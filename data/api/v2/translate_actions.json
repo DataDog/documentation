@@ -765,6 +765,30 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "ListIncidentNotificationRules": {
+    "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
+    "summary": "List incident notification rules"
+  },
+  "CreateIncidentNotificationRule": {
+    "description": "Creates a new notification rule.",
+    "summary": "Create an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification rule."
+  },
+  "DeleteIncidentNotificationRule": {
+    "description": "Deletes a notification rule by its ID.",
+    "summary": "Delete an incident notification rule"
+  },
+  "GetIncidentNotificationRule": {
+    "description": "Retrieves a specific notification rule by its ID.",
+    "summary": "Get an incident notification rule"
+  },
+  "UpdateIncidentNotificationRule": {
+    "description": "Updates an existing notification rule with a complete replacement.",
+    "summary": "Update an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Put request for a notification rule."
+  },
   "ListIncidentNotificationTemplates": {
     "description": "Lists all notification templates. Optionally filter by incident type.",
     "summary": "List incident notification templates"

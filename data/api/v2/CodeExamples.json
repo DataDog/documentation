@@ -657,6 +657,13 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentNotificationRule": [
+    {
+      "group": "incidents",
+      "suffix": "_3029800608",
+      "description": "Create incident notification rule returns \"Created\" response"
+    }
+  ],
   "CreateIncidentNotificationTemplate": [
     {
       "group": "incidents",
@@ -683,6 +690,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationRule": [
+    {
+      "group": "incidents",
+      "suffix": "_1207309457",
+      "description": "Update incident notification rule returns \"OK\" response"
     }
   ],
   "UpdateIncidentNotificationTemplate": [
