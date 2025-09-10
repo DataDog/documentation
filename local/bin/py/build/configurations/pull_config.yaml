@@ -212,12 +212,12 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'packages/datadog-ci/src/commands/synthetics/README.md'
+          - 'packages/plugin-synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
