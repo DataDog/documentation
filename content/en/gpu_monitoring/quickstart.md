@@ -24,6 +24,7 @@ Your installation method depends on your deployment type (uniform or mixed):
 - Mixed clusters have some nodes with GPU devices and others without. 
 
 #### Datadog Operator Users
+
 {{< tabs >}}
 {{% tab "Uniform Clusters" %}}
 
