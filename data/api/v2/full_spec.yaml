@@ -497,6 +497,27 @@ components:
       required: true
       schema:
         type: string
+    IncidentNotificationRuleIDPathParameter:
+      description: The ID of the notification rule.
+      in: path
+      name: id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
+    IncidentNotificationRuleIncludeQueryParameter:
+      description: 'Comma-separated list of resources to include. Supported values:
+        `created_by_user`, `last_modified_by_user`, `incident_type`, `notification_template`
+
+        '
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        example: created_by_user,incident_type,notification_template
+        type: string
     IncidentNotificationTemplateIDPathParameter:
       description: The ID of the notification template.
       in: path
@@ -10851,6 +10872,14 @@ components:
       required:
       - data
       type: object
+    CreateIncidentNotificationRuleRequest:
+      description: Create request for a notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationRuleCreateData'
+      required:
+      - data
+      type: object
     CreateIncidentNotificationTemplateRequest:
       description: Create request for a notification template.
       properties:
@@ -20073,6 +20102,283 @@ components:
           example: '@test.user@test.com'
           type: string
       type: object
+    IncidentNotificationRule:
+      description: Response with a notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationRuleResponseData'
+        included:
+          description: Related objects that are included in the response.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationRuleIncludedItems'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentNotificationRuleArray:
+      description: Response with notification rules.
+      properties:
+        data:
+          description: The `NotificationRuleArray` `data`.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationRuleResponseData'
+          type: array
+        included:
+          description: Related objects that are included in the response.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationRuleIncludedItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentNotificationRuleArrayMeta'
+      required:
+      - data
+      type: object
+    IncidentNotificationRuleArrayMeta:
+      description: Response metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/IncidentNotificationRuleArrayMetaPage'
+      type: object
+    IncidentNotificationRuleArrayMetaPage:
+      description: Pagination metadata.
+      properties:
+        next_offset:
+          description: The offset for the next page of results.
+          example: 15
+          format: int64
+          type: integer
+        offset:
+          description: The current offset in the results.
+          example: 0
+          format: int64
+          type: integer
+        size:
+          description: The number of results returned per page.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    IncidentNotificationRuleAttributes:
+      description: The notification rule's attributes.
+      properties:
+        conditions:
+          $ref: '#/components/schemas/IncidentNotificationRuleConditions'
+        created:
+          description: Timestamp when the notification rule was created.
+          example: '2025-01-15T10:30:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        enabled:
+          description: Whether the notification rule is enabled.
+          example: true
+          type: boolean
+        handles:
+          $ref: '#/components/schemas/IncidentNotificationRuleHandles'
+        modified:
+          description: Timestamp when the notification rule was last modified.
+          example: '2025-01-15T14:45:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        renotify_on:
+          $ref: '#/components/schemas/IncidentNotificationRuleRenotifyOn'
+        trigger:
+          description: The trigger event for this notification rule.
+          example: incident_created_trigger
+          type: string
+        visibility:
+          $ref: '#/components/schemas/IncidentNotificationRuleAttributesVisibility'
+      required:
+      - conditions
+      - handles
+      - visibility
+      - trigger
+      - enabled
+      - created
+      - modified
+      type: object
+    IncidentNotificationRuleAttributesVisibility:
+      description: The visibility of the notification rule.
+      enum:
+      - all
+      - organization
+      - private
+      example: organization
+      type: string
+      x-enum-varnames:
+      - ALL
+      - ORGANIZATION
+      - PRIVATE
+    IncidentNotificationRuleConditions:
+      description: The conditions that trigger this notification rule.
+      example:
+      - field: severity
+        values:
+        - SEV-1
+        - SEV-2
+      items:
+        $ref: '#/components/schemas/IncidentNotificationRuleConditionsItems'
+      type: array
+    IncidentNotificationRuleConditionsItems:
+      description: A condition that must be met to trigger the notification rule.
+      properties:
+        field:
+          description: The incident field to evaluate
+          example: severity
+          type: string
+        values:
+          description: The value(s) to compare against. Multiple values are `ORed`
+            together.
+          example:
+          - SEV-1
+          - SEV-2
+          items:
+            type: string
+          type: array
+      required:
+      - field
+      - values
+      type: object
+    IncidentNotificationRuleCreateAttributes:
+      description: The attributes for creating a notification rule.
+      properties:
+        conditions:
+          $ref: '#/components/schemas/IncidentNotificationRuleConditions'
+        enabled:
+          default: false
+          description: Whether the notification rule is enabled.
+          example: true
+          type: boolean
+        handles:
+          $ref: '#/components/schemas/IncidentNotificationRuleHandles'
+        renotify_on:
+          $ref: '#/components/schemas/IncidentNotificationRuleRenotifyOn'
+        trigger:
+          description: The trigger event for this notification rule.
+          example: incident_created_trigger
+          type: string
+        visibility:
+          $ref: '#/components/schemas/IncidentNotificationRuleCreateAttributesVisibility'
+      required:
+      - conditions
+      - handles
+      - trigger
+      type: object
+    IncidentNotificationRuleCreateAttributesVisibility:
+      description: The visibility of the notification rule.
+      enum:
+      - all
+      - organization
+      - private
+      example: organization
+      type: string
+      x-enum-varnames:
+      - ALL
+      - ORGANIZATION
+      - PRIVATE
+    IncidentNotificationRuleCreateData:
+      description: Notification rule data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationRuleCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationRuleCreateDataRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationRuleType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentNotificationRuleCreateDataRelationships:
+      description: The definition of `NotificationRuleCreateDataRelationships` object.
+      properties:
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+        notification_template:
+          $ref: '#/components/schemas/RelationshipToIncidentNotificationTemplate'
+      type: object
+    IncidentNotificationRuleHandles:
+      description: The notification handles (targets) for this rule.
+      example:
+      - '@team-email@company.com'
+      - '@slack-channel'
+      items:
+        description: A notification handle (email, Slack channel, etc.).
+        type: string
+      type: array
+    IncidentNotificationRuleIncludedItems:
+      description: Objects related to a notification rule.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+      - $ref: '#/components/schemas/IncidentNotificationTemplateObject'
+    IncidentNotificationRuleRelationships:
+      description: The notification rule's resource relationships.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        notification_template:
+          $ref: '#/components/schemas/RelationshipToIncidentNotificationTemplate'
+      type: object
+    IncidentNotificationRuleRenotifyOn:
+      description: List of incident fields that trigger re-notification when changed.
+      example:
+      - status
+      - severity
+      items:
+        description: An incident field name.
+        type: string
+      type: array
+    IncidentNotificationRuleResponseData:
+      description: Notification rule data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationRuleAttributes'
+        id:
+          description: The unique identifier of the notification rule.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationRuleType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentNotificationRuleType:
+      description: Notification rules resource type.
+      enum:
+      - incident_notification_rules
+      example: incident_notification_rules
+      type: string
+      x-enum-varnames:
+      - INCIDENT_NOTIFICATION_RULES
+    IncidentNotificationRuleUpdateData:
+      description: Notification rule data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationRuleCreateAttributes'
+        id:
+          description: The unique identifier of the notification rule.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationRuleCreateDataRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationRuleType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
     IncidentNotificationTemplate:
       description: Response with a notification template.
       properties:
@@ -20237,6 +20543,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentNotificationTemplateObject:
+      description: A notification template object for inclusion in other resources.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateAttributes'
+        id:
+          description: The unique identifier of the notification template.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationTemplateRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - id
+      - type
+      type: object
     IncidentNotificationTemplateRelationships:
       description: The notification template's resource relationships.
       properties:
@@ -33943,6 +34267,14 @@ components:
         data:
           $ref: '#/components/schemas/Deployment'
       type: object
+    PutIncidentNotificationRuleRequest:
+      description: Put request for a notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationRuleUpdateData'
+      required:
+      - data
+      type: object
     Query:
       description: A data query used by an app. This can take the form of an external
         action, a data transformation, or a state variable.
@@ -35137,6 +35469,28 @@ components:
           type: array
       required:
       - data
+      type: object
+    RelationshipToIncidentNotificationTemplate:
+      description: A relationship reference to a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToIncidentNotificationTemplateData'
+      required:
+      - data
+      type: object
+    RelationshipToIncidentNotificationTemplateData:
+      description: The notification template relationship data.
+      properties:
+        id:
+          description: The unique identifier of the notification template.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToIncidentPostmortem:
       description: A relationship reference for postmortems.
@@ -47971,8 +48325,9 @@ components:
             error_tracking_write: Edit Error Tracking issues.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
+            incident_notification_settings_read: View Incident Notification Rule Settings.
             incident_notification_settings_write: Configure Incidents Notification
-              settings.
+              Rule settings.
             incident_read: View incidents in Datadog.
             incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
@@ -55516,6 +55871,238 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/notification-rules:
+    get:
+      description: Lists all notification rules for the organization. Optionally filter
+        by incident type.
+      operationId: ListIncidentNotificationRules
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationRuleIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationRuleArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_read
+      summary: List incident notification rules
+      tags:
+      - Incidents
+      x-menu-order: 29
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new notification rule.
+      operationId: CreateIncidentNotificationRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIncidentNotificationRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationRule'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Create an incident notification rule
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        notification_rule:
+          operationId: CreateIncidentNotificationRule
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"conditions\":
+              [{\"field\": \"severity\", \"values\": [\"SEV-1\", \"SEV-2\"]}],\n      \"handles\":
+              [\"@test-email@company.com\"],\n      \"visibility\": \"organization\",\n
+              \     \"trigger\": \"incident_created_trigger\",\n      \"enabled\":
+              true\n    },\n    \"relationships\": {\n      \"incident_type\": {\n
+              \       \"data\": {\n          \"id\": \"{{ incident_type.data.id }}\",\n
+              \         \"type\": \"incident_types\"\n        }\n      }\n    },\n
+              \   \"type\": \"incident_notification_rules\"\n  }\n}"
+          step: there is a valid "notification_rule" in the system
+      x-menu-order: 30
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        operationId: DeleteIncidentNotificationRule
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/notification-rules/{id}:
+    delete:
+      description: Deletes a notification rule by its ID.
+      operationId: DeleteIncidentNotificationRule
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationRuleIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationRuleIncludeQueryParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Delete an incident notification rule
+      tags:
+      - Incidents
+      x-menu-order: 33
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieves a specific notification rule by its ID.
+      operationId: GetIncidentNotificationRule
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationRuleIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationRuleIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationRule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_read
+      summary: Get an incident notification rule
+      tags:
+      - Incidents
+      x-menu-order: 31
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Updates an existing notification rule with a complete replacement.
+      operationId: UpdateIncidentNotificationRule
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationRuleIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationRuleIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutIncidentNotificationRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationRule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Update an incident notification rule
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 32
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/notification-templates:
     get:
       description: Lists all notification templates. Optionally filter by incident
@@ -55549,7 +56136,7 @@ paths:
       summary: List incident notification templates
       tags:
       - Incidents
-      x-menu-order: 10
+      x-menu-order: 24
       x-permission:
         operator: AND
         permissions:
@@ -55607,7 +56194,7 @@ paths:
               \"incident_types\"\n        }\n      }\n    },\n    \"type\": \"notification_templates\"\n
               \ }\n}"
           step: there is a valid "notification_template" in the system
-      x-menu-order: 11
+      x-menu-order: 25
       x-permission:
         operator: AND
         permissions:
@@ -55649,7 +56236,7 @@ paths:
       summary: Delete a notification template
       tags:
       - Incidents
-      x-menu-order: 14
+      x-menu-order: 28
       x-permission:
         operator: AND
         permissions:
@@ -55690,7 +56277,7 @@ paths:
       summary: Get incident notification template
       tags:
       - Incidents
-      x-menu-order: 12
+      x-menu-order: 26
       x-permission:
         operator: OR
         permissions:
@@ -55740,7 +56327,7 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 27
       x-permission:
         operator: AND
         permissions:
