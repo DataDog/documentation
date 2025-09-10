@@ -268,8 +268,9 @@ bar: quuz
 </div>
 
 
-Although Kubernetes labels and annotations are case sensitive, this configuration is not.
-For example, you have this label on a pod
+Although Kubernetes labels and annotations are case sensitive, tags are case insensitive. If you have Kubernetes labels or annotations with matching characters, they can conflict.
+
+For example, suppose you have both "foo" and "Foo" labels on a pod:
 
 ```yaml
   labels:
