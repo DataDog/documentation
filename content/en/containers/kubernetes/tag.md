@@ -294,7 +294,6 @@ It should be changed like this, and you get `tag1: bar` for your data.
         foo: tag1
 ```
 
-</div>
 
 
 ### Kubernetes resources annotations as tags
