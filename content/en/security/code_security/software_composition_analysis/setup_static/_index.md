@@ -37,7 +37,11 @@ For GitHub repositories, you can run Datadog SCA scans directly on Datadog infra
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 <div class="alert alert-info">
-Datadog-hosted SCA does not support repositories using <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a> or file paths with parent directory traversal (<code>..</code>).<br/>Instead, use <b>run SCA scans in your CI Pipelines</b> for these repositories.
+Datadog-hosted SCA does not support repositories that:<br>
+- Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br>
+- Contain file paths with parent directory traversal (<code>..</code>)<br>
+- Contain file names longer than 255 characters<br>
+Use CI Pipelines for these repositories.
 </div>
 
 {{% /tab %}}
@@ -67,6 +71,8 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Language   | Package Manager    | Lockfile                                |
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`                     |
+| C++        | Conan             | `conan.lock`                             |
+| Erlang     | Hex               | `mix.lock`                               |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -74,9 +80,12 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Node.js    | pnpm              | `pnpm-lock.yaml`                         |
 | Node.js    | yarn              | `yarn.lock`                              |
 | PHP        | composer          | `composer.lock`                          |
+| Python     | PDM               | `pdm.lock`                               |
 | Python     | pip               | `requirements.txt`, `Pipfile.lock`       |
 | Python     | poetry            | `poetry.lock`                            |
+| Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
+| Rust       | Cargo             | `cargo.lock`                             |
 
 ### Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
@@ -455,6 +464,10 @@ Static reachability analysis is available for the following advisories:
 - [GHSA-9mxf-g3x6-wv74](https://osv.dev/vulnerability/GHSA-9mxf-g3x6-wv74)
 - [GHSA-f3j5-rmmp-3fc5](https://osv.dev/vulnerability/GHSA-f3j5-rmmp-3fc5)
 {{% /collapse-content %}}
+
+## Data Retention
+
+Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup

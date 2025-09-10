@@ -244,7 +244,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td></td>
   </tr>
   <tr>
-    <td>>= 2016</td>
+    <td>2016, 2019, 2022, 2025</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -297,6 +297,7 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 | 10.10 - 10.11 | <= 5.11.3 |||
 | 10.12 || <= 6.34.0 | <= 7.34.0 |
 | 10.13 || <= 6.38.2 | <= 7.38.2 |
+| 10.14 ||           | 7.39.0 - 7.61.0 |
 | >= 11.0 ||           | >= 7.39.0 |
 
 ## Apple ARM64

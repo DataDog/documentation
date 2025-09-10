@@ -241,7 +241,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
 
 `MALFORMED_RESPONSE`
-: El servidor remoto ha respondido con una carga útil que no cumple con las especificaciones HTTP.
+: El servidor remoto respondió con una carga útil que no cumple con las especificaciones HTTP. Este error puede producirse cuando los servidores remotos difieren en su compatibilidad con HTTP. Para evitar problemas, ejecuta los tests con una versión HTTP constante: HTTP/2 (si está disponible) o HTTP/1.1.
 
 ## Permisos
 

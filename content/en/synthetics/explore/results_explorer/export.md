@@ -1,6 +1,6 @@
 ---
 title: Export Test Runs
-description: Export your test runs and CI batches to CSV from the Synthetics Results Explorer
+description: Export your test runs and CI batches to CSV from the Synthetic Monitoring Results Explorer
 aliases:
 - /continuous_testing/explorer/export/
 further_reading:

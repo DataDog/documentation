@@ -21,7 +21,7 @@ If you have not set up the RUM iOS SDK yet, follow the [in-app setup instruction
 
 iOS RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
-### Custom Views
+### Custom views
 
 In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
 
@@ -52,7 +52,7 @@ override func viewDidDisappear(_ animated: Bool) {
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogRUM;
 // in your `UIViewController`:
 
 DDRUMMonitor *rum = [DDRUMMonitor shared];
@@ -74,7 +74,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Custom Actions
+### Custom actions
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
@@ -113,7 +113,7 @@ let rum = RUMMonitor.shared()
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Custom Resources
+### Custom resources
 
 In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
@@ -163,7 +163,7 @@ rum.stopResource(
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Custom Errors
+### Custom errors
 
 To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
 
@@ -261,12 +261,15 @@ RUM.enable(
 )
 ```
 
-## Initialization Parameters
+## Initialization parameters
 
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
 `backgroundTasksEnabled`
 : This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`.
+
+`batchProcessingLevel`
+: Batch processing level defines the maximum number of batches processed sequentially without a delay within one reading/uploading cycle. The default value is `.medium`.
 
 `batchSize`
 : Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the RUM iOS SDK (small batches mean more requests, but each request becomes smaller in size). Available values include: `.small`, `.medium`, and `.large`.
@@ -344,11 +347,14 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `trackAnonymousUser`
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
+`trackBackgroundEvents`
+: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+
 `trackFrustrations`
 : Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
 
-`trackBackgroundEvents`
-: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+`trackMemoryWarnings`
+: Determines whether automatic tracking of memory warnings is enabled. By default, this is set to `true`.
 
 `trackWatchdogTerminations`
 : Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
@@ -558,6 +564,7 @@ To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPr
 - The implementation differs between iOS 18+ and iOS 17 and below:
   - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
   - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). For that reason, actions are reported as `SwiftUI_Unidentified_Element`.
+- If you use both automatic and manual tracking, you may see duplicate events. This is a known limitation. To avoid this, use only one instrumentation type - either automatic or manual.
 - You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
 
 {{< tabs >}}
@@ -641,12 +648,20 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info">Be mindful of delegate retention.
+While Datadog instrumentation does not create memory leaks directly, it relies on <code>URLSession</code> delegates. According to <a href="https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters"> Apple documentation</a>:
+"The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the <code>invalidateAndCancel()</code> or <code>finishTasksAndInvalidate()</code> method, your app leaks memory until it exits."
+To avoid memory leaks, make sure to invalidate any <code>URLSession</code> instances you no longer need.
+</div>
+
+
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
 
+[10]: https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -684,7 +699,7 @@ This tracks all requests sent with the instrumented `session`. Requests matching
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogRUM;
 
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
@@ -748,7 +763,7 @@ logger.critical("message")
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDLogger *logger = [DDLogger create];
 [logger error:@"message"];
@@ -945,7 +960,7 @@ Datadog.stopInstance()
 
 Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

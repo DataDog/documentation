@@ -69,7 +69,7 @@
   },
   "cloud-network-monitoring": {
     "name": "Cloud Network Monitoring",
-    "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) for more information."
+    "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/) for more information."
   },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
@@ -95,6 +95,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "datasets": {
+    "name": "Datasets",
+    "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
+  },
   "domain-allowlist": {
     "name": "Domain Allowlist",
     "description": "Configure your Datadog Email Domain Allowlist directly through the Datadog API.\nThe Email Domain Allowlist controls the domains that certain datadog emails can be sent to.\nFor more information, see the [Domain Allowlist docs page](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)"
@@ -102,6 +106,10 @@
   "downtimes": {
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+  },
+  "error-tracking": {
+    "name": "Error Tracking",
+    "description": "View and manage issues within Error Tracking. See the [Error Tracking page](https://docs.datadoghq.com/error_tracking/) for more information."
   },
   "events": {
     "name": "Events",
@@ -133,7 +141,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
@@ -190,6 +198,10 @@
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
+  },
+  "org-connections": {
+    "name": "Org Connections",
+    "description": "Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information."
   },
   "organizations": {
     "name": "Organizations",
@@ -254,6 +266,10 @@
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
+  },
+  "spa": {
+    "name": "Spa",
+    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
   },
   "spans": {
     "name": "Spans",

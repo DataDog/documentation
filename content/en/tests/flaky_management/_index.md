@@ -17,10 +17,6 @@ further_reading:
 <div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/flaky-test-management/" >}}
-Flaky Test Management is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The [Flaky Test Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
@@ -42,6 +38,23 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 <div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Configure policies to automate the flaky test lifecycle
+
+Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
+
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][11] in Software Delivery settings.
+2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
+    {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
+
+3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
+
+| Action    | Description |
+| ---- | ---- |
+| **Quarantine**     | Toggle to allow flaky tests to be quarantined for this repository. Customize automation rules based on: <li>Time: Quarantine a test if its status is `Active` for a specified number of days. <li>Branch: Quarantine an `Active` test if it flakes in one or more specified branches.|
+| **Disable**        | Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness. Customize automation rules based on: <li>Status and time: Disable a test if it has a specified status for a specified number of days. <li>Branch: Disable an `Active` or `Quarantined` test if it flakes in one or more specified branches. |
+| **Attempt&nbsp;to&nbsp;Fix** | When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix. |
+| **Fixed**          | If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized. |
+
 ## Track evolution of flaky tests
 
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
@@ -50,6 +63,7 @@ Track the evolution of the number of flaky tests with the `test_optimization.tes
 - `branch`
 - `flaky_status`
 - `test_codeowners`
+- `flaky_category`
 
 The `branch` tag only exists when the test has flaked in the default branch of the repository during the last 30 days. This helps you discard flaky tests that have only exhibited flakiness in feature branches, as these may not be relevant. You can configure the default branch of your repositories under [Repository Settings][2].
 
@@ -77,18 +91,43 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
    - If all retries pass, updates the test's status to `Fixed`.
    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
 
+## AI-powered flaky test categorization
+
+Flaky Test Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
+
+<div class="alert alert-info"><strong>Note:</strong> A test must have at least one failed execution that includes both <code>@error.message</code> and <code>@error.stack</code> tags to be eligible for categorization. If the test was recently detected, categorization may take several minutes to complete.</div>
+
+### Categories
+
+| Category                | Description |
+|-------------------------|-------------|
+| **Concurrency**         | Test that invokes multiple threads interacting in an unsafe or unanticipated manner. Flakiness is caused by, for example, race conditions resulting from implicit assumptions about the ordering of execution, leading to deadlocks in certain test runs. |
+| **Randomness**          | Test uses the result of a random data generator. If the test does not account for all possible cases, then the test may fail intermittently, e.g., only when the result of a random number generator is zero. |
+| **Floating Point**      | Test uses the result of a floating-point operation. Floating-point operations can suffer from precision over- and under-flows, non-associative addition, etc., which—if not properly accounted for—can result in inconsistent outcomes (e.g., comparing a floating-point result to an exact real value in an assertion). |
+| **Unordered Collection**| Test assumes a particular iteration order for an unordered-collection object. Since no order is specified, tests that assume a fixed order will likely be flaky for various reasons (e.g., collection-class implementation). |
+| **Too Restrictive Range**| Test whose assertions accept only part of the valid output range. It intermittently fails on unhandled corner cases. |
+| **Timeout**             | Test fails due to time limitations, either at the individual test level or as part of a suite. This includes tests that exceed their execution time limit (e.g., single test or the whole suite) and fail intermittently due to varying execution times. |
+| **Order Dependency**    | Test depends on a shared value or resource modified by another test. Changing the test-run order can break those dependencies and produce inconsistent outcomes. |
+| **Resource Leak**       | Test improperly handles an external resource (e.g., failing to release memory). Subsequent tests that reuse the resource may become flaky. |
+| **Asynchronous Wait**   | Test makes an asynchronous call or waits for elements to load/render and does not explicitly wait for completion (often using a fixed delay). If the call or rendering takes longer than the delay, the test fails. |
+| **IO**                  | Test is flaky due to its handling of input/output—for example, failing when disk space runs out during a write. |
+| **Network**             | Test depends on network availability (e.g., querying a server). If the network is unavailable or congested, the test may fail. |
+| **Time**                | Test relies on system time and may be flaky due to precision or timezone discrepancies (e.g., failing when midnight passes in UTC). |
+| **Environment Dependency** | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
+| **Unknown**             | Test is flaky for an unknown reason. |
+
 ## Compatibility
 
 To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
-| Language        | Quarantine & Disable | Attempt to fix   |
-| --------------- | -------------------- | ---------------- |
-| [.NET][5]       | 3.13.0+              | 3.17.0+          |
-| [Go][6]         | 1.73.0+              | Not available    |
-| [Java][7]       | 1.48.0+              | 1.50.0+          |
-| [JavaScript][8] | 5.44.0+              | 5.52.0+          |
-| [Python][9]     | 3.3.0+               | 3.8.0+           |
-| [Ruby][10]       | 1.13.0+              | 1.17.0+          |
+| Language        | Quarantine & Disable          | Attempt to fix               |
+| --------------- | ----------------------------- | ---------------------------- |
+| [.NET][5]       | 3.13.0+                       | 3.17.0+                      |
+| [Go][6]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
+| [Java][7]       | 1.48.0+                       | 1.50.0+                      |
+| [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
+| [Python][9]     | 3.3.0+                        | 3.8.0+                       |
+| [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
 
 ## Further reading
 
@@ -104,3 +143,4 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [8]: /tests/setup/javascript/
 [9]: /tests/setup/python/
 [10]: /tests/setup/ruby/
+[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management

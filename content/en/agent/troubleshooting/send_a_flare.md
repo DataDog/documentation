@@ -61,7 +61,7 @@ If you don't have a case ID, enter your email address used to log in to Datadog 
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Windows    | Consult the dedicated [Windows documentation][2]        |
+| Windows    | `& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>`       |
 | Heroku     | Consult the dedicated [Heroku documentation][3]         |
 | PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
@@ -156,5 +156,5 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /agent/fleet_automation/
-[3]: /agent/remote_config#enabling-remote-configuration
+[3]: /agent/guide/setup_remote_config
 [4]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

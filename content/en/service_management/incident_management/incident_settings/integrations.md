@@ -1,59 +1,173 @@
 ---
 title: Integrations
+further_reading:
+- link: "/service_management/incident_management/integrations"
+  tag: "Documentation"
+  text: "Incident Integrations"
 ---
 
 ## Overview
 
-Custom integrations with popular communication tools like Slack, Microsoft Teams, Zoom, and Jira ensure that your team can use platforms they are already comfortable with. Customize the use of integration features in Datadog Incident Management to minimize the time spent on setting up new communication channels during incident response.
+Datadog Incident Management integrates with popular collaboration tools, such as Slack, Microsoft Teams, Zoom, Jira, Confluence, ServiceNow, Google Meet, and Google Drive.
 
-## Integrations
+To integrate Incident Management with a third-party application, install that application's integration in the [Datadog integrations library][1].
 
-Navigate to [**Incidents > Settings > Integrations**][1].
+Then, configure the integration for Incident Management by navigating to [**Incidents > Settings > Integrations**][2].
 
-Toggle the option to **Automatically create a channel for each new incident** to enable the following:
-- Automatic Slack or Microsoft Teams channel creation for every new incident and the name template for those channels.
-- Incident updates channel.
+## Slack
 
-Configure either of these settings to use any Slack or Microsoft Teams workspace you have set up in your organization's [integration tile][2]. The *incident updates channel* sends a message whenever an incident is declared or changes status, severity, or incident commander.
+To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][3].
 
-## Channel name template options
-<div class="alert alert-info">Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. </div>
+After you do that, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Slack features for Incident Management.
 
-Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward. By default, dedicated incident channels use `incident-{public_id}` as their name template. Add additional title options to add clarity to Slack channels:
-- The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. 
-- Click the **Incident ID** checkbox to prevent duplicate channel names. 
-- Click the **Title of Incident** checkbox to enable the Datadog Slack App to automatically rename the channel if an incident's title changes.
+### Declaring incidents in Slack
 
-## Slack features
+When you connect a Slack workspace to a Datadog organization, users in the workspace can use slash commands and shortcuts related to Incident Management:
 
-The following features are available to use with the Incident Management Slack integration. Enable or configure these options in **[Service Management > Incidents > Settings > Integrations][1]**.
-- Mirror Slack channel messages, to import and retain all Slack conversations in the incident timeline. **Note**: This counts every Slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
-- Add important links from integrations such as Jira and Zoom to the incident channel's bookmarks.
-- You can also automatically add [team members][3] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
-- Automatically archive a Slack channel after a certain amount of time.
+* `/datadog incident` declares an incident
+* `/datadog incident test` declares a test incident (if test incidents are enabled for the incident type)
+* `/datadog incident list` shows active and stable incidents
 
-## Supported integrations
+_Tip: You can start any Datadog slash command in Slack with `/dd` instead of `/datadog`._
 
-In addition to integrating with [Slack][4], Incident Management also integrates with:
+To allow any Slack user or non-guest Slack user to declare incidents in your Slack workspace, enable "Allow Slack users to declare incidents without a connected Datadog account" in Incident Management settings.
 
-- [PagerDuty][5] and [Opsgenie][6] to send incident notifications to your on-call engineers.
-- [CoScreen][7] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
-- [Jira][8] to create a Jira ticket for an incident.
-- [Webhooks][9] to send incident notifications using webhooks (for example, [sending SMS to Twilio][10]).
-- [Statuspage][11] to create and update Statuspage incidents.
-- [ServiceNow][12] to create a ServiceNow ticket for an incident.
-- [Zoom][13] to create Zoom meetings for an incident.
+You can also declare incidents directly from a Slack message. To do this, mouse over the Slack message, click the "More actions" button, and then select "Declare incident". When you declare an incident in this way, Datadog posts a message to the Slack message thread indicating that you declared an incident.
 
-[1]: https://app.datadoghq.com/incidents/settings#Integrations
-[2]: https://app.datadoghq.com/account/settings#integrations
-[3]: /account_management/teams/
-[4]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[5]: /integrations/pagerduty/
-[6]: /integrations/opsgenie/
-[7]: /coscreen
-[8]: /integrations/jira/
-[9]: /integrations/webhooks/
-[10]: /integrations/webhooks/#sending-sms-through-twilio
-[11]: /integrations/statuspage/
-[12]: /integrations/servicenow/
-[13]: /integrations/zoom_incident_management/
+### Incident channels
+
+#### Automatic channel creation
+
+You can configure Incident Management to automatically create an incident Slack for each incident or for incidents meeting criteria you define.
+
+After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. The following variables are available in channel name templates:
+
+* `{{public_id}}`: Incident's numeric ID
+* `{{title}}`: Incident's title
+* `{{created}}`: Incident's creation date in format MM_DD_YYYY
+* `{{yyyy}}`: Incident's four-digit creation year
+* `{{mm}}`: Incident's two-digit creation month
+* `{{dd}}`: Incident's two-digit creation day of month
+* `{{random_adjective}}`: Random adjective
+* `{{random_noun}}`: Random noun
+
+#### Incident commands
+
+You can run the following commands inside the incident Slack channel to manage the incident:
+
+| Command                        | Description                                                                                                    |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `/datadog`                     | Summons the incident action tray, which you can use to perform common actions related to managing the incident |
+| `/datadog incident update`     | Updates the channel's incident                                                                                 |
+| `/datadog incident private`    | Converts the incident to a private incident (if private incidents are enabled for the incident type)           |
+| `/datadog incident responders` | Allows you to add new responders and manage responder types                                                    |
+| `/datadog page`                | Pages the [Datadog On-call][4] team you select                                                                 |
+| `/datadog task`                | Creates a new incident task                                                                                    |
+| `/datadog task list`           | Shows the incident's tasks                                                                                     |
+
+_Tip: You can start any Datadog slash command in Slack with `/dd` instead of `/datadog`._
+
+#### Channel message syncing
+
+You can configure Incident Management to push all incident Slack channel messages to the incident timeline. Alternatively, you can configure it to sync a Slack message only when you add a 📌 reaction to it.
+
+The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
+
+#### Other incident channel features
+
+You can configure Incident Management to:
+
+* Push incident timeline messages to the incident Slack channel
+* Add important links to the incident Slack channel's bookmarks
+* Add team members to the incident channel when a Datadog team is added to the incident
+* Send a notification to the Slack channel when a meeting has been started
+* Automatically archive an incident Slack channel after the incident is resolved
+
+### Other Slack features
+
+*Send incident updates to a global channel*: You can configure Incident Management to inform a selected channel when an incident's state, severity, title, or incident commander changes.
+
+To customize this behavior, deactivate this setting and [define a notification rule][5] instead.
+
+## Microsoft Teams
+
+To use Incident Management's Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][6].
+
+After you do that, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
+
+### Declaring and managing incidents in Microsoft Teams
+
+To declare or manage an incident from a specific team:
+1. [Add the Datadog application][7] to the team.
+2. Add the **Datadog** tab to any channel in that team. 
+3. From this tab, declare incidents and manage existing ones (for example, update fields, impacts, and responders). 
+
+**Note**: In an incident channel, the tab shows and lets you manage the incident associated with that channel. In other channels, you can only declare new incidents.
+
+### Incident channels
+
+#### Automatic channel creation
+
+You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define.
+
+After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. The following variables are available in channel name templates:
+
+* `{{public_id}}`: Incident's numeric ID
+* `{{title}}`: Incident's title
+* `{{created}}`: Incident's creation date in format MM_DD_YYYY
+* `{{yyyy}}`: Incident's four-digit creation year
+* `{{mm}}`: Incident's two-digit creation month
+* `{{dd}}`: Incident's two-digit creation day of month
+* `{{random_adjective}}`: Random adjective
+* `{{random_noun}}`: Random noun
+
+#### Channel message syncing
+
+You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline.
+
+The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
+
+#### Other incident channel features
+
+You can configure Incident Management to:
+
+* Automatically archive an incident channel after the incident is resolved
+
+### Other Microsoft Teams features
+
+*Send incident updates to a global channel*: You can configure Incident Management to notify a selected channel when an incident's state, severity, title, or incident commander changes.
+
+To customize this behavior, deactivate this setting and [define a notification rule][5] instead.
+
+## Other integrations
+
+In addition to integrating with Slack and Microsoft Teams, Incident Management also integrates with:
+
+- [PagerDuty][8] and [Opsgenie][9] to send incident notifications to your on-call engineers.
+- [CoScreen][10] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
+- [Jira][11] to create a Jira ticket for an incident.
+- [Webhooks][12] to send incident notifications using webhooks (for example, [sending SMS to Twilio][13]).
+- [Statuspage][14] to create and update Statuspage incidents.
+- [ServiceNow][15] to create a ServiceNow ticket for an incident.
+- [Zoom][16] to create Zoom meetings for an incident.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/integrations
+[2]: https://app.datadoghq.com/incidents/settings#Integrations
+[3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[4]: /service_management/on-call/
+[5]: /service_management/incident_management/incident_settings/notification_rules
+[6]: /integrations/microsoft-teams/?tab=datadogapprecommended
+[7]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
+[8]: /integrations/pagerduty/
+[9]: /integrations/opsgenie/
+[10]: /coscreen
+[11]: /integrations/jira/
+[12]: /integrations/webhooks/
+[13]: /integrations/webhooks/#sending-sms-through-twilio
+[14]: /integrations/statuspage/
+[15]: /integrations/servicenow/
+[16]: /integrations/zoom_incident_management/

@@ -30,7 +30,7 @@ Los tests de navegador de Datadog y la aserción `Test a downloaded file` te per
 
 Para crear un test de navegador con esta aserción, haz lo siguiente:
 
-1. **Graba el paso que genera la descarga del archivo** en tu test de navegador. El siguiente ejemplo muestra cómo grabar un clic en un botón que activa la descarga de un archivo `.docx`. El tamaño del archivo debe ser inferior a 100 Mb.
+1. **Graba el paso que genera la descarga del archivo** en tu test de navegador. El siguiente ejemplo muestra cómo grabar un clic en un botón que desencadena la descarga de un archivo `.docx`. El tamaño del archivo debe ser inferior a 250 Mb.
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="Grabación de pasos" video="true">}}
 

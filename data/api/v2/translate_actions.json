@@ -22,7 +22,7 @@
     "request_schema_description": "Request used to create an action connection."
   },
   "DeleteActionConnection": {
-    "description": "Delete an existing Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Delete an existing Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete an existing Action Connection"
   },
   "GetActionConnection": {
@@ -37,7 +37,7 @@
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "Get AWS Scan Options"
+    "summary": "List AWS Scan Options"
   },
   "CreateAwsScanOptions": {
     "description": "Activate Agentless scan options for an AWS account.",
@@ -48,6 +48,10 @@
   "DeleteAwsScanOptions": {
     "description": "Delete Agentless scan options for an AWS account.",
     "summary": "Delete AWS Scan Options"
+  },
+  "GetAwsScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated account.",
+    "summary": "Get AWS scan options"
   },
   "UpdateAwsScanOptions": {
     "description": "Update the Agentless scan options for an activated account.",
@@ -172,41 +176,41 @@
     "request_schema_description": "The body of the retention filter to be updated."
   },
   "DeleteApps": {
-    "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete Multiple Apps",
     "request_description": "",
     "request_schema_description": "A request object for deleting multiple apps by ID."
   },
   "ListApps": {
-    "description": "List all apps, with optional filters and sorting. This endpoint is paginated. Only basic app information such as the app ID, name, and description is returned by this endpoint. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "List all apps, with optional filters and sorting. This endpoint is paginated. Only basic app information such as the app ID, name, and description is returned by this endpoint. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "List Apps"
   },
   "CreateApp": {
-    "description": "Create a new app, returning the app ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Create a new app, returning the app ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Create App",
     "request_description": "",
     "request_schema_description": "A request object for creating a new app."
   },
   "DeleteApp": {
-    "description": "Delete a single app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Delete a single app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete App"
   },
   "GetApp": {
-    "description": "Get the full definition of an app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Get the full definition of an app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Get App"
   },
   "UpdateApp": {
-    "description": "Update an existing app. This creates a new version of the app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Update an existing app. This creates a new version of the app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Update App",
     "request_description": "",
     "request_schema_description": "A request object for updating an existing app."
   },
   "UnpublishApp": {
-    "description": "Unpublish an app, removing the live version of the app. Unpublishing creates a new instance of a `deployment` object on the app, with a nil `app_version_id` (`00000000-0000-0000-0000-000000000000`). The app can still be updated and published again in the future. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Unpublish an app, removing the live version of the app. Unpublishing creates a new instance of a `deployment` object on the app, with a nil `app_version_id` (`00000000-0000-0000-0000-000000000000`). The app can still be updated and published again in the future. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Unpublish App"
   },
   "PublishApp": {
-    "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Publish App"
   },
   "ListApplicationKeys": {
@@ -304,6 +308,12 @@
     "summary": "Assign case",
     "request_description": "Assign case payload",
     "request_schema_description": "Case assign request"
+  },
+  "UpdateAttributes": {
+    "description": "Update case attributes",
+    "summary": "Update case attributes",
+    "request_description": "Case attributes update payload",
+    "request_schema_description": "Case update attributes request"
   },
   "UpdatePriority": {
     "description": "Update case priority",
@@ -607,6 +617,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "GetAllDatasets": {
+    "description": "Get all datasets that have been configured for an organization.",
+    "summary": "Get all datasets"
+  },
+  "CreateDataset": {
+    "description": "Create a dataset with the configurations in the request.",
+    "summary": "Create a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Create request for a dataset."
+  },
+  "DeleteDataset": {
+    "description": "Deletes the dataset associated with the ID.",
+    "summary": "Delete a dataset"
+  },
+  "GetDataset": {
+    "description": "Retrieves the dataset associated with the ID.",
+    "summary": "Get a single dataset by ID"
+  },
+  "UpdateDataset": {
+    "description": "Edits the dataset associated with the ID.",
+    "summary": "Edit a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Edit request for a dataset."
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
@@ -679,12 +713,34 @@
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
   },
+  "SearchIssues": {
+    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
+    "summary": "Search error tracking issues",
+    "request_description": "Search issues request payload.",
+    "request_schema_description": "Search issues request payload."
+  },
+  "GetIssue": {
+    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
+    "summary": "Get the details of an error tracking issue"
+  },
+  "UpdateIssueAssignee": {
+    "description": "Update the assignee of an issue by `issue_id`.",
+    "summary": "Update the assignee of an issue",
+    "request_description": "Update issue assignee request payload.",
+    "request_schema_description": "Update issue assignee request payload."
+  },
+  "UpdateIssueState": {
+    "description": "Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.",
+    "summary": "Update the state of an issue",
+    "request_description": "Update issue state request payload.",
+    "request_schema_description": "Update issue state request payload."
+  },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.\n\n❌ This endpoint is not available for the Government (US1-FED) site. Contact your account representative for more information.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -695,6 +751,10 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
   },
+  "GetEvent": {
+    "description": "Get the details of an event by `event_id`.",
+    "summary": "Get an event"
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
@@ -704,6 +764,54 @@
     "summary": "Create an incident",
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
+  },
+  "ListIncidentNotificationRules": {
+    "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
+    "summary": "List incident notification rules"
+  },
+  "CreateIncidentNotificationRule": {
+    "description": "Creates a new notification rule.",
+    "summary": "Create an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification rule."
+  },
+  "DeleteIncidentNotificationRule": {
+    "description": "Deletes a notification rule by its ID.",
+    "summary": "Delete an incident notification rule"
+  },
+  "GetIncidentNotificationRule": {
+    "description": "Retrieves a specific notification rule by its ID.",
+    "summary": "Get an incident notification rule"
+  },
+  "UpdateIncidentNotificationRule": {
+    "description": "Updates an existing notification rule with a complete replacement.",
+    "summary": "Update an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Put request for a notification rule."
+  },
+  "ListIncidentNotificationTemplates": {
+    "description": "Lists all notification templates. Optionally filter by incident type.",
+    "summary": "List incident notification templates"
+  },
+  "CreateIncidentNotificationTemplate": {
+    "description": "Creates a new notification template.",
+    "summary": "Create incident notification template",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification template."
+  },
+  "DeleteIncidentNotificationTemplate": {
+    "description": "Deletes a notification template by its ID.",
+    "summary": "Delete a notification template"
+  },
+  "GetIncidentNotificationTemplate": {
+    "description": "Retrieves a specific notification template by its ID.",
+    "summary": "Get incident notification template"
+  },
+  "UpdateIncidentNotificationTemplate": {
+    "description": "Updates an existing notification template's attributes.",
+    "summary": "Update incident notification template",
+    "request_description": "",
+    "request_schema_description": "Update request for a notification template."
   },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
@@ -1305,6 +1413,10 @@
     "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
+  "GetMetricTagCardinalityDetails": {
+    "description": "Returns the cardinality details of tags for a specific metric.",
+    "summary": "Get tag key cardinality details"
+  },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
     "summary": "Delete a tag configuration"
@@ -1443,6 +1555,10 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "GetAggregatedDns": {
+    "description": "Get all aggregated DNS traffic.",
+    "summary": "Get all aggregated DNS traffic"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -1533,12 +1649,32 @@
     "request_description": "",
     "request_schema_description": "A request to update an Org Config."
   },
+  "ListOrgConnections": {
+    "description": "Returns a list of org connections.",
+    "summary": "List Org Connections"
+  },
+  "CreateOrgConnections": {
+    "description": "Create a new org connection between the current org and a target org.",
+    "summary": "Create Org Connection",
+    "request_description": "",
+    "request_schema_description": "Request to create an org connection."
+  },
+  "DeleteOrgConnections": {
+    "description": "Delete an existing org connection.",
+    "summary": "Delete Org Connection"
+  },
+  "UpdateOrgConnections": {
+    "description": "Update an existing org connection.",
+    "summary": "Update Org Connection",
+    "request_description": "",
+    "request_schema_description": "Request to update an org connection."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
   "MuteFindings": {
@@ -1730,7 +1866,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1961,6 +2097,12 @@
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
+  "UpdateScorecardOutcomesAsync": {
+    "description": "Updates multiple scorecard rule outcomes in a single batched request.",
+    "summary": "Update Scorecard outcomes asynchronously",
+    "request_description": "Set of scorecard outcomes.",
+    "request_schema_description": "Scorecard outcomes batch request."
+  },
   "CreateScorecardOutcomesBatch": {
     "description": "Sets multiple service-rule outcomes in a single batched request.",
     "summary": "Create outcomes batch",
@@ -1994,6 +2136,10 @@
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
+  },
+  "ListAssetsSBOMs": {
+    "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
+    "summary": "List assets SBOMs"
   },
   "GetSBOM": {
     "description": "Get a single SBOM related to an asset by its type and name.\n",
@@ -2107,6 +2253,22 @@
     "description": "Create a new suppression rule.",
     "summary": "Create a suppression rule",
     "request_description": "The definition of the new suppression rule.",
+    "request_schema_description": "Request object that includes the suppression rule that you would like to create."
+  },
+  "GetSuppressionsAffectingFutureRule": {
+    "description": "Get the list of suppressions that would affect a rule.",
+    "summary": "Get suppressions affecting future rule",
+    "request_description": "",
+    "request_schema_description": "Create a new rule."
+  },
+  "GetSuppressionsAffectingRule": {
+    "description": "Get the list of suppressions that affect a specific existing rule by its ID.",
+    "summary": "Get suppressions affecting a specific rule"
+  },
+  "ValidateSecurityMonitoringSuppression": {
+    "description": "Validate a suppression rule.",
+    "summary": "Validate a suppression rule",
+    "request_description": "",
     "request_schema_description": "Request object that includes the suppression rule that you would like to create."
   },
   "DeleteSecurityMonitoringSuppression": {
@@ -2339,6 +2501,20 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "ListSecurityMonitoringHistsignals": {
+    "description": "List hist signals.",
+    "summary": "List hist signals"
+  },
+  "SearchSecurityMonitoringHistsignals": {
+    "description": "Search hist signals.",
+    "summary": "Search hist signals",
+    "request_description": "",
+    "request_schema_description": "The request for a security signal list."
+  },
+  "GetSecurityMonitoringHistsignal": {
+    "description": "Get a hist signal's details.",
+    "summary": "Get a hist signal's details"
+  },
   "ListHistoricalJobs": {
     "description": "List historical jobs.",
     "summary": "List historical jobs"
@@ -2367,6 +2543,10 @@
     "description": "Cancel a historical job.",
     "summary": "Cancel a historical job"
   },
+  "GetSecurityMonitoringHistsignalsByJobId": {
+    "description": "Get a job's hist signals.",
+    "summary": "Get a job's hist signals"
+  },
   "CreateSLOReportJob": {
     "description": "Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.\n\nCheck the status of the job and download the CSV report using the returned `report_id`.",
     "summary": "Create a new SLO report",
@@ -2380,6 +2560,10 @@
   "GetSLOReportJobStatus": {
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
+  },
+  "GetSPARecommendations": {
+    "description": "Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA Recommendations"
   },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
@@ -2416,6 +2600,12 @@
     "summary": "Create a team",
     "request_description": "",
     "request_schema_description": "Request to create a team"
+  },
+  "SyncTeams": {
+    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This will not create new Teams in Datadog.",
+    "summary": "Link Teams with GitHub Teams",
+    "request_description": "",
+    "request_schema_description": "Team sync request."
   },
   "ListMemberTeams": {
     "description": "Get all member teams.",
@@ -2606,41 +2796,41 @@
     "summary": "Get user memberships"
   },
   "CreateWorkflow": {
-    "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Create a Workflow",
     "request_description": "",
     "request_schema_description": "A request object for creating a new workflow."
   },
   "DeleteWorkflow": {
-    "description": "Delete a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Delete a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete an existing Workflow"
   },
   "GetWorkflow": {
-    "description": "Get a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Get a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Get an existing Workflow"
   },
   "UpdateWorkflow": {
-    "description": "Update a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Update a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Update an existing Workflow",
     "request_description": "",
     "request_schema_description": "A request object for updating an existing workflow."
   },
   "ListWorkflowInstances": {
-    "description": "List all instances of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "List all instances of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "List workflow instances"
   },
   "CreateWorkflowInstance": {
-    "description": "Execute the given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Execute the given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Execute a workflow",
     "request_description": "",
     "request_schema_description": "Request used to create a workflow instance."
   },
   "GetWorkflowInstance": {
-    "description": "Get a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Get a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Get a workflow instance"
   },
   "CancelWorkflowInstance": {
-    "description": "Cancels a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Cancels a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Cancel a workflow instance"
   }
 }

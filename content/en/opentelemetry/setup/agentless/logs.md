@@ -22,9 +22,6 @@ Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to s
 
 Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
-{{< site-region region="us,us3,us5,eu" >}}
-
-
 ## Configuration
 
 To send OTLP data to the Datadog OTLP logs intake endpoint, you must configure the OTLP HTTP Protobuf exporter. The process differs depending on whether you are using automatic or manual instrumentation for OpenTelemetry.
@@ -38,7 +35,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_LOGS_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_LOGS_ENDPOINT="${YOUR_ENDPOINT}" // Replace this with the correct endpoint
-export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY}"
+export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-api-key=${DD_API_KEY}"
 ```
 
 #### Manual instrumentation
@@ -56,7 +53,6 @@ import io.opentelemetry.exporter.otlp.http.logs.OtlpHttpLogRecordExporter;
 
 OtlpHttpLogRecordExporter exporter = OtlpHttpLogRecordExporter.builder()
     .setEndpoint("${YOUR_ENDPOINT}") // Replace this with the correct endpoint
-    .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .build();
 ```
@@ -71,10 +67,9 @@ import "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp"
 logExporter, err := otlploghttp.New(
     ctx,
     otlploghttp.WithEndpointURL("${YOUR_ENDPOINT}"), // Replace this with the correct endpoint, minus the URL path
-    otlploghttp.WithURLPath("/api/v2/logs"),
+    otlploghttp.WithURLPath("/v1/logs"),
     otlploghttp.WithHeaders(
         map[string]string{
-            "dd-protocol": "otlp",
             "dd-api-key": os.Getenv("DD_API_KEY"),
         }),
 )
@@ -93,7 +88,6 @@ exporters:
   otlphttp:
     logs_endpoint: ${YOUR_ENDPOINT} // Replace this with the correct endpoint
     headers:
-      dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
 
 service:
@@ -113,13 +107,11 @@ If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP log
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_logs_endpoint" code="true" >}} endpoint.
 
-[3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
-{{< /site-region >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
+[3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
+[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter

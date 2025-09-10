@@ -13,6 +13,9 @@ further_reading:
 - link: "/service_management/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 
 ---
 
@@ -314,6 +317,41 @@ State Function
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Integration logo" level="h3" %}}
+Integration logo components have the following properties.
+
+### General
+
+Integration Id
+: Specifies which integration logo icon to display.<br>
+**Value**: string or expression<br>
+**Examples**: datadog, amazon-s3, postgres, okta
+
+### Appearance
+
+Horizontal Alignment
+: Controls the horizontal positioning of the logo within the component.<br>
+**Provided values**: align left, align center, align right
+
+Vertical Alignment
+: Controls the vertical positioning of the logo within the component.<br>
+**Provided values**: align top, align center, align bottom
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Is Loading
+: Shows a loading indicator.<br>
+**Provided values**: on, off
 
 ### Inspect data
 

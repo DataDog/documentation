@@ -17,9 +17,13 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
   tag: 'Blog'
   text: 'Best practices for creating end-to-end tests'
+products:
+- name: Browser Tests
+  url: /synthetics/browser_tests/
+  icon: browser
 ---
 
-<div class="alert alert-info">Extracting one-time passcodes from an email body is only supported for Synthetic Browser Tests.</div>
+{{< product-availability names="Browser Tests" >}}
 
 ## Overview
 
@@ -31,7 +35,7 @@ This guide walks you through how to configure the OTP extraction for a Synthetic
 
 ### Step 1 - Create an email variable
 
-Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetics email address][7] for the Synthetic Test run.
+Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetic Monitoring email address][7] for the Synthetic test run.
 
 1. On a new or existing Browser Test, under **Variables** click **Add Variable**.
 2. Next, select **Email Address** from the dropdown menu.
@@ -49,7 +53,7 @@ Next, [record steps][11] to insert the email address variable into an input fiel
 
 {{< img src="synthetics/guide/otp-from-email-body/email_injection.mp4" alt="Example of recording the email address injection steps" video="true" width="100%">}}
 
-1. First click **Record** at the top of the test. This automatically adds steps to the test based on the detected interactions and inputs.
+1. Click **Record** at the top of the test. This automatically adds steps to the test based on the detected interactions and inputs.
 2. Click the email input field, which creates a **Click** step.
 3. Find the email variable created earlier, called `DD_EMAIL_ADDRESS` in this example. On the right, click **Inject variable in a text input** and click the desired text box, which is highlighted in the UI. The email gets inserted.
 
@@ -59,7 +63,7 @@ After the email containing the OTP is sent, the Browser Test can access the emai
 
 ### Step 3 - Extract the OTP from the email body
 
-The next step is to define a test step that extracts the OTP from the email body once it has been sent and store it in a variable. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
+Next, create a test step that extracts the OTP from the email body after it's sent and stores it in a variable. This example uses the variable name OTP_FROM_EMAIL throughout the rest of this guide.
 
 1. Under **Add a variable** select **from Email body**.
 
@@ -67,7 +71,7 @@ The next step is to define a test step that extracts the OTP from the email body
 
 2. Under **Parsing Regex** add in the regex pattern that corresponds to the OTP.
 
-Here are sample regex patterns to parse the OTP token from the email body:
+The following are example regex patterns to parse the OTP token from the email body:
 
 | **Type**                           | **Example**                                  | **Regex Rule**                           |
 |:-----------------------------------|:---------------------------------------------|:-----------------------------------------|
