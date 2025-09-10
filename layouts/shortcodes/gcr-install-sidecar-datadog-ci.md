@@ -31,8 +31,11 @@ To permanently install Datadog for your production applications, run the `instru
 datadog-ci cloud-run instrument --project <GCP-PROJECT-ID> --service <CLOUD-RUN-SERVICE-NAME> --region <GCP-REGION>
 ```
 
+You can pin to a specific image with the `--sidecar-image` flag. See the [latest releases on Docker Hub][1003].
+
 Additional parameters can be found in the [CLI documentation][1003].
 
 [1001]: https://cloud.google.com/sdk/docs/install
 [1002]: /getting_started/site/
-[1003]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/cloud-run#readme
+[1003]: https://hub.docker.com/r/datadog/serverless-init
+[1004]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/cloud-run#readme
