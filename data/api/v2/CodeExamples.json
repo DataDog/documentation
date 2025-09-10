@@ -179,6 +179,11 @@
       "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_2836340212",
+      "description": "Send several pipeline events returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [

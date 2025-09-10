@@ -6007,10 +6007,9 @@ components:
       type: object
     CIAppCreatePipelineEventRequest:
       description: Request object.
-      properties:
-        data:
-          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/CIAppCreatePipelineEventRequestRootDataSingle'
+      - $ref: '#/components/schemas/CIAppCreatePipelineEventRequestRootDataArray'
     CIAppCreatePipelineEventRequestAttributes:
       description: Attributes of the pipeline event to create.
       properties:
@@ -6045,6 +6044,11 @@ components:
         type:
           $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataType'
       type: object
+    CIAppCreatePipelineEventRequestDataArray:
+      description: Array of pipeline events to create in batch.
+      items:
+        $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+      type: array
     CIAppCreatePipelineEventRequestDataType:
       default: cipipeline_resource_request
       description: Type of the event.
@@ -6054,6 +6058,18 @@ components:
       type: string
       x-enum-varnames:
       - CIPIPELINE_RESOURCE_REQUEST
+    CIAppCreatePipelineEventRequestRootDataArray:
+      description: Data of the pipeline events to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataArray'
+      type: object
+    CIAppCreatePipelineEventRequestRootDataSingle:
+      description: Data of the pipeline events to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+      type: object
     CIAppEventAttributes:
       description: JSON object containing all event attributes and their associated
         values.
@@ -51564,6 +51580,9 @@ paths:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
         details about how pipeline executions are modeled and what execution types
         we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
+
+
+        Multiple events can be sent in an array (up to 1000).
 
 
         Pipeline events can be submitted with a timestamp that is up to 18 hours in
