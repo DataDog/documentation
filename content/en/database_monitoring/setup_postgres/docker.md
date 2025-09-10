@@ -1,6 +1,6 @@
 ---
-title: Setting Up Database Monitoring for self hosted Postgres
-description: Install and configure Database Monitoring for self-hosted Postgres.
+title: Setting Up Database Monitoring for Docker hosted Postgres
+description: Install and configure Database Monitoring for Docker hosted Postgres.
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
