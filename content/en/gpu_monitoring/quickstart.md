@@ -31,7 +31,7 @@ Your installation method depends on your deployment type (uniform or mixed):
 Uniform clusters are those where all the nodes have GPU devices
 
 1. Install and deploy the Datadog Agent on Kubernetes (instructions [here][1])
-2. Include the additional parameter, `gpu.enabled:true` to your existing Operator configuration file. If you would like to opt-in for more advanced eBPF metrics such as [METRIC NAME HERE], also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below
+2. Include the additional parameter, `gpu.enabled:true` to your existing Operator configuration file. If you would like to opt-in for more advanced eBPF metrics, such as GPU Core utilization (`gpu.core.usage`), you should also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below.
 
 Example snippet from configuration file: 
    ```
@@ -138,7 +138,7 @@ spec:
 Uniform clusters are those where all the nodes have GPU devices.
 
 1. Install and deploy the Datadog Agent on Kubernetes with Helm (instructions [here][1])
-2. Include the additional parameter, `gpu.enabled:true` to the `datadog-values.yaml` configuration file. If you would like to opt-in for more advanced eBPF metrics such as [METRIC NAME HERE], also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below
+2. Include the additional parameter, `gpu.enabled:true` to the `datadog-values.yaml` configuration file. If you would like to opt-in for more advanced eBPF metrics, such as GPU Core utilization (`gpu.core.usage`), also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below
 
 Example snippet from datadog-values.yaml configuration file: 
 ```
