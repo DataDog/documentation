@@ -106,6 +106,16 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   }
 }
 
+// Fix for nav-tabs being affected by .main ul li:before rule
+.nav-tabs.response-toggle {
+  .nav-item {
+    &::before {
+      content: none !important;
+      display: none !important;
+    }
+  }
+}
+
 // Common tab styles
 .code-tabs {
   position: relative;
