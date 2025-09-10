@@ -98,14 +98,13 @@ This is an example input log from the Splunk HEC source:
 }
 ```
 
-If these are the correct values you want for the log sent to Datadog:
+Assume these are the correct values you want for the log sent to Datadog:
 
 ```json
 {
   "ddsource": "akamai",
   "source": "cdn-logs"
 }
-```
 
 Use this Custom Processor script to remap the `service` and `source` to the correct values:
 
@@ -139,7 +138,7 @@ This is example input log from the Splunk HEC source:
 }
 ```
 
-If these are the correct values you want for the log sent to Datadog:
+Assume these are the correct values you want for the log sent to Datadog:
 
 ```json
 {
