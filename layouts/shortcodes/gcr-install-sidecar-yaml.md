@@ -90,7 +90,7 @@ spec:
       percent: 100
 ```
 
-In this example, we used the latest version of serverless-init. See the [latest releases on Docker Hub][1004] to pin a specific version.
+This example uses the latest version of serverless-init. See the [latest releases on Docker Hub][1004] to pin a specific version.
 
 See the [Environment Variables](#environment-variables) for more information.
 
