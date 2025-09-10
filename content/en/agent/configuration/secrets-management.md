@@ -564,8 +564,8 @@ On Linux, your executable must:
 
 On Windows, your executable must:
 
-* Have read/exec for `ddagentuser` (the user used to run the Agent).
-* Have no rights for any user or group except for the `Administrators` group, the built-in `Local System` account, or the Agent user context (`ddagentuser` by default).
+* Have **read** or **execute** for `ddagentuser` (the user used to run the Agent).
+* Have no rights for any user or group except for the **Administrators** group, the built-in **Local System** account, or the Agent user context (`ddagentuser` by default).
 * Be a valid Win32 application so the Agent can execute it (for example, a PowerShell or Python script doesn't work).
 
 {{% /tab %}}
@@ -848,7 +848,7 @@ Some secret management tools automatically add a line break when exporting secre
 
 ### Autodiscovery variables in secret handles
 
-It's also possible to use [Autodiscovery][1] variables in secret handles. The Agent resolves these variables before resolving the secret. For example:
+It is also possible to use [Autodiscovery][1] variables in secret handles. The Agent resolves these variables before resolving the secret. For example:
 ```
 instances:
   - server: %%host%%
