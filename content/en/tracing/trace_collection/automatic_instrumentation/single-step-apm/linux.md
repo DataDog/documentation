@@ -100,11 +100,11 @@ Use one of the following setup methods:
 
 ## Update SDK version
 
-The SDK version is fixed at the time the Agent installation command is run.
+The SDK version is fixed when you run the Agent installation command.
 
 To update the SDK versions:
 
-1. Re-run the Agent install command. This will also update the Agent to the latest version.
+1. Re-run the Agent install command. This command also updates the Agent to the latest version.
 1. Restart your applications.
 
 ## Remove Single Step APM instrumentation from your Agent
