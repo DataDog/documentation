@@ -49,7 +49,7 @@ To set up the integration:
 
 3. The following configuration parameters need to be present for TeamCity projects:
 
-   * **datadog.ci.api.key**: Your [Datadog API Key][2]. Can have type **Password** since plugin version 0.0.5.
+   * **datadog.ci.api.key**: Your [Datadog API Key][2]. Supports type **Password** since plugin version 0.0.5.
    * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}
    * **datadog.ci.enabled**: `true` (`false` can be used to disable the plugin for a specific project).
 
