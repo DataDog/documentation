@@ -109,7 +109,7 @@ Scalable (XS, S, M, L) compute tiers are billed at a flat rate. Flex Logs Starte
 
 ## Enable and disable Flex Logs
 
-You can enable or disable Flex Logs at the organization level. You must have the `flex_logs_config_write`[8](https://docs.datadoghq.com/account_management/rbac/permissions/#log-management) permission to do so.
+You can enable or disable Flex Logs at the organization level. You must have the [`flex_logs_config_write`][8] permission to do so.
 
 If Flex Logs is part of your contract, the compute options available on your contract is shown in the UI.
 
