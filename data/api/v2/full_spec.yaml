@@ -28626,6 +28626,10 @@ components:
       description: The `add_env_vars` processor adds environment variable values to
         log events.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this processor in the pipeline.
@@ -28685,6 +28689,10 @@ components:
     ObservabilityPipelineAddFieldsProcessor:
       description: The `add_fields` processor adds static key-value fields to logs.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         fields:
           description: A list of static fields (key-value pairs) that is added to
             each log event processed by this component.
@@ -29186,6 +29194,10 @@ components:
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this processor.
           example: remap-vrl-processor
@@ -29358,6 +29370,10 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -29443,6 +29459,10 @@ components:
     ObservabilityPipelineDedupeProcessor:
       description: The `dedupe` processor removes duplicate fields in log events.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         fields:
           description: A list of log field paths to check for duplicates.
           example:
@@ -29684,6 +29704,10 @@ components:
       description: The `enrichment_table` processor enriches logs using a static CSV
         file or GeoIP database.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         file:
           $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableFile'
         geoip:
@@ -29747,6 +29771,10 @@ components:
         on a Datadog search query. Logs that match the `include` query are passed
         through; others are discarded.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -29857,6 +29885,10 @@ components:
 
         '
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -30433,6 +30465,10 @@ components:
       description: The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -30567,6 +30603,10 @@ components:
             by Datadog.
           example: true
           type: boolean
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: A unique identifier for this processor.
           example: parse-grok-processor
@@ -30691,6 +30731,10 @@ components:
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         field:
           description: The name of the log field that contains a JSON string.
           example: message
@@ -30753,6 +30797,10 @@ components:
             after the quota has been met are dropped; only logs that did not match
             the filter query continue through the pipeline.
           example: false
+          type: boolean
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
           type: boolean
         id:
           description: The unique identifier for this component. Used to reference
@@ -30886,6 +30934,10 @@ components:
       description: The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         group_by:
           description: A list of fields used to group log events for merging.
           example:
@@ -30982,6 +31034,10 @@ components:
     ObservabilityPipelineRemoveFieldsProcessor:
       description: The `remove_fields` processor deletes specified fields from logs.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         fields:
           description: A list of field names to be removed from each log event.
           example:
@@ -31029,6 +31085,10 @@ components:
     ObservabilityPipelineRenameFieldsProcessor:
       description: The `rename_fields` processor changes field names.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         fields:
           description: A list of rename rules specifying which fields to rename in
             the event, what to rename them to, and whether to preserve the original
@@ -31168,6 +31228,10 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -31219,6 +31283,10 @@ components:
       description: The `sensitive_data_scanner` processor detects and optionally redacts
         sensitive data in log events.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (e.g., as input to downstream
@@ -32224,6 +32292,10 @@ components:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
       properties:
+        enabled:
+          description: The processor passes through all events if it is set to `false`.
+            Defaults to `true`.
+          type: boolean
         group_by:
           description: Optional list of fields used to group events before the threshold
             has been reached.
