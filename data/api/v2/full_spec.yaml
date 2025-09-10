@@ -19192,11 +19192,11 @@ components:
             type: string
           type: array
         hasOptionalGroupByFields:
+          default: false
           description: When false, events without a group-by value are ignored by
             the query. When true, events with missing group-by fields are processed
             with `N/A`, replacing the missing values.
           example: false
-          readOnly: true
           type: boolean
         metrics:
           description: Group of target fields to aggregate over when using the sum,
@@ -40280,11 +40280,11 @@ components:
             type: string
           type: array
         hasOptionalGroupByFields:
+          default: false
           description: When false, events without a group-by value are ignored by
             the rule. When true, events with missing group-by fields are processed
             with `N/A`, replacing the missing values.
           example: false
-          readOnly: true
           type: boolean
         index:
           description: '**This field is currently unstable and might be removed in
