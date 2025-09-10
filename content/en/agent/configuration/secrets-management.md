@@ -168,7 +168,7 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 
 The following Azure services are supported:
 
-| "secret_backend_type" value                            | Azure Service          |
+| secret_backend_type value                            | Azure Service          |
 | ----------------------------------------|------------------------|
 | `azure.keyvault` | [Azure Keyvault][2000] |
 
@@ -180,7 +180,7 @@ Datadog recommends using Managed Identities to authenticate with Azure. This all
 
 To access your Key Vault, create a Managed Identity and assign it to your Virtual Machine. Then, configure the appropriate role assignment on the Key Vault to allow that identity to access its secrets.
 
-#### Datadog.yaml configuration
+##### Configuration example
 
 The backend configuration for Azure Key Vault secrets is structured as YAML following this schema:
 
@@ -249,7 +249,7 @@ After this has been set up, write an [authentication-specific vault policy][3004
 In the following example, assume the HashiCorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `apikey`:
 
 ```sh
-/DatadogAgent/Production/apikey: (SecureString) "<your api key>"
+/DatadogAgent/Production/apikey: (SecureString) "<your_api_key>"
 ```
 
 The following example fetches the API key value from HashiCorp Vault leveraging AWS for authentication.
@@ -268,7 +268,7 @@ secret_backend_config:
 ```
 <!-- HASHICORP LINKS -->
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
-[3001]: https://www.hashicorp.com/en/products/vault
+[3001]: https://developer.hashicorp.com/
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
@@ -276,13 +276,13 @@ secret_backend_config:
 
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
 
-| "secret_backend_type" value                                 | File Service                             |
+| secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`file.json`           |[JSON][4001]                             |
 |`file.yaml`          |[YAML][4002]                        |                            |
 
 ##### File permissions
-The file backend only requires read permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
+The file backend only requires **read** permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
 
 
 {{< tabs >}}
@@ -290,19 +290,19 @@ The file backend only requires read permissions for the configured JSON or YAML 
 
 **Note**: Only one level of JSON depth is supported (for example, `{"key": "value"}`)
 
-##### Datadog.yaml configuration
+##### Configuration example
 
 You can use a JSON file to store secrets locally.
 
-As an example if we have a JSON file in `/path/to/secret.json` containing:
+For example, with a JSON file in `/path/to/secret.json` containing the following:
 
 ```json
 {
-  "datadog_api_key": "your api key"
+  "datadog_api_key": "your_api_key"
 }
 ```
 
-You can use the following configuration to pull secrets from it:
+You can use this configuration to pull its secrets:
 
 ```yaml
 # datadog.yaml
