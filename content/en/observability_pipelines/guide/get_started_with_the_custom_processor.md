@@ -338,7 +338,7 @@ empty_patterns = ["null", "NULL", "N/A", "n/a", "none", "NONE", "-", "undefined"
 
 ## Merge nested attributes to root level
 
-Targeting nested objects or fields in a filter query may require multiple paths to define. This is common when working with the message field, where the resulting parsed contents are nested in an object. When you use the Observability Pipelines' filter syntax, accessing a nested field requires the <OUTER_PATH>.<INNER_PATH> notation.
+Targeting nested objects or fields in a filter query may require you to define multiple paths. This is common when working with the message field, where the resulting parsed contents are nested in an object. When you use the Observability Pipelines' filter syntax, accessing a nested field requires the <OUTER_PATH>.<INNER_PATH> notation.
 
 For example, this log contains a stringified JSON message:
 
@@ -358,7 +358,7 @@ For example, this log contains a stringified JSON message:
 }
 ```
 
-Now see the output after the `message` field is parsed. The parsed content is nested in the `message` object.
+This is the output after the `message` field has been parsed. The parsed content is nested in the `message` object.
 
 ```
 {
@@ -383,9 +383,9 @@ Now see the output after the `message` field is parsed. The parsed content is ne
    "user_id": "12345"
 }
 ```
-In this case, to filter for `event_type`, you need to specify` @message.event_type`. Though that works, it can be difficult to do at scale. Therefore, Datadog recommends flattening the object to the root level.
+In this case, to filter for `event_type`, you need to specify` @message.event_type`. While that works, it can be difficult to do so at scale. Therefore, Datadog recommends flattening the object to the root level.
 
-In order to merge the events from the `message` object to the root level, use this script:
+In order to merge the events from the `message` object to root level, use this script:
 
 ```
 if is_object(.message) {
@@ -420,12 +420,14 @@ This results in the log with flattened attributes that you can filter directly:
 }
 ```
 
+**Note**: If you flatten the message field and send the logs to Datadog, the resulting log does not have a "Log message" in the Log Explorer.
+
 ## Serialize outbound logs in _raw format
 
 Splunk and CrowdStrike prefer a format called `_raw` for log ingestion. Sending data in `_raw` normalizes your logs and allows you to benefit from their out-of-the-box dashboards, monitors, and threat detection content. To ensure the `_raw` log format gets applied, you can serialize the outbound event in `_raw`.
 
 **Notes**:
-- You should add any processing, remapping, or parsing before using this step.
+- You should add other processing, remapping, and parsing steps before serializing your logs in `_raw` format.
 - Select `Raw` as the encoding option when you set up the Splunk HEC or Crowdstrike destination.
 
 An example input log:
@@ -449,7 +451,7 @@ An example input log:
 }
 ```
 
-This custom function serializes the event to `_raw` format:
+This custom function serializes the event into `_raw` format:
 
 ```
 # Serialize the entire event into _raw
