@@ -252,15 +252,15 @@ When the extension is updated, the debugger permission is requested and the exte
 You can replay steps in three ways:
 
 <strong>1. Single step replay:</strong> Re-execute a single step:
-{{< img src="synthetics/browser_tests/recording__replay--replay-one-step.mp4" alt="Single Step Replay" video="true" height="400px" >}}
+{{< img src="synthetics/browser_tests/recording__replay--replay-one-step_1.mp4" alt="Single Step Replay" video="true" height="400px" >}}
 <p style="text-align: center;"><em>Hover over the step, and click on the play button to replay only this step.</em></p>
 
 <strong>2. Replay all steps:</strong> Run the entire sequence of steps as defined in the recorder:
-{{< img src="synthetics/browser_tests/recording__replay--replay-all-steps.mp4" alt="Replay All Steps" video="true" height="400px" >}}
+{{< img src="synthetics/browser_tests/recording__replay--replay-all-steps_1.mp4" alt="Replay All Steps" video="true" height="400px" >}}
 <p style="text-align: center;"><em>Click on the replay all button (⏩︎) on top of the step list to replay all steps.</em></p>
 
 <strong>3. Replay selected steps:</strong> Run a subset of steps you select in the step list:
-{{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps.mp4" alt="Replay Selected Steps" video="true">}}
+{{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps_1.mp4" alt="Replay Selected Steps" video="true">}}
 <p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected button (⏩︎) on top of the step list.</em></p>
 
 ### Step replay feature support
