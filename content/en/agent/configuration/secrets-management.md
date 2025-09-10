@@ -33,7 +33,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`. 
 
-`secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution:
+`secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution.
 
 ```yaml
 # datadog.yaml
@@ -50,17 +50,17 @@ More specific setup instructions depend on the backend type used. Refer to the a
 {{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-anchoring" %}}
 The following AWS services are supported:
 
-|"secret_backend_type" value                                | AWS Service                             |
+|secret_backend_type value                                | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
 
-##### Set up an Instance profile
+##### Set up an instance profile
 
 Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1000].
 
-#### Datadog.yaml configuration
+##### Configuration example
 
-Configure the DataDog Agent to user `AWS Secrets` to resolve secrets using the following configuration:
+Configure the DataDog Agent to use AWS Secrets to resolve secrets using the following configuration:
 
 ```yaml
 # datadog.yaml
@@ -70,10 +70,10 @@ secret_backend_config:
     aws_region: {regionName}
 ```
 
-After configuring the Agent to use AWS Secrets, you can refer to any secrets in your configurations with `ENC[secretId;secretKey]`. 
+After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`. 
 
 The ENC notation is composed of:
-* `secretId`: either the secret "friendly name" (ex: `/DatadogAgent/Production`) or the ARN (ex: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
+* `secretId`: either the secret "friendly name" (for example, `/DatadogAgent/Production`) or the ARN (for example, `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
   - **Note**: The full ARN format is required when accessing secrets from a different account where the AWS credential or `sts:AssumeRole` credential is defined.
 * `secretKey`: the JSON key from the AWS secret that you want to use.
 
@@ -90,7 +90,7 @@ For example, assuming the secret ID `My-Secrets` contains the following 3 values
 }
 ```
 
-Here would be a complete example of the `datadog.yaml` using the AWS Secrets to pull its API key from `My-Secrets`:
+The following is a complete example of the `datadog.yaml` configuration file using the AWS Secrets to pull its API key from `My-Secrets`:
 
 ```yaml
 api_key: ENC[My-Secrets;prodApiKey]
@@ -117,20 +117,20 @@ secret_backend_config:
 {{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-anchoring" %}}
 The following AWS services are supported:
 
-|"secret_backend_type" value                                | AWS Service                             |
+|secret_backend_type value                                | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
-##### Set up an Instance profile
+##### Set up an instance profile
 
 Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1001].
 
-#### Datadog.yaml configuration
+##### Configuration example
 
 The AWS System Manager Parameter Store supports a hierachical model. For example, assuming the following AWS System Manager Parameter Store paths:
 
 ```sh
-/DatadogAgent/Production/ApiKey = < your api key >
+/DatadogAgent/Production/ApiKey = <your_api_key>
 /DatadogAgent/Production/ParameterKey2 = ParameterStringValue2
 /DatadogAgent/Production/ParameterKey3 = ParameterStringValue3
 ```
