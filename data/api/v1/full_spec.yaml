@@ -14649,6 +14649,11 @@ components:
         extractedValuesFromScript:
           description: Generate variables using JavaScript.
           type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -14705,6 +14710,11 @@ components:
     SyntheticsAPIWaitStep:
       description: The Wait step used in a Synthetic multi-step API test.
       properties:
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         name:
           description: The name of the step.
           example: Example step name
@@ -28017,6 +28027,7 @@ paths:
         type: safe
   /api/v1/integration/aws:
     delete:
+      deprecated: true
       description: Delete a Datadog-AWS integration matching the specified `account_id`
         and `role_name parameters`.
       operationId: DeleteAWSAccount
@@ -28066,6 +28077,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS integrations available in your Datadog organization.
       operationId: ListAWSAccounts
       parameters:
@@ -28119,6 +28131,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: 'Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
@@ -28191,6 +28204,7 @@ paths:
             }}"}'
         type: unsafe
     put:
+      deprecated: true
       description: Update a Datadog-Amazon Web Services integration.
       operationId: UpdateAWSAccount
       parameters:
@@ -28263,6 +28277,7 @@ paths:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
     get:
+      deprecated: true
       description: List all namespace rules for a given Datadog-AWS integration. This
         endpoint takes no arguments.
       operationId: ListAvailableAWSNamespaces
@@ -28422,6 +28437,7 @@ paths:
         type: unsafe
   /api/v1/integration/aws/filtering:
     delete:
+      deprecated: true
       description: Delete a tag filtering entry.
       operationId: DeleteAWSTagFilter
       requestBody:
@@ -28466,6 +28482,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: Get all AWS tag filters.
       operationId: ListAWSTagFilters
       parameters:
@@ -28507,6 +28524,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Set an AWS tag filter.
       operationId: CreateAWSTagFilter
       requestBody:
@@ -28557,6 +28575,7 @@ paths:
         type: unsafe
   /api/v1/integration/aws/generate_new_external_id:
     put:
+      deprecated: true
       description: Generate a new AWS external ID for a given AWS account ID and role
         name pair.
       operationId: CreateNewAWSExternalID
@@ -28648,6 +28667,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
       operationId: ListAWSLogsIntegrations
@@ -28800,6 +28820,7 @@ paths:
         type: safe
   /api/v1/integration/aws/logs/services:
     get:
+      deprecated: true
       description: Get the list of current AWS services that Datadog offers automatic
         log collection. Use returned service IDs with the services parameter for the
         Enable an AWS service log collection API endpoint.
@@ -28845,6 +28866,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Enable automatic log collection for a list of services. This should
         be run after running `CreateAWSLambdaARN` to save the configuration.
       operationId: EnableAWSLogServices

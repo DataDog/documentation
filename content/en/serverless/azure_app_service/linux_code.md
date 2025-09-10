@@ -109,7 +109,7 @@ This bash script is intended to run as the startup command, which installs the t
 ### Instrumentation
 
 {{< tabs >}}
-{{% tab "Automated" %}}
+{{% tab "Datadog CLI" %}}
 
 First, install the [Datadog CLI][201] and [Azure CLI][202].
 
@@ -134,6 +134,66 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 [201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+
+Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
+
+```tf
+variable "datadog_api_key" {
+  description = "Your Datadog API key"
+  type        = string
+  sensitive   = true
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = "00000000-0000-0000-0000-000000000000" // Replace with your subscription ID
+}
+
+resource "azurerm_service_plan" "my_asp" {
+  name                = "my-app-service-plan" // Replace with your app service plan name
+  resource_group_name = "my-resource-group"   // Replace with your resource group name
+  os_type             = "Linux"
+  location            = "eastus"
+  sku_name            = "P1v2"
+}
+
+module "my_web_app" {
+  source  = "DataDog/web-app-datadog/azurerm//modules/linux"
+  version = "1.0.0"
+
+  name                = "my-web-app"        // Replace with your web app name
+  resource_group_name = "my-resource-group" // Replace with your resource group name
+  service_plan_id     = azurerm_service_plan.my_asp.id
+  location            = "eastus"
+
+  datadog_api_key = var.datadog_api_key
+  datadog_service = "my-service" // Replace with your service name
+  datadog_env     = "prod"       // Replace with your environment (e.g. prod, staging)
+  datadog_version = "0.0.0"      // Replace with your application version
+
+  site_config = {
+    application_stack = {
+      python_version = "3.13" // change for your specific runtime
+    }
+  }
+  app_settings = {
+    DD_TRACE_ENABLED = "true" // Example setting
+  }
+}
+```
+
+Finally, run `terraform apply`, and follow any prompts.
+
+The [Datadog Linux Web App module][251] only deploys the Web App resource, so you need to [deploy your code][252] separately.
+
+[250]: https://developer.hashicorp.com/terraform/install
+[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 {{% /tab %}}
 {{% tab "Manual" %}}

@@ -61,9 +61,9 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
    {{< code-block lang="go" disable_copy="false" >}}
 const LOG_FILE = "/shared-volume/logs/app.log"
 

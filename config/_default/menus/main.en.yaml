@@ -646,65 +646,80 @@ menu:
       url: /opentelemetry/setup/
       parent: opentelemetry_top_level
       weight: 4
+    - name: DDOT Collector (Recommended)
+      url: /opentelemetry/setup/ddot_collector
+      identifier: otel-setup-ddot
+      parent: otel_collect
+      weight: 401
+    - name: Install the DDOT Collector
+      url: /opentelemetry/setup/ddot_collector/install/kubernetes
+      identifier: otel-setup-ddot-install
+      parent: otel-setup-ddot
+      weight: 4011
+    - name: Use Custom OTel Components
+      url: /opentelemetry/setup/ddot_collector/custom_components
+      identifier: otel-setup-ddot-custom
+      parent: otel-setup-ddot
+      weight: 4012
+    - name: Migrate to the DDOT Collector
+      url: /opentelemetry/migrate/ddot_collector
+      identifier: otel-setup-ddot-migrate
+      parent: otel-setup-ddot
+      weight: 4013
+    - name: Other Setup Options
+      url: /opentelemetry/setup/
+      identifier: otel-setup-other
+      parent: otel_collect
+      weight: 402
     - name: OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
-      parent: otel_collect
-      weight: 401
+      parent: otel-setup-other
+      weight: 4021
     - name: Deploy
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
       parent: otel-setup-collector-exporter
-      weight: 101
+      weight: 40211
     - name: Batch and Memory Settings
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter
-      weight: 102
+      weight: 40212
     - name: Hostnames and Tagging
       url: opentelemetry/config/hostname_tagging/
       identifier: otel_hostnames_tagging
       parent: otel-setup-collector-exporter
-      weight: 103
+      weight: 40213
     - name: Log Collection
       url: opentelemetry/config/log_collection/
       identifier: otel_log_collection
       parent: otel-setup-collector-exporter
-      weight: 104
+      weight: 40214
     - name: OTLP Receiver
       url: opentelemetry/config/otlp_receiver/
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
-      weight: 105
-    - name: Datadog Agent
-      url: /opentelemetry/setup/agent
-      identifier: otel-setup-agent
-      parent: otel_collect
-      weight: 402
-    - name: DDOT Collector
-      url: /opentelemetry/setup/ddot_collector
-      identifier: otel-setup-ddot-collector
-      parent: otel-setup-agent
-      weight: 4021
-    - name: OTLP Ingest
+      weight: 40215
+    - name: OTLP Ingest in the Agent
       url: /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
-      parent: otel-setup-agent
+      parent: otel-setup-other
       weight: 4022
     - name: Agentless Deployment
       url: /opentelemetry/setup/agentless
       identifier: otel-setup-intake-endpoint
-      parent: otel_collect
-      weight: 403
+      parent: otel-setup-other
+      weight: 4023
     - name: Logs Endpoint
       url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
-      weight: 301
+      weight: 40231
       identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
       url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
-      weight: 302
+      weight: 40232
       identifier: otel_setup_agentless_metrics
     - name: Semantic Mapping
       url: opentelemetry/mapping/
@@ -2435,22 +2450,32 @@ menu:
       parent: incidents
       identifier: analytics
       weight: 7
-    - name: Datadog Clipboard
-      url: service_management/incident_management/datadog_clipboard
+    - name: Integrations
+      url: service_management/incident_management/integrations
       parent: incidents
-      identifier: incidents_clipboard
-      weight: 8
-    - name: Guides
-      url: service_management/incident_management/guides
-      parent: incidents
-      identifier: incidents_guide
+      identifier: incidents_integrations
       weight: 9
+    - name: Jira
+      url: service_management/incident_management/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_jira
+      weight: 901
+    - name: Statuspage
+      url: service_management/incident_management/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_statuspage
+      weight: 902
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
       parent: service_management_heading
       identifier: oncall
       weight: 30000
+    - name: Datadog Clipboard
+      url: service_management/incident_management/datadog_clipboard
+      parent: incidents
+      identifier: incidents_clipboard
+      weight: 10
     - name: Onboard a Team
       url: service_management/on-call/teams/
       parent: oncall
@@ -3477,6 +3502,11 @@ menu:
       parent: ndm_setup
       identifier: ndm_sd-wan
       weight: 30005
+    - name: VPN Monitoring
+      url: network_monitoring/devices/vpn_monitoring
+      parent: ndm_setup
+      identifier: ndm_vpn_monitoring
+      weight: 30006
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
@@ -4731,7 +4761,7 @@ menu:
       identifier: llm_obs_submit_evaluations
       weight: 404
     - name: Experiments
-      url: llm_observability/experiments_preview
+      url: llm_observability/experiments
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
@@ -6304,11 +6334,16 @@ menu:
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 1
     - name: Coverage
       url: security/workload_protection/inventory/coverage_map
       parent: workload_protection_inventory
       identifier: workload_protection_coverage_map
-      weight: 1
+      weight: 2
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
