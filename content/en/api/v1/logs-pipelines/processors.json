@@ -1,0 +1,355 @@
+{
+  "grok-parser": {
+    "json_curl": {
+      "grok": {
+        "match_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+      },
+      "source": "message",
+      "type": "grok-parser"
+    },
+    "json": {
+      "grok": {
+        "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
+        "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+      },
+      "is_enabled": false,
+      "name": "string",
+      "samples": [],
+      "source": "message",
+      "type": "grok-parser"
+    },
+    "html": "<div class=\"\"><div class=\"row hasChildData \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n        <div class=\"col-3 column\">\n          <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> grok</p>\n        </div>\n        <div class=\"col-2 column\"><p>object</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Set of rules for the grok parser.<br><strong>Type:</strong> array of object</p></div>\n      </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">match_rules</p>\n          </div>\n          <div class=\"col-2 column\"><p>string</p></div>\n          <div class=\"col-2 column text-center\"><p>true</p></div>\n          <div class=\"col-5 column\"><p>List of match rules for the grok parser, separated by a new line.</p></div>\n        </div>\n      </div>\n    </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">support_rules</p>\n          </div>\n          <div class=\"col-2 column\"><p>string</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>List of support rules for the grok parser, separated by a new line.<br>default: <code></code></p></div>\n        </div>\n      </div>\n    </div></div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">samples</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>List of sample logs to test this grok parser.<br><strong>Max Items:</strong> 5<br><strong>Item Max Length:</strong> 5000 characters</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">source</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the log attribute to parse.<br>default: <code>message</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs grok parser.<br>default: <code>grok-parser</code><br>Allowed enum values: <code>grok-parser</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "date-remapper": {
+    "json_curl": {
+      "sources": [
+        "web",
+        "gateway"
+      ],
+      "type": "date-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [
+        "web",
+        "gateway"
+      ],
+      "type": "date-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs date remapper.<br>default: <code>date-remapper</code><br>Allowed enum values: <code>date-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "status-remapper": {
+    "json_curl": {
+      "sources": [
+        null
+      ],
+      "type": "status-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [
+        []
+      ],
+      "type": "status-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs status remapper.<br>default: <code>status-remapper</code><br>Allowed enum values: <code>status-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "service-remapper": {
+    "json_curl": {
+      "sources": [
+        "web",
+        "gateway"
+      ],
+      "type": "service-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [
+        "web",
+        "gateway"
+      ],
+      "type": "service-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs service remapper.<br>default: <code>service-remapper</code><br>Allowed enum values: <code>service-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "message-remapper": {
+    "json_curl": {
+      "sources": [
+        "msg"
+      ],
+      "type": "message-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [
+        "msg"
+      ],
+      "type": "message-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.<br>default: <code>msg</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs message remapper.<br>default: <code>message-remapper</code><br>Allowed enum values: <code>message-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "attribute-remapper": {
+    "json_curl": {
+      "sources": [
+        "web",
+        "gateway"
+      ],
+      "target": "operation_id",
+      "type": "attribute-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "override_on_conflict": false,
+      "preserve_source": false,
+      "source_type": "string",
+      "sources": [
+        "web",
+        "gateway"
+      ],
+      "target": "operation_id",
+      "target_format": "string",
+      "target_type": "string",
+      "type": "attribute-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">override_on_conflict</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Override or not the target element if already set,<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">preserve_source</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Remove or preserve the remapped source element.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">source_type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Defines if the sources are from log `attribute` or `tag`.<br>default: <code>attribute</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Final attribute or tag name to remap the sources to.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target_format</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>If the `target_type` of the remapper is `attribute`, try to cast the value to a new specific type.\nIf the cast is not possible, the original type is kept. `string`, `integer`, or `double` are the possible types.\nIf the `target_type` is `tag`, this parameter may not be specified.<br>Allowed enum values: <code>auto</code>, <code>string</code>, <code>integer</code>, <code>double</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target_type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Defines if the final attribute or tag name is from log `attribute` or `tag`.<br>default: <code>attribute</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs attribute remapper.<br>default: <code>attribute-remapper</code><br>Allowed enum values: <code>attribute-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "url-parser": {
+    "json_curl": {
+      "sources": [
+        "http.url"
+      ],
+      "target": "http.url_details",
+      "type": "url-parser"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "normalize_ending_slashes": false,
+      "sources": [
+        "http.url"
+      ],
+      "target": "http.url_details",
+      "type": "url-parser"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">normalize_ending_slashes</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Normalize the ending slashes or not.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.<br>default: <code>http.url</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the parent attribute that contains all the extracted details from the `sources`.<br>default: <code>http.url_details</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs URL parser.<br>default: <code>url-parser</code><br>Allowed enum values: <code>url-parser</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "user-agent-parser": {
+    "json_curl": {
+      "sources": [
+        "http.useragent"
+      ],
+      "target": "http.useragent_details",
+      "type": "user-agent-parser"
+    },
+    "json": {
+      "is_enabled": false,
+      "is_encoded": false,
+      "name": "string",
+      "sources": [
+        "http.useragent"
+      ],
+      "target": "http.useragent_details",
+      "type": "user-agent-parser"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_encoded</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Define if the source attribute is URL encoded or not.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.<br>default: <code>http.useragent</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the parent attribute that contains all the extracted details from the `sources`.<br>default: <code>http.useragent_details</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs User-Agent parser.<br>default: <code>user-agent-parser</code><br>Allowed enum values: <code>user-agent-parser</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "category-processor": {
+    "json_curl": {
+      "categories": [
+        {}
+      ],
+      "target": "string",
+      "type": "category-processor"
+    },
+    "json": {
+      "categories": [
+        {
+          "filter": {
+            "query": "source:python"
+          },
+          "name": "string"
+        }
+      ],
+      "is_enabled": false,
+      "name": "string",
+      "target": "string",
+      "type": "category-processor"
+    },
+    "html": "<div class=\"\"><div class=\"row hasChildData \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n        <div class=\"col-3 column\">\n          <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> categories</p>\n        </div>\n        <div class=\"col-2 column\"><p>[object]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of filters to match or not a log and their\ncorresponding `name` to assign a custom value to the log.<br><strong>Type:</strong> array of object</p></div>\n      </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">filter</p>\n          </div>\n          <div class=\"col-2 column\"><p>object</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>Filter for logs.</p></div>\n        </div>\n      </div>\n    </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">name</p>\n          </div>\n          <div class=\"col-2 column\"><p>string</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>Value to assign to the target attribute.</p></div>\n        </div>\n      </div>\n    </div></div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the target attribute which value is defined by the matching category.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs category processor.<br>default: <code>category-processor</code><br>Allowed enum values: <code>category-processor</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "arithmetic-processor": {
+    "json_curl": {
+      "expression": "string",
+      "target": "string",
+      "type": "arithmetic-processor"
+    },
+    "json": {
+      "expression": "string",
+      "is_enabled": false,
+      "is_replace_missing": false,
+      "name": "string",
+      "target": "string",
+      "type": "arithmetic-processor"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">expression</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Arithmetic operation between one or more log attributes.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_replace_missing</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>If `true`, it replaces all missing attributes of expression by `0`, `false`\nskip the operation if an attribute is missing.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the attribute that contains the result of the arithmetic operation.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs arithmetic processor.<br>default: <code>arithmetic-processor</code><br>Allowed enum values: <code>arithmetic-processor</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "string-builder-processor": {
+    "json_curl": {
+      "target": "string",
+      "template": "string",
+      "type": "string-builder-processor"
+    },
+    "json": {
+      "is_enabled": false,
+      "is_replace_missing": false,
+      "name": "string",
+      "target": "string",
+      "template": "string",
+      "type": "string-builder-processor"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_replace_missing</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>If true, it replaces all missing attributes of `template` by an empty string.\nIf `false` (default), skips the operation for missing attributes.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>The name of the attribute that contains the result of the template.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">template</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>A formula with one or more attributes and raw text.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs string builder processor.<br>default: <code>string-builder-processor</code><br>Allowed enum values: <code>string-builder-processor</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "pipeline": {
+    "json_curl": {
+      "processors": [
+        {
+          "grok": {
+            "match_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+          }
+        }
+      ],
+      "type": "pipeline"
+    },
+    "json": {
+      "filter": {
+        "query": "source:python"
+      },
+      "is_enabled": false,
+      "name": "string",
+      "processors": [
+        {
+          "grok": {
+            "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
+            "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+          },
+          "is_enabled": false,
+          "name": "string",
+          "samples": [],
+          "source": "message",
+          "type": "grok-parser"
+        }
+      ],
+      "type": "pipeline"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">filter</p>\n        </div>\n        <div class=\"col-2 column\"><p>object</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Filter for logs.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">processors</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Ordered list of processors in this pipeline.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs pipeline processor.<br>default: <code>pipeline</code><br>Allowed enum values: <code>pipeline</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "geo-ip-parser": {
+    "json_curl": {
+      "sources": [
+        "network.client.ip"
+      ],
+      "target": "network.client.geoip",
+      "type": "geo-ip-parser"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [
+        "network.client.ip"
+      ],
+      "target": "network.client.geoip",
+      "type": "geo-ip-parser"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.<br>default: <code>network.client.ip</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the parent attribute that contains all the extracted details from the `sources`.<br>default: <code>network.client.geoip</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of GeoIP parser.<br>default: <code>geo-ip-parser</code><br>Allowed enum values: <code>geo-ip-parser</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "lookup-processor": {
+    "json_curl": {
+      "lookup_table": [
+        "source_key1,target_value1",
+        "source_key2,target_value2"
+      ],
+      "source": "service_id",
+      "target": "service",
+      "type": "lookup-processor"
+    },
+    "json": {
+      "default_lookup": "string",
+      "is_enabled": false,
+      "lookup_table": [
+        "source_key1,target_value1",
+        "source_key2,target_value2"
+      ],
+      "name": "string",
+      "source": "service_id",
+      "target": "service",
+      "type": "lookup-processor"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">default_lookup</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Value to set the target attribute if the source value is not found in the list.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">lookup_table</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Mapping table of values for the source attribute and their associated target attribute values,\nformatted as `[\"source_key1,target_value1\", \"source_key2,target_value2\"]`</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">source</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Source attribute used to perform the lookup.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the attribute that contains the corresponding value in the mapping list\nor the `default_lookup` if not found in the mapping list.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs lookup processor.<br>default: <code>lookup-processor</code><br>Allowed enum values: <code>lookup-processor</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "trace-id-remapper": {
+    "json_curl": {
+      "type": "trace-id-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [],
+      "type": "trace-id-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.<br>default: <code>dd.trace_id</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs trace remapper.<br>default: <code>trace-id-remapper</code><br>Allowed enum values: <code>trace-id-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "span-id-remapper": {
+    "json_curl": {
+      "type": "span-id-remapper"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "sources": [],
+      "type": "span-id-remapper"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">sources</p>\n        </div>\n        <div class=\"col-2 column\"><p>[string]</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Array of source attributes.<br>default: <code>dd.span_id</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs span remapper.<br>default: <code>span-id-remapper</code><br>Allowed enum values: <code>span-id-remapper</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "array-processor": {
+    "json_curl": {
+      "operation": {},
+      "type": "array-processor"
+    },
+    "json": {
+      "is_enabled": false,
+      "name": "string",
+      "operation": {
+        "preserve_source": false,
+        "source": "network.client.ip",
+        "target": "sourceIps",
+        "type": "append"
+      },
+      "type": "array-processor"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether or not the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row hasChildData \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n        <div class=\"col-3 column\">\n          <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> operation</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Configuration of the array processor operation to perform.</p></div>\n      </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">preserve_source</p>\n          </div>\n          <div class=\"col-2 column\"><p>boolean</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>Remove or preserve the remapped source element.<br>default: <code>true</code></p></div>\n        </div>\n      </div>\n    </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">source</p>\n          </div>\n          <div class=\"col-2 column\"><p>string</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>Attribute path containing the value to append.</p></div>\n        </div>\n      </div>\n    </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">target</p>\n          </div>\n          <div class=\"col-2 column\"><p>string</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>Attribute path of the array to append to.</p></div>\n        </div>\n      </div>\n    </div><div class=\"row isNested d-none  \">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row  \">\n          <div class=\"col-3 column\">\n            <p class=\"key\">type</p>\n          </div>\n          <div class=\"col-2 column\"><p>string</p></div>\n          <div class=\"col-2 column text-center\"><p>false</p></div>\n          <div class=\"col-5 column\"><p>Operation type.<br>Allowed enum values: <code>append</code></p></div>\n        </div>\n      </div>\n    </div></div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs array processor.<br>default: <code>array-processor</code><br>Allowed enum values: <code>array-processor</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  },
+  "decoder-processor": {
+    "json_curl": {
+      "binary_to_text_encoding": "base64",
+      "input_representation": "utf_8",
+      "source": "encoded.field",
+      "target": "decoded.field",
+      "type": "decoder-processor"
+    },
+    "json": {
+      "binary_to_text_encoding": "base64",
+      "input_representation": "utf_8",
+      "is_enabled": false,
+      "name": "string",
+      "source": "encoded.field",
+      "target": "decoded.field",
+      "type": "decoder-processor"
+    },
+    "html": "<div class=\"\"><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">binary_to_text_encoding</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>The encoding used to represent the binary data.<br>Allowed enum values: <code>base64</code>, <code>base16</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">input_representation</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>The original representation of input string.<br>Allowed enum values: <code>utf_8</code>, <code>integer</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">is_enabled</p>\n        </div>\n        <div class=\"col-2 column\"><p>boolean</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Whether the processor is enabled.<br>default: <code>false</code></p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">name</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>false</p></div>\n        <div class=\"col-5 column\"><p>Name of the processor.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">source</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the log attribute with the encoded data.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">target</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Name of the log attribute that contains the decoded data.</p></div>\n      </div>\n    </div>\n  </div><div class=\"row   \">\n    <div class=\"col-12 first-column\">\n      <div class=\"row first-row  \">\n        <div class=\"col-3 column\">\n          <p class=\"key\">type</p>\n        </div>\n        <div class=\"col-2 column\"><p>string</p></div>\n        <div class=\"col-2 column text-center\"><p>true</p></div>\n        <div class=\"col-5 column\"><p>Type of logs decoder processor.<br>default: <code>decoder-processor</code><br>Allowed enum values: <code>decoder-processor</code></p></div>\n      </div>\n    </div>\n  </div></div>"
+  }
+}
