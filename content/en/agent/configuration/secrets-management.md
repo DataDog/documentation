@@ -29,7 +29,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
-**Note**: This option is not available for FIPS-enabled agents at this time.
+**Note**: This option is not available for FIPS-enabled Agents at this time.
 
 Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`. 
 
@@ -165,7 +165,6 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 
 {{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 
-##### Supported backends
 
 The following Azure services are supported:
 
@@ -175,7 +174,7 @@ The following Azure services are supported:
 
 ##### Azure authentication
 
-Datadog recommends using Managed Identities to authenticate with Azure. This allows you associate cloud resources with AMI accounts and removes the need to put sensitive information in your `datadog.yaml` configuration file.
+Datadog recommends using Managed Identities to authenticate with Azure. This allows you to associate cloud resources with AMI accounts and removes the need to put sensitive information in your `datadog.yaml` configuration file.
 
 ##### Managed identity
 
@@ -192,7 +191,7 @@ secret_backend_config:
   keyvaulturl: {keyVaultURL}
 ```
 
-The backend secret is referenced in your Datadog Agent configuration file with `ENC`--here is an example where a plaintext secret needs to be retrieved:
+The backend secret is referenced in your Datadog Agent configuration file with `ENC[ ]`. The following is an example where a plain text secret needs to be retrieved:
 
 ```yaml
 # datadog.yaml
@@ -206,17 +205,16 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 
 {{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
-##### Supported backends
 
 The following HashiCorp services are supported:
 
-| "secret_backend_type" value                               | HashiCorp Service                                  |
+| secret_backend_type value                               | HashiCorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
-| `hashicorp.vault` | [HashiCorp Vault (Secrets Engine Version 1 and 2)][3000] |
+| `hashicorp.vault` | [HashiCorp Vault (Secrets Engine Versions 1 and 2)][3000] |
 
-#### General instructions to set up HashiCorp Vault
-1. Run your HashiCorp Vault. For more information, see the [official HashiCorp Vault documentation][3001]. 
-2. Write a policy that gives the permission to pull secrets from your vault--create a `*.hcl` file, and include the following permission if using Secrets Engine Version 1:
+##### How to set up HashiCorp Vault
+1. Run your HashiCorp Vault. See the [official HashiCorp Vault documentation][3001] for more information. 
+2. Write a policy that gives the permission to pull secrets from your vault. Create a `*.hcl` file, and include the following permission if using Secrets Engine Version 1:
 ```
 path "<your mount path>/<additional subpath>" {
   capabilities = ["read"]
@@ -224,29 +222,29 @@ path "<your mount path>/<additional subpath>" {
 ```
 If using Secrets Engine Version 2, then the following permissions are needed:
 ```
-path "<your mount path>/data/<additional subpath>" {
+path "<your_mount_path>/data/<additional_subpath>" {
   capabilities = ["read"]
 }
 
 /*
-We need access to mount information to check the Secrets Engine version
+Datadog needs access to mount information to check the Secrets Engine version
 number. If access isn't granted, version 1 is assumed.
 */
 path "sys/mounts" {
   capabilities = ["read"]
 }
 ```
-3. Then, run `vault policy write <policy-name> <path to *.hcl file>`
+3. Run `vault policy write <policy_name> <path_to_*.hcl_file>`
 
 4. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`. 
 
-#### AWS instance profile instructions
+##### AWS instance profile instructions
 
 Datadog recommends that you authenticate using the [instance profile method][3003] if you are running your HashiCorp Vault from an AWS-connected machine.
 
 After this has been set up, write an [authentication-specific vault policy][3004].
 
-#### Configuration example
+##### Configuration example
 
 In the following example, assume the HashiCorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `apikey`:
 
