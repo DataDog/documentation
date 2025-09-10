@@ -210,7 +210,7 @@ For more information, see [Using Synthetic Test Monitors][9].
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
+Tests can be only recorded from [Google Chrome][10] and [Microsoft Edge][18]. To record your test, download the [Datadog Record Test extension][11].
 
 You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][12]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
@@ -228,7 +228,9 @@ You can switch tabs in a browser test recording in order to perform an action on
 
 ## Step replay
 
-Step replay allows you to re-run one or more steps of your browser test directly from the Datadog Synthetic Monitoring Chrome extension. This feature helps you establish the correct state when adding or editing steps in the middle of a long test, so you don't need to manually replay the entire test from the beginning.
+Step replay allows you to re-run one or more steps of your browser test directly in your browser with the [Datadog Record Test extension][11]. This feature helps you establish the correct state when adding or editing steps in the middle of a long test, so you don't need to manually replay the entire test from the beginning.
+
+### Debugger permission
 
 <div class="alert alert-warning">
   <p>The current version of the extension <strong>does not have <a href="https://developer.chrome.com/docs/extensions/reference/api/debugger">Chrome's debugger permission</a> yet</strong>, as a result:</p>
@@ -238,6 +240,12 @@ Step replay allows you to re-run one or more steps of your browser test directly
   </ul>
   <p>A version of the extension with Chrome's debugger permission is <strong>coming soon</strong>.</p>
 </div>
+
+JavaScript-based steps and keystroke simulations require the debugger permission.
+
+When the extension is updated, the debugger permission is requested and the extension is disabled until you accept the permission:
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
 
 ### How to use step replay
 
@@ -249,11 +257,11 @@ You can replay steps in three ways:
 
 <strong>2. Replay all steps:</strong> Run the entire sequence of steps as defined in the recorder:
 {{< img src="synthetics/browser_tests/recording__replay--replay-all-steps.mp4" alt="Replay All Steps" video="true" height="400px" >}}
-<p style="text-align: center;"><em>Click on the replay all icon (⏩︎) on top of the step list to replay all steps.</em></p>
+<p style="text-align: center;"><em>Click on the replay all button (⏩︎) on top of the step list to replay all steps.</em></p>
 
 <strong>3. Replay selected steps:</strong> Run a subset of steps you select in the step list:
 {{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps.mp4" alt="Replay Selected Steps" video="true">}}
-<p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected icon (⏩︎) on top of the step list.</em></p>
+<p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected button (⏩︎) on top of the step list.</em></p>
 
 ### Step replay feature support
 
@@ -342,3 +350,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
+[18]: https://www.microsoft.com/edge
