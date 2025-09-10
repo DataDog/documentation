@@ -116,10 +116,10 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
 | Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                            | `AwsDynamoDb`        |
-| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
-| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
-| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                               | `CosmosDb`           |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                                      | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
@@ -127,7 +127,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                               | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
-| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                                 | `IbmMq`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
