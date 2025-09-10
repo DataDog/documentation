@@ -62,8 +62,8 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
    {{% gcr-install-sidecar-yaml language="java" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -101,11 +101,11 @@ logger.info("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="java" %}}
+{{% gcr-env-vars-sidecar language="java" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 

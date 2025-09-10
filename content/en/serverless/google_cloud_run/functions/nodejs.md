@@ -41,8 +41,8 @@ const tracer = require('dd-trace').init({
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom function="true" %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -83,11 +83,11 @@ logger.info(`Hello world!`);
 
    To send custom metrics, [view code examples][3]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" function="true" %}}
+{{% gcr-env-vars-sidecar language="nodejs" function="true" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 

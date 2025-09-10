@@ -200,16 +200,21 @@ menu:
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
       weight: 2101
+    - name: Feature Flags
+      identifier: getting_started_feature_flags
+      url: getting_started/feature_flags/
+      parent: getting_started_software_delivery
+      weight: 2102
     - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
-      weight: 2102
+      weight: 2103
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
-      weight: 2103
+      weight: 2104
     - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
