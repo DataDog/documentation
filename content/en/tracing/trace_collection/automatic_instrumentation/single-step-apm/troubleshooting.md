@@ -17,7 +17,7 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 ### Troubleshoot injection in Datadog Fleet Automation
 
 {{< callout btn_hidden="true" header="false">}}
-Instrumentation insights in Fleet Automation is available in Preview.
+Troubleshooting in Fleet Automation is available in Preview.
 {{< /callout >}}
 
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
@@ -28,15 +28,15 @@ Using Datadog, you can identify and troubleshoot instrumentation issues across y
 
 #### Prerequisites
 
-Instrumentation insights are available for:
+This functionality is available for:
 
-- **Languages**: Python, Java, Node.js, Ruby, PHP, .NET
+- **Languages**: Python, Java, Node.js, PHP, .NET
 - **Environments**: Linux hosts, containers, Kubernetes
 - Datadog Agent v7.68.2+
 
-#### View instrumentation insights 
+#### View SSI troubleshooting insights 
 
-To access instrumentation insights in Datadog:
+To explore instrumentation troubleshooting data in Datadog:
 
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
@@ -79,6 +79,18 @@ To enable debug logs:
 ## Configuration options that affect injection
 
 There are several configuration mechanisms that can block or alter injection behavior.
+
+### Storage requirements
+
+SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
+
+<div style="text-align:center;">
+  <pre><code>[sum of the language library sizes]
++
+[injector package size] * [number of injected pods per host]</code></pre>
+</div>
+
+Because library packages are updated frequently and may grow when support for new language versions is added, disk usage can change over time. If your environment has limited disk space, monitor package sizes and allow extra capacity to avoid injection failures.
 
 ### Injector version
 
