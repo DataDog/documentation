@@ -19,6 +19,10 @@
     "name": "Action Connection",
     "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
   },
+  "actions-datastores": {
+    "name": "Actions Datastores",
+    "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
+  },
   "agentless-scanning": {
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
@@ -106,6 +110,10 @@
   "downtimes": {
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+  },
+  "error-tracking": {
+    "name": "Error Tracking",
+    "description": "View and manage issues within Error Tracking. See the [Error Tracking page](https://docs.datadoghq.com/error_tracking/) for more information."
   },
   "events": {
     "name": "Events",
@@ -195,6 +203,10 @@
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
   },
+  "org-connections": {
+    "name": "Org Connections",
+    "description": "Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information."
+  },
   "organizations": {
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
@@ -258,6 +270,10 @@
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
+  },
+  "spa": {
+    "name": "Spa",
+    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
   },
   "spans": {
     "name": "Spans",

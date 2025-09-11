@@ -19,8 +19,7 @@ title: ルックアッププロセッサー
 
 
 **Reference Table**
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー"
-    style="width:80%;">}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー" style="width:80%;">}}
 
 
  マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されます。しかし、リファレンステーブルはより大容量のファイルサイズをサポートしています。

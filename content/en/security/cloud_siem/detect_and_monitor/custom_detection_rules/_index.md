@@ -97,6 +97,7 @@ To see the version history of a rule:
 1. Click **Unified** if you want to see the comparison in the same panel.
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/
