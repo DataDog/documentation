@@ -17,7 +17,7 @@ further_reading:
 - link: /service_management/events/pipelines_and_processors/lookup_processor/
   tag: Documentación
   text: Procesador de búsqueda de eventos
-- link: '/cloud_cost_management/tag_pipelines/ #map-multiple-tags'
+- link: '/cloud_cost_management/tag_pipelines/#map-multiple-tags'
   tag: Documentación
   text: Uso de las tablas de referencia para añadir varias etiquetas (tags) a los
     datos de costes

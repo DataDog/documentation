@@ -12,6 +12,8 @@ aliases:
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
+algolia:
+    tags: ["C#","APM"]
 further_reading:
   - link: "/tracing/other_telemetry/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
