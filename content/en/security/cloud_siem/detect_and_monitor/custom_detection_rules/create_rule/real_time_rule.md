@@ -31,8 +31,6 @@ Select the detection method you want to use for creating signals.
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
 
-**Note**: The query applies to all ingested logs and events.
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 
@@ -73,8 +71,6 @@ Select the detection method you want to use for creating signals.
     1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
     1. Click **Run Query Test**.
 
-**Note**: The query applies to all ingested logs and events.
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 
@@ -109,8 +105,6 @@ Select the detection method you want to use for creating signals.
     1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
     1. Click **Run Query Test**.
 
-**Note**: The query applies to all ingested logs and events.
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 
@@ -141,7 +135,6 @@ Select the detection method you want to use for creating signals.
     - The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][3] to give a log location information based on the client's IP address.
 1. Click the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
     - When selected, signals are suppressed for the first 24 hours. During that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
-    - Do **not** click the checkbox if you want Datadog to detect all impossible travel behavior.
     - See [How the impossible detection method works][4] for more information.
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
@@ -159,11 +152,9 @@ Select the detection method you want to use for creating signals.
 {{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
+1. Construct a query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 Click **Add Root Query** to add additional queries.
 
@@ -193,9 +184,9 @@ Click **Add Root Query** to add additional queries.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-{{% cloud_siem/set_conditions %}}
+{{% cloud_siem/set_conditions_threshold %}}
 
 ### Other parameters
 
@@ -224,7 +215,7 @@ Click **Add Root Query** to add additional queries.
 
 {{% cloud_siem/forget_value %}}
 
-#### 2. Rule multi-triggering {#rule-multi-triggering-rt-new-value}
+#### 2. Rule multi-triggering behavior {#rule-multi-triggering-rt-new-value}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
@@ -269,9 +260,9 @@ Click **Add Root Query** to add additional queries.
 #### 1. Content anomaly detection {#content-anomaly-rt-content-anomaly}
 {{% cloud_siem/content_anomaly_options %}}
 
-#### 2. Rule multi-triggering {#rule-multi-triggering-rt-content-anomaly}
+#### 2. Rule multi-triggering behavior {#rule-multi-triggering-rt-content-anomaly}
 
-{{% cloud_siem/rule_multi_triggering %}}
+{{% cloud_siem/rule_multi_triggering_content_anomaly %}}
 
 #### 3. Decrease severity for non-production environments {#decrease-severity-rt-content-anomaly}
 
@@ -305,9 +296,9 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-{{% cloud_siem/set_conditions %}}
+{{% cloud_siem/set_conditions_third_party %}}
 
 ### Other parameters
 
@@ -322,7 +313,7 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_signal_correlation.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_then_operator %}}
 

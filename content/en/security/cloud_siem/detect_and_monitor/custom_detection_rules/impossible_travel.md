@@ -31,7 +31,6 @@ When **Baseline User Locations** is enabled:
     - Checks if the location is one of the common locations. If it is one of the common locations, Datadog moves on to the next log or event.
     - Checks if it's an impossible travel situation.
         - If it's not an impossible travel situation, Datadog moves on to the next log or event.
-        - It it's an impossible travel situation, Datadog checks if there is an IP transition pattern.
-- You can enable "Common locations and IP transitions detection" through a toggle button in the rule editor UI.
+        - It it's an impossible travel situation, Datadog checks if there is an IP transition pattern. From example, if a user travels from location A to location B and that travel pattern has occurred in the past, a signal is not triggered.
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule

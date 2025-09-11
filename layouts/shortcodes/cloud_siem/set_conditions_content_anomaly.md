@@ -7,6 +7,7 @@
     - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`.
     - **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 1. In the **within a window of** dropdown menu, select the time period during which a signal is triggered if the condition is met.
+    - An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates cases in real time.
 1. In the **Add notify** section, click **Add Recipient** to optionally configure [notification targets][101].
     - You can also create [notification rules][102] to avoid manual edits to notification preferences for individual detection rules.
 

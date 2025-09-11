@@ -9,7 +9,7 @@ weight: 2
 
 Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
 
-Scheduled rules complement real-time monitoring by ensuring periodic, in-depth analysis of logs with advanced query time operations and functions.
+Scheduled rules complement real-time monitoring by ensuring periodic, in-depth analysis of logs using [calculated fields][2].
 
 ## Create a rule
 
@@ -39,8 +39,6 @@ Choose the query language you want to use.
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -78,8 +76,6 @@ TKTK
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
 
-**Note**: The query applies to all ingested logs and events.
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/explorer/calculated_fields/expression_language/
@@ -102,8 +98,6 @@ TKTK
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -138,7 +132,6 @@ TKTK
     - The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][4] to give a log location information based on the client's IP address.
 1. Click the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
     - When selected, signals are suppressed for the first 24 hours. During that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
-    - Do **not** click the checkbox if you want Datadog to detect all impossible travel behavior.
     - See [How the impossible detection method works][5] for more information.
 {{% cloud_siem/add_calculated_fields %}}
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
@@ -158,16 +151,18 @@ TKTK
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
+1. Construct a query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
+{{% cloud_siem/add_calculated_fields %}}
+    - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
+{{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 Click **Add Root Query** to add additional queries.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
+[3]: /logs/explorer/calculated_fields/expression_language/
 
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
@@ -190,9 +185,9 @@ Click **Add Root Query** to add additional queries.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-{{% cloud_siem/set_conditions %}}
+{{% cloud_siem/set_conditions_threshold %}}
 
 ### Other parameters
 
@@ -217,7 +212,7 @@ Click **Add Root Query** to add additional queries.
 
 {{% cloud_siem/forget_value %}}
 
-#### 2. Rule multi-triggering {#rule-multi-triggering-scheduled-new-value}
+#### 2. Rule multi-triggering behavior {#rule-multi-triggering-scheduled-new-value}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
@@ -267,9 +262,9 @@ Click **Add Root Query** to add additional queries.
 
 {{% cloud_siem/content_anomaly_options %}}
 
-#### 2. Rule multi-triggering {#rule-multi-triggering-scheduled-content-anomaly}
+#### 2. Rule multi-triggering behavior {#rule-multi-triggering-scheduled-content-anomaly}
 
-{{% cloud_siem/rule_multi_triggering %}}
+{{% cloud_siem/rule_multi_triggering_content_anomaly %}}
 
 #### 3. Decrease severity for non-production environments {#decrease-severity-scheduled-content-anomaly}
 
@@ -303,9 +298,9 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/conditions_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-{{% cloud_siem/set_conditions %}}
+{{% cloud_siem/set_conditions_third_party %}}
 
 ### Other parameters
 
@@ -320,7 +315,7 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_signal_correlation.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_then_operator %}}
 
@@ -350,3 +345,4 @@ Click **Add Root Query** to add additional queries.
 {{% cloud_siem/create_suppression %}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /logs/explorer/calculated_fields/

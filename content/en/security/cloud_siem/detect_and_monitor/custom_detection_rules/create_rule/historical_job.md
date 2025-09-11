@@ -7,7 +7,7 @@ weight: 3
 
 ## Overview
 
-Historical jobs are one-time executable searches on historical logs using the detection engine that creates results instead of signals. These results can be converted to signals. It allows backtesting of detection rules to assess their effectiveness on past data.
+Historical jobs are one-time executable queries on historical logs. It allows you to backtest detection rules to assess their effectiveness on past data. The job results generated are lightweight versions of signals that provide information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results that need immediate action into signals.
 
 ## Create a rule
 
@@ -33,8 +33,6 @@ Historical jobs are one-time executable searches on historical logs using the de
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -64,8 +62,6 @@ Historical jobs are one-time executable searches on historical logs using the de
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
 
-**Note**: The query applies to all ingested logs and events.
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/explorer/calculated_fields/expression_language/
@@ -87,8 +83,6 @@ Historical jobs are one-time executable searches on historical logs using the de
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -124,7 +118,6 @@ Historical jobs are one-time executable searches on historical logs using the de
     - The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][4] to give a log location information based on the client's IP address.
 1. Click the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
     - When selected, signals are suppressed for the first 24 hours. During that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
-    - Do **not** click the checkbox if you want Datadog to detect all impossible travel behavior.
     - See [How the impossible detection method works][5] for more information.
 {{% cloud_siem/add_calculated_fields %}}
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
@@ -145,13 +138,14 @@ Historical jobs are one-time executable searches on historical logs using the de
 {{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
+1. Construct a query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/add_calculated_fields %}}
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
+{{% cloud_siem/add_calculated_fields %}}
+    - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
+{{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
-
-**Note**: The query applies to all ingested logs and events.
 
 Click **Add Root Query** to add additional queries.
 
@@ -167,9 +161,9 @@ Click **Add Root Query** to add additional queries.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-{{% cloud_siem/set_conditions_conditions_only %}}
+{{% cloud_siem/set_conditions_threshold %}}
 
 ### Other parameters
 
@@ -192,7 +186,7 @@ Click **Add Root Query** to add additional queries.
 
 {{% cloud_siem/forget_value %}}
 
-#### 2. Job multi-triggering {#job-multi-triggering-historical-new-value}
+#### 2. Job multi-triggering behavior {#job-multi-triggering-historical-new-value}
 
 {{% cloud_siem/job_multi_triggering %}}
 
@@ -232,15 +226,16 @@ Click **Add Root Query** to add additional queries.
     - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`.
     - **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 1. In the **within a window of** dropdown menu, select the time period during which a signal is triggered if the condition is met.
+    - An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates cases in real time.
 
 ### Other parameters
 
 #### 1. Content anomaly detection {#content-anomaly-historical-content-anomaly}
 {{% cloud_siem/content_anomaly_options %}}
 
-#### 2. Job multi-triggering {#job-multi-triggering-historical-content-anomaly}
+#### 2. Job multi-triggering behavior {#job-multi-triggering-historical-content-anomaly}
 
-{{% cloud_siem/job_multi_triggering %}}
+{{% cloud_siem/rule_multi_triggering_content_anomaly %}}
 
 #### 3. Enable optional group by {#enable-group-by-historical-content-anomaly}
 
