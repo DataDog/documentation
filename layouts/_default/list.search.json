@@ -1,4 +1,4 @@
-{{- if (or (ne hugo.Environment "live") (in (slice "typesense_sync_preview:manual" "algolia_sync_preview:manual") (os.Getenv "CI_JOB_NAME" | default "" ))) -}}
+{{- if (or (eq hugo.Environment "live") (in (slice "typesense_sync_preview:manual" "algolia_sync_preview:manual") (os.Getenv "CI_JOB_NAME" | default "" ))) -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
