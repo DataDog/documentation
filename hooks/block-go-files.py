@@ -15,10 +15,10 @@ def main():
     # Only check Bash commands that contain git commit
     if tool_name == 'Bash':
         command = tool_input.get('command', '')
-        if 'git commit' in command:
+        if 'git add' in command:
             # Check if go.sum or go.mod are staged for commit
             if 'go.sum' in command or 'go.mod' in command:
-                print("ERROR: Cannot commit go.sum or go.mod files. These files should be managed automatically by Go tooling.", file=sys.stderr)
+                print("ERROR: Cannot stage go.sum or go.mod files. These files should be managed automatically by Go tooling.", file=sys.stderr)
                 sys.exit(2)  # Exit code 2 blocks the tool call
     
     # Allow all other operations
