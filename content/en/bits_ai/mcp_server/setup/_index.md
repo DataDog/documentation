@@ -75,7 +75,7 @@ To install the extension:
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. To find the MCP Server configuration:
    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **Tools & Integrations** tab.
    - VS Code: Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
-2. Install the Datadog extension following [these instructions][14]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.  
+2. Install the Datadog extension following [these instructions][14]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.
 3. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
     {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
 4. **Restart the IDE.**
@@ -96,7 +96,7 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
 
 If your organization uses a [custom sub-domain][3], use the endpoint that corresponds to your regional Datadog site. For example, if your custom sub-domain is `myorg.datadoghq.com`, use the US1 endpoint.
 
-| Datadog Site | MCP Server Endpoint | 
+| Datadog Site | MCP Server Endpoint |
 |--------|------|
 | **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
 | **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
@@ -150,7 +150,7 @@ Use this option if direct remote authentication is not available for you. After 
 
     * Windows: Download the [Windows version][2].
 
-2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow.  
+2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow.
 
     The MCP Server automatically starts the OAuth flow if a client needs it, but doing it manually lets you choose a [Datadog site][3] and avoid the AI client timing out.
 
@@ -192,8 +192,8 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
     "datadog": {
       "type": "http",
       "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-      "headers": { 
-          "DD_API_KEY": "<YOUR_API_KEY>", 
+      "headers": {
+          "DD_API_KEY": "<YOUR_API_KEY>",
           "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
       }
     }
@@ -256,13 +256,6 @@ Retrieves information about Datadog monitors, including their statuses, threshol
 - List all monitors that are currently alerting.
 - Show me monitors related to our payment service.
 - Find monitors tagged with `team:infrastructure`.
-
-### `get_synthetics_tests`
-Searches Datadog Synthetic tests.
-
-- Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
-- There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
-- Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
 
 ### `get_datadog_trace`
 Fetches a complete trace from Datadog APM using a trace ID.
@@ -330,6 +323,27 @@ Search Datadog RUM events using advanced query syntax.
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
+
+### `get_synthetics_tests`
+Searches Datadog Synthetic tests.
+
+- Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
+- There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
+- Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
+
+### `edit_synthetics_tests`
+Edits Datadog Synthetic HTTP API tests
+
+- Improve the assertions of the synthetic test defined on my endpoint `/v1/my/tested/endpoint`
+- Pause the test aaa-bbb-ccc and set the locations to only European locations.
+- Add my team tag to the test aaa-bbb-ccc
+
+### `synthetics_test_wizard`
+Allows to preview and then create Datadog Synthetics HTTP API Tests
+
+- Create synthetics tests on every endpoint defined in this code file
+- Create a synthetics test on `/path/to/endpoint`
+- Create a synthetics test that checks if my domain `mycompany.com` stays up
 
 ## Toolsets
 
