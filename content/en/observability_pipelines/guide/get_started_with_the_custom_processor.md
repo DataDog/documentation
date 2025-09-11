@@ -318,7 +318,7 @@ For this example, you have a service field that contains an incorrect service na
 
 Attributes with null or empty values can add unnecessary bloat to your logs. Remove null values to trim the log and only send attributes that provide information. In the script below, the `empty_patterns` section contains the list of empty patterns to check for in your logs. You can add and remove patterns to fit your use case.
 
-```
+```json
 # Define your empty patterns
 empty_patterns = ["null", "NULL", "N/A", "n/a", "none", "NONE", "-", "undefined"]
 
@@ -360,7 +360,7 @@ For example, this log contains a stringified JSON message:
 
 This is the output after the `message` field has been parsed. The parsed content is nested in the `message` object.
 
-```
+```json
 {
    "app_id": "streaming-services",
    "ddtags": [
@@ -387,7 +387,7 @@ In this case, to filter for `event_type`, you need to specify `@message.event_ty
 
 To merge the events from the `message` object to root level, use this script:
 
-```
+```json
 if is_object(.message) {
  . = merge!(., .message)
  del(.message)
@@ -398,7 +398,7 @@ if is_object(.message) {
 
 This results in the log with flattened attributes that you can filter directly:
 
-```
+```json
 {
    "app_id": "streaming-services",
    "ddtags": [
@@ -432,7 +432,7 @@ Splunk and CrowdStrike prefer a format called `_raw` for log ingestion. Sending 
 
 An example input log:
 
-```
+```json
 {
    "app_id": "streaming-services",
    "level": "info",
@@ -453,7 +453,7 @@ An example input log:
 
 This custom function serializes the event into `_raw` format:
 
-```
+```json
 # Serialize the entire event into _raw
 ._raw = encode_key_value(.)
 # Only keep _raw
@@ -462,7 +462,7 @@ This custom function serializes the event into `_raw` format:
 
 This is the output of the example log after it's been processed by the custom script:
 
-```
+```json
 {
    "_raw": "app_id=streaming-services level=info message.duration_ms=245 message.event_type=user_login message.ip_address=192.168.1.100 message.login_method=oauth message.result=success message.session_id=sess_abc123xyz message.user_agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\" processed_ts=2025-05-22T14:30:00Z timestamp=2019-03-12T11:30:00Z user_id=12345"
 }
