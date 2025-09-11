@@ -383,7 +383,7 @@ This is the output after the `message` field has been parsed. The parsed content
    "user_id": "12345"
 }
 ```
-In this case, to filter for `event_type`, you need to specify `@message.event_type`. While that works, it can be difficult to do so at scale. Therefore, Datadog recommends flattening the object to the root level.
+In this case, to filter for `event_type`, you need to specify `@message.event_type`. To directly filter for `event_type` or another field within an object, Datadog recommends flattening the object to the root level.
 
 To merge the events from the `message` object to root level, use this script:
 
