@@ -2885,9 +2885,9 @@ menu:
       identifier: run_script
       weight: 202
     - name: Update the Private Action Runner
-      url: actions/private_actions/update_PAR/
+      url: actions/private_actions/update_private_action_runner/
       parent: private_actions
-      identifier: update_PAR
+      identifier: update_private_action_runner
       weight: 203
     - name: Private Action Credentials
       url: actions/private_actions/private_action_credentials/
