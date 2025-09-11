@@ -11,7 +11,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 ### Set up the destination
 
-1. In the **Mode** dropdown menu, select **Bulk** or **Data Streams**.
+1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses Elasticsearch's [Bulk API][5] to send batched events directly into a standard index.
 		- Choose this mode when you want direct control over index naming and lifecycle management. Data is appended to the index you specify, and you are responsible for handling rollovers, deletions, and mappings.
