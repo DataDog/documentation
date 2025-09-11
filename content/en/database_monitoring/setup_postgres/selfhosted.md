@@ -239,7 +239,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, set the following parameters in the log section:
    ```conf
      logging_collector = on
-     log_line_prefix= '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
+     log_line_prefix = '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
      log_file_mode = 0644
 
      ## For Windows
