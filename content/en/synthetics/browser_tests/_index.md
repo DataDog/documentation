@@ -23,6 +23,9 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "External Site"
   text: "Create and manage Synthetic Browser Tests with Terraform"
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 ---
 
 ## Overview

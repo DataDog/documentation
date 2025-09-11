@@ -504,4 +504,4 @@ Inside the loop, add the following snippet:
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
-[17]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
+[17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id

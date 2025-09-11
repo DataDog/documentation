@@ -19,6 +19,10 @@
     "name": "Action Connection",
     "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
   },
+  "actions-datastores": {
+    "name": "Actions Datastores",
+    "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
+  },
   "agentless-scanning": {
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
@@ -198,6 +202,10 @@
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
+  },
+  "org-connections": {
+    "name": "Org Connections",
+    "description": "Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information."
   },
   "organizations": {
     "name": "Organizations",
