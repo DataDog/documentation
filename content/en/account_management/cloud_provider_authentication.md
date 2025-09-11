@@ -16,7 +16,7 @@ further_reading:
   text: "AWS Integration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloud-provider-authentication/" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/" btn_hidden="false" header="Join the Preview!" >}}
 Cloud-based authentication is in Preview. Complete the form to request access.
 {{< /callout >}}
 
@@ -36,7 +36,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 4. **Token issue:** If validation succeeds, Datadog issues a temporary JWT token for API access
 5. **API authentication:** The token is used for subsequent Datadog API calls
 
-**Note:** Prefer mapping ARNs to a Datadog service account.
+**Note:** If possible, map ARNs to a Datadog service account rather than a user account. Using a service account avoids associating your authentication process with a specific person.
 
 ## AWS setup
 
@@ -117,18 +117,9 @@ provider "datadog" {
 
 The Terraform provider automatically uses your configured AWS credentials to authenticate with Datadog.
 
-
-## API reference
-
-For detailed API documentation, see the following endpoints:
-- [Cloud authentication configuration][3]
-- [Delegated token generation][4]
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html
 [2]: https://app.datadoghq.com/api/v2/current_user
-[3]: /api/latest/cloud-authentication/
-[4]: /api/latest/authentication-tokens/
