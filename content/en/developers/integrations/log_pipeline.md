@@ -42,7 +42,7 @@ Below are important concepts to understand before building your pipeline. See [L
 
 ## Building an integration log pipeline
 
-To get started, make sure you’re a registered Technology Partner with access to a Datadog developer instance. If you haven't joined yet, see [Join the Datadog Partner Network][6].
+To get started, make sure you're a registered Technology Partner with access to a Datadog developer instance. If you haven't joined yet, see [Join the Datadog Partner Network][6].
 
 1. [Create a pipeline that filters by your integration's log source](#create-a-pipeline).
 2. [Add processors to normalize and enrich logs](#add-processors).
