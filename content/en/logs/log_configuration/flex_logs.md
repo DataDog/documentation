@@ -95,15 +95,61 @@ Consider the following factors when deciding on a compute tier:
 - The number of users regularly querying Flex tier logs.
 - The frequency and types of queries you run. For example, the query time windows you typically use to query your logs.
 
-The number of logs stored in the Flex tier has the largest impact on the size needed to performantly query the data. Datadog recommends the following compute sizes based on log volume:
-| Size                                      | Volume (events stored)   |
-| ----------------------------------------- | ------------------------ |
-| Starter                                   | < 10 billion             |
-| Extra Small (XS)                          | 10 - 50 billion          |
-| Small (S)                                 | 50 - 200 billion         |
-| Medium (M)                                | 200 - 500 billion        |
-| Large (L)                                 | 500 billion - 1 trillion |
-| Contact your [Customer Success Manager][7]| 1T+                      |
+The number of logs stored in the Flex tier has the largest impact on the size needed to performantly query the data. Datadog recommends the following compute sizes based on log volume. Use this calculator to help evaluate:
+
+<!-- Flex Logs Query Pool Sizer -->
+<style>
+  .calc{max-width:560px;padding:1rem;border:1px solid #ddd;border-radius:.75rem;font:14px/1.4 system-ui,sans-serif}
+  .calc h3{margin:0 0 .75rem;font-size:1.1rem}
+  .calc label{display:block;margin:.5rem 0 .25rem;font-weight:600}
+  .calc input,.calc select,.calc button{padding:.5rem .6rem;border:1px solid #ccc;border-radius:.5rem;font:inherit}
+  .calc .row{display:flex;gap:.5rem;align-items:end;flex-wrap:wrap}
+  .calc .row>div{flex:1 1 200px}
+  .calc .muted{color:#666;font-size:.9em}
+  .calc .result{margin-top:.75rem;padding:.75rem;background:#f8f9fa;border:1px solid #e6e8eb;border-radius:.5rem}
+  .calc .tier{font-weight:700}
+</style>
+
+<div class="calc" id="log-calc">
+  <h3>Log Size Recommendation</h3>
+  <div class="row">
+    <div>
+      <label for="logsPerDay">Logs per day</label>
+      <input id="logsPerDay" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 250000000" />
+      <div class="muted">Enter a whole number (no decimals)</div>
+    </div>
+    <div>
+      <label for="retentionDays">Retention</label>
+      <select id="retentionDays">
+        <option value="15">15 days</option>
+        <option value="30" selected>30 days</option>
+        <option value="45">45 days</option>
+        <option value="60">60 days</option>
+        <option value="90">90 days</option>
+        <option value="180">180 days</option>
+        <option value="360">360 days</option>
+        <option value="366">366 days</option>
+        <option value="450">450 days</option>
+      </select>
+    </div>
+    <div><button id="calcBtn" type="button">Calculate</button></div>
+  </div>
+
+  <div class="result" id="result" hidden>
+    <div>Total logs over <span id="daysOut">0</span> days: <strong id="totalOut">0</strong></div>
+    <div id="recLine">We recommend a <span class="tier" id="tierOut"></span> Flex Logs Query Pool.</div>
+  </div>
+</div>
+
+<script>
+(()=>{const $=e=>document.getElementById(e),l=$("logsPerDay"),d=$("retentionDays"),b=$("calcBtn"),r=$("result"),dy=$("daysOut"),to=$("totalOut"),ti=$("tierOut"),rl=$("recLine"),B=1_000_000_000n,T=1_000_000_000_000n,thr=[[10n*B,"Starter"],[50n*B,"Extra Small (XS)"],[200n*B,"Small (S)"],[500n*B,"Medium (M)"],[1n*T,"Large (L)"],[null,null]];
+
+function fmtHuman(n){const u=[["trillion",1_000_000_000_000n],["billion",1_000_000_000n],["million",1_000_000n]];for(const [name,val]of u){if(n>=val){let num=Number(n*100n/val)/100;return `${num} ${name}`}}return n.toString()}
+
+function f(){const v=String(l.value).trim(),days=parseInt(d.value,10);if(!/^\d+$/.test(v)||!(days>0)){r.hidden=!0;return}const total=BigInt(v)*BigInt(days);let tier=null;for(const t of thr){if(t[0]===null||total<t[0]){tier=t[1];break}}dy.textContent=String(days);to.textContent=fmtHuman(total);tier?(ti.textContent=tier,rl.textContent=`We recommend a ${tier} Flex Logs Query Pool.`):(ti.textContent="",rl.textContent="This volume is over 1 trillion events. Please contact your Customer Success Manager to size a Flex Logs Query Pool.");r.hidden=!1}
+
+b.addEventListener("click",f);l.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault(),f()}});d.addEventListener("change",f)})();
+</script>
 
 Scalable (XS, S, M, L) compute tiers are billed at a flat rate. Flex Logs Starter is billed at a bundled storage+compute rate. See the [pricing page][6] for more information.
 
