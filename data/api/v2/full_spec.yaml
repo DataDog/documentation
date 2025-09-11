@@ -12733,7 +12733,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp when the failure finished. It must be in nanoseconds,
-            milliseconds, or seconds, and it should not be older than 1 hour.
+            milliseconds, or seconds.
           example: 1693491984000000000
           format: int64
           type: integer
