@@ -3395,15 +3395,19 @@ components:
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         cloud_run_revision_filters:
-          description: 'Limit the Cloud Run revisions that are pulled into Datadog
-            by using tags.
+          deprecated: true
+          description: 'List of filters to limit the Cloud Run revisions that are
+            pulled into Datadog by using tags.
 
             Only Cloud Run revision resources that apply to specified filters are
-            imported into Datadog.'
+            imported into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=cloud_run_revision`'
           example:
           - $KEY:$VALUE
           items:
-            description: Cloud Run Filters
+            description: Cloud Run revision filters
             type: string
           type: array
         errors:
@@ -3416,11 +3420,16 @@ components:
             type: string
           type: array
         host_filters:
-          description: 'Limit the GCE instances that are pulled into Datadog by using
-            tags.
+          deprecated: true
+          description: 'A comma-separated list of filters to limit the VM instances
+            that are pulled into Datadog by using tags.
 
-            Only hosts that match one of the defined tags are imported into Datadog.'
-          example: key:value,filter:example
+            Only VM instance resources that apply to specified filters are imported
+            into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=gce_instance`'
+          example: $KEY1:$VALUE1,$KEY2:$VALUE2
           type: string
         is_cspm_enabled:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
@@ -3441,6 +3450,15 @@ components:
             account.'
           example: true
           type: boolean
+        monitored_resource_configs:
+          description: Configurations for GCP monitored resources.
+          example:
+          - filters:
+            - $KEY:$VALUE
+            type: gce_instance
+          items:
+            $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key
@@ -3473,6 +3491,37 @@ components:
       items:
         $ref: '#/components/schemas/GCPAccount'
       type: array
+    GCPMonitoredResourceConfig:
+      description: Configuration for a GCP monitored resource.
+      properties:
+        filters:
+          description: 'List of filters to limit the monitored resources that are
+            pulled into Datadog by using tags.
+
+            Only monitored resources that apply to specified filters are imported
+            into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: A monitored resource filter
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/GCPMonitoredResourceConfigType'
+      type: object
+    GCPMonitoredResourceConfigType:
+      description: The GCP monitored resource type. Only a subset of resource types
+        are supported.
+      enum:
+      - cloud_function
+      - cloud_run_revision
+      - gce_instance
+      example: gce_instance
+      type: string
+      x-enum-varnames:
+      - CLOUD_FUNCTION
+      - CLOUD_RUN_REVISION
+      - GCE_INSTANCE
     GeomapWidgetDefinition:
       description: This visualization displays a series of values by country on a
         world map.
