@@ -7,9 +7,10 @@ on:
 jobs:
   call-version-getter-shared-workflow:
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
-    uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@fc972275dd6ac5ac1e519864a4e8ff25778f66af
+      id-token: write
+    uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@e135a6b659590a1a4cd1cf5e05e6939aa6d4d805
     with:
       url: https://ddsynthetics-windows.s3.amazonaws.com/installers.json
       file-name: synthetics_worker_versions.json
