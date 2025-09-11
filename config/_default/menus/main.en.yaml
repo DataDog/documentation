@@ -4059,7 +4059,7 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Renaming Rules for Inferred Entities
+    - name: Renaming Rules
       url: tracing/services/renaming_rules
       parent: tracing_services
       identifier: tracing_renaming_rules

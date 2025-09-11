@@ -6,7 +6,7 @@ further_reading:
   text: "Inferred services"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1Qt03IHB-oHF_BmYQxDiENPksjXzxsfD0kGpTSHd81Hw/edit" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the preview for renaming rules for inferred entities!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/renaming-rules-for-inferred-entities" d_target="#signupModal" btn_hidden="false" header="Join the preview for renaming rules for inferred entities!" >}}
 {{< /callout >}}
 
 ## Overview
