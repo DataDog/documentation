@@ -25,7 +25,15 @@ Start a new container with [the latest image][2]. Environment variables are no l
 
 Run:
 ```bash
-docker run -d  -u 0 --platform=linux/x86_64  -p 9016:9016  -v ./config:/etc/dd-action-runner  --health-cmd "curl http://localhost:9016/liveness"  --health-interval 10s  --health-timeout 10s  --health-retries 3 gcr.io/datadoghq/private-action-runner:v1.0.0
+docker run -d \
+ --cpus="0.25" \
+ --memory="1g"  \
+ -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config 
+ -v ./config:/etc/dd-action-runner/config \
+ --health-cmd "curl http://localhost:9016/liveness" \
+ --health-interval 10s \
+ --health-timeout 10s \
+ --health-retries 3 gcr.io/datadoghq/private-action-runner:v1.7.0
 ```
 
 After confirming the new PAR version is working as expected, remove the old version:
