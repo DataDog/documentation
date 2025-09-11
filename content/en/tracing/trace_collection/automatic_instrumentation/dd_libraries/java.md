@@ -218,6 +218,20 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
+### Remote configuration
+
+Remote Configuration allows the Datadog Agent to dynamically configure tracing settings without requiring application restarts. By default, Remote Configuration is enabled. To disable it, set the environment variable:
+
+```
+DD_REMOTE_CONFIG_ENABLED=false
+```
+
+Or add the JVM system property:
+
+```
+-Ddd.remote_config.enabled=false
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
