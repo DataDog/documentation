@@ -21,6 +21,7 @@ Set up the CloudPRem destination and its environment variables when you [set up 
 
 - CloudPrem endpoint URL
 	- Observability Pipelines sends logs to this CloudPrem endpoint, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port
+	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
     - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 
 ## How the destination works

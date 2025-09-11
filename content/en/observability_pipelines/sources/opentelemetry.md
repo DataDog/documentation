@@ -9,7 +9,7 @@ Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from yo
 
 ## Prerequisites
 
-To use Observability Pipelines' OTel source, if your forwarders are globally configured to enable SSL, you need the appropriate TLS certificates and the password you used to create your private key.
+If your forwarders are globally configured to enable SSL, you need the appropriate TLS certificates and the password you used to create your private key.
 
 ## Set up the source in the pipeline UI
 
@@ -20,8 +20,43 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 ## Set the environment variables
 
-TKTK
+You must provide both HTTP and gRPC endpoints. Configure your OTLP exporters to point to one of these endpoints. See [Send logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker) for more information.
+
+- HTTP listener address
+	- The Observability Pipelines Worker listens to this socket address to receive logs from the OTel collector.
+    - Stored as the environment variable `DD_OP_SOURCE_OTEL_HTTP_ADDRESS`.
+
+- gRPC listener address
+	- The Observability Pipelines Worker listens to this socket address to receive logs from the OTel collector.
+    - Stored as the environment variable `DD_OP_SOURCE_OTEL_GRPC_ADDRESS`.
 
 ## Send logs to the Observability Pipelines Worker
 
-TKTK
+Configure your OTel exporters to point to HTTP or gRPC.
+
+### HTTP configuration example
+
+The Worker exposes the HTTP endpoint on port 4317. This is an example of configuring your OTel exporters with HTTP using Python:
+
+```python
+    from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
+    http_exporter = OTLPLogExporter(
+        endpoint="http://worker:4317/v1/logs"
+    )
+```
+
+### gRPC configuration example
+
+The Worker exposes the gRPC endpoint on port 4138. This is an example of configuring your OTel exporters with gRPC:
+
+```python
+    from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
+    grpc_exporter = OTLPLogExporter(
+        endpoint="grpc://worker:4318"
+    )
+```
+
+Based on these example configurations, these are values you enter for the following environment variables:
+
+- HTTP listener address: `worker:4317`
+- gRPC listener address: `worker:4318`
