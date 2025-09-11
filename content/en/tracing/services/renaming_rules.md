@@ -20,6 +20,10 @@ Renaming is useful when:
 
 **Note**: Renaming applies only to [inferred entities][1], which are entities that Datadog identifies automatically.
 
+## Prerequisites
+
+You must have the `apm_service_catalog_write` permission to create renaming rules. See [Permissions][2] for details on Datadog role-based access control.  
+
 ## Create a renaming rule 
 
 ### Step 1: Select entities to rename
@@ -53,3 +57,4 @@ Renaming is useful when:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/services/inferred_services
+[2]: /account_management/rbac/permissions
