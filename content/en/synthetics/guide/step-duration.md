@@ -3,7 +3,11 @@ title: How Step Duration is Determined in Browser Tests
 further_reading:
 - link: "/synthetics/browser_tests"
   tag: "Documentation"
-  text: "Learn more about Synthetic Monitoring browser testing"
+  text: "Learn more about Synthetic Monitoring Browser Testing"
+- link: "/synthetics/guide/rum-to-synthetics/"
+  tag: "Documentation"
+  text: "Generate Synthetic Browser Tests From Session Replay"
+
 ---
 
 ## Overview
@@ -14,7 +18,7 @@ A page is considered fully loaded when:
 - The [frame](#understanding-frames) has finished loading, _and_
 - There are no requests still in flight.
 
-In Synthetic Monitoring Browser Tests, step duration and fully loaded time are the same metric:
+In Synthetic Monitoring Browser Tests, step duration and fully loaded time represent the same concept:
 
 {{< img src="synthetics/guide/step-duration/step_duration.png" alt="Your image description" style="width:100%;" >}}
 
@@ -69,4 +73,4 @@ Test results may not always reveal why steps take longer than expected. For comp
 
 [1]: https://developer.mozilla.org/en-US/docs/Glossary/Browsing_context
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
-[3]: /real_user_monitoring/correlate_with_other_telemetry/synthetics/
+[3]: /synthetics/guide/explore-rum-through-synthetics/
