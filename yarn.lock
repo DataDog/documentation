@@ -7656,7 +7656,7 @@ __metadata:
     eslint-plugin-standard: ^4.1.0
     fancy-log: ^1.3.3
     geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
-    hugo-bin: 0.123.0
+    hugo-bin: 0.139.0
     husky: ^9.1.7
     instantsearch.js: ^4.74.1
     jest: ^25.5.4
@@ -10134,15 +10134,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hugo-bin@npm:0.123.0":
-  version: 0.123.0
-  resolution: "hugo-bin@npm:0.123.0"
+"hugo-bin@npm:0.139.0":
+  version: 0.139.0
+  resolution: "hugo-bin@npm:0.139.0"
   dependencies:
     "@xhmikosr/bin-wrapper": ^13.0.5
     package-config: ^5.0.0
   bin:
     hugo: bin/cli.js
-  checksum: 3d47b260622e182815da41d96f2d9f008145c7a76a931d34e9d69b3f81310390a4bff4a0666a8a5b90f304302c2d67c368ffba985af1dfe83577cf2b5687ba3b
+  checksum: 0afadc46fe5e98178f011d0dcb7b3ff0383bead31c2a44bcd77a772685bab4df915c592690b566b065cd7615388fee820e32e781bcb13c7a6fe5e6d6d9100928
   languageName: node
   linkType: hard
 
