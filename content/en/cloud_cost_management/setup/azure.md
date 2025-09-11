@@ -165,7 +165,9 @@ You can visualize your ingested data using the following cost types:
 
 ### Out-of-the-box tags
 
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [usage cost report][9] and make it easier to discover and understand cost data.
+Datadog automatically enriches your Azure cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][12].
+
+The following out-of-the-box tags are derived from your [usage cost report][9] and make it easier to discover and understand cost data:
 
 | Tag Name                         | Tag Description       |
 | ---------------------------- | ----------------- |
@@ -248,3 +250,4 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [9]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
 [10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
 [11]: /help/
+[12]: /cloud_cost_management/tags

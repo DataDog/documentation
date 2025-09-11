@@ -142,9 +142,10 @@ You can visualize your ingested data using the following cost types:
 | `gcp.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data.
 
-The following out-of-the-box tags are available for filtering and grouping data:
+Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][17].
+
+The following out-of-the-box tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data:
 
 | Tag Name                         | Tag Description       |
 | ---------------------------- | ----------------- |
@@ -204,3 +205,4 @@ The following out-of-the-box tags are available:
 [14]: /cloud_cost_management/container_cost_allocation/
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
+[17]: /cloud_cost_management/tags
