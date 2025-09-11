@@ -5148,6 +5148,118 @@ menu:
           - ListAppKeyRegistrations
         unstable: []
         order: 6
+    - name: Actions Datastores
+      url: /api/latest/actions-datastores/
+      identifier: actions-datastores
+      generated: true
+    - name: Bulk write datastore items
+      url: '#bulk-write-datastore-items'
+      identifier: actions-datastores-bulk-write-datastore-items
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkWriteDatastoreItems
+        unstable: []
+        order: 10
+    - name: Update datastore item
+      url: '#update-datastore-item'
+      identifier: actions-datastores-update-datastore-item
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDatastoreItem
+        unstable: []
+        order: 9
+    - name: List datastore items
+      url: '#list-datastore-items'
+      identifier: actions-datastores-list-datastore-items
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatastoreItems
+        unstable: []
+        order: 7
+    - name: Delete datastore item
+      url: '#delete-datastore-item'
+      identifier: actions-datastores-delete-datastore-item
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDatastoreItem
+        unstable: []
+        order: 8
+    - name: Update datastore
+      url: '#update-datastore'
+      identifier: actions-datastores-update-datastore
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDatastore
+        unstable: []
+        order: 5
+    - name: Get datastore
+      url: '#get-datastore'
+      identifier: actions-datastores-get-datastore
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDatastore
+        unstable: []
+        order: 4
+    - name: Delete datastore
+      url: '#delete-datastore'
+      identifier: actions-datastores-delete-datastore
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDatastore
+        unstable: []
+        order: 6
+    - name: Create datastore
+      url: '#create-datastore'
+      identifier: actions-datastores-create-datastore
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDatastore
+        unstable: []
+        order: 2
+    - name: List datastores
+      url: '#list-datastores'
+      identifier: actions-datastores-list-datastores
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatastores
+        unstable: []
+        order: 1
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning

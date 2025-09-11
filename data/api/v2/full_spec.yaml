@@ -5858,6 +5858,33 @@ components:
         type:
           $ref: '#/components/schemas/FindingType'
       type: object
+    BulkPutAppsDatastoreItemsRequest:
+      description: Request to insert multiple items into a datastore in a single operation.
+      properties:
+        data:
+          $ref: '#/components/schemas/BulkPutAppsDatastoreItemsRequestData'
+      type: object
+    BulkPutAppsDatastoreItemsRequestData:
+      description: Data wrapper containing the items to insert and their configuration
+        for the bulk insert operation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BulkPutAppsDatastoreItemsRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/DatastoreItemsDataType'
+      required:
+      - type
+      type: object
+    BulkPutAppsDatastoreItemsRequestDataAttributes:
+      description: Configuration for bulk inserting multiple items into a datastore.
+      properties:
+        conflict_mode:
+          $ref: '#/components/schemas/DatastoreItemConflictMode'
+        values:
+          $ref: '#/components/schemas/DatastoreItemValues'
+      required:
+      - values
+      type: object
     CIAppAggregateBucketValue:
       description: A bucket value, can either be a timeseries or a single value.
       oneOf:
@@ -10856,6 +10883,77 @@ components:
       - id
       - type
       type: object
+    CreateAppsDatastoreRequest:
+      description: Request to create a new datastore with specified configuration
+        and metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateAppsDatastoreRequestData'
+      type: object
+    CreateAppsDatastoreRequestData:
+      description: Data wrapper containing the configuration needed to create a new
+        datastore.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateAppsDatastoreRequestDataAttributes'
+        id:
+          description: Optional ID for the new datastore. If not provided, one will
+            be generated automatically.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreDataType'
+      required:
+      - type
+      type: object
+    CreateAppsDatastoreRequestDataAttributes:
+      description: Configuration and metadata to create a new datastore.
+      properties:
+        description:
+          description: A human-readable description about the datastore.
+          type: string
+        name:
+          description: The display name for the new datastore.
+          example: datastore-name
+          type: string
+        org_access:
+          $ref: '#/components/schemas/CreateAppsDatastoreRequestDataAttributesOrgAccess'
+        primary_column_name:
+          $ref: '#/components/schemas/DatastoreAttributesPrimaryColumnName'
+        primary_key_generation_strategy:
+          $ref: '#/components/schemas/DatastorePrimaryKeyGenerationStrategy'
+      required:
+      - name
+      - primary_column_name
+      type: object
+    CreateAppsDatastoreRequestDataAttributesOrgAccess:
+      description: The organization access level for the datastore. For example, 'contributor'.
+      enum:
+      - contributor
+      - viewer
+      - manager
+      type: string
+      x-enum-varnames:
+      - CONTRIBUTOR
+      - VIEWER
+      - MANAGER
+    CreateAppsDatastoreResponse:
+      description: Response after successfully creating a new datastore, containing
+        the datastore's assigned ID.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateAppsDatastoreResponseData'
+      type: object
+    CreateAppsDatastoreResponseData:
+      description: The newly created datastore's data.
+      properties:
+        id:
+          description: The unique identifier assigned to the newly created datastore.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreDataType'
+      required:
+      - type
+      type: object
     CreateCustomFrameworkRequest:
       description: Request object to create a custom framework.
       properties:
@@ -13376,6 +13474,134 @@ components:
       required:
       - data
       type: object
+    Datastore:
+      description: A datastore's complete configuration and metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/DatastoreData'
+      type: object
+    DatastoreArray:
+      description: A collection of datastores returned by list operations.
+      properties:
+        data:
+          description: An array of datastore objects containing their configurations
+            and metadata.
+          items:
+            $ref: '#/components/schemas/DatastoreData'
+          type: array
+      required:
+      - data
+      type: object
+    DatastoreAttributesPrimaryColumnName:
+      description: "The name of the primary key column for this datastore. Primary
+        column names:\n  - Must abide by both [PostgreSQL naming conventions](https://www.postgresql.org/docs/7.0/syntax525.htm)\n
+        \ - Cannot exceed 63 characters"
+      example: ''
+      maxLength: 63
+      type: string
+    DatastoreData:
+      description: Core information about a datastore, including its unique identifier
+        and attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DatastoreDataAttributes'
+        id:
+          description: The unique identifier of the datastore.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreDataType'
+      required:
+      - type
+      type: object
+    DatastoreDataAttributes:
+      description: Detailed information about a datastore.
+      properties:
+        created_at:
+          description: Timestamp when the datastore was created.
+          format: date-time
+          type: string
+        creator_user_id:
+          description: The numeric ID of the user who created the datastore.
+          format: int64
+          type: integer
+        creator_user_uuid:
+          description: The UUID of the user who created the datastore.
+          type: string
+        description:
+          description: A human-readable description about the datastore.
+          type: string
+        modified_at:
+          description: Timestamp when the datastore was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The display name of the datastore.
+          type: string
+        org_id:
+          description: The ID of the organization that owns this datastore.
+          format: int64
+          type: integer
+        primary_column_name:
+          $ref: '#/components/schemas/DatastoreAttributesPrimaryColumnName'
+        primary_key_generation_strategy:
+          $ref: '#/components/schemas/DatastorePrimaryKeyGenerationStrategy'
+      type: object
+    DatastoreDataType:
+      default: datastores
+      description: The resource type for datastores.
+      enum:
+      - datastores
+      example: datastores
+      type: string
+      x-enum-varnames:
+      - DATASTORES
+    DatastoreItemConflictMode:
+      description: How to handle conflicts when inserting items that already exist
+        in the datastore.
+      enum:
+      - fail_on_conflict
+      - overwrite_on_conflict
+      example: overwrite_on_conflict
+      type: string
+      x-enum-varnames:
+      - FAIL_ON_CONFLICT
+      - OVERWRITE_ON_CONFLICT
+    DatastoreItemValues:
+      description: An array of items to add to the datastore, where each item is a
+        set of key-value pairs representing the item's data. Up to 100 items can be
+        updated in a single request.
+      example:
+      - data: example data
+        key: value
+      - data: example data2
+        key: value2
+      items:
+        additionalProperties: {}
+        description: A single item's data as key-value pairs. Key names cannot exceed
+          63 characters.
+        type: object
+      maxItems: 100
+      type: array
+    DatastoreItemsDataType:
+      default: items
+      description: The resource type for datastore items.
+      enum:
+      - items
+      example: items
+      type: string
+      x-enum-varnames:
+      - ITEMS
+    DatastorePrimaryKeyGenerationStrategy:
+      description: Can be set to `uuid` to automatically generate primary keys when
+        new items are added. Default value is `none`, which requires you to supply
+        a primary key for each new item.
+      enum:
+      - none
+      - uuid
+      type: string
+      x-enum-varnames:
+      - NONE
+      - UUID
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -13399,6 +13625,59 @@ components:
           $ref: '#/components/schemas/AppDefinitionType'
       required:
       - id
+      - type
+      type: object
+    DeleteAppsDatastoreItemRequest:
+      description: Request to delete a specific item from a datastore by its primary
+        key.
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteAppsDatastoreItemRequestData'
+      type: object
+    DeleteAppsDatastoreItemRequestData:
+      description: Data wrapper containing the information needed to identify and
+        delete a specific datastore item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeleteAppsDatastoreItemRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/DatastoreItemsDataType'
+      required:
+      - type
+      type: object
+    DeleteAppsDatastoreItemRequestDataAttributes:
+      description: Attributes specifying which datastore item to delete by its primary
+        key.
+      properties:
+        id:
+          description: Optional unique identifier of the item to delete.
+          example: a7656bcc-51d4-4884-adf7-4d0d9a3e0633
+          type: string
+        item_key:
+          description: The primary key value that identifies the item to delete. Cannot
+            exceed 256 characters.
+          example: primaryKey
+          maxLength: 256
+          type: string
+      required:
+      - item_key
+      type: object
+    DeleteAppsDatastoreItemResponse:
+      description: Response from successfully deleting a datastore item.
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteAppsDatastoreItemResponseData'
+      type: object
+    DeleteAppsDatastoreItemResponseData:
+      description: Data containing the identifier of the datastore item that was successfully
+        deleted.
+      properties:
+        id:
+          description: The unique identifier of the item that was deleted.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreItemsDataType'
+      required:
       - type
       type: object
     DeleteAppsRequest:
@@ -23105,6 +23384,125 @@ components:
       type: string
       x-enum-varnames:
       - ERROR_TRACKING_SEARCH_RESULT
+    ItemApiPayload:
+      description: A single datastore item with its content and metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/ItemApiPayloadData'
+      type: object
+    ItemApiPayloadArray:
+      description: A collection of datastore items with pagination and schema metadata.
+      properties:
+        data:
+          description: An array of datastore items with their content and metadata.
+          items:
+            $ref: '#/components/schemas/ItemApiPayloadData'
+          maxItems: 100
+          type: array
+        meta:
+          $ref: '#/components/schemas/ItemApiPayloadMeta'
+          description: Metadata about the included items, including pagination info
+            and datastore schema.
+      required:
+      - data
+      type: object
+    ItemApiPayloadData:
+      description: Core data and metadata for a single datastore item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ItemApiPayloadDataAttributes'
+        id:
+          description: The unique identifier of the datastore.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreItemsDataType'
+      required:
+      - type
+      type: object
+    ItemApiPayloadDataAttributes:
+      description: Metadata and content of a datastore item.
+      properties:
+        created_at:
+          description: Timestamp when the item was first created.
+          format: date-time
+          type: string
+        modified_at:
+          description: Timestamp when the item was last modified.
+          format: date-time
+          type: string
+        org_id:
+          description: The ID of the organization that owns this item.
+          format: int64
+          type: integer
+        primary_column_name:
+          $ref: '#/components/schemas/DatastoreAttributesPrimaryColumnName'
+        signature:
+          description: A unique signature identifying this item version.
+          type: string
+        store_id:
+          description: The unique identifier of the datastore containing this item.
+          type: string
+        value:
+          $ref: '#/components/schemas/ItemApiPayloadDataAttributesValue'
+      type: object
+    ItemApiPayloadDataAttributesValue:
+      additionalProperties: {}
+      description: The data content (as key-value pairs) of a datastore item.
+      type: object
+    ItemApiPayloadMeta:
+      description: Additional metadata about a collection of datastore items, including
+        pagination and schema information.
+      properties:
+        page:
+          $ref: '#/components/schemas/ItemApiPayloadMetaPage'
+        schema:
+          $ref: '#/components/schemas/ItemApiPayloadMetaSchema'
+      type: object
+    ItemApiPayloadMetaPage:
+      description: Pagination information for a collection of datastore items.
+      properties:
+        hasMore:
+          description: Whether there are additional pages of items beyond the current
+            page.
+          type: boolean
+        totalCount:
+          description: The total number of items in the datastore, ignoring any filters.
+          format: int64
+          type: integer
+        totalFilteredCount:
+          description: The total number of items that match the current filter criteria.
+          format: int64
+          type: integer
+      type: object
+    ItemApiPayloadMetaSchema:
+      description: Schema information about the datastore, including its primary key
+        and field definitions.
+      properties:
+        fields:
+          description: An array describing the columns available in this datastore.
+          items:
+            $ref: '#/components/schemas/ItemApiPayloadMetaSchemaField'
+          type: array
+        primary_key:
+          description: The name of the primary key column for this datastore.
+          type: string
+      type: object
+    ItemApiPayloadMetaSchemaField:
+      description: Information about a specific column in the datastore schema.
+      properties:
+        name:
+          description: The name of this column in the datastore.
+          example: ''
+          type: string
+        type:
+          description: The data type of this column. For example, 'string', 'number',
+            or 'boolean'.
+          example: ''
+          type: string
+      required:
+      - name
+      - type
+      type: object
     JSONAPIErrorItem:
       description: API error response body
       properties:
@@ -34320,6 +34718,32 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Deployment'
+      type: object
+    PutAppsDatastoreItemResponseArray:
+      description: Response after successfully inserting multiple items into a datastore,
+        containing the identifiers of the created items.
+      properties:
+        data:
+          description: An array of data objects containing the identifiers of the
+            successfully inserted items.
+          items:
+            $ref: '#/components/schemas/PutAppsDatastoreItemResponseData'
+          maxItems: 100
+          type: array
+      required:
+      - data
+      type: object
+    PutAppsDatastoreItemResponseData:
+      description: Data containing the identifier of a single item that was successfully
+        inserted into the datastore.
+      properties:
+        id:
+          description: The unique identifier assigned to the inserted item.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreItemsDataType'
+      required:
+      - type
       type: object
     PutIncidentNotificationRuleRequest:
       description: Put request for a notification rule.
@@ -46428,6 +46852,94 @@ components:
             type: string
           type: array
       type: object
+    UpdateAppsDatastoreItemRequest:
+      description: Request to update specific fields on an existing datastore item.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateAppsDatastoreItemRequestData'
+      type: object
+    UpdateAppsDatastoreItemRequestData:
+      description: Data wrapper containing the item identifier and the changes to
+        apply during the update operation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateAppsDatastoreItemRequestDataAttributes'
+        id:
+          description: The unique identifier of the datastore item.
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateAppsDatastoreItemRequestDataType'
+      required:
+      - type
+      type: object
+    UpdateAppsDatastoreItemRequestDataAttributes:
+      description: Attributes for updating a datastore item, including the item key
+        and changes to apply.
+      properties:
+        id:
+          description: The unique identifier of the item being updated.
+          type: string
+        item_changes:
+          $ref: '#/components/schemas/UpdateAppsDatastoreItemRequestDataAttributesItemChanges'
+        item_key:
+          description: The primary key that identifies the item to update. Cannot
+            exceed 256 characters.
+          example: ''
+          maxLength: 256
+          type: string
+      required:
+      - item_changes
+      - item_key
+      type: object
+    UpdateAppsDatastoreItemRequestDataAttributesItemChanges:
+      description: Changes to apply to a datastore item using set operations.
+      properties:
+        ops_set:
+          additionalProperties: {}
+          description: Set operation that contains key-value pairs to set on the datastore
+            item.
+          type: object
+      type: object
+    UpdateAppsDatastoreItemRequestDataType:
+      default: items
+      description: The resource type for datastore items.
+      enum:
+      - items
+      example: items
+      type: string
+      x-enum-varnames:
+      - ITEMS
+    UpdateAppsDatastoreRequest:
+      description: Request to update a datastore's configuration such as its name
+        or description.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateAppsDatastoreRequestData'
+      type: object
+    UpdateAppsDatastoreRequestData:
+      description: Data wrapper containing the datastore identifier and the attributes
+        to update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateAppsDatastoreRequestDataAttributes'
+        id:
+          description: The unique identifier of the datastore to update.
+          type: string
+        type:
+          $ref: '#/components/schemas/DatastoreDataType'
+      required:
+      - type
+      type: object
+    UpdateAppsDatastoreRequestDataAttributes:
+      description: Attributes that can be updated on a datastore.
+      properties:
+        description:
+          description: A human-readable description about the datastore.
+          type: string
+        name:
+          description: The display name of the datastore.
+          type: string
+      type: object
     UpdateCustomFrameworkRequest:
       description: Request object to update a custom framework.
       properties:
@@ -48469,6 +48981,429 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/actions-datastores:
+    get:
+      description: Lists all datastores for the organization.
+      operationId: ListDatastores
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatastoreArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List datastores
+      tags:
+      - Actions Datastores
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_read
+      x-undo:
+        type: safe
+    post:
+      description: Creates a new datastore.
+      operationId: CreateDatastore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppsDatastoreRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppsDatastoreResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create datastore
+      tags:
+      - Actions Datastores
+      x-given:
+        datastore:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"datastores\",\n    \"attributes\":
+              {\n      \"name\": \"Test Datastore\",\n      \"primary_column_name\":
+              \"id\",\n      \"primary_key_generation_strategy\": \"none\",\n      \"description\":
+              \"\",\n      \"org_access\": \"contributor\"\n    }\n  }\n}"
+          step: there is a valid "datastore" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_manage
+      x-undo:
+        operationId: DeleteDatastore
+        parameters:
+        - name: datastore_id
+          source: data.id
+        type: unsafe
+  /api/v2/actions-datastores/{datastore_id}:
+    delete:
+      description: Deletes a datastore by its unique identifier.
+      operationId: DeleteDatastore
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete datastore
+      tags:
+      - Actions Datastores
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_manage
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieves a specific datastore by its ID.
+      operationId: GetDatastore
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Datastore'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get datastore
+      tags:
+      - Actions Datastores
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_read
+      x-undo:
+        type: safe
+    patch:
+      description: Updates an existing datastore's attributes.
+      operationId: UpdateDatastore
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppsDatastoreRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Datastore'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update datastore
+      tags:
+      - Actions Datastores
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_manage
+      x-undo:
+        type: idempotent
+  /api/v2/actions-datastores/{datastore_id}/items:
+    delete:
+      description: Deletes an item from a datastore by its key.
+      operationId: DeleteDatastoreItem
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAppsDatastoreItemRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAppsDatastoreItemResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete datastore item
+      tags:
+      - Actions Datastores
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Lists items from a datastore. You can filter the results by specifying
+        either an item key or a filter query parameter, but not both at the same time.
+        Supports server-side pagination for large datasets.
+      operationId: ListDatastoreItems
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      - description: Optional query filter to search items using the [logs search
+          syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Optional primary key value to retrieve a specific item. Cannot
+          be used together with the filter parameter.
+        in: query
+        name: item_key
+        schema:
+          maxLength: 256
+          type: string
+      - description: Optional field to limit the number of items to return per page
+          for pagination. Up to 100 items can be returned per page.
+        in: query
+        name: page[limit]
+        schema:
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: Optional field to offset the number of items to skip from the
+          beginning of the result set for pagination.
+        in: query
+        name: page[offset]
+        schema:
+          format: int64
+          type: integer
+      - description: Optional field to sort results by. Prefix with '-' for descending
+          order (e.g., '-created_at').
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemApiPayloadArray'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List datastore items
+      tags:
+      - Actions Datastores
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_read
+      x-undo:
+        type: safe
+    patch:
+      description: Partially updates an item in a datastore by its key.
+      operationId: UpdateDatastoreItem
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppsDatastoreItemRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemApiPayload'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update datastore item
+      tags:
+      - Actions Datastores
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_write
+      x-undo:
+        type: idempotent
+  /api/v2/actions-datastores/{datastore_id}/items/bulk:
+    post:
+      description: Creates or replaces multiple items in a datastore by their keys
+        in a single operation.
+      operationId: BulkWriteDatastoreItems
+      parameters:
+      - description: The unique identifier of the datastore to retrieve.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPutAppsDatastoreItemsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAppsDatastoreItemResponseArray'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Bulk write datastore items
+      tags:
+      - Actions Datastores
+      x-given:
+        datastore_item:
+          parameters:
+          - name: datastore_id
+            source: datastore.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"items\",\n    \"attributes\":
+              {\n      \"conflict_mode\": \"fail_on_conflict\",\n      \"values\":
+              [\n        {\n          \"id\": \"test-key\",\n          \"data\": \"test-value\"\n
+              \       }\n      ]\n    }\n  }\n}"
+          step: there is a valid "datastore_item" in the system
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_write
+      x-undo:
+        type: idempotent
   /api/v2/actions/app_key_registrations:
     get:
       description: List App Key Registrations
@@ -76594,6 +77529,12 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/service_management/workflows/connections/
   name: Action Connection
+- description: 'Leverage the Actions Datastore API to create, modify, and delete
+
+    items in datastores owned by your organization.'
+  externalDocs:
+    url: https://docs.datadoghq.com/actions/datastore
+  name: Actions Datastores
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
     teams to install Agents on every host or where Agents cannot be installed.\nAgentless
