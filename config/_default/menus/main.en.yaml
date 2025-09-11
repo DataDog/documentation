@@ -3753,6 +3753,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_anomalies
       weight: 12
+    - name: Real-Time Costs
+      url: cloud_cost_management/real_time_costs
+      parent: cloud_cost
+      identifier: cloud_cost_real_time_costs
+      weight: 13
     - name: APM
       url: tracing/
       pre: apm

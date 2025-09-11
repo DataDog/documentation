@@ -1,6 +1,5 @@
 ---
 title: Real-Time Costs
-private: true
 description: View and analyze cloud spend in real time.
 further_reading:
 - link: "/cloud_cost_management/"
@@ -44,7 +43,7 @@ Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly c
 ## Real-time Kubernetes allocation
 
 Similar to the existing container cost allocation, EC2 instance costs are broken down into the Kubernetes pods that ran on them. All tags used on your pod are available in real time, including **custom tags on your pods**, such as team, service or env, and **out-of-the-box Kubernetes tags**:
-- `allocated_spend_type` 
+- `allocated_spend_type`
 - `kube_cluster_name`
 - `kube_namespace`
 - `kube_deployment`
