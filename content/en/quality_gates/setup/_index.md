@@ -131,7 +131,7 @@ For more information, see the [RBAC Permissions documentation][1].
 [1]: /account_management/rbac/permissions
 [2]: https://app.datadoghq.com/ci/quality-gates
 [3]: /account_management/audit_trail/events/#ci-visibility-events
-[4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
+[4]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/blob/master/README.md

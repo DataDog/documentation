@@ -243,4 +243,4 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 [2]: https://github.com/DataDog/expo-datadog
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/#usage
 [4]: https://app.datadoghq.com/source-code/setup/rum
-[5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
+[5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
