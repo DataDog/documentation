@@ -7,9 +7,10 @@ on:
 jobs:
     call-version-getter-shared-workflow:
         permissions:
-            contents: read
+            contents: write
+            id-token: write
             pull-requests: write
-        uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@fc972275dd6ac5ac1e519864a4e8ff25778f66af
+        uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@7d1e92491b2ca1aa03023f0cbc649d76c2bb5c31
         with:
             url: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
             file-name: private_action_runner_version.json
