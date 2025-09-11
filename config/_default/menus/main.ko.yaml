@@ -3505,7 +3505,7 @@ menu:
       parent: profiler
       identifier: profiler_traces_profiles
       weight: 4
-    - name: .NET
+    - name: 프로파일 비교
       url: profiler/compare_profiles
       parent: profiler
       identifier: profiler_compare
