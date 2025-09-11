@@ -130,7 +130,7 @@
             file_name: 'saltstack.md'
             front_matters:
               title: SaltStack
-              dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-formula/tree/iadjivon/DOCS-11593-saltstack-doc"]
 
       - repo_name: dd-trace-rb
         contents:
