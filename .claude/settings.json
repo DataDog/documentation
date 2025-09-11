@@ -3,16 +3,6 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ./.claude/hooks/write_langs.js",
-            "timeout": 300
-          }
-        ]
-      },
-      {
         "matcher": "Bash",
         "hooks": [
           {
