@@ -88,7 +88,9 @@ For binaries not available in the base runner image, create a custom image:
 ```dockerfile
 # Dockerfile example
 FROM gcr.io/datadoghq/private-action-runner:v1.7.0
+USER root
 RUN apt update && apt install -y python3
+USER dog
 ```
 
 You can mount complex scripts inside the runner:
