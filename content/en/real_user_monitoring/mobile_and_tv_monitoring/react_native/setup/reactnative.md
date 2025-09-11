@@ -29,14 +29,19 @@ further_reading:
 ---
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
-
-The minimum supported version for the React Native SDK is React Native v0.65+. Compatibility with older versions is not guaranteed out-of-the-box.
+This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the React Native SDK. The minimum supported version for the React Native SDK is React Native `v0.65+`. Compatibility with older versions is not guaranteed out-of-the-box.
 
 The React Native SDK supports the following services:
 
 - [CodePush][3]. For more information, see the [CodePush documentation][4].
 - [Expo][5]. For more information, see the [Expo documentation][6].
+
+
+<!-- INCLUDE THIS? 
+
+You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or see the [Error Tracking documentation][14] if you have purchased Error Tracking as a standalone product.
+
+ -->
 
 ## Setup
 
@@ -79,32 +84,14 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
 ### Specify application details in the UI
 
-{{< tabs >}}
-{{% tab "RUM" %}}
 
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][101].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
 
    {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Create a RUM application for React Native in Datadog" style="width:90%;">}}
 
-
-[1]: https://app.datadoghq.com/rum/application/create
-{{% /tab %}}
-{{% tab "Error Tracking" %}}
-
-1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
-2. Choose `react-native` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
-
-   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for React Native in Datadog" style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client/
-{{% /tab %}}
-{{< /tabs >}}
 
 To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][7] to configure the `@datadog/mobile-react-native` library, they would be exposed client-side in the React Native application's code.
 
@@ -476,3 +463,5 @@ end
 [11]: https://source.android.com/security/app-sandbox
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
+[14]: /error_tracking/frontend/mobile/reactnative.md
+[101]: https://app.datadoghq.com/rum/application/create
