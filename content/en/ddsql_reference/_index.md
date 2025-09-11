@@ -240,6 +240,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval.                                                                                                     |
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.                                                                                                                                   |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.                                                                                                                                   |
+| `DATE_BIN(interval stride, timestamp source, timestamp origin)` | timestamp                             | Aligns a timestamp to evenly spaced buckets. Returns the start of the bucket containing source, calculated as the largest timestamp less than or equal to source that is a multiple of stride from origin. |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.                                                                                                                        |
 | `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
 | `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current query.                                                                                                                                  |
@@ -469,6 +470,11 @@ SELECT
   TO_CHAR(order_date, 'MM-DD-YYYY') AS formatted_date
 FROM
   orders
+{{< /code-block >}}
+
+### `DATE_BIN`
+{{< code-block lang="sql" >}}
+SELECT DATE_BIN('15 minutes', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01')
 {{< /code-block >}}
 
 ### `DATE_TRUNC`
