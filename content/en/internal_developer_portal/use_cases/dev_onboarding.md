@@ -29,7 +29,7 @@ Datadog's Software Catalog automates key tasks and centralizes essential resourc
 
 Software Catalog acts as a single source of truth for your engineering environment. Newly onboarded developers can:
 
-- Quickly locate relevant [APIs][3], services, repositories, and dependencies.
+- Quickly locate relevant [APIs][3], entities, repositories, and dependencies.
 - Access up-to-date documentation, code snippets, and runbooks, enabling them to start making meaningful contributions.
 - Navigate [organized metadata and organizational inventory][4] to understand the team's structure, communication channels, and best practices.
 

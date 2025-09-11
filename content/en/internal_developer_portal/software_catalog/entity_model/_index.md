@@ -55,7 +55,7 @@ algolia:
 
 ## Overview
 
-Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services.
+Software Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services.
 
 {{< callout url="https://forms.gle/fwzarcSww6By7tn39" btn_hidden="true" header="false" >}}
 <a href="https://forms.gle/fwzarcSww6By7tn39">Share feedback</a> on new and upcoming Software Catalog features!
