@@ -29,6 +29,7 @@ Bits AI Dev Agent is available for the following Datadog products:
 | [Error Tracking][1]       | Preview              | Crashes, panics, exceptions, unhandled errors                      |
 | [Code Security][2]        | Preview              | Security issues in first-party code and open source dependencies   |
 | [Continuous Profiler][3]  | Preview              | Code-level performance issues                                      |
+| [Test Optimization][7]    | Preview              | Flaky tests                                                        |
 
 ## Setup
 
@@ -65,3 +66,4 @@ Bits AI Dev Agent uses the `service` and `version` telemetry tags to match issue
 [4]: https://app.datadoghq.com/integrations/github
 [5]: /integrations/github/
 [6]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[7]: /tests/
