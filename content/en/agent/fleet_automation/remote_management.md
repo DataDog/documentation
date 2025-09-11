@@ -30,7 +30,10 @@ Remotely upgrading Agents in containerized environments is not supported.
 Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
 
 ## Enable Remote Agent Management
-To enable Remote Agent Management:
+If you are running Agent version 7.69+:
+1. Ensure that your Agent configuration includes the environment variable `DD_REMOTE_UPDATES=true` set. This alone enables Remote Agent Management on the Agent.
+
+If you are running older Agent versions:
 1. Ensure that [Remote Configuration is enabled for your organization][15].
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
 1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
@@ -39,7 +42,7 @@ To enable Remote Agent Management:
 
 1. Use the generated Agent installation command to upgrade your Agent to version 7.66+.
 
-<div class="alert alert-info">You must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
+<div class="alert alert-info">For Agent versions prior to 7.69, you must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
 
 ## Upgrade Agents remotely

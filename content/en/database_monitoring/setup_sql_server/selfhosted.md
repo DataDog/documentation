@@ -94,14 +94,6 @@ It's recommended to install the agent directly on the SQL Server host as that en
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
-{{% tab "Docker" %}}
-{{% dbm-alwayson %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-{{% dbm-alwayson %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Example Agent Configurations

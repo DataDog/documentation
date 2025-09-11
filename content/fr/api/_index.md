@@ -4,20 +4,25 @@ algolia:
   - api
 cascade:
 - _target:
+    lang: fr
     path: /api/latest/downtimes
-    lang: fr
   aliases:
-  - /fr/api/latest/downtimes/s
+  - /api/latest/downtimes/s
 - _target:
+    lang: fr
     path: /api/latest/ci-visibility-pipelines
-    lang: fr
   aliases:
-  - /fr/api/latest/ci-visibility
+  - /api/latest/ci-visibility
 - _target:
-    path: /api/latest/dashboards
     lang: fr
+    path: /api/latest/csm-threats
   aliases:
-  - /fr/api/screenboards/
+  - /api/latest/cloud-workload-security
+- _target:
+    lang: fr
+    path: /api/latest/dashboards
+  aliases:
+  - /api/screenboards/
 external_redirect: /api/latest/
 title: Références sur les API
 type: api

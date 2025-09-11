@@ -24,7 +24,7 @@ title: Live Debugger
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
     Live Debugger está en Vista previa limitada. Solicita acceso para unirte a la fila de espera.
     <br>
-    Para enviar preguntas, comentarios o solicitudes relacionadas con Live Debugger, rellena <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM9SV4fxrM_OvQ2CtI7CMl7evN0jasFb6X1QiPAbW6dPTQVQ/viewform?usp=header">este formulario</a> con la información. 
+    Para enviar preguntas, comentarios o solicitudes relacionadas con Live Debugger, rellena <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM9SV4fxrM_OvQ2CtI7CMl7evN0jasFb6X1QiPAbW6dPTQVQ/viewform?usp=header">este formulario</a> con la información.
     <br>
     En caso de problemas cronológicamente sensibles, ponte en contacto con el <a href="https://www.datadoghq.com/support/">servicio de asistencia de Datadog</a>.
 {{< /beta-callout-private >}}
@@ -51,7 +51,7 @@ Live Debugger proporciona:
 ### Requisitos previos
 
 1. Se cumplen todos los [requisitos previos de Dynamic Instrumentation][16].
-1. Has [creado un índice de logs][19] para almacenar información de depuración. 
+1. Has [creado un índice de logs][19] para almacenar información de depuración.
 1. (Recomendado) Has activado la [integración del código fuente][20] para ver y seleccionar localizaciones de código específicas al añadir puntos de registro.
 
 ### Configurar Live Debugger
@@ -77,7 +77,7 @@ Activa y desactiva Live Debugger en un servicio utilizando uno de los siguientes
 
 
 ## Live Debugger y Dynamic Instrumentation
-Debido a la tecnología subyacente compartida, Live Debugger y Dynamic Instrumentation siempre se activan o desactivan juntos en el mismo servicio y entorno. 
+Debido a la tecnología subyacente compartida, Live Debugger y Dynamic Instrumentation siempre se activan o desactivan juntos en el mismo servicio y entorno.
 
 Al igual que Live Debugger, Dynamic Instrumentation permite a los usuarios crear puntos de registro (además de admitir otros instrumentos personalizados como tramos (spans), etiquetas (tags) de tramos y métricas. Sin embargo, los puntos de registro de Live Debugger expiran automáticamente tras un periodo de tiempo determinado, mientras que los de Dynamic Instrumentation permanecen activos hasta que se desactivan manualmente.
 
@@ -93,7 +93,7 @@ Las sesiones de depuración te permiten inspeccionar tu código en tiempo de eje
 
 1. Inicia una sesión de depuración desde una de las siguientes opciones:
     - En la [página de Live Debugger][14], haz clic en **Create Debug Session** (Crear sesión de depuración).
-    - (Requiere la función Code Origins) En el [Explorador de trazas (traces)][22], haz clic en una traza para abrir el panel lateral, busca la sección Code Origins y haz clic en **Start Debug Session** (Iniciar sesión de depuración).
+    - (Requiere la función Code Origin) En el [Explorador de trazas (traces)][22], haz clic en una traza para abrir el panel lateral, busca la sección Code Origin y haz clic en **Start Debug Session** (Iniciar sesión de depuración).
 2. Añade el primer punto de registro para iniciar la sesión.
 3. Añade, elimina y modifica puntos de registro dentro de la sesión.
 

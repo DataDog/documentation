@@ -547,11 +547,10 @@ metadata:
     - name: Payment Team
       type: team
       contact: https://www.slack.com/archives/payments
-
-owner: payments-team
-additionalOwners:
-  - name: finance-team
-    type: stakeholder
+  owner: payments-team
+  additionalOwners:
+    - name: finance-team
+      type: stakeholder
 spec:
   components:
     - service:payment-api

@@ -11,6 +11,9 @@ further_reading:
   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
     tag: 'Documentation'
     text: 'Learn more about global variables'
+  - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+    tag: "Blog"
+    text: "How I helped my client scale their browser tests with Datadog"
  
 ---
 
