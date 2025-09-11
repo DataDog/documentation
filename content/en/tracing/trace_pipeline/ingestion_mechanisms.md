@@ -281,8 +281,15 @@ For .NET applications, set a global sampling rate for the library using the `DD_
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+#using PowerShell
+$env:DD_TRACE_SAMPLE_RATE=0.1
+$env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+
+#using JSON file   
+{
+    "DD_TRACE_SAMPLE_RATE": "0.1",
+    "DD_TRACE_SAMPLING_RULES": "[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\": 0.5}]"
+}
 ```
 
 <div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
@@ -802,7 +809,13 @@ Starting from version [v2.18.0][1], for .NET applications, set by-service and by
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+#using PowerShell
+$env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+
+#using JSON file
+{
+    "DD_SPAN_SAMPLING_RULES": "[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\": 1.0, \"max_per_second\": 50}]"
+}
 ```
 
 Read more about sampling controls in the [.NET tracing library documentation][2].
