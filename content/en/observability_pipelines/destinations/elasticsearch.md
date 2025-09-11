@@ -20,7 +20,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 	- **Data streams** mode
 		- Uses [Elasticsearch Data Streams][4] for log storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
 		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensures smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
-		- To configure Data streams mode, optionally define the data stream name (default is `logs-generic-default`) by entering the following information:
+		- To configure **Data streams** mode, optionally define the data stream name (default is `logs-generic-default`) by entering the following information:
 			- In the **Type** field, enter the category of data being ingested, for example `logs`.
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
