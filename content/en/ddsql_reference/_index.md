@@ -475,10 +475,7 @@ FROM
 
 ### `DATE_BIN`
 {{< code-block lang="sql" >}}
-SELECT DATE_BIN('1 day', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01'),
-       DATE_BIN('15 minutes', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01')
-
--- Result: 2025-09-15 00:00:00 | 2025-09-15 12:30:00
+SELECT DATE_BIN('15 minutes', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01')
 {{< /code-block >}}
 
 
