@@ -122,7 +122,7 @@
         contents:
 
         - action: pull-and-push-file
-          branch: iadjivon/DOCS-11593-saltstack-doc-edits
+          branch: iadjivon/DOCS-11593-saltstack-doc
           globs:
           - README.md
           options:
