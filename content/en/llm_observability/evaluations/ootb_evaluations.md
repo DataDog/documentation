@@ -252,6 +252,8 @@ This check helps understand the overall mood of the conversation, gauge user sat
 
 This check evaluates whether your LLM chatbot can successfully carry out a full session by effectively meeting the user's needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
 
+{{< img src="llm_observability/evaluations/goal_completeness.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
 | Evaluated on session | Evaluated using LLM | Goal Completeness assesses whether all user intentions within a multi-turn interaction were successfully resolved. The evaluation identifies resolved and unresolved intentions, providing a completeness score based on the ratio of unresolved to total intentions. |
