@@ -60,7 +60,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 | Tracing Library Version | Frameworks |
 |---|---|
-| 2.15.0+ | Django, Flask, Starlette and derivatives |
+| 2.15.0+ | Django, Flask, Starlette, and derivatives |
 
 {{% /tab %}}
 
