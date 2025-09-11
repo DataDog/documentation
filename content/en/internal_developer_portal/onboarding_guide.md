@@ -41,7 +41,7 @@ Recommendations:
    - **Import from external systems** such as [Backstage][14] or [ServiceNow][15].  
    - **[Create entries directly][24]** through the Datadog UI, or programmatically by importing from GitHub, Terraform, the Datadog Software Metadata Provider, or the Service Definition API.  
 
-  **Note**: If you use APM, prioritize [Unified Service Tagging][13] and [Inferred Services][14] as entry points, rather than relying on service overrides.
+  **Note**: If you use APM, prioritize [Unified Service Tagging][25] and [Inferred Services][26] as entry points, rather than relying on service overrides.
 
 1. **Create internal onboarding guidance**: Document tagging standards, sample `entity.definition.yaml` files, and expectations for application teams.  
 1. **Explore automation**: Use the [API][8] or Terraform provider to manage entities, scorecards, and workflows programmatically.
@@ -99,3 +99,5 @@ Recommendations:
 [20]: /internal_developer_portal/scorecards/scorecard_configuration#group-rules-into-levels
 [23]: /internal_developer_portal/software_catalog/set_up/discover_entities
 [24]: /internal_developer_portal/software_catalog/set_up/create_entities
+[25]: /getting_started/tagging/unified_service_tagging
+[26]: /tracing/services/inferred_services
