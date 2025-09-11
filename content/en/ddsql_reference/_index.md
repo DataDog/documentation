@@ -40,56 +40,120 @@ This documentation covers the SQL support available and includes:
 
 The following SQL syntax is supported:
 
-| Syntax        | Description                                                                                  | Example                                                                                                  |
-|---------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `SELECT (DISTINCT)`<br>DISTINCT: Optional | Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.       | {{< code-block lang="sql" >}}SELECT DISTINCT customer_id
-FROM orders {{< /code-block >}} |
-| `JOIN`        | Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.  | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
+`SELECT (DISTINCT)` (DISTINCT: Optional)
+: Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.
+
+    {{< code-block lang="sql" >}}SELECT DISTINCT customer_id
+FROM orders {{< /code-block >}}
+
+`JOIN`
+: Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.
+
+    {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
 FROM orders
 JOIN customers
-ON orders.customer_id = customers.customer_id {{< /code-block >}} |
-| `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
+ON orders.customer_id = customers.customer_id {{< /code-block >}}
+
+`GROUP BY`
+: Groups rows that have the same values in specified columns into summary rows.
+
+    {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
 FROM sales
-GROUP BY product_id {{< /code-block >}} |
-| `\|\|` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name
-FROM employees {{< /code-block >}} |
-| `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT *
+GROUP BY product_id {{< /code-block >}}
+
+`||` (concat)
+: Concatenates two or more strings together.
+
+    {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name
+FROM employees {{< /code-block >}}
+
+`WHERE` (Includes support for `LIKE`, `IN`, `ON`, `OR` filters)
+: Filters records that meet a specified condition.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM employees
-WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
-| `CASE`        | Provides conditional logic to return different values based on specified conditions.         | {{< code-block lang="sql" >}}SELECT order_id,
+WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}}
+
+`CASE`
+: Provides conditional logic to return different values based on specified conditions.
+
+    {{< code-block lang="sql" >}}SELECT order_id,
   CASE
     WHEN quantity > 10 THEN 'Bulk Order'
     ELSE 'Standard Order'
   END AS order_type
-FROM orders {{< /code-block >}} |
-| `WINDOW` | Performs a calculation across a set of table rows that are related to the current row.                 | {{< code-block lang="sql" >}}SELECT
+FROM orders {{< /code-block >}}
+
+`WINDOW`
+: Performs a calculation across a set of table rows that are related to the current row.
+
+    {{< code-block lang="sql" >}}SELECT
   timestamp,
   service_name,
   cpu_usage_percent,
   AVG(cpu_usage_percent) OVER (PARTITION BY service_name ORDER BY timestamp ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg_cpu
 FROM
-  cpu_usage_data {{< /code-block >}} |
-| `IS NULL` / `IS NOT NULL`   | Checks if a value is null or not null.                                         | {{< code-block lang="sql" >}}SELECT *
+  cpu_usage_data {{< /code-block >}}
+
+`IS NULL` / `IS NOT NULL`
+: Checks if a value is null or not null.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM orders
-WHERE delivery_date IS NULL {{< /code-block >}}        |
-| `LIMIT`    | Specifies the maximum number of records to return.                                               | {{< code-block lang="sql" >}}SELECT *
+WHERE delivery_date IS NULL {{< /code-block >}}
+
+`LIMIT`
+: Specifies the maximum number of records to return.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM customers
-LIMIT 10 {{< /code-block >}}                         |
-| `ORDER BY`  | Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.  | {{< code-block lang="sql" >}}SELECT *
+LIMIT 10 {{< /code-block >}}
+
+`ORDER BY`
+: Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM sales
-ORDER BY sale_date DESC {{< /code-block >}}              |
-| `HAVING`    | Filters records that meet a specified condition after grouping.                               | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
+ORDER BY sale_date DESC {{< /code-block >}}
+
+`HAVING`
+: Filters records that meet a specified condition after grouping.
+
+    {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
 FROM sales
 GROUP BY product_id
-HAVING SUM(quantity) > 10 {{< /code-block >}} |
-| `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT *
+HAVING SUM(quantity) > 10 {{< /code-block >}}
+
+`IN`, `ON`, `OR`
+: Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM orders
-WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
-| `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name
-FROM employees {{< /code-block >}}                |
-| Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
-FROM products {{< /code-block >}} |
-| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
+WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}}
+
+`USING`
+: This clause is a shorthand for joins where the join columns have the same name in both tables. It takes a comma-separated list of those columns and creates a separate equality condition for each matching pair. For example, joining `T1` and `T2` with `USING (a, b)` is equivalent to `ON T1.a = T2.a AND T1.b = T2.b`.
+
+    {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
+FROM orders
+JOIN customers
+USING (customer_id) {{< /code-block >}}
+
+`AS`
+: Renames a column or table with an alias.
+
+    {{< code-block lang="sql" >}}SELECT first_name AS name
+FROM employees {{< /code-block >}}
+
+Arithmetic Operations
+: Performs basic calculations using operators like `+`, `-`, `*`, `/`.
+
+    {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
+FROM products {{< /code-block >}}
+
+`INTERVAL value unit`
+: Interval representing a time duration specified in a given unit.
+Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day`
 
 ## Data types
 
@@ -107,7 +171,7 @@ DDSQL supports the following data types:
 
 ### Array types
 
-All data types except `JSON` support array types. Arrays can contain multiple values of the same data type.
+All data types support array types. Arrays can contain multiple values of the same data type.
 
 ## Type literals
 
@@ -123,7 +187,7 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
 | `VARCHAR` | `VARCHAR 'value'` | `VARCHAR 'hello world'` |
 
-The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`.
+The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`. Use explicit type prefixes when values could be ambiguous; for example,`TIMESTAMP '2025-01-01'` would be inferred as `VARCHAR` without the prefix.
 
 ### Array literals
 
@@ -140,48 +204,50 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
 
 {{< code-block lang="sql" >}}
 -- Using type literals in queries
-SELECT 
+SELECT
     VARCHAR 'Product Name: ' || name AS labeled_name,
     price * DOUBLE 1.08 AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
 FROM products
-WHERE active = BOOLEAN true;
+WHERE created_at > TIMESTAMP '2025-01-01';
 {{< /code-block >}}
 
 ## Functions
 
 The following SQL functions are supported. For Window function, see the separate [Window function](#window-functions) section in this documentation.
 
-| Function                                         | Return Type                           | Description                                                                 |
-|--------------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------|
-| `MIN(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
-| `MAX(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                          |
-| `COUNT(any a)`                                   | numeric                               | Returns the number of input values that are not null.                       |
-| `SUM(numeric n)`                                 | numeric                               | Returns the summation across all input values.                              |
-| `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.        |
-| `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                        |
-| `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                      |
-| `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                           |
-| `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                            |
-| `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                            |
-| `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                 |
-| `COALESCE(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                   |
-| `CAST(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
-| `LENGTH(string s)`                               | integer                               | Returns the number of characters in the string.                             |
-| `TRIM(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
-| `REPLACE(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
-| `SUBSTRING(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
-| `STRPOS(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
-| `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
-| `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
-| `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
-| `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
-| `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
-| `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
-| `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
-| `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
-| `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
+| Function                                         | Return Type                           | Description                                                                                                                                                                                       |
+|--------------------------------------------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `MIN(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                                                                                                                                      |
+| `MAX(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                                                                                                                                                |
+| `COUNT(any a)`                                   | numeric                               | Returns the number of input values that are not null.                                                                                                                                             |
+| `SUM(numeric n)`                                 | numeric                               | Returns the summation across all input values.                                                                                                                                                    |
+| `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.                                                                                                                              |
+| `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
+| `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
+| `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
+| `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                                                                                                                                                  |
+| `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                                                                                                                                                  |
+| `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                                                                                                                                       |
+| `COALESCE(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                                                                                                                                         |
+| `CAST(value AS type)`                            | type                                  | Converts the given value to the specified data type.                                                                                                                                              |
+| `LENGTH(string s)`                               | integer                               | Returns the number of characters in the string.                                                                                                                                                   |
+| `TRIM(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                                                                                                                                          |
+| `REPLACE(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring.                                                                                                                       |
+| `SUBSTRING(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length.                                                                                                      |
+| `STRPOS(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match.                                                                                                   |
+| `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one.                                                                                          |
+| `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval.                                                                                                     |
+| `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.                                                                                                                                   |
+| `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.                                                                                                                                   |
+| `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.                                                                                                                        |
+| `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
+| `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current query.                                                                                                                                  |
+| `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                                                                                                                                      |
+| `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found.                                                                                         |
+| `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter.                                                                                                                       |
+| `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                                                                                                                                              |
+| `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause.                                                                                                                    |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -425,6 +491,37 @@ FROM
   events
 {{< /code-block >}}
 
+### `CURRENT_SETTING`
+
+Supported setting parameters:
+- `dd.time_frame_start`: Returns the start of the selected time frame in RFC 3339 format (`YYYY-MM-DD HH:mm:ss.sss±HH:mm`).
+- `dd.time_frame_end`: Returns the end of the selected time frame in RFC 3339 format (`YYYY-MM-DD HH:mm:ss.sss±HH:mm`).
+
+{{< code-block lang="sql" >}}
+-- Define the current analysis window
+WITH bounds AS (
+  SELECT CAST(CURRENT_SETTING('dd.time_frame_start') AS TIMESTAMP) AS time_frame_start,
+         CAST(CURRENT_SETTING('dd.time_frame_end')   AS TIMESTAMP) AS time_frame_end
+),
+-- Define the immediately preceding window of equal length
+     previous_bounds AS (
+  SELECT time_frame_start - (time_frame_end - time_frame_start) AS prev_time_frame_start,
+         time_frame_start                                       AS prev_time_frame_end
+  FROM bounds
+)
+SELECT * FROM bounds, previous_bounds
+{{< /code-block >}}
+
+### `NOW`
+{{< code-block lang="sql" >}}
+SELECT
+  *
+FROM
+  sales
+WHERE
+  purchase_date > NOW() - INTERVAL '1 hour'
+{{< /code-block >}}
+
 ### `CARDINALITY`
 {{< code-block lang="sql" >}}
 SELECT
@@ -536,7 +633,7 @@ SELECT regexp_replace('INFO INFO INFO', 'INFO', 'DEBUG', 1, 2);
 You can use the following flags with [regular expression functions](#regular-expressions):
 
 `i`
-: Case-insensitive matching 
+: Case-insensitive matching
 
 `n` or `m`
 : Newline-sensitive matching
@@ -549,10 +646,10 @@ You can use the following flags with [regular expression functions](#regular-exp
 ### `i` flag
 
 {{< code-block lang="sql" >}}
-SELECT regexp_match('INFO', 'info') 
+SELECT regexp_match('INFO', 'info')
 -- NULL
 
-SELECT regexp_match('INFO', 'info', 'i') 
+SELECT regexp_match('INFO', 'info', 'i')
 -- ['INFO']
 {{< /code-block >}}
 
@@ -566,7 +663,7 @@ b', '^b');
 SELECT regexp_match('a
 b', '^b', 'n');
 -- ['b']
-{{< /code-block >}}   
+{{< /code-block >}}
 
 ### `g` flag
 
@@ -608,7 +705,7 @@ This table provides an overview of the supported window functions. For comprehen
 
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}} 
+{{< /callout >}}
 
 Table functions are used to query Logs and Metrics
 
@@ -677,7 +774,7 @@ ORDER BY value DESC;{{< /code-block >}}
 
 ## Tags
 
-DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+DDSQL exposes tags as an `hstore` type, which is inspired by PostgreSQL. You can access the values for specific tag keys using the PostgreSQL arrow operator. For example:
 
 ```sql
 SELECT instance_type, count(instance_type)
@@ -686,7 +783,15 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 ```
 
-Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+Tags are key-value pairs where each key can have zero, one, or multiple tag values corresponding to it. When accessed, the tag value returns a single string, containing _all_ corresponding values. When the data has multiple tag values for the same tag key, they are represented as a sorted, comma-separated string. For example:
+
+```sql
+SELECT tags->'team', instance_type, architecture, COUNT(*) as instance_count
+FROM aws.ec2_instance
+WHERE tags->'team' = 'compute_provisioning,database_ops'
+GROUP BY tags->'team', instance_type, architecture
+ORDER BY instance_count DESC
+```
 
 You can also compare tag values as strings or entire tag sets:
 

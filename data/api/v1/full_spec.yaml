@@ -3395,15 +3395,19 @@ components:
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         cloud_run_revision_filters:
-          description: 'Limit the Cloud Run revisions that are pulled into Datadog
-            by using tags.
+          deprecated: true
+          description: 'List of filters to limit the Cloud Run revisions that are
+            pulled into Datadog by using tags.
 
             Only Cloud Run revision resources that apply to specified filters are
-            imported into Datadog.'
+            imported into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=cloud_run_revision`'
           example:
           - $KEY:$VALUE
           items:
-            description: Cloud Run Filters
+            description: Cloud Run revision filters
             type: string
           type: array
         errors:
@@ -3416,11 +3420,16 @@ components:
             type: string
           type: array
         host_filters:
-          description: 'Limit the GCE instances that are pulled into Datadog by using
-            tags.
+          deprecated: true
+          description: 'A comma-separated list of filters to limit the VM instances
+            that are pulled into Datadog by using tags.
 
-            Only hosts that match one of the defined tags are imported into Datadog.'
-          example: key:value,filter:example
+            Only VM instance resources that apply to specified filters are imported
+            into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=gce_instance`'
+          example: $KEY1:$VALUE1,$KEY2:$VALUE2
           type: string
         is_cspm_enabled:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
@@ -3441,6 +3450,15 @@ components:
             account.'
           example: true
           type: boolean
+        monitored_resource_configs:
+          description: Configurations for GCP monitored resources.
+          example:
+          - filters:
+            - $KEY:$VALUE
+            type: gce_instance
+          items:
+            $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key
@@ -3473,6 +3491,37 @@ components:
       items:
         $ref: '#/components/schemas/GCPAccount'
       type: array
+    GCPMonitoredResourceConfig:
+      description: Configuration for a GCP monitored resource.
+      properties:
+        filters:
+          description: 'List of filters to limit the monitored resources that are
+            pulled into Datadog by using tags.
+
+            Only monitored resources that apply to specified filters are imported
+            into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: A monitored resource filter
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/GCPMonitoredResourceConfigType'
+      type: object
+    GCPMonitoredResourceConfigType:
+      description: The GCP monitored resource type. Only a subset of resource types
+        are supported.
+      enum:
+      - cloud_function
+      - cloud_run_revision
+      - gce_instance
+      example: gce_instance
+      type: string
+      x-enum-varnames:
+      - CLOUD_FUNCTION
+      - CLOUD_RUN_REVISION
+      - GCE_INSTANCE
     GeomapWidgetDefinition:
       description: This visualization displays a series of values by country on a
         world map.
@@ -14649,6 +14698,11 @@ components:
         extractedValuesFromScript:
           description: Generate variables using JavaScript.
           type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -14705,6 +14759,11 @@ components:
     SyntheticsAPIWaitStep:
       description: The Wait step used in a Synthetic multi-step API test.
       properties:
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         name:
           description: The name of the step.
           example: Example step name
@@ -24401,6 +24460,9 @@ components:
       additionalProperties: false
       description: Wrapper for live span
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
       type: object
@@ -24601,6 +24663,9 @@ components:
           format: int64
           minimum: 0
           type: integer
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         to:
           description: End time in seconds since epoch.
           example: 1712083128
@@ -24625,6 +24690,9 @@ components:
     WidgetNewLiveSpan:
       description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         type:
           $ref: '#/components/schemas/WidgetNewLiveSpanType'
         unit:
@@ -28008,6 +28076,7 @@ paths:
         type: safe
   /api/v1/integration/aws:
     delete:
+      deprecated: true
       description: Delete a Datadog-AWS integration matching the specified `account_id`
         and `role_name parameters`.
       operationId: DeleteAWSAccount
@@ -28057,6 +28126,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS integrations available in your Datadog organization.
       operationId: ListAWSAccounts
       parameters:
@@ -28110,6 +28180,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: 'Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
@@ -28182,6 +28253,7 @@ paths:
             }}"}'
         type: unsafe
     put:
+      deprecated: true
       description: Update a Datadog-Amazon Web Services integration.
       operationId: UpdateAWSAccount
       parameters:
@@ -28254,6 +28326,7 @@ paths:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
     get:
+      deprecated: true
       description: List all namespace rules for a given Datadog-AWS integration. This
         endpoint takes no arguments.
       operationId: ListAvailableAWSNamespaces
@@ -28413,6 +28486,7 @@ paths:
         type: unsafe
   /api/v1/integration/aws/filtering:
     delete:
+      deprecated: true
       description: Delete a tag filtering entry.
       operationId: DeleteAWSTagFilter
       requestBody:
@@ -28457,6 +28531,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: Get all AWS tag filters.
       operationId: ListAWSTagFilters
       parameters:
@@ -28498,6 +28573,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Set an AWS tag filter.
       operationId: CreateAWSTagFilter
       requestBody:
@@ -28548,6 +28624,7 @@ paths:
         type: unsafe
   /api/v1/integration/aws/generate_new_external_id:
     put:
+      deprecated: true
       description: Generate a new AWS external ID for a given AWS account ID and role
         name pair.
       operationId: CreateNewAWSExternalID
@@ -28639,6 +28716,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
       operationId: ListAWSLogsIntegrations
@@ -28791,6 +28869,7 @@ paths:
         type: safe
   /api/v1/integration/aws/logs/services:
     get:
+      deprecated: true
       description: Get the list of current AWS services that Datadog offers automatic
         log collection. Use returned service IDs with the services parameter for the
         Enable an AWS service log collection API endpoint.
@@ -28836,6 +28915,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Enable automatic log collection for a list of services. This should
         be run after running `CreateAWSLambdaARN` to save the configuration.
       operationId: EnableAWSLogServices

@@ -136,7 +136,7 @@ For complete configuration options and detailed usage examples, refer to the [`d
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
@@ -234,7 +234,7 @@ spec:
 [4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
-[7]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
+[7]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
 
 {{% /tab %}}
 {{% tab "Generic script" %}}

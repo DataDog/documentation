@@ -17,7 +17,7 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 ### Troubleshoot injection in Datadog Fleet Automation
 
 {{< callout btn_hidden="true" header="false">}}
-Instrumentation insights in Fleet Automation is available in Preview.
+Troubleshooting in Fleet Automation is available in Preview.
 {{< /callout >}}
 
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
@@ -28,15 +28,15 @@ Using Datadog, you can identify and troubleshoot instrumentation issues across y
 
 #### Prerequisites
 
-Instrumentation insights are available for:
+This functionality is available for:
 
-- **Languages**: Python, Java, Node.js, Ruby, PHP, .NET
+- **Languages**: Python, Java, Node.js, PHP, .NET
 - **Environments**: Linux hosts, containers, Kubernetes
 - Datadog Agent v7.68.2+
 
-#### View instrumentation insights 
+#### View SSI troubleshooting insights 
 
-To access instrumentation insights in Datadog:
+To explore instrumentation troubleshooting data in Datadog:
 
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
@@ -63,12 +63,34 @@ To confirm injection at the container level, check that:
 4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java).
 
 To enable debug logs:
-1. Set `DD_APM_INSTRUMENTATION_DEBUG: true` in the pod spec.
+
+1. Set the following in your pod spec:
+ 
+   {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+   env:
+     - name: DD_TRACE_DEBUG    # debug logging for the tracer
+       value: "true"
+     - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
+       value: "true"
+   {{< /code-block >}}
+   
 2. Delete the pod to enable debug logs during injection.
 
 ## Configuration options that affect injection
 
 There are several configuration mechanisms that can block or alter injection behavior.
+
+### Storage requirements
+
+SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
+
+<div style="text-align:center;">
+  <pre><code>[sum of the language library sizes]
++
+[injector package size] * [number of injected pods per host]</code></pre>
+</div>
+
+Because library packages are updated frequently and may grow when support for new language versions is added, disk usage can change over time. If your environment has limited disk space, monitor package sizes and allow extra capacity to avoid injection failures.
 
 ### Injector version
 
@@ -83,16 +105,6 @@ To set the injector version:
 
 
 For host or Docker injection, modifying the `auto_inject` version is not recommended. 
-
-To manually update the injector version, run:
-```
-sudo datadog-installer install "oci://install.datadoghq.com/apm-inject-package: <VERSION>-1"
-```
-
-Alternatively, set the following in the installation script:
-```
-DD_INSTALLER_DEFAULT_PKG_VERSION_DATADOG_APM_INJECT=<VERSION>-1
-```
 
 ### Allow and deny lists
 
