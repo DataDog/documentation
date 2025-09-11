@@ -3225,7 +3225,7 @@ menu:
       parent: tracing_other_telemetry
       identifier: tracing_connect_synthetics
       weight: 504
-    - name: 프로필 및 트레이스 상호 연결
+    - name: 프로파일 및 트레이스 상호 연결
       url: /profiler/connect_traces_and_profiles/
       parent: tracing_other_telemetry
       identifier: tracing_connect_profiles
