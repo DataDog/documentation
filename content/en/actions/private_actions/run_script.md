@@ -123,4 +123,4 @@ runPredefinedScript:
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
 [9]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
 [10]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.script.runPredefinedScript
-[11]: /actions/private_actions/update_PAR/
+[11]: /actions/private_actions/update_private_action_runner/
