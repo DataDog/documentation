@@ -23,6 +23,9 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "External Site"
   text: "Create and manage Synthetic Browser Tests with Terraform"
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 ---
 
 ## Overview
@@ -187,7 +190,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+1. Enter a **message** for the browser test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -200,13 +203,28 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations.
+    Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+
+     {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+
+     For example, to create a monitor that iterates over steps extracting variables for browser tests, add the following to the monitor message:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
 2. Choose team members and services to notify.
-3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-4. Click **Save Details and Record Test** to save your test configuration and record your browser steps.
+3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
+4. Click **Save & Start Recording** to save your test configuration and record your browser steps.
 
-For more information, see [Using Synthetic Test Monitors][9].
+For more information, see [Synthetic Monitoring notifications][9].
 
 ## Record your steps
 
@@ -265,7 +283,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 [6]: /api/latest/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[9]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/notifications/
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [12]: /synthetics/browser_tests/actions/#assertion

@@ -65,16 +65,79 @@ There are no billing implications for tracing Java Web Apps during this period.
 ## Installation
 Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-1. If you haven't already, set up the [Datadog-Azure integration][9].
+If you haven't already, set up the [Datadog-Azure integration][9]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
 
-1. Verify that your Datadog-Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
+<div class="alert alert-info">This step is critical for metric/trace correlation and functional trace panel views and improves the overall experience of using Datadog with Azure App Services.
+</div>
 
-   <div class="alert alert-info">This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
-   </div>
+{{< tabs >}}
+{{% tab "Terraform" %}}
 
-2. In your [Azure Portal][3], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
-3. Configure the following Application Settings:
+If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+
+Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
+
+```tf
+variable "datadog_api_key" {
+  description = "Your Datadog API key"
+  type        = string
+  sensitive   = true
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = "00000000-0000-0000-0000-000000000000" // Replace with your subscription ID
+}
+
+resource "azurerm_service_plan" "my_asp" {
+  name                = "my-app-service-plan" // Replace with your app service plan name
+  resource_group_name = "my-resource-group"   // Replace with your resource group
+  os_type             = "Windows"
+  location            = "eastus"
+  sku_name            = "P1v2"
+}
+
+module "my_web_app" {
+  source  = "DataDog/web-app-datadog/azurerm//modules/windows"
+  version = "1.0.0"
+
+  name                = "my-web-app"        // Replace with your web app name
+  resource_group_name = "my-resource-group" // Replace with your resource group
+  service_plan_id     = azurerm_service_plan.my_asp.id
+  location            = "eastus"
+
+  datadog_api_key = var.datadog_api_key
+  datadog_service = "my-service" // Replace with your service name
+  datadog_env     = "prod"       // Replace with your environment (e.g. prod, staging)
+  datadog_version = "0.0.0"      // Replace with your application version
+
+  site_config = {
+    application_stack = {
+      node_version = "~22" // change for your specific runtime
+    }
+  }
+  app_settings = {
+    DD_TRACE_ENABLED = "true" // Example setting
+  }
+}
+```
+
+Finally, run `terraform apply`, and follow any prompts.
+
+The [Datadog Windows Web App module][251] only deploys the Web App resource and extension, so you need to [deploy your code][252] separately.
+
+[250]: https://developer.hashicorp.com/terraform/install
+[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
+[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+
+
+{{% /tab %}}
+{{% tab "Manual" %}}
+
+1. In your [Azure Portal][3], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
+
+2. Configure the following Application Settings:
 
    **Required environment variables**
 
@@ -108,25 +171,29 @@ Datadog recommends doing regular updates to the latest version of the extension 
    Enables trace-log correlation by injecting trace IDs into your application logs.<br>
    This allows you to correlate logs with traces in the Datadog UI.<br>
 
-6. Click **Save**. This restarts your application.
+3. Click **Save**. This restarts your application.
 
-7. Stop your application by clicking **Stop**.
+4. Stop your application by clicking **Stop**.
    <div class="alert alert-warning">You <u>must</u> stop your application to successfully install Datadog.</div>
 
-8. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
+5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
-9. Accept the legal terms, click **OK**, and wait for the installation to complete. 
+6. Accept the legal terms, click **OK**, and wait for the installation to complete. 
    <div class="alert alert-warning">This step requires that your application be in a stopped state.</div>
 
-10. Start the main application, click **Start**:
+7.  Start the main application, click **Start**:
 
     {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Azure start button" style="width:100%;" >}}
 
-11. Verify that the extension is installed and running by checking the **Extensions** page in your Azure Portal.
+8.  Verify that the extension is installed and running by checking the **Extensions** page in your Azure Portal.
 
 <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Custom metrics
 
