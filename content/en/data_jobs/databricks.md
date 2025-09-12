@@ -300,8 +300,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 2. On the create policy page, click **Add Definition** under the **Definition** section.
 3. In the **Field** dropdown that appears, select **init_scripts**.
 
-   // TO UPDATE
-   {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
+   {{< img src="data_jobs/databricks/configure-databricks-cluster-policy-init-script.png" alt="Databricks UI, cluster policy creation page, Definition section. A 'Field' drop-down with 'init_scripts' selected, showing a 'Source' drop-down and an 'File path' file selector." style="width:80%;" >}}
 
    - Under the **Source** drop-down, select `Workspace`.
    - Under **File path**, enter the path to your init script.
@@ -322,8 +321,7 @@ This can be done by following these steps for each key-value pair:
 1. Click **Add Definition** under the **Definition** section.
 2. In the **Field** dropdown that appears, select **spark_env_vars**
 
-   // TO UPDATE
-   {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
+   {{< img src="data_jobs/databricks/configure-databricks-cluster-policy-envvars.png" alt="Databricks UI, cluster policy creation page, Definition section. A 'Field' drop-down with 'spark_env_vars' selected, showing text boxes to enter a 'Key' and 'Value' envvar configuration. A 'Type' dropdown with 'Fixed' selected, and a 'Hidden' checkbox that is selected." style="width:80%;" >}}
 
    - In the **Key** field, enter the environment variable key.
    - In the **Value** field, enter the environment variable value.
