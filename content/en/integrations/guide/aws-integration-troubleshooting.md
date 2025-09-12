@@ -22,7 +22,7 @@ The `sts:Assumerole` permission error indicates an issue with the trust policy a
 
 ### Resolve All AWS Permissions Issues
 **Resolve All AWS Permissions Issues** in the AWS Integration tile allows you to use a CloudFormation QuickStart stack to update your IAM role and resolve missing permissions issues. 
-Under the "Issues" tab, when clicked, it launches a CloudFormation stack that calls our public API [endpoint](https://api.datadoghq.com/api/v2/integration/aws/iam_permissions) to fetch the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches them to the integration role. It will also attach the SecurityAudit managed AWS policy if it is not already present.
+Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a CloudFormation stack that calls our public API [endpoint](https://api.datadoghq.com/api/v2/integration/aws/iam_permissions) and fetches the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches these to the integration role. It will also attach the `SecurityAudit` Managed AWS policy if it is not present.
 
 **Notes**:
 
