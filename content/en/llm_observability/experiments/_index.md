@@ -365,7 +365,6 @@ List all projects, sorted by creation date. The most recently-created projects a
 | `id` | UUID | Unique project ID. Set at the top level `id` field within the [Data](#object-data) object. |
 | `name` | string | Unique project name. |
 | `description` | string | Project description. |
-| `ml_app` | string | Name of the ML app associated with the project. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -381,7 +380,6 @@ Create a project. If there is an existing project with the same name, the API re
 | ---- | ---- | ---- |
 | `name` (_required_) | string | Unique project name. |
 | `description` | string | Project description. |
-| `ml_app` | string | Name of the ML app associated with the project. |
 
 **Response**
 
@@ -390,7 +388,6 @@ Create a project. If there is an existing project with the same name, the API re
 | `id` | UUID | Unique project ID. Set at the top level `id` field within the [Data](#object-data) object. |
 | `name` | string | Unique project name. |
 | `description` | string | Project description. |
-| `ml_app` | string | Name of the ML app associated with the project. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -406,7 +403,6 @@ Update a project.
 | ---- | ---- | ---- |
 | `name` | string | Unique project name. |
 | `description` | string | Project description. |
-| `ml_app` | string | Name of the ML app associated with the project. |
 
 **Response**
 
@@ -415,7 +411,6 @@ Update a project.
 | `id` | UUID | Unique project ID. Set at the top level `id` field within the [Data](#object-data) object. |
 | `name` | string | Unique project name. |
 | `description` | string | Project description. |
-| `ml_app` | string | Name of the ML app associated with the project. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
