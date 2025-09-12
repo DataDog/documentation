@@ -140,9 +140,9 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [22]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
 [23]: /agent/
 [24]: /tracing/metrics/metrics_namespace/
-[30]: /tracing/dynamic_instrumentation/
 [25]: /tracing/metrics/runtime_metrics/
 [26]: /tracing/services/service_page/
 [27]: /tracing/trace_collection/single-step-apm/
 [28]: /tracing/services/resource_page/
 [29]: /tracing/troubleshooting/
+[30]: /tracing/dynamic_instrumentation/
