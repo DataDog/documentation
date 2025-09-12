@@ -42,15 +42,14 @@ If you want to set up a service account for the Worker, do the following:
 1. Enter the destination project name.
 1. Enter the topic.
 1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in **JSON** or **Raw message**.
-1. If you have a credentials JSON file, enter the path to your credentials JSON file. This is the credentials file you downloaded if you had set up the Worker services account in [Prerequisite](#prerequisites). The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
-    - If you're using [workload identity][4] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
+1. If you have a credentials JSON file, enter the path to your credentials JSON file. This is the credentials file you downloaded if you had set up the Worker service account in [Prerequisite](#prerequisites). The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
+    - If you're using [workload identity][7] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
     - The Worker uses standard [Google authentication methods][2].
-1. Select **JSON** or **Raw** encoding in the dropdown menu.
 1. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.
 	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
 	- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 	- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options are in Preview. Contact your account manager to request access.
 	- If left disabled, the maximum size for buffering is 500 events.
 	- If enabled:
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
@@ -61,7 +60,7 @@ If you want to set up a service account for the Worker, do the following:
 - (Optional) Google Pub/Sub alternative endpoint URL
 	- The Google Pub/Sub destination uses Google Pub/Sub's global endpoint (`https://pubsub.googleapis.com`) as the default.
     - If your Pub/Sub topic is configured to store messages in a specific region, enter the endpoint for that region in the **Google Pub/Sub alternative endpoint URL** field. See [About Pub/Sub endpoints][5] for more information.
-	- Stored as the environment variable: `DD_OP_DESTINATION_GCP_PUBSUB_KEY_PASS`.
+	- Stored as the environment variable: `DD_OP_DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
 
 ## How the destination works
 
@@ -73,7 +72,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-----------------|---------------------|
 | 1,000          | 10,000,000      | 1                   |
 
-[4]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
+[7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart
 [3]: https://cloud.google.com/pubsub/docs/access-control#roles

@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from your OTel collector through HTTP or gRPC. Select and set up this source when you set up a pipeline. The information below is configured in the pipelines UI.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline. The information below is configured in the pipelines UI.
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ The Worker exposes the HTTP endpoint on port 4317. This is an example of configu
 
 ### gRPC configuration example
 
-The Worker exposes the gRPC endpoint on port 4138. This is an example of configuring your OTel exporters with gRPC:
+The Worker exposes the gRPC endpoint on port 4318. This is an example of configuring your OTel exporters with gRPC:
 
 ```python
     from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
