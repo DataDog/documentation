@@ -147,7 +147,7 @@ Example snippet from datadog-values.yaml configuration file:
     enabled: true
     privilegedMode: true        # Only for advanced SP metrics
     configureCgroupPerms: true  # Only for GKE 
-    runtimeClassName: ""        # Only for Oracle Cloud
+    runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
 ```
 3. Restart the Agent
 {{% /tab %}}
