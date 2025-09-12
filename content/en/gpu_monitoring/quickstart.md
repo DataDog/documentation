@@ -183,7 +183,7 @@ datadog:
     enabled: true
     privilegedMode: true        # Only for advanced SP metrics
     configureCgroupPerms: true  # Only for GKE 
-    runtimeClassName: ""        # Only for Oracle Cloud
+    runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
 
 agents:
   affinity:
