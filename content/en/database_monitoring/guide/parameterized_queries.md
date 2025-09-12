@@ -1,5 +1,5 @@
 ---
-title: Configuring Query Capture with Parameter Values in Database Monitoring
+title: Capturing SQL Query Parameter Values With Database Monitoring
 private: true
 further_reading:
 - link: "/database_monitoring/"
@@ -13,7 +13,9 @@ further_reading:
   text: "Troubleshooting Database Monitoring"
 ---
 
-<div class="alert alert-info">This feature is currently in preview, and processing of raw SQL query text and explain plans must be turned on on a per-org basis. Rule Based Access Controls are forthcoming to bring this feature to GA. In the meantime, please reach out to DBM to access this preview</div>
+<div class="alert alert-info">
+This feature is in preview. To enable collection of raw SQL query text and execution plans with parameter values, please contact your Datadog representative or support. Role-based access controls are planned for GA.
+</div>
 
 The Database Monitoring integrations collect aggregated query metrics, in-flight query executions, and query explain plans across your database. By default, query SQL texts and explain plans are obfuscated and normalized in the Agent before being sent to Datadog in order to protect sensitive data, which may be exposed in query parameters.
 
@@ -40,12 +42,26 @@ Supported deployments
 : All deployment types.
 
 ## Setup
-To collect SQL query text and explain plans with parameter values, enable `collect_raw_query_statement` in `conf.yaml`.
+To capture SQL query text and execution plans with parameter values, update the appropriate integration `conf.yaml` file based on your database type:
+- For PostgreSQL: edit `postgres.d/conf.yaml`
+- For SQL Server: edit `sqlserver.d/conf.yaml`
 
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
+
+For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture via Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up.
+
+```yaml
+  xe_collection:
+    query_completions:
+      enabled: true
+    query_errors:
+      enabled: true
+```
+
+Prepared statement support is currently available only for SQL Server. For more details, see [Why prepared statement parameter values are limited](#why-prepared-statement-parameter-values-are-limited).
 
 ## Query parameter value capture by DBMS type
 
@@ -53,33 +69,26 @@ To collect SQL query text and explain plans with parameter values, enable `colle
 
 | Query Execution Method | Support | Description | Example | Supported Agent Version |
 |------------|---------|-------------|---------|---------------|
-| Direct Execution | {{< X >}} | Ad-hoc SQL statements executed directly, including literal values in the query text. | `SELECT * FROM users WHERE id = 123` | 7.64.0+ |
-| Prepared Statements | {{< X >}} | Parameterized queries executed through prepared statements. Can be created explicitly or through drivers. | `PREPARE stmt AS SELECT * FROM users WHERE id = $1; EXECUTE stmt(123);` | 7.64.0+ |
-| Functions | {{< X >}} | Functions invoked with SELECT. | `SELECT get_user_name(123);` | 7.64.0+ |
-| Stored Procedures | | Procedures invoked with CALL. Parameters are substituted at the call boundary, and only the inner SQL statements are visible in system views. | `CALL procname(123)` |  |
+| Direct Executions | {{< X >}} | Ad-hoc SQL statements executed directly, including literal values in the query text. | `SELECT * FROM users WHERE id = 123` | 7.64.0+ |
+| Functions | {{< X >}} | Scalar or table-valued functions invoked with SELECT. | `SELECT get_user_name(123);` | 7.64.0+ |
+| Stored Procedures | {{< X >}} | Procedures invoked with CALL. | `CALL procname(123)` | 7.64.0+ |
+| Prepared Statements |  | Not currently supported. See [Why prepared statement parameter values are limited](#why-prepared-statement-parameter-values-are-limited). Parameterized queries executed through prepared statements. Can be created explicitly or through drivers. | `PREPARE stmt AS SELECT * FROM users WHERE id = $1; EXECUTE stmt(123);` | |
 
 ### SQL Server
 
 | Query Execution Method | Support | Description | Example | Agent Version |
 |------------|---------|-------------|---------|---------------|
-| Direct Execution | {{< X >}} | Ad-hoc SQL statements executed directly, including literal values in the query text. | `SELECT * FROM users WHERE id = 123` | 7.64.0+ |
-| Prepared Statements | {{< X >}} | Parameterized queries executed through prepared statements. Can be created explicitly or through drivers. | `sp_prepare @handle, N'SELECT * FROM users WHERE id = @id'; sp_execute @handle, @id = 123;` | 7.64.0+ |
-| Functions | {{< X >}} | Invoked with SELECT. The outer call (with parameter values) is visible in system views; inner SQL statements inside the function body are not. | SELECT dbo.GetUserName(123); | 7.64.0+ |
-| Stored Procedures | {{< X >}} * | Procedures invoked with EXEC. Parameters can be passed as named or positional arguments. The procedure body executes with substituted values, so only the inner statements are captured by default. | `EXEC GetUser @id = 123` | 7.67.0+ |
+| Direct Executions | {{< X >}} | Ad-hoc SQL statements executed directly, including literal values in the query text. | `SELECT * FROM users WHERE id = 123` | 7.64.0+
+| Functions | {{< X >}} | Scalar or table-valued functions invoked with SELECT. | `SELECT dbo.GetUserName(123);` | 7.64.0+ |
+| Stored Procedures | {{< X >}} |  Procedures invoked with EXEC. | `EXEC GetUser @id = 123;` | 7.64.0+ |
+| Prepared Statements | {{< X >}} | Support requires [query completions][1] configuration. Parameterized queries executed through prepared statements. Can be created explicitly or through drivers. | `sp_prepare @handle, N'SELECT * FROM users WHERE id = @id'; sp_execute @handle, @id = 123;` | 7.67.0+ |
 
-\* Requires [query completions][1] configuration
+### Why prepared statement parameter values are limited
+
+Datadog uses activity sampling to capture currently running SQL queries. However, for prepared statements, the Database Management System replaces parameter values with placeholders at execution time. As a result, activity sampling cannot observe the actual values.
+
+To capture prepared statements with parameter values in SQL Server, you must [configure your SQL Server instance and integration to capture query completions][1], which provides the Datadog Agent rich visibility into prepared statement execution.
+
+Support for PostgreSQL prepared statement parameter value capture is not available at this time.
 
 [1]: /database_monitoring/guide/sql_extended_events/
-
-### Why stored procedure parameters are limited
-
-When a stored procedure is invoked, the database engine substitutes parameter values at the call level. The inner SQL statements that run inside the procedure no longer carry those original parameter bindings—they execute as independent statements.
-
-Database Monitoring collects samples from system views at the statement level, which means:
-
-- Inner statements are visible, but their connection to the original procedure parameters is lost
-- The outer procedure call itself (with parameter values) is not captured
-
-This is why stored procedure parameters are not available in PostgreSQL, and only available in SQL Server when query completions are enabled.
-
-In contrast, direct execution and prepared statements retain their parameter values throughout execution, so Database Monitoring can capture and display them.
