@@ -9,10 +9,6 @@ Common scenarios when you might use this destination:
 - For analytics pipelines: Route logs downstream into BigQuery, Data Lake, or custom machine learning workflows.
 - For event-driven processing: Publish logs to a Pub/Sub topic so Google Cloud Functions, Cloud Run functions, and Datadflow jobs can react to them in real time.
 
-## Setup
-
-Set up the Google Pub/Sub destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
-
 ## Prerequisites
 
 Before you configure the destination, you need the following:
@@ -48,7 +44,9 @@ If you are authenticating using a service account:
 	1. Save the downloaded JSON file.
 	1. Place the JSON file under: `DD_OP_DATA_DIR/config`. You reference this file when you [set up the Google Pub/Sub destination](#set-up-the-destination) later on.
 
-### Set up the destination
+## Set up the destination
+
+The information below is configured in the [pipelines UI][1].
 
 1. Enter the destination project name.
 	- This is the GCP project where your Pub/Sub topic lives.
@@ -57,15 +55,18 @@ If you are authenticating using a service account:
 1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in **JSON** or **Raw message**.
 	- **JSON**: Logs are structured as JSON (recommended if downstream tools need structured data).
 	- **Raw**: Logs are sent as raw strings (preserves the original format).
-1. If you have a credentials JSON file, enter the path to your credentials JSON file. 
+1. If you have a credentials JSON file, enter the path to your credentials JSON file.
 	- If you using a service account JSON: enter the path `DD_OP_DATA_DIR/config/<your-service-account>.json`.
 	- Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 	- If you're using [workload identity][7] on GKE, credentials are automatically managed.
-1. (Optional) Toggle the switch to enable **TLS**. If you enable TLS, the following certificate and key files are required.
+
+### Optional settings
+
+- Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
 	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
 	- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 	- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. (Optional) Toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access to the Preview.
+- Toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access to the Preview.
 	- If disabled (default): Up to 500 events are buffered before flush.
 	- If enabled:
 		1. Select the buffer type you want to set.
@@ -73,6 +74,8 @@ If you are authenticating using a service account:
 			- **Buffer size**: Durable, survives restarts
 		1. Enter the buffer size and select the unit.
 			- Maximum capacity in MB or GB.
+
+{{< img src="observability_pipelines/destinations/google_pubsub.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
 ### (Optional) Alternative endpoints
 
