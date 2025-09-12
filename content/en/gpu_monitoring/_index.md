@@ -23,7 +23,7 @@ Users can understand their current device availability and forecast how many dev
 {{< img src="gpu_monitoring/device_allocation.png" alt="Improve operational fleet efficiency by understanding device distribution and allocation over time." style="width:100%;" >}}
 
 ### Identify & eliminate wasted, idle GPU costs: 
-Users can identify total and spend on GPU infrastructure and attribute those costs to specific workloads and instances. Directly correlted GPU usage to related pods or processes.
+Users can identify total and spend on GPU infrastructure and attribute those costs to specific workloads and instances and directly correlate GPU usage to related pods or processes.
 
 {{< img src="gpu_monitoring/fleet_costs.png" alt="Understand and attribute total or idle costs on GPU infrastructure." style="width:100%;" >}}
 
