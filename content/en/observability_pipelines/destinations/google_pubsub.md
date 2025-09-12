@@ -77,11 +77,11 @@ The information below is configured in the [pipelines UI][1].
 
 {{< img src="observability_pipelines/destinations/google_pubsub.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### (Optional) Alternative endpoints
+### Optional alternative Pub/Sub endpoints
 
 By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
 
-If your Pub/Sub topi is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][5] for more information.
+If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][5] for more information.
 
 Stored as the environment variable: `DD_OP_DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
 
