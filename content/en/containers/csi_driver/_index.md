@@ -34,9 +34,7 @@ If CSI volumes are not used, the UDS sockets need to be shared with the user pod
 
 The Datadog CSI Driver shifts the hostpath volume from the user application to the CSI node server: the CSI DaemonSet runs in a separate privileged namespace and allows injecting UDS sockets into user pods with a Datadog CSI volume, which allows user pods to run in namespaces with `baseline` or `restricted` pod security standards.
 
-## Installation
-
-You can install the Datadog CSI Driver by using a public Helm chart.
+## Installation and Activation
 
 <div class="alert alert-info">
 <strong>Notes</strong>:
@@ -46,6 +44,28 @@ You can install the Datadog CSI Driver by using a public Helm chart.
 </ul>
 </div>
 
+Datadog CSI Driver has its own helm chart that may or may not be required to install manually depending on the Datadog Agent mode used.
+
+{{< tabs >}}
+
+{{% tab "Helm" %}}
+
+If Datadog Agent is deployed using Helm, the CSI driver is installed automatically if Datadog CSI is enabled in Datadog Agent. 
+
+CSI can be enabled during installation by setting `datadog.csi.enabled` to `true` in the Datadog Agent chart.
+
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+
+   helm install datadog-agent datadog/datadog --set datadog.csi.enabled=true
+   ```
+
+{{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+
+To use Datadog CSI Driver with an operator-based installation of Datadog Agent, Datadog CSI Driver has to be installed manually before activating it in the agent.
 
 1. **Add the Datadog CSI Helm repository.**
 
@@ -53,9 +73,10 @@ You can install the Datadog CSI Driver by using a public Helm chart.
    ```shell
    helm repo add datadog-csi-driver https://helm.datadoghq.com
    helm repo update
+
    ```
 
-2. **Deploy the Datadog CSI Driver.**
+2. **Install Datadog CSI Driver**
 
    Run:
 
@@ -63,11 +84,40 @@ You can install the Datadog CSI Driver by using a public Helm chart.
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
 
-## Datadog CSI volumes
+3. **Activate CSI in Datadog Agent**
 
-<div class="alert alert-info">
-With Datadog Agent v7.67+, the Admission Controller can automatically mount Datadog UDS sockets to mutated pods by setting the injection config mode to <code>csi</code>. For more information, see <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">Admission Controller: Configure APM and DogStatsD Communication Mode</a>.
-</div>
+  ```
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+      csi:
+        enabled: true
+  ```
+
+{{% /tab %}}
+
+{{% tab "Daemonset" %}}
+
+If the Datadog Agent is installed manually as Daemonset, Datadog CSI Driver has to be installed manually before activating it in the agent.
+
+CSI driver can be activated in the Datadog Agent by setting the following environment variable in the Datadog Cluster Agent container.
+
+```
+DD_CSI_DRIVER_ENABLED=true
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+## Datadog CSI volumes
 
 CSI volumes processed by the Datadog CSI Driver must have the following format:
 
@@ -177,6 +227,12 @@ csi:
         type: DSDSocketDirectory
 name: datadog
 ```
+
+<div class="alert alert-info">
+With Datadog Agent v7.67+, the Admission Controller can automatically mount Datadog UDS sockets to mutated pods by setting the injection config mode to <code>csi</code>. For more information, see <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">Admission Controller: Configure APM and DogStatsD Communication Mode</a>.
+
+<strong>Note:</strong>With the default configuration of the Datadog Agent, the Admission Controller injects `APMSocketDirectory` or `DSDSocketDirectory`. If the Trace Agent and DogStatsD sockets are both in the same directory on the host, only one volume will be injected because this will subsequently provide access to both sockets as they share the same directory on the host.
+</div>
 
 ## Security considerations
 
