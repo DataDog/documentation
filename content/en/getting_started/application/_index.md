@@ -32,17 +32,6 @@ The Datadog site navigation varies based on the width of your browser. You can h
 
 ## Infrastructure
 
-<!-- 
-Read through getting-started page for each indv topic? Then:
-
-Explain the value proposition
-List key capabilities
-Link to relevant page in the app
-Link to relevant getting started documentation for the feature
-
-Review each section with the owning writer
- -->
-
 The [infrastructure list][7] serves as a central view of all your infrastructure resources (hosts, containers, processes, etc.) and their associated metadata. 
 
 **Key capabilities:**
