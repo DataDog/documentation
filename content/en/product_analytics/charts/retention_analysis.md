@@ -41,7 +41,7 @@ For each cohort and return period, `Return on or after` calculates the percentag
 
 `Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
-## Weighted average cohort
+## Calculating retention events 
 ### What is a weighted average cohort
 The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average.
 
@@ -70,7 +70,7 @@ This means each cohort's retention rate is scaled by its number of users before 
 <strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated.
 </div>
 
-## Retention grouping
+## Grouping retention events
 Use the `group by` function to break down retention based on events’ attributes. This is helpful is you want to, for example, see how retention compares across user countries. The `group by` function is applied to the **start event**.
 
 Note the following limits when grouping retentions: 
