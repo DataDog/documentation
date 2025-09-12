@@ -4,6 +4,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
 ---
+
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring/" >}}
 GPU Monitoring is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}} 
