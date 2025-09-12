@@ -1989,9 +1989,10 @@ public class MyJavaClass {
 
 ## Span processing
 
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
+
 {{< tabs >}}
 {{% tab "Python" %}}
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
 
 ### Example
 
@@ -2041,6 +2042,89 @@ def call_openai():
         # make call to openai
         ...
 {{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+from typing import Optional
+
+def filter_processor(span: LLMObsSpan) -> Optional[LLMObsSpan]:
+    # Skip spans that are marked as internal or contain sensitive data
+    if span.get_tag("internal") == "true" or span.get_tag("sensitive") == "true":
+        return None  # This span will not be emitted
+
+    # Process and return the span normally
+    return span
+
+LLMObs.register_processor(filter_processor)
+
+# This span will be filtered out and not sent to Datadog
+with LLMObs.workflow("internal_workflow"):
+    LLMObs.annotate(tags={"internal": "true"})
+    # ... workflow logic
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+### Example
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function redactProcessor(span) {
+  if (span.getTag("no_output") === "true") {
+    for (const message of span.output) {
+      message.content = ""
+    }
+  }
+  return span
+}
+
+llmobs.registerProcessor(redactProcessor)
+{{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function filterProcessor(span) {
+  // Skip spans that are marked as internal or contain sensitive data
+  if (span.getTag("internal") === "true" || span.getTag("sensitive") === "true") {
+    return null  // This span will not be emitted
+  }
+
+  // Process and return the span normally
+  return span
+}
+
+llmobs.registerProcessor(filterProcessor)
+
+// This span will be filtered out and not sent to Datadog
+function internalWorkflow() {
+  return llmobs.trace({ kind: 'workflow', name: 'internalWorkflow' }, (span) => {
+    llmobs.annotate({ tags: { internal: "true" } })
+    // ... workflow logic
+  })
+}
+{{< /code-block >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
