@@ -395,7 +395,7 @@ Create a project. If there is an existing project with the same name, the API re
 
 {{% collapse-content title="PATCH /api/v1/llm-obs/v1/projects/{project_id}" level="h4" expanded=false id="api-projects-patch" %}}
 
-Update a project.
+Partially update a project object. Specify the fields to update in the payload.
 
 **Request**
 
@@ -554,7 +554,7 @@ Appends records for a given dataset.
 
 {{% collapse-content title="PATCH /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}" level="h4" expanded=false id="api-datasets-patch" %}}
 
-Update a dataset.
+Partially update a dataset object. Specify the fields to update in the payload.
 
 **Request**
 
@@ -579,7 +579,7 @@ Update a dataset.
 
 {{% collapse-content title="PATCH /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-update-records" %}}
 
-Update one or more dataset records.
+Partially update a one or more dataset record objects. Specify the fields to update in the payload.
 
 **Request**
 
@@ -711,7 +711,7 @@ Create an experiment. If there is an existing experiment with the same name, the
 
 {{% collapse-content title="PATCH /api/v1/llm-obs/v1/experiments/{experiment_id}" level="h4" expanded=false id="api-experiments-patch" %}}
 
-Update an experiment.
+Partially update an experiment object. Specify the fields to update in the payload.
 
 **Request**
 
