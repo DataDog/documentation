@@ -494,8 +494,8 @@ To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm(
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
-<br/>The name of the model provider.
-<br />**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
+<br />The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `model_provider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `session_id`
 : optional - _string_
