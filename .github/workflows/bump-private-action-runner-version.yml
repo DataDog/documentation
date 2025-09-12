@@ -1,6 +1,6 @@
 on:
   schedule:
-    # At 08:00 on every day-of-week from Monday through Friday.
+    # At 07:00 on every day-of-week from Monday through Friday.
     - cron: "0 7 * * 1-5"
   workflow_dispatch: # allows manual trigger
 
@@ -10,7 +10,7 @@ jobs:
       contents: write # for git push
       id-token: write # Needed to federate tokens.
     runs-on: ubuntu-latest
-    name: Find latest version
+    name: Find latest private action runner version
     steps:
       - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
         id: octo-sts
