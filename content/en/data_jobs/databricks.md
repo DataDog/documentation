@@ -284,7 +284,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{% /tab %}}
 
-{{% tab "Add to a cluster policy" %}}
+{{% tab "Configure on a cluster policy" %}}
 
 1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
    ```shell
@@ -308,15 +308,15 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 ### Setup required environment variables 
 
-Each of the following environment variables should be added to the cluster policy.
+Each of the following environment variables must be added to the cluster policy.
 
-| Key                  | Value                 |
-|----------------------|-----------------------|
-| DD_API_KEY           | <YOUR API KEY>        |
-| DD_SITE              | <YOUR DATADOG SITE>   |
-| DATABRICKS_WORKSPACE | <YOUR WORKSPACE NAME> |
+| Key                  | Description                  |
+|----------------------|------------------------------|
+| DD_API_KEY           | Your [Datadog API key][1].   |
+| DD_SITE              | Your [Datadog site][2].      |
+| DATABRICKS_WORKSPACE | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |
 
-This can be done by following these steps for each key-value pair:
+This can be done by following these steps for each variable:
 
 1. Click **Add Definition** under the **Definition** section.
 2. In the **Field** dropdown that appears, select **spark_env_vars**
