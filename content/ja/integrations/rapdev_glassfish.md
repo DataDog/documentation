@@ -21,7 +21,7 @@ assets:
     source_type_id: 10424
     source_type_name: RapDev Glassfish
   monitors:
-    Glassfish Virtual Server State: assets/monitors/virtual_server_state.json
+    Glassfish Virtual Server is Off: assets/monitors/virtual_server_state.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,7 +31,7 @@ author:
 categories:
 - マーケットプレイス
 - 開発ツール
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -115,4 +115,4 @@ GlassFish は、Jakarta EE の Eclipse 実装 (旧 Oracle のリファレンス�
 [6]: mailto:support@rapdev.io
 [7]: mailto:sales@rapdev.io
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-glassfish" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-glassfish" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

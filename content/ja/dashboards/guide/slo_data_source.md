@@ -1,10 +1,19 @@
 ---
-disable_toc: false
+further_reading:
+- link: /service_management/service_level_objectives/
+  tag: ドキュメント
+  text: サービス レベル目標について
+- link: /dashboards/widgets/slo
+  tag: ドキュメント
+  text: SLO ウィジェット
+- link: /dashboards/widgets/slo_list
+  tag: ドキュメント
+  text: SLO リストウィジェット
 title: ダッシュボードで SLO 履歴データをグラフ化する
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  SLO データソースは公開ベータ版です。この機能は、<strong>メトリクスベース</strong>および<strong>タイムスライス</strong>の SLO に対応しています。
+  SLO データソースは、<strong>メトリクスベース</strong>および<strong>タイムスライス</strong>の SLO に対応しています。
 {{< /callout >}}
 
 ## 概要
@@ -40,6 +49,9 @@ Timeseries ウィジェットで SLO データソースの測定値を使用す�
 
 {{< img src="dashboards/guide/slo_data_type/slo-data-source-correction.mp4" alt="グラフエディターの構成で SLO のデータタイプが選択され、測定値として良好イベントが選択されている" video="true" style="width:100%;" >}}
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/sharing/scheduled_reports/
 [2]: /ja/service_management/service_level_objectives/#slo-status-corrections

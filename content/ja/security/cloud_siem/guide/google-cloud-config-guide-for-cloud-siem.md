@@ -3,10 +3,10 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Cloud SIEM のデフォルト検出ルールの確認
-- link: /security/cloud_siem/investigate_security_signals
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentation
   text: セキュリティシグナルエクスプローラーについて学ぶ
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
   tag: Documentation
   text: 新しい検出ルールの作成
 - link: /integrations/google_cloud_platform/#log-collection
