@@ -1,4 +1,50 @@
 {
+  "ListDatastores": {
+    "description": "Lists all datastores for the organization.",
+    "summary": "List datastores"
+  },
+  "CreateDatastore": {
+    "description": "Creates a new datastore.",
+    "summary": "Create datastore",
+    "request_description": "",
+    "request_schema_description": "Request to create a new datastore with specified configuration and metadata."
+  },
+  "DeleteDatastore": {
+    "description": "Deletes a datastore by its unique identifier.",
+    "summary": "Delete datastore"
+  },
+  "GetDatastore": {
+    "description": "Retrieves a specific datastore by its ID.",
+    "summary": "Get datastore"
+  },
+  "UpdateDatastore": {
+    "description": "Updates an existing datastore's attributes.",
+    "summary": "Update datastore",
+    "request_description": "",
+    "request_schema_description": "Request to update a datastore's configuration such as its name or description."
+  },
+  "DeleteDatastoreItem": {
+    "description": "Deletes an item from a datastore by its key.",
+    "summary": "Delete datastore item",
+    "request_description": "",
+    "request_schema_description": "Request to delete a specific item from a datastore by its primary key."
+  },
+  "ListDatastoreItems": {
+    "description": "Lists items from a datastore. You can filter the results by specifying either an item key or a filter query parameter, but not both at the same time. Supports server-side pagination for large datasets.",
+    "summary": "List datastore items"
+  },
+  "UpdateDatastoreItem": {
+    "description": "Partially updates an item in a datastore by its key.",
+    "summary": "Update datastore item",
+    "request_description": "",
+    "request_schema_description": "Request to update specific fields on an existing datastore item."
+  },
+  "BulkWriteDatastoreItems": {
+    "description": "Creates or replaces multiple items in a datastore by their keys in a single operation.",
+    "summary": "Bulk write datastore items",
+    "request_description": "",
+    "request_schema_description": "Request to insert multiple items into a datastore in a single operation."
+  },
   "ListAppKeyRegistrations": {
     "description": "List App Key Registrations",
     "summary": "List App Key Registrations"
@@ -372,7 +418,7 @@
     "summary": "Get a list of entity relations"
   },
   "CreateCIAppPipelineEvent": {
-    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
+    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nMultiple events can be sent in an array (up to 1000).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
     "request_description": "",
     "request_schema_description": "Request object."
@@ -764,6 +810,30 @@
     "summary": "Create an incident",
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
+  },
+  "ListIncidentNotificationRules": {
+    "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
+    "summary": "List incident notification rules"
+  },
+  "CreateIncidentNotificationRule": {
+    "description": "Creates a new notification rule.",
+    "summary": "Create an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification rule."
+  },
+  "DeleteIncidentNotificationRule": {
+    "description": "Deletes a notification rule by its ID.",
+    "summary": "Delete an incident notification rule"
+  },
+  "GetIncidentNotificationRule": {
+    "description": "Retrieves a specific notification rule by its ID.",
+    "summary": "Get an incident notification rule"
+  },
+  "UpdateIncidentNotificationRule": {
+    "description": "Updates an existing notification rule with a complete replacement.",
+    "summary": "Update an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Put request for a notification rule."
   },
   "ListIncidentNotificationTemplates": {
     "description": "Lists all notification templates. Optionally filter by incident type.",

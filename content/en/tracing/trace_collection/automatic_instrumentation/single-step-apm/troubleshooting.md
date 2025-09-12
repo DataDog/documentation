@@ -17,7 +17,7 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 ### Troubleshoot injection in Datadog Fleet Automation
 
 {{< callout btn_hidden="true" header="false">}}
-Instrumentation insights in Fleet Automation is available in Preview.
+Troubleshooting in Fleet Automation is available in Preview.
 {{< /callout >}}
 
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
@@ -28,15 +28,15 @@ Using Datadog, you can identify and troubleshoot instrumentation issues across y
 
 #### Prerequisites
 
-Instrumentation insights are available for:
+This functionality is available for:
 
-- **Languages**: Python, Java, Node.js, Ruby, PHP, .NET
+- **Languages**: Python, Java, Node.js, PHP, .NET
 - **Environments**: Linux hosts, containers, Kubernetes
 - Datadog Agent v7.68.2+
 
-#### View instrumentation insights 
+#### View SSI troubleshooting insights 
 
-To access instrumentation insights in Datadog:
+To explore instrumentation troubleshooting data in Datadog:
 
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
