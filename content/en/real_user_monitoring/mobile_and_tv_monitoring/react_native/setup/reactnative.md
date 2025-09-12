@@ -28,7 +28,6 @@ further_reading:
 
 ---
 ## Overview
-
 This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the React Native SDK. The minimum supported version for the React Native SDK is React Native `v0.65+`. Compatibility with older versions is not guaranteed out-of-the-box.
 
 The React Native SDK supports the following services:
