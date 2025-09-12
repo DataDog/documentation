@@ -28,12 +28,17 @@ You must have the `apm_service_catalog_write` permission to create renaming rule
 
 ### Step 1: Select entities to rename
 
-1. In Datadog, navigate to **APM > Settings > Service Renaming** and click **+ Add Rule**.
+1. In Datadog, navigate to **APM > Settings > Service Renaming** and click **+ Add Rule**. 
+
+   Alternatively, navigate to **APM > Software Catalog** and click on a service to open the service side panel. From there, click **Service Page > Service Renaming**.
+
+   {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a particular service, showing the Service Page dropdown menu with a Service Renaming option" style="width:100%;" >}}
+
 1. Use the search bar to select the entities you want to rename.
    1. You can select one or more entities, but all must be of the same type (service, datastore, or queue).
    1. As you select entities, a span query is built in the background. To edit the query, select the code icon to the right of the search bar.
 
-{{< img src="tracing/services/renaming_rules/create-service-rename-rule-search.png" alt="Step 1 in the Create Service Rename Rule UI, prompting the user to filter and select the entities to rename" style="width:100%;" >}}
+   {{< img src="tracing/services/renaming_rules/create-service-rename-rule-search.png" alt="Step 1 in the Create Service Rename Rule UI, prompting the user to filter and select the entities to rename" style="width:100%;" >}}
 
 ### Step 2: Choose a rename method
 
