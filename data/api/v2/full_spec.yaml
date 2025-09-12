@@ -39688,6 +39688,9 @@ components:
     SecurityMonitoringRuleConvertResponse:
       description: Result of the convert rule request containing Terraform content.
       properties:
+        ruleId:
+          description: the ID of the rule.
+          type: string
         terraformContent:
           description: Terraform string as a result of converting the rule from JSON.
           type: string
