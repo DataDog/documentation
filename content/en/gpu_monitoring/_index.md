@@ -4,6 +4,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
 ---
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring/" >}}
+GPU Monitoring is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
+{{< /callout >}} 
 
 ## Overview
 Datadog’s GPU Monitoring provides a centralized view into GPU fleet health, cost and performance, enabling teams to make better provisioning decisions, troubleshoot failed workloads and eliminate idle GPU costs without requiring you to manually set up each vendor tool (like NVIDIA's DCGM). Just by deploying the Datadog Agent, users instantly get advanced insights into their GPU fleet automatically.
