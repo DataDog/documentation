@@ -20,6 +20,18 @@ The `sts:Assumerole` permission error indicates an issue with the trust policy a
 
 **Note**: This error may persist in the Datadog UI for a few hours while the changes propagate.
 
+### Using "Resolve All AWS Permissions Issues" button to fix permission issues
+This button in AWS Integration tile that allows you to use a CloudFormation QuickStart stack to update your IAM role to resolve missing permissions issues. 
+Under the "Issues" tab, when clicked, it launches a CloudFormation stack that calls our public API [endpoint](https://api.datadoghq.com/api/v2/integration/aws/iam_permissions) to fetch the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches them to the integration role. It will also attach the SecurityAudit managed AWS policy if it is not already present.
+
+**Notes**:
+
+* This button will not fix broken authentication issues with the role (where the role name, external ID, or trust policy configuration is not working for Datadog to authenticate to your AWS account). 
+* The CloudFormation template is in our public [repository](https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions).
+* The policies created are named with a `datadog-aws-integration-iam-permissions-` prefix followed by a unique hash, to avoid colliding with any existing policies you have configured.
+* If the button is clicked multiple times, any old policies created with that prefix will be deleted before the new ones are created.
+* Any policies you attached to the role will NOT be impacted.
+
 ## Data discrepancies
 
 ### Discrepancy between your data in CloudWatch and Datadog
