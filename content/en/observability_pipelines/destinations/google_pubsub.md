@@ -5,7 +5,7 @@ disable_toc: false
 
 Use Observability Pipelines' Google Pub/Sub source to pull logs from the Google Cloud Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
 
-Common scenarios of when you might use this destination:
+Common scenarios when you might use this destination:
 - For analytics pipelines: Route logs downstream into BigQuery, Data Lake, or custom machine learning workflows.
 - For event-driven processing: Publish logs to a Pub/Sub topic so Google Cloud Functions, Cloud Run functions, and Datadflow jobs can react to them in real time.
 
