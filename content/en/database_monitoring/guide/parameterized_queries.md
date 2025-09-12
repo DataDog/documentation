@@ -26,12 +26,12 @@ Having access to query parameters enables:
 - **Performance analysis**: Map explain plans to specific parameter values to understand why certain execution plans are chosen
 - **Root cause identification**: Identify which parameter values or query patterns cause performance regressions
 - **Hotspot detection**: Discover problematic parameters (for example, 90% of slow queries caused by `org_id:12345`)
-- **Query optimization**: Run `EXPLAIN ANALYZE` with actual parameters to obtain execution statistics and identify optimization opportunities
+- **Query optimization**: Investigate actual execution plans with real parameters to obtain execution statistics and identify optimization opportunities
 - **Index tuning**: Fine-tune indexes, rewrite queries, or adjust query hints based on real parameter values
 
 ## Before you begin
 
-<div class="alert alert-info">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
 
 You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
 
