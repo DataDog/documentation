@@ -5,12 +5,7 @@ on:
   workflow_dispatch: # allows manual trigger
 
 jobs:
-  reusable_workflow_job:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/labeler@v5
-      
-  fetch-version:
+  private-action-runner-version:
     permissions:
       contents: write # for git push
       id-token: write # Needed to federate tokens.
