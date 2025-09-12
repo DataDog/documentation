@@ -22,7 +22,7 @@ Only views and actions can act as events.
 
 ## Prerequisites
 
-In order for user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
+For user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
 
 ## Measuring retention events
 Product analytics support two types of retention event measurements:
@@ -41,14 +41,13 @@ For each cohort and return period, `Return on or after` calculates the percentag
 
 `Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
-
-## Calculating and grouping retention
-
-### Weighted average cohort calculation
+## Weighted average cohort
+### What is a weighted average cohort
 The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average.
 
 This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval. 
 
+### How to calculate a weighted average cohort
 To compute the value for a specific interval (such as Week 1 in the retention grid), multiply each cohort's value by its size, sum the results, and divide by the total cohort size. The formula is:
 
 ```
@@ -71,8 +70,8 @@ This means each cohort's retention rate is scaled by its number of users before 
 <strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated.
 </div>
 
-### Retention grouping
-Use the `group by` function to break down a retention based on events’ attributes. This is helpful is you want to, for example, see how retention compares across user countries. The `group by` function is applied to the **start event**.
+## Retention grouping
+Use the `group by` function to break down retention based on events’ attributes. This is helpful is you want to, for example, see how retention compares across user countries. The `group by` function is applied to the **start event**.
 
 Note the following limits when grouping retentions: 
 - **Daily retention**: Can be applied for up to a month.
