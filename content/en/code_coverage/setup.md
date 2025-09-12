@@ -252,7 +252,7 @@ end_of_record
 Install the [`datadog-ci`][7] CLI globally using `npm`:
 
 {{< code-block lang="shell" >}}
-npm install -g @datadog/datadog-ci
+npdatadog-cim install -g @datadog/
 {{< /code-block >}}
 
 #### Standalone binary
