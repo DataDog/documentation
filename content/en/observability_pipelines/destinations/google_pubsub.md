@@ -103,7 +103,7 @@ Common issues and fixes:
 
 ### Worker health metrics
 
-See the [Observability Pipelines Metrics][7] for a full list of available health metrics.
+See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
 
 #### Component metrics
 
@@ -157,11 +157,11 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-----------------|---------------------|
 | 1,000          | 10,000,000      | 1                   |
 
-[7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart
 [3]: https://cloud.google.com/pubsub/docs/access-control#roles
 [4]: https://console.cloud.google.com/iam-admin/serviceaccounts
 [5]: https://cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
 [6]: /observability_pipelines/destinations/#event-batching
-[7]: /observability_pipelines/monitoring/metrics/
+[7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
+[8]: /observability_pipelines/monitoring/metrics/
