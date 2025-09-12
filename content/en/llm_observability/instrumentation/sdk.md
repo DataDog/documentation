@@ -1991,7 +1991,7 @@ public class MyJavaClass {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None` to prevent the span from being emitted entirely. See the following examples for usage.
 
 ### Example
 
@@ -2041,6 +2041,32 @@ def call_openai():
         # make call to openai
         ...
 {{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+You can return `None` from a processor function to prevent a span from being emitted to LLM Observability. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+from typing import Optional
+
+def filter_processor(span: LLMObsSpan) -> Optional[LLMObsSpan]:
+    # Skip spans that are marked as internal or contain sensitive data
+    if span.get_tag("internal") == "true" or span.get_tag("sensitive") == "true":
+        return None  # This span will not be emitted
+
+    # Process and return the span normally
+    return span
+
+LLMObs.register_processor(filter_processor)
+
+# This span will be filtered out and not sent to Datadog
+with LLMObs.workflow("internal_workflow"):
+    LLMObs.annotate(tags={"internal": "true"})
+    # ... workflow logic
+{{< /code-block >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
