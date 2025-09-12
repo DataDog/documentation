@@ -31,7 +31,7 @@ Having access to query parameters enables:
 
 ## Before you begin
 
-<div class="alert alert-info">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
 

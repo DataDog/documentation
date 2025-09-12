@@ -179,7 +179,7 @@ To collect query statements with parameter values, enable `collect_raw_query_sta
     enabled: true
 ```
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
@@ -321,7 +321,7 @@ To collect query statements with parameter values, enable `collect_raw_query_sta
     enabled: true
 ```
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
