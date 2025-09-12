@@ -265,7 +265,7 @@ for result in results:
         print(f"Error: {result['error']['message']}")
 ```
 
-## LLM Experiments API
+## HTTP API
 
 ### Postman quickstart
 
