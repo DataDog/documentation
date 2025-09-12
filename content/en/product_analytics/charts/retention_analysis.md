@@ -24,7 +24,7 @@ Only views and actions can act as events.
 
 In order for user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
 
-## Retention types
+## Measuring retention events
 Product analytics support two types of retention event measurements:
 
 {{< img src="product_analytics/retention/pana_retention_measureby.png" alt="The two types of retention measurements available with product analytics" style="width:80%;" >}}
@@ -42,7 +42,7 @@ For each cohort and return period, `Return on or after` calculates the percentag
 `Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
 
-## Retention calculation and grouping 
+## Calculating and grouping retention
 
 ### Weighted average cohort calculation
 The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average.
@@ -71,8 +71,13 @@ This means each cohort's retention rate is scaled by its number of users before 
 <strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated.
 </div>
 
-### Grouping
-You scope retention based on event attributes. The `group by` function is applied to the **start event**. This is helpful is you want to, for example, see how retention compares across user countries. 
+### Retention grouping
+Use the `group by` function to break down a retention based on events’ attributes. This is helpful is you want to, for example, see how retention compares across user countries. The `group by` function is applied to the **start event**.
+
+Note the following limits when grouping retentions: 
+- **Daily retention**: Can be applied for up to a month.
+- **Weekly retention**: Can be applied for up to a year.
+- **Monthly retention**: Can be applied for up to 16 months.
 
 
 ## Build a graph
