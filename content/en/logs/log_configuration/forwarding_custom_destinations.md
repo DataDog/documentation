@@ -102,6 +102,32 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 {{% /tab %}}
 
+{{% tab "Google SecOps (Chronicle)" %}}
+
+<div class="alert alert-info">
+<b>Preview available</b>: You can send logs to Google SecOps (Chronicle) from Datadog  <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-google-chronicle/">Register for the Preview</a>.
+</div>
+
+7. Enter a name for the destination.
+8. Authentication for the Google Chronicle Forwarder requires using a GCP Service Account with Chronicle write access.
+9. In the **Configure Destination** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Customer ID** | The Chronicle customer ID provided by Google. | `abcd1234`   |
+| **Regional Endpoint**           | The Chronicle ingestion API endpoint URL based on your region.  **Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings. | `https://us.chronicle.googleapis.com`              |
+| **Namespace**| The namespace in which your Chronicle logs should be ingested.  | `default`                                          |
+
+10. In the **Configure authentication settings** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Project ID**| The GCP project ID associated with the Chronicle instance.  | `my-gcp-chronicle-project`                                          |
+| **Private Key ID**| The ID of the private key from your service account credentials.  | `0123456789abcdef`                                          |
+| **Private Key**| The private key from your service account credentials.  | `-----BEGIN PRIVATE KEY-----\nMIIE...`                                          |
+| **Client Email**| The email address of the service account.  | `chronicle-writer@my-gcp-chronicle-project.iam.gserviceaccount.com`                                          |
+| **Client ID**| The client ID from your service account credentials.  | `123456789012345678901`                                          |
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 10. In the **Select Tags to Forward** section:

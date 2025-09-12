@@ -7,18 +7,20 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentation
   text: Agent または API ベースのインテグレーションの作成について
-- link: /developers/integrations/oauth_for_integrations/
+- link: /developers/integrations/api_integration/
   tag: Documentation
-  text: OAuth を使ったインテグレーションについて
+  text: API ベースのインテグレーションでの OAuth の使用について学ぶ
 title: インテグレーションアセットリファレンス
 ---
 ## 概要
 
 このページでは、[** Integrations** ページ][12]または [**Marketplace** ページ][9]で製品を作成するために入力する必要があるファイルについて説明します。
 
+<div class="alert alert-info">一部のファイルは、Integration Developer Platform を使用して作成されて<em>いない</em>レガシー インテグレーションにのみ適用されます。</div>
+
 ## 構成ファイル
 
-When preparing a new integration, you must include an example configuration that contains the necessary options and reasonable defaults. The example configuration file—which in this case, is located at `<CHECK_NAME>/datadog_checks/<CHECK_NAME>/data/conf.yaml.example`—has two top-level elements: `init_config` and `instances`. 
+新しいインテグレーションを用意する際は、必要なオプションと適正なデフォルトを設定したコンフィギュレーションサンプルを追加する必要があります。この例のサンプルコンフィギュレーションファイルは `<チェック名>/datadog_checks/<チェック名>/data/conf.yaml.example` にあり、`init_config` と `instances` という 2 つのトップレベル要素を持っています。
 
 `init_config` 下のコンフィギュレーションはインテグレーションにグローバルに適用され、インテグレーションのすべてのインスタンスで使用されます。一方、`instances` 内のコンフィギュレーションは特定のインスタンスに適用されます。
 
@@ -61,7 +63,7 @@ When preparing a new integration, you must include an example configuration that
 
 `list` および `object` 変数は複数行にまたがり、特別な規則があります。
 
-- In a `list`, individual elements are not documented with the `@param` specification.
+- `list` の個々の要素は、`@param` 指定を使用して文書化されません。
 - `object` の場合は、`@param` 指定を使用して要素を個別に文書化することも、オブジェクト自体の指定に続けてトップレベルに共通の説明を付けることもできます。
 
 ### オプションパラメーター
@@ -97,7 +99,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 
 `service_checks.json` ファイルの必須属性の完全なリストは、以下の通りです。
 
-| 属性       | 説明                                                                                                                |
+| 属性       | Description                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `agent_version` | サポートされている Agent の最小バージョン。                                                                                           |
 | `integration`   | このサービスチェックを送信するインテグレーションの名前。これは、`manifest.json` にある正規化されていない `tile.title` です。   |
@@ -114,7 +116,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 
 以下に、`metadata.csv` ファイルの必須属性とオプション属性の完全なリストを示します。
 
-| 列名     | 必須またはオプション | 説明                                                                                                                                                                                                                                                                                                                             |
+| 列名     | 必須またはオプション | Description                                                                                                                                                                                                                                                                                                                             |
 | --------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metric_name`   | 必須          | メトリクスの名前。                                                                                                                                                                                                                                                                                                                     |
 | `metric_type`   | 必須          | メトリクスのタイプ。利用可能なメトリクス送信タイプの一覧は、[メトリクスタイプ][6]を参照してください。                                                                                                                                                                                                                                                                                                                |
@@ -124,10 +126,11 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 | `description`   | オプション           | メトリクスの説明。                                                                                                                                                                                                                                                                                                              |
 | `orientation`   | 必須          | `myapp.turnover` のように、大きい方がよいメトリクスの場合は `1` に設定します。メトリクスの変動が特に重要でない場合は `0` に設定します。`myapp.latency` のように、小さい方がよいメトリクスの場合は `-1` に設定します。                                                                                                                                                         |
 | `integration`   | 必須          | メトリクスを送信するインテグレーションの名前。これは、`manifest.json` ファイルにある `tile.title` を正規化した文字列です。文字、アンダースコア、ダッシュ、数字以外の文字はアンダースコアに変換されます。例: `Openstack Controller` -> `openstack_controller`、`ASP.NET` -> `asp_net`、`CRI-o` -> `cri-o`。 |
-| `short_name`    | 必須          | Explicit unique ID for the metric.                                                                                                                                                                                                                                                                                                      |
-| `curated_metric`| オプション           | インテグレーションのためのどのメトリクスが、与えられたタイプで注目すべきかをマークします (`cpu`と`memory`の両方が受け入れられる)。これらは、UI で他のインテグレーションメトリクスの上に表示されます。
+| `short_name`    | 必須          | メトリクス名の人間が読みやすい省略形です。インテグレーション名は繰り返さないでください。例: `postgresql.index_blocks_hit` は `idx blks hit` に短縮してください。                                                                                                                                                                                                                                                                                                     |
+| `curated_metric`| オプション           | インテグレーションのためのどのメトリクスが、与えられたタイプで注目すべきかをマークします (`cpu`と`memory`の両方が受け入れられる)。これらは、UI で他のインテグレーションメトリクスの上に表示されます。 |
+| `sample_tags` | オプション           | メトリクスに関連付けられたサンプル タグの一覧を、スペースなしのカンマで区切って記載します。例: `host,region,deployment`。 |
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

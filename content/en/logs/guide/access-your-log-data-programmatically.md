@@ -443,18 +443,6 @@ The `from` and `to` parameters can be:
 }
 ```
 
-The timezone can be specified both as an offset (for example, "UTC+03:00") or a regional zone (for example, "Europe/Paris"). If both offset and timezone are supplied then the offset takes precedence. The offset must be specified in seconds.
-
-```javascript
-{
-  "options": {
-    "timeOffset": -1000,
-    "timezone": "Europe/Paris"
-  }
-}
-```
-
-
 ### Pagination
 
 To retrieve a log list longer than the `1000` [logs limit](#limit-the-number-of-results-retrieved), use the pagination feature. 

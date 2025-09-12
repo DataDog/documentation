@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "category": "update",
+      "content": "Incident Status Update:\n\nTitle: Sample Incident Title\nNew Status: resolved\nSeverity: SEV-2\nServices: web-service, database-service\nCommander: John Doe\n\nFor more details, visit the incident page.",
+      "name": "Example-Incident",
+      "subject": "Incident Update: Sample Incident Title - resolved"
+    },
+    "id": "00000000-0000-0000-0000-000000000001",
+    "type": "notification_templates"
+  }
+}

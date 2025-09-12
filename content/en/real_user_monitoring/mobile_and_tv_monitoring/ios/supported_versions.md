@@ -64,7 +64,7 @@ We currently support integration of the SDK using the following dependency manag
 | Framework | Automatic | Manual |
 |--------|-------|-------|
 | UIKit | {{< X >}} | {{< X >}} |
-| SwiftUI | | {{< X >}} |
+| SwiftUI | {{< X >}} | {{< X >}} |
 
 ### Network compatibility
 
@@ -73,13 +73,15 @@ We currently support integration of the SDK using the following dependency manag
 | URLSession | {{< X >}} | {{< X >}} |
 | [Alamofire][7] | {{< X >}} | {{< X >}} |
 | [Apollo GraphQL][8] | {{< X >}} | {{< X >}} |
-| SwiftNIO | | | 
+| [SDWebImage][9] | {{< X >}} | {{< X >}} |
+| [OpenAPI Generator][10] | {{< X >}} | {{< X >}} |
+| SwiftNIO | | |
 
 ### Dependencies
 
 The Datadog RUM SDK depends on the following third-party library:
 
-- [PLCrashReporter][9] 1.11.2
+- [PLCrashReporter][11] 1.12.0
 
 ## Further Reading
 
@@ -93,4 +95,6 @@ The Datadog RUM SDK depends on the following third-party library:
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries/#alamofire
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries/#apollo-graphql
-[9]: https://github.com/microsoft/plcrashreporter
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries#sdwebimage
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries#openapi-generator
+[11]: https://github.com/microsoft/plcrashreporter

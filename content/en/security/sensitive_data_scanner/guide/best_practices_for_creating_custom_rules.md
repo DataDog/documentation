@@ -51,4 +51,4 @@ Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules 
 [2]: /security/sensitive_data_scanner/setup/telemetry_data/#add-scanning-rules
 [3]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [4]: /help/
-[5]: /security/sensitive_data_scanner/setup/telemetry_data/#add-additional-keywords
+[5]: /security/sensitive_data_scanner/setup/telemetry_data/#add-custom-keywords

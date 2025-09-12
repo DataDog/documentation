@@ -102,7 +102,7 @@ Datadog also provides a solution for [instrumenting your Cloud Run applications]
 [4]: /serverless/custom_metrics
 [5]: /serverless/distributed_tracing
 [6]: /serverless/deployment_tracking
-[7]: /infrastructure/serverless/azure_app_services/#overview
+[7]: /serverless/azure_app_service/#overview
 [8]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
 [9]: /integrations/azure/#log-collection
 [10]: /serverless/azure_container_apps

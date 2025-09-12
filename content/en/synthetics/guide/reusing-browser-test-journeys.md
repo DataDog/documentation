@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
       tag: 'Blog'
       text: 'Best practices for creating end-to-end tests'
+    - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+      tag: "Blog"
+      text: "How I helped my client scale their browser tests with Datadog"
 
 ---
 

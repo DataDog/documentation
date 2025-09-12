@@ -26,6 +26,9 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 ## Usage
 
 ### Setup RUM
+
+<div class="alert alert-info">Browser SDK version 6.12 or later is required.</div>
+
 1. Set up [RUM Browser Monitoring][2].
 
 2. Initialize the RUM SDK and configure `profilingSampleRate`, which sets the percentage of sessions that are profiled.
@@ -39,7 +42,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      profilingSampleRate: 100,
+      profilingSampleRate: 25,
       trackLongTasks: true,
       trackUserInteractions: true,
     })

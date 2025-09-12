@@ -379,31 +379,21 @@ For Docs and Links you can also access a specific item with the following syntax
 ```
 {{% /collapse-content %}}
 
-
-
 ### Matching attribute/tag variables
-
-<div class="alert alert-info">Available for
-  <a href="/monitors/types/log/">Log monitors </a>,
-  <a href="/monitors/types/apm/?tab=analytics">Trace Analytics monitors (APM)</a>,
-  <a href="/monitors/types/error_tracking/"> Error Tracking monitors </a>,
-  <a href="/monitors/types/real_user_monitoring/">RUM monitors </a>,
-  <a href="/monitors/types/ci/">CI monitors </a>, and
-  <a href="/monitors/types/database_monitoring/">Database Monitoring monitors</a>.
-</div>
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
 | Monitor type    | Variable syntax                                  |
 |-----------------|--------------------------------------------------|
-| Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
-| Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| Error Tracking  | `{{issue.attributes.key}}`                         |
-| RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
-| Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
-| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
-| CI Test         | `{{citest.attributes.key}}`                      |
-| Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
+| [Log][12]          | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
+| [Trace Analytics][13]  | `{{span.attributes.key}}` or `{{span.tags.key}}` |
+| [Error Tracking][14]   | `{{issue.attributes.key}}`                         |
+| [RUM][15]           | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| [Audit Trail][16]      | `{{audit.attributes.key}}` or `{{audit.message}}`    |
+| [CI Pipeline][17]     | `{{cipipeline.attributes.key}}`                  |
+| [CI Test][18]         | `{{citest.attributes.key}}`                      |
+| [Database Monitoring][19] | `{{databasemonitoring.attributes.key}}`      |
+|[Synthetic Monitoring][20] | `{{synthetics.attributes.key}}`      |
 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
@@ -423,9 +413,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
   {{ event.tags.[dot.key.test] }}
   ```
 
-
 {{% /collapse-content %}}
-
 
 #### Important notes
 
@@ -715,3 +703,12 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [9]: /monitors/types/error_tracking/
 [10]: /software_catalog/service_definitions/
 [11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml
+[12]: /monitors/types/log/
+[13]: /monitors/types/apm/?tab=analytics
+[14]: /monitors/types/error_tracking/
+[15]: /monitors/types/real_user_monitoring/
+[16]: /monitors/types/audit_trail/
+[17]: /monitors/types/ci/?tab=tests
+[18]: /monitors/types/ci/?tab=pipelines
+[19]: /monitors/types/database_monitoring/
+[20]: /synthetics/notifications/template_variables/

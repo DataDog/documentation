@@ -159,7 +159,7 @@ Deploy the changes to your application. After your deployment is live, Datadog c
 
 ### Step 5 - Upload source maps (optional but recommended)
 
-Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][30].
+Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][29].
 
 ### Step 6 - Visualize your data
 

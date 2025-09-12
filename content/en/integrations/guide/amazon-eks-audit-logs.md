@@ -76,10 +76,10 @@ To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /security/cloud_siem/detection_rules/
+[8]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [9]: /getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
 [11]: /security/default_rules/#cat-cloud-siem
 [12]: /security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /security/cloud_siem/detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method

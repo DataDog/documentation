@@ -7,6 +7,9 @@ further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
+- link: "/opentelemetry/correlate/logs_and_traces/"
+  tag: "Documentation"
+  text: "Correlate OpenTelemetry Traces and Logs"
 ---
 
 <div class="alert alert-info">
@@ -136,12 +139,12 @@ Resource attributes:
      -> kube_app_instance: Str(opentelemetry-collector)
      -> k8s.pod.start_time: Str(2023-11-20T12:53:23Z)
 ScopeLogs #0
-ScopeLogs SchemaURL: 
-InstrumentationScope  
+ScopeLogs SchemaURL:
+InstrumentationScope
 LogRecord #0
 ObservedTimestamp: 2023-11-20 13:02:04.332021519 +0000 UTC
 Timestamp: 2023-11-20 13:01:46.095736502 +0000 UTC
-SeverityText: 
+SeverityText:
 SeverityNumber: Unspecified(0)
 Body: Str( return wrapped_send(self, request, **kwargs))
 Attributes:
@@ -149,10 +152,14 @@ Attributes:
      -> time: Str(2023-11-20T13:01:46.095736502Z)
      -> logtag: Str(F)
      -> log.iostream: Str(stderr)
-Trace ID: 
-Span ID: 
+Trace ID:
+Span ID:
 Flags: 0
 ```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver

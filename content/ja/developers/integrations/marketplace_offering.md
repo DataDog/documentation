@@ -9,13 +9,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: ブログ
   text: Datadog Marketplace で監視範囲を拡大する
-- link: /developers/integrations/create_a_tile
+- link: /developers/integrations/
   tag: Documentation
-  text: タイルの作成
+  text: Create an integration
 - link: /developers/integrations/agent_integration
   tag: Documentation
   text: Agent ベースのインテグレーションの作成
-title: マーケットプレイス製品の構築
+title: マーケットプレイスのオファリングを構築
 type: documentation
 ---
 ## 概要
@@ -80,7 +80,7 @@ Datadog Marketplace に製品を出品する前に、まず [Datadog パート�
 
 ## 詳細はこちら
 
-API ベースのインテグレーション、ソフトウェアライセンス、またはプロフェッショナルサービスの作成を開始するには、[タイルの作成][13]を参照してください。Agent ベースのインテグレーションを作成し、Datadog Marketplace で販売することに興味がある場合は、[Agent ベースのインテグレーションを作成する][19]を参照してください。
+インテグレーションの作成を開始するには、[Datadog でインテグレーションを構築する][13] を参照してください。
 
 ## その他の参考資料
 
@@ -97,7 +97,7 @@ API ベースのインテグレーション、ソフトウェアライセンス�
 [10]: https://chat.datadoghq.com/
 [11]: https://docs.datadoghq.com/ja/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
-[13]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
+[13]: /ja/developers/integrations/build_integration/
 [15]: https://docs.datadoghq.com/ja/developers/integrations/api_integration
 [19]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration
 [20]: https://www.dashcon.io/

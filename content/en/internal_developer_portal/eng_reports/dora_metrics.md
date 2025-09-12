@@ -30,7 +30,7 @@ Access the DORA Metrics report by searching for "Engineering Reports" (or clicki
 
 ### Adjust your view
 
-By default, the Scorecards Performance report breaks down data by service, which allows you to quickly understand DORA metrics performance across all your services.
+By default, the Scorecards Performance report breaks down data by service, which allows you to understand DORA metrics performance across all your services.
 
 You can update your DORA Metrics report view in the following ways:
 

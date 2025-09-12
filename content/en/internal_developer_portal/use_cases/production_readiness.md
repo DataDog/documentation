@@ -15,16 +15,16 @@ further_reading:
     text: "Cloud Cost Management"
 ---
 
-With Software Catalog, you can ensure your services are production-ready by evaluating monitoring coverage, enforcing governance best practices, and identifying security and cost optimization opportunities.
+With Software Catalog, you can ensure your entities are production-ready by evaluating monitoring coverage, enforcing governance best practices, and identifying security and cost optimization opportunities.
 
 ## Evaluate monitoring coverage
 
 With Software Catalog, you can: 
-- Identify services that lack monitoring or observability data.
-- Detect gaps such as missing SLOs or monitors, or unowned services.
+- Identify entities that lack monitoring or observability data.
+- Detect gaps such as missing SLOs or monitors, or unowned entities.
 - Enforce tagging best practices and verify configurations for enabling cross-telemetry insights.
 
-In [Software Catalog][3], click on a service to open a detailed side panel, and find the Setup Guidance tab. In this section, you can check whether your service has the necessary setup to leverage Datadog features like Monitors, SLOs, and Error Tracking. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
+In [Software Catalog][3], click on an entity to open a detailed side panel, and find the Setup Guidance tab. In this section, you can check whether your service has the necessary setup to leverage Datadog features like Monitors, SLOs, and Error Tracking. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
 
 {{< img src="tracing/software_catalog/production-readiness-setup-guidance.png" alt="The Setup Guidance tab for a service, which shows the configuration completeness of that service and recommended setup steps " style="width:100%;" >}}
 
@@ -34,7 +34,7 @@ In [Software Catalog][3], click on a service to open a detailed side panel, and 
 
 ### Use Scorecards to track health and performance
 
-[Scorecards][1] provide a high-level view of best practices across teams and services, helping you communicate effectively and take informed action to improve service health and performance. Services with defined metadata in Software Catalog are automatically evaluated against pass-fail criteria for Production Readiness, Observability Best Practices, and Ownership & Documentation.
+[Scorecards][1] provide a high-level view of best practices across teams and services, helping you communicate effectively and take informed action to improve service health and performance. Entities with defined metadata in Software Catalog are automatically evaluated against pass-fail criteria for Production Readiness, Observability Best Practices, and Ownership & Documentation.
 
 {{< img src="tracing/software_catalog/production-readiness-governance-and-obs.png" alt="Default scorecards for Production Readiness, Observability Best Practices, and Ownership and Documentation, with percent scores for each" style="width:100%;" >}}
 

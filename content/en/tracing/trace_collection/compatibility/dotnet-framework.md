@@ -72,7 +72,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
 | Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                    | `CosmosDb`           |
+| Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                           | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |

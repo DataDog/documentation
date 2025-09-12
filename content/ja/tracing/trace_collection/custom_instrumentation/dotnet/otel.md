@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - C#
+  - APM
 aliases:
 - /ja/tracing/trace_collection/otel_instrumentation/dotnet/
 - /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
@@ -20,7 +24,7 @@ type: multi-code-lang
 
 ## セットアップ
 
-Datadog トレースプロバイダーを使用するために OpenTelemetry を構成するには
+OpenTelemetry を Datadog トレースプロバイダーを使用するように構成するには
 
 1. [OpenTelemetry .NET 手動インスツルメンテーションドキュメント][5]に従って、必要な手動 OpenTelemetry インスツルメンテーションを .NET コードに追加してください。**注**: OpenTelemetry SDK を呼び出すように指示されている箇所では、代わりに Datadog トレーシングライブラリを呼び出してください。
 
@@ -115,22 +119,22 @@ catch(Exception e)
 }
 ```
 
-## Adding span events
+## スパン イベントの追加
 
 <div class="alert alert-info">スパン イベントを追加するには SDK バージョン 2.53.0 以上が必要です。</div>
 
 `AddEvent` API を使用してスパン イベントを追加できます。このメソッドには `name` パラメーターで構築した `ActivityEvent` が必須で、オプションで `attributes` と `timestamp` を受け取ります。メソッドは指定されたプロパティを持つ新しいスパン イベントを作成し、対象のスパンに関連付けます。
 
-- **Name** [_required_]: A string representing the event's name.
+- **Name** [_required_]: イベント名を表す文字列。
 - **Timestamp** [_optional_]: イベント発生時刻を表す UNIX タイムスタンプ。`DateTimeOffset` オブジェクトを想定します。
-- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
-  - The key must be a non-empty string.
-  - The value can be either:
-    - A primitive type: string, Boolean, or number.
-    - A homogeneous array of primitive type values (for example, an array of strings).
-  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Attributes** [_optional_]: 以下のプロパティを持つ 0 個以上のキーと値のペア。
+  - キーは空でない文字列である必要があります。
+  - 値として指定できるのは次のいずれかです。
+    - プリミティブ型: string、Boolean、number。
+    - 同一プリミティブ型の要素のみを含む配列 (例: string の配列)。
+  - 入れ子の配列や異なるデータ型を混在させた配列は使用できません。
 
-The following examples demonstrate different ways to add events to a span:
+以下の例は、スパンにイベントを追加するさまざまな方法を示しています。
 
 ```csharp
 var eventTags = new ActivityTagsCollection
@@ -152,7 +156,7 @@ activity.AddEvent(new ActivityEvent("Event With Some Attributes", DateTimeOffset
 
 分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][14]をお読みください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

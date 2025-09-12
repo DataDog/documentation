@@ -191,6 +191,8 @@ You can trigger a workflow from GitHub using the following steps.
 
 <div class="alert alert-info"><strong>Note</strong>: You must install the Datadog App in your Slack workspace to use this feature. For more information, see <a href="/integrations/slack/?tab=datadogforslack#setup">Slack Setup</a>.</div>
 
+<div class="alert alert-info"><strong>Quick start</strong>: Click to create a <a href="https://app.datadoghq.com/workflow/create?source=slack">workflow</a> with a Slack trigger.</div>
+
 You can trigger a workflow from Slack using the following steps.
 
 1. Add a Slack trigger to your workflow:

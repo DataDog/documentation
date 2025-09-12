@@ -1,12 +1,11 @@
 ---
 title: CloudPrem
 description: Learn how to deploy and manage Datadog CloudPrem, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
-private: true
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
-
-## Overview
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 {{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}
 
@@ -14,18 +13,10 @@ Datadog CloudPrem is a self-hosted log management solution that enables cost-eff
 
 ## Get started
 
-{{< whatsnext >}}
-   {{< nextlink href="/cloudprem/installation/" >}}Install CloudPrem and Send Logs with the Agent {{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingress/" >}}Configure CloudPrem Ingress{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/aws_config" >}}Configure AWS{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/processing/" >}}Configure CloudPrem Log Processing{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/cluster/" >}}Learn more about Cluster Sizing and Operations{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/architecture/" >}}Learn more about CloudPrem Architecture{{< /nextlink >}}   
-   {{< nextlink href="/cloudprem/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
+{{< whatsnext desc="Follow our guides to get CloudPrem up and running:">}}
+  {{< nextlink href="/cloudprem/install/" >}}Install CloudPrem{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/ingest_logs/datadog_agent/" >}}Ingest logs with Datadog Agent{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/configure/datadog_account" >}}Configure your Datadog account{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/architecture/" >}}Understand CloudPrem architecture{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[2]: /cloudprem/installation/
-[3]: /cloudprem/processing/
-[4]: /cloudprem/architecture/

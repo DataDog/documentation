@@ -51,8 +51,8 @@ Lorsqu'un service est configuré avec des tags `version`, une section sur les ve
 Voici les informations que vous verrez par défaut :
 
 - Les noms des versions déployées pour ce service sur l'intervalle sélectionné.
-- Quand les traces correspondant à cette version ont été observées pour la première fois et pour la dernière fois.
-- Un indicateur Error Types, qui affiche le nombre de types d'erreur présents dans une version mais pas dans la version qui la précède.
+- L'heure de la première observation et de la dernière observation des traces correspondant à cette version.
+- Un indicateur Error Types, qui affiche le nombre de types d'erreurs présents dans chaque version, mais pas dans la version qui la précède.
 
     > **Remarque :** cet indicateur affiche les erreurs qui n'ont pas été observées dans les traces de la version précédente ; cela ne signifie pas forcément que ces erreurs sont apparues dans cette version pour la première fois. Le nombre de nouveaux types d'erreurs est particulièrement utile pour commencer à analyser les erreurs.
 
@@ -60,15 +60,15 @@ Voici les informations que vous verrez par défaut :
 - Le taux d'erreur, exprimé en tant que pourcentage du nombre total de requêtes.
 
 
-Vous avez la possibilité d'ajouter des colonnes au tableau ou d'en supprimer. Vos sélections seront enregistrées. Voici les colonnes supplémentaires disponibles :
+Vous avez la possibilité d'ajouter des colonnes ou d'en supprimer. Vos sélections seront enregistrées. Les colonnes supplémentaires suivantes peuvent être ajoutées :
 
 - Endpoints actifs dans une version, mais qui ne l'étaient pas dans la version précédente.
-- Durée d'activité, qui affiche le temps écoulé entre la première et la dernière trace envoyée à Datadog pour cette version.
+- Durée d'activité, à savoir la durée entre la première trace envoyée à Datadog et la dernière trace envoyée pour la version en question.
 - Nombre total de requêtes.
 - Nombre total d'erreurs.
-- Latence mesurée au p50, p75, p90, p95, p99, ou latence max.
+- Latence mesurée au p50, p75, p90, p95 ou p99, ou latence maximale.
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions sur la page Service" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
 **Remarque :** la section sur les versions s'affiche uniquement lorsque plusieurs versions ont transmis des données pendant l'intervalle sélectionné en haut de la page.
 
@@ -220,7 +220,7 @@ Durée = 30
 : `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
 
 Durée = 45
-: `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
+: `{service: foo, env: staging, cluster-name: dev-shopist, version: Y}`
 
 Durée maximale entre des déploiements :
 : `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`

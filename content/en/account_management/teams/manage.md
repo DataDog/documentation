@@ -59,6 +59,16 @@ Under the team's settings, specify which users can modify the team membership. T
 
 Users with the `user_access_manage` permission can set default rules on who can add or remove members, or edit team details. Set default rules with the **Default Settings** button on the team directory page. Override these policies for an individual team on the team details panel.
 
+### Subteams
+
+{{< callout url="https://www.datadoghq.com/product-preview/teams-hierarchy/" btn_hidden="false" header="Join the Preview">}}
+Teams Hierarchy is in Preview. Fill out this form to request access.
+{{< /callout >}}
+
+With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
+
+On the **Subteams** tab, you can add and remove existing teams. For a clear view of a team's place in its hierarchy, go to [**Service Management** > **Teams** > **Map View**][4], then search for the team by name.
+
 ## Manage teams through an identity provider
 
 When you set up a managed team, you configure the following properties of the team externally through an identity provider integration:
@@ -87,3 +97,4 @@ To enforce a strict membership model, configure your default team settings so **
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [3]: /account_management/scim/
+[4]: https://app.datadoghq.com/teams/map

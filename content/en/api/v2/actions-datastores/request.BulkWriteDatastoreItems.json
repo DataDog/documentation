@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "values": [
+        {
+          "id": "cust_3141",
+          "name": "Johnathan"
+        },
+        {
+          "id": "cust_3142",
+          "name": "Mary"
+        }
+      ]
+    },
+    "type": "items"
+  }
+}

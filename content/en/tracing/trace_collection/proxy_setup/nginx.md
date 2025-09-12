@@ -123,7 +123,8 @@ For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-
 **2. Modify your controller's pod specification**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
 
-{{< highlight yaml "hl_lines=4-10 13 16-19" >}}
+
+{{< highlight yaml "hl_lines=4-10 13-16 19-22 25-26" >}}
     spec:
       template:
         spec:
@@ -137,12 +138,19 @@ Update the controller pod specification to include the init-container and config
           containers:
             - name: controller
               image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+              volumeMounts:
+                - name: nginx-module
+                  mountPath: /opt/datadog-modules
               env:
                 - ...
                 - name: DD_AGENT_HOST
                   valueFrom:
                     fieldRef:
                       fieldPath: status.hostIP
+          volumes:
+            - ...
+            - name: nginx-module
+              emptyDir: {}
 {{< /highlight >}}
 
 **Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][1].

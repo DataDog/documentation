@@ -19,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 10, 11, 12, 13, 14, 15
+: 10, 11, 12, 13, 14, 15, 16, 17
 
 Supported Agent versions
 : 7.36.1+
@@ -343,22 +343,24 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/service.check_names: '["postgres"]'
-    ad.datadoghq.com/service.init_configs: '[{}]'
-    ad.datadoghq.com/service.instances: |
-      [
-        {
-          "dbm": true,
-          "host": "<INSTANCE_ADDRESS>",
-          "port": 5432,
-          "username": "datadog",
-          "password": "ENC[datadog_user_database_password]",
-          "gcp": {
-            "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_ID>"
-          }
+    ad.datadoghq.com/postgres.checks: |
+      {
+        "postgres": {
+          "instances": [
+            {
+              "dbm": true,
+              "host": "<INSTANCE_ADDRESS>",
+              "port": 5432,
+              "username": "datadog",
+              "password": "ENC[datadog_user_database_password]",
+              "gcp": {
+                "project_id": "<PROJECT_ID>",
+                "instance_id": "<INSTANCE_ID>"
+              }
+            }
+          ]
         }
-      ]
+      }
 spec:
   ports:
   - port: 5432

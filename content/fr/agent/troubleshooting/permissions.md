@@ -1,23 +1,19 @@
 ---
-title: Problèmes d'autorisation
 aliases:
-  - /fr/agent/faq/how-to-solve-permission-denied-errors
-  - /fr/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-  - /fr/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
+- /fr/agent/faq/how-to-solve-permission-denied-errors
+- /fr/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
+- /fr/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Dépannage de l'Agent
-    text: Mode debugging de l'Agent
-  - link: /agent/troubleshooting/send_a_flare/
-    tag: Dépannage de l'Agent
-    text: Envoyer un flare de l'Agent
+- link: /agent/troubleshooting/debug_mode/
+  tag: Documentation
+  text: Mode debugging de l'Agent
+- link: /agent/troubleshooting/send_a_flare/
+  tag: Documentation
+  text: Envoyer un flare de l'Agent
+title: Problèmes d'autorisation
 ---
-L'Agent a besoin d'un ensemble d'autorisations spécifique pour recueillir vos données sur votre host. Vous trouverez ci-dessous les problèmes courants liés aux autorisations ainsi que des solutions :
 
-* [Problèmes d'autorisation liés à la journalisation de l'Agent](#problemes-d-autorisation-lies-a-la-journalisation-de-l-Agent)
-* [Problèmes d'autorisation liés aux sockets de l'Agent](#problemes-d-autorisation-lies-aux-sockets-de-l-Agent)
-* [Problème d'autorisation lié aux métriques de processus](#probleme-d-autorisation-lie-aux-metriques-de-processus)
-* [Pour aller plus loin](#pour-aller-plus-loin)
+L'Agent a besoin d'un ensemble spécifique d'autorisations pour collecter les données sur votre host. Vous trouverez ci-dessous les problèmes d'autorisations les plus courants et comment les résoudre.
 
 ## Problèmes d'autorisation liés à la journalisation de l'Agent
 
@@ -27,7 +23,7 @@ Lorsque vous exécutez l'Agent Datadog sur un host donné, vous pouvez rencontre
 IOError: [Errno 13] Permission denied: '/var/log/datadog/supervisord.log'
 ```
 
-Assurez-vous que les fichiers de log de l'Agent, ainsi que le répertoire qui contient ces fichiers, appartiennent à l'utilisateur de l'Agent Datadog : `dd-agent`. Si ce n'est pas le cas, l'Agent ne peut pas rédiger des entrées de log dans ces fichiers. La commande ci-dessous permet d'afficher les informations sur la propriété des fichiers sur les systèmes Unix :
+Assurez-vous que les fichiers de log de l'Agent, ainsi que le répertoire qui contient ces fichiers, appartiennent à l'utilisateur de l'Agent Datadog : `dd-agent`. Si ce n'est pas le cas, l'Agent ne pourra pas écrire les entrées de log dans ces fichiers. La commande ci-dessous permet d'afficher les informations sur la propriété des fichiers sur les systèmes Unix :
 
 ```text
 ls -l /var/log/datadog/
@@ -72,7 +68,7 @@ ls -al /opt/datadog-agent/run
 Si le propriétaire du fichier n'est **PAS** `dd-agent`, lancez la commande suivante pour y remédier :
 
 ```text
-chown dd-agent -R /opt/datadog-agent/run
+sudo chown -R dd-agent:dd-agent /opt/datadog-agent/run
 ```
 
 Une fois cette modification effectuée, la [commande de démarrage de l'Agent][5] fonctionne correctement. Si vous continuez à voir ce problème après avoir suivi ces étapes, contactez l'[assistance Datadog][6] pour obtenir des instructions supplémentaires.
@@ -82,10 +78,7 @@ Une fois cette modification effectuée, la [commande de démarrage de l'Agent][5
 Si vous avez activé le [check de processus][7] dans l'Agent qui s'exécute sur un système d'exploitation Linux, il se peut que la métrique `system.processes.open_file_descriptors` ne soit pas recueillie ni transmise par défaut.
 Cela se produit lorsque des processus surveillés par le check de processus s'exécutent avec un utilisateur différent de l'utilisateur de l'Agent `dd-agent`. En réalité, l'utilisateur `dd-agent` ne dispose pas d'un accès complet à tous les fichiers dans `/proc`, l'emplacement dans lequel l'Agent effectue ses recherches pour recueillir les données de cette métrique.
 
-{{< tabs >}}
-{{% tab "Agent v6.3 et ultérieur" %}}
-
-Activez l'option `try_sudo` dans la configuration du check de processus et ajoutez les règles `sudoers` appropriées :
+Activer l'option `try_sudo` (disponible depuis l'Agent 6.3) dans la configuration du check `process` et ajouter les règles `sudoers` appropriées :
 
 ```text
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
@@ -93,59 +86,38 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 Cela permet au check de processus d'utiliser `sudo` pour exécuter la commande `ls`, mais uniquement sur la liste de contenu du chemin `/proc/*/fd/`.
 
-Si la ligne `sudo: sorry, you must have a tty to run sudo` s'affiche dans le fichier `error.log` Datadog, vous devez utiliser `visudo` et mettre en commentaire la ligne `Default requiretty`.
+Si la ligne `sudo: sorry, you must have a tty to run sudo` s'affiche dans le fichier `error.log` Datadog, vous devez utiliser `visudo` et mettre en commentaire la ligne `Default requiretty` dans votre fichier sudoers.
 
-{{% /tab %}}
-{{% tab "Agents v6 et v7" %}}
+### Exécuter l'Agent en tant que root
 
-Si vous exécutez un Agent v6 antérieur à 6.3, essayez de mettre à jour l'Agent et d'utiliser l'option `try_sudo`. Si vous ne parvenez pas à effectuer la mise à jour, vous pouvez toujours exécuter l'Agent en tant que `root`.
+Si vous ne pouvez pas utiliser `try_sudo`, vous pouvez exécuter l'Agent en tant que `root` en solution de contournement.
 
-**REMARQUE** : il n'est pas conseillé d'exécuter l'Agent en tant que `root`. Cette recommandation n'est pas spécifique à l'Agent Datadog et n'est pas due à un problème de confiance. Pour suivre les meilleures pratiques en matière de processus sur Linux, il est généralement déconseillé d'exécuter le daemon en tant que `root`. Si vous avez des préoccupations personnelles quant à la sécurité de l'Agent, sachez qu'il est disponible en open source et que votre équipe ou vous-même pouvez l'auditer via le [référentiel GitHub][1].
+<div class="alert alert-info">Exécuter un daemon de processus en tant que <code>root</code> n'est pas recommandé sur Linux. L'Agent est open source et peut être audité via le <a href="https://github.com/DataDog/datadog-agent">référentiel GitHub</a></div>
 
-1. [Arrêtez l'Agent][2].
-
-2. Ouvrez `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` et modifiez l'attribut `user​` sous `[Service]`.
-
-3. [Démarrez l'Agent][3].
-
-[1]: https://github.com/DataDog/datadog-agent
-[2]: /fr/agent/guide/agent-commands/#stop-the-agent
-[3]: /fr/agent/guide/agent-commands/#start-the-agent
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-Si vous exécutez l'Agent v5, essayez d'effectuer une mise à jour vers la [dernière version de l'Agent 6][1] et d'utiliser l'option `try_sudo`. Si vous ne parvenez pas à effectuer la mise à jour, vous pouvez toujours exécuter l'Agent en tant que `root`.
-
-**REMARQUE** : il n'est pas conseillé d'exécuter l'Agent en tant que `root`. Cette recommandation n'est pas spécifique à l'Agent Datadog et n'est pas due à un problème de confiance. Pour suivre les meilleures pratiques en matière de processus sur Linux, il est généralement déconseillé d'exécuter le daemon en tant que `root`. Si vous avez des préoccupations personnelles quant à la sécurité de l'Agent, sachez qu'il est disponible en open source et que votre équipe ou vous-même pouvez l'auditer via le [référentiel GitHub][2].
-
-1. [Arrêtez l'Agent][2].
-
-2. Ouvrez `/etc/dd-agent/supervisor.conf` et remplacez `dd-agent` par `root` à la [ligne 20][4] et la [ligne 30][5]. Effectuez à nouveau cette opération en cas de mise à niveau ou de réinstallation de l'Agent.
-
-3. [Démarrez l'Agent][6].
-
-[1]: /fr/agent/guide/upgrade-to-agent-v6/
-[2]: https://github.com/DataDog/dd-agent
-[3]: /fr/agent/guide/agent-commands/?tab=agentv5#stop-the-agent
-[4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
-[5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /fr/agent/guide/agent-commands/?tab=agentv5#start-the-agent
-{{% /tab %}}
-{{< /tabs >}}
+Pour exécuter l'Agent en tant que `root` :
+1. [Arrêtez l'Agent][9]
+2. Ouvrez `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` et modifiez l'attribut `user` dans la section `[Service]`
+3. [Démarrez l'Agent][10]
 
 Consultez les issues GitHub suivantes pour en savoir plus à ce sujet et pour découvrir d'autres méthodes pouvant être employées pour enregistrer cette métrique sur des machines Linux.
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
+## Problèmes d'autorisations lors de l'exécution de l'Agent en tant que daemon système sur macOS
+
+Si vous avez installé l'Agent en tant que daemon système global à l'aide des options `DD_SYSTEMDAEMON_INSTALL` et `DD_SYSTEMDAEMON_USER_GROUP`, vérifiez que l'utilisateur et le groupe spécifiés dans `DD_SYSTEMDAEMON_USER_GROUP` sont valides et disposent des autorisations appropriées.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/guide/agent-commands/
-[2]: /fr/agent/guide/agent-log-files/
+[1]: /fr/agent/configuration/agent-commands/
+[2]: /fr/agent/configuration/agent-log-files/
 [3]: /fr/agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /fr/agent/faq/network/
-[5]: /fr/agent/guide/agent-commands/#start-the-agent
+[5]: /fr/agent/configuration/agent-commands/#start-the-agent
 [6]: /fr/help/
 [7]: /fr/integrations/process/
+[9]: /fr/agent/configuration/agent-commands/#stop-the-agent
+[10]: /fr/agent/configuration/agent-commands/#start-the-agent

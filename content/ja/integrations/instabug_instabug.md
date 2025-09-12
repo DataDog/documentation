@@ -12,7 +12,7 @@ author:
   vendor_id: instabug
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -79,23 +79,23 @@ tile:
 
 
 ## 概要
-Instabug allows mobile application teams to balance stability, performance, and feature development throughout the entire development lifecycle. Based on a lightweight SDK, Instabug provides a unique set of insights enabling mobile teams to release with confidence, align on key performance metrics, identify and resolve critical issues before they impact end users.
+Instabug を利用すると、モバイルアプリ開発チームは開発ライフサイクル全体にわたり、安定性・パフォーマンス・機能開発のバランスを取れます。軽量な SDK を基盤とする Instabug が提供する独自のインサイトにより、モバイルチームは自信を持ってリリースでき、主要なパフォーマンス指標に関して共通認識を持ち、エンドユーザーに影響が及ぶ前に重要な問題を特定して解決できます。
 
 Instabug を使えば、チームの可視性を高め、優れたモバイルアプリ体験を一貫して提供することができます。
 
-### Release Centered
+### リリース単位の管理
 モバイルのパフォーマンスを追跡し、バージョンの採用、安定性、パフォーマンスを比較します。問題をすばやく特定し、リリースごとに問題を監視し、回帰した問題を効率的に解決します。
 
-### Unified Performance Monitoring
+### 統合パフォーマンスモニタリング
 クラッシュのないセッションにとどまらず、画面遷移の遅れ、ネットワークエラー、致命的なアプリのハングアップ、OOM クラッシュなどの問題をモニタリングしながら、単一のアプリケーションパフォーマンスメトリクスを中心にチームをまとめます。
 
-### Comprehensive Debugging
+### 包括的なデバッグ機能
 ログ、スクリーンショット、デバイスの詳細へのアクセスにすぐに使えるので、ユーザーが影響を受ける前に、アプリケーションのライフサイクルを通じてパフォーマンス、品質、安定性の問題を素早く特定できます。
 
-### Secure by Design
+### 安全な設計
 機密性の高いビューをオーバーレイで隠し、レポートから個人情報を除外することで、ユーザーのプライバシーを保護します。Instabug は GDPR に完全に準拠しています。
 
-### Seamless Integrations
+### シームレスな統合
 Jira、GitHub、Slack などのインテグレーションで、ワークフローを同期させます。
 
 ## サポート
@@ -108,7 +108,7 @@ Jira、GitHub、Slack などのインテグレーションで、ワークフロ�
 
 お役に立つドキュメント、リンクや記事:
 
-- [Instabug Documentation][4]
+- [Instabug ドキュメント][4]
 
 [1]: https://dashboard.instabug.com/signup
 [2]: mailto:contactus@instabug.com
@@ -116,4 +116,4 @@ Jira、GitHub、Slack などのインテグレーションで、ワークフロ�
 [4]: https://docs.instabug.com
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -93,7 +93,7 @@
       {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
       {{ $default_dd_logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" "_datadog" "variant" "avatar" "fallback" "cloud") "_datadog" "avatar" }}
       <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
-        <div class="js-group-header mb-1 d-flex align-items-center active" id="">
+        <div class="js-group-header mb-1 d-flex align-items-center" id="">
           <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
             {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
           </div>

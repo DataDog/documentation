@@ -1,13 +1,13 @@
 ---
 further_reading:
 - link: /logs/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: ログエクスプローラーの詳細
 - link: /logs/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: 検索構文の詳細
 - link: /logs/search_syntax/
-  tag: Documentation
+  tag: ドキュメント
   text: ログ検索 API 向け構文の詳細
 title: ログ検索 API を使用してログデータにプログラマティックにアクセスする
 ---
@@ -442,18 +442,6 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 }
 ```
 
-タイムゾーンはオフセット ("UTC+03:00" など) または地域ゾーン ("Europe/Paris" など) で指定することができます。オフセットとゾーンの両方が渡された場合は、オフセットが優先されます。オフセットは秒で指定する必要があります。
-
-```javascript
-{
-  "options": {
-    "timeOffset": -1000,
-    "timezone": "Europe/Paris"
-  }
-}
-```
-
-
 ### ページ区切り
 
 `1000` の[ログ制限](#取得した結果数の制限)よりも長いログリストを取得するには、ページ区切り機能を使用します。
@@ -544,7 +532,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 **注:** ページ区切りを使用する際は、相対的なタイムレンジを使用しないでください。検索結果が失われる可能性があります。
 
-### その他の参考資料
+### 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

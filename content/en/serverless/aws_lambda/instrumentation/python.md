@@ -23,15 +23,17 @@ algolia:
 
 ## Setup
 
-### Remote instrumentation
-
-If you are instrumenting your Python AWS Lambda application for the first time, Datadog recommends that you use remote instrumentation. See [Remote instrumentation for AWS Lambda][11].
-
-### Other instrumentation methods
-
 If your application is deployed as a container image, use the _Container Image_ method.
 
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+If [remote instrumentation][1] is enabled, you can instrument your Python AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select **Instrument Functions**.
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.

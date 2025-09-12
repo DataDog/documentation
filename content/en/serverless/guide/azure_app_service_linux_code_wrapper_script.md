@@ -5,6 +5,13 @@ further_reading:
   tag: "Blog"
   text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
+
+<div class="alert alert-warning">
+The AAS Linux Wrapper is now deprecated. It will continue to receive layer bumps but no new features.
+It will be retired on January 1, 2026, at which point no further updates will be provided.
+Datadog strongly recommends switching to the <a href="https://docs.datadoghq.com/serverless/azure_app_service/linux_code">sidecar instrumentation method</a> as soon as possible.
+</div>
+
 ## Overview
 
 This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
@@ -118,4 +125,3 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
 [11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
 [14]: /help
-

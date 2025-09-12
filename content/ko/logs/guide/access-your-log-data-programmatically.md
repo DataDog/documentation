@@ -2,7 +2,7 @@
 further_reading:
 - link: /logs/explorer/
   tag: 설명서
-  text: 로그 탐색기에 대해 더 알아보기
+  text: Log Explorer에 대해 더 알아보기
 - link: /logs/explorer/
   tag: 설명서
   text: 검색 구문에 대해 더 알아보기
@@ -441,18 +441,6 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
   }
 }
 ```
-
-시간대는 오프셋(예: "UTC+03:00") 또는 지역 시간대(예: "유럽/파리") 형식으로 지정할 수 있습니다. 오프셋과 시간대를 모두 적용한 경우 오프셋이 우선 적용됩니다. 오프셋은 초 단위로 지정해야 합니다.
-
-```javascript
-{
-  "options": {
-    "timeOffset": -1000,
-    "timezone": "Europe/Paris"
-  }
-}
-```
-
 
 ### 페이지 매기기
 

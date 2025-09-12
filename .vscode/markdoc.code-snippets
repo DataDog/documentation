@@ -1,7 +1,7 @@
 {
     "Alert box": {
         "scope": "markdoc",
-        "prefix": ";;alert",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": ["{% alert level=\"${1|info,warning,danger|}\" %}", "${2:This is an alert message.}", "{% /alert %}"],
         "description": "Markdoc alert block with a level attribute (info, warning, danger)"
     },

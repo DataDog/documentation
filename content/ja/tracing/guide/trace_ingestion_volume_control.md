@@ -23,7 +23,7 @@ title: APM 分散型トレーシングによる取り込み量制御
 
 **注**: アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、SDK レベルやコレクターレベルでサンプリングを設定した場合、APM メトリクスはデフォルトで**サンプル**データセットに基づきます。詳しくは [OpenTelemetry による取り込みサンプリング][4]をご覧ください。
 
-<div class="alert alert-info"><strong>ベータ版</strong>: あるいは、<a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> を使用して、サンプリングされていないデータの APM メトリクスを計算します。詳しくは<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスを Datadog プロセッサから Datadog Connector に切り替える</a>をお読みください。</div>
+<div class="alert alert-info">あるいは、<a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> を使用して、サンプリングされていないデータの APM メトリクスを計算します。詳しくは<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスを Datadog プロセッサから Datadog Connector に切り替える</a>をお読みください。</div>
 
 トレースデータは非常に反復性が高いため、取り込みサンプリングでも問題を調査するためのトレースサンプルは利用可能です。高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。取り込み制御は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
 
@@ -73,7 +73,7 @@ Downstream Bytes/s レートが高く、サンプリングレートも高いサ�
 
 ### Agent レベルで取り込みサンプリングレートをグローバルに構成する
 
-The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally accross services.
+**Configuration** の列は、サービスにサンプリングルールが構成されているかどうかを示しています。上位のサービスが `AUTOMATIC` 構成である場合、**Agent configuration** を変更すると、サービス全体でボリュームが減少します。
 
 Agent レベルで取り込み量を減らすには、`DD_APM_MAX_TPS` (デフォルトでは `10` に設定) を構成して、ヘッドベースのサンプリング量のシェアを減らしてください。[デフォルトのサンプリングメカニズム][7]について詳しくはこちら。
 

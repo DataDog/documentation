@@ -57,7 +57,7 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 
 ## Configuration
 
-The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
+The [Datadog Agent configuration file][7] is located in `/opt/datadog-agent`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
 - `api_key`: your organization's [Datadog API key][8] 
 - `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
