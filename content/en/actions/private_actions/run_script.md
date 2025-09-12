@@ -34,13 +34,16 @@ To use the script action, you need:
 
 ### Create a script connection
 
-1. Navigate to the **Private Action Runner** page in [Workflow Automation][4] or [App Builder][5].
-1. Create a new script connection and associate it with your private action runner.
-1. Select this connection when using the script action in your workflows or apps.
-
-### Configure the action catalog
-
-Navigate to the Action Catalog and select [**Run Predefined Script**][10]. This action is available for use in both workflows and apps.
+1. After [setting up a PAR][1], navigate to [**Connections**][2].
+1. Click **New Connection**.
+1. Select **Script**.
+1. Enter a **Connection Name**.
+1. In the **Private Action Runner** dropdown, select your PAR. 
+1. Copy and paste the credential file template into your PAR's configuration directory with real secrets. 
+1. In **Path to file**, ensure the file path is entered correctly as this field is auto-populated.
+1. Click **Next, Confirm Access**. 
+1. After configuring permissions, click **Create**.
+1. Select this new connection when using the script action in your workflows or apps.
 
 ## Configuration
 
@@ -115,8 +118,8 @@ runPredefinedScript:
     command: [ "bash", "/etc/dd-action-runner-script/scripts/script.sh" ]
 ```
 
-[1]: /actions/private_actions/use_private_actions/?tab=docker#supported-private-actions
-[2]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
+[1]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
+[2]: https://app.datadoghq.com/actions/connections
 [3]: https://hub.docker.com/r/datadog/private-action-runner-dev
 [4]: https://app.datadoghq.com/workflow/
 [5]: https://app.datadoghq.com/app-builder/
