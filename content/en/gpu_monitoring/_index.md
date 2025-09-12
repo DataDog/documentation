@@ -6,22 +6,28 @@ further_reading:
 ---
 
 ## Overview
-Datadog’s GPU Monitoring provides a centralized view into GPU fleet health, cost and performance, enabling users to: 
+Datadog’s GPU Monitoring provides a centralized view into GPU fleet health, cost and performance, enabling teams to make better provisioning decisions, troubleshoot failed workloads and eliminate idle GPU costs without requiring you to manually set up each vendor tool (like NVIDIA's DCGM). Just by deploying the Datadog Agent, users instantly get advanced insights into their GPU fleet automatically.
 
-1. Make better provisioning decisions:
+### Confidently make GPU allocation and provisioning decisions
 With visibility into GPU utilization by host, node or even pod, users can identify hotspots or underutilization of expensive GPU infrastructure.
 
-2. Quickly troubleshoot failed workloads due to resource contention 
+{{< img src="gpu_monitoring/funnel.png" alt="Snapshot funnel that highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
+
+### Quickly troubleshoot failed workloads due to resource contention
 Users can understand their current device availability and forecast how many devices are needed for certain teams or workloads to avoid failed workloads from resource contention.
 
-3. Maximize model/application performance: 
+{{< img src="gpu_monitoring/device_allocation.png" alt="Improve operational fleet efficiency by understanding device distribution and allocation over time." style="width:100%;" >}}
+
+### Identify & eliminate wasted, idle GPU costs: 
+Users can identify total and spend on GPU infrastructure and attribute those costs to specific workloads and instances. Directly correlted GPU usage to related pods or processes.
+
+{{< img src="gpu_monitoring/fleet_costs.png" alt="Understand and attribute total or idle costs on GPU infrastructure." style="width:100%;" >}}
+
+
+### Maximize model/application performance: 
 With GPUM’s Resource Telemetry, users can analyze trends in GPU resources and metrics over time like GPU Utilization, Power, and Memory data throughput to understand their effects on your model/application performance.
 
-4. Identify & eliminate wasted, idle GPU costs: 
-Users can identify total, idle and inefficient spend on GPU infrastructure and attribute those costs to specific workloads and instances.
-
-5. Avoid cumbersome manual setup of vendor tools: 
-GPU Monitoring has a streamlined onboarding experience where users don’t need to set up each vendor tool manually (like the NVIDIA DCGM Exporter) and they can automatically get GPU metrics OOTB directly from the DD Agent. 
+{{< img src="gpu_monitoring/device_metrics.png" alt="Comprehensive GPU resource telemetry available OOTB with the Datadog Agent" style="width:100%;" >}}
 
 ## Ready to start?
 
