@@ -284,6 +284,76 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{% /tab %}}
 
+{{% tab "Add to a cluster policy" %}}
+
+1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
+   ```shell
+   #!/bin/bash
+
+   # Download and run the latest init script
+   curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
+   bash djm-install-script || true
+   ```
+
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
+
+2. On the create policy page, click **Add Definition** under the **Definition** section.
+3. In the **Field** dropdown that appears, select **init_scripts**.
+
+   // TO UPDATE
+   {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
+
+   - Under the **Source** drop-down, select `Workspace`.
+   - Under **File path**, enter the path to your init script.
+   - Click **Add**.
+
+### Setup required environment variables 
+
+Each of the following environment variables should be added to the cluster policy.
+
+| Key                  | Value                 |
+|----------------------|-----------------------|
+| DD_API_KEY           | <YOUR API KEY>        |
+| DD_SITE              | <YOUR DATADOG SITE>   |
+| DATABRICKS_WORKSPACE | <YOUR WORKSPACE NAME> |
+
+This can be done by following these steps for each key-value pair:
+
+1. Click **Add Definition** under the **Definition** section.
+2. In the **Field** dropdown that appears, select **spark_env_vars**
+
+   // TO UPDATE
+   {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
+
+   - In the **Key** field, enter the environment variable key.
+   - In the **Value** field, enter the environment variable value.
+   - Under the **Type** drop-down, select `Fixed`.
+   - Toggle the **Hidden** checkbox to reduce exposure of the env vars.
+
+   Optionally, you can also set other init script parameters and Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`. The script can be configured using the following parameters:
+
+| Variable                 | Description                                                                                                                                                      | Default |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| DD_API_KEY               | Your [Datadog API key][1].                                                                                                                                        |         |
+| DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
+| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
+| DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
+| WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
+
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
+[4]: /getting_started/tagging/
+[5]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
+
+3. Click **Create**. The cluster policy is now available to use when configuring new clusters or editing existing ones.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Restart already-running clusters
