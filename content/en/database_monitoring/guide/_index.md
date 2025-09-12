@@ -22,6 +22,7 @@ cascade:
 {{< whatsnext desc="SQL Server guides:" >}}
     {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Exploring SQL Server AlwaysOn Availability Groups{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/sql_deadlock" >}}Configuring Deadlock Monitoring on SQL Server{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/sql_extended_events" >}}Configuring Query Completion and Query Error Collection on SQL Server{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="PostgreSQL guides:" >}}
