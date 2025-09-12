@@ -14,6 +14,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: /real_user_monitoring/guide/mobile-sdk-upgrade
+  tag: Documentation
+  text: Upgrade RUM Mobile SDKs
 ---
 ## Overview
 
