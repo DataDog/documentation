@@ -1708,6 +1708,23 @@
       "description": "Update permission setting for team returns \"OK\" response"
     }
   ],
+  "SearchFlakyTests": [
+    {
+      "group": "test_optimization",
+      "suffix": "_3833010053",
+      "description": "Search flaky tests returns \"OK\" response with cursor pagination"
+    },
+    {
+      "group": "test_optimization",
+      "suffix": "_2665223746",
+      "description": "Search flaky tests returns \"OK\" response with filtered query"
+    },
+    {
+      "group": "test_optimization",
+      "suffix": "_3039631009",
+      "description": "Search flaky tests returns \"OK\" response with specific cursor"
+    }
+  ],
   "CreateUser": [
     {
       "group": "users",
