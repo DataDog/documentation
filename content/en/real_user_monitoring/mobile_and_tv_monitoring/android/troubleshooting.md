@@ -32,9 +32,9 @@ When writing your application, you can enable development logs by calling the `s
 Datadog.setVerbosity(Log.INFO)
 ```
 
-## Migrating to 2.0.0
+## Migrating to 3.0.0
 
-If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][2] for more information.
+If you've been using the SDK v2 or SDK v1, there are some breaking changes introduced in version `3.0.0`. See the [migration guide][2] for more information.
 
 ## "Deobfuscation failed" warning
 
