@@ -579,7 +579,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 `modelProvider`
 : optional - _String_ - **default**: `"custom"`
 <br/>The name of the model provider.
-<br />**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
+<br />**Note**: To display the estimated cost in US dollars, set `modelProvider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `mlApp`
 : optional - _String_
