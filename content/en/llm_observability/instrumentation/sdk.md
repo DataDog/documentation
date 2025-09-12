@@ -535,7 +535,7 @@ To trace an LLM span, specify the span kind as `llm`, and optionally specify the
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
 <br/>The name of the model provider.
-<br />**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
+<br />**Note**: To display the estimated cost in US dollars, set `modelProvider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `sessionId`
 : optional - _string_
