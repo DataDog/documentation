@@ -63,7 +63,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
-For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][25] in the Datadog UI. To learn more, read [Application Instrumentation][2].
+For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
 
 <div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 
@@ -140,7 +140,7 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [22]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
 [23]: /agent/
 [24]: /tracing/metrics/metrics_namespace/
-[25]: /tracing/dynamic_instrumentation/
+[30]: /tracing/dynamic_instrumentation/
 [25]: /tracing/metrics/runtime_metrics/
 [26]: /tracing/services/service_page/
 [27]: /tracing/trace_collection/single-step-apm/
