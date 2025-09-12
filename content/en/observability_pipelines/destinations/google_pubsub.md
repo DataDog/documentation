@@ -90,9 +90,9 @@ Common issues and fixes:
 - Permission denied
 	- Ensure the service account has `roles/pubsub.publisher`.
 - Authentication errors
-	- Verify credentials JSON path or GKE Workload Identity setup.
+	- Verify the credentials JSON path or GKE Workload Identity setup.
 - Dropped events
-	- Check `pipelines.component_discarded_events_total` and `pipelines.buffer_discarded_events_total` metrics.
+	- Check the `pipelines.component_discarded_events_total` and `pipelines.buffer_discarded_events_total` metrics.
 	- Increase buffer size or fix misconfigured filters as needed.
 - High latency
 	- Reduce buffer sizer and timeout or scale Workers.
