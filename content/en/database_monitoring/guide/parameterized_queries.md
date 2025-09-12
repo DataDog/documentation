@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This feature is in preview. To enable collection of raw SQL query text and execution plans with parameter values, please contact your Datadog representative or support. Role-based access controls are planned for GA.
+This feature is in preview. To enable collection of raw SQL query text and execution plans with parameter values, please contact your Datadog representative or support.
 </div>
 
 The Database Monitoring integrations collect aggregated query metrics, in-flight query executions, and query explain plans across your database. By default, query SQL texts and explain plans are obfuscated and normalized in the Agent before being sent to Datadog in order to protect sensitive data, which may be exposed in query parameters.
