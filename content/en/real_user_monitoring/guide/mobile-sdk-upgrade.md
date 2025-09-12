@@ -145,8 +145,8 @@ Then, you can select the modules you want to use:
 
 API changes:
 
-| `2.x`                               | `3.0`                              |
-|-------------------------------------|------------------------------------|
+| `2.x`                                                         | `3.0`                                                              |
+|---------------------------------------------------------------|--------------------------------------------------------------------|
 | `Datadog.setUserInfo(null, "Jane Smith", "jane@example.com")` | `Datadog.setUserInfo("user123", "Jane Smith", "jane@example.com")` |
 
 ### RUM
@@ -159,13 +159,13 @@ API changes:
 |-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
 | `DatadogRumMonitor.startResource(String, String, String,Map<String, Any?>)`         | Use `startResource` method which takes `RumHttpMethod` as `method` parameter instead |
 | `com.datadog.android.rum.GlobalRum`                                                 | `GlobalRum` object was renamed to `com.datadog.android.rum.GlobalRumMonitor`         |
-| `com.datadog.android.rum.RumMonitor.addAction()`                                    | Parameter `attributes: Map<String, Any?>` is optional                            |
-| `com.datadog.android.rum.RumMonitor.startAction()`                                  | Parameter `attributes: Map<String, Any?>` is optional                            |
-| `com.datadog.android.rum.RumMonitor.stopResource()`                                 | Parameter `attributes: Map<String, Any?>` is optional                            |
-| `com.datadog.android.rum.RumMonitor.addError()`                                     | Parameter `attributes: Map<String, Any?>` is optional                            |
-| `com.datadog.android.rum.RumMonitor.addErrorWithStacktrace()`                       | Parameter `attributes: Map<String, Any?>` is optional                            |
-| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                            |
-| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.RumMonitor.addAction()`                                    | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.startAction()`                                  | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.stopResource()`                                 | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.addError()`                                     | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.addErrorWithStacktrace()`                       | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                                |
 
 ### Logs
 
@@ -258,7 +258,7 @@ Refer to the Datadog [documentation](https://docs.datadoghq.com/tracing/trace_co
 
 API changes:
 
-| `2.x`                                     | `3.0` `Open Telemetry`                     | `3.0` `Datadog Tracing`                                 |
+| `2.x`                                     | `3.0` `Open Telemetry`                     | `3.0` `Datadog API`                                     |
 |-------------------------------------------|--------------------------------------------|---------------------------------------------------------|
 | `io.opentracing.util.GlobalTracer`        | `io.opentelemetry.api.GlobalOpenTelemetry` | `com.datadog.android.trace.GlobalDatadogTracer`         |
 | `com.datadog.android.trace.AndroidTracer` | `io.opentelemetry.api.trace.Tracer`        | `com.datadog.android.trace.api.tracer.DatadogTracer`    |
@@ -268,12 +268,12 @@ API changes:
 
 Replacement hints:
 
-| `2.x`                                         | `3.0` `Open Telemetry`                                | `3.0` `Datadog Tracing`                           |
+| `2.x`                                         | `3.0` `Open Telemetry`                                | `3.0` `Datadog API`                               |
 |-----------------------------------------------|-------------------------------------------------------|---------------------------------------------------|
 | `AndroidTracer.Builder().build()`             |                                                       | `DatadogTracing.newTracerBuilder().build()`       |
 | `AndroidTracer.setPartialFlushThreshold(Int)` | `OtelTracerProvider.setPartialFlushThreshold()`       | `DatadogTracerBuilder.withPartialFlushMinSpans()` |
-| `io.opentracing.SpanContext#toTraceId()`      | `io.opentelemetry.api.trace.SpanContext#getTraceId()` | `DatadogSpanContext.traceId.toString()`           |
-| `io.opentracing.Span#setError()`              | `io.opentelemetry.api.trace.recordException()`        | `DatadogSpan.addThrowable()`                      |
+| `io.opentracing.SpanContext.toTraceId()`      | `io.opentelemetry.api.trace.SpanContext.getTraceId()` | `DatadogSpanContext.traceId.toString()`           |
+| `io.opentracing.Span.setError()`              | `io.opentelemetry.api.trace.recordException()`        | `DatadogSpan.addThrowable()`                      |
 
 ### OkHttp instrumentation
 
