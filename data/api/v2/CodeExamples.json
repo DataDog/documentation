@@ -354,7 +354,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Create Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "CreateArbitraryCostRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create arbitrary cost rule returns \"OK\" response"
+    }
+  ],
+  "CreateRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create ruleset returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -375,7 +389,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Update Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "UpdateArbitraryCostRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update arbitrary cost rule returns \"OK\" response"
+    }
+  ],
+  "UpdateRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update ruleset returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -383,6 +411,13 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
+  "ValidateQuery": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Validate query returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
