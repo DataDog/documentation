@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "query": "*"
+      },
+      "page": {
+        "cursor": "Q29udGludW91cyBUZXN0aW5nLltETyBOT1QgREVMRVRFXVtPTi1ERU1BTkQgRlVOQ1RJT05BTElUSUVTXVtPVkVSUklERV0gRXh0cmFWYXJpYWJsZXM=",
+        "limit": 2
+      },
+      "sort": "fqn"
+    },
+    "type": "search_flaky_tests_request"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "query": "flaky_test_state:active @git.repository.id_v2:\"github.com/datadog/shopist\""
+      },
+      "page": {
+        "limit": 2
+      },
+      "sort": "-last_flaked"
+    },
+    "type": "search_flaky_tests_request"
+  }
+}

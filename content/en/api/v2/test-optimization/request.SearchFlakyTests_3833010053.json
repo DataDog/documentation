@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "query": "*"
+      },
+      "page": {
+        "limit": 2
+      },
+      "sort": "fqn"
+    },
+    "type": "search_flaky_tests_request"
+  }
+}
