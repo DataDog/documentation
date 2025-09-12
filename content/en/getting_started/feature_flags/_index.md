@@ -33,7 +33,7 @@ Your organization likely already has pre-configured environments for Development
 
 ### Step 1: Import and initialize the SDK
 
-First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk` and `@openfeature/core` as dependencies in your project:
+First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeature/core` as dependencies in your project:
 
 
 ```
