@@ -11,7 +11,7 @@ In order to begin using Datadog's GPU Monitoring, you must meet the following cr
 - Uses Kubernetes and NVIDIA's device plugin for Kubernetes (either [directly][3] or through [NVIDIA's GPU Operator][4]) 
 
 The minimum version requirements are: 
-- Datadog Agent: version 7.70+
+- Datadog Agent: version 7.70.1+
 - If using the datadog-operator: version 1.18
 - If using helm chart: version 3.130.1
 - Operating System: Linux. (optional: For advanced eBPF metrics, minimal version is 5.8)
