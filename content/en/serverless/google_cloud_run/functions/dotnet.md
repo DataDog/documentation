@@ -38,8 +38,8 @@ DD_DOTNET_TRACER_HOME=/workspace/datadog
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom function="true" %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -76,11 +76,11 @@ logger.LogInformation("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" function="true" %}}
+{{% gcr-env-vars-sidecar language="csharp" function="true" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 
