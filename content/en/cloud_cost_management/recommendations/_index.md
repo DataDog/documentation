@@ -19,6 +19,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
     tag: "Blog"
     text: "How we've created a successful FinOps practice at Datadog"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-recommendations/"
+    tag: "Blog"
+    text: "Eliminate cloud waste across AWS, Azure, and Google Cloud with Cloud Cost Recommendations"
 
 
 multifiltersearch:
@@ -51,6 +54,12 @@ multifiltersearch:
       resource_type: Autoscaling Group
       recommendation_type: Migrate Legacy Autoscaling Group instances to new types
       recommendation_description: An autoscaling group that includes legacy instance types.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Cloudtrail Trail
+      recommendation_type: Delete unnecessary Cloudtrail Trails
+      recommendation_description: More than the necessary number of Cloudtrails Trails are active on an account.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS

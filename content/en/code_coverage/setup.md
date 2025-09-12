@@ -52,6 +52,13 @@ If everything is configured correctly, a green check mark is displayed in Datado
 [1]: /integrations/github/#github-apps-1
 [2]: https://app.datadoghq.com/integrations/github/configuration
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+
+Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Gitlab repositories to Datadog.
+
+[1]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
+
+{{% /tab %}}
 {{< /tabs >}}
 
 See [Data Collected][1] for details on what data is collected from your source code provider.
@@ -252,7 +259,7 @@ end_of_record
 Install the [`datadog-ci`][7] CLI globally using `npm`:
 
 {{< code-block lang="shell" >}}
-npdatadog-cim install -g @datadog/
+npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
 #### Standalone binary
@@ -312,6 +319,17 @@ steps:
   env:
     DD_API_KEY: ${{ secrets.DD_API_KEY }}
     DD_SITE: {{< region-param key="dd_site" >}}
+</code>
+</pre>
+{{% /tab %}}
+{{% tab "Gitlab" %}}
+<pre>
+<code class="language-yaml" data-lang="yaml">
+test:
+  stage: test
+  script:
+    - ... # run your tests and generate coverage reports
+    - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
 </code>
 </pre>
 {{% /tab %}}
@@ -403,6 +421,6 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider

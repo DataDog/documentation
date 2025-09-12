@@ -44,9 +44,11 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
       {{% /tab %}}
       {{< /tabs >}}
 
+      See [dd-trace-java releases][1] for the latest tracer version.
+
    3. Add the `@Trace` annotation to any method you want to trace.
 
-   For more information, see [Tracing Java Applications][1].
+   For more information, see [Tracing Java Applications][2].
 
 2. **Install serverless-init as a sidecar**.
 
@@ -56,21 +58,25 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform %}}
+   {{% /tab %}}
+
    {{% tab "YAML Deploy" %}}
    {{% gcr-install-sidecar-yaml language="java" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In Java, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Java, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
 
    {{< code-block lang="java" disable_copy="false" >}}
 private static final Logger logger = LogManager.getLogger(App.class);
@@ -89,25 +95,28 @@ logger.info("Hello World!");
 </Configuration>
 {{< /code-block >}}
 
-   Datadog recommends setting the environment variable `DD_SOURCE=java` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=java` (in your sidecar container) to enable advanced Datadog log parsing.
 
-   For more information, see [Correlating Java Logs and Traces][2].
+   For more information, see [Correlating Java Logs and Traces][3].
 
-4. **Send custom metrics**.
+4. {{% gcr-service-label %}}
 
-   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+5. **Send custom metrics**.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="java" %}}
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+
+{{% gcr-env-vars-sidecar language="java" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-[2]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[3]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
+[1]: https://github.com/DataDog/dd-trace-java/releases
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples

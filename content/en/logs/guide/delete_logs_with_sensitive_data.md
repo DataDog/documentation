@@ -3,9 +3,9 @@ title: Delete Logs with Sensitive Data
 
 disable_toc: false
 further_reading:
-- link: "logs/guide/control-sensitive-logs-data/"
+- link: "logs/guide/manage-sensitive-logs-data-access/"
   tag: "Documentation"
-  text: "Control Sensitive Logs Data"
+  text: "Manage sensitive logs data access"
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
@@ -70,7 +70,7 @@ If the options for changing your retention period, making logs un-queryable, and
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /logs/guide/control-sensitive-logs-data/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
+[2]: /logs/guide/manage-sensitive-logs-data-access/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
 [3]: /help/
 [4]: /getting_started/site/
 [5]: https://www.datadoghq.com/product/sensitive-data-scanner/

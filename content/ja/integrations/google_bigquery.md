@@ -25,6 +25,12 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+
+{{< callout url="https://www.datadoghq.com/product-preview/bigquery-monitoring/" header="プレビューに参加する！" >}}
+   高度な BigQuery 監視はプレビュー中です。クエリ パフォーマンスへのインサイトを得るために、こちらのフォームから登録してください。
+{{< /callout >}}
+
+
 ## 概要
 
 BigQuery は、Google が提供するフルマネージド型の企業向け分析用データウェアハウスです。ペタバイト規模の処理を低コストで行うことができます。
@@ -40,7 +46,7 @@ Google BigQuery からメトリクスを取得して、以下のことができ�
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-### 収集データ
+### ログ収集
 
 Google BigQuery のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
@@ -54,7 +60,7 @@ Google BigQuery のログは Google Cloud Logging で収集され、Cloud Pub/Su
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-cloud-bigquery" >}}
+{{< get-metrics-from-git "google_bigquery" >}}
 
 
 ### イベント

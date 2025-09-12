@@ -257,8 +257,12 @@ To get started, follow the instructions below.
 1. In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
 
    - In Section 1, enter `openlineage`.
-   - In Key 1, enter `transport`.
-   - In Value 1, enter the following:
+   - In Key 1, enter `disabled`.
+   - In Value 1, enter `False` to make sure OpenLineage is activated.
+
+   - In Section 2, enter `openlineage`.
+   - In Key 2, enter `transport`.
+   - In Value 2, enter the following:
 
      ```text
      {

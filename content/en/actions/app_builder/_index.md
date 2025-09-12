@@ -89,3 +89,4 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/app-builder/apps/list

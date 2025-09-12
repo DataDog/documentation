@@ -33,10 +33,7 @@ Your Continuous Testing tests can:
 
 You can set up [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes. Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Testing Results Explorer][5]. 
 
-To improve your developer workflow with Continuous Testing, you can:
-
-* Use the [`datadog-ci` NPM package][6] to run tests directly in your CI pipeline.
-* Use the [Datadog Synthetics VS Code Integration][7] to run tests directly in your IDE.
+To improve your developer workflow with Continuous Testing, you can use the [`datadog-ci` NPM package][6] to run tests directly in your CI pipeline.
 
 Continuous Testing accelerates your organization's application development by automating end-to-end testing across the entire software lifecycle. You can run tests in local and staging environments, parallelize test runs, and integrate with CI providers.
 
