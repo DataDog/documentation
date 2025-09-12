@@ -32,9 +32,26 @@ The Datadog site navigation varies based on the width of your browser. You can h
 
 ## Infrastructure
 
-- All machines show up in the [infrastructure list][7].
-- You can see the tags applied to each machine. Tagging allows you to indicate which machines have a particular purpose.
-- Datadog attempts to automatically categorize your servers. If a new machine is tagged, you can immediately see the stats for that machine based on what was previously set up for that tag. [Read more on tagging][8].
+<!-- 
+Read through getting-started page for each indv topic? Then:
+
+Explain the value proposition
+List key capabilities
+Link to relevant page in the app
+Link to relevant getting started documentation for the feature
+
+Review each section with the owning writer
+ -->
+
+The [infrastructure list][7] serves as a central view of all your infrastructure resources (hosts, containers, processes, etc.) and their associated metadata. 
+
+**Key capabilities:**
+
+- Investigate infrastructure performance
+- Arrange, filter, and visualize hosts based on tags and metrics
+- Inspect hosts to review their tags, performance, health, and more
+
+Navigate to [**Infrastructure > Hosts**][23] in the app to get started. To learn more, read the [Infrastructure List documentation][7].
 
 ## Host map
 
@@ -105,7 +122,7 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 [4]: https://github.com/DataDog/datadog-agent
 [5]: /logs/
 [6]: /tracing/
-[7]: /infrastructure/
+[7]: /infrastructure/list/
 [8]: /getting_started/tagging/
 [9]: /infrastructure/hostmap/
 [12]: /dashboards/
@@ -116,3 +133,4 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 [18]: /real_user_monitoring/
 [19]: /real_user_monitoring/session_replay/browser/
 [22]: /synthetics/
+[23]: https://app.datadoghq.com/infrastructure
