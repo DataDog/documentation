@@ -55508,14 +55508,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_manage
       summary: Delete a dataset
       tags:
       - Datasets
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note: Data Access is in preview. If you have any feedback,
@@ -55544,7 +55546,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get a single dataset by ID
       tags:
       - Datasets
@@ -55587,15 +55590,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_manage
       summary: Edit a dataset
       tags:
       - Datasets
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note: Data Access is in preview. If you have any feedback,
