@@ -26,7 +26,7 @@ Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a 
 
 **Notes**:
 
-* This button will not fix broken authentication issues with the role (where the role name, external ID, or trust policy configuration is not working for Datadog to authenticate to your AWS account). 
+* **Resolve All AWS Permissions Issues** does not fix broken authentication issues with the role (where the role name, external ID, or trust policy configuration does not let Datadog authenticate with your AWS account). 
 * The CloudFormation template is in our public [repository](https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions).
 * The policies created are named with a `datadog-aws-integration-iam-permissions-` prefix followed by a unique hash to avoid colliding with any existing policies you have configured.
 * If **Resolve All AWS Permissions Issues** is clicked multiple times, any old policies created with that prefix are deleted before the new ones are created.
