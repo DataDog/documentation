@@ -837,6 +837,9 @@ Formatting
 : The type of format that the column takes on.<br>
 **Provided values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
 
+Sortable
+: Determines whether the user can sort by the column.<br>
+
 Copyable
 : Determines whether the user click to copy the contents of the column.<br>
 **Provided values**: on, off
