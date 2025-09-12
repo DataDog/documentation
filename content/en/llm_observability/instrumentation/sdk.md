@@ -1989,9 +1989,10 @@ public class MyJavaClass {
 
 ## Span processing
 
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
+
 {{< tabs >}}
 {{% tab "Python" %}}
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None` to prevent the span from being emitted entirely. See the following examples for usage.
 
 ### Example
 
@@ -2044,8 +2045,6 @@ def call_openai():
 
 ### Example: preventing spans from being emitted
 
-You can return `None` from a processor function to prevent a span from being emitted to LLM Observability. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
-
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs import LLMObsSpan
@@ -2070,47 +2069,52 @@ with LLMObs.workflow("internal_workflow"):
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `null` to prevent the span from being emitted entirely. See the following examples for usage.
 
 ### Example
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
   llmobs: {
-    mlApp: "<YOUR_ML_APP_NAME>",
-    spanProcessor: (span) => {
-      if (span.getTag("no_output") === "true") {
-        for (const message of span.output) {
-          message.content = ""
-        }
-      }
-      return span
-    }
-  }
-})
-{{< /code-block >}}
-
-### Example: preventing spans from being emitted
-
-You can return `null` from a processor function to prevent a span from being emitted to LLM Observability. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
-
-{{< code-block lang="javascript" >}}
-const tracer = require('dd-trace').init({
-  llmobs: {
-    mlApp: "<YOUR_ML_APP_NAME>",
-    spanProcessor: (span) => {
-      // Skip spans that are marked as internal or contain sensitive data
-      if (span.getTag("internal") === "true" || span.getTag("sensitive") === "true") {
-        return null  // This span will not be emitted
-      }
-
-      // Process and return the span normally
-      return span
-    }
+    mlApp: "<YOUR_ML_APP_NAME>"
   }
 })
 
 const llmobs = tracer.llmobs
+
+function redactProcessor(span) {
+  if (span.getTag("no_output") === "true") {
+    for (const message of span.output) {
+      message.content = ""
+    }
+  }
+  return span
+}
+
+llmobs.registerProcessor(redactProcessor)
+{{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function filterProcessor(span) {
+  // Skip spans that are marked as internal or contain sensitive data
+  if (span.getTag("internal") === "true" || span.getTag("sensitive") === "true") {
+    return null  // This span will not be emitted
+  }
+
+  // Process and return the span normally
+  return span
+}
+
+llmobs.registerProcessor(filterProcessor)
 
 // This span will be filtered out and not sent to Datadog
 function internalWorkflow() {
