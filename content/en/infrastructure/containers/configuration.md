@@ -265,7 +265,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
 1. In the modal, under **Select indexed fields for filtering/sorting**, select the fields you want to index from the custom resource for filtering and sorting. For some CRDs, Datadog provides a default configuration. You can select additional fields if needed.
 
-    <div class="alert alert-info">After the Datadog Agent is set up, it collects available CRs automatically. Indexing fields is optional.</div>
+    <div class="alert alert-info">After the Datadog Agent is set up, it collects available custom resources automatically. Indexing fields is optional.</div>
 
 
     {{< img src="infrastructure/containers_view/CRD_indexing_modal_1.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Update Fields. A success message displays." video="true">}}
@@ -278,7 +278,7 @@ After the fields are indexed, you can add them as columns in the explorer and so
 
 ### Indexing complex types
 
-{{< img src="containers/explorer/crd_groupby_1.png" alt="Indexing Configuration: A targets object[] array, with 'Group by' drop down options: no field, containerResource.container, containerResource.name, containerResource.value.type, etc" style="width:100%;" >}}
+{{< img src="containers/explorer/crd_groupby_1.png" alt="Indexing Configuration: A targets object[] array, with 'Group by' drop down options: no field, containerResource.container, containerResource.name, containerResource.value.type, etc." style="width:100%;" >}}
 
 For arrays of objects, two group-by strategies are available:
 
