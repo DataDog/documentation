@@ -14,6 +14,11 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
+
+**Most common migrations**:
+- [**v2 to v3**](#from-v2-to-v3): Focus on Open Tracing removal and API updates
+- [**v1 to v2**](#from-v1-to-v2): Major architectural changes to modular design
+
 ## From v2 to v3
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -26,7 +31,7 @@ The transition from version 2 to version 3 focuses on removing support for the l
 
 The migration from v2 to v3 focuses on streamlining modules, refining defaults, and improving reliability across product features.
 
-All SDK products (RUM, Trace, Logs, SessionReplay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
+All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -35,11 +40,14 @@ All SDK products (RUM, Trace, Logs, SessionReplay, and so on) remain modular and
 {{< tabs >}}
 {{% tab "Android" %}}
 
-We are following Google's [AndroidX library version policy](https://developer.android.com/jetpack/androidx/versions#version-table) for the `AndroidX` libraries so the minimum Android API level supported by SDK v3 is `23` now.
+<div class="alert alert-warning">
+We are following Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the `AndroidX` libraries so the minimum Android API level supported by SDK v3 is `23`.
+</div>
 
-Kotlin 1.9 is required.
+**Requirements**:
+- Kotlin 1.9 is required
+- The `Open Tracing` dependency was removed because it is obsolete
 
-The `Open Tracing` dependency was removed because it is obsolete.
 
 {{% /tab %}}
 
@@ -111,7 +119,7 @@ In Xcode, you **must** link the following frameworks:
   DatadogCore.xcframework
   ```
 
-Then you can select the modules you want to use:
+Then, you can select the modules you want to use:
   ```
   DatadogCrashReporting.xcframework + CrashReporter.xcframework
   DatadogLogs.xcframework
@@ -125,19 +133,21 @@ Then you can select the modules you want to use:
 {{% /tab %}}
 {{< /tabs >}}
 
-### API changes
+### Required changes and API updates
 {{< tabs >}}
 {{% tab "Android" %}}
 
 ### Core
 
-In SDK v3, the user info ID becomes mandatory, and the `null` value cannot be provided anymore.
+<div class="alert alert-info">
+<strong>Action Required:</strong> In SDK v3, the user info ID becomes mandatory, and the `null` value cannot be provided anymore.
+</div>
 
 API changes:
 
 | `2.x`                               | `3.0`                              |
 |-------------------------------------|------------------------------------|
-| `Datadog#setUserInfo(String?, ...)` | `Datadog.setUserInfo(String, ...)` |
+| `Datadog.setUserInfo(null, "Jane Smith", "jane@example.com")` | `Datadog.setUserInfo("user123", "Jane Smith", "jane@example.com")` |
 
 ### RUM
 
@@ -147,15 +157,15 @@ API changes:
 
 | `2.x`                                                                               | `3.0`                                                                                |
 |-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `DatadogRumMonitor#startResource(String, String, String,Map<String, Any?>)`         | Use `startResource` method which takes `RumHttpMethod` as `method` parameter instead |
+| `DatadogRumMonitor.startResource(String, String, String,Map<String, Any?>)`         | Use `startResource` method which takes `RumHttpMethod` as `method` parameter instead |
 | `com.datadog.android.rum.GlobalRum`                                                 | `GlobalRum` object was renamed to `com.datadog.android.rum.GlobalRumMonitor`         |
-| `com.datadog.android.rum.RumMonitor#addAction()`                                    | Parameter `attributes: Map<String, Any?>` is now optional                            |
-| `com.datadog.android.rum.RumMonitor#startAction()`                                  | Parameter `attributes: Map<String, Any?>` is now optional                            |
-| `com.datadog.android.rum.RumMonitor#stopResource()`                                 | Parameter `attributes: Map<String, Any?>` is now optional                            |
-| `com.datadog.android.rum.RumMonitor#addError()`                                     | Parameter `attributes: Map<String, Any?>` is now optional                            |
-| `com.datadog.android.rum.RumMonitor#addErrorWithStacktrace()`                       | Parameter `attributes: Map<String, Any?>` is now optional                            |
-| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor#stopResource()` | Parameter `attributes: Map<String, Any?>` is now optional                            |
-| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor#stopResource()` | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.RumMonitor.addAction()`                                    | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.RumMonitor.startAction()`                                  | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.RumMonitor.stopResource()`                                 | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.RumMonitor.addError()`                                     | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.RumMonitor.addErrorWithStacktrace()`                       | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                            |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                            |
 
 ### Logs
 
@@ -165,7 +175,7 @@ The Logs product no longer reports fatal errors. To enable Error Tracking for cr
 
 The [`Open Tracing`](https://opentracing.io/) project has been marked as archived and it is no longer supported. The `Open Tracing` dependencies on has been removed from SDK v3.
 
-The Datadog SDK already supports [`Open Telemetry`](https://opentelemetry.io/), which is now the recommended way to use the tracing feature API.
+The Datadog SDK already supports [`Open Telemetry`](https://opentelemetry.io/), which is the recommended way to use the tracing feature API.
 
 **Note** that the `Open Telemetry` specification library [requires](https://github.com/open-telemetry/opentelemetry-java?tab=readme-ov-file#requirements) desugaring to be enabled for projects with a `minSdk` < 26.
 
@@ -213,7 +223,7 @@ Refer to the official `Open Telemetry` [documentation](https://opentelemetry.io/
 
 #### Migrating tracing from `Open Tracing` to `DatadogTracing` (transition period)
 
-<div class="alert alert-warning">This option has been added for compatibility and to simplify the transition from Open Tracing to Open Telemetry, but it may not be available in future major releases. We recommend using Open Telemetry as the standard for tracing tasks. However, if it is not possible to enable desugaring in your project for some reason, you can use this method.</div>
+<div class="alert alert-warning">This option has been added for compatibility and to simplify the transition from Open Tracing to Open Telemetry, but it may not be available in future major releases. Datadog recommends using Open Telemetry as the standard for tracing tasks. However, if it is not possible to enable desugaring in your project for some reason, you can use this method.</div>
 Replace the `Open Tracing` configuration:
 ```kotlin
 GlobalTracer.registerIfAbsent(
@@ -261,9 +271,9 @@ Replacement hints:
 | `2.x`                                         | `3.0` `Open Telemetry`                                | `3.0` `Datadog Tracing`                           |
 |-----------------------------------------------|-------------------------------------------------------|---------------------------------------------------|
 | `AndroidTracer.Builder().build()`             |                                                       | `DatadogTracing.newTracerBuilder().build()`       |
-| `AndroidTracer#setPartialFlushThreshold(Int)` | `OtelTracerProvider#setPartialFlushThreshold()`       | `DatadogTracerBuilder#withPartialFlushMinSpans()` |
+| `AndroidTracer.setPartialFlushThreshold(Int)` | `OtelTracerProvider.setPartialFlushThreshold()`       | `DatadogTracerBuilder.withPartialFlushMinSpans()` |
 | `io.opentracing.SpanContext#toTraceId()`      | `io.opentelemetry.api.trace.SpanContext#getTraceId()` | `DatadogSpanContext.traceId.toString()`           |
-| `io.opentracing.Span#setError()`              | `io.opentelemetry.api.trace#recordException()`        | `DatadogSpan#addThrowable()`                      |
+| `io.opentracing.Span#setError()`              | `io.opentelemetry.api.trace.recordException()`        | `DatadogSpan.addThrowable()`                      |
 
 ### OkHttp instrumentation
 
@@ -300,15 +310,17 @@ Datadog.initialize(
 
 **Note**: Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
 
-The API to set the user info now requires the `id` parameter, which was optional in 2.x:
+<div class="alert alert-info">
+<strong>Action Required:</strong> The API to set the user info requires the `id` parameter, which was optional in 2.x.
+</div>
 
 | `2.x`                               | `3.0`                              |
 |-------------------------------------|------------------------------------|
-| `Datadog.setUserInfo(id: String?, name: String?, email: String?, extraInfo: [AttributeKey: AttributeValue], in core: DatadogCoreProtocol)` | `Datadog.setUserInfo(id: String, name: String?, email: String?, extraInfo: [AttributeKey: AttributeValue], in core: DatadogCoreProtocol)` |
+| `Datadog.setUserInfo(id: nil, name: "Jane Smith", email: "jane@example.com")` | `Datadog.setUserInfo(id: "user123", name: "Jane Smith", email: "jane@example.com")` |
 
 ### RUM
 
-RUM View-level attributes are now automatically propagated to all related child events, including resources, user actions, errors, and long tasks. This ensures consistent metadata across events, making it easier to filter and correlate data on Datadog dashboards.
+RUM View-level attributes are automatically propagated to all related child events, including resources, user actions, errors, and long tasks. This ensures consistent metadata across events, making it easier to filter and correlate data on Datadog dashboards.
 
 To manage View level attributes more effectively, new APIs were added:
 - `Monitor.addViewAttribute(forKey:value:)`
@@ -317,7 +329,7 @@ To manage View level attributes more effectively, new APIs were added:
 - `Monitor.removeViewAttributes(forKeys:)`
 
 Other notable changes:
-- All Objective-C RUM APIs are now included in `DatadogRUM`. The separate `DatadogObjc` module is no longer available.
+- All Objective-C RUM APIs are included in `DatadogRUM`. The separate `DatadogObjc` module is no longer available.
 - App Hangs and Watchdog terminations are no longer reported from app extensions or widgets.
 - A new property `trackMemoryWarnings` was added to `RUM.Configuration` to report memory warnings as RUM Errors.
 
@@ -336,7 +348,7 @@ API changes:
 
 The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
 
-Additionally, all Objective-C Logs APIs are now included in `DatadogLogs`. The separate `DatadogObjc` module is no longer available.
+Additionally, all Objective-C Logs APIs are included in `DatadogLogs`. The separate `DatadogObjc` module is no longer available.
 
 ### Trace
 
@@ -344,13 +356,13 @@ Trace sampling is now deterministic when used alongside RUM. It uses the RUM `se
 
 Also:
 - The `Trace.Configuration.URLSessionTracking.FirstPartyHostsTracing` configuration sets sampling for all requests by default and the trace context is injected only into sampled requests.
-- All Objective-C Trace APIs are now included in `DatadogTrace`. The separate `DatadogObjc` module is no longer available.
+- All Objective-C Trace APIs are included in `DatadogTrace`. The separate `DatadogObjc` module is no longer available.
 
 **Note**: A similar configuration exists in `RUM.Configuration.URLSessionTracking.FirstPartyHostsTracing`.
 
 ### Session Replay
 
-Privacy settings are now more granular. The previous `defaultPrivacyLevel` parameter has been replaced with:
+Privacy settings are more granular. The previous `defaultPrivacyLevel` parameter has been replaced with:
 - `textAndInputPrivacyLevel`
 - `imagePrivacyLevel`
 - `touchPrivacyLevel`
@@ -536,7 +548,7 @@ In Xcode, you **must** link the following frameworks:
   DatadogCore.xcframework
   ```
 
-Then you can select the modules you want to use:
+Then, you can select the modules you want to use:
   ```
   DatadogLogs.xcframework
   DatadogTrace.xcframework
