@@ -2,9 +2,9 @@
 title: GPU Monitoring
 private: true
 further_reading:
-- link: "/gpu_monitoring/quickstart"
+- link: "/gpu_monitoring/setup"
   tag: "Documentation"
-  text: "GPU Monitoring: Quickstart"
+  text: "Set up GPU Monitoring"
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
@@ -17,7 +17,7 @@ GPU Monitoring is in Preview. To join the preview, click <strong>Request Access<
 ## Overview
 Datadog’s [GPU Monitoring][1] provides a centralized view into GPU fleet health, cost, and performance. GPU Monitoring enables teams to make better provisioning decisions, troubleshoot failed workloads and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
 
-For setup instructions, see [GPU Monitoring: Quickstart][2].
+For setup instructions, see [Set up GPU Monitoring][2].
 
 ### Make data-driven GPU allocation and provisioning decisions
 With visibility into GPU utilization by host, node, or pod, you can identify hotspots or underutilization of expensive GPU infrastructure.
@@ -41,11 +41,11 @@ With GPU Monitoring's resource telemetry, you can analyze trends in GPU resource
 
 ## Ready to start?
 
-See [GPU Monitoring: Quickstart][2] for instructions on how to set up Datadog's GPU Monitoring.
+See [Set up GPU Monitoring][2] for instructions on how to set up Datadog's GPU Monitoring.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/gpu-monitoring
-[2]: /gpu_monitoring/quickstart
+[2]: /gpu_monitoring/setup
