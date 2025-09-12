@@ -21,7 +21,7 @@ jobs:
         id: octo-sts
         with:
           scope: DataDog/documentation
-          policy: self.bump-synthetics-worker-version.create-pr.sts.yaml
+          policy: self.bump-private-action-runner-version.create-pr.sts.yaml
         
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
@@ -36,13 +36,13 @@ jobs:
         id: write-version
         run: |
           python local/bin/py/version_getter.py \
-          --url "https://ddsynthetics-windows.s3.amazonaws.com/installers.json" \
-          --file-name "synthetics_worker_versions.json"
+          --url "https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image" \
+          --file-name "private_action_runner_version.json"
 
       - name: Save modified file
         run: |
           mkdir -p $RUNNER_TEMP/temp
-          cp ./data/synthetics_worker_versions.json $RUNNER_TEMP/temp/
+          cp ./data/private_action_runner_version.json $RUNNER_TEMP/temp/
 
       - name: echo new version
         run: echo ${{ steps.write-version.outputs.new_version }}
@@ -53,14 +53,14 @@ jobs:
 
       - name: Restore modified file
         run: |
-          cp $RUNNER_TEMP/temp/synthetics_worker_versions.json ./data/
+          cp $RUNNER_TEMP/temp/private_action_runner_version.json ./data/
 
       - name: Write version
         if: steps.write-version.outputs.new_version == 'true'
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ./data/synthetics_worker_versions.json
+          git add ./data/private_action_runner_version.json
           git commit -m "(Automated) Bump version"
           git push -f origin HEAD:refs/heads/automatic-version-update/versions
 
