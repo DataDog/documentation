@@ -13,7 +13,7 @@
 {{ with index .Site.Menus $partnersMenu }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
-  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus $partnersMenu) }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.Default.Menus $partnersMenu) }}
 {{ end }}
 {{ $menu := .Scratch.Get "menu" }}
 
@@ -31,7 +31,7 @@
     for use in providing english names for anchoring the nav-links (.nav-link)
 */}}
 {{ if ne $currentPage.Lang "en" }}
-{{$engMenu := (index .Sites.First.Menus $partnersMenu) }}
+{{$engMenu := (index .Sites.Default.Menus $partnersMenu) }}
 {{ range $engMenu }}
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/partners/") }}
     {{ range .Children }}
