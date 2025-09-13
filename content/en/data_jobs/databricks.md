@@ -319,14 +319,14 @@ Each of the following environment variables must be added to the cluster policy.
 This can be done by following these steps for each variable:
 
 1. Click **Add Definition** under the **Definition** section.
-2. In the **Field** dropdown that appears, select **spark_env_vars**
+2. In the **Field** dropdown that appears, select **spark_env_vars**.
 
    {{< img src="data_jobs/databricks/configure-databricks-cluster-policy-envvars.png" alt="Databricks UI, cluster policy creation page, Definition section. A 'Field' drop-down with 'spark_env_vars' selected, showing text boxes to enter a 'Key' and 'Value' envvar configuration. A 'Type' dropdown with 'Fixed' selected, and a 'Hidden' checkbox that is selected." style="width:80%;" >}}
 
    - In the **Key** field, enter the environment variable key.
    - In the **Value** field, enter the environment variable value.
    - Under the **Type** drop-down, select `Fixed`.
-   - Toggle the **Hidden** checkbox to reduce exposure of the env vars.
+   - Toggle the **Hidden** checkbox to reduce exposure of sensitive environment variables.
 
    Optionally, you can also set other init script parameters and Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`. The script can be configured using the following parameters:
 
