@@ -1,6 +1,7 @@
 rum_sdk_platform_options:
-  - id: android
+  - id: browser
     default: true
+  - id: android
   - id: ios
   - id: react_native
 

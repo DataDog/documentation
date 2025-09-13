@@ -2242,6 +2242,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_issue_team_ownership
       weight: 10
+    - name: Installation
+      url: error_tracking/frontend/setup
+      parent: error_tracking_frontend
+      identifier: error_tracking_setup
+      weight: 100
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -7230,6 +7235,16 @@ menu:
       parent: rum_browser
       identifier: troubleshooting
       weight: 111
+    - name: Performance Monitoring
+      url: real_user_monitoring/performance_monitoring/
+      parent: rum
+      identifier: rum_performance_monitoring
+      weight: 2
+    - name: Setup
+      url: real_user_monitoring/performance_monitoring/setup
+      parent: rum_performance_monitoring
+      identifier: rum_performance_monitoring_setup
+      weight: 2
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum

@@ -13,7 +13,7 @@ further_reading:
 ---
 ## Overview
 
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Android RUM setup documentation][2]. 
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Android RUM setup documentation][2].
 
 ## Enrich user sessions
 
@@ -23,9 +23,9 @@ Android RUM automatically tracks attributes such as user activity, screens, erro
 
 In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
-
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        fun onResume() {
          GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
@@ -35,8 +35,10 @@ In addition to [tracking views automatically][4], you can also track specific di
          GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
        }
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
    ```java
        public void onResume() {
             GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
@@ -46,6 +48,7 @@ In addition to [tracking views automatically][4], you can also track specific di
             GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
        }
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -57,18 +60,22 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        fun onUserInteraction() { 
             GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
        }
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
    ```java
        public void onUserInteraction() {
             GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
        }
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -78,6 +85,7 @@ When [tracking resources automatically][6], provide a custom `RumResourceAttribu
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
     override fun onProvideAttributes(
@@ -92,8 +100,10 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class CustomRumResourceAttributesProvider implements RumResourceAttributesProvider {
     @NonNull
@@ -115,6 +125,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -122,8 +133,9 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        fun loadResource() {
             GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
@@ -135,8 +147,10 @@ In addition to [tracking resources automatically][6], you can also track specifi
             } 
        }
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
    ```java
        public void loadResource() {
             GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
@@ -148,6 +162,7 @@ In addition to [tracking resources automatically][6], you can also track specifi
             }
        }
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -229,6 +244,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Android SDK a
 ### Track user sessions
 
 Adding user information to your RUM sessions makes it possible to:
+
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
@@ -258,29 +274,29 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ```
 
 ## Track widgets
- 
+
 Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][10].
 
 ## Initialization parameters
 
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
-`setFirstPartyHosts()` 
+`setFirstPartyHosts()`
 : Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
-`useSite(DatadogSite)` 
+`useSite(DatadogSite)`
 : Switches target data to EU1, US1, US3, US5, US1_FED, AP1 and AP2 sites.
 
 `setFirstPartyHostsWithHeaderType`
 : Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
+`setBatchSize([SMALL|MEDIUM|LARGE])`
 : Defines the individual batch size for requests sent to Datadog.
 
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])`
 : Defines the frequency for requests made to Datadog endpoints (if requests are available).
 
-`setBatchProcessingLevel(LOW|MEDIUM|HIGH)` 
+`setBatchProcessingLevel(LOW|MEDIUM|HIGH)`
 : Defines the number of batches sent in each upload cycle.
 
 `setAdditionalConfiguration`
@@ -289,7 +305,7 @@ You can use the following methods in `Configuration.Builder` when creating the D
 `setProxy`
 : Enables a custom proxy for uploading tracked data to Datadog's intake.
 
-`setEncryption(Encryption)` 
+`setEncryption(Encryption)`
 : Set an encryption function applied to data stored locally on the device.
 
 `setPersistenceStrategyFactory`
@@ -298,33 +314,33 @@ You can use the following methods in `Configuration.Builder` when creating the D
 `setCrashReportsEnabled(Boolean)`
 : Allows you to control whether JVM crashes are tracked or not. The default value is `true`.
 
-`setBackpressureStrategy(BackPressureStrategy)` 
+`setBackpressureStrategy(BackPressureStrategy)`
 : Define the strategy the SDK uses when handling large volumes of data and internal queues are full.
- 
+
 You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM features:
 
-`trackUserInteractions(Array<ViewAttributesProvider>)` 
+`trackUserInteractions(Array<ViewAttributesProvider>)`
 : Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
 
 `disableUserInteractionTracking`
 : Disables the user interaction automatic tracker.
 
-`useViewTrackingStrategy(strategy)` 
+`useViewTrackingStrategy(strategy)`
 : Defines the strategy used to track views. See [Automatically track views](#automatically-track-views) for more information.
 
-`trackLongTasks(durationThreshold)` 
+`trackLongTasks(durationThreshold)`
 : Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog. See [Automatically track long tasks](#automatically-track-long-tasks) for more information.
 
-`trackNonFatalAnrs(Boolean)` 
+`trackNonFatalAnrs(Boolean)`
 : Enables tracking non-fatal ANRs. This is enabled by default on Android API 29 and below, and disabled by default on Android API 30 and above.
 
-`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : Sets the preferred frequency for collecting mobile vitals.
 
-`setSessionSampleRate(<sampleRate>)` 
+`setSessionSampleRate(<sampleRate>)`
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setSessionListener(RumSessionListener)` 
+`setSessionListener(RumSessionListener)`
 : Sets a listener to be notified on when a new RUM Session starts.
 
 `setTelemetrySampleRate`
@@ -362,7 +378,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 
 `trackAnonymousUser`
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
- 
+
 ### Automatically track views
 
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
@@ -373,7 +389,7 @@ To automatically track your views (such as activities and fragments), provide a 
 `FragmentViewTrackingStrategy`
 : Every fragment in your application is considered a distinct view.
 
-`MixedViewTrackingStrategy` 
+`MixedViewTrackingStrategy`
 : Every activity or fragment in your application is considered a distinct view.
 
 `NavigationViewTrackingStrategy`
@@ -383,26 +399,30 @@ For instance, to set each fragment as a distinct view, use the following configu
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        val rumConfig = RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
         .build()
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
    ```java
        RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
         .build();
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-   
 For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedViewTrackingStrategy`, you can filter which `Fragment` or `Activity` is tracked as a RUM View by providing a `ComponentPredicate` implementation in the constructor:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        val rumConfig = RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(
@@ -418,8 +438,10 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
         )
         .build()  
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
    ```java
         RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
             .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
@@ -438,12 +460,11 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
             ))
             .build();
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-   
 **Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
-
 
 ### Automatically track network requests
 
@@ -461,6 +482,7 @@ To get timing information in resources (such as third-party providers, network r
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        val tracedHosts = listOf("example.com")
        val okHttpClient = OkHttpClient.Builder()
@@ -468,8 +490,10 @@ To get timing information in resources (such as third-party providers, network r
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
    ```java
        List<String> tracedHosts = Arrays.asList("example.com");
        OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -477,6 +501,7 @@ To get timing information in resources (such as third-party providers, network r
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -486,6 +511,7 @@ Long running operations performed on the main thread can impact the visual perfo
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        val rumConfig = RumConfiguration.Builder(applicationId)
         // …
@@ -501,8 +527,10 @@ For example, to replace the default `100 ms` duration, set a custom threshold in
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build()
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
   ```java
       RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         // …
@@ -518,6 +546,7 @@ For example, to replace the default `100 ms` duration, set a custom threshold in
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build();
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -527,6 +556,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
    ```kotlin
        val rumConfig = RumConfiguration.Builder(applicationId)
         // ...
@@ -537,8 +567,10 @@ To modify some attributes in your RUM events, or to drop some of the events enti
         .setLongTaskEventMapper(rumLongTaskEventMapper)
         .build()
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
   ```java
       RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         // ...
@@ -550,11 +582,12 @@ To modify some attributes in your RUM events, or to drop some of the events enti
         .build();
 
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
-     
+
    | Event type    | Attribute key        | Description                                      |
    | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
@@ -581,7 +614,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`          | Name of the view.                                |
-   
+
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
 ## Retrieve the RUM session ID
@@ -594,6 +627,66 @@ You can access the RUM session ID at runtime without waiting for the `sessionSta
 GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
   currentSessionId = sessionId
 }
+```
+
+## Track background events
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
+
+Add the following snippet during configuration:
+
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+.trackBackgroundEvents(true)
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+.trackBackgroundEvents(true)
+```
+
+{% /tab %}
+{% /tabs %}
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
+## Sending data when device is offline
+
+The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches.
+
+Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
+
+## Kotlin extensions
+
+### `Closeable` extension
+
+You can monitor `Closeable` instance usage with the `useMonitored` method, which reports errors to Datadog and closes the resource afterwards.
+
+```kotlin
+val closeable: Closeable = ...
+closeable.useMonitored {
+    // Your code here
+}
+```
+
+### Track local assets as resources
+
+You can track access to the assets by using `getAssetAsRumResource` extension method:
+
+```kotlin
+val inputStream = context.getAssetAsRumResource(fileName)
+```
+
+Usage of the local resources can be tracked by using `getRawResAsRumResource` extension method:
+
+```kotlin
+val inputStream = context.getRawResAsRumResource(id)
 ```
 
 ## Further reading
@@ -612,6 +705,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#time-to-network-settled
 [12]: https://square.github.io/okhttp/features/events/
-[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
-[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
 [13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
