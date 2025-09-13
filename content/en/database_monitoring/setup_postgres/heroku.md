@@ -154,6 +154,13 @@ instances:
     dbname: <DB_NAME>
     ssl: True
 ```
+
+At this point you can also enable additional features found in the postgres [conf.yaml.example][7] like [schema collection][6]. 
+
+You can manually replace the placeholders in the YAML file by following the [Manual Setup](#manual-setup) or follow the [Prerun Script](#prerun-script) instructions to learn how do this programmatically.
+
+[6]: /database_monitoring/schema_explorer
+[7]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
  
 {{% collapse-content title="Manual Setup" level="h5" %}}
 #### Manual Setup
@@ -161,8 +168,6 @@ instances:
 Now replace those values using the `HEROKU_POSTGRESQL_<COLOR>_URL` connection string where the URL follows the structure:
 
 `postgres://<DATADOG_USERNAME>:<DATADOG_USER_PASSWORD>@<DATABASE_ENDPOINT>:<PORT>/<DB_NAME>`.
-
-At this point you can enable additional features found in the postgres [conf.yaml.example](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) like [schema collection][6]. 
 
 Once you have made the necessary changes, you can redeploy the heroku application and agent with the commands below:
 
@@ -203,6 +208,8 @@ git add .
 git commit -m "Enable postgres integration"
 git push heroku main
 ```
+
+[5]: /agent/basic_agent_usage/heroku/#prerun-script
 {{% /collapse-content %}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -212,5 +219,3 @@ git push heroku main
 [2]: https://www.datadoghq.com/product/database-monitoring/
 [3]: https://devcenter.heroku.com/articles/heroku-postgresql
 [4]: https://devcenter.heroku.com/articles/heroku-postgres-plans
-[5]: /agent/basic_agent_usage/heroku/#prerun-script
-[6]: /database_monitoring/schema_explorer
