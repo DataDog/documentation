@@ -76,7 +76,8 @@ Finally, we configure the Datadog agent to enable the Postgres Integration, for 
 
 **Option B**: Allows the customer to create their own Postgres configuration allowing them to enable additional features that aren’t available in Option A.
 
-{{% collapse-content title="Option A: Static Configuration" level="h4" %}}
+{{< tabs >}}
+{{% tab "Option A: Static Configuration" %}}
 ### Static Configuration
 
 To enable the Postgres Integration to collect standard metrics, simply set `DD_ENABLE_HEROKU_POSTGRES` to true and rebuild the application:
@@ -97,9 +98,9 @@ git push heroku main
 ```
 
 At this point the Postgres Integration should be running and monitoring your Heroku Database.
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="Option B: Custom Configuration" level="h4" %}}
+{{% tab "Option B: Custom Configuration" %}}
 ### Custom Configuration
 
 <div class="alert alert-warning">
@@ -173,7 +174,6 @@ git push heroku main
 {{% /collapse-content %}}
 
 {{% collapse-content title="Prerun Script" level="h5" %}}
-
 #### Prerun Script
 
 Using a [prerun script][5] you can programatically replace those values before starting the Datadog Agent. If you don't have a prerun script yet, create a shell script called `prerun.sh` in the `datadog/` directory in the root for the project and add the following:
@@ -203,10 +203,10 @@ git add .
 git commit -m "Enable postgres integration"
 git push heroku main
 ```
-
 {{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
-{{% /collapse-content %}}
 
 [1]: /agent/basic_agent_usage/heroku/
 [2]: https://www.datadoghq.com/product/database-monitoring/
