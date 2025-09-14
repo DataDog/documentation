@@ -12,7 +12,7 @@ products:
   name: CSM 위협
   url: /security/threats/
 - icon: app-sec
-  name: App and API Protection
+  name: 앱 및 API 보호
   url: /security/application_security/
 title: 억제
 ---
