@@ -2242,15 +2242,10 @@ menu:
       parent: error_tracking
       identifier: error_tracking_issue_team_ownership
       weight: 10
-    - name: Installation
+    - name: Setup
       url: error_tracking/frontend/setup
       parent: error_tracking_frontend
       identifier: error_tracking_setup
-      weight: 100
-    - name: Browser Error Tracking
-      url: error_tracking/frontend/browser
-      parent: error_tracking_frontend
-      identifier: error_tracking_browser
       weight: 100
     - name: Collecting Browser Errors
       url: error_tracking/frontend/collecting_browser_errors
@@ -2277,7 +2272,7 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
       weight: 105
-    - name: Track Browser and Mobile Errors
+    - name: Track Client Errors
       url: error_tracking/frontend
       parent: error_tracking
       identifier: error_tracking_frontend

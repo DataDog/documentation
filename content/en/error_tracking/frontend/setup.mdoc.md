@@ -22,8 +22,31 @@ further_reading:
 {% if equals($platform, "browser") %}
   {% partial file="error_tracking/browser_setup.mdoc.md" /%}
 {% /if %}
+
 {% if equals($platform, "android") %}
   {% partial file="error_tracking/android_setup.mdoc.md" /%}
 {% /if %}
 
+{% if equals($platform, "ios") %}
+  {% partial file="error_tracking/ios-setup.mdoc.md" /%}
+{% /if %}
 
+{% if equals($platform, "flutter") %}
+  {% partial file="error_tracking/flutter-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "roku") %}
+  {% partial file="error_tracking/roku-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "react_native") %}
+  {% partial file="error_tracking/react-native-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "kotlin_multiplatform") %}
+  {% partial file="error_tracking/kotlin-multiplatform-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "unity") %}
+  {% partial file="error_tracking/unity-setup.mdoc.md" /%}
+{% /if %}
