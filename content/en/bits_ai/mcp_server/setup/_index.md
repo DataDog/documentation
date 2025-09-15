@@ -233,14 +233,14 @@ This section lists the tools available in the Datadog MCP Server and provides ex
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
 ### `search_datadog_docs`
-*Toolset: **core***
+*Toolset: **core***\
 Returns AI-generated answers to Datadog questions, sourced from [Datadog documentation][15].
 - How do you enable Datadog profiling in Python?
 - What's the best way to correlate logs and traces?
 - How does RUM auto-instrumentation work?
 
 ### `search_datadog_events`
-*Toolset: **core***
+*Toolset: **core***\
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
 
 - Show me all deployment events from the last 24 hours.
@@ -250,7 +250,7 @@ Searches events like monitor alerts, deployment notifications, infrastructure ch
 **Note**: See the [Event Management API][16] for more details.
 
 ### `get_datadog_incident`
-*Toolset: **core***
+*Toolset: **core***\
 Retrieves detailed information about an incident.
 
 - Get details for incident ABC123.
@@ -260,7 +260,7 @@ Retrieves detailed information about an incident.
 **Note**: The tool is operational, but does not include incident timeline data.
 
 ### `get_datadog_metric`
-*Toolset: **core***
+*Toolset: **core***\
 Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
 
 - Show me CPU utilization metrics for all hosts in the last 4 hours.
@@ -268,7 +268,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 - Display memory usage trends for our database servers.
 
 ### `search_datadog_monitors`
-*Toolset: **core***
+*Toolset: **core***\
 Retrieves information about Datadog monitors, including their statuses, thresholds, and alert conditions.
 
 - List all monitors that are currently alerting.
@@ -276,7 +276,7 @@ Retrieves information about Datadog monitors, including their statuses, threshol
 - Find monitors tagged with `team:infrastructure`.
 
 ### `get_datadog_trace`
-*Toolset: **core***
+*Toolset: **core***\
 Fetches a complete trace from Datadog APM using a trace ID.
 
 - Get the complete trace for ID 7d5d747be160e280504c099d984bcfe0.
@@ -286,7 +286,7 @@ Fetches a complete trace from Datadog APM using a trace ID.
 **Note**: Large traces with thousands of spans may be truncated (and indicated as such) without a way to retrieve all spans.
 
 ### `search_datadog_dashboards`
-*Toolset: **core***
+*Toolset: **core***\
 Lists available Datadog dashboards and key details.
 
 - Show me all available dashboards in our account.
@@ -296,7 +296,7 @@ Lists available Datadog dashboards and key details.
 **Note**: This tool lists relevant dashboards but provides limited detail about their contents.
 
 ### `search_datadog_hosts`
-*Toolset: **core***
+*Toolset: **core***\
 Lists and provides information about monitored hosts, supporting filtering and searching.
 
 - Show me all hosts in our production environment.
@@ -304,7 +304,7 @@ Lists and provides information about monitored hosts, supporting filtering and s
 - Get all hosts tagged with `role:database`.
 
 ### `search_datadog_incidents`
-*Toolset: **core***
+*Toolset: **core***\
 Retrieves a list of Datadog incidents, including their state, severity, and metadata.
 
 - Show me all active incidents by severity.
@@ -312,7 +312,7 @@ Retrieves a list of Datadog incidents, including their state, severity, and meta
 - Find incidents that are customer-impacting.
 
 ### `search_datadog_metrics`
-*Toolset: **core***
+*Toolset: **core***\
 Lists available metrics, with options for filtering and metadata.
 
 - Show me all available Redis metrics.
@@ -320,7 +320,7 @@ Lists available metrics, with options for filtering and metadata.
 - Find metrics tagged with `service:api`.
 
 ### `search_datadog_services`
-*Toolset: **core***
+*Toolset: **core***\
 Lists services in Datadog's Software Catalog with details and team information.
 
 - Show me all services in our microservices architecture.
@@ -328,7 +328,7 @@ Lists services in Datadog's Software Catalog with details and team information.
 - Find services related to payment processing.
 
 ### `search_datadog_spans`
-*Toolset: **core***
+*Toolset: **core***\
 Retrieves spans from APM traces with filters such as service, time, resource, and so on.
 
 - Show me spans with errors from the checkout service.
@@ -336,7 +336,7 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 - Get spans for failed API requests to our payment service.
 
 ### `search_datadog_logs`
-*Toolset: **core***
+*Toolset: **core***\
 Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
 
 - Show me error logs from the nginx service in the last hour.
@@ -344,7 +344,7 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 - Get all 500 status code logs from production.
 
 ### `search_datadog_rum_events`
-*Toolset: **core***
+*Toolset: **core***\
 Search Datadog RUM events using advanced query syntax.
 
 - Show JavaScript errors and console warnings in RUM.
@@ -352,7 +352,7 @@ Search Datadog RUM events using advanced query syntax.
 - Show recent user interactions on product detail pages.
 
 ### `get_synthetics_tests`
-*Toolset: **synthetics***
+*Toolset: **synthetics***\
 Searches Datadog Synthetic tests.
 
 - Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
@@ -360,7 +360,7 @@ Searches Datadog Synthetic tests.
 - Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
 
 ### `edit_synthetics_tests`
-*Toolset: **synthetics***
+*Toolset: **synthetics***\
 Edits Datadog Synthetic HTTP API tests.
 
 - Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
@@ -368,7 +368,7 @@ Edits Datadog Synthetic HTTP API tests.
 - Add my team tag to the test `aaa-bbb-ccc`.
 
 ### `synthetics_test_wizard`
-*Toolset: **synthetics***
+*Toolset: **synthetics***\
 Preview and create Datadog Synthetics HTTP API Tests.
 
 - Create Synthetics tests on every endpoint defined in this code file.
