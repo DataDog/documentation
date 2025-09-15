@@ -50,7 +50,7 @@ If you are authenticating using a service account:
 
 ## Setup
 
-Set up the SentinelOne destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Google Pub/Sub destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 ### Set up the destination
 
