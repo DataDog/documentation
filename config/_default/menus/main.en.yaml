@@ -5548,14 +5548,14 @@ menu:
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
       weight: 1104
-    - name: CloudPrem
-      identifier: observability_pipelines_cloudprem
-      url: observability_pipelines/destinations/cloudprem/
-      parent: observability_pipelines_destinations
-      weight: 1105
     - name: CrowdStrike NG-SIEM
       identifier: observability_pipelines_crowdstrike_ng_siem
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
+      parent: observability_pipelines_destinations
+      weight: 1105
+    - name: Datadog CloudPrem
+      identifier: observability_pipelines_cloudprem
+      url: observability_pipelines/destinations/cloudprem/
       parent: observability_pipelines_destinations
       weight: 1106
     - name: Datadog Logs

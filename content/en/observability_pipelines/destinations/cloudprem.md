@@ -8,7 +8,7 @@ Use Observability Pipelines' CloudPrem destination to send logs to Datadog Cloud
 
 ## Prerequisites
 
-Before configuring the destination, you need to deploy a CloudPrem cluster. Learn how to install it in the [CloudPrem installation section](/cloudprem/install).
+Before configuring the destination, you need to deploy a CloudPrem cluster. Learn how to install it in the [CloudPrem installation section][3].
 
 ## Setup
 
@@ -16,11 +16,15 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 
 ### Set up the destination
 
-Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options are in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access.
+- If disabled (default): Up to 500 events are buffered before flush.
+- If enabled:
+	1. Select the buffer type you want to set.
+		- **Memory**: Fast, limited by RAM
+		- **Buffer size**: Durable, survives restarts
+	1. Enter the buffer size and select the unit.
+		- Maximum capacity in MB or GB.
+	
 
 ### Set the environment variables
 
@@ -41,3 +45,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /cloudprem/install/
