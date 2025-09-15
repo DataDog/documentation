@@ -38,9 +38,9 @@ The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of sever
 
 ## Connection to Datadog UI
 
-There are two ways to use connect Datadog UI to CloudPrem:
-- Accept external requests from Datadog: You give Datadog a DNS to send gRPC requests to, configure an Public Ingress to accept those requests. Learn how to configure the ingress [here]()
-- Let CloudPrem initiates a bi-directional gRPC requests: this is the reverse connection feature.  Learn how to configure the reverse connection [here]()
+There are two ways to connect the Datadog UI to CloudPrem:
+- **Accept external requests from Datadog**: Provide Datadog with a DNS endpoint for gRPC requests and configure a public Ingress toaccept those requests. Learn [how to configure the ingress][].
+- **Reverse connection**: Let CloudPrem initiate bi-directional gRPC requests to Datadog. Learn [how to configure the reverse connection][].
 
 
 ## Further reading
