@@ -73,7 +73,7 @@ There are two types of retention filters:
 | **What is indexed** | Only spans targeted by the query | All spans belonging to traces that contain spans matching the query |
 | **Where it is queryable** | Span Explorer | Span Explorer and Trace Queries |
 
-**Note**: Indirectly indexed spans retained by trace-level retention filters (i.e. spans belonging to traces that contain spans matching the query, but not directly matching the query) are not evaluated by [trace analytics monitors][19]
+**Note**: Indirectly indexed spans retained by trace-level retention filters (that is, spans that don't match the query directly but belong to traces that do) are not evaluated by [trace analytics monitors][19].
 
 ### Default retention filters
 
