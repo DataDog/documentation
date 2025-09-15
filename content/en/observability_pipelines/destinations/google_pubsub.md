@@ -11,7 +11,7 @@ Use Observability Pipelines' Google Pub/Sub source to pull logs from the Google 
 
 Common scenarios when you might use this destination:
 - For analytics pipelines: Route logs downstream into Google BigQuery, Data Lake, or custom machine learning workflows.
-- For event-driven processing: Publish logs to a Pub/Sub topic so Google Cloud Functions, Cloud Run functions, and Dataflow jobs can react to them in real time.
+- For event-driven processing: Publish logs to a Pub/Sub topic so that Google Cloud Functions, Cloud Run functions, and Dataflow jobs can carry out actions based on the logs in real time.
 
 ## Prerequisites
 
@@ -86,6 +86,8 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 ### Set environment variables
 
 #### Optional alternative Pub/Sub endpoints
+
+{{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field " style="width:60%;" >}}
 
 By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
 
