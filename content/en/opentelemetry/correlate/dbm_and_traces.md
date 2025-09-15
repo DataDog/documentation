@@ -35,8 +35,8 @@ For DBM correlation to work, your database spans must include the following attr
 | `db.name`      | No        | The logical database or schema name being queried.                                                                | `user_accounts`                         |
 
 <div class="alert alert-info">
-The <code>span.type</code> attribute is a Datadog-specific convention for identifying and processing database spans. 
-When using OpenTelemetry auto-instrumentation or the Datadog Agent, this attribute is set automatically. 
+The <code>span.type</code> attribute is a Datadog-specific convention for identifying and processing database spans.
+When using OpenTelemetry auto-instrumentation or the Datadog Agent, this attribute is set automatically.
 Only add it manually if you are instrumenting spans directly with the SDK.
 </div>
 
@@ -156,7 +156,7 @@ After your application is sending traces, you can see the correlation in the APM
 If you don't see the expected correlation between your APM traces and DBM, it's typically due to a missing or incorrect configuration. Check the following common causes:
 
 - **Missing attributes**: The database span must contain `db.system` and `db.statement`. The `span.type` attribute is also required but is typically derived automatically by Datadog.
-- **Incorrect unified service tagging**: The `service` tag on your traces must match the `service` tag on your database host metrics. Verify that [unified service tagging][1] is configured correctly.
+- **Incorrect unified service tagging**: The `service` tag on your database spans must be set. Verify that [unified service tagging][1] is configured correctly.
 - **The SQL query may not be parsable**: The correlation relies on Datadog's ability to parse the SQL query from the `db.statement` attribute. If the query uses non-standard or complex syntax, parsing may fail. If you suspect this is the case, [contact Datadog support][5] for assistance.
 - **The correct feature gates must be enabled** for your specific trace ingestion path as described in the setup steps.
 
