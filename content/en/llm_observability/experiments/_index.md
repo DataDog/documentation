@@ -23,7 +23,7 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
-pip install ddtrace>=3.11.0
+pip install ddtrace>=3.14.0
 ```
 
 ### Cookbooks
@@ -41,13 +41,14 @@ LLMObs.enable(
     ml_app="my-app",
     api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
     app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
-    site="datadoghq.com"  # defaults to DD_SITE environment variable
+    site="datadoghq.com",  # defaults to DD_SITE environment variable
+    project_name="my-project"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or default-project if the environment variable is not set
 )
 ```
 
 ## Datasets
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ (optional) and _metadata_ (optional).
+A _dataset_ is a collection of _inputs_, and _expected outputs_ (optional) and _metadata_ (optional). Each _dataset_ is associated to a _project_.
 You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
 
 ### Creating a dataset
@@ -58,7 +59,8 @@ You can create a new dataset using `LLMObs.create_dataset()`:
 from ddtrace.llmobs import LLMObs
 
 dataset = LLMObs.create_dataset(
-    name="capitals-of-the-world",
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project", # optional, defaults to project_name used in LLMObs.enable
     description="Questions about world capitals",
     records=[
         {
@@ -123,10 +125,13 @@ for record in dataset:
 
 ### Retrieving a dataset
 
-To retrieve an existing dataset from Datadog:
+To retrieve a project's existing dataset from Datadog:
 
 ```python
-dataset = LLMObs.pull_dataset("capitals-of-the-world")
+dataset = LLMObs.pull_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
+)
 
 # Get dataset length
 print(len(dataset))
@@ -148,7 +153,8 @@ dataset = LLMObs.create_dataset_from_csv(
     expected_output_columns=["answer"],           # Columns to use as expected output
     metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
     csv_delimiter=",",                           # Optional: Defaults to comma
-    description="Geography quiz dataset"          # Optional: Dataset description
+    description="Geography quiz dataset",          # Optional: Dataset description
+    project_name="quizzes-project"          # Optional: defaults to the project name from LLMObs.enable
 )
 
 # Example CSV format:
