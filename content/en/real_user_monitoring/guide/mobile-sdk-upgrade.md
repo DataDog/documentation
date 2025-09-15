@@ -41,7 +41,7 @@ All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular an
 {{% tab "Android" %}}
 
 <div class="alert alert-warning">
-We are following Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the `AndroidX` libraries so the minimum Android API level supported by SDK v3 is `23`.
+We are following Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is `23`.
 </div>
 
 **Requirements**:
@@ -140,7 +140,7 @@ Then, you can select the modules you want to use:
 ### Core
 
 <div class="alert alert-info">
-<strong>Action Required:</strong> In SDK v3, the user info ID becomes mandatory, and the `null` value cannot be provided anymore.
+<strong>Action Required:</strong> In SDK v3, the user info ID becomes mandatory, and the <code>null</code> value cannot be provided anymore.
 </div>
 
 API changes:
@@ -311,7 +311,7 @@ Datadog.initialize(
 **Note**: Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
 
 <div class="alert alert-info">
-<strong>Action Required:</strong> The API to set the user info requires the `id` parameter, which was optional in 2.x.
+<strong>Action Required:</strong> The API to set the user info requires the <code>id</code> parameter, which was optional in 2.x.
 </div>
 
 | `2.x`                               | `3.0`                              |
