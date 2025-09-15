@@ -332,11 +332,11 @@ Searches Datadog Synthetic tests.
 - Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
 
 ### `edit_synthetics_tests`
-Edits Datadog Synthetic HTTP API tests
+Edits Datadog Synthetic HTTP API tests.
 
-- Improve the assertions of the synthetic test defined on my endpoint `/v1/my/tested/endpoint`
-- Pause the test aaa-bbb-ccc and set the locations to only European locations.
-- Add my team tag to the test aaa-bbb-ccc
+- Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
+- Pause the test `aaa-bbb-ccc` and set the locations to only European locations.
+- Add my team tag to the test `aaa-bbb-ccc`.
 
 ### `synthetics_test_wizard`
 Allows to preview and then create Datadog Synthetics HTTP API Tests
