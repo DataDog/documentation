@@ -114,6 +114,12 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       display: none !important;
     }
   }
+
+  // Align Widget Model tab buttons with content in main pages
+  .main & {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
 }
 
 // Common tab styles
