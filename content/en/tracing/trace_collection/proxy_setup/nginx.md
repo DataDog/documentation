@@ -402,7 +402,7 @@ sudo nginx -s reload
 
 ### Step 2: Configure the log pipeline to parse the trace and span IDs
 
-The trace and span IDs in the logs will be in hexadecimal format:
+By default, logs capture `dd.trace_id` and `dd.span_id` in hexadecimal format:
 
 ```
 10.244.0.1 - - [12/Sep/2025:22:41:03 +0000] "GET /health HTTP/1.1" 200 87 0.002 "-" "kube-probe/1.32" "-" dd.trace_id="68c4a17f000000009aed12af2ccb1ead" dd.span_id="9aed12af2ccb1ead"
