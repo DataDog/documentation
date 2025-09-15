@@ -8,7 +8,6 @@ This page provides instructions on setting up Datadog's GPU Monitoring on a unif
 
 To begin using Datadog's GPU Monitoring, you must meet the following critieria:
 - You are a Datadog user with active Datadog infrastructure hosts
-- The [latest version][2] of the Datadog Agent is [installed and deployed][1] on all of the GPU-enabled hosts that you want to monitor
 - The NVIDIA device plugin for Kubernetes is installed ([directly][3], or through [NVIDIA GPU Operator][4])
 
 #### Minimum version requirements
@@ -26,7 +25,7 @@ In a _uniform cluster_, all nodes have GPU devices.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-1. [Install and deploy][1] the Datadog Agent on Kubernetes in your cluster.
+1. Ensure that the [latest version of the Datadog Agent][2] is [installed and deployed][1] on every GPU host you wish to monitor.
 2. Modify your `DatadogAgent` resource with the following parameters:
 
    `gpu.enabled: true`
@@ -36,7 +35,7 @@ In a _uniform cluster_, all nodes have GPU devices.
    : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`)
 
    `gpu.patchCgroupPermissions: true` 
-   : _Only for GKE_. Patches cgroup permissions.
+   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices. 
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
    : _Only for AWS EKS and Oracle Cloud_. Specifies container runtime, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`
@@ -60,10 +59,12 @@ In a _uniform cluster_, all nodes have GPU devices.
 3. Apply your changes and restart the Datadog Agent.
 
 [1]: /containers/kubernetes/installation/?tab=datadogoperator
+[2]: https://github.com/DataDog/datadog-agent/releases
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-1. [Install and deploy][1] the Datadog Agent on Kubernetes in your cluster.
+1. Ensure that the [latest version of the Datadog Agent][2] is [installed and deployed][1] on every GPU host you wish to monitor.
 
 2. Modify your `datadog-values.yaml` configuration file with the following parameters:
 
@@ -74,7 +75,7 @@ In a _uniform cluster_, all nodes have GPU devices.
    : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`)
 
    `gpuMonitoring.configureCgroupPerms: true` 
-   : _Only for GKE_. Patches cgroup permissions.
+   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices. 
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
    : _Only for AWS EKS and Oracle Cloud_. Specifies container runtime, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`
@@ -93,6 +94,8 @@ In a _uniform cluster_, all nodes have GPU devices.
 3. Upgrade your Helm chart and restart the Datadog Agent.
 
 [1]: /containers/kubernetes/installation/?tab=helm
+[2]: https://github.com/DataDog/datadog-agent/releases
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -104,7 +107,7 @@ In a _mixed cluster_, some nodes have GPU devices while other nodes do not.
 {{% tab "Datadog Operator" %}}
 To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the Operator's [Agent Profiles][2] feature to selectively enable GPU Monitoring only on nodes with GPUs.
 
-1. [Install and deploy][1] the Datadog Agent on Kubernetes in your cluster.
+1. Ensure that the [latest version of the Datadog Agent][4] is [installed and deployed][1] on every GPU host you wish to monitor.
 
 2. Modify your `DatadogAgent` resource with the following changes:
 
@@ -192,13 +195,15 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 [1]: /containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
 [3]: http://nvidia.com/gpu.present
+[4]: https://github.com/DataDog/datadog-agent/releases
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 
 To set up GPU Monitoring on a mixed cluster with the Helm, create two different Helm deployments—one deployment for GPU nodes, one deployment for non-GPU nodes.
 
-1. [Install and deploy][1] the Datadog Agent on Kubernetes in your cluster.
+1. Ensure that the [latest version of the Datadog Agent][3] is [installed and deployed][1] on every GPU host you wish to monitor.
 
 2. Modify your `datadog-values.yaml` configuration file to target non-GPU nodes.
 
@@ -229,7 +234,7 @@ To set up GPU Monitoring on a mixed cluster with the Helm, create two different 
    : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`)
 
    `gpuMonitoring.configureCgroupPerms: true` 
-   : _Only for GKE_. Patches cgroup permissions.
+   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices. 
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
    : _Only for AWS EKS and Oracle Cloud_. Specifies container runtime, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`
@@ -280,6 +285,8 @@ To set up GPU Monitoring on a mixed cluster with the Helm, create two different 
    ```
 [1]: /containers/kubernetes/installation/?tab=helm
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#how-to-join-a-cluster-agent-from-another-helm-chart-deployment-linux
+[3]: https://github.com/DataDog/datadog-agent/releases
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -288,7 +295,7 @@ To set up GPU Monitoring on a mixed cluster with the Helm, create two different 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /containers/kubernetes/installation/?tab=datadogoperator
-[2]: https://github.com/DataDog/datadog-agent/releases?page=1
+[2]: https://github.com/DataDog/datadog-agent/releases
 [3]: https://github.com/NVIDIA/k8s-device-plugin
 [4]: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html
 [5]: https://github.com/DataDog/datadog-operator
