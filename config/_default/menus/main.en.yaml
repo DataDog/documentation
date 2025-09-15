@@ -5311,7 +5311,7 @@ menu:
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines_configuration
-      identifier: observability_pipelines_configuration_sources
+      identifier: observability_pipelines_sources
       weight: 104
     - name: Processors
       url: observability_pipelines/configuration/processors/
