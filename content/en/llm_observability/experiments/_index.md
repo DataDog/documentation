@@ -38,22 +38,26 @@ Enable LLM Observability:
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
-    ml_app="my-app",
     api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
     app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
-    site="datadoghq.com",  # defaults to DD_SITE environment variable
-    project_name="my-project"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or default-project if the environment variable is not set
+    site="datadoghq.com",      # defaults to DD_SITE environment variable
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
 )
 ```
 
+Notes: 
+- You need *both* an API key and an APP key
+- All datasets and experiments live in a project
+
 ## Datasets
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ (optional) and _metadata_ (optional). Each _dataset_ is associated to a _project_.
-You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
+A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each _dataset_ is associated to a _project_.
+You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push, modify and retrieve datasets from Datadog.
 
 ### Creating a dataset
+There are 2 ways to create a dataset: manually or via CSV (see Working with CSV)
 
-You can create a new dataset using `LLMObs.create_dataset()`:
+To manually create a new dataset, use `LLMObs.create_dataset()`:
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -64,9 +68,9 @@ dataset = LLMObs.create_dataset(
     description="Questions about world capitals",
     records=[
         {
-            "input_data": {"question": "What is the capital of China?"},
-            "expected_output": "Beijing",
-            "metadata": {"difficulty": "easy"}
+            "input_data": {"question": "What is the capital of China?"},       # required, JSON or string
+            "expected_output": "Beijing",                                      # optional, JSON or string
+            "metadata": {"difficulty": "easy"}                                 # optional, JSON
         },
         {
             "input_data": {"question": "Which city serves as the capital of South Africa?"},
@@ -82,7 +86,7 @@ print(f"View dataset: {dataset.url}")
 
 ### Managing dataset records
 
-The Dataset class provides methods to manage records:
+The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog
 
 ```python
 # Add a new record
@@ -255,11 +259,6 @@ experiment = LLMObs.experiment(
 
 # Run the experiment
 results = experiment.run()  # Run on all dataset records
-results = experiment.run(jobs=4)  # Run with parallel processing
-results = experiment.run(sample_size=10, raise_errors=True)  # Test on subset
-
-# View experiment in Datadog UI
-print(f"View experiment: {experiment.url}")
 
 # Process results
 for result in results:
@@ -269,6 +268,26 @@ for result in results:
     print(f"Score: {result['evaluations']['evaluator']['value']}")
     if result['error']['message']:
         print(f"Error: {result['error']['message']}")
+```
+
+To increase the execution speed of the Experiment, you can enable parallel processing:
+```
+results = experiment.run(jobs=4)
+```
+
+To test your pipeline on a subset of the data, use:
+```
+results = experiment.run(sample_size=10)
+```
+
+To stop the execution of the Experiment if an error occurs, use:
+```
+results = experiment.run(raise_errors=True)
+```
+
+5. View your experiment results in Datadog UI
+```
+print(f"View experiment: {experiment.url}")
 ```
 
 ## HTTP API
