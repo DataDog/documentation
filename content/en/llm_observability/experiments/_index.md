@@ -2,6 +2,8 @@
 title: Experiments
 description: Using LLM Observability Experiments feature
 private: true
+aliases:
+  - /llm_observability/experiments_preview
 further_reading:
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
     tag: "Blog"

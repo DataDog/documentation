@@ -28,9 +28,6 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices.

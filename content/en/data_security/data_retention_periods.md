@@ -30,7 +30,8 @@ attributes:
        - **Audit logs (Audit Trail disabled)**: 7 days
   - product: Browser RUM
     data_type: |
-       - **Events**: 30 days
+       - **Session, View, Action, and Error Events**: 30 days
+       - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Case Management
     data_type: | 
        - **Cases**: Retained for the duration of the account
@@ -89,7 +90,7 @@ attributes:
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
-       - **Error samples**: 15 days
+       - **Error samples**: 30 days
        - **Issues**: 1 year after last activity
   - product: Event Management
     data_type: | 
@@ -113,7 +114,8 @@ attributes:
        - **Mobile application binaries**: Retained for the duration of the account
   - product: Mobile RUM
     data_type: | 
-       - **Events**: 30 days
+       - **Session, View, Action, and Error Events**: 30 days
+       - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: | 
        - **Netflow**: 30 days
