@@ -30,6 +30,11 @@ ddtrace==<VERSION>
 RUN pip install ddtrace
 {{< /code-block >}}
 
+   Then, wrap your start command with `ddtrace-run`:
+   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
+CMD ["ddtrace-run", "python", "app.py"]
+{{< /code-block >}}
+
    For more information, see [Tracing Python applications][2].
 
 2. **Install serverless-init**.
@@ -79,7 +84,7 @@ logger.info("Hello world!")
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="in-container" language="python" %}}
+{{% gcr-env-vars-in-container language="python" %}}
 
 ## Troubleshooting
 

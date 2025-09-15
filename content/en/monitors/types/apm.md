@@ -90,7 +90,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**Note:** Analytics monitors can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).
+**Note:** Analytics monitors only evaluate spans retained by [custom retention filters][6] (not the intelligent retention filter). Additionally, spans indirectly indexed by [trace-level retention filters][7] (that is, spans that don't match the query directly but belong to traces that do) are not evaluated by trace analytics monitors.
 
 ### Select alert conditions
 
@@ -113,6 +113,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [4]: /tracing/glossary/#indexed-span
 [5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filter-types
 {{% /tab %}}
 {{< /tabs >}}
 
