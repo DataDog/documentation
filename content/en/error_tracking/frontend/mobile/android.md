@@ -561,7 +561,7 @@ See the [RUM Debug Symbols][24] page to view all uploaded symbols.
 
 ## Advanced Error Tracking features
 
-### Set tracking consent (GDPR compliance)
+{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" expanded=false id="set-tracking-consent" %}}
 
 To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
 
@@ -577,7 +577,9 @@ To **update the tracking consent** after the SDK is initialized, call `Datadog.s
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
-### Sample session rates
+{{% /collapse-content %}}
+
+{{% collapse-content title="Sample session rates" level="h4" expanded=false id="sample-session-rates" %}}
 
 To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
@@ -589,7 +591,9 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 Rum.enable(rumConfig)
 ```
 
-### Initialize the interceptor to track network events
+{{% /collapse-content %}}
+
+{{% collapse-content title="Initialize the interceptor to track network events" level="h4" expanded=false id="interceptor" %}}
 
 The network interceptor automatically tracks HTTP requests and responses, capturing network errors, timeouts, and performance issues that can help you correlate network problems with app crashes and user experience issues. To initialize an interceptor for tracking network events:
 
@@ -604,56 +608,57 @@ The network interceptor automatically tracks HTTP requests and responses, captur
 
 3. To track your OkHttp requests as resources, add the provided [interceptor][14]:
 
-   {{< tabs >}}
-   {{% tab "Kotlin" %}}
-   ```kotlin
-   val tracedHostsWithHeaderType = mapOf(
-       "example.com" to setOf(
-           TracingHeaderType.DATADOG,
-           TracingHeaderType.TRACECONTEXT),
-       "example.eu" to setOf(
-           TracingHeaderType.DATADOG,
-           TracingHeaderType.TRACECONTEXT))
-   val okHttpClient = OkHttpClient.Builder()
-       .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build()
-   ```
-   {{% /tab %}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val tracedHostsWithHeaderType = mapOf(
+    "example.com" to setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT),
+    "example.eu" to setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT))
+val okHttpClient = OkHttpClient.Builder()
+    .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+    .build()
+```
+{{% /tab %}}
 
-   {{% tab "Java" %}}
-   ```java
-   Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
-   Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
-   tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
-   tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
-   OkHttpClient okHttpClient = new OkHttpClient.Builder()
-       .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build();
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
+{{% tab "Java" %}}
+
+```java
+Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+    .build();
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
    - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
       
 5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][16]:
 
-   {{< tabs >}}
-   {{% tab "Kotlin" %}}
-   ```kotlin
-   val okHttpClient = OkHttpClient.Builder()
-       .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build()
-   ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
-   ```java
-   OkHttpClient okHttpClient = new OkHttpClient.Builder()
-       .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build();
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val okHttpClient = OkHttpClient.Builder()
+    .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+    .build()
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+    .build();
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 **Notes**:
 - To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
@@ -661,7 +666,9 @@ The network interceptor automatically tracks HTTP requests and responses, captur
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][17] for third-party providers and network requests.
 
-### Track background events
+{{% /collapse-content %}}
+
+{{% collapse-content title="Track background events" level="h4" expanded=false id="track-background-events" %}}
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
 
@@ -682,7 +689,9 @@ Add the following snippet during configuration:
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
 </div>
 
-### Sending data when device is offline
+{{% /collapse-content %}}
+
+{{% collapse-content title="Sending data when device is offline" level="h4" expanded=false id="sending-data-device-offline" %}}
 
 The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
@@ -690,7 +699,9 @@ Each batch follows the intake specification. Batches are sent as soon as the net
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
-### Plugin configuration options
+{{% /collapse-content %}}
+
+{{% collapse-content title="Plugin configuration options" level="h4" expanded=false id="plugin-config-options" %}}
 
 There are several plugin properties that can be configured through the plugin extension. In case you are using multiple variants, you can set a property value for a specific flavor in the variant.
 
@@ -726,7 +737,9 @@ This resolves the final value for the `versionName` property as `fooBar`.
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
 | `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, "none" is ignored, "warn" logs a warning, and "fail" fails the build with an error (default). |
 
-### Integrate with a CI/CD pipeline
+{{% /collapse-content %}}
+
+{{% collapse-content title="Integrate with a CI/CD pipeline" level="h4" expanded=false id="plugin-config-options" %}}
 
 By default, the upload mapping task is independent from other tasks in the build graph. Run the task manually when you need to upload mapping.
 
@@ -737,6 +750,7 @@ For example:
 ```kotlin
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ```
+{{% /collapse-content %}}
 
 ## Limitations
 
