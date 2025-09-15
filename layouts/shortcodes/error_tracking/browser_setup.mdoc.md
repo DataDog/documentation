@@ -1,4 +1,4 @@
-  {% partial file="sdks/browser/setup.mdoc.md" /%}
+  {% partial file="sdks/browser-setup.mdoc.md" /%}
 
   ### Step 7 - Link errors with your source code (optional)
 

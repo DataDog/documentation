@@ -7245,6 +7245,11 @@ menu:
       parent: rum_performance_monitoring
       identifier: rum_performance_monitoring_setup
       weight: 2
+    - name: Troubleshooting
+      url: real_user_monitoring/performance_monitoring/troubleshooting
+      parent: rum_performance_monitoring
+      identifier: rum_performance_monitoring_troubleshooting
+      weight: 2
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum
