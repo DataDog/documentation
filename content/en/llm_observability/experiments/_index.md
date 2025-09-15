@@ -833,7 +833,7 @@ Empty body on success.
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
-[7]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments
+[7]: https://github.com/DataDog/llm-observability/tree/main/experiments
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
 [10]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
