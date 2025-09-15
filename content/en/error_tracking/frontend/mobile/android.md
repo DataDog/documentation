@@ -66,10 +66,9 @@ dependencies {
 
 1. Navigate to [**Errors** > **Settings** > **Browser and Mobile** > **+ New Application**][7].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][8].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][9].
+3. Click **Create Application**.
 
-   {{< img src="/error_tracking/setup/android/mobile-new-app.png" alt="Create an application for Android in Datadog" style="width:90%;">}}
+
 
 ### Step 3 - Initialize the Datadog SDK with application context
 
@@ -369,6 +368,27 @@ To enable the Android SDK to start sending data:
 {{< /tabs >}}
 
 See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views (activities, fragments, and more).
+
+#### Instrument your webviews (optional)
+
+If your Android application uses WebViews to display web content, you can instrument them to track JavaScript errors and crashes that occur within the web content.
+
+To instrument your web views:
+
+1. Add the Gradle dependency by declaring the dd-sdk-android-webview as dependency in your build.gradle file:
+
+   ```groovy
+   dependencies {
+    implementation "com.datadoghq:dd-sdk-android-webview:<latest_version>"
+   }
+   ```
+2. Enable webview tracking for a given WebView instance by providing a list of hosts to track:
+
+   ```groovy
+   WebViewTracking.enable(webView, hosts)
+   ```
+
+For more information, see [Web View Tracking][8].
 
 ### Step 4 - Add NDK crash reporting
 
@@ -735,7 +755,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 | `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
 | `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, AP1, or AP2).                                                                                                                                       |
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
-| `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, "none" is ignored, "warn" logs a warning, and "fail" fails the build with an error (default). |
+| `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, `none` is ignored, `warn` logs a warning, and `fail` fails the build with an error (default). |
 
 {{% /collapse-content %}}
 
