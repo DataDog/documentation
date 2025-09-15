@@ -99,7 +99,10 @@ Click an element to view additional attributes:
 
 View and download crash reports for your iOS and Android devices in the [Results Explorer][12].
 
-In the Results Explorer, filter, and search for crash reports with the query `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:ios` or `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:android` to identify, view, and download crash reports for your devices:
+To find specific crash reports, use the following queries in the search bar:
+- **iOS**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:ios`
+- **Android**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:android`
+
 
 {{< img src="mobile_app_testing/ios_search_2.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
 
