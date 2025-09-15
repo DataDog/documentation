@@ -10,16 +10,13 @@ You can configure Bits to automatically investigate when a monitor triggers an a
 There are a few ways to enable Bits for automated investigations:
 - **Option 1: Use the Bits AI SRE Monitors list**
   1. In Bits AI SRE, go to the [**Monitor Management**][5] page.
-  1. In the **Ready for Bits** tab, toggle automatic investigations on for a monitor. 
-- **Option 2: Add the Bits AI tag to a single monitor**
+  1. In the **Ready for Bits** tab, enable automatic investigations for a single monitor. Alternatively, select one or more monitors, then click **Edit automatic investigations** to toggle the setting in bulk.
+- **Option 2: Configure for a single monitor**
   1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
-  1. Add the `bitsai:enabled` tag.
-  1. Save your changes.
-- **Option 3: Add the Bits AI tag in bulk**
-  1. In the **Monitor List**, select multiple monitors, then click **Edit tags**.
-  1. Add the `bitsai:enabled` tag to the selected monitors.
+  1. Navigate to the section "Configure notifications & automations".
+  1. Within **Investigate with Bits AI SRE**, enable automatic investigations.
 
-You can also add the tag to your desired monitors using the Datadog API or Terraform.
+We no longer support enabling automatic investigations using the Datadog API or Terraform.
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
 
@@ -28,12 +25,12 @@ An investigation initiates when a monitor transitions to the alert state. Transi
 Alternatively, you can manually invoke Bits on an individual monitor alert or warn event.
 
 - **Option 1: Monitor Status Page**
-  -  For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top-right corner. 
+  -  For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top-right corner.
   -  Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE** on the right.
 - **Option 2: Monitor Event Side Panel**
   -  On the monitor event side panel, click **Investigate with Bits AI SRE**.
 - **Option 3: Slack**
-  - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`. 
+  - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
 ### Monitor requirements for Bits AI SRE
 
@@ -70,15 +67,15 @@ Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [no
 1. Lastly, go to [**Bits AI** > **SRE Agent** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
-In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14]. 
+In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14].
 {{% /collapse-content %}}
 {{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
-In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.     
+In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
 {{% /collapse-content %}}
 
 ### Configure knowledge base integrations
 
-Bits integrates with Confluence to find relevant documentation and runbooks to support its investigations, and also allows you to interact with your Confluence content directly through chat. 
+Bits integrates with Confluence to find relevant documentation and runbooks to support its investigations, and also allows you to interact with your Confluence content directly through chat.
 1. Connect your Confluence Cloud account by following the instructions in the [Confluence integration tile][13].
 1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. This is not required for Bits to use Confluence when generating its investigation plan.
 1. You can view all connected Confluence accounts on the [Bits Settings page][9].
@@ -91,6 +88,12 @@ Help Bits interpret and act on your documentation by following these best practi
 - Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
 
 **Tip**: The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.
+
+### Restrict access to Bits investigations
+
+To access investigations, users need the `Bits Investigations Read` [permission][15]. This permission is included in the Datadog Read Only Role by default. To configure automated investigations and manually start investigations, users need the `Bits Investigations Write` [permission][15]. This permission is included in the Datadog Standard Role by default. If your organization uses custom roles, add these permissions to the appropriate role. For more information on managing permissions, see [Access Control][11].
+
+**Note**: Your organization's third-party AI enablement status is always respected, even when users have these permissions.
 
 ## How Bits AI SRE investigates
 
@@ -152,3 +155,4 @@ Every piece of feedback you give generates a **memory**. Bits uses these memorie
 [12]: /monitors/notify/#renotify
 [13]: https://app.datadoghq.com/integrations/confluence
 [14]: /service_management/case_management/notifications_integrations/#third-party-tickets
+[15]: /account_management/rbac/permissions/#bits-ai
