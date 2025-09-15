@@ -30,10 +30,10 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 {{< img src="tracing/software_catalog/software_catalog_tabs.mp4" video=true alt="A video overview of the Software Catalog, with the Services component type selected, that scrolls through the Ownership, Reliability, Performance, Security, Costs, and Delivery tabs" style="width:100%;" >}}
 <br>
 
-Software Catalog offers multiple views to help you explore and manage your services.
+Software Catalog offers multiple views to help you explore and manage your entities.
 
 - **Ownership**: Access your team's Slack, repo, or on-call information.
-- **Reliability**: Address risks by surfacing services with recent deploys, rising error rates, open incidents, or failing monitors.
+- **Reliability**: Address risks by surfacing entities with recent deploys, rising error rates, open incidents, or failing monitors.
 - **Performance**: Compare latency, traffic, error rate, and Apdex by environment.
 - **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
 - **Costs**: Track AWS costs linked to code and infrastructure changes to control cloud spend.

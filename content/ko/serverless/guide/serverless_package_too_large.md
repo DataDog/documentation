@@ -71,4 +71,4 @@ Datadog 지원팀의 지원이 필요한 경우 티켓에 다음 정보를 포�
 [6]: https://webpack.js.org
 [7]: https://esbuild.github.io/
 [8]: /ko/serverless/guide/serverless_tracing_and_bundlers/
-[9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda#readme
+[9]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/lambda#readme

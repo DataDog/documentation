@@ -8,4 +8,3 @@ require (
 )
 
 // replace github.com/DataDog/websites-modules => /Users/lisiane.turlure/guac/websites-modules
-// replace github.com/DataDog/websites-sources => /Users/brian.deutsch/dd/websites-sources
