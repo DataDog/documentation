@@ -12,11 +12,20 @@ Your Postgres database should now be ready for monitoring. If you haven't set it
 Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres. 
 If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
-1. [Configure the AWS integration](#configure-the-aws-integration)
-1. [Configure database parameters](#configure-postgres-settings)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install and configure the Agent](#install-and-configure-the-agent)
-1. [Install the RDS integration](#install-the-rds-integration)
+1. [Host Agent](?tab=hostagent#host-agent)
+    1. [Base Configuration](?tab=hostagent#base-configuration)
+    1. [AWS Managed Database](?tab=hostagent#aws-managed-database)
+    1. [Google Cloud SQL / AlloyDB Managed Database](?tab=hostagent#google-cloud-sql--alloydb-managed-database)
+    1. [Azure Managed Database](?tab=hostagent#azure-managed-database)
+1. [Containerized Agent: Docker](?tab=docker#docker)
+    1. [Base Configuration](?tab=docker#base-configuration)
+        1. [Command Line](?tab=docker#command-line)
+        1. [Compose File](?tab=docker#compose-file)
+        1. [Dockerfile](?tab=docker#dockerfile)
+    1. [Cloud Hosted Database](?tab=docker#cloud-hosted-database)
+        1. [AWS Managed Database](?tab=docker#aws-managed-database)
+        1. [Google Cloud SQL / AlloyDB Managed Database](?tab=docker#google-cloud-sql--alloydb-managed-database)
+        1. [Azure Managed Database](?tab=docker#azure-managed-database)
 
 ## Agent Configuration
 
@@ -201,16 +210,16 @@ LABEL "com.datadoghq.ad.checks"='{ \
 ```
 {{% /collapse-content %}} 
 
-## Cloud Hosted Database
+### Cloud Hosted Database
 
 This would the configuration to start with and should be enough if you are self hosting, if you are using a Cloud Managed Database go through our additional steps below for your Cloud Managed Database.
 
 {{% collapse-content title="AWS Managed Database" level="h4" id="aws-managed-database" %}}
-### AWS Managed Database
+#### AWS Managed Database
 
 If you are using AWS RDS or AWS Aurora you should add the addition `aws` key to the [base configuration](#base-configuration), this ensures that we can correlation the [AWS Integration](/integrations/amazon-web-services/) data to your Database instance.
 
-#### Command Line
+##### Command Line
 
 {{< highlight bash "hl_lines=13-16" >}}
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -234,7 +243,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:latest
 {{< /highlight >}}
 
-#### Docker Compose
+##### Docker Compose
 
 {{< highlight yaml "hl_lines=19-22" >}}
 services:
@@ -266,7 +275,7 @@ services:
     image: gcr.io/datadoghq/agent:latest
 {{< /highlight >}}
 
-#### Dockerfile
+##### Dockerfile
 
 {{< highlight dockerfile "hl_lines=13-16" >}}
 FROM gcr.io/datadoghq/agent:latest
@@ -295,11 +304,11 @@ LABEL "com.datadoghq.ad.checks"='{ \
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Google Cloud SQL / AlloyDB Managed Database" level="h4" id="google-cloud-sql-alloydb-managed-database" %}}
-### Google Cloud SQL / AlloyDB Managed Database
+#### Google Cloud SQL / AlloyDB Managed Database
 
 If you are using Google Cloud SQL you should add the addition `gcp` key to the [base configuration](#base-configuration), this ensures that we can correlation the [GCP Integration](/integrations/google-cloudsql/) and [GCP AlloyDB](/integrations/google-cloud-alloydb/) data to your Database instance.
 
-#### Command Line
+##### Command Line
 
 {{< highlight bash "hl_lines=13-16" >}}
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -323,7 +332,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:latest
 {{< /highlight >}}
 
-#### Docker Compose
+##### Docker Compose
 
 {{< highlight yaml "hl_lines=19-22" >}}
 services:
@@ -355,7 +364,7 @@ services:
     image: gcr.io/datadoghq/agent:latest
 {{< /highlight >}}
 
-#### Dockerfile
+##### Dockerfile
 
 {{< highlight dockerfile "hl_lines=13-16" >}}
 FROM gcr.io/datadoghq/agent:latest
@@ -382,11 +391,11 @@ LABEL "com.datadoghq.ad.checks"='{ \
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Azure Managed Database" level="h4" id="azure-managed-database" %}}
-### Azure Managed Database
+#### Azure Managed Database
 
 If you are monitoring a Azure Managed Database you should add the addition `azure` key to the [base configuration](#base-configuration), this ensures that we can correlation the [Azure Integration](/integrations/azure/) data to your Database instance.
 
-#### Command Line
+##### Command Line
 
 {{< highlight bash "hl_lines=13-16" >}}
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -411,7 +420,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:latest
 {{< /highlight >}}
 
-#### Docker Compose
+##### Docker Compose
 
 {{< highlight yaml "hl_lines=19-22" >}}
 services:
@@ -444,7 +453,7 @@ services:
     image: gcr.io/datadoghq/agent:latest
 {{< /highlight >}}
 
-#### Dockerfile
+##### Dockerfile
 
 {{< highlight dockerfile "hl_lines=13-16" >}}
 FROM gcr.io/datadoghq/agent:latest
