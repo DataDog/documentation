@@ -45,7 +45,7 @@ LLMObs.enable(
 )
 ```
 
-Notes: 
+Notes:
 - You need *both* an API key and an APP key
 - All datasets and experiments live in a project
 
@@ -364,7 +364,7 @@ Datadog highly recommends importing the [Experiments Postman collection][7] into
 
 **Request type**: `projects`
 
-{{% collapse-content title="GET /api/v1/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-get" %}}
+{{% collapse-content title="GET /api/v2/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-get" %}}
 
 List all projects, sorted by creation date. The most recently-created projects are first.
 
@@ -395,7 +395,7 @@ List all projects, sorted by creation date. The most recently-created projects a
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-post" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-post" %}}
 
 Create a project. If there is an existing project with the same name, the API returns the existing project unmodified.
 
@@ -418,7 +418,7 @@ Create a project. If there is an existing project with the same name, the API re
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="PATCH /api/v1/llm-obs/v1/projects/{project_id}" level="h4" expanded=false id="api-projects-patch" %}}
+{{% collapse-content title="PATCH /api/v2/llm-obs/v1/projects/{project_id}" level="h4" expanded=false id="api-projects-patch" %}}
 
 Partially update a project object. Specify the fields to update in the payload.
 
@@ -441,7 +441,7 @@ Partially update a project object. Specify the fields to update in the payload.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/projects/delete" level="h4" expanded=false id="api-projects-delete" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/projects/delete" level="h4" expanded=false id="api-projects-delete" %}}
 
 Delete one or more projects.
 
@@ -461,7 +461,7 @@ Empty body on success.
 
 **Request type**: `datasets`
 
-{{% collapse-content title="GET /api/v1/llm-obs/v1/{project_id}/datasets" level="h4" expanded=false id="api-datasets-get" %}}
+{{% collapse-content title="GET /api/v2/llm-obs/v1/{project_id}/datasets" level="h4" expanded=false id="api-datasets-get" %}}
 
 List all datasets, sorted by creation date. The most recently-created datasets are first.
 
@@ -493,7 +493,7 @@ List all datasets, sorted by creation date. The most recently-created datasets a
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/{project_id}/datasets" level="h4" expanded=false id="api-datasets-post" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/{project_id}/datasets" level="h4" expanded=false id="api-datasets-post" %}}
 
 Create a dataset. If there is an existing dataset with the same name, the API returns the existing dataset unmodified.
 
@@ -518,7 +518,7 @@ Create a dataset. If there is an existing dataset with the same name, the API re
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="GET /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-list-records" %}}
+{{% collapse-content title="GET /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-list-records" %}}
 
 List all dataset records, sorted by creation date. The most recently-created records are first.
 
@@ -550,7 +550,7 @@ List all dataset records, sorted by creation date. The most recently-created rec
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-append-records" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-append-records" %}}
 
 Appends records for a given dataset.
 
@@ -577,7 +577,7 @@ Appends records for a given dataset.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="PATCH /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}" level="h4" expanded=false id="api-datasets-patch" %}}
+{{% collapse-content title="PATCH /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}" level="h4" expanded=false id="api-datasets-patch" %}}
 
 Partially update a dataset object. Specify the fields to update in the payload.
 
@@ -602,7 +602,7 @@ Partially update a dataset object. Specify the fields to update in the payload.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="PATCH /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-update-records" %}}
+{{% collapse-content title="PATCH /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-update-records" %}}
 
 Partially update a one or more dataset record objects. Specify the fields to update in the payload.
 
@@ -629,7 +629,7 @@ Partially update a one or more dataset record objects. Specify the fields to upd
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/{project_id}/datasets/delete" level="h4" expanded=false id="api-datasets-delete" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/{project_id}/datasets/delete" level="h4" expanded=false id="api-datasets-delete" %}}
 
 Delete one or more datasets.
 
@@ -645,7 +645,7 @@ Empty body on success.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/{project_id}/datasets/{dataset_id}/records/delete" level="h4" expanded=false id="api-datasets-delete-records" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records/delete" level="h4" expanded=false id="api-datasets-delete-records" %}}
 
 Delete one or more dataset records.
 
@@ -665,7 +665,7 @@ Empty body on success.
 
 **Request type**: `experiments`
 
-{{% collapse-content title="GET /api/v1/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-get" %}}
+{{% collapse-content title="GET /api/v2/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-get" %}}
 
 List all experiments, sorted by creation date. The most recently-created experiments are first.
 
@@ -701,7 +701,7 @@ List all experiments, sorted by creation date. The most recently-created experim
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-post" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-post" %}}
 
 Create an experiment. If there is an existing experiment with the same name, the API returns the existing experiment unmodified.
 
@@ -734,7 +734,7 @@ Create an experiment. If there is an existing experiment with the same name, the
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="PATCH /api/v1/llm-obs/v1/experiments/{experiment_id}" level="h4" expanded=false id="api-experiments-patch" %}}
+{{% collapse-content title="PATCH /api/v2/llm-obs/v1/experiments/{experiment_id}" level="h4" expanded=false id="api-experiments-patch" %}}
 
 Partially update an experiment object. Specify the fields to update in the payload.
 
@@ -761,7 +761,7 @@ Partially update an experiment object. Specify the fields to update in the paylo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/experiments/delete" level="h4" expanded=false id="api-experiments-delete" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/experiments/delete" level="h4" expanded=false id="api-experiments-delete" %}}
 
 Delete one or more experiments.
 
@@ -777,7 +777,7 @@ Empty body on success.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="POST /api/v1/llm-obs/v1/experiments/{experiment_id}/events" level="h4" expanded=false id="api-experiments-events" %}}
+{{% collapse-content title="POST /api/v2/llm-obs/v1/experiments/{experiment_id}/events" level="h4" expanded=false id="api-experiments-events" %}}
 
 Push events (spans and metrics) for an experiment.
 
