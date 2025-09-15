@@ -3,11 +3,15 @@ title: Google Pub/Sub Destination
 disable_toc: false
 ---
 
+## Overview
+
 Use Observability Pipelines' Google Pub/Sub source to pull logs from the Google Cloud Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
 
+### When to use this destination
+
 Common scenarios when you might use this destination:
-- For analytics pipelines: Route logs downstream into BigQuery, Data Lake, or custom machine learning workflows.
-- For event-driven processing: Publish logs to a Pub/Sub topic so Google Cloud Functions, Cloud Run functions, and Datadflow jobs can react to them in real time.
+- For analytics pipelines: Route logs downstream into Google BigQuery, Data Lake, or custom machine learning workflows.
+- For event-driven processing: Publish logs to a Pub/Sub topic so Google Cloud Functions, Cloud Run functions, and Dataflow jobs can react to them in real time.
 
 ## Prerequisites
 
@@ -23,7 +27,7 @@ Before you configure the destination, you need the following:
 		- If the role is missing, the error `Healthcheck endpoint forbidden` is logged and the Worker proceeds as usual.
 	- See [Available Pub/Sub roles][3] for more information.
 
-### (Optional) Set up a service account for the Worker
+### Optional service account setup for the Worker
 
 A service account in Google Cloud is a type of account used only by application or services.
 - It has its own identity and credentials (a JSON key file).
@@ -44,9 +48,11 @@ If you are authenticating using a service account:
 	1. Save the downloaded JSON file.
 	1. Place the JSON file under: `DD_OP_DATA_DIR/config`. You reference this file when you [set up the Google Pub/Sub destination](#set-up-the-destination) later on.
 
-## Set up the destination
+## Setup
 
-The information below is configured in the [pipelines UI][1].
+Set up the SentinelOne destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+
+### Set up the destination
 
 1. Enter the destination project name.
 	- This is the GCP project where your Pub/Sub topic lives.
@@ -58,9 +64,9 @@ The information below is configured in the [pipelines UI][1].
 1. If you have a credentials JSON file, enter the path to your credentials JSON file.
 	- If you using a service account JSON: enter the path `DD_OP_DATA_DIR/config/<your-service-account>.json`.
 	- Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
-	- If you're using [workload identity][7] on GKE, credentials are automatically managed.
+	- Credentials are automatically managed if you're using [workload identity][7] on GKE.
 
-### Optional settings
+#### Optional settings
 
 - Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
 	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
@@ -77,7 +83,9 @@ The information below is configured in the [pipelines UI][1].
 
 {{< img src="observability_pipelines/destinations/google_pubsub.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### Optional alternative Pub/Sub endpoints
+### Set environment variables
+
+#### Optional alternative Pub/Sub endpoints
 
 By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
 
@@ -96,11 +104,11 @@ Common issues and fixes:
 	- Verify the credentials JSON path or GKE Workload Identity setup.
 - Dropped events
 	- Check the `pipelines.component_discarded_events_total` and `pipelines.buffer_discarded_events_total` metrics.
-	- Increase buffer size or fix misconfigured filters as needed.
+	- Increase the buffer size or fix misconfigured filters as needed to resolve the issue.
 - High latency
-	- Reduce buffer sizer and timeout or scale Workers.
+	- Reduce buffer sizer and timeout, or scale your Workers.
 - No logs are arriving
-	- Double-check topic name, project, and Pub/Sub endpoint (global vs regional).
+	- In your Google Pub/Sub destination setup, double-check the topic name, project, and Pub/Sub endpoint (global vs regional).
 
 ## How the destination works
 
