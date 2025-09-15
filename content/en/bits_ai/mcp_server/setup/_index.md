@@ -339,11 +339,11 @@ Edits Datadog Synthetic HTTP API tests.
 - Add my team tag to the test `aaa-bbb-ccc`.
 
 ### `synthetics_test_wizard`
-Allows to preview and then create Datadog Synthetics HTTP API Tests
+Preview and create Datadog Synthetics HTTP API Tests.
 
-- Create synthetics tests on every endpoint defined in this code file
-- Create a synthetics test on `/path/to/endpoint`
-- Create a synthetics test that checks if my domain `mycompany.com` stays up
+- Create Synthetics tests on every endpoint defined in this code file.
+- Create a Synthetics test on `/path/to/endpoint`.
+- Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
 ## Toolsets
 
