@@ -74,7 +74,7 @@ If you haven't already, set up the [Datadog-Azure integration][9]. You can verif
 {{% tab "Terraform" %}}
 
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+If you don't already have Terraform set up, [install Terraform][1], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
@@ -125,17 +125,17 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Windows Web App module][251] only deploys the Web App resource and extension, so you need to [deploy your code][252] separately.
+The [Datadog Windows Web App module][2] only deploys the Web App resource and extension, so you need to [deploy your code][3] separately.
 
-[250]: https://developer.hashicorp.com/terraform/install
-[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
-[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+[1]: https://developer.hashicorp.com/terraform/install
+[2]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
+[3]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 
 {{% /tab %}}
 {{% tab "Manual" %}}
 
-1. In your [Azure Portal][3], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
+1. In your [Azure Portal][1], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
 2. Configure the following Application Settings:
 
@@ -143,15 +143,15 @@ The [Datadog Windows Web App module][251] only deploys the Web App resource and 
 
    `DD_API_KEY`
    : **Value**: Your Datadog API key.<br>
-   See [Organization Settings > API Keys][4] in Datadog.<br>
+   See [Organization Settings > API Keys][2] in Datadog.<br>
 
    `DD_SITE`
    : **Value**: Your Datadog site<br>
-   Your [Datadog site][5]. Defaults to `datadoghq.com`.<br>
+   Your [Datadog site][3]. Defaults to `datadoghq.com`.<br>
 
    **Unified Service Tagging**
 
-   Datadog recommends tagging your application with the `env`, `service`, and `version` tags for [unified service tagging][6].
+   Datadog recommends tagging your application with the `env`, `service`, and `version` tags for [unified service tagging][4].
 
    `DD_SERVICE`
    : **Value**: Your application's service name.<br>
@@ -190,6 +190,11 @@ The [Datadog Windows Web App module][251] only deploys the Web App resource and 
 8.  Verify that the extension is installed and running by checking the **Extensions** page in your Azure Portal.
 
 <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
+
+[1]: https://portal.azure.com/
+[2]: /account_management/api-app-keys/
+[3]: /getting_started/site/
+[4]: /getting_started/tagging/unified_service_tagging
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -552,10 +557,6 @@ Still need help? Contact [Datadog support][10].
 
 [1]: /developers/dogstatsd
 [2]: /tracing/setup/dotnet/
-[3]: https://portal.azure.com/
-[4]: /account_management/api-app-keys/
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging
 [7]: /developers/dogstatsd
 [8]: /metrics/
 [9]: /integrations/azure/
