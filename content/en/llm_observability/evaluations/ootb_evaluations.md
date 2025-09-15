@@ -232,6 +232,10 @@ This check identifies instances where the LLM generates responses in a different
 
 Language mismatch is only supported for natural language prompts. Input and output pairs that mainly consist of structured data such as JSON, code snippets, or special characters are not flagged as a language mismatch.
 
+{{% collapse-content title="Supported languages" level="h5" %}}
+Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegian Bokmal, Bosnian, Bulgarian, Chinese, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, Georgian, German, Greek, Gujarati, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Irish, Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, Macedonian, Malay, Marathi, Mongolian, Norwegian Nynorsk, Persian, Polish, Portuguese, Punjabi, Romanian, Russian, Serbian, Slovak, Slovene, Spanish, Swahili, Swedish, Tamil, Telugu, Thai, Turkish, Ukrainian, Urdu, Vietnamese, Yoruba, Zulu
+{{% /collapse-content %}}
+
 {{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 

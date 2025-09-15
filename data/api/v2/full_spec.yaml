@@ -39688,6 +39688,9 @@ components:
     SecurityMonitoringRuleConvertResponse:
       description: Result of the convert rule request containing Terraform content.
       properties:
+        ruleId:
+          description: the ID of the rule.
+          type: string
         terraformContent:
           description: Terraform string as a result of converting the rule from JSON.
           type: string
@@ -65244,6 +65247,39 @@ paths:
     get:
       description: Returns a list of org connections.
       operationId: ListOrgConnections
+      parameters:
+      - description: The Org ID of the sink org.
+        example: 0879ce27-29a1-481f-a12e-bc2a48ec9ae1
+        in: query
+        name: sink_org_id
+        required: false
+        schema:
+          type: string
+      - description: The Org ID of the source org.
+        example: 0879ce27-29a1-481f-a12e-bc2a48ec9ae1
+        in: query
+        name: source_org_id
+        required: false
+        schema:
+          type: string
+      - description: The limit of number of entries you want to return. Default is
+          1000.
+        example: 1000
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The pagination offset which you want to query from. Default is
+          0.
+        example: 0
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
