@@ -4431,31 +4431,21 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
       weight: 306
-    - name: Heroku
-      url: database_monitoring/setup_postgres/heroku
+    - name: Agent Configuration
+      url: database_monitoring/setup_postgres/agent_configuration
       parent: dbm_setup_postgres
-      identifier: dbm_postgres_heroku
-      weight: 307
-    - name: Kubernetes
-      url: database_monitoring/setup_postgres/kubernetes
-      parent: dbm_setup_postgres
-      identifier: dbm_postgres_kubernetes
+      identifier: dbm_postgres_agent_configuration
       weight: 308
-    - name: Docker
-      url: database_monitoring/setup_postgres/docker
-      parent: dbm_setup_postgres
-      identifier: dbm_postgres_docker
-      weight: 309
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 310
+      weight: 309
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 311
+      weight: 310
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
