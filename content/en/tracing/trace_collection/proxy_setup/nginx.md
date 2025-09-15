@@ -408,9 +408,7 @@ By default, logs capture `dd.trace_id` and `dd.span_id` in hexadecimal format:
 10.244.0.1 - - [12/Sep/2025:22:41:03 +0000] "GET /health HTTP/1.1" 200 87 0.002 "-" "kube-probe/1.32" "-" dd.trace_id="68c4a17f000000009aed12af2ccb1ead" dd.span_id="9aed12af2ccb1ead"
 ```
 
-This means you'll need to remap them as decimal for logs and trace correlation to work in Datadog. 
-
-To fix this, you'll need to create a pipeline to process the trace ID from your logs. These steps are the same for both instrumentation methods.
+To enable log and trace correlation in Datadog, configure a log processing pipeline to convert these IDs from hexadecimal to decimal. Follow the same steps regardless of the instrumentation method you use.
 
 1. In Datadog, navigate to the [**Log Configuration**][9] page.
 2. Hover over your active NGINX pipeline and click the **Clone** icon to create an editable version.
