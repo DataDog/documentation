@@ -8,7 +8,7 @@ Use Observability Pipelines' CloudPrem destination to send logs to Datadog Cloud
 
 ## Prerequisites
 
-Before configuring the destination, you need to deploy a CloudPrem cluster. Learn how to install it in our [dedicated installation section](/cloudprem/install).
+Before configuring the destination, you need to deploy a CloudPrem cluster. Learn how to install it in the [CloudPrem installation section](/cloudprem/install).
 
 ## Setup
 
@@ -25,7 +25,7 @@ Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buff
 ### Set the environment variables
 
 - CloudPrem endpoint URL
-	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL such as s `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
+	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 
