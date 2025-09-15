@@ -38,45 +38,16 @@ Choose one of the following installation methods:
 
 This method uses individual Docker containers for a minimal CloudPrem setup.
 
-### Step 1: Create configuration files
-
-First, create the necessary configuration files in your working directory.
-
-1. **Create the CloudPrem configuration file** (`config.yaml`):
-
-   ```yaml
-   version: 0.8
-   listen_address: 0.0.0.0
-   gossip_listen_port: 7282
-   cloudprem_listen_port: 7283
-   data_dir: /quickwit/qwdata
-   grpc:
-     keep_alive:
-       interval: 30s
-       timeout: 10s
-   cloudprem:
-     site: ${DD_SITE}
-     dd_api_key: ${DD_API_KEY}
-     dd_application_key: ${DD_APP_KEY}
-   ```
-
-2. **Download the Datadog index configuration**:
-
-   ```bash
-   curl -o datadog-index.yaml https://raw.githubusercontent.com/DataDog/helm-charts/refs/heads/main/charts/cloudprem/datadog.yaml
-   ```
-
-### Step 2: Set environment variables
 
 Export your Datadog credentials as environment variables:
 
 ```bash
+export DD_SITE="datadoghq.com"  # or your specific Datadog site
 export DD_API_KEY="your_datadog_api_key"
 export DD_APP_KEY="your_datadog_application_key"
-export DD_SITE="datadoghq.com"  # or your specific Datadog site
 ```
 
-### Step 3: Start CloudPrem
+### Step 1: Start CloudPrem
 
 Create the data directory and start the CloudPrem container:
 
@@ -85,30 +56,18 @@ Create the data directory and start the CloudPrem container:
 docker run -d \
   --name cloudprem \
   -v $(pwd)/qwdata:/quickwit/qwdata \
-  -v $(pwd)/config.yaml:/quickwit/config/quickwit.yaml:ro \
+  -e QW_CLUSTER_ID=local-cloudprem \
+  -e QW_ENABLE_REVERSE_CONNECTION=true \
+  -e DD_SITE=${DD_SITE} \
   -e DD_API_KEY=${DD_API_KEY} \
   -e DD_APP_KEY=${DD_APP_KEY} \
   -p 127.0.0.1:7280:7280 \
   datadog/cloudprem run
 ```
 
-### Step 4: Create the Datadog index
+### Step 2: Start the Datadog Agent
 
-Wait for CloudPrem to start, then create the Datadog index:
-
-```bash
-docker run --rm \
-  -v $(pwd)/datadog-index.yaml:/quickwit/datadog.yaml:ro \
-  --network host \
-  datadog/cloudprem index create \
-  --index-config /quickwit/datadog.yaml \
-  --yes \
-  --endpoint http://localhost:7280
-```
-
-### Step 5: Start the Datadog Agent
-
-To collect logs from your local containers, start the Datadog Agent:
+To collect logs from your local containers and send them to CloudPrem, start the Datadog Agent:
 
 ```bash
 docker run \
@@ -128,20 +87,11 @@ docker run \
   gcr.io/datadoghq/agent:latest
 ```
 
-You can
-
 ## Docker Compose setup
 
-This method provides a complete CloudPrem setup with automatic index creation and Datadog Agent integration.
+This method provides a CloudPrem setup with the Datadog Agent integration.
 
-
-### Step 1: Download the Datadog index file
-
-```bash
-curl -o datadog-index.yaml https://raw.githubusercontent.com/DataDog/helm-charts/refs/heads/main/charts/cloudprem/datadog.yaml
-```
-
-### Step 2: Create the Docker Compose file
+### Step 1: Create the Docker Compose file
 
 Create a `docker-compose.yml` file in your working directory:
 
@@ -154,35 +104,14 @@ services:
       - "127.0.0.1:7280:7280"
     environment:
       - QW_CLUSTER_ID=cloudprem-local
+      - QW_ENABLE_REVERSE_CONNECTION
+      - DD_SITE=${DD_SITE:-datadoghq.com}
       - DD_API_KEY=${DD_API_KEY}
       - DD_APP_KEY=${DD_APP_KEY}
-      - DD_SITE=${DD_SITE:-datadoghq.com}
     volumes:
       - ./qwdata:/quickwit/qwdata
       - ./config.yaml:/quickwit/config/quickwit.yaml:ro
     restart: unless-stopped
-
-  datadog-index-creator:
-    image: datadog/cloudprem:latest
-    depends_on:
-      cloudprem:
-        condition: service_healthy
-    volumes:
-      - ./datadog-index.yaml:/quickwit/datadog.yaml:ro
-    entrypoint: []
-    command:
-      - /bin/sh
-      - -c
-      - |
-        echo 'Starting datadog-index-creator...'
-        echo 'Waiting for CloudPrem to be ready...'
-        sleep 5
-        echo 'Testing connection to CloudPrem...'
-        curl -f http://cloudprem:7280/api/v1/version || echo 'Connection failed'
-        echo 'Creating Datadog index...'
-        quickwit index create --index-config /quickwit/datadog.yaml --yes --retries 10 --endpoint http://cloudprem:7280
-        echo 'Datadog index created successfully!'
-    restart: "no"
 
   datadog-agent:
     image: gcr.io/datadoghq/agent:latest
@@ -209,20 +138,19 @@ services:
 
 The Docker Compose setup will:
 1. Start CloudPrem and wait for it to be healthy
-2. Automatically create the Datadog index
-3. Start the Datadog Agent to collect container logs
+2. Start the Datadog Agent to collect container logs
 
-### Step 3: Set environment variables
+### Step 2: Set environment variables
 
 Create a `.env` file in the same directory:
 
 ```bash
+DD_SITE=datadoghq.com
 DD_API_KEY=your_datadog_api_key
 DD_APP_KEY=your_datadog_application_key
-DD_SITE=datadoghq.com
 ```
 
-### Step 4: Start docker compose
+### Step 3: Start docker compose
 
 ```bash
 docker compose up -d
