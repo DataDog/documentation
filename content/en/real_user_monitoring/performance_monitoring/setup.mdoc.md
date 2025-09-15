@@ -24,16 +24,39 @@ further_reading:
 ---
 
 ## Overview
-This page describes how to instrument your applications for both Real User Monitoring (RUM) or Error Tracking. You can follow the steps below to instrument your applications for RUM or Error Tracking if you have purchased it as a standalone product.
+
+This guide walks you through setting up Real User Monitoring (RUM) for your application. RUM provides deep insight into your application's frontend performance and user experience across different platforms.
 
 ## Setup
-To start sending RUM data from your application to Datadog:
 
 {% if equals($platform, "browser") %}
-  {% partial file="sdks/browser/setup.mdoc.md" /%}
+  {% partial file="sdks/browser-setup.mdoc.md" /%}
 {% /if %}
+
 {% if equals($platform, "android") %}
-  {% partial file="sdks/android/setup.mdoc.md" /%}
+  {% partial file="sdks/android-setup.mdoc.md" /%}
 {% /if %}
 
+{% if equals($platform, "ios") %}
+  {% partial file="sdks/ios-setup.mdoc.md" /%}
+{% /if %}
 
+{% if equals($platform, "flutter") %}
+  {% partial file="sdks/flutter-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "roku") %}
+  {% partial file="sdks/roku-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "react_native") %}
+  {% partial file="sdks/react-native-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "kotlin_multiplatform") %}
+  {% partial file="sdks/kotlin-multiplatform-setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "unity") %}
+  {% partial file="sdks/unity-setup.mdoc.md" /%}
+{% /if %}

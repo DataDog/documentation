@@ -4,6 +4,10 @@ rum_sdk_platform_options:
   - id: android
   - id: ios
   - id: react_native
+  - id: flutter
+  - id: roku
+  - id: kotlin_multiplatform
+  - id: unity
 
 rum_session_replay_sdk_options:
   - id: android

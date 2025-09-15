@@ -423,3 +423,9 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- label: Roku
+  id: roku
+
+- label: Unity
+  id: unity
