@@ -15,7 +15,7 @@ See the Datadog documentation [README][9] for additional contribution requiremen
 
 ### Content
 
-**Be direct and specific**: Say exactly what you mean using simple phrasing. Be specific - don't leave the reader guessing.
+**Be direct and specific**: Say exactly what you mean using simple phrasing. Don't leave the reader guessing!
 - **Not recommended**: Please note the Datadog Agent includes DogStatsD, which serves as a StatsD forwarder. This integration is intended for monitoring external StatsD servers, and is not needed to send metrics to Datadog using the StatsD protocol.
 - **Recommended**: This integration does **not** help you forward application metrics from StatsD servers to Datadog. To do that, configure your StatsD server to forward metrics to DogStatsD.
 
