@@ -11,7 +11,7 @@ further_reading:
       text: 'Instrument your application with custom spans'
 ---
 
-This page demonstrates using Datadog's LLM Observability SDK to instrument a Python or Node.js LLM application.
+This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
 
 ### Prerequisites
 
@@ -72,7 +72,7 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
-2. Add the -javaagent JVM argument to your Java start command:
+2. Add the `-javaagent` JVM argument to your Java start command:
    ```shell
    java -javaagent:/path/to/dd-java-agent.jar \
    -Ddd.llmobs.enabled=true \
@@ -112,7 +112,7 @@ See below for a simple application that can be used to begin exploring the LLM O
 
 1. Install OpenAI with `pip install openai`.
 
-2. Save example script `app.py`.
+2. Save example script `app.py`:
 
    ```python
    import os
@@ -131,16 +131,17 @@ See below for a simple application that can be used to begin exploring the LLM O
 3. Run the application:
 
    ```shell
-   # Make sure you have the required environment variables listed above
-   DD_...= \
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    ddtrace-run app.py
    ```
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-1. Install OpenAI `npm install openai`.
+1. Install OpenAI with `npm install openai`.
 
-2. Save example script `app.js`
+2. Save example script `app.js`:
 
    ```js
    const { OpenAI } = require('openai');
@@ -160,29 +161,30 @@ See below for a simple application that can be used to begin exploring the LLM O
    main().then(console.log)
 
 3. Run the application:
-
    ```
-   # Make sure you have the required environment variables listed above
-   DD_...= \
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
    ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
-1. Install OpenAI
-- Using Maven add this dependency to your pom.xml:
-```java
-<dependency>
-  <groupId>com.openai</groupId>
-  <artifactId>openai</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
+1. Install OpenAI:
+   - **Maven**: Add this dependency to your `pom.xml`:
+      ```java
+      <dependency>
+        <groupId>com.openai</groupId>
+        <artifactId>openai</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      ```
 
-   - Using Gradle add this line to your build.gradle:
-```script
-implementation 'com.openai:openai:1.0.0'
-```
-2. Save example script `app.java`
+   - **Gradle**: Add this line to your `build.gradle`:
+      ```script
+      implementation 'com.openai:openai:1.0.0'
+      ```
+2. Save example script `app.java`:
 
    ```java
    import com.openai.OpenAI;
@@ -223,8 +225,6 @@ implementation 'com.openai:openai:1.0.0'
 3. Run the application:
 
    ```
-   # Make sure you have the required environment variables listed above
-   DD_...= \
    java -javaagent:/path/to/dd-java-agent.jar \
    -Ddd.llmobs.enabled=true \
    -Ddd.llmobs.ml.app=quickstart-app \
