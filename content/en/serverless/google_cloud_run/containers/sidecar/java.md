@@ -58,6 +58,10 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform %}}
+   {{% /tab %}}
+
    {{% tab "YAML Deploy" %}}
    {{% gcr-install-sidecar-yaml language="java" %}}
    {{% /tab %}}
