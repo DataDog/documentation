@@ -47,7 +47,7 @@ docker logs <id-of-container>
 ```
 
 ## Docker compose mode
-Navigate to the directory containing your `docker-compose.yaml` file. Next, navigate to the `config` directory, then the `config.yaml` file. Update the `image` property of the PAR and point to the latest version:
+Navigate to the directory containing your `docker-compose.yaml` file.
 
 ```yaml
 services:
