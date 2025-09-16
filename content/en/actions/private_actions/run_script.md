@@ -103,6 +103,7 @@ You can mount complex scripts inside the runner:
 services:
   runner:
     image: gcr.io/datadoghq/private-action-runner:v1.7.0
+    # build: . # if you are using a custom Dockerfile
     volumes:
       - "./config:/etc/dd-action-runner/config"
       - "./scripts:/etc/dd-action-runner-script/scripts:ro"
