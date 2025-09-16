@@ -29,7 +29,7 @@ Before you configure the destination, you need the following:
 
 ### Optional service account setup for the Worker
 
-A service account in Google Cloud is a type of account used only by application or services.
+A service account in Google Cloud is a type of account used only by applications or services.
 - It has its own identity and credentials (a JSON key file).
 - You assign it IAM roles so it can access specific resources.
 - In this case, the Observability Pipelines Worker uses a service account to authenticate and send logs to Pub/Sub on your behalf.
