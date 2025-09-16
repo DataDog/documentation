@@ -841,7 +841,7 @@ Sortable
 : Determines whether the user can sort by the column.<br>
 
 Copyable
-: Determines whether the user click to copy the contents of the column.<br>
+: Determines whether the user can click to copy the contents of the column.<br>
 **Provided values**: on, off
 
 Filterable
@@ -905,7 +905,7 @@ Level
 
 Reactions
 : The reactions the button triggers. A button can have multiple reactions.<br>
-**Provided values**: download file, open modal, close modal, open side panel, close side panel, open url, set component state, set state variable value, toast notification, trigger action, custom<br>
+**Provided values**: download file, open modal, close modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action, custom<br>
 Some reaction types have additional properties.
 
 State Function

@@ -21,11 +21,11 @@ When you have a full list of items already and you want to filter them, there ar
 
 ### Column filtering
 
-Under **Columns**, expand a column and enable the **Filterable** option to allow users to filter by entries in that column. When enabled, a drop-down appears in the table header which allows the user to select an item from that column to filter on.
+Under **Columns**, expand a column and enable the **Filterable** option to allow users to filter by entries in that column. When enabled, a drop-down menu appears in the table header which allows the user to select an item from that column to filter on.
 
 ### Filter by date range
 
-To allow date range filtering, under **Appearance**, enable the **Has Date Range Filter** option and select a data path to filter by. When enabled, a drop-down appears in the table header which allows the user to select a time span to filter by.
+To allow date range filtering, under **Appearance**, enable the **Has Date Range Filter** option and select a data path to filter by. When enabled, a drop-down menu appears in the table header which allows the user to select a time span to filter by.
 
 ### Filter with search
 
