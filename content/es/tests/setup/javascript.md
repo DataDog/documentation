@@ -39,7 +39,7 @@ La instrumentación funciona en el tiempo de ejecución, por lo que los transcom
 
 ## Configuración del método de informes
 
-Para informar resultados de tests a Datadog, debes configurar la biblioteca de Datadog JavaScript:
+Para informar resultados de tests a Datadog, debes configurar la librería de Datadog JavaScript:
 
 {{< tabs >}}
 {{% tab "Acciones de Github" %}}
@@ -58,7 +58,7 @@ Si lo haces, el resto de los pasos de configuración a continuación pueden omit
 
 
 {{% tab "Otro proveedor de CI en la nube" %}}
-<div class="alert alert-info">El modo sin Agent está disponible en las versiones de la biblioteca de Datadog JavaScript >= 2.5.0</div>
+<div class="alert alert-info">El modo sin Agent está disponible en las versiones de la librería de Datadog JavaScript >= 2.5.0</div>
 {{% ci-agentless %}}
 
 {{% /tab %}}
