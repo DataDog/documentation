@@ -43,10 +43,6 @@ To authenticate using a service account:
 	- **Pub/Sub Publisher**
 	- **Pub/Sub Viewer**
 1. Click **Done**.
-1. Open the new service account **Keys** > **Add key** > **Create new key**.
-	1. Choose **JSON** format.
-	1. Save the downloaded JSON file.
-	1. Place the JSON file under: `DD_OP_DATA_DIR/config`. You reference this file when you [set up the Google Pub/Sub destination](#set-up-the-destination) later on.
 
 #### Authentication methods
 
@@ -57,7 +53,7 @@ After you've created the service account with the correct roles, set up one of t
 1. Bind the service account to a Kubernetes service account (KSA).
 1. Allow the service account to be impersonated by that KSA.
 1. Annotate the KSA so the GKE knows which service account to use.
-1. Authentication then comes from the GCP's metadata server, not a file.
+1. Authentication then comes from the GCP's metadata server.
 
 ##### Option B: Attach the GSA directly to a VM (for Google Compute Engine)
 
@@ -110,13 +106,13 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 		1. Enter the buffer size and select the unit.
 			- Maximum capacity in MB or GB.
 
-{{< img src="observability_pipelines/destinations/google_pubsub.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
+{{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
 ### Set environment variables
 
 #### Optional alternative Pub/Sub endpoints
 
-{{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field " style="width:70%;" >}}
+{{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field" style="width:70%;" >}}
 
 By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
 

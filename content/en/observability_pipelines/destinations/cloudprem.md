@@ -24,9 +24,12 @@ Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**No
 		- **Buffer size**: Durable, survives restarts
 	1. Enter the buffer size and select the unit.
 		- Maximum capacity in MB or GB.
-	
+
+{{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The CloudPrem destination settings" style="width:35%;" >}}
 
 ### Set the environment variables
+
+{{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the CloudPrem environment variable field" style="width:75%;" >}}
 
 - CloudPrem endpoint URL
 	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
