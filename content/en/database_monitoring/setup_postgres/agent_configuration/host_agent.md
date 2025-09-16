@@ -10,9 +10,9 @@ further_reading:
 Your Postgres database should now be ready for monitoring. If you haven't set it up yet, go to the [Postgres Setup Page][1] and follow the steps for your hosting type.
 
 1. [Base Configuration](#base-configuration)
-1. [Base Configuration + AWS Managed Database](?tab=awsmanageddatabase#aws-managed-database)
-1. [Base Configuration + Google Cloud SQL / AlloyDB Managed Database](?tab=googlecloudsqlalloydbmanageddatabase#google-cloud-sql--alloydb-managed-database)
-1. [Base Configuration + Azure Managed Database](?tab=azuremanageddatabase#google-cloud-sql--alloydb-managed-database)
+1. [Base + AWS Managed Database Configuration](?tab=awsmanageddatabase#aws-managed-database)
+1. [Base + Google Cloud SQL / AlloyDB Managed Database](?tab=googlecloudsqlalloydbmanageddatabase#google-cloud-sql--alloydb-managed-database)
+1. [Base + Azure Managed Database](?tab=azuremanageddatabase#google-cloud-sql--alloydb-managed-database)
 
 This will help you setup the Standard Host Agent to collection DBM Data from your Postgres Database instance. If you are using a containerized agent, follow our Docker or Kubernetes Setup instructions.
 
