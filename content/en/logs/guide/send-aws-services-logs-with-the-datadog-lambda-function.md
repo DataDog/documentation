@@ -40,6 +40,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] and [automatic](#automatically-set-up-triggers) log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
 | [CodeBuild][66]                    | [Enable Amazon CodeBuild logs][67]                                                                             | [Manual][67] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [DMS][68]                          | [Enable Amazon Database Migration Service logs][69]                                                            | [Manual][69] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
+| [DocumentDB][70]                   | [Enable Amazon DocumentDB logs][71]                                                                            | [Manual][71] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                              | [Manual][14] log collection.                                                                                                 |
 | [EC2][15]                          | `-`                                                                                                            | Use the [Datadog Agent][15] to send your logs to Datadog.                                                                    |
 | [ECS][16]                          | `-`                                                                                                            | [Use the docker agent to gather your logs][17].                                                                              |
@@ -89,6 +90,7 @@ The following sources and locations are supported:
 | Cloudtrail Logs             | S3, CloudWatch |
 | CodeBuild Logs              | S3, CloudWatch |
 | DMS Logs                    | CloudWatch     |
+| DocumentDB Logs             | CloudWatch     |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
@@ -412,3 +414,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [67]: /integrations/amazon-codebuild/#send-logs-to-datadog
 [68]: /integrations/amazon-dms/
 [69]: /integrations/amazon-dms/#send-logs-to-datadog
+[70]: /integrations/amazon-documentdb/
+[71]: /integrations/amazon-documentdb/#send-logs-to-datadog
