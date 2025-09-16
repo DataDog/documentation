@@ -30,16 +30,16 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
-| .NET 9               |                       | [GA](#support-ga)    | latest (>= 3.6.0)   |
-| .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
+| .NET 9               | _11/10/2026_          | [GA](#support-ga)    | latest (>= 3.6.0)    |
+| .NET 8               | _11/10/2026_          | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
-| .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET 6               | 11/12/2024            | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
-| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
-| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
-| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  | Not recommended       |
-| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended      |
+| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended      |
+| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  | Not recommended      |
+| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended      |
 
 Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
@@ -47,7 +47,7 @@ Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                   | Support level         | Package version                        |
+| Processor architecture                    | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
 | Windows x86 (`win-x86`)                   | [GA](#support-ga)     | < 3.0.0 (e.g. 2.56.0)                  |
@@ -56,7 +56,7 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 | Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
 | Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     | .NET 6+ only, added in version 3.2.0   |
 
-Note that running 32-bit applications on Windows x64 is supported.
+Note that running `x86` applications on Windows `x64` is supported.
 
 ## Supported operating systems
 
