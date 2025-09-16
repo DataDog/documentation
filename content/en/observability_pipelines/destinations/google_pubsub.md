@@ -23,7 +23,7 @@ Before you configure the destination, you need the following:
 	- A workload identity (Google Kubernetes Engine (GKE))
 - IAM roles:
 	- `roles/pubsub.publisher` is required for publishing events.
-	- `roles/pubsub.viewer` is recommended for heath checks.
+	- `roles/pubsub.viewer` is recommended for health checks.
 		- If the role is missing, the error `Healthcheck endpoint forbidden` is logged and the Worker proceeds as usual.
 	- See [Available Pub/Sub roles][3] for more information.
 
