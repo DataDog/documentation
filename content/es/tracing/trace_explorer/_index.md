@@ -66,7 +66,7 @@ Con la **Vista de lista**, puedes:
 - Comprueba si un proceso se ha iniciado correctamente al escribir `process_id` y autocompletar el nuevo ID de proceso como una etiquetar en los tramos secundarios.
 - Monitoriza la prueba de carga y el impacto en el rendimiento de tus endpoints al filtrar por la duración de un recurso secundario.
 - Ejecuta consultas de búsqueda con un solo clic en cualquier tramo o etiqueta directamente desde la vista del panel de traza.
-- Añade, elimina y ordena columnas de etiquetas de tramo para obtener una vista personalizada.
+- Añade, elimina y ordena columnas de span tags para obtener una vista personalizada.
 
 El número de tramos recibidos por segundo se muestra en la parte superior de la tabla de trazas. Dado que un flujo (stream) de miles de tramos por segundo no es legible para las personas, los flujos de tramos de alto rendimiento muestran algunos tramos para mayor claridad visual. Puedes buscar todos los tramos disponibles en la consulta de búsqueda. Utiliza las funciones de filtrado de la barra de consulta de Live Search para filtrar el flujo de tramos y el botón **Pause/Play** (Pausa/Reproducción) situado en la parte superior derecha de la pantalla para pausar o reanudar el flujo.
 
@@ -128,7 +128,7 @@ Todos los tramos indexados por filtros de retención personalizados *y* el filtr
 
 Todos los tramos indexados por filtros de retención personalizados o el filtro de retención inteligente están disponibles para su búsqueda cuando se utiliza el análisis de trazas.
 
-Desde la vista de series temporales, exporta tu consulta a un [dashboard][1], [monitor][2], o [notebook][3] para investigar más en detalle o para alertar automáticamente cuando un número agregado de tramos cruce un umbral específico. 
+Desde la vista de series temporales, exporta tu consulta a un [dashboard][1], [monitor][2], o [notebook][3] para investigar más en detalle o para alertar automáticamente cuando un número agregado de tramos cruce un umbral específico.
 
 **Nota**: Los tramos indexados por el filtro de retención inteligente se excluyen de las evaluaciones del monitor de análisis de trazas de APM. Para obtener más información, consulta [Retención de trazas][4].
 

@@ -130,7 +130,7 @@ You can access a custom variable in your workflow using `{{ Variables.variableNa
 
 ### Iteration
 
-Setting a custom variable inside a **For loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a custom variable and append the data you need to it on each iteration. Outside of the loop, you can access the custom variable and handle the data you collected.
+Setting a custom variable inside a **For loop** or a **While loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a custom variable and append the data you need to it on each iteration. Outside of the loop, you can access the custom variable and handle the data you collected.
 
 To avoid a type error resulting from an undefined variable, assign a custom variable before you use it in a loop. In the example below, the custom variable `evenList` is set to an empty array before it is used in the loop.
 

@@ -25,7 +25,7 @@ type: multi-code-lang
 
 Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:
 
-1. Añade la instrumentación manual de OpenTelemetry deseada a tu código Node.js siguiendo la [documentación de la Instrumentación manual de OpenTelemetry Node.js][1]. **Nota**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la biblioteca de rastreo de Datadog en su lugar.
+1. Añade la instrumentación manual de OpenTelemetry deseada a tu código Node.js siguiendo la [documentación de la Instrumentación manual de OpenTelemetry Node.js][1]. **Nota**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la librería de rastreo de Datadog en su lugar.
 
 2. Añadir el módulo `dd-trace` a tu paquete .json:
 

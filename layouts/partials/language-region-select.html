@@ -12,7 +12,7 @@
         <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}" {{ if ne .Language.Lang "en" }} data-lang="{{ .Language.Lang }}"{{end}}>{{ .Language.LanguageName }}</a>
 
         <!-- Manually adding English option to non-English sites -->
-        {{ if ne .Sites.First .Site }}
+        {{ if ne .Sites.Default .Site }}
           <a class="dropdown-item" href="{{ replace .Permalink (printf "/%s/" .Language.Lang) "/" }}?lang_pref=en">English</a>
         {{ end }}
 

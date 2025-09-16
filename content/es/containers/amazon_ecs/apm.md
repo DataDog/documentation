@@ -65,8 +65,8 @@ Una vez activado, el contenedor del Datadog Agent recopila las trazas emitidas d
 
 ## Configurar tu contenedor de aplicaciones para enviar trazas al Datadog Agent
 
-### Instalar la biblioteca de rastreo
-Sigue las [instrucciones de configuración para instalar la biblioteca de rastreo de Datadog][2] para el lenguaje de tu aplicación. Para ECS, instala el rastreador en la imagen del contenedor de tu aplicación.
+### Instalar la librería de rastreo
+Sigue las [instrucciones de configuración para instalar la librería de rastreo de Datadog][2] para el lenguaje de tu aplicación. Para ECS, instala el rastreador en la imagen del contenedor de tu aplicación.
 
 ### Proporcionar la dirección IP privada para la instancia EC2
 Indica al rastreador la dirección IP privada de la instancia EC2 subyacente en la que se está ejecutando el contenedor de aplicaciones. Esta dirección es el nombre de host del endpoint del rastreador. El contenedor del Datadog Agent que está en el mismo host (con el puerto del host activado) recibe estas trazas.
@@ -104,7 +104,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{% /tab %}}
 {{< /tabs >}}
 
-Indica el resultado de esta solicitud al rastreador configurando la variable de entorno `DD_AGENT_HOST` para cada contenedor de aplicaciones que envíe trazas. 
+Indica el resultado de esta solicitud al rastreador configurando la variable de entorno `DD_AGENT_HOST` para cada contenedor de aplicaciones que envíe trazas.
 
 ### Configurar el endpoint del Trace Agent
 
