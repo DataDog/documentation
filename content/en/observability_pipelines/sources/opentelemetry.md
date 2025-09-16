@@ -13,7 +13,7 @@ Common scenarios when you might use this source:
 
 - You are using OpenTelemetry as your standard method for collecting and routing data, and you want to normalize that data, before routing them to different destinations.
 - You are collecting data from multiple sources and want to aggregate them in a central place for consistent processing.
-    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines sources, you can aggregate all of your data in Observability Pipelines for processing.
+    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines [sources][2], you can aggregate all of your data in Observability Pipelines for processing.
 
 ## Prerequisites
 
@@ -69,4 +69,5 @@ Based on these example configurations, these are values you enter for the follow
 - HTTP listener address: `worker:4317`
 - gRPC listener address: `worker:4318`
 
-[1]: /advanced_configurations/#bootstrap-options
+[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[2]: /observability_pipelines/sources/
