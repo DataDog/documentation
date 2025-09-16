@@ -45,19 +45,21 @@ LLMObs.enable(
 )
 ```
 
-Notes:
-- You need *both* an API key and an APP key
+**Notes**:
+- You need *both* an API key and an application key
 - All datasets and experiments live in a project
 
 ## Datasets
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each _dataset_ is associated to a _project_.
-You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push, modify and retrieve datasets from Datadog.
+A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
 
 ### Creating a dataset
-There are 2 ways to create a dataset: manually or via CSV (see Working with CSV)
 
-To manually create a new dataset, use `LLMObs.create_dataset()`:
+{{< tabs >}}
+{{% tab "Manual" %}}
+
+To manually create a dataset, use `LLMObs.create_dataset()`:
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -83,10 +85,44 @@ dataset = LLMObs.create_dataset(
 # View dataset in Datadog UI
 print(f"View dataset: {dataset.url}")
 ```
+{{% /tab %}}
+
+{{% tab "CSV" %}}
+
+To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
+
+```python
+# Create dataset from CSV
+dataset = LLMObs.create_dataset_from_csv(
+    csv_path="questions.csv",
+    dataset_name="geography-quiz",
+    input_data_columns=["question", "category"],  # Columns to use as input
+    expected_output_columns=["answer"],           # Columns to use as expected output
+    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    csv_delimiter=",",                           # Optional: Defaults to comma
+    description="Geography quiz dataset",          # Optional: Dataset description
+    project_name="quizzes-project"          # Optional: defaults to the project name from LLMObs.enable
+)
+
+# Example CSV format:
+# question,category,answer,difficulty
+# What is the capital of Japan?,geography,Tokyo,medium
+# What is the capital of Brazil?,geography,Brasília,medium
+
+```
+
+**Notes**:
+- CSV files must have a header row
+- Maximum field size is 10MB
+- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
+- The dataset is automatically pushed to Datadog after creation
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Managing dataset records
 
-The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog
+The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
 
 ```python
 # Add a new record
@@ -126,46 +162,13 @@ for record in dataset:
     print(record["input_data"])
 ```
 
+### Exporting a dataset to pandas
 
-### Retrieving a dataset
+The Dataset class also provides the method `as_dataframe()`, which allows you to export a dataset as a [pandas DataFrame][11].
 
-To retrieve a project's existing dataset from Datadog:
-
-```python
-dataset = LLMObs.pull_dataset(
-    dataset_name="capitals-of-the-world",
-    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
-)
-
-# Get dataset length
-print(len(dataset))
-```
-
-
-### Working with CSV files
-
-You can create datasets from CSV files and export datasets to pandas DataFrames.
-
-**Note**: Pandas is required for these operations; install it with `pip install pandas`.
+<div class="alert alert-info"><a href="https://pandas.pydata.org/docs/index.html">Pandas</a> is required for this operation. To install pandas, <code>pip install pandas</code>.</div>
 
 ```python
-# Create dataset from CSV
-dataset = LLMObs.create_dataset_from_csv(
-    csv_path="questions.csv",
-    dataset_name="geography-quiz",
-    input_data_columns=["question", "category"],  # Columns to use as input
-    expected_output_columns=["answer"],           # Columns to use as expected output
-    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
-    csv_delimiter=",",                           # Optional: Defaults to comma
-    description="Geography quiz dataset",          # Optional: Dataset description
-    project_name="quizzes-project"          # Optional: defaults to the project name from LLMObs.enable
-)
-
-# Example CSV format:
-# question,category,answer,difficulty
-# What is the capital of Japan?,geography,Tokyo,medium
-# What is the capital of Brazil?,geography,Brasília,medium
-
 # Convert dataset to pandas DataFrame
 df = dataset.as_dataframe()
 print(df.head())
@@ -182,14 +185,22 @@ The DataFrame has a MultiIndex structure with the following columns:
 - `expected_output`: Contains all output fields from `expected_output_columns`
 - `metadata`: Contains any additional fields from `metadata_columns`
 
-**Notes**:
-- CSV files must have a header row
-- Maximum field size is 10MB
-- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
-- The dataset is automatically pushed to Datadog after creation
+### Retrieving a dataset
+
+To retrieve a project's existing dataset from Datadog:
+
+```python
+dataset = LLMObs.pull_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
+)
+
+# Get dataset length
+print(len(dataset))
+```
 
 ## Experiments
-An experiment is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
+An _experiment_ is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
 
 ### Task
 The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
@@ -205,90 +216,91 @@ Evaluators are functions that measure how well the model or agent performs by co
 Create an experiment using `LLMObs.experiment()`:
 
 1. Load a dataset
-```python
-from ddtrace.llmobs import LLMObs
-from typing import Dict, Any, Optional, List
+   ```python
+   from ddtrace.llmobs import LLMObs
+   from typing import Dict, Any, Optional, List
 
-dataset = LLMObs.pull_dataset("capitals-of-the-world")
-```
+   dataset = LLMObs.pull_dataset("capitals-of-the-world")
+   ```
 
 2. Define a task function that processes a single dataset record.
-```python
-def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
-    question = input_data["question"]
-    # Your LLM or processing logic here
-    return "Beijing" if "China" in question else "Unknown"
-```
+   ```python
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+       question = input_data["question"]
+       # Your LLM or processing logic here
+       return "Beijing" if "China" in question else "Unknown"
+   ```
 
-You can trace the different parts of your Experiment task (workflow, tool calls...) using the [same tracing decorators](https://docs.datadoghq.com/llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application) you use in production.
-If you use a [supported framework](https://docs.datadoghq.com/llm_observability/instrumentation/auto_instrumentation?tab=python) (e.g openAI, ...), LLMObs automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.
+
+   If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-3. Define evaluator functions
-```python
-def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
-    return output_data == expected_output
+3. Define evaluator functions.
+   ```python
+   def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
+       return output_data == expected_output
 
-def overlap(input_data: Dict[str, Any], output_data: str, expected_output: str) -> float:
-    expected_output_set = set(expected_output)
-    output_set = set(output_data)
+   def overlap(input_data: Dict[str, Any], output_data: str, expected_output: str) -> float:
+       expected_output_set = set(expected_output)
+       output_set = set(output_data)
 
-    intersection = len(output_set.intersection(expected_output_set))
-    union = len(output_set.union(expected_output_set))
+       intersection = len(output_set.intersection(expected_output_set))
+       union = len(output_set.union(expected_output_set))
 
-    return intersection / union
+       return intersection / union
 
-def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
-    fake_llm_call = "excellent"
-    return fake_llm_call
-```
+   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
+       fake_llm_call = "excellent"
+       return fake_llm_call
+   ```
 
-4. Create and run the experiment
-```python
-experiment = LLMObs.experiment(
-    name="capital-cities-test",
-    task=task,
-    dataset=dataset,
-    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
-    description="Testing capital cities knowledge",
-    config={
-        "model_name": "gpt-4",
-        "version": "1.0"
-    },
-)
+4. Create and run the experiment.
+   ```python
+   experiment = LLMObs.experiment(
+       name="capital-cities-test",
+       task=task,
+       dataset=dataset,
+       evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+       description="Testing capital cities knowledge",
+       config={
+           "model_name": "gpt-4",
+           "version": "1.0"
+       },
+   )
 
-# Run the experiment
-results = experiment.run()  # Run on all dataset records
+   # Run the experiment
+   results = experiment.run()  # Run on all dataset records
 
-# Process results
-for result in results:
-    print(f"Record {result['idx']}")
-    print(f"Input: {result['input']}")
-    print(f"Output: {result['output']}")
-    print(f"Score: {result['evaluations']['evaluator']['value']}")
-    if result['error']['message']:
-        print(f"Error: {result['error']['message']}")
-```
+   # Process results
+   for result in results:
+       print(f"Record {result['idx']}")
+       print(f"Input: {result['input']}")
+       print(f"Output: {result['output']}")
+       print(f"Score: {result['evaluations']['evaluator']['value']}")
+       if result['error']['message']:
+           print(f"Error: {result['error']['message']}")
+   ```
 
-To increase the execution speed of the Experiment, you can enable parallel processing:
-```
-results = experiment.run(jobs=4)
-```
+   To increase the execution speed of the experiment, you can enable parallel processing:
+   ```
+   results = experiment.run(jobs=4)
+   ```
 
-To test your pipeline on a subset of the data, use:
-```
-results = experiment.run(sample_size=10)
-```
+   To test your pipeline on a subset of the data, use:
+   ```
+   results = experiment.run(sample_size=10)
+   ```
 
-To stop the execution of the Experiment if an error occurs, use:
-```
-results = experiment.run(raise_errors=True)
-```
+   To stop the execution of the Experiment if an error occurs, use:
+   ```
+   results = experiment.run(raise_errors=True)
+   ```
 
-5. View your experiment results in Datadog UI
-```
-print(f"View experiment: {experiment.url}")
-```
+5. View your experiment results in Datadog:
+   ```
+   print(f"View experiment: {experiment.url}")
+   ```
 
 ## HTTP API
 
@@ -366,7 +378,7 @@ Datadog highly recommends importing the [Experiments Postman collection][7] into
 
 {{% collapse-content title="GET /api/v2/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-get" %}}
 
-List all projects, sorted by creation date. The most recently-created projects are first.
+List all projects, sorted by creation date. The most recently created projects are first.
 
 **Query parameters**
 
@@ -812,7 +824,7 @@ Push events (spans and metrics) for an experiment.
 | ---- | ---- | ---- |
 | `span_id` | string | Associated span ID. |
 | `metric_type` | string | Metric type. One of: `score`, `categorical`. |
-| `timestamp_ms` | number | Unix timestamp in milliseconds. |
+| `timestamp_ms` | number | UNIX timestamp in milliseconds. |
 | `label` | string | Metric label (evaluator name). |
 | `score_value` | number | Score value (when `metric_type` is `score`). |
 | `categorical_value` | string | Categorical value (when `metric_type` is `categorical`). |
@@ -837,3 +849,6 @@ Empty body on success.
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
 [10]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
+[12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
+[13]: /llm_observability/instrumentation/auto_instrumentation?tab=python
