@@ -12,7 +12,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-{% partial file="sdks/android-setup.mdoc.md" /%}
+{% partial file="sdks/setup/android-setup.mdoc.md" /%}
 
 ### Add NDK crash reporting
 

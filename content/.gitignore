@@ -6,6 +6,7 @@
 # This file lists compiled Cdocs files to keep them out of version control. For more information, see the internal Cdocs documentation: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4898063037/Cdocs+Build
 
 /en/error_tracking/frontend/setup.md
+/en/error_tracking/frontend/troubleshooting.md
 /en/product_analytics/session_replay/mobile/privacy_options.md
 /en/product_analytics/session_replay/mobile/setup_and_configuration.md
 /en/real_user_monitoring/error_tracking/setup.md

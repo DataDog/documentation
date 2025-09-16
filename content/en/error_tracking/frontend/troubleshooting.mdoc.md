@@ -1,28 +1,15 @@
 ---
 title: Troubleshooting
-description: Learn how to troubleshoot issues with RUM monitoring.
+description: Learn how to troubleshoot issues.
 content_filters:
   - trait_id: platform
     option_group_id: rum_sdk_platform_options
     label: "SDK"
-further_reading:
-- link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
-  tag: 'Blog'
-  text: 'Real User Monitoring'
-- link: '/integrations/content_security_policy_logs/'
-  tag: 'Documentation'
-  text: 'Content Security Policy'
-- link: https://github.com/DataDog/dd-sdk-android
-  tag: "Source Code"
-  text: dd-sdk-android Source code
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Explore Real User Monitoring
 ---
 
 ## Overview
 
-If you experience unexpected behavior with Datadog RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the SDK, as each release contains improvements and fixes.
+If you experience unexpected behavior with client SDKs, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the SDK, as each release contains improvements and fixes.
 
 {% if equals($platform, "browser") %}
   {% partial file="sdks/troubleshooting/browser-troubleshooting.mdoc.md" /%}

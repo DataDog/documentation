@@ -7166,22 +7166,22 @@ menu:
       identifier: rum_advanced_configuration
       weight: 1
     - name: Data Collected
-      url: real_user_monitoring/data_collected/data_collected
+      url: real_user_monitoring/advanced_configuration/data_collected
       parent: rum_configuration
       identifier: rum_data_collected
       weight: 1
     - name: Tracking User Actions
-      url: real_user_monitoring/tracking_user_actions/tracking_user_actions
+      url: real_user_monitoring/advanced_configuration/tracking_user_actions
       parent: rum_configuration
       identifier: rum_tracking_user_actions
       weight: 1
     - name: Integrated Libraries
-      url: real_user_monitoring/integrated_libraries/integrated_libraries
+      url: real_user_monitoring/advanced_configuration/integrated_libraries
       parent: rum_configuration
       identifier: rum_integrated_libraries
       weight: 1
     - name: Web View Tracking
-      url: real_user_monitoring/web_view_tracking/web_view_tracking
+      url: real_user_monitoring/advanced_configuration/web_view_tracking
       parent: rum_configuration
       identifier: rum_web_view_tracking
       weight: 1

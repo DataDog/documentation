@@ -30,33 +30,33 @@ This guide walks you through setting up Real User Monitoring (RUM) for your appl
 ## Setup
 
 {% if equals($platform, "browser") %}
-  {% partial file="sdks/browser-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/browser-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "android") %}
-  {% partial file="sdks/android-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/android-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "ios") %}
-  {% partial file="sdks/ios-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/ios-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "flutter") %}
-  {% partial file="sdks/flutter-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/flutter-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "roku") %}
-  {% partial file="sdks/roku-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/roku-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "react_native") %}
-  {% partial file="sdks/react-native-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/react-native-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "kotlin_multiplatform") %}
-  {% partial file="sdks/kotlin-multiplatform-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/kotlin-multiplatform-setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "unity") %}
-  {% partial file="sdks/unity-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/unity-setup.mdoc.md" /%}
 {% /if %}

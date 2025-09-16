@@ -5,7 +5,7 @@ Whenever a source, custom, report, or console error containing a stack trace is 
  
 ## Setup
 
-{% partial file="sdks/browser-setup.mdoc.md" /%}
+{% partial file="sdks/setup/browser-setup.mdoc.md" /%}
 
 ### Link errors with your source code (optional)
 
