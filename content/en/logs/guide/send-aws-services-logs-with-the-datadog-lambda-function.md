@@ -34,6 +34,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | AWS service                        | Activate AWS service logging                                                                                   | Send AWS logs to Datadog                                                                                                     |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | [API Gateway][3]                   | [Enable Amazon API Gateway logs][4]                                                                            | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
+| [AppSync][64]                      | [Enable AWS AppSync Logs][65]                                                                                  | [Manual][65] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [Cloudfront][6]                    | [Enable Amazon CloudFront logs][7]                                                                             | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] and [automatic](#automatically-set-up-triggers) log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
 | [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                              | [Manual][14] log collection.                                                                                                 |
@@ -77,6 +78,7 @@ The following sources and locations are supported:
 | Apache Airflow (MWAA)       | CloudWatch     |
 | API Gateway Access Logs     | CloudWatch     |
 | API Gateway Execution Logs  | CloudWatch     |
+| AppSync Logs                | CloudWatch.    |
 | Application ELB Access Logs | S3             |
 | Classic ELB Access Logs     | S3             |
 | CloudFront Access Logs      | S3             |
@@ -103,6 +105,7 @@ The following sources and locations are supported:
     ```text
     "airflow:GetEnvironment",
     "airflow:ListEnvironments",
+    "appsync:ListGraphqlApis",
     "cloudfront:GetDistributionConfig",
     "cloudfront:ListDistributions",
     "cloudtrail:GetTrail",
@@ -142,6 +145,7 @@ The following sources and locations are supported:
     | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
     | `airflow:ListEnvironments`                                  | List all MWAA environment names.                                             |
     | `airflow:GetEnvironment`                                    | Get information about a MWAA environment.                                    |
+    | `appsync:ListGraphqlApis`                                   | List all GraphQL Apis                                                        |
     | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
@@ -388,3 +392,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [61]: /integrations/amazon_route53/#send-logs-to-datadog
 [62]: /integrations/amazon-eks/
 [63]: /integrations/amazon-eks/#log-collection
+[64]: /integrations/amazon-appsync/
+[65]: /integrations/amazon-appsync/#send-logs-to-datadog
