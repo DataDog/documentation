@@ -117,6 +117,14 @@ runPredefinedScript:
   shell:
     command: [ "bash", "/etc/dd-action-runner-script/scripts/script.sh" ]
 ```
+```shell
+# scripts/script.sh
+echo "Hello from the shell script!"
+```
+```python
+# scripts/script.py
+print("Hello from Python script!")
+```
 
 [1]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
 [2]: https://app.datadoghq.com/actions/connections
