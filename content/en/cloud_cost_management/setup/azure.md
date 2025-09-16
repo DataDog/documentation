@@ -23,12 +23,11 @@ Datadog provides cost visibility on a Subscription, Resource Group, and Billing 
 
 ## Setup
 
-
 {{% site-region region="us3" %}}
-**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: /integrations/azure/?tab=azurecliv20#setup
+[2]: /getting_started/integrations/azure/#azure-cli-setup
 {{% /site-region %}}
 
 ### Configure the Azure integration
@@ -226,7 +225,6 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `subscriptionname` | The name of the Azure subscription. |
 | `term` | Describes the duration or term of the Savings Plan in months (such as `12`). |
 | `unitofmeasure` | The unit of measure for billing for the service. For example, compute services are billed per hour. |
-
 
 #### Cost and observability correlation
 
