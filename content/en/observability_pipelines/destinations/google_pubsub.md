@@ -27,14 +27,14 @@ Before you configure the destination, you need the following:
 		- If the role is missing, the error `Healthcheck endpoint forbidden` is logged and the Worker proceeds as usual.
 	- See [Available Pub/Sub roles][3] for more information.
 
-### Optional service account setup for the Worker
+### Set up a service account for the Worker
 
 A service account in Google Cloud is a type of account used only by applications or services.
 - It has its own identity and credentials (a JSON key file).
 - You assign it IAM roles so it can access specific resources.
 - In this case, the Observability Pipelines Worker uses a service account to authenticate and send logs to Pub/Sub on your behalf.
 
-If you are authenticating using a service account:
+To authenticate using a service account:
 
 1. In the Google Cloud console, navigate to **IAM & Admin** > **[Service Accounts][4]**.
 1. Click **+ Create service account**.
@@ -47,6 +47,35 @@ If you are authenticating using a service account:
 	1. Choose **JSON** format.
 	1. Save the downloaded JSON file.
 	1. Place the JSON file under: `DD_OP_DATA_DIR/config`. You reference this file when you [set up the Google Pub/Sub destination](#set-up-the-destination) later on.
+
+#### Authentication methods
+
+After you've created the service account with the correct roles, choose one of the following authentication methods:
+
+##### Option A: Workload Identity method (for GKE, recommended)
+
+1. Bind the service account to a Kubernetes service account (KSA).
+1. Allow the service account to be impersonated by that KSA.
+1. Annotate the KSA so the GKE knows which service account to use.
+1. Authentication then comes from the GCP's metadata server, not a file.
+
+##### Option B: Attach the GSA directly to a VM (for Google Compute Engine)
+
+Use this authentication method if you're running the Observability Pipelines Worker on a Google Compute Engine (GCE) VM.
+- When you create or edit the VM, specify the Google service account under **Identity and API access** > **Service account**.
+
+##### Option C: Run the service as the GSA (for Cloud Run or Cloud Functions)
+
+Use this authentication method if you're deploying the Worker as a Cloud Run service or Cloud Function.
+- In the Cloud Run or Cloud Functions deployment settings, set the **Execution service account** to the Google service account you created.
+
+##### Option D: JSON key method (any environment without identity bindings)
+
+1. Open the new service account and navigate to **Keys** > **Add key** > **Create new key**.
+1. Choose the JSON format.
+1. Save the downloaded JSON file in a secure location.
+1. After you install the Worker, copy or mount JSON the file into `DD_OP_DATA_DIR/config/`.
+You reference this file in the Google Pub/Sub destination's **Credentials path** field when you [set up the destination](#set-up-the-destination) in the Pipelines UI.
 
 ## Setup
 
