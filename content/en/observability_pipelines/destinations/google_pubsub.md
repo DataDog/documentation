@@ -50,7 +50,7 @@ To authenticate using a service account:
 
 #### Authentication methods
 
-After you've created the service account with the correct roles, choose one of the following authentication methods:
+After you've created the service account with the correct roles, set up one of the following authentication methods:
 
 ##### Option A: Workload Identity method (for GKE, recommended)
 
