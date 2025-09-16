@@ -65,6 +65,28 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
 [2]: /getting_started/site/
 
 {{% /tab %}}
+{{% tab "Java" %}}
+1. Install the SDK:
+
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+
+2. Add the -javaagent JVM argument to your Java start command:
+   ```shell
+   java -javaagent:/path/to/dd-java-agent.jar \
+   -Ddd.llmobs.enabled=true \
+   -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
+   -jar path/to/your/app.jar
+   ```
+
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+
+[1]: /llm_observability/setup/sdk/java/#command-line-setup
+[2]: /getting_started/site/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### View traces
@@ -143,6 +165,71 @@ See below for a simple application that can be used to begin exploring the LLM O
    # Make sure you have the required environment variables listed above
    DD_...= \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+1. Install OpenAI
+- Using Maven add this dependency to your pom.xml:
+```java
+<dependency>
+  <groupId>com.openai</groupId>
+  <artifactId>openai</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+   - Using Gradle add this line to your build.gradle:
+```script
+implementation 'com.openai:openai:1.0.0'
+```
+2. Save example script `app.java`
+
+   ```java
+   import com.openai.OpenAI;
+   import com.openai.api.models.ChatCompletionRequest;
+   import com.openai.api.models.ChatCompletionResponse;
+   import com.openai.api.models.ChatMessage;
+
+   import java.util.Arrays;
+
+   public class App {
+       public static void main(String[] args) {
+           String apiKey = System.getenv("OPENAI_API_KEY");
+           OpenAI openAI = new OpenAI(apiKey);
+
+           ChatCompletionRequest request = ChatCompletionRequest.builder()
+               .model("gpt-4o-mini")
+               .messages(Arrays.asList(
+                   ChatMessage.builder()
+                       .role("system")
+                       .content("You are a helpful customer assistant for a furniture store.")
+                       .build(),
+                   ChatMessage.builder()
+                       .role("user")
+                       .content("I'd like to buy a chair for my living room.")
+                       .build()
+               ))
+               .build();
+
+           try {
+               ChatCompletionResponse response = openAI.chat().completions().create(request);
+               System.out.println(response);
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+   }
+
+3. Run the application:
+
+   ```
+   # Make sure you have the required environment variables listed above
+   DD_...= \
+   java -javaagent:/path/to/dd-java-agent.jar \
+   -Ddd.llmobs.enabled=true \
+   -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
+   -jar path/to/your/app.jar
    ```
 {{% /tab %}}
 {{< /tabs >}}
