@@ -60,7 +60,7 @@ platforms:
     image: "platform_cloud_foundry.png"
     category: "Cloud platforms"
   - name: Amazon ECS
-    link: "containers/"
+    link: "/containers/amazon_ecs/"
     image: "platform_ecs.png" 
     category: "Container platforms"
   # - name: source

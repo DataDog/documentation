@@ -29,11 +29,21 @@ algolia:
 
 Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
+## Setup
+
+### Install with Fleet Automation
+Follow the [in-app installation guide in Fleet Automation][32] to complete setup on ECS. After selecting your launch type (EC2 or Fargate), you provide values such as the task family and cluster name. [Fleet Automation][33] then generates a ready-to-use task definition or CloudFormation template, with your API key pre-injected.
+
+{{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="In-app installation steps for the Datadog Agent on a Linux host." style="width:90%;">}}
+
 <div class="alert alert-info">
 If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.
 </div>
 
-## Setup
+If you prefer to install manually, **run one Agent container per EC2 host** by creating a Datadog Agent **task definition** and deploying it as a **Daemon** service. Each Agent then monitors the other containers on its host. See the [Install manually](#install-manually) section for more details.
+
+
+### Install manually
 
 To monitor your ECS containers and tasks, deploy the Datadog Agent as a container **once on each EC2 instance** in your ECS cluster. You can do this by creating a task definition for the Datadog Agent container and deploying it as a daemon service. Each Datadog Agent container then monitors the other containers on its respective EC2 instance.
 
@@ -355,3 +365,5 @@ Need help? Contact [Datadog support][11].
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
+[32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]:https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
