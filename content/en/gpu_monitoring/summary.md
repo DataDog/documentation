@@ -57,12 +57,25 @@ In cases where your AI workloads fail, code performance may not be the issue but
 ** Note:** For any device type, if the number of devices available is <5%, the device type will be highlighted in red.
 
 ### Pinpoint areas with insufficient GPU resources to guide provisioning decisions
-Quickly identify the underprovisioned services or Kubernetes clusters with the most number of unmet GPU requests. 
+Quickly identify the Kubernetes clusters with the most number of unmet GPU requests. 
 
 {{< img src="gpu_monitoring/unmet_requests.png" alt="Availability by GPU device type" style="width:100%;" >}}
 
 For example, for any of these services with a large number of GPU requests, you can also look at their _Device Type Breakdown_ widget to understand which device type the particular service relies on and the _Device Allocation over time_ widget to track historical demands to confirm if these services and device types are constantly underprovisioned.
 
+** Note:** If there are no services or clusters listed and you are emitting the proper tags, this is indicative that all of your services and clusters have sufficient GPU resources during the selected timeframe. 
+
+## Workload Optimization Opportunities 
+GPUs are often the highest cost item within a team's infrastructure budget, so cost optimization of your setup is crucial. This section uncovers suboptimal workloads with inefficient GPU utilization -- linking wasted costs to specific workloads and their resource usage.
+
+### Most Expensive Clusters
+This widget uncovers your most expensive Kubernetes clusters and identifies their idle spend so you can reach out to the teams who are responsible for these clusters and find ways to decrease spend, such as reducing the number of idle or inefficient GPU devices. This table is sorted by _Total Cost_ to identify the most expensive clusters. 
+
+{{< img src="gpu_monitoring/unmet_requests.png" alt="Availability by GPU device type" style="width:100%;" >}}
+
+You can click into any one of these clusters to investigate its connected entities that contribute to its costs on the [GPU Fleet page][1]. 
+
+{{< img src="gpu_monitoring/cluster_entities.png" alt="Availability by GPU device type" style="width:100%;" >}}
 
 ### Metric origin definitions
 
@@ -98,8 +111,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[0]: /metrics/metrics-without-limits
-[1]: https://app.datadoghq.com/metric/summary
-
-[33]: /metrics/custom_metrics/agent_metrics_submission/
-[34]: https://app.datadoghq.com/metric/overview
+[0]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mEnd=1758048728968&mPage=fleet&mStart=1758034328968&mView=nvidia
