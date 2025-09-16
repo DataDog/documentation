@@ -35,7 +35,7 @@ To configure your ECS with Datadog, you can either use **Fleet Automation** or *
 ## Setup with Fleet Automation
 Follow the [in-app installation guide in Fleet Automation][32] to complete setup on ECS. After completing the outlined steps in the in-app guide, [Fleet Automation][33] generates a ready-to-use task definition or CloudFormation template, with your API key pre-injected.
 
-{{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="In-app installation steps for the Datadog Agent on a Linux host." style="width:90%;">}}
+{{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="In-app installation steps for the Datadog Agent on ECS." style="width:90%;">}}
 
 <div class="alert alert-info">
 If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.
