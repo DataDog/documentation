@@ -48,7 +48,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [RDS][23]                          | [Enable Amazon RDS logs][24]                                                                                   | [Manual][25] log. collection.                                                                                                |
-| [Route 53][26]                     | [Enable Amazon Route 53 logs][27]                                                                              | [Manual][28] log collection.                                                                                                 |
+| [Route 53][26]                     | [Enable Amazon Route 53 logs][27]                                                                              | [Manual][28] nd [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 | [S3][29]                           | [Enable Amazon S3 logs][30]                                                                                    | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [SNS][32]                          | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                                                                 |
 | SSM                                | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
@@ -101,6 +101,7 @@ The following sources and locations are supported:
 | Redshift Serverless Logs    | CloudWatch     |
 | RDS Logs                    | CloudWatch     |
 | Route53 DNS Query Logs      | CloudWatch     |
+| Route53 Resolver query Logs | S3, CloudWatch |
 | S3 Access Logs              | S3             |
 | SSM Command Logs            | CloudWatch     |
 | Step Functions              | CloudWatch     |
@@ -144,6 +145,7 @@ The following sources and locations are supported:
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
     "route53:ListQueryLoggingConfigs",
+    "route53resolver:ListResolverQueryLogConfigs",
     "s3:GetBucketLocation",
     "s3:GetBucketLogging",
     "s3:GetBucketNotification",
@@ -190,6 +192,7 @@ The following sources and locations are supported:
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces.                                     |
     | `route53:ListQueryLoggingConfigs`                           | List all DNS query logging configurations for Route 53.                      |
+    | `route53resolver:ListResolverQueryLogConfigs`               | List all Resolver query logging configurations for Route 53.                 |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
     | `s3:GetBucketLocation`                                      | Get the region of the S3 bucket containing S3 access logs.                   |
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
