@@ -59,9 +59,9 @@ In cases where your AI workloads fail, code performance may not be the issue but
 ### Pinpoint areas with insufficient GPU resources to guide provisioning decisions
 Quickly identify the Kubernetes clusters with the most number of unmet GPU requests. 
 
-{{< img src="gpu_monitoring/unmet_requests.png" alt="Availability by GPU device type" style="width:100%;" >}}
+{{< img src="gpu_monitoring/unmet_requests.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:100%;" >}}
 
-For example, for any of these services with a large number of GPU requests, you can also look at their _Device Type Breakdown_ widget to understand which device type the particular service relies on and the _Device Allocation over time_ widget to track historical demands to confirm if these services and device types are constantly underprovisioned.
+For example, for any of these Kubernetes clusters with a large number of GPU requests, you can also look at their _Device Type Breakdown_ widget to understand which device type the particular service relies on and the _Device Allocation over time_ widget to track historical demands to confirm if these clusters and device types are constantly underprovisioned.
 
 ** Note:** If there are no services or clusters listed and you are emitting the proper tags, this is indicative that all of your services and clusters have sufficient GPU resources during the selected timeframe. 
 
@@ -71,41 +71,27 @@ GPUs are often the highest cost item within a team's infrastructure budget, so c
 ### Most Expensive Clusters
 This widget uncovers your most expensive Kubernetes clusters and identifies their idle spend so you can reach out to the teams who are responsible for these clusters and find ways to decrease spend, such as reducing the number of idle or inefficient GPU devices. This table is sorted by _Total Cost_ to identify the most expensive clusters. 
 
-{{< img src="gpu_monitoring/unmet_requests.png" alt="Availability by GPU device type" style="width:100%;" >}}
+{{< img src="gpu_monitoring/expensive_clusters.png" alt="Table of the most expensive Kubernetes clusters." style="width:100%;" >}}
 
-You can click into any one of these clusters to investigate its connected entities that contribute to its costs on the [GPU Fleet page][1]. 
+You can click into any one of these clusters to investigate its connected entities that contribute to its costs on the [GPU Fleet page][1].
 
-{{< img src="gpu_monitoring/cluster_entities.png" alt="Availability by GPU device type" style="width:100%;" >}}
+{{< img src="gpu_monitoring/cluster_entities.png" alt="A details sidepanel for a particular cluster that displays the connected entities of that cluster such as pods and processes." style="width:100%;" >}}
 
-### Metric origin definitions
+This opens a sidepanel that's tailored to that specific cluster and reveals its connected entities. For example, if you see a related pod with high core utilization and "bad status", that pod is ineffectively using its associated GPU device. So the pod owner should be contacted to .(INSERT WORKFLOW HERE) 
 
-This table shows the mapping between the metric origin as seen in the facet and where it was submitted from:
+### Inefficient Pods (NEEDS WORK) 
+**Note:** This section is only available for Kubernetes users.
+To maximize value on your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by SM engine activity by default. 
 
-| Metric Origin           | Submitted from                                                                |
-| ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Timeseries sent by the Datadog [Software Catalog][13] product from the APIM Endpoint.
-| APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
-| Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
-| Cloud Security                     | Timeseries sent by the Datadog [Cloud Security][14] product.
-| Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
-| DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
-| DSM                     | Timeseries sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
-| Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
-| Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
-| Events                  | Timeseries generated from the Datadog Events platform.
-| LLM Observability       | Timeseries emitted by the LLM Observability product using the `lmobs_to_metrics` service.
-| Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
-| Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
-| CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
-| Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
-| Other                   | Timeseries that don't have a DD integration counterpart.
-| Processes               | Timeseries generated from the Datadog [Processes][22] product.
-| RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
-| SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
-| Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Software Catalog         | Timeseries sent by the Datadog [Software Catalog][25] product including [Scorecard][29] metrics.
-| Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
-| USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
+{{< img src="gpu_monitoring/inefficient_pods.png" alt="Table of inefficient pods sorted by SM Engine Activity level." style="width:100%;" >}}
+
+You can click into any inefficient pod to open up a details sidepanel that reveals the workload it's running; contact the pod owner to consolidate to a smaller number of GPU devices if the core utilization across most of this pod's associated devices is low. Additionally, given pods can share hosts, you can identify noisy neighbors. For example, another pod can be using all of a given host's CPU so your pod is starved.
+
+### Zombie Process
+Zombie processes are often a main source of wasted GPU spend as they often reserve GPU capacity that they shouldn't be. This widget lists the zombie processes that should be killed in order to free up GPUs for other workloads.
+
+{{< img src="gpu_monitoring/zombie_processes.png" alt="Table of zombie processes that is sorted by SM Engine Activity that need to be killed to free up GPU capacity." style="width:100%;" >}}
+
 
 ## Further reading
 
