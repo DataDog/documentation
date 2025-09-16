@@ -27,6 +27,10 @@ Under **Columns**, expand a column and enable the **Filterable** option to allow
 
 To allow date range filtering, under **Appearance**, enable the **Has Date Range Filter** option and select a data path to filter by. When enabled, a drop-down appears in the table header which allows the user to select a time span to filter by.
 
+### Filter with search
+
+To add a search bar to your table, under **Appearance**, enable the **Is Searchable** option.
+
 ### Filter a table with a text input or search component
 
 One common use case is filtering a table component using the value in a text input component.
