@@ -21,7 +21,7 @@ Stop the container:
 docker stop <id>
 ```
 
-Start a new container with [the latest image][2]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
+Start a new container with [the latest image][1]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
 
 Run:
 ```bash
@@ -77,7 +77,7 @@ docker compose logs runner
 
 ## Helm mode
 When using Helm, there are two options for upgrading the PAR: 
-1. **(Recommended)** Upgrade the chart, which will use the latest version of the PAR. There may be changes to the chart; please review [our changelog][8].
+1. **(Recommended)** Upgrade the chart, which will use the latest version of the PAR. There may be changes to the chart; please review [our changelog][2].
 1. Upgrade the runner without upgrading the chart.
 
 #### Upgrading the chart (recommended)
@@ -91,7 +91,7 @@ helm upgrade <RELEASE_NAME> datadog/private-action-runner -f ./values.yaml
 
 ### Upgrading the PAR only
 
-Specify the PAR version in your `values.yaml` under the `common.image.tag` key with the values found [here][9]:
+Specify the PAR version in your `values.yaml` under the `common.image.tag` key with the values found [here][3]:
 
 ```yaml
 common:
@@ -112,4 +112,5 @@ kubectl get pods
 kubectl logs <name-of-the-pod>
 ```
 [1]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
-[2]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
+[2]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
