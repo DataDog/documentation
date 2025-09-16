@@ -58,7 +58,7 @@ To set up Mobile Session Replay for iOS:
 
     ```swift {% filename="AppDelegate.swift" %}
     import DatadogSessionReplay
- 
+
     SessionReplay.enable(
       with: SessionReplay.Configuration(
         replaySampleRate: sampleRate,
@@ -132,7 +132,7 @@ To set up Mobile Session Replay for React Native:
     npm install @datadog/mobile-react-native-session-replay
     ```
     {% /tab %}
-    
+
     {% tab label="yarn" %}
     ```shell
     yarn add @datadog/mobile-react-native-session-replay
@@ -144,7 +144,7 @@ To set up Mobile Session Replay for React Native:
 2. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK.
 
     {% tabs %}
-    
+
     {% tab label="DatadogProvider" %}
     If you use the `DatadogProvider` component:
 
@@ -163,9 +163,9 @@ To set up Mobile Session Replay for React Native:
     const onSDKInitialized = async () => {
       await SessionReplay.enable({
         replaySampleRate: 100,
-        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS, 
-        imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE, 
-        touchPrivacyLevel: TouchPrivacyLevel.SHOW, 
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
+        imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
+        touchPrivacyLevel: TouchPrivacyLevel.SHOW,
       });
     };
 
@@ -181,7 +181,7 @@ To set up Mobile Session Replay for React Native:
     export default App;
     ```
     {% /tab %}
-    
+
     {% tab label="DdSdkReactNative.initialize" %}
     If you use the `DdSdkReactNative.initialize` method:
 
@@ -223,6 +223,82 @@ To set up Mobile Session Replay for React Native:
 6. Rebuild your iOS and Android apps.
 {% /if %}
 <!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+
+{% alert level="warning" %}
+Datadog Session Replay for Flutter is currently in Preview.
+{% /alert %}
+
+All Session Replay SDK versions can be found in [Pub][29].
+
+To set up Datadog Session Replay for Flutter:
+
+1. Make sure yout've [set up and initialized the Datadog Flutter Plugin][28].
+
+2. Add the package to your `pubspec.yaml`:
+
+```yaml {% filename="pubspec.yaml" %}
+packages:
+  # other packages
+  datadog_session_replay: ^x.x.x
+```
+
+3. Enable Session Replay in your `DatadogConfiguration`:
+
+```dart
+import 'package:datadog_session_replay/datadog_session_replay.dart';
+
+// ....
+final configuration = DatadogConfiguration(
+    // Normal Datadog configuration
+    clientToken: 'client-token',
+    // RUM is required to use Datadog Session Replay
+    rumConfiguration: RumConfiguration(
+        applicationId: '<application-id'>
+    ),
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        // Setup default text, image, and touch privacy
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskSensitiveInputs,
+        touchPrivacyLevel: TouchPrivacyLevel.show,
+        // Setup session replay sample rate.
+        replaySampleRate: 1.0,
+    ),
+);
+```
+
+4. Add a SessionReplayCapture widget to the root of your Widget tree, above your MaterialApp or similar application widget:
+
+```dart
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // Note a key is required for SessionReplayCapture
+  final captureKey = GlobalKey();
+
+  // Other App Configuration
+
+  @override
+  Widget build(BuildContext context) {
+    return SessionReplayCapture(
+      key: captureKey,
+      rum: DatadogSdk.instance.rum!,
+      sessionReplay: DatadogSessionReplay.instance!,
+      child: MaterialApp.router(color: color, routerConfig: router),
+    );
+  }
+}
+```
+
+{% /if %}
+<!-- end Flutter -->
 
 ## Web view instrumentation
 
@@ -274,6 +350,14 @@ To instrument your consolidated web and native Session Replay views for React Na
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+
+Datadog Session Replay for Flutter does not currently support Web view capture.
+
+{% /if %}
+<!-- end Flutter -->
+
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
@@ -323,6 +407,21 @@ SessionReplay.enable({
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+{% if equals($platform, "android") %}
+```dart
+final configuration = DatadogConfiguration(
+  // ...
+)..enableSessionReplay(
+  DatadogSessionReplayConfiguration(
+    replaySampleRate: <SAMPLE_RATE>
+  )
+);
+```
+{% /if %}
+<!-- end Flutter -->
+
+
 ### Start or stop the recording manually
 
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
@@ -347,7 +446,7 @@ let sessionReplayConfig = SessionReplay.Configuration(
   replaySampleRate: <SAMPLE_RATE>,
   startRecordingImmediately: false
 )
-    
+
 // Do something
 SessionReplay.startRecording()
 SessionReplay.stopRecording()
@@ -384,6 +483,14 @@ SessionReplay.stopRecording();
 ```
 {% /if %}
 <!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+
+Datadog Session Replay for Flutter does not currently support manual recording.
+
+{% /if %}
+<!-- end Flutter -->
 
 ### Validate whether Session Replay data is being sent
 
@@ -434,6 +541,16 @@ config.verbosity = SdkVerbosity.DEBUG;
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+Set the SDKs verbosity to `CoreLoggerLevel.debub` before you initialize the SDK:
+
+```dart
+DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
+```
+{% /if %}
+<!-- end Flutter -->
+
 ### Privacy options
 
 See [Privacy Options][2].
@@ -465,3 +582,5 @@ See [Privacy Options][2].
 [25]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
 [26]: /real_user_monitoring/session_replay/browser/#setup
 [27]: https://reactnative.dev/architecture/landing-page
+[28]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup?tab=rum
+[29]: https://pub.dev/packages/datadog_session_replay
