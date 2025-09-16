@@ -43,7 +43,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [DocumentDB][70]                   | [Enable Amazon DocumentDB logs][71]                                                                            | [Manual][71] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                              | [Manual][14] log collection.                                                                                                 |
 | [EC2][15]                          | `-`                                                                                                            | Use the [Datadog Agent][15] to send your logs to Datadog.                                                                    |
-| [ECS][16]                          | `-`                                                                                                            | [Use the docker agent to gather your logs][17].                                                                              |
+| [ECS][16]                          | `-`                                                                                                            | [Use the docker agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
@@ -91,6 +91,7 @@ The following sources and locations are supported:
 | CodeBuild Logs              | S3, CloudWatch |
 | DMS Logs                    | CloudWatch     |
 | DocumentDB Logs             | CloudWatch     |
+| ECS Logs                    | CloudWatch     |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
@@ -122,6 +123,8 @@ The following sources and locations are supported:
     "codebuild:BatchGetProjects",
     "codebuild:ListProjects",
     "dms:DescribeReplicationInstances",
+    "ecs:DescribeTaskDefinition",
+    "ecs:ListTaskDefinitionFamilies",
     "eks:DescribeCluster",
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
@@ -157,15 +160,17 @@ The following sources and locations are supported:
     | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
     | `airflow:ListEnvironments`                                  | List all MWAA environment names.                                             |
     | `airflow:GetEnvironment`                                    | Get information about a MWAA environment.                                    |
-    | `appsync:ListGraphqlApis`                                   | List all GraphQL Apis                                                        |
-    | `batch:DescribeJobDefinitions`                              | List all Batch job definitions                                               |
+    | `appsync:ListGraphqlApis`                                   | List all GraphQL Apis.                                                       |
+    | `batch:DescribeJobDefinitions`                              | List all Batch job definitions.                                              |
     | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
     | `cloudtrail:ListTrails`                                     | List all Cloudtrail trails.                                                  |
-    | `codebuild:BatchGetProjects`                                | List all CodeBuild projects                                                  |
-    | `codebuild:ListProjects`                                    | Get information on CodeBuild projects                                        |
-    | `dms:DescribeReplicationInstances`                          | List all replication instances for DMS                                       |
+    | `codebuild:BatchGetProjects`                                | List all CodeBuild projects.                                                 |
+    | `codebuild:ListProjects`                                    | Get information on CodeBuild projects.                                       |
+    | `dms:DescribeReplicationInstances`                          | List all replication instances for DMS.                                      |
+    | `ecs:DescribeTaskDefinition`                                | Describe ECS task definition.                                                |
+    | `ecs:ListTaskDefinitionFamilies`                            | List all task definition families.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
