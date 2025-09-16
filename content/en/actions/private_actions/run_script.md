@@ -39,7 +39,7 @@ To use the script action, you need:
 1. Select **Script**.
 1. Enter a **Connection Name**.
 1. In the **Private Action Runner** dropdown, select your PAR. 
-1. Copy and paste the credential file template into your PAR's configuration directory with real secrets. 
+1. Copy and paste the credential file template into your PAR's configuration directory with the commands you want to run. 
 1. In **Path to file**, ensure the file path is entered correctly as this field is auto-populated.
 1. Click **Next, Confirm Access**. 
 1. After configuring permissions, click **Create**.
