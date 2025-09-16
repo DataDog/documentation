@@ -5339,9 +5339,9 @@ menu:
       identifier: observability_pipelines_scaling_and_performance
       weight: 2
     - name: Advanced Worker Configuration
-      url: observability_pipelines/scaling_and_performance/advanced_configurations/
+      url: observability_pipelines/scaling_and_performance/advanced_worker_configurations/
       parent: observability_pipelines_scaling_and_performance
-      identifier: observability_pipelines_advanced_configurations
+      identifier: observability_pipelines_advanced_worker_configurations
       weight: 201
     - name: Run Multiple Pipelines on a Host
       identifier: observability_run_multiple_pipelines_on_a_host
@@ -5473,11 +5473,6 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
       weight: 10417
-    - name: OpenTelemetry
-      url: observability_pipelines/sources/opentelemetry/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_opentelemetry
-      weight: 10418
     - name: Add Environment Variables
       url: observability_pipelines/processors/add_environment_variables
       parent: observability_pipelines_processors
