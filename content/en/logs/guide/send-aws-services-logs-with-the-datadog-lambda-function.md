@@ -38,6 +38,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | Batch                              | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [Cloudfront][6]                    | [Enable Amazon CloudFront logs][7]                                                                             | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] and [automatic](#automatically-set-up-triggers) log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
+| [CodeBuild][66]                    | [Enable Amazon CodeBuild logs][67]                                                                             | [Manual][67] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                              | [Manual][14] log collection.                                                                                                 |
 | [EC2][15]                          | `-`                                                                                                            | Use the [Datadog Agent][15] to send your logs to Datadog.                                                                    |
 | [ECS][16]                          | `-`                                                                                                            | [Use the docker agent to gather your logs][17].                                                                              |
@@ -85,6 +86,7 @@ The following sources and locations are supported:
 | Classic ELB Access Logs     | S3             |
 | CloudFront Access Logs      | S3             |
 | Cloudtrail Logs             | S3, CloudWatch |
+| CodeBuild Logs              | S3, CloudWatch |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
@@ -113,6 +115,8 @@ The following sources and locations are supported:
     "cloudfront:ListDistributions",
     "cloudtrail:GetTrail",
     "cloudtrail:ListTrails",
+    "codebuild:BatchGetProjects",
+    "codebuild:ListProjects",
     "eks:DescribeCluster",
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
@@ -154,6 +158,8 @@ The following sources and locations are supported:
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
     | `cloudtrail:ListTrails`                                     | List all Cloudtrail trails.                                                  |
+    | `codebuild:BatchGetProjects`                                | List all CodeBuild projects                                                  |
+    | `codebuild:ListProjects`                                    | Get information on CodeBuild projects                                        |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
@@ -398,3 +404,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [63]: /integrations/amazon-eks/#log-collection
 [64]: /integrations/amazon-appsync/
 [65]: /integrations/amazon-appsync/#send-logs-to-datadog
+[66]: /integrations/amazon-codebuild/
+[67]: /integrations/amazon-codebuild/#send-logs-to-datadog
