@@ -49,6 +49,20 @@ If you rely on GPUs deployed through major cloud providers, this widget breaks d
 
 {{< img src="gpu_monitoring/instance_breakdown.png" alt="Total, Allocated and Active device counts over time" style="width:100%;" >}}
 
+### Device Type Breakdown
+In cases where your AI workloads fail, code performance may not be the issue but rather number of available GPU devices. This widget surfaces the availability across all of your GPU device types and highlights which device type pool is fully saturated (signalling that additional devices may be required). You can further combine this widget with the Unmet GPU requests by Service or Cluster widgets to understand for a given workload, which device type pool is already saturated and needs additional provisioning.
+
+{{< img src="gpu_monitoring/device_type.png" alt="Availability by GPU device type" style="width:100%;" >}}
+
+** Note:** For any device type, if the number of devices available is <5%, the device type will be highlighted in red.
+
+### Pinpoint areas with insufficient GPU resources to guide provisioning decisions
+Quickly identify the underprovisioned services or Kubernetes clusters with the most number of unmet GPU requests. 
+
+{{< img src="gpu_monitoring/unmet_requests.png" alt="Availability by GPU device type" style="width:100%;" >}}
+
+For example, for any of these services with a large number of GPU requests, you can also look at their _Device Type Breakdown_ widget to understand which device type the particular service relies on and the _Device Allocation over time_ widget to track historical demands to confirm if these services and device types are constantly underprovisioned.
+
 
 ### Metric origin definitions
 
