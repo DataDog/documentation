@@ -106,7 +106,6 @@ services:
     # build: . # if you are using a custom Dockerfile
     volumes:
       - "./config:/etc/dd-action-runner/config"
-      - "./scripts:/etc/dd-action-runner-script/scripts:ro"
 ```
 
 ```yaml
