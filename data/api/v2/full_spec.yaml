@@ -2148,7 +2148,7 @@ components:
           $ref: '#/components/schemas/XRayServicesList'
       type: object
     AccountFilteringConfig:
-      description: The account filtering configuration.
+      description: The account filtering configuration object.
       properties:
         excluded_accounts:
           description: The AWS account IDs to be excluded from your billing dataset.
