@@ -56,9 +56,10 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | Redshift Ser4verless               | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Route 53][59]                     | [Enable Amazon Route 53 DNS query logging][60]                                                                 | [Manual][61] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
 | [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
-| [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
+| [VPN][26]                          | [Enable Amazon VPN logs][27]                                                                                   | [Manual][27] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 | [Web Application Firewall][49]     | [Enable AWS WAF logs][50]                                                                                      | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 
 
@@ -106,6 +107,7 @@ The following sources and locations are supported:
 | Step Functions              | CloudWatch     |
 | Verified Access Logs        | S3, CloudWatch |
 | VPC Flow Logs               | S3, CloudWatch |
+| VPN Logs                    | CloudWatch     |
 | Web Application Firewall    | S3, CloudWatch |
 
 **Note**: [Subscription filters][48] are automatically created on CloudWatch log groups by the DatadogForwarder, and are named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
@@ -125,8 +127,9 @@ The following sources and locations are supported:
     "codebuild:BatchGetProjects",
     "codebuild:ListProjects",
     "dms:DescribeReplicationInstances",
-    "ec2:DescribeVerifiedAccessInstanceLoggingConfigurations",
     "ec2:DescribeFlowLogs",
+    "ec2:DescribeVerifiedAccessInstanceLoggingConfigurations",
+    "ec2:DescribeVpnConnections",
     "ecs:DescribeTaskDefinition",
     "ecs:ListTaskDefinitionFamilies",
     "eks:DescribeCluster",
@@ -174,8 +177,9 @@ The following sources and locations are supported:
     | `codebuild:BatchGetProjects`                                | List all CodeBuild projects.                                                 |
     | `codebuild:ListProjects`                                    | Get information on CodeBuild projects.                                       |
     | `dms:DescribeReplicationInstances`                          | List all replication instances for DMS.                                      |
-    | `ec2:DescribeVerifiedAccessInstanceLoggingConfigurations`   | List all Verified Access instance logging configurations.                    |
     | `ec2:DescribeFlowLogs`                                      | List all Flow log configurations.                                            |
+    | `ec2:DescribeVerifiedAccessInstanceLoggingConfigurations`   | List all Verified Access instance logging configurations.                    |
+    | `ec2:DescribeVpnConnections`                                | List all VPN connections.                                                    |
     | `ecs:DescribeTaskDefinition`                                | Describe ECS task definition.                                                |
     | `ecs:ListTaskDefinitionFamilies`                            | List all task definition families.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
@@ -383,6 +387,8 @@ You can also exclude or send only those logs that match a specific pattern by us
 [23]: /integrations/amazon_rds/
 [24]: /integrations/amazon_rds/#enable-rds-logging
 [25]: /integrations/amazon_rds/#send-logs-to-datadog
+[26]: /integrations/amazon-vpn/
+[27]: /integrations/amazon-vpn/#send-logs-to-datadog
 [28]: /integrations/amazon_route53/#send-logs-to-datadog
 [29]: /integrations/amazon_s3/
 [30]: /integrations/amazon_s3/#enable-s3-access-logs
