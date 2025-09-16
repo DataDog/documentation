@@ -36,6 +36,18 @@ further_reading:
 
 ## Overview
 
+You can install the Agent using the [Datadog Operator][4] or Helm chart by following the [in-app installation guide in Fleet Automation][5], which provides a guided interface for:
+Selecting your Kubernetes distribution (EKS, AKS, GKE, etc.)
+
+{{< img src="agent/basic_agent_usage/agent_install_k8.png" alt="In-app installation steps for the Datadog Agent on Kubernetes." style="width:90%;">}}
+
+
+
+Generating helm and kubectl commands with your API key prefilled
+
+
+Enabling products and telemetry such as APM, Log Management, and tagging through UI-based configuration
+
 Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.
 
 **Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, see [Legacy Kubernetes versions][1].
@@ -65,3 +77,5 @@ For information pertaining to the Datadog Cluster Agent, which provides a stream
 [1]: /agent/faq/kubernetes-legacy/
 [2]: /agent/configuration/agent-commands/
 [3]: /containers/cluster_agent/
+[4]: https://docs.datadoghq.com/containers/datadog_operator/
+[5]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
