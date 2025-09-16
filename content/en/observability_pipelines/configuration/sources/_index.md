@@ -3,7 +3,7 @@ title: Sources
 disable_toc: false
 aliases: /observability_pipelines/sources/
 further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 - link: "/observability_pipelines/configuration/processors/"

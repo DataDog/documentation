@@ -136,13 +136,13 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
-[4]: /observability_pipelines/set_up_pipelines/#set-up-a-pipeline
+[4]: /observability_pipelines/configuration/set_up_pipelines/#set-up-a-pipeline
 [5]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#bootstrap-options
 [6]: /observability_pipelines/configuration/destinations/#event-batching-intro
 [7]: https://app.datadoghq.com/logs/
 [8]: /containers/docker/log/?tab=containerinstallation#linux
 [9]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
-[10]: /observability_pipelines/set_up_pipelines/#index-your-worker-logs
+[10]: /observability_pipelines/configuration/set_up_pipelines/#index-your-worker-logs
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
