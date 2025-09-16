@@ -2247,30 +2247,20 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_setup
       weight: 100
-    - name: Collecting Browser Errors
-      url: error_tracking/frontend/collecting_browser_errors
-      parent: error_tracking_frontend
-      identifier: error_tracking_collect_errors
-      weight: 101
-    - name: Mobile Crash Tracking
-      url: error_tracking/frontend/mobile
-      parent: error_tracking_frontend
-      identifier: error_tracking_mobile
-      weight: 102
     - name: Replay Errors
       url: error_tracking/frontend/replay_errors
       parent: error_tracking_frontend
       identifier: error_tracking_replays
       weight: 103
-    - name: Real User Monitoring
-      url: error_tracking/rum
-      parent: error_tracking_frontend
-      identifier: error_tracking_rum
-      weight: 104
     - name: Logs
       url: error_tracking/frontend/logs
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
+      weight: 105
+    - name: Troubleshooting
+      url: error_tracking/frontend/troubleshooting
+      parent: error_tracking_frontend
+      identifier: error_tracking__fe_troubleshooting
       weight: 105
     - name: Track Client Errors
       url: error_tracking/frontend
@@ -7770,15 +7760,10 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_states
       weight: 902
-    - name: Track Browser Errors
-      url: real_user_monitoring/error_tracking/browser/
+    - name: Setup
+      url: real_user_monitoring/error_tracking/setup
       parent: rum_error_tracking
-      identifier: rum_error_tracking_browser
-      weight: 903
-    - name: Track Mobile Errors
-      url: real_user_monitoring/error_tracking/mobile/
-      parent: rum_error_tracking
-      identifier: rum_error_tracking_mobile
+      identifier: rum_error_tracking_setup
       weight: 804
     - name: Error Grouping
       url: real_user_monitoring/error_tracking/error_grouping

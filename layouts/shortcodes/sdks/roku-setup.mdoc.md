@@ -1,6 +1,6 @@
 The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
-### Step 1 - Declare the SDK as a dependency
+### Declare the SDK as a dependency
 
 #### Using ROPM (recommended)
 
@@ -17,7 +17,7 @@ and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 
-### Step 2 - Specify application details in Datadog
+### Specify application details in Datadog
 
 {% tabs %}
 {% tab label="RUM" %}
@@ -51,7 +51,7 @@ To ensure the safety of your data, you must use a client token. If you use only 
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
-### Step 3 - Initialize the library
+### Initialize the library
 
 In the initialization snippet, set an environment name. For more information, see [Using Tags][7].
 

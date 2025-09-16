@@ -1,6 +1,4 @@
-To start sending RUM or Error Tracking data from your iOS or tvOS application to Datadog:
-
-### Step 1 - Declare the iOS SDK as a dependency
+### Declare the iOS SDK as a dependency
 
 Declare the iOS library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
 
@@ -53,7 +51,7 @@ DatadogRUM.xcframework
 {% /tab %}
 {% /tabs %}
 
-### Step 2 - Specify application details in the UI
+### Specify application details in the UI
 
 {% tabs %}
 {% tab label="RUM" %}
@@ -90,7 +88,7 @@ To ensure the safety of your data, you must use a client token. If you used only
 
 For more information about setting up a client token, see the [Client token documentation][4].
 
-### Step 3 - Initialize the library
+### Initialize the library
 
 In the initialization snippet, set an environment name, service name, and client token.
 
@@ -206,7 +204,7 @@ For example, if the current tracking consent is `.pending`:
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
-### Step 4 - Start sending data
+### Start sending data
 
 #### Enable RUM
 Configure and start RUM. This should be done once and as early as possible, specifically in your `AppDelegate`:

@@ -1,9 +1,9 @@
-### Step 1 - Create the application in the UI
+### Create the application in the UI
 
 1. Navigate to [**Digital Experience** > **Add an Application**][11].
 2. Select `Javascript` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 
-### Step 2 - Install the Browser SDK
+### Install the Browser SDK
 
 Choose the installation method for the Browser SDK.
 
@@ -53,7 +53,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {% /tab %}
 {% /tabs %}
 
-### Step 3 - Initialize the Browser SDK
+### Initialize the Browser SDK
 
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
 
@@ -235,11 +235,11 @@ acceptCookieBannerButton.addEventListener('click', () => {
 {% /tabs %}
 {% /collapse-content %}
 
-### Step 4 - Add Readable Stack Traces to Errors (optional but recommended)
+### Add Readable Stack Traces to Errors (optional but recommended)
 
 Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][8].
 
-### Step 5 - Visualize your data
+### Visualize your data
 
 After your deployment is live, Datadog collects events from your users' browsers.
 

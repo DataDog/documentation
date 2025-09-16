@@ -1,4 +1,4 @@
-### Step 1 - Create the application in the UI
+### Create the application in the UI
 Navigate to [Digital Experience > Add an Application][11].
 Select Javascript as the application type and enter an application name to generate a unique Datadog application ID and client token.
 
@@ -10,7 +10,7 @@ Select Javascript as the application type and enter an application name to gener
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
-### Step 2 - Declare the Android SDK as a dependency
+### Declare the Android SDK as a dependency
 
 Declare [dd-sdk-android-rum][3] and the [Gradle plugin][4] as dependencies in your **application module's** `build.gradle` file.
 
@@ -34,7 +34,7 @@ dependencies {
 
 ```
 
-### Step 3 - Initialize the Datadog SDK with application context
+### Initialize the Datadog SDK with application context
 
 #### Update the initialization snippet
 
@@ -113,7 +113,7 @@ To **update the tracking consent** after the SDK is initialized, call `Datadog.s
 {% /collapse-content %}
 
 
-### Step 4 - Enable the feature to start sending data
+### Enable the feature to start sending data
 
 To enable the Android SDK to start sending data:
 
@@ -144,7 +144,7 @@ To enable the Android SDK to start sending data:
 
 See [`ViewTrackingStrategy`][10] to enable automatic tracking of all your views (activities, fragments, and more).
 
-### Step 5 - Initialize the interceptor to track network events
+### Initialize the interceptor to track network events
 
 To initialize an interceptor for tracking network events:
 

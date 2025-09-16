@@ -14,7 +14,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 {% partial file="sdks/android-setup.mdoc.md" /%}
 
-### Step 6 - Add NDK crash reporting
+### Add NDK crash reporting
 
 Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK plugin. 
 
@@ -32,7 +32,7 @@ Your Android application may be running native code (C/C++) for performance or c
     NdkCrashReports.enable()
     ```
 
-### Step 7 - Add ANR reporting
+### Add ANR reporting
 
 An "Application Not Responding" ([ANR][6]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 

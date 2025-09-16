@@ -1,12 +1,4 @@
-## Overview
-
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
-
-## Setup
-
-To start sending RUM or Error Tracking data from your Flutter application to Datadog:
-
-### Step 1 - Specify application details in the UI
+### Specify application details in the UI
 
 {% tabs %}
 {% tab label="RUM" %}
@@ -39,7 +31,7 @@ To start sending RUM or Error Tracking data from your Flutter application to Dat
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][3].
 
-### Step 2 - Instrument your application
+### Instrument your application
 
 First, ensure that you have your environment set up properly for each platform.
 
@@ -122,7 +114,7 @@ To ensure the safety of your data, you must use a client token. You cannot use D
 - If you are using RUM, set up a **Client Token** and **Application ID**.
 - If you are only using Logs, initialize the library with a client token.
 
-### Step 3 - Initialize the library
+### Initialize the library
 
 You can initialize the library using one of two methods in your `main.dart` file.
 
