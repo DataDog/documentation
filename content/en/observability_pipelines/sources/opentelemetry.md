@@ -7,6 +7,14 @@ disable_toc: false
 
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline. The information below is configured in the pipelines UI.
 
+### When to use this source
+
+Common scenarios when you might use this source:
+
+- You are using OpenTelemetry as your standard method for collecting and routing data, and you want to normalize that data, before routing them to different destinations.
+- You are collecting data from multiple sources and want to aggregate them in a central place for consistent processing.
+    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines sources, you can aggregate all of your data in Observability Pipelines for processing.
+
 ## Prerequisites
 
 If your forwarders are globally configured to enable SSL, you need the appropriate TLS certificates and the password you used to create your private key.
