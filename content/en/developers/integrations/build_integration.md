@@ -67,7 +67,7 @@ If your integration sends in metrics:
 Example: 
 | metric_name                             | metric_type      | interval                       | unit_name        | per_unit_name     | description                      | orientation            | integration    | short_name                                                  | curated_metric            | sample_tags          |
 |-----------------------------------------|------------------|--------------------------------|------------------|-------------------|----------------------------------|------------------------|----------------|-------------------------------------------------------------|---------------------------|----------------------|
-| <partner_name>.<category>.<measurement> | Select from the following [list][12]  | Collection interval in seconds | Select from following [list][13] | Unit sub-division | Short description                | Value indicating trend | integration ID | human-readable abbreviated version without integration name | internal use, leave blank | list of example tags |
+| <partner_name>.\<category>.\<measurement> | Select from the following [list][12]  | Collection interval in seconds | Select from following [list][13] | Unit sub-division | Short description                | Value indicating trend | integration ID | human-readable abbreviated version without integration name | internal use, leave blank | list of example tags |
 | datadog.system.cpu.usage                | gauge            | 60                             | percent          |                   | The percentage of total CPU used | 0                      | datadog        | sys cpu usage                                               |                           | "host_name,region"   |
 
 
