@@ -4436,16 +4436,31 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_agent_configuration
       weight: 308
+    - name: Host Agent Configuration
+      url: database_monitoring/setup_postgres/agent_configuration/host_agent
+      parent: dbm_postgres_agent_configuration
+      identifier: dbm_postgres_host_agent_configuration
+      weight: 2010
+    - name: Docker Agent Configuration
+      url: database_monitoring/setup_postgres/agent_configuration/docker
+      parent: dbm_postgres_agent_configuration
+      identifier: dbm_postgres_docker_agent_configuration
+      weight: 2011
+    - name: Kubernetes Agent Configuration
+      url: database_monitoring/setup_postgres/agent_configuration/kubernetes
+      parent: dbm_postgres_agent_configuration
+      identifier: dbm_postgres_kubernetes_agent_configuration
+      weight: 2012
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 309
+      weight: 310
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 310
+      weight: 311
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
