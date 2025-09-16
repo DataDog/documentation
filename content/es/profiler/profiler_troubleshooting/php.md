@@ -16,7 +16,7 @@ Si has configurado el generador de perfiles y no ves perfiles en la página de b
 [Abre un ticket de asistencia][1] con la siguiente información:
 
 - Tipo y versión del sistema operativo (por ejemplo, Linux Ubuntu 20.04)
-- El resultado de `phpinfo()`, que incluye la versión de PHP, el tipo de SAPI, las versiones de bibliotecas de Datadog y los diagnósticos del generador de perfiles.
+- El resultado de `phpinfo()`, que incluye la versión de PHP, el tipo de SAPI, las versiones de librerías de Datadog y los diagnósticos del generador de perfiles.
 
 ## Reducción de la sobrecarga de la configuración por defecto
 

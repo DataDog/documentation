@@ -38,7 +38,7 @@ Marcos de test compatibles:
 
 ## Configuración del método de informe
 
-Para informar resultados de tests a Datadog, debes configurar la biblioteca Datadog Python:
+Para informar resultados de tests a Datadog, debes configurar la librería Datadog Python:
 
 {{< tabs >}}
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
@@ -387,7 +387,7 @@ La siguiente es una lista de los parámetros de configuración más importantes 
 **Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `DD_SERVICE`
-: Nombre del servicio o de la biblioteca en proceso de test.<br/>
+: Nombre del servicio o de la librería en proceso de test.<br/>
 **Variable de entorno**: `DD_SERVICE`<br/>
 **Por defecto**: `pytest`<br/>
 **Ejemplo**: `my-python-app`
