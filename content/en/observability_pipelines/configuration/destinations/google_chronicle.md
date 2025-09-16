@@ -31,5 +31,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | None           | 1,000,000       | 15                  |
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/#event-batching
+[2]: /observability_pipelines/configuration/destinations/#event-batching
 [3]: https://cloud.google.com/docs/authentication#auth-flowchart

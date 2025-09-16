@@ -44,4 +44,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | None           | 256,000,000     | 300                 |
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/#event-batching
+[2]: /observability_pipelines/configuration/destinations/#event-batching

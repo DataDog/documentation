@@ -472,6 +472,6 @@ This is the output of the example log after it's been processed by the custom sc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/processors/custom_processor/#decode_base16
-[2]: /observability_pipelines/processors/custom_processor/#encode_base64
-[3]: /observability_pipelines/processors/custom_processor/#encode_base16
+[1]: /observability_pipelines/configuration/processors/custom_processor/#decode_base16
+[2]: /observability_pipelines/configuration/processors/custom_processor/#encode_base64
+[3]: /observability_pipelines/configuration/processors/custom_processor/#encode_base16

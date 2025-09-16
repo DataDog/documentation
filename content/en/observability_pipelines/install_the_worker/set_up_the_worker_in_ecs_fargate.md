@@ -112,4 +112,4 @@ Depending on your use case, configure either an [Application Load Balancer][3] o
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-console-v2.html
 [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html
 [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
-[5]: /observability_pipelines/best_practices_for_scaling_observability_pipelines/
+[5]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/

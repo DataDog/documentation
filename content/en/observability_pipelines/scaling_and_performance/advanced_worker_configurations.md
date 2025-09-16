@@ -20,7 +20,7 @@ further_reading:
 - link: "/observability_pipelines/sensitive_data_redaction/"
   tag: "Documentation"
   text: "Redact data redaction with Observability Pipelines"
-- link: "/observability_pipelines/update_existing_pipelines/"
+- link: "/observability_pipelines/configuration/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update existing pipelines"
 ---
@@ -126,4 +126,4 @@ api:
 [5]: https://en.wikipedia.org/wiki/HTTP_tunnel
 [6]: /remote_configuration
 [7]: /observability_pipelines/set_up_pipelines/
-[8]: /observability_pipelines/install_the_worker/worker_commands/#run-tap-or-top-the-worker
+[8]: /observability_pipelines/configuration/install_the_worker/worker_commands/#run-tap-or-top-the-worker

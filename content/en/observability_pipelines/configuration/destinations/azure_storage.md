@@ -39,4 +39,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: /logs/log_configuration/rehydrating/
 [3]: /integrations/azure/#setup
 [4]: /observability_pipelines/archive_logs/
-[5]: /observability_pipelines/destinations/#event-batching
+[5]: /observability_pipelines/configuration/destinations/#event-batching

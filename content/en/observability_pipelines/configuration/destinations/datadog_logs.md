@@ -59,4 +59,4 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 {{< /site-region >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/#event-batching
+[2]: /observability_pipelines/configuration/destinations/#event-batching

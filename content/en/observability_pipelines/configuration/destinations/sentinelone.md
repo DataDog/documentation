@@ -48,4 +48,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://usea1-partners.sentinelone.net/login
-[3]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/configuration/destinations/#event-batching

@@ -50,7 +50,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | None           | 10,000,000      | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/#event-batching
-[3]: /observability_pipelines/destinations/#template-syntax
+[2]: /observability_pipelines/configuration/destinations/#event-batching
+[3]: /observability_pipelines/configuration/destinations/#template-syntax
 [4]: https://www.elastic.co/docs/reference/fleet/data-streams
 [5]: https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk

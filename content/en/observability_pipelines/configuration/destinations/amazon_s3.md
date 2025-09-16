@@ -83,4 +83,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [4]: /observability_pipelines/archive_logs/
 [5]: /observability_pipelines/set_up_pipelines/
 [6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
-[7]: /observability_pipelines/destinations/#event-batching
+[7]: /observability_pipelines/configuration/destinations/#event-batching

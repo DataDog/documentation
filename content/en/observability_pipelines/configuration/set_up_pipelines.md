@@ -80,9 +80,9 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
 
 After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
 
-[1]: /observability_pipelines/sources/
-[2]: /observability_pipelines/processors/
-[3]: /observability_pipelines/destinations/
+[1]: /observability_pipelines/configuration/sources/
+[2]: /observability_pipelines/configuration/processors/
+[3]: /observability_pipelines/configuration/destinations/
 [4]: /observability_pipelines/#archive-logs
 [5]: /observability_pipelines/#dual-ship-logs
 [6]: /observability_pipelines/#generate-metrics
@@ -90,12 +90,12 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [8]: /observability_pipelines/#log-volume-control
 [9]: /observability_pipelines/#sensitive-data-redaction
 [10]: /observability_pipelines/#split-logs
-[11]: /observability_pipelines/update_existing_pipelines/
-[12]: /observability_pipelines/install_the_worker/
+[11]: /observability_pipelines/configuration/update_existing_pipelines/
+[12]: /observability_pipelines/configuration/install_the_worker/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /monitors/types/metric/
 [15]: /observability_pipelines/environment_variables/
-[16]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[16]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#bootstrap-options
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -107,7 +107,7 @@ You can use Observability Pipelines API to [create a pipeline][1]. After the pip
 **Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
 
 [1]: /api/latest/observability-pipelines/#create-a-new-pipeline
-[2]: /observability_pipelines/install_the_worker/
+[2]: /observability_pipelines/configuration/install_the_worker/
 [3]: /api/latest/observability-pipelines/#update-a-pipeline
 
 {{% /tab %}}
@@ -120,12 +120,12 @@ You can use the [datadog_observability_pipeline][1] module to create a pipeline 
 Pipelines created using Terraform are read-only in the UI. Use the [datadog_observability_pipeline][1] module to make any changes to an existing pipeline.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[2]: /observability_pipelines/install_the_worker/
+[2]: /observability_pipelines/configuration/install_the_worker/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Advanced Configurations][5] for bootstrapping options.
+See [Advanced Worker Configurations][5] for bootstrapping options.
 
 ### Index your Worker logs
 
@@ -149,9 +149,9 @@ Make sure your Worker logs are [indexed][6] in Log Management for optimal functi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/sources/
-[2]: /observability_pipelines/processors/
-[3]: /observability_pipelines/destinations/
+[1]: /observability_pipelines/configuration/sources/
+[2]: /observability_pipelines/configuration/processors/
+[3]: /observability_pipelines/configuration/destinations/
 [4]: https://app.datadoghq.com/observability-pipelines
-[5]: /observability_pipelines/advanced_configurations/
+[5]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/
 [6]: /logs/log_configuration/indexes/

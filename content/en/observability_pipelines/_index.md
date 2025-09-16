@@ -66,7 +66,7 @@ The Observability Pipelines UI provides a control plane to manage your Observabi
 ## Get started
 
 <div class="alert alert-info">
-Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates. See <a href="https://docs.datadoghq.com/observability_pipelines/install_the_worker/?tab=docker#upgrade-the-worker">Upgrade the Worker</a> to update to the latest Worker version</a>.
+Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates. See <a href="https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/?tab=docker#upgrade-the-worker">Upgrade the Worker</a> to update to the latest Worker version</a>.
 </div>
 
 To set up a pipeline:
@@ -88,7 +88,7 @@ To set up a pipeline:
 
 See [Set Up Pipelines][12] for more information.
 
-See [Advanced Configurations][13] for bootstrapping options and for details on setting up the Worker with Kubernetes.
+See [Advanced Worker Configurations][13] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Explore Observability Pipelines
 
@@ -156,9 +156,9 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [6]: /observability_pipelines/sensitive_data_redaction/
 [7]: /observability_pipelines/log_enrichment/
 [8]: /observability_pipelines/set_up_pipelines/generate_metrics/
-[9]: /observability_pipelines/sources/
-[10]: /observability_pipelines/destinations/
-[11]: /observability_pipelines/processors/
+[9]: /observability_pipelines/configuration/sources/
+[10]: /observability_pipelines/configuration/destinations/
+[11]: /observability_pipelines/configuration/processors/
 [12]: /observability_pipelines/set_up_pipelines/
-[13]: /observability_pipelines/advanced_configurations/
-[14]: /observability_pipelines/install_the_worker/
+[13]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/
+[14]: /observability_pipelines/configuration/install_the_worker/

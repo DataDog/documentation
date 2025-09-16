@@ -2,7 +2,7 @@
 title: Destinations
 disable_toc: false
 aliases:
-  - /observability_pipelines/destinations
+  - /observability_pipelines/destinations/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
