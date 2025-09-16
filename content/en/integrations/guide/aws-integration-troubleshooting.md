@@ -20,6 +20,19 @@ The `sts:Assumerole` permission error indicates an issue with the trust policy a
 
 **Note**: This error may persist in the Datadog UI for a few hours while the changes propagate.
 
+### Resolve All AWS permissions issues
+**Resolve All AWS Permissions Issues** in the AWS Integration tile allows you to use a CloudFormation QuickStart stack to update your IAM role and resolve missing permissions issues. 
+Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a CloudFormation stack that calls our public API [endpoint][13] and fetches the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches these to the integration role. It will also attach the `SecurityAudit` Managed AWS policy if it is not present.
+
+**Notes**:
+
+* **Resolve All AWS Permissions Issues** does not fix broken authentication issues with the role (where the role name, external ID, or trust policy configuration does not let Datadog authenticate with your AWS account). 
+* The CloudFormation template is in our public [repository][14].
+* The policies created are named with a `datadog-aws-integration-iam-permissions-` prefix followed by a unique hash to avoid colliding with any existing policies you have configured.
+* If **Resolve All AWS Permissions Issues** is clicked multiple times, any old policies created with that prefix are deleted before the new ones are created.
+* Any policies you attached to the role will NOT be impacted.
+* **Resolve All AWS Permissions Issues** will not fix cases where a Service Control Policy (SCP) is applied that explicitly denies the required permissions.
+  
 ## Data discrepancies
 
 ### Discrepancy between your data in CloudWatch and Datadog
@@ -108,3 +121,5 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
 [11]: /api/latest/tags/#remove-host-tags
 [12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py
+[13]: https://api.datadoghq.com/api/v2/integration/aws/iam_permissions
+[14]: https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions
