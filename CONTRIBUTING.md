@@ -1,6 +1,6 @@
 # Datadog documentation style guide
 
-This document is a guide to writing and editing documentation for the [Datadog documentation][7]. While it's helpful for standardizing large bodies of work with multiple contributors, a style guide can't tell you how to write for your specific context. If you find that these guidelines get in the way of writing clearly, break the rules! Just do so thoughtfully.
+This guide explains how to write and edit content for the [Datadog documentation][7]. While it's helpful for standardizing large bodies of work with multiple contributors, a style guide can't tell you how to write for your specific context. If you find that these guidelines get in the way of writing clearly, break the rules! Just do so thoughtfully.
 
 The Datadog documentation [implementation of the Vale linter][4] has rules corresponding to some of these guidelines. After you make a PR, check its **Files changed** tab to see and fix warnings and errors it flagged.
 
@@ -9,7 +9,7 @@ See the Datadog documentation [README][9] for additional contribution requiremen
 ## Language
 
 - Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.
-- Don't contribute updates to translated files (French, Japanese, Korean, or Spanish), as the content in GitHub is not the managed source. If there's a mistake in a translated file, let the documentation team know so we can fix it through the translation service. Automatic workflows later pull that content into GitHub.
+- Don't contribute updates to translated files (the `fr`, `ja`, `ko`, or `es` directories for French, Japanese, Korean, or Spanish), as the content in GitHub is not the managed source. If there's a mistake in a translated file, let the documentation team know so we can fix it through the translation service. Automatic workflows later pull that content into GitHub.
 
 ## General principles
 
@@ -19,7 +19,7 @@ See the Datadog documentation [README][9] for additional contribution requiremen
 - **Not recommended**: Please note the Datadog Agent includes DogStatsD, which serves as a StatsD forwarder. This integration is intended for monitoring external StatsD servers, and is not needed to send metrics to Datadog using the StatsD protocol.
 - **Recommended**: This integration does **not** help you forward application metrics from StatsD servers to Datadog. To do that, configure your StatsD server to forward metrics to DogStatsD.
 
-**Be objective**: The purpose of the Docs site is to clearly inform readers about how to use Datadog. The Docs site is not intended to sell or market Datadog, so avoid marketing language, and focus on providing instructions instead.
+**Be objective**: The purpose of the Docs site is to clearly inform readers about how to use Datadog. Avoid overt marketing language and focus on providing clear instructions.
 
 **Be concise**: Rephrase complicated sentences to simplify them. Less is more:
 - **Not recommended**: This integration offers you the ability to monitor the health and availability of a StatsD server.
