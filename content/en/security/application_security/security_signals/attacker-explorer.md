@@ -37,7 +37,7 @@ Each explorer focuses on a specific use case:
 
 - **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
 - **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Users explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+- **Users Explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
@@ -76,9 +76,9 @@ Details common to all attacker views:
 
 - **Blocking Status:** Indicates whether the attacker IP is actively being blocked, helping you confirm if immediate action is needed.
 - **Threat Intelligence:** Show Datadog definitions **Suspicious** or **Flagged**.
-- **Last Information:** Provides contextual network origin (e.g., route, public/private status, geolocation), which helps you understand attacker infrastructure and scope.
+- **Last Information:** Provides contextual network origin (for example, route, public/private status, geolocation), which helps you understand attacker infrastructure and scope.
 - **Associated Users:** Shows which user accounts (if any) were affected or linked to the IP, assisting with lateral movement tracking and potential account compromise identification.
-- **Security Traces:** Visualizes the timeline and volume of suspicious activity (e.g., **151k AAP traces**), helping SOC teams correlate events and identify peaks in attack behavior.
+- **Security Traces:** Visualizes the timeline and volume of suspicious activity (for example, **151k AAP traces**), helping SOC teams correlate events and identify peaks in attack behavior.
 
 View-specific details:
 
