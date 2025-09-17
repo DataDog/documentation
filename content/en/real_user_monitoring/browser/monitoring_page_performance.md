@@ -140,6 +140,15 @@ window.DD_RUM.init({
 })
 ```
 
+You can also ignore specific DOM mutations by marking an element (or one of its ancestors) with the attribute `data-dd-excluded-activity-mutations`.  
+This is useful for elements that constantly update but don’t indicate real UI instability — like loading spinners, progress bars, or live clocks.
+
+```html
+<div id="loading-spinner" data-dd-excluded-activity-mutations>
+  <svg> ... </svg>
+</div>
+```
+
 ### Hash SPA navigation
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
