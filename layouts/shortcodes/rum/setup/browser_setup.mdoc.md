@@ -1,11 +1,10 @@
-
 ## Overview
 
 This guide walks you through setting up Real User Monitoring (RUM) for your application. RUM provides deep insight into your application's frontend performance and user experience across different platforms.
 
-## Setup
+### Install the Browser SDK
 
-{% partial file="sdks/setup/android_setup.mdoc.md" /%}
+Make sure you've set up the [Browser SDK][3].
 
 ### Visualize your data
 
@@ -17,3 +16,4 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 [1]: /real_user_monitoring/configuration/data_collected/
 [2]: /real_user_monitoring/platform/dashboards/errors/
+[3]: /real_user_monitoring/platform/dashboards/errors/

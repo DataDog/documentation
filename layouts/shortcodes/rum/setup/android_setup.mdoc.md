@@ -6,8 +6,7 @@ The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
 
-{% partial file="sdks/setup/android_setup.mdoc.md" /%}
-
+Make sure you've set up the [Android SDK][14].
 
 ### Visualize your data
 
@@ -19,3 +18,4 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 [1]: /real_user_monitoring/configuration/data_collected/
 [2]: /real_user_monitoring/platform/dashboards/errors/
+[3]: /client_sdks/setup
