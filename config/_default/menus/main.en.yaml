@@ -333,6 +333,11 @@ menu:
       parent: client_sdks
       identifier: client_sdks_integrated_libraries
       weight: 6
+    - name: Web View Tracking
+      url: client_sdks/web_view_tracking
+      parent: client_sdks
+      identifier: client_sdks_web_view_tracking
+      weight: 7
     - name: Agent
       url: agent/
       pre: agent-fill
@@ -7190,36 +7195,6 @@ menu:
       parent: rum
       identifier: rum_setup
       weight: 1
-    - name: Configuration
-      url: real_user_monitoring/configuration/
-      parent: rum
-      identifier: rum_configuration
-      weight: 2
-    - name: Advanced Configuration
-      url: real_user_monitoring/configuration/advanced_configuration
-      parent: rum_configuration
-      identifier: rum_advanced_configuration
-      weight: 1
-    - name: Data Collected
-      url: real_user_monitoring/configuration/data_collected
-      parent: rum_configuration
-      identifier: rum_data_collected
-      weight: 1
-    - name: Tracking User Actions
-      url: real_user_monitoring/configuration/tracking_user_actions
-      parent: rum_configuration
-      identifier: rum_tracking_user_actions
-      weight: 1
-    - name: Integrated Libraries
-      url: real_user_monitoring/configuration/integrated_libraries
-      parent: rum_configuration
-      identifier: rum_integrated_libraries
-      weight: 1
-    - name: Web View Tracking
-      url: real_user_monitoring/configuration/web_view_tracking
-      parent: rum_configuration
-      identifier: rum_web_view_tracking
-      weight: 1
     - name: Performance Monitoring
       url: real_user_monitoring/performance_monitoring/
       parent: rum
@@ -7245,6 +7220,11 @@ menu:
       parent: rum_performance_monitoring
       identifier: rum_performance_monitoring_vitals
       weight: 2
+    - name: Tracking User Actions
+      url: real_user_monitoring/performance_monitoring/tracking_user_actions
+      parent: rum_performance_monitoring
+      identifier: rum_performance_monitoring_tracking_user_actions
+      weight: 3
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform

@@ -16,4 +16,4 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 [1]: /real_user_monitoring/configuration/data_collected/
 [2]: /real_user_monitoring/platform/dashboards/errors/
-[3]: /real_user_monitoring/platform/dashboards/errors/
+[3]: /client_sdks/setup

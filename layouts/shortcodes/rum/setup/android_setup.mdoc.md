@@ -6,7 +6,7 @@ The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
 
-Make sure you've set up the [Android SDK][14].
+Make sure you've set up the [Android SDK][3].
 
 ### Visualize your data
 

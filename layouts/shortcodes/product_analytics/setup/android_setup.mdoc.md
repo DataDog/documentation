@@ -8,7 +8,7 @@ content_filters:
 -->
 ## Setup
 
-All Session Replay SDK versions can be found in the [Maven Central Repository][7].
+All Session Replay SDK versions can be found in the [Maven Central Repository][3].
 
 ### Install the Android SDK
 
