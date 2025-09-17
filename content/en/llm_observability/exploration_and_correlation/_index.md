@@ -20,7 +20,7 @@ This enables you to quickly identify issues, monitor performance, and gain insig
 
 ### Correlate APM and LLM Observability
 
-You can also correlate applications instrumented by [Correcting APM and LLM Observability][2] through the SDK. Correlating with your broader app with APM enables full end-to-end visibility and seamless drill-downs from app issues into LLM-specific root causes.
+You can also correlate applications instrumented by [Correlating APM and LLM Observability][2] through the SDK. Correlating with your broader app with APM enables full end-to-end visibility and seamless drill-downs from app issues into LLM-specific root causes.
 
 ### Cluster Map
 
