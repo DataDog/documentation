@@ -1,19 +1,8 @@
 ## Overview
 
-Error Tracking processes errors collected from the Android SDK. 
-
-Enable Android Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
-
-- Aggregated Android crash dashboards and attributes
-- Deobfuscated Android crash reports
-- Trend analysis with Android error tracking
-
-Your crash reports appear in [**Error Tracking**][1].
-
-
-## Overview
-
 This guide walks you through setting up Real User Monitoring (RUM) for your application. RUM provides deep insight into your application's frontend performance and user experience across different platforms.
+
+The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
 
