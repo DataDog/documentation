@@ -63,6 +63,13 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 [1]: /observability_pipelines/update_existing_pipelines
 
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+See [Set Up the Worker in ECS Fargate][1] for instructions.
+
+[1]: /observability_pipelines/guide/set_up_the_worker_in_ecs_fargate/
+
+{{% /tab %}}
 {{% tab "CloudFormation" %}}
 
 {{% observability_pipelines/install_worker/cloudformation %}}

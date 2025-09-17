@@ -1,6 +1,8 @@
 ---
 title: Set Up the Worker in ECS Fargate
 disable_toc: false
+aliases:
+  - /observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
 ---
 
 ## Overview

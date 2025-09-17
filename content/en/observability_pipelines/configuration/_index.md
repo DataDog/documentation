@@ -22,6 +22,10 @@ Build and deploy pipelines to collect, transform, and route your logs using one 
 
  See [Set Up Pipelines][4] for more details.
 
+ ## Further reading
+
+ {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /observability_pipelines/configuration/sources/
 [2]: /observability_pipelines/configuration/processors/
 [3]: /observability_pipelines/configuration/destinations/
