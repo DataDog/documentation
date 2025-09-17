@@ -45,21 +45,6 @@
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
           - networks/model/domain/azure_services.go
 
-      # Some dogweb integrations are not migrated to APW yet, this is here for reviewing upstream changes locally.
-      # Please don't add this to pull_config.yaml / production.
-      - repo_name: dogweb
-
-        contents:
-
-        - action: integrations
-          branch: prod
-          globs:
-          - integration/*/*_metadata.csv
-          - integration/*/manifest.json
-          - integration/*/service_checks.json
-          - integration/*/README.md
-          - integration/*/__init__.py
-
       - repo_name: ansible-datadog
         contents:
 

@@ -40,12 +40,12 @@ En esta página, se describe cómo instrumentar tus aplicaciones tanto para [Rea
 
 1. Declarar el SDK como dependencia.
 2. Especificar los detalles de la aplicación en la interfaz de usuario
-3. Inicializar la biblioteca.
+3. Inicializar la librería.
 4. Inicializa el monitor de Datadog y habilita `URLSessionInstrumentation` para empezar a enviar datos.
 
 ### Declarar el SDK como dependencia
 
-Declara la biblioteca como una dependencia en función de tu gestor de paquetes. El Swift Package Manager (SPM) es recomendado.
+Declara la librería como una dependencia en función de tu gestor de paquetes. El Swift Package Manager (SPM) es recomendado.
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -124,11 +124,11 @@ DatadogRUM.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-Para asegurar la seguridad de tus datos, debes utilizar un token de cliente. Si solo utilizas [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, están expuestos del lado del cliente en el código de byte de la aplicación de iOS.
+Para asegurar la seguridad de tus datos, debes utilizar un token de cliente. Si solo utilizas [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, están expuestos del lado del cliente en el código de byte de la aplicación de iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][4].
 
-### Inicializar la biblioteca
+### Inicializar la librería
 
 En el fragmento de inicialización, establece un nombre de entorno, un nombre de servicio y un número de versión. En los ejemplos siguientes, `app-name` especifica la variante de la aplicación que genera datos.
 

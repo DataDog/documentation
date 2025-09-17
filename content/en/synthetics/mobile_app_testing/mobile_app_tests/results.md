@@ -99,30 +99,16 @@ Click an element to view additional attributes:
 
 View and download crash reports for your iOS and Android devices in the [Results Explorer][12].
 
-{{< tabs >}}
-{{% tab "iOS" %}}
+To find specific crash reports, use the following queries in the search bar:
+- **iOS**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:ios`
+- **Android**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:android`
 
-In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:ios` to identify, view, and download crash reports for your iOS devices:
 
-{{< img src="mobile_app_testing/ios_search.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
+{{< img src="mobile_app_testing/ios_search_2.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
 
-Select a failed test and download the crash report:
+Click on a failed test to open the side panel and download the crash report in the **Run Details** tab:
 
-{{< img src="mobile_app_testing/ios_crash_report.png" alt="Screenshot of a test result highlighting the ability to download the iOS crash report" style="width=80%" >}}
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:android` to identify, view, and download crash reports for your Android devices.
-
-{{< img src="mobile_app_testing/android_search.png" alt="Screenshot the Results Explorer using filter and search to locate Android crash results" style="width=80%" >}}
-
-Select a failed test and download the crash report:
-
-{{< img src="mobile_app_testing/andriod_crash_report.png" alt="Screenshot of a test result highlighting the ability to download the Android crash report" style="width=80%" >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< img src="mobile_app_testing/ios_crash_report_2.png" alt="Screenshot of a test result highlighting the ability to download the iOS crash report" style="width=80%" >}}
 
 ## Failed results
 
@@ -144,7 +130,7 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/guide/synthetic-test-monitors/
+[1]: /monitors/types/synthetic_monitoring/
 [2]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [3]: /continuous_testing/cicd_integrations
 [4]: /mobile_app_testing/mobile_app_tests/#scheduling-and-alert
