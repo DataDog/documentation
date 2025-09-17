@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-The [GPU Monitoring Summary page][1] provides a snapshot summary of your entire GPU fleet under a specified time frame, like the past hour, day, week or month. This page answers key questions like:  
+The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame, like the past hour, day, week or month. This page answers key questions like:  
 
 ## Your GPU fleet at a glance
 Your operational efficiency is a key driver to overall costs. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
@@ -99,4 +99,5 @@ Zombie processes are often a main source of wasted GPU spend as they often reser
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[0]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mEnd=1758048728968&mPage=fleet&mStart=1758034328968&mView=nvidia
+[0]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mEnd=1758119954290&mPage=summary&mStart=1757947154290&mView=nvidia
+[1]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mEnd=1758119939640&mPage=fleet&mStart=1758105539640&mView=nvidia
