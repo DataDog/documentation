@@ -433,3 +433,4 @@ You can also exclude or send only those logs that match a specific pattern by us
 [69]: /integrations/amazon-dms/#send-logs-to-datadog
 [70]: /integrations/amazon-documentdb/
 [71]: /integrations/amazon-documentdb/#send-logs-to-datadog
+[72]: /integrations/amazon-vpn/#enable-logging
