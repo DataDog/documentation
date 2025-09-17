@@ -52,7 +52,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [RDS][23]                          | [Enable Amazon RDS logs][24]                                                                                   | [Manual][25] log. collection.                                                                                                |
 | [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][35] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | Redshift Serverless                | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
-| [Route 53][59]                     | [Enable Amazon Route 53 DNS query logging][60]                                                                 | [Manual][61] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Route 53][59]                     | Enable Amazon Route 53 [DNS query logging][60] and [resolver query logging][73]                                                                                                                                                  | [Manual][61] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [S3][29]                           | [Enable Amazon S3 logs][30]                                                                                    | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [SNS][32]                          | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                                                                 |
 | SSM                                | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                            |
@@ -434,3 +434,4 @@ You can also exclude or send only those logs that match a specific pattern by us
 [70]: /integrations/amazon-documentdb/
 [71]: /integrations/amazon-documentdb/#send-logs-to-datadog
 [72]: /integrations/amazon-vpn/#enable-logging
+[73]: /integrations/amazon_route53/#enable-route53-resolver-query-logging
