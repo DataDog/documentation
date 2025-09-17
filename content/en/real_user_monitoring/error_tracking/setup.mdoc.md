@@ -20,11 +20,11 @@ further_reading:
 ---
 
 {% if equals($platform, "browser") %}
-  {% partial file="error_tracking/browser_setup.mdoc.md" /%}
+  {% partial file="error_tracking/setup/browser_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "android") %}
-  {% partial file="error_tracking/android_setup.mdoc.md" /%}
+  {% partial file="error_tracking/setup/android_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "ios") %}

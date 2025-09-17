@@ -23,18 +23,12 @@ further_reading:
       text: Session Replay
 ---
 
-## Overview
-
-This guide walks you through setting up Real User Monitoring (RUM) for your application. RUM provides deep insight into your application's frontend performance and user experience across different platforms.
-
-## Setup
-
 {% if equals($platform, "browser") %}
-  {% partial file="sdks/setup/browser_setup.mdoc.md" /%}
+  {% partial file="rum/setup/browser_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "android") %}
-  {% partial file="sdks/setup/android_setup.mdoc.md" /%}
+  {% partial file="rum/setup/android_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "ios") %}

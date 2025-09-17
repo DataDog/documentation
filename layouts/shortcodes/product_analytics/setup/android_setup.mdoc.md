@@ -14,27 +14,27 @@ All Session Replay SDK versions can be found in the [Maven Central Repository][3
 
 ### Declare the Datadog Session Replay as a dependency
 
-    ```kotlin {% filename="build.gradle.kts" %}
-    implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
-    implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
-    // in case you need Material support
-    implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
-    // in case you need Jetpack Compose support
-    implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
-    ```
+```kotlin {% filename="build.gradle.kts" %}
+implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
+implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
+// in case you need Material support
+implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+// in case you need Jetpack Compose support
+implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
+```
 
 ### Enable Session Replay in your app
 
-    ```kotlin {% filename="Application.kt" %}
-    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-      // in case you need Material extension support
-      .addExtensionSupport(MaterialExtensionSupport())
-      // in case you need Jetpack Compose support
-      .addExtensionSupport(ComposeExtensionSupport())
-      .build()
+```kotlin {% filename="Application.kt" %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  // in case you need Material extension support
+  .addExtensionSupport(MaterialExtensionSupport())
+  // in case you need Jetpack Compose support
+  .addExtensionSupport(ComposeExtensionSupport())
+  .build()
 
-    SessionReplay.enable(sessionReplayConfig)
-    ```
+SessionReplay.enable(sessionReplayConfig)
+```
 
 
 ## Web view instrumentation

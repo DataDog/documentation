@@ -239,18 +239,10 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][6].
 
-### Visualize your data
-
-After your deployment is live, Datadog collects events from your users' browsers.
-
-Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
-
-Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [5]: /data_security/real_user_monitoring/
 [6]: /real_user_monitoring/guide/upload-javascript-source-maps
-[7]: /real_user_monitoring/configuration/data_collected/
-[8]: /real_user_monitoring/platform/dashboards/errors/
+

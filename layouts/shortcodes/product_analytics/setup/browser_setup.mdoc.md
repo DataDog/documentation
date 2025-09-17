@@ -1,13 +1,3 @@
-## Session Replay recorder
-
-The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps.
-
-Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
-
-The Session Replay recorder supports all browsers supported by the RUM Browser SDK. For more information, see the [Browser Support table][1].
-
-To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
-
 ## Setup
 
 {% alert type="info" %}
@@ -16,36 +6,24 @@ Session Replay is supported by SDK version 3.6.0 or later.
 
 {% partial file="sdks/setup/browser_setup.mdoc.md" /%}
 
-## Usage
+### Enable session replay
 
-Starting with v5.0.0 of the RUM Browser SDK, the Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`.
-
-For example, to only record authenticated user sessions:
+To enable session replay initialize the Browser SDK with sessionReplaySampleRate. Example:
 
 ```javascript
 window.DD_RUM.init({
-  applicationId: '<DATADOG_APPLICATION_ID>',
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
-  //  service: 'my-web-application',
-  //  env: 'production',
-  //  version: '1.0.0',
-  sessionSampleRate: 100,
+  ...
   sessionReplaySampleRate: 100,
-  startSessionReplayRecordingManually: true,
   ...
 });
-
-if (user.isAuthenticated) {
-    window.DD_RUM.startSessionReplayRecording();
-}
 ```
-
-To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 {% alert type="warning" %}
 When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.
 {% /alert %}
+
+To stop the Session Replay recording, call `stopSessionReplayRecording()`.
+
 
 ## Disable Session Replay
 

@@ -9,6 +9,11 @@
 /en/error_tracking/frontend/troubleshooting.md
 /en/product_analytics/session_replay/privacy_options.md
 /en/product_analytics/session_replay/setup.md
+/en/real_user_monitoring/configuration/advanced_configuration.md
+/en/real_user_monitoring/configuration/data_collected.md
+/en/real_user_monitoring/configuration/integrated_libraries.md
+/en/real_user_monitoring/configuration/tracking_user_actions.md
+/en/real_user_monitoring/configuration/web_view_tracking.md
 /en/real_user_monitoring/error_tracking/setup.md
 /en/real_user_monitoring/guide/proxy-mobile-rum-data.md
 /en/real_user_monitoring/guide/proxy-rum-data.md

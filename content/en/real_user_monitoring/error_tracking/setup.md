@@ -745,24 +745,6 @@ further_reading:
         >source map upload guide</a
       >.
     </p>
-    <h3 id="visualize-your-data">Visualize your data</h3>
-    <p>
-      After your deployment is live, Datadog collects events from your users'
-      browsers.
-    </p>
-    <p>
-      Visualize the
-      <a href="/real_user_monitoring/configuration/data_collected/"
-        >data collected</a
-      >
-      in
-      <a href="/real_user_monitoring/platform/dashboards/errors/">dashboards</a>
-      or create a search query in Error Tracking.
-    </p>
-    <p>
-      Until Datadog starts receiving data, your application appears as
-      <code>pending</code> on the <strong>Applications</strong> page.
-    </p>
     <h3 id="link-errors-with-your-source-code--optional">
       Link errors with your source code (optional)
     </h3>
