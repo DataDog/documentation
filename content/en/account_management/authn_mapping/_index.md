@@ -1,5 +1,6 @@
 ---
 title: Federated Authentication to Role Mapping API
+description: Automatically map identity provider groups to Datadog roles using the Authentication Mapping API for federated authentication systems.
 beta: true
 aliases:
   - /account_management/authen_mapping/

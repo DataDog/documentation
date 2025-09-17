@@ -1,5 +1,6 @@
 ---
 title: Custom Organization Landing Page
+description: Set a custom dashboard as your organization's landing page to control the first impression and information users see when logging into Datadog.
 ---
 
 ## Overview

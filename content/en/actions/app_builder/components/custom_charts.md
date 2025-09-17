@@ -1,5 +1,6 @@
 ---
 title: Custom Charts
+description: Create custom charts in apps using Vega-Lite specifications to visualize data from queries with various chart types and styles.
 disable_toc: false
 aliases:
 - /service_management/app_builder/custom_charts/

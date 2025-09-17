@@ -1,5 +1,6 @@
 ---
 title: Components
+description: Comprehensive reference for App Builder UI components including buttons, forms, tables, charts, and interactive elements.
 disable_toc: true
 aliases:
     - /service_management/app_builder/components

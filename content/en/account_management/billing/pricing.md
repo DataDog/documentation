@@ -1,5 +1,6 @@
 ---
 title: Pricing
+description: Understand Datadog pricing models including infrastructure monitoring, APM, logs, synthetic tests, and billing calculations for various products.
 further_reading:
 - link: "https://www.datadoghq.com/pricing"
   tag: "Pricing"
