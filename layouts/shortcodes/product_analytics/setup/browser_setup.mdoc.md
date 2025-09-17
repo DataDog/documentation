@@ -1,31 +1,3 @@
----
-title: Browser Session Replay
-description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
-further_reading:
-- link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
-  tag: 'Blog'
-  text: 'Use Datadog Session Replay to view real-time user journeys'
-- link: 'https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/'
-  tag: 'Blog'
-  text: 'Use funnel analysis to understand and optimize key user flows'
-- link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
-  tag: 'Blog'
-  text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
-- link: '/product_analytics/analytics_explorer'
-  tag: 'Documentation'
-  text: 'Visualize your Product Analytics data in the Analytics Explorer'
-- link: '/integrations/content_security_policy_logs'
-  tag: 'Documentation'
-  text: 'Detect and aggregate CSP violations with Datadog'
----
-
-
-## Overview
-
-Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
-
-The RUM Browser SDK is [open source][1] and leverages the open source [rrweb][2] project.
-
 ## Session Replay recorder
 
 The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps.
@@ -40,7 +12,9 @@ To reduce Session Replay's network impact and ensure the Session Replay recorder
 
 Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. For setup in mobile environments, see [Mobile Session Replay][5].
 
-<div class="alert alert-info">Session Replay is supported by SDK version 3.6.0 or later.</div>
+{% alert type="info" %}
+Session Replay is supported by SDK version 3.6.0 or later.
+{% /alert %}
 
 ## Usage
 
@@ -69,31 +43,27 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
+{% alert type="warning" %}
+When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.
+{% /alert %}
 
 ## Disable Session Replay
 
 To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
 
-<div class="alert alert-warning">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
+{% alert type="warning" %}
+If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.
+{% /alert %}
 
 ## Playback history
 
 You can see who has watched a given session replay by clicking the **watched** count displayed on the player page. This feature allows you to check whether someone you'd like to share the recording with has already watched it.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Check who has watched a session's recording" style="width:100%;" >}}
+{% img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Check who has watched a session's recording" style="width:100%;" /%}
 
 The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][8] or side panel. Included playbacks also generate an [Audit Trail][7] event. Thumbnail previews are not included in history.
 
 To view your own playback history, check out the [My Watch History][9] playlist.
-
-## Mobile Session Replay
-
-Learn more about the [Session Replay for Mobile][5].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/

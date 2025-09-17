@@ -1,17 +1,3 @@
----
-title: Session Replay Browser Privacy Options
-description: Describes privacy controls available in Session Replay and how to set privacy options
-aliases:
-- /real_user_monitoring/session_replay/privacy_options
-further_reading:
-    - link: '/real_user_monitoring/session_replay'
-      tag: Documentation
-      text: Session Replay
-    - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
-      tag: "Blog"
-      text: "Obfuscate user data with Session Replay default privacy settings"
----
-
 ## Overview
 
 Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
@@ -22,7 +8,11 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 
 ## Configuration
 
-<div class="alert alert-warning"><code>defaultPrivacyLevel</code> and <code>mask-user-input</code> are available in the SDK v3.6.0+.</div>
+{% alert type="warning" %}
+
+`>defaultPrivacyLevel` and `mask-user-input` are available in the SDK v3.6.0+.
+
+{% /alert %}
 
 To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in your JavaScript configuration.
 
@@ -53,7 +43,7 @@ After updating your configuration, you can override elements of your HTML docume
 
 Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][1]. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
-{{< img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Mask mode" style="width:100%;">}}
+{% img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Mask mode" style="width:100%" /%}
 
 **Note**: Masked data is not stored on Datadog servers.
 
@@ -61,13 +51,13 @@ Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, im
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/browser-privacy-mask-input.png" alt="Mask user input mode" style="width:100%;">}}
+{% img src="real_user_monitoring/session_replay/browser-privacy-mask-input.png" alt="Mask user input mode" style="width:100%" /%}
 
 ### Allow mode
 
 Records everything unmasked.
 
-{{< img src="real_user_monitoring/session_replay/browser-privacy-allow-all.png" alt="Allow mode" style="width:100%;">}}
+{% img src="real_user_monitoring/session_replay/browser-privacy-allow-all.png" alt="Allow mode" style="width:100%" /%}
 
 ## Privacy options
 
@@ -91,7 +81,7 @@ The example below demonstrates how you can override certain elements in your HTM
 
 The dollar amount in the cart is replaced with asterisks.
 
-{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
+{% img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%" /%}
 
 ## Privacy restrictions
 
@@ -110,7 +100,7 @@ If you are concerned about the number of visible elements in sensitive fields, e
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
-{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
+{% img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%" /%}
 
 ### Override the action name
 
@@ -125,14 +115,10 @@ Additional use cases to override the default action name include masking sensiti
 ### Mask action names
 By default, if you wish to mask all action names, you can use the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation automatically substitutes all non-overridden action names with the placeholder `Masked Element`. This setting is also designed to be compatible with existing [HTML override attributes](#override-an-html-element).
 
-<div class="alert alert-info">
+{% alert type="info" %}
 
 Datadog is working to add more privacy features to RUM & Session Replay. Have something in mind that you would like to see? <a href="/help">Contact Datadog support.</a>
 
-</div>
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+{% /alert %}
 
 [1]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
