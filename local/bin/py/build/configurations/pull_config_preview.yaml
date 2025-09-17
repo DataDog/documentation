@@ -369,7 +369,7 @@
       - repo_name: security-monitoring
         contents:
         - action: security-rules
-          branch: main
+          branch: samuel.cox/oci-cis-rules-set-1
           globs:
             - "workload-security/backend-rules/*.yaml"
             - "workload-security/backend-rules/*.md"
