@@ -13,7 +13,7 @@ further_reading:
 The [GPU Monitoring Summary page][1] provides a snapshot summary of your entire GPU fleet under a specified time frame, like the past hour, day, week or month. This page answers key questions like:  
 
 ## Your GPU fleet at a glance
-(INTRO SENTENCE HERE) 
+Your operational efficiency is a key driver to overall costs. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
 
 ### GPU Fleet Funnel Visualization 
 This funnel visualization provides a breakdown of your entire GPU fleet across multiple cloud providers like AWS or Google Cloud. You can instantly breakdown your fleet by number of Kubernetes clusters, hosts or GPU devices. 
@@ -73,19 +73,21 @@ This widget uncovers your most expensive Kubernetes clusters and identifies thei
 
 {{< img src="gpu_monitoring/expensive_clusters.png" alt="Table of the most expensive Kubernetes clusters." style="width:100%;" >}}
 
-You can click into any one of these clusters to investigate its connected entities that contribute to its costs on the [GPU Fleet page][1].
+You can click into any one of these clusters to investigate its connected workloads by pods or processes that contribute to its costs on the [GPU Fleet page][1].
 
 {{< img src="gpu_monitoring/cluster_entities.png" alt="A details sidepanel for a particular cluster that displays the connected entities of that cluster such as pods and processes." style="width:100%;" >}}
 
-This opens a sidepanel that's tailored to that specific cluster and reveals its connected entities. For example, if you see a related pod with high core utilization and "bad status", that pod is ineffectively using its associated GPU device. So the pod owner should be contacted to .(INSERT WORKFLOW HERE) 
+This opens a sidepanel that's tailored to that specific cluster and reveals its connected entities. For example, if you see a related pod with high core utilization and "bad status", that pod is ineffectively using its associated GPU device. So the pod owner should be contacted to terminate the pod or move it to a smaller GPU.
 
-### Inefficient Pods (NEEDS WORK) 
+### Inefficient Pods
 **Note:** This section is only available for Kubernetes users.
 To maximize value on your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by SM engine activity by default. 
 
 {{< img src="gpu_monitoring/inefficient_pods.png" alt="Table of inefficient pods sorted by SM Engine Activity level." style="width:100%;" >}}
 
-You can click into any inefficient pod to open up a details sidepanel that reveals the workload it's running; contact the pod owner to consolidate to a smaller number of GPU devices if the core utilization across most of this pod's associated devices is low. Additionally, given pods can share hosts, you can identify noisy neighbors. For example, another pod can be using all of a given host's CPU so your pod is starved.
+You can click into any inefficient pod to view more details about the pod and its related GPU devices within the Kubernetes Explorer page (navigate to the GPU tab within a particular pod). If you notice the GPU core utilization across most of this pod's associated GPU devices is low, this means the GPU devices are idle; either due to bursty workloads or due to IO network etc. To remediate, you can contact the pod owner to consolidate to a smaller number of devices, use a smaller GPU. Or you can optimize your code to continue using the large GPU for better throughput.
+
+Additionally, given pods can share hosts, you can identify noisy neighbors. For example, another pod can be using all of a given host's CPU so your pod is starved.
 
 ### Zombie Process
 Zombie processes are often a main source of wasted GPU spend as they often reserve GPU capacity that they shouldn't be. This widget lists the zombie processes that should be killed in order to free up GPUs for other workloads.
