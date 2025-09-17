@@ -5,6 +5,12 @@
 
 # This file lists compiled Cdocs files to keep them out of version control. For more information, see the internal Cdocs documentation: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4898063037/Cdocs+Build
 
+/en/client_sdks/advanced_configuration.md
+/en/client_sdks/data_collected.md
+/en/client_sdks/integrated_libraries.md
+/en/client_sdks/products.md
+/en/client_sdks/setup.md
+/en/client_sdks/supported_versions.md
 /en/error_tracking/frontend/setup.md
 /en/error_tracking/frontend/troubleshooting.md
 /en/product_analytics/session_replay/privacy_options.md

@@ -298,6 +298,41 @@ menu:
       identifier: guides
       parent: essentials_heading
       weight: 40000
+    - name: Client SDKs
+      url: client_sdks/
+      parent: essentials_heading
+      identifier: client_sdks
+      weight: 50000
+    - name: Setup
+      url: client_sdks/setup/
+      parent: client_sdks
+      identifier: client_sdks_setup
+      weight: 1
+    - name: Advanced Configuration
+      url: client_sdks/advanced_configuration/
+      parent: client_sdks
+      identifier: client_sdks_advanced_configuration
+      weight: 2
+    - name: Data Collected
+      url: client_sdks/data_collected/
+      parent: client_sdks
+      identifier: client_sdks_data_collected
+      weight: 3
+    - name: Products
+      url: client_sdks/products/
+      parent: client_sdks
+      identifier: client_sdks_products
+      weight: 4
+    - name: Supported Versions
+      url: client_sdks/supported_versions/
+      parent: client_sdks
+      identifier: client_sdks_supported_versions
+      weight: 5
+    - name: Integrated Libraries
+      url: client_sdks/integrated_libraries/
+      parent: client_sdks
+      identifier: client_sdks_integrated_libraries
+      weight: 6
     - name: Agent
       url: agent/
       pre: agent-fill

@@ -146,7 +146,7 @@ description: Learn how to troubleshoot issues.
     Support][1] for further assistance. Regularly update to the latest version
     of the SDK, as each release contains improvements and fixes.
   </p>
-  <div class="cdoc__toggleable" data-if="8">
+  <div class="cdoc__toggleable" data-if="16">
     <h2 id="missing-data">Missing data</h2>
     <p>If you can't see any RUM data or if data is missing for some users:</p>
     <table>
@@ -500,7 +500,7 @@ description: Learn how to troubleshoot issues.
       Symbols][15].
     </p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="9">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="17">
     <h2 id="check-if-datadog-rum-is-initialized">
       Check if Datadog RUM is initialized
     </h2>
@@ -564,7 +564,7 @@ description: Learn how to troubleshoot issues.
       Symbols][4].
     </p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="10">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="18">
     <h2 id="check-if-datadog-sdk-is-properly-initialized">
       Check if Datadog SDK is properly initialized
     </h2>
@@ -631,7 +631,7 @@ description: Learn how to troubleshoot issues.
       Symbols][5].
     </p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="11">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="19">
     <h2 id="duplicate-interface--ios">Duplicate interface (iOS)</h2>
     <p>
       If you see this error while building iOS after upgrading to
@@ -861,7 +861,7 @@ description: Learn how to troubleshoot issues.
       Traces with RUM Debug Symbols][7].
     </p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="12">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="20">
     <h2 id="check-if-datadog-rum-is-initialized">
       Check if Datadog RUM is initialized
     </h2>
@@ -1068,7 +1068,7 @@ description: Learn how to troubleshoot issues.
       </div>
     </div>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="13">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="21">
     <h2 id="no-data-is-being-sent-to-datadog">
       No data is being sent to Datadog
     </h2>
@@ -1652,7 +1652,7 @@ description: Learn how to troubleshoot issues.
       Traces with RUM Debug Symbols][7].
     </p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="14">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="22">
     <h2 id="set-sdkverbosity-for-easier-debugging">
       Set sdkVerbosity for easier debugging
     </h2>
@@ -1720,7 +1720,7 @@ description: Learn how to troubleshoot issues.
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"8":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"8"},"9":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"android"},"v":false,"r":"9"},"10":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"ios"},"v":false,"r":"10"},"11":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"flutter"},"v":false,"r":"11"},"12":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"12"},"13":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"react_native"},"v":false,"r":"13"},"14":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"unity"},"v":false,"r":"14"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"rum_sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"platform":"browser"},"optionGroupsById":{"rum_sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"},{"id":"roku","label":"Roku"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"16":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"16"},"17":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"android"},"v":false,"r":"17"},"18":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"ios"},"v":false,"r":"18"},"19":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"flutter"},"v":false,"r":"19"},"20":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"20"},"21":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"react_native"},"v":false,"r":"21"},"22":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"unity"},"v":false,"r":"22"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"rum_sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"platform":"browser"},"optionGroupsById":{"rum_sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"},{"id":"roku","label":"Roku"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" style="display:none;" alt="" >}}
 {{< img src="real_user_monitoring/browser/troubleshooting/error_rum_internal_context.png" style="display:none;" alt="" >}}

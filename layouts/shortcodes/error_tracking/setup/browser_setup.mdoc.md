@@ -5,7 +5,9 @@ Whenever a source, custom, report, or console error containing a stack trace is 
  
 ## Setup
 
-{% partial file="sdks/setup/browser_setup.mdoc.md" /%}
+### Install the Browser SDK
+
+Make sure you've set up the [Browser SDK][1].
 
 ### Link errors with your source code (optional)
 
@@ -17,3 +19,5 @@ Error Tracking can use this information to correlate errors with your [source co
 
 For more information, see the [Datadog Source Code Integration][27].
   
+
+[1]: /client_sdks/setup

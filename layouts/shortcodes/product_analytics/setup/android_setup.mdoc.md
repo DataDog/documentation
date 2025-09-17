@@ -8,9 +8,11 @@ content_filters:
 -->
 ## Setup
 
-All Session Replay SDK versions can be found in the [Maven Central Repository][3].
+All Session Replay SDK versions can be found in the [Maven Central Repository][7].
 
-{% partial file="sdks/setup/android_setup.mdoc.md" /%}
+### Install the Android SDK
+
+Make sure you've set up the [Android SDK][14].
 
 ### Declare the Datadog Session Replay as a dependency
 
@@ -90,3 +92,4 @@ See [Privacy Options][2].
 [4]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
 [6]: /real_user_monitoring/session_replay/browser/#setup
+[14]: /client_sdks/setup

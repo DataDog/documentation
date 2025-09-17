@@ -12,7 +12,9 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-{% partial file="sdks/setup/android_setup.mdoc.md" /%}
+### Install the Android SDK
+
+Make sure you've set up the [Android SDK][14].
 
 ### Add NDK crash reporting
 
@@ -245,3 +247,4 @@ To test your implementation:
 [10]: /real_user_monitoring/configuration/advanced_configuration#track-background-events
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [13]: https://app.datadoghq.com/organization-settings/api-keys
+[14]: /client_sdks/setup

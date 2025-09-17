@@ -4,7 +4,9 @@
 Session Replay is supported by SDK version 3.6.0 or later.
 {% /alert %}
 
-{% partial file="sdks/setup/browser_setup.mdoc.md" /%}
+### Install the Android SDK
+
+Make sure you've set up the [Browser SDK][6].
 
 ### Enable session replay
 
@@ -48,3 +50,4 @@ To view your own playback history, check out the [My Watch History][5] playlist.
 [3]: https://docs.datadoghq.com/account_management/audit_trail/
 [4]: https://docs.datadoghq.com/notebooks/
 [5]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
+[6]: /client_sdks/setup
