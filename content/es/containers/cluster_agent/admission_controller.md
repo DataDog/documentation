@@ -10,7 +10,7 @@ further_reading:
   text: Solucionar problemas del controlador de admisión
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
-  text: Usar la inyección de biblioteca para auto-instrumentar el rastreo de aplicaciones
+  text: Usar la inyección de librería para auto-instrumentar el rastreo de aplicaciones
     Kubernetes con Datadog APM
 title: Controlador de admisión de Datadog
 ---
@@ -136,13 +136,13 @@ Por último, ejecuta los siguientes comandos:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Inyección de la biblioteca de instrumentación
-Puedes configurar el Cluster Agent (v7.39 o posterior) para inyectar bibliotecas de instrumentación. Consulta [Inyección de bibliotecas de instrumentación con el controlador de admisión][2] para obtener más información.
+### Inyección de la librería de instrumentación
+Puedes configurar el Cluster Agent (v7.39 o posterior) para inyectar bibliotecas de instrumentación. Consulta [Inyección de librerías de instrumentación con el controlador de admisión][2] para obtener más información.
 
 
 ### APM y DogStatsD
 
-Para configurar clientes DogStatsD u otras bibliotecas APM que no admitan la inyección de bibliotecas, inyecta las variables de entorno `DD_AGENT_HOST` y `DD_ENTITY_ID` realizando una de las siguientes acciones:
+Para configurar clientes DogStatsD u otras bibliotecas APM que no admitan la inyección de librerías, inyecta las variables de entorno `DD_AGENT_HOST` y `DD_ENTITY_ID` realizando una de las siguientes acciones:
 - Añade la etiqueta `admission.datadoghq.com/enabled: "true"` a tu pod.
 - Configura el controlador de admisión del Cluster Agent estableciendo `mutateUnlabelled` (o `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, dependiendo de tu método de configuración), como `true`.
 

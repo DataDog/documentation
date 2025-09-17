@@ -17,7 +17,7 @@ title: Activación de Java Profiler
 type: multi-code-lang
 ---
 
-El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de biblioteca e ir directamente a habilitar el generador de perfiles.
+El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de librería e ir directamente a habilitar el generador de perfiles.
 
 ## Requisitos
 
@@ -57,7 +57,7 @@ Versiones mínimas de JDK:
 - Azul Zulu 8 (versión 1.8.0.212/8u212+), 11+
 - GraalVM 17+ - ambas versiones, JIT y AOT (imagen nativa)
 
-Dado que las versiones de JDK que no son LTS pueden no contener correcciones de estabilidad y rendimiento relacionadas con la biblioteca de Datadog Profiler, utiliza las versiones 8, 11 y 17 del JDK de soporte a largo plazo.
+Dado que las versiones de JDK que no son LTS pueden no contener correcciones de estabilidad y rendimiento relacionadas con la librería de Datadog Profiler, utiliza las versiones 8, 11 y 17 del JDK de soporte a largo plazo.
 
 Requisitos adicionales para la formación de perfiles [trace (traza) to integración de perfil][12]:
  - OpenJDK 17.0.5+ y `dd-trace (traza)-java` versión 1.17.0+.
@@ -103,7 +103,7 @@ Para empezar a crear perfiles de aplicaciones:
    {{% /tab %}}
    {{< /tabs >}}
 
-     **Nota**: El generador de perfiles está disponible en la biblioteca `dd-java-agent.jar` para las versiones 0.55+.
+     **Nota**: El generador de perfiles está disponible en la librería `dd-java-agent.jar` para las versiones 0.55+.
 
 3. Habilita el generador de perfiles configurando el indicador `-Ddd.profiling.enabled` o la variable de entorno `DD_PROFILING_ENABLED` en `true`. Especifica `dd.service`, `dd.env` y `dd.version` para poder filtrar y agrupar tus perfiles a través de estas dimensiones:
    {{< tabs >}}

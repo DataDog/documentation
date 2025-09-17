@@ -20,7 +20,7 @@ title: Activación de Ruby Profiler
 type: multi-code-lang
 ---
 
-El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de biblioteca e ir directamente a habilitar el generador de perfiles.
+El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de librería e ir directamente a habilitar el generador de perfiles.
 
 ## Requisitos
 

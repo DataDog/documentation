@@ -73,7 +73,7 @@ Obtén métricas de la base de datos de Aerospike en tiempo real para:
 
 ## Configuración
 
-NOTA: La integración de Aerospike actual solo es compatible con el servidor Aerospike v4.9 o posterior, consulta las [notas de versión de la biblioteca de cliente de Python][1] de Aerospike para obtener más información.
+NOTA: La integración de Aerospike actual solo es compatible con el servidor Aerospike v4.9 o posterior, consulta las [notas de versión de la librería de cliente de Python][1] de Aerospike para obtener más información.
 Si utilizas una versión anterior del servidor Aerospike, todavía es posible monitorizar la versión 7.29.0 o inferior del Datadog Agent.
 
 ### Instalación
@@ -154,7 +154,7 @@ ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       "init_config": {},
       "instances": [{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}]
     }
-  } 
+  }
 ```
 
 
@@ -179,7 +179,7 @@ ad.datadoghq.com/<CONTAINER_NAME>.logs: |
       "type": "file",
       "path": "/var/log/aerospike/aerospike.log",
       "source": "aerospike"
-    } 
+    }
   ]
 ```
 [1]: https://docs.datadoghq.com/es/containers/kubernetes/integrations/

@@ -51,7 +51,7 @@ Para ello, define `DD_TRACE_ANALYTICS_ENABLED=true` en tu entorno o configura:
 Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
-* `true` permite el análisis de todos los marcos web.
+* `true` permite el análisis de todos los web frameworks.
 * `false` o `nil` desactiva el análisis, excepto para integraciones que lo activan explícitamente. (Por defecto)
 
 {{< /programming-lang >}}
@@ -162,7 +162,7 @@ Utilízala junto con la configuración global de cualquier integración que env�
 * Configuración del rastreador: `ddtrace.config.boto.analytics_enabled = True`
 * Variable de entorno: `DD_BOTO_ANALYTICS_ENABLED=true`
 
-**Nota**: Varias integraciones requieren una configuración no estándar debido a la implementación específica de la integración del rastreador. Para ver más detalles, consulta la documentación de biblioteca en [App Analytics][1].
+**Nota**: Varias integraciones requieren una configuración no estándar debido a la implementación específica de la integración del rastreador. Para ver más detalles, consulta la documentación de librería en [App Analytics][1].
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{< /programming-lang >}}
@@ -188,7 +188,7 @@ Donde `integration` es el nombre de la integración. Consulta la [lista de integ
 
 {{% tracing-go-v2 %}}
 
-Además de la configuración global, puedes habilitar o deshabilitar App Analytics individualmente para cada integración. Como ejemplo, para configurar el paquete estándar `net/http` de la biblioteca, podrías:
+Además de la configuración global, puedes habilitar o deshabilitar App Analytics individualmente para cada integración. Como ejemplo, para configurar el paquete estándar `net/http` de la librería, podrías:
 
 ```go
 package main
@@ -492,7 +492,7 @@ apm_config:
     service_C: 0.05
 ```
 
-Para definir la frecuencia de tramos a analizar por servicio y nombre de operación, configura lo siguiente en el archivo `datadog.yaml`: 
+Para definir la frecuencia de tramos a analizar por servicio y nombre de operación, configura lo siguiente en el archivo `datadog.yaml`:
 
 ```
 apm_config:
