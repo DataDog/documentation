@@ -24,7 +24,7 @@ Start by creating a table of data, either by building a new query from Sheets or
 {{< img src="/sheets/create_table.png" alt="Modal to create to create a table from Sheets, showing a Logs query with status:error" style="width:90%;" >}}
 
 1. On the [Datadog Sheets page][1], click **New Spreadsheet**.
-1. Click **Add Data**.
+1. Click **Add Data**. Note: if there is a data source you want that is not available, request for it [here][19]
 1. Start building your query by selecting your Data source, and adding filtering parameters.
 1. Select the columns you want to display and preview the resulting table.
 1. Click **Create Table**.
@@ -132,3 +132,4 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [16]: https://app.datadoghq.com/databases/queries
 [17]: https://app.datadoghq.com/ci/pipelines
 [18]: https://app.datadoghq.com/apm/traces
+[19]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
