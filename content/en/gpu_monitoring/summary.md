@@ -10,7 +10,10 @@ further_reading:
 
 ## Overview
 
-The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame, like the past hour, day, week or month. This page answers key questions like:  
+The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame, like the past hour, day, week or month. This page answers key questions like: 
+- Am I using my existing GPU fleet effectively?
+- How can I better provision these devices to match workload demand?
+- How can I get more value from my existing GPU spend? 
 
 ## Your GPU fleet at a glance
 Your operational efficiency is a key driver to overall costs. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
