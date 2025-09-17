@@ -277,7 +277,7 @@ For example, suppose you have both "foo" and "Foo" labels on a pod:
     foo: bar
     Foo: qux
 ```
-Using tag extraction cause a conflict and creates an unexpected result:
+Using tag extraction causes a conflict and creates an unexpected result:
 
 ```yaml
     kubernetesResourcesLabelsAsTags:
