@@ -31,7 +31,7 @@ Below the search and filter fields, this page  provides preset filters that allo
 - Inefficient devices: GPU core utilization is <50%. This is only available if you've enabled System Probe for more advanced GPU metrics and insights.
 - Inactive (Idle) devices: Both streaming multiprocessor and graphics engine are active <1% of the time.
 
-### Summary Graph
+## Summary Graph
 After toggling Cluster, Host, or Device, the **Summary Graph** displays key resource telemetry across your entire GPU infrastructure grouped by that toggle value. Here is a table of the available metrics and what they represent. 
 
 | Metric                | Definition                                                              | Metric Name                                    |
