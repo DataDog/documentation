@@ -33,7 +33,7 @@ docker run -d \
  --health-cmd "curl http://localhost:9016/liveness" \
  --health-interval 10s \
  --health-timeout 10s \
- --health-retries 3 gcr.io/datadoghq/private-action-runner:v1.7.0
+ --health-retries 3 gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}
 ```
 
 After confirming the new PAR version is working as expected, remove the old version:

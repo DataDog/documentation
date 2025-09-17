@@ -28,7 +28,7 @@ The following table outlines supported and unsupported use cases for the script 
 To use the script action, you need:
 
 - **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image.
-- **PAR Version**: {{< private-action-runner-version "private-action-runner" >}} or later. To create a new PAR, see [Set Up a Private Action Runner][2]. To update your PAR version, see [Update the Private Action Runner][11].
+- **PAR Version**: 1.7.0 or later. To create a new PAR, see [Set Up a Private Action Runner][2]. To update your PAR version, see [Update the Private Action Runner][11].
 
 ## Set up a PAR script
 
@@ -90,7 +90,7 @@ For binaries not available in the base runner image, create a custom image:
 
 ```dockerfile
 # Dockerfile example
-FROM gcr.io/datadoghq/private-action-runner:v1.7.0
+FROM gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}
 USER root
 RUN apt update && apt install -y python3
 USER dog
@@ -102,7 +102,7 @@ You can mount complex scripts inside the runner:
 # docker-compose example
 services:
   runner:
-    image: gcr.io/datadoghq/private-action-runner:v1.7.0
+    image: gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}
     # build: . # if you are using a custom Dockerfile
     volumes:
       - "./config:/etc/dd-action-runner/config"
