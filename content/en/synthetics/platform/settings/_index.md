@@ -302,7 +302,7 @@ For more information, see [Explore RUM & Session Replay][14].
 
 ### Synthetic mobile application test data collection
 
-To allow Datadog to collect RUM data from your mobile application test runs, simply configure and package the RUM [iOS SDK][23] or [Android SDK][24] with your `.ipa` or `.apk` file. RUM data will automatically be linked to your test runs, giving you end-to-end observability of test runs.
+To allow Datadog to collect RUM data from your mobile application test runs, configure and package the RUM [iOS SDK][23] or [Android SDK][24] with your `.ipa` or `.apk` file. This automatically links RUM data, giving you end-to-end observability of test runs.
 
 ## Further Reading
 
