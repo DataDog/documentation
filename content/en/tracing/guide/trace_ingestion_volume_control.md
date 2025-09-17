@@ -1,5 +1,6 @@
 ---
 title: Ingestion volume control with APM Distributed Tracing
+description: Learn how to control span ingestion volume with APM tracing mechanisms to manage costs while maintaining observability.
 
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls/"

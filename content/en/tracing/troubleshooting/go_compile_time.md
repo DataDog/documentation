@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Go Compile-Time Instrumentation
+description: Debug Orchestrion build issues by preserving work trees, configuring logging, and examining transformed source files.
 further_reading:
 - link: "/tracing/trace_collection/automatic_instrumentation/dd_libraries/go/"
   tag: "Documentation"

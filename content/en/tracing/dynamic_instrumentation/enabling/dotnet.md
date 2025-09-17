@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for .NET
+description: "Learn how to install, configure, and enable Dynamic Instrumentation for .NET applications to add instrumentation without modifying code."
 aliases:
     - /dynamic_instrumentation/enabling/dotnet/
 private: false

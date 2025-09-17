@@ -1,5 +1,6 @@
 ---
 title: Inferred services
+description: Automatically discover service dependencies like databases and queues through outbound request analysis.
 aliases:
   - /tracing/guide/inferred-service-opt-in
 further_reading:

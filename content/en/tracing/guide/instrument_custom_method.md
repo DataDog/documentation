@@ -1,5 +1,6 @@
 ---
 title: Instrument a custom method to get deep visibility into your business logic
+description: Learn how to add custom instrumentation to methods and functions to get detailed visibility into your business logic and application performance.
 
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
