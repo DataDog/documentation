@@ -18,19 +18,11 @@ further_reading:
 
 ## Overview
 
-Tags help you organize, filter, and allocate your cloud costs effectively. Cloud Cost Management automatically enriches your cost data with tags from multiple sources, so you can focus on using tags to drive insights rather than managing the technical details. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment.
+Tags help you investigate and understand your cloud and SaaS costs across any dimensions. 
 
-## Getting started
+Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve higher cost allocation and get deeper insight into who owns infrastructure costs in your ever changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment. 
 
-Get started with tags in three steps:
-
-1. **See what you have** - Use [Tag Explorer][5] to discover which tags are already available in your cost data.
-2. **Identify gaps** - Look for missing tags that would help you track costs by team, project, or environment.
-3. **Add missing tags** - Use [Tag Pipelines][4] to automatically add tags based on your business logic.
-
-{{< img src="cloud_cost/tag_explorer/aws_1.png" alt="Tag Explorer interface showing available AWS tags and their usage" style="width:80%;" >}}
-
-## Where your tags come from
+## Where tags come form
 
 Datadog applies tags to cost data using the following sources:
 
@@ -39,58 +31,17 @@ Datadog applies tags to cost data using the following sources:
 - **[Resource and account tags][3]** - Tags you've applied to your cloud resources
 - **[Tag pipelines][4]** - Custom rules you create to add missing tags
 
-## How tags are attached to cost data
+## How tags are normalized
 
-Datadog automatically associates tags with your cost data through a multi-step process as new cost data is ingested. Your cost analysis always reflects the most current tag information.
+## Improving tagging
 
-1. **Data ingestion** - When cost data arrives from your cloud provider (through billing reports, APIs, and so on), Datadog identifies the specific resources and services being billed.
-2. **Tag lookup** - For each cost datapoint, Datadog looks up available tags from all configured sources (billing data, resource tags, container metadata, and so on).
-3. **Tag application** - Tags are attached to the cost data based on a precedence order:
-   - Tag Pipelines (highest priority)
-   - Container tags
-   - Resource/account tags
-   - Out-of-the-box tags
-   - Billing data (lowest priority)
+1. **Understand what tags exist** - Use [Tag Explorer][5] to discover which tags are already available in your cost data.
+2. **Identify gaps in cost allocation** - In Explorer, group by any tag to see how many dollars are allocated to that tag, or are unallocated (which show up as `N/A`). Make sure to have "Container Allocated" enabled so that you are looking at cost allocation including tags on pods.
+3. **Split up shared costs** - Use [Custom Allocation Rules][6] to split and assign shared costs back to teams, services, or more. You can use observability data to split costs accurately based on infrastructure usage.
+4. **Address missing or incorrect tags** - Use [Tag Pipelines][4] to alias tags, or create a new tag, for incorrect tagging. For example, if your organization wants to use the standard `application` tag key, but teams use variations (like app, webapp, or apps), you can clean up those tags to become `application` for more accurate cost reporting.
+5. **Add new tags** - Use [Tag Pipelines][4] to automatically create new inferred tags that align with specific business logic, such as a `business-unit` tag based on team structure.
 
-4. **Data storage** - The enriched cost data with all associated tags is stored and made available for analysis.
-
-## Essential tags and examples
-
-In addition to out-of-the-box tags, you can add these key tags to get the most value from your cost data:
-
-### Team and ownership tags
-- `team` - Which team owns the resource
-- `owner` - Individual responsible for the resource
-- `project` - Project or initiative the resource supports
-
-**Example: Track costs by team**
-Tag your resources with `team:engineering` or `team:marketing`, then:
-- Create dashboards showing spend by team
-- Set up alerts for unusual team spending
-- Generate monthly cost reports per team
-
-### Environment and lifecycle tags
-- `env` - Environment (prod, staging, dev)
-- `service` - Application or service name
-- `version` - Application version or release
-
-**Example: Identify unused resources**
-Use tags like `env:dev` and `purpose:testing` to:
-- Find development resources that can be stopped
-- Track costs for temporary projects
-- Clean up abandoned test environments
-
-### Business context tags
-- `cost-center` - Budget or cost center
-- `business-unit` - Business unit or department
-- `purpose` - What the resource is used for
-
-**Example: Optimize container costs**
-With container cost allocation, you can:
-- See costs broken down by pod, namespace, or deployment
-- Identify which applications are most expensive
-- Optimize resource requests and limits
-
+{{< img src="cloud_cost/tag_explorer/aws_1.png" alt="Tag Explorer interface showing available AWS tags and their usage" style="width:80%;" >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -100,3 +51,4 @@ With container cost allocation, you can:
 [3]: /cloud_cost_management/setup/aws/#aws-resource-tags
 [4]: /cloud_cost_management/tags/tag_pipelines
 [5]: /cloud_cost_management/tags/tag_explorer
+[6]: /cloud_cost_management/custom_allocation_rules
