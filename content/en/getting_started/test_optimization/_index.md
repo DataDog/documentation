@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Test Optimization
+description: Understand test performance and identify flaky tests, performance regressions, and failures across CI environments.
 aliases:
 - /getting_started/test_visibility
 further_reading:
