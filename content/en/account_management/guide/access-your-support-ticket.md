@@ -4,7 +4,7 @@ aliases:
   - /developers/faq/access-your-support-ticket
   - /account_management/faq/access-your-support-ticket
 further_reading:
-- link: "/getting_started/support/t"
+- link: "/getting_started/support/"
   tag: "Documentation"
   text: "Getting Started with Datadog Support"
 ---
