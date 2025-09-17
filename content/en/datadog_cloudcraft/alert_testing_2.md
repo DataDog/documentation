@@ -9,6 +9,8 @@ further_reading:
   text: "Visually identify observability gaps with Cloudcraft in Datadog"
 ---
 
+<div class="alert alert-tip">If you did not create an action, you cannot delete it or edit it directly. Instead, select the <b>Clone</b> {{< img src="icons/clone-alert-blue.png" inline="true" style="width:14px;">}} icon to copy the action and make your configuration changes.</div>
+
 <div class="alert alert-info">If you did not create an action, you cannot delete it or edit it directly. Instead, select the <b>Clone</b> {{< img src="icons/clone-alert-blue.png" inline="true" style="width:14px;">}} icon to copy the action and make your configuration changes.</div>
 
 <div class="alert alert-warning">If you did not create an action, you cannot delete it or edit it directly. Instead, select the <b>Clone</b> {{< img src="icons/clone-alert-blue.png" inline="true" style="width:14px;">}} icon to copy the action and make your configuration changes.</div>

@@ -18,11 +18,23 @@
 
 .alert-info{
     background-color: none;
+    padding-top: 32px;
   }
 
 .alert-info::before {
     background-color: #006bc2;
   }
+
+  .alert-info::after {
+    content: 'NOTE';
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    color: #004A8C;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
   
   .alert-warning {
     background-color: none;
@@ -37,7 +49,7 @@
     content: 'WARNING';
     position: absolute;
     top: 8px;
-    left: 20px;
+    left: 16px;
     color: #7F4205;
     font-size: 12px;
     font-weight: 600;
@@ -56,8 +68,27 @@
     content: 'CAUTION';
     position: absolute;
     top: 8px;
-    left: 20px;
+    left: 16px;
     color: #9B3908;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .alert-tip {
+    background-color: none;
+    padding-top: 32px;
+  }
+
+  .alert-tip::before {
+    background-color: #9364cd;
+  }
+
+  .alert-tip::after {
+    content: 'TIP';
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    color: #4A2C6A;
     font-size: 12px;
     font-weight: 600;
   }
