@@ -38,7 +38,7 @@ Datadog publica nuevas versiones de la imagen de contenedor serverless-init en D
 Las imágenes se etiquetan en función del control de versiones semántico, y cada nueva versión recibe tres etiquetas (tags):
 
 * `1`, `1-alpine`: utilízalas para hacer un seguimiento de las últimas versiones secundarias, sin cambios importantes.
-* `1.x.x`, `1.x.x-alpine`: utilízalas para fijar una versión precisa de la biblioteca.
+* `1.x.x`, `1.x.x-alpine`: utilízalas para fijar una versión precisa de la librería.
 * `latest`, `latest-alpine`: utilízalas para hacer un seguimiento de la última versión, que puede incluir cambios importantes.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}

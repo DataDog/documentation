@@ -73,6 +73,8 @@ There are two types of retention filters:
 | **What is indexed** | Only spans targeted by the query | All spans belonging to traces that contain spans matching the query |
 | **Where it is queryable** | Span Explorer | Span Explorer and Trace Queries |
 
+**Note**: Indirectly indexed spans retained by trace-level retention filters (that is, spans that don't match the query directly but belong to traces that do) are not evaluated by [trace analytics monitors][19].
+
 ### Default retention filters
 
 The following retention filters are enabled by default: 
@@ -189,3 +191,4 @@ Spans indexed by the intelligent retention filter are **excluded** from APM trac
 [16]: /security/application_security/
 [17]: /dynamic_instrumentation/
 [18]: https://app.datadoghq.com/apm/traces/retention-filters
+[19]: /monitors/types/apm/?tab=traceanalytics

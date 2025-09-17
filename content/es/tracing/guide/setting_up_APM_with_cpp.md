@@ -33,7 +33,7 @@ sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-Descarga e instala la biblioteca `dd-trace-cpp` con:
+Descarga e instala la librería `dd-trace-cpp` con:
 
 ```bash
 wget https://github.com/DataDog/dd-trace-cpp/archive/v1.0.0.tar.gz -O dd-trace-cpp.tar.gz
@@ -48,7 +48,7 @@ mkdir dd-trace-cpp
 tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 ```
 
-Por último, crea e instala la biblioteca:
+Por último, crea e instala la librería:
 
 ```bash
 cd dd-trace-cpp

@@ -33,7 +33,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
 | Name | Description | Default Role |
 | :---- | :---- | :---- |
-| Status Pages Settings Read (`status_pages_settings_read`) | View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Private Status Pages. | Datadog Read Only Role |
+| Status Pages Settings Read (`status_pages_settings_read`) | View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages. | Datadog Read Only Role |
 | Status Pages Settings Write (`status_pages_settings_write`) | Create and launch new Status Pages, and configure Status Pages settings. | Datadog Admin Role |
 | Status Pages Incident Write (`status_pages_incident_write`) | Publish and update Incidents. | Datadog Admin Role |
 
@@ -44,7 +44,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated users within your Datadog organization can view |
+   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Company logo or Favicon** *(optional)* | Upload a logo or favicon to personalize the appearance of your status page |
@@ -77,7 +77,7 @@ After you save your status page settings, click **Launch Status Page** to make t
 
 If you selected:
 - **Public**, the page is immediately accessible to all visitors.  
-- **Private**, access is limited to authenticated Datadog users in your organization.
+- **Internal**, access is limited to authenticated Datadog users in your organization.
 
 ## Add an incident
 

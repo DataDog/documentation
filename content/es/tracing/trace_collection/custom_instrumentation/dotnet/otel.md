@@ -24,15 +24,15 @@ type: multi-code-lang
 
 Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:
 
-1. Añade la instrumentación manual de OpenTelemetry deseada a tu código .NET siguiendo la [documentación de la Instrumentación manual de OpenTelemetry .NET][5]. **Nota**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la biblioteca de rastreo de Datadog en su lugar.
+1. Añade la instrumentación manual de OpenTelemetry deseada a tu código .NET siguiendo la [documentación de la Instrumentación manual de OpenTelemetry .NET][5]. **Nota**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la librería de rastreo de Datadog en su lugar.
 
-2. Instala la biblioteca de rastreo Datadog .NET y activa el rastreador para tu [servicio .NET Framework][10] o tu [servicio .NET Core (y .NET v5 o posterior)][11]. **Vista previa**: también puedes hacerlo con la [instrumentación APM de un solo paso][13].
+2. Instala la librería de rastreo Datadog .NET y activa el rastreador para tu [servicio .NET Framework][10] o tu [servicio .NET Core (y .NET v5 o posterior)][11]. **Vista previa**: también puedes hacerlo con la [instrumentación APM de un solo paso][13].
 
 3. Establece la variable de entorno `DD_TRACE_OTEL_ENABLED` en `true`.
 
 4. Ejecuta tu aplicación.
 
-Datadog combina estos tramos de OpenTelemetry con otros tramos de Datadog APM en una traza única de tu aplicación. También es compatible con [la biblioteca de instrumentación de OpenTelemetry][8].
+Datadog combina estos tramos de OpenTelemetry con otros tramos de Datadog APM en una traza única de tu aplicación. También es compatible con [la librería de instrumentación de OpenTelemetry][8].
 
 ## Creación de tramos personalizados
 
