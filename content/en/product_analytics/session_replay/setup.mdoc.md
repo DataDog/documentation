@@ -20,19 +20,19 @@ Session Replay expands visibility into your  applications by visually replaying 
 {% /if %}
 
 {% if equals($platform, "android") %}
-  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+  {% partial file="product_analytics/setup/android_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "ios") %}
-  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "kotlin_multiplatform") %}
-  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "react_native") %}
-  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "flutter") %}

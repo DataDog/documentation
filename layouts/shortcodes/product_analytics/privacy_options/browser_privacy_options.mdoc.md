@@ -10,7 +10,7 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 
 {% alert type="warning" %}
 
-`>defaultPrivacyLevel` and `mask-user-input` are available in the SDK v3.6.0+.
+`defaultPrivacyLevel` and `mask-user-input` are available in the SDK v3.6.0+.
 
 {% /alert %}
 

@@ -1,11 +1,11 @@
- ## Overview
+## Overview
 
 Error Tracking processes errors collected from the browser by the Browser SDK. 
 Whenever a source, custom, report, or console error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors to be found in the Error Tracking Explorer.
  
 ## Setup
 
-{% partial file="sdks/setup/browser-setup.mdoc.md" /%}
+{% partial file="sdks/setup/browser_setup.mdoc.md" /%}
 
 ### Link errors with your source code (optional)
 

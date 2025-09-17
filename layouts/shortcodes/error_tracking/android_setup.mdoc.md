@@ -12,7 +12,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-{% partial file="sdks/setup/android-setup.mdoc.md" /%}
+{% partial file="sdks/setup/android_setup.mdoc.md" /%}
 
 ### Add NDK crash reporting
 
@@ -61,7 +61,7 @@ For any Android version, you can override the default setting for reporting non-
 
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated for each build run, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-Depending on the [Android Gradle plugin][1] version, the matching of stack traces and mapping files relies on different fields:
+Depending on the [Android Gradle plugin][12] version, the matching of stack traces and mapping files relies on different fields:
 
 - Versions 1.13.0 and higher use the `build_id` field (you must use Datadog Android SDK 2.8.0 or later to support this field)
 - Older versions use a combination of the `service`, `version`, and `variant` fields
@@ -73,7 +73,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 {% tabs %}
 {% tab label="US" %}
 
-1. Add the [Android Gradle Plugin][1] to your Gradle project using the following code snippet.
+1. Add the [Android Gradle Plugin][12] to your Gradle project using the following code snippet.
 
    ```kotlin
    // In your app's build.gradle script
@@ -82,7 +82,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    }
    ```
 
-2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
+2. [Create a dedicated Datadog API key][13] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Optionally, configure the plugin to upload files to the EU region by configuring the plugin in your `build.gradle` script:
    
    ```kotlin
@@ -105,11 +105,10 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
 
-[1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+
 {% /tab %}
 {% tab label="EU" %}
-1. Add the [Android Gradle Plugin][1] to your Gradle project using the following code snippet.
+1. Add the [Android Gradle Plugin][12] to your Gradle project using the following code snippet.
 
    ```kotlin
    // In your app's build.gradle script
@@ -118,7 +117,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    }
    ```
 
-2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
+2. [Create a dedicated Datadog API key][13] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Configure the plugin to use the EU region by adding the following snippet in your app's `build.gradle` script file:
 
    ```kotlin
@@ -139,10 +138,6 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    ```
 
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
-
-
-[1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[2]: https://app.datadoghq.com/organization-settings/api-keys
 {% /tab %}
 {% /tabs %}
 
@@ -223,7 +218,7 @@ When looking at RUM Crash Reporting behaviors for Android, consider the followin
 
 - The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
 - RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (typically an Activity or Fragment in an `onResume` state), or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][10] in your `RumConfiguration` builder.
-- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate is not 100%][11], some will not be reported.
+- Only crashes that occur in sampled sessions are kept, meaning if a session sampling rate is not 100%, some will not be reported.
 
 ## Test your implementation
 
@@ -243,13 +238,10 @@ To test your implementation:
 3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][1].
 
 [1]: https://app.datadoghq.com/rum/error-tracking
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#setup
-[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
 [6]: https://developer.android.com/topic/performance/vitals/anr
 [7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [8]: https://developer.android.com/tools/releases/platforms#11
 [9]: https://developer.android.com/tools/releases/platforms#10
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#track-background-events
-[11]: https://app.datadoghq.com/source-code/setup/rum
+[10]: /real_user_monitoring/configuration/advanced_configuration#track-background-events
+[12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[13]: https://app.datadoghq.com/organization-settings/api-keys

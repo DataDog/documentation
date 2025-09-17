@@ -28,25 +28,25 @@ further_reading:
 {% /if %}
 
 {% if equals($platform, "ios") %}
-  {% partial file="error_tracking/ios-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "flutter") %}
-  {% partial file="error_tracking/flutter-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "roku") %}
-  {% partial file="error_tracking/roku-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "react_native") %}
-  {% partial file="error_tracking/react-native-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "kotlin_multiplatform") %}
-  {% partial file="error_tracking/kotlin-multiplatform-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "unity") %}
-  {% partial file="error_tracking/unity-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}

@@ -1,14 +1,8 @@
 ### Create the application in the UI
-Navigate to [Digital Experience > Add an Application][11].
-Select Javascript as the application type and enter an application name to generate a unique Datadog application ID and client token.
+Navigate to [Digital Experience > Add an Application][1].
+Select Android as the application type and enter an application name to generate a unique Datadog application ID and client token.
 
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
-2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-
-[1]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/android/data_collected/
-
-For more information about setting up a client token, see the [Client Token documentation][6].
+For more information about setting up a client token, see the [Client Token documentation][2].
 
 ### Declare the Android SDK as a dependency
 
@@ -78,12 +72,12 @@ public class SampleApplication extends Application {
 
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
-The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][9].
+The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][13].
 
 {% collapse-content title="Sample the sessions" level="h4" %}
 
 
-To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][8]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][12]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -142,13 +136,13 @@ To enable the Android SDK to start sending data:
 {% /tab %}
 {% /tabs %}
 
-See [`ViewTrackingStrategy`][10] to enable automatic tracking of all your views (activities, fragments, and more).
+See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (activities, fragments, and more).
 
 ### Initialize the interceptor to track network events
 
 To initialize an interceptor for tracking network events:
 
-1. For distributed tracing, [add and enable the Trace feature][11].
+1. For distributed tracing, [add and enable the Trace feature][6].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy
@@ -157,7 +151,7 @@ To initialize an interceptor for tracking network events:
     }
     ```
 
-3. To track your OkHttp requests as resources, add the provided [interceptor][12]:
+3. To track your OkHttp requests as resources, add the provided [interceptor][7]:
 
    {% tabs %}
    {% tab label="Kotlin" %}
@@ -190,9 +184,9 @@ To initialize an interceptor for tracking network events:
    {% /tabs %}
 
 4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
-   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
+   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][9].
       
-5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][15]:
+5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][10]:
 
    {% tabs %}
    {% tab label="Kotlin" %}
@@ -215,20 +209,18 @@ To initialize an interceptor for tracking network events:
 - To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
 - If you use multiple interceptors, add `DatadogInterceptor` first.
 
-You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][14] for third-party providers and network requests.
+You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][8] for third-party providers and network requests.
 
-[1]:/real_user_monitoring/
-[2]: /error_tracking/
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /account_management/api-app-keys/#client-tokens
 [3]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [4]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[5]: /account_management/api-app-keys/#api-keys
-[6]: /account_management/api-app-keys/#client-tokens
-[7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
-[9]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
-[11]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
-[12]: https://square.github.io/okhttp/features/interceptors/
-[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#custom-views
-[14]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
-[15]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
+[6]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
+[7]: https://square.github.io/okhttp/features/interceptors/
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#custom-views
+[10]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
+[11]: /getting_started/tagging/using_tags/#rum--session-replay
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[13]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file

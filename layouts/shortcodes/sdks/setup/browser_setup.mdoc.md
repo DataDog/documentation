@@ -1,6 +1,6 @@
 ### Create the application in the UI
 
-1. Navigate to [**Digital Experience** > **Add an Application**][11].
+1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `Javascript` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 
 ### Install the Browser SDK
@@ -12,7 +12,7 @@ Choose the installation method for the Browser SDK.
 
 Installing through npm (Node Package Manager) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
-Add [`@datadog/browser-rum`][4] to your `package.json` file, example if you use npm cli:
+Add [`@datadog/browser-rum`][2] to your `package.json` file, example if you use npm cli:
 
 ```shell
 npm install @sentry/browser --save
@@ -119,11 +119,11 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {% /tab %}
 {% /tabs %}
 
-The Browser SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][6] to the SDK configuration, see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
+The Browser SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][3] to the SDK configuration, see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
 {% collapse-content title="Sample the sessions" level="h4" %}
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Browser SDK][7]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Browser SDK. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to only keep 50% of sessions use:
 
@@ -167,7 +167,7 @@ For example, to only keep 50% of sessions use:
 
 {% collapse-content title="Set tracking consent (GDPR compliance)e" level="h4" %}
 
-To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][18].
+To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][5].
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
@@ -237,19 +237,20 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ### Add Readable Stack Traces to Errors (optional but recommended)
 
-Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][8].
+Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][6].
 
 ### Visualize your data
 
 After your deployment is live, Datadog collects events from your users' browsers.
 
-Visualize the [data collected][9] in [dashboards][10] or create a search query in Error Tracking.
+Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
 
 Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
 
-[4]: https://www.npmjs.com/package/@datadog/browser-rum
-[6]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[7]: /real_user_monitoring/browser/data_collected/
-[8]: /real_user_monitoring/guide/upload-javascript-source-maps
-[9]: /real_user_monitoring/browser/data_collected/
-[10]: /real_user_monitoring/platform/dashboards/errors/
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: https://www.npmjs.com/package/@datadog/browser-rum
+[3]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[5]: /data_security/real_user_monitoring/
+[6]: /real_user_monitoring/guide/upload-javascript-source-maps
+[7]: /real_user_monitoring/configuration/data_collected/
+[8]: /real_user_monitoring/platform/dashboards/errors/

@@ -151,7 +151,7 @@ further_reading:
       aria-selected="false"
       tabIndex="0"
     >Unity</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
-  <div class="cdoc__toggleable" data-if="342">
+  <div class="cdoc__toggleable" data-if="262">
     <h2 id="overview">Overview</h2>
     <p>
       Error Tracking processes errors collected from the browser by the Browser
@@ -166,8 +166,11 @@ further_reading:
     </h3>
     <ol>
       <li>
-        Navigate to [<strong>Digital Experience</strong> &gt;
-        <strong>Add an Application</strong>][11].
+        Navigate to
+        <a href="https://app.datadoghq.com/rum/application/create"
+          ><strong>Digital Experience</strong> &gt;
+          <strong>Add an Application</strong></a
+        >.
       </li>
       <li>
         Select <code>Javascript</code> as the application type and enter an
@@ -446,10 +449,8 @@ further_reading:
       <div class="collapsible-content">
         <p>
           To control the data your application sends to Datadog RUM, you can
-          specify a sampling rate for RUM sessions while
-          <a href="/real_user_monitoring/browser/data_collected/"
-            >initializing the RUM Browser SDK</a
-          >. The rate is a percentage between 0 and 100. By default,
+          specify a sampling rate for RUM sessions while initializing the
+          Browser SDK. The rate is a percentage between 0 and 100. By default,
           <code>sessionSamplingRate</code> is set to 100 (keep all sessions).
         </p>
         <p>For example, to only keep 50% of sessions use:</p>
@@ -577,7 +578,8 @@ further_reading:
         <p>
           To be compliant with GDPR, CCPA, and similar regulations, the Browser
           SDK lets you provide the tracking consent value at initialization. For
-          more information on tracking consent, see [Data Security][18].
+          more information on tracking consent, see
+          <a href="/data_security/real_user_monitoring/">Data Security</a>.
         </p>
         <p>
           The <code>trackingConsent</code> initialization parameter can be one
@@ -750,7 +752,9 @@ further_reading:
     </p>
     <p>
       Visualize the
-      <a href="/real_user_monitoring/browser/data_collected/">data collected</a>
+      <a href="/real_user_monitoring/configuration/data_collected/"
+        >data collected</a
+      >
       in
       <a href="/real_user_monitoring/platform/dashboards/errors/">dashboards</a>
       or create a search query in Error Tracking.
@@ -781,7 +785,7 @@ further_reading:
     </p>
     <p>For more information, see the [Datadog Source Code Integration][27].</p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="343">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="263">
     <h2 id="overview">Overview</h2>
     <p>Error Tracking processes errors collected from the Android SDK.</p>
     <p>
@@ -795,7 +799,7 @@ further_reading:
     </ul>
     <p>
       Your crash reports appear in
-      <a href="https://github.com/DataDog/dd-sdk-android-gradle-plugin"
+      <a href="https://app.datadoghq.com/rum/error-tracking"
         ><strong>Error Tracking</strong></a
       >.
     </p>
@@ -805,25 +809,11 @@ further_reading:
     </h3>
     <p>
       Navigate to
-      <a href="/tracing/trace_collection/dd_libraries/android/?tab=kotlin"
+      <a href="https://app.datadoghq.com/rum/application/create"
         >Digital Experience &gt; Add an Application</a
-      >. Select Javascript as the application type and enter an application name
-      to generate a unique Datadog application ID and client token.
+      >. Select Android as the application type and enter an application name to
+      generate a unique Datadog application ID and client token.
     </p>
-    <ol>
-      <li>
-        Navigate to
-        <a href="https://app.datadoghq.com/rum/application/create"
-          ><strong>Digital Experience</strong> &gt;
-          <strong>Add an Application</strong></a
-        >.
-      </li>
-      <li>
-        Select <code>android</code> as the application type and enter an
-        application name to generate a unique Datadog application ID and client
-        token.
-      </li>
-    </ol>
     <p>
       For more information about setting up a client token, see the
       <a href="/account_management/api-app-keys/#client-tokens"
@@ -835,7 +825,8 @@ further_reading:
     </h3>
     <p>
       Declare
-      <a href="/real_user_monitoring/android/data_collected/"
+      <a
+        href="https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum"
         >dd-sdk-android-rum</a
       >
       and the
@@ -887,7 +878,7 @@ further_reading:
       version number. In the examples below,
       <code>APP_VARIANT_NAME</code> specifies the variant of the application
       that generates data. For more information, see
-      <a href="/getting_started/tagging/using_tags/#rum--session-replay"
+      <a href="https://square.github.io/okhttp/features/interceptors/"
         >Using Tags</a
       >.
     </p>
@@ -895,7 +886,7 @@ further_reading:
       During initialization, you can also set the sample rate (RUM sessions) and
       set the tracking consent for GDPR compliance, as described below. See
       <a
-        href="/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters"
+        href="/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests"
         >other configuration options</a
       >
       to initialize the library.
@@ -1849,13 +1840,7 @@ further_reading:
       </div>
     </div>
     <h4 id="list-uploaded-mapping-files">List uploaded mapping files</h4>
-    <p>
-      See the
-      <a href="https://app.datadoghq.com/source-code/setup/rum"
-        >RUM Debug Symbols</a
-      >
-      page to view all uploaded symbols.
-    </p>
+    <p>See the [RUM Debug Symbols][11] page to view all uploaded symbols.</p>
     <h3 id="plugin-configuration-options">Plugin configuration options</h3>
     <p>
       There are several plugin properties that can be configured through the
@@ -2043,16 +2028,14 @@ further_reading:
         reported for collection. To mitigate this, use the
         <code>trackBackgroundEvents()</code>
         <a
-          href="/real_user_monitoring/mobile_and_tv_monitoring/android/setup/#track-background-events"
+          href="/real_user_monitoring/configuration/advanced_configuration#track-background-events"
           >method</a
         >
         in your <code>RumConfiguration</code> builder.
       </li>
       <li>
         Only crashes that occur in sampled sessions are kept, meaning if a
-        <a href="https://app.datadoghq.com/source-code/setup/rum"
-          >session sampling rate is not 100%</a
-        >, some will not be reported.
+        session sampling rate is not 100%, some will not be reported.
       </li>
     </ul>
     <h2 id="test-your-implementation">Test your implementation</h2>
@@ -2090,34 +2073,34 @@ further_reading:
         <p>
           After the crash happens, restart your application and wait for the
           Android SDK to upload the crash report in
-          <a href="https://github.com/DataDog/dd-sdk-android-gradle-plugin"
+          <a href="https://app.datadoghq.com/rum/error-tracking"
             ><strong>Error Tracking</strong></a
           >.
         </p>
       </li>
     </ol>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="344">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="264">
     <p>Coming soon!</p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="345">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="265">
     <p>Coming soon!</p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="346">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="266">
     <p>Coming soon!</p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="347">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="267">
     <p>Coming soon!</p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="348">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="268">
     <p>Coming soon!</p>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="349">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="269">
     <p>Coming soon!</p>
   </div>
 <h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"><span class="w-100 d-flex justify-content-between "><span class="text">datadog-ci Source code</span><span class="badge badge-white pe-2 border-0">SOURCE CODE</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/guide/upload-javascript-source-maps"><span class="w-100 d-flex justify-content-between "><span class="text">Upload JavaScript source maps</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/error_tracking/explorer"><span class="w-100 d-flex justify-content-between "><span class="text">Learn about the Error Tracking Explorer</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"342":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"342"},"343":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"android"},"v":false,"r":"343"},"344":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"ios"},"v":false,"r":"344"},"345":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"flutter"},"v":false,"r":"345"},"346":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"roku"},"v":false,"r":"346"},"347":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"react_native"},"v":false,"r":"347"},"348":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"348"},"349":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"unity"},"v":false,"r":"349"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"rum_sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"platform":"browser"},"optionGroupsById":{"rum_sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"},{"id":"roku","label":"Roku"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"262":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"262"},"263":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"android"},"v":false,"r":"263"},"264":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"ios"},"v":false,"r":"264"},"265":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"flutter"},"v":false,"r":"265"},"266":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"roku"},"v":false,"r":"266"},"267":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"react_native"},"v":false,"r":"267"},"268":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"268"},"269":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"unity"},"v":false,"r":"269"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"rum_sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"platform":"browser"},"optionGroupsById":{"rum_sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"},{"id":"roku","label":"Roku"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" style="display:none;" alt="" >}}
 {{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" style="display:none;" alt="" >}}

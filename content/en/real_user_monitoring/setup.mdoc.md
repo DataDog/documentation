@@ -30,33 +30,33 @@ This guide walks you through setting up Real User Monitoring (RUM) for your appl
 ## Setup
 
 {% if equals($platform, "browser") %}
-  {% partial file="sdks/setup/browser-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/browser_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "android") %}
-  {% partial file="sdks/setup/android-setup.mdoc.md" /%}
+  {% partial file="sdks/setup/android_setup.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "ios") %}
-  {% partial file="sdks/setup/ios-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "flutter") %}
-  {% partial file="sdks/setup/flutter-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "roku") %}
-  {% partial file="sdks/setup/roku-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "react_native") %}
-  {% partial file="sdks/setup/react-native-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "kotlin_multiplatform") %}
-  {% partial file="sdks/setup/kotlin-multiplatform-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}
 
 {% if equals($platform, "unity") %}
-  {% partial file="sdks/setup/unity-setup.mdoc.md" /%}
+  Coming soon!
 {% /if %}

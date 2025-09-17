@@ -4,17 +4,17 @@ The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a
 
 Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
 
-The Session Replay recorder supports all browsers supported by the RUM Browser SDK. For more information, see the [Browser Support table][3].
+The Session Replay recorder supports all browsers supported by the RUM Browser SDK. For more information, see the [Browser Support table][1].
 
 To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 
 ## Setup
 
-Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. For setup in mobile environments, see [Mobile Session Replay][5].
-
 {% alert type="info" %}
 Session Replay is supported by SDK version 3.6.0 or later.
 {% /alert %}
+
+{% partial file="sdks/setup/browser_setup.mdoc.md" /%}
 
 ## Usage
 
@@ -49,7 +49,7 @@ When using a version of the RUM Browser SDK older than v5.0.0, Session Replay re
 
 ## Disable Session Replay
 
-To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][2].
 
 {% alert type="warning" %}
 If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.
@@ -61,16 +61,12 @@ You can see who has watched a given session replay by clicking the **watched** c
 
 {% img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Check who has watched a session's recording" style="width:100%;" /%}
 
-The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][8] or side panel. Included playbacks also generate an [Audit Trail][7] event. Thumbnail previews are not included in history.
+The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][4] or side panel. Included playbacks also generate an [Audit Trail][3] event. Thumbnail previews are not included in history.
 
-To view your own playback history, check out the [My Watch History][9] playlist.
+To view your own playback history, check out the [My Watch History][5] playlist.
 
-[1]: https://github.com/DataDog/browser-sdk
-[2]: https://www.rrweb.io/
-[3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /real_user_monitoring/browser/
-[5]: /real_user_monitoring/session_replay/mobile/
-[6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[7]: https://docs.datadoghq.com/account_management/audit_trail/
-[8]: https://docs.datadoghq.com/notebooks/
-[9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
+[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
+[2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[3]: https://docs.datadoghq.com/account_management/audit_trail/
+[4]: https://docs.datadoghq.com/notebooks/
+[5]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
