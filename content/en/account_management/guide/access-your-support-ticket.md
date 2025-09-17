@@ -1,5 +1,6 @@
 ---
 title: Access Your Support Ticket
+description: Learn how to create new support tickets and access your existing Datadog support tickets through the Zendesk portal.
 aliases:
   - /developers/faq/access-your-support-ticket
   - /account_management/faq/access-your-support-ticket
