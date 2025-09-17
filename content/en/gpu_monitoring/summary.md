@@ -85,7 +85,7 @@ To maximize value on your GPU infrastructure spend, it's important to keep your 
 
 {{< img src="gpu_monitoring/inefficient_pods.png" alt="Table of inefficient pods sorted by SM Engine Activity level." style="width:100%;" >}}
 
-You can click into any inefficient pod to view more details about the pod and its related GPU devices within the Kubernetes Explorer page (navigate to the GPU tab within a particular pod). If you notice the GPU core utilization across most of this pod's associated GPU devices is low, this means the GPU devices are idle; either due to bursty workloads or due to IO network etc. To remediate, you can contact the pod owner to consolidate to a smaller number of devices, use a smaller GPU. Or you can optimize your code to continue using the large GPU for better throughput.
+You can click into any inefficient pod to view more details about the pod and its related GPU devices within the Kubernetes Explorer page (navigate to the GPU tab within a particular pod). For example, you may notice that the SM activity timeseries graph dips lower than 50%. You can then check whether your devices' `Memory Utilization` and `Graphics Activity` values have spiked during that particular timeframe; if so, that is the reason for low SM Engine Activity (aka idle devices). To remediate, you can contact the pod owner to consolidate to a smaller number of devices, use a smaller GPU. Or you can optimize your code to continue using the large GPU for better throughput.
 
 Additionally, given pods can share hosts, you can identify noisy neighbors. For example, another pod can be using all of a given host's CPU so your pod is starved.
 
