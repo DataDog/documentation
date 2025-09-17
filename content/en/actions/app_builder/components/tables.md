@@ -1,5 +1,6 @@
 ---
 title: Tables
+description: Advanced table component features including client-side filtering, server-side filtering, loading indicators, and dynamic values.
 disable_toc: false
 aliases:
 - /service_management/app_builder/tables/

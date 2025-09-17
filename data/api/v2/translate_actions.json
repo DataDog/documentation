@@ -911,6 +911,20 @@
     "request_description": "Incident Attachment Payload.",
     "request_schema_description": "The update request for an incident's attachments."
   },
+  "ListIncidentImpacts": {
+    "description": "Get all impacts for an incident.",
+    "summary": "List an incident's impacts"
+  },
+  "CreateIncidentImpact": {
+    "description": "Create an impact for an incident.",
+    "summary": "Create an incident impact",
+    "request_description": "Incident impact payload.",
+    "request_schema_description": "Create request for an incident impact."
+  },
+  "DeleteIncidentImpact": {
+    "description": "Delete an incident impact.",
+    "summary": "Delete an incident impact"
+  },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
     "summary": "Get a list of an incident's integration metadata"

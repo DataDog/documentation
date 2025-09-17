@@ -1,5 +1,6 @@
 ---
 title: Datastore
+description: Scalable, structured data storage solution that integrates with App Builder and Workflow Automation for persistent data without external databases.
 disable_toc: false
 aliases:
 - service_management/workflows/datastore/
