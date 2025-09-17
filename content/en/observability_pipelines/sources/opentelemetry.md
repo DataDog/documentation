@@ -11,7 +11,7 @@ Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from yo
 
 Common scenarios when you might use this source:
 
-- You are using OpenTelemetry as your standard method for collecting and routing data, and you want to normalize that data, before routing them to different destinations.
+- You are using [OpenTelemetry][1] as your standard method for collecting and routing data, and you want to normalize that data, before routing them to different destinations.
 - You are collecting data from multiple sources and want to aggregate them in a central place for consistent processing.
     - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines [sources][2], you can aggregate all of your data in Observability Pipelines for processing.
 
@@ -21,7 +21,7 @@ If your forwarders are globally configured to enable SSL, you need the appropria
 
 ## Set up the source in the pipeline UI
 
-Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][1] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][3] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
@@ -73,5 +73,6 @@ Based on these example configurations, these are values you enter for the follow
 - HTTP listener address: `worker:4317`
 - gRPC listener address: `worker:4318`
 
-[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[1]: https://opentelemetry.io/docs/collector/
 [2]: /observability_pipelines/sources/
+[3]: /observability_pipelines/advanced_configurations/#bootstrap-options
