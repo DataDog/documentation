@@ -235,7 +235,7 @@ All Session Replay SDK versions can be found in [Pub][29].
 
 To set up Datadog Session Replay for Flutter:
 
-1. Make sure yout've [set up and initialized the Datadog Flutter Plugin][28].
+1. Make sure you have [set up and initialized the Datadog Flutter Plugin][28].
 
 2. Add the package to your `pubspec.yaml`:
 
@@ -543,7 +543,7 @@ config.verbosity = SdkVerbosity.DEBUG;
 
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
-Set the SDKs verbosity to `CoreLoggerLevel.debub` before you initialize the SDK:
+Set the SDKs verbosity to `CoreLoggerLevel.debug` before you initialize the SDK:
 
 ```dart
 DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
