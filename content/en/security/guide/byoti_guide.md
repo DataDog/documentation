@@ -46,7 +46,7 @@ Datadog supports creating reference tables through a manual upload, or by period
 <li>It can take 10 to 30 minutes to start enriching traces after creating a table.</li>
 <li>If a primary key is duplicated, it is skipped and an error message about the key is displayed.</li>
 <li>Signals are not enriched. Enrichment only applies to traces.</li>
-<li>Datadog does not enrich local/private IPs.</li>
+<li>Datadog does not enrich local or private IPs.</li>
 <li>Only new traces (after the reference table is enabled or updated) are enriched. Old traces are not retroactively enriched.</li>
 <li>Enrichment happens for traces that match the IPs in the reference table.</li>
 <li>Manual file uploads don't auto-update. Updates occur only from cloud storage.</li>
