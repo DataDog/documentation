@@ -90,7 +90,7 @@ Cloudflare permite a los clientes enviar logs directamente a Datadog mediante Cl
 Si instalas el pipeline de la integración Cloudflare, se reasignarán automáticamente determinados atributos. Para ver los atributos reasignados:
 
 1. Navega hasta [Pipelines de logs](https://app.datadoghq.com/logs/pipelines).
-1. Haz clic en **Browse Pipeline Library** (Consultar la biblioteca del pipeline) en la esquina superior derecha.
+1. Haz clic en **Browse Pipeline Library** (Consultar la librería del pipeline) en la esquina superior derecha.
 1. Introduce `Cloudflare` en la barra de búsqueda.
 1. Haz clic en **Cloudflare** para ver la lista de reasignadores y otros procesadores instalados.
 

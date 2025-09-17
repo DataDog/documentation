@@ -34,6 +34,9 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 
 If you're new to IDP, start with the [Getting Started guide][5], which walks through setup and basic usage.
 
+{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
+{{< /callout >}}
+
 ## Common use cases
 
 {{< whatsnext desc=" " >}}

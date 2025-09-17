@@ -91,7 +91,7 @@ Ejemplo:
   "apiKey": "<DATADOG_API_KEY>",
   "appKey": "<DATADOG_APPLICATION_KEY>",
   "batchTimeout": 180000,
-  "datadogSite": "datadoghq.com", // You can use another Datadog site in https://docs.datadoghq.com/getting_started/site/. By default, requests are sent to Datadog US1. 
+  "datadogSite": "datadoghq.com", // You can use another Datadog site in https://docs.datadoghq.com/getting_started/site/. By default, requests are sent to Datadog US1.
   "defaultTestOverrides": {
     "allowInsecureCertificates": true,
     "basicAuth": {"username": "test", "password": "test"},
@@ -173,7 +173,7 @@ Puedes configurar un proxy que se utilizará para las conexiones salientes a Dat
 
 **Nota**: Esta es la única excepción en la que el archivo de configuración global tiene prioridad sobre la variable de entorno. No existe una opción para configurar esto a través de la CLI.
 
-Dado que la biblioteca [`proxy-agent`][2] se utiliza para configurar el proxy, los protocolos compatibles incluyen `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` y `pac+https`. La clave `proxy` del archivo de configuración global se pasa a una nueva instancia `proxy-agent`, lo que significa que se admite la misma configuración para la biblioteca.
+Dado que la librería [`proxy-agent`][2] se utiliza para configurar el proxy, los protocolos compatibles incluyen `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` y `pac+https`. La clave `proxy` del archivo de configuración global se pasa a una nueva instancia `proxy-agent`, lo que significa que se admite la misma configuración para la librería.
 
 Para utilizar un proxy, primero tienes que configurar el certificado CA para que datadog-ci confíe en tu proxy. Puedes hacerlo configurando la variable de entorno `NODE_EXTRA_CA_CERTS` en la ruta de tu certificado CA. De lo contrario, podría producirse un error `unable to verify the first certificate`.
 
@@ -201,7 +201,7 @@ Ejemplo:
 }
 ```
 
-El formato utilizado para la variable de entorno `HTTPS_PROXY` es `<protocol>://<username>:<password>@<host>:<port>`, tal y como se describe en la biblioteca [proxy-from-env][13], que la [biblioteca `proxy-agent`][2] utiliza para analizar las variables de entorno.
+El formato utilizado para la variable de entorno `HTTPS_PROXY` es `<protocol>://<username>:<password>@<host>:<port>`, tal y como se describe en la librería [proxy-from-env][13], que la [biblioteca `proxy-agent`][2] utiliza para analizar las variables de entorno.
 Se utiliza la variable `HTTPS_PROXY`, en lugar de `HTTP_PROXY`, porque la API Datadog utiliza el protocolo HTTPS.
 
 Ejemplo:
@@ -335,8 +335,8 @@ Anulaciones de tests Synthetic aplicadas a todos los tests.
 **Opciones de configuración**
 
 * Configuración global: consultar [anulaciones de tests](#test-overrides)
-* Variable de entorno: todas las variables siguen el patrón `DATADOG_SYNTHETICS_OVERRIDE_...` 
-* Parámetro de CLI: todos los parámetros de CLI utilizan el patrón `--override option=value` 
+* Variable de entorno: todas las variables siguen el patrón `DATADOG_SYNTHETICS_OVERRIDE_...`
+* Parámetro de CLI: todos los parámetros de CLI utilizan el patrón `--override option=value`
 
 #### `failOnCriticalErrors`
 
@@ -400,7 +400,7 @@ Anula la versión de la aplicación para todos los tests de aplicaciones móvile
 
 #### `proxy`
 
-Proxy que se va a utilizar para las conexiones salientes a Datadog. Las claves `host` y `port` son argumentos obligatorios, la clave `protocol` por defecto es `http`. Los valores compatibles para la clave `protocol` son `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` y `pac+https`. La biblioteca utilizada para configurar el proxy es la biblioteca [proxy-agent][2].
+Proxy que se va a utilizar para las conexiones salientes a Datadog. Las claves `host` y `port` son argumentos obligatorios, la clave `protocol` por defecto es `http`. Los valores compatibles para la clave `protocol` son `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` y `pac+https`. La librería utilizada para configurar el proxy es la librería [proxy-agent][2].
 
 **Opciones de configuración**
 
@@ -903,7 +903,7 @@ Ruta a tu aplicación móvil (`.apk` o `.ipa`).
 
 #### `proxy`
 
-Proxy que se va a utilizar para las conexiones salientes a Datadog. Las claves `host` y `port` son argumentos obligatorios, la clave `protocol` por defecto es `http`. Los valores compatibles para la clave `protocol` son `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` y `pac+https`. La biblioteca utilizada para configurar el proxy es la biblioteca [proxy-agent][2].
+Proxy que se va a utilizar para las conexiones salientes a Datadog. Las claves `host` y `port` son argumentos obligatorios, la clave `protocol` por defecto es `http`. Los valores compatibles para la clave `protocol` son `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` y `pac+https`. La librería utilizada para configurar el proxy es la librería [proxy-agent][2].
 
 **Opciones de configuración**
 
@@ -958,7 +958,7 @@ El nombre de archivo predeterminado para el [archivo de configuración global](#
 
 ## Uso de entornos locales y de staging
 
-Puedes combinar anulaciones de variables con [entornos locales y de staging][3] para ejecutar tests dentro de tu entorno de desarrollo. Esta conexión garantiza que todas las solicitudes de tests enviadas a través de la CLI se enrutan automáticamente a través del cliente `datadog-ci`. 
+Puedes combinar anulaciones de variables con [entornos locales y de staging][3] para ejecutar tests dentro de tu entorno de desarrollo. Esta conexión garantiza que todas las solicitudes de tests enviadas a través de la CLI se enrutan automáticamente a través del cliente `datadog-ci`.
 
 Esto te permite ejecutar tests con cifrado de extremo a extremo en cada etapa del ciclo de vida de desarrollo de tu software, desde los entornos de preproducción hasta tu sistema de producción.
 
@@ -1044,7 +1044,7 @@ También puedes ver el resultado de las ejecuciones de tests directamente en tu 
     * location: 30019
       ⎋ total duration: 32.6 ms - result url: https://app.datadoghq.com/synthetics/details/2cj-h3c-39x?resultId=122140688175981634
       x GET - https://www.datadoghq.com
-        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}] 
+        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}]
   error Command failed with exit code 1.
   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```

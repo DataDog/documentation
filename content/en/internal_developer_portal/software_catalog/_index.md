@@ -41,6 +41,9 @@ Software Catalog offers multiple views to help you explore and manage your entit
 
 See the [Use Cases documentation][4] to learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
 
+{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
+{{< /callout >}}
+
 ## What appears in Software Catalog
 
 Software Catalog includes an entity when:
