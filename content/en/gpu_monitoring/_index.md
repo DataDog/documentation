@@ -15,7 +15,7 @@ GPU Monitoring is in Preview. To join the preview, click <strong>Request Access<
 {{< /callout >}} 
 
 ## Overview
-Datadog’s [GPU Monitoring][1] provides a centralized view into GPU fleet health, cost, and performance. GPU Monitoring enables teams to make better provisioning decisions, troubleshoot failed workloads and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
+Datadog’s [GPU Monitoring][1] provides a centralized view into GPU fleet health, cost, and performance. GPU Monitoring enables teams to make better provisioning decisions, troubleshoot failed workloads, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
 
 For setup instructions, see [Set up GPU Monitoring][2].
 
