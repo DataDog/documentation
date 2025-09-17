@@ -82,8 +82,8 @@ The following sources and locations are supported:
 | Apache Airflow (MWAA)       | CloudWatch     |
 | API Gateway Access Logs     | CloudWatch     |
 | API Gateway Execution Logs  | CloudWatch     |
-| AppSync Logs                | CloudWatch     |
 | Application ELB Access Logs | S3             |
+| AppSync Logs                | CloudWatch     |
 | Batch                       | CloudWatch     |
 | Classic ELB Access Logs     | S3             |
 | CloudFront Access Logs      | S3             |
