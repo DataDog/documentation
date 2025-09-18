@@ -562,7 +562,7 @@ For more details on changing your container registry, see [Changing Your Contain
 ### Using a Container Network Interface on EKS
 
 When using a CNI like Calico, the control plane nodes are not able to initiate network connections to Datadog's Admission Controller and report an "Address is not allowed" error.
-If you sant Datadog' Single Step instrumentation to work, modify Datadog's Cluster Agent with the `useHostNetwork: true` parameter.
+To use Single Step instrumentation, modify Datadog's Cluster Agent with the `useHostNetwork: true` parameter.
 
 ```
 datadog:
