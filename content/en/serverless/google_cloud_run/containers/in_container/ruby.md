@@ -60,7 +60,7 @@ logger.info "Hello world!"
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="in-container" language="ruby" %}}
+{{% gcr-env-vars-in-container language="ruby" %}}
 
 ## Troubleshooting
 

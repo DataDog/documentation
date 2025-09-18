@@ -1,5 +1,6 @@
 ---
 title: Track Dashboard Access and Configuration Changes
+description: Use Audit Trail to track dashboard usage, access patterns, and configuration changes with API request monitoring and diff inspection.
 disable_toc: false
 further_reading:
 - link: "account_management/audit_trail/"

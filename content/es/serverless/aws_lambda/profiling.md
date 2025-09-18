@@ -21,7 +21,7 @@ Continuous Profiler para AWS Lambda está en la beta pública. Durante el period
 
 Para habilitar la creación de perfiles, haz lo siguiente:
 
-1. Asegúrate de haber [instalado la biblioteca de rastreo asociada][2] en tu función de Lambda.
+1. Asegúrate de haber [instalado la librería de rastreo asociada][2] en tu función de Lambda.
 2. Define la variable de entorno `DD_PROFILING_ENABLED` como `true`.
 
 Los datos estarán disponibles tras un mínimo de 60 segundos de ejecución de la función de Lambda.

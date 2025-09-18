@@ -1,5 +1,6 @@
 ---
 title: Okta SAML Identity Provider Configuration
+description: Set up Okta as a SAML identity provider for Datadog with IdP and SP-initiated SSO, JIT provisioning, and role mapping configuration.
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"

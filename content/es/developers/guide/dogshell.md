@@ -10,13 +10,13 @@ Puedes utilizar la API de Datadog en la línea de comandos utilizando una envolt
 
 ## Instalar Dogshell
 
-Dogshell viene con la [biblioteca de Python `datadogpy`][1] admitida oficialmente, que a menudo se utiliza para enviar datos a Datadog con [`DogStatsD`][2]. Para instalar la biblioteca con PIP, ejecuta el siguiente comando:
+Dogshell viene con la [biblioteca de Python `datadogpy`][1] admitida oficialmente, que a menudo se utiliza para enviar datos a Datadog con [`DogStatsD`][2]. Para instalar la librería con PIP, ejecuta el siguiente comando:
 
 {{< code-block lang="shell" >}}
 pip install Datadog
 {{< /code-block >}}
 
-En función de tu entorno, puede que tengas que añadir la biblioteca a tu RUTA. Consulta el [repositorio de GitHub`datadogpy`][3] para obtener instrucciones de instalación alternativas.
+En función de tu entorno, puede que tengas que añadir la librería a tu RUTA. Consulta el [repositorio de GitHub`datadogpy`][3] para obtener instrucciones de instalación alternativas.
 
 ## Configurar Dogshell
 

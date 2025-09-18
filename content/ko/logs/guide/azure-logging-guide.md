@@ -22,7 +22,7 @@ Datadog 에이전트 또는 DaemonSet을 사용하여 Azure에서 Datadog로 로
 
 시작하려면 아래 버튼을 클릭하고 Azure 포털에서 양식을 작성하세요. 활동 로그 스트리밍을 Datadog 계정으로 가져오는 데 필요한 Azure 리소스가 배포됩니다.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Frefs%2Fheads%2Fmaster%2Fazure%2Feventhub_log_forwarder%2Fparent_template.json)
 
 또는 Datadog에서 Azure 활동 로그 및 Azure 플랫폼 로그(리소스 로그 포함)를 전송하는 데 사용할 수 있는 자동화된 스크립트가 제공됩니다.
 

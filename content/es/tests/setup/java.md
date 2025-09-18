@@ -86,11 +86,11 @@ Si lo haces, puedes omitir los pasos "Descargar biblioteca del rastreador" y "Ej
 {{% /tab %}}
 {{< /tabs >}}
 
-### Descarga de la biblioteca del rastreador
+### Descarga de la librería del rastreador
 
-Solo tienes que descargar la biblioteca de rastreador una vez para cada servidor.
+Solo tienes que descargar la librería de rastreador una vez para cada servidor.
 
-Si la biblioteca del rastreador ya está disponible localmente en el servidor, puedes proceder directamente a ejecutar los tests.
+Si la librería del rastreador ya está disponible localmente en el servidor, puedes proceder directamente a ejecutar los tests.
 
 Declara la variable `DD_TRACER_FOLDER` con la ruta a la carpeta donde deseas almacenar el JAR del rastreador descargado:
 
@@ -104,7 +104,7 @@ Ejecuta el siguiente comando para descargar el JAR del rastreador a la carpeta e
 wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-Puedes ejecutar el comando `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` para comprobar la versión de la biblioteca del rastreador.
+Puedes ejecutar el comando `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` para comprobar la versión de la librería del rastreador.
 
 ### Ejecutar tus tests
 
@@ -141,7 +141,7 @@ Al especificar los argumentos del rastreador, incluye lo siguiente:
 
 * Habilita CI Visibility estableciendo la propiedad `dd.civisibility.enabled` en `true`.
 * Define el entorno en el que se ejecutan los tests utilizando la propiedad `dd.env` (por ejemplo: `local` cuando se ejecutan test en una estación de trabajo de desarrollador o `ci` cuando se ejecutan en un proveedor de CI).
-* Define el nombre del servicio o la biblioteca que se está comprobando en la propiedad `dd.service`.
+* Define el nombre del servicio o la librería que se está comprobando en la propiedad `dd.service`.
 
 Por ejemplo:
 
@@ -196,7 +196,7 @@ El rastreador expone un conjunto de APIs que pueden utilizarse para ampliar su f
 
 ### Añadir etiquetas personalizadas a los tests
 
-Para añadir etiquetas personalizadas, incluye la biblioteca [opentracing-util][4] como una dependencia de tiempo de compilación en tu proyecto.
+Para añadir etiquetas personalizadas, incluye la librería [opentracing-util][4] como una dependencia de tiempo de compilación en tu proyecto.
 
 A continuación, puedes añadir etiquetas personalizadas a tus tests mediante el tramo activo:
 
@@ -244,7 +244,7 @@ Si utilizas uno de los marcos de test compatibles, el rastreador de Java instrum
 
 Si utilizas un marco que no es compatible o una solución de tests ad hoc, puedes aprovechar la API de test manual, que también informa de los resultados de los tests al backend.
 
-Para utilizar la API de test manual, añade la biblioteca [`dd-trace-api`][7] como dependencia de tiempo de compilación en tu proyecto.
+Para utilizar la API de test manual, añade la librería [`dd-trace-api`][7] como dependencia de tiempo de compilación en tu proyecto.
 
 #### Modelo de dominio
 
@@ -256,7 +256,7 @@ Una sesión de tests representa una compilación del proyecto, que normalmente c
 
 Para iniciar una sesión de test, llama a `datadog.trace.api.civisibility.CIVisibility#startSession` y pasa el nombre del proyecto y el nombre del marco de tests que has utilizado.
 
-Cuando todos tus tests hayan finalizado, llama a `datadog.trace.api.civisibility.DDTestSession#end`, que obliga a la biblioteca a enviar todos los resultados de los tests restantes al backend.
+Cuando todos tus tests hayan finalizado, llama a `datadog.trace.api.civisibility.DDTestSession#end`, que obliga a la librería a enviar todos los resultados de los tests restantes al backend.
 
 ##### Módulo de test
 
@@ -450,9 +450,9 @@ El complemento es opcional, ya que solo sirve para reducir la sobrecarga de rend
 
 ### Los tests fallan cuando se compila un proyecto con el rastreador conectado
 
-En algunos casos, adjuntar el rastreador puede romper los tests, especialmente si ejecutan aserciones sobre el estado interno de la JVM o instancias de clases de bibliotecas de terceros.
+En algunos casos, adjuntar el rastreador puede romper los tests, especialmente si ejecutan aserciones sobre el estado interno de la JVM o instancias de clases de librerías de terceros.
 
-Aunque en estos casos lo mejor es actualizar los tests, también existe la opción más rápida de desactivar las integraciones de biblioteca de terceros del rastreador.
+Aunque en estos casos lo mejor es actualizar los tests, también existe la opción más rápida de desactivar las integraciones de librería de terceros del rastreador.
 
 Las integraciones proporcionan información adicional sobre lo que ocurre en el código probado y es especialmente útil en los tests de integración, para monitorizar cosas como solicitudes HTTP o llamadas a bases de datos.
 Están activadas por defecto.

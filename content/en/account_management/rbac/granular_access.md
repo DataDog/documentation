@@ -1,5 +1,6 @@
 ---
 title: Granular Access Control
+description: Control access to individual Datadog resources like dashboards, monitors, and notebooks by teams, roles, or users for fine-grained permission management.
 ---
 ## Manage access to individual resources
 
