@@ -39,7 +39,7 @@ Customize the visualization of cell values for each column with Column Formattin
 * Threshold formatting: highlight cells with colors when specific value ranges are met.
 * Range formatting: color code cells with a range of values.
 * Text formatting: replace cells with alias text values to improve readability.
-* Trending information: vizualize metrics and events queries.
+* Trending information: visualize metrics and events queries.
 
 {{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Table widget showing conditional formatting with trend indicators" style="width:100%;" >}}
 

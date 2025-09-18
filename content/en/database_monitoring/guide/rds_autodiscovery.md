@@ -15,7 +15,7 @@ Supported Agent versions
 
 ## Overview
 
-Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your RDS instances without having to list individual database host endpoints. Autodiscovery automatically discovers and monitors any RDS instances that match the tag critera specified in your configuration.
+Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your RDS instances without having to list individual database host endpoints. Autodiscovery automatically discovers and monitors any RDS instances that match the tag criteria specified in your configuration.
 
 With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which instances to apply each check to.
 

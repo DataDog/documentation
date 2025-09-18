@@ -40,7 +40,7 @@ The `http.request POST /charge/` span is taking a lot of time without having any
 
 In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-**Instument a method with a decorator**:
+**Instrument a method with a decorator**:
 
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
@@ -101,7 +101,7 @@ public class BackupLedger {
 
 In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-**Instument a method with a decorator**:
+**Instrument a method with a decorator**:
 
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 

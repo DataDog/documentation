@@ -52,7 +52,7 @@ LLMObs.enable(
 ## Datasets
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
 
 ### Creating a dataset
 
