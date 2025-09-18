@@ -31,11 +31,9 @@ As your organization grows, your observability needs for different use cases, su
 
 ### Generate Metrics
 
-Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration. The template starts you off with the following processors:
+Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
-- **Filter**: Add a query to send only a subset of logs based on your conditions.
-- **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources or add custom parsing rules.
-- **Generate metrics**: Generate metrics for your logs or a subset of them. You can generate these types of metrics for your logs.
+These are the available metric types:
   | Metric type  | Description                                                                                                                                     | Example                                                                                             |
   | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
   | COUNT        | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased.                | You want to count the number of logs with `status:error`.                                         |
@@ -45,24 +43,11 @@ Some log sources, such as firewalls and network appliances, generate a large vol
 
 ### Log Enrichment
 
-Your organization's different services, systems, and applications all generate logs containing layers of information and in different formats. To manage these logs, you might need to standardize their format and add information to make it easier to search and analyze them. For example, each log source has its own unique format. This can make it difficult to search and analyze during investigations if they have not been reformatted and standardized. You could also have additional information, such as customer IDs or IP addresses, that you want to add to your logs. Use the Log Enrichment Template and these Observability Pipelines processors to enrich and transform your logs:
-
-- **Enrichment Table**: Enrich your logs with information from a reference table, which could be a local file or a GeoIP database.
-- **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources.
-- **Add hostname**: Add the name of the host that sent the log so you can use it to find the root cause of an issue.
-- **Parse JSON**: Convert fields into JSON objects.
+Your organization's different services, systems, and applications all generate logs containing layers of information and in different formats. To manage these logs, you might need to standardize their format and add information to make it easier to search and analyze them. For example, each log source has its own unique format. This can make it difficult to search and analyze during investigations if they have not been reformatted and standardized. You could also have additional information, such as customer IDs or IP addresses, that you want to add to your logs.
 
 ### Log Volume Control
 
 Raw logs are noisy, and only some logs are useful for further search and analysis during investigations. Use the Log Volume Control template to determine which logs to send to your indexed solution, such as a SIEM or log management solution. This helps you to increase the value of your indexed logs and also remain within your planned budget.
-
-You can use the following processors in the Observability Pipeline Worker to manage your log volume:
-
-- **Filter**: Add a query to send only a subset of logs based on your conditions.
-- **Sample**: Define a sampling rate to send only a subset of your logs.
-- **Quota**: Enforce daily limits on either the volume of log data or the number of log events.
-- **Dedupe**: Drop duplicate copies of your logs, for example, due to retries because of network issues.
-- **Remap**: Add, drop, or rename a field in your logs.
 
 ### Sensitive Data Redaction
 
