@@ -1,15 +1,20 @@
 ---
-title: Enabling App and API Protection for PHP
-aliases:
-  - /security_platform/application_security/getting_started/php
-  - /security/application_security/getting_started/php
-  - /security/application_security/threats/setup/threat_detection/php
-  - /security/application_security/threats_detection/php
-  - /security/application_security/setup/aws/fargate/php
+title: Enabling App and API Protection for Nginx
+further_reading:
+    - link: 'https://github.com/DataDog/nginx-datadog/'
+      tag: "Source Code"
+      text: "nginx integration's source code"
+    - link: "/security/default_rules/?category=cat-application-security"
+      tag: "Documentation"
+      text: "OOTB App and API Protection Rules"
+    - link: "/security/application_security/troubleshooting"
+      tag: "Documentation"
+      text: "Troubleshooting App and API Protection"
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{% app_and_api_protection_php_overview showSetup="false" %}}
+## Overview
+App and API Protection leverages the [Datadog Nginx Integration](https://github.com/DataDog/nginx-datadog/) to monitor and secure your reverse proxy.
 
 ## Environments
 
@@ -20,7 +25,6 @@ aliases:
 
 ### Cloud and Container Platforms
 {{< appsec-integrations >}}
-{{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
 {{< /appsec-integrations >}}
 

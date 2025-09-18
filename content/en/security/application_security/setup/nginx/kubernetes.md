@@ -1,8 +1,6 @@
 ---
 title: Set up App and API Protection for Nginx in Kubernetes
-code_lang: kubernetes
 type: multi-code-lang
-code_lang_weight: 20
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"
@@ -14,6 +12,8 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+{{< partial name="app_and_api_protection/callout.html" >}}
+
 # Ingress-nginx support for Datadog
 
 [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is one of the [Kubernetes ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress/)
