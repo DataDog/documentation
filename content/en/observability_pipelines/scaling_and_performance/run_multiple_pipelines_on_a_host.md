@@ -7,7 +7,7 @@ further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up a pipeline"
-- link: "/observability_pipelines/environment_variables/"
+- link: "/observability_pipelines/guide/environment_variables/"
   tag: "Documentation"
   text: "Environment variable for sources, processors, and components"
 ---
@@ -130,7 +130,7 @@ Additionally, you can use the command `sudo journalctl -u op-fluent.service` to 
 1.  In the **Deploy your pipeline** section, you should see your additional Worker detected. Click **Deploy**.
 
 [1]: https://docs.datadoghq.com/observability_pipelines/configuration/set_up_pipelines/?tab=pipelineui
-[2]: https://docs.datadoghq.com/observability_pipelines/environment_variables/?tab=sources
+[2]: https://docs.datadoghq.com/observability_pipelines/guide/environment_variables/?tab=sources
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.datadoghq.com/getting_started/site/
 

@@ -94,7 +94,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [12]: /observability_pipelines/configuration/install_the_worker/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /monitors/types/metric/
-[15]: /observability_pipelines/environment_variables/
+[15]: /observability_pipelines/guide/environment_variables/
 [16]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#bootstrap-options
 
 {{% /tab %}}

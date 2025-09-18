@@ -4,12 +4,18 @@ disable_toc: false
 aliases:
     - /observability_pipelines/install_the_worker/
 further_reading:
-- link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
+- link: "/observability_pipelines/scaling_and_performance/advanced_worker_configurations/"
+  tag: "Documentation"
+  text: "Advanced Worker configurations"
+- link: "/observability_pipelines/monitoring_and_maintenance/worker_cli_commands/"
+  tag: "Documentation"
+  text: "Worker CLI commands"
+- link: "/observability_pipelines/guide/environment_variables/"
+  tag: "Documentation"
+  text: "Environment variable for sources, processors, and components"
+- link: "/observability_pipelines/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
-- link: "observability_pipelines/worker_commands/"
-  tag: "Documentation"
-  text: "Worker commands"
 ---
 
 ## Overview
@@ -231,4 +237,4 @@ sudo apt-get remove --purge observability-pipelines-worker
 [4]: /observability_pipelines/configuration/processors/
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
-[7]: /observability_pipelines/environment_variables/
+[7]: /observability_pipelines/guide/environment_variables/
