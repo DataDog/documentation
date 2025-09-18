@@ -434,7 +434,7 @@ datadog:
 
 #### Exclude CIDR ranges
 
-CIDR (Classless Inter-Domain Routing) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
+Classless Inter-Domain Routing (CIDR) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
 
 - Reduce monitoring overhead for internal networks
 - Focus on external traffic patterns
