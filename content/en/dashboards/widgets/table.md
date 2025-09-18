@@ -1,5 +1,6 @@
 ---
 title: Table Widget
+description: Display tabular data with columns, rows, and sorting capabilities for detailed metric and event analysis.
 widget_type: "query_table"
 aliases:
 - /graphing/widgets/table/
