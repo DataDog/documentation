@@ -3,8 +3,6 @@ title: Scaling and Performance
 disable_toc: false
 ---
 
-## Overview
-
 See [Advanced Worker Configuration][1] for information on bootstrapping options and how to enable the liveness and readiness probe.
 
 If you want to run multiple pipelines on a host so that you can send logs from different sources, follow the instructions in [Run Multiple Pipelines on a Host][2].
