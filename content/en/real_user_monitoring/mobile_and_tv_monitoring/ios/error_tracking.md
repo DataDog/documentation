@@ -10,7 +10,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
  - Symbolicated iOS crash reports
  - Trend analysis with iOS error tracking
 
-To symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
+To symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application.
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -18,9 +18,9 @@ Your crash reports appear in [**Error Tracking**][1].
 
 If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2] or see the [iOS setup documentation][3].
 
-### Add crash reporting 
+### Add crash reporting
 
-To enable Crash Reporting, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, add the package according to your dependency manager and update your initialize snippet.
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -37,7 +37,7 @@ pod 'DatadogCrashReporting'
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:
@@ -75,7 +75,7 @@ Datadog.initialize(
     clientToken: "<client token>",
     env: "<environment>",
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 
@@ -189,9 +189,9 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 ### Find your .dSYM file
 
-Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files. 
+Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files.
 
-Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
+Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine.
 
 | Bitcode Enabled | Description |
 |---|---|
@@ -220,7 +220,7 @@ npx @datadog/datadog-ci dsyms upload appDsyms.zip
 npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 ```
 
-**Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable. 
+**Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable.
 
 Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can leverage these integrations instead of `datadog-ci`:
 
@@ -282,7 +282,7 @@ dSYM files are limited in size to **2 GB** each.
 
 ## Test your implementation
 
-To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your application and confirm that the error appears in Datadog. 
+To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your application and confirm that the error appears in Datadog.
 
 1. Run your application on an iOS simulator or a real device. Ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the iOS SDK does.
 2. Execute the code containing the crash:
@@ -308,7 +308,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [8]: https://www.npmjs.com/package/@datadog/datadog-ci
 [9]: https://github.com/DataDog/datadog-fastlane-plugin
 [10]: https://github.com/marketplace/actions/datadog-upload-dsyms
-[11]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
+[11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [13]: /real_user_monitoring/mobile_and_tv_monitoring/ios/error_tracking/?tab=cocoapods#add-app-hang-reporting
 [14]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry

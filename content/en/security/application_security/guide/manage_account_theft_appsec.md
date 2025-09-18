@@ -140,7 +140,7 @@ To use custom In-App WAF rules, do the following:
 
 6. Select a specific user parameter as an input, either in the body or the query.   
 7. Set the `Tag` field to the name of the tag where you want to save the value captured using `usr.login`.
-   {{<img src="security/ato/guide_waf_instrumentation_tag.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
+   {{<img src="security/ato/guide_waf_instrumentation_tagged.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
 
 8. Click **Save**. The rule is automatically sent to every instance of the service and then begins capturing login failures. 
 

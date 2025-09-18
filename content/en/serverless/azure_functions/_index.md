@@ -11,6 +11,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
 ## Setup
 
+If you haven't already, install the [Datadog-Azure integration][5] to collect metrics and logs. Then instrument your application with the following steps:
+
 {{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
 {{< programming-lang lang="nodejs" >}}
 1. **Install dependencies**. Run the following commands:

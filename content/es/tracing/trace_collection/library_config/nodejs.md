@@ -20,11 +20,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la biblioteca de rastreo de Node.js
+title: Configuración de la librería de rastreo de Node.js
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
 
 Los parámetros del rastreador pueden configurarse con las siguientes variables de entorno:
 
@@ -52,7 +52,7 @@ Se recomienda utilizar `DD_ENV`, `DD_SERVICE` y `DD_VERSION` para configurar `en
 `DD_TRACE_ENABLED`
 : **Configuración**: N/A<br>
 **Predeterminado**: `true`<br>
-Si se habilita dd-trace. Configurar esto a `false` desactiva todas las funciones de la biblioteca.<br/>
+Si se habilita dd-trace. Configurar esto a `false` desactiva todas las funciones de la librería.<br/>
 Consulta también [DD_APM_TRACING_ENABLED][16].
 
 `DD_TRACE_DEBUG`
@@ -148,10 +148,10 @@ Características experimentales
 **Por defecto**: `{}`<br>
 Las funciones experimentales pueden habilitarse añadiendo claves predefinidas con un valor de `true`. Para obtener más información sobre las funciones experimentales disponibles, [ponte en contacto con el servicio de asistencia][4].
 
-Instrumentación automática de bibliotecas externas
+Instrumentación automática de librerías externas
 : **Configuración**: `plugins`<br>
 **Por defecto**: `true`<br>
-Si se habilita la instrumentación automática de bibliotecas externas utilizando los complementos incorporados.
+Si se habilita la instrumentación automática de librerías externas utilizando los complementos incorporados.
 
 `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`
 : **Configuración**: `cloudPayloadTagging.request`<br>
@@ -196,7 +196,7 @@ El puerto del Trace Agent al que envía trazas el rastreador. Si la [configuraci
 `DD_DOGSTATSD_PORT`
 : **Configuración**: `dogstatsd.port`<br>
 **Por defecto**: `8125`<br>
-El puerto del Agent DogStatsD al que se envían métricas. Si la [configuración del Agent][13] define `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto del valor predeterminado `8125`, este `DD_DOGSTATSD_PORT` de la biblioteca de rastreo debe coincidir con él.
+El puerto del Agent DogStatsD al que se envían métricas. Si la [configuración del Agent][13] define `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto del valor predeterminado `8125`, este `DD_DOGSTATSD_PORT` de la librería de rastreo debe coincidir con él.
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Configuración**: `remoteConfig.pollInterval`<br>
@@ -289,7 +289,7 @@ Una lista separada por comas de formatos de encabezados de los que intentar extr
 **Predeterminado**: `Datadog,tracecontext,baggage`<br>
 Un lista separada por comas de formatos de encabezados de los que intentar insertar y extraer datos de propagación de rastreo distribuido. El primer formato encontrado con encabezados completos y válidos se utiliza para definir la trace (traza) para continuar. Las configuraciones más específicas `DD_TRACE_PROPAGATION_STYLE_INJECT` y `DD_TRACE_PROPAGATION_STYLE_EXTRACT` tienen prioridad cuando están presentes.
 
-Para ver más ejemplos de cómo trabajar con la biblioteca, consulta la [documentación de la API][2].
+Para ver más ejemplos de cómo trabajar con la librería, consulta la [documentación de la API][2].
 
 ## Referencias adicionales
 

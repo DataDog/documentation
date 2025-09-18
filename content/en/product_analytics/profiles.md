@@ -137,8 +137,8 @@ You can customize the Account Profiles page to include additional attributes, gi
 
 ## Use custom attributes to enrich profiles
 
-{{< callout header="Join the Preview!" btn_hidden="true">}}
-  Custom Attributes is in Preview!
+{{< callout url="https://www.datadoghq.com/product-preview/custom-attributes-for-user-and-account/" header="Join the Preview!" btn_hidden="false">}}
+  Custom Attributes for User & Account Profiles is in Preview! Request access by using this form.
 {{< /callout >}} 
 
 

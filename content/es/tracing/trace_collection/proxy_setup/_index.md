@@ -354,7 +354,7 @@ curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/
 
 Extrae el archivo `ngx_http_datadog_module.so` del archivo .tar descargado mediante `tar` y colócalo en el directorio de módulos de NGINX, generalmente ubicado en `/usr/lib/nginx/modules`.
 
-### Configuración de NGINX con el módulo de Datadog 
+### Configuración de NGINX con el módulo de Datadog
 En la sección superior de configuración de NGINX, carga el módulo de Datadog.
 
 ```nginx
@@ -694,7 +694,7 @@ Para instalar el módulo:
    | wget -qi -
    ```
 
-   Al descomprimir el archivo .tar, el archivo resultante es `mod_datadog.so`, la biblioteca compartida que debe
+   Al descomprimir el archivo .tar, el archivo resultante es `mod_datadog.so`, la librería compartida que debe
    ser cargada por el servidor.
 
 1. Coloca el archivo en el directorio donde HTTPd busca los módulos, normalmente `/usr/local/apache2/modules`.

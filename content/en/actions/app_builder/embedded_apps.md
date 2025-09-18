@@ -1,5 +1,6 @@
 ---
 title: Embedded Apps
+description: Embed published apps in dashboards and sync them with template variables and time frames for dynamic, contextual actions.
 disable_toc: false
 aliases:
     - /service_management/app_builder/embedded_apps
@@ -42,6 +43,12 @@ To list all of the available values of a specific template variable, use the fol
 
 {{< code-block lang="json" disable_copy="false">}}
 ${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.availableValues}
+{{< /code-block >}}
+
+To list all of the available values when using a select component, use the following template expression:
+
+{{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.availableValues.map(availableValue => {return {label: availableValue, value:availableValue}})}
 {{< /code-block >}}
 
 To get the selected value of a template variable, use the following template expressions:

@@ -1,5 +1,6 @@
 ---
 title: Access Control
+description: Manage user access with role-based permissions, custom roles, and granular access control for dashboards, monitors, and other Datadog resources.
 aliases:
     - /guides/rbac
     - /account_management/rbac/role_api

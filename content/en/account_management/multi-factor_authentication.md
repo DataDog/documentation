@@ -1,5 +1,6 @@
 ---
 title: Multi-Factor Authentication (MFA)
+description: Add an extra layer of security to Datadog accounts with multi-factor authentication using time-based one-time passwords and authenticator apps.
 ---
 
 ## Overview
