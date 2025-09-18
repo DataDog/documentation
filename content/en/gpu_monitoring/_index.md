@@ -34,7 +34,7 @@ Identify total spend on GPU infrastructure and attribute those costs to specific
 
 {{< img src="gpu_monitoring/fleet_costs.png" alt="Detail view of a cluster, displaying funnel visualization of devices (total/allocated/active/effective), total cloud cost, idle cloud cost, and visualizations and details of various connected entitles (pods, processors, SLURM jobs)." style="width:100%;" >}}
 
-### Maximize model/application performance
+### Maximize model and application performance
 With GPU Monitoring's resource telemetry, you can analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) over time, helping you understand their effects on your model and application performance.
 
 {{< img src="gpu_monitoring/device_metrics.png" alt="Detail view of a device, displaying configurable timeseries visualizations for SM activity, memory utilization, power, and engine activity." style="width:100%;" >}}
