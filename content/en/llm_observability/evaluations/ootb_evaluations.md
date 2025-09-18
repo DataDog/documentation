@@ -301,6 +301,78 @@ After instrumenting your application to send session-end spans, configure the ev
 
 This configuration ensures evaluations run only on complete sessions. This provides accurate assessments of user intention resolution.
 
+#### Tool Selection
+
+This check evaluates whether your agent can successfully select the right tools to address the user's request. This serves as a .
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on LLM Spans| Evaluated using LLM | Tool Selection evaluates the tools chosen by the LLM, comparing them against the user’s request and the set of available tools. This process helps identify whether any incorrect tool calls were made.|
+
+##### Instrumentation
+
+The Tool Selection evaluation is only supported in dd-trace version 3.12 and above due to the way the list of available tools are parsed by the evaluation. 
+
+The evaluation accesses the list of available tools to the agent by requiring the requires sending a span with a specific tag when the session ends. This signal allows the evaluation to identify session boundaries and trigger the completeness assessment:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from agents import function_tool
+
+@function_tool
+def add_numbers(a: int, b: int) -> int:
+    """
+    Adds two numbers together.
+    """
+    return a + b
+
+@function_tool
+def subtract_numbers(a: int, b: int) -> int:
+    """
+    Subtracts two numbers.
+    """
+    return a - b
+    
+@function_tool  
+def multiply_numbers(a: int, b: int) -> int:
+    """
+    Multiplies two numbers.
+    """
+    return a * b
+
+@function_tool
+def divide_numbers(a: int, b: int) -> int:
+    """
+    Divides two numbers.
+    """
+    return a / b
+
+# List of tools made available to the agent are attached this way 
+math_tutor_agent = Agent(
+    name="Math Tutor",
+    handoff_description="Specialist agent for math questions",
+    instructions="You provide help with math problems. Please use the tools to find the answer.",
+    model="o3-mini",
+    tools=[
+        add_numbers, subtract_numbers, multiply_numbers, divide_numbers
+    ],
+)
+
+history_tutor_agent = Agent(
+    name="History Tutor",
+    handoff_description="Specialist agent for history questions",
+    instructions="You provide help with history problems.",
+    model="o3-mini",
+)
+
+# Triage agent illustrates how to handle handoffs between agents 
+triage_agent = Agent(  
+    'openai:gpt-4o',
+    model_settings=ModelSettings(temperature=0),
+    instructions='Please solve this question using the least amount of steps possible by leveraging the available tools. What is the sum of 1 to 100?',  
+    handoffs=[math_tutor_agent, history_tutor_agent],
+)
+{{< /code-block >}}
 
 ### Security and Safety evaluations
 
