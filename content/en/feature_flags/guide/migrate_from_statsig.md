@@ -19,39 +19,43 @@ This guide walks you through the process of migrating feature flags from Statsig
 6. [Recreate critical feature flags in Datadog.](#recreate-critical-flags)
 7. [Switch existing flags to the new application.](#switch-to-new-app)
 
+<div class="alert alert-info"><strong>Note</strong>: Unless otherwise specified, all code examples are in TypeScript.</div>
+
 ## 1. Install the Eppo SDK {#install-sdk}
   * Login to Eppo with your work email: <https://eppo.cloud/>
   * Generate an SDK key by navigating to "SDK Keys" under Configuration
   * Define a logging function for the Eppo SDK to log assignments so they end up in your data warehouse.
-  _TypeScript Example:_
-  ```typescript
-  const assignmentLogger: IAssignmentLogger = {
-    logAssignment(assignment) {
-      analytics.track({
-        userId: assignment.subject,
-        event: "Eppo Randomization Event",
-        type: "track",
-        properties: { ...assignment },
-      });
-    },
-  };
-  ```
+
+{{< code-block lang="typescript" >}}
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    analytics.track({
+      userId: assignment.subject,
+      event: "Eppo Randomization Event",
+      type: "track",
+      properties: { ...assignment },
+    });
+  },
+};
+{{< /code-block >}}
+
+
   * Initialize the SDK in your code using the SDK guides for your language here.
-  _TypeScript Example:_
-  ```typescript
+  
+  {{< code-block lang="typescript" >}}
   await init({
     apiKey: EPPO_SDK_KEY,
     assignmentLogger,
   });
-  ```
+  {{< /code-block >}}
 
 
 ## 2. Set up and verify a new flag {#set-up-flag}
   * Create a new flag in Eppo by navigating to "Feature Flags" under Configuration
   * Implement the flag in your application code
   * Test the flag in your local development environment to ensure it works as expected.
-  _TypeScript Example:_
-  ```typescript
+
+  {{< code-block lang="typescript" >}}
   const variation = getInstance().getBooleanAssignment(
     'show-new-feature',
     user.id,
@@ -61,7 +65,8 @@ This guide walks you through the process of migrating feature flags from Statsig
     },
     false
   );
-  ```
+  {{< /code-block >}}
+
   * Deploy the application to your staging or testing environments and verify the flag's functionality.
   * Once verified, deploy the application to your production environment and test the flag again.
 
@@ -78,8 +83,8 @@ This guide walks you through the process of migrating feature flags from Statsig
   * Implement a function that wraps calling Eppo's SDK to have a fallback mechanism to use the Statsig flag values if the new service is unavailable or experiences issues.
   * When attempting to retrieve a flag value from Eppo, catch any exceptions or errors that may occur due to service unavailability or issues and return the old value.
   * Eppo SDKs only strongly typed assignment functions (e.g `getBooleanAssignment`), whereas Statsig SDKs use specific evaluation functions for different types. For such SDKs, we recommend creating wrappers for each type. Uses  of the Statsig functions can then be replaced with the typed wrappers in your application. Here are examples:
-  _TypeScript Example:_
-  ```typescript
+
+  {{< code-block lang="typescript" >}}
   // After initialization, turn off graceful failure so exceptions are rethrown
   getInstance().setIsGracefulFailureMode(false);
  
@@ -202,7 +207,7 @@ This guide walks you through the process of migrating feature flags from Statsig
     }
     return assignment;
   }
-  ```
+  {{< /code-block >}}
 
 
 ## 6. Recreate critical flags in Eppo {#recreate-critical-flags}
@@ -217,9 +222,8 @@ This guide walks you through the process of migrating feature flags from Statsig
   * Once you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
   * Remove the fallback mechanism and the Statsig flag code once you have confirmed that the Eppo flags are working as expected in production.
   * It's recommended to keep the wrapper as a facade to make future changes easier, as they will typically only need to be made to the wrapper.
-  _TypeScript Example:_
-  ```typescript
-  // FeatureHelper.ts
+
+  {{< code-block lang="typescript" filename="FeatureHelper.ts" >}}
   export function isFeatureEnabled(
     featureKey: string,
     userId: string,
@@ -235,12 +239,12 @@ This guide walks you through the process of migrating feature flags from Statsig
   ) {
     return getInstance().getJSONAssignment(userId, configKey, attributes, {});
   }
-  ```
-  ```typescript
-  // PlaceUsingFlags.ts
+  {{< /code-block >}}
+
+  {{< code-block lang="typescript" filename="PlaceUsingFlags.ts" >}}
   const useBigButtons = isFeatureEnabled(userId, 'use-big-buttons', userAttributes);
   const buttonConfig = getFeatureConfig(userId, 'button-configuration', userAttributes);
-  ```
+  {{< /code-block >}}
 
 ## Appendix: TypeScript implementation comparison
 
