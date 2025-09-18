@@ -138,7 +138,7 @@ You can customize the Account Profiles page to include additional attributes, gi
 ## Use custom attributes to enrich profiles
 
 {{< callout url="#" header="Join the Preview!" btn_hidden="true">}}
-  Custom Attributes for User & Account Profiles is in public Preview!
+  Custom Attributes for User & Account Profiles is in Preview.
 {{< /callout >}} 
 
 
