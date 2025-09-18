@@ -76,11 +76,11 @@ Records
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
 
-{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width:100%" >}}
 
 Screenshots can be disabled by checking "Do not capture screenshot for this step" in the **Advanced Options** section.
 
-{{< img src="mobile_app_testing/do_not_capture_screenshot.png" alt="Advanced options for a Mobile app test, highlighting Do not capture screenshot for this step" style="width=60%" >}}
+{{< img src="mobile_app_testing/do_not_capture_screenshot.png" alt="Advanced options for a Mobile app test, highlighting Do not capture screenshot for this step" style="width:60%" >}}
 
 ### Video replay
 
