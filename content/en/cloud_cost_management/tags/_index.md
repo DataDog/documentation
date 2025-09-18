@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Tags help you investigate and understand your cloud and SaaS costs across any dimensions. 
+Tags help you investigate and understand your cloud and SaaS costs across any dimensions. Tags are made of tag keys and values (ex: in `aws_product:ec2`, the tag key is `aws_product`, and the value is `ec2`.)
 
 Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve higher cost allocation and get deeper insight into who owns infrastructure costs in your ever changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment. 
 
@@ -66,6 +66,41 @@ Datadog also adds provider specific tags:
 | Custom Costs | Cost File Tags | User-defined tags for every provider, found on [cost files][9] uploaded to Cloud Cost Management |
 
 ## How tags are normalized
+
+Tag keys and/or values may look slightly different in Cloud Cost Management compared to the providers or other parts of Datadog because of tag normalization. 
+
+Cloud Cost Management normalizes tag **keys** largely the same as Datadog Metrics:
+- Drop leading characters that are not letters
+- Lower-case all characters
+- Replace special characters and spaces with single underscore
+- Remove any trailing underscore
+- Reduce contiguous underscores to a single underscore
+- Tag keys up to 5000 characters are supported, and any characters up until a letter are dropped so that tag keys start with letters (differs from Datadog Metrics)
+
+Cloud Cost Management normalizes tag **values** as well, while maintaining human readable tag values for cost reporting, with the following logic:
+- Convert any consecutive whitespace to a single space
+- Keep all letters, marks, numbers, punctuation, and symbols
+- Replace any other characters with an underscore `_`
+- Tag values up to 5000 characters are supported
+
+## How tags are prioritized
+
+It's possible for a cost data row to have multiple values, if tag values from 2+ sources are combined, and one is not prioritized over the other.
+
+To resolve conflicts and mitigate this, Cloud Cost Management will replace existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace an Kubernetes node tag `team:compute`.
+
+Sources higher in this list replace tag values from sources lower in this list, if there are conflicts:
+- Tag Pipelines and Custom Allocation Rules
+- FOCUS
+- Service Catalog
+- Amazon ECS Container
+- Amazon ECS Task
+- Kubernetes Pod
+- Kubernetes Persistent Volume
+- Kubernetes Node 
+- Host Agent
+
+All other tag sources (such as bill columns, AWS Organization tags, etc) can be overriden by these sources.
 
 ## Improving tagging
 
