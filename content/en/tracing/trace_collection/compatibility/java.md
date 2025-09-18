@@ -374,7 +374,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 {{< /tabs >}}
 
-<div class="alert alert-info">For GraalVM 25, you may see errors related to `Use of Unsafe`. Add `-Dnet.bytebuddy.safe=false` when building the native executable to address this.</div>
+<div class="alert alert-info">For GraalVM 25, you may see errors related to <code>Use of Unsafe</code>. Add <code>-Dnet.bytebuddy.safe=false</code> when building the native executable to address this.</div>
 
 #### Usage
 
