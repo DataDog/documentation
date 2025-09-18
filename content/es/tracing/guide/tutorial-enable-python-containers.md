@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: Documentación
-  text: Opciones adicionales de configuración de bibliotecas de rastreo
+  text: Opciones adicionales de configuración de librerías de rastreo
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
+  text: Instrucciones detalladas de configuración de librerías de rastreo
 - link: /tracing/trace_collection/compatibility/python/
   tag: Documentación
   text: Marcos de trabajo compatibles Java para la instrumentación automática
@@ -14,7 +14,7 @@ further_reading:
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-py
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de bibliotecas
+  text: Rastreo del repositorio de código fuente abierto de librerías
 title: Tutorial - Habilitación del rastreo de una aplicación Python y el Datadog Agent
   en contenedores
 ---
@@ -125,7 +125,7 @@ Ahora que ya tienes una aplicación Python en funcionamiento, configúrala para 
 2. Dentro del archivo Docker de la aplicación de notas, `docker/containers/exercise/Dockerfile.notes`, cambia la línea CMD que inicia la aplicación para utilizar el paquete `ddtrace`:
 
    ```
-   # Run the application with Datadog 
+   # Run the application with Datadog
    CMD ["ddtrace-run", "python", "-m", "notes_app.app"]
    ```
 
@@ -162,8 +162,8 @@ Añade el Datadog Agent en la sección de servicios del archivo `docker/containe
           - DD_API_KEY=<DD_API_KEY>
           - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
           - DD_APM_ENABLED=true    # Enable APM
-       volumes: 
-          - /var/run/docker.sock:/var/run/docker.sock:ro 
+       volumes:
+          - /var/run/docker.sock:/var/run/docker.sock:ro
           - /proc/:/host/proc/:ro
           - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
    ```
@@ -178,7 +178,7 @@ Para comprobar que has configurado todo correctamente, compara tu archivo `docke
 
 ## Inicio de los contenedores para observar el rastreo automático
 
-Ahora que la biblioteca de rastreo está instalada, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
+Ahora que la librería de rastreo está instalada, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
 
 ```
 docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
@@ -268,7 +268,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar_app` qu
 
 1. Configura la aplicación de calendario para el rastreo añadiendo `dd_trace` al comando de inicio en el archivo Docker, como hiciste anteriormente para la aplicación de notas. Abre `docker/containers/exercise/Dockerfile.calendar` y actualiza la línea CMD de la siguiente forma:
    ```
-   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
+   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"]
    ```
 
 3. Aplica etiquetas (tags) unificadas de servicios, como lo hicimos para la aplicación de notas. Añade las siguientes variables de entorno en el archivo `Dockerfile.calendar`:
@@ -321,7 +321,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar_app` qu
 
 Puedes añadir Instrumentación personalizada utilizando código. Supongamos que quieres instrumentar aún más el servicio de calendario para ver mejor la traza:
 
-1. Abre `notes_app/notes_logic.py`. 
+1. Abre `notes_app/notes_logic.py`.
 2. Añadir la siguiente importación
 
    ```python

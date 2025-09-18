@@ -23,27 +23,27 @@ assets:
     source_type_name: Hardware Sentry
   logs: {}
   monitors:
-    Hardware Sentry - Agent-NoData: assets/monitors/agent-nodata.json
-    Hardware Sentry - Connector Failed: assets/monitors/connector-failed.json
-    Hardware Sentry - Critical Fan Speed: assets/monitors/critical-fan-speed.json
-    Hardware Sentry - Critical Temperature: assets/monitors/critical-temperature.json
-    Hardware Sentry - Errors: assets/monitors/errors.json
-    Hardware Sentry - High Temperature: assets/monitors/high-temperature.json
-    Hardware Sentry - High Voltage: assets/monitors/high-voltage.json
-    Hardware Sentry - Intrusion: assets/monitors/intrusion.json
-    Hardware Sentry - Link Down: assets/monitors/network-link-down.json
-    Hardware Sentry - Low Battery: assets/monitors/low-battery.json
-    Hardware Sentry - Low Fan Speed: assets/monitors/low-fan-speed.json
-    Hardware Sentry - Low Fan Speed %: assets/monitors/low-fan-speed-percent.json
-    Hardware Sentry - Low Voltage: assets/monitors/low-voltage.json
-    Hardware Sentry - Lun Multipathing: assets/monitors/lun-multipathing.json
-    Hardware Sentry - Missing Device: assets/monitors/missing-device.json
-    Hardware Sentry - Network Errors: assets/monitors/errors-network.json
-    Hardware Sentry - Power Capacity: assets/monitors/power-capacity.json
-    Hardware Sentry - Predicted Failure: assets/monitors/predicted-failure.json
-    Hardware Sentry - Status Degraded: assets/monitors/status-degraded.json
-    Hardware Sentry - Status Failed: assets/monitors/status-failed.json
-    Hardware Sentry - Tape Drive Cleaning: assets/monitors/tape-drive-cleaning.json
+    Agent stopped sending metrics: assets/monitors/agent-nodata.json
+    Battery charge is low: assets/monitors/low-battery.json
+    Connector failed: assets/monitors/connector-failed.json
+    Critically high temperature: assets/monitors/critical-temperature.json
+    Device errors: assets/monitors/errors.json
+    Device is missing: assets/monitors/missing-device.json
+    Fan speed is critically low: assets/monitors/critical-fan-speed.json
+    Hardware failure is predicted: assets/monitors/predicted-failure.json
+    Hardware is degraded: assets/monitors/status-degraded.json
+    Hardware is no longer operational: assets/monitors/status-failed.json
+    LUN multi-pathing is unavailable: assets/monitors/lun-multipathing.json
+    Low fan speed: assets/monitors/low-fan-speed.json
+    Low fan speed (%): assets/monitors/low-fan-speed-percent.json
+    Network errors is high: assets/monitors/errors-network.json
+    Network link is down: assets/monitors/network-link-down.json
+    Physical intrusion: assets/monitors/intrusion.json
+    Power supply is near its capacity: assets/monitors/power-capacity.json
+    Tape drive needs cleaning: assets/monitors/tape-drive-cleaning.json
+    Temperature is high: assets/monitors/high-temperature.json
+    Voltage is high: assets/monitors/high-voltage.json
+    Voltage is low: assets/monitors/low-voltage.json
 author:
   homepage: https://sentrysoftware.com
   name: Sentry Software
@@ -54,7 +54,7 @@ categories:
 - コスト管理
 - マーケットプレイス
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -78,8 +78,8 @@ pricing:
   unit_label: 監視ホスト
   unit_price: 8
 public_title: Hardware Sentry
-short_description: Hardware & sustainability metrics for 100+ systems (Cisco, Dell
-  EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+short_description: 100 以上のシステム (Cisco, Dell EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA,
+  Pure など) に対応したハードウェア メトリクス と サステナビリティ メトリクス
 supported_os:
 - linux
 - windows
@@ -95,8 +95,8 @@ tile:
   - Submitted Data Type::Metrics
   - Submitted Data Type::Logs
   configuration: README.md#Setup
-  description: Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC,
-    HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+  description: 100 以上のシステム (Cisco, Dell EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA,
+    Pure など) に対応したハードウェア メトリクス と サステナビリティ メトリクス
   media:
   - caption: Hardware Sentry のメインダッシュボードでは、すべてのデータセンターとサーバールームのエネルギー使用量と二酸化炭素排出量の概要が表示されます。これは、Hardware
       Sentry OpenTelemetry Collector によって収集されたメトリクスを活用したものです。
@@ -189,4 +189,4 @@ Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプショ
 [13]: https://sentrydesk.atlassian.net/servicedesk/customer/portals
 [14]: https://www.datadoghq.com/blog/sustainability-monitoring-carbon-footprint-hardware-sentry-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/hardware-sentry" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/hardware-sentry" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

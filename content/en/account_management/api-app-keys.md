@@ -1,5 +1,6 @@
 ---
 title: API and Application Keys
+description: Manage API keys, application keys, and client tokens for browser applications with security features.
 aliases:
     - /account_management/faq/how-do-i-reset-my-application-keys/
     - /agent/faq/how-do-i-reset-my-datadog-api-keys/

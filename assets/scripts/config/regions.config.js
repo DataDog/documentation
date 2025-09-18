@@ -344,24 +344,24 @@ export default {
     us3: 'https://trace.agent.us3.datadoghq.com/v1/traces',
     us5: 'https://trace.agent.us5.datadoghq.com/v1/traces',
     eu: 'https://trace.agent.datadoghq.eu/v1/traces',
-    ap1: 'Datadog OTLP traces intake endpoint is not supported for AP1',
-    ap2: 'Datadog OTLP traces intake endpoint is not supported for AP2'
+    ap1: 'https://trace.agent.ap1.datadoghq.com/v1/traces',
+    ap2: 'https://trace.agent.ap2.datadoghq.com/v1/traces'
   },
   otlp_metrics_endpoint: {
     us: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
     us3: 'https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics',
     us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
     eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics',
-    ap1: 'Datadog OTLP metrics intake endpoint is not supported for AP1',
-    ap2: 'Datadog OTLP metrics intake endpoint is not supported for AP2'
+    ap1: 'https://api.ap1.datadoghq.com/api/intake/otlp/v1/metrics',
+    ap2: 'https://api.ap2.datadoghq.com/api/intake/otlp/v1/metrics'
   },
   otlp_logs_endpoint: {
     us: 'https://http-intake.logs.datadoghq.com/v1/logs',
     us3: 'https://http-intake.logs.us3.datadoghq.com/v1/logs',
     us5: 'https://http-intake.logs.us5.datadoghq.com/v1/logs',
     eu: 'https://http-intake.logs.datadoghq.eu/v1/logs',
-    ap1: 'Datadog OTLP logs intake endpoint is not supported for AP1',
-    ap2: 'Datadog OTLP logs intake endpoint is not supported for AP2'
+    ap1: 'https://http-intake.logs.ap1.datadoghq.com/v1/logs',
+    ap2: 'https://http-intake.logs.ap2.datadoghq.com/v1/logs'
   },
   custom_costs_endpoint: {
     us: 'api.datadoghq.com/api/v2/cost/custom_costs',

@@ -225,8 +225,7 @@ Si vous ajoutez des agrégations par centile supplémentaires à une métrique D
 
 Cette fonctionnalité vous permet de contrôler le tagging pour les métriques pour lesquelles une granularité au niveau des hosts n'est pas nécessaire. Consultez la section [Metrics without Limits™][1] pour en savoir plus.
 
-**Remarque** : l'exclusion de tags comportant le caractère `!` n'est pas possible avec cette fonction.
-
+**Remarque** : la personnalisation de tags via cette liste ne permet pas d'exclure de tags. L'ajout de tags débutant par `!` n'est pas accepté.
 
 [1]: /fr/metrics/metrics-without-limits/
 {{% /tab %}}

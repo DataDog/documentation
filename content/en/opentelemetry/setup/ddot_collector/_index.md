@@ -160,7 +160,7 @@ The default Datadog Agent package includes a DDOT Collector with a [curated set 
 - (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to extend the Datadog Agent's capabilities.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Quick start with the default Agent package{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/kubernetes" >}}Quick start with the default Agent package{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Migrate from OpenTelemetry Collector to Datadog Agent

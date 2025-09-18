@@ -1,5 +1,6 @@
 ---
 title: Cost Details
+description: Track Datadog costs with cost summaries and chargebacks, including projected monthly costs, historical data, and multi-organization cost allocation.
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"

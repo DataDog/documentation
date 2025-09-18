@@ -1,0 +1,30 @@
+{
+  "data": {
+    "attributes": {
+      "conditions": [
+        {
+          "field": "severity",
+          "values": [
+            "SEV-1",
+            "SEV-2"
+          ]
+        }
+      ],
+      "handles": [
+        "@test-email@company.com"
+      ],
+      "visibility": "organization",
+      "trigger": "incident_created_trigger",
+      "enabled": true
+    },
+    "relationships": {
+      "incident_type": {
+        "data": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "type": "incident_types"
+        }
+      }
+    },
+    "type": "incident_notification_rules"
+  }
+}

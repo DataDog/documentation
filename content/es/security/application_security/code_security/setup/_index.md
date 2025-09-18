@@ -26,9 +26,9 @@ Antes de configurar Code Security, asegúrate de que se cumplen los siguientes r
 
 1. **Instalación del Datadog Agent:** El Datadog Agent se instala y configura para el sistema operativo de tu aplicación, o el contenedor, la nube o el entorno virtual.
 2. **Configuración de Datadog APM:** Datadog APM está configurado para tu aplicación o servicio y Datadog recibe las trazas (traces) web (`type:web`).
-3. **Biblioteca de rastreo compatible:** La biblioteca de rastreo Datadog utilizada por tu aplicación o servicio admite capacidades de Code Security para el lenguaje de tu aplicación o servicio. Para obtener más detalles, consulta la página [Compatibilidad de biblioteca][1].
+3. **Biblioteca de rastreo compatible:** La librería de rastreo Datadog utilizada por tu aplicación o servicio admite capacidades de Code Security para el lenguaje de tu aplicación o servicio. Para obtener más detalles, consulta la página [Compatibilidad de librería][1].
 
-## Uso de bibliotecas de rastreo de Datadog
+## Uso de librerías de rastreo de Datadog
 
 Selecciona el lenguaje de la aplicación para obtener información sobre cómo habilitar la seguridad del código para tu lenguaje y los tipos de infraestructura.
 
