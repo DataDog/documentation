@@ -306,7 +306,7 @@ spec:
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
-Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
+Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [exclude CIDR ranges](#exclude-cidr-ranges) to filter specific network ranges.
 
 <div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
 
@@ -431,6 +431,32 @@ datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Exclude CIDR ranges
+
+CIDR (Classless Inter-Domain Routing) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
+
+- Reduce monitoring overhead for internal networks
+- Focus on external traffic patterns
+- Exclude known infrastructure ranges that don't require monitoring
+
+To exclude specific CIDR ranges from network traffic paths, configure the following in your `/etc/datadog-agent/datadog.yaml` file:
+
+```yaml
+network_path:
+    connections_monitoring:
+        enabled: true # enable network path collection
+    collector:
+        source_excludes:
+            "10.0.0.0/8":
+                - "*" # all ports
+        dest_excludes:
+            "10.0.0.0/8":
+                - "*" # all ports
+            "8.8.8.8":
+                - "53" # dns
+                - "33434-33464" # traceroute range
+```
 
 ## Troubleshooting
 
