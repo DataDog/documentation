@@ -212,17 +212,17 @@ export function getJSONVariationWrapper(
     {{< /code-block >}}
 
 ## 6. Recreate critical flags in Eppo {#recreate-critical-flags}
-  > **note**
-  > Eppo can help with migrating flags to the Eppo dashboard. Please reach out to your customer support rep for help.
+
+<div class="alert alert-info"><strong>Note</strong>: Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
  
- 1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s](https://docs.statsig.com/console-api/introduction/) and [Eppo’s](https://docs.geteppo.com/reference/api/) REST APIs.
- 1. Ensure that the flag configurations, such as rollout percentages, targeting rules, and variations, are accurately replicated in the new service.
+1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s](https://docs.statsig.com/console-api/introduction/) and [Eppo’s](https://docs.geteppo.com/reference/api/) REST APIs.
+1. Ensure that the flag configurations, such as rollout percentages, targeting rules, and variations, are accurately replicated in the new service.
 
 
 ## 7. Switch existing flags to the new application {#switch-to-new-app}
- 1. Once you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
- 1. Remove the fallback mechanism and the Statsig flag code once you have confirmed that the Eppo flags are working as expected in production.
- 1. It's recommended to keep the wrapper as a facade to make future changes easier, as they will typically only need to be made to the wrapper.
+1. Once you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
+1. Remove the fallback mechanism and the Statsig flag code once you have confirmed that the Eppo flags are working as expected in production.
+1. It's recommended to keep the wrapper as a facade to make future changes easier, as they will typically only need to be made to the wrapper.
 
 {{< code-block lang="typescript" filename="FeatureHelper.ts" >}}
 export function isFeatureEnabled(
