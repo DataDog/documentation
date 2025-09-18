@@ -4705,7 +4705,7 @@ menu:
       parent: llm_obs
       identifier: llm_obs_instrumentation
       weight: 2
-    - name: Automatic Instrumentation
+    - name: Automatic
       url: llm_observability/instrumentation/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
