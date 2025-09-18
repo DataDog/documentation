@@ -246,7 +246,7 @@ name: datadog
 <div class="alert alert-info">
 With Datadog Agent v7.67+, the Admission Controller can automatically mount Datadog UDS sockets to mutated pods by setting the injection config mode to <code>csi</code>. For more information, see <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">Admission Controller: Configure APM and DogStatsD Communication Mode</a>.
 
-<strong>Note:</strong>With the default configuration of the Datadog Agent, the Admission Controller injects `APMSocketDirectory` or `DSDSocketDirectory`. If the Trace Agent and DogStatsD sockets are both in the same directory on the host, only one volume will be injected because this will subsequently provide access to both sockets as they share the same directory on the host.
+With the default configuration of the Datadog Agent, the Admission Controller injects <code>APMSocketDirectory</code> or <code>DSDSocketDirectory</code>. If the Trace Agent and DogStatsD sockets are both in the same directory on the host, only one volume is injected because this subsequently provides access to both sockets, as they share the same directory on the host.
 </div>
 
 ## Security considerations
