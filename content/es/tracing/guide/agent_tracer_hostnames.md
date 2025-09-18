@@ -8,7 +8,7 @@ En Datadog APM , la etiqueta `host` correlaciona tramos (spans) y trazas (traces
 
 ## Nombre de host del Datadog Agent frente al rastreador
 
-El **host de Agent** es el host en el que se está ejecutando el Datadog Agent. El **host de rastreador** es el host en el que se está ejecutando la aplicación instrumentada con la biblioteca de rastreo.
+El **host de Agent** es el host en el que se está ejecutando el Datadog Agent. El **host de rastreador** es el host en el que se está ejecutando la aplicación instrumentada con la librería de rastreo.
 
 El host de Agent y el host de rastreador pueden diferir en función de cómo despliegues el Datadog Agent en tu infraestructura:
 

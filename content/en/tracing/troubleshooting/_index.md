@@ -1,5 +1,6 @@
 ---
 title: APM Troubleshooting
+description: Comprehensive troubleshooting guide for APM issues including trace retention, service configuration, and connection errors.
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
     - /tracing/troubleshooting/faq_apm/

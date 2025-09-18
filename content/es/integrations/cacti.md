@@ -100,7 +100,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 
 ### Configuración
 
-#### Crear un usuario de Datadog 
+#### Crear un usuario de Datadog
 
 1. Crea un usuario de Datadog con derechos de solo lectura para la base de datos Cacti.
 
@@ -216,7 +216,7 @@ El check de Cacti no incluye checks de servicio.
 
 ### Problemas conocidos
 
-La biblioteca Python que utiliza esta integración pierde memoria en determinadas circunstancias. Si esto te sucede, una solución alternativa es instalar el paquete [python-rrdtool][6] en lugar de rrdtool. Este paquete antiguo no recibe mantenimiento y esta integración no lo admite oficialmente, pero ha ayudado a otros a resolver los problemas de memoria.
+La librería Python que utiliza esta integración pierde memoria en determinadas circunstancias. Si esto te sucede, una solución alternativa es instalar el paquete [python-rrdtool][6] en lugar de rrdtool. Este paquete antiguo no recibe mantenimiento y esta integración no lo admite oficialmente, pero ha ayudado a otros a resolver los problemas de memoria.
 
 Se ha abierto un [problema de Github][7] para rastrear esta pérdida de memoria.
 

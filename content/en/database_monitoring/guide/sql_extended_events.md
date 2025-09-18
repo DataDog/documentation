@@ -1,6 +1,5 @@
 ---
-title: Configuring Deobfuscated Query Event and Query Error Capture on SQL Server
-private: true
+title: Configuring Query Completion and Query Error Capture on SQL Server
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -8,14 +7,21 @@ further_reading:
 - link: "/database_monitoring/setup_sql_server/"
   tag: "Documentation"
   text: "Setting Up SQL Server"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Configuring Query Capture with Parameter Values"
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Database Monitoring"
 ---
 
-This feature collects deobfuscated queries and query error events from your SQL Server instances using Extended Events (XE). It provides visibility into:
-- Metrics and behavior of SQL queries with deobfuscated parameter values
+This feature collects query completion and query error events from your SQL Server instances using Extended Events (XE). It provides visibility into:
+- Metrics and behavior of SQL queries with parameter values
 - Errors and timeouts that occurred during execution
+
+For information about query parameter capture across different database systems, see [Configuring Query Capture with Parameter Values][1].
+
+[1]: /database_monitoring/guide/parameterized_queries/
 
 This data is useful for:
 - Performance analysis
@@ -25,7 +31,7 @@ This data is useful for:
 
 ## Before you begin
 
-You must configure Database Monitoring for your [SQL Server][1] before continuing with this guide.
+You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
 
 
 Supported databases
@@ -166,14 +172,14 @@ See the [sample conf.yaml.example][3] for all available configuration options.
     query_errors:
       enabled: true
 ```
-To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
+To collect query statements with parameter values, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`. For more information about parameter capture, see [Configuring Query Capture with Parameter Values][1].
 
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
@@ -308,14 +314,14 @@ See the [sample conf.yaml.example][3] for all available configuration options.
     query_errors:
       enabled: true
 ```
-To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
+To collect query statements with parameter values, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`. For more information about parameter capture, see [Configuring Query Capture with Parameter Values][1].
 
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class

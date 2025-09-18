@@ -1,5 +1,6 @@
 ---
 title: Service Overrides
+description: Understand service overrides and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
 further_reading:
 - link: "/tracing/services/inferred_services"

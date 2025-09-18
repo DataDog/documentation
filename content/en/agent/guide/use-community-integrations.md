@@ -1,5 +1,6 @@
 ---
 title: Use Community and Marketplace Integrations
+description: Installation and configuration guide for community-developed and Marketplace integrations with the Datadog Agent across different environments.
 aliases:
   - /agent/guide/community-integrations-installation-with-docker-agent
 further_reading:
