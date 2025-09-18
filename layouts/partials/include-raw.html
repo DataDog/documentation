@@ -1,0 +1,9 @@
+{{/* 
+  include-raw.html
+  Reads an HTML fragment from /assets and outputs it untouched.
+  Expects a dict with key "path", like (dict "path" "docs/widget-x-body.html").
+*/}}
+
+{{ $path := .path }}                               {{/* get the relative path */}}
+{{ $raw  := readFile (printf "assets/%s" $path) }} {{/* load the file contents */}}
+{{ $raw | safeHTML }}                              {{/* mark as safe, output directly */}}

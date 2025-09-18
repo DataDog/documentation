@@ -14,4 +14,8 @@
 
   {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }}
   {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+  {{/* If the page has a rawBody param, include that file */}}
+  {{ with .Params.rawBody }}
+    {{ partialCached "include-raw.html" (dict "path" .) . }}
+  {{ end }}
 {{ end }}
