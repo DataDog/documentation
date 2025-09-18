@@ -37,7 +37,7 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 | Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Pod | User-defined tags found on Kubernetes pods monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Persistent Volume | User-defined tags found on Persistent Volumes in Kubernetes clusters monitored with Datadog |
-| Kubernetes Persistent Volume Claim | User-defined tags found on Persistent Volume Claims in Kubernetes clusters monitored with Datadog | 
+| Kubernetes Enrichment | Kubernetes Persistent Volume Claim | User-defined tags found on Persistent Volume Claims in Kubernetes clusters monitored with Datadog | 
 | Cloud Cost Management | Cloud Cost Aliases | Some aliases are tags derived from provider cost data, used to simplify the cost data model, such as `aws_product`, which is an alias of `lineItem/ProductCode`. Additional tags that exist on both cost data and integration metrics are added, allowing cost data and usage data to be combined in Custom Allocation Rules, dashboards, and notebooks |
 | Cloud Cost Management | Cloud Cost Allocation | Tags created during cost allocation that specify the split of shared resources, such as `allocated_spend_type` |
 | Cloud Cost Management | FOCUS | Provider-agnostic tags compliant with [FOCUS][8], the unifying format for cloud billing data |
