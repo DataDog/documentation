@@ -59,7 +59,7 @@ Datadog also adds provider specific tags:
 | Google Cloud | Google Billing Export - Project Labels| User-defined labels on a project in Google Cloud, found in the project.labels column in the billing export |
 | Google Cloud | Google Billing Export - System Resource Labels | System-generated labels on a resource in Google Cloud, found in the system_labels column in the billing export |
 | Google Cloud | Google Billing Export - User Resource Labels | User-defined labels on a cloud resource in Google Cloud, found in the labels column in the billing export |
-| Google Cloud | Google Billing Export - User Resource Tags | User-defined tags on a cloud resource in Google Cloud, found in the tags column in the billing export |
+| Google Cloud | Google Billing Export - User Resource Tags | User-defined tags on a cloud resource in Google Cloud, found in the tags column in the billing export. The `goog-originating-sku-description` tag is added leveraging Google's SKU APis, to provide more granular SKU details for commitment line items. |
 | Google Cloud | GKE Pod | User-defined labels found on pods running in Google Kubernetes Engine | 
 | Oracle Cloud | OCI Cost Export - User Resource Tags | User-defined tags on a cloud resource in Oracle Cloud Infrastructure, from the Tags column in the OCI FOCUS cost export |
 | Datadog | Datadog Usage Attribution | User-defined tags for Usage Attribution in Datadog Plan and Usage |
