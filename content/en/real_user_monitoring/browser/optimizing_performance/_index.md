@@ -1,5 +1,6 @@
 ---
 title: Optimizing Performance
+description: "Use the RUM Optimization page to identify and troubleshoot browser performance issues with Core Web Vitals analysis and user experience visualization."
 aliases:
   - real_user_monitoring/browser/monitoring_performance_vitals/
 further_reading:
