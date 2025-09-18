@@ -15,12 +15,12 @@ Datadog offers multiple setup options to accommodate various use cases, from ful
 
 Datadog supports several configurations for using OpenTelemetry. The primary difference between these setups is the choice of SDK (OpenTelemetry or Datadog) and the collector used to process and forward telemetry data.
 
-| Setup Type                           | API                    | SDK         | Collector/Agent                  |
-|--------------------------------------|------------------------|-------------|----------------------------------|
-| **Datadog SDK + DDOT (Recommended)** | Datadog API & OTel API | Datadog SDK | Datadog OTel Collector (DDOT)    |
-| **OTel SDK + DDOT**                  | OTel API               | OTel SDK    | Datadog OTel Collector (DDOT)    |
-| **OTel SDK + OSS Collector**         | OTel API               | OTel SDK    | OTel Collector (OSS)             |
-| **Agentless OTLP**                   | OTel API               | OTel SDK    | N/A (Direct to Datadog endpoint) |
+| Setup Type                                 | API                    | SDK         | Collector/Agent                               |
+|--------------------------------------------|------------------------|-------------|-----------------------------------------------|
+| [**Datadog SDK + DDOT (Recommended)**][29] | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
+| [**OTel SDK + DDOT**][29]                  | OTel API               | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
+| [**OTel SDK + OSS Collector**][7]          | OTel API               | OTel SDK    | OTel Collector (OSS)                          |
+| [**Agentless OTLP**][28]                   | OTel API               | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
@@ -108,3 +108,5 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [25]: /tracing/trace_collection/span_links/
 [26]: /tracing/metrics/metrics_namespace/
 [27]: /tracing/trace_collection/
+[28]: /opentelmetry/agentless
+[29]: /opentelemetry/setup/ddot_collector
