@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Monitors
+description: Create metric monitors with threshold alerts and custom notifications to proactively track system health and performance issues.
 aliases:
   - /getting_started/application/monitors
 further_reading:

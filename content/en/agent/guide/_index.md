@@ -1,5 +1,6 @@
 ---
 title: Agent Guides
+description: "Collection of comprehensive guides covering Datadog Agent configuration, installation, troubleshooting, and advanced features."
 private: true
 disable_toc: true
 cascade:
