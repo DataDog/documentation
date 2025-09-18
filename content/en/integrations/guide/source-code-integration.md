@@ -476,22 +476,15 @@ You can see links from stack frames to their source repository in [Error Trackin
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see a source code preview for profile frames in the [Continuous Profiler][1].
+You can see inline code snippets directly in [Continuous Profiler][1] flame graphs.
 
-1. Navigate to [**APM** > **Profile Search**][2].
+1. Navigate to [**APM** > **Profile Explorer**][2].
 2. Hover your cursor over a method in the flame graph.
-3. If needed, press `Opt` or `Alt` to enable the preview.
-4. If you're using the GitHub or GitLab integrations, click **Connect to preview** to see inline code snippets directly in the flame graph.
+3. Press `Opt` in macOS or `Ctrl` in other operating systems to lock the tooltip and interact with its content.
+3. If prompted to do so, click **Connect to preview**. 
+4. Click on the file link to open the repository and view the full source code.
 
-{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
-
-You can also see links from profile frames to their source repository. This is supported for profiles broken down by line, method, or file.
-
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
-
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/explorer
