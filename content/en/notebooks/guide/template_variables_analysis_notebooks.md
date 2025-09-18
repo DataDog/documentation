@@ -21,9 +21,9 @@ Most analysis cells support template variables, but some have limited or no supp
 | ----- | ----- | ----- |
 | [Data source](#data-source) | {{< X >}} | Cell name not supported. |
 | [Transformation](#transformation) | {{< X >}} | Cell name not supported. |
-| [Visualization](#visualization) | {{< X >}} | All vizualization types supported (scatterplot requires extra fields). |
-| [SQL Analysis](#sql-analysis) | Not Supported | Not supported. |
-| [Published dataset (reused elsewhere)](#published-datasets) | Limited Support | template variables are resolved at publish time, you must republish to update downstream. |
+| [Visualization](#visualization) | {{< X >}} | All visualization types supported (scatterplot requires extra fields). |
+| [SQL Analysis](#sql-analysis) | Not supported | Not supported. |
+| [Published dataset (reused elsewhere)](#published-datasets) | Limited support | Template variables are resolved at publish time, you must republish to update downstream. |
 
 ## Support widgets
 
@@ -43,7 +43,7 @@ For all supported widgets, results update dynamically when template variables ch
 ### Visualization
 * Supported in cell titles, filters, and analysis queries.
 * All visualization types are supported.
-* Filters remain consistent when switching visualization types, except [scatterplots][3] (which require additional setup).
+* Filters remain consistent when switching visualization types, except [scatter plots][3] (which require additional setup).
 
 **Note:** Visualizations with published datasets behave the same as standard visualizations, and their results update when template variables change in the source notebook.
 
