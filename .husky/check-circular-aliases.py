@@ -26,6 +26,19 @@ def parse_frontmatter(content):
         
         if line.startswith('aliases:'):
             in_aliases_section = True
+
+            # Check if aliases are on the same line
+            if ':' in line and line.split(':', 1)[1].strip():
+                # Handle single line format like "aliases: [/path1, /path2]"
+                aliases_part = line.split(':', 1)[1].strip()
+                if aliases_part.startswith('[') and aliases_part.endswith(']'):
+                    # Parse bracket format
+                    aliases_content = aliases_part[1:-1]
+                    for alias in aliases_content.split(','):
+                        alias = alias.strip().strip('"\'')
+                        if alias:
+                            aliases.append(alias)
+                    in_aliases_section = False
             continue
         
         if in_aliases_section:
