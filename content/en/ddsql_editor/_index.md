@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" >}}
-Querying Logs, Metrics, Spans, RUM, and Product Analytics as a data source in DDSQL is in Preview. Use this form to request access.
+Querying Logs, Metrics, Spans, RUM, and Product Analytics as data sources in DDSQL is in Preview. Use this form to request access.
 
 If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
 {{< /callout >}} 
