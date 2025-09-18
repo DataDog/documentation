@@ -27,7 +27,7 @@ type: multi-code-lang
 
 ## Inyección
 
-### Registro de la biblioteca estándar
+### Registro de la librería estándar
 
 Para correlacionar tus [trazas[1] con tus logs, completa los siguientes pasos:
 
@@ -38,9 +38,9 @@ Para correlacionar tus [trazas[1] con tus logs, completa los siguientes pasos:
 
 Activa la instrumentación automática mediante una de las siguientes opciones:
 
-Opción 1: [inyección de biblioteca][5]:
+Opción 1: [inyección de librería][5]:
   1. Establece la variable de entorno `DD_LOGS_INJECTION=true` en el archivo `deployment/manifest` de la aplicación.
-  2. Sigue las instrucciones de la [Inyección de biblioteca][5] para configurar el rastreo.
+  2. Sigue las instrucciones de la [Inyección de librería][5] para configurar el rastreo.
 
 Opción 2: `ddtrace-run`:
   1. Establece la variable de entorno `DD_LOGS_INJECTION=true` en el entorno donde se ejecuta la aplicación.
@@ -81,9 +81,9 @@ hello()
 
 Para obtener más información sobre la inyección de logs, lee la [documentación de ddtrace][6].
 
-### Sin registro de la biblioteca estándar
+### Sin registro de la librería estándar
 
-Si nos utiliza el módulo `logging` de la biblioteca estándar, puedes utilizar el siguiente fragmento de código para inyectar información de rastreo en tus logs:
+Si nos utiliza el módulo `logging` de la librería estándar, puedes utilizar el siguiente fragmento de código para inyectar información de rastreo en tus logs:
 
 ```python
 from ddtrace import tracer

@@ -479,6 +479,23 @@ components:
       required: true
       schema:
         type: string
+    IncidentImpactIDPathParameter:
+      description: The UUID of the incident impact.
+      in: path
+      name: impact_id
+      required: true
+      schema:
+        type: string
+    IncidentImpactIncludeQueryParameter:
+      description: Specifies which related resources should be included in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentImpactRelatedObject'
+        type: array
     IncidentIncludeQueryParameter:
       description: Specifies which types of related objects should be included in
         the response.
@@ -6057,7 +6074,7 @@ components:
       description: Request object.
       properties:
         data:
-          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataSingleOrArray'
       type: object
     CIAppCreatePipelineEventRequestAttributes:
       description: Attributes of the pipeline event to create.
@@ -6093,6 +6110,16 @@ components:
         type:
           $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataType'
       type: object
+    CIAppCreatePipelineEventRequestDataArray:
+      description: Array of pipeline events to create in batch.
+      items:
+        $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+      type: array
+    CIAppCreatePipelineEventRequestDataSingleOrArray:
+      description: Data of the pipeline events to create.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+      - $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataArray'
     CIAppCreatePipelineEventRequestDataType:
       default: cipipeline_resource_request
       description: Type of the event.
@@ -20244,6 +20271,177 @@ components:
       - TEXTARRAY
       - METRICTAG
       - AUTOCOMPLETE
+    IncidentImpactAttributes:
+      description: The incident impact's attributes.
+      properties:
+        created:
+          description: Timestamp when the impact was created.
+          example: '2025-08-29T13:17:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the impact.
+          example: Service was unavailable for external users
+          type: string
+        end_at:
+          description: Timestamp when the impact ended.
+          example: '2025-08-29T13:17:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          $ref: '#/components/schemas/IncidentImpactFieldsObject'
+        impact_type:
+          description: The type of impact.
+          example: customer
+          type: string
+        modified:
+          description: Timestamp when the impact was last modified.
+          example: '2025-08-29T13:17:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        start_at:
+          description: Timestamp representing when the impact started.
+          example: '2025-08-28T13:17:00Z'
+          format: date-time
+          type: string
+      required:
+      - description
+      - start_at
+      type: object
+    IncidentImpactCreateAttributes:
+      description: The incident impact's attributes for a create request.
+      properties:
+        description:
+          description: Description of the impact.
+          example: Service was unavailable for external users
+          type: string
+        end_at:
+          description: Timestamp when the impact ended.
+          example: '2025-08-29T13:17:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          $ref: '#/components/schemas/IncidentImpactFieldsObject'
+        start_at:
+          description: Timestamp when the impact started.
+          example: '2025-08-28T13:17:00Z'
+          format: date-time
+          type: string
+      required:
+      - description
+      - start_at
+      type: object
+    IncidentImpactCreateData:
+      description: Incident impact data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentImpactCreateAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentImpactType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentImpactCreateRequest:
+      description: Create request for an incident impact.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentImpactCreateData'
+      required:
+      - data
+      type: object
+    IncidentImpactFieldsObject:
+      additionalProperties: {}
+      description: An object mapping impact field names to field values.
+      example:
+        customers_impacted: all
+        products_impacted:
+        - shopping
+        - marketing
+      nullable: true
+      type: object
+    IncidentImpactRelatedObject:
+      description: A reference to a resource related to an incident impact.
+      enum:
+      - incident
+      - created_by_user
+      - last_modified_by_user
+      type: string
+      x-enum-varnames:
+      - INCIDENT
+      - CREATED_BY_USER
+      - LAST_MODIFIED_BY_USER
+    IncidentImpactRelationships:
+      description: The incident impact's resource relationships.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        incident:
+          $ref: '#/components/schemas/RelationshipToIncident'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentImpactResponse:
+      description: Response with an incident impact.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentImpactResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentUserData'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentImpactResponseData:
+      description: Incident impact data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentImpactAttributes'
+        id:
+          description: The incident impact's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentImpactRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentImpactType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentImpactType:
+      default: incident_impacts
+      description: Incident impact resource type.
+      enum:
+      - incident_impacts
+      example: incident_impacts
+      type: string
+      x-enum-varnames:
+      - INCIDENT_IMPACTS
+    IncidentImpactsResponse:
+      description: Response with a list of incident impacts.
+      properties:
+        data:
+          description: An array of incident impacts.
+          items:
+            $ref: '#/components/schemas/IncidentImpactResponseData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentUserData'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
     IncidentImpactsType:
       description: The incident impacts type.
       enum:
@@ -21021,6 +21219,7 @@ components:
       - data
       type: object
     IncidentResponseAttributes:
+      additionalProperties: {}
       description: The incident's attributes from a response.
       properties:
         archived:
@@ -21065,6 +21264,17 @@ components:
           description: A flag indicating whether the incident caused customer impact.
           example: false
           type: boolean
+        declared:
+          description: Timestamp when the incident was declared.
+          format: date-time
+          readOnly: true
+          type: string
+        declared_by:
+          $ref: '#/components/schemas/IncidentNonDatadogCreator'
+        declared_by_uuid:
+          description: UUID of the user who declared the incident.
+          nullable: true
+          type: string
         detected:
           description: Timestamp when the incident was detected.
           format: date-time
@@ -21221,6 +21431,8 @@ components:
         commander_user:
           $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        declared_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
         impacts:
           $ref: '#/components/schemas/RelationshipToIncidentImpacts'
@@ -35856,6 +36068,14 @@ components:
           description: Relationship type.
           type: string
       type: object
+    RelationshipToIncident:
+      description: Relationship to incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToIncidentData'
+      required:
+      - data
+      type: object
     RelationshipToIncidentAttachment:
       description: A relationship reference for attachments.
       properties:
@@ -35882,6 +36102,19 @@ components:
       type: object
       x-merge-override:
         required: false
+    RelationshipToIncidentData:
+      description: Relationship to incident object.
+      properties:
+        id:
+          description: A unique identifier that represents the incident.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - id
+      - type
+      type: object
     RelationshipToIncidentImpactData:
       description: Relationship to impact object.
       properties:
@@ -39678,6 +39911,9 @@ components:
     SecurityMonitoringRuleConvertResponse:
       description: Result of the convert rule request containing Terraform content.
       properties:
+        ruleId:
+          description: the ID of the rule.
+          type: string
         terraformContent:
           description: Terraform string as a result of converting the rule from JSON.
           type: string
@@ -52910,6 +53146,9 @@ paths:
         we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
+        Multiple events can be sent in an array (up to 1000).
+
+
         Pipeline events can be submitted with a timestamp that is up to 18 hours in
         the past.'
       operationId: CreateCIAppPipelineEvent
@@ -55495,14 +55734,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_manage
       summary: Delete a dataset
       tags:
       - Datasets
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note: Data Access is in preview. If you have any feedback,
@@ -55531,7 +55772,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get a single dataset by ID
       tags:
       - Datasets
@@ -55574,15 +55816,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_manage
       summary: Edit a dataset
       tags:
       - Datasets
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         type: idempotent
       x-unstable: '**Note: Data Access is in preview. If you have any feedback,
@@ -57822,6 +58066,151 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/impacts:
+    get:
+      description: Get all impacts for an incident.
+      operationId: ListIncidentImpacts
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentImpactIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentImpactsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: List an incident's impacts
+      tags:
+      - Incidents
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an impact for an incident.
+      operationId: CreateIncidentImpact
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentImpactIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentImpactCreateRequest'
+        description: Incident impact payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentImpactResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create an incident impact
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_impact:
+          operationId: CreateIncidentImpact
+          parameters:
+          - name: incident_id
+            source: incident.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"incident_impacts\",\n    \"attributes\":
+              {\n      \"start_at\": \"2025-09-12T13:50:00.000Z\",\n      \"end_at\":
+              \"2025-09-12T14:50:00.000Z\",\n      \"description\": \"Outage in the
+              us-east-1 region\"\n    }\n  }\n}"
+          step: the "incident" has an "incident_impact"
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
+      x-undo:
+        operationId: DeleteIncidentImpact
+        parameters:
+        - name: incident_id
+          source: data.relationships.incident.data.id
+        - name: impact_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/impacts/{impact_id}:
+    delete:
+      description: Delete an incident impact.
+      operationId: DeleteIncidentImpact
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentImpactIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete an incident impact
+      tags:
+      - Incidents
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/relationships/integrations:
@@ -65226,6 +65615,39 @@ paths:
     get:
       description: Returns a list of org connections.
       operationId: ListOrgConnections
+      parameters:
+      - description: The Org ID of the sink org.
+        example: 0879ce27-29a1-481f-a12e-bc2a48ec9ae1
+        in: query
+        name: sink_org_id
+        required: false
+        schema:
+          type: string
+      - description: The Org ID of the source org.
+        example: 0879ce27-29a1-481f-a12e-bc2a48ec9ae1
+        in: query
+        name: source_org_id
+        required: false
+        schema:
+          type: string
+      - description: The limit of number of entries you want to return. Default is
+          1000.
+        example: 1000
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The pagination offset which you want to query from. Default is
+          0.
+        example: 0
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
