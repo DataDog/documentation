@@ -1,5 +1,6 @@
 ---
 title: Notification Message Best Practices
+description: "Best practices for writing clear, actionable monitor notification messages with variables, conditional logic, and structured templates."
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

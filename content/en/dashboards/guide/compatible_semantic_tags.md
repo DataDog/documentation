@@ -1,5 +1,6 @@
 ---
 title: Compatible semantic tags
+description: Use meaning-driven semantic color palettes that automatically map compatible tags to consistent colors across charts.
 aliases:
 - /dashboards/guide/semantic_colors
 further_reading:

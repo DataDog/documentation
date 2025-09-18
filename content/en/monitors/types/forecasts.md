@@ -1,5 +1,6 @@
 ---
 title: Forecasts Monitor
+description: "Predict future metric trends using linear and seasonal algorithms to alert before issues occur, such as disk space running out."
 aliases:
 - /guides/forecasts/
 - /monitors/monitor_types/forecasts
