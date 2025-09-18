@@ -302,7 +302,7 @@ GraalVM Native Image is a technology that allows you to compile Java application
 
 Use:
 
-- [GraalVM JDK 21][7]
+- [GraalVM JDK 21 or JDK 25][7]
 - [Datadog Java tracer][1]
 
 ### Setup
@@ -373,6 +373,8 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+<div class="alert alert-info">For GraalVM 25, you may see errors related to `Use of Unsafe`. Add `-Dnet.bytebuddy.safe=false` when building the native executable to address this.</div>
 
 #### Usage
 
