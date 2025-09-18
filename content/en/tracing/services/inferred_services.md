@@ -119,7 +119,7 @@ exporters:
 
 ## Naming inferred entities
 
-To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For example, inferred external APIs use the default naming scheme `net.peer.name` like `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`. You can rename inferred entities by creating [renaming rules](https://docs.datadoghq.com/tracing/services/renaming_rules/).
+To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For example, inferred external APIs use the default naming scheme `net.peer.name` like `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`. You can rename inferred entities by creating [renaming rules][5].
 
 ### Peer tags
 
@@ -171,6 +171,8 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
+[5]: /tracing/services/renaming_rules/
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 <div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
