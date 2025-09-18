@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-In Datadog, you can rename inferred entities, including datastores and queues, to make them easier to identify and manage. Renaming rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions.  
+In Datadog, you can rename inferred entities, including datastores and queues, to make them easier to identify and manage. Renaming rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions. This functionality applies across all of APM, not only in the service catalog. After a rule is created, the updated names appear consistently in service maps, Trace Explorer, monitors, dashboards, and any other APM view.
 
 Renaming is useful when:
 - The default name does not match your preferences or conventions.  

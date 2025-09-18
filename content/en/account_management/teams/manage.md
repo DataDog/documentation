@@ -1,5 +1,6 @@
 ---
 title: Team Management
+description: Customize team pages, manage membership, set up subteams, and configure team access through identity providers or SAML attribute mapping.
 ---
 
 ## Team detail
