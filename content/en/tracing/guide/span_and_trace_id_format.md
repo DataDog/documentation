@@ -1,6 +1,6 @@
 ---
 title: Trace and Span ID Formats
-description: Understand the valid formats for trace and span IDs supported by Datadog tracing libraries and how they correlate with logs.
+description: Guide on valid trace and span ID formats supported by Datadog tracing libraries and how they correlate with logs.
 
 aliases:
   - /tracing/faq/span_and_trace_id_format/
