@@ -1,3 +1,0 @@
----
-title: Sensitive Data Scanner
----

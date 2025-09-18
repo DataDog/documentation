@@ -1,9 +1,0 @@
-{
-  "data": {
-    "attributes": {
-      "name": "datastore-name",
-      "primary_column_name": "primaryKey"
-    },
-    "type": "datastores"
-  }
-}

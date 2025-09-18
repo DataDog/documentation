@@ -1,4 +1,0 @@
----
-title: セキュリティモニタリング
-headless: true
----

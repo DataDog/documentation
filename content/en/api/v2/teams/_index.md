@@ -1,4 +1,0 @@
----
-title: Teams
-headless: true
----

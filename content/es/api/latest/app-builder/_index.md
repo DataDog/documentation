@@ -1,3 +1,0 @@
----
-title: Creador de aplicaciones
----

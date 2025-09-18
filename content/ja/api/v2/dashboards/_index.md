@@ -1,4 +1,0 @@
----
-title: ダッシュボード
-headless: true
----

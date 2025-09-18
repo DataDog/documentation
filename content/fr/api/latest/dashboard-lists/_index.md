@@ -1,3 +1,0 @@
----
-title: Listes de dashboards
----

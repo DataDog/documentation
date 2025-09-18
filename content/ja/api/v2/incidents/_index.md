@@ -1,4 +1,0 @@
----
-title: インシデント
-headless: true
----

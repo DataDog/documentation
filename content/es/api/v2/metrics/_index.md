@@ -1,4 +1,0 @@
----
-headless: true
-title: Métricas
----

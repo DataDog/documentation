@@ -1,3 +1,0 @@
----
-title: Plages d'IP
----

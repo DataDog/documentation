@@ -1,4 +1,0 @@
----
-title: Events
-headless: true
----

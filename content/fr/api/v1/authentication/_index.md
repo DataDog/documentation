@@ -1,4 +1,0 @@
----
-title: Authentification
-headless: true
----

@@ -1,8 +1,0 @@
-{
-  "data": {
-    "attributes": {
-      "api_key": "update-secret"
-    },
-    "type": "fastly-accounts"
-  }
-}

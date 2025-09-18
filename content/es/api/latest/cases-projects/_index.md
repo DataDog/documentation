@@ -1,3 +1,0 @@
----
-title: Proyectos de casos
----

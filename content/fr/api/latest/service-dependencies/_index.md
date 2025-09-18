@@ -1,3 +1,0 @@
----
-title: Dépendances de service
----

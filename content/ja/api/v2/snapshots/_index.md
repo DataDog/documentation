@@ -1,4 +1,0 @@
----
-title: スナップショット
-headless: true
----

@@ -1,4 +1,0 @@
----
-title: Cases
-headless: true
----

@@ -1,4 +1,0 @@
----
-title: ログインデックス
-headless: true
----

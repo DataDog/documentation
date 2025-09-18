@@ -1,3 +1,0 @@
----
-title: Logs Restriction Queries
----

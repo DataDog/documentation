@@ -1,9 +1,0 @@
-{
-  "data": {
-    "type": "users",
-    "attributes": {
-      "name": "Datadog API Client Python",
-      "email": "Example-User@datadoghq.com"
-    }
-  }
-}

@@ -1,4 +1,0 @@
----
-headless: true
-title: 서비스 점검
----

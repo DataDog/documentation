@@ -1,3 +1,0 @@
----
-title: Pipelines CI Visibility
----

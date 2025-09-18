@@ -1,3 +1,0 @@
----
-title: Définition de service
----

@@ -1,4 +1,0 @@
----
-title: タイムボード
-headless: true
----

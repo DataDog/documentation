@@ -1,3 +1,0 @@
----
-title: Catálogo de software
----

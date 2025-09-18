@@ -1,4 +1,0 @@
----
-title: RUM
-headless: true
----

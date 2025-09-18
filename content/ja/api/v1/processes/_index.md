@@ -1,4 +1,0 @@
----
-title: プロセス
-headless: true
----

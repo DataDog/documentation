@@ -1,4 +1,0 @@
----
-title: Utilisateurs
-headless: true
----

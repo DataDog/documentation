@@ -1,4 +1,0 @@
----
-title: Powerpack
-headless: true
----

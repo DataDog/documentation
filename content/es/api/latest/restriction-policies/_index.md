@@ -1,3 +1,0 @@
----
-title: Políticas de restricción
----
