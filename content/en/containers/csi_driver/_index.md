@@ -34,7 +34,7 @@ If CSI volumes are not used, the UDS sockets need to be shared with the user pod
 
 The Datadog CSI Driver shifts the hostpath volume from the user application to the CSI node server: the CSI DaemonSet runs in a separate privileged namespace and allows injecting UDS sockets into user pods with a Datadog CSI volume, which allows user pods to run in namespaces with `baseline` or `restricted` pod security standards.
 
-## Installation and Activation
+## Installation and activation
 
 <div class="alert alert-info">
 <strong>Notes</strong>:
@@ -44,15 +44,11 @@ The Datadog CSI Driver shifts the hostpath volume from the user application to t
 </ul>
 </div>
 
-Datadog CSI Driver has its own helm chart that may or may not be required to install manually depending on the Datadog Agent mode used.
-
 {{< tabs >}}
 
 {{% tab "Helm" %}}
 
-If Datadog Agent is deployed using Helm, the CSI driver is installed automatically if Datadog CSI is enabled in Datadog Agent. 
-
-CSI can be enabled during installation by setting `datadog.csi.enabled` to `true` in the Datadog Agent chart.
+To install and activate the Datadog CSI Driver, set `datadog.csi.enabled` to `true` in the Datadog Agent Helm chart.
 
    ```shell
    helm repo add datadog https://helm.datadoghq.com
@@ -65,7 +61,7 @@ CSI can be enabled during installation by setting `datadog.csi.enabled` to `true
 
 {{% tab "Datadog Operator" %}}
 
-To use Datadog CSI Driver with an operator-based installation of Datadog Agent, Datadog CSI Driver has to be installed manually before activating it in the agent.
+If the Datadog Agent is deployed using the Datadog Operator, you must install the Datadog CSI Driver Helm chart before you activate Datadog CSI in the Datadog Agent.
 
 1. **Add the Datadog CSI Helm repository.**
 
@@ -76,7 +72,7 @@ To use Datadog CSI Driver with an operator-based installation of Datadog Agent, 
 
    ```
 
-2. **Install Datadog CSI Driver**
+2. **Install the Datadog CSI Driver Helm chart.**
 
    Run:
 
@@ -84,34 +80,53 @@ To use Datadog CSI Driver with an operator-based installation of Datadog Agent, 
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
 
-3. **Activate CSI in Datadog Agent**
+3. **Activate Datadog CSI in your `DatadogAgent` resource.**
 
-  ```
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiSecret:
-          secretName: datadog-secret
-          keyName: api-key
-      csi:
-        enabled: true
-  ```
+   ```
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+       csi:
+         enabled: true
+   ```
 
 {{% /tab %}}
 
-{{% tab "Daemonset" %}}
+{{% tab "DaemonSet" %}}
 
-If the Datadog Agent is installed manually as Daemonset, Datadog CSI Driver has to be installed manually before activating it in the agent.
+If the Datadog Agent is deployed using a DaemonSet, you must install the Datadog CSI Driver Helm chart before you activate the Datadog CSI Driver in the Datadog Agent.
 
-CSI driver can be activated in the Datadog Agent by setting the following environment variable in the Datadog Cluster Agent container.
+1. **Add the Datadog CSI Driver Helm repository.**
 
-```
-DD_CSI_DRIVER_ENABLED=true
-```
+   Run:
+   ```shell
+   helm repo add datadog-csi-driver https://helm.datadoghq.com
+   helm repo update
+
+   ```
+
+2. **Install the Datadog CSI Driver Helm chart.**
+
+   Run:
+
+   ```shell
+   helm install datadog-csi-driver datadog/datadog-csi-driver
+   ```
+
+3. **Activate Datadog CSI**.
+
+   To activate the Datadog CSI driver, set the following environment variable in the Datadog Cluster Agent container:
+
+   ```
+   DD_CSI_DRIVER_ENABLED=true
+   ```
 {{% /tab %}}
 
 {{< /tabs >}}
