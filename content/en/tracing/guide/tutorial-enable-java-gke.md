@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on Google Kubernetes Engine
+description: Step-by-step tutorial to enable distributed tracing for a Java application deployed on Google Kubernetes Engine with Datadog APM.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
