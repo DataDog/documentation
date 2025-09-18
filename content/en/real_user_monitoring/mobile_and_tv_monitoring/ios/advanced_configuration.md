@@ -1,5 +1,6 @@
 ---
 title: iOS Advanced Configuration
+description: "Configure advanced iOS RUM SDK settings to enrich user sessions, track custom events, and control data collection for better insights."
 aliases:
     - /real_user_monitoring/ios/advanced_configuration
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios

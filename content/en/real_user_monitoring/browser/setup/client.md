@@ -1,5 +1,6 @@
 ---
 title: Browser Monitoring Client-Side Instrumentation
+description: "Set up RUM Browser SDK using client-side instrumentation with NPM or CDN to monitor user experience, performance, and errors in web applications."
 aliases:
   - /real_user_monitoring/setup
 further_reading:
