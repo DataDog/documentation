@@ -1729,7 +1729,65 @@ def rag_workflow(user_question):
 {{% /tab %}}
 {{< /tabs >}}
 
+## Nesting spans
 
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def extract_data(document):
+    preprocess_document(document)
+    ... # performs data extraction on the document
+    return
+
+@task
+def preprocess_document(document):
+    ... # preprocesses a document for data extraction
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function preprocessDocument (document) {
+  ... // preprocesses a document for data extraction
+  return
+}
+preprocessDocument = llmobs.wrap({ kind: 'task' }, preprocessDocument)
+
+function extractData (document) {
+  preprocessDocument(document)
+  ... // performs data extraction on the document
+  return
+}
+extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public void preprocessDocument(String document) {
+   LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
+   ...   // preprocess document for data extraction
+  }
+
+  public String extractData(String document) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("extractData", null, "session-141");
+    preprocessDocument(document)
+    ... // perform data extraction on the document
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+  }
+}
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Evaluations
 
