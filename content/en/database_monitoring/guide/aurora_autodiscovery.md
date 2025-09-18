@@ -128,7 +128,6 @@ database_monitoring:
 
 The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
 
-
 ### Create a configuration template
 
 The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the Aurora clusters you wish to monitor.
@@ -144,8 +143,6 @@ ad_identifiers:
 ```
 
 Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
-
-The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
 ```yaml
 ad_identifiers:
@@ -166,9 +163,41 @@ instances:
 
 In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, `%%extra_dbm%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
+#### Authentication
+
+If you are using password for authentication note that the password provided in this template file will be used across every database discovered. 
+
+{{% collapse-content title="Securely store your password" level="h5" id="securely-store-your-password" %}}
+##### Securely store your password
+{{% dbm-secret %}}
+
+The following example configuration template is applied to every instance discovered in the Aurora cluster:
+
+{{< highlight yaml "hl_lines=8" >}}
+ad_identifiers:
+  - _dbm_postgres_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    password: "ENC[datadog_user_database_password]"
+    dbm: "%%extra_dbm%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+    - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+    - "region:%%extra_region%%"
+{{< /highlight >}}
+{{% /collapse-content %}} 
+
+{{% collapse-content title="IAM Authentication" level="h5" id="iam-authentication" %}}
+##### IAM Authentication
+
 To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
 
-```yaml
+{{< highlight yaml "hl_lines=12-13" >}}
 ad_identifiers:
   - _dbm_postgres_aurora
 init_config:
@@ -185,14 +214,15 @@ instances:
     tags:
       - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
       - "region:%%extra_region%%"
-```
+{{< /highlight >}}
 
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
 [2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
+{{% /collapse-content %}} 
 {{% /tab %}}
-{{% tab "MySQL" %}}
 
+{{% tab "MySQL" %}}
 First, add an `ad_identifier` for Aurora-managed MySQL to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
@@ -212,6 +242,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
+    password: "<DATADOG_USER_PASSWORD>"
     dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
@@ -222,6 +253,63 @@ instances:
 
 In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, `%%extra_dbm%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
+#### Authentication
+
+If you are using password for authentication note that the password provided in this template file will be used across every database discovered. 
+
+{{% collapse-content title="Securely store your password" level="h5" id="securely-store-your-password" %}}
+##### Securely store your password
+{{% dbm-secret %}}
+
+The following example configuration template is applied to every instance discovered in the Aurora cluster:
+
+{{< highlight yaml "hl_lines=8" >}}
+ad_identifiers:
+  - _dbm_mysql_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    password: "ENC[datadog_user_database_password]"
+    dbm: "%%extra_dbm%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+    - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+    - "region:%%extra_region%%"
+{{< /highlight >}}
+{{% /collapse-content %}} 
+
+{{% collapse-content title="IAM Authentication" level="h5" id="iam-authentication" %}}
+##### IAM Authentication
+
+To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
+
+{{< highlight yaml "hl_lines=12-13" >}}
+ad_identifiers:
+  - _dbm_mysql_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+      managed_authentication:
+        enabled: "%%extra_managed_authentication_enabled%%"
+    tags:
+      - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+      - "region:%%extra_region%%"
+{{< /highlight >}}
+
+The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
+
+[2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
+{{% /collapse-content %}} 
 {{% /tab %}}
 {{< /tabs >}}
 

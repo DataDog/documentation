@@ -132,6 +132,9 @@ The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It
 
 The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the RDS instances you wish to monitor.
 
+#### Securely store your password
+{{% dbm-secret %}}
+
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
@@ -156,6 +159,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
+    password: "<DATADOG_USER_PASSWORD>"
     dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
@@ -217,6 +221,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
+    password: "ENC[datadog_user_password]"
     dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
