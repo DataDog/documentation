@@ -5393,25 +5393,25 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
       weight: 909
-    - name: Lambda Forwarder
-      url: observability_pipelines/sources/lambda_forwarder/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 910
-    - name: OpenTelemetry
-      url: observability_pipelines/sources/opentelemetry/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_opentelemetry
-      weight: 911
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 912
+      weight: 910
+    - name: Lambda Forwarder
+      url: observability_pipelines/sources/lambda_forwarder/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_forwarder
+      weight: 911
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
+      weight: 912
+    - name: OpenTelemetry
+      url: observability_pipelines/sources/opentelemetry/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_opentelemetry
       weight: 913
     - name: Socket
       url: observability_pipelines/sources/socket/
