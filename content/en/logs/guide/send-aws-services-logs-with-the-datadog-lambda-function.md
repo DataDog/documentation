@@ -49,7 +49,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                         | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
-| [RDS][23]                          | [Enable Amazon RDS logs][24]                                                                                   | [Manual][25] log. collection.                                                                                                |
+| [RDS][23]                          | [Enable Amazon RDS logs][24]                                                                                   | [Manual][25] log collection.                                                                                                |
 | [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][35] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | Redshift Serverless                | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Route 53][59]                     | Enable Amazon Route 53 [DNS query logging][60] and [resolver query logging][73]                                                                                                                                                  | [Manual][61] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
@@ -397,6 +397,7 @@ You can also exclude or send only those logs that match a specific pattern by us
 [33]: /integrations/amazon_sns/#send-logs-to-datadog
 [34]: /integrations/amazon_redshift/
 [35]: /integrations/amazon-redshift/#enable-logging
+[36]: /integrations/amazon-redshift/#log-collection
 [37]: /integrations/amazon-verified-access/
 [38]: /integrations/amazon-verified-access/#enable-verified-access-logs
 [39]: /integrations/amazon-verified-access/#log-collection
