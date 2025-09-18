@@ -43,7 +43,7 @@ To customize SDK versions:
 
 1. Find your language(s) and use the dropdown to either:
    - Select an exact SDK version, or
-   - Select the major version which will use the latest minor release available when the Agent installation command is run.
+   - Select the major version which uses the latest minor release available when the Agent installation command is run.
 1. Copy and run the updated installation command.
 
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
@@ -64,7 +64,7 @@ To customize SDK versions:
 
 1. Find your language(s) and use the dropdown to either:
    - Select an exact SDK version, or
-   - Select the major version which will use the latest minor release available when the Agent installation command is run.
+   - Select the major version which uses the latest minor release available when the Agent installation command is run.
 1. Copy and run the updated installation command.
 
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
