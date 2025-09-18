@@ -22,11 +22,12 @@ This guide walks you through the process of migrating feature flags from Statsig
 <div class="alert alert-info"><strong>Note</strong>: Unless otherwise specified, all code examples are in TypeScript.</div>
 
 ## 1. Install the Eppo SDK {#install-sdk}
-  * Login to Eppo with your work email: <https://eppo.cloud/>
-  * Generate an SDK key by navigating to "SDK Keys" under Configuration
-  * Define a logging function for the Eppo SDK to log assignments so they end up in your data warehouse.
 
-{{< code-block lang="typescript" >}}
+1. Login to Eppo with your work email: <https://eppo.cloud/>.
+1. Generate an SDK key by navigating to "SDK Keys" under Configuration.
+1. Define a logging function for the Eppo SDK to log assignments so they end up in your data warehouse.
+
+    {{< code-block lang="typescript" >}}
 const assignmentLogger: IAssignmentLogger = {
   logAssignment(assignment) {
     analytics.track({
@@ -37,214 +38,214 @@ const assignmentLogger: IAssignmentLogger = {
     });
   },
 };
-{{< /code-block >}}
+    {{< /code-block >}}
 
+1. Initialize the SDK in your code using the SDK guides for your language here.
 
-  * Initialize the SDK in your code using the SDK guides for your language here.
-  
-  {{< code-block lang="typescript" >}}
-  await init({
-    apiKey: EPPO_SDK_KEY,
-    assignmentLogger,
-  });
-  {{< /code-block >}}
+    {{< code-block lang="typescript" >}}
+await init({
+  apiKey: EPPO_SDK_KEY,
+  assignmentLogger,
+});
+   {{< /code-block >}}
 
 
 ## 2. Set up and verify a new flag {#set-up-flag}
-  * Create a new flag in Eppo by navigating to "Feature Flags" under Configuration
-  * Implement the flag in your application code
-  * Test the flag in your local development environment to ensure it works as expected.
 
-  {{< code-block lang="typescript" >}}
-  const variation = getInstance().getBooleanAssignment(
-    'show-new-feature',
-    user.id,
-    {
-      'country': user.country,
-      'device': user.device
-    },
-    false
-  );
-  {{< /code-block >}}
+1. Create a new flag in Eppo by navigating to "Feature Flags" under Configuration.
+1. Implement the flag in your application code.
+1. Test the flag in your local development environment to ensure it works as expected.
 
-  * Deploy the application to your staging or testing environments and verify the flag's functionality.
-  * Once verified, deploy the application to your production environment and test the flag again.
+    {{< code-block lang="typescript" >}}
+const variation = getInstance().getBooleanAssignment(
+  'show-new-feature',
+  user.id,
+  {
+    'country': user.country,
+    'device': user.device
+  },
+  false
+);
+    {{< /code-block >}}
+
+1. Deploy the application to your staging or testing environments and verify the flag's functionality.
+1. Once verified, deploy the application to your production environment and test the flag again.
 
 ## 3. Identify critical flags in Statsig {#identify-critical-flags}
-  * Make a list of all the feature flags currently in use within your application using the provided template
-  * Categorize the flags as critical or non-critical based on their importance and impact on your application's functionality.
-  * Flags that are disabled or are rolled out to 100% can be categorized as non-critical
+
+1. Make a list of all the feature flags currently in use within your application using the provided template.
+1. Categorize the flags as critical or non-critical based on their importance and impact on your application's functionality.
+1. Flags that are disabled or are rolled out to 100% can be categorized as non-critical.
 
 ## 4. Remove non-critical flag code {#remove-non-critical-flags}
-  * For the non-critical flags identified in the previous step, remove the flag code from your application and from Statsig. They are no longer relevant.
-  * Test your application thoroughly to ensure that the removal of these flags does not introduce any regressions or unintended behavior.
+1. For the non-critical flags identified in the previous step, remove the flag code from your application and from Statsig. They are no longer relevant.
+1. Test your application thoroughly to ensure that the removal of these flags does not introduce any regressions or unintended behavior.
 
 ## 5. Create fallback values for critical flags {#create-fallback-values}
-  * Implement a function that wraps calling Eppo's SDK to have a fallback mechanism to use the Statsig flag values if the new service is unavailable or experiences issues.
-  * When attempting to retrieve a flag value from Eppo, catch any exceptions or errors that may occur due to service unavailability or issues and return the old value.
-  * Eppo SDKs only strongly typed assignment functions (e.g `getBooleanAssignment`), whereas Statsig SDKs use specific evaluation functions for different types. For such SDKs, we recommend creating wrappers for each type. Uses  of the Statsig functions can then be replaced with the typed wrappers in your application. Here are examples:
+1. Implement a function that wraps calling Eppo's SDK to have a fallback mechanism to use the Statsig flag values if the new service is unavailable or experiences issues.
+1. When attempting to retrieve a flag value from Eppo, catch any exceptions or errors that may occur due to service unavailability or issues and return the old value.
+1. Eppo SDKs only strongly typed assignment functions (e.g `getBooleanAssignment`), whereas Statsig SDKs use specific evaluation functions for different types. For such SDKs, we recommend creating wrappers for each type. Uses  of the Statsig functions can then be replaced with the typed wrappers in your application. Here are examples:
 
-  {{< code-block lang="typescript" >}}
-  // After initialization, turn off graceful failure so exceptions are rethrown
-  getInstance().setIsGracefulFailureMode(false);
- 
-  // Drop-in wrapper replacement for getting a boolean Statsig gate.
-  // Replace boolean calls to checkGate() with getBoolVariationWrapper() in the code.
-  export function getBoolVariationWrapper(
-    gateKey: string,
-    user: StatsigUser,
-    attributes?: Record<string, string | number | boolean | null>
-  ) {
-    let assignment = false;
-       
-    try {
-      assignment = getInstance().getBooleanAssignment(
-        user.userID,
-        gateKey,
-        attributes,
-        false
-      );
-    } catch (e) {
-      logger.warn(
-        'Error encountered evaluating boolean assignment from Eppo SDK; falling back to Statsig',
-        { gateKey, user, attributes }
-      );
-         
-      // Fallback to Statsig gate check
-      assignment = statsig.checkGate(user, gateKey);
-    }
-    return assignment;
-  }
- 
-  // Drop-in wrapper replacement for getting a string Statsig config.
-  // Replace string calls to getConfig() with getStringVariationWrapper() in the code.
-  export function getStringVariationWrapper(
-    configKey: string,
-    parameterName: string,
-    user: StatsigUser,
-    attributes?: Record<string, string | number | boolean | null>
-  ) {
-    let assignment = 'default';
-       
-    try {
-      assignment = getInstance().getStringAssignment(
-        user.userID,
-        configKey,
-        attributes,
-        'default'
-      );
-    } catch (e) {
-      logger.warn(
-        'Error encountered evaluating string assignment from Eppo SDK; falling back to Statsig',
-        { configKey, parameterName, user, attributes }
-      );
-         
-      // Fallback to Statsig config parameter
-      const config = statsig.getConfig(user, configKey);
-      assignment = config.get(parameterName, 'default');
-    }
-    return assignment;
-  }
- 
-  // Drop-in wrapper replacement for getting a numeric Statsig config parameter.
-  // Replace numeric calls to getConfig() with getNumericVariationWrapper() in the code.
-  export function getNumericVariationWrapper(
-    configKey: string,
-    parameterName: string,
-    user: StatsigUser,
-    attributes?: Record<string, string | number | boolean | null>
-  ) {
-    let assignment = 0;
-       
-    try {
-      assignment = getInstance().getNumericAssignment(
-        user.userID,
-        configKey,
-        attributes,
-        0
-      );
-    } catch (e) {
-      logger.warn(
-        'Error encountered evaluating numeric assignment from Eppo SDK; falling back to Statsig',
-        { configKey, parameterName, user, attributes }
-      );
-         
-      // Fallback to Statsig config parameter
-      const config = statsig.getConfig(user, configKey);
-      assignment = config.get(parameterName, 0);
-    }
-    return assignment;
-  }
- 
-  // Drop-in wrapper replacement for getting experiment assignments.
-  // Replace calls to getExperiment() with getExperimentVariationWrapper() in the code.
-  export function getJSONVariationWrapper(
-    experimentKey: string,
-    parameterName: string,
-    user: StatsigUser,
-    attributes?: Record<string, string | number | boolean | null>
-  ) {
-    let assignment: any = null;
-       
-    try {
-      // For experiments with multiple parameters, use JSON assignment
-      const experimentResult = getInstance().getJSONAssignment(
-        user.userID,
-        experimentKey,
-        attributes,
-        {}
-      );
-      assignment = experimentResult?.[parameterName];
-    } catch (e) {
-      logger.warn(
-        'Error encountered evaluating experiment assignment from Eppo SDK; falling back to Statsig',
-        { experimentKey, parameterName, user, attributes }
-      );
-         
-      // Fallback to Statsig experiment
-      const experiment = statsig.getExperiment(user, experimentKey);
-      assignment = experiment.get(parameterName, null);
-    }
-    return assignment;
-  }
-  {{< /code-block >}}
+    {{< code-block lang="typescript" >}}
+// After initialization, turn off graceful failure so exceptions are rethrown
+getInstance().setIsGracefulFailureMode(false);
 
+// Drop-in wrapper replacement for getting a boolean Statsig gate.
+// Replace boolean calls to checkGate() with getBoolVariationWrapper() in the code.
+export function getBoolVariationWrapper(
+  gateKey: string,
+  user: StatsigUser,
+  attributes?: Record<string, string | number | boolean | null>
+) {
+  let assignment = false;
+      
+  try {
+    assignment = getInstance().getBooleanAssignment(
+      user.userID,
+      gateKey,
+      attributes,
+      false
+    );
+  } catch (e) {
+    logger.warn(
+      'Error encountered evaluating boolean assignment from Eppo SDK; falling back to Statsig',
+      { gateKey, user, attributes }
+    );
+        
+    // Fallback to Statsig gate check
+    assignment = statsig.checkGate(user, gateKey);
+  }
+  return assignment;
+}
+
+// Drop-in wrapper replacement for getting a string Statsig config.
+// Replace string calls to getConfig() with getStringVariationWrapper() in the code.
+export function getStringVariationWrapper(
+  configKey: string,
+  parameterName: string,
+  user: StatsigUser,
+  attributes?: Record<string, string | number | boolean | null>
+) {
+  let assignment = 'default';
+      
+  try {
+    assignment = getInstance().getStringAssignment(
+      user.userID,
+      configKey,
+      attributes,
+      'default'
+    );
+  } catch (e) {
+    logger.warn(
+      'Error encountered evaluating string assignment from Eppo SDK; falling back to Statsig',
+      { configKey, parameterName, user, attributes }
+    );
+        
+    // Fallback to Statsig config parameter
+    const config = statsig.getConfig(user, configKey);
+    assignment = config.get(parameterName, 'default');
+  }
+  return assignment;
+}
+
+// Drop-in wrapper replacement for getting a numeric Statsig config parameter.
+// Replace numeric calls to getConfig() with getNumericVariationWrapper() in the code.
+export function getNumericVariationWrapper(
+  configKey: string,
+  parameterName: string,
+  user: StatsigUser,
+  attributes?: Record<string, string | number | boolean | null>
+) {
+  let assignment = 0;
+      
+  try {
+    assignment = getInstance().getNumericAssignment(
+      user.userID,
+      configKey,
+      attributes,
+      0
+    );
+  } catch (e) {
+    logger.warn(
+      'Error encountered evaluating numeric assignment from Eppo SDK; falling back to Statsig',
+      { configKey, parameterName, user, attributes }
+    );
+        
+    // Fallback to Statsig config parameter
+    const config = statsig.getConfig(user, configKey);
+    assignment = config.get(parameterName, 0);
+  }
+  return assignment;
+}
+
+// Drop-in wrapper replacement for getting experiment assignments.
+// Replace calls to getExperiment() with getExperimentVariationWrapper() in the code.
+export function getJSONVariationWrapper(
+  experimentKey: string,
+  parameterName: string,
+  user: StatsigUser,
+  attributes?: Record<string, string | number | boolean | null>
+) {
+  let assignment: any = null;
+      
+  try {
+    // For experiments with multiple parameters, use JSON assignment
+    const experimentResult = getInstance().getJSONAssignment(
+      user.userID,
+      experimentKey,
+      attributes,
+      {}
+    );
+    assignment = experimentResult?.[parameterName];
+  } catch (e) {
+    logger.warn(
+      'Error encountered evaluating experiment assignment from Eppo SDK; falling back to Statsig',
+      { experimentKey, parameterName, user, attributes }
+    );
+        
+    // Fallback to Statsig experiment
+    const experiment = statsig.getExperiment(user, experimentKey);
+    assignment = experiment.get(parameterName, null);
+  }
+  return assignment;
+}
+    {{< /code-block >}}
 
 ## 6. Recreate critical flags in Eppo {#recreate-critical-flags}
   > **note**
   > Eppo can help with migrating flags to the Eppo dashboard. Please reach out to your customer support rep for help.
  
-  * In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s](https://docs.statsig.com/console-api/introduction/) and [Eppo’s](https://docs.geteppo.com/reference/api/) REST APIs.
-  * Ensure that the flag configurations, such as rollout percentages, targeting rules, and variations, are accurately replicated in the new service.
+ 1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s](https://docs.statsig.com/console-api/introduction/) and [Eppo’s](https://docs.geteppo.com/reference/api/) REST APIs.
+ 1. Ensure that the flag configurations, such as rollout percentages, targeting rules, and variations, are accurately replicated in the new service.
 
 
 ## 7. Switch existing flags to the new application {#switch-to-new-app}
-  * Once you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
-  * Remove the fallback mechanism and the Statsig flag code once you have confirmed that the Eppo flags are working as expected in production.
-  * It's recommended to keep the wrapper as a facade to make future changes easier, as they will typically only need to be made to the wrapper.
+ 1. Once you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
+ 1. Remove the fallback mechanism and the Statsig flag code once you have confirmed that the Eppo flags are working as expected in production.
+ 1. It's recommended to keep the wrapper as a facade to make future changes easier, as they will typically only need to be made to the wrapper.
 
-  {{< code-block lang="typescript" filename="FeatureHelper.ts" >}}
-  export function isFeatureEnabled(
-    featureKey: string,
-    userId: string,
-    attributes?: Record<string, string | number | boolean | null>
-  ) {
-    return getInstance().getBooleanAssignment(userId, featureKey, attributes, false);
-  }
- 
-  export function getFeatureConfig(
-    configKey: string,
-    userId: string,
-    attributes?: Record<string, string | number | boolean | null>
-  ) {
-    return getInstance().getJSONAssignment(userId, configKey, attributes, {});
-  }
-  {{< /code-block >}}
+{{< code-block lang="typescript" filename="FeatureHelper.ts" >}}
+export function isFeatureEnabled(
+  featureKey: string,
+  userId: string,
+  attributes?: Record<string, string | number | boolean | null>
+) {
+  return getInstance().getBooleanAssignment(userId, featureKey, attributes, false);
+}
 
-  {{< code-block lang="typescript" filename="PlaceUsingFlags.ts" >}}
-  const useBigButtons = isFeatureEnabled(userId, 'use-big-buttons', userAttributes);
-  const buttonConfig = getFeatureConfig(userId, 'button-configuration', userAttributes);
-  {{< /code-block >}}
+export function getFeatureConfig(
+  configKey: string,
+  userId: string,
+  attributes?: Record<string, string | number | boolean | null>
+) {
+  return getInstance().getJSONAssignment(userId, configKey, attributes, {});
+}
+{{< /code-block >}}
+
+{{< code-block lang="typescript" filename="PlaceUsingFlags.ts" >}}
+const useBigButtons = isFeatureEnabled(userId, 'use-big-buttons', userAttributes);
+const buttonConfig = getFeatureConfig(userId, 'button-configuration', userAttributes);
+{{< /code-block >}}
 
 ## Appendix: TypeScript implementation comparison
 
