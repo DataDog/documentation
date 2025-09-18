@@ -68,19 +68,19 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-## Configuring the Postgres Integration
+## Configuring the Postgres integration
 
-Finally, we configure the Datadog agent to enable the Postgres Integration, for this we have two options.
+Next, configure the Datadog agent to enable the Postgres integration, using one of the following two options.
 
-**Option A**: The buildpack will create a static Postgres configuration that customers cannot modify. Enables the Postgres Standard Integration and optionall, DBM.
+**Option A**: Use a buildpack to create a static Postgres configuration that cannot be modified. In addition, Database Monitoring may be enabled through this method.
 
-**Option B**: Allows the customer to create their own Postgres configuration allowing them to enable additional features that aren’t available in Option A.
+**Option B**: Create a custom Postgres configuration with the ability to enable additional features that aren’t available through the static configuration in Option A.
 
 {{< tabs >}}
 {{% tab "Option A: Static Configuration" %}}
 ### Static Configuration
 
-To enable the Postgres Integration to collect standard metrics, simply set `DD_ENABLE_HEROKU_POSTGRES` to true and rebuild the application:
+To enable the Postgres integration to collect standard metrics, set `DD_ENABLE_HEROKU_POSTGRES` to true, then rebuild the application:
 
 ``` bash
 heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
@@ -88,7 +88,7 @@ git commit --allow-empty -m "enabled postgres integration"
 git push heroku main
 ```
  
-To enabled the Postgres Integration with DBM enabled, you will need both `DD_ENABLE_HEROKU_POSTGRES` and `DD_ENABLE_DBM` set to true:
+To enable both the Postgres integration and Database Monitoring, set `DD_ENABLE_HEROKU_POSTGRES` and `DD_ENABLE_DBM` to true:
 
 ``` bash
 heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
@@ -97,7 +97,7 @@ git commit --allow-empty -m "enabled postgres integration with DBM"
 git push heroku main
 ```
 
-At this point the Postgres Integration should be running and monitoring your Heroku Database.
+The Postgres integration and, if enabled, Database Monitoring, will begin collecting metrics.
 {{% /tab %}}
 
 {{% tab "Option B: Custom Configuration" %}}
@@ -112,11 +112,11 @@ heroku config:unset DD_ENABLE_DBM
 ```
 </div>
 
-First we need to find the connect string for the Datadog user to connect to Postgres. We can find that by running the heroku config command (`heroku config`) and scouting for a variable that looks like `HEROKU_POSTGRESQL_<COLOR>_URL`:
+First, find the connection string for the Datadog user to connect to Postgres by running `heroku config` and locating the `HEROKU_POSTGRESQL_<COLOR>_URL` variable.
 
-The `<COLOR>` might be different for you but you should see and output like below:
+The `<COLOR>` component of the variable name differs by user. In the sample output below, the `<COLOR>` component is `IVORY`. Copy or note the connection string found in your `HEROKU_POSTGRESQL_<COLOR>_URL` variable.
 
-``` bash
+``` bash {hl_lines=[9]}
 === immense-scrubland-xxxxx Config Vars
 DATABASE_URL:                   postgres://<ADMIN_USER>:<ADMIN_PASSWORD>@<DATABASE_ENDPOINT>:<PORT>/<DB_NAME>
 DD_API_KEY:                     *****
@@ -134,14 +134,14 @@ HEROKU_SLUG_DESCRIPTION:        Deploy 383c7b61
 
 Notice that the connection string for the Datadog user is stored in the Heroku Configuration called `HEROKU_POSTGRESQL_IVORY_URL`. Keep this in mind.
 
-In the root of the project, create a directory for the postgres configuration called `datadog/conf.d/postgres.d` and then a file inside called `conf.yaml`.
+In the root of the project, create a directory for the Postgres configuration called `datadog/conf.d/postgres.d`, containing a file called `conf.yaml`:
 
 ``` bash
 mkdir -p datadog/conf.d/postgres.d
 touch datadog/conf.d/postgres.d/conf.yaml
 ```
  
-Add the following to the `conf.yaml`
+Add the following to `conf.yaml`:
 
 ``` yaml
 init_config:
@@ -157,7 +157,7 @@ instances:
 
 At this point you can also enable additional features found in the postgres [conf.yaml.example][7] like [schema collection][6]. 
 
-You can manually replace the placeholders in the YAML file by following the [Manual Setup](#manual-setup) or follow the [Prerun Script](#prerun-script) instructions to learn how do this programmatically.
+To manually locate the correct values for the placeholders in the YAML file, follow the [Manual Setup](#manual-setup). To programmatically replace them, follow the [Prerun Script](#prerun-script) instructions.
 
 [6]: /database_monitoring/schema_explorer
 [7]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
@@ -165,11 +165,11 @@ You can manually replace the placeholders in the YAML file by following the [Man
 {{% collapse-content title="Manual Setup" level="h5" %}}
 #### Manual Setup
 
-Now replace those values using the `HEROKU_POSTGRESQL_<COLOR>_URL` connection string where the URL follows the structure:
+Locate the`HEROKU_POSTGRESQL_<COLOR>_URL` connection string from above. If you need to locate the string again, run `heroku config`. The connection string follows the structure:
 
 `postgres://<DATADOG_USERNAME>:<DATADOG_USER_PASSWORD>@<DATABASE_ENDPOINT>:<PORT>/<DB_NAME>`.
 
-Once you have made the necessary changes, you can redeploy the heroku application and agent with the commands below:
+Using that structure, replace the `conf.yaml` placeholders, save the file, and redeploy the Heroku application and agent with the commands below:
 
 ``` bash
 git add .
@@ -181,14 +181,14 @@ git push heroku main
 {{% collapse-content title="Prerun Script" level="h5" %}}
 #### Prerun Script
 
-Using a [prerun script][5] you can programatically replace those values before starting the Datadog Agent. If you don't have a prerun script yet, create a shell script called `prerun.sh` in the `datadog/` directory in the root for the project and add the following:
+Using a [prerun script][5], you can programatically replace the placeholder `conf.yaml` values before starting the Datadog Agent. If you don't have a prerun script yet, create a shell script called `prerun.sh` in the `datadog/` directory in project root, and add the script below.
 
-Below is an example where the Datadog user connection string in the Heroku Configuration was called `HEROKU_POSTGRESQL_IVORY_URL`:
+**Note:** In the below example, the Datadog user connection variable in the Heroku configuration is called `HEROKU_POSTGRESQL_IVORY_URL`. Replace `IVORY` with the component that appears as part of your connection variable.
 
 ``` bash
 #!/usr/bin/env bash
 
-# Update the Postgres configuration from above using the Heroku application environment variable
+# Update the Postgres configuration using the Heroku application environment variable
 if [ -n "$HEROKU_POSTGRESQL_IVORY_URL" ]; then
   POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
   if [[ $HEROKU_POSTGRESQL_IVORY_URL =~ $POSTGREGEX ]]; then
