@@ -22,14 +22,48 @@ Tags help you investigate and understand your cloud and SaaS costs across any di
 
 Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve higher cost allocation and get deeper insight into who owns infrastructure costs in your ever changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment. 
 
-## Where tags come form
+## Where tags come from
 
-Datadog applies tags to cost data using the following sources:
+Across all cloud and SaaS providers, Datadog collects tags from the following sources (including enriching cost data with data from other Datadog products) and adds them to your cost data:
 
-- **[Out-of-the-box tags][1]** - Standardized tags that Datadog automatically generates from some billing data columns (like `aws_product` and `aws_region`) in your cost and usage report
-- **[Container allocation tags][2]** - Tags from your container workloads
-- **[Resource and account tags][3]** - Tags you've applied to your cloud resources
-- **[Tag pipelines][4]** - Custom rules you create to add missing tags
+| Source | What tags are collected | Description |
+|---|---|---|
+| All Providers | Bill columns | Such as AWS Cost and Usage Report (CUR) columns, Google Billing Export columns, etc |
+| Datadog Enrichment | Host Agent | Tags added to host metadata by the Datadog agent running on the host |
+| Datadog Enrichment | Service Catalog | Tags associated with this service in the APM Service Catalog |
+| Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
+| Datadog Enrichment | Data Observability | Tags from the Datadog’s Data Observability product, requires enabling BigQuery monitoring |
+| Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the Datadog Cloud Network product. Requires enabling Cloud Network in the Datadog agent |
+| Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
+| Kubernetes Enrichment | Kubernetes Pod | User-defined tags found on Kubernetes pods monitored with Datadog | 
+| Kubernetes Enrichment | Kubernetes Persistent Volume | User-defined tags found on Persistent Volumes in Kubernetes clusters monitored with Datadog |
+| Kubernetes Persistent Volume Claim | User-defined tags found on Persistent Volume Claims in Kubernetes clusters monitored with Datadog | 
+| Cloud Cost Management | Cloud Cost Aliases | Some aliases are tags derived from provider cost data, used to simplify the cost data model, such as `aws_product`, which is an alias of `lineItem/ProductCode`. Additional tags that exist on both cost data and integration metrics are added, allowing cost data and usage data to be combined in Custom Allocation Rules, dashboards, and notebooks |
+| Cloud Cost Management | Cloud Cost Allocation | Tags created during cost allocation that specify the split of shared resources, such as `allocated_spend_type` |
+| Cloud Cost Management | FOCUS | Provider-agnostic tags compliant with [FOCUS][8], the unifying format for cloud billing data |
+| Tag Pipelines | Rules defined by user | Tags created by applying your Tag Pipelines to cost data |
+| Custom Allocation Rules | Rules defined by user | Tags created by applying your Custom Allocation Rules to cost data (do not apply to SaaS costs) |
+
+Datadog also adds provider specific tags:
+
+| Provider | What tags are collected | Description |
+|---|---|---|
+| AWS | Cost Allocation Tags | Any tag defined by the user in [AWS Cost Allocation][1] tags that show up in the AWS CUR |
+| AWS | AWS Resource Groups Tagging API | User-defined tags on a cloud resource in AWS, pulled by Cloud Cost Management using the Group Tagging API |
+| AWS | AWS Organizational Units | User-defined tags on an AWS organizational units using [AWS Organizations][7] |
+| AWS | AWS Organizations - Accounts | User-defined tags on an AWS account using [AWS Organizations][7] |
+| Amazon ECS | Amazon ECS Task | User-defined tags on an ECS task definition |
+| Amazon ECS | Amazon ECS Container | User-defined tags on a container running in an ECS task |
+| Azure | Azure Cost Export - User Resource Tags | User-defined tags on a cloud resource in Azure, found in the Tags column in the Azure cost export. Does not include Resource Group tags |
+| Azure | Azure Cost Export - System Resource Tags | Azure-defined tags on a cloud resource, found in the AdditionalInfo column in the Azure cost export |
+| Google Cloud | Google Billing Export - Project Labels| User-defined labels on a project in Google Cloud, found in the project.labels column in the billing export |
+| Google Cloud | Google Billing Export - System Resource Labels | System-generated labels on a resource in Google Cloud, found in the system_labels column in the billing export |
+| Google Cloud | Google Billing Export - User Resource Labels | User-defined labels on a cloud resource in Google Cloud, found in the labels column in the billing export |
+| Google Cloud | Google Billing Export - User Resource Tags | User-defined tags on a cloud resource in Google Cloud, found in the tags column in the billing export |
+| Google Cloud | GKE Pod | User-defined labels found on pods running in Google Kubernetes Engine | 
+| Oracle Cloud | OCI Cost Export - User Resource Tags | User-defined tags on a cloud resource in Oracle Cloud Infrastructure, from the Tags column in the OCI FOCUS cost export |
+| Datadog | Datadog Usage Attribution | User-defined tags for Usage Attribution in Datadog Plan and Usage |
+| Custom Costs | Cost File Tags | User-defined tags for every provider, found on [cost files][9] uploaded to Cloud Cost Management |
 
 ## How tags are normalized
 
@@ -46,9 +80,12 @@ Datadog applies tags to cost data using the following sources:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/multisource_querying/#out-of-the-box-tags
+[1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
 [2]: /cloud_cost_management/container_cost_allocation
 [3]: /cloud_cost_management/setup/aws/#aws-resource-tags
 [4]: /cloud_cost_management/tags/tag_pipelines
 [5]: /cloud_cost_management/tags/tag_explorer
 [6]: /cloud_cost_management/custom_allocation_rules
+[7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html
+[8]: https://focus.finops.org/
+[9]: /cloud_cost_management/setup/custom?tab=csv
