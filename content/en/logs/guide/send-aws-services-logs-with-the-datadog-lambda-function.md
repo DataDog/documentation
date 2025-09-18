@@ -396,8 +396,7 @@ You can also exclude or send only those logs that match a specific pattern by us
 [32]: /integrations/amazon_sns/
 [33]: /integrations/amazon_sns/#send-logs-to-datadog
 [34]: /integrations/amazon_redshift/
-[35]: /integrations/amazon_redshift/#enable-aws-redshift-logging
-[36]: /integrations/amazon_redshift/#log-collection
+[35]: /integrations/amazon-redshift/#enable-logging
 [37]: /integrations/amazon-verified-access/
 [38]: /integrations/amazon-verified-access/#enable-verified-access-logs
 [39]: /integrations/amazon-verified-access/#log-collection
