@@ -303,7 +303,7 @@ This configuration ensures evaluations run only on complete sessions. This provi
 
 #### Tool Selection
 
-This check evaluates whether your agent can successfully select the right tools to address the user's request. This serves as a .
+This check evaluates whether your agent can successfully select the right tools to address the user's request.
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
