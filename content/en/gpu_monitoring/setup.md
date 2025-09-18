@@ -6,7 +6,7 @@ This page provides instructions on setting up Datadog's GPU Monitoring on a unif
 
 ### Prerequisites
 
-To begin using Datadog's GPU Monitoring, you must meet the following critieria:
+To begin using Datadog's GPU Monitoring, your environment must meet the following criteria:
 - You are a Datadog user with active Datadog infrastructure hosts
 - The NVIDIA device plugin for Kubernetes is installed ([directly][3], or through [NVIDIA GPU Operator][4])
 
