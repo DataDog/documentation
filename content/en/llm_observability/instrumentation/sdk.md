@@ -10,6 +10,8 @@ aliases:
     - /llm_observability/sdk/java
     - /llm_observability/sdk/
     - /llm_observability/instrumentation/custom_instrumentation
+    - /tracing/llm_observability/trace_an_llm_application
+    - /llm_observability/setup
 ---
 
 ## Overview
