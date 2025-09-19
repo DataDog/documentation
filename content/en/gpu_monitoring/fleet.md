@@ -93,7 +93,7 @@ Within this sidepanel you now have a cluster-specific funnel that identifies:
 - Total and Idle Cost of that cluster.
 - Connected Entities of that cluster: pods, processes and SLURM jobs
 - 4 Key Metrics (customizable) for that cluster: Core Utilization (only if System probe is enabled), SM Activity, Memory Utilization, PCIe Throughput and Graphics Engine Activity
-- Table of Hosts tied to that pod (NEEDS REPHRASING)
+- Table of Hosts tied to that cluster (NEEDS REPHRASING)
 
 {{< img src="gpu_monitoring/cluster_sidepanel.png" alt="Cluster specific sidepanel that breaks down idle devices, costs and connected entities" style="width:100%;" >}}
 
