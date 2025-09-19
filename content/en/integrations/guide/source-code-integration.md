@@ -480,7 +480,7 @@ You can see source code previews directly in [Continuous Profiler][1] flame grap
 
 1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
 2. Select the service you want to investigate.
-2. Hover your cursor over a method in the flame graph.
+3. Hover your cursor over a method in the flame graph.
 3. Press `Opt` in macOS or `Ctrl` in other operating systems to lock the tooltip and interact with its content.
 3. If prompted to do so, click **Connect to preview**. 
 4. Click on the file link to open the repository and view the full source code.
