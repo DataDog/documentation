@@ -22,7 +22,7 @@ cascade:
 
 ## Overview
 
-[Pipeline Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
+[CI Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
 
 ## Setup
 
@@ -167,7 +167,7 @@ You can export your search query to a [CI Pipeline monitor][12] on the [**Execut
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/pipelines
+[1]: https://app.datadoghq.com/ci/pipelines/health
 [2]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
 [6]: https://app.datadoghq.com/ci/pipeline-executions
 [8]: https://app.datadoghq.com/dashboard/lists
