@@ -2,10 +2,6 @@
 title: Scheduled CSV Reports
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}  
-Scheduled CSV Reports are in Preview.  
-{{< /callout >}}
-
 ## Overview
 
 Scheduled CSV Reports let you automatically receive recurring, structured data exports through email or Slack. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
