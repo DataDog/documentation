@@ -1,5 +1,6 @@
 ---
 title: Single Sign On With SAML
+description: Configure SAML authentication for Datadog with identity providers like Active Directory, Auth0, Google, Okta, and Microsoft Entra ID for secure single sign-on.
 aliases:
   - /guides/saml
 further_reading:

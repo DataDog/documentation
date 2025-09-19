@@ -1,6 +1,6 @@
 ---
 title: Upgrade RUM Mobile SDKs
-
+description: "Migration guide for upgrading between major versions of RUM, Logs, and Trace mobile SDKs with breaking changes and new features."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

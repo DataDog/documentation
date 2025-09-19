@@ -8,9 +8,9 @@ title: Análisis de la composición del software y acciones de GitHub
 Ejecuta un trabajo de [Análisis de la composición del software][1] de Detadog en tus flujos de trabajo de acciones de GitHub. Esta acción invoca
 [Datadog osv-scanner][3] en tu código base y carga los resultados en Datadog.
 
-## Generación de inventarios de biblioteca
+## Generación de inventarios de librería
 
-La acción de GitHub genera un inventario de bibliotecas en forma automática basándose en las bibliotecas que se declaran en tu repositorio.
+La acción de GitHub genera un inventario de librerías en forma automática basándose en las bibliotecas que se declaran en tu repositorio.
 
 La acción de GitHub funciona para los siguientes lenguajes y archivos:
 
@@ -53,9 +53,9 @@ jobs:
         dd_site: "datadoghq.com"
 ```
 
-## Herramientas relacionadas de Datadog 
+## Herramientas relacionadas de Datadog
 
-Con el [análisis estático de Datadog][5] se analiza tu código y se proporciona información en tu IDE, GitHub PR o en el entorno de Datadog. El análisis estático de Datadog puede configurarse mediante la acción [`datadog-static-analyzer-github-action`][6] 
+Con el [análisis estático de Datadog][5] se analiza tu código y se proporciona información en tu IDE, GitHub PR o en el entorno de Datadog. El análisis estático de Datadog puede configurarse mediante la acción [`datadog-static-analyzer-github-action`][6]
 de GitHub.
 
 ## Referencias adicionales

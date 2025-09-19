@@ -1,5 +1,6 @@
 ---
 title: Dual Shipping
+description: "Configure the Datadog Agent to send metrics, logs, and traces to multiple Datadog organizations simultaneously."
 aliases:
 - /agent/guide/dual-shipping
 further_reading:

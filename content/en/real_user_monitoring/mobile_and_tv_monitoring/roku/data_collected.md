@@ -1,5 +1,6 @@
 ---
 title: Roku Data Collected
+description: "Understand RUM Roku SDK event types, attributes, and telemetry data including sessions, views, actions, and errors for TV channels."
 aliases:
 - /real_user_monitoring/roku/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku

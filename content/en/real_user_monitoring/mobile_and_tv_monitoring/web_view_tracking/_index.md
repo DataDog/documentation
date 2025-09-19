@@ -1,5 +1,6 @@
 ---
 title: Web View Tracking
+description: "Track web views across mobile and TV platforms including Android, iOS, Flutter, React Native, and Roku for hybrid app monitoring."
 aliases:
   - /real_user_monitoring/android/web_view_tracking
   - /real_user_monitoring/ios/web_view_tracking

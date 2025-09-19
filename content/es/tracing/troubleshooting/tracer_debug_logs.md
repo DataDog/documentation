@@ -71,9 +71,9 @@ logging.getLogger("ddtrace").setLevel(logging.WARNING)
 
 2. Para dirigir logs a la consola, para aplicaciones **Python 2 o Python 3**, configura `logging.basicConfig()` o utiliza `DD_CALL_BASIC_CONFIG=true`.
 
-### Escenario 5: Configuración del registro de depuración en el código de la aplicación con la biblioteca de registro estándar
+### Escenario 5: Configuración del registro de depuración en el código de la aplicación con la librería de registro estándar
 
-Para cualquier versión de ddtrace, en lugar de establecer la variable de entorno del rastreador `DD_TRACE_DEBUG`, puedes habilitar el registro de depuración en el código de la aplicación utilizando directamente la biblioteca estándar de `logging`:
+Para cualquier versión de ddtrace, en lugar de establecer la variable de entorno del rastreador `DD_TRACE_DEBUG`, puedes habilitar el registro de depuración en el código de la aplicación utilizando directamente la librería estándar de `logging`:
 
 ```
 log = logging.getLogger("ddtrace.tracer")
@@ -210,7 +210,7 @@ Los logs se guardan por defecto en los siguientes directorios. Utiliza la config
 |------------------------------------------------------|--------------------------------------------------|
 | Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
 | Linux                                                | `/var/log/datadog/dotnet/`                       |
-| Linux (cuando se utiliza la [inyección de la biblioteca de Kubernetes][1]) | `/datadog-lib/logs`                              |
+| Linux (cuando se utiliza la [inyección de la librería de Kubernetes][1]) | `/datadog-lib/logs`                              |
 | Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Nota:**: En Linux, debes crear el directorio de logs antes de activar el modo de depuración.
@@ -243,7 +243,7 @@ Con dd-trace-php 0.98.0+, puedes especificar una ruta a un archivo de log para d
 - **INI**: `datadog.trace.log_file`
 
 **Notas**:
-  - Para obtener más información sobre dónde configurar `DD_TRACE_LOG_FILE`, consulta [Configuración de la biblioteca de rastreo de PHP][2].
+  - Para obtener más información sobre dónde configurar `DD_TRACE_LOG_FILE`, consulta [Configuración de la librería de rastreo de PHP][2].
   - Si no se especifica `DD_TRACE_LOG_FILE`, los logs pasarán a la localización del error por defecto en PHP (Ver **Opción 2** para más detalles).
 
 **Opción 2:**
@@ -261,7 +261,7 @@ Si estás configurando en su lugar en el nivel de PHP, utiliza el parámetro ini
 
 {{< programming-lang lang="cpp" >}}
 
-Las bibliotecas binarias de versión están compiladas con símbolos de depuración añadidos a la versión optimizada. Puedes utilizar GDB o LLDB para depurar la biblioteca y leer los volcados de núcleos. Si estás compilando la biblioteca desde la fuente, pasa el argumento `-DCMAKE_BUILD_TYPE=RelWithDebInfo` a cmake para compilar una versión optimizada con símbolos de depuración.
+Las bibliotecas binarias de versión están compiladas con símbolos de depuración añadidos a la versión optimizada. Puedes utilizar GDB o LLDB para depurar la librería y leer los volcados de núcleos. Si estás compilando la librería desde la fuente, pasa el argumento `-DCMAKE_BUILD_TYPE=RelWithDebInfo` a cmake para compilar una versión optimizada con símbolos de depuración.
 
 ```bash
 cmake -B .build -DCMAKE_BUILD_TYPE=RelWithDebInfo ..

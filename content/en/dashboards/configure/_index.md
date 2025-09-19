@@ -1,5 +1,6 @@
 ---
 title: Configure
+description: Configure dashboard details, template variables, permissions, and access controls to customize your Datadog dashboards.
 disable_toc: false
 further_reading:
 - link: "/dashboards/"

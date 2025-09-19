@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Feature Flags
+description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
 - link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
   tag: 'External Site'

@@ -2982,6 +2982,7 @@ components:
       - ci_tests
       - ci_pipelines
       - incident_analytics
+      - product_analytics
       example: logs
       type: string
       x-enum-varnames:
@@ -2996,6 +2997,7 @@ components:
       - CI_TESTS
       - CI_PIPELINES
       - INCIDENT_ANALYTICS
+      - PRODUCT_ANALYTICS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:

@@ -1,7 +1,8 @@
 ---
 title: Adaptive Sampling
+description: Automatically adjust sampling rates to match specific budgets while maintaining visibility over service endpoints.
 disable_toc: false
-aliases: 
+aliases:
     - /tracing/guide/adaptive_sampling
 further_reading:
     - link: "/tracing/trace_pipeline/ingestion_mechanisms"

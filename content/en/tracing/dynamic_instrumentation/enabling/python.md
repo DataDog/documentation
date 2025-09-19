@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Python
+description: Set up Dynamic Instrumentation for Python applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/python/
 private: false

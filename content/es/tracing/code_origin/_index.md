@@ -53,7 +53,7 @@ En el Explorador de trazas, selecciona un tramo de un servicio habilitado para v
 
 ### Requisitos de compatibilidad
 
-| Lenguaje en tiempo de ejecución | Versión de biblioteca de rastreo | Marcos |
+| Lenguaje en tiempo de ejecución | Versión de librería de rastreo | Marcos |
 |---|---|---|
 | Java | 1.47.0 o posterior | Spring Boot/Data, servidores gRPC, Micronaut 4, consumidores Kafka|
 | Python | 2.15.0+ | Django, Flask, Starlette y derivados|
@@ -93,7 +93,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
      - Haz clic en las variables del código fuente para añadirlas como atributos a tramos futuros con [Dynamic Instrumentation][5].
 
-        {{< img src="tracing/code_origin/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Añadir etiquetas de tramo con Dynamic Instrumentation" style="width:100%;">}}
+        {{< img src="tracing/code_origin/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Añadir span tags con Dynamic Instrumentation" style="width:100%;">}}
 
 
 ### En tu IDE

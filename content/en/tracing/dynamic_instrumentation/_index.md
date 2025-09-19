@@ -1,5 +1,6 @@
 ---
 title: Dynamic Instrumentation
+description: Add instrumentation to your running production systems without restarts to collect logs, metrics, spans, and tags from any location in your code.
 aliases:
     - /dynamic_instrumentation/how-it-works/
     - /dynamic_instrumentation/
