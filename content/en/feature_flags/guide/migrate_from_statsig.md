@@ -23,7 +23,7 @@ This guide walks you through the process of migrating feature flags from Statsig
 
 ## 1. Install the Eppo SDK {#install-sdk}
 
-1. Login to Eppo with your work email: <https://eppo.cloud/>.
+1. Login to Eppo with your work email: [https://eppo.cloud/][1].
 1. Generate an SDK key by navigating to "SDK Keys" under Configuration.
 1. Define a logging function for the Eppo SDK to log assignments so they end up in your data warehouse.
 
@@ -215,7 +215,7 @@ export function getJSONVariationWrapper(
 
 <div class="alert alert-info"><strong>Note</strong>: Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
  
-1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s](https://docs.statsig.com/console-api/introduction/) and [Eppo’s](https://docs.geteppo.com/reference/api/) REST APIs.
+1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s][2] and [Eppo’s][3] REST APIs.
 1. Ensure that the flag configurations, such as rollout percentages, targeting rules, and variations, are accurately replicated in the new service.
 
 
@@ -251,26 +251,30 @@ const buttonConfig = getFeatureConfig(userId, 'button-configuration', userAttrib
 
 Statsig and Eppo have similar interfaces for feature flag evaluation, making the transition straightforward with some key differences in how they handle different data types.
 
-_Note: Above each code example is a link to its respective documentation source._
+For more details, see the documentation sources above each code example.
 
 ### Initialization
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
-Statsig docs: [Getting Started](https://docs.statsig.com/client/javascript-sdk#getting-started)
+Statsig docs: [Getting Started][1]
 {{< code-block lang="typescript" >}}
 await statsig.initialize('client-key', user, { environment: { tier: 'production' } });
 {{< /code-block >}}
+
+[1]: https://docs.statsig.com/client/javascript-sdk#getting-started
 {{% /tab %}}
 
 {{% tab "Eppo" %}}
-Eppo docs: [Initialization](https://docs.geteppo.com/sdks/client-sdks/javascript/Initialization/)
+Eppo docs: [Initialization][1]
 {{< code-block lang="typescript" >}}
 await init({
  apiKey: EPPO_SDK_KEY,
  assignmentLogger,
 });
 {{< /code-block >}}
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/javascript/Initialization/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -278,7 +282,7 @@ await init({
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
-Statsig docs: [Logging an Event](https://docs.statsig.com/client/javascript-sdk/#event-logging)
+Statsig docs: [Logging an Event][1]
 {{< code-block lang="typescript" >}}
 // Statsig automatically logs assignments, but you can add custom logging by 
 // subscribing to client events like gate_evaluation or experiment_evaluation.
@@ -288,10 +292,12 @@ statsig.on('gate_evaluation', (event) => {
   console.log(event);
 });
 {{< /code-block >}}
+
+[1]: https://docs.statsig.com/client/javascript-sdk/#event-logging
 {{% /tab %}}
 
 {{% tab "Eppo" %}}
-Eppo docs: [Assignment logging](https://docs.geteppo.com/sdks/event-logging/assignment-logging/)
+Eppo docs: [Assignment logging][1]
 {{< code-block lang="typescript" >}}
 const assignmentLogger: IAssignmentLogger = {
   logAssignment(assignment) {
@@ -306,6 +312,8 @@ const assignmentLogger: IAssignmentLogger = {
 };
 getInstance().setLogger(assignmentLogger);   // Can also be set in init()
 {{< /code-block >}}
+
+[1]: https://docs.geteppo.com/sdks/event-logging/assignment-logging/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -315,14 +323,16 @@ For example, checking if a feature is enabled
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
-Statsig docs: [Checking a Feature Flag/Gate](https://docs.statsig.com/client/javascript-sdk/#feature-gates)
+Statsig docs: [Checking a Feature Flag/Gate][1]
 {{< code-block lang="typescript" >}}
 const enabled = statsig.checkGate('new_feature_gate');
 {{< /code-block >}}
 
+[1]: https://docs.statsig.com/client/javascript-sdk/#feature-gates
 {{% /tab %}}
+
 {{% tab "Eppo" %}}
-Eppo docs: [Boolean Assignments](https://docs.geteppo.com/sdks/server-sdks/node/assignments/#boolean-assignments)
+Eppo docs: [Boolean Assignments][1]
 {{< code-block lang="typescript" >}}
 const enabled = getInstance().getBooleanAssignment(
   user.userID,
@@ -331,6 +341,8 @@ const enabled = getInstance().getBooleanAssignment(
   false
 );
 {{< /code-block >}}
+
+[1]: https://docs.geteppo.com/sdks/server-sdks/node/assignments/#boolean-assignments
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -338,14 +350,16 @@ const enabled = getInstance().getBooleanAssignment(
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
-Statsig docs: [Reading a Dynamic Config](https://docs.statsig.com/client/javascript-sdk#dynamic-configs)
+Statsig docs: [Reading a Dynamic Config][1]
 {{< code-block lang="typescript" >}}
 const config = statsig.getConfig('product_config');
 {{< /code-block >}}
 
+[1]: https://docs.statsig.com/client/javascript-sdk#dynamic-configs
 {{% /tab %}}
+
 {{% tab "Eppo" %}}
-Eppo docs: [Assignments](https://docs.geteppo.com/sdks/server-sdks/node/assignments/)
+Eppo docs: [Assignments][1]
 {{< code-block lang="typescript" >}}
 // If it's part of a multi-valued configuration (how Statsig organizes values),
 // you will have to figure out the type of each parameter, as Eppo uses different 
@@ -372,6 +386,8 @@ const maxItems = getInstance().getNumericAssignment(
   10
 );
 {{< /code-block >}}
+
+[1]: https://docs.geteppo.com/sdks/server-sdks/node/assignments/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -381,7 +397,7 @@ For example, getting experiment parameter values
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
-Statsig docs: [Getting a Layer/Experiment](https://docs.statsig.com/client/javascript-sdk/#layers)
+Statsig docs: [Getting a Layer/Experiment][1]
 {{< code-block lang="typescript" >}}
 // Values using getLayer
 
@@ -398,10 +414,12 @@ const priceExperiment = statsig.getExperiment("new_user_promo_price");
 const promoTitle = titleExperiment.value["title"] ?? "Welcome!";
 const discount = priceExperiment.value["discount"] ?? 0.1;
 {{< /code-block >}}
+
+[1]: https://docs.statsig.com/client/javascript-sdk/#layers
 {{% /tab %}}
 
 {{% tab "Eppo" %}}
-Eppo docs: [Assignments](https://docs.geteppo.com/sdks/server-sdks/node/assignments/)
+Eppo docs: [Assignments][1]
 {{< code-block lang="typescript" >}}
 // For experiments with multiple parameters, use JSON assignment.
 const variation = getInstance().getJSONAssignment(
@@ -421,6 +439,8 @@ const checkoutVersion = getInstance().getStringAssignment(
   'control'
 );
 {{< /code-block >}}
+
+[1]: https://docs.geteppo.com/sdks/server-sdks/node/assignments/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -428,7 +448,7 @@ const checkoutVersion = getInstance().getStringAssignment(
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
-Statsig docs: [Statsig User](https://docs.statsig.com/client/javascript-sdk/#statsig-user)
+Statsig docs: [Statsig User][1]
 {{< code-block lang="typescript" >}}
 const user = new StatsigUser({
   userID: '12345',
@@ -440,10 +460,12 @@ const user = new StatsigUser({
   }
 });
 {{< /code-block >}}
+
+[1]: https://docs.statsig.com/client/javascript-sdk/#statsig-user
 {{% /tab %}}
 
 {{% tab "Eppo" %}}
-Eppo docs: [Subject attributes](https://docs.geteppo.com/sdks/sdk-features/subject-attributes/)
+Eppo docs: [Subject attributes][1]
 {{< code-block lang="typescript" >}}
 const userAttributes = {
   email: 'user@example.com',
@@ -460,5 +482,11 @@ const variation = getInstance().getBooleanAssignment(
   false
 );
 {{< /code-block >}}
+
+[1]: https://docs.geteppo.com/sdks/sdk-features/subject-attributes/
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: https://eppo.cloud/
+[2]: https://docs.statsig.com/console-api/introduction/
+[3]: https://docs.geteppo.com/reference/api/
