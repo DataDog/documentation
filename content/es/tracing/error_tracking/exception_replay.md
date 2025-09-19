@@ -41,7 +41,7 @@ Exception Replay solo está disponible en el seguimiento de errores de APM. No s
 
 ## Configuración
 
-1. Instala o actualiza el Agent a la versión `7.44.0` o superior.
+1. Instala o actualiza el Agent a la versión `7.49` o superior.
 2. Asegúrate de estar utilizando:
   * `ddtrace` versión `1.16.0` o superior.
   * `dd-trace-java` versión `1.35.0` o superior.

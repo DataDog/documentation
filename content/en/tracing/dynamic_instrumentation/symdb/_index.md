@@ -29,7 +29,7 @@ To provide autocomplete and search, nonsensitive symbols and metadata are upload
 Autocomplete and search require the following:
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
+- [Datadog Agent][2] 7.49 or higher is installed alongside your service.
 - [Remote Configuration][3] is enabled in the Agent.
 - The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
 
