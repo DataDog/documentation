@@ -95,7 +95,7 @@ Complete the following steps to configure these three components.
           - DD_API_KEY=<Your API Key>
     ```
 
-3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` and add the following to the file:
+3. To configure the OpenTelemetry Collector, open `src/otel-collector/otelcol-config-extras.yml` and add the following to the file:
 
     ```yaml
     extensions:
@@ -146,8 +146,8 @@ Complete the following steps to configure these three components.
 
     By default, the collector in the demo application merges the configuration from two files:
 
-    - `src/otelcollector/otelcol-config.yml`: contains the default configuration for the collector.
-    - `src/otelcollector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
+    - `src/otel-collector/otelcol-config.yml`: contains the default configuration for the collector.
+    - `src/otel-collector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
 
     <div class="alert alert-info">
     When merging YAML values, objects are merged and arrays are replaced.
