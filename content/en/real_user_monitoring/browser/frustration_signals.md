@@ -1,5 +1,6 @@
 ---
 title: Frustration Signals
+description: "Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment."
 aliases:
 - /real_user_monitoring/frustration_signals
 further_reading:

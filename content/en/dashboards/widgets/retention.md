@@ -1,5 +1,6 @@
 ---
 title: Retention Widget
+description: Analyze user retention and engagement patterns over time using cohort analysis visualization.
 widget_type: cohort
 further_reading:
 - link: "product_analytics/charts/retention_analysis/"

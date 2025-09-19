@@ -1,5 +1,6 @@
 ---
 title: Service Overrides
+description: Understand service overrides and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
 further_reading:
 - link: "/tracing/services/inferred_services"
@@ -55,7 +56,7 @@ To give less importance to service overrides, these are treated differently visu
 
 #### In service and resource pages
 
-Services that are service overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overriden, in a [custom](#custom-service-overrides) way, or as the default setting of the [integration](#integration-service-overrides).
+Services that are service overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overridden, in a [custom](#custom-service-overrides) way, or as the default setting of the [integration](#integration-service-overrides).
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
 
@@ -67,7 +68,7 @@ In service maps, service overrides are represented as part of the edge going fro
 
 #### In traces
 
-In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overriden service name, and the inferred entity name.
+In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overridden service name, and the inferred entity name.
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_traces.png" alt="Trace side panel service overrides" style="width:80%;">}}
 

@@ -1,6 +1,6 @@
 ---
 title: Understanding the RUM Event Hierarchy
-
+description: "Learn about RUM event types and their hierarchical relationships including sessions, views, actions, resources, and errors."
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'

@@ -9,3 +9,7 @@ if [ "$branch" = "master" ]; then
   echo "${YELLOW}You're trying to commit to master. Use a feature branch instead.${ENDCOLOR}"
   exit 1
 fi
+
+# Check for circular aliases in markdown files
+echo "Checking for circular aliases..."
+python3 .husky/check-circular-aliases.py

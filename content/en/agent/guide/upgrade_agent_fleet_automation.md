@@ -1,5 +1,6 @@
 ---
 title: Upgrade your Datadog Agent
+description: Guide for upgrading Datadog Agent versions using Fleet Automation remote management, installation scripts, and configuration management tools.
 aliases:
   - /agent/faq/upgrade-between-agent-minor-versions
   - /agent/guide/upgrade-between-agent-minor-versions

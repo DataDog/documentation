@@ -1,5 +1,6 @@
 ---
 title: Datadog FIPS Compliance
+description: "Configure FIPS-compliant cryptographic modules for the Datadog Agent in highly regulated environments like FedRAMP."
 disable_toc: false
 aliases:
 - /agent/guide/agent-fips-proxy
