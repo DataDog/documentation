@@ -20,24 +20,24 @@ The Datadog Mobile App is fully compatible with [AppConfig][1] and the Mobile De
 The mobile app supports all default MDM capabilities for [iOS][2] and [Android][3], as well as the following dedicated features:
 
 `datadogDefaultLoginOrganizationUUID`<br>
-&emsp; **Type**: String <br>
-&emsp; **Default Value**: Null <br>
-&emsp; **Description**: Define the organization UUID `dd_oid` passed as a parameter during login.
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: Define the organization UUID `dd_oid` passed as a parameter during login.
 
 `datadogDefaultLoginOrganizationPublicID`<br>
-&emsp; **Type**: String <br>
-&emsp; **Default Value**: Null <br>
-&emsp; **Description**: Define the organization `public_id` (available through the [API endpoint for listing your managed organizations][4]) passed as a parameter during login. If `datadogDefaultLoginOrganizationUUID` has been set, it takes precedence over the `public_id`.
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: Define the organization `public_id` (available through the [API endpoint for listing your managed organizations][4]) passed as a parameter during login. If `datadogDefaultLoginOrganizationUUID` has been set, it takes precedence over the `public_id`.
 
 `disableSharing`<br>
-&emsp; **Type**: Boolean <br>
-&emsp; **Default Value**: False <br>
-&emsp; **Description**: Disable content sharing from the app.
+: **Type**: Boolean <br>
+**Default Value**: False <br>
+**Description**: Disable content sharing from the app.
 
 `disableHomeScreenWidgets`<br>
-&emsp; **Type**: Boolean <br>
-&emsp; **Default Value**: False <br>
-&emsp; **Description**: Disable access to homescreen widgets (and instead display "disabled by your organization").
+: **Type**: Boolean <br>
+**Default Value**: False <br>
+**Description**: Disable access to homescreen widgets (and instead display "disabled by your organization").
 
 To learn more about default capabilities, see your Mobile Device Management provider's documentation.
 
