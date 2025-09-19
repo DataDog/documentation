@@ -107,11 +107,12 @@ Within this sidepanel you now have a host-specific view that identifies:
 
 ### Device Sidepanel
 Within this sidepanel you now have a device-specific view that identifies:
+- Recommendations (if any) for how to use this device more effectively 
 - Device related details: Device Type, SM Activity, Temperature
 - 4 key metrics tied to GPUs: SM Activity, Memory Utilization, Power, Graphics Engine Activity 
 - Connected Entities of that cluster: pods and processes
 
-{{< img src="gpu_monitoring/device_sidepanel.png" alt="Host specific sidepanel that displays the GPU devices tied to that host and Connected Entities" style="width:100%;" >}}
+{{< img src="gpu_monitoring/device_sidepanel.png" alt="Device specific sidepanel that displays recommendations for how to use the device more effectively and other key telemetry." style="width:100%;" >}}
 
 ## Installation Recommendations
 We actively survey your infrastructure and detect installation gaps that may diminish the value you can get out of GPU Monitoring. In this modal, we provide various installation update recommendations that guarantee a smoother experience when using the product, like making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver and checking for misconfigured hosts.
