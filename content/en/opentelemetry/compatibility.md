@@ -15,12 +15,12 @@ Datadog offers multiple setup options to accommodate various use cases, from ful
 
 Datadog supports several configurations for using OpenTelemetry. The primary difference between these setups is the choice of SDK (OpenTelemetry or Datadog) and the collector used to process and forward telemetry data.
 
-| Setup Type                                 | API                    | SDK         | Collector/Agent                               |
-|--------------------------------------------|------------------------|-------------|-----------------------------------------------|
+| Setup Type                                 | API                     | SDK         | Collector/Agent                               |
+|--------------------------------------------|-------------------------|-------------|-----------------------------------------------|
 | [**Datadog SDK + DDOT (Recommended)**][29] | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
-| [**OTel SDK + DDOT**][29]                  | OTel API               | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
-| [**OTel SDK + OSS Collector**][7]          | OTel API               | OTel SDK    | OTel Collector (OSS)                          |
-| [**Agentless OTLP**][28]                   | OTel API               | OTel SDK    | N/A (Direct to Datadog endpoint)              |
+| [**OTel SDK + DDOT**][29]                  | OTel API                | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
+| [**OTel SDK + OSS Collector**][7]          | OTel API                | OTel SDK    | OTel Collector (OSS)                          |
+| [**Agentless OTLP**][28]                   | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
@@ -61,10 +61,6 @@ To enable full RUM functionality, you need to [inject supported headers][2] to c
 Span-level or endpoint-level monitoring is **not** supported.
 
 For more information, see [Cloud Network Monitoring Setup][3].
-
-### Live Processes
-
-For **OTel to Datadog Agent (OTLP)**, you must enable the [Process Agent][4].
 
 ### Source Code Integration
 
