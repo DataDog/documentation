@@ -73,6 +73,7 @@ If you haven't already, set up the [Datadog-Azure integration][5]. You can verif
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
+The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
 If you don't already have Terraform set up, [install Terraform][1], create a new directory, and make a file called `main.tf`.
 
@@ -130,7 +131,8 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 [1]: https://developer.hashicorp.com/terraform/install
 [2]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
 [3]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
-
+[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
+[5]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_web_app
 
 {{% /tab %}}
 {{% tab "Manual" %}}
