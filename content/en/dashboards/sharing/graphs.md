@@ -1,5 +1,6 @@
 ---
 title: Share Graphs
+description: Generate embed codes for individual graphs and manage sharing permissions with revocation and IP restrictions.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs

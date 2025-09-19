@@ -37,7 +37,7 @@ Añade la medida personalizada a tu test. La página de instrumentación nativa 
 
 {{% tab "Java" %}}
 
-Para añadir métricas personalizadas, incluye la biblioteca [`opentracing-util`][1] como dependencia en tiempo de compilación en tu proyecto.
+Para añadir métricas personalizadas, incluye la librería [`opentracing-util`][1] como dependencia en tiempo de compilación en tu proyecto.
 
 ```java
 import io.opentracing.Span;

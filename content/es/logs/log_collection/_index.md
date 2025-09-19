@@ -375,7 +375,7 @@ Para activar estas funciones, utiliza los siguientes nombres de atributos:
 | `error.message`      | Mensaje de error contenido en la stack trace                              |
 | `error.kind`         | El tipo o clase de un error (por ejemplo, "Exception" u "OSError") |
 
-**Nota**: De forma predeterminada, los pipelines de integración intentan reasignar parámetros de bibliotecas de registro predeterminados a esos atributos específicos y analizar stack traces o rastrear para extraer automáticamente `error.message` y `error.kind`.
+**Nota**: De forma predeterminada, los pipelines de integración intentan reasignar parámetros de librerías de registro predeterminados a esos atributos específicos y analizar stack traces o rastrear para extraer automáticamente `error.message` y `error.kind`.
 
 Para obtener más información, consulta la [documentación completa sobre atributos de código fuente][11].
 

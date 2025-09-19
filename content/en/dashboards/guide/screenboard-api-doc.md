@@ -1,5 +1,6 @@
 ---
 title: Screenboard API
+description: DEPRECATED - API for the deprecated Screenboard endpoint. Use the Dashboard endpoint for dashboard operations instead.
 aliases:
   - /graphing/faq/screenboard-api-doc
   - /graphing/guide/screenboard-api-doc

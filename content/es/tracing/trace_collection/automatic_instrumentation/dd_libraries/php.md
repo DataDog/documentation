@@ -112,7 +112,7 @@ Capturas de instrumentación automática:
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para enviar datos de telemetría del rendimiento de la aplicación, según tus necesidades, incluyendo la configuración del etiquetado unificado de servicios. Para obtener más detalles, consulta la [configuración de bibliotecas][6].
+Si es necesario, configura la librería de rastreo para enviar datos de telemetría del rendimiento de la aplicación, según tus necesidades, incluyendo la configuración del etiquetado unificado de servicios. Para obtener más detalles, consulta la [configuración de librerías][6].
 
 ## Rastreo de scripts de CLI de corta y larga ejecución
 

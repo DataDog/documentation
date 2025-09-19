@@ -1,5 +1,6 @@
 ---
 title: Autocomplete and Search
+description: Enable IDE-like autocomplete and search functionality for Dynamic Instrumentation to improve developer experience.
 is_beta: true
 private: false
 aliases:

@@ -26,7 +26,7 @@ Open external links directly in the Datadog app instead of in the browser by set
 
 2. Tap **Open by default** and then tap **In the app**. Confirm verified links to set Datadog as your default.
 
-For more infromation about default apps on Android, see [Set or clear default app][7]
+For more information about default apps on Android, see [Set or clear default app][7]
 
 [7]: https://support.google.com/pixelphone/answer/6271667?hl=en
 
@@ -76,7 +76,7 @@ For more information, see [Set up a Focus on iPhone][5].
 
    {{< img src="service_management/mobile/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Mode configuration screen showing focus options">}}
 
-3. Tap **Stay focused** > **Restrict app usage** and add the Datadog Mobile App > **Done**. Alteratively, tap **Do not distrub** and add the Datadog Mobile App > **Done**.
+3. Tap **Stay focused** > **Restrict app usage** and add the Datadog Mobile App > **Done**. Alternatively, tap **Do not disturb** and add the Datadog Mobile App > **Done**.
 
 For more information, see [Limit interruptions with Modes][6].
 

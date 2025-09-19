@@ -53,7 +53,7 @@ Datadog.configure do |c|
 end
 ```
 
-Para más información sobre la configuración de la propagación de contextos de rastreo, lee [la sección Rastreo distribuido][1] en los documentos de configuración de la biblioteca de rastreo de Ruby.
+Para más información sobre la configuración de la propagación de contextos de rastreo, lee [la sección Rastreo distribuido][1] en los documentos de configuración de la librería de rastreo de Ruby.
 
 ## Referencias adicionales
 

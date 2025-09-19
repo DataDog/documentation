@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Ruby
+description: Set up Dynamic Instrumentation for Ruby applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/ruby/
 private: false

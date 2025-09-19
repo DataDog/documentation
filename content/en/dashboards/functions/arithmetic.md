@@ -1,5 +1,6 @@
 ---
 title: Arithmetic
+description: Perform mathematical operations including absolute values, logarithms, exponents, and cumulative sums on metrics.
 aliases:
     - /graphing/functions/arithmetic/
 ---

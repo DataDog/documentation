@@ -16,7 +16,7 @@ Dynamic Instrumentation es una característica de apoyo para las bibliotecas de 
 
 ## Requisitos
 
-- La biblioteca de Datadog Dynamic Instrumentation es compatible en JDK versión 8 y posteriores.
+- La librería de Datadog Dynamic Instrumentation es compatible en JDK versión 8 y posteriores.
 - Para una mejor experiencia, Datadog recomienda activar [autocompletar y búsqueda (en Vista previa)][7].
 
 ## Instalación
@@ -43,7 +43,7 @@ Dynamic Instrumentation es una característica de apoyo para las bibliotecas de 
 {{% /tab %}}
 {{< /tabs >}}
 
-   **Nota**: Dynamic Instrumentation está disponible en la biblioteca `dd-java-agent.jar` en las versiones 1.34.0 y posteriores.
+   **Nota**: Dynamic Instrumentation está disponible en la librería `dd-java-agent.jar` en las versiones 1.34.0 y posteriores.
 
 3. Ejecuta tu servicio con Dynamic Instrumentation habilitado configurando el indicador `-Ddd.dynamic.instrumentation.enabled` o la variable de entorno `DD_DYNAMIC_INSTRUMENTATION_ENABLED` en `true`. Especifica las etiquetas de servicio unificado `dd.service`, `dd.env` y `dd.version` para que puedas filtrar y agrupar tus instrumentaciones y apuntar a clientes activos a través de estas dimensiones.
    {{< tabs >}}
