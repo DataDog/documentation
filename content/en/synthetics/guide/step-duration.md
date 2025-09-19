@@ -33,7 +33,7 @@ A frame is a browser section that renders a web page. Each page contains one mai
 
 The Synthetics Worker monitors two browser signals to determine if a frame has fully loaded:
 
-**`document.readyState`**: [The state of the DOM][4] is "complete""
+**`document.readyState`**: [The state of the DOM][4] is "complete"
 - Indicates the HTML is parsed, the browser DOM is constructed, and sub-resources (CSS, images) are loaded.
 - Delays may occur when synchronous or deferred scripts prevent DOM completion.
 
