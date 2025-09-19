@@ -34,7 +34,7 @@ The following table shows feature compatibility across different setups:
 | [Real User Monitoring][22] (RUM) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>(From sampled spans) |
+| [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Trace metrics are calculated on the backend based on ingested spans that have passed through sampling, not on 100% of local traces before sampling." >}}) |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
