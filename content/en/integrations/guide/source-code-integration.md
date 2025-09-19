@@ -481,9 +481,10 @@ You can see source code previews directly in [Continuous Profiler][1] flame grap
 1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
 2. Select the service you want to investigate.
 3. Hover your cursor over a method in the flame graph.
-3. Press `Opt` in macOS or `Ctrl` in other operating systems to lock the tooltip and interact with its content.
-3. If prompted to do so, click **Connect to preview**. 
-4. Click on the file link to open the repository and view the full source code.
+4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
+5. If prompted, click **Connect to preview**. The first time you do this for a repository, you will be redirected to GitHub to **Authorize** the Datadog application.
+6. After authorizing, the source code preview appears in the tooltip.
+7. Click the file link in the tooltip to open the full source code file in your repository.
 
 {{< img src="integrations/guide/source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
