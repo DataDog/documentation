@@ -149,12 +149,12 @@ Or, modify the `package.json` file if you typically start an application with np
 | Module                               | Versions  | Support Type    | Notes                                                  |
 | --------------------------           | --------  | --------------- | ------------------------------------------------------ |
 | [@azure/service-bus][68]             | `>=7.9.2` | Fully supported |                                                        |
+| [@confluentinc/kafka-javascript][67] | `>=1`     | Fully supported |                                                        |
 | [@google-cloud/pubsub][42]           | `>=1.2`   | Fully supported |                                                        |
 | [amqp10][43]                         | `>=3`     | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
 | [amqplib][44]                        | `>=0.5`   | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
 | [generic-pool][45]                   | `>=2`     | Fully supported |                                                        |
 | [kafkajs][46]                        | `>=1.4`   | Fully supported |                                                        |
-| [@confluentinc/kafka-javascript][67] | `>=1`     | Fully supported |                                                        |
 | [rhea][48]                           | `>=1`     | Fully supported |                                                        |
 
 ### SDK compatibility
