@@ -20602,6 +20602,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -41463,6 +41465,7 @@ components:
       - hardcoded
       - third_party
       - anomaly_threshold
+      - sequence_detection
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -41472,6 +41475,7 @@ components:
       - HARDCODED
       - THIRD_PARTY
       - ANOMALY_THRESHOLD
+      - SEQUENCE_DETECTION
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -41685,6 +41689,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -41760,6 +41766,47 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+    SecurityMonitoringRuleSequenceDetectionOptions:
+      description: Options on sequence detection method.
+      properties:
+        stepTransitions:
+          description: Transitions defining the allowed order of steps and their evaluation
+            windows.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStepTransition'
+          type: array
+        steps:
+          description: Steps that define the conditions to be matched in sequence.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStep'
+          type: array
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStep:
+      description: Step definition for sequence detection containing the step name,
+        condition, and evaluation window.
+      properties:
+        condition:
+          description: Condition referencing rule queries (e.g., `a > 0`).
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        name:
+          description: Unique name identifying the step.
+          type: string
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStepTransition:
+      description: Transition from a parent step to a child step within a sequence
+        detection rule.
+      properties:
+        child:
+          description: Name of the child step.
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        parent:
+          description: Name of the parent step.
+          type: string
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
