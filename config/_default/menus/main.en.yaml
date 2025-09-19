@@ -5633,15 +5633,15 @@ menu:
       url: /observability_pipelines/scaling_and_performance/run_multiple_pipelines_on_a_host/
       parent: observability_pipelines_scaling_and_performance
       weight: 202
-    - name: Best Practices for Scaling Observability Pipelines
-      url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
-      parent: observability_pipelines_scaling_and_performance
-      identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 203
     - name: Handling Load and Backpressure
       url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
+      weight: 203
+    - name: Best Practices for Scaling Observability Pipelines
+      url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
+      parent: observability_pipelines_scaling_and_performance
+      identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
       weight: 204
     - name: Monitoring and Maintenance
       url: observability_pipelines/monitoring_and_maintenance/
