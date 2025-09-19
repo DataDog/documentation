@@ -45,7 +45,7 @@ Exception Replay is only available in APM Error Tracking. It is not available fo
 
 ## Setup
 
-1. Upgrade the Datadog Agent to version `7.44.0` or higher.
+1. Upgrade the Datadog Agent to version `7.49.0` or higher.
 1. Upgrade the APM tracer library to the minimum required version or higher:
    * `ddtrace` version `2.21.9+`
    * `dd-trace-java` version `1.49.0+`
