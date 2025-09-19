@@ -2879,11 +2879,21 @@ menu:
       parent: private_actions
       identifier: use_private_actions
       weight: 201
+    - name: Run a Script
+      url: actions/private_actions/run_script/
+      parent: private_actions
+      identifier: run_script
+      weight: 202
+    - name: Update the Private Action Runner
+      url: actions/private_actions/update_private_action_runner/
+      parent: private_actions
+      identifier: update_private_action_runner
+      weight: 203
     - name: Private Action Credentials
       url: actions/private_actions/private_action_credentials/
       parent: private_actions
       identifier: private_actions_creds
-      weight: 202
+      weight: 204
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
