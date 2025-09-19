@@ -38,7 +38,7 @@ In a uniform cluster, all nodes have GPU devices.
    : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
-   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
    Example `datadog-agent.yaml`, running on GKE with advanced eBPF metrics enabled:
 
@@ -78,7 +78,7 @@ In a uniform cluster, all nodes have GPU devices.
    : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
    Example `datadog-values.yaml`, running on GKE with advanced eBPF metrics enabled:
 
@@ -237,7 +237,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
    : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
    Example `datadog-gpu-values.yaml`:
 
