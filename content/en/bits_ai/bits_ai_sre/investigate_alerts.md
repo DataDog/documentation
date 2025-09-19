@@ -18,7 +18,7 @@ To enable Bits for automated investigations, use one of the following options:
 1. Scroll to **Configure notifications & automations** > **Investigate with Bits AI SRE**.
 1. Click the toggle to enable.
 
-We do not support enabling automatic investigations using the Datadog API or Terraform.
+**Note**: We do not support enabling automatic investigations using the Datadog API or Terraform.
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
 
