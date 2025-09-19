@@ -74,7 +74,7 @@ database_monitoring:
 
 **Note**: The Agent only discovers Aurora instances running in the same region as the Agent. To determine the region of the instance, the Agent uses [IMDS (Instance Metadata Service)][8]. If your EC2 instance requires `IMDSv2`, you must configure the Agent to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in `datadog.yaml`, as shown below:
 
-```yaml
+``` yaml {hl_lines=[1]}
 ec2_prefer_imdsv2: true
 database_monitoring:
   autodiscovery:
@@ -86,7 +86,7 @@ By default, the listener only discovers Aurora clusters in the account and regio
 
 To specify custom tags for Aurora cluster discovery in the `datadog.yaml` file:
 
-```yaml
+``` yaml {hl_lines=["5-6"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -97,7 +97,7 @@ database_monitoring:
 
 To monitor all clusters in the account and region:
 
-```yaml
+``` yaml {hl_lines=["5"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -107,7 +107,7 @@ database_monitoring:
 
 The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
 
-```yaml
+``` yaml {hl_lines=["5"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -117,7 +117,7 @@ database_monitoring:
 
 The listener provides an `%%extra_dbm%%` variable that can be used to enable or disable DBM for the instance. This value defaults to `true` if the tag `datadoghq.com/dbm:true` is present. To specify a custom tag for this value use `dbm_tag`:
 
-```yaml
+``` yaml {hl_lines=["5-6"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -173,7 +173,7 @@ If you are using password for authentication note that the password provided in 
 
 The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
-{{< highlight yaml "hl_lines=8" >}}
+``` yaml {hl_lines=[8]}
 ad_identifiers:
   - _dbm_postgres_aurora
 init_config:
@@ -189,7 +189,7 @@ instances:
     tags:
     - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
     - "region:%%extra_region%%"
-{{< /highlight >}}
+```
 {{% /collapse-content %}} 
 
 {{% collapse-content title="IAM Authentication" level="h5" id="iam-authentication" %}}
@@ -232,8 +232,6 @@ ad_identifiers:
 
 Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
 
-The following example configuration template is applied to every instance discovered in the Aurora cluster:
-
 ```yaml
 ad_identifiers:
   - _dbm_mysql_aurora
@@ -242,10 +240,10 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    password: "<DATADOG_USER_PASSWORD>"
     dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
     tags:
     - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
     - "region:%%extra_region%%"
@@ -263,7 +261,7 @@ If you are using password for authentication note that the password provided in 
 
 The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
-{{< highlight yaml "hl_lines=8" >}}
+``` yaml {hl_lines=[8]}
 ad_identifiers:
   - _dbm_mysql_aurora
 init_config:
@@ -279,15 +277,15 @@ instances:
     tags:
     - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
     - "region:%%extra_region%%"
-{{< /highlight >}}
+```
 {{% /collapse-content %}} 
 
-{{% collapse-content title="IAM Authentication" level="h5" id="iam-authentication" %}}
+{{% collapse-content title="IAM Authentication (7.67.0+)" level="h5" id="iam-authentication" %}}
 ##### IAM Authentication
 
 To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
 
-{{< highlight yaml "hl_lines=12-13" >}}
+``` yaml {hl_lines=["12-13"]}
 ad_identifiers:
   - _dbm_mysql_aurora
 init_config:
@@ -304,7 +302,7 @@ instances:
     tags:
       - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
       - "region:%%extra_region%%"
-{{< /highlight >}}
+```
 
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
