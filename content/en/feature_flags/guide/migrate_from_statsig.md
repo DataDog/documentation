@@ -1,6 +1,6 @@
 ---
 title: Migrate Your Feature Flags from Statsig
-description: Learn how to migrate feature flags from Statsig to Datadog.
+description: Learn how to migrate feature flags from Statsig to Eppo by Datadog.
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -9,22 +9,22 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-This guide walks you through the process of migrating feature flags from Statsig to Datadog. Follow these general steps:
+This guide walks you through the process of migrating feature flags from Statsig to [Eppo by Datadog][1], as an intermediate step before fully migrating to Datadog's dedicated [Feature Flags][2] product. Follow these general steps:
 
-1. [Install the SDK.](#install-sdk)
-2. [Create a feature flag in Datadog and verify its functionality.](#set-up-flag)
+1. [Install the Eppo SDK.](#install-sdk)
+2. [Create a feature flag in Eppo and verify its functionality.](#set-up-flag)
 3. [Identify critical feature flags in Statsig.](#identify-critical-flags)
 4. [For all non-critical flags, remove existing code.](#remove-non-critical-flags)
 5. [For critical flags, create a fallback value in a wrapper.](#create-fallback-values)
-6. [Recreate critical feature flags in Datadog.](#recreate-critical-flags)
+6. [Recreate critical feature flags in Eppo.](#recreate-critical-flags)
 7. [Switch existing flags to the new application.](#switch-to-new-app)
 
 <div class="alert alert-info"><strong>Note</strong>: Unless otherwise specified, all code examples are in TypeScript.</div>
 
 ## 1. Install the Eppo SDK {#install-sdk}
 
-1. Login to Eppo with your work email: [https://eppo.cloud/][1].
-1. Generate an SDK key by navigating to "SDK Keys" under Configuration.
+1. Log in to Eppo at [https://eppo.cloud/][3].
+1. Generate an SDK key by navigating to **Flags** > **Environments**, then clicking **Create** > **SDK Key**.
 1. Define a logging function for the Eppo SDK to log assignments so they end up in your data warehouse.
 
     {{< code-block lang="typescript" >}}
@@ -52,7 +52,7 @@ await init({
 
 ## 2. Set up and verify a new flag {#set-up-flag}
 
-1. Create a new flag in Eppo by navigating to "Feature Flags" under Configuration.
+1. Create a flag in Eppo by navigating to **Flags** > **Feature Flags**, then clicking **Create Flag** > **Feature Flag**.
 1. Implement the flag in your application code.
 1. Test the flag in your local development environment to ensure it works as expected.
 
@@ -69,7 +69,7 @@ const variation = getInstance().getBooleanAssignment(
     {{< /code-block >}}
 
 1. Deploy the application to your staging or testing environments and verify the flag's functionality.
-1. Once verified, deploy the application to your production environment and test the flag again.
+1. Deploy the application to your production environment and test the flag again.
 
 ## 3. Identify critical flags in Statsig {#identify-critical-flags}
 
@@ -84,7 +84,7 @@ const variation = getInstance().getBooleanAssignment(
 ## 5. Create fallback values for critical flags {#create-fallback-values}
 1. Implement a function that wraps calling Eppo's SDK to have a fallback mechanism to use the Statsig flag values if the new service is unavailable or experiences issues.
 1. When attempting to retrieve a flag value from Eppo, catch any exceptions or errors that may occur due to service unavailability or issues and return the old value.
-1. Eppo SDKs only strongly typed assignment functions (e.g `getBooleanAssignment`), whereas Statsig SDKs use specific evaluation functions for different types. For such SDKs, we recommend creating wrappers for each type. Uses  of the Statsig functions can then be replaced with the typed wrappers in your application. Here are examples:
+1. Eppo SDKs use only strongly typed assignment functions (for example, `getBooleanAssignment`), whereas Statsig SDKs use specific evaluation functions for different types. For such SDKs, it's recommended to create wrappers for each type. You can then replace uses of the Statsig functions with the typed wrappers in your application. Here are examples:
 
     {{< code-block lang="typescript" >}}
 // After initialization, turn off graceful failure so exceptions are rethrown
@@ -215,14 +215,14 @@ export function getJSONVariationWrapper(
 
 <div class="alert alert-info"><strong>Note</strong>: Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
  
-1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig’s][2] and [Eppo’s][3] REST APIs.
-1. Ensure that the flag configurations, such as rollout percentages, targeting rules, and variations, are accurately replicated in the new service.
+1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig's][4] and [Eppo's][5] REST APIs.
+1. Ensure that the flag configurations—such as rollout percentages, targeting rules, and variations—are accurately replicated in the new service.
 
 
 ## 7. Switch existing flags to the new application {#switch-to-new-app}
-1. Once you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
-1. Remove the fallback mechanism and the Statsig flag code once you have confirmed that the Eppo flags are working as expected in production.
-1. It's recommended to keep the wrapper as a facade to make future changes easier, as they will typically only need to be made to the wrapper.
+1. After you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
+1. Remove the fallback mechanism and the Statsig flag code after you have confirmed that the Eppo flags are working as expected in production.
+1. It's recommended to keep the wrapper as a facade to make future changes easier, as they typically only need to be made to the wrapper.
 
 {{< code-block lang="typescript" filename="FeatureHelper.ts" >}}
 export function isFeatureEnabled(
@@ -319,7 +319,7 @@ getInstance().setLogger(assignmentLogger);   // Can also be set in init()
 
 ### Get a Boolean flag (Feature Gate)
 
-For example, checking if a feature is enabled
+For example, check if a feature is enabled.
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
@@ -393,7 +393,7 @@ const maxItems = getInstance().getNumericAssignment(
 
 ### Get experiment values
 
-For example, getting experiment parameter values
+For example, get experiment parameter values.
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
@@ -487,6 +487,8 @@ const variation = getInstance().getBooleanAssignment(
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://eppo.cloud/
-[2]: https://docs.statsig.com/console-api/introduction/
-[3]: https://docs.geteppo.com/reference/api/
+[1]: https://geteppo.com/
+[2]: /feature_flags/
+[3]: https://eppo.cloud/
+[4]: https://docs.statsig.com/console-api/introduction/
+[5]: https://docs.geteppo.com/reference/api/
