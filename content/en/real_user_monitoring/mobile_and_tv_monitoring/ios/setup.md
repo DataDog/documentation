@@ -28,6 +28,9 @@ further_reading:
  - link: "/real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions"
    tag: "Documentation"
    text: "RUM iOS and tvOS monitoring supported versions"
+ - link: "/real_user_monitoring/guide/mobile-sdk-upgrade"
+   tag: "Documentation"
+   text: "Upgrade RUM Mobile SDKs"
 ---
 
 ## Overview
