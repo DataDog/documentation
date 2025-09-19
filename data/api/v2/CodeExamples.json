@@ -1338,6 +1338,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2899714190",
+      "description": "Create a detection rule with detection method 'sequence_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_3367706049",
       "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
     },
@@ -1508,6 +1513,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_4152369508",
+      "description": "Validate a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringSuppression": [
