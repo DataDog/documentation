@@ -7,16 +7,18 @@ You can configure Bits to automatically investigate when a monitor triggers an a
 
 ### Enable Bits on monitors for automated investigations
 
-There are a few ways to enable Bits for automated investigations:
-- **Option 1: Use the Bits AI SRE Monitors list**
-  1. In Bits AI SRE, go to the [**Monitor Management**][5] page.
-  1. In the **Ready for Bits** tab, enable automatic investigations for a single monitor. Alternatively, select one or more monitors, then click **Edit automatic investigations** to toggle the setting in bulk.
-- **Option 2: Configure for a single monitor**
-  1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
-  1. Navigate to the section "Configure notifications & automations".
-  1. Within **Investigate with Bits AI SRE**, enable automatic investigations.
+To enable Bits for automated investigations, use one of the following options:
 
-We no longer support enabling automatic investigations using the Datadog API or Terraform.
+#### Option 1: Use the Bits AI SRE Monitors list
+1. In Bits AI SRE, go to [**Monitor Management**][5] > **Ready for Bits**.
+1. For a single monitor, toggle **Enable** under **Automatic investigations**. For multiple monitors, select them and click **Edit automatic investigations**.
+
+#### Option 2: Configure for a single monitor
+1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
+1. Go to the section "Configure notifications & automations".
+1. Within **Investigate with Bits AI SRE**, enable automatic investigations.
+
+We do not support enabling automatic investigations using the Datadog API or Terraform.
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
 
@@ -89,11 +91,14 @@ Help Bits interpret and act on your documentation by following these best practi
 
 **Tip**: The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.
 
-### Restrict access to Bits investigations
+### Permissions for Bits investigations
 
-To access investigations, users need the `Bits Investigations Read` [permission][15]. This permission is included in the Datadog Read Only Role by default. To configure automated investigations and manually start investigations, users need the `Bits Investigations Write` [permission][15]. This permission is included in the Datadog Standard Role by default. If your organization uses custom roles, add these permissions to the appropriate role. For more information on managing permissions, see [Access Control][11].
+* To view investigations, users need the `Bits Investigations Read` [permission][15]. This is included in the **Datadog Read Only Role** by default.
+* To configure automated investigations or start them manually, users need the `Bits Investigations Write` [permission][15]. This is included in the **Datadog Standard Role** by default.
 
-**Note**: Your organization's third-party AI enablement status is always respected, even when users have these permissions.
+If your organization uses custom roles, add these permissions to the appropriate role. For details, see [Access Control][11].
+
+**Note**: Your organization's third-party AI enablement settings are always respected, even when users have these permissions.
 
 ## How Bits AI SRE investigates
 
