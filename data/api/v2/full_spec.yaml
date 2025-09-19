@@ -58208,7 +58208,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Delete a deployment event
       tags:
       - DORA Metrics
@@ -58290,7 +58290,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a deployment event
       tags:
       - DORA Metrics
@@ -58377,7 +58377,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Delete a failure event
       tags:
       - DORA Metrics
@@ -58459,7 +58459,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a failure event
       tags:
       - DORA Metrics
