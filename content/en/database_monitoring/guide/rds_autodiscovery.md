@@ -281,7 +281,7 @@ instances:
 {{% collapse-content title="IAM Authentication (7.67.0+)" level="h5" id="iam-authentication" %}}
 ##### IAM authentication
 
-To use [IAM authentication][2] to connect to your RDS instance, use the following template:
+To use [IAM authentication][2] to connect to your RDS instance, make sure that you are using Agent version 7.67.0 or above and use the following template:
 
 ``` yaml {hl_lines=["12-13"]}
 ad_identifiers:
