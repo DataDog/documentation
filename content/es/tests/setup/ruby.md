@@ -69,7 +69,7 @@ Para informar los resultados de test a Datadog, debes configurar el gem `datadog
 
 {{% /tab %}}{{< /tabs >}}
 
-## Instalación de la biblioteca de Test Optimization para Ruby
+## Instalación de la librería de Test Optimization para Ruby
 
 Para instalar el [gem de Test Optimization de Ruby][10] ejecuta:
 
@@ -144,10 +144,10 @@ Para obtener más información sobre las medidas personalizadas, consulta la [gu
 
 ## Ajustes de configuración
 
-A continuación, se muestra una lista de los ajustes más importantes de configuración que se pueden utilizar con la biblioteca de Test Optimization, ya sea en código mediante un bloque `Datadog.configure`, o utilizando variables de entorno:
+A continuación, se muestra una lista de los ajustes más importantes de configuración que se pueden utilizar con la librería de Test Optimization, ya sea en código mediante un bloque `Datadog.configure`, o utilizando variables de entorno:
 
 `service`
-: Nombre del servicio o de la biblioteca en proceso de test.<br/>
+: Nombre del servicio o de la librería en proceso de test.<br/>
 **Variable de entorno**: `DD_SERVICE`<br/>
 **Por defecto**: `$PROGRAM_NAME`<br/>
 **Ejemplo**: `my-ruby-app`
@@ -353,7 +353,7 @@ DD_ENV=ci bundle exec rake cucumber
 {{% /tab %}}
 {{< /tabs >}}
 
-## Utilización de la API pública de la biblioteca para marcos de tests no compatibles
+## Utilización de la API pública de la librería para marcos de tests no compatibles
 
 Si utilizas RSpec, Minitest o Cucumber, **no utilices la API de tests manuales**, ya que Test Optimization los instrumenta automáticamente y envía los resultados de los tests a Datadog. La API de tests manuales **no es incompatible** con los marcos de tests ya compatibles.
 

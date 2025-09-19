@@ -27,7 +27,7 @@ Para identificar qué mecanismos de ingesta se utilizan actualmente en tu entorn
 
 La tabla ofrece información sobre los volúmenes ingeridos *por servicio*. La columna Configuration (Configuración) proporciona una primera indicación de la configuración actual. Muestra lo siguiente:
 - `AUTOMATIC` si la frecuencia de muestreo calculada en el Datadog Agent se aplica a las trazas que parten del servicio. Lee más sobre los detalles de [la lógica de ingesta de Datadog Agent][5].
-- `CONFIGURED` si se aplica una frecuencia de muestreo personalizado de trazas configurada en la biblioteca de rastreo a las trazas que parten del servicio.
+- `CONFIGURED` si se aplica una frecuencia de muestreo personalizado de trazas configurada en la librería de rastreo a las trazas que parten del servicio.
 
 Haz clic en los servicios para ver detalles sobre los responsables de la toma de decisiones de muestreo (por ejemplo, Agent o biblioteca de rastreo, reglas o frecuencias de muestreo) que se utilizan para cada servicio, así como los [mecanismos de muestreo de ingesta][1] que se aprovechan para los servicios de tramos ingeridos.
 
@@ -71,7 +71,7 @@ Si algunos servicios o solicitudes son críticos para tu negocio, querrás tener
 
 #### Solución: reglas de muestreo
 
-Por defecto, la frecuencia de muestreo se calcula para 10 trazas por segundo por Datadog Agent. Puedes anular la frecuencia de muestreo calculada por defecto al configurar [reglas de muestreo][6] en la biblioteca de rastreo.
+Por defecto, la frecuencia de muestreo se calcula para 10 trazas por segundo por Datadog Agent. Puedes anular la frecuencia de muestreo calculada por defecto al configurar [reglas de muestreo][6] en la librería de rastreo.
 
 Puedes configurar reglas de muestreo por servicio. Para trazas que comienzan a partir del servicio especificado en la regla, se aplica la frecuencia de muestreo porcentual definida en lugar de la frecuencia de muestreo predeterminada del Agent.
 
@@ -99,7 +99,7 @@ Además de las trazas de muestreo basado en la fase inicial, puedes aumentar la 
 
 **Notas:**
 - Es posible que los fragmentos distribuidos de las partes de trazas no se ingieran, ya que el muestreo se realiza localmente a nivel del Datadog Agent.
-- A partir del **Datadog Agent 6/7.41.0 y versiones posteriores**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` puede configurarse para incluir tramos descartados mediante reglas de biblioteca de rastreo o `manual.drop`. Encontrarás más detalles en la sección [Trazas de errores del documento Mecanismos de ingesta][9].
+- A partir del **Datadog Agent 6/7.41.0 y versiones posteriores**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` puede configurarse para incluir tramos descartados mediante reglas de librería de rastreo o `manual.drop`. Encontrarás más detalles en la sección [Trazas de errores del documento Mecanismos de ingesta][9].
 
 #### Configuración del muestreo de errores
 

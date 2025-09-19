@@ -7369,6 +7369,45 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Delete an incident impact
+      url: '#delete-an-incident-impact'
+      identifier: incidents-delete-an-incident-impact
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentImpact
+        unstable:
+          - v2
+        order: 9
+    - name: Create an incident impact
+      url: '#create-an-incident-impact'
+      identifier: incidents-create-an-incident-impact
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentImpact
+        unstable:
+          - v2
+        order: 7
+    - name: List an incident's impacts
+      url: '#list-an-incidents-impacts'
+      identifier: incidents-list-an-incidents-impacts
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentImpacts
+        unstable:
+          - v2
+        order: 6
     - name: 'Create, update, and delete incident attachments'
       url: '#create,-update,-and-delete-incident-attachments'
       identifier: 'incidents-create,-update,-and-delete-incident-attachments'

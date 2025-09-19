@@ -1,5 +1,6 @@
 ---
 title: Action Interface
+description: AI chat interface for configuring and executing actions from the Action Catalog using natural language prompts.
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/action-interface/" btn_hidden="false" header="Join the Preview!" >}}

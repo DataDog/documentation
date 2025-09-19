@@ -112,7 +112,7 @@ Se añaden las siguientes etiquetas para [Docker][3]. Es importante señalar que
 La detección del origen en entornos distintos a Kubernetes se basa en una extensión del protocolo DogStatsD en [Datagram Format and Shell Usage][2]. Para habilitar la función en el Agent, establece la variable de entorno `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` en `true`.
 
 <div class="alert alert-warning">
-  Por defecto, la detección del origen está activada en todos los clientes DogStatsD, pero no está activada por defecto en el Datadog Agent. Para desactivar la detección del origen en un cliente, consulta la documentación de la biblioteca DogStatsD específica que estás utilizando.
+  Por defecto, la detección del origen está activada en todos los clientes DogStatsD, pero no está activada por defecto en el Datadog Agent. Para desactivar la detección del origen en un cliente, consulta la documentación de la librería DogStatsD específica que estás utilizando.
 </div>
 
 **Nota**: La detección del origen no es compatible con entornos de Fargate.
@@ -193,7 +193,7 @@ Se añaden las siguientes etiquetas para [Kubernetes][8]. Es importante señalar
             enabled: true
     ```
 
-**Notas**: 
+**Notas**:
 * Una alternativa a UDP son los [sockets de dominio UNIX][5].
 * La detección del origen con UDP puede utilizar el ID del pod como ID de entidad.
 
@@ -266,7 +266,7 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 
 ### Cliente DogStatsD
 
-Instala la biblioteca cliente DogStatsD con tu lenguaje preferido y configúrala para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
+Instala la librería cliente DogStatsD con tu lenguaje preferido y configúrala para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
 
 #### Instalar el cliente de DogStatsD
 
@@ -343,7 +343,7 @@ dotnet add package DogStatsD-CSharp-Client
 {{< /programming-lang-wrapper >}}
 
 
-#### Instanciar el cliente de DogStatsD 
+#### Instanciar el cliente de DogStatsD
 
 Una vez instalado tu cliente DogStatsD, instálalo en tu código:
 {{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}

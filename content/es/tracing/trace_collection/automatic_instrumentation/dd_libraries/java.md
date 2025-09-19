@@ -31,7 +31,7 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][18].
 
 ### Instrumentar tu solicitud
 
-Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
+Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la librería de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
 Para empezar a rastrear tus aplicaciones:
 
@@ -214,7 +214,7 @@ La instrumentación puede venir de la instrumentación automática, de la API Op
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][9].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][9].
 
 ## Referencias adicionales
 

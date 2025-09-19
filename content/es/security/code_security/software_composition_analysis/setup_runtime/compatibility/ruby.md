@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Soporte de las capacidades de Code Security
 
-Las siguientes capacidades de Code Security son compatibles con la biblioteca Ruby, para la versión del rastreador especificado:
+Las siguientes capacidades de Code Security son compatibles con la librería Ruby, para la versión del rastreador especificado:
 
 | Capacidad de Code Security                    | Versión mínima de rastreador Ruby |
 | ------------------------------------------- | ----------------------------|
@@ -28,7 +28,7 @@ Las siguientes capacidades de Code Security son compatibles con la biblioteca Ru
 ## Compatibilidad con lenguajes y marcos
 
 **Intérpretes Ruby compatibles**
-La biblioteca Ruby de Datadog es compatible con el último gem para los siguientes intérpretes Ruby:
+La librería Ruby de Datadog es compatible con el último gem para los siguientes intérpretes Ruby:
 
 - [MRI][2] versiones 2.1 a 3.1
 

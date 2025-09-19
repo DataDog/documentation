@@ -1,5 +1,6 @@
 ---
 title: HTTP Requests
+description: Make custom HTTP requests to endpoints with configurable authentication, methods, headers, and response handling for workflows and apps.
 disable_toc: false
 further_reading:
 - link: "/actions/connections/"
