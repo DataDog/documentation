@@ -476,7 +476,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see inline code snippets directly in [Continuous Profiler][1] flame graphs.
+You can see source code previews directly in [Continuous Profiler][1] flame graphs.
 
 1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
 2. Select the service you want to investigate.
