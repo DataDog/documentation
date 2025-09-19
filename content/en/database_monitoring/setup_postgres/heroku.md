@@ -153,7 +153,7 @@ instances:
     ssl: True
 ```
 
-At this point you can also enable additional features found in the postgres [conf.yaml.example][7] like [schema collection][6]. 
+The database connection is now configured. To enable additional features, such as [schema collection][6], refer to the options available in the Postgres [conf.yaml.example][7] file.
 
 To manually locate the correct values for the placeholders in the YAML file, follow the [Manual Setup](#manual-setup). To programmatically replace them, follow the [Prerun Script](#prerun-script) instructions.
 
