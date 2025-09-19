@@ -1,4 +1,4 @@
-The [Datadog Terraform module for Google Cloud Run][1] wraps the [google_cloud_run_v2_service][2] resource and automatically configures your Cloud Run service for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+The [Datadog Terraform module for Google Cloud Run][1001] wraps the [google_cloud_run_v2_service][1002] resource and automatically configures your Cloud Run service for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
 Create a `.tf` file that contains your configuration. You can use the following example and adapt it to your needs:
 
