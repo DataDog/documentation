@@ -255,192 +255,210 @@ _Note: Above each code example is a link to its respective documentation source.
 
 ### Initialization
 
-_[Statsig](https://docs.statsig.com/client/jsClientSDK#step-3-initialize-the-sdk):_
-```typescript
+{{< tabs >}}
+{{% tab "Statsig" %}}
+Statsig docs: [Getting Started](https://docs.statsig.com/client/javascript-sdk#getting-started)
+{{< code-block lang="typescript" >}}
 await statsig.initialize('client-key', user, { environment: { tier: 'production' } });
-```
+{{< /code-block >}}
+{{% /tab %}}
 
-
-_[Eppo](https://docs.geteppo.com/sdks/client-sdks/javascript/):_
-```typescript
+{{% tab "Eppo" %}}
+Eppo docs: [Initialization](https://docs.geteppo.com/sdks/client-sdks/javascript/Initialization/)
+{{< code-block lang="typescript" >}}
 await init({
  apiKey: EPPO_SDK_KEY,
  assignmentLogger,
 });
-```
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Wire up assignment logger
 
-_[Statsig](https://docs.statsig.com/client/jsClientSDK#logging):_
-```typescript
-// Statsig automatically logs assignments, but you can add custom logging by subscribing to client events like gate_evaluation or experiment_evaluation 
+{{< tabs >}}
+{{% tab "Statsig" %}}
+Statsig docs: [Logging an Event](https://docs.statsig.com/client/javascript-sdk/#event-logging)
+{{< code-block lang="typescript" >}}
+// Statsig automatically logs assignments, but you can add custom logging by 
+// subscribing to client events like gate_evaluation or experiment_evaluation.
+
 statsig.on('gate_evaluation', (event) => {
- // Your custom logging logic here
- console.log(event);
+  // Your custom logging logic here
+  console.log(event);
 });
-```
+{{< /code-block >}}
+{{% /tab %}}
 
-
-_[Eppo](https://docs.geteppo.com/sdks/concepts/#assignment-logging):_
-```typescript
+{{% tab "Eppo" %}}
+Eppo docs: [Assignment logging](https://docs.geteppo.com/sdks/event-logging/assignment-logging/)
+{{< code-block lang="typescript" >}}
 const assignmentLogger: IAssignmentLogger = {
- logAssignment(assignment) {
-   // Send data to analytics provider / warehouse here
-   analytics.track({
-     userId: assignment.subject,
-     event: "Eppo Randomization Event",
-     type: "track",
-     properties: { ...assignment },
-   });
- }
+  logAssignment(assignment) {
+    // Send data to analytics provider/warehouse here
+    analytics.track({
+      userId: assignment.subject,
+      event: "Eppo Randomization Event",
+      type: "track",
+      properties: { ...assignment },
+    });
+  }
 };
-getInstance().setLogger(assignmentLogger); // Note: can also be set in init()
-```
+getInstance().setLogger(assignmentLogger);   // Can also be set in init()
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Get a Boolean flag (Feature Gate)
 
 For example, checking if a feature is enabled
 
-
-_[Statsig](https://docs.statsig.com/client/jsClientSDK#checking-a-gate):_
-```typescript
+{{< tabs >}}
+{{% tab "Statsig" %}}
+Statsig docs: [Checking a Feature Flag/Gate](https://docs.statsig.com/client/javascript-sdk/#feature-gates)
+{{< code-block lang="typescript" >}}
 const enabled = statsig.checkGate('new_feature_gate');
-```
+{{< /code-block >}}
 
-
-_[Eppo](https://docs.geteppo.com/sdks/server-sdks/node/#boolean-flags):_
-```typescript
+{{% /tab %}}
+{{% tab "Eppo" %}}
+Eppo docs: [Boolean Assignments](https://docs.geteppo.com/sdks/server-sdks/node/assignments/#boolean-assignments)
+{{< code-block lang="typescript" >}}
 const enabled = getInstance().getBooleanAssignment(
- user.userID,
- 'new_feature_gate',
- userAttributes,
- false
+  user.userID,
+  'new_feature_gate',
+  userAttributes,
+  false
 );
-```
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Get configuration values
 
-_[Statsig](https://docs.statsig.com/client/jsClientSDK#reading-a-dynamic-config):_
-```typescript
+{{< tabs >}}
+{{% tab "Statsig" %}}
+Statsig docs: [Reading a Dynamic Config](https://docs.statsig.com/client/javascript-sdk#dynamic-configs)
+{{< code-block lang="typescript" >}}
 const config = statsig.getConfig('product_config');
+{{< /code-block >}}
 
-
-```
-
-
-_[Eppo](https://docs.geteppo.com/sdks/server-sdks/node/#json-flags):_
-```typescript
-// If it's part of a multi-valued configuration (How Statsig organizes values),
-// you will have to figure out the type of each parameter as Eppo uses different calls
-// for each variant type.
-
+{{% /tab %}}
+{{% tab "Eppo" %}}
+Eppo docs: [Assignments](https://docs.geteppo.com/sdks/server-sdks/node/assignments/)
+{{< code-block lang="typescript" >}}
+// If it's part of a multi-valued configuration (how Statsig organizes values),
+// you will have to figure out the type of each parameter, as Eppo uses different 
+// calls for each variant type.
 
 // For a JSON configuration with multiple parameters:
 const config = getInstance().getJSONAssignment(user.userID, 'product_config', userAttributes, {});
 const buttonColor = config?.button_color || 'blue';
 const maxItems = config?.max_items || 10;
 
-
 // For individual string parameters:
 const buttonColor = getInstance().getStringAssignment(
- user.userID,
- 'button_color_flag',
- userAttributes,
- 'blue'
+  user.userID,
+  'button_color_flag',
+  userAttributes,
+  'blue'
 );
-
 
 // For individual numeric parameters:
 const maxItems = getInstance().getNumericAssignment(
- user.userID,
- 'max_items_flag',
- userAttributes,
- 10
+  user.userID,
+  'max_items_flag',
+  userAttributes,
+  10
 );
-```
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Get experiment values
 
 For example, getting experiment parameter values
 
-
-_[Statsig](https://docs.statsig.com/client/jsClientSDK#getting-an-experiment):_
-```typescript
-// Values via getLayer
-
+{{< tabs >}}
+{{% tab "Statsig" %}}
+Statsig docs: [Getting a Layer/Experiment](https://docs.statsig.com/client/javascript-sdk/#layers)
+{{< code-block lang="typescript" >}}
+// Values using getLayer
 
 const layer = statsig.getLayer("user_promo_experiments");
-
 
 const promoTitle = layer.get("title", "Welcome to Statsig!");
 const discount = layer.get("discount", 0.1);
 
-
-// or, via getExperiment
-
+// or, using getExperiment
 
 const titleExperiment = statsig.getExperiment("new_user_promo_title");
 const priceExperiment = statsig.getExperiment("new_user_promo_price");
 
-
 const promoTitle = titleExperiment.value["title"] ?? "Welcome!";
 const discount = priceExperiment.value["discount"] ?? 0.1;
-```
+{{< /code-block >}}
+{{% /tab %}}
 
-
-_[Eppo](https://docs.geteppo.com/sdks/server-sdks/node/#json-flags):_
-```typescript
-// For experiments with multiple parameters, use JSON assignment
+{{% tab "Eppo" %}}
+Eppo docs: [Assignments](https://docs.geteppo.com/sdks/server-sdks/node/assignments/)
+{{< code-block lang="typescript" >}}
+// For experiments with multiple parameters, use JSON assignment.
 const variation = getInstance().getJSONAssignment(
- user.userID,
- 'checkout_flow_test',
- userAttributes,
- {}
+  user.userID,
+  'checkout_flow_test',
+  userAttributes,
+  {}
 );
 const checkoutVersion = experiment?.checkout_version || 'control';
 const showUpsell = experiment?.show_upsell || false;
 
-
 // Alternatively, for individual experiment parameters:
 const checkoutVersion = getInstance().getStringAssignment(
- user.userID,
- 'checkout_version',
- userAttributes,
- 'control'
+  user.userID,
+  'checkout_version',
+  userAttributes,
+  'control'
 );
-```
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### User context and attributes
 
-_[Statsig](https://docs.statsig.com/client/jsClientSDK#statsig-user):_
-```typescript
+{{< tabs >}}
+{{% tab "Statsig" %}}
+Statsig docs: [Statsig User](https://docs.statsig.com/client/javascript-sdk/#statsig-user)
+{{< code-block lang="typescript" >}}
 const user = new StatsigUser({
- userID: '12345',
- email: 'user@example.com',
- country: 'US',
- custom: {
-   plan: 'premium',
-   signup_date: '2023-01-15'
- }
+  userID: '12345',
+  email: 'user@example.com',
+  country: 'US',
+  custom: {
+    plan: 'premium',
+    signup_date: '2023-01-15'
+  }
 });
-```
+{{< /code-block >}}
+{{% /tab %}}
 
-
-_[Eppo](https://docs.geteppo.com/sdks/concepts/#subject-attributes):_
-```typescript
+{{% tab "Eppo" %}}
+Eppo docs: [Subject attributes](https://docs.geteppo.com/sdks/sdk-features/subject-attributes/)
+{{< code-block lang="typescript" >}}
 const userAttributes = {
- email: 'user@example.com',
- country: 'US',
- plan: 'premium',
- signup_date: '2023-01-15'
+  email: 'user@example.com',
+  country: 'US',
+  plan: 'premium',
+  signup_date: '2023-01-15'
 };
-
 
 // Used in assignment calls
 const variation = getInstance().getBooleanAssignment(
- '12345', // userID as separate parameter
- 'feature_flag',
- userAttributes,
- false
+  '12345', // userID as separate parameter
+  'feature_flag',
+  userAttributes,
+  false
 );
-```
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
