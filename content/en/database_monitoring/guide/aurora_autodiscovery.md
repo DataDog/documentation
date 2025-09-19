@@ -55,7 +55,7 @@ You can also attach the [`AmazonRDSReadOnlyAccess`][3] policy.
 
 ### Configure Aurora tags
 
-By default, the listener discovers all Aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the Agent to discover clusters with specific tags.
+The listener discovers all Aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the Agent to discover clusters with specific tags.
 
 You must apply these tags to the DB cluster (Role: `Regional cluster`). For more information on tagging RDS resources, see the [AWS documentation][7].
 
@@ -197,7 +197,7 @@ instances:
 
 To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
 
-{{< highlight yaml "hl_lines=12-13" >}}
+``` yaml {hl_lines=["12-13"]}
 ad_identifiers:
   - _dbm_postgres_aurora
 init_config:
@@ -214,7 +214,7 @@ instances:
     tags:
       - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
       - "region:%%extra_region%%"
-{{< /highlight >}}
+```
 
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
@@ -283,7 +283,7 @@ instances:
 {{% collapse-content title="IAM Authentication (7.67.0+)" level="h5" id="iam-authentication" %}}
 ##### IAM Authentication
 
-To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
+To use [IAM authentication][2] to connect to your RDS instance, make sure that you are using Agent version 7.67.0 or above and use the following template:
 
 ``` yaml {hl_lines=["12-13"]}
 ad_identifiers:
