@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Step duration in Synthetic Monitoring is the time a Browser Test step takes to be considered fully loaded. It ends only when the page has finished rendering and all network requests are complete. 
+Step duration in Synthetic Monitoring is the time a Browser Test step takes to be considered fully loaded. It is captured only when the page has finished rendering and all network requests are complete. 
 
 A page is considered fully loaded when:
 - The [frame](#understanding-frames) has finished loading, _and_
@@ -20,7 +20,7 @@ A page is considered fully loaded when:
 
 In Synthetic Monitoring Browser Tests, step duration and fully loaded time represent the same concept:
 
-{{< img src="synthetics/guide/step-duration/step_duration.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="synthetics/guide/step-duration/step_duration_2.png" alt="Side panel of a Synthetic Monitoring step highlighting fully loaded and step duration times" style="width:100%" >}}
 
 ## Understanding frames
 
@@ -33,7 +33,7 @@ A frame is a browser section that renders a web page. Each page contains one mai
 
 The Synthetics Worker monitors two browser signals to determine if a frame has fully loaded:
 
-**`document.readyState`**: Must show "complete"
+**`document.readyState`**: [The state of the DOM][4] is "complete""
 - Indicates the HTML is parsed, the browser DOM is constructed, and sub-resources (CSS, images) are loaded.
 - Delays may occur when synchronous or deferred scripts prevent DOM completion.
 
@@ -55,7 +55,7 @@ The Synthetics Worker also monitors pending network requests to determine step c
 
 ### LCP impact on fully loaded time
 
-Largest Contentful Paint (LCP) indirectly impacts step completion. While the Synthetics Worker doesn't explicitly wait for LCP, steps requiring interaction with LCP-related elements (such as buttons) cannot proceed until those elements are fully rendered and ready.
+Largest Contentful Paint (LCP) indirectly impacts step completion. While the Synthetics Worker doesn't explicitly wait for LCP, steps requiring interaction with LCP-related elements (such as buttons, large images, or text blocks) cannot proceed until those elements are fully rendered and ready.
 
 ### Deeper insights into step duration
 
@@ -74,3 +74,4 @@ Test results may not always reveal why steps take longer than expected. For comp
 [1]: https://developer.mozilla.org/en-US/docs/Glossary/Browsing_context
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
 [3]: /synthetics/guide/explore-rum-through-synthetics/
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState#complete
