@@ -1,6 +1,6 @@
 '''
 This script checks to ensure that all moved, renamed, or deleted files have a redirect in place.
-- Before you run this script, make sure you've run the build your Hugo server is running at http://localhost:1313.
+- Before you run this script, run a build so your Hugo server is running at http://localhost:1313.
 
 The script finds a list of all files that have been moved, renamed, or deleted from the content/en directory in the current branch.
 It then uses a curl request to the Hugo server to check if the file has a redirect in place.
