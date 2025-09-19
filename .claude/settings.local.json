@@ -1,3 +1,8 @@
 {
-  "permissions": {}
+  "permissions": {
+    "allow": [
+      "Read(//Users/minyi.zhu/Desktop/DataDog/datadog-agent/pkg/collector/corechecks/cluster/orchestrator/processors/**)",
+      "Read(//Users/minyi.zhu/Desktop/DataDog/datadog-agent/pkg/collector/corechecks/cluster/orchestrator/**)"
+    ]
+  }
 }
