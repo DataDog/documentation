@@ -132,7 +132,7 @@ HEROKU_SLUG_COMMIT:             383c7b6105fe2a11baeddb9b75703eb1660dd519
 HEROKU_SLUG_DESCRIPTION:        Deploy 383c7b61
 ```
 
-In the root of the project, create a directory for the postgres configuration called `datadog/conf.d/postgres.d` and then a file inside called `conf.yaml`.
+In the root of the project, create a directory for the Postgres configuration called `datadog/conf.d/postgres.d`, containing a file called `conf.yaml`:
 
 ``` shell
 mkdir -p datadog/conf.d/postgres.d
