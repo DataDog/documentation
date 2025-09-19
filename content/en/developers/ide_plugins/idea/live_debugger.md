@@ -89,10 +89,10 @@ You can enable or disable logpoints by right-clicking and selecting the appropri
 
 | Icon         | Description       |
 |--------------|-------------------|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeActive.png" alt="Active icon" width="24px" >}}      | **Active**: Log events will be generated when the line of code is about to be executed.|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeDisabled.png" alt="Inactive icon" width="24px" >}}  | **Disabled**: The logpoint is inactive, either because it automatically expired or the user disabled it manually. |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.png" alt="Error icon" width="24px" >}}        | **Error**: The logpoint is not generating log events due to an error. |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.png" alt="Warning icon" width="24px" >}}    | **Warning**: The logpoint may not be generating log events. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeActive.svg.png" alt="Active icon" width="24px" >}}      | **Active**: Log events will be generated when the line of code is about to be executed.|
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeDisabled.svg.png" alt="Inactive icon" width="24px" >}}  | **Disabled**: The logpoint is inactive, either because it automatically expired or the user disabled it manually. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" width="24px" >}}        | **Error**: The logpoint is not generating log events due to an error. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" width="24px" >}}    | **Warning**: The logpoint may not be generating log events. |
 
 Disabling then re-enabling a logpoint extends its expiry time to 48 hours.
 
