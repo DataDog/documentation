@@ -76,20 +76,56 @@ You can click on the gear box icon to customize which metrics are displayed with
 | Cores Limit           | Number of GPU cores that the process/container/device has available | `gpu.core.limit`
 | Memory Used           | (Only emitted if processes are active) The memory used by this process at the point the metric was queried. | `gpu.memory.usage`
 | Memory Limit          | The maximum amount of memory a process/container/device could allocate | `gpu.memory.limit`
-| Metric Tons CO2       | Metric tons of carbon dioxide equivalent (MTCO2e) is a unit of measurement that compares the emissions of greenhouse gases based on their global warming potential (GWP).
-It's calculated by multiplying the amount of a gas by its GWP.
-For example, if methane has a GWP of 21, then 1 million metric tons of methane is equivalent to 21 million metric tons of carbon dioxide. | Formula based on `gpu.power.usage`
+| Metric Tons CO2       | Metric tons of carbon dioxide equivalent (MTCO2e) is a unit of measurement that compares the emissions of greenhouse gases based on their global warming potential (GWP). It's calculated by multiplying the amount of a gas by its GWP. For example, if methane has a GWP of 21, then 1 million metric tons of methane is equivalent to 21 million metric tons of carbon dioxide. | Formula based on `gpu.power.usage`
 | Core Utilization      | (Only available if System Probe enabled) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization | `gpu_core_utilization`  
 | Memory Utilization    | GPU Memory used / GPU Memory limit for GPU processes | `gpu_memory_utilization`
 | Idle Cost             | (Only nonzero for timeframes >2 days) The cost of GPU resources that are reserved and allocated but not used.
 
-## Installation Recommendations
-(ADD SP enabled or not dependencies here) 
+## Details Sidepanel 
+Clicking any row in the Fleet table opens a side panel with more details for the selected cluster, host, or device.
 
+### Connected Entities 
+One of the key differentiators of Datadog's GPU Monitoring product is that we don't need to rely on NVIDIA'S DCGM Exporter. We use the Datadog agent to observe GPUs directly which elucidates the relationship of GPU usage, costs to the pods and processes directly. Under the **Connected Entities** section, you can see SM Activity, GPU core utilization (only if System Probe is enabled), and memory usage by pods, processes, and SLURM jobs so  you know which workloads to cut or optimize to decrease total spend. 
+
+### Cluster Sidepanel
+Within this sidepanel you now have a cluster-specific funnel that identifies:
+- number of Total, Allocated, Active, and Effective devices within that particular cluster
+- Total and Idle Cost of that cluster.
+- Connected Entities of that cluster: pods, processes and SLURM jobs
+- 4 Key Metrics (customizable) for that cluster: Core Utilization (only if System probe is enabled), SM Activity, Memory Utilization, PCIe Throughput and Graphics Engine Activity
+- Table of Hosts tied to that pod (NEEDS REPHRASING)
+
+{{< img src="gpu_monitoring/cluster_sidepanel.png" alt="Cluster specific sidepanel that breaks down idle devices, costs and connected entities" style="width:100%;" >}}
+
+### Host Sidepanel
+Within this sidepanel you now have a host-specific view that identifies:
+- Host related metadata like the provider, instance type, CPU Utilization, System Memory Used, System Memory Total, System IO Util, SM Activity and Temperature
+- The specific GPU devices allocated to that host sorted by Graphics Engine Activity
+- Connected Entities of that cluster: pods, processes and SLURM jobs
+
+{{< img src="gpu_monitoring/host_sidepanel.png" alt="Host specific sidepanel that displays the GPU devices tied to that host and Connected Entities" style="width:100%;" >}}
+
+### Device Sidepanel
+Within this sidepanel you now have a device-specific view that identifies:
+- Device related details: Device Type, SM Activity, Temperature
+- 4 key metrics tied to GPUs: SM Activity, Memory Utilization, Power, Graphics Engine Activity 
+- Connected Entities of that cluster: pods and processes
+
+{{< img src="gpu_monitoring/device_sidepanel.png" alt="Host specific sidepanel that displays the GPU devices tied to that host and Connected Entities" style="width:100%;" >}}
+
+## Installation Recommendations
+We actively survey your infrastructure and detect installation gaps that may diminish the value you can get out of GPU Monitoring. In this modal, we provide various installation update recommendations that guarantee a smoother experience when using the product, like making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver and checking for misconfigured hosts.
+
+Additionally, to view advanced GPU Monitoring features such as attribution of GPU resources by related processes or SLURM jobs, you must enable [Live Processes][3] or the [SLURM][4] integration as a prerequisite respectively
+
+{{< img src="gpu_monitoring/installation.png" alt="Modal containing installation guidance for smoother GPU Monitoring user experience." style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [0]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mEnd=1758119939640&mPage=fleet&mStart=1758105539640&mView=nvidia
-[1]: 
+[1]: https://github.com/DataDog/datadog-agent/releases
+[2]: https://www.nvidia.com/en-us/drivers/
+[3]: https://docs.datadoghq.com/infrastructure/process/
+[4]: https://docs.datadoghq.com/integrations/slurm/
