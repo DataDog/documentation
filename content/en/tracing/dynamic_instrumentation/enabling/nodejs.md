@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Node.js
+description: Set up Dynamic Instrumentation for Node.js applications to add probes and capture data without code changes.
 private: false
 code_lang: nodejs
 type: multi-code-lang

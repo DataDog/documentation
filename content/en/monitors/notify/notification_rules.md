@@ -1,5 +1,6 @@
 ---
 title: Notification Rules
+description: "Automate monitor alert routing using predefined notification rules based on tags and conditions to streamline team notifications."
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

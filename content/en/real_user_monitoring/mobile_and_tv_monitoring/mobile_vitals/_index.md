@@ -1,5 +1,6 @@
 ---
 title: Mobile Vitals
+description: "Monitor key mobile performance metrics including startup times, frame rates, and resource usage across Android, iOS, Flutter, and React Native."
 aliases:
 - /real_user_monitoring/android/mobile_vitals
 - /real_user_monitoring/ios/mobile_vitals

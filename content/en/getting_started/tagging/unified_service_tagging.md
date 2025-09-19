@@ -1,5 +1,6 @@
 ---
 title: Unified Service Tagging
+description: Connect telemetry across traces, metrics, and logs using standardized env, service, and version tags for consistent monitoring.
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"

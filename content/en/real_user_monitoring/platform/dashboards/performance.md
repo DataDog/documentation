@@ -1,5 +1,6 @@
 ---
 title: RUM Performance Overview Dashboards
+description: "Visualize application performance with dashboards covering Core Web Vitals, loading times, resource performance, and mobile metrics."
 aliases:
 - '/real_user_monitoring/dashboards/performance_overview_dashboard/'
 - '/real_user_monitoring/dashboards/resources_dashboard'

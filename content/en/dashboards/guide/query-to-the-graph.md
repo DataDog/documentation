@@ -1,5 +1,6 @@
 ---
 title: Query to the Graph
+description: Understand how Datadog's graphing system processes queries and renders graph lines with backend execution steps.
 aliases:
     - /dashboards/faq/query-to-the-graph
 ---
