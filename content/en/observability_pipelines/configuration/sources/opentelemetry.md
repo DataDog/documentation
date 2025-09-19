@@ -75,4 +75,4 @@ Based on these example configurations, these are values you enter for the follow
 
 [1]: https://opentelemetry.io/docs/collector/
 [2]: /observability_pipelines/sources/
-[3]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[3]: /observability_pipelines/scaling_and_performance/advanced_configurations/#bootstrap-options
