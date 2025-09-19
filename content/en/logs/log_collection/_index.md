@@ -1,5 +1,6 @@
 ---
 title: Log Collection and Integrations
+
 description: "Configure your environment to gather logs from your host, containers, and services."
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
