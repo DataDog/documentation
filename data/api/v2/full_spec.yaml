@@ -18874,6 +18874,13 @@ components:
           format: date-time
           readOnly: true
           type: string
+        date_last_used:
+          description: Date the API Key was last used
+          example: '2020-11-27T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         key:
           description: The API key.
           readOnly: true
@@ -18938,6 +18945,13 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_at:
+          description: Last usage timestamp of the application key.
+          example: '2020-12-20T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -35186,6 +35200,13 @@ components:
           type: string
           x-merge-override:
             format: false
+        date_last_used:
+          description: Date the API Key was last used.
+          example: '2020-11-27T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -35242,6 +35263,12 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_at:
+          description: Last usage timestamp of the application key.
+          example: '2020-12-20T10:00:00.000Z'
+          nullable: true
+          readOnly: true
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -38449,6 +38476,7 @@ components:
       x-merge-override:
         required: false
     RoleAttributes:
+      additionalProperties: {}
       description: Attributes of the role.
       properties:
         created_at:
@@ -57537,6 +57565,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
       patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
