@@ -478,7 +478,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 You can see inline code snippets directly in [Continuous Profiler][1] flame graphs.
 
-1. Navigate to [**APM** > **Profile Explorer**][2].
+1. Navigate to [**APM** > **Profiles Explorer**][2].
 2. Hover your cursor over a method in the flame graph.
 3. Press `Opt` in macOS or `Ctrl` in other operating systems to lock the tooltip and interact with its content.
 3. If prompted to do so, click **Connect to preview**. 
