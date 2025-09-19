@@ -32,17 +32,15 @@ The Datadog nginx tracing module has experimental support for threat detection a
    `--with-threads` in the output, you will need to rebuild nginx with this flag
    enabled. For more information on how to build nginx from sources, see the
    [nginx documentation][3].
-
-2. **Update your nginx tracing library module** to at least version 1.2.0. Visit
+2. Update your nginx tracing library module to at least version 1.2.0. Visit
    the [GitHub releases page][2] and select the artifact named according to the
-   pattern "ngx_http_datadog_module-appsec-&lt;amd64/arm64&gt;-&lt;nginx
-   version&gt;.so.tgz". Note that this artifact includes "appsec" in the name.
-
-3. **Enable App and API Protection in the nginx configuration**.
-   You need to:
-   * define one or more thread pools with the [`thread_pool`][4] directive,
-   * explicitly enable AppSec with [`datadog_appsec_enabled`][5], and
-   * map requests to a thread pool or pools that you defined with the directive
+   pattern `ngx_http_datadog_module-appsec-&lt;amd64/arm64&gt;-&lt;nginx
+   version&gt;.so.tgz`. Note that this artifact includes `appsec` in the name.
+3. Enable App and API Protection in the nginx configuration.
+   Do the following:
+   * Define one or more thread pools with the [`thread_pool`][4] directive.
+   * Explicitly enable AppSec with [`datadog_appsec_enabled`][5].
+   * Map requests to a thread pool or pools that you defined with the directive
      [`datadog_waf_thread_pool_name`][6].
 
    For example:
@@ -64,7 +62,7 @@ The Datadog nginx tracing module has experimental support for threat detection a
 
 ## Using App and API Protection without APM tracing
 
-If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+If you want to use App and API Protection without APM tracing functionality, you can deploy with tracing disabled:
 
 1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
 2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
