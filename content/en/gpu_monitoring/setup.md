@@ -34,11 +34,11 @@ In a uniform cluster, all nodes have GPU devices.
    `gpu.privilegedMode: true`
    : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`).
 
-   `gpu.patchCgroupPermissions: true` 
-   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices. 
+   `gpu.patchCgroupPermissions: true`
+   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
-   : _Only for AWS EKS and Oracle Cloud_. Specifies container runtime, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
    Example `datadog-agent.yaml`, running on GKE with advanced eBPF metrics enabled:
 
@@ -52,7 +52,7 @@ In a uniform cluster, all nodes have GPU devices.
        gpu:
          enabled: true
          privilegedMode: true # Only for advanced eBPF metrics
-         patchCgroupPermissions: true # Only for GKE 
+         patchCgroupPermissions: true # Only for GKE
          requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
    ```
 
@@ -74,11 +74,11 @@ In a uniform cluster, all nodes have GPU devices.
    `gpuMonitoring.privilegedMode: true`
    : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`).
 
-   `gpuMonitoring.configureCgroupPerms: true` 
-   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices. 
+   `gpuMonitoring.configureCgroupPerms: true`
+   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Only for AWS EKS and Oracle Cloud_. Specifies container runtime, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
    Example `datadog-values.yaml`, running on GKE with advanced eBPF metrics enabled:
 
@@ -87,7 +87,7 @@ In a uniform cluster, all nodes have GPU devices.
      gpuMonitoring:
        enabled: true
        privilegedMode: true        # Only for advanced SP metrics
-       configureCgroupPerms: true  # Only for GKE 
+       configureCgroupPerms: true  # Only for GKE
        runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
    ```
 
@@ -118,7 +118,7 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
          # Only enable this feature if there is nothing else that requires the system-probe container in all Agent pods
          # Examples of system-probe features are npm, cws, usm
          enabled: true
-         
+
    override:
      nodeAgent:
        volumes:
@@ -172,8 +172,8 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
          nodeAgent:
            runtimeClassName: nvidia  # Only if not in AWS EKS or Oracle Cloud
            containers:
-             # Change system-probe environment variables only for advanced 
-             # eBPF metrics, or if running in GKE 
+             # Change system-probe environment variables only for advanced
+             # eBPF metrics, or if running in GKE
              system-probe:
                env:
                  - name: DD_GPU_MONITORING_ENABLED
@@ -233,11 +233,11 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
    `gpuMonitoring.privilegedMode: true`
    : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`).
 
-   `gpuMonitoring.configureCgroupPerms: true` 
-   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices. 
+   `gpuMonitoring.configureCgroupPerms: true`
+   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Only for AWS EKS and Oracle Cloud_. Specifies container runtime, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
    Example `datadog-gpu-values.yaml`:
 
@@ -248,7 +248,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
      gpuMonitoring:
        enabled: true
        privilegedMode: true        # Only for advanced eBPF metrics
-       configureCgroupPerms: true  # Only for GKE 
+       configureCgroupPerms: true  # Only for GKE
        runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
 
    agents:
@@ -261,7 +261,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
                operator: In
                values:
                  - "true"
-   
+
    # Join with existing Cluster Agent
    existingClusterAgent:
      join: true
