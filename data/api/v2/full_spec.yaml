@@ -77084,6 +77084,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
   /api/v2/spans/events/search:
@@ -77136,6 +77140,10 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.data.attributes.page.limit
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_read
       x-undo:
         type: safe
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
