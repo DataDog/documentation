@@ -261,4 +261,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [65]: https://github.com/dotansimha/graphql-yoga
 [66]: https://js.langchain.com/
 [67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
-[67]: https://www.npmjs.com/package/@azure/service-bus
+[68]: https://www.npmjs.com/package/@azure/service-bus
