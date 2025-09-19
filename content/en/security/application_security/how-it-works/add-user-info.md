@@ -709,7 +709,7 @@ In the following example, the commented code is no longer necessary.
 $user = [
     'id' => 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
     'email' => 'user@email.com' // other fields are optional
-]; // same as before, but now the array is optional. Providing a user ID will nonetheless help with post-compromised activity correlation
+]; // same as before, but now the array is optional. Providing a user ID nonetheless helps with post-compromised activity correlation
 
 $login = 'user@email.com'; // new mandatory argument
 
