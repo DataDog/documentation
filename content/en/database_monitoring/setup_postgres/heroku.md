@@ -153,13 +153,8 @@ instances:
     ssl: True
 ```
 
-The database connection is now configured. To enable additional features, such as [schema collection][6], refer to the options available in the Postgres [conf.yaml.example][7] file.
-
 To manually locate the correct values for the placeholders in the YAML file, follow the [Manual Setup](#manual-setup). To programmatically replace them, follow the [Prerun Script](#prerun-script) instructions.
 
-[6]: /database_monitoring/schema_explorer
-[7]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
- 
 {{% collapse-content title="Manual Setup" level="h5" %}}
 #### Manual Setup
 
@@ -212,8 +207,12 @@ git push heroku main
 {{% /tab %}}
 {{< /tabs >}}
 
+The database connection is now configured. To enable additional features, such as [schema collection][6], refer to the options available in the Postgres [conf.yaml.example][7] file.
 
 [1]: /agent/basic_agent_usage/heroku/
 [2]: https://www.datadoghq.com/product/database-monitoring/
 [3]: https://devcenter.heroku.com/articles/heroku-postgresql
 [4]: https://devcenter.heroku.com/articles/heroku-postgres-plans
+[6]: /database_monitoring/schema_explorer
+[7]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+ 
