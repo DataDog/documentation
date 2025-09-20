@@ -73,6 +73,22 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskSensitiveInputs,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
+
 #### Mask all inputs
 With the `mask_all_inputs` setting enabled, all inputs fields are masked in the replay.
 
@@ -119,6 +135,22 @@ SessionReplay.enable(config)
 ```
 {% /if %}
 <!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskAllInputs,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
 
 #### Mask all
 With the `mask_all` setting enabled, all text and input fields are masked in the replay.
@@ -167,9 +199,29 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskAll,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
+
 ### Image masking
 
 By default, the `mask_all` setting is enabled for all images. With this setting enabled, all images on screen are masked.
+
+{% if equals($platform, "flutter") %}
+For performance reasons, large images (those exceeding 1000x1000 total pixels) are masked in Flutter, and will display "Large Image" in the Session Replay player.
+{% if %}
 
 #### Mask all images
 With the `mask_all` setting enabled, all images are replaced by placeholders labeled 'Image' in the replay.
@@ -219,6 +271,22 @@ SessionReplay.enable(config)
 ```
 {% /if %}
 <!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        imagePrivacyLevel: ImagePrivacyLevel.maskAll,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
 
 #### Mask content images
 You can manage content masking while still allowing system or bundled images to be visible.
@@ -286,6 +354,25 @@ SessionReplay.enable(config)
 ```
 {% /if %}
 <!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+Bundled images are those that use `AssetImage` as their image provider.
+
+
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        imagePrivacyLevel: ImagePrivacyLevel.maskNonAssetsOnly,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
 
 #### Show all images
 With the `mask_none` setting enabled, all images are shown in the replay.
@@ -384,6 +471,22 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        imagePrivacyLevel: ImagePrivacyLevel.maskNone,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
+
 #### Show all touches
 With the `show` setting enabled, all touches that occur during the replay are shown.
 
@@ -431,6 +534,24 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
+<!-- Flutter -->
+Bundled images are those that use `AssetImage` as their image provider.
+
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        touchPrivacyLevel: TouchPrivacyLevel.show,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
+
 ## Privacy overrides
 
 The sections above describe the global masking levels that apply to the entire application. However, it is also possible to override these settings at the view level. The same privacy levels as above are available for text and inputs, images, touches, and an additional setting to completely hide a specific view.
@@ -443,7 +564,7 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 
 
 <!-- Android or iOS -->
-{% if or(equals($platform, "android"), equals($platform, "ios")) %}
+{% if or(equals($platform, "android"), equals($platform, "ios"), equals($platform, "flutter")) %}
 
 ### Text and input override
 
@@ -488,7 +609,7 @@ To override text and input privacy in SwiftUI, wrap your content with `SessionRe
 struct ContentView: View {
     @State private var username = ""
     @State private var password = ""
-    
+
     var body: some View {
         // Set a text and input override on your SwiftUI content
         SessionReplayPrivacyView(textAndInputPrivacy: .maskAllInputs) {
@@ -503,6 +624,28 @@ struct ContentView: View {
 ```
 {% /if %}
 <!-- end iOS -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+To override text and input privacy in Flutter, use the `SessionReplayPrivacy` widget to override the privacy settings for an entire widget tree. Setting
+any value to `null` keeps the privacy values unchanged from values provided higher up the widget tree.
+
+```dart {% collapsible=true %}
+class MyWidget: StatelessWidget {
+  Widget build() {
+    return SessionReplayPrivacy(
+      textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskAllInputs,
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: 'Simple Text Field',
+        ),
+      ),
+    );
+  }
+}
+```
+{% /if %}
+<!-- end Flutter -->
 
 ### Image override
 
@@ -547,7 +690,7 @@ To override image privacy in SwiftUI, wrap your content with `SessionReplayPriva
 ```swift {% filename="ContentView.swift" collapsible=true %}
 struct ProfileView: View {
     let profileImageURL = URL(string: "https://example.com/profile.jpg")
-    
+
     var body: some View {
         // Set an image privacy override on your SwiftUI content
         SessionReplayPrivacyView(imagePrivacy: .maskAll) {
@@ -556,7 +699,7 @@ struct ProfileView: View {
                     .resizable()
                     .frame(width: 60, height: 60)
                     .clipShape(Circle())
-                
+
                 AsyncImage(url: profileImageURL) { image in
                     image.resizable()
                 } placeholder: {
@@ -570,6 +713,24 @@ struct ProfileView: View {
 ```
 {% /if %}
 <!-- end iOS -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+To override image privacy in Flutter, use the `SessionReplayPrivacy` widget to override the privacy settings for an entire widget tree. Setting
+any value to `null` keeps the privacy values unchanged from values provided higher up the widget tree.
+
+```dart {% collapsible=true %}
+class MyWidget: StatelessWidget {
+  Widget build() {
+    return SessionReplayPrivacy(
+      imagePrivacyLevel: ImagePrivacyLevel.maskAll,
+      child: Image.asset('assets/my_image.png'),
+    );
+  }
+}
+```
+{% /if %}
+<!-- end Flutter -->
 
 ### Touch override
 
@@ -613,7 +774,7 @@ To override touch privacy in SwiftUI, wrap your content with `SessionReplayPriva
 ```swift {% filename="ContentView.swift" collapsible=true %}
 struct SettingsView: View {
     @State private var sliderValue = 0.5
-    
+
     var body: some View {
         // Set a touch privacy override on your SwiftUI content
         SessionReplayPrivacyView(touchPrivacy: .hide) {
@@ -625,7 +786,7 @@ struct SettingsView: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
-                
+
                 Slider(value: $sliderValue, in: 0...1) {
                     Text("Some Value")
                 }
@@ -637,6 +798,26 @@ struct SettingsView: View {
 ```
 {% /if %}
 <!-- end iOS -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+To override touch privacy in Flutter, use the `SessionReplayPrivacy` widget to override the privacy settings for an entire widget tree. Setting
+any value to `null` keeps the privacy values unchanged from values provided higher up the widget tree.
+
+Enabling touch privacy affects the entire widget tree, and cannot be toggled back to "show" in children.
+
+```dart {% collapsible=true %}
+class MyWidget: StatelessWidget {
+  Widget build() {
+    return SessionReplayPrivacy(
+      touchPrivacyLevel: TouchPrivacyLevel.hide,
+      child: PinPadWidget(),
+    );
+  }
+}
+```
+{% /if %}
+<!-- end Flutter -->
 
 ### Hidden elements override
 
@@ -686,20 +867,20 @@ In SwiftUI, wrap your content with `SessionReplayPrivacyView` and set the `hide`
 struct PaymentView: View {
     @State private var cardNumber = ""
     @State private var cvv = ""
-    
+
     var body: some View {
         // Mark SwiftUI content as hidden
         SessionReplayPrivacyView(hide: true) {
             VStack(spacing: 16) {
                 Text("Payment Information")
                     .font(.headline)
-                
+
                 TextField("Card Number", text: $cardNumber)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 SecureField("CVV", text: $cvv)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 Text("Card ending in 1234")
                     .foregroundColor(.secondary)
             }
@@ -719,7 +900,7 @@ Combine multiple privacy settings in one `SessionReplayPrivacyView` for differen
 struct UserProfileView: View {
     @State private var userBio = ""
     @State private var cardNumber = ""
-    
+
     var body: some View {
         VStack(spacing: 30) {
             // Preferred: Combine multiple privacy settings in one view
@@ -738,7 +919,7 @@ struct UserProfileView: View {
                         }
                         .frame(width: 60, height: 60)
                         .clipShape(Circle())
-                        
+
                         VStack(alignment: .leading) {
                             Text("John Doe")
                                 .font(.headline)
@@ -746,7 +927,7 @@ struct UserProfileView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                         }
                     }
-                    
+
                     Button("Save Profile") {
                         // Save action
                         print("Profile saved")
@@ -758,7 +939,7 @@ struct UserProfileView: View {
                 }
                 .padding()
             }
-            
+
             // For completely different privacy requirements, use separate `SessionReplayPrivacyView` instances
             SessionReplayPrivacyView(hide: true) {
                 VStack(spacing: 16) {
@@ -781,8 +962,28 @@ struct UserProfileView: View {
 {% /if %}
 <!-- end iOS -->
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+To hide a widget tree in Flutter, use the `SessionReplayPrivacy` widget to override the privacy settings for an entire widget tree.
+
+Hiding a widget tree affects the entire widget tree, and cannot be toggled back to `false` in children, as Session Replay stops processing widget trees that are marked with `hide`.
+
+```dart {% collapsible=true %}
+class MyWidget: StatelessWidget {
+  Widget build() {
+    return SessionReplayPrivacy(
+      hide: true,
+      child: PinPadWidget(),
+    );
+  }
+}
+```
 {% /if %}
-<!-- end iOS or Android -->
+<!-- end Flutter -->
+
+
+{% /if %}
+<!-- end iOS or Android of Flutter -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -1027,6 +1228,21 @@ Sensitive text can be detected in the following components.
 {% /table %}
 {% /if %}
 
+{% table %}
+Sensitive text is detected by checking the `obscureText` and `keyboardType` members of the `EditableText` widget,
+which are provided by most `TextField`-like Widgets.
+
+The following `TextInputType`s are considered sensitive:
+
+- `TextInputType.name`
+- `TextInputType.phone`
+- `TextInputType.emailAddress`
+- `TextInputType.streetAddress`
+- `TextInputType.twitter`
+- `TextInputType.visiblePassword`
+{% /table %}
+{% /if %}
+
 #### Input and option text
 
 Input and option text is text entered by the user with a keyboard or other text-input device, or a custom (non-generic) value in selection elements.
@@ -1075,6 +1291,18 @@ This includes the below.
   - Month, day, and year labels in Date Picker (generic values)
 {% /if %}
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+- User-entered text in EditableText, which is used in:
+  - TextField
+  - CupertinoTextField
+  - many custom TextField implementations
+- Notable exclusions:
+  - Placeholder (hint) texts in Text Field and Text View (not entered by the user)
+  - Text in Text Decorations (not entered by the user)
+  - Month, day, and year labels in Date Picker (generic values)
+{% /if %}
+
 #### Static text
 Static text is any text that is not directly entered by the user. This includes the below.
 
@@ -1105,6 +1333,14 @@ All texts in:
 - Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
 {% /if %}
 
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+- Checkbox and Radio Button titles
+- Month, day and year labels in the date and time picker
+- Values updated in response to gesture interaction with input elements, such as the current value of the Slider
+- Other controls, not considered as "user input elements", such as Text, Tab Bar, and Bottom Navigation Bar
+{% /if %}
+
 #### Hint text
 Hint text is static text in editable text elements or option selectors that is displayed when no value is given. This includes:
 
@@ -1125,6 +1361,12 @@ Hint text is static text in editable text elements or option selectors that is d
 - Placeholders in Text Field (iOS), Text View (iOS)
 - Hints in Edit Text (Android)
 - Prompts in Drop Down lists (Android)
+{% /if %}
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+- InputDecoration elements in TextView
+- Placeholder text in CupertinoTextField
 {% /if %}
 
 ### Appearance masking
@@ -1198,6 +1440,18 @@ This includes:
 {% /table %}
 {% /if %}
 <!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+**Shapes**
+- Background of selected option in Segment
+- Circle surrounding the selected date in a Date Picker
+- Thumb of a Slider
+
+**Text attributes**
+- The color of a label rendering the selected date in Date Picker
+- The position of the first and last option in Value Picker
+{% /if %}
 
 ### Touch interactions
 
