@@ -297,5 +297,17 @@
   },
   "datadog_partner_network": {
     "other": "Datadog Partner Network Documentation"
+  },
+  "alert_note": {
+    "other": "NOTE"
+  },
+  "alert_warning": {
+    "other": "WARNING"
+  },
+  "alert_caution": {
+    "other": "CAUTION"
+  },
+  "alert_tip": {
+    "other": "TIP"
   }
 }
