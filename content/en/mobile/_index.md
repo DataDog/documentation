@@ -1,5 +1,6 @@
 ---
 title: Datadog Mobile App
+description: "Monitor your infrastructure on-the-go with the Datadog mobile app for iOS and Android, featuring dashboards, alerts, incidents, and on-call management."
 aliases:
 - /service_management/mobile/
 algolia:

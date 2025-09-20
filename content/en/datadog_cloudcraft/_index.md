@@ -1,5 +1,6 @@
 ---
 title: Cloudcraft in Datadog
+description: "Visualize and analyze AWS cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"

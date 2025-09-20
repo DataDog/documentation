@@ -1,5 +1,6 @@
 ---
 title: "Data Observability: Datasets"
+description: "Set up Data Observability for datasets to detect freshness delays, unusual data patterns, and column-level metric changes in Snowflake and BigQuery."
 further_reading:
   - link: '/data_observability'
     tag: 'Documentation'

@@ -1,5 +1,6 @@
 ---
 title: Code Coverage Data Collected
+description: "Learn about the data collected by Code Coverage including source code provider webhooks, coverage reports, and git metadata."
 further_reading:
   - link: "/code_coverage"
     tag: "Documentation"

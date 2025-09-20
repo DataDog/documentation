@@ -1,5 +1,6 @@
 ---
 title: Set Up Push Notifications on Mobile App
+description: "Configure push notifications on iOS and Android for on-call alerts, incidents, and workflow updates with critical alert settings."
 further_reading:
 - link: "https://docs.datadoghq.com/service_management/on-call/"
   tag: "Documentation"

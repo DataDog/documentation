@@ -1,5 +1,6 @@
 ---
 title: Getting Started with DDSQL Editor
+description: "Learn how to write queries in DDSQL Editor using natural language or SQL syntax, explore schemas, and save and share your queries."
 aliases:
 - /dashboards/ddsql_editor/getting_started/
 ---

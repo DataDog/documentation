@@ -1,5 +1,6 @@
 ---
 title: Remote Configuration
+description: "Remotely configure and change behavior of Datadog components like Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure."
 aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works

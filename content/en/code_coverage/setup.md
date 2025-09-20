@@ -1,5 +1,6 @@
 ---
 title: Set Up Code Coverage
+description: "Configure Code Coverage by integrating with GitHub or GitLab, setting permissions, creating PR Gates, and uploading coverage reports."
 further_reading:
   - link: "/code_coverage"
     tag: "Documentation"
