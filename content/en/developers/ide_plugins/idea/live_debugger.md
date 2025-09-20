@@ -11,25 +11,25 @@ further_reading:
 ---
 
 ## Overview
-The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 48 hours.
+The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are set dynamically in running systems, so there is no need to redeploy your code to investigate and resolve issues. Logpoints are grouped into sessions and you can activate, edit, deactivate or delete sessions (or individual logpoints) at any time. All sessions and logpoints automatically deactivate within 48 hours.
 
 ## Live Debugger tab
-The **Live Debugger** in the Datadog tool window shows the defined logpoints and their related output:
+The **Live Debugger** tab in the Datadog tool window shows the current session, its logpoints and the data captured by the selected logpoint:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
 The panel has three sections: 
 
-* [All available logpoints](#logpoints-tree)
-* [Status and events](#logpoint-status-and-events) for the selected logpoint
-* [Runtime data](#logpoint-event-data) for the selected logpoint event
+* The current [session](#current-session) and its logpoints (on the left side)
+* The [status and events](#logpoint-status-and-events) for the selected logpoint (in the center)
+* The [runtime data](#logpoint-event-data) for the selected logpoint event (on the right side)
 
-### Logpoints tree
-The logpoints tree on the left section shows the available logpoints, with these filters:
+### Current Session
+The session view shows the current session and its logpoints.  Select another session, or start a new one, using the selector. 
 
-* `Only my logpoints` - Show only logpoints created by the current user
-* `Only the current repositories` - Show only logpoints for the repositories associated with the current project
-* `Only enabled logpoints` - Show only logpoints that are enabled
+{{< img src="/developers/ide_plugins/idea/live_debugger/session-selector.png" alt="The session selector" style="width:100%;" >}}
+
+Activate, deactivate or delete the session, using the controls next to the selector. You can also open the session at Datadog in your default web browser.
 
 Select any logpoint to display its status and recently generated events, or to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
@@ -39,14 +39,14 @@ The central section displays the status and recent event information for the sel
 At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to explore all log events for the selected logpoint. 
 
 ### Logpoint event data
-The right section displays data for the selected logpoint event, including captured variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about the source code.
+The right section displays data for the selected logpoint event, including captured variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about your source code.
 
 The **Captures** tab shows a tree view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint. The data is fully searchable and you can copy selected items to the clipboard.
 
 The **Stacktrace** tab shows the runtime path execution leading up to the logpoint. Double-click any frame in the stack trace to open the corresponding source file location.
 
 ## Source editor
-In the source editor, an icon is shown in the gutter for any line that has a logpoint defined:
+In the source editor, an icon is shown in the gutter for any line that has a logpoint defined in the current session:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
@@ -55,7 +55,9 @@ Click the icon to open the Datadog tool window and show the selected logpoint. R
 ## Managing logpoints
 
 ### Add a logpoint
-To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, a template for the log message to be emitted at runtime, the variable capture depth, and a logpoint condition expression (optional):
+To add a logpoint right-click on a line of code in the source editor and select **Add Line Logpoint** (or **Add Method Logpoint**) from the **Datadog Live Debugger** menu. New logpoints are added to the current session or, if required, a new session is created. 
+
+A dialog appears where you can enter the service name, the environment, a template for the log message to be emitted at runtime, a logpoint condition expression (optional), and the variable capture depth:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
@@ -86,6 +88,8 @@ You can delete logpoints by right-clicking the icon in the gutter of the source 
 
 Deleting a logpoint does not delete the events already generated by the logpoint.
 
+When a session is deleted, all the logpoints in the session are deleted. This cannot be undone.
+
 ### Enable and disable a logpoint
 You can enable or disable logpoints by right-clicking and selecting the appropriate context menu item. The icon changes to indicate the current state of the logpoint:
 
@@ -99,7 +103,7 @@ You can enable or disable logpoints by right-clicking and selecting the appropri
 Disabling then re-enabling a logpoint extends its expiry time to 48 hours.
 
 ## Prerequisites
-The Live Debugger feature in the IDE supports Java and Python and is subject to the same setup requirements as [Live Debugger][1].
+The Live Debugger feature in the IDE supports Java, Python and Go and is subject to the same setup requirements as [Live Debugger][1].
 
 ## Further reading
 
