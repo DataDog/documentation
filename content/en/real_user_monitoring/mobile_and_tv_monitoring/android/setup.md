@@ -19,7 +19,7 @@ further_reading:
 
 This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the Android SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
 
-The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
+The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ## Setup
 
@@ -43,7 +43,7 @@ android {
     //(...)
 }
 dependencies {
-    implementation "com.datadoghq:dd-sdk-android-rum:x.x.x" 
+    implementation "com.datadoghq:dd-sdk-android-rum:x.x.x"
     //(...)
 }
 
@@ -100,10 +100,11 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-            clientToken = <CLIENT_TOKEN>,
-            env = <ENV_NAME>,
-            variant = <APP_VARIANT_NAME>
+            clientToken = "<CLIENT_TOKEN>",
+            env = "<ENV_NAME>",
+            variant = "<APP_VARIANT_NAME>"
         ).build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -116,8 +117,9 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -134,12 +136,13 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
             )
             .useSite(DatadogSite.EU1)
             .build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -152,9 +155,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.EU1)
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -171,12 +175,13 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
             )
             .useSite(DatadogSite.US3)
             .build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -189,9 +194,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.US3)
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -208,12 +214,13 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
             )
             .useSite(DatadogSite.US5)
             .build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -226,9 +233,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.US5)
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -245,12 +253,13 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
             )
             .useSite(DatadogSite.US1_FED)
             .build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -263,9 +272,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.US1_FED)
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -282,12 +292,13 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
             )
             .useSite(DatadogSite.AP1)
             .build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -300,9 +311,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.AP1)
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -319,12 +331,13 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
             )
             .useSite(DatadogSite.AP2)
             .build()
+
         Datadog.initialize(this, configuration, trackingConsent)
     }
 }
@@ -337,9 +350,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.AP2)
                         .build();
+
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
@@ -457,7 +471,7 @@ To initialize an interceptor for tracking network events:
 
 4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
    - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
-      
+
 5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][15]:
 
    {{< tabs >}}
@@ -485,19 +499,23 @@ You can also add an `EventListener` for the `OkHttpClient` to [automatically tra
 
 ## Track background events
 
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
 
 Add the following snippet during configuration:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-.trackBackgroundEvents(true)
+val rumConfig = RumConfiguration.Builder(applicationId)
+  // …
+  .trackBackgroundEvents(true)
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-.trackBackgroundEvents(true)
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+  // …
+  .trackBackgroundEvents(true)
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -506,10 +524,10 @@ Add the following snippet during configuration:
 
 ## Sending data when device is offline
 
-The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
+The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches.
 
 Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
+
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Kotlin extensions
