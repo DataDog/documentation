@@ -35807,7 +35807,7 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/search:
     get:
-      description: Search for Synthetic tests and Test Suites.
+      description: Search for Synthetic tests.
       operationId: SearchTests
       parameters:
       - description: The search query.
@@ -35820,12 +35820,6 @@ paths:
           response.
         in: query
         name: include_full_config
-        required: false
-        schema:
-          type: boolean
-      - description: If true, returns suites instead of tests.
-        in: query
-        name: search_suites
         required: false
         schema:
           type: boolean
