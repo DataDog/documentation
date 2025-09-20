@@ -483,6 +483,38 @@ To initialize an interceptor for tracking network events:
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][14] for third-party providers and network requests.
 
+To filter out specific errors reported by `DatadogInterceptor`, you can configure a custom `EventMapper` in your `RumConfiguration`:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+    val rumConfig = RumConfiguration.Builder(applicationId)
+        .setErrorEventMapper { errorEvent ->
+            if (errorEvent.shouldBeDiscarded()) {
+                null
+            } else {
+                errorEvent
+            }
+    }
+    .build();
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   RumConfiguration rumConfig = new RumConfiguration.Builder("applicationId")
+                .setErrorEventMapper(errorEvent -> {
+                    if (errorEvent.shouldBeDiscarded()) {
+                        return null;
+                    } else {
+                        return errorEvent;
+                    }
+                })
+                .build();
+    
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
 ## Track background events
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
