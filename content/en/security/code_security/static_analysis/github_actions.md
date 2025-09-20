@@ -7,7 +7,7 @@ title: Static Code Analysis and GitHub Actions
 ---
 ## Overview
 
-Run a [Datadog Static Code Analysis][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
+Run a [Datadog Static Code Analysis][1] job as an action in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
 invokes it against your codebase, and uploads the results to Datadog.
 
 ## Workflow
