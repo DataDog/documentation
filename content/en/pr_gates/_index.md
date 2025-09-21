@@ -47,10 +47,10 @@ You can configure PR Gates rules for the following categories:
 
 | Source type     | Condition types |
 | --- | ----------- |
-| [**Static Code Analysis**][11] | <li> Code vulnerabilities <li> Code quality violations |
-| [**Software Composition Analysis**][12] | <li> Library vulnerabilities <li> Library license violations |
-| [**Code Coverage**][15] | <li> Total code coverage <li> Patch code coverage |
-| [**Infrastructure as Code Scanning**][16] | <li> IaC vulnerabilities |
+| [**Static Code Analysis**][11] | - Code vulnerabilities<br/> - Code quality violations |
+| [**Software Composition Analysis**][12] | - Library vulnerabilities<br/> - Library license violations |
+| [**Code Coverage**][15] | - Total code coverage<br/> - Patch code coverage |
+| [**Infrastructure as Code Scanning**][16] | - IaC vulnerabilities |
 
 After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][13] or [Azure DevOps integration][14]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
