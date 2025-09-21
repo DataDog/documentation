@@ -32,7 +32,7 @@ Al minimizar el número de tests que se ejecutan por confirmación, Test Impact 
 
 Con la configuración predeterminada, hay situaciones conocidas que pueden hacer que Test Impact Analysis omita tests que deberían haberse ejecutado. En concreto, Test Impact Analysis no es capaz de detectar automáticamente cambios en:
 
-- Dependencias de biblioteca
+- Dependencias de librería
 - Opciones del compilador
 - Servicios externos
 - Cambios en los archivos de datos en los tests basados en datos

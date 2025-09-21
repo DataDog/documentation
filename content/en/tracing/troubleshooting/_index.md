@@ -1,5 +1,6 @@
 ---
 title: APM Troubleshooting
+description: Comprehensive troubleshooting guide for APM issues including trace retention, service configuration, and connection errors.
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
     - /tracing/troubleshooting/faq_apm/
@@ -335,7 +336,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 6. **Custom tracing code**: Custom instrumentation, configuration, and adding span tags can significantly impact trace visualizations in Datadog.
 
-7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatiblity Requirements][15], check for known issues, or recommend a version upgrades. For example:
+7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatibility Requirements][15], check for known issues, or recommend a version upgrades. For example:
     
 {{% /collapse-content %}}
 

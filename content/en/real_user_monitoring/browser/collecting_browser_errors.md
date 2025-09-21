@@ -1,6 +1,7 @@
 
 ---
 title: Collecting Browser Errors
+description: "Learn how to collect and track frontend errors from multiple sources using RUM Browser SDK, including manual error collection and React error boundaries."
 aliases:
  - /error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:

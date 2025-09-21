@@ -612,7 +612,7 @@ If you're interested in learning more about the datagram format used by DogStats
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/etsy/statsd
+[1]: https://github.com/statsd/statsd
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd

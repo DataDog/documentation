@@ -1,5 +1,6 @@
 ---
 title: Enable Autocomplete and Search for Java
+description: Configure Java applications to enable IDE-like autocomplete and search features for Dynamic Instrumentation.
 is_beta: false
 private: false
 code_lang: java

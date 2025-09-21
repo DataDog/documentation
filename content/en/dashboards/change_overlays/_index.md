@@ -32,7 +32,7 @@ To get started, click **Show Overlays** in the upper right corner of your dashbo
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
-When actived, the **Service** search bar will display the **Most Relevant** service by default. Datadog automatically selects the service most frequently referenced in the queries supporting the widgets on the dashboard.
+When activated, the **Service** search bar displays the **Most Relevant** service by default. Datadog automatically selects the service most frequently referenced in the queries supporting the widgets on the dashboard.
 
 Override the automatic service detection by using the search bar to find the service of interest. 
 

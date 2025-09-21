@@ -48,7 +48,7 @@ Una configuración clásica de Kafka muestra una traza con un tramo (span) de pr
 
 <div class="alert alert-info">
   <div class="alert-info">
-    <div>Para comprender mejor los metadatos de tramos en Datadog, lee <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de las etiquetas de tramo</a></strong>.</div>
+    <div>Para comprender mejor los metadatos de tramos en Datadog, lee <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de las span tags</a></strong>.</div>
   </div>
 </div>
 

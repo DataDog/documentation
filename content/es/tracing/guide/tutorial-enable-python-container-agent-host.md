@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: Documentación
-  text: Opciones adicionales de configuración de bibliotecas de rastreo
+  text: Opciones adicionales de configuración de librerías de rastreo
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
+  text: Instrucciones detalladas de configuración de librerías de rastreo
 - link: /tracing/trace_collection/compatibility/python/
   tag: Documentación
   text: Marcos de trabajo compatibles Java para la instrumentación automática
@@ -14,7 +14,7 @@ further_reading:
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-py
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de bibliotecas
+  text: Rastreo del repositorio de código fuente abierto de librerías
 title: Tutorial - Enabling Tracing for a Python Application in a Container and an
   Agent on a Host
 ---
@@ -48,7 +48,7 @@ Para enviar datos a un sitio Datadog distinto de `datadoghq.com`, sustituye la v
 Asegúrate de que tu Agent está configurado para recibir datos de rastreo de los contenedores. Abre su [archivo de configuración][15] y asegúrate de que `apm_config:` está sin comentar, y que `apm_non_local_traffic` está sin comentar y configurado como `true`.
 
 
-Si ya tienes un Agent instalado en el host, asegúrate de que es al menos la versión 7.28. Puedes consultar la versión mínima del Datadog Agent necesaria para utilizar las aplicaciones de rastreo Python `ddtrace` en la [documentación para desarrolladores de bibliotecas de rastreo][7].
+Si ya tienes un Agent instalado en el host, asegúrate de que es al menos la versión 7.28. Puedes consultar la versión mínima del Datadog Agent necesaria para utilizar las aplicaciones de rastreo Python `ddtrace` en la [documentación para desarrolladores de librerías de rastreo][7].
 
 
 ## Instalación de la aplicación de ejemplo Python en Docker
@@ -218,7 +218,7 @@ Verifica que el Agent se está ejecutando y enviando datos a Datadog, accediendo
 
 ## Inicio de los contenedores para observar el rastreo automático
 
-Ahora que la biblioteca de rastreo está instalada y el Agent se está ejecutando, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
+Ahora que la librería de rastreo está instalada y el Agent se está ejecutando, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
 
 ```
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app

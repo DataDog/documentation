@@ -1,5 +1,6 @@
 ---
 title: Datadog Audit Trail
+description: Monitor Datadog user activity, API requests, and resource changes with comprehensive audit logging for compliance, security, and governance.
 aliases:
     - /account_management/audit_logs/
 further_reading:

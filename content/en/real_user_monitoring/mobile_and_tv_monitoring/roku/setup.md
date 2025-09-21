@@ -1,5 +1,6 @@
 ---
 title: Roku Channel Monitoring Setup
+description: "Set up RUM monitoring for Roku channels to track user interactions, performance, and errors on TV streaming applications."
 aliases:
     - /real_user_monitoring/roku/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/roku

@@ -1,5 +1,6 @@
 ---
 title: Agent Architecture
+description: Overview of Datadog Agent architecture including main processes, components like the Collector and Forwarder, and port configurations.
 disable_toc: false
 further_reading:
 - link: "/agent/supported_platforms/"
