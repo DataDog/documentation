@@ -1,5 +1,6 @@
 ---
 title: Custom Instrumentation
+description: Add custom spans, tags, and instrumentation to capture application-specific observability data using Datadog APIs and OpenTelemetry.
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -18,6 +19,8 @@ algolia:
 Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
 
 Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
+
+<div class="alert alert-info">To add custom instrumentation at specific application code locations from the Datadog UI, without code changes, see <a href="https://docs.datadoghq.com/tracing/dynamic_instrumentation/">Dynamic Instrumentation</a>.</div>
 
 ## Use cases
 

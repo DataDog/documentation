@@ -1,5 +1,6 @@
 ---
 title: Sankey Widget
+description: Visualize user flow paths and transitions between different states or pages using Sankey diagram representations.
 widget_type: "sankey"
 further_reading:
 - link: "/product_analytics/journeys/sankey/"

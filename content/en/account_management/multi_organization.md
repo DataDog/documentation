@@ -1,5 +1,6 @@
 ---
 title: Managing Multiple-Organization Accounts
+description: Manage multiple child organizations from a parent account with separate billing, usage tracking, and access control for managed service providers.
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account

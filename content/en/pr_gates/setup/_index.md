@@ -140,7 +140,7 @@ For more information, see the [RBAC Permissions documentation][15].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pr-gates
-[2]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
+[2]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/gate/README.md
 [3]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
 [4]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pr-status-policy?view=azure-devops
 [5]: https://github.com/DataDog/datadog-ci/blob/master/README.md

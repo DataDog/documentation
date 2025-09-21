@@ -33,7 +33,7 @@ Para configurar fragmentos de código en línea en las incidencias, configura la
 Para activar Error Tracking, los logs deben incluir los siguientes atributos:
 
 - Puede ser un campo `error.kind` o `error.stack`. **Nota**: Si se utiliza `error.stack`, debe ser un stack trace válido.
-- Un atributo `Service` 
+- Un atributo `Service`
 - Un nivel de estado de `ERROR`, `CRITICAL`, `ALERT` o `EMERGENCY`.
 
 El resto de atributos enumerados a continuación son opcionales, pero su presencia mejora la agrupación de errores.
@@ -46,7 +46,7 @@ Los atributos específicos tienen una pantalla de interfaz de usuario dedicada d
 | `error.message`      | Mensaje de error contenido en la stack trace                              |
 | `error.kind`         | El tipo o clase de un error (por ejemplo, "Exception" u "OSError") |
 
-**Nota**: De forma predeterminada, los pipelines de integración intentan reasignar parámetros de bibliotecas de registro predeterminados a esos atributos específicos y analizar stack traces o rastrear para extraer automáticamente `error.message` y `error.kind`.
+**Nota**: De forma predeterminada, los pipelines de integración intentan reasignar parámetros de librerías de registro predeterminados a esos atributos específicos y analizar stack traces o rastrear para extraer automáticamente `error.message` y `error.kind`.
 
 Para obtener más información, consulta la [documentación completa sobre atributos de código fuente][11].
 

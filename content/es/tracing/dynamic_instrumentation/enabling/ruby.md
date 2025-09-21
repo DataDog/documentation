@@ -24,9 +24,9 @@ Dynamic Instrumentation es una característica de apoyo para las bibliotecas de 
 
 ## Instalación
 
-1. Instala o actualiza tu Agent a la versión [7.45.0][7] o posterior.
+1. Instala o actualiza tu Agent a la versión [7.49.0][7] o posterior.
 2. Si aún no tienes APM habilitado, en tu configuración del Agent, establece la variable de entorno `DD_APM_ENABLED` en `true` y escuchando en el puerto `8126/TCP`.
-3. Instala o actualiza la biblioteca de rastreo de Ruby a la versión 2.9.0 o posterior, siguiendo las [instrucciones pertinentes][2].
+3. Instala o actualiza la librería de rastreo de Ruby a la versión 2.9.0 o posterior, siguiendo las [instrucciones pertinentes][2].
 4. Ejecuta tu servicio conDynamic Instrumentation habilitada, al configurar la variable de entorno `DD_DYNAMIC_INSTRUMENTATION_ENABLED` en `true`. Especifica las etiquetas de servicio unificado `DD_SERVICE`, `DD_ENV` y `DD_VERSION` para que puedas filtrar y agrupar tus instrumentaciones y dirigirte a los clientes activos a través de estas dimensiones.
 5. Después de iniciar tu servicio con la Dynamic Instrumentation activada, puedes empezar a utilizar Dynamic Instrumentation en la página [APM > Dynamic Instrumentation][3].
 
@@ -59,11 +59,11 @@ Las siguientes limitaciones se aplican a la vista previa limitada:
 
 ### Funciones no compatibles
 
-- Métricas, tramos y etiquetas de tramo dinámicos
+- Métricas, tramos y span tags dinámicos
 - Condiciones de logs dinámicos
 - Captura de variables locales para logs dinámicos adjuntos a un método
 - Evaluación de expresiones en las plantillas de logs dinámicos
-- Instrumentación de bibliotecas de terceros
+- Instrumentación de librerías de terceros
 
 ## Referencias adicionales
 

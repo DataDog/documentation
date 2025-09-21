@@ -1,5 +1,6 @@
 ---
 title: Python 3 Custom Check Migration
+description: "Migrate custom Datadog Agent checks from Python 2 to Python 3 with best practices and compatibility tools."
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"

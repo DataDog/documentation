@@ -49,7 +49,7 @@ Con las siguientes definiciones:
 : Nombre de la métrica (ejemplos: `hits`, `errors`, `apdex`, `duration`). Consulta la sección siguiente.
 
 `<TAGS>`
-: Rastrea etiquetas (tags) de métricas. Las etiquetas posibles son: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, `rpc.grpc.status_code`(requiere el Datadog Agent v7.65.0 o posterior) y etiquetas del Datadog Agent (incluyendo [etiquetas primarias adicionales][4] y del host). 
+: Rastrea etiquetas (tags) de métricas. Las etiquetas posibles son: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, `rpc.grpc.status_code`(requiere el Datadog Agent v7.65.0 o posterior) y etiquetas del Datadog Agent (incluyendo [etiquetas primarias adicionales][4] y del host).
 : **Nota:** Otras etiquetas configuradas en tramos no están disponibles como etiquetas en métricas de rastreo.
 
 ## Sufijo de métrica
@@ -132,9 +132,9 @@ Esta métrica no admite agregaciones de percentiles. Para obtener más informaci
 
 En la mayoría de los casos, las métricas de rastreo se calculan sobre la base de todo el tráfico de la aplicación. Sin embargo, con determinadas configuraciones de muestreo de la ingesta de trazas, las métricas representan sólo un subconjunto de todas las solicitudes.
 
-### Muestreo del lado de la aplicación 
+### Muestreo del lado de la aplicación
 
-Algunas bibliotecas de rastreo admiten el muestreo del lado de la aplicación, que reduce el número de tramos antes de que se envíen al Datadog Agent. Por ejemplo, la biblioteca de rastreo Ruby proporciona un muestreo del lado de la aplicación para reducir la sobrecarga de rendimiento. Sin embargo, esto puede afectar a las métricas de rastreo, ya que el Datadog Agent necesita todos los tramos para calcular métricas precisas.
+Algunas bibliotecas de rastreo admiten el muestreo del lado de la aplicación, que reduce el número de tramos antes de que se envíen al Datadog Agent. Por ejemplo, la librería de rastreo Ruby proporciona un muestreo del lado de la aplicación para reducir la sobrecarga de rendimiento. Sin embargo, esto puede afectar a las métricas de rastreo, ya que el Datadog Agent necesita todos los tramos para calcular métricas precisas.
 
 Muy pocas bibliotecas de rastreo admiten esta configuración y por lo general no se recomienda su uso.
 

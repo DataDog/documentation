@@ -4,6 +4,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
   text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
+- link: "https://www.datadoghq.com/blog/cloudcraft-observability-overlay/"
+  tag: "Blog"
+  text: "Visually identify observability gaps with Cloudcraft in Datadog"
 ---
 
 ## Overview

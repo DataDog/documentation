@@ -3,7 +3,7 @@ null
 ...
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado de servicios unificado][4].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado de servicios unificado][4].
 
 {{< img src="tracing/dotnet/dotnet_core_configuration.png" alt="Establecer precedencia de la configuración del rastreador de .NET Core" style="width:100%" >}}
 
@@ -208,7 +208,7 @@ Las siguientes variables de configuración están disponibles **solo** cuando se
 : **Propiedad en TracerSettings**: `TraceEnabled`<br>
 Activa o desactiva toda la instrumentación. Los valores válidos son: `true` o `false`.<br>
 **Predeterminado**: `true`
-**Nota**: Establecer la variable de entorno en `false` deshabilita completamente la biblioteca del cliente, y no puede ser habilitada a través de otros métodos de configuración. Si se establece en `false` a través de otro método de configuración (no una variable de entorno), la biblioteca del cliente se sigue cargando, pero no se generarán trazas.
+**Nota**: Establecer la variable de entorno en `false` deshabilita completamente la librería del cliente, y no puede ser habilitada a través de otros métodos de configuración. Si se establece en `false` a través de otro método de configuración (no una variable de entorno), la librería del cliente se sigue cargando, pero no se generarán trazas.
 
 `DD_DBM_PROPAGATION_MODE`
 : permite la conexión entre los datos enviados desde APM y el producto de Database Monitoring cuando se establece en `service` o `full`. La opción `service` permite la conexión entre DBM y servicios de APM. La opción `full` permite la conexión entre los tramos de base de datos y los eventos de consulta de base de datos. Disponible para Postgres y MySQL.<br>

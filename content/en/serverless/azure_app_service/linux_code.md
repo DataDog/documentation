@@ -199,7 +199,7 @@ The [Datadog Linux Web App module][251] only deploys the Web App resource, so yo
 {{% tab "Manual" %}}
 
 1. **Configure environment variables**.
-   In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
+   In Azure, add the following key-value pairs in **Settings** > **Environment Variables** > **App Settings**:
 
 `DD_API_KEY`
 : **Value**: Your Datadog API key.<br>
@@ -280,6 +280,7 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
       - **Registry server URL**: `index.docker.io`
       - **Image and tag**: `datadog/serverless-init:latest`
       - **Port**: 8126
+      - **Environment Variables**: Include all previously configured Datadog environment variables.
    1. Select **Apply**.
 
 3. **Restart your application**.

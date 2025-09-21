@@ -1,5 +1,6 @@
 ---
 title: RUM Recommendations
+description: "Get AI-powered recommendations to improve your application's frontend performance, availability, and reliability based on RUM and APM data analysis."
 private: true
 further_reading:
   - link: "https://www.datadoghq.com/blog/rum-optimization/"

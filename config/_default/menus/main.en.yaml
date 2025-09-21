@@ -200,16 +200,21 @@ menu:
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
       weight: 2101
+    - name: Feature Flags
+      identifier: getting_started_feature_flags
+      url: getting_started/feature_flags/
+      parent: getting_started_software_delivery
+      weight: 2102
     - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
-      weight: 2102
+      weight: 2103
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
-      weight: 2103
+      weight: 2104
     - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
@@ -3748,6 +3753,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_anomalies
       weight: 12
+    - name: Real-Time Costs
+      url: cloud_cost_management/real_time_costs
+      parent: cloud_cost
+      identifier: cloud_cost_real_time_costs
+      weight: 13
     - name: APM
       url: tracing/
       pre: apm
@@ -4094,11 +4104,16 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
+    - name: Renaming Rules
+      url: tracing/services/renaming_rules
+      parent: tracing_services
+      identifier: tracing_renaming_rules
+      weight: 907
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 907
+      weight: 908
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -4632,14 +4647,14 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
+    - name: Kafka Messages
+      url: data_streams/messages
+      identifier: data_streams_kafka_messages
+      parent: data_streams
+      weight: 2
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
-      parent: data_streams
-      weight: 2
-    - name: Live Messages
-      url: data_streams/live_messages
-      identifier: data_streams_live_messages
       parent: data_streams
       weight: 3
     - name: Dead Letter Queues
@@ -5353,46 +5368,51 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
       weight: 909
-    - name: Lambda Forwarder
-      url: observability_pipelines/sources/lambda_forwarder/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 910
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
+      weight: 910
+    - name: Lambda Forwarder
+      url: observability_pipelines/sources/lambda_forwarder/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_forwarder
       weight: 911
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
       weight: 912
+    - name: OpenTelemetry
+      url: observability_pipelines/sources/opentelemetry/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_opentelemetry
+      weight: 913
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 913
+      weight: 914
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 914
+      weight: 915
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 915
+      weight: 916
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 916
+      weight: 917
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 917
+      weight: 918
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -5523,71 +5543,81 @@ menu:
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
       weight: 1105
+    - name: Datadog CloudPrem
+      identifier: observability_pipelines_cloudprem
+      url: observability_pipelines/destinations/cloudprem/
+      parent: observability_pipelines_destinations
+      weight: 1106
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 1106
+      weight: 1107
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 1107
+      weight: 1108
     - name: Google Chronicle
       url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
-      weight: 1108
+      weight: 1109
+    - name: Google Pub/Sub
+      identifier: observability_pipelines_google_pubsub
+      url: observability_pipelines/destinations/google_pubsub/
+      parent: observability_pipelines_destinations
+      weight: 1110
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 1109
+      weight: 1111
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 1110
+      weight: 1112
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 1111
+      weight: 1113
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 1112
+      weight: 1114
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 1113
+      weight: 1115
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 1114
+      weight: 1116
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 1115
+      weight: 1117
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 1116
+      weight: 1118
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 1117
+      weight: 1119
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 1118
+      weight: 1120
     - name: Environment Variables
       url: observability_pipelines/environment_variables/
       parent: observability_pipelines
@@ -6122,66 +6152,91 @@ menu:
       parent: security_platform_heading
       identifier: cloud_siem
       weight: 20000
-    - name: Content Packs
-      url: security/cloud_siem/content_packs
+    - name: Ingest and Enrich
+      url: security/cloud_siem/ingest_and_enrich/
       parent: cloud_siem
-      identifier: cloud_siem_content_packs
+      identifier: cloud_siem_ingest_and_enrich
       weight: 1
-    - name: Detection Rules
-      url: security/cloud_siem/detection_rules
+    - name: Content Packs
+      url: security/cloud_siem/ingest_and_enrich/content_packs
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_content_packs
+      weight: 101
+    - name: Threat Intelligence
+      url: security/cloud_siem/ingest_and_enrich/threat_intelligence
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_threat_intelligence
+      weight: 102
+    - name: Open Cybersecurity Schema Framework
+      url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_open_cybersecurity_schema_framework
+      weight: 103
+    - name: Detect and Monitor
+      url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
-      identifier: cloud_siem_detection_rules
+      identifier: cloud_siem_detect_and_monitor
       weight: 2
-    - name: Signal Correlation Rules
-      url: security/cloud_siem/detection_rules/signal_correlation_rules
-      parent: cloud_siem_detection_rules
-      identifier: cloud_siem_signal_correlation_rules
-      weight: 20500
-    - name: MITRE ATT&CK Map
-      url: security/cloud_siem/detection_rules/mitre_attack_map
-      parent: cloud_siem_detection_rules
-      identifier: cloud_siem_mitre_attack_map
-      weight: 20510
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
-      parent: cloud_siem
+      parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_default_rules
-      weight: 4
-    - name: Threat Intelligence
-      url: /security/cloud_siem/threat_intelligence
-      parent: cloud_siem
-      identifier: cloud_siem_threat_intelligence
-      weight: 5
-    - name: Open Cybersecurity Schema Framework
-      url: /security/cloud_siem/open_cybersecurity_schema_framework
-      parent: cloud_siem
-      identifier: cloud_siem_open_cybersecurity_schema_framework
-      weight: 5
-    - name: Investigate Security Signals
-      url: /security/cloud_siem/investigate_security_signals
-      parent: cloud_siem
-      identifier: cloud_siem_investigate_security_signals
-      weight: 6
-    - name: Investigator
-      url: security/cloud_siem/investigator
-      parent: cloud_siem
-      identifier: cloud_siem_investigator
-      weight: 7
+      weight: 201
+    - name: Custom Detection Rules
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_custom_detection_rules
+      weight: 202
+    - name: Signal Correlation
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_signal_correlation_rules
+      weight: 2101
+    - name: Suppressions
+      url: security/cloud_siem/detect_and_monitor/suppressions
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_suppressions
+      weight: 203
     - name: Historical Jobs
-      url: security/cloud_siem/historical_jobs
-      parent: cloud_siem
+      url: security/cloud_siem/detect_and_monitor/historical_jobs
+      parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 8
+      weight: 204
+    - name: MITRE ATT&CK Map
+      url: security/cloud_siem/detect_and_monitor/mitre_attack_map
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_mitre_attack_map
+      weight: 205
+    - name: Triage and Investigate
+      url: security/cloud_siem/triage_and_investigate
+      parent: cloud_siem
+      identifier: cloud_siem_triage_and_investigate
+      weight: 3
+    - name: Investigate Security Signals
+      url: security/cloud_siem/triage_and_investigate/investigate_security_signals
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_investigate_security_signals
+      weight: 301
     - name: Risk Insights
-      url: security/cloud_siem/entities_and_risk_scoring
-      parent: cloud_siem
+      url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
+      parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
-      weight: 9
-    - name: Security Operational Metrics
-      url: security/cloud_siem/security_operational_metrics/
+      weight: 302
+    - name: Investigator
+      url: security/cloud_siem/triage_and_investigate/investigator
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_investigator
+      weight: 303
+    - name: Respond and Report
+      url: security/cloud_siem/respond_and_report
       parent: cloud_siem
+      identifier: cloud_siem_respond_and_report
+      weight: 4
+    - name: Security Operational Metrics
+      url: security/cloud_siem/respond_and_report/security_operational_metrics
+      parent: cloud_siem_respond_and_report
       identifier: siem_security_operational_metrics
-      weight: 10
+      weight: 401
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
@@ -6309,11 +6364,21 @@ menu:
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
+    - name: Hosts and Containers
+      url: security/workload_protection/inventory/hosts_and_containers
+      parent: workload_protection_inventory
+      identifier: workload_protection_hosts_and_containers
+      weight: 1
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 2
     - name: Coverage
       url: security/workload_protection/inventory/coverage_map
       parent: workload_protection_inventory
       identifier: workload_protection_coverage_map
-      weight: 1
+      weight: 3
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
@@ -8172,6 +8237,11 @@ menu:
       url: account_management/guide/
       parent: account_management
       weight: 14
+    - name: Cloud-based Authentication
+      identifier: account_management_cloud_auth
+      url: account_management/cloud_provider_authentication/
+      parent: account_management
+      weight: 15
     - name: Data Security
       url: data_security/
       pre: security-lock
