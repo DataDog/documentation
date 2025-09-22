@@ -73,10 +73,9 @@ For binaries stripped of debug symbols, it's possible to upload symbols manually
 3. Set the `DD_SITE` environment variable to your [Datadog site][11].
 4. Install the `binutils` package, which provides the `objcopy` CLI tool.
 5. Run:
-
-```
-DD_BETA_COMMANDS_ENABLED=1 datadog-ci elf-symbols upload ~/your/build/symbols/
-```
+   ```
+   DD_BETA_COMMANDS_ENABLED=1 datadog-ci elf-symbols upload ~/your/build/symbols/
+   ```
 
 
 ## What's next?
