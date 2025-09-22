@@ -300,7 +300,7 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 
 ### View traces in Datadog
 
-After your application restarts, go to Datadog's [APM Service page][1] and search for the service name you set for your application (`DD_SERVICE`).
+After your application restarts, go to Datadog's [APM Service page][2] and search for the service name you set for your application (`DD_SERVICE`).
 
 ### Custom metrics
 
