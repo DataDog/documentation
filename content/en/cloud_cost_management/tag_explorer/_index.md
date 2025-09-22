@@ -147,12 +147,11 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 {{< /tabs >}}
 
 ## Set preferred tags
-Set up to five preferred tags to surface your organization's most relevant tags throughout Cloud Cost Management. For example, these tags are shown first when picking tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9].
+Set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_1.png" alt="Preferred tags are shown throughout CCM" style="width:100%;" >}}
 
-Preferred tags can be selected from any of your existing tags on your cost data, including [Tag Pipelines][3]. Preferred tags are applied at the organizational level.
-
+You can choose preferred tags from any of your existing cost data tags, including [Tag Pipelines][3]. These settings apply to your entire organization.
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_2.png" alt="Select your preferred tags in Tag Explorer" style="width:100%;" >}}
 
