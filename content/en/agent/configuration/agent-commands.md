@@ -1,5 +1,6 @@
 ---
 title: Agent Commands
+description: "Complete reference of Datadog Agent commands for starting, stopping, troubleshooting, and managing the Agent."
 aliases:
     - /agent/faq/agent-status-and-information
     - /agent/faq/start-stop-restart-the-datadog-agent

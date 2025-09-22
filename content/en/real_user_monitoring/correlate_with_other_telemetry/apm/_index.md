@@ -1,5 +1,6 @@
 ---
 title: Connect RUM and Traces
+description: "Connect frontend RUM data with backend APM traces for end-to-end visibility across your application stack and user journey."
 aliases:
 - /real_user_monitoring/connect_rum_and_traces
 - /real_user_monitoring/platform/connect_rum_and_traces/

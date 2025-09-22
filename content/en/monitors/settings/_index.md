@@ -1,5 +1,6 @@
 ---
 title: Monitor Settings
+description: "Configure organization settings, tag policies, notification rules, and manage deleted monitors through the Monitor Settings page."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

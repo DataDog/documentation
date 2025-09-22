@@ -1,5 +1,6 @@
 ---
 title: Resource-based sampling
+description: Learn how to configure resource-based sampling to control trace ingestion based on specific resources and endpoints for cost optimization.
 disable_toc: false
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"

@@ -1,5 +1,6 @@
 ---
 title: Ignoring Unwanted Resources in APM
+description: Learn how to exclude unwanted resources like health checks from traces using sampling rules and filtering to reduce noise and manage costs.
 ---
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application. This documentation covers two main options: sampling and filtering.

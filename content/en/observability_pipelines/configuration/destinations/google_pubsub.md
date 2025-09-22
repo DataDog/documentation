@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Use Observability Pipelines' Google Pub/Sub destination to publish logs to the Google Cloud Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
+Use Observability Pipelines' Google Pub/Sub destination to publish logs to the Google Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
 
 ### When to use this destination
 

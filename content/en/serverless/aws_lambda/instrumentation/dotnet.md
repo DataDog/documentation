@@ -304,9 +304,7 @@ module "lambda-datadog" {
 When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET tracer is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
 ```xml
-<PackageReference Include="Datadog.Trace" Version="2.38.0">
-    <ExcludeAssets>runtime</ExcludeAssets>
-</PackageReference>
+<PackageReference Include="Datadog.Trace" Version="3.26.3"/>
 ```
 
 You can then add custom spans and span tags using the .NET tracer. For instructions on how to add spans, see [.NET custom instrumentation][10].
