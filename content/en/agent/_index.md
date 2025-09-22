@@ -168,8 +168,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 
 ## Additional resources
-
-
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Install and configure the Datadog Agent on Kubernetes.{{< /nextlink >}}
   {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: Install and configure the Cluster Agent for Kubernetes, a version of the Datadog Agent built to efficiently gather monitoring data from across an orchestrated cluster.{{< /nextlink >}}

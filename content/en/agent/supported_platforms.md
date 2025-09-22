@@ -3,9 +3,9 @@ title: Supported Platforms
 description: "Complete list of operating systems and platforms supported by the Datadog Agent including Linux, Windows, macOS, and cloud environments."
 disable_toc: false
 further_reading:
-- link: "agent/basic_agent_usage/"
+- link: "agent/"
   tag: "Documentation"
-  text: "Basic Agent Usage"
+  text: "The Datadog Agent"
 ---
 
 The Datadog Agent is supported on a range of widely used operating systems and platforms. If your operating system is not listed below, [a source installation][1] might work for you.
