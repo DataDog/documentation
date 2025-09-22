@@ -74,13 +74,17 @@ Records
 
 ### Screenshots and actions
 
-Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
+Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
 
-{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width:100%" >}}
+
+Screenshots can be disabled by checking "Do not capture screenshot for this step" in the **Advanced Options** section.
+
+{{< img src="mobile_app_testing/do_not_capture_screenshot.png" alt="Advanced options for a Mobile app test, highlighting Do not capture screenshot for this step" style="width:60%" >}}
 
 ### Video replay
 
-Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue.
+Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue. Video replay requires [screenshots to be enabled](#screenshots-and-actions). Disabling screenshots for a step prevents video replay for all test runs.
 
 Click on an individual test run from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the **Video Replay** tab to watch the complete test execution.
 

@@ -745,6 +745,10 @@
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
+  "DeleteDORADeployment": {
+    "description": "Use this API endpoint to delete a deployment event.",
+    "summary": "Delete a deployment event"
+  },
   "ListDORADeployments": {
     "description": "Use this API endpoint to get a list of deployment events.",
     "summary": "Get a list of deployment events",
@@ -760,6 +764,10 @@
     "summary": "Send a failure event for DORA Metrics",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
+  },
+  "DeleteDORAFailure": {
+    "description": "Use this API endpoint to delete a failure event.",
+    "summary": "Delete a failure event"
   },
   "ListDORAFailures": {
     "description": "Use this API endpoint to get a list of failure events.",
