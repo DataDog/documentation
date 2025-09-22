@@ -27,8 +27,8 @@ Android [Error Tracking][1] gives you comprehensive visibility into your mobile 
 - Monitor app stability in real-time with instant crash alerts and error rate tracking across versions, devices, and user segments.
 - Debug issues faster with deobfuscated stack traces and automatic ProGuard mapping file uploads for easier problem identification.
 - Improve app quality by pinpointing crash-prone features, tracking error trends, and prioritizing fixes for better user satisfaction.
-- Access aggregated Android crash dashboards and attributes
-- View deobfuscated Android crash reports with trend analysis
+- Access aggregated Android crash dashboards and attributes.
+- View deobfuscated Android crash reports with trend analysis.
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
@@ -40,7 +40,7 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 ### Step 1 - Declare the Android SDK as a dependency
 
-Declare [dd-sdk-android-rum][5] and the [Gradle plugin][6] as dependencies in your **application module's** `build.gradle` file.
+Declare [dd-sdk-android-rum][5] and the [Gradle plugin][6] as dependencies in your **application module's** `build.gradle` file:
 
 ```groovy
 buildscript {
@@ -406,7 +406,7 @@ To enable NDK crash reporting, use the Datadog NDK plugin:
         //(...)
     }
    ```
-2. Enable NDK crash collection after initializing the SDK.
+2. Enable NDK crash collection after initializing the SDK:
 
     ``` kotlin
     NdkCrashReports.enable()
@@ -450,7 +450,7 @@ Fatal ANRs result in crashes. The application reports them when it's unresponsiv
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="A fatal crash report in Error Tracking." >}}
 
-- In the **Error Tracking** page, fatal ANRs are grouped based on their similarity, which can result into several **individual issues** being created.
+- In the **Error Tracking** page, fatal ANRs are grouped based on their similarity, which can result in several **individual issues** being created.
 - By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][19] (available since *[Android 30+][20]*), which can be read on the next app launch.
 - In *[Android 29][21] and below*, reporting on fatal ANRs is not possible.
 
@@ -475,9 +475,9 @@ To make these stack traces readable for debugging, you need to upload your mappi
 
 Datadog uses a unique build ID generated for each build to automatically match stack traces with the correct mapping files. This ensures that:
 
-- Stack traces are always deobfuscated with the correct mapping file, regardless of when it was uploaded
-- You can upload mapping files during pre-production or production builds
-- The process works seamlessly across different build variants and environments
+- Stack traces are always deobfuscated with the correct mapping file, regardless of when it was uploaded.
+- You can upload mapping files during pre-production or production builds.
+- The process works seamlessly across different build variants and environments.
 
 The matching process depends on your [Android Gradle plugin][22] version:
 
@@ -797,7 +797,7 @@ When looking at RUM Crash Reporting behaviors for Android, consider the followin
 
 - The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
 - RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (typically an Activity or Fragment in an `onResume` state), or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][25] in your `RumConfiguration` builder.
-- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate is not 100%][24], some are not reported.
+- Only crashes that occur in sampled sessions are kept. If a [session sampling rate is not 100%][24], some crashes are not reported. 
 
 ## Test your implementation
 
@@ -820,7 +820,7 @@ To test your implementation:
 
 ### `Closeable` extension
 
-You can monitor `Closeable` instance usage with the `useMonitored` method, which reports errors to Datadog and closes the resource afterwards.
+You can monitor `Closeable` instance usage with the `useMonitored` method, which reports errors to Datadog and closes the resource afterwards:
 
 ```kotlin
 val closeable: Closeable = ...

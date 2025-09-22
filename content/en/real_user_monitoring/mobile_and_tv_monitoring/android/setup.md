@@ -524,7 +524,7 @@ val inputStream = context.getRawResAsRumResource(id)
 [3]: /error_tracking/frontend/mobile/android
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[6]: https://app.datadoghq.com/rum/application/create
+[6]: https://app.datadoghq.com/rum/list
 [7]: /real_user_monitoring/android/web_view_tracking/
 [8]: /real_user_monitoring/android/data_collected/
 [9]: /account_management/api-app-keys/#client-tokens

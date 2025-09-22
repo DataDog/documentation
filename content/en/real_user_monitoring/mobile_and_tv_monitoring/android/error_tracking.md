@@ -37,5 +37,5 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
-[2]: https://app.datadoghq.com/rum/application/create
+[2]: https://app.datadoghq.com/rum/list
 [3]: /error_tracking/frontend/mobile/android
