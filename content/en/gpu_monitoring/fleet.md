@@ -38,7 +38,7 @@ After toggling Cluster, Host, or Device, the **Summary Graph** displays key reso
 | ----------------------| ------------------------------------------------------------------------| --------------------------------------------- |
 | Core Utilization      | (Only available if System Probe enabled) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization| `gpu_core_utilization`  
 | Memory Utilization    | GPU Memory used / GPU Memory limit for GPU processes | `gpu_memory_utilization`
-| PCIe Throughput       | (TO BE FILLED)| TO BE FILLED
+| PCIe Throughput       | Bytes received and bytes transmitted through PCI from the GPU device per second | `gpu.pci.throughput.rx`,`gpu.pci.throughput.tx` 
 | Graphics Activity     | Percentage of time that the graphics engine was active | `gpu.gr_engine_active`
 | SM Activity           | Percentage of time the streaming multiprocessor was active | `gpu.sm_active`
 | Power                 | Power usage for the GPU device. Note that on GA100 and older architectures, this represents the instantaneous power at that moment. For newer architectures, it represents the average power draw (Watts) over one second | `gpu.power.usage`
@@ -62,7 +62,7 @@ You can click on the gear box icon to customize which metrics are displayed with
 | CPU Utilization       | The percent of time the CPU spent running user space processes. Shown as percent | `system.cpu.user`
 | Device Type           | Type of GPU device | `gpu_device`
 | Total Devices         | Count of all devices sending data during this timeframe | `gpu.device.total`
-| Allocated Devices     | Count of devices that have been allocated to a workload | `gpu.device.total` (NEEDS TO BE CHECKED) 
+| Allocated Devices     | Count of devices that have been allocated to a workload | `gpu.device.total`
 | Active Devices        | Count of allocated devices that are actively used for a workload | `gpu.gr_engine_active`
 | Effective Devices     | Count of devices that are used and working for more than 50% of their lifespan | `gpu.sm_active`
 | Graphics Engine Activity| Percentage of time that the graphics engine was active | `gpu.gr_engine_active`
