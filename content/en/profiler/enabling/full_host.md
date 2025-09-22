@@ -53,7 +53,7 @@ For hosts running containerized workloads, Datadog recommends running the profil
 For hosts without container runtimes, follow the instructions for [running directly on the host][9].
 
 ## Service naming
-When using full-host profiling, Datadog profiles all processes on the host. Each process’s service name is derived from its `DD_SERVICE` environment variable.
+When using full-host profiling, Datadog profiles all processes on the host. Each process's service name is derived from its `DD_SERVICE` environment variable.
 
 If `DD_SERVICE` is set, the profiler uses the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
 
