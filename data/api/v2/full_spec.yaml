@@ -54755,6 +54755,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
     post:
@@ -54838,6 +54842,10 @@ paths:
               \         \"../plop/*.java\"\n        ]\n      }\n    ]\n  }\n}"
           step: there is a valid entity in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_write
       x-undo:
         operationId: DeleteCatalogEntity
         parameters:
@@ -54915,6 +54923,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
     post:
@@ -54957,6 +54969,10 @@ paths:
               \"A job entity in the catalog.\"\n}"
           step: there is a valid kind
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_write
       x-undo:
         operationId: DeleteCatalogKind
         parameters:
@@ -55034,6 +55050,10 @@ paths:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_service_catalog_read
       x-undo:
         type: safe
   /api/v2/ci/pipeline:
