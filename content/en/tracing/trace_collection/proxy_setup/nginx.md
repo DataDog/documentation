@@ -62,7 +62,7 @@ if [ -z "$ARCH" ]; then
     exit 1
 fi
 
-NGINX_VERSION="1.26.0"
+NGINX_VERSION="1.29.0"
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
 TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
 
@@ -399,29 +399,36 @@ After saving your changes, reload the NGINX configuration. For example:
 ```sh
 sudo nginx -s reload
 ```
+
 ### Step 2: Configure the log pipeline to parse the trace and span IDs
 
-Next, create a pipeline to process the trace ID from your logs. These steps are the same for both instrumentation methods.
+By default, logs capture `dd.trace_id` and `dd.span_id` in hexadecimal format:
+
+```
+10.244.0.1 - - [12/Sep/2025:22:41:03 +0000] "GET /health HTTP/1.1" 200 87 0.002 "-" "kube-probe/1.32" "-" dd.trace_id="68c4a17f000000009aed12af2ccb1ead" dd.span_id="9aed12af2ccb1ead"
+```
+
+To enable log and trace correlation in Datadog, configure a log processing pipeline to convert these IDs from hexadecimal to decimal. Follow the same steps regardless of the instrumentation method you use.
 
 1. In Datadog, navigate to the [**Log Configuration**][9] page.
-1. Hover over your active NGINX pipeline and click the **Clone** icon to create an editable version.
-1. Click the cloned pipeline.
-1. Click **Add Processor**.
-1. Select [Grok Parser][11] as the processor type.
-1. Define the following parsing rule to extract the trace ID attribute from a log event. This rule works for both the Datadog module and OpenTelemetry outputs:
+2. Hover over your active NGINX pipeline and click the **Clone** icon to create an editable version.
+3. Click the cloned pipeline.
+4. Click **Add Processor**.
+5. Select [Grok Parser][11] as the processor type.
+6. Define the following parsing rule to extract the trace ID attribute from a log event. This rule works for both the Datadog module and OpenTelemetry outputs:
    ```text
    extract_correlation_ids %{data} dd.trace_id="%{notSpace:dd.trace_id:nullIf("-")}" dd.span_id="%{notSpace:dd.span_id:nullIf("-")}"
    ```
-1. Click **Create**.
-1. Click **Add Processor** again.
-1. Select [Trace ID Remapper][10] as the processor type. This processor associates the parsed ID with its corresponding APM trace.
-1. In the **Set trace id attribute(s)** field, enter `dd.trace_id`.
-1. Click **Create**.
-1. Click **Add Processor** again.
-1. Select [Span ID Remapper][12] as the processor type. This processor associates the parsed ID with its corresponding APM span.
-1. In the **Set span id attribute(s)** field, enter `dd.span_id`.
-1. Click **Create**.
-1. Save and enable your new pipeline.
+7. Click **Create**.
+8. Click **Add Processor** again.
+9. Select [Trace ID Remapper][10] as the processor type. This processor associates the parsed ID with its corresponding APM trace.
+10. In the **Set trace id attribute(s)** field, enter `dd.trace_id`.
+11. Click **Create**.
+12. Click **Add Processor** again.
+13. Select [Span ID Remapper][12] as the processor type. This processor associates the parsed ID with its corresponding APM span.
+14. In the **Set span id attribute(s)** field, enter `dd.span_id`.
+15. Click **Create**.
+16. Save and enable your new pipeline.
 
 Once the pipeline is active, new NGINX logs are automatically correlated with their traces and spans.
 

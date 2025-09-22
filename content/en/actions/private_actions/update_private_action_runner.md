@@ -21,7 +21,7 @@ Stop the container:
 docker stop <id>
 ```
 
-Start a new container with [the latest image][1]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
+Start a new container with [the latest image][1]. Environment variables are not needed. Everything is configured in the `config/config.yaml` file.
 
 Run:
 ```bash
@@ -77,7 +77,7 @@ docker compose logs runner
 
 ## Helm mode
 When using Helm, there are two options for upgrading the PAR: 
-1. **(Recommended)** Upgrade the chart, which will use the latest version of the PAR. There may be changes to the chart; please review [our changelog][2].
+1. **(Recommended)** Upgrade the chart, which uses the latest version of the PAR. There may be changes to the chart; please review [the changelog][2].
 1. Upgrade the runner without upgrading the chart.
 
 #### Upgrading the chart (recommended)

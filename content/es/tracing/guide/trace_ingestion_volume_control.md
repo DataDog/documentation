@@ -41,7 +41,7 @@ Los monitores de [**análisis de traza**][6] basados en el recuento también se 
 
 ## Evalúa la configuración de ingesta de tu servicio
 
-Para evaluar el estado actual de la instrumentación de aplicaciones, aprovecha la [página de Control de ingesta de traza][1] que brinda información detallada sobre la configuración del Agent y la biblioteca de rastreo.
+Para evaluar el estado actual de la instrumentación de aplicaciones, aprovecha la [página de Control de ingesta de traza][1] que brinda información detallada sobre la configuración del Agent y la librería de rastreo.
 
 ### Comprende si estás dentro de la asignación de ingesta mensual
 
@@ -83,13 +83,13 @@ Además, para reducir el volumen de [error][9] y trazas [poco frecuentes][10]:
 - Configura `DD_APM_ERROR_TPS` para reducir la cuota de error de muestreo.
 - Establece `DD_APM_DISABLE_RARE_SAMPLER` en true para dejar de muestrear las trazas poco frecuentes.
 
-### Configura independientemente la frecuencia de muestreo de la ingesta para los servicios a nivel de biblioteca
+### Configura independientemente la frecuencia de muestreo de la ingesta para los servicios a nivel de librería
 
 Al configurar las frecuencias de muestreo para unos pocos servicios de alto rendimiento, la mayor parte del volumen de ingesta "excedente" puede reducirse.
 
 Haz clic en un servicio para ver el **Service Ingestion Summary** (Resumen de ingesta del servicio). Observa el **Ingestion reasons breakdown** (Desglose de motivos de ingesta) en el panel lateral, que ofrece una descripción general de la parte de volumen de ingesta atribuida a cada mecanismo.
 
-Si el motivo principal de la mayor parte del volumen de ingesta es el muestreo basado en títulos (`auto` o `rule`), el volumen puede configurarse estableciendo una regla de muestreo en el nivel de la biblioteca de rastreo.
+Si el motivo principal de la mayor parte del volumen de ingesta es el muestreo basado en títulos (`auto` o `rule`), el volumen puede configurarse estableciendo una regla de muestreo en el nivel de la librería de rastreo.
 
 Haz clic en el botón **Manage Ingestion Rate** (Gestionar tasa de ingesta) para configurar una tasa de muestreo para el servicio. Selecciona el lenguaje de servicio y la frecuencia de muestreo de ingesta que deseas aplicar.
 
@@ -123,7 +123,7 @@ Otros motivos de ingesta aparecen en la página Control de la ingesta y como una
 | Motivo de la ingesta   | Dónde             | Descripción del mecanismo de ingesta | Predeterminado |
 |--------------------|-------------------|-----------------------|---------|
 | `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Muestreo de errores no detectados por el muestreo basado en la fase inicial.             | 10 trazas por segundo por Agent (nulo, si se definen reglas) |
-| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Muestreo de trazas poco frecuentes (captura de todas las combinaciones de un conjunto de etiquetas de tramo).        | 5 trazas por segundo por Agent (nulo, si se definen reglas) |
+| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Muestreo de trazas poco frecuentes (captura de todas las combinaciones de un conjunto de span tags).        | 5 trazas por segundo por Agent (nulo, si se definen reglas) |
 | `manual`             | En el código         | Anulación de decisión en código para mantener/descartar un tramo y sus secundarios.    | nulo |
 | `analytics`          | Agent y bibliotecas de rastreo | [Mecanismo de ingesta obsoleto][16] que muestrea tramos únicos sin la traza completa.   | nulo                 |
 

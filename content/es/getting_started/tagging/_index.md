@@ -67,7 +67,7 @@ Estos son los requisitos de etiquetado de Datadog:
     | `env_staging:east` | `env_staging` | `east`         |
 
 5. Las etiquetas no deben originarse en fuentes sin enlazar, como marcas de tiempo epoch, ID de usuario o ID de solicitud. De ser así, [la cantidad de métricas podría aumentar][2] infinitamente en tu organización y afectar a tu facturación.
-6. Las limitaciones (como el cambio a minúsculas) solo se aplican a las etiquetas de métricas, no a los atributos de logs ni a las etiquetas de tramos.
+6. Las limitaciones (como el cambio a minúsculas) solo se aplican a las etiquetas de métricas, no a los atributos de logs ni a las span tagss.
 
 ## Asignación de etiquetas
 

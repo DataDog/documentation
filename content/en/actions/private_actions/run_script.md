@@ -8,7 +8,7 @@ disable_toc: false
 This page explains how to use the private action runner (PAR), which allows you to run custom scripts and Linux binaries within your Datadog workflows and apps. Unlike standard private actions that call specific APIs or services, the script action gives you the flexibility to execute arbitrary commands, shell scripts, and command-line tools directly from the private action runner in your private network.
 
 <div class="alert alert-warning">
-<strong>Security Notice:</strong> The PAR script action runs within a containerized environment using a dedicated Linux user named `scriptuser` for enhanced security. Datadog enforces container sandboxing and only accepts signed tasks, but you decide which binaries and scripts are allowed. Always review every command you add to the script action allow-list, especially ones that take dynamic user input. Ensure that your actions are configured with the least privileged commands, and carefully review the permissions you share through connections. For more information, see <a href="/actions/connections/?tab=workflowautomation#connection-security-considerations">connection security considerations</a>.
+<strong>Security Notice:</strong> The PAR script action runs within a containerized environment using a dedicated Linux user named <code>scriptuser</code> for enhanced security. Datadog enforces container sandboxing and only accepts signed tasks, but you decide which binaries and scripts are allowed. Always review every command you add to the script action allow-list, especially ones that take dynamic user input. Ensure that your actions are configured with the least privileged commands, and carefully review the permissions you share through connections. For more information, see <a href="/actions/connections/?tab=workflowautomation#connection-security-considerations">connection security considerations</a>.
 </div>
 
 ## Use cases
@@ -40,7 +40,7 @@ To use the script action, you need:
 1. Enter a **Connection Name**.
 1. In the **Private Action Runner** dropdown, select your PAR. 
 1. Copy and paste the credential file template into your PAR's configuration directory with the commands you want to run. 
-1. In **Path to file**, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases)
+1. In **Path to file**, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases).
 1. Click **Next, Confirm Access**. 
 1. After configuring permissions, click **Create**.
 1. Select this new connection when using the script action in your workflows or apps.

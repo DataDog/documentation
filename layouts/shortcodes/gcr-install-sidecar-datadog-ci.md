@@ -33,7 +33,7 @@ datadog-ci cloud-run instrument --project <GCP-PROJECT-ID> --service <CLOUD-RUN-
 
 You can pin to a specific image with the `--sidecar-image` flag. See the [latest releases on Docker Hub][1003].
 
-Additional parameters can be found in the [CLI documentation][1003].
+Additional parameters can be found in the [CLI documentation][1004].
 
 [1001]: https://cloud.google.com/sdk/docs/install
 [1002]: /getting_started/site/
