@@ -43,7 +43,7 @@ If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integratio
 
 <br>
 
-## Setup manually
+## Manual setup
 
 To monitor your ECS containers and tasks, deploy the Datadog Agent as a container **once on each EC2 instance** in your ECS cluster. You can do this by creating a task definition for the Datadog Agent container and deploying it as a daemon service. Each Datadog Agent container then monitors the other containers on its respective EC2 instance.
 
