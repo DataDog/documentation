@@ -167,7 +167,7 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 {{< /tabs >}}
 
 
-
+## Additional resources
 
 
 {{< whatsnext desc="This section includes the following topics:">}}
