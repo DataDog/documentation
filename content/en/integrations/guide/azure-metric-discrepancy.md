@@ -34,76 +34,75 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
      Source of Truth from [Metric Definitions - List API][2]:
 
     ```json
-    { 
+    {
       "id": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2/providers/microsoft.insights/metricdefinitions/Ingress",
-          "resourceId": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2",
-          "namespace": "Microsoft.Storage/storageAccounts",
-          "category": "Transaction",
-          "name": {
-            "value": "Ingress",
-            "localizedValue": "Ingress"
-          },
-          "displayDescription": "The amount of ingress data, in bytes. This number includes ingress from an external client into Azure Storage as well as ingress within Azure.",
-          "isDimensionRequired": false,
-          "unit": "Bytes",
-          "primaryAggregationType": "Total",
-          "supportedAggregationTypes": [
-            "Total",
-            "Average",
-            "Minimum",
-            "Maximum"
-          ],
-          "metricAvailabilities": [
-            {
-              "timeGrain": "PT1M",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "PT5M",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "PT15M",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "PT30M",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "PT1H",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "PT6H",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "PT12H",
-              "retention": "P93D"
-            },
-            {
-              "timeGrain": "P1D",
-              "retention": "P93D"
-            }
-          ],
-          "dimensions": [
-            {
-              "value": "GeoType",
-              "localizedValue": "Geo type"
-            },
-            {
-              "value": "ApiName",
-              "localizedValue": "API name"
-            },
-            {
-              "value": "Authentication",
-              "localizedValue": "Authentication"
-            }
-          ]
-        } 
-        ```
-
+      "resourceId": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2",
+      "namespace": "Microsoft.Storage/storageAccounts",
+      "category": "Transaction",
+      "name": {
+        "value": "Ingress",
+        "localizedValue": "Ingress"
+      },
+      "displayDescription": "The amount of ingress data, in bytes. This number includes ingress from an external client into Azure Storage as well as ingress within Azure.",
+      "isDimensionRequired": false,
+      "unit": "Bytes",
+      "primaryAggregationType": "Total",
+      "supportedAggregationTypes": [
+        "Total",
+        "Average",
+        "Minimum",
+        "Maximum"
+      ],
+      "metricAvailabilities": [
+        {
+          "timeGrain": "PT1M",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "PT5M",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "PT15M",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "PT30M",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "PT1H",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "PT6H",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "PT12H",
+          "retention": "P93D"
+        },
+        {
+          "timeGrain": "P1D",
+          "retention": "P93D"
+        }
+      ],
+      "dimensions": [
+        {
+          "value": "GeoType",
+          "localizedValue": "Geo type"
+        },
+        {
+          "value": "ApiName",
+          "localizedValue": "API name"
+        },
+        {
+          "value": "Authentication",
+          "localizedValue": "Authentication"
+        }
+      ]
+    }
+    ```
 
    4. Graph the metric in Azure Monitor or by going to the individual Resource view > Monitoring > Metrics on the left panel.
 
