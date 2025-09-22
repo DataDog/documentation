@@ -20,7 +20,7 @@ The **Live Debugger** tab in the Datadog tool window shows the current session, 
 
 The panel has three sections: 
 
-* The current [session](#current-session) and its logpoints (on the left side)
+* The [current session](#current-session) and its logpoints (on the left side)
 * The [status and events](#logpoint-status-and-events) for the selected logpoint (in the center)
 * The [runtime data](#logpoint-event-data) for the selected logpoint event (on the right side)
 
@@ -29,12 +29,14 @@ The session view shows the current session and its logpoints.  Select another se
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/session-selector.png" alt="The session selector" style="width:100%;" >}}
 
-Activate, deactivate or delete the session, using the controls next to the selector. You can also open the session at Datadog in your default web browser.
+Activate, deactivate or delete the session, using the controls in the toolbar at the right the selector. You can also open the session in the Datadog web application.
 
 Select any logpoint to display its status and recently generated events, or to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
 ### Logpoint status and events
-The central section displays the status and recent event information for the selected logpoint. Select an event to view the generated log message, the captured variables, and the runtime stacktrace for the event. The list shows up to 50 events from within the past 24 hours.
+The central section displays the status and recent event information for the selected logpoint. The list shows up to 50 events from within the past 24 hours.
+
+Select an event to view the generated log message, the captured variables, and the runtime stacktrace for the event. 
 
 At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to explore all log events for the selected logpoint. 
 
@@ -103,7 +105,7 @@ You can enable or disable logpoints by right-clicking and selecting the appropri
 Disabling then re-enabling a logpoint extends its expiry time to 48 hours.
 
 ## Prerequisites
-The Live Debugger feature in the IDE supports Java, Python and Go and is subject to the same setup requirements as [Live Debugger][1].
+The Live Debugger feature in the IDE supports Java and Python runtimes and is subject to the same setup requirements as [Live Debugger][1].
 
 ## Further reading
 
