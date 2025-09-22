@@ -59,9 +59,9 @@ Creating a cross-organization connection allows you to query metrics from the so
 
 ### Update a connection
 
-Updating a cross-organization connection allows you to change the data types that are shared from the source organization in the destination organization for an existing connection.
+Updating an existing cross-organization connection allows you to change the data types that are shared from the source organization in the destination organization.
 
-1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
+1. Make sure you are signed in to the _source_ organization of the existing connection.
 1. Hover over the connection you wish to update. A pencil (**Edit**) icon appears on the right.
 1. Click the pencil (**Edit**) icon on the connection you wish to update. The **Edit Connection** dialog box appears.
 1. Select the checkboxes for the data types you wish to include.
