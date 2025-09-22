@@ -57,7 +57,7 @@ further_reading:
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
-Datadog Observability Pipelines allows you to collect, process, and route logs within your own infrastructure. It give you control over your observability data before it leaves your environment.
+Datadog Observability Pipelines allows you to collect, process, and route logs within your own infrastructure. It gives you control over your observability data before it leaves your environment.
 
 With out-of-the-box templates, you can build pipelines that redact sensitive data, enrich logs, filter out noisy logs, and route events to destinations like Datadog, SIEM tools, or cloud storage.
 
@@ -68,7 +68,7 @@ With out-of-the-box templates, you can build pipelines that redact sensitive dat
 The Observability Pipelines Worker runs within your infrastructure to aggregate, process, and route logs.
 
 <div class="alert alert-info">
-Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates. See <a href="https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/?tab=docker#upgrade-the-worker">Upgrade the Worker</a> to update to the latest Worker version</a>.
+Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates. See <a href="/observability_pipelines/configuration/install_the_worker/#upgrade-the-worker">Upgrade the Worker</a> to update to the latest Worker version</a>.
 </div>
 
 ### Observability Pipelines UI
