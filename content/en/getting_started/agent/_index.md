@@ -2,9 +2,9 @@
 title: Getting Started with the Agent
 description: Guide to installing and configuring the Datadog Agent to collect system-level metrics, events, and logs from hosts.
 further_reading:
-    - link: '/agent/basic_agent_usage/'
-      tag: 'Documentation'
-      text: 'Basic Agent Usage'
+    - link: "agent/"
+      tag: "Documentation"
+      text: "The Datadog Agent"
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to power up your Infrastructure monitoring'

@@ -4,9 +4,9 @@ description: "Learn how to uninstall the Datadog Agent from different operating 
 aliases:
   - /agent/faq/how-do-i-uninstall-the-agent/
 further_reading:
-- link: "/agent/basic_agent_usage/"
+- link: "agent/"
   tag: "Documentation"
-  text: "Basic Agent Usage"
+  text: "The Datadog Agent"
 algolia:
   tags: ['uninstall']
 ---
