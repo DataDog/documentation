@@ -1,5 +1,6 @@
 ---
 title: Proxy Your Browser RUM Data
+description: "Configure browser RUM data proxying with SDK source options and version-specific settings for custom network routing."
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
 content_filters:

@@ -1,6 +1,6 @@
 ---
 title: Tips When Using Browser Developer Tools
-
+description: "Debug tips for using browser developer tools with Datadog Browser SDK to troubleshoot RUM and logging instrumentation issues."
 further_reading:
     - link: '/real_user_monitoring/browser'
       tag: 'Documentation'

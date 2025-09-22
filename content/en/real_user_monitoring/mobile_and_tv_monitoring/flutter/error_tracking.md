@@ -1,5 +1,6 @@
 ---
 title: Flutter Crash Reporting and Error Tracking
+description: "Enable comprehensive crash reporting and error tracking for Flutter applications to monitor and resolve issues across platforms."
 ---
 
 ## Overview

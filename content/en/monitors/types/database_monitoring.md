@@ -1,5 +1,6 @@
 ---
 title: Database Monitoring Monitor
+description: "Create Database Monitoring monitors to alert on query performance, waiting queries, and significant changes in explain-plan cost."
 ---
 
 

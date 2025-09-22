@@ -1,6 +1,6 @@
 ---
 title: Define Services And Track UI Components In Your Browser Application
-
+description: "Organize large browser applications by defining services and tracking UI components for better team ownership and troubleshooting."
 disable_toc: false
 further_reading:
 - link: "/real_user_monitoring/browser/"
