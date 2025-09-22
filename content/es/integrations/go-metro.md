@@ -66,7 +66,7 @@ Sigue las instrucciones a continuación para instalar y configurar este check pa
 
 ### Instalación
 
-El check de TCP RTT, también conocido como [go-metro][2], se incluye en el paquete del Agent, pero requiere bibliotecas de sistema adicionales. El check utiliza marcas de tiempo proporcionadas por la biblioteca PCAP para calcular el tiempo entre cualquier paquete saliente y la confirmación TCP correspondiente. Como tal, PCAP debe ser instalado y configurado.
+El check de TCP RTT, también conocido como [go-metro][2], se incluye en el paquete del Agent, pero requiere bibliotecas de sistema adicionales. El check utiliza marcas de tiempo proporcionadas por la librería PCAP para calcular el tiempo entre cualquier paquete saliente y la confirmación TCP correspondiente. Como tal, PCAP debe ser instalado y configurado.
 
 Los sistemas basados en Debian deben utilizar una de las siguientes opciones:
 

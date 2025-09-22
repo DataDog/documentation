@@ -34,7 +34,7 @@ Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:
 
 ## Añadir etiquetas al tramo
 
-### Añadir etiquetas de tramos personalizadas
+### Añadir span tagss personalizadas
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 
 ```java
@@ -112,7 +112,7 @@ public class Example {
         if (null != rootSpan) {
           rootSpan.setAttribute("my-attribute", "my-attribute-value");
           rootSpan.setStatus(StatusCode.ERROR, "Some error details...");
-        } 
+        }
     } finally {
       childSpan.end();
     }
@@ -223,7 +223,7 @@ Los siguientes ejemplos muestran diferentes formas de registrar excepciones:
 
 ```java
 span.recordException(new Exception("Error Message"));
-span.recordException(new Exception("Error Message"), 
+span.recordException(new Exception("Error Message"),
     Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
 ```
 

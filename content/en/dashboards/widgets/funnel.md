@@ -1,5 +1,6 @@
 ---
 title: Funnel Widget
+description: Track conversion rates and identify bottlenecks in user workflows with funnel analysis visualization.
 widget_type: funnel
 aliases:
 - /graphing/widgets/funnel/

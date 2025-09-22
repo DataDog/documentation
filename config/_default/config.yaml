@@ -94,24 +94,21 @@ module:
      - source: i18n
        target: i18n
 
-   - path: github.com/DataDog/websites-sources
-     disabled: false
-     mounts:
-     - source: content/en/integrations
-       target: content/integrations
-       lang: en
-     - source: content/en/security/code_security/iac_security/iac_rules
-       target: content/security/code_security/iac_security/iac_rules
-       lang: en
-     - source: content/en/ddsql_reference/dataset_directory
-       target: content/ddsql_reference/dataset_directory
-       lang: en
-     - source: data
-       target: data
-     - source: assets
-       target: assets
-     - source: layouts/shortcodes
-       target: layouts/shortcodes
+  #  - path: github.com/DataDog/websites-sources
+  #    disabled: true
+  #    mounts:
+  #    - source: content/en/integrations
+  #      target: content/integrations
+  #      lang: en
+  #    - source: content/en/security/code_security/iac_security/iac_rules
+  #      target: content/security/code_security/iac_security/iac_rules
+  #      lang: en
+  #    - source: data
+  #      target: data
+  #    - source: assets
+  #      target: assets
+  #    - source: layouts/shortcodes
+  #      target: layouts/shortcodes
 
   mounts:
     # default mounts
@@ -149,6 +146,15 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    - source: _vendor/content/en
+      target: content
+      lang: en
+    - source: _vendor/data
+      target: data
+    - source: _vendor/layouts
+      target: layouts
+    - source: _vendor/assets
+      target: assets
 
 security:
   funcs:
