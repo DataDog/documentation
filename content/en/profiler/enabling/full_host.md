@@ -62,9 +62,9 @@ If `DD_SERVICE` is not set, Datadog infers a service name from the binary name. 
 
 If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, Datadog groups them together under the same service name. Datadog cannot distinguish between them unless you provide a unique service name.
 
-## Debug Symbols
+## Debug symbols
 
-For compiled languages (C/C++/Rust/Go/...), the profiler uploads local symbols to Datadog for symbolication (ensuring that function names are available in profiles). For Rust, C and C++, symbols need to be available locally (unstripped binaries).
+For compiled languages (C/C++/Rust/Go/...), the profiler uploads local symbols to Datadog for symbolication (ensuring that function names are available in profiles). For Rust, C, and C++, symbols need to be available locally (unstripped binaries).
 
 For binaries stripped of debug symbols, it's possible to upload symbols manually or in the CI:
 
