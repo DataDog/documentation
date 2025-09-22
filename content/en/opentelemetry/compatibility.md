@@ -20,13 +20,13 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 | [**Datadog SDK + DDOT (Recommended)**][29] | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
 | [**OTel SDK + DDOT**][29]                  | OTel API                | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
 | [**OTel SDK + OSS Collector**][7]          | OTel API                | OTel SDK    | OTel Collector (OSS)                          |
-| [**Agentless OTLP**][28]                   | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
+| [**Direct OTLP Ingest**][28]                   | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
 The following table shows feature compatibility across different setups:
 
-| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OSS Collector | Agentless OTLP |
+| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OSS Collector | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -104,5 +104,5 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [25]: /tracing/trace_collection/span_links/
 [26]: /tracing/metrics/metrics_namespace/
 [27]: /tracing/trace_collection/
-[28]: /opentelmetry/agentless
+[28]: /opentelemetry/setup/agentless
 [29]: /opentelemetry/setup/ddot_collector

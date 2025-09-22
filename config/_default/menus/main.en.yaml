@@ -711,7 +711,7 @@ menu:
       identifier: otel-setup-otlp-ingest
       parent: otel-setup-other
       weight: 4022
-    - name: Agentless Deployment
+    - name: Direct OTLP Ingest
       url: /opentelemetry/setup/agentless
       identifier: otel-setup-intake-endpoint
       parent: otel-setup-other
