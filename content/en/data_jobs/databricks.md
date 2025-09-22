@@ -284,7 +284,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{% /tab %}}
 
-{{% tab "Configure on a cluster policy" %}}
+{{% tab "Manually configure on a cluster policy" %}}
 
 1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
    ```shell
