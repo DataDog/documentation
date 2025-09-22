@@ -48,7 +48,7 @@ To check the PAR logs:
 docker logs <id-of-container>
 ```
 
-## Docker compose mode
+## Docker Compose mode
 Navigate to the directory containing your `docker-compose.yaml` file.
 
 ```yaml
