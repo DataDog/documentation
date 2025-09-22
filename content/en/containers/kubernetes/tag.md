@@ -115,7 +115,7 @@ com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 
 Starting with Agent v7.58+, the Agent can be configured to collect labels for Kubernetes resources and use them as tags.
 
-**Important:** Tags do NOT cascade between parent and child resources. For example, labels on a Deployment are NOT automatically applied to logs from its child Pods. To tag pod logs, you must configure labels on the Pods themselves.
+**Note:** Tags do not cascade between parent and child resources. For example, labels on a Deployment are not automatically applied to logs from its child Pods. To tag Pod logs, configure labels directly on the Pods.
 
 This configuration option is more generic and should be preferred over the following options:
 - podLabelsAsTags
