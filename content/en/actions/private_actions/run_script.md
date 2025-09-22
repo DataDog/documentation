@@ -40,7 +40,7 @@ To use the script action, you need:
 1. Enter a **Connection Name**.
 1. In the **Private Action Runner** dropdown, select your PAR. 
 1. Copy and paste the credential file template into your PAR's configuration directory with the commands you want to run. 
-1. In **Path to file**, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases)
+1. In **Path to file**, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases).
 1. Click **Next, Confirm Access**. 
 1. After configuring permissions, click **Create**.
 1. Select this new connection when using the script action in your workflows or apps.
