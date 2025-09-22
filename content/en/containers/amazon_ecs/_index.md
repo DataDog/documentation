@@ -32,7 +32,7 @@ Amazon ECS is a scalable, high-performance container orchestration service that 
 To configure Amazon ECS with Datadog, you can either use **Fleet Automation** or **install manually**. If you prefer to install manually, run one Agent container per Amazon EC2 host by creating a Datadog Agent task definition and deploying it as a daemon service. Each Agent then monitors the other containers on its host. See the [Install manually](#install-manually) section for more details.
 
 
-## Setup with Fleet Automation
+## Fleet Automation setup
 Follow the [in-app installation guide in Fleet Automation][32] to complete setup on ECS. After completing the outlined steps in the in-app guide, [Fleet Automation][33] generates a ready-to-use task definition or CloudFormation template, with your API key pre-injected.
 
 {{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="In-app installation steps for the Datadog Agent on ECS." style="width:90%;">}}
