@@ -14,7 +14,7 @@ Use this guide to troubleshoot metric discrepancies between Azure and Datadog.
 
 ## Metric discrepancies
 
-Metric discrepancies between Datadog and Azure monitor are usually attributed to differences in time or space aggregation. Datadog collects the [following metrics] [1] from Azure Monitor with all dimensions available, lowest time grain available and the primary aggregation type. 
+Metric discrepancies between Datadog and Azure typically arise from differences in time or space aggregation. Datadog collects the [following metrics][1] from Azure Monitor with all dimensions available, lowest time grain available and the primary aggregation type. 
 These information are visible in the response of the [Metric Definitions - List API][2] (source of truth) or in the [Azure documentation][3]. 
 
 To compare metrics in Azure Monitor and in Datadog, make sure that your query includes:
