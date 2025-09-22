@@ -1,4 +1,50 @@
 {
+  "ListDatastores": {
+    "description": "Lists all datastores for the organization.",
+    "summary": "List datastores"
+  },
+  "CreateDatastore": {
+    "description": "Creates a new datastore.",
+    "summary": "Create datastore",
+    "request_description": "",
+    "request_schema_description": "Request to create a new datastore with specified configuration and metadata."
+  },
+  "DeleteDatastore": {
+    "description": "Deletes a datastore by its unique identifier.",
+    "summary": "Delete datastore"
+  },
+  "GetDatastore": {
+    "description": "Retrieves a specific datastore by its ID.",
+    "summary": "Get datastore"
+  },
+  "UpdateDatastore": {
+    "description": "Updates an existing datastore's attributes.",
+    "summary": "Update datastore",
+    "request_description": "",
+    "request_schema_description": "Request to update a datastore's configuration such as its name or description."
+  },
+  "DeleteDatastoreItem": {
+    "description": "Deletes an item from a datastore by its key.",
+    "summary": "Delete datastore item",
+    "request_description": "",
+    "request_schema_description": "Request to delete a specific item from a datastore by its primary key."
+  },
+  "ListDatastoreItems": {
+    "description": "Lists items from a datastore. You can filter the results by specifying either an item key or a filter query parameter, but not both at the same time. Supports server-side pagination for large datasets.",
+    "summary": "List datastore items"
+  },
+  "UpdateDatastoreItem": {
+    "description": "Partially updates an item in a datastore by its key.",
+    "summary": "Update datastore item",
+    "request_description": "",
+    "request_schema_description": "Request to update specific fields on an existing datastore item."
+  },
+  "BulkWriteDatastoreItems": {
+    "description": "Creates or replaces multiple items in a datastore by their keys in a single operation.",
+    "summary": "Bulk write datastore items",
+    "request_description": "",
+    "request_schema_description": "Request to insert multiple items into a datastore in a single operation."
+  },
   "ListAppKeyRegistrations": {
     "description": "List App Key Registrations",
     "summary": "List App Key Registrations"
@@ -372,7 +418,7 @@
     "summary": "Get a list of entity relations"
   },
   "CreateCIAppPipelineEvent": {
-    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
+    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nMultiple events can be sent in an array (up to 1000).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
     "request_description": "",
     "request_schema_description": "Request object."
@@ -447,6 +493,36 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "ListArbitraryCostRules": {
+    "description": "List all arbitrary cost rules - Retrieve a list of all arbitrary cost rules for the organization",
+    "summary": "List arbitrary cost rules"
+  },
+  "CreateArbitraryCostRule": {
+    "description": "Create a new arbitrary cost rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Create arbitrary cost rule",
+    "request_description": "",
+    "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
+  },
+  "ReorderArbitraryCostRules": {
+    "description": "Reorder arbitrary cost rules - Change the execution order of arbitrary cost rules.\n\n**Important**: You must provide the **complete list** of all rule IDs in the desired execution order. The API will reorder ALL rules according to the provided sequence.\n\nRules are executed in the order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**: If you have rules with IDs [123, 456, 789] and want to change order from 123→456→789 to 456→123→789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\": \"789\"}]",
+    "summary": "Reorder arbitrary cost rules",
+    "request_description": "",
+    "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
+  },
+  "DeleteArbitraryCostRule": {
+    "description": "Delete an arbitrary cost rule - Delete an existing arbitrary cost rule by its ID",
+    "summary": "Delete arbitrary cost rule"
+  },
+  "GetArbitraryCostRule": {
+    "description": "Get a specific arbitrary cost rule - Retrieve a specific arbitrary cost rule by its ID",
+    "summary": "Get arbitrary cost rule"
+  },
+  "UpdateArbitraryCostRule": {
+    "description": "Update an existing arbitrary cost rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Update arbitrary cost rule",
+    "request_description": "",
+    "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
+  },
   "ListCostAWSCURConfigs": {
     "description": "List the AWS CUR configs.",
     "summary": "List Cloud Cost Management AWS CUR configs"
@@ -460,6 +536,10 @@
   "DeleteCostAWSCURConfig": {
     "description": "Archive a Cloud Cost Management Account.",
     "summary": "Delete Cloud Cost Management AWS CUR config"
+  },
+  "GetCostAWSCURConfig": {
+    "description": "Get a specific AWS CUR config.",
+    "summary": "Get cost AWS CUR config"
   },
   "UpdateCostAWSCURConfig": {
     "description": "Update the status (active/archived) and/or account filtering configuration of an AWS CUR config.",
@@ -480,6 +560,10 @@
   "DeleteCostAzureUCConfig": {
     "description": "Archive a Cloud Cost Management Account.",
     "summary": "Delete Cloud Cost Management Azure config"
+  },
+  "GetCostAzureUCConfig": {
+    "description": "Get a specific Azure config.",
+    "summary": "Get cost Azure UC config"
   },
   "UpdateCostAzureUCConfigs": {
     "description": "Update the status of an  Azure config (active/archived).",
@@ -524,24 +608,28 @@
     "summary": "Get Custom Costs file"
   },
   "ListCostGCPUsageCostConfigs": {
-    "description": "List the GCP Usage Cost configs.",
-    "summary": "List Cloud Cost Management GCP Usage Cost configs"
+    "description": "List the Google Cloud Usage Cost configs.",
+    "summary": "List Google Cloud Usage Cost configs"
   },
   "CreateCostGCPUsageCostConfig": {
-    "description": "Create a Cloud Cost Management account for an GCP Usage Cost config.",
-    "summary": "Create Cloud Cost Management GCP Usage Cost config",
+    "description": "Create a Cloud Cost Management account for an Google Cloud Usage Cost config.",
+    "summary": "Create Google Cloud Usage Cost config",
     "request_description": "",
-    "request_schema_description": "GCP Usage Cost config post request."
+    "request_schema_description": "Google Cloud Usage Cost config post request."
   },
   "DeleteCostGCPUsageCostConfig": {
     "description": "Archive a Cloud Cost Management account.",
-    "summary": "Delete Cloud Cost Management GCP Usage Cost config"
+    "summary": "Delete Google Cloud Usage Cost config"
+  },
+  "GetCostGCPUsageCostConfig": {
+    "description": "Get a specific Google Cloud Usage Cost config.",
+    "summary": "Get Google Cloud Usage Cost config"
   },
   "UpdateCostGCPUsageCostConfig": {
-    "description": "Update the status of an GCP Usage Cost config (active/archived).",
-    "summary": "Update Cloud Cost Management GCP Usage Cost config",
+    "description": "Update the status of an Google Cloud Usage Cost config (active/archived).",
+    "summary": "Update Google Cloud Usage Cost config",
     "request_description": "",
-    "request_schema_description": "GCP Usage Cost config patch request."
+    "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -657,6 +745,10 @@
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
+  "DeleteDORADeployment": {
+    "description": "Use this API endpoint to delete a deployment event.",
+    "summary": "Delete a deployment event"
+  },
   "ListDORADeployments": {
     "description": "Use this API endpoint to get a list of deployment events.",
     "summary": "Get a list of deployment events",
@@ -672,6 +764,10 @@
     "summary": "Send a failure event for DORA Metrics",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
+  },
+  "DeleteDORAFailure": {
+    "description": "Use this API endpoint to delete a failure event.",
+    "summary": "Delete a failure event"
   },
   "ListDORAFailures": {
     "description": "Use this API endpoint to get a list of failure events.",
@@ -765,6 +861,54 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "ListIncidentNotificationRules": {
+    "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
+    "summary": "List incident notification rules"
+  },
+  "CreateIncidentNotificationRule": {
+    "description": "Creates a new notification rule.",
+    "summary": "Create an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification rule."
+  },
+  "DeleteIncidentNotificationRule": {
+    "description": "Deletes a notification rule by its ID.",
+    "summary": "Delete an incident notification rule"
+  },
+  "GetIncidentNotificationRule": {
+    "description": "Retrieves a specific notification rule by its ID.",
+    "summary": "Get an incident notification rule"
+  },
+  "UpdateIncidentNotificationRule": {
+    "description": "Updates an existing notification rule with a complete replacement.",
+    "summary": "Update an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Put request for a notification rule."
+  },
+  "ListIncidentNotificationTemplates": {
+    "description": "Lists all notification templates. Optionally filter by incident type.",
+    "summary": "List incident notification templates"
+  },
+  "CreateIncidentNotificationTemplate": {
+    "description": "Creates a new notification template.",
+    "summary": "Create incident notification template",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification template."
+  },
+  "DeleteIncidentNotificationTemplate": {
+    "description": "Deletes a notification template by its ID.",
+    "summary": "Delete a notification template"
+  },
+  "GetIncidentNotificationTemplate": {
+    "description": "Retrieves a specific notification template by its ID.",
+    "summary": "Get incident notification template"
+  },
+  "UpdateIncidentNotificationTemplate": {
+    "description": "Updates an existing notification template's attributes.",
+    "summary": "Update incident notification template",
+    "request_description": "",
+    "request_schema_description": "Update request for a notification template."
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -816,6 +960,20 @@
     "summary": "Create, update, and delete incident attachments",
     "request_description": "Incident Attachment Payload.",
     "request_schema_description": "The update request for an incident's attachments."
+  },
+  "ListIncidentImpacts": {
+    "description": "Get all impacts for an incident.",
+    "summary": "List an incident's impacts"
+  },
+  "CreateIncidentImpact": {
+    "description": "Create an impact for an incident.",
+    "summary": "Create an incident impact",
+    "request_description": "Incident impact payload.",
+    "request_schema_description": "Create request for an incident impact."
+  },
+  "DeleteIncidentImpact": {
+    "description": "Delete an incident impact.",
+    "summary": "Delete an incident impact"
   },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
@@ -2542,6 +2700,42 @@
     "summary": "Save new value for on-demand concurrency cap",
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
+  },
+  "ListRulesets": {
+    "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
+    "summary": "List rulesets"
+  },
+  "CreateRuleset": {
+    "description": "Create a new tag pipeline ruleset with the specified rules and configuration",
+    "summary": "Create ruleset",
+    "request_description": "",
+    "request_schema_description": "The definition of `CreateRulesetRequest` object."
+  },
+  "ReorderRulesets": {
+    "description": "Reorder tag pipeline rulesets - Change the execution order of tag pipeline rulesets",
+    "summary": "Reorder rulesets",
+    "request_description": "",
+    "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
+  },
+  "ValidateQuery": {
+    "description": "Validate a tag pipeline query - Validate the syntax and structure of a tag pipeline query",
+    "summary": "Validate query",
+    "request_description": "",
+    "request_schema_description": "The definition of `RulesValidateQueryRequest` object."
+  },
+  "DeleteRuleset": {
+    "description": "Delete a tag pipeline ruleset - Delete an existing tag pipeline ruleset by its ID",
+    "summary": "Delete ruleset"
+  },
+  "GetRuleset": {
+    "description": "Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline ruleset by its ID",
+    "summary": "Get ruleset"
+  },
+  "UpdateRuleset": {
+    "description": "Update a tag pipeline ruleset - Update an existing tag pipeline ruleset with new rules and configuration",
+    "summary": "Update ruleset",
+    "request_description": "",
+    "request_schema_description": "The definition of `UpdateRulesetRequest` object."
   },
   "ListTeams": {
     "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",

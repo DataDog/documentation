@@ -1,5 +1,6 @@
 ---
 title: Android Advanced Configuration
+description: "Configure advanced Android RUM SDK settings to enrich user sessions, track custom events, and control data collection."
 aliases:
     - /real_user_monitoring/android/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android

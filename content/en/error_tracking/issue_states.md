@@ -37,6 +37,8 @@ Error Tracking automatically marks issues as **RESOLVED** that appear to be inac
 - If the issue was last reported in a version that is more than 14 days old, and a newer version has been released but does not report the same error, Error Tracking automatically resolves the issue. Configure your services with version tags (see instructions for [APM][1], [RUM][2], and [Logs][3]) to ensure that automatic resolution accounts for versions of your services.
 - If `version` tags are not set up, Error Tracking automatically resolves an issue if there have been no new errors reported for that issue within the last 14 days.
 
+**Note**: The auto-resolution logic does not take `version` into account.
+
 ## Automatic re-opening through regression detection
 
 See [Regression Detection][4].

@@ -109,7 +109,7 @@ datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
   - `datadog-cdk-constructs` >= 0.8.5
 
 ### Métodos alternativos para activar la integración del código fuente
-Si la implementación automática no funciona en tu caso, sigue una de las dos guías siguientes. 
+Si la implementación automática no funciona en tu caso, sigue una de las dos guías siguientes.
 
 **Nota: estas otras guías solo funcionan para Typescript**.
 <details>
@@ -121,7 +121,7 @@ Si la implementación automática no funciona en tu caso, sigue una de las dos g
   ```typescript
   const app = new cdk.App();
 
-  // Make sure to add @datadog/datadog-ci via your package manager 
+  // Make sure to add @datadog/datadog-ci via your package manager
   const datadogCi = require("@Datadog/Datadog-ci");
   // Manually uploading Git metadata to Datadog.
   datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
@@ -139,7 +139,7 @@ Si la implementación automática no funciona en tu caso, sigue una de las dos g
 
   ``typescript
   async function main() {
-    // Make sure to add @datadog/datadog-ci via your package manager 
+    // Make sure to add @datadog/datadog-ci via your package manager
     const datadogCi = require("@datadog/datadog-ci");
     const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
@@ -171,7 +171,7 @@ _Nota_: En las descripciones, se utilizan los parámetros de paquetes de npm, pe
 
 | Parámetro de paquete de npm  | Parámetro de paquete de PyPI  | Descripción |
 | --- | --- | --- |
-| `addLayers` | `add_layers` | Si se añaden las Lambda Layers o se espera que el usuario traiga las suyas propias. Por defecto es `true`. Cuando es `true`, también se requieren las variables de la versión de la biblioteca Lambda. Cuando es `false`, debes incluir la biblioteca Datadog Lambda en los paquetes de despliegue de tus funciones. |
+| `addLayers` | `add_layers` | Si se añaden las Lambda Layers o se espera que el usuario traiga las suyas propias. Por defecto es `true`. Cuando es `true`, también se requieren las variables de la versión de la librería Lambda. Cuando es `false`, debes incluir la librería Datadog Lambda en los paquetes de despliegue de tus funciones. |
 | `pythonLayerVersion` | `python_layer_version` | Versión de la capa Lambda de Python que se va a instalar, como `83`. Es necesario si estás desplegando al menos una función Lambda escrita en Python y `addLayers` es `true`. Encuentra el número de la última versión [aquí][5]. |
 | `nodeLayerVersion` | `node_layer_version` | Versión de la capa Lambda de Node.js que se va a instalar, como `100`. Es necesario si estás desplegando al menos una función Lambda escrita en Node.js y `addLayers` es `true`. Encuentra el número de la última versión en [aquí][6]. |
 | `javaLayerVersion` | `java_layer_version` | Versión de la capa de Java que se va a instalar, como `8`. Es necesario si estás desplegando al menos una función Lambda escrita en Java y `addLayers` es `true`. Encuentra el número de la última versión en la [Documentación de instalación de Serverless Java][15]. **Nota**: `extensionLayerVersion >= 25` y `javaLayerVersion >= 5` son necesarios para que la construcción de Datadog para instrumentar tus funciones de Java correctamente. |
@@ -190,19 +190,19 @@ _Nota_: En las descripciones, se utilizan los parámetros de paquetes de npm, pe
 | `enableDatadogLogs` | `enable_datadog_logs` | Envía los logs de las funciones Lambda a Datadog a través de la extensión Datadog Lambda. El valor por defecto es `true`. Nota: Esta configuración no tiene ningún efecto en los logs enviados a través de Datadog Forwarder . |
 | `enableSourceCodeIntegration` | `enable_source_code_integration` | Activa la integración del código fuente de Datadog, conectando tu telemetría con el código de la aplicación en tus repositorios Git. Esto necesita la integración de Datadog Github para funcionar, de otro modo, sigue el [método alternativo](#alternative-methods-to-enable-source-code-integration). Más información [aquí](https://docs.datadoghq.com/integrations/guide/source-code-integrations/). Por defecto es `true`. |
 | `injectLogContext` | `inject_log_context` | Cuando se configura, la capa Lambda aplica un parche automáticamente a console.log con los identificadores de rastreo de Datadog. Por defecto es `true`. |
-| `logLevel` | `log_level` | Cuando se configura en `debug`, la biblioteca y la extensión Datadog Lambda registran información adicional para ayudar a solucionar problemas. |
+| `logLevel` | `log_level` | Cuando se configura en `debug`, la librería y la extensión Datadog Lambda registran información adicional para ayudar a solucionar problemas. |
 | `env` | `env` | Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_ENV` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, se añade una etiqueta (tag) `env` a todas las funciones Lambda con el valor proporcionado. |
 | `service` | `service` | Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_SERVICE` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, se añade una etiqueta `service` a todas las funciones Lambda con el valor proporcionado. |
 | `version` | `version` | Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_VERSION` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, se añade una etiqueta `version` a todas las funciones Lambda con el valor proporcionado. |
 | `tags` | `tags` | Una lista separada por comas de pares clave:valor como una sola cadena. Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_TAGS` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, el cdk analiza la cadena y configura cada par clave:valor como una etiqueta en todas las funciones Lambda. |
 | `enableColdStartTracing`      | `enable_cold_start_tracing` | Configúralo en `false` para desactivar el rastreo de inicio en frío. Se utiliza en Node.js y Python. Por defecto es `true`. |
 | `coldStartTraceMinDuration`   | `min_cold_start_trace_duration` | Configura la duración mínima (en milisegundos) de un evento de carga de un módulo que se va a rastrear a través del rastreo de inicio en frío. Número. Por defecto es `3`. |
-| `coldStartTraceSkipLibs`      | `cold_start_trace_skip_libs`| Opcionalmente, omite la creación de tramos (spans) de inicio en frío para una lista separada por comas de bibliotecas. Es útil para limitar la profundidad u omitir bibliotecas conocidas. El valor por defecto depende del tiempo de ejecución. |
+| `coldStartTraceSkipLibs`      | `cold_start_trace_skip_libs`| Opcionalmente, omite la creación de tramos (spans) de inicio en frío para una lista separada por comas de librerías. Es útil para limitar la profundidad u omitir bibliotecas conocidas. El valor por defecto depende del tiempo de ejecución. |
 | `enableProfiling`             | `enable_profiling` | Activa Datadog Continuous Profiler con `true`. Es compatible en Beta con Node.js y Python. Por defecto es `false`. |
 | `encodeAuthorizerContext`     |`encode_authorizer_context` | Cuando se configura en `true` para autorizadores Lambda, el contexto de rastreo se codificará en la respuesta para la propagación. Es compatible con Node.js y Python. Por defecto es `true`. |
 | `decodeAuthorizerContext`     |`decode_authorizer_context` | Cuando se configura en `true` para Lambdas que están autorizadas a través de autorizadores Lambda, analizará y utilizará el contexto de rastreo codificado (si se encuentra). Es compatible con Node.js y Python. Por defecto es `true`.                         |
 | `apmFlushDeadline` | `apm_flush_deadline` | Se utiliza para determinar cuándo enviar tramos antes de que se agote el tiempo, en milisegundos. Cuando el tiempo restante en una invocación de AWS lambda es inferior al valor configurado, el rastreador intenta enviar tramos activos actuales y todos los tramos finalizados. Es compatible con Node.js y Python. El valor por defecto es `100` milisegundos. |
-| `redirectHandler` | `redirect_handler` | Cuando se configura en `false`, omite la redirección del controlador al controlador de la biblioteca Datadog Lambda. Es útil cuando solo se instrumenta con la extensión Datadog Lambda. Por defecto es `true`. |
+| `redirectHandler` | `redirect_handler` | Cuando se configura en `false`, omite la redirección del controlador al controlador de la librería Datadog Lambda. Es útil cuando solo se instrumenta con la extensión Datadog Lambda. Por defecto es `true`. |
 
 **Nota**: El uso de los parámetros anteriores puede sustituir las variables de entorno `DD_XXX` del nivel de función correspondiente.
 ### Rastreo
@@ -308,7 +308,7 @@ Cuando se llama a `addLambdaFunctions`, la construcción de Datadog CDK concede 
 
 ## Cómo funciona
 
-La construcción de Datadog CDK toma una lista de funciones lambda e instala la biblioteca Datadog Lambda adjuntando las Lambda Layers para [.NET][19], [Java][15], [Node.js][2] y [Python][1] a tus funciones. Redirige a un controlador de sustitución que inicializa la biblioteca Lambda sin necesidad de ningún cambio de código. Las configuraciones adicionales añadidas a la construcción de Datadog CDK también se traducirán en sus respectivas variables de entorno en cada función lambda (si es aplicable/necesario).
+La construcción de Datadog CDK toma una lista de funciones lambda e instala la librería Datadog Lambda adjuntando las Lambda Layers para [.NET][19], [Java][15], [Node.js][2] y [Python][1] a tus funciones. Redirige a un controlador de sustitución que inicializa la librería Lambda sin necesidad de ningún cambio de código. Las configuraciones adicionales añadidas a la construcción de Datadog CDK también se traducirán en sus respectivas variables de entorno en cada función lambda (si es aplicable/necesario).
 
 Los grupos de logs basados en funciones Lambda se controlan en forma automática mediante el método de `addLambdaFunctions`, mientras que la construcción tiene una función `addForwarderToNonLambdaLogGroups` adicional que suscribe el Forwarder a cualquier grupo de logs adicional de tu elección.
 

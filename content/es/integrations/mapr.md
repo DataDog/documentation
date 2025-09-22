@@ -82,8 +82,8 @@ El check de MapR está incluido en el paquete del [Datadog Agent][2], pero requi
 Pasos de instalación para cada nodo:
 
 1. [Instala el Agent][2].
-2. Instala la biblioteca _librdkafka_, que se requiere para _mapr-streams-library_, siguiendo [estas instrucciones][7].
-3. Instala la biblioteca _mapr-streams-library_ con el siguiente comando:
+2. Instala la librería _librdkafka_, que se requiere para _mapr-streams-library_, siguiendo [estas instrucciones][7].
+3. Instala la librería _mapr-streams-library_ con el siguiente comando:
 
     `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python`.
 
@@ -96,7 +96,7 @@ Pasos de instalación para cada nodo:
 #### Notas adicionales
 
 - Si no tienes habilitada la "seguridad" en el clúster, puedes continuar sin un ticket.
-- Si tu entorno de producción no admite herramientas de compilación como gcc (necesarias para compilar la mapr-streams-library), es posible generar un archivo wheel compilado de la biblioteca en una instancia de desarrollo y distribuir el archivo wheel compilado a producción. Los hosts de desarrollo y producción tienen que ser lo suficientemente similares para que el archivo wheel compilado sea compatible. Puedes ejecutar `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` para crear el archivo de wheel en la máquina de desarrollo. Luego, debes ejecutar `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <THE_WHEEL_FILE>` en la máquina de producción.
+- Si tu entorno de producción no admite herramientas de compilación como gcc (necesarias para compilar la mapr-streams-library), es posible generar un archivo wheel compilado de la librería en una instancia de desarrollo y distribuir el archivo wheel compilado a producción. Los hosts de desarrollo y producción tienen que ser lo suficientemente similares para que el archivo wheel compilado sea compatible. Puedes ejecutar `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` para crear el archivo de wheel en la máquina de desarrollo. Luego, debes ejecutar `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <THE_WHEEL_FILE>` en la máquina de producción.
 - Si utilizas Python 3 con el Agent v7, asegúrate de reemplazar `pip` por `pip3` al instalar la _mapr-streams-library_.
 
 ### Configuración
@@ -158,7 +158,7 @@ El check de MapR no incluye eventos.
 
 - **El Agent entra en un bucle de error luego de configurar la integración de MapR.**
 
-  Ha habido algunos casos en los que la biblioteca de C dentro de _mapr-streams-python_ genera errores de segmentación debido a problemas de permisos. Asegúrate de que el usuario del `dd-agent` tenga permiso de lectura en el archivo del ticket y que dicho usuario del `dd-agent` pueda ejecutar comandos de la `maprcli` cuando la variable de entorno `MAPR_TICKETFILE_LOCATION` esté apuntando hacia el ticket.
+  Ha habido algunos casos en los que la librería de C dentro de _mapr-streams-python_ genera errores de segmentación debido a problemas de permisos. Asegúrate de que el usuario del `dd-agent` tenga permiso de lectura en el archivo del ticket y que dicho usuario del `dd-agent` pueda ejecutar comandos de la `maprcli` cuando la variable de entorno `MAPR_TICKETFILE_LOCATION` esté apuntando hacia el ticket.
 
 - **La integración parece funcionar correctamente, pero no envía ninguna métrica.**
 

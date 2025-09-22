@@ -1,5 +1,7 @@
 ---
 title: Messages
+aliases:
+  - data_streams/live_messages
 ---
 
 Messages feature allows identifying the root cause of poison pill messages and to better understand data streams by inspecting message content.

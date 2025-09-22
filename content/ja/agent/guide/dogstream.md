@@ -6,9 +6,8 @@ title: Dogstream
 ---
 
 <div class="alert alert-danger">
-これは、Agent 5 の非推奨の機能です。新機能のリリースは中止されました。
+これは Agent 5 における非推奨機能です。新機能のリリースは終了しています。
 <br>
-Agent v6 が利用可能です。<a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">最新バージョンにアップグレードすると、</a>新しい機能を利用できます。
 </div>
 
 ログファイルには、膨大な量の貴重なアプリケーションデータとビジネスデータが含まれています。

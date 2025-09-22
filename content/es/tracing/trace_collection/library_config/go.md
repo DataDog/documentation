@@ -17,11 +17,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la biblioteca de rastreo de Go
+title: Configuración de la librería de rastreo de Go
 type: lenguaje de código múltiple
 ---
 
-Después de [configurar la biblioteca de rastreo con tu código, configurar el Agent para recopilar datos de APM y activa la integración Go][1]. También puedes configurar la biblioteca de rastreo como prefieras.
+Después de [configurar la librería de rastreo con tu código, configurar el Agent para recopilar datos de APM y activa la integración Go][1]. También puedes configurar la librería de rastreo como prefieras.
 
 Datadog recomienda utilizar `DD_ENV`, `DD_SERVICE`, y `DD_VERSION` para configurar `env`, `service` y `version` para tus servicios.
 
@@ -67,11 +67,11 @@ Anula la dirección del host por defecto del Trace Agent para el envío de traza
 
 `DD_TRACE_AGENT_PORT`
 : **Por defecto: `8126` <br>
-Anula el puerto por defecto del Trace Agent para el envío de trazas de Datadog. Si la [configuración del Agent][13] configura `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto al predeterminado `8126`, la configuración de la biblioteca `DD_DOGSTATSD_PORT` debe coincidir con él.
+Anula el puerto por defecto del Trace Agent para el envío de trazas de Datadog. Si la [configuración del Agent][13] configura `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto al predeterminado `8126`, la configuración de la librería `DD_DOGSTATSD_PORT` debe coincidir con él.
 
 `DD_DOGSTATSD_PORT`
 : **Por defecto: `8125` <br>
-Anula el puerto por defecto del Trace Agent para el envío de métricas de DogStatsD. Si la [configuración del Agent][13] configura `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto al predeterminado `8125`, la configuración de la biblioteca `DD_DOGSTATSD_PORT` debe coincidir con él.
+Anula el puerto por defecto del Trace Agent para el envío de métricas de DogStatsD. Si la [configuración del Agent][13] configura `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto al predeterminado `8125`, la configuración de la librería `DD_DOGSTATSD_PORT` debe coincidir con él.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Por defecto**: `nil`<br>
@@ -118,7 +118,7 @@ Habilita el registro de depuración en el rastreador.
 
 `DD_TRACE_ENABLED`
 : **Por defecto: `true` <br>
-Habilita la instrumentación de marcos web y bibliotecas. Cuando es falso, el código de la aplicación no genera trazas.
+Habilita la instrumentación de web frameworks y bibliotecas. Cuando es falso, el código de la aplicación no genera trazas.
 
 `DD_SERVICE_MAPPING`
 : **Por defecto: `null` <br>
@@ -145,7 +145,7 @@ Añadido en la versión 1.47.0
 
 `DD_TRACE_HEADER_TAGS`
 : **Por defecto: `null` <br>
-Lista de cabeceras HTTP separadas por comas que se utilizarán como etiquetas de tramos. También puedes especificar un campo "asignado" para renombrar una cabecera de solicitud como una etiqueta. La configuración se puede establecer globalmente con esta variable de entorno, o a nivel de la integración, utilizando las opciones especificadas en la [documentación de Go][15]. Esta función es compatible con cabeceras [HTTP1][16].<br>
+Lista de cabeceras HTTP separadas por comas que se utilizarán como span tagss. También puedes especificar un campo "asignado" para renombrar una cabecera de solicitud como una etiqueta. La configuración se puede establecer globalmente con esta variable de entorno, o a nivel de la integración, utilizando las opciones especificadas en la [documentación de Go][15]. Esta función es compatible con cabeceras [HTTP1][16].<br>
 **Ejemplos:**<br>
   - Captura la cabecera de solicitud `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
   - Captura la cabecera de solicitud `my-header-1` y `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`

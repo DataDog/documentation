@@ -1,5 +1,6 @@
 ---
 title: Tracking User Actions
+description: "Automatically track user interactions and custom actions in web applications to understand user behavior, performance, and feature adoption."
 further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
