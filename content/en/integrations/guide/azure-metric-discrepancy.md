@@ -3,7 +3,7 @@ title: Azure Metric Discrepancy
 
 description: "Troubleshooting steps for Azure metric discrepancy"
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/google-cloud-platform/](https://docs.datadoghq.com/integrations/azure/"
+- link: "https://docs.datadoghq.com/integrations/azure/](https://docs.datadoghq.com/integrations/azure/"
   tag: "Integration"
   text: "Azure Integration"
 ---
