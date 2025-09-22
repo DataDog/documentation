@@ -303,17 +303,17 @@ This configuration ensures evaluations run only on complete sessions. This provi
 
 #### Tool selection
 
-This check evaluates whether the agent can successfully select the appropriate tools to address the user's request.
+This check evaluates whether the agent has successfully selected the appropriate tools to address the user's request.
+
+{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on LLM Spans| Evaluated using LLM | Tool Selection verifies whether the tools chosen by the LLM align with the user's request and the set of available tools. The evaluation identifies cases where irrelevant or incorrect tool calls were made.|
+| Evaluated on LLM Spans| Evaluated using LLM | Tool Selection verifies that the tools chosen by the LLM align with the user's request and the available tools. The evaluation identifies cases where irrelevant or incorrect tool calls were made.|
 
 ##### Instrumentation
 
-The tool selection evaluation is only supported in dd-trace version 3.12 and above
-
-This script is built using the OpenAI Agents SDK and illustrates how tools are made available to the agent and the evaluation:
+This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -352,7 +352,7 @@ history_tutor_agent = Agent(
     model="o3-mini",
 )
 
-# Triage agent decides which specialized agent to handoff the task to - another type of tool selection covered by this evaluation
+# The triage agent decides which specialized agent to hand off the task to — another type of tool selection covered by this evaluation.
 triage_agent = Agent(  
     'openai:gpt-4o',
     model_settings=ModelSettings(temperature=0),
