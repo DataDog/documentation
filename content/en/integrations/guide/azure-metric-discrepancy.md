@@ -33,7 +33,7 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
 
      Source of Truth from [Metric Definitions - List API][2]:
 
-     ```json
+    ```json
     { 
       "id": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2/providers/microsoft.insights/metricdefinitions/Ingress",
           "resourceId": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2",
@@ -101,8 +101,9 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
               "localizedValue": "Authentication"
             }
           ]
-        }
+        } 
         ```
+
 
    4. Graph the metric in Azure Monitor or by going to the individual Resource view > Monitoring > Metrics on the left panel.
 
