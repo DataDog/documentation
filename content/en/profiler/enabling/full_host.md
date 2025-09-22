@@ -64,14 +64,14 @@ If multiple services are running under the same interpreter (for example, two se
 
 ## Debug symbols
 
-For compiled languages (C/C++/Rust/Go/...), the profiler uploads local symbols to Datadog for symbolication (ensuring that function names are available in profiles). For Rust, C, and C++, symbols need to be available locally (unstripped binaries).
+For compiled languages (such as Rust, C, C++, Go, etc.), the profiler uploads local symbols to Datadog for symbolication, ensuring that function names are available in profiles. For Rust, C, and C++, symbols need to be available locally (unstripped binaries).
 
 For binaries stripped of debug symbols, it's possible to upload symbols manually or in the CI:
 
 1. Install the [datadog-ci][12] command line tool.
 2. Provide a [Datadog API key][10] through the `DD_API_KEY` environment variable.
 3. Set the `DD_SITE` environment variable to your [Datadog site][11].
-4. Install the `binutils` package which provides the `objcopy` CLI tool.
+4. Install the `binutils` package, which provides the `objcopy` CLI tool.
 5. Run:
 
 ```
