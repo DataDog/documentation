@@ -35,8 +35,8 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
 
     ```json
     {
-      "id": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2/providers/microsoft.insights/metricdefinitions/Ingress",
-      "resourceId": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2",
+      "id": "/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<resource_name>/providers/microsoft.insights/metricdefinitions/Ingress",
+      "resourceId": "/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<resource_name>",
       "namespace": "Microsoft.Storage/storageAccounts",
       "category": "Transaction",
       "name": {
