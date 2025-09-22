@@ -27,11 +27,11 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
 
   1. Find the corresponding metric in Azure.
 
-     Datadog converts Azure monitor metrics into the format `azure.RESOURCE_PROVIDER_RESOURCE_TYPE.METRIC_NAME`. For the [example metric][4], the Azure Resource Provider is **storage**, the Azure Resource Type is **storageaccounts_blobservices** and the metric name is **ingress**.
+     Datadog converts metrics from Azure monitor into the format `azure.RESOURCE_PROVIDER_RESOURCE_TYPE.METRIC_NAME`. For the [example metric][4], the Azure Resource Provider is **storage**, the Azure Resource Type is **storageaccounts_blobservices** and the metric name is **ingress**.
 
   2. Find the most granular dimensions, time grain and primary aggregation type for the metric
 
-     Source of Truth from [Metric Definitions - List API[ [2]:
+     Source of Truth from [Metric Definitions - List API][2]:
          {
       "id": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2/providers/microsoft.insights/metricdefinitions/Ingress",
       "resourceId": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2",
