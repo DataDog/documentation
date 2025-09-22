@@ -31,12 +31,11 @@ Learn how to setup App and API Protection (AAP) on your AWS Lambda functions by 
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Python" avatar="python" link="./python" >}}
-  {{< appsec-integration name="Node.js" avatar="node" link="./generic" >}}
-  {{< appsec-integration name="Java" avatar="java" link="./generic" >}}
-  {{< appsec-integration name="Go" avatar="go" link="./generic" >}}
-  {{< appsec-integration name="Ruby" avatar="ruby" link="./generic" >}}
-  {{< appsec-integration name=".NET" avatar="dotnet" link="./generic" >}}
-  {{< appsec-integration name="PHP" avatar="php" link="./generic" >}}
+  {{< appsec-integration name="Node.js" avatar="node" link="./nodejs" >}}
+  {{< appsec-integration name="Java" avatar="java" link="./java" >}}
+  {{< appsec-integration name="Go" avatar="go" link="./go" >}}
+  {{< appsec-integration name="Ruby" avatar="ruby" link="./ruby" >}}
+  {{< appsec-integration name=".NET" avatar="dotnet" link="./dotnet" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading
