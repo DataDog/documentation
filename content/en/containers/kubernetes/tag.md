@@ -204,7 +204,7 @@ datadog:
       baz: qux
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to all metrics except KSM metrics (kubernetes_state.*). In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, pod tag names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
