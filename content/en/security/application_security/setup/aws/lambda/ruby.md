@@ -1,5 +1,5 @@
 ---
-title: Enabling App and API Protection for AWS Lambda functions in Python
+title: Enabling App and API Protection for AWS Lambda functions in Ruby
 further_reading:
     - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
@@ -29,6 +29,10 @@ Configuring App and API Protection (AAP) for AWS Lambda involves:
 - [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
   X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
 
+## Compatibility
+
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
@@ -37,7 +41,6 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 - Function URL
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> to send feedback.</div>
-
 
 ## Get started
 
@@ -192,79 +195,115 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 1. Install the Datadog Lambda library
 
-    The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
+    The Datadog Lambda Library can be installed as a layer or a gem. For most functions, Datadog recommends installing the library as a layer. If your Lambda function is deployed as a container image, you must install the library as a gem.
 
-    The minor version of the `datadog-lambda` package always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
+    The minor version of the `datadog-lambda` gem always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
 
     - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
       ```sh
       # Use this format for x86-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 
       # Use this format for arm64-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="ruby" >}}
+
 
       # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 
       # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="ruby" >}}
       ```
 
-      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python-versions" >}}.
+      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Ruby2-7`, and `Ruby3-2`.
 
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `datadog` by adding them to your Gemfile as an alternative:
 
-      ```sh
-      pip install datadog-lambda -t ./
+      ```Gemfile
+      gem 'datadog'
+      gem 'datadog-lambda'
       ```
 
-      **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore it must be installed and compiled in a Linux environment on the right architecture (`x86_64` or `arm64`). For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
+      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
-      See the [latest release][5].
+      Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
+
+      ```dockerfile
+      FROM <base image>
+
+      # assemble your container image
+
+      RUN yum -y install gcc gmp-devel make
+      RUN bundle config set path 'vendor/bundle'
+      RUN bundle install
+      ```
 
 2. Install the Datadog Lambda Extension
 
-    [Configure the layers][1] for your Lambda function using the ARN in the following format:
+    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-    ```sh
-    # Use this format for x86-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+      ```sh
+      # Use this format for x86-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 
-    # Use this format for arm64-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+      # Use this format for arm64-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 
-    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 
-    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+      ```
+
+      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+    - Option B: Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
+
+      ```dockerfile
+      COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+      ```
+
+      Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][2].
+
+3. Configure your Lambda functions
+
+    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+
+    ```ruby
+    require 'datadog/lambda'
+
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
+
+    def handler(event:, context:)
+        Datadog::Lambda.wrap(event, context) do
+            return { statusCode: 200, body: 'Hello World' }
+        end
+    end
     ```
 
-    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+4. Configure Datadog site and API key
 
-3. Redirect the handler function
+    - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
-    - Set your function's handler to `datadog_lambda.handler.handler`.
-    - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-
-    **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][6] instead.
-
-4. Enable AAP by adding the following environment variables on your function deployment:
+5. Enable AAP by adding the following environment variables on your function deployment:
    ```yaml
    environment:
-     DD_APPSEC_ENABLED: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_SERVERLESS_APPSEC_ENABLED: true
    ```
 
-5. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][6].
+6. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][4].
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[5]: https://pypi.org/project/datadog-lambda/
-[6]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[2]: https://gallery.ecr.aws/datadog/lambda-extension
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}
 {{< /tabs >}}
