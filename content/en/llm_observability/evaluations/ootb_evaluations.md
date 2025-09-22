@@ -309,7 +309,7 @@ This check evaluates whether the agent has successfully selected the appropriate
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on LLM Spans| Evaluated using LLM | Tool Selection verifies that the tools chosen by the LLM align with the user's request and the available tools. The evaluation identifies cases where irrelevant or incorrect tool calls were made.|
+| Evaluated on LLM spans| Evaluated using LLM | Tool Selection verifies that the tools chosen by the LLM align with the user's request and the available tools. The evaluation identifies cases where irrelevant or incorrect tool calls were made.|
 
 ##### Instrumentation
 
