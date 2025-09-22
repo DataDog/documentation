@@ -5,7 +5,9 @@ disable_toc: false
 
 ## Overview
 
-This page explains how to update the private action runner (PAR). Currently, the PAR is on v{{< private-action-runner-version "private-action-runner" >}}.
+This page explains how to update the private action runner (PAR). You can update the PAR using Docker, Docker Compose, or Helm. 
+
+Currently, the PAR is on v{{< private-action-runner-version "private-action-runner" >}}.
 
 ## Docker mode
 Navigate to the directory where you started the PAR. Next, navigate to the `config` directory, then the `config.yaml` file. 
