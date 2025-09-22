@@ -32,7 +32,9 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
   2. Find the most granular dimensions, time grain and primary aggregation type for the metric
 
      Source of Truth from [Metric Definitions - List API][2]:
-         {
+
+     ```json
+  {
       "id": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2/providers/microsoft.insights/metricdefinitions/Ingress",
       "resourceId": "/subscriptions/8c56d827-5f07-45ce-8f2b-6c5001db5c6f/resourceGroups/agentplatform-voting-rg/providers/Microsoft.Storage/storageAccounts/4dethjvl5ku7s2",
       "namespace": "Microsoft.Storage/storageAccounts",
@@ -100,8 +102,9 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
         }
       ]
     },
+```
 
-   3. Graph the metric in Azure Monitor or by going to the individual Resource view > Monitoring > Metrics on the left panel.
+   4. Graph the metric in Azure Monitor or by going to the individual Resource view > Monitoring > Metrics on the left panel.
 
       - Time: Last 30 minutes or Last 1 hour (ideally in UTC)
       - Metric name: Ingress
