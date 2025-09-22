@@ -20,6 +20,18 @@ further_reading:
 
 Use this page to troubleshoot common issues with Datadog Synthetic Monitoring setup and configuration. For additional assistance, contact [Datadog Support][1].
 
+## Common error messages
+
+Use this table to find troubleshooting steps for common errors.
+
+| Error message                                  | See section |
+|------------------------------------------------|-------------|
+| `self-signed certificate in certificate chain` | [Private Locations → Certificates](?tab=windows#self-signed-certificate-errors) |
+| `401 Unauthorized`                           | [API and Browser Tests → Unauthorized](#api-and-browser-tests) |
+| `Element not found`                            | [Test execution → Element selection issues](#element-detection-warning-in-browser-test-steps) |
+| `Unsupported browser version`                  | [Private Locations → Browser compatibility](?tab=common#requirements-for-browser-tests-running-on-private-location) |
+
+
 ## API tests
 
 ### Network timings are varied
@@ -114,7 +126,7 @@ Resources with long load times may span multiple test steps. Datadog returns all
 
 The synthetics worker uses hierarchical timeouts to balance speed and reliability. Therefore, [step duration][14] should not be used to measure web application performance, it reflects the time needed for reliable test execution.
 
-## API and browser tests
+## API and Browser Tests
 
 ### Unauthorized errors
 
