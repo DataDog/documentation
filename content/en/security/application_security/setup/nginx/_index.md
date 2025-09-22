@@ -14,7 +14,7 @@ further_reading:
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 ## Overview
-App and API Protection leverages the [Datadog Nginx Integration](https://github.com/DataDog/nginx-datadog/) to monitor and secure your reverse proxy.
+App and API Protection leverages the [Datadog Nginx Integration][1] to monitor and secure your reverse proxy.
 
 ## Environments
 
@@ -30,5 +30,9 @@ App and API Protection leverages the [Datadog Nginx Integration](https://github.
 
 ## Additional Resources
 
-- [Troubleshooting Guide](/security/application_security/setup/php/troubleshooting)
-- [Compatibility Information](/security/application_security/setup/php/compatibility)
+- [Troubleshooting Guide][2]
+- [Compatibility Information][3]
+
+[1]: https://github.com/DataDog/nginx-datadog/
+[2]: /security/application_security/setup/php/troubleshooting
+[3]: /security/application_security/setup/php/compatibility
