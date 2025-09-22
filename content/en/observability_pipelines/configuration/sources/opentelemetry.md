@@ -1,6 +1,8 @@
 ---
 title: OpenTelemetry
 disable_toc: false
+aliases:
+ - /observability_pipelines/sources/opentelemetry/
 ---
 
 ## Overview

@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
   - /observability_pipelines/install_the_worker/worker_commands/
 further_reading:
-- link: "observability_pipelines/install_the_worker/"
+- link: "observability_pipelines/configuration/install_the_worker/"
   tag: "Documentation"
   text: "Install the Worker"
 ---

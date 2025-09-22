@@ -13,7 +13,7 @@ further_reading:
 - link: "/observability_pipelines/guide/environment_variables/"
   tag: "Documentation"
   text: "Environment variable for sources, processors, and components"
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 ---
@@ -66,7 +66,7 @@ Follow the steps below if you want to use the one-line installation script to in
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
@@ -129,7 +129,7 @@ If you prefer not to use the one-line installation script for Linux, follow thes
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
 {{% tab "RPM" %}}
@@ -174,7 +174,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
 {{< /tabs >}}

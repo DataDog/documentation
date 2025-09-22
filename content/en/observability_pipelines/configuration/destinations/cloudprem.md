@@ -1,6 +1,8 @@
 ---
 title: Datadog CloudPrem Destination
 disable_toc: false
+aliases:
+ - /observability_pipelines/destinations/cloudprem/
 ---
 
 Use Observability Pipelines' CloudPrem destination to send logs to Datadog CloudPrem.
