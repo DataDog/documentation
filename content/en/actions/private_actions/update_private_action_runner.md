@@ -21,7 +21,7 @@ Stop the container:
 docker stop <id>
 ```
 
-Start a new container with [the latest image][1]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
+Start a new container with [the latest image][1]. Environment variables are not needed. Everything is configured in the `config/config.yaml` file.
 
 Run:
 ```bash
