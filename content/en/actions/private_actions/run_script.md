@@ -84,6 +84,8 @@ In your workflow or app, configure the action to use the `runPredefinedScript` w
 
 **Note**: There are two levels of variable resolution: one at the workflow level and one at the action level inside the runner.
 
+{{< img src="service_management/par-script-variables.png" alt="The two levels of variables inside the runner." style="width:80%;" >}}
+
 ## Advanced usage with custom images
 
 For binaries not available in the base runner image, create a custom image:
