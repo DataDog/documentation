@@ -301,6 +301,65 @@ After instrumenting your application to send session-end spans, configure the ev
 
 This configuration ensures evaluations run only on complete sessions. This provides accurate assessments of user intention resolution.
 
+#### Tool selection
+
+This check evaluates whether the agent has successfully selected the appropriate tools to address the user's request.
+
+{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on LLM spans| Evaluated using LLM | Tool Selection verifies that the tools chosen by the LLM align with the user's request and the available tools. The evaluation identifies cases where irrelevant or incorrect tool calls were made.|
+
+##### Instrumentation
+
+This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from agents import Agent, ModelSettings, function_tool
+
+@function_tool
+def add_numbers(a: int, b: int) -> int:
+    """
+    Adds two numbers together.
+    """
+    return a + b
+
+@function_tool
+def subtract_numbers(a: int, b: int) -> int:
+    """
+    Subtracts two numbers.
+    """
+    return a - b
+    
+
+# List of tools available to the agent 
+math_tutor_agent = Agent(
+    name="Math Tutor",
+    handoff_description="Specialist agent for math questions",
+    instructions="You provide help with math problems. Please use the tools to find the answer.",
+    model="o3-mini",
+    tools=[
+        add_numbers, subtract_numbers
+    ],
+)
+
+history_tutor_agent = Agent(
+    name="History Tutor",
+    handoff_description="Specialist agent for history questions",
+    instructions="You provide help with history problems.",
+    model="o3-mini",
+)
+
+# The triage agent decides which specialized agent to hand off the task to — another type of tool selection covered by this evaluation.
+triage_agent = Agent(  
+    'openai:gpt-4o',
+    model_settings=ModelSettings(temperature=0),
+    instructions='What is the sum of 1 to 10?',  
+    handoffs=[math_tutor_agent, history_tutor_agent],
+)
+{{< /code-block >}}
 
 ### Security and Safety evaluations
 
