@@ -268,7 +268,7 @@ The worker runs under the **Local Service** account. Verify this by checking for
 
 **Automatic startup**: If you provided a configuration file during installation, the `Datadog Synthetics Private Location` Windows service starts automatically. Verify the service is running in the **Services** tool—this service handles automatic restarts.
 
-### Self-signed certificate errors in Windows Private Locations
+### Self-signed certificate errors 
 
 Windows Private Locations may display this error immediately after startup:
 
