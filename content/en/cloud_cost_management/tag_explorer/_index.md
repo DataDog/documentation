@@ -146,6 +146,16 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 {{% /tab %}}
 {{< /tabs >}}
 
+## Set preferred tags
+Set up to five preferred tags to surface your organization's most relevant tags throughout Cloud Cost Management. For example, these tags are shown first when picking tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9].
+
+{{< img src="cloud_cost/tag_explorer/preferred_tags_1.png" alt="Preferred tags are shown throughout CCM" style="width:100%;" >}}
+
+Preferred tags can be selected from any of your existing tags on your cost data, including [Tag Pipelines][3]. Preferred tags are applied at the organizational level.
+
+
+{{< img src="cloud_cost/tag_explorer/preferred_tags_2.png" alt="Select your preferred tags in Tag Explorer" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -156,3 +166,6 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 [4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
 [6]: /cloud_cost_management/setup/saas_costs
+[7]: https://app.datadoghq.com/cost/explorer
+[8]: /cloud_cost_management/reports
+[9]: /cloud_cost_management/custom_allocation_rules
