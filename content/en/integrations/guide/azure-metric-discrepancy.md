@@ -114,7 +114,7 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
 
    {{< img src="integrations/guide/azure-metric-discrepancy/azure_metric_explorer.jpg" alt="Azure Metrics Explorer" >}}
 
-   4. Graph the metric in the Datadog Metrics Explorer:
+   5. Graph the metric in the Datadog Metrics Explorer:
 
    {{< img src="integrations/guide/azure-metric-discrepancy/datadog_metric_explorer.jpg" alt="Datadog Metrics Explorer" >}}
 
