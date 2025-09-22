@@ -104,7 +104,7 @@ The following steps reconcile the metric `azure.storage_storageaccounts_blobserv
     }
     ```
 
-   4. Graph the metric in Azure Monitor or by going to the individual Resource view > Monitoring > Metrics on the left panel.
+   4. Graph the metric in Azure Monitor Metrics Explorer or by going to the individual Resource view > Monitoring > Metrics on the left panel.
 
       - Time: Last 30 minutes or Last 1 hour (ideally in UTC)
       - Metric name: Ingress
