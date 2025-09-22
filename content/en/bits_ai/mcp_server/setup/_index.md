@@ -82,7 +82,7 @@ To install the extension:
 4. **Restart the IDE.**
 5. Confirm the Datadog MCP Server is available and the [tools](#available-tools) are listed in your IDE:
     - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
-    - VS Code: Open the chat panel, select Agent mode, and click the **Configure Tools** button.
+    - VS Code: Open the chat panel, select agent mode, and click the **Configure Tools** button.
        {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 
 ## Connect in supported AI clients

@@ -83,7 +83,7 @@ Install the extension either directly in the IDE, or from the web:
 
 The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
 
-1. Open the chat panel, select Agent mode, and click the **Configure Tools** button.
+1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
     {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
 
 1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
