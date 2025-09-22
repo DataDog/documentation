@@ -21,7 +21,7 @@ To compare metrics in Azure Monitor and in Datadog, make sure that your query in
 
 - The most granular set of dimensions available 
 - The primary aggregation type 
-- Lowest time granularity (no roll-up)
+- Lowest time granularity
 
 The following steps reconcile the metric `azure.storage_storageaccounts_blobservices.blob_capacity` between Azure and Datadog.
 
