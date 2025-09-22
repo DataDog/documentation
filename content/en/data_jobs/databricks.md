@@ -297,8 +297,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
    The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
-2. On the create policy page, click **Add Definition** under the **Definition** section.
-3. In the **Field** dropdown that appears, select **init_scripts**.
+2. In Compute, navigate to the Policies tab. Click Create Policy or navigate to an existing policy to edit it.
+3. On the create or edit policy page, click **Add Definition** under the **Definition** section.
+4. In the **Field** dropdown that appears, select **init_scripts**.
 
    {{< img src="data_jobs/databricks/configure-databricks-cluster-policy-init-script.png" alt="Databricks UI, cluster policy creation page, Definition section. A 'Field' drop-down with 'init_scripts' selected, showing a 'Source' drop-down and an 'File path' file selector." style="width:80%;" >}}
 
@@ -332,9 +333,6 @@ This can be done by following these steps for each variable:
 
 | Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| DD_API_KEY               | Your [Datadog API key][1].                                                                                                                                        |         |
-| DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
-| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
