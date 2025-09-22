@@ -29,7 +29,7 @@ algolia:
 
 Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
-To configure your ECS with Datadog, you can either use **Fleet Automation** or **install manually**. If you prefer to install manually, run one Agent container per EC2 host by creating a Datadog Agent task definition and deploying it as a Daemon service. Each Agent then monitors the other containers on its host. See the [Install manually](#install-manually) section for more details.
+To configure Amazon ECS with Datadog, you can either use **Fleet Automation** or **install manually**. If you prefer to install manually, run one Agent container per Amazon EC2 host by creating a Datadog Agent task definition and deploying it as a daemon service. Each Agent then monitors the other containers on its host. See the [Install manually](#install-manually) section for more details.
 
 
 ## Setup with Fleet Automation
