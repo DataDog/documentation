@@ -57,6 +57,16 @@ Creating a cross-organization connection allows you to query metrics from the so
 1. In the drop-down menu, select the _destination_ organization where you want to see the data.
 1. Click **Connect**.
 
+### Update a connection
+
+Updating a cross-organization connection allows you to change the data types that are shared from the source organization in the destination organization for an existing connection.
+
+1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
+1. Hover over the connection you wish to update. A pencil (**Edit**) icon appears on the right.
+1. Click the pencil (**Edit**) icon on the connection you wish to update. The **Edit Connection** dialog box appears.
+1. Select the checkboxes for the data types you wish to include.
+1. Click **Save**.
+
 ### Delete a connection
 
 Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics.
