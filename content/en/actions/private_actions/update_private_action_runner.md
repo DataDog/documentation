@@ -63,7 +63,6 @@ services:
       - DD_BASE_URL=https://app.datadoghq.com
       - DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config
       - STATSD_ENABLED=true
-      #  RUNNER_ENROLLMENT_TOKEN is not needed anymore
     volumes:
       - "./config:/etc/dd-action-runner/config"
 ```
