@@ -1,5 +1,6 @@
 ---
 title: Basic Agent Usage
+description: "Learn how to install, configure, and manage the Datadog Agent across different platforms and environments."
 aliases:
     - /guides/basic_agent_usage/
     - /agent/faq/where-is-the-configuration-file-for-the-agent/

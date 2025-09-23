@@ -656,7 +656,7 @@ Para proceder con la migración, compara las [instrucciones de instalación de l
 {{% /tab %}}
 {{% tab "Others" %}}
 
-1. Actualiza la capa de la biblioteca Lambda de Datadog de tu tiempo de ejecución a la última versión.
+1. Actualiza la capa de la librería Lambda de Datadog de tu tiempo de ejecución a la última versión.
 2. Instala la última versión de la Datadog Lambda Extension.
 3. Define las variables de entorno obligatorias `DD_SITE` y `DD_API_KEY_SECRET_ARN`.
 3. Define las variables de entorno `DD_ENV`, `DD_SERVICE` y `DD_VERSION` si antes las definiste como etiquetas de recursos de Lambda.
@@ -681,7 +681,7 @@ Para testear la imagen de contenedor de tu función de Lambda de forma local con
 
 ## Instrumentar AWS Lambda con la API de OpenTelemetry
 
-La biblioteca de rastreo de Datadog, que se incluye en la Datadog Lambda Extension tras su instalación, acepta los tramos y trazas generados a partir del código instrumentado por OpenTelemetry, procesa la telemetría y la envía a Datadog.
+La librería de rastreo de Datadog, que se incluye en la Datadog Lambda Extension tras su instalación, acepta los tramos y trazas generados a partir del código instrumentado por OpenTelemetry, procesa la telemetría y la envía a Datadog.
 
 Puedes utilizar este enfoque si, por ejemplo, tu código ya se instrumentó con la API de OpenTelemetry. También puedes utilizar este enfoque si quieres instrumentar mediante código agnóstico del proveedor con la API de OpenTelemetry sin dejar de obtener los beneficios de utilizar las bibliotecas de rastreo de Datadog.
 

@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 22 and upward</td>
+    <td>from 26 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 21</td>
+    <td>from 18 to 25</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -302,7 +302,7 @@ GraalVM Native Image is a technology that allows you to compile Java application
 
 Use:
 
-- [GraalVM JDK 21][7]
+- [GraalVM JDK 21 or JDK 25][7]
 - [Datadog Java tracer][1]
 
 ### Setup
@@ -317,7 +317,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -332,7 +332,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -365,7 +365,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </build>
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
-3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr’`.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true --enable-monitoring=jfr’`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -373,6 +373,8 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+<div class="alert alert-info">For GraalVM 25, you may see errors related to <code>Use of Unsafe</code>. Add <code>-Dnet.bytebuddy.safe=false</code> when building the native executable to address this.</div>
 
 #### Usage
 

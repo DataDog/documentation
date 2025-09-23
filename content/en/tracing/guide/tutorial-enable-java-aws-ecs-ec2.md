@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with EC2
+description: Step-by-step tutorial to enable distributed tracing for a Java application deployed on Amazon ECS using the EC2 launch type.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/java/

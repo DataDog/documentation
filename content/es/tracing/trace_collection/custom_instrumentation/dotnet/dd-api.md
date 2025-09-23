@@ -131,7 +131,7 @@ a través del (ámbito de variable = Tracer.Instance.StartActive("custom-operati
 }
 ```
 
-Añade [etiquetas de tramos][5] personalizadas a tus [tramos][6] para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel del comercio, el importe del pago o el ID de usuario.
+Añade [span tagss][5] personalizadas a tus [tramos][6] para personalizar tu capacidad de observación en Datadog. Las span tagss se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel del comercio, el importe del pago o el ID de usuario.
 
 ### Crear manualmente un nuevo tramo
 
@@ -152,7 +152,7 @@ a través de (var parentScope =
 }
 ```
 
-### Añadir etiquetas de tramos personalizadas
+### Añadir span tagss personalizadas
 
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 
