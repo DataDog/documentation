@@ -45,7 +45,7 @@ jobs:
 
     - name: Sanitize branch name
       id: sanitize_branch
-      uses: DataDog/websites-actions/sanitize-branch-name@bd5c9d44efd0a8f8ee312650fa39779544e3a84e
+      uses: DataDog/websites-actions/sanitize-branch-name@d3911e3d08fed171d4d0d5ae7158a6adf936a4d0
       env:
         GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
       with:
