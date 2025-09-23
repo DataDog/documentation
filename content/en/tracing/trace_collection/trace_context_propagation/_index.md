@@ -100,6 +100,7 @@ The Datadog Java SDK supports the following trace context formats, including dep
 |                        | `b3single`          |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
+| [Baggage][10]         | `baggage`           |
 | [AWS X-Ray][5]         | `xray`              |
 | [None][6]              | `none`              |
 
