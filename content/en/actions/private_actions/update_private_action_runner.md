@@ -30,7 +30,7 @@ Run:
 docker run -d \
  --cpus="0.25" \
  --memory="1g"  \
- -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config 
+ -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
  -v ./config:/etc/dd-action-runner/config \
  --health-cmd "curl http://localhost:9016/liveness" \
  --health-interval 10s \
@@ -54,18 +54,19 @@ Navigate to the directory containing your `docker-compose.yaml` file.
 ```yaml
 services:
   private-actions-runner:
-    image: gcr.io/datadoghq/private-action-runner:<latest_version>
+    image: gcr.io/datadoghq/private-action-runner:{{< private-action-runner-version "private-action-runner" >}}
     cpus: 25
     mem_limit: 1g
     deploy:
       replicas: 1
     environment:
       - DD_BASE_URL=https://app.datadoghq.com
-      - DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config 
-      - RUNNER_ENROLLMENT_TOKEN=<the_token>
+      - DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config
       - STATSD_ENABLED=true
+      #  RUNNER_ENROLLMENT_TOKEN is not needed anymore
     volumes:
       - "./config:/etc/dd-action-runner/config"
+```
 
 Start the container again:
 ```bash
