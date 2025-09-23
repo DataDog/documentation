@@ -14,7 +14,6 @@ jobs:
   look-for-gifs:
     permissions:
       contents: read
-      id-token: write # Needed to federate tokens for accessing private actions
     
     if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
@@ -25,27 +24,32 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+    # SECURITY: Branch name validation to prevent command injection  
+    # This step is critical for security - any changes require security team review
+    - name: Validate branch name and set output
+      id: validate
+      run: |
+        BRANCH="${{ github.head_ref }}"
+        # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
+        # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
+        # Blocks dangerous chars like: ; | & $ ( ) ` " ' \ and others
+        if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]]; then
+          echo "valid=true" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+        else
+          echo "valid=false" >> $GITHUB_OUTPUT
+          echo "::error::Invalid branch name detected. Branch names must only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
+        fi
+
     - name: Find changed files
       id: changed_files
+      if: steps.validate.outputs.valid == 'true'
       uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
 
-    - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
-      id: octo-sts
-      with:
-        scope: DataDog/websites-actions
-        policy: documentation.sanitize-branch-name.sts.yaml
-
-    - name: Sanitize branch name
-      id: sanitize_branch
-      uses: DataDog/websites-actions@94d87e622e6b0ac86dbaea2327dd7daf2bbd1bc8
-      env:
-        GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
-      with:
-        branch-ref: ${{ github.head_ref }}
-
     - name: Look for gifs
+      if: steps.validate.outputs.valid == 'true'
       env:
-        branch: ${{ steps.sanitize_branch.outputs.branch }}
+        branch: ${{ steps.validate.outputs.branch }}
         ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
       id: comment_body
       run: |

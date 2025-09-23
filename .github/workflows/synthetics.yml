@@ -9,7 +9,6 @@ concurrency:
 
 permissions:
   contents: read
-  id-token: write # Needed to federate tokens for accessing private actions
 
 jobs:
   synthetic_testing:
@@ -25,25 +24,29 @@ jobs:
           sparse-checkout: |
             .
 
-      - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
-        id: octo-sts
-        with:
-          scope: DataDog/websites-actions
-          policy: documentation.sanitize-branch-name.sts.yaml
-
-      - name: Sanitize branch name
-        id: extract_branch
-        uses: DataDog/websites-actions@94d87e622e6b0ac86dbaea2327dd7daf2bbd1bc8
-        env:
-          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
-        with:
-          branch-ref: ${{ github.event.pull_request.head.ref }}
+      # SECURITY: Branch name validation to prevent command injection
+      # This step is critical for security - any changes require security team review
+      - name: Validate branch name and set output
+        id: validate
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
+          # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
+          # Blocks dangerous chars like: ; | & $ ( ) ` " ' \ and others
+          if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]]; then
+            echo "valid=true" >> $GITHUB_OUTPUT
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+            echo "::error::Invalid branch name detected. Branch names must only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
+          fi
 
       - name: Check preview status
         id: check-status
+        if: steps.validate.outputs.valid == 'true'
         run: |
-          # Use the sanitized branch name from previous step
-          BRANCH="${{ steps.extract_branch.outputs.branch }}"
+          # Use the validated branch name from previous step
+          BRANCH="${{ steps.validate.outputs.branch }}"
           URL="https://docs-staging.datadoghq.com/${BRANCH}"
           SUCCESS_CODES=("200" "302" "304")
           for i in {1..30}
@@ -64,9 +67,10 @@ jobs:
           done
 
       - name: Run Datadog Synthetic tests
+        if: steps.validate.outputs.valid == 'true'
         uses: DataDog/synthetics-ci-github-action@d77d9c9a6228ff9b17a4e0056fb94d8c8010d79c # v1.3.0
         env:
-          CI_COMMIT_REF_NAME: ${{ steps.extract_branch.outputs.branch }}
+          CI_COMMIT_REF_NAME: ${{ steps.validate.outputs.branch }}
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}

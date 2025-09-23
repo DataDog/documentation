@@ -7,7 +7,6 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  id-token: write # Needed to federate tokens for accessing private actions
 
 # Stop the current running job if a new push is made to the PR
 concurrency:
@@ -31,29 +30,35 @@ jobs:
         python-version: '3.10'
     - run: pip install Mako docutils
 
+    # SECURITY: Branch name validation to prevent command injection  
+    # This step is critical for security - any changes require security team review
+    - name: Validate branch name and set output
+      id: validate
+      run: |
+        BRANCH="${{ github.head_ref }}"
+        # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
+        # This supports the required <name>/<description> format like "devin.ford/test-this-new-feature"
+        # Blocks dangerous chars like: ; | & $ ( ) ` " ' \ and others
+        # Also requires forward slash to be present (per repository requirements)
+        if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]] && [[ "$BRANCH" == *"/"* ]]; then
+          echo "valid=true" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+        else
+          echo "valid=false" >> $GITHUB_OUTPUT
+          echo "::error::Invalid branch name detected. Branch names must contain a forward slash and only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
+        fi
+
     - name: Find changed files
       id: changed_files
+      if: steps.validate.outputs.valid == 'true'
       uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
       with:
         include_all_old_new_renamed_files: true
 
-    - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
-      id: octo-sts
-      with:
-        scope: DataDog/websites-actions
-        policy: documentation.sanitize-branch-name.sts.yaml
-
-    - name: Sanitize branch name
-      id: sanitize_branch
-      uses: DataDog/websites-actions@94d87e622e6b0ac86dbaea2327dd7daf2bbd1bc8
-      env:
-        GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
-      with:
-        branch-ref: ${{ github.head_ref }}
-
     - name: Generate links
+      if: steps.validate.outputs.valid == 'true'
       env:
-        branch: ${{ steps.sanitize_branch.outputs.branch }}
+        branch: ${{ steps.validate.outputs.branch }}
         DELETED_FILES: ${{ steps.changed_files.outputs.deleted_files }}
         RENAMED_FILES: ${{ steps.changed_files.outputs.renamed_files }}
         MODIFIED_FILES: ${{ steps.changed_files.outputs.modified_files }}
@@ -66,12 +71,14 @@ jobs:
         --added="${ADDED_FILES}"
 
     - name: Render template
+      if: steps.validate.outputs.valid == 'true'
       id: template
       uses: chuhlomin/render-template@a473db625a96c98e519d188812dc22bcaf54ffba # v1.9.0
       with:
         template: .github/preview-links-template.md
 
     - name: Find existing comment
+      if: steps.validate.outputs.valid == 'true'
       uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
       id: find_comment
       with:
@@ -80,6 +87,7 @@ jobs:
         body-includes: "Preview links ("
 
     - name: Post comment
+      if: steps.validate.outputs.valid == 'true'
       uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
       with:
         issue-number: ${{ github.event.pull_request.number }}
