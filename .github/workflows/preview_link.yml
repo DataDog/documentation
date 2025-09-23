@@ -7,6 +7,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  id-token: write # Needed to federate tokens for accessing private actions
 
 # Stop the current running job if a new push is made to the PR
 concurrency:
@@ -36,9 +37,17 @@ jobs:
       with:
         include_all_old_new_renamed_files: true
 
+    - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
+      id: octo-sts
+      with:
+        scope: DataDog/websites-actions
+        policy: documentation.sanitize-branch-name.sts.yaml
+
     - name: Sanitize branch name
       id: sanitize_branch
       uses: DataDog/websites-actions/sanitize-branch-name@bd5c9d44efd0a8f8ee312650fa39779544e3a84e
+      env:
+        GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
       with:
         branch-ref: ${{ github.head_ref }}
 
