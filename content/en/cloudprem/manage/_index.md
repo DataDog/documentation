@@ -9,7 +9,7 @@ description: Learn how to monitor, maintain, and operate your CloudPrem deployme
 
 ## Dashboards
 
-CloudPrem provides an out-of-the-box dashboard that monitors CloudPrem's key metrics
+CloudPrem provides an out-of-the-box dashboard that monitors CloudPrem's key metrics.
 
 ### Setup
 
