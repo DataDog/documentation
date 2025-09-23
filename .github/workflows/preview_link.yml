@@ -37,9 +37,7 @@ jobs:
       run: |
         BRANCH="${{ github.head_ref }}"
         # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
-        # This supports the required <name>/<description> format like "devin.ford/test-this-new-feature"
-        # Blocks dangerous chars like: ; | & $ ( ) ` " ' \ and others
-        # Also requires forward slash to be present (per repository requirements)
+        # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
         if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]] && [[ "$BRANCH" == *"/"* ]]; then
           echo "valid=true" >> $GITHUB_OUTPUT
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
