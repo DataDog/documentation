@@ -1,6 +1,8 @@
 ---
 title: Setting up Heroku Postgres for Database Monitoring
 private: true
+aliases:
+- /database_monitoring/guide/heroku-postgres/
 further_reading:
 - link: "/agent/basic_agent_usage/heroku/"
   tag: "Documentation"
