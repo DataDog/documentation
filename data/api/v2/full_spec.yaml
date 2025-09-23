@@ -61316,6 +61316,45 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+  /api/v2/integration/aws/iam_permissions/resource_collection:
+    get:
+      description: Get all resource collection AWS IAM permissions required for the
+        AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsResourceCollection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration resource collection IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get resource collection IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 8
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/standard:
+    get:
+      description: Get all standard AWS IAM permissions required for the AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsStandard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration standard IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS integration standard IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 7
+      x-undo:
+        type: safe
   /api/v2/integration/aws/logs/services:
     get:
       description: Get a list of AWS services that can send logs to Datadog.
