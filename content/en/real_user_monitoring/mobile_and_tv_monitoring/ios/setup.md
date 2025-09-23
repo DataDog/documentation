@@ -540,6 +540,6 @@ See [Supported versions][9] for a list of operating system versions and platform
 [4]: /getting_started/tagging/using_tags/#rum--session-replay
 [5]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
 [6]: https://github.com/DataDog/dd-sdk-ios
-[7]: /error_tracking/frontend/ios
+[7]: /error_tracking/frontend/mobile/ios
 [8]: /real_user_monitoring/explorer/
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
