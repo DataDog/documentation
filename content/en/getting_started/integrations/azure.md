@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Azure
+description: Connect Microsoft Azure with Datadog using Azure Native or Standard integration options. Configure metric collection, log forwarding, and Agent installation.
 further_reading:
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'

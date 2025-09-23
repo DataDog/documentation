@@ -152,7 +152,7 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [3]: /developers/guide/custom-python-package/
 [4]: /integrations/
 [5]: /agent/supported_platforms/?tab=linux
-[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linuxs
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://docs.datadoghq.com/agent/configuration/proxy/
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/

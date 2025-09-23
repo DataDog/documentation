@@ -25,6 +25,12 @@ For more information, including supported operating systems, see the OpenTelemet
 Add the following lines to your Collector configuration:
 
 ```yaml
+processors:
+  resourcedetection:
+    detectors: [system]
+    system:
+      hostname_sources: [os]
+
 receivers:
   hostmetrics:
     collection_interval: 10s
@@ -46,6 +52,13 @@ receivers:
       memory:
       network:
       processes:
+
+service:
+  pipelines:
+    metrics:
+      receivers: [hostmetrics]
+      processors: [resourcedetection]
+      exporters: [datadog]
 ```
 
 {{% /tab %}}

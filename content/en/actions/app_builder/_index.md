@@ -1,5 +1,6 @@
 ---
 title: App Builder
+description: Low-code platform for building internal tools with drag-and-drop interface, JavaScript support, and integration with external services.
 disable_toc: false
 aliases:
     - /developers/datadog_apps/

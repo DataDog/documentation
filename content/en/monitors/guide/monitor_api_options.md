@@ -1,5 +1,6 @@
 ---
 title: Monitor API Options
+description: "Comprehensive reference for monitor API configuration options including common settings, permissions, anomaly alerts, and metric alerts."
 ---
 
 ## Common options

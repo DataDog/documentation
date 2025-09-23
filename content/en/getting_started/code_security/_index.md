@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Code Security
+description: Secure applications with SAST, SCA, and IAST tools to detect vulnerabilities in first-party code and open source libraries.
 aliases:
 - /getting_started/code_analysis/
 ---

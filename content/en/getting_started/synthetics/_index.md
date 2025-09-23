@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Synthetic Monitoring
+description: Monitor system performance with simulated requests for API, browser, and mobile tests across global locations.
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
@@ -75,7 +76,7 @@ For more information, see [Synthetic Monitoring notifications][9].
 
 ## Version History
 
-Use [Version History in Synthetic Monitoring][8] to restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+Use [Version History in Synthetic Monitoring][8] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
 
 ## Further Reading
 

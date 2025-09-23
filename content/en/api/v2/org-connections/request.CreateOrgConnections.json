@@ -1,0 +1,18 @@
+{
+  "data": {
+    "type": "org_connection",
+    "relationships": {
+      "sink_org": {
+        "data": {
+          "type": "orgs",
+          "id": "83999dcd-7f97-11f0-8de1-1ecf66f1aa85"
+        }
+      }
+    },
+    "attributes": {
+      "connection_types": [
+        "logs"
+      ]
+    }
+  }
+}

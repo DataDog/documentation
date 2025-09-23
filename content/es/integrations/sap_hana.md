@@ -74,7 +74,7 @@ Este check monitoriza [SAP HANA][1] 2.0, SPS 2 a través del Datadog Agent.
 
 ### Instalación
 
-El check de SAP HANA está incluido en el paquete del [Datadog Agent][2]. Para utilizar esta integración, es necesario instalar la biblioteca [hdbcli][3] manualmente.
+El check de SAP HANA está incluido en el paquete del [Datadog Agent][2]. Para utilizar esta integración, es necesario instalar la librería [hdbcli][3] manualmente.
 
 
 Para Unix:

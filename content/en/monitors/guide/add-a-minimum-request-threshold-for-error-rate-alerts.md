@@ -1,5 +1,6 @@
 ---
 title: Add a Minimum Request Threshold for Error Rate Alerts
+description: "Learn to set minimum request thresholds for error rate monitors using Boolean functions to reduce false alarms during low-traffic periods."
 disable_toc: false
 further_reading:
 - link: "/metrics/nested_queries"

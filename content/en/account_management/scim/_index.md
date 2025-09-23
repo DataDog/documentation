@@ -1,5 +1,6 @@
 ---
 title: User Provisioning with SCIM
+description: Automate user provisioning and deprovisioning in Datadog using SCIM integration with Microsoft Entra ID and Okta identity providers.
 further_reading:
     - link: '/account_management/scim/azure/'
       tag: 'Documentation'

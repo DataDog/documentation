@@ -127,6 +127,10 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: If you have the proper permissions on the app registration but your network is blocking Datadog's webhook IPs, you may see unexpected errors that appear to be permission issues.
+
+To resolve this, add Datadog's webhook IPs to your network allowlist by visiting the `Webhooks` section at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
+
 ### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 

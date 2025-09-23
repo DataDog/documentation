@@ -1,5 +1,6 @@
 ---
 title: Integration Management
+description: Guide to managing official Datadog integrations using the datadog-agent integration command, including install, remove, show, and freeze operations.
 algolia:
   tags: ['integration management']
 ---
