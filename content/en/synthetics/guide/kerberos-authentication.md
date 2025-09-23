@@ -7,7 +7,7 @@ further_reading:
     text: 'Monitor your Synthetic private locations with Datadog'
   - link: 'https://www.datadoghq.com/blog/kerberos-synthetics/'
     tag: 'Blog'
-    text: 'Kerberos authentication for Synthetic Monitoring'
+    text: 'Proactively monitor Kerberos-authenticated web apps and APIs with Datadog Synthetics'
   - link: '/synthetics/guide/browser-tests-passkeys'
     tag: 'Guide'
     text: 'Learn about Passkeys in Browser Tests'
