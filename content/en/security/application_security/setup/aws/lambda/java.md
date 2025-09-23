@@ -21,7 +21,7 @@ further_reading:
 Configuring App and API Protection (AAP) for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from AAP. Find them on [the Security tab of your Software Catalog][1].
-2. Setting up AAP instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][7], or manually by using the Datadog tracing layers.
+2. Setting up AAP instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Prerequisites
@@ -31,9 +31,9 @@ Configuring App and API Protection (AAP) for AWS Lambda involves:
 
 ## Compatibility
 
-**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][3] to block IPs in your [WAF][4].
 
-To fully instrument your Java Lambda functions with distributed tracing, use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), or Java 17 (`java17`) runtimes with at least 1024MB of memory. If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) together with `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][14] before enabling AAP.
+To fully instrument your Java Lambda functions with distributed tracing, use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), or Java 17 (`java17`) runtimes with at least 1024MB of memory. If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) together with `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][5] before enabling AAP.
 
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
@@ -50,7 +50,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][7] can be used to automatically configure and deploy your lambda with AAP.
+The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your lambda with AAP.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -74,9 +74,9 @@ To install and configure the Datadog Serverless Framework plugin:
        enableDDTracing: true
        enableASM: true
    ```
-   See also the complete list of [plugin parameters][9] to further configure your lambda settings.
+   See also the complete list of [plugin parameters][6] to further configure your lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][3].
+4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][7].
 
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
@@ -99,7 +99,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
 3. Configure the AWS credentials:
 
-    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][10]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
+    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][8]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
 
 4. Configure the Datadog site:
 
@@ -138,12 +138,12 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
    **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
-    Additional parameters can be found in the [CLI documentation][11].
+    Additional parameters can be found in the [CLI documentation][9].
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Construct][12] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+The [Datadog CDK Construct][10] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
 1. Install the Datadog CDK constructs library:
 
@@ -177,9 +177,9 @@ The [Datadog CDK Construct][12] automatically installs Datadog on your functions
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][13] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][11] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
-    More information and additional parameters can be found on the [Datadog CDK documentation][12].
+    More information and additional parameters can be found on the [Datadog CDK documentation][10].
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -211,9 +211,8 @@ The [Datadog CDK Construct][12] automatically installs Datadog on your functions
      DD_SERVERLESS_APPSEC_ENABLED: true
    ```
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][3].
+4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][7].
 
-[15]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -223,17 +222,14 @@ The [Datadog CDK Construct][12] automatically installs Datadog on your functions
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?query=type%3Afunction%20&env=prod&groupBy=&hostGroup=%2A&lens=Security&sort=-attackExposure&view=list
-[2]: /serverless/distributed_tracing/
-[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-[5]: /actions/workflows/
-[6]: /security/application_security/waf-integration/
-[7]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[8]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[9]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
-[10]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[11]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-[12]: https://github.com/DataDog/datadog-cdk-constructs
-[13]: https://app.datadoghq.com/organization-settings/api-keys
-[14]: /serverless/guide/upgrade_java_instrumentation/
-[15]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[3]: /actions/workflows/
+[4]: /security/application_security/waf-integration/
+[5]: /serverless/guide/upgrade_java_instrumentation/
+[6]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[7]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[8]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[9]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[10]: https://github.com/DataDog/datadog-cdk-constructs
+[11]: https://app.datadoghq.com/organization-settings/api-keys
 [apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
