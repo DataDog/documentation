@@ -84,20 +84,19 @@ DatadogRUM.xcframework
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][2].
-2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][3].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [iOS Data Collected][4].
+1. Navigate to **Error Tracking** > **[Setup][2]** > **Mobile and Browser**.
+2. Select `iOS` as the application type and enter an application name.
+3. Click **Create Application** to generate a unique Datadog application ID and client token.
 
-   {{< img src="real_user_monitoring/error_tracking/mobile-new-application-1.png" alt="Create an application for iOS in Datadog" style="width:90%;">}}
+### Step 3 - Initialize the library
+
+#### Update the initialization snippet
+
+In the initialization snippet, set an environment name and service name.
 
 To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-ios` library, they would be exposed client-side in the iOS application's byte code.
 
 For more information about setting up a client token, see the [Client token documentation][6].
-
-### Step 3 - Initialize the library
-
-In the initialization snippet, set an environment name, service name, and client token.
 
 The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
@@ -328,7 +327,27 @@ configuration.site = [DDSite ap2];
 {{< /tabs >}}
 {{< /site-region >}}
 
-The iOS SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][8] to the SDK configuration, see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
+#### Instrument your webviews (optional)
+
+Add the DatadogWebViewTracking module using your preferred dependency manager.
+
+To track errors and performance issues within web content, enable webview tracking for your WKWebView instances. This allows you to monitor JavaScript errors, network requests, and user interactions that occur within embedded web pages, giving you complete visibility into your hybrid app's web components.
+
+Specify which hosts to track by providing a list of domains. Only web content from the specified hosts are monitored and reported to Datadog.
+
+```swift
+import DatadogWebViewTracking
+
+let webview = WKWebView(...)
+
+// start tracking webviews
+WebViewTracking.enable(webView: webview, hosts: ["foo.bar"])
+
+//stop tracking webviews (after the user stops navigating the web page)
+WebViewTracking.disable(webView: webview)
+```
+
+For more information, see [Web View Tracking][2].
 
 ### Step 4 - Add crash reporting
 
