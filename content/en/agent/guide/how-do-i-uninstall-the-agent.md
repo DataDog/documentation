@@ -1,5 +1,6 @@
 ---
 title: Uninstalling the Agent
+description: "Learn how to uninstall the Datadog Agent from different operating systems, platforms, and configuration management tools."
 aliases:
   - /agent/faq/how-do-i-uninstall-the-agent/
 further_reading:

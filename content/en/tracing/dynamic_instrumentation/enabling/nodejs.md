@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Node.js
+description: Set up Dynamic Instrumentation for Node.js applications to add probes and capture data without code changes.
 private: false
 code_lang: nodejs
 type: multi-code-lang
@@ -22,7 +23,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.45.0][6] or higher.
+1. Install or upgrade your Agent to version [7.49.0][6] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 3. Install or upgrade the Node.js tracing library to version 5.48.0 or higher, by following the [relevant instructions][2].
 4. If your source code is transpiled during deployment (for example, if using TypeScript), ensure that source maps are published along with the deployed Node.js application.

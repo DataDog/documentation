@@ -1,5 +1,6 @@
 ---
 title: Search RUM Events
+description: "Search and filter RUM events by type, attributes, and full-text queries to analyze user sessions, performance, and errors."
 further_reading:
 - link: "/real_user_monitoring/explorer/group/"
   tag: "Documentation"

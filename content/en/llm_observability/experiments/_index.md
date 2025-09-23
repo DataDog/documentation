@@ -52,7 +52,7 @@ LLMObs.enable(
 ## Datasets
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
 
 ### Creating a dataset
 
@@ -841,14 +841,14 @@ Empty body on success.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[1]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
-[10]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[10]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python

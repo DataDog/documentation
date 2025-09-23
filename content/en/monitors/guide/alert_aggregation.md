@@ -1,5 +1,6 @@
 ---
-title: Alert aggregation 
+title: Alert aggregation
+description: "Learn about simple and multi alert aggregation strategies to manage alert noise and ensure actionable notifications for your monitoring system."
 further_reading:
 - link: "/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations"
   tag: "Documentation"

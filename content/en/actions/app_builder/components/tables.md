@@ -76,7 +76,7 @@ If you want to filter the results of a query itself, then use those results in y
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component and set its **data source** property to the query that you added.
-1. Expand the **Advanced** section of the query and find **Post-query Tranformation**.
+1. Expand the **Advanced** section of the query and find **Post-query Transformation**.
 1. Replace `return outputs` with the following line:
 
     ```

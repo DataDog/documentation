@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: "Troubleshoot common issues with RUM Browser SDK including missing data, ad blockers, network restrictions, and configuration problems."
 further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'

@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-
+description: "Upload JavaScript source maps to enhance error tracking with readable stack traces and better debugging for minified code."
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'

@@ -1,6 +1,6 @@
 ---
 title: Investigate Zendesk Tickets with Session Replay
-
+description: "Integrate Session Replay with Zendesk to help support teams troubleshoot user issues by watching replays directly from tickets."
 ---
 
 ## Overview
