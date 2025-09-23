@@ -9,6 +9,7 @@ jobs:
     permissions:
       contents: write # for git push
       id-token: write # Needed to federate tokens.
+      pull-requests: write # Action creates a PR.
     runs-on: ubuntu-latest
     name: Find latest synthetics-worker version
     steps:
