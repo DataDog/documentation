@@ -37,8 +37,10 @@ To install the module:
    cd /tmp && \
        # Get latest release info using curl and basic text processing
        RELEASE_DATA=$(curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest) && \
+       
        # Extract download URL for the zip file using grep and sed
        DOWNLOAD_URL=$(echo "$RELEASE_DATA" | grep '"browser_download_url".*mod_datadog_artifact.zip' | sed 's/.*"browser_download_url": *"\([^"]*\)".*/\1/') && \
+       
        # Download and install
        curl -Lf -o mod_datadog_artifact.zip "$DOWNLOAD_URL" && \
        unzip -j mod_datadog_artifact.zip -d /usr/lib/apache2/modules/ && \
