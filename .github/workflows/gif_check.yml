@@ -28,9 +28,15 @@ jobs:
       id: changed_files
       uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
 
+    - name: Sanitize branch name
+      id: sanitize_branch
+      uses: DataDog/websites-actions/sanitize-branch-name@bd5c9d44efd0a8f8ee312650fa39779544e3a84e
+      with:
+        branch-ref: ${{ github.head_ref }}
+
     - name: Look for gifs
       env:
-        branch: ${{ github.head_ref }}
+        branch: ${{ steps.sanitize_branch.outputs.branch }}
         ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
       id: comment_body
       run: |

@@ -36,9 +36,15 @@ jobs:
       with:
         include_all_old_new_renamed_files: true
 
+    - name: Sanitize branch name
+      id: sanitize_branch
+      uses: DataDog/websites-actions/sanitize-branch-name@bd5c9d44efd0a8f8ee312650fa39779544e3a84e
+      with:
+        branch-ref: ${{ github.head_ref }}
+
     - name: Generate links
       env:
-        branch: ${{ github.head_ref }}
+        branch: ${{ steps.sanitize_branch.outputs.branch }}
         DELETED_FILES: ${{ steps.changed_files.outputs.deleted_files }}
         RENAMED_FILES: ${{ steps.changed_files.outputs.renamed_files }}
         MODIFIED_FILES: ${{ steps.changed_files.outputs.modified_files }}
