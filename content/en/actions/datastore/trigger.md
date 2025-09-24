@@ -17,7 +17,7 @@ You can add workflows to your datastores that automatically trigger when records
 ## Create a new automation rule
 
 To create a new automation rule: 
-1. Navigate to [Datastores page][1].
+1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Configure your new automation rule: 
@@ -29,7 +29,7 @@ To create a new automation rule:
 ## Edit an automation rule 
 
 To edit an automation rule: 
-1. Navigate to [Datastores][1].
+1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
@@ -39,7 +39,7 @@ To edit an automation rule:
 ## Delete an automation rule
 
 To delete an automation rule: 
-1. Navigate to [Datastores][1].
+1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 

@@ -13,12 +13,12 @@ further_reading:
 
 ## Required Datadog role permissions
 
-To interact with the Actions Datastore, your Datadog account must have the following [permissions][1], which are included in the Datadog Standard Role:
+To interact with Datastores, your Datadog account must have the following [permissions][1], which are included in the Datadog Standard Role:
 
 * `actions_datastore_read` - Allows read access to the data within the Actions Datastore.
 * `actions_datastore_write` - Allows modification of data within the Actions Datastore, including adding, editing, and deleting records.
 
-To use the [Actions Datastore UI][2], you also need the following permission, which is also included in the Datadog Standard Role:
+To use the [Datastores UI][2], you also need the following permission, which is also included in the Datadog Standard Role:
 
 * `actions_datastore_manage` - Allows management of the Actions Datastore, including creating, updating, and deleting the datastore itself.
 
