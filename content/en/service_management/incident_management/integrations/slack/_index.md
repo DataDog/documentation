@@ -32,13 +32,11 @@ The Slack integration documentation is organized around the typical lifecycle of
 5. **[Reference Slack configurations](#additional-slack-configurations) and [Slack commands](#slack-incident-commands)**: Explore detailed configuration options and see the full list of available Slack commands to tailor and streamline your incident response workflows.
 
 
-<!-- ## Prerequisites -->
-<!-- What permissions does the user need to be aware of to use this, can anyone enable Slack or do they need to be Admin? -->
-
+## Prerequisites
+Install the integration through the [Slack Integration tile][1]. For more information, see the [Slack integration][2] documentation.
 
 ## Setup
 
-1. Install the integration through the [Slack Integration tile][1]. For more information, see the [Slack integration][2] documentation.
 1. After the integration is installed, navigate to **[Service Management > Incidents > Settings > Integrations][3]**.
 1. Select the Slack integration.
 1. Toggle **Create Slack channels for incidents** to enable the Slack feature for Incident Management.
