@@ -327,10 +327,10 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
             | Variable                 |  Description                                                                                                                                                      |  Default |
             |--------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------|
-            | DRIVER_LOGS_ENABLED      | Collect spark driver logs in  Datadog.                                                                                                                          | false   |
-            | WORKER_LOGS_ENABLED      | Collect spark workers logs in  Datadog.                                                                                                                            | false   |
-            | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics, using comma- or space-separated key:value pairs. Follow [Datadog tag  conventions][4]. Example: `env:staging,team:data_engineering` |         |
-            | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this  cluster.                                                                                          |         |
+            | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
+            | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                            | false   |
+            | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics, using comma- or space-separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+            | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
             | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
           {{< img src="data_jobs/databricks/configure-databricks-cluster-policy-envvars.png" alt="Databricks UI, cluster policy creation page, Definition section. A 'Field' drop-down with 'spark_env_vars' selected, showing text boxes to enter a 'Key' and 'Value' envvar configuration. A 'Type' dropdown with 'Fixed' selected, and a 'Hidden' checkbox that is selected." style="width:80%;" >}}
