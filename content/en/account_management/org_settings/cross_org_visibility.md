@@ -38,7 +38,7 @@ After you set up an organization connection, the exposed data is still stored in
 
 ### Scope
 
-Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2]. HIPAA-enabled organizations cannot use cross-organization visibility.
+Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2].
 
 All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
 
@@ -159,7 +159,13 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 By default, only users attached to roles with the _Org Connection Read_ permission can see the list of cross-organization connections. Users attached to roles with the _Org Connection Write_ permission can create and delete cross-organization connections. 
 
 ### Granular access controls
-Use [granular access controls][12] to limit the teams, roles, or users that can edit or query a cross-organization connection:
+Use [granular access controls][12] to limit the teams, roles, or users that can edit or query a cross-organization connection. These access controls govern:
+- From the source organization: who can edit the connection.
+- From the destination organization: who can view the shared data, and who can edit the connection.
+
+Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org. 
+
+**Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information to destination organizations.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
 1. Hover over the cross-organization connection on which you would like to set granular permissions. **Permissions** and **Delete** icons appear on the right.
@@ -192,3 +198,5 @@ To restore general access to a cross-organization connection with restricted acc
 [10]: /dashboards/sharing/shared_dashboards/#public-shared-dashboards
 [11]: /getting_started/site
 [12]: /account_management/rbac/granular_access
+[13]: /account_management/rbac/data_access/
+[14]: /logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
