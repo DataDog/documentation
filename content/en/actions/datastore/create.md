@@ -18,7 +18,7 @@ further_reading:
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can create and manage datastores from the [Datastores][1].
+You can create and manage datastores from the [Datastores page][1].
 
 ## Create a datastore
 
