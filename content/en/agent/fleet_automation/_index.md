@@ -3,6 +3,9 @@ title: Fleet Automation
 description: "Centrally govern and remotely manage Datadog Agents at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/cloudcraft-observability-overlay
+  tag: Blog
+  text: Visually identify observability gaps with Cloudcraft in Datadog
 - link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
