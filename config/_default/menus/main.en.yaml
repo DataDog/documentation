@@ -2863,11 +2863,16 @@ menu:
       parent: datastore
       identifier: use
       weight: 2
+    - name: Use Automation Rules
+      url: actions/datastore/trigger
+      parent: datastore
+      identifier: trigger
+      weight: 3
     - name: Access and Authentication
       url: actions/datastore/auth
       parent: datastore
       identifier: auth
-      weight: 3
+      weight: 4
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
