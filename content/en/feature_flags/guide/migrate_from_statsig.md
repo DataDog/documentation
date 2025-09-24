@@ -21,7 +21,9 @@ This guide walks you through the process of migrating feature flags from Statsig
 
 <div class="alert alert-info"><strong>Note</strong>: Unless otherwise specified, all code examples are in TypeScript.</div>
 
-## 1. Install the Eppo SDK {#install-sdk}
+## Migration process
+
+### 1. Install the Eppo SDK {#install-sdk}
 
 1. Log in to Eppo at [https://eppo.cloud/][3].
 1. Generate an SDK key by navigating to **Flags** > **Environments**, then clicking **Create** > **SDK Key**.
@@ -50,7 +52,7 @@ await init({
    {{< /code-block >}}
 
 
-## 2. Set up and verify a new flag {#set-up-flag}
+### 2. Set up and verify a new flag {#set-up-flag}
 
 1. Create a flag in Eppo by navigating to **Flags** > **Feature Flags**, then clicking **Create Flag** > **Feature Flag**.
 1. Implement the flag in your application code.
@@ -71,17 +73,17 @@ const variation = getInstance().getBooleanAssignment(
 1. Deploy the application to your staging or testing environments and verify the flag's functionality.
 1. Deploy the application to your production environment and test the flag again.
 
-## 3. Identify critical flags in Statsig {#identify-critical-flags}
+### 3. Identify critical flags in Statsig {#identify-critical-flags}
 
 1. Make a list of all the feature flags currently in use within your application.
 1. Categorize the flags as critical or non-critical based on their importance and impact on your application's functionality.
 1. Flags that are disabled or are rolled out to 100% can be categorized as non-critical.
 
-## 4. Remove non-critical flag code {#remove-non-critical-flags}
+### 4. Remove non-critical flag code {#remove-non-critical-flags}
 1. For the non-critical flags identified in the previous step, remove the flag code from your application and from Statsig. They are no longer relevant.
 1. Test your application thoroughly to ensure that the removal of these flags does not introduce any regressions or unintended behavior.
 
-## 5. Create fallback values for critical flags {#create-fallback-values}
+### 5. Create fallback values for critical flags {#create-fallback-values}
 1. Implement a function that wraps calling Eppo's SDK to have a fallback mechanism to use the Statsig flag values if the new service is unavailable or experiences issues.
 1. When attempting to retrieve a flag value from Eppo, catch any exceptions or errors that may occur due to service unavailability or issues and return the old value.
 1. Eppo SDKs use only strongly typed assignment functions (for example, `getBooleanAssignment`), whereas Statsig SDKs use specific evaluation functions for different types. For such SDKs, it's recommended to create wrappers for each type. You can then replace uses of the Statsig functions with the typed wrappers in your application. Here are examples:
@@ -211,7 +213,7 @@ export function getJSONVariationWrapper(
 }
     {{< /code-block >}}
 
-## 6. Recreate critical flags in Eppo {#recreate-critical-flags}
+### 6. Recreate critical flags in Eppo {#recreate-critical-flags}
 
 <div class="alert alert-info"><strong>Note</strong>: Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
  
@@ -219,7 +221,7 @@ export function getJSONVariationWrapper(
 1. Ensure that the flag configurations—such as rollout percentages, targeting rules, and variations—are accurately replicated in the new service.
 
 
-## 7. Switch existing flags to the new application {#switch-to-new-app}
+### 7. Switch existing flags to the new application {#switch-to-new-app}
 1. After you have verified that the Eppo flags are working correctly, switch your application to use the function that checks Eppo for flags instead of the Statsig ones.
 1. Remove the fallback mechanism and the Statsig flag code after you have confirmed that the Eppo flags are working as expected in production.
 1. It's recommended to keep the wrapper as a facade to make future changes easier, as they typically only need to be made to the wrapper.
