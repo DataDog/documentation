@@ -174,5 +174,6 @@ content/en/data_streams/*.md                      @Datadog/data-streams-monitori
 content/.gitignore                                @Datadog/documentation
 
 # Cdocs
-customization_config/**/*                                      @DataDog/teams/docs-dev @DataDog/documentation
+customization_config/                                         @DataDog/teams/docs-dev @DataDog/documentation
 content/en/**/*.mdoc.md                                       @DataDog/teams/docs-dev @DataDog/documentation  
+layouts/shortcodes/*.mdoc.md                                  @DataDog/teams/docs-dev @DataDog/documentation  
