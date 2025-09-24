@@ -56634,12 +56634,14 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_write
       summary: Create or update a budget
       tags:
       - Cloud Cost Management
       x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         operationId: DeleteBudget
         parameters:
@@ -56715,12 +56717,14 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
       summary: List budgets
       tags:
       - Cloud Cost Management
       x-menu-order: 33
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost/custom_costs:
