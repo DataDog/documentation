@@ -137,7 +137,7 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
 [4]: /observability_pipelines/configuration/set_up_pipelines/#set-up-a-pipeline
-[5]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#bootstrap-options
+[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 [6]: /observability_pipelines/configuration/destinations/#event-batching-intro
 [7]: https://app.datadoghq.com/logs/
 [8]: /containers/docker/log/?tab=containerinstallation#linux
@@ -147,5 +147,5 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
-[15]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#enable-liveness-and-readiness-probe
+[15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-liveness-and-readiness-probe
 [16]: /observability_pipelines/configuration/sources/#tls-certificates

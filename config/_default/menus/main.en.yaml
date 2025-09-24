@@ -5308,6 +5308,16 @@ menu:
       identifier: observability_pipelines_install_the_worker
       parent: observability_pipelines_configuration
       weight: 103
+    - name: Advanced Worker Configuration
+      url: observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+      parent: observability_pipelines_install_the_worker
+      identifier: observability_pipelines_advanced_worker_configurations
+      weight: 10301
+    - name: Run Multiple Pipelines on a Host
+      identifier: observability_run_multiple_pipelines_on_a_host
+      url: /observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/
+      parent: observability_pipelines_install_the_worker
+      weight: 10302
     - name: Sources
       url: observability_pipelines/configuration/sources/
       parent: observability_pipelines_configuration
@@ -5623,30 +5633,20 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
       weight: 2
-    - name: Advanced Worker Configuration
-      url: observability_pipelines/scaling_and_performance/advanced_worker_configurations/
-      parent: observability_pipelines_scaling_and_performance
-      identifier: observability_pipelines_advanced_worker_configurations
-      weight: 201
-    - name: Run Multiple Pipelines on a Host
-      identifier: observability_run_multiple_pipelines_on_a_host
-      url: /observability_pipelines/scaling_and_performance/run_multiple_pipelines_on_a_host/
-      parent: observability_pipelines_scaling_and_performance
-      weight: 202
     - name: Handling Load and Backpressure
       url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
-      weight: 203
+      weight: 201
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 204
-    - name: Monitoring and Maintenance
-      url: observability_pipelines/monitoring_and_maintenance/
+      weight: 202
+    - name: Monitoring and Troubleshooting
+      url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
-      identifier: observability_pipelines_monitoring_and_maintenance
+      identifier: observability_pipelines_monitoring_and_troubleshooting
       weight: 3
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_maintenance/worker_cli_commands/
@@ -5664,10 +5664,10 @@ menu:
       identifier: observability_pipelines_pipeline_usage_metrics
       weight: 303
     - name: Troubleshooting
-      url: observability_pipelines/troubleshooting/
+      url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines
-      weight: 4
+      weight: 304
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines

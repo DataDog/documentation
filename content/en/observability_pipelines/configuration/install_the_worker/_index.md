@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
     - /observability_pipelines/install_the_worker/
 further_reading:
-- link: "/observability_pipelines/scaling_and_performance/advanced_worker_configurations/"
+- link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
   text: "Advanced Worker configurations"
 - link: "/observability_pipelines/monitoring_and_maintenance/worker_cli_commands/"
@@ -231,7 +231,7 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#bootstrap-options
+[1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 [2]: /observability_pipelines/configuration/sources/
 [3]: /observability_pipelines/configuration/destinations/
 [4]: /observability_pipelines/configuration/processors/
