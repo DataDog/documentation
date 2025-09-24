@@ -68451,6 +68451,11 @@ paths:
         cursorPath: meta.page.cursor
         limitParam: page[limit]
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
