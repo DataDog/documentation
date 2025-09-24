@@ -152,13 +152,14 @@ To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
 **Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
 
-#### Metric arithmetic using an integer
+{{ % collapse-content title="Metric arithmetic using an integer" level="h5" %}}
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
 {{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
+ {{% /collapse-content %}}
 
-#### Arithmetic between two metrics
+{{ % collapse-content title="Arithmetic between two metrics" level="h5" %}}
 
 Visualize the percentage of a metric by dividing one metric over another, for example:
 
@@ -181,8 +182,11 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
+{{% /collapse-content %}}
 
-#### Minimum or Maximum between two queries
+
+{{ % collapse-content title="Minimum or Maximum between two queries" level="h5" %}}
+
 Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
 
 ```text
@@ -199,8 +203,7 @@ min(status:error, status:warn)
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
-#### Exponentiation
-
+{{ % collapse-content title="Exponentiation" level="h5" %}}
 You can now use the `pow()` function to raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
 
 Here is an example of how to forecast user growth by applying an exponential growth factor to a prior time window:
@@ -216,6 +219,22 @@ pow(ping{region:*}, 2)
 ```
 
 To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
+{{% /collapse-content %}}
+
+{{ % collapse-content title="Time() function" level="h5" %}}
+TThe time() function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which is ideal for monitoring data freshness or calculating time until an expiration.
+
+For example, to calculate the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between now and the timestamp of the backup metric.
+
+```text
+time() - max:backup.last_completed_timestamp{*}
+```
+
+In the editor, this would look like:
+<!-- TBD after designs are done, need to also add units here like time_s and explain units -->
+
+{{% /collapse-content %}}
+
 
 ### Create an alias
 
