@@ -31,6 +31,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
     tag: "Blog"
     text: "Unify remediation and communication with Datadog Incident Response"
+  - link: https://www.datadoghq.com/blog/sre-security-incident-management
+    tag: Blog
+    text: Aligning SRE and security for better incident response
 ---
 
 
