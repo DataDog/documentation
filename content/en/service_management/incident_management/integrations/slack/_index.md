@@ -1,5 +1,6 @@
 ---
 title: Integrate Slack with Datadog Incident Management
+description: Manage Datadog incidents directly from Slack.
 further_reading:
 - link: "integrations/slack/"
   tag: "Documentation"
@@ -29,7 +30,7 @@ The Slack integration documentation is organized around the typical lifecycle of
 3. [**Manage incident channels**](#incident-channels): Use dedicated Slack channels with commands, syncing, and automations.
 4. [**Configure global notifications**](#global-slack-notifications): Keep your organization informed with automatic updates.
 5. [**Manage incident tasks**](#incident-tasks): Track, assign, and update tasks related to incidents directly from Slack channels.
-5. **[Reference Slack configurations](#additional-slack-configurations) and [Slack commands](#slack-incident-commands)**: Explore detailed configuration options and see the full list of available Slack commands to tailor and streamline your incident response workflows.
+6. **[Reference Slack configurations](#additional-slack-configurations) and [Slack commands](#slack-incident-commands)**: Explore detailed configuration options and see the full list of available Slack commands to tailor and streamline your incident response workflows.
 
 
 ## Prerequisites
@@ -41,7 +42,7 @@ Install the integration through the [Slack Integration tile][1]. For more inform
 1. Select the Slack integration.
 1. Toggle **Create Slack channels for incidents** to enable the Slack feature for Incident Management.
 
-## Declaring incidents from slack
+## Declaring incidents from Slack
 
 When you connect a Slack workspace to a Datadog organization, users in the workspace can use slash commands and shortcuts related to Incident Management. To allow any Slack user or non-guest Slack user to declare incidents in your Slack workspace, enable **Allow Slack users to declare incidents without a connected Datadog account** in Incident Management settings.
 
@@ -64,7 +65,7 @@ After you enable this automation, you can define a **channel name template** for
 
 ### Channel name templates
 
-You can define a template for Datadog to follow when creating the channel name. The following variable are available:
+You can define a template for Datadog to follow when creating the channel name. The following variables are available:
 
 * `{{public_id}}`: Incident's numeric ID
 * `{{title}}`: Incident's title
@@ -77,7 +78,7 @@ You can define a template for Datadog to follow when creating the channel name. 
 
 ### Incident channel commands
 
-You can run the slack commands to manage the incident from within the incident Slack channel. Commands allow you to make an incident private, or paging the associated On-call team. For a full list of channel commands, see the [Incident channel commands](#incident-channel-commands) section.
+You can run the slack commands to manage the incident from within the incident Slack channel. Commands allow you to make an incident private, or page the associated On-call team. For a full list of channel commands, see the [Incident channel commands](#incident-channel-commands) section.
 
 ### Channel message syncing
 
@@ -111,7 +112,7 @@ To send the message to the Incident Timeline, use the message actions command (t
 
 {{< img src="integrations/slack/incidents2.png" alt="Slack configuration" style="width:60%;">}}
 
-To show a list of all tasks created for the incident, use the following slack command to list tasks and to mark tasks as complete or reopen them.
+To show a list of all tasks created for the incident, use the following Slack command to list tasks and to mark tasks as complete or reopen them.
 
 ```
 /datadog task list
