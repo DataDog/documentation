@@ -8,6 +8,9 @@ aliases:
 - /workflows/trigger
 - /service_management/workflows/trigger
 further_reading:
+- link: https://www.datadoghq.com/blog/windows-certificate-store
+  tag: Blog
+  text: Monitor Windows Certificate Store with Datadog
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
