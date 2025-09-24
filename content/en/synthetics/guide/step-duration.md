@@ -12,7 +12,14 @@ further_reading:
 
 ## Overview
 
-Step duration in Synthetic Monitoring is the time a Browser Test step takes to be considered fully loaded. It is captured only when the page has finished rendering and all network requests are complete. 
+Step duration in Synthetic Monitoring is the time a Browser Test step takes to be considered fully loaded. In most cases, a step represents a user action (for example, click and type). The Synthetics worker emulates the action, then waits for the page to finish loading and network requests to complete.
+
+Step duration includes:
+- The action itself
+- Page loading time  
+- Network request completion time
+
+Step duration does **not** include overhead such as finding the step element, taking screenshots, or creating snapshots on errors.
 
 A page is considered fully loaded when:
 - The [frame](#understanding-frames) has finished loading, _and_
@@ -49,7 +56,9 @@ The Synthetics Worker also monitors pending network requests to determine step c
 
 - Steps cannot complete while network requests are still active.
 - A 10-second timeout prevents indefinite waiting.
-- Certain requests are ignored (favicon pings, tracking URLs) to avoid unnecessary delays.
+- Certain requests are automatically ignored (favicon pings, Google Analytics, Sentry, etc.) to avoid unnecessary delays.
+
+**Performance optimization**: If a step takes approximately 10 seconds to complete, this typically indicates pending requests are causing delays. Check the network tab of that step or subsequent steps to identify slow requests. For requests irrelevant to your test, add them to the **blocked requests** section in your test configuration to improve performance.
 
 ## Troubleshooting
 
@@ -59,13 +68,14 @@ Largest Contentful Paint (LCP) indirectly impacts step completion. While the Syn
 
 ### Deeper insights into step duration
 
-Test results may not always reveal why steps take longer than expected. For comprehensive analysis:
+By default, each step has a [60-second timeout][5]. You can adjust this timeout in the step configuration window to accommodate longer-running operations or to fail faster for performance testing.
+
+Additionally, test results may not always reveal why steps take longer than expected. For comprehensive analysis:
 
 **[Enable RUM data collection with Synthetic Monitoring][3]** to gain visibility into:
 - Network resource loading times
 - DOM construction timings  
 - Core Web Vitals metrics that influence step duration
-
 
 ## Further Reading
 
@@ -75,3 +85,4 @@ Test results may not always reveal why steps take longer than expected. For comp
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
 [3]: /synthetics/guide/explore-rum-through-synthetics/
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState#complete
+[5]: /synthetics/browser_tests/advanced_options#timeout
