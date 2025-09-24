@@ -40,7 +40,7 @@ const assignmentLogger: IAssignmentLogger = {
 };
     {{< /code-block >}}
 
-1. Initialize the SDK in your code using the SDK guides for your language here.
+1. Initialize the SDK in your code. For instructions for your language, see [SDK guides][6].```
 
     {{< code-block lang="typescript" >}}
 await init({
@@ -73,7 +73,7 @@ const variation = getInstance().getBooleanAssignment(
 
 ## 3. Identify critical flags in Statsig {#identify-critical-flags}
 
-1. Make a list of all the feature flags currently in use within your application using the provided template.
+1. Make a list of all the feature flags currently in use within your application.
 1. Categorize the flags as critical or non-critical based on their importance and impact on your application's functionality.
 1. Flags that are disabled or are rolled out to 100% can be categorized as non-critical.
 
@@ -101,8 +101,8 @@ export function getBoolVariationWrapper(
       
   try {
     assignment = getInstance().getBooleanAssignment(
-      user.userID,
       gateKey,
+      user.userID,
       attributes,
       false
     );
@@ -243,8 +243,8 @@ export function getFeatureConfig(
 {{< /code-block >}}
 
 {{< code-block lang="typescript" filename="PlaceUsingFlags.ts" >}}
-const useBigButtons = isFeatureEnabled(userId, 'use-big-buttons', userAttributes);
-const buttonConfig = getFeatureConfig(userId, 'button-configuration', userAttributes);
+const useBigButtons = isFeatureEnabled('use-big-buttons', userId, userAttributes);
+const buttonConfig = getFeatureConfig('button-configuration', userId, userAttributes);
 {{< /code-block >}}
 
 ## Appendix: TypeScript implementation comparison
@@ -278,7 +278,7 @@ await init({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Wire up assignment logger
+### Configure the assignment logger
 
 {{< tabs >}}
 {{% tab "Statsig" %}}
@@ -492,3 +492,4 @@ const variation = getInstance().getBooleanAssignment(
 [3]: https://eppo.cloud/
 [4]: https://docs.statsig.com/console-api/introduction/
 [5]: https://docs.geteppo.com/reference/api/
+[6]: https://docs.geteppo.com/sdks/
