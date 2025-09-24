@@ -5,11 +5,6 @@ algolia:
   tags: ["cross org", "cross-org", "cross organization"]
 ---
 
-{{< callout url="#" btn_hidden="true">}}
-  Cross-organization visibility is in Preview.
-{{< /callout >}} 
-
-
 ## Overview
 
 Some companies rely on multiple Datadog [organizations][1] to separate data for compliance or other reasons.
@@ -165,7 +160,7 @@ Use [granular access controls][12] to limit the teams, roles, or users that can 
 
 Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org. 
 
-**Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information to destination organizations.
+**Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information (PHI) to destination organizations. Customers are responsible for any sensitive data transferred, including PHI.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
 1. Hover over the cross-organization connection on which you would like to set granular permissions. **Permissions** and **Delete** icons appear on the right.
