@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Google Cloud
+description: Set up comprehensive monitoring for your Google Cloud environment. Configure service accounts, enable metric collection, and explore log forwarding and Agent installation.
 further_reading:
     - link: 'https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=dataflowmethodrecommended'
       tag: 'Documentation'

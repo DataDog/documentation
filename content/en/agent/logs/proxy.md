@@ -1,5 +1,6 @@
 ---
 title: TCP Agent proxy for logs
+description: Configure the Datadog Agent to send logs through TCP and SOCKS5 proxies, with detailed HAProxy and NGINX configuration examples.
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

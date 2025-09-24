@@ -1,5 +1,6 @@
 ---
 title: Getting Started with the Datadog Operator
+description: Deploy the Datadog Agent in Kubernetes using the Datadog Operator. Install with Helm, configure Agent settings, and enable metrics, logs, and APM collection.
 further_reading:
   - link: '/containers/datadog_operator'
     tag: 'documentation'

@@ -1,5 +1,6 @@
 ---
 title: Count
+description: Count non-zero and non-null metric values for grouped queries and time series analysis.
 aliases:
     - /graphing/functions/count/
 ---
