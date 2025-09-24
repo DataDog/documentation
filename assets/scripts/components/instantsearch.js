@@ -341,16 +341,14 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     }
     
     const handleSearchbarKeydown = (e) => {
-        const code = e.code;
         // Only handle navigation and selection keys; exit early for all others
-        if (!['ArrowDown', 'ArrowUp', 'Enter'].includes(code)) return;
+        if (!['ArrowDown', 'ArrowUp', 'Enter'].includes(e.code)) return;
 
         e.preventDefault();
         const searchResultItems = getVisibleSearchResultItems();
         const currentSelectedIndex = Array.from(searchResultItems).findIndex((item) => item.classList.contains('selected-item'));
 
         if (e.code === 'Enter') {
-            console.log("debug: currentSelectedIndex",currentSelectedIndex);
             const link = searchResultItems[currentSelectedIndex]?.querySelector('a[href]');
             if (link?.href) {
                 return navigateToUrl(link.href);
@@ -362,8 +360,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             setTimeout(() => {
                 window.location.pathname = searchPathname;
             }, 500);
-        }
-        if (e.code === 'ArrowDown') {
+        } else if (e.code === 'ArrowDown') {
             if (searchResultItems.length === 0) {
                 return;
             }
@@ -375,7 +372,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 searchResultItems[currentSelectedIndex + 1].classList.add('selected-item');
             }
         }
-        if (e.code === 'ArrowUp') {
+        else if (e.code === 'ArrowUp') {
             if (currentSelectedIndex > 0) {
                 searchResultItems[currentSelectedIndex].classList.remove('selected-item');
                 searchResultItems[currentSelectedIndex - 1].classList.add('selected-item');
