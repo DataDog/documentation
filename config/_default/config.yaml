@@ -6,15 +6,30 @@ pygmentsCodeFences: true
 enableRobotsTXT: true
 
 # don't publish cdocs source files
-ignoreFiles: ["\\.mdoc\\.md$"]
+ignoreFiles:
+  - "\\.mdoc\\.md$"
+  - "integrations_data"
+  - "hugpython"
+  - "examples"
+  - "local"
+  - "logs"
+  - "\\.(txt|log|zip|tar\\.gz|bak)$"
+
+disableKinds:
+  - "RSS" # Major memory saver
+  - "taxonomy"
+  - "taxonomyTerm"
+
+rss:
+  limit: 10  # Only recent items
 
 publishDir: "./public"
 
 # taxonomies
-taxonomies:
-  #tag: "tags"
-  #category: "categories"
-  "video-category": "video-categories"
+#taxonomies:
+#  #tag: "tags"
+#  #category: "categories"
+#  "video-category": "video-categories"
 
 # language
 defaultContentLanguage: "en"
@@ -26,12 +41,22 @@ defaultContentLanguageInSubdir: false
 # Prevent autogeneration of jsconfig.json file
 # See: https://gohugo.io/hugo-pipes/js/#import-js-code-from-assets
 build:
+  writeStats: false
   noJSConfigInAssets: true
+  # When to use the resource file cache, one of never, fallback, or always.
+  # Applicable when transpiling Sass to CSS. Default is fallback.
+  useResourceCacheWhen: "fallback"
 
 caches:
     getjson:
         dir: :cacheDir/:project
         maxAge: '1h'
+    images:
+        dir: :resourceDir/_gen
+        maxAge: '24h'  # Cache images longer
+    assets:
+        dir: :resourceDir/_gen
+        maxAge: '24h'
 
 # enableGitInfo so lastmod in sitemap.xml is based off git
 enableGitInfo: true

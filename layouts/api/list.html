@@ -161,20 +161,20 @@
                     <p>
                      {{ $translate_action.description | default $endpoint.action.description | $dot.Page.RenderString }}
                       <!-- required permissions and scopes -->
-                      {{ partial "api/permissions.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
+                      {{/* partial "api/permissions.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) */}}
                     </p>
 
                     <!-- querystring, path params, header params -->
-                    {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
+                    {{/* partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) */}}
 
                     <!-- request body -->
-                    {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                    {{/* partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) */}}
 
                     <!-- response -->
-                    {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                    {{/* partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) */}}
 
                     <!-- code example -->
-                    {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
+                    {{/* partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) */}}
                 </div>
             </div>
         </div>
