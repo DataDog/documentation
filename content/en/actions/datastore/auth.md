@@ -47,7 +47,7 @@ None
 During the datastore creation process, you're asked to set the organization access level for the datastore. You can choose either `Contributor`, `Viewer`, or `None`. Contributor is the default access level.
 
 To restrict access to an existing datastore for either an organization or individual:
-1. Hover over the datastore on the [Datastore page][6] and click the padlock (**Permissions**) icon.
+1. Hover over the datastore on the [Datastores page][6] and click the padlock (**Permissions**) icon.
 1. Use the drop-down menus to edit the permissions for a user or organization.
 1. Click **Save**.
 
@@ -56,7 +56,7 @@ To restrict access to an existing datastore for either an organization or indivi
 The `user_access_manage` [permission][1] is required to elevate your access to datastores.
 
 To elevate your access:
-1. Hover over the datastore on the [Datastore page][6] and click the padlock (**Permissions**) icon.
+1. Hover over the datastore on the [Datastores page][6] and click the padlock (**Permissions**) icon.
 1. Click **Elevate Access**.
 1. Click **Save**.
 
@@ -65,8 +65,8 @@ To elevate your access:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions/?tab=ui#app-builder--workflow-automation
-[2]: https://app.datadoghq.com/app-builder/datastore
+[2]: https://app.datadoghq.com/actions/datastores
 [3]: /actions/workflows
 [4]: /actions/app_builder
 [5]: /service_management/app_builder/connections/
-[6]: https://app.datadoghq.com/app-builder/datastore
+[6]: https://app.datadoghq.com/actions/datastores

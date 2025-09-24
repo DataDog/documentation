@@ -17,7 +17,7 @@ You can add workflows to your datastores that automatically trigger when records
 ## Create a new automation rule
 
 To create a new automation rule: 
-1. Navigate to [Datastores][1].
+1. Navigate to [Datastores page][1].
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Configure your new automation rule: 
