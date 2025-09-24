@@ -15,7 +15,7 @@ PR Gates are in Preview.
 
 ## Overview
 
-To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules**][1] page and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][2].
+To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules**][1] page.
 
 {{< img src="pr_gates/rules_list_3.png" alt="PR Gates page in Datadog" style="width:100%" >}}
 
@@ -52,76 +52,13 @@ To create a PR Gates rule in Datadog:
 
 1. Click **Create Rule**.
 
-### Integrate PR Gates in your CI/CD pipeline
+### Manage PR checks
 
-Invoke the PR Gates evaluation by calling the [`datadog-ci gate evaluate`][2] command. PR Gates requires [`datadog-ci`][5] version `2.27.0` or later.
+PR Gates automatically create PR checks in [GitHub][10] or [Azure DevOps][11] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
 
-<div class="alert alert-info">For the command to work properly, ensure that events (for example, static analysis, software composition analysis violations, or tests) are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</code> command executes. Otherwise, the rules may demonstrate incorrect behavior due to the absence of these events.
-</div>
+<div class="alert alert-info"><strong>Note</strong>: Re-running a check in the pull request UI does not re-run the corresponding PR Gates rule.</div>
 
-This command does the following:
-
-1. Retrieves all the rules that have [rule scopes and custom scopes][6] that match the current pipeline context (the repository, branch, or custom scopes passed in the command).
-2. Evaluates all the matching rules.
-3. Fails if one or more blocking rules fail, blocking the pipeline.
-
-| Environment Variables | Description |
-|---|---|
-| `DD_API_KEY` | Point to your [Datadog API key][7]. |
-| `DD_APP_KEY` | Point to your [Datadog application key][8]. The application key must have the `PR Gates Evaluations` permission enabled.|
-| `DD_SITE` | (Optional) Point to a specific [Datadog site][9] (default value is {{< region-param key="dd_site" code="true" >}}).<br/>**Note**: `DATADOG_SITE` is not supported. |
-
-For example:
-
-```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> DD_APP_KEY=<YOUR_APP_KEY> datadog-ci gate evaluate
-```
-
-Configure the behavior of the `datadog-ci gate evaluate` command using the following flags:
-
-`--fail-on-empty`
-: The command fails if no matching rules are found based on the current pipeline context. By default, the command succeeds.
-
-`--fail-if-unavailable`
-: The command fails if one or more rules cannot be evaluated because of an internal issue.
-By default, the command succeeds.
-
-`--timeout`
-: The command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes. The command typically completes within a few minutes, but it could take longer.
-
-`--no-wait`
-: Skips the default time that the command waits for the events (for example, static analysis violations or tests) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
-
-Add [custom scopes][6] to the command by using the `--scope` option one or more times:
-
-```shell
-datadog-ci gate evaluate --scope team:backend --scope team:frontend
-```
-
-Check the command logs to see the overall gate evaluation status and information about the rules that were evaluated.
-
-{{< img src="ci/datadog_ci_gate_evaluate_logs.png" alt="Datadog-ci gate evaluate logs" style="width:100%;">}}
-
-### Enable CI status checks
-
-You can automatically create a status check in [GitHub][10] or [Azure DevOps][11] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in pull requests in your CI provider.
-
-<div class="alert alert-info"><strong>Note</strong>: Re-running a check in the CI provider does not re-run the corresponding PR Gates rule.</div>
-
-To enable status checks:
-
-1. Navigate to the integration tile for your CI provider:
-   - [GitHub][12]
-   - [Azure DevOps Source Code][13]
-
-   If you do not have the integration installed, or you don't have an app set up within the integration (GitHub App or Microsoft Entra App), follow the [GitHub][14] or [Azure DevOps Source Code][13] integration documentation to set one up.
-
-1. Ensure the integration has the permission required to create status checks:
-
-   - GitHub: Grant `Checks: Write` access to the integration.
-   - Azure DevOps: Grant `vso.build` and `vso.profile` access to the integration.
-
-1. After the permission is granted, you can see the checks in the CI provider.
+To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][14] or [Azure DevOps Source Code][13] integration documentation to set one up.
 
 ## Manage rules
 
