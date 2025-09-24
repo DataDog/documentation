@@ -14,7 +14,7 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 {{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
 
-Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically detect, diagnose, and fix high-impact issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products—including Error Tracking, Code Security, Continuous Profiler, and Test Optimization—to generate contextual fixes.
+Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically detect, diagnose, and fix high-impact issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
 ## Supported Datadog products
 
@@ -29,7 +29,7 @@ Bits AI Dev Agent is available for the following Datadog products:
 
 ## Key capabilities
 
-Bits AI Dev Agent provides comprehensive code remediation across multiple areas of your development workflow.
+Bits AI Dev Agent provides comprehensive code remediation across multiple areas of your development workflow:
 
 ### Error tracking
 

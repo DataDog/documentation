@@ -42,8 +42,7 @@ To allow the Dev Agent to use CI logs when iterating on pull requests, you must 
 
 Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
 
-To configure telemetry tagging, see [Tag your telemetry with Git information][7].  
-You can also configure service-to-repository mapping manually in **Settings**.
+To configure telemetry tagging, see [Tag your telemetry with Git information][7]. You can also configure service-to-repository mapping manually in **Settings**.
 
 ### Step 4: (Optional) Enable Auto-push
 
