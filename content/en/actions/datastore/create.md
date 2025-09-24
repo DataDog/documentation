@@ -51,7 +51,7 @@ You can create a datastore from an app or workflow by clicking the **Datastore I
 
 To manually edit a row in your datastore:
 1. On the [Datastores page][1], locate your datastore and click to open it.
-1. Hover over the row you want to change and click the pencil (**Edit**) icon.
+1. Hover over the row you want to change and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Use the **JSON** or **Raw text** tabs to edit keys in the row.
 
 **Note:** You cannot manually edit the primary key in a row. If you need to edit a primary key, delete the row and re-add it or re-upload the data from a file.
