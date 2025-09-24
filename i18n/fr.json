@@ -264,5 +264,8 @@
   },
   "source": {
     "other": "Source"
+  },
+  "available_for": {
+    "other": "Disponible pour"
   }
 }

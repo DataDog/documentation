@@ -1,5 +1,6 @@
 ---
 title: Android and Android TV Libraries for RUM
+description: "Integrate popular Android libraries like Coil, OkHttp, and Retrofit with RUM for automatic monitoring of network requests and image loading."
 aliases:
 - /real_user_monitoring/android/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/android

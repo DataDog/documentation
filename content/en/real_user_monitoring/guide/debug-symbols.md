@@ -1,5 +1,6 @@
 ---
 title: Investigate Obfuscated Stack Traces with RUM Debug Symbols
+description: "Debug and deobfuscate stack traces in RUM using debug symbols to investigate errors in obfuscated mobile and web applications."
 ---
 
 The [RUM Debug Symbols page][1] lists all the debug symbols that are uploaded for a given type of RUM application. You can use this page to investigate obfuscated stack traces.

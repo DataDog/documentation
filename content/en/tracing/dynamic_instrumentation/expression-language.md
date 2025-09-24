@@ -1,5 +1,6 @@
 ---
 title: Dynamic Instrumentation Expression Language
+description: Learn the syntax and capabilities of the Dynamic Instrumentation Expression Language for creating probe conditions and message templates.
 private: false
 aliases:
     - /dynamic_instrumentation/expression-language

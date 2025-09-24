@@ -1,5 +1,6 @@
 ---
 title: Remote Configuration for Fleet Automation
+description: Configure Remote Configuration with Fleet Automation to enable Agent flares, remote upgrades, and centralized configuration management.
 disable_toc: false
 further_reading:
 - link: "/remote_configuration"

@@ -43,13 +43,13 @@ Asegúrate de que hayas actualizado tu versión de Kotlin al menos a la 1.8 en t
 
 ## Problemas con Cocoapods
 
-Si tienes problemas para compilar tu aplicación iOS después de añadir el SDK de Datadog debido a errores lanzados por Cocoapods, check qué error estás recibiendo. El error más frecuente es un problema para obtener la biblioteca nativa más actualizada de Cocoapods, que puede resolverse ejecutando lo siguiente en tu directorio `ios`:
+Si tienes problemas para compilar tu aplicación iOS después de añadir el SDK de Datadog debido a errores lanzados por Cocoapods, check qué error estás recibiendo. El error más frecuente es un problema para obtener la librería nativa más actualizada de Cocoapods, que puede resolverse ejecutando lo siguiente en tu directorio `ios`:
 
 ```bash
 pod install --repo-update
 ```
 
-Otro error frecuente es un problema al cargar la biblioteca FFI en Silicon Macs  Si ves un error similar al siguiente:
+Otro error frecuente es un problema al cargar la librería FFI en Silicon Macs  Si ves un error similar al siguiente:
 
 ```bash
 LoadError - dlsym(0x7fbbeb6837d0, Init_ffi_c): symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle

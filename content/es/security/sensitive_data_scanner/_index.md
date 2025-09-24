@@ -86,7 +86,7 @@ Para obtener más información, consulta [Configurar Sensitive Data Scanner para
 
 ### En tu entorno {#in-your-environment}
 
-Utiliza [Observability Pipelines][5] para recopilar y procesar tus logs de tu entorno y luego envía los datos a tus integraciones posteriores. Cuando configures un pipeline en Observability Pipelines, añade el [procesador Sensitive Data Scanner][6] para redactar los datos confidenciales de tus logs antes de que salgan de tus instalaciones. Puedes añadir reglas de análisis predefinidas de la biblioteca de reglas, como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, direcciones IP, etc. También puedes crear tus propias reglas utilizando patrones de expresiones regulares (regex).
+Utiliza [Observability Pipelines][5] para recopilar y procesar tus logs de tu entorno y luego envía los datos a tus integraciones posteriores. Cuando configures un pipeline en Observability Pipelines, añade el [procesador Sensitive Data Scanner][6] para redactar los datos confidenciales de tus logs antes de que salgan de tus instalaciones. Puedes añadir reglas de análisis predefinidas de la librería de reglas, como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, direcciones IP, etc. También puedes crear tus propias reglas utilizando patrones de expresiones regulares (regex).
 
 Para obtener más información, consulta [Configurar pipelines][7].
 
