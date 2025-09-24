@@ -162,6 +162,12 @@ cascade:
     lang: en
   aliases:
     - /integrations/amazon_event_bridge
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/aws-pcs-integration-announcement
+    tag: Blog
+    text: Track the performance of your HPC workloads with Datadog's AWS PCS integration
+
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
