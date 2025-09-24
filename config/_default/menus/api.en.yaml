@@ -5324,6 +5324,54 @@ menu:
           - ListAwsOnDemandTasks
         unstable: []
         order: 6
+    - name: Update azure scan options
+      url: '#update-azure-scan-options'
+      identifier: agentless-scanning-update-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAzureScanOptions
+        unstable: []
+        order: 9
+    - name: Delete azure scan options
+      url: '#delete-azure-scan-options'
+      identifier: agentless-scanning-delete-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAzureScanOptions
+        unstable: []
+        order: 10
+    - name: Create azure scan options
+      url: '#create-azure-scan-options'
+      identifier: agentless-scanning-create-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAzureScanOptions
+        unstable: []
+        order: 11
+    - name: List azure scan options
+      url: '#list-azure-scan-options'
+      identifier: agentless-scanning-list-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAzureScanOptions
+        unstable: []
+        order: 12
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
