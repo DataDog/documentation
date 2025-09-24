@@ -46,7 +46,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
 
    - **Crea un test a partir de una plantilla**:
 
-     1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor. 
+     1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor.
      2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Definir solicitud**, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
      3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
 
@@ -54,14 +54,14 @@ Puedes crear un test utilizando una de las siguientes opciones:
 
   - **Crea un test desde cero**:
 
-     1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero), selecciona el tipo de solicitud `HTTP` y especifica la **URL** a consultar. 
+     1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero), selecciona el tipo de solicitud `HTTP` y especifica la **URL** a consultar.
         Los métodos disponibles son: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` y `OPTIONS`. Se admiten las URL `http` y `https`.
 
         <div class="alert alert-info">Para ver más opciones, consulta <a href=#advanced-options>Opciones avanzadas</a>.</div>
 
      2. **Pon un nombre** a tu test HTTP.
 
-     3. Añade **etiquetas (tags)** de entorno así como cualquier otra etiqueta a tu test HTTP. A continuación, puedes utilizar estas etiquetas para filtrar a través de tus tests Synthetic en la [página de monitorización Synthetic y tests continuos][3]. 
+     3. Añade **etiquetas (tags)** de entorno así como cualquier otra etiqueta a tu test HTTP. A continuación, puedes utilizar estas etiquetas para filtrar a través de tus tests Synthetic en la [página de monitorización Synthetic y tests continuos][3].
 
      4. Haz clic en **Enviar** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.<br /><br>
 
@@ -89,7 +89,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
 
    {{% tab "Autenticación" %}}
 
-   * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`. Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
+   * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`. Puedes utilizar la librería `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
       ```
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
@@ -117,7 +117,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
    * **Cuerpo de la solicitud**: Añade el contenido del cuerpo de tu solicitud HTTP.
        * El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes para `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
        * El cuerpo de la solicitud está limitado a un archivo de 3 megabytes para `application/octet-stream`.
-       * El cuerpo de la solicitud está limitado a tres archivos de 3 megabytes cada uno para `multipart/form-data`. 
+       * El cuerpo de la solicitud está limitado a tres archivos de 3 megabytes cada uno para `multipart/form-data`.
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
@@ -228,7 +228,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 `Error performing HTTP/2 request`
 : No se ha podido realizar la solicitud. Para obtener más información, consulta la página de [errores][16] específicos.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
 
 `SSL`

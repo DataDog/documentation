@@ -223,6 +223,8 @@ The following SQL functions are supported. For Window function, see the separate
 | `COUNT(any a)`                                   | numeric                               | Returns the number of input values that are not null.                                                                                                                                             |
 | `SUM(numeric n)`                                 | numeric                               | Returns the summation across all input values.                                                                                                                                                    |
 | `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.                                                                                                                              |
+| `BOOL_AND(boolean b)`                            | boolean                               | Returns whether all non-null input values are true.                                                                                                                                               |
+| `BOOL_OR(boolean b)`                             | boolean                               | Returns whether any non-null input value is true.                                                                                                                                                 |
 | `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
 | `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
@@ -283,6 +285,16 @@ AS avg_response_time
 FROM logs
 WHERE status_code = 200
 GROUP BY service_name
+{{< /code-block >}}
+
+### `BOOL_AND`
+{{< code-block lang="sql" >}}SELECT BOOL_AND(status_code = 200) AS all_success
+FROM logs
+{{< /code-block >}}
+
+### `BOOL_OR`
+{{< code-block lang="sql" >}}SELECT BOOL_OR(status_code = 200) AS some_success
+FROM logs
 {{< /code-block >}}
 
 ### `CEIL`

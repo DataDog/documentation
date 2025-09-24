@@ -1,5 +1,6 @@
 ---
 title: Graphing Guides
+description: Guides for dashboard configuration, visualization techniques, widget customization, and API usage.
 private: true
 disable_toc: true
 aliases:

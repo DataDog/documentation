@@ -3217,7 +3217,7 @@ menu:
     url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
     weight: 2011
   - identifier: auto_dd_libraries
-    name: Uso de bibliotecas de rastreo de Datadog
+    name: Uso de librerías de rastreo de Datadog
     parent: automatic_instrumentation
     url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
     weight: 2012
@@ -3292,12 +3292,12 @@ menu:
     url: tracing/trace_collection/custom_instrumentation/elixir
     weight: 2033
   - identifier: tracing_compatibility
-    name: Compatibilidad de bibliotecas
+    name: Compatibilidad de librerías
     parent: tracing_trace_collection
     url: tracing/trace_collection/compatibility/
     weight: 203
   - identifier: tracing_library_config
-    name: Configuración de bibliotecas
+    name: Configuración de librerías
     parent: tracing_trace_collection
     url: tracing/trace_collection/library_config/
     weight: 204
@@ -3322,7 +3322,7 @@ menu:
     url: tracing/trace_collection/proxy_setup/
     weight: 208
   - identifier: tracing_naming_convention
-    name: Semántica de etiquetas de tramo (span)
+    name: Semántica de Span Tag
     parent: tracing_trace_collection
     url: tracing/trace_collection/tracing_naming_convention
     weight: 209
@@ -5840,7 +5840,7 @@ menu:
     url: security/application_security/software_composition_analysis/setup/
     weight: 1
   - identifier: appsec_compat_sca
-    name: Compatibilidad de bibliotecas
+    name: Compatibilidad de librerías
     parent: application_security_software_composition_analysis_setup
     url: security/application_security/software_composition_analysis/setup/compatibility/
     weight: 2
@@ -5855,7 +5855,7 @@ menu:
     url: security/application_security/code_security/setup/
     weight: 1
   - identifier: appsec_compat_code_security
-    name: Compatibilidad de bibliotecas
+    name: Compatibilidad de librerías
     parent: application_security_code_security_setup
     url: security/application_security/code_security/setup/compatibility/
     weight: 2
@@ -5870,7 +5870,7 @@ menu:
     url: security/application_security/threats/setup/
     weight: 700
   - identifier: appsec_compat_threats_mgmt
-    name: Compatibilidad de bibliotecas
+    name: Compatibilidad de librerías
     parent: appsec_threats_management_setup
     url: security/application_security/threats/setup/compatibility/
     weight: 701
@@ -5880,7 +5880,7 @@ menu:
     url: security/application_security/threats/setup/single_step/
     weight: 702
   - identifier: appsec_threats_setup_threat_detection_setup
-    name: Uso de bibliotecas de rastreo de Datadog
+    name: Uso de librerías de rastreo de Datadog
     parent: appsec_threats_management_setup
     url: security/application_security/threats/setup/threat_detection/
     weight: 703
@@ -5945,7 +5945,7 @@ menu:
     url: security/application_security/serverless/
     weight: 8
   - identifier: asm_serverless_compat
-    name: Compatibilidad de bibliotecas
+    name: Compatibilidad de librerías
     parent: asm_serverless
     url: security/application_security/serverless/compatibility/
     weight: 1
@@ -6986,7 +6986,7 @@ menu:
     url: sensitive_data_scanner/
     weight: 30000
   - identifier: sds_library_rules
-    name: Reglas de biblioteca
+    name: Reglas de librería
     parent: sensitive_data_scanner
     url: sensitive_data_scanner/library_rules/
     weight: 1

@@ -132,7 +132,7 @@ On the Incidents page, you can view, search, and filter all incidents that you h
 {{% /tab %}}
 {{< /tabs >}}
 
-The Notification Center lists all push notifications recieved so that notification context is never lost. You can filter by notification type.
+The Notification Center lists all push notifications received so that notification context is never lost. You can filter by notification type.
 
 ## Dashboards
 

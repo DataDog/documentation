@@ -1,5 +1,6 @@
 ---
 title: Roku Advanced Configuration
+description: "Configure advanced Roku RUM SDK settings to enrich user sessions, track custom events, and control data collection for TV channels."
 aliases:
     - /real_user_monitoring/roku/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku

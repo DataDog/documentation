@@ -47,7 +47,7 @@ El rastreador PHP proporciona varias formas de configurar la inyección de ident
 
 El comportamiento predeterminado del rastreador PHP es añadir todos los identificadores de correlación de trazas al contexto del log.
 
-Por ejemplo, si estás utilizando la biblioteca de [Monolog][4] en una aplicación Laravel de la siguiente manera:
+Por ejemplo, si estás utilizando la librería de [Monolog][4] en una aplicación Laravel de la siguiente manera:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -68,13 +68,13 @@ El rastreador PHP añade los identificadores de correlación de trazas disponibl
 Puedes utilizar marcadores de posición en tu mensaje para seleccionar qué identificadores de correlación de trazas se inyectan automáticamente en tus logs. El rastreador PHP admite los siguientes marcadores de posición:
 - `%dd.trace_id%`: el ID de traza
 - `%dd.span_id%`: el ID de tramo (span)
-- `%dd.service%`: el nombre de servicio 
-- `%dd.version%`: la versión de servicio 
+- `%dd.service%`: el nombre de servicio
+- `%dd.version%`: la versión de servicio
 - `%dd.env%`: el entorno de servicio
 
 Los parámetros distinguen entre mayúsculas y minúsculas y deben ir encerrados entre `%`.
 
-Por ejemplo, si estás utilizando la biblioteca de [Monolog][4] en una aplicación Laravel, puedes configurar la inyección en un mensaje de log de la siguiente manera:
+Por ejemplo, si estás utilizando la librería de [Monolog][4] en una aplicación Laravel, puedes configurar la inyección en un mensaje de log de la siguiente manera:
 
 ```php
 use Illuminate\Support\Facades\Log;

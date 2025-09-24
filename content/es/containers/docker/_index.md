@@ -187,7 +187,7 @@ Envía las métricas con el [protocolo de StatsD][20]:
 | `DD_DOGSTATSD_SOCKET`            | La ruta al socket Unix que hay que escuchar. Debe estar en un volumen montado `rw`.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Activa detección de contenedores y etiquetado para métricas de socket Unix.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Etiquetas adicionales para anexar a todas las métricas, los eventos y los checks de servicios recibidos por este servidor de DogStatsD, por ejemplo: `"env:golden group:retrievers"`. |
-| `DD_USE_DOGSTATSD`           | Activar o desactivar el envío de métricas personalizadas desde la biblioteca de DogStatsD.                                                                                                |
+| `DD_USE_DOGSTATSD`           | Activar o desactivar el envío de métricas personalizadas desde la librería de DogStatsD.                                                                                                |
 Aprende más sobre [DogStatsD en Sockets de Dominio de Unix][21].
 
 ### Etiquetado
