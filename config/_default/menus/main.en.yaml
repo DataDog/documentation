@@ -5649,18 +5649,18 @@ menu:
       identifier: observability_pipelines_monitoring_and_troubleshooting
       weight: 3
     - name: Worker CLI Commands
-      url: observability_pipelines/monitoring_and_maintenance/worker_cli_commands/
-      parent: observability_pipelines_monitoring_and_maintenance
+      url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
+      parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_worker_cli_commands
       weight: 301
     - name: Monitoring Pipelines
-      url: observability_pipelines/monitoring_and_maintenance/monitoring_pipelines/
-      parent: observability_pipelines_monitoring_and_maintenance
+      url: observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
+      parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_monitoring_pipelines
       weight: 302
     - name: Pipeline Usage Metrics
-      url: observability_pipelines/monitoring_and_maintenance/pipeline_usage_metrics/
-      parent: observability_pipelines_monitoring_and_maintenance
+      url: observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+      parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_pipeline_usage_metrics
       weight: 303
     - name: Troubleshooting
