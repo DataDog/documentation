@@ -5666,7 +5666,7 @@ menu:
     - name: Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
       identifier: observability_pipelines_troubleshooting
-      parent: observability_pipelines
+      parent: observability_pipelines_monitoring_and_troubleshooting
       weight: 304
     - name: Guides
       url: observability_pipelines/guide/
