@@ -65552,8 +65552,9 @@ paths:
       - Metrics
       x-menu-order: 11
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tag-cardinalities:
@@ -65878,8 +65879,9 @@ paths:
       - Metrics
       x-menu-order: 8
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/monitor/notification_rule:
