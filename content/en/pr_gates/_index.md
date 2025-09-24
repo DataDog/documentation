@@ -9,6 +9,8 @@ aliases:
   - /quality_gates/explorer/facets/
   - /quality_gates/explorer/saved_views/
   - /quality_gates/search/
+  - /quality_gates/guide/
+  - /quality_gates/guide/understanding_rule_scopes/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
