@@ -37,6 +37,7 @@ aliases:
   - /agent/basic_agent_usage/sccm/
   - /agent/basic_agent_usage/windows/
   - /agent/basic_agent_usage/chef/
+  - /agent/basic_agent_usage/source/
 cascade:
 - _target:
     path: /agent/basic_agent_usage/chef
