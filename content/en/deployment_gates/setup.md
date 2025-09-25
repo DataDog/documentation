@@ -238,7 +238,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-Datadog provides a Github Action to integrate with Deployment Gates:
+Datadog provides a GitHub Action to integrate with Deployment Gates:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
