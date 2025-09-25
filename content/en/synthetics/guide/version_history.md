@@ -110,5 +110,5 @@ Content-Type: application/json
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/audit_trail/
-[2]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/synthetics#run-tests-command
+[2]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics#run-tests-command
 [3]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
