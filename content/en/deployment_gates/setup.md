@@ -251,10 +251,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-        - name: Deploy Canary
+
+      - name: Deploy Canary
         run: |
           echo "Deploying canary release for service:'my-service' in 'production'. Version 1.0.1"
           # Your deployment commands here
+
       - name: Evaluate Deployment Gate
         uses: DataDog/deployment-gate-github-action@v1
         env:
@@ -263,6 +265,7 @@ jobs:
         with:
           service: 'my-service'
           env: 'production'
+
       - name: Deploy
         if: success()
         run: |
