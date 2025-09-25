@@ -112,7 +112,7 @@ Clicking any row in the Fleet table opens a side panel with more details for the
 
 Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the **Connected Entities** section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
 
-**Note**: The **Pods** tab is only available for cluster, host, or device.
+**Note**: The **Pods** tab is only available if you're using Kubernetes.
 
 {{< tabs >}}
 {{% tab "Cluster side panel" %}}
