@@ -15,7 +15,6 @@ further_reading:
 ---
 
 
-
 ## Overview
 
 Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
@@ -348,6 +347,17 @@ Agent `v7.59+` is required.
         ## Recommendation: leave at default
         #
         # workers: <NUMBER OF WORKERS> # default 4
+
+        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+        # pathtest_interval: 10m
+
+        # @param pathtest_ttl - integer - optional - default: 35m
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+        # The TTL is reset each time the connection is seen again.
+        # pathtest_ttl: 35m
+
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
