@@ -106,23 +106,6 @@ You can post **updates** over time to keep users informed, and then mark the inc
 
 {{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the incident history timeline on a live status page with published incidents and updates" video=true >}}
 
-## Set a custom domain
-
-To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
-
-1. From your status page, click **Settings**.  
-1. Select **Custom Domain**.
-1. Follow the instructions to enter your domain and add DNS records.  
-1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.  
-
-<div class="alert alert-warning">Custom domains require access to your DNS provider to add a CNAME or A record.</div>
-
-**Notes**:
-
-- DNS propagation may take several minutes.
-- You can revert to the default Datadog domain at any time.
-- Ensure DNS changes are made by someone with access to your domain registrar.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

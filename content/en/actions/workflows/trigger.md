@@ -1,5 +1,6 @@
 ---
 title: Trigger a workflow
+description: Learn how to trigger workflows manually or automatically from dashboards, monitors, security signals, and other sources.
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']

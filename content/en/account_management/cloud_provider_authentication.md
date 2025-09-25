@@ -1,5 +1,6 @@
 ---
 title: Cloud-based Authentication
+description: Authenticate the Datadog Terraform provider using cloud credentials instead of static API keys with AWS STS authentication and identity mapping.
 aliases:
     - /account_management/cloud_authentication/
 algolia:

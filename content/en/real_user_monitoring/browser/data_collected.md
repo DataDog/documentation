@@ -1,5 +1,6 @@
 ---
 title: RUM Browser Data Collected
+description: "Comprehensive guide to RUM Browser SDK event types, attributes, and telemetry data—including sessions, views, resources, errors, and user actions."
 aliases:
   - /real_user_monitoring/data_collected/
   - /real_user_monitoring/data_collected/view/
@@ -198,8 +199,8 @@ Source errors include code-level information about the error. For more informati
 |-------------------------------|--------|---------------------------------------------------------------|
 | `view.url_query.utm_source`     | string | The parameter in the URL tracking the source of traffic. |
 | `view.url_query.utm_medium`        | string | The parameter in the URL tracking the channel where the traffic is coming from.    |
-| `view.url_query.utm_campaign`  | string | The paramter in the URL identifying the specific marketing campaign tied to that view.              |
-| `view.url_query.utm_content`  | string | The paramter in the URL identifying the specific element a user clicked within a marketing campaign.           |
+| `view.url_query.utm_campaign`  | string | The parameter in the URL identifying the specific marketing campaign tied to that view.              |
+| `view.url_query.utm_content`  | string | The parameter in the URL identifying the specific element a user clicked within a marketing campaign.           |
 | `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
 
 ## Further Reading

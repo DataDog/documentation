@@ -1,5 +1,6 @@
 ---
 title: Configure SCIM with Microsoft Entra ID
+description: Set up automated user provisioning from Microsoft Entra ID to Datadog using SCIM with step-by-step configuration and attribute mapping.
 aliases:
   - /account_management/scim/azure/
 algolia:

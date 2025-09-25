@@ -1,5 +1,6 @@
 ---
 title: Regression
+description: Apply regression analysis with robust trends, trend lines, and piecewise constant approximations to metric data.
 aliases:
     - /graphing/functions/regression/
 ---

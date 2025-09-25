@@ -1,5 +1,6 @@
 ---
 title: Build Apps
+description: Create custom apps from blueprints or scratch using drag-and-drop UI components, queries, and JavaScript expressions.
 aliases:
   - /app_builder/build
   - /service_management/app_builder/build
