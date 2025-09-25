@@ -1917,7 +1917,8 @@ components:
       type: object
     AWSLogsServicesResponseDataType:
       default: logs_services
-      description: The `AWSLogsServicesResponseData` `type`.
+      description: The `AWSLogsServicesResponseData` `type`. Test to trigger client
+        generation.
       enum:
       - logs_services
       example: logs_services
