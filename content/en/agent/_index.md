@@ -162,7 +162,7 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 0.7% of the CPU used on average
 * Memory: ~ 90MB of RAM used (RSS memory)
 * Network bandwidth: ~ 200 KB/s ▲
-
+ 
 {{% /tab %}}
 {{< /tabs >}}
 
