@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Session Replay
+description: Capture and analyze user sessions with video-like replays to understand customer interactions and troubleshoot issues.
 further_reading:
     - link: '/real_user_monitoring/session_replay/browser'
       tag: 'Documentation'

@@ -214,6 +214,11 @@
       "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_2836340212",
+      "description": "Send several pipeline events returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [
@@ -349,7 +354,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Create Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "CreateArbitraryCostRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create arbitrary cost rule returns \"OK\" response"
+    }
+  ],
+  "CreateRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create ruleset returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -370,7 +389,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Update Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "UpdateArbitraryCostRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update arbitrary cost rule returns \"OK\" response"
+    }
+  ],
+  "UpdateRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update ruleset returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -378,6 +411,13 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
+  "ValidateQuery": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Validate query returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -1298,6 +1338,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2899714190",
+      "description": "Create a detection rule with detection method 'sequence_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_3367706049",
       "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
     },
@@ -1468,6 +1513,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_4152369508",
+      "description": "Validate a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringSuppression": [

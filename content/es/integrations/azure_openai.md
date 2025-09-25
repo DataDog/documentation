@@ -71,7 +71,7 @@ Si creas aplicaciones de LLM, usa la observabilidad de LLM para investigar la ca
 
 Ve el [vídeo sobre la vista de rastreo de observabilidad de LLM][1] para obtener un ejemplo acerca de cómo puedes investigar una traza (trace).
 
-Azure OpenAI permite el desarrollo de copilotos y aplicaciones de IA generativa utilizando la biblioteca de modelos de OpenAI. Utiliza la integración de Datadog para realizar un seguimiento del rendimiento y el uso de la API y los despliegues de Azure OpenAI.
+Azure OpenAI permite el desarrollo de copilotos y aplicaciones de IA generativa utilizando la librería de modelos de OpenAI. Utiliza la integración de Datadog para realizar un seguimiento del rendimiento y el uso de la API y los despliegues de Azure OpenAI.
 
 ## Configuración
 

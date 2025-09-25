@@ -1,5 +1,6 @@
 ---
 title: Private Actions Overview
+description: Allow workflows and apps to interact with private network services using Docker-based private action runners with secure authentication.
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/
@@ -14,6 +15,9 @@ further_reading:
 - link: "actions/private_actions/use_private_actions"
   tag: "Documentation"
   text: "Use Private Actions"
+- link: "actions/private_actions/run_script"
+  tag: "Documentation"
+  text: "Run a Script with the Private Action Runner"
 - link: "actions/private_actions/private_action_credentials"
   tag: "Documentation"
   text: "Handling Private Action Credentials"

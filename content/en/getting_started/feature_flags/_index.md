@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Feature Flags
+description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
 - link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
   tag: 'External Site'
@@ -33,11 +34,11 @@ Your organization likely already has pre-configured environments for Development
 
 ### Step 1: Import and initialize the SDK
 
-First, install `@datadog/openfeature-browser` and `@openfeature/web-sdk` as dependencies in your project:
+First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeature/core` as dependencies in your project:
 
 
 ```
-yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk
+yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
 ```
 
 Then, add the following to your project to initialize the SDK:
@@ -86,7 +87,7 @@ await OpenFeature.setContext({
 
 // This is what the SDK returns if the flag is disabled in
 // the current environment
-const fallback = false; 
+const fallback = false;
 
 const showFeature = await client.getBooleanValue('show-new-feature', fallback);
 if (showFeature) {
@@ -98,7 +99,7 @@ After you've completed this step, redeploy the application to pick up these chan
 
 ### Step 4: Define targeting rules and enable the feature flag
 
-Now that the application is ready to check the value of your flag, you can start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature. 
+Now that the application is ready to check the value of your flag, you can start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature.
 
 Go to **Feature Flags**, select your flag, then find the **Targeting Rules & Rollouts** section. Select the environment whose rules you want to modify, and click **Edit Targeting Rules**.
 
@@ -106,7 +107,7 @@ Go to **Feature Flags**, select your flag, then find the **Targeting Rules & Rol
 
 ### Step 5: Publish the rules in your environments
 
-After saving changes to the targeting rules, publish those rules by enabling your flag in the environment of your choice. 
+After saving changes to the targeting rules, publish those rules by enabling your flag in the environment of your choice.
 
 <div class="alert alert-info">
 As a general best practice, changes should be rolled out in a Staging environment before rolling out in Production.

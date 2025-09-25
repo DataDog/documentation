@@ -163,6 +163,10 @@ nav_sections:
         link: internal_developer_portal
         icon: internal-developer-portal-wui
         desc: Unify telemetry, metadata, and workflows to accelerate delivery
+      - title: On-Call
+        link: service_management/on-call/
+        icon: on-call
+        desc: Manage paging, escalation, and on-call schedules in one platform
   - nav_section:
     - name: 'Configuration'
     - navtiles:

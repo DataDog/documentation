@@ -1,5 +1,6 @@
 ---
 title: Resource Page
+description: Analyze resource performance with health metrics, dependency maps, span summaries, and frontend impact data.
 aliases:
 - /tracing/visualization/resource/
 further_reading:

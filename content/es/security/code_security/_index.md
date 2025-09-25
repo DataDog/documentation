@@ -27,7 +27,7 @@ Code Security ayuda a los equipos a implementar DevSecOps en toda la organizaci�
 Static Code Analysis (SAST) analiza el código previo a la producción para identificar problemas de seguridad y calidad. Puedes integrar las prácticas recomendadas de seguridad y desarrollo en todo el ciclo de vida de desarrollo de software con:
 - Integración del IDE para señalar infracciones en tiempo real con propuestas de corrección deterministas.
 - Comentarios en línea de las solicitudes pull de GitHub con sugerencias de correcciones deterministas y análisis gradual/consciente de las diferencias.
-- Posibilidad de abrir una solicitud pull para corregir una infracción directamente desde Datadog 
+- Posibilidad de abrir una solicitud pull para corregir una infracción directamente desde Datadog
 
 Los análisis pueden ejecutarse a través de tus pipelines de CI/CD o directamente en Datadog con el análisis alojado (sólo GitHub).
 Consulta [Static Code Analysis Setup][6] para empezar.
@@ -35,7 +35,7 @@ Consulta [Static Code Analysis Setup][6] para empezar.
 ## Software Composition Analysis
 Software Composition Analysis (SCA) analiza las bibliotecas de código abierto tanto en tus repositorios como en los servicios en ejecución. Puedes realizar un seguimiento y gestionar las dependencias a lo largo del ciclo de vida de desarrollo de software con:
 - Integración del IDE para detectar las vulnerabilidades que afectan a bibliotecas que se ejecutan en tus servicios
-- Posibilidad de abrir una solicitud pull para corregir una vulnerabilidad de biblioteca directamente desde Datadog
+- Posibilidad de abrir una solicitud pull para corregir una vulnerabilidad de librería directamente desde Datadog
 - Priorización de vulnerabilidades basada en el tiempo de ejecución con la puntuación de gravedad de Datadog
 
 SCA admite la detección de dependencias estáticas y en tiempo de ejecución.

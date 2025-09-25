@@ -57,7 +57,7 @@ Los siguientes permisos permiten a Datadog acceder a la exportación de la factu
   2. Habilita la facturación en tu proyecto para todas las transferencias.
 
 - Habilita el [servicio de transferencia de datos de BigQuery][5].
-  1. Abre la página de la API de transferencia de datos de BigQuery en la biblioteca de la API.
+  1. Abre la página de la API de transferencia de datos de BigQuery en la librería de la API.
   2. En el menú desplegable, selecciona el proyecto que contiene la cuenta de servicio.
   3. Haz clic en el botón ENABLE (Habilitar).
 

@@ -23,14 +23,14 @@ Intento de ataque
 
 Biblioteca de Datadog
 : _también_ rastreador, biblioteca de rastreo
-: una biblioteca específica del lenguaje de programación incrustada en aplicaciones web. Datadog App and API Protection utiliza la biblioteca para monitorizar y proteger. APM utiliza la misma biblioteca para instrumentar código para rastrear telemetría.
+: una biblioteca específica del lenguaje de programación incrustada en aplicaciones web. Datadog App and API Protection utiliza la librería para monitorizar y proteger. APM utiliza la misma biblioteca para instrumentar código para rastrear telemetría.
 
 Regla de detección
 : Definición de lógica condicional que se aplica a los datos ingeridos y a las configuraciones de la nube. Cuando coincide al menos un caso definido en una regla durante un periodo de tiempo determinado, Datadog genera una _señal de seguridad_.
 : Consulta [Reglas de detección][10].
 
 Lista de permisos (antiguo filtro de exclusión)
-: Mecanismo para descartar las trazas de seguridad marcadas por la biblioteca de Datadog App and API Protection y las reglas WAF en la aplicación. La lista de permisos se aplica a medida que las solicitudes se ingieren en Datadog (admisión), y ayuda a gestionar los falsos positivos y los costes de admisión.
+: Mecanismo para descartar las trazas de seguridad marcadas por la librería de Datadog App and API Protection y las reglas WAF en la aplicación. La lista de permisos se aplica a medida que las solicitudes se ingieren en Datadog (admisión), y ayuda a gestionar los falsos positivos y los costes de admisión.
 : Consulta [Filtros de exclusión][11] en la aplicación.
 
 Reglas WAF en la aplicación (antiguas reglas de eventos)

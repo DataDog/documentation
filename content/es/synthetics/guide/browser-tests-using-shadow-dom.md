@@ -8,11 +8,11 @@ title: Ejecutar tests en aplicaciones utilizando un Shadow DOM
 
 ## Información general
 
-La API del Shadow Objeto de documento de objeto (DOM) es un componente web que permite adjuntar un árbol del DOM encapsulado a un elemento de HTML. El [DOM de sombra][1] es autónomo y permanece aislado del DOM del documento principal. 
+La API del Shadow Objeto de documento de objeto (DOM) es un componente web que permite adjuntar un árbol del DOM encapsulado a un elemento de HTML. El [DOM de sombra][1] es autónomo y permanece aislado del DOM del documento principal.
 
 Puedes utilizar un DOM de sombra para los siguientes casos de uso:
 
-- Formularios y componentes de bibliotecas de terceros
+- Formularios y componentes de librerías de terceros
 - Contenido incrustado (como vídeo o una imagen)
 - Integraciones de chats emergentes
 
@@ -26,7 +26,7 @@ En función del [modo de encapsulación][2] y del objetivo del paso, aprovecha l
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Shadow DOM abierto" style="width:50%;" >}}
 
-En el modo `open`, las aserciones normales no están disponibles. Puedes utilizar las aserciones de JavaScript para interactuar y validar elementos representados en un DOM de sombra con la propiedad `Element.shadowRoot`. 
+En el modo `open`, las aserciones normales no están disponibles. Puedes utilizar las aserciones de JavaScript para interactuar y validar elementos representados en un DOM de sombra con la propiedad `Element.shadowRoot`.
 
 ### Aserción de la presencia de texto
 
@@ -57,7 +57,7 @@ return shadowDomElement.textContent.includes("TODO")
 
 ### Introducir texto en los campos de entrada
 
-Cuando los campos de entrada de texto se representan en el árbol del DOM del documento principal, el grabador de tests del navegador Datadog graba automáticamente los valores introducidos y crea un paso de test [Escribir texto][3]. 
+Cuando los campos de entrada de texto se representan en el árbol del DOM del documento principal, el grabador de tests del navegador Datadog graba automáticamente los valores introducidos y crea un paso de test [Escribir texto][3].
 
 Cuando se trabaja con campos de entrada representados en un DOM de sombra, es posible que el grabador no pueda capturar un conjunto completo de puntos de referencia al elemento, lo que provoca que el paso falle en las ejecuciones de tests. Como solución para introducir texto en un campo de entrada de texto representado en un DOM de sombra, añade una aserción de JavaScript que localice el elemento `<input>` respectivo y configure el campo `value`.
 
