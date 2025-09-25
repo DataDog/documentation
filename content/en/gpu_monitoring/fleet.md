@@ -1,6 +1,7 @@
 ---
 title: GPU Monitoring Fleet Page
 description: "An inventory of all your GPU-accelerated hosts that helps you diagnose performance issues."
+private: true
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
       tag: "Blog"
@@ -103,13 +104,15 @@ You can click on the gear icon to customize which metrics are displayed within t
 | Idle Cost             | (Only nonzero for time frames longer than 2 days) The cost of GPU resources that are reserved and allocated, but not used.
 {{% /collapse-content %}} 
 
-## Details Side panel 
+## Details side panel 
 
 Clicking any row in the Fleet table opens a side panel with more details for the selected cluster, host, or device.
 
 ### Connected Entities 
 
-Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the **Connected Entities** section in any detail view, you can see SM Activity, GPU core utilization (only if System Probe is enabled), and memory usage by pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
+Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the **Connected Entities** section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
+
+**Note**: The **Pods** tab is only available for cluster, host, or device.
 
 {{< tabs >}}
 {{% tab "Cluster side panel" %}}
@@ -117,10 +120,10 @@ Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses
 Within this side panel, you have a cluster-specific funnel that identifies:
 
 - Number of Total, Allocated, Active, and Effective devices within that particular cluster
-- Total and Idle Cost of that cluster
-- Connected Entities of that cluster: pods, processes and Slurm jobs
-- 4 Key Metrics (customizable) for that cluster: Core Utilization (only if System probe is enabled), SM Activity, Memory Utilization, PCIe Throughput and Graphics Engine Activity
-- Table of Hosts associated with that cluster
+- Estimated total and idle cost of that cluster
+- Connected entities of that cluster: pods, processes, and Slurm jobs
+- Four key metrics (customizable) for that cluster: Graphics Activity, SM Activity, Core Utilization (only if System probe is enabled), and Memory Utilization
+- Table of hosts associated with that cluster
 
 {{< img src="gpu_monitoring/cluster_sidepanel.png" alt="Cluster specific side panel that breaks down idle devices, costs and connected entities" style="width:100%;" >}}
 
@@ -128,11 +131,11 @@ Within this side panel, you have a cluster-specific funnel that identifies:
 
 {{% tab "Host side panel" %}}
 
-Within this side panel you now have a host-specific view that identifies:
+Within this side panel, you have a host-specific view that identifies:
 
-- Host-related metadata such as the provider, instance type, CPU Utilization, System Memory Used, System Memory Total, System IO Util, SM Activity, and Temperature
+- Host-related metadata such as provider, instance type, CPU utilization, system memory used, system memory total, system IO util, SM activity, and temperature
 - The specific GPU devices allocated to that host sorted by Graphics Engine Activity
-- Connected Entities of that cluster: pods, processes, and Slurm jobs
+- Connected Entities of that host: pods, processes, and Slurm jobs
 
 {{< img src="gpu_monitoring/host_sidepanel.png" alt="Host specific side panel that displays the GPU devices tied to that host and Connected Entities" style="width:100%;" >}}
 
@@ -140,11 +143,11 @@ Within this side panel you now have a host-specific view that identifies:
 
 {{% tab "Device side panel" %}}
 
-Within this side panel you now have a device-specific view that identifies:
+Within this side panel, you have a device-specific view that identifies:
 
 - Recommendations (if any) for how to use this device more effectively 
-- Device-related details: Device Type, SM Activity, Temperature
-- Four key metrics tied to GPUs: SM Activity, Memory Utilization, Power, Graphics Engine Activity 
+- Device-related details: device type, SM activity, and temperature
+- Four key metrics tied to GPUs: SM Activity, Memory Utilization, Power, and Graphics Engine Activity 
 - Connected Entities of that cluster: pods and processes
 
 {{< img src="gpu_monitoring/device_sidepanel.png" alt="Device specific side panel that displays recommendations for how to use the device more effectively and other key telemetry." style="width:100%;" >}}
@@ -154,7 +157,7 @@ Within this side panel you now have a device-specific view that identifies:
 
 ## Installation Recommendations
 
-Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of GPU Monitoring. In this modal, you have various installation update recommendations to get the optimal value of GPU Monitoring. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts.
+Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of GPU Monitoring. In this modal, you can find installation update recommendations to get the optimal value of GPU Monitoring. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts.
 
 To view advanced GPU Monitoring features such as attribution of GPU resources by related processes or SLURM jobs, you must enable [Live Processes][3] and the [Slurm][4] integration, respectively.
 

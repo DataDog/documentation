@@ -1,5 +1,6 @@
 ---
 title: GPU Monitoring Summary Page
+private: true
 description: "Real-time insights across your entire GPU fleet for better provisioning and cost optimization"
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
@@ -86,6 +87,8 @@ If you have Kubernetes clusters with a large number of unmet GPU requests, you c
 Cost optimization of your GPU workloads is crucial, as GPUs are often the most costly items in a team's infrastructure budget. This section uncovers workloads with inefficient GPU utilization, linking wasted costs to specific workloads and their resource usage.
 
 ### Most expensive clusters
+
+**Note**: This section is only available for Kubernetes users.
 
 This table is sorted by **Total Cost**, helping you to identify your most expensive Kubernetes clusters and the amount spent on their idle resources. You can use this information to reach out to the teams responsible for those clusters, and find ways to decrease their costs, such as reducing the number of idle or inefficient GPU devices.
 
