@@ -10,10 +10,6 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.alert ul, .alert ol {
-  font-size: inherit;
-}
-
 .alert::before {
   content: '';
   position: absolute;
