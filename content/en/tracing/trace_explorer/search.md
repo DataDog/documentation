@@ -23,11 +23,6 @@ Group the query by `http.route` to see which specific endpoints are most affecte
 
 {{< img src="tracing/trace_explorer/search/trace_explorer_group_by.png" alt="Trace Explorer list search. The Visualize As option is set to Top List." style="width:100%;">}}
 
-{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
-
-[1]: /tracing/trace_explorer/query_syntax/#facets
-{{< /site-region >}}
-
 ## Query Syntax
 
 To begin searching for spans in the Trace Explorer, read the [query syntax documentation][2] and the [time frame documentation][3] for more details on custom time frames.
