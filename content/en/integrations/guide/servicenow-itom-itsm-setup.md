@@ -61,7 +61,8 @@ To configure legacy monitor notifications using `@servicenow-<INSTANCE_NAME>`:
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Monitors** tab.
 1. Under **Manage Legacy Monitor Notifications**, select the instance you want to configure notifications for, then select the table that legacy monitor notifications write to.
-1. To validate the integration is set up correctly, add `@servicenow-<INSTANCE_NAME>` in a monitor or event notification. The raw data populates rows in the interim table and is forwarded to the ServiceNow table specified by the integration.
+1. To validate the integration is set up correctly, add `@servicenow-<INSTANCE_NAME>` in a monitor or event notification, and define both the `Impact` and `Urgency` values so ServiceNow can use them to calculate the incident priority. The raw data populates rows in the interim table and is forwarded to the ServiceNow table specified by the integration.
+   {{< img src="integrations/guide/servicenow/servicenow-priority-field-mapping.png" alt="Example legacy monitor with defined Impact and Urgency values" style="width:100%;" >}}
 1. Use [transform maps](#transform-maps) in ServiceNow to customize the transformation of the data sent to the interim tables.
 1. Customize the notification payload with available Datadog variables or custom strings.
 
