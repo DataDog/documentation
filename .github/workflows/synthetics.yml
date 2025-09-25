@@ -24,8 +24,7 @@ jobs:
           sparse-checkout: |
             .
 
-      # SECURITY: Branch name validation to prevent command injection
-      # This step is critical for security - any changes require security team review
+      # Branch Name Validation to be run prior to workflow
       - name: Validate branch name and set output
         id: validate
         run: |
