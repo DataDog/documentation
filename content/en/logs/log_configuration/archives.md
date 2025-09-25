@@ -37,7 +37,7 @@ Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding
 
 See how to [archive your logs with Observability Pipelines][4] if you want to route your logs to a storage-optimized archive directly from your environment.
 
-The following metrics report on logs that have been archives successfully, including logs that were sent successfully after retries.
+The following metrics report on logs that have been archived successfully, including logs that were sent successfully after retries.
 
 - datadog.archives.logs.bytes
 - datadog.archives.logs.count
