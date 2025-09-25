@@ -16,6 +16,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
     tag: 'Blog'
     text: 'Datadog Brings Observability to Data Teams by Acquiring Metaplane'
+  - link: https://www.datadoghq.com/blog/airflow-data-lineage-monitoring
+    tag: Blog
+    text: Monitor your data pipelines with Airflow lineage
 ---
 
 <div class="alert alert-info">Data Observability is in Preview.</div>

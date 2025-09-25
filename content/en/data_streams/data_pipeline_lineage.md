@@ -1,6 +1,9 @@
 ---
 title: Data Pipeline Lineage
 further_reading:
+- link: https://www.datadoghq.com/blog/airflow-data-lineage-monitoring
+  tag: Blog
+  text: Monitor your data pipelines with Airflow lineage
 - link: "/data_jobs"
   tag: "Documentation"
   text: "Data Jobs Monitoring"
