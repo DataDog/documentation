@@ -304,11 +304,6 @@ menu:
       parent: essentials_heading
       weight: 50000
       identifier: agent
-    # - name: Basic Agent Usage
-    #   url: agent/basic_agent_usage/
-    #   parent: agent
-    #   identifier: basic_agent_usage
-    #   weight: 1
     - name: Architecture
       url: agent/architecture/
       parent: agent
