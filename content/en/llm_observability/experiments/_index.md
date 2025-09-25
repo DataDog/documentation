@@ -308,8 +308,7 @@ You can run an `experiment` manually or configure it to run automatically in you
 ### GitHub Actions
 Use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
 
-- Workflow files live in the `.github/workflows` directory at the root of your repository.
-- Workflow files use YAML syntax and use the `.yml` extension.
+**Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
 
 ```yaml
 name: Experiment SDK Test
