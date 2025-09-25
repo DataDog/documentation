@@ -27,8 +27,6 @@ Select the detection method you want to use for creating signals.
 
 Choose the query language you want to use.
 
-{{% collapse-content title="Event query" level="h5" expanded=false id="id-for-anchoring" %}}
-
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -43,13 +41,6 @@ Choose the query language you want to use.
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/explorer/calculated_fields/expression_language/
-
-{{% /collapse-content %}}
-{{% collapse-content title="SQL" level="h5" expanded=false id="id-for-anchoring" %}}
-
-TKTK
-
-{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "New Value" %}}
