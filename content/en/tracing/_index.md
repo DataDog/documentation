@@ -29,6 +29,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to boost your APM understanding"
+  - link: https://www.datadoghq.com/blog/cloudcraft-observability-overlay
+    tag: Blog
+    text: Visually identify observability gaps with Cloudcraft in Datadog
 
 aliases:
   - /tracing/faq/terminology

@@ -46,6 +46,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/archive-search/"
     tag: "Blog"
     text: "Search your historical logs more efficiently with Datadog Archive Search"
+  - link: https://www.datadoghq.com/blog/cloudcraft-observability-overlay
+    tag: Blog
+    text: Visually identify observability gaps with Cloudcraft in Datadog
 cascade:
     algolia:
         rank: 70

@@ -7,6 +7,9 @@ aliases:
   - /network_performance_monitoring/
   - /network_monitoring/performance/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloudcraft-observability-overlay
+  tag: Blog
+  text: Visually identify observability gaps with Cloudcraft in Datadog
 - link: '/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/'
   tag: 'Guide'
   text: 'Detecting Application Availability using Network Insights'
