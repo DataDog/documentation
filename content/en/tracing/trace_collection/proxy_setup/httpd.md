@@ -134,7 +134,7 @@ To enable log and trace correlation in Datadog, configure a log processing pipel
 15. Click **Create**.
 16. Save and enable your new pipeline.
 
-Once the pipeline is active, new Apache logs are automatically correlated with their traces and spans.
+After the pipeline is active, new Apache logs are automatically correlated with their traces and spans.
 
 ## Further Reading
 
