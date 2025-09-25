@@ -4,6 +4,9 @@ description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
 further_reading:
+- link: https://www.datadoghq.com/blog/aws-pcs-integration-announcement
+  tag: Blog
+  text: Track the performance of your HPC workloads with Datadog's AWS PCS integration
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
