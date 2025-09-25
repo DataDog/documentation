@@ -2,6 +2,8 @@
 title: Create and Manage Datastores
 description: Create datastores with primary keys, seed initial data, and manage datastore contents through manual editing or file uploads.
 disable_toc: false
+aliases:
+- actions/datastore/create
 further_reading:
 - link: "service_management/app_builder/build"
   tag: "Documentation"

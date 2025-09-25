@@ -1,6 +1,9 @@
 ---
 title: Access and Authentication
 description: Access and authentication for Datastores
+disable_toc: false
+aliases:
+- actions/datastore/auth
 further_reading:
 - link: "/actions/connections"
   tag: "Documentation"
