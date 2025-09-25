@@ -11,7 +11,7 @@ algolia:
   tags: ['uninstall']
 ---
 
-For information on uninstalling the Agent on your system, consult the [Supported Platforms][1] page for your operating system, platform, or configuration tool.
+For information on uninstalling the Agent on your system, select your operating system, platform, or configuration tool.
 
 {{< uninstall-agent >}}
 
