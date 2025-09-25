@@ -45,7 +45,7 @@ You can visualize your ingested data using the following cost types:
 | `oci.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [FOCUS cost export][] and make it easier to discover and understand cost data.
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [FOCUS cost export][4] and make it easier to discover and understand cost data.
 
 The following out-of-the-box tags are available for filtering and grouping data:
 
@@ -102,3 +102,4 @@ Container cost allocation is not available for OCI. See [Container Cost Allocati
 [1]:  https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/
 [2]:  https://app.datadoghq.com/cost/setup?cloud=oracle
 [3]:  https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended#oci-integration-manual-to-quickstart-migration
+[4]: https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costusagereportsoverview.htm
