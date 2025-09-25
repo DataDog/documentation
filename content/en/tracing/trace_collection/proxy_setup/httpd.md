@@ -114,27 +114,27 @@ By default, logs capture `dd.trace_id` and `dd.span_id` in hexadecimal format:
 
 To enable log and trace correlation in Datadog, configure a log processing pipeline to convert these IDs from hexadecimal to decimal.
 
-1. In Datadog, navigate to the [**Log Configuration**][9] page.
+1. In Datadog, navigate to the [**Log Configuration**][4] page.
 2. Hover over your active Apache pipeline and click the **Clone** icon to create an editable version.
 3. Click the cloned pipeline.
 4. Click **Add Processor**.
-5. Select [Grok Parser][11] as the processor type.
+5. Select [Grok Parser][5] as the processor type.
 6. Define the following parsing rule to extract the trace ID attribute from a log event:
    ```text
    extract_correlation_ids %{data} dd.trace_id="%{notSpace:dd.trace_id:nullIf("-")}" dd.span_id="%{notSpace:dd.span_id:nullIf("-")}"
    ```
 7. Click **Create**.
 8. Click **Add Processor** again.
-9. Select [Trace ID Remapper][10] as the processor type. This processor associates the parsed ID with its corresponding APM trace.
+9. Select [Trace ID Remapper][6] as the processor type. This processor associates the parsed ID with its corresponding APM trace.
 10. In the **Set trace id attribute(s)** field, enter `dd.trace_id`.
 11. Click **Create**.
 12. Click **Add Processor** again.
-13. Select [Span ID Remapper][12] as the processor type. This processor associates the parsed ID with its corresponding APM span.
+13. Select [Span ID Remapper][7] as the processor type. This processor associates the parsed ID with its corresponding APM span.
 14. In the **Set span id attribute(s)** field, enter `dd.span_id`.
 15. Click **Create**.
 16. Save and enable your new pipeline.
 
-After the pipeline is active, new Apache logs are automatically correlated with their traces and spans.
+Once the pipeline is active, new Apache logs are automatically correlated with their traces and spans.
 
 ## Further Reading
 
@@ -143,7 +143,7 @@ After the pipeline is active, new Apache logs are automatically correlated with 
 [1]: https://github.com/DataDog/httpd-datadog
 [2]: https://httpd.apache.org/
 [3]: https://github.com/DataDog/httpd-datadog/blob/main/doc/configuration.md
-[9]: https://app.datadoghq.com/logs/pipelines
-[10]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[11]: /logs/log_configuration/processors/?tab=ui#grok-parser
-[12]: /logs/log_configuration/processors/?tab=ui#span-remapper
+[4]: https://app.datadoghq.com/logs/pipelines
+[5]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[6]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+[7]: /logs/log_configuration/processors/?tab=ui#span-remapper
