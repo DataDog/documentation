@@ -305,7 +305,7 @@ Create an experiment using `LLMObs.experiment()`:
 ## Setting Up An Automated Experiment (CI/CD)
 You can run an `experiment` once, or set it to run automatically in your pipelines (like CI/CD). For example, kick it off against your dataset on every change to compare with your baseline and catch any impact on your system.
 
-### Github Actions
+### GitHub Actions
 - Workflow files live within the `.github/workflows` directory of your root repository.
 - Workflow files use `YAML syntax` and use the `.yml`extension
 
