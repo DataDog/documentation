@@ -129,10 +129,10 @@ Additionally, you can use the command `sudo journalctl -u op-fluent.service` to 
 1.  Navigate to the additional pipeline's Install page.
 1.  In the **Deploy your pipeline** section, you should see your additional Worker detected. Click **Deploy**.
 
-[1]: https://docs.datadoghq.com/observability_pipelines/configuration/set_up_pipelines/?tab=pipelineui
-[2]: https://docs.datadoghq.com/observability_pipelines/guide/environment_variables/?tab=sources
+[1]: /observability_pipelines/configuration/set_up_pipelines/?tab=pipelineui
+[2]: /observability_pipelines/guide/environment_variables/?tab=sources
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.datadoghq.com/getting_started/site/
+[4]: /getting_started/site/
 
 ## Further reading
 
