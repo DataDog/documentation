@@ -1223,6 +1223,7 @@ extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
 {{% tab "Java" %}}
 {{< code-block lang="java" >}}
 import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
 
 public class MyJavaClass {
   public void preprocessDocument(String document) {
@@ -1232,7 +1233,7 @@ public class MyJavaClass {
 
   public String extractData(String document) {
     LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("extractData", null, "session-141");
-    preprocessDocument(document)
+    preprocessDocument(document);
     ... // perform data extraction on the document
     workflowSpan.annotateIO(...); // record the input and output
     workflowSpan.finish();
