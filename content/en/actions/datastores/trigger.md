@@ -10,10 +10,6 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datastores are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You can add workflows to your datastores that automatically trigger when records are created, updated, or change status.
 
 ## Create a new automation rule
