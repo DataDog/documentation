@@ -19,7 +19,7 @@ title: Guides de l'Agent
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installation de Agent sur un serveur avec une connectivité internet limitée{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Mettre en place Ansible en utilisant un rôle Datadog autonome{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Comment désinstaller l'Agent ?{{< /nextlink >}}
-    {{< nextlink href="agent/guide/Linux-key-rotation-2024" >}}Rotation des clés Linux 2024{{{< /nextlink >}}
+    {{< nextlink href="agent/guide/Linux-key-rotation-2024" >}}Rotation des clés Linux 2024{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="Windows guides" >}}
@@ -50,7 +50,7 @@ title: Guides de l'Agent
 {{< /header-list >}}
 
 {{< header-list header="Agent 6 guides" >}}
-    {{< nextlink href="agent/guide/install-agent-6" >}}Installer la version 6 de l'Agent 6{{{< /nextlink >}}
+    {{< nextlink href="agent/guide/install-agent-6" >}}Installer la version 6 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-6-commands" >}}Commandes la version 6 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-6-configuration-files" >}}Fichiers de configuration de la version 6 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-6-log-files" >}}Fichiers de log de la version 6 de l'Agent{{< /nextlink >}}
@@ -65,9 +65,9 @@ title: Guides de l'Agent
     {{< nextlink href="agent/guide/install-agent-5" >}}Installer la version 5 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-ports" >}}Ports de la version 5 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-proxy" >}}Configuration du proxy pour la version 5 de l'Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-5-flare" >}}Envoyer un flare avec la version 5 de l'Agent{{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-flare" >}}Envoyer un flare avec la version 5 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery dans la version 5 de l'Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Utilisation basique de l'Agent avec Kubernetes pour la version 5 de l'Agent{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Utilisation basique de l'Agent avec Kubernetes pour la version 5 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-check-status" >}}Dépannage un check de l'Agent avec la version 5 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-permissions-issues" >}}Problèmes d'autorisation avec la version 5 de l'Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-debug-mode" >}}Mode de débogage avec la version 5 de l'Agent{{< /nextlink >}}
