@@ -302,6 +302,42 @@ Create an experiment using `LLMObs.experiment()`:
    print(f"View experiment: {experiment.url}")
    ```
 
+## Setting Up An Automated Experiment (CI/CD)
+You can run an `experiment` once, or set it to run automatically in your pipelines (like CI/CD). For example, kick it off against your dataset on every change to compare with your baseline and catch any impact on your system.
+
+### Github Actions
+- Workflow files live within the `.github/workflows` directory of your root repository.
+- Workflow files use `YAML syntax` and use the `.yml`extension
+
+```yaml
+name: Experiment SDK Test
+
+on:
+  push:
+    branches:
+      - main # Or your desired branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: protected-main-env # This job will use secrets defined in the 'protected-main-env' environment
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.0' # Or your desired Python version
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Install dependencies
+        run: poetry install
+      - name: Run tests
+        run: poetry run pytest -vv -s
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+```
+
 ## HTTP API
 
 ### Postman quickstart
