@@ -14,9 +14,9 @@ further_reading:
   text: "Learn about CI Monitors"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-This Test Optimization feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
-{{< /callout >}}
+<div class="alert alert-info">
+This Test Optimization feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product.
+</div>
 
 ## Overview
 
