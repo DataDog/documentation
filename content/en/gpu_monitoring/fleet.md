@@ -21,7 +21,7 @@ Your selection is used to populate the resulting table. If you select _Cluster_ 
 
 {{< img src="gpu_monitoring/host_row_expansion.png" alt="A host entry in the table" style="width:90%;" >}}
 
-**Note:** The Cluster table is only populated if you use Kubernetes.
+**Note**: The Cluster table is only populated if you use Kubernetes.
 
 ### Explore your GPU fleet with filters and groupings
 

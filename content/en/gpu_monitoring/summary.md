@@ -99,7 +99,7 @@ For example, if you see a related pod with high core utilization, that pod is in
 
 ### Ineffective pods
 
-**Note:** This section is only available for Kubernetes users.
+**Note**: This section is only available for Kubernetes users.
 
 To maximize the value of your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by **SM activity** by default. 
 
