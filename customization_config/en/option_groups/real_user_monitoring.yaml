@@ -4,6 +4,13 @@ rum_sdk_platform_options:
   - id: ios
   - id: react_native
 
+rum_sdk_platform_options_v2:
+  - id: android
+    default: true
+  - id: ios
+  - id: react_native
+  - id: flutter
+
 rum_session_replay_sdk_options:
   - id: android
     default: true

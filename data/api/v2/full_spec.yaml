@@ -30742,6 +30742,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -31803,6 +31804,65 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_CLOUD_STORAGE
+    ObservabilityPipelineGooglePubSubDestination:
+      description: The `google_pubsub` destination publishes logs to a Google Cloud
+        Pub/Sub topic.
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: google-pubsub-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        project:
+          description: The GCP project ID that owns the Pub/Sub topic.
+          example: my-gcp-project
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Pub/Sub topic name to publish logs to.
+          example: logs-subscription
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      - project
+      - topic
+      type: object
+    ObservabilityPipelineGooglePubSubDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineGooglePubSubDestinationType:
+      default: google_pubsub
+      description: The destination type. The value should always be `google_pubsub`.
+      enum:
+      - google_pubsub
+      example: google_pubsub
+      type: string
+      x-enum-varnames:
+      - GOOGLE_PUBSUB
     ObservabilityPipelineGooglePubSubSource:
       description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
@@ -36223,6 +36283,12 @@ components:
     RUMApplicationAttributes:
       description: RUM application attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -61254,6 +61320,45 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/resource_collection:
+    get:
+      description: Get all resource collection AWS IAM permissions required for the
+        AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsResourceCollection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration resource collection IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get resource collection IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 8
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/standard:
+    get:
+      description: Get all standard AWS IAM permissions required for the AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsStandard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration standard IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS integration standard IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/integration/aws/logs/services:
