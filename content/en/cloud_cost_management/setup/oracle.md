@@ -94,7 +94,7 @@ The following out-of-the-box tags are available:
 | Object Storage     | `name`                        |
 
 ### Container cost allocation
-Container cost allocation is not available for OCI. See [Container Cost Allocation][14] for more details.
+Container cost allocation is not available for OCI. See [Container Cost Allocation][5] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -103,3 +103,4 @@ Container cost allocation is not available for OCI. See [Container Cost Allocati
 [2]:  https://app.datadoghq.com/cost/setup?cloud=oracle
 [3]:  https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended#oci-integration-manual-to-quickstart-migration
 [4]: https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costusagereportsoverview.htm
+[5]: https://docs-staging.datadoghq.com/jahanzeb.hassan/oci-docs-yo/cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws
