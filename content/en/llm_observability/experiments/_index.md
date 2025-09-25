@@ -302,12 +302,14 @@ Create an experiment using `LLMObs.experiment()`:
    print(f"View experiment: {experiment.url}")
    ```
 
-## Setting Up An Automated Experiment (CI/CD)
-You can run an `experiment` once, or set it to run automatically in your pipelines (like CI/CD). For example, kick it off against your dataset on every change to compare with your baseline and catch any impact on your system.
+## Setting up an automated experiment in CI/CD
+You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
 ### GitHub Actions
-- Workflow files live within the `.github/workflows` directory of your root repository.
-- Workflow files use `YAML syntax` and use the `.yml`extension
+Use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
+
+- Workflow files live in the `.github/workflows` directory at the root of your repository.
+- Workflow files use YAML syntax and use the `.yml` extension.
 
 ```yaml
 name: Experiment SDK Test
@@ -320,7 +322,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: protected-main-env # This job will use secrets defined in the 'protected-main-env' environment
+    environment: protected-main-env # The job uses secrets defined in this environment
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
