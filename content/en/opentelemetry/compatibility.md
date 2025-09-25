@@ -31,7 +31,6 @@ The following table shows feature compatibility across different setups:
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Real User Monitoring][22] (RUM) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Trace metrics are calculated on the backend based on ingested spans that have passed through sampling, not on 100% of local traces before sampling." >}}) |
@@ -44,6 +43,7 @@ The following table shows feature compatibility across different setups:
 | [Data Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Database Monitoring][14] (DBM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}} |
+| [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
 ## More details
