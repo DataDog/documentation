@@ -5,6 +5,9 @@ aliases:
   - /synthetics/uptime_check
   - /synthetics/api_test
 further_reading:
+- link: https://www.datadoghq.com/blog/kerberos-synthetics
+  tag: Blog
+  text: Proactively monitor Kerberos-authenticated web apps and APIs with Datadog Synthetics
 - link: "/synthetics/guide/version_history/"
   tag: "Guide"
   text: "Version History for Synthetic Monitoring"
