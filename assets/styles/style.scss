@@ -67,7 +67,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/try-rule-modal';
 @import 'components/learning-center-callout';
 @import 'components/expression-language';
-@import 'components/alerts_with_warning';
+@import 'components/admonitions';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
