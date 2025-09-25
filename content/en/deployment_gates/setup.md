@@ -127,8 +127,8 @@ The command has the following behavior:
 Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
 **Required environment variables**:
-* `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
-* `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
+* `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
 * `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
 For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][4].
@@ -238,7 +238,9 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-Datadog provides a GitHub Action to integrate with Deployment Gates:
+The [`Datadog Deployment Gate GitHub Action`][4] includes all the required logic to evaluate a Deployment Gate during the deployment of a service.
+
+Add a `DataDog/deployment-gate-github-action` step to your existing deployment workflow, for example:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
@@ -249,9 +251,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
       - name: Deploy Canary
         run: |
           echo "Deploying canary release for service:'my-service' in 'production'. Version 1.0.1"
@@ -273,14 +272,18 @@ jobs:
           # Your deployment commands here
 ```
 
-The GitHub action wraps around the  [`datadog-ci` command][1], and as such has the same behavior, parameters and requirements.
-
+If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `version: 1.0.1`).
+The action has the following behavior:
+* It sends a request to start the gate evaluation and blocks until the evaluation is complete.
+* It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
+* It has built-in automatic retries for errors.
+* It allows you to customize its behavior in case of unexpected Datadog errors with the `fail-on-error` parameter.
 
 **Required environment variables**:
-* `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
-* `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
+* `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
 
-For complete configuration options and detailed usage examples, see the [`deployment-gate-action` repository][4].
+For complete configuration options and detailed usage examples, see the [`DataDog/deployment-gate-github-action` repository][4].
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
