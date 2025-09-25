@@ -237,28 +237,24 @@ spec:
 [7]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
 
 {{% /tab %}}
-{{% tab "Github Actions" %}}
-Datadog provides a Github Action to make it simple to integrate with Deployment Gates:
+{{% tab "GitHub Actions" %}}
+Datadog provides a Github Action to integrate with Deployment Gates:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
-
 on:
   push:
     branches: [main]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
         - name: Deploy Canary
         run: |
           echo "Deploying canary release for service:'my-service' in 'production'. Version 1.0.1"
           # Your deployment commands here
-
       - name: Evaluate Deployment Gate
         uses: DataDog/deployment-gate-github-action@v1
         env:
@@ -267,7 +263,6 @@ jobs:
         with:
           service: 'my-service'
           env: 'production'
-
       - name: Deploy
         if: success()
         run: |
@@ -275,14 +270,14 @@ jobs:
           # Your deployment commands here
 ```
 
-The Github action wraps around the  [`datadog-ci` command][1], and as such has the same behavior, parameters and requirements.
+The GitHub action wraps around the  [`datadog-ci` command][1], and as such has the same behavior, parameters and requirements.
 
 
 **Required environment variables**:
 * `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
 * `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
 
-For complete configuration options and detailed usage examples, refer to the [`deployment-gate-action` repository][4].
+For complete configuration options and detailed usage examples, see the [`deployment-gate-action` repository][4].
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
