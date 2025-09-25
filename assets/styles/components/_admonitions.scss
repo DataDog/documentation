@@ -4,7 +4,10 @@
   border-radius: 0;
   position: relative;
   padding: 8px 12px 8px 16px;
-  color: black
+  font-size: 18px;
+  line-height: 27px;
+  color: #4a4a4a;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .alert ul, .alert ol {
