@@ -329,11 +329,11 @@ menu:
       url: agent/supported_platforms/aix/
       weight: 401
       parent: agent_supported_platforms
-    # - name: Linux
-    #   identifier: basic_agent_usage_linux
-    #   url: agent/basic_agent_usage/linux/
-    #   weight: 102
-    #   parent: basic_agent_usage
+    - name: Linux
+      identifier: basic_agent_usage_linux
+      url: agent/supported_platforms/linux/
+      weight: 402
+      parent: agent_supported_platforms
     # - name: Ansible
     #   identifier: basic_agent_usage_ansible
     #   url: agent/basic_agent_usage/ansible/
