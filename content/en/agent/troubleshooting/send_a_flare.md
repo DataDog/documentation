@@ -3,6 +3,9 @@ title: Agent Flare
 aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
+- link: https://www.datadoghq.com/blog/cloudcraft-observability-overlay
+  tag: Blog
+  text: Visually identify observability gaps with Cloudcraft in Datadog
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"
   text: "Agent Debug Mode"
