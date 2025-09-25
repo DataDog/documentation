@@ -5,8 +5,12 @@
     position: relative;
     padding: 8px 12px 8px 16px;
     color: black
-    }
+}
 
+.alert ul, .alert ol {
+    font-size: inherit;
+}
+  
 .alert::before {
     content: '';
     position: absolute;
@@ -14,7 +18,7 @@
     top: 8px;
     bottom: 8px;
     width: 4px;
-  }
+}
 
 .alert-info{
     background-color: none;
@@ -31,7 +35,7 @@
     top: 8px;
     left: 16px;
     color: #004A8C;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
   }
   
@@ -51,7 +55,7 @@
     top: 8px;
     left: 16px;
     color: #7F4205;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
   }
   
@@ -70,7 +74,7 @@
     top: 8px;
     left: 16px;
     color: #9B3908;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
   }
 
@@ -89,7 +93,7 @@
     top: 8px;
     left: 16px;
     color: #4A2C6A;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
   }
   
