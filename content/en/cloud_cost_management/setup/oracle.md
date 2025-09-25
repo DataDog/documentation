@@ -83,12 +83,12 @@ The following out-of-the-box tags are available for filtering and grouping data:
 
 #### Cost and observability correlation
 
-Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top Google products to simplify correlating observability and cost metrics.
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top OCI products to simplify correlating observability and cost metrics.
 
-For example, to view cost and utilization for each Compute instance, you can make a table with `oci.cost.amortized`, `oci.computeagent.cpu_utilization`, and `oci.computeagent.memory_utilization` (or any other Compute metric) and group by `host`. Or, to see Object Storage usage and costs side by side, you can graph `gcp.cloudfunctions.function.execution_count` and `oci.cost.amortized` grouped by `name`.
+For example, to view cost and utilization for each Compute instance, you can make a table with `oci.cost.amortized`, `oci.computeagent.cpu_utilization`, and `oci.computeagent.memory_utilization` (or any other Compute metric) and group by `host`. Or, to see Object Storage usage and costs side by side, you can graph `oci.objectstorage.stored_bytes` and `oci.cost.amortized` grouped by `name`.
 
 The following out-of-the-box tags are available:
-| Google Product     | Tag(s)                        |
+| OCI Product        | Tag(s)                        |
 | -------------------| ----------------------------- |
 | Compute            | `host`                        |
 | Object Storage     | `name`                        |
