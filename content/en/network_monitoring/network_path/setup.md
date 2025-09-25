@@ -401,6 +401,16 @@ Agent `v7.61+` is required.
         ## Recommendation: leave at default
         #
         # workers: <NUMBER OF WORKERS> # default 4
+
+        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+        # pathtest_interval: 10m
+
+        # @param pathtest_ttl - integer - optional - default: 35m
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+        # The TTL is reset each time the connection is seen again.
+        # pathtest_ttl: 35m
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -433,6 +443,15 @@ datadog:
     ## The `workers` refers to the number of concurrent workers available for network path execution.
     #
     # workers: 4
+    #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+    # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+    # pathtest_interval: 10m
+
+    # @param pathtest_ttl - integer - optional - default: 35m
+    # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+    # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+    # The TTL is reset each time the connection is seen again.
+    # pathtest_ttl: 35m
 
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
