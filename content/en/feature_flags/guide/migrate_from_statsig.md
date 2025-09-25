@@ -42,7 +42,7 @@ const assignmentLogger: IAssignmentLogger = {
 };
     {{< /code-block >}}
 
-1. Initialize the SDK in your code. For instructions for your language, see [SDK guides][6].```
+1. Initialize the SDK in your code. For instructions for your language, see [SDK guides][6].
 
     {{< code-block lang="typescript" >}}
 await init({
