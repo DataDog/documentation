@@ -23,7 +23,12 @@ To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1]
 
 ### Scan with Datadog-hosted scanning
 
-For GitHub repositories, you can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+You can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. This is supported for:
+- GitHub repositories (except those using [Git Large File Storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage))
+- GitLab.com and Self-Managed repositories
+- Azure DevOps repositories
+
+To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
 Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
@@ -43,7 +48,7 @@ Datadog Static Code Analysis supports all source code management providers, with
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
+You must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
@@ -59,13 +64,9 @@ When installing a GitHub App, the following permissions are required to enable c
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
+See [these instructions][1] to complete the setup process to connect your GitLab instance to Datadog. Both GitLab.com and Self-Managed are supported.
 
-If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
-
-[1]: https://github.com/DataDog/gitlab-integration-setup
+[1] https://docs.datadoghq.com/integrations/gitlab-source-code/#setup 
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
@@ -74,7 +75,7 @@ If GitLab is your source code management provider, before you can begin installa
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
+Before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
 
 **Note:** Azure DevOps Server is not supported.
 
