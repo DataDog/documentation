@@ -1,5 +1,6 @@
 ---
 title: API and Application Keys
+description: Manage API keys, application keys, and client tokens for browser applications with security features.
 aliases:
     - /account_management/faq/how-do-i-reset-my-application-keys/
     - /agent/faq/how-do-i-reset-my-datadog-api-keys/
@@ -41,7 +42,7 @@ Action APIs include:
 - [Actions Connections][6]
 - [Workflow Automation][7]
 
-In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done [through the UI][2] or [API][5]. By default, application keys cannot be used with these APIs.
+In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done [through the UI][2] or [API][21]. By default, application keys cannot be used with these APIs.
 
 {{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
 
@@ -176,3 +177,4 @@ Need help? Contact [Datadog support][19].
 [18]: /api/latest/service-accounts/
 [19]: /help/
 [20]: /account_management/org_settings/service_accounts/
+[21]: /api/latest/action-connection/#register-a-new-app-key

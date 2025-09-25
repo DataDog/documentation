@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: Documentación
-  text: Opciones adicionales de configuración de la biblioteca de rastreo
+  text: Opciones adicionales de configuración de la librería de rastreo
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: Documentación
-  text: Instrucciones de configuración detalladas de la biblioteca de rastreo
+  text: Instrucciones de configuración detalladas de la librería de rastreo
 - link: /tracing/trace_collection/compatibility/go/
   tag: Documentación
   text: Marcos de Go compatibles para la instrumentación automática
@@ -17,7 +17,7 @@ further_reading:
   text: Mecanismos de ingesta
 - link: https://github.com/DataDog/dd-trace-Go
   tag: Código fuente
-  text: Repositorio de código fuente abierto de la biblioteca de rastreo
+  text: Repositorio de código fuente abierto de la librería de rastreo
 title: 'Tutorial: Activación del rastreo de una aplicación Go y Datadog Agent en contenedores'
 ---
 
@@ -189,7 +189,7 @@ Añade el Datadog Agent en la sección de servicios de tu archivo `all-docker-co
 
 ## Iniciar los contenedores para explorar la instrumentación automática
 
-Ahora que la biblioteca de rastreo está instalada, reinicia tus contenedores de aplicación e inicia para empezar a recibir trazas. Ejecuta los siguientes comandos:
+Ahora que la librería de rastreo está instalada, reinicia tus contenedores de aplicación e inicia para empezar a recibir trazas. Ejecuta los siguientes comandos:
 
 {{< code-block lang="shell" >}}
 docker-compose -f all-docker-compose.yaml build
@@ -239,7 +239,7 @@ Una traza `GET /notes` tiene este aspecto:
 
 ## Configuración del rastreo
 
-Puedes configurar la biblioteca de rastreo para añadir etiquetas (tags) a la telemetría que envía a Datadog. Las etiquetas ayudan a agrupar, filtrar y mostrar datos de forma significativa en dashboards y gráficos. Para añadir etiquetas, especifica las variables de entorno al ejecutar la aplicación. El proyecto `Makefile` incluye las variables de entorno `DD_ENV` , `DD_SERVICE` y `DD_VERSION`, que están configuradas para activar el [etiquetado de servicios unificado][17]:
+Puedes configurar la librería de rastreo para añadir etiquetas (tags) a la telemetría que envía a Datadog. Las etiquetas ayudan a agrupar, filtrar y mostrar datos de forma significativa en dashboards y gráficos. Para añadir etiquetas, especifica las variables de entorno al ejecutar la aplicación. El proyecto `Makefile` incluye las variables de entorno `DD_ENV` , `DD_SERVICE` y `DD_VERSION`, que están configuradas para activar el [etiquetado de servicios unificado][17]:
 
 {{< code-block lang="go" filename="docker/all-docker-compose.yaml" disable_copy="true" >}}
 environment:
@@ -248,9 +248,9 @@ environment:
   - DD_APM_NON_LOCAL_TRAFFIC=true
 {{< /code-block >}}
 
-Para obtener más información sobre las opciones de configuración disponibles, consulta [Configuración de la biblioteca de rastreo de Go][14].
+Para obtener más información sobre las opciones de configuración disponibles, consulta [Configuración de la librería de rastreo de Go][14].
 
-### Uso de bibliotecas de rastreo automático
+### Uso de librerías de rastreo automático
 
 Datadog dispone de varias bibliotecas completamente compatibles para Go que permiten el rastreo automático cuando se implementan en el código. En el archivo `cmd/notes/main.go`, puedes ver que las bibliotecas `go-chi`, `sql` y `http` tienen alias según las correspondientes bibliotecas de Datadog: `chitrace` `sqltrace` y `httptrace` respectivamente:
 
@@ -270,7 +270,7 @@ import (
 )
 {{< /code-block >}}
 
-En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción `WithService`. Por ejemplo, la biblioteca `chitrace` se inicializa de la siguiente manera:
+En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción `WithService`. Por ejemplo, la librería `chitrace` se inicializa de la siguiente manera:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
@@ -279,9 +279,9 @@ r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-El uso de `chitrace.WithServiceName("notes")` garantiza que todos los elementos rastreados por la biblioteca estén bajo el nombre de servicio `notes`.
+El uso de `chitrace.WithServiceName("notes")` garantiza que todos los elementos rastreados por la librería estén bajo el nombre de servicio `notes`.
 
-El archivo `main.go` contiene más ejemplos de implementación para cada una de estas bibliotecas. Para ver una lista exhaustiva de bibliotecas, consulta [Requisitos de compatibilidad de Go][16].
+El archivo `main.go` contiene más ejemplos de implementación para cada una de estas bibliotecas. Para ver una lista exhaustiva de librerías, consulta [Requisitos de compatibilidad de Go][16].
 
 ### Uso del rastreo personalizado con contexto
 
@@ -436,11 +436,11 @@ Para activar el rastreo en la aplicación de calendario:
    {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="Gráfico de llamas de una traza distribuida." style="width:100%;" >}}
 
 Este gráfico de llamas combina interacciones de múltiples aplicaciones:
-- El primer tramo es una solicitud POST enviada por el usuario y gestionada por el enrutador `chi` a través de la biblioteca `go-chi` compatible.
+- El primer tramo es una solicitud POST enviada por el usuario y gestionada por el enrutador `chi` a través de la librería `go-chi` compatible.
 - El segundo tramo es una función `createNote` que fue rastreada manualmente por la función `makeSpanMiddleware`. La función creó un tramo a partir del contexto de la solicitud HTTP.
-- El siguiente tramo es la solicitud enviada por la aplicación de notas utilizando la biblioteca `http` compatible y el cliente inicializado en el archivo `main.go`. Esta solicitud GET se envía a la aplicación de calendario. Los tramos de la aplicación de calendario aparecen en azul porque son servicios independientes.
+- El siguiente tramo es la solicitud enviada por la aplicación de notas utilizando la librería `http` compatible y el cliente inicializado en el archivo `main.go`. Esta solicitud GET se envía a la aplicación de calendario. Los tramos de la aplicación de calendario aparecen en azul porque son servicios independientes.
 - Dentro de la aplicación de calendario, un enrutador `go-chi` gestiona la solicitud GET y la función `GetDate` se rastrea manualmente con su propio tramo bajo la solicitud GET.
-- Por último, la llamada `db` púrpura es su propio servicio de la biblioteca `sql` compatible. Aparece en el mismo nivel que la solicitud `GET /Calendar` porque ambas son llamadas por el tramo principal `CreateNote`.
+- Por último, la llamada `db` púrpura es su propio servicio de la librería `sql` compatible. Aparece en el mismo nivel que la solicitud `GET /Calendar` porque ambas son llamadas por el tramo principal `CreateNote`.
 
 ## Solucionar problemas
 

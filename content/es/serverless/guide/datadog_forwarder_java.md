@@ -21,7 +21,7 @@ Para completar la instrumentación de tu aplicación serverless con el rastreo d
 
 ### Instalar
 
-Instala la biblioteca Lambda de Datadog localmente mediante la adición de uno de los siguientes bloques de código en el archivo `pom.xml` (Maven) o `build.gradle` (Gradle). Reemplaza el parámetro `VERSION` de abajo con la última versión (sin anteponer la `v`): ![Maven Cental][4]
+Instala la librería Lambda de Datadog localmente mediante la adición de uno de los siguientes bloques de código en el archivo `pom.xml` (Maven) o `build.gradle` (Gradle). Reemplaza el parámetro `VERSION` de abajo con la última versión (sin anteponer la `v`): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
@@ -66,7 +66,7 @@ dependencies {
     DD_TRACE_ENABLED: true
     ```
 
-3. Envuelve tu función de controlador de Lambda con la envoltura de la biblioteca Lambda de Datadog.
+3. Envuelve tu función de controlador de Lambda con la envoltura de la librería Lambda de Datadog.
 
     ```java
     public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {

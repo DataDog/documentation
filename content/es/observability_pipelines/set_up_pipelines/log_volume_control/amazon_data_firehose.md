@@ -195,7 +195,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-<!-- {{% collapse-content title="Añadir reglas desde la biblioteca" level="h5" %}}
+<!-- {{% collapse-content title="Añadir reglas desde la librería" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 

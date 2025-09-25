@@ -1,5 +1,6 @@
 ---
 title: Datadog Role Permissions
+description: Complete reference of Datadog permissions, including managed roles, custom roles, sensitive permissions, and the permissions list.
 aliases:
   - /account_management/faq/managing-global-role-permissions
 disable_toc: true

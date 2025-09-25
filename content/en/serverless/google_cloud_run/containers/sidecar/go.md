@@ -49,12 +49,16 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform %}}
+   {{% /tab %}}
+
    {{% tab "YAML Deploy" %}}
    {{% gcr-install-sidecar-yaml language="go" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -88,11 +92,11 @@ logrus.WithContext(ctx).Info("Hello World!")
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="go" %}}
+{{% gcr-env-vars-sidecar language="go" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 

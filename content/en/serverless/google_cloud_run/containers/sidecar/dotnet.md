@@ -18,13 +18,12 @@ further_reading:
 
 1. **Install the Datadog .NET tracer** in your Dockerfile.
 
-   Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
-
    {{< tabs >}}
    {{% tab "Linux/AMD64" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
-RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
-    chmod +x /app/dotnet.sh && /app/dotnet.sh
+ARG TRACER_VERSION
+RUN curl -L -s "https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm_${TRACER_VERSION}_amd64.deb" --output datadog-dotnet-apm.deb && \
+   dpkg -i datadog-dotnet-apm.deb
 {{< /code-block >}}
    {{% /tab %}}
 
@@ -39,6 +38,8 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
    {{% /tab %}}
    {{< /tabs >}}
 
+   See the [dd-trace-dotnet releases][1] to view the latest tracer version.
+
    For more information, see [Tracing .NET applications][2].
 
 2. **Install serverless-init as a sidecar**.
@@ -49,12 +50,16 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform %}}
+   {{% /tab %}}
+
    {{% tab "YAML Deploy" %}}
    {{% gcr-install-sidecar-yaml language="csharp" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -91,17 +96,17 @@ logger.LogInformation("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
+{{% gcr-env-vars-sidecar language="csharp" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.docker.com/build/building/secrets/
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client

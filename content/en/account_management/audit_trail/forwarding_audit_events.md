@@ -1,5 +1,6 @@
 ---
 title: Forwarding Audit Events to Custom Destinations
+description: Forward audit events from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints for compliance and security monitoring.
 disable_toc: false
 further_reading:
 - link: "/account_management/audit_trail/"

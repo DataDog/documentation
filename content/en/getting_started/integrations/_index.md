@@ -1,5 +1,6 @@
 ---
 title: Introduction to Integrations
+description: Unify metrics and logs from infrastructure using Agent-based, authentication-based, and library integrations.
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'

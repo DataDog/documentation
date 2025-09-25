@@ -1,5 +1,6 @@
 ---
 title: Shared Dashboards
+description: Create public, invite-only, and embedded dashboards for external access with customizable timeframes and variables.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs

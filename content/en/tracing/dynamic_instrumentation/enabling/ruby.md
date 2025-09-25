@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Ruby
+description: Set up Dynamic Instrumentation for Ruby applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/ruby/
 private: false
@@ -24,7 +25,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.45.0][7] or higher.
+1. Install or upgrade your Agent to version [7.49.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 3. Install or upgrade the Ruby tracing library to version 2.9.0 or higher, by following the [relevant instructions][2].
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.

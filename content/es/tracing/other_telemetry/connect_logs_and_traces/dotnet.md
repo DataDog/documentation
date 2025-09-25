@@ -50,7 +50,7 @@ Para inyectar identificadores de correlación en tus mensajes de log, sigue las 
 {{% tab "Serilog" %}}
 
 <div class="alert alert-warning">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la biblioteca de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
+ <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -67,7 +67,7 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
 {{% tab "log4net" %}}
 
 <div class="alert alert-warning">
- <strong>Nota: </strong>A partir de la versión 1.29.0 de .NET Tracer, la inyección automática para la biblioteca de registro log4net requiere que la aplicación esté instrumentada con la instrumentación automática.
+ <strong>Nota: </strong>A partir de la versión 1.29.0 de .NET Tracer, la inyección automática para la librería de registro log4net requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -112,7 +112,7 @@ Para ver ejemplos adicionales, consulta [el proyecto de inyección automática d
 {{% tab "NLog" %}}
 
 <div class="alert alert-warning">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la biblioteca de registro de NLog requiere que la aplicación esté instrumentada con la instrumentación automática.
+ <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de NLog requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -249,7 +249,7 @@ Ejemplos:
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-**Nota**: La biblioteca de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
+**Nota**: La librería de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
 
 ```csharp
 using Datadog.Trace;

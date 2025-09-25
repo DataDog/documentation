@@ -1,5 +1,6 @@
 ---
 title: JavaScript Expressions
+description: Use JavaScript expressions in App Builder to create custom interactions between components, queries, and app state.
 aliases:
     - /service_management/app_builder/expressions
 further_reading:

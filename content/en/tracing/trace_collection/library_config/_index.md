@@ -1,5 +1,6 @@
 ---
 title: Configure the Datadog Tracing Library
+description: Configure Datadog tracing libraries with environment variables, runtime settings, and language-specific options for optimal APM performance.
 type: multi-code-lang
 ---
 

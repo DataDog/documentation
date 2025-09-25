@@ -481,12 +481,6 @@ multifiltersearch:
       recommendation_type: Terminate Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    - category: Downsize
-      cloud_provider: Azure
-      resource_type: VM Instance
-      recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type.
-      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Purchase
       cloud_provider: GCP
       resource_type: Cloud Run Job

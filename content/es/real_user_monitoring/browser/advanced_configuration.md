@@ -203,7 +203,7 @@ Si utilizas React, Angular, Vue o cualquier otro marco de frontend, Datadog reco
 
 Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajusten a cómo los has definido en tu aplicación React, debes seguir los pasos a continuación.
 
-**Nota**: Estas instrucciones son específicas para la biblioteca del **React Router v6**.
+**Nota**: Estas instrucciones son específicas para la librería del **React Router v6**.
 
 1. Configura `trackViewsManually` en `true` al inicializar el SDK del RUM Browser como se describe [anteriormente](#override-default-rum-view-names).
 
