@@ -605,7 +605,7 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 * Values containing a separator character must be quoted.
 * Quoted Values containing a quoting character must be escaped with a quoting characters. For example, `""` within a quoted value represents `"`.
 * If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones.
-* Intergers and Double are automatically casted if possible.
+* Integers and Double are automatically casted if possible.
 
 **Log**:
 

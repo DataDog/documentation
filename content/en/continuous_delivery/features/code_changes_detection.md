@@ -98,7 +98,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ✅  Handled in 0.077 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -168,9 +168,9 @@ extensions:
       - "**"
 ```
 
-In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes in the whole repository tree.  
+In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes in the whole repository tree.
 
-<div class="alert alert-warning">If a pattern is exactly <code>**</code> or begins with it, enclose it in quotes, as <code>*</code> is reserved in YAML for anchors.</div>  
+<div class="alert alert-warning">If a pattern is exactly <code>**</code> or begins with it, enclose it in quotes, as <code>*</code> is reserved in YAML for anchors.</div>
 
 
 ## Further Reading
