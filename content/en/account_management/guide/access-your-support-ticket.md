@@ -4,11 +4,15 @@ description: Learn how to create new support tickets and access your existing Da
 aliases:
   - /developers/faq/access-your-support-ticket
   - /account_management/faq/access-your-support-ticket
+further_reading:
+- link: "/getting_started/support/"
+  tag: "Documentation"
+  text: "Getting Started with Datadog Support"
 ---
 
 ## Creating a support ticket
 
-To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form. 
+To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form.
 
 {{< whatsnext desc="Support page by Datadog site:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
@@ -22,9 +26,9 @@ You can also access this form through Datadog from the [help page][2], from the 
 ## Accessing existing tickets
 
 If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:
-1. From the Support page click **Sign in** on the top right. 
+1. From the Support page click **Sign in** on the top right.
 
-2. If this is your first time signing into your Datadog Zendesk account, click the link by **New to your Datadog Zendesk account? Sign up**. 
+2. If this is your first time signing into your Datadog Zendesk account, click the link by **New to your Datadog Zendesk account? Sign up**.
 
 3. If you have previously emailed Datadog support, click **Emailed us for support? Get a password** and enter the same email address you used to contact Datadog support.
 
@@ -64,6 +68,10 @@ To ensure the security of your account, any password used to sign in to Datadog'
 **Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][1] in Google Chrome Help.
 
 If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add **datadog.zendesk.com** to the allow list.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://support.google.com/chrome/answer/95647
 [2]: https://app.datadoghq.com/help

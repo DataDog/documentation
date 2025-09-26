@@ -1,5 +1,6 @@
 ---
 title: How to use Terraform to restrict the editing of a dashboard
+description: Use the restricted_roles attribute in Terraform to control dashboard editing permissions for specific user roles.
 aliases:
   - /dashboards/faq/how-to-use-terraform-to-restrict-dashboards
   - /dashboards/guide/how-to-use-terraform-to-restrict-dashboards

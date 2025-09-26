@@ -1,5 +1,6 @@
 ---
 title: React Native Libraries for RUM
+description: "Integrate React Native libraries with RUM SDK for automatic monitoring of navigation, network requests, and other app functionality."
 aliases:
 - /real_user_monitoring/reactnative/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/reactnative

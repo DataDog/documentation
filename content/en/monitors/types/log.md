@@ -1,5 +1,6 @@
 ---
 title: Log Monitor
+description: "Monitor indexed logs to detect security threats, troubleshoot issues, and alert when log patterns exceed defined thresholds."
 aliases:
 - /monitors/monitor_types/log
 - /monitors/create/types/log/

@@ -1,5 +1,6 @@
 ---
 title: Service Page
+description: Comprehensive service overview with health metrics, dependencies, deployments, error tracking, and security insights.
 aliases:
 - /tracing/visualization/service/
 further_reading:

@@ -1,5 +1,6 @@
 ---
 title: Agent Troubleshooting
+description: "Comprehensive troubleshooting guide for common Datadog Agent issues including installation, connectivity, and configuration problems."
 aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
     - /agent/faq/common-windows-agent-installation-error-1721

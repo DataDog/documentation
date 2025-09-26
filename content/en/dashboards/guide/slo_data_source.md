@@ -1,5 +1,6 @@
 ---
 title: Graph historical SLO data on Dashboards
+description: Display historical SLO data on dashboards using SLO widgets and timeseries visualizations for performance tracking.
 further_reading:
 - link: "/service_management/service_level_objectives/"
   tag: "Documentation"

@@ -127,7 +127,7 @@ Datadog recommends using the [instance profile method][1006] of retrieving secre
 
 ##### Configuration example
 
-The AWS System Manager Parameter Store supports a hierachical model. For example, assuming the following AWS System Manager Parameter Store paths:
+The AWS System Manager Parameter Store supports a hierarchical model. For example, assuming the following AWS System Manager Parameter Store paths:
 
 ```sh
 /DatadogAgent/Production/ApiKey = <your_api_key>
