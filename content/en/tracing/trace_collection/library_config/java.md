@@ -337,8 +337,8 @@ For more information, see [Enabling AAP for Java][19].
 
 `dd.http.client.tag.query-string`
 : **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
-When set to `true` query string parameters and fragment get added to web client spans
+**Default**: `true`<br>
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data.
 
 `dd.http.client.error.statuses`
 : **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
