@@ -22,7 +22,7 @@ The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire 
 
 Operational efficiency is a key driver of overall cost. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
 
-### GPU Fleet funnel visualization
+### GPU fleet funnel visualization
 
 This visualization provides a breakdown of your entire GPU fleet across multiple cloud providers, showing all your Kubernetes clusters, hosts, and GPU devices.
 

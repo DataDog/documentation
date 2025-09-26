@@ -155,7 +155,7 @@ Within this side panel, you have a device-specific view that identifies:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installation Recommendations
+## Installation recommendations
 
 Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of GPU Monitoring. In this modal, you can find installation update recommendations to get the optimal value of GPU Monitoring. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts.
 
