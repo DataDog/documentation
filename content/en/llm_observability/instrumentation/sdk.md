@@ -1227,8 +1227,10 @@ import datadog.trace.api.llmobs.LLMObsSpan;
 
 public class MyJavaClass {
   public void preprocessDocument(String document) {
-   LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
+  LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
    ...   // preprocess document for data extraction
+   taskSpan.annotateIO(...); // record the input and output
+   taskSpan.finish();    
   }
 
   public String extractData(String document) {
