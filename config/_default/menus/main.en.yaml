@@ -344,7 +344,7 @@ menu:
       url: agent/supported_platforms/heroku/
       weight: 405
       parent: agent_supported_platforms
-    - name: Mac OS X
+    - name: MacOS 
       identifier: basic_agent_usage_osx
       url: agent/supported_platforms/osx/
       weight: 406
