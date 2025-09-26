@@ -1,5 +1,6 @@
 ---
 title: Widgets
+description: Dashboard building blocks for visualizing and correlating data across infrastructure with various chart types and displays.
 aliases:
     - /graphing/dashboards/widgets
     - /graphing/faq/widgets

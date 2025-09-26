@@ -14561,6 +14561,23 @@ components:
       x-enum-varnames:
       - NONE
       - UUID
+    DatastoreTrigger:
+      description: Trigger a workflow from a Datastore. For automatic triggering a
+        handle must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    DatastoreTriggerWrapper:
+      description: Schema for a Datastore-based trigger.
+      properties:
+        datastoreTrigger:
+          $ref: '#/components/schemas/DatastoreTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - datastoreTrigger
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -18874,6 +18891,13 @@ components:
           format: date-time
           readOnly: true
           type: string
+        date_last_used:
+          description: Date the API Key was last used
+          example: '2020-11-27T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         key:
           description: The API key.
           readOnly: true
@@ -18938,6 +18962,13 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_at:
+          description: Last usage timestamp of the application key.
+          example: '2020-12-20T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -20588,6 +20619,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -30709,6 +30742,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -31770,6 +31804,65 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_CLOUD_STORAGE
+    ObservabilityPipelineGooglePubSubDestination:
+      description: The `google_pubsub` destination publishes logs to a Google Cloud
+        Pub/Sub topic.
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: google-pubsub-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        project:
+          description: The GCP project ID that owns the Pub/Sub topic.
+          example: my-gcp-project
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Pub/Sub topic name to publish logs to.
+          example: logs-subscription
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      - project
+      - topic
+      type: object
+    ObservabilityPipelineGooglePubSubDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineGooglePubSubDestinationType:
+      default: google_pubsub
+      description: The destination type. The value should always be `google_pubsub`.
+      enum:
+      - google_pubsub
+      example: google_pubsub
+      type: string
+      x-enum-varnames:
+      - GOOGLE_PUBSUB
     ObservabilityPipelineGooglePubSubSource:
       description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
@@ -35186,6 +35279,13 @@ components:
           type: string
           x-merge-override:
             format: false
+        date_last_used:
+          description: Date the API Key was last used.
+          example: '2020-11-27T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -35242,6 +35342,12 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_at:
+          description: Last usage timestamp of the application key.
+          example: '2020-12-20T10:00:00.000Z'
+          nullable: true
+          readOnly: true
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -36177,6 +36283,12 @@ components:
     RUMApplicationAttributes:
       description: RUM application attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -38449,6 +38561,7 @@ components:
       x-merge-override:
         required: false
     RoleAttributes:
+      additionalProperties: {}
       description: Attributes of the role.
       properties:
         created_at:
@@ -41435,6 +41548,7 @@ components:
       - hardcoded
       - third_party
       - anomaly_threshold
+      - sequence_detection
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -41444,6 +41558,7 @@ components:
       - HARDCODED
       - THIRD_PARTY
       - ANOMALY_THRESHOLD
+      - SEQUENCE_DETECTION
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -41657,6 +41772,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -41732,6 +41849,47 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+    SecurityMonitoringRuleSequenceDetectionOptions:
+      description: Options on sequence detection method.
+      properties:
+        stepTransitions:
+          description: Transitions defining the allowed order of steps and their evaluation
+            windows.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStepTransition'
+          type: array
+        steps:
+          description: Steps that define the conditions to be matched in sequence.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStep'
+          type: array
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStep:
+      description: Step definition for sequence detection containing the step name,
+        condition, and evaluation window.
+      properties:
+        condition:
+          description: Condition referencing rule queries (e.g., `a > 0`).
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        name:
+          description: Unique name identifying the step.
+          type: string
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStepTransition:
+      description: Transition from a parent step to a child step within a sequence
+        detection rule.
+      properties:
+        child:
+          description: Name of the child step.
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        parent:
+          description: Name of the parent step.
+          type: string
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -48321,6 +48479,7 @@ components:
       - $ref: '#/components/schemas/CaseTriggerWrapper'
       - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
       - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
+      - $ref: '#/components/schemas/DatastoreTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
@@ -57537,6 +57696,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
       patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
@@ -58106,6 +58266,43 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+  /api/v2/dora/deployment/{deployment_id}:
+    delete:
+      description: Use this API endpoint to delete a deployment event.
+      operationId: DeleteDORADeployment
+      parameters:
+      - description: The ID of the deployment event to delete.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a deployment event
+      tags:
+      - DORA Metrics
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
+      x-undo:
+        type: idempotent
   /api/v2/dora/deployments:
     post:
       description: Use this API endpoint to get a list of deployment events.
@@ -58177,7 +58374,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a deployment event
       tags:
       - DORA Metrics
@@ -58236,6 +58433,43 @@ paths:
       - DORA Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/dora/failure/{failure_id}:
+    delete:
+      description: Use this API endpoint to delete a failure event.
+      operationId: DeleteDORAFailure
+      parameters:
+      - description: The ID of the failure event to delete.
+        in: path
+        name: failure_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a failure event
+      tags:
+      - DORA Metrics
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
       x-undo:
         type: idempotent
   /api/v2/dora/failures:
@@ -58309,7 +58543,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a failure event
       tags:
       - DORA Metrics
@@ -61086,6 +61320,45 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/resource_collection:
+    get:
+      description: Get all resource collection AWS IAM permissions required for the
+        AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsResourceCollection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration resource collection IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get resource collection IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 8
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/standard:
+    get:
+      description: Get all standard AWS IAM permissions required for the AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsStandard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration standard IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS integration standard IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/integration/aws/logs/services:
@@ -73887,6 +74160,13 @@ paths:
     get:
       description: Get the list of all suppression rules.
       operationId: ListSecurityMonitoringSuppressions
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -80416,8 +80696,8 @@ tags:
     See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
     more information.
   name: Containers
-- description: 'Search or send events for DORA Metrics to measure and improve your
-    software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/)
+- description: 'Search, send, or delete events for DORA Metrics to measure and improve
+    your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/)
     for more information.
 
 

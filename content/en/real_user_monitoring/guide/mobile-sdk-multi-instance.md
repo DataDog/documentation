@@ -1,6 +1,6 @@
 ---
 title: Use Multiple Instances of the Mobile SDK
-
+description: "Configure and manage multiple named instances of RUM mobile SDKs for complex application architectures and multi-tenant scenarios."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

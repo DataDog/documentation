@@ -1,5 +1,6 @@
 ---
 title: iOS Data Collected
+description: "Understand RUM iOS SDK event types, attributes, and telemetry data including sessions, views, actions, resources, and errors."
 aliases:
 - /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios/

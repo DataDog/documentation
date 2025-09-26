@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-
+description: "Upload JavaScript source maps to enhance error tracking with readable stack traces and better debugging for minified code."
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'
@@ -8,7 +8,7 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
-- link: 'https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps'
+- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command'
   tag: 'Source Code'
   text: 'Sourcemaps command reference'
 ---

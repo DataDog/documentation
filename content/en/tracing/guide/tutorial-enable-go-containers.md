@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application and Datadog Agent in Containers
+description: Step-by-step tutorial to enable distributed tracing for a Go application and Datadog Agent running in separate containers.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/

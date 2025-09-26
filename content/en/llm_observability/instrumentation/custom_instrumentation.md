@@ -28,7 +28,7 @@ This page explains how to use the Datadog LLM Observability SDK's custom instrum
 To instrument an LLM application:
 
 1. [Install the LLM Observability SDK for Python][5].
-1. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7]. Ensure you have configured your configure your Datadog API key, Datadog site, and machine learning (ML) app name.
+1. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7]. Ensure you have configured your Datadog API key, Datadog site, and machine learning (ML) app name.
 
 ## Trace an LLM application
 

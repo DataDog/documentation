@@ -745,6 +745,10 @@
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
+  "DeleteDORADeployment": {
+    "description": "Use this API endpoint to delete a deployment event.",
+    "summary": "Delete a deployment event"
+  },
   "ListDORADeployments": {
     "description": "Use this API endpoint to get a list of deployment events.",
     "summary": "Get a list of deployment events",
@@ -760,6 +764,10 @@
     "summary": "Send a failure event for DORA Metrics",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
+  },
+  "DeleteDORAFailure": {
+    "description": "Use this API endpoint to delete a failure event.",
+    "summary": "Delete a failure event"
   },
   "ListDORAFailures": {
     "description": "Use this API endpoint to get a list of failure events.",
@@ -1050,6 +1058,14 @@
   "GetAWSIntegrationIAMPermissions": {
     "description": "Get all AWS IAM permissions required for the AWS integration.",
     "summary": "Get AWS integration IAM permissions"
+  },
+  "GetAWSIntegrationIAMPermissionsResourceCollection": {
+    "description": "Get all resource collection AWS IAM permissions required for the AWS integration.",
+    "summary": "Get resource collection IAM permissions"
+  },
+  "GetAWSIntegrationIAMPermissionsStandard": {
+    "description": "Get all standard AWS IAM permissions required for the AWS integration.",
+    "summary": "Get AWS integration standard IAM permissions"
   },
   "ListAWSLogsServices": {
     "description": "Get a list of AWS services that can send logs to Datadog.",

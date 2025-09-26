@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Datadog Support
+description: Learn best practices for contacting Datadog support through chat or tickets for technical questions and urgent issues.
 further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: "Documentation"
