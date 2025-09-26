@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for Linux
+title: Linux
 platform: Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
