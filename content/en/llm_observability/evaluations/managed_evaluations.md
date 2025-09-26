@@ -98,6 +98,7 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 1. Navigate to [**AI Observability > Settings > Evaluations**][2].
 1. Click on the **Create Evaluation** button on the top right corner.
+1. Select a specific managed evaluation. This will open the evalution editor window.
 1. Select the LLM application(s) you want to configure your evaluation for.
 1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider and choose an account.
 1. Configure the data to run the evaluation on:
