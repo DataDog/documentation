@@ -64,7 +64,7 @@ When installing a GitHub App, the following permissions are required to enable c
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-See [these instructions][1] to complete the setup process to connect your GitLab instance to Datadog. Both GitLab.com and Self-Managed are supported.
+See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
 [1] https://docs.datadoghq.com/integrations/gitlab-source-code/#setup 
 
