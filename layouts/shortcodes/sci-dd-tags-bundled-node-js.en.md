@@ -1,10 +1,6 @@
 If you're bundling your application from a Git directory, you can use plugins to inject Git metadata into the runtime bundle.
 
-
-<details>
-  <summary>
-  Bundling with esbuild
-  </summary>
+###### Bundling with esbuild
 
 Use the `dd-trace/esbuild` plugin to automatically inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` in your runtime bundle. See the plugin [documentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling-with-esbuild).
 Install `dd-trace` **v5.68.0 or later** for automatic Git tag injection.
@@ -29,12 +25,8 @@ esbuild.build({
 });
 
 ```
-</details>
 
-<details>
-  <summary>
-  Bundling with Rollup
-  </summary>
+###### Bundling with Rollup
 
 Use [rollup-plugin-inject-process-env](https://www.npmjs.com/package/rollup-plugin-inject-process-env) to inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` in your runtime bundle. Run the bundle step inside a Git repository so the script can read `.git/` information.
 
@@ -93,13 +85,8 @@ function getGitInfo() {
   }
 }
 ```
-</details>
 
-
-<details>
-  <summary>
-  Bundling with webpack
-  </summary>
+###### Bundling with webpack
 
 Use the [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/) to inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` in your runtime bundle. Run the bundle step inside a Git repository so the script can read `.git/` information.
 
@@ -161,4 +148,3 @@ function getGitInfo() {
   }
 }
 ```
-</details>
