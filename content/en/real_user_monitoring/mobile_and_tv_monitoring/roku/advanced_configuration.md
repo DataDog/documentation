@@ -133,6 +133,6 @@ In addition to the default attributes captured by the SDK automatically, you can
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup
+[2]: /real_user_monitoring/application_monitoring/roku/setup
 
 

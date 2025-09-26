@@ -415,11 +415,11 @@ This means that even if users open your application while offline, no data is lo
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /account_management/api-app-keys/#client-tokens
 [6]: /getting_started/tagging/using_tags/
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
+[7]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
 [8]: https://app.datadoghq.com/rum/application/create
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
+[9]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
 [10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
+[11]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
 [12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [13]: /real_user_monitoring/explorer/
 [14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md

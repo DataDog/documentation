@@ -465,8 +465,8 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries/
+[2]: /real_user_monitoring/application_monitoring/flutter/setup/
+[3]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries/
 [4]: /getting_started/tagging/#defining-tags
 [5]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#how-are-rum-resources-linked-to-traces
 [6]: https://github.com/openzipkin/b3-propagation#single-headers
@@ -477,9 +477,9 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [13]: /serverless/aws_lambda/distributed_tracing/
-[14]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected
+[14]: /real_user_monitoring/application_monitoring/flutter/data_collected
 [15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
-[18]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter
+[18]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=flutter
 [19]: https://pub.dev/packages/datadog_grpc_interceptor

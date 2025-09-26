@@ -10,7 +10,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/swiftui/
   - /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
 further_reading:
- - link: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
+ - link: /real_user_monitoring/application_monitoring/ios/advanced_configuration
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"
@@ -25,7 +25,7 @@ further_reading:
  - link: "/real_user_monitoring/ios/swiftui/"
    tag: "Documentation"
    text: "Learn about instrumenting SwiftUI applications"
- - link: "/real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions"
+ - link: "/real_user_monitoring/application_monitoring/ios/supported_versions"
    tag: "Documentation"
    text: "RUM iOS and tvOS monitoring supported versions"
  - link: "/real_user_monitoring/guide/mobile-sdk-upgrade"
@@ -505,7 +505,7 @@ The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view
 
 The Datadog iOS SDK allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
-<div class="alert alert-warning">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
+<div class="alert alert-warning">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -553,4 +553,4 @@ See [Supported versions][10] for a list operating system versions and platforms 
 [7]: https://github.com/DataDog/dd-sdk-ios
 [8]: /real_user_monitoring/error_tracking/ios/
 [9]: /real_user_monitoring/explorer/
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[10]: /real_user_monitoring/application_monitoring/supported_versions/ios/

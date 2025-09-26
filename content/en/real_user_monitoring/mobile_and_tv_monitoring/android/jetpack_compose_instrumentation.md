@@ -241,6 +241,6 @@ fun AppScaffold(){
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-compose
-[2]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/setup?tab=rum#step-1---declare-the-android-sdk-as-a-dependency
+[2]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/setup?tab=rum#step-1---declare-the-android-sdk-as-a-dependency
 [3]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [4]: https://developer.android.com/develop/ui/compose/accessibility/semantics

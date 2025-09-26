@@ -11,7 +11,7 @@ further_reading:
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
-  - link: "/real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions/"
+  - link: "/real_user_monitoring/application_monitoring/ios/supported_versions/"
     tag: "Documentation"
     text: "RUM iOS and tvOS monitoring supported versions"
 ---
@@ -966,11 +966,11 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
+[2]: /real_user_monitoring/application_monitoring/ios
+[3]: /real_user_monitoring/application_monitoring/ios/data_collected/
 [4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
+[5]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=error#error-attributes
+[6]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+[9]: /real_user_monitoring/application_monitoring/ios/setup

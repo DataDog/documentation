@@ -54,4 +54,4 @@ val ktorClient = HttpClient {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/
+[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/

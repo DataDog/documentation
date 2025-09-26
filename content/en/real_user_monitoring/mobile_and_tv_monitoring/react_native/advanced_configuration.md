@@ -629,7 +629,7 @@ See [Monitor hybrid React Native applications][18].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/react_native
+[2]: /real_user_monitoring/application_monitoring/react_native
 [3]: https://jestjs.io/
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /getting_started/tagging/#define-tags
@@ -638,8 +638,8 @@ See [Monitor hybrid React Native applications][18].
 [8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
-[12]: https://github.com/rmobile_and_tv_monitoring/eact-navigation/react-navigation
+[11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
+[12]: https://github.com/application_monitoring/eact-navigation/react-navigation
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

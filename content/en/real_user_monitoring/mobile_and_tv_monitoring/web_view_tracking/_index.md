@@ -136,7 +136,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 Add `DatadogWebViewTracking` library to your application by following the guide [here][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform/#add-native-dependencies-for-ios
+[1]: /real_user_monitoring/application_monitoring/setup/kotlin_multiplatform/#add-native-dependencies-for-ios
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -387,7 +387,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 [1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/browser/setup/#npm
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+[3]: /real_user_monitoring/application_monitoring/ios/setup
 [4]: /logs/log_collection/ios
 [5]: https://app.datadoghq.com/rum/explorer
 [6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

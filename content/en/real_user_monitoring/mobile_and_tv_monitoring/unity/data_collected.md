@@ -26,5 +26,5 @@ Most Unity Monitoring data is collected by native Datadog iOS and Android SDKs f
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/#event-specific-metrics-and-attributes
+[1]: /real_user_monitoring/application_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
+[2]: /real_user_monitoring/application_monitoring/android/data_collected/#event-specific-metrics-and-attributes

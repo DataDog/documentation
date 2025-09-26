@@ -5,7 +5,7 @@ aliases:
     - /real_user_monitoring/android/
     - /real_user_monitoring/setup/android
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
+- link: /real_user_monitoring/application_monitoring/android/advanced_configuration
   tag: Documentation
   text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android
@@ -74,6 +74,7 @@ During initialization, you can also set the sample rate (RUM sessions) and set t
 {{< site-region region="us" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -88,8 +89,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -103,6 +106,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -110,6 +114,7 @@ public class SampleApplication extends Application {
 {{< site-region region="eu" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -126,8 +131,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -142,6 +149,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -149,6 +157,7 @@ public class SampleApplication extends Application {
 {{< site-region region="us3" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -165,8 +174,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -181,6 +192,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -188,6 +200,7 @@ public class SampleApplication extends Application {
 {{< site-region region="us5" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -204,8 +217,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -220,6 +235,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -227,6 +243,7 @@ public class SampleApplication extends Application {
 {{< site-region region="gov" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -243,8 +260,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -259,6 +278,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -266,6 +286,7 @@ public class SampleApplication extends Application {
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -282,8 +303,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -298,6 +321,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -305,6 +329,7 @@ public class SampleApplication extends Application {
 {{< site-region region="ap2" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -321,8 +346,10 @@ class SampleApplication : Application() {
     }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -337,6 +364,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
@@ -379,6 +407,7 @@ To enable the Android SDK to start sending data:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
     val rumConfig = RumConfiguration.Builder(applicationId)
       .trackInteractions()
@@ -387,9 +416,11 @@ To enable the Android SDK to start sending data:
       .build()
     Rum.enable(rumConfig)
 ```
+
 {{% /tab %}}
 
 {{% tab "Java" %}}
+
 ```java
     RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
       .trackInteractions()
@@ -421,6 +452,7 @@ To initialize an interceptor for tracking network events:
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
+
    ```kotlin
    val tracedHostsWithHeaderType = mapOf(
        "example.com" to setOf(
@@ -433,9 +465,11 @@ To initialize an interceptor for tracking network events:
        .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
        .build()
    ```
+
    {{% /tab %}}
 
    {{% tab "Java" %}}
+
    ```java
    Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
    Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
@@ -445,6 +479,7 @@ To initialize an interceptor for tracking network events:
        .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
        .build();
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -455,22 +490,27 @@ To initialize an interceptor for tracking network events:
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
+
    ```kotlin
    val okHttpClient = OkHttpClient.Builder()
        .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
        .build()
    ```
+
    {{% /tab %}}
    {{% tab "Java" %}}
+
    ```java
    OkHttpClient okHttpClient = new OkHttpClient.Builder()
        .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
        .build();
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
 **Notes**:
+
 - To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
 - If you use multiple interceptors, add `DatadogInterceptor` first.
 
@@ -480,6 +520,7 @@ To filter out specific errors reported by `DatadogInterceptor`, you can configur
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
+
    ```kotlin
     val rumConfig = RumConfiguration.Builder(applicationId)
         .setErrorEventMapper { errorEvent ->
@@ -491,8 +532,10 @@ To filter out specific errors reported by `DatadogInterceptor`, you can configur
     }
     .build();
    ```
+
    {{% /tab %}}
    {{% tab "Java" %}}
+
    ```java
    RumConfiguration rumConfig = new RumConfiguration.Builder("applicationId")
                 .setErrorEventMapper(errorEvent -> {
@@ -505,6 +548,7 @@ To filter out specific errors reported by `DatadogInterceptor`, you can configur
                 .build();
     
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -516,18 +560,22 @@ Add the following snippet during configuration:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
   // …
   .trackBackgroundEvents(true)
 ```
+
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
   // …
   .trackBackgroundEvents(true)
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
@@ -573,7 +621,6 @@ val inputStream = context.getRawResAsRumResource(id)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:/real_user_monitoring/
-[2]: /error_tracking/
 [3]: /error_tracking/frontend/mobile/android
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
@@ -582,10 +629,10 @@ val inputStream = context.getRawResAsRumResource(id)
 [8]: /real_user_monitoring/android/data_collected/
 [9]: /account_management/api-app-keys/#client-tokens
 [10]: /getting_started/tagging/using_tags/#rum--session-replay
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[11]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [12]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
-[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
+[13]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
 [14]: /tracing/trace_collection/dd_libraries/android/
 [15]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[16]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [17]: https://square.github.io/okhttp/features/interceptors/

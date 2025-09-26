@@ -44,7 +44,7 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
+[2]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
 [3]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogInternal/Sources/NetworkInstrumentation/URLSession/DatadogURLSessionDelegate.swift#L14
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: /real_user_monitoring/guide/debug-symbols

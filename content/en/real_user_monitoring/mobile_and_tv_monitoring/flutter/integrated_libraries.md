@@ -230,4 +230,4 @@ final datadogConfig = DatadogConfiguration(
 [7]: https://pub.dev/packages/grpc
 [8]: https://pub.dev/packages/webview_flutter
 [9]: https://pub.dev/packages/flutter_inappwebview
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking?tab=flutter
+[10]: /real_user_monitoring/application_monitoring/web_view_tracking?tab=flutter

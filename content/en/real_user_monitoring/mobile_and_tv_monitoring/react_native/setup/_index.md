@@ -4,4 +4,4 @@ description: "Set up RUM monitoring for React Native applications with automatic
 type: multi-code-lang
 ---
 
-{{< include-markdown "/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative" >}}
+{{< include-markdown "/real_user_monitoring/application_monitoring/react_native/setup/reactnative" >}}

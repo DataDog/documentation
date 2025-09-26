@@ -5,7 +5,7 @@ aliases:
     - /real_user_monitoring/roku/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/roku
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration
+- link: /real_user_monitoring/application_monitoring/roku/advanced_configuration
   tag: Documentation
   text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku
@@ -57,7 +57,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+[2]: /real_user_monitoring/application_monitoring/data_collected/roku
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -69,7 +69,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+[2]: /real_user_monitoring/application_monitoring/data_collected/roku
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -268,5 +268,5 @@ This means that even if users open your application while offline, no data is lo
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+[8]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[9]: /real_user_monitoring/application_monitoring/roku/data_collected

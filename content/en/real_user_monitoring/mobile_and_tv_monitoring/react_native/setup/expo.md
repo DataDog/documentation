@@ -9,7 +9,7 @@ type: multi-code-lang
 code_lang: expo
 code_lang_weight: 2
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
+- link: /real_user_monitoring/application_monitoring/react_native/advanced_configuration
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -285,7 +285,7 @@ config.resourceEventMapper = event => {
 [1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
+[4]: /real_user_monitoring/application_monitoring/setup/expo#initialize-the-library-with-application-context
 [5]: /real_user_monitoring/error_tracking/mobile/expo/
 [6]: https://expo.github.io/router/docs/
 [7]: https://docs.expo.dev/development/introduction/

@@ -264,16 +264,16 @@ If your application supports [Direct Boot mode][13], note that data captured bef
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-actions
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup?tab=rum#track-background-events
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#enrich-user-sessions
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[1]: /real_user_monitoring/application_monitoring/advanced_configuration/android/#custom-actions
+[2]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views
+[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
+[4]: /real_user_monitoring/application_monitoring/android/setup?tab=rum#track-background-events
+[5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
+[6]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#enrich-user-sessions
+[7]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#track-custom-global-attributes
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: /data_security/real_user_monitoring/#geolocation
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#track-user-sessions
+[10]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#track-user-sessions
 [11]: /data_security/real_user_monitoring/#ip-address
 [12]: https://source.android.com/security/app-sandbox
 [13]: https://developer.android.com/training/articles/direct-boot

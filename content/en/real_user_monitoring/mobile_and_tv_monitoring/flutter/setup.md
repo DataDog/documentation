@@ -378,10 +378,10 @@ This means that even if users open your application while offline, no data is lo
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [6]: /real_user_monitoring/error_tracking/flutter
 [7]: https://pub.dev/packages?q=go_router
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#automatic-view-tracking
+[8]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#automatic-view-tracking
 [9]: https://pub.dev/packages/auto_route
 [10]: https://pub.dev/packages/beamer
 [11]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
-[12]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries/
+[12]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries/
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html

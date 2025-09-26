@@ -10,7 +10,7 @@ aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
     - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
+- link: /real_user_monitoring/application_monitoring/react_native/advanced_configuration
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -466,12 +466,12 @@ end
 [1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://microsoft.github.io/code-push/
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/codepush
+[4]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
 [5]: https://docs.expo.dev/
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo
+[6]: /real_user_monitoring/application_monitoring/react_native/setup/expo
 [7]: /account_management/api-app-keys/#api-keys
 [8]: /account_management/api-app-keys/#client-tokens
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
+[9]: /real_user_monitoring/application_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
 [10]: /getting_started/tagging/#define-tags
 [11]: https://source.android.com/security/app-sandbox
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
