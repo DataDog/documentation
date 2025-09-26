@@ -10467,6 +10467,23 @@ menu:
           - ListTeams
         unstable: []
         order: 1
+    - name: Test Optimization
+      url: /api/latest/test-optimization/
+      identifier: test-optimization
+      generated: true
+    - name: Search flaky tests
+      url: '#search-flaky-tests'
+      identifier: test-optimization-search-flaky-tests
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchFlakyTests
+        unstable:
+          - v2
+        order: 1
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
