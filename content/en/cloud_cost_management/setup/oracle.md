@@ -45,7 +45,7 @@ You can visualize your ingested data using the following cost types:
 | `oci.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [FOCUS cost export][4] and make it easier to discover and understand cost data.
+Datadog adds out-of-the-box tags to ingested cost data and help you further break down and allocate your costs. These tags are derived from your [FOCUS cost export][4] and make it easier to discover and understand cost data.
 
 The following out-of-the-box tags are available for filtering and grouping data:
 
