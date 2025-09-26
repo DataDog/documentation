@@ -47,7 +47,17 @@ LLMObs.enable(
 
 **Notes**:
 - You need *both* an API key and an application key
-- All datasets and experiments live in a project
+  
+## Projects
+_Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
+You can create a project manually in the UI, via API or via SDK by specifying a project name that does not already exist in `LLMObs.enable`.
+
+```python
+LLMObs.enable(
+    ...
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+)
+```
 
 ## Datasets
 
@@ -213,8 +223,6 @@ Evaluators are functions that measure how well the model or agent performs by co
 
 ### Creating an experiment
 
-Create an experiment using `LLMObs.experiment()`:
-
 1. Load a dataset
    ```python
    from ddtrace.llmobs import LLMObs
@@ -223,20 +231,23 @@ Create an experiment using `LLMObs.experiment()`:
    dataset = LLMObs.pull_dataset("capitals-of-the-world")
    ```
 
-2. Define a task function that processes a single dataset record.
+2. Define a task function that processes a single dataset record  
+
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
        question = input_data["question"]
        # Your LLM or processing logic here
        return "Beijing" if "China" in question else "Unknown"
    ```
-
-   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.
-
+   A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.  
+   Our example here generates a string, but you could generate a dict as output to store any intermediary information you'd like to save and compare in the Evaluators.
+     
+   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.  
    If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-3. Define evaluator functions.
+4. Define evaluator functions  
+   
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
        return output_data == expected_output
@@ -253,9 +264,11 @@ Create an experiment using `LLMObs.experiment()`:
    def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
        fake_llm_call = "excellent"
        return fake_llm_call
-   ```
+   ```  
+   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array), `output_data` and `expected_output` can be any type.  
+   Evaluators can only return a string, number, Boolean.  
 
-4. Create and run the experiment.
+6. Create and run the experiment
    ```python
    experiment = LLMObs.experiment(
        name="capital-cities-test",
@@ -297,7 +310,7 @@ Create an experiment using `LLMObs.experiment()`:
    results = experiment.run(raise_errors=True)
    ```
 
-5. View your experiment results in Datadog:
+7. View your experiment results in Datadog
    ```
    print(f"View experiment: {experiment.url}")
    ```
