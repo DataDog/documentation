@@ -29,17 +29,19 @@ After setting up your pipeline using the API or Terraform, follow the instructio
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run the below command to install the Worker. You must replace the placeholders with the following values:
+Run the below [command](#worker-install-docker) to install the Worker. You must replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
 - `<PIPELINE_ID>`: The ID of your pipeline.
 - `<DATADOG_SITE>`: The [Datadog site][2].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0`
+    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
     - See [Environment Variables][3] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
     - See [Environment Variables][3] for a list of destination environment variables.
+
+#### Command to install the Worker {#worker-install-docker}
 
 ```shell
 docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -82,7 +84,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
-1. Run the below command to install the Worker. You must replace the placeholders with the following values:
+1. Run the below [command](#worker-install-kubernetes) to install the Worker. You must replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API.
         - **Note**: The API key must be [enabled for Remote Configuration][3].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -92,6 +94,8 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
         - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
         - See [Environment Variables][4] for a list of destination environment variables.
+
+#### Command to install the Worker {#worker-install-kubernetes}
 
     ```shell
     helm upgrade --install opw \
@@ -128,17 +132,19 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
 
-Run the one-step command below to install the Worker. You must replace the placeholders with the following values:
+Run the [one-step command](#worker-install-linux) below to install the Worker. You must replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
 - `<PIPELINE_ID>`: The ID of your pipeline.
 - `<DATADOG_SITE>`: The [Datadog site][2].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0`
+    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
     - See [Environment Variables][3] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
     - See [Environment Variables][3] for a list of destination environment variables.
+
+#### Command to install the Worker {#worker-install-linux}
 
 ```bash
 DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
