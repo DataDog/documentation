@@ -20,25 +20,26 @@ The Observability Pipelines Worker is software that runs in your environment to 
 
 If you had set up your pipeline using the [API][6] or [Terraform][8], see [API or Terraform pipeline setup](#api-or-terraform-pipeline-setup) on how to install the Worker.
 
-If you are setting up your pipeline in the UI, see [Pipelines UI setup](#pipeline-ui-setup) on how to install the Worker.
+If you had set up your pipeline in the UI, see [Pipelines UI setup](#pipeline-ui-setup) on how to install the Worker.
 
 ### API or Terraform pipeline setup
 
-After setting up your pipeline using the API or Terraform, follow the below instructions on installing the Worker for your platform.
+After setting up your pipeline using the API or Terraform, follow the below instructions on how to install the Worker for your platform.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run the following command to install the Worker. You must replace the following placeholders:
+Run the below command to install the Worker. You must replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
 - `<PIPELINE_ID>`: The ID of your pipeline.
+- `<DATADOG_SITE>`: The [Datadog site][2].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
     - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0`
-    - See [Environment Variables][2] for a list of source environment variables.
+    - See [Environment Variables][3] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
-    - See [Environment Variables][2] for a list of destination environment variables.
+    - See [Environment Variables][3] for a list of destination environment variables.
 
 ```shell
 docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -57,8 +58,8 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 See [Update Existing Pipelines][3] if you want to make changes to your pipeline's configuration.
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
-[2]: /observability_pipelines/environment_variables/
-[3]: /observability_pipelines/update_existing_pipelines
+[2]: /getting_started/site/
+[3]: /observability_pipelines/environment_variables/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -71,7 +72,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 - Red Hat Openshift
 - Rancher
 
-1. Download the [Helm chart values file][1]. See the [full list of configuration options][2] available.
+1. Download the [Helm chart values file][1]. See the [full list of configuration options][5] available.
     - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 1. Add the Datadog chart repository to Helm:
     ```shell
@@ -81,7 +82,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
-1. Run the following command to install the Worker. You must replace the following placeholders:
+1. Run the below command to install the Worker. You must replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API.
         - **Note**: The API key must be [enabled for Remote Configuration][3].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -127,7 +128,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
 
-Run the following one-step command to install the Worker. You must replace the following placeholders:
+Run the one-step command below to install the Worker. You must replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
 - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -147,8 +148,8 @@ DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SI
 
 See [Update Existing Pipelines][4] if you want to make changes to your pipeline's configuration.
 
-[1]: /getting_started/site/
-[2]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[1]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[2]: /getting_started/site/
 [3]: /observability_pipelines/environment_variables/
 [4]: /observability_pipelines/update_existing_pipelines
 
