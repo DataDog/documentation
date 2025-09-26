@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for macOS
+title: macOS
 platform: OS X
 os: osx
 aliases:
