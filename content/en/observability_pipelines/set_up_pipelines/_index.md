@@ -101,7 +101,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 <div class="alert alert-warning">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 1. You can use Observability Pipelines API to [create a pipeline][1].
-1. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+1. After creating the pipeline, [install the Worker][2] to send logs through it.
     - See [Environment Variables][4] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
 **Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.

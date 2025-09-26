@@ -135,7 +135,7 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 
 ## Ensure your organization is enabled for RC
 
-If you see the error `Please ensure you organization is enabled for RC`, make sure the API key you are using for the Worker has [Remote Configuration enabled][17].
+If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17].
 
 ## Missing environment variable
 
