@@ -24,7 +24,6 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`                     |
 | C++        | Conan             | `conan.lock`                             |
-| Erlang     | Hex               | `mix.lock`                               |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
