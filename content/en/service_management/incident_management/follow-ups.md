@@ -9,15 +9,15 @@ further_reading:
 
 ## Overview
 
-Incident follow-ups are tasks to be performed following the incident's resolution. Follow-ups are usuaully work items intended to improve the reliability of your systems or the effectiveness of your incident response process.
+Incident follow-ups are tasks to be performed following an incident's resolution. Follow-ups are usually work items intended to improve the reliability of your systems or the effectiveness of your incident response process.
 
-You can use Incident Management to define, manage, and track follow-up tasks that come out of your incident response process.
+You can use Datadog Incident Management to define, manage, and track follow-up tasks for your incidents.
 
 ## Define follow-ups
 
 Your incident responders can define incident follow-ups at any point during an incident.
 
-Follow-ups support a due date and multiple assignees.
+When defining a follow-up or at any time later, you can add due date and multiple assignees.
 
 ## Export follow-ups
 
@@ -50,6 +50,9 @@ When Datadog exports an incident follow-up to Case Management, it creates a case
 
 **Status syncing:** Datadog syncs status between the follow-up and the case **in both directions**, following the mapping you defined in the export template.
 
+**Assignee syncing:** Datadog sync assignee between the follow-up and the case **in both directions**. Because a case can have only one assignee, only the first assignee of the follow-up is added to it.
+
+
 ### Jira exports
 
 To export follow-ups to Jira, you must first install the Jira integration through the [Jira Integration tile][3]. For more information, see the [Jira integration][4] documentation.
@@ -60,7 +63,7 @@ When Datadog exports an incident follow-up to Jira, it creates a Jira issue for 
 
 **Status syncing:** When you close or open a incident follow-up, Datadog automatically syncs the status of connected Jira issue based on the mapping you defined in the export template. **This is a one-way sync.**
 
-Organizations that need two-way sync can export to a Case Management project that is configured for two-way sync with a Jira project.
+Organizations that need two-way sync should export to a Case Management project that is configured for two-way sync with a Jira project.
 
 ## Further reading
 
