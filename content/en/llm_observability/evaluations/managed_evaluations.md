@@ -1,6 +1,6 @@
 ---
-title: Out-of-the-Box Evaluations
-description: Learn how to configure out-of-the-box evaluations for your LLM applications.
+title: Managed Evaluations
+description: Learn how to configure managed evaluations for your LLM applications.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-Out-of-the-box evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
-LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
+LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
 ## Connect your LLM provider account
 
@@ -115,7 +115,7 @@ After you click **Save**, LLM Observability uses the LLM account you connected t
 
 ### Estimated token usage
 
-You can monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
+You can monitor the token usage of your BYOK managed evaluations using [this dashboard][7].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
