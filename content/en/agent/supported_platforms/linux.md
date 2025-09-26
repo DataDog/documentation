@@ -20,6 +20,7 @@ aliases:
     - /agent/basic_agent_usage/ubuntu/
     - /agent/basic_agent_usage/suse/
     - /agent/basic_agent_usage/rocky/
+    - /agent/basic_agent_usage/linux/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

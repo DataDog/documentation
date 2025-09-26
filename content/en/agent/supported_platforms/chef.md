@@ -2,6 +2,8 @@
 dependencies:
 - https://github.com/DataDog/chef-datadog/blob/main/README.md
 title: Chef
+aliases:
+  - /agent/basic_agent_usage/chef/
 ---
 The Datadog Chef recipes are used to deploy Datadog's components and configuration automatically. The cookbook includes support for:
 

@@ -4,6 +4,7 @@ description: "Basic functionality of the Datadog Agent on the Windows platform."
 platform: Windows
 aliases:
     - /guides/basic_agent_usage/windows/
+    - /agent/basic_agent_usage/windows/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

@@ -353,4 +353,4 @@ Note: The Datadog UNIX Agent is developed for specific system architectures, and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage/source/
+[1]: /agent/supported_platforms/source/

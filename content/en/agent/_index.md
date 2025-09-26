@@ -26,17 +26,6 @@ aliases:
   - /guides/basic_agent_usage/
   - /agent/faq/where-is-the-configuration-file-for-the-agent/
   - /agent/faq/log-location
-  - /agent/basic_agent_usage/aix/
-  - /agent/basic_agent_usage/linux/
-  - /agent/basic_agent_usage/ansible/
-  - /agent/basic_agent_usage/chef/
-  - /agent/basic_agent_usage/heroku/
-  - /agent/basic_agent_usage/osx/
-  - /agent/basic_agent_usage/puppet/
-  - /agent/basic_agent_usage/saltstack/
-  - /agent/basic_agent_usage/sccm/
-  - /agent/basic_agent_usage/windows/
-  - /agent/basic_agent_usage/chef/
 cascade:
 - _target:
     path: /agent/basic_agent_usage/chef

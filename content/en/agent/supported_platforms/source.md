@@ -4,6 +4,7 @@ description: "Learn how to install, configure, and manage the Datadog Agent when
 platform: Source
 aliases:
     - /guides/basic_agent_usage/source/
+    - /agent/basic_agent_usage/source/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

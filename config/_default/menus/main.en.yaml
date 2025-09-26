@@ -369,6 +369,11 @@ menu:
       url: agent/supported_platforms/windows/
       weight: 410
       parent: agent_supported_platforms
+    - name: From Source
+      identifier: basic_agent_usage_source
+      url: agent/supported_platforms/source/
+      weight: 411
+      parent: agent_supported_platforms
     - name: Log Collection
       url: agent/logs/
       identifier: agent_logs

@@ -2,6 +2,8 @@
 dependencies:
 - https://github.com/ansible-collections/Datadog/blob/main/README.md
 title: Ansible
+aliases:
+  - /agent/basic_agent_usage/ansible/
 ---
 ## Description
 

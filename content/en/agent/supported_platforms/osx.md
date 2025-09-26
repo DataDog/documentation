@@ -4,6 +4,7 @@ platform: OS X
 os: osx
 aliases:
     - /guides/basic_agent_usage/osx/
+    - /agent/basic_agent_usage/osx/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

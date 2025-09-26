@@ -11,6 +11,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
   text: "Monitor AIX with the Datadog UNIX Agent"
+aliases:
+  - /agent/basic_agent_usage/aix/
 algolia:
   tags: ['uninstall', 'uninstalling']
 ---
