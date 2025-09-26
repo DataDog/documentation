@@ -24,7 +24,7 @@ If you had set up your pipeline in the UI, see [Pipelines UI setup](#pipeline-ui
 
 ### API or Terraform pipeline setup
 
-After setting up your pipeline using the API or Terraform, follow the below instructions on how to install the Worker for your platform.
+After setting up your pipeline using the API or Terraform, follow the instructions below on how to install the Worker for your platform.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
