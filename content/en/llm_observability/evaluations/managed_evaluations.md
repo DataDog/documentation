@@ -11,6 +11,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
   tag: "Blog"
   text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
+aliases:
+    - /llm_observability/evaluations/ootb_evaluations
 ---
 
 ## Overview
