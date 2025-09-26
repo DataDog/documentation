@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations:
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][7].
 
 ### Out-of-the-Box Evaluations
 
@@ -38,3 +38,4 @@ By proactively scanning for sensitive data, LLM Observability ensures that conve
 [4]: /llm_observability/evaluations/submit_nemo_evaluations
 [5]: /security/sensitive_data_scanner/
 [6]: /account_management/rbac/permissions/#llm-observability
+[7]: https://app.datadoghq.com/llm/settings/evaluations
