@@ -92,22 +92,26 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
 If your LLM provider restricts IP addresses, you can obtain the required IP ranges by visiting [Datadog's IP ranges documentation][5], selecting your `Datadog Site`, pasting the `GET` URL into your browser, and copying the `webhooks` section.
 
-## Select and enable evaluations
+## Create new evaluations
 
-1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
-1. Click on the evaluation you want to enable.
-   - Configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you select the edit icon to configure the evaluation for an individual LLM application.
-   - Evaluations can be disabled by selecting the disable icon for an individual LLM application.
-1. If you chose **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
+1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Click on the **Create Evaluation** button on the top right corner.
+1. Select the LLM application(s) you want to configure your evaluation for.
 1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider and choose an account.
 1. Configure the data to run the evaluation on:
-   - Select **traces** (the root span of each trace) or **spans** (LLM, Workflow, and Agent).
-   - If you selected spans, you must select at least one **span name**.
+   - Select **Traces** (filtering for the root span of each trace) or **All Spans** (no filtering).
    - (Optional) Specify any or all **tags** you want this evaluation to run on.
    - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than `0` and less than or equal to `100` (sampling all spans).
 1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
+
+## Edit existing evaluations
+
+1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Find on the evaluation you want to edit and toggle the **Enabled Applications** button.
+1. Select the edit icon to configure the evaluation for an individual LLM application or click on the application name.
+1. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
 
 ### Estimated token usage
 
