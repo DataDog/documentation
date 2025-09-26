@@ -643,14 +643,24 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user events.
+Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user events. Version v1.11.0 of dd-trace-php introduces new methods under the `\datadog\appsec\v2\` namespace. Existing event tracking methods are retained for compatibility.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
 {{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```php
 <?php
-\datadog\appsec\track_user_login_success_event($id, ['usr.login' => $email])
+$user = [
+    'id' => 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
+    'email' => 'user@email.com' // other fields are optional
+]; //User data can be provided as an array
+$user = 'user-id'; //or user could be just an ID
+$login = 'user@email.com';
+$metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
+
+// Log a successful user authentication event
+// user and metadata are optional
+\datadog\appsec\v2\track_user_login_success($login, $user, $metadata);
 ?>
 ```
 {{% /collapse-content %}}
@@ -658,9 +668,14 @@ The following examples show how to track login events or custom events (using si
 {{% collapse-content title="Login failure" level="h4" expanded="false" id="php-login-failure" %}}
 ```php
 <?php
-// If no numeric userId is available, you may use any unique string as userId instead (username, email...)
-// Make sure that the value is unique per user (and not per attacker/IP)
-\datadog\appsec\track_user_login_failure_event($id, $exists, ['usr.login' => $email])
+$login = 'user-id'; // the string used by the user to log in
+$userExists = true; // if the user login exists in database or not
+$metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
+
+// Log a failed user authentication event
+// userExists is optional and it defaults to false
+// metadata is optional
+\datadog\appsec\v2\track_user_login_failure($login, $userExists, $metadata);
 ?>
 ```
 {{% /collapse-content %}}
@@ -668,11 +683,64 @@ The following examples show how to track login events or custom events (using si
 {{% collapse-content title="Custom business logic" level="h4" expanded="false" id="php-custom-business" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event('users.signup', ['usr.id' => $id]);
+$eventName = 'users.signup'; // custom event name
+$metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
+\datadog\appsec\track_custom_event($eventName, $metadata);
 ?>
 ```
 {{% /collapse-content %}}
 
+#### Migrating to the new login success and failure methods
+
+The new methods in `\datadog\appsec\v2\` namespace introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user array/ID is optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+
+**Note**: the legacy methods `\datadog\appsec\track_user_login_success_event` and `\datadog\appsec\track_user_login_failure_event` are deprecated in favor of the new methods `\datadog\appsec\v2\track_user_login_success` and `\datadog\appsec\v2\track_user_login_failure`, respectively.
+
+In the following example, the commented code is no longer necessary.
+
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
+```php
+<?php
+// in a controller:
+$user = [
+    'id' => 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
+    'email' => 'user@email.com' // other fields are optional
+]; // same as before, but now the array is optional. Providing a user ID nonetheless helps with post-compromised activity correlation
+
+$login = 'user@email.com'; // new mandatory argument
+
+$metadata = [
+//  'usr.login' => 'user@email.com', this is no longer necessary in metadata. Must be the first argument
+  'key' => 'value'
+];
+
+// \datadog\appsec\track_user_login_success_event($user, $metadata) // deprecated
+\datadog\appsec\v2\track_user_login_success($login, $user, $metadata);
+?>
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="php-migration-login-failure" %}}
+```php
+<?php
+
+$userId = 'user-id'; // No longer mandatory, but helpful when available
+$login = 'user@email.com'; // new mandatory argument
+$userExists = true;
+$metadata = [
+//  'usr.login' => 'user@email.com', this is no longer necessary in metadata. Must be the first argument
+  'usr.id' => 'user-id', // Helps with correlating login failures with the rest of the user activity
+  'key' => 'value'
+];
+
+// \datadog\appsec\track_user_login_failure_event($userId, $exists, $metadata); // deprecated
+\datadog\appsec\v2\track_user_login_failure($login, $userExists, $metadata);
+```
+{{% /collapse-content %}}
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
@@ -1024,7 +1092,7 @@ This will open a menu in which you may define your custom WAF rule. By selecting
 Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
 
 
-[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[1]: /tracing/guide/remote_config
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## Automatic user activity event tracking
@@ -1096,4 +1164,4 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
-[15]: /agent/remote_config/
+[15]: /tracing/guide/remote_config

@@ -34,6 +34,9 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 
 If you're new to IDP, start with the [Getting Started guide][5], which walks through setup and basic usage.
 
+{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
+{{< /callout >}}
+
 ## Common use cases
 
 {{< whatsnext desc=" " >}}
@@ -50,6 +53,7 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
     {{< nextlink href="/internal_developer_portal/scorecards" >}}Promote engineering best practices at scale with Scorecards{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/self_service_actions" >}}Accelerate releases through Self-Service Actions{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports" >}}Track reliability and scorecard compliance with Engineering Reports{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/external_provider_status" >}}Monitor external dependencies with External Provider Status{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Working with teams

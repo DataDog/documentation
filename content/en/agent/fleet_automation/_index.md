@@ -1,8 +1,9 @@
 ---
 title: Fleet Automation
+description: "Centrally govern and remotely manage Datadog Agents at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
-- link: "/agent/remote_config"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
 - link: "/infrastructure/list/#agent-configuration"

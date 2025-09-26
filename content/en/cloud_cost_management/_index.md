@@ -34,6 +34,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
     tag: "Blog"
     text: "How we've created a successful FinOps practice at Datadog"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-management-saved-millions/"
+    tag: "Blog"
+    text: "How we saved $1.5 million per year with Cloud Cost Management"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

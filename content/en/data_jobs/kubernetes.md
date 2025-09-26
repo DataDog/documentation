@@ -25,12 +25,12 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-#### Prerequisites
+### Prerequisites
 - Kubernetes cluster version v1.20.X+
 - [`Helm`][1]
 - The [`kubectl` CLI][2]
 
-#### Installation
+### Installation
 1. Install the Datadog Operator by running the following commands:
    ```shell
    helm repo add datadog https://helm.datadoghq.com

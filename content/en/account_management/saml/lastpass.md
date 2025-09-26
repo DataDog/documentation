@@ -1,5 +1,6 @@
 ---
 title: LastPass SAML IdP
+description: Configure LastPass as a SAML identity provider for Datadog authentication using the LastPass Datadog app integration.
 aliases:
   - /account_management/saml/nopassword
   - /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/

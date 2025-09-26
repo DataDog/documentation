@@ -269,7 +269,6 @@ To install the [Datadog extension][6], select the appropriate app, then click **
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
-- `DD_LOGS_INJECTION:true`
 
 Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 

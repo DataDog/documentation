@@ -1,90 +1,108 @@
 ---
+aliases:
+- /es/security/agentless_scanning
+- /es/security/cloud_security_management/agentless_scanning
 further_reading:
-- link: /security/cloud_security_management/setup
+- link: /security/vulnerabilities
   tag: Documentación
-  text: Configuración de Cloud Security Management
-- link: /security/cloud_security_management/agentless_scanning
-  tag: Documentación
-  text: Agentless Scanning de Cloud Security Management
-title: Activación de de Agentless Scanning
+  text: Más información sobre Cloud Security Vulnerabilities
+title: Cloud Security Agentless Scanning
 ---
 
-Agentless Scanning proporciona visibilidad de las vulnerabilidades que existen dentro de tu infraestructura de nube, sin necesidad de instalar el Datadog Agent. Para obtener más información sobre las capacidades y el funcionamiento de Agentless Scanning, consulta la documentación de [Agentless Scanning][12].
+## Información general
 
-## Requisitos previos
+Agentless Scanning proporciona visibilidad de las vulnerabilidades que existen en tu infraestructura en la nube, sin necesidad de instalar el Datadog Agent . Datadog recomienda activar Agentless Scanning como primer paso para obtener una visibilidad completa de tus recursos en la nube y luego instalar el Datadog Agent en tus activos principales con el tiempo para obtener un contexto de seguridad y observabilidad más profundo.
 
-Antes de configurar Agentless Scanning, asegúrate de que se cumplen los siguientes requisitos previos:
+## Cómo funciona
 
-- **Configuración remota**: La [configuración remota][3] es necesaria para permitir que Datadog envíe información a los analizadores Agentless, como qué recursos de la nube analizar.
-- Permisos en la nube**: La instancia de Agentless Scanning requiere permisos específicos para analizar funciones de hosts. Estos permisos se aplican automáticamente como parte del proceso de instalación.<br><br>
-  {{< collapse-content title="Permisos de análisis de hosts y contenedores AWS" level="h5" >}}
-  <ul>
-    <li><code>ec2:DescribeVolumes</code></li>
-    <li><code>ec2:CreateTags</code></li>
-    <li><code>ec2:CreateSnapshot</code></li>
-    <li><code>ec2:DeleteSnapshot</code></li>
-    <li><code>ec2:DescribeSnapshots</code></li>
-    <li><code>ec2:DescribeSnapshotAttribute</code></li>
-    <li><code>ebs:ListSnapshotBlocks</code></li>
-    <li><code>ebs:ListChangedBlocks</code></li>
-    <li><code>ebs:GetSnapshotBlock</code></li>
-  </ul>
-  {{< /collapse-content >}}
+Después de [configurar el Agentless scanning][1] para tus recursos, Datadog programa escaneos automatizados en intervalos de 12 horas a través de la [Configuración remota][2]. Durante un ciclo de escaneo, los escáneres Agentless recopilan dependencias de código Lambda y crean snapshots de tus instancias de VM. Con estos snapshots, los escáneres Agentless escanean, generan y transmiten una lista de paquetes a Datadog para check en busca de vulnerabilidades, junto con dependencias de código Lambda. Una vez finalizados los escaneos de un snapshot, se elimina el snapshot. Nunca se transmite información personal confidencial o privada fuera de tu infraestructura.
 
-  {{< collapse-content title="Permisos de análisis de AWS Lambda" level="h5" >}}
-  <ul><li><code>lambda:GetFunction</code></li></ul>
-  {{< /collapse-content >}}
+El siguiente diagrama ilustra el funcionamiento de Agentless Scanning:
 
-  {{< collapse-content title="Permisos de análisis de hosts" level="h5" >}}
-  <ul>
-    <li><code>Microsoft.Compute/virtualMachines/read</code></li>
-    <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
-    <li><code>Microsoft.Compute/virtualMachineScaleSets/read</code></li>
-    <li><code>Microsoft.compu/virtualMachineScaleSets/instanceView/read</code></li>
-    <li><code>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/read</code></li>
-    <li><code>Microsoft.compu/virtualMachineScaleSets/virtualMachines/instanceView/read</code></li>
-    <li><code>Microsoft.Compute/disks/read</code></li>
-    <li><code>Microsoft.Compute/disks/beginGetAccess/action</code></li>
-    <li><code>Microsoft.Compute/disks/endGetAccess/action</code></li>
-  </ul>
-  {{< /collapse-content >}}
+{{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagrama que muestra el funcionamiento de Agentless Scanning" width="90%" >}}
 
-## Configuración
+1. Datadog programa un análisis y determina qué recursos analizar mediante configuración remota.
 
-<div class="alert alert-warning">La ejecución de analizadores Agentless incurre en costes adicionales. Para optimizar estos costes sin dejar de garantizar la fiabilidad de los análisis de 12 horas, Datadog recomienda configurar <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Agentless Scanning con Terraform</a> como plantilla predeterminada.</div>
+    **Nota**: Los análisis programados ignoran hosts que ya tienen el [Datadog Agent instalado con Cloud Security habilitado](#agentless-scanning-with-existing-Agent-installations). Datadog programa nuevos análisis continuos de los recursos cada 12 horas para proporcionar información actualizada sobre vulnerabilidades y debilidades potenciales.
 
-Para activar Agentless Scanning, utiliza uno de los siguientes flujos de trabajo:
+2. Para las funciones Lambda, los analizadores obtienen el código de la función.
+3. El escáner crea snapshots de volúmenes utilizados en instancias de VM en ejecución. Estos snapshots sirven como base para realizar escaneos. Utilizando los snapshots, o el código, el escáner genera un lista de paquetes.
+4. Una vez finalizado el escaneado, la lista de paquetes y la información relacionada con los hosts recopilados se transmiten a Datadog, mientras que el resto de los datos permanece dentro de tu infraestructura. Los snapshots creados durante el ciclo de escaneado se eliminan.
+5. Aprovechando la lista de paquetes recopilados junto con el acceso de Datadog a la base de datos de vulnerabilidades de Trivy, Datadog encuentra las vulnerabilidades afectadas coincidentes en tus recursos y tu código.
 
-### Inicio rápido
+**Notas**:
+- El escáner funciona como una instancia de VM independiente dentro de tu infraestructura, lo que garantiza un impacto mínimo en los sistemas y recursos existentes.
+- El analizador recopila de forma segura una lista de paquetes de tus hosts, sin transmitir ninguna información personal confidencial o privada fuera de tu infraestructura.
+- El escáner limita su uso de la API del proveedor de la nube para evitar alcanzar cualquier límite de velocidad y utiliza un backoff exponencial si es necesario.
 
-Diseñado para nuevos usuarios, el [flujo de trabajo de inicio rápido][5] ofrece un proceso de configuración eficaz para la gestión de la seguridad en la nube, lo que permite la monitorización inmediata de recursos de AWS. Utiliza AWS CloudFormation para automatizar la configuración.
+## Datos que se envían a Datadog
+El analizador Agentless utiliza el formato OWASP [cycloneDX][3] para transmitir una lista de paquetes a Datadog. Nunca se transmite información personal confidencial o privada fuera de tu infraestructura.
 
-### Terraform
+Datadog **no** envía:
+- Configuraciones de sistemas y paquetes 
+- Claves de cifrado y certificados
+- Logs y registros de auditoría
+- Datos empresariales sensibles
 
-El [módulo de análisis Agentless Terraform Datadog][6] proporciona una configuración sencilla y reutilizable para instalar el analizador Agentless de Datadog. Para obtener más información, consulta [Configuración del analizador Agentless mediante Terraform][7].
+## Cuestiones de seguridad
 
-### AWS CloudFormation
+Dado que las instancias de escáner conceden [permisos][4] para crear y copiar snapshots y describir volúmenes, Datadog aconseja restringir el acceso a estas instancias únicamente a los usuarios administrativos.
 
-Utiliza la plantilla AWS CloudFormation para crear un stack tecnológico de CloudFormation. La plantilla incluye los permisos de IAM necesarios para desplegar y gestionar analizadores Agentless. Para obtener más información, consulta [Configuración de Agentless Scanning con AWS CloudFormation][11].
+Para reducir aún más este riesgo, Datadog aplica las siguientes medidas de seguridad:
 
-### Azure Resource Manager
+- El analizador de Datadog funciona _dentro_ de tu infraestructura, garantizando que todos los datos, incluidos los snapshots y la lista de paquetes, permanecen aislados y seguros.
+- Toda la transmisión de datos entre el analizador y Datadog se cifra mediante protocolos estándar del sector (como HTTPS) para garantizar la confidencialidad e integridad de los datos.
+- El analizador de Datadog opera bajo el principio de mínimo privilegio. Esto significa que sólo se conceden los permisos mínimos necesarios para realizar eficazmente las funciones deseadas.
+- Datadog revisa y limita cuidadosamente los permisos concedidos al analizador para garantizar que pueda realizar análisis sin acceder innecesariamente a datos o recursos confidenciales.
+- Las actualizaciones de seguridad no supervisadas están habilitadas en las instancias del analizador de Datadog. Esta función automatiza el proceso de instalación de parches y actualizaciones de seguridad críticos sin necesidad de una intervención manual.
+- Las instancias de escáner de Datadog se rotan automáticamente cada 24 horas. Esta rotación garantiza que las instancias de escáner se actualicen continuamente con las últimas imágenes de Ubuntu.
+- El acceso a las instancias del analizador está estrictamente controlado mediante el uso de grupos de seguridad. No se permite el acceso entrante al analizador, lo que restringe la posibilidad de comprometer la instancia.
+- Nunca se transmite información personal confidencial o privada fuera de tu infraestructura.
 
-Utiliza la plantilla Azure Resource Manager para desplegar el analizador Agentless. La plantilla incluye las definiciones de funciones necesarias para desplegar y gestionar analizadores Agentless. Para obtener más información, consulta [Configuración de Agentless Scanning con Azure Resource Manager][13].
+## Agentless Scanning con instalaciones existentes del Agent 
+
+Una vez instalado, el Datadog Agent ofrece una visibilidad profunda y en tiempo real de los riesgos y las vulnerabilidades existentes en tus cargas de trabajo en la nube. Se recomienda instalar completamente el Datadog Agent.
+
+Como resultado, Agentless Scanning excluye de tus análisis los recursos que tienen instalado y configurado el Datadog Agent para [Vulnerability Management][5]. De este modo, Cloud Security te ofrece una visibilidad completa de tu panorama de riesgos sin anular las ventajas de la instalación del Datadog Agent con Vulnerability Management.
+
+El siguiente diagrama muestra cómo funciona Agentless Scanning con las instalaciones existentes del Agent:
+
+{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagrama que muestra cómo funciona Agentless Scanning cuando el Agent ya está instalado con Cloud Security Vulnerability Management" width="90%" >}}
+
+## Análisis del almacenamiento en la nube
+
+{{< callout header="Disponibilidad limitada" url="https://www.datadoghq.com/private-beta/data-security" >}}
+La compatibilidad del análisis de buckets de Amazon S3 e instancias RDS está en Disponibilidad limitada. Para inscribirte, haz clic en <strong>Request Access</strong> (Solicitar acceso).
+{{< /callout >}}
+
+Si tienes activado [Sensitive Data Scanner][8], puedes catalogar y clasificar los datos confidenciales en tus buckets de Amazon S3 e instancias RDS.
+
+Sensitive Data Scanner analiza datos confidenciales desplegando [analizadores Agentless][1] en tus entornos de nube. Estas instancias de análisis recuperan una lista de todos los buckets de S3 e instancias RDS mediante [configuración remota][10] y tienen instrucciones para analizar archivos de texto, como CSV y JSON, y tablas en cada almacén de datos a lo largo del tiempo. Sensitive Data Scanner aprovecha sus [bibliotecas de reglas completas][11] para encontrar coincidencias. Cuando se encuentra una coincidencia, la instancia de análisis envía la localización de la coincidencia a Datadog. Los almacenes de datos y sus archivos sólo se leen en tu entorno. No se reenvía ningún dato confidencial a Datadog.
+
+Además de mostrar las coincidencias de datos confidenciales, Sensitive Data Scanner muestra cualquier problema de seguridad detectado por [Cloud Security][9] que afecte a los almacenes de datos confidenciales. Puedes hacer clic en cualquier problema para continuar con la clasificación y la corrección dentro de Cloud Security.
+
+## Coste del proveedor de servicio en la nube
+
+Cuando se utiliza Agentless Scanning, existen costos adicionales del proveedor de la nube para ejecutar los escáneres y analizar tus entornos de la nube.
+
+Tu configuración de la nube afecta a los costos de tu proveedor de la nube. Normalmente, utilizando la [configuración recomendada][13], estos oscilan en torno a 1 USD por host escaneado y por año. Consulta la información de tu proveedor de la nube para conocer los importes exactos, que están sujetos a cambios sin la participación de Datadog.
+
+Para grandes cargas de trabajo en la nube distribuidas en varias regiones, Datadog recomienda configurar [Agentless Scanning con Terraform][6] para evitar la creación de redes entre regiones.
+
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/cloud_security_management/agentless_scanning
-[2]: /es/integrations/amazon_web_services/
-[3]: /es/agent/remote_config/?tab=configurationyamlfile#setup
-[4]: https://app.datadoghq.com/security/csm/intro
-[5]: /es/security/cloud_security_management/setup/agentless_scanning/quick_start
-[6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
-[7]: /es/security/cloud_security_management/setup/agentless_scanning/terraform
-[8]: mailto:success@datadoghq.com
-[9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
-[10]: https://app.datadoghq.com/security/configuration/csm/setup
-[11]: /es/security/cloud_security_management/setup/agentless_scanning/cloudformation
-[12]: /es/security/cloud_security_management/agentless_scanning
-[13]: /es/security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
+[1]: /es/security/cloud_security_management/setup/agentless_scanning#setup
+[2]: /es/remote_configuration
+[3]: https://cyclonedx.org/
+[4]: /es/security/cloud_security_management/setup/agentless_scanning/enable#prerequisites
+[5]: https://app.datadoghq.com/security/csm/vm
+[6]: #terraform
+[7]: mailto:success@datadoghq.com
+[8]: /es/security/sensitive_data_scanner
+[9]: /es/security/cloud_security_management
+[10]: /es/remote_configuration
+[11]: /es/security/sensitive_data_scanner/scanning_rules/library_rules/
+[13]: /es/security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration

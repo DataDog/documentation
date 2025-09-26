@@ -26,9 +26,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for macOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
-
-See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
+This page outlines the basic features of the Datadog Agent for macOS. See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
 
 ## Install the Agent 
 To install the Agent on macOS, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
@@ -59,7 +57,7 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 
 ## Configuration
 
-The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
+The [Datadog Agent configuration file][7] is located in `/opt/datadog-agent`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
 - `api_key`: your organization's [Datadog API key][8] 
 - `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  

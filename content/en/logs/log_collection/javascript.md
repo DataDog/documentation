@@ -386,45 +386,11 @@ window.DD_LOGS.init({
 
 ### Content Security Policy integration
 
-If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the RUM section of the CSP documentation][14] for configuration steps.
+If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the RUM section of the CSP documentation][7] for configuration steps.
 
 ### Initialization parameters
 
-The following parameters are available to configure the Datadog browser logs SDK to send logs to Datadog:
-
-| Parameter                  | Type                                                                      | Required | Default         | Description                                                                                                                                                                           |
-|----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `clientToken`              | String                                                                    | Yes      |                 | A [Datadog client token][2].                                                                                                                                                          |
-| `site`                     | String                                                                    | Yes      | `datadoghq.com` | The [Datadog site parameter of your organization][9].                                                                                                                                 |
-| `service`                  | String                                                                    | No       |                 | The service name for your application. It should follow the [tag syntax requirements][7].                                                                                             |
-| `env`                      | String                                                                    | No       |                 | The application's environment, for example: prod, pre-prod, staging, and so on. It should follow the [tag syntax requirements][7].                                                    |
-| `version`                  | String                                                                    | No       |                 | The application's version, for example: 1.2.3, 6c44da20, 2020.02.13, and so on. It should follow the [tag syntax requirements][7].                                                    |
-| `forwardErrorsToLogs`      | Boolean                                                                   | No       | `true`          | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog.                                                                              |
-| `forwardConsoleLogs`       | `"all"` or an Array of `"log"` `"debug"` `"info"` `"warn"` `"error"`      | No       | `[]`            | Forward logs from `console.*` to Datadog. Use `"all"` to forward everything or an array of console API names to forward only a subset.                                                |
-| `forwardReports`           | `"all"` or an Array of `"intervention"` `"deprecation"` `"csp_violation"` | No       | `[]`            | Forward reports from the [Reporting API][8] to Datadog. Use `"all"` to forward everything or an array of report types to forward only a subset.                                       |
-| `sampleRate`               | Number                                                                    | No       | `100`           | **Deprecated** - see `sessionSampleRate`.                                                                                                                                             |
-| `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs. It applies only to logs collected via the Browser Logs SDK and is independent of RUM data.                                                                                    |
-| `trackingConsent`          | `"granted"` or `"not-granted"`                                            | No       | `"granted"`     | Set the initial user tracking consent state. See [User Tracking Consent][15].                                                                                                         |
-| `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
-| `proxy`                    | String                                                                    | No       |                 | Optional proxy URL (ex: `https://www.proxy.com/path`), see the full [proxy setup guide][6] for more information.                                                                      |
-| `usePciIntake`             | Boolean                                                                   | No       | `false`         | Use PCI-compliant intake. See [PCI DSS Compliance][20] for more information.                                                                                                          |
-| `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
-| `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.          |
-| `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
-| `allowedTrackingOrigins`   | Array                                                                     | No       |                 | List of origins where the SDK is allowed to run.                                                                                                                                      |
-
-
-Options that must have a matching configuration when using the `RUM` SDK:
-
-
-| Parameter                              | Type                            | Required | Default    | Description                                                                                                                                                                                                                                                              |
-| -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `sessionPersistence`                   | `"cookie"` or `"local-storage"` | No       | `"cookie"` | Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.                                                                                                                                                                        |
-| `trackAnonymousUser`                   | Boolean                         | No       | `true`     | Enables collection of anonymous user id across sessions.                                                                                                                                                                        |
-| `trackSessionAcrossSubdomains`         | Boolean                         | No       | `false`    | Preserve the session across subdomains for the same site.                                                                                                                                                                                                                |
-| `useSecureSessionCookie`               | Boolean                         | No       | `false`    | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                                                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | Boolean                         | No       | `false`    | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.                                                                                                 |
-| `usePciIntake`                         | Boolean                         | No       | `false`    | To forward logs to the [PCI-compliant intake][16], set to `true`. The PCI-compliant intake is only available for Datadog organizations in the US1 site. If `usePciIntake` is set to `true` and the site is not US1 (datadoghq.com), logs are sent to the default intake. |
+Refer to the [Browser SDK API Reference][8] for the full list of available configuration options.
 
 ## Usage
 
@@ -506,7 +472,7 @@ The Datadog backend adds more fields, like:
 
 ### Error tracking
 
-The Datadog browser logs SDK allows for manual error tracking by using the optional `error` parameter (Available in SDK v4.36.0+). When an instance of a [JavaScript Error][10] is provided, the SDK extracts relevant information (kind, message, stack trace) from the error.
+The Datadog browser logs SDK allows for manual error tracking by using the optional `error` parameter (Available in SDK v4.36.0+). When an instance of a [JavaScript Error][5] is provided, the SDK extracts relevant information (kind, message, stack trace) from the error.
 
 ```
 logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
@@ -623,7 +589,7 @@ The placeholders in the examples above are described below:
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog.                               |
 | `<JSON_ATTRIBUTES>` | A valid JSON object, which includes all attributes attached to the `<MESSAGE>`.         |
 | `<STATUS>`          | The status of your log; accepted status values are `debug`, `info`, `warn`, or `error`. |
-| `<ERROR>`           | An instance of a [JavaScript Error][10] object.                                         |
+| `<ERROR>`           | An instance of a [JavaScript Error][5] object.                                         |
 
 ## Advanced usage
 
@@ -631,7 +597,7 @@ The placeholders in the examples above are described below:
 
 If your Browser logs contain sensitive information that needs redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize the Browser Log Collector.
 
-The `beforeSend` callback function can be invoked with two arguments: the `log` event and `context`. This function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you use the context to adjust any log properties. The context contains additional information related to the event, but not necessarily included in the event. You can typically use this information to [enrich][18] your event or [discard][19] it.
+The `beforeSend` callback function can be invoked with two arguments: the `log` event and `context`. This function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you use the context to adjust any log properties. The context contains additional information related to the event, but not necessarily included in the event. You can typically use this information to [enrich][10] your event or [discard][11] it.
 
 ```javascript
 function beforeSend(log, context)
@@ -642,7 +608,7 @@ The potential `context` values are:
 | Value | Data Type | Use Case |
 |-------|---------|------------|
 | `isAborted` | Boolean | For network log events, this property tells you whether the failing request was aborted by the application, in which case you might not want to send this event because it may be intentionally aborted. |
-| `handlingStack` | String | A stack trace of where the log event was handled. This can be used to identify which [micro-frontend][17] the log was sent from. |
+| `handlingStack` | String | A stack trace of where the log event was handled. This can be used to identify which [micro-frontend][9] the log was sent from. |
 
 To redact email addresses from your web application URLs:
 
@@ -1139,7 +1105,7 @@ By default, contexts are stored in the current page memory, which means they are
 
 To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][12], allowing the following behaviors:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][6], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
@@ -1399,19 +1365,10 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
 [4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
-[5]: https://docs.datadoghq.com/real_user_monitoring/guide/enrich-and-control-rum-data/
-[6]: https://docs.datadoghq.com/real_user_monitoring/faq/proxy_rum_data/
-[7]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
-[8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
-[9]: https://docs.datadoghq.com/getting_started/site/
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[11]: https://docs.datadoghq.com/logs/log_collection/javascript/#contexts-life-cycle
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[15]: #user-tracking-consent
-[16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management
-[17]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
-[18]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[19]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
-[20]: /data_security/pci_compliance/?tab=logmanagement
+[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[7]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[8]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
+[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event

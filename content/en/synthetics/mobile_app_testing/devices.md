@@ -1,13 +1,13 @@
 ---
 title: Supported Mobile App Testing Devices
 further_reading:
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 - link: "synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Mobile App Testing"
 ---
-
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 The following mobile devices are compatible with Mobile App Testing. These devices are categorized by operating system and availability in the EU and US regions.
 

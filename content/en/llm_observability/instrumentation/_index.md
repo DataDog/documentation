@@ -13,6 +13,12 @@ You can visualize the interactions and performance data of your LLM applications
 
 {{< img src="llm_observability/traces.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /llm_observability/auto_instrumentation
 [2]: /llm_observability/setup/api
 [3]: https://app.datadoghq.com/llm/traces

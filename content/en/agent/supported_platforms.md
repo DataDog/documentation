@@ -1,5 +1,6 @@
 ---
 title: Supported Platforms
+description: "Complete list of operating systems and platforms supported by the Datadog Agent including Linux, Windows, macOS, and cloud environments."
 disable_toc: false
 further_reading:
 - link: "agent/basic_agent_usage/"
@@ -244,7 +245,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td></td>
   </tr>
   <tr>
-    <td>2016, 2019, 2022</td>
+    <td>2016, 2019, 2022, 2025</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>

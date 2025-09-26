@@ -1,5 +1,18 @@
 {{ $dot := . }}
 
+<!-- manual mappings of integration to pmm categories - WEB-6040 -->
+{{ $s1 := newScratch }}
+<!-- AWS, Azure, GCP are also part of ccm filter, we add them later -->
+{{ $ccm_integration_ids := (slice "fastly" "snowflake-web" "confluent-cloud" "mongodb" "databricks" "openai" "twilio" "elastic-cloud") }}
+{{ $s1.SetInMap "manualfilters" "CCM" $ccm_integration_ids }}
+{{ $s1.SetInMap "manualfilters" "DSM" (slice "kafka" "confluent-cloud" "confluent-platform" "amazon-msk-cloud" "amazon-msk" "rabbitmq" "amazon-sqs") }}
+{{ $s1.SetInMap "manualfilters" "DJM" (slice "databricks") }}
+{{ $s1.SetInMap "manualfilters" "LLM" (slice "openai" "azure-openai" "anthropic" "amazon-bedrock") }}
+{{ $s1.SetInMap "manualfilters" "Product Analytics" (slice "snowflake-web" "servicenow" "salesforce" "databricks") }}
+{{ $s1.SetInMap "manualfilters" "NDM" (slice "snmp-arista" "snmp-aruba" "cisco-sdwan" "meraki" "cisco-aci" "velocloud-sd-wan") }}
+{{ $s1.SetInMap "manualfilters" "DBM" (slice "postgres" "mysql" "sql-server" "oracle" "mongodb") }}
+
+
 <!-- From data file -->
 {{ $integration_list := site.Pages }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Section" "=" "integrations") }}
@@ -12,6 +25,13 @@
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
+
+<!-- Add Manual filters to the filter tag cloud -->
+{{ $manualfilterkeys := slice }}
+{{- range $key, $e := $s1.Get "manualfilters" }}
+  {{- $.Scratch.Add "filters" ($key | lower) -}}
+  {{- $manualfilterkeys = $manualfilterkeys | append ($key | lower) -}}
+{{- end -}}
 
 <!-- build tiles -->
 {{- $s := newScratch -}}
@@ -48,8 +68,21 @@
     {{- $curr_categories = $curr_categories | append (print "cat-" (replace $e "/" "" | urlize)) -}}
   {{- end -}}
 
-  {{- $s.SetInMap $path "tags" ($curr_categories | default slice) -}}
+  <!-- AWS, Azure, GCP are also part of ccm, manually attach this to integrations too -->
+  {{ if (collections.Intersect (slice "cat-aws" "cat-azure" "cat-google-cloud") $curr_categories) }}
+    {{- $curr_categories = $curr_categories | append (print "cat-ccm") -}}
+  {{ end }}
+
   {{- $basename := $enpage.Params.integration_id | default ($enpage.Params.name | lower) | default ($enpage.File.TranslationBaseName | lower) }}
+
+  <!-- inject manual filters to categories for matched integration -->
+  {{- range $key, $ids := $s1.Get "manualfilters" }}
+    {{ if in $ids $basename }}
+      {{- $curr_categories = $curr_categories | append (print "cat-" (replace $key "/" "" | urlize)) -}}
+    {{ end }}
+  {{- end -}}
+
+  {{- $s.SetInMap $path "tags" ($curr_categories | default slice) -}}
   <!-- we need to overwrite system or network tiles to be more specific -->
   {{- if in (slice "system" "network") $enpage.Params.integration_id  -}}
     {{- $basename = ($enpage.Params.name | lower) | default ($v.File.TranslationBaseName | lower) -}}
@@ -79,14 +112,14 @@
     <div id="integration-popper" class="dropdown-menu" style="display:none;" data-ref="mobilecontrols">
         <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">{{ i18n "all" }}</a>
         {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-            <a id="cat-{{ replace $e "/" "" | urlize }}" data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+            <a id="cat-{{ replace $e "/" "" | urlize }}" data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }} {{ cond (in $manualfilterkeys $e) "d-none" "" }} ">{{ $e | upper }}</a>
         {{ end }}
     </div>
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
     <a data-ref="filter" data-filter="all" href="#all" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
-    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }} {{ cond (in $manualfilterkeys $e) "d-none" "" }}">{{ $e | upper }}</a>{{ end }}
 </div>
 
 <div class="input-group mt-4 mb-4">

@@ -1,6 +1,6 @@
 ---
 title: Allow Third-Party Service Workers For Session Replay
-
+description: "Configure third-party service worker permissions for Session Replay to ensure optimal performance and data security."
 aliases:
   - /real_user_monitoring/faq/session_replay_service_worker/
 further_reading:

@@ -80,7 +80,9 @@ instances:
 ```
 
 ### Collecting schemas
-Starting from Agent v7.56, the Datadog Agent can collect schema information from SQLServer databases running SQLServer 2017 or higher. To enable this feature, use the `schemas_collection` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
+<div class="alert alert-warning">Datadog Agent v7.56+ and SQL Server 2017 or higher are required for SQL Server schema collection.</div>
+
+To enable this feature, use the `collect_schemas` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
 
 <div class="alert alert-info">To collect schema information from RDS instances, you must grant the <code>datadog</code> user explicit <code>CONNECT</code> access to each database on the instance. For more information, see <a href="/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access">Grant the Agent access</a>.</div>
 
@@ -97,7 +99,7 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     database_autodiscovery: true
-    schemas_collection:
+    collect_schemas:
       enabled: true
     database_metrics:
       # Optional: enable metric collection for indexes
@@ -111,13 +113,14 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     database: users
-    schemas_collection:
+    collect_schemas:
       enabled: true
     database_metrics:
       # Optional: enable metric collection for indexes
       index_usage_metrics:
         enabled: true
 ```
+**Note**: For Agent v7.68 and below, use `schemas_collection` instead of `collect_schemas`.
 
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures][1006] for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.

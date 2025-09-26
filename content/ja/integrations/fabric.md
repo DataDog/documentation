@@ -1,25 +1,13 @@
 ---
+app_id: fabric
 categories:
-- orchestration
-custom_kind: integration
-dependencies: []
-description: Datadog イベントストリームで Fabric タスクを参照および検索。
-doc_link: https://docs.datadoghq.com/integrations/fabric/
-draft: false
-git_integration_title: fabric
-has_logo: true
-integration_id: fabric
-integration_title: Fabric
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: fabric
-public_title: Datadog-Fabric インテグレーション
-short_description: Datadog イベントストリームで Fabric タスクを参照および検索。
-version: '1.0'
+- オーケストレーション
+custom_kind: インテグレーション
+description: A Python library and command-line tool that simplifies SSH use for app
+  deployment and system administration tasks.
+media: []
+title: Fabric
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 **警告**: このインテグレーションは非推奨になりました。今後、積極的な開発は行われません。
@@ -31,35 +19,35 @@ Fabric を Datadog に接続すると、以下のことができます。
 
 ## セットアップ
 
-### 構成
+### 設定
 
 1. dogapi パッケージをインストールします。
 
-    ```shell
-    sudo easy_install --upgrade dogapi
-    ```
+   ```shell
+   sudo easy_install --upgrade dogapi
+   ```
 
-    または
+   または
 
-    ```shell
-    sudo pip install dogapi
-    ```
+   ```shell
+   sudo pip install dogapi
+   ```
 
-2. dogapi をインポートし、API キーを設定します。
+1. dogapi をインポートし、API キーを設定します。
 
-    ```python
-    from dogapi.fab import setup, notify
-    setup("<YOUR_DATADOG_API_KEY")
-    ```
+   ```python
+   from dogapi.fab import setup, notify
+   setup("<YOUR_DATADOG_API_KEY")
+   ```
 
-3. Datadog に接続する各タスクに notify デコレータを追加します。@notify は必ず @task のすぐ上に記述してください
+1. Datadog に接続する各タスクに notify デコレータを追加します。@notify は必ず @task のすぐ上に記述してください
 
-    ```python
-    @notify
-    @task
-    def a_fabric_task(...):
-        # do things
-    ```
+   ```python
+   @notify
+   @task
+   def a_fabric_task(...):
+       # do things
+   ```
 
 ## 収集データ
 
@@ -71,12 +59,10 @@ Fabric インテグレーションには、メトリクスは含まれません�
 
 Fabric インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Fabric インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
-
-[1]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

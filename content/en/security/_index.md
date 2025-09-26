@@ -24,7 +24,7 @@ further_reading:
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
-  - link: "/security/threats/setup"
+  - link: "/security/workload_protection/"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Workload Protection"
   - link: "https://securitylabs.datadoghq.com/"

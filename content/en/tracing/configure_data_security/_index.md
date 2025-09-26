@@ -12,11 +12,11 @@ aliases:
 further_reading:
 - link: "/data_security/pci_compliance/"
   tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
+  text: "PCI DSS Compliance"
 ---
 ## Overview
 
-Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog.
+Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog. Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][14].
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
@@ -688,29 +688,6 @@ export DD_APM_TELEMETRY_ENABLED=false
 {{% /tab %}}
 {{< /tabs >}}
 
-## PCI DSS compliance for compliance for APM
-
-{{< site-region region="us" >}}
-
-<div class="alert alert-warning">
-PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
-
-To set up a PCI-compliant Datadog org, follow these steps:
-
-{{% pci-apm %}}
-
-See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
-
-[1]: /data_security/pci_compliance/
-[2]: /data_security/pci_compliance/?tab=logmanagement
-
-{{< /site-region >}}
-
-{{< site-region region="us2,us3,us5,eu,gov" >}}
-PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
-{{< /site-region >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -728,3 +705,4 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [12]: /security/sensitive_data_scanner/
 [13]: /security/application_security/how-it-works/#data-privacy
+[14]: /data_security/pci_compliance/

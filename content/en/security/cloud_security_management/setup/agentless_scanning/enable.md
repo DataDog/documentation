@@ -337,7 +337,7 @@ If you did not use a dedicated resource group, you must manually delete the scan
 
 [1]: /security/cloud_security_management/agentless_scanning
 [2]: /integrations/amazon_web_services/
-[3]: /agent/remote_config/?tab=configurationyamlfile#setup
+[3]: /remote_configuration
 [4]: https://app.datadoghq.com/security/csm/
 [6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
 [7]: #terraform-setup

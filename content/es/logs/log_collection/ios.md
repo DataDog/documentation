@@ -11,34 +11,23 @@ title: Recopilación de logs de iOS
 ---
 ## Información general
 
-Envía logs a Datadog desde tus aplicaciones de iOS con [la biblioteca de registro del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
+Envía logs a Datadog desde tus aplicaciones de iOS con [la librería de registro del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
 
 * Loguear en Datadog en formato JSON de forma nativa.
 * Utilizar los atributos predeterminados y añadir atributos personalizados a cada log enviado.
 * Registrar las direcciones IP reales de los clientes y los Agents de usuario.
 * Aprovechar el uso optimizado de red con publicaciones masivas automáticas.
 
-La biblioteca `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o posteriores.
+La librería `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o posteriores.
 
 ## Configuración
 
-1. Declara la biblioteca como una dependencia en función de tu Pack Manager:
+1. Declara la librería como una dependencia dependiente de tu gestor de paquete. Se recomienda el gestor de paquete Swift.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-Puedes utilizar [CocoaPods][6] para instalar `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogLogs'
-```
-
-[6]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
-Para integrar utilizando Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
+Para integrar con Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 ```
@@ -48,6 +37,17 @@ En tu proyecto, vincula las siguientes bibliotecas:
 DatadogCore
 DatadogLogs
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+Puedes utilizar [CocoaPods][6] para instalar `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogLogs'
+```
+
+[6]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -69,7 +69,7 @@ DatadogLogs.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 
@@ -86,7 +86,7 @@ Datadog.initialize(
         clientToken: "<client token>",
         env: "<environment>",
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -121,7 +121,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .eu1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -157,7 +157,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us3,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -195,7 +195,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us5,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -233,7 +233,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us1_fed,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -271,7 +271,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .ap1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -295,12 +295,50 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+import DatadogLogs
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .ap2,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+
+Logs.enable()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+
+[DDLogs enable];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 Para cumplir con la normativa GDPR, el SDK requiere el valor `trackingConsent` en la inicialización.
 El valor `trackingConsent` puede ser uno de los siguientes:
 
 - `.pending`: el SDK comienza a recopilar y procesar los datos por lotes, pero no los envía a Datadog. El SDK espera al nuevo valor de consentimiento de rastreo para decidir qué hacer con los datos procesados por lotes.
 - `.granted`: el SDK comienza a recopilar los datos y los envía a Datadog.
-- `.notGranted`: el SDK no recopila ningún dato: los logs, trazas (traces) y eventos RUM no se envían a Datadog.
+- `.notGranted`: el SDK no recopila ningún dato: los logs, trazas y eventos RUM no se envían a Datadog.
 
 Para cambiar el valor del consentimiento de rastreo una vez inicializado el SDK, utiliza la llamada a la API `Datadog.set(trackingConsent:)`.
 
@@ -326,7 +364,8 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Configurar el `Logger`:
+3. Configura el `Logger`: <br>
+**Nota**: Debes crear el registrador *después* de llamar a `Logs.enable()`.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -461,7 +500,7 @@ Para más información, consulta [Empezando con etiquetas][5].
 
 Por defecto, los siguientes atributos se añaden a todos los logs enviados por un registrador:
 
-* `http.useragent` y sus propiedades extraídas `device` y `OS` 
+* `http.useragent` y sus propiedades extraídas `device` y `OS`
 * `network.client.ip` y sus propiedades geográficas extraídas (`country`, `city`)
 * `logger.version`, versión del SDK de Datadog
 * `logger.thread_name`(`main`, `background`)
@@ -504,7 +543,7 @@ logger.removeAttribute(forKey: "device-model")
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

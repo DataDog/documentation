@@ -15,10 +15,6 @@ Analysis Features para notebooks no está disponible en el <a href="/getting_sta
 </div>
 {{% /site-region %}}
 
-{{< callout btn_hidden="true" header="Únete a la vista previa.">}} 
-  Advanced Analysis está en vista previa. Para activarlo, contacta con tu asesor de clientes.
-{{< /callout >}}
-
 ## Información general
 
 La función de análisis de los notebooks permite realizar análisis avanzados de los datos de Datadog. Puedes unir varios conjuntos de datos, encadenar consultas y transformar los datos mediante transformaciones predefinidas o SQL, sin perder ninguna de las funciones que ofrecen los notebooks.
@@ -74,8 +70,8 @@ Puedes añadir o modificar columnas en tu celda de fuente de datos. Hay dos form
 Puedes tomar consultas existentes del Log Explorer que incluyan [Campos calculados][4] y abrirlas en notebooks. Para transferir estas consultas desde el Log Explorer, haz clic en **More** (Más) y selecciona **Analyze in Notebooks** (Analizar en notebooks). Los campos calculados se convierten automáticamente en una celda de transformación.
 
 También puedes crear campos calculados directamente en un notebook para definir un campo calculado a partir de fuentes de datos existentes. Estos campos pueden reutilizarse en análisis posteriores:
-1. Abre un espacio de trabajo con una fuente de datos.
-1. Añade una [celda de transformación](#transformation-cell).
+1. Abre un Workspace con una fuente de datos.
+1. Añade una [Celda de transformación](#transformation-cell).
 1. Haz clic en **More operations** (Más operaciones).
 1. Selecciona **Calculate** (Calcular).
 

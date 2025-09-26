@@ -17,6 +17,8 @@ aliases:
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70
+algolia:
+    tags: ["C#","APM"]
 further_reading:
   - link: "/tracing/other_telemetry/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
@@ -60,7 +62,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ## Installation and getting started
 
 <div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-warning">

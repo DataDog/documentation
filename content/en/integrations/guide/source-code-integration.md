@@ -48,17 +48,17 @@ Datadog supports the following features for the following source code management
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
-| **Connect SaaS Instance** | Yes <br />(GitHub.com) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
+| **Connect SaaS Instance** | Yes <br />(GitHub.com and GitHub Enterprise Cloud) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
 | **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed or Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center or Server)|
 | **Context Links** | Yes | Yes | Yes | Yes |
-| **Code Snippets** | Yes | Yes | Yes | No | 
-| **PR Comments** | Yes | Yes | Yes | No | 
+| **Code Snippets** | Yes | Yes | Yes | No |
+| **PR Comments** | Yes | Yes | Yes | No |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
 
 <div class="alert alert-info">
-Repositories from GitHub instances are supported for both GitHub.com (SaaS) and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
+Repositories from GitHub instances are supported for GitHub.com, GitHub Enterprise Cloud (SaaS), and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
 Install Datadog's [GitHub integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitHub repositories.
@@ -117,7 +117,7 @@ Successfully synced git DB in 3.579 seconds.
 ✅ Uploaded in 5.207 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -476,22 +476,17 @@ You can see links from stack frames to their source repository in [Error Trackin
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see a source code preview for profile frames in the [Continuous Profiler][1].
+You can see source code previews directly in [Continuous Profiler][1] flame graphs.
 
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph.
-3. If needed, press `Opt` or `Alt` to enable the preview.
-4. If you're using the GitHub or GitLab integrations, click **Connect to preview** to see inline code snippets directly in the flame graph.
+1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
+2. Select the service you want to investigate.
+3. Hover your cursor over a method in the flame graph.
+4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
+5. If prompted, click **Connect to preview**. The first time you do this for a repository, you will be redirected to GitHub to **Authorize** the Datadog application.
+6. After authorizing, the source code preview appears in the tooltip.
+7. Click the file link in the tooltip to open the full source code file in your repository.
 
-{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
-
-You can also see links from profile frames to their source repository. This is supported for profiles broken down by line, method, or file.
-
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
-
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/explorer
@@ -582,7 +577,7 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
-PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request. 
+PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
@@ -593,9 +588,9 @@ To disable PR comments for CI Visibility, go to the [CI Visibility Repository Se
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests: 
+PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
 
-1. A single comment summarizing the new violations detected in your pull request. 
+1. A single comment summarizing the new violations detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
 
@@ -610,7 +605,7 @@ To disable PR comments for Code Security, go to the [Code Security Repository Se
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request. 
+PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 

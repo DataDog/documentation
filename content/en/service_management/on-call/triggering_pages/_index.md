@@ -17,6 +17,9 @@ You can send a Page by mentioning a Team's handle with `oncall-` prepended. For 
 
 You can send Pages to On-Call Teams wherever @-handles are supported, including monitors, Incident Management, security detection rules, Event Management, and more.
 
+#### Resolving pages automatically
+When a monitor recovers, any Page it triggered is automatically set to `Resolved` if the recovery notification includes the On-Call team mention (for example, `@oncall-payments`). If the mention appears only in the alert template (such as within `{{#is_alert}} ... {{/is_alert}}`) and not in the recovery message, the Page does not auto-resolve. 
+
 #### Monitors and dynamic urgencies
 
 If you send a Page through a monitor alert, and your Team's routing rule uses dynamic urgencies:
@@ -64,5 +67,5 @@ To send Pages to Slack, see [Routing Rules][4].
 
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
-[3]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
-[4]: /service_management/on-call/triggering_pages/live-call-routing
+[3]: /service_management/on-call/triggering_pages/live_call_routing
+[4]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams

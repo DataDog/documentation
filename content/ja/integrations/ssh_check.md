@@ -37,7 +37,7 @@ draft: false
 git_integration_title: ssh_check
 integration_id: ssh
 integration_title: SSH
-integration_version: 4.1.0
+integration_version: 4.2.1
 is_public: true
 manifest_version: 2.0.0
 name: ssh_check
@@ -131,7 +131,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ssh" >}}
+{{< get-metrics-from-git "ssh_check" >}}
 
 
 ### イベント
@@ -139,7 +139,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 SSH チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ssh" >}}
+{{< get-service-checks-from-git "ssh_check" >}}
 
 
 ## トラブルシューティング

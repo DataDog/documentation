@@ -407,6 +407,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: /ja/logs/indexes/#exclusion-filters

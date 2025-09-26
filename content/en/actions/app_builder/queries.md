@@ -1,5 +1,6 @@
 ---
 title: Queries
+description: Populate apps with data from Datadog APIs and integrations using queries that connect UI components with backend actions.
 aliases:
 - /app_builder/queries
 disable_toc: false

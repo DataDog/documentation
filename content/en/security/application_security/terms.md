@@ -133,7 +133,7 @@ Object-Graph Navigation Language Injection (OGNLi)
 [5]: https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
-[8]: /agent/remote_config/
+[8]: /remote_configuration
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /security/application_security/policies/inapp_waf_rules/

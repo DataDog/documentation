@@ -1,5 +1,6 @@
 ---
 title: Notification Rules
+description: "Automate monitor alert routing using predefined notification rules based on tags and conditions to streamline team notifications."
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -15,6 +16,8 @@ further_reading:
 ## Overview
 
 Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of individually configuring notification recipients and routing for every monitor, notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
+
+<div class="alert alert-info">There is a default limit of 1000 rules per organization.</a>.</div>
 
 ## Creating notification rules
 

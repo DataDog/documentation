@@ -1,0 +1,108 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "string": "모바일 세션 리플레이 설치 및 설정"
+      },
+      "description": {
+        "string": "모바일 세션 리플레이을 설치하고 설정합니다."
+      },
+      "further_reading": [
+        {
+          "link": "/real_user_monitoring/session_replay/mobile",
+          "text": {
+            "string": "Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay/mobile/app_performance",
+          "text": {
+            "string": "How Mobile Session Replay Impacts App Performance"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay/mobile/privacy_options",
+          "text": {
+            "string": "Mobile Session Replay Privacy Options"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
+          "text": {
+            "string": "Troubleshoot Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay",
+          "text": {
+            "string": "Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking",
+          "text": {
+            "string": "Web View Tracking"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        }
+      ]
+    }
+  },
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        28,
+        29
+      ],
+      "inline": false,
+      "attributes": {
+        "file": "rum/session_replay/setup_and_configuration.mdoc.md"
+      },
+      "children": [],
+      "type": "tag",
+      "tag": "partial",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "file",
+          "value": "rum/session_replay/setup_and_configuration.mdoc.md"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 28
+        },
+        "end": {
+          "line": 29
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

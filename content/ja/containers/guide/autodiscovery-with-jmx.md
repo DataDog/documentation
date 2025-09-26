@@ -1,4 +1,14 @@
 ---
+algolia:
+  tags:
+  - JMX
+  - JMX メトリクス
+  - Web ロジックの欠落
+  - JMX 制限
+  - Cassandra
+  - Kafka
+  - Tomcat
+  - Weblogic
 aliases:
 - /ja/agent/guide/autodiscovery-with-jmx
 further_reading:
@@ -73,7 +83,7 @@ kind: Pod
 metadata:
   name: <POD_NAME>
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "<INTEGRATION_NAME>": {
           "init_config": {
@@ -89,7 +99,7 @@ metadata:
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
       # (...)
       env:
         - name: POD_IP
@@ -109,7 +119,7 @@ spec:
 
 この例では
 - `<POD_NAME>` はポッドの名前です。
-- `<CONTAINER_IDENTIFIER>` はポッド内の希望するコンテナにマッチします。
+- `<CONTAINER_NAME>` はポッド内の希望するコンテナにマッチします。
 - `<INTEGRATION_NAME>` は希望する JMX インテグレーションの名前です。利用可能な JMX インテグレーション](#available-jmx-integrations)のリストを参照してください。
 - `<JMX_PORT>` は、アノテーションと `JAVA_OPTS` 間で一致する限り、任意に設定します。
 
@@ -168,7 +178,7 @@ spec:
 これらのインテグレーションから追加のメトリクスを収集する必要がある場合は、`init_config` セクションに追加します。
 
 ```yaml
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
   {
     "<INTEGRATION_NAME>": {
       "init_config": {
@@ -217,7 +227,7 @@ Datadog-JMX インテグレーションのより複雑なカスタム構成を�
 
 ```yaml
 ad_identifiers:
-  - "<SHORT_IMAGE>"
+  - <CONTAINER_IMAGE>
 
 init_config:
   is_jmx: true
@@ -229,7 +239,7 @@ instances:
     port: "<JMX_PORT>"
 ```
 
-`<SHORT_IMAGE>` は、希望するコンテナのショートイメージ名に置き換えてください。例えば、コンテナイメージ `gcr.io/CompanyName/my-app:latest` のショートイメージ名は `my-app` です。Datadog Agent がこのコンテナを検出すると、このファイルに記述されているように JMX 構成を設定します。
+`<CONTAINER_IMAGE>` は、希望するコンテナのショートイメージ名に置き換えてください。例えば、コンテナイメージ `gcr.io/CompanyName/my-app:latest` のショートイメージ名は `my-app` です。Datadog Agent がこのコンテナを検出すると、このファイルに記述されているように JMX 構成を設定します。
 
 ショートイメージ名を基にしたくない場合は、[コンテナへのカスタム識別子][4]を参照して指定することもできます。
 
@@ -258,7 +268,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - "<SHORT_IMAGE>"
+              - <CONTAINER_IMAGE>
 
             init_config:
               is_jmx: true
@@ -278,7 +288,7 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |
       ad_identifiers:
-        - "<SHORT_IMAGE>"
+        - <CONTAINER_IMAGE>
 
       init_config:
         is_jmx: true
@@ -290,7 +300,7 @@ datadog:
 
 {{% /tab %}}
 {{% tab "Custom image" %}}
-If you cannot mount these files in the Agent container (for example, on Amazon ECS) you can build an Agent Docker image containing the desired configuration files.
+これらのファイルを Agent コンテナにマウントできない場合 (Amazon ECS など)、希望するコンフィギュレーションファイルを含む Agent Docker イメージを構築できます。
 
 例:
 

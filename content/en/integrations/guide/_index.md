@@ -47,6 +47,10 @@ cascade:
     {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag=" AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="AWS Marketplace guides:" >}}
+    {{< nextlink href="integrations/guide/aws-marketplace-datadog-trial" tag=" AWS Marketplace" >}}AWS Marketplace Datadog trial setup{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Azure guides:" >}}
     {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure manual setup guide{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native manual setup guide{{< /nextlink >}}
@@ -61,6 +65,10 @@ cascade:
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Commands to install the Azure Datadog extension{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Google Cloud guides:" >}}
+    {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}Google Cloud Metric Discrepancy{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX guides:" >}}

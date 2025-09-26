@@ -21,7 +21,7 @@ Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `!` or `not(...)`) to build complex Boolean conditions, for example: `!isEmpty(user.email) && not(contains(user.name, "abc"))`.
-* Using the `null` literal (equivalent to `nil` in Python).
+* Using the `null` literal (which is automatically translated to `None` in Python and `nil` in Ruby).
 
 It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
@@ -35,7 +35,7 @@ Expressions can be used to produce metrics or logs, and as conditions to emit fi
 
 For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
 
-Logs can be emitted using templates. In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it is replaced with `UNDEFINED`.
+Logs can be emitted using templates. In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value.
 
 Probe conditions must evaluate to a Boolean, for example: 
  - `startsWith(user.name, "abc")`

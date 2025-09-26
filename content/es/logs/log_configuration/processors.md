@@ -686,7 +686,7 @@ El procesador de búsqueda realiza las siguientes acciones:
 
   * Opcionalmente, si no encuentra el valor en la tabla de asignación, crea un atributo de destino con el valor de la tabla de referencia. Puedes seleccionar un valor para una [tabla de referencias][101] en la pestaña **Reference Table** (Tabla de referencia).
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda"
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda" >}}
     style="width:80%;">}}
 
 

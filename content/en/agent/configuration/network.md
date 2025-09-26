@@ -73,6 +73,9 @@ Add the following domains to your inclusion list to allow for Agent installation
 [Real User Monitoring (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+[Cloud Security Vulnerabilities][29]
+: `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Synthetic Monitoring Private Locations][8]
 : Synthetics Worker v1.5.0 or later: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint you need to configure.<br>
 API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -88,7 +91,7 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /agent/remote_config
+[101]: /remote_configuration
 [102]: /database_monitoring/
 
 {{% /site-region %}}
@@ -425,3 +428,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [26]: /metrics/
 [27]: /developers/service_checks/
 [28]: /events/
+[29]: /security/cloud_security_management/vulnerabilities/

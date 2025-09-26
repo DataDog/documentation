@@ -24,9 +24,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 데이터 스토어
+- 데이터 저장소
 - sap
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_on_public_website: true
@@ -41,18 +41,18 @@ name: sap_hana
 public_title: SAP HANA
 short_description: SAP HANA 시스템에서 메모리, 네트워크, 볼륨 및 기타 메트릭을 모니터링하세요.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 카테고리::데이터 저장
+  - Category::Data Stores
   - Category::SAP
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: SAP HANA 시스템에서 메모리, 네트워크, 볼륨 및 기타 메트릭을 모니터링하세요.
   media: []
@@ -149,11 +149,11 @@ HANA 테넌트, 단일 테넌트 및 시스템 데이터베이스의 포트 번�
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### 구성
+### 설정
 
 1. 에이전트 설정 디렉터리 루트의 `conf.d/` 폴더에 있는 `sap_hana.d/conf.yaml` 파일을 편집하여 sap_hana 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 sap_hana.d/conf.yaml][5]을 참조하세요.
 
-2. [Agent를 재시작합니다][6].
+2. [에이전트를 재시작합니다][6].
 
 #### 로그 수집
 
@@ -181,7 +181,7 @@ HANA 테넌트, 단일 테넌트 및 시스템 데이터베이스의 포트 번�
 
     사용 가능한 모든 설정 옵션은 [샘플 sap_hana.d/conf.yaml][5]을 참조하세요.
 
-3. [에이전트를 재시작하세요][6].
+3. [에이전트를 재시작합니다][6].
 
 ### 검증
 
@@ -190,7 +190,7 @@ HANA 테넌트, 단일 테넌트 및 시스템 데이터베이스의 포트 번�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "sap-hana" >}}
+{{< get-metrics-from-git "sap_hana" >}}
 
 
 ### 이벤트
@@ -198,7 +198,7 @@ HANA 테넌트, 단일 테넌트 및 시스템 데이터베이스의 포트 번�
 SAP HANA에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "sap-hana" >}}
+{{< get-service-checks-from-git "sap_hana" >}}
 
 
 ## 트러블슈팅

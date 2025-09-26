@@ -89,6 +89,8 @@
                     }
                 }
                 form {
+                    max-height: 545px;
+                    overflow-y: scroll;
                     row-gap: 12px;
                     padding: 8px;
                     margin-top: 8px;

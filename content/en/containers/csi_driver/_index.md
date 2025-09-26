@@ -1,5 +1,9 @@
 ---
 title: Datadog CSI Driver
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+  tag: "Blog"
+  text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 
 ## Overview
@@ -30,9 +34,7 @@ If CSI volumes are not used, the UDS sockets need to be shared with the user pod
 
 The Datadog CSI Driver shifts the hostpath volume from the user application to the CSI node server: the CSI DaemonSet runs in a separate privileged namespace and allows injecting UDS sockets into user pods with a Datadog CSI volume, which allows user pods to run in namespaces with `baseline` or `restricted` pod security standards.
 
-## Installation
-
-You can install the Datadog CSI Driver by using a public Helm chart.
+## Installation and activation
 
 <div class="alert alert-info">
 <strong>Notes</strong>:
@@ -42,6 +44,24 @@ You can install the Datadog CSI Driver by using a public Helm chart.
 </ul>
 </div>
 
+{{< tabs >}}
+
+{{% tab "Helm" %}}
+
+To install and activate the Datadog CSI Driver, set `datadog.csi.enabled` to `true` in the Datadog Agent Helm chart.
+
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+
+   helm install datadog-agent datadog/datadog --set datadog.csi.enabled=true
+   ```
+
+{{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+
+If the Datadog Agent is deployed using the Datadog Operator, you must install the Datadog CSI Driver Helm chart before you activate Datadog CSI in the Datadog Agent.
 
 1. **Add the Datadog CSI Helm repository.**
 
@@ -49,9 +69,10 @@ You can install the Datadog CSI Driver by using a public Helm chart.
    ```shell
    helm repo add datadog-csi-driver https://helm.datadoghq.com
    helm repo update
+
    ```
 
-2. **Deploy the Datadog CSI Driver.**
+2. **Install the Datadog CSI Driver Helm chart.**
 
    Run:
 
@@ -59,11 +80,59 @@ You can install the Datadog CSI Driver by using a public Helm chart.
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
 
-## Datadog CSI volumes
+3. **Activate Datadog CSI in your `DatadogAgent` resource.**
 
-<div class="alert alert-info">
-With Datadog Agent v7.67+, the Admission Controller can automatically mount Datadog UDS sockets to mutated pods by setting the injection config mode to <code>csi</code>. For more information, see <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">Admission Controller: Configure APM and DogStatsD Communication Mode</a>.
-</div>
+   ```
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+       csi:
+         enabled: true
+   ```
+
+{{% /tab %}}
+
+{{% tab "DaemonSet" %}}
+
+If the Datadog Agent is deployed using a DaemonSet, you must install the Datadog CSI Driver Helm chart before you activate the Datadog CSI Driver in the Datadog Agent.
+
+1. **Add the Datadog CSI Driver Helm repository.**
+
+   Run:
+   ```shell
+   helm repo add datadog-csi-driver https://helm.datadoghq.com
+   helm repo update
+
+   ```
+
+2. **Install the Datadog CSI Driver Helm chart.**
+
+   Run:
+
+   ```shell
+   helm install datadog-csi-driver datadog/datadog-csi-driver
+   ```
+
+3. **Activate Datadog CSI**.
+
+   To activate the Datadog CSI driver, set the following environment variable in the Datadog Cluster Agent container:
+
+   ```
+   DD_CSI_DRIVER_ENABLED=true
+   ```
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+## Datadog CSI volumes
 
 CSI volumes processed by the Datadog CSI Driver must have the following format:
 
@@ -174,6 +243,12 @@ csi:
 name: datadog
 ```
 
+<div class="alert alert-info">
+With Datadog Agent v7.67+, the Admission Controller can automatically mount Datadog UDS sockets to mutated pods by setting the injection config mode to <code>csi</code>. For more information, see <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">Admission Controller: Configure APM and DogStatsD Communication Mode</a>.
+
+With the default configuration of the Datadog Agent, the Admission Controller injects <code>APMSocketDirectory</code> or <code>DSDSocketDirectory</code>. If the Trace Agent and DogStatsD sockets are both in the same directory on the host, only one volume is injected because this subsequently provides access to both sockets, as they share the same directory on the host.
+</div>
+
 ## Security considerations
 
 The Datadog CSI Driver requires elevated privileges and specific host access
@@ -192,6 +267,10 @@ By isolating the Datadog CSI Driver in a privileged namespace, Kubernetes cluste
 <div class="alert alert-info">
    Limit access to the Datadog CSI Driver's namespace and configuration to trusted operators. If the Datadog CSI Driver's elevated privileges are misconfigured, these privileges can be exploited.
 </div>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-csi-driver
 [2]: https://hub.docker.com/r/datadog/csi-driver

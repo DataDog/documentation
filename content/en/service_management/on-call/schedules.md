@@ -103,6 +103,13 @@ If you encounter issues when exporting your On-Call schedule feeds to Google Cal
 
 - Change `webcal://` to `http://` or `https://` at the beginning of the URL. For example, change `webcal://<your_personal_link>` to `http://<your_personal_link>`.
 
+### Managing user departures
+
+When team members leave your organisation, they are not automatically removed from On-Call schedules:
+
+- **Schedule membership**: Departed users remain in On-Call schedules until manually removed. You must update schedules to remove former team members and reassign their shifts.
+- **Notifications**: If a user's Datadog account is deactivated, they no longer receive On-Call notifications (such as SMS, email, and push notifications), even if still assigned to scheduled shifts.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

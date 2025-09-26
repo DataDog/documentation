@@ -1,5 +1,6 @@
 ---
 title: Datadog FIPS Compliance
+description: "Configure FIPS-compliant cryptographic modules for the Datadog Agent in highly regulated environments like FedRAMP."
 disable_toc: false
 aliases:
 - /agent/guide/agent-fips-proxy
@@ -172,17 +173,17 @@ When following the [Datadog Agent installation on Kubernetes](/containers/kubern
 
 For the Datadog Operator:
 ```yaml
-datadog:
-   site: "ddog-gov.com"
-useFIPSAgent: true
-```
-
-For the Datadog Helm Chart:
-```yaml
 spec:
    global:
       site: "ddog-gov.com"
       useFIPSAgent: true
+```
+
+For the Datadog Helm Chart:
+```yaml
+datadog:
+   site: "ddog-gov.com"
+useFIPSAgent: true
 ```
 
 {{% /tab %}}

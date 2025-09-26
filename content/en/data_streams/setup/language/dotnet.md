@@ -10,7 +10,7 @@ aliases:
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][10]
 
 ### Supported libraries
 
@@ -100,7 +100,7 @@ The following size thresholds apply when Data Streams Monitoring is enabled in d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[10]: /agent
 [3]: https://www.nuget.org/packages/Confluent.Kafka
 [4]: https://www.nuget.org/packages/RabbitMQ.Client
 [5]: https://www.nuget.org/packages/AWSSDK.SQS

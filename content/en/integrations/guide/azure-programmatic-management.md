@@ -61,8 +61,8 @@ When critical errors are encountered, the Azure integration generates events in 
 
 Datadog provides a monitor template to help you get started. To use the monitor template:
 
-1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][19] tab.
-2. Select the monitor template titled `[Azure] Integration Errors`.
+1. In Datadog, go to **Monitors** and click the **Browse Templates** button.
+2. Search for and select the monitor template titled [[Azure] Integration Errors][19].
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][20] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
@@ -77,11 +77,33 @@ See the [Azure Logging guide][18] to set up log forwarding from your Azure envir
 
 You can use Terraform to create and manage the Datadog Agent extension. Follow these steps to install and configure the Agent on a single machine, and then upload a zipped configuration file to blob storage to be referenced in your VM Extension Terraform block.
 
-1. [Install the Agent][11].
-2. Apply any desired [Agent configurations][12].
-3. For Windows Server 2008, Vista, and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
-4. Upload the file to blob storage.
-5. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+{{< tabs >}}
+{{% tab "Windows" %}}
+1. [Install the Agent][100].
+2. Apply any desired [Agent configurations][101].
+3. Navigate to `%ProgramData%\Datadog`. Remove any extra installation artifacts or files that may be present. Ensure that the folder contains only:
+    -  `datadog.yaml`
+    -  `conf.d` folder containing your integration configurations
+4. Save the sanitized `%ProgramData%\Datadog` folder as a zip file.
+5. Generate a hash of the zipped folder using the PowerShell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+6. Upload the file to blob storage.
+7. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+[100]: https://app.datadoghq.com/account/settings/agent/latest
+[101]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+{{% /tab %}}
+{{% tab "Linux" %}}
+1. [Install the Agent][200].
+2. Apply any desired [Agent configurations][201].
+3. Save the `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
+4. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+5. Upload the file to blob storage.
+6. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+[200]: https://app.datadoghq.com/account/settings/agent/latest
+[201]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Extension settings
 
@@ -170,5 +192,5 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide
-[19]: https://app.datadoghq.com/monitors/recommended
+[19]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [20]: /monitors/notify/#configure-notifications-and-automations

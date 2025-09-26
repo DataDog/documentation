@@ -36,6 +36,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
     tag: "Blog"
     text: "How we use Datadog for detection as code"
+  - link: "https://www.datadoghq.com/blog/cache-purge-ci-cd/"
+    tag: "Blog"
+    text: "Patterns for safe and efficient cache purging in CI/CD pipelines"
 cascade:
     algolia:
         rank: 70

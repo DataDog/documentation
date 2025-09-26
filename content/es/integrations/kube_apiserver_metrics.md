@@ -101,7 +101,7 @@ Puedes revisar todas las opciones de configuración disponibles en [kube_apiserv
 Puedes anotar el servicio de Kubernetes en tu espacio de nombres `default` con lo siguiente:
 
 {{< tabs >}}
-{{% tab "Versión 2 de anotaciones (para la versión 7.36 o posterior del Datadog Agent)" %}}
+{{% tab "Annotations v2 (for Datadog Agent v7.36)" %}}
 
 ```yaml
 ad.datadoghq.com/endpoints.checks: |
@@ -113,11 +113,12 @@ ad.datadoghq.com/endpoints.checks: |
         }
       ]
     }
-  } 
-
+  }
 ```
+
 {{% /tab %}}
-{{% tab "Versión 1 de anotaciones (para la versión 7.36 o anterior del Datadog Agent" %}}
+
+{{% tab "Annotations v1 (for Datadog Agent < v7.36)" %}}
 
 ```yaml
 annotations:
@@ -126,6 +127,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances:
     '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics"}]'
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -139,8 +141,10 @@ También puedes ejecutar el check al configurar los endpoints directamente en el
 
 Proporciona una [configuración][9] a tu Cluster Agent para configurar un check de clúster:
 
-{{< tabs >}} 
+{{< tabs >}}
+
 {{% tab "Helm" %}}
+
 ```yaml
 clusterAgent:
   confd:
@@ -154,6 +158,7 @@ clusterAgent:
       instances:
         - prometheus_url: "https://%%host%%:%%port%%/metrics"
 ```
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -175,7 +180,9 @@ spec:
             instances:
               - prometheus_url: "https://%%host%%:%%port%%/metrics"
 ```
+
 {{% /tab %}}
+
 {{< /tabs >}}
 
 Estas configuraciones hacen que el Agent realice una solicitud al servicio `kubernetes` en el espacio de nombres `default` en sus direcciones IP de endpoint y puerto definidos.
@@ -187,7 +194,7 @@ Estas configuraciones hacen que el Agent realice una solicitud al servicio `kube
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kube-apiserver-metrics" >}}
+{{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 
 ### Checks de servicio
@@ -200,7 +207,8 @@ Kube_apiserver_metrics no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][12].
+¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][11].
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_apiserver_metrics/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver
@@ -212,5 +220,4 @@ Kube_apiserver_metrics no incluye eventos.
 [8]: https:docs.datadoghq.com//containers/cluster_agent/clusterchecks/?tab=datadogoperator#setting-up-check-configurations
 [9]: https://docs.datadoghq.com/es/containers/cluster_agent/clusterchecks/?tab=helm#configuration-from-configuration-files
 [10]: https://docs.datadoghq.com/es/agent/faq/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/metadata.csv
-[12]: https://docs.datadoghq.com/es/help/
+[11]: https://docs.datadoghq.com/es/help/

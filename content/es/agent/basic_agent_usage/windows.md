@@ -18,7 +18,7 @@ further_reading:
   text: Recopilar tus procesos
 - link: /tracing/
   tag: Documentación
-  text: Recopilar tus trazas
+  text: Recopilar tus trazas (traces)
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentación
   text: Más información sobre la arquitectura del Agent
@@ -36,123 +36,28 @@ title: Uso básico del Agent para Windows
 
 En esta página se describen las funciones básicas de Datadog Agent para Windows. Si aún no has instalado el Agent, consulta las instrucciones de instalación que aparecen a continuación o [sigue las instrucciones de la aplicación][1].
 
-## Instalar el Datadog Agent
+Consulta las [plataformas compatibles][15] para ver la lista completa de distribuciones y versiones de Linux compatibles.
 
-### Requisitos
+## Instalación
 
-- **Versión de Windows**: Windows Server 2016 o posterior, o Windows 10 o posterior. Consulta la documentación de Plataformas compatibles del Agent para conocer las [versiones de sistema operativo compatibles][2].
-- ** Cuenta de Datadog**: asegúrate de tener acceso a una cuenta de Datadog y de disponer de tu clave de API de Datadog.
-- **Privilegios de administrador**: se requiere acceso de administrador en la máquina de Windows.
-
-{{< tabs >}}
-{{% tab "Instalación estándar" %}}
-
-El núcleo y los componentes de APM/Traza de Windows Agent se ejecutan en la cuenta `ddagentuser`. El componente de Live Processes, si está activado, se ejecuta en la cuenta `LOCAL_SYSTEM`. Más información sobre el [Datadog Windows Agent User][3].
-
-### Instalar con la GUI
-
-<div class="alert alert-info">La localización de instalación predeterminada para el Agent es <code>%ProgramFiles%Datadog\Datadog Agent</code>. Si decides utilizar una localización de instalación personalizada, asegúrate de especificar un subdirectorio de <code>Datadog</code> para los archivos de Datadog.</div>
-
-1. Descarga el [instalador del Datadog Agent][4] para instalar la última versión del Agent.
-2. Ejecuta el instalador abriendo `datadog-agent-7-latest.amd64.msi`. Cuando se te solicite, introduce tus credenciales de administrador.
-3. Sigue las instrucciones, acepta el acuerdo de licencia e introduce tu [clave de API de Datadog][5].
-
-Cuando termine la instalación, tendrás la opción de iniciar el Datadog Agent Manager.
-
-### Instalar con la línea de comandos
-
-1. Abre PowerShell con privilegios de **Administrador**.
-2. Ejecuta el siguiente comando para instalar el Datadog Agent:
-    ```powershell
-    Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
-    ```
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /es/agent/supported_platforms/?tab=windows
-[3]: /es/agent/faq/windows-agent-ddagent-user/
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-
-{{% /tab %}}
-{{% tab "Instalación en dominios de Active Directory" %}}
-
-Al desplegar el Datadog Agent en un entorno de Active Directory, Datadog recomienda utilizar una Group Managed Service Account (gMSA).
-
-El uso de gMSA puede mejorar la seguridad y simplificar la gestión. Algunas de las ventajas son:
-- Despliegue en varios servidores: a diferencia de las Managed Service Accounts (MSAs) tradicionales o de las Managed Service Accounts (sMSAs) independientes, las gMSAs pueden desplegarse en varios servidores.
-- Gestión automatizada de contraseñas: las contraseñas de las gMSAs se gestionan a nivel de sistema operativo y se rotan periódicamente sin necesidad de intervención manual.
-
-Cuando se ejecuta con una gMSA, los componentes centrales y APM/traza del Windows Agent se ejecutan bajo la cuenta configurada. El componente Live Processes, si está habilitado, se ejecuta bajo la cuenta `LOCAL_SYSTEM`. Más información sobre el [Datadog Windows Agent User][3].
-
-### Requisitos previos
-
-- Un entorno de Active Directory
-- Permiso para crear y gestionar gMSAs
-- Consulta más [requisitos en la documentación de Microsoft][4].
-
-**Nota**: Para una comprensión completa de la configuración de gMSAs, consulta [Información general de Group Managed Service Accounts de Microsoft][5].
-
-### Crear y configurar una gMSA
-
-1. Cree un grupo de seguridad:
-   1. Abre **Active Directory Users and Computers (ADUC) (Usuarios y equipos de Active Directory (ADUC)).
-   2. Navega hasta la **Organizational Unit (OU)** (Unidad Organizativa (UO)) apropiada.
-   3. Haz clic con el botón derecho y selecciona **New** > **Group** (Nuevo > Grupo).
-   4. Asigna un nombre al grupo. Por ejemplo, `DatadogAgentsGroup`.
-   5. Establece el contexto del grupo correcto para tu organización. Por ejemplo, **Dominio local**.
-   6. Establece el tipo en **Security** (Seguridad).
+Para instalar el Datadog Agent en tus hosts Windows, sigue el [flujo guiado dentro de la aplicación en Fleet Automation][16] y, a continuación, copia y ejecuta el comando de instalación. El Datadog Agent se ejecuta bajo el `ddagentuser`. Para obtener más información, consulta la documentación [Usuario del Agent Datadog para Windows][17]. 
 
 
-2. Crear la gMSA:
-   1. Abre PowerShell con privilegios de **Administrador**.
-   2. Ejecuta el siguiente comando para crear la gMSA, sustituyendo `<YOUR_DOMAIN_NAME>` por tu nombre de dominio:
-        ```powershell
-        New-ADServiceAccount -Name DatadogGMSA -DNSHostName <YOUR_DOMAIN_NAME> -PrincipalsAllowedToRetrieveManagedPassword DatadogAgentsGroup
-        ```
+{{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="Pasos de instalación en la aplicación del Datadog Agent en un host Windows." style="width:90%;">}}
 
 
-3. Verifica que la gMSA se puede utilizar en la máquina de destino:
+## Métodos de instalación alternativos
 
-   1. Asegúrate de que la máquina de destino forma parte de `DatadogAgentsGroup`.
-   2. En el equipo de destino, abre PowerShell y ejecútalo:
-        ```powerhsell
-        Install-ADServiceAccount -Identity DatadogGMSA
-        ```
-      Asegúrate de que el comando se ejecuta sin errores.
-
-### Instalación del Agent
-
-Sigue las siguientes instrucciones para instalar la última versión del Datadog Agent. Si necesitas instalar una versión específica del Agent, consulta la [lista de instalador][6].
-
-#### Instalación a través de la GUI
+### Instalación con la GUI del Agent Manager
 
 <div class="alert alert-info">La localización de instalación predeterminada para el Agent es <code>%ProgramFiles%Datadog\Datadog Agent</code>. Si decides utilizar una localización de instalación personalizada, asegúrate de especificar un subdirectorio de <code>Datadog</code> para los archivos de Datadog.</div>
 
-1. Descarga el [instalador del Datadog Agent][1] para instalar la última versión del Agent.
+1. Descarga el [instalador del Datadog Agent][400] para instalar la última versión del Agent.
 2. Ejecuta el instalador abriendo `datadog-agent-7-latest.amd64.msi`. Cuando se te solicite, introduce tus credenciales de administrador.
-3. Sigue las indicaciones, acepta el acuerdo de licencia e introduce tu [clave de API de Datadog][2].
-4. Cuando se te solicite la "Cuenta de usuario de Datadog Agent", introduce el nombre de usuario de la gMSA. Por ejemplo, `<YOUR_DOMAIN_NAME>\DatadogGMSA. Cuando se te solicite la "Cuenta de usuario de Datadog Agent", introduce el nombre de usuario de la gMSA. Por ejemplo,  y **sin contraseña**.
+3. Sigue las instrucciones, acepta el acuerdo de licencia e introduce tu [clave de API Datadog][500].
+
 Cuando termines la instalación, tendrás la opción de iniciar el Datadog Agent Manager.
 
-#### Instalar con la línea de comandos
-
-1. Abre PowerShell con privilegios de **Administrador**.
-2. Ejecuta el siguiente comando para instalar el Datadog Agent:
-
-**Nota:** Sustituye `DatadogGMSA$` por el nombre de usuario de tu gMSA. El nombre de usuario **debe terminar con el símbolo $.**.
-  ```powershell
-  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
-  ```
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /es/agent/supported_platforms/?tab=windows
-[3]: /es/agent/faq/windows-agent-ddagent-user/
-[4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview#software-requirements
-[5]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
-[6]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Opciones de configuración de instalación
 
@@ -162,8 +67,8 @@ Cada una de las siguientes opciones de configuración se puede añadir como prop
 | Variable                                    | Tipo    | Descripción                                                                                                                                                                                                                         |
 |----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `APIKEY`                                    | Cadena  | Añade la clave de API de Datadog al archivo de configuración.                                                                                                                                                                                 |
-| `SITE`                                      | Cadena  | Configura el sitio de ingesta de Datadog. Ejemplo: `SITE=`{{< region-param key="dd_site" code="true" >}}                                                                                                                                     |
-| `TAGS`                                      | Cadena  | Lista de etiquetas que asignar en el archivo de configuración. Los valores están separados por comas. Ejemplo: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                         |
+| `SITE`   | Cadena  | Configura el sitio de admisión en Datadog, por ejemplo: `SITE=datadoghq.com`.     |
+| `TAGS`                                      | Cadena  | Lista de etiquetas (tags) que asignar en el archivo de configuración. Los valores están separados por comas. Ejemplo: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                         |
 | `HOSTNAME`                                  | Cadena  | Configura el nombre de host que el Agent envía a Datadog (anula cualquier nombre de host determinado durante el tiempo de ejecución).                                                                                                                            |
 | `DDAGENTUSER_NAME`                          | Cadena  | Anula el nombre de usuario `ddagentuser` predeterminado que se utilizó durante la instalación del Agent _(v6.11.0 y posteriores)_. [Más información sobre el usuario del Datadog Windows Agent][3]                                                                                      |
 | `DDAGENTUSER_PASSWORD`                      | Cadena  | Anula la contraseña con protección criptográfica que se generó para el usuario `ddagentuser` durante la instalación del Agent _(v6.11.0 y posteriores)_. Se debe proporcionar para instalaciones en servidores de dominios. [Más información sobre el usuario del Datadog Windows Agent][3]  |
@@ -195,31 +100,41 @@ Cada una de las siguientes opciones de configuración se puede añadir como prop
 | `PROXY_PORT`                                | Número  | (Si utilizas un proxy) establece tu puerto de proxy. [Más información sobre el uso de proxy con el Datadog Agent][4].                                                                                                                                 |
 | `PROXY_USER`                                | Cadena  | (Si utilizas un proxy) establece tu usuario de proxy. [Más información sobre el uso de proxy con el Datadog Agent][4].                                                                                                                                 |
 | `PROXY_PASSWORD`                            | Cadena  | (Si utilizas un proxy) establece tu contraseña de proxy. Para Agent de proceso/contenedor, esta variable se requiere para pasar una contraseña de autenticación y no puede ser renombrada. [Más información sobre el uso de proxy con Datadog Agent][4]. |
-| `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Booleano | Utiliza el ID de instancia EC2 para los hosts de Windows en EC2. _(v7.28.0 y posteriores)_                                                                                                                                                                      |
-| [OBSOLETO] `ADDLOCAL` | Cadena | Habilita el componente de Agent adicional. Si se selecciona `"MainApplication,NPM"`, se instalará el componente del controlador para [Network Performance Monitoring][5]. _(Versión 7.44.0 y anteriores)_ |
-
-**Nota**:
-Agent 7 sólo es compatible con Python 3. Antes de actualizar, confirma que tus checks personalizados son compatibles con Python 3. Consulta la guía de [Migración de check personalizado de Python 3][13] para más información. Si no estás utilizando checks personalizados o ya has confirmado su compatibilidad, actualiza normalmente.
-
-Si estás actualizando desde una versión del Datadog Agent < 5.12.0, primero actualiza a una versión más reciente del Agent 5 (>= 5.12.0, pero < 6.0.0) con el [instalador EXE][14] y después actualiza al Datadog Agent versión >= 6.
+| `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Booleano | Utiliza el ID de instancia EC2 para los hosts de Windows en EC2. _(v7.28.0 y posteriores)_                                            |
 
 #### Archivos de log de la instalación
 
-Puedes encontrar los archivos de log de la instalación del Agent en `%TEMP%\MSI*.LOG`.
+Define la opción `/log <FILENAME>` msiexec para configurar un archivo de log de instalación. Si no se define esta opción, msiexec escribe el log en `%TEMP%\MSI*.LOG` por defecto.
 
-#### Validación
 
-Para verificar tu instalación, sigue las instrucciones que aparecen en la sección [Estado e información del Agent](#agent-status-and-information).
+## Configuración
+
+El archivo de configuración principal del Agent se encuentra en
+`C:\ProgramData\Datadog\datadog.yaml`. Este archivo se utiliza para las configuraciones en todo el host, como la clave de API, el sitio Datadog seleccionado, los parámetros proxy, las etiquetas de host y el nivel de log.
+
+También hay un archivo `datadog.yaml.example` en el mismo directorio, que es una referencia completamente comentada con todas las opciones de configuración disponibles. Es útil como referencia y para copiar configuraciones específicas.
+
+
+Los archivos de configuración de las integraciones están en:
+`C:\ProgramData\Datadog\conf.d\` También puede haber una ubicación legacy alternativa: `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`.
+
+Cada integración tiene un subdirectorio `<INTEGRATION>.d\` que contiene:
+- `conf.yaml`: Parámetros activos de la integración
+* `conf.yaml.example`: Archivo de ejemplo que muestra las claves de configuración compatibles
+
+Cuando realices cambios en la configuración, asegúrate de reiniciar el Agent para que los cambios surtan efecto.
+
+La [GUI del Datadog Agent Manager][6] puede utilizarse para activar, desactivar y configurar checks. Debes reiniciar Agent para que los cambios surtan efecto.
+
+**Nota**: `ProgramData` es una carpeta oculta.
 
 ## Comandos del Agent
 
 El administrador de control de servicios de Windows controla la ejecución del Agent.
 
-* El nombre del archivo ejecutable principal es `agent.exe`. En función de la versión del Agent, su localización es la siguiente:
-    - Versiones del Agent <= 6.11: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
-    - Versiones del Agent >= 6.12: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
+* El nombre del ejecutable principal es `agent.exe`. 
 * La GUI de configuración es una aplicación de configuración basada en navegador (solo para Windows de 64 bits).
-* Se pueden ejecutar comandos desde una línea de comandos **con privilegios superiores (ejecutada como administrador)** (PowerShell o Símbolo del sistema) con la sintaxis `<PATH_TO_AGENT.EXE> <COMMAND>`.
+* Los comandos se pueden ejecutar desde la línea de comandos **elevada (ejecutar como administrador)** (PowerShell o símbolo del sistema) utilizando la sintaxis `<PATH_TO_AGENT.EXE> <COMMAND>`.
 * Estas son las opciones de línea de comandos:
 
 | Comando         | Descripción                                                                      |
@@ -239,7 +154,7 @@ El administrador de control de servicios de Windows controla la ejecución del A
 | stopservice     | Detiene el Agent en el administrador de control de servicios.                              |
 | version         | Muestra información acerca de la versión.                                                         |
 
-* Ejemplos:
+**Ejemplos**:
   - PowerShell (`powershell.exe`)
 
     ```powershell
@@ -255,20 +170,6 @@ El administrador de control de servicios de Windows controla la ejecución del A
     "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
     "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
-
-## Configuración
-
-Utiliza el [Datadog Agent Manager][6] para habilitar, deshabilitar y configurar checks. Reinicia el Agent para aplicar los cambios.
-
-
-El archivo principal de configuración del Agent se encuentra en:
-`C:\ProgramData\Datadog\datadog.yaml`
-
-Los archivos de configuración para las integraciones se encuentran en:
-`C:\ProgramData\Datadog\conf.d\` O
-`C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
-
-**Nota**: `ProgramData` es una carpeta oculta.
 
 ## Desinstalar el Agent
 
@@ -292,6 +193,9 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 {{< /code-block >}}
 
 ## Solucionar problemas
+
+Para conocer los pasos a seguir para la resolución de problemas, consulta la [documentación para la resolución de problemas del Agent][18].
+
 
 ### Estado e información del Agent
 
@@ -325,33 +229,7 @@ Los logs del Agent se encuentran en `C:\ProgramData\Datadog\logs\agent.log`.
 
 **Nota**: `ProgramData` es una carpeta oculta.
 
-### Enviar un flare
-
-* Navega hasta [http://127.0.0.1:5002][12] para visualizar el Datadog Agent Manager.
-
-* Selecciona la pestaña Flare.
-
-* Introduce tu número de tique (si tienes alguno).
-
-* Introduce la dirección de correo electrónico que utilizas para iniciar sesión en Datadog.
-
-* Pulsa Submit (Enviar).
-
-El comando flare se puede usar en PowerShell:
-
-```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
-```
-
-También en cmd.exe:
-
-```cmd
-"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
-```
-
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Flare en Windows con el Agent 6" style="width:75%;">}}
-
-## Casos de uso
+## Casos prácticos
 
 ###  Monitorización de un servicio de Windows
 
@@ -393,11 +271,11 @@ Una vez que se haya completado la configuración, [reinicia el Agent][11].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [2]: /es/agent/supported_platforms/?tab=windows
 [3]: /es/agent/faq/windows-agent-ddagent-user/
 [4]: /es/agent/configuration/proxy/
-[5]: /es/network_monitoring/performance
+[5]: /es/network_monitoring/cloud_network_monitoring
 [6]: /es/agent/guide/datadog-agent-manager-windows/
 [7]: /es/integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors/create/integration
@@ -407,3 +285,9 @@ Una vez que se haya completado la configuración, [reinicia el Agent][11].
 [12]: http://127.0.0.1:5002
 [13]: /es/agent/guide/python-3/
 [14]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
+[15]: https://docs.datadoghq.com/es/agent/supported_platforms/?tab=linux
+[16]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+[17]: /es/agent/faq/windows-agent-ddagent-user/
+[18]: https://docs.datadoghq.com/es/agent/troubleshooting/
+[400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[500]: https://app.datadoghq.com/organization-settings/api-keys

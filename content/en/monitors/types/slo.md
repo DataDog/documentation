@@ -1,5 +1,6 @@
 ---
 title: SLO Alerts
+description: "Create SLO alerts to monitor error budget consumption and burn rates, ensuring service reliability targets are maintained."
 aliases :
   - /monitors/create/types/slo/
 further_reading:

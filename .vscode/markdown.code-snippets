@@ -79,7 +79,7 @@
 
     "Alert box": {
         "scope": "markdown",
-        "prefix": ";;alert",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": [
             "<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
         ],
@@ -269,6 +269,16 @@
             "   {{< nextlink href=\"link/here\" >}}Link description goes here{{< /nextlink >}}",
             "{{< /whatsnext >}}"
         ]
+    },
+    "Header list": {
+        "scope": "markdown",
+        "prefix": ";;header-list",
+        "body": [
+            "{{< header-list header=\"${1:}\" >}}",
+            "   {{< nextlink href=\"link/here\" >}}Link description goes here{{< /nextlink >}}",
+            "{{< /header-list >}}"
+        ],
+        "description": "Header list"
     },
     "Eng Blog Frontmatter": {
         "scope": "markdown",

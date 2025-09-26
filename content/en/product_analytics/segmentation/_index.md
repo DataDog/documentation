@@ -9,11 +9,7 @@ further_reading:
 
 ## Overview
 
-Analyze and understand individual users or segments (groups based on common characteristics) of your user base using the [Segments][1] feature. 
-
-You can use [user profile attributes](#user-profile-attributes) to filter on the users you want, or [create a segment](#build-a-segment) to better analyze and understand usage of your product across a group. 
-
-The Segments page displays all the user segments you’ve created and also allows you to create new ones. Segmenting helps you focus on specific user groups based on characteristics or behaviors, enabling you to uncover insights, identify trends, and make data-driven decisions to optimize your product and user experience.
+Segmenting helps you focus on specific user groups based on characteristics or behaviors, enabling you to uncover insights, identify trends, and make data-driven decisions to optimize your product and user experience.
 
 For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
 
@@ -33,9 +29,9 @@ To create a new segment using Product Analytics data:
 
 1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page
 
-2. Under the **Select a data source** section, choose **Product Analytics** to filter on any attribute collected by the SDK, or custom attributes you added to create a granular user segment.
+2. Under the **Select a data source** section, choose **Product Analytics** to explore how users interact with your product, such as completing key flows or taking specific actions. You can then narrow the audience using attributes to target specific segments or uncover trends.
 
-   In the below image, the segment is filtered to all users who were on the `/cart` page and then clicked on the checkout button (and did so from Brazil):
+   In the below image, the segment is filtered to all users who were on the `/cart` page and then clicked on the checkout button (and did so from Brazil) within the same session in the past week:
 
    {{< img src="product_analytics/segmentation/pana_example_users_brazil-2.png" alt="Filter to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
 
@@ -46,7 +42,6 @@ To create a new segment using Product Analytics data:
 
 
 Or you directly click on the <strong> Create Segment</strong> button to select your data source:
-
 
 {{< img src="product_analytics/segmentation/pana_segment_data_source.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
 

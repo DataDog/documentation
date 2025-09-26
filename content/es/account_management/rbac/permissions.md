@@ -16,7 +16,7 @@ further_reading:
 title: Permisos de rol en Datadog
 ---
 
-## Información general
+## Permisos
 
 Los permisos definen el tipo de acceso que tiene un usuario a un recurso determinado. Por lo general, los permisos otorgan a un usuario el derecho a leer, editar o eliminar un objeto. Los permisos son la base de los derechos de acceso de todos los roles, incluidos los tres roles gestionados y los roles personalizados.
 
@@ -29,6 +29,19 @@ Algunos permisos de Datadog proporcionan acceso a funcionalidades más privilegi
 - Acceso para realizar operaciones privilegiadas
 
 Los permisos sensibles se marcan en las interfaces de Roles y Permisos para identificar que pueden necesitar un mayor análisis. Como práctica recomendada, los administradores que configuran las funciones deben prestar especial atención a estos permisos y confirmar cuáles de ellos están asignados a sus funciones y usuarios.
+
+### Permisos del modo de vista previa
+
+Algunos permisos aparecen en "modo de vista previa" antes de aplicarse plenamente. Durante este periodo:
+
+- Los permisos de vista previa se marcan en la aplicación con un distintivo de "Vista previa".
+- No restringen el acceso hasta que finaliza el periodo de vista previa
+- La vista previa suele durar de 2 a 4 semanas antes de que comience la ejecución.
+- Los administradores deben configurar roles apropiados durante este período
+
+El modo de vista previa ofrece a los administradores de tu organización la posibilidad de optar por determinados permisos nuevos, de modo que puedan evitar perder el acceso a recursos que antes no tenían restricciones. Las notas de la versión asociadas a cada permiso del modo de vista previa indican cuándo se crea el permiso y cuándo se aplicará. Aunque estos permisos no restringen el acceso durante la vista previa, Datadog recomienda actualizar las configuraciones de roles antes de que entren en vigor para evitar interrupciones.
+
+## Roles
 
 ### Roles gestionados
 

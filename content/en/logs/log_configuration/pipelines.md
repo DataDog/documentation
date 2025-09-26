@@ -77,6 +77,8 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `hostname`
 * `syslog.hostname`
 
+**Note**: In Kubernetes, if a JSON log ingested by the Datadog Agent contains a `host`, `hostname`, or `syslog.hostname` key attribute, that value overrides the default Agent hostname for that log. As a result, the log does not inherit the expected host-level tags, which are set at the host level, of the correct host. In this case, Datadog recommends clearing these attributes to ensure your logs can be attributed to the correct hosts.
+
 {{% /tab %}}
 {{% tab "Date" %}}
 
@@ -185,9 +187,8 @@ By default, Datadog tracers can [automatically inject span IDs into your logs][1
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
 4. Name your pipeline.
-5. (Optional) Grant editing access to processors in the pipeline. If you assign a role to a pipeline, the role receives `logs_write_processor` [permissions][12] specifically scoped to that pipeline. Roles with `logs_write_processor` permissions assigned globally (by editing role), cannot be selected, as they have access to all pipelines.
-6. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][5].
-7. Press **Create**.
+5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][5].
+6. Press **Create**.
 
 An example of a log transformed by a pipeline:
 

@@ -24,13 +24,14 @@ jobs:
     steps:
       - name: Get GitHub App token
         id: get_token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1.12.0
         with:
           app-id: ${{ secrets.PIPELINE_GITHUB_APP_ID }}
           private-key: ${{ secrets.PIPELINE_GITHUB_APP_PRIVATE_KEY }}
           repositories: datadog-api-spec
       - name: Post PR review status check
-        uses: DataDog/github-actions/post-review-status@v1.0.0
+        uses: DataDog/github-actions/post-review-status@65b4875f33ad773d7ba4b005a2cb5f35020295f3 # v2.3.0
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           repo: datadog-api-spec
+          context: documentation/master
