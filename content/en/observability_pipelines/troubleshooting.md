@@ -139,7 +139,7 @@ If you see the error `Please ensure you organization is enabled for RC`, make su
 
 ## Missing environment variable
 
-If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you added the environment variables for your sources and destinations. See [Environment Variables][18] for a list of environment variables for sources, processors, and destinations if applicable.
+If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you add the environment variables for your sources, processors, and destinations when you install the Worker. See [Environment Variables][18] for a list of source, processor, and destination environment variables.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
