@@ -122,7 +122,7 @@ Within this side panel, you have a cluster-specific funnel that identifies:
 - Number of Total, Allocated, Active, and Effective devices within that particular cluster
 - Estimated total and idle cost of that cluster
 - Connected entities of that cluster: pods, processes, and Slurm jobs
-- Four key metrics (customizable) for that cluster: Graphics Activity, SM Activity, Core Utilization (only if System probe is enabled), and Memory Utilization
+- Four key metrics (customizable) for that cluster: Core Utilization (only if System probe is enabled), Memory Utilization, PCIe Throughput, and Graphics Activity
 - Table of hosts associated with that cluster
 
 {{< img src="gpu_monitoring/cluster_sidepanel.png" alt="Cluster specific side panel that breaks down idle devices, costs and connected entities" style="width:100%;" >}}
