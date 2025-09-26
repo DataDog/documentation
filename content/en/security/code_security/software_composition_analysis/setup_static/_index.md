@@ -44,7 +44,7 @@ The following sections describe ways to configure SCA for your repositories.
 
 ### Scan with Datadog-hosted scanning
 
-You can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. This is supported for:
+You can run Datadog Static Code Analysis scans directly on Datadog infrastructure. Supported repository types include:
 - [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider)
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
