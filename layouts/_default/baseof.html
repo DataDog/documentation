@@ -49,7 +49,11 @@
   <div class="container container__content h-100 pt-1">
     <div class="row h-100 position-relative js-content-container">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-        {{ partial "sidenav/main-sidenav.html" . }}
+        {{ $filePath := "" }}
+        {{ with .File }}
+          {{ $filePath = .Path }}
+        {{ end }}
+        {{ partialCached "sidenav/main-sidenav.html" . .Section (eq $filePath "search.md") .Language }}
       </div>
 
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
