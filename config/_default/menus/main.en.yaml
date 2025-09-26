@@ -712,17 +712,17 @@ menu:
       parent: otel-setup-other
       weight: 4022
     - name: Direct OTLP Ingest
-      url: /opentelemetry/setup/agentless
+      url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
       parent: otel-setup-other
       weight: 4023
     - name: Logs Endpoint
-      url: /opentelemetry/setup/agentless/logs
+      url: /opentelemetry/setup/otlp_ingest/logs
       parent: otel-setup-intake-endpoint
       weight: 40231
       identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
-      url: /opentelemetry/setup/agentless/metrics
+      url: /opentelemetry/setup/otlp_ingest/metrics
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
