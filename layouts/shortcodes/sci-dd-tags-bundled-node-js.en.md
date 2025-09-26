@@ -1,6 +1,10 @@
-If your application is bundled in the Git repository, use a bundler plugin to inject Git metadata into the runtime bundle. Inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` so dd-trace can report Git information.
+If you're bundling your application from a Git directory, you can use plugins to inject Git metadata into the runtime bundle.
 
-###### Bundling with esbuild
+
+<details>
+  <summary>
+  Bundling with esbuild
+  </summary>
 
 Use the `dd-trace/esbuild` plugin to automatically inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` in your runtime bundle. See the plugin [documentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling-with-esbuild).
 Install `dd-trace` **v5.68.0 or later** for automatic Git tag injection.
@@ -25,10 +29,14 @@ esbuild.build({
 });
 
 ```
+</details>
 
-###### Bundling with Rollup
+<details>
+  <summary>
+  Bundling with Rollup
+  </summary>
 
-Use [`rollup-plugin-inject-process-env`](https://www.npmjs.com/package/rollup-plugin-inject-process-env) to inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA`. Run the bundle step inside a Git working tree so the script can read `.git` information. Implement `getGitInfo()` to read these values (for example, by running `git` commands or parsing files under `.git/`).
+Use [rollup-plugin-inject-process-env](https://www.npmjs.com/package/rollup-plugin-inject-process-env) to inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` in your runtime bundle. Run the bundle step inside a Git repository so the script can read `.git/` information.
 
 ```diff
 + const injectProcessEnv = require('rollup-plugin-inject-process-env');
@@ -57,9 +65,43 @@ module.exports = {
 
 ```
 
-###### Bundling with webpack
+The `getGitInfo()` function executes git commands to return `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` variables. It needs to be executed in the git repository.
 
-Use the [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/) to set `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` at the top of the bundle. Run the bundle step inside a Git working tree. Implement `getGitInfo()` to read these values (for example, by running `git` commands or parsing files under `.git/`).
+```js title="getGitInfo()"
+const { execSync } = require('child_process');
+
+function getGitInfo() {
+  try {
+    const commitSha = execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+    const repositoryUrl = execSync('git config --get remote.origin.url', { encoding: 'utf8' }).trim();
+
+    console.log('Build-time Git metadata:', {
+      commitSha,
+      repositoryUrl,
+    });
+
+    return {
+      DD_GIT_COMMIT_SHA: commitSha,
+      DD_GIT_REPOSITORY_URL: repositoryUrl,
+    };
+  } catch (error) {
+    console.warn('Could not get Git metadata at build time:', error.message);
+    return {
+      DD_GIT_COMMIT_SHA: '',
+      DD_GIT_REPOSITORY_URL: '',
+    };
+  }
+}
+```
+</details>
+
+
+<details>
+  <summary>
+  Bundling with webpack
+  </summary>
+
+Use the [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/) to inject `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` in your runtime bundle. Run the bundle step inside a Git repository so the script can read `.git/` information.
 
 ```diff
 + const webpack = require('webpack');
@@ -89,5 +131,34 @@ module.exports = {
 +		}),
 	]
 };
-
 ```
+
+The `getGitInfo()` function executes git commands to return `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` variables. It needs to be executed in the git repository.
+
+```js title="getGitInfo()"
+const { execSync } = require('child_process');
+
+function getGitInfo() {
+  try {
+    const commitSha = execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+    const repositoryUrl = execSync('git config --get remote.origin.url', { encoding: 'utf8' }).trim();
+
+    console.log('Build-time Git metadata:', {
+      commitSha,
+      repositoryUrl,
+    });
+
+    return {
+      DD_GIT_COMMIT_SHA: commitSha,
+      DD_GIT_REPOSITORY_URL: repositoryUrl,
+    };
+  } catch (error) {
+    console.warn('Could not get Git metadata at build time:', error.message);
+    return {
+      DD_GIT_COMMIT_SHA: '',
+      DD_GIT_REPOSITORY_URL: '',
+    };
+  }
+}
+```
+</details>
