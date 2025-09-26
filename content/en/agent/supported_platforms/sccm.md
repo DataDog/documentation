@@ -18,6 +18,8 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+aliases:
+  - /agent/basic_agent_usage/sccm/
 ---
 
 Microsoft SCCM (Systems Center Configuration Manager) is a configuration management solution that comes packaged with Microsoft's Systems Center suite of tools. This page covers installing and configuring the Datadog Agent using SCCM.

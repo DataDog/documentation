@@ -11,9 +11,9 @@ further_reading:
   - link: "/agent/troubleshooting/"
     tag: "Documentation"
     text: "Agent Troubleshooting"
-  - link: "/agent/basic_agent_usage/"
+  - link: "agent/"
     tag: "Documentation"
-    text: "Basic Agent Usage"
+    text: "The Datadog Agent" 
 ---
 
 ## Overview

@@ -22,6 +22,10 @@ aliases:
   - /agent/faq/install-core-extra
   - /logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
+  - /agent/basic_agent_usage/
+  - /guides/basic_agent_usage/
+  - /agent/faq/where-is-the-configuration-file-for-the-agent/
+  - /agent/faq/log-location
 cascade:
 - _target:
     path: /agent/basic_agent_usage/chef
@@ -43,27 +47,128 @@ Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to 
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-**It is recommended to fully install the Agent.** However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE, and Ubuntu. This package is used in containerized environments where DogStatsD runs as a sidecar or environments running a DogStatsD server without full Agent functionality.
-
-The standalone DogStatsD package is installed with the Agent [one-line install command][2] **except** every occurrence of `datadog-agent` should be replaced with `datadog-dogstatsd`. A Docker image is available in the [DogStatsD6 Docker image repo][3].
-
-Packages are also available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+<br>
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 <div class="alert alert-info"><p>
 Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
-Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization depends on your infrastructure and your configuration management practices, but aim for monthly.</p>
-<p>
-To update the Datadog Agent core between two minor versions on a given host, run <a href="https://app.datadoghq.com/account/settings/agent/latest">the corresponding install command for your platform</a>.</p>
-<p>
-Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a> rules.</p>
+Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes.</p>
 </div>
 
+## Managing the Agent
+
+### Managing the Agent with Fleet Automation (recommended)
+[Fleet Automation][15] is the primary, in-app workflow for installing, upgrading, configuring, and troubleshooting the Datadog Agent at scale.
+
+{{< img src="/agent/basic_agent_usage/basic_agent_2_july_25.png" alt="The Fleet Automation view that allows you to centrally manage your Datadog Agents in one place." style="width:100%;">}}
+
+
+- **View configuration & history**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
+- **[Upgrade outdated Agents][13]**: Trigger remote upgrades for your Agents to keep your fleet updated in a few clicks.
+- **[Send a flare for support][14]**: From the Support tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.
+- **Audit API-key usage**: Identify which Agents are using a specific API key and rotate keys safely.
+
+
+### Datadog Agent Manager GUI
+
+<div class="alert alert-info">The Agent GUI is not supported on 32-bit Windows platforms.</div>
+
+Use the Datadog Agent Manager GUI to:
+- View the status information for your Agent
+- View all running checks
+- View the Agent log
+- Edit the Agent configuration file (`datadog.yaml`)
+- Add or edit Agent checks
+- Send flares
+
+The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5002`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
+
+You can change the GUI's default port in your `datadog.yaml` configuration file. To disable the GUI, set the port's value to `-1`. On Linux, the GUI is disabled by default.
+
+GUI requirements:
+- Cookies must be enabled in your browser. The GUI generates and saves a token in your browser, which is used for authenticating all communications with the GUI server.
+- To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
+- For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the host where the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.
+
+### Command-line interface
+
+From Agent 6 and later, the Agent command-line interface is based on subcommands. For a full list of Agent subcommands, see [Agent Commands][2].
+
+## Getting further with the Datadog Agent
+
+### Update the Agent
+
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding installation command for your platform][7].
+
+**Note**: If you want to manually update one specific Agent integration, see the [Integration Management guide][8].
+
+### Configuration files
+
+See the [Agent configuration files documentation][9].
+
+### Datadog site
+
+Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site` parameter (defaults to `datadoghq.com`).
+
+```yaml
+site: {{< region-param key="dd_site" >}}
+```
+
+**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.
+
+### Log location
+
+See the [Agent log files documentation][12].
+
+## Agent overhead
+
+An example of the Datadog Agent resource consumption is below. Tests were made on an Amazon EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
+Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
+
+* Agent Test version: 7.34.0
+* CPU: ~ 0.08% of the CPU used on average
+* Memory: ~ 130MB of RAM used (RSS memory)
+* Network bandwidth: ~ 140 B/s ▼ | 800 B/s ▲
+* Disk:
+  * Linux 830MB to 880MB depending on the distribution
+  * Windows: 870MB
+
+**Log Collection**:
+
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.
+
+{{< tabs >}}
+{{% tab "HTTP compression level 6" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 1.5% of the CPU used on average
+* Memory: ~ 95MB of RAM used.
+* Network bandwidth: ~ 14 KB/s ▲
+
+{{% /tab %}}
+{{% tab "HTTP compression level 1" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 1% of the CPU used on average
+* Memory: ~ 95MB of RAM used.
+* Network bandwidth: ~ 20 KB/s ▲
+
+{{% /tab %}}
+{{% tab "HTTP Uncompressed" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 0.7% of the CPU used on average
+* Memory: ~ 90MB of RAM used (RSS memory)
+* Network bandwidth: ~ 200 KB/s ▲
+ 
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Additional resources
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/agent/basic_agent_usage">}}<u>Basic Agent Usage</u>: Find out more about the Datadog Agent, including architecture details, CLI, overhead, and configuration management tools.{{< /nextlink >}}
-  {{< nextlink href="/agent/docker">}}<u>Docker</u>: Install and configure the Datadog Agent on Docker. {{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Install and configure the Datadog Agent on Kubernetes.{{< /nextlink >}}
   {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: Install and configure the Cluster Agent for Kubernetes, a version of the Datadog Agent built to efficiently gather monitoring data from across an orchestrated cluster.{{< /nextlink >}}
   {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: Install and configure the Datadog Agent on Amazon ECS.{{< /nextlink >}}
@@ -83,5 +188,14 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
-[3]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/dogstatsd/alpine
+[2]: /agent/configuration/agent-commands/
+[6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
+[7]: https://app.datadoghq.com/account/settings/agent/latest
+[8]: /agent/guide/integration-management/
+[9]: /agent/configuration/agent-configuration-files/
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /getting_started/site/
+[12]: /agent/configuration/agent-log-files/
+[13]: /agent/fleet_automation/remote_management/#remotely-upgrade-your-agents
+[14]: /agent/troubleshooting/send_a_flare/?tab=agent#send-a-flare-from-the-datadog-site
+[15]: /agent/fleet_automation
