@@ -18,10 +18,10 @@ The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire 
 - How can I better provision these devices to match workload demand?
 - How can I get more value from my existing GPU spend?
 
-For quick access, you can click on the tabs on the left to jump to the corresponding sections below: 
-- Fleet Cost and Usage
-- Allocation and Provisioning
-- Workload Optimization Opportunities
+Click on the section titles below to access the corresponding section: 
+- [Fleet Cost and Usage](#fleet-cost-and-usage)
+- [Allocation and Provisioning](#allocation-and-provisioning)
+- [Workload Optimization Opportunities](#workload-optimization-opportunities)
 
 ## Fleet Cost and Usage
 
