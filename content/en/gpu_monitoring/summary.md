@@ -16,9 +16,14 @@ further_reading:
 The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame. This page answers key questions such as: 
 - Am I using my existing GPU fleet effectively?
 - How can I better provision these devices to match workload demand?
-- How can I get more value from my existing GPU spend? 
+- How can I get more value from my existing GPU spend?
 
-## Your GPU fleet at a glance
+For quick access, you can click on the tabs on the left to jump to the corresponding sections below: 
+- Fleet Cost and Usage
+- Allocation and Provisioning
+- Workload Optimization Opportunities
+
+## Fleet Cost and Usage
 
 Operational efficiency is a key driver of overall cost. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
 
@@ -44,7 +49,7 @@ See your total spend on GPU infrastructure, and identify the subset of those cos
 
 **Note**: Total cloud costs from AWS and Google Cloud are calculated over the selected time frame. As this data is only available at a delay, the selected time frame must be greater than or equal to two days. Idle costs are the subset of the total cost attributed to idle GPUs.
 
-## Device distribution across your fleet 
+## Allocation and Provisioning
 
 Use this section to gain insights into GPU allocation and capacity. This helps you to troubleshoot failed workloads due to GPU constraints, and improve the operational efficiency of your fleet.
 
