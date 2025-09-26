@@ -38,7 +38,7 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
 
-The sections below cover the different ways to configure SCA for your repositories.
+The following sections describe ways to configure SCA for your repositories.
 
 ## Select where to run static SCA scans
 
