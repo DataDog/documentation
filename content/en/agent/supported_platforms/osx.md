@@ -15,7 +15,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "/agent/basic_agent_usage/#agent-architecture"
+- link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
 - link: "/agent/configuration/network#configure-ports"
@@ -29,7 +29,7 @@ algolia:
 
 This page outlines the basic features of the Datadog Agent for macOS. See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
 
-## Install the Agent 
+## Install the Agent
 To install the Agent on macOS, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
 {{< img src="/agent/basic_agent_usage/macos_img_installation.png" alt="In-app installation steps for the Datadog Agent on a MacOS host." style="width:90%;">}}
@@ -60,16 +60,16 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 
 The [Datadog Agent configuration file][7] is located in `/opt/datadog-agent`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
-- `api_key`: your organization's [Datadog API key][8] 
-- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
-- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
+- `api_key`: your organization's [Datadog API key][8]
+- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
+- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])
 - Default tags, log levels, and Datadog configurations.
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [sample config_template.yaml file][10] for all available configuration options.
 
 ### Integration files
 Configuration files for integrations are found in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, which contains:
-- `conf.yaml`: the active configuration controlling how the integration gathers metrics and logs  
+- `conf.yaml`: the active configuration controlling how the integration gathers metrics and logs
 -  `conf.yaml.example`: a sample illustrating supported keys and defaults
 
 

@@ -15,7 +15,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "/agent/basic_agent_usage/#agent-architecture"
+- link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
 - link: "/agent/configuration/network#configure-ports"
@@ -36,7 +36,7 @@ See [Supported Platforms][15] for the complete list of supported Linux distribut
 
 ## Installation
 
-To install the Datadog Agent on your Windows hosts, follow the [guided in-app flow within Fleet Automation][16], then copy and run the installation command. The Datadog Agents run under the `ddagentuser`. See [Datadog Windows Agent User][17] documentation for more information. 
+To install the Datadog Agent on your Windows hosts, follow the [guided in-app flow within Fleet Automation][16], then copy and run the installation command. The Datadog Agents run under the `ddagentuser`. See [Datadog Windows Agent User][17] documentation for more information.
 
 
 {{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="In-app installation steps for the Datadog Agent on a Windows host." style="width:90%;">}}
@@ -55,9 +55,9 @@ To install the Datadog Agent on your Windows hosts, follow the [guided in-app fl
 When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 
-#### Installation configuration options 
+#### Installation configuration options
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).
 
 
 | Variable                                    | Type    | Description                                                                                                                                                                                                                         |
@@ -80,7 +80,7 @@ Each of the following configuration options can be added as a property to the co
 
 #### More Agent configuration options
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. 
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows.
 
 **Note**: If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
 
@@ -106,9 +106,9 @@ Set the `/log <FILENAME>` msiexec option to configure an installation log file. 
 ## Configuration
 
 The main Agent configuration file is located at
-`C:\ProgramData\Datadog\datadog.yaml`. This file is used for host-wide settings such as the API key, selected Datadog site, proxy parameters, host tags, and log level. 
+`C:\ProgramData\Datadog\datadog.yaml`. This file is used for host-wide settings such as the API key, selected Datadog site, proxy parameters, host tags, and log level.
 
-There is also a `datadog.yaml.example` file in the same directory, which is a fully commented reference with all available configuration options, useful for reference and copying specific settings. 
+There is also a `datadog.yaml.example` file in the same directory, which is a fully commented reference with all available configuration options, useful for reference and copying specific settings.
 
 
 Configuration files for integrations are in:
@@ -116,7 +116,7 @@ Configuration files for integrations are in:
 
 Each integration has a subdirectory `<INTEGRATION>.d\` that contains:
 - `conf.yaml`: The active settings for the integration
-* `conf.yaml.example`: A sample file showing what configuration keys are supported 
+* `conf.yaml.example`: A sample file showing what configuration keys are supported
 
 When making configuration changes, be sure to restart the Agent to ensure the changes take effect.
 
@@ -128,7 +128,7 @@ The [Datadog Agent Manager GUI][6] can be used to enable, disable, and configure
 
 The execution of the Agent is controlled by the Windows Service Control Manager.
 
-* The main executable name is `agent.exe`. 
+* The main executable name is `agent.exe`.
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
 * Commands can be run from the **elevated (run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
 * Command-line options are below:
