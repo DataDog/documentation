@@ -96,7 +96,7 @@ This table is sorted by **Total Cost**, helping you to identify your most expens
 
 Click into any of these clusters to investigate the workloads contributing to its costs, by either pods or processes, on the [GPU Fleet page][1]. This opens a side panel with details of that specific cluster and its connected entities. 
 
-For example, if you see a related pod with high core utilization, that pod is ineffectively using its associated GPU device. You can then contact the pod owner to terminate the pod or move it to a smaller GPU.
+For example, if you see a related pod with low core utilization, that pod is ineffectively using its associated GPU device. You can then contact the pod owner to terminate the pod or move it to a smaller GPU.
 
 {{< img src="gpu_monitoring/cluster_entities.png" alt="A details side panel for a particular cluster that displays the connected entities of that cluster such as pods and processes." style="width:90%;" >}}
 
