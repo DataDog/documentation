@@ -1,5 +1,6 @@
 ---
 title: Explore Deployment Gates
+description: "View gate evaluations, identify frequently failing rules, analyze failure patterns, and track evaluation trends over time."
 further_reading:
 - link: "/deployment_gates/setup"
   tag: "Documentation"

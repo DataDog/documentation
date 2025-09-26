@@ -1,5 +1,6 @@
 ---
 title: Functions and Operators
+description: "Reference guide for functions and operators available in Sheets calculated columns including text, date, logical, mathematical, and regex operations."
 ---
 
 ## Overview

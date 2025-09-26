@@ -1,5 +1,6 @@
 ---
 title: Enterprise Configuration
+description: "Configure the Datadog Mobile App for enterprise deployment with MDM providers using AppConfig for organization-specific settings."
 aliases:
 - /service_management/enterprise-configuration
 further_reading:

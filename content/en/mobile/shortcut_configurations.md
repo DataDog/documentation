@@ -1,5 +1,6 @@
 ---
 title: Shortcut Configurations
+description: "Configure mobile app shortcuts, Siri integration, focus mode, quick actions, and Apple Watch notifications for enhanced Datadog mobile experience."
 further_reading:
 - link: "/mobile/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Sheets Guides
+description: "Step-by-step guides for analyzing logs and RUM data using Sheets with practical examples and use cases."
 private: true
 disable_toc: true
 cascade:

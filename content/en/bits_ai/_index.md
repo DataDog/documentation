@@ -1,5 +1,6 @@
 ---
 title: Bits AI
+description: "Learn about Bits AI, your agentic teammate in Datadog that automates development, security, and operational workflows."
 disable_toc: false
 is_beta: true
 aliases:

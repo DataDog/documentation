@@ -1,5 +1,6 @@
 ---
 title: CoScreen Optimization and Troubleshooting
+description: "Troubleshoot CoScreen issues including audio quality, screen sharing optimization, network connectivity, and platform-specific problems."
 is_beta: false
 ---
 

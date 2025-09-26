@@ -1,5 +1,6 @@
 ---
 title: Automatic Faulty Deployment Detection
+description: "Detect faulty code deployments within minutes using Watchdog's automatic analysis of new deployment performance compared to previous versions."
 ---
 
 ## Overview

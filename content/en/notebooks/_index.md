@@ -1,5 +1,6 @@
 ---
 title: Notebooks
+description: "Create collaborative rich text documents with live Datadog graphs for investigations, postmortems, runbooks, and data-driven storytelling."
 aliases:
   - /graphing/notebooks/
   - /notebooks_new/

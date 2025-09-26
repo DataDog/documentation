@@ -1,5 +1,6 @@
 ---
 title: Overlays
+description: "Use Cloudcraft overlays to view AWS infrastructure from different perspectives including observability, security, cost management, and infrastructure."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
