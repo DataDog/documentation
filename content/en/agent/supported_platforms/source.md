@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for Source Installation
+title: Source Installation
 description: "Learn how to install, configure, and manage the Datadog Agent when building from source code."
 platform: Source
 aliases:
