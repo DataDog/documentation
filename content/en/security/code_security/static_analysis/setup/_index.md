@@ -48,7 +48,7 @@ Datadog Static Code Analysis supports all source code management providers, with
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-You must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
+Configure a GitHub App with the [GitHub integration tile][1] and set up the [source code integration][2] to enable inline code snippets and [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
