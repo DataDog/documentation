@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for AIX
+title: AIX
 description: "Install and manage the Datadog UNIX Agent on IBM AIX systems for infrastructure monitoring and custom metrics collection."
 further_reading:
 - link: "/agent/architecture/#agent-architecture"
