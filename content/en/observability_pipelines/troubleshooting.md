@@ -133,6 +133,14 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 
 If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
 
+## Ensure your organization is enabled for RC
+
+If you see the error `Please ensure you organization is enabled for RC`, make sure the API key you are using for the Worker has [Remote Configuration enabled][17].
+
+## Missing environment variable
+
+If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you added the environment variables for your sources and destinations. See [Environment Variables][18] for a list of environment variables for sources, processors, and destinations if applicable.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -149,3 +157,5 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
 [15]: /observability_pipelines/advanced_configurations/#enable-liveness-and-readiness-probe
 [16]: /observability_pipelines/sources/#tls-certificates
+[17]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[18]: /observability_pipelines/environment_variables/
