@@ -64,7 +64,7 @@ If you rely on GPUs deployed through major cloud providers, this widget breaks d
 
 ### Device type breakdown
 
-When AI workloads fail, it may be due to the number of available GPU devices rather than code performance. This widget surfaces device availability across all of your GPU device types, and highlights any device type pools that are fully saturated (signalling that additional devices may be required). 
+When AI workloads fail, it may be due to the number of available GPU devices rather than code performance. This widget surfaces device availability across all of your GPU device types, and highlights any device type pools that are fully saturated (signaling that additional devices may be required). 
 
 To understand if any device type pools need additional provisioning, check this data against the **Unmet GPU requests** widget beneath it.
 
@@ -116,7 +116,7 @@ This widget also helps you to identify "noisy neighbors" (where one or more pods
 
 ### Zombie processes
 
-Zombie processes are often the primary source of wasted GPU spend, as they inappropriately reserve GPU capacity. This widget lists any zombie processes that should be terminated to free up GPUs this capacity for other workloads.
+Zombie processes are often the primary source of wasted GPU spend, as they inappropriately reserve GPU capacity. This widget lists any zombie processes that should be terminated to free up this GPU capacity for other workloads.
 
 {{< img src="gpu_monitoring/zombie_processes.png" alt="Table of zombie processes that is sorted by SM Engine Activity that need to be killed to free up GPU capacity." style="width:90%;" >}}
 
