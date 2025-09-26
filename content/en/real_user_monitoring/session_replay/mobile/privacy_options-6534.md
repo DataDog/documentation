@@ -20,4 +20,8 @@ further_reading:
     text: Session Replay
 ---
 
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" style="display:none;" alt="" >}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-all.png" style="display:none;" alt="" >}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-large-only.png" style="display:none;" alt="" >}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-non-bundled-only.png" style="display:none;" alt="" >}}
 
