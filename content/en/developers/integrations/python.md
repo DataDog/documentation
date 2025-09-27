@@ -11,7 +11,7 @@ Many operating systems come with a pre-installed version of Python. However, the
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-Install Python 3.12 using [Homebrew][1]:
+Install Python 3.13 using [Homebrew][1]:
 
 1. Update Homebrew:
    ```
@@ -20,31 +20,31 @@ Install Python 3.12 using [Homebrew][1]:
 
 2. Install Python:
    ```
-   brew install python@3.12
+   brew install python@3.13
    ```
 
 3. Check the Homebrew installation output and run any additional commands recommended by the installation script.
 
 4. Verify that the Python binary is installed in your `PATH` and that have installed the correct version:
    ```
-   which python3.12
+   which python3.13
    ```
 
    You should see the following output depending on your Mac architecture:
    - ARM (M1+) machines:
      ```
-     /opt/homebrew/bin/python3.12
+     /opt/homebrew/bin/python3.13
      ```
    - MacOS on Intel machines:
      ```
-     /usr/local/bin/python3.12
+     /usr/local/bin/python3.13
      ```
 
 [1]: https://brew.sh/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. Download the [Python 3.12 64-bit executable installer][1] and run it.
+1. Download the [Python 3.13 64-bit executable installer][1] and run it.
 1. Select the option to add Python to your PATH.
 1. Click **Install Now**.
 1. After the installation has completed, restart your machine.
@@ -59,7 +59,7 @@ Install Python 3.12 using [Homebrew][1]:
 {{% /tab %}}
 
 {{% tab "Linux" %}}
-For Linux installations, avoid modifying your system Python. Datadog recommends installing Python 3.12 using [pyenv][1] or [miniconda][2].
+For Linux installations, avoid modifying your system Python. Datadog recommends installing Python 3.13 using [pyenv][1] or [miniconda][2].
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
