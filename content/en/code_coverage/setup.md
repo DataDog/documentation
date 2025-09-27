@@ -9,9 +9,10 @@ further_reading:
     text: "Learn what data is collected for Code Coverage"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
+<div class="alert alert-info">
+This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated.
+</div>
+
 
 Setting up Code Coverage involves the following steps:
 
