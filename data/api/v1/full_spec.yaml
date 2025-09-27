@@ -791,11 +791,10 @@ components:
       description: Datadog-Azure integrations configured for your organization.
       properties:
         app_service_plan_filters:
-          description: 'Limit the Azure app service plans that are pulled into Datadog
-            using tags.
+          description: 'Limit the Azure app service plans (and Consumption Function
+            Apps) that are pulled into Datadog using tags.
 
-            Only app service plans that match one of the defined tags are imported
-            into Datadog.'
+            Filtering an App Service Plan applies to all Apps running on that plan.'
           example: key:value,filter:example
           type: string
         automute:
