@@ -9,7 +9,6 @@ further_reading:
 - link: "https://app.datadoghq.com/integrations/jira"
   tag: "App"
   text: "In-app Jira integration tile"
-
 ---
 
 ## Overview
