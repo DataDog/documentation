@@ -43,13 +43,11 @@
     },
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
-        "@babel/core": "^7.28.4",
         "@babel/polyfill": "^7.12.1",
         "@babel/runtime": "^7.25.6",
         "@datadog/browser-logs": "^5.27.0",
         "@datadog/browser-rum": "^5.27.0",
         "@popperjs/core": "^2.11.8",
-        "algoliasearch": "^5.39.0",
         "alpinejs": "^3.13.7",
         "bootstrap": "^5.2",
         "cdocs-hugo-integration": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.0.0.tgz",

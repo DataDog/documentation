@@ -4658,6 +4658,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tokenizer/inflate@npm:^0.2.6":
+  version: 0.2.7
+  resolution: "@tokenizer/inflate@npm:0.2.7"
+  dependencies:
+    debug: ^4.4.0
+    fflate: ^0.8.2
+    token-types: ^6.0.0
+  checksum: 0c77759d453501aa0509f6c60a3f2ec2ff6db9e33f196d077af719be6c2cc5a6b2c686e425610ed25d6416ddcb7f495a5e9ef689c8df225a80703b03e83aa956
+  languageName: node
+  linkType: hard
+
 "@tokenizer/token@npm:^0.3.0":
   version: 0.3.0
   resolution: "@tokenizer/token@npm:0.3.0"
@@ -5071,34 +5082,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xhmikosr/archive-type@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@xhmikosr/archive-type@npm:7.0.0"
+"@xhmikosr/archive-type@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@xhmikosr/archive-type@npm:7.1.0"
   dependencies:
-    file-type: ^19.0.0
-  checksum: ae6b388ccb6ec746f85a674a47745c910df43088879870f8364ea3da37dc9196ef28c80185793cc70de17565380f146fb0bc098228656097559e40fe61150a2f
+    file-type: ^20.5.0
+  checksum: ce363bea7798572b74c0821248d9abbb28847290b298b02d142ee1f95f72561f1947e95121450980cf3ea03242ded914ba896681b7ca817f1a247653624d8d7e
   languageName: node
   linkType: hard
 
-"@xhmikosr/bin-check@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "@xhmikosr/bin-check@npm:7.0.3"
+"@xhmikosr/bin-check@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@xhmikosr/bin-check@npm:7.1.0"
   dependencies:
     execa: ^5.1.1
     isexe: ^2.0.0
-  checksum: d4d2bdd45ced4bee0f60ce61c7b6a854f443fd96d5141e70158ae295641aad60af38f2d343d176f604e881250dd7f1faa8242716d46c8f87d7cb9c25585f8a42
+  checksum: 24c3ed3059a36966a41161ded170a755c998b4000313922a70136b6f5be324cbbb640ec35b029b065bb072b188597b6560f239bc73ed0a1293ff2f504e0ee523
   languageName: node
   linkType: hard
 
-"@xhmikosr/bin-wrapper@npm:^13.0.5":
-  version: 13.0.5
-  resolution: "@xhmikosr/bin-wrapper@npm:13.0.5"
+"@xhmikosr/bin-wrapper@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "@xhmikosr/bin-wrapper@npm:13.2.0"
   dependencies:
-    "@xhmikosr/bin-check": ^7.0.3
-    "@xhmikosr/downloader": ^15.0.1
+    "@xhmikosr/bin-check": ^7.1.0
+    "@xhmikosr/downloader": ^15.2.0
     "@xhmikosr/os-filter-obj": ^3.0.0
     bin-version-check: ^5.1.0
-  checksum: 7b634f533bb266c44f50f1bf746d6238bdcf1abd91665e34ca57756f07d0bac74aeb70f41685e23cd71407f4844fb7a13999ed03a8b43199535dd6168d9c4967
+  checksum: 5aa70b9e30a19924c244f046099af808fa6dc8b9799de72628d0b5836c6ddb68fee4c31ed5e6c4733db5ceb878b6a6f0218a42ebc67ece39aadfd81cefe3ba32
   languageName: node
   linkType: hard
 
@@ -5113,70 +5124,80 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xhmikosr/decompress-tarbz2@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@xhmikosr/decompress-tarbz2@npm:8.0.1"
+"@xhmikosr/decompress-tar@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@xhmikosr/decompress-tar@npm:8.1.0"
+  dependencies:
+    file-type: ^20.5.0
+    is-stream: ^2.0.1
+    tar-stream: ^3.1.7
+  checksum: 3cd845a5c6aafeb9a3988e6810513a041202cfe829cdc6a689238279c7ca00aa91f7ec1dc576e2645051b7120c82b7aef5cce5691362d822c1589594648d407f
+  languageName: node
+  linkType: hard
+
+"@xhmikosr/decompress-tarbz2@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@xhmikosr/decompress-tarbz2@npm:8.1.0"
   dependencies:
     "@xhmikosr/decompress-tar": ^8.0.1
-    file-type: ^19.0.0
+    file-type: ^20.5.0
     is-stream: ^2.0.1
     seek-bzip: ^2.0.0
     unbzip2-stream: ^1.4.3
-  checksum: 185ca627b2c584d5aa55eb12ee2a175944a23761b42d3d5511020e88c612c1eb995ba1eae5c40cacd5694ec906ea5c664d104a4f8cfefd526e895bdf506113ee
+  checksum: a8184cc4a597d83b52232d499364533349ffdb2d9f6dea2e9eadd49bd6b28960fc11c7148130476dc1fee6fe89ad3f97cea8c42d94f2d9b78196497b98b6f2d3
   languageName: node
   linkType: hard
 
-"@xhmikosr/decompress-targz@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@xhmikosr/decompress-targz@npm:8.0.1"
+"@xhmikosr/decompress-targz@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@xhmikosr/decompress-targz@npm:8.1.0"
   dependencies:
     "@xhmikosr/decompress-tar": ^8.0.1
-    file-type: ^19.0.0
+    file-type: ^20.5.0
     is-stream: ^2.0.1
-  checksum: 8fd397655d2e7375df7e5a99083ca92709fa72b849cf0807d11d5491acbb3d5a4b2c58fb6753ae698653361f5462546214edb97c3c5696ecc84307df60f3f0d7
+  checksum: 76b899439ac9961f326b7eaab9ba15ab336c2ad040cd61f4972125763e7713411de941f0aefb000193e662c3d394769f61c51257083a2b9d94288d4af9907e33
   languageName: node
   linkType: hard
 
-"@xhmikosr/decompress-unzip@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@xhmikosr/decompress-unzip@npm:7.0.0"
+"@xhmikosr/decompress-unzip@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@xhmikosr/decompress-unzip@npm:7.1.0"
   dependencies:
-    file-type: ^19.0.0
+    file-type: ^20.5.0
     get-stream: ^6.0.1
     yauzl: ^3.1.2
-  checksum: 8b47889d08b02ecf972ca9a3c686a049ac0db88b9a56c8449d2592fab5c2d0ea90f6eddc50bc1d2116ee15754aebec7bba9e886142b16c7a2b25c546385b4162
+  checksum: 68e26666a82170d2f862173312ae0005e58fc7f41831484422f17392a32b8999427c477fc1aaf0a889f3110974f56209da405aa56a4bfeefc1c98e5f5591ccea
   languageName: node
   linkType: hard
 
-"@xhmikosr/decompress@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "@xhmikosr/decompress@npm:10.0.1"
+"@xhmikosr/decompress@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "@xhmikosr/decompress@npm:10.2.0"
   dependencies:
-    "@xhmikosr/decompress-tar": ^8.0.1
-    "@xhmikosr/decompress-tarbz2": ^8.0.1
-    "@xhmikosr/decompress-targz": ^8.0.1
-    "@xhmikosr/decompress-unzip": ^7.0.0
+    "@xhmikosr/decompress-tar": ^8.1.0
+    "@xhmikosr/decompress-tarbz2": ^8.1.0
+    "@xhmikosr/decompress-targz": ^8.1.0
+    "@xhmikosr/decompress-unzip": ^7.1.0
     graceful-fs: ^4.2.11
-    make-dir: ^4.0.0
     strip-dirs: ^3.0.0
-  checksum: 64b915efdde046910c4c20d2a4c2aca12f35b6f3398720dca502aed5b3338b9f7ec438d88e8acf84394c9b0e3db5a6a88bfd0157ee377b3fab5e3269b417aadd
+  checksum: c3866843e59b1c4ab1124237391f811f78317beef2946b7d0c34bbae0acce569ded45c8e72a536c570e4e95f99fda8b6b6b876e29d83393f0e89d87e1410f07e
   languageName: node
   linkType: hard
 
-"@xhmikosr/downloader@npm:^15.0.1":
-  version: 15.0.1
-  resolution: "@xhmikosr/downloader@npm:15.0.1"
+"@xhmikosr/downloader@npm:^15.2.0":
+  version: 15.2.0
+  resolution: "@xhmikosr/downloader@npm:15.2.0"
   dependencies:
-    "@xhmikosr/archive-type": ^7.0.0
-    "@xhmikosr/decompress": ^10.0.1
+    "@xhmikosr/archive-type": ^7.1.0
+    "@xhmikosr/decompress": ^10.2.0
     content-disposition: ^0.5.4
-    defaults: ^3.0.0
+    defaults: ^2.0.2
     ext-name: ^5.0.0
-    file-type: ^19.0.0
+    file-type: ^20.5.0
     filenamify: ^6.0.0
     get-stream: ^6.0.1
     got: ^13.0.0
-  checksum: 15407be257fa9c97f076852a2444d2c2de0f77e64e5263fb553bf7e3bdacec93ee05346cce075dfd2811be34c07ec4d69b0b0c56ebb7f97804f9c53f06355436
+  checksum: 16b1a80aeca8d4a82643c477df2b5616d464da94c0279eeb53f03d4ccacc0c96e107cf8c109b8f9d26d30c4f01af5713e396b986afc8218573c7bdf318eaf399
   languageName: node
   linkType: hard
 
@@ -7452,10 +7473,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"defaults@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "defaults@npm:3.0.0"
-  checksum: 656215c738993a43e436bfbbe8d5aaa3d029e1a3d19fc48c98aba416270eec8d69c194d28d6aaba728366afeadccc923bf2d168613be066fa83a3e232335e65a
+"defaults@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "defaults@npm:2.0.2"
+  checksum: fdce6a8d1ff8fbe6a8c11d8ad4c9118e455c36f96d933f950ea415d7e0add6bde4e8537dc625478e9f040315555f12a6088fe9ed11996d5dfaaa447aeb05d169
   languageName: node
   linkType: hard
 
@@ -7656,7 +7677,7 @@ __metadata:
     eslint-plugin-standard: ^4.1.0
     fancy-log: ^1.3.3
     geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
-    hugo-bin: 0.139.0
+    hugo-bin: 0.147.1
     husky: ^9.1.7
     instantsearch.js: ^4.74.1
     jest: ^25.5.4
@@ -8986,6 +9007,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fflate@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "fflate@npm:0.8.2"
+  checksum: 29470337b85d3831826758e78f370e15cda3169c5cd4477c9b5eea2402261a74b2975bae816afabe1c15d21d98591e0d30a574f7103aa117bff60756fa3035d4
+  languageName: node
+  linkType: hard
+
 "figures@npm:^3.0.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
@@ -9012,6 +9040,18 @@ __metadata:
     token-types: ^6.0.0
     uint8array-extras: ^1.3.0
   checksum: de380c27acc99f9a5ac14cfb98b666fa71ac6356d6057103229acfdc6c6a9f9a676c1655e3ac61f905b84e7ee5fca912465bb14dd0586a3567bb937df236525f
+  languageName: node
+  linkType: hard
+
+"file-type@npm:^20.5.0":
+  version: 20.5.0
+  resolution: "file-type@npm:20.5.0"
+  dependencies:
+    "@tokenizer/inflate": ^0.2.6
+    strtok3: ^10.2.0
+    token-types: ^6.0.0
+    uint8array-extras: ^1.4.0
+  checksum: 6e7ee661e0c189a8c0b3e2f38afed999f3cb9154cd8f3cbdecc526d5734697b0197c92981c319a233c40c5d7b2785b80e6cc3284b8f3803e046e609fbe006a97
   languageName: node
   linkType: hard
 
@@ -10134,15 +10174,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hugo-bin@npm:0.139.0":
-  version: 0.139.0
-  resolution: "hugo-bin@npm:0.139.0"
+"hugo-bin@npm:0.147.1":
+  version: 0.147.1
+  resolution: "hugo-bin@npm:0.147.1"
   dependencies:
-    "@xhmikosr/bin-wrapper": ^13.0.5
+    "@xhmikosr/bin-wrapper": ^13.2.0
     package-config: ^5.0.0
   bin:
     hugo: bin/cli.js
-  checksum: 0afadc46fe5e98178f011d0dcb7b3ff0383bead31c2a44bcd77a772685bab4df915c592690b566b065cd7615388fee820e32e781bcb13c7a6fe5e6d6d9100928
+  checksum: c34d95854b2098b99aa81c456337e57b8e772da1cefb9320eb32b1d3559193b2ed67100fae088b48b5e0bdd8329ddaae382f144232068dabc1bff77fa1003290
   languageName: node
   linkType: hard
 
@@ -12368,15 +12408,6 @@ __metadata:
   dependencies:
     semver: ^6.0.0
   checksum: 484200020ab5a1fdf12f393fe5f385fc8e4378824c940fba1729dcd198ae4ff24867bc7a5646331e50cead8abff5d9270c456314386e629acec6dff4b8016b78
-  languageName: node
-  linkType: hard
-
-"make-dir@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "make-dir@npm:4.0.0"
-  dependencies:
-    semver: ^7.5.3
-  checksum: bf0731a2dd3aab4db6f3de1585cea0b746bb73eb5a02e3d8d72757e376e64e6ada190b1eddcde5b2f24a81b688a9897efd5018737d05e02e2a671dda9cff8a8a
   languageName: node
   linkType: hard
 
@@ -16255,6 +16286,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strtok3@npm:^10.2.0":
+  version: 10.3.4
+  resolution: "strtok3@npm:10.3.4"
+  dependencies:
+    "@tokenizer/token": ^0.3.0
+  checksum: 7faf008cdf7f96c3d066d349116affbd5e5a49da0f03520299a9a04ad55d57b338d368231d469a64d358a86a03c2a0a3b67d61aa124000c941f65093ada9ae98
+  languageName: node
+  linkType: hard
+
 "strtok3@npm:^7.1.0":
   version: 7.1.1
   resolution: "strtok3@npm:7.1.1"
@@ -16957,6 +16997,13 @@ __metadata:
   version: 1.3.0
   resolution: "uint8array-extras@npm:1.3.0"
   checksum: fd413f0a28551541a6ff84d77bc3a592c81d837e43b19ae45b6df121566d26e74cb92be68a1d92daed47d1ef23cd098f957bdc15ff84b0c3b6d8f26198cc3ea4
+  languageName: node
+  linkType: hard
+
+"uint8array-extras@npm:^1.4.0":
+  version: 1.5.0
+  resolution: "uint8array-extras@npm:1.5.0"
+  checksum: e7fb42b57e73a5891fe3d5358ca6ac2e2db8e8666b1621220319e2dd0523965cd35562a8171c3e9b2ff26693cc658dc5bc1256e6f4935e4e4c13070d779bf76e
   languageName: node
   linkType: hard
 
