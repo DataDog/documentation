@@ -1,9 +1,10 @@
 ---
-title: Basic Agent Usage for Source Installation
+title: Source Installation
 description: "Learn how to install, configure, and manage the Datadog Agent when building from source code."
 platform: Source
 aliases:
     - /guides/basic_agent_usage/source/
+    - /agent/basic_agent_usage/source/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -14,7 +15,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "/agent/basic_agent_usage/#agent-architecture"
+- link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
 - link: "/agent/configuration/network#configure-ports"
