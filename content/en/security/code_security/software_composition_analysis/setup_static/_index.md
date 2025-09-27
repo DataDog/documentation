@@ -97,7 +97,7 @@ See the [GitLab source code setup instructions][1] to connect GitLab to Datadog.
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-Before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow the instructions below to complete the setup process.
+Before you can begin installation, request access to the closed Preview using the form above. After being granted access, see the following instructions to complete the setup process.
 
 **Note:** Azure DevOps Server is not supported.
 
