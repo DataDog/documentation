@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
+After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][15], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
 
 Use Multisource Querying to build cost views, understand the total cost of service ownership, and alert on cost changes and trends across the [**Explorer** page][6], [dashboards][7], [notebooks][8], and [cost monitors][9].
 
@@ -30,7 +30,7 @@ You can select multiple providers in the **Provider** field on the [**Explorer**
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Explorer page" style="width:40%;" >}}
 
-Dropdown filters like **Provider** and **Team** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
+Dropdown filters like **Provider** and **Team** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**.
 
 {{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Explorer page" style="width:100%;" >}}
 
@@ -127,3 +127,4 @@ Cloud Cost Management retrieves the billing currency from each cloud provider's 
 [12]: https://focus.finops.org/#obtain
 [13]: /cloud_cost_management/container_cost_allocation
 [14]: /cloud_cost_management/container_cost_allocation/?tab=aws#applying-tags
+[15]: /cloud_cost_management/setup/oracle
