@@ -225,7 +225,6 @@ If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.c
 [4]: https://app.datadoghq.com/apps
 [5]: https://github.com/DataDog/integrations-extras/
 [6]: http://github.com/DataDog/marketplace
-[7]: /developers/integrations/marketplace_offering/#list-an-offering
 [8]: /getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys

@@ -5,14 +5,12 @@ aliases:
 - /guides/agent_checks/
 - /agent/agent_checks
 - /developers/agent_checks/
+- /developers/integrations/marketplace_offering
 description: Learn how to develop and publish a Datadog integration.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: Blog
   text: Expand your monitoring reach with the Datadog Marketplace
-- link: /developers/integrations/marketplace_offering
-  tag: Documentation
-  text: Create an offering on the Datadog Marketplace
 title: Datadog Integrations
 type: documentation
 ---
@@ -150,7 +148,6 @@ Datadog offers GTM support. Please reach out to your partner manager to learn mo
 [1]: http://partners.datadoghq.com
 [2]: https://app.datadoghq.com/integrations
 [3]: https://app.datadoghq.com/marketplace
-[4]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
 [5]: /developers/integrations/agent_integration/
 [6]: /developers/integrations/api_integration/
 [7]: https://docs.datadoghq.com/account_management/users/#add-new-members-and-manage-invites
