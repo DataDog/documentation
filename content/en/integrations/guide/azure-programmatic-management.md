@@ -136,17 +136,12 @@ The protected settings include:
   publisher            = "Datadog.Agent"
   type                 = "DatadogWindowsAgent"
   type_handler_version = "7.0"
-   settings = <<SETTINGS
-  {
-    "site":"<DATADOG_SITE>"
-  }
-  SETTINGS
-   protected_settings = <<PROTECTED_SETTINGS
-  {
-    "api_key": "<DATADOG_API_KEY>"
-  }
-  PROTECTED_SETTINGS
-}
+  settings = jsonencode({
+    site = "<DATADOG_SITE>"
+  })
+  protected_settings = jsonencode({
+    api_key = "<DATADOG_API_KEY>"
+  })
 ```
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -158,16 +153,12 @@ The protected settings include:
   publisher            = "Datadog.Agent"
   type                 = "DatadogLinuxAgent"
   type_handler_version = "7.0"
-   settings = <<SETTINGS
-  {
-    "site":"<DATADOG_SITE>"
-  }
-  SETTINGS
-   protected_settings = <<PROTECTED_SETTINGS
-  {
-    "api_key": "<DATADOG_API_KEY>"
-  }
-  PROTECTED_SETTINGS
+  settings = jsonencode({
+    site = "<DATADOG_SITE>"
+  })
+  protected_settings = jsonencode({
+    api_key = "<DATADOG_API_KEY>"
+  })
 ```
 {{% /tab %}}
 {{< /tabs >}}
