@@ -112,7 +112,7 @@
         "serialize-javascript": "^2.1.2"
     },
     "hugo-bin": {
-        "buildTags": "extended,withdeploy"
+        "buildTags": "extended"
     },
     "packageManager": "yarn@3.6.1"
 }
