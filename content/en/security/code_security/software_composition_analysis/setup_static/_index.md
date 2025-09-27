@@ -63,7 +63,7 @@ Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` C
 
 Configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Make sure the application key has the `code_analysis_read` scope.
 
-You **must** scan your default branch at least once before results appear in Datadog **Code Security**.
+**Note**: You must scan your default branch at least once before results appear in **Code Security**.
 
 ## Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
