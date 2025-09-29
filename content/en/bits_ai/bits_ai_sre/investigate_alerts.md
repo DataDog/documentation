@@ -3,37 +3,39 @@ title: Investigate Alerts
 ---
 
 ## Get started with alert investigations
-You can manually start an investigation when a monitor triggers or configure Bits to automatically investigate each time.
+You can investigate alerts with Bits AI SRE in two ways:
+- **Manually**: Trigger an investigation on an individual monitor alert
+- **Automatically**: Configure monitors so Bits run an investigation whenever they alert
 
 ### Manually start an investigation
 
-You can manually invoke Bits on an individual monitor alert or warn event.
+You can manually invoke Bits on an individual monitor alert or warn event from several entry points:
 
 #### Option 1: Bits AI SRE Monitors List
 1. Go to Bits AI SRE > [**Monitor Management**][5] > **Ready for Bits**.
-1. Click on the **Investigate Recent Alerts** dropdown and select an alert to run Bits on.
+1. Click on the **Investigate Recent Alerts** dropdown and select an alert.
 
 #### Option 2: Monitor Status Page
-1. For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top-right corner.
+1. For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** in the top-right corner.
 1. Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE** on the right.
 
 #### Option 3: Monitor Event Side Panel
-1. On the monitor event side panel, click **Investigate with Bits AI SRE**.
+1. From the monitor event side panel, click **Investigate with Bits AI SRE**.
 
 #### Option 4: Slack
 1. In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-### Enable Bits on monitors for automated investigations
+### Enable automatic investigations
 
-To enable Bits for automated investigations, use one of the following options:
+You can configure monitors so Bits runs automatically whenever they transition to the alert state: 
 
 #### Option 1: Bits AI SRE Monitors list
 1. Go to Bits AI SRE > [**Monitor Management**][5] > **Ready for Bits**.
-1. For a single monitor, toggle **Enable** under **Automatic investigations**. For multiple monitors, select them and click **Edit automatic investigations**.
+1. Toggle **Enable** under **Automatic investigations** for a single monitor, or bulk-edit multiple monitors by selecting a set of monitors, followed by **Edit automatic investigations**.
 
 #### Option 2: Configure for a single monitor
-1. Open a monitor's status page and select **Edit**.
-1. Scroll to **Configure notifications & automations** and toggle **Investigate with Bits AI SRE** on.
+1. Open the monitor's status page and click **Edit**.
+1. Scroll to **Configure notifications & automations** and toggle **Investigate with Bits AI SRE**.
 
 **Note**: Enabling automatic investigations via Datadog API or Terraform is not supported.
 
@@ -60,11 +62,11 @@ Think of the first page you'd navigate to in Datadog if this monitor were to fir
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-<div class="alert alert-info">Note: Certain customers are enabled for all metric, logs, APM, anomaly, forecast, integration, and outlier monitors, without service scope or telemetry link requirements. Support for these monitors is currently in preview. </div>
+<div class="alert alert-info">Note: Some customers are enabled for all metric, logs, APM, anomaly, forecast, integration, and outlier monitors, without service scope or telemetry link requirements. This is currently in preview. </div>
 
 ### Configure where investigation findings are sent
 
-Bits can send investigation findings to several destinations. By default, findings appear in two places:
+By default, Bits' investigation findings appear in two places:
   - **Full investigation findings** are available on the [Bits AI Investigations][2] page.
   - **A summary of the findings** is available on the status page for the monitor.
 
@@ -99,15 +101,12 @@ Help Bits interpret and act on your documentation by following these best practi
 
 ### Configure permissions
 
-There are two RBAC permissions that are relevant to Bits AI SRE. 
+There are two RBAC permissions that apply to Bits AI SRE:
 
 | Name | Description | Default Role |
 | :---- | :---- | :---- |
 | Bits Investigations Read (`bits_investigations_read`) | Read Bits investigations. | Datadog Read Only Role |
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role |
-
-* To view investigations, users need the `Bits Investigations Read` [permission][15]. 
-* To configure automated investigations or start them manually, users need the `Bits Investigations Write` [permission][15]. 
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or have previously modified the default roles, an admin with the User Access Manage permission will need to manually add the permission to the appropriate roles. For details, see [Access Control][11].
 
