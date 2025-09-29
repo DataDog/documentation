@@ -140,7 +140,8 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
     Additional parameters can be found in the [CLI documentation][8].
 
-
+[7]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[8]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
