@@ -310,7 +310,7 @@ Evaluators are functions that measure how well the model or agent performs by co
    results = experiment.run(raise_errors=True)
    ```
 
-7. View your experiment results in Datadog
+7. View your experiment results in Datadog.
    ```
    print(f"View experiment: {experiment.url}")
    ```
