@@ -18,16 +18,16 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-Configuring App and API Protection (AAP) for AWS Lambda involves:
+Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from AAP. Find them on [the Security tab of your Software Catalog][1].
-2. Setting up AAP instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
+2. Setting up App and API Protection instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Prerequisites
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
+  X-Ray tracing, by itself, is not sufficient for App and API Protection and requires APM Tracing to be enabled.
 
 ## Compatibility
 
@@ -59,7 +59,7 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable AAP by updating your `serverless.yml` with the `enableASM` configuration parameter:
+2. Enable App and API Protection by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
@@ -76,8 +76,10 @@ To install and configure the Datadog Serverless Framework plugin:
    ```
    See also the complete list of [plugin parameters][6] to further configure your lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][7].
-
+4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][7].
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[6]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[7]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 

@@ -183,7 +183,8 @@ The [Datadog CDK Construct][10] automatically installs Datadog on your functions
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][11] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][10].
-
+[10]: https://github.com/DataDog/datadog-cdk-constructs
+[11]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -207,15 +208,15 @@ The [Datadog CDK Construct][10] automatically installs Datadog on your functions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
 
-3. Enable AAP by adding the following environment variables on your function deployment:
+3. Enable App and API Protection by adding the following environment variables on your function deployment:
    ```yaml
    environment:
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
    ```
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][7].
-
+4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][7].
+[7]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}
 {{< /tabs >}}
