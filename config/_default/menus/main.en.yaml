@@ -2461,7 +2461,7 @@ menu:
       identifier: incidents_jira
       weight: 901
     - name: Slack
-      url: service_management/incident_management/slack
+      url: service_management/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_slack
       weight: 902
