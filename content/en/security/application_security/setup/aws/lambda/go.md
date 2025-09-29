@@ -204,7 +204,7 @@ The [Datadog CDK Construct][9] automatically installs Datadog on your functions 
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
 
-3. Enable AAP by adding the following environment variables on your function deployment:
+3. Enable App and API Protection by adding the following environment variables on your function deployment:
    ```yaml
    environment:
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
@@ -212,7 +212,7 @@ The [Datadog CDK Construct][9] automatically installs Datadog on your functions 
    ```
 
 4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][6].
-
+[6]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}
 {{< /tabs >}}
