@@ -25,7 +25,7 @@ The panel has three sections:
 * The [runtime data](#runtime-data-for-debugging) for the selected logpoint event (right side)
 
 ### Current session
-The session view shows the current session and its logpoints. Select another session, or start a new one, using the selector. 
+The session view shows the current session and its logpoints. Use the selector to choose another session or start a new one. 
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/session-selector.png" alt="The session selector" style="width:80%;" >}}
 
