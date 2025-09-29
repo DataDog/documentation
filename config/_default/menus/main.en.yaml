@@ -304,66 +304,6 @@ menu:
       parent: essentials_heading
       weight: 50000
       identifier: agent
-    - name: Basic Agent Usage
-      url: agent/basic_agent_usage/
-      parent: agent
-      identifier: basic_agent_usage
-      weight: 1
-    - name: AIX
-      identifier: basic_agent_usage_aix
-      url: agent/basic_agent_usage/aix/
-      weight: 101
-      parent: basic_agent_usage
-    - name: Linux
-      identifier: basic_agent_usage_linux
-      url: agent/basic_agent_usage/linux/
-      weight: 102
-      parent: basic_agent_usage
-    - name: Ansible
-      identifier: basic_agent_usage_ansible
-      url: agent/basic_agent_usage/ansible/
-      parent: basic_agent_usage
-      weight: 104
-    - name: Chef
-      identifier: basic_agent_usage_chef
-      url: agent/basic_agent_usage/chef/
-      weight: 106
-      parent: basic_agent_usage
-    - name: Heroku
-      identifier: basic_agent_usage_heroku
-      url: agent/basic_agent_usage/heroku/
-      weight: 109
-      parent: basic_agent_usage
-    - name: Mac OS X
-      identifier: basic_agent_usage_osx
-      url: agent/basic_agent_usage/osx/
-      weight: 110
-      parent: basic_agent_usage
-    - name: Puppet
-      identifier: basic_agent_usage_puppet
-      url: agent/basic_agent_usage/puppet/
-      weight: 112
-      parent: basic_agent_usage
-    - name: SaltStack
-      identifier: basic_agent_usage_saltstack
-      url: agent/basic_agent_usage/saltstack/
-      weight: 115
-      parent: basic_agent_usage
-    - name: SCCM
-      identifier: basic_agent_usage_sccm
-      url: agent/basic_agent_usage/sccm/
-      weight: 116
-      parent: basic_agent_usage
-    - name: Windows
-      identifier: basic_agent_usage_windows
-      url: agent/basic_agent_usage/windows/
-      weight: 119
-      parent: basic_agent_usage
-    - name: From Source
-      identifier: basic_agent_usage_source
-      url: agent/basic_agent_usage/source/
-      weight: 120
-      parent: basic_agent_usage
     - name: Architecture
       url: agent/architecture/
       parent: agent
@@ -379,6 +319,61 @@ menu:
       parent: agent
       identifier: agent_supported_platforms
       weight: 4
+    - name: AIX
+      identifier: basic_agent_usage_aix
+      url: agent/supported_platforms/aix/
+      weight: 401
+      parent: agent_supported_platforms
+    - name: Linux
+      identifier: basic_agent_usage_linux
+      url: agent/supported_platforms/linux/
+      weight: 402
+      parent: agent_supported_platforms
+    - name: Ansible
+      identifier: basic_agent_usage_ansible
+      url: agent/supported_platforms/ansible/
+      parent: agent_supported_platforms
+      weight: 403
+    - name: Chef
+      identifier: basic_agent_usage_chef
+      url: agent/supported_platforms/chef/
+      weight: 404
+      parent: agent_supported_platforms
+    - name: Heroku
+      identifier: basic_agent_usage_heroku
+      url: agent/supported_platforms/heroku/
+      weight: 405
+      parent: agent_supported_platforms
+    - name: MacOS 
+      identifier: basic_agent_usage_osx
+      url: agent/supported_platforms/osx/
+      weight: 406
+      parent: agent_supported_platforms
+    - name: Puppet
+      identifier: basic_agent_usage_puppet
+      url: agent/supported_platforms/puppet/
+      weight: 407
+      parent: agent_supported_platforms
+    - name: SaltStack
+      identifier: basic_agent_usage_saltstack
+      url: agent/supported_platforms/saltstack/
+      weight: 408
+      parent: agent_supported_platforms
+    - name: SCCM
+      identifier: basic_agent_usage_sccm
+      url: agent/supported_platforms/sccm/
+      weight: 409
+      parent: agent_supported_platforms
+    - name: Windows
+      identifier: basic_agent_usage_windows
+      url: agent/supported_platforms/windows/
+      weight: 410
+      parent: agent_supported_platforms
+    - name: From Source
+      identifier: basic_agent_usage_source
+      url: agent/supported_platforms/source/
+      weight: 411
+      parent: agent_supported_platforms
     - name: Log Collection
       url: agent/logs/
       identifier: agent_logs
@@ -3608,11 +3603,16 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
       weight: 103
+    - name: Oracle
+      url: cloud_cost_management/setup/oracle/
+      parent: cloud_cost_setup
+      identifier: cloud_cost_oracle
+      weight: 104
     - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 104
+      weight: 105
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations

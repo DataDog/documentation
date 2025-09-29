@@ -37,6 +37,12 @@ Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding
 
 See how to [archive your logs with Observability Pipelines][4] if you want to route your logs to a storage-optimized archive directly from your environment.
 
+The following metrics report on logs that have been archived successfully, including logs that were sent successfully after retries.
+
+- datadog.archives.logs.bytes
+- datadog.archives.logs.count
+
+
 ## Configure an archive
 
 ### Set up an integration
@@ -309,15 +315,15 @@ To set or check your S3 bucket's encryption configuration:
 {{% /tab %}}
 {{% tab "Amazon S3 managed keys" %}}
 
-This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
+This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 {{% /tab %}}
 {{% tab "AWS Key Management Service" %}}
 
-This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket. 
+This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket.
 
-Ensure that you have completed the following steps to create a valid CMK and CMK policy. You will need to provide the CMK ARN to successfully configure this encryption type. 
+Ensure that you have completed the following steps to create a valid CMK and CMK policy. Then, provide the CMK ARN to successfully configure this encryption type.
 
 1. Create your CMK.
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
