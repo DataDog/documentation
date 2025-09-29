@@ -12,7 +12,7 @@ You can investigate alerts with Bits AI SRE in two ways:
 You can manually invoke Bits on an individual monitor alert or warn event from several entry points:
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to **[Bits AI** > **Monitors** > **Ready for Bits**][5].
+1. Go to [**Bits AI SRE** > **Monitors** > **Ready for Bits**][5].
 1. Click the **Investigate Recent Alerts** dropdown and select an alert.
 
 #### Option 2: Monitor Status page
@@ -30,7 +30,7 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 You can configure monitors so Bits runs automatically whenever they transition to the alert state: 
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to **[Bits AI** > **Monitors** > **Ready for Bits**][5].
+1. Go to [**Bits AI SRE** > **Monitors** > **Ready for Bits**][5].
 1. Toggle **Enable** under **Automatic investigations** for a single monitor, or bulk-edit multiple monitors by selecting a set of monitors, followed by **Edit automatic investigations**.
 
 #### Option 2: Configure for a single monitor
