@@ -31,8 +31,8 @@ Install the tracing library for your language:
 Java supports adding instrumentation code through the use of a command line argument, `javaagent`.
 
 1. Download the [latest version of Datadog's Java tracing library][101].
-1. Place the tracing library inside your project. It must be included with your deployment. 
-   If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`. 
+1. Place the tracing library inside your project. It must be included with your deployment.
+   If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`.
 1. Set the environment variable `JAVA_OPTS` with `--javaagent:/home/site/lib/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/lib/dd-java-agent.jar`.
 
 Instrumentation starts when the application is launched.
@@ -64,7 +64,7 @@ dotnet add package Datadog.Trace.Bundle --version 3.21.0
 
 [102]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
-{{% /tab %}} 
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following script to install Datadog's PHP tracing library:
@@ -90,7 +90,7 @@ fi
 service nginx reload
 ```
 
-This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the NGINX service. 
+This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the NGINX service.
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -237,6 +237,10 @@ Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFile
 : **Value**: false <br>
 When `true`, log collection is automatically configured for the additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 
+`DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`
+: **Value**: An optional file descriptor used for more precise log tailing.<br>
+Reccommended for scenarios with high log rotation. For example, setting `_default_docker` will configure the log tailer to ignore rotated files and focus only on Azure's active log file.<br>
+
 <div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
 
 `WEBSITES_ENABLE_APP_SERVICE_STORAGE`
@@ -244,7 +248,7 @@ When `true`, log collection is automatically configured for the additional file 
 Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 
-    
+
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 
 For .NET applications, the following environment variables are **required**. See the `Datadog.Tracer.Bundle` [Nuget package README file][1] for more details.
@@ -289,7 +293,7 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 
 3. **Restart your application**.
 
-   If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved. 
+   If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved.
 
 [301]: https://app.datadoghq.com/organization-settings/api-keys
 [302]: /getting_started/site/
@@ -327,7 +331,7 @@ If you are not receiving traces or custom metric data as expected, enable agent 
 Be sure to enable **App Service logs** to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
- 
+
 Share the content of the **Log stream** with [Datadog Support][9].
 
 ## Further reading
