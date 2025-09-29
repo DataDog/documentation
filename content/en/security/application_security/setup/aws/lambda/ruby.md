@@ -47,7 +47,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your lambda with AAP.
+The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your Lambda with App and API Protection.
 
 To install and configure the Datadog Serverless Framework plugin:
 
