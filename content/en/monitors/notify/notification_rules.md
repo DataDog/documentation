@@ -26,7 +26,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 1. Navigate to [**Monitors > Settings > Notification Rules**][1].
 1. Click **New Rule**.
 1. Add specific tags and values to set the scope for the rule. Notification rules use an AND logic for multiple tags. Both monitor tags and group tags are considered when matching the scope. For an example of this, see [Routing logic](#routing-logic).
-1. Add up to 50 notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
+1. Define your routing conditions by specifying "when" and "who" should be notified. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2]. There is a limit of 50 notification recipients per rule.
 1. Add a name for the rule.
 1. Click **Create Rule**.
 
