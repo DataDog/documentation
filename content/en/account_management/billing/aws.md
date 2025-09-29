@@ -52,19 +52,19 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 
 You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
 
-## How to determine If a host is being monitored by the Agent or the AWS integration
+## Host Monitoring: Agent vs. AWS
 
 In the Infrastructure Host List:
 
 - **Monitored by AWS Integration**
 
-  If a host displays only the AWS logo, or if its metrics are limited to the **aws.*** namespace, it indicates that the host is monitored exclusively through the AWS integration.
+  If a host displays only the AWS logo, or if its metrics are limited to the **aws.\*** namespace, it indicates that the host is monitored exclusively through the AWS integration.
 
   {{< img src="account_management/billing/infra-aws.png" alt="host monitored by AWS integration" >}}
 
 - **Monitored by the Datadog Agent**
 
-  If a host displays the Datadog Agent logo but not the AWS logo, or if its metrics are collected from the Datadog Agent (such as **datadog.***, **system.***, etc.), it indicates that the host is being monitored by the Datadog Agent.
+  If a host displays the Datadog Agent logo but not the AWS logo, or if its metrics are collected from the Datadog Agent (such as **datadog.\***, **system.\***, etc.), it indicates that the host is being monitored by the Datadog Agent.
 
   {{< img src="account_management/billing/infra-agent.png" alt="host monitored by Datadog agent" >}}
 
