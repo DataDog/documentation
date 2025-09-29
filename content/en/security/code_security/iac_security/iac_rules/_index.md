@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">This product is not supported for your selected <a href ="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 [Infrastructure as Code (IaC) Security][1] identifies misconfigurations and security risks in infrastructure-as-code files before deployment, helping ensure that cloud environments remain secure and compliant.
