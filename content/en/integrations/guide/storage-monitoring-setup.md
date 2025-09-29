@@ -40,7 +40,9 @@ Select your cloud storage service to access setup instructions.
 {{< tabs >}}
 {{% tab "Recommended: Set up Inventory with Datadog" %}}
 
-The fastest way to configure Storage Monitoring is through the [Enable Buckets][501] page, where you can enable S3 inventory and configure monitoring for multiple buckets at once. If you prefer to set up S3 inventory manually or through Terraform, see [Existing S3 Inventory][506] or Terraform instructions.
+The fastest way to configure Storage Monitoring is through the [Enable Buckets][501] page, where you can enable S3 inventory and configure monitoring for multiple buckets at once.
+
+If you prefer to set up S3 inventory manually or through Terraform, see [Existing S3 Inventory][506] or Terraform instructions.
 
 Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Buckets][501].
 
