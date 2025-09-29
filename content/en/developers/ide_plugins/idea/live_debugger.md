@@ -48,7 +48,7 @@ The **Stacktrace** tab shows the runtime path execution leading up to the logpoi
 ## Source editor
 In the source editor, an icon is shown in the gutter for any line that has a logpoint defined in the current session:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:80%;" >}}
 
 Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint.
 
