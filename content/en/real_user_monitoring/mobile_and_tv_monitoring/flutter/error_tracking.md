@@ -5,7 +5,7 @@ description: "Enable comprehensive crash reporting and error tracking for Flutte
 
 ## Overview
 
-Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. 
+Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -32,7 +32,7 @@ final configuration = DdSdkConfiguration(
 DatadogSdk.instance.initialize(configuration);
 ```
 
-If your application suffers a fatal crash, once your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data. 
+If your application suffers a fatal crash, once your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
 
 
 ## Upload symbol files to Datadog
@@ -54,7 +54,7 @@ First, install the `datadog-ci` tool from the instructions above and create a `d
 
 Because this file contains your API key, it should not be checked in to version control.
 
-Alternately, you can set the `DATADOG_API_KEY` and `DATADOG_SITE` environment variables. 
+Alternately, you can set the `DATADOG_API_KEY` and `DATADOG_SITE` environment variables.
 
 Then, you can use the following command to upload all the necessary files for symbolication and deobfuscation of your crash reports:
 ```sh
@@ -89,7 +89,7 @@ Note that Datadog uses tags for versions which do not allow `+`. All tooling aut
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
+[6]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/flutter-symbols
 [7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [8]: https://docs.flutter.dev/deployment/flavors
 [9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html

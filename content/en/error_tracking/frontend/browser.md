@@ -4,7 +4,7 @@ aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 - /error_tracking/standalone_frontend/browser
 further_reading:
-- link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
+- link: "https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps"
   tag: "Source Code"
   text: "datadog-ci Source code"
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
@@ -175,7 +175,7 @@ In addition to sending source maps, the [Datadog CLI][11] reports Git informatio
 
 Error Tracking can use this information to correlate errors with your [source code][15], allowing you to pivot from any stack trace frame to the related line of code in [GitHub][12], [GitLab][13] and [Bitbucket][14].
 
-<div class="alert alert-info">Linking from stack frames to source code is supported in the <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> version <code>0.12.0</code> and later.</div>
+<div class="alert alert-info">Linking from stack frames to source code is supported in the <a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> version <code>0.12.0</code> and later.</div>
 
 For more information, see the [Datadog Source Code Integration][15].
 
@@ -224,7 +224,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [8]: /real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [10]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
-[11]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
+[11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [12]: https://github.com
 [13]: https://about.gitlab.com
 [14]: https://bitbucket.org/product
