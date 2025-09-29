@@ -50,7 +50,7 @@ LLMObs.enable(
   
 ## Projects
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
-You can create a project manually in the UI, via API or via SDK by specifying a project name that does not already exist in `LLMObs.enable`.
+You can create a project manually in the Datadog console, API, and SDK by specifying a project name that does not already exist in `LLMObs.enable`.
 
 ```python
 LLMObs.enable(
