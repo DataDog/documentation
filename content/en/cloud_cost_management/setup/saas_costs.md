@@ -18,6 +18,9 @@ further_reading:
 - link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
+- link: "/cloud_cost_management/setup/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 - link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
@@ -283,7 +286,7 @@ You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
 {{< tabs >}}
-{{% tab "Snowflake" %}} 
+{{% tab "Snowflake" %}}
 
 <table>
   <thead>

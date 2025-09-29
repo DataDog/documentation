@@ -310,31 +310,45 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 #### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have several options: using a plugin if your application is bundled, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-##### Option 1: Docker
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Docker
 
 {{% sci-docker %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have several options depending on your serverless application's setup.
 
-##### Option 1: Datadog Tooling
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Datadog Tooling
 
 {{% sci-dd-serverless %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+For host-based environments, you have two options based on your build and deploy configuration.
+
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
