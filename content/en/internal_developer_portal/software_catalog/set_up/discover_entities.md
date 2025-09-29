@@ -21,7 +21,7 @@ Software Catalog automatically discovers entities from Datadog Application Perfo
 
 ## Automatic discovery with APM, USM, and RUM 
 
-Datadog Software Catalog is pre-populated with entries detected through [APM][1], eBPF-based autodiscovery with [Universal Service Monitoring][4], and RUM applications.
+Datadog Software Catalog is pre-populated with entries detected through [APM][1], eBPF-based autodiscovery with [Universal Service Monitoring][2], and RUM applications.
 
 All automatically detected entities appear in the Component Selector within Software Catalog.
 

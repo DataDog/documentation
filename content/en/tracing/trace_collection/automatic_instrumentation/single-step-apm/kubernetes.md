@@ -559,6 +559,22 @@ To use SSI with a private container registry:
 
 For more details on changing your container registry, see [Changing Your Container Registry][33].
 
+### Using a Container Network Interface on EKS
+
+When using a CNI like Calico, the control plane nodes are not able to initiate network connections to Datadog's Admission Controller and report an "Address is not allowed" error.
+To use Single Step instrumentation, modify Datadog's Cluster Agent with the `useHostNetwork: true` parameter.
+
+```
+datadog:
+  ...
+
+clusterAgent:
+  useHostNetwork: true
+
+  admissionController:
+    ...
+```
+
 ## Remove Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:

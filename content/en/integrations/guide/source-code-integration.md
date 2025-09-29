@@ -117,7 +117,7 @@ Successfully synced git DB in 3.579 seconds.
 ✅ Uploaded in 5.207 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
