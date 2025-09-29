@@ -14,7 +14,17 @@ further_reading:
 
 ## Overview
 
-Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used. It detects potential issues before they impact operations, and helps you make data-driven decisions about storage optimization. Use these insights to track storage growth, investigate access patterns, and optimize costs.
+Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used. With Storage Monitoring you can:
+- Pinpoint exactly where spend is coming from in your bucket – Break storage cost to the prefix so you know exactly which workloads, teams, or environments drive growth.
+- Identify cold data – Spot buckets with rarely accessed prefixes without the need for spreadsheets or custom scripts and move cold data to lower-cost tiers.
+- Tune retention and lifecycle rules with data – Read/write and age metrics show when objects were last used, making it easy to shift unused prefixes to Glacier, Intelligent-Tiering, and other low-cost classes.
+- Monitor data freshness – Age metrics show how recently each prefix was updated, making it easy to confirm that backups and other time-sensitive data are landing in prefixes when they should.
+
+For Storage Monitoring, the following are the required data:
+1. Amazon S3 Integration & Resource Collection
+2. S3 Inventory configuration for every bucket you want to monitor
+3. S3 Access Logs for access related metrics
+
 
 This guide explains how to configure Storage Monitoring in Datadog for your Amazon S3 buckets, Google Cloud Storage buckets, and Azure storage accounts. Access your Storage Monitoring data by navigating to **Infrastructure > Storage Monitoring**.
 
@@ -25,28 +35,28 @@ Select your cloud storage service to access setup instructions.
 ## Setup for Amazon S3
 
 {{< tabs >}}
-{{% tab "Recommended: Storage Monitoring UI" %}}
+{{% tab "Recommended: Set up Inventory with Datadog" %}}
 
-The fastest way to configure Storage Monitoring is through the [Add Buckets][501] page in Datadog, where you can set up multiple S3 buckets at the same time.
+The fastest way to configure Storage Monitoring is through the [Enable Buckets][501] page, where you can enable S3 inventory and set up Storage Monitoring for multiple buckets at the same time. If you want to instead set up S3 inventory by yourself, see instructions in [Existing S3 Inventory][506].
 
 Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Buckets][501].
 
-{{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/add-bucket.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.**
 2. **Enable S3 Inventory to get prefix level monitoring.**
 
-      **Note:**
+     <div class="alert alert-info"> **Note:**
       - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
-      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account)
+      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account) </div>
 
-   1. **Allow Datadog to create inventories and read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
+
+   1. Add the following permissions to your [Datadog IAM policy][] in order to allow Datadog to enable S3 inventory on your source buckets and read the generated inventories from the destination buckets:
       - `s3:PutInventoryConfiguration`
-      - `s3:GetObject`
-      - `s3:ListBucket`
+      - `s3:GetObject` (scoped to the destination bucket(s))
+      - `s3:ListBucket` (scoped to the destination bucket(s))
 
-      Scope these permissions to only the destination buckets containing your S3 Inventory files.
-
+    Example IAM policy:
       ```json
             {
               "Version": "2012-10-17",
@@ -56,7 +66,7 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
                   "Sid": "AllowDatadogToEnableInventory",
                   "Effect": "Allow",
                   "Action": [
-                    "s3:PutInventoryConfiguration" // Used for onboarding through the UI
+                    "s3:PutInventoryConfiguration" // If you want Datadog to enable S3 inventory through Datadog UI
                   ],
                   "Resource": "arn:aws:s3:::storage-monitoring-source-bucket" // source bucket(s)
                 },
@@ -76,15 +86,13 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
             }
       ```
 
-   2. **Allow source buckets to write to destination buckets.** The destination buckets must include a policy that allows the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details.
+    2. Assign destination bucket(s) per region or per account to store S3 Inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
 
-   3. Select the S3 buckets you want to monitor with Storage Monitoring. You can select buckets from multiple AWS accounts at once.
+         <div class="alert alert-info"> Note: The destination buckets must allow the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details. </div>
 
     {{< img src="integrations/guide/storage_monitoring/step-2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-   4. Assign one destination bucket per region to store S3 Inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
-
-   5. Complete the inventory configuration.
+    3. Complete the inventory configuration. The first S3 inventory report can take up to 24 hrs to be generated.
 
 3. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
 
@@ -115,11 +123,13 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
 
 4. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
 
-[501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
+[501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
 [502]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy
 [503]: https://docs.datadoghq.com/logs/guide/forwarder/?tab=cloudformation
 [504]: https://app.datadoghq.com/integrations/amazon-web-services
 [505]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[506]: https://docs.datadoghq.com/integrations/guide/storage-monitoring-setup/?tab=existings3inventory#setup-for-amazon-s3
+[507]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
@@ -197,7 +207,7 @@ After completing the CloudFormation setup, fill out the [post-setup form][105] w
 
 {{% tab "Terraform" %}}
 
-You can use the Terraform [aws_s3_bucket_inventory][403] resource to set up Storage Monitoring.
+You can use the Terraform [aws_s3_bucket_inventory][403] resource to enable S3 Inventory.
 
 The following example shows how to enable daily inventory on an S3 bucket for Datadog monitoring. To use this example:
 
@@ -234,7 +244,7 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
   optional_fields = [
     "Size",
     "StorageClass",
-    "LastModifiedDate"
+    "LastModifiedDate", "ETag", "IsMultipartUploaded", "ReplicationStatus", EncryptionStatus | ObjectLockRetainUntilDate | ObjectLockMode | ObjectLockLegalHoldStatus | IntelligentTieringAccessTier | BucketKeyStatus | ChecksumAlgorithm | ObjectAccessControlList | ObjectOwner
   ]
 }
 ```
@@ -242,11 +252,11 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 **Notes**:
 
    - The destination bucket can be your source bucket, but for security and logical separation, many organizations use a separate bucket.
-   - The `optional_fields` section is recommended for Datadog prefix metrics.
+   - The `optional_fields` section is required for Datadog prefix metrics & cost optimization insights like duplicate objects.
 
-### Post-setup steps
+### Finish setting up S3 buckets for Storage Monitoring
 
-Once the inventory configuration is set up and your inventory files begin appearing in the destination bucket, fill out [this form][401] to provide your S3 configuration details. This allows Datadog to begin generating prefix metrics for your storage.
+Once the inventory configuration is set up and your inventory files begin appearing in the destination bucket, fill out [this form][401] to provide your S3 configuration details. This allows Datadog to read the S3 inventory reports and start generating prefix metrics for your storage.
 
 ### Use modules for complex setups
 
@@ -274,9 +284,9 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 ### Step 2: Configure the bucket and integration role policies
 
-1. Follow the steps in the [Amazon S3 user guide][202] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets.
+1. Ensure the Datadog AWS integration role has `s3:GetObject` and `s3:ListBucket` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
-2. Ensure the Datadog AWS integration role has `s3:GetObject` and `s3:ListObjects` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
+2. Follow the steps in the [Amazon S3 user guide][202] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets.
 
 ### Step 3: Configure inventory generation
 
@@ -294,10 +304,7 @@ For each bucket you want to monitor:
   - **Output format**: CSV
   - **Status**: Enabled
   - **Server-side encryption**: Don't specify an encryption key
-  - Select the following **Additional metadata fields**:
-      1. Size
-      2. Last Modified
-      3. Storage Class
+  - Select all the available **Additional metadata fields**
 
 **Note**: Review [Amazon S3 pricing][204] for costs related to inventory generation.
 
