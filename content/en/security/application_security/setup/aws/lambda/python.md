@@ -24,11 +24,6 @@ Configuring App and API Protection for AWS Lambda involves:
 2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][2], [AWS CDK][3], [Datadog Serverless Framework plugin][4], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
-## Prerequisites
-
-- [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for App and API Protection and requires APM Tracing to be enabled.
-
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
@@ -274,4 +269,3 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 [3]: https://github.com/DataDog/datadog-cdk-constructs
 [4]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/

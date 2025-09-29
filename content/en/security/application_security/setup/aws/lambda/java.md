@@ -24,17 +24,6 @@ Configuring App and API Protection for AWS Lambda involves:
 2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][9], [AWS CDK][10], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
-## Prerequisites
-
-- [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for App and API Protection and requires APM Tracing to be enabled.
-
-## Compatibility
-
-**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][3] to block IPs in your [WAF][4].
-
-To fully instrument your Java Lambda functions with distributed tracing, use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), or Java 17 (`java17`) runtimes with at least 1024MB of memory. If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) together with `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][5] before enabling App and API Protection.
-
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
@@ -228,13 +217,9 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 [1]: https://app.datadoghq.com/services?query=type%3Afunction%20&env=prod&groupBy=&hostGroup=%2A&lens=Security&sort=-attackExposure&view=list
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[3]: /actions/workflows/
-[4]: /security/application_security/waf-integration/
-[5]: /serverless/guide/upgrade_java_instrumentation/
 [6]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
 [7]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 [8]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [9]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 [10]: https://github.com/DataDog/datadog-cdk-constructs
 [11]: https://app.datadoghq.com/organization-settings/api-keys
-[apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
