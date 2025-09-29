@@ -1,5 +1,6 @@
 ---
 title: Graphing with JSON
+description: Create and configure dashboard widgets programmatically using JSON syntax with the Datadog API.
 aliases:
 - /graphingjson/
 - /graphing/miscellaneous/graphingjson

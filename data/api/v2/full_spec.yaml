@@ -2180,6 +2180,7 @@ components:
           description: Whether or not to automatically include new member accounts
             by default in your billing dataset.
           example: true
+          nullable: true
           type: boolean
         included_accounts:
           description: The AWS account IDs to be included in your billing dataset.
@@ -3985,6 +3986,634 @@ components:
       - CREATED_AT_DESC
       - UPDATED_AT_DESC
       - USER_NAME_DESC
+    ArbitraryCostUpsertRequest:
+      description: The definition of `ArbitraryCostUpsertRequest` object.
+      example:
+        data:
+          attributes:
+            costs_to_allocate:
+            - condition: is
+              tag: account_id
+              value: '123456789'
+              values: null
+            - condition: in
+              tag: environment
+              value: ''
+              values:
+              - production
+              - staging
+            enabled: true
+            order_id: 1
+            provider:
+            - aws
+            - gcp
+            rule_name: example-arbitrary-cost-rule
+            strategy:
+              allocated_by_tag_keys:
+              - team
+              - environment
+              based_on_costs:
+              - condition: is
+                tag: service
+                value: web-api
+                values: null
+              - condition: not in
+                tag: team
+                value: ''
+                values:
+                - legacy
+                - deprecated
+              granularity: daily
+              method: proportional
+            type: shared
+          type: upsert_arbitrary_rule
+      properties:
+        data:
+          $ref: '#/components/schemas/ArbitraryCostUpsertRequestData'
+      type: object
+    ArbitraryCostUpsertRequestData:
+      description: The definition of `ArbitraryCostUpsertRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributes'
+        id:
+          description: The `ArbitraryCostUpsertRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataType'
+      required:
+      - type
+      type: object
+    ArbitraryCostUpsertRequestDataAttributes:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributes` object.
+      properties:
+        costs_to_allocate:
+          description: The `attributes` `costs_to_allocate`.
+          items:
+            $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesCostsToAllocateItems'
+          type: array
+        enabled:
+          description: The `attributes` `enabled`.
+          type: boolean
+        order_id:
+          description: The `attributes` `order_id`.
+          format: int64
+          type: integer
+        provider:
+          description: The `attributes` `provider`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        rejected:
+          description: The `attributes` `rejected`.
+          type: boolean
+        rule_name:
+          description: The `attributes` `rule_name`.
+          example: ''
+          type: string
+        strategy:
+          $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesStrategy'
+        type:
+          description: The `attributes` `type`.
+          example: ''
+          type: string
+      required:
+      - costs_to_allocate
+      - provider
+      - rule_name
+      - strategy
+      - type
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesCostsToAllocateItems:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesCostsToAllocateItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesStrategy:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategy`
+        object.
+      properties:
+        allocated_by:
+          description: The `strategy` `allocated_by`.
+          items:
+            $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItems'
+          type: array
+        allocated_by_filters:
+          description: The `strategy` `allocated_by_filters`.
+          items:
+            $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByFiltersItems'
+          type: array
+        allocated_by_tag_keys:
+          description: The `strategy` `allocated_by_tag_keys`.
+          items:
+            type: string
+          type: array
+        based_on_costs:
+          description: The `strategy` `based_on_costs`.
+          items:
+            $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesStrategyBasedOnCostsItems'
+          type: array
+        based_on_timeseries:
+          additionalProperties: {}
+          description: The `strategy` `based_on_timeseries`.
+          type: object
+        evaluate_grouped_by_filters:
+          description: The `strategy` `evaluate_grouped_by_filters`.
+          items:
+            $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesStrategyEvaluateGroupedByFiltersItems'
+          type: array
+        evaluate_grouped_by_tag_keys:
+          description: The `strategy` `evaluate_grouped_by_tag_keys`.
+          items:
+            type: string
+          type: array
+        granularity:
+          description: The `strategy` `granularity`.
+          type: string
+        method:
+          description: The `strategy` `method`.
+          example: ''
+          type: string
+      required:
+      - method
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByFiltersItems:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByFiltersItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItems:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItems`
+        object.
+      properties:
+        allocated_tags:
+          description: The `items` `allocated_tags`.
+          items:
+            $ref: '#/components/schemas/ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItemsAllocatedTagsItems'
+          type: array
+        percentage:
+          description: The `items` `percentage`. The numeric value format should be
+            a 32bit float value.
+          example: 0.0
+          format: double
+          type: number
+      required:
+      - allocated_tags
+      - percentage
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItemsAllocatedTagsItems:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItemsAllocatedTagsItems`
+        object.
+      properties:
+        key:
+          description: The `items` `key`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          example: ''
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesStrategyBasedOnCostsItems:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyBasedOnCostsItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryCostUpsertRequestDataAttributesStrategyEvaluateGroupedByFiltersItems:
+      description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyEvaluateGroupedByFiltersItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryCostUpsertRequestDataType:
+      default: upsert_arbitrary_rule
+      description: Upsert arbitrary rule resource type.
+      enum:
+      - upsert_arbitrary_rule
+      example: upsert_arbitrary_rule
+      type: string
+      x-enum-varnames:
+      - UPSERT_ARBITRARY_RULE
+    ArbitraryRuleResponse:
+      description: The definition of `ArbitraryRuleResponse` object.
+      example:
+        data:
+          attributes:
+            costs_to_allocate:
+            - condition: is
+              tag: account_id
+              value: '123456789'
+              values: null
+            - condition: in
+              tag: environment
+              value: ''
+              values:
+              - production
+              - staging
+            created: '2023-01-01T12:00:00Z'
+            enabled: true
+            last_modified_user_uuid: user-123-uuid
+            order_id: 1
+            provider:
+            - aws
+            - gcp
+            rule_name: Example Arbitrary Cost Rule
+            strategy:
+              allocated_by_tag_keys:
+              - team
+              - environment
+              based_on_costs:
+              - condition: is
+                tag: service
+                value: web-api
+                values: null
+              - condition: not in
+                tag: team
+                value: ''
+                values:
+                - legacy
+                - deprecated
+              granularity: daily
+              method: proportional
+            type: shared
+            updated: '2023-01-01T12:00:00Z'
+            version: 1
+          id: '123'
+          type: arbitrary_rule
+      properties:
+        data:
+          $ref: '#/components/schemas/ArbitraryRuleResponseData'
+      type: object
+    ArbitraryRuleResponseArray:
+      description: The definition of `ArbitraryRuleResponseArray` object.
+      properties:
+        data:
+          description: The `ArbitraryRuleResponseArray` `data`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    ArbitraryRuleResponseData:
+      description: The definition of `ArbitraryRuleResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributes'
+        id:
+          description: The `ArbitraryRuleResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ArbitraryRuleResponseDataType'
+      required:
+      - type
+      type: object
+    ArbitraryRuleResponseDataAttributes:
+      description: The definition of `ArbitraryRuleResponseDataAttributes` object.
+      properties:
+        costs_to_allocate:
+          description: The `attributes` `costs_to_allocate`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesCostsToAllocateItems'
+          type: array
+        created:
+          description: The `attributes` `created`.
+          example: ''
+          format: date-time
+          type: string
+        enabled:
+          description: The `attributes` `enabled`.
+          example: false
+          type: boolean
+        last_modified_user_uuid:
+          description: The `attributes` `last_modified_user_uuid`.
+          example: ''
+          type: string
+        order_id:
+          description: The `attributes` `order_id`.
+          example: 0
+          format: int64
+          type: integer
+        provider:
+          description: The `attributes` `provider`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        rejected:
+          description: The `attributes` `rejected`.
+          type: boolean
+        rule_name:
+          description: The `attributes` `rule_name`.
+          example: ''
+          type: string
+        strategy:
+          $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesStrategy'
+        type:
+          description: The `attributes` `type`.
+          example: ''
+          type: string
+        updated:
+          description: The `attributes` `updated`.
+          example: ''
+          format: date-time
+          type: string
+        version:
+          description: The `attributes` `version`.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - costs_to_allocate
+      - created
+      - enabled
+      - last_modified_user_uuid
+      - order_id
+      - provider
+      - rule_name
+      - strategy
+      - type
+      - updated
+      - version
+      type: object
+    ArbitraryRuleResponseDataAttributesCostsToAllocateItems:
+      description: The definition of `ArbitraryRuleResponseDataAttributesCostsToAllocateItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryRuleResponseDataAttributesStrategy:
+      description: The definition of `ArbitraryRuleResponseDataAttributesStrategy`
+        object.
+      properties:
+        allocated_by:
+          description: The `strategy` `allocated_by`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesStrategyAllocatedByItems'
+          type: array
+        allocated_by_filters:
+          description: The `strategy` `allocated_by_filters`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesStrategyAllocatedByFiltersItems'
+          type: array
+        allocated_by_tag_keys:
+          description: The `strategy` `allocated_by_tag_keys`.
+          items:
+            type: string
+          type: array
+        based_on_costs:
+          description: The `strategy` `based_on_costs`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesStrategyBasedOnCostsItems'
+          type: array
+        based_on_timeseries:
+          additionalProperties: {}
+          description: The rule `strategy` `based_on_timeseries`.
+          type: object
+        evaluate_grouped_by_filters:
+          description: The `strategy` `evaluate_grouped_by_filters`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesStrategyEvaluateGroupedByFiltersItems'
+          type: array
+        evaluate_grouped_by_tag_keys:
+          description: The `strategy` `evaluate_grouped_by_tag_keys`.
+          items:
+            type: string
+          type: array
+        granularity:
+          description: The `strategy` `granularity`.
+          type: string
+        method:
+          description: The `strategy` `method`.
+          example: ''
+          type: string
+      required:
+      - method
+      type: object
+    ArbitraryRuleResponseDataAttributesStrategyAllocatedByFiltersItems:
+      description: The definition of `ArbitraryRuleResponseDataAttributesStrategyAllocatedByFiltersItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryRuleResponseDataAttributesStrategyAllocatedByItems:
+      description: The definition of `ArbitraryRuleResponseDataAttributesStrategyAllocatedByItems`
+        object.
+      properties:
+        allocated_tags:
+          description: The `items` `allocated_tags`.
+          items:
+            $ref: '#/components/schemas/ArbitraryRuleResponseDataAttributesStrategyAllocatedByItemsAllocatedTagsItems'
+          type: array
+        percentage:
+          description: The `items` `percentage`. The numeric value format should be
+            a 32bit float value.
+          example: 0.0
+          format: double
+          type: number
+      required:
+      - allocated_tags
+      - percentage
+      type: object
+    ArbitraryRuleResponseDataAttributesStrategyAllocatedByItemsAllocatedTagsItems:
+      description: The definition of `ArbitraryRuleResponseDataAttributesStrategyAllocatedByItemsAllocatedTagsItems`
+        object.
+      properties:
+        key:
+          description: The `items` `key`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          example: ''
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    ArbitraryRuleResponseDataAttributesStrategyBasedOnCostsItems:
+      description: The definition of `ArbitraryRuleResponseDataAttributesStrategyBasedOnCostsItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryRuleResponseDataAttributesStrategyEvaluateGroupedByFiltersItems:
+      description: The definition of `ArbitraryRuleResponseDataAttributesStrategyEvaluateGroupedByFiltersItems`
+        object.
+      properties:
+        condition:
+          description: The `items` `condition`.
+          example: ''
+          type: string
+        tag:
+          description: The `items` `tag`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+        values:
+          description: The `items` `values`.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - condition
+      - tag
+      type: object
+    ArbitraryRuleResponseDataType:
+      default: arbitrary_rule
+      description: Arbitrary rule resource type.
+      enum:
+      - arbitrary_rule
+      example: arbitrary_rule
+      type: string
+      x-enum-varnames:
+      - ARBITRARY_RULE
     AsanaAccessToken:
       description: The definition of the `AsanaAccessToken` object.
       properties:
@@ -4744,6 +5373,7 @@ components:
           description: The error messages for the AWS CUR config.
           items:
             type: string
+          nullable: true
           type: array
         months:
           deprecated: true
@@ -4833,7 +5463,6 @@ components:
         type:
           $ref: '#/components/schemas/AwsCURConfigPostRequestType'
       required:
-      - attributes
       - type
       type: object
     AwsCURConfigPostRequest:
@@ -4889,12 +5518,6 @@ components:
       type: string
       x-enum-varnames:
       - AWS_CUR_CONFIG_POST_REQUEST
-    AwsCURConfigResponse:
-      description: Response of AWS CUR config.
-      properties:
-        data:
-          $ref: '#/components/schemas/AwsCURConfig'
-      type: object
     AwsCURConfigType:
       default: aws_cur_config
       description: Type of AWS CUR config.
@@ -4912,7 +5535,120 @@ components:
           items:
             $ref: '#/components/schemas/AwsCURConfig'
           type: array
+      required:
+      - data
       type: object
+    AwsCurConfigResponse:
+      description: The definition of `AwsCurConfigResponse` object.
+      example:
+        data:
+          attributes:
+            account_filters:
+              excluded_accounts:
+              - '123456789124'
+              - '123456789125'
+              include_new_accounts: true
+            account_id: '123456789123'
+            bucket_name: dd-cost-bucket
+            bucket_region: us-east-1
+            created_at: 2023-01-01 12:00:00
+            error_messages: []
+            months: 36
+            report_name: dd-report-name
+            report_prefix: dd-report-prefix
+            status: active
+            status_updated_at: 2023-01-01 12:00:00
+            updated_at: 2023-01-01 12:00:00
+          id: '123456789123'
+          type: aws_cur_config
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsCurConfigResponseData'
+      type: object
+    AwsCurConfigResponseData:
+      description: The definition of `AwsCurConfigResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsCurConfigResponseDataAttributes'
+        id:
+          description: The `AwsCurConfigResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/AwsCurConfigResponseDataType'
+      required:
+      - type
+      type: object
+    AwsCurConfigResponseDataAttributes:
+      description: The definition of `AwsCurConfigResponseDataAttributes` object.
+      properties:
+        account_filters:
+          $ref: '#/components/schemas/AwsCurConfigResponseDataAttributesAccountFilters'
+        account_id:
+          description: The `attributes` `account_id`.
+          type: string
+        bucket_name:
+          description: The `attributes` `bucket_name`.
+          type: string
+        bucket_region:
+          description: The `attributes` `bucket_region`.
+          type: string
+        created_at:
+          description: The `attributes` `created_at`.
+          type: string
+        error_messages:
+          description: The `attributes` `error_messages`.
+          items:
+            type: string
+          nullable: true
+          type: array
+        months:
+          description: The `attributes` `months`.
+          format: int64
+          type: integer
+        report_name:
+          description: The `attributes` `report_name`.
+          type: string
+        report_prefix:
+          description: The `attributes` `report_prefix`.
+          type: string
+        status:
+          description: The `attributes` `status`.
+          type: string
+        status_updated_at:
+          description: The `attributes` `status_updated_at`.
+          type: string
+        updated_at:
+          description: The `attributes` `updated_at`.
+          type: string
+      type: object
+    AwsCurConfigResponseDataAttributesAccountFilters:
+      description: The definition of `AwsCurConfigResponseDataAttributesAccountFilters`
+        object.
+      properties:
+        excluded_accounts:
+          description: The `account_filters` `excluded_accounts`.
+          items:
+            type: string
+          type: array
+        include_new_accounts:
+          description: The `account_filters` `include_new_accounts`.
+          nullable: true
+          type: boolean
+        included_accounts:
+          description: The `account_filters` `included_accounts`.
+          items:
+            type: string
+          type: array
+      type: object
+    AwsCurConfigResponseDataType:
+      default: aws_cur_config
+      description: AWS CUR config resource type.
+      enum:
+      - aws_cur_config
+      example: aws_cur_config
+      type: string
+      x-enum-varnames:
+      - AWS_CUR_CONFIG
     AwsOnDemandAttributes:
       description: Attributes for the AWS on demand task.
       properties:
@@ -5322,7 +6058,7 @@ components:
       description: Azure config.
       properties:
         account_id:
-          description: The tenant ID of the azure account.
+          description: The tenant ID of the Azure account.
           example: 1234abcd-1234-abcd-1234-1234abcd1234
           type: string
         client_id:
@@ -5343,6 +6079,7 @@ components:
           description: The error messages for the Azure config.
           items:
             type: string
+          nullable: true
           type: array
         export_name:
           description: The name of the configured Azure Export.
@@ -5458,7 +6195,6 @@ components:
         type:
           $ref: '#/components/schemas/AzureUCConfigPatchRequestType'
       required:
-      - attributes
       - type
       type: object
     AzureUCConfigPatchRequest:
@@ -5496,7 +6232,6 @@ components:
         type:
           $ref: '#/components/schemas/AzureUCConfigPostRequestType'
       required:
-      - attributes
       - type
       type: object
     AzureUCConfigPostRequest:
@@ -5511,7 +6246,7 @@ components:
       description: Attributes for Azure config Post Request.
       properties:
         account_id:
-          description: The tenant ID of the azure account.
+          description: The tenant ID of the Azure account.
           example: 1234abcd-1234-abcd-1234-1234abcd1234
           type: string
         actual_bill_config:
@@ -5519,12 +6254,9 @@ components:
         amortized_bill_config:
           $ref: '#/components/schemas/BillConfig'
         client_id:
-          description: The client ID of the azure account.
+          description: The client ID of the Azure account.
           example: 1234abcd-1234-abcd-1234-1234abcd1234
           type: string
-        is_enabled:
-          description: Whether or not the Cloud Cost Management account is enabled.
-          type: boolean
         scope:
           description: The scope of your observed subscription.
           example: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
@@ -5553,6 +6285,8 @@ components:
           items:
             $ref: '#/components/schemas/AzureUCConfigPair'
           type: array
+      required:
+      - data
       type: object
     BillConfig:
       description: Bill config.
@@ -11205,6 +11939,204 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+    CreateRulesetRequest:
+      description: The definition of `CreateRulesetRequest` object.
+      example:
+        data:
+          attributes:
+            enabled: true
+            rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: Add Cost Center Tag
+              query:
+                addition:
+                  key: cost_center
+                  value: engineering
+                case_insensitivity: false
+                if_not_exists: true
+                query: account_id:"123456789" AND service:"web-api"
+              reference_table: null
+          id: New Ruleset
+          type: create_ruleset
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateRulesetRequestData'
+      type: object
+    CreateRulesetRequestData:
+      description: The definition of `CreateRulesetRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateRulesetRequestDataAttributes'
+        id:
+          description: The `CreateRulesetRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/CreateRulesetRequestDataType'
+      required:
+      - type
+      type: object
+    CreateRulesetRequestDataAttributes:
+      description: The definition of `CreateRulesetRequestDataAttributes` object.
+      properties:
+        enabled:
+          description: The `attributes` `enabled`.
+          type: boolean
+        rules:
+          description: The `attributes` `rules`.
+          items:
+            $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItems'
+          type: array
+      required:
+      - rules
+      type: object
+    CreateRulesetRequestDataAttributesRulesItems:
+      description: The definition of `CreateRulesetRequestDataAttributesRulesItems`
+        object.
+      properties:
+        enabled:
+          description: The `items` `enabled`.
+          example: false
+          type: boolean
+        mapping:
+          $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsMapping'
+        metadata:
+          $ref: '#/components/schemas/RulesetItemMetadata'
+        name:
+          description: The `items` `name`.
+          example: ''
+          type: string
+        query:
+          $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsQuery'
+        reference_table:
+          $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsReferenceTable'
+      required:
+      - enabled
+      - name
+      type: object
+    CreateRulesetRequestDataAttributesRulesItemsMapping:
+      description: The definition of `CreateRulesetRequestDataAttributesRulesItemsMapping`
+        object.
+      nullable: true
+      properties:
+        destination_key:
+          description: The `mapping` `destination_key`.
+          example: ''
+          type: string
+        if_not_exists:
+          description: The `mapping` `if_not_exists`.
+          example: false
+          type: boolean
+        source_keys:
+          description: The `mapping` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - destination_key
+      - if_not_exists
+      - source_keys
+      type: object
+    CreateRulesetRequestDataAttributesRulesItemsQuery:
+      description: The definition of `CreateRulesetRequestDataAttributesRulesItemsQuery`
+        object.
+      nullable: true
+      properties:
+        addition:
+          $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsQueryAddition'
+        case_insensitivity:
+          description: The `query` `case_insensitivity`.
+          type: boolean
+        if_not_exists:
+          description: The `query` `if_not_exists`.
+          example: false
+          type: boolean
+        query:
+          description: The `query` `query`.
+          example: ''
+          type: string
+      required:
+      - addition
+      - if_not_exists
+      - query
+      type: object
+    CreateRulesetRequestDataAttributesRulesItemsQueryAddition:
+      description: The definition of `CreateRulesetRequestDataAttributesRulesItemsQueryAddition`
+        object.
+      nullable: true
+      properties:
+        key:
+          description: The `addition` `key`.
+          example: ''
+          type: string
+        value:
+          description: The `addition` `value`.
+          example: ''
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    CreateRulesetRequestDataAttributesRulesItemsReferenceTable:
+      description: The definition of `CreateRulesetRequestDataAttributesRulesItemsReferenceTable`
+        object.
+      nullable: true
+      properties:
+        case_insensitivity:
+          description: The `reference_table` `case_insensitivity`.
+          type: boolean
+        field_pairs:
+          description: The `reference_table` `field_pairs`.
+          items:
+            $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems'
+          type: array
+        if_not_exists:
+          description: The `reference_table` `if_not_exists`.
+          type: boolean
+        source_keys:
+          description: The `reference_table` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The `reference_table` `table_name`.
+          example: ''
+          type: string
+      required:
+      - field_pairs
+      - source_keys
+      - table_name
+      type: object
+    CreateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems:
+      description: The definition of `CreateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems`
+        object.
+      properties:
+        input_column:
+          description: The `items` `input_column`.
+          example: ''
+          type: string
+        output_key:
+          description: The `items` `output_key`.
+          example: ''
+          type: string
+      required:
+      - input_column
+      - output_key
+      type: object
+    CreateRulesetRequestDataType:
+      default: create_ruleset
+      description: Create ruleset resource type.
+      enum:
+      - create_ruleset
+      example: create_ruleset
+      type: string
+      x-enum-varnames:
+      - CREATE_RULESET
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
       example:
@@ -13629,6 +14561,23 @@ components:
       x-enum-varnames:
       - NONE
       - UUID
+    DatastoreTrigger:
+      description: Trigger a workflow from a Datastore. For automatic triggering a
+        handle must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    DatastoreTriggerWrapper:
+      description: Schema for a Datastore-based trigger.
+      properties:
+        datastoreTrigger:
+          $ref: '#/components/schemas/DatastoreTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - datastoreTrigger
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -17942,6 +18891,13 @@ components:
           format: date-time
           readOnly: true
           type: string
+        date_last_used:
+          description: Date the API Key was last used
+          example: '2020-11-27T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         key:
           description: The API key.
           readOnly: true
@@ -18006,6 +18962,13 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_at:
+          description: Last usage timestamp of the application key.
+          example: '2020-12-20T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -18411,12 +19374,12 @@ components:
       - type
       type: object
     GCPUsageCostConfig:
-      description: GCP Usage Cost config.
+      description: Google Cloud Usage Cost config.
       properties:
         attributes:
           $ref: '#/components/schemas/GCPUsageCostConfigAttributes'
         id:
-          description: The ID of the GCP Usage Cost config.
+          description: The ID of the Google Cloud Usage Cost config.
           type: string
         type:
           $ref: '#/components/schemas/GCPUsageCostConfigType'
@@ -18427,38 +19390,39 @@ components:
       x-merge-override:
         required: false
     GCPUsageCostConfigAttributes:
-      description: Attributes for a GCP Usage Cost config.
+      description: Attributes for a Google Cloud Usage Cost config.
       properties:
         account_id:
-          description: The GCP account ID.
+          description: The Google Cloud account ID.
           example: 123456_A123BC_12AB34
           type: string
         bucket_name:
-          description: The GCP bucket name used to store the Usage Cost export.
+          description: The Google Cloud bucket name used to store the Usage Cost export.
           example: dd-cost-bucket
           type: string
         created_at:
-          description: The timestamp when the GCP Usage Cost config was created.
+          description: The timestamp when the Google Cloud Usage Cost config was created.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
           x-merge-override:
             format: false
         dataset:
-          description: The export dataset name used for the GCP Usage Cost Report.
+          description: The export dataset name used for the Google Cloud Usage Cost
+            Report.
           example: billing
           type: string
         error_messages:
-          description: The error messages for the GCP Usage Cost config.
+          description: The error messages for the Google Cloud Usage Cost config.
           items:
             type: string
           nullable: true
           type: array
         export_prefix:
-          description: The export prefix used for the GCP Usage Cost Report.
+          description: The export prefix used for the Google Cloud Usage Cost Report.
           example: datadog_cloud_cost_usage_export
           type: string
         export_project_name:
-          description: The name of the GCP Usage Cost Report.
+          description: The name of the Google Cloud Usage Cost Report.
           example: dd-cloud-cost-report
           type: string
         months:
@@ -18468,25 +19432,27 @@ components:
           maximum: 36
           type: integer
         project_id:
-          description: The `project_id` of the GCP Usage Cost report.
+          description: The `project_id` of the Google Cloud Usage Cost report.
           example: my-project-123
           type: string
         service_account:
-          description: The unique GCP service account email.
+          description: The unique Google Cloud service account email.
           example: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
           type: string
         status:
-          description: The status of the GCP Usage Cost config.
+          description: The status of the Google Cloud Usage Cost config.
           example: active
           type: string
         status_updated_at:
-          description: The timestamp when the GCP Usage Cost config status was updated.
+          description: The timestamp when the Google Cloud Usage Cost config status
+            was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
           x-merge-override:
             format: false
         updated_at:
-          description: The timestamp when the GCP Usage Cost config status was updated.
+          description: The timestamp when the Google Cloud Usage Cost config status
+            was updated.
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
           x-merge-override:
@@ -18503,7 +19469,7 @@ components:
       x-merge-override:
         required: false
     GCPUsageCostConfigPatchData:
-      description: GCP Usage Cost config patch data.
+      description: Google Cloud Usage Cost config patch data.
       properties:
         attributes:
           $ref: '#/components/schemas/GCPUsageCostConfigPatchRequestAttributes'
@@ -18516,7 +19482,7 @@ components:
       x-merge-override:
         required: false
     GCPUsageCostConfigPatchRequest:
-      description: GCP Usage Cost config patch request.
+      description: Google Cloud Usage Cost config patch request.
       properties:
         data:
           $ref: '#/components/schemas/GCPUsageCostConfigPatchData'
@@ -18524,7 +19490,7 @@ components:
       - data
       type: object
     GCPUsageCostConfigPatchRequestAttributes:
-      description: Attributes for GCP Usage Cost config patch request.
+      description: Attributes for Google Cloud Usage Cost config patch request.
       properties:
         is_enabled:
           description: Whether or not the Cloud Cost Management account is enabled.
@@ -18535,7 +19501,7 @@ components:
       type: object
     GCPUsageCostConfigPatchRequestType:
       default: gcp_uc_config_patch_request
-      description: Type of GCP Usage Cost config patch request.
+      description: Type of Google Cloud Usage Cost config patch request.
       enum:
       - gcp_uc_config_patch_request
       example: gcp_uc_config_patch_request
@@ -18543,18 +19509,17 @@ components:
       x-enum-varnames:
       - GCP_USAGE_COST_CONFIG_PATCH_REQUEST
     GCPUsageCostConfigPostData:
-      description: GCP Usage Cost config post data.
+      description: Google Cloud Usage Cost config post data.
       properties:
         attributes:
           $ref: '#/components/schemas/GCPUsageCostConfigPostRequestAttributes'
         type:
           $ref: '#/components/schemas/GCPUsageCostConfigPostRequestType'
       required:
-      - attributes
       - type
       type: object
     GCPUsageCostConfigPostRequest:
-      description: GCP Usage Cost config post request.
+      description: Google Cloud Usage Cost config post request.
       properties:
         data:
           $ref: '#/components/schemas/GCPUsageCostConfigPostData'
@@ -18562,30 +19527,31 @@ components:
       - data
       type: object
     GCPUsageCostConfigPostRequestAttributes:
-      description: Attributes for GCP Usage Cost config post request.
+      description: Attributes for Google Cloud Usage Cost config post request.
       properties:
         billing_account_id:
-          description: The GCP account ID.
+          description: The Google Cloud account ID.
           example: 123456_A123BC_12AB34
           type: string
         bucket_name:
-          description: The GCP bucket name used to store the Usage Cost export.
+          description: The Google Cloud bucket name used to store the Usage Cost export.
           example: dd-cost-bucket
           type: string
         export_dataset_name:
-          description: The export dataset name used for the GCP Usage Cost report.
+          description: The export dataset name used for the Google Cloud Usage Cost
+            report.
           example: billing
           type: string
         export_prefix:
-          description: The export prefix used for the GCP Usage Cost report.
+          description: The export prefix used for the Google Cloud Usage Cost report.
           example: datadog_cloud_cost_usage_export
           type: string
         export_project_name:
-          description: The name of the GCP Usage Cost report.
+          description: The name of the Google Cloud Usage Cost report.
           example: dd-cloud-cost-report
           type: string
         service_account:
-          description: The unique GCP service account email.
+          description: The unique Google Cloud service account email.
           example: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
           type: string
       required:
@@ -18597,7 +19563,7 @@ components:
       type: object
     GCPUsageCostConfigPostRequestType:
       default: gcp_uc_config_post_request
-      description: Type of GCP Usage Cost config post request.
+      description: Type of Google Cloud Usage Cost config post request.
       enum:
       - gcp_uc_config_post_request
       example: gcp_usage_cost_config_post_request
@@ -18605,14 +19571,14 @@ components:
       x-enum-varnames:
       - GCP_USAGE_COST_CONFIG_POST_REQUEST
     GCPUsageCostConfigResponse:
-      description: Response of GCP Usage Cost config.
+      description: Response of Google Cloud Usage Cost config.
       properties:
         data:
           $ref: '#/components/schemas/GCPUsageCostConfig'
       type: object
     GCPUsageCostConfigType:
       default: gcp_uc_config
-      description: Type of GCP Usage Cost config.
+      description: Type of Google Cloud Usage Cost config.
       enum:
       - gcp_uc_config
       example: gcp_uc_config
@@ -18620,14 +19586,109 @@ components:
       x-enum-varnames:
       - GCP_UC_CONFIG
     GCPUsageCostConfigsResponse:
-      description: List of GCP Usage Cost configs.
+      description: List of Google Cloud Usage Cost configs.
       properties:
         data:
-          description: A GCP Usage Cost config.
+          description: A Google Cloud Usage Cost config.
           items:
             $ref: '#/components/schemas/GCPUsageCostConfig'
           type: array
+      required:
+      - data
       type: object
+    GcpUcConfigResponse:
+      description: The definition of `GcpUcConfigResponse` object.
+      example:
+        data:
+          attributes:
+            account_id: 123456_A123BC_12AB34
+            bucket_name: dd-cost-bucket
+            created_at: 2023-01-01 12:00:00
+            dataset: billing
+            error_messages: []
+            export_prefix: datadog_cloud_cost_usage_export
+            export_project_name: dd-cloud-cost-report
+            months: 36
+            project_id: my-project-123
+            service_account: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
+            status: active
+            status_updated_at: 2023-01-01 12:00:00
+            updated_at: 2023-01-01 12:00:00
+          id: '123456789123'
+          type: gcp_uc_config
+      properties:
+        data:
+          $ref: '#/components/schemas/GcpUcConfigResponseData'
+      type: object
+    GcpUcConfigResponseData:
+      description: The definition of `GcpUcConfigResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GcpUcConfigResponseDataAttributes'
+        id:
+          description: The `GcpUcConfigResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GcpUcConfigResponseDataType'
+      required:
+      - type
+      type: object
+    GcpUcConfigResponseDataAttributes:
+      description: The definition of `GcpUcConfigResponseDataAttributes` object.
+      properties:
+        account_id:
+          description: The `attributes` `account_id`.
+          type: string
+        bucket_name:
+          description: The `attributes` `bucket_name`.
+          type: string
+        created_at:
+          description: The `attributes` `created_at`.
+          type: string
+        dataset:
+          description: The `attributes` `dataset`.
+          type: string
+        error_messages:
+          description: The `attributes` `error_messages`.
+          items:
+            type: string
+          nullable: true
+          type: array
+        export_prefix:
+          description: The `attributes` `export_prefix`.
+          type: string
+        export_project_name:
+          description: The `attributes` `export_project_name`.
+          type: string
+        months:
+          description: The `attributes` `months`.
+          format: int64
+          type: integer
+        project_id:
+          description: The `attributes` `project_id`.
+          type: string
+        service_account:
+          description: The `attributes` `service_account`.
+          type: string
+        status:
+          description: The `attributes` `status`.
+          type: string
+        status_updated_at:
+          description: The `attributes` `status_updated_at`.
+          type: string
+        updated_at:
+          description: The `attributes` `updated_at`.
+          type: string
+      type: object
+    GcpUcConfigResponseDataType:
+      default: gcp_uc_config
+      description: Google Cloud Usage Cost config resource type.
+      enum:
+      - gcp_uc_config
+      example: gcp_uc_config
+      type: string
+      x-enum-varnames:
+      - GCP_UC_CONFIG
     GeminiAPIKey:
       description: The definition of the `GeminiAPIKey` object.
       properties:
@@ -19558,6 +20619,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -29679,6 +30742,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -30740,6 +31804,65 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_CLOUD_STORAGE
+    ObservabilityPipelineGooglePubSubDestination:
+      description: The `google_pubsub` destination publishes logs to a Google Cloud
+        Pub/Sub topic.
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: google-pubsub-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        project:
+          description: The GCP project ID that owns the Pub/Sub topic.
+          example: my-gcp-project
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Pub/Sub topic name to publish logs to.
+          example: logs-subscription
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      - project
+      - topic
+      type: object
+    ObservabilityPipelineGooglePubSubDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineGooglePubSubDestinationType:
+      default: google_pubsub
+      description: The destination type. The value should always be `google_pubsub`.
+      enum:
+      - google_pubsub
+      example: google_pubsub
+      type: string
+      x-enum-varnames:
+      - GOOGLE_PUBSUB
     ObservabilityPipelineGooglePubSubSource:
       description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
@@ -34156,6 +35279,13 @@ components:
           type: string
           x-merge-override:
             format: false
+        date_last_used:
+          description: Date the API Key was last used.
+          example: '2020-11-27T10:00:00.000Z'
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -34212,6 +35342,12 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_at:
+          description: Last usage timestamp of the application key.
+          example: '2020-12-20T10:00:00.000Z'
+          nullable: true
+          readOnly: true
+          type: string
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -35147,6 +36283,12 @@ components:
     RUMApplicationAttributes:
       description: RUM application attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -36671,6 +37813,76 @@ components:
       required:
       - data
       type: object
+    ReorderRuleResourceArray:
+      description: The definition of `ReorderRuleResourceArray` object.
+      example:
+        data:
+        - id: '456'
+          type: arbitrary_rule
+        - id: '123'
+          type: arbitrary_rule
+        - id: '789'
+          type: arbitrary_rule
+      properties:
+        data:
+          description: The `ReorderRuleResourceArray` `data`.
+          items:
+            $ref: '#/components/schemas/ReorderRuleResourceData'
+          type: array
+      required:
+      - data
+      type: object
+    ReorderRuleResourceData:
+      description: The definition of `ReorderRuleResourceData` object.
+      properties:
+        id:
+          description: The `ReorderRuleResourceData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ReorderRuleResourceDataType'
+      required:
+      - type
+      type: object
+    ReorderRuleResourceDataType:
+      default: arbitrary_rule
+      description: Arbitrary rule resource type.
+      enum:
+      - arbitrary_rule
+      example: arbitrary_rule
+      type: string
+      x-enum-varnames:
+      - ARBITRARY_RULE
+    ReorderRulesetResourceArray:
+      description: The definition of `ReorderRulesetResourceArray` object.
+      properties:
+        data:
+          description: The `ReorderRulesetResourceArray` `data`.
+          items:
+            $ref: '#/components/schemas/ReorderRulesetResourceData'
+          type: array
+      required:
+      - data
+      type: object
+    ReorderRulesetResourceData:
+      description: The definition of `ReorderRulesetResourceData` object.
+      properties:
+        id:
+          description: The `ReorderRulesetResourceData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ReorderRulesetResourceDataType'
+      required:
+      - type
+      type: object
+    ReorderRulesetResourceDataType:
+      default: ruleset
+      description: Ruleset resource type.
+      enum:
+      - ruleset
+      example: ruleset
+      type: string
+      x-enum-varnames:
+      - RULESET
     ResourceFilterAttributes:
       description: Attributes of a resource filter.
       example:
@@ -37349,6 +38561,7 @@ components:
       x-merge-override:
         required: false
     RoleAttributes:
+      additionalProperties: {}
       description: Attributes of the role.
       properties:
         created_at:
@@ -37882,6 +39095,396 @@ components:
         rule:
           $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
       type: object
+    RulesValidateQueryRequest:
+      description: The definition of `RulesValidateQueryRequest` object.
+      example:
+        data:
+          attributes:
+            Query: example:query AND test:true
+          type: validate_query
+      properties:
+        data:
+          $ref: '#/components/schemas/RulesValidateQueryRequestData'
+      type: object
+    RulesValidateQueryRequestData:
+      description: The definition of `RulesValidateQueryRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RulesValidateQueryRequestDataAttributes'
+        id:
+          description: The `RulesValidateQueryRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/RulesValidateQueryRequestDataType'
+      required:
+      - type
+      type: object
+    RulesValidateQueryRequestDataAttributes:
+      description: The definition of `RulesValidateQueryRequestDataAttributes` object.
+      properties:
+        Query:
+          description: The `attributes` `Query`.
+          example: ''
+          type: string
+      required:
+      - Query
+      type: object
+    RulesValidateQueryRequestDataType:
+      default: validate_query
+      description: Validate query resource type.
+      enum:
+      - validate_query
+      example: validate_query
+      type: string
+      x-enum-varnames:
+      - VALIDATE_QUERY
+    RulesValidateQueryResponse:
+      description: The definition of `RulesValidateQueryResponse` object.
+      example:
+        data:
+          attributes:
+            Canonical: canonical query representation
+          type: validate_response
+      properties:
+        data:
+          $ref: '#/components/schemas/RulesValidateQueryResponseData'
+      type: object
+    RulesValidateQueryResponseData:
+      description: The definition of `RulesValidateQueryResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RulesValidateQueryResponseDataAttributes'
+        id:
+          description: The `RulesValidateQueryResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/RulesValidateQueryResponseDataType'
+      required:
+      - type
+      type: object
+    RulesValidateQueryResponseDataAttributes:
+      description: The definition of `RulesValidateQueryResponseDataAttributes` object.
+      properties:
+        Canonical:
+          description: The `attributes` `Canonical`.
+          example: ''
+          type: string
+      required:
+      - Canonical
+      type: object
+    RulesValidateQueryResponseDataType:
+      default: validate_response
+      description: Validate response resource type.
+      enum:
+      - validate_response
+      example: validate_response
+      type: string
+      x-enum-varnames:
+      - VALIDATE_RESPONSE
+    RulesetItemMetadata:
+      additionalProperties:
+        type: string
+      description: The `items` `metadata`.
+      nullable: true
+      type: object
+    RulesetResp:
+      description: The definition of `RulesetResp` object.
+      example:
+        data:
+          attributes:
+            created: null
+            enabled: true
+            last_modified_user_uuid: ''
+            modified: null
+            name: Example Ruleset
+            position: 0
+            rules:
+            - enabled: false
+              mapping: null
+              metadata: null
+              name: RC test rule edited1
+              query:
+                addition:
+                  key: abc
+                  value: ww
+                case_insensitivity: false
+                if_not_exists: true
+                query: billingcurrency:"USD" AND account_name:"SZA96462" AND billingcurrency:"USD"
+              reference_table: null
+            - enabled: true
+              mapping:
+                destination_key: h
+                if_not_exists: true
+                source_keys:
+                - accountname
+                - accountownerid
+              metadata: null
+              name: rule with empty source key
+              query: null
+              reference_table: null
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: New table rule with new UI
+              query: null
+              reference_table:
+                case_insensitivity: true
+                field_pairs:
+                - input_column: status_type
+                  output_key: status
+                - input_column: status_description
+                  output_key: dess
+                if_not_exists: false
+                source_keys:
+                - http_status
+                - status_description
+                table_name: http_status_codes
+            version: 1
+          id: '12345'
+          type: ruleset
+      properties:
+        data:
+          $ref: '#/components/schemas/RulesetRespData'
+      type: object
+    RulesetRespArray:
+      description: The definition of `RulesetRespArray` object.
+      properties:
+        data:
+          description: The `RulesetRespArray` `data`.
+          items:
+            $ref: '#/components/schemas/RulesetRespData'
+          type: array
+      required:
+      - data
+      type: object
+    RulesetRespData:
+      description: The definition of `RulesetRespData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RulesetRespDataAttributes'
+        id:
+          description: The `RulesetRespData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/RulesetRespDataType'
+      required:
+      - type
+      type: object
+    RulesetRespDataAttributes:
+      description: The definition of `RulesetRespDataAttributes` object.
+      properties:
+        created:
+          $ref: '#/components/schemas/RulesetRespDataAttributesCreated'
+        enabled:
+          description: The `attributes` `enabled`.
+          example: false
+          type: boolean
+        last_modified_user_uuid:
+          description: The `attributes` `last_modified_user_uuid`.
+          example: ''
+          type: string
+        modified:
+          $ref: '#/components/schemas/RulesetRespDataAttributesModified'
+        name:
+          description: The `attributes` `name`.
+          example: ''
+          type: string
+        position:
+          description: The `attributes` `position`.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        rules:
+          description: The `attributes` `rules`.
+          items:
+            $ref: '#/components/schemas/RulesetRespDataAttributesRulesItems'
+          type: array
+        version:
+          description: The `attributes` `version`.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - created
+      - enabled
+      - last_modified_user_uuid
+      - modified
+      - name
+      - position
+      - rules
+      - version
+      type: object
+    RulesetRespDataAttributesCreated:
+      description: The definition of `RulesetRespDataAttributesCreated` object.
+      properties:
+        nanos:
+          description: The `created` `nanos`.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        seconds:
+          description: The `created` `seconds`.
+          format: int64
+          type: integer
+      type: object
+    RulesetRespDataAttributesModified:
+      description: The definition of `RulesetRespDataAttributesModified` object.
+      properties:
+        nanos:
+          description: The `modified` `nanos`.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        seconds:
+          description: The `modified` `seconds`.
+          format: int64
+          type: integer
+      type: object
+    RulesetRespDataAttributesRulesItems:
+      description: The definition of `RulesetRespDataAttributesRulesItems` object.
+      properties:
+        enabled:
+          description: The `items` `enabled`.
+          example: false
+          type: boolean
+        mapping:
+          $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsMapping'
+        metadata:
+          $ref: '#/components/schemas/RulesetItemMetadata'
+        name:
+          description: The `items` `name`.
+          example: ''
+          type: string
+        query:
+          $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsQuery'
+        reference_table:
+          $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsReferenceTable'
+      required:
+      - enabled
+      - name
+      type: object
+    RulesetRespDataAttributesRulesItemsMapping:
+      description: The definition of `RulesetRespDataAttributesRulesItemsMapping`
+        object.
+      nullable: true
+      properties:
+        destination_key:
+          description: The `mapping` `destination_key`.
+          example: ''
+          type: string
+        if_not_exists:
+          description: The `mapping` `if_not_exists`.
+          example: false
+          type: boolean
+        source_keys:
+          description: The `mapping` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - destination_key
+      - if_not_exists
+      - source_keys
+      type: object
+    RulesetRespDataAttributesRulesItemsQuery:
+      description: The definition of `RulesetRespDataAttributesRulesItemsQuery` object.
+      nullable: true
+      properties:
+        addition:
+          $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsQueryAddition'
+        case_insensitivity:
+          description: The `query` `case_insensitivity`.
+          type: boolean
+        if_not_exists:
+          description: The `query` `if_not_exists`.
+          example: false
+          type: boolean
+        query:
+          description: The `query` `query`.
+          example: ''
+          type: string
+      required:
+      - addition
+      - if_not_exists
+      - query
+      type: object
+    RulesetRespDataAttributesRulesItemsQueryAddition:
+      description: The definition of `RulesetRespDataAttributesRulesItemsQueryAddition`
+        object.
+      nullable: true
+      properties:
+        key:
+          description: The `addition` `key`.
+          example: ''
+          type: string
+        value:
+          description: The `addition` `value`.
+          example: ''
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    RulesetRespDataAttributesRulesItemsReferenceTable:
+      description: The definition of `RulesetRespDataAttributesRulesItemsReferenceTable`
+        object.
+      nullable: true
+      properties:
+        case_insensitivity:
+          description: The `reference_table` `case_insensitivity`.
+          type: boolean
+        field_pairs:
+          description: The `reference_table` `field_pairs`.
+          items:
+            $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsReferenceTableFieldPairsItems'
+          type: array
+        if_not_exists:
+          description: The `reference_table` `if_not_exists`.
+          type: boolean
+        source_keys:
+          description: The `reference_table` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The `reference_table` `table_name`.
+          example: ''
+          type: string
+      required:
+      - field_pairs
+      - source_keys
+      - table_name
+      type: object
+    RulesetRespDataAttributesRulesItemsReferenceTableFieldPairsItems:
+      description: The definition of `RulesetRespDataAttributesRulesItemsReferenceTableFieldPairsItems`
+        object.
+      properties:
+        input_column:
+          description: The `items` `input_column`.
+          example: ''
+          type: string
+        output_key:
+          description: The `items` `output_key`.
+          example: ''
+          type: string
+      required:
+      - input_column
+      - output_key
+      type: object
+    RulesetRespDataType:
+      default: ruleset
+      description: Ruleset resource type.
+      enum:
+      - ruleset
+      example: ruleset
+      type: string
+      x-enum-varnames:
+      - RULESET
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -39945,6 +41548,7 @@ components:
       - hardcoded
       - third_party
       - anomaly_threshold
+      - sequence_detection
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -39954,6 +41558,7 @@ components:
       - HARDCODED
       - THIRD_PARTY
       - ANOMALY_THRESHOLD
+      - SEQUENCE_DETECTION
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -40167,6 +41772,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -40242,6 +41849,47 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+    SecurityMonitoringRuleSequenceDetectionOptions:
+      description: Options on sequence detection method.
+      properties:
+        stepTransitions:
+          description: Transitions defining the allowed order of steps and their evaluation
+            windows.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStepTransition'
+          type: array
+        steps:
+          description: Steps that define the conditions to be matched in sequence.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStep'
+          type: array
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStep:
+      description: Step definition for sequence detection containing the step name,
+        condition, and evaluation window.
+      properties:
+        condition:
+          description: Condition referencing rule queries (e.g., `a > 0`).
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        name:
+          description: Unique name identifying the step.
+          type: string
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStepTransition:
+      description: Transition from a parent step to a child step within a sequence
+        detection rule.
+      properties:
+        child:
+          description: Name of the child step.
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        parent:
+          description: Name of the parent step.
+          type: string
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -46831,6 +48479,7 @@ components:
       - $ref: '#/components/schemas/CaseTriggerWrapper'
       - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
       - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
+      - $ref: '#/components/schemas/DatastoreTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
@@ -46868,6 +48517,117 @@ components:
       x-enum-varnames:
       - SECURITY_FINDINGS
       - SECURITY_SIGNALS
+    UCConfigPair:
+      description: The definition of `UCConfigPair` object.
+      example:
+        data:
+          attributes:
+            configs:
+            - account_id: 1234abcd-1234-abcd-1234-1234abcd1234
+              client_id: 1234abcd-1234-abcd-1234-1234abcd1234
+              created_at: 2023-01-01 12:00:00
+              dataset_type: actual
+              error_messages: []
+              export_name: dd-actual-export
+              export_path: dd-export-path
+              id: '123456789123'
+              months: 36
+              scope: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
+              status: active
+              status_updated_at: 2023-01-01 12:00:00
+              storage_account: dd-storage-account
+              storage_container: dd-storage-container
+              updated_at: 2023-01-01 12:00:00
+          id: '123456789123'
+          type: azure_uc_configs
+      properties:
+        data:
+          $ref: '#/components/schemas/UCConfigPairData'
+      type: object
+    UCConfigPairData:
+      description: The definition of `UCConfigPairData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UCConfigPairDataAttributes'
+        id:
+          description: The `UCConfigPairData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/UCConfigPairDataType'
+      required:
+      - type
+      type: object
+    UCConfigPairDataAttributes:
+      description: The definition of `UCConfigPairDataAttributes` object.
+      properties:
+        configs:
+          description: The `attributes` `configs`.
+          items:
+            $ref: '#/components/schemas/UCConfigPairDataAttributesConfigsItems'
+          type: array
+      type: object
+    UCConfigPairDataAttributesConfigsItems:
+      description: The definition of `UCConfigPairDataAttributesConfigsItems` object.
+      properties:
+        account_id:
+          description: The `items` `account_id`.
+          type: string
+        client_id:
+          description: The `items` `client_id`.
+          type: string
+        created_at:
+          description: The `items` `created_at`.
+          type: string
+        dataset_type:
+          description: The `items` `dataset_type`.
+          type: string
+        error_messages:
+          description: The `items` `error_messages`.
+          items:
+            type: string
+          nullable: true
+          type: array
+        export_name:
+          description: The `items` `export_name`.
+          type: string
+        export_path:
+          description: The `items` `export_path`.
+          type: string
+        id:
+          description: The `items` `id`.
+          type: string
+        months:
+          description: The `items` `months`.
+          format: int64
+          type: integer
+        scope:
+          description: The `items` `scope`.
+          type: string
+        status:
+          description: The `items` `status`.
+          type: string
+        status_updated_at:
+          description: The `items` `status_updated_at`.
+          type: string
+        storage_account:
+          description: The `items` `storage_account`.
+          type: string
+        storage_container:
+          description: The `items` `storage_container`.
+          type: string
+        updated_at:
+          description: The `items` `updated_at`.
+          type: string
+      type: object
+    UCConfigPairDataType:
+      default: azure_uc_configs
+      description: Azure UC configs resource type.
+      enum:
+      - azure_uc_configs
+      example: azure_uc_configs
+      type: string
+      x-enum-varnames:
+      - AZURE_UC_CONFIGS
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -47344,6 +49104,209 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+    UpdateRulesetRequest:
+      description: The definition of `UpdateRulesetRequest` object.
+      example:
+        data:
+          attributes:
+            enabled: true
+            last_version: 1
+            rules:
+            - enabled: true
+              mapping:
+                destination_key: team_owner
+                if_not_exists: true
+                source_keys:
+                - account_name
+                - account_id
+              metadata: null
+              name: Account Name Mapping
+              query: null
+              reference_table: null
+          type: update_ruleset
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateRulesetRequestData'
+      type: object
+    UpdateRulesetRequestData:
+      description: The definition of `UpdateRulesetRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateRulesetRequestDataAttributes'
+        id:
+          description: The `UpdateRulesetRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateRulesetRequestDataType'
+      required:
+      - type
+      type: object
+    UpdateRulesetRequestDataAttributes:
+      description: The definition of `UpdateRulesetRequestDataAttributes` object.
+      properties:
+        enabled:
+          description: The `attributes` `enabled`.
+          example: false
+          type: boolean
+        last_version:
+          description: The `attributes` `last_version`.
+          format: int64
+          type: integer
+        rules:
+          description: The `attributes` `rules`.
+          items:
+            $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItems'
+          type: array
+      required:
+      - enabled
+      - rules
+      type: object
+    UpdateRulesetRequestDataAttributesRulesItems:
+      description: The definition of `UpdateRulesetRequestDataAttributesRulesItems`
+        object.
+      properties:
+        enabled:
+          description: The `items` `enabled`.
+          example: false
+          type: boolean
+        mapping:
+          $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsMapping'
+        metadata:
+          $ref: '#/components/schemas/RulesetItemMetadata'
+        name:
+          description: The `items` `name`.
+          example: ''
+          type: string
+        query:
+          $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsQuery'
+        reference_table:
+          $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsReferenceTable'
+      required:
+      - enabled
+      - name
+      type: object
+    UpdateRulesetRequestDataAttributesRulesItemsMapping:
+      description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsMapping`
+        object.
+      nullable: true
+      properties:
+        destination_key:
+          description: The `mapping` `destination_key`.
+          example: ''
+          type: string
+        if_not_exists:
+          description: The `mapping` `if_not_exists`.
+          example: false
+          type: boolean
+        source_keys:
+          description: The `mapping` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - destination_key
+      - if_not_exists
+      - source_keys
+      type: object
+    UpdateRulesetRequestDataAttributesRulesItemsQuery:
+      description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsQuery`
+        object.
+      nullable: true
+      properties:
+        addition:
+          $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsQueryAddition'
+        case_insensitivity:
+          description: The `query` `case_insensitivity`.
+          type: boolean
+        if_not_exists:
+          description: The `query` `if_not_exists`.
+          example: false
+          type: boolean
+        query:
+          description: The `query` `query`.
+          example: ''
+          type: string
+      required:
+      - addition
+      - if_not_exists
+      - query
+      type: object
+    UpdateRulesetRequestDataAttributesRulesItemsQueryAddition:
+      description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsQueryAddition`
+        object.
+      nullable: true
+      properties:
+        key:
+          description: The `addition` `key`.
+          example: ''
+          type: string
+        value:
+          description: The `addition` `value`.
+          example: ''
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    UpdateRulesetRequestDataAttributesRulesItemsReferenceTable:
+      description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsReferenceTable`
+        object.
+      nullable: true
+      properties:
+        case_insensitivity:
+          description: The `reference_table` `case_insensitivity`.
+          type: boolean
+        field_pairs:
+          description: The `reference_table` `field_pairs`.
+          items:
+            $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems'
+          type: array
+        if_not_exists:
+          description: The `reference_table` `if_not_exists`.
+          type: boolean
+        source_keys:
+          description: The `reference_table` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The `reference_table` `table_name`.
+          example: ''
+          type: string
+      required:
+      - field_pairs
+      - source_keys
+      - table_name
+      type: object
+    UpdateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems:
+      description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems`
+        object.
+      properties:
+        input_column:
+          description: The `items` `input_column`.
+          example: ''
+          type: string
+        output_key:
+          description: The `items` `output_key`.
+          example: ''
+          type: string
+      required:
+      - input_column
+      - output_key
+      type: object
+    UpdateRulesetRequestDataType:
+      default: update_ruleset
+      description: Update ruleset resource type.
+      enum:
+      - update_ruleset
+      example: update_ruleset
+      type: string
+      x-enum-varnames:
+      - UPDATE_RULESET
     UpdateWorkflowRequest:
       description: A request object for updating an existing workflow.
       example:
@@ -54009,6 +55972,249 @@ paths:
         permissions: []
       x-undo:
         type: safe
+  /api/v2/cost/arbitrary_rule:
+    get:
+      description: List all arbitrary cost rules - Retrieve a list of all arbitrary
+        cost rules for the organization
+      operationId: ListArbitraryCostRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArbitraryRuleResponseArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List arbitrary cost rules
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 23
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new arbitrary cost rule with the specified filters and
+        allocation strategy.
+
+
+        **Strategy Methods:**
+
+        - **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing
+        costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs,
+        allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.
+
+        - **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries
+        data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.
+
+        - **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by
+        (array of percentage allocations).
+
+
+        **Filter Conditions:**
+
+        - Use **value** for single-value conditions: "is", "is not", "contains", "does
+        not contain", "=", "!=", "like", "not like", "is all values", "is untagged"
+
+        - Use **values** for multi-value conditions: "in", "not in"
+
+        - Cannot use both value and values simultaneously.
+
+
+        **Supported operators**: is, is not, is all values, is untagged, contains,
+        does not contain, in, not in, =, !=, like, not like'
+      operationId: CreateArbitraryCostRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArbitraryCostUpsertRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArbitraryRuleResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Create arbitrary cost rule
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 24
+      x-undo:
+        type: idempotent
+  /api/v2/cost/arbitrary_rule/reorder:
+    post:
+      description: "Reorder arbitrary cost rules - Change the execution order of arbitrary
+        cost rules.\n\n**Important**: You must provide the **complete list** of all
+        rule IDs in the desired execution order. The API will reorder ALL rules according
+        to the provided sequence.\n\nRules are executed in the order specified, with
+        lower indices (earlier in the array) having higher priority.\n\n**Example**:
+        If you have rules with IDs [123, 456, 789] and want to change order from 123\u2192456\u2192789
+        to 456\u2192123\u2192789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\":
+        \"789\"}]"
+      operationId: ReorderArbitraryCostRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderRuleResourceArray'
+        required: true
+      responses:
+        '204':
+          description: Successfully reordered rules
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Reorder arbitrary cost rules
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 28
+      x-undo:
+        type: idempotent
+  /api/v2/cost/arbitrary_rule/{rule_id}:
+    delete:
+      description: Delete an arbitrary cost rule - Delete an existing arbitrary cost
+        rule by its ID
+      operationId: DeleteArbitraryCostRule
+      parameters:
+      - description: The unique identifier of the arbitrary cost rule
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete arbitrary cost rule
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 26
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific arbitrary cost rule - Retrieve a specific arbitrary
+        cost rule by its ID
+      operationId: GetArbitraryCostRule
+      parameters:
+      - description: The unique identifier of the arbitrary cost rule
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArbitraryRuleResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get arbitrary cost rule
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 27
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update an existing arbitrary cost rule with new filters and allocation
+        strategy.
+
+
+        **Strategy Methods:**
+
+        - **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing
+        costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs,
+        allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.
+
+        - **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries
+        data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.
+
+        - **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by
+        (array of percentage allocations).
+
+        - **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).
+
+
+        **Filter Conditions:**
+
+        - Use **value** for single-value conditions: "is", "is not", "contains", "does
+        not contain", "=", "!=", "like", "not like", "is all values", "is untagged"
+
+        - Use **values** for multi-value conditions: "in", "not in"
+
+        - Cannot use both value and values simultaneously.
+
+
+        **Supported operators**: is, is not, is all values, is untagged, contains,
+        does not contain, in, not in, =, !=, like, not like'
+      operationId: UpdateArbitraryCostRule
+      parameters:
+      - description: The unique identifier of the arbitrary cost rule
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArbitraryCostUpsertRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArbitraryRuleResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Update arbitrary cost rule
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 25
+      x-undo:
+        type: idempotent
   /api/v2/cost/aws_cur_config:
     get:
       description: List the AWS CUR configs.
@@ -54057,7 +56263,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AwsCURConfigResponse'
+                $ref: '#/components/schemas/AwsCurConfigResponse'
           description: OK
         '400':
           content:
@@ -54081,7 +56287,7 @@ paths:
       summary: Create Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
-      x-menu-order: 3
+      x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
@@ -54126,6 +56332,37 @@ paths:
         - cloud_cost_management_write
       x-undo:
         type: idempotent
+    get:
+      description: Get a specific AWS CUR config.
+      operationId: GetCostAWSCURConfig
+      parameters:
+      - description: The unique identifier of the cloud account
+        in: path
+        name: cloud_account_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsCurConfigResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get cost AWS CUR config
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 5
+      x-undo:
+        type: safe
     patch:
       description: Update the status (active/archived) and/or account filtering configuration
         of an AWS CUR config.
@@ -54167,7 +56404,7 @@ paths:
       summary: Update Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
-      x-menu-order: 2
+      x-menu-order: 3
       x-permission:
         operator: OR
         permissions:
@@ -54246,7 +56483,7 @@ paths:
       summary: Create Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
-      x-menu-order: 8
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -54291,6 +56528,37 @@ paths:
         - cloud_cost_management_write
       x-undo:
         type: idempotent
+    get:
+      description: Get a specific Azure config.
+      operationId: GetCostAzureUCConfig
+      parameters:
+      - description: The unique identifier of the cloud account
+        in: path
+        name: cloud_account_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UCConfigPair'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get cost Azure UC config
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 10
+      x-undo:
+        type: safe
     patch:
       description: Update the status of an  Azure config (active/archived).
       operationId: UpdateCostAzureUCConfigs
@@ -54337,7 +56605,7 @@ paths:
       summary: Update Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
-      x-menu-order: 7
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -54377,7 +56645,7 @@ paths:
       summary: Create or update a budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 14
+      x-menu-order: 34
       x-undo:
         operationId: DeleteBudget
         parameters:
@@ -54405,7 +56673,7 @@ paths:
       summary: Delete a budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 15
+      x-menu-order: 35
       x-undo:
         type: idempotent
     get:
@@ -54434,7 +56702,7 @@ paths:
       summary: Get a budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 16
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v2/cost/budgets:
@@ -54458,7 +56726,7 @@ paths:
       summary: List budgets
       tags:
       - Cloud Cost Management
-      x-menu-order: 17
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v2/cost/custom_costs:
@@ -54519,7 +56787,11 @@ paths:
       summary: List Custom Costs files
       tags:
       - Cloud Cost Management
-      x-menu-order: 10
+      x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
       x-undo:
         type: safe
     put:
@@ -54560,7 +56832,11 @@ paths:
       summary: Upload Custom Costs file
       tags:
       - Cloud Cost Management
-      x-menu-order: 11
+      x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
       x-undo:
         type: idempotent
   /api/v2/cost/custom_costs/{file_id}:
@@ -54594,7 +56870,7 @@ paths:
       summary: Delete Custom Costs file
       tags:
       - Cloud Cost Management
-      x-menu-order: 13
+      x-menu-order: 31
       x-undo:
         type: idempotent
     get:
@@ -54631,12 +56907,12 @@ paths:
       summary: Get Custom Costs file
       tags:
       - Cloud Cost Management
-      x-menu-order: 12
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v2/cost/gcp_uc_config:
     get:
-      description: List the GCP Usage Cost configs.
+      description: List the Google Cloud Usage Cost configs.
       operationId: ListCostGCPUsageCostConfigs
       responses:
         '200':
@@ -54658,10 +56934,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: List Cloud Cost Management GCP Usage Cost configs
+      summary: List Google Cloud Usage Cost configs
       tags:
       - Cloud Cost Management
-      x-menu-order: 1
+      x-menu-order: 11
       x-permission:
         operator: OR
         permissions:
@@ -54669,7 +56945,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a Cloud Cost Management account for an GCP Usage Cost config.
+      description: Create a Cloud Cost Management account for an Google Cloud Usage
+        Cost config.
       operationId: CreateCostGCPUsageCostConfig
       requestBody:
         content:
@@ -54703,10 +56980,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Create Cloud Cost Management GCP Usage Cost config
+      summary: Create Google Cloud Usage Cost config
       tags:
       - Cloud Cost Management
-      x-menu-order: 3
+      x-menu-order: 12
       x-permission:
         operator: OR
         permissions:
@@ -54741,18 +57018,49 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Delete Cloud Cost Management GCP Usage Cost config
+      summary: Delete Google Cloud Usage Cost config
       tags:
       - Cloud Cost Management
-      x-menu-order: 4
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
         - cloud_cost_management_write
       x-undo:
         type: idempotent
+    get:
+      description: Get a specific Google Cloud Usage Cost config.
+      operationId: GetCostGCPUsageCostConfig
+      parameters:
+      - description: The unique identifier of the cloud account
+        in: path
+        name: cloud_account_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpUcConfigResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get Google Cloud Usage Cost config
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 15
+      x-undo:
+        type: safe
     patch:
-      description: Update the status of an GCP Usage Cost config (active/archived).
+      description: Update the status of an Google Cloud Usage Cost config (active/archived).
       operationId: UpdateCostGCPUsageCostConfig
       parameters:
       - $ref: '#/components/parameters/CloudAccountID'
@@ -54794,10 +57102,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Update Cloud Cost Management GCP Usage Cost config
+      summary: Update Google Cloud Usage Cost config
       tags:
       - Cloud Cost Management
-      x-menu-order: 2
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -55388,6 +57696,7 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+      get: false
       patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
@@ -55957,6 +58266,43 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+  /api/v2/dora/deployment/{deployment_id}:
+    delete:
+      description: Use this API endpoint to delete a deployment event.
+      operationId: DeleteDORADeployment
+      parameters:
+      - description: The ID of the deployment event to delete.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a deployment event
+      tags:
+      - DORA Metrics
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
+      x-undo:
+        type: idempotent
   /api/v2/dora/deployments:
     post:
       description: Use this API endpoint to get a list of deployment events.
@@ -56028,7 +58374,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a deployment event
       tags:
       - DORA Metrics
@@ -56087,6 +58433,43 @@ paths:
       - DORA Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/dora/failure/{failure_id}:
+    delete:
+      description: Use this API endpoint to delete a failure event.
+      operationId: DeleteDORAFailure
+      parameters:
+      - description: The ID of the failure event to delete.
+        in: path
+        name: failure_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a failure event
+      tags:
+      - DORA Metrics
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
       x-undo:
         type: idempotent
   /api/v2/dora/failures:
@@ -56160,7 +58543,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a failure event
       tags:
       - DORA Metrics
@@ -58937,6 +61320,45 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/resource_collection:
+    get:
+      description: Get all resource collection AWS IAM permissions required for the
+        AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsResourceCollection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration resource collection IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get resource collection IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 8
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/standard:
+    get:
+      description: Get all standard AWS IAM permissions required for the AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsStandard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration standard IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS integration standard IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/integration/aws/logs/services:
@@ -71738,6 +74160,13 @@ paths:
     get:
       description: Get the list of all suppression rules.
       operationId: ListSecurityMonitoringSuppressions
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -74892,6 +77321,215 @@ paths:
         - billing_edit
       x-undo:
         type: safe
+  /api/v2/tags/enrichment:
+    get:
+      description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline
+        rulesets for the organization
+      operationId: ListRulesets
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RulesetRespArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List rulesets
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 16
+      x-undo:
+        type: safe
+    post:
+      description: Create a new tag pipeline ruleset with the specified rules and
+        configuration
+      operationId: CreateRuleset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRulesetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RulesetResp'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Create ruleset
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 17
+      x-undo:
+        type: idempotent
+  /api/v2/tags/enrichment/reorder:
+    post:
+      description: Reorder tag pipeline rulesets - Change the execution order of tag
+        pipeline rulesets
+      operationId: ReorderRulesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderRulesetResourceArray'
+        required: true
+      responses:
+        '204':
+          description: Successfully reordered rulesets
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Reorder rulesets
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 21
+      x-undo:
+        type: idempotent
+  /api/v2/tags/enrichment/validate-query:
+    post:
+      description: Validate a tag pipeline query - Validate the syntax and structure
+        of a tag pipeline query
+      operationId: ValidateQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RulesValidateQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RulesValidateQueryResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Validate query
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 22
+      x-undo:
+        type: safe
+  /api/v2/tags/enrichment/{ruleset_id}:
+    delete:
+      description: Delete a tag pipeline ruleset - Delete an existing tag pipeline
+        ruleset by its ID
+      operationId: DeleteRuleset
+      parameters:
+      - description: The unique identifier of the ruleset
+        in: path
+        name: ruleset_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete ruleset
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 19
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline
+        ruleset by its ID
+      operationId: GetRuleset
+      parameters:
+      - description: The unique identifier of the ruleset
+        in: path
+        name: ruleset_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RulesetResp'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get ruleset
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 20
+      x-undo:
+        type: safe
+    patch:
+      description: Update a tag pipeline ruleset - Update an existing tag pipeline
+        ruleset with new rules and configuration
+      operationId: UpdateRuleset
+      parameters:
+      - description: The unique identifier of the ruleset
+        in: path
+        name: ruleset_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRulesetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RulesetResp'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Update ruleset
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 18
+      x-undo:
+        type: idempotent
   /api/v2/team:
     get:
       description: 'Get all teams.
@@ -78032,8 +80670,8 @@ tags:
     for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
-    Cloud Cost Management accounts for AWS, Azure, and GCP. You can query your cost
-    data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
+    Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query
+    your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
     and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
@@ -78058,8 +80696,8 @@ tags:
     See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
     more information.
   name: Containers
-- description: 'Search or send events for DORA Metrics to measure and improve your
-    software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/)
+- description: 'Search, send, or delete events for DORA Metrics to measure and improve
+    your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/)
     for more information.
 
 

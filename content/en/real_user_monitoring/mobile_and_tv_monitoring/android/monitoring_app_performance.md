@@ -1,5 +1,6 @@
 ---
 title: Android Monitoring App Performance
+description: "Track Android app performance with custom view timings, network metrics, and user interaction measurements for better user experience."
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"

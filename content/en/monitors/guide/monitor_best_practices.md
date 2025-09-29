@@ -1,5 +1,6 @@
 ---
 title: Monitor Best Practices
+description: "Learn best practices for creating effective monitors including clear titles, multi-alerts, context, and using Monitor Quality for optimization."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

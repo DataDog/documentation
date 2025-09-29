@@ -1,5 +1,6 @@
 ---
 title: Rollup
+description: Control time aggregation and data point intervals using custom rollup functions and moving rollups for metrics.
 aliases:
     - /graphing/functions/rollup/
 further_reading:

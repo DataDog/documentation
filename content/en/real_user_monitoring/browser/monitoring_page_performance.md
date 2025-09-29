@@ -1,5 +1,6 @@
 ---
 title: Monitoring Page Performance
+description: "Monitor Core Web Vitals, loading times, and page performance telemetry with RUM Browser SDK to optimize user experience and troubleshoot issues."
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"
@@ -138,6 +139,15 @@ window.DD_RUM.init({
         (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
+```
+
+You can also ignore specific DOM mutations by marking an element (or one of its ancestors) with the attribute `data-dd-excluded-activity-mutations`.  
+This is useful for elements that constantly update but don't indicate real UI instability like loading spinners, progress bars, or live clocks.
+
+```html
+<div id="loading-spinner" data-dd-excluded-activity-mutations>
+  <svg> ... </svg>
+</div>
 ```
 
 ### Hash SPA navigation

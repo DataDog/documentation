@@ -52,7 +52,7 @@ LLMObs.enable(
 ## Datasets
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
 
 ### Creating a dataset
 
@@ -301,6 +301,43 @@ Create an experiment using `LLMObs.experiment()`:
    ```
    print(f"View experiment: {experiment.url}")
    ```
+
+## Setting up an automated experiment in CI/CD
+You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
+
+### GitHub Actions
+Use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
+
+**Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
+
+```yaml
+name: Experiment SDK Test
+
+on:
+  push:
+    branches:
+      - main # Or your desired branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: protected-main-env # The job uses secrets defined in this environment
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.0' # Or your desired Python version
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Install dependencies
+        run: poetry install
+      - name: Run tests
+        run: poetry run pytest -vv -s
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+```
 
 ## HTTP API
 
@@ -841,14 +878,14 @@ Empty body on success.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[1]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
-[10]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[10]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python

@@ -1,6 +1,6 @@
 ---
 title: Enrich And Control Browser RUM Data With beforeSend
-
+description: "Use the beforeSend callback to enrich, modify, or filter RUM events before they're sent to Datadog for enhanced data control."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
