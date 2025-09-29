@@ -18,16 +18,16 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-Configuring App and API Protection (AAP) for AWS Lambda involves:
+Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from AAP. Find them on [the Security tab of your Software Catalog][1].
-2. Setting up AAP instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
+2. Setting up App and API Protection instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Prerequisites
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
+  X-Ray tracing, by itself, is not sufficient for App and API Protection and requires APM Tracing to be enabled.
 
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
@@ -44,7 +44,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your lambda with AAP.
+The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your Lambda with App and API Protection.
 
 To install and configure the Datadog Serverless Framework plugin:
 
