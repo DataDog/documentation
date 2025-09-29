@@ -21,7 +21,7 @@ further_reading:
 Configuring App and API Protection for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
-2. Setting up App and API Protection instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
+2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][9], [AWS CDK][10], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Prerequisites
@@ -50,7 +50,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your lambda with AAP.
+The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with App and API protection.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -74,12 +74,12 @@ To install and configure the Datadog Serverless Framework plugin:
        enableDDTracing: true
        enableASM: true
    ```
-   See also the complete list of [plugin parameters][6] to further configure your lambda settings.
+   See also the complete list of [plugin parameters][2] to further configure your lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][7].
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[6]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
-[7]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][3].
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -101,7 +101,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
 3. Configure the AWS credentials:
 
-    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][8]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
+    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
 
 4. Configure the Datadog site:
 
@@ -140,13 +140,13 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
    **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
-    Additional parameters can be found in the [CLI documentation][9].
-[8]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[9]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+    Additional parameters can be found in the [CLI documentation][2].
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Construct][10] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
 1. Install the Datadog CDK constructs library:
 
@@ -180,10 +180,11 @@ The [Datadog CDK Construct][10] automatically installs Datadog on your functions
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][11] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
-    More information and additional parameters can be found on the [Datadog CDK documentation][10].
-[10]: https://github.com/DataDog/datadog-cdk-constructs
+    More information and additional parameters can be found on the [Datadog CDK documentation][1].
+[1]: https://github.com/DataDog/datadog-cdk-constructs
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -220,8 +221,8 @@ The [Datadog CDK Construct][10] automatically installs Datadog on your functions
     - Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-5. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][7].
-[7]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+5. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][1].
+[1]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}
 {{< /tabs >}}

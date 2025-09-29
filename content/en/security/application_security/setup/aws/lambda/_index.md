@@ -22,7 +22,7 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-Learn how to setup App and API Protection (AAP) on your AWS Lambda functions by selecting the programming language your function is written with.
+Learn how to setup App and API Protection on your AWS Lambda functions by selecting the programming language your function is written with.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>
