@@ -31,7 +31,7 @@ Configuring App and API Protection for AWS Lambda involves:
 
 ## Compatibility
 
-**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][3] to block IPs in your [WAF][4].
+Threat Protection through Remote Configuration is not supported. Use [Workflows][3] to block IPs in your [WAF][4].
 
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
