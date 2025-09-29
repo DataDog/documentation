@@ -11,7 +11,7 @@ variable "datadog_api_key" {
 
 module "my-cloud-run-app" {
   source  = "DataDog/cloud-run-datadog/google"
-  version = "1.0.1"
+  version = "~> 1.0"
 
   project  = "my-gcp-project"
   name     = "my-cloud-run-app"

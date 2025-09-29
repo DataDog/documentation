@@ -14,6 +14,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: /real_user_monitoring/guide/mobile-sdk-upgrade
+  tag: Documentation
+  text: Upgrade RUM Mobile SDKs
 ---
 ## Overview
 
@@ -472,6 +475,38 @@ To initialize an interceptor for tracking network events:
 - If you use multiple interceptors, add `DatadogInterceptor` first.
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][16] for third-party providers and network requests.
+
+To filter out specific errors reported by `DatadogInterceptor`, you can configure a custom `EventMapper` in your `RumConfiguration`:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+    val rumConfig = RumConfiguration.Builder(applicationId)
+        .setErrorEventMapper { errorEvent ->
+            if (errorEvent.shouldBeDiscarded()) {
+                null
+            } else {
+                errorEvent
+            }
+    }
+    .build();
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   RumConfiguration rumConfig = new RumConfiguration.Builder("applicationId")
+                .setErrorEventMapper(errorEvent -> {
+                    if (errorEvent.shouldBeDiscarded()) {
+                        return null;
+                    } else {
+                        return errorEvent;
+                    }
+                })
+                .build();
+    
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Track background events
 
