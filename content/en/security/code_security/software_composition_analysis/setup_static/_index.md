@@ -11,7 +11,7 @@ aliases:
 
 Datadog Software Composition Analysis (SCA) scans your repositories for open-source libraries and detects known security vulnerabilities before you ship to production.
 
-**Supported languages:** C#, Go, Java, JavaScript, PHP, Python, Ruby
+**Supported languages:** C#, C++, Go, Java, JavaScript, PHP, Python, Ruby
 
 To get started:
 1. Open [Code Security settings][2].
@@ -72,7 +72,6 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`                     |
 | C++        | Conan             | `conan.lock`                             |
-| Erlang     | Hex               | `mix.lock`                               |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -85,7 +84,6 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Python     | poetry            | `poetry.lock`                            |
 | Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
-| Rust       | Cargo             | `cargo.lock`                             |
 
 ### Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
