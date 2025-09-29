@@ -3603,11 +3603,16 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
       weight: 103
+    - name: Oracle
+      url: cloud_cost_management/setup/oracle/
+      parent: cloud_cost_setup
+      identifier: cloud_cost_oracle
+      weight: 104
     - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 104
+      weight: 105
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
