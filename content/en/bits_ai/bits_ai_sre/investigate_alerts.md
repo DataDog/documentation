@@ -20,10 +20,10 @@ You can manually invoke Bits on an individual monitor alert or warn event from s
 1. Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE** on the right.
 
 #### Option 3: Monitor Event Side Panel
-1. From the monitor event side panel, click **Investigate with Bits AI SRE**.
+From the monitor event side panel, click **Investigate with Bits AI SRE**.
 
 #### Option 4: Slack
-1. In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
+In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
 ### Enable automatic investigations
 
@@ -78,10 +78,10 @@ Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [no
 1. Lastly, go to [**Bits AI** > **SRE Agent** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
 
 #### Case Management
-1. In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14].
+In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14].
 
 #### On-Call
-1. In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
+In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
 
 ### Configure knowledge base integrations
 
