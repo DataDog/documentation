@@ -240,7 +240,7 @@ Evaluators are functions that measure how well the model or agent performs by co
        return "Beijing" if "China" in question else "Unknown"
    ```
    A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.  
-   Our example here generates a string, but you could generate a dict as output to store any intermediary information you'd like to save and compare in the Evaluators.
+   This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
      
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.  
    If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
