@@ -30,7 +30,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 1. Add a name for the rule.
 1. Click **Create Rule**.
 
-{{< img src="/monitors/notifications/notification_rules/notification_rules_form.png" alt="Configuration for a notification rule showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_form_with_conditional_recipients.png" alt="Configuration for a notification rule showing tag scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
 
 ## Managing notification rules
 
