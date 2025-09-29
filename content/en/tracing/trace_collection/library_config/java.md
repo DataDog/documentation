@@ -335,10 +335,12 @@ For more information, see [Enabling AAP for Java][19].
 
 ### Errors
 
-`dd.http.client.tag.query-string`
-: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+`dd.trace.http.client.tag.query-string`
+: **System Property (Deprecated)**: `dd.http.client.tag.query-string`<br>
+**Environment Variable**: `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Environment Variable (Deprecated)**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
-By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data.
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
 
 `dd.http.client.error.statuses`
 : **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
