@@ -1,10 +1,11 @@
 ---
 title: Retention Widget
+description: Analyze user retention and engagement patterns over time using cohort analysis visualization.
 widget_type: cohort
 further_reading:
-- link: "product_analytics/user_retention/"
+- link: "product_analytics/charts/retention_analysis/"
   tag: "Documentation"
-  text: "Product Analytics User Retention"
+  text: "Retention Analysis"
 - link: "https://www.datadoghq.com/blog/user-engagement-retention-analysis/"
   tag: "Blog"
   text: "Measure long-term user engagement with Datadog Retention Analysis"
@@ -31,7 +32,7 @@ Retention Analysis allows you to measure how often users are successfully return
 
 ## Setup
 
-To populate User Retention data, you must set the `usr.id` attribute in your SDK. [See the instructions for sending unique user attributes][1].
+To populate user retention data, you must set the `usr.id` attribute in your SDK. [See the instructions for sending unique user attributes][1].
 
 ### Configuration
 

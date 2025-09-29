@@ -26,7 +26,7 @@ title: Recopilación de logs de Node.js
 
 ## Configurar tu logger
 
-Para enviar tus logs a Datadog, loguea un archivo y [supervisa][14] ese archivo con tu Datadog Agent. Utiliza la biblioteca de registro de [Winston][1] al log desde tu aplicación Node.js.
+Para enviar tus logs a Datadog, loguea un archivo y [supervisa][14] ese archivo con tu Datadog Agent. Utiliza la librería de registro de [Winston][1] al log desde tu aplicación Node.js.
 
 Winston está disponible a través de [NPM][2], para empezar, debes añadir la dependencia a tu código:
 

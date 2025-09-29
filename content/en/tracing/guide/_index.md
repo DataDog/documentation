@@ -1,5 +1,6 @@
 ---
 title: Tracing Guides
+description: Step-by-step guides for getting started with APM, enabling tracing tutorials, configuration guides, and advanced tracing techniques.
 
 private: true
 disable_toc: true
@@ -88,5 +89,5 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/aws_payload_tagging/" >}}Capture requests and responses from AWS services automatically{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/service_overrides/" >}}Service Overrides{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/injectors/" >}}Understanding injector behavior with Single Step Instrumentation{{< /nextlink >}}
-    {{< nextlink href="/tracing/code_origins/" >}}Code Origins for Spans{{< /nextlink >}}
+    {{< nextlink href="/tracing/code_origin/" >}}Code Origin for Spans{{< /nextlink >}}
 {{< /whatsnext >}}

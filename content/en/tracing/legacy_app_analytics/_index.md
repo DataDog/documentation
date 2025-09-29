@@ -1,5 +1,6 @@
 ---
 title: App Analytics
+description: Documentation for deprecated App Analytics features with configuration information for legacy setups and migration guidance to new ingestion controls.
 aliases:
   - /tracing/visualization/search/
   - /tracing/trace_search_and_analytics/

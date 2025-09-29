@@ -60,6 +60,7 @@ App and API Protection capabililties for PHP support the following SAPI's:
 | cli            | Fully Supported |
 | fpm-fcgi       | Fully Supported |
 | cgi-fcgi       | Fully Supported |
+| FrankenPHP     | Fully Supported |
 
 ## Supported processor architectures
 

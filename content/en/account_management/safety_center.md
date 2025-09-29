@@ -1,5 +1,6 @@
 ---
 title: Safety Center
+description: Review security alerts, configuration warnings, and user management best practices from Datadog's centralized Safety Center.
 further_reading:
     - link: "/account_management/api-app-keys/"
       tag: "Documentation"

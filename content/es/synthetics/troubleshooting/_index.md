@@ -18,7 +18,7 @@ title: Solución de problemas de Synthetic Monitoring
 
 ## Información general
 
-Si tienes problemas para instalar o configurar Datadog Synthetic Monitoring, esta página te ayudará a solucionarlos. Si sigues teniendo problemas, [contacta con el equipo de asistencia de Datadog][1].
+Si tienes problemas para instalar o configurar Datadog Synthetic Monitoring, esta página te ayudará a solucionarlos. Si sigues teniendo problemas, [ponte en contacto con el equipo de asistencia de Datadog][1].
 
 ## Tests de API
 
@@ -32,9 +32,9 @@ Si ves un pico repentino o un aumento general en las [métricas de tiempos][2] d
 
 #### El sitio web no se carga en el iframe
 
-Tras descargar la [extensión de Datadog][4], no se ve tu sitio web en el iframe situado a la derecha de la grabadora de tu test de navegador, sino que indica el mensaje`Your website does not support being loaded through an iframe.`(Tu sitio web no permite la carga a través de un iframe). Podría deberse a que hay algunas configuraciones de tu aplicación que impiden que se abra en un iframe.
+Luego de descargar la [extensión Datadog][4], no ves tu sitio web en el iframe situado a la derecha de la grabadora de tu test de navegador, sino que el iframe indica el mensaje`Your website does not support being loaded through an iframe.` Esto podría deberse a que algunas configuraciones de tu aplicación impiden que se abra en un iframe.
 
-O, si no puedes iniciar sesión en tu sitio web al grabar en la grabadora de iframe, esto podría significar que tu aplicación tiene una petición bloqueada.
+Si no puedes iniciar sesión en tu sitio web cuando grabas en la grabadora de iframe, es posible que tu aplicación tenga una solicitud bloqueada.
 
 Prueba abrir tu sitio web en una ventana emergente haciendo clic en **Open in Popup** (Abrir en ventana emergente) para registrar el recorrido del usuario.
 
@@ -50,11 +50,11 @@ Lo más probable es que estés intentando grabar los pasos en una página `http`
 
 #### Mi sitio web no se carga en el iframe y no puedo grabar ningún paso, aunque lo abra en una ventana emergente
 
-Tras descargar la [extensión de Datadog][4], no se ve tu sitio web en el iframe situado a la derecha de la grabadora de tu test de navegador. Tampoco puedes grabar ningún paso, independientemente de si abres el sitio web en el iframe o en una ventana emergente:
+Luego de descargar la [extensión Datadog][4], no ves tu sitio web en el iframe situado a la derecha de la grabadora de tu test de navegador. Tampoco puedes grabar ningún paso, independientemente de si abres el sitio web en el iframe o en una ventana emergente:
 
 {{< img src="synthetics/recording_iframe.mp4" alt="Problemas al grabar pasos de tests de navegador" video="true" width="100%" >}}
 
-Si esto sucede, asegúrate de que la [extensión de Datadog][5] disponga de los permisos necesarios para leer y modificar datos en los sitios web correspondientes, indicando tu sitio web en la sección `On specific sites` (En sitios específicos) o activando la opción `On all sites` (En todos los sitios):
+Si esto sucede, asegúrate de que la [extensión Datadog][5] disponga de los permisos necesarios para leer y modificar datos en los sitios web correspondientes, indicando tu sitio web en la sección `On specific sites` (En sitios específicos) o activando la opción `On all sites` (En todos los sitios):
 
 {{< img src="synthetics/extension.mp4" alt="Permitir que la extensión lea datos en todos los sitios" video="true" width="100%" >}}
 
@@ -129,7 +129,7 @@ Si uno de los tests de Synthetic muestra un error 401, lo más probable es que n
 
 * ¿Este endpoint utiliza **parámetros de consulta para la autenticación** (por ejemplo, necesitas añadir una clave de API específica en tus parámetros de URL)?
 
-* ¿Este endpoint utiliza **autenticación con IP**? Si es así, es posible que debas permitir algunas o todas las [IPs desde las que se originan los tests de Synthetic] [11].
+* ¿Este endpoint utiliza **autenticación con IP**? Si es así, es posible que debas permitir algunas o todas las [IP desde las que se originan los tests Synthetic][11].
 
 ### Errores de prohibición
 
@@ -221,6 +221,12 @@ Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.syntheti
 ```
 
 Para resolver este problema, asegúrate de que `net.ipv4.ip_forward` está habilitado en el host. 
+
+### Mi política de seguridad requiere que los contenedores de localización privada se ejecuten con un sistema de archivos raíz de sólo lectura
+
+Los contenedores de localización privada requieren acceso de lectura-escritura a carpetas y archivos específicos para funcionar correctamente. Si el contenedor se ejecuta con un sistema de archivos raíz de sólo lectura, no se iniciará correctamente debido a varias operaciones críticas que dependen del acceso de escritura.
+
+Durante el inicio, el contenedor intenta configurar capacidades de Linux en ciertos binarios. Esto es necesario porque, durante el proceso de creación de localizaciones privadas, los bits de metadatos se eliminan de los binarios por razones de seguridad. Por defecto, esto restringe la ejecución al usuario `root`. Dado que las localizaciones privadas se ejecutan con el usuario `dog`, el contenedor vuelve a aplicar los permisos necesarios para permitir la ejecución. En un sistema de archivos raíz de sólo lectura, estas actualizaciones fallan, dando lugar a errores cuando se inicia el contenedor.
 
 ### A veces, mis contendores de localizaciones privadas se eliminan debido a un problema `OOM`
 

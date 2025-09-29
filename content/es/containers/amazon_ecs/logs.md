@@ -18,7 +18,11 @@ A partir de la versión 6, el Datadog Agent recopila logs de contenedores. La fo
 Una vez activada, el contenedor del Datadog Agent recopila los logs emitidos desde los otros contenedores de aplicaciones que se encuentran en ese mismo host, lo cual se limita a los logs emitidos en los flujos de logs `stdout` y `stderr` al utilizar el controlador de registro `default` o `json-file`.
 
 - Si tus contenedores crean archivos de logs aislados en *sus* contenedores, debes seguir algunos [pasos más](#log-file-within-a-container) para asegurarte de que el contenedor del Agent tenga visibilidad sobre esos archivos de logs.
-- Si tus contenedores utilizan el [controlador de registro `awslogs` para enviar los logs a CloudWatch][9], esos logs no resultarán visibles para el Agent. Para recopilar estos, logs, utiliza una de las [integraciones de recopilación de logs de AWS][10] en su lugar.
+- Si tus contenedores utilizan el [controlador de registro `awslogs` para enviar logs a CloudWatch][9], entonces esos logs no son visibles para el Agent. En su lugar, utiliza una de las [integraciones de recopilación de logs de AWS][10] para recopilar esos logs.
+
+#### AWS Fargate
+
+Para configurar la recopilación de logs para AWS Fargate, consulta [Recopilación de logs para AWS Fargate][13].
 
 ## Instalación
 
@@ -267,3 +271,4 @@ El atributo `source` sirve para identificar la integración que usar para cada c
 [10]: /es/integrations/amazon_web_services/?tab=allpermissions#log-collection
 [11]: /es/containers/amazon_ecs/?tab=awscli#setup
 [12]: /es/containers/docker/log/?tab=dockerfile#log-integrations
+[13]: /es/integrations/ecs_fargate/?tab=webui#log-collection

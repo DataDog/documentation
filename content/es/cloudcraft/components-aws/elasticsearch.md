@@ -126,7 +126,7 @@ Cada opción se representa de forma diferente dentro del objeto `billingOptions`
 ```
 
 - **type: ri**: el valor de la opción de facturación para una instancia reservada es siempre `ri`.
-- **leaseContractLenght**: el tiempo por el que se reserva la instancia. Los valores aceptados son `12` o `36`.
+- **leaseContractLength**: el tiempo por el que se reserva la instancia. Los valores aceptados son `12` o `36`.
 - **purchaseOption: string**: la opción de compra de la instancia. Los valores aceptados son `No Upfront`, `Partial Upfront` y `All Upfront`.
 
 [1]: https://developers.cloudcraft.co/

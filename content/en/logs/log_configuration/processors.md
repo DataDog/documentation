@@ -859,6 +859,38 @@ Extract a specific value from an object inside an array when it matches a condit
 ```
 
 {{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Extract Referrer URL",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "select",
+    "source": "httpRequest.headers",
+    "target": "referrer",
+    "filter": "name:Referrer",
+    "value_to_extract": "value"
+  }
+}
+```
+
+| Parameter    | Type             | Required | Description                                                   |
+|--------------|------------------|----------|---------------------------------------------------------------|
+| `type`       | String           | Yes      | Type of the processor.                                        |
+| `name`       | String           | No       | Name of the processor.                                        |
+| `is_enabled` | Boolean          | No       | Whether the processor is enabled. Default: `false`.        |
+| `operation.type`  | String      | Yes      | Type of array processor operation.                            |
+| `operation.source`  | String    | Yes      | Path of the array you want to select from.                    |
+| `operation.target`  | String    | Yes      | Target attribute.                                             |
+| `operation.filter`  | String    | Yes      | Expression to match an array element. The first matching element is selected. |
+| `operation.value_to_extract`  | String | Yes | Attribute to read in the selected element.                  |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Array length
@@ -891,6 +923,34 @@ Compute the number of elements in an array.
   "tagCount": 3
 }
 ```
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Compute number of tags",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "length",
+    "source": "tags",
+    "target": "tagCount"
+  }
+}
+```
+
+| Parameter           | Type      | Required | Description                                                   |
+|---------------------|-----------|----------|---------------------------------------------------------------|
+| `type`              | String    | Yes      | Type of the processor.                                        |
+| `name`              | String    | No       | Name of the processor.                                        |
+| `is_enabled`        | Boolean   | No       | Whether the processor is enabled. Default: `false`.        |
+| `operation.type`    | String    | Yes      | Type of array processor operation.                            |
+| `operation.source`  | String    | Yes      | Path of the array to extract the length of.                   |
+| `operation.target`  | String    | Yes      | Target attribute.                                             |
+
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -937,6 +997,35 @@ Add an attribute value to the end of a target array attribute in the log.
 }
 ```
 {{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Append client IP to sourceIps",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "append",
+    "source": "network.client.ip",
+    "target": "sourceIps"
+  }
+}
+```
+
+| Parameter                    | Type       | Required | Description                                                        |
+|------------------------------|------------|----------|--------------------------------------------------------------------|
+| `type`                       | String     | Yes      | Type of the processor.                                             |
+| `name`                       | String     | No       | Name of the processor.                                             |
+| `is_enabled`                 | Boolean    | No       | Whether the processor is enabled. Default: `false`.             |
+| `operation.type`             | String     | Yes      | Type of array processor operation.                                 |
+| `operation.source`           | String     | Yes      | Attribute to append.                                               |
+| `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
+| `operation.preserve_source`  | Boolean    | No      | Whether to preserve the original source after remapping. Default: `false`.   |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Decoder processor
@@ -978,7 +1067,7 @@ For more information, see [Threat Intelligence][9].
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/log_configuration/pipelines/
-[2]: /logs/log_configuration/parsing/
+[2]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [5]: /logs/log_collection/?tab=host#attributes-and-tags

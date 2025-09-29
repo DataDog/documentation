@@ -1,5 +1,6 @@
 ---
 title: Agent Guides
+description: "Collection of comprehensive guides covering Datadog Agent configuration, installation, troubleshooting, and advanced features."
 private: true
 disable_toc: true
 cascade:
@@ -12,6 +13,8 @@ cascade:
 {{< header-list header="Configuration guides" >}}
     {{< nextlink href="agent/guide/setup_remote_config" >}}Set up Remote Configuration for Fleet Automation{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
+    {{< nextlink href="agent/guide/datadog-disaster-recovery" >}}Datadog Disaster Recovery{{< /nextlink >}}
+
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Set up Ansible Using a Standalone Datadog Role{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}

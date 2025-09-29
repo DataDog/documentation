@@ -28,25 +28,22 @@ Automated Analysis는 Continuous Profiler 데이터를 사용하여 애플리케
 
 발견하지 못할 수도 있는 애플리케이션의 성능 문제를 식별하고 이를 해결하는 데 필요한 프로파일링 전문성을 줄입니다.
 
-{{< img src="profiler/profiling_automated_analysis.png" alt="발생 예외 인사이트가 표시된 Profiler 스레드 타임라인" style="width:100%;" >}}
+{{< img src="profiler/profiling_automated_analysis_thread_timeline.png" alt="발생 예외 인사이트가 표시된 Profiler 스레드 타임라인" style="width:100%;" >}}
 
 ## 인사이트 살펴보기
 [Profile Explorer][1]에서 Automated Analysis에 액세스합니다. 다음 인사이트가 표시됩니다.
 
 - 특정 서비스로 범위가 지정되면 Page 상단의 **Top Insights** 배너에서 다음을 확인할 수 있습니다.
-{{< img src="profiler/profiling_automated_analysis_banner.png" alt="Automated Analysis 배너, 지정된 서비스에 대해 탐지된 인사이트가 표시됨" style="width:100%;">}}
-
-- 서비스 목록의 **Insights** 열에 다음과 같이 표시됩니다.
-{{< img src="profiler/profiling_automated_analysis_column.png" alt="Automated Analysis 열, 서비스 목록 내 지정된 서비스와 관련하여 탐지된 인사이트가 표시됨" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_section.png" alt="Automated Analysis 배너, 지정된 서비스에 대해 탐지된 인사이트가 표시됨" style="width:100%;">}}
 
 - 플레임 그래프 보기 내에서는 다음과 같이 표시됩니다.
-{{< img src="profiler/profiling_automated_analysis_flamegraph_viz.png" alt="Automated Analysis 열, 플레임 그래프 내의 지정된 서비스와 관련하여 탐지된 인사이트가 표시됨" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_flamegraph.png" alt="Automated Analysis 열, 플레임 그래프 내의 지정된 서비스와 관련하여 탐지된 인사이트가 표시됨" style="width:100%;">}}
 
 - 타임라인 보기 내에서는 다음과 같이 표시됩니다.
-{{< img src="profiler/profiling_automated_analysis.png" alt="Automated Analysis 열, 타임라인 내 지정된 서비스에 대해 탐지된 인사이트가 표시됨" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_thread_timeline.png" alt="Automated Analysis 열, 타임라인 내 지정된 서비스에 대해 탐지된 인사이트가 표시됨" style="width:100%;">}}
 
 인사이트를 클릭하면 문제를 설명하는 개괄적 요약, 프로파일링 데이터의 상황별 인사이트, 권장 다음 단계를 확인할 수 있습니다.
-{{< img src="profiler/profiling_automated_analysis_details.png" alt="감지된 문제의 세부 사항을 보여주는 확장 프로파일링 인사이트" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_detail.png" alt="감지된 문제의 세부 사항을 보여주는 확장 프로파일링 인사이트" style="width:100%;">}}
 
 ## 지원되는 인사이트
 

@@ -38,14 +38,14 @@ Ce guide suppose que votre application s'exécute déjà sur Heroku. Consultez l
    heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
    # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
-   heroku config:add DD_DYNO_HOST=true
+   heroku config:add DD_DYNO_HOST=true -a $APPNAME
 
    # Set the DD_SITE env variable automatically
-   heroku config:add DD_SITE=$DD_SITE
+   heroku config:add DD_SITE=$DD_SITE -a $APPNAME
 
    # Add this buildpack and set your Datadog API key
-   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-   heroku config:add DD_API_KEY=$DD_API_KEY
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git -a $APPNAME
+   heroku config:add DD_API_KEY=$DD_API_KEY -a $APPNAME
 
    # Deploy to Heroku forcing a rebuild
    git commit --allow-empty -m "Rebuild slug"
@@ -106,7 +106,7 @@ git push heroku main
 
 Outre les exemples ci-dessus, vous pouvez définir un certain nombre de variables d'environnement supplémentaires :
 
-| Paramètre                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Paramètre                    | Rôle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`               | *Obligatoire.* Vous pouvez consulter votre clé d'API sur la page [Organization Settings -> API Keys][3]. **Remarque** : il s'agit de votre clé d'*API*, et non de la clé d'application.                                                                                                                                                                                                                                                                                                                                                                                |
 | `DD_HOSTNAME`              | *Facultatif*. **ATTENTION** : la définition manuelle du hostname peut entraîner des erreurs de continuité des métriques. Nous vous conseillons de ne *pas* définir cette variable. Étant donné que les hosts dyno sont éphémères, il est recommandé d'effectuer votre suivi en fonction des tags `dynoname` ou `appname`.                                                                                                                                                                                                                                                       |
@@ -146,7 +146,8 @@ Par défaut, l'Agent Datadog s'exécute sur chacun des dynos qui font partie de 
 Pour désactiver l'Agent Datadog en fonction du type de dyno, ajoutez l'extrait de code suivant à votre [script prerun.sh](#script-de-pre-execution) (en l'adaptant au type de dynos que vous ne souhaitez pas surveiller) :
 
 ```shell
-# Désactiver l'Agent Datadog en fonction du type de dyno
+DYNOTYPE=${DYNO%%.*}
+# Disable the Datadog Agent based on dyno type
 if [ "$DYNOTYPE" == "run" ] || [ "$DYNOTYPE" == "scheduler" ] || [ "$DYNOTYPE" == "release" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
@@ -218,6 +219,52 @@ heroku config:set DD_ENABLE_DBM=true
 
 La solution Database Monitoring requiert la création d'identifiants de base de données pour l'Agent Datadog. Pour cette raison, vous ne pouvez pas en tirer parti si vous bénéficiez simplement d'une offre Essential pour Heroku Postgres.
 
+### Activer les profils DogStatsD Mapper (Sidekiq)
+
+Certaines intégrations, comme [Sidekiq](https://docs.datadoghq.com/integrations/sidekiq/), nécessitent des profils [DogStatsD Mapper](https://docs.datadoghq.com/developers/dogstatsd/dogstatsd_mapper/).
+
+Pour ajouter un nouveau profil DogStatsD Mapper, ajoutez l'extrait suivant dans votre [script prerun.sh](#prerun-script) :
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: '<PROFILE_NAME>'
+    prefix: '<PROFILE_PREFIX>'
+    mappings:
+      - match: '<METRIC_TO_MATCH>'
+        match_type: '<MATCH_TYPE>'
+        name: '<MAPPED_METRIC_NAME>'
+        tags:
+          '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
+EOF
+```
+
+Par exemple, pour activer l'intégration Sidekiq, ajoutez l'extrait suivant :
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: sidekiq
+    prefix: "sidekiq."
+    mappings:
+      - match: 'sidekiq\.sidekiq\.(.*)'
+        match_type: "regex"
+        name: "sidekiq.$1"
+      - match: 'sidekiq\.jobs\.(.*)\.perform'
+        name: "sidekiq.jobs.perform"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+      - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+        name: "sidekiq.jobs.worker.$2"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+EOF
+```
+
 ### Activer d'autres intégrations
 
 Pour activer une [intégration Datadog intitulée -<NOM_INTÉGRATION>][19], procédez comme suit :
@@ -242,6 +289,40 @@ instances:
 
 **Remarque** : consultez le fichier d'exemple [mcache.d/conf.yaml][22] pour découvrir toutes les options de configuration disponibles.
 
+#### Utiliser le script prerun.sh pour modifier dynamiquement la configuration de l'intégration
+
+Si vous avez des détails de configuration stockés dans des variables d'environnement (comme la configuration d'une base de données ou des secrets), vous pouvez utiliser le [script prerun.sh](#prerun-script) pour les ajouter dynamiquement à la configuration de l'Agent Datadog avant son démarrage.
+
+Par exemple, pour activer l'intégration Postgres, le fichier `datadog/conf.d/postgres.d/conf.yaml` peut être ajouté à la racine de votre application (ou à l'emplacement `/$DD_HEROKU_CONF_FOLDER/conf.d/postgres.d/conf.yaml` si vous avez modifié cette [option de configuration](#configuration)) :
+
+```yaml
+init_config:
+
+instances:
+  - host: <VOTRE HOSTNAME>
+    port: <VOTRE PORT>
+    username: <VOTRE NOM D'UTILISATEUR>
+    password: <VOTRE MOT DE PASSE>
+    dbname: <NOM DE VOTRE BDD>
+    ssl: True
+```
+
+Utilisez ensuite le script `prerun.sh` pour remplacer ces variables par leurs valeurs réelles issues de l'environnement :
+
+```bash
+# Update the Postgres configuration from above using the Heroku application environment variable
+if [ -n "$DATABASE_URL" ]; then
+  POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
+  if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
+    sed -i "s/<YOUR HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR USERNAME>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR DBNAME>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+  fi
+fi
+```
+
 ### Intégrations de la communauté
 
 Si l'intégration que vous activez fait partie des [intégrations de la communauté][23], installez le package au sein du [script de pré-exécution](#script-de-pre-execution).
@@ -262,7 +343,8 @@ Puisque le système de fichiers d'une application Heroku est partagé avec tous 
 
 Par exemple, pour que l'intégration Gunicorn s'exécute uniquement sur les dynos de type `web`, ajoutez ce qui suit à votre script de pré-exécution :
 
-```
+```shell
+DYNOTYPE=${DYNO%%.*}
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
@@ -295,22 +377,25 @@ L'exemple ci-dessous illustre quelques actions que vous pouvez accomplir à l'ai
 ```shell
 #!/usr/bin/env bash
 
-# Désactiver l'Agent Datadog en fonction du type de dyno
+# Extract dyno type from Heroku's '$DYNO' environment variable 
+DYNOTYPE="${DYNO%%.*}"
+
+# Disable the Datadog Agent based on dyno type
 if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
-# Désactiver des integrations en fonction du type de dyno
+# Disable integrations based on dyno type
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
 
-# Définir la version de l'application en fonction de HEROKU_SLUG_COMMIT
+# Set app version based on HEROKU_SLUG_COMMIT
 if [ -n "$HEROKU_SLUG_COMMIT" ]; then
   DD_VERSION=$HEROKU_SLUG_COMMIT
 fi
 
-# Installer l'intégration « ping » de la communauté
+# Install the "ping" community integration
 agent-wrapper integration install -t datadog-ping==1.0.0
 ```
 
@@ -364,11 +449,11 @@ heroku config:add DD_HEROKU_DYNO=true
 Par exemple, si vous créez votre image Docker depuis un système d'exploitation basé sur Debian, ajoutez les lignes suivantes à votre `Dockerfile` :
 
 ```
-# Installer les dépendances GPG
+# Install GPG dependencies
 RUN apt-get update \
  && apt-get install -y gnupg apt-transport-https gpg-agent curl ca-certificates
 
-# Ajouter le référentiel et les clés de signature Datadog
+# Add Datadog repository and signing keys
 ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
 ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
 RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
@@ -385,16 +470,16 @@ RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADO
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_382E94DE.public
 
 
-# Installer l'Agent Datadog
+# Install the Datadog Agent
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
-# Copier le point d'entrée
+# Copy entrypoint
 COPY entrypoint.sh /
 
-# Exposer les ports de DogStatsD et de trace-agent
+# Expose DogStatsD and trace-agent ports
 EXPOSE 8125/udp 8126/tcp
 
-# Copier votre configuration Datadog
+# Copy your Datadog configuration
 COPY datadog-config/ /etc/datadog-agent/
 
 CMD ["/entrypoint.sh"]

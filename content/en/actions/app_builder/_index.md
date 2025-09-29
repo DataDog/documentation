@@ -1,5 +1,6 @@
 ---
 title: App Builder
+description: Low-code platform for building internal tools with drag-and-drop interface, JavaScript support, and integration with external services.
 disable_toc: false
 aliases:
     - /developers/datadog_apps/
@@ -9,7 +10,7 @@ aliases:
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
-  text: "Actions Catalog"
+  text: "Action Catalog"
 - link: "https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/"
   tag: "Blog"
   text: "Build custom monitoring and remediation tools with the Datadog App Builder"
@@ -81,7 +82,7 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][4].
 
-[1]: https://app.datadoghq.com/app-builder/action-catalog
+[1]: https://app.datadoghq.com/actions/action-catalog/
 [2]: /service_management/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
 [4]: https://datadoghq.slack.com/
@@ -89,3 +90,4 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/app-builder/apps/list

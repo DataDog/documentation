@@ -43,8 +43,12 @@
     {{ $data = (index $resource_data "multifiltersearch" "data")}}
   {{ else }}
     {{/*  Data source input given, but not valid  */}}
-    {{ errorf "No valid data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
-  {{ end}}
+    {{ if eq hugo.Environment "development" -}}
+      {{ warnf "No valid data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
+    {{ else }}
+      {{ errorf "No valid data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
+    {{ end }}
+  {{ end }}
 {{ end }}
   
 

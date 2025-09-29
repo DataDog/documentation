@@ -16,16 +16,16 @@ further_reading:
     en la aplicación).
 - link: https://www.datadoghq.com/state-of-serverless
   tag: Blog
-  text: El estado de Serverless
+  text: Estado de Serverless
 - link: /serverless/installation/
   tag: Documentación
-  text: Instalación de Serverless Monitoring
+  text: Instalación de la monitorización serverless
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: Blog
   text: Monitoriza las aplicaciones del contenedor de Azure con Datadog
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
-  text: Participa en una sesión interactiva para saber más sobre la monitorización
+  text: Participar en una sesión interactiva para saber más sobre la monitorización
     serverless
 title: Serverless
 ---
@@ -68,7 +68,7 @@ Las métricas mejoradas de Step Functions, que aparecen en Datadog con el prefij
 
 ### Azure App Service
 
-La [extensión de Datadog para Azure App Service][7] ofrece capacidades de rastreo para Azure Web Apps.
+La [extensión Datadog para Azure App Service][7] proporciona capacidades de rastreo para Azure Web Apps.
 
 Utiliza la [vista de Azure App Service][8] para:
 
@@ -84,7 +84,7 @@ La extensión de Datadog para Azure App Service proporciona capacidades de rastr
 
 ### Azure Container Apps
 
-Azure Container Apps es una plataforma serverless totalmente gestionada para desplegar y escalar aplicaciones basadas en contenedores. Datadog proporciona monitorización y recopilación de logs para Container Apps a través de la [integración de Azure][9].
+Azure Container Apps es una plataforma serverless totalmente gestionada para desplegar y escalar aplicaciones basadas en contenedores. Datadog proporciona la monitorización y la recopilación de log para Container Apps a través de la [integración Azure][9].
 
 Datadog también ofrece una solución, ahora en Vista previa, para [instrumentar tus aplicaciones de contenedor][10] con un Agent diseñado específicamente para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
 

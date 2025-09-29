@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: "Troubleshoot common issues with RUM Browser SDK including missing data, ad blockers, network restrictions, and configuration problems."
 further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
@@ -23,6 +24,10 @@ If you can't see any RUM data or if data is missing for some users:
 | If you've set `trackViewsManually: true` and notice that no sessions are present, the application may have suddenly stopped sending RUM information even though there are no network errors. | Be sure to start an initial view once you've initialized RUM to prevent any data loss. See [Advanced Configuration][6] for more information.|
 
 Read the [Content Security Policy guidelines][5] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
+
+## Issues running multiple RUM tools in the same application
+
+Datadog supports only one SDK per application. To ensure optimal data collection and full functionality of all Datadog RUM SDK features, use only the Datadog RUM SDK.
 
 ### The RUM Browser SDK is initialized
 

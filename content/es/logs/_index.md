@@ -69,8 +69,6 @@ Datadog Log Management, también denominado como logs de Datadog o logging, elim
 
 Logging without Limits\* permite agilizar la experiencia de solucionar problemas en el [Log Explorer][1], lo que te permite a ti y a tus equipos evaluar y solucionar rápidamente los problemas de infraestructura. Proporciona un archivado intuitivo para ayudar a tus equipos de seguridad y TI durante las auditorías y evaluaciones. Logging without Limits* también impulsa [Datadog Cloud SIEM][2], que detecta amenazas a la seguridad en tu entorno, sin necesidad de indexar logs.
 
-**Nota**: Consulta [Cumplimiento de PCI DSS][3] para obtener información sobre la creación de una organización de Datadog que cumple con la PCI.
-
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
@@ -121,7 +119,6 @@ Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
 
 [1]: /es/logs/explorer/
 [2]: /es/security/cloud_siem/
-[3]: /es/data_security/pci_compliance/
 [4]: /es/logs/log_collection/
 [5]: /es/logs/log_configuration/
 [6]: /es/tracing/other_telemetry/connect_logs_and_traces/

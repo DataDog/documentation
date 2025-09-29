@@ -19,8 +19,12 @@ The Datadog Agent works with both rootless and rootful containers.
 
 To deploy the Agent as a rootless Podman container, the command to run is similar to the one used for [Docker][2].
 
-The main difference is that as the Agent does not have access to the runtime socket, it relies on the Podman DB to extract the container information that it needs. So, instead of mounting the Docker socket and setting `DOCKER_HOST` we need to mount the Podman DB (`<PODMAN_DB_PATH>` in the command below).
+The main difference is that as the Agent does not have access to the runtime socket, it relies on the Podman DB to extract the container information that it needs. Instead of mounting the Docker socket and setting `DOCKER_HOST`, you need to mount the Podman DB (`PODMAN_DB_PATH>` in the command below).
 In some systems the path of the Podman DB is `$HOME/.local/share/containers/storage/libpod/bolt_state.db` but it might be different in your system. Set `<PODMAN_DB_PATH>` in the command below accordingly.
+
+<div class="alert alert-info">
+<strong>Podman version 4.8+</strong> uses SQLite as the default database backend, and BoltDB is deprecated from v5. You may need to update the <code>&lt;PODMAN_DB_PATH&gt;</code> to your <code>db.sql</code> path. Generally, this path is <code>/var/lib/containers/storage/db.sql</code>, but it may differ in some systems.
+</div>
 
 ```
 $ podman run -d --name dd-agent \

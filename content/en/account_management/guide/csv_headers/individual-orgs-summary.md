@@ -1,5 +1,6 @@
 ---
 title: New CSV headers for Individual Organizations Summary
+description: Updated CSV structure for individual organization summary reports with new headers for organization name, public ID, month, product name, and cost.
 ---
 
 CSV header changes take effect the week of February 19, 2024. The following example demonstrates the new CSV structure. 

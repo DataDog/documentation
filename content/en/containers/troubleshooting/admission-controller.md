@@ -279,6 +279,7 @@ Alternatively, for Cilium-based environments, set `flavor` to `cilium` to create
 ### Network troubleshooting for Kubernetes distributions
 
 When a pod is created, the Kubernetes cluster sends a request from the control plane, to `datadog-webhook`, through the service, and finally to the Cluster Agent pod. This request requires inbound connectivity from the control plane to the node that the Cluster Agent is on, over its Admission Controller port (`8000`). After this request is resolved, the Cluster Agent mutates your pod to configure the network connection for the Datadog tracer.
+The Admission Controller service receives traffic on port 443 and forwards it to the Cluster Agent pod on port 8000.
 
 Depending on your Kubernetes distribution, this may have some additional requirements for your security rules and Admission Controller settings.
 

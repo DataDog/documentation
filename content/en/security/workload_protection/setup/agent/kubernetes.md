@@ -120,6 +120,12 @@ Join the preview by enabling the admission controller and cws instrumentation va
 
 2. Restart the Agent.
 
+If you experience RBAC issues, you can run the chart with the `clusterRole.allowCreatePodsExec` option enabled for the `clusterRole`: 
+
+```sh
+helm install datadog-operator datadog/datadog-operator --set clusterRole.allowCreatePodsExec=true
+```
+
 {{% /tab %}}
 
 {{% tab "DaemonSet" %}}

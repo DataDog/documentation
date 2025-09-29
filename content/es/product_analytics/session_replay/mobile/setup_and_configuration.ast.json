@@ -1,0 +1,99 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "string": "Instalación y configuración de Session Replay para móviles"
+      },
+      "description": {
+        "string": "Instala y configura Session Replay para móviles."
+      },
+      "further_reading": [
+        {
+          "link": "/product_analytics/session_replay/mobile",
+          "text": {
+            "string": "Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/product_analytics/session_replay/mobile/app_performance",
+          "text": {
+            "string": "How Mobile Session Replay Impacts App Performance"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/product_analytics/session_replay/mobile/privacy_options",
+          "text": {
+            "string": "Mobile Session Replay Privacy Options"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/product_analytics/session_replay/mobile/troubleshooting",
+          "text": {
+            "string": "Troubleshoot Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/product_analytics/session_replay",
+          "text": {
+            "string": "Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        }
+      ]
+    }
+  },
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        25,
+        26
+      ],
+      "inline": false,
+      "attributes": {
+        "file": "rum/session_replay/setup_and_configuration.mdoc.md"
+      },
+      "children": [],
+      "type": "tag",
+      "tag": "partial",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "file",
+          "value": "rum/session_replay/setup_and_configuration.mdoc.md"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 25
+        },
+        "end": {
+          "line": 26
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

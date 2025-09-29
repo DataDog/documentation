@@ -1,5 +1,6 @@
 ---
 title: SAML Group Mapping
+description: Map SAML identity provider attributes to Datadog roles and teams for automated user provisioning and access control management.
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"

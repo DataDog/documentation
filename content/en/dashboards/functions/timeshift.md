@@ -1,5 +1,6 @@
 ---
 title: Timeshift
+description: Compare current metric values with historical data using timeshift, calendar shift, and time-based comparison functions.
 aliases:
     - /graphing/functions/timeshift/
 further_reading:

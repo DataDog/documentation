@@ -37,7 +37,7 @@
 "git_integration_title": "ssh_check"
 "integration_id": "ssh"
 "integration_title": "SSH"
-"integration_version": "4.1.0"
+"integration_version": "4.2.1"
 "is_public": true
 "manifest_version": "2.0.0"
 "name": "ssh_check"
@@ -131,7 +131,7 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ssh" >}}
+{{< get-metrics-from-git "ssh_check" >}}
 
 
 ### Eventos
@@ -139,7 +139,7 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 El check de SSH no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ssh" >}}
+{{< get-service-checks-from-git "ssh_check" >}}
 
 
 ## Solucionar problemas

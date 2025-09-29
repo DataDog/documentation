@@ -102,9 +102,9 @@ Por ejemplo, puedes tener un único servicio como `service:test` mostrando múlt
 
 Puedes utilizar [dependencias inferidas de servicios (Vista previa)][30]. Las API externas inferidas utilizan la nomenclatura por defecto `net.peer.name`. Por ejemplo: `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan la nomenclatura por defecto `scheme db.instance`.
 
-O bien, puedes fusionar los nombres de servicio utilizando una variable de entorno como `DD_SERVICE_MAPPING` o `DD_TRACE_SERVICE_MAPPING`, según el lenguaje. 
+O bien, puedes fusionar los nombres de servicio utilizando una variable de entorno como `DD_SERVICE_MAPPING` o `DD_TRACE_SERVICE_MAPPING`, según el lenguaje.
 
-Para más información, consulta [Configurar la biblioteca de rastreo de Datadog][27] o elige tu lenguaje aquí:
+Para más información, consulta [Configurar la librería de rastreo de Datadog][27] o elige tu lenguaje aquí:
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -183,13 +183,13 @@ El [dashboard de uso de trazas de APM][28] contiene varios grupos de widget que 
 
 {{% collapse-content title="Falta el mensaje de error y el stack trace" level="h4" %}}
 
-En algunas trazas con un estado de error, la pestaña **Errors** (Errores) muestra `Missing error message and stack trace` en lugar de los detalles de la excepción. 
+En algunas trazas con un estado de error, la pestaña **Errors** (Errores) muestra `Missing error message and stack trace` en lugar de los detalles de la excepción.
 
 Un tramo puede mostrar este mensaje por dos posibles razones:
 - El tramo contiene una excepción no controlada.
 - Una respuesta HTTP dentro de tramo devuelve un código de estado HTTP entre 400 y 599.
 
-Cuando se maneja una excepción en un bloque try/catch, las etiquetas de tramo `error.message`, `error.type` y `error.stack` no se rellenan. Para rellenar las etiquetas de tramo de error detallado, utiliza el código [Instrumentación personalizada][18].
+Cuando se maneja una excepción en un bloque try/catch, las span tags `error.message`, `error.type` y `error.stack` no se rellenan. Para rellenar las span tags de error detallado, utiliza el código [Instrumentación personalizada][18].
 
 {{% /collapse-content %}}
 
@@ -207,7 +207,7 @@ Tu aplicación instrumentada puede enviar tramos con marcas temporales de hasta 
 
 Datadog acepta las siguientes combinaciones para un intervalo determinado de 40 minutos:
 
-- 5000 combinaciones únicas de `environments` y `service` 
+- 5000 combinaciones únicas de `environments` y `service`
 - 30 `second primary tag values` únicos por entorno
 - 100 `operation names` únicos por entorno y servicio
 - 1000 `resources` únicos por entorno, servicio y nombre de operación
@@ -226,7 +226,7 @@ Datadog trunca las siguientes cadenas si superan el número de caracteres indica
 | [clave de etiqueta][8]    |  200       |
 | [valor de etiqueta][8]  |  25000     |
 
-Además, el número de [etiquetas de tramo][8] presentes en cualquier tramo no puede exceder de 1024.
+Además, el número de [span tags][8] presentes en cualquier tramo no puede exceder de 1024.
 
 {{% /collapse-content %}}
 
@@ -234,7 +234,7 @@ Además, el número de [etiquetas de tramo][8] presentes en cualquier tramo no p
 
 Si el número de servicios excede lo especificado en las [directrices de volumen de datos](#data-volume-guidelines), intenta seguir estas prácticas recomendadas para las convenciones de nomenclatura de servicio.
 
-### Excluir los valores de etiqueta de entorno de los nombres de servicio 
+### Excluir los valores de etiqueta de entorno de los nombres de servicio
 
 Por defecto, el entorno (`env`) es la etiqueta primaria para [Datadog APM][17].
 
@@ -250,7 +250,7 @@ Datadog recomienda ajustar tu instrumentación renombrando los servicios.
 
 Las métricas de traza no están muestreadas, lo que significa que tu aplicación instrumentada muestra todos los datos, en lugar de subsecciones de ellos. También se aplican las [directrices de volumen](#data-volume-guidelines).
 
-### Utilizar la segunda etiqueta primaria en lugar de poner particiones de métrica o agrupar variables en nombres de servicio 
+### Utilizar la segunda etiqueta primaria en lugar de poner particiones de métrica o agrupar variables en nombres de servicio
 
 Las segundas etiquetas primarias son etiquetas adicionales que puedes utilizar para agrupar y añadir tus métricas de traza. Puedes utilizar el menú desplegable para limitar los datos de rendimiento a un determinado nombre de clúster o valor de centro de datos.
 
@@ -337,7 +337,7 @@ Cuando abres un [tique de soporte][1], el equipo de soporte de Datadog puede ped
 
 5. **Una descripción de tu entorno**: entender la configuración del despliegue de tu aplicación ayuda al equipo de soporte a identificar posibles problemas de comunicación entre el Agent y el rastreador e identificar errores de configuración. Para problemas complejos, el equipo de soporte puede solicitar manifiestos de Kubernetes, definiciones de tareas de ECS o archivos de configuración de despliegue similares.
 
-6. **Código de rastreo personalizado**: la instrumentación personalizada, la configuración y añadir etiquetas de tramo puede afectar significativamente a las visualizaciones de trazas en Datadog.
+6. **Código de rastreo personalizado**: la instrumentación personalizada, la configuración y añadir span tags puede afectar significativamente a las visualizaciones de trazas en Datadog.
 
 7. **Información sobre la versión**: saber qué versiones de lenguaje, marco, Datadog Agent y rastreador de Datadog estás utilizando permite al soporte verificar [requisitos de compatibilidad][15], buscar problemas conocidos, o recomendar una actualización de versión. Por ejemplo:
 

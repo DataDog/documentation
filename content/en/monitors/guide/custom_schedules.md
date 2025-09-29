@@ -1,5 +1,6 @@
 ---
 title: Customize monitor evaluation frequencies
+description: "Configure custom monitor schedules with daily, weekly, or monthly intervals for critical jobs using RRULE patterns for advanced scheduling."
 disable_toc: false
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-frequency"

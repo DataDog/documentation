@@ -52,6 +52,13 @@ If everything is configured correctly, a green check mark is displayed in Datado
 [1]: /integrations/github/#github-apps-1
 [2]: https://app.datadoghq.com/integrations/github/configuration
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+
+Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Gitlab repositories to Datadog.
+
+[1]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
+
+{{% /tab %}}
 {{< /tabs >}}
 
 See [Data Collected][1] for details on what data is collected from your source code provider.
@@ -315,6 +322,17 @@ steps:
 </code>
 </pre>
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+<pre>
+<code class="language-yaml" data-lang="yaml">
+test:
+  stage: test
+  script:
+    - ... # run your tests and generate coverage reports
+    - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
+</code>
+</pre>
+{{% /tab %}}
 {{< /tabs >}}
 
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
@@ -327,7 +345,7 @@ You can also view your coverage data aggregated by pull request in the [Code Cov
 
 ## Troubleshooting
 
-### Coverage upload command does not detect your coverage report files
+### Coverage upload command does not detect coverage report files
 
 The `datadog-ci coverage upload` command automatically detects supported coverage report files in the specified directories using heuristics, such as file names and extensions.
 If your coverage report files do not match expected patterns, the command might not detect them automatically. In this case, specify the report format and provide the file paths as positional arguments. For example:
@@ -341,7 +359,7 @@ datadog-ci coverage upload --format=lcov \
 ### Coverage upload fails with "Format could not be detected" error
 
 The `datadog-ci coverage upload` command automatically detects the format of the coverage report files based on their content and file extension.
-If the command fails with the following error: 
+If the command fails with the following error:
 ```
 Invalid coverage report file [...]: format could not be detected
 ```
@@ -358,6 +376,27 @@ If you are using a [source code provider integration][12], such as Datadog GitHu
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --skip-git-metadata-upload=1 .
+{{< /code-block >}}
+
+### Datadog UI does not show changed files in the PR view
+
+By default, the "Changed files" table only contains executable source code files that are present in the uploaded coverage reports.
+Select **Non-executable files** or **All** in the table header to display all files that were changed in the PR, regardless of whether they are executable or not.
+
+{{< img src="/code_coverage/non_executable_files.png" text="In Changed files, you have the option to select Non-executable on the table header" style="width:100%" >}}
+
+If a source code file is mistakenly marked as non-executable, it is probably missing from your uploaded coverage reports.
+Make sure that you are uploading all of your relevant reports, and double-check your coverage tool configuration to verify that coverage data is collected for all applicable files.
+
+Test sources are not considered executable files as they are not part of the production codebase being measured for coverage.
+
+### Datadog UI shows incorrect file paths
+
+Code Coverage relies on the file paths in coverage reports to be either absolute or relative to the repository root.
+If the paths in your report are relative to a different directory in your repository, specify the correct base path (relative to the repo root) with the `--base-path` option when running the `datadog-ci coverage upload` command, like this:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
 
 ### Discrepancy between Datadog UI and coverage report values
@@ -382,6 +421,6 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider

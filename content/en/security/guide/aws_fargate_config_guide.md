@@ -427,11 +427,11 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/agent-events
 [10]: /security/application_security/setup/java/aws-fargate
-[11]: /security/application_security/setup/aws/fargate/dotnet/?tab=awsfargate
-[12]: /security/application_security/setup/aws/fargate/dotnet/?tab=awsfargate
-[13]: /security/application_security/setup/aws/fargate/ruby/?tab=awsfargate
+[11]: /security/application_security/setup/dotnet/aws-fargate
+[12]: /security/application_security/setup/aws/fargate
+[13]: /security/application_security/setup/ruby/aws-fargate
 [14]: /security/application_security/setup/nodejs/aws-fargate
-[15]: /security/application_security/setup/aws/fargate/python/?tab=awsfargate
+[15]: /security/application_security/setup/python/aws-fargate
 [16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [18]: /security/code_security/iast/setup/java/

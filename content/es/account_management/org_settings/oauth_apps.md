@@ -14,13 +14,13 @@ Usa la página de gestión de **Aplicaciones de OAuth** en [Parámetros de organ
 ## Configuración
 ### Permisos
 
-De manera predeterminada, los usuarios con [roles estándar y de administrador de Datadog][2] pueden acceder a la página de gestión de aplicaciones de OAuth. Si tu organización tiene [roles personalizados][3] definidos, añade tu usuario a cualquier rol personalizado con los permisos `org_authorized_apps_read` y `org_authorized_apps_write`. 
+En forma predeterminada, los usuarios con el [rol de administrador de Datadog][2] pueden acceder a la page (página) de gestión de aplicaciones OAuth. Si tu organización tiene definidos [roles personalizados][3], añade tu usuario a cualquier rol personalizado con el permiso `org_management`.
 
-Solo los usuarios con el rol de administrador de Datadog o el permiso `org_authorized_apps_write` pueden gestionar las aplicaciones de OAuth en esta página, como deshabilitar aplicaciones o revocar el acceso de OAuth de un usuario.
+Sólo los usuarios con el rol de administrador de Datadog o el permiso `org_management` pueden gestionar aplicaciones OAuth en esta page (página), como desactivar aplicaciones o revocar el acceso de un usuario a OAuth.
 
 ### Activar
 
-Las aplicaciones de OAuth habilitadas permiten que los usuarios con los permisos necesarios autoricen el acceso en su nombre. Las aplicaciones de OAuth incluyen la aplicación móvil de Datadog<!-- y tus [extensiones de interfaz de usuario][4] personalizadas que tienen [acceso a la API de OAuth][5]-->. 
+Las aplicaciones OAuth habilitadas permiten a los usuarios con los permisos necesarios autorizar el acceso en su nombre. Las aplicaciones OAuth incluyen la aplicación móvil Datadog<!-- y tus [extensiones de interfaz de usuario][4] personalizadas que tienen [acceso a la API OAuth][5]--> .
 
 ### Desactivar
 
