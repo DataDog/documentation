@@ -11,15 +11,15 @@ You can investigate alerts with Bits AI SRE in two ways:
 
 You can manually invoke Bits on an individual monitor alert or warn event from several entry points:
 
-#### Option 1: Bits AI SRE Monitors List
-1. Go to Bits AI SRE > [**Monitor Management**][5] > **Ready for Bits**.
-1. Click on the **Investigate Recent Alerts** dropdown and select an alert.
+#### Option 1: Bits AI SRE Monitors list
+1. Go to **[Bits AI** > **Monitors** > **Ready for Bits**][5].
+1. Click the **Investigate Recent Alerts** dropdown and select an alert.
 
-#### Option 2: Monitor Status Page
+#### Option 2: Monitor Status page
 1. For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** in the top-right corner.
 1. Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE** on the right.
 
-#### Option 3: Monitor Event Side Panel
+#### Option 3: Monitor Event side panel
 From the monitor event side panel, click **Investigate with Bits AI SRE**.
 
 #### Option 4: Slack
@@ -30,14 +30,14 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 You can configure monitors so Bits runs automatically whenever they transition to the alert state: 
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to Bits AI SRE > [**Monitor Management**][5] > **Ready for Bits**.
+1. Go to **[Bits AI** > **Monitors** > **Ready for Bits**][5].
 1. Toggle **Enable** under **Automatic investigations** for a single monitor, or bulk-edit multiple monitors by selecting a set of monitors, followed by **Edit automatic investigations**.
 
 #### Option 2: Configure for a single monitor
 1. Open the monitor's status page and click **Edit**.
 1. Scroll to **Configure notifications & automations** and toggle **Investigate with Bits AI SRE**.
 
-**Note**: Enabling automatic investigations via Datadog API or Terraform is not supported.
+**Note**: Enabling automatic investigations using the Datadog API or Terraform is not supported.
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations.
 
