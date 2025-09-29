@@ -62,7 +62,11 @@ Think of the first page you'd navigate to in Datadog if this monitor were to fir
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-<div class="alert alert-info">Note: Some customers are enabled for all metric, logs, APM, anomaly, forecast, integration, and outlier monitors, without service scope or telemetry link requirements. This is currently in preview. </div>
+<div class="alert alert-info">
+	<strong>Preview: No service scope or link requirements</strong><br>
+	Certain customers can run Bits investigations on the above supported monitor types without the service scope or telemetry link requirements.<br><br>
+	Contact your Datadog representative to learn more about the Preview.
+	</div>
 
 ### Configure where investigation findings are sent
 
