@@ -70,9 +70,11 @@ To install and configure the Datadog Serverless Framework plugin:
    ```
    See also the complete list of [plugin parameters][3] to further configure your lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][4].
+4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][4].
 
-
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[3]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[4]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -135,7 +137,8 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
     Additional parameters can be found in the [CLI documentation][6].
 
-
+[5]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[6]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
@@ -177,7 +180,8 @@ The [Datadog CDK Construct][7] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][8] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][7].
-
+[7]: https://github.com/DataDog/datadog-cdk-constructs
+[8]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -243,15 +247,19 @@ The [Datadog CDK Construct][7] automatically installs Datadog on your functions 
 
     **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][14] instead.
 
-4. Enable AAP by adding the following environment variables on your function deployment:
+4. Enable App and API Protection by adding the following environment variables on your function deployment:
    ```yaml
    environment:
      DD_APPSEC_ENABLED: true
    ```
 
-5. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][4].
+5. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][4].
 
-
+[4]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[12]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[13]: https://pypi.org/project/datadog-lambda/
+[14]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 {{% /tab %}}
 {{< /tabs >}}
 
