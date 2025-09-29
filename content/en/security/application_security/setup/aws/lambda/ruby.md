@@ -75,7 +75,9 @@ To install and configure the Datadog Serverless Framework plugin:
 
 4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][6].
 
-
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[5]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[6]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
