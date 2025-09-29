@@ -55,7 +55,7 @@ Click the icon to open the Datadog tool window and show the selected logpoint. R
 ## Managing logpoints
 
 ### Add a logpoint
-To add a logpoint right-click on a line of code in the source editor and select **Add Line Logpoint** (or **Add Method Logpoint**) from the **Datadog Live Debugger** menu. New logpoints are added to the current session or, if required, a new session is created. 
+To add a logpoint, right-click a line of code in the source editor and select **Datadog Live Debugger** > **Add Line Logpoint** or **Add Method Logpoint**. New logpoints are added to the current session or, if required, a new session is created. 
 
 A dialog appears where you can enter the service name, the environment, a template for the log message to be emitted at runtime, a logpoint condition expression (optional), and the variable capture depth:
 
