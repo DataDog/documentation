@@ -295,6 +295,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
    ```
 
 6. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][4].
+
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://gallery.ecr.aws/datadoghq/lambda-extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys

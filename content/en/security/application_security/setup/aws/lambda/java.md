@@ -216,6 +216,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
    ```
 
 4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][1].
+
 [1]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}

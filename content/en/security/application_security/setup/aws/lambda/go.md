@@ -77,6 +77,7 @@ To install and configure the Datadog Serverless Framework plugin:
    See also the complete list of [plugin parameters][2] to further configure your lambda settings.
 
 4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][3].
+
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
@@ -141,6 +142,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
    **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes. After the CLI completes, update your source code to depend on the latest `datadog-lambda-go` module release to enable App and API Protection.
 
     Additional parameters can be found in the [CLI documentation][2].
+
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
@@ -182,6 +184,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}

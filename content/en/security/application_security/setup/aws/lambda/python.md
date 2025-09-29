@@ -180,6 +180,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 
