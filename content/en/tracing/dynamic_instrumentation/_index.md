@@ -47,7 +47,7 @@ Dynamic Instrumentation requires the following:
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
 - For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
-- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
+- For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
@@ -82,7 +82,7 @@ For more detailed instructions, select your runtime below:
 
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
 - Full support is available only for applications built with Python, Java, .NET.
-- Limited previews are ongoing for applications built with Node.js, Ruby, and PHP.
+- Limited previews are ongoing for applications built with Ruby and PHP.
 - The Java tracer library does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
