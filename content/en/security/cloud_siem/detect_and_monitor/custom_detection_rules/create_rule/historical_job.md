@@ -259,9 +259,11 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/set_condition_root_query.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-{{% cloud_siem/set_conditions_conditions_only %}}
+1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
+1. In the **Query** field, enter the tags of a log that you want to trigger a signal.
+    - For example, if you want logs with the tag `dev:demo` to trigger signals with a severity of `INFO`, enter `dev:demo` in the query field. Similarly, if you want logs with the tag `dev:prod` to trigger signals with a severity of `MEDIUM`, enter `dev:prod` in the query field.
 
 ### Other parameters
 

@@ -16,36 +16,53 @@ See [Create Rule][1] for instructions on how to configure a content anomaly rule
 
 When you create a rule with the content anomaly detection method, these are the parameters you can set.
 
-**Learning duration**
-: **Description**: Time window during which values are learned without generating signals. No signals are generated during this phase. The learning period restarts if the rule is modified.
-: **Default**: `7` days
-: **Range**: `1`-`10` days
+#### Learning duration
+{{< img src="security/security_monitoring/detection_rules/content_anomaly/query_learning_duration.png" alt="A content anomaly rule's query with the leaning duration setting highlighted" style="width:100%;" >}}
 
-**Forget after**
-: **Description**: How long learned values are retained before being discarded.
-: **Default**: `7` days
-: **Range**: `1`-`10` days
+- **Description**: Time window during which values are learned without generating signals. No signals are generated during this phase. The learning period restarts if the rule is modified.
+- **Default**: `7` days
+- **Range**: `1`-`10` days
+- **How to configure**: When you edit a content anomaly rule, you can set the learning duration in the query's **Learning for** dropdown menu.
 
-**similarityPercentageThreshold**
-: **Description**: Minimum similarity required to consider a log as normal.
-: **Default**: `70%`
-: **Range**: `35`-`100%`
+#### Forget after
+{{< img src="security/security_monitoring/detection_rules/content_anomaly/forget_duration.png" alt="Content anomaly detection options with the within the last days dropdown menu highlighted" style="width:100%;" >}}
 
-**nbSimilarItemsThreshold**
-: **Description**: Number of historical logs required for an incoming value to be considered normal.
-: **Default**: `1`
-: **Range**: `1`-`20`
+- **Description**: How long learned values are retained before being discarded.
+- **Default**: `7` days
+- **Range**: `1`-`10` days
+- **How to configure**: In the **Content anomaly detection options** section of a rule's setting page, you can set how long learned values are retained in the **within in the last** dropdown menu.
 
-**Evaluation Window**
-: **Description**: Defines the time frame for counting anomalous logs. Signals are triggered if anomalies exceed the case condition (for example, `a >= 2`).
-: **Range**: `0`-`24` hours
+#### Similarity percentage threshold
+
+{{< img src="security/security_monitoring/detection_rules/content_anomaly/similarity_percentage_threshold.png" alt="Content anomaly detection options with the similarity percentage dropdown menu highlighted" style="width:100%;" >}}
+
+- **Description**: Minimum similarity required to consider a log as normal.
+- **Default**: `70%`
+- **Range**: `35`-`100%`
+- **How to configure**: In the **Content anomaly detection options** section of a rule's setting page, you can set the similarity percentage threshold in the **within in the last** dropdown menu.
+
+#### Similar items threshold
+
+{{< img src="security/security_monitoring/detection_rules/content_anomaly/similar_items_threshold.png" alt="Content anomaly detection options with the similar items dropdown menu highlighted" style="width:100%;" >}}
+
+- **Description**: Number of matching historical logs required for an incoming value to be considered normal.
+- **Default**: `1`
+- **Range**: `1`-`20`
+- **How to configure**: In the **Content anomaly detection options** section of a rule's setting page, you can enter the similar items threshold in the **with more than** field.
+
+#### Evaluation Window
+{{< img src="security/security_monitoring/detection_rules/content_anomaly/evaluation_window.png" alt="Content anomaly detection options with the similar items dropdown menu highlighted" style="width:100%;" >}}
+
+- **Description**: Defines the time frame for counting anomalous logs. Signals are triggered if anomalies exceed the case condition (for example, `a >= 2`).
+- **Range**: `0`-`24` hours
+- **How to configure**: In the **Set conditions** section of a rule's setting page, you can set a conditiions's evaluation window in the **within a window of** dropdown menu.
 
 ## How logs are determined to be anomalous
 
 1. Logs are tokenized using [Unicode Text Segmentation (UTS #29)][2].
 1. Tokens are compared using [Jaccard similarity][3].
 1. Efficient comparisons are achieved with [MinHash][4] and [Locality Sensitive Hashing (LSH)][5].
-1. A log is anomalous if it fails both similarity and historical thresholds.
+1. A log is anomalous if it fails both similarity percentage and similar items threshold.
 
 ### Jaccard similarity computation examples
 
@@ -57,7 +74,7 @@ The following are examples of how Jaccard similarity is calculated for logs with
 
 #### Single-word fields
 
-This is an example of logs with single-word fields:
+These are two example logs with single-word fields:
 
 ```
 log1={actionType:auth, resourceType:k8s, networkType:public, userType:swe}
@@ -76,7 +93,7 @@ $$\text"J(log1,log2)" = 3 / 5 = 0.6$$
 
 #### Multi-word fields
 
-This is an example of logs with multi-word fields:
+These are two example logs with multi-word fields:
 
 ```
 log1={actionDescription: "User connected to abc network"}
