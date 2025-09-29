@@ -48,7 +48,7 @@ You can run Datadog Static Code Analysis scans directly on Datadog infrastructur
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
 
-To get started, navigate to the [**Code Security** page](https://app.datadoghq.com/security/configuration/code-security/setup).
+To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that:<br>
@@ -88,7 +88,7 @@ When installing a GitHub App, the following permissions are required to enable c
 
 See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-[1] https://docs.datadoghq.com/integrations/gitlab-source-code/#setup 
+[1]: https://docs.datadoghq.com/integrations/gitlab-source-code/#setup 
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
@@ -443,6 +443,20 @@ Static reachability analysis is available for the following advisories:
 
 Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
+## Further Reading
+
+{{< whatsnext desc="More about SCA:">}}
+    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Runtime detection of libraries vulnerabilities{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Other Code Security scanning for your repositories:">}}
+    {{< nextlink href="/security/code_security/static_analysis/" >}}Static Code Analysis (SAST){{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/iac_scanning/" >}}Infrastructure as Code (IaC){{< /nextlink >}}
+    {{< nextlink href="/security/code_security/secret_scanning/" >}}Secrets Scanning{{< /nextlink >}}
+{{< /whatsnext >}}
+
+
+
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 [3]: /security/code_security/software_composition_analysis/setup_static
@@ -462,17 +476,4 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [18]: https://cyclonedx.org/docs/1.4/json/
 [19]: https://cyclonedx.org/docs/1.5/json/
 [20]: https://cyclonedx.org/docs/1.6/json/
-
-
-## Further Reading
-
-{{< whatsnext desc="More about SCA:">}}
-    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Runtime detection of libraries vulnerabilities{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Other Code Security scanning for your repositories:">}}
-    {{< nextlink href="/security/code_security/static_analysis/" >}}Static Code Analysis (SAST){{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/iac_scanning/" >}}Infrastructure as Code (IaC){{< /nextlink >}}
-    {{< nextlink href="/security/code_security/secret_scanning/" >}}Secrets Scanning{{< /nextlink >}}
-{{< /whatsnext >}}
 
