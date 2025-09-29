@@ -246,7 +246,7 @@ Evaluators are functions that measure how well the model or agent performs by co
    If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-4. Define evaluator functions  
+4. Define evaluator functions.  
    
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
