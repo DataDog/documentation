@@ -20,9 +20,9 @@ The **Live Debugger** tab in the Datadog tool window shows the current session, 
 
 The panel has three sections: 
 
-* The [current session](#current-session) and its logpoints (on the left side)
-* The [status and events](#logpoint-status-and-events) for the selected logpoint (in the center)
-* The [runtime data](#runtime-data-for-debugging) for the selected logpoint event (on the right side)
+* The [current session](#current-session) and its logpoints (left side)
+* The [status and events](#logpoint-status-and-events) for the selected logpoint (center)
+* The [runtime data](#runtime-data-for-debugging) for the selected logpoint event (right side)
 
 ### Current session
 The session view shows the current session and its logpoints. Select another session, or start a new one, using the selector. 
