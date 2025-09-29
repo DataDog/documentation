@@ -73,14 +73,14 @@ function getGitInfo() {
     });
 
     return {
-      DD_GIT_COMMIT_SHA: commitSha,
       DD_GIT_REPOSITORY_URL: repositoryUrl,
+      DD_GIT_COMMIT_SHA: commitSha,
     };
   } catch (error) {
     console.warn('Could not get Git metadata at build time:', error.message);
     return {
-      DD_GIT_COMMIT_SHA: '',
       DD_GIT_REPOSITORY_URL: '',
+      DD_GIT_COMMIT_SHA: '',
     };
   }
 }
@@ -136,14 +136,14 @@ function getGitInfo() {
     });
 
     return {
-      DD_GIT_COMMIT_SHA: commitSha,
       DD_GIT_REPOSITORY_URL: repositoryUrl,
+      DD_GIT_COMMIT_SHA: commitSha,
     };
   } catch (error) {
     console.warn('Could not get Git metadata at build time:', error.message);
     return {
-      DD_GIT_COMMIT_SHA: '',
       DD_GIT_REPOSITORY_URL: '',
+      DD_GIT_COMMIT_SHA: '',
     };
   }
 }
