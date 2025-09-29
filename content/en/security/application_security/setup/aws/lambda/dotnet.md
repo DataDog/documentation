@@ -57,7 +57,7 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable AAP by updating your `serverless.yml` with the `enableASM` configuration parameter:
+2. Enable App and API Protection by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
@@ -72,10 +72,12 @@ To install and configure the Datadog Serverless Framework plugin:
        enableDDTracing: true
        enableASM: true
    ```
-   See also the complete list of [plugin parameters][5] to further configure your lambda settings.
+   See also the complete list of [plugin parameters][5] to further configure your Lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][6].
-
+4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][6].
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[5]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[6]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -137,7 +139,8 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
    **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
     Additional parameters can be found in the [CLI documentation][8].
-
+[7]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[8]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -178,7 +181,8 @@ The [Datadog CDK Construct][9] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][10] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][9].
-
+[9]: https://github.com/DataDog/datadog-cdk-constructs
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -228,15 +232,16 @@ The [Datadog CDK Construct][9] automatically installs Datadog on your functions 
     - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][10] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
-4. Enable AAP by adding the following environment variables on your function deployment:
+4. Enable App and API Protection by adding the following environment variables on your function deployment:
    ```yaml
    environment:
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
    ```
 
-5. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][6].
-
+5. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][6].
+[6]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[11]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 {{% /tab %}}
 {{< /tabs >}}
 
