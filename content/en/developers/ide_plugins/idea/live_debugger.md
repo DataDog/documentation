@@ -29,7 +29,7 @@ The session view shows the current session and its logpoints. Use the selector t
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/session-selector.png" alt="The session selector" style="width:80%;" >}}
 
-Activate, deactivate or delete the session, using the controls in the toolbar at the right of the selector. You can also open the session in the Datadog web application from here.
+Activate, deactivate, or delete the session, using the controls in the toolbar at the right of the selector. You can also open the session in the Datadog UI from here.
 
 Select any logpoint to display its status and recently generated events, or to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
