@@ -326,7 +326,7 @@ If you are using Docker containers, you have several options: using a plugin if 
 
 #### Serverless
 
-If you are using Serverless, you have three options depending on your serverless application's setup.
+If you are using Serverless, you have several options depending on your serverless application's setup.
 
 ##### Option 1: Bundler plugin
 
