@@ -1,5 +1,6 @@
 ---
 title: How Step Duration is Determined in Browser Tests
+description: Learn how Synthetic Monitoring determines when a browser test step is fully loaded and what factors influence step duration timing.
 further_reading:
 - link: "/synthetics/browser_tests"
   tag: "Documentation"
@@ -12,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Step duration in Synthetic Monitoring is the time a Browser Test step takes to be considered fully loaded. In most cases, a step represents a user action (for example, click and type). The Synthetics worker emulates the action, then waits for the page to finish loading and network requests to complete.
+Step duration in Synthetic Monitoring is the time a Browser Test step takes to be considered fully loaded. In most cases, a step represents a user action (such as click and type). The Synthetics worker emulates the action, then waits for the page to finish loading and network requests to complete.
 
 Step duration includes:
 - The action itself
@@ -33,8 +34,8 @@ In Synthetic Monitoring Browser Tests, step duration and fully loaded time repre
 
 A frame is a browser section that renders a web page. Each page contains one main frame (the primary [browsing][1] context) and may include child [frames][2] for content like advertisements, embedded widgets, or cross-origin elements.
 
-- **Main frame** = The primary image in a picture frame (your webpage).
-- **Child frames** = Smaller images within the main picture (iframes).
+- **Main frame**: The primary image in a picture frame (your webpage).
+- **Child frames**: Smaller images within the main picture (iframes).
 
 ### Condition 1: Page loading completion
 
