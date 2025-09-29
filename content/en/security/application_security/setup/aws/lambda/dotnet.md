@@ -26,8 +26,8 @@ Configuring App and API Protection for AWS Lambda involves:
 
 ## Prerequisites
 
-- [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
+- [Serverless APM Tracing][apm-lambda-tracing-setup] is set up on the Lambda function to send traces directly to Datadog.
+  X-Ray tracing, by itself, is not sufficient for App and API Protection and requires APM Tracing to be enabled.
 
 ## Compatibility
 
