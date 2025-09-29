@@ -104,7 +104,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
   <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
   {{< /site-region >}}
   {{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
-- Use the [Cloudcraft Security Map][21] for a visualization of your resources and any misconfigurations, vulnerabilities, identity risks, or sensitive data associated with them. For more information on these overlays, see the [Cloudcraft overlay][22] documentation.
+- Use the [Cloudcraft Security Map][21] to visualize your resources and any misconfigurations, vulnerabilities, identity risks, or sensitive data associated with them. For more information on these overlays, see the [Cloudcraft overlay][22] documentation.
 
 ## Subscribe to weekly digest reports
 
