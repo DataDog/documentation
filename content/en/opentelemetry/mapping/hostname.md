@@ -89,7 +89,7 @@ If none of the above conventions are present, the `host.id` and `host.name` reso
 
 ## Infra attributes processor
 
-The [infra attributes processor][6] automates the extraction of Kubernetes tags based on labels or annotations and assigns these tags as resource attributes on traces, metrics, and logs. The infra attributes processor requires the following [attributes][7] (such as `container.id`) to be set in order to extract the correct attributes.
+The [infra attributes processor][6] automates the extraction of Kubernetes tags based on labels or annotations and assigns these tags as resource attributes on traces, metrics, and logs. The infra attributes processor requires the following [attributes][7] (such as `container.id`) to be set in order to extract the correct attributes and hostname.
 
 The infra attributes processor can also be configured to override the hostname extracted from attributes by the agent hostname:
 
