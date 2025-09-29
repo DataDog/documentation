@@ -14,7 +14,7 @@ further_reading:
 The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are set dynamically in running systems, so there is no need to redeploy your code to investigate and resolve issues. Logpoints are grouped into sessions and you can activate, edit, deactivate, or delete sessions (or individual logpoints) at any time. All sessions and logpoints automatically deactivate after 48 hours.
 
 ## Live Debugger tab
-The **Live Debugger** tab in the Datadog tool window shows the current session, its logpoints and the data captured by the selected logpoint:
+The **Live Debugger** tab in the Datadog tool window shows the current session, its logpoints, and the data captured by the selected logpoint:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
