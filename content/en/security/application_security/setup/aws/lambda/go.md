@@ -18,22 +18,22 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-Configuring App and API Protection (AAP) for AWS Lambda involves:
+Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from AAP. Find them on [the Security tab of your Software Catalog][1].
-2. Setting up AAP instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
+2. Setting up App and API Protection instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Prerequisites
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
+  X-Ray tracing, by itself, is not sufficient for App and API Protection and requires APM Tracing to be enabled.
 
 ## Compatibility
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][3] to block IPs in your [WAF][4].
 
-The Datadog Go tracer is distributed as a Go module rather than a Lambda layer. Ensure your functions vendor the latest `github.com/DataDog/datadog-lambda-go` release when enabling AAP.
+The Datadog Go tracer is distributed as a Go module rather than a Lambda layer. Ensure your functions vendor the latest `github.com/DataDog/datadog-lambda-go` release when enabling App and API Protection.
 
 ## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
@@ -50,7 +50,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your lambda with AAP.
+The [Datadog Serverless Framework plugin][2] can be used to automatically configure and deploy your lambda with App and API Protection.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -59,7 +59,7 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable AAP by updating your `serverless.yml` with the `enableASM` configuration parameter:
+2. Enable App and API Protection by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
@@ -76,8 +76,10 @@ To install and configure the Datadog Serverless Framework plugin:
    ```
    See also the complete list of [plugin parameters][5] to further configure your lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][6].
-
+4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][6].
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[5]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[6]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -139,7 +141,8 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
    **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes. After the CLI completes, update your source code to depend on the latest `datadog-lambda-go` module release to enable App and API Protection.
 
     Additional parameters can be found in the [CLI documentation][8].
-
+[7]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[8]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -179,7 +182,8 @@ The [Datadog CDK Construct][9] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][10] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][9].
-
+[9]: https://github.com/DataDog/datadog-cdk-constructs
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
