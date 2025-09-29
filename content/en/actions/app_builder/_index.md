@@ -38,7 +38,19 @@ Datadog App Builder provides an [Action Catalog][1] of hundreds of actions acros
 
 {{< img src="/service_management/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
 
-## Start with blueprints
+## Onboarding with App Builder 
+
+When creating a new app, Datadog displays an onboarding modal with several options to get started: 
+- Start with AI 
+- Start with Blueprint
+- Start with Layout
+- Start with Data
+- Start from Scratch 
+- App Playground
+
+{{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="App blueprints" style="width:100%;" >}}
+
+### Start with blueprints
 
 Datadog provides you with preconfigured flows in the form of out-of-the-box [blueprints][3] to help you [get started][5].
 
