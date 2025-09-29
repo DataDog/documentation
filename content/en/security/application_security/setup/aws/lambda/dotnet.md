@@ -40,7 +40,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 - API Gateway v2 (HTTP API)
 - Function URL
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> to send feedback.</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> and send feedback.</div>
 
 
 ## Get started
