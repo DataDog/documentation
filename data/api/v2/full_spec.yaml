@@ -36283,6 +36283,12 @@ components:
     RUMApplicationAttributes:
       description: RUM application attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -74154,6 +74160,13 @@ paths:
     get:
       description: Get the list of all suppression rules.
       operationId: ListSecurityMonitoringSuppressions
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:

@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for Linux
+title: Linux
 platform: Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
@@ -20,6 +20,7 @@ aliases:
     - /agent/basic_agent_usage/ubuntu/
     - /agent/basic_agent_usage/suse/
     - /agent/basic_agent_usage/rocky/
+    - /agent/basic_agent_usage/linux/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -30,7 +31,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "/agent/basic_agent_usage/#agent-architecture"
+- link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
 - link: "/agent/configuration/network#configure-ports"
@@ -42,7 +43,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Linux environments. See the [Supported Platforms][5] documentation for the complete list of supported Linux distributions and versions. 
+This page outlines the basic features of the Datadog Agent for Linux environments. See the [Supported Platforms][5] documentation for the complete list of supported Linux distributions and versions.
 
 ## Install the Agent
 To install the Agent on Linux, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
@@ -52,16 +53,16 @@ To install the Agent on Linux, follow the [in-app instructions in Fleet Automati
 
 ## Configure the Agent
 The Datadog Agent configuration file is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
-- `api_key`: Your organization's [Datadog API key][7] 
-- `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
-- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])  
+- `api_key`: Your organization's [Datadog API key][7]
+- `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
+- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])
 - Default tags, log level, and Datadog configurations
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. Alternatively, see the sample `config_template.yaml` file for all available configuration options.
 
 ### Integration files
 Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
-- `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs  
+- `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs
 - `conf.yaml.example`: A sample illustrating supported keys and defaults
 
 
@@ -129,7 +130,7 @@ sudo apt-get remove --purge datadog-agent -y
 
 
 ### Uninstall Single Step APM Instrumentation
-If you installed the Agent with Single Step APM Instrumentation and want to uninstall it, you need to [run additional commands][9] to remove APM Instrumentation. Follow the steps for your [specific environment][10]. 
+If you installed the Agent with Single Step APM Instrumentation and want to uninstall it, you need to [run additional commands][9] to remove APM Instrumentation. Follow the steps for your [specific environment][10].
 
 
 ## Troubleshooting
