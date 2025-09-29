@@ -18,8 +18,6 @@ further_reading:
   text: 'Correlate RUM Events with Other Telemetry'
 ---
 
-
-
 ## Overview
 
 The Datadog Browser SDK enables Real User Monitoring (RUM) for your web applications, providing comprehensive visibility into user experience and application performance. With RUM, you can monitor page load times, user interactions, resource loading, and application errors in real-time.
@@ -311,10 +309,6 @@ To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK le
 
 If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][6] for additional setup steps.
 
-#### Advanced configuration
-
-For advanced configuration look at [advanced configuration][7]
-
 ### Step 4 - Visualize your data
 
 Now that you’ve completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
@@ -332,7 +326,6 @@ Until Datadog starts receiving data, your application appears as pending on the 
 [4]: /real_user_monitoring/guide/sampling-browser-plans/
 [5]: /real_user_monitoring/browser
 [6]: /integrations/content_security_policy_logs/
-[7]: /real_user_monitoring/browser/advanced_configuration/
 [8]: /real_user_monitoring/browser/data_collected/
 [9]: /real_user_monitoring/platform/dashboards/
 [10]: https://app.datadoghq.com/rum/sessions
