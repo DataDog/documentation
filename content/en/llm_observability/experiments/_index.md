@@ -268,7 +268,7 @@ Evaluators are functions that measure how well the model or agent performs by co
    Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.  
    Evaluators can only return a string, number, Boolean.  
 
-6. Create and run the experiment
+6. Create and run the experiment.
    ```python
    experiment = LLMObs.experiment(
        name="capital-cities-test",
