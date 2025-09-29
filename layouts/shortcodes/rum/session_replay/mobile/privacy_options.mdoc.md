@@ -3,7 +3,7 @@ Pages using this partial must declare these filters:
 
 content_filters:
   - trait_id: platform
-    option_group_id: rum_sdk_platform_options
+    option_group_id: rum_sdk_platform_options_v2
     label: "SDK"
 -->
 
@@ -221,7 +221,7 @@ By default, the `mask_all` setting is enabled for all images. With this setting 
 
 {% if equals($platform, "flutter") %}
 For performance reasons, large images (those exceeding 1000x1000 total pixels) are masked in Flutter, and will display "Large Image" in the Session Replay player.
-{% if %}
+{% /if %}
 
 #### Mask all images
 With the `mask_all` setting enabled, all images are replaced by placeholders labeled 'Image' in the replay.
@@ -563,7 +563,7 @@ Privacy overrides affect views and their descendants. This means that even if an
 Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
 
 
-<!-- Android or iOS -->
+<!-- Android, iOS, or Flutter -->
 {% if or(equals($platform, "android"), equals($platform, "ios"), equals($platform, "flutter")) %}
 
 ### Text and input override
@@ -1241,7 +1241,6 @@ The following `TextInputType`s are considered sensitive:
 - `TextInputType.twitter`
 - `TextInputType.visiblePassword`
 {% /table %}
-{% /if %}
 
 #### Input and option text
 

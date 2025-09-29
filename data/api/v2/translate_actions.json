@@ -1059,6 +1059,14 @@
     "description": "Get all AWS IAM permissions required for the AWS integration.",
     "summary": "Get AWS integration IAM permissions"
   },
+  "GetAWSIntegrationIAMPermissionsResourceCollection": {
+    "description": "Get all resource collection AWS IAM permissions required for the AWS integration.",
+    "summary": "Get resource collection IAM permissions"
+  },
+  "GetAWSIntegrationIAMPermissionsStandard": {
+    "description": "Get all standard AWS IAM permissions required for the AWS integration.",
+    "summary": "Get AWS integration standard IAM permissions"
+  },
   "ListAWSLogsServices": {
     "description": "Get a list of AWS services that can send logs to Datadog.",
     "summary": "Get list of AWS log ready services"
