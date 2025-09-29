@@ -66,7 +66,7 @@ When installing a GitHub App, the following permissions are required to enable c
 
 See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-[1] /integrations/gitlab-source-code/#setup 
+[1]: /integrations/gitlab-source-code/#setup 
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
