@@ -383,7 +383,7 @@ For Docs and Links you can also access a specific item with the following syntax
 
 You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variables</strong> and select from the expanded menu options.</div>
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
 
 | Monitor type             | Variable syntax                                         |
 |--------------------------|--------------------------------------------------------|
