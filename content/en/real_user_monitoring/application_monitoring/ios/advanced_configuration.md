@@ -4,6 +4,7 @@ description: "Configure advanced iOS RUM SDK settings to enrich user sessions, t
 aliases:
     - /real_user_monitoring/ios/advanced_configuration
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+    - /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
     tag: "Source Code"

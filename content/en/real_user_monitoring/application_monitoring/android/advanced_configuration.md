@@ -4,6 +4,7 @@ description: "Configure advanced Android RUM SDK settings to enrich user session
 aliases:
     - /real_user_monitoring/android/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
+    - /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"

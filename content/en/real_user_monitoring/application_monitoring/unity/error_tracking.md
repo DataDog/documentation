@@ -2,6 +2,7 @@
 description: Learn how to track Unity errors with Error Tracking.
 aliases:
 - /real_user_monitoring/error_tracking/unity
+- /real_user_monitoring/mobile_and_tv_monitoring/unity/error_tracking
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"

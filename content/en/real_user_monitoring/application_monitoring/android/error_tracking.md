@@ -4,6 +4,7 @@ description: Set up Error Tracking for your Android applications.
 aliases:
     - /real_user_monitoring/error_tracking/android
     - /real_user_monitoring/error_tracking/mobile/android
+    - /real_user_monitoring/mobile_and_tv_monitoring/android/error_tracking
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'

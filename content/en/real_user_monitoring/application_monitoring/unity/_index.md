@@ -3,6 +3,7 @@ title: Unity Monitoring
 description: Collect RUM and Error Tracking data from your Unity projects.
 aliases:
 - /real_user_monitoring/application_monitoring/setup/unity/
+- /real_user_monitoring/mobile_and_tv_monitoring/unity
 further_reading:
 - link: /real_user_monitoring/application_monitoring/unity/troubleshooting
   tag: Documentation

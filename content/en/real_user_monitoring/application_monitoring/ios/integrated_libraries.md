@@ -4,6 +4,7 @@ description: "Integrate popular iOS libraries like URLSession, Alamofire, and im
 aliases:
 - /real_user_monitoring/ios/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/
+- /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: "Source Code"

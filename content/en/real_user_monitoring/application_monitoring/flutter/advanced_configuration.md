@@ -8,6 +8,7 @@ aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
     - /real_user_monitoring/flutter/otel_support/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
+    - /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: "Source Code"

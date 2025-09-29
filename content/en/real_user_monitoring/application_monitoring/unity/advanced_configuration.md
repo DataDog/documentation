@@ -8,6 +8,7 @@ aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
     - /real_user_monitoring/unity/otel_support/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/unity
+    - /real_user_monitoring/mobile_and_tv_monitoring/unity/advanced_configuration
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"

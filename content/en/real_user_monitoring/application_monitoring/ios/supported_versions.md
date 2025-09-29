@@ -5,6 +5,7 @@ description: "List of supported operating systems and platforms for the RUM iOS 
 aliases:
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
+ - /real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions
 further_reading:
  - link: /real_user_monitoring/application_monitoring/ios/advanced_configuration/
    tag: Documentation

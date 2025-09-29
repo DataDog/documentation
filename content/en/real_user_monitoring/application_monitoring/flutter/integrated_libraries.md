@@ -4,6 +4,7 @@ description: "Integrate popular Flutter libraries with RUM SDK for automatic mon
 aliases:
 - /real_user_monitoring/flutter/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/flutter
+- /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: "Source Code"

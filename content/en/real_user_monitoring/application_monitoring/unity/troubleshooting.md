@@ -3,6 +3,7 @@ title: Troubleshooting Unity SDK Issues
 description: Learn how to troubleshoot issues with Unity Monitoring.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/unity
+- /real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"

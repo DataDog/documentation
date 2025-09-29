@@ -4,6 +4,7 @@ description: "Set up RUM monitoring for Roku channels to track user interactions
 aliases:
     - /real_user_monitoring/roku/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/roku
+    - /real_user_monitoring/mobile_and_tv_monitoring/roku/setup
 further_reading:
 - link: /real_user_monitoring/application_monitoring/roku/advanced_configuration
   tag: Documentation

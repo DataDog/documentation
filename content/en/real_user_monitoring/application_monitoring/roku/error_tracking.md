@@ -4,6 +4,7 @@ description: Set up Error Tracking for your Roku channels.
 aliases:
 - /real_user_monitoring/error_tracking/roku
 - /real_user_monitoring/error_tracking/mobile/roku
+- /real_user_monitoring/mobile_and_tv_monitoring/roku/error_tracking
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'

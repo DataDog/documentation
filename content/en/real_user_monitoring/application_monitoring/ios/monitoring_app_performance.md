@@ -1,6 +1,8 @@
 ---
 title: iOS Monitoring App Performance
 description: "Track iOS app performance with custom view timings, network metrics, and user interaction measurements for enhanced user experience."
+aliases:
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/monitoring_app_performance
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: "Source Code"

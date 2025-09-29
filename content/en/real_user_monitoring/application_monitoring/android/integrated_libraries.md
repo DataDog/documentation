@@ -4,6 +4,7 @@ description: "Integrate popular Android libraries like Coil, OkHttp, and Retrofi
 aliases:
 - /real_user_monitoring/android/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/android
+- /real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"

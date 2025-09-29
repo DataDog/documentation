@@ -4,6 +4,7 @@ description: "Understand RUM iOS SDK event types, attributes, and telemetry data
 aliases:
 - /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios/
+- /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
     tag: "Source Code"

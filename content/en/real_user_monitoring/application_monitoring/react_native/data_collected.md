@@ -4,6 +4,7 @@ description: Learn about the data collected by React Native Monitoring.
 aliases:
 - /real_user_monitoring/reactnative/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/reactnative/
+- /real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"

@@ -1,6 +1,8 @@
 ---
 title: Flutter Monitoring
 description: "Monitor Flutter applications with RUM to track performance, user journeys, and errors across iOS and Android platforms."
+aliases:
+  - /real_user_monitoring/flutter/mobile_and_tv_monitoring
 further_reading:
 - link: /real_user_monitoring/application_monitoring/flutter/advanced_configuration
   tag: Documentation

@@ -5,6 +5,7 @@ aliases:
     - /real_user_monitoring/react-native/advanced_configuration/
     - /real_user_monitoring/reactnative/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/react_native/
+    - /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
 further_reading:
     - link: https://github.com/DataDog/dd-sdk-reactnative
       tag: "Source Code"

@@ -4,6 +4,7 @@ description: Instrument Jetpack Compose manually or automatically using the Data
 aliases:
   - /real_user_monitoring/android/jetpack_compose_instrumentation/
   - /real_user_monitoring/mobile_and_tv_monitoring/jetpack_compose_instrumentation/android
+  - /real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-compose
   tag: "Source Code"

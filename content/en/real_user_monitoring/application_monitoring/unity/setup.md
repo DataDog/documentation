@@ -5,6 +5,7 @@ aliases:
     - /real_user_monitoring/unity/
     - /real_user_monitoring/unity/setup
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/unity
+    - /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"

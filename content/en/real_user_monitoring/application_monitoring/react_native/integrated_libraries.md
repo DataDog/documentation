@@ -4,6 +4,7 @@ description: "Integrate React Native libraries with RUM SDK for automatic monito
 aliases:
 - /real_user_monitoring/reactnative/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/reactnative
+- /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"

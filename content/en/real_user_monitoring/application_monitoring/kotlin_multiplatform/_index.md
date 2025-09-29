@@ -1,6 +1,8 @@
 ---
 title: Kotlin Multiplatform Monitoring
 description: Collect RUM and Error Tracking data from your Kotlin Multiplatform projects.
+aliases:
+  - /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
 further_reading:
 - link: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration
   tag: Documentation

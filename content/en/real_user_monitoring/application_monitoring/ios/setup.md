@@ -9,6 +9,7 @@ aliases:
   - /real_user_monitoring/swiftui/
   - /real_user_monitoring/mobile_and_tv_monitoring/swiftui/
   - /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 further_reading:
  - link: /real_user_monitoring/application_monitoring/ios/advanced_configuration
    tag: Documentation

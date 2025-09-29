@@ -1,6 +1,8 @@
 ---
 title: SDK Performance Impact
 description: Learn about how the SDK impacts performance of your application.
+aliases:
+  - /real_user_monitoring/mobile_and_tv_monitoring/android/sdk_performance_impact
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"

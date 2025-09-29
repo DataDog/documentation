@@ -8,6 +8,7 @@ aliases:
     - /real_user_monitoring/kotlin_multiplatform/setup
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"

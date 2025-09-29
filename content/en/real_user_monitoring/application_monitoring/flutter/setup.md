@@ -5,6 +5,7 @@ aliases:
     - /real_user_monitoring/flutter/
     - /real_user_monitoring/flutter/setup
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
+    - /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration
   tag: Documentation

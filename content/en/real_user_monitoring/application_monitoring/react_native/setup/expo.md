@@ -5,6 +5,7 @@ aliases:
     - /real_user_monitoring/reactnative/expo/
     - /real_user_monitoring/reactnative-expo/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/expo
+    - /real_user_monitoring/mobile_and_tv_monitoring/expo/setup
 type: multi-code-lang
 code_lang: expo
 code_lang_weight: 2

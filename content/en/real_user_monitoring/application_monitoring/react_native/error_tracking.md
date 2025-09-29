@@ -5,6 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/reactnative
 - /real_user_monitoring/mobile_and_tv_monitoring/reactnative/error_tracking
 - /real_user_monitoring/error_tracking/mobile/reactnative/
+- /real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"

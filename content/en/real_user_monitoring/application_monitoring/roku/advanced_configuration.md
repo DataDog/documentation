@@ -4,6 +4,7 @@ description: "Configure advanced Roku RUM SDK settings to enrich user sessions, 
 aliases:
     - /real_user_monitoring/roku/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
+    - /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
   tag: "Source Code"

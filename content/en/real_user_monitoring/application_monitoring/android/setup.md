@@ -4,6 +4,7 @@ description: Collect RUM and Error Tracking data from your Android projects.
 aliases:
     - /real_user_monitoring/android/
     - /real_user_monitoring/setup/android
+    - /real_user_monitoring/mobile_and_tv_monitoring/android/setup
 further_reading:
 - link: /real_user_monitoring/application_monitoring/android/advanced_configuration
   tag: Documentation

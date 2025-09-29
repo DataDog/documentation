@@ -4,6 +4,7 @@ description: "Configure advanced Kotlin Multiplatform RUM SDK settings for cross
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration
     - /real_user_monitoring/kotlin-multiplatform
     - /real_user_monitoring/kotlin_multiplatform
 further_reading:

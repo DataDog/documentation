@@ -3,6 +3,7 @@ title: Troubleshooting React Native SDK issues
 description: Learn how to troubleshoot issues with React Native Monitoring.
 aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/reactnative
+  - /real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-reactnative"
     tag: "Source Code"
