@@ -310,7 +310,7 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 #### Containers
 
-If you are using Docker containers, you have three options: using a plugin if your application is bundled, using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have several options: using a plugin if your application is bundled, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
 ##### Option 1: Bundler plugin
 
