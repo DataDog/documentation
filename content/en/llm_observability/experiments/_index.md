@@ -265,7 +265,7 @@ Evaluators are functions that measure how well the model or agent performs by co
        fake_llm_call = "excellent"
        return fake_llm_call
    ```  
-   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array), `output_data` and `expected_output` can be any type.  
+   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.  
    Evaluators can only return a string, number, Boolean.  
 
 6. Create and run the experiment
