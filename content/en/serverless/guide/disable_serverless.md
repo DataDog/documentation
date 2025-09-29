@@ -57,9 +57,10 @@ To disable Serverless Monitoring for Google Cloud Run containers or functions:
 4. **Save** your changes.
 
 ### Disable tracing
-If you deployed the Datadog Agent in a sidecar container, remove it with the [Datadog CLI][4]. If you are using `datadog/serverless-init`, remove it from your Dockerfile.
+If you deployed the Datadog Agent in a sidecar container, remove it with the [Datadog CLI][4]'s [`uninstrument` command][5]. If you are using `datadog/serverless-init`, remove it from your Dockerfile.
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://app.datadoghq.com/integrations/azure
 [3]: https://app.datadoghq.com/integrations/google-cloud-platform
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-cloud-run#uninstrument
+[4]: https://github.com/DataDog/datadog-ci/
+[5]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-cloud-run#uninstrument
