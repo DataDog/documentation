@@ -87,7 +87,7 @@ start:
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
 	@make build-cdocs
-	# @make server
+	@make server
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
