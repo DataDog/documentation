@@ -72,13 +72,13 @@ Suggested rules use cases include:
 To use a suggested rule, do one of the following:
 - Create a custom rule from a suggested rule:
   1. In [Suggested Rules][5], select one or more rules and click **Create Selected Suggested Rules**.
-  2. In **Create suggested custom In-App WAF rules**, click **Create rules**. This will create custom In-App WAF rules to monitor the security activities of the rules you selected.
+  2. In **Create suggested custom In-App WAF rules**, click **Create rules**. This creates custom In-App WAF rules to monitor the security activities of the rules you selected.
 - Modify a suggested rule to create a custom rule:
   1. In [Suggested Rules][5], identify a rule you want to use and click **View suggested rule**.
   2. In **Add a new Business Logic**, edit the rule as needed.
   3. Click **Continue in In-App WAF**.
   4. In **Define your custom rule**, make any further changes.
-  5. Cick **Save Rule**.
+  5. Click **Save Rule**.
 
 
 ## Configure an AAP In-App WAF rule
