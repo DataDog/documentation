@@ -1,6 +1,6 @@
 ---
 title: Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage
-private: true
+private: false
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-storage-monitoring/"
       tag: "Blog"
