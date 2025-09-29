@@ -18,6 +18,9 @@ further_reading:
 - link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
+- link: "/cloud_cost_management/setup/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
