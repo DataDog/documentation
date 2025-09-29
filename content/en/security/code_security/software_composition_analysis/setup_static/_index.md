@@ -455,8 +455,6 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
     {{< nextlink href="/security/code_security/secret_scanning/" >}}Secrets Scanning{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 [3]: /security/code_security/software_composition_analysis/setup_static
