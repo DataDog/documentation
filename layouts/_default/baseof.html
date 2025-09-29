@@ -53,7 +53,7 @@
         {{ with .File }}
           {{ $filePath = .Path }}
         {{ end }}
-        {{ partialCached "sidenav/main-sidenav.html" . .Section (eq $filePath "search.md") .Language }}
+        {{ partialCached "sidenav/main-sidenav.html" . .Section (eq $filePath "search.md") .Site.Language.Lang }}
       </div>
 
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
