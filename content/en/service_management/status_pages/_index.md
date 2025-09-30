@@ -15,15 +15,15 @@ Status Pages is in Preview.
 
 ## Overview
 
-{{< img src="service_management/status_pages/shopist_status_page_example.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages are part of Datadog's Incident Response suite, alongside On-Call and Incident Management. They let your team proactively communicate **service availability**, **incidents**, and **maintenance updates** with customers or internal stakeholders through a shareable web page.
+Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, and **incidents** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
-* Reduce inbound support volume with proactive updates
+* Reduce inbound support volume with proactive email notifications
 
 ## Configure permissions
 
@@ -87,7 +87,7 @@ Components are the building blocks of your status page. Each one represents a se
 You can add components to your status page either on intial setup or through the status page settings:
 
 1. From your status page, click **Settings** and select the **Components** tab.
-1. Create individual components or a group of related components. You can associate [incidents](#add-a-notice) with these components to reflect impact on your status page.
+1. Create individual components or a group of related components. You can associate [notices](#add-a-notice) with these components to reflect impact on your status page.
 1. Select a visualization type:
    1. Bars and Uptime Percentage
    1. Bars Only
