@@ -4725,29 +4725,29 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
       weight: 204
-    - name: Exploration and Correlation
-      url: llm_observability/exploration_and_correlation
+    - name: Monitoring
+      url: llm_observability/monitoring
       parent: llm_obs
-      identifier: llm_obs_exploration_and_correlation
+      identifier: llm_obs_monitoring
       weight: 3
     - name: Querying spans and traces
-      url: llm_observability/exploration_and_correlation/querying
-      parent: llm_obs_exploration_and_correlation
+      url: llm_observability/monitoring/querying
+      parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
       weight: 301
     - name: Correlate with APM
-      url: llm_observability/exploration_and_correlation/llm_observability_and_apm
-      parent: llm_obs_exploration_and_correlation
+      url: llm_observability/monitoring/llm_observability_and_apm
+      parent: llm_obs_monitoring
       identifier: llm_obs_correlate_apm
       weight: 302
     - name: Cluster Map
-      url: llm_observability/exploration_and_correlation/cluster_map/
-      parent: llm_obs_exploration_and_correlation
+      url: llm_observability/monitoring/cluster_map/
+      parent: llm_obs_monitoring
       identifier: llm_obs_cluster_map
       weight: 303
     - name: Agent Monitoring
-      url: llm_observability/exploration_and_correlation/agent_monitoring
-      parent: llm_obs_exploration_and_correlation
+      url: llm_observability/monitoring/agent_monitoring
+      parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
     - name: Evaluations

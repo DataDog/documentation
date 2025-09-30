@@ -1,5 +1,5 @@
 ---
-title: Exploration and Correlation
+title: Monitoring
 description: Learn about how to explore more of your application in LLM Observability.
 ---
 
