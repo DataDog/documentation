@@ -44,7 +44,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
     tag: "Blog"
     text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
-  - link: "https://www.datadoghq.com/blog/software-catalog-custom-entities/
+  - link: "https://www.datadoghq.com/blog/software-catalog-custom-entities/"
     tag: "Blog"
     text: "Model your architecture with custom entities in the Datadog Software Catalog"
 algolia:
