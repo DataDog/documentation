@@ -118,7 +118,7 @@ After you click **Save**, LLM Observability uses the LLM account you connected t
 
 ### Estimated token usage
 
-You can monitor the token usage of your BYOK managed evaluations using [this dashboard][7].
+You can monitor the token usage of your managed LLM evaluations using [this dashboard][7].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
@@ -439,7 +439,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [4]: /security/sensitive_data_scanner/
 [5]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
-[7]: https://app.datadoghq.com/dash/integration/llm_byok_token_usage
+[7]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [9]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/simple-instruction-attack
 [10]: https://owasp.org/www-community/attacks/Code_Injection
 [11]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/context-switching
