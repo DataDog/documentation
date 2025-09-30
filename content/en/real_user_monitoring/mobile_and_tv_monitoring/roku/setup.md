@@ -47,32 +47,12 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 ### Step 2 - Specify application details in Datadog
 
-{{< tabs >}}
-{{% tab "RUM" %}}
-
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
+1. Navigate to [**Digital Experience** > **Add an Application**][101].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
+3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][201].
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
-
-{{% /tab %}}
-{{% tab "Error Tracking" %}}
-
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
-2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
-
-   {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
-
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
-
-{{% /tab %}}
-{{< /tabs >}}
 
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
@@ -270,3 +250,5 @@ This means that even if users open your application while offline, no data is lo
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+[101]: https://app.datadoghq.com/rum/application/create
+[201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
