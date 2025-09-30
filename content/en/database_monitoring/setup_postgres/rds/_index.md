@@ -1,4 +1,3 @@
-create a service using the following syntax---
 title: Setting Up Database Monitoring for Amazon RDS managed Postgres
 description: Install and configure Database Monitoring for Postgres on Amazon RDS.
 further_reading:

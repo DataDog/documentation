@@ -1,4 +1,3 @@
-create a service using the following syntax---
 title: Setting Up Database Monitoring for Amazon RDS managed MySQL
 description: Install and configure Database Monitoring for MySQL managed on Amazon RDS.
 further_reading:
