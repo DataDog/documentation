@@ -22,39 +22,36 @@ const setRumDeviceId = () => {
 
     window.DD_RUM.setUserProperty('device_id', deviceId);
 };
+if (window.DD_RUM && (env === 'preview' || env === 'live')) {
+    window.DD_RUM.init({
+        applicationId: Config.ddApplicationId,
+        clientToken: Config.ddClientToken,
+        env,
+        service: 'docs',
+        version: CI_COMMIT_SHORT_SHA,
+        trackUserInteractions: true,
+        enableExperimentalFeatures: ['zero_lcp_telemetry'],
+        sessionSampleRate: 100,
+        sessionReplaySampleRate: 50,
+        trackResources: true,
+        trackLongTasks: true,
+        defaultPrivacyLevel: 'mask-user-input',
+        allowedTracingUrls: [window.location.origin],
+        internalAnalyticsSubdomain: IA_SUBDOMAIN
+    });
 
-if (window.DD_RUM) {
-    if (env === 'preview' || env === 'live') {
-        window.DD_RUM.init({
-            applicationId: Config.ddApplicationId,
-            clientToken: Config.ddClientToken,
-            env,
-            service: 'docs',
-            version: CI_COMMIT_SHORT_SHA,
-            trackUserInteractions: true,
-            enableExperimentalFeatures: ['zero_lcp_telemetry'],
-            sessionSampleRate: 100,
-            sessionReplaySampleRate: 50,
-            trackResources: true,
-            trackLongTasks: true,
-            defaultPrivacyLevel: 'mask-user-input',
-            allowedTracingUrls: [window.location.origin],
-            internalAnalyticsSubdomain: IA_SUBDOMAIN
-        });
+    window.DD_RUM.startSessionReplayRecording();
 
-        window.DD_RUM.startSessionReplayRecording();
+    if (branch) {
+        window.DD_RUM.setGlobalContextProperty('branch', branch);
+    }
 
-        if (branch) {
-            window.DD_RUM.setGlobalContextProperty('branch', branch);
-        }
-
-        if (env === 'live') {
-            setRumDeviceId();
-        }
+    if (env === 'live') {
+        setRumDeviceId();
     }
 }
 
-if (window.DD_LOGS) {
+if (window.DD_LOGS && (env === 'preview' || env === 'live')) {
     // init browser logs
     window.DD_LOGS.init({
         clientToken: Config.ddClientToken,
@@ -80,7 +77,7 @@ if (window.DD_LOGS) {
 
 const handleCdocsCustomRumAction = () => {
     const filterSelectorMenu = document.querySelector('.filter-selector-menu');
-
+    
     if (filterSelectorMenu) {
         const filterButtons = filterSelectorMenu.querySelectorAll('.cdoc-filter__option');
 
@@ -97,22 +94,22 @@ const handleCdocsCustomRumAction = () => {
 
 const handleFleetAutomationCustomRumAction = () => {
     const fleetAutomationLink = document.querySelector("[href^='https://app.datadoghq.com/fleet/install-agent']")
-    console.log('fleetAutomationLink', fleetAutomationLink);
+    console.log('fleetAutomationLink', fleetAutomationLink, "Commit SHA::", CI_COMMIT_SHORT_SHA);
     if (fleetAutomationLink) {
         fleetAutomationLink.addEventListener('click', () => {
             window.DD_RUM.addAction('in_app_fleet_automation_agent_install_clicked', {
-                textContent: fleetAutomationLink.textContent
+                textContent: fleetAutomationLink.textContent,
+                href: fleetAutomationLink.href
             });
         });
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    handleFleetAutomationCustomRumAction();
     if (window.clientFiltersManager) {
         handleCdocsCustomRumAction();
         clientFiltersManager.registerHook('afterRerender', handleCdocsCustomRumAction);
-
+        
         clientFiltersManager.registerHook('afterReveal', () => {
             window.DD_RUM.addAction('cdocs_page_revealed', {});
         });
@@ -120,4 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
             window.DD_RUM.addAction('cdocs_page_rerendered', {});
         });
     }
+    handleFleetAutomationCustomRumAction();
 });
+
+
+export { handleFleetAutomationCustomRumAction };
