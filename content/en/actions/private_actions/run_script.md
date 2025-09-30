@@ -104,8 +104,8 @@ You can mount complex scripts inside the runner:
 # docker-compose example
 services:
   runner:
-    image: gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}
-    # build: . # if you are using a custom Dockerfile
+    build: . # if you are using a local Dockerfile
+    # image: <your_custom_published_image> # if you published your image to a registry
     volumes:
       - "./config:/etc/dd-action-runner/config"
 ```
