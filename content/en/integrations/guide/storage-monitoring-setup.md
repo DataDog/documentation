@@ -11,8 +11,8 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/storage-monitoring/" >}}
-  Storage Monitoring is in Preview. Request access by using this form.
-{{< /callout >}} 
+  Storage Monitoring is in Preview. Request access to start monitoring your object storage.
+{{< /callout >}}
 
 
 ## Overview
