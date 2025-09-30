@@ -25,7 +25,7 @@ Use Status Pages to:
 * Communicate service disruptions clearly during incidents
 * Reduce inbound support volume with proactive updates
 
-## Configure permissions 
+## Configure permissions
 
 There are three RBAC permissions that are relevant to Status Pages. Users with the Datadog Admin Role have all the necessary permissions.
 
@@ -39,7 +39,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
 ## Create a status page
 
-1. In Datadog, navigate to [**Service Management > Status Pages**][2].  
+1. In Datadog, navigate to [**Service Management > Status Pages**][2].
 1. Click **Create Status Page** and follow the onboarding flow:
 
    | Field             | Description |
@@ -57,33 +57,33 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 {{< img src="/service_management/status_pages/status_page_components.png" alt="Status page component configuration with live preview panel" style="width:100%;" >}}
 
 Components are the building blocks of your status page. Each one represents a service or feature your users care about. Some examples of components include:
-- API Gateway  
-- Web Dashboard  
-- Database Cluster  
+- API Gateway
+- Web Dashboard
+- Database Cluster
 - US Region Services
 
 You can add components to your status page either on intial setup or through the status page settings:
 
 1. From your status page, click **Settings** and select the **Components** tab.
-1. Create individual components or a group of related components. You can associate [incidents](#add-an-incident) with these components to reflect impact on your status page.  
-1. Select a visualization type:  
-   1. Bars and Uptime Percentage  
-   1. Bars Only  
-   1. Component Name Only  
+1. Create individual components or a group of related components. You can associate [incidents](#add-an-incident) with these components to reflect impact on your status page.
+1. Select a visualization type:
+   1. Bars and Uptime Percentage
+   1. Bars Only
+   1. Component Name Only
 
 ## Publish your status page
 
 After you save your status page settings, click **Launch Status Page** to make the page available at its URL.
 
 If you selected:
-- **Public**, the page is immediately accessible to all visitors.  
+- **Public**, the page is immediately accessible to all visitors.
 - **Internal**, access is limited to authenticated Datadog users in your organization.
 
-## Add an incident
+## Add a notice
 
-<div class="alert alert-warning">Incidents published on Status Pages are not the same as incidents declared within Datadog Incident Management. Incidents on Status Pages are carefully crafted messages posted to a public website to communicate system status, and may encompass multiple internal Incident Management incidents.</div>
+Notices on Status Pages are carefully crafted messages posted to a public website to communicate system status, and may encompass multiple internal Incident Management incidents.
 
-When an issue arises, you can communicate it clearly through your status page. 
+When an issue arises, you can communicate it clearly through your status page.
 
 1. From a status page, click **Publish Incident** to open a "Publish Status Page Incident" modal and provide:
    | Field | Description |
