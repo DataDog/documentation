@@ -1,6 +1,6 @@
 # Documentation site for Datadog
 
-Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
+Welcome to the Datadog documentation repository. The Markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
 
 ## Contribute to the docs
 
@@ -20,7 +20,7 @@ Follow these steps if you are NOT a Datadog employee:
 - Fork the master branch.
 - Consult our [contributing guidelines][8].
 - When you're ready to finalize your changes, commit them and make a pull request back to `DataDog/master`.
-- A Datadog technical writer might change your PR title with a DOCS ticket number, such as "[DOCS-9000]," which means it has been added to the team's internal Jira queue to triage and review. No action is necessary from you if we change the title of your PR.
+- A Datadog technical writer may update your PR title with a DOCS ticket number, such as "[DOCS-9000]," which means it has been added to the team's internal Jira queue to triage and review. No action is necessary from you if we change the title of your PR.
 
 ### Datadog Staff
 Follow these steps if you are a Datadog employee:
