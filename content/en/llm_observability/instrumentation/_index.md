@@ -7,7 +7,7 @@ further_reading:
 ---
 
 
-To get started with Datadog LLM Observability, instrument your LLM application by choosing from several approaches based on your programming language and application setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications with minimal code changes.
+To get started with Datadog LLM Observability, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
 
 ## Instrumentation Options
 You can instrument your application with the Python, Node.js, or Java SDKs, or by using the LLM Observability API.
