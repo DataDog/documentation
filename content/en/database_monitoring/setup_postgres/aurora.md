@@ -452,7 +452,7 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+    ad.datadoghq.com/service.checks: |
       {
         "postgres": {
           "init_config": <INIT_CONFIG>,
