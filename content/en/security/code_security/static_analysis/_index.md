@@ -77,7 +77,7 @@ For each finding, you can provide Bits AI with feedback on its assessment.
 {{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
 False positive filtering is supported for the following CWEs:
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
-- [CWE-78: OS Command Injection)](https://cwe.mitre.org/data/definitions/78.html)
+- [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
 - [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
 - [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
 - [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
