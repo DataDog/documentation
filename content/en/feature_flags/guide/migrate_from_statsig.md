@@ -430,8 +430,8 @@ const variation = getInstance().getJSONAssignment(
   userAttributes,
   {}
 );
-const checkoutVersion = experiment?.checkout_version || 'control';
-const showUpsell = experiment?.show_upsell || false;
+const checkoutVersion = variation?.checkout_version || 'control';
+const showUpsell = variation?.show_upsell || false;
 
 // Alternatively, for individual experiment parameters:
 const checkoutVersion = getInstance().getStringAssignment(
