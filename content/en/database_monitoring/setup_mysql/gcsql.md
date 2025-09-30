@@ -1,4 +1,4 @@
----
+create a service using the following syntax---
 title: Setting Up Database Monitoring for Google Cloud SQL managed MySQL
 description: Install and configure Database Monitoring for MySQL managed on Google Cloud SQL.
 further_reading:
