@@ -86,7 +86,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Empareja una fecha con el patrón especificado y la analiza para producir una marca de tiempo Unix. [Consulta los ejemplos del emparejador de fechas](#parsing-dates).
 
 `regex("pattern")`
@@ -526,7 +526,7 @@ myParsingRule Los usuarios %{data:users:array("{}","-", uppercase)} se han añad
 
 ### Formato glog
 
-A veces los componentes de Kubernetes gestionan logs en el formato `glog`. Este ejemplo es del elemento del programador de Kubernetes en la biblioteca de pipelines.
+A veces los componentes de Kubernetes gestionan logs en el formato `glog`. Este ejemplo es del elemento del programador de Kubernetes en la librería de pipelines.
 
 Ejemplo de línea de log:
 

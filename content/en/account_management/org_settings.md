@@ -1,5 +1,6 @@
 ---
 title: Organization Settings
+description: Manage users, teams, authentication, API keys, roles, and security settings for your Datadog organization from the Organization Settings section.
 further_reading:
     - link: "/account_management/api-app-keys/"
       tag: "Documentation"

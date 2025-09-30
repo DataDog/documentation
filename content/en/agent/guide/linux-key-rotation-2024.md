@@ -1,5 +1,6 @@
 ---
 title: 2024 Linux Key Rotation
+description: "Information about the 2024 GPG key rotation for Datadog RPM and DEB packages and how to update your systems."
 ---
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. Datadog packages include:

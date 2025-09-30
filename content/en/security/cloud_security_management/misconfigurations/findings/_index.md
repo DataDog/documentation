@@ -32,7 +32,7 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 Misconfigurations are displayed on the [Misconfigurations Findings page][1].
 - Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed.
-  - Group misconfigurations by **Resources** or **Teams** (or **None** to view misconfigurations individually), so you can find the resources or teams that have the most failed misconfigurations, and prioritize your remediation efforts accordingly.
+  - Group misconfigurations by any facet, custom property, or tag (or **None** to view misconfigurations individually), so you can find patterns of failed misconfigurations and prioritize your remediation efforts accordingly.
 - Hover over **Views**, then select an existing view to apply, or click **Save as new view** to use your explorer settings again in the future.
 
 {{< img src="security/csm/findings_page_2.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}

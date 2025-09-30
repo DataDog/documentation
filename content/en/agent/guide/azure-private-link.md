@@ -1,5 +1,6 @@
 ---
 title: Connect to Datadog over Azure Private Link
+description: Configure Azure Private Link to send telemetry to Datadog securely without using the public internet, including endpoint setup and DNS configuration.
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
