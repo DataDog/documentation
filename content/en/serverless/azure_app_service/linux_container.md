@@ -321,7 +321,7 @@ In your **App settings** in Azure, set the following environment variables on bo
 - `DD_ENV`: How you want to tag your env. For example, `prod`
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
-- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Reccommended for scenarios with high log rotation. For example, setting `_default_docker` will configure the log tailer to ignore rotated files and focus only on Azure's active log file.
+- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.
 
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
