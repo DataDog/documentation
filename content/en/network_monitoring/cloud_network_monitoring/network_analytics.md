@@ -206,16 +206,19 @@ The following TCP metrics are available:
 
 | Metric | Description |
 |---|---|
-| **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
-| **TCP Latency** | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged. |
+| **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
+| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
+| **Host unreachable** | Indicates when the target host is offline or traffic is blocked by routers or firewalls. Available in **Agent 7.68+**. |
+| **Network unreachable** | Indicates local networking issues on the Agent's host machine. Available in **Agent 7.68+**. |
+| **Connection cancels** | Tracks TCP connection cancellations and userspace connection timeouts in language runtimes such as `Go` and `Node.js`. Available in **Agent 7.70+**. |
 | **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
-| **TCP Timeouts**  | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
+| **TCP Latency** | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged. |
 | **TCP Refusals**  | The number of TCP connections that were refused by the server. Typically this indicates an attempt to connect to an IP/port that isn't receiving connections, or a firewall/security misconfiguration. |
 | **TCP Resets**  | The number of TCP connections that were reset by the server.  |
-| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
-| **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
+| **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
+| **TCP Timeouts**  | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
 
-All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
+All metrics are measured from the `client` side of the connection when available, otherwise from the server side.
 
 ### Cloud service autodetection
 
