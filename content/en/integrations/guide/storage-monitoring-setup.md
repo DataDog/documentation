@@ -15,23 +15,14 @@ further_reading:
 ## Overview
 
 Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used. With Storage Monitoring you can:
-- Pinpoint where spend is coming from in your bucket: Break storage cost to the prefix so you know which workloads, teams, or environments drive growth.
-- Identify cold data: Spot buckets with rarely accessed prefixes, and move cold data to lower-cost tiers.
-- Tune retention and lifecycle rules with data: Read/write and age metrics show when objects were last used, so you can shift unused prefixes to Glacier, Intelligent-Tiering, and other low-cost classes.
-- Monitor data freshness: Age metrics show how recently each prefix was updated, so you can confirm that backups and other time-sensitive data are landing in prefixes when they should.
+- **Pinpoint where spend is coming from in your bucket**: Break storage cost to the prefix so you know which workloads, teams, or environments drive growth.
+- **Identify cold data**: Spot buckets with rarely accessed prefixes, and move cold data to lower-cost tiers.
+- **Tune retention and lifecycle rules with data**: Read/write and age metrics show when objects were last used, so you can shift unused prefixes to Glacier, Intelligent-Tiering, and other low-cost classes.
+- **Monitor data freshness**: Age metrics show how recently each prefix was updated, so you can confirm that backups and other time-sensitive data are landing in prefixes when they should.
 
-To use Storage Monitoring, the following data sources are required:
+You can access Storage Monitoring in Datadog by navigating to **Infrastructure** > **Storage Monitoring**.
 
-1. Amazon S3 Integration & Resource Collection
-2. S3 Inventory configured for every bucket you want to monitor
-3. S3 Access Logs for access-related metrics
-
-
-This guide explains how to configure Storage Monitoring in Datadog for your Amazon S3 buckets, Google Cloud Storage buckets, and Azure storage accounts
-
-You can access your Storage Monitoring data in Datadog by navigating to **Infrastructure** > **Storage Monitoring**.
-
-Select your cloud storage service to access setup instructions.
+This guide explains how to configure Storage Monitoring in Datadog for your Amazon S3 buckets, Google Cloud Storage buckets, and Azure storage accounts. Select your cloud storage service to access setup instructions.
 
 {{< partial name="cloud_storage_monitoring/storage-monitoring-setup.html" >}}
 
@@ -42,18 +33,17 @@ Select your cloud storage service to access setup instructions.
 
 The fastest way to configure Storage Monitoring is through the [Enable Buckets][501] page, where you can enable S3 inventory and configure monitoring for multiple buckets at once.
 
-To set up S3 inventory manually or with Terraform, see [Existing S3 Inventory][506] or the Terraform instructions.
-
-Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Buckets][501].
+To set up S3 inventory manually or with Terraform and enable Storage Monitoring using your existing set up, see [Existing S3 Inventory][506].
 
 {{< img src="integrations/guide/storage_monitoring/add-bucket.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.**
 2. **Enable S3 Inventory to get prefix level monitoring.**
 
-     <div class="alert alert-info"> **Note:**
-      - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
-      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account) </div>
+     <div class="alert alert-info">
+      - Source bucket: The S3 bucket you want to monitor with Storage Monitoring <br>
+      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account)
+      </div>
 
 
    1. Add the following permissions to your [Datadog IAM policy][508] so Datadog can enable S3 inventory on your source buckets and read the generated reports from the destination buckets:
@@ -98,6 +88,7 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
     {{< img src="integrations/guide/storage_monitoring/step2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
     3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate.
+    <br>
 
 3. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
 
@@ -125,6 +116,7 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
         - Set the event type to **All object create events**
         - Set the prefix to `access-logs/` (matching your access log prefix)
 
+  <div class="alert alert-info"> Sending S3 Access Logs will also make it available in Datadog Logs Management. </div>
 
 4. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
 
@@ -250,7 +242,19 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
   optional_fields = [
     "Size",
     "StorageClass",
-    "LastModifiedDate", "ETag", "IsMultipartUploaded", "ReplicationStatus", EncryptionStatus | ObjectLockRetainUntilDate | ObjectLockMode | ObjectLockLegalHoldStatus | IntelligentTieringAccessTier | BucketKeyStatus | ChecksumAlgorithm | ObjectAccessControlList | ObjectOwner
+    "LastModifiedDate",
+    "ETag",
+    "IsMultipartUploaded",
+    "ReplicationStatus",
+    "EncryptionStatus",
+    "ObjectLockRetainUntilDate",
+    "ObjectLockMode",
+    "ObjectLockLegalHoldStatus",
+    "IntelligentTieringAccessTier",
+    "BucketKeyStatus",
+    "ChecksumAlgorithm",
+    "ObjectAccessControlList",
+    "ObjectOwner"
   ]
 }
 ```
