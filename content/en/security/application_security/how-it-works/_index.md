@@ -33,7 +33,7 @@ If your service is running with <a href="/agent/remote_config/#enabling-remote-c
 
 ## Compatibility
 
-App and API Protection uses the same libraries used by APM, so you don't need to deploy and maintain another library. Steps to enable Datadog App and API Protectionon are specific to each runtime language. Check to see if your language is supported in the [App and API Protection setup guides][6].
+App and API Protection uses the same libraries as APM, so you don't need to deploy and maintain another library. Steps to enable Datadog App and API Protection are specific to each runtime language. See the [App and API Protection setup guides][6] to check if your language is supported.
 
 ## Serverless monitoring
 
