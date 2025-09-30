@@ -147,6 +147,6 @@ The following host names are deemed invalid and discarded:
 [2]: /opentelemetry/interoperability/otlp_ingest_in_the_agent
 [3]: /opentelemetry/setup/collector_exporter/
 [4]: /opentelemetry/config/hostname_tagging/
-[5]: /opentelemetry/migrate/ddot_collector.md
+[5]: opentelemetry/migrate/ddot_collector/
 [6]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor
 [7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#expected-attributes
