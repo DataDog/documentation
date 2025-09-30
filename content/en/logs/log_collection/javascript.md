@@ -16,9 +16,11 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Forward frontend errors.
 - Record real client IP addresses and user agents.
 - Optimized network usage with automatic bulk posts.
+- Use in Worker and Service Worker environments.
 
 **Notes**:
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
+- **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs executing in Worker environments do not automatically track sessions.
 
 ## Setup
 
@@ -26,7 +28,9 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 **Datadog browser logs SDK**: Configure the SDK through [NPM](#npm) or use the [CDN async](#cdn-async) or [CDN sync](#cdn-sync) code snippets in the head tag.
 
-**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers. See the [Browser Support][4] table.
+**Supported environments**: The browser logs SDK supports all modern desktop and mobile browsers, as well as Worker and Service Worker environments. See the [Browser Support][4] table.
+
+**Note**: Logs executing in Worker environments do not automatically track sessions.
 
 ### Choose the right installation method
 
