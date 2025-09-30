@@ -177,9 +177,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    | Name | Value |
    | ---- | ----- |
-   | `DD_API_KEY` | Your [Datadog API key][1]. |
+   | `DD_AZURE_RESOURCE_GROUP` | **Required** for Azure Functions on the [Flex Consumption Plan][8]. Your Azure resource group. |
+   | `DD_API_KEY` | **Required**. Your [Datadog API key][1]. |
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
-   | `DD_AZURE_RESOURCE_GROUP` | Your Azure resource group. **Required** for Azure Functions on the [Flex Consumption Plan][8]. |
 
 7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][5]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables.
 
