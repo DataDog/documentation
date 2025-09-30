@@ -339,6 +339,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
       enabled: true
     ```
 
+
 3. Deploy the Agent with the above configuration file from the command line:
 
     ```shell

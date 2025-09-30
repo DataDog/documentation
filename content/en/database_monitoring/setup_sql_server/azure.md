@@ -1,3 +1,4 @@
+---
 title: Setting Up Database Monitoring for Azure SQL Server
 description: Install and configure Database Monitoring for SQL Server managed on Azure.
 further_reading:

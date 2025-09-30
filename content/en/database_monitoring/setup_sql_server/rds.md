@@ -1,3 +1,4 @@
+---
 title: Setting Up Database Monitoring for SQL Server on Amazon RDS
 description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:

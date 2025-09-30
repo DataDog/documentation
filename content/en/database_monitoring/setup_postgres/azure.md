@@ -1,3 +1,4 @@
+---
 title: Setting Up Database Monitoring for Azure Database for PostgreSQL
 description: Install and configure Database Monitoring for PostgreSQL managed on Azure.
 further_reading:

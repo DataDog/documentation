@@ -1,3 +1,4 @@
+---
 title: Setting Up Database Monitoring for Google Cloud SQL managed SQL Server
 description: Install and configure Database Monitoring for SQL Server managed on Google Cloud SQL
 further_reading:

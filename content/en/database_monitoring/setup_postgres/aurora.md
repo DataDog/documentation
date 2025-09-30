@@ -1,3 +1,4 @@
+---
 title: Setting Up Database Monitoring for Aurora managed Postgres
 description: Install and configure Database Monitoring for Postgres on Amazon Aurora.
 further_reading:
