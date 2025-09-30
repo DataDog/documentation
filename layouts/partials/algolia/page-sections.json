@@ -48,7 +48,7 @@
                   {{- $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) -}}
                   {{- $object_id := (print $page.File.UniqueID "_" $page.Language.Lang "_" ($section_header | anchorize) "_" $i "_" $order) -}}
 
-                  {{- if eq $page.Params.exclude_headers_from_search "true" -}}
+                  {{- if $page.Params.exclude_headers_from_search -}}
                     {{- $section_header = "" -}}
                   {{- end -}}
                   
