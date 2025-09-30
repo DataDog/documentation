@@ -34,44 +34,15 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-## Limitations
+After setting up Roku, f[ollow the steps on this page to enable React Native Crash Reporting and Error Tracking][101].
 
-Crash reporting on Roku doesn't yet support stacktraces. 
-
-## Test your implementation
-
-To verify your Roku Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
-
-To test your implementation:
-
-1. Run your application on an Roku device.
-2. Execute some code containing a crash. For example:
-
-   ```brightscript
-   sub explodingMethod()
-       x = 1
-       print x.foo
-   ```
-
-3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
-
-### Forward errors to Datadog
-
-Whenever you perform an operation that might throw an exception, you can forward the error to Datadog by adding the following code snippet:
-
-```brightscript
-    try
-        doSomethingThatMightThrowAnException()
-    catch error
-        m.global.datadogRumAgent.callfunc("addError", error)
-    end try
-```
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[101]: /error_tracking/frontend/mobile/roku.md
 
 
 ## Further Reading
