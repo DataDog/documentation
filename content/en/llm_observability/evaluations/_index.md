@@ -8,11 +8,11 @@ aliases:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations:
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][7].
 
-### Out-of-the-Box Evaluations
+### Managed Evaluations
 
-Datadog builds and supports [Out-of-the-Box Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
+Datadog builds and supports [Managed Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
 
 ### Submit Custom Evaluations
 
@@ -32,9 +32,10 @@ By proactively scanning for sensitive data, LLM Observability ensures that conve
 
 [LLM Observability Write permissions][6] are necessary to configure evaluations.
 
-[1]: /llm_observability/evaluations/ootb_evaluations
+[1]: /llm_observability/evaluations/managed_evaluations
 [2]: /llm_observability/evaluations/submit_evaluations
 [3]: /llm_observability/evaluations/ragas_evaluations
 [4]: /llm_observability/evaluations/submit_nemo_evaluations
 [5]: /security/sensitive_data_scanner/
 [6]: /account_management/rbac/permissions/#llm-observability
+[7]: https://app.datadoghq.com/llm/settings/evaluations
