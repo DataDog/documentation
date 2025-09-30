@@ -87,7 +87,7 @@ Components are the building blocks of your status page. Each one represents a se
 You can add components to your status page either on intial setup or through the status page settings:
 
 1. From your status page, click **Settings** and select the **Components** tab.
-1. Create individual components or a group of related components. You can associate [incidents](#add-an-incident) with these components to reflect impact on your status page.
+1. Create individual components or a group of related components. You can associate [incidents](#add-a-notice) with these components to reflect impact on your status page.
 1. Select a visualization type:
    1. Bars and Uptime Percentage
    1. Bars Only
