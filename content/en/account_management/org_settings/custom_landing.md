@@ -13,7 +13,7 @@ You can customize a dashboard with the information you want your users to see wh
 
 ## Set a custom landing page
 
-Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization.
+Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization. Custom landing pages are not available during free trial periods.
 
 To set a custom landing page, follow the steps below:
 
