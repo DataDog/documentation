@@ -252,6 +252,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  cdocs_test: [gov]
   actions: [gov]
   adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
