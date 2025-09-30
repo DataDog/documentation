@@ -1,5 +1,6 @@
 ---
 title: Microsoft Entra ID SAML IdP
+description: Configure Microsoft Entra ID as a SAML identity provider for Datadog single sign-on authentication.
 aliases:
   - /account_management/saml/azure/
   - /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/

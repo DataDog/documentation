@@ -1,5 +1,6 @@
 ---
 title: Use Datastores with Apps and Workflows
+description: Reference and perform CRUD operations on datastores within workflows and apps, and create workflows or apps from existing datastores.
 disable_toc: false
 further_reading:
 - link: "service_management/app_builder/build"

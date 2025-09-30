@@ -7,7 +7,7 @@
 {{- if $int_name -}}
   <!-- Some edge cases the metadata is from a non-integration source, we get the JSON from websites-sources -->
    <!-- The datafile in sources needs to follow the convention to match: appid_metadata.json -->
-  {{- $exceptions := slice "synthetics" "cloud-foundry" -}}
+  {{- $exceptions := slice "synthetics" "cloud-foundry" "system" -}}
   {{- if in $exceptions $int_name -}}
     {{- $data := index .Site.Data (print $int_name "_metadata") -}}
     {{- if $data -}}
@@ -38,7 +38,7 @@
     {{- end -}}
   {{- else -}}
 
-  <!-- For integrations we get the metrics from the integration page -->
+  <!-- For Integrations -->
   <!-- if the page is a draft we can skip -->
   {{- if not .Page.Draft -}}
     <!-- if non english page load from english integration -->
@@ -51,6 +51,7 @@
     {{- if not $page -}}
       {{ warnf "Integration page for '%s' not found in get-metrics-from-git shortcode." $int_name }}
     {{- else -}}
+      <!-- We find and use the metrics from the integration page markdown -->
       {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
       {{- $matches := findRE $pattern $page.RawContent 1 -}}
       {{- if not $matches -}}

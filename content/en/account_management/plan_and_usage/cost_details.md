@@ -1,5 +1,6 @@
 ---
 title: Cost Details
+description: Track Datadog costs with cost summaries and chargebacks, including projected monthly costs, historical data, and multi-organization cost allocation.
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"
@@ -19,6 +20,8 @@ Cost Summary and Cost Chargebacks help you understand your estimated month-to-da
 You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
 - Gain insight into how costs are tracking
+
+For visibility into daily Datadog spending in Cloud Cost Explorer, dashboards, and [cost monitors][7], see [Datadog Costs][8] under Cloud Cost Management.
 
 ### Permissions
 
@@ -157,3 +160,5 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
 [6]: /api/latest/usage-metering/#get-projected-cost-across-your-account
+[7]: /cloud_cost_management/monitors/?tab=costmetricbased
+[8]: /cloud_cost_management/datadog_costs/

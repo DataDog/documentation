@@ -57,7 +57,7 @@ Si tu aplicación está instrumentada con:
 
 Agent v7.52.0 o posterior para generar enlaces de tramos) utilizando [bibliotecas de rastreo de Datadog][7]. La compatibilidad con los enlaces de tramos se introdujo en las siguientes versiones:
 
-| Lenguaje  | Versión mínima de biblioteca de rastreo |
+| Lenguaje  | Versión mínima de librería de rastreo |
 |-----------|---------------------------------|
 | C++/proxy | Aún no es compatible               |
 | Go        | 1.61.0                          |

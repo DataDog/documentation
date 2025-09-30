@@ -22,7 +22,7 @@ _2 minutos para completarse_
 
 Datadog puede mostrarte la latencia de tu aplicación a lo largo del tiempo y cómo se compara con momentos similares en periodos anteriores, como la semana o el mes pasados. Este ejemplo muestra un servidor web para una plataforma de comercio electrónico y monitoriza el rendimiento de latencia del servidor en el último mes.
 
-1. **Abrir el [Catálogo de servicios][1]**.
+1. **Abre el [Software Catalog][1]**.
 
    Esta página contiene una lista de todos los [servicios][2] que proporcionan datos a Datadog. Puedes buscar en tus servicios por palabras clave, filtrarlos por etiqueta `env` y establecer el marco temporal.
 

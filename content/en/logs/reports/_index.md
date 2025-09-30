@@ -2,10 +2,6 @@
 title: Scheduled CSV Reports
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}  
-Scheduled CSV Reports are in Preview.  
-{{< /callout >}}
-
 ## Overview
 
 Scheduled CSV Reports let you automatically receive recurring, structured data exports through email or Slack. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
@@ -15,9 +11,8 @@ Scheduled CSV Reports let you automatically receive recurring, structured data e
 To schedule a CSV Report, the query must meet the following conditions:
 
 * The query must be created from the [Log Explorer][1]  
-* The query result displays as a **List** (not a Table or other visualization type)  
-* The query is not a composite query (no [subqueries][2])  
-* "Group into" (fields/patterns/transactions) is not selected  
+* The query result displays as a **List** or **Table** (no other visualization types are supported)  
+* The query is not a composite query (no [subqueries][2])
 * The query doesn't use [calculated fields][3] or [Reference Tables][4]
 * The CSV is limited to 50k rows
 
@@ -37,18 +32,18 @@ To view CSV reports navigate to [Log Explorer][1] and click the **Reports** tab.
 
 **Note**: Reports are not tied to [Saved Views][6] and can only be accessed through the Reports tab. 
 
-* You must have the **Log Reports Write** permission to create your own report schedules.
-* You must have the **Log Reports Manage** permission to modify other users' report schedules.
+* You must have the **CSV Report Schedules Write** permission to create your own report schedules.
+* You must have the **CSV Report Schedules Manage** permission to modify other users' report schedules.
 
-After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have **Log Reports Write** or **Log Reports Manage** permissions, you can unsubscribe from the report directly from an email
+After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have **CSV Report Schedules Write** or **CSV Report Schedules Manage** permissions, you can unsubscribe from the report directly from an email
 
 ## Reports views
 
 | Report View | Description | Required Permission |
 | ----- | ----- | ----- |
-| Created by you | Shows all Scheduled CSV Reports you have created from Log Explorer | Log Reports Write |
-| All Reports | Shows all Scheduled CSV Reports in Log Explorer for the organization you are in | Log Reports Manage |
-| Subscribed | Shows all Scheduled CSV Reports that you are Subscribed to | Log Reports Write |
+| Created by you | Shows all Scheduled CSV Reports you have created from Log Explorer | CSV Report Schedules Write |
+| All Reports | Shows all Scheduled CSV Reports in Log Explorer for the organization you are in | CSV Report Schedules Manage |
+| Subscribed | Shows all Scheduled CSV Reports that you are Subscribed to | CSV Report Schedules Write |
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/explorer/advanced_search/#filter-logs-with-subqueries

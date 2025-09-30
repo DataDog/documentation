@@ -33,7 +33,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
 | Name | Description | Default Role |
 | :---- | :---- | :---- |
-| Status Pages Settings Read (`status_pages_settings_read`) | View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Private Status Pages. | Datadog Read Only Role |
+| Status Pages Settings Read (`status_pages_settings_read`) | View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages. | Datadog Read Only Role |
 | Status Pages Settings Write (`status_pages_settings_write`) | Create and launch new Status Pages, and configure Status Pages settings. | Datadog Admin Role |
 | Status Pages Incident Write (`status_pages_incident_write`) | Publish and update Incidents. | Datadog Admin Role |
 
@@ -44,7 +44,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated users within your Datadog organization can view |
+   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Company logo or Favicon** *(optional)* | Upload a logo or favicon to personalize the appearance of your status page |
@@ -77,7 +77,7 @@ After you save your status page settings, click **Launch Status Page** to make t
 
 If you selected:
 - **Public**, the page is immediately accessible to all visitors.  
-- **Private**, access is limited to authenticated Datadog users in your organization.
+- **Internal**, access is limited to authenticated Datadog users in your organization.
 
 ## Add an incident
 
@@ -105,23 +105,6 @@ After an incident is published, the incident:
 You can post **updates** over time to keep users informed, and then mark the incident as **Resolved**.
 
 {{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the incident history timeline on a live status page with published incidents and updates" video=true >}}
-
-## Set a custom domain
-
-To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
-
-1. From your status page, click **Settings**.  
-1. Select **Custom Domain**.
-1. Follow the instructions to enter your domain and add DNS records.  
-1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.  
-
-<div class="alert alert-warning">Custom domains require access to your DNS provider to add a CNAME or A record.</div>
-
-**Notes**:
-
-- DNS propagation may take several minutes.
-- You can revert to the default Datadog domain at any time.
-- Ensure DNS changes are made by someone with access to your domain registrar.
 
 ## Further reading
 

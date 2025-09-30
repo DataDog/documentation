@@ -50,6 +50,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
    - Workload Scaling Read
    - Workload Scaling Write
    - Autoscaling Manage
+- (Recommended) Linux kernel v5.19+ and cgroup v2
 
 ## Setup
 

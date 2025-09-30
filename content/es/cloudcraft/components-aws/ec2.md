@@ -135,7 +135,7 @@ Cada opción se representa de forma diferente en el objeto `billingOptions`.
 ```
 
 - **type: ri**: el valor de la opción de facturación para una instancia reservada es siempre `ri`.
-- **leaseContractLenght: number**: el tiempo por el que se reserva la instancia. Los valores aceptados son 12 o 36.
+- **leaseContractLength: number**: el tiempo por el que se reserva la instancia. Los valores aceptados son 12 o 36.
 - **purchaseOption: string**: la opción de compra de la instancia. Los valores aceptados son `No Upfront`, `Partial Upfront` y `All Upfront`.
 - **offeringClass: string**: la clase de oferta para la instancia. Los valores aceptados son `standard` y `convertible`.
 

@@ -1,5 +1,6 @@
 ---
 title: Real User Monitoring Monitor
+description: "Monitor real user performance and errors across web and mobile applications using RUM data to improve customer experience."
 aliases:
 - /monitors/monitor_types/real_user_monitoring
 - /monitors/create/types/real_user_monitoring/

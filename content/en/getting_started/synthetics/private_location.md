@@ -1,18 +1,16 @@
 ---
 title: Getting Started with Private Locations
+description: Set up private locations to monitor internal applications and private URLs. Create custom locations for mission-critical areas and internal testing environments.
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'
       text: 'Monitor your Synthetic private locations with Datadog'
-    - link: '/getting_started/synthetics/api_test'
-      tag: 'Documentation'
-      text: 'Create your first API test'
-    - link: '/getting_started/synthetics/browser_test'
-      tag: 'Documentation'
-      text: 'Create your first browser test'
     - link: '/synthetics/private_locations'
       tag: 'Documentation'
       text: 'Learn more about private locations'
+    - link: '/synthetics/guide/kerberos-authentication/'
+      tag: 'Guide'
+      text: 'Kerberos Authentication for Synthetic Monitorings'
 ---
 
 ## Overview
@@ -26,6 +24,7 @@ You can also use private locations to:
 - **Create custom locations** in mission-critical areas of your business.
 - **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic tests in your CI/CD pipelines][1].
 - **Compare the application performance** from inside and outside your internal network.
+- **[Authenticate Synthetic Monitoring tests using Kerberos SSO][16]** for internal Windows-based sites and APIs.
 
 Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].**\*** 
 
@@ -117,3 +116,4 @@ Use your new private location just like a managed location in your Synthetic tes
 [13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/
 [15]: https://www.datadoghq.com/support/
+[16]: /synthetics/guide/kerberos-authentication/

@@ -1,5 +1,6 @@
 ---
 title: Unified Service Tagging
+description: Connect telemetry across traces, metrics, and logs using standardized env, service, and version tags for consistent monitoring.
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -335,6 +336,9 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
   "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
+<div class="alert alert-warning">
+On ECS Fargate, you must add these tags to your application container, <strong>not</strong> the Datadog Agent container.
+</div>
 
 ##### Partial configuration
 

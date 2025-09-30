@@ -16,6 +16,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: Blog
   text: Datadog CNM admite ahora la conexión en red de Consul
+- link: https://www.datadoghq.com/blog/cnm-kubernetes-egress/
+  tag: Blog
+  text: Cómo Datadog Cloud Network Monitoring te ayuda a pasar a una política de salida
+    de red de denegación por defecto a escala
 title: Configuración de Cloud Network Monitoring
 ---
 
@@ -58,8 +62,6 @@ Datadog Cloud Network Monitoring no es compatible con plataformas macOS.
 
 CNM te ayuda a visualizar la arquitectura y el rendimiento de tus entornos en contenedores y orquestados, con compatibilidad con [Docker][5], [Kubernetes][6], [ECS][7] y otras tecnologías de contenedor. Las integraciones de contenedores de Datadog te permiten agregar tráfico por entidades significativas, como contenedores, tareas, pods, clústeres y despliegues, con etiquetas predefinidas como `container_name`, `task_name` y `kube_service`.
 
-CNM no es compatible con Autopilot de Google Kubernetes Engine (GKE).
-
 ### Herramientas de enrutamiento en la red
 
 #### Istio
@@ -72,7 +74,7 @@ Datadog monitoriza todos los aspectos de tu entorno Istio para que también pued
 - Desglosar el rendimiento de tu malla de servicios con [métricas][8] de solicitudes, ancho de banda y consumo de recursos.
 - Examinar trazas (traces) distribuidas de aplicaciones que realizan transacciones a lo largo de la malla con [APM][9].
 
-CNM admite Istio v1.6.4+ con el [Datadog Agent v7.24.1+][1].
+CNM admite Istio v1.6.4 o posterior con el [Datadog Agent v7.24.1 o posterior][1].
 
 Para obtener más información sobre la monitorización de tu entorno Istio con Datadog, [consulta el blog de Istio][10].
 
@@ -92,14 +94,14 @@ Cloud Network Monitoring admite el uso de los siguientes sistemas de aprovisiona
 
 ## Configuración
 
-Dado que la potencia y el enfoque de esta herramienta se centran en el análisis del tráfico entre endpoints de red y la asignación de dependencias red, recomendamos instalarla en un subconjunto significativo de tu infraestructura y en un **mínimo de 2 hosts** para maximizar su valor.
+Cloud Network Monitoring está diseñado para analizar el tráfico _entre_ endpoints de red y asignar dependencias de red. Datadog recomienda instalar CNM en un subconjunto significativo de tu infraestructura y en un **_mínimo de 2 hosts_** para maximizar el valor.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
 
 Para habilitar Cloud Network Monitoring con el Datadog Agent, utiliza las siguientes configuraciones:
 
-1. **Si utilizas una versión del Agent anterior a v6.14 o posterior**, habilita primero [la recopilación de procesos en directo][1]; de lo contrario, omite este paso.
+1. **Si utilizas una versión del Agent anterior a la v6.14**, activa primero la [recopilación de procesos en directo][1]; de lo contrario, omite este paso.
 
 2. Copia la configuración de ejemplo de sonda del sistema:
 
@@ -208,10 +210,10 @@ Para habilitar Cloud Network Monitoring para hosts de Windows:
 [1]: /es/agent/basic_agent_usage/windows/?tab=commandline
 [2]: /es/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
 Para habilitar Cloud Network Monitoring con Kubernetes utilizando Helm, añade lo siguiente a tu archivo `values.yaml`.</br>
-**Se requiere Helm chart v2.4.39 o posterior**. Para obtener más información, consulta la [documentación de Datadog Helm chart][1].
+**Nota:** Se requiere Helm Chart v2.4.39 o posterior. Para obtener más información, consulta la [documentación de Helm Chart de Datadog][1].
 
   ```yaml
   datadog:
@@ -394,14 +396,14 @@ Si el [Agent ya se ejecuta con un manifiesto][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /es/agent/kubernetes/
-[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1774-L1775
+
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">El Datadog Operator está disponible de forma general en la versión `1.0.0` y concilia la versión `v2alpha1` del recurso personalizado del Datadog Agent. </div>
 
-[El Datadog Operator][1] permite desplegar el Datadog Agent en Kubernetes y OpenShift e informa sobre la situación y los errores de despliegue en el estado de tu recurso personalizado. Además, sus opciones de configuración de nivel superior limitan el riesgo de configuraciones erróneas.
+El [Datadog Operator][1] simplifica el despliegue del Datadog Agent en Kubernetes y OpenShift. Proporciona informes sobre estados de despliegues, salud y errores a través de su estado Recurso personalizado, al tiempo que reduce el riesgo de configuraciones incorrectas proporcionando opciones de configuración más claras.
 
-Para habilitar Cloud Network Monitoring en Operator, utiliza la siguiente configuración:
+Para habilitar Cloud Network Monitoring en el Datadog Operator, utiliza la siguiente configuración:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -414,7 +416,7 @@ spec:
       enabled: true
 ```
 
-[1]: https://github.com/DataDog/datadog-operator
+[1]: /es/containers/datadog_operator 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -446,7 +448,7 @@ Sustituye `<DATADOG_API_KEY>` por tu [clave de API Datadog][1].
 
 Si utilizas `docker-compose`, añade lo siguiente al servicio del Datadog Agent.
 
-```
+```shell
 version: '3'
 services:
   datadog:
@@ -476,11 +478,57 @@ services:
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-Para configurar en Amazon ECS, consulta la página de documentación de [Amazon ECS][1].
+Para configurar CNM en Amazon ECS, consulta la página de la documentación de [Amazon ECS][1].
 
 
 [1]: /es/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+
+{{% tab "ECS Fargate" %}}
+
+<div class="alert alert-info">ECS Fargate para CNM está en Vista previa. Ponte en contacto con tu representante de Datadog para inscribirte.</div>
+
+Para habilitar Cloud Network Monitoring en ECS Fargate, utiliza las siguientes instrucciones:
+
+**Requiere la versión `7.58` o superior del Agent**.
+
+- Para realizar un nuevo despliegue de Fargate, configura el Datadog Agent para monitorizar Fargate en ECS, habilitando la [recopilación de procesos][1] en tu host Fargate.
+
+- Para los despliegues existentes, actualiza tu archivo `task.json` para incluir los siguientes parámetros de configuración:
+
+```json
+{
+ "containerDefinitions": [
+   (...)
+     "environment": [
+       (...)
+       {
+         "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
+         "value": "true"
+       },
+       {
+          "name": "DD_NETWORK_CONFIG_ENABLE_EBPFLESS",
+          "value": "true"
+       },
+       {
+          "name": "DD_PROCESS_AGENT_ENABLED",
+          "value": "true"
+       }      
+     ],
+     "linuxParameters": {
+      "capabilities": {
+        "add": [
+          "SYS_PTRACE"
+        ]
+      }
+    },
+ ],
+}
+```
+[1]: /es/integrations/ecs_fargate/?tab=webui#process-collection 
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{< site-region region="us,us3,us5,eu" >}}
 ### Resolución mejorada
@@ -505,7 +553,7 @@ Failed Connections permite recopilar e informar de fallos de TCP incluidos [rein
 
 {{< img src="network_performance_monitoring/setup/cnm_tcp_failures_toggle.png" alt="Captura de pantalla en el menú personalizado de CNM, con el conmutador Fallos resaltado" style="width:50%;">}}
 
-## Para leer más
+## Referencias adicionales
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

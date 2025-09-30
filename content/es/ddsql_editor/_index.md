@@ -12,9 +12,13 @@ further_reading:
 title: Editor DDSQL
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
+La consulta de logs y métricas mediante DDSQL está en vista previa. Utiliza este formulario para solicitar acceso.
+{{< /callout >}} 
+
 ## Información general
 
-Con el [Editar DDSQL][1], puedes obtener una visibilidad más profunda de tu infraestructura consultando tus recursos con lenguaje natural o con [DDSQL](#use-sql-syntax-ddsql), un dialecto de SQL con soporte adicional para consultar etiquetas (tags).
+Con el [Editor DDSQL][1], puedes lograr una visibilidad más profunda de tu infraestructura consultando tus recursos con lenguaje natural o con [DDSQL](#use-sql-syntax-ddsql), un dialecto de SQL con soporte adicional para consultar etiquetas (tags).
 
 {{< img src="/ddsql_editor/query-results-cloud-provider-host-count.png" alt="El resultado de una consulta SQL que muestra el recuento de host del proveedor en la nube en la página de DDSQL en Datadog" style="width:100%;" >}}
 
@@ -35,15 +39,19 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-## Explora tus datos en infraestructura 
+## Explorar tu telemetría
 
-Ve y filtra la lista de tablas y campos en el panel lateral del esquema:
+<div class="alert alert-warning">La consulta de logs y métricas mediante DDSQL está en vista previa. Utiliza este <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">formulario</a> para solicitar acceso.</div>
+
+Visualiza, filtra y crea consultas en el Explorador de datos.
 
 {{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Panel lateral que muestra una lista de tablas disponibles para consultar en el DDSQL Editor" style="width:90%;" >}}
 
 Haz clic en el nombre de una tabla para ver tus columnas y relaciones:
 
 {{< img src="ddsql_editor/data-tab.png" alt="La pestaña de datos que muestra la información de la tabla para aws.ec2_instance" style="width:70%;" >}}
+
+Para logs y métricas, utiliza el creador de consultas para ayudarte a generar funciones de tabla.
 
 ## Guardar y compartir consultas
 

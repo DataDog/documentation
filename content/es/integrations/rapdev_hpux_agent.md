@@ -80,7 +80,7 @@ tile:
 
 ## Información general
 
-El HP-UX Agent te permite recopilar y generar informes sobre métricas del sistema dentro de Datadog. La integración es compatible con HP-UX 11.31 en las arquitecturas PA-RISC e Itanium. El HP-UX Agent usa la distribución del sistema Perl de HP-UX predeterminada y no requiere dependencias de bibliotecas adicionales, lo que simplifica la instalación y la compatibilidad.
+El HP-UX Agent te permite recopilar y generar informes sobre métricas del sistema dentro de Datadog. La integración es compatible con HP-UX 11.31 en las arquitecturas PA-RISC e Itanium. El HP-UX Agent usa la distribución del sistema Perl de HP-UX predeterminada y no requiere dependencias de librerías adicionales, lo que simplifica la instalación y la compatibilidad.
 
 El HP-UX Agent proporciona los metadatos de host necesarios para admitir la lista de infraestructuras de Datadog, lo que permite que tu organización trabaje con sistemas host de HP-UX similares a otros sistemas operativos host de Datadog compatibles.
 
@@ -88,11 +88,11 @@ El HP-UX Agent usa las mismas URLs y puertos que los Agents nativos. Actualmente
 
 ## Ayuda
 
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales: 
+Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
- - Correo electrónico: support@rapdev.io 
+ - Correo electrónico: support@rapdev.io
  - Chat: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - Teléfono: 855-857-0222 
+ - Teléfono: 855-857-0222
 
 ---
 Hecho con ❤️ en Boston

@@ -1,5 +1,6 @@
 ---
 title: Top List Widget
+description: Display ranked lists of metrics and dimensions showing top or bottom values for easy comparison and analysis.
 widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/

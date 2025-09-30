@@ -1,5 +1,6 @@
 ---
 title: CI/CD & Test Monitor
+description: "Monitor CI pipelines, tests, and CD deployments with alerts on failures, performance regressions, and code coverage metrics."
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/

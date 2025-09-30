@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces
   tag: Documentación
   text: Conectar logs y trazas
-- link: /real_user_monitoring/platform/connect_rum_and_traces/
+- link: /real_user_monitoring/correlate_with_other_telemetry/apm/
   tag: Documentación
   text: Conectar RUM, Session Replay y trazas
 - link: /synthetics/apm/
@@ -48,17 +48,17 @@ La [correlación de logs de aplicación](#correlate-application-logs) te proporc
 
 #### ¿Por qué?
 
-Los logs de aplicación ofrecen el mayor contexto en torno a la mayoría de los problemas de código y de lógica empresarial. Incluso pueden ayudarte resolver otros problemas de servicios. Por ejemplo, la mayoría de los errores de base de datos de logs de ORM.
+Los logs de aplicación ofrecen el mejor contexto sobre la mayoría de los problemas de código y de lógica empresarial. Incluso pueden ayudarte a resolver otros problemas de servicios. Por ejemplo, la mayoría de los errores de base de datos de logs de ORM.
 
 #### ¿Cómo?
 
-Utiliza una de las [varias correlaciones OOTB][3]. Si utilizas un rastreador personalizado o si tienes algún problema, consulta la sección de [FAQ acerca de correlaciones][4].
+Utiliza una de las [diversas correlaciones OOTB][3]. Si utilizas un rastreador personalizado o si tienes algún problema, consulta la sección de [FAQ acerca de correlaciones][4].
 
 ### Correlacionar logs de proxy
 
 #### ¿Por qué?
 
-Los logs de proxy proporcionan más información que los logs de aplicación, ya que abarcan más puntos de entrada y brindan información sobre el contenido estático y las redirecciones.
+Los logs de proxy proporcionan más detalles que los logs de aplicación, ya que abarcan más puntos de entrada y brindan información sobre el contenido estático y las redirecciones.
 
 #### ¿Cómo?
 
@@ -70,9 +70,9 @@ El rastreador de aplicaciones genera los ID de rastreo por defecto. Esto se pued
 
 Consulta la [integración de rastreo NGINX][5].
 
-##### Inyectar un ID de rastreo en logs
+##### Inyectar ID de rastreo en logs
 
-El ID de rastreo se almacena como variable `opentelemetry_trace_id`. Actualiza el formato de log NGINX añadiendo el siguiente bloque de configuración en la sección HTTP de tu archivo de configuración NGINX `/etc/nginx/nginx.conf`:
+El ID de traza se almacena como variable `opentelemetry_trace_id`. Actualiza el formato de log de NGINX añadiendo el siguiente bloque de configuración en la sección HTTP de tu archivo de configuración de NGINX `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
@@ -89,7 +89,7 @@ http {
 1. Clona el pipeline NGINX.
 
 2. Personaliza el primer [analizador grok][6]:
-   - En **Parsing rules* (Reglas de análisis), sustituye la primera regla de análisis por:
+   - En **Parsing rules** (Reglas de análisis), sustituye la primera regla de análisis por:
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
    ```
@@ -106,7 +106,7 @@ http {
 
 Los logs de base de datos suelen ser difíciles de contextualizar debido a la similitud de las consultas, la anonimización variable y el elevado uso.
 
-Por ejemplo, las consultas lentas de producción son difíciles de reproducir y analizar sin invertir mucho tiempo y recursos. A continuación se muestra un ejemplo de cómo correlacionar el análisis de consultas lentas con las trazas.
+Por ejemplo, las consultas lentas de producción son difíciles de reproducir y analizar sin invertir mucho tiempo y recursos. A continuación se muestra un ejemplo de cómo correlacionar el análisis de consultas lentas con trazas.
 
 #### ¿Cómo?
 
@@ -116,7 +116,7 @@ Por ejemplo, las consultas lentas de producción son difíciles de reproducir y 
 
 Los logs predeterminados de PostgreSQL no tienen información. Para enriquecerlos, sigue [esta guía sobre integraciones][8].
 
-Las prácticas recomendadas para consultas lentas también sugieren registrar planes de ejecución de sentencias lentas automáticamente, para que no tengas que ejecutar `EXPLAIN` manualmente. Para ejecutar `EXPLAIN` automáticamente, actualiza `/etc/postgresql/<VERSION>/main/postgresql.conf` con:
+Las prácticas recomendadas para consultas lentas también sugieren registrar planes de ejecución de declaraciones lentas automáticamente, para que no tengas que ejecutar `EXPLAIN` manualmente. Para ejecutar `EXPLAIN` automáticamente, actualiza `/etc/postgresql/<VERSION>/main/postgresql.conf` con:
 
 ```conf
 session_preload_libraries = 'auto_explain'
@@ -127,7 +127,7 @@ Las consultas de más de 500ms registran su plan de ejecución.
 
 **Nota**: `auto_explain.log_analyze = 'true'` proporciona aún más información, pero afecta enormemente al rendimiento. Para obtener más información, consulta la [documentación oficial][9].
 
-##### Inyectar trace_id en tus logs de base de datos
+##### Inyectar ID de rastreo en tus logs de base de datos
 
 Inyecta `trace_id` en la mayoría de tus logs de base de datos con [comentarios SQL][10]. El siguiente es un ejemplo con Flask y SQLAlchemy:
 
@@ -177,7 +177,7 @@ Los logs de navegador y los eventos RUM se correlacionan automáticamente. Para 
 
 ## Correlacionar la experiencia del usuario con el comportamiento del servidor
 
-Las monitorizaciones backend y frontend tradicionales están aisladas y pueden requerir flujos de trabajo separados para solucionar problemas en toda la pila. Las correlaciones de pila completa de Datadog te permiten identificar la causa raíz, ya sea que provenga de un problema con el navegador o de un tiempo de inactividad en una base de datos, y calcular su impacto en el usuario.
+Las monitorizaciones backend y frontend tradicionales están aisladas y pueden requerir flujos de trabajo separados para solucionar problemas en toda la pila. Las correlaciones de pila completa de Datadog te permiten identificar la causa raíz, ya sea un problema con el navegador o un tiempo de inactividad en una base de datos, y calcular su impacto en el usuario.
 
 En esta sección se explica cómo habilitar estas correlaciones:
 
@@ -207,7 +207,7 @@ No existe una correlación directa entre las vistas de RUM y los logs del servid
 
 #### ¿Por qué?
 
-La integración de APM con la monitorización Synthetic te permite navegar desde la ejecución fallida de un test hasta la causa raíz del problema a través de la traza generada por el test.
+La integración de APM con la monitorización Synthetic te permite navegar desde la ejecución fallida de un test hasta la causa raíz del problema, a través de la traza generada por el test.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Causa raíz del fallo de un test Synthetic" style="width:100%;" >}}
 
@@ -238,7 +238,7 @@ Para obtener más información, consulta [Conectar tests Synthetic y trazas][19]
 [13]: /es/real_user_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
-[16]: /es/real_user_monitoring/platform/connect_rum_and_traces
+[16]: /es/real_user_monitoring/correlate_with_other_telemetry/apm
 [17]: /es/synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /es/synthetics/apm

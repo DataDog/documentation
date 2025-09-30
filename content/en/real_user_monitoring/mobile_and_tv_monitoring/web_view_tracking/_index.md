@@ -1,5 +1,6 @@
 ---
 title: Web View Tracking
+description: "Track web views across mobile and TV platforms including Android, iOS, Flutter, React Native, and Roku for hybrid app monitoring."
 aliases:
   - /real_user_monitoring/android/web_view_tracking
   - /real_user_monitoring/ios/web_view_tracking
@@ -87,7 +88,7 @@ pod 'DatadogWebViewTracking'
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:

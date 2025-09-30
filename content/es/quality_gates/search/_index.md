@@ -29,7 +29,7 @@ Haz clic en una ejecución de regla específica para ver los resultados de la ej
 
 Para cambiar a los resultados de Static Analysis o Software Composition Analysis relacionados en [Datadog Code Security][2], haz clic en `See related events`. Puedes editar la regla de las Puertas de calidad, de acuerdo con los resultados de tu ejecución, haciendo clic en **Manage Rule** (Gestionar regla).
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

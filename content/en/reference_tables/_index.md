@@ -17,8 +17,7 @@ further_reading:
 - link: "/service_management/events/pipelines_and_processors/lookup_processor/"
   tag: "Documentation"
   text: "Lookup processor for Events"
-- link: "/cloud_cost_management/tag_pipelines/
-#map-multiple-tags"
+- link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
   tag: "Documentation"
   text: "Use Reference Tables to add multiple tags to cost data"
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
@@ -42,20 +41,7 @@ For example, you can:
 
 - **Enrich logs and security data for faster investigations:** Correlate logs, traces, and security events with up-to-date business context—such as customer names, account owners, threat intelligence, or error code descriptions—to accelerate troubleshooting and analysis.
 - **Segment users and resources for targeted analytics and cost management:** Group users, customers, or cloud resources into meaningful segments (like user tiers, teams, or business units) for deeper product analytics and precise cost attribution using tools like Tag Pipelines.
-- **Enhance data for advanced querying and reporting:** Join external data from Reference Tables in Sheets, DDSQL Editor, or Log Workspaces to perform complex queries, aggregations, and build custom reports without technical expertise.
-
-## Validation rules
-
-Reference Table names and column headers are validated using the following naming conventions and automatically updated or normalized, if necessary.
-
-| Rule     | Normalization |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Names and headers cannot be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
-| Names and headers cannot contain uppercase letters. 								| Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names, which are then enumerated. For example, `Fileid` and `FileID` both become `fileid` and are enumerated to `fileid1` and `fileid2` respectively. |
-| Names and headers cannot contain spaces. 											| Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
-| Names and headers must start with a lowercase letter. 							| Uppercase characters are converted to lowercase. Non-letter leading characters are removed. For example, `23Two_three` becomes `two_three`.	|
-| Names and headers support only lowercase letters, numbers, and the `_` character. | Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.				|
-| Names and headers must be 56 characters or less. 									| No normalization is done. Names and headers that have more than 56 characters are rejected and need to be renamed. |
+- **Enhance data for advanced querying and reporting:** Join external data from Reference Tables in Sheets, DDSQL Editor, or Notebooks to perform complex queries, aggregations, and build custom reports without technical expertise.
 
 ## Create a Reference Table
 
@@ -204,6 +190,12 @@ The selected CSV is upserted into the table, meaning that:
 
 Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete.
 
+## Export a Reference Table
+
+To export a Reference Table, select a table and click **Query in DDSQL Editor**. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
+
+{{< img src="reference_tables/query_ddsql_editor.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
+
 ## Delete a Reference Table
 
 To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click **Delete Table**.
@@ -281,3 +273,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [4]: /monitors/types/event/
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
+[7]: /ddsql_editor/#save-and-share-queries

@@ -28,9 +28,9 @@ type: multi-code-lang
 Si aún no has leído las instrucciones de autoinstrumentación y configuración, empieza por las <a href="/tracing/setup/nodejs/">Instrucciones de configuración de Node.js</a>.
 </div>
 
-Si no utilizas la instrumentación de biblioteca compatible (consulta [Compatibilidad de bibliotecas][1]), puede que desees instrumentar manualmente tu código.
+Si no utilizas la instrumentación de librería compatible (consulta [Compatibilidad de librerías][1]), puede que desees instrumentar manualmente tu código.
 
-También es posible que desees ampliar la funcionalidad de la biblioteca `dd-trace` u obtener un control más preciso sobre la instrumentación de tu aplicación. La biblioteca proporciona varias técnicas para conseguirlo.
+También es posible que desees ampliar la funcionalidad de la librería `dd-trace` u obtener un control más preciso sobre la instrumentación de tu aplicación. La librería proporciona varias técnicas para conseguirlo.
 
 ## Añadir etiquetas
 
@@ -131,7 +131,7 @@ Cuando se utiliza `tracer.trace()` o `tracer.wrap()` esto se hace automáticamen
 
 ## Creación de tramos
 
-La biblioteca `dd-trace` crea [tramos][2] automáticamente con `tracer.init()` para [muchas bibliotecas y marcos][1]. Sin embargo, es posible que desees obtener visibilidad de tu propio código y esto se logra utilizando tramos.
+La librería `dd-trace` crea [tramos][2] automáticamente con `tracer.init()` para [muchas bibliotecas y marcos][1]. Sin embargo, es posible que desees obtener visibilidad de tu propio código y esto se logra utilizando tramos.
 
 Dentro de tu solicitud web (por ejemplo, `/make-sandwich`), puedes realizar varias operaciones, como `getIngredients()` y `assembleSandwich()`, que son útiles para hacer mediciones.
 

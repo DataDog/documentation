@@ -431,6 +431,7 @@ Dentro del archivo JSON comprimido, el contenido de cada evento tiene el siguien
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits es una marca registrada de Datadog, Inc.
 
 [1]: /es/logs/indexes/#exclusion-filters
