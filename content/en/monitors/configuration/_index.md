@@ -36,7 +36,7 @@ To learn how to construct the search query, see the individual [monitor types][1
 As you build or modify your query, the preview graph at the top of the configuration dynamically updates to reflect the results in real time.
 
 {{< tabs >}}
-{{% tab "Evaluated Data (in Preview)" %}}
+{{% tab "Evaluated Data" %}}
 
 {{< img src="/monitors/configuration/evaluated_data_preview_graph.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
 
