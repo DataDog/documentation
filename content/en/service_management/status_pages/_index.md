@@ -102,7 +102,7 @@ After a notice is published, the notice:
 - Updates the uptime bars for impacted components.
 - Is visible in the notice history timeline.
 
-You can post **updates** over time to keep users informed, and then mark the [issue][Need to verify this as issue or notice] as **Resolved**.
+You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
 
 {{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the noticce history timeline on a live status page with published notices and updates" video=true >}}
 
