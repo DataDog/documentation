@@ -1,5 +1,5 @@
 ---
-title: Automated Pull Request Generation and CI Repair
+title: Pull Request Automation and CI Repair
 ---
 
 ## Overview
