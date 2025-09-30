@@ -43,8 +43,8 @@ The following sections describe ways to configure SCA for your repositories.
 
 ### Scan with Datadog-hosted scanning
 
-You can run Datadog Static Code Analysis scans directly on Datadog infrastructure. Supported repository types include:
-- [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider)
+You can run Datadog Static SCA scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub (excluding repositories that use [Git Large File Storage][21])](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider)
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
 
@@ -321,7 +321,7 @@ are set to your API key, APP key, and [Datadog site][12], respectively.
 datadog-ci sbom upload /path/to/third-party-sbom.json
 ```
 
-## Features
+## Link results to Datadog services and teams
 
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
@@ -387,7 +387,7 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
-### Reachability analysis
+## Filter by reachable vulnerabilities
 
 Datadog offers static reachability analysis to help teams assess whether vulnerable code paths in dependencies are referenced within their application code. This capability supports more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore present minimal immediate risk.
 
@@ -474,4 +474,5 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [18]: https://cyclonedx.org/docs/1.4/json/
 [19]: https://cyclonedx.org/docs/1.5/json/
 [20]: https://cyclonedx.org/docs/1.6/json/
+[21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 
