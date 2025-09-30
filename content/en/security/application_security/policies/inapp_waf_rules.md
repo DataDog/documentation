@@ -67,7 +67,6 @@ Suggested rules use cases include:
   * Use Suggested Rules as baselines for ATO protection by tracking successful and failed login attempts and tuning conditions (for example, the POST method plus 401/403 failures).
   * Apply consistent detection logic across services to make it harder for attackers to bypass defenses in less monitored environments.
   * Detect signs of **account takeover attempts** by monitoring abnormal login activity (for example, spikes in failures, unusual login success rates after repeated failures).
-  * Feed findings back into Suggested Rules to reduce noise while sharpening ATO-focused detections.
 
 To use a suggested rule, do one of the following:
 - Create a custom rule from a suggested rule:
