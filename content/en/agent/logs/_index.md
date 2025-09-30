@@ -32,8 +32,6 @@ Collecting logs is **not enabled** by default in the Datadog Agent. If you are r
 
 To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][5] (`datadog.yaml`).
 
-{{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
-
 Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details on how to enforce HTTPS/TCP transport, refer to the [Agent transport documentation][6].
 
 To send logs with environment variables, configure the following:
