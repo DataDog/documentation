@@ -35,7 +35,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 | :---- | :---- | :---- |
 | Status Pages Settings Read (`status_pages_settings_read`) | View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages. | Datadog Read Only Role |
 | Status Pages Settings Write (`status_pages_settings_write`) | Create and launch new Status Pages, and configure Status Pages settings. | Datadog Admin Role |
-| Status Pages Incident Write (`status_pages_incident_write`) | Publish and update Incidents. | Datadog Admin Role |
+| Status Pages Notice Write (`status_pages_incident_write`) | Publish and update Incidents. | Datadog Admin Role |
 
 ## Create a status page
 
@@ -44,10 +44,11 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
+   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Company logo or Favicon** *(optional)* | Upload a logo or favicon to personalize the appearance of your status page |
+   | **Subscriptions** *(optional)* | Enable users to receive email notifications about status page updates. When subscriptions are enabled, users can sign up to get notified about new notices and updates. You can turn subscriptions on or off for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in, email must be confirmed. |
+   | **Company logo, Favicon, or Email Header Image** *(optional)* | Upload a logo, favicon, or image to personalize the appearance of your status page and email notifications. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
    <div class="alert alert-info">A status page <strong>is not Live</strong> after you save your settings. To make the page available, <a href="#publish-your-status-page">publish your status page</a>.</div>
@@ -81,30 +82,35 @@ If you selected:
 
 ## Add a notice
 
-Notices on Status Pages are carefully crafted messages posted to a public website to communicate system status, and may encompass multiple internal Incident Management incidents.
+Notices on Status Pages are carefully crafted messages posted to a public website to communicate system status. When an issue arises, you can communicate it clearly through your status page.
 
-When an issue arises, you can communicate it clearly through your status page.
-
-1. From a status page, click **Publish Incident** to open a "Publish Status Page Incident" modal and provide:
+1. From a status page, click **Publish Notice** to open a "Publish Status Page Notice" modal and provide:
    | Field | Description |
    | ---- | ---- |
    | **Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
    | **Status** | Current state of the incident: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
    | **Message** *(optional)* | Additional details for your users <br>*Examples: known cause, expected resolution time* |
-   | **Affected Components** | One or more components impacted by the incident |
+   | **Components impacted** | One or more components impacted by the incident |
    | **Impact** | Level of impact per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
-1. Click **Publish Incident**.
+   | **Notify Subscribers** | Toggle to send the notice to subscribers |
+1. Click **Publish Notice**.
 
-{{< img src="/service_management/status_pages/publish_status_page_incident.png" alt="Screenshot of the Status Page Incident creation modal with fields filled out" style="width:70%;" >}}
+{{< img src="/service_management/status_pages/publish_status_page_incident_1.png" alt="Screenshot of the Status Page Notice creation modal with fields filled out" style="width:70%;" >}}
 
-After an incident is published, the incident:
-- Appears on the Status Pages List under **Active Incidents**.
+After a notice is published, the notice:
+- Appears on the Status Pages List under **Active Notices**.
 - Updates the uptime bars for impacted components.
-- Is visible in the incident history timeline.
+- Is visible in the notice history timeline.
 
-You can post **updates** over time to keep users informed, and then mark the incident as **Resolved**.
+You can post **updates** over time to keep users informed, and then mark the [issue][Need to verify this as issue or notice] as **Resolved**.
 
-{{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the incident history timeline on a live status page with published incidents and updates" video=true >}}
+{{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the noticce history timeline on a live status page with published notices and updates" video=true >}}
+
+## Email subscriptions
+
+Email subscriptions on status pages are **double opt-in**: users must confirm their email address before they are added as subscribers. After entering an email to subscribe, a confirmation email is sent, and the subscription is only activated after the user clicks the confirmation link.
+
+For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
 ## Further reading
 
