@@ -368,6 +368,102 @@ triage_agent = Agent(
 )
 {{< /code-block >}}
 
+#### Tool argument correctness
+
+This check evaluates whether the arguments provided to the selected tool are correct (i.e. match the type expected by the tool) and make sense given the tool's context. 
+<!-- agent has successfully selected the appropriate tools to address the user's request. -->
+
+{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on LLM spans| Evaluated using LLM | Tool Argument Correctness verifies that the arguments provided to a tool by the LLM are correct and contextually relevant. This evaluation identifies cases where the arguments provided to the tool are incorrect according to the tool schema (i.e. the agument is expected to be an integer rather than a string) and are not revelant (i.e. the argument is a country but the model provides the name of a city).|
+
+##### Instrumentation
+
+This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+
+{{< code-block lang="python" >}}
+import os
+
+from ddtrace.llmobs import LLMObs
+from pydantic_ai import Agent
+
+
+# Define tools as regular functions with type hints
+def add_numbers(a: int, b: int) -> int:
+    """
+    Adds two numbers together.
+    """
+    return a + b
+
+
+def subtract_numbers(a: int, b: int) -> int:
+    """
+    Subtracts two numbers.
+    """
+    return a - b
+
+    
+def multiply_numbers(a: int, b: int) -> int:
+    """
+    Multiplies two numbers.
+    """
+    return a * b
+
+
+def divide_numbers(a: int, b: int) -> float:
+    """
+    Divides two numbers.
+    """
+    return a / b
+
+
+# Enable LLMObs
+LLMObs.enable(
+    ml_app="jenn_test",
+    api_key=os.environ["DD_API_KEY"],
+    site=os.environ["DD_SITE"],
+    agentless_enabled=True,
+)
+
+
+# Create the Math Tutor agent with tools
+math_tutor_agent = Agent(
+    'openai:gpt-5-nano',
+    instructions="You provide help with math problems. Please use the tools to find the answer.",
+    tools=[add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
+)
+
+# Create the History Tutor agent (note: gpt-5-nano doesn't exist, using gpt-4o-mini)
+history_tutor_agent = Agent(
+    'openai:gpt-5-nano',
+    instructions="You provide help with history problems.",
+)
+
+# Create the triage agent
+# Note: pydantic_ai handles handoffs differently - you'd typically use result_type 
+# or custom logic to route between agents
+triage_agent = Agent(
+    'openai:gpt-5-nano',
+    instructions=(
+        'DO NOT RELY ON YOUR OWN MATHEMATICAL KNOWLEDGE, '
+        'MAKE SURE TO CALL AVAILABLE TOOLS TO SOLVE EVERY SUBPROBLEM.'
+    ),
+    tools=[add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
+)
+
+
+# Run the agent synchronously
+result = triage_agent.run_sync(
+    '''
+    Help me solve the following problem:
+    What is the sum of the numbers between 1 and 100?
+    Make sure you list out all the mathematical operations (addition, subtraction, multiplication, division) in order before you start calling tools in that order.
+    '''
+)
+{{< /code-block >}}
+
 ### Security and Safety evaluations
 
 #### Toxicity
