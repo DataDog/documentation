@@ -1323,9 +1323,8 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
 [4]: logs/log_collection/javascript/#user-tracking-consent
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[7]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-
+[7]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
 [8]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
 [9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
 [10]: /logs/explorer/
