@@ -311,7 +311,7 @@ namespace Example
 
 ### Submit historical metrics
 
-To submit historical metrics, Datadog recommends using the Datadog Lambda Extension. Historical metrics can have timestamps within the last hour.
+Use the Datadog Lambda Extension to submit historical metrics. These metrics can have timestamps up to one hour in the past.
 
 Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the latest Datadog Lambda Extension.
 
