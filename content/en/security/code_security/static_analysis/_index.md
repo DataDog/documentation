@@ -83,7 +83,7 @@ False positive filtering is supported for the following CWEs:
 - [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
 - [CWE-79: Cross-site Scripting](https://cwe.mitre.org/data/definitions/79.html)
 - [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
-- [CWE-327: Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/614.html)
+- [CWE-327: Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)
 - [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
 - [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
 - [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)
