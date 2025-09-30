@@ -1,5 +1,6 @@
 ---
 title: Delete Data
+description: Delete logs and other data from Datadog with proper permissions, time-based queries, and audit trail logging for compliance.
 private: true
 ---
 

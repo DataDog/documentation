@@ -16,7 +16,7 @@ type: multi-code-lang
 
 ### Control de versiones
 
-El control de versiones de la biblioteca de rastreo de Datadog Node.js sigue [control de versiones semántico][1]. Cuando se publica una nueva versión principal, se convierte en la línea de publicación principal, donde aterrizan todas las nuevas funciones, correcciones de errores y parches de seguridad. Aquí hay un esquema de lo que constituye cada tipo de cambio de control de versiones semántico:
+El control de versiones de la librería de rastreo de Datadog Node.js sigue [control de versiones semántico][1]. Cuando se publica una nueva versión principal, se convierte en la línea de publicación principal, donde aterrizan todas las nuevas funciones, correcciones de errores y parches de seguridad. Aquí hay un esquema de lo que constituye cada tipo de cambio de control de versiones semántico:
 
 | Principal          | Secundaria                                                          | Parche    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
@@ -38,7 +38,7 @@ Si tienes alguna pregunta o duda sobre nuestro soporte técnico para una versió
 ### Soporte técnico de versiones de Node.js
 
 Cuando el proyecto Node.js deja de dar soporte técnico a una línea de versión principal LTS (cuando pasa a EOL), se le deja de dar soporte técnico en la siguiente versión principal de `dd-trace`.
-La última línea de versión principal que da soporte técnico de la biblioteca de `dd-trace` brinda soporte técnico a esa versión EOL de Node.js durante por lo menos otro año en el modo de mantenimiento.
+La última línea de versión principal que da soporte técnico de la librería de `dd-trace` brinda soporte técnico a esa versión EOL de Node.js durante por lo menos otro año en el modo de mantenimiento.
 
 Algunos problemas no pueden resolverse en `dd-trace` y deben solucionarse en Node.js. Cuando esto ocurre y la versión de Node.js en cuestión es EOL, no es posible resolver el problema sin pasar a otra versión que no sea EOL.
 En  Datadog no se realizan nuevas versiones de `dd-trace` para ofrecer soporte técnico para las líneas de versiones principales de Node.js que no son LTS (versiones impares).
@@ -68,7 +68,7 @@ APM proporciona instrumentación predefinida para muchos marcos de trabajo popul
 
 Para obtener más información sobre cómo intercambiar y configurar las extensiones, restaura la [documentación de la API][5].
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 | Módulo                  | Versiones | Tipo de soporte técnico    | Notas                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |

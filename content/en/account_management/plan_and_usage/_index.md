@@ -1,5 +1,6 @@
 ---
 title: Plan and Usage Settings
+description: Access usage reports, plan settings, and billing history for your Datadog account, including multi-organization usage tracking and cost analysis.
 ---
 
 [Administrators][1] can access the [organization settings][2] by clicking Plan & Usage from the Account menu in the bottom of the left side navigation or by selecting Plan & Usage from the header dropdown at the top of the Personal Settings page.

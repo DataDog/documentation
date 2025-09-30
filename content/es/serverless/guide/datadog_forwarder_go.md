@@ -11,7 +11,7 @@ Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverles
 
 Si todavía no lo hiciste:
 
-- Instala la [integración de AWS][1]. De esta forma, Datadog podrá ingerir las métricas de Lambda desde AWS. 
+- Instala la [integración de AWS][1]. De esta forma, Datadog podrá ingerir las métricas de Lambda desde AWS.
 - Instala la [función de Lambda del Datadog Forwarder][2], necesaria para ingerir las trazas (traces), las métricas mejoradas, las métricas personalizadas y los logs de AWS Lambda.
 
 Una vez que tengas instalada la [integración de AWS][1] y el [Datadog Forwarder][2], sigue estos pasos para instrumentar tu aplicación de modo que envíe métricas, logs y trazas a Datadog.
@@ -43,7 +43,7 @@ Sigue estos pasos para instrumentar la función:
       httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     )
     ```
-3. Envuelve el controlador de tu función de Lambda con la envoltura de la biblioteca Lambda de Datadog.
+3. Envuelve el controlador de tu función de Lambda con la envoltura de la librería Lambda de Datadog.
 
     ```go
     func main() {

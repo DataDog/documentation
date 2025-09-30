@@ -1,5 +1,6 @@
 ---
 title: Auto-Instrumentation
+description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration for seamless monitoring setup."
 beta: true
 code_lang: server
 type: multi-code-lang

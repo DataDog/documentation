@@ -1,5 +1,6 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
+description: Configure OpenTelemetry SDK with Datadog Exporter to send standardized observability data including metrics, traces, and logs.
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
   tag: 'External Site'

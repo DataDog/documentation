@@ -11,18 +11,18 @@ title: Recopilación de logs de iOS
 ---
 ## Información general
 
-Envía logs a Datadog desde tus aplicaciones de iOS con [la biblioteca de registro del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
+Envía logs a Datadog desde tus aplicaciones de iOS con [la librería de registro del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
 
 * Loguear en Datadog en formato JSON de forma nativa.
 * Utilizar los atributos predeterminados y añadir atributos personalizados a cada log enviado.
 * Registrar las direcciones IP reales de los clientes y los Agents de usuario.
 * Aprovechar el uso optimizado de red con publicaciones masivas automáticas.
 
-La biblioteca `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o posteriores.
+La librería `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o posteriores.
 
 ## Configuración
 
-1. Declara la biblioteca como una dependencia dependiente de tu gestor de paquete. Se recomienda el gestor de paquete Swift.
+1. Declara la librería como una dependencia dependiente de tu gestor de paquete. Se recomienda el gestor de paquete Swift.
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -69,7 +69,7 @@ DatadogLogs.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 
@@ -86,7 +86,7 @@ Datadog.initialize(
         clientToken: "<client token>",
         env: "<environment>",
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -121,7 +121,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .eu1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -157,7 +157,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us3,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -195,7 +195,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us5,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -233,7 +233,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us1_fed,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -271,7 +271,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .ap1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -309,7 +309,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .ap2,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -500,7 +500,7 @@ Para más información, consulta [Empezando con etiquetas][5].
 
 Por defecto, los siguientes atributos se añaden a todos los logs enviados por un registrador:
 
-* `http.useragent` y sus propiedades extraídas `device` y `OS` 
+* `http.useragent` y sus propiedades extraídas `device` y `OS`
 * `network.client.ip` y sus propiedades geográficas extraídas (`country`, `city`)
 * `logger.version`, versión del SDK de Datadog
 * `logger.thread_name`(`main`, `background`)

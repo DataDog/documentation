@@ -1,9 +1,10 @@
 ---
 title: Getting Started with the Agent
+description: Guide to installing and configuring the Datadog Agent to collect system-level metrics, events, and logs from hosts.
 further_reading:
-    - link: '/agent/basic_agent_usage/'
-      tag: 'Documentation'
-      text: 'Basic Agent Usage'
+    - link: "agent/"
+      tag: "Documentation"
+      text: "The Datadog Agent"
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to power up your Infrastructure monitoring'
@@ -95,7 +96,7 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 3. Have the Datadog UI open.
 
-**Note**: This walkthrough uses the Ubuntu operating system. See the [Basic Agent Usage][17] page for a full list of supported platforms.
+**Note**: This walkthrough uses the Ubuntu operating system. See the [Supported Platforms][17] page for a full list of supported platforms.
 
 ### Installation
 
@@ -292,7 +293,7 @@ For help troubleshooting the Agent:
 [14]: /getting_started/agent/#checks
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
-[17]: /agent/basic_agent_usage/?tab=agentv6v7
+[17]: /agent/supported_platforms
 [18]: https://app.datadoghq.com/account/settings/agent/latest
 [19]: /agent/configuration/agent-commands/#agent-status-and-information
 [20]: https://app.datadoghq.com/event/explorer

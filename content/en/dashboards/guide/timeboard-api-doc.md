@@ -1,5 +1,6 @@
 ---
 title: Timeboard API
+description: DEPRECATED - API for the deprecated Timeboard endpoint. Use the Dashboard endpoint for dashboard operations instead.
 aliases:
   - /graphing/faq/timeboard-api-doc
   - /graphing/guide/timeboard-api-doc

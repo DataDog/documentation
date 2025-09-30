@@ -8,7 +8,7 @@ further_reading:
   text: Controlador de admisión del Cluster Agent
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: Documentación
-  text: Inyección de biblioteca de Kubernetes
+  text: Inyección de librería de Kubernetes
 title: Solucionar problemas del Controlador de admisión
 ---
 
@@ -26,7 +26,7 @@ Por lo tanto, **el Controlador de admisión no muta los pods existentes dentro d
 ### Labels (etiquetas) y anotaciones
 El Cluster Agent responde a las labels y anotaciones del pod creado; **no** responde a la carga de trabajo (Despliegue, DaemonSet, CronJob, etc.) que creó ese pod. Asegúrate de que tu plantilla de pod hace referencia a esto.
 
-Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de biblioteca][3]:
+Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de librería][3]:
 
 ```yaml
 apiVersion: apps/v1
@@ -34,7 +34,7 @@ kind: Deployment
 metadata:
   name: example-deployment
 spec:
-  #(...)  
+  #(...)
   template:
     metadata:
       labels:
@@ -217,7 +217,7 @@ datadog:
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 in processNextWorkItem) | Webhook datadog-webhook reconciled successfully
 ```
 
-Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión según las [instrucciones de configuración][1]. 
+Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión según las [instrucciones de configuración][1].
 
 ### Validar inyección
 
@@ -272,7 +272,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`. 
+Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`.
 
 Alternativamente, para los entornos basados en Cilium, establece `flavor` en `cilium` para crear un recurso de `CiliumNetworkPolicy`.
 
