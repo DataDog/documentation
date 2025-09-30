@@ -2867,6 +2867,12 @@
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
   },
+  "SearchFlakyTests": {
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "summary": "Search flaky tests",
+    "request_description": "",
+    "request_schema_description": "The request for a flaky tests search."
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
