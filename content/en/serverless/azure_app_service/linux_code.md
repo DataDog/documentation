@@ -239,7 +239,7 @@ When `true`, log collection is automatically configured for the additional file 
 
 `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`
 : **Value**: An optional file descriptor used for more precise log tailing.<br>
-Reccommended for scenarios with high log rotation. For example, setting `_default_docker` will configure the log tailer to ignore rotated files and focus only on Azure's active log file.<br>
+Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.<br>
 
 <div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
 
