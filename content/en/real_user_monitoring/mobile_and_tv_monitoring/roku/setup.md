@@ -22,7 +22,7 @@ site_support_id: rum_roku
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Roku SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Roku SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][14] for specific steps.
 
 The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
@@ -249,6 +249,8 @@ This means that even if users open your application while offline, no data is lo
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+[9]: /real_user_monitoring/
+mobile_and_tv_monitoring/roku/data_collected
+[10]: /error_tracking/frontend/mobile/roku
 [101]: https://app.datadoghq.com/rum/application/create
 [201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku

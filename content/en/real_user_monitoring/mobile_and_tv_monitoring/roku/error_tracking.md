@@ -42,7 +42,7 @@ After setting up Roku, f[ollow the steps on this page to enable React Native Cra
 [3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
-[101]: /error_tracking/frontend/mobile/roku.md
+[101]: /error_tracking/frontend/mobile/roku
 
 
 ## Further Reading
