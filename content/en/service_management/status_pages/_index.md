@@ -31,11 +31,32 @@ There are three RBAC permissions that are relevant to Status Pages. Users with t
 
 To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_incident_write` RBAC permissions. For more information, see [Access Control][1].
 
-| Name | Description | Default Role |
-| :---- | :---- | :---- |
-| Status Pages Settings Read (`status_pages_settings_read`) | View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages. | Datadog Read Only Role |
-| Status Pages Settings Write (`status_pages_settings_write`) | Create and launch new Status Pages, and configure Status Pages settings. | Datadog Admin Role |
-| Status Pages Notice Write (`status_pages_incident_write`) | Publish and update Incidents. | Datadog Admin Role |
+<table>
+  <thead>
+    <tr>
+      <th style="white-space: nowrap;">Name</th>
+      <th>Description</th>
+      <th>Default Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Settings Read<br><code style="white-space: nowrap;">status_pages_settings_read</code></td>
+      <td>View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages.</td>
+      <td>Datadog Read Only Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Settings Write<br><code style="white-space: nowrap;">status_pages_settings_write</code></td>
+      <td>Create and launch new Status Pages, and configure Status Pages settings.</td>
+      <td>Datadog Admin Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
+      <td>Publish and update Incidents.</td>
+      <td>Datadog Admin Role</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Create a status page
 
