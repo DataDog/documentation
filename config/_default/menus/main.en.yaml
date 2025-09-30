@@ -4750,10 +4750,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
       weight: 301
-    - name: Connect with APM
+    - name: Correlate with APM
       url: llm_observability/monitoring/llm_observability_and_apm
       parent: llm_obs_monitoring
-      identifier: llm_obs_monitoring_apm
+      identifier: llm_obs_correlate_apm
       weight: 302
     - name: Cluster Map
       url: llm_observability/monitoring/cluster_map/
