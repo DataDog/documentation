@@ -15,10 +15,10 @@ further_reading:
 ## Overview
 
 Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used. With Storage Monitoring you can:
-- Pinpoint exactly where spend is coming from in your bucket – Break storage cost to the prefix so you know exactly which workloads, teams, or environments drive growth.
-- Identify cold data – Spot buckets with rarely accessed prefixes without the need for spreadsheets or custom scripts and move cold data to lower-cost tiers.
-- Tune retention and lifecycle rules with data – Read/write and age metrics show when objects were last used, making it easy to shift unused prefixes to Glacier, Intelligent-Tiering, and other low-cost classes.
-- Monitor data freshness – Age metrics show how recently each prefix was updated, making it easy to confirm that backups and other time-sensitive data are landing in prefixes when they should.
+- Pinpoint where spend is coming from in your bucket: Break storage cost to the prefix so you know which workloads, teams, or environments drive growth.
+- Identify cold data: Spot buckets with rarely accessed prefixes, and move cold data to lower-cost tiers.
+- Tune retention and lifecycle rules with data: Read/write and age metrics show when objects were last used, so you can shift unused prefixes to Glacier, Intelligent-Tiering, and other low-cost classes.
+- Monitor data freshness: Age metrics show how recently each prefix was updated, so you can confirm that backups and other time-sensitive data are landing in prefixes when they should.
 
 To use Storage Monitoring, the following data sources are required:
 
@@ -29,7 +29,7 @@ To use Storage Monitoring, the following data sources are required:
 
 This guide explains how to configure Storage Monitoring in Datadog for your Amazon S3 buckets, Google Cloud Storage buckets, and Azure storage accounts
 
-You can access your Storage Monitoring data in the Datadog app by navigating to: **Infrastructure** > **Storage Monitoring**.
+You can access your Storage Monitoring data in Datadog by navigating to **Infrastructure** > **Storage Monitoring**.
 
 Select your cloud storage service to access setup instructions.
 
@@ -42,7 +42,7 @@ Select your cloud storage service to access setup instructions.
 
 The fastest way to configure Storage Monitoring is through the [Enable Buckets][501] page, where you can enable S3 inventory and configure monitoring for multiple buckets at once.
 
-If you prefer to set up S3 inventory manually or through Terraform, see [Existing S3 Inventory][506] or Terraform instructions.
+To set up S3 inventory manually or with Terraform, see [Existing S3 Inventory][506] or the Terraform instructions.
 
 Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Buckets][501].
 
@@ -91,13 +91,13 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
             }
       ```
 
-    2. Assign a destination bucket per region or per account to store S3 Inventory reports. You can use either an existing bucket or create a new one.
+    2. Assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one.
 
          <div class="alert alert-info"> Note: The destination buckets must allow the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details. </div>
 
     {{< img src="integrations/guide/storage_monitoring/step2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-    3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate..
+    3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate.
 
 3. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
 
@@ -258,11 +258,11 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 **Notes**:
 
    - The destination bucket can be your source bucket, but for security and logical separation, many organizations use a separate bucket.
-   - The `optional_fields` section is required for Datadog prefix metrics & cost optimization insights like duplicate objects.
+   - The `optional_fields` section is required for Datadog prefix metrics and cost optimization insights like duplicate objects.
 
 ### Finish setting up S3 buckets for Storage Monitoring
 
-Once the inventory configuration is set up and your inventory files begin appearing in the destination bucket, fill out [this form][401] to provide your S3 configuration details. This allows Datadog to read the S3 inventory reports and start generating prefix metrics for your storage.
+After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, fill out [this form][401] to provide your S3 configuration details. This allows Datadog to read the S3 inventory reports and start generating prefix metrics for your storage.
 
 ### Use modules for complex setups
 
