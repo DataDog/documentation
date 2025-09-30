@@ -83,12 +83,12 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    {{% /tab %}}
    {{< /tabs >}}
 
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][17], you can also optionally define the associated service name and version.
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][16], you can also optionally define the associated service name and version.
 
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
-   - Context: Starting with [version 5.28.0][20], you can add context to views and the child events of views.
+   - Context: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
 
    For more information, see [Setup Browser Monitoring][4].
 
@@ -1107,7 +1107,7 @@ For a sampled out session, all pageviews and associated telemetry for that sessi
 
 ## User tracking consent
 
-To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][18].
+To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][17].
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
@@ -1517,7 +1517,7 @@ By default, global context and user context are stored in the current page memor
 
 To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][19], allowing the following behaviors:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][18], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
@@ -1530,7 +1530,7 @@ However, this feature comes with some **limitations**:
 
 ## Internal context
 
-After the Datadog browser RUM SDK is initialized, you can access the internal context of the SDK.
+After the Datadog browser RUM SDK is initialized, you can access the internal context of the SDK. This provides core identifiers and metadata that the SDK uses internally, such as session IDs and application details.
 
 You can explore the following attributes:
 
@@ -1682,7 +1682,7 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 
 - Action events collected automatically
 - Resource events other than XHR and Fetch.
-- View events (but you can [override default RUM view names][21] instead)
+- View events (but you can [override default RUM view names][20] instead)
 - CORS and CSP violations
 
 ## Further Reading
@@ -1704,8 +1704,8 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
-[18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
-[19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-[21]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[16]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
+[17]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
+[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+[20]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names

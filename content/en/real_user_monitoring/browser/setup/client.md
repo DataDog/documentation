@@ -44,7 +44,7 @@ Choose the installation method for the Browser SDK.
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Installing through npm (Node Package Manager) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+Installing through Node Package Manager (npm) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
 Add [`@datadog/browser-rum`][2] to your `package.json` file, example if you use npm cli:
 
@@ -315,7 +315,7 @@ Now that you’ve completed the basic setup for RUM, your application is collect
 
 Visualize the [data collected][8] in [dashboards][9] or create a search query in the [RUM Explorer][10].
 
-Until Datadog starts receiving data, your application appears as pending on the Applications page.
+Your application appears as pending on the Applications page until Datadog starts receiving data.
 
 ## Further reading
 
