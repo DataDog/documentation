@@ -49,7 +49,7 @@ This table provides details on pipeline executions, failures, and their impact o
 | **Failures Due to Non-Flaky Tests**   | Number of pipeline executions that failed due to tests without any flakiness. None of the failing tests have any of the following tags: `@test.is_known_flaky`, `@test.is_new_flaky`, and `@test.is_flaky`. |
 | **Dev Experience - Test Failure Breakdown** | Ratio of flaky to non-flaky test failures. When pipelines fail due to tests, how often is it a flaky test? A higher ratio of flaky test failures erodes trust in test results. Developers may stop paying attention to failing tests, assume they're flakes, and manually retry. |
 
-**NOTE**: If CI Visibility is enabled, a failed test is only counted in these metrics if the job where the test was executed failed (not the entire pipeline).
+**Note**: If [CI Visibility][7] is enabled, a failed test is only counted in these metrics if the job where the test was executed failed (not the entire pipeline).
 
 ### Time Wasted in CI
 
@@ -62,7 +62,7 @@ This table provides details on testing time, time lost due to failures, and the 
 | **Time Lost Due to Non-Flaky Tests** | Total duration of test sessions that failed due to tests without any flakiness. All tests that failed do not have any of the following tags: `@test.is_known_flaky`, `@test.is_new_flaky`, and `@test.is_flaky`. |
 | **Dev Experience - Time Lost Breakdown** | Ratio of time lost due to flaky vs. non-flaky test failures. When you lose time due to tests, how much is due to flaky tests? A higher ratio of time lost to flaky test failures leads to developer frustration. |
 
-**NOTE**: If CI Visibility is enabled, the duration is based on the job's duration, not the test session's duration. Also, only jobs with test sessions are considered for the metrics.
+**Note**: If [CI Visibility][7] is enabled, the duration is based on the job's duration, not the test session's duration. Also, only jobs with test sessions are considered for the metrics.
 
 ### Pipelines Saved
 
@@ -75,7 +75,7 @@ This table shows how many pipelines [Auto Test Retries][1] have prevented from f
 | **Pipeline Executions with Tests** | Number of pipeline executions with one or more test sessions. |
 | **Saved by Auto Test Retries**     | Number of CI pipelines with passed test sessions containing tests with `@test.is_retry:true` and `@test.is_new:false`. |
 
-**NOTE**: If CI Visibility is enabled, a passing test is only counted in these metrics if the job where the test was executed passed (not the entire pipeline).
+**Note**: If [CI Visibility][7] is enabled, a passing test is only counted in these metrics if the job where the test was executed passed (not the entire pipeline).
 
 ### Time Saved in CI
 
@@ -88,7 +88,7 @@ This table shows how much CI usage time [Test Impact Analysis][4] and [Auto Test
 | **Saved by Test Impact Analysis** | Total duration indicated by `@test_session.itr.time_saved`. |
 | **Saved by Auto Test Retries**    | Total duration of passed test sessions in which some tests initially failed but later passed due to Auto Test Retries. These tests are tagged with `@test.is_retry:true` and `@test.is_new:false`. |
 
-**NOTE**: If CI Visibility is enabled, the duration is based on the job's duration, not the test session's duration. Also, only passing jobs with test sessions are considered for the metrics.
+**Note**: If [CI Visibility][7] is enabled, the duration is based on the job's duration, not the test session's duration. Also, only passing jobs with test sessions are considered for the metrics.
 
 ## Use cases
 
