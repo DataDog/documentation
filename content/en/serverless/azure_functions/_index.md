@@ -175,7 +175,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
 6. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
 
-   | Name | Value |
+   | Name | Description |
    | ---- | ----- |
    | `DD_AZURE_RESOURCE_GROUP` | **Required** for Azure Functions on the [Flex Consumption Plan][8]. Your Azure resource group. |
    | `DD_API_KEY` | **Required**. Your [Datadog API key][1]. |
