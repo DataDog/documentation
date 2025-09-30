@@ -10,21 +10,21 @@ Dev Agent creates high-quality pull requests (PRs) and iterates on them until CI
 
 When creating a PR, the Bits AI Dev Agent does the following:
 
-- **Branch and commits**
+- **Creates branches and commits**
   - Creates a feature or fix branch with a readable, deterministic name.
   - Produces clear, minimal commits with concise messages.
   - Avoids force pushes and preserves history.
-- **PR title generation**
+- **Generates PR titles**
   - Generates a concise, action-oriented title.
   - Optionally follows conventions (for example, feat:, fix:, chore:) if your repo uses them.
-- **PR description and template compliance**
+- **Fills PR templates**
   - Detects and fills your repository's PR template, populating sections such as Summary, Motivation/Context, Implementation Details, Testing Plan, Risks and Mitigations, Rollback Plan, and Release Notes.
   - Converts the change rationale into user-readable language and links to related issues, tickets, or Datadog signals when available.
-- **Metadata and governance**
+- **Applies metadata and governance**
   - Applies labels, milestones, and assignees if configured.
   - Requests reviews from CODEOWNERS and relevant teams.
   - Respects branch protection rules and required checks.
-- **Code quality alignment**
+- **Aligns with code quality standards**
   - Adheres to repository coding conventions, lint rules, and formatting guides.
   - Adds or updates tests when appropriate and avoids suppressing failing tests.
 
