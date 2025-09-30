@@ -9,9 +9,20 @@ aliases:
 
 ## Overview
 
-Widgets are building blocks for your dashboards. They allow you to visualize and correlate your data across your infrastructure.
+Dashboard widgets are visual representations of data.  They serve as the building blocks for your dashboards to visualize and correlate your data across your infrastructure. They can contain different types of information, such as graphs, images, logs, and statuses, to give you an overview of your systems and environments.
 
-## Getting Started
+## Get started
+
+The fastest way to onboard widgets relevant to your data is to clone a dashboard from the [preset list][4] which includes dashboards created by other members of your organization and out-of-the-box templates for your installed integrations. After you clone a dashboard, you can customize widgets to your use case.
+
+
+{{< whatsnext desc="Additional guides and courses to learn about widgets:" >}}
+   {{< nextlink href="https://docs.datadoghq.com/getting_started/dashboards/" >}}<strong>Getting Started with Dashboards</strong>: Walkthrough of building out a dashboard with widgets{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}<strong>Dashboard Graph Widgets</strong>: Learning center course, create, configure, and utilize dashboard graph widgets{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}<strong>Introduction to Dashboards</strong>: Learning center course, build a dashboard in a sandbox environment{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Add a widget to your dashboard
 
 To begin using widgets in your dashboards:
 
@@ -24,16 +35,7 @@ To begin using widgets in your dashboards:
     - Add context: Use custom links, conditional formatting, and grouping for enhanced insights.
 5. Save your dashboard and share it with your team or externally as needed.
 
-For a detailed walkthrough, see the [Widget Configuration Guide][2] and explore the [Widget Types][3] available.
-
-### Learn with Datadog Learning Center courses
-
-Looking for hands-on tutorials? Check out these free Datadog Learninc Center courses for step-by-step guidance on dashboards and widgets:
-
-{{< whatsnext desc=" " >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}Dashboard Graph Widgets{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Introduction to Dashboards{{< /nextlink >}}
-{{< /whatsnext >}}
+For more information, see [Widget Configuration][2] and explore the available [Widget Types][3].
 
 ## Data sources
 
@@ -83,3 +85,4 @@ Widgets can visualize data from multiple Datadog sources including:
 [1]: /dashboards/
 [2]: /dashboards/widgets/configuration/
 [3]: /dashboards/widgets/types/
+[4]: https://app.datadoghq.com/dashboard/lists/preset/1
