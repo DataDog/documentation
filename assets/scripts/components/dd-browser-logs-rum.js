@@ -97,6 +97,7 @@ const handleCdocsCustomRumAction = () => {
 
 const handleFleetAutomationCustomRumAction = () => {
     const fleetAutomationLink = document.querySelector("[href^='https://app.datadoghq.com/fleet/install-agent']")
+    console.log('fleetAutomationLink', fleetAutomationLink);
     if (fleetAutomationLink) {
         fleetAutomationLink.addEventListener('click', () => {
             window.DD_RUM.addAction('in_app_fleet_automation_agent_install_clicked', {
@@ -107,6 +108,7 @@ const handleFleetAutomationCustomRumAction = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    handleFleetAutomationCustomRumAction();
     if (window.clientFiltersManager) {
         handleCdocsCustomRumAction();
         clientFiltersManager.registerHook('afterRerender', handleCdocsCustomRumAction);
@@ -117,6 +119,5 @@ document.addEventListener('DOMContentLoaded', () => {
         clientFiltersManager.registerHook('afterRerender', () => {
             window.DD_RUM.addAction('cdocs_page_rerendered', {});
         });
-        handleFleetAutomationCustomRumAction();
     }
 });
