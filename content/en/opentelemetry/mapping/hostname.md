@@ -99,7 +99,7 @@ processors:
    allow_hostname_override: true
 ```
 
-Please note this setting is only available in DDOT Collector. 
+Please note this setting is only available for the DDOT Collector. 
 
 ## Fallback hostname logic
 
