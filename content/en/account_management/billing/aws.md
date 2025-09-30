@@ -54,7 +54,7 @@ You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric S
 
 ## Check if a host is monitored by the Agent or AWS
 
-In the Infrastructure Host List:
+In the Infrastructure Host list:
 
 - **Monitored by AWS Integration**
 
