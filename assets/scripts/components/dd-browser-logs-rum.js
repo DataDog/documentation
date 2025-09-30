@@ -95,6 +95,17 @@ const handleCdocsCustomRumAction = () => {
     }
 };
 
+const handleFleetAutomationCustomRumAction = () => {
+    const fleetAutomationLink = document.querySelector("[href^='https://app.datadoghq.com/fleet/install-agent']")
+    if (fleetAutomationLink) {
+        fleetAutomationLink.addEventListener('click', () => {
+            window.DD_RUM.addAction('fleet_automation_clicked', {
+                textContent: fleetAutomationLink.textContent
+            });
+        });
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.clientFiltersManager) {
         handleCdocsCustomRumAction();
@@ -106,5 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         clientFiltersManager.registerHook('afterRerender', () => {
             window.DD_RUM.addAction('cdocs_page_rerendered', {});
         });
+        handleFleetAutomationCustomRumAction();
     }
 });
