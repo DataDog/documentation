@@ -117,17 +117,3 @@ further_reading:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /dashboards/widgets/timeseries/#full-screen
-[2]: /dashboards/guide/context-links/
-[3]: /dashboards/guide/unit-override
-[4]: /dashboards/
-[5]: /notebooks/
-[6]: /tracing/services/service_page/
-[7]: /tracing/services/resource_page/
-[8]: /logs/explorer/
-[9]: /tracing/trace_explorer/
-[10]: /profiler/profile_visualizations/
-[11]: /dashboards/guide/custom_time_frames/
-[12]: /service_management/incident_management/datadog_clipboard/
-[13]: /dashboards/widgets/split_graph/

@@ -64,8 +64,6 @@ Using joins and data previews makes it easier to select the right fields and enr
 
 {{% /collapse-content %}}
 
-
-
 ## Custom links
 
 Custom links enhance data interaction by connecting widget data values to relevant URLs such as Datadog pages or your AWS console.
@@ -93,7 +91,7 @@ This is not an alternative for assigning units to your data.
 
 The global time selector is a fundamental time configuration option that synchronizes all widgets on a dashboard to use the same time frame. To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (for example, `Past 1 Hour` or `Past 1 Day`) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][11]. If a moving window is chosen, the widgets are updated to move along with the time window.
+The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (for example, `Past 1 Hour` or `Past 1 Day`) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][8]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
 
@@ -112,7 +110,7 @@ The copied widgets can be pasted within Datadog by using <kbd>Ctrl</kbd>/<kbd>Cm
 
 You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget.
 
-For more information, see [Datadog Clipboard][12].
+For more information, see [Datadog Clipboard][9].
 
 ## Groups of widgets
 
@@ -171,7 +169,7 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 |------------------------|--------------------------------------------------------------------|
 | Edit                              | Edit the graph.                                         |
 | Clone                             | Create an adjacent copy of the graph.                   |
-| Split graph                       | Create a [split graph][13].                             |
+| Split graph                       | Create a [split graph][10].                             |
 | Create custom links               | Create [custom links](#custom-links).                   |
 | Create monitor                    | Create a monitor preconfigured with the graph's query.  |
 | Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page.            |
@@ -188,9 +186,6 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [5]: /notebooks/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/
-[8]: /logs/explorer/
-[9]: /tracing/trace_explorer/
-[10]: /profiler/profile_visualizations/
-[11]: /dashboards/guide/custom_time_frames/
-[12]: /service_management/incident_management/datadog_clipboard/
-[13]: /dashboards/widgets/split_graph/
+[8]: /dashboards/guide/custom_time_frames/
+[9]: /service_management/incident_management/datadog_clipboard/
+[10]: /dashboards/widgets/split_graph/

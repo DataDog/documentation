@@ -13,7 +13,7 @@ Dashboard widgets are visual representations of data.  They serve as the buildin
 
 ## Get started
 
-The fastest way to onboard widgets relevant to your data is to clone a dashboard from the [preset list][4] which includes dashboards created by other members of your organization and out-of-the-box templates for your installed integrations. After you clone a dashboard, you can customize widgets to your use case.
+The fastest way to onboard widgets relevant to your data is to clone a dashboard from the [preset list][1] which includes dashboards created by other members of your organization and out-of-the-box templates for your installed integrations. After you clone a dashboard, you can customize widgets to your use case.
 
 
 {{< whatsnext desc="Additional guides and courses to learn about widgets:" >}}
@@ -26,7 +26,7 @@ The fastest way to onboard widgets relevant to your data is to clone a dashboard
 
 To begin using widgets in your dashboards:
 
-1. Navigate to the [Dashboards page][1] in Datadog.
+1. Navigate to the [Dashboards page][2] in Datadog.
 2. Click **New Dashboard** or select an existing dashboard to edit.
 3. Click **Add Widget**. Choose from a variety of widget types such as timeseries, bar chart, table, or event stream.
 4. Configure Your Widget:
@@ -35,7 +35,7 @@ To begin using widgets in your dashboards:
     - Add context: Use custom links, conditional formatting, and grouping for enhanced insights.
 5. Save your dashboard and share it with your team or externally as needed.
 
-For more information, see [Widget Configuration][2] and explore the available [Widget Types][3].
+For more information, see [Widget Configuration][3] and explore the available [Widget Types][4].
 
 ## Data sources
 
@@ -82,7 +82,7 @@ Widgets can visualize data from multiple Datadog sources including:
     {{< nextlink href="/dashboards/widgets/types" >}}<strong>Widget Types</strong>: Explore all available widget types and their use cases{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /dashboards/
-[2]: /dashboards/widgets/configuration/
-[3]: /dashboards/widgets/types/
-[4]: https://app.datadoghq.com/dashboard/lists/preset/1
+[1]: https://app.datadoghq.com/dashboard/lists/preset/1
+[2]: /dashboards/
+[3]: /dashboards/widgets/configuration/
+[4]: /dashboards/widgets/types/
