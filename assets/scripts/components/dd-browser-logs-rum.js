@@ -99,7 +99,7 @@ const handleFleetAutomationCustomRumAction = () => {
     const fleetAutomationLink = document.querySelector("[href^='https://app.datadoghq.com/fleet/install-agent']")
     if (fleetAutomationLink) {
         fleetAutomationLink.addEventListener('click', () => {
-            window.DD_RUM.addAction('fleet_automation_clicked', {
+            window.DD_RUM.addAction('in_app_fleet_automation_agent_install_clicked', {
                 textContent: fleetAutomationLink.textContent
             });
         });
