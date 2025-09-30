@@ -10,7 +10,10 @@ further_reading:
       text: "Reduce cloud storage costs and improve operational efficiency with Datadog Storage Monitoring"
 ---
 
-<div class="alert alert-info">Storage Monitoring is in [Preview][https://www.datadoghq.com/product-preview/storage-monitoring/].</div>
+{{< callout url="https://www.datadoghq.com/product-preview/storage-monitoring/" >}}
+  Storage Monitoring is in Preview. Request access by using this form.
+{{< /callout >}} 
+
 
 ## Overview
 
@@ -83,13 +86,12 @@ To set up S3 inventory manually or with Terraform and enable Storage Monitoring 
 
     2. Assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one.
 
-         <div class="alert alert-info">Note: The destination buckets must allow the source buckets to write inventory data. See [Creating a destination bucket policy][https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy] in the AWS documentation for details.</div>
+         <div class="alert alert-info">Note: The destination buckets must allow the source buckets to write inventory data. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy">Creating a destination bucket policy.</a> in the AWS documentation for details.</div>
 
     {{< img src="integrations/guide/storage_monitoring/step2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
     3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate.
 
-    <br>
 
 
 3. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
@@ -118,7 +120,7 @@ To set up S3 inventory manually or with Terraform and enable Storage Monitoring 
         - Set the event type to **All object create events**
         - Set the prefix to `access-logs/` (matching your access log prefix)
 
-  <div class="alert alert-info"> Sending S3 Access Logs will also make it available in [Datadog Log Management][https://docs.datadoghq.com/logs/#explore]. </div>
+  <div class="alert alert-info"> After sending, S3 Access Logs are also available in <a href="https://docs.datadoghq.com/logs/#explore">Datadog Log Management.</a>. </div>
 
 4. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
 
@@ -363,9 +365,9 @@ To verify your setup:
 ### Troubleshooting
 
 If you don't see data for buckets you set up for Storage Monitoring:
-  - Check the destination bucket for inventory files
-  - Confirm the Datadog integration can access the files: ensure `s3:GetObject` & `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role
-  - If you're still encountering issues, please [reach out][1] with your bucket details, AWS account ID, and Datadog org name
+  - Check the destination bucket for inventory files.
+  - Confirm the Datadog integration can access the files: ensure `s3:GetObject` & `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role.
+  - If you're still encountering issues, [contact Datadog][1] with your bucket details, AWS account ID, and Datadog org name.
 
 ## Setup for Google Cloud Storage
 
@@ -557,9 +559,9 @@ To verify your setup:
 ### Troubleshooting
 
 If you encounter any issues or need assistance:
-- Use only one destination bucket for all inventory files per Google Cloud project
-- Verify all permissions are correctly configured
-- If issues persist, [reach out][1] with your bucket details, Google Cloud Project ID, and Datadog org name
+- Use only one destination bucket for all inventory files per Google Cloud project.
+- Verify all permissions are correctly configured.
+- If issues persist, [contact Datadog][1] with your bucket details, Google Cloud Project ID, and Datadog org name.
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: https://cloud.google.com/storage/docs/insights/using-inventory-reports#enable_the_api
