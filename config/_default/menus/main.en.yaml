@@ -4750,10 +4750,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
       weight: 301
-    - name: Connect with APM
+    - name: Correlate with APM
       url: llm_observability/monitoring/llm_observability_and_apm
       parent: llm_obs_monitoring
-      identifier: llm_obs_monitoring_apm
+      identifier: llm_obs_correlate_apm
       weight: 302
     - name: Cluster Map
       url: llm_observability/monitoring/cluster_map/
@@ -4770,10 +4770,10 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Out-of-the-Box
-      url: llm_observability/evaluations/ootb_evaluations
+    - name: Managed
+      url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
-      identifier: llm_obs_ootb_evaluations
+      identifier: llm_obs_managed_evaluations
       weight: 401
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
@@ -4785,10 +4785,10 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 403
-    - name: Custom
-      url: llm_observability/evaluations/submit_evaluations
+    - name: External
+      url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
-      identifier: llm_obs_submit_evaluations
+      identifier: llm_obs_external_evaluations
       weight: 404
     - name: Experiments
       url: llm_observability/experiments
