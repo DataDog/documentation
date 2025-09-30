@@ -127,6 +127,7 @@ The Datadog Agent hostname is used. See [How does Datadog determine the Agent ho
 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname/
 {{% /tab %}}
+{{< /tabs >}}
 
 ## Invalid hostnames
 
