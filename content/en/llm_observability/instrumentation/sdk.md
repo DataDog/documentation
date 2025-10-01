@@ -1230,7 +1230,7 @@ public class MyJavaClass {
   LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
    ...   // preprocess document for data extraction
    taskSpan.annotateIO(...); // record the input and output
-   taskSpan.finish();    
+   taskSpan.finish();
   }
 
   public String extractData(String document) {
@@ -1306,6 +1306,104 @@ public class MyJavaClass {
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+## Prompt tracking
+
+Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions.
+
+### Inline annotation (Python)
+
+Attach prompt metadata immediately before the LLM call. Use this for one-off or ad‑hoc prompts inside a function. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call).
+
+{{% collapse-content title="Prompt object" level="h4" expanded=false id="prompt-tracking-arguments" %}}
+
+`prompt`
+: required - dictionary
+<br />A dictionary that follows the Prompt schema below. Provide either `template` or `chat_template`.
+
+Supported keys:
+
+- `id` (string): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
+- `version` (string): Version tag for the prompt (for example, "1.0.0").
+- `variables` (object: Dict[str, str]): Variables used to render the template.
+- `template` (string): Single-template form. If provided alone, the role defaults to "user".
+- `chat_template` (list of objects or Messages): Multi-message template form. Provide a list of `{ "role": "<role>", "template": "<template>" }` objects, or a list of `Message` objects.
+- `tags` (object: Dict[str, str]): Tags to attach to the prompt run.
+- `rag_context_variables` (list of strings): Variable keys that contain ground-truth/context content.
+- `rag_query_variables` (list of strings): Variable keys that contain the user query.
+
+{{% /collapse-content %}}
+
+## Auto versioning
+
+LLM Observability automatically versions your prompts based on changes to the template content. When you provide a `template` or `chat_template` in your prompt metadata, the system generates a hash of the template content and uses it for automatic versioning. This ensures that any changes to your prompt templates are tracked without requiring manual version management.
+
+The auto versioning system works by:
+- Computing a hash of the `template` or `chat_template` content
+- Automatically incrementing the version when template content changes
+- Maintaining version history to track prompt evolution over time
+
+This allows you to focus on prompt development while automatically maintaining version consistency for performance analysis and debugging.
+
+#### Example: single-template prompt
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def answer_question(text):
+    # Attach prompt metadata to the upcoming LLM span
+    LLMObs.annotate(prompt={
+        "id": "translate-v1",
+        "version": "1.0.0",
+        "template": "Translate to {{lang}}: {{text}}",
+        "variables": {"lang": "fr", "text": text},
+        "tags": {"team": "nlp"}
+    })
+
+    # Example provider call (replace with your client)
+    completion = openai_client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": text}]
+    )
+    return completion
+{{< /code-block >}}
+
+#### Example: chat-style prompt with RAG variables
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def rag_answer(question, context):
+    LLMObs.annotate(prompt={
+        "id": "rag-qa",
+        "version": "2.1.3",
+        "chat_template": [
+            {"role": "system", "template": "You are a helpful assistant."},
+            {"role": "user",   "template": "Use the context to answer: {{question}}\nContext:\n{{context}}"}
+        ],
+        "variables": {
+            "question": question,
+            "context": context
+        },
+        "rag_query_variables": ["question"],
+        "rag_context_variables": ["context"],
+        "tags": {"pipeline": "semantic-retrieval"}
+    })
+
+    completion = openai_client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": f"Use the context to answer: {question}\nContext:\n{context}"}
+        ]
+    )
+    return completion
+{{< /code-block >}}
+
+Notes:
+- Place the annotation immediately before the provider call so it applies to the correct LLM span.
+- Do not include secrets in `variables`; values are persisted as provided.
+- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See Annotating auto-instrumented spans.
 
 ## Annotating a span
 
