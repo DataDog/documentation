@@ -105,6 +105,26 @@
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object that includes the scan options to update."
   },
+  "ListAzureScanOptions": {
+    "description": "Fetches the scan options configured for Azure accounts.",
+    "summary": "List azure scan options"
+  },
+  "CreateAzureScanOptions": {
+    "description": "Activate Agentless scan options for an Azure subscription.",
+    "summary": "Create azure scan options",
+    "request_description": "",
+    "request_schema_description": "The definition of `AzureScanOptions` object."
+  },
+  "DeleteAzureScanOptions": {
+    "description": "Delete Agentless scan options for an Azure subscription.",
+    "summary": "Delete azure scan options"
+  },
+  "UpdateAzureScanOptions": {
+    "description": "Update the Agentless scan options for an activated subscription.",
+    "summary": "Update azure scan options",
+    "request_description": "",
+    "request_schema_description": "The definition of `AzureScanOptionsInputUpdate` object."
+  },
   "ListAwsOnDemandTasks": {
     "description": "Fetches the most recent 1000 AWS on demand tasks.",
     "summary": "Get AWS On Demand tasks"
@@ -1058,6 +1078,14 @@
   "GetAWSIntegrationIAMPermissions": {
     "description": "Get all AWS IAM permissions required for the AWS integration.",
     "summary": "Get AWS integration IAM permissions"
+  },
+  "GetAWSIntegrationIAMPermissionsResourceCollection": {
+    "description": "Get all resource collection AWS IAM permissions required for the AWS integration.",
+    "summary": "Get resource collection IAM permissions"
+  },
+  "GetAWSIntegrationIAMPermissionsStandard": {
+    "description": "Get all standard AWS IAM permissions required for the AWS integration.",
+    "summary": "Get AWS integration standard IAM permissions"
   },
   "ListAWSLogsServices": {
     "description": "Get a list of AWS services that can send logs to Datadog.",
@@ -2858,6 +2886,12 @@
     "summary": "Update an existing incident team",
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
+  },
+  "SearchFlakyTests": {
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "summary": "Search flaky tests",
+    "request_description": "",
+    "request_schema_description": "The request for a flaky tests search."
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
