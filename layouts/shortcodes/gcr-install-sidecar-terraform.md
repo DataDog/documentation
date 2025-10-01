@@ -28,7 +28,7 @@ module "my-cloud-run-app" {
   {{ if eq (.Get "function") "true" }}build_config = {
     function_target          = "helloHttp" // your function entry point
     image_uri                = "us-docker.pkg.dev/cloudrun/container/hello"
-    base_image               = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/nodejs22"
+    base_image               = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/your-runtime" // base image for your runtime
     enable_automatic_updates = true
   }{{ end }}
   template = {
@@ -36,7 +36,7 @@ module "my-cloud-run-app" {
       {
         name  = "main"
         image = "us-docker.pkg.dev/cloudrun/container/hello"
-        {{ if eq (.Get "function") "true" }}base_image_uri = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/nodejs22"{{ end }}
+        {{ if eq (.Get "function") "true" }}base_image_uri = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/your-runtime" // base image for your runtime{{ end }}
         resources = {
           limits = {
             cpu    = "1"
