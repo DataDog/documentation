@@ -32,6 +32,14 @@ Datadog App Builder is a low-code application building platform. It streamlines 
 
 {{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" style="width:100%;" >}}
 
+Below are a few examples of what App Builder apps can do:
+- Identify the most likely causes of a regression given a text description of an incident and the most recent 150 commits to a repo.
+- Monitor your PagerDuty service status to get complete context while working on incidents.
+- Allow users to manage their EC2 instances directly from a dashboard.
+- Allow users to explore and view the content of an S3 bucket.
+- Use a PagerDuty integration to see who is on-call for each team in an organization.
+- Summarize the progress of each PR in a given repo.
+
 ## Start with Onboarding
 
 When creating a new app, Datadog displays an onboarding modal with several options to get started: 
