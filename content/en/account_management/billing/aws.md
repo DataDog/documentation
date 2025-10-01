@@ -64,7 +64,7 @@ In the Infrastructure Host list:
 
 - **Monitored by the Datadog Agent**
 
-  If a host displays the Datadog Agent logo but not the AWS logo, or if its metrics are collected from the Datadog Agent (such as **datadog.\***, **system.\***, etc.), it indicates that the host is being monitored by the Datadog Agent.
+  If a host displays the Datadog Agent logo but not the AWS logo, or if its metrics are collected from the Datadog Agent (such as `datadog.*`, `system.*`, etc.), it indicates that the host is being monitored by the Datadog Agent.
 
   {{< img src="account_management/billing/infra-agent.png" alt="Infrastructure Host List showing a host with the Datadog Agent logo but no AWS logo, indicating monitoring through the Datadog Agent." >}}
 
