@@ -995,6 +995,12 @@
     "description": "Delete an incident impact.",
     "summary": "Delete an incident impact"
   },
+  "CreatePageFromIncident": {
+    "description": "Create a page from an incident.",
+    "summary": "Create a page from an incident",
+    "request_description": "Page creation request payload.",
+    "request_schema_description": "Request to create a page from an incident."
+  },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
     "summary": "Get a list of an incident's integration metadata"
