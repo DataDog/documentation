@@ -66,11 +66,6 @@ If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` t
 **Default**: `200` <br>
 Maximum number of traces allowed to be submitted per second.
 
-`DD_SPAN_SAMPLING_RULES`
-: **Version**: v0.1.0 <br>
-**Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between `0.0` and `1.0` (inclusive).
-
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Since**: 0.1.0 <br>
 Points to a JSON file that contains the span sampling rules. See `DD_SPAN_SAMPLING_RULES` for the rule format.
