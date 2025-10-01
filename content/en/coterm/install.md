@@ -1,5 +1,6 @@
 ---
 title: Install Datadog CoTerm
+description: "Install CoTerm on macOS and Linux, configure authorization with Datadog, and set up your CoTerm configuration settings."
 further_reading:
 - link: "/coterm"
   tag: "documentation"
