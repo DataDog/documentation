@@ -1,5 +1,6 @@
 ---
 title: AWS Batch with ECS Fargate and the Datadog Agent
+description: Deploy the Datadog Agent alongside AWS Batch jobs running on ECS Fargate for comprehensive monitoring
 further_reading:
     - link: "integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate"
       tag: 'Documentation'
