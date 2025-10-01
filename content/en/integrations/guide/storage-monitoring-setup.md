@@ -190,9 +190,9 @@ This template creates two IAM policies:
 
 ### Finish setting up S3 buckets for Storage Monitoring
   After completing the CloudFormation setup, enable buckets for Storage Monitoring from the Datadog UI:
-      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
-      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
-      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
+  - Navigate to **Storage Monitoring** → [Enable Buckets][105]
+  - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+  - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -268,9 +268,9 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 ### Finish setting up S3 buckets for Storage Monitoring
 
   After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Monitoring from the Datadog UI:
-      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
-      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
-      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
+  - Navigate to **Storage Monitoring** → [Enable Buckets][405]
+  - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+  - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -287,6 +287,7 @@ If you need to manage multiple buckets, complex inventory policies, encryption, 
 [401]: https://docs.google.com/forms/d/e/1FAIpQLScd0xor8RQ76N6BemvvMzg9UU7Q90svFrNGY8n83sMF2JXhkA/viewform
 [402]: https://github.com/terraform-aws-modules/terraform-aws-s3-bucket/tree/master/examples/s3-inventory
 [403]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_inventory
+[405]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
 {{% /tab %}}
 
 {{% tab "AWS Console" %}}
@@ -327,9 +328,9 @@ For each bucket you want to monitor:
 ### Post-setup steps
 
   After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Monitoring from the Datadog UI:
-      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
-      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
-      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
+  - Navigate to **Storage Monitoring** → [Enable Buckets][205]
+  - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+  - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -337,7 +338,7 @@ For each bucket you want to monitor:
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
 [203]: https://console.aws.amazon.com/s3/buckets
 [204]: https://aws.amazon.com/s3/pricing/
-[205]: https://forms.gle/L97Ndxr2XLen1GBs7
+[205]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
 [206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 {{% /tab %}}
 
