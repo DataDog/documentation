@@ -8,12 +8,6 @@ import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName 
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
-
-// make these variables available for logs and rum initialization on every page 
-CI_COMMIT_SHORT_SHA = document.documentElement.dataset.ciCommitShortSha;
-IA_SUBDOMAIN = document.documentElement.dataset.iaSubdomain;
-console.log('CI_COMMIT_SHORT_SHA???', CI_COMMIT_SHORT_SHA);
-console.log("DOM", document.documentElement);
 import { handleFleetAutomationCustomRumAction } from './dd-browser-logs-rum';
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];

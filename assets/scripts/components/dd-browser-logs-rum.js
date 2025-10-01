@@ -5,6 +5,7 @@ const lang = document.documentElement.lang || 'en';
 
 const Config = getConfig(env);
 
+
 const generateRumDeviceId = () => Math.floor(Math.random() * 2 ** 53).toString(36);
 
 const getRumDeviceId = () => {
@@ -94,7 +95,7 @@ const handleCdocsCustomRumAction = () => {
 
 const handleFleetAutomationCustomRumAction = () => {
     const fleetAutomationLink = document.querySelector("[href^='https://app.datadoghq.com/fleet/install-agent']")
-    console.log('fleetAutomationLink', fleetAutomationLink, "Commit SHA::", CI_COMMIT_SHORT_SHA);
+    console.log("fleetAutomationLink", fleetAutomationLink);
     if (fleetAutomationLink) {
         fleetAutomationLink.addEventListener('click', () => {
             window.DD_RUM.addAction('in_app_fleet_automation_agent_install_clicked', {
@@ -122,3 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 export { handleFleetAutomationCustomRumAction };
+
+//**
+// logs-rum loads once in the build first with the env vars.
+// logs-rum should also load async. so, logs-rum needs to have the env vars all the time. 
+//*/
