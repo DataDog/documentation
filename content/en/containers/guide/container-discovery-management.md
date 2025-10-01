@@ -1,5 +1,6 @@
 ---
 title: Container Discovery Management
+description: Control which containers the Datadog Agent monitors by configuring discovery rules and inclusion/exclusion patterns
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
