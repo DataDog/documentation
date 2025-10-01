@@ -194,7 +194,7 @@ This template creates two IAM policies:
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-      {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [101]: https://datadog-cloudformation-template.s3.us-east-1.amazonaws.com/aws/cloud-inventory/source-bucket-inventory-cfn.yaml
 [102]: https://console.aws.amazon.com/cloudformation/
@@ -272,7 +272,7 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-    {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 ### Use modules for complex setups
 
@@ -331,7 +331,7 @@ For each bucket you want to monitor:
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-  {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [201]: https://console.aws.amazon.com/s3/bucket/create
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
@@ -348,7 +348,7 @@ For each bucket you want to monitor:
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-  {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [601]: https://forms.gle/dhDbSxTvCUDXg1QR7
 [602]: mailto:storage-monitoring@datadoghq.com
