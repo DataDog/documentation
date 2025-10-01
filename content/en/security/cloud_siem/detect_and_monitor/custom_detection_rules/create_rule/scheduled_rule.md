@@ -325,7 +325,38 @@ Click **Add Root Query** to add additional queries.
 
 ### Add custom schedule
 
-{{% cloud_siem/add_custom_schedule %}}
+You can set specific evaluation time and how often it runs by creating a custom schedule or using a recurrence rule (RRULE).
+
+#### Create custom schedule
+
+{{< img src="security/security_monitoring/detection_rules/custom_schedule.png" alt="The Use custom schedule section with an example" style="width:100%;" >}}
+
+1. Select **Create Custom Schedules**.
+1. Set how often and at what time you want the rule to run.
+
+#### Use RRULE
+
+{{< img src="security/security_monitoring/detection_rules/rrule_example.png" alt="The Use RRULE section with an example" style="width:100%;" >}}
+
+Recurrence rule (RRULE) is a property name from the [iCalendar RFC][1], which is the standard for defining recurring events. Use the [official RRULE generator][4] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases.
+
+For example, if the RRULE is:
+
+```text
+FREQ=DAILY;INTERVAL=1;BYHOUR=6;BYMINUTE=0
+```
+
+The example RRULE runs the scheduled rule once a day at 6:00 AM.
+
+**Notes**:
+- Attributes specifying the duration in RRULE are not supported (for example, DTSTART, DTEND, DURATION).
+- Evaluation frequencies must be a day or longer. For shorter evaluation frequencies, use the default monitor schedules.
+
+To write a custom RRULE for your detection rule:
+
+1. Select **</> Use RRULE**.
+1. Set the date and time for when you want the rule to start.
+1. Input a [RRULE string][4] to set how often you want the rule to run.
 
 ## Describe your playbook
 
@@ -337,3 +368,5 @@ Click **Add Root Query** to add additional queries.
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /logs/explorer/calculated_fields/
+[3]: https://icalendar.org/rrule-tool.html
+[4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html

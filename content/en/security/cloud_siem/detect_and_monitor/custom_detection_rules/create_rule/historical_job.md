@@ -274,10 +274,11 @@ Click **Add Root Query** to add additional queries.
 
 ## Notify when job is complete
 
-{{% cloud_siem/notify_when_job_complete %}}
+(Optional) Click **Add Recipient** to send notifications upon the completion of job analysis. See [Notification channels][2] for more information.
 
 ## Describe your playbook
 
 {{% security-rule-say-whats-happening %}}
 
 [1]: https://app.datadoghq.com/security/rules/new
+[2]: /security_platform/notifications/#notification-channels
