@@ -3,7 +3,7 @@ title: Microsoft Sentinel Destination
 disable_toc: false
 ---
 
-Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for the maximum size of API calls the Observability Pipelines Worker can make to Microsoft Sentinel.
+Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for API call limits in Microsoft Sentinel.
 
 ## Setup
 
