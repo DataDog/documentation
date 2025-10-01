@@ -1309,11 +1309,11 @@ public class MyJavaClass {
 
 ## Prompt tracking
 
-Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions.
+Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, LLM Observability provides [automatic versioning](#auto-versioning) based on template content changes.
 
 ### Inline annotation (Python)
 
-Attach prompt metadata immediately before the LLM call. Use this for one-off or ad‑hoc prompts inside a function. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call).
+Attach prompt metadata immediately before the LLM call. Use this for one-off or ad‑hoc prompts inside a function. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call). For more details on span annotation, see [Annotating a span](#annotating-a-span).
 
 {{% collapse-content title="Prompt object" level="h4" expanded=false id="prompt-tracking-arguments" %}}
 
