@@ -11,7 +11,7 @@ Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull re
 
 ## Setup
 
-The following steps are required to get started with Bits AI Dev Agent.
+The following steps are required to get started with Bits AI Dev Agent. 
 
 ### Step 1: Enable the GitHub integration
 
