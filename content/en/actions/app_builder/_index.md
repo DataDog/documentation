@@ -32,7 +32,7 @@ Datadog App Builder is a low-code application building platform. It streamlines 
 
 {{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" style="width:100%;" >}}
 
-## Onboarding with App Builder 
+## Start with Onboarding
 
 When creating a new app, Datadog displays an onboarding modal with several options to get started: 
 - Start with AI 
