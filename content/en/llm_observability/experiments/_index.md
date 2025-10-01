@@ -23,7 +23,7 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
-pip install ddtrace>=3.14.0
+pip install ddtrace>=3.15.0
 ```
 
 ### Cookbooks
@@ -221,6 +221,9 @@ Evaluators are functions that measure how well the model or agent performs by co
 - score: returns a numeric value (float)
 - categorical: returns a labeled category (string)
 
+### Summary Evaluators
+Summary Evaluators are optionally defined functions that measure how well the model or agent performs, by providing an aggregated score against the entire dataset, outputs, and evaluation results. The supported evaluator types are the same as above.
+
 ### Creating an experiment
 
 1. Load a dataset
@@ -266,7 +269,17 @@ Evaluators are functions that measure how well the model or agent performs by co
        return fake_llm_call
    ```  
    Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.  
-   Evaluators can only return a string, number, Boolean.  
+   Evaluators can only return a string, a number, or a boolean.  
+
+5. (Optional) Define summary evaluator function(s).  
+   
+   ```python
+    def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
+        return evaluators_results["exact_match"].count(True)
+
+   ```  
+   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
+   Summary evaluators can only return a string, a number, or a boolean.  
 
 6. Create and run the experiment.
    ```python
@@ -275,6 +288,7 @@ Evaluators are functions that measure how well the model or agent performs by co
        task=task,
        dataset=dataset,
        evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+       summary_evaluators=[num_exact_matches], # optional
        description="Testing capital cities knowledge",
        config={
            "model_name": "gpt-4",
@@ -286,7 +300,7 @@ Evaluators are functions that measure how well the model or agent performs by co
    results = experiment.run()  # Run on all dataset records
 
    # Process results
-   for result in results:
+   for result in results.get("rows", []):
        print(f"Record {result['idx']}")
        print(f"Input: {result['input']}")
        print(f"Output: {result['output']}")
