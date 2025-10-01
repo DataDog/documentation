@@ -60,5 +60,5 @@ After a Statuspage is added to an incident, you can continue updating the Status
 
 [1]: https://app.datadoghq.com/integrations/statuspage
 [2]: /integrations/statuspage/
-[3]: https://app.datadoghq.com/incidents/settings#Integrations
+[3]: https://app.datadoghq.com/incidents/settings?section=integrations
 [4]: https://app.datadoghq.com/incidents
