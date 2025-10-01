@@ -87,7 +87,7 @@ On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.
 
 {{% tab "TCP/UDP" %}}
 
-To collect the sender IP address and associate with the log message payload, add the following configuration to your `datadog.yaml` file:
+To capture the sender IP address and include it in the log message payload, add the following configuration to your `datadog.yaml` file:
 ```yaml
  logs_config:
    use_sourcehost_tag: true
