@@ -936,7 +936,7 @@
     "request_schema_description": "Object containing details about a Synthetic mobile test."
   },
   "SearchTests": {
-    "description": "Search for Synthetic tests and Test Suites.",
+    "description": "Search for Synthetic tests.",
     "summary": "Search Synthetic tests"
   },
   "TriggerTests": {
