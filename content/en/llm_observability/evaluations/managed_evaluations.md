@@ -370,7 +370,7 @@ triage_agent = Agent(
 
 #### Tool argument correctness
 
-This check evaluates whether the arguments provided to the selected tool are correct (i.e. match the type expected by the tool) and make sense given the tool's context. 
+This check looks at the arguments provided to a selected tool, and it evaluates whether these arguments match the expected type and make sense given the tool's context. 
 
 {{< img src="llm_observability/evaluations/tool_argument_correctness_error.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
