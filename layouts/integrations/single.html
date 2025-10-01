@@ -24,7 +24,7 @@
 
     {{ .Content }}
 
-    {{- if and ($is_marketplace) ($further_reading) -}}
+    {{- if ($further_reading) -}}
 
     <h2>Further Reading</h2>
         {{- partial "whats-next/whats-next.html" . -}}
