@@ -96,20 +96,17 @@ In organizations with seat-based Incident Management billing:
 * You do **not** need a seat for Datadog to sync your messages to Incident Management.
 * When you pin a message, you **must** have a seat for Datadog to sync the message you pinned.
 
-## Global incident updates channel
+## Global channel for incident updates
 
-A global incident updates channel provides your team with organization-wide visibility into the status of all incidents directly from your Slack workspace. Select which channel in your workspace to post these updates to, and the channel receives the following posts:
-
-- Newly declared incidents.
-- Changes to severity, status transition, and incident commander.
-- Links to the [incident][4]'s overview page in app.
-- Link to join dedicated incident Slack channels.
-
-To set up a global incident updates channel:
+You can configure Incident Management to automatically post updates about incidents to a selected Slack channel. To enable this:
 
 1. In Datadog, navigate to the [**Incidents** > **Settings** > **Integrations**][3] page.
-2. In the Slack section, click the **Send all incident updates to a global channel** toggle.
-3. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
+1. In the Slack section, enable **Send all incident updates to a global channel**.
+1. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
+
+Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident states, severities, and incident commanders.
+
+Under the hood, this feature is a built-in, hidden [incident notification rule][5]. If you would like to customize the message or its triggers, disable it and define your own notification rule.
 
 ## Other Slack configuration options
 
@@ -195,3 +192,4 @@ You can view the full list of available Slack commands at any time by typing `/d
 [2]: /integrations/slack/?tab=datadogforslack
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: /integrations/jira/
+[5]: /service_management/incident_management/incident_settings/notification_rules/
