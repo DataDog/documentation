@@ -5930,6 +5930,115 @@ components:
       required:
       - type
       type: object
+    AzureScanOptions:
+      description: The definition of `AzureScanOptions` object.
+      example:
+        data:
+          attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/AzureScanOptionsData'
+      type: object
+    AzureScanOptionsArray:
+      description: The definition of `AzureScanOptionsArray` object.
+      example:
+        data:
+        - attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          description: The `AzureScanOptionsArray` `data`.
+          items:
+            $ref: '#/components/schemas/AzureScanOptionsData'
+          type: array
+      required:
+      - data
+      type: object
+    AzureScanOptionsData:
+      description: The definition of `AzureScanOptionsData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AzureScanOptionsDataAttributes'
+        id:
+          description: The `AzureScanOptionsData` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureScanOptionsDataType'
+      required:
+      - type
+      - id
+      type: object
+    AzureScanOptionsDataAttributes:
+      description: The definition of `AzureScanOptionsDataAttributes` object.
+      properties:
+        vuln_containers_os:
+          description: The `attributes` `vuln_containers_os`.
+          type: boolean
+        vuln_host_os:
+          description: The `attributes` `vuln_host_os`.
+          type: boolean
+      type: object
+    AzureScanOptionsDataType:
+      default: azure_scan_options
+      description: The type of the resource. The value should always be `azure_scan_options`.
+      enum:
+      - azure_scan_options
+      example: azure_scan_options
+      type: string
+      x-enum-varnames:
+      - AZURE_SCAN_OPTIONS
+    AzureScanOptionsInputUpdate:
+      description: The definition of `AzureScanOptionsInputUpdate` object.
+      example:
+        data:
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateData'
+      type: object
+    AzureScanOptionsInputUpdateData:
+      description: The definition of `AzureScanOptionsInputUpdateData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataAttributes'
+        id:
+          description: The `AzureScanOptionsInputUpdateData` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataType'
+      required:
+      - type
+      - id
+      type: object
+    AzureScanOptionsInputUpdateDataAttributes:
+      description: The definition of `AzureScanOptionsInputUpdateDataAttributes` object.
+      properties:
+        vuln_containers_os:
+          description: The `attributes` `vuln_containers_os`.
+          type: boolean
+        vuln_host_os:
+          description: The `attributes` `vuln_host_os`.
+          type: boolean
+      type: object
+    AzureScanOptionsInputUpdateDataType:
+      default: azure_scan_options
+      description: Azure scan options resource type.
+      enum:
+      - azure_scan_options
+      example: azure_scan_options
+      type: string
+      x-enum-varnames:
+      - AZURE_SCAN_OPTIONS
     AzureStorageDestination:
       description: The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
@@ -14561,6 +14670,23 @@ components:
       x-enum-varnames:
       - NONE
       - UUID
+    DatastoreTrigger:
+      description: Trigger a workflow from a Datastore. For automatic triggering a
+        handle must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    DatastoreTriggerWrapper:
+      description: Schema for a Datastore-based trigger.
+      properties:
+        datastoreTrigger:
+          $ref: '#/components/schemas/DatastoreTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - datastoreTrigger
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -18739,6 +18865,376 @@ components:
       - ATTACK_PATH
       - IDENTITY_RISK
       - API_SECURITY
+    FlakyTest:
+      description: A flaky test object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FlakyTestAttributes'
+        id:
+          description: Test's ID. This ID is the hash of the test's Fully Qualified
+            Name and Git repository ID. On the Test Runs UI it is the same as the
+            `test_fingerprint_fqn` tag.
+          type: string
+        type:
+          $ref: '#/components/schemas/FlakyTestType'
+      type: object
+    FlakyTestAttributes:
+      description: Attributes of a flaky test.
+      properties:
+        attempt_to_fix_id:
+          description: 'Unique identifier for the attempt to fix this flaky test.
+            Use this ID in the Git commit message in order to trigger the attempt
+            to fix workflow.
+
+
+            When the workflow is triggered the test is automatically retried by the
+            tracer a certain number of configurable times. When all retries pass,
+            the test is automatically marked as fixed in Flaky Test Management.
+
+            Test runs are tagged with @test.test_management.attempt_to_fix_passed
+            and @test.test_management.is_attempt_to_fix when the attempt to fix workflow
+            is triggered.'
+          example: I42TEO
+          type: string
+        codeowners:
+          description: The name of the test's code owners as inferred from the repository
+            configuration.
+          example:
+          - '@foo'
+          - '@bar'
+          items:
+            type: string
+          type: array
+        envs:
+          description: List of environments where this test has been flaky.
+          example: prod
+          items:
+            type: string
+          type: array
+        first_flaked_branch:
+          description: The branch name where the test exhibited flakiness for the
+            first time.
+          example: main
+          type: string
+        first_flaked_sha:
+          description: The commit SHA where the test exhibited flakiness for the first
+            time.
+          example: 0c6be03165b7f7ffe96e076ffb29afb2825616c3
+          type: string
+        first_flaked_ts:
+          description: Unix timestamp when the test exhibited flakiness for the first
+            time.
+          example: 1757688149
+          format: int64
+          type: integer
+        flaky_category:
+          description: The category of a flaky test.
+          example: Timeout
+          nullable: true
+          type: string
+        flaky_state:
+          $ref: '#/components/schemas/FlakyTestAttributesFlakyState'
+        last_flaked_branch:
+          description: The branch name where the test exhibited flakiness for the
+            last time.
+          example: main
+          type: string
+        last_flaked_sha:
+          description: The commit SHA where the test exhibited flakiness for the last
+            time.
+          example: 0c6be03165b7f7ffe96e076ffb29afb2825616c3
+          type: string
+        last_flaked_ts:
+          description: Unix timestamp when the test exhibited flakiness for the last
+            time.
+          example: 1757688149
+          format: int64
+          type: integer
+        module:
+          description: 'The name of the test module. The definition of module changes
+            slightly per language:
+
+            - In .NET, a test module groups every test that is run under the same
+            unit test project.
+
+            - In Swift, a test module groups every test that is run for a given bundle.
+
+            - In JavaScript, the test modules map one-to-one to test sessions.
+
+            - In Java, a test module groups every test that is run by the same Maven
+            Surefire/Failsafe or Gradle Test task execution.
+
+            - In Python, a test module groups every test that is run under the same
+            `.py` file as part of a test suite, which is typically managed by a framework
+            like `unittest` or `pytest`.
+
+            - In Ruby, a test module groups every test that is run within the same
+            test file, which is typically managed by a framework like `RSpec` or `Minitest`.'
+          example: TestModule
+          nullable: true
+          type: string
+        name:
+          description: The test name. A concise name for a test case. Defined in the
+            test itself.
+          example: TestName
+          type: string
+        pipeline_stats:
+          $ref: '#/components/schemas/FlakyTestPipelineStats'
+          nullable: true
+        services:
+          description: 'List of test service names where this test has been flaky.
+
+
+            A test service is a group of tests associated with a project or repository.
+            It contains all the individual tests for your code, optionally organized
+            into test suites, which are like folders for your tests.'
+          example:
+          - foo
+          - bar
+          items:
+            type: string
+          type: array
+        suite:
+          description: The name of the test suite. A group of tests exercising the
+            same unit of code depending on your language and testing framework.
+          example: TestSuite
+          type: string
+        test_run_metadata:
+          $ref: '#/components/schemas/FlakyTestRunMetadata'
+        test_stats:
+          $ref: '#/components/schemas/FlakyTestStats'
+      type: object
+    FlakyTestAttributesFlakyState:
+      description: The current state of the flaky test.
+      enum:
+      - active
+      - fixed
+      - quarantined
+      - disabled
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - FIXED
+      - QUARANTINED
+      - DISABLED
+    FlakyTestPipelineStats:
+      description: CI pipeline related statistics for the flaky test. This information
+        is only available if test runs are associated with CI pipeline events from
+        CI Visibility.
+      properties:
+        failed_pipelines:
+          description: The number of pipelines that failed due to this test for the
+            past 7 days. This is computed as the sum of failed CI pipeline events
+            associated with test runs where the flaky test failed.
+          example: 319
+          format: int64
+          nullable: true
+          type: integer
+        total_lost_time_ms:
+          description: The total time lost by CI pipelines due to this flaky test
+            in milliseconds. This is computed as the sum of the duration of failed
+            CI pipeline events associated with test runs where the flaky test failed.
+          example: 1527550000
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    FlakyTestRunMetadata:
+      description: Metadata about the latest failed test run of the flaky test.
+      properties:
+        duration_ms:
+          description: The duration of the test run in milliseconds.
+          example: 27398
+          format: int64
+          nullable: true
+          type: integer
+        error_message:
+          description: The error message from the test failure.
+          example: Expecting actual not to be empty
+          nullable: true
+          type: string
+        error_stack:
+          description: The stack trace from the test failure.
+          example: "Traceback (most recent call last):\n  File \"test_foo.py\", line
+            10, in test_foo\n    assert actual == expected\nAssertionError: Expecting
+            actual not to be empty"
+          nullable: true
+          type: string
+        source_end:
+          description: The line number where the test ends in the source file.
+          example: 20
+          format: int64
+          nullable: true
+          type: integer
+        source_file:
+          description: The source file where the test is defined.
+          example: test_foo.py
+          nullable: true
+          type: string
+        source_start:
+          description: The line number where the test starts in the source file.
+          example: 10
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    FlakyTestStats:
+      description: Test statistics for the flaky test.
+      properties:
+        failure_rate_pct:
+          description: The failure rate percentage of the test for the past 7 days.
+            This is the number of failed test runs divided by the total number of
+            test runs (excluding skipped test runs).
+          example: 0.1
+          format: double
+          nullable: true
+          type: number
+      type: object
+    FlakyTestType:
+      description: The type of the flaky test from Flaky Test Management.
+      enum:
+      - flaky_test
+      type: string
+      x-enum-varnames:
+      - FLAKY_TEST
+    FlakyTestsPagination:
+      description: Pagination metadata for flaky tests.
+      properties:
+        next_page:
+          description: Cursor for the next page of results.
+          nullable: true
+          type: string
+      type: object
+    FlakyTestsSearchFilter:
+      description: Search filter settings.
+      properties:
+        query:
+          default: '*'
+          description: 'Search query following log syntax used to filter flaky tests,
+            same as on Flaky Tests Management UI. The supported search keys are:
+
+            - `flaky_test_state`
+
+            - `flaky_test_category`
+
+            - `@test.name`
+
+            - `@test.suite`
+
+            - `@test.module`
+
+            - `@test.service`
+
+            - `@git.repository.id_v2`
+
+            - `@git.branch`
+
+            - `@test.codeowners`
+
+            - `env`
+
+            '
+          example: flaky_test_state:active @git.repository.id_v2:"github.com/datadog/shopist"
+          type: string
+      type: object
+    FlakyTestsSearchPageOptions:
+      description: Pagination attributes for listing flaky tests.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            request.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of flaky tests in the response.
+          example: 25
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+      type: object
+    FlakyTestsSearchRequest:
+      description: The request for a flaky tests search.
+      properties:
+        data:
+          $ref: '#/components/schemas/FlakyTestsSearchRequestData'
+      type: object
+    FlakyTestsSearchRequestAttributes:
+      description: Attributes for the flaky tests search request.
+      properties:
+        filter:
+          $ref: '#/components/schemas/FlakyTestsSearchFilter'
+        page:
+          $ref: '#/components/schemas/FlakyTestsSearchPageOptions'
+        sort:
+          $ref: '#/components/schemas/FlakyTestsSearchSort'
+      type: object
+    FlakyTestsSearchRequestData:
+      description: The JSON:API data for flaky tests search request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FlakyTestsSearchRequestAttributes'
+        type:
+          $ref: '#/components/schemas/FlakyTestsSearchRequestDataType'
+      type: object
+    FlakyTestsSearchRequestDataType:
+      description: The definition of `FlakyTestsSearchRequestDataType` object.
+      enum:
+      - search_flaky_tests_request
+      type: string
+      x-enum-varnames:
+      - SEARCH_FLAKY_TESTS_REQUEST
+    FlakyTestsSearchResponse:
+      description: Response object with flaky tests matching the search request.
+      properties:
+        data:
+          description: Array of flaky tests matching the request.
+          items:
+            $ref: '#/components/schemas/FlakyTest'
+          type: array
+        meta:
+          $ref: '#/components/schemas/FlakyTestsSearchResponseMeta'
+      type: object
+    FlakyTestsSearchResponseMeta:
+      description: Metadata for the flaky tests search response.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/FlakyTestsPagination'
+      type: object
+    FlakyTestsSearchSort:
+      description: Parameter for sorting flaky test results. The default sort is by
+        ascending Fully Qualified Name (FQN). The FQN is the concatenation of the
+        test module, suite, and name.
+      enum:
+      - fqn
+      - -fqn
+      - first_flaked
+      - -first_flaked
+      - last_flaked
+      - -last_flaked
+      - failure_rate
+      - -failure_rate
+      - pipelines_failed
+      - -pipelines_failed
+      - pipelines_duration_lost
+      - -pipelines_duration_lost
+      example: failure_rate
+      type: string
+      x-enum-varnames:
+      - FQN_ASCENDING
+      - FQN_DESCENDING
+      - FIRST_FLAKED_ASCENDING
+      - FIRST_FLAKED_DESCENDING
+      - LAST_FLAKED_ASCENDING
+      - LAST_FLAKED_DESCENDING
+      - FAILURE_RATE_ASCENDING
+      - FAILURE_RATE_DESCENDING
+      - PIPELINES_FAILED_ASCENDING
+      - PIPELINES_FAILED_DESCENDING
+      - PIPELINES_DURATION_LOST_ASCENDING
+      - PIPELINES_DURATION_LOST_DESCENDING
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -20602,6 +21098,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -30723,6 +31221,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -31784,6 +32283,65 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_CLOUD_STORAGE
+    ObservabilityPipelineGooglePubSubDestination:
+      description: The `google_pubsub` destination publishes logs to a Google Cloud
+        Pub/Sub topic.
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: google-pubsub-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        project:
+          description: The GCP project ID that owns the Pub/Sub topic.
+          example: my-gcp-project
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Pub/Sub topic name to publish logs to.
+          example: logs-subscription
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      - project
+      - topic
+      type: object
+    ObservabilityPipelineGooglePubSubDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineGooglePubSubDestinationType:
+      default: google_pubsub
+      description: The destination type. The value should always be `google_pubsub`.
+      enum:
+      - google_pubsub
+      example: google_pubsub
+      type: string
+      x-enum-varnames:
+      - GOOGLE_PUBSUB
     ObservabilityPipelineGooglePubSubSource:
       description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
@@ -36204,6 +36762,12 @@ components:
     RUMApplicationAttributes:
       description: RUM application attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -41463,6 +42027,7 @@ components:
       - hardcoded
       - third_party
       - anomaly_threshold
+      - sequence_detection
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -41472,6 +42037,7 @@ components:
       - HARDCODED
       - THIRD_PARTY
       - ANOMALY_THRESHOLD
+      - SEQUENCE_DETECTION
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -41685,6 +42251,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -41760,6 +42328,47 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+    SecurityMonitoringRuleSequenceDetectionOptions:
+      description: Options on sequence detection method.
+      properties:
+        stepTransitions:
+          description: Transitions defining the allowed order of steps and their evaluation
+            windows.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStepTransition'
+          type: array
+        steps:
+          description: Steps that define the conditions to be matched in sequence.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionStep'
+          type: array
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStep:
+      description: Step definition for sequence detection containing the step name,
+        condition, and evaluation window.
+      properties:
+        condition:
+          description: Condition referencing rule queries (e.g., `a > 0`).
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        name:
+          description: Unique name identifying the step.
+          type: string
+      type: object
+    SecurityMonitoringRuleSequenceDetectionStepTransition:
+      description: Transition from a parent step to a child step within a sequence
+        detection rule.
+      properties:
+        child:
+          description: Name of the child step.
+          type: string
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        parent:
+          description: Name of the parent step.
+          type: string
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -48349,6 +48958,7 @@ components:
       - $ref: '#/components/schemas/CaseTriggerWrapper'
       - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
       - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
+      - $ref: '#/components/schemas/DatastoreTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
@@ -51863,6 +52473,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: List AWS Scan Options
       tags:
       - Agentless Scanning
@@ -51898,6 +52513,11 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Post AWS Scan Options
       tags:
       - Agentless Scanning
@@ -51926,6 +52546,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Delete AWS Scan Options
       tags:
       - Agentless Scanning
@@ -51952,6 +52577,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS scan options
       tags:
       - Agentless Scanning
@@ -51981,11 +52611,138 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Patch AWS Scan Options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/agentless_scanning/accounts/azure:
+    get:
+      description: Fetches the scan options configured for Azure accounts.
+      operationId: ListAzureScanOptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptionsArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 12
+      x-undo:
+        type: safe
+    post:
+      description: Activate Agentless scan options for an Azure subscription.
+      operationId: CreateAzureScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureScanOptions'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Create azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteAzureScanOptions
+        parameters:
+        - name: subscription_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/azure/{subscription_id}:
+    delete:
+      description: Delete Agentless scan options for an Azure subscription.
+      operationId: DeleteAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Delete azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 10
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update the Agentless scan options for an activated subscription.
+      operationId: UpdateAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureScanOptionsInputUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
@@ -52003,6 +52760,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
@@ -52038,6 +52800,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Post an AWS on demand task
       tags:
       - Agentless Scanning
@@ -52070,6 +52837,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
@@ -58161,7 +58933,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Delete a deployment event
       tags:
       - DORA Metrics
@@ -58243,7 +59015,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a deployment event
       tags:
       - DORA Metrics
@@ -58330,7 +59102,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Delete a failure event
       tags:
       - DORA Metrics
@@ -58412,7 +59184,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - appKeyAuth: []
+        appKeyAuth: []
       summary: Get a failure event
       tags:
       - DORA Metrics
@@ -61189,6 +61961,45 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/resource_collection:
+    get:
+      description: Get all resource collection AWS IAM permissions required for the
+        AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsResourceCollection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration resource collection IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get resource collection IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 8
+      x-undo:
+        type: safe
+  /api/v2/integration/aws/iam_permissions/standard:
+    get:
+      description: Get all standard AWS IAM permissions required for the AWS integration.
+      operationId: GetAWSIntegrationIAMPermissionsStandard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS integration standard IAM permissions.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS integration standard IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/integration/aws/logs/services:
@@ -73990,6 +74801,13 @@ paths:
     get:
       description: Get the list of all suppression rules.
       operationId: ListSecurityMonitoringSuppressions
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -78693,6 +79511,55 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
+  /api/v2/test/flaky-test-management/tests:
+    post:
+      description: List endpoint returning flaky tests from Flaky Test Management.
+        Results are paginated.
+      operationId: SearchFlakyTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlakyTestsSearchRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlakyTestsSearchResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - test_optimization_read
+      summary: Search flaky tests
+      tags:
+      - Test Optimization
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.pagination.next_page
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - test_optimization_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta and may be subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/usage/application_security:
     get:
       deprecated: true
@@ -80905,6 +81772,9 @@ tags:
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams
+- description: Search and manage flaky tests through Test Optimization. See the [Test
+    Optimization page](https://docs.datadoghq.com/tests/) for more information.
+  name: Test Optimization
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.
