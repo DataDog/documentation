@@ -34,7 +34,7 @@ The Slack integration documentation is organized around the typical lifecycle of
 
 
 ## Prerequisites
-Install the integration through the [Slack Integration tile][1]. For more information, see the [Slack integration][2] documentation.
+Install the integration through the [Slack Integration tile][1] with the proper [OAuth scopes][5]. For more information, see the [Slack integration][2] documentation.
 
 ## Setup
 
@@ -224,3 +224,4 @@ You can view the full list of available Slack commands at any time by typing `/d
 [2]: /integrations/slack/?tab=datadogforslack
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: /integrations/jira/
+[5]: /integrations/slack/?tab=datadogforslack#permissions
