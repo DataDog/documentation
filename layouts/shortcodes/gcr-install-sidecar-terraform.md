@@ -25,22 +25,18 @@ module "my-cloud-run-app" {
   datadog_enable_logging = true
 
   deletion_protection = false
-  {{ if eq (.Get "function") "true" }}
-  build_config = {
+  {{ if eq (.Get "function") "true" }}build_config = {
     function_target          = "helloHttp" // your function entry point
     image_uri                = "us-docker.pkg.dev/cloudrun/container/hello"
     base_image               = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/nodejs22"
     enable_automatic_updates = true
-  }
-  {{ end }}
+  }{{ end }}
   template = {
     containers = [
       {
         name  = "main"
         image = "us-docker.pkg.dev/cloudrun/container/hello"
-        {{ if eq (.Get "function") "true" }}
-        base_image_uri = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/nodejs22"
-        {{ end }}
+        {{ if eq (.Get "function") "true" }}base_image_uri = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/nodejs22"{{ end }}
         resources = {
           limits = {
             cpu    = "1"
