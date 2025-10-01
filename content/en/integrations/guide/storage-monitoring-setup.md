@@ -32,7 +32,7 @@ This guide explains how to configure Storage Monitoring in Datadog for your Amaz
 ## Setup for Amazon S3
 
 {{< tabs >}}
-{{% tab "Recommended: Set up Inventory with Datadog" %}}
+{{% tab "Set up Inventory from Datadog" %}}
 
 The fastest way to configure Storage Monitoring is through the [Enable Buckets][501] page, where you can enable S3 inventory and configure monitoring for multiple buckets at once.
 
@@ -189,7 +189,7 @@ This template creates two IAM policies:
 6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**.
 
 ### Finish setting up S3 buckets for Storage Monitoring
-  After completing the CloudFormation setup, enable buckets for Storage Monitoring:
+  After completing the CloudFormation setup, enable buckets for Storage Monitoring from the Datadog UI:
       - Navigate to **Storage Monitoring** → [Enable Buckets][105]
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
@@ -267,7 +267,7 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 
 ### Finish setting up S3 buckets for Storage Monitoring
 
-  After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Monitoring:
+  After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Monitoring from the Datadog UI:
       - Navigate to **Storage Monitoring** → [Enable Buckets][105]
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
@@ -326,14 +326,12 @@ For each bucket you want to monitor:
 
 ### Post-setup steps
 
-After completing the above steps, fill out the [post-setup form][205] with the following required information:
+  After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Monitoring from the Datadog UI:
+      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
+      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-1. Name of the destination bucket where inventories are stored.
-2. Prefix where the files are stored in the destination bucket (optional).
-3. Region of the destination bucket.
-4. AWS account ID containing the bucket.
-5. Datadog role name that has the permissions to read objects in destination bucket.
-6. Datadog org name.
+  {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [201]: https://console.aws.amazon.com/s3/bucket/create
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
@@ -345,10 +343,12 @@ After completing the above steps, fill out the [post-setup form][205] with the f
 
 {{% tab "Existing S3 Inventory" %}}
 
-If you have already configured S3 Inventory for the buckets you want to monitor, choose **one** of the following options:
+  If you have already configured S3 Inventory for the buckets you want to monitor, enable buckets for Storage Monitoring from the Datadog UI:
+      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
+      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-- Fill out [this form][601] to share your configurations with Datadog
-- [Reach out to us][602] to use an API for setting up multiple buckets
+  {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [601]: https://forms.gle/dhDbSxTvCUDXg1QR7
 [602]: mailto:storage-monitoring@datadoghq.com
