@@ -32,12 +32,6 @@ Datadog App Builder is a low-code application building platform. It streamlines 
 
 {{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" style="width:100%;" >}}
 
-## Configure App Builder actions
-
-Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.
-
-{{< img src="/service_management/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
-
 ## Onboarding with App Builder 
 
 When creating a new app, Datadog displays an onboarding modal with several options to get started: 
@@ -49,6 +43,12 @@ When creating a new app, Datadog displays an onboarding modal with several optio
 - App Playground
 
 {{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="App blueprints" style="width:100%;" >}}
+
+## Configure App Builder actions
+
+Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.
+
+{{< img src="/service_management/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
 
 ### Start with blueprints
 
