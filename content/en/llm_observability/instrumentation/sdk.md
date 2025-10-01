@@ -1329,8 +1329,8 @@ Supported keys:
 - `template` (string): Single-template form. If provided alone, the role defaults to "user".
 - `chat_template` (list of objects or Messages): Multi-message template form. Provide a list of `{ "role": "<role>", "template": "<template>" }` objects, or a list of `Message` objects.
 - `tags` (object: Dict[str, str]): Tags to attach to the prompt run.
-- `rag_context_variables` (list of strings): Variable keys that contain ground-truth/context content.
-- `rag_query_variables` (list of strings): Variable keys that contain the user query.
+- `rag_context_variables` (list of strings): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/setup/evaluations/#hallucination).
+- `rag_query_variables` (list of strings): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/setup/evaluations/#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1351,7 +1351,7 @@ This gives you the flexibility to either rely on automatic version management ba
 from ddtrace.llmobs import LLMObs
 
 def answer_question(text):
-    # Attach prompt metadata to the upcoming LLM span
+    # Attach prompt metadata to the upcoming LLM span using LLMObs.annotate()
     LLMObs.annotate(prompt={
         "id": "translate-v1",
         "version": "1.0.0",
@@ -1403,7 +1403,7 @@ def rag_answer(question, context):
 Notes:
 - Place the annotation immediately before the provider call so it applies to the correct LLM span.
 - Do not include secrets in `variables`; values are persisted as provided.
-- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See Annotating auto-instrumented spans.
+- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
 
 ## Annotating a span
 
@@ -1850,7 +1850,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `prompt`
 : optional - _dictionary_
-<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.llmobs.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
+<br />A dictionary that represents the prompt used for an LLM call. See the [Prompt object](#prompt-tracking-arguments) documentation for the complete schema and supported keys. You can also import the `Prompt` object from `ddtrace.llmobs.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
 : optional - _dictionary_
@@ -1870,11 +1870,13 @@ def rag_workflow(user_question):
 
     with LLMObs.annotation_context(
         prompt = Prompt(
+            id= "chatbot_prompt",
+            version = "1.0.0",
+            template = "Please answer the question using the provided context: {{question}}\n\nContext:\n{{context}}",
             variables = {
                 "question": user_question,
                 "context": context_str,
-            },
-            template = "Please answer the..."
+            }
         ),
         tags = {
             "retrieval_strategy": "semantic_similarity"
