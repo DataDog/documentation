@@ -2,9 +2,6 @@
     {{ $media := .Params.tile.media | default .Params.media | default "" }}
     {{ $further_reading := .Params.further_reading }}
 
-    {{- /* Only marketplace integrations are supported currently */ -}}
-    {{ $is_marketplace := in .Params.categories "marketplace" }}
-
     <div class="row">
         <div class="col-12 order-1">
             <h1 id="pagetitle">{{ .Params.integration_title | default .Title }}</h1>
