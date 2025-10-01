@@ -325,6 +325,17 @@ In **Agent v7.70+**, you can restrict security monitoring for specific container
 [2]: /security/cloud_security_management/vulnerabilities
 [3]: /security/workload_protection/
 {{% /tab %}}
+{{% tab "Config file" %}}
+For [Cloud Security Vulnerabilities][1], you can use the following format in your config file to include or exclude containers:
+```
+---
+sbom:
+  container_image:
+    container_include: ...
+    container_exclude: ...
+```
+[1]: /security/cloud_security_management/vulnerabilities
+{{% /tab %}}
 {{% tab "Containerized Agent" %}}
 In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
 
