@@ -84,9 +84,10 @@ DatadogRUM.xcframework
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to **Error Tracking** > **[Setup][2]** > **Mobile and Browser**.
-2. Select `iOS` as the application type and enter an application name.
-3. Click **Create Application** to generate a unique Datadog application ID and client token.
+1. Navigate to **Error Tracking** > **[Settings][2]** > **Browser and Mobile**.
+2. Click **New Application**.
+3. Enter an application name and select **iOS** as the application type.
+4. Click **Create Application** to generate a unique Datadog application ID and client token.
 
 ### Step 3 - Initialize the library
 
@@ -100,7 +101,7 @@ For more information about setting up a client token, see the [Client token docu
 
 The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
-<div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
+<div class="alert alert-warning">Initializing the SDK elsewhere (for example, later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
 
 For more information, see [Using Tags][7].
 
@@ -347,11 +348,11 @@ WebViewTracking.enable(webView: webview, hosts: ["foo.bar"])
 WebViewTracking.disable(webView: webview)
 ```
 
-For more information, see [Web View Tracking][2].
+For more information, see [Web View Tracking][3].
 
 ### Step 4 - Add crash reporting
 
-Error tracking processes and displays all types of errors in a unified interface, while crash reporting captures fatal crashes when your app terminates unexpectedly.
+Crash reporting captures fatal crashes when your app terminates unexpectedly, in addition to the errors that Error Tracking displays in a unified interface.
 
 To enable Crash Reporting, add the package according to your dependency manager and update your initialize snippet.
 
@@ -417,11 +418,11 @@ CrashReporting.enable()
 
 ### Step 5 - Add app hang reporting
 
-App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]).
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-the-app-hang-threshold) for more guidance on setting this value.
 
-App hangs are reported through the iOS SDK (not through [Logs][10]).
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
+
 
 When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a _hang_ in [**Error Tracking**][1]. There are two types of hangs:
 
@@ -450,7 +451,7 @@ To enable app hang monitoring:
    )
    ```
 
-3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Configure the app hang threshold](#configure-the-app-hang-threshold) for more guidance on setting this value.
+3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported, in seconds. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
 
    Make sure you follow the steps below to get [deobfuscated stack traces](#step-6---get-deobfuscated-stack-traces).
 
@@ -460,15 +461,14 @@ To enable app hang monitoring:
 
 Choose the right threshold value based on your monitoring needs:
 
-**For development and debugging:**
-- Start with `appHangThreshold: 0.25` seconds (250 ms) to catch most performance issues
-- Adjust incrementally (lower or higher) to find the right setup for your specific needs
+- **For development and debugging:**
+  - Start with `appHangThreshold: 0.25` seconds (250 ms) to catch most performance issues
+  - Adjust incrementally (lower or higher) to find the right setup for your specific needs
+- **For production monitoring:**
+  - Set `appHangThreshold` between `2.0` and `3.0` seconds to filter out noisy hangs and focus on significant performance issues
+  - This aligns with user experience expectations, where hangs under 2 seconds are less noticeable
 
-**For production monitoring:**
-- Set `appHangThreshold` between `2.0` to `3.0` seconds to filter out noisy hangs and focus on significant performance issues
-- This aligns with user experience expectations where hangs under 2 seconds are less noticeable
-
-**Configuration example:**
+##### Configuration example
 ```swift
 RUM.enable(
     with: RUM.Configuration(
@@ -493,7 +493,7 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 ### Step 6 - Get deobfuscated stack traces
 
-Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+To help you debug errors, Datadog uses a unique generated build ID to deobfuscate stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
@@ -628,15 +628,15 @@ To be compliant with the GDPR regulation, the iOS SDK requires the tracking cons
 
 The `trackingConsent` setting can be one of the following values:
 
-1. `.pending`: The iOS SDK starts collecting and batching the data but does not send it to Datadog. The iOS SDK waits for the new tracking consent value to decide what to do with the batched data.
+1. `.pending`: The iOS SDK starts collecting and batching the data but does not send it to Datadog. The iOS SDK waits for the new tracking consent value to determine what to do with the batched data.
 2. `.granted`: The iOS SDK starts collecting the data and sends it to Datadog.
-3. `.notGranted`: The iOS SDK does not collect any data. No logs, traces, or events are sent to Datadog.
+3. `.notGranted`: The iOS SDK does not collect any data, and doesn't send logs, traces, or events to Datadog.
 
 To **change the tracking consent value** after the iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The iOS SDK changes its behavior according to the new value.
 
 For example, if the current tracking consent is `.pending`:
 
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
+- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog.
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
 {{% /collapse-content %}}
@@ -645,7 +645,7 @@ For example, if the current tracking consent is `.pending`:
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][19]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
-For example, to only keep 50% of sessions use:
+For example, to only keep 50% of sessions, use:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -666,13 +666,13 @@ configuration.sessionSampleRate = 50;
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Sending data when device is offline" level="h4" expanded=false id="sending-data-device-offline" %}}
+{{% collapse-content title="Send data when device is offline" level="h4" expanded=false id="sending-data-device-offline" %}}
 
-The iOS SDK ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+The iOS SDK ensures data remains available when an end user's device is offline. In cases of low-network areas, or when the device battery is too low, the device first stores all events in batches. It sends them as soon as the network is available and the battery is high enough to ensure the iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if a data upload fails, the device keeps the batch until it can complete a successful upload.
 
 This means that even if users open your application while offline, no data is lost.
 
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the iOS SDK does not use too much disk space.
+**Note**: To ensure the iOS SDK does not use too much disk space, the device automatically discards the data on the disk if the data gets too old.
 
 {{% /collapse-content %}}
 
@@ -688,7 +688,7 @@ When enabled, a watchdog termination is reported and attached to the previous us
 
 - And it did not call neither `exit`, nor `abort`,
 
-- And it did not crash, either because of an exception, or because of a fatal [app hang][18],
+- And it did not crash, either because of an exception, or because of a fatal [app hang](#step-5---add-app-hang-reporting),
 
 - And it was not force-quitted by the user,
 
