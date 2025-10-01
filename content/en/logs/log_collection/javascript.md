@@ -25,7 +25,9 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 ### Step 1 - Create a client token
 
-For security reasons, [API keys][1] cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. See the [client token documentation][2] for more details.
+In Datadog, navigate to [Organization Settings > New Client Tokens][1]
+
+**Note**: For security reasons, [API keys][2] cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used.
 
 ### Step 2 - Install the Logs Browser SDK
 
@@ -34,16 +36,16 @@ Choose the installation method for the Browser SDK.
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Installing through Node Package Manager (npm) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+Installing through Node Package Manager (npm) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors and console logs triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
-Add [`@datadog/browser-logs`][3] to your `package.json` file, example if you use npm cli:
+Add [`@datadog/browser-logs`][13] to your `package.json` file, example if you use npm cli:
 
-[3]: https://www.npmjs.com/package/@datadog/browser-logs
+[13]: https://www.npmjs.com/package/@datadog/browser-logs
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-Installing through CDN async is recommended for web applications with performance targets. The Browser SDK loads from Datadog's CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized.
+Installing through CDN async is recommended for web applications with performance targets. The Browser SDK loads from Datadog's CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors and console logs triggered before the SDK is initialized.
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application.
 
@@ -222,9 +224,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ### Step 3 - Initialize the Browser SDK
 
-The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
+The SDK should be initialized as early as possible in the app lifecycle. This ensures all logs are captured correctly.
 
-In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][8].
+In the initialization snippet, set client token and site. See the full list of [initialization parameters][4].
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -233,10 +235,10 @@ In the initialization snippet, set an environment name, service name, and client
 import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
-   clientToken: '<CLIENT_TOKEN>',
-   // `site` refers to the Datadog site parameter of your organization
-   // see https://docs.datadoghq.com/getting_started/site/
-   site: '<DATADOG_SITE>',
+  clientToken: '<CLIENT_TOKEN>',
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
   forwardErrorsToLogs: true,
   sessionSampleRate: 100,
 });
@@ -282,17 +284,17 @@ datadogLogs.init({
 
 #### Configure tracking consent (GDPR compliance)
 
-To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the [tracking consent value at initialization][4].
+To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the [tracking consent value at initialization][5].
 
 #### Configure Content Security Policy (CSP)
 
-If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][5] for additional setup steps.
+If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][6] for additional setup steps.
 
 ### Step 4 - Visualize your data
 
 Now that you’ve completed the basic setup for Logs, your application is collecting browser logs and you can start monitoring and debugging issues in real-time.
 
-Visualize the logs in the [Log Explorer][10].
+Visualize the logs in the [Log Explorer][7].
 
 ## Usage
 
@@ -380,10 +382,10 @@ The Datadog backend adds more fields, like:
 
 ### Error tracking
 
-The Datadog browser logs SDK allows for manual error tracking by using the optional `error` parameter (Available in SDK v4.36.0+). When an instance of a [JavaScript Error][7] is provided, the SDK extracts relevant information (kind, message, stack trace) from the error.
+The Datadog browser logs SDK allows for manual error tracking by using the optional `error` parameter (Available in SDK v4.36.0+). When an instance of a [JavaScript Error][8] is provided, the SDK extracts relevant information (kind, message, stack trace) from the error.
 
-```
-logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
+```typescript
+logger.{debug|info|warn|error}(message: string, messageContext?: Context, error?: Error)
 ```
 
 {{< tabs >}}
@@ -460,8 +462,8 @@ The results are the same when using NPM, CDN async, or CDN sync:
 
 The Datadog browser logs SDK adds shorthand functions (`.debug`, `.info`, `.warn`, `.error`) to the loggers for convenience. A generic logger function is also available, exposing the `status` parameter:
 
-```
-log (message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
+```typescript
+log(message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
 ```
 
 {{< tabs >}}
@@ -505,7 +507,7 @@ The placeholders in the examples above are described below:
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog.                               |
 | `<JSON_ATTRIBUTES>` | A valid JSON object, which includes all attributes attached to the `<MESSAGE>`.         |
 | `<STATUS>`          | The status of your log; accepted status values are `debug`, `info`, `warn`, or `error`. |
-| `<ERROR>`           | An instance of a [JavaScript Error][7] object.                                         |
+| `<ERROR>`           | An instance of a [JavaScript Error][8] object.                                         |
 
 ## Advanced usage
 
@@ -1059,7 +1061,7 @@ By default, contexts are stored in the current page memory, which means they are
 
 To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][6], allowing the following behaviors:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][9], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
@@ -1319,14 +1321,14 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 
 <!-- Note: all URLs should be absolute -->
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[4]: logs/log_collection/javascript/#user-tracking-consent
-[5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[7]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
-[8]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
-[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
-[10]: /logs/explorer/
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[2]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[3]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[4]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
+[5]: /logs/log_collection/javascript/#user-tracking-consent
+[6]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[7]: /logs/explorer/
+[8]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
