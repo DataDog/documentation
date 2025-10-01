@@ -58,20 +58,6 @@ Datadog App Builder provides an [Action Catalog][1] of hundreds of actions acros
 
 {{< img src="/service_management/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
 
-### Start with blueprints
-
-Datadog provides you with preconfigured flows in the form of out-of-the-box [blueprints][3] to help you [get started][5].
-
-Below are a few examples of what App Builder apps can do:
-- Identify the most likely causes of a regression given a text description of an incident and the most recent 150 commits to a repo.
-- Monitor your PagerDuty service status to get complete context while working on incidents.
-- Allow users to manage their EC2 instances directly from a dashboard.
-- Allow users to explore and view the content of an S3 bucket.
-- Use a PagerDuty integration to see who is on-call for each team in an organization.
-- Summarize the progress of each PR in a given repo.
-
-{{< img src="/service_management/app_builder/app-builder-blueprints-2.png" alt="App blueprints" style="width:100%;" >}}
-
 ## Take action directly from dashboards
 
 You can use your apps from the Apps page or [access them directly from within your dashboards][6]. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
