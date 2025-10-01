@@ -380,7 +380,7 @@ This check evaluates whether the arguments provided to the selected tool are cor
 
 ##### Instrumentation
 
-This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
 {{< code-block lang="python" >}}
 import os
