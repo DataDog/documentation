@@ -32,7 +32,7 @@ NOTA: La detección de vulnerabilidades a nivel de código en Python está en vi
 Sigue estos pasos para activar Code Security en tu servicio:
 
 1. [Actualiza tu Datadog Agent][6] al menos a la versión 7.41.1.
-2. Actualiza tu biblioteca de rastreo de Datadog al menos a la versión mínima necesaria para activar Code Security. Para ver más detalles, consulta la página [Compatibilidad de bibliotecas][3].
+2. Actualiza tu biblioteca de rastreo de Datadog al menos a la versión mínima necesaria para activar Code Security. Para ver más detalles, consulta la página [Compatibilidad de librerías][3].
 3. Añade la variable de entorno `DD_IAST_ENABLED=true` a la configuración de tu aplicación.
 
    Desde la línea de comandos:
@@ -107,7 +107,7 @@ Actualiza tu archivo JSON de definición de tarea de ECS añadiendo esto en la s
 Si necesitas ayuda adicional, ponte en contacto con el [equipo de asistencia de Datadog][5].
 
 
-### Nota sobre la compatibilidad de bibliotecas de terceros
+### Nota sobre la compatibilidad de librerías de terceros
 
 Code Security modifica el código Python en tiempo de ejecución. Esto podría causar conflictos con otras bibliotecas Python de terceros que realizan transformaciones de código similares, en particular con los siguientes, pero sin limitarse a ellos:
 

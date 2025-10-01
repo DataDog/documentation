@@ -1,5 +1,6 @@
 ---
 title: DDSketch-based Metrics in APM
+description: Learn about DDSketch-based metrics in APM for computing accurate percentiles and latency distributions with improved accuracy.
 
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/

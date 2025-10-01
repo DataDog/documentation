@@ -9,6 +9,9 @@ aliases:
     - /llm_observability/setup/sdk/java
     - /llm_observability/sdk/java
     - /llm_observability/sdk/
+    - /llm_observability/instrumentation/custom_instrumentation
+    - /tracing/llm_observability/trace_an_llm_application
+    - /llm_observability/setup
 ---
 
 ## Overview
@@ -1180,6 +1183,68 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{% /tab %}}
 {{< /tabs >}}
 
+## Nesting spans
+
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def extract_data(document):
+    preprocess_document(document)
+    ... # performs data extraction on the document
+    return
+
+@task
+def preprocess_document(document):
+    ... # preprocesses a document for data extraction
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function preprocessDocument (document) {
+  ... // preprocesses a document for data extraction
+  return
+}
+preprocessDocument = llmobs.wrap({ kind: 'task' }, preprocessDocument)
+
+function extractData (document) {
+  preprocessDocument(document)
+  ... // performs data extraction on the document
+  return
+}
+extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+
+public class MyJavaClass {
+  public void preprocessDocument(String document) {
+  LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
+   ...   // preprocess document for data extraction
+   taskSpan.annotateIO(...); // record the input and output
+   taskSpan.finish();    
+  }
+
+  public String extractData(String document) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("extractData", null, "session-141");
+    preprocessDocument(document);
+    ... // perform data extraction on the document
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+  }
+}
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Tracking user sessions
 
@@ -1687,7 +1752,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `prompt`
 : optional - _dictionary_
-<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
+<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.llmobs.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
 : optional - _dictionary_
@@ -1727,7 +1792,6 @@ def rag_workflow(user_question):
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 ## Evaluations

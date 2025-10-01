@@ -1,5 +1,6 @@
 ---
 title: Draft Monitors
+description: "Create, test, and refine monitor alerts safely without triggering notifications using Draft Monitors."
 further_reading:
 - link: "monitors/"
   tag: "Documentation"

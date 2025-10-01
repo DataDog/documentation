@@ -1,5 +1,6 @@
 ---
 title: Android and Android TV Monitoring
+description: "Monitor Android and Android TV applications with RUM to visualize user journeys, track performance, and analyze real-time user experiences."
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
   tag: Documentation

@@ -1,5 +1,6 @@
 ---
 title: Kotlin Multiplatform Advanced Configuration
+description: "Configure advanced Kotlin Multiplatform RUM SDK settings for cross-platform mobile applications on iOS and Android."
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform

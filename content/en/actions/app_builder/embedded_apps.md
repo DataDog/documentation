@@ -1,10 +1,11 @@
 ---
 title: Embedded Apps
+description: Embed published apps in dashboards and sync them with template variables and time frames for dynamic, contextual actions.
 disable_toc: false
 aliases:
     - /service_management/app_builder/embedded_apps
 further_reading:
-- link: "https://app.datadoghq.com/app-builder/action-catalog"
+- link: "https://app.datadoghq.com/actions/action-catalog/"
   tag: "App"
   text: "Action Catalog"
 ---

@@ -1,5 +1,6 @@
 ---
 title: Enabling Dynamic Instrumentation
+description: Enable Dynamic Instrumentation for your applications to add probes and capture runtime data without code changes.
 type: multi-code-lang
 aliases:
     - /dynamic_instrumentation/enabling/

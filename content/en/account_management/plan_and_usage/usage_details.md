@@ -1,5 +1,6 @@
 ---
 title: Usage Details
+description: Monitor your Datadog usage across all products with month-to-date summaries, usage trends, top custom metrics, and logs usage by index.
 aliases:
   - /account_management/billing/usage_details/
 ---

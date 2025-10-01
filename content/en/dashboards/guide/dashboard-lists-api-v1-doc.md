@@ -1,5 +1,6 @@
 ---
 title: Dashboard Lists API (v1)
+description: Interact with dashboard lists through the deprecated v1 API to organize, find, and share dashboards.
 aliases:
   - /graphing/faq/dashboard-lists-api-doc
   - /graphing/guide/dashboard-lists-api-v1-doc

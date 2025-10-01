@@ -1,5 +1,6 @@
 ---
 title: Build workflows
+description: Create workflows from blueprints or build custom workflows using AI assistance, manual configuration, and drag-and-drop actions.
 disable_toc: false
 aliases:
 - /workflows/build

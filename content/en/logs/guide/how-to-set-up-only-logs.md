@@ -8,7 +8,7 @@ further_reading:
   text: "Docker Log Collection"
 - link: "/containers/kubernetes/log/"
   tag: "Documentation"
-  text: "Kubenetes Log Collection"
+  text: "Kubernetes Log Collection"
 ---
 
 <div class="alert alert-danger">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>

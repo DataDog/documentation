@@ -1,5 +1,6 @@
 ---
 title: Account Management Guides
+description: Comprehensive guides for managing your Datadog account, including API migrations, Terraform management, and support resources.
 private: true
 cascade:
     algolia:
