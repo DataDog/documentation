@@ -1402,7 +1402,8 @@ def rag_answer(question, context):
 
 Notes:
 - Place the annotation immediately before the provider call so it applies to the correct LLM span.
-- Do not include secrets in `variables`; values are persisted as provided.
+- Use a unique prompt `id` to distinguish different prompts within your application.
+- Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
 - For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
 
 ## Annotating a span
