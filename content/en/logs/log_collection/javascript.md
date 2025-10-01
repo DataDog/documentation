@@ -20,7 +20,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 **Notes**:
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
-- **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs executing in Worker environments do not automatically track sessions.
+- **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs sent from Worker environments do not automatically include session information.
 
 ## Setup
 
