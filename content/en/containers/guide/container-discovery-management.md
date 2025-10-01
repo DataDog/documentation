@@ -315,11 +315,11 @@ In **Agent v7.70+**, you can restrict security monitoring for specific container
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-| Feature                  | Include container                                   | Exclude container                                   |
-|--------------------------|-----------------------------------------------------|-----------------------------------------------------|
-| [Misconfigurations][1]   | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
-| [Vulnerabilities][2]     | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
-| [Workload Protection][3] | `datadog.securityAgent.runtime.containerInclude`    | `datadog.securityAgent.runtime.containerExclude`    |
+| Feature                               | Include container                                   | Exclude container                                   |
+|---------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
+| [Cloud Security Vulnerabilities][2]   | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
+| [Workload Protection][3]              | `datadog.securityAgent.runtime.containerInclude`    | `datadog.securityAgent.runtime.containerExclude`    |
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/cloud_security_management/vulnerabilities
@@ -328,11 +328,11 @@ In **Agent v7.70+**, you can restrict security monitoring for specific container
 {{% tab "Containerized Agent" %}}
 In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
 
-| Feature                  | Include container                              | Exclude container                              |
-|--------------------------|------------------------------------------------|------------------------------------------------|
-| [Misconfigurations][1]   | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
-| [Vulnerabilities][2]     | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
-| [Workload Protection][3] | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_INCLUDE` | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_EXCLUDE` |
+| Feature                               | Include container                              | Exclude container                              |
+|---------------------------------------|------------------------------------------------|------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
+| [Cloud Security Vulnerabilities][2]   | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
+| [Workload Protection][3]              | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_INCLUDE` | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_EXCLUDE` |
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/cloud_security_management/vulnerabilities
