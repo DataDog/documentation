@@ -5930,6 +5930,115 @@ components:
       required:
       - type
       type: object
+    AzureScanOptions:
+      description: The definition of `AzureScanOptions` object.
+      example:
+        data:
+          attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/AzureScanOptionsData'
+      type: object
+    AzureScanOptionsArray:
+      description: The definition of `AzureScanOptionsArray` object.
+      example:
+        data:
+        - attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          description: The `AzureScanOptionsArray` `data`.
+          items:
+            $ref: '#/components/schemas/AzureScanOptionsData'
+          type: array
+      required:
+      - data
+      type: object
+    AzureScanOptionsData:
+      description: The definition of `AzureScanOptionsData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AzureScanOptionsDataAttributes'
+        id:
+          description: The `AzureScanOptionsData` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureScanOptionsDataType'
+      required:
+      - type
+      - id
+      type: object
+    AzureScanOptionsDataAttributes:
+      description: The definition of `AzureScanOptionsDataAttributes` object.
+      properties:
+        vuln_containers_os:
+          description: The `attributes` `vuln_containers_os`.
+          type: boolean
+        vuln_host_os:
+          description: The `attributes` `vuln_host_os`.
+          type: boolean
+      type: object
+    AzureScanOptionsDataType:
+      default: azure_scan_options
+      description: The type of the resource. The value should always be `azure_scan_options`.
+      enum:
+      - azure_scan_options
+      example: azure_scan_options
+      type: string
+      x-enum-varnames:
+      - AZURE_SCAN_OPTIONS
+    AzureScanOptionsInputUpdate:
+      description: The definition of `AzureScanOptionsInputUpdate` object.
+      example:
+        data:
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateData'
+      type: object
+    AzureScanOptionsInputUpdateData:
+      description: The definition of `AzureScanOptionsInputUpdateData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataAttributes'
+        id:
+          description: The `AzureScanOptionsInputUpdateData` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataType'
+      required:
+      - type
+      - id
+      type: object
+    AzureScanOptionsInputUpdateDataAttributes:
+      description: The definition of `AzureScanOptionsInputUpdateDataAttributes` object.
+      properties:
+        vuln_containers_os:
+          description: The `attributes` `vuln_containers_os`.
+          type: boolean
+        vuln_host_os:
+          description: The `attributes` `vuln_host_os`.
+          type: boolean
+      type: object
+    AzureScanOptionsInputUpdateDataType:
+      default: azure_scan_options
+      description: Azure scan options resource type.
+      enum:
+      - azure_scan_options
+      example: azure_scan_options
+      type: string
+      x-enum-varnames:
+      - AZURE_SCAN_OPTIONS
     AzureStorageDestination:
       description: The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
@@ -52364,6 +52473,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: List AWS Scan Options
       tags:
       - Agentless Scanning
@@ -52399,6 +52513,11 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Post AWS Scan Options
       tags:
       - Agentless Scanning
@@ -52427,6 +52546,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Delete AWS Scan Options
       tags:
       - Agentless Scanning
@@ -52453,6 +52577,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS scan options
       tags:
       - Agentless Scanning
@@ -52482,11 +52611,138 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Patch AWS Scan Options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/agentless_scanning/accounts/azure:
+    get:
+      description: Fetches the scan options configured for Azure accounts.
+      operationId: ListAzureScanOptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptionsArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 12
+      x-undo:
+        type: safe
+    post:
+      description: Activate Agentless scan options for an Azure subscription.
+      operationId: CreateAzureScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureScanOptions'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Create azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteAzureScanOptions
+        parameters:
+        - name: subscription_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/azure/{subscription_id}:
+    delete:
+      description: Delete Agentless scan options for an Azure subscription.
+      operationId: DeleteAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Delete azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 10
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update the Agentless scan options for an activated subscription.
+      operationId: UpdateAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureScanOptionsInputUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
@@ -52504,6 +52760,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
@@ -52539,6 +52800,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Post an AWS on demand task
       tags:
       - Agentless Scanning
@@ -52571,6 +52837,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
