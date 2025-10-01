@@ -21,7 +21,7 @@ With the integration, you can:
 
 - Respond faster by declaring Datadog incidents directly from Slack.
 - Automatically create Slack channels for collaboration when Datadog incidents are declared.
-- Execute your incident response in Slack — page on-call teams, assign responder roles, update severity, and more.
+- Execute your incident response in Slack—page on-call teams, assign responder roles, update severity, and more.
 
 The Slack integration documentation is organized around the typical lifecycle of using Slack with Incident Management:
 
@@ -40,7 +40,7 @@ After the integration is installed, navigate to **[Service Management > Incident
 
 ## Declaring incidents from Slack
 
-When you connect a Slack workspace to a Datadog organization, you and other users in the Slack workspace can use slash commands and shortcuts related to Incident Management.
+When you connect a Slack workspace to a Datadog organization, users in the workspace can use Slack shortcuts related to Incident Management.
 
 You can declare an incident with the following slash command:
 
@@ -52,7 +52,7 @@ To declare an incident from a Slack message, hover over the message, click **Mor
 
 By default, only Slack users connected to a Datadog organization can declare incidents. Slack users can connect to a Datadog organization by running `/datadog connect`.
 
-To allow any Slack user or non-guest Slack user to declare incidents in your Slack workspace, enable **Allow Slack users to declare incidents without a connected Datadog account** in Incident Management settings.
+To allow any Slack user to declare incidents in your Slack workspace, enable **Allow Slack users to declare incidents without a connected Datadog account** in Incident Management settings.
 
 ## Incident channels
 
@@ -88,9 +88,13 @@ To enable syncing, enable "Push Slack channel messages to the incident timeline"
 
 For both options, a message's author does not need to be connected to the Datadog organization for Datadog to sync the message. For message pinning, the pinner **does** need to be connected to the Datadog organization for the message pinned to sync.
 
-In organizations with usage-based Incident Management billing, authoring a message that is synced to Datadog does **not** make you a billable user for the current month. Pinning a message that is then synced **does** make you a billable user.
+In organizations with usage-based Incident Management billing:
+* Authoring a message that is synced to Datadog does **not** make you a billable user for the current month
+* Pinning a message that is then synced **does** make you a billable user.
 
-In organizations with seat-based Incident Management billing, you do not need a seat for Datadog to sync your messages to Incident Management. When you pin a message, you must have a seat for Datadog to sync the message you pinned.
+In organizations with seat-based Incident Management billing:
+* You do **not** need a seat for Datadog to sync your messages to Incident Management.
+* When you pin a message, you **must** have a seat for Datadog to sync the message you pinned.
 
 ## Global incident updates channel
 
