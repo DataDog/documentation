@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Datadog's access management system uses role-based access control.This lets you define the level of access users have to different Datadog resources. Users are assigned to roles that define their account permissions, including what data they can read and which account assets they can modify. When [permissions](#permissions) are granted for a role, any user who is associated with that role receives those permissions. See [Role based access control][1] for more information.
+Datadog's access management system uses role-based access control (RBAC). This lets you define the level of access users have to different Datadog resources. Users are assigned to roles that define their account permissions, including what data they can read and which account assets they can modify. When [permissions](#permissions) are granted for a role, any user who is associated with that role receives those permissions. See [Role based access control][1] for more information.
 
 [Granular access control](#granular-access-control) lets you restrict access to individual resources by roles, [Teams][2], or users. For Observability Pipelines, you can [restrict access to a pipeline](#restrict-access-to-a-pipeline) or [restrict access to Live Capture for a pipeline](#restrict-access-to-live-capture-for-a-pipeline).
 
