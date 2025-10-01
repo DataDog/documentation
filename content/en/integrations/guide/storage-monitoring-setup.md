@@ -184,7 +184,7 @@ This template creates two IAM policies:
    - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket
    - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`)
 
-{{< img src="integrations/guide/storage_monitoring/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:90%;" >}}
+    {{< img src="integrations/guide/storage_monitoring/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:90%;" >}}
 
 6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**.
 
@@ -194,7 +194,7 @@ This template creates two IAM policies:
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-      {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets to sync" responsive="true" style="width:90%;" >}}
+      {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [101]: https://datadog-cloudformation-template.s3.us-east-1.amazonaws.com/aws/cloud-inventory/source-bucket-inventory-cfn.yaml
 [102]: https://console.aws.amazon.com/cloudformation/
@@ -272,7 +272,7 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
       - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-      {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets to sync" responsive="true" style="width:90%;" >}}
+    {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 ### Use modules for complex setups
 
