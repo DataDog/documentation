@@ -376,7 +376,7 @@ This check evaluates whether the arguments provided to the selected tool are cor
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on LLM spans| Evaluated using LLM | Tool Argument Correctness verifies that the arguments provided to a tool by the LLM are correct and contextually relevant. This evaluation identifies cases where the arguments provided to the tool are incorrect according to the tool schema (i.e. the agument is expected to be an integer rather than a string) and are not revelant (i.e. the argument is a country but the model provides the name of a city).|
+| Evaluated on LLM spans| Evaluated using LLM | Tool Argument Correctness verifies that the arguments provided to a tool by the LLM are correct and contextually relevant. This evaluation identifies cases where the arguments provided to the tool are incorrect according to the tool schema (for example: the argument is expected to be an integer rather than a string) and are not relevant (for example: the argument is a country, but the model provides the name of a city).|
 
 ##### Instrumentation
 
