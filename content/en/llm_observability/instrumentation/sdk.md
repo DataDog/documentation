@@ -1339,7 +1339,7 @@ Supported keys:
 LLM Observability provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, LLM Observability uses your specified version label instead of auto-generating one.
 
 The versioning system works as follows:
-- **Auto versioning**: When no `version` tag is provided, LLM Observability computes a hash of the `template` or `chat_template` content to automatically generate a version identifier
+- **Auto versioning**: When no `version` tag is provided, LLM Observability computes a hash of the `template` or `chat_template` content to automatically generate a numerical version identifier
 - **Manual versioning**: When a `version` tag is provided, LLM Observability uses your specified version label exactly as provided
 - **Version history**: Both auto-generated and manual versions are maintained in the version history to track prompt evolution over time
 
