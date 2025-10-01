@@ -72,7 +72,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 
 ## Exclude containers from evaluation using the Datadog Agent
 
-For information on how to configure your Datadog Agent to exclude containers from Security monitoring, see [Container Discovery Management][1].
+For information on how to configure your Datadog Agent to exclude containers from security monitoring, see [Container Discovery Management][1].
 
 ## Further Reading
 
