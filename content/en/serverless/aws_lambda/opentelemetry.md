@@ -1,5 +1,6 @@
 ---
 title: AWS Lambda and OpenTelemetry
+description: Instrument AWS Lambda functions using OpenTelemetry with Datadog for standardized observability and telemetry collection.
 further_reading:
   - link: '/opentelemetry/'
     tag: 'Documentation'

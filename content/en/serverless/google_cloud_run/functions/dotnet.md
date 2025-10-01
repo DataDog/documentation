@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a .NET Cloud Run Function
+description: Instrument .NET applications running as Google Cloud Run functions with Datadog monitoring for traces and metrics.
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50

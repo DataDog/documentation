@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Java Cloud Run Container with Sidecar
+description: Instrument Java applications in Google Cloud Run containers using the sidecar pattern with Datadog Agent for monitoring.
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 40

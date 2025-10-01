@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Cloud Run Functions
+description: Instrument Google Cloud Run functions (2nd gen) for comprehensive monitoring with traces, metrics, and logs collection.
 type: multi-code-lang
 further_reading:
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'

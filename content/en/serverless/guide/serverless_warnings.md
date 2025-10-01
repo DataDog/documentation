@@ -1,5 +1,6 @@
 ---
 title: Serverless Warnings
+description: View and understand serverless warnings and insights to optimize Lambda function performance and identify issues.
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"

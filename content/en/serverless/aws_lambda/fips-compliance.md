@@ -1,5 +1,6 @@
 ---
 title: AWS Lambda FIPS Compliance
+description: Configure AWS Lambda functions to comply with FIPS requirements for government and regulated environments.
 further_reading:
     - link: '/serverless/aws_lambda/installation/'
       tag: 'Documentation'

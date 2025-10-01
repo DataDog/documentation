@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Ruby Serverless Applications Using the Datadog Forwarder
-
+description: "Learn how to instrument Ruby Lambda functions using the Datadog Forwarder to collect enhanced metrics, traces, and logs for serverless monitoring."
 ---
 
 ## Overview

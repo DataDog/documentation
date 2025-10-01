@@ -1,5 +1,6 @@
 ---
 title: Merge Step Functions and Lambda Traces
+description: Connect AWS Step Functions traces with downstream Lambda traces for complete end-to-end visibility using JSONata and tracing configuration.
 further_reading:
     - link: '/serverless/step_functions/installation'
       tag: 'Documentation'

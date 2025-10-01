@@ -1,5 +1,6 @@
 ---
 title: Azure Container Apps
+description: "Monitor Azure Container Apps with Datadog for comprehensive serverless container monitoring including metrics and tracing."
 further_reading:
   - link: "/serverless/guide/disable_serverless"
     tag: "Documentation"

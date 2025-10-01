@@ -1,5 +1,6 @@
 ---
 title: Serverless Glossary
+description: "Glossary of serverless terms, concepts, and cloud provider-specific definitions for AWS Lambda, Azure Functions, and Google Cloud Functions."
 ---
 
 This glossary focuses on terms and concepts specific to serverless architectures, cloud platform providers, and Datadog Serverless monitoring. 

@@ -1,5 +1,6 @@
 ---
-title: Node.js Lambda Tracing and Bundlers Compatibility 
+title: Node.js Lambda Tracing and Bundlers Compatibility
+description: Configure Node.js Lambda tracing with bundlers like Webpack and esbuild using Datadog Lambda layers for compatibility.
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'

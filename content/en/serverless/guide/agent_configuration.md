@@ -1,5 +1,6 @@
 ---
 title: Serverless Agent configuration
+description: Configure the Datadog serverless Agent using environment variables for API keys, metrics, logs, and tracing options.
 ---
 
 ## Overview

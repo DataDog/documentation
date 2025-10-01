@@ -1,5 +1,6 @@
 ---
 title: CDK Examples for Instrumenting AWS Step Functions
+description: Language-specific CDK code examples for instrumenting AWS Step Functions using Datadog's CDK Construct Library.
 further_reading:
     - link: "/serverless/step_functions/installation"
       tag: "Documentation"

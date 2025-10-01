@@ -1,5 +1,6 @@
 ---
 title: Log Collection for AWS Lambda
+description: "Configure log collection for AWS Lambda functions and related managed resources using the Datadog Lambda Extension or Forwarder."
 ---
 
 <div class="alert alert-info">If you are using the <a href="https://docs.datadoghq.com/serverless/libraries_integrations/extension/">Datadog Lambda extension</a>, log collection is <strong>enabled by default</strong>. </div>

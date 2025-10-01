@@ -1,5 +1,6 @@
 ---
 title: Continuous Profiler for AWS Lambda
+description: "Enable continuous profiling for AWS Lambda functions to analyze performance bottlenecks and optimize code efficiency."
 further_reading:
     - link: '/profiler/'
       tag: 'Documentation'

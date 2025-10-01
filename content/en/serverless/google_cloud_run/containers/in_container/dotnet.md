@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a .NET Cloud Run Container In-Container
+description: Instrument .NET applications running in Google Cloud Run containers using in-container monitoring for traces and metrics.
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
