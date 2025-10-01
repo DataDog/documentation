@@ -84,7 +84,7 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
               }
         ```
 
-    2. Assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one.
+    2. Under "Enable it for me", select the regions or accounts you want to enable and assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one in AWS.
 
         <div class="alert alert-info">Note: The destination buckets must allow the source buckets to write inventory data. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy">Creating a destination bucket policy.</a> in the AWS documentation for details.</div>
 
@@ -188,21 +188,19 @@ This template creates two IAM policies:
 
 6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**.
 
-### Post-setup steps
+### Finish setting up S3 buckets for Storage Monitoring
+  After completing the CloudFormation setup, enable buckets for Storage Monitoring:
+      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
+      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
 
-After completing the CloudFormation setup, fill out the [post-setup form][105] with the following required information:
-1. Name of the destination bucket holding the inventory files.
-2. Prefix where the files are stored in the destination bucket (if any).
-3. Name of the source bucket you want to monitor (the bucket producing inventory files).
-4. AWS region of the destination bucket holding the inventory files.
-5. AWS account ID containing the buckets.
-6. Datadog org name.
+      {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets to sync" responsive="true" style="width:90%;" >}}
 
 [101]: https://datadog-cloudformation-template.s3.us-east-1.amazonaws.com/aws/cloud-inventory/source-bucket-inventory-cfn.yaml
 [102]: https://console.aws.amazon.com/cloudformation/
 [103]: https://datadog-cloudformation-template.s3.us-east-1.amazonaws.com/aws/cloud-inventory/cloud-inventory-policies-cfn.yaml
 [104]: https://console.aws.amazon.com/cloudformation/
-[105]: https://forms.gle/L97Ndxr2XLen1GBs7
+[105]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
 [106]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
@@ -269,7 +267,12 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 
 ### Finish setting up S3 buckets for Storage Monitoring
 
-After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, fill out [this form][401] to provide your S3 configuration details. This allows Datadog to read the S3 inventory reports and start generating prefix metrics for your storage.
+  After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Monitoring:
+      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
+      - In Step 2: "Enable S3 Inventory to get prefix level monitoring", select **"I enabled it myself"**
+      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click Confirm
+
+      {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets to sync" responsive="true" style="width:90%;" >}}
 
 ### Use modules for complex setups
 
