@@ -332,13 +332,6 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 **Default**: `1000`<br>
 The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
 
-`DD_SPAN_SAMPLING_RULES`
-: **INI**: `datadog.span_sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
-**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
-
 ### Agent
 
 `DD_AGENT_HOST`
