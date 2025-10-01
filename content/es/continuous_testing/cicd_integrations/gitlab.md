@@ -33,11 +33,11 @@ Para más información, consulta la [configuración de integraciones de CI/CD][4
 ### Ejecutar tests utilizando IDs de test
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --public-id xtf-w5p-z5n --public-id eif-van-tu7
 {{< /code-block >}}
@@ -45,25 +45,25 @@ synthetic-tests:
 ### Ejecutar tests con etiquetas
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests'
 {{< /code-block >}}
 
 ### Ejecutar tests utilizando anulaciones de variables
 
-Si tienes diferentes usuarios de test o datos específicos para tu entorno de CI/CD, puedes anular estas variables con el comando `-v`. Para obtener más información, [consulta el comando de Synthetics](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics) en el paquete `datadog-ci` NPM.
+Si tienes diferentes usuarios de test o datos específicos para tu entorno de CI/CD, puedes anular estas variables con el comando `-v`. Para obtener más información, [consulta el comando de Synthetics](https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics) en el paquete `datadog-ci` NPM.
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests' -v PASSWORD="$PASSWORD"
 {{< /code-block >}}
@@ -75,11 +75,11 @@ synthetic-tests:
 Añade un archivo `config.json` personalizado a tu repositorio de pipelines y accede a él en tu configuración de pipeline.
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --config synthetics_global.json -f synthetic_test.json
 {{< /code-block >}}

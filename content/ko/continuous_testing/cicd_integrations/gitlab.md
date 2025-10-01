@@ -24,7 +24,7 @@ title: GitLab
 시작하기:
 
 1. GitLab 프로젝트에 Datadog API와 애플리케이션 키를 변수로 추가합니다.
-2. GitLab 러너에 Node.js 10.24.1 버전 이상이 설치되어 있는지 확인하세요. 
+2. GitLab 러너에 Node.js 10.24.1 버전 이상이 설치되어 있는지 확인하세요.
 
 자세한 정보는 [CI/CD Integrations 설정][4]을 참고하세요.
 
@@ -33,11 +33,11 @@ title: GitLab
 ### 테스트 ID를 사용해 테스트 실행
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --public-id xtf-w5p-z5n --public-id eif-van-tu7
 {{< /code-block >}}
@@ -45,25 +45,25 @@ synthetic-tests:
 ### 테그를 사용해 테스트 실행
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests'
 {{< /code-block >}}
 
 ### 변수 재정의를 사용해 테스트 실행
 
-내 CI/CD 환경에 따라 데이터나 테스트 사용자가 다른 경우 이 변수를 `-v` 명령으로 재정의할 수 있습니다. 더 자세한 정보는 `datadog-ci` NPM 패키지의 [Synthetics 명령](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics)을 참고하세요.
+내 CI/CD 환경에 따라 데이터나 테스트 사용자가 다른 경우 이 변수를 `-v` 명령으로 재정의할 수 있습니다. 더 자세한 정보는 `datadog-ci` NPM 패키지의 [Synthetics 명령](https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics)을 참고하세요.
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests' -v PASSWORD="$PASSWORD"
 {{< /code-block >}}
@@ -75,11 +75,11 @@ synthetic-tests:
 파이프라인 리포지토리에 커스텀 `config.json` 파일을 추가하고 파이프라인 설정에서 액세스합니다.
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --config synthetics_global.json -f synthetic_test.json
 {{< /code-block >}}

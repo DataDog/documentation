@@ -166,7 +166,7 @@ CircleCI 파이프라인에서 `pollingTimeout`을 사용자 지정하는 것과
 - [Continuous Testing Tunnel][10]
 
 [1]: https://github.com/DataDog/datadog-ci/
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics
+[2]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics
 [3]: https://docs.datadoghq.com/ko/continuous_testing/cicd_integrations
 [4]: https://bats-core.readthedocs.io/en/stable/installation.html
 [5]: https://circleci.com/orbs/registry/orb/datadog/synthetics-ci-orb

@@ -149,7 +149,7 @@ Documentation, liens et articles supplémentaires utiles :
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-ci
 [2]: https://github.com/DataDog/datadog-ci
-[3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics
+[3]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics
 [4]: https://docs.datadoghq.com/fr/continuous_testing/cicd_integrations/configuration
 [5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints
 [6]: https://docs.datadoghq.com/fr/account_management/api-app-keys/

@@ -55,7 +55,7 @@ synthetic-tests:
 
 ### Run tests using variable overrides
 
-If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, [see the Synthetics command](https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics) in the `datadog-ci` NPM package.
+If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, [see the related README](https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics) in the `datadog-ci` repository.
 
 {{< code-block lang="yaml" >}}
 stages:

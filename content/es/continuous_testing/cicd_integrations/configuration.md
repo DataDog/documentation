@@ -2,7 +2,7 @@
 aliases:
 - /es/synthetics/cicd_integrations/configuration
 dependencies:
-- https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md
+- https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/README.md
 description: Configura Continuous Testing para ejecutar tests en tus pipelines CI/CD.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
@@ -1067,7 +1067,7 @@ Documentación útil adicional, enlaces y artículos:
 [6]: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
 [7]: https://docs.datadoghq.com/es/continuous_testing/cicd_integrations/
 [8]: https://docs.datadoghq.com/es/continuous_testing/explorer/
-[9]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/examples/global-config-complete-example.json
+[9]: https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/src/examples/global-config-complete-example.json
 [10]: https://docs.datadoghq.com/es/mobile_app_testing/
 [11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#device_ids
 [12]: https://app.datadoghq.com/api/v1/synthetics/locations?only_public=true

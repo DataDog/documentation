@@ -2,7 +2,7 @@
 aliases:
 - /ja/synthetics/cicd_integrations/configuration
 dependencies:
-- https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md
+- https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/README.md
 description: CI/CD パイプラインでテストを実行するための Continuous Testing の構成
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
@@ -89,7 +89,7 @@ See each command's list of configurations below for the list of advanced options
   "apiKey": "<DATADOG_API_KEY>",
   "appKey": "<DATADOG_APPLICATION_KEY>",
   "batchTimeout": 180000,
-  "datadogSite": "datadoghq.com", // You can use another Datadog site in https://docs.datadoghq.com/getting_started/site/. By default, requests are sent to Datadog US1. 
+  "datadogSite": "datadoghq.com", // You can use another Datadog site in https://docs.datadoghq.com/getting_started/site/. By default, requests are sent to Datadog US1.
   "defaultTestOverrides": {
     "allowInsecureCertificates": true,
     "basicAuth": {"username": "test", "password": "test"},
@@ -329,7 +329,7 @@ The global JSON configuration is used when launching tests. See the [example con
 
 #### `datadogSite`
 
-The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}. 
+The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
 **Configuration options**
 
@@ -824,7 +824,7 @@ The global JSON configuration is used when launching tests. See the [example con
 
 #### `datadogSite`
 
-The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}. 
+The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
 **Configuration options**
 
@@ -919,7 +919,7 @@ The default file name for the [global configuration file](#global-configuration-
 
 ## Use local and staging environments
 
-You can combine variable overrides with [Local and Staging Environments][3] to run tests within your development environment. This connection ensures that all test requests sent through the CLI are automatically routed through the `datadog-ci` client. 
+You can combine variable overrides with [Local and Staging Environments][3] to run tests within your development environment. This connection ensures that all test requests sent through the CLI are automatically routed through the `datadog-ci` client.
 
 これにより、本番前環境から本番システムまで、ソフトウェア開発のライフサイクルのあらゆる段階で、エンドツーエンドで暗号化されたテストを実行することが可能になります。
 
@@ -1005,7 +1005,7 @@ You can see results for CI batches by clicking on a batch in the [Synthetic Moni
     * location: 30019
       ⎋ total duration: 32.6 ms - result url: https://app.datadoghq.com/synthetics/details/2cj-h3c-39x?resultId=122140688175981634
       x GET - https://www.datadoghq.com
-        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}] 
+        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}]
   error Command failed with exit code 1.
   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
@@ -1028,7 +1028,7 @@ You can see results for CI batches by clicking on a batch in the [Synthetic Moni
 [6]: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
 [7]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/
 [8]: https://docs.datadoghq.com/ja/continuous_testing/explorer/
-[9]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/examples/global-config-complete-example.json
+[9]: https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/src/examples/global-config-complete-example.json
 [10]: https://docs.datadoghq.com/ja/mobile_app_testing/
 [11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#device_ids
 [12]: https://app.datadoghq.com/api/v1/synthetics/locations?only_public=true
