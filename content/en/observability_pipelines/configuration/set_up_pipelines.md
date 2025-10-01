@@ -7,13 +7,13 @@ further_reading:
 - link: "observability_pipelines/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update an existing pipeline"
-- link: "observability_pipelines/scaling_and_performance/advanced_worker_configurations/"
+- link: "observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
   text: "Advanced Worker configurations for Observability Pipelines"
-- link: "observability_pipelines/scaling_and_performance/run_multiple_pipelines_on_a_host/"
+- link: "observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/"
   tag: "Documentation"
   text: "Run multiple pipelines on a host"
-- link: "observability_pipelines/troubleshooting/"
+- link: "observability_pipelines/monitoring_and_troubleshooting/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Observability Pipelines"
 ---
@@ -95,7 +95,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /monitors/types/metric/
 [15]: /observability_pipelines/guide/environment_variables/
-[16]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/#bootstrap-options
+[16]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -153,5 +153,5 @@ Make sure your Worker logs are [indexed][6] in Log Management for optimal functi
 [2]: /observability_pipelines/configuration/processors/
 [3]: /observability_pipelines/configuration/destinations/
 [4]: https://app.datadoghq.com/observability-pipelines
-[5]: /observability_pipelines/scaling_and_performance/advanced_worker_configurations/
+[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: /logs/log_configuration/indexes/
