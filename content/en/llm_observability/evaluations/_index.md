@@ -14,9 +14,9 @@ LLM Observability offers several ways to support evaluations. They can be config
 
 Datadog builds and supports [Managed Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
 
-### Submit Custom Evaluations
+### Submit External Evaluations
 
-You can also [Submit Custom Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also submit [External Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
 ### Evaluation Integrations
 
@@ -33,7 +33,7 @@ By proactively scanning for sensitive data, LLM Observability ensures that conve
 [LLM Observability Write permissions][6] are necessary to configure evaluations.
 
 [1]: /llm_observability/evaluations/managed_evaluations
-[2]: /llm_observability/evaluations/submit_evaluations
+[2]: /llm_observability/evaluations/external_evaluations
 [3]: /llm_observability/evaluations/ragas_evaluations
 [4]: /llm_observability/evaluations/submit_nemo_evaluations
 [5]: /security/sensitive_data_scanner/
