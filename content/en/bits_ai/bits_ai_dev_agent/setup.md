@@ -36,15 +36,17 @@ To allow the Dev Agent to use CI logs when iterating on pull requests, you must 
   - `Check run`  
   - `Check suite`  
   - `Issue comment`  
-  - `Status`  
+  - `Status` 
 
-### Step 3: Configure telemetry tagging
+## Additional configuration  
+
+### Configure telemetry tagging
 
 Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
 
 To configure telemetry tagging, see [Tag your telemetry with Git information][7]. You can also configure service-to-repository mapping manually in **Settings**.
 
-### Step 4: (Optional) Enable Auto-push
+### Enable Auto-push
 
 Enabling Auto-Push allows the Dev Agent to push commits directly to a branch. With Auto-Push, the Dev Agent can:  
 - Open merge-ready pull requests that fix errors, vulnerabilities, and other issues.  
@@ -53,7 +55,7 @@ Enabling Auto-Push allows the Dev Agent to push commits directly to a branch. Wi
 
 If Auto-Push is disabled, you must review and approve code in Datadog before it is pushed. 
 
-### Step 5: Configure custom instructions
+### Configure custom instructions
 
 The Dev Agent ingests custom instruction files from your repository, including:  
 
@@ -65,16 +67,6 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `agent.md`  
 
 You can also define global custom instructions in **Settings**, which apply to all Dev Agent sessions.  
-
-## Troubleshooting
-
-If you encounter issues during setup:
-
-- **GitHub integration not connecting**: Verify your GitHub account has the necessary permissions and that the integration is properly configured.
-- **Missing telemetry data**: Ensure your applications are properly instrumented and sending data to Datadog with the required tags.
-- **Dev Agent not creating pull requests**: Check that Auto-Push is enabled (if desired) and that the GitHub integration has the required repository permissions.
-
-For additional help, see the [GitHub integration troubleshooting guide][9] or contact [Datadog support][10].
 
 ## Further reading
 
