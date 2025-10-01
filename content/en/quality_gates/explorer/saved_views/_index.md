@@ -1,5 +1,6 @@
 ---
 title: Saved Views
+description: "Save and manage Quality Gates Explorer states with custom queries, facets, visualizations, and time ranges for effective troubleshooting."
 further_reading:
 - link: "/quality_gates/explorer/search_syntax/"
   tag: "Documentation"

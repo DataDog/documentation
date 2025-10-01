@@ -1,5 +1,6 @@
 ---
 title: Investigate Alerts
+description: "Configure Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
 ---
 
 ## Get started with alert investigations
