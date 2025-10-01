@@ -78,10 +78,10 @@ Configure a custom environment for the Dev Agent to install dependencies, format
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > **Repositories**.
-1. Create a repository configuration.
-   - Define any required environment variables or secrets.
-   - Add setup commands to the shell script (for example: `pip install -r requirements.txt`).
+1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11].
+1. Click **New Config** to create a repository configuration.
+   1. Define any required environment variables or secrets.
+   1. Add setup commands to the shell script (for example: `pip install -r requirements.txt`).
 1. Test the setup command to ensure it runs successfully.
 1. Save the configuration.
 
@@ -103,3 +103,4 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 [8]: https://app.datadoghq.com/metric/summary
 [9]: /integrations/github/#troubleshooting
 [10]: /help/
+[11]: https://app.datadoghq.com/code/settings?tab=repositories
