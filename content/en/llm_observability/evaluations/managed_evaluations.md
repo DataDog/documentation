@@ -373,7 +373,7 @@ triage_agent = Agent(
 This check evaluates whether the arguments provided to the selected tool are correct (i.e. match the type expected by the tool) and make sense given the tool's context. 
 <!-- agent has successfully selected the appropriate tools to address the user's request. -->
 
-{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_argument_correctness_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
