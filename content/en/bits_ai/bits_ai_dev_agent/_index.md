@@ -71,6 +71,8 @@ Bits AI Dev Agent works in GitHub to request changes, fix CI failures, and respo
 
 Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search by service, source, and status.
 
+Learn more about [PR automation and CI iteration][9].
+
 ### Bits AI SRE integration 
 
 Bits AI Dev Agent generates fixes from SRE-led investigations. Learn more about [Bits AI SRE][8].
@@ -105,6 +107,7 @@ Datadog applies automated security and quality checks on agent output, but safeg
 [3]: /profiler/
 [4]: /tests/
 [5]: https://app.datadoghq.com/integrations/github
-[6]: /bits_ai_dev_agent/setup
+[6]: /bits_ai_dev_agent/setup/
 [7]: https://app.datadoghq.com/code?tab=my-sessions
 [8]: /bits_ai/bits_ai_sre/
+[9]: /bits_ai/bits_ai_dev_agent/pr_automation_and_ci_repair/

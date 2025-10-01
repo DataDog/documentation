@@ -1483,11 +1483,6 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
-    - name: Pull Request Automation and CI Repair
-      url: bits_ai/bits_ai_dev_agent/pr_automation_and_ci_repair
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_pr_automation_and_ci_repair
-      weight: 201
     - name: Chat with Bits AI
       url: bits_ai/chat_with_bits_ai
       identifier: bits_ai_chat_with_bits_ai
