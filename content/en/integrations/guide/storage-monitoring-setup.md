@@ -345,7 +345,7 @@ For each bucket you want to monitor:
 {{% tab "Existing S3 Inventory" %}}
 
   If you have already configured S3 Inventory for the buckets you want to monitor, enable buckets for Storage Monitoring from the Datadog UI:
-      - Navigate to **Storage Monitoring** → [Enable Buckets][105]
+      - Navigate to **Storage Monitoring** → [Enable Buckets][603]
   - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
 
@@ -353,6 +353,7 @@ For each bucket you want to monitor:
 
 [601]: https://forms.gle/dhDbSxTvCUDXg1QR7
 [602]: mailto:storage-monitoring@datadoghq.com
+[603]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
 {{% /tab %}}
 
 {{< /tabs >}}
