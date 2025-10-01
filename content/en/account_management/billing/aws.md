@@ -58,7 +58,7 @@ In the Infrastructure Host list:
 
 - **Monitored by AWS Integration**
 
-  If a host displays only the AWS logo, or if its metrics are limited to the **aws.\*** namespace, it indicates that the host is monitored exclusively through the AWS integration.
+  If a host displays only the AWS logo, or if its metrics are limited to the `aws.*` namespace, it indicates that the host is monitored exclusively through the AWS integration.
 
   {{< img src="account_management/billing/infra-aws.png" alt="Infrastructure Host list showing multiple hosts with only the AWS logo, indicating monitoring through the AWS integration." >}}
 
