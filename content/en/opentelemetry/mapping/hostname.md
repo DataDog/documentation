@@ -91,7 +91,7 @@ If none of the above conventions are present, the `host.id` and `host.name` reso
 
 The [infra attributes processor][6] automates the extraction of Kubernetes tags based on labels or annotations and assigns these tags as resource attributes on traces, metrics, and logs. The infra attributes processor requires the following [attributes][7] (such as `container.id`) to be set to extract the correct attributes and hostname.
 
-The infra attributes processor can also be configured to override the hostname extracted from attributes by the agent hostname:
+The infra attributes processor can also be configured to override the hostname extracted from attributes by the Agent hostname:
 
 ```
 processors:
@@ -99,7 +99,7 @@ processors:
    allow_hostname_override: true
 ```
 
-Please note this setting is only available for the DDOT Collector. 
+**Note**: This setting is only available for the DDOT Collector. 
 
 ## Fallback hostname logic
 
@@ -147,6 +147,6 @@ The following host names are deemed invalid and discarded:
 [2]: /opentelemetry/interoperability/otlp_ingest_in_the_agent
 [3]: /opentelemetry/setup/collector_exporter/
 [4]: /opentelemetry/config/hostname_tagging/
-[5]: opentelemetry/migrate/ddot_collector/
+[5]: /opentelemetry/migrate/ddot_collector/
 [6]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor
 [7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#expected-attributes
