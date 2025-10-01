@@ -88,7 +88,7 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
 
         <div class="alert alert-info">Note: The destination buckets must allow the source buckets to write inventory data. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy">Creating a destination bucket policy.</a> in the AWS documentation for details.</div>
 
-        {{< img src="integrations/guide/storage_monitoring/step2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+        {{< img src="integrations/guide/storage_monitoring/enable-inventory.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
     3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate.
 
@@ -194,7 +194,7 @@ This template creates two IAM policies:
   - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
 
-{{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/enable-it-for-me.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [101]: https://datadog-cloudformation-template.s3.us-east-1.amazonaws.com/aws/cloud-inventory/source-bucket-inventory-cfn.yaml
 [102]: https://console.aws.amazon.com/cloudformation/
