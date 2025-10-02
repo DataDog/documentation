@@ -32,7 +32,7 @@ If you are using Datadog-hosted scanning, enable the toggle for your desired sca
 If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.  
 
 ### Set up the GitHub source code integration
-See instructions to enable the Datadog GitHub source code integration [here][2].
+For setup instructions, read the [Datadog GitHub source code integration][2] documentation.
 
 #### Configure a GitHub App
 To use Code Security on GitHub, you can do one of the following:
