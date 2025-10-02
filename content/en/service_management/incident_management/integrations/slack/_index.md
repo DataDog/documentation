@@ -104,7 +104,7 @@ Access all configuration options for Slack in Incident Management through the [*
 
 | Feature                                                   | Description & Notes                                                                                                                             |
 |-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Push incident timeline messages to Slack**              | Automatically send incident timeline updates from Datadog to the Slack channel.<br><br>Keeps channel participants in sync with Datadog updates. |
+| **Push incident timeline messages to Slack**              | Automatically send incident timeline updates from Datadog to the Slack channel.<br><br>Keeps channel participants in-sync with Datadog updates. |
 | **Add important links to channel bookmarks**              | Post incident-related links in the Slack channel bookmarks.<br><br>Provides quick access to resources.                                          |
 | **Add team members automatically**                        | When a Datadog team is added to the incident, its members are added to the Slack channel.                                                       |
 | **Send incident updates to the Slack channel**            | Update the channel topic with incident state, severity, and incident commander.                                                                 |
