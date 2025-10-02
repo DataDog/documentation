@@ -9387,6 +9387,19 @@ menu:
           - DeleteRole
         unstable: []
         order: 5
+    - name: List role templates
+      url: '#list-role-templates'
+      identifier: roles-list-role-templates
+      parent: roles
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRoleTemplates
+        unstable:
+          - v2
+        order: 16
     - name: Create role
       url: '#create-role'
       identifier: roles-create-role
