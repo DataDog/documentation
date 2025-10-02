@@ -1,5 +1,5 @@
 ---
-title:  Integrate Datadog Status Pages with Datadog Incident Management
+title: Integrate Datadog Status Pages with Datadog Incident Management
 description: Learn how to integrate Datadog Status Pages with Incident Management to communicate real-time service status during incidents.
 further_reading:
 - link: "/service_management/status_pages/"
@@ -9,41 +9,44 @@ further_reading:
 
 ## Overview
 
-Status Pages conveys real-time status of an organization's services on a webpage. Enable the integration to automatically link and update your status page notice within Datadog's Incident Management platform. As an Incident Commander or Responder, you can:
-- Send customer facing messages with accurate and up to date information
-- Update Status Page while investigating an incident without leaving the Datadog platform
-- Resolve both Datadog incidents and the linked Status Page notice at the same time
+Status Pages is a way to keep internal and external stakeholders informed during service disruptions by publishing real-time updates about system health.
+
+This integration enables responders to publish and update status page notices directly from Incident Management.
+-Eliminate context switching by managing public communications without leaving your incident workflow
+-Publish notices quickly and consistently during high-severity incidents
+- Keep incident timelines and public-facing updates in sync to reduce confusion and messaging mistakes
 
 ## Prerequisites
 
-At least one Status Page is required to enable the Status Pages integration for Incident Management
+At least one status page is required to enable the Status Pages integration for Incident Management.
+
+You must have a role with Incidents Write and Status Pages Notice Write permissions to add a Status Pages notice from an incident. For more information, see [Datadog Role Permissions][3].
 
 ## Setup
 
 1. In the [Integration Settings page][1], find the Status Pages integration.
 1. Toggle **Enable Status Pages notice creation**.
 
-## Add a Status Pages notice
+## Publish a Status Pages notice
 
-You must have a role with Incidents Write and Status Pages Notice Write permissions to add a Status Pages notice.
+You must have a role with Incidents Write and Status Pages Notice Write permissions to add a Status Pages notice from an incident.
 
-{{< img src="/service_management/incidents/Integrations/status_pages/status_pages_config_modal.png" alt="Configuration modal for integrating a Datadog incident with a Status Page notice" style="width:70%;" >}}
+{{< img src="/service_management/incidents/Integrations/status_pages/status_pages_config_modal.png" alt="Configuration modal for integrating a Datadog incident with a status page notice" style="width:70%;" >}}
 
-1. In the [Incidents page][2], open an existing incident.
+1. In the [Incidents List page][2], open an existing incident.
 1. At the top of the incident page, click **Update Status Page**.
-1. Enter all the required fields, which include Select a Status Page, Notice title, and Notice status. You can also specify which Status Page components are affected.
+1. Enter all the required fields, including _Select a Status Page_, _Notice title_, and _Notice status_. You can also specify which status page components are affected.
 
+## Update status page configuration
 
-## Update status
+After a notice is added to an incident, you can continue updating the status page until the incident is resolved.
 
-After a Status Page is added to an incident, you can continue updating the Status Page until the incident is resolved.
+{{< img src="/service_management/incidents/Integrations/status_pages/incident_status_pages.png" alt="Screenshot showing the integration of a Datadog incident with a Status Page notice, including fields for selecting a status page, notice title, and status" style="width:100%;" >}}
 
-{{< img src="/service_management/incidents/Integrations/status_pages/incident_status_pages.png" alt="Screenshot showing the integration of a Datadog incident with a Status Page notice, including fields for selecting a Status Page, notice title, and status" style="width:100%;" >}}
-
-1. In the [Incidents page][2], open the incident you want to update.
-1. Find the Status Page you added and hover on the button to open the integration modal. You can unlink the Status Page integration or update the current Status Page notice.
-1. Click **Update Status Page** to open the linked Status Page details and make your modifications.
-1. Click **Update** to update the Status Page notice.
+1. In the [Incidents List page][2], open the incident you want to update.
+1. At the top of the incident page, find the status page you added, and hover over the button to open the integration modal. You can update the current status page notice or unlink the notice.
+1. Click **Update** to update the status page notice.
+1. Click **Update Status Page** to open the linked status page details and make your modifications.
 
 ## Further Reading
 
