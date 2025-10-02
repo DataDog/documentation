@@ -28,7 +28,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 - Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** page][4].  
 
 ## Set up GitHub pull request comments
-If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (e.g. Static Code Analysis).  
+If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis).  
 If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.  
 
 ### Set up the GitHub source code integration
