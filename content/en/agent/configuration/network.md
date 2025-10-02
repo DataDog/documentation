@@ -42,7 +42,7 @@ Add the following domains to your inclusion list to allow for Agent installation
 
 ## Destinations
 <div class="alert alert-warning">
-Starting with version 7.67.0, the Agent converts Datadog sites to fully qualified domain names (ie. it adds a dot at the end of the domain) in order to reduce the number of DNS queries.
+Starting with version 7.67.0, the Agent converts Datadog sites to fully qualified domain names (by adding a dot at the end of the domain) to reduce the number of DNS queries.
 For example it sends APM payloads to <code>trace.agent.datadoghq.com.</code>.<br>
 This behavior can be disabled in version 7.72.0 or more recent by setting <code>convert_dd_site_fqdn.enabled</code> to <code>false</code> in the configuration, or with the environment variable <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
 </div>
