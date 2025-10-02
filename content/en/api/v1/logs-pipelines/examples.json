@@ -116,8 +116,8 @@
           "processors": [
             {
               "grok": {
-                "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
-                "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+                "match_rules": "rule_name_1 foo\nrule_name_2 bar",
+                "support_rules": "rule_name_1 foo\nrule_name_2 bar"
               },
               "is_enabled": false,
               "name": "string",
@@ -169,8 +169,8 @@
           "processors": [
             {
               "grok": {
-                "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
-                "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+                "match_rules": "rule_name_1 foo\nrule_name_2 bar",
+                "support_rules": "rule_name_1 foo\nrule_name_2 bar"
               },
               "is_enabled": false,
               "name": "string",
@@ -217,7 +217,7 @@
         "processors": [
           {
             "grok": {
-              "match_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+              "match_rules": "rule_name_1 foo\nrule_name_2 bar"
             }
           }
         ]
@@ -232,8 +232,8 @@
         "processors": [
           {
             "grok": {
-              "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
-              "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+              "match_rules": "rule_name_1 foo\nrule_name_2 bar",
+              "support_rules": "rule_name_1 foo\nrule_name_2 bar"
             },
             "is_enabled": false,
             "name": "string",
@@ -297,8 +297,8 @@
           "processors": [
             {
               "grok": {
-                "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
-                "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+                "match_rules": "rule_name_1 foo\nrule_name_2 bar",
+                "support_rules": "rule_name_1 foo\nrule_name_2 bar"
               },
               "is_enabled": false,
               "name": "string",
@@ -360,8 +360,8 @@
           "processors": [
             {
               "grok": {
-                "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
-                "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+                "match_rules": "rule_name_1 foo\nrule_name_2 bar",
+                "support_rules": "rule_name_1 foo\nrule_name_2 bar"
               },
               "is_enabled": false,
               "name": "string",
@@ -408,7 +408,7 @@
         "processors": [
           {
             "grok": {
-              "match_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+              "match_rules": "rule_name_1 foo\nrule_name_2 bar"
             }
           }
         ]
@@ -423,8 +423,8 @@
         "processors": [
           {
             "grok": {
-              "match_rules": "rule_name_1 foo\nrule_name_2 bar\n",
-              "support_rules": "rule_name_1 foo\nrule_name_2 bar\n"
+              "match_rules": "rule_name_1 foo\nrule_name_2 bar",
+              "support_rules": "rule_name_1 foo\nrule_name_2 bar"
             },
             "is_enabled": false,
             "name": "string",
