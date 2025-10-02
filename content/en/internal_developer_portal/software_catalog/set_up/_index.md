@@ -57,9 +57,9 @@ further_reading:
 Software Catalog entities are defined through [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 
 
 To populate Software Catalog, you can:
-- Set up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs, which will automatically feed entity data into Software Catalog.
+- Set up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs, which automatically feed entity data into Software Catalog.
 - Create entity definitions manually or through automation. 
--  Import existing entity definitions from third parties. 
+- Import existing entity definitions from third parties. 
 
 By default, these services are not associated with Datadog telemetry, but you can link telemetry data from Datadog or external sources manually using entity definition YAML files.
 
@@ -70,6 +70,28 @@ By default, these services are not associated with Datadog telemetry, but you ca
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/discover_entities#import-entities-from-infrastructure-and-logs" >}}Import from Infrastructure and Logs{{< /nextlink >}}
 {{< /whatsnext >}}
 
+By default, Software Catalog is automatically populated with entries discovered from APM, USM, and RUM. You can also manually import entries from other Datadog telemetries, like logs. 
+
+### APM
+
+When you instrument your application code with Datadog APM SDKs or OpenTelemetry, your applications emit traces and generate unsampled trace metrics. These traces and metrics power the entity discovery and dependency mapping capabilities in IDP. Your instrumentation choices (for example, your Datadog Agent version, your SDK version, and whether you use custom instrumentation or service overrides) affect the quality and accuracy of your dependency maps. See [Discover from APM, USM, and RUM][5] for details.
+
+### USM
+
+USM detects Golden Signal metrics (for example, requests, errors, and durations) and maps out application dependencies based on eBPF. It does not require instrumentation of your application code.
+
+### RUM 
+
+RUM provides frontend user experience data, including page performance, errors, session events, and views. If you have RUM applications, they appear in Datadog under the 'Frontend Apps' category in the component selector. 
+
+### Other Datadog telemetries
+
+You can also import entities that are reflected in Datadog telemetries like logs, host metrics, container metrics, network metrics, and process metrics. 
+
+When you use [**Import Entities**][10] and choose a data source like logs, Datadog queries logs and searches for valid `DD_SERVICE` tags. Entities are marked with the `kind:service` attribute.
+
+**Note**: You should only do this if the `DD_SERVICE` tags are well maintained and do not contain irrelevant or incorrect tag values.
+
 ## Create entities
 
 {{< whatsnext desc=" " >}}
@@ -77,12 +99,30 @@ By default, these services are not associated with Datadog telemetry, but you ca
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/create_entities#through-automation" >}}Create through code automation{{< /nextlink >}}
 {{< /whatsnext >}}
 
+[Entity definitions][1], defined in entity YAML files, are the canonical source of truth in Software Catalog. You can: 
+- Create entity definitions manually through Datadog.
+- Store definitions in a version control system like Git, and set up [Source Code Integration][6] to sync definitions with IDP. Changes made to your files are reflected in Datadog within minutes.
+
+**Note**: Automatic telemetry overlay requires that the name field value matches the corresponding Datadog telemetries keys exactly. See examples for [`kind:datastore`][7], [`kind:queue`][8], and other [entity types][9]. 
+
 ## Import entities
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage" >}}Import from Backstage{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow" >}}Import from ServiceNow{{< /nextlink >}}
 {{< /whatsnext >}}
+
+If you maintain software inventories in Backstage or ServiceNow CMDB, you can sync these inventories into Datadog's Software Catalog.
+
+### Backstage 
+
+You can bring your Backstage entities into Datadog's IDP in one of two ways:
+1. Install [Datadog's Backstage plugin][11]. 
+1. Import entity descriptor files from Backstage to IDP using the Datadog API, Terraform, or Datadog's GitHub integration. 
+
+### ServiceNow
+
+Sync your ServiceNow CMDB inventories with Datadog's Software Catalog by setting up a regular query against your ServiceNow CI tables.
 
 ## Verify configuration completeness 
 
@@ -125,6 +165,13 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [2]: https://app.datadoghq.com/software
 [3]: /account_management/rbac
 [4]: /account_management/rbac/permissions
+[5]: /internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
+[6]: /integrations/guide/source-code-integration/
+[7]: /internal_developer_portal/software_catalog/entity_model/entity_types?tab=datastore#datastore-peer-tags
+[8]: /internal_developer_portal/software_catalog/entity_model/entity_types?tab=queue#datastore-peer-tags
+[9]: /internal_developer_portal/software_catalog/entity_model?tab=v30
+[10]: https://app.datadoghq.com/software/settings/get-started
+[11]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend
 
 
 
