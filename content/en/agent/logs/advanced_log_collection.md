@@ -37,7 +37,7 @@ After you set up [log collection][1], you can customize your collection configur
 - [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
 - [Commonly used log processing rules](#commonly-used-log-processing-rules)
 - [Tail directories using wildcards](#tail-directories-using-wildcards)
-  - [Tail most recently modified files first](#tail-most-recently-modified-files-first)
+  - [Prioritize tailed files by modification time](#prioritize-tailed-files-by-modification-time)
 - [Log file encodings](#log-file-encodings)
 - [Global processing rules](#global-processing-rules)
 - [Further Reading](#further-reading)
@@ -100,9 +100,9 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -143,9 +143,9 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -224,9 +224,9 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -263,9 +263,9 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -393,9 +393,9 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -433,9 +433,9 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -544,9 +544,9 @@ spec:
           image: postgres:latest
 ```
 
-**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Notes**:
+- Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -611,16 +611,37 @@ logs:
 
 The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
 
-**Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+**Notes**:
+- The Agent requires read and execute permissions on a directory to list all the available files in it.
+- The path and exclude_paths values are case sensitive.
 
-**Note**: The path and exclude_paths values are case sensitive.
+### Prioritize tailed files by modification time
 
-### Tail most recently modified files first
+The Agent sets a maximum number of files it can tail simultaneously, through the `logs_config.open_files_limit` parameter.
+By default, if the number of files matching your configured log sources (such as wildcards) does **not** exceed this limit, the Agent tails them all without prioritization. When **more** files match than the `open_files_limit` allows, the Agent prioritizes them by sorting filenames in reverse lexicographic order. This works well for log files named with timestamps or sequential numbering, since that the most recent files appear last in name order.
 
-The Agent limits the number of files it can tail simultaneously, as defined by the `logs_config.open_files_limit` parameter.
-By default, when more files match the wildcard pattern than this limit, the Agent prioritizes them by sorting filenames in reverse lexicographic order. This works well for log files named with timestamps or sequential numbering, ensuring that the most recent logs are tailed first.
+However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent tails the most recently modified files first.
 
-However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set logs_config.file_wildcard_selection_mode to by_modification_time. With this setting, the Agent continuously sorts files by their modification time. It always tails the most recently modified files first and stops tailing the least recently modified ones.
+**Example**:
+- `open_files_limit` = 500
+- Your wildcard pattern matches 700 files.
+- With `by_name`: the Agent tails the 500 files whose names are last in reverse lexicographic order (for example, app.log.700 through app.log.201).
+- With `by_modification_time`: the Agent tails the 500 files most recently written to, regardless of their names.
+
+```yaml
+logs_enabled: true
+logs_config:
+ [...]
+  open_files_limit: 500
+
+  ## @param file_wildcard_selection_mode - string - optional - default: by_name
+  ## The strategy used to prioritize wildcard matches if they exceed open_files_limit.
+  ## Choices:
+  ##   - by_name: files are sorted in reverse lexicographic order (default).
+  ##   - by_modification_time: files are sorted by modification time, with the most recent first.
+  ## WARNING: by_modification_time is less performant and increases disk I/O.
+  file_wildcard_selection_mode: by_modification_time
+```
 
 To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
 
@@ -719,7 +740,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 **1. When should I use manual multi-line rules vs. automatic multi-line detection?**
 
-If you know the format of your logs, you should use manual multi-line rules for precise control. 
+If you know the format of your logs, you should use manual multi-line rules for precise control.
 If you are sending lots of multi-line logs, and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
 
 **2. What happens when a multi-line pattern doesn't match any logs?**
