@@ -24,7 +24,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 **Note**: PR comments are not PR checks. To set up checks, see [Quality Gates][10].
 
 ## Prerequisites
-- You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([preview][9]).  
+- You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([in Preview][9]).  
 - Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** page][4].  
 
 ## Set up GitHub pull request comments
