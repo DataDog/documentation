@@ -104,6 +104,6 @@ To configure PR comments for a single repository:
 [7]: https://app.datadoghq.com/security/configuration/code-security/settings
 [8]: /integrations/gitlab-source-code/
 [9]: https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/
-[10]: https://docs.datadoghq.com/quality_gates/?tab=staticanalysis#setup
+[10]: /quality_gates/?tab=staticanalysis#setup
 
 
