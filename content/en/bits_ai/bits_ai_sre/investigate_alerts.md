@@ -56,7 +56,9 @@ Bits is able to run investigations on the following monitor types:
 #### Best practices: Add troubleshooting context to your monitors
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
 
-1. **Include telemetry links:** Add at least one helpful telemetry link in the monitor message. This link could be a Datadog dashboard, logs query, trace query, a Datadog notebook with helpful widgets, or a [Confluence page](#configure-knowledge-base-integrations) containing these links. Think about the first place you'd normally look in Datadog when this monitor triggers. Bits uses these links during the “Executing Runbook” step of the initial investigation to zero in on potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would and giving you the flexibility to tailor investigations to your team’s workflows.
+1. **Include telemetry links:** Add at least one helpful telemetry link in the monitor message. This link could be a Datadog dashboard, logs query, trace query, a Datadog notebook with helpful widgets, or a [Confluence runbook page](#configure-knowledge-base-integrations) containing these links. Think about the first place you'd normally look in Datadog when this monitor triggers. 
+
+Bits uses these links during the “Executing Runbook” step of the initial investigation to identify potential problem areas. Because these links are user-defined, you have control over what Bits reviews; ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team’s workflows.
 
 1. **Service scoping:** For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
 
