@@ -617,12 +617,13 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 
 ### Prioritize tailed files by modification time
 
-The Agent sets a maximum number of files it can tail simultaneously, through the `logs_config.open_files_limit` parameter.
-By default, if the number of files matching your configured log sources (such as wildcards) does **not** exceed this limit, the Agent tails them all without prioritization. When **more** files match than the `open_files_limit` allows, the Agent prioritizes them by sorting filenames in reverse lexicographic order. This works well for log files named with timestamps or sequential numbering, since that the most recent files appear last in name order.
+This feature requires Agent version 7.40.0 or above.
+
+The Agent sets a maximum number of files it can tail simultaneously, through the `logs_config.open_files_limit` parameter. By default, if the number of files matching your configured log sources (such as wildcards) does **not** exceed this limit, the Agent tails them all without prioritization. When **more** files match than the `open_files_limit` allows, the Agent prioritizes them by sorting filenames in reverse lexicographic order (most recent files appear last in name order). This works well for log files named with timestamps or sequential numbering.
 
 However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent tails the most recently modified files first.
 
-**Example**:
+*Example*:
 - `open_files_limit` = 500
 - Your wildcard pattern matches 700 files.
 - With `by_name`: the Agent tails the 500 files whose names are last in reverse lexicographic order (for example, app.log.700 through app.log.201).
@@ -644,8 +645,6 @@ logs_config:
 ```
 
 To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
-
-This feature requires Agent version 7.40.0 or above.
 
 ## Log file encodings
 
