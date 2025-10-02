@@ -116,7 +116,7 @@ Access all configuration options for Slack in Incident Management through the [*
 
 You can configure Incident Management to automatically post updates about incidents to a selected Slack channel. To enable this:
 
-1. In Datadog, navigate to the [**Incidents** > **Settings** > **Integrations**][3] page.
+1. In Datadog, navigate to [**Incidents** > **Settings** > **Integrations**][3].
 1. In the Slack section, enable **Send all incident updates to a global channel**.
 1. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
 
