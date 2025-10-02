@@ -47,7 +47,7 @@ To ensure proper auto-correlation between APM and Software Catalog, follow these
 
 - Ensure your APM SDK and Datadog Agent versions support [inferred entities][15].
 - Avoid arbitrary [service overrides][16] and use [inferred entities][15] instead. 
-  - Arbitrary service overrides can make correlation unreliable and clutter your catalog. They also make Software Catalog hard to use for those unfamiliar with the overrides.
+  - Arbitrary service overrides can make correlation unreliable and clutter your catalog. They also make Software Catalog hard to use for those unfamiliar with the override names.
 - [Rename inferred entities][14], like datastores and queues, to match your team's naming conventions.
 - Use [Unified Service Tagging][17] to ensure service names, environments, and versions match across APM, infrastructure, and catalog definitions.
   - In Datadog APM, a service is an identifier used to group traces and aggregate metrics, not necessarily a logical service. Define what constitutes a "service" for your organization (for example, a Kubernetes namespace, deployment, or individual pod) and apply this definition consistently across all telemetry sources. 

@@ -82,13 +82,13 @@ USM detects Golden Signal metrics (for example, requests, errors, and durations)
 
 ### RUM 
 
-RUM provides frontend user experience data, including page performance, errors, session events, and views. If you have RUM applications, they appear in Datadog under the 'Frontend Apps' category in the component selector. 
+RUM provides frontend user experience data, including page performance, errors, session events, and views. If you have RUM applications, they appear in Software Catalog as **Frontend Apps** in the component selector. 
 
 ### Other Datadog telemetries
 
 You can also import entities that are reflected in Datadog telemetries like logs, host metrics, container metrics, network metrics, and process metrics. 
 
-When you use [**Import Entities**][10] and choose a data source like logs, Datadog queries logs and searches for valid `DD_SERVICE` tags. Entities are marked with the `kind:service` attribute.
+When you use [**Import Entities**][10] and choose a data source, Datadog queries that source and searches for valid `DD_SERVICE` tags. Entities are marked with the `kind:service` attribute.
 
 **Note**: You should only do this if the `DD_SERVICE` tags are well maintained and do not contain irrelevant or incorrect tag values.
 
