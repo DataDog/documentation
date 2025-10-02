@@ -1,37 +1,37 @@
 ---
 title: Pull Request Comments
-description: Learn how to use Code Security in GitHub pull requests.
+description: Learn how to set up pull request comments for repositories scanned by Code Security.
 aliases:
 - /static_analysis/github_pull_requests
 - /code_analysis/github_pull_requests/
 ---
 
 ## Overview
-Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This allows developers to see issues in context, within the pull request itself, and fix them before merging. PR comments posted on feature branches are diff-aware, meaning they flag issues detected only on lines modified by commits within the PR.
+Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This allows developers to see issues in context, within the pull request itself, and fix them before merging. PR comments posted on feature branches are diff-aware, meaning they flag issues detected only on lines modified by commits within the PR. There are two types of pull request comments:
+- Inline comment: flags an individual Code Security finding on specific line(s) of code and suggests a remediation (if available)  
+    {{< img src=\"static/images/code_security/github_inline_pr_comment_light.png\" alt=\"Your image description\" style=\"width:75%;\" >}}
+- Summary comment: combines all findings from Datadog into one comment  
+    {{< img src=\"static/images/code_security/github_summary_comment_injections_light.png\" alt=\"Your image description\" style=\"width:75%;\" >}}
 
 You can configure PR comments at the organization or repository level in [Repository Settings][7], with the following controls:
 - Enabling/disabling PR comments by scan type (SAST, static SCA, Secrets, IaC)
 - Setting severity thresholds for each scan type
 - Excluding findings from test files or dev/test dependencies
 
-<!-- Code Security integrates with GitHub pull requests in two ways:
-- [Pull request comments to flag violations](#enable-code-security-pr-comments-for-your-repositories)
-{{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Security comment on a pull request" style="width:90%;" >}}
-- [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Code Analysis (SAST).
-
-To enable these features, ensure you have the required GitHub permissions (Read & Write) for your repository. -->
-
+**Note**: PR comments are not PR checks. To set up checks, see [Quality Gates][10].
 
 ## Prerequisites
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([preview][9]).  
 - Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** page][4].  
 
-## Set up Code Security for GitHub pull requests
+## Set up GitHub pull request comments
 If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (e.g. Static Code Analysis).  
 If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.  
 
-### Configure a GitHub App
+### Set up the GitHub source code integration
+See instructions to enable the Datadog GitHub source code integration [here][2].
 
+#### Configure a GitHub App
 To use Code Security on GitHub, you can do one of the following:
 
 - Create a GitHub App in Datadog.
@@ -61,6 +61,12 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 1. Under the **Subscribe to events** heading, check the **Pull request** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
+
+## Set up GitLab merge request comments
+See instructions to enable the Datadog GitLab source code integration [here][8].
+
+## Set up Azure DevOps pull request comments
+Azure DevOps for Code Security is currently in preview. Request access [here][9].
 
 ## Configure PR comment settings for your repositories
 To configure PR comments for all repositories:
@@ -95,5 +101,6 @@ To configure PR comments for a single repository:
 [7]: https://app.datadoghq.com/security/configuration/code-security/settings
 [8]: /integrations/gitlab-source-code/
 [9]: https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/
+[10]: https://docs.datadoghq.com/quality_gates/?tab=staticanalysis#setup
 
 
