@@ -75,7 +75,7 @@ The **channel name template** you define determines how Datadog names the incide
 
 After enabling automatic channel creation, you can configure Incident Management to sync messages between an incident Slack channel and the incident's timeline in Datadog.
 
-To enable syncing, enable "Push Slack channel messages to the incident timeline" in Incident Management settings, and then select one of the following options:
+To enable syncing, enable **Push Slack channel messages to the incident timeline** in Incident Management settings, and then select one of the following options:
 
 * **Mirror all messages in real-time**: Datadog syncs all messages posted by Slack users to the incident channel.
 * **Push message when 📌 is added as a reaction**: Datadog syncs messages only when Slack users react to them with pushpins (📌).
