@@ -17580,6 +17580,11 @@ components:
           description: Allows loading insecure content for an HTTP request in an API
             test.
           type: boolean
+        blockedRequestPatterns:
+          description: Array of URL patterns to block.
+          items:
+            type: string
+          type: array
         checkCertificateRevocation:
           description: For SSL tests, whether or not the test should fail on revoked
             certificate in stapled OCSP.
