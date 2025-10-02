@@ -11,10 +11,10 @@ aliases:
 Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This help you see and fix issues in context before merging code. The comments are diff-aware, meaning they only flag new issues introduced on lines modified lines in the pull request.
 
 There are two types of pull request comments:
-- Inline comment: flags an individual Code Security finding on specific line(s) of code and suggests a remediation (if available)  
-    {{< img src=\"static/images/code_security/github_inline_pr_comment_light.png\" alt=\"Your image description\" style=\"width:75%;\" >}}
-- Summary comment: combines all findings from Datadog into one comment  
-    {{< img src=\"static/images/code_security/github_summary_comment_injections_light.png\" alt=\"Your image description\" style=\"width:75%;\" >}}
+- **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available) . 
+    {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". The comment suggests replacing the code os.system(command) with os.system(shlex.quote(command)) to sanitize the process call." style="width:100%;" >}}
+- **Summary comment**: Combines all findings from Datadog into a single comment. 
+    {{< img src="/code_security/github_summary_comment_injections_light.png" alt="A Datadog bot has posted a summary comment on a GitHub pull request. The comment has a \"Warnings\" section that lists four critical code vulnerabilities, such as SQL and command injections, with links to the specific files and lines of code." style="width:100%;" >}}
 
 You can configure PR comments at the organization or repository level in [Repository Settings][7], with the following controls:
 - Enabling/disabling PR comments by scan type (SAST, static SCA, Secrets, IaC)
