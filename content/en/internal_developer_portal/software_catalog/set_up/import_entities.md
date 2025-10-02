@@ -91,4 +91,4 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 [2]: /integrations/servicenow/#service-ingestion
 [3]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend
 [4]: https://backstage.io/docs/features/software-catalog/descriptor-format
-[5]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30
+[5]: /internal_developer_portal/software_catalog/entity_model/
