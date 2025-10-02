@@ -23,7 +23,9 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 - **Incorrect log search**: ensure that you used the correct [search syntax][7] and/or attributes/tags to search logs
 - **Diagnostic setting**: ensure that a [diagnostic setting][8] has been added to the resource(s) and/or the activity/Entra Id logs you want to send to Datadog
 
-**Note**: when using the automated log forwarder and the native integrations methods to send logs, Entra Id diagnostic setting is not added automatically and should be set manually. 
+**Notes**: 
+- When using the automated log forwarder and the native integrations methods to send logs, Entra Id diagnostic setting is not added automatically and should be set manually.
+- If a diagnostic setting has not been added automatically to your resources/activity logs, check if the maxinimum number of diagnostic settings has been reached and/or if a lock exists on the resource, preventing modifications. 
 
 ## Automated Log Forwarder 
 
