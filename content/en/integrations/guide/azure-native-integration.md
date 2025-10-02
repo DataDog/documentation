@@ -342,7 +342,8 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 
 ## Next steps
 
-<CONTENT>
+- Check out the [Azure Overview dashboard][5] to start getting insights into your Azure environment
+- Check out [Azure monitor templates][6] to start getting alerts for the data that's important to your organization
 
 ## Further Reading
 
@@ -352,3 +353,5 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 [3]: https://docs.microsoft.com/cli/azure/datadog?view=azure-cli-latest
 [4]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
+[5]: https://app.datadoghq.com/dash/integration/71/azure-overview
+[6]: https://app.datadoghq.com/monitors/templates?q=azure
