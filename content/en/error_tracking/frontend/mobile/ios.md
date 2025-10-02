@@ -354,7 +354,7 @@ For more information, see [Web View Tracking][3].
 
 Crash reporting captures fatal crashes when your app terminates unexpectedly, in addition to the errors that Error Tracking displays in a unified interface.
 
-To enable Crash Reporting, add the package according to your dependency manager and update your initialize snippet.
+To enable crash reporting, add the package according to your dependency manager and update your initialize snippet.
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
