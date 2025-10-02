@@ -87,7 +87,7 @@ Para correlacionar manualmente tus trazas con tus logs, parchea el módulo de re
 // ########## logger.js
 
 // convertir a dd con:
-// https://github.com/DataDog/dd-trace-js/blob/master/packages/dd-trace/src/id.js
+// https://github.com/DataDog/dd-trace-js/blob/main/packages/dd-trace/src/id.js
 const opentelemetry = require('@opentelemetry/api');
 const winston = require('winston')
 

@@ -87,7 +87,7 @@ Pour mettre manuellement en corrélation vos traces et vos logs, ajoutez à votr
 // ########## logger.js
 
 // convertir au format dd avec :
-// https://github.com/DataDog/dd-trace-js/blob/master/packages/dd-trace/src/id.js
+// https://github.com/DataDog/dd-trace-js/blob/main/packages/dd-trace/src/id.js
 const opentelemetry = require('@opentelemetry/api');
 const winston = require('winston')
 const UINT_MAX = 4294967296

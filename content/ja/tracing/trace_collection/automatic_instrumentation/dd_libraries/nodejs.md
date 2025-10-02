@@ -266,7 +266,7 @@ cp -R ./node_modules path/to/bundle
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /ja/tracing/trace_collection/library_config/nodejs/
-[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[5]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [6]: /ja/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage
 [11]: /ja/tracing/trace_collection/library_injection_local/
 [13]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

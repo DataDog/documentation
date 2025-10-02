@@ -280,7 +280,7 @@ Actualiza tu archivo JSON de definición de tarea de ECS añadiendo esto en la s
 ]
 ```
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: /es/security/code_security/iast/setup/nodejs/
 [3]: /es/security/code_security/iast/setup/
 [4]: /es/agent/versions/upgrade_between_agent_minor_versions/
