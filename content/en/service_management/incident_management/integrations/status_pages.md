@@ -1,9 +1,9 @@
 ---
 title: Datadog Status Pages
 further_reading:
-- link: "service_management/incident_management/guides/status_pages
+- link: "/service_management/status_pages/
   tag: "Documentation"
-  text: "Learn more about Status Pages"
+  text: "Learn more about Datadog Status Pages"
 ---
 
 ## Overview
