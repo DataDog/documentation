@@ -12,8 +12,8 @@ further_reading:
 Status Pages is a way to keep internal and external stakeholders informed during service disruptions by publishing real-time updates about system health.
 
 This integration enables responders to publish and update status page notices directly from Incident Management.
--Eliminate context switching by managing public communications without leaving your incident workflow
--Publish notices quickly and consistently during high-severity incidents
+- Eliminate context switching by managing public communications without leaving your incident workflow
+- Publish notices quickly and consistently during high-severity incidents
 - Keep incident timelines and public-facing updates in sync to reduce confusion and messaging mistakes
 
 ## Prerequisites
@@ -54,3 +54,4 @@ After a notice is added to an incident, you can continue updating the status pag
 
 [1]: https://app.datadoghq.com/incidents/settings?section=integrations
 [2]: https://app.datadoghq.com/incidents
+[3]: /account_management/rbac/permissions
