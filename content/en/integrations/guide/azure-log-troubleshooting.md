@@ -39,7 +39,7 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 
 2. Check the `containerAppConsole` logs of the forwarder jobs
 
-   These logs capture the standard output (stdout) and standard error (stderr) streams from the forwarder's containers. They help diagnose issues such as Application Errors and Exceptions.
+   These logs capture the standard output and standard error streams from the forwarder's containers. They help diagnose issues such as Application Errors and Exceptions.
    
    To inspect these logs, enable them and send them to a destination: select the forwarder container apps environment from the same region as your resource and storage account. For instance, if     your resource and storage account are in Japan West, choose the forwarder container apps environment from that region. 
    Next, go to logging options and select to send logs to Azure Monitor or a Log Analytics workspace.
