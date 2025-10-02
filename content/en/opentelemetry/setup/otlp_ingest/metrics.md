@@ -26,10 +26,6 @@ further_reading:
 site_support_id: otlp_agentless
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
-{{< /callout >}}
-
 ## Overview
 
 Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows you to send metrics directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
@@ -74,15 +70,9 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="{{< region-param key="otlp_metrics_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${PARTNER_ID}"
+export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY}"
 export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="delta"
 ```
-
-<div class="alert alert-info">
-  The <code>dd-otlp-source</code> header is <strong>only required for Datadog platform partners</strong> who receive a specific identifier from Datadog for multi-tenant data ingestion.
-  <br>
-  <strong>Datadog customers</strong> whose organizations are allowlisted for OTLP metrics intake should <strong>omit this header</strong>. Contact your Datadog representative if unsure.
-</div>
 
 #### Manual instrumentation
 
@@ -97,12 +87,11 @@ The JavaScript exporter is [`@opentelemetry/exporter-metrics-otlp-proto`][100]. 
 const { OTLPMetricExporter } = require('@opentelemetry/exporter-metrics-otlp-proto');
 
 const exporter = new OTLPMetricExporter({
-  url: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
+  url: 'https://otlp.datadoghq.com/v1/metrics',
   temporalityPreference: AggregationTemporalityPreference.DELTA, // Ensure delta temporality
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-metric-config': '{"resource_attributes_as_tags": true}',
-    'dd-otlp-source': '${PARTNER_ID}', // For Datadog platform partners only. Use the ID provided by Datadog.
   },
 });
 ```
@@ -119,12 +108,11 @@ The Java exporter is [`OtlpHttpMetricExporter`][200]. To configure the exporter,
 import io.opentelemetry.exporter.otlp.http.metrics.OtlpHttpMetricExporter;
 
 OtlpHttpMetricExporter exporter = OtlpHttpMetricExporter.builder()
-    .setEndpoint("https://api.datadoghq.com/api/intake/otlp/v1/metrics")
+    .setEndpoint("https://otlp.datadoghq.com/v1/metrics")
     .setAggregationTemporalitySelector(
-			AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
+      AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-metric-config", "{\"resource_attributes_as_tags\": true}")
-    .addHeader("dd-otlp-source", "${PARTNER_ID}") // For Datadog platform partners only. Use the ID provided by Datadog.
     .build();
 ```
 
@@ -140,16 +128,15 @@ The Go exporter is [`otlpmetrichttp`][300]. To configure the exporter, use the f
 import "go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp"
 
 metricExporter, err := otlpmetrichttp.New(
-	ctx,
-	otlpmetrichttp.WithEndpoint("api.datadoghq.com"),
-	otlpmetrichttp.WithURLPath("/api/intake/otlp/v1/metrics"),
+  ctx,
+  otlpmetrichttp.WithEndpoint("otlp.datadoghq.com"),
+  otlpmetrichttp.WithURLPath("/v1/metrics"),
       otlpmetrichttp.WithTemporalitySelector(deltaSelector), // Ensure delta temporality
-	otlpmetrichttp.WithHeaders(
-		map[string]string{
-			"dd-api-key": os.Getenv("DD_API_KEY"),
-			"dd-otel-metric-config": "{\"resource_attributes_as_tags\": true}",
-      "dd-otlp-source": "${PARTNER_ID}", // For Datadog platform partners only. Use the ID provided by Datadog.
-		}),
+  otlpmetrichttp.WithHeaders(
+    map[string]string{
+      "dd-api-key": os.Getenv("DD_API_KEY"),
+      "dd-otel-metric-config": "{\"resource_attributes_as_tags\": true}",
+    }),
 )
 ```
 
@@ -165,12 +152,11 @@ The Python exporter is [`OTLPMetricExporter`][400]. To configure the exporter, u
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
 
 exporter = OTLPMetricExporter(
-    endpoint="https://api.datadoghq.com/api/intake/otlp/v1/metrics",
+    endpoint="https://otlp.datadoghq.com/v1/metrics",
     preferred_temporality=deltaTemporality, # Ensure delta temporality
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-metric-config": '{"resource_attributes_as_tags": true}',
-        "dd-otlp-source": "${PARTNER_ID}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -241,7 +227,6 @@ exporters:
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-metric-config: '{"resource_attributes_as_tags": true}'
-      dd-otlp-source: "${PARTNER_ID}", # For Datadog platform partners only. Use the ID provided by Datadog.
 ...
 
 service:
@@ -258,15 +243,6 @@ service:
 ### Error: 403 Forbidden
 
 If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates one of the following issues:
-
-- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.  
-   **Solution**: To request access, contact your account representative.
-
-- The `dd-otlp-source` header is missing or has an incorrect value.  
-   **Solution**: This error can relate to the <code>dd-otlp-source</code> header:
-    - <i>Datadog Platform Partners</i>: Verify <code>dd-otlp-source</code> is set to the unique identifier provided by Datadog.
-    - <i>Individual Datadog Customers</i>: If your organization is allowlisted, this header should be omitted. Remove <code>dd-otlp-source</code> from your configuration.
-    - If the error persists, contact your Datadog representative to confirm if <code>dd-otlp-source</code> is required for your organization and, if so, its correct value.
 
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_metrics_endpoint" code="true" >}} endpoint.

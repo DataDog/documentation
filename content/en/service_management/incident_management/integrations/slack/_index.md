@@ -33,7 +33,7 @@ The Slack integration documentation is organized around the typical lifecycle of
 
 ## Prerequisites
 
-Install the Datadog Slack integration through the [Slack Integration tile][1]. For more information, see the [Slack integration][2] documentation.
+Install the integration through the [Slack Integration tile][1] with the proper [OAuth scopes][6]. For more information, see the [Slack integration][2] documentation.
 
 After the integration is installed, navigate to **[Service Management > Incidents > Settings > Integrations][3]** to enable Slack capabilities for Incident Management.
 
@@ -192,3 +192,4 @@ You can view the full list of available Slack commands at any time by typing `/d
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: /integrations/jira/
 [5]: /service_management/incident_management/incident_settings/notification_rules/
+[6]: /integrations/slack/?tab=datadogforslack#permissions
