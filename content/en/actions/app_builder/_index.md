@@ -47,7 +47,7 @@ When creating a new app, Datadog displays an onboarding modal with the following
 - [Start with Blueprint][5]
 - Start with Layout
 - Start with Data
-- Start from Scratch 
+- [Start from Scratch][10] 
 - App Playground
 
 {{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="App blueprints" style="width:100%;" >}}
@@ -97,3 +97,4 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/app-builder/apps/list
+[10]: /actions/app_builder/build/?site=us#create-a-custom-app
