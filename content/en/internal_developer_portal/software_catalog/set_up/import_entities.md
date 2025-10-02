@@ -30,7 +30,7 @@ If you already have data or services registered in Backstage or ServiceNow, you 
 
 ### Sync Backstage entities into Datadog Software Catalog 
 
-You can install the [Datadog Plugin][3] in your Backstage backend, the plugin will begin mapping your [Backstage entities][4] into the [definition schemas supported by Datadog Software Catalog entities][5]. The plugin supports entity filtering, enabling you to query for select entities that you want to be imported. For example, you may only want to only sync a specific Backstage component type, such as services or repositories, or only entities used in your production lifecycle. 
+You can use the [Datadog's Backstage plugin][3] to map your [Backstage entities][4] into Datadog's Software Catalog [definition schemas][5]. The plugin supports entity filtering so you can import only entities that meet certain criteria (for example, only entities with a specific Backstage component type, like services or repositories). 
 
 ### Import entity descriptor files from Backstage
 
