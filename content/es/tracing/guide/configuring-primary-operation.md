@@ -4,8 +4,8 @@ aliases:
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
-  text: Más información sobre cómo configurar el rastreo de APM con la aplicación
-- link: /tracing/service_catalog/
+  text: Aprende a configurar APM tracing con su aplicación
+- link: /tracing/software_catalog/
   tag: Documentación
   text: Descubrir y catalogar los servicios que generan informes en Datadog
 - link: /tracing/services/service_page/
@@ -22,7 +22,7 @@ title: Operaciones principales en servicios
 
 ## Servicios de APM
 
-Los servicios de APM calculan las métricas de trazas (traces) para errores, rendimiento y latencia. Estas se calculan con base en los recursos que coinciden con un único nombre de tramo (span), considerado como la operación principal. Estas métricas de servicio se utilizan en todo el producto, tanto la Página de servicios por defecto, en el Catálogo de servicios, como el Mapa de servicios.
+Los servicios de APM calculan métricas de rastreo para errores, rendimiento y latencia. Estos cálculos se basan en los recursos que coinciden con un único nombre de tramo, considerado la operación principal. Estas métricas de servicio se utilizan en todo el producto, tanto por la página de servicio por defecto en el Software Catalog y como Mapa de servicio.
 
 **Nota**: Las métricas de trazas pueden consultarse en función de su `trace.*` [espacio de nombres][1].
 

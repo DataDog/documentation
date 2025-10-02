@@ -23,7 +23,7 @@ type: multi-code-lang
 
 ## Inyección manual
 
-La API de rastreador de Go permite imprimir información de tramo (span) junto con sentencias de log mediante el especificador de formato `%v`:
+La API del rastreador Go permite imprimir información de tramo (span) junto con sentencias de log mediante el especificador de formato `%v`:
 
 ```go
 package main
@@ -31,27 +31,28 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    // Crea un tramo para una solicitud web en la URL /posts.
+    // Create a span for a web request at the /posts URL.
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // Anexa información del tramo a mensajes de log:
+    // Append span info to log messages:
     log.Printf("my log message %v", span)
 }
 ```
 
-El ejemplo anterior ilustra cómo utilizar el contexto del tramo en el paquete `log` de la biblioteca estándar. Una lógica similar puede aplicarse también a paquetes de terceros.
+El ejemplo anterior ilustra cómo utilizar el contexto del tramo en el paquete `log` de la librería estándar. Una lógica similar puede aplicarse también a paquetes de terceros.
 
-**Nota**: Si no estás utilizando [una integración de log de Datadog][1] para analizar tus logs, las reglas personalizadas de parseo de log, deben asegurarse de que `dd.trace_id`, `dd.span_id`, `dd.service`, `dd.env` y `dd.version` se analizan como cadenas. Encontrarás más información en [Los logs correlacionados no aparecen en el panel de ID de traza][2].
+**Nota**: Si no estás utilizando una [integración de logs de Datadog][1] para analizar tus logs, las reglas personalizadas de análisis de logs deben garantizar que `dd.trace_id`, `dd.span_id`, `dd.service`, `dd.env` y `dd.version` se analizan como cadenas. Encontrarás más información en [Logs correlacionados no aparecen en el panel de ID de traza][2].
 
-## Inyección en logs de logrus
+## Inyección en logs Logrus
 
-Hay disponible un hook para el paquete de logrus para vincular automáticamente tus logs y tramos.
-El paquete está disponible en el rastreador de Go.
+Hay disponible un hook para el paquete de Logrus para vincular automáticamente tus logs y tramos.
+El paquete está disponible en el rastreador Go.
 
 ```go
 package main
@@ -59,28 +60,30 @@ package main
 import (
     "github.com/sirupsen/logrus"
 
-    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus" // 1.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2" // 2.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
-    // Opcional: Cambia el formato de log para usar JSON (Cf. Go Log Collection)
+    // Optional: Change log format to use JSON (Cf. Go Log Collection)
     logrus.SetFormatter(&logrus.JSONFormatter{})
 
-    // Añade un hook de log de contexto de Datadog
-    logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
+    // Add Datadog context log hook
+    logrus.AddHook(&dd_logrus.DDContextLogHook{})
 
     // ...
 }
 ```
 
-Esto inyecta automáticamente el ID de traza a tus logs cuando logueas con el contexto.
+Esto inyecta automáticamente el ID de traza a tus logs cuando generas logs con el contexto.
 ```go
-    // Loguear con el contexto
+    // Log with the context
     logrus.WithContext(ctx).Info("Go logs and traces connected!")
 ```
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

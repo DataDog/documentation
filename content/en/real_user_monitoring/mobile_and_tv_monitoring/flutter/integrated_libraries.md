@@ -1,5 +1,6 @@
 ---
 title: Flutter Libraries for RUM
+description: "Integrate popular Flutter libraries with RUM SDK for automatic monitoring of HTTP requests, navigation, and other app functionality."
 aliases:
 - /real_user_monitoring/flutter/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/flutter
@@ -158,7 +159,7 @@ import 'package:datadog_grpc_interceptor/datadog_grpc_interceptor.dart'
 // Enable Datadog Distributed Tracing
 final config = DatadogConfiguration(
   // ...
-  firstParthHosts = ['localhost']
+  firstPartyHosts = ['localhost']
 )
 
 // Create the gRPC channel

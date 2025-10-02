@@ -8,7 +8,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/docker
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -44,8 +44,6 @@ docker run -d --name dd-agent \
   -v /etc/os-release:/etc/os-release \
   -e DD_COMPLIANCE_CONFIG_ENABLED=true \
   -e DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED=true \
-  -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-  -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e DD_CONTAINER_IMAGE_ENABLE=true
   -e DD_SBOM_ENABLED=true
   -e DD_SBOM_CONTAINER_IMAGE_ENABLED=true

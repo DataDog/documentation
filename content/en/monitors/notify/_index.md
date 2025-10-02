@@ -16,6 +16,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
   tag: "Learning Center"
   text: "Take a course to customize alert monitor notifications"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
 
 ## Overview

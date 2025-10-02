@@ -13,10 +13,6 @@ further_reading:
 title: 예약 보고서
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Scheduled Reports are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## 개요
 
 예약 보고서를 사용하면 Datadog 사용자가 이메일을 사용해 고밀도 PDF로 대시보드를 반복해서 공유할 수 있습니다.

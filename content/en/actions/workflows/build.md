@@ -1,5 +1,6 @@
 ---
 title: Build workflows
+description: Create workflows from blueprints or build custom workflows using AI assistance, manual configuration, and drag-and-drop actions.
 disable_toc: false
 aliases:
 - /workflows/build
@@ -12,7 +13,7 @@ further_reading:
   text: "Getting Started with Workflow Automation"
 - link: "/actions/actions_catalog"
   tag: "Documentation"
-  text: "Browse the available actions in the Actions Catalog"
+  text: "Browse the available actions in the Action Catalog"
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
@@ -20,10 +21,6 @@ further_reading:
   tag: "Documentation"
   text: "Variables and Parameters"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
@@ -44,14 +41,22 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. When you are finished modifying the workflow, Click **Run** to test your workflow.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
-## Create a workflow with AI
+## Create or edit a workflow with AI {#create-a-workflow-with-ai}
 
-If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
+If you're not sure where to start, you can automatically generate a workflow, or iterate on an existing workflow with AI.
 
+To generate a workflow:
 1. From the [Workflow Automation][1] page, click **New Workflow**.
-1. Click **<i class="icon-bits-ai"></i> Build with Bits AI**.
-1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
-1. Click the up arrow (**↑**) to create your app.
+1. Click **Create a workflow with AI**.
+1. Enter a detailed prompt for your workflow. Specify the integrations and actions you'd like to use.
+1. Click the up arrow (**↑**) to create your workflow.
+
+To iterate on an existing workflow:
+1. From an existing workflow, click **Edit with AI**.
+1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
+1. Click the up arrow (**↑**) to add the functionality to your workflow.
+
+<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack</a></div>
 
 ## Create a custom workflow
 
@@ -99,6 +104,20 @@ See the test and debug page for information on [how to test a step][11].
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+### Updating a published workflow
+
+You can update published workflows without affecting the live version until you are ready.
+
+Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
+
+Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor. 
+
+To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
+
+**Notes**:
+- Running a draft for published workflows do not accrue costs.
+- Any update to the workflow properties (name, tags, or notifications) bypass the drafting flow and are applied immediately to the published version.
 
 ## Variables and parameters
 

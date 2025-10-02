@@ -1,5 +1,6 @@
 ---
 title: Docker Prometheus and OpenMetrics metrics collection
+description: Collect Prometheus and OpenMetrics metrics from containerized Docker applications using the Datadog Agent
 aliases:
 - /agent/docker/prometheus
 further_reading:

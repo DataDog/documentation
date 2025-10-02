@@ -4,8 +4,8 @@ aliases:
 - /es/tracing/trace_collection/custom_instrumentation/otel_instrumentation/java
 code_lang: otel
 code_lang_weight: 2
-description: Instrumenta tu aplicación Java con la API de OpenTelemetry, para enviar
-  trazas (traces) a Datadog.
+description: Instrumenta tu aplicación Java con la API OpenTelemetry para enviar trazas
+  (traces) a Datadog.
 further_reading:
 - link: tracing/glossary/
   tag: Documentación
@@ -14,7 +14,7 @@ further_reading:
   tag: Documentación
   text: Interoperabilidad de la API de OpenTelemetry e instrumentación de trazas de
     Datadog
-title: Instrumentación personalizada de Java con la API de OpenTelemetry
+title: Instrumentación de Java personalizada utilizando la API OpenTelemetry
 type: multi-code-lang
 ---
 
@@ -34,7 +34,7 @@ Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:
 
 ## Añadir etiquetas al tramo
 
-### Añadir etiquetas de tramo personalizadas
+### Añadir span tagss personalizadas
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 
 ```java
@@ -112,7 +112,7 @@ public class Example {
         if (null != rootSpan) {
           rootSpan.setAttribute("my-attribute", "my-attribute-value");
           rootSpan.setStatus(StatusCode.ERROR, "Some error details...");
-        } 
+        }
     } finally {
       childSpan.end();
     }
@@ -148,7 +148,7 @@ public class SessionManager {
 }
 ```
 
-### Creación manual de un nuevo tramo
+### Crear manualmente un nuevo tramo
 
 Para crear manualmente nuevos tramos en el contexto de traza actual:
 
@@ -183,11 +183,57 @@ public class Example {
 }
 ```
 
+## Añadir eventos de tramos
+
+<div class="alert alert-info">Para añadir eventos de tramos se requiere la versión 1.40.0 o posterior del SDK.</div>
+
+Puedes añadir eventos de tramos utilizando la API `addEvent`. Este método requiere un parámetro `name` y acepta opcionalmente los parámetros `attributes` y `timestamp`. El método crea un nuevo evento de tramo con las propiedades especificadas y lo asocia al tramo correspondiente.
+
+- **Nombre** [_obligatorio_]: Una cadena que representa el nombre del evento.
+- **Atributos** [_opcional_]: Cero o más pares clave-valor con las siguientes propiedades:
+  - La clave debe ser una cadena no vacía.
+  - El valor puede ser:
+    - Un tipo primitivo: cadena, booleano o número.
+    - Una matriz homogénea de valores de tipo primitivo (por ejemplo, una matriz de cadenas).
+  - Las matrices anidadas y las matrices que contienen elementos de distintos tipos de datos no están permitidas.
+- **Marca de tiempo** [_opcional_]: Una marca de tiempo UNIX que representa la hora en que se produjo un evento. Se espera un objeto `Instant`.
+
+Los siguientes ejemplos muestran distintas formas de añadir eventos a un tramo:
+
+```java
+Attributes eventAttributes = Attributes.builder()
+    .put(AttributeKey.longKey("int_val"), 1L)
+    .put(AttributeKey.stringKey("string_val"), "two")
+    .put(AttributeKey.longArrayKey("int_array"), Arrays.asList(3L, 4L))
+    .put(AttributeKey.stringArrayKey("string_array"), Arrays.asList("5", "6"))
+    .put(AttributeKey.booleanArrayKey("bool_array"), Arrays.asList(true, false))
+    .build();
+
+span.addEvent("Event With No Attributes");
+span.addEvent("Event With Some Attributes", eventAttributes);
+```
+
+Para obtener más información, consulta la especificación de [OpenTelemetry][21].
+
+### Registro de excepciones
+
+Para registrar excepciones, utiliza la API `recordException`. Este método requiere un parámetro `exception` y acepta opcionalmente un parámetro UNIX `timestamp`. Crea un nuevo evento de tramo que incluya atributos de excepción estandarizados y lo asocia al tramo correspondiente.
+
+Los siguientes ejemplos muestran diferentes formas de registrar excepciones:
+
+```java
+span.recordException(new Exception("Error Message"));
+span.recordException(new Exception("Error Message"),
+    Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
+```
+
+Para obtener más información, consulta la especificación de [OpenTelemetry][22].
+
 ## Rastrear la configuración del cliente y el Agent
 
 Tanto el cliente de rastreo como el Datadog Agent ofrecen opciones adicionales de configuración para la propagación de contexto. También puedes excluir recursos específicos del envío de trazas a Datadog si no deseas que esas trazas se incluyan en métricas calculadas, como trazas relacionadas con los checks de estado.
 
-### Propagación de contexto con extracción e inyección de encabezados
+### Propagación del contexto con extracción e inserción de cabeceras
 
 Puedes configurar la propagación de contexto para trazas distribuidas al inyectar y extraer encabezados. Consulta [Propagación de contexto de traza][18] para obtener información.
 
@@ -195,13 +241,15 @@ Puedes configurar la propagación de contexto para trazas distribuidas al inyect
 
 Las trazas se pueden excluir en función de su nombre de recurso, para eliminar el tráfico Synthetic, como los checks de estado, de la notificación de trazas a Datadog. Esta y otras configuraciones de seguridad y ajuste se pueden encontrar en la página de [Seguridad][19] o en [Ignorar recursos no deseados][20].
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [15]: /es/tracing/setup/java/
 [16]: /es/tracing/glossary/#trace
 [17]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
-[18]: /es/tracing/trace_collection/trace_context_propagation/java/
+[18]: /es/tracing/trace_collection/trace_context_propagation/
 [19]: /es/tracing/security
 [20]: /es/tracing/guide/ignoring_apm_resources/
+[21]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[22]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

@@ -315,7 +315,7 @@ custom_queries:
 </div>
 
 ### メトリクス
-{{< get-metrics-from-git "snowflake" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### イベント
@@ -323,7 +323,7 @@ custom_queries:
 Snowflake には、イベントは含まれません。
 
 ### サービスのチェック
-{{< get-service-checks-from-git "snowflake" >}}
+{{< get-service-checks-from-git "snowflake-web" >}}
 
 
 ## トラブルシューティング

@@ -32,6 +32,7 @@ The walkthrough guides you through several steps to:
 To use this walkthrough, you need:
 * A containerized Go or Java service with either the Datadog Kubernetes integration or the Datadog Container integration installed.
 * [Continuous Profiler enabled][3].
+  * Ensure that your profiles are tagged with `container_id`. This is necessary to link between container memory utilization metrics and profiling data.
 
 ## Get started
 

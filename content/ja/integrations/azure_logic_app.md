@@ -41,7 +41,7 @@ Azure Logic App からメトリクスを取得すると、以下のことがで�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_logic_app" >}}
+{{< get-metrics-from-git "azure-logic-app" >}}
 
 
 ### イベント

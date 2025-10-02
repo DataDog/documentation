@@ -19,7 +19,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup instructions][2] or see the [Flutter setup documentation][3].
+If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup instructions][2] or see the [Unity setup documentation][3].
 
 ### Forward uncaught exceptions from Unity logs
 
@@ -108,5 +108,5 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/unity-symbols
+[5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
 [6]: https://app.datadoghq.com/source-code/setup/rum

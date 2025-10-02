@@ -3,10 +3,6 @@ null
 ...
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para ayudarte a solucionar problemas de visibilidad de tests. Si necesita más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][2].
@@ -100,7 +96,7 @@ Los números de estado de los tests se calculan a partir de los tests únicos qu
 
 ### Los números son más bajos de lo esperado
 
-Si los números son más bajos de lo esperado, es probable que la biblioteca o la herramienta que estás utilizando para recopilar los datos de tests no puedan recopilar parámetros de tests o algunas configuraciones de tests.
+Si los números son más bajos de lo esperado, es probable que la librería o la herramienta que estás utilizando para recopilar los datos de tests no puedan recopilar parámetros de tests o algunas configuraciones de tests.
 
 1. Si estás cargando archivos de informes de tests JUnit:
     1. Si estás ejecutando los mismos tests en entornos con diferentes configuraciones, [asegúrate de que estás definiendo esas etiquetas de configuración durante la carga][10].

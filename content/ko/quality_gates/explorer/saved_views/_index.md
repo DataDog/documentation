@@ -6,10 +6,6 @@ further_reading:
 title: \u0008저장된 뷰
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트({{< region-param key="dd_site_name" >}})에서는 아직 Quality Gates가 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" >}}
 Quality Gates는 공용 베타 서비스 중입니다.
 {{< /callout >}}

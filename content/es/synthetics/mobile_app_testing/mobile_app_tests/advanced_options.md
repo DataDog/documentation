@@ -21,10 +21,6 @@ further_reading:
 title: Opciones avanzadas para los pasos de tests de aplicaciones móviles
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Este sitio no admite tests de aplicaciones móviles.</div>
-{{< /site-region >}}
-
 ## Información general
 
 En esta página se describen las opciones avanzadas para los tests de aplicaciones móviles Synthetic.

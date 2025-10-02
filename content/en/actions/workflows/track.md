@@ -1,5 +1,6 @@
 ---
 title: Track workflows
+description: Monitor workflow activity, metrics, and costs using dashboards, audit trails, event management, and usage attribution.
 disable_toc: false
 aliases:
 - /service_management/workflows/track
@@ -16,10 +17,6 @@ further_reading:
   tag: "Documentation"
   text: "Usage Attribution"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 This page explains how to track different kinds of workflow activity and workflow costs.
 

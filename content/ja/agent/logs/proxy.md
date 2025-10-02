@@ -12,7 +12,7 @@ further_reading:
 title: TCP Agent のログ用プロキシ
 ---
 
-{{% site-region region="us3,eu,us5,gov,ap1" %}}
+{{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
 <div class="alert alert-warning">
     TCP は {{< region-param key="dd_site_name" >}} サイトでは利用できません。詳細については<a href="/help/">サポート</a>にお問い合わせください。
 </div>

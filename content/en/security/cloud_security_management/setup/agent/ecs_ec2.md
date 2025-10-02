@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -76,15 +76,7 @@ Add the following environment variables to your `datadog-agent` container defini
           "value": "true"
         },
         {
-          "name": "DD_RUNTIME_SECURITY_CONFIG_ENABLED",
-          "value": "true"
-        },
-        {
           "name": "DD_SYSTEM_PROBE_ENABLED",
-          "value": "true"
-        },
-        {
-          "name": "DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED",
           "value": "true"
         },
         {

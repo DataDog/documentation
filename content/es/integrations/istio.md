@@ -19,7 +19,7 @@
       - "istio.mesh.request.count"
       - "istio.galley.endpoint_no_pod"
       "metadata_path": "metadata.csv"
-      "prefix": "istio"
+      "prefix": "istio."
     "process_signatures":
     - "pilot-agent proxy router"
     - "envoy envoy-rev0.json"
@@ -60,7 +60,7 @@
 "manifest_version": "2.0.0"
 "name": "istio"
 "public_title": "Istio"
-"short_description": "Recopila métricas de esquemas de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más"
+"short_description": "Recopila métricas de esquemas de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más."
 "supported_os":
 - "linux"
 - "windows"
@@ -79,7 +79,7 @@
   - "Submitted Data Type::Trazas (traces)"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más"
+  "description": "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más."
   "media": []
   "overview": "README.md#Información general"
   "resources":
@@ -161,9 +161,6 @@ Personaliza este archivo con cualquier configuración adicional. Para ver todas 
 ##### Configuración del plano de control
 Para monitorizar el plano de control de Istio y notificar las métricas `mixer`, `galley`, `pilot` y `citadel`, debes configurar el Agent para monitorizar el despliegue de `istiod`. En Istio v1.5 o posterior, aplica las siguientes anotaciones de pod para el despliegue de `istiod` en el espacio de nombres `istio-system`:
 
-{{< tabs >}}
-{{% tab "Anotaciones v1" %}}
-
 ```yaml
 ad.datadoghq.com/discovery.checks: |
   {
@@ -177,26 +174,7 @@ ad.datadoghq.com/discovery.checks: |
     }
   }
 ```
-
-{{% /tab %}}
-{{% tab "Anotaciones v2" %}}
-
-**Nota**: Anotaciones v2 es compatible con Agent v7.36 o posterior.
-
-```yaml
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
-  {
-    "Istio": {
-      "istiod_endpoint": "http://%%host%%:15014/metrics",
-      "use_openmetrics": "true"
-    }
-  }
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
+**Nota**: La sintaxis de Autodiscovery Annotations v2 es compatible con el Agent v7.36 o posterior.
 
 Esta anotación especifica el contenedor `discovery` para que coincida con el nombre por defecto del contenedor Istio en este pod. Sustituye esta anotación `ad.datadoghq.com/<CONTAINER_NAME>.checks` por el nombre (`.spec.containers[i].name`) de tu contenedor Istio, si el tuyo difiere.
 
@@ -248,7 +226,7 @@ kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"anno
 
 #### Recopilación de logs
 
-_Disponible para la versión 6.0 o posterior del Agent_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 En primer lugar, habilita el Datadog Agent para realizar la recopilación de logs en Kubernetes. Consulta [Recopilación de logs de Kubernetes][14].
 
@@ -305,11 +283,11 @@ Sustituye `<SERVICE_NAME>` por el nombre de servicio de proxy de Istio que elija
 
 El check de Istio no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 {{< get-service-checks-from-git "istio" >}}
 
 
-## Resolución de problemas
+## Solucionar problemas
 
 ### Error de longitud de fragmento no válida
 Si ves el siguiente error en el modo legacy de la integración Istio (versión `3.13.0` o anterior de la integración Istio):
@@ -325,7 +303,7 @@ Debes actualizar como mínimo al Agent `7.31.0` y a Python 3. Consulta la secci�
 
 ### Uso de la integración genérica OpenMetrics en un despliegue de Istio
 
-Si se habilita la inyección de sidecars de proxy de Istio, la monitorización de otras métricas de Prometheus que utilicen la [integración de OpenMetrics][17] con el mismo endpoint de métricas que el `istio_mesh_endpoint` puede dar lugar a un uso elevado de métricas personalizadas y a una recopilación de métricas duplicadas.
+Si la inyección de sidecar proxy de Istio está habilitada, la monitorización de otras métricas de Prometheus utilizando la [integración OpenMetrics][19] con el mismo endpoint de métricas que `istio_mesh_endpoint` puede resultar en un uso elevado de métricas personalizadas y en una recopilación duplicada de métricas.
 
 Para asegurarte de que tu configuración de OpenMetrics no recopile métricas de forma redundante, puedes:
 
@@ -344,8 +322,8 @@ instances:
     metrics:
     - '.*'
     exclude_metrics:
-      - istio_*
-      - envoy_*
+      - istio_.*
+      - envoy_.*
 
 ```
 
@@ -363,16 +341,15 @@ instances:
       - envoy_*
 ```
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][18].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][20].
 
 ## Referencias adicionales
 
 Documentación útil adicional, enlaces y artículos:
 
-- [Monitorización de tu malla de servicios Istio con Datadog][19]
-- [Más información sobre cómo Datadog recopila métricas claves para la monitorización de Istio][20]
+- [Monitorización de tu malla de servicios Istio con Datadog][21]
+- [Más información sobre cómo Datadog recopila claves métricas para la monitorización de Istio][22]
 - [Monitorizarización de Istio con Datadog][3]
-
 
 [1]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
 [2]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
@@ -390,7 +367,10 @@ Documentación útil adicional, enlaces y artículos:
 [14]: https://docs.datadoghq.com/agent/kubernetes/log/
 [15]: https://istio.io/latest/docs/tasks/observability/logs/access-log/
 [16]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[17]: https://docs.datadoghq.com/integrations/openmetrics/
-[18]: https://docs.datadoghq.com/help/
-[19]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
-[20]: https://www.datadoghq.com/blog/istio-metrics/
+[17]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
+[18]: https://github.com/DataDog/integrations-core/blob/master/istio/assets/service_checks.json
+[19]: https://docs.datadoghq.com/integrations/openmetrics/
+[20]: https://docs.datadoghq.com/help/
+[21]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
+[22]: https://www.datadoghq.com/blog/istio-metrics/
+

@@ -17,12 +17,12 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- AWS
+- aws
 - クラウド
-- コンテナ
+- incident-teams
 - kubernetes
 - ログの収集
-- orchestration
+- オーケストレーション
 - プロビジョニング
 custom_kind: インテグレーション
 dependencies:

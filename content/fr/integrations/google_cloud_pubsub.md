@@ -61,7 +61,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Pub/Sub d
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_pubsub" >}}
+{{< get-metrics-from-git "google-cloud-pubsub" >}}
 
 
 ### Événements

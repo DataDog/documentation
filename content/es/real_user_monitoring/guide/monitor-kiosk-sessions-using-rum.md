@@ -63,10 +63,6 @@ El método `stopSession()` varía en función de tu marco del SDK móvil.
 Esta función requiere el SDK iOS RUM versión 1.18.0 o posterior. Consulta las instrucciones de instalación [aquí][1]. 
 
 ```swift
-// SDK v1
-Global.rum.stopSession()
-
-// SDK v2
 RUMMonitor.shared().stopSession()
 ```
 
@@ -78,7 +74,7 @@ RUMMonitor.shared().stopSession()
 Esta función requiere el SDK Android RUM versión 1.19.0 o posterior. Consulta las instrucciones de instalación [aquí][1]. 
 
 ```kotlin
-GlobalRum.get().stopSession()
+GlobalRumMonitor.get().stopSession()
 ```
 
 [1]: https://docs.datadoghq.com/es/real_user_monitoring/android/
@@ -92,7 +88,7 @@ Esta función requiere el SDK Flutter RUM versión 1.4.0 o posterior. Consulta l
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/es/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/es/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -114,7 +110,7 @@ DdRum.stopSession()
 
 [1]: /es/real_user_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
 [2]: /es/real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-user-sessions
-[4]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#track-user-sessions
+[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
+[4]: /es/real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#track-user-sessions
 [5]: /es/real_user_monitoring/reactnative/#user-information
 [6]: /es/real_user_monitoring/browser/

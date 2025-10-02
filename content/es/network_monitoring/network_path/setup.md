@@ -11,10 +11,6 @@ is_beta: true
 title: Ajustes
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path para Datadog Cloud Network Monitoring no es compatible con tu <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Network Path para Datadog Cloud Network Monitoring tiene disponibilidad limitada. Ponte en contacto con tu representante de Datadog para inscribirte y, a continuación, utiliza las siguientes instrucciones para configurar el Datadog Agent para recopilar datos de Network Path.</div>
 
 ## Información general

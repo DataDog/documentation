@@ -15,10 +15,6 @@ further_reading:
 title: Configurer le tracing sur un pipeline AWS CodePipeline
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">À l'heure actuelle, la solution CI Visibility n'est pas disponible pour le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Aperçu
 
 [AWS CodePipeline][1] est un service de déploiement continu entièrement géré qui vous permet d'automatiser vos pipelines de publication de code afin de mettre à jour vos applications et infrastructures de façon rapide et fiable.

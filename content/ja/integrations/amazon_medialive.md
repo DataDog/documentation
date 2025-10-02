@@ -75,7 +75,7 @@ AWS Elemental MediaLive は、ブロードキャストグレードのライブ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_medialive" >}}
+{{< get-metrics-from-git "amazon-medialive" >}}
 
 
 ### イベント

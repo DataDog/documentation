@@ -9,6 +9,12 @@ further_reading:
 - link: "/dashboards/widgets/treemap/"
   tag: "Documentation"
   text: "Treemap Widget"
+- link: "/dashboards/widgets/top_list/"
+  tag: "Documentation"
+  text: "Top List Widget"
+- link: "/dashboards/widgets/bar_chart/"
+  tag: "Documentation"
+  text: "Bar Chart Widget"
 ---
 
 The pie chart widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.

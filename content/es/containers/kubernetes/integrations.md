@@ -7,36 +7,36 @@ aliases:
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación
-  text: Recopilar tus logs de aplicación
+  text: Recopilar logs de tus aplicaciones
 - link: /agent/kubernetes/apm/
   tag: Documentación
-  text: Recopila tus trazas de aplicaciones
+  text: Recopilar trazas (traces) de tus aplicaciones
 - link: /agent/kubernetes/prometheus/
   tag: Documentación
-  text: Recopila tus métricas de Prometheus
+  text: Recopilar métricas de Prometheus
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limita la recopilación de datos solo a un subconjunto de contenedores
+  text: Limitar la recopilación de datos sólo a un subconjunto de contenedores
 - link: /agent/kubernetes/tag/
   tag: Documentación
-  text: Asignar etiquetas a todos los datos emitidos por un contenedor
+  text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
 title: Kubernetes e integraciones
 ---
 
-Esta página cubre la instalación y la configuración de integraciones para tu infraestructura Kubernetes utilizando una característica de Datadog conocida como _Autodiscovery_. Esto te permite utilizar [variables][16] como `%%host%%` para rellenar dinámicamente tus parámetros de configuración. Para ver una explicación detallada de cómo funciona Autodiscovery, consulta [Empezando con contenedores: Autodiscovery][12]. Para ver las opciones avanzadas de Autodiscovery, como la exclusión de determinados contenedores de Autodiscovery o la tolerancia de pods no listos, consulta la [gestión de Autodiscovery][23].
+Esta página muestra cómo instalar y configurar integraciones para tu infraestructura Kubernetes utilizando una función de Datadog conocida como _Autodiscovery_. Esta opción te permite utilizar [variables][16] como `%%host%%` para rellenar dinámicamente tus parámetros de configuración. Para ver una explicación detallada de cómo funciona Autodiscovery, consulta [Empezando con contenedores: Autodiscovery][12]. Para ver opciones avanzadas de Autodiscovery, como la exclusión de ciertos contenedores de Autodiscovery o la tolerancia de pods no listos, consulta [Gestión de la detección de contenedores][23].
 
 Si utilizas Docker o Amazon ECS, consulta [Docker e integraciones][1].
 
 <div class="alert alert-info">
 Algunas integraciones de Datadog no funcionan con Autodiscovery, ya que requieren datos del árbol de procesos o un acceso a los sistemas de archivos: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">nodetools Cassandra</a> y <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
-Para monitorizar integraciones que no son compatibles con Autodiscovery, puedes utilizar un exportador Prometheus en el pod, para exponer un endpoint HTTP, y luego puedes utilizar la <a href="/integrations/openmetrics/">integración con OpenMetrics</a> (compatible con Autodiscovery) para encontrar el pod y consultar el endpoint. 
+Para monitorizar integraciones que no son compatibles con Autodiscovery, puedes utilizar un exportador Prometheus en el pod, para exponer un endpoint HTTP, y luego puedes utilizar la <a href="/integrations/openmetrics/">integración con OpenMetrics</a> (compatible con Autodiscovery) para encontrar el pod y consultar el endpoint.
 </div>
 
-## Configurar su integración
+## Configurar tu integración
 
 Algunas integraciones requieren pasos de configuración, como la creación de un token de acceso o la concesión de permisos de lectura al Datadog Agent. Sigue las instrucciones de la sección **Configuración** de la documentación de integraciones.
 
-### Integraciones comunitarias
+### Integraciones de la comunidad
 Para utilizar una integración que no está empaquetada con el Datadog Agent, debes crear una imagen personalizada que contenga la integración deseada. Consulta el [uso de integraciones comunitarias][13] para obtener instrucciones.
 
 ## Configuración
@@ -46,7 +46,7 @@ Algunas integraciones de uso común vienen por defecto con una configuración pa
 O:
 
 1. Elige un método de configuración (anotaciones en pods de Kubernetes, un archivo local, un ConfigMap, una base de datos clave-valor, un manifiesto del Datadog Operator o un chart de Helm) que se adapte a tu caso de uso.
-2. Consulta el formato de plantilla del método que hayas elegido. Cada formato contiene parámetros como `<CONTAINER_IDENTIFIER>`.
+2. Consulta el formato de plantilla para el método elegido. Cada formato contiene parámetros, como `<CONTAINER_NAME>`.
 3. [Proporciona valores](#placeholder-values) para estos parámetros.
 
 {{< tabs >}}
@@ -54,7 +54,7 @@ O:
 
 Si defines tus pods de Kubernetes directamente con `kind: Pod`, añade las anotaciones de cada pod directamente bajo su sección `metadata`, como se muestra a continuación:
 
-**Anotaciones de Autodiscovery v2** (para el Datadog Agent v7.36 o posteriores)
+**Anotaciones de Autodiscovery v2** (para el Datadog Agent v7.36 o posterior)
 
 ```yaml
 apiVersion: v1
@@ -63,22 +63,22 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "<INTEGRATION_NAME>": {
           "init_config": <INIT_CONFIG>,
           "instances": [<INSTANCES_CONFIG>]
         }
       }
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOGS_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.logs: '[<LOGS_CONFIG>]'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 # (...)
 ```
 
-**Anotaciones de Autodiscovery v1** 
+**Anotaciones de Autodiscovery v1**
 
 ```yaml
 apiVersion: v1
@@ -87,14 +87,14 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<INTEGRATION_NAME>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCES_CONFIG>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOGS_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<INTEGRATION_NAME>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.init_configs: '[<INIT_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.instances: '[<INSTANCES_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.logs: '[<LOGS_CONFIG>]'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 # (...)
 ```
 
@@ -103,12 +103,12 @@ Si defines pods indirectamente (con despliegues, ReplicaSets o ReplicationContro
 {{% /tab %}}
 {{% tab "Archivo local" %}}
 
-Puedes almacenar plantillas de Autodiscovery como archivos locales dentro del directorio montado `/conf.d`. Debes reiniciar tus contenedores del Agent cada vez que cambies, añadas o elimines plantillas.
+Puedes almacenar plantillas de Autodiscovery como archivos locales en el directorio montado `conf.d` (`/etc/datadog-agent/conf.d`). Debes reiniciar tus contenedores del Agent cada vez que cambias, añades o eliminas plantillas.
 
 1. Crea un archivo `conf.d/<INTEGRATION_NAME>.d/conf.yaml` en tu host:
    ```yaml
    ad_identifiers:
-     - <CONTAINER_IDENTIFIER>
+     - <CONTAINER_IMAGE>
 
    init_config:
      <INIT_CONFIG>
@@ -125,7 +125,7 @@ Puedes almacenar plantillas de Autodiscovery como archivos locales dentro del di
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-Puedes utilizar [ConfigMaps][1] para definir externamente configuraciones y montarlas posteriormente.
+Puedes utilizar [ConfigMaps][1] para definir configuraciones externamente y montarlas posteriormente.
 
 ```yaml
 kind: ConfigMap
@@ -136,7 +136,7 @@ metadata:
 data:
   <INTEGRATION_NAME>-config: |-
     ad_identifiers:
-      <CONTAINER_IDENTIFIER>
+      <CONTAINER_IMAGE>
     init_config:
       <INIT_CONFIG>
     instances:
@@ -150,7 +150,7 @@ data:
 {{% /tab %}}
 {{% tab "Base de datos clave-valor" %}}
 
-Puedes obtener plantillas de Autodiscovery de [Consul][1], [etcd][2] o [ZooKeeper][3]. Puedes configurar tu base de datos clave-valor en el archivo de configuración `datadog.yaml` (y posteriormente montar este archivo en el contenedor del Agent) o como variables de entorno en el contenedor del Agent.
+Puedes obtener plantillas de Autodiscovery desde [Consul][1], [etcd][2] o [ZooKeeper][3]. Puedes configurar tu base de datos clave-valor en el archivo de configuración `datadog.yaml` (y posteriormente montar este archivo en el contenedor del Agent) o como variables de entorno en el contenedor del Agent.
 
 **Configurar en datadog.yaml**:
 
@@ -194,7 +194,7 @@ Si la base de datos clave-valor se ha activado como fuente de plantillas, el Age
 ```yaml
 /datadog/
   check_configs/
-    <CONTAINER_IDENTIFIER>/
+    <CONTAINER_IMAGE>/
       - check_names: ["<INTEGRATION_NAME>"]
       - init_configs: ["<INIT_CONFIG>"]
       - instances: ["<INSTANCES_CONFIG>"]
@@ -210,7 +210,7 @@ Si la base de datos clave-valor se ha activado como fuente de plantillas, el Age
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Para configurar integraciones en `datadog-agent.yaml`, añade una sobreescritura al componente `extraConfd.configDataMap` `nodeAgent` de tu configuración del `DatadogAgent`. Cada clave se convierte en archivo en el directorio `conf.d` del Agent.
+Para configurar integraciones en `datadog-agent.yaml`, añade una sobreescritura `extraConfd.configDataMap` al componente `nodeAgent` de tu configuración del `DatadogAgent`. Cada clave se convierte en archivo en el directorio `conf.d` del Agent.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -228,7 +228,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - <CONTAINER_IDENTIFIER>
+              - <CONTAINER_IMAGE>
             init_config:
               <INIT_CONFIG>
             instances:
@@ -237,7 +237,7 @@ spec:
               <LOGS_CONFIG>
 ```
 
-Para monitorizar un [check de clústeres][1], añade una sobreescritura `extraConfd.configDataMap` al componente `clusterAgent`. También debes activar los checks de clústeres configurando `features.clusterChecks.enabled: true`. 
+Para monitorizar un [check de clústeres][1], añade una sobreescritura `extraConfd.configDataMap` al componente `clusterAgent`. También debes activar los checks de clústeres configurando `features.clusterChecks.enabled: true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -259,7 +259,8 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - <CONTAINER_IDENTIFIER>
+              - <CONTAINER_IMAGE>
+            cluster_check: true
             init_config:
               <INIT_CONFIG>
             instances:
@@ -282,7 +283,7 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
-        - <CONTAINER_IDENTIFIER>
+        - <CONTAINER_IMAGE>
       init_config:
         <INIT_CONFIG>
       instances:
@@ -291,7 +292,7 @@ datadog:
         <LOGS_CONFIG>
 ```
 
-Para monitorizar un [check de clústeres][3], define tu plantilla en `clusterAgent.confd`. Puedes encontrar ejemplos en línea en [values.yaml][2]. También debes habilitar el Cluster Agent, configurando `clusterAgent.enabled: true`, y habilitar los checks de clústeres, configurando `datadog.clusterChecks.enabled: true`. 
+Para monitorizar un [check de clústeres][3], define tu plantilla en `clusterAgent.confd`. Puedes encontrar ejemplos en línea en [values.yaml][2]. También debes habilitar el Cluster Agent, configurando `clusterAgent.enabled: true`, y habilitar los checks de clústeres, configurando `datadog.clusterChecks.enabled: true`.
 
 ```yaml
 datadog:
@@ -302,7 +303,8 @@ clusterAgent:
   confd:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
-        - <CONTAINER_IDENTIFIER>
+        - <CONTAINER_IMAGE>
+      cluster_check: true
       init_config:
         <INIT_CONFIG>
       instances:
@@ -311,7 +313,7 @@ clusterAgent:
         <LOGS_CONFIG>
 ```
 
-Consulta los [checks de clústeres][1] para más contexto.
+Consulta los [checks de clústeres][3] para más contexto.
 
 [1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
 [2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
@@ -322,18 +324,21 @@ Consulta los [checks de clústeres][1] para más contexto.
 
 ### Valores de parámetros
 
-Proporcione los siguientes valores de parámetros:
+Proporciona los siguientes valores de parámetros:
 
 `<INTEGRATION_NAME>`
 : nombre de tu integración de Datadog, como `etcd` o `redisdb`.
 
-`<CONTAINER_IDENTIFIER>`
-: identificador para cotejar con los nombres (`spec.containers[0].name`, **no** `spec.containers[0].image`) de los contenedores que corresponden a tu integración. El parámetro `ad_identifiers` toma una lista, por lo que puedes proporcionar varios identificadores de contenedores.<br/><br/>
-Por ejemplo: si proporcionas `redis` como identificador de contenedor, tu plantilla de Autodiscovery se aplicará a todos los contenedores cuyos nombres coincidan con `redis`. Si tienes un contenedor que ejecuta `foo/redis:latest` y `bar/redis:v2`, tu plantilla de Autodiscovery se aplicará a ambos contenedores.<br/><br/>
-También puedes utilizar identificadores personalizados. Consulta los [identificadores personalizados de Autodiscovery][21].
+`<CONTAINER_NAME>`
+: Un identificador para emparejar con los nombres (`spec.containers[i].name`, **no** `spec.containers[i].image`) de los contenedores que corresponden a tu integración.
+
+`<CONTAINER_IMAGE>`
+: Un identificador para emparejar con la imagen de contenedor (`.spec.containers[i].image`). <br/><br/>
+Por ejemplo: si proporcionas `redis` como identificador de contenedor, tu plantilla de Autodiscovery se aplica a todos los contenedores con nombres de imagen que coincidan con `redis`. Si tienes un contenedor que ejecuta `foo/redis:latest` y `bar/redis:v2`, tu plantilla de Autodiscovery se aplica a ambos contenedores.<br/><br/>
+El parámetro `ad_identifiers` toma una lista, por lo que puedes proporcionar varios identificadores de contenedor. También puedes utilizar identificadores personalizados. Consulta los [identificadores personalizados de Autodiscovery][21].
 
 `<INIT_CONFIG>`
-: parámetros de configuración que figuran en `init_config` en el archivo `<INTEGRATION_NAME>.d/conf.yaml.example` de tu integración. La sección `init_config` suele estar vacía.
+: parámetros de configuración que figuran en `init_config`, en el archivo `<INTEGRATION_NAME>.d/conf.yaml.example` de tu integración. La sección `init_config` suele estar vacía.
 
 `<INSTANCES_CONFIG>`
 : parámetros de configuración que figuran en `instances`, en el archivo `<INTEGRATION_NAME>.d/conf.yaml.example` de tu integración.
@@ -371,14 +376,14 @@ logs:
 
 Aquí, `<PASSWORD>` corresponde a la contraseña del usuario `datadog` que has creado.
 
-Para aplicar esta configuración a tus contenedores Postgres:
+Para aplicar esta configuración a tus contenedores de Postgres:
 
 {{< tabs >}}
 {{% tab "Anotaciones" %}}
 
 En el manifiesto de tu pod:
 
-**Anotaciones de Autodiscovery v2** (para el Datadog Agent v7.36 o posteriores)
+**Anotaciones de Autodiscovery v2** (para el Datadog Agent v7.36 o posterior)
 
 ```yaml
 apiVersion: v1
@@ -413,7 +418,7 @@ spec:
     - name: postgres
 ```
 
-**Anotaciones de Autodiscovery v1** 
+**Anotaciones de Autodiscovery v1**
 
 ```yaml
 apiVersion: v1
@@ -502,7 +507,7 @@ A continuación, define `volumeMounts` y `volumes` en tu manifiesto:
         volumeMounts:
         # [...]
           - name: postgresql-config-map
-            mountPath: /conf.d/postgresql.d
+            mountPath: /etc/datadog-agent/conf.d/postgresql.d
         # [...]
       volumes:
       # [...]
@@ -527,7 +532,7 @@ etcdctl set /datadog/check_configs/postgres/init_configs '[{}]'
 etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","port":"5432","username":"datadog","password":"%%env_PG_PASSWORD%%"}]'
 ```
 
-Fíjate que cada uno de los tres valores es una lista. Autodiscovery agrupa los elementos de la lista en configuraciones de integraciones basadas en índices de lista compartidos. En este caso, conforma la primera (y única) configuración de checks a partir de `check_names[0]`, `init_configs[0]` y `instances[0]`.
+Fíjate que cada uno de los tres valores es una lista. Autodiscovery agrupa los elementos de la lista en configuraciones de integraciones basadas en índices de lista compartidos. En este caso, define la primera (y única) configuración de checks a partir de `check_names[0]`, `init_configs[0]` y `instances[0]`.
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -548,7 +553,7 @@ spec:
     nodeAgent:
       extraConfd:
         configDataMap:
-          postgresql.yaml: |-
+          postgres.yaml: |-
             ad_identifiers:
               - postgres
             init_config:
@@ -558,7 +563,7 @@ spec:
                 username: "datadog"
                 password: "%%env_PG_PASSWORD%%"
 ```
-Como resultado, el Agent contiene un archivo `postgresql.yaml` con la configuración anterior en el directorio `conf.d`.
+Como resultado, el Agent contiene un archivo `postgres.yaml` con la configuración anterior en el directorio `conf.d`.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -568,7 +573,7 @@ En `datadog-values.yaml`:
 ```yaml
 datadog:
   confd:
-    postgresql.yaml: |-
+    postgres.yaml: |-
       ad_identifiers:
         - postgres
       init_config:
@@ -578,18 +583,18 @@ datadog:
           username: "datadog"
           password: "%%env_PG_PASSWORD%%"
 ```
-Como resultado, el Agent contiene un archivo `postgresql.yaml` con la configuración anterior en el directorio `conf.d`.
+Como resultado, el Agent contiene un archivo `postgres.yaml` con la configuración anterior en el directorio `conf.d`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Estas plantillas utilizan [variables de plantillas de Autodiscovery][16]:
-- `%%host%%` se rellena dinámicamente con la IP del contenedor.
+Estas plantillas utilizan [variables de plantilla de Autodiscovery][16]:
+- `%%host%%` se rellena dinámicamente con la dirección IP del contenedor.
 - `%%env_PG_PASSWORD%%` hace referencia a una variable de entorno denominada `PG_PASSWORD`, que es como la ve el proceso del Agent.
 
 Para ver más ejemplos, incluyendo la configuración de múltiples checks para múltiples conjuntos de contenedores, consulta [Autodiscovery: escenarios y ejemplos][24].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

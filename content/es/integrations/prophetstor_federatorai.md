@@ -30,7 +30,7 @@ categories:
 - marketplace
 - orquestación
 - ia/ml
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -126,7 +126,7 @@ tile:
 * Coste real y ahorro potencial basados en recomendaciones para clústeres, aplicaciones Kubernetes, máquinas virtuales y espacios de nombres de Kubernetes
 * Capacidad de observación de la formación LLM de múltiples inquilinos y optimizaciones de recursos procesables sin comprometer el rendimiento
 
-[ProphetStor Federator.ai][1] proporciona una capacidad de observación de pila completa a través de sus API integradas con Datadog Agents, desde las cargas de trabajo a nivel de aplicación, incluida la formación LLM, hasta el consumo de recursos a nivel de clúster. Esta integración incentiva un bucle dinámico entre la monitorización en directo y el análisis predictivo, mejorando continuamente la gestión de recursos, optimizando los costes y garantizando un funcionamiento eficiente de las aplicaciones. Con una licencia de ProphetStor Federator.ai, puedes aplicar una solución basada en IA para realizar un seguimiento y predecir el uso de recursos de contenedores, espacios de nombres y nodos de clústeres Kubernetes a fin de hacer las recomendaciones correctas y evitar un costoso exceso de aprovisionamiento o una falta de aprovisionamiento que afecte al rendimiento. Utilizando las predicciones de las cargas de trabajo de las aplicaciones, Federator.ai autoescala los contenedores de aplicaciones en el momento adecuado y optimiza el rendimiento con el número correcto de réplicas de contenedores a través del Autoescalado horizontal de pods (HPA) de Kubernetes o el [Datadog Watermark Pod Autoscaling (WPA)][3].
+[ProphetStor Federator.ai][1] proporciona una capacidad de observación de stack tecnológico completo a través de sus API integradas con Datadog Agents, desde las cargas de trabajo a nivel de aplicación, incluida la formación LLM, hasta el consumo de recursos a nivel de clúster. Esta integración incentiva un bucle dinámico entre la monitorización en directo y el análisis predictivo, mejorando continuamente la gestión de recursos, optimizando los costes y garantizando un funcionamiento eficiente de las aplicaciones. Con una licencia de ProphetStor Federator.ai, puedes aplicar una solución basada en IA para realizar un seguimiento y predecir el uso de recursos de contenedores, espacios de nombres y nodos de clústeres Kubernetes a fin de hacer las recomendaciones correctas y evitar un costoso exceso de aprovisionamiento o una falta de aprovisionamiento que afecte al rendimiento. Utilizando las predicciones de las cargas de trabajo de las aplicaciones, Federator.ai autoescala los contenedores de aplicaciones en el momento adecuado y optimiza el rendimiento con el número correcto de réplicas de contenedores a través del Autoescalado horizontal de pods (HPA) de Kubernetes o el [Datadog Watermark Pod Autoscaling (WPA)][3].
 
 Aparte de esta licencia de Federator.ai, está disponible una [integración Datadog][9] oficial con dashboards predefinidos y monitores recomendados. Para obtener información adicional sobre Federator.ai, puedes ver el vídeo [ProphetStor Federator.ai Feature Demo][2].
 
@@ -143,7 +143,7 @@ Para recibir asistencia o enviar solicitudes, ponte en contacto con el [servicio
 [6]: https://www.datadoghq.com/
 [7]: https://docs.datadoghq.com/es/account_management/api-app-keys/
 [8]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20User%20Guide.pdf
-[9]: /es/integrations/federatorai
+[9]: https://app.datadoghq.com/integrations/federatorai
 
 ---
-Esta aplicación está disponible a través del Marketplace y cuenta con el soporte de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/prophetstor-federatorai-license" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/prophetstor-federatorai-license" target="_blank">adquiere esta aplicación en el Marketplace</a>.

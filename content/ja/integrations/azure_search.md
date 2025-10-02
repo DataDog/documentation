@@ -36,7 +36,7 @@ Datadog Azure インテグレーションを使用して、Azure Cognitive  Sear
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_search" >}}
+{{ get-metrics-from-git "azure-ai-search" }}
 
 
 ### イベント

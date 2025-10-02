@@ -28,6 +28,9 @@ products:
 - name: App and API Protection
   url: /security/application_security/
   icon: app-sec
+- name: Workload Protection
+  url: /security/workload_protection/
+  icon: cloud-security-management
 ---
 
 {{< product-availability >}}
@@ -43,10 +46,31 @@ Out-of-the box rules are available for the following security products:
 - [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
 - Cloud Security:
     - [Cloud Security Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
-    - [Workload Protection][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
     - [Cloud Security Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
+- [Workload Protection][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
 - [App and API Protection][7] (AAP) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
+## MITRE ATT&CK map
+
+{{< product-availability names="Cloud SIEM,App and API Protection,Workload Protection" >}}
+
+MITRE ATT&CK is a framework that helps organizations understand how cyber attackers operate. It maps the following:
+
+- **Tactics:** The "why" of an attack. These are the high-level goals, like gaining initial access, executing malicious code, or stealing data.
+- **Techniques:** The "how" of an attack. These are the specific actions an attacker takes to achieve a tactic, like using phishing to get into a system or exploiting a vulnerability in software.
+
+By mapping tactics and techniques, MITRE ATT&CK provides security teams with a common language to communicate threats and better prepare defenses.
+
+To use the MITRE ATT&CK map, do the following:
+
+1. Open Detection Rules in [SIEM][16] or [Workload Protection][17].
+2. Select **MITRE ATT&CK map**.
+3. Select one of more products in the filter <i class="icon-filter"></i>.
+4. Review the map for the following:
+   - Assessing Coverage: Determine which attack techniques are well-covered and which are under-monitored.
+   - Prioritizing Rule Creation: Focus on creating detection rules for techniques with low or no coverage.
+   - Streamlining Rule Management: Manage and update detection rules, ensuring they align with the latest threat intelligence.
+The MITRE ATT&CK map available in SIEM or Workload Protection, but you can select Application and API Protection in the filter. Application and API Protection is included in the MITRE ATT&CK map for all-inclusive security coverage.
 ## Beta detection rules
 
 Datadog's Security Research team continually adds new OOTB security detection rules. While the aim is to deliver high quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research the time to either refine or deprecate detection opportunities that do not meet our standards.
@@ -59,7 +83,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (Application Security, Cloud Security, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (App and API Protection, Cloud Security, and Cloud SIEM).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -119,7 +143,7 @@ Use Rule Version History to:
 
 To see the version history of a rule:
 1. Navigate to the [Security Settings][15] page. In the left navigation panel:
-    - For AAP: Click **Application Security** and then click **Detection Rules**.
+    - For AAP: Click **App and API Protection** and then click **Detection Rules**.
     - For Cloud Security: Click **Cloud Security** and then click **Threat Detection Rules**.
     - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
 1. Click on the rule you are interested in.
@@ -170,8 +194,11 @@ The rule deprecation process is as follows:
 [8]: /tracing/
 [9]: /agent/
 [10]: https://app.datadoghq.com/security/configuration/
-[11]: /security/cloud_siem/detection_rules/
-[12]: /security/application_security/threats/custom_rules/
+[11]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
+[12]: /security/application_security/policies/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
 [14]: /security/workload_protection/workload_security_rules?tab=host#create-custom-rules
 [15]: https://app.datadoghq.com/security/configuration/
+[16]: https://app.datadoghq.com/security/rules
+[17]: https://app.datadoghq.com/security/workload-protection/detection-rules
+

@@ -124,7 +124,7 @@ You can start collecting feature flag data with [custom feature flag management 
 **Note**: The following special characters are not supported for Feature Flag Tracking: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
 
   ```javascript
-  datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+  datadogRum.addFeatureFlagEvaluation(key.replaceAll(':', '_'), value);
   ```
 
 </div>

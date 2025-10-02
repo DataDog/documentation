@@ -12,10 +12,6 @@ further_reading:
     text: "Learn about Saved Views"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The Quality Gates Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) quality gates or rule executions at multiple levels using any tag.

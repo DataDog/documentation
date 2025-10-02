@@ -1,7 +1,6 @@
 {
   "data": {
     "attributes": {
-      "description": "Escalation Policy 1 description",
       "name": "Example-On-Call",
       "resolve_page_on_policy_end": true,
       "retries": 2,

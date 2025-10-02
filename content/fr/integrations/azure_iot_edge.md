@@ -150,7 +150,7 @@ Une fois l'Agent déployé sur l'appareil, [lancez la sous-commande status de l'
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### Checks de service

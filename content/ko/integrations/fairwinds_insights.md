@@ -26,13 +26,13 @@ author:
   support_email: insights@fairwinds.com
   vendor_id: fairwinds
 categories:
-- ㅊ
-- 비용 관리
+- 컨테이너
+- cost management
 - 쿠버네티스(Kubernetes)
 - marketplace
 - 프로비저닝
-- 보안
-custom_kind: integration
+- security
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -57,8 +57,8 @@ pricing:
 public_title: Fairwinds Insights
 short_description: 미션 크리티컬 Kubernetes 애플리케이션을 보호하고 최적화하세요
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -67,8 +67,8 @@ tile:
   - Category::Cost Management
   - Category::Kubernetes
   - Category::Marketplace
-  - 카테고리::프로비저닝
-  - 카테고리::보안
+  - Category::Provisioning
+  - Category::Security
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows

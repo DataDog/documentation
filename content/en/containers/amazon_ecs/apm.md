@@ -1,5 +1,6 @@
 ---
 title: Tracing ECS Applications
+description: Configure APM trace collection for containerized applications running on Amazon ECS
 aliases:
   - /agent/amazon_ecs/apm
 further_reading:
@@ -214,7 +215,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly:
+You can alternatively update your code to have the tracer set the hostname explicitly. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,8 +223,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

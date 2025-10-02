@@ -5,7 +5,7 @@ further_reading:
 - link: "security/application_security/terms/"
   tag: "Documentation"
   text: "AAP Terms and Concepts"
-- link: "security/application_security/threats/add-user-info/?tab=set_user"
+- link: "security/application_security/how-it-works/add-user-info/?tab=set_user"
   tag: "Documentation"
   text: "User Monitoring and Protection"
 - link: "security/application_security/guide/"
@@ -75,6 +75,8 @@ The following user activity events are used for ATO tracking.
 | `users.password_reset` | False             | Detection rule requirement to identify user enumeration through password reset |
 
 Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
+
+<div class="alert alert-info">You can use the <a href="https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules">Suggested Rules</a> feature to automatically analyze application traffic and propose rules to help monitor and protect login and API flows. See <a href="/security/application_security/policies/inapp_waf_rules/#suggested-rules">Suggested Rules.</a></div>
 
 For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
@@ -266,10 +268,10 @@ To receive targeted and compromised user IDs with a webhook, set up a webhook us
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/
+[1]: https://docs.datadoghq.com/security/application_security/how-it-works/add-user-info/
 [2]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [3]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
-[4]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /tracing/guide/remote_config/
 [5]: https://app.datadoghq.com/security/appsec/business-logic
 [6]: https://docs.datadoghq.com/security/notifications/rules/
 [7]: https://app.datadoghq.com/integrations?category=Collaboration

@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Monitor the usage of Flex compute through various graphs on the Flex Controls page. Make informed decisions using data on cost-performance tradeoffs and balance operational success with financial efficiency.
+Monitor the usage of Flex compute through various graphs on the [Flex Logs Controls][1] page. Make informed decisions using data on cost-performance tradeoffs and balance operational success with financial efficiency.
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Dashboard showing both the query performance and compute size" style="width:100%;" >}} -->
+{{< img src="/logs/guide/flex_compute/flex_compute_graphs_1.png" alt="Dashboard showing the query performance and compute size metrics, including query slowdowns, top sources of slowdowns, and compute usage over time" style="width:100%;" >}}
 
 ## Monitoring query performance
 
@@ -26,11 +26,10 @@ Query slowdowns occur when the concurrent query limit is reached, and a query is
 
 ### Available metrics
 
-The Flex Logs Controls page provides visualizations so you can assess how often query slowdowns are occurring and where they are happening most frequently. The following metrics are available:
-- Query slowdowns
-- Top sources of query slowdowns
-- Top users experiencing slowdowns
-- Top dashboards experiencing slowdowns
+- **Concurrent query utilization:** Shows the number of queries running at the same time and the available headroom. If usage reaches the maximum capacity, additional queries are throttled until a slot is available.
+- **Slowdowns by day of the week:** Provides an overview of the percentage of query slowdowns by day, helping identify patterns in compute demand.
+- **Top sources of slowdowns:** Breaks down whether delays originate from the Log Explorer, dashboards, or API queries, making it easier to target areas for optimization.
+- **Drilldowns:** Click on a dashboard or user to open directly to the dashboard or the user history of Flex queries in [Audit Trail][2]. **Note**: Only Logs List queries are audited. This does not include queries used for visualizations, such as timeseries or top list.
 
 ## Optimization recommendations
 
@@ -40,15 +39,19 @@ Use this information to optimize your usage.
    - Discuss their querying needs
    - Understand if there are logs they query frequently that should be stored in Standard Indexing instead
 1. **Improve dashboards experiencing slowdowns by:**
-   - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex compute usage
-   - Breaking them down into smaller dashboards to spread the load
-   - Reducing the number of concurrent queries
+   - Pausing the auto-refresh of dashboards
+      {{< img src="/logs/guide/flex_compute/pause_dashboard.png" alt="Dashboard interface showing the pause auto-refresh button to stop automatic dashboard updates" style="width:90%;" >}}
+   - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex compute usage. For example, if dashboard widgets are only looking at a few "error" or "success" instances, but the logs themselves contain low information density, consider turning these logs into a metric
+   - Organizing dashboard widgets into groups, and keeping the groups collapsed until needed. Widgets in a collapsed group do not load when the dashboard is opened
 1. **Consider upgrading your Flex compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
+1. **Scope to the index** you are querying. If the logs you are querying belong to a specific index, scoping to that index can speed up your search.
 
-To learn more about compute sizes, see the [Flex Logs][1] documentation.
+To learn more about compute sizes, see the [Flex Logs][3] documentation.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/flex_logs/
+[1]: https://app.datadoghq.com/logs/pipelines/flex-logs-controls
+[2]: /account_management/audit_trail/#explore-audit-events
+[3]: /logs/log_configuration/flex_logs/

@@ -6,10 +6,6 @@ further_reading:
 title: 팀 온보딩
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 팀은 [Datadog On-Call][2]의 중앙 조직 단위입니다. 페이지는 팀으로 전송되고 팀의 스케줄이나 에스컬레이션 정책은 페이지를 적절한 팀원에게 라우팅합니다.
 
 On-Call Teams는 [Datadog Teams][1]의 확장입니다. On-Call Teams는 [Teams][3] 개요 페이지에 온콜 업무를 수행하지 않는 팀과 함께 나열되어 있습니다. Datadog은 가능한 한 On-Call 구성에 기존 팀을 사용할 것을 권장합니다. 이렇게 하면 On-Call 팀을 쉽게 찾을 수 있습니다.

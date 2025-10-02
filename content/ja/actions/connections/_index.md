@@ -16,10 +16,6 @@ further_reading:
 title: 接続
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択された <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Workflow Automation と App Builder はサポートされていません。</div>
-{{< /site-region >}}
-
 アクションは外部のソフトウェアシステムと連携するため、対応するインテグレーションで Datadog アカウントを認証する必要がある場合があります。認証が必要なすべてのアクションが Datadog アカウントの ID を検証できて初めて、アプリやワークフローは正常に実行されます。Datadog に権限を付与する際は、セキュリティのベストプラクティスに従い、アプリまたはワークフローの実行に必要な権限のみを付与していることを確認してください。
 
 アクションの認証方法は次の 2 種類があります:

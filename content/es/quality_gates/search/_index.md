@@ -7,10 +7,6 @@ further_reading:
 title: Buscar y gestionar reglas de Puertas de calidad
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las Puertas de calidad no se encuentran disponibles en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 La página [**Reglas de las puertas de calidad**][1] es útil para los desarrolladores que quieren controlar las puertas de calidad de sus procesos de compilación. Puedes ver todas las reglas definidas por la organización.
@@ -33,7 +29,7 @@ Haz clic en una ejecución de regla específica para ver los resultados de la ej
 
 Para cambiar a los resultados de Static Analysis o Software Composition Analysis relacionados en [Datadog Code Security][2], haz clic en `See related events`. Puedes editar la regla de las Puertas de calidad, de acuerdo con los resultados de tu ejecución, haciendo clic en **Manage Rule** (Gestionar regla).
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

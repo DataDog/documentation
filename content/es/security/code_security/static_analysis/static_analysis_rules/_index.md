@@ -2,16 +2,17 @@
 title: Reglas de SAST
 description: Consulta las reglas de Static Code Analysis para múltiples lenguajes.
 aliases:
-- /es/continuous_integration/static_analysis/rules
-- /es/static_analysis/rules
-- /es/code_analysis/static_analysis_rules
-- /es/security/code_security/static_analysis_rules
+- /continuous_integration/static_analysis/rules
+- /static_analysis/rules
+- /code_analysis/static_analysis_rules
+- /security/code_security/static_analysis_rules
 is_beta: false
 type: static-analysis
 rulesets:
   csharp-best-practices:
     title: "Prácticas recomendadas para C#"
-    description: "Reglas para aplicar las prácticas recomendadas de C#."
+    description: |
+      Reglas para aplicar las prácticas recomendadas de C#.
   csharp-code-style:
     title: "Seguir los patrones del estilo de código de C#"
     description: |
@@ -145,21 +146,21 @@ rulesets:
     description: |
       Un conjunto de reglas para verificar que el código de pandas se use de forma adecuada.
 
-      - Garantiza que las declaraciones `import` sigan las pautas de codificación.
-      - Evita códigos y métodos obsoletos.
-      - Evita el código ineficiente siempre que sea posible.
+       - Garantiza que las declaraciones `import` sigan las pautas de codificación.
+       - Evita códigos y métodos obsoletos.
+       - Evita el código ineficiente siempre que sea posible.
   python-security:
     title: Garantizar que el código de Python esté protegido y seguro
     description: |
       Reglas centradas en encontrar problemas de seguridad y vulnerabilidad en tu código de Python, incluidos aquellos que se encuentran en OWASP10 y SANS25.
 
-      - Uso de protocolos de cifrado y hash incorrectos
-      - Falta de control de acceso
-      - Configuración errónea de seguridad
-      - Inyecciones de SQL
-      - Credenciales codificadas
-      - Inyección de shell
-      - Deserialización insegura
+       - Uso de protocolos de cifrado y hash incorrectos
+       - Falta de control de acceso
+       - Configuración errónea de seguridad
+       - Inyecciones de SQL
+       - Credenciales codificadas
+       - Inyección de shell
+       - Deserialización insegura
   rails-best-practices:
     title: Patrones ampliamente adoptados por la comunidad de Ruby on Rails
     description: |
@@ -241,13 +242,13 @@ cascade:
       text: Utiliza Datadog Code Security para detectar problemas de código en cada paso del proceso de desarrollo
       link:
         name: Datadog Code Security
-        url: "https://www.datadoghq.com/security/code_security/"
+        url: "https://www.datadoghq.com/product/code-security/"
 
   banner:
     title: <span>Integraciones sin problemas.</span> Prueba Datadog Code Security
     link:
       name: Datadog Code Security
-      url: "https://www.datadoghq.com/security/code_security/"
+      url: "https://www.datadoghq.com/product/code-security/"
 
 further_reading:
   - link: /security/code_security/

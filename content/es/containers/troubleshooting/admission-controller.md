@@ -5,28 +5,28 @@ further_reading:
   text: Rastreo de Kubernetes para instrumentar automáticamente
 - link: /containers/cluster_agent/admission_controller/
   tag: Documentación
-  text: Controlador de admisión (Admission Controller) del Cluster Agent
+  text: Controlador de admisión del Cluster Agent
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: Documentación
-  text: Inyección de biblioteca de Kubernetes
-title: Solucionar problemas con el Controlador de admisiones (Admission Controller)
+  text: Inyección de librería de Kubernetes
+title: Solucionar problemas del Controlador de admisión
 ---
 
 ## Información general
 
-Esta página proporciona una opción para solucionar problemas para el [Controlador de admisión (Admission Controller)][1] del Datadog Cluster Agent.
+Esta página proporciona información para la resolución de problemas del [Controlador de admisión][1] del Datadog Cluster Agent.
 
 ## Problemas comunes
 
 ### Actualizar los pods preexistentes
-El Controlador de admisión (Admission Controller) responde a la creación de nuevos pods dentro de tu clúster de Kubernetes: en la creación de pods, el Cluster Agent recibe una solicitud de Kubernetes y responde con los detalles de qué cambios (si los hay) hacer en el pod.
+El Controlador de admisión responde a la creación de nuevos pods dentro de tu clúster de Kubernetes: en la creación de pods, el Cluster Agent recibe una solicitud de Kubernetes y responde con los detalles de qué cambios (si los hay) hacer en el pod.
 
-Por lo tanto, **el Controlador de admisión (Admission Controller) no muta los pods existentes dentro de tu clúster**. Si has activado recientemente el Controlador de admisión (Admission Controller) o has realizado otros cambios en el entorno, elimina tu pod existente y deja que Kubernetes lo vuelva a crear. Esto asegura que el Controlador de admisión (Admission Controller) actualice tu pod.
+Por lo tanto, **el Controlador de admisión no muta los pods existentes dentro de tu clúster**. Si has activado recientemente el Controlador de admisión o has realizado otros cambios en el entorno, elimina tu pod existente y deja que Kubernetes lo vuelva a crear. Esto asegura que el Controlador de admisión actualice tu pod.
 
 ### Labels (etiquetas) y anotaciones
 El Cluster Agent responde a las labels y anotaciones del pod creado; **no** responde a la carga de trabajo (Despliegue, DaemonSet, CronJob, etc.) que creó ese pod. Asegúrate de que tu plantilla de pod hace referencia a esto.
 
-Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de biblioteca][3]:
+Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de librería][3]:
 
 ```yaml
 apiVersion: apps/v1
@@ -34,7 +34,7 @@ kind: Deployment
 metadata:
   name: example-deployment
 spec:
-  #(...)  
+  #(...)
   template:
     metadata:
       labels:
@@ -48,15 +48,15 @@ spec:
 
 ### No se crean los pods de aplicación
 
-El modo de inyección del Controlador de admisión (Admission Controller) (`socket`, `hostip`, `service`) lo establece la configuración de tu Cluster Agent. Por ejemplo, si tienes habilitado el modo `socket` en tu Agent, el Controlador de admisión (Admission Controller) también utiliza el modo `socket`.
+El modo de inyección del Controlador de admisión (`socket`, `hostip`, `service`) lo establece la configuración de tu Cluster Agent. Por ejemplo, si tienes habilitado el modo `socket` en tu Agent, el Controlador de admisión también utiliza el modo `socket`.
 
 Si utilizas GKE Autopilot u OpenShift, deberás utilizar un modo de inyección específico.
 
 #### GKE Autopilot
 
-GKE Autopilot restringe el uso de cualquier `volumes` con una `hostPath`. Por lo tanto, si el Controlador de admisión (Admission Controller) utiliza el modo `socket`, el GKE Warden bloquea la programación de los pods.
+GKE Autopilot restringe el uso de cualquier `volumes` con una `hostPath`. Por lo tanto, si el Controlador de admisión utiliza el modo `socket`, el GKE Warden bloquea la programación de los pods.
 
-Al activar el modo de GKE Autopilot en la tabla de Helm, se desactiva el modo `socket` para evitar que esto ocurra. Para habilitar APM, habilita el puerto y utiliza en su lugar el método `hostip` o `service`. El Controlador de admisión (Admission Controller) utilizará por defecto `hostip` para coincidir.
+Al activar el modo de GKE Autopilot en la tabla de Helm, se desactiva el modo `socket` para evitar que esto ocurra. Para habilitar APM, habilita el puerto y utiliza en su lugar el método `hostip` o `service`. El Controlador de admisión utilizará por defecto `hostip` para coincidir.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -77,9 +77,9 @@ Consulta la página [Distribuciones de Kubernetes][17] para obtener más detalle
 
 #### OpenShift
 
-OpenShift dispone de `SecurityContextConstraints` (SCCs) que son necesarios para desplegar pods con permisos adicionales, como un `volume` con una `hostPath`. Los componentes de Datadog se despliegan con SCCs para permitir la actividad específica de los pods de Datadog, pero Datadog no crea SCCs para otros pods.
+OpenShift dispone de `SecurityContextConstraints` (SCC) que son necesarios para desplegar pods con permisos adicionales, como un `volume` con un `hostPath`. Los componentes Datadog se despliegan con SCC para permitir la actividad específica de los pods Datadog, pero Datadog no crea SCC para otros pods. El Controlador de admisión podría añadir la configuración basada en sockets a tus pods de aplicación, lo que impediría que se desplieguen.
 
-Si utilizas OpenShift, utiliza el modo `hostip`. La siguiente configuración habilita el modo `hostip`:
+Si utilizas OpenShift, utiliza el modo `hostip`. La siguiente configuración habilita el modo `hostip` desactivando las opciones de socket:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -96,7 +96,14 @@ spec:
         enabled: true
       unixDomainSocketConfig:
         enabled: false
+    dogstatsd:
+      hostPortConfig:
+        enabled: true
+      unixDomainSocketConfig:
+        enabled: false
 ```
+Como alternativa, puedes definir `features.admissionController.agentCommunicationMode` como `hostip` o `service` directamente.
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
@@ -105,12 +112,13 @@ datadog:
     portEnabled: true
     socketEnabled: false
 ```
+Como alternativa, puedes definir `clusterAgent.admissionController.configMode` como `hostip` o `service` directamente.
 {{% /tab %}}
 {{< /tabs >}}
 
-Consulta la página [Distribuciones de Kubernetes][18] para obtener más detalles sobre la configuración de Autopilot.
+Para obtener más detalles de configuración de OpenShift, consulta [Distribuciones de Kubernetes][18].
 
-## Ver el estado del Controlador de admisión (Admission Controller)
+## Ver el estado del Controlador de admisión
 
 La salida de estado del Cluster Agent proporciona información para verificar que ha creado el `datadog-webhook` para la `MutatingWebhookConfiguration` y tiene un certificado válido.
 
@@ -127,7 +135,7 @@ Tu salida se parece a la siguiente:
 Admission Controller
 ====================
 
-    Información de Webhooks
+    Webhooks info
     -------------
       MutatingWebhookConfigurations name: datadog-webhook
       Created at: 2023-09-25T22:32:07Z
@@ -150,7 +158,7 @@ Admission Controller
         Rule 1: Operations: [CREATE] - APIGroups: [] - APIVersions: [v1] - Resources: [pods]
         Service: default/datadog-admission-controller - Port: 443 - Path: /injecttags
 
-    Información del Secret
+    Secret info
     -----------
     Secret name: webhook-certificate
     Secret namespace: default
@@ -162,9 +170,9 @@ Admission Controller
 
 Esta salida es relativa al Cluster Agent desplegado en el espacio de nombres `default`. `Service` y `Secret` deben coincidir con el espacio de nombres utilizado.
 
-## Ver los logs del Controlador de admisión (Admission Controller)
+## Ver logs del Controlador de admisión
 
-Los logs de depuración ayudan a validar que has configurado el Controlador de admisión (Admission Controller) correctamente. [Habilita la depuración de logs][3] con la siguiente configuración:
+Los logs de depuración ayudan a validar que has configurado el Controlador de admisión correctamente. [Habilita la depuración de logs][3] con la siguiente configuración:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -198,32 +206,32 @@ datadog:
 **Ejemplo de logs**:
 
 ```
-<TIMESTAMP> | CLÚSTER | INFO | (pkg/clusteragent/admission/controllers/secret/controller.go:73 en ejecución) | Iniciando el controlador de secretos para default/webhook-certificate
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:148 en cola) | Añadiendo objeto con key default/webhook-certificate a la cola
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/secret/controller.go:140 en cola) | Añadiendo un objeto con key default/webhook-certificate a la cola
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:148 en cola) | Añadiendo objecto con key datadog-webhook a la cola
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/util/kubernetes/apiserver/util.go:47 en func1) | Sincronización para el informador admissionregistration.k8s.io/v1/mutatingwebhookconfigurations en 101.116625ms, última versión del recurso: 152728
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/webhook/controller_v1.go:140 en conciliación) | Se encontró el Webhook datadog-webhook, se está actualizando
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/secret/controller.go:211 en conciliación) | El certificado está actualizado, no está en acción. Duración antes del vencimiento: 8558h17m27.909792831s
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/secret/controller.go:174 en processNextWorkItem) | Secret default/webhook-certificate conciliado con éxito
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 en processNextWorkItem) | Webhook datadog-webhook conciliado con éxito
+<TIMESTAMP> | CLUSTER | INFO | (pkg/clusteragent/admission/controllers/secret/controller.go:73 in Run) | Starting secrets controller for default/webhook-certificate
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:148 in enqueue) | Adding object with key default/webhook-certificate to the queue
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:140 in enqueue) | Adding object with key default/webhook-certificate to the queue
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:148 in enqueue) | Adding object with key datadog-webhook to the queue
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/util/kubernetes/apiserver/util.go:47 in func1) | Sync done for informer admissionregistration.k8s.io/v1/mutatingwebhookconfigurations in 101.116625ms, last resource version: 152728
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_v1.go:140 in reconcile) | The Webhook datadog-webhook was found, updating it
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:211 in reconcile) | The certificate is up-to-date, doing nothing. Duration before expiration: 8558h17m27.909792831s
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:174 in processNextWorkItem) | Secret default/webhook-certificate reconciled successfully
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 in processNextWorkItem) | Webhook datadog-webhook reconciled successfully
 ```
 
-Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión (Admission Controller) según las [Instrucciones de configuración][1]. 
+Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión según las [instrucciones de configuración][1].
 
 ### Validar inyección
 
 **Ejemplo de logs**:
 
 ```
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/secret/controller.go:140 en cola) | Añadiendo objecto con key default/webhook-certificate a la cola
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/secret/controller.go:211 en conciliación) | El certificado está actualizado, no está en acción. Duración antes del vencimiento: 8558h12m28.007769373s
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/controllers/secret/controller.go:174 en processNextWorkItem) | Secret default/webhook-certificate conciliado con éxito
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/mutate/common.go:74 en injectEnv) | Inyectando variable de entorno 'DD_TRACE_AGENT_URL' en el pod con el nombre generado example-pod-123456789-
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/mutate/common.go:74 en injectEnv) | Inyectando variable de entorno 'DD_DOGSTATSD_URL' en el pod con el nombre generado example-pod-123456789-
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/mutate/common.go:74 en injectEnv) | Inyectando variable de entorno 'DD_ENTITY_ID' en el pod con el nombre generado example-pod-123456789-
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/mutate/common.go:74 en injectEnv) | Inyectando variable de entorno 'DD_SERVICE' en el pod con el nombre generado example-pod-123456789-
-<TIMESTAMP> | CLÚSTER | DEPURACIÓN | (pkg/clusteragent/admission/mutate/auto_instrumentation.go:336 en injectLibInitContainer) | Inyectando contenedor init llamado "datadog-lib-python-init" con la imagen "gcr.io/datadoghq/dd-lib-python-init:v1.18.0" en el pod con el nombre generado example-pod-123456789-
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:140 in enqueue) | Adding object with key default/webhook-certificate to the queue
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:211 in reconcile) | The certificate is up-to-date, doing nothing. Duration before expiration: 8558h12m28.007769373s
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:174 in processNextWorkItem) | Secret default/webhook-certificate reconciled successfully
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/common.go:74 in injectEnv) | Injecting env var 'DD_TRACE_AGENT_URL' into pod with generate name example-pod-123456789-
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/common.go:74 in injectEnv) | Injecting env var 'DD_DOGSTATSD_URL' into pod with generate name example-pod-123456789-
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/common.go:74 in injectEnv) | Injecting env var 'DD_ENTITY_ID' into pod with generate name example-pod-123456789-
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/common.go:74 in injectEnv) | Injecting env var 'DD_SERVICE' into pod with generate name example-pod-123456789-
+<TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/auto_instrumentation.go:336 in injectLibInitContainer) | Injecting init container named "datadog-lib-python-init" with image "gcr.io/datadoghq/dd-lib-python-init:v1.18.0" into pod with generate name example-pod-123456789-
 ```
 
 Si observas errores con la inyección de un pod determinado, ponte en contacto con el soporte de Datadog indicando tu configuración de Datadog y tu configuración de pod.
@@ -264,15 +272,15 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`. 
+Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`.
 
 Alternativamente, para los entornos basados en Cilium, establece `flavor` en `cilium` para crear un recurso de `CiliumNetworkPolicy`.
 
 ### Solucionar problemas de red para distribuciones de Kubernetes
 
-Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (Admission Controller) (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el trazador de Datadog.
+Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el trazador de Datadog.
 
-Según tu distribución de Kubernetes, esto puede tener algunos requisitos adicionales para tus reglas de seguridad y configuración del Controlador de admisiones (Admission Controller).
+Según tu distribución de Kubernetes, esto puede tener algunos requisitos adicionales para tus reglas de seguridad y configuración del Controlador de admisión.
 
 #### Amazon Elastic Kubernetes Service (EKS)
 
@@ -289,7 +297,7 @@ Si tienes varios [grupos de nodos gestionados][8], cada uno con grupos de seguri
 
 Para validar tu configuración de redes, activa el [registro del plano de control de EKS][9] para el servidor de API. Puedes ver estos logs en la [consola de CloudWatch][10].
 
-A continuación, elimina uno de tus pods para volver a lanzar una solicitud a través del Controlador de admisión (Admission Controller). Cuando la solicitud falla, puedes ver logs que se parecen a los siguiente:
+A continuación, elimina uno de tus pods para volver a lanzar una solicitud a través del Controlador de admisión. Cuando la solicitud falla, puedes ver logs que se parecen a los siguiente:
 
 ```
 W0908 <TIMESTAMP> 10 dispatcher.go:202] Failed calling webhook, failing open datadog.webhook.auto.instrumentation: failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
@@ -298,13 +306,13 @@ E0908 <TIMESTAMP> 10 dispatcher.go:206] failed calling webhook "datadog.webhook.
 
 Estos fallos son relativos a un Cluster Agent desplegado en el espacio de nombres `default`; el nombre de DNS se ajusta en relación al espacio de nombres utilizado.
 
-También puedes ver fallos para los otros webhooks del Controlador de admisión (Admission Controller), como `datadog.webhook.tags` y `datadodg.webhook.config`.
+También puedes ver fallos para los otros webhooks del Controlador de admisión, como `datadog.webhook.tags` y `datadodg.webhook.config`.
 
 **Nota:** EKS suele generar dos flujos de log dentro del grupo de log de CloudWatch para el clúster. Asegúrate de comprobar ambos para estos tipos de logs.
 
 #### Azure Kubernetes Service (AKS)
 
-Para utilizar [webhooks del controlador de admisión (Admission Controller) en AKS][11], utiliza la siguiente configuración:
+Para utilizar [webhooks del Controlador de admisión en AKS][11], utiliza la siguiente configuración:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -336,7 +344,7 @@ providers:
     enabled: true
 ```
 
-La opción `providers.aks.enabled` establece la variable de entorno `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"`.
+La opción `providers.aks.enabled` define la variable de entorno `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"`.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -353,6 +361,8 @@ Para más información, consulta [Añadir reglas de cortafuegos para casos de us
 #### Rancher
 
 Si utilizas Rancher con un clúster de EKS o un clúster privado de GKE, se requiere una configuración adicional. Para más información, consulta [Rancher Webhook - Problemas comunes][16] en la documentación de Rancher.
+
+**Nota**: Dado que el webhook del Controlador de admisión de Datadog funciona de forma similar al webhook de Rancher, Datadog necesita acceso al puerto `8000` en lugar del puerto `9443` de Rancher.
 
 ##### Rancher y EKS
 Para utilizar Rancher en un clúster de EKS, despliega el pod de Cluster Agent con la siguiente configuración:
@@ -385,9 +395,9 @@ clusterAgent:
 También debes añadir una regla de entrada de grupo de seguridad, como se describe en la sección [Amazon EKS](#amazon-elastic-kubernetes-service-eks) de esta página.
 
 ##### Rancher y GKE
-Para utilizar Rancher en un clúster privado de GKE, edita las reglas de tu cortafuegos para permitir el acceso entrante a través de TCP en los puertos `8000` y `9443`. Consulta la sección [GKE](#google-kubernetes-engine-gke) en esta página.
+Para utilizar Rancher en un clúster GKE privado, edita las reglas de tu cortafuegos para permitir el acceso entrante a través de TCP en el puerto `8000`. Consulta la sección [GKE](#google-kubernetes-engine-gke) en esta página.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

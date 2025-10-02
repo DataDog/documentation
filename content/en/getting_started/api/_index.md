@@ -1,5 +1,6 @@
 ---
 title: Using Postman with Datadog APIs
+description: Learn how to use Postman to perform API calls to Datadog for GET, POST, PUT, and DELETE operations with authentication setup.
 aliases:
     - /developers/faq/using-postman-with-datadog-apis
     - /getting_started/using-postman-with-datadog-apis

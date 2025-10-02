@@ -2,8 +2,8 @@
 title: IP 許可リスト
 ---
 
-{{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
+{{< callout url="/help/" header="IP Allowlist の使用を開始する" >}}
+IP allowlist 機能はエンタープライズ プランのお客様のみが利用できます。サポートに問い合わせてアクセスをリクエストしてください。
 {{< /callout >}}
 
 ## 概要
@@ -26,10 +26,12 @@ IP 許可リストを有効にすると、許可リストに含まれる IP ア�
 IP 許可リスト機能は、以下へのアクセスをブロックしません。
 - Agent がメトリクス、トレース、ログなどのデータを送信するデータ取り込みエンドポイント
 - Agent がデータを送信する前に使用する [validate API key][2] のエンドポイント
-- [Agent flare submission][3]
-- [Public dashboards][4]
+- [Agent フレアの送信][3]
+- [パブリック ダッシュボード][4]
 
-Applications and integrations that submit telemetry from the Agent (metrics, traces, and logs), and those that use an API key provided by the user, are not impacted by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third party applications and integrations.
+Agent からテレメトリー (metrics、traces、logs) を送信するアプリケーションおよびインテグレーション、ならびにユーザーが提供した API キーを使用するものは、IP allowlist の影響を受けません。Datadog は、サードパーティのアプリケーションおよびインテグレーションからの IP アドレスを監視するために [Audit Trail][5] を利用することを推奨します。
+
+IP allowlist 機能が有効な場合にモバイル アプリ クライアントが Datadog に接続できるようにするには、モバイル デバイスを VPN 経由で許可されたネットワーク範囲に接続させることを Datadog は推奨します。
 
 ### 機能性
 
@@ -54,10 +56,10 @@ IP 許可リストを有効化または変更すると、あなたがデータ�
 
 **注:** IP 許可リスト ページは、Datadog 組織がこの機能をオンにしている場合にのみ UI に表示されます。
 
-To find the [IP allowlist UI][6]:
+[IP allowlist UI][6] を見つけるには:
 
 1. アカウントメニューから、**Organization Settings** に移動します。
-1. **Access** の下で、**IP Allowlist** を選択します。
+1. **Security** で **IP Allowlist** を選択します。
 
 IP 許可リストテーブルには、IP 許可リストに含まれる CIDR 範囲が一覧表示されます。
 
@@ -69,7 +71,7 @@ IP 許可リストのステータスを切り替えるには、**Enable** また
 
 ### IP アドレスまたは CIDR 範囲を追加する
 
-{{< img src="account_management/org_settings/add_ip_2.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
+{{< img src="account_management/org_settings/add_ip_2.png" alt="「Add IP to allowlist」というタイトルのダイアログ ボックスを示すスクリーンショット" >}}
 
 1. ページ右上の **Add IP** ボタンをクリックします。
 1. 有効な IP アドレスまたは CIDR 範囲を入力します。
@@ -90,9 +92,9 @@ IP 許可リストのステータスを切り替えるには、**Enable** また
 
 ## プログラムで IP 許可リストを管理する
 
-To manage the IP allowlist through the API, see the [IP Allowlist API documentation][7].
+API 経由で IP allowlist を管理するには、[IP Allowlist API ドキュメント][7] を参照してください。
 
-See the [`ip_allowlist` resource][8] to manage the IP allowlist in Terraform.
+Terraform で IP allowlist を管理するには、[`ip_allowlist` リソース][8] を参照してください。
 
 
 [1]: /ja/api/latest/

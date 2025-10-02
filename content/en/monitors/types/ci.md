@@ -1,5 +1,6 @@
 ---
 title: CI/CD & Test Monitor
+description: "Monitor CI pipelines, tests, and CD deployments with alerts on failures, performance regressions, and code coverage metrics."
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
@@ -17,13 +18,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
   tag: "Blog"
   text: "Configure pipeline alerts with Datadog CI monitors"
+site_support_id: ci_visibility
 ---
-
-{{< site-region region="gov" >}}
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">The CI/CD & Test Monitor is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-{{< /site-region >}}
 
 ## Overview
 

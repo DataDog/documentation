@@ -14,10 +14,6 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
@@ -309,6 +305,8 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
 
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+
 For a full explanation, see the guide on [using CI jobs failure analysis][28].
 
 #### Errors provided by GitLab
@@ -452,3 +450,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [27]: /continuous_integration/search/#search-for-pipelines
 [28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments

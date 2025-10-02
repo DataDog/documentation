@@ -94,7 +94,7 @@ Configura AWS Elemental MediaConvert para enviar logs a un bucket de S3 o a Clou
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_mediaconvert" >}}
+{{< get-metrics-from-git "amazon-mediaconvert" >}}
 
 
 ### Eventos

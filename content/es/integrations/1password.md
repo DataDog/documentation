@@ -40,8 +40,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Categoría::Recopilación de logs
-  - Categoría::Gestión de costes
-  - Categoría::Seguimiento de problemas
+  - Categoría::Gestión de eventos
+  - Categoría::Seguimiento de incidentes
   - Categoría::Seguridad
   - Tipo de datos enviados::Logs
   - Oferta::Integración
@@ -62,14 +62,14 @@ tile:
   title: 1Password
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Con [1Password Business][1], puedes enviar eventos de tu cuenta a Datadog Cloud SIEM utilizando la API de eventos de 1Password. Además, puedes:
 
 - Gestionar la conservación de datos de 1Password.
 - Crear widgets y dashboards personalizados.
-- Definir reglas de detección que activen acciones específicas.
+- Establecer reglas de detección que desencadenen acciones específicas.
 - Realizar referencias cruzadas entre eventos de 1Password con datos de otros servicios.
 
 La integración de Datadog con 1Password recopila logs utilizando la [API de eventos de 1Password][2], que genera tres tipos de logs:
@@ -120,7 +120,7 @@ Busca tus logs de Datadog con `source:1password`. Si has instalado la integraci�
 
 La integración 1Password no incluye métricas.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración 1Password no incluye checks de servicio.
 
@@ -134,7 +134,7 @@ La integración 1Password no incluye eventos.
 
 [1]: https://support.1password.com/explore/business/
 [2]: https://developer.1password.com/docs/events-api/
-[3]: http://app.datadoghq.com/dash/integration/1Password-Overview
+[3]: https://app.datadoghq.com/dash/integration/1Password-Overview
 [4]: https://start.1password.com/signin
 [5]: https://support.1password.com/events-reporting/#appendix-issue-or-revoke-bearer-tokens
 [6]: https://docs.datadoghq.com/es/help/

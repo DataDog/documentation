@@ -11,6 +11,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: https://www.datadoghq.com/blog/kotlin-multiplatform-sdk/
+  tag: Blog
+  text: Optimize cross-platform mobile apps with Datadog RUM and Kotlin Multiplatform support
 ---
 ## Overview
 
@@ -34,3 +37,7 @@ To get started with RUM for Kotlin Multiplatform, create an application and conf
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/troubleshooting">}}
   <u>Troubleshooting</u>: Common troubleshooting Kotlin Multiplatform SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

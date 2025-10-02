@@ -400,7 +400,7 @@ OCI オブジェクトストレージの詳細については、[イベント入
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "oracle_cloud_infrastructure" >}}
+{{< get-metrics-from-git "oracle-cloud-infrastructure" >}}
 
 
 ### サービスチェック

@@ -1,7 +1,6 @@
 {
   "data": {
     "attributes": {
-      "description": "Example-On-Call",
       "name": "Example-On-Call-updated",
       "resolve_page_on_policy_end": false,
       "retries": 0,

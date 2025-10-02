@@ -6,7 +6,7 @@ title: Serverless Billing
 
 You can track the billable and total Serverless usage in your account by checking the Datadog Usage Page. You can see both the Month-To-Date summary, as well as usage over time.
 
-Datadog Serverless monitoring is billed based on a combination of the invocations and active Lambda functions that are tracked and monitored within Datadog. The relevant metrics based on your plan are visible in the Plan and Usage page's Serverless tab under the [Billable filter][1]. For more information about your plan and usage, contact your [Customer Success][3] Manager.
+Datadog Serverless monitoring is billed based on a combination of the invocations and active Lambda functions that are tracked and monitored within Datadog. For more information about your plan and usage, contact your [Customer Success][3] Manager.
 
 Lambda functions can be monitored through the [Datadog AWS Integration][10] or by direct instrumentation with the [Lambda Extension][11] and [Forwarder][12] layers.
 

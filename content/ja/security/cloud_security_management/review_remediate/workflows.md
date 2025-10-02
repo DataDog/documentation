@@ -19,13 +19,10 @@ products:
   name: CSM Identity Risks
   url: /security/cloud_security_management/identity_risks/
 title: Workflow Automation によるセキュリティワークフローの自動化
+site_support_id: workflows
 ---
 
 {{< product-availability >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
-{{< /site-region >}}
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 

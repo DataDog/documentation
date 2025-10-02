@@ -16,12 +16,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
   <strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files,
   as the native instrumentation provides more accurate time results, supports distributed traces on integration tests
@@ -546,6 +540,11 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 
 
 ## Reporting code coverage
+
+{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
+This section covers the code coverage feature of the Test Optimization product.
+This feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
+{{< /callout >}}
 
 It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 

@@ -108,7 +108,7 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 | プラットフォーム固有のバイタルを監視 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | ログのグローバルコンテキスト/属性追跡  | {{< X >}} |  |  |  |  |  |  |
 | クライアント側のトレース |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| セッション リプレイ | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | ネイティブモバイルアプリ向けの Mobile Session Replay は現在プレビュー版です。 |
+| セッション リプレイ | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
 | フラストレーションシグナル | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | すべての**モバイル**および **Roku** デバイスは部分的にサポートされています |
 
 ## SDK ドメインでサポートされるエンドポイント
@@ -123,6 +123,7 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+| AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
 ## Datadog RUM を探索する
 
@@ -142,7 +143,7 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 
 [RUM パフォーマンスモニタリング概要][1]ページは、Web およびモバイルアプリケーション双方に関連性が高く実用的なインサイトを提供します。また、各プラットフォームに合わせたエクスペリエンスによって、以下が可能となります。
 
-- **重要なデータポイントに注目**: Web では UI レイテンシー、モバイルではクラッシュなど、プラットフォームごとの主要指標にフォーカスできます。
+- **プラットフォームごとの主要データポイントにフォーカス** (例: Web の UI レイテンシ、モバイル クラッシュ)
 - **アプリケーションの健全性をモニタリング**: Core Web Vitals (Web アプリ) やハング率 (iOS) などの馴染みのある KPI を用いて、アプリの信頼性を評価できます。
 - **直接調査を開始**: ページを離れることなく、インタラクティブなウィジェットから直ちに問題の原因究明に取りかかれます。
 
@@ -166,7 +167,7 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 
 [バックエンドトレース、ログ、インフラストラクチャーメトリクス][5]を、ユーザーエクスペリエンスと報告された問題に対応して、アプリケーションのパフォーマンスに影響を与えるコードの正確な行まで表示します。
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM と APM" >}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs-2.png" alt="RUM と APM" >}}
 
 ### エラー追跡とクラッシュレポート
 
@@ -194,6 +195,30 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 
 [ブラウザ開発ツール][14]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
 
+
+## 権限
+
+デフォルトでは、すべてのユーザーがアプリケーションの RUM 構成を変更できます。
+
+きめ細かなアクセス コントロールを使用して、特定のアプリケーションの RUM 構成を編集できる [ロール][18] を制限します:
+1. アプリケーションの RUM 構成を表示している状態で、画面上部の **Edit application** ボタンをクリックします。ドロップダウンが表示されます。
+1. **Manage App Permissions** を選択します。
+1. **Restrict Access** をクリックします。
+1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
+1. ドロップダウンを使用して、ノートブックを編集できる 1 つまたは複数のロール、チーム、ユーザーを選択します。
+1. **Add** をクリックします。
+1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
+1. **Save** をクリックします。
+
+**注:** 編集アクセスを維持するため、保存前に自分がメンバーであるロールを少なくとも 1 つ含める必要があります。
+
+制限されたアプリケーションへの一般アクセスを復元するには、編集アクセスが必要です。次の手順を実行します:
+1. アプリケーションの RUM 構成を表示している状態で、画面上部の **Edit application** ボタンをクリックします。ドロップダウンが表示されます。
+1. **Manage App Permissions** を選択します。
+1. **Restore Full Access** をクリックします。
+1. **Save** をクリックします。
+
+
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -202,7 +227,7 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 [2]: /ja/real_user_monitoring/platform/dashboards/
 [3]: /ja/real_user_monitoring/explorer/visualize/
 [4]: /ja/monitors/types/real_user_monitoring/
-[5]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
+[5]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /ja/real_user_monitoring/error_tracking/
 [7]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /ja/real_user_monitoring/ios/mobile_vitals/
@@ -215,3 +240,4 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 [15]: /ja/real_user_monitoring/browser/setup/
 [16]: /ja/real_user_monitoring/mobile_and_tv_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
+[18]: /ja/account_management/rbac/

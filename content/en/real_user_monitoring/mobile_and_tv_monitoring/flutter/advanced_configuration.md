@@ -25,7 +25,7 @@ further_reading:
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup). For additional manual instrumentation functions, such as automatic view tracking, see [Flutter Libraries for RUM][3].
 
 ## Initialization parameters
-You can specify the following parameters in your configuration when intializing the SDK.
+You can specify the following parameters in your configuration when initializing the SDK.
 
 `clientToken`
 : Required<br/>
@@ -40,7 +40,7 @@ The environment name sent to Datadog. You can use `env` to filter events by envi
 `site`
 : Required<br/>
 **Type**: Enum<br/>
-The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, and `ap1`.
+The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, `ap1`, and `ap2`.
 
 `nativeCrashReportEnabled`
 : Optional<br/>

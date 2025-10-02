@@ -1,5 +1,6 @@
 ---
 title: Configuring Login Methods
+description: Enable or disable authentication methods like username/password, Google OAuth, and SAML for your Datadog organization with MFA enforcement options.
 ---
 
 Login Methods determine how users may authenticate themselves and log into your Datadog organization. Using Login Methods to enable or disable the default login methods requires one of the following privileged access permissions:

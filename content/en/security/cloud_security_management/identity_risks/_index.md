@@ -32,27 +32,27 @@ Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (
 
 ## Review identity risks
 
-Review your organization's active identity risks on the [Identity Risks Findings page][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
+Cloud Security Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions. Review your organization's active identity risks on the [Identity Risks Findings page][1].
+- Use the query search bar or the facet panel to filter for specific types of identity risks. 
+- Beside **Group by**, group identity risks by **Identity Risks**, **Resources** or **Teams** (or **None** to view identity risks individually), so you can prioritize your remediation efforts accordingly.
+- Hover over **Views**, then select an existing view to apply, or click **Save as new view** to use your explorer settings again in the future.
+- Select an identity risk to view up to five affected resources, or click **View All** to view all of them. Select a resource to view additional details in a side panel.
 
-Cloud Security Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
-
-{{< img src="security/identity_risks/identity_risks_explorer_4.png" alt="Cloud Security Identity Risks Findings page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer_6.png" alt="Cloud Security Identity Risks Findings page" width="100%">}}
 
 ## Remediate identity risks
 
 For detailed insights and remediation help, click the **Remediation** tab. In the following example, the **Remediation** tab shows the usage of provisioned permissions.
 
-{{< img src="security/identity_risks/side_panel_remediation_tab.png" alt="The Remediation tab on the identity risks side panel shows the usage of provisioned permissions" width="80%">}}
+{{< img src="security/identity_risks/side_panel_remediation_tab_1.png" alt="The Remediation tab on the identity risks side panel shows the usage of provisioned permissions" width="100%">}}
 
-Click **View Suggested Policy** to view a suggested downsized policy based on the actual usage.
+- To remediate the identity risk, click **Fix in \<cloud provider\>** to update the resource directly in your cloud provider console.
+- To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Issues][2] for more information.
+- To view a suggested downsized policy based on the actual usage, click **View Suggested Policy**. Then, you can click **Edit Policy in \<cloud provider\>** to apply the suggested changes:
 
-{{< img src="security/identity_risks/downsized_policy.png" alt="Review suggestions for downsizing a policy on the Suggested downsized policy dialog" width="100%">}}
+  {{< img src="security/identity_risks/downsized_policy_3.png" alt="Review suggestions for downsizing a policy on the Suggested downsized policy dialog" width="100%">}}
 
-To remediate the identity risk, click **Fix in AWS** to update the resource in AWS IAM console. To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Issues][2] for more information.
-
-{{< img src="security/identity_risks/side_panel_action_buttons_2.png" alt="Remediate identity risks using the action buttons on the side panel" width="100%">}}
-
-You can also use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
+  You can also use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
 
 ## Gain visibility into at-risk resource access
 
@@ -60,9 +60,9 @@ In Misconfigurations, Identity Risks, and the Security Inbox, you can click the 
 - Which entities the resource can access across your accounts
 - Which principals can directly or indirectly access the resource
 
-This example shows all the principals that can access this EC2 instance:
+This example shows all the identities this AWS IAM user can access:
 
-{{< img src="security/csm/access_insights_2.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
+{{< img src="security/csm/access_insights_3.png" alt="The Access Insights panel, showing a list of AWS IAM users with large permissions gaps" width="100%">}}
 
 In the **What can this resource access?** section, you can:
 - See the account associated with each entity, and details about the access type
@@ -84,7 +84,7 @@ Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve 
 
 <div class="alert alert-info">If you are enabling AWS IAM Access Analyzer for the first time, there is an additional AWS cost associated with this enablement and it could take up to two hours before AWS IAM Access Analyzer's insights are made available.</div>
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

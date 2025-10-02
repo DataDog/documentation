@@ -14,6 +14,10 @@ further_reading:
 title: Cómo configurar el control de acceso basado en roles (RBAC) para logs
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
+El desenmascaramiento basado en roles de los datos confidenciales en logs está en Vista previa. Para inscribirte, haz clic en <b>Request Access</b> (Solicitar acceso).
+{{< /callout >}}
+
 ## Información general
 
 En muchas organizaciones, los logs pueden contener información confidencial que requiere [depuración][1] o acceso restringido para garantizar el cumplimiento y la privacidad. El control de acceso basado en roles (RBAC) permite gestionar los permisos de acceso de los usuarios de forma eficaz, permitiendo que sólo el personal autorizado acceda a logs y funciones específicos. Esta guía detalla cómo configurar RBAC para logs en Datadog, centrándose en la creación de roles personalizados y la asignación de los permisos adecuados.
@@ -116,7 +120,8 @@ Para obtener más información sobre la creación de roles, consulta [Control de
 [2]: /es/api/v2/roles/#list-roles
 [3]: /es/api/v2/roles/#grant-permission-to-a-role
 [4]: /es/api/v2/roles/#revoke-permission
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Asignación de roles a usuarios
 
@@ -136,7 +141,8 @@ Para obtener más información sobre la creación de roles, consulta [Control de
 
 [1]: /es/api/v2/users/#list-all-users
 [2]: /es/api/v2/roles/#add-a-user-to-a-role
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Restringir el acceso a logs
 
@@ -178,7 +184,8 @@ En esta sección se explica cómo:
 [3]: /es/api/v2/roles/#grant-permission-to-a-role
 [4]: /es/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 [5]: /es/api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Restringir el acceso a recursos de logs
 

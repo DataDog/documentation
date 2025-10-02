@@ -17,6 +17,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
   tag: "Learning Center"
   text: "Take a course to customize alert monitor notifications"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
 
 Use variables in notification messages to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
@@ -141,8 +144,7 @@ Or use the `{{else}}` parameter in the first example:
   @slack-example
 {{/is_match}}
 ```
-
-**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
+**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details.
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
@@ -188,6 +190,14 @@ To notify your dev team if the value that breached the threshold of your monitor
   This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
 {{/is_exact_match}}
 ```
+
+The `is_exact_match` conditional variable also supports an empty string for the `<COMPARISON_STRING>` to check if the attribute or tag is empty or does not exist.
+```text
+{{#is_exact_match "host.datacenter" ""}}
+  This displays if the attribute or tag does not exist or if it's empty
+{{/is_exact_match}}
+```
+
 
 {{% /tab %}}
 {{% tab "is_renotify" %}}
@@ -252,7 +262,7 @@ Attributes
 
 ### Multi alert variables
 
-Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert. 
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
 
 **Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
 
@@ -369,31 +379,23 @@ For Docs and Links you can also access a specific item with the following syntax
 ```
 {{% /collapse-content %}}
 
-
-
 ### Matching attribute/tag variables
 
-<div class="alert alert-info">Available for
-  <a href="/monitors/types/log/">Log monitors </a>,
-  <a href="/monitors/types/apm/?tab=analytics">Trace Analytics monitors (APM)</a>,
-  <a href="/monitors/types/error_tracking/"> Error Tracking monitors </a>,
-  <a href="/monitors/types/real_user_monitoring/">RUM monitors </a>,
-  <a href="/monitors/types/ci/">CI monitors </a>, and
-  <a href="/monitors/types/database_monitoring/">Database Monitoring monitors</a>.
-</div>
+You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
 
-| Monitor type    | Variable syntax                                  |
-|-----------------|--------------------------------------------------|
-| Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
-| Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| Error Tracking  | `{{issue.attributes.key}}`                         |
-| RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
-| Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
-| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
-| CI Test         | `{{citest.attributes.key}}`                      |
-| Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
+| Monitor type             | Variable syntax                                         |
+|--------------------------|--------------------------------------------------------|
+| [Audit Trail][16]        | `{{audit.attributes.key}}` or `{{audit.message}}`      |
+| [CI Pipeline][17]        | `{{cipipeline.attributes.key}}`                        |
+| [CI Test][18]            | `{{citest.attributes.key}}`                            |
+| [Database Monitoring][19]| `{{databasemonitoring.attributes.key}}`                |
+| [Error Tracking][14]     | `{{issue.attributes.key}}`                             |
+| [Log][12]                | `{{log.attributes.key}}` or `{{log.tags.key}}`         |
+| [RUM][15]                | `{{rum.attributes.key}}` or `{{rum.tags.key}}`         |
+| [Synthetic Monitoring][20]| `{{synthetics.attributes.key}}`                       |
+| [Trace Analytics][13]    | `{{span.attributes.key}}` or `{{span.tags.key}}`       |
 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
@@ -413,9 +415,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
   {{ event.tags.[dot.key.test] }}
   ```
 
-
 {{% /collapse-content %}}
-
 
 #### Important notes
 
@@ -551,8 +551,9 @@ When building dynamic handles with attributes that might not always be present, 
 To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
 ```text
-{{#is_match "kube_namespace.owner" ""}}
+{{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
+  // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
 {{/is_match}}
 ```
 
@@ -704,3 +705,12 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [9]: /monitors/types/error_tracking/
 [10]: /software_catalog/service_definitions/
 [11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml
+[12]: /monitors/types/log/
+[13]: /monitors/types/apm/?tab=analytics
+[14]: /monitors/types/error_tracking/
+[15]: /monitors/types/real_user_monitoring/
+[16]: /monitors/types/audit_trail/
+[17]: /monitors/types/ci/?tab=tests
+[18]: /monitors/types/ci/?tab=pipelines
+[19]: /monitors/types/database_monitoring/
+[20]: /synthetics/notifications/template_variables/

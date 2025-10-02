@@ -96,7 +96,7 @@ Lancez la [sous-commande status de l'Agent][7] et cherchez `php_apcu` dans la se
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "php_apcu" >}}
+{{< get-metrics-from-git "php-apcu" >}}
 
 
 ### Événements
@@ -104,7 +104,7 @@ Lancez la [sous-commande status de l'Agent][7] et cherchez `php_apcu` dans la se
 L'intégration PHP APCu n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "php_apcu" >}}
+{{< get-service-checks-from-git "php-apcu" >}}
 
 
 ## Dépannage

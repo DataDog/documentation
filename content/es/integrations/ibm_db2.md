@@ -26,7 +26,7 @@ author:
 categories:
 - almacenes de datos
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 2.2.0
+integration_version: 4.0.1
 is_public: true
 manifest_version: 2.0.0
 name: ibm_db2
@@ -83,12 +83,12 @@ El check de IBM Db2 está incluido en el paquete del [Datadog Agent][3].
 
 #### Dependencias
 
-Se necesita la biblioteca de cliente [ibm_db][4]. Para instalarla, asegúrate de que dispones de un compilador operativo y ejecútalo:
+Se necesita la librería de cliente [ibm_db][4]. Para instalarla, asegúrate de que dispones de un compilador operativo y ejecútalo:
 
 ##### Unix
 
 ```text
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.3
 ```
 
 Nota: Si utilizas el Agent con Python 2, usa `ibm_db==3.0.1` en lugar de `ibm_db=3.1.0`.
@@ -107,10 +107,16 @@ Para las versiones del Agent entre la 6.12 y la 7.0:
 "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-Para las versiones del Agent posteriores a la 7.0:
+Para versiones del Agent 7.0 o posteriores y anteriores a 7.58:
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.2.2
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.4
+```
+
+Para versiones del Agent 7.58 o posteriores:
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.2.3
 ```
 
 En Linux, puede ser necesaria la funcionalidad XML. Si encuentras errores durante
@@ -118,7 +124,7 @@ el proceso de compilación, instala `libxslt-dev` (o `libxslt-devel` para RPM).
 
 #### Habilitar la monitorización
 
-La integración de IBM Db2 extrae los datos mediante las siguientes funciones de tabla: 
+La integración de IBM Db2 extrae los datos mediante las siguientes funciones de tabla:
 * `MON_GET_TABLESPACE`
 * `MON_GET_TRANSACTION_LOG`
 * `MON_GET_BUFFERPOOL`
@@ -132,7 +138,7 @@ Para monitorizar una instancia de Db2, crea un usuario de Db2 con el permiso `EX
 * Autoridad `DBADM`
 * Autoridad `SQLADM`
 
-Para monitorizar el estado de una instancia, sus bases de datos asociadas y los objetos de base de datos, habilita los interruptores de monitorización del sistema de base de datos para cada uno de los objetos que quieras monitorizar: 
+Para monitorizar el estado de una instancia, sus bases de datos asociadas y los objetos de base de datos, habilita los interruptores de monitorización del sistema de base de datos para cada uno de los objetos que quieras monitorizar:
 * Sentencia
 * Bloqueo
 * Tablas
@@ -169,7 +175,7 @@ Luego, ejecuta `get dbm cfg` y deberías ver lo siguiente:
 
 #### Host
 
-Para configurar este check para un Agent que se ejecuta en un host, haz lo siguiente:
+Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
@@ -179,9 +185,9 @@ Para configurar este check para un Agent que se ejecuta en un host, haz lo sigui
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+Disponible para la versión 6.0 o posteriores del Agent
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; habilítala en el archivo `datadog.yaml`:
+1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -206,11 +212,11 @@ _Disponible para las versiones del Agent a partir de la 6.0_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 #### Contenedores
 
-En el caso de los entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican abajo.
+Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 ##### Recopilación de métricas
 
@@ -222,7 +228,7 @@ En el caso de los entornos en contenedores, consulta las [Plantillas de integrac
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+Disponible para la versión 6.0 o posteriores del Agent
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
 
@@ -242,7 +248,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_db2" >}}
+{{< get-metrics-from-git "ibm-db2" >}}
 
 
 ### Eventos
@@ -250,7 +256,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 - `ibm_db2.tablespace_state_change` se activa cada vez que cambia el estado de un espacio de tablas.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ibm_db2" >}}
+{{< get-service-checks-from-git "ibm-db2" >}}
 
 
 ## Solucionar problemas
@@ -269,12 +275,12 @@ En ese caso, lo más probable es que se deba a una de las siguientes situaciones
 
 El Agent necesita la información de los dos escenarios anteriores para determinar dónde conectarse correctamente a la base de datos. Para resolver este problema, puedes incluir un parámetro de host y puerto para cada instancia del check de `ibm_db2` que tenga este problema. De manera alternativa, si quieres utilizar los DSN definidos en los archivos `db2cli.ini` o `db2dsdriver.cfg`, puedes copiar dichos archivos en el directorio `clidriver` que utiliza el Agent. En circunstancias normales, ese directorio se encuentra en `/opt/datadog-agent/embedded/lib/python3.9/site-packages/clidriver/cfg` para Linux.
 
-### Instalación de la biblioteca de cliente `ibm_db` sin conexión
+### Instalación de la librería de cliente `ibm_db` sin conexión
 
 Si trabajas en un entorno sin conexión o con una red restringida donde no es posible ejecutar `pip install ibm_db==x.y.z` con `x.y.z` como el número de versión, puedes instalar `ibm_db` mediante el siguiente método:
 
 
-1. En una máquina con acceso a una red, descarga los archivos .tar de origen de la [biblioteca`ibm_db`][7] y [la ODBC y la CLI][8]. La ODBC y la CLI deben descargarse por separado porque la biblioteca `ibm_db` los necesita, pero no pueden descargarse a través del `pip`. El siguiente script instala el archivo de almacenamiento para `ibm_db==x.y.z` en una máquina Linux, donde `x.y.z` es el número de versión:
+1. En una máquina con acceso a una red, descarga los archivos .tar de origen de la [biblioteca`ibm_db`][7] y [la ODBC y la CLI][8]. La ODBC y la CLI deben descargarse por separado porque la librería `ibm_db` los necesita, pero no pueden descargarse a través del `pip`. El siguiente script instala el archivo de almacenamiento para `ibm_db==x.y.z` en una máquina Linux, donde `x.y.z` es el número de versión:
 
    ```
    curl -Lo ibm_db.tar.gz https://github.com/ibmdb/python-ibmdb/archive/refs/tags/vx.y.z.tar.gz
@@ -290,13 +296,13 @@ Si trabajas en un entorno sin conexión o con una red restringida donde no es po
    tar -xvf linuxx64_odbc_cli.tar.gz
    ```
 
-1. Define la variable de entorno `IBM_DB_HOME` como la localización de donde extrajiste `/clidriver` de `linuxx64_odbc_cli.tar.gz`. Esto evitará que la biblioteca `ibm_db` instale una nueva versión de la ODBC y la CLI, ya que eso generaría un error.
+1. Define la variable de entorno `IBM_DB_HOME` como la localización de donde extrajiste `/clidriver` de `linuxx64_odbc_cli.tar.gz`. Esto evitará que la librería `ibm_db` instale una nueva versión de la ODBC y la CLI, ya que eso generaría un error.
 
    ```
    export IBM_DB_HOME=/path/to/clidriver
    ```
 
-1. Con el [`pip`][9] integrado en el Agent, instala la biblioteca `ibm_db` de manera local. Los archivos de esta biblioteca se encuentran dentro del `python-ibmdb-x.y.z` extraído de `ibm_db.tar.gz`.
+1. Con el [`pip`][9] integrado en el Agent, instala la librería `ibm_db` de manera local. Los archivos de esta biblioteca se encuentran dentro del `python-ibmdb-x.y.z` extraído de `ibm_db.tar.gz`.
 
    ```
    /opt/datadog-agent/embedded/bin/pip install --no-index --no-deps --no-build-isolation  /path/to/python-ibmdb-x.y.z/IBM_DB/ibm_db/

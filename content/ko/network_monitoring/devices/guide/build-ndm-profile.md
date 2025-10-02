@@ -8,15 +8,15 @@ further_reading:
 - link: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
   tag: 설명서
   text: 시뮬레이션 데이터 형식 참조
-title: NDM 프로필 만들기
+title: NDM 프로필 빌드(고급)
 ---
 
 Datadog 네트워크 장치 모니터링은 프로필을 사용하여 네트워크 장치에서 메트릭을 수집합니다. 이는 좁게는 MIB에 의해 정의되거나 특정 장치 제조업체 및 모델에서 메트릭을 수집하기 위해 정의됩니다. 이 튜토리얼에서는 HP iLO4 장치에서 OID 메트릭을 수집하는 기본 NDM 프로필을 구축하는 단계를 보여 줍니다.
 
-NDM 프로필은 SNMP 개념을 사용합니다. SNMP에 대한 기본적인 내용은 [용어][1]를 참조하세요.
+NDM 프로필은 SNMP 개념을 사용합니다. SNMP에 관한 기본 상세 정보는 [용어집][1]을 참조하세요.
 
-<div class="alert alert-warning">
-이 가이드는 고급 사용자를 위한 것입니다. 대부분의 장치는 <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog 프로필</a>을 사용하여 설정할 수 있습니다.
+<div class="alert alert-info">
+이 가이드는 고급 사용자용입니다. 대부분의 장치는 <a href="/network_monitoring/devices/guide/device_profiles/">디바이스 프로필 시작하기</a> 지침에 나와 있는 GUI 기반 환경을 사용하거나 <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog 프로필</a>을 사용하여 설정할 수 있습니다.
 </div>
 
 ## 리서치
@@ -79,7 +79,7 @@ metrics:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ko/network_monitoring/devices/troubleshooting#terminology
+[1]: /ko/network_monitoring/devices/glossary
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware

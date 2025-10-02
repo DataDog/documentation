@@ -49,7 +49,7 @@ If a vendor or device type is supported, but the specific model isn't, you can:
 
 | Vendor                                                                                                                                                                                                               | Config files |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ----------- |
-| 3com                                                                                                                                                                                                                 | [3com.yaml][3] <br> [3com-huawei.yaml.yaml][126] <br>|
+| 3com                                                                                                                                                                                                                 | [3com.yaml][3] <br> [3com-huawei.yaml][126] <br>|
 | TP-Link                                                                                                                                                                                                              | [tp-link.yaml][4] <br> |
 | A10                                                                                                                                                                                                                  | [a10.yaml][5] <br> |
 | Alcatel-lucent                                                                                                                                                                                                       | [alcatel-lucent.yaml][6] <br> |
@@ -146,10 +146,10 @@ If a vendor or device type is supported, but the specific model isn't, you can:
 [21]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avtech.yaml
 [22]: https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/
 [23]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/barracuda.yaml
-[24]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/barracuda.yaml
-[25]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/bluecat-server.yaml
-[26]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml
-[27]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brother.yaml
+[24]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/bluecat-server.yaml
+[25]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml
+[26]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brother.yaml
+[27]: https://docs.datadoghq.com/integrations/snmp_chatsworth_products/#overview
 [28]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chatsworth_pdu.yaml
 [29]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint.yaml
 [30]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint-firewall.yaml

@@ -12,10 +12,6 @@ further_reading:
 title: CI Visibility のトラブルシューティング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 このページでは、CI Visibility に関する問題のトラブルシューティングに役立つ情報を提供します。さらにヘルプが必要な場合は、[Datadog サポート][2]にお問い合わせください。

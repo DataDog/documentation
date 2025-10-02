@@ -32,7 +32,7 @@ author:
 categories:
 - 로그 수집
 - marketplace
-- 보안
+- security
 custom_kind: 통합
 dependencies: []
 display_on_public_website: true
@@ -56,7 +56,7 @@ public_title: Rapid7
 short_description: Rapid7 로그 및 조사 활동 모니터링
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -110,9 +110,9 @@ tile:
 Rapid7 insightIDR [로그 검색 문서][5]에 자세히 설명된 대로 특정 [로그 세트][4]를 지정하여 해당 로그만 가져올 수 있습니다.
 
 ## 지원
-지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의하세요.
+지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의해 주세요.
 
-- 지원: support@rapdev.io
+- 지원 팀: support@rapdev.io
 - 영업 팀: sales@rapdev.io
 - 채팅: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 전화: 855-857-0222

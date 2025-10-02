@@ -8,6 +8,7 @@ disable_sidebar: true
     <div id="count"></div>
     <div class="hits-container">
         <div id="hits"></div>
+        <div id="hits-partners"></div>
     </div>
     <div id="pagination"></div>
 </div>

@@ -13,10 +13,10 @@ products:
   name: Cloud SIEM
   url: /security/cloud_siem/
 - icon: cloud-security-management
-  name: Cloud Security Management
+  name: Cloud Security
   url: /security/cloud_security_management/
 - icon: app-sec
-  name: Application Security Management
+  name: App and API Protection
   url: /security/application_security/
 title: Variables
 ---
@@ -139,7 +139,7 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 
 {{% /tab %}}
 
-{{% tab "Application Security Management" %}}
+{{% tab "App and API Protection" %}}
 
 ```json
 {
@@ -281,7 +281,7 @@ Si `host.name` coincide con `<HOST_NAME>`, la plantilla muestra:
 
 Si tu notificación de señal incluye información que debe codificarse en una URL (por ejemplo, para redireccionamientos), utiliza la sintaxis `{{ urlencode "<variable>"}}`.
 
-**Ejemplo**: Si tu mensaje de señal incluye una URL al catálogo de servicios filtrado por un servicio específico, utiliza la [variable de etiqueta] `service` (#attribute-and-tag-variables) y añade la sintaxis `{{ urlencode "<variable>"}}` a la URL:
+**Ejemplo**: Si tu mensaje de señal incluye una URL al Catálogo de software filtrado por un servicio específico, utiliza la [variable de etiqueta] `service` (#attribute-and-tag-variables) y añade la sintaxis `{{ urlencode "<variable>"}}` a la URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}

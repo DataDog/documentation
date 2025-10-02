@@ -5,10 +5,9 @@
         "json": {
           "api_keys": [
             {
-              "created": "2019-08-02 15:31:07",
-              "created_by": "john@example.com",
+              "created_by": "test_user",
               "key": "1234512345123456abcabc912349abcd",
-              "name": "example user"
+              "name": "app_key"
             }
           ]
         },
@@ -42,10 +41,9 @@
       "200": {
         "json": {
           "api_key": {
-            "created": "2019-08-02 15:31:07",
-            "created_by": "john@example.com",
+            "created_by": "test_user",
             "key": "1234512345123456abcabc912349abcd",
-            "name": "example user"
+            "name": "app_key"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Datadog API key.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Date of creation of the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created_by</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Datadog user handle that created the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of your API key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -88,10 +86,9 @@
       "200": {
         "json": {
           "api_key": {
-            "created": "2019-08-02 15:31:07",
-            "created_by": "john@example.com",
+            "created_by": "test_user",
             "key": "1234512345123456abcabc912349abcd",
-            "name": "example user"
+            "name": "app_key"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Datadog API key.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Date of creation of the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created_by</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Datadog user handle that created the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of your API key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -140,10 +137,9 @@
       "200": {
         "json": {
           "api_key": {
-            "created": "2019-08-02 15:31:07",
-            "created_by": "john@example.com",
+            "created_by": "test_user",
             "key": "1234512345123456abcabc912349abcd",
-            "name": "example user"
+            "name": "app_key"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Datadog API key.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Date of creation of the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created_by</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Datadog user handle that created the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of your API key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -184,10 +180,9 @@
       "200": {
         "json": {
           "api_key": {
-            "created": "2019-08-02 15:31:07",
-            "created_by": "john@example.com",
+            "created_by": "test_user",
             "key": "1234512345123456abcabc912349abcd",
-            "name": "example user"
+            "name": "app_key"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Datadog API key.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Date of creation of the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created_by</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Datadog user handle that created the API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>API key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of your API key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -240,8 +235,8 @@
           "application_keys": [
             {
               "hash": "1234512345123459cda4eb9ced49a3d84fd0138c",
-              "name": "example user",
-              "owner": "example.com"
+              "name": "app_key",
+              "owner": "test_user"
             }
           ]
         },
@@ -276,8 +271,8 @@
         "json": {
           "application_key": {
             "hash": "1234512345123459cda4eb9ced49a3d84fd0138c",
-            "name": "example user",
-            "owner": "example.com"
+            "name": "app_key",
+            "owner": "test_user"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> application_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>An application key with its associated metadata.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Hash of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">owner</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Owner of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -329,8 +324,8 @@
         "json": {
           "application_key": {
             "hash": "1234512345123459cda4eb9ced49a3d84fd0138c",
-            "name": "example user",
-            "owner": "example.com"
+            "name": "app_key",
+            "owner": "test_user"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> application_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>An application key with its associated metadata.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Hash of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">owner</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Owner of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -372,8 +367,8 @@
         "json": {
           "application_key": {
             "hash": "1234512345123459cda4eb9ced49a3d84fd0138c",
-            "name": "example user",
-            "owner": "example.com"
+            "name": "app_key",
+            "owner": "test_user"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> application_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>An application key with its associated metadata.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Hash of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">owner</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Owner of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -415,8 +410,8 @@
         "json": {
           "application_key": {
             "hash": "1234512345123459cda4eb9ced49a3d84fd0138c",
-            "name": "example user",
-            "owner": "example.com"
+            "name": "app_key",
+            "owner": "test_user"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> application_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>An application key with its associated metadata.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Hash of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">owner</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Owner of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"

@@ -1,5 +1,6 @@
 ---
 title: RUM Usage Dashboard
+description: "Track user engagement and behavior with dashboards showing user sessions, frustration signals, and application usage patterns."
 aliases:
   - '/real_user_monitoring/dashboards/frustration_signals_dashboard'
   - '/real_user_monitoring/dashboards/user_sessions_dashboard'

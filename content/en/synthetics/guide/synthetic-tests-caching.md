@@ -8,7 +8,9 @@ further_reading:
     - link: '/synthetics/api_tests/http_tests'
       tag: 'Documentation'
       text: 'Configure an HTTP test'
-
+    - link: "https://www.datadoghq.com/blog/cache-purge-ci-cd/"
+      tag: "Blog"
+      text: "Patterns for safe and efficient cache purging in CI/CD pipelines"
 ---
 
 ## Overview

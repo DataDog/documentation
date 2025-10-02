@@ -76,7 +76,7 @@ AWS Global Accelerator は、ローカルおよびグローバルユーザー向
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_globalaccelerator" >}}
+{{< get-metrics-from-git "amazon-globalaccelerator" >}}
 
 
 ### サービスチェック

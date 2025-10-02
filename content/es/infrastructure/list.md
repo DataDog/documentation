@@ -85,21 +85,15 @@ Datadog crea alias para nombres de host cuando hay varios nombres unívocos para
 
 #### Configuración del Agent
 
-{{< callout url="#" btn_hidden="true" >}}
-La vista de configuración del Agent se encuentra en la versión beta pública y está disponible en las versiones del Agent 7.39/6.39 o posteriores.
-
-A partir de las versiones del Agent 7.47/6.47 o posteriores, esta función se encuentra habilitada de forma predeterminada.
-{{< /callout >}}
-
 El Agent puede enviar su propia configuración a Datadog para que se muestre en la sección `Agent Configuration` del panel de detalles del host.
 
 La configuración del Agent no incluye información confidencial y sólo contiene la configuración que has establecido mediante el archivo de configuración o las variables de entorno. Los cambios de configuración se actualizan cada 10 minutos.
 
-Esta función se encuentra habilitada de manera predeterminada en las versiones del Agent 7.47.0/6.47.0 o posteriores.
+La vista de la configuración del Agent está activada en forma predeterminada en el Agent versión >= 7.47.0/6.47.0. En el Agent versiones >= 7.39/6.39, puedes activarla manualmente:
 
-Para modificar este comportamiento, configura el valor de `inventories_configuration_enabled` en tu [archivo de configuración del Agent][6] como `true` para enviar la configuración o `false` para deshabilitarla.
-
-También puedes utilizar la variable de entorno `DD_INVENTORIES_CONFIGURATION_ENABLED` para habilitar o deshabilitar esta función.
+Para activar o desactivar la vista de la configuración:
+- Configura el valor de `inventories_configuration_enabled` en tu [archivo de configuración del Agent][6] en `true` para activar la vista de configuración o `false` para desactivarla.
+- También puedes utilizar la variable de entorno`DD_INVENTORIES_CONFIGURATION_ENABLED` para activar o desactivar la vista de configuración.
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="La vista de configuración del Agent" style="width:100%;">}}
 
@@ -110,7 +104,7 @@ Para obtener una lista con formato JSON de tus hosts que informan a Datadog, uti
 * El **enlace permanente de la API de JSON** en la parte superior de la lista de infraestructuras.
 * El [endpoint de búsqueda de la API de los hosts][7]. Para ver un ejemplo, consulta la [guía para desarrolladores][8].
 
-#### Versión del Agent
+#### Agent version
 
 En ciertas ocasiones, también puede resultar útil auditar tus versiones del Agent para asegurarte de que estás ejecutando la última versión. Para ello, utiliza el [script get_host_agent_list][9], que aprovecha el enlace permanente de JSON para generar los Agents en ejecución actuales con sus números de versión. También puedes utilizar el script `json_to_csv` para convertir el resultado JSON en un archivo CSV.
 
@@ -147,6 +141,7 @@ for host in infra['rows']:
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/agent/faq/how-datadog-agent-determines-the-hostname/
 [2]: /es/getting_started/tagging/

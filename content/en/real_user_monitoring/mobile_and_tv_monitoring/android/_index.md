@@ -1,5 +1,6 @@
 ---
 title: Android and Android TV Monitoring
+description: "Monitor Android and Android TV applications with RUM to visualize user journeys, track performance, and analyze real-time user experiences."
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
   tag: Documentation
@@ -33,4 +34,6 @@ To get started with RUM for Android, create an application and configure the And
   <u>Integrated Libraries</u>: Import integrated libraries for your Android and Android TV applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting">}}
   <u>Troubleshooting</u>: Common troubleshooting Android SDK issues.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation">}}<u>Jetpack Compose Instrumentation</u>: Instrument Jetpack Compose manually or automatically using the Datadog Gradle Plugin. {{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/sdk_performance_impact">}}<u>SDK Performance Impact</u>: Learn about how the SDK impacts performance of your application. {{< /nextlink >}}
 {{< /whatsnext >}}

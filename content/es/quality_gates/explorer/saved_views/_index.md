@@ -10,42 +10,38 @@ title: Vistas guardadas
 Las Puertas de calidad están en vista previa.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Puertas de calidad no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
-Las vistas guardadas te permiten guardar el estado del [Explorador de puertas de Calidad][2] en la [página **Ejecuciones de puertas de Calidad**][1] y te permiten solucionar problemas de forma eficaz, proporcionándote acceso a consultas delimitadas, facetas relevantes, opciones de visualización e intervalo de tiempo. 
+Las vistas guardadas te permiten guardar el estado del [Quality Gates Explorer][2] en la página [**Ejecuciones de Quality Gates**][1] y posibilitan la resolución eficaz de problemas al proporcionar un acceso a las consultas con contexto, las facetas relevantes, las opciones de visualización y el intervalo de tiempo. 
 
-Las vistas guardadas pueden realizar un seguimiento de tus:
+Las vistas guardadas te permiten realizar un seguimiento de tus:
 
-- Ejecuciones y ejecuciones de reglas de puertas de calidad
+- Ejecuciones de Quality Gate y ejecuciones de reglas
 - Consultas de búsqueda 
-- Orden de las columnas
-- Intervalo de tiempo en tiempo real (como la última hora o la última semana)
-- Visualizaciones (como series temporales, listas principales, tablas o gráficos de embudo)
-- Subconjunto de facetas
+- Secuencias de clasificación de columnas
+- Intervalos de tiempo en directo (como la última hora o la última semana)
+- Visualizaciones (como series temporales, lista principal, tablas o gráficos de embudo)
+- Subconjuntos de facetas
 
 También puedes utilizar las vistas guardadas para compartir consultas y configuraciones comunes con tus compañeros de equipo.
 
 ## Vistas guardadas
 
-Para acceder a las vistas guardadas, expande **> Vistas** a la izquierda en el [Explorador de puertas de calidad][1].
+Para acceder a las vistas guardadas, despliega **> Views** (> Vistas) a la izquierda en [Quality Gates Explorer][1].
 
-Todas las vistas guardadas excepto la [vista por defecto](#default-views) se comparten en toda la organización, incluidas las vistas guardadas personalizadas creadas por los usuarios. Cualquier persona de la organización puede editarlas y muestran el avatar del creador de la vista. Haz clic en **Save** (Guardar) para crear una vista guardada a partir del contenido actual de tu Explorador.
+Todas las vistas guardadas, excepto la [vista por defecto](#default-views), se comparten en toda la organización, incluidas las vistas guardadas personalizadas creadas por los usuarios. Cualquier persona en tu organización puede editarlas y mostrar el avatar del creador de la vista. Haz clic en **Save** (Guardar) para crear una vista guardada a partir del contenido actual de tu explorador.
 
-{{< img src="quality_gates/explorer/expand_view_1.png" text="Crear una vista guardada en el Explorador de puertas de calidad" style="width:100%" >}}
+{{< img src="quality_gates/explorer/expand_view_1.png" text="Crear una vista guardada en el Quality Gates Explorer" style="width:100%" >}}
 
 Puedes:
 
-- Cargar o recargar una vista guardada
-- Actualizar una vista guardada con la configuración de vista actual
-- Renombrar o eliminar una vista guardada
+- Cargar o volver a cargar una vista guardada
+- Actualizar una vista guardada con la configuración de la vista actual
+- Renombrar o borrar una vista guardada
 - Compartir una vista guardada a través de un enlace corto
-- Marcar como favorita una vista guardada para añadirla a tu lista de vistas guardadas, accesible en el menú de navegación
+- Marcar una vista guardada como favorita para añadirla a tu lista de vistas guardadas, a la que tendrás acceso a través del menú de navegación
 
-<div class="alert alert-info">Las acciones de actualizar, renombrar y eliminar están desactivadas para los usuarios de sólo lectura.</div>
+<div class="alert alert-info">Los usuarios con permisos de sólo lectura no podrán actualizar, renombrar ni eliminar vistas guardadas.</div>
 
 ## Vistas predeterminadas
 
@@ -59,7 +55,6 @@ Actualiza tu vista guardada por defecto actual a un diseño diferente que quiera
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/ci/quality-gates/executions
 [2]: /es/quality_gates/explorer/

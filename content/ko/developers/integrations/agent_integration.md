@@ -5,49 +5,57 @@ aliases:
 - /ko/integrations/datadog_checks_dev/
 - /ko/guides/new_integration/
 - /ko/developers/integrations/new_check_howto/
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/agent_integration.md
+description: Datadog Agent 통합을 개발하고 게시하는 방법을 알아보세요.
 further_reading:
-- link: /developers/integrations/create_a_tile/
+- link: /developers/integrations/
   tag: 설명서
-  text: 타일 생성
+  text: 통합 생성하기
 - link: /developers/integrations/python/
   tag: 설명서
   text: 에이전트 기반 통합 개발을 위한 Python
 - link: /developers/
   tag: 설명서
   text: Datadog 플랫폼에서 개발하는 방법에 대해 알아보세요.
-title: 에이전트 통합 생성
+title: 에이전트 기반 통합 생성
 ---
 ## 개요
 
-이 페이지는 기술 파트너가 어떻게 Datadog 에이전트 통합을 생성할 수 있는지에 대해 소개합니다. 생성된 통합은 [통합 페이지][23]에서 즉시 사용할 수 있도록 등록하거나 [마켓플레이스 페이지][24]에 등록할 수 있습니다.
+이 페이지에서는 Technology Partners가 Datadog Agent 통합을 생성하는 방법에 대해 알아봅니다. 이 통합은 [Integrations 페이지][23]에서 기본 제공 항목으로 공개하거나 [Marketplace 페이지][24]에서 유료로 공개할 수 있습니다.
 
-## 에이전트 기반 통합
+Agent 기반 통합은 [Datadog Agent][17]를 사용하여 개발자가 작성한 사용자 지정 점검을 통해 데이터를 제출합니다. 이러한 점검은 [메트릭][34], [이벤트][18], [서비스 점검][25]을 고객의 Datadog 계정으로 전송할 수 있습니다. Agent 자체도 [로그][26]를 제출할 수 있지만, 이는 점검 외부에서 구성됩니다.
 
-에이전트 기반 통합은 개발자가 작성한 검사를 통해 데이터를 제출하기 위해 [Datadog 에이전트][17]를 사용합니다. 검사는 [메트릭][23], [이벤트][24], [서비스 검사][25]를 고객의 Datadog 계정으로 전송할 수 있습니다. 에이전트 자체도 [로그][26]를 제출할 수 있지만, 이는 검사 외부에서 설정됩니다.
+## Agent 기반 통합은 언제 사용하나요?
 
-이러한 통합을 위한 구현 코드는 Datadog에서 호스팅합니다. 에이전트 통합은 근거리 통신망(LAN) 또는 가상 사설 클라우드(VPC)에 있는 시스템이나 애플리케이션에서 데이터를 수집하는 데 가장 적합합니다. 에이전트 통합을 만들려면 솔루션을 Python 휠(`.whl`)로 게시하고 배포해야 합니다.
+Agent 통합은 다음을 실행하는 시스템이나 애플리케이션에서 데이터를 수집하는 데 가장 적합합니다.
+- 근거리 통신망(LAN)
+- 가상 프라이빗 클라우드(VPC)
+Agent 기반 통합은 Python wheel(.whl)로 게시하고 배포해야 합니다.
 
-[모니터][27], [대시보드][28], [로그 파이프라인][29]과 같은 기본 제공 에셋을 에이전트 기반 통합에 포함할 수 있습니다. 사용자가 통합 타일에서 **설치**를 클릭하면 설정 지침을 따르라는 메시지가 표시되며, 즉시 사용 가능한 모든 대시보드가 계정에 표시됩니다. 로그 파이프라인과 같은 다른 에셋은 통합을 올바르게 설치하고 설정한 후에 사용자에게 표시됩니다.
 
 ## 개발 프로세스
 
-에이전트 기반 통합을 구축하는 프로세스는 다음과 같습니다:
+Agent 기반 통합을 만드는 프로세스는 다음과 같습니다.
 
-1. [Datadog 파트너 네트워크][32]에 가입이 승인되면 Datadog 기술 파트너 팀과 만나 오퍼링 및 사용 사례에 대해 논의하게 됩니다.
-2. Datadog 파트너 네트워크 포털을 통해 개발을 위한 Datadog 샌드박스 계정을 요청합니다.
-3. 통합 코드 작성과 Python 휠 (`.whl`) 구축 및 설치 등 통합 개발을 시작합니다.
-4. Datadog 샌드박스 계정에서 통합을 테스트합니다.
-5. 개발 작업이 테스트되고 완료되면 **통합** 또는 **마켓플레이스** 페이지에 표시되는 통합 타일을 구성할 설정 지침, 이미지, 지원 정보 등의 정보를 제공하여 타일 에셋을 채웁니다.
-6. 풀 리퀘스트가 제출되고 승인되면 Datadog 기술 파트너 팀이 통합을 최종 검토하기 위해 데모 일정을 잡습니다.
-7. 게시하기 전에 Datadog 샌드박스 계정에서 타일 및 통합을 테스트하거나 모든 고객을 위해 즉시 통합을 게시할 수 있는 옵션이 제공됩니다.
+1. Datadog Partner Network에 가입하기
+   - [Datadog Partner Network][32]에 지원하세요. 지원이 승인되면 Datadog Technology Partner 팀 담당자와의 오리엔테이션 콜 일정이 예약됩니다.
+2. 개발 환경 설정
+   - Datadog Partner Network 포털을 통해 Datadog 샌드박스 계정을 요청합니다.
+   - 필수 개발 도구를 설치합니다.
+3. 통합 생성
+   - Datadog 샌드박스에서 **Developer Platform** > **add a new listing**으로 이동합니다.
+   - 통합을 설명하는 세부 정보를 입력합니다.
+4. Agent 점검 구축 및 통합 테스트
+   - Agent 점검을 [단계]((#write-an-agent-check)를 따라 생성합니다.
+4. 리뷰를 위해 제출
+   - Developer Platform을 통해 통합 콘텐츠를 제출합니다.
+   - 해당 코드를 사용하여 Agent 점검에 대한 GitHub 풀 요청을 엽니다.
+   - Datadog 팀에서 통합 리뷰를 위해 최종 데모 일정을 예약합니다.
 
-## 전제 조건
+## 사전 필수 조건
 
 필수 Datadog 에이전트 통합 개발 도구에는 다음이 포함됩니다:
 
-- Python v3.8, [pipx][2] 및 에이전트 통합 개발자 도구 (`ddev`)입니다. 설치 지침은 [Datadog 에이전트 통합 개발자 도구 설치][3]를 참조하세요.
+- Python v3.12, [pipx][2], Agent Integration Developer Tool(`ddev`). 설치 지침은 [Datadog Agent Integration Developer Tool 설치][3]에서 확인하세요.
 - [도커][4]를 통해 전체 테스트 스위트를 실행합니다.
 - git [명령줄][5] 또는 [GitHub 데스크톱 클라이언트][19].
 
@@ -64,7 +72,7 @@ title: 에이전트 통합 생성
 mkdir $HOME/dd && cd $HOME/dd
 ```
 
-Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 것으로 예상합니다. 필수는 아니지만 다른 디렉토리에서 작업하려면 추가 설정 단계가 필요합니다.
+   Datadog Development Toolkit은`$HOME/dd/` 디렉터리에서 작업하는 것이 좋습니다. 필수 사항은 아니지만, 다른 디렉터리에서 작업하려면 추가 구성 단계가 필요합니다.
 
 1. [`integrations-extras` 리포지토리][101]를 포크합니다.
 
@@ -86,7 +94,7 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 
 1. 선택 사항으로, `integrations-extras` 리포지토리가 `$HOME/dd/`가 아닌 다른 곳에 있는 경우 `ddev` 설정 파일을 조정합니다:
    ```shell
-   ddev config set extras "/path/to/integrations-extras"
+   ddev config set repos.extras "/path/to/integrations-extras"
    ```
 
 1. `integrations-extras`를 기본 작업 리포지토리로 설정합니다:
@@ -97,7 +105,7 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 [101]: https://github.com/Datadog/integrations-extras
 [102]: https://docs.datadoghq.com/ko/developers/integrations/python
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "마켓플레이스 통합 구축" %}}
 
@@ -131,7 +139,7 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 
    ```shell
 
-   ddev config set marketplace $HOME/dd/marketplace
+   ddev config set repos.marketplace $HOME/dd/marketplace
    ddev config set repo marketplace
    ```
 
@@ -139,7 +147,7 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 
    ```shell
 
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
+   ddev config set repos.marketplace <PATH/TO/MARKETPLACE>
    ddev config set repo marketplace
    ```
 
@@ -147,21 +155,21 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 [102]: https://docs.datadoghq.com/ko/developers/integrations/marketplace_offering
 [103]: https://docs.datadoghq.com/ko/developers/integrations/python
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 ## 통합 생성
 
-도커를 다운로드하고 적절한 버전의 Python을 설치한 후 개발 환경이 준비되면 에이전트 기반 통합을 만들 수 있습니다.
+Docker를 다운로드하고, 적절한 버전의 Python을 설치하고, 개발 환경을 준비하면 Agent 기반 통합을 만들 수 있습니다.
 
-다음 지침은 `Awesome`이라는 통합 예시를 사용합니다. Awesome의 코드를 사용하여 따라 하거나, 명령 내에서 통합 이름과 함께 사용자 자체 코드로 Awesome을 대체할 수 있습니다. 예를 들어, `ddev create Awesome`대신 `ddev create <your-integration-name>`을 사용합니다.
+다음 지침에서는 `Awesome`이라는 통합 예제를 사용합니다. Awesome의 코드를 사용하거나, Awesome을 직접 작성한 코드로 바꾸고 명령 내에서 통합 이름을 입력하세요. 예를 들어 `ddev create Awesome` 대신 `ddev create <your-integration-name>`을 사용합니다.
 
 ### 통합을 위한 스캐폴딩 만들기
 
 `ddev create` 명령은 에이전트 기반 통합에 필요한 기본 파일 및 경로 구조 (또는 "스캐폴딩")를 만드는 대화형 도구를 실행합니다.
 
-1. 첫 번째 통합 디렉토리를 만들기 전에 디스크에 아무것도 쓰지 않는 `-n/--dry-run` 플래그를 사용하여 드라이-런을 시도해 보세요:
+1. 첫 번째 통합 디렉토리를 만들기 전에 디스크에 아무것도 쓰지 않는 `-n/--dry-run` 플래그를 사용하여 드라이 런을 시도해 보세요:
    ```shell
    ddev create -n Awesome
    ```
@@ -178,7 +186,7 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 
 ## 에이전트 검사 작성
 
-각 에이전트 기반 통합의 핵심은 주기적으로 정보를 수집하여 Datadog으로 전송하는 *에이전트 검사"입니다.
+모든 Agent 기반 통합의 핵심은 주기적으로 정보를 수집하고 Datadog에 전송하는 *Agent Check*입니다.
 
 [검사][30]는 `AgentCheck` 기본 클래스에서 로직을 이어 받고, 다음과 같은 요구 사항을 갖습니다:
 
@@ -191,7 +199,7 @@ Datadog 개발 툴킷은 사용자가 `$HOME/dd/` 디렉토리에서 작업할 �
 
 ### 검사 로직 구현
 
-Awesome의 경우 에이전트 검사는 웹 페이지에서 문자열을 검색하는 `awesome.search` 라는 이름의 [서비스 검사][25]로 구성됩니다. 문자열이 있는 경우 `OK`, 페이지에 액세스할 수 있지만 문자열을 찾을 수 없는 경우 `WARNING`, 페이지에 액세스할 수 없는 경우 `CRITICAL`이라는 결과가 나옵니다. 
+Awesome의 경우 Agent Check는 `awesome.search`라는 [서비스 점검][25]으로 구성되며, 이 점검은 웹 페이지에서 문자열을 검색합니다. 문자열이 존재하면 `OK`, 페이지에 접근할 수 있지만 문자열을 찾을 수 없다면 `WARNING`, 페이지에 접근할 수 없다면 `CRITICAL`을 표시합니다.
 
 에이전트 검사로 메트릭을 제출하는 방법을 알아보려면 [커스텀 에이전트 검사][7]를 참조하세요.
 
@@ -246,7 +254,7 @@ class AwesomeCheck(AgentCheck):
 
 ### 단위 테스트 작성
 
-Awesome을 위한 `check` 방식의 첫 번째 부분은 설정 파일에서 두 가지 요소를 검색하고 확인하는 것입니다. 이것은 단위 테스트에 적합한 후보입니다.
+Awesome용 `check` 메서드의 첫 번째 부분은 구성 파일에서 두 요소를 검색하고 검증합니다. 이는 단위 테스트를 작성하기에 적합한 대상입니다.
 
 `awesome/tests/test_awesome.py`에서 파일을 열고 내용을 다음으로 바꿉니다:
 
@@ -364,37 +372,13 @@ def test_service_check(aggregator, instance):
    ```
    ddev test -m integration awesome
    ```
-통합이 거의 완료되었습니다. 다음으로 필요한 검사 에셋을 추가합니다.
-
-## 통합 에셋 채우기
-
-`ddev` 스캐폴딩에 의해 생성된 다음 에셋 세트는 **반드시** 통합과 관련된 정보로 채워져야 합니다:
-
-`README.md`
-: 에이전트 검사에 대한 도움말, 설정 방법, 수집하는 데이터 및 지원 정보가 포함되어 있습니다.
-
-`spec.yaml`
-: `ddev` 툴링을 사용하여 `conf.yaml.example`을 생성하는 데 사용됩니다. 자세한 내용은 [설정 사양][11]을 참조하세요.
-
-`conf.yaml.example`
-: 에이전트 검사에 대한 기본 (또는 예시) 설정 옵션이 포함되어 있습니다. **이 파일을 직접 편집하지 마세요!** 이 파일은 `spec.yaml`의 내용에서 생성됩니다. 자세한 내용은 [설정 파일 참조 설명서][12]에서 확인하세요.
-
-`manifest.json`
-: 여기에는 제목 및 카테고리와 같은 에이전트 검사의 메타데이터가 포함되어 있습니다. 자세한 내용은 [매니페스트 파일 참조 설명서][13]에서 확인하세요.
-
-`metadata.csv`
-: 여기에는 에이전트 검사에서 수집한 모든 메트릭 목록이 포함되어 있습니다. 자세한 내용은 [메트릭 메타데이터 파일 참조 설명서][14]에서 확인하세요.
-
-`service_check.json`
-: 에이전트 검사에서 수집한 모든 서비스 검사 목록이 포함되어 있습니다. 자세한 내용은 [서비스 검사 파일 참조 설명서][15]에서 확인하세요.
-
-`README.md`와 `manifest.json` 파일에 대한 자세한 내용은 [타일 생성][20] 및 [통합 에셋 참조][33]에서 확인하세요.
+통합이 거의 완료되었습니다. 샌드박스의  Developer Platform으로 돌아가서 제출을 완료하세요.
 
 ## 휠 구축하기
 
 `pyproject.toml` 파일은 휠을 패키징하고 구축하는 데 사용되는 메타데이터를 제공합니다. 휠에는 통합 기능에 필요한 파일이 포함되어 있으며, 여기에는 에이전트 검사, 설정 예제 파일 및 휠 빌드 중에 생성된 아티팩트가 포함됩니다.
 
-메타데이터 파일을 포함한 모든 추가 요소는 휠 내에 포함되지 않으며 Datadog 플랫폼 및 에코시스템에 의해 다른 곳에서 사용됩니다.
+메타데이터 파일 등 모든 추가 요소는 wheel 내에 포함되지 않으며, Datadog 플랫폼과 에코시스템의 다른 곳에서 사용됩니다.
 
 Python 패키징에 대해 자세히 알아보려면 [Python 프로젝트 패키징][16]을 참조하세요.
 
@@ -436,10 +420,50 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
   ```
 </details>
 
-## 타일을 채우고 통합 게시하기
+Kubernetes 환경에서 테스트 목적으로 wheel을 설치하려면 다음 단계를 따르세요.
+1. `.whl` 파일을 initContainer에 마운트합니다.
+2. initContainer에서 wheel 설치를 실행합니다.
+3. Agent 컨테이너가 실행되는 동안 initContainer를 마운트합니다.
 
-에이전트 기반 통합을 생성했다면, 통합 타일에 표시되는 나머지 [필수 에셋][31]을 채우고 풀 리퀘스트를 열기 위해 [타일 생성][20] 설명서를 참고하세요.
+호스트 및 컨테이너 환경에 대한 고객 설치 명령은 [Community 및 Marketplace 통합 문서][35]를 참고하세요.
 
+## 리뷰를 위해 코드를 제출합니다.
+
+Developer Platform에 안내된 단계를 따라 GitHub에서 리뷰할 수 있도록 Agent 점검 코드를 제출합니다. 승인되면 통합과 함께 풀 리퀘스트가 공개됩니다.
+
+## 통합 업그레이드
+* 새로운 통합 코드를 편집하거나 추가하려면 버전 업그레이드가 필요합니다.
+
+* README 콘텐츠, 매니페스트 정보, 자산(대시보드 및 모니터 템플릿)을 편집하거나 추가하는 경우 버전을 올릴 필요가 없습니다.
+
+### 통합 버전 올리기
+통합 버전을 변경할 때는 코드 변경 외에도 다음 사항이 필요합니다.
+1. 새 버전 번호를 반영하도록 `__about__.py`를 업데이트합니다. 이 파일은 `/datadog_checks/<your_check_name>/__about__.py`의 통합 디렉터리에서 찾을 수 있습니다.
+2. Developer Platform의 *Release Notes**에 다음 형식을 따르는 항목을 추가합니다.
+   ```
+   ## Version Number / Date in YYYY-MM-DD
+
+   ***Added***:
+
+   * New feature
+   * New feature
+
+   ***Fixed***:
+
+   * Bug fix
+   * Bug fix
+
+   ***Changed***:
+
+   * Feature update
+   * Feature update
+
+   ***Removed***:
+
+   * Feature removal
+   * Feature removal
+   ```
+3. 설치 지침과 다른 모든 곳에서 언급된 버전 번호를 모두 업데이트하세요. 설치 지침에는 보통 버전 번호가 포함되어 있으므로, 해당 번호를 업데이트해야 합니다.
 
 ## 참고 자료
 
@@ -462,9 +486,9 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 [15]: /ko/developers/integrations/check_references/#service-check-file
 [16]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [17]: https://docs.datadoghq.com/ko/agent/
-[18]: https://docs.datadoghq.com/ko/events/
+[18]: https://docs.datadoghq.com/ko/service_management/events/
 [19]: https://desktop.github.com/
-[20]: https://docs.datadoghq.com/ko/developers/integrations/create_a_tile
+[20]: https://docs.datadoghq.com/ko/developers/integrations/
 [21]: https://github.com/Datadog/integrations-extras
 [22]: https://github.com/Datadog/marketplace
 [23]: https://app.datadoghq.com/integrations
@@ -475,6 +499,8 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 [28]: https://docs.datadoghq.com/ko/dashboards/
 [29]: https://docs.datadoghq.com/ko/logs/log_configuration/pipelines/
 [30]: https://docs.datadoghq.com/ko/glossary/#check
-[31]: https://docs.datadoghq.com/ko/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
+[31]: https://docs.datadoghq.com/ko/developers/integrations/
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/ko/developers/integrations/check_references/
+[34]: https://docs.datadoghq.com/ko/metrics/
+[35]: https://docs.datadoghq.com/ko/agent/guide/use-community-integrations/

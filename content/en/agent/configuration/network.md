@@ -73,13 +73,16 @@ Add the following domains to your inclusion list to allow for Agent installation
 [Real User Monitoring (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+[Cloud Security Vulnerabilities][29]
+: `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Synthetic Monitoring Private Locations][8]
 : Synthetics Worker v1.5.0 or later: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint you need to configure.<br>
 API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -88,7 +91,7 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /agent/remote_config
+[101]: /remote_configuration
 [102]: /database_monitoring/
 
 {{% /site-region %}}
@@ -160,6 +163,16 @@ Other: See [logs endpoints][202]
 {{% site-region region="ap1" %}}
 [Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+Other: See [logs endpoints][202]
+
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
+
+{{% site-region region="ap2" %}}
+[Logs][200] & [HIPAA logs][201]
+: HTTP: `agent-http-intake.logs.ap2.datadoghq.com`<br>
 Other: See [logs endpoints][202]
 
 [200]: /logs/
@@ -277,7 +290,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
@@ -415,3 +428,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [26]: /metrics/
 [27]: /developers/service_checks/
 [28]: /events/
+[29]: /security/cloud_security_management/vulnerabilities/

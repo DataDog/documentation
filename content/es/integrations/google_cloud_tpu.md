@@ -108,7 +108,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud TPU de Google Cloud Logging
 ## Recopilación de datos
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_tpu" >}}
+{{< get-metrics-from-git "google-cloud-tpu" >}}
 
 
 ### Eventos

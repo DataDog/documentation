@@ -31,7 +31,7 @@ further_reading:
 
 This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
 
-The minimum supported version for the React Native SDK is React Native v0.63.4+. Compatibility with older versions is not guaranteed out-of-the-box.
+The minimum supported version for the React Native SDK is React Native v0.65+. Compatibility with older versions is not guaranteed out-of-the-box.
 
 The React Native SDK supports the following services:
 
@@ -131,7 +131,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US1';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%). This option is not applicable to Error Tracking.
+// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -176,7 +176,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US3';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%). This option is not applicable to Error Tracking.
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -217,7 +217,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US5';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%). This setting is not applicable to Error Tracking.
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -257,7 +257,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'EU1';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%). This setting is not applicable to Error Tracking.
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -299,7 +299,7 @@ config.site = 'US1_FED';
 config.nativeCrashReportEnabled = true;
 // Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%)
 config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%). This setting is not applicable to Error Tracking.
+// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%).
 // You need to specify the hosts of your backends to enable tracing with these backends
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'

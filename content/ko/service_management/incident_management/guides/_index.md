@@ -15,14 +15,3 @@ further_reading:
 private: true
 title: 인시던트 관리 가이드
 ---
-
-
-{{< whatsnext desc="통합:">}}
-    {{< nextlink href="/service_management/incident_management/guides/jira" >}}Jira{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/guides/statuspage" >}}Statuspage{{< /nextlink >}}
-{{< /whatsnext >}}
-
-
-## 참고 자료
-
-{{< partial name="whats-next/whats-next.html" >}}

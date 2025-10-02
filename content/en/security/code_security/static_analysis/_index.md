@@ -50,7 +50,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 {{< /whatsnext >}}
 
 ## Search and filter results
-After setting up Static Code Analysis, a scan is ran upon each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
+After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
@@ -68,6 +68,27 @@ The content of the violation is shown in tabs:
 - **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
+
+### Filter out false positives
+For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. Select the toggle "Filter out false positives" on the [SAST vulnerabilities explorer](https://app.datadoghq.com/security/code-security/sast) to quickly narrow down your initial list for triage. 
+
+For each finding, you can provide Bits AI with feedback on its assessment.
+
+{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+False positive filtering is supported for the following CWEs:
+- [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
+- [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
+- [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
+- [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
+- [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
+- [CWE-79: Cross-site Scripting](https://cwe.mitre.org/data/definitions/79.html)
+- [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
+- [CWE-327: Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)
+- [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
+- [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
+- [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)
+- [CWE-502: Deserialization of Untrusted Data](https://cwe.mitre.org/data/definitions/502.html)
+{{% /collapse-content %}}
 
 ## Customize your configuration
 To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].

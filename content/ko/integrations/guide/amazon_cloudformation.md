@@ -43,9 +43,9 @@ title: Datadog-Amazon CloudFormation
     }
   }
   ```
-   미국 외 계정을 사용하는 경우 `ApiURL`를 지정합니다(기본값은 `https://api.datadoghq.com`). 예를 들어 EU 계정에 `https://api.datadoghq.eu`를 사용합니다.
+   US1 이외의 지역에서 계정을 사용하는 경우 `ApiURL`을 지정합니다. 예를 들어 EU 지역의 계정인 경우 `https://api.datadoghq.eu`, US5 지역의 계정인 경우 `https://api.us5.datadoghq.com/` 을 사용합니다.
 
-7. 리소스를 설정한 다음 활성화된 Datadog 리소스를 포함하는 [AWS 스택을 생성][3]합니다.
+7. 리소스를 설정한 후에는 활성화된 Datadog 리소스를 포함하는 [AWS 스택을 생성][3]합니다.
 
 사용 가능한 명령어 및 워크플로우에 대한 자세한 내용을 확인하려면 공식 [AWS 문서][4]를 참조하세요.
 
