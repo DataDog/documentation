@@ -42,9 +42,10 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 
 ### Create a custom app
 
-1. From [App Builder][1], click **New App**.
+1. From [App Builder][1], click **New App**. 
+1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
 1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab, then click the component or drag it onto the canvas.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab, then click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
