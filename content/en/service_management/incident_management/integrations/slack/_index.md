@@ -96,7 +96,7 @@ In organizations with seat-based Incident Management billing:
 
 In an incident Slack channel, you can run Slack commands to modify the incident's states and severity, assign responder roles, page on-call teams, and more.
 
-For a full list of Slack commands, see the [Slack commands](#slack-commands) section.
+For a full list of Slack commands, see [Slack commands](#slack-commands).
 
 ### Other incident channel configuration options
 
