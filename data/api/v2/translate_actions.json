@@ -2019,6 +2019,10 @@
     "request_description": "",
     "request_schema_description": "Create a role."
   },
+  "ListRoleTemplates": {
+    "description": "List all role templates",
+    "summary": "List role templates"
+  },
   "DeleteRole": {
     "description": "Disables a role.",
     "summary": "Delete role"

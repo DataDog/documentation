@@ -39108,6 +39108,49 @@ components:
         permissions:
           $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
+    RoleTemplateArray:
+      description: The definition of `RoleTemplateArray` object.
+      properties:
+        data:
+          description: The `RoleTemplateArray` `data`.
+          items:
+            $ref: '#/components/schemas/RoleTemplateData'
+          type: array
+      required:
+      - data
+      type: object
+    RoleTemplateData:
+      description: The definition of `RoleTemplateData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleTemplateDataAttributes'
+        id:
+          description: The `RoleTemplateData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/RoleTemplateDataType'
+      required:
+      - type
+      type: object
+    RoleTemplateDataAttributes:
+      description: The definition of `RoleTemplateDataAttributes` object.
+      properties:
+        description:
+          description: The `attributes` `description`.
+          type: string
+        name:
+          description: The `attributes` `name`.
+          type: string
+      type: object
+    RoleTemplateDataType:
+      default: roles
+      description: Roles resource type.
+      enum:
+      - roles
+      example: roles
+      type: string
+      x-enum-varnames:
+      - ROLES
     RoleUpdateAttributes:
       description: Attributes of the role.
       properties:
@@ -70844,6 +70887,31 @@ paths:
         - name: role_id
           source: data.id
         type: unsafe
+  /api/v2/roles/templates:
+    get:
+      description: List all role templates
+      operationId: ListRoleTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleTemplateArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_read
+      summary: List role templates
+      tags:
+      - Roles
+      x-menu-order: 16
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/roles/{role_id}:
     delete:
       description: Disables a role.
