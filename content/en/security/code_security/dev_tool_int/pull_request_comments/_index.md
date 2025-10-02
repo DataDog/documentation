@@ -69,7 +69,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 For setup instructions, read the [Datadog GitLab source code integration][8] documentation.
 
 ## Set up Azure DevOps pull request comments
-Azure DevOps for Code Security is currently in preview. Request access [here][9].
+Azure DevOps for Code Security is currently in Preview. [Request access to join the Preview][9].
 
 ## Configure PR comment settings for your repositories
 To configure PR comments for all repositories:
