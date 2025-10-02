@@ -8,7 +8,9 @@ aliases:
 ---
 
 ## Overview
-Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This allows developers to see issues in context, within the pull request itself, and fix them before merging. PR comments posted on feature branches are diff-aware, meaning they flag issues detected only on lines modified by commits within the PR. There are two types of pull request comments:
+Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This help you see and fix issues in context before merging code. The comments are diff-aware, meaning they only flag new issues introduced on lines modified lines in the pull request.
+
+There are two types of pull request comments:
 - Inline comment: flags an individual Code Security finding on specific line(s) of code and suggests a remediation (if available)  
     {{< img src=\"static/images/code_security/github_inline_pr_comment_light.png\" alt=\"Your image description\" style=\"width:75%;\" >}}
 - Summary comment: combines all findings from Datadog into one comment  
