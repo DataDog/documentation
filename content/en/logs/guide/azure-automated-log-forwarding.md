@@ -25,11 +25,13 @@ Use the automated setup method if you want to:
    - manage your infrastructure through declarative templates
    - centrally control access, tags, and billing
    - redeploy your resources in the correct order and in a consistent way
+   - save costs by using a storage account rather than an event hub
 
+Add that automated setup method 
 
 ## Setup
 
-Begin by opening the [Automated Log Forwarding ARM template][1]. The sections below provide instructions for completing each page of the template.
+Begin by opening the [Automated Log Forwarding ARM template][1], or by clicking **+ Add Log Collection** in the [Azure integration tile][6]. The sections below provide instructions for completing each page of the template.
 
 ### Basics
 
@@ -138,6 +140,7 @@ The script first discovers any instances running in each subscription, then prom
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
 [5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
+[6]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
 [7]: https://learn.microsoft.com/azure/azure-functions/
 [8]: https://azure.microsoft.com/products/container-apps
 [9]: https://learn.microsoft.com/azure/storage/common/storage-account-overview
