@@ -31,7 +31,7 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 
 1. Check logs are present in the storage account container(s)
 
-   Take note of the region of the resource(s) missing logs in Datadog (if the logs missing are azure [resource logs][8]). Then go to the storage account deployed by the ARM template in the same region as the resource(s) and look if there is a container with the expected logs.
+   Take note of the region of the resource(s) missing logs in Datadog (if the logs missing are azure [resource logs][8]). Then go to the storage account deployed by the ARM template in the same     region as the resource(s) and look if there is a container with the expected logs.
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/storage_account_container.png" alt="storage account container" >}}
 
@@ -40,12 +40,13 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 2. Check the `containerAppConsole` logs of the forwarder jobs
 
    These logs capture the standard output (stdout) and standard error (stderr) streams from the forwarder's containers. They help diagnose issues such as Application Errors and Exceptions.
-   To inspect these logs, enable them and send them to a destination: select the forwarder container apps environment from the same region as your resource and storage account. For instance, if your resource and storage account are in Japan West, choose the forwarder container apps environment from that region. 
+   
+   To inspect these logs, enable them and send them to a destination: select the forwarder container apps environment from the same region as your resource and storage account. For instance, if     your resource and storage account are in Japan West, choose the forwarder container apps environment from that region. 
    Next, go to logging options and select to send logs to Azure Monitor or a Log Analytics workspace.
 
-  {{< img src="integrations/guide/azure-log-troubleshooting/list_forwarder_env.png" alt="list of forwarder container apps environment" >}}
+   {{< img src="integrations/guide/azure-log-troubleshooting/list_forwarder_env.png" alt="list of forwarder container apps environment" >}}
 
-  {{< img src="integrations/guide/azure-log-troubleshooting/forwarder_env_log_config.png" alt="diagnostic setting config in forwarder container apps environment" >}}
+   {{< img src="integrations/guide/azure-log-troubleshooting/forwarder_env_log_config.png" alt="diagnostic setting config in forwarder container apps environment" >}}
 
 ## Event Hub + Forwarder
 
