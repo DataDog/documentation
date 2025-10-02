@@ -21,7 +21,7 @@ With the integration, you can:
 
 - Respond faster by declaring Datadog incidents directly from Slack.
 - Automatically create Slack channels for collaboration when Datadog incidents are declared.
-- Execute your incident response in Slack—page on-call teams, assign responder roles, update severity, and more.
+- Execute your incident response in Slack. For example, page on-call teams, assign responder roles, or update severity.
 
 The Slack integration documentation is organized around the typical lifecycle of using Slack with Incident Management:
 
