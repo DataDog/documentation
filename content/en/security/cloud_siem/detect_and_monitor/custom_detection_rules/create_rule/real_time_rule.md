@@ -99,7 +99,7 @@ Select the detection method you want to use for creating signals.
 {{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. Construct a query for your logs or events using the [Log Explorer search syntax][1].
+1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/unit_testing %}}
 

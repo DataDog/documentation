@@ -113,7 +113,7 @@ Choose the query language you want to use.
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
-1. Construct a query for your logs or events using the [Log Explorer search syntax][1].
+1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/add_calculated_fields %}}
 {{% cloud_siem/add_reference_tables %}}
@@ -260,7 +260,7 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-{{< img src="security/security_monitoring/detection_rules/conditions_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/condition_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_third_party %}}
 
@@ -294,22 +294,22 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Add custom schedule
+## Add custom schedule
 
-You can set specific evaluation time and how often it runs by creating a custom schedule or using a recurrence rule (RRULE).
+You can set specific evaluation time and how often it runs by creating a [custom schedule](#create-custom-schedule) or using a [recurrence rule (RRULE)](#use-rrule).
 
-#### Create custom schedule
+### Create custom schedule
 
 {{< img src="security/security_monitoring/detection_rules/custom_schedule.png" alt="The Use custom schedule section with an example" style="width:100%;" >}}
 
 1. Select **Create Custom Schedules**.
 1. Set how often and at what time you want the rule to run.
 
-#### Use RRULE
+### Use RRULE
 
 {{< img src="security/security_monitoring/detection_rules/rrule_example.png" alt="The Use RRULE section with an example" style="width:100%;" >}}
 
-Recurrence rule (RRULE) is a property name from the [iCalendar RFC][1], which is the standard for defining recurring events. Use the [official RRULE generator][4] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases.
+Recurrence rule (RRULE) is a property name from the [iCalendar RFC][3], which is the standard for defining recurring events. Use the [official RRULE generator][4] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases.
 
 For example, if the RRULE is:
 
@@ -320,7 +320,7 @@ FREQ=DAILY;INTERVAL=1;BYHOUR=6;BYMINUTE=0
 The example RRULE runs the scheduled rule once a day at 6:00 AM.
 
 **Notes**:
-- Attributes specifying the duration in RRULE are not supported (for example, DTSTART, DTEND, DURATION).
+- Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`).
 - Evaluation frequencies must be a day or longer. For shorter evaluation frequencies, use the default monitor schedules.
 
 To write a custom RRULE for your detection rule:

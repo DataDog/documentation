@@ -1,4 +1,4 @@
-1. If you have multiple queries, you can create a **Simple condition** or **Then condition**.
+1. If you have a single query, skip to step 2. If you have multiple queries, you can create a **Simple condition** or **Then condition**.
     - If you want to create a simple condition, leave the selection as is.
     - If you want to create a `then` condition, click **THEN condition**.
         - Use the **Then condition** when you want to trigger a signal if query A occurs and then query B occurs.

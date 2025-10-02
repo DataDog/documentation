@@ -104,7 +104,7 @@ Historical jobs are one-time executable queries on historical logs. It allows yo
 {{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. Construct a query for your logs or events using the [Log Explorer search syntax][1].
+1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/add_calculated_fields %}}
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
@@ -125,7 +125,7 @@ Click **Add Root Query** to add additional queries.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/threshold_historical_condition.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_threshold %}}
 
@@ -141,8 +141,6 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "New Value" %}}
-
-{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
 
 ### Other parameters
 
@@ -165,8 +163,6 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
-{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
-
 ### Other parameters
 
 #### 1. Job multi-triggering {#job-multi-triggering-historical-anomaly}
@@ -180,7 +176,7 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
 
-{{< img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/content_anomaly_historical_condition.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" >}}
 
 1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
 1. In the **Anomaly count** field, enter the condition for how many anomalous logs within the specified window are required to trigger a signal.
@@ -207,8 +203,6 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
-
-{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
 
 ### Other parameters
 
