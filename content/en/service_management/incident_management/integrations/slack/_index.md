@@ -96,7 +96,7 @@ In organizations with seat-based Incident Management billing:
 
 In an incident Slack channel, you can run Slack commands to modify the incident's states and severity, assign responder roles, page on-call teams, and more.
 
-For a full list of Slack commands, see the [Incident commands](#incident-commands) section.
+For a full list of Slack commands, see the [Slack commands](#slack-commands) section.
 
 ### Other incident channel configuration options
 
@@ -124,7 +124,7 @@ Datadog automatically notifies the selected channel about any newly declared inc
 
 Under the hood, this feature is a built-in, hidden [incident notification rule][5]. If you would like to customize the message or its triggers, disable it and define your own notification rule.
 
-## Slack incident commands
+## Slack commands
 
 You can view the full list of available Slack commands at any time by typing `/dd help` or `/datadog help` in Slack. This will open the command reference directly in your Slack workspace. To open the action tray for common incident management actions, type `/datadog`.
 
