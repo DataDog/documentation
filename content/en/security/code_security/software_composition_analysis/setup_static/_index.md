@@ -52,7 +52,6 @@ To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that:<br>
-<!-- - Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br> -->
 - Contain file paths with parent directory traversal (<code>..</code>)<br>
 - Contain file names longer than 255 characters<br>
 For these cases, use CI Pipelines.
