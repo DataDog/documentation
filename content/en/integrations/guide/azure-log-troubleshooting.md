@@ -135,8 +135,8 @@ If you don't spot any issue with the tag rules, contact [Datadog Support][17] an
 
 [1]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=automated#setup
 [2]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=eventhub#setup
-[3]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=blobstorage#setup
-[4]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension&site=us3#log-collection
+[3]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension&site=us3#log-collection
+[4]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=blobstorage#setup
 [5]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
 [6]: https://docs.datadoghq.com/logs/log_configuration/indexes/#exclusion-filters
 [7]: https://docs.datadoghq.com/logs/explorer/search/
