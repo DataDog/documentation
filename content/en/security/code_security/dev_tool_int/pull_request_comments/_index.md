@@ -29,7 +29,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 
 ## Set up GitHub pull request comments
 If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis).  
-If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.  
+If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` for comments to appear.  
 
 ### Set up the GitHub source code integration
 For setup instructions, read the [Datadog GitHub source code integration][2] documentation.
