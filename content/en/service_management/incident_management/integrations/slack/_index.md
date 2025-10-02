@@ -29,7 +29,7 @@ The Slack integration documentation is organized around the typical lifecycle of
 2. [**Declare incidents**](#declaring-incidents-from-slack): Learn how to start incidents using Slack commands or message actions.
 3. [**Manage incidents from incident channels**](#incident-channels): Use dedicated Slack channels with commands, syncing, and automations.
 4. [**Configure global notifications**](#global-slack-notifications): Keep your organization informed with automatic updates.
-6. **[Reference Slack configuration options](#additional-slack-configurations) and [Slack commands](#slack-incident-commands)**: Explore detailed configuration options and see the full list of available Slack commands to tailor and streamline your incident response workflows.
+5. **[Reference Slack configuration options](#additional-slack-configurations) and [Slack commands](#slack-incident-commands)**: Explore detailed configuration options and see the full list of available Slack commands to tailor and streamline your incident response workflows.
 
 ## Prerequisites
 
