@@ -4,6 +4,8 @@ description: Learn how to set up pull request comments for repositories scanned 
 aliases:
 - /static_analysis/github_pull_requests
 - /code_analysis/github_pull_requests/
+- /code_security/dev_tool_int/github_pull_requests/
+- /code_security/dev_tool_int/pull_request_comments/
 ---
 
 ## Overview
