@@ -41,7 +41,7 @@ You can configure monitors so Bits runs automatically whenever they transition t
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations.
 
-### Supported monitors 
+### Supported monitors
 <div class="alert alert-info"> Note: Prior to general availability, monitor requirements may change.  </div>
 
 Bits is able to run investigations on the following monitor types:
@@ -53,16 +53,16 @@ Bits is able to run investigations on the following monitor types:
   - Logs
   - APM (`APM Metrics` type only)
 
-#### Best practices: Add troubleshooting context to your monitors 
+#### Best practices: Add troubleshooting context to your monitors
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
 
-1. **Include telemetry links:** Add at least one helpful telemetry link in the monitor message. This link could be a Datadog dashboard, logs query, trace query, a Datadog notebook with helpful widgets, or a [Confluence page](#configure-knowledge-base-integrations) containing these links. Think about the first place you'd normally look in Datadog when this monitor fires. Bits uses these links during the “Executing Runbook” step of the initial investigation to zero in on potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would and giving you the flexibility to tailor investigations to your team’s workflows.
+1. **Include telemetry links:** Add at least one helpful telemetry link in the monitor message. This link could be a Datadog dashboard, logs query, trace query, a Datadog notebook with helpful widgets, or a [Confluence page](#configure-knowledge-base-integrations) containing these links. Think about the first place you'd normally look in Datadog when this monitor triggers. Bits uses these links during the “Executing Runbook” step of the initial investigation to zero in on potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would and giving you the flexibility to tailor investigations to your team’s workflows.
 
 1. **Service scoping:** For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
 
    {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-For additional suggestions on how to optimize investigations, see our [Memories feature](#help-bits-ai-sre-learn).
+For additional suggestions on how to optimize investigations, see the section on [Memories](#help-bits-ai-sre-learn).
 
 ### Configure where investigation findings are sent
 
