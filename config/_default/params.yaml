@@ -286,7 +286,6 @@ unsupported_sites:
   iac_security: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
-  network_path: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
   otlp_agentless: [gov]
