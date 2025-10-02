@@ -53,7 +53,7 @@ Bits is able to run investigations on the following monitor types:
   - Logs
   - APM (`APM Metrics` type only)
 
-#### Best practices: Add troubleshooting context to your monitors
+#### Best practices: Add investigation context to your monitors
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
 
 1. **Include telemetry links:** Add at least one helpful telemetry link in the monitor message. This link could be a Datadog dashboard, logs query, trace query, a Datadog notebook with helpful widgets, or a [Confluence runbook page](#configure-knowledge-base-integrations) containing these links. Think about the first place you'd normally look in Datadog when this monitor triggers. 
