@@ -52,7 +52,6 @@ To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that:<br>
-- Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br>
 - Contain file paths with parent directory traversal (<code>..</code>)<br>
 - Contain file names longer than 255 characters<br>
 For these cases, use CI Pipelines.
@@ -174,7 +173,7 @@ There are two ways to run SCA scans from within your CI Pipelines:
 You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
 
 {{< tabs >}}
-{{% tab "Github" %}}
+{{% tab "GitHub" %}}
 **GitHub Actions**
 
 SCA can run as a job in your GitHub Actions workflows. The action provided below invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][1], on your codebase and uploads the results into Datadog.
@@ -446,7 +445,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 ## Further Reading
 
 {{< whatsnext desc="More about SCA:">}}
-    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Runtime detection of libraries vulnerabilities{{< /nextlink >}}
+    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Set up runtime detection of library vulnerabilities{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Other Code Security scanning for your repositories:">}}
