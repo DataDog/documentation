@@ -25,7 +25,7 @@ You can restrict access to a specific pipeline with the following options:
     - Delete the pipeline.
     - Restrict access to the pipeline.
 - **Runner** is allowed to:
-        - View, edit, and deploy pipeline configuration.
+    - View, edit, and deploy pipeline configuration.
 - **Contributor** is allowed to:
     - View and edit pipeline configuration.
     - **Note**: This is only relevant when the pipeline is still in draft mode and has not been deployed yet. After it has been deployed for the first time, Runner or Editor access is needed to edit the configuration.
@@ -46,7 +46,7 @@ To use granular access controls to limit access to a specific pipeline:
 1. Click **Edit Access** > **Pipeline Access**.
 1. Click **Restrict Access**.
 1. The **Organization access** section shows that members of your organization have **Viewer** access by default. Use the dropdown menu to select what kind of access you want them to have.
-1. Click the dropdown menu in the **Restricted** section to set access levels for teams, roles, users, or service accounts.
+1. Click the dropdown menu in the **Restricted** section to set access levels for Teams, roles, users, or service accounts.
 1. Click **Copy Link** if you want to provide the pipeline link to users who are getting access to this pipeline.
 1. Click **Save**.
 
@@ -88,7 +88,7 @@ To use granular access controls to limit access to Live Capture for a specific p
 1. Click **Edit Access** > **Live Capture Access**.
 1. Click **Restrict Access**.
 1. The **Organization access** section shows that members of your organization have **Viewer** access by default. Use the dropdown menu to select what kind of access you want them to have.
-1. Click the dropdown menu in the **Restricted* section to set access levels for teams, roles, users, or service accounts based on your use case.
+1. Click the dropdown menu in the **Restricted* section to set access levels for Teams, roles, users, or service accounts based on your use case.
 1. Click **Save**.
 
 To restore full access to Live Capture for a pipeline:
