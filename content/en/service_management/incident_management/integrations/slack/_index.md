@@ -35,7 +35,7 @@ The Slack integration documentation is organized around the typical lifecycle of
 
 Install the integration through the [Slack Integration tile][1] with the proper [OAuth scopes][6]. For more information, see the [Slack integration][2] documentation.
 
-After the integration is installed, navigate to **[Service Management > Incidents > Settings > Integrations][3]** to enable Slack capabilities for Incident Management.
+After the integration is installed, navigate to [**Service Management** > **Incidents** > **Settings** > **Integrations**][3]** to enable Slack capabilities for Incident Management.
 
 ## Declaring incidents from Slack
 
