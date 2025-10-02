@@ -1,5 +1,5 @@
 ---
-title: GitHub Pull Requests
+title: Pull Request Comments
 description: Learn how to use Code Security in GitHub pull requests.
 aliases:
 - /static_analysis/github_pull_requests
@@ -7,19 +7,28 @@ aliases:
 ---
 
 ## Overview
+Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This allows developers to see issues in context, within the pull request itself, and fix them before merging. PR comments posted on feature branches are diff-aware, meaning they flag issues detected only on lines modified by commits within the PR.
 
-Code Security integrates with GitHub pull requests in two ways:
+You can configure PR comments at the organization or repository level in [Repository Settings][7], with the following controls:
+- Enabling/disabling PR comments by scan type (SAST, static SCA, Secrets, IaC)
+- Setting severity thresholds for each scan type
+- Excluding findings from test files or dev/test dependencies
+
+<!-- Code Security integrates with GitHub pull requests in two ways:
 - [Pull request comments to flag violations](#enable-code-security-pr-comments-for-your-repositories)
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Security comment on a pull request" style="width:90%;" >}}
 - [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Code Analysis (SAST).
 
-To enable these features, ensure you have the required GitHub permissions (Read & Write) for your repository.
+To enable these features, ensure you have the required GitHub permissions (Read & Write) for your repository. -->
+
+
+## Prerequisites
+- You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([preview][9]).  
+- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** page][4].  
 
 ## Set up Code Security for GitHub pull requests
-
-### Enable Datadog Code Security
-
-To enable Code Security in-app, navigate to the [**Code Security** page][4].
+If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (e.g. Static Code Analysis).  
+If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.  
 
 ### Configure a GitHub App
 
@@ -53,18 +62,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 1. Under the **Subscribe to events** heading, check the **Pull request** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
-### Enable Code Security PR comments for your repositories
-
-1. In Datadog, navigate to [**Security** > **Code Security** > **Setup**][4].
-2. In **Enable scanning for your repositories**, select **Edit** next to a given repository.
-3. Toggle **Enable Static Analyis** to on.
-
-**Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
-
-### Configure PR comment settings for your repositories
-
-Configure PR comment settings globally for all repositories or tailor them individually for a single repository. You can enable comments for different scan types and set minimum severity thresholds to control when PR comments appear, enabling you to exclude comments from appearing on lower-severity issues.
-
+## Configure PR comment settings for your repositories
 To configure PR comments for all repositories:
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
@@ -88,17 +86,6 @@ To configure PR comments for a single repository:
     - **Block all comments in this repository**: Enable this to disable all comments for this repository, overriding global settings.
 1. Click **Save Configuration**.
 
-### Fix a vulnerability directly from Datadog
-
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
-
-Follow these steps to fix a vulnerability and open a pull request:
-1. Go to **Code Security > Repositories**.
-2. Click a repository.
-3. On the repository's page, click the **Code Vulnerabilities** or **Code Quality** tabs.
-4. Click on a violation.
-5. If a suggested fix is available for that violation, one-click remediation is available in the side panel in the **Remediation** tab.
-
 [1]: /security/code_security/
 [2]: /integrations/github/
 [3]: https://app.datadoghq.com/integrations/github/add
@@ -106,3 +93,7 @@ Follow these steps to fix a vulnerability and open a pull request:
 [5]: https://app.datadoghq.com/integrations/github/configuration
 [6]: /security/code_security/static_analysis/github_actions/
 [7]: https://app.datadoghq.com/security/configuration/code-security/settings
+[8]: /integrations/gitlab-source-code/
+[9]: https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/
+
+

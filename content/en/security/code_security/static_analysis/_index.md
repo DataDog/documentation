@@ -144,8 +144,7 @@ In Datadog Static Code Analysis, there are two types of suggested fixes:
 If GitHub is your source code manager, you can push a code change to fix a SAST issue directly from Datadog in two ways.
 
 #### Open a pull request
-
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10].
+If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. View a specific SAST result in Code Security.
