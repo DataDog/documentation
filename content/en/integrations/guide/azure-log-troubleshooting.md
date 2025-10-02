@@ -59,6 +59,16 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 ## Native 
 
 **Note**: All logs sent with the native integration are tagged with `forwarder:native`
+
+1. Check that your tag rule(s) in the Datadog resource config match the tags set on your resource logs
+
+   {{< img src="integrations/guide/azure-logs-troubleshooting/tag_rules.png" alt="tag rules in datadog resource config" >}}
+   
+3. Contact [Datadog Support][10] and share the following information:
+- Tenant Id: go to Entra Id, under Basic information find the Tenant ID value
+- Subscription Id(s): the subscription in which the logs are missing
+- Datadog Resource Id: visible in the settings > properties of the Datadog resource blade. Example: `/subscriptions/<subscription_id>/resourceGroups/myresourcegroup/providers/Microsoft.Datadog/monitors/mydatadogresource`
+- Resource Id(s): if the logs are missing for specific resources such as web apps, sql databases etc.
    
 ## Further reading
 
@@ -73,3 +83,4 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 [7]: https://docs.datadoghq.com/logs/explorer/search/
 [8]: https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings?tabs=portal
 [9]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/logs-index
+[10]: https://www.datadoghq.com/support/
