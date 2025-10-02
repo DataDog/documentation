@@ -13,12 +13,17 @@ further_reading:
     text: "Enable monitoring for enterprise-scale Azure environments in minutes with Datadog"
 ---
 
-This guide is for setting up and managing the Datadog Monitor resource in Azure, which connects your Datadog organization and your Azure environment.<WHEN_TO_CHOOSE>
+This guide is for setting up and managing the Datadog Monitor resource in Azure, which connects your Datadog organization and your Azure environment. Choose this integration setup method if:
+
+- You're using the [US3 Site][1]
+- You want to manage the Datadog Azure integration from within the Azure portal
 
 ## Prerequisites
 
 - Your Datadog account must be on the [US3 Site][1]
 - You must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog organization you are linking them to
+
+## Overview
 
 The Datadog resource in Azure represents the connection between your Datadog organization and your Azure environment. You can configure a Datadog resource to link as many subscriptions as you wish to monitor. 
 
