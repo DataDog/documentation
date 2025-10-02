@@ -66,7 +66,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
 ## Set up GitLab merge request comments
-See instructions to enable the Datadog GitLab source code integration [here][8].
+For setup instructions, read the [Datadog GitLab source code integration][8] documentation.
 
 ## Set up Azure DevOps pull request comments
 Azure DevOps for Code Security is currently in preview. Request access [here][9].
