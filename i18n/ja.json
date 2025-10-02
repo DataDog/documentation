@@ -291,5 +291,17 @@
   },
   "available_for": {
     "other": "次で利用可能"
+  },
+  "alert_note": {
+    "other": "注"
+  },
+  "alert_warning": {
+    "other": "警告"
+  },
+  "alert_caution": {
+    "other": "注"
+  },
+  "alert_tip": {
+    "other": "ヒント"
   }
 }

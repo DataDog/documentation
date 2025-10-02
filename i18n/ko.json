@@ -291,5 +291,17 @@
   },
   "available_for": {
     "other": "이용 가능"
+  },
+  "alert_note": {
+    "other": "참고"
+  },
+  "alert_warning": {
+    "other": "경고"
+  },
+  "alert_caution": {
+    "other": "주의"
+  },
+  "alert_tip": {
+    "other": "팁"
   }
 }
