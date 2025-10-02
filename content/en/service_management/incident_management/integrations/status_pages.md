@@ -1,7 +1,8 @@
 ---
-title: Datadog Status Pages
+title:  Integrate Datadog Status Pages with Datadog Incident Management
+description: Learn how to integrate Datadog Status Pages with Incident Management to communicate real-time service status during incidents.
 further_reading:
-- link: "/service_management/status_pages/
+- link: "/service_management/status_pages/"
   tag: "Documentation"
   text: "Learn more about Datadog Status Pages"
 ---
@@ -26,6 +27,8 @@ At least one Status Page is required to enable the Status Pages integration for 
 
 You must have a role with Incidents Write and Status Pages Notice Write permissions to add a Status Pages notice.
 
+{{< img src="/service_management/incidents/Integrations/status_pages/status_pages_config_modal.png" alt="Configuration modal for integrating a Datadog incident with a Status Page notice" style="width:70%;" >}}
+
 1. In the [Incidents page][2], open an existing incident.
 1. At the top of the incident page, click **Update Status Page**.
 1. Enter all the required fields, which include Select a Status Page, Notice title, and Notice status. You can also specify which Status Page components are affected.
@@ -34,6 +37,8 @@ You must have a role with Incidents Write and Status Pages Notice Write permissi
 ## Update status
 
 After a Status Page is added to an incident, you can continue updating the Status Page until the incident is resolved.
+
+{{< img src="/service_management/incidents/Integrations/status_pages/incident_status_pages.png" alt="Screenshot showing the integration of a Datadog incident with a Status Page notice, including fields for selecting a Status Page, notice title, and status" style="width:100%;" >}}
 
 1. In the [Incidents page][2], open the incident you want to update.
 1. Find the Status Page you added and hover on the button to open the integration modal. You can unlink the Status Page integration or update the current Status Page notice.
