@@ -74,9 +74,13 @@ A form to create a new app registration is displayed:
 
 ## Next steps
 
-<CONTENT>
+- Check out the [Azure Overview dashboard][3] to start getting insights into your Azure environment
+- Check out [Azure monitor templates][4] to start getting alerts for the data that's important to your organization
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://learn.microsoft.com/azure/azure-resource-manager/management/overview
 [2]: /security/cloud_security_management/
+[3]: https://app.datadoghq.com/dash/integration/71/azure-overview
+[4]: https://app.datadoghq.com/monitors/templates?q=azure
