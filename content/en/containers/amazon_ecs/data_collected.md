@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS Data Collection
+description: Reference guide for metrics, logs, and events collected by the Datadog Agent on Amazon ECS
 aliases:
   - /agent/amazon_ecs/data_collected
 further_reading:

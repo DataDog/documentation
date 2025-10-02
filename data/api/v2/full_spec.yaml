@@ -525,9 +525,7 @@ components:
         type: string
     IncidentNotificationRuleIncludeQueryParameter:
       description: 'Comma-separated list of resources to include. Supported values:
-        `created_by_user`, `last_modified_by_user`, `incident_type`, `notification_template`
-
-        '
+        `created_by_user`, `last_modified_by_user`, `incident_type`, `notification_template`'
       explode: false
       in: query
       name: include
@@ -556,9 +554,7 @@ components:
         type: string
     IncidentNotificationTemplateIncludeQueryParameter:
       description: 'Comma-separated list of relationships to include. Supported values:
-        `created_by_user`, `last_modified_by_user`, `incident_type`
-
-        '
+        `created_by_user`, `last_modified_by_user`, `incident_type`'
       explode: false
       in: query
       name: include
@@ -5930,6 +5926,115 @@ components:
       required:
       - type
       type: object
+    AzureScanOptions:
+      description: The definition of `AzureScanOptions` object.
+      example:
+        data:
+          attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/AzureScanOptionsData'
+      type: object
+    AzureScanOptionsArray:
+      description: The definition of `AzureScanOptionsArray` object.
+      example:
+        data:
+        - attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          description: The `AzureScanOptionsArray` `data`.
+          items:
+            $ref: '#/components/schemas/AzureScanOptionsData'
+          type: array
+      required:
+      - data
+      type: object
+    AzureScanOptionsData:
+      description: The definition of `AzureScanOptionsData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AzureScanOptionsDataAttributes'
+        id:
+          description: The `AzureScanOptionsData` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureScanOptionsDataType'
+      required:
+      - type
+      - id
+      type: object
+    AzureScanOptionsDataAttributes:
+      description: The definition of `AzureScanOptionsDataAttributes` object.
+      properties:
+        vuln_containers_os:
+          description: The `attributes` `vuln_containers_os`.
+          type: boolean
+        vuln_host_os:
+          description: The `attributes` `vuln_host_os`.
+          type: boolean
+      type: object
+    AzureScanOptionsDataType:
+      default: azure_scan_options
+      description: The type of the resource. The value should always be `azure_scan_options`.
+      enum:
+      - azure_scan_options
+      example: azure_scan_options
+      type: string
+      x-enum-varnames:
+      - AZURE_SCAN_OPTIONS
+    AzureScanOptionsInputUpdate:
+      description: The definition of `AzureScanOptionsInputUpdate` object.
+      example:
+        data:
+          id: 12345678-90ab-cdef-1234-567890abcdef
+          type: azure_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateData'
+      type: object
+    AzureScanOptionsInputUpdateData:
+      description: The definition of `AzureScanOptionsInputUpdateData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataAttributes'
+        id:
+          description: The `AzureScanOptionsInputUpdateData` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataType'
+      required:
+      - type
+      - id
+      type: object
+    AzureScanOptionsInputUpdateDataAttributes:
+      description: The definition of `AzureScanOptionsInputUpdateDataAttributes` object.
+      properties:
+        vuln_containers_os:
+          description: The `attributes` `vuln_containers_os`.
+          type: boolean
+        vuln_host_os:
+          description: The `attributes` `vuln_host_os`.
+          type: boolean
+      type: object
+    AzureScanOptionsInputUpdateDataType:
+      default: azure_scan_options
+      description: Azure scan options resource type.
+      enum:
+      - azure_scan_options
+      example: azure_scan_options
+      type: string
+      x-enum-varnames:
+      - AZURE_SCAN_OPTIONS
     AzureStorageDestination:
       description: The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
@@ -6575,9 +6680,7 @@ components:
             It must be set to a value greater than the current timestamp.
 
             If this field is not provided, the finding will be muted or unmuted indefinitely,
-            which is equivalent to setting the expiration date to 9999999999999.
-
-            '
+            which is equivalent to setting the expiration date to 9999999999999.'
           example: 1778721573794
           format: int64
           type: integer
@@ -8969,25 +9072,19 @@ components:
       description: 'Options for cloud_configuration rules.
 
         Fields `resourceType` and `regoRule` are mandatory when managing custom `cloud_configuration`
-        rules.
-
-        '
+        rules.'
       properties:
         complexRule:
           description: 'Whether the rule is a complex one.
 
             Must be set to true if `regoRule.resourceTypes` contains more than one
-            item. Defaults to false.
-
-            '
+            item. Defaults to false.'
           type: boolean
         regoRule:
           $ref: '#/components/schemas/CloudConfigurationRegoRule'
         resourceType:
-          description: 'Main resource type to be checked by the rule. It should be
+          description: Main resource type to be checked by the rule. It should be
             specified again in `regoRule.resourceTypes`.
-
-            '
           example: aws_acm
           type: string
       type: object
@@ -9004,7 +9101,7 @@ components:
             evaluates to true if the resource is not compliant\n  true\n}\n\n# This
             part remains unchanged for all rules\nresults contains result if {\n  some
             resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource,
-            eval(resource))\n}\n"
+            eval(resource))\n}"
           type: string
         resourceTypes:
           description: List of resource types that will be evaluated upon. Must have
@@ -9062,11 +9159,9 @@ components:
       description: Create a new cloud configuration rule.
       properties:
         cases:
-          description: 'Description of generated findings and signals (severity and
+          description: Description of generated findings and signals (severity and
             channels to be notified in case of a signal). Must contain exactly one
             item.
-
-            '
           items:
             $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
           type: array
@@ -9091,9 +9186,7 @@ components:
 
             #Remediation
 
-            How to fix the security issue.
-
-            '
+            How to fix the security issue.'
           type: string
         name:
           description: The name of the rule.
@@ -9132,11 +9225,9 @@ components:
       description: The payload of a cloud configuration rule.
       properties:
         cases:
-          description: 'Description of generated findings and signals (severity and
+          description: Description of generated findings and signals (severity and
             channels to be notified in case of a signal). Must contain exactly one
             item.
-
-            '
           items:
             $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
           type: array
@@ -9169,9 +9260,7 @@ components:
 
             #Remediation
 
-            How to fix the security issue.
-
-            '
+            How to fix the security issue.'
           type: string
         name:
           description: The name of the rule.
@@ -15777,7 +15866,7 @@ components:
       type: object
     EntityRaw:
       description: Entity definition in raw JSON or YAML representation.
-      example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice\n"
+      example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice"
       type: string
     EntityReference:
       description: The unique reference for an IDP entity.
@@ -18756,6 +18845,374 @@ components:
       - ATTACK_PATH
       - IDENTITY_RISK
       - API_SECURITY
+    FlakyTest:
+      description: A flaky test object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FlakyTestAttributes'
+        id:
+          description: Test's ID. This ID is the hash of the test's Fully Qualified
+            Name and Git repository ID. On the Test Runs UI it is the same as the
+            `test_fingerprint_fqn` tag.
+          type: string
+        type:
+          $ref: '#/components/schemas/FlakyTestType'
+      type: object
+    FlakyTestAttributes:
+      description: Attributes of a flaky test.
+      properties:
+        attempt_to_fix_id:
+          description: 'Unique identifier for the attempt to fix this flaky test.
+            Use this ID in the Git commit message in order to trigger the attempt
+            to fix workflow.
+
+
+            When the workflow is triggered the test is automatically retried by the
+            tracer a certain number of configurable times. When all retries pass,
+            the test is automatically marked as fixed in Flaky Test Management.
+
+            Test runs are tagged with @test.test_management.attempt_to_fix_passed
+            and @test.test_management.is_attempt_to_fix when the attempt to fix workflow
+            is triggered.'
+          example: I42TEO
+          type: string
+        codeowners:
+          description: The name of the test's code owners as inferred from the repository
+            configuration.
+          example:
+          - '@foo'
+          - '@bar'
+          items:
+            type: string
+          type: array
+        envs:
+          description: List of environments where this test has been flaky.
+          example: prod
+          items:
+            type: string
+          type: array
+        first_flaked_branch:
+          description: The branch name where the test exhibited flakiness for the
+            first time.
+          example: main
+          type: string
+        first_flaked_sha:
+          description: The commit SHA where the test exhibited flakiness for the first
+            time.
+          example: 0c6be03165b7f7ffe96e076ffb29afb2825616c3
+          type: string
+        first_flaked_ts:
+          description: Unix timestamp when the test exhibited flakiness for the first
+            time.
+          example: 1757688149
+          format: int64
+          type: integer
+        flaky_category:
+          description: The category of a flaky test.
+          example: Timeout
+          nullable: true
+          type: string
+        flaky_state:
+          $ref: '#/components/schemas/FlakyTestAttributesFlakyState'
+        last_flaked_branch:
+          description: The branch name where the test exhibited flakiness for the
+            last time.
+          example: main
+          type: string
+        last_flaked_sha:
+          description: The commit SHA where the test exhibited flakiness for the last
+            time.
+          example: 0c6be03165b7f7ffe96e076ffb29afb2825616c3
+          type: string
+        last_flaked_ts:
+          description: Unix timestamp when the test exhibited flakiness for the last
+            time.
+          example: 1757688149
+          format: int64
+          type: integer
+        module:
+          description: 'The name of the test module. The definition of module changes
+            slightly per language:
+
+            - In .NET, a test module groups every test that is run under the same
+            unit test project.
+
+            - In Swift, a test module groups every test that is run for a given bundle.
+
+            - In JavaScript, the test modules map one-to-one to test sessions.
+
+            - In Java, a test module groups every test that is run by the same Maven
+            Surefire/Failsafe or Gradle Test task execution.
+
+            - In Python, a test module groups every test that is run under the same
+            `.py` file as part of a test suite, which is typically managed by a framework
+            like `unittest` or `pytest`.
+
+            - In Ruby, a test module groups every test that is run within the same
+            test file, which is typically managed by a framework like `RSpec` or `Minitest`.'
+          example: TestModule
+          nullable: true
+          type: string
+        name:
+          description: The test name. A concise name for a test case. Defined in the
+            test itself.
+          example: TestName
+          type: string
+        pipeline_stats:
+          $ref: '#/components/schemas/FlakyTestPipelineStats'
+          nullable: true
+        services:
+          description: 'List of test service names where this test has been flaky.
+
+
+            A test service is a group of tests associated with a project or repository.
+            It contains all the individual tests for your code, optionally organized
+            into test suites, which are like folders for your tests.'
+          example:
+          - foo
+          - bar
+          items:
+            type: string
+          type: array
+        suite:
+          description: The name of the test suite. A group of tests exercising the
+            same unit of code depending on your language and testing framework.
+          example: TestSuite
+          type: string
+        test_run_metadata:
+          $ref: '#/components/schemas/FlakyTestRunMetadata'
+        test_stats:
+          $ref: '#/components/schemas/FlakyTestStats'
+      type: object
+    FlakyTestAttributesFlakyState:
+      description: The current state of the flaky test.
+      enum:
+      - active
+      - fixed
+      - quarantined
+      - disabled
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - FIXED
+      - QUARANTINED
+      - DISABLED
+    FlakyTestPipelineStats:
+      description: CI pipeline related statistics for the flaky test. This information
+        is only available if test runs are associated with CI pipeline events from
+        CI Visibility.
+      properties:
+        failed_pipelines:
+          description: The number of pipelines that failed due to this test for the
+            past 7 days. This is computed as the sum of failed CI pipeline events
+            associated with test runs where the flaky test failed.
+          example: 319
+          format: int64
+          nullable: true
+          type: integer
+        total_lost_time_ms:
+          description: The total time lost by CI pipelines due to this flaky test
+            in milliseconds. This is computed as the sum of the duration of failed
+            CI pipeline events associated with test runs where the flaky test failed.
+          example: 1527550000
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    FlakyTestRunMetadata:
+      description: Metadata about the latest failed test run of the flaky test.
+      properties:
+        duration_ms:
+          description: The duration of the test run in milliseconds.
+          example: 27398
+          format: int64
+          nullable: true
+          type: integer
+        error_message:
+          description: The error message from the test failure.
+          example: Expecting actual not to be empty
+          nullable: true
+          type: string
+        error_stack:
+          description: The stack trace from the test failure.
+          example: "Traceback (most recent call last):\n  File \"test_foo.py\", line
+            10, in test_foo\n    assert actual == expected\nAssertionError: Expecting
+            actual not to be empty"
+          nullable: true
+          type: string
+        source_end:
+          description: The line number where the test ends in the source file.
+          example: 20
+          format: int64
+          nullable: true
+          type: integer
+        source_file:
+          description: The source file where the test is defined.
+          example: test_foo.py
+          nullable: true
+          type: string
+        source_start:
+          description: The line number where the test starts in the source file.
+          example: 10
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    FlakyTestStats:
+      description: Test statistics for the flaky test.
+      properties:
+        failure_rate_pct:
+          description: The failure rate percentage of the test for the past 7 days.
+            This is the number of failed test runs divided by the total number of
+            test runs (excluding skipped test runs).
+          example: 0.1
+          format: double
+          nullable: true
+          type: number
+      type: object
+    FlakyTestType:
+      description: The type of the flaky test from Flaky Test Management.
+      enum:
+      - flaky_test
+      type: string
+      x-enum-varnames:
+      - FLAKY_TEST
+    FlakyTestsPagination:
+      description: Pagination metadata for flaky tests.
+      properties:
+        next_page:
+          description: Cursor for the next page of results.
+          nullable: true
+          type: string
+      type: object
+    FlakyTestsSearchFilter:
+      description: Search filter settings.
+      properties:
+        query:
+          default: '*'
+          description: 'Search query following log syntax used to filter flaky tests,
+            same as on Flaky Tests Management UI. The supported search keys are:
+
+            - `flaky_test_state`
+
+            - `flaky_test_category`
+
+            - `@test.name`
+
+            - `@test.suite`
+
+            - `@test.module`
+
+            - `@test.service`
+
+            - `@git.repository.id_v2`
+
+            - `@git.branch`
+
+            - `@test.codeowners`
+
+            - `env`'
+          example: flaky_test_state:active @git.repository.id_v2:"github.com/datadog/shopist"
+          type: string
+      type: object
+    FlakyTestsSearchPageOptions:
+      description: Pagination attributes for listing flaky tests.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            request.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of flaky tests in the response.
+          example: 25
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+      type: object
+    FlakyTestsSearchRequest:
+      description: The request for a flaky tests search.
+      properties:
+        data:
+          $ref: '#/components/schemas/FlakyTestsSearchRequestData'
+      type: object
+    FlakyTestsSearchRequestAttributes:
+      description: Attributes for the flaky tests search request.
+      properties:
+        filter:
+          $ref: '#/components/schemas/FlakyTestsSearchFilter'
+        page:
+          $ref: '#/components/schemas/FlakyTestsSearchPageOptions'
+        sort:
+          $ref: '#/components/schemas/FlakyTestsSearchSort'
+      type: object
+    FlakyTestsSearchRequestData:
+      description: The JSON:API data for flaky tests search request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FlakyTestsSearchRequestAttributes'
+        type:
+          $ref: '#/components/schemas/FlakyTestsSearchRequestDataType'
+      type: object
+    FlakyTestsSearchRequestDataType:
+      description: The definition of `FlakyTestsSearchRequestDataType` object.
+      enum:
+      - search_flaky_tests_request
+      type: string
+      x-enum-varnames:
+      - SEARCH_FLAKY_TESTS_REQUEST
+    FlakyTestsSearchResponse:
+      description: Response object with flaky tests matching the search request.
+      properties:
+        data:
+          description: Array of flaky tests matching the request.
+          items:
+            $ref: '#/components/schemas/FlakyTest'
+          type: array
+        meta:
+          $ref: '#/components/schemas/FlakyTestsSearchResponseMeta'
+      type: object
+    FlakyTestsSearchResponseMeta:
+      description: Metadata for the flaky tests search response.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/FlakyTestsPagination'
+      type: object
+    FlakyTestsSearchSort:
+      description: Parameter for sorting flaky test results. The default sort is by
+        ascending Fully Qualified Name (FQN). The FQN is the concatenation of the
+        test module, suite, and name.
+      enum:
+      - fqn
+      - -fqn
+      - first_flaked
+      - -first_flaked
+      - last_flaked
+      - -last_flaked
+      - failure_rate
+      - -failure_rate
+      - pipelines_failed
+      - -pipelines_failed
+      - pipelines_duration_lost
+      - -pipelines_duration_lost
+      example: failure_rate
+      type: string
+      x-enum-varnames:
+      - FQN_ASCENDING
+      - FQN_DESCENDING
+      - FIRST_FLAKED_ASCENDING
+      - FIRST_FLAKED_DESCENDING
+      - LAST_FLAKED_ASCENDING
+      - LAST_FLAKED_DESCENDING
+      - FAILURE_RATE_ASCENDING
+      - FAILURE_RATE_DESCENDING
+      - PIPELINES_FAILED_ASCENDING
+      - PIPELINES_FAILED_DESCENDING
+      - PIPELINES_DURATION_LOST_ASCENDING
+      - PIPELINES_DURATION_LOST_DESCENDING
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -25091,9 +25548,7 @@ components:
 
         displayName: Service
 
-        description: A service entity in the catalog.
-
-        '
+        description: A service entity in the catalog.'
       type: string
     KindResponseData:
       description: List of kind responses.
@@ -28328,16 +28783,12 @@ components:
         metric_name:
           description: 'The name of metric for which the tag cardinalities are returned.
 
-            This matches the metric name provided in the request.
-
-            '
+            This matches the metric name provided in the request.'
           type: string
       type: object
     MetricTagCardinalitiesResponse:
-      description: 'Response object that includes an array of objects representing
-        the cardinality details of a metric''s tags.
-
-        '
+      description: Response object that includes an array of objects representing
+        the cardinality details of a metric's tags.
       properties:
         data:
           $ref: '#/components/schemas/MetricTagCardinalitiesData'
@@ -30102,9 +30553,7 @@ components:
         rule types, rule tags, and so on), and the targets to notify.
 
         A notification rule is composed of a rule ID, a rule type, and the rule attributes.
-        All fields are required.
-
-        '
+        All fields are required.'
       properties:
         attributes:
           $ref: '#/components/schemas/NotificationRuleAttributes'
@@ -30462,9 +30911,7 @@ components:
       description: 'Authentication settings for the Amazon OpenSearch destination.
 
         The `strategy` field determines whether basic or AWS-based authentication
-        is used.
-
-        '
+        is used.'
       properties:
         assume_role:
           description: The ARN of the role to assume (used with `aws` strategy).
@@ -30581,9 +31028,7 @@ components:
     ObservabilityPipelineAmazonS3Source:
       description: 'The `amazon_s3` source ingests logs from an Amazon S3 bucket.
 
-        It supports AWS authentication and TLS encryption.
-
-        '
+        It supports AWS authentication and TLS encryption.'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -30616,10 +31061,8 @@ components:
       x-enum-varnames:
       - AMAZON_S3
     ObservabilityPipelineAmazonSecurityLakeDestination:
-      description: 'The `amazon_security_lake` destination sends your logs to Amazon
+      description: The `amazon_security_lake` destination sends your logs to Amazon
         Security Lake.
-
-        '
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -30671,7 +31114,7 @@ components:
     ObservabilityPipelineAwsAuth:
       description: "AWS authentication credentials used for accessing AWS services
         such as S3.\nIf omitted, the system\u2019s default credentials are used (for
-        example, the IAM role and environment variables).\n"
+        example, the IAM role and environment variables)."
       properties:
         assume_role:
           description: The Amazon Resource Name (ARN) of the role to assume.
@@ -31511,9 +31954,7 @@ components:
       x-enum-varnames:
       - FLUENTD
     ObservabilityPipelineGcpAuth:
-      description: 'GCP credentials used to authenticate with Google Cloud Storage.
-
-        '
+      description: GCP credentials used to authenticate with Google Cloud Storage.
       properties:
         credentials_file:
           description: Path to the GCP service account key file.
@@ -31527,9 +31968,7 @@ components:
         from logs and sends them to Datadog.
 
         Metrics can be counters, gauges, or distributions and optionally grouped by
-        log fields.
-
-        '
+        log fields.'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -31576,9 +32015,7 @@ components:
       description: 'Defines a log-based custom metric, including its name, type, filter,
         value computation strategy,
 
-        and optional grouping fields.
-
-        '
+        and optional grouping fields.'
       properties:
         group_by:
           description: Optional fields used to group the metric series.
@@ -31717,9 +32154,7 @@ components:
       description: 'The `google_cloud_storage` destination stores logs in a Google
         Cloud Storage (GCS) bucket.
 
-        It requires a bucket name, GCP authentication, and metadata fields.
-
-        '
+        It requires a bucket name, GCP authentication, and metadata fields.'
       properties:
         acl:
           $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationAcl'
@@ -32337,17 +32772,13 @@ components:
       description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
         defines how to extract structured fields
 
-        from a specific log field using Grok patterns.
-
-        '
+        from a specific log field using Grok patterns.'
       properties:
         match_rules:
           description: 'A list of Grok parsing rules that define how to extract fields
             from the source field.
 
-            Each rule must contain a name and a valid Grok pattern.
-
-            '
+            Each rule must contain a name and a valid Grok pattern.'
           example:
           - name: MyParsingRule
             rule: '%{word:user} connected on %{date("MM/dd/yyyy"):date}'
@@ -32360,10 +32791,8 @@ components:
           example: message
           type: string
         support_rules:
-          description: 'A list of Grok helper rules that can be referenced by the
-            parsing rules.
-
-            '
+          description: A list of Grok helper rules that can be referenced by the parsing
+            rules.
           example:
           - name: user
             rule: '%{word:user.name}'
@@ -32379,9 +32808,7 @@ components:
         from log content using named Grok patterns.
 
         Each rule must have a unique name and a valid Datadog Grok pattern that will
-        be applied to the source field.
-
-        '
+        be applied to the source field.'
       properties:
         name:
           description: The name of the rule.
@@ -32576,9 +33003,7 @@ components:
 
         - `no_action`: Let the event pass through.
 
-        - `overflow_routing`: Route to an overflow destination.
-
-        '
+        - `overflow_routing`: Route to an overflow destination.'
       enum:
       - drop
       - no_action
@@ -33351,10 +33776,8 @@ components:
       x-enum-varnames:
       - SENTINEL_ONE
     ObservabilityPipelineSocketDestination:
-      description: 'The `socket` destination sends logs over TCP or UDP to a remote
+      description: The `socket` destination sends logs over TCP or UDP to a remote
         server.
-
-        '
       properties:
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
@@ -33481,9 +33904,7 @@ components:
       x-enum-varnames:
       - SOCKET
     ObservabilityPipelineSocketSource:
-      description: 'The `socket` source ingests logs over TCP or UDP.
-
-        '
+      description: The `socket` source ingests logs over TCP or UDP.
       properties:
         framing:
           $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
@@ -33647,18 +34068,14 @@ components:
       - attributes
       type: object
     ObservabilityPipelineSplunkHecDestination:
-      description: 'The `splunk_hec` destination forwards logs to Splunk using the
+      description: The `splunk_hec` destination forwards logs to Splunk using the
         HTTP Event Collector (HEC).
-
-        '
       properties:
         auto_extract_timestamp:
           description: 'If `true`, Splunk tries to extract timestamps from incoming
             log events.
 
-            If `false`, Splunk assigns the time the event was received.
-
-            '
+            If `false`, Splunk assigns the time the event was received.'
           example: true
           type: boolean
         encoding:
@@ -33712,10 +34129,8 @@ components:
       x-enum-varnames:
       - SPLUNK_HEC
     ObservabilityPipelineSplunkHecSource:
-      description: 'The `splunk_hec` source implements the Splunk HTTP Event Collector
+      description: The `splunk_hec` source implements the Splunk HTTP Event Collector
         (HEC) API.
-
-        '
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -33744,9 +34159,7 @@ components:
       description: 'The `splunk_tcp` source receives logs from a Splunk Universal
         Forwarder over TCP.
 
-        TLS is supported for secure transmission.
-
-        '
+        TLS is supported for secure transmission.'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -36283,6 +36696,12 @@ components:
     RUMApplicationAttributes:
       description: RUM application attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -38689,6 +39108,49 @@ components:
         permissions:
           $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
+    RoleTemplateArray:
+      description: The definition of `RoleTemplateArray` object.
+      properties:
+        data:
+          description: The `RoleTemplateArray` `data`.
+          items:
+            $ref: '#/components/schemas/RoleTemplateData'
+          type: array
+      required:
+      - data
+      type: object
+    RoleTemplateData:
+      description: The definition of `RoleTemplateData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleTemplateDataAttributes'
+        id:
+          description: The `RoleTemplateData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/RoleTemplateDataType'
+      required:
+      - type
+      type: object
+    RoleTemplateDataAttributes:
+      description: The definition of `RoleTemplateDataAttributes` object.
+      properties:
+        description:
+          description: The `attributes` `description`.
+          type: string
+        name:
+          description: The `attributes` `name`.
+          type: string
+      type: object
+    RoleTemplateDataType:
+      default: roles
+      description: Roles resource type.
+      enum:
+      - roles
+      example: roles
+      type: string
+      x-enum-varnames:
+      - ROLES
     RoleUpdateAttributes:
       description: Attributes of the role.
       properties:
@@ -44528,9 +44990,7 @@ components:
 
         schema-version: v2
 
-        dd-service: my-service
-
-        '
+        dd-service: my-service'
       type: string
     ServiceDefinitionSchema:
       description: Service definition schema.
@@ -51988,6 +52448,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: List AWS Scan Options
       tags:
       - Agentless Scanning
@@ -52023,6 +52488,11 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Post AWS Scan Options
       tags:
       - Agentless Scanning
@@ -52051,6 +52521,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Delete AWS Scan Options
       tags:
       - Agentless Scanning
@@ -52077,6 +52552,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS scan options
       tags:
       - Agentless Scanning
@@ -52106,11 +52586,138 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Patch AWS Scan Options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/agentless_scanning/accounts/azure:
+    get:
+      description: Fetches the scan options configured for Azure accounts.
+      operationId: ListAzureScanOptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptionsArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 12
+      x-undo:
+        type: safe
+    post:
+      description: Activate Agentless scan options for an Azure subscription.
+      operationId: CreateAzureScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureScanOptions'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Create azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteAzureScanOptions
+        parameters:
+        - name: subscription_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/azure/{subscription_id}:
+    delete:
+      description: Delete Agentless scan options for an Azure subscription.
+      operationId: DeleteAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Delete azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 10
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update the Agentless scan options for an activated subscription.
+      operationId: UpdateAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureScanOptionsInputUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
@@ -52128,6 +52735,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
@@ -52163,6 +52775,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Post an AWS on demand task
       tags:
       - Agentless Scanning
@@ -52195,6 +52812,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
@@ -52613,9 +53235,7 @@ paths:
         replace all API content of the given ID.
 
         The ID is returned by the create API, or can be found in the URL in the API
-        catalog UI.
-
-        '
+        catalog UI.'
       operationId: UpdateOpenAPI
       parameters:
       - description: ID of the API to modify
@@ -52684,9 +53304,7 @@ paths:
 
         information about the possible metadata.
 
-        It returns the created API ID.
-
-        '
+        It returns the created API ID.'
       operationId: CreateOpenAPI
       requestBody:
         content:
@@ -63448,9 +64066,7 @@ paths:
                 summary: Multi Raw Messages
                 value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
 
-                  2019-11-19T14:37:58,995 INFO [process.name][20081] World
-
-                  '
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World'
               simple-raw-message:
                 description: 'Submit log string. Log attributes can be passed as query
                   parameters in the URL. This enables the addition of tags or the
@@ -67286,9 +67902,7 @@ paths:
         type: idempotent
   /api/v2/on-call/pages:
     post:
-      description: 'Trigger a new On-Call Page.
-
-        '
+      description: Trigger a new On-Call Page.
       operationId: CreateOnCallPage
       requestBody:
         content:
@@ -67347,9 +67961,7 @@ paths:
         type: unsafe
   /api/v2/on-call/pages/{page_id}/acknowledge:
     post:
-      description: 'Acknowledges an On-Call Page.
-
-        '
+      description: Acknowledges an On-Call Page.
       operationId: AcknowledgeOnCallPage
       parameters:
       - description: The page ID.
@@ -67407,9 +68019,7 @@ paths:
         type: unsafe
   /api/v2/on-call/pages/{page_id}/escalate:
     post:
-      description: 'Escalates an On-Call Page.
-
-        '
+      description: Escalates an On-Call Page.
       operationId: EscalateOnCallPage
       parameters:
       - description: The page ID.
@@ -67467,9 +68077,7 @@ paths:
         type: unsafe
   /api/v2/on-call/pages/{page_id}/resolve:
     post:
-      description: 'Resolves an On-Call Page.
-
-        '
+      description: Resolves an On-Call Page.
       operationId: ResolveOnCallPage
       parameters:
       - description: The page ID.
@@ -68305,7 +68913,7 @@ paths:
         ID that can be used in a `GetFinding` request to retrieve the full finding
         details.\n- Core attributes, including status, evaluation, high-level resource
         details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
-        time stamps.\n- An array of associated tags.\n"
+        time stamps.\n- An array of associated tags."
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -68470,7 +69078,7 @@ paths:
           \ - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`,
           `OTHER`.\n  - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`,
           `OTHER`.\n\n### Meta\n\nThe request body must include a list of the finding
-          IDs to be updated.\n"
+          IDs to be updated."
         required: true
       responses:
         '200':
@@ -69794,9 +70402,7 @@ paths:
       description: 'Validates a pipeline configuration without creating or updating
         any resources.
 
-        Returns a list of validation errors, if any.
-
-        '
+        Returns a list of validation errors, if any.'
       operationId: ValidatePipeline
       requestBody:
         content:
@@ -70281,6 +70887,31 @@ paths:
         - name: role_id
           source: data.id
         type: unsafe
+  /api/v2/roles/templates:
+    get:
+      description: List all role templates
+      operationId: ListRoleTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleTemplateArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_read
+      summary: List role templates
+      tags:
+      - Roles
+      x-menu-order: 16
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/roles/{role_id}:
     delete:
       description: Disables a role.
@@ -72558,9 +73189,7 @@ paths:
 
 
         Please review the [Metadata section for the "List Vulnerabilities"](#metadata)
-        endpoint.
-
-        '
+        endpoint.'
       operationId: ListVulnerableAssets
       parameters:
       - description: Its value must come from the `links` section of the response
@@ -72893,9 +73522,7 @@ paths:
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/sboms/{asset_type}:
     get:
-      description: 'Get a single SBOM related to an asset by its type and name.
-
-        '
+      description: Get a single SBOM related to an asset by its type and name.
       operationId: GetSBOM
       parameters:
       - description: The type of the asset for the SBOM request.
@@ -72997,9 +73624,7 @@ paths:
           of the rule type and the rule attributes:
 
           the rule name, the selectors, the notification targets, and the rule enabled
-          status.
-
-          '
+          status.'
         required: true
       responses:
         '201':
@@ -73202,7 +73827,7 @@ paths:
         For more details on each of the properties included in this section, check
         the endpoints response tables.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\":
         {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n
-        \ },\n  \"links\": {...}\n}\n```\n"
+        \ },\n  \"links\": {...}\n}\n```"
       operationId: ListVulnerabilities
       parameters:
       - description: Its value must come from the `links` section of the response
@@ -73595,9 +74220,7 @@ paths:
           of the rule type and the rule attributes:
 
           the rule name, the selectors, the notification targets, and the rule enabled
-          status.
-
-          '
+          status.'
         required: true
       responses:
         '201':
@@ -74154,6 +74777,13 @@ paths:
     get:
       description: Get the list of all suppression rules.
       operationId: ListSecurityMonitoringSuppressions
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -78857,6 +79487,55 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
+  /api/v2/test/flaky-test-management/tests:
+    post:
+      description: List endpoint returning flaky tests from Flaky Test Management.
+        Results are paginated.
+      operationId: SearchFlakyTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlakyTestsSearchRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlakyTestsSearchResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - test_optimization_read
+      summary: Search flaky tests
+      tags:
+      - Test Optimization
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.pagination.next_page
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - test_optimization_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta and may be subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/usage/application_security:
     get:
       deprecated: true
@@ -81069,6 +81748,9 @@ tags:
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams
+- description: Search and manage flaky tests through Test Optimization. See the [Test
+    Optimization page](https://docs.datadoghq.com/tests/) for more information.
+  name: Test Optimization
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

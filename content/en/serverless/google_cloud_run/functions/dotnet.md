@@ -38,6 +38,10 @@ DD_DOTNET_TRACER_HOME=/layers/google.dotnet.publish/publish/bin/datadog
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform function="true" %}}
+   {{% /tab %}}
+
    {{% tab "Other" %}}
    {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}

@@ -98,6 +98,13 @@
       "description": "Update datastore returns \"OK\" response"
     }
   ],
+  "CreateAzureScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create azure scan options returns \"Created\" response"
+    }
+  ],
   "UpdateAwsScanOptions": [
     {
       "group": "agentless_scanning",
