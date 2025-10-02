@@ -100,7 +100,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -143,7 +143,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -224,7 +224,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
       }]
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -263,7 +263,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -393,7 +393,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -433,7 +433,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -544,7 +544,7 @@ spec:
           image: postgres:latest
 ```
 
-**Notes**:
+**Note**:
 - Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 - The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -611,7 +611,7 @@ logs:
 
 The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
 
-**Notes**:
+**Note**:
 - The Agent requires read and execute permissions on a directory to list all the available files in it.
 - The path and exclude_paths values are case sensitive.
 
@@ -619,14 +619,14 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 
 This feature requires Agent version 7.40.0 or above.
 
-The Agent sets a maximum number of files it can tail simultaneously, through the `logs_config.open_files_limit` parameter. By default, if the number of files matching your configured log sources (such as wildcards) does **not** exceed this limit, the Agent tails them all without prioritization. When **more** files match than the `open_files_limit` allows, the Agent prioritizes them by sorting filenames in reverse lexicographic order (most recent files appear last in name order). This works well for log files named with timestamps or sequential numbering.
+The Agent limits how many files it can tail simultaneously with the `logs_config.open_files_limit` parameter. If the number of files matching your configured log sources (such as wildcards) is within the limit, the Agent tails all of them. If more files match than the limit allows, the Agent prioritizes by sorting filenames in reverse lexicographic order, so files with newer timestamps or higher numbers are tailed first.
 
-However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent tails the most recently modified files first.
+If filenames don’t follow sequential or timestamped patterns, the default ordering may not be ideal. To prioritize by modification time instead, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent tails the most recently modified files first.
 
-*Example*:
+**Example**:
 - `open_files_limit` = 500
 - Your wildcard pattern matches 700 files.
-- With `by_name`: the Agent tails the 500 files whose names are last in reverse lexicographic order (for example, app.log.700 through app.log.201).
+- With `by_name`: the Agent tails the 500 files with the highest names in reverse lexicographic order (for example, app.log.700 through app.log.201).
 - With `by_modification_time`: the Agent tails the 500 files most recently written to, regardless of their names.
 
 ```yaml
