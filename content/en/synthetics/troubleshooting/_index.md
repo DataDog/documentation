@@ -201,7 +201,7 @@ sudo: If sudo is running in a container, you may need to adjust the container co
 
 ICMP tests use the `ping` command to assess network routes and host connectivity. The `ping` command opens raw sockets to send ICMP packets and requires the `NET_RAW` capability. If your container's security context removes this capability, ICMP tests do not function properly on the private location.
 
-Additionally, `ping` requires elevated privileges to create raw sockets. Private locations with restricted security contexts cannot execute ICMP tests.
+Additionally, `ping` requires elevated privileges to create the raw socket. The private location cannot execute ICMP tests if the private location is configured with a security context that restricts elevated privileges.
 
 ### `TIMEOUT` errors in API tests from private locations
 
@@ -294,16 +294,20 @@ Error: self-signed certificate in certificate chain
     at Worker.doOneLoop (dist/build/index.js:25810:45)
 ```
 
-**Symptoms:**
+**Symptoms**:
 - Error messages repeat continuously in logs.
 - Certificate chains appear modified when browsing from the Windows host (for example, Datadog sites show self-signed intermediaries instead of trusted CAs).
 
-**Cause:** This error occurs when **Deep Packet Inspection (DPI) / TLS inspection** is enabled on the network. DPI intercepts, decrypts, and re-encrypts SSL/TLS traffic. During this process, the private location receives a certificate chain that includes a self-signed certificate.  
+**Cause**: This error occurs when **Deep Packet Inspection (DPI)** or TLS inspection is being performed on your network traffic. DPI intercepts, decrypts, and re-encrypts SSL/TLS traffic. During this process, the private location receives a certificate chain that includes a self-signed certificate.  
 
-**Solution:**
+**Solution**:
 
-- Configure your TLS inspection solution to mount [root certificates][101] on your private locations.
-- Verify the fix by browsing to `datadoghq.com` on the Private Location host and confirming expected intermediary certificates are present.
+- Upload your custom self-signed [root certificates][101] to your private location.
+- Verify that your Windows Private Location logs is no longer reporting the error 
+```
+"Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
+Error: self-signed certificate in certificate chain"
+```
 
 Without bypassing TLS inspection, the Windows Private Location cannot retrieve test messages and remains in an error state.
 
@@ -312,11 +316,11 @@ Without bypassing TLS inspection, the Windows Private Location cannot retrieve t
 {{% /tab %}}
 {{< /tabs >}}
 
-### Password prompts for sudo or dog user access
+### Password prompts for sudo or dog user
 
 The Private Location user (`dog`) requires `sudo` access for proper operation. This user typically receives permissions during container launch. Verify that no policies restrict the `dog` user's `sudo` access or prevent the container from running as the `dog` user (UID 501).
 
-Additionally, Private Location versions `>v1.27` require the `clone3` system call. Older container runtime environments (Docker versions <20.10.10) may not support `clone3` in their default `seccomp` policy. 
+Additionally, Private Location versions `>v1.27` depend the `clone3` system call. Older container runtime environments (Docker versions <20.10.10) may not support `clone3` in their default `seccomp` policy. 
 
 **Solution**: Ensure your runtime's `seccomp` policy includes `clone3` by updating your runtime version, manually adding `clone3` to your policy, or using an `unconfined` seccomp policy. See [Docker's `seccomp` documentation][13] for details.
 
