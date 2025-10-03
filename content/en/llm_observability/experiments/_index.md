@@ -274,7 +274,7 @@ Summary Evaluators are optionally defined functions that measure how well the mo
         return evaluators_results["exact_match"].count(True)
 
    ```  
-   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
+   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
    Summary evaluators can only return a string, a number, or a boolean.  
 
 6. Create and run the experiment.
