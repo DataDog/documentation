@@ -265,7 +265,7 @@ Summary Evaluators are optionally defined functions that measure how well the mo
        return fake_llm_call
    ```  
    Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.  
-   Evaluators can only return a string, a number, or a boolean.  
+   Evaluators can only return a string, a number, or a Boolean.  
 
 5. (Optional) Define summary evaluator function(s).  
    
