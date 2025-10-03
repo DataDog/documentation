@@ -404,14 +404,7 @@ Update your initialization snippet to include Crash Reporting:
 import DatadogCore
 import DatadogCrashReporting
 
-Datadog.initialize(
-  with: Datadog.Configuration(
-    clientToken: "<client token>",
-    env: "<environment>",
-    service: "<service name>"
-  ),
-  trackingConsent: trackingConsent
-)
+Datadog.initialize(...)
 
 CrashReporting.enable()
 ```
