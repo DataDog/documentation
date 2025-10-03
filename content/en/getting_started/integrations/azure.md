@@ -53,7 +53,7 @@ Follow the instructions on this page to set up the **Azure integration** through
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
 
-{{% collapse-content title="Quickstart" level="h4" expanded=false id="azure-quickstart-setup" %}}
+{{% collapse-content title="Quickstart (recommended)" level="h4" expanded=false id="azure-quickstart-setup" %}}
 
 ### Choose this if...
 
