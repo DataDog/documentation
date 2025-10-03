@@ -417,11 +417,11 @@ There are two types of hangs:
 
 - **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="A fatal app hang in the Error side panel." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="A fatal app hang in the Error side panel." style="width:100%;" >}}
 
 - **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="A non-fatal app hang in the Error side panel." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="A non-fatal app hang in the Error side panel." style="width:100%;" >}}
 
 {{% collapse-content title="Enable app hang monitoring" level="h4" expanded=false id="enable-app-hang-monitoring" %}}
 
@@ -482,17 +482,13 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 ### Step 6 - Get deobfuscated stack traces
 
+Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information (a process called symbolication), Datadog requires `.dSYM` files, which are generated in your application's build or distribution process.
+
 To help you debug errors, Datadog uses a unique generated build ID to deobfuscate stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
-{{% collapse-content title="Symbolicate crash reports" level="h4" expanded=false id="symbolicate-crash-reports" %}}
-
-Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .`dSYM` files, which are generated in your application's build or distribution process.
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Find your .dSYM file" level="h4" expanded=false id="find-your-dsym-file" %}}
+{{% collapse-content title="Find your .dSYM files" level="h4" expanded=false id="find-your-dsym-files" %}}
 
 Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files.
 
@@ -505,19 +501,18 @@ Depending on your setup, you may need to download `.dSYM` files from App Store C
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Upload your .dSYM file" level="h4" expanded=false id="upload-your-dsym-file" %}}
+{{% collapse-content title="Upload your .dSYM files" level="h4" expanded=false id="upload-your-dsym-files" %}}
 
-By uploading your `.dSYM` file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
+By uploading your `.dSYM` files to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
 
 After your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog.
 
-**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+**Note**: Re-uploading a `.dSYM` file with the same application version does not override the existing one.
 
-{{% /collapse-content %}}
+{{< tabs >}}
+{{% tab "Datadog CI" %}}
 
-{{% collapse-content title="Use Datadog CI to upload your .dSYM file" level="h4" expanded=false id="datadog-ci-upload-dsym-file" %}}
-
-You can use the command line tool [@datadog/datadog-ci][13] to upload your `.dSYM` file:
+You can use the command line tool [@datadog/datadog-ci][1] to upload your `.dSYM` files:
 
 ```sh
 export DATADOG_API_KEY="<API KEY>"
@@ -531,15 +526,14 @@ npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 
 **Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable.
 
-Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can leverage these integrations instead of `datadog-ci`:
+[1]: https://www.npmjs.com/package/@datadog/datadog-ci
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="Use Fastlane plugin to upload your .dSYM file" level="h4" expanded=false id="fastlane-plugin" %}}
+{{% /tab %}}
+{{% tab "Fastlane" %}}
 
 The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane configuration.
 
-1. Add [`fastlane-plugin-datadog`][14] to your project.
+1. Add [`fastlane-plugin-datadog`][1] to your project.
 
    ```sh
    fastlane add_plugin datadog
@@ -555,13 +549,14 @@ The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane
    end
    ```
 
-For more information, see [`fastlane-plugin-datadog`][14].
+For more information, see [`fastlane-plugin-datadog`][1].
 
-{{% /collapse-content %}}
+[1]: https://github.com/DataDog/datadog-fastlane-plugin
 
-{{% collapse-content title="Use GitHub Actions to upload your .dSYM file" level="h4" expanded=false id="github-actions" %}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
-The [Datadog Upload dSYMs GitHub Action][15] allows you to upload your symbols in your GitHub Action jobs:
+The [Datadog Upload dSYMs GitHub Action][1] allows you to upload your symbols in your GitHub Action jobs:
 
 ```yml
 name: Upload dSYM Files
@@ -587,10 +582,15 @@ jobs:
             path/to/zip/dsyms.zip
 ```
 
-For more information, see [dSYMs commands][16].
+For more information, see [dSYMs commands][2].
+
+[1]: https://github.com/marketplace/actions/datadog-upload-dsyms
+[2]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
-
 
 ## Test your implementation
 
@@ -632,7 +632,7 @@ For example, if the current tracking consent is `.pending`:
 
 {{% collapse-content title="Sample session rates" level="h4" expanded=false id="sample-session-rates" %}}
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][19]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][14]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to only keep 50% of sessions, use:
 
@@ -667,7 +667,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{% collapse-content title="Add watchdog terminations reporting" level="h4" expanded=false id="add-watchdog-terminations-reporting" %}}
 
-In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These watchdog terminations are fatal and not recoverable (more details in the official [Apple documentation][17]).
+In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These watchdog terminations are fatal and not recoverable (more details in the official [Apple documentation][13]).
 
 By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
 
@@ -710,7 +710,7 @@ To disable watchdog terminations reporting, update the initialization snippet an
 
 ## Limitations
 
-- See [Supported versions][20] for a list operating system versions and platforms that are compatible with the iOS SDK.
+- See [Supported versions][15] for a list operating system versions and platforms that are compatible with the iOS SDK.
 - `.dSYM` files are limited in size to **2 GB** each.
 
 ## Further reading
@@ -728,11 +728,6 @@ To disable watchdog terminations reporting, update the initialization snippet an
 [9]: /real_user_monitoring/explorer/
 [10]: /logs/log_collection/ios
 [12]: https://appstoreconnect.apple.com/
-[13]: https://www.npmjs.com/package/@datadog/datadog-ci
-[14]: https://github.com/DataDog/datadog-fastlane-plugin
-[15]: https://github.com/marketplace/actions/datadog-upload-dsyms
-[16]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
-[17]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
-[18]: /real_user_monitoring/mobile_and_tv_monitoring/ios/error_tracking/?tab=cocoapods#add-app-hang-reporting
-[19]: https://github.com/DataDog/dd-sdk-ios
-[20]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[13]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
+[14]: https://github.com/DataDog/dd-sdk-ios
+[15]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
