@@ -671,7 +671,7 @@ In the Apple ecosystem, the operating system employs a watchdog mechanism to mon
 
 By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
 
-When enabled, a watchdog termination is reported and attached to the previous user session on the next application launch, based on heuristics:
+When enabled, the app reports a watchdog termination and attaches to the previous user session on the next application launch, if all of the following conditions are true:
 
 - The application was not upgraded in the meantime,
 
