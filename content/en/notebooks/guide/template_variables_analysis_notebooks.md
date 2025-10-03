@@ -1,5 +1,6 @@
 ---
 title: Template Variable Support in Analysis Notebooks
+description: "Learn about template variable support and limitations in Notebook analysis cells including data sources, transformations, and SQL queries."
 further_reading:
 - link: "/dashboards/template_variables/"
   tag: "Documentation"

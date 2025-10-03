@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS
+description: Install and configure the Datadog Agent on Amazon Elastic Container Service
 aliases:
   - /agent/amazon_ecs/
 further_reading:

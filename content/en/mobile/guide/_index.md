@@ -1,5 +1,6 @@
 ---
 title: Mobile App Guides
+description: "Step-by-step guides for setting up your mobile device with the Datadog app and configuring on-call notifications and alerts."
 private: false
 disable_toc: true
 cascade:
