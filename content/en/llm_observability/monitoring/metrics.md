@@ -44,7 +44,7 @@ After you instrument your application with LLM Observability, you can access LLM
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
-| `ml_obs.trace` | A collection of spans representing an end-to-end request or workflow | Count | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
+| `ml_obs.trace` | Number of traces | Count | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
 | `ml_obs.trace.duration` | Total duration of all traces across all spans | Distribution | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
 | `ml_obs.trace.error` | Indicator or description of an error that occurred during the trace | Count | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
 
