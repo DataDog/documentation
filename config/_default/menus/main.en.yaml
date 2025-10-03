@@ -6828,7 +6828,7 @@ menu:
       url: /security/code_security/dev_tool_int/
       parent: code_security
       weight: 6
-    - name: GitHub Pull Requests
+    - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/github_pull_requests/
       parent: dev_tool_int

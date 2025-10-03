@@ -38,7 +38,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 ## Integrate into the development lifecycle
 
 ### Source code management
-{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request. You can also open a pull request directly from Datadog to fix a vulnerability or quality issue." >}}
+{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
     {{< nextlink href="static_analysis/github_pull_requests" >}}Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -55,7 +55,7 @@ After setting up Static Code Analysis, a scan is run on each commit to a scanned
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
-To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Security][11].
+To filter your results, use the facets to the left of the list, or search. Results can be [filtered by service or team facets][13].
 
 Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, results are shown for the latest commit on the default branch of the repository you are viewing).
 
@@ -122,16 +122,13 @@ paths:
 - path/to/service/code/**
 {{< /code-block >}}
 
-
-## Remediation
-
-### Apply suggested fixes
+## Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
 In Datadog Static Code Analysis, there are two types of suggested fixes:
 
 1. **Deterministic Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
-2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
+2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
 
 <!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
@@ -183,3 +180,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [10]: /security/code_security/dev_tool_int/github_pull_requests/
 [11]: /getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
+[13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
