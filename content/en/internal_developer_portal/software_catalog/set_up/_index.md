@@ -61,8 +61,6 @@ To populate Software Catalog, you can:
 - Create entity definitions manually or through automation. 
 - Import existing entity definitions from third parties. 
 
-By default, these services are not associated with Datadog telemetry, but you can link telemetry data from Datadog or external sources manually using entity definition YAML files.
-
 ## Automatically discover entities from Datadog
 
 By default, Software Catalog is automatically populated with entries discovered from APM, USM, and RUM. You can also manually import entries from other Datadog telemetries, like logs. 

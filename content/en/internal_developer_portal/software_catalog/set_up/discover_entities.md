@@ -37,7 +37,7 @@ For information about discovering endpoints, see [Discovering Endpoints from APM
 
 To adjust how inferred entities appear in Software Catalog, you can:
 
-- Assign a display name to identify an entity by a custom name.
+- [Create a renaming rule][18] to identify an entity by a custom name.
 - [Filter out entities][3] by type (database, queue, third-party).
 - [Remove service overrides][4] such as `service:my-service-http-client` from your catalog or map.
 
@@ -87,3 +87,4 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 [15]: /tracing/services/inferred_services/?tab=agentv7600#set-up-inferred-services
 [16]: /tracing/guide/service_overrides/#how-service-overrides-are-set
 [17]: /getting_started/tagging/unified_service_tagging/
+[18]: /tracing/services/renaming_rules/
