@@ -152,6 +152,8 @@ The HAProxy integration has the following limitations:
 
 - Asynchronous (observability) mode is not currently supported.
 
+For additional details on the HAProxy integration compatibilities, refer to the [HAProxy integration compatibility page][10].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -165,3 +167,4 @@ The HAProxy integration has the following limitations:
 [7]: /security/application_security/policies/library_configuration/
 [8]: https://github.com/DataDog/dd-trace-go/tree/main/contrib/haproxy/stream-processing-offload/cmd/spoa/haproxyconf/
 [9]: https://github.com/DataDog/dd-trace-go/blob/main/contrib/haproxy/stream-processing-offload/cmd/spoa/haproxyconf/CHANGELOG.md
+[10]: /security/application_security/setup/compatibility/haproxy
