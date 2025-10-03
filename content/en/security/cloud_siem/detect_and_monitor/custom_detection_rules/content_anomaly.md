@@ -6,20 +6,20 @@ disable_toc: false
 
 ## Overview
 
-Content anomaly detection analyzes incoming logs to identify and alert on anomalous log content. You can set [anomaly detection parameters](#anomaly-detection-parameters) to trigger signals if a log's field values significantly deviates from historical logs within a group. A significant deviation is when the similarity between incoming and historical values is low or there is no similarity at all. See [How logs are determined to be anomalous](#how-logs-are-determined-to-be-anomalous) for more information.
+Content anomaly detection analyzes incoming logs to identify and alert on anomalous log content. You can set [anomaly detection parameters](#anomaly-detection-parameters) to trigger signals if a log's field values significantly deviate from historical logs within a group. A significant deviation is when the similarity between incoming and historical values is low or there is no similarity at all. See [How logs are determined to be anomalous](#how-logs-are-determined-to-be-anomalous) for more information.
 
 See [Create Rule][1] for instructions on how to configure a content anomaly rule.
 
-## How the content anomaly detection works
+## How content anomaly detection works
 
 ### Anomaly detection parameters
 
-When you create a rule with the content anomaly detection method, these are the parameters you can set.
+When you create a rule with the content anomaly detection method, you can set the following parameters.
 
 #### Learning duration
 {{< img src="security/security_monitoring/detection_rules/content_anomaly/query_learning_duration.png" alt="A content anomaly rule's query with the leaning duration setting highlighted" style="width:100%;" >}}
 
-- **Description**: Time window during which values are learned without generating signals. No signals are generated during this phase. The learning period restarts if the rule is modified.
+- **Description**: Time window when values are learned. No signals are generated during this phase. The learning period restarts if the rule is modified.
 - **Default**: `7` days
 - **Range**: `1`-`10` days
 - **How to configure**: When you edit a content anomaly rule, you can set the learning duration in the query's **Learning for** dropdown menu.
@@ -110,7 +110,7 @@ To calculate the Jaccard similarity between the two logs:
 - The Jaccard similarity is calculated using the number of elements in the results:
 $$\text"J(log1,log2)" = 2 / 8 = 0.25$$
 
-## Content anomaly method compared to other detection methods
+## Comparing content anomaly method with other detection methods
 
 | Feature | Anomaly Detection | New Value Detection | Content Anomaly Detection |
 |---------|-------------------|---------------------|---------------------------|

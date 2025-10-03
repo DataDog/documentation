@@ -7,7 +7,7 @@ weight: 3
 
 ## Overview
 
-Historical jobs are one-time executable queries on historical logs. It allows you to backtest detection rules to assess their effectiveness on past data. The job results generated are lightweight versions of signals that provide information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results that need immediate action into signals.
+Historical jobs are one-time executable queries on historical logs used to backtest detection rules and assess their effectiveness on past data. The generated job results are lightweight versions of signals providing information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results needing immediate action into signals.
 
 ## Create a rule
 
