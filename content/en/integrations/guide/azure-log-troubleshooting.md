@@ -25,7 +25,8 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 
 **Notes**: 
 - When using the automated log forwarder and the native integrations methods to send logs, Entra Id diagnostic setting is not added automatically and should be set manually.
-- If a diagnostic setting has not been added automatically to your resources/activity logs, check if the maxinimum number of diagnostic settings has been reached and/or if a lock exists on the resource, preventing modifications. 
+- If a diagnostic setting has not been added automatically to your resources/activity logs, check if the maxinimum number of diagnostic settings has been reached and/or if a lock exists on the resource, preventing modifications.
+- Entra id logs can be searched in Datadog log platform using `source:azure.activedirectory`
 
 ## Automated Log Forwarder 
 
@@ -56,7 +57,7 @@ For instance, if your resource and storage account are in Japan West, choose the
 
 ## Event Hub + Forwarder
 
-**Note**: All logs sent with the event hub + forwarder are tagged with `forwarder:<forwarder_function_name>`
+**Note**: All logs sent with the event hub + forwarder are tagged with `forwardername:<forwarder_function_name>`
 
 ### Check if the resource provider is unregistered
 
@@ -111,6 +112,53 @@ Ensure the function app is executing by looking at the following function metric
 
 ## Blob Storage 
 
+**Notes**: 
+- All logs sent with the native integration are tagged with `forwardername:<forwarder_function_name>`
+- Be aware that when new logs are added to a blob file, the function is triggered to send the entirety of the file's content, rather than just the recent additions.
+
+### Check DD_SITE and DD_API_KEY values
+
+If you are missing all logs, ensure that the [selected DC][9] is correct and that the api key points to the correct org. 
+
+### Verify the forwarder config
+
+Make sure that the forwarder is using the latest version, running Node.js 22 TLS or later on Windows OS. The code is publicly available at [index.js][19]
+
+### Inspect the Blob Trigger
+
+Verify the blob storage trigger is configured with the following options:
+
+- **Binding Type**: Azure Blob Storage
+- **Blob parameter name**: blobContent
+- **Path**: the path within the storage account
+- **Storage account connection**: the name of the app setting containing the storage account connection string
+
+### Inspect Blob Storage Metrics
+
+Make sure that data is making it in and out of the blob storage container by looking at the Azure Blob storage metrics:
+
+- azure.storage_storageaccounts_blobservices.egress
+- azure.storage_storageaccounts_blobservices.ingress
+- azure.storage_storageaccounts_blobservices.transactions
+
+For the transactions metric, use the following metric query to view the number of successful or failed Put operations:
+
+`azure.storage_storageaccounts_blobservices.transactions{responsetype:success , apiname:put*} by {apiname}`
+
+`azure.storage_storageaccounts_blobservices.transactions{!responsetype:success , apiname:put*} by {responsetype}`
+
+
+### Inspect Function Metrics
+
+Ensure the function app is executing by looking at the following metrics:
+
+- `azure.functions.function_execution_count`
+- `azure.functions.bytes_received`
+- `azure.functions.bytes_sent`
+- `azure.functions.http2xx`
+- `azure.functions.http4xx`
+- `azure.functions.http5xx`
+
 ## Native 
 
 **Note**: All logs sent with the native integration are tagged with `forwarder:native`
@@ -151,4 +199,4 @@ If you don't spot any issue with the tag rules, contact [Datadog Support][17] an
 [16]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
 [17]: https://www.datadoghq.com/support/
 [18]: https://www.datadoghq.com/blog/azure-log-forwarding/
-
+[19]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
