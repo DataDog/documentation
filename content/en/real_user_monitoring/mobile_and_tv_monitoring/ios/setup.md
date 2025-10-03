@@ -100,17 +100,12 @@ DatadogRUM.xcframework
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
+1. Navigate to [**Digital Experience** > **Add an Application**][10].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][3].
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][11].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][12].
 
    {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Create a RUM application for iOS in Datadog" style="width:100%;border:none" >}}
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/ios/web_view_tracking/
-[3]: /real_user_monitoring/ios/data_collected/
-
 
 To ensure the safety of your data, you must use a client token. Using only [Datadog API keys][2] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code.
 
@@ -543,3 +538,7 @@ See [Supported versions][9] for a list of operating system versions and platform
 [7]: /error_tracking/frontend/mobile/ios
 [8]: /real_user_monitoring/explorer/
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[10]: https://app.datadoghq.com/rum/application/create
+[11]: /real_user_monitoring/ios/web_view_tracking/
+[12]: /real_user_monitoring/ios/data_collected/
+
