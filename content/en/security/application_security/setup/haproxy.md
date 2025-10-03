@@ -21,7 +21,7 @@ further_reading:
 To try the preview of App and API Protection for HAProxy, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection for your HAProxy. The Datadog HAProxy integration leverages HAProxy's Stream Processing Offload Engine (SPOE) to inspect and protect traffic for threat detection at the edge of your infrastructure.
+You can enable App and API Protection for your HAProxy instances. The Datadog HAProxy integration leverages HAProxy's Stream Processing Offload Engine (SPOE) to inspect and protect traffic for threat detection at the edge of your infrastructure.
 
 ## Prerequisites
 
@@ -38,26 +38,23 @@ The App and API Protection HAProxy integration uses HAProxy's [Stream Processing
 
 #### SPOA container
 
-Use the Datadog HAProxy SPOA image from the Datadog GitHub Container Registry [here][4]. The SPOA listens for SPOE connections from HAProxy and sends security events to your Datadog Agent.
+Deploy the Datadog HAProxy SPOA image available in the Datadog GitHub Container Registry [here][4]. The SPOA listens for SPOE connections from HAProxy and sends security events to your Datadog Agent.
 
-See [Configuration](#configuration) for configuration details about the SPOA container.
+See [Configuration](#configuration) for available configuration options about the SPOA container.
 
 #### HAProxy configuration files (source of truth)
 
-All required HAProxy configuration files live in the GitHub folder:
+All required HAProxy configuration files are available in the [repository folder][8]. For information about updates and changes about the configuration, refer to the [Configuration changelog][9].
 
-- [Configuration directory][8]
-- [Configuration CHANGELOG][9]
+The following files are needed for your setup:
 
-Files you will install and reference:
+- `spoe.cfg`: Core SPOE engine configuration file.
+- `global-config.cfg`: Configuration lines to include in your `global` section.
+- `frontend-config.cfg`: Configuration lines to add at the top of each `frontend` you want to protect.
+- `backend.cfg`: Defines the SPOA backend used by the SPOE engine.
+- `datadog_aap_blocking_response.lua`: Lua script for blocking responses.
 
-- `spoe.cfg`: Core SPOE engine configuration
-- `global-config.cfg`: Lines to add in your `global` section
-- `frontend-config.cfg`: Lines to add at the top of each protected `frontend`
-- `backend.cfg`: SPOA backend used by the SPOE engine
-- `datadog_aap_blocking_response.lua`: Lua helper for custom blocking responses
-
-Follow the per-file guidance below to install and customize as needed.
+Refer to the guidance below for each file to install and customize them as needed.
 
 ##### spoe.cfg
 
@@ -94,15 +91,15 @@ Be sure to modify the `server spoa1 <host>:<port>` line so that it references yo
 
 ##### datadog_aap_blocking_response.lua
 
-The `datadog_aap_blocking_response.lua` script is responsible for sending a custom blocking response when the SPOA instructs HAProxy to block a request. This script should be stored in a location such as `/etc/haproxy/lua/datadog_aap_blocking_response.lua`, and the `lua-load` directive in the `global` section should reference this path.
+The `datadog_aap_blocking_response.lua` script is responsible for sending a custom blocking response when the SPOA instructs HAProxy to block a request. This script could be stored in a location such as `/etc/haproxy/lua/datadog_aap_blocking_response.lua`, and the `lua-load` directive in the `global` section should reference this path.
 
 It is important that no custom modifications are made to this file.
-
-### Validation
 
 <div class="alert alert-info">
   <strong>Note:</strong> This lua script is not invoked on every request processed by HAProxy. It is only invoked when a request is blocked by App and API Protection. This design ensures optimal performance by avoiding the overhead of running Lua code for all requests.
 </div>
+
+### Validation
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -132,25 +129,21 @@ Configure the SPOA to send traces to your Datadog Agent using the following envi
 The HAProxy integration is built on top of the [Datadog Go Tracer][5] and inherits all of its environment variables. See [Configuring the Go Tracing Library][6] and [App and API Protection Library Configuration][7].
 
 <div class="alert alert-info">
-  <strong>Note:</strong> As the HAProxy SPOA is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the Datadog SPOA is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.3.0</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ## Keeping your configuration up to date
 
 Because HAProxy's SPOE integration involves both a runtime component (the SPOA container image) and HAProxy configuration, upgrades can require changes in both places.
 
-<div class="alert alert-warning">
-  <strong>Reference configuration and changelog:</strong> Datadog publishes the reference HAProxy configuration and a changelog you can monitor for updates:
-  <ul>
-    <li><a href="https://github.com/DataDog/dd-trace-go/tree/main/contrib/haproxy/stream-processing-offload/cmd/spoa/haproxyconf/">Reference HAProxy configuration directory</a> (SPOE engine, frontend/backend snippets, Lua)</li>
-    <li><a href="https://github.com/DataDog/dd-trace-go/blob/main/contrib/haproxy/stream-processing-offload/cmd/spoa/haproxyconf/CHANGELOG.md">Configuration CHANGELOG</a></li>
-  </ul>
-</div>
+The reference HAProxy configuration and an associated changelog are available to help you monitor and track updates:
+- [Reference HAProxy configuration directory][8] (SPOE engine, global, frontend/backend snippets, Lua)
+- [Configuration changelog][9]
 
 ### Recommended upgrade practices
 
 - Pin your SPOA image to a specific version and upgrade intentionally after reviewing the configuration changelog.
-- Centralize the Datadog configuration so you easily update it.
+- Centralize the Datadog configuration so it is easily updatable.
 - Track the reference configuration and changelog and compare your configuration to it when upgrading.
 
 ## Limitations
@@ -164,7 +157,7 @@ The HAProxy integration has the following limitations:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /remote_configuration/
 [3]: https://www.haproxy.com/blog/extending-haproxy-with-the-stream-processing-offload-engine
 [4]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fhaproxy-spoa
 [5]: https://github.com/DataDog/dd-trace-go
