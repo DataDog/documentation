@@ -132,6 +132,7 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
+    haproxy: "HAProxy"
 branch: ""
 
 signupclass: sign-up-trigger
