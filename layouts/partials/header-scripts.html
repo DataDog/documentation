@@ -59,9 +59,6 @@ hugo defaults to environment development with hugo server
 
 
 {{ $opts := dict "targetPath" "static/dd-browser-logs-rum.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
-{{/*  {{ $js := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $opts }}  */}}
-<!-- intentionally skipping fingerprint --->
-{{/*  <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous" defer></script>  */}}
 
 {{ if eq .Section "api" }}
   {{ $opts := dict "targetPath" "static/api-redirect.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
