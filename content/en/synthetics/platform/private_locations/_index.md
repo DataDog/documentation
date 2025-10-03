@@ -678,7 +678,7 @@ You can upload custom root certificates to your private locations to have your A
 
 When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
-<div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
+<div class="alert alert-info">If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
 
 {{% /tab %}}
 
@@ -690,7 +690,7 @@ To install root certificates for private locations on a Windows service, use the
 2. Navigate to the entry `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location`.
 3. Create a Registry key named `Environment` with the `Multi-string` value type.
 
-<div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
+<div class="alert alert-info">Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
 default: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
 
 4. Set the value `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
@@ -1020,7 +1020,7 @@ Use [granular access control][24] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |

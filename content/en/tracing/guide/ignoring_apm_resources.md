@@ -25,7 +25,7 @@ Or to sample based on HTTP URL tags:
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
 ```
 
-<div class="alert alert-info"><strong>Note</strong>: Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
+<div class="alert alert-info">Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
 
 ## Filtering
 
@@ -491,7 +491,7 @@ tracer.use('http', {
 //import http
 
 ```
-<div class="alert alert-info"><strong>Note</strong>: The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
+<div class="alert alert-info">The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
