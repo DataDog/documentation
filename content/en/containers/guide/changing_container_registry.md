@@ -1,5 +1,6 @@
 ---
 title: Changing Your Container Registry
+description: Switch between Datadog container image registries for different deployment environments and requirements
 aliases:
  - /agent/guide/changing_container_registry
 ---

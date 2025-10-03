@@ -1,5 +1,6 @@
 ---
 title: Kubernetes log collection
+description: Configure log collection from containerized applications running on Kubernetes using the Datadog Agent
 aliases:
   - /agent/kubernetes/log
 further_reading:

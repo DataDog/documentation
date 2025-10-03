@@ -1,5 +1,6 @@
 ---
 title: DDSQL Reference
+description: "Complete reference for DDSQL syntax, data types, functions, operators, and statements for querying Datadog data with SQL."
 aliases:
 - /logs/workspaces/sql_reference
 - /ddsql_reference/ddsql_default
