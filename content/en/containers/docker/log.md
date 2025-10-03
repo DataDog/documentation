@@ -1,5 +1,6 @@
 ---
 title: Docker Log collection
+description: Configure log collection from applications running in Docker containers using the Datadog Agent
 aliases:
     - /logs/docker
     - /logs/languages/docker
