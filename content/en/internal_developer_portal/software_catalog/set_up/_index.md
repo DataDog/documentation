@@ -65,12 +65,12 @@ By default, these services are not associated with Datadog telemetry, but you ca
 
 ## Automatically discover entities from Datadog
 
+By default, Software Catalog is automatically populated with entries discovered from APM, USM, and RUM. You can also manually import entries from other Datadog telemetries, like logs. 
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum" >}}Discover from APM, USM, and RUM{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/discover_entities#import-entities-from-infrastructure-and-logs" >}}Import from Infrastructure and Logs{{< /nextlink >}}
 {{< /whatsnext >}}
-
-By default, Software Catalog is automatically populated with entries discovered from APM, USM, and RUM. You can also manually import entries from other Datadog telemetries, like logs. 
 
 ### APM
 
@@ -94,25 +94,25 @@ When you use [**Import Entities**][10] and choose a data source, Datadog queries
 
 ## Create entities
 
+[Entity definitions][1], defined in entity YAML files, are the canonical source of truth in Software Catalog. You can: 
+- Create entity definitions manually through Datadog.
+- Store definitions in a version control system like Git, and set up [Source Code Integration][6] to sync definitions with IDP. Changes made to your files are reflected in Datadog within minutes.
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/create_entities#through-the-datadog-ui" >}}Create through the Datadog UI{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/create_entities#through-automation" >}}Create through code automation{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[Entity definitions][1], defined in entity YAML files, are the canonical source of truth in Software Catalog. You can: 
-- Create entity definitions manually through Datadog.
-- Store definitions in a version control system like Git, and set up [Source Code Integration][6] to sync definitions with IDP. Changes made to your files are reflected in Datadog within minutes.
-
 **Note**: To automatically correlate an entity to its telemetry, the `name` field in your definition must exactly match the primary identifier from the telemetry data. For most services, this is the `service` tag as defined in Datadog's Unified Service Tagging. See examples for [`kind:datastore`][7], [`kind:queue`][8], and other [`entity types`][9].
 
 ## Import entities
+
+If you maintain software inventories in Backstage or ServiceNow CMDB, you can sync these inventories into Datadog's Software Catalog.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage" >}}Import from Backstage{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow" >}}Import from ServiceNow{{< /nextlink >}}
 {{< /whatsnext >}}
-
-If you maintain software inventories in Backstage or ServiceNow CMDB, you can sync these inventories into Datadog's Software Catalog.
 
 ### Backstage 
 
