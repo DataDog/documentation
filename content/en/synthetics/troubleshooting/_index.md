@@ -303,7 +303,7 @@ Error: self-signed certificate in certificate chain
 **Solution**:
 
 - Upload your custom self-signed [root certificates][101] to your private location.
-- Verify that your Windows Private Location logs is no longer reporting the error 
+- Verify that your Windows Private Location logs are no longer reporting the error.
 ```
 "Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
 Error: self-signed certificate in certificate chain"
