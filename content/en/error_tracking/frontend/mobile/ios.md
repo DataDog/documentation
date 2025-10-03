@@ -457,6 +457,11 @@ Choose the right threshold value based on your monitoring needs:
   - Set `appHangThreshold` between `2.0` and `3.0` seconds to filter out noisy hangs and focus on significant performance issues
   - This aligns with user experience expectations, where hangs under 2 seconds are less noticeable
 
+#### Threshold limits
+- Minimum: `0.1` seconds (100 ms) - however, setting the threshold to such small values may lead to an excessive reporting of hangs
+- Recommended range: `0.25` to `3.0` seconds
+- The SDK uses 2.5% tolerance to reduce CPU usage, which means some hangs that last close to the `appHangThreshold` may not be reported
+
 ##### Configuration example
 ```swift
 RUM.enable(
@@ -466,11 +471,6 @@ RUM.enable(
     )
 )
 ```
-
-**Threshold limits:**
-- Minimum: `0.1` seconds (100 ms) - however, setting the threshold to such small values may lead to an excessive reporting of hangs
-- Recommended range: `0.25` to `3.0` seconds
-- The SDK uses 2.5% tolerance to reduce CPU usage, which means some hangs that last close to the `appHangThreshold` may not be reported
 
 {{% /collapse-content %}}
 
