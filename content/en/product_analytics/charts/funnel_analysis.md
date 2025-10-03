@@ -24,7 +24,6 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 - Filter on individual events (action or view) on different steps in your funnel
 - Combine multiple events within a given step, as end users might have different ways to achieve the same outcome through different flows
 
-**Note**: The **conversion rate** is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
 
 ## Build a funnel
 
@@ -36,11 +35,9 @@ From this page, choose your starting view or action and click on `+ Step` to bui
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_video1.mp4" alt="Filtering network map with search" video=true >}}
 
-If you have a starting point in mind, but aren't sure what your users did next, the funnel step editor automatically loads the top most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
+If you have a starting point in mind, but aren't sure what your users did next, the funnel step editor automatically loads the top most common **views** and **actions** that users typically see.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_dropoffs.png" alt="The funnel step editor automatically loads the top most common views and actions that users typically see and take next." style="width:50%;" >}}
-
-**Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
 ### Filtering
 
@@ -64,13 +61,13 @@ To combine an event, click the three dots next to an event and select **+ Combin
 
 Use the Group by dropdown to group the data by a specific attribute.
 
-**Note**: Group by does not work with the funnel steps visualization.
+**Note**: Group by does not work with the funnel steps visualization, your visualization will automatically change to a top list.
 
 ## Refine conversion
 
 You can further analyze the information on the funnel page to understand the conversion rate. Conversion rate is a crucial metric that measures the effectiveness of your site or application.
 
-You can analyze conversion by **session count** or **users**, which means you can understand how many sessions or users ended up completing the funnel.
+You can analyze conversion by **session**, **users** or **accounts**, which means you can understand conversion across all sessions, or by distinct users/accounts. This can be useful if you suspect, for instance, that a minority of your user base converts at a high rate.
 
 You can measure conversion by the following attributes:
 
@@ -85,9 +82,29 @@ You can measure these attributes **across all steps** or between **specific step
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion.png" alt="Measure attributes across all steps or specific steps." style="width:60%;" >}}
 
-Use the **filter** selector to filter by various criteria that you define.
+Use the **filter** selector to filter by various criteria that you define. These filters will be applied to all steps of the funnel.
 
 Next, click a datapoint to **investigate the specific attributes** that might have affected conversion rates, such as page load speed, ease of navigation, or checkout experience.
+
+## How Datadog computes conversion metrics
+
+Consider a funnel with events `A → B → C` and event steps: 
+
+```
+A, A, A, B, C, C
+```
+
+If a user performs the actions as in the example above, Datadog counts it as one conversion. This is because the conversion calculations only look at the first element **A** matched and the first element **C** matched. 
+**`(WHY? does it only look for the first and last? if yes, should we include it?)`**
+
+If you select the **unique** conversion measure, then a conversion (session, user, or account) is counted only once per session, user or account. So, if the user performs  A → B → C → A → B → C during the session or timeframe then unique will count 1 conversion.
+
+
+If total is selected, then in the example above we will count 2 conversions. 
+If you analyze your funnel by user or account, you can define your conversion timeframe (default: 1 day). This means that we use a 24-hour window (not calendar dates) to determine if a conversion happened or not.
+The average time between steps is calculated by looking at the average duration between each conversion. Note that this takes all conversions into account, no matter if unique or total is selected for the counts.
+The conversion rate takes all the users/accounts/sessions that enter the funnel on one hand, all the conversions on the other hand, and computes the ratio between the two.
+
 
 ## Changing the visualization
 
