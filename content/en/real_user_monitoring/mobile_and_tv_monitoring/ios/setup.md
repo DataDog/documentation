@@ -47,7 +47,7 @@ To start sending RUM data from your iOS or tvOS application to Datadog:
 
 ### Step 1 - Add the iOS SDK as a dependency
 
-Add the iOS SDK to your project using your preferred package manager. Swift Package Manager (SPM) is recommended.
+Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
