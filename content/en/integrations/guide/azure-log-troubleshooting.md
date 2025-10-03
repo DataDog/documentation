@@ -80,7 +80,7 @@ If you are missing all logs, ensure that the [selected DC][9] is correct and tha
 
 ### Identify potential Event Hub Bottlenecks
 
-If there is a spike in the number of incoming messages while outgoing messages drop, it could indicate a bottleneck. Use the following metrics to investigate potential bottlenecks:
+A spike in incoming messages with a drop in outgoing ones suggests a bottleneck. Use these metrics to investigate:
 
 - `azure.eventhub_namespaces.incoming_messages`
 - `azure.eventhub_namespaces.incoming_bytes`
@@ -89,7 +89,7 @@ If there is a spike in the number of incoming messages while outgoing messages d
 - `azure.eventhub_namespaces.throttled_requests`
 - `azure.eventhub_namespaces.server_errors`
 
-**Note**: If the bottleneck is not addressed and log delay starts increasing, it is possible this could lead to missing events as [logs that are delayed][12] by 18 hours or more are dropped by Datadog logs intake. 
+**Note**: Increasing log delays can cause data loss, as [logs older than 18 hours][12] are dropped. 
 
 In response to these symptoms there are two suggestions:
 
@@ -108,8 +108,8 @@ Ensure the function app is executing by looking at the following function metric
 - `azure.functions.http5xx`
 
 **Notes**: 
-- The log forwarder now uses the [Azure Functions V4 Programming model][15], which is package-based and disables direct code editing in the Azure portal. To update or customize your function, you must contact [Datadog support][17] for instructions.
-- For more reliable, efficient, and cost-effective log collection, we recommend using the [Automated Log Forwarder (LFO)][18]. It fully automates the process of forwarding logs from all your Azure resources directly to Datadog.
+- The log forwarder uses the [Azure Functions V4 Programming model][15], which is package-based and disables direct code editing in the Azure portal. To update or customize your function if you had previously set it up manually, you must contact [Datadog support][17] for instructions.
+- For more reliable, efficient, and cost-effective log collection, you can transition to the [Automated Log Forwarder (LFO)][18]. It fully automates the process of forwarding logs from all your Azure resources directly to Datadog.
 
 ## Blob Storage 
 
