@@ -36,7 +36,6 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the [Datadog Cloud Network][12] product. Requires enabling Cloud Network in the Datadog agent. See [data transfer cost allocation][13] for more details |
 | Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the Datadog Cloud Network product. Requires enabling Cloud Network in the Datadog agent |
->>>>>>> 30e05c6471ac26d86998fc56bab3398d012956a6
 | Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Pod | User-defined tags found on Kubernetes pods monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Persistent Volume | User-defined tags found on Persistent Volumes in Kubernetes clusters monitored with Datadog |
