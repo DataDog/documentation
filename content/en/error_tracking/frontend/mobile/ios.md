@@ -411,13 +411,9 @@ CrashReporting.enable()
 
 ### Step 5 - Add app hang reporting
 
-App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]).
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]). By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a _hang_ in [**Error Tracking**][1]. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
 
-
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
-
-
-When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a _hang_ in [**Error Tracking**][1]. There are two types of hangs:
+There are two types of hangs:
 
 - **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
