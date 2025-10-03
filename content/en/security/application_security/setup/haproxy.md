@@ -34,15 +34,17 @@ You can enable App and API Protection for your HAProxy instances. The Datadog HA
 
 The App and API Protection HAProxy integration uses HAProxy's [Stream Processing Offload Engine][3] (SPOE) to call a Datadog Stream Processing Offload Agent (SPOA). The SPOA analyzes requests and responses.
 
-### Install the Datadog HAProxy SPOA and configuration.
+Enabling App and API Protection for HAProxy involves two main steps:
+1. Deploy the Datadog HAProxy SPOA container.
+2. Update your HAProxy configuration files to integrate with the SPOA
 
-#### SPOA container
+### SPOA container
 
 Deploy the Datadog HAProxy SPOA image available in the Datadog GitHub Container Registry [here][4]. The SPOA listens for SPOE connections from HAProxy and sends security events to your Datadog Agent.
 
 See [Configuration](#configuration) for available configuration options about the SPOA container.
 
-#### HAProxy configuration files (source of truth)
+### HAProxy configuration files
 
 All required HAProxy configuration files are available in the [repository folder][8]. For information about updates and changes about the configuration, refer to the [Configuration changelog][9].
 
@@ -56,19 +58,19 @@ The following files are needed for your setup:
 
 Refer to the guidance below for each file to install and customize them as needed.
 
-##### spoe.cfg
+#### spoe.cfg
 
 The `spoe.cfg` file is responsible for declaring the SPOE agent and its configuration. This file should be saved to disk, for example at `/usr/local/etc/haproxy/spoe.cfg`. The location of this file is referenced via the `DD_SPOA_SPOA_CONF_FILE` environment variable, which is configured within the `global` section.
 
 It is important that no custom modifications are made to this file.
 
-##### global-config.cfg
+#### global-config.cfg
 
 The `global-config.cfg` file loads the required Lua script and configures the necessary variables for the integration. Its contents should be incorporated into the `global` section of your `haproxy.cfg` configuration file.
 
 You can adjust the values as needed for your environment. It is recommended to review the comments within the file for further guidance on each setting.
 
-##### frontend-config.cfg
+#### frontend-config.cfg
 
 The `frontend-config.cfg` file attaches the SPOE filter to your frontend. This section should be placed at the very top of each `frontend` section you want to protect, before other filters and the router.
 
@@ -79,7 +81,7 @@ This section ensures that:
 
 It is important that no custom modifications are made to this part of the configuration.
 
-##### backend.cfg
+#### backend.cfg
 
 The `backend.cfg` file defines the `spoa-backend` used by the SPOE engine and for health checks. This configuration should be appended near the end of your `haproxy.cfg` file.
 
@@ -89,7 +91,7 @@ Be sure to modify the `server spoa1 <host>:<port>` line so that it references yo
   <strong>Note:</strong> For high availability and redundancy, you can configure multiple SPOA agent servers by adding additional <code>server</code> lines (for example, <code>server spoa1 ...</code>, <code>server spoa2 ...</code>, etc.). HAProxy will automatically load-balance and fail over between these SPOA agents, ensuring continued protection even if one agent becomes unavailable.
 </div>
 
-##### datadog_aap_blocking_response.lua
+#### datadog_aap_blocking_response.lua
 
 The `datadog_aap_blocking_response.lua` script is responsible for sending a custom blocking response when the SPOA instructs HAProxy to block a request. This script could be stored in a location such as `/etc/haproxy/lua/datadog_aap_blocking_response.lua`, and the `lua-load` directive in the `global` section should reference this path.
 
