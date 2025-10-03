@@ -41,9 +41,14 @@ With the Datadog resource, you can manage the following within the associated Az
 
 This page describes the Azure Portal experience. If you prefer to use CLI, see the [Azure CLI for Datadog][3].
 
-## Included and missing features <REWORD>
+## Unsupported features
 
-<CONTENT>
+Some features cannot be managed through the Datadog resource in Azure. These include:
+
+- Metric filtering at the **resource** level
+- [Cloud Cost Management][8] (CCM)
+- [Log Archiving][9]
+- [Storage Monitoring][7]
 
 ## Setup
 
@@ -354,9 +359,12 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/getting_started/site/
+[1]: /getting_started/site/
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 [3]: https://docs.microsoft.com/cli/azure/datadog?view=azure-cli-latest
 [4]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [5]: https://app.datadoghq.com/dash/integration/71/azure-overview
 [6]: https://app.datadoghq.com/monitors/templates?q=azure
+[7]: /integrations/guide/storage-monitoring-setup/#setup-for-azure-blob-storage
+[8]: /cloud_cost_management/setup/azure/
+[9]: /logs/guide/azure-automated-log-forwarding/#log-archiving
