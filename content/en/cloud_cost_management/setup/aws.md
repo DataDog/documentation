@@ -411,7 +411,7 @@ _Requires [container cost allocation][11], and applies only to `shared.resources
 
 ### Tag pipelines
 
-Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible. Tag pipelines are the final enrichment layer and can override tags from other sources.
+Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible. Tag pipelines are the final enrichment layer and add new tags to your cost data.
 
 ## Billing conductor
 [AWS Billing Conductor][16] is a custom billing service for AWS Marketplace Channel Partners (Partners) and organizations that have chargeback requirements.

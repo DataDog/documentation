@@ -32,14 +32,14 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 | Datadog Enrichment | Host Agent | Tags added to host metadata by the Datadog agent running on the host |
 | Datadog Enrichment | Service Catalog | Tags associated with this service in the APM Service Catalog |
 | Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
-| Datadog Enrichment | Data Observability | Tags from the Datadog’s Data Observability product, requires enabling BigQuery monitoring |
-| Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the Datadog Cloud Network product. Requires enabling Cloud Network in the Datadog agent |
+| Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
+| Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the [Datadog Cloud Network][12] product. Requires enabling Cloud Network in the Datadog agent. See [data transfer cost allocation][13] for more details |
 | Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Pod | User-defined tags found on Kubernetes pods monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Persistent Volume | User-defined tags found on Persistent Volumes in Kubernetes clusters monitored with Datadog |
 | Kubernetes Enrichment | Kubernetes Persistent Volume Claim | User-defined tags found on Persistent Volume Claims in Kubernetes clusters monitored with Datadog | 
 | Cloud Cost Management | Cloud Cost Aliases | Some aliases are tags derived from provider cost data, used to simplify the cost data model, such as `aws_product`, which is an alias of `lineItem/ProductCode`. Additional tags that exist on both cost data and integration metrics are added, allowing cost data and usage data to be combined in Custom Allocation Rules, dashboards, and notebooks |
-| Cloud Cost Management | Cloud Cost Allocation | Tags created during cost allocation that specify the split of shared resources, such as `allocated_spend_type` |
+| Cloud Cost Management | Cloud Cost Allocation | Tags created during [cost allocation][11] that specify the split of shared resources, such as `allocated_spend_type` |
 | Cloud Cost Management | FOCUS | Provider-agnostic tags compliant with [FOCUS][8], the unifying format for cloud billing data |
 | Tag Pipelines | Rules defined by user | Tags created by applying your Tag Pipelines to cost data |
 | Custom Allocation Rules | Rules defined by user | Tags created by applying your Custom Allocation Rules to cost data (do not apply to SaaS costs) |
@@ -49,7 +49,7 @@ Datadog also adds provider specific tags:
 | Provider | What tags are collected | Description |
 |---|---|---|
 | AWS | Cost Allocation Tags | Any tag defined by the user in [AWS Cost Allocation][1] tags that show up in the AWS CUR |
-| AWS | AWS Resource Groups Tagging API | User-defined tags on a cloud resource in AWS, pulled by Cloud Cost Management using the Group Tagging API |
+| AWS | AWS Resource Groups Tagging API | User-defined tags on a cloud resource in AWS, pulled by Cloud Cost Management using the [Groups Tagging API][10] |
 | AWS | AWS Organizational Units | User-defined tags on an AWS organizational units using [AWS Organizations][7] |
 | AWS | AWS Organizations - Accounts | User-defined tags on an AWS account using [AWS Organizations][7] |
 | Amazon ECS | Amazon ECS Task | User-defined tags on an ECS task definition |
@@ -77,7 +77,7 @@ Cloud Cost Management normalizes tag **keys** largely the same as Datadog Metric
 - Reduce contiguous underscores to a single underscore
 - Tag keys up to 5000 characters are supported, and any characters up until a letter are dropped so that tag keys start with letters (differs from Datadog Metrics)
 
-Cloud Cost Management normalizes tag **values** as well, while maintaining human readable tag values for cost reporting, with the following logic:
+Cloud Cost Management normalizes tag **values** as well, while maintaining human readable tag values for cost reporting. For example, `aws_instance_family:Machine Learning ASIC Instances` remains readable rather than being converted to something like `machine_learning_asic_instances`. The normalization follows this logic:
 - Convert any consecutive whitespace to a single space
 - Keep all letters, marks, numbers, punctuation, and symbols
 - Replace any other characters with an underscore `_`
@@ -87,10 +87,10 @@ Cloud Cost Management normalizes tag **values** as well, while maintaining human
 
 It's possible for a cost data row to have multiple values, if tag values from 2+ sources are combined, and one is not prioritized over the other.
 
-To resolve conflicts and mitigate this, Cloud Cost Management will replace existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace an Kubernetes node tag `team:compute`.
+To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace an Kubernetes node tag `team:compute`.
 
 Sources higher in this list replace tag values from sources lower in this list, if there are conflicts:
-- Tag Pipelines and Custom Allocation Rules
+- Custom Allocation Rules
 - FOCUS
 - Service Catalog
 - Amazon ECS Container
@@ -100,7 +100,7 @@ Sources higher in this list replace tag values from sources lower in this list, 
 - Kubernetes Node 
 - Host Agent
 
-All other tag sources (such as bill columns, AWS Organization tags, etc) can be overriden by these sources.
+Other tag sources (such as AWS Organization tags, integration tile tags, and such) can be overridden by these sources. Bill columns and FOCUS columns are reserved and cannot be overridden. Tag Pipelines add new tags but do not override existing tags.
 
 ## Improving tagging
 
@@ -124,3 +124,7 @@ All other tag sources (such as bill columns, AWS Organization tags, etc) can be 
 [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html
 [8]: https://focus.finops.org/
 [9]: /cloud_cost_management/setup/custom?tab=csv
+[10]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
+[11]: /cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#understanding-spend
+[12]: /network_monitoring/
+[13]: /cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#data-transfer
