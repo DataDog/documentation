@@ -111,6 +111,7 @@ WITH (
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
     STARTUP_STATE = ON
 );
 
@@ -156,12 +157,15 @@ WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
     STARTUP_STATE = ON
 );
 
 ALTER EVENT SESSION datadog_query_errors ON SERVER STATE = START;
 GO
 ```
+
+   **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from both session configurations, as this option is not supported on RDS instances.
 
 2. In the Datadog Agent configuration, enable `xe_collection` in `sqlserver.d/conf.yaml`.
 See the [sample conf.yaml.example][3] for all available configuration options.
@@ -253,6 +257,7 @@ WITH (
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems
     STARTUP_STATE = ON
 );
 
@@ -298,6 +303,7 @@ WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems
     STARTUP_STATE = ON
 );
 
