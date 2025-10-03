@@ -55,7 +55,7 @@ You can hide frameworks from the list on the [Compliance][20] page, so you can f
 
 To hide a framework, either on the Compliance page or on a page for a specific framework, click the **Options** button {{< img src="icons/kebab.png" alt="Options button" inline="true" style="height:1em">}}, then click **Hide framework**.
 
-Then, on the Compliance page, you can use the **Show hidden frameworks** toggle to show hidden frameworks at the bottom of the list, or hide them completely. When you show hidden frameworks, you can click **Show** on a hidden framework to add it back to the list.
+Then, on the Compliance page, you can use the **Show hidden frameworks** toggle to show hidden frameworks at the bottom of the list, or hide them completely. When the toggle is on, you can click **Show** next to any hidden framework to add it back to the list.
 
 ## Further reading
 
