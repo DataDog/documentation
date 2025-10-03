@@ -357,16 +357,6 @@ Crash reporting captures fatal crashes when your app terminates unexpectedly, in
 To enable crash reporting, add the package according to your dependency manager and update your initialize snippet.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogCrashReporting'
-```
-
-[1]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -378,6 +368,16 @@ In your project, link the following libraries:
 ```
 DatadogCrashReporting
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
+```
+pod 'DatadogCrashReporting'
+```
+
+[1]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
