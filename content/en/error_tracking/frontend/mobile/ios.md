@@ -526,6 +526,20 @@ npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 
 **Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable.
 
+  For example, to configure for different Datadog sites:
+
+  ```sh
+  # For EU endpoint
+  export DATADOG_SITE="datadoghq.eu"
+  export DATADOG_API_KEY="<API KEY>"
+  npx @datadog/datadog-ci dsyms upload appDsyms.zip
+
+  # For custom intake URL
+  export DATADOG_DSYM_INTAKE_URL="https://your-custom-endpoint.com"
+  export DATADOG_API_KEY="<API KEY>"
+  npx @datadog/datadog-ci dsyms upload appDsyms.zip
+  ```
+
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 
 {{% /tab %}}
