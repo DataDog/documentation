@@ -9,15 +9,11 @@ further_reading:
   text: "Learn more about On-Call Scheduling"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/status-pages/">}}
-Status Pages is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="service_management/status_pages/shopist_status_page.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, and **incidents** with customers or internal stakeholders through a shareable web page.
+Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability** and **incidents** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 
@@ -67,7 +63,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
    | ----------------- | ----------- |
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
-   | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
+   | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Subscriptions** *(optional)* | Enable users to receive email notifications about status page updates. When subscriptions are enabled, users can sign up to get notified about new notices and updates. You can turn subscriptions on or off for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in, email must be confirmed. |
    | **Company logo, Favicon, or Email Header Image** *(optional)* | Upload a logo, favicon, or image to personalize the appearance of your status page and email notifications. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
