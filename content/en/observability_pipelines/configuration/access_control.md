@@ -19,19 +19,17 @@ See the [list of permissions][3] for Observability Pipelines' assets and what le
 
 ### Restrict access to a pipeline
 
-You can restrict access to a specific pipeline with the following options:
-- **Editor** is allowed to:
-    - View, edit, and deploy pipeline configuration.
-    - Delete the pipeline.
-    - Restrict access to the pipeline.
-- **Runner** is allowed to:
-    - View, edit, and deploy pipeline configuration.
-- **Contributor** is allowed to:
-    - View and edit pipeline configuration.
-    - **Note**: This is only relevant when the pipeline is still in draft mode and has not been deployed yet. After it has been deployed for the first time, Runner or Editor access is needed to edit the configuration.
-- **Viewer** is allowed to:
-    - View pipeline configuration.
-- **No Access** has no default access to the pipeline.
+You can restrict access to a specific pipeline with the following role options:
+
+| Role | View pipeline | Edit pipeline | Deploy pipeline | Delete pipeline | Can restrict access to pipeline |
+|:----:|:-------------:|:-------------:|:---------------:|:---------------:|:--------------------------:|
+| Editor | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Runner | ✓ | ✓ | ✓ |  |  |
+| Contributor* | ✓ | ✓ |  |  |  |
+| Viewer | ✓ |  |  |  |  |
+| No Access |  |  |  |  |  |
+
+*Contributor can only edit pipeline configuration when the pipeline is in draft mode and has not been deployed yet.
 
 **Notes**:
 
