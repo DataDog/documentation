@@ -86,7 +86,7 @@ RUM provides frontend user experience data, including page performance, errors, 
 
 ### Other Datadog telemetries
 
-You can also import entities that are reflected in Datadog telemetries like logs, host metrics, container metrics, network metrics, and process metrics. 
+You can also import entities that are identified from Datadog telemetries like logs, host metrics, container metrics, network metrics, and process metrics. 
 
 When you use [**Import Entities**][10] and choose a data source, Datadog queries that source and searches for valid `DD_SERVICE` tags. Entities are marked with the `kind:service` attribute.
 
@@ -103,7 +103,7 @@ When you use [**Import Entities**][10] and choose a data source, Datadog queries
 - Create entity definitions manually through Datadog.
 - Store definitions in a version control system like Git, and set up [Source Code Integration][6] to sync definitions with IDP. Changes made to your files are reflected in Datadog within minutes.
 
-**Note**: Automatic telemetry overlay requires that the name field value matches the corresponding Datadog telemetries keys exactly. See examples for [`kind:datastore`][7], [`kind:queue`][8], and other [entity types][9]. 
+**Note**: To automatically correlate an entity to its telemetry, the `name` field in your definition must exactly match the primary identifier from the telemetry data. For most services, this is the `service` tag as defined in Datadog's Unified Service Tagging. See examples for [`kind:datastore`][7], [`kind:queue`][8], and other [`entity types`][9].
 
 ## Import entities
 
