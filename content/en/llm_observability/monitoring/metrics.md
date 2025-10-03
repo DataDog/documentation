@@ -60,6 +60,10 @@ These metrics capture **span** counts, **error** counts, **token usage**, and **
 
 ### Deprecated metrics
 
+<div class="alert alert-warning">
+<strong>Important:</strong> The following metrics have been deprecated and are maintained for backward compatibility only. Datadog strongly recommends using the current token metrics instead for all token usage measurement use cases.
+</div>
+
 The following metrics have been deprecated:
 
 | Metric Name | Description | Metric Type | Tags |
