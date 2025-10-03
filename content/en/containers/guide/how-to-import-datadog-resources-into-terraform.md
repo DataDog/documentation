@@ -1,5 +1,6 @@
 ---
 title: Importing Datadog Resources into Terraform
+description: Import existing Datadog resources into Terraform state using the terraform import command or Terraformer tool
 aliases:
   - /integrations/faq/how-to-import-datadog-resources-into-terraform
   - /agent/guide/how-to-import-datadog-resources-into-terraform

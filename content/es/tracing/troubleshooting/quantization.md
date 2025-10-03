@@ -8,7 +8,7 @@ further_reading:
   text: Sustituir etiquetas en tramos
 - link: /tracing/trace_collection/library_config/
   tag: Documentación
-  text: Configuración de la biblioteca de rastreo
+  text: Configuración de la librería de rastreo
 title: Cuantificación de datos de APM
 ---
 

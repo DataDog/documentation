@@ -1,5 +1,6 @@
 ---
 title: Set Up Code Coverage
+description: "Configure Code Coverage by integrating with GitHub or GitLab, setting permissions, creating PR Gates, and uploading coverage reports."
 further_reading:
   - link: "/code_coverage"
     tag: "Documentation"
@@ -421,6 +422,6 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider

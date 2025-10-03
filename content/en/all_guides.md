@@ -38,8 +38,10 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Continuous Integration:">}}
+{{< whatsnext desc="Software Delivery:">}}
 {{< nextlink href="/continuous_integration/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CI Visibility{{< /nextlink >}}
+{{< nextlink href="/tests/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Test Optimization{{< /nextlink >}}
+{{< nextlink href="/feature_flags/guide" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Feature Flags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Security:">}}

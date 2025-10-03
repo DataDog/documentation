@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -35,7 +35,7 @@ help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
 clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
-	rm -rf ./node_modules ./hugpython ./public
+	rm -rf ./node_modules ./hugpython ./public ./_vendor
 
 clean-dependent-repos:
 	rm -rf ./integrations_data
@@ -81,20 +81,24 @@ build-llms-txt:
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
-	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
-	@make update_websites_sources_module
 	@make build-cdocs
 	@make server
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
-	@make update_websites_sources_module
+	@make server
+	
+# Run the site with websites_sources_data (integrations previews)
+start-sources: node_modules
+	@make setup-build-scripts
+	@make websites_sources_data
+	@make build-cdocs
 	@make server
 
 # Leave build scripts in place, but skip dependencies and sources_module
@@ -123,7 +127,12 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs build-llms-txt
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt
+
+# Download files from S3 bucket and add them to the file system
+websites_sources_data: hugpython
+	@echo "Downloading data from websites-sources S3 bucket..."
+	@. hugpython/bin/activate && python3 ./local/bin/py/build/get_websites_sources_data.py
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -136,6 +145,7 @@ vector_data: integrations_data/extracted/vector
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/" 
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt

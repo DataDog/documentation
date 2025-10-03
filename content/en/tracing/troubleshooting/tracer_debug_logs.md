@@ -1,5 +1,6 @@
 ---
 title: Tracer Debug Logs
+description: Enable and collect debug logs from APM tracers to troubleshoot configuration and connectivity issues.
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Apache Airflow
+description: "Monitor Apache Airflow DAG workflows with Data Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
 is_beta: true
 private: true
 further_reading:
@@ -31,7 +32,7 @@ To try the preview for Airflow monitoring, follow the setup instructions below.
 
 To get started, follow the instructions below.
 
-1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
+1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow dependencies are managed:
 
     For **Airflow 2.7 or later**:
 
@@ -257,8 +258,12 @@ To get started, follow the instructions below.
 1. In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
 
    - In Section 1, enter `openlineage`.
-   - In Key 1, enter `transport`.
-   - In Value 1, enter the following:
+   - In Key 1, enter `disabled`.
+   - In Value 1, enter `False` to make sure OpenLineage is activated.
+
+   - In Section 2, enter `openlineage`.
+   - In Key 2, enter `transport`.
+   - In Value 2, enter the following:
 
      ```text
      {

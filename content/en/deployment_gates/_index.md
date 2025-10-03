@@ -1,5 +1,6 @@
 ---
 title: Deployment Gates
+description: "Reduce deployment incidents by automatically evaluating monitors and APM anomalies to halt releases when performance regressions are detected."
 further_reading:
 - link: "/deployment_gates/setup"
   tag: "Documentation"

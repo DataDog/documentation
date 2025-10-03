@@ -41,21 +41,21 @@ El componente Trace Agent dentro del Datadog Agent tiene dos métodos para evita
 
 La configuración del Trace Agent para ignorar ciertos tramos o recursos se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Si tienes requisitos específicos de la aplicación, utiliza, en su lugar, el método de [Configuración del rastreador](#tracer-configuration).
 
-#### Ignorar en función de las etiquetas de tramos
+#### Ignorar en función de las span tagss
 
-Empezando con el Datadog Agent 6.27.0/7.27.0, con la opción **filtrar por etiquetas**, se descartan trazas con tramos de raíz que coincidan con etiquetas de tramos especificadas. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Las trazas que se descartan debido al filtro por etiquetas no se incluyen en las métricas de trazas.
+Empezando con el Datadog Agent 6.27.0/7.27.0, con la opción **filtrar por etiquetas**, se descartan trazas con tramos de raíz que coincidan con span tagss especificadas. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Las trazas que se descartan debido al filtro por etiquetas no se incluyen en las métricas de trazas.
 
 Si puedes identificar mediante programación un conjunto de trazas que sabes que no deseas enviar a Datadog y ninguna otra opción de esta guía resuelve tu necesidad, puedes considerar añadir una [etiqueta de tramo personalizada][2] para poder descartar las trazas. [Ponte en contacto con el servicio de soporte técnico][1] para tratar tu caso de uso con más detalle, de modo que Datadog pueda seguir ampliando esta funcionalidad.
 
 La opción de filtrar por etiquetas requiere una coincidencia exacta de las cadenas. Si tu caso de uso requiere ignorar por expresiones regulares, consulta [Ignorar en función de los recursos](#ignoring-based-on-resources).
 
-Puedes especificar etiquetas de tramos para requerir o rechazar utilizando un lista de claves y valores separados por espacios en variables de entorno:
+Puedes especificar span tagss para requerir o rechazar utilizando un lista de claves y valores separados por espacios en variables de entorno:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Recopila solo las trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si no coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
+: Recopila solo las trazas que tienen tramos de raíz con una coincidencia exacta con las span tagss y valores especificados. Si no coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rechaza las trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
+: Rechaza las trazas que tienen tramos de raíz con una coincidencia exacta con las span tagss y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 
 {{< tabs >}}

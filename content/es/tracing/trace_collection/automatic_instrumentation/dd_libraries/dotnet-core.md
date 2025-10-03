@@ -51,7 +51,7 @@ type: lenguaje de código múltiple
 
 El rastreador de .NET es compatible con la instrumentación en .NET Core 3.1, .NET 5, .NET 6, .NET 7, .NET 8 y .NET 9.
 
-Para ver la lista completa de los requisitos de compatibilidad de la biblioteca .NET Core y de la arquitectura de procesadores de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
+Para ver la lista completa de los requisitos de compatibilidad de la librería .NET Core y de la arquitectura de procesadores de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
 
 ## Para instalar y empezar a utilizar
 
@@ -60,7 +60,7 @@ Para ver la lista completa de los requisitos de compatibilidad de la biblioteca 
 </div>
 
 <div class="alert alert-warning">
- <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación. 
+ <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación.
 </div>
 
 <div class="alert alert-info">
@@ -77,7 +77,7 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][12].
 
 ### Instalación del rastreador
 
-Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
+Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la librería de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
 Puedes instalar el rastreador .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows o Linux. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
 
@@ -228,7 +228,7 @@ Después de activar el rastreador .NET para tu servicio:
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][4].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][4].
 
 ## Instrumentación personalizada
 
@@ -284,7 +284,7 @@ Para adjuntar la instrumentación automática a tu servicio, debes configurar la
 ### Windows
 
 <div class="alert alert-warning">
-  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la biblioteca de .NET en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Deberías limitar la instrumentación a solo las aplicaciones que deben instrumentarse. <strong>No configures estas variables de entorno de forma global ya que esto causará la instrumentación de <em>todos</em> los procesos de .NET en el host.</strong>
+  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la librería de .NET en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Deberías limitar la instrumentación a solo las aplicaciones que deben instrumentarse. <strong>No configures estas variables de entorno de forma global ya que esto causará la instrumentación de <em>todos</em> los procesos de .NET en el host.</strong>
 </div>
 
 #### Servicios de Windows
@@ -417,7 +417,7 @@ Cuando utilizas `systemctl` para ejecutar aplicaciones .NET como un servicio, pu
 #### `systemctl` (todos los servicios)
 
 <div class="alert alert-warning">
-  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la biblioteca de .NET en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Deberías limitar la instrumentación a solo las aplicaciones que deben instrumentarse. <strong>No configures estas variables de entorno de forma global ya que esto causará la instrumentación de <em>todos</em> los procesos de .NET en el host.</strong>
+  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la librería de .NET en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Deberías limitar la instrumentación a solo las aplicaciones que deben instrumentarse. <strong>No configures estas variables de entorno de forma global ya que esto causará la instrumentación de <em>todos</em> los procesos de .NET en el host.</strong>
 </div>
 
 Cuando utilizas `systemctl` para ejecutar aplicaciones .NET como un servicio, también puedes configurar variables de entorno para que se carguen para todos los servicios que ejecuta `systemctl`.

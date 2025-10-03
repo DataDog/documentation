@@ -28,6 +28,9 @@ further_reading:
  - link: "/real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions"
    tag: "Documentation"
    text: "RUM iOS and tvOS monitoring supported versions"
+ - link: "/real_user_monitoring/guide/mobile-sdk-upgrade"
+   tag: "Documentation"
+   text: "Upgrade RUM Mobile SDKs"
 ---
 
 ## Overview
@@ -47,7 +50,7 @@ Declare the iOS library as a dependency depending on your package manager. Swift
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:
@@ -158,7 +161,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -189,7 +192,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -221,7 +224,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -253,7 +256,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -285,7 +288,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -317,7 +320,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -349,7 +352,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -429,7 +432,7 @@ RUM.enable(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogRUM;
 
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];

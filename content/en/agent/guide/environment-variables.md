@@ -1,5 +1,6 @@
 ---
 title: Agent Environment Variables
+description: Configure Datadog Agent settings using environment variables as an alternative to datadog.yaml, including naming conventions and systemd usage.
 further_reading:
   - link: "/agent/docker/#environment-variables"
     tag: "Documentation"
@@ -105,7 +106,7 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
-  DD_TAGS=env:dev,service:foo
+  DD_TAGS=env:dev service:foo
   ```
 3. Restart the service for changes to take effect
 

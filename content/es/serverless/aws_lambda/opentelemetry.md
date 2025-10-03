@@ -19,9 +19,9 @@ Existen varias formas de instrumentar las funciones de AWS Lambda con OpenTeleme
 
 ### Compatibilidad de la API de OpenTelemetry en los rastreadores de Datadog
 
-La biblioteca de rastreo de Datadog, que se incluye en la extensión Lambda Datadog tras su instalación, acepta tramos (spans) y trazas (traces) personalizados creados con código instrumentado con OpenTelemetry, procesa la telemetría y la envía a Datadog.
+La librería de rastreo de Datadog, que se incluye en la extensión Lambda Datadog tras su instalación, acepta tramos (spans) y trazas (traces) personalizados creados con código instrumentado con OpenTelemetry, procesa la telemetría y la envía a Datadog.
 
-Puedes utilizar este enfoque si, por ejemplo, tu objetivo principal es el código que ya se ha instrumentado con la API de OpenTelemetry. Esto significa que puedes mantener una instrumentación independiente del proveedor para todos tus servicios, sin dejar de aprovechar la implementación, el etiquetado y las características nativos de Datadog. 
+Puedes utilizar este enfoque si, por ejemplo, tu objetivo principal es el código que ya se ha instrumentado con la API de OpenTelemetry. Esto significa que puedes mantener una instrumentación independiente del proveedor para todos tus servicios, sin dejar de aprovechar la implementación, el etiquetado y las características nativos de Datadog.
 
 Para instrumentar AWS Lambda con la API de OpenTelemetry, define la variable de entorno `DD_TRACE_OTEL_ENABLED` como `true` en tu función de Lambda. Consulta [Instrumentación personalizada con la API de OpenTelemetry][3] para obtener instrucciones específicas del tiempo de ejecución.
 
@@ -30,7 +30,7 @@ Para instrumentar AWS Lambda con la API de OpenTelemetry, define la variable de 
 
 <div class="alert alert-warning">Esta característica está en fase beta.</div>
 
-Este enfoque es análogo a la [Ingesta de OLTP en el Datadog Agent][4]. Se recomienda en situaciones en las que la compatibilidad del rastreo puede no estar disponible para un tiempo de ejecución (por ejemplo, Rust o PHP). 
+Este enfoque es análogo a la [Ingesta de OLTP en el Datadog Agent][4]. Se recomienda en situaciones en las que la compatibilidad del rastreo puede no estar disponible para un tiempo de ejecución (por ejemplo, Rust o PHP).
 
 1. Pídele a OpenTelemetry que exporte tramos a la extensión Datadog Lambda. Luego, añade la instrumentación de OpenTelemetry para AWS Lambda.
 

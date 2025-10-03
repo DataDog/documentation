@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for PHP
+description: Set up Dynamic Instrumentation for PHP applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/php/
 private: true
@@ -13,7 +14,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.45.0][7] or higher.
+1. Install or upgrade your Agent to version [7.49.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 3. Install or upgrade the PHP tracing libraries to version 1.5.0, by following the [relevant instructions][2].
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
@@ -63,4 +64,3 @@ See [Dynamic Instrumentation][5] for information about adding instrumentations a
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [9]: /integrations/guide/source-code-integration/?tab=php
-
