@@ -23,4 +23,9 @@ further_reading:
       text: Session Replay
 ---
 
+
+{% if equals($platform, "browser") %}
+{% partial file="rum/session_replay/browser_setup.mdoc.md" /%}
+{% else /%}
 {% partial file="rum/session_replay/setup_and_configuration.mdoc.md" /%}
+{% /if %}
