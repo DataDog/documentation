@@ -20,7 +20,7 @@ This integration enables responders to publish and update status page notices di
 
 At least one status page is required to enable the Status Pages integration for Incident Management.
 
-You must have a role with Incidents Write and Status Pages Notice Write permissions to add a Status Pages notice from an incident. For more information, see [Datadog Role Permissions][3].
+You must have a role with the Incident Settings Write permission to enable the Status Pages integration for Incident Management.
 
 ## Setup
 
@@ -37,7 +37,7 @@ You must have a role with Incidents Write and Status Pages Notice Write permissi
 1. At the top of the incident page, click **Update Status Page**.
 1. Enter all the required fields, including _Select a Status Page_, _Notice title_, and _Notice status_. You can also specify which status page components are affected.
 
-## Update status page configuration
+## Update a Status Pages notice
 
 After a notice is added to an incident, you can continue updating the status page until the incident is resolved.
 
