@@ -63,6 +63,13 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "BulkDeleteDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk delete datastore items returns \"OK\" response"
+    }
+  ],
   "BulkWriteDatastoreItems": [
     {
       "group": "actions_datastores",

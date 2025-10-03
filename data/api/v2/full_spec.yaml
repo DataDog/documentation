@@ -6616,6 +6616,46 @@ components:
           description: The type of the object, must be `budget`.
           type: string
       type: object
+    BulkDeleteAppsDatastoreItemsRequest:
+      description: Request to delete items from a datastore.
+      properties:
+        data:
+          $ref: '#/components/schemas/BulkDeleteAppsDatastoreItemsRequestData'
+      type: object
+    BulkDeleteAppsDatastoreItemsRequestData:
+      description: Data wrapper containing the data needed to delete items from a
+        datastore.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BulkDeleteAppsDatastoreItemsRequestDataAttributes'
+        id:
+          description: ID for the datastore of the items to delete.
+          type: string
+        type:
+          $ref: '#/components/schemas/BulkDeleteAppsDatastoreItemsRequestDataType'
+      required:
+      - type
+      type: object
+    BulkDeleteAppsDatastoreItemsRequestDataAttributes:
+      description: Attributes of request data to delete items from a datastore.
+      properties:
+        item_keys:
+          description: List of primary keys identifying items to delete from datastore.
+            Up to 100 items can be deleted in a single request.
+          items:
+            type: string
+          maxItems: 100
+          type: array
+      type: object
+    BulkDeleteAppsDatastoreItemsRequestDataType:
+      default: items
+      description: Items resource type.
+      enum:
+      - items
+      example: items
+      type: string
+      x-enum-varnames:
+      - ITEMS
     BulkMuteFindingsRequest:
       description: The new bulk mute finding request.
       properties:
@@ -14732,6 +14772,17 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/DeleteAppsDatastoreItemResponseData'
+      type: object
+    DeleteAppsDatastoreItemResponseArray:
+      description: The definition of `DeleteAppsDatastoreItemResponseArray` object.
+      properties:
+        data:
+          description: The `DeleteAppsDatastoreItemResponseArray` `data`.
+          items:
+            $ref: '#/components/schemas/DeleteAppsDatastoreItemResponseData'
+          type: array
+      required:
+      - data
       type: object
     DeleteAppsDatastoreItemResponseData:
       description: Data containing the identifier of the datastore item that was successfully
@@ -51998,6 +52049,60 @@ paths:
       x-undo:
         type: idempotent
   /api/v2/actions-datastores/{datastore_id}/items/bulk:
+    delete:
+      description: Deletes multiple items from a datastore by their keys in a single
+        operation.
+      operationId: BulkDeleteDatastoreItems
+      parameters:
+      - description: The ID of the datastore.
+        in: path
+        name: datastore_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeleteAppsDatastoreItemsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAppsDatastoreItemResponseArray'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Bulk delete datastore items
+      tags:
+      - Actions Datastores
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - apps_datastore_write
+      x-undo:
+        type: idempotent
     post:
       description: Creates or replaces multiple items in a datastore by their keys
         in a single operation.

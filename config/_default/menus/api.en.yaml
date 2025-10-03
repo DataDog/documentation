@@ -5188,6 +5188,18 @@ menu:
           - BulkWriteDatastoreItems
         unstable: []
         order: 10
+    - name: Bulk delete datastore items
+      url: '#bulk-delete-datastore-items'
+      identifier: actions-datastores-bulk-delete-datastore-items
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteDatastoreItems
+        unstable: []
+        order: 11
     - name: Update datastore item
       url: '#update-datastore-item'
       identifier: actions-datastores-update-datastore-item
