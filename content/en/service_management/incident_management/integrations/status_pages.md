@@ -46,7 +46,6 @@ After a notice is added to an incident, you can continue updating the status pag
 1. In the [Incidents List page][2], open the incident you want to update.
 1. At the top of the incident page, find the status page you added, and hover over the button to open the integration modal. You can update the current status page notice or unlink the notice.
 1. Click **Update** to update the status page notice.
-1. Click **Update Status Page** to open the linked status page details and make your modifications.
 
 ## Further Reading
 
