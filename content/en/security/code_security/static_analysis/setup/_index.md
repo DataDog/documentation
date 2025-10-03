@@ -25,7 +25,7 @@ To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1]
 
 You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infrastructure. Supported repository types include:
 - [GitHub][18] (excluding repositories that use [Git Large File Storage][17])
-- [GitLab.com and GitLab Self-Managed][18]
+- [GitLab.com and GitLab Self-Managed][20]
 - [Azure DevOps][19]
 
 To get started, navigate to the [**Code Security** page][1].
@@ -708,3 +708,4 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
+[20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
