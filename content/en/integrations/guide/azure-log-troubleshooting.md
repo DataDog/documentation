@@ -25,7 +25,7 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 
 **Notes**: 
 - When using the automated log forwarder and the native integrations methods to send logs, Entra Id diagnostic setting is not added automatically and should be set manually.
-- If a diagnostic setting has not been added automatically to your resources/activity logs, check if the maxinimum number of diagnostic settings has been reached and/or if a lock exists on the resource, preventing modifications.
+- If a diagnostic setting has not been added automatically to your resource(s)/activity logs, check if the maxinimum number of diagnostic settings has been reached and/or if a lock exists on the resource(s), preventing modifications.
 - Entra id logs can be searched in Datadog log platform using `source:azure.activedirectory`
 
 ## Automated Log Forwarder 
