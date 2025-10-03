@@ -145,6 +145,7 @@ vector_data: integrations_data/extracted/vector
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/" 
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt

@@ -32,14 +32,14 @@ Static Code Analysis supports scanning for security vulnerabilities and poor cod
 {{< partial name="code_security/languages-getting-started.html" >}}
 
 <!-- </br>  -->
-Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
+Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
 To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
 
 ## Integrate into the development lifecycle
 
 ### Source code management
-{{< whatsnext desc="During code reviews on GitHub, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request. You can also open a pull request directly from Datadog to fix a vulnerability or quality issue." >}}
-    {{< nextlink href="static_analysis/github_pull_requests" >}}GitHub Pull Requests{{< /nextlink >}}
+{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request. You can also open a pull request directly from Datadog to fix a vulnerability or quality issue." >}}
+    {{< nextlink href="static_analysis/github_pull_requests" >}}Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### IDEs
@@ -65,9 +65,30 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
+- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider (GitHub[4], GitLab[5]).
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
+
+### Filter out false positives
+For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. Select the toggle "Filter out false positives" on the [SAST vulnerabilities explorer](https://app.datadoghq.com/security/code-security/sast) to quickly narrow down your initial list for triage. 
+
+For each finding, you can provide Bits AI with feedback on its assessment.
+
+{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+False positive filtering is supported for the following CWEs:
+- [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
+- [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
+- [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
+- [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
+- [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
+- [CWE-79: Cross-site Scripting](https://cwe.mitre.org/data/definitions/79.html)
+- [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
+- [CWE-327: Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)
+- [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
+- [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
+- [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)
+- [CWE-502: Deserialization of Untrusted Data](https://cwe.mitre.org/data/definitions/502.html)
+{{% /collapse-content %}}
 
 ## Customize your configuration
 To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
@@ -110,7 +131,7 @@ paths:
 In Datadog Static Code Analysis, there are two types of suggested fixes:
 
 1. **Deterministic Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
-2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively. *This feature is opt-in*.
+2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
 
 <!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
@@ -120,11 +141,10 @@ In Datadog Static Code Analysis, there are two types of suggested fixes:
 
 <!-- {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}} -->
 
-You can push a code change to fix an issue found by Static Code Analysis directly from a result in Datadog in two ways.
+If GitHub is your source code manager, you can push a code change to fix a SAST issue directly from Datadog in two ways.
 
 #### Open a pull request
-
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10].
+If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. View a specific SAST result in Code Security.
@@ -155,6 +175,7 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [2]: /security/code_security/static_analysis_rules?categories=Security
 [3]: /security/code_security/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/
+[5]: /integrations/gitlab-source-code/
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
 [8]: /security/code_security/static_analysis/setup/#customize-your-configuration

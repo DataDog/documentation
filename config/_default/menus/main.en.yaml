@@ -304,66 +304,6 @@ menu:
       parent: essentials_heading
       weight: 50000
       identifier: agent
-    - name: Basic Agent Usage
-      url: agent/basic_agent_usage/
-      parent: agent
-      identifier: basic_agent_usage
-      weight: 1
-    - name: AIX
-      identifier: basic_agent_usage_aix
-      url: agent/basic_agent_usage/aix/
-      weight: 101
-      parent: basic_agent_usage
-    - name: Linux
-      identifier: basic_agent_usage_linux
-      url: agent/basic_agent_usage/linux/
-      weight: 102
-      parent: basic_agent_usage
-    - name: Ansible
-      identifier: basic_agent_usage_ansible
-      url: agent/basic_agent_usage/ansible/
-      parent: basic_agent_usage
-      weight: 104
-    - name: Chef
-      identifier: basic_agent_usage_chef
-      url: agent/basic_agent_usage/chef/
-      weight: 106
-      parent: basic_agent_usage
-    - name: Heroku
-      identifier: basic_agent_usage_heroku
-      url: agent/basic_agent_usage/heroku/
-      weight: 109
-      parent: basic_agent_usage
-    - name: Mac OS X
-      identifier: basic_agent_usage_osx
-      url: agent/basic_agent_usage/osx/
-      weight: 110
-      parent: basic_agent_usage
-    - name: Puppet
-      identifier: basic_agent_usage_puppet
-      url: agent/basic_agent_usage/puppet/
-      weight: 112
-      parent: basic_agent_usage
-    - name: SaltStack
-      identifier: basic_agent_usage_saltstack
-      url: agent/basic_agent_usage/saltstack/
-      weight: 115
-      parent: basic_agent_usage
-    - name: SCCM
-      identifier: basic_agent_usage_sccm
-      url: agent/basic_agent_usage/sccm/
-      weight: 116
-      parent: basic_agent_usage
-    - name: Windows
-      identifier: basic_agent_usage_windows
-      url: agent/basic_agent_usage/windows/
-      weight: 119
-      parent: basic_agent_usage
-    - name: From Source
-      identifier: basic_agent_usage_source
-      url: agent/basic_agent_usage/source/
-      weight: 120
-      parent: basic_agent_usage
     - name: Architecture
       url: agent/architecture/
       parent: agent
@@ -379,6 +319,61 @@ menu:
       parent: agent
       identifier: agent_supported_platforms
       weight: 4
+    - name: AIX
+      identifier: basic_agent_usage_aix
+      url: agent/supported_platforms/aix/
+      weight: 401
+      parent: agent_supported_platforms
+    - name: Linux
+      identifier: basic_agent_usage_linux
+      url: agent/supported_platforms/linux/
+      weight: 402
+      parent: agent_supported_platforms
+    - name: Ansible
+      identifier: basic_agent_usage_ansible
+      url: agent/supported_platforms/ansible/
+      parent: agent_supported_platforms
+      weight: 403
+    - name: Chef
+      identifier: basic_agent_usage_chef
+      url: agent/supported_platforms/chef/
+      weight: 404
+      parent: agent_supported_platforms
+    - name: Heroku
+      identifier: basic_agent_usage_heroku
+      url: agent/supported_platforms/heroku/
+      weight: 405
+      parent: agent_supported_platforms
+    - name: MacOS 
+      identifier: basic_agent_usage_osx
+      url: agent/supported_platforms/osx/
+      weight: 406
+      parent: agent_supported_platforms
+    - name: Puppet
+      identifier: basic_agent_usage_puppet
+      url: agent/supported_platforms/puppet/
+      weight: 407
+      parent: agent_supported_platforms
+    - name: SaltStack
+      identifier: basic_agent_usage_saltstack
+      url: agent/supported_platforms/saltstack/
+      weight: 408
+      parent: agent_supported_platforms
+    - name: SCCM
+      identifier: basic_agent_usage_sccm
+      url: agent/supported_platforms/sccm/
+      weight: 409
+      parent: agent_supported_platforms
+    - name: Windows
+      identifier: basic_agent_usage_windows
+      url: agent/supported_platforms/windows/
+      weight: 410
+      parent: agent_supported_platforms
+    - name: From Source
+      identifier: basic_agent_usage_source
+      url: agent/supported_platforms/source/
+      weight: 411
+      parent: agent_supported_platforms
     - name: Log Collection
       url: agent/logs/
       identifier: agent_logs
@@ -711,18 +706,18 @@ menu:
       identifier: otel-setup-otlp-ingest
       parent: otel-setup-other
       weight: 4022
-    - name: Agentless Deployment
-      url: /opentelemetry/setup/agentless
+    - name: Direct OTLP Ingest
+      url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
       parent: otel-setup-other
       weight: 4023
     - name: Logs Endpoint
-      url: /opentelemetry/setup/agentless/logs
+      url: /opentelemetry/setup/otlp_ingest/logs
       parent: otel-setup-intake-endpoint
       weight: 40231
       identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
-      url: /opentelemetry/setup/agentless/metrics
+      url: /opentelemetry/setup/otlp_ingest/metrics
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
@@ -2465,11 +2460,16 @@ menu:
       parent: incidents_integrations
       identifier: incidents_jira
       weight: 901
+    - name: Slack
+      url: service_management/incident_management/integrations/slack
+      parent: incidents_integrations
+      identifier: incidents_slack
+      weight: 902
     - name: Statuspage
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_statuspage
-      weight: 902
+      weight: 903
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
@@ -2879,11 +2879,21 @@ menu:
       parent: private_actions
       identifier: use_private_actions
       weight: 201
+    - name: Run a Script
+      url: actions/private_actions/run_script/
+      parent: private_actions
+      identifier: run_script
+      weight: 202
+    - name: Update the Private Action Runner
+      url: actions/private_actions/update_private_action_runner/
+      parent: private_actions
+      identifier: update_private_action_runner
+      weight: 203
     - name: Private Action Credentials
       url: actions/private_actions/private_action_credentials/
       parent: private_actions
       identifier: private_actions_creds
-      weight: 202
+      weight: 204
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
@@ -3598,11 +3608,16 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
       weight: 103
+    - name: Oracle
+      url: cloud_cost_management/setup/oracle/
+      parent: cloud_cost_setup
+      identifier: cloud_cost_oracle
+      weight: 104
     - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 104
+      weight: 105
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
@@ -4446,16 +4461,21 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
       weight: 306
+    - name: Heroku
+      url: database_monitoring/setup_postgres/heroku
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_heroku
+      weight: 307
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 307
+      weight: 308
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 308
+      weight: 309
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
@@ -4705,26 +4725,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_instrumentation
       weight: 2
-    - name: Automatic Instrumentation
+    - name: Automatic
       url: llm_observability/instrumentation/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
       weight: 201
-    - name: Custom Instrumentation
-      url: llm_observability/instrumentation/custom_instrumentation
+    - name: SDK Reference
+      url: llm_observability/instrumentation/sdk
       parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_custom
+      identifier: llm_obs_instrumentation_sdk
       weight: 202
     - name: HTTP API
       url: llm_observability/instrumentation/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
       weight: 203
-    - name: SDK Reference
-      url: llm_observability/instrumentation/sdk
-      parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_sdk
-      weight: 204
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
@@ -4735,10 +4750,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
       weight: 301
-    - name: Connect with APM
+    - name: Correlate with APM
       url: llm_observability/monitoring/llm_observability_and_apm
       parent: llm_obs_monitoring
-      identifier: llm_obs_monitoring_apm
+      identifier: llm_obs_correlate_apm
       weight: 302
     - name: Cluster Map
       url: llm_observability/monitoring/cluster_map/
@@ -4755,10 +4770,10 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Out-of-the-Box
-      url: llm_observability/evaluations/ootb_evaluations
+    - name: Managed
+      url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
-      identifier: llm_obs_ootb_evaluations
+      identifier: llm_obs_managed_evaluations
       weight: 401
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
@@ -4770,10 +4785,10 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 403
-    - name: Custom
-      url: llm_observability/evaluations/submit_evaluations
+    - name: External
+      url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
-      identifier: llm_obs_submit_evaluations
+      identifier: llm_obs_external_evaluations
       weight: 404
     - name: Experiments
       url: llm_observability/experiments
@@ -5282,6 +5297,17 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_data_collected
       weight: 2
+    - name: Feature Flags
+      url: feature_flags/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: feature_flags
+      weight: 80000
+    - name: Guides
+      url: feature_flags/guide
+      parent: feature_flags
+      identifier: feature_flags_guide
+      weight: 1
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines

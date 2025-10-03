@@ -1,5 +1,6 @@
 ---
 title: Set Up the Datadog MCP Server
+description: "Learn how to set up and configure the Datadog MCP Server to connect your AI agents to Datadog observability tools and data."
 private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
@@ -56,7 +57,7 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -125,6 +126,19 @@ These examples are for the US1 site:
       "datadog": {
         "type": "http",
         "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      }
+    }
+  }
+  ```
+  * Amazon Q CLI: `~/.aws/amazonq/default.json`
+
+  ```json
+  {
+    "mcpServers": {
+      "datadog": {
+        "type": "http",
+        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+        "oauthScopes": []
       }
     }
   }

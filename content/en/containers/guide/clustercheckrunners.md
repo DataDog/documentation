@@ -1,5 +1,6 @@
 ---
 title: Cluster Check Runners
+description: Configure dedicated cluster check runners for scaling cluster and endpoint checks in Kubernetes environments
 aliases:
 - /agent/cluster_agent/clusterchecksrunner
 - /containers/cluster_agent/clusterchecksrunner
