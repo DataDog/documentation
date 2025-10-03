@@ -34,11 +34,15 @@ Use this guide to troubleshoot missing azure logs forwarded with the following m
 
 ### Check DD_SITE and DD_API_KEY values
 
-If you are missing all logs, ensure that the [selected DC][9] is correct and that the api key points to the correct org. To check these values go to the resource group where all the resources deployed by the ARM template are present, click on settings > deployment then click on your latest deployment and redeploy. 
+If all logs are missing, verify your [Datadog site][9] and API key:
+
+1. In the resource group where the LFO resources were deployed, go to Settings > Deployments.
+2. Select the most recent deployment.
+3. Click Redeploy to check and modify the values.
 
 ### Verify logs are present in the storage account container(s)
 
-Take note of the region of the resource(s) missing logs in Datadog (if the logs missing are azure [resource logs][10]). Then go to the storage account deployed by the ARM template in the same region as the resource(s) and look if there is a container with the expected logs.
+For missing Azure resource logs, find the ARM-deployed storage account in the resource's region and check for the container with the expected logs.
 
 {{< img src="integrations/guide/gcp-metric-discrepancy/storage_account_container.png" alt="storage account container" >}}
 
@@ -46,10 +50,7 @@ Take note of the region of the resource(s) missing logs in Datadog (if the logs 
 
 ### Inspect the `containerAppConsole` logs of the forwarder jobs
 
-[These logs][11] capture the standard output and standard error streams from the forwarder's containers. They help diagnose issues such as Application Errors and Exceptions.
-   
-To inspect these logs, enable them and send them to a destination: select the forwarder container apps environment from the same region as your resource and storage account. 
-For instance, if your resource and storage account are in Japan West, choose the forwarder container apps environment from that region. Next, go to logging options and select to send logs to Azure Monitor or a Log Analytics workspace.
+[These logs][11] help you diagnose application errors and exceptions. To inspect them, enable logging within the container apps environment that is in the same region as your resource(s) missing the logs.
 
 {{< img src="integrations/guide/azure-log-troubleshooting/list_forwarder_env.png" alt="list of forwarder container apps environment" >}}
 
@@ -75,11 +76,11 @@ az provider register --namespace Microsoft.EventHub
 
 If you are missing all logs, ensure that the [selected DC][9] is correct and that the api key points to the correct org. 
 
-**Note**: once you modified the app settings, Azure will warn you that your app may restart.
+**Note**: if the datadog site and api key have been set in the function app settings, your app may restart if you modify them. 
 
 ### Identify potential Event Hub Bottlenecks
 
-If there is a spike in the number of incoming messages while outgoing messages drop, it could indicate a bottleneck.  Use the following metrics to investigate potential bottlenecks:
+If there is a spike in the number of incoming messages while outgoing messages drop, it could indicate a bottleneck. Use the following metrics to investigate potential bottlenecks:
 
 - `azure.eventhub_namespaces.incoming_messages`
 - `azure.eventhub_namespaces.incoming_bytes`
@@ -88,12 +89,12 @@ If there is a spike in the number of incoming messages while outgoing messages d
 - `azure.eventhub_namespaces.throttled_requests`
 - `azure.eventhub_namespaces.server_errors`
 
-**Note**: If the bottleneck is not addressed and log delay starts increasing, it is possible this could lead to missing events as [logs that are delayed][12] by 18 hours or more will be dropped by Datadog logs intake. 
+**Note**: If the bottleneck is not addressed and log delay starts increasing, it is possible this could lead to missing events as [logs that are delayed][12] by 18 hours or more are dropped by Datadog logs intake. 
 
 In response to these symptoms there are two suggestions:
 
-- [Scale up the event hub partitions][13] in Azure to handle your expected throughput (maximum 32). Azure does not allow you to scale partitions in place unless it's a premium or dedicated event hub namespace, therefore a new event hub must be created with the desired partitions and reconfigured (diagnostic settings and forwarder trigger).  It’s recommended you consult [Azure support][14] for advice on your scaling needs.
-- Split the Azure log forwarder pipelines in Datadog and have each one process the logs from a subset of resources (based on priority, or some kind of other rule). This would reduce the number of logs that one individual pipeline would need to process and allow to handle more logs simultaneously.
+- To handle higher throughput, [scale up your Event Hub partitions][13] (maximum 32). Because in-place scaling is only available for Premium or Dedicated tiers, you must create a new event hub with the desired partition count and then reconfigure its diagnostic settings and forwarder trigger. Consult [Azure support][14] for scaling advice.
+- Split the Azure log forwarder into multiple pipelines in Datadog, with each one processing a specific subset of resources based on rules like priority. This would allow to handle more logs simultaneously.
 
 ### Inspect function metrics
 
@@ -107,14 +108,14 @@ Ensure the function app is executing by looking at the following function metric
 - `azure.functions.http5xx`
 
 **Notes**: 
-- The log forwarder function has been updated to use the [Azure Functions V4 Programming model][15]. As a consequence, if you had installed this log forwarding pipeline before the change and you wish to do some manual updates, it is no longer possible to edit the function code directly in the Azure portal as the v4 programming model is designed to be deployment-package-based. If you need to update your azure function code to the [latest version][16] or customize the code, contact [Datadog support][17] to get detailed instructions. 
-- We recommend transitioning to log collection through the [Automated Log Forwarder (LFO)][18] to enhance efficiency and reliability while reducing costs. This method automates the entire process of collecting and forwarding logs from all your Azure resources to Datadog.
+- The log forwarder now uses the [Azure Functions V4 Programming model][15], which is package-based and disables direct code editing in the Azure portal. To update or customize your function, you must contact [Datadog support][17] for instructions.
+- For more reliable, efficient, and cost-effective log collection, we recommend using the [Automated Log Forwarder (LFO)][18]. It fully automates the process of forwarding logs from all your Azure resources directly to Datadog.
 
 ## Blob Storage 
 
 **Notes**: 
 - All logs sent with the native integration are tagged with `forwardername:<forwarder_function_name>`
-- Be aware that when new logs are added to a blob file, the function is triggered to send the entirety of the file's content, rather than just the recent additions.
+- Be aware that when new logs are added to a blob file, the function is triggered to send the entirety of the file's content, rather than the recent additions only.
 
 ### Check DD_SITE and DD_API_KEY values
 
