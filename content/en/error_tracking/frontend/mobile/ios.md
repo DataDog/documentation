@@ -22,6 +22,10 @@ To symbolicate your stack traces, find and upload your `.dSYM` files to Datadog.
 
 Your crash reports appear in [**Error Tracking**][1].
 
+## Compatibility
+
+See [Supported versions][15] for a list of operating system versions and platforms that are compatible with the iOS SDK.
+
 ## Setup
 
 To start sending Error Tracking data from your iOS or tvOS application to Datadog:
@@ -484,7 +488,9 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information (a process called symbolication), Datadog requires `.dSYM` files, which are generated in your application's build or distribution process.
 
-To help you debug errors, Datadog uses a unique generated build ID to deobfuscate stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
+**Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture. `.dSYM` files are limited in size to **2 GB** each.
+
+To help you debug errors, Datadog uses a unique generated build ID to deobfuscated stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
@@ -621,8 +627,6 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
 3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [**Error Tracking**][1].
 
-**Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture.
-
 ## Advanced Error Tracking features
 
 {{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" expanded=false id="set-tracking-consent" %}}
@@ -679,7 +683,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Add watchdog terminations reporting" level="h4" expanded=false id="add-watchdog-terminations-reporting" %}}
+{{% collapse-content title="Add watchdog termination reporting" level="h4" expanded=false id="add-watchdog-termination-reporting" %}}
 
 In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These watchdog terminations are fatal and not recoverable (more details in the official [Apple documentation][13]).
 
@@ -697,7 +701,7 @@ When enabled, a watchdog termination is reported and attached to the previous us
 
 - And the device did not reboot (which includes upgrades of the operating system).
 
-{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="A watchdog termination in the Error Tracking side panel." style="width:60%;" >}}
+{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination-1.png" alt="A watchdog termination in the Error Tracking side panel." style="width:100%;" >}}
 
 #### Enable watchdog terminations reporting
 
@@ -721,11 +725,6 @@ To enable watchdog terminations reporting:
 To disable watchdog terminations reporting, update the initialization snippet and set the `trackWatchdogTerminations` parameter to `false`.
 
 {{% /collapse-content %}}
-
-## Limitations
-
-- See [Supported versions][15] for a list operating system versions and platforms that are compatible with the iOS SDK.
-- `.dSYM` files are limited in size to **2 GB** each.
 
 ## Further reading
 
