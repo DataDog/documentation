@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Tags help you investigate and understand your cloud and SaaS costs across any dimensions. Tags are made of tag keys and values (ex: in `aws_product:ec2`, the tag key is `aws_product`, and the value is `ec2`.)
+Tags help you investigate and understand your cloud and SaaS costs across any dimensions. Tags consist of tag keys and values (for example: in `aws_product:ec2`, the tag key is `aws_product`, and the value is `ec2`.)
 
 Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve higher cost allocation and get deeper insight into who owns infrastructure costs in your ever changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment. 
 
@@ -30,10 +30,15 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 |---|---|---|
 | All Providers | Bill columns | Such as AWS Cost and Usage Report (CUR) columns, Google Billing Export columns, etc |
 | Datadog Enrichment | Host Agent | Tags added to host metadata by the Datadog agent running on the host |
-| Datadog Enrichment | Service Catalog | Tags associated with this service in the APM Service Catalog |
+| Datadog Enrichment | Software Catalog | Tags associated with this service in the APM Service Catalog |
 | Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
+<<<<<<< HEAD
 | Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the [Datadog Cloud Network][12] product. Requires enabling Cloud Network in the Datadog agent. See [data transfer cost allocation][13] for more details |
+=======
+| Datadog Enrichment | Data Observability | Tags from the Datadog’s Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
+| Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the Datadog Cloud Network product. Requires enabling Cloud Network in the Datadog agent |
+>>>>>>> 30e05c6471ac26d86998fc56bab3398d012956a6
 | Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Pod | User-defined tags found on Kubernetes pods monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Persistent Volume | User-defined tags found on Persistent Volumes in Kubernetes clusters monitored with Datadog |
@@ -59,7 +64,7 @@ Datadog also adds provider specific tags:
 | Google Cloud | Google Billing Export - Project Labels| User-defined labels on a project in Google Cloud, found in the project.labels column in the billing export |
 | Google Cloud | Google Billing Export - System Resource Labels | System-generated labels on a resource in Google Cloud, found in the system_labels column in the billing export |
 | Google Cloud | Google Billing Export - User Resource Labels | User-defined labels on a cloud resource in Google Cloud, found in the labels column in the billing export |
-| Google Cloud | Google Billing Export - User Resource Tags | User-defined tags on a cloud resource in Google Cloud, found in the tags column in the billing export. The `goog-originating-sku-description` tag is added leveraging Google's SKU APis, to provide more granular SKU details for commitment line items. |
+| Google Cloud | Google Billing Export - User Resource Tags | User-defined tags on a cloud resource in Google Cloud, found in the tags column in the billing export. The `goog-originating-sku-description` tag is added leveraging Google's SKU APIs, to provide more granular SKU details for commitment line items. |
 | Google Cloud | GKE Pod | User-defined labels found on pods running in Google Kubernetes Engine | 
 | Oracle Cloud | OCI Cost Export - User Resource Tags | User-defined tags on a cloud resource in Oracle Cloud Infrastructure, from the Tags column in the OCI FOCUS cost export |
 | Datadog | Datadog Usage Attribution | User-defined tags for Usage Attribution in Datadog Plan and Usage |
@@ -85,9 +90,13 @@ Cloud Cost Management normalizes tag **values** as well, while maintaining human
 
 ## How tags are prioritized
 
-It's possible for a cost data row to have multiple values, if tag values from 2+ sources are combined, and one is not prioritized over the other.
+It's possible for a cost data row to have multiple values for the same tag key, if tag values from 2+ sources are combined, and one is not prioritized over the other.
 
+<<<<<<< HEAD
 To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace an Kubernetes node tag `team:compute`.
+=======
+To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace a Kubernetes node tag `team:compute`.
+>>>>>>> 30e05c6471ac26d86998fc56bab3398d012956a6
 
 Sources higher in this list replace tag values from sources lower in this list, if there are conflicts:
 - Custom Allocation Rules
