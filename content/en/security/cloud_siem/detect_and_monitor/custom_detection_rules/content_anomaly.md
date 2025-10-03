@@ -89,6 +89,7 @@ To calculate the Jaccard similarity between the two logs:
 - The intersection of `log1` and `log2` results in this set of words: `{auth, k8s, public}`.
 - The union of `log1` and `log2` results in this set of words: `{auth, k8s, public, swe, pm}`.
 - The Jaccard similarity is calculated using the number of words in the results:
+
 $$\text"J(log1,log2)" = 3 / 5 = 0.6$$
 
 #### Multi-word fields
@@ -108,6 +109,7 @@ To calculate the Jaccard similarity between the two logs:
 - The intersection of `log1` and `log2` results in this set of words: `{User, network}`.
 - The union of `log1` and `log2` results in this set of words: `{User, connected, to, abc, network, got, unauthorized, access}`.
 - The Jaccard similarity is calculated using the number of elements in the results:
+
 $$\text"J(log1,log2)" = 2 / 8 = 0.25$$
 
 ## Comparing content anomaly method with other detection methods
