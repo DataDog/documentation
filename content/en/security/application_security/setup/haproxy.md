@@ -98,6 +98,8 @@ The `datadog_aap_blocking_response.lua` script is responsible for sending a cust
 
 It is important that no custom modifications are made to this file.
 
+### Validation
+
 <div class="alert alert-info">
   <strong>Note:</strong> This lua script is not invoked on every request processed by HAProxy. It is only invoked when a request is blocked by App and API Protection. This design ensures optimal performance by avoiding the overhead of running Lua code for all requests.
 </div>
