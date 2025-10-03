@@ -48,6 +48,8 @@ Test Impact Analysis performs test impact analysis based on code coverage to det
 
 If you are authoring a commit that includes any of those cases, you can force-disable test skipping in Test Impact Analysis by adding `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 
+In Python, some packages, such as `sumy` and `sendgrid`, install modules under the `test.*` or `tests.*` package namespace, which can cause tests to be detected as third-party packages if they are located in a folder with the same name. If you use one of those packages, coverage data for tests may be incomplete, which may cause a test to be skipped when it should have been run. In this case, you should disable Test Impact Analysis for your project. This is a known issue that will be resolved in a future version of `dd-trace-py`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
