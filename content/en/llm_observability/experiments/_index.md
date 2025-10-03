@@ -26,10 +26,6 @@ Install Datadog's LLM Observability Python SDK:
 pip install ddtrace>=3.15.0
 ```
 
-### Cookbooks
-
-To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
-
 ### Setup
 
 Enable LLM Observability:
@@ -365,6 +361,10 @@ jobs:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
 ```
+
+## Cookbooks
+
+To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
 
 ## HTTP API
 
