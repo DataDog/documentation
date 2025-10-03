@@ -128,7 +128,7 @@ You can also use the OpenTelemetry Resource Attributes environment variables to 
          - name: OTEL_SERVICE_NAME
            value: "<SERVICE>"
 ```
-<div class="alert alert-warning"><strong>Note</strong>: The <code>OTEL_SERVICE_NAME</code> environment variable takes precedence over the <code>service.name</code> attribute in the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable.</div>
+<div class="alert alert-warning">The <code>OTEL_SERVICE_NAME</code> environment variable takes precedence over the <code>service.name</code> attribute in the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable.</div>
 
 ##### Partial configuration
 

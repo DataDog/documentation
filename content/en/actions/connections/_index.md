@@ -192,7 +192,7 @@ To delete a connection group:
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
 
-<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group impacts any workflows and apps that are using that group.</div>
+<div class="alert alert-warning">Deleting a connection group impacts any workflows and apps that are using that group.</div>
 
 ## Further reading
 
