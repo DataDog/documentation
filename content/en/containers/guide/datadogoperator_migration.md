@@ -1,3 +1,10 @@
+---
+title: Migrating to version 1.0 of the Datadog Operator
+description: Guide for migrating from v1alpha1 to v2alpha1 of the DatadogAgent custom resource using conversion webhook
+aliases:
+ - /agent/guide/datadogoperator_migration
+---
+
 ## Migrating to version 1.0 of the Datadog Operator
 
 <div class="alert alert-warning">

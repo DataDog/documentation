@@ -1,5 +1,6 @@
 ---
 title: Track workflows
+description: Monitor workflow activity, metrics, and costs using dashboards, audit trails, event management, and usage attribution.
 disable_toc: false
 aliases:
 - /service_management/workflows/track

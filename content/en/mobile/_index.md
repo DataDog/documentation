@@ -1,5 +1,6 @@
 ---
 title: Datadog Mobile App
+description: "Monitor your infrastructure on-the-go with the Datadog mobile app for iOS and Android, featuring dashboards, alerts, incidents, and on-call management."
 aliases:
 - /service_management/mobile/
 algolia:
@@ -132,7 +133,7 @@ On the Incidents page, you can view, search, and filter all incidents that you h
 {{% /tab %}}
 {{< /tabs >}}
 
-The Notification Center lists all push notifications recieved so that notification context is never lost. You can filter by notification type.
+The Notification Center lists all push notifications received so that notification context is never lost. You can filter by notification type.
 
 ## Dashboards
 

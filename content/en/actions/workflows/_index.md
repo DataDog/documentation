@@ -1,5 +1,6 @@
 ---
 title: Workflow Automation
+description: Orchestrate and automate end-to-end processes with workflows that connect actions across your infrastructure and tools.
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']

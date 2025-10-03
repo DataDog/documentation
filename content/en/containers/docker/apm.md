@@ -1,5 +1,6 @@
 ---
 title: Tracing Docker Applications
+description: Configure APM trace collection for applications running in Docker containers using the Datadog Agent
 aliases:
     - /tracing/docker/
     - /tracing/setup/docker/

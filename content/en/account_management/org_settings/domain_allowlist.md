@@ -1,5 +1,6 @@
 ---
 title: Domain Allowlist
+description: Restrict email domains that can receive monitor and scheduled report notifications with domain allowlist controls.
 further_reading:
 - link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
   tag: "In the app"

@@ -1,5 +1,6 @@
 ---
 title: Automatic Faulty Cloud & SaaS API Detection
+description: "Detect third-party provider issues within minutes using Watchdog's monitoring of external APIs like AWS, Stripe, OpenAI, and other cloud services."
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-outage-detection/"
   tag: "Blog"

@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Notebooks Analysis Features
+description: "Step-by-step walkthrough of multi-step data analysis in Notebooks including data import, parsing, joins, transformations, and visualizations."
 further_reading:
 - link: "/notebooks/advanced_analysis"
   tag: "Documentation"

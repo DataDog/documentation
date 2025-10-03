@@ -1,5 +1,6 @@
 ---
 title: Custom Time Frames
+description: Use custom time frame syntaxes including fixed dates, relative dates, and calendar aligned periods in Datadog dashboards.
 ---
 
 ## Overview

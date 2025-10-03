@@ -1,5 +1,6 @@
 ---
 title: Trace Metrics
+description: Comprehensive guide to APM trace metrics including namespace, types (hits, errors, latency, Apdex), and how they're calculated from application traffic.
 further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'

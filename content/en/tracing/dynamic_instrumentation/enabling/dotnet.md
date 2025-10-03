@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for .NET
+description: "Learn how to install, configure, and enable Dynamic Instrumentation for .NET applications to add instrumentation without modifying code."
 aliases:
     - /dynamic_instrumentation/enabling/dotnet/
 private: false
@@ -20,7 +21,7 @@ For a better experience, Datadog recommends enabling [autocomplete and search (i
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.45.0][7] or higher.
+1. Install or upgrade your Agent to version [7.49.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 3. Install or upgrade the .NET tracing libraries to version 2.54.0, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.

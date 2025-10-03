@@ -182,7 +182,7 @@ See the [DORA Metrics API reference documentation][13] for the full spec and add
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
 ```shell
-curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
+curl -X POST "https://api.<DD_SITE>/api/v2/dora/failure" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -209,7 +209,7 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
 EOF
 ```
 
-[13]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[13]: /api/latest/dora-metrics/#send-a-failure-event-for-dora-metrics
 [14]: https://app.datadoghq.com/ci/dora
 [15]: https://app.datadoghq.com/ci/settings/dora
 

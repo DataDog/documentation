@@ -1,5 +1,6 @@
 ---
 title: NetFlow Monitor
+description: "Monitor network traffic flows on routers, switches, and firewalls to alert on throughput and congestion using NetFlow data."
 further_reading:
 - link: "/network_monitoring/netflow/#visualization"
   tag: "Documentation"

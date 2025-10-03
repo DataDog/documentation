@@ -71,4 +71,4 @@ If you need the Datadog support team to help investigate, include the following 
 [6]: https://webpack.js.org
 [7]: https://esbuild.github.io/
 [8]: /serverless/guide/serverless_tracing_and_bundlers/
-[9]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/lambda#readme
+[9]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-lambda#readme
