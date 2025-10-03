@@ -10,19 +10,15 @@ further_reading:
       text: 'Create and manage monitors to notify your teams when it matters.'
 ---
 
-## LLM Observability metrics
+After you instrument your application with LLM Observability, you can access LLM Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.
 
-LLM Observability metrics are collected after enabling LLM Observability and instrumenting your application. These metrics are available for dashboards and monitors.
-
-These metrics capture **span** counts, **error** counts, **token usage**, and **latency** measures for your LLM applications. They are calculated based on 100% of the application's traffic.
-
-**Note**: Other tags set on spans are not available as tags on LLM Observability metrics.
+<div class="alert alert-info">Other tags set on spans are not available as tags on LLM Observability metrics.</div>
 
 ### Span metrics
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
-| `ml_obs.span` | Total amount of spans with a span kind | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
+| `ml_obs.span` | Total number of spans with a span kind | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.duration` | Total duration of spans in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.error` | Number of errors that occurred in the span | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 
@@ -61,10 +57,8 @@ These metrics capture **span** counts, **error** counts, **token usage**, and **
 ### Deprecated metrics
 
 <div class="alert alert-warning">
-<strong>Important:</strong> The following metrics have been deprecated and are maintained for backward compatibility only. Datadog strongly recommends using the current token metrics instead for all token usage measurement use cases.
+The following metrics are deprecated, and are maintained only for backward compatibility. Datadog strongly recommends using non-deprecated token metrics for all token usage measurement use cases.
 </div>
-
-The following metrics have been deprecated:
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
@@ -73,9 +67,9 @@ The following metrics have been deprecated:
 
 ## Next steps
 
-{{< whatsnext desc="Use what you set up:" >}}
-    {{< nextlink href="dashboards/" >}}Create a Dashboard to track and correlate LLM Observability metrics{{< /nextlink >}}
-    {{< nextlink href="monitors/create/" >}}Create Monitors that alert and notify you when something is unexpected{{< /nextlink >}}
+{{< whatsnext desc="Make use of your LLM Observability metrics:" >}}
+    {{< nextlink href="dashboards/" >}}Create a dashboard to track and correlate LLM Observability metrics{{< /nextlink >}}
+    {{< nextlink href="monitors/create/" >}}Create a monitor for alerts and notifications{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
