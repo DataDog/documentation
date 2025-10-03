@@ -3316,21 +3316,16 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
       weight: 111
-    - name: Libraries & Integrations
-      url: serverless/libraries_integrations
-      parent: serverless_aws_lambda
-      identifier: libraries_integrations
-      weight: 112
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 113
+      weight: 112
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 114
+      weight: 113
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -3421,16 +3416,21 @@ menu:
       parent: serverless_gcr
       weight: 703
       identifier: serverless_gcr_functions_1st_gen
+    - name: Libraries & Integrations
+      url: serverless/libraries_integrations
+      parent: serverless
+      identifier: libraries_integrations
+      weight: 8
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 8
+      weight: 9
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 9
+      weight: 10
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
