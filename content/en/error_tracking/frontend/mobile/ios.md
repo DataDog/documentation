@@ -433,7 +433,7 @@ To enable app hang monitoring:
 
 1. [Enable Crash Reporting](#step-4---add-crash-reporting).
 
-2. Update the initialization snippet with the `appHangThreshold` parameter:
+2. Update the initialization snippet with the `appHangThreshold` parameter set to the minimal duration you want app hangs to be reported, in seconds. For example, use `0.25` to report hangs lasting at least 250 ms:
 
    ```swift
    RUM.enable(
@@ -444,7 +444,7 @@ To enable app hang monitoring:
    )
    ```
 
-3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported, in seconds. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
+   See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
 
    Make sure you follow the steps below to get [deobfuscated stack traces](#step-6---get-deobfuscated-stack-traces), which transform cryptic memory addresses into readable function names and line numbers for effective debugging. 
 
