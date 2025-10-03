@@ -123,8 +123,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 export { handleFleetAutomationCustomRumAction };
-
-//**
-// logs-rum loads once in the build first with the env vars.
-// logs-rum should also load async. so, logs-rum needs to have the env vars all the time. 
-//*/
