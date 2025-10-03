@@ -32,11 +32,9 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 | Datadog Enrichment | Host Agent | Tags added to host metadata by the Datadog agent running on the host |
 | Datadog Enrichment | Software Catalog | Tags associated with this service in the APM Service Catalog |
 | Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
-<<<<<<< HEAD
 | Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the [Datadog Cloud Network][12] product. Requires enabling Cloud Network in the Datadog agent. See [data transfer cost allocation][13] for more details |
-=======
-| Datadog Enrichment | Data Observability | Tags from the Datadog’s Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
+| Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the Datadog Cloud Network product. Requires enabling Cloud Network in the Datadog agent |
 >>>>>>> 30e05c6471ac26d86998fc56bab3398d012956a6
 | Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
@@ -92,11 +90,7 @@ Cloud Cost Management normalizes tag **values** as well, while maintaining human
 
 It's possible for a cost data row to have multiple values for the same tag key, if tag values from 2+ sources are combined, and one is not prioritized over the other.
 
-<<<<<<< HEAD
 To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace an Kubernetes node tag `team:compute`.
-=======
-To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace a Kubernetes node tag `team:compute`.
->>>>>>> 30e05c6471ac26d86998fc56bab3398d012956a6
 
 Sources higher in this list replace tag values from sources lower in this list, if there are conflicts:
 - Custom Allocation Rules
