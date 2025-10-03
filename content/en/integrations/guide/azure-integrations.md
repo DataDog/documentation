@@ -101,16 +101,16 @@ Datadog's Azure integration is built to collect <a href="https://docs.microsoft.
 
 ## Datadog-generated metrics
 
-Datadog automatically queries other resource-specific Azure metadata APIs and uses that information to generate additional timeseries metrics. This provides more than 40 Datadog-generated metrics and dozens of new tags for your Azure services, including:
+Datadog automatically queries other resource-specific Azure metadata APIs and uses that information to generate additional timeseries metrics. There are more than 40 Datadog-generated metrics and dozens of new tags for your Azure services, including:
 
-App Services
-Azure Functions
-App Service Plans
-Azure SQL Databases
-Azure Load Balancers
-Azure Virtual Networks
-Usage and quotas
-Resource counts and statuses
+- App Services
+- Azure Functions
+- App Service Plans
+- Azure SQL Databases
+- Azure Load Balancers
+- Azure Virtual Networks
+- Usage and quotas
+- Resource counts and statuses
 
 ## Configuration
 
