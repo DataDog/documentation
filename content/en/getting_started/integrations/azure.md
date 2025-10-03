@@ -10,12 +10,6 @@ further_reading:
     - link: 'https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
       tag: 'Guide'
       text: 'Why should I install the Datadog Agent on my cloud instances?'
-    - link: 'https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension'
-      tag: 'Guide'
-      text: 'Managing the Azure Native Integration'
-    - link: 'https://www.datadoghq.com/blog/azure-integration-configuration/'
-      text: 'Fine-tune observability configurations for all your Azure integrations in one place'
-      tag: 'Blog'
 ---
 
 ## Overview
@@ -215,171 +209,6 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Azure CLI" level="h4" expanded=false id="azure-cli-setup" %}}
-
-### Choose this if...
-
-- You need to set up access manually for a smaller number of subscriptions or management groups.
-- You want more step-by-step control over assigning permissions and credentials within the Azure UI.
-
-### Instructions
-
-First, log into the Azure account you want to integrate with Datadog:
-
-```shell
-az login
-```
-
-Create a service principal and configure its access to Azure resources:
-
-```shell
-az ad sp create-for-rbac
-```
-
-Display a list of subscriptions so that you can copy and paste the `subscription_id`:
-
-```shell
-az account list --output table
-```
-
-Create an application as a service principal using the format:
-
-```shell
-az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{subscription_id}
-```
-
-Example Output:
-```text
-{
-  "appId": "4ce52v13k-39j6-98ea-b632-965b77d02f36",
-  "displayName": "azure-cli-2025-02-23-04-27-19",
-  "password": "fe-3T~bEcFxY23R7NHwVS_qP5AmxLuTwgap5Dea6",
-  "tenant": "abc123de-12f1-82de-97bb-4b2cd023bd31"
-}
-```
-
-- This command grants the Service Principal the `monitoring reader` role for the subscription you would like to monitor.
-- The `appID` generated from this command must be entered in the [Datadog Azure integration tile][20] under **Client ID**.
-- Enter the generated `Tenant ID` value in the [Datadog Azure integration tile][20] under **Tenant name/ID**.
-- `--scopes` can support multiple values, and you can add multiple subscriptions or Management Groups at once. See the examples in the **[az ad sp][21]** documentation.
-- Add `--name <CUSTOM_NAME>` to use a hand-picked name, otherwise Azure generates a unique one. The name is not used in the setup process.
-- Add `--password <CUSTOM_PASSWORD>` to use a hand-picked password. Otherwise Azure generates a unique one. This password must be entered in the [Datadog Azure integration tile][1] under **Client Secret**.
-
-Management Group is a valid and recommended option for scope. For example:
-
-```shell
-az account management-group entities list --query "[?inheritedPermissions!='noaccess' && permissions!='noaccess'].{Name:displayName,Id:id}" --output table
-```
-
-- This command displays all the subscriptions and management groups a user has access to.
-- It joins the IDs together and creates the Service-Principal. You can run this one command to create a user and assign roles to every management-group/subscription
-{{% /collapse-content %}} 
-
-{{% collapse-content title="Azure portal" level="h4" expanded=false id="azure-portal-setup" %}}
-
-### Choose this if...
-
-- You prefer a UI-based workflow to configure app registrations and role assignments.
-- You need to set up access manually for a smaller number of subscriptions or management groups.
-- You want more step-by-step control over assigning permissions and credentials within the Azure UI.
-
-### Instructions
-
-1. [Create an app registration](#create-an-app-registration) in Microsoft Entra ID.
-2. [Give the application read access](#give-read-permissions-to-the-application) to any subscriptions you want to monitor.
-3. [Configure the application credentials](#complete-the-integration) in Datadog.
-
-#### Create an app registration
-
-1. Under **Microsoft Entra ID**, navigate to **App registrations**.
-2. Click **New registration**.
-3. Provide a name, and confirm that **Supported account types** is set to `Accounts in this organizational directory only`.
-4. Click **Register**.
-
-{{< img src="integrations/guide/azure_manual_setup/azure_app_registration.png" alt="The screen in the Azure portal for registering an application" popup="true" style="width:80%;" >}}
-
-#### Give read permissions to the application
-
-1. Assign access at the individual subscription or management group level. 
-   - To assign access at the subscription level, navigate to **Subscriptions** through the search box or the left sidebar.
-   - To assign access at the management group level, navigate to **Management Groups** and select the management group that contains the set of subscriptions to monitor.<br />
-   **Note**: Assigning access at the management group level means that any new subscriptions added to the group are automatically discovered and monitored by Datadog.
-
-2. Click on the subscription or management group you would like to monitor.
-3. Select **Access control (IAM)** in the subscription menu and click **Add role assignment**:
-
-    {{< img src="integrations/guide/azure_manual_setup/azure-add-role.png" alt="Add Role Assignment" popup="true" style="width:80%">}}
-
-4. In the **Role** tab, select **Reader**. 
-5. In the **Members** tab, click **Select members**.
-6. Enter the application created in the [create an app registration section](#create-an-app-registration).
-7. Click **Review + assign** to complete the creation.
-8. Repeat this process for any additional subscriptions or management groups you want to monitor with Datadog.
-
-**Notes**: 
-   - Users of Azure Lighthouse can add subscriptions from customer tenants.
-   - Diagnostics must be enabled for ARM deployed VMs to collect metrics, see [Enable diagnostics][28].
-
-#### Complete the integration
-
-1. Under **App Registrations**, select the app you created, copy the **Application (client) ID** and **Directory (tenant) ID**, and paste the values in the [Datadog Azure integration tile][20] under **Client ID** and **Tenant ID**.
-2. For the same app, go to **Manage** > **Certificates & secrets**.
-3. Click **+ New client secret**:
-   1. Optionally, provide a description.
-   2. Select an expiration time frame in the **Expires** field.
-   3. Click **Add**.
-
-    {{< img src="integrations/guide/azure_manual_setup/add_client_secret.png" alt="Azure client secret" popup="true" style="width:80%">}}
-
-4. When the key value is shown, copy and paste the value in the [Datadog Azure integration tile][20] under **Client Secret**.
-5. Click **Create Configuration**.
-
-**Note**: Your updates to the Azure configuration can take up to 20 minutes to be reflected in Datadog.
-{{% /collapse-content %}} 
-
-{{% collapse-content title="Azure CLI Classic" level="h4" expanded=false id="azure-cli-classic-setup" %}}
-
-### Choose this if...
-
-- You need to maintain backward compatibility with existing automation scripts leveraging Azure CLI classic.
-
-### Instructions
-
-First, log in to the Azure account you want to integrate with Datadog:
-
-```text
-azure login
-```
-
-Run the account show command:
-
-```text
-az account show
-```
-
-Enter the generated `Tenant ID` value in the [Datadog Azure integration tile][20] under **Tenant name/ID**.
-
-Create a name and password:
-
-```text
-azure ad sp create -n <NAME> -p <PASSWORD>
-```
-
-- The `<NAME>` is NOT used but is required as part of the setup process.
-- The `<PASSWORD>` you choose must be entered in the [Datadog Azure integration tile][20] under **Client Secret**.
-- The `Object Id` returned from this command is used in place of `<OBJECT_ID>` in the next command.
-
-Create an application as a service principal using the format:
-
-```text
-azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /subscriptions/<SUBSCRIPTION_ID>/
-```
-
-- This command grants the Service Principal the `monitoring reader` role for the subscription you would like to monitor.
-- The `Service Principal Name` generated from this command must be entered in the [Datadog Azure integration tile][20] under **Client ID**.
-- `<SUBSCRIPTION_ID>` is the Azure subscription you would like to monitor, and is listed as `ID` with `azure account show` or in the portal.
-{{% /collapse-content %}} 
-
 ## Metric collection
 
 Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. See the [Integrations page][9] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. 
@@ -411,25 +240,55 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 See [Azure Automated Log Forwarding Architecture and Configuration][34] for more details.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Event Hub" level="h4" expanded=false id="event-hub-log-forwarding-setup" %}}
+{{% collapse-content title="Blob Storage" level="h4" expanded=false id="blob-storage-log-forwarding-setup" %}}
+## Setup
 
-### Choose this if...
+1. If you haven't already set up [Azure Blob Storage][39], use one of the following methods to get started:
+   - [Azure portal][40]
+   - [Azure Storage Explorer][41]
+   - [Azure CLI][42]
+   - [PowerShell][43]
+2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
+3. Configure your Azure App Services to [forward their logs to Blob Storage][44].
 
-- <GUIDANCE>
+##### Create a function app
 
-### Instructions
+If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
-To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you. To forward Activity Logs, set the **Send Activity Logs** option to true.
+1. In the Azure portal, navigate to the [Function App overview][45] and click **Create**.
+2. In the **Instance Details** section, configure the following settings:
+  a. Select the **Code** radio button
+  b. For **Runtime stack**, select `Node.js`
+  c. For **Version**, select `18 LTS`.
+  d. For **Operating System**, select `Windows`.
+3. Configure other settings as desired.
+4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Frefs%2Fheads%2Fmaster%2Fazure%2Feventhub_log_forwarder%2Fparent_template.json)
+##### Add a new function to your Function App using the Azure Blob Storage trigger template
 
-### Azure platform logs
+1. Select your new or existing function app from the [Function App overview][45].
+2. Under the **Functions** tab, click **Create**.
+3. For the **Development environment** field, select **Develop in portal**.
+4. Under **Select a template**, choose [Azure Blob storage trigger][46].
+5. Select your **Storage account connection**.
+   **Note**: See [Configure a connection string for an Azure storage account][47] for more information.
+6. Click **Create**.
 
-After the template deployment finishes, set up diagnostic settings for each log source to send Azure platform logs (including resource logs) to the Event Hub created during deployment.
+See [Getting started with Azure Functions][48] for more information.
 
-**Note**: Resources can only stream to Event Hubs in the same Azure region.
+##### Point your Blob Storage trigger to Datadog
 
-If you run into any problems during deployment, see [Automated log collection][35] for common error cases.
+1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
+2. Add the [Datadog-Azure Function code][49] to the function's `index.js` file.
+3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.
+4. If you're not using the Datadog US1 site, set your [Datadog site][50] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
+5. **Save** the function.
+6. Click **Integration** under the **Developer** side menu.
+7. Click **Azure Blob Storage** under **Trigger and inputs**.
+8. Set the **Blob Parameter Name** to `blobContent` and click **Save**.
+9. Verify your setup is correct by checking the [Datadog Log Explorer][51] for logs from this resource.
+
+{{% azure-log-archiving %}}
 {{% /collapse-content %}} 
 
 ## Get more from the Datadog Platform 
@@ -469,10 +328,10 @@ Still need help? Contact [Datadog support][17].
 [2]: https://www.datadoghq.com/
 [3]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
 [4]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration
-[5]: https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create
+[5]: https://learn.microsoft.com/azure/event-hubs/event-hubs-create
 [6]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/?tab=windows
 [7]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=azurecli
-[8]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/metrics-index
+[8]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index
 [9]: https://docs.datadoghq.com/integrations/#cat-azure
 [10]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=automatedinstallation
 [11]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension#install
@@ -503,3 +362,18 @@ Still need help? Contact [Datadog support][17].
 [36]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
 [37]: /logs/guide/azure-automated-log-forwarding/#architecture
 [38]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer
+
+[39]: https://azure.microsoft.com/services/storage/blobs/
+
+[40]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal
+[41]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
+[42]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-cli
+[43]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-powershell
+[44]: https://learn.microsoft.com/training/modules/store-app-data-with-azure-blob-storage/
+[45]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+[46]: https://learn.microsoft.com/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
+[47]: https://learn.microsoft.com/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
+[48]: https://learn.microsoft.com/azure/azure-functions/functions-get-started
+[49]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
+[50]: https://docs.datadoghq.com/getting_started/site/
+[51]: https://app.datadoghq.com/logs
