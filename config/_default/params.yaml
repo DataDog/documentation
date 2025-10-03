@@ -135,6 +135,7 @@ code_language_ids:
     real_time_rule: "Real-Time Rule"
     scheduled_rule: "Scheduled Rule"
     historical_job: "Historical Job"
+    haproxy: "HAProxy"
 branch: ""
 
 signupclass: sign-up-trigger
