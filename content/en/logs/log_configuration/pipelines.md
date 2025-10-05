@@ -42,17 +42,17 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 **Note**: For optimal use of the Log Management solution, Datadog recommends using at most **20 processors per pipeline** and **10 parsing rules** within a [Grok processor][6]. Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
-## Access Control and Scoping
+## Pipeline permissions
 
-The Log Pipelines feature utilizes [Granular Access Control][7]. This model shifts permission assignment from only roles to include **individual users** and **teams**, ensuring precise control over pipeline resources.
+Pipelines use [Granular Access Control][7]. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources.
 
-The base permission required to interact with pipelines is `logs_write_pipelines`. Once granted, Granular Access controls the specific editing privileges for each pipeline.
+<div class="alert alert-warning">Granular Access Control is available for organizations that do not already have the scoped RBAC feature flag enabled on piplines.</div>
 
-For individual pipelines, administrators can now choose the following edit scopes:
+For individual pipelines, administrators can choose the following edit scopes:
 
-* **Unrestricted:** Any user possessing the `logs_write_pipelines` permission can modify the pipeline.
-* **Restricted Pipeline Editor:** Editing permissions are limited to specific users, teams, or roles.
-* **Processor-Only Editor:** Users are allowed to edit the pipeline's **processors** (including nested pipelines) but are restricted from modifying the pipeline's core attributes, such as its filter query or its order in the global pipeline list.
+* **Unrestricted**: Any user with the `logs_write_pipelines` permission can modify the pipeline.
+* **Restricted pipeline editor**: Editing permissions are limited to specific users, teams, or roles.
+* **Processor-only editor**: Users are allowed to edit the pipeline's **processors** (including nested pipelines) but cannot modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
 These permissions are fully manageable programmatically through **API and Terraform**.
 
