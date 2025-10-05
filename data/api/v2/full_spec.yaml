@@ -9585,6 +9585,11 @@ components:
     CloudWorkloadSecurityAgentRuleActionHash:
       additionalProperties: {}
       description: An empty object indicating the hash action
+      properties:
+        field:
+          description: Event field to use for the hash computation.
+          example: process.file
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
