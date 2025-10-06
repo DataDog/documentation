@@ -47,8 +47,8 @@ When creating a new app, Datadog displays an onboarding modal with the following
 - [Start with Blueprint][5]
 - [Start with Layout][12]
 - [Start with Data][13]
+- [Start with App Playground][14]
 - [Start from Scratch][10] 
-- [App Playground][14]
 
 {{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="App blueprints" style="width:100%;" >}}
 
