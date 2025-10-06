@@ -28,7 +28,6 @@ The FIPS Agent also includes [limited support for integrations][3] that need to 
 
 ## Supported platforms and limitations
 
-
 Supported platforms:
 
 |||
@@ -49,9 +48,7 @@ Supported products (Agent 7.65.0 and above):
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents
 - Outbound communication to anything other than GovCloud
-- Datadog [DDOT Collector][1]
-
-[1]: /opentelemetry/setup/ddot_collector
+- Datadog [DDOT Collector][5]
 
 ## Compliance guidelines
 <div class="alert alert-warning">
@@ -68,10 +65,9 @@ The following baseline controls apply to each platform. Your system may require 
 
 {{% tab "Windows" %}}
 - A non-containerized Windows host.
-- Windows must be in [FIPS-compliant mode][1].
+- Windows must be in [FIPS-compliant mode][6].
 - FIPS-compliant storage backing the host file system.
 
-[1]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
 {{% /tab %}}
 
 {{% tab "AWS Lambda" %}}
@@ -109,7 +105,7 @@ In addition to the Operating System (OS) requirements above:
       ```sh
       DD_SITE="ddog-gov.com" DD_API_KEY="MY_API_KEY" DD_AGENT_FLAVOR="datadog-fips-agent" … bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
       ```
-   1. If you're installing with a package, [follow the instructions][1] to install the latest `datadog-fips-agent` package available for your platform.
+   1. If you're installing with a package, [follow the instructions][7] to install the latest `datadog-fips-agent` package available for your platform.
    1. Add `GOFIPS=1` to your Datadog environment variables, reload all service units, and restart the Datadog Agent service (`datadog-agent.service`). For example, if your host is using systemd:
 
       ```sh
@@ -121,12 +117,11 @@ In addition to the Operating System (OS) requirements above:
 
 {{< img src="/agent/fips-linux.png" alt="Agent status command output with FIPS Mode enabled - Linux" style="width:100%;" >}}
 
-[1]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
 
-1. Follow the [Windows instructions][1] to uninstall any existing Datadog Agent on the machine.
+1. Follow the [Windows instructions][8] to uninstall any existing Datadog Agent on the machine.
 1. Run the command below to install the FIPS Agent, replacing `DATADOG_API_KEY` with your API key:
 
    **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
@@ -148,8 +143,6 @@ if ($p.ExitCode -ne 0) {
 
 
 **Note**: The program name for the FIPS Agent in **Add or Remove Programs** is "Datadog FIPS Agent."
-
-[1]: /agent/basic_agent_usage/windows/#uninstall-the-agent
 
 {{% /tab %}}
 
@@ -203,8 +196,11 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [3]: /integrations/guide/fips-integrations
 [4]: /integrations/guide/jmxfetch-fips
+[5]: /opentelemetry/setup/ddot_collector
+[6]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
+[7]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
+[8]: /agent/basic_agent_usage/windows/#uninstall-the-agent
