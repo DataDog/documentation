@@ -329,7 +329,7 @@ DdSdkReactNative.initialize(config);
 
 ## Additional configuration options
 
-### Disable file uploads
+{{% collapse-content title="Disable file uploads" level="h4" expanded=false id="disable-file-uploads" %}}
 
 You can disable some files from uploading by setting the `iosDsyms`, `iosSourcemaps`, `androidProguardMappingFiles`, or `androidSourcemaps` parameters to `false`.
 
@@ -352,17 +352,25 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 
 If you want to disable **all file uploads**, remove `expo-datadog` from the list of plugins.
 
-### List uploaded source maps
+{{% /collapse-content %}}
+
+{{% collapse-content title="List uploaded source maps" level="h4" expanded=false id="list-uploaded-source-maps" %}}
+
+To verify that your source maps, dSYMs, and Proguard mapping files have been successfully uploaded and are available for symbolication, you can list all uploaded debug symbols.
 
 See the [RUM Debug Symbols][13] page to view all uploaded symbols.
 
-### Specifying a custom release version
+{{% /collapse-content %}}
+
+{{% collapse-content title="Specify a custom release version" level="h4" expanded=false id="specify-custom-release-version" %}}
 
 Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your source maps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
 
 When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
 
-### Using Expo with Datadog and Sentry
+{{% /collapse-content %}}
+
+{{% collapse-content title="Use Expo with Datadog and Sentry" level="h4" expanded=false id="use-expo-with-datadog-sentry" %}}
 
 Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
@@ -377,7 +385,9 @@ To use both plugins, make sure to add the `expo-datadog` plugin first in order i
 
 If you are using the `expo-dev-client` and already have the `expo-datadog` plugin, revert its changes to the `project.pbxproj` file before adding `sentry-expo` and running `npx expo prebuild` with both plugins.
 
-## Limitations
+{{% /collapse-content %}}
+
+{{% collapse-content title="Check source map file size limits" level="h4" expanded=false id="check-source-map-size" %}}
 
 Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
@@ -399,6 +409,8 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 ```
 
 If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
+
+{{% /collapse-content %}}
 
 ## Further reading
 
