@@ -26,18 +26,29 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ## Create an app
 
+### Build an app with AI 
+
+1. From [App Builder][1], click **New App**.
+1. Click **Start with AI**.
+1. Click a suggested prompt, or enter a custom prompt. 
+1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
+1. To save the app, click **Save**. 
+1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
 ### Build an app from a blueprint
 
 Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
 1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **+ New App**, then **Start with Blueprint**.
-1. Find the blueprint that you want to use and click **Preview**.
+1. Find the blueprint that you want to use and click **View**.
 1. Click **Use Blueprint** to open the app blueprint.
 1. To change the app name and description, click the app name.
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### Create a custom app
@@ -47,9 +58,9 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab, then click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ## Customize your app
@@ -58,7 +69,7 @@ Apps are made up of UI components and queries which interact with each other to 
 
 Basic customization:
 - To edit the **Name**, **Description**, or **Canvas Color** of your app, click the app name at the top left.
-- Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
+- Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 - To save your app, click **Save**.
 - When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
@@ -166,3 +177,4 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [12]: /service_management/app_builder/queries
 [13]: /service_management/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
+[15]: /actions/app_builder/build/#customize-your-app
