@@ -231,11 +231,11 @@ To send a test request:
 {{< img src="/tracing/software_catalog/play-request.png" alt="Play Request modal to test API requests in Software Catalog" style="width:90%;" >}}
 
 Before sending the request, you can configure the following: 
-- Inputs: Provide values for any required query parameters, path variables, or request body fields.
-- Authentication: Select an authentication method if required by the endpoint.
-- Location: Choose where the request should be sent from:
+- **Inputs**: Provide values for any required query parameters, path variables, or request body fields.
+- **Authentication**: Select an authentication method if required by the endpoint.
+- **Location**: Choose where the request should be sent from:
     - Public Location (default)
-    - Private Location, for APIs accessible only within your private network. These must be configured using [Synthetics Private Locations][2]. Any Private Locations already set up will appear automatically in the dropdown.
+    - Private Location, for APIs accessible only within your private network. These must be configured using [Synthetics Private Locations][2]. Any Private Locations you've already set up appear automatically in the dropdown.
 
 **Note**: Software Catalog contains HTTP endpoints that are automatically discovered by APM. The concept of endpoints correspond to [APM resources][1] for an APM web service.
 
