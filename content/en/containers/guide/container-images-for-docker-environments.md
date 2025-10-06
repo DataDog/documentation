@@ -1,5 +1,6 @@
 ---
 title: Container Images for Docker Environments
+description: Overview of available Datadog container images for Docker environments across different registries
 aliases:
   - /agent/guide/container-images-for-docker-environments
 further_reading:

@@ -38,7 +38,7 @@ Instrument your main application with the `dd-trace-js` library. See [Tracing No
 Custom metrics are also collected through the tracer. See the [code examples][102].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -57,7 +57,7 @@ Instrument your main application with the `dd-trace-py` library. See [Tracing Py
 Custom metrics are also collected through the tracer. See the [code examples][202].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -76,7 +76,7 @@ Instrument your main application with the `dd-trace-java` library. See [Tracing 
 Custom metrics are also collected through the tracer. See the [code examples][302].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -143,7 +143,7 @@ For more information, see [Tracing .NET Applications][401].
 Custom metrics are also collected through the tracer. See the [code examples][402].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -163,7 +163,7 @@ Instrument your main application with the `dd-trace-go` library. See [Tracing Go
 Custom metrics are also collected through the tracer. See the [code examples][502].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -182,7 +182,7 @@ Instrument your main application with the `dd-trace-php` library. See [Tracing P
 Custom metrics are also collected through the tracer. See the [code examples][602].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -321,6 +321,8 @@ In your **App settings** in Azure, set the following environment variables on bo
 - `DD_ENV`: How you want to tag your env. For example, `prod`
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.
+
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
 

@@ -1,5 +1,6 @@
 ---
 title: DDSQL Editor
+description: "Query infrastructure resources and telemetry data using natural language or DDSQL syntax with support for tags as table columns."
 aliases:
 - /dashboards/ddsql_editor/
 further_reading:

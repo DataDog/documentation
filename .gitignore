@@ -34,6 +34,11 @@ content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
+content/en/agent/supported_platforms/ansible.md
+content/en/agent/supported_platforms/chef.md
+content/en/agent/supported_platforms/heroku.md
+content/en/agent/supported_platforms/puppet.md
+content/en/agent/supported_platforms/saltstack.md
 content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing

@@ -1,12 +1,15 @@
 ---
 title: Data Pipeline Lineage
 further_reading:
-- link: "/data_jobs"
-  tag: "Documentation"
-  text: "Data Jobs Monitoring"
-- link: https://www.datadoghq.com/blog/data-observability-monitoring/
-  tag: "Blog"
-  text: "Observing the data lifecycle with Datadog"
+  - link: "/data_jobs"
+    tag: "Documentation"
+    text: "Data Jobs Monitoring"
+  - link: https://www.datadoghq.com/blog/data-observability-monitoring/
+    tag: "Blog"
+    text: "Observing the data lifecycle with Datadog"
+  - link: https://www.datadoghq.com/blog/airflow-data-lineage-monitoring/
+    tag: "Blog"
+    text: "Monitor your data pipelines with Airflow lineage"
 ---
 
 {{% site-region region="gov" %}}

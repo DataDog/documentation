@@ -147,29 +147,6 @@ Manual Agent upgrades are not required after you've updated to 7.66 or higher. F
 
 If you don't upgrade an earlier Agent version to 7.66 or higher, there is no impact on your existing Agent. However, remote upgrades remain unavailable until you update the Agent.
 
-## Uninstall Remote Agent Management
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-To uninstall Remote Agent Management from your Linux environment, follow the steps below. Ensure that you have the necessary permissions to perform the uninstall process.
-
-To uninstall the Agent after installing it with Remote Agent Management, in a shell, run `sudo datadog-installer purge`.
-
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-There are no steps needed to uninstall Remote Agent Management on Windows, it is packaged with the Agent itself.
-
-To disable Remote Agent Management, configure `remote_updates: false` in `datadog.yaml`.
-
-To uninstall the Agent, see [Uninstall the Agent][1].
-
-[1]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#uninstall-the-agent
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
