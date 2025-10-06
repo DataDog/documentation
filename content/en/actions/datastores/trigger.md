@@ -10,7 +10,7 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
-You can add workflows to your datastores that automatically trigger when records are created, updated, deleted
+You can add workflows to your datastores that automatically trigger when records are created, updated, or deleted.
 
 ## Create a new automation rule
 
