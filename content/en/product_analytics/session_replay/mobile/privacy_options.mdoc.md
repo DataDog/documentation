@@ -24,7 +24,7 @@ further_reading:
 ---
 
 {% if equals($platform, "browser") %}
-{% partial file="rum/session_replay/browser_privacy_options.mdoc.md" /%}
+{% partial file="rum/session_replay/browser/privacy_options.mdoc.md" /%}
 {% else /%}
 {% partial file="rum/session_replay/mobile/privacy_options.mdoc.md" /%}
 {% /if %}

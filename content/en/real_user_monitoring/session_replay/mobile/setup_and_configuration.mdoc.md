@@ -27,7 +27,7 @@ further_reading:
 ---
 
 {% if equals($platform, "browser") %}
-{% partial file="rum/session_replay/browser_setup.mdoc.md" /%}
+{% partial file="rum/session_replay/browser/setup.mdoc.md" /%}
 {% else /%}
 {% partial file="rum/session_replay/setup_and_configuration.mdoc.md" /%}
 {% /if %}
