@@ -29,7 +29,19 @@ After setting up your pipeline using the API or Terraform, follow the instructio
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run the below [command](#worker-install-docker) to install the Worker. You must replace the placeholders with the following values:
+Run the below command to install the Worker.
+
+```shell
+docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+    -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+    -e DD_SITE=<DATADOG_SITE> \
+    -e <SOURCE_ENV_VARIABLE> \
+    -e <DESTINATION_ENV_VARIABLE> \
+    -p 8088:8088 \
+    datadog/observability-pipelines-worker run
+```
+
+You must replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
 - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -41,17 +53,6 @@ Run the below [command](#worker-install-docker) to install the Worker. You must 
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
     - See [Environment Variables][3] for a list of destination environment variables.
 
-#### Command to install the Worker {#worker-install-docker}
-
-```shell
-docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
-    -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
-    -e DD_SITE=<DATADOG_SITE> \
-    -e <SOURCE_ENV_VARIABLE> \
-    -e <DESTINATION_ENV_VARIABLE> \
-    -p 8088:8088 \
-    datadog/observability-pipelines-worker run
-```
 **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
 ```
 -p 8282:8088 datadog/observability-pipelines-worker run
@@ -84,18 +85,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
-1. Run the below [command](#worker-install-kubernetes) to install the Worker. You must replace the placeholders with the following values:
-    - `<DATADOG_API_KEY>`: Your Datadog API.
-        - **Note**: The API key must be [enabled for Remote Configuration][3].
-    - `<PIPELINE_ID>`: The ID of your pipeline.
-    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-        - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
-        - See [Environment Variables][4] for a list of source environment variables.
-    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
-        - See [Environment Variables][4] for a list of destination environment variables.
-
-#### Command to install the Worker {#worker-install-kubernetes}
+1. Run the below command to install the Worker.
 
     ```shell
     helm upgrade --install opw \
@@ -107,10 +97,24 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
 	datadog/observability-pipelines-worker
     ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
+
+You must replace the placeholders with the following values:
+
+- `<DATADOG_API_KEY>`: Your Datadog API.
+    - **Note**: The API key must be [enabled for Remote Configuration][3].
+- `<PIPELINE_ID>`: The ID of your pipeline.
+- `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+    - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
+    - See [Environment Variables][4] for a list of source environment variables.
+- `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+    - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
+    - See [Environment Variables][4] for a list of destination environment variables.
+
+**Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+
+```
+--set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
+```
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
@@ -131,8 +135,14 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
+Run the one-step command below to install the Worker.
 
-Run the [one-step command](#worker-install-linux) below to install the Worker. You must replace the placeholders with the following values:
+```bash
+DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
+```
+
+You must replace the placeholders with the following values:
+
 - `<DATADOG_API_KEY>`: Your Datadog API.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
 - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -143,12 +153,6 @@ Run the [one-step command](#worker-install-linux) below to install the Worker. Y
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
     - See [Environment Variables][3] for a list of destination environment variables.
-
-#### Command to install the Worker {#worker-install-linux}
-
-```bash
-DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
-```
 
 **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 
@@ -162,7 +166,25 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-{{% observability_pipelines/install_worker/cloudformation %}}
+1. Select one of the options in the dropdown to provide the expected log volume for the pipeline:
+|   Option   | Description |
+| ---------- | ----------- |
+| Unsure | Use this option if you are not able to project the log volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
+| 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
+| 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
+| >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |
+
+    **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
+1. Select the AWS region you want to use to install the Worker.
+1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][7002].
+1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+1. Select the VPC and subnet you want to use to install the Worker.
+1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+
+See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+[1]: /observability_pipelines/update_existing_pipelines
 
 {{% /tab %}}
 {{< /tabs >}}
