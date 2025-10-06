@@ -52,7 +52,7 @@ For individual pipelines, administrators can choose the following edit scopes:
 
 * **Unrestricted**: Any user with the `logs_write_pipelines` permission can modify the pipeline.
 * **Restricted pipeline editor**: Editing permissions are limited to specific users, teams, or roles.
-* **Processor-only editor**: Users are allowed to edit the pipeline's **processors** (including nested pipelines) but cannot modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
+* **Processor-only editor**: Users are allowed to edit the pipeline's **processors** (including nested pipelines), but cannot modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
 You can manage these permissions programmatically through **API and Terraform**.
 
@@ -248,7 +248,7 @@ It's also possible to copy an integration pipeline using the clone button.
 
 A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API.
 
-See [Parsing dates][12] to learn about custom date and time formats and the require `timezone` parameter for non-UTC timestamps.
+See [Parsing dates][12] to learn about custom date and time formats and the required `timezone` parameter for non-UTC timestamps.
 
 ### Nested pipelines
 
@@ -276,7 +276,7 @@ Reorder pipelines precisely with the `Move to` option in the sliding option pane
 
 ## Estimated usage metrics
 
-Estimated usage metrics are displayed for each pipeline. This shows the the volume and count of logs being ingested and modified by each pipeline. Every pipeline includes a link to the out-of-the-box [Logs Estimated Usage Dashboard][13]. This dashboard offers detailed charts of the pipeline's usage metrics.
+Estimated usage metrics are displayed for each pipeline. This shows the volume and count of logs being ingested and modified by each pipeline. Every pipeline includes a link to the out-of-the-box [Logs Estimated Usage Dashboard][13]. This dashboard offers detailed charts of the pipeline's usage metrics.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="How to get a quick view of your pipelines' usage metrics" style="width:50%;">}}
 
