@@ -568,7 +568,7 @@ See [Privacy Options][2].
 [11]: /real_user_monitoring/kotlin_multiplatform/
 [12]: /real_user_monitoring/kotlin_multiplatform/#add-native-dependencies-for-ios
 [13]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[14]: /real_user_monitoring/application_monitoring/setup/reactnative/
+[14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
 [17]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative

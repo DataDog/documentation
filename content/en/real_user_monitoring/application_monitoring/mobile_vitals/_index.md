@@ -151,7 +151,7 @@ The following telemetry provide insight into your mobile application's performan
 [1]: https://developer.apple.com/documentation/xcode/diagnosing-issues-using-crash-reports-and-device-logs
 [2]: /real_user_monitoring/error_tracking/mobile/unity/
 [3]: https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/
-[4]: /real_user_monitoring/application_monitoring/setup/unity
+[4]: /real_user_monitoring/application_monitoring/unity/setup
 [6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-watchdog-terminations-reporting
 
 {{% /tab %}}

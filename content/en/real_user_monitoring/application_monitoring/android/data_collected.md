@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-The RUM Android SDK generates events that have associated attributes. These can have quantifiable values and can be used for measurements related to the event, while others are non-quantifiable values used to slice telemetry values (group by) in analytics. 
+The RUM Android SDK generates events that have associated attributes. These can have quantifiable values and can be used for measurements related to the event, while others are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
+Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [attributes that are specific to a given event type](#event-specific-attributes). For example, the `view.time_spent` attribute is associated with "view" events and the `resource.method` one is associated with "resource" events. 
+There are additional [attributes that are specific to a given event type](#event-specific-attributes). For example, the `view.time_spent` attribute is associated with "view" events and the `resource.method` one is associated with "resource" events.
 
 | Event Type     | Retention | Description     |
 |----------------|-----------|-------------------|
@@ -52,7 +52,7 @@ The Android RUM SDK offers various strategies to [automatically track views][2] 
 - Fragments (`FragmentViewTrackingStrategy`): Each `Fragment` in your application is tracked as a separate RUM view. The SDK starts the view in the Fragment's `onResume` lifecycle method and stops it in `onPause`.
 - Mixed (`MixedViewTrackingStrategy`): Activities and Fragments each become distinct RUM views based on their respective lifecycle events (`onResume` and `onPause`).
 - Navigation (`NavigationViewTrackingStrategy`): Each navigation destination is treated as a distinct RUM view, so view boundaries align with navigation events in your graph.
-- Manual View Tracking: When [tracking views manually][3] using `GlobalRumMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method. 
+- Manual View Tracking: When [tracking views manually][3] using `GlobalRumMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
 
 When the application goes into the background (for example, the user presses the home button or switches apps), RUM automatically stops the current view. Consequently, there is no active view while the app remains in the background. Since RUM's data model requires an active view to correlate and capture events, any events generated in the background are skipped by default. To capture these events instead, refer to the [Track Background Events][4] section.
 
@@ -132,7 +132,7 @@ You can enable [tracking user info][10] globally to collect and apply user attri
 
 ## Event-specific attributes
 
-Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
+Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
 ### Session attributes
 
@@ -176,7 +176,6 @@ RUM action, error, resource, and long task events contain information about the 
 
 ### Resource attributes
 
-
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
@@ -211,7 +210,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.file` | string | File where the error happened for the Error Tracking issue. |
 | `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
 
-### Network errors 
+### Network errors
 
 Network errors include information about failing HTTP requests. The following facets are also collected:
 
@@ -250,8 +249,8 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 
 The RUM Android SDK allows you to get the data you need to Datadog while considering user bandwidth impact. The Datadog SDK batches and uploads events as follows:
 
-- On _event collected_, the Datadog SDK appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
-- On _upload_ (when the batch is considered "closed"), the Datadog SDK:
+- On *event collected*, the Datadog SDK appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
+- On *upload* (when the batch is considered "closed"), the Datadog SDK:
   - Reads the batch and extracts events
   - Drops redundant View events in RUM (no optimizations in other tracks)
   - Builds payloads specific to each track
@@ -265,7 +264,7 @@ If your application supports [Direct Boot mode][13], note that data captured bef
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/advanced_configuration/android/#custom-actions
+[1]: /real_user_monitoring/application_monitoring/android/advanced_configuration//#custom-actions
 [2]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views
 [3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
 [4]: /real_user_monitoring/application_monitoring/android/setup?tab=rum#track-background-events

@@ -136,7 +136,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 Add `DatadogWebViewTracking` library to your application by following the guide [here][1].
 
-[1]: /real_user_monitoring/application_monitoring/setup/kotlin_multiplatform/#add-native-dependencies-for-ios
+[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios
 
 {{% /tab %}}
 {{< /tabs >}}

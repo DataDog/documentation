@@ -58,7 +58,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/data_collected/roku
+[2]: /real_user_monitoring/application_monitoring/roku/data_collected
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -70,7 +70,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/application_monitoring/data_collected/roku
+[2]: /real_user_monitoring/application_monitoring/roku/data_collected
 
 {{% /tab %}}
 {{< /tabs >}}

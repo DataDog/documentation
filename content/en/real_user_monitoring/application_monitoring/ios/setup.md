@@ -554,4 +554,4 @@ See [Supported versions][10] for a list operating system versions and platforms 
 [7]: https://github.com/DataDog/dd-sdk-ios
 [8]: /real_user_monitoring/error_tracking/ios/
 [9]: /real_user_monitoring/explorer/
-[10]: /real_user_monitoring/application_monitoring/supported_versions/ios/
+[10]: /real_user_monitoring/application_monitoring/ios/supported_versions/

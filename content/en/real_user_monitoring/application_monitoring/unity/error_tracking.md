@@ -107,7 +107,7 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/setup/unity#setup
+[3]: /real_user_monitoring/application_monitoring/unity/setup/#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
 [6]: https://app.datadoghq.com/source-code/setup/rum
