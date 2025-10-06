@@ -12,10 +12,19 @@ aliases:
     - /agent/apm/
     - /tracing/setup_overview/
     - /tracing/trace_collection/library_injection_remote
+    - /tracing/trace_collection/automatic_instrumentation
 further_reading:
 - link: "tracing/trace_collection/compatibility"
   tag: "Documentation"
   text: "Compatibility requirements"
+- link: "/tracing/glossary/"
+  tag: "Documentation"
+  text: "APM Terms and Concepts"
+- link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+  tag: "Architecture Center"
+  text: "Instrument your app using the Datadog Operator and Admission Controller"
+algolia:
+  tags: ['apm automatic instrumentation']
 ---
 
 ## Overview
@@ -42,7 +51,14 @@ Create {{< tooltip glossary="span" >}}s for your application with minimal manual
 - [Single Step Instrumentation][7]: Run a one-line installation command to install the Datadog Agent, enable APM, and instrument all of your services on your Linux host, VM, or container.
 - [Datadog libraries][8]: Add Datadog tracing libraries to your application.
 
-To learn more, see [automatic instrumentation][5].
+#### Use cases
+
+Some situations when you might use automatic instrumentation include:
+
+- Capturing essential observability data across common libraries and languages with minimal configuration.
+- Enabling real-time monitoring with pre-configured settings for immediate insights into application performance.
+- Simplifying the observability setup for projects where [custom instrumentation][6] is not required.
+
 
 ### Custom instrumentation
 
