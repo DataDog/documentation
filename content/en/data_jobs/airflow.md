@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Apache Airflow
+description: "Monitor Apache Airflow DAG workflows with Data Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
 is_beta: true
 private: true
 further_reading:

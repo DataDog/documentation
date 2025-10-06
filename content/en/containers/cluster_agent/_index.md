@@ -1,5 +1,6 @@
 ---
 title: Cluster Agent for Kubernetes
+description: Centralized approach to collecting cluster-level monitoring data with the Datadog Cluster Agent
 aliases:
 - /agent/kubernetes/cluster/
 - /agent/cluster_agent/

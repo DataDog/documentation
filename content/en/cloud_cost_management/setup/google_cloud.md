@@ -13,6 +13,9 @@ further_reading:
 - link: "/cloud_cost_management/azure"
   tag: "Documentation"
   text: "Gain insights into your Azure bill"
+- link: "/cloud_cost_management/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 ---
 
 
