@@ -17,7 +17,7 @@ You can map attributes to the following principals:
 
 Setting up a mapping from SAML attributes to Datadog entities allows you to manage users solely in your identity provider. The system then provisions users in Datadog according to the mappings you set up.
 
-There is a limit of 1000 role and 1000 team mappings for each organization. If your organization needs more mappings, reach out to [Support][8].
+You can create a maximum of of 1000 role and 1000 team mappings in each organization. If your organization needs more mappings, reach out to [Support][8].
 
 ## Prerequisites
 
