@@ -20500,6 +20500,266 @@ components:
       - ASSIGNEE
       - CASE
       - TEAM_OWNERS
+    GetMultipleRulesetsRequest:
+      description: The definition of `GetMultipleRulesetsRequest` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestData'
+      type: object
+    GetMultipleRulesetsRequestData:
+      description: The definition of `GetMultipleRulesetsRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataAttributes'
+        id:
+          description: The `GetMultipleRulesetsRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsRequestDataAttributes:
+      description: The definition of `GetMultipleRulesetsRequestDataAttributes` object.
+      properties:
+        include_testing_rules:
+          description: The `attributes` `include_testing_rules`.
+          type: boolean
+        include_tests:
+          description: The `attributes` `include_tests`.
+          type: boolean
+        rulesets:
+          description: The `attributes` `rulesets`.
+          items:
+            type: string
+          type: array
+      type: object
+    GetMultipleRulesetsRequestDataType:
+      default: get_multiple_rulesets_request
+      description: Get multiple rulesets request resource type.
+      enum:
+      - get_multiple_rulesets_request
+      example: get_multiple_rulesets_request
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_REQUEST
+    GetMultipleRulesetsResponse:
+      description: The definition of `GetMultipleRulesetsResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseData'
+      type: object
+    GetMultipleRulesetsResponseData:
+      description: The definition of `GetMultipleRulesetsResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributes'
+        id:
+          description: The `GetMultipleRulesetsResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributes:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributes` object.
+      properties:
+        rulesets:
+          description: The `attributes` `rulesets`.
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItems'
+          type: array
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItems:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributesRulesetsItems`
+        object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsData'
+        description:
+          description: The `items` `description`.
+          type: string
+        name:
+          description: The `items` `name`.
+          type: string
+        rules:
+          description: The `items` `rules`.
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems'
+          type: array
+        short_description:
+          description: The `items` `short_description`.
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsData:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributesRulesetsItemsData`
+        object.
+      properties:
+        id:
+          description: The `data` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType:
+      default: rulesets
+      description: Rulesets resource type.
+      enum:
+      - rulesets
+      example: rulesets
+      type: string
+      x-enum-varnames:
+      - RULESETS
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems`
+        object.
+      properties:
+        arguments:
+          description: The `items` `arguments`.
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems'
+          type: array
+        category:
+          description: The `items` `category`.
+          type: string
+        checksum:
+          description: The `items` `checksum`.
+          type: string
+        code:
+          description: The `items` `code`.
+          type: string
+        created_at:
+          description: The `items` `created_at`.
+          format: date-time
+          type: string
+        created_by:
+          description: The `items` `created_by`.
+          type: string
+        cve:
+          description: The `items` `cve`.
+          type: string
+        cwe:
+          description: The `items` `cwe`.
+          type: string
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData'
+        description:
+          description: The `items` `description`.
+          type: string
+        documentation_url:
+          description: The `items` `documentation_url`.
+          type: string
+        entity_checked:
+          description: The `items` `entity_checked`.
+          type: string
+        is_published:
+          description: The `items` `is_published`.
+          type: boolean
+        is_testing:
+          description: The `items` `is_testing`.
+          type: boolean
+        language:
+          description: The `items` `language`.
+          type: string
+        last_updated_at:
+          description: The `items` `last_updated_at`.
+          format: date-time
+          type: string
+        last_updated_by:
+          description: The `items` `last_updated_by`.
+          type: string
+        name:
+          description: The `items` `name`.
+          type: string
+        regex:
+          description: The `items` `regex`.
+          type: string
+        severity:
+          description: The `items` `severity`.
+          type: string
+        short_description:
+          description: The `items` `short_description`.
+          type: string
+        should_use_ai_fix:
+          description: The `items` `should_use_ai_fix`.
+          type: boolean
+        tests:
+          description: The `items` `tests`.
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems'
+          type: array
+        tree_sitter_query:
+          description: The `items` `tree_sitter_query`.
+          type: string
+        type:
+          description: The `items` `type`.
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems`
+        object.
+      properties:
+        description:
+          description: The `items` `description`.
+          type: string
+        name:
+          description: The `items` `name`.
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData`
+        object.
+      properties:
+        id:
+          description: The `data` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType:
+      default: rules
+      description: Rules resource type.
+      enum:
+      - rules
+      example: rules
+      type: string
+      x-enum-varnames:
+      - RULES
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems:
+      description: The definition of `GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems`
+        object.
+      properties:
+        annotation_count:
+          description: The `items` `annotation_count`.
+          format: int64
+          maximum: 65535
+          minimum: 0
+          type: integer
+        code:
+          description: The `items` `code`.
+          type: string
+        filename:
+          description: The `items` `filename`.
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataType:
+      default: get_multiple_rulesets_response
+      description: Get multiple rulesets response resource type.
+      enum:
+      - get_multiple_rulesets_response
+      example: get_multiple_rulesets_response
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_RESPONSE
     GetResourceEvaluationFiltersResponse:
       description: The definition of `GetResourceEvaluationFiltersResponse` object.
       properties:
@@ -41670,6 +41930,146 @@ components:
       - ISSUE_ASSIGNEE
       - ISSUE_CASE
       - ISSUE_TEAM_OWNERS
+    SecretRuleArray:
+      description: The definition of `SecretRuleArray` object.
+      properties:
+        data:
+          description: The `SecretRuleArray` `data`.
+          items:
+            $ref: '#/components/schemas/SecretRuleData'
+          type: array
+      required:
+      - data
+      type: object
+    SecretRuleData:
+      description: The definition of `SecretRuleData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecretRuleDataAttributes'
+        id:
+          description: The `SecretRuleData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/SecretRuleDataType'
+      required:
+      - type
+      type: object
+    SecretRuleDataAttributes:
+      description: The definition of `SecretRuleDataAttributes` object.
+      properties:
+        default_included_keywords:
+          description: The `attributes` `default_included_keywords`.
+          items:
+            type: string
+          type: array
+        description:
+          description: The `attributes` `description`.
+          type: string
+        license:
+          description: The `attributes` `license`.
+          type: string
+        match_validation:
+          $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidation'
+        name:
+          description: The `attributes` `name`.
+          type: string
+        pattern:
+          description: The `attributes` `pattern`.
+          type: string
+        priority:
+          description: The `attributes` `priority`.
+          type: string
+        sds_id:
+          description: The `attributes` `sds_id`.
+          type: string
+        validators:
+          description: The `attributes` `validators`.
+          items:
+            type: string
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidation:
+      description: The definition of `SecretRuleDataAttributesMatchValidation` object.
+      properties:
+        endpoint:
+          description: The `match_validation` `endpoint`.
+          type: string
+        hosts:
+          description: The `match_validation` `hosts`.
+          items:
+            type: string
+          type: array
+        http_method:
+          description: The `match_validation` `http_method`.
+          type: string
+        invalid_http_status_code:
+          description: The `match_validation` `invalid_http_status_code`.
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems'
+          type: array
+        request_headers:
+          additionalProperties:
+            type: string
+          description: The `match_validation` `request_headers`.
+          type: object
+        timeout_seconds:
+          description: The `match_validation` `timeout_seconds`.
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        type:
+          description: The `match_validation` `type`.
+          type: string
+        valid_http_status_code:
+          description: The `match_validation` `valid_http_status_code`.
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems'
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems:
+      description: The definition of `SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems`
+        object.
+      properties:
+        end:
+          description: The `items` `end`.
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          description: The `items` `start`.
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems:
+      description: The definition of `SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems`
+        object.
+      properties:
+        end:
+          description: The `items` `end`.
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          description: The `items` `start`.
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataType:
+      default: secret_rule
+      description: Secret rule resource type.
+      enum:
+      - secret_rule
+      example: secret_rule
+      type: string
+      x-enum-varnames:
+      - SECRET_RULE
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -78028,6 +78428,65 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/static-analysis/rulesets:
+    post:
+      description: Get rules for multiple rulesets in batch.
+      operationId: ListMultipleRulesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMultipleRulesetsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMultipleRulesetsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - code_analysis_read
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Ruleset get multiple
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/secrets/rules:
+    get:
+      description: Returns list of Secrets rules with ID, Pattern, Description, Priority,
+        and SDS ID
+      operationId: GetSecretsRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretRuleArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - code_analysis_read
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Returns list of Secrets rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
