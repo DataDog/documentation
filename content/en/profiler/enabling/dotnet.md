@@ -45,7 +45,8 @@ Supported .NET runtimes (64-bit applications)
 .NET 6<br/>
 .NET 7<br/>
 .NET 8<br/>
-.NET 9
+.NET 9<br/>
+.NET 10
 
 <div class="alert alert-warning">
   <strong>Note:</strong> For containers, <strong>more than one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
@@ -62,16 +63,16 @@ The following profiling features are available in the following minimum versions
 | CPU profiling              | 2.15.0+                            | All supported runtime versions.                                                          |
 | GC CPU consumption         | 3.19.0+                            | .NET 5+                                                          |
 | Exceptions profiling       | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling beta | 3.12.0+ / 2.18.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+)   |
+| Allocations profiling      | 3.12.0+ / 3.28.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+ but .NET10 recommended with 3.28+)   |
 | Lock Contention profiling  | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                                |
-| Live heap profiling beta   | 2.22.0+                            | .NET 7+                                                                                  |
+| Live heap profiling        | 3.28.0+                            | .NET 7+ but .NET 10+ recommended                                                                                  |
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+ (and 3.19.0+ for outgoing HTTP requests longer than 50 ms in beta and thread start/end events)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
 
 - Allocations and Lock Contention profiling for .NET Framework requires that the Datadog Agent and the profiled applications are running on the same machine.
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
-- Allocations and Live Heap profiling are in beta until .NET 10 ships with the required changes for better statistical allocations sampling.
+- Allocations and Live Heap profiling are GA in .NET 10. For the other previous versions of .NET, the statistical distribution of allocations sampling might not be accurate (i.e. expect larger objects to be more represented).
 - Continuous Profiler is not supported for AWS Lambda.
 - Continuous Profiler does not support ARM64.
  
