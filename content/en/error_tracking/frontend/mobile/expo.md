@@ -11,25 +11,29 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
   text: Debug iOS crashes efficiently with Datadog
-- link: /real_user_monitoring/error_tracking/
+- link: /error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-- link: /real_user_monitoring/error_tracking/explorer
+- link: /error_tracking/explorer
   tag: Documentation
   text: Visualize Error Tracking data in the Explorer
 ---
 
 ## Overview
 
-Enable Expo Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
+Enable Expo Crash Reporting and Error Tracking to get comprehensive crash reports and error trends for your Expo mobile applications.
 
-With this feature, you can access the following features:
+With this feature, you can access:
 
 -   Aggregated Expo crash dashboards and attributes
 -   Symbolicated iOS and deobfuscated Android crash reports
 -   Trend analysis with Expo error tracking
 
-In order to symbolicate your stack traces and deobfuscate Android crashes, upload your .dSYM, Proguard mapping files and source maps to Datadog using the `expo-datadog` config plugin.
+In order to symbolicate your stack traces and deobfuscate Android crashes, upload your `.dSYM` files, Proguard mapping files and source maps to Datadog using the `expo-datadog` config plugin.
+
+Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+**Note:** Error Tracking can be used as a standalone product or alongside [Real User Monitoring (RUM)][12]. If you're using RUM, Error Tracking is already included. See the [RUM Expo setup documentation][3] for RUM-specific configuration.
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -107,8 +111,8 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // track user interactions
-    true, // track XHR resources
+    true, // track user interactions (set to false if using Error Tracking only)
+    true, // track XHR resources (set to false if using Error Tracking only)
     true  // track errors
 );
 
@@ -116,11 +120,13 @@ const config = new DdSdkReactNativeConfiguration(
 config.site = 'US1';
 // Optional: Enable or disable native crash reports.
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (affects Error Tracking visibility), for example: 80% of sessions are sent to Datadog. Default is 100%.
+// Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
 config.sessionSamplingRate = 80;
 
 await DdSdkReactNative.initialize(config);
 ```
+
+**Note:** If you're using Error Tracking as a standalone product without RUM, you can set the user interaction and XHR resource tracking parameters to `false`. However, view tracking (Step 2) is still required for Error Tracking sessions to be created.
 
 ### Step 4 - Configure the Expo plugin
 
@@ -249,6 +255,16 @@ const crashApp = () => {
 
 Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
 
+To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
+
+```javascript
+import { crashNativeMainThread } from 'react-native-performance-limiter';
+
+const crashApp = () => {
+    crashNativeMainThread('custom error message');
+};
+```
+
 ## Expo Go
 
 If you are using Expo Go, switch to development builds (recommended), or keep using Expo Go without Datadog while having it run on your standalone application (not recommended).
@@ -336,6 +352,16 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 
 If you want to disable **all file uploads**, remove `expo-datadog` from the list of plugins.
 
+### List uploaded source maps
+
+See the [RUM Debug Symbols][13] page to view all uploaded symbols.
+
+### Specifying a custom release version
+
+Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your source maps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
+
+When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
+
 ### Using Expo with Datadog and Sentry
 
 Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
@@ -355,13 +381,32 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
+To compute the size of your source maps and bundle, run the following command:
+
+```shell
+npx react-native bundle \
+  --dev false \
+  --platform ios \
+  --entry-file index.js \
+  --bundle-output build/main.jsbundle \
+  --sourcemap-output build/main.jsbundle.map
+
+sourcemapsize=$(wc -c build/main.jsbundle.map | awk '{print $1}')
+bundlesize=$(wc -c build/main.jsbundle | awk '{print $1}')
+payloadsize=$(($sourcemapsize + $bundlesize))
+
+echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
+```
+
+If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/#usage
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
 [6]: https://www.npmjs.com/package/react-native-performance-limiter
@@ -370,3 +415,5 @@ Source maps and mapping files are limited in size to **500 MB** each, while dSYM
 [9]: https://docs.expo.dev/development/introduction/
 [10]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
 [11]: https://docs.expo.dev/development/getting-started/
+[12]: /real_user_monitoring/
+[13]: https://app.datadoghq.com/source-code/setup/rum
