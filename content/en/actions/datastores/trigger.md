@@ -41,8 +41,7 @@ To delete an automation rule:
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
-1. _Are you sure?_ will appear in the Datadog UI.
-1. Click **Delete**.
+1. Confirm deletion when prompted
 
 ## Further reading
 
