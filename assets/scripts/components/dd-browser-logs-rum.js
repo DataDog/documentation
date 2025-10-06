@@ -5,8 +5,6 @@ const lang = document.documentElement.lang || 'en';
 
 const Config = getConfig(env);
 
-const CI_COMMIT_SHORT_SHA = CI_COMMIT_SHORT_SHA || document.documentElement.dataset.ciCommitShortSha;
-const IA_SUBDOMAIN = IA_SUBDOMAIN || document.documentElement.dataset.iaSubdomain;
 const generateRumDeviceId = () => Math.floor(Math.random() * 2 ** 53).toString(36);
 
 const getRumDeviceId = () => {
