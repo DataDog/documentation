@@ -46,7 +46,7 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 Pipelines use [Granular Access Control][7]. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources.
 
-<div class="alert alert-warning">Granular Access Control is available for organizations that do not already have the scoped RBAC feature flag enabled on piplines.</div>
+<div class="alert alert-warning">Granular Access Control is not supported for organizations that already have the scoped RBAC feature flag enabled.</div>
 
 For individual pipelines, administrators can choose the following edit scopes:
 
@@ -54,7 +54,7 @@ For individual pipelines, administrators can choose the following edit scopes:
 * **Restricted pipeline editor**: Editing permissions are limited to specific users, teams, or roles.
 * **Processor-only editor**: Users are allowed to edit the pipeline's **processors** (including nested pipelines) but cannot modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
-These permissions are fully manageable programmatically through **API and Terraform**.
+You can manage these permissions programmatically through **API and Terraform**.
 
 ## Preprocessing
 
@@ -62,7 +62,7 @@ Preprocessing of JSON logs occurs before logs enter pipeline processing. Preproc
 
 JSON log preprocessing comes with a default configuration that works for standard log forwarders. To edit this configuration to adapt custom or specific log forwarding approaches:
 
-1. Navigate to [Pipelines][8] in the Datadog app and select [Preprocessing for JSON logs][9].
+1. Navigate to [Pipelines][8] in Datadog and select [Preprocessing for JSON logs][9].
 
     **Note:** Preprocessing JSON logs is the only way to define one of your log attributes as `host` for your logs.
 
@@ -194,7 +194,7 @@ By default, Datadog tracers can [automatically inject span IDs into your logs][1
 
 ## Create a pipeline
 
-1. Navigate to [Pipelines][8] in the Datadog app.
+1. Navigate to [Pipelines][8] in Datadog.
 2. Select **New Pipeline**.
 3. Select a log from the live tail preview to apply a filter, or apply your own filter. Choose a filter from the dropdown menu or create your own filter query by selecting the **</>** icon. Filters let you limit what kinds of logs a pipeline applies to.
 
@@ -232,7 +232,7 @@ To see the full list of integration pipelines that Datadog offers, browse the [i
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="Integration pipeline library" video=true style="width:80%;">}}
 
-To use an integration pipeline, Datadog recommends installing the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation is automatically triggered and the integration pipeline is added to the processing pipelines list. To configure the log source, refer to the corresponding [integration documentation][11].
+To use an integration pipeline, Datadog recommends installing the integration by configuring the corresponding log `source`. After Datadog receives the first log with this source, the installation is automatically triggered and the integration pipeline is added to the processing pipelines list. To configure the log source, see the corresponding [integration documentation][11].
 
 It's also possible to copy an integration pipeline using the clone button.
 
@@ -240,7 +240,7 @@ It's also possible to copy an integration pipeline using the clone button.
 
 ## Add a processor or nested pipeline
 
-1. Navigate to [Pipelines][8] in the Datadog app.
+1. Navigate to [Pipelines][8] in Datadog.
 2. Hover over a pipeline and click the arrow next to it to expand processors and nested pipelines.
 3. Select **Add Processor** or **Add Nested Pipeline**.
 
@@ -248,7 +248,7 @@ It's also possible to copy an integration pipeline using the clone button.
 
 A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API.
 
-See [Parsing dates][12] for more information about parsing a custom date and time format and for information on the `timezone` parameter, which is needed if your timestamps are not in UTC.
+See [Parsing dates][12] to learn about custom date and time formats and the require `timezone` parameter for non-UTC timestamps.
 
 ### Nested pipelines
 
@@ -276,7 +276,7 @@ Reorder pipelines precisely with the `Move to` option in the sliding option pane
 
 ## Estimated usage metrics
 
-Estimated usage metrics are displayed per pipeline - specifically, the volume and count of logs being ingested and modified by each pipeline. There is also a link to the out-of-the-box [Logs Estimated Usage Dashboard][13] from every pipeline where you can view that pipeline's usage metrics in more detailed charts.
+Estimated usage metrics are displayed for each pipeline. This shows the the volume and count of logs being ingested and modified by each pipeline. Every pipeline includes a link to the out-of-the-box [Logs Estimated Usage Dashboard][13]. This dashboard offers detailed charts of the pipeline's usage metrics.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="How to get a quick view of your pipelines' usage metrics" style="width:50%;">}}
 
