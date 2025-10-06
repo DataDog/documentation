@@ -4770,6 +4770,11 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
+    - name: Metrics
+      url: llm_observability/monitoring/metrics
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_metrics
+      weight: 305
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
