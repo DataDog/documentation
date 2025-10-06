@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Data Collected
+description: Reference guide for metrics and events collected by the Datadog Agent from Kubernetes clusters
 aliases:
  - /agent/kubernetes/metrics
  - /agent/kubernetes/data_collected
