@@ -1,8 +1,9 @@
 {{ $root := . }}
 {{ $sd_wan_integrations := slice
-    (dict "name" "meraki" "href" "/integrations/meraki/" "src" "integrations_logos/meraki.png")
-    (dict "name" "cisco-sdwan" "href" "/integrations/cisco-sdwan/" "src" "integrations_logos/cisco-sdwan_small.svg")
-    (dict "name" "velocloud" "href" "/integrations/velocloud-sd-wan/" "src" "integrations_logos/velocloud-sd-wan_small.svg")
+  (dict "name" "meraki" "href" "/integrations/meraki/" "src" "integrations_logos/meraki.png")
+  (dict "name" "cisco-sdwan" "href" "/integrations/cisco-sdwan/" "src" "integrations_logos/cisco-sdwan_small.svg")
+  (dict "name" "velocloud" "href" "/integrations/velocloud-sd-wan/" "src" "integrations_logos/velocloud-sd-wan_small.svg")
+  (dict "name" "versa" "href" "/integrations/versa/" "src" "integrations_logos/versa_logo_small.png")
 }}
 <div class="sd-wan-integrations">
   <div class="container cards-dd">
@@ -11,7 +12,7 @@
       <div class="col">
         <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "120") }}
           </div>
         </a>
       </div>
@@ -23,7 +24,7 @@
       <div class="col">
         <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "120") }}
           </div>
         </a>
       </div>
@@ -35,7 +36,7 @@
       <div class="col">
         <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "120") }}
           </div>
         </a>
       </div>
