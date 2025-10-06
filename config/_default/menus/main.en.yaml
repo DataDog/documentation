@@ -344,7 +344,7 @@ menu:
       url: agent/supported_platforms/heroku/
       weight: 405
       parent: agent_supported_platforms
-    - name: MacOS 
+    - name: MacOS
       identifier: basic_agent_usage_osx
       url: agent/supported_platforms/osx/
       weight: 406
@@ -4780,6 +4780,11 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
+      weight: 400
     - name: Managed
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
