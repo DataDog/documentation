@@ -33,7 +33,6 @@ For other missing metrics, contact [Datadog support][3] with the following infor
 
 Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric. **Important**: Graph 1-minute data points in the screenshot.
 
-
 ### Enable diagnostics
 
 Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc. Follow these instructions:
@@ -74,6 +73,110 @@ Ensure that you have not exceeded your [daily quota][4] for log retention.
 
 **Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
 
+## Metric discrepancies
+
+Metric discrepancies between Datadog and Azure typically arise from differences in [time or space aggregation][5]. Datadog collects all of the [Azure Monitor supported metrics][6], with all available dimensions, the lowest time granularity, and the primary aggregation type. 
+
+**Note**: In addition to the [Azure Monitor supported metrics][6] page, you can also find this information by querying Azure's [Metric Definitions - List API][10]. 
+
+### Compare metric values
+
+To compare metrics in Azure Monitor with metrics in Datadog, make sure that your query includes:
+
+- The most granular dimension available 
+- The primary aggregation type 
+- The lowest time granularity
+
+The following steps reconcile the metric `azure.storage_storageaccounts_blobservices.ingress` between Azure and Datadog.
+
+  1. Find the corresponding metric in Azure.
+
+     Datadog converts metrics from Azure monitor into the format `azure.<RESOURCE_PROVIDER_RESOURCE_TYPE>.<METRIC_NAME>`. For the [example metric][8], the Azure Resource Provider is **storage**, the Azure Resource Type is **storageaccounts_blobservices**, and the metric name is **ingress**.
+
+  2. Find the most granular dimensions, time interval, and the primary aggregation type for the metric. 
+  
+  Click the section below to see an example Azure API response for the `azure.storage_storageaccounts_blobservices.ingress` with these fields highlighted.
+
+{{% collapse-content title="Example Azure API response" level="h4" expanded=false id="example-azure-api-response" %}}
+  {{< highlight json "hl_lines=13 22 60-61" >}}
+    {
+      "id": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.Storage/storageAccounts/<RESOURCE_NAME>/providers/microsoft.insights/metricdefinitions/Ingress",
+      "resourceId": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.Storage/storageAccounts/<RESOURCE_NAME>",
+        "namespace": "Microsoft.Storage/storageAccounts",
+        "category": "Transaction",
+        "name": {
+          "value": "Ingress",
+          "localizedValue": "Ingress"
+        },
+        "displayDescription": "The amount of ingress data, in bytes. This number includes ingress from an external client into Azure Storage as well as ingress within Azure.",
+        "isDimensionRequired": false,
+        "unit": "Bytes",
+        "primaryAggregationType": "Total",
+        "supportedAggregationTypes": [
+          "Total",
+          "Average",
+          "Minimum",
+          "Maximum"
+        ],
+        "metricAvailabilities": [
+          {
+            "timeGrain": "PT1M",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "PT5M",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "PT15M",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "PT30M",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "PT1H",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "PT6H",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "PT12H",
+            "retention": "P93D"
+          },
+          {
+            "timeGrain": "P1D",
+            "retention": "P93D"
+          }
+        ],
+        "dimensions": [
+          {
+            "value": "GeoType",
+            "localizedValue": "Geo type"
+          },
+          {
+            "value": "ApiName",
+            "localizedValue": "API name"
+          },
+          {
+            "value": "Authentication",
+            "localizedValue": "Authentication"
+          }
+      ]
+    }
+    {{< /highlight >}}
+
+{{% /collapse-content %}} 
+
+   **Note**: `Total` is the same as `Sum`. See [Aggregation types][7] in the Azure Monitor documentation for more information.
+
+   3. Graph the metric in the Azure Monitor Metrics Explorer, or by opening the resource in Azure and clicking **Monitoring → Metrics** in the left panel.
+
+   4. Graph the metric in the [Datadog Metrics Explorer][9] over the same time frame. If you use the same values for time and space aggregation, the metric values should match.
+
 ## Monitoring multiple app registrations
 
 Subscriptions monitored by multiple app registrations can introduce overlapping access configurations. This setup is not recommended and may result in integration issues or system conflicts, and may also increase your Azure Monitor costs.
@@ -86,3 +189,9 @@ Subscriptions monitored by multiple app registrations can introduce overlapping 
 [2]: https://manage.windowsazure.com
 [3]: /help/
 [4]: /logs/indexes/#set-daily-quota
+[5]: /metrics/#time-and-space-aggregation
+[6]: https://learn.microsoft.com/azure/azure-monitor/reference/metrics-index
+[7]: https://learn.microsoft.com/azure/azure-monitor/metrics/metrics-aggregation-explained#aggregation-types
+[8]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/microsoft-storage-storageaccounts-blobservices-metrics#:~:text=ingress%20within%20Azure.-,Ingress,-Bytes
+[9]: https://app.datadoghq.com/metric/explorer
+[10]: https://learn.microsoft.com/rest/api/monitor/metric-definitions/list
