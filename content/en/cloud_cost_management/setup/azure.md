@@ -20,9 +20,11 @@ further_reading:
 
 ## Overview
 
-To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
+To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Azure integration and create **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. To determine your account type, see the [Azure documentation][10]. **Note**: If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. 
+
+To determine your account type, see the [Azure documentation][10]. **Note:** If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
 
 ## Setup
 
@@ -92,8 +94,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note:** If you do not see your App Registration listed, start typing in the name for the UI to update and show it, if it is available.
-    - Select *review + assign*.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note:** If you do not see your App Registration listed, start typing the name for the UI to update and show it, if it is available.
+    - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /tab %}}
@@ -108,7 +110,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
-    - Select *review + assign*.
+    - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
@@ -130,7 +132,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you have the proper permissions on the app registration but your network is blocking Datadog's webhook IPs, you may see unexpected errors that appear to be permission issues.
+**Note**: If you have the proper permissions on the app registration but your network is blocking Datadog's webhook IPs, you may encounter errors that appear to be permission-related.
 
 To resolve this, add Datadog's webhook IPs to your network allowlist by visiting the `Webhooks` section at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
@@ -227,7 +229,7 @@ The following out-of-the-box tags are derived from your [usage cost report][9] a
 | `resourceid` | The ID of the Azure resource. |
 | `resourcelocation` | The data center location where the resource is running (such as `westus2`). |
 | `resourcename` | The name of the resource. Not all charges come from deployed resources. |
-| ResourceType |  |
+| `resourcetype` | The type of the Azure resource. |
 | `servicefamily` | The service family that the service belongs to (such as `Compute`). The tag `consumedservice` has deeper insights on infrastructure types. |
 | `ServicePeriodEndDate` | The termination date of the Azure service period. |
 | `ServicePeriodStartDate` | The start date the Azure service period. |

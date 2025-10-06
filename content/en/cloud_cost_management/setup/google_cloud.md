@@ -122,7 +122,7 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 1. Trigger the service agent creation by following the [official documentation][11] using the following values:
    * ENDPOINT: `bigquerydatatransfer.googleapis.com`
    * RESOURCE_TYPE: `project`
-   * RESOURCE_ID: export dataset project</br></br>
+   * RESOURCE_ID: export dataset project<br><br>
 
      This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
 
@@ -133,7 +133,7 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 ### Configure Cloud Cost
 Continue to follow the steps indicated in [Setup & Configuration][3].
 
-**Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+**Note**: Data can take 48 to 72 hours after setup to stabilize in Datadog.
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
@@ -146,7 +146,7 @@ You can visualize your ingested data using the following cost types:
 
 ### Out-of-the-box tags
 
-Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][17].
+Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see the [Tags documentation][17].
 
 The following out-of-the-box tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data:
 

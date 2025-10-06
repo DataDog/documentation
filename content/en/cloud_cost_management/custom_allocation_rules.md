@@ -21,9 +21,9 @@ The following allocation methods are available:
  | Even  | Split costs evenly among all destinations. | Scenarios where each team, project, or environment should be charged the same amount for a shared cost. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
  | Custom  | Split costs to each destination based on percentages you define. | Scenarios where business rules or agreements dictate how much each team should pay. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
  | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion to their actual spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
- | Dynamic by metric  | Split costs based each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
+ | Dynamic by metric  | Split costs based on each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
 
-Custom allocation rules runs after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
+Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
 
 ## Create a custom allocation rule
 
@@ -92,10 +92,9 @@ For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {u
 
 To create a rule for this allocation, you could:
 
-- Define the costs to allocate (source): **PostGreSQL costs** (`azure_product_family:dbforpostgresql`).
+- Define the costs to allocate (source): **PostgreSQL costs** (`azure_product_family:dbforpostgresql`).
 - Choose the allocation method: **Dynamic by metric**
 - Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
 - Define the metric query used to split the source costs: **Query execution time per user** (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
 - Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
@@ -166,7 +165,7 @@ You can also disable a custom allocation rule without deleting it.
 Rules are applied in the same order as shown in the list.
 
 ## Visualize your allocations
-Changes to custom allocation rules may take up to 24 hours to be applied. After being applied, the new allocations can be seen throughout Cloud Cost Management on all costs where Container Allocation is set to `enabled`. Custom allocated costs also include an `allocated_by_rule` tag, denoting the rule name that applied the allocation.
+Changes to custom allocation rules may take up to 24 hours to be applied. After being applied, the new allocations can be seen throughout Cloud Cost Management. Custom allocated costs also include an `allocated_by_rule` tag, denoting the rule name that applied the allocation.
 
 {{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations-1.png" alt="See your allocations throughout Datadog" style="width:90%;" >}}
 

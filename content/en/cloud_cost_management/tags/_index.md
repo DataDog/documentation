@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Tags help you investigate and understand your cloud and SaaS costs across any dimensions. Tags consist of tag keys and values (for example: in `aws_product:ec2`, the tag key is `aws_product`, and the value is `ec2`.)
+Tags help you investigate and understand your cloud and SaaS costs across any dimensions. Tags consist of tag keys and values. For example, in `aws_product:ec2`, the tag key is `aws_product`, and the value is `ec2`.
 
-Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve higher cost allocation and get deeper insight into who owns infrastructure costs in your ever changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment. 
+Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve better cost allocation and get deeper insight into who owns infrastructure costs in your ever-changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment. 
 
 ## Where tags come from
 
@@ -34,13 +34,11 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 | Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
 | Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the [Datadog Cloud Network][12] product. Requires enabling Cloud Network in the Datadog agent. See [data transfer cost allocation][13] for more details |
-| Datadog Enrichment | Data Observability | Tags from the Datadog Data Observability product, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
-| Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from the Datadog Cloud Network product. Requires enabling Cloud Network in the Datadog agent |
 | Kubernetes Enrichment | Kubernetes Node | User-defined tags found on Kubernetes nodes monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Pod | User-defined tags found on Kubernetes pods monitored with Datadog | 
 | Kubernetes Enrichment | Kubernetes Persistent Volume | User-defined tags found on Persistent Volumes in Kubernetes clusters monitored with Datadog |
 | Kubernetes Enrichment | Kubernetes Persistent Volume Claim | User-defined tags found on Persistent Volume Claims in Kubernetes clusters monitored with Datadog | 
-| Cloud Cost Management | Cloud Cost Aliases | Some aliases are tags derived from provider cost data, used to simplify the cost data model, such as `aws_product`, which is an alias of `lineItem/ProductCode`. Additional tags that exist on both cost data and integration metrics are added, allowing cost data and usage data to be combined in Custom Allocation Rules, dashboards, and notebooks |
+| Cloud Cost Management | Cloud Cost Aliases | Tags derived from provider cost data to simplify the cost data model, such as `aws_product` (an alias of `lineItem/ProductCode`). Additional tags that exist on both cost data and integration metrics are added, allowing cost data and usage data to be combined in Custom Allocation Rules, dashboards, and notebooks |
 | Cloud Cost Management | Cloud Cost Allocation | Tags created during [cost allocation][11] that specify the split of shared resources, such as `allocated_spend_type` |
 | Cloud Cost Management | FOCUS | Provider-agnostic tags compliant with [FOCUS][8], the unifying format for cloud billing data |
 | Tag Pipelines | Rules defined by user | Tags created by applying your Tag Pipelines to cost data |
@@ -87,9 +85,9 @@ Cloud Cost Management normalizes tag **values** as well, while maintaining human
 
 ## How tags are prioritized
 
-It's possible for a cost data row to have multiple values for the same tag key, if tag values from 2+ sources are combined, and one is not prioritized over the other.
+A cost data row can have multiple values for the same tag key when tag values from two or more sources are combined and one is not prioritized over the other.
 
-To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopist` would take precedence and replace an Kubernetes node tag `team:compute`.
+To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopping` would take precedence and replace a Kubernetes node tag `team:compute`.
 
 Sources higher in this list replace tag values from sources lower in this list, if there are conflicts:
 - Custom Allocation Rules
@@ -102,7 +100,7 @@ Sources higher in this list replace tag values from sources lower in this list, 
 - Kubernetes Node 
 - Host Agent
 
-Other tag sources (such as AWS Organization tags, integration tile tags, and such) can be overridden by these sources. Bill columns and FOCUS columns are reserved and cannot be overridden. Tag Pipelines add new tags but do not override existing tags.
+Other tag sources (such as AWS Organization tags, integration tile tags, and similar sources) can be overridden by these sources. Bill columns and FOCUS columns are reserved and cannot be overridden by any source. Tag Pipelines add new tags but do not override existing tags.
 
 ## Improving tagging
 
