@@ -43,12 +43,12 @@ Below are a few examples of what App Builder apps can do:
 ## Start with Onboarding
 
 When creating a new app, Datadog displays an onboarding modal with the following options: 
-- Start with AI 
+- [Start with AI][11] 
 - [Start with Blueprint][5]
-- Start with Layout
-- Start with Data
+- [Start with Layout][12]
+- [Start with Data][13]
 - [Start from Scratch][10] 
-- App Playground
+- [App Playground][14]
 
 {{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="App blueprints" style="width:100%;" >}}
 
@@ -98,3 +98,7 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/app-builder/apps/list
 [10]: /actions/app_builder/build/?site=us#create-a-custom-app
+[11]: /actions/app_builder/build/#build-an-app-with-ai
+[12]: /actions/app_builder/build/#build-an-app-from-a-layout
+[13]: /actions/app_builder/build/#build-an-app-from-data
+[14]: /actions/app_builder/build/#build-with-app-playground
