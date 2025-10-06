@@ -66,12 +66,29 @@ Choosing a layout creates an app as a table, form, or custom graph.
 1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
+### Build an app from data
+
+You can get started with an app by importing data from one of your [integrations][16].
+
+1. From [App Builder][1], click **New App**. 
+1. Click **Start with Data**. 
+1. Choose an integration, then click **Continue**.
+1. Choose one or more actions. There is no limit to the number of actions you can choose. 
+1. Click **Create**.
+1. To change the app name and description, click the app name.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
+1. Each layout template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
 ### Create a custom app
 
 1. From [App Builder][1], click **New App**. 
 1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
 1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab, then click the component or drag it onto the canvas.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
@@ -193,3 +210,4 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [13]: /service_management/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
 [15]: /actions/app_builder/build/#customize-your-app
+[16]: /getting_started/integrations/
