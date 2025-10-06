@@ -41,7 +41,7 @@ You can create and manage custom evaluations from the [Evaluations page][1] in L
 {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="Begin creating your own Custom LLM-as-a-judge Evaluation by opening the Create Evaluation side panel from the Evaluations page" style="width:100%;" >}}
 
 
-### 1. Name Your Evaluation
+### 1. Name your evaluation
 
 Give your evaluation a clear, descriptive name (e.g., `factuality-check` or `tone-eval`). You will use this name later when querying evaluation results. The name has to be unique within your application.
 
@@ -49,7 +49,7 @@ Give your evaluation a clear, descriptive name (e.g., `factuality-check` or `ton
 
 Select your LLM account and the model you wish to use for the evaluation. If you do not have an LLM account already integrated with LLM Observability, follow these instructions to [connect an LLM provider][2].
 
-### 3. Define the Evaluation Prompt
+### 3. Define the evaluation prompt
 
 In the **Evaluation Prompt** section, you can either:
 - Use preexisting prompt templates, including:
@@ -103,7 +103,7 @@ Classification: unrelated
 Span Input: {{span_input}}
 {{< /code-block >}}
 
-### 4. Choose Output Type
+### 4. Choose an output type
 
 Define the expected output schema for the evaluator:
 
