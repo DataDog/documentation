@@ -58,6 +58,15 @@ To learn more, see [custom instrumentation][6].
 Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
 {{< /callout >}}
 
+## Instrumentation types comparison
+
+|      | [Single Step Instrumentation][7] | [Manually Managed SDKs][8] | [Code-based Custom Instrumentation][9] | [UI-based Custom Instrumentation][11] (a.k.a. Dynamic Instrumentation) | 
+| ---  | ----------- | ----------- | ----------- | ----------- |
+| Instrumentation type | Automatic instrumentation | Automatic instrumentation | Custom instrumentation | Custom instrumentation |
+| Code changes required? | No | No | Yes | No |
+| Environment config changes? | No | Yes | Yes | No |
+| Set-up complexity | Low | Medium | High | Low | 
+| Best for | SRE, admins, or central observability teams managing instrumentation at scale without requiring developer involvement. | App dev teams who want to instrument applications individually with granular control over configuration through environment variables. | Teams that need to add custom logic for span creation or modify instrumentation behavior beyond standard automatic instrumentation. | Teams that want to add custom spans, metrics, or tags to specific code locations without modifying source code. Configuration is managed through the Datadog UI. |
 
 ## APM setup tutorials
 
