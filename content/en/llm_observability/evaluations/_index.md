@@ -8,34 +8,39 @@ aliases:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][7].
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][8].
+
+### Custom LLM-as-a-Judge Evaluations
+
+[Custom LLM-as-a-Judge Evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria—like tone, helpfulness, or factuality—and run them at scale across your traces and spans.
 
 ### Managed Evaluations
 
-Datadog builds and supports [Managed Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
+Datadog builds and supports [Managed Evaluations][2] to support common use cases. You can enable and configure them within the LLM Observability application.
 
 ### Submit External Evaluations
 
-You can also submit [External Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also submit [External Evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
 ### Evaluation Integrations
 
-Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][3] and [NeMo][4].
+Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][4] and [NeMo][5].
 
 ### Sensitive Data Scanner integration
 
-In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][5], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application. 
+In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
 
 By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
 ### Permissions
 
-[LLM Observability Write permissions][6] are necessary to configure evaluations.
+[LLM Observability Write permissions][7] are necessary to configure evaluations.
 
-[1]: /llm_observability/evaluations/managed_evaluations
-[2]: /llm_observability/evaluations/external_evaluations
-[3]: /llm_observability/evaluations/ragas_evaluations
-[4]: /llm_observability/evaluations/submit_nemo_evaluations
-[5]: /security/sensitive_data_scanner/
-[6]: /account_management/rbac/permissions/#llm-observability
-[7]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+[2]: /llm_observability/evaluations/managed_evaluations
+[3]: /llm_observability/evaluations/external_evaluations
+[4]: /llm_observability/evaluations/ragas_evaluations
+[5]: /llm_observability/evaluations/submit_nemo_evaluations
+[6]: /security/sensitive_data_scanner/
+[7]: /account_management/rbac/permissions/#llm-observability
+[8]: https://app.datadoghq.com/llm/settings/evaluations

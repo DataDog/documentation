@@ -1,6 +1,6 @@
 ---
 title: Custom LLM-as-a-Judge Evaluations
-description: Learn how to create custom evaluations for your LLM applications using LLM-as-a-Judge.
+description: Learn how to create Custom LLM-as-a-judge Evaluations.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
@@ -28,9 +28,9 @@ Custom LLM-as-a-Judge Evaluations use an LLM to judge the performance of another
 
 You define:
 - The criteria (via prompt text)
-- What is evaluated (for example, a span's output)
-- The model (for example, GPT-4o)
-- The output type (Boolean, numeric score, or categorical label)
+- What is evaluated (e.g., a span's output)
+- The model (e.g., GPT-4o)
+- The output type (boolean, numeric score, or categorical label)
 
 Datadog then runs this evaluation logic automatically against your spans, recording results as structured metrics that you can query, visualize, and monitor.
 
@@ -38,17 +38,18 @@ Datadog then runs this evaluation logic automatically against your spans, record
 
 You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability.
 
-### 1. Name your evaluation
+{{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="Begin creating your own Custom LLM-as-a-judge Evaluation by opening the Create Evaluation side panel from the Evaluations page" style="width:100%;" >}}
 
-Give your evaluation a clear, descriptive name (for example, `factuality-check` or `tone-eval`).
 
-You'll use this name later when querying evaluation results. The name has to be unique within your application.
+### 1. Name Your Evaluation
 
-### 2. Choose a model provider and model
+Give your evaluation a clear, descriptive name (e.g., `factuality-check` or `tone-eval`). You will use this name later when querying evaluation results. The name has to be unique within your application.
 
-Select your LLM account and the model you wish to use for the evaluation. If you do not have an LLM account already integrated with LLM Observability, follow [these instructions][2] to connect an LLM provider.
+### 2. Choose an LLM provider and model
 
-### 3. Define the evaluation prompt
+Select your LLM account and the model you wish to use for the evaluation. If you do not have an LLM account already integrated with LLM Observability, follow these instructions to [connect an LLM provider][2].
+
+### 3. Define the Evaluation Prompt
 
 In the **Evaluation Prompt** section, you can either:
 - Use preexisting prompt templates, including:
@@ -57,9 +58,9 @@ In the **Evaluation Prompt** section, you can either:
   - Sentiment
   - Topic Relevancy
   - Toxicity
-- Or create an evaluation from scratch by writing your own criteria.
+- Create an evaluation from scratch by writing your own criteria.
 
-Templates can be used as-is or fully customized to match your specific evaluation logic.
+Templates can be used as-is or modified to match your specific evaluation logic.
 
 #### Writing a custom prompt
 
@@ -68,7 +69,7 @@ In the **System Prompt** field, write clear instructions describing what the eva
 - Focus on a single evaluation goal
 - Include 2–3 few-shot examples showing input/output pairs, expected results, and reasoning.
 
-In the **User Prompt** field, explicitly specify what parts of the span to evaluate: Span Input, Output, or Both.
+In the **User Prompt** field, explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
 
 **Example System Prompt:**
 
@@ -102,17 +103,17 @@ Classification: unrelated
 Span Input: {{span_input}}
 {{< /code-block >}}
 
-### 4. Choose output type
+### 4. Choose Output Type
 
 Define the expected output schema for the evaluator:
 
-- **Boolean** – True/False results (for example, "Did the model follow instructions?")
-- **Score** – Numeric rating (for example, 1–5 scale for helpfulness)
-- **Categorical** – Discrete labels (for example, "Good", "Bad", "Neutral")
+- **Boolean** – True/False results (e.g., "Did the model follow instructions?")
+- **Score** – Numeric rating (e.g., 1–5 scale for helpfulness)
+- **Categorical** – Discrete labels (e.g., "Good", "Bad", "Neutral")
 
-The schema ensures your results are structured for querying and dashboarding. For Anthropic and Bedrock models, only Boolean output types are available.
+The schema ensures your results are structured for querying and dashboarding. For Anthropic and Bedrock models, only Boolean output types are allowed.
 
-You can preview and refine your logic in the **Test Evaluation** panel by providing sample span input/output and clicking **Run Evaluation** to verify outputs before saving.
+You can preview and refine your logic in the [**Test Evaluation**](#6-test-your-evaluation) panel by providing sample span input/output and clicking **Run Evaluation** to verify outputs.
 
 ### 5. Configure filters and sampling
 
@@ -131,9 +132,14 @@ Use the **Test Evaluation** panel on the right to preview how your evaluator per
 
 You can input sample `{{span_input}}` and `{{span_output}}` values, then click **Run Evaluation** to see the LLM-as-a-Judge's output before saving. Modify your evaluation until you are satisfied with the results.
 
+{{< img src="llm_observability/evaluations/custom_llm_judge_2.png" alt="The Test Evaluation panel allows you to preview your evaluation before saving." style="width:100%;" >}}
+
+
 ## Viewing and using results
 
-After an evaluation has been saved, it will automatically run on targeted spans and results will be available across LLM Observability in near-realtime.
+After an evaluation has been saved, it will automatically run on targeted spans and results will be available across LLM Observability in near-realtime. Custom LLM-as-a-judge results for a specific span can be found in the **Evaluations** tab next to all other evaluations.
+
+{{< img src="llm_observability/evaluations/custom_llm_judge_3.png" alt="View custom evaluation results alongside managed evaluations in the Evaluations tab of a trace" style="width:100%;" >}}
 
 Use the syntax `@evaluations.custom.<evaluation_name>` to query or visualize results.
 
@@ -142,11 +148,14 @@ For example:
 @evaluations.custom.helpfulness-check
 ```
 
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="Filter and query traces using custom evaluation results in the LLM Observability Traces page" style="width:100%;" >}}
+
+
 You can:
 - Filter traces by evaluation results
-- Use evaluation results as facets
+- Use evaluation results as [facets][5]
 - View aggregate results in the LLM Observability Overview page's Evaluation section
-- Create monitors to alert on performance changes or regression
+- Create [monitors][6] to alert on performance changes or regression
 
 ## Best practices for reliable custom evaluations
 
@@ -166,4 +175,6 @@ For more resources on best practices, check out [Building an LLM evaluation fram
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
 [3]: https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/
 [4]: https://huggingface.co/learn/cookbook/llm_judge
+[5]: https://docs.datadoghq.com/service_management/events/explorer/facets/
+[6]: https://docs.datadoghq.com/monitors/
 
