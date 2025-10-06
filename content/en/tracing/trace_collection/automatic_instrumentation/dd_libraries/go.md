@@ -241,10 +241,11 @@ You can remove integrations by modifying the imports in the `orchestrion.tool.go
 You might do this if you don't want an integration,
 or if you want to reduce the number of transitive dependencies for integrations your program doesn't use.
 By default, Orchestrion imports `github.com/DataDog/dd-trace-go/orchestrion/all/v2`,
-which will import every library for which there is an Orchestrion integration.
+which imports every library for which there is an Orchestrion integration.
 You can replace this import with imports of only the integrations you want to use.
 See [the tracer source code][17] for the list of supported integrations.
-Note that if you do this, you will need to manually update `orchestrion.tool.go` in order to enable new integrations.
+
+**Note**: If you choose to import specific integrations, you must manually update `orchestrion.tool.go` each time you want to add a new integration.
 
 ### Troubleshooting
 
