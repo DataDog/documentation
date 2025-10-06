@@ -124,8 +124,6 @@ After a notice is published, the notice:
 
 You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
 
-{{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the noticce history timeline on a live status page with published notices and updates" video=true >}}
-
 ## Email subscriptions
 
 Email subscriptions on status pages are **double opt-in**: users must confirm their email address before they are added as subscribers. After entering an email to subscribe, a confirmation email is sent, and the subscription is only activated after the user clicks the confirmation link.
