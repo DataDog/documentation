@@ -9,16 +9,15 @@ private: true
 {{< /callout >}}
 
 ## Overview
-
-LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37 semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the LLM Observability SDK.
-
 By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in LLM Observability.
+
+LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37 semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Datadog LLM Observability SDK or a Datadog agent.
 
 ## Prerequisites
 
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37 gen_ai semantic conventions][1]
-- Access to the OpenTelemetry instrumentation beta feature (contact support to request access)
+- Access to the OpenTelemetry instrumentation beta feature ([contact support][4] to request access)
 
 ## Setup
 
@@ -45,7 +44,9 @@ To generate traces compatible with LLM Observability:
 1. Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37 gen_ai semantic conventions][1].
 2. Alternatively, create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes as defined in the semantic conventions.
 
-The traces will automatically appear in the [**LLM Observability Traces** page][3] once your application starts sending data.
+The traces will automatically appear in the [**LLM Observability Traces** page][3] once your application starts sending data. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your Opentelemetry span's `service` attribute.
+
+**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear in the UI.
 
 ## Supported semantic conventions
 
