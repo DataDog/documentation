@@ -8,10 +8,10 @@ enableRobotsTXT: true
 # don't publish cdocs source files
 ignoreFiles:
   - "\\.mdoc\\.md$"
-  - "integrations_data"
-  - "hugpython"
-  - "examples"
-  - "local"
+  - "^integrations_data/"
+  - "^hugpython/"
+  - "^examples/"
+  - "^local/"
 
 publishDir: "./public"
 
