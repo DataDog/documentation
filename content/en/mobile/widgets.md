@@ -1,5 +1,6 @@
 ---
 title: Mobile Device Widgets
+description: "Add Datadog widgets to your mobile home screen or lock screen for quick access to SLOs, incidents, dashboards, monitors, and on-call information."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: "Blog"

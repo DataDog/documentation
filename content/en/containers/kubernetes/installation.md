@@ -1,5 +1,6 @@
 ---
 title: Install the Datadog Agent on Kubernetes
+description: Install and configure the Datadog Agent on Kubernetes using the Datadog Operator, Helm, or kubectl
 aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm

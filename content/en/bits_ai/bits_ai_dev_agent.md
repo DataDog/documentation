@@ -1,5 +1,6 @@
 ---
 title: Bits AI Dev Agent
+description: "Use Bits AI Dev Agent to automatically detect, diagnose, and fix high-impact issues in your code with production-ready pull requests."
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
     tag: "Blog"
