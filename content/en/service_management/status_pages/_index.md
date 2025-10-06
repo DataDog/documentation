@@ -66,7 +66,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
    | ----------------- | ----------- |
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
-   | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
+   | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Subscriptions** *(optional)* | Enable users to receive email notifications about status page updates. When subscriptions are enabled, users can sign up to get notified about new notices and updates. You can turn subscriptions on or off for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in, email must be confirmed. |
    | **Company logo, Favicon, or Email Header Image** *(optional)* | Upload a logo, favicon, or image to personalize the appearance of your status page and email notifications. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
@@ -136,14 +136,14 @@ For **internal** status pages, the subscription process is the same, but users m
 
 To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
 
-1. From your status page, click **Settings**.  
+1. From your status page, click **Settings**.
 1. Select **Custom Domain**.
-1. Follow the instructions to enter your domain and add DNS records.  
-1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.  
+1. Follow the instructions to enter your domain and add DNS records.
+1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.
 
 <div class="alert alert-warning">Custom domains require access to your DNS provider to add a CNAME or A record.</div>
 
-**Notes**:
+**Note**:
 
 - DNS propagation may take several minutes.
 - You can revert to the default Datadog domain at any time.
