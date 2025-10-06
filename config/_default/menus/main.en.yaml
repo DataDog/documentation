@@ -3794,171 +3794,166 @@ menu:
       parent: tracing
       identifier: tracing_trace_collection
       weight: 2
-    - name: Automatic Instrumentation
-      url: tracing/trace_collection/automatic_instrumentation/
+    - name: Single Step Instrumentation
+      url: tracing/trace_collection/single-step-apm/
       parent: tracing_trace_collection
-      identifier: automatic_instrumentation
-      weight: 201
-    - name: Using Single Step Instrumentation
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
-      parent: automatic_instrumentation
       identifier: single_step_apm
-      weight: 2011
+      weight: 201
     - name: Single Step APM Instrumentation on Linux
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+      url: tracing/trace_collection/single-step-apm/linux
       parent: single_step_apm
       identifier: single_step_apm_linux
-      weight: 20111
+      weight: 2011
     - name: Single Step APM Instrumentation on Docker
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/docker
+      url: tracing/trace_collection/single-step-apm/docker
       parent: single_step_apm
       identifier: single_step_apm_docker
-      weight: 20112
+      weight: 2012
     - name: Single Step APM Instrumentation on Kubernetes
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes
+      url: tracing/trace_collection/single-step-apm/kubernetes
       parent: single_step_apm
       identifier: single_step_apm_kubernetes
-      weight: 20113
-    - name: Using Datadog Tracing Libraries
-      url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
-      parent: automatic_instrumentation
+      weight: 2013
+    - name: Datadog Tracing Libraries
+      url: tracing/trace_collection/dd_libraries/
+      parent: tracing_trace_collection
       identifier: auto_dd_libraries
-      weight: 2012
+      weight: 202
     - name: Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
       identifier: custom_instrumentation
-      weight: 202
+      weight: 203
     - name: Java
       url: tracing/trace_collection/custom_instrumentation/java/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_java
-      weight: 2021
+      weight: 2031
     - name: Python
       url: tracing/trace_collection/custom_instrumentation/python/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_python
-      weight: 2022
+      weight: 2032
     - name: Ruby
       url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_ruby
-      weight: 2023
+      weight: 2033
     - name: Go
       url: tracing/trace_collection/custom_instrumentation/go/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_go
-      weight: 2024
+      weight: 2034
     - name: Node.js
       url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_nodejs
-      weight: 2025
+      weight: 2035
     - name: PHP
       url: tracing/trace_collection/custom_instrumentation/php/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_php
-      weight: 2026
+      weight: 2036
     - name: C++
       url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_cpp
-      weight: 2027
+      weight: 2037
     - name: .NET
       url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
-      weight: 2028
+      weight: 2038
     - name: Android
       url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
-      weight: 2029
+      weight: 2039
     - name: iOS
       url: tracing/trace_collection/custom_instrumentation/ios/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
-      weight: 2030
+      weight: 2040
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2031
+      weight: 2041
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
       identifier: custom_instrumentation_swift
-      weight: 2032
+      weight: 2042
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2033
+      weight: 2043
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
       identifier: tracing_compatibility
-      weight: 203
+      weight: 204
     - name: Library Configuration
       url: tracing/trace_collection/library_config/
       parent: tracing_trace_collection
       identifier: tracing_library_config
-      weight: 204
+      weight: 205
     - name: Configuration at Runtime
       url: tracing/trace_collection/runtime_config/
       parent: tracing_trace_collection
       identifier: runtime_config
-      weight: 205
+      weight: 206
     - name: Trace Context Propagation
       url: tracing/trace_collection/trace_context_propagation/
       parent: tracing_trace_collection
       identifier: tracing_context
-      weight: 206
+      weight: 207
     - name: Serverless Application Tracing
       url: serverless/distributed_tracing/
       parent: tracing_trace_collection
       identifier: tracing_serverless
-      weight: 207
+      weight: 208
     - name: Proxy Tracing
       url: tracing/trace_collection/proxy_setup/
       parent: tracing_trace_collection
       identifier: tracing_proxies
-      weight: 208
+      weight: 209
     - name: Envoy
       url: tracing/trace_collection/proxy_setup/envoy
       parent: tracing_proxies
       identifier: tracing_proxies_envoy
-      weight: 2081
+      weight: 2091
     - name: NGINX
       url: tracing/trace_collection/proxy_setup/nginx
       parent: tracing_proxies
       identifier: tracing_proxies_nginx
-      weight: 2082
+      weight: 2092
     - name: Istio
       url: tracing/trace_collection/proxy_setup/istio
       parent: tracing_proxies
       identifier: tracing_proxies_istio
-      weight: 2083
+      weight: 2093
     - name: Kong
       url: tracing/trace_collection/proxy_setup/kong
       parent: tracing_proxies
       identifier: tracing_proxies_kong
-      weight: 2084
+      weight: 2094
     - name: Apache HTTP Server
       url: tracing/trace_collection/proxy_setup/httpd
       parent: tracing_proxies
       identifier: tracing_proxies_httpd
-      weight: 2085
+      weight: 2095
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
       identifier: tracing_naming_convention
-      weight: 209
+      weight: 210
     - name: Span Links
       url: tracing/trace_collection/span_links
       parent: tracing_trace_collection
       identifier: tracing_span_links
-      weight: 211
+      weight: 212
     - name: APM Metrics Collection
       url: tracing/metrics/
       parent: tracing
