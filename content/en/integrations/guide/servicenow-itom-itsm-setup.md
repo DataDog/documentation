@@ -36,7 +36,7 @@ By default, Datadog doesn't include ServiceNow impact and urgency levels when se
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Monitors** tab.
 1. Under **Instance Priority Mapping for Templates**, open the settings for your ServiceNow instance.
 1. Turn on the **Use Instance Priority Mapping** toggle.
-1. In the **ServiceNow Urgency** and **ServiceNow Impact**, select the levels you want to correspond with Datadog's Monitor Priority levels. For example:
+1. Under **ServiceNow Urgency** and **ServiceNow Impact**, select the levels you want to correspond with Datadog's Monitor Priority levels. For example:
    - Impact: 4
    - Urgency: 5
 1. Click **Update**.
@@ -49,8 +49,8 @@ To create a ServiceNow record from a monitor, you need to configure an @-handle 
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Monitors** tab.
 1. Beside **Templates**, click **+ New** to create a new template.
 1. Define an @-handle **Name**, **Instance**, and **Target Table** for the monitor notification to be delivered to. 
-1. Optionally, you can also set **Assignment Group**, **Business Service**, and/or **User** in the template.<br /> **Note**: If you set both an assignment group and user, the user must belong to the selected assignment group for the ServiceNow record creation to successfully complete.
-1. Optionally, you can add additional variables from Datadog by expanding the **Customize notification payload** section and clicking **Add field**.
+1. (Optional) Set **Assignment Group**, **Business Service**, and/or **User** in the template.<br /> **Note**: If you set both an assignment group and user, the user must belong to the selected assignment group for the ServiceNow record creation to successfully complete.
+1. (Optional) Expand the **Customize notification payload** section and click **Add field** to add more variables from Datadog.
 1. Click **Save**.
 
 To use the new template, add `@servicenow-<TEMPLATE_NAME>` in a monitor description. When the monitor alerts, ServiceNow also creates a corresponding record, and automatically sets it to **Resolved** when the underlying alert recovers.
@@ -232,7 +232,7 @@ Case Management integration is not supported in the {{< region-param key=dd_data
 </div>
 {{% /site-region %}}
 
-You can choose to send cases from Datadog to either the Datadog Cases ITOM or ITSM table in ServiceNow. ServiceNow stores the records and transforms them using the installed update set to records in the Event or Incident table. Datadog doesn't support custom payloads for these tables, or updates to the Events table.
+Send cases from Datadog to either the Datadog Cases ITOM or ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Event or Incident table. Datadog doesn't support custom payloads for these tables, or updates to the Events table.
 
 <div class="alert alert-info">The user configuring the settings in ServiceNow must have both the <code>x_datad_datadog.user</code> and <code>admin</code> roles.</a></div>
 
@@ -240,7 +240,7 @@ You can choose to send cases from Datadog to either the Datadog Cases ITOM or IT
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Case Management** tab.
 1. Under **Sync ServiceNow with Case Management**, open the settings for your ServiceNow instance.
 1. Beside **Case Table**, choose to send cases to either **Datadog Cases ITOM** or **Datadog Cases ITSM**.
-1. Navigate to the [Case Management > Settings][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
+1. Navigate to the [**Case Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
 ### Configure Datadog Incident Management {#incident-management}
 
@@ -294,12 +294,12 @@ This section describes the fields that are synced between Incident Management an
 | SEV-5 (Minor)                  | 3                      | 3                     | 5 - Planning            |
 | Unknown                        | 3                      | 3                     | 5 - Planning            |
 
-\***Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
+**Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
 {{% /collapse-content %}}
 
 ## Customize data with transform maps {#transform-maps}
 
-The ServiceNow integration writes from Datadog to interim tables, which transform to records in ServiceNow. For any customizations (for example, custom field mappings, etc.), you can extend the transform maps to specify what fields you want to map to from Datadog to ServiceNow.
+The ServiceNow integration writes from Datadog to interim tables, which transform to records in ServiceNow. For any customizations (for example, custom field mappings), you can extend the transform maps to specify what fields you want to map to from Datadog to ServiceNow.
 
 ## Additional configuration options
 
@@ -312,17 +312,17 @@ To create a custom field mapping in ServiceNow:
 
 1. Click one of the tables (for example, **Datadog Monitors ITSM Tables**), and scroll to the bottom of the record to see the link for the associated transform map.
 1. Click on the name of the transform map to view the record:
-   {{< img src="integrations/guide/servicenow/servicenow-click-transform-map.png" alt="Your image description" style="width:100%;" >}}
+   {{< img src="integrations/guide/servicenow/servicenow-click-transform-map.png" alt="ServiceNow Table Transform Map showing the Datadog Incident Transform that maps the Datadog Incident Table to the Incident table." style="width:100%;" >}}
    At the top are two important fields on the Transform record: <code>Source table</code> and <code>Target table</code>:
-   {{< img src="integrations/guide/servicenow/servicenow-source-target-fields.png" alt="Your image description" style="width:100%;" >}}
+   {{< img src="integrations/guide/servicenow/servicenow-source-target-fields.png" alt="Datadog Incident Transform map in ServiceNow showing the source table Datadog Incident Table mapped to the target table Incident [incident]" style="width:100%;" >}}
 1. Click **New**:
-   {{< img src="integrations/guide/servicenow/servicenow-click-new.png" alt="Your image description" style="width:100%;" >}}
+   {{< img src="integrations/guide/servicenow/servicenow-click-new.png" alt="Field Maps tab in ServiceNow showing source and target field mappings for the Datadog Incident Transform. A pink arrow points to the New button used to add a new field map." style="width:100%;" >}}
 1. Select the source and target fields for one to one mappings:
-   {{< img src="integrations/guide/servicenow/servicenow-select-source-target.png" alt="Your image description" style="width:100%;" >}}
+   {{< img src="integrations/guide/servicenow/servicenow-select-source-target.png" alt="ServiceNow Field Map configuration showing the source field PRIORITY mapped to the target field Severity in the Datadog Incident Transform map" style="width:100%;" >}}
    Or check the <strong>Use source script</strong> box and define transformations:
-   {{< img src="integrations/guide/servicenow/servicenow-script-example.png" alt="Your image description" style="width:100%;" >}}
+   {{< img src="integrations/guide/servicenow/servicenow-script-example.png" alt="ServiceNow Field Map script in the Datadog Incident Transform showing a source script that maps source.priority values to numerical severity levels for the Priority field in the Incident table." style="width:100%;" >}}
 
-**Note:** For mapping any custom fields in the integration tile, you can use the following mapping script for either the Datadog Monitors ITOM and Datadog Monitors ITSM Transform maps. In this example, the field `my_field` was defined as a custom field in the integration tile:
+To map custom fields in the integration tile, you can use the following script for either the Datadog Monitors ITOM and Datadog Monitors ITSM Transform maps. In this example, the field `my_field` is defined as a custom field in the integration tile:
 
 ```
 answer = (function transformEntry(source)
