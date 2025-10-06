@@ -228,7 +228,7 @@ To send a test request:
 2. Click an endpoint to open its details in the side panel
 3. Click Play Request to configure and send the request
 
-{{< img src="/tracing/software_catalog/play-request" alt="Play Request modal to test API requests in Software Catalog" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/play-request.png" alt="Play Request modal to test API requests in Software Catalog" style="width:90%;" >}}
 
 Before sending the request, you can configure the following: 
 - Inputs: Provide values for any required query parameters, path variables, or request body fields.
