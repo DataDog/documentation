@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on a CircleCI Workflow
+description: Configure CI Visibility tracing for CircleCI workflows to monitor pipeline executions and performance.
 aliases:
   - /continuous_integration/setup_pipelines/circleci
 further_reading:

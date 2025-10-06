@@ -1,5 +1,6 @@
 ---
 title: SaaS Cost Integrations
+description: Send cost data from supported SaaS cost providers to Datadog with SaaS Cost Integrations.
 is_beta: true
 private: true
 disable_toc: false

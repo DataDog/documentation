@@ -1,5 +1,6 @@
 ---
 title: CI Visibility Troubleshooting
+description: Troubleshoot common CI Visibility issues including missing data, pipeline configuration problems, and webhook delivery.
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"

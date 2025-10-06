@@ -1,5 +1,6 @@
 ---
 title: Setup
+description: Configure Cloud Cost Management for AWS, Azure, Google Cloud, Oracle, SaaS providers, or custom cost data sources.
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

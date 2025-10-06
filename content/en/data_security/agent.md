@@ -1,6 +1,6 @@
 ---
 title: Agent Data Security
-description: "Datadog Agent Security measures"
+description: "Learn about the security of data sent to Datadog."
 aliases:
     - /agent/security/
 further_reading:

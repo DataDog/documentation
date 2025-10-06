@@ -1,5 +1,6 @@
 ---
-title: Export Pipeline Executions 
+title: Export Pipeline Executions
+description: Export CI Visibility search queries and visualizations to dashboards, monitors, notebooks, or download as CSV files.
 further_reading:
 - link: "/continuous_integration/search/"
   tag: "Documentation"

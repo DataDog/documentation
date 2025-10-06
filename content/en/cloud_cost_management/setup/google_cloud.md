@@ -1,5 +1,6 @@
 ---
 title: Google Cloud
+description: Configure Cloud Cost Management for Google Cloud Platform to gain insights into your GCP billing data.
 disable_toc: false
 aliases:
 - /cloud_cost_management/google_cloud/

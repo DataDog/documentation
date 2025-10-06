@@ -1,5 +1,6 @@
 ---
 title: Scheduled Cost Reports
+description: Automatically receive recurring cloud cost reports through email or Slack with Scheduled Cost Reports.
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

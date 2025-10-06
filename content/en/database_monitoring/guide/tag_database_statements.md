@@ -1,6 +1,6 @@
 ---
 title: Tagging SQL Statements
-
+description: Add custom tags to SQL statements as comments for enhanced filtering and analysis in Database Monitoring.
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].

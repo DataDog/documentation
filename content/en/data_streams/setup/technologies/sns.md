@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for Amazon SNS
+description: Enable Data Streams Monitoring for Amazon SNS with supported languages and Lambda library versions.
 ---
 
 ### Prerequisites

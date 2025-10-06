@@ -1,5 +1,6 @@
 ---
 title: Exploring SQL Server AlwaysOn Availability Groups
+description: Monitor SQL Server AlwaysOn Availability Groups to detect synchronization issues and identify cluster bottlenecks.
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

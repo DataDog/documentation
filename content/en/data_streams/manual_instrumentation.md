@@ -1,5 +1,6 @@
 ---
 title: Set up Data Streams Monitoring through Manual Instrumentation
+description: Configure Data Streams Monitoring manually for custom messaging systems and unsupported libraries.
 private: true
 aliases:
   - /data_streams/java_manual_instrumentation

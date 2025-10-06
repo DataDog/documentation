@@ -1,5 +1,6 @@
 ---
 title: Continuous Testing Settings
+description: Configure Continuous Testing settings including parallelization and test execution parameters.
 further_reading:
 - link: "/continuous_testing/cicd_integrations"
   tag: "Documentation"

@@ -1,6 +1,6 @@
 ---
 title: Database Monitoring Guides
-
+description: Index of guides for configuring and optimizing Database Monitoring across different database platforms.
 private: true
 disable_toc: true
 cascade:

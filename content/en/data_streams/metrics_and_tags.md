@@ -1,5 +1,6 @@
 ---
 title: Metrics and Tags
+description: Learn about Data Streams Monitoring metrics like data_streams.latency and their associated tags.
 aliases:
   - "/data_streams/guide/metrics-and-tags"
 ---

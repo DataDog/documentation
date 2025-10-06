@@ -1,5 +1,6 @@
 ---
 title: Continuous Delivery Visibility
+description: Monitor and track deployment performance with CD Visibility to improve deployment strategies and operational efficiency.
 disable_sidebar: true
 further_reading:
 - link: "continuous_delivery/deployments"

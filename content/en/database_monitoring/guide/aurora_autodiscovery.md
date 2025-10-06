@@ -1,6 +1,6 @@
 ---
 title: Configuring Database Monitoring for Amazon Aurora DB Clusters
-
+description: Set up Database Monitoring for Amazon Aurora clusters using Autodiscovery with dynamic endpoint management.
 ---
 
 This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.

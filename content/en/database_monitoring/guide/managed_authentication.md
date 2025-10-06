@@ -1,6 +1,6 @@
 ---
 title: Connecting with Managed Authentication
-
+description: Configure Database Monitoring to use cloud managed authentication like IAM and Microsoft Entra ID.
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].

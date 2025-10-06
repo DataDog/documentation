@@ -1,5 +1,6 @@
 ---
 title: PCI DSS Compliance
+description: Learn how Datadog complies with PCI DSS v4.0 requirements and supports secure monitoring for regulated environments.
 further_reading:
 - link: "https://trust.datadoghq.com/"
   tag: "Datadog Trust Center"

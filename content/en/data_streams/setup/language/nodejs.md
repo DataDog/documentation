@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for Node.js
+description: Set up Data Streams Monitoring for Node.js applications with messaging library integrations.
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

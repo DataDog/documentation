@@ -1,5 +1,6 @@
 ---
 title: Real User Monitoring Data Security
+description: Learn about data security, privacy controls, and data handling for Real User Monitoring and Session Replay.
 aliases:
     - /real_user_monitoring/security/
 further_reading:

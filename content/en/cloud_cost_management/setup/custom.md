@@ -1,5 +1,6 @@
 ---
 title: Custom Costs
+description: Upload any cost data source to Datadog to understand the total cost of your services with Custom Costs.
 is_beta: true
 private: true
 disable_toc: false

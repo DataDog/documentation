@@ -1,5 +1,6 @@
 ---
 title: Set up CI Visibility on GitHub Actions Workflows
+description: Configure CI Visibility for GitHub Actions workflows to monitor pipeline executions and performance.
 aliases:
   - /continuous_integration/setup_pipelines/github
 further_reading:

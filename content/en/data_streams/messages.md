@@ -1,5 +1,6 @@
 ---
 title: Messages
+description: Identify root causes of poison pill messages and inspect Kafka message content at specific partitions and offsets.
 aliases:
   - data_streams/live_messages
 ---

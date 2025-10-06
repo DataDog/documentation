@@ -1,5 +1,6 @@
 ---
 title: Log Management Data Security
+description: Understand security guarantees and filtering controls for log data submitted to Datadog Log Management.
 aliases:
     - /logs/security/
 further_reading:

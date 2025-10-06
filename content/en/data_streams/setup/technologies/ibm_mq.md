@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for IBM MQ
+description: Set up Data Streams Monitoring for IBM MQ with .NET client library support and configuration.
 ---
 
 ### Prerequisites

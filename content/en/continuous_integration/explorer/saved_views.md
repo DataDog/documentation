@@ -1,5 +1,6 @@
 ---
 title: Saved Views
+description: Save and share CI Visibility Explorer states to enable effective troubleshooting with scoped queries and visualizations.
 further_reading:
 - link: "/continuous_integration/explorer/search_syntax/"
   tag: "Documentation"

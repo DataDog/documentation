@@ -1,5 +1,6 @@
 ---
-title: Data Streams Monitoring for Azure Service Bus 
+title: Data Streams Monitoring for Azure Service Bus
+description: Enable Data Streams Monitoring for Azure Service Bus.
 ---
 
 ### Prerequisites

@@ -1,5 +1,6 @@
 ---
 title: Adding Custom Commands to Pipeline Traces
+description: Trace individual commands in CI pipelines to measure execution time without setup and teardown overhead.
 aliases:
   - /continuous_integration/setup_pipelines/custom_commands
 further_reading:

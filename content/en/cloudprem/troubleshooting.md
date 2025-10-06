@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: Troubleshoot common CloudPrem issues including access permissions, storage configuration, and component health problems.
 further_reading:
 - link: "/cloudprem/overview/architecture/"
   tag: "Documentation"

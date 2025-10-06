@@ -1,5 +1,6 @@
 ---
 title: Send Custom Pipelines to Datadog
+description: Send custom pipeline data to Datadog using APIs to enable CI Visibility for unsupported CI providers.
 aliases:
   - /continuous_integration/setup_pipelines/custom
 further_reading:

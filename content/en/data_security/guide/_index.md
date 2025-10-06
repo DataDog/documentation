@@ -1,5 +1,6 @@
 ---
 title: Security Guides
+description: Security guides covering TLS deprecations, certificate changes, and other security-related topics.
 private: true
 disable_toc: true
 cascade:

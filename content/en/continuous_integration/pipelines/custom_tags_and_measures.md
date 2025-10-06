@@ -1,5 +1,6 @@
 ---
 title: Adding Custom Tags and Measures to Pipeline Traces
+description: Add user-defined text and numerical tags to pipeline traces for enhanced filtering and monitoring in CI Visibility.
 aliases:
   - /continuous_integration/pipelines/custom_tags_and_metrics
   - /continuous_integration/setup_pipelines/custom_tags_and_metrics

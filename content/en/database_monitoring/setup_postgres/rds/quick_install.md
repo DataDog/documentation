@@ -1,5 +1,6 @@
 ---
 title: Database Monitoring Quick Install for Postgres RDS
+description: Quickly set up Database Monitoring for PostgreSQL RDS instances using CloudFormation and Amazon ECS.
 further_reading:
 - link: "/database_monitoring/setup_postgres/"
   tag: "Documentation"

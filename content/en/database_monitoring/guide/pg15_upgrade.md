@@ -1,6 +1,6 @@
 ---
 title: Upgrading to PostgreSQL 15 and higher
-
+description: Configuration changes required when upgrading PostgreSQL to version 15 or higher for Database Monitoring.
 ---
 
 Run this command on each database host to enable the additional permission needed for the `datadog` user:

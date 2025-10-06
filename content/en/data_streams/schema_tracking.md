@@ -1,5 +1,6 @@
 ---
 title: Schema Tracking
+description: Monitor schemas used by producers and consumers, track schema changes, and manage schema migrations.
 ---
 
 {{% site-region region="gov" %}}

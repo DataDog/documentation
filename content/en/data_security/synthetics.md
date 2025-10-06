@@ -1,5 +1,6 @@
 ---
 title: Synthetic Monitoring Data Security
+description: Understand security measures and data handling for Synthetic Monitoring tests in managed and private locations.
 aliases:
     - /synthetics/security/
 further_reading:

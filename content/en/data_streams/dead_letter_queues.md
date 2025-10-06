@@ -1,5 +1,6 @@
 ---
 title: Dead Letter Queues
+description: Monitor and remediate non-empty dead letter queues to identify and fix message processing failures.
 ---
 
 {{% site-region region="gov" %}}

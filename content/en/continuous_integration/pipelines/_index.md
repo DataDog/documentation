@@ -1,5 +1,6 @@
 ---
 title: CI Pipeline Visibility in Datadog
+description: Set up Pipeline Visibility to get a pipeline-first view into your CI health with metrics and troubleshooting capabilities.
 aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/

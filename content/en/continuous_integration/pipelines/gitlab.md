@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on a GitLab Pipeline
+description: Configure CI Visibility tracing for GitLab pipelines to monitor execution results and performance.
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
