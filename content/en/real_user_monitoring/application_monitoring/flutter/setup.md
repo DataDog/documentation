@@ -7,7 +7,7 @@ aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
     - /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration
+- link: /real_user_monitoring/application_monitoring/flutter/advanced_configuration
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
@@ -54,8 +54,6 @@ To start sending RUM or Error Tracking data from your Flutter application to Dat
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application-1.png" alt="Create an application for Flutter in Datadog" style="width:90%;">}}
 
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/ios/data_collected/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -72,13 +70,13 @@ Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 
 Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
 
- * All Actions reported from Flutter are labeled with type `custom`.
- * Long running actions (`startAction` and `stopAction`) are not supported.
- * Manually reporting RUM resources (`startResource` and `stopResource`) is not supported.
- * Event mappers are not supported.
- * Tags on loggers are not supported.
- * `addUserExtraInfo` is not supported.
- * `stopSession` is not supported.
+* All Actions reported from Flutter are labeled with type `custom`.
+* Long running actions (`startAction` and `stopAction`) are not supported.
+* Manually reporting RUM resources (`startResource` and `stopResource`) is not supported.
+* Event mappers are not supported.
+* Tags on loggers are not supported.
+* `addUserExtraInfo` is not supported.
+* `stopSession` is not supported.
 
 No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use the Datadog SDK to monitor its performance, reach out to your customer support team and escalate this feature request.
 
@@ -102,46 +100,60 @@ For Android, your `minSdkVersion` version must be >= 21, and if you are using Ko
 
 For Web, add the following to your `index.html` under the `head` tag, for **{{<region-param key="dd_site_name">}}** site:
 {{< site-region region="us" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
+
 {{</ site-region>}}
 {{< site-region region="ap1" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
 ```
+
 {{</ site-region>}}
 {{< site-region region="ap2" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum-slim.js"></script>
 ```
+
 {{</ site-region>}}
 {{< site-region region="eu" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum-slim.js"></script>
 ```
+
 {{</ site-region>}}
 {{< site-region region="us3" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum-slim.js"></script>
 ```
+
 {{</ site-region>}}
 {{< site-region region="us5" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum-slim.js"></script>
 ```
+
 {{</ site-region>}}
 {{< site-region region="gov" >}}
+
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v5.js"></script>
 ```
+
 {{</ site-region>}}
 
 This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchronous CDN-delivered version of the Browser SDK is the only version supported by the Datadog Flutter Plugin.
@@ -154,6 +166,7 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
    dependencies:
      datadog_flutter_plugin: ^2.0.0
    ```
+
 2. Create a configuration object for each Datadog feature (such as Logs or RUM) with the following snippet. If you do not pass a configuration for a given feature, that feature is disabled.
 
    ```dart
@@ -175,15 +188,14 @@ For more information on available configuration options, see the [DatadogConfigu
 
 To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog [Flutter Plugin][5].
 
-- If you are using RUM, set up a **Client Token** and **Application ID**.
-- If you are only using Logs, initialize the library with a client token.
-
+* If you are using RUM, set up a **Client Token** and **Application ID**.
+* If you are only using Logs, initialize the library with a client token.
 
 ### Step 3 - Initialize the library
 
 You can initialize the library using one of two methods in your `main.dart` file.
 
-- Use `DatadogSdk.runApp` to automatically set up [Error Tracking][6].
+* Use `DatadogSdk.runApp` to automatically set up [Error Tracking][6].
 
    ```dart
    await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
@@ -191,7 +203,7 @@ You can initialize the library using one of two methods in your `main.dart` file
    })
    ```
 
-- You can also manually set up [Error Tracking][6] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
+* You can also manually set up [Error Tracking][6] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
@@ -235,16 +247,16 @@ To be compliant with the GDPR regulation, the Datadog Flutter SDK requires the `
 
 Set `trackingConsent` to one of the following values:
 
-- `TrackingConsent.pending`: The Datadog Flutter SDK starts collecting and batching the data but does not send it to Datadog. It waits for the new tracking consent value to decide what to do with the batched data.
-- `TrackingConsent.granted`: The Datadog Flutter SDK starts collecting the data and sends it to Datadog.
-- `TrackingConsent.notGranted`: The Datadog Flutter SDK does not collect any data, which means no logs, traces, or events are sent to Datadog.
+* `TrackingConsent.pending`: The Datadog Flutter SDK starts collecting and batching the data but does not send it to Datadog. It waits for the new tracking consent value to decide what to do with the batched data.
+* `TrackingConsent.granted`: The Datadog Flutter SDK starts collecting the data and sends it to Datadog.
+* `TrackingConsent.notGranted`: The Datadog Flutter SDK does not collect any data, which means no logs, traces, or events are sent to Datadog.
 
 To change the tracking consent value after the SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call.
 
 The SDK changes its behavior according to the new value. For example, if the current tracking consent is `TrackingConsent.pending`:
 
-- You change it to `TrackingConsent.granted`, the SDK sends all current and future data to Datadog;
-- You change it to `TrackingConsent.notGranted`, the SDK wipes all current data and does not collect any future data.
+* You change it to `TrackingConsent.granted`, the SDK sends all current and future data to Datadog;
+* You change it to `TrackingConsent.notGranted`, the SDK wipes all current data and does not collect any future data.
 
 ## Automatically track views
 
@@ -287,7 +299,6 @@ MaterialApp.router(
 ```
 
 For examples that use routers other than `go_router`, see [Automatically track views](#automatically-track-views).
-
 
 ### Renaming Views
 
@@ -372,14 +383,11 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/
-[2]: /error_tracking/
 [3]: /account_management/api-app-keys/#client-tokens
 [4]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [6]: /real_user_monitoring/error_tracking/flutter
 [7]: https://pub.dev/packages?q=go_router
-[8]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#automatic-view-tracking
 [9]: https://pub.dev/packages/auto_route
 [10]: https://pub.dev/packages/beamer
 [11]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html

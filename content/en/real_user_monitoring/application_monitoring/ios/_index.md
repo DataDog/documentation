@@ -3,6 +3,7 @@ title: iOS and tvOS Monitoring
 description: Collect RUM and Error Tracking data from your iOS projects.
 aliases:
   - /real_user_monitoring/ios/mobile_and_tv_monitoring
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios
 further_reading:
 - link: /real_user_monitoring/application_monitoring/ios/advanced_configuration
   tag: Documentation
