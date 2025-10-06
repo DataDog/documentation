@@ -224,9 +224,9 @@ You can use the **Play Request** feature in Software Catalog to send test HTTP r
 
 To send a test request: 
 
-1. Navigate to an endpoint in Software Catalog
-2. Click an endpoint to open its details in the side panel
-3. Click Play Request to configure and send the request
+1. Navigate to an endpoint in Software Catalog.
+2. Click an endpoint to open its details in the side panel.
+3. Click **Play Request** to configure and send the request.
 
 {{< img src="/tracing/software_catalog/play-request.png" alt="Play Request modal to test API requests in Software Catalog" style="width:90%;" >}}
 
