@@ -1,5 +1,5 @@
 ---
-title: CI Pipeline Visibility in Datadog
+title: Set up CI Visibility
 aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/
@@ -22,11 +22,11 @@ cascade:
 
 ## Overview
 
-[Pipeline Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
+[CI Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
 
 ## Setup
 
-{{< whatsnext desc="Select your CI provider to set up Pipeline Visibility in Datadog:" >}}
+{{< whatsnext desc="Select your CI provider to set up CI Visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/pipelines/awscodepipeline" >}}AWS CodePipeline{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
@@ -43,7 +43,7 @@ cascade:
 
 ### Terminology
 
-While the concept of a CI pipeline may vary depending on your provider, see how those concepts correspond to the definition of a CI pipeline in Datadog Pipeline Visibility:
+While the concept of a CI pipeline may vary depending on your provider, see how those concepts correspond to the definition of a CI pipeline in Datadog CI Visibility:
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -132,7 +132,7 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 {{% /tab %}}
 {{< /tabs >}}
 
-If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
+If your CI provider is not supported, you can try setting up CI Visibility through the [public API endpoint][2].
 
 ### Supported features
 
