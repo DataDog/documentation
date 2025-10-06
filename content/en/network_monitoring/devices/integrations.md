@@ -21,17 +21,23 @@ These integrations use the **SNMP protocol** to collect metrics directly from ne
 
 {{< partial name="ndm/ndm_integrations.html" >}}
 
-## SD-WAN
+<br>
+
+## Software Defined Networking
 
 The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
 {{< partial name="ndm/sd-wan.html" >}}
+
+<br>
 
 ## Virtualization
 
 NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
 
 {{< partial name="ndm/virtualization.html" >}}
+
+<br>
 
 ## Next steps
 
