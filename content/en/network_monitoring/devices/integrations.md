@@ -29,14 +29,13 @@ The following integrations cover **software-defined and edge networking platform
 
 ## Virtualization
 
-NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations.  
-These integrations help you correlate host-level performance with physical network metrics.
+NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
 
 {{< partial name="ndm/virtualization.html" >}}
 
 ## Next steps
 
-- Review the [Supported NDM Devices][1] list for a complete view of profiles available out of the box.
+- Review the [supported NDM devices][1] list for a complete view of profiles available out of the box.
 - Learn how to [add custom SNMP profiles][2] to extend NDM to devices not listed here.
 
 ## Further Reading
