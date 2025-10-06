@@ -5,8 +5,9 @@ aliases:
     - /tracing/languages
     - /tracing/setup_overview/setup/undefined
     - /tracing/setup_overview/setup/
-    - /tracing/trace_collection/dd_libraries/
 ---
+
+## Overview
 
 To automatically instrument your application with Datadog libraries:
 

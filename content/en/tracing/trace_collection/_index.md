@@ -59,16 +59,22 @@ Some situations when you might use automatic instrumentation include:
 - Enabling real-time monitoring with pre-configured settings for immediate insights into application performance.
 - Simplifying the observability setup for projects where [custom instrumentation][6] is not required.
 
-
 ### Custom instrumentation
 
 Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. To custom instrument your application, you can use any of these options:
 
 - [Datadog libraries][9]: Use Datadog tracing libraries to add and customize observability within Datadog.
 - [OpenTelemetry APIs][10]: Use OpenTelemetry API support in Datadog libraries to have vendor-neutral instrumentation of your code.
-- [Dynamic Instrumentation][11]: Use Dynamic Instrumentation to add custom telemetry at specific code locations, from the Datadog UI.
+- [Dynamic Instrumentation][11]: Use Dynamic Instrumentation to add custom telemetry at specific code locations from the Datadog UI, without code changes.
 
-To learn more, see [custom instrumentation][6].
+#### Use cases
+
+Some situations when you might use custom instrumentation include:
+
+- Collecting observability data from custom code with unique or complex business logic.
+- Providing deeper visibility and context into spans, including adding [span tags][12].
+- Precisely monitoring specific sequences of operations or user interactions that require fine-grained control.
+- Removing unwanted spans from traces.
 
 {{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Service discovery is in Preview">}}
 Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
@@ -76,13 +82,63 @@ Service discovery provides complete visibility into the current state of applica
 
 ## Instrumentation types comparison
 
-|      | [Single Step Instrumentation][7] | [Manually Managed SDKs][8] | [Code-based Custom Instrumentation][9] | [UI-based Custom Instrumentation][11] (a.k.a. Dynamic Instrumentation) | 
-| ---  | ----------- | ----------- | ----------- | ----------- |
-| Instrumentation type | Automatic instrumentation | Automatic instrumentation | Custom instrumentation | Custom instrumentation |
-| Code changes required? | No | No | Yes | No |
-| Environment config changes? | No | Yes | Yes | No |
-| Set-up complexity | Low | Medium | High | Low | 
-| Best for | SRE, admins, or central observability teams managing instrumentation at scale without requiring developer involvement. | App dev teams who want to instrument applications individually with granular control over configuration through environment variables. | Teams that need to add custom logic for span creation or modify instrumentation behavior beyond standard automatic instrumentation. | Teams that want to add custom spans, metrics, or tags to specific code locations without modifying source code. Configuration is managed through the Datadog UI. |
+<table style="width:100%; border-collapse:collapse; border:1px solid #ccc;">
+  <!-- Header group -->
+  <tr style="background-color:#efefef;">
+    <th style="border:1px solid #ccc; background-color:#e6e6e6;"></th>
+    <th colspan="2" style="border:1px solid #ccc; text-align:center; background-color:#e6e6e6; font-weight:bold; text-transform:uppercase;">
+      Automatic Instrumentation
+    </th>
+    <th colspan="2" style="border:1px solid #ccc; text-align:center; background-color:#e6e6e6; font-weight:bold; text-transform:uppercase;">
+      Custom Instrumentation
+    </th>
+  </tr>
+  <tr style="background-color:#f2f2f2;">
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"></th>
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step Instrumentation</a></th>
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/">SDK-based Auto Instrumentation</a></th>
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/custom_instrumentation/">Code-based Custom Instrumentation</a></th>
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/dynamic_instrumentation/">UI-based Custom Instrumentation</a><br>(a.k.a. Dynamic Instrumentation)</th>
+  </tr>
+
+  <!-- Body rows -->
+  <tr>
+    <td style="border:1px solid #ccc; font-weight:bold;">Description</td>
+    <td style="border:1px solid #ccc;">Automatically install and activate the Datadog tracing library at runtime (no code or SDK setup required).</td>
+    <td style="border:1px solid #ccc;">Add Datadog tracing libraries (SDKs) to your code. The SDK handles instrumentation automatically.</td>
+    <td style="border:1px solid #ccc;">Add explicit tracing API calls or span logic in your application code.</td>
+    <td style="border:1px solid #ccc;">Add instrumentation rules in the Datadog UI (dynamic, runtime; no code changes).</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; font-weight:bold;">Code changes required?</td>
+    <td style="border:1px solid #ccc;">No</td>
+    <td style="border:1px solid #ccc;">No (aside from adding the SDK)</td>
+    <td style="border:1px solid #ccc;">Yes</td>
+    <td style="border:1px solid #ccc;">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; font-weight:bold;">Environment config changes?</td>
+    <td style="border:1px solid #ccc;">No</td>
+    <td style="border:1px solid #ccc;">Yes</td>
+    <td style="border:1px solid #ccc;">Yes</td>
+    <td style="border:1px solid #ccc;">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; font-weight:bold;">Set-up complexity</td>
+    <td style="border:1px solid #ccc;">Low</td>
+    <td style="border:1px solid #ccc;">Medium</td>
+    <td style="border:1px solid #ccc;">High</td>
+    <td style="border:1px solid #ccc;">Low</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; font-weight:bold;">Best for</td>
+    <td style="border:1px solid #ccc;">SRE, admins, or central teams who want tracing across services without developer involvement.</td>
+    <td style="border:1px solid #ccc;">App dev teams who want to instrument applications individually with granular control over configuration through environment variables.</td>
+    <td style="border:1px solid #ccc;">Teams needing custom logic, specialized spans, or visibility into custom code paths.</td>
+    <td style="border:1px solid #ccc;">Teams wanting to add spans, logs, or metrics to specific code locations at runtime without redeploying or modifying source code. Configuration is managed through the Datadog UI.</td>
+  </tr>
+</table>
+
 
 ## APM setup tutorials
 
