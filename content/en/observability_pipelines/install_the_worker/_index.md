@@ -98,23 +98,23 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 	datadog/observability-pipelines-worker
     ```
 
-You must replace the placeholders with the following values:
+    You must replace the placeholders with the following values:
 
-- `<DATADOG_API_KEY>`: Your Datadog API.
-    - **Note**: The API key must be [enabled for Remote Configuration][3].
-- `<PIPELINE_ID>`: The ID of your pipeline.
-- `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
-    - See [Environment Variables][4] for a list of source environment variables.
-- `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
-    - See [Environment Variables][4] for a list of destination environment variables.
+    - `<DATADOG_API_KEY>`: Your Datadog API.
+        - **Note**: The API key must be [enabled for Remote Configuration][3].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
+        - See [Environment Variables][4] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
+        - See [Environment Variables][4] for a list of destination environment variables.
 
-**Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
 
-```
---set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-```
+    ```
+    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
+    ```
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
