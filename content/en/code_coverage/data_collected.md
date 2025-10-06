@@ -10,8 +10,8 @@ further_reading:
     text: "Set up Code Coverage"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
+{{< callout btn_hidden="true" header="false" >}}
+Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated.
 {{< /callout >}}
 
 ## Source Code Provider Integration
@@ -41,6 +41,15 @@ Code Coverage relies on Gitlab webhooks. The webhooks do not include your source
 See Gitlab's [webhook events and payloads documentation][1] for a detailed description of the data sent by webhooks.
 
 [1]: https://docs.gitlab.com/user/project/integrations/webhook_events/
+
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
+Code Coverage relies on Azure DevOps webhooks. The webhooks do not include your source code content. They only include metadata about the pull request, such as the title, description, author, labels, and commit SHAs.
+
+See Azure DevOps' [webhook events and payloads documentation][1] for a detailed description of the data sent by webhooks.
+
+[1]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#git.pullrequest.created
 
 {{% /tab %}}
 {{< /tabs >}}
