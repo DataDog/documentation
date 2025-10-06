@@ -51,7 +51,7 @@ Automatic Monitors can include:
 - APM monitors (error rates or latency per service)
 
 You can view these monitors immediately on the Datadog [**Monitors**][17] page.
-From there, you can edit, clone, or disable them just like any other monitor.
+From there, you can edit, clone, or disable them like any other monitor.
 
 ## Create a monitor
 
