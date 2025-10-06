@@ -7,6 +7,9 @@ further_reading:
 - link: "service_management/on-call/"
   tag: "Documentation"
   text: "Learn more about On-Call Scheduling"
+- link: "service_management/incident_management/integrations/status_pages"
+  tag: "Documentation"
+  text: "Integrate Datadog Status Pages with Incident Management"
 ---
 
 ## Overview
