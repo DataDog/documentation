@@ -41,7 +41,7 @@ To delete an automation rule:
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
-1. Confirm deletion when prompted
+1. When prompted, confirm deletion.
 
 ## Further reading
 
