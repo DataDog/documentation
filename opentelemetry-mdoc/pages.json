@@ -1,0 +1,1160 @@
+{
+  "compatibility/index.md": {
+    "metadata": {
+      "title": "Datadog and OpenTelemetry Compatibility",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Datadog and OpenTelemetry Compatibility"
+      ]
+    },
+    "mdocHash": "0e70a698507bf8319dde86a4f62b23f1",
+    "htmlHash": "0ab093d509dd4ebadf865756a2da2924",
+    "astIsValid": true
+  },
+  "config/collector_batch_memory/index.md": {
+    "metadata": {
+      "title": "Batch and Memory Settings",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Configuration",
+        "Batch and Memory Settings"
+      ]
+    },
+    "mdocHash": "b57bef9b56e0bf93d71bdd408e3eafb9",
+    "htmlHash": "d641ec27cb07f77641378e40bf795742",
+    "astIsValid": true
+  },
+  "config/environment_variable_support/index.md": {
+    "metadata": {
+      "title": "Using OpenTelemetry Environment Variables with Datadog SDKs",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Configuration",
+        "Using OpenTelemetry Environment Variables with Datadog SDKs"
+      ]
+    },
+    "mdocHash": "0408c75c2a3c19621bdff50b999d1445",
+    "htmlHash": "383ff2eaecce9a574497d1a77dc3fd6e",
+    "astIsValid": false
+  },
+  "config/hostname_tagging/index.md": {
+    "metadata": {
+      "title": "Hostname and Tagging",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Configuration",
+        "Hostname and Tagging"
+      ]
+    },
+    "mdocHash": "72e3b468437ed4c0b3f29217716ee606",
+    "htmlHash": "f23651f28b6fcf5cc4b87fcda7740a37",
+    "astIsValid": true
+  },
+  "config/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry Configuration",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Configuration"
+      ]
+    },
+    "mdocHash": "2db4d62a8741c85dd7a2492677d67353",
+    "htmlHash": "d8adcaff8e7c024d715be8311f4d1c1b",
+    "astIsValid": true
+  },
+  "config/log_collection/index.md": {
+    "metadata": {
+      "title": "Log Collection",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Configuration",
+        "Log Collection"
+      ]
+    },
+    "mdocHash": "d1a79968f87101681c4ddd75e00a9f60",
+    "htmlHash": "5ee68a88e5be99a6dc3ef78ced40388f",
+    "astIsValid": true
+  },
+  "config/otlp_receiver/index.md": {
+    "metadata": {
+      "title": "OTLP Receiver",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Configuration",
+        "OTLP Receiver"
+      ]
+    },
+    "mdocHash": "17fed0e33d9c23675f8c68dcf5a31180",
+    "htmlHash": "f1a009363fa9b8c26ac4e162dec9e4d6",
+    "astIsValid": true
+  },
+  "correlate/dbm_and_traces/index.md": {
+    "metadata": {
+      "title": "Correlate OpenTelemetry Traces and DBM",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Correlate OpenTelemetry Data",
+        "Correlate OpenTelemetry Traces and DBM"
+      ]
+    },
+    "mdocHash": "bafa0cac3bc3e45215cfdc9f6aefe320",
+    "htmlHash": "24386b128a1454541e10baa654497173",
+    "astIsValid": true
+  },
+  "correlate/index.md": {
+    "metadata": {
+      "title": "Correlate OpenTelemetry Data",
+      "description": "Learn how to correlate your OpenTelemetry traces, metrics, logs, and other telemetry in Datadog to get a unified view of your application's performance.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Correlate OpenTelemetry Data"
+      ]
+    },
+    "mdocHash": "e6617b4590d3246d011c58d36a2d09b6",
+    "htmlHash": "f8b91fe3c6f6c356a08035ebe3e99666",
+    "astIsValid": true
+  },
+  "correlate/logs_and_traces/index.md": {
+    "metadata": {
+      "title": "Correlate OpenTelemetry Traces and Logs",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Correlate OpenTelemetry Data",
+        "Correlate OpenTelemetry Traces and Logs"
+      ]
+    },
+    "mdocHash": "503a7995490794fd99f7c804a3a2746c",
+    "htmlHash": "9f7fda7b7052c4fb55b24532f1fb03e1",
+    "astIsValid": true
+  },
+  "correlate/metrics_and_traces/index.md": {
+    "metadata": {
+      "title": "Correlate OpenTelemetry Traces and Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Correlate OpenTelemetry Data",
+        "Correlate OpenTelemetry Traces and Metrics"
+      ]
+    },
+    "mdocHash": "73c814e538e1b266627293738f4b7523",
+    "htmlHash": "bde96ab1c857645140e7d7797a07ff1f",
+    "astIsValid": true
+  },
+  "correlate/rum_and_traces/index.md": {
+    "metadata": {
+      "title": "Correlate RUM and Traces",
+      "description": "Learn how to integrate Real User Monitoring with APM.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Correlate OpenTelemetry Data",
+        "Correlate RUM and Traces"
+      ]
+    },
+    "mdocHash": "f33ad7f167d738a5c4201082790d634a",
+    "htmlHash": "d7389ff9949e5363666d088f6e7eb86e",
+    "astIsValid": true
+  },
+  "getting_started/datadog_example/index.md": {
+    "metadata": {
+      "title": "Getting Started with OpenTelemetry at Datadog",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Getting Started with OpenTelemetry at Datadog",
+        "Getting Started with OpenTelemetry at Datadog"
+      ]
+    },
+    "mdocHash": "599f2b09de851b4d12061f01b81e366c",
+    "htmlHash": "a7b3ce91738dddfa7152d80e269cc8c5",
+    "astIsValid": false
+  },
+  "getting_started/index.md": {
+    "metadata": {
+      "title": "Getting Started with OpenTelemetry at Datadog",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Getting Started with OpenTelemetry at Datadog"
+      ]
+    },
+    "mdocHash": "a9e20e2db6bce8590be7295380df602f",
+    "htmlHash": "5731a83dd5c436d3b1d7b6c32f6996d7",
+    "astIsValid": true
+  },
+  "getting_started/otel_demo_to_datadog/index.md": {
+    "metadata": {
+      "title": "Sending Data from the OpenTelemetry Demo to Datadog",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Getting Started with OpenTelemetry at Datadog",
+        "Sending Data from the OpenTelemetry Demo to Datadog"
+      ]
+    },
+    "mdocHash": "5dd46b1b51e0fbfce27edaafb959fb9b",
+    "htmlHash": "35f61d2581cb3e0103569188af7663b6",
+    "astIsValid": true
+  },
+  "guide/otlp_delta_temporality/index.md": {
+    "metadata": {
+      "title": "Producing Delta Temporality Metrics with OpenTelemetry",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Guides",
+        "Producing Delta Temporality Metrics with OpenTelemetry"
+      ]
+    },
+    "mdocHash": "882f0b9eb0c14c413929cdcdc00a15d6",
+    "htmlHash": "f97bf2e7b3d5baadd48a3d5cb2aef95b",
+    "astIsValid": true
+  },
+  "guide/otlp_histogram_heatmaps/index.md": {
+    "metadata": {
+      "title": "Visualize OTLP Histograms as Heatmaps",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Guides",
+        "Visualize OTLP Histograms as Heatmaps"
+      ]
+    },
+    "mdocHash": "d41210875b20b31fb07466279995987b",
+    "htmlHash": "d8b683d42eef4e988040ec77e605361b",
+    "astIsValid": true
+  },
+  "index.md": {
+    "metadata": {
+      "title": "OpenTelemetry in Datadog",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog"
+      ]
+    },
+    "mdocHash": "f8131c32d62031e497e83fb00e1bc2ee",
+    "htmlHash": "b35f2691bcbb594ae7633e22283bb8d2",
+    "astIsValid": true
+  },
+  "ingestion_sampling/index.md": {
+    "metadata": {
+      "title": "Ingestion Sampling with OpenTelemetry",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Ingestion Sampling with OpenTelemetry"
+      ]
+    },
+    "mdocHash": "30fbec506508598765980170280e1b67",
+    "htmlHash": "953c29ff68b1032c992f0f714399edae",
+    "astIsValid": true
+  },
+  "instrument/api_support/dotnet/index.md": {
+    "metadata": {
+      "title": ".NET Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        ".NET Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "0b308830e6ceb0c4d6fe8fca505a05c8",
+    "htmlHash": "b2950f2fa120fdd2c9db902968bdcbdb",
+    "astIsValid": true
+  },
+  "instrument/api_support/go/index.md": {
+    "metadata": {
+      "title": "Go Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        "Go Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "0e1128b93bcce03f0e0cab31b8338ea1",
+    "htmlHash": "b77e37df6bfb5ecda80435a61e9d131e",
+    "astIsValid": true
+  },
+  "instrument/api_support/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry API Support",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support"
+      ]
+    },
+    "mdocHash": "cb51341cf6d9021992649a7541d9b720",
+    "htmlHash": "662dfe9d398afc4b463b9453606a8d94",
+    "astIsValid": true
+  },
+  "instrument/api_support/java/index.md": {
+    "metadata": {
+      "title": "Java Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        "Java Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "b0ddcb1b7b33e17033557d419a50d5b7",
+    "htmlHash": "6af08a27bef40e78514a51819e597b79",
+    "astIsValid": true
+  },
+  "instrument/api_support/nodejs/index.md": {
+    "metadata": {
+      "title": "Node.js Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        "Node.js Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "55cc7935831b01a6ba6ed488106ee4cc",
+    "htmlHash": "2c1b5f50eaea13d6561bf07786970873",
+    "astIsValid": true
+  },
+  "instrument/api_support/php/index.md": {
+    "metadata": {
+      "title": "PHP Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        "PHP Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "4ce64345f8d45f485f54184cc2b40549",
+    "htmlHash": "f2f78d7810b67faeb76382425105ff65",
+    "astIsValid": true
+  },
+  "instrument/api_support/python/index.md": {
+    "metadata": {
+      "title": "Python Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        "Python Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "4576f043c640acf58d15b781a8d41f30",
+    "htmlHash": "96b51b939decdc73bf289898c145fe34",
+    "astIsValid": true
+  },
+  "instrument/api_support/ruby/index.md": {
+    "metadata": {
+      "title": "Ruby Custom Instrumentation using the OpenTelemetry API",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry API Support",
+        "Ruby Custom Instrumentation using the OpenTelemetry API"
+      ]
+    },
+    "mdocHash": "11cec7a3b83eeb90d6ad7dd47e23f7cc",
+    "htmlHash": "188fcddf73a667adbff6c42b7dcd322f",
+    "astIsValid": true
+  },
+  "instrument/index.md": {
+    "metadata": {
+      "title": "Instrument Your Applications",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications"
+      ]
+    },
+    "mdocHash": "6e0c4b721608fed98c33fa4b528c310a",
+    "htmlHash": "52067615764a2413927794c36ec14de4",
+    "astIsValid": true
+  },
+  "instrument/instrumentation_libraries/index.md": {
+    "metadata": {
+      "title": "Using OpenTelemetry Instrumentation Libraries with Datadog SDKs",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "Using OpenTelemetry Instrumentation Libraries with Datadog SDKs"
+      ]
+    },
+    "mdocHash": "c5c1afbfd6d206c4c7683e7d2dcc7573",
+    "htmlHash": "661ec38527769ba1cb75717d03b62aef",
+    "astIsValid": true
+  },
+  "instrument/otel_sdks/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry SDKs",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Instrument Your Applications",
+        "OpenTelemetry SDKs"
+      ]
+    },
+    "mdocHash": "ad4183da882dd9ec57933d28ecbecd77",
+    "htmlHash": "a93801b6aecccc2f9910a19fcf8841e9",
+    "astIsValid": true
+  },
+  "integrations/apache_metrics/index.md": {
+    "metadata": {
+      "title": "Apache Web Server Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Apache Web Server Metrics"
+      ]
+    },
+    "mdocHash": "84ad151141b8930c2ccc62354e4134e5",
+    "htmlHash": "fb9b0c7861b816c6cc3cf4f4f216af00",
+    "astIsValid": true
+  },
+  "integrations/collector_health_metrics/index.md": {
+    "metadata": {
+      "title": "Health Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Health Metrics"
+      ]
+    },
+    "mdocHash": "00fb4ba4ebda0e055251a9413114a5e2",
+    "htmlHash": "510bcf48043bc6c7460f64ff2a415df8",
+    "astIsValid": true
+  },
+  "integrations/datadog_extension/index.md": {
+    "metadata": {
+      "title": "Datadog Extension",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Datadog Extension"
+      ]
+    },
+    "mdocHash": "b04368b5e18b61b9d4d61a54796df651",
+    "htmlHash": "d6daa5b1c1ed6aaf43e741bd23e54481",
+    "astIsValid": true
+  },
+  "integrations/docker_metrics/index.md": {
+    "metadata": {
+      "title": "Docker Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Docker Metrics"
+      ]
+    },
+    "mdocHash": "6d7b2dfb6ea7e1e2fcc39e5f8d17e745",
+    "htmlHash": "849d6a479824d7e96d019228d3d09395",
+    "astIsValid": true
+  },
+  "integrations/haproxy_metrics/index.md": {
+    "metadata": {
+      "title": "HAProxy Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "HAProxy Metrics"
+      ]
+    },
+    "mdocHash": "2de1fa8a7d1e4eb06b7ae5e680374cd9",
+    "htmlHash": "ef6767ff8f7966c55e9cdb958ce4d1ce",
+    "astIsValid": true
+  },
+  "integrations/host_metrics/index.md": {
+    "metadata": {
+      "title": "Host Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Host Metrics"
+      ]
+    },
+    "mdocHash": "62e4bee24a433236e07c20cbd5009895",
+    "htmlHash": "125387f8ef502dc6a6de42d3869fce00",
+    "astIsValid": true
+  },
+  "integrations/iis_metrics/index.md": {
+    "metadata": {
+      "title": "IIS Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "IIS Metrics"
+      ]
+    },
+    "mdocHash": "5be04860a5052ca0717160cf4b41f770",
+    "htmlHash": "1e6c0ac24c03af24d76f8a6e01e52085",
+    "astIsValid": true
+  },
+  "integrations/index.md": {
+    "metadata": {
+      "title": "Integrations",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations"
+      ]
+    },
+    "mdocHash": "c7774216f488f5c950b6424bcbcfefda",
+    "htmlHash": "2536103579ad85c5a0ae5d626f53b764",
+    "astIsValid": true
+  },
+  "integrations/kafka_metrics/index.md": {
+    "metadata": {
+      "title": "Kafka Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Kafka Metrics"
+      ]
+    },
+    "mdocHash": "1ec5e296526653a236a157a49871d739",
+    "htmlHash": "77ef8e56b871a98912d66d4042f8497d",
+    "astIsValid": true
+  },
+  "integrations/kubernetes_metrics/index.md": {
+    "metadata": {
+      "title": "Kubernetes Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Kubernetes Metrics"
+      ]
+    },
+    "mdocHash": "94a261c7a16c07c614070a713d650e22",
+    "htmlHash": "2eb18722a0dd4facad177d426713d54a",
+    "astIsValid": true
+  },
+  "integrations/mysql_metrics/index.md": {
+    "metadata": {
+      "title": "MySQL Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "MySQL Metrics"
+      ]
+    },
+    "mdocHash": "bd44e0450e015664d0f629b46873c672",
+    "htmlHash": "bed6ced2461b086bb3657ef81fed3479",
+    "astIsValid": true
+  },
+  "integrations/nginx_metrics/index.md": {
+    "metadata": {
+      "title": "NGINX Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "NGINX Metrics"
+      ]
+    },
+    "mdocHash": "003a0d69e06b73e3b5c42dbb3b0fccca",
+    "htmlHash": "5135975f40ab1c05e8649a067b82d0df",
+    "astIsValid": true
+  },
+  "integrations/podman_metrics/index.md": {
+    "metadata": {
+      "title": "Podman Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Podman Metrics"
+      ]
+    },
+    "mdocHash": "bbda422aec9ae1beba2dfc26eb049ad6",
+    "htmlHash": "ad4dba3ea21ca4b9951d293eb6524867",
+    "astIsValid": true
+  },
+  "integrations/runtime_metrics/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry Runtime Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "OpenTelemetry Runtime Metrics"
+      ]
+    },
+    "mdocHash": "9a8a0ef0bc425bcbea965e0b96c17880",
+    "htmlHash": "c01dff4e0b72b11a195604adf3bbeac7",
+    "astIsValid": true
+  },
+  "integrations/spark_metrics/index.md": {
+    "metadata": {
+      "title": "Apache Spark Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Apache Spark Metrics"
+      ]
+    },
+    "mdocHash": "7a897c3864467f6a8b06a493a7f38cd8",
+    "htmlHash": "29e21d7f1070d3ec6c46493c6949bd51",
+    "astIsValid": true
+  },
+  "integrations/trace_metrics/index.md": {
+    "metadata": {
+      "title": "Trace Metrics",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Integrations",
+        "Trace Metrics"
+      ]
+    },
+    "mdocHash": "fc6d622acb83dbcb896e3319fd73e2f8",
+    "htmlHash": "fa462ecc675da445581e7a602d1f9432",
+    "astIsValid": true
+  },
+  "mapping/host_metadata/index.md": {
+    "metadata": {
+      "title": "Infrastructure List Host Information",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Semantic Mapping",
+        "Infrastructure List Host Information"
+      ]
+    },
+    "mdocHash": "146da9e067087c913c5b8156e6ff4535",
+    "htmlHash": "cd5c340d11e3a19338c63a89a1a3695b",
+    "astIsValid": true
+  },
+  "mapping/hostname/index.md": {
+    "metadata": {
+      "title": "Mapping OpenTelemetry Semantic Conventions to Hostnames",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Semantic Mapping",
+        "Mapping OpenTelemetry Semantic Conventions to Hostnames"
+      ]
+    },
+    "mdocHash": "6d23182f500ddef22014eddfcd527942",
+    "htmlHash": "7a00090582738dd2972381f6d05def64",
+    "astIsValid": true
+  },
+  "mapping/index.md": {
+    "metadata": {
+      "title": "Semantic Mapping",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Semantic Mapping"
+      ]
+    },
+    "mdocHash": "31d65e9138d2fb3058ba3e9bd90669e3",
+    "htmlHash": "bb5a3fcf146ffec743d8959aa5f27e11",
+    "astIsValid": true
+  },
+  "mapping/metrics_mapping/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry Metrics Mapping",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Semantic Mapping",
+        "OpenTelemetry Metrics Mapping"
+      ]
+    },
+    "mdocHash": "3b5c751929441421ac6f9f2a32d71632",
+    "htmlHash": "90e93d5227eb3511b12c61df1176f3b1",
+    "astIsValid": true
+  },
+  "mapping/semantic_mapping/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry Semantic Conventions and Datadog Conventions",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Semantic Mapping",
+        "OpenTelemetry Semantic Conventions and Datadog Conventions"
+      ]
+    },
+    "mdocHash": "e6e8e0c210b2ecde456fa869d8e26c1e",
+    "htmlHash": "011d1936b721f8ca0a83dcfecd1a5e6e",
+    "astIsValid": true
+  },
+  "mapping/service_entry_spans/index.md": {
+    "metadata": {
+      "title": "Mapping OpenTelemetry Semantic Conventions to Service-entry Spans",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Semantic Mapping",
+        "Mapping OpenTelemetry Semantic Conventions to Service-entry Spans"
+      ]
+    },
+    "mdocHash": "f606bcfe53bf25132d77377d147a2b96",
+    "htmlHash": "d409692b0e13e2d4211955fa6381e665",
+    "astIsValid": true
+  },
+  "migrate/collector_0_120_0/index.md": {
+    "metadata": {
+      "title": "Migrate to OpenTelemetry Collector version 0.120.0+",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Migration Guides",
+        "Migrate to OpenTelemetry Collector version 0.120.0+"
+      ]
+    },
+    "mdocHash": "72fc46a731e6f3dccd393d4b68e03390",
+    "htmlHash": "ba9c9f225463b4871880e17faa329f64",
+    "astIsValid": true
+  },
+  "migrate/collector_0_95_0/index.md": {
+    "metadata": {
+      "title": "Migrate to OpenTelemetry Collector version 0.95.0+",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Migration Guides",
+        "Migrate to OpenTelemetry Collector version 0.95.0+"
+      ]
+    },
+    "mdocHash": "60d58325b924c766812b5fe2217c6a86",
+    "htmlHash": "eb254f6c8f38fa70e813dc908c31bbdf",
+    "astIsValid": true
+  },
+  "migrate/ddot_collector/index.md": {
+    "metadata": {
+      "title": "Migrate to the Datadog Distribution of OTel Collector",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Migration Guides",
+        "Migrate to the Datadog Distribution of OTel Collector"
+      ]
+    },
+    "mdocHash": "e223d7a62ae5c5d281f24ebcc979b938",
+    "htmlHash": "1a8257cde54cf9cc2efa878e3dd6bc64",
+    "astIsValid": false
+  },
+  "migrate/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry Migration Guides",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Migration Guides"
+      ]
+    },
+    "mdocHash": "fc08a5e814616e0b00c48904fda17433",
+    "htmlHash": "09e1e922faccc7084f3523b16ec95b78",
+    "astIsValid": true
+  },
+  "migrate/migrate_operation_names/index.md": {
+    "metadata": {
+      "title": "Migrate to New Operation Name Mappings",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "OpenTelemetry Migration Guides",
+        "Migrate to New Operation Name Mappings"
+      ]
+    },
+    "mdocHash": "e801cb8a1a6bca37fdb1d0008c279133",
+    "htmlHash": "caf8ccc2bb5b9d2552c0e1a522b2ec7f",
+    "astIsValid": true
+  },
+  "reference/concepts/index.md": {
+    "metadata": {
+      "title": "OpenTelemetry Terms and Concepts",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Reference",
+        "OpenTelemetry Terms and Concepts"
+      ]
+    },
+    "mdocHash": "0d0d18ac39f2e1af5c01dfcf94f252fc",
+    "htmlHash": "3448c52f722ac803cb12c94591f24c19",
+    "astIsValid": true
+  },
+  "reference/index.md": {
+    "metadata": {
+      "title": "Reference",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Reference"
+      ]
+    },
+    "mdocHash": "fc2a83b14c541a60d1cc8d5e5f2a916c",
+    "htmlHash": "e7b018d34615a689a80905dbd3630625",
+    "astIsValid": true
+  },
+  "reference/otlp_metric_types/index.md": {
+    "metadata": {
+      "title": "OTLP Metrics Types",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Reference",
+        "OTLP Metrics Types"
+      ]
+    },
+    "mdocHash": "18c330a218fe3f7ed8e7838d07a4a42f",
+    "htmlHash": "9f187ed458e64e40541827b82fdc1bcb",
+    "astIsValid": true
+  },
+  "reference/trace_context_propagation/index.md": {
+    "metadata": {
+      "title": "Trace Context Propagation",
+      "description": "Extract and inject Datadog, B3, and W3C Trace Context headers to propagate the context of a distributed trace.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Reference",
+        "Trace Context Propagation"
+      ]
+    },
+    "mdocHash": "2d1ccac70dfdaa79d89362c0cd895c1d",
+    "htmlHash": "ff55ebb3fcbe41a895adc3708810f219",
+    "astIsValid": true
+  },
+  "reference/trace_ids/index.md": {
+    "metadata": {
+      "title": "Trace IDs",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Reference",
+        "Trace IDs"
+      ]
+    },
+    "mdocHash": "9d7a23d5ae43d4c046c2c0c8d4b37870",
+    "htmlHash": "9f04604a8f753db6ee05a1119f234733",
+    "astIsValid": true
+  },
+  "setup/agent/index.md": {
+    "metadata": {
+      "title": "Datadog Agent",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog Agent"
+      ]
+    },
+    "mdocHash": "1657309fb405ca770c7e27ab5caaaac2",
+    "htmlHash": "5c158199cff959ba9e211cef76be5abf",
+    "astIsValid": true
+  },
+  "setup/collector_exporter/deploy/index.md": {
+    "metadata": {
+      "title": "Deploy the OpenTelemetry Collector",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Install and Configure the OpenTelemetry Collector",
+        "Deploy the OpenTelemetry Collector"
+      ]
+    },
+    "mdocHash": "de70ecee87b7ff0456c909fbc6890644",
+    "htmlHash": "c4b07fc2fa098d583fa80d38579be83b",
+    "astIsValid": true
+  },
+  "setup/collector_exporter/index.md": {
+    "metadata": {
+      "title": "Install and Configure the OpenTelemetry Collector",
+      "description": "Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Install and Configure the OpenTelemetry Collector"
+      ]
+    },
+    "mdocHash": "20d22b6697778f4dbcbb5a21db1d9c04",
+    "htmlHash": "1f19710a97e86d506a16fd584d75b655",
+    "astIsValid": true
+  },
+  "setup/collector_exporter/install/index.md": {
+    "metadata": {
+      "title": "Set Up the OpenTelemetry Collector",
+      "description": "Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Install and Configure the OpenTelemetry Collector",
+        "Set Up the OpenTelemetry Collector"
+      ]
+    },
+    "mdocHash": "2e8210157d137e9139cf63b26787b386",
+    "htmlHash": "37dbf0344ed4110112a3c7c1967874e9",
+    "astIsValid": true
+  },
+  "setup/ddot_collector/custom_components/index.md": {
+    "metadata": {
+      "title": "Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog Distribution of OpenTelemetry Collector",
+        "Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector"
+      ]
+    },
+    "mdocHash": "0e131f1ef3ae7feff474498ecf857a9c",
+    "htmlHash": "25d928843f164ea6481f8b701ad37e91",
+    "astIsValid": false
+  },
+  "setup/ddot_collector/index.md": {
+    "metadata": {
+      "title": "Datadog Distribution of OpenTelemetry Collector",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog Distribution of OpenTelemetry Collector"
+      ]
+    },
+    "mdocHash": "0342af3899601d7955c7a250be783881",
+    "htmlHash": "fbe4722270fcddaf359c26500676f1ed",
+    "astIsValid": true
+  },
+  "setup/ddot_collector/install/index.md": {
+    "metadata": {
+      "title": "Install",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog Distribution of OpenTelemetry Collector",
+        "Install"
+      ]
+    },
+    "mdocHash": "7925987cd448cb28023efd4769ae9736",
+    "htmlHash": "d7da73d4aa47885e2075aa054745387a",
+    "astIsValid": true
+  },
+  "setup/ddot_collector/install/kubernetes/index.md": {
+    "metadata": {
+      "title": "Install the Datadog Distribution of OTel Collector on Kubernetes",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog Distribution of OpenTelemetry Collector",
+        "Install",
+        "Install the Datadog Distribution of OTel Collector on Kubernetes"
+      ]
+    },
+    "mdocHash": "f89f1170b0bdb0feb660d1c4fe7e1686",
+    "htmlHash": "addf64986f14902021f08004a0ec7998",
+    "astIsValid": true
+  },
+  "setup/ddot_collector/install/linux/index.md": {
+    "metadata": {
+      "title": "Install the Datadog Distribution of OTel Collector on Linux",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog Distribution of OpenTelemetry Collector",
+        "Install",
+        "Install the Datadog Distribution of OTel Collector on Linux"
+      ]
+    },
+    "mdocHash": "264cf1bf4959cf51a03049b7039846f0",
+    "htmlHash": "573e17520bcbf389218e576399f0d188",
+    "astIsValid": true
+  },
+  "setup/index.md": {
+    "metadata": {
+      "title": "Send OpenTelemetry Data to Datadog",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog"
+      ]
+    },
+    "mdocHash": "c71f25343913d2e1db1e3267d3b89095",
+    "htmlHash": "2e6d0744447701521e0cbad4ec9a22fc",
+    "astIsValid": true
+  },
+  "setup/otlp_ingest_in_the_agent/index.md": {
+    "metadata": {
+      "title": "OTLP Ingestion by the Datadog Agent",
+      "description": "Ingest OTLP trace data through the Datadog Agent",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "OTLP Ingestion by the Datadog Agent"
+      ]
+    },
+    "mdocHash": "b8af864d940b2c2b5dc0b3cca8952d4a",
+    "htmlHash": "b3ea13fb5e88450ff6c97811ba516702",
+    "astIsValid": true
+  },
+  "setup/otlp_ingest/index.md": {
+    "metadata": {
+      "title": "Datadog OTLP Intake Endpoint",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog OTLP Intake Endpoint"
+      ]
+    },
+    "mdocHash": "caf45c74a832de507a0f4c279c06e068",
+    "htmlHash": "59e659d55615fd1dfcd2d2edcf82bd7c",
+    "astIsValid": true
+  },
+  "setup/otlp_ingest/logs/index.md": {
+    "metadata": {
+      "title": "Datadog OTLP Logs Intake Endpoint",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog OTLP Intake Endpoint",
+        "Datadog OTLP Logs Intake Endpoint"
+      ]
+    },
+    "mdocHash": "58236fb8a763d38462f1e55d9bec23f1",
+    "htmlHash": "7a61206f2e882562a66a770cd80530ce",
+    "astIsValid": true
+  },
+  "setup/otlp_ingest/metrics/index.md": {
+    "metadata": {
+      "title": "Datadog OTLP Metrics Intake Endpoint",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Send OpenTelemetry Data to Datadog",
+        "Datadog OTLP Intake Endpoint",
+        "Datadog OTLP Metrics Intake Endpoint"
+      ]
+    },
+    "mdocHash": "47aabcbb942c947dc08571b8d2da7237",
+    "htmlHash": "66ed629a49d25cd332311bca61e37c7c",
+    "astIsValid": true
+  },
+  "troubleshooting/index.md": {
+    "metadata": {
+      "title": "Troubleshooting",
+      "description": "Datadog, the leading service for cloud-scale monitoring.",
+      "breadcrumbs": [
+        "Docs",
+        "OpenTelemetry in Datadog",
+        "Troubleshooting"
+      ]
+    },
+    "mdocHash": "5e26e7df618d55819cea57c3b00791c5",
+    "htmlHash": "861556379531772e10bdb8f14894fd4b",
+    "astIsValid": true
+  }
+}
