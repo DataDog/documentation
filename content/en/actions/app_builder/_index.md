@@ -50,7 +50,7 @@ When creating a new app, Datadog displays an onboarding modal with the following
 - [Start with App Playground][14]
 - [Start from Scratch][10] 
 
-{{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="App blueprints" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-onboarding-modal.png" alt="A screenshot of the App Builder onboarding modal" caption="The App Builder onboarding modal" style="width:100%;" >}}
 
 ## Configure App Builder actions
 
