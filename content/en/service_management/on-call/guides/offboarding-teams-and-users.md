@@ -25,7 +25,13 @@ This guide shows you how to:
 
 This guide is for administrators and team leads who manage Datadog On-Call billing and user access.
 
-## Identify billable users
+## Offboarding Teams
+
+If you no longer need a Datadog Team in On-Call, you can quickly offboard it. The team will remain in Datadog, but it will no longer appear as a pageable entity in On-Call.
+
+Go to On-Call, pick the team to offboard, and scroll to the *Danger Zone*. Confirm offboarding. The team and its assets (schedules, escalation policies) stay intact—they’re just removed from On-Call.
+
+## Offboarding users
 
 Datadog charges for users who are actively configured in On-Call. Before removing anyone, identify which users are currently being billed by checking if they have:
 
@@ -35,7 +41,7 @@ Datadog charges for users who are actively configured in On-Call. Before removin
 
 You can find this information in the On-Call settings for each team and by reviewing individual user profiles. This is also available in the Plan & Usage page, specifically under "Seat Management".
 
-## Replace coverage before removing users
+### Replace coverage before removing users
 
 Before removing users from On-Call, make sure someone else can handle their responsibilities to avoid gaps in incident response.
 
