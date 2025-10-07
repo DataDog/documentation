@@ -218,7 +218,7 @@ Source errors include code-level information about the error. For more informati
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[11]: /real_user_monitoring/browser/collecting_browser_errors#error-sources
+[11]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [13]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
 [14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

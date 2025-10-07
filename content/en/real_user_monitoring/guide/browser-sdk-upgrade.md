@@ -381,10 +381,10 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 
 [1]: /real_user_monitoring/faq/content_security_policy
 [2]: /real_user_monitoring/session_replay
-[3]: /real_user_monitoring/browser/collecting_browser_errors/
-[4]: /real_user_monitoring/browser/monitoring_resource_performance/
+[3]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+[4]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
 [5]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[6]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
 [7]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
 [8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property

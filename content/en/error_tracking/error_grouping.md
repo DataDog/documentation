@@ -300,7 +300,7 @@ DD_RUM.init({
 
 In both cases, `my-custom-grouping-material` is used to group the Browser RUM errors into a single issue in Error Tracking.
 
-[1]: /real_user_monitoring/browser/collecting_browser_errors/
+[1]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
 [2]: https://github.com/DataDog/browser-sdk/releases/tag/v4.42.0
 {{% /tab %}}
 
