@@ -275,7 +275,7 @@
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
         - action: pull-and-push-folder
-          branch: main
+          branch: julien/update-languages
           globs:
           - rulesets/**/*.md
           options:
