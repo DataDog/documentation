@@ -95,9 +95,19 @@ A, A, A, B, C, C
 ```
 
 If a user performs the actions as in the example above, Datadog counts it as one conversion. This is because the conversion calculations only look at the first element **A** matched and the first element **C** matched. 
-**`(WHY? does it only look for the first and last? if yes, should we include it?)`**
+**`(WHY? confirming that it only look for the first and last actions?)`**
 
-If you select the **unique** conversion measure, then a conversion (session, user, or account) is counted only once per session, user or account. So, if the user performs  A → B → C → A → B → C during the session or timeframe then unique will count 1 conversion.
+If you select the **unique** conversion measure, then a conversion (session, user, or account) is counted only once per session, user or account. So, if the user performs  A → B → C → A → B → C during the session or timeframe then `unique` will count 1 conversion.
+
+If total is selected, then in the example above we will count 2 conversions. 
+
+<!-- 
+If you analyze your funnel by user or account, you can define your conversion timeframe (default: 1 day). This means that we use a 24-hour window (not calendar dates) to determine if a conversion happened or not.
+
+The average time between steps is calculated by looking at the average duration between each conversion. Note that this takes all conversions into account, no matter if unique or total is selected for the counts.
+
+The conversion rate takes all the users/accounts/sessions that enter the funnel on one hand, all the conversions on the other hand, and computes the ratio between the two.
+ -->
 
 
 If total is selected, then in the example above we will count 2 conversions. 
