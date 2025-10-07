@@ -3734,32 +3734,32 @@ menu:
       identifier: cloud_cost_custom_allocation_rules
       weight: 403
     - name: Reporting
-      url: /cloud_cost_management/reporting
+      url: cloud_cost_management/reporting
       parent: cloud_cost
       identifier: cloud_cost_reporting
       weight: 5
     - name: Explorer
-      url: /cloud_cost_management/reporting/explorer
+      url: cloud_cost_management/reporting/explorer
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
       weight: 501
     - name: Scheduled Cost Reports
-      url: /cloud_cost_management/reporting/scheduled_reports
+      url: cloud_cost_management/reporting/scheduled_reports
       parent: cloud_cost_reporting
       identifier: cloud_cost_scheduled_reports
       weight: 502
     - name: Reports
-      url: /cloud_cost_management/reporting/reports
+      url: cloud_cost_management/reporting/reports
       parent: cloud_cost_reporting
       identifier: cloud_cost_sreports
       weight: 503
     - name: Monitors
-      url: /cloud_cost_management/reporting/monitors
+      url: cloud_cost_management/reporting/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
       weight: 504
     - name: Anomalies
-      url: /cloud_cost_management/reporting/anomalies
+      url: cloud_cost_management/reporting/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
       weight: 505
