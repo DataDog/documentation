@@ -7696,6 +7696,11 @@ menu:
       parent: rum_session_replay
       identifier: rum_session_replay_browser
       weight: 502
+    - name: Setup
+      url: real_user_monitoring/session_replay/browser/setup_and_configuration
+      parent: rum_session_replay_browser
+      identifier: rum_session_replay_browser_setup
+      weight: 101
     - name: Privacy Options
       url: real_user_monitoring/session_replay/browser/privacy_options
       parent: rum_session_replay_browser
@@ -7967,6 +7972,11 @@ menu:
       parent: pa_session_replay
       identifier: pa_session_replay_browser
       weight: 303
+    - name: Setup
+      url: product_analytics/session_replay/browser/setup_and_configuration
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_browser_setup
+      weight: 101
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
