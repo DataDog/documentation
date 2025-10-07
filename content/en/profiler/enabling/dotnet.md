@@ -63,7 +63,7 @@ The following profiling features are available in the following minimum versions
 | CPU profiling              | 2.15.0+                            | All supported runtime versions.                                                          |
 | GC CPU consumption         | 3.19.0+                            | .NET 5+                                                          |
 | Exceptions profiling       | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling      | 3.12.0+ / 3.28.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+ but .NET10 recommended with 3.28+)   |
+| Allocations profiling      | 3.12.0+ / 3.28.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+ but Datadog recommends .NET10 with 3.28+).   |
 | Lock Contention profiling  | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                                |
 | Live heap profiling        | 3.28.0+                            | .NET 7+ but .NET 10+ recommended                                                                                  |
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
