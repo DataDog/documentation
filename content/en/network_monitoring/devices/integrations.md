@@ -8,6 +8,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-meraki/'
       tag: 'Blog'
       text: 'Monitor Cisco Meraki with Datadog'
+    - link: 'https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/'
+      tag: 'Architecture Center'
+      text: 'SD-WAN Reference Architecture'
 
 ---
 
