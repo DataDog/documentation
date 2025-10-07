@@ -102,7 +102,7 @@ Additionally, we provide the following tags that can be used with many observabi
 | `tenancy_name`            | The name for the OCI tenant.|
 | `resource_id`              | An identifier assigned to a resource by the provider.|
 | `resource_type`                | Describes the kind of resource the charge applies to.|
-| `dd_resource_key`  | The Canonical Cloud Resource Identifier (CCRID) for the resource. Same as OCID for OCI. |
+| `dd_resource_key`  | The Canonical Cloud Resource Identifier (CCRID) for the resource. Same as OCID for OCI.|
 
 ### Container cost allocation
 Container cost allocation is not available for OCI. See [Container Cost Allocation][5] for more details.
