@@ -51,3 +51,4 @@ Signals can be triaged directly in Datadog (assign, create a case, or declare an
 [2]: https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction
 [3]: https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem
 [4]: https://app.datadoghq.com/security
+[5]: /actions/workflows/
