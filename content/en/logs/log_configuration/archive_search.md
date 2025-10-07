@@ -89,9 +89,9 @@ To retain more data or access logs in other Datadog products, choose one of the 
 
 From the **Archive Search list view**, you can:
 
-- **Stop** a running search — preserves logs already retrieved.
-- **Delete** a completed search — removes results and metadata.
-- **Duplicate** a search — opens the Archive Search creation form with the same parameters for quick reruns.
+- **Stop** a running search: preserves logs already retrieved.
+- **Delete** a completed search: removes results and metadata.
+- **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
 {{< img src="logs/archive_search/list_view.png" alt="Archive Search list view showing stop, delete, and duplicate options" style="width:90%;" >}}
 
@@ -108,7 +108,7 @@ To improve query performance and reduce scan volume:
 
 ## Cloud-specific permissions
 
-Datadog requires the permission to read from your archives in order to rehydrate content from them. This permission can be changed at any time.
+Datadog requires the permission to read from your archives to rehydrate content from them. This permission can be changed at any time.
 
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
@@ -143,7 +143,7 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
 
 ### Adding role delegation to S3 archives
 
-Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. Once you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon-web-services/#aws-iam-permissions
@@ -159,7 +159,7 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
+In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting **Storage > Storage Object Viewer**.
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
