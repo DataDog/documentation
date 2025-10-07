@@ -22,7 +22,7 @@ further_reading:
 
 ## Setup
 
-To set up Mobile Session Replay for Browser:
+To set up Session Replay for Browser:
 
 ### Step 1 - Setup the Browser SDK
 
@@ -30,7 +30,7 @@ Make sure you've set up the [RUM Browser SDK][1].
 
 ### Step 2 - Enable Session Replay
 
-To enable session replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay.
+To enable session replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 See [Browser RUM & Session Replay sessions][2] for more information.
