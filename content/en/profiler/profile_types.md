@@ -207,7 +207,7 @@ Thrown Exceptions (v2.31+)
 Allocations (v3.28+)
 : The number and size of allocated objects by each method, as well as their type.
 For .NET Framework, the size is not available.<br />
-_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+ but .NET 10+ is recommended for more accurate sampling_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+, but Datadog recommends .NET 10+ for more accurate sampling.
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
