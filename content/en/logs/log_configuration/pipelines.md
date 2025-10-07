@@ -1,6 +1,6 @@
 ---
 title: Pipelines
-description: "Parse your logs using the Grok Processor"
+description: "Parse, enrich, and manage your logs with Datadog pipelines and processors"
 aliases:
   - /logs/processing/pipelines/
 further_reading:
@@ -44,13 +44,14 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 ## Pipeline permissions
 
-Pipelines use [Granular Access Control][7] to manage who can view and edit. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources.
+Pipelines use [Granular Access Control][7] to manage who can edit pipeline and processor configurations. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources. Pipelines without any restrictions are considered unrestricted, meaning any user with the `logs_write_pipelines` permission can modify the pipeline and its processors.
+
+{{< img src="/logs/processing/pipelines/pipeline_permissions_grace.png" alt="Pipeline permissions configuration in Datadog" style="width:80%;" >}}
 
 For each pipeline, administrators can choose the following edit scopes:
 
-* **Unrestricted**: Any user with the `logs_write_pipelines` permission can modify the pipeline and processors.
-* **Restricted pipeline editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
-* **Processor-only editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
+- **Editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
+- **Processor Editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
 <div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 
