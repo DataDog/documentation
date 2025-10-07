@@ -600,6 +600,13 @@ module.exports = {
   }
 }
 ```
+{{% tab "Java" %}}
+
+## Overview
+
+Support for the OpenAI Java Client Library is coming soon. Stay tuned for updates on automatic instrumentation and tracing for Java-based LLM applications.
+
+{{% /tab %}}
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
