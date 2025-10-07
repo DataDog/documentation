@@ -169,4 +169,4 @@ You can choose preferred tags from any of your existing cost data tags, includin
 [6]: /cloud_cost_management/setup/saas_costs
 [7]: https://app.datadoghq.com/cost/explorer
 [8]: /cloud_cost_management/reports
-[9]: /cloud_cost_management/custom_allocation_rules
+[9]: /cloud_cost_management/allocation/custom_allocation_rules

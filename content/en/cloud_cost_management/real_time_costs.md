@@ -76,4 +76,4 @@ You can use the `estimated_hourly_cost` tag to understand the estimated unit cos
   - Instances are monitored by the Datadog Agent but are not included in CCM billing data
 
 [1]: /metrics/types/?tab=rate#metric-types
-[2]: /cloud_cost_management/cost_allocation/container_cost_allocation/
+[2]: /cloud_cost_management/allocation/container_cost_allocation/

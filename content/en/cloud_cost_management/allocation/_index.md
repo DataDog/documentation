@@ -5,10 +5,10 @@ further_reading:
   - link: "/cloud_cost_management/"
     tag: "Documentation"
     text: "Learn about Cloud Cost Management"
-  - link: "/cloud_cost_management/cost_allocation/container_cost_allocation"
+  - link: "/cloud_cost_management/allocation/container_cost_allocation"
     tag: "Documentation"
     text: "Container Cost Allocation"
-  - link: "/cloud_cost_management/cost_allocation/bigquery"
+  - link: "/cloud_cost_management/allocation/bigquery"
     tag: "Documentation"
     text: "BigQuery Cost Allocation"
 ---
@@ -51,6 +51,6 @@ To get started with cost allocation:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/cost_allocation/container_cost_allocation
-[2]: /cloud_cost_management/cost_allocation/bigquery
+[1]: /cloud_cost_management/allocation/container_cost_allocation
+[2]: /cloud_cost_management/allocation/bigquery
 [3]: https://app.datadoghq.com/cost/setup 
