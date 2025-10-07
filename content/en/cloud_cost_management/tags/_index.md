@@ -72,7 +72,7 @@ Tag keys and values may look slightly different in Cloud Cost Management compare
 Cloud Cost Management normalizes tag **keys** in a similar way to Datadog Metrics:
 - Drop leading characters that are not letters
 - Lowercase all characters
-- Replace special characters and spaces with single underscore
+- Replace special characters and spaces with single underscores `_`
 - Remove any trailing underscores
 - Reduce contiguous underscores to a single underscore
 - Tag keys up to 5000 characters are supported, and any characters before the first letter are dropped so that tag keys start with letters (different from Datadog Metrics)
