@@ -30,7 +30,7 @@ Malicious PR protection is in Preview. Click <strong>Request Access</strong> and
 ### Detection coverage
 Malicious code changes come in many different forms. Datadog SAST covers attack vectors such as malicious code injection, attempted secret exfiltration, the pushing of malicious packages, and CI workflow compromise, among others. Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3].  
 
-Read more in the blog post [here][1].  
+<!-- Read more in the blog post [here][1].   -->
 
 ### Search and filter results
 Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] by filtering for `malicious_PR`.  
