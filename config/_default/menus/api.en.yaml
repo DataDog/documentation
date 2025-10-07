@@ -6988,9 +6988,9 @@ menu:
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
       generated: true
-    - name: Send an incident event for DORA Metrics
-      url: '#send-an-incident-event-for-dora-metrics'
-      identifier: dora-metrics-send-an-incident-event-for-dora-metrics
+    - name: Send an incident event
+      url: '#send-an-incident-event'
+      identifier: dora-metrics-send-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7036,9 +7036,9 @@ menu:
           - DeleteDORAFailure
         unstable: []
         order: 7
-    - name: Send a failure event for DORA Metrics
-      url: '#send-a-failure-event-for-dora-metrics'
-      identifier: dora-metrics-send-a-failure-event-for-dora-metrics
+    - name: Send a failure event
+      url: '#send-a-failure-event'
+      identifier: dora-metrics-send-a-failure-event
       parent: dora-metrics
       generated: true
       params:
@@ -7084,9 +7084,9 @@ menu:
           - DeleteDORADeployment
         unstable: []
         order: 8
-    - name: Send a deployment event for DORA Metrics
-      url: '#send-a-deployment-event-for-dora-metrics'
-      identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
+    - name: Send a deployment event
+      url: '#send-a-deployment-event'
+      identifier: dora-metrics-send-a-deployment-event
       parent: dora-metrics
       generated: true
       params:

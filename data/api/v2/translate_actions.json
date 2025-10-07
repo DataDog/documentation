@@ -766,8 +766,8 @@
     "request_schema_description": "Request containing the desired email domain allowlist configuration."
   },
   "CreateDORADeployment": {
-    "description": "Use this API endpoint to provide data about deployments for DORA metrics.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
-    "summary": "Send a deployment event for DORA Metrics",
+    "description": "Use this API endpoint to provide deployment data.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
+    "summary": "Send a deployment event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
@@ -786,8 +786,8 @@
     "summary": "Get a deployment event"
   },
   "CreateDORAFailure": {
-    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
-    "summary": "Send a failure event for DORA Metrics",
+    "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send a failure event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
   },
@@ -806,8 +806,8 @@
     "summary": "Get a failure event"
   },
   "CreateDORAIncident": {
-    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
-    "summary": "Send an incident event for DORA Metrics",
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send an incident event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
   },
