@@ -13,10 +13,9 @@ algolia:
 {{% /site-region %}}
 
 
-## Overview
-Datadog Static Code Analysis (SAST) uses LLMs to detect and prevent malicious code changes at scale. This allows Datadog to not only scan code for known vulnerabilities, but also detect potentially malicious intent in pull requests (PRs) submitted to your repositories. This helps you:
+Datadog Static Code Analysis (SAST) Malicious PR protection uses LLMs to detect and prevent malicious code changes at scale. This functionality scans code for known vulnerabilities and detects potentially malicious intent in the pull requests (PRs) submitted to your repositories. Malicious PR protection helps you to:
 
-- Scale up your code reviews as the volume of code changes increases with AI-assisted development
+- Scale your code reviews as the volume of AI-assisted code changes increases
 - Secure code changes from both internal and external contributors
 - Embed code security into your security incident response workflows
 
