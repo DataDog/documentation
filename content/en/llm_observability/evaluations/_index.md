@@ -10,19 +10,19 @@ aliases:
 
 LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][8].
 
-### Custom LLM-as-a-Judge Evaluations
+### Custom LLM-as-a-judge evaluations
 
-[Custom LLM-as-a-Judge Evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria - like tone, helpfulness, or factuality - and run them at scale across your traces and spans.
+[Custom LLM-as-a-judge evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria (like tone, helpfulness, or factuality) and run them at scale across your traces and spans.
 
-### Managed Evaluations
+### Managed evaluations
 
-Datadog builds and supports [Managed Evaluations][2] to support common use cases. You can enable and configure them within the LLM Observability application.
+Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the LLM Observability application.
 
-### Submit External Evaluations
+### Submit external evaluations
 
-You can also submit [External Evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
-### Evaluation Integrations
+### Evaluation integrations
 
 Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][4] and [NeMo][5].
 
@@ -34,7 +34,7 @@ By proactively scanning for sensitive data, LLM Observability ensures that conve
 
 ### Permissions
 
-[LLM Observability Write permissions][7] are necessary to configure evaluations.
+[`LLM Observability Write` permissions][7] are necessary to configure evaluations.
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [2]: /llm_observability/evaluations/managed_evaluations
