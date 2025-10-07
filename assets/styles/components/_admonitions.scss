@@ -39,16 +39,16 @@
 }
 
 
-.alert-danger {
+.alert-warning {
   background-color: transparent;
   padding-top: 32px;
 }
 
-.alert-danger::before {
+.alert-warning::before {
   background-color: #facc00;
 }
 
-.alert-danger::after {
+.alert-warning::after {
   content: 'WARNING';
   position: absolute;
   top: 8px;
@@ -58,16 +58,16 @@
   font-weight: 600;
 }
 
-.alert-warning {
+.alert-danger {
   background-color: transparent;
   padding-top: 32px;
 }
 
-.alert-warning::before {
+.alert-danger::before {
   background-color: #eb364b;
 }
 
-.alert-warning::after {
+.alert-danger::after {
   content: 'CAUTION';
   position: absolute;
   top: 8px;
