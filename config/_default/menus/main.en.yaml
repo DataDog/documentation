@@ -4785,6 +4785,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_managed_evaluations
       weight: 401
+    - name: Agent
+      url: llm_observability/evaluations/managed_evaluations/agent_evals
+      parent: llm_obs_evaluations
+      identifier: llm_obs_managed_evaluations_agent
+      weight: 501
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_evaluations
