@@ -65,7 +65,7 @@ The following profiling features are available in the following minimum versions
 | Exceptions profiling       | 2.31.0+                            | All supported runtime versions.                                                          |
 | Allocations profiling      | 3.12.0+ / 3.28.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+ but Datadog recommends .NET10 with 3.28+).   |
 | Lock Contention profiling  | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                                |
-| Live heap profiling        | 3.28.0+                            | .NET 7+ but .NET 10+ recommended                                                                                  |
+| Live heap profiling        | 3.28.0+                            | .NET 7+ but Datadog recommends .NET 10+.                                                                                  |
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+ (and 3.19.0+ for outgoing HTTP requests longer than 50 ms in beta and thread start/end events)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
