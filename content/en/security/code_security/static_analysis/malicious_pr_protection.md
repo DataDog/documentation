@@ -32,7 +32,7 @@ Malicious code changes come in many different forms. Datadog SAST covers attack 
 - Malicious code injection
 - Attempted secret exfiltration
 - Pushing of malicious packages
-- CI workflow compromise. 
+- CI workflow compromise  
 
 Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3].  
 
