@@ -71,6 +71,6 @@ After a report is created, you can subscribe, unsubscribe, edit schedules, and d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/analyze/reports
-[2]: /cloud_cost_management/reports
+[2]: /cloud_cost_management/reporting
 [3]: /integrations/slack/?tab=datadogforslack
 [4]: /account_management/org_settings/domain_allowlist/

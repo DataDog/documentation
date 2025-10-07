@@ -3,7 +3,7 @@ title: Reports
 private: true
 description: Track your organization spending with Cloud Cost Management Reports.
 further_reading:
-- link: "/cloud_cost_management/reports/scheduled_reports"
+- link: "/cloud_cost_management/reporting/scheduled_reports"
   tag: "Documentation"
   text: "Scheduled cost reports"
 - link: "/cloud_cost_management/"
@@ -105,5 +105,5 @@ After you've created and customized your report, you can save and share it from 
 [8]: /cloud_cost_management/setup/azure/#cost-types
 [9]: /cloud_cost_management/setup/google_cloud/#cost-types
 [10]: /cloud_cost_management/setup/custom/#cost-metric-types
-[11]: /cloud_cost_management/reports/scheduled_reports
+[11]: /cloud_cost_management/reporting/scheduled_reports
 [12]: /cloud_cost_management/oracle/
