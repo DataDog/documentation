@@ -313,7 +313,7 @@ config.resourceEventMapper = event => {
 [2]: /error_tracking/frontend/mobile/expo/
 [3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
 [4]: /real_user_monitoring/application_monitoring/react_native/setup/expo#initialize-the-library-with-application-context
-[5]: /real_user_monitoring/error_tracking/mobile/expo/
+[5]: /real_user_monitoring/error_tracking/mobile/expo/#use-the-datadog-ci-react-native-inject-debug-id-command
 [6]: https://expo.github.io/router/docs/
 [7]: https://docs.expo.dev/development/introduction/
 [8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
