@@ -190,7 +190,7 @@ SELinux가 강제 모드인 경우, Datadog 에이전트 포드에 [`spc_t` 유�
 <code>사용자</code> 섹션에 <code>system:serviceaccount<datadog-agent namespace><datadog-agent service account name></code>를 추가하여 <a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">datadog 에이전트 서비스 계정</a>을 새로 생성한 <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">datadog 에이전트 SCC</a>에 추가하는 것을 잊지 마세요.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>OpenShift 4.0+:</b> 지원되는 클라우드 공급자에서 OpenShift 설치 관리자를 사용하는 경우, <code>scc.yaml</code> 매니페스트에서 <code>allowHostNetwork: true</code>로 SCC를 배포하고, 에이전트 설정에서 <code>hostNetwork: true</code>로 호스트 태그 및 별칭을 가져와야 합니다. 그렇지 않으면 포드 네트워크에서 메타데이터 서버에 대한 액세스가 제한됩니다.
 </div>
 

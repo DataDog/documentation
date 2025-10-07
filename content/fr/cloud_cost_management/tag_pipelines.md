@@ -14,7 +14,7 @@ Créez des règles de tag pour vos [pipelines de tags][1] afin de résoudre les 
 
 ## Types de règles
 
-<div class="alert alert-warning"> Vous pouvez créer jusqu'à 100 règles. Les tables de référence basées sur une API ne sont pas prises en charge. </div>
+<div class="alert alert-danger"> Vous pouvez créer jusqu'à 100 règles. Les tables de référence basées sur une API ne sont pas prises en charge. </div>
 
 Trois types de règles sont prises en charge : **Add Tag**, **Alias Tag Keys** et **Map Multiple Tags**. Vous pouvez organiser vos règles au sein d'ensembles de règles, ceux-ci faisant office de dossiers pour vos règles. Les règles sont exécutées dans un ordre déterministe (de haut en bas). Vous pouvez organiser les règles et ensembles de règles de manière à ce que leur ordre d'exécution corresponde à votre logique opérationnelle.
 

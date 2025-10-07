@@ -201,7 +201,7 @@ instances:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
-<div class="alert alert-warning">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -251,7 +251,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning">Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
 
 
 [1]: /agent/docker/integrations/?tab=docker

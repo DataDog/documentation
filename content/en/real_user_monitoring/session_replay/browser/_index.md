@@ -71,7 +71,7 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
+<div class="alert alert-danger">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
 
 ## Force Session Replay
 
@@ -81,13 +81,13 @@ To force Session Replay recording for the rest of the current session, call `sta
 
 When using the force option, the session is upgraded to a replayed session for the remainder of its duration, regardless of its initial sampling decision.
 
-<div class="alert alert-warning">The force option only upgrades an existing session to a replayed one if it is already being sampled. In other words, if sampling hasn't started yet, using the force option does not initiate one, and no replay is recorded.</div>
+<div class="alert alert-danger">The force option only upgrades an existing session to a replayed one if it is already being sampled. In other words, if sampling hasn't started yet, using the force option does not initiate one, and no replay is recorded.</div>
 
 ## Disable Session Replay
 
 To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
 
-<div class="alert alert-warning">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
+<div class="alert alert-danger">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
 
 ## Retention
 

@@ -30,7 +30,7 @@ title: Adobe Experience Manager
 ---
 
 {{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">L'intégration Adobe Experience Manager n'est pas disponible pour le <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}) que vous avez sélectionné.</div>
+<div class="alert alert-danger">L'intégration Adobe Experience Manager n'est pas disponible pour le <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}) que vous avez sélectionné.</div>
 {{< /site-region >}}
 
 ## Présentation

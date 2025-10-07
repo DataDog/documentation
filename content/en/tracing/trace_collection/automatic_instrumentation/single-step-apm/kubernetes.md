@@ -416,7 +416,7 @@ Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available vers
 - [Ruby][38]
 - [PHP][39]
 
-<div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
+<div class="alert alert-danger">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
 
 For example, to automatically instrument Java applications:
 
@@ -591,7 +591,7 @@ With workload selection (available for Agent v7.64+), you can enable and disable
 
 As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
 
-<div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
+<div class="alert alert-danger">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml

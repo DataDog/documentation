@@ -81,7 +81,7 @@ If you selected:
 
 ## Add an incident
 
-<div class="alert alert-warning">Incidents published on Status Pages are not the same as incidents declared within Datadog Incident Management. Incidents on Status Pages are carefully crafted messages posted to a public website to communicate system status, and may encompass multiple internal Incident Management incidents.</div>
+<div class="alert alert-danger">Incidents published on Status Pages are not the same as incidents declared within Datadog Incident Management. Incidents on Status Pages are carefully crafted messages posted to a public website to communicate system status, and may encompass multiple internal Incident Management incidents.</div>
 
 When an issue arises, you can communicate it clearly through your status page. 
 

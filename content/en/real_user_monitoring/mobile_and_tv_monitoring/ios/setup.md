@@ -138,7 +138,7 @@ In the initialization snippet, set an environment name, service name, and client
 
 The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
-<div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
+<div class="alert alert-danger">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
 
 For more information, see [Using Tags][5].
 
@@ -505,7 +505,7 @@ The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view
 
 The Datadog iOS SDK allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
-<div class="alert alert-warning">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
+<div class="alert alert-danger">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 

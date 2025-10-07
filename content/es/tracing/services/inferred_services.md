@@ -163,7 +163,7 @@ Con los servicios inferidos, las dependencias de servicios se detectan automáti
 
 Habilita `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` para asegurarte de que ninguna integración Datadog defina nombres de servicios diferentes del nombre global del servicio por defecto. Esto también mejora la forma en que las conexiones servicio-a-servicio y los servicios inferidos son representados en las visualizaciones de Datadog, a través de todos los lenguajes de librerías de rastreo e integraciones compatibles.
 
-<div class="alert alert-warning">La activación de esta opción puede afectar a métricas de APM, métricas de tramos personalizadas, análisis de trazas (traces), filtros de retención, análisis de datos confidenciales, monitores, dashboards o notebooks existentes que hacen referencia a los antiguos nombres de servicios. Actualiza estos recursos para utilizar la etiqueta global de servicio por defecto (<code>servicio:&lt;DD_SERVICE&gt;)</code>.</div>
+<div class="alert alert-danger">La activación de esta opción puede afectar a métricas de APM, métricas de tramos personalizadas, análisis de trazas (traces), filtros de retención, análisis de datos confidenciales, monitores, dashboards o notebooks existentes que hacen referencia a los antiguos nombres de servicios. Actualiza estos recursos para utilizar la etiqueta global de servicio por defecto (<code>servicio:&lt;DD_SERVICE&gt;)</code>.</div>
 
 Para obtener instrucciones sobre cómo eliminar servicios anulados y migrar a servicios inferidos, consulta la guía [Anulación de servicios][4].
 

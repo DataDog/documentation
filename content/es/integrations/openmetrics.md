@@ -65,7 +65,7 @@ tile:
 
 Extrae métricas personalizadas de cualquier endpoint de OpenMetrics o Prometheus.
 
-<div class="alert alert-warning">Todas las métricas recuperadas por esta integración se consideran <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métricas personalizadas</a>.</div>
+<div class="alert alert-danger">Todas las métricas recuperadas por esta integración se consideran <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métricas personalizadas</a>.</div>
 
 La integración es compatible tanto con el [formato de exposición de Prometheus][1] como con la [especificación de OpenMetrics][2].
 

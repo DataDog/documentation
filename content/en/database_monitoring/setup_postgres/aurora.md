@@ -218,7 +218,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 2. [Restart the Agent][2].
 

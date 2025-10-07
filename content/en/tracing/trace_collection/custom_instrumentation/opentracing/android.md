@@ -23,7 +23,7 @@ Read more in the SDK v3 migration guide.
 Check the recommended approach with Open Telemetry.
 If it is not possible to add Open Telemetry to your project, you can use the internal Datadog tracing API in compatibility mode.
 
-<div class="alert alert-warning">Open Tracing support for the Android SDK was <strong>discontinued</strong> in version 3.
+<div class="alert alert-danger">Open Tracing support for the Android SDK was <strong>discontinued</strong> in version 3.
 <ul>
   <li>Read more in the SDK v3 <a href="/real_user_monitoring/guide/mobile-sdk-upgrade/?tab=android">migration guide</a>.</li>
   <li>Check the recommended approach with <a href="/tracing/trace_collection/custom_instrumentation/android/otel">Open Telemetry</a>.</li>

@@ -140,7 +140,7 @@ To create a retention filter:
 1. Set a name for the filter.
 1. Click **Add Filter** to save the filter.
 
-<div class="alert alert-danger">Configuring a trace rate can significantly increase your indexed spans usage.</div>
+<div class="alert alert-warning">Configuring a trace rate can significantly increase your indexed spans usage.</div>
 
 For example, if you configure a retention filter to index spans from `service:my-service`:
 - Configuring a span rate of `100%` ensures that all spans matching `service:my-service` are indexed.

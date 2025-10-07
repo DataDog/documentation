@@ -69,7 +69,7 @@ OpenTelemetry Go 애플리케이션은 [수동으로 계측됩니다][3]. 런타
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">.NET OpenTelemetry SDK의 최소 지원 버전은 <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a>입니다.</div>
+<div class="alert alert-danger">.NET OpenTelemetry SDK의 최소 지원 버전은 <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a>입니다.</div>
 
 #### 자동 계측
 
@@ -120,7 +120,7 @@ OpenTelemetry 런타임 메트릭에는 소스에 따라 다음과 같은 접두
 
 다음은 OpenTelemetry 매핑을 통해 지원되는 Datadog 런타임 메트릭 목록입니다. "N/A"는 메트릭에 해당하는 OpenTelemetry가 없음을 나타냅니다.
 
-<div class="alert alert-warning"> OpenTelemetry 런타임 메트릭은 메트릭 이름별로 Datadog에 매핑됩니다. 매핑이 깨지므로 OpenTelemetry 런타임 메트릭의 호스트 메트릭 이름을 바꾸지 마세요.</div>
+<div class="alert alert-danger"> OpenTelemetry 런타임 메트릭은 메트릭 이름별로 Datadog에 매핑됩니다. 매핑이 깨지므로 OpenTelemetry 런타임 메트릭의 호스트 메트릭 이름을 바꾸지 마세요.</div>
 
 [100]: /ko/opentelemetry/setup/collector_exporter/
 [101]: /ko/opentelemetry/setup/otlp_ingest_in_the_agent

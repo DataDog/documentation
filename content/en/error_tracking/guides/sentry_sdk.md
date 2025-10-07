@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Manage Data Collection"
 ---
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Using the Sentry SDK with Error Tracking helps you migrate to Datadog. However, to get the most out of Error Tracking, it is recommended to use the Datadog SDKs. See <a href="/error_tracking/frontend">Frontend Error Tracking</a> and <a href="/error_tracking/backend">Backend Error Tracking</a>.
 </div>
 

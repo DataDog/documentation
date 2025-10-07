@@ -176,7 +176,7 @@ To use a connection group:
 
 **Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow or app tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure the workflow or app so that it can't point to a connection that doesn't have a Resolver permission.
-- Remove the connection that doesn't have a Resolver permission from the connection group. <div class="alert alert-warning">If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
+- Remove the connection that doesn't have a Resolver permission from the connection group. <div class="alert alert-danger">If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
 
@@ -192,7 +192,7 @@ To delete a connection group:
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
 
-<div class="alert alert-danger">Deleting a connection group impacts any workflows and apps that are using that group.</div>
+<div class="alert alert-warning">Deleting a connection group impacts any workflows and apps that are using that group.</div>
 
 ## Further reading
 

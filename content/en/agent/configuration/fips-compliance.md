@@ -54,7 +54,7 @@ The Datadog FIPS Agent does **not** support the following:
 [1]: /opentelemetry/setup/ddot_collector
 
 ## Compliance guidelines
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This is not an exhaustive list. These requirements are a baseline only. You are responsible for evaluating your environment and implementing any additional controls needed to achieve full FIPS compliance.
 </div>
 The following baseline controls apply to each platform. Your system may require additional controls:
