@@ -226,8 +226,8 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 ### Choose this if...
 
 - You haven't already set up logs through the [Quickstart setup method](#azure-quickstart-setup).
-- You prefer a UI-based workflow and want to quickly create a service principal with the required monitoring permissions.
-- You want to automate setup steps easily in scripts or CI/CD pipelines.
+- You prefer a UI-based workflow and want to minimize the time it takes to create a service principal with the required monitoring permissions.
+- You want to automate setup steps in scripts or CI/CD pipelines.
 
 ### Instructions
 
@@ -240,56 +240,29 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 See [Azure Automated Log Forwarding Architecture and Configuration][34] for more details.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Blob Storage" level="h4" expanded=false id="blob-storage-log-forwarding-setup" %}}
-## Setup
+{{% collapse-content title="Container App" level="h4" expanded=false id="container-app-log-forwarding-setup" %}}
 
-1. If you haven't already set up [Azure Blob Storage][39], use one of the following methods to get started:
-   - [Azure portal][40]
-   - [Azure Storage Explorer][41]
-   - [Azure CLI][42]
-   - [PowerShell][43]
-2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
-3. Configure your Azure App Services to [forward their logs to Blob Storage][44].
+### Choose this if...
 
-##### Create a function app
+- You prefer manual setup and do not want to use the fully automated log-forwarding setup.
 
-If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
+## Instructions
 
-1. In the Azure portal, navigate to the [Function App overview][45] and click **Create**.
-2. In the **Instance Details** section, configure the following settings:
-  a. Select the **Code** radio button
-  b. For **Runtime stack**, select `Node.js`
-  c. For **Version**, select `18 LTS`.
-  d. For **Operating System**, select `Windows`.
-3. Configure other settings as desired.
-4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
+Click the button below, and fill in the form on the Azure Portal. Datadog automatically deploys the Azure resources required to get activity logs streaming into your Datadog account. To forward [Activity Logs][53], set the **Send Activity Logs** option to `true`.
 
-##### Add a new function to your Function App using the Azure Blob Storage trigger template
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)][52]
 
-1. Select your new or existing function app from the [Function App overview][45].
-2. Under the **Functions** tab, click **Create**.
-3. For the **Development environment** field, select **Develop in portal**.
-4. Under **Select a template**, choose [Azure Blob storage trigger][46].
-5. Select your **Storage account connection**.
-   **Note**: See [Configure a connection string for an Azure storage account][47] for more information.
-6. Click **Create**.
+### Azure platform logs
 
-See [Getting started with Azure Functions][48] for more information.
+After the template deployment finishes, set up [diagnostic settings][54] for each log source to send Azure platform logs (including resource logs) to the Storage Account created during deployment.
 
-##### Point your Blob Storage trigger to Datadog
+**Note**: Resources can only stream to a Storage Account in the same Azure region.
 
-1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
-2. Add the [Datadog-Azure Function code][49] to the function's `index.js` file.
-3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.
-4. If you're not using the Datadog US1 site, set your [Datadog site][50] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
-5. **Save** the function.
-6. Click **Integration** under the **Developer** side menu.
-7. Click **Azure Blob Storage** under **Trigger and inputs**.
-8. Set the **Blob Parameter Name** to `blobContent` and click **Save**.
-9. Verify your setup is correct by checking the [Datadog Log Explorer][51] for logs from this resource.
+If you run into any problems during deployment, see [Automated log collection](#automated-log-forwarding-setup) for common error cases.
+
+{{% /collapse-content %}} 
 
 {{% azure-log-archiving %}}
-{{% /collapse-content %}} 
 
 ## Get more from the Datadog Platform 
 
@@ -377,3 +350,6 @@ Still need help? Contact [Datadog support][17].
 [49]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
 [50]: https://docs.datadoghq.com/getting_started/site/
 [51]: https://app.datadoghq.com/logs
+[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[53]: https://learn.microsoft.com/azure/azure-monitor/platform/activity-log
+[54]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
