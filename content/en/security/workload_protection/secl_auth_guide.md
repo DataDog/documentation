@@ -63,30 +63,46 @@ Here's a summary of the process:
    - Time: `process.created_at > 5s`
 9.  Insert safe exceptions. Examples: `not in [...]`, `!~`, `allowlists`.
 10. Name and save the rule.
-11. Test the rule:
-    -  To test Agent events, open the rule and click **View Events**. The [Agent Events explorer][2] opens and displays the Agent events that match the expression. 
-    -  To test detection rules, open Signals: Check if the rule fires too often.
-12. Ship it:
-    -  Tag it for a targeted environment
-    -  Reference in a detection rule
-    -  Tune signal volume with suppressions
+
+### Test the rule
+
+To view Agent events that match the expression, view the rule details, and then click **View Events**. The [Agent Events explorer][2] opens and displays the Agent events that match the expression. In **Agent Events**, you can see the raw telemetry: every kernel/OS event that matched the SECL rule before suppression or aggregation.
+
+When viewing raw Agent events, do the following:
+1. Confirm the rule is firing on the intended activity.
+2. Measure the scope and frequency across hosts/environments.
+3. Decide if this is the expected baseline or a true threat?
+4. Act: Suppress/allowlist if benign, escalate/contain if suspicious.
+    
+To test detection rules, view the rule details, and then click **[Number] detection rules found**. The Detection Rules explorer opens and displays the backend logic layer: the detection rule, linked signals, metadata, JSON definition, tags, and version history.
+
+When viewing the backend logic for a detection rule, do the following:
+
+1. Confirm that the rule name, description, and JSON (net_util_in_container) clarify what the rule is supposed to catch.
+2. Measure whether the rule is noisy or precise by reviewing the aggregate metrics (query histogram, signals over time, affected hosts)..
+3. Decide if the detected activity is expected (baseline) or suspicious (threat).
+4. Act: Suppress/allowlist if benign, escalate/contain if suspicious.
+
+## Rule authoring tips
+
+- Always set os: filter in the rule YAML when using OS-specific fields:
+    
+  {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+  id: my_linux_rule
+  expression: exec.file.path == "/usr/bin/passwd"
+  filters:
+    - os == "linux"
+  {{< /code-block >}}
+- Prefer exact matches over regex. Use glob-style `~"/path/*"` or `**` for subfolders.
+- Use `in [...]` lists instead of long `OR` chains. It makes expressions faster and easier to read.
+- Anchor on ancestry to reduce noise. Use `process.ancestors.file.name`.
+- Treat regex as last resort. Use globs or `in` where possible.
+- Use durations (for example, `> 5s`, `10m`, `2h`) to target narrow execution windows.
+- Name rules by behavior, with a format that follows *What + Who + Context*.
+- Tag generously: `team`, `app`, `env`, `MITRE`, `severity`.
 
 
-### Tips
-
-High-Signal Attributes
-
-Process lineage: process.ancestors.file.name → Use this to separate benign system actions from suspicious spawns.
-
-File path: open.file.path → Match sensitive files; combine with not in [...] to allow normal tools.
-
-Network: network.destination.ip in CIDR → Use allowlists of corp ranges to suppress noise.
-
-Container scope: container.id, container.image → Restrict detections to workloads that matter.
-
-Timing: process.created_at > 5s → Useful for catching odd behavior like “read secrets right after start.”
-
-Operators & Matchers
+## Operators and matchers
 
 Exact match (==) → Fastest, lowest noise. Always prefer.
 
@@ -102,20 +118,35 @@ CIDR operators (in CIDR, not in CIDR) → Use for network boundaries.
 
 👉 Rule of thumb: Start with == or in [...]. Reach for regex only as a last resort.
 
-## Rule authoring checklist and style guide
-
-
-
-
-## Common building blocks
-
-
 ## Avoid common mistakes
 
+| Pattern                   | Explanation                                 |
+| ------------------------- | -------------------------------------------- |
+| `proc.args contains "rm"` | Too broad. Matches a lot of valid use cases.  |
+| `fd.name contains "/"`    | Matches nearly every file I/O event.     |
+| `container.id != ""`      | Useful only if scoped with a more specific field. |
 
+
+## Rule authoring framework
+
+1. Define the attack vector:
+   - **Process Execution:** Unusual binaries, suspicious args.
+   - **File Access:** Unauthorized file reads/writes.
+   - **Network Activity:** Suspicious connections.
+   - **System Calls:** Abnormal kernel activity.
+2. Use platform-specific fields that provide meaningful context:
+   - Linux context:
+    {{< code-block lang="secl" disable_copy="true" collapsible="true" >}}
+    # High-value fields
+    process.name and process.args and process.user and process.pid
+    file.path and file.name and file.permissions
+    network.destination.ip and network.destination.port
+    {{< /code-block >}}
+
+   - Windows context:
+3. 
 
 ## Examples
-
 
 ### Linux examples
 
