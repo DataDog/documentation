@@ -198,7 +198,6 @@ function loadPage(newUrl) {
                 updateMainContentAnchors();
                 reloadWistiaVidScripts(wistiaVidId);
                 initializeIntegrations();
-                handleFleetAutomationCustomRumAction();
             } else if (
                 document.querySelector('.js-toc-container #TableOfContents')
             ) {
@@ -245,6 +244,9 @@ function loadPage(newUrl) {
 
             // sets query params if code tabs are present
             initCodeTabs();
+            
+            handleFleetAutomationCustomRumAction();
+
 
             const regionSelector = document.querySelector('.js-region-select');
 
