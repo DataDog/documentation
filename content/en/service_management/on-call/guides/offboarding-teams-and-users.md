@@ -12,7 +12,7 @@ further_reading:
   text: "Schedules"
 ---
 
-Datadog charges for users who are active in On-Call - specifically those who are in schedules, escalation policies, or have notification preferences configured. When team members leave your organization or no longer need On-Call access, you'll want to remove them to avoid unnecessary charges.
+Datadog charges for users who are active in On-Call, specifically those who are in schedules, escalation policies, or have notification preferences configured. When team members leave your organization or no longer need On-Call access, you'll want to remove them to avoid unnecessary charges.
 
 This guide shows you how to:
 
@@ -33,7 +33,7 @@ Datadog charges for users who are actively configured in On-Call. Before removin
 - **Escalation policy membership**: Users included in escalation policies (either directly or as team members)
 - **Notification preferences**: Users with On-Call notification methods configured (SMS, voice, push notifications)
 
-You can find this information in the On-Call settings for each team and by reviewing individual user profiles.
+You can find this information in the On-Call settings for each team and by reviewing individual user profiles. This is also available in the Plan & Usage page, specifically under "Seat Management".
 
 ## Replace coverage before removing users
 
@@ -59,8 +59,8 @@ If the departing user is in any escalation policies:
 
 If the user is still part of your organisation you can ask them to remove their Notification Preferences in their On-Call profile by visiting On-Call > Settings > My On-Call Profile. 
 
-As an admin, you can also take care of it yourself by visiting On-Call > Settings > User Notifications.  Find the right user and remove their notification preferences whenver needed.
-djusting schedules or escalation policies.
+As an admin, you can also take care of it yourself by visiting On-Call > Settings > Notification Preferences. Find the right user and remove their notification preferences whenver needed.
+djusting schedules or escalation policies. **Note**, you will need the "On-Call Admin" permission to perform this.
 
 ## Further reading
 
