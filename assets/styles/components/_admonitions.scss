@@ -49,7 +49,7 @@
 }
 
 .alert-danger::after {
-  content: 'WARNING';
+  content: 'CAUTION';
   position: absolute;
   top: 8px;
   left: 16px;
@@ -68,7 +68,7 @@
 }
 
 .alert-warning::after {
-  content: 'CAUTION';
+  content: 'WARNING';
   position: absolute;
   top: 8px;
   left: 16px;
