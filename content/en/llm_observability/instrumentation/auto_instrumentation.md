@@ -600,6 +600,7 @@ module.exports = {
   }
 }
 ```
+{{% /tab %}}
 {{% tab "Java" %}}
 
 ## Overview
