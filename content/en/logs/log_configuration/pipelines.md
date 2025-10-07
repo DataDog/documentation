@@ -56,27 +56,6 @@ For each pipeline, administrators can choose the following edit scopes:
 
 You can manage these permissions programmatically through **API and Terraform**.
 
-### Legacy behavior
-
-If your organization has the legacy *Access control* model enabled, pipeline permissions appear as **Step 2: Access control** in the pipeline configuration UI. In this mode, you can grant edit access for a pipeline's processors to specific users or teams, but **Granular Access Control** features, such as role-level assignments and precise scope definitions, are not available.
-
-<table style="width:100%; border-collapse:collapse;">
-  <tr style="background-color:#f5f6fa;">
-    <th style="width:50%; text-align:left; font-weight:bold; text-transform:uppercase; padding:8px;">Legacy Permissions</th>
-    <th style="width:50%; text-align:left; font-weight:bold; text-transform:uppercase; padding:8px;">Granular Access Control Permissions</th>
-  </tr>
-  <tr style="background-color:#fff;">
-    <td style="width:50%; text-align:center; vertical-align:top; padding:8px;">
-      {{< img src="/logs/processing/pipelines/pipeline_legacy_permissions.png" alt="Legacy permissions UI for pipelines" style="width:100%;" >}}
-    </td>
-    <td style="width:50%; text-align:center; vertical-align:top; padding:8px;">
-      {{< img src="/logs/processing/pipelines/pipeline_grace_permissions.png" alt="Granular Access Control permissions UI for pipelines" style="width:100%;" >}}
-    </td>
-  </tr>
-</table>
-
-If you're unsure which permission model your organization uses, contact your Datadog Administrator.
-
 ## Preprocessing
 
 Preprocessing of JSON logs occurs before logs enter pipeline processing. Preprocessing runs a series of operations based on reserved attributes, such as `timestamp`, `status`, `host`, `service`, and `message`. If you have different attribute names in your JSON logs, use preprocessing to map your log attribute names to those in the reserved attribute list.
