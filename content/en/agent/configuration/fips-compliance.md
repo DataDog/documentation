@@ -50,6 +50,7 @@ The Datadog FIPS Agent does **not** support the following:
 - Outbound communication to anything other than GovCloud
 - Datadog [DDOT Collector][5]
 
+
 ## Compliance guidelines
 <div class="alert alert-warning">
 This is not an exhaustive list. These requirements are a baseline only. You are responsible for evaluating your environment and implementing any additional controls needed to achieve full FIPS compliance.
@@ -68,6 +69,7 @@ The following baseline controls apply to each platform. Your system may require 
 - Windows must be in [FIPS-compliant mode][6].
 - FIPS-compliant storage backing the host file system.
 
+[6]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
 {{% /tab %}}
 
 {{% tab "AWS Lambda" %}}
@@ -117,6 +119,7 @@ In addition to the Operating System (OS) requirements above:
 
 {{< img src="/agent/fips-linux.png" alt="Agent status command output with FIPS Mode enabled - Linux" style="width:100%;" >}}
 
+[7]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -143,6 +146,8 @@ if ($p.ExitCode -ne 0) {
 
 
 **Note**: The program name for the FIPS Agent in **Add or Remove Programs** is "Datadog FIPS Agent."
+
+[8]: /agent/basic_agent_usage/windows/#uninstall-the-agent
 
 {{% /tab %}}
 
@@ -201,6 +206,3 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 [3]: /integrations/guide/fips-integrations
 [4]: /integrations/guide/jmxfetch-fips
 [5]: /opentelemetry/setup/ddot_collector
-[6]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
-[7]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
-[8]: /agent/basic_agent_usage/windows/#uninstall-the-agent
