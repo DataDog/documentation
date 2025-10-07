@@ -1,5 +1,7 @@
 ---
 title: Scheduled Cost Reports
+aliases:
+- /cloud_cost_management/scheduled_reports
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

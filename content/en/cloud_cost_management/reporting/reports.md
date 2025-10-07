@@ -1,6 +1,8 @@
 ---
 title: Reports
 private: true
+aliases:
+- /cloud_cost_management/reports
 description: Track your organization spending with Cloud Cost Management Reports.
 further_reading:
 - link: "/cloud_cost_management/reporting/scheduled_reports"

@@ -3751,16 +3751,16 @@ menu:
     - name: Reports
       url: cloud_cost_management/reporting/reports
       parent: cloud_cost_reporting
-      identifier: cloud_cost_sreports
+      identifier: cloud_cost_reports
       weight: 503
     - name: Monitors
       url: cloud_cost_management/reporting/monitors
-      parent: cloud_cost
+      parent: cloud_cost_reporting
       identifier: cloud_cost_monitors
       weight: 504
     - name: Anomalies
       url: cloud_cost_management/reporting/anomalies
-      parent: cloud_cost
+      parent: cloud_cost_reporting
       identifier: cloud_cost_anomalies
       weight: 505
     - name: Planning
