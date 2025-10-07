@@ -432,6 +432,8 @@ Within the zipped JSON file, each event's content is formatted as follows:
 }
 ```
 
+Note: Logs are stored as Newline Delimited JSON, meaning each line in the file is a valid JSON object representing one log event.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
