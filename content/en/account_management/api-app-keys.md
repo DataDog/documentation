@@ -27,7 +27,7 @@ All application keys for new parent organizations (and their child organizations
 
 #### For existing organizations
 
-Organization administrators can enable or disable OTR mode from [**Organization Settings** > **Application Keys**][2]. Once enabled:
+Organization administrators can enable or disable OTR mode from [**Organization Settings** > **Application Keys**][2]. After enabling OTR mode:
 
 - Application key secrets are visible only once, at the time of creation
 - They are no longer retrievable via the UI or API afterward
