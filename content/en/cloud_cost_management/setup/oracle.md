@@ -93,7 +93,7 @@ The following out-of-the-box tags are available:
 | Compute            | `host`                        |
 | Object Storage     | `name`                        |
 
-Additionally, we provide the following tags that can be used with many observability metrics. For example, to view cost and execution duration of OCI Functions for each compartment, you can make a table with `oci.cost.amortized`, `oci.faas.function_execution_duration` , and group by `compartment_id`.
+Additionally, we provide the following tags that can be used with many observability metrics. For example, to view cost and execution duration of OCI Functions for each compartment, you can make a table with `oci.cost.amortized`, `oci.faas.function_execution_duration`, and group by `compartment_id`.
 | Tag Name                         | Tag Description       |
 | ---------------------------- | ----------------- |
 | `compartment_id`             | The identifier (OCID) for the compartment.|
