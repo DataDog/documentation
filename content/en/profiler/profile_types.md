@@ -215,7 +215,7 @@ _Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
 Live Heap (v3.28+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
-_Requires: .NET 7+ but .NET 10+ is recommended for more accurate sampling_
+_Requires: .NET 7+ but Datadog recommends .NET 10+ for more accurate sampling.
 
 Outgoing HTTP requests (in Timeline) (in beta v3.19+)
 : Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
