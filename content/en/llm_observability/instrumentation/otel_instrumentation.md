@@ -46,7 +46,7 @@ To generate traces compatible with LLM Observability:
 
 The traces will automatically appear in the [**LLM Observability Traces** page][3] once your application starts sending data. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your Opentelemetry span's `service` attribute.
 
-**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear in the UI.
+**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear in the LLM Observability Traces UI.
 
 ## Supported semantic conventions
 
