@@ -34,6 +34,8 @@ Organization administrators can enable or disable OTR mode from [**Organization 
 - The setting can be toggled on or off by organization administrators for 3 months after enabling
 - After 3 months of being continuously enabled, OTR mode becomes permanent and the toggle is removed
 
+**Permissions**: Users must have both the `org_app_keys_write` and `org_management` permissions to enable or disable OTR mode for their organization.
+
 ### Scopes 
 
 
