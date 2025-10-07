@@ -244,7 +244,7 @@ See [Azure Automated Log Forwarding Architecture and Configuration][34] for more
 
 ### Choose this if...
 
-- You prefer manual setup and do not want to use the fully automated log-forwarding setup.
+You prefer manual setup and do not want to use the fully automated log-forwarding setup.
 
 ## Instructions
 
