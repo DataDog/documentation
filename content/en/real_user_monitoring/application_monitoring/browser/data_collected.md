@@ -13,7 +13,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
-- link: "/real_user_monitoring/browser/advanced_configuration"
+- link: "/real_user_monitoring/application_monitoring/browser/advanced_configuration"
   tag: "Documentation"
   text: "Modifying RUM data and adding context"
 - link: "/real_user_monitoring/explorer/"

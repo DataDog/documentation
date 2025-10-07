@@ -47,4 +47,4 @@ Keep in mind the following limitations when using auto-instrumentation:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

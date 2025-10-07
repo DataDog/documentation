@@ -33,5 +33,5 @@ There are two ways to instrument your application: automatic or manual instrumen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/server
-[2]: /real_user_monitoring/browser/setup/client
+[1]: /real_user_monitoring/application_monitoring/browser/setup/server
+[2]: /real_user_monitoring/application_monitoring/browser/setup/

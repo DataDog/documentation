@@ -19,6 +19,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Use in Worker and Service Worker environments.
 
 **Notes**:
+
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
 - **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs sent from Worker environments do not automatically include session information.
 
@@ -60,6 +61,7 @@ datadogLogs.init({
 Load and configure the SDK in the head section of your pages. For **{{<region-param key="dd_site_name">}}** site:
 
 {{< site-region region="us" >}}
+
 ```html
 <html>
   <head>
@@ -82,8 +84,10 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="ap1" >}}
+
 ```html
 <html>
   <head>
@@ -106,8 +110,10 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="ap2" >}}
+
 ```html
 <html>
   <head>
@@ -130,8 +136,10 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="eu" >}}
+
 ```html
 <html>
   <head>
@@ -154,8 +162,10 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="us3" >}}
+
 ```html
 <html>
   <head>
@@ -178,8 +188,10 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="us5" >}}
+
 ```html
 <html>
   <head>
@@ -202,8 +214,10 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="gov" >}}
+
 ```html
 <html>
   <head>
@@ -226,8 +240,8 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
   </head>
 </html>
 ```
-{{</ site-region>}}
 
+{{</ site-region>}}
 
 **Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
@@ -236,6 +250,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
 To receive all logs and errors, load and configure the SDK at the beginning of the head section for your pages. For **{{<region-param key="dd_site_name">}}** site:
 
 {{< site-region region="us" >}}
+
 ```html
 <html>
   <head>
@@ -253,8 +268,10 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="ap1" >}}
+
 ```html
 <html>
   <head>
@@ -272,8 +289,10 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="ap2" >}}
+
 ```html
 <html>
   <head>
@@ -291,8 +310,10 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="eu" >}}
+
 ```html
 <html>
   <head>
@@ -310,8 +331,10 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="us3" >}}
+
 ```html
 <html>
   <head>
@@ -329,8 +352,10 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="us5" >}}
+
 ```html
 <html>
   <head>
@@ -348,8 +373,10 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 {{< site-region region="gov" >}}
+
 ```html
 <html>
   <head>
@@ -367,6 +394,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
   </head>
 </html>
 ```
+
 {{</ site-region>}}
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -1267,8 +1295,8 @@ The `trackingConsent` initialization parameter can be one of the following value
 
 To change the tracking consent value after the Logs Browser SDK is initialized, use the `setTrackingConsent()` API call. The Logs Browser SDK changes its behavior according to the new value:
 
-* when changed from `"granted"` to `"not-granted"`, the Logs session is stopped, and data is no longer sent to Datadog.
-* when changed from `"not-granted"` to `"granted"`, a new Logs session is created if no previous session is active, and data collection resumes.
+- when changed from `"granted"` to `"not-granted"`, the Logs session is stopped, and data is no longer sent to Datadog.
+- when changed from `"not-granted"` to `"granted"`, a new Logs session is created if no previous session is active, and data collection resumes.
 
 This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during Logs Browser SDK initialization or by using `setTrackingConsent()`.
 
@@ -1373,6 +1401,6 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [7]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [8]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
-[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
-[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
+[10]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event

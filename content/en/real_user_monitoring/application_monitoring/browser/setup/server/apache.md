@@ -8,7 +8,7 @@ code_lang_weight: 3
 aliases:
   - /real_user_monitoring/browser/setup/server/apache/
 further_reading:
-- link: '/real_user_monitoring/browser/setup/server/'
+- link: '/real_user_monitoring/application_monitoring/browser/setup/server'
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
@@ -118,7 +118,7 @@ To manually instrument your RUM application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/server/#limitations
+[1]: /real_user_monitoring/application_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://httpd.apache.org/modules/
 [4]: https://app.datadoghq.com/rum/list

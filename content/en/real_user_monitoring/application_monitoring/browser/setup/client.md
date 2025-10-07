@@ -5,7 +5,7 @@ aliases:
   - /real_user_monitoring/setup
   - /real_user_monitoring/browser/setup/client
 further_reading:
-- link: '/real_user_monitoring/browser/advanced_configuration/'
+- link: '/real_user_monitoring/application_monitoring/browser/advanced_configuration/'
   tag: 'Documentation'
   text: 'Advanced configuration'
 - link: '/real_user_monitoring/session_replay/browser/'

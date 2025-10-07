@@ -8,7 +8,7 @@ code_lang_weight: 7
 aliases:
   - /real_user_monitoring/browser/setup/server/java
 further_reading:
-- link: '/real_user_monitoring/browser/setup/server/'
+- link: '/real_user_monitoring/application_monitoring/browser/setup/server'
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---

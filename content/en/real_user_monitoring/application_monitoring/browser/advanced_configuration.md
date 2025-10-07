@@ -1709,4 +1709,4 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [17]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-[20]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[20]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#override-default-rum-view-names
