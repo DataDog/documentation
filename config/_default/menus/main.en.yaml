@@ -4775,6 +4775,11 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
       weight: 305
+    - name: Dashboards
+      url: llm_observability/monitoring/dashboards
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_dashboards
+      weight: 306
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
