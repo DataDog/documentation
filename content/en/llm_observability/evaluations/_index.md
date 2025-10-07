@@ -12,7 +12,7 @@ LLM Observability offers several ways to support evaluations. They can be config
 
 ### Custom LLM-as-a-Judge Evaluations
 
-[Custom LLM-as-a-Judge Evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria—like tone, helpfulness, or factuality—and run them at scale across your traces and spans.
+[Custom LLM-as-a-Judge Evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria - like tone, helpfulness, or factuality - and run them at scale across your traces and spans.
 
 ### Managed Evaluations
 

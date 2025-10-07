@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Custom LLM-as-a-Judge Evaluations let you define your own evaluation logic to automatically assess your LLM applications. You can use natural language prompts to capture subjective or objective criteria—like tone, helpfulness, or factuality—and run them at scale across your traces and spans.
+Custom LLM-as-a-Judge Evaluations let you define your own evaluation logic to automatically assess your LLM applications. You can use natural language prompts to capture subjective or objective criteria - like tone, helpfulness, or factuality - and run them at scale across your traces and spans.
 
 This provides a flexible, automated way to monitor model quality, detect regressions, and track improvements over time.
 
@@ -29,10 +29,10 @@ Custom LLM-as-a-Judge Evaluations use an LLM to judge the performance of another
 You define:
 - The criteria (via prompt text)
 - What is evaluated (e.g., a span's output)
-- The model (e.g., GPT-4o)
-- The output type (boolean, numeric score, or categorical label)
+- The model (e.g., `GPT-4o`)
+- The output type (`boolean`, numeric score, or `categorical` label)
 
-Datadog then runs this evaluation logic automatically against your spans, recording results as structured metrics that you can query, visualize, and monitor.
+Datadog then runs this evaluation logic automatically against your spans, recording results for you to query, visualize, and monitor.
 
 ## Create a custom evaluation
 
@@ -107,11 +107,84 @@ Span Input: {{span_input}}
 
 Define the expected output schema for the evaluator:
 
-- **Boolean** – True/False results (e.g., "Did the model follow instructions?")
-- **Score** – Numeric rating (e.g., 1–5 scale for helpfulness)
-- **Categorical** – Discrete labels (e.g., "Good", "Bad", "Neutral")
+- **`boolean`** – True/False results (e.g., "Did the model follow instructions?")
+- **`score`** – Numeric rating (e.g., 1–5 scale for helpfulness)
+- **`categorical`** – Discrete labels (e.g., "Good", "Bad", "Neutral")
 
-The schema ensures your results are structured for querying and dashboarding. For Anthropic and Bedrock models, only Boolean output types are allowed.
+The schema ensures your results are structured for querying and dashboarding. For Anthropic and Bedrock models, only `boolean` output types are allowed.
+
+#### JSON Output Schema
+
+When using OpenAI or Azure OpenAI, you will be prompted to edit a JSON schema that defines your evaluations output type. Use the `description` field to provide further context to the LLM-as-a-judge.
+
+For `boolean` evaluations:
+- You can edit the `description` field to further explain what true and false mean in your use case.
+
+For `score` evaluations:
+- You can set a `min` and `max` score for your evaluation.
+- You can edit the `description` field to further explain the scale of your evaluation.
+
+For `categorical` evaluations:
+- You can add or remove categories by editing the JSON schema
+- You can edit category names
+- You can edit the `description` field of categories to further explain what they mean in the context of your evaluation.
+
+Below is an example of a `categorical` JSON Schema.
+
+{{< code-block lang="json" >}}
+{
+    "name": "categorical_eval",
+    "schema": {
+        "type": "object",
+        "required": [
+            "categorical_eval"
+        ],
+        "properties": {
+            "categorical_eval": {
+                "type": "string",
+                "anyOf": [
+                    {
+                        "const": "budgeting_question",
+                        "description": "The user is asking a question about their budget. The answer can be directly determined by looking at their budget and spending."
+                    },
+                    {
+                        "const": "budgeting_request",
+                        "description": "The user is asking to change something about their budget. This should involve an action that changes their budget."
+                    },
+                    {
+                        "const": "budgeting_advice",
+                        "description": "The user is asking for advice on their budget. This should not require a change to their budget, but it should require an analysis of their budget and spending."
+                    },
+                    {
+                        "const": "general_financial_advice",
+                        "description": "The user is asking for general financial advice which is not directly related to their specific budget. However, this can include advice about budgeting in general."
+                    },
+                    {
+                        "const": "unrelated",
+                        "description": "This is a catch-all category for things not related to budgeting or financial advice."
+                    }
+                ]
+            }
+        },
+        "additionalProperties": false
+    },
+    "strict": true
+}
+{{< /code-block >}}
+
+#### Keyword Search
+When using other LLM providers, only `boolean` output types are allowed. You will be prompted to provide **True Keywords** and **False Keywords** that define when the evaluation result will be true or false, respectively. Datadog will search the LLM-as-a-judge's response text for those keywords and provide the appropriate results for the evaluation.
+
+For this reason, you should always instruct the LLM to respond with your chosen keywords. For example, if you set
+
+- **True Keywords**: Yes, yes
+- **False Keywords**: No, no
+
+You should include something like the following instructions in the System Prompt:
+
+{{< code-block lang="text" >}}
+Respond with "yes" or "no".
+{{< /code-block >}}
 
 You can preview and refine your logic in the [**Test Evaluation**](#6-test-your-evaluation) panel by providing sample span input/output and clicking **Run Evaluation** to verify outputs.
 
