@@ -112,10 +112,12 @@ To learn more, check out the [30-second Product Guided Tour][14].
 - [Runtime Code Analysis (IAST)][29] for identifying vulnerabilities in the first-party code within your services
 - [Secret Scanning][30] for identifying and validating leaked secrets (in Preview)
 
-Code Security helps teams implement DevSecOps throughout the organization:
+With IDE integrations, pull request comments, and CI/CD gates, Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
-- **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.
+- **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.  
+
+{{< img src="static/images/code_security/gitlab_integration_light.png" alt="A SAST finding within a GitLab repository" width="100%">}}
 
 ## Cloud Security
 
@@ -130,11 +132,6 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 ##  App and API Protection
 
 Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
-
-In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
-- [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
-- [Software Composition Analysis (SCA)][22] for identifying open source dependencies in both your repositories and your services
-- [Runtime Code Analysis (IAST)][23] for code-level vulnerabilities in your services
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
