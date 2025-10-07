@@ -41,7 +41,7 @@ You can visualize your ingested data using the following cost types:
 
 | Cost Type                                       | Description |
 |-------------------------------------------------| ----------------------------------|
-| `oci.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts |
+| `oci.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts. |
 | `oci.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
