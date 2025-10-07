@@ -173,7 +173,7 @@ The following is the list of neutral tags available for use:
 </tr>
 <tr>
 <td><code>intra_availability_zone</code></td>
-<td>Indicates whether network flows are within an availability zone (<code>true</code>), cross-AZ (<code>false</code>), or undetermined (<code>unknown</code>). <strong>Note</strong>: Not applicable for Azure.</td>
+<td>Indicates whether network flows are within an availability zone (<code>true</code>), cross-availability zone (<code>false</code>), or undetermined (<code>unknown</code>). <strong>Note</strong>: Not applicable for Azure.</td>
 </tr>
 <tr>
 <td><code>intra_region</code></td>
@@ -201,7 +201,7 @@ The following is the list of neutral tags available for use:
 </tr>
 <tr>
 <td><code>tls_client_version</code></td>
-<td>The TLS versions supported by the client (<code>tls_1.2</code> or <code>tls_1.3</code>).</td>
+<td>The TLS version supported by the client (<code>tls_1.2</code> or <code>tls_1.3</code>).</td>
 </tr>
 <tr>
 <td><code>tls_encrypted</code></td>
