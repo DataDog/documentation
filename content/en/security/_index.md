@@ -117,7 +117,7 @@ With IDE integrations, pull request comments, and CI/CD gates, Code Security hel
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
 - **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.  
 
-{{< img src="/code_security/gitlab_integration_light.png" alt="A SAST finding within a GitLab repository" width="100%">}}
+{{< img src="code_security/gitlab_integration_light.png" alt="A SAST finding within a GitLab repository" width="100%">}}
 
 ## Cloud Security
 
