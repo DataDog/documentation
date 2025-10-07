@@ -3693,11 +3693,6 @@ menu:
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_pipelines
       weight: 302
-    - name: Multisource Querying
-      url: cloud_cost_management/multisource_querying
-      parent: cloud_cost_tags
-      identifier: cloud_cost_multisource_querying
-      weight: 303
     - name: Allocation
       url: cloud_cost_management/allocation
       parent: cloud_cost
