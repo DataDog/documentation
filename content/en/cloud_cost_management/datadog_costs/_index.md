@@ -73,7 +73,7 @@ Datadog cost data is available at the parent organization level. Sub-organizatio
 
 Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [**Plan & Usage** page][7] because Plan & Usage costs are cumulative and prorated monthly. Only Cloud Cost Management provides daily cost calculations.
 
-Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
+Datadog cost data has an expected data delay of 48 hours and is available for the past 15 months. Cost data can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 

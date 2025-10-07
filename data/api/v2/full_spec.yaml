@@ -13717,8 +13717,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp when the deployment finished. It must be in
-            nanoseconds, milliseconds, or seconds, and it should not be older than
-            1 hour.
+            nanoseconds, milliseconds, or seconds.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -29978,6 +29977,8 @@ components:
       additionalProperties: false
       description: Attributes of the monitor notification rule.
       properties:
+        conditional_recipients:
+          $ref: '#/components/schemas/MonitorNotificationRuleConditionalRecipients'
         filter:
           $ref: '#/components/schemas/MonitorNotificationRuleFilter'
         name:
@@ -29986,7 +29987,35 @@ components:
           $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
       required:
       - name
+      type: object
+    MonitorNotificationRuleCondition:
+      description: Conditions for `conditional_recipients`.
+      properties:
+        recipients:
+          $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
+        scope:
+          $ref: '#/components/schemas/MonitorNotificationRuleScope'
+      required:
+      - scope
       - recipients
+      type: object
+    MonitorNotificationRuleConditionalRecipients:
+      description: Use conditional recipients to define different recipients for different
+        situations.
+      properties:
+        conditions:
+          description: Conditions of the notification rule.
+          items:
+            $ref: '#/components/schemas/MonitorNotificationRuleCondition'
+          maxItems: 10
+          minItems: 1
+          type: array
+        fallback_recipients:
+          $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
+          description: If none of the `conditions` applied, `fallback_recipients`
+            will get notified.
+      required:
+      - conditions
       type: object
     MonitorNotificationRuleCreateRequest:
       description: Request for creating a monitor notification rule.
@@ -30127,6 +30156,8 @@ components:
       additionalProperties: {}
       description: Attributes of the monitor notification rule.
       properties:
+        conditional_recipients:
+          $ref: '#/components/schemas/MonitorNotificationRuleConditionalRecipients'
         created:
           description: Creation time of the monitor notification rule.
           example: 2020-01-02 03:04:00+00:00
@@ -30148,6 +30179,12 @@ components:
       description: An object related to a monitor notification rule.
       oneOf:
       - $ref: '#/components/schemas/User'
+    MonitorNotificationRuleScope:
+      description: The scope to which the monitor applied.
+      example: transition_type:alert
+      maxLength: 3000
+      minLength: 1
+      type: string
     MonitorNotificationRuleUpdateRequest:
       description: Request for updating a monitor notification rule.
       properties:
@@ -58933,8 +58970,7 @@ paths:
         type: idempotent
   /api/v2/dora/deployment:
     post:
-      description: 'Use this API endpoint to provide data about deployments for DORA
-        metrics.
+      description: 'Use this API endpoint to provide deployment data.
 
 
         This is necessary for:
@@ -58976,7 +59012,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      summary: Send a deployment event for DORA Metrics
+      summary: Send a deployment event
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
@@ -59105,7 +59141,7 @@ paths:
         type: safe
   /api/v2/dora/failure:
     post:
-      description: 'Use this API endpoint to provide failure data for DORA metrics.
+      description: 'Use this API endpoint to provide failure data.
 
 
         This is necessary for:
@@ -59145,7 +59181,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      summary: Send a failure event for DORA Metrics
+      summary: Send a failure event
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
@@ -59279,7 +59315,7 @@ paths:
         instead.
 
 
-        Use this API endpoint to provide failure data for DORA metrics.
+        Use this API endpoint to provide failure data.
 
 
         This is necessary for:
@@ -59319,7 +59355,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      summary: Send an incident event for DORA Metrics
+      summary: Send an incident event
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
