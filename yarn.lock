@@ -2891,6 +2891,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@datadog/browser-core@npm:6.22.0":
+  version: 6.22.0
+  resolution: "@datadog/browser-core@npm:6.22.0"
+  checksum: 7bc0ff94c478255c18e420fb691448bbd97edcd6e676b59e10bb3575a2e9fba7d95757fca8961ec904ff796f65ee463d17406613e26a65f15e12985688af040b
+  languageName: node
+  linkType: hard
+
 "@datadog/browser-logs@npm:^5.27.0":
   version: 5.27.0
   resolution: "@datadog/browser-logs@npm:5.27.0"
@@ -2905,27 +2912,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datadog/browser-rum-core@npm:5.27.0":
-  version: 5.27.0
-  resolution: "@datadog/browser-rum-core@npm:5.27.0"
+"@datadog/browser-rum-core@npm:6.22.0":
+  version: 6.22.0
+  resolution: "@datadog/browser-rum-core@npm:6.22.0"
   dependencies:
-    "@datadog/browser-core": 5.27.0
-  checksum: 55a80145029b1ca5dbfadfd66e0f9b14a43fa6d1669e68067a0cf2eff9d5342d270da68a62767cfc9d58f59282d7376f367e71a8dfc9d1a8f6e8da9e30299857
+    "@datadog/browser-core": 6.22.0
+  checksum: 60609e54f5c2e443fb86da04019a48898506df031aedc8ff1593f05f45c578d2b3aaab666c8f4ca0bc4193982b0a22001388ba2100c25789248bc8afed45337e
   languageName: node
   linkType: hard
 
-"@datadog/browser-rum@npm:^5.27.0":
-  version: 5.27.0
-  resolution: "@datadog/browser-rum@npm:5.27.0"
+"@datadog/browser-rum@npm:^6.22.0":
+  version: 6.22.0
+  resolution: "@datadog/browser-rum@npm:6.22.0"
   dependencies:
-    "@datadog/browser-core": 5.27.0
-    "@datadog/browser-rum-core": 5.27.0
+    "@datadog/browser-core": 6.22.0
+    "@datadog/browser-rum-core": 6.22.0
   peerDependencies:
-    "@datadog/browser-logs": 5.27.0
+    "@datadog/browser-logs": 6.22.0
   peerDependenciesMeta:
     "@datadog/browser-logs":
       optional: true
-  checksum: 18f2d8485c462a8360349e9c5bda1781d6f9d47fedf7a9edfa0249af4fd74a60a9fbcf301535ce1612da565aea251c2133524426d7df24d146095235984536e2
+  checksum: c7dd19483fac6f464369171a6084ad77e8e799e7c7aeab0d3ba1fa36caaa2c5ec2bf4e4642312bc3ef9c48fb92d06efb57991451b34ed50b050c4d3fd1d0aff8
   languageName: node
   linkType: hard
 
@@ -7633,7 +7640,7 @@ __metadata:
     "@babel/preset-env": ^7.24.0
     "@babel/runtime": ^7.25.6
     "@datadog/browser-logs": ^5.27.0
-    "@datadog/browser-rum": ^5.27.0
+    "@datadog/browser-rum": ^6.22.0
     "@datadog/datadog-ci": ^2.36.0
     "@popperjs/core": ^2.11.8
     acorn: ^7.4.1
