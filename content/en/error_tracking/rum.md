@@ -1,5 +1,6 @@
 ---
 title: Error Tracking for Web and Mobile Applications
+description: Set up Error Tracking for Real User Monitoring (RUM) across browser, mobile, and TV applications.
 ---
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation:" >}}

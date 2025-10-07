@@ -1,5 +1,6 @@
 ---
 title: Issue States in Error Tracking
+description: Understand the five issue states in Error Tracking and how they automatically update or can be manually managed.
 further_reading:
   - link: '/error_tracking/regression_detection/'
     tag: 'Documentation'

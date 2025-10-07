@@ -1,5 +1,6 @@
 ---
 title: Error Tracking Guides
+description: Guides for enabling Infrastructure Monitoring, APM, and Sentry SDK with standalone backend Error Tracking.
 private: true
 disable_toc: true
 ---

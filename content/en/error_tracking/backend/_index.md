@@ -1,5 +1,6 @@
 ---
 title: Backend Error Tracking
+description: Track, triage, and debug backend application errors with automatic local variable capture and exception replay.
 is_beta: true
 private: false
 aliases:

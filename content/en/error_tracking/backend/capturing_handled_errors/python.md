@@ -1,5 +1,6 @@
 ---
 title: Capturing Handled Exceptions In Python Applications
+description: Configure automatic and manual instrumentation to capture handled exceptions in Python applications using ddtrace.
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10

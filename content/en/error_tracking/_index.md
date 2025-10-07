@@ -1,5 +1,6 @@
 ---
 title: Error Tracking
+description: Learn about Datadog's Error Tracking. Group similar errors into issues and track, triage, and debug fatal errors across your web, mobile, and backend applications.
 disable_toc: false
 further_reading:
 - link: 'https://www.datadoghq.com/blog/error-tracking-and-github/'

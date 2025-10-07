@@ -1,5 +1,6 @@
 ---
 title: Capturing Handled Exceptions In Ruby Applications
+description: Configure automatic instrumentation to capture handled exceptions in Ruby applications using the Datadog Ruby gem.
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 10
