@@ -4,7 +4,7 @@ Datadog searches the LLM-as-a-judge's response text for your defined keywords an
 
 For example, if you set:
 
-- **True Keywords**: Yes, yes
-- **False Keywords**: No, no
+- **True keywords**: Yes, yes
+- **False keywords**: No, no
 
 Then your system prompt should include something like `Respond with "yes" or "no"`.
