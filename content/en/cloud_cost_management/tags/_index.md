@@ -28,7 +28,7 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 
 | Source | What tags are collected | Description |
 |---|---|---|
-| All Providers | Bill columns | Such as AWS Cost and Usage Report (CUR) columns, Google Billing Export columns, etc |
+| All Providers | Bill columns | Such as AWS Cost and Usage Report (CUR) columns, Google Billing Export columns, and so on |
 | Datadog Enrichment | Host Agent | Tags added to host metadata by the Datadog Agent running on the host |
 | Datadog Enrichment | Software Catalog | Tags associated with this service in the APM Service Catalog |
 | Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
