@@ -32,7 +32,7 @@ To set up Cloud Cost Management in Datadog, you need:
 
 Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
 
-**Note:** Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. 
+**Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. 
 
 If you send a Cost and Usage Report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 - **Linked Account Access**
@@ -165,7 +165,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 }
 {{< /code-block >}}
 
-**Note:** Make note of the name you created for this policy for next steps.
+**Note**: Make note of the name you created for this policy for next steps.
 
 ### Attach the policy to the Datadog integration role
 

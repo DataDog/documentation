@@ -146,7 +146,7 @@ You can visualize your ingested data using the following cost types:
 
 ### Out-of-the-box tags
 
-Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see the [Tags documentation][17].
+Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][17].
 
 The following out-of-the-box tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data:
 

@@ -23,9 +23,9 @@ further_reading:
 
 ## Overview
 
-[Cloud Cost Management][1] detects the sources for all of your cost-related tags. You can search and manage tags for breaking down costs, including [Custom costs][4], [Datadog costs][5], and [SaaS cost integrations][6].
+[Cloud Cost Management][1] detects the sources for all of your cost-related tags. You can search and manage tags for breaking down costs, including [Custom Costs][4], [Datadog costs][5], and [SaaS cost integrations][6].
 
-Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. [Tag Pipelines][3] allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
+Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. Tag Pipelines allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
 
 {{< img src="cloud_cost/tag_explorer/dropdown_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 

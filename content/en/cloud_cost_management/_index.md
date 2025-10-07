@@ -87,7 +87,7 @@ Optionally, you can programmatically export a timeseries graph of your Datadog c
 
 ## Tagging and cost allocation
 
-Learn how tags are sourced, enriched, and managed in Cloud Cost Management by visiting the [Tags documentation][5].
+Learn how tags are sourced, enriched, and managed in Cloud Cost Management by reading the [Tags documentation][5].
 
 You can create tag rules to correct missing or incorrect tags, and add inferred tags that align with your organization's business logic.
 
