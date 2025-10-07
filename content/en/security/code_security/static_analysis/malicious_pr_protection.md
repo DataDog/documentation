@@ -25,17 +25,27 @@ Malicious PR protection is supported for default branches and GitHub repositorie
 Malicious PR protection is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}}  
 
-## How it works
-### Detection coverage
-Malicious code changes come in many different forms. Datadog SAST covers attack vectors such as malicious code injection, attempted secret exfiltration, the pushing of malicious packages, and CI workflow compromise, among others. Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3].  
+## Detection coverage
+
+Malicious code changes come in many different forms. Datadog SAST covers attack vectors such as: 
+
+- Malicious code injection
+- Attempted secret exfiltration
+- Pushing of malicious packages
+- CI workflow compromise. 
+
+Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3].  
 
 <!-- Read more in the blog post [here][1].   -->
 <!-- ^^ This line above should be added back in once the eng blog is published -->
 
-### Search and filter results
+## Search and filter results
+
 Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] by filtering for `malicious_PR`.  
 
-There are two potential verdicts: `malicious` and `benign`. Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally via Datadog Workflows.
+There are two potential verdicts: `malicious` and `benign`. 
+
+Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally via [Datadog Workflow Automation][5].
 
 [1]: https://www.datadoghq.com/blog/engineering/malicious-pull-requests/
 [2]: https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction
