@@ -38,45 +38,71 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
 {{% tab "ARM" %}}
 
 ```shell
-curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_arm64.deb -o datadog-agent_<AGENT_VERSION>-1_arm64.deb
+curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_arm64.deb -o datadog-agent_<AGENT_VERSION >-1_arm64.deb
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-    **Note**: The full list of Debian packages available can be found [on this APT listing][1].
+<div class="alert alert-info"> For <strong>Agent ≥ 7.44</strong> – the build Dockerfile expects a <strong>data.tar.xz</strong> archive. As such, do one of the following: <br><br>
+
+- download the release tarball `datadog-agent_<AGENT_VERSION>-<ARCH>.tar.xz` (`<ARCH>` = amd64 or arm64) <br>
+**OR** <br>
+- extract the data payload from the `.deb`with `ar -x datadog-agent_<AGENT_VERSION>-<ARCH>.deb # produces data.tar.xz`and pass `data.tar.xz` to `DD_AGENT_ARTIFACT`. 
+    </div>
+
+**Note**: The full list of Debian packages available can be found [on this APT listing][1].
+<br>
+<br>
 
 5. Build the Agent image by running:
 
     {{< tabs >}}
-{{% tab "AMD" %}}
-
+    {{% tab "AMD" %}}    
 ```shell
-docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
+     docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
+    {{% /tab %}}
 
-{{% /tab %}}
-{{% tab "ARM" %}}
-
+    {{% tab "ARM" %}}
 ```shell
-docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
+    docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
+    {{% /tab %}}
+    {{< /tabs >}} 
 
     For instance to build the Agent version 7.17.0 on the AMD architecture you would run:
 
     ```shell
     docker build --build-arg DD_AGENT_ARTIFACT=./datadog-agent_7.17.0-1_amd64.deb --file amd64/Dockerfile --pull --tag documentation-example .
     ```
+     
 
-     Available `<BUILD_ARGS>` are:
+<div class="alert alert-info"> <strong> For Agent ≥ 7.44 - recent Agent tags ship a single multi-arch Dockerfile. For your command:</strong> <br> 
 
-    | Argument          | Definition                                                                  | Default |
-    | ----------------- | --------------------------------------------------------------------------- | ------- |
-    | PYTHON_VERSION    | The Python runtime version for your Agent check.                            | `-`     |
-    | WITH_JMX          | If set to `true`, the Agent container contains the JMX fetch logic.         | `false` |
-    | DD_AGENT_ARTIFACT | Path to the Agent Debian artifact package to use if not in the same folder. | `-`     |
+- use `--file Dockerfile`
+- remove the leading `./` in `DD_AGENT_ARTIFACT` and 
+- point to the `*.tar.xz`file from _Step 4_.
+<br>
+
+```shell
+# Agent ≥ 7.44 example
+docker build \
+  --build-arg DD_AGENT_ARTIFACT=datadog-agent_<AGENT_VERSION>-<ARCH>.tar.xz \
+  --file Dockerfile \
+  --pull \
+  --tag dd-agent:<AGENT_VERSION> .
+```
+</div>
+
+
+
+Available `<BUILD_ARGS>` are:
+
+| Argument  | Definition   | Default |
+| ----------| -------------| ------- |
+| PYTHON_VERSION    | The Python runtime version for your Agent check.   | `-`     |
+| WITH_JMX          | If set to `true`, the Agent container contains the JMX fetch logic. | `false` |
+| DD_AGENT_ARTIFACT | Path to the Agent Debian artifact package to use if not in the same folder. | `-`     |
 
 [1]: http://apt.datadoghq.com/pool/d/da/
