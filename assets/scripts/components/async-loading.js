@@ -8,7 +8,7 @@ import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName 
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
-
+import { handleFleetAutomationCustomRumAction } from './dd-browser-logs-rum';
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
@@ -244,6 +244,9 @@ function loadPage(newUrl) {
 
             // sets query params if code tabs are present
             initCodeTabs();
+            
+            handleFleetAutomationCustomRumAction();
+
 
             const regionSelector = document.querySelector('.js-region-select');
 
