@@ -11,6 +11,8 @@ The impossible travel method detects access from different locations whose dista
 
 ### Baseline user locations
 
+{{< img src="security/security_monitoring/detection_rules/impossible_travel_baseline_location.png" alt="A impossible travel rule's query with the baseline locations option highlighted" style="width:100%;" >}}
+
 When you set up a query for your impossible travel rule, you can enable **Baseline User Locations** if you want Datadog to learn the common locations for each user before the rule starts creating signals.
 
 #### Baseline user locations disabled

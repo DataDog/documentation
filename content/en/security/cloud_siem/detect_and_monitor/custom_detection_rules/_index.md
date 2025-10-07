@@ -50,21 +50,21 @@ Out-of-the-box detection rules help you cover the majority of threat scenarios, 
 
 You can create the following types of custom detection rules:
 
-- Real-time rule, which continuously monitors and analyzes incoming logs.
-- Scheduled rule, which runs at pre-scheduled intervals to analyze log data.
-- Historical job, which backtests detections by running them against historical logs.
+- Real-time rule: Continuously monitors and analyzes incoming logs.
+- Scheduled rule: Runs at pre-scheduled intervals to analyze log data.
+- Historical job: Backtest detections by running detections against historical logs.
 
 ## Detection methods
 
-The following detection methods are available for custom detection rule or historical job:
+The following detection methods are available when you create a custom detection rule or historical job:
 
-- [Threshold][3]: Detects when events exceed a user-defined threshold.
-- [New value][4]: Detects when an attributes changes to a brand new value.
-- [Anomaly][5]: Detects when a behavior deviates from its historical baseline.
+- Threshold: Detects when events exceed a user-defined threshold.
+- New value: Detects when an attributes changes to a brand new value.
+- Anomaly: Detects when a behavior deviates from its historical baseline.
 - [Content anomaly][6]: Detects when an event's content is an anomaly compared to the historical baseline
 - [Impossible travel][7]: Detects if impossible speed is detected in user activity logs.
-- [Third party][8]: Maps third-party security logs to signals, setting the severity based on log attributes.
-- [Signal correlation][9]: Combines multiple signals together to generate a new signal so you can alert on more complex use cases and reduce alert fatigue.
+- Third party: Maps third-party security logs to signals, setting the severity based on log attributes.
+- Signal correlation: Combines multiple signals together to generate a new signal so you can alert on more complex use cases and reduce alert fatigue.
 
 ## Filter logs based on Reference Tables
 
@@ -76,25 +76,9 @@ In the following example, a Reference Table containing product information is us
 
 {{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
 
-## Rule Version History
+## Unit testing
 
-{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
-
-Use Rule Version History to:
-- See past versions of a detection rule and understand the changes over time.
-- See who made the changes for improved collaboration.
-- Compare versions with diffs to analyze the modifications and impact of the changes.
-
-To see the version history of a rule:
-1. Navigate to [Detection Rules][2].
-1. Click on the rule you are interested in.
-1. In the rule editor, click **Version History** to see past changes.
-1. Click a specific version to see what changes were made.
-1. Click **Open Version Comparison** to see what changed between versions.
-1. Select the two versions you want to compare.
-    - Data highlighted in red indicates data that was modified or removed.
-    - Data highlighted in green indicates data that was added.
-1. Click **Unified** if you want to see the comparison in the same panel.
+Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. This can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for the event. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.
 
 ## Further Reading
 

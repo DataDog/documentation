@@ -6212,31 +6212,31 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_detect_and_monitor
       weight: 2
-    - name: Custom Detection Rules
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules
-      parent: cloud_siem_detect_and_monitor
-      identifier: cloud_siem_custom_detection_rules
-      weight: 201
-    - name: Create Rule
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
-      parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_real_time_rule
-      weight: 2011
-    - name: Content Anomaly
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly
-      parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_content_anomaly_rule
-      weight: 2015
-    - name: Impossible Travel
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel
-      parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_impossible_travel_rule
-      weight: 2016
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_default_rules
+      weight: 201
+    - name: Custom Detection Rules
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_custom_detection_rules
       weight: 202
+    - name: Create Rule
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_real_time_rule
+      weight: 2021
+    - name: Content Anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_content_anomaly_rule
+      weight: 2025
+    - name: Impossible Travel
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_impossible_travel_rule
+      weight: 2026
     - name: Suppressions
       url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
