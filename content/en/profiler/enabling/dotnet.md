@@ -72,7 +72,7 @@ The following profiling features are available in the following minimum versions
 
 - Allocations and Lock Contention profiling for .NET Framework requires that the Datadog Agent and the profiled applications are running on the same machine.
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
-- Allocations and Live Heap profiling are GA in .NET 10. For the other previous versions of .NET, the statistical distribution of allocations sampling might not be accurate (i.e. expect larger objects to be more represented).
+- Allocations and Live Heap profiling are available in .NET 10. For other previous versions of .NET, the statistical distribution of allocations sampling might not be accurate, so expect larger objects to be represented more often
 - Continuous Profiler is not supported for AWS Lambda.
 - Continuous Profiler does not support ARM64.
  
