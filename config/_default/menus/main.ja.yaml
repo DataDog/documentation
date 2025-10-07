@@ -4770,11 +4770,6 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 400
     - name: Managed
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
