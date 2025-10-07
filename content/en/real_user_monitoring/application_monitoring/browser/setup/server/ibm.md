@@ -5,6 +5,8 @@ beta: true
 code_lang: ibm
 type: multi-code-lang
 code_lang_weight: 4
+aliases:
+  - /real_user_monitoring/browser/setup/server/ibm
 further_reading:
 - link: '/real_user_monitoring/browser/setup/server/'
   tag: 'Documentation'

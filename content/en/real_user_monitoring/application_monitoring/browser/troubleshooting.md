@@ -1,6 +1,8 @@
 ---
 title: Troubleshooting
 description: "Troubleshoot common issues with RUM Browser SDK including missing data, ad blockers, network restrictions, and configuration problems."
+aliases:
+  - /real_user_monitoring/browser/troubleshooting/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
@@ -44,7 +46,6 @@ You can also check your browser developer tools console or network tab if you no
 **Note**: To ensure accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][9].
 
 ### Data to the Datadog intake
-
 
 The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
 

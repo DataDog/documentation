@@ -1,6 +1,8 @@
 ---
 title: Tracking User Actions
 description: "Automatically track user interactions and custom actions in web applications to understand user behavior, performance, and feature adoption."
+aliases:
+  - /real_user_monitoring/browser/tracking_user_actions/
 further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
@@ -117,8 +119,8 @@ For more information, see [Send Custom Actions][8].
 
 There is no strict limit on the number of user actions, such as clicks or custom actions, that the Datadog RUM Browser SDK can track per session or page. However, you should consider the following:
 
-- **Sampling** - You can configure the SDK to sample a percentage of user actions using the `sampleRate` and `trackInteractions` options. This helps control the volume of data sent to Datadog. For more information, see [Advanced Configuration][1].
-- **Performance** - The SDK batches and sends events periodically. In cases of high-frequency actions, such as repeated clicks, the SDK may deduplicate or group actions, for example, through rage click detection to avoid flooding.
+* **Sampling** - You can configure the SDK to sample a percentage of user actions using the `sampleRate` and `trackInteractions` options. This helps control the volume of data sent to Datadog. For more information, see [Advanced Configuration][1].
+* **Performance** - The SDK batches and sends events periodically. In cases of high-frequency actions, such as repeated clicks, the SDK may deduplicate or group actions, for example, through rage click detection to avoid flooding.
 
 As a best practice, if you expect a high volume of user actions, consider adjusting your sampling configuration and monitor your Datadog event usage.
 

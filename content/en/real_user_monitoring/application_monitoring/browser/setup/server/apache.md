@@ -5,6 +5,8 @@ beta: true
 code_lang: apache
 type: multi-code-lang
 code_lang_weight: 3
+aliases:
+  - /real_user_monitoring/browser/setup/server/apache/
 further_reading:
 - link: '/real_user_monitoring/browser/setup/server/'
   tag: 'Documentation'

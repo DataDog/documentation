@@ -4,6 +4,7 @@ description: "Configure RUM Browser SDK to modify data collection, override view
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
+  - /real_user_monitoring/browser/advanced_configuration/
 further_reading:
 - link: "/real_user_monitoring/browser/tracking_user_actions"
   tag: Documentation

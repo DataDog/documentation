@@ -2,7 +2,8 @@
 title: Optimizing Performance
 description: "Use the RUM Optimization page to identify and troubleshoot browser performance issues with Core Web Vitals analysis and user experience visualization."
 aliases:
-  - real_user_monitoring/browser/monitoring_performance_vitals/
+  - /real_user_monitoring/browser/monitoring_performance_vitals/
+  - /real_user_monitoring/browser/optimizing_performance/
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"
@@ -94,6 +95,7 @@ You can select another sample event using the dropdown in the top left, and expa
 {{< img src="real_user_monitoring/browser/optimizing_performance/view-event-samples.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
 
 ## Browser profiling within event samples
+
 For deeper root cause analysis, use browser profiling alongside RUM to identify what JavaScript or rendering activity is causing slow or unresponsive experiences. Profiling reveals performance issues that aren't always visible through Core Web Vitals alone. To get started, [ensure that browser profiling is enabled in your RUM SDK configuration][12].
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" alt="Browser profiling example when analyzing an event sample." style="width:100%;" >}}
 
@@ -107,10 +109,8 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [4]: /real_user_monitoring/session_replay/
 [5]: https://app.datadoghq.com/rum/vitals
 [6]: https://app.datadoghq.com/rum/performance-monitoring
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [8]: https://web.dev/articles/lcp/
 [9]: https://web.dev/articles/fcp
 [10]: https://web.dev/articles/cls/
 [11]: https://web.dev/articles/inp/
 [12]: /real_user_monitoring/correlate_with_other_telemetry/profiling
-[13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks

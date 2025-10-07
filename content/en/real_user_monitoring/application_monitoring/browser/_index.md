@@ -1,6 +1,8 @@
 ---
 title: RUM Browser Monitoring
 description: "Monitor real user data and frontend performance with Datadog RUM Browser SDK to optimize web experiences and identify issues across the stack."
+aliases:
+  - /real_user_monitoring/browser/
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'

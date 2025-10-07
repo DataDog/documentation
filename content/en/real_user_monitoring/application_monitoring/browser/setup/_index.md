@@ -1,6 +1,8 @@
 ---
 title: Browser Monitoring Setup
 description: Understand your options for setting up the RUM Browser SDK.
+aliases:
+- real_user_monitoring/browser/setup/
 further_reading:
 - link: '/real_user_monitoring/browser/'
   tag: 'Documentation'

@@ -8,6 +8,7 @@ aliases:
   - /real_user_monitoring/data_collected/long_task/
   - /real_user_monitoring/data_collected/error/
   - /real_user_monitoring/data_collected/user_action/
+  - /real_user_monitoring/browser/data_collected/
 further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"

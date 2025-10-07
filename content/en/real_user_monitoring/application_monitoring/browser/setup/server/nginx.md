@@ -5,6 +5,8 @@ beta: true
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 5
+aliases:
+  - /real_user_monitoring/browser/setup/server/nginx
 further_reading:
 - link: '/real_user_monitoring/browser/setup/server/'
   tag: 'Documentation'
