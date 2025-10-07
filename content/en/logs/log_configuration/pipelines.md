@@ -44,17 +44,38 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 ## Pipeline permissions
 
-Pipelines use [Granular Access Control][7]. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources.
+Pipelines use [Granular Access Control][7] to manage who can view and edit. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources.
 
-<div class="alert alert-warning">Granular Access Control is not supported for organizations that already have the scoped RBAC feature flag enabled.</div>
+For each pipeline, administrators can choose the following edit scopes:
 
-For individual pipelines, administrators can choose the following edit scopes:
+* **Unrestricted**: Any user with the `logs_write_pipelines` permission can modify the pipeline and processors.
+* **Restricted pipeline editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
+* **Processor-only editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
-* **Unrestricted**: Any user with the `logs_write_pipelines` permission can modify the pipeline.
-* **Restricted pipeline editor**: Editing permissions are limited to specific users, teams, or roles.
-* **Processor-only editor**: Users are allowed to edit the pipeline's **processors** (including nested pipelines), but cannot modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
+<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 
 You can manage these permissions programmatically through **API and Terraform**.
+
+### Legacy behavior
+
+If your organization has the legacy *Access control* model enabled, pipeline permissions appear as **Step 2: Access control** in the pipeline configuration UI. In this mode, you can grant edit access for a pipeline's processors to specific users or teams, but **Granular Access Control** features, such as role-level assignments and precise scope definitions, are not available.
+
+<table style="width:100%; border-collapse:collapse;">
+  <tr style="background-color:#f5f6fa;">
+    <th style="width:50%; text-align:left; font-weight:bold; text-transform:uppercase; padding:8px;">Legacy Permissions</th>
+    <th style="width:50%; text-align:left; font-weight:bold; text-transform:uppercase; padding:8px;">Granular Access Control Permissions</th>
+  </tr>
+  <tr style="background-color:#fff;">
+    <td style="width:50%; text-align:center; vertical-align:top; padding:8px;">
+      {{< img src="/logs/processing/pipelines/pipeline_legacy_permissions.png" alt="Legacy permissions UI for pipelines" style="width:100%;" >}}
+    </td>
+    <td style="width:50%; text-align:center; vertical-align:top; padding:8px;">
+      {{< img src="/logs/processing/pipelines/pipeline_grace_permissions.png" alt="Granular Access Control permissions UI for pipelines" style="width:100%;" >}}
+    </td>
+  </tr>
+</table>
+
+If you're unsure which permission model your organization uses, contact your Datadog Administrator.
 
 ## Preprocessing
 
