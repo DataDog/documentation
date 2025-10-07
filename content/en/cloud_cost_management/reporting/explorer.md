@@ -1,5 +1,5 @@
 ---
-title: Multisource Querying
+title: Cloud Cost Explorer
 is_beta: true
 description: Learn how to use Multisource Querying to query costs across multiple providers in Cloud Cost Management.
 further_reading:
