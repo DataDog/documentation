@@ -1,6 +1,6 @@
 ---
 title: Custom LLM-as-a-Judge Evaluations
-description: Learn how to create Custom LLM-as-a-judge Evaluations.
+description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
@@ -10,7 +10,7 @@ further_reading:
   text: "Learn how to set up LLM Observability"
 - link: "/llm_observability/evaluations/managed_evaluations"
   tag: "Documentation"
-  text: "Learn about Managed Evaluations"
+  text: "Learn about managed evaluations"
 - link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
   tag: "Blog"
   text: "Building an LLM evaluation framework: best practices"
@@ -28,7 +28,7 @@ You can create and manage custom evaluations from the [Evaluations page][1] in L
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
    {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
 
-1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name later when querying evaluation results. The name must be unique within your application.
+1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name when querying evaluation results. The name must be unique within your application.
 
 1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
 
