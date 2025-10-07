@@ -1,5 +1,6 @@
 ---
 title: Set Up Deployment Gates
+description: "Configure gates and rules in Datadog UI, then integrate with deployment pipelines using the datadog-ci CLI, Argo Rollouts, or API calls."
 further_reading:
 - link: "/deployment_gates/explore"
   tag: "Documentation"

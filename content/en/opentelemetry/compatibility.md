@@ -34,6 +34,7 @@ The following table shows feature compatibility across different setups:
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Trace metrics are calculated on the backend based on ingested spans that have passed through sampling, not on 100% of local traces before sampling." >}}) |
+| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
@@ -42,7 +43,6 @@ The following table shows feature compatibility across different setups:
 | [Continuous Profiler][12] | {{< X >}} | | | |
 | [Data Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
-| [Database Monitoring][14] (DBM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
@@ -90,15 +90,15 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [11]: /security/application_security/
 [12]: /profiler/
 [13]: /data_jobs/
-[14]: /database_monitoring/
+[14]: /opentelemetry/correlate/dbm_and_traces/
 [15]: /data_streams/
 [16]: /infrastructure/process/
 [17]: /universal_service_monitoring/
 [18]: /security/cloud_siem/
-[19]: /tracing/other_telemetry/
+[19]: /opentelemetry/correlate/
 [20]: /containers/
 [21]: /network_monitoring/performance/
-[22]: /real_user_monitoring/
+[22]: /opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
 [23]: /tracing/metrics/runtime_metrics/
 [24]: /integrations/guide/source-code-integration/
 [25]: /tracing/trace_collection/span_links/
