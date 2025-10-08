@@ -74160,6 +74160,13 @@ paths:
     get:
       description: Get the list of all suppression rules.
       operationId: ListSecurityMonitoringSuppressions
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
