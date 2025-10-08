@@ -75,6 +75,11 @@ Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true"
 **Note**: This zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 
+### Connection request acceptance
+
+Azure Private Link requires that the Provider accepts new connection requests from a Consumer. Please reach out to support@datadoghq.com with your newly created Endpoint ID and request that we accept the connection.
+   
+
 ## Published services
 
 | Datadog intake service | Private Link service name | Private DNS name |
