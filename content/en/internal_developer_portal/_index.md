@@ -70,9 +70,6 @@ If your organization manages team structure in GitHub, join the preview for GitH
 {{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams" >}}
 {{< /callout >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/teams-hierarchy/" d_target="#signupModal" btn_hidden="false" header="Join the preview for the Teams hierarchy feature" >}}
-{{< /callout >}}
-
 
 ## Further reading
 

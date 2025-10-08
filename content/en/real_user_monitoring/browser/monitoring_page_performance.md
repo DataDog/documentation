@@ -2,9 +2,9 @@
 title: Monitoring Page Performance
 description: "Monitor Core Web Vitals, loading times, and page performance telemetry with RUM Browser SDK to optimize user experience and troubleshoot issues."
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+  - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
-    text: "Interactive Lab: Core Web Vitals"
+    text: "Interactive Lab: Optimizing Frontend Performance with Datadog RUM Browser Monitoring"
   - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
     tag: "Blog"
     text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"

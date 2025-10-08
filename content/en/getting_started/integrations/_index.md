@@ -8,6 +8,9 @@ further_reading:
   - link: '/integrations/'
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
+  - link: 'https://www.datadoghq.com/blog/1k-integrations-milestone/'
+    tag: 'Blog'
+    text: 'Scaling Datadog observability: 1,000 integrations and counting'
 ---
 
 ## Overview
