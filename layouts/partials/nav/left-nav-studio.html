@@ -1,0 +1,206 @@
+{{/*
+    This navigation is used on the left of the site, and is the main Studio documentation nav.
+    Looking for the header nav? see website-modules
+  */}}
+
+  {{ $dot := . }}
+  {{ $studioMenu := "studio" }}
+  {{ $menu := .Scratch.Get "menu" }}
+  {{ $currentPage := . }}
+
+<!-- Get main menu for cross-referencing -->
+{{ $mainMenu := index .Site.Menus "main" }}
+{{ if not $mainMenu }}
+  {{ $mainMenu = index .Sites.Default.Menus "main" }}
+{{ end }}
+
+<!-- if no studio menu in other languages fallback to english -->
+{{ with index .Site.Menus $studioMenu }}
+  {{ $dot.Scratch.Set "menu" . }}
+{{ else }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.Default.Menus $studioMenu) }}
+{{ end }}
+{{ $menu := .Scratch.Get "menu" }}
+
+{{ $currentPage := . }}
+
+<!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
+{{ $currentEnURL := $currentPage.RelPermalink }}
+{{ if ne $currentPage.Lang "en" }}
+    {{ $currentEnURL = (strings.Replace $currentPage.RelPermalink (printf "/%s" .Lang) "") }}
+{{ end }}
+
+{{/*
+    build array ($engMenuChildren) of english menu items with parents from "studio.en.yaml".
+    for use in providing english names for anchoring the nav-links (.nav-link)
+*/}}
+{{ if ne $currentPage.Lang "en" }}
+{{$engMenu := (index .Sites.Default.Menus $studioMenu) }}
+{{ range $engMenu }}
+    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/studio/") }}
+    {{ range .Children }}
+        {{ $dot.Scratch.SetInMap "engMenuChildren" .Identifier .Name }}
+    {{ end }}
+    {{ end }}
+{{ end }}
+{{ end }}
+
+{{$engMenuChildren := $dot.Scratch.Get "engMenuChildren" | default dict}}
+
+{{ $path := (printf "%s/" $.Site.Params.branch) }}
+
+{{/* account for branch name in preview site for data-path */}}
+{{ if eq $.Site.Params.environment "preview"}}
+    {{ $.Scratch.Set "branch_path" $path }}
+{{ else }}
+    {{ $.Scratch.Set "branch_path" "" }}
+{{ end }}
+
+{{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
+{{ $url_without_anchor := "" }}
+
+<ul class="list-unstyled">
+{{ range $menu }}
+    {{/* Check if this menu item has a ref_id parameter */}}
+    {{ if and .Params .Params.ref_id }}
+        {{/* This is a cross-referenced item - find it in main menu */}}
+        {{ $dot.Scratch.Set "mainMenuItem" dict }}
+        {{ $refId := .Params.ref_id }}
+
+        {{ range $mainMenu }}
+            {{ if eq .Identifier $refId }}
+                {{ $dot.Scratch.Set "mainMenuItem" . }}
+            {{ else if .Children }}
+                {{ range .Children }}
+                    {{ if eq .Identifier $refId }}
+                        {{ $dot.Scratch.Set "mainMenuItem" . }}
+                    {{ else if .Children }}
+                        {{ range .Children }}
+                            {{ if eq .Identifier $refId }}
+                                {{ $dot.Scratch.Set "mainMenuItem" . }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
+        {{ $mainMenuItem := $dot.Scratch.Get "mainMenuItem" }}
+        {{ if $mainMenuItem.Name }}
+            <li class="js-load {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+                {{$url_without_anchor = ((index (split $mainMenuItem.URL "#") 0) | relLangURL)}}
+                <a href="{{ (strings.TrimLeft "/" $mainMenuItem.URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                    <span>{{ .Name }}</span>
+                </a>
+
+                {{/* Render children from main menu if they exist */}}
+                {{ if $mainMenuItem.Children }}
+                <ul class="nav">
+                    {{ range $mainMenuItem.Children }}
+                        <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                            {{$identifier := .Identifier}}
+                            {{/*
+                                lookup english equivalent of non-english menu item identifier attr.
+                                pull the name attr and plug into anchor href.
+                            */}}
+                            {{ if ne $currentPage.Lang "en" }}
+                            {{ $dot.Scratch.Set "name" (index $engMenuChildren $identifier) }}
+                            {{ end }}
+
+                            {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
+                            {{$engName := $dot.Scratch.Get "name"}}
+                            <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                              <span class="d-inline-block">{{ .Name }}</span>
+                            </a>
+                        </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+            </li>
+        {{ end }}
+    {{ else }}
+        {{/* Regular hardcoded menu item processing */}}
+        <!-- check if on /studio/ top level section page, don't generate sub anchors if true -->
+        {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/studio/" ) }}
+            <li class="js-load {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+                {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
+                <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                    <span>{{ .Name }}</span>
+                </a>
+                <ul class="nav">
+                    {{ range .Children }}
+                        {{/* Check if this child has a ref_id parameter */}}
+                        {{ if and .Params .Params.ref_id }}
+                            {{/* This child is cross-referenced - find it in main menu */}}
+                            {{ $dot.Scratch.Set "childMainMenuItem" dict }}
+                            {{ $childRefId := .Params.ref_id }}
+
+                            {{ range $mainMenu }}
+                                {{ if eq .Identifier $childRefId }}
+                                    {{ $dot.Scratch.Set "childMainMenuItem" . }}
+                                {{ else if .Children }}
+                                    {{ range .Children }}
+                                        {{ if eq .Identifier $childRefId }}
+                                            {{ $dot.Scratch.Set "childMainMenuItem" . }}
+                                        {{ else if .Children }}
+                                            {{ range .Children }}
+                                                {{ if eq .Identifier $childRefId }}
+                                                    {{ $dot.Scratch.Set "childMainMenuItem" . }}
+                                                {{ end }}
+                                            {{ end }}
+                                        {{ end }}
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}
+
+                            {{ $childMainMenuItem := $dot.Scratch.Get "childMainMenuItem" }}
+                            {{ if $childMainMenuItem.Name }}
+                                <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent "main" $childMainMenuItem }}active{{ end }}">
+                                    {{$identifier := $childMainMenuItem.Identifier}}
+                                    {{/*
+                                        lookup english equivalent of non-english menu item identifier attr.
+                                        pull the name attr and plug into anchor href.
+                                    */}}
+                                    {{ if ne $currentPage.Lang "en" }}
+                                    {{ $dot.Scratch.Set "name" (index $engMenuChildren $identifier) }}
+                                    {{ end }}
+
+                                    {{$url_without_anchor = ((index (split $childMainMenuItem.URL "#") 0) | relLangURL)}}
+                                    {{$engName := $dot.Scratch.Get "name"}}
+                                    <a class="col nav-link d-inline-block" href='{{ if hasPrefix $childMainMenuItem.URL "#" }}#{{ default ($childMainMenuItem.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" $childMainMenuItem.URL) | absLangURL }}{{ end }}' data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                                      <span class="d-inline-block">{{ .Name }}</span>
+                                    </a>
+                                </li>
+                            {{ end }}
+                        {{ else }}
+                            {{/* Regular hardcoded child */}}
+                            <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent $studioMenu . }}active{{ end }}">
+                                {{$identifier := .Identifier}}
+                                {{/*
+                                    lookup english equivalent of non-english menu item identifier attr.
+                                    pull the name attr and plug into anchor href.
+                                */}}
+                                {{ if ne $currentPage.Lang "en" }}
+                                {{ $dot.Scratch.Set "name" (index $engMenuChildren $identifier) }}
+                                {{ end }}
+
+                                {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
+                                {{$engName := $dot.Scratch.Get "name"}}
+                                <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                                  <span class="d-inline-block">{{ .Name }}</span>
+                                </a>
+                            </li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </li>
+        {{ else }}
+            <li class="js-load {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+                <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
+                    <span>{{ .Name }}</span>
+                </a>
+            </li>
+        {{ end }}
+    {{ end }}
+{{ end }}
+</ul>

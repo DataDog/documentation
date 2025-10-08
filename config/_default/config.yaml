@@ -132,6 +132,29 @@ module:
     - source: content/es
       target: content
       lang: es
+    # studio
+    # Studio content new
+    - source: content/studio
+      target: content
+      lang: studio
+    # Load in existing content
+    - source: content/en
+      target: content
+      lang: studio
+      includeFiles:
+        - "/account_management/**"
+        - "/agent/**"
+        - "/bits_ai/**"
+        - "/dashboards/**"
+        - "/error_tracking/**"
+        - "/integrations/**"
+        - "/llm_observability/**"
+        - "/logs/**"
+        - "/monitors/**"
+        - "/metrics/**"
+        - "/notebooks/**"
+        - "/product_analytics/**"
+    # end studio
     - source: static
       target: static
     - source: layouts
