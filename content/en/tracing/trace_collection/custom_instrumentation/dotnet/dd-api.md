@@ -79,7 +79,7 @@ namespace Store.Managers
 ## Custom instrumentation with code
 
 <div class="alert alert-info">
-  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
+  This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
 </div>
 
 <div class="alert alert-danger">
