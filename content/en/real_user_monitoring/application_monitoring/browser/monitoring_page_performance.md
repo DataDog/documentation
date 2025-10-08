@@ -4,9 +4,9 @@ description: "Monitor Core Web Vitals, loading times, and page performance telem
 aliases:
   - /real_user_monitoring/browser/monitoring_page_performance/
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+  - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
-    text: "Interactive Lab: Core Web Vitals"
+    text: "Interactive Lab: Optimizing Frontend Performance with Datadog RUM Browser Monitoring"
   - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
     tag: "Blog"
     text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"

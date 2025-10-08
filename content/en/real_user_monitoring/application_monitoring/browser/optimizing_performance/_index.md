@@ -5,9 +5,9 @@ aliases:
   - /real_user_monitoring/browser/monitoring_performance_vitals/
   - /real_user_monitoring/browser/optimizing_performance/
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+  - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
-    text: "Interactive Lab: Core Web Vitals"
+    text: "Interactive Lab: Optimize Frontend Performance with Datadog RUM Browser Monitoring"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
@@ -113,3 +113,4 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [10]: https://web.dev/articles/cls/
 [11]: https://web.dev/articles/inp/
 [12]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
