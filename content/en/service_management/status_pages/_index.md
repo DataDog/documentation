@@ -16,7 +16,7 @@ further_reading:
 
 {{< img src="service_management/status_pages/shopist_status_page.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability** and **incidents** with customers or internal stakeholders through a shareable web page.
+Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability** and **incident notices** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 
@@ -28,7 +28,7 @@ Use Status Pages to:
 
 There are three RBAC permissions that are relevant to Status Pages. Users with the Datadog Admin Role have all the necessary permissions.
 
-To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_incident_write` RBAC permissions. For more information, see [Access Control][1].
+To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_notice_write` RBAC permissions. For more information, see [Access Control][1].
 
 <table>
   <thead>
@@ -50,8 +50,8 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
       <td>Datadog Admin Role</td>
     </tr>
     <tr>
-      <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
-      <td>Publish and update Incidents.</td>
+      <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_notice_write</code></td>
+      <td>Publish and update Notices.</td>
       <td>Datadog Admin Role</td>
     </tr>
   </tbody>
@@ -107,10 +107,10 @@ Notices on Status Pages are carefully crafted messages posted to a public websit
 1. From a status page, click **Publish Notice** to open a "Publish Status Page Notice" modal and provide:
    | Field | Description |
    | ---- | ---- |
-   | **Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
-   | **Status** | Current state of the incident: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
+   | **Title** | Short, clear description of the notice <br>*Example: Increased error rates on US region* |
+   | **Status** | Current state of the notice: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
    | **Message** *(optional)* | Additional details for your users <br>*Examples: known cause, expected resolution time* |
-   | **Components impacted** | One or more components impacted by the incident |
+   | **Components impacted** | One or more components impacted by the notice |
    | **Impact** | Level of impact per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
    | **Notify Subscribers** | Toggle to send the notice to subscribers |
 1. Click **Publish Notice**.

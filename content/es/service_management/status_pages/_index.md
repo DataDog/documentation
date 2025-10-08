@@ -29,13 +29,13 @@ Utiliza las páginas de estado para:
 
 Hay tres permisos RBAC que son relevantes para las páginas de estado. Los usuarios con el rol de administrador de Datadog tienen todos los permisos necesarios.
 
-Para crear, actualizar o publicar páginas de estado, debes tener permisos RBAC `status_pages_settings_read`, `status_pages_settings_write` y `status_pages_incident_write`. Para obtener más información, consulta [Control de acceso][1].
+Para crear, actualizar o publicar páginas de estado, debes tener permisos RBAC `status_pages_settings_read`, `status_pages_settings_write` y `status_pages_notice_write`. Para obtener más información, consulta [Control de acceso][1].
 
 | Nombre | Descripción | Función predeterminada |
 | :---- | :---- | :---- |
 | Configuración de lectura de las páginas de estado (`status_pages_settings_read`) | Mira la lista de páginas de estado, la configuración de cada página de estado, sus incidents (incidentes) y las páginas de estado privadas lanzadas. | Rol de sólo lectura de Datadog |
 | Configuración de escritura de las páginas de estado (`status_pages_settings_write`) | Crea e inicia nuevas páginas de estado y configure los parámetros de las páginas de estado. | Rol de administrador de Datadog |
-| Escritura de incidents (incidentes) de páginas de estado (`status_pages_incident_write`) | Publicar y actualizar incidents (incidentes). | Rol de administrador de Datadog |
+| Escritura de incidents (incidentes) de páginas de estado (`status_pages_notice_write`) | Publicar y actualizar incidents (incidentes). | Rol de administrador de Datadog |
 
 ## Crear una página de estado
 
