@@ -74,6 +74,8 @@ You can get started with an app by importing data from one of the integrations l
 
 ### Create a custom app
 
+If you don't want to use any of the methods above, you can create a new app from the blank App Builder canvas.
+
 1. From [App Builder][1], click **New App**. 
 1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
 1. To change the app name and description, click the app name.
