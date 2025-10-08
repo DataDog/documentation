@@ -225,11 +225,9 @@ To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to 
   ```
 
 
-### Platform-specific configuration
+You may require one of the following additional steps depending on your environment:
 
-
-{{< collapse-content title="GKE Autopilot" level="h4" >}}
-
+{{< collapse-content title="Google GKE Autopilot" level="h4" >}}
 
 If your cluster is running Google's GKE Autopilot, add the following to your values file as well:
 
