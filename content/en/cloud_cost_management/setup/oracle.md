@@ -41,7 +41,7 @@ You can visualize your ingested data using the following cost types:
 
 | Cost Type                                       | Description |
 |-------------------------------------------------| ----------------------------------|
-| `oci.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts |
+| `oci.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts. |
 | `oci.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
@@ -83,7 +83,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 
 #### Cost and observability correlation
 
-Viewing costs in the context of observability data is important for understanding how infrastructure changes impact costs, identifying why costs change, and optimizing infrastructure for both costs and performance. 
+Viewing costs in the context of observability data is important for understanding how infrastructure changes impact costs, identifying why costs change, and optimizing infrastructure for both costs and performance.
 
 Datadog updates resource identifying tags on cost data for top OCI products to simplify correlating observability and cost metrics. For example, to view cost and utilization for each Compute instance, you can make a table with `oci.cost.amortized`, `oci.computeagent.cpu_utilization`, and `oci.computeagent.memory_utilization` (or any other Compute metric) and group by `host`. To see Object Storage usage and costs side by side, you can graph `oci.objectstorage.stored_bytes` and `oci.cost.amortized` grouped by `name`.
 
@@ -92,6 +92,17 @@ The following out-of-the-box tags are available:
 | -------------------| ----------------------------- |
 | Compute            | `host`                        |
 | Object Storage     | `name`                        |
+
+Additionally, Datadog provides the following tags that can be used with many observability metrics. For example, to view cost and execution duration of OCI Functions for each compartment, you can make a table with `oci.cost.amortized`, `oci.faas.function_execution_duration`, and group by `compartment_id`.
+| Tag Name                         | Tag Description       |
+| ---------------------------- | ----------------- |
+| `compartment_id`             | The identifier (OCID) for the compartment.|
+| `compartment_name`           | The name for the compartment.|
+| `tenancy_ocid`          | The identifier (OCID) for the OCI tenant.|
+| `tenancy_name`            | The name for the OCI tenant.|
+| `resource_id`              | An identifier assigned to a resource by the provider.|
+| `resource_type`                | Describes the kind of resource the charge applies to.|
+| `dd_resource_key`  | The Canonical Cloud Resource Identifier (CCRID) for the resource. Same as OCID for OCI.|
 
 ### Container cost allocation
 Container cost allocation is not available for OCI. See [Container Cost Allocation][5] for more details.
