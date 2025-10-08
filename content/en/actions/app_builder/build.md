@@ -28,7 +28,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
+Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
 1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **+ New App**, then **Start with Blueprint**.
 1. Find the blueprint that you want to use and click **View**.
@@ -42,7 +42,7 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 
 ### Build an app from a layout
 
-Choosing a layout creates an app as a table, form, or custom graph. 
+Choosing a layout creates an app as a table, form, or custom chart. 
 
 1. From [App Builder][1], click **New App**.
 1. Click **Start with Layout**.
@@ -57,7 +57,7 @@ Choosing a layout creates an app as a table, form, or custom graph.
 
 ### Build an app from data
 
-You can get started with an app by importing data from one of your [integrations][16].
+You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
 
 1. From [App Builder][1], click **New App**. 
 1. Click **Start with Data**. 
@@ -212,3 +212,4 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [14]: https://app.datadoghq.com/app-builder/apps/list
 [15]: /actions/app_builder/build/#customize-your-app
 [16]: /getting_started/integrations/
+[17]: /actions/actions_catalog/
