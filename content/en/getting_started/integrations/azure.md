@@ -58,8 +58,8 @@ Follow the instructions on this page to set up the **Azure integration** through
 ### Choose this if...
 
 - You are setting up Datadog for the first time.
-- You prefer a UI-based workflow and want to quickly create a service principal with the required monitoring permissions.
-- You want to automate setup steps easily in scripts or CI/CD pipelines.
+- You prefer a UI-based workflow and want to minimize the time it takes to create a service principal with the required monitoring permissions.
+- You want to automate setup steps in scripts or CI/CD pipelines.
 
 ### Instructions
 
@@ -77,21 +77,18 @@ Follow the instructions on this page to set up the **Azure integration** through
 You can also click to enable custom metric collection from [Azure Application Insights][36], and disable the collection of usage metrics.
 
 6. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
-7. Configure log collection:
-   a. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
-   b. If you're creating a new log forwarder:
-      a. Enter a resource group name to store the log forwarder control plane
-      b. Select a control plane subscription for the log-forwarding orchestration (LFO).
-      c. Select a region for the control plane.
+7. Enable log collection to setup and configure the services and diagnostic settings needed to forward logs to Datadog:
+   1. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
+   2. If you're creating a new log forwarder:
+      1. Enter a resource group name to store the log forwarder control plane
+      2. Select a control plane subscription for the log-forwarding orchestration (LFO).
+      3. Select a region for the control plane.<br>
+   **Note**: This section only appears when creating a new log forwarder.
+   3. Optionally, open **Log filtering options** to filter logs by tags, or apply filtering for specific information (such as PII) using regex.
+
    See the [Architecture section][37] of the automated log forwarding guide for more information about this architecture.
     
 8. Click **Confirm** to finish the setup.
-
-Enable Log collection (this is the automated log forwarding feature now part of the onboarding flow)). If a log forwarder already exists in the tenant, modify it and extend it to the selected scopes instead. Advanced log forwarding set ups with more than 1 forwarder are not supported.
-Choose resource group name, control plane subscription, and control plane region. This section appears only for new log forwarders.
-(optional) click on Log filtering options and filter logs by tags or enter PII filtering regex
-Click on finish setup.
-
 
 {{% /collapse-content %}} 
 
@@ -108,7 +105,7 @@ Click on finish setup.
 Follow these steps to deploy the Datadog Azure integration through [Terraform][23].
 
 {{< tabs >}}
-{{% tab "Create a new app registration" %}}
+{{% tab "Create an app registration" %}}
 
 1. In the [Azure integration tile][100], select **Terraform** as the method for setting up your app registration.
 2. Select the subscriptions and management groups to collect data from.
@@ -125,7 +122,7 @@ You can also click to enable custom metric collection from [Azure Application In
 5. Configure log collection:
    a. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
    b. If you're creating a new log forwarder:
-      a. Enter a resource group name to store the log forwarder control plane
+      a. Enter a resource group name to store the log forwarder control plane.
       b. Select a control plane subscription for the log-forwarding orchestration (LFO).
       c. Select a region for the control plane.
    See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
@@ -174,7 +171,7 @@ You can use multiple provider blocks with aliases to manage Terraform resources 
 
 ### Monitor the integration status
 
-Once the integration is configured, Datadog begins running a continuous series of calls to Azure APIs to collect critical monitoring data from your Azure environment. Sometimes these calls return errors (for example, if the provided credentials have expired). These errors can inhibit or block Datadog's ability to collect monitoring data.
+After the integration is configured, Datadog begins running a continuous series of calls to Azure APIs to collect critical monitoring data from your Azure environment. Sometimes these calls return errors (for example, if the provided credentials have expired). These errors can inhibit or block Datadog's ability to collect monitoring data.
 
 When critical errors are encountered, the Azure integration generates events in the Datadog Events Explorer, and republishes them every five minutes. You can configure an Event Monitor to trigger when these events are detected and notify the appropriate team.
 
@@ -211,13 +208,15 @@ You can also click to enable custom metric collection from [Azure Application In
 
 ## Metric collection
 
-Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. See the [Integrations page][9] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. 
+Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. The [Integrations page][9] shows a curated list of predefined sub-integrations that provide additional out-of-the-box dashboards and monitors for specific Azure services. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. However, Datadog can ingest metrics from **any Azure Monitor-supported resource**, even if it doesn’t have a dedicated sub-integration tile. 
 
 You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to `Metrics > Summary` and searching for `Azure`.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
 
-## Log collection 
+## Enable log collection 
+
+You can use the automated log forwarding feature to setup and configure the services and diagnostic settings needed to forward logs to Datadog. If an automated log forwarding control plane already exists in the tenant, this flow modifies it and extends its scope to include the selected subscriptions or management groups. For more detail see the []
 
 Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, you can use an Azure Resource Manager (ARM) template to [automate log forwarding setup][19] across your Azure environment with no manual configuration. This feature automatically manages and scales log forwarding services.
 
@@ -237,28 +236,25 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 4. Acknowledge deployment warnings on the [Deployment tab][32].
 5. Start the deployment process on the [Review + create tab][33].
 
-See [Azure Automated Log Forwarding Architecture and Configuration][34] for more details.
+See [Azure Automated Log Forwarding Architecture][34] for more details.
+
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Container App" level="h4" expanded=false id="container-app-log-forwarding-setup" %}}
 
 ### Choose this if...
 
-You prefer manual setup and do not want to use the fully automated log-forwarding setup.
+You prefer to manually configure [diagnostic settings][53] on the resources you want to forward logs from.
 
 ## Instructions
 
-Click the button below, and fill in the form on the Azure Portal. Datadog automatically deploys the Azure resources required to get activity logs streaming into your Datadog account. To forward [Activity Logs][53], set the **Send Activity Logs** option to `true`.
+1. Click the button below, and fill in the form on the Azure Portal. Datadog automatically deploys the Azure resources required to forward logs into your Datadog account.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)][52]
 
-### Azure platform logs
-
-After the template deployment finishes, set up [diagnostic settings][54] for each log source to send Azure platform logs (including resource logs) to the Storage Account created during deployment.
+2. After the template deployment finishes, set up [diagnostic settings][53] for each log source to send Azure platform logs (including resource logs) to the Storage Account created during deployment.
 
 **Note**: Resources can only stream to a Storage Account in the same Azure region.
-
-If you run into any problems during deployment, see [Automated log collection](#automated-log-forwarding-setup) for common error cases.
 
 {{% /collapse-content %}} 
 
@@ -266,32 +262,24 @@ If you run into any problems during deployment, see [Automated log collection](#
 
 ## Get more from the Datadog Platform 
 
-### Installing the agent for greater visibility into your application
-After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1].
+### Install the Agent for greater visibility into your application
 
-#### Azure Native Agent installation
-
-The simplest way to install the Datadog Agent is directly in Azure with the [VM Extension][11] or [natively within Azure AKS][12], thus avoiding the complexity of third-party management tools. 
-
-#### Standard Azure Agent installation
-
-You can use the [Azure extension to install the Datadog Agent on your Windows and Linux VMs][13] or use the [AKS Cluster Extension to deploy the Agent to your AKS Clusters][14].
+After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Use the [Azure extension to install the Datadog Agent on your Windows and Linux VMs][13], or use the [AKS Cluster Extension to deploy the Agent to your AKS Clusters][14].
 
 Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to: 
 - **application health** 
 - **process utilization**
 - **system level metrics** 
 
-You can also use the built-in StatsD client to send custom metrics from your application to correlate what's happening with your application, your users, and your system.
+You can also use the built-in StatsD client to send custom metrics from your applications, to correlate what's happening with your applications, users, and system.
 
 See the guide on [_Why should I install the Datadog Agent on my cloud instances?_][15]  for more information on the benefits of installing the Datadog Agent on your instances.
 
-
 ## Troubleshooting
+
 See the [Azure Troubleshooting guide][16].
 
 Still need help? Contact [Datadog support][17].
-
 
 ## Further Reading
 
@@ -307,8 +295,6 @@ Still need help? Contact [Datadog support][17].
 [8]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index
 [9]: https://docs.datadoghq.com/integrations/#cat-azure
 [10]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=automatedinstallation
-[11]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension#install
-[12]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=aksclusterextension#install
 [13]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=vmextension#agent-installation
 [14]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=aksclusterextension#agent-installation
 [15]: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
@@ -330,7 +316,7 @@ Still need help? Contact [Datadog support][17].
 [31]: /logs/guide/azure-automated-log-forwarding/#datadog-configuration
 [32]: /logs/guide/azure-automated-log-forwarding/#deployment
 [33]: /logs/guide/azure-automated-log-forwarding/#review--create
-[34]: /logs/guide/azure-automated-logs-architecture/
+[34]: /logs/guide/azure-automated-log-forwarding/#architecture
 [35]: /integrations/guide/azure-troubleshooting/#automated-log-collection
 [36]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
 [37]: /logs/guide/azure-automated-log-forwarding/#architecture
@@ -351,5 +337,4 @@ Still need help? Contact [Datadog support][17].
 [50]: https://docs.datadoghq.com/getting_started/site/
 [51]: https://app.datadoghq.com/logs
 [52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
-[53]: https://learn.microsoft.com/azure/azure-monitor/platform/activity-log
-[54]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
+[53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
