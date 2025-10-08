@@ -15,7 +15,7 @@ further_reading:
 title: Agent 環境変数
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Agent v5 の場合は、<a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub リポジトリ</a>を参照してください。
 </div>
 

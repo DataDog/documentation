@@ -1,5 +1,6 @@
 ---
 title: Tracing ECS Applications
+description: Configure APM trace collection for containerized applications running on Amazon ECS
 aliases:
   - /agent/amazon_ecs/apm
 further_reading:

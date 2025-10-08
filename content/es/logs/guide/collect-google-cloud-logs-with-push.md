@@ -24,7 +24,7 @@ Esta página describe funciones obsoletas con información de configuración rel
 La documentación de la suscripción <strong>Push</strong> sólo se mantiene para solucionar problemas o para modificar configuraciones legacy. 
 
 Utiliza una suscripción <strong>Pull</strong> con la plantilla Datadog Dataflow para reenviar tus logs de Google Cloud a Datadog. Para obtener instrucciones, consulta <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Recopilación de logs</a> en la página de la integración Google Cloud.
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 ## Información general
 

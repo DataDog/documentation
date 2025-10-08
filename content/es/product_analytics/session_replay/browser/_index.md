@@ -73,13 +73,13 @@ if (user.isAuthenticated) {
 
 Para detener la grabación de Session Replay, llama a `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">Cuando se utiliza una versión del SDK del navegador RUM anterior a v5.0.0, la grabación de Session Replay no comienza automáticamente. Para iniciar la grabación, llama a <code>startSessionReplayRecording()</code>.</div>
+<div class="alert alert-danger">Cuando se utiliza una versión del SDK del navegador RUM anterior a v5.0.0, la grabación de Session Replay no comienza automáticamente. Para iniciar la grabación, llama a <code>startSessionReplayRecording()</code>.</div>
 
 ## Desactivar Session Replay
 
 Para detener las grabaciones de sesión, establece `sessionReplaySampleRate` en `0`. Esto detiene la recopilación de datos para el [plan de navegador RUM y Session Replay][6].
 
-<div class="alert alert-warning">Si estás utilizando una versión del SDK del navegador RUM anterior a v5.0.0, define <code>replaySampleRate</code> en <code>0</code>.</div>
+<div class="alert alert-danger">Si estás utilizando una versión del SDK del navegador RUM anterior a v5.0.0, define <code>replaySampleRate</code> en <code>0</code>.</div>
 
 ## Historial de reproducción
 

@@ -21,7 +21,7 @@ With [Tag Pipelines][1], you can create tag rules to address missing or incorrec
 
 ## Create a ruleset
 
-<div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
+<div class="alert alert-danger"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
 Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**.
 

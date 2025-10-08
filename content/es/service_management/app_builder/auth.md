@@ -4,7 +4,7 @@ title: Acceso y autenticación
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Algunas herramientas controlan el acceso y la autenticación de las aplicaciones y sus componentes.

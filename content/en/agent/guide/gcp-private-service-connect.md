@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{% site-region region="us,us3,gov,ap1,ap2" %}}
-<div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
+<div class="alert alert-danger">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}

@@ -1,5 +1,6 @@
 ---
 title: Sheets
+description: "Analyze Datadog data in a familiar spreadsheet interface with pivot tables, lookups, calculated columns, and complex analysis tools."
 further_reading:
 - link: "/sheets/functions_operators"
   tag: "Documentation"

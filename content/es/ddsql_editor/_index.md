@@ -41,7 +41,7 @@ GROUP BY instance_type
 
 ## Explorar tu telemetría
 
-<div class="alert alert-warning">La consulta de logs y métricas mediante DDSQL está en vista previa. Utiliza este <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">formulario</a> para solicitar acceso.</div>
+<div class="alert alert-danger">La consulta de logs y métricas mediante DDSQL está en vista previa. Utiliza este <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">formulario</a> para solicitar acceso.</div>
 
 Visualiza, filtra y crea consultas en el Explorador de datos.
 

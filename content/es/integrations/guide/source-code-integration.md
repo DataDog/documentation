@@ -72,7 +72,7 @@ Instala la [integración GitHub][101] de Datadog utilizando el [cuadro de la int
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios de las instancias de GitLab son compatibles con la vista previa cerrada. Los repositorios de las instancias de GitLab son compatibles tanto con GitLab.com (SaaS) como con GitLab Self-Managed/Dedicated (On-Prem). Para GitLab Self-Managed, tu instancia debe ser accesible desde Internet. Si es necesario, puedes permitir <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">direcciones IP de <code> webhooks</code> de Datadog</a> para que Datadog pueda conectarse a tu instancia. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Únete a la vista previa</a>.
 </div>
 
@@ -84,7 +84,7 @@ Instala la [integración del código fuente de GitHub][101] de Datadog utilizand
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios de Azure DevOps son compatibles con la vista previa cerrada. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Únete a la vista previa</a>.
 </div>
 
@@ -95,7 +95,7 @@ Instala la integración del código fuente de Azure DevOps de Datadog mientras a
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios en instancias autoalojadas o URL privadas no son compatibles de forma predefinida. Para activar esta función, <a href="/help">ponte en contacto con el servicio de asistencia</a>.
 </div>
 

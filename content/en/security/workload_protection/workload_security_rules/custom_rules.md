@@ -74,11 +74,6 @@ You can create custom rules using these methods:
 
 ## Create the custom Agent and detection rules together
 
-Workload Protection custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
-
-
-## Create the custom Agent and detection rules together
-
 When you create an Agent configuration policy it contains the default Agent rules only. You can add custom Agent rules to the policy to apply specific rules to specific Agents.
 
 When you add an Agent configuration policy you can use the **Assisted rule creator** option to create the Agent and dependent detection rules together. This method ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than creating the Agent and detection rules separately and then referencing the Agent rules in the detection rules.

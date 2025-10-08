@@ -154,7 +154,7 @@ Los widgets no vinculados a la hora global muestran los datos de su periodo de t
 
 ## Copiar y pegar widgets
 
-<div class="alert alert-warning">Debes contar con los permisos <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code></a> y habilitar el <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>uso compartido de datos públicos estáticos</strong></a> en los parámetros de organización para utilizar esta característica.</div>
+<div class="alert alert-danger">Debes contar con los permisos <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code></a> y habilitar el <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>uso compartido de datos públicos estáticos</strong></a> en los parámetros de organización para utilizar esta característica.</div>
 
 Los widgets se pueden copiar en [dashboards][4], [notebooks][5], [servicios de APM][6] y la página de [recursos de APM][7] con `Ctrl + C` (`Cmd + C` para Mac), o al seleccionar el icono de compartir y elegir «Copy» (Copiar).
 

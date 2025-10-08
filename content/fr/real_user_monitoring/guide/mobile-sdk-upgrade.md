@@ -64,7 +64,7 @@ La référence à l'artefact `com.datadoghq:dd-sdk-android` doit être supprimé
 
 **Remarque** : les coordonnées Maven de tous les autres artefacts demeurent les mêmes.
 
-<div class="alert alert-warning">La version 2 ne prend pas en charge l'API 19 (KitKat) d'Android. Le SDK minimum pris en charge est désormais l'API 21 (Lollipop). Kotlin 1.7 est requis. Puisque Le SDK est compilé avec Kotlin 1.8, un compilateur de Kotlin 1.6 et versions antérieures ne peut pas lire les métadonnées des classes du SDK.</div>
+<div class="alert alert-danger">La version 2 ne prend pas en charge l'API 19 (KitKat) d'Android. Le SDK minimum pris en charge est désormais l'API 21 (Lollipop). Kotlin 1.7 est requis. Puisque Le SDK est compilé avec Kotlin 1.8, un compilateur de Kotlin 1.6 et versions antérieures ne peut pas lire les métadonnées des classes du SDK.</div>
 
 Si jamais vous rencontrez une erreur semblable à ce qui suit :
 

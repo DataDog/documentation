@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Tag Extraction
+description: Configure automatic tag extraction from Kubernetes pod labels and annotations for enhanced monitoring
 aliases:
 - /agent/autodiscovery/tag/
 - /agent/kubernetes/tag

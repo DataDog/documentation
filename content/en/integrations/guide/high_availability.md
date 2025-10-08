@@ -24,7 +24,9 @@ The following integrations are supported for High Availability:
 |-------------------------|------------------------------|
 | **Database Monitoring**  | [PostgreSQL][15], [MySQL][16], [MongoDB][17], [Oracle][18], [SQL Server][19] |
 | **Network Monitoring**   | [SNMP][1], [Network Path][2], [HTTP Check][3] |
-| **Vendor-Specific**      | [Cisco ACI][4], [Cisco SD-WAN][5]|
+| **Vendor-Specific**      | [Cisco ACI][4], [Cisco SD-WAN][5], [Versa][23]|
+| **Virtualization**  | [Proxmox][20], [vSphere][21] |
+| **Cloud platforms** | [OpenStack Controller][22]|
 
 ## Prerequisites
 
@@ -133,3 +135,9 @@ The following integrations are supported for High Availability:
 [17]: /database_monitoring/#mongodb
 [18]: /database_monitoring/#oracle
 [19]: /database_monitoring/#sql-server
+[20]: https://docs.datadoghq.com/integrations/proxmox/
+[21]: https://docs.datadoghq.com/integrations/vsphere/
+[22]: https://docs.datadoghq.com/integrations/openstack-controller
+[23]: https://docs.datadoghq.com/integrations/versa/
+
+

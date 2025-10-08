@@ -38,7 +38,7 @@ L'aperçu de Code Analysis est disponible.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Analysis n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}
@@ -63,7 +63,7 @@ Cliquez sur **+ Add a Repository** dans la [page **Code Analysis Repositories**]
 {{< tabs >}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Les analyses hébergées par Datadog sont uniquement prises en charge par Software Composition Analysis (SCA) et les référentiels GitHub. Pour activer Static Analysis ou utiliser un autre fournisseur CI, exécutez plutôt les analyses dans vos pipelines CI.</div>
+<div class="alert alert-danger">Les analyses hébergées par Datadog sont uniquement prises en charge par Software Composition Analysis (SCA) et les référentiels GitHub. Pour activer Static Analysis ou utiliser un autre fournisseur CI, exécutez plutôt les analyses dans vos pipelines CI.</div>
 
 Avec les analyses hébergées par Datadog, votre code est analysé dans l'infrastructure de Datadog plutôt que dans votre pipeline CI. Datadog lit votre code, exécute l'analyseur statique pour effectuer une Static Analysis ou une Software Composition Analysis, puis téléverse les résultats.
 

@@ -18,7 +18,7 @@ Quelques précisions concernant la politique de limitation de débit des API :
 - Le taux limite de soumission d'événements est de `250,000` événements par minute et par organisation.
 - Les limites de débit varient selon les endpoints et sont précisées dans les en-têtes détaillés ci-dessous. Il est possible d'augmenter ces limites sur demande.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La liste ci-dessus ne répertorie pas toutes les limites de débit applicables aux API Datadog. Si votre débit est limité, contactez l'<a href="https://www.datadoghq.com/support/">assistance</a> pour en savoir plus sur l'API que vous utilisez et sur ses limites.</div>
 
 | En-têtes de limites de débit      | Description                                              |
