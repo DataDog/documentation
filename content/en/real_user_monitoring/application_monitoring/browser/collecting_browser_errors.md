@@ -248,7 +248,7 @@ Get visibility into cross-origin scripts by following these two steps:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [4]: /real_user_monitoring/error_tracking

@@ -403,10 +403,10 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [22]: /real_user_monitoring/session_replay/browser/#usage
 [23]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
-[26]: /real_user_monitoring/browser/
+[26]: /real_user_monitoring/application_monitoring/browser/
 [25]: /real_user_monitoring/correlate_with_other_telemetry/apm#opentelemetry-support
 [27]: /real_user_monitoring/guide/proxy-rum-data
-[28]: /real_user_monitoring/browser/setup/#initialization-parameters
+[28]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [29]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#:~:text=configure%20the%20traceContextInjection
 [30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
 [31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports

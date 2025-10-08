@@ -6,13 +6,13 @@ aliases:
   - /real_user_monitoring/browser/modifying_data_and_context/
   - /real_user_monitoring/browser/advanced_configuration/
 further_reading:
-- link: "/real_user_monitoring/browser/tracking_user_actions"
+- link: "/real_user_monitoring/application_monitoring/browser/tracking_user_actions"
   tag: Documentation
   text: "Tracking User Actions"
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Real User Monitoring"
-- link: "/real_user_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM browser data collected"
 - link: "/real_user_monitoring/explorer/"
@@ -1690,10 +1690,10 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/browser/monitoring_page_performance/
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/browser/setup/
+[4]: /real_user_monitoring/application_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event

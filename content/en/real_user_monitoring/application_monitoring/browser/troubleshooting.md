@@ -146,16 +146,16 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
-[3]: /real_user_monitoring/browser/setup/#npm
+[3]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[7]: /real_user_monitoring/browser/data_collected/?tab=session
+[7]: /real_user_monitoring/application_monitoring/browser/data_collected/?tab=session
 [8]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [9]: /real_user_monitoring/guide/sampling-browser-plans/
 [10]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
-[13]: /real_user_monitoring/browser/setup/#initialization-parameters
+[13]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /real_user_monitoring/guide/debug-symbols

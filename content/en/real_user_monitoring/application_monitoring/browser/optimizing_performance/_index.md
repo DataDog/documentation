@@ -103,9 +103,9 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[3]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /real_user_monitoring/session_replay/
 [5]: https://app.datadoghq.com/rum/vitals
 [6]: https://app.datadoghq.com/rum/performance-monitoring

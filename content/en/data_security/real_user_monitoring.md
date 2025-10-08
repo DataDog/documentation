@@ -161,11 +161,11 @@ See [privacy options specific to Session Replay][19].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /real_user_monitoring/browser/setup/#configuration
+[2]: /real_user_monitoring/application_monitoring/browser/setup/#configuration
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [5]: /real_user_monitoring/explorer/search/
-[6]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[6]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [7]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [8]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
 [9]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events

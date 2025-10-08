@@ -128,11 +128,11 @@ As a best practice, if you expect a high volume of user actions, consider adjust
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/troubleshooting/
+[1]: /real_user_monitoring/application_monitoring/browser/troubleshooting/
 [2]: /data_security/real_user_monitoring/#mask-action-names
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
-[4]: /real_user_monitoring/browser/frustration_signals/
-[5]: /real_user_monitoring/browser/data_collected/#default-attributes
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[4]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
+[5]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
+[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [7]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [8]: /real_user_monitoring/guide/send-rum-custom-actions

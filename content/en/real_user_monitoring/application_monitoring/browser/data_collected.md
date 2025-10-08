@@ -211,7 +211,7 @@ Source errors include code-level information about the error. For more informati
 [1]: /standard-attributes/?product=browser
 [2]: /data_security/real_user_monitoring/#ip-address
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [5]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
@@ -220,5 +220,5 @@ Source errors include code-level information about the error. For more informati
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [11]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[13]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
-[14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
+[14]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

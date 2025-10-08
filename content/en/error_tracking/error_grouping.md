@@ -396,5 +396,5 @@ configuration.errorEventMapper = event => {
 
 [1]: /tracing/
 [2]: /logs/log_collection/
-[3]: /real_user_monitoring/browser/
+[3]: /real_user_monitoring/application_monitoring/browser/
 [4]: /real_user_monitoring/application_monitoring/#get-started

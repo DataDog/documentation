@@ -79,7 +79,7 @@ To enable feature flag data collection for the Browser SDK:
    </details>
    <br/>
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /real_user_monitoring/application_monitoring/browser#setup
 {{% /tab %}}
 {{% tab "iOS" %}}
 

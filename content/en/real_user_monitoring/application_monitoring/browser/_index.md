@@ -45,5 +45,5 @@ From here, you can modify the [data and context][2] the RUM Browser SDK collects
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_security/real_user_monitoring/#shared-responsibility
-[2]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

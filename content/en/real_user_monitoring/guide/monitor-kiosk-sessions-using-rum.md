@@ -114,4 +114,4 @@ DdRum.stopSession()
 [3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
 [4]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#track-user-sessions
 [5]: /real_user_monitoring/reactnative/#user-information
-[6]: /real_user_monitoring/browser/
+[6]: /real_user_monitoring/application_monitoring/browser/
