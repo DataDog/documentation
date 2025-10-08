@@ -99,7 +99,7 @@ Create and configure [retention filters][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/rum_without_limits/metrics
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: /real_user_monitoring/platform/connect_rum_and_traces/
 [4]: https://app.datadoghq.com/rum/list
 [5]: /real_user_monitoring/guide/retention_filter_best_practices/

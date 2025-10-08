@@ -2,7 +2,8 @@
 title: Optimizing Performance
 description: "Use the RUM Optimization page to identify and troubleshoot browser performance issues with Core Web Vitals analysis and user experience visualization."
 aliases:
-  - real_user_monitoring/browser/monitoring_performance_vitals/
+  - /real_user_monitoring/browser/monitoring_performance_vitals/
+  - /real_user_monitoring/browser/optimizing_performance/
 further_reading:
   - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
@@ -101,13 +102,12 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[3]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /real_user_monitoring/session_replay/
 [5]: https://app.datadoghq.com/rum/vitals
 [6]: https://app.datadoghq.com/rum/performance-monitoring
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [8]: https://web.dev/articles/lcp/
 [9]: https://web.dev/articles/fcp
 [10]: https://web.dev/articles/cls/

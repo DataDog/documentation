@@ -8,7 +8,7 @@ further_reading:
   - link: 'synthetics/browser_tests'
     tag: 'Documentation'
     text: 'Configure a Browser Test'
-  - link: 'real_user_monitoring/browser'
+  - link: 'real_user_monitoring/application_monitoring/browser'
     tag: 'Documentation'
     text: 'RUM Browser Monitoring'
 

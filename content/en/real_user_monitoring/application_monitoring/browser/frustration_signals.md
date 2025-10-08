@@ -3,6 +3,7 @@ title: Frustration Signals
 description: "Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment."
 aliases:
 - /real_user_monitoring/frustration_signals
+- /real_user_monitoring/browser/frustration_signals/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'Blog'
@@ -166,3 +167,4 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [8]: /real_user_monitoring/session_replay/browser/
 [9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com
+

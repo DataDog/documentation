@@ -249,8 +249,8 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 [1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Synthetic Monitoring" %}}
 

@@ -5,7 +5,7 @@ description: Learn how to customize your Browser RUM and Browser RUM & Session R
 aliases:
 - /real_user_monitoring/guide/sampling-browser-and-browser-premium/
 further_reading:
-- link: '/real_user_monitoring/browser/'
+- link: '/real_user_monitoring/application_monitoring/browser/'
   tag: 'Documentation'
   text: 'Learn about RUM Browser Monitoring'
 ---
@@ -230,6 +230,6 @@ For more information about tagging and exploring attributes, see [Browser Monito
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /real_user_monitoring/application_monitoring/browser#setup
 [2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[3]: /real_user_monitoring/browser#tagging
+[3]: /real_user_monitoring/application_monitoring/browser#tagging

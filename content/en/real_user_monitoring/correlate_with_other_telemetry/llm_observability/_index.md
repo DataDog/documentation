@@ -116,7 +116,7 @@ After configuration is complete, you can navigate between correlated data:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 [2]: /llm_observability/setup/
-[3]: /real_user_monitoring/browser/
+[3]: /real_user_monitoring/application_monitoring/browser/
 [4]: /llm_observability/

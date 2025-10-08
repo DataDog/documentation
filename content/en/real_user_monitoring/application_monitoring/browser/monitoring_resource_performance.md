@@ -1,6 +1,8 @@
 ---
 title: Monitoring Resource Performance
 description: "Track web resource performance including XHR, Fetch, images, CSS, and JavaScript assets with detailed timing data and provider identification."
+aliases:
+  - /real_user_monitoring/browser/monitoring_resource_performance/
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

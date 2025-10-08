@@ -1373,6 +1373,6 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [7]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [8]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
-[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
-[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
+[10]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event

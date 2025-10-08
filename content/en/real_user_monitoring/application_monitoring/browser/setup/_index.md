@@ -1,24 +1,22 @@
 ---
 title: Browser Monitoring Setup
 description: Understand your options for setting up the RUM Browser SDK.
+aliases:
+- real_user_monitoring/browser/setup/
 further_reading:
-- link: '/real_user_monitoring/browser/'
+- link: '/real_user_monitoring/application_monitoring/browser/'
   tag: 'Documentation'
   text: 'RUM Browser Monitoring'
 ---
 
-## Overview
+## Setup
 
-To get started with Datadog RUM Browser, you need to:
+{{< whatsnext desc="Choose the instrumentation type for the Browser SDK:" >}}
+  {{< nextlink href="real_user_monitoring/application_monitoring/browser/setup/client">}}<u>Client-Side</u>: Instrument each of your browser-based web applications, deploy the application, then configure the initialization parameters you want to track, and use advanced configuration to further manage data and context that RUM collects.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server">}}<u>Auto-Instrumentation</u>: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.{{< /nextlink >}}
+{{< /whatsnext >}}
 
-1. Create an application in Datadog.
-2. Instrument your application.
-
-Instrumenting your application allows observability data from your application to be displayed in the Datadog UI.
-
-## Instrumentation types
-
-There are two ways to instrument your application: automatic or manual instrumentation.
+## How to choose the instrumentation type
 
 | | Auto-instrumentation (Preview) | Client-side (Manual) |
 |----------------------|--------------------------------|----------------------|
@@ -31,5 +29,5 @@ There are two ways to instrument your application: automatic or manual instrumen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/server
-[2]: /real_user_monitoring/browser/setup/client
+[1]: /real_user_monitoring/application_monitoring/browser/setup/server
+[2]: /real_user_monitoring/application_monitoring/browser/setup/client

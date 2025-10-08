@@ -217,7 +217,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
-[3]: /real_user_monitoring/browser/setup/
+[3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
@@ -483,7 +483,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /real_user_monitoring/browser/setup/
+[10]: /real_user_monitoring/application_monitoring/browser/setup/
 [11]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
@@ -842,7 +842,7 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [6]: /tests/code_coverage/?tab=javascripttypescript
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[9]: /real_user_monitoring/browser/
+[9]: /real_user_monitoring/application_monitoring/browser/
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File

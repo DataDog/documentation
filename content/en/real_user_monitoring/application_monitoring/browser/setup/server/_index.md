@@ -5,6 +5,8 @@ beta: true
 code_lang: server
 type: multi-code-lang
 code_lang_weight: 2
+aliases:
+  - /real_user_monitoring/browser/setup/server
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -21,7 +23,6 @@ further_reading:
 RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 RUM Auto-Instrumentation requires Datadog Agent version 7.34+.
-
 
 ## Getting started
 
@@ -46,4 +47,4 @@ Keep in mind the following limitations when using auto-instrumentation:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
