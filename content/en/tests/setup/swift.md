@@ -106,7 +106,7 @@ end
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+<div class="alert alert-warning">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
 
@@ -241,7 +241,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+<div class="alert alert-warning">If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 

@@ -56,7 +56,7 @@ To configure the tracer using environment variables, set the variables before la
 To configure the tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
+  Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
 </div>
 
 ```csharp
@@ -99,7 +99,7 @@ To configure the tracer using a JSON file, create `datadog.json` in the instrume
 ## Configuration settings
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
+  On Linux, the names of environment variables are case-sensitive.
 </div>
 
 Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `Exporter.AgentUri`) when changing settings in code.

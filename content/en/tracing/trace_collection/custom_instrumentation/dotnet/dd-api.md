@@ -83,7 +83,7 @@ namespace Store.Managers
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
+  Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 ### Configuring Datadog in code
@@ -118,7 +118,7 @@ In addition to automatic instrumentation, the `[Trace]` attribute, and `DD_TRACE
 
 To create and activate a custom span, use `Tracer.Instance.StartActive()`. If a trace is already active (when created by automatic instrumentation, for example), the span is part of the current trace. If there is no current trace, a new one is started.
 
-<div class="alert alert-warning"><strong>Warning</strong>: Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
+<div class="alert alert-warning">Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
 </div>
 
 ```csharp
