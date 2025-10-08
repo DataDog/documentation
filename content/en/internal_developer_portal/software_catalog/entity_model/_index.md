@@ -29,27 +29,30 @@ aliases:
   - /api_catalog/api_catalog_api
   - /service_catalog/apis
 further_reading:
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "External Site"
-  text: "Create and manage definitions with Terraform"
-- link: "/api/latest/service-definition/"
-  tag: "API"
-  text: "Learn about the Definition API"
-- link: "/integrations/github"
-  tag: "Documentation"
-  text: "Learn about the GitHub Integration"
-- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
-  tag: "Blog"
-  text: "Import Backstage YAML files into Datadog"
-- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
-  tag: "Blog"
-  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+    tag: "External Site"
+    text: "Create and manage definitions with Terraform"
+  - link: "/api/latest/service-definition/"
+    tag: "API"
+    text: "Learn about the Definition API"
+  - link: "/integrations/github"
+    tag: "Documentation"
+    text: "Learn about the GitHub Integration"
+  - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+    tag: "Blog"
+    text: "Import Backstage YAML files into Datadog"
+  - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
+    tag: "Blog"
+    text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  - link: "https://www.datadoghq.com/blog/software-catalog-custom-entities/"
+    tag: "Blog"
+    text: "Model your architecture with custom entities in the Datadog Software Catalog"
 algolia:
   tags: [ "codeLocations" ]
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Entity Model schema v3.0 is not available in the selected site at this time.</div>
+<div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}
 

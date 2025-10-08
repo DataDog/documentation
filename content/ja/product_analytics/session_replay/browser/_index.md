@@ -69,13 +69,13 @@ if (user.isAuthenticated) {
 
 セッションリプレイの記録を停止するには、`stopSessionReplayRecording()` を呼び出してください。
 
-<div class="alert alert-warning">RUM Browser SDK のバージョンが v5.0.0 より古い場合、Session Replay の記録は自動的に開始されません。<code>startSessionReplayRecording()</code> を呼び出して記録を開始してください。</div>
+<div class="alert alert-danger">RUM Browser SDK のバージョンが v5.0.0 より古い場合、Session Replay の記録は自動的に開始されません。<code>startSessionReplayRecording()</code> を呼び出して記録を開始してください。</div>
 
 ## セッションリプレイを無効にする
 
 セッションの記録を停止するには、`sessionReplaySampleRate` を `0` に設定します。これにより、[Browser RUM & Session Replay プラン][6]のデータ収集が停止します。
 
-<div class="alert alert-warning">RUM Browser SDK のバージョンが v5.0.0 より前の場合は、<code>replaySampleRate</code> を <code>0</code> に設定してください。</div>
+<div class="alert alert-danger">RUM Browser SDK のバージョンが v5.0.0 より前の場合は、<code>replaySampleRate</code> を <code>0</code> に設定してください。</div>
 
 ## 再生履歴
 

@@ -5188,6 +5188,18 @@ menu:
           - BulkWriteDatastoreItems
         unstable: []
         order: 10
+    - name: Bulk delete datastore items
+      url: '#bulk-delete-datastore-items'
+      identifier: actions-datastores-bulk-delete-datastore-items
+      parent: actions-datastores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteDatastoreItems
+        unstable: []
+        order: 11
     - name: Update datastore item
       url: '#update-datastore-item'
       identifier: actions-datastores-update-datastore-item
@@ -5324,6 +5336,54 @@ menu:
           - ListAwsOnDemandTasks
         unstable: []
         order: 6
+    - name: Update azure scan options
+      url: '#update-azure-scan-options'
+      identifier: agentless-scanning-update-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAzureScanOptions
+        unstable: []
+        order: 9
+    - name: Delete azure scan options
+      url: '#delete-azure-scan-options'
+      identifier: agentless-scanning-delete-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAzureScanOptions
+        unstable: []
+        order: 10
+    - name: Create azure scan options
+      url: '#create-azure-scan-options'
+      identifier: agentless-scanning-create-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAzureScanOptions
+        unstable: []
+        order: 11
+    - name: List azure scan options
+      url: '#list-azure-scan-options'
+      identifier: agentless-scanning-list-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAzureScanOptions
+        unstable: []
+        order: 12
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
@@ -6928,9 +6988,9 @@ menu:
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
       generated: true
-    - name: Send an incident event for DORA Metrics
-      url: '#send-an-incident-event-for-dora-metrics'
-      identifier: dora-metrics-send-an-incident-event-for-dora-metrics
+    - name: Send an incident event
+      url: '#send-an-incident-event'
+      identifier: dora-metrics-send-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -6976,9 +7036,9 @@ menu:
           - DeleteDORAFailure
         unstable: []
         order: 7
-    - name: Send a failure event for DORA Metrics
-      url: '#send-a-failure-event-for-dora-metrics'
-      identifier: dora-metrics-send-a-failure-event-for-dora-metrics
+    - name: Send a failure event
+      url: '#send-a-failure-event'
+      identifier: dora-metrics-send-a-failure-event
       parent: dora-metrics
       generated: true
       params:
@@ -7024,9 +7084,9 @@ menu:
           - DeleteDORADeployment
         unstable: []
         order: 8
-    - name: Send a deployment event for DORA Metrics
-      url: '#send-a-deployment-event-for-dora-metrics'
-      identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
+    - name: Send a deployment event
+      url: '#send-a-deployment-event'
+      identifier: dora-metrics-send-a-deployment-event
       parent: dora-metrics
       generated: true
       params:
@@ -9339,6 +9399,19 @@ menu:
           - DeleteRole
         unstable: []
         order: 5
+    - name: List role templates
+      url: '#list-role-templates'
+      identifier: roles-list-role-templates
+      parent: roles
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRoleTemplates
+        unstable:
+          - v2
+        order: 16
     - name: Create role
       url: '#create-role'
       identifier: roles-create-role
@@ -10466,6 +10539,23 @@ menu:
         operationids:
           - ListTeams
         unstable: []
+        order: 1
+    - name: Test Optimization
+      url: /api/latest/test-optimization/
+      identifier: test-optimization
+      generated: true
+    - name: Search flaky tests
+      url: '#search-flaky-tests'
+      identifier: test-optimization-search-flaky-tests
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchFlakyTests
+        unstable:
+          - v2
         order: 1
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
