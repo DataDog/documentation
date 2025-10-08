@@ -3,7 +3,7 @@ title: Automation Rules
 description: Reduce manual effort by triggering workflows automatically when datastore records are created, updated, or change status. 
 disable_toc: false
 aliases:
-- actions/datastore/trigger
+- /actions/datastore/trigger
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-datastore/"
   tag: "Blog"
