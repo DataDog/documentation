@@ -14,7 +14,7 @@ All Session Replay SDK versions can be found in the [Maven Central Repository][4
 
 To set up Mobile Session Replay for Android:
 
-### Step 1 - Setup the Android RUM SDK
+### Step 1 - Set up the Android RUM SDK
 
 Make sure you've [set up and initialized the Datadog Android RUM SDK][5] with views instrumentation enabled.
 
@@ -48,7 +48,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 To set up Mobile Session Replay for iOS:
 
-### Step 1 - Setup the iOS RUM SDK
+### Step 1 - Set up the iOS RUM SDK
 
 Make sure you've [set up and initialized the Datadog iOS RUM SDK][6] with views instrumentation enabled.
 
@@ -89,9 +89,9 @@ All Session Replay SDK versions can be found in the [Maven Central Repository][1
 
 To set up Mobile Session Replay for Kotlin Multiplatform:
 
-### Step 1 - Setup the Kotlin Multiplatform RUM SDK
+### Step 1 - Set up the Kotlin Multiplatform RUM SDK
 
-Make sure you've [setup and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
+Make sure you've [set up and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
 
 ### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency 
 
@@ -124,7 +124,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 SessionReplay.enable(sessionReplayConfig)
 ```
 
-### Step 5 - Setup Material support on Android (Optional) 
+### Step 5 - Set up Material support on Android (Optional) 
 
 If your app uses Material on Android, add:
 
@@ -145,7 +145,7 @@ All Session Replay SDK versions can be found in the [npmjs repository][13].
 
 To set up Mobile Session Replay for React Native:
 
-### Step 1 - Setup the React Native SDK
+### Step 1 - Set up the React Native SDK
 
 Make sure you've [set up and initialized the Datadog React Native SDK][14] with views instrumentation enabled.
 
@@ -261,7 +261,7 @@ All Session Replay SDK versions can be found in [Pub][29].
 
 To set up Datadog Session Replay for Flutter:
 
-### Step 1 - Setup the Flutter Plugin
+### Step 1 - Set up the Flutter plugin
 
 Make sure you have [set up and initialized the Datadog Flutter Plugin][28].
 

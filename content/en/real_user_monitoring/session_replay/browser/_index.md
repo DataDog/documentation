@@ -51,7 +51,7 @@ Learn how to [troubleshoot Browser Session Replay][7].
 
 ## Mobile Session Replay
 
-Learn more about the [Session Replay for Mobile][8].
+Learn more about [Session Replay for Mobile][8].
 
 ## Further Reading
 

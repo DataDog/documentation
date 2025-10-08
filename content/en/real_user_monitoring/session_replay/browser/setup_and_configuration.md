@@ -1,6 +1,6 @@
 ---
 title: Browser Session Replay Setup and Configuration
-description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
+description: Capture and visually replay your users' web browsing experience with Session Replay.
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
@@ -24,13 +24,13 @@ further_reading:
 
 To set up Session Replay for Browser:
 
-### Step 1 - Setup the Browser SDK
+### Step 1 - Set up the Browser SDK
 
 Make sure you've set up the [RUM Browser SDK][1].
 
 ### Step 2 - Enable Session Replay
 
-To enable session replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.
+To enable Session Replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 See [Browser RUM & Session Replay sessions][2] for more information.
@@ -77,7 +77,7 @@ datadogRum.init({
 </script>
 ```
 
-**Note:** Bellow version v5.0.0, Session Replay does not start automatically and you need to call [`startSessionReplayRecording()`][3] API
+**Note**: Bellow version v5.0.0, Session Replay does not start automatically and you need to call [`startSessionReplayRecording()`][3] API
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -88,7 +88,7 @@ datadogRum.init({
 
 By default, Session Replay starts recording automatically.
 However, if you prefer to manually start recording at a specific point in your application, you can use the option `startSessionReplayRecordingManually` parameter as shown below, and later call [`startSessionReplayRecording()`][3].
-You can also use [`stopSessionReplayRecording()`][4] to stop the recording anytime.
+You can also use [`stopSessionReplayRecording()`][4] to stop the recording at any time.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -131,7 +131,7 @@ datadogRum.stopSessionReplayRecording()
 
 ```javascript
 <script>
-    window.DD_RUM && window.DD_RUM..init({
+    window.DD_RUM && window.DD_RUM.init({
         ...
         startSessionReplayRecordingManually: true,
         ...
@@ -146,17 +146,17 @@ datadogRum.stopSessionReplayRecording()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note** In some scenarios, you may want to begin recording, even if it was initially sampled out of replay. To force Session Replay recording for the rest of the current session, call [`startSessionReplayRecording({ force: true })`][3]
+**Note**: In some scenarios, you may want to begin recording, even if it was initially sampled out of replay. To force Session Replay recording for the rest of the current session, call [`startSessionReplayRecording({ force: true })`][3]
 
 ### Privacy options
 
 Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data.
 See [Privacy Options][5].
 
-### Connect Session Replay To Your Third-Party Tools
+### Connect Session Replay to your Third-Party tools
 
 You can access the Session Replay URL to use in integrations, live from the browser where the session is taking place.
-See [Connect Session Replay To Your Third-Party Tools][6].
+See [Connect Session Replay to your Third-Party tools][6].
 
 [1]: /real_user_monitoring/browser/setup/
 [2]: /real_user_monitoring/guide/sampling-browser-plans/
