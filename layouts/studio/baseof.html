@@ -23,6 +23,13 @@
   {{- if and (ne $.Params.disable_opengraph_meta_tags true) .File -}}
     {{- partial "meta.html" . -}}
   {{- end -}}
+
+  <style>
+    .main-nav {
+      background:#000 !important;
+      color:#fff !important;
+    }
+  </style>
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{ $ctx := . }}
@@ -44,7 +51,7 @@
   <div class="container container__content h-100 pt-1">
     <div class="row h-100 position-relative js-content-container">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-        {{ partial "sidenav/studio-sidenav.html" . }}
+        {{ partial "sidenav/main-sidenav.html" . }}
       </div>
 
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
