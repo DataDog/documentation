@@ -51,7 +51,7 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
 
 ### Build an app from a layout
 
@@ -66,7 +66,7 @@ Choosing a layout creates an app as a table, form, or custom chart.
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
 
 ### Build an app from data
 
@@ -83,7 +83,7 @@ You can get started with an app by importing data from one of the integrations l
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
 
 ### Create a custom app
 
@@ -97,7 +97,7 @@ If you don't want to use any of the methods above, you can create a new app from
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
 
 ## Customize your app
 
