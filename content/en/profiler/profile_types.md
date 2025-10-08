@@ -204,18 +204,18 @@ CPU (v2.15+)
 Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (in beta, v2.18+)
+Allocations (v3.28+)
 : The number and size of allocated objects by each method, as well as their type.
 For .NET Framework, the size is not available.<br />
-_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+, but Datadog recommends .NET 10+ for more accurate sampling.
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
 _Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
-Live Heap (in beta, v2.22+)
+Live Heap (v3.28+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
-_Requires: .NET 7+_
+_Requires: .NET 7+ but Datadog recommends .NET 10+ for more accurate sampling.
 
 Outgoing HTTP requests (in Timeline) (in beta v3.19+)
 : Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
@@ -229,7 +229,7 @@ Garbage Collector CPU consumption (v3.19+)
 : The time garbage collector's threads spent running on the CPU.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
-Note: **Allocations** and **Live Heap** profiling are in beta until .NET 10, where required better statistical allocation sampling will be available.
+**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results. 
 
 
 [1]: /profiler/enabling/dotnet/#requirements

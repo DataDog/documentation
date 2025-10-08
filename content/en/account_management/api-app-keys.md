@@ -19,7 +19,22 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ### One-Time Read mode
 
-All application keys for new parent organizations (and their child organizations) created after August 20th, 2025 are in One-Time Read (OTR) mode. OTR mode is a security feature that limits the visibility of application key secrets to creation time only. All application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
+One-Time Read (OTR) mode is a security feature that limits the visibility of application key secrets to creation time only. When OTR mode is enabled, application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
+
+#### For new organizations
+
+All application keys for new parent organizations (and their child organizations) created after August 20th, 2025 have OTR mode enabled by default. This setting is permanent and cannot be changed.
+
+#### For existing organizations
+
+Organization administrators can enable or disable OTR mode from [**Organization Settings** > **Application Keys**][2]. After enabling OTR mode:
+
+- Application key secrets are visible only once, at the time of creation
+- They are no longer retrievable through the UI or API
+- The setting can be toggled on or off by organization administrators for 3 months after enabling
+- After 3 months of being continuously enabled, OTR mode becomes permanent and the toggle is removed
+
+**Permissions**: Users must have both the `org_app_keys_write` and `org_management` permissions to enable or disable OTR mode for their organization.
 
 ### Scopes 
 
@@ -87,6 +102,8 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 {{< site-region region="ap2,gov" >}}
 <div class="alert alert-danger">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 {{< /site-region >}}
+
+<div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 
 **Notes:**
 

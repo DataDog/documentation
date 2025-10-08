@@ -330,5 +330,5 @@ To allow Datadog to collect RUM data from your mobile application test runs, con
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies
 [22]: /account_management/rbac/granular_access
-[23]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/ios/setup?tab=swiftpackagemanagerspm
-[24]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/setup?tab=rum
+[23]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/setup?tab=swiftpackagemanagerspm
+[24]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/setup?tab=rum
