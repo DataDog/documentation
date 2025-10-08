@@ -5,6 +5,7 @@ is_beta: true
 private: false
 aliases:
     - /dynamic_instrumentation/symdb
+    - /tracing/dynamic_instrumentation/symdb
 further_reading:
   - link: /dynamic_instrumentation/
     tag: Documentation

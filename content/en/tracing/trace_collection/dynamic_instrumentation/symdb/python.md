@@ -8,6 +8,7 @@ type: multi-code-lang
 code_lang_weight: 10
 aliases:
     - /dynamic_instrumentation/symdb/python
+    - /tracing/dynamic_instrumentation/symdb/python
 ---
 {{< beta-callout url="#" btn_hidden="true" >}}
 Autocomplete and search are in Preview.

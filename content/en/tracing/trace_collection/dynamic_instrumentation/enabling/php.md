@@ -3,6 +3,7 @@ title: Enable Dynamic Instrumentation for PHP
 description: Set up Dynamic Instrumentation for PHP applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/php/
+    - /tracing/dynamic_instrumentation/enabling/php
 private: true
 further_reading:
     - link: 'agent'

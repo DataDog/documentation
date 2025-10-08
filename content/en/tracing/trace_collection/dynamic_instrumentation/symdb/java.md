@@ -8,6 +8,7 @@ type: multi-code-lang
 code_lang_weight: 10
 aliases:
     - /dynamic_instrumentation/symdb/java
+    - /tracing/dynamic_instrumentation/symdb/java
 ---
 
 ## Requirements

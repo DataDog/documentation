@@ -3,6 +3,7 @@ title: Dynamic Instrumentation Expression Language
 private: false
 aliases:
     - /dynamic_instrumentation/expression-language
+    - /tracing/dynamic_instrumentation/expression-language
 ---
 
 ## Overview

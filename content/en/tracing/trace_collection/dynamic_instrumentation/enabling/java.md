@@ -3,6 +3,7 @@ title: Enable Dynamic Instrumentation for Java
 description: Set up Dynamic Instrumentation for Java applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/java/
+    - /tracing/dynamic_instrumentation/enabling/java
 private: false
 code_lang: java
 type: multi-code-lang

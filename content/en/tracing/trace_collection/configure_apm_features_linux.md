@@ -1,5 +1,7 @@
 ---
 title: Enable SDK-dependent products on Linux
+aliases:
+- /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux
 further_reading:
   - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm
     tag: Documentation

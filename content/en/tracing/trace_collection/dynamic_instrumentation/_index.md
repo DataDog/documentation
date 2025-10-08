@@ -6,6 +6,7 @@ aliases:
     - /dynamic_instrumentation/
     - /dynamic_instrumentation/enabling/
     - /tracing/dynamic_instrumentation/enabling
+    - /tracing/dynamic_instrumentation/
 is_beta: false
 private: false
 further_reading:

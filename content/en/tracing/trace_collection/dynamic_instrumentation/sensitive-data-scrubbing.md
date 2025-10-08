@@ -3,6 +3,7 @@ title: Dynamic Instrumentation Sensitive Data Scrubbing
 description: Protect sensitive information by configuring redaction and scrubbing mechanisms for Dynamic Instrumentation.
 aliases:
     - /dynamic_instrumentation/sensitive-data-scrubbing/
+    - /tracing/dynamic_instrumentation/sensitive-data-scrubbing
 further_reading:
 - link: "/dynamic_instrumentation/enabling/"
   tag: "Documentation"
