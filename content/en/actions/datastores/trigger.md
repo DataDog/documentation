@@ -1,5 +1,5 @@
 ---
-title: Use Automation Rules 
+title: Automation Rules 
 description: Reduce manual effort by triggering workflows automatically when datastore records are created, updated, or change status. 
 disable_toc: false
 aliases:
@@ -10,9 +10,11 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
-You can add workflows to your datastores that automatically trigger when records are created, updated, or deleted.
+This page explains how to use and audit automation rules for datastores. With automation rules, you can add workflows to your datastores that automatically trigger when records are created, updated, or deleted.
 
-## Create a new automation rule
+## Use Automation Rules 
+
+### Create a new automation rule
 
 To create a new automation rule: 
 1. Navigate to the [Datastores page][1].
@@ -24,7 +26,7 @@ To create a new automation rule:
     1. Name your rule. 
 1. Click **Save**.
 
-## Edit an automation rule 
+### Edit an automation rule 
 
 To edit an automation rule: 
 1. Navigate to the [Datastores page][1].
@@ -34,7 +36,7 @@ To edit an automation rule:
 1. Make your changes. 
 1. Click **Save Changes**.
 
-## Delete an automation rule
+### Delete an automation rule
 
 To delete an automation rule: 
 1. Navigate to the [Datastores page][1].
@@ -42,6 +44,10 @@ To delete an automation rule:
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
 1. When prompted, confirm deletion.
+
+## Audit Automation Rules
+
+
 
 ## Further reading
 
