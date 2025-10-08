@@ -6,10 +6,10 @@ further_reading:
   text: "Scorecards Documentation"
 ---
 
+{{< img src="/tracing/software_catalog/campaign-manage.png" alt="List of Campaigns in Internal Developer Portal" style="width:90%;" >}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Campaigns!" >}}
 {{< /callout >}}
-
-{{< img src="/tracing/software_catalog/campaign-manage.png" alt="List of Campaigns in Internal Developer Portal" style="width:90%;" >}}
 
 ## Overview
 
