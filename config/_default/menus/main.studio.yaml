@@ -1,0 +1,57 @@
+menu:
+  studio:
+    - name: Getting Started
+      url: /studio/getting_started/
+      identifier: getting_started
+      weight: 1
+    - name: Test
+      url: /studio/test/
+      identifier: test
+      weight: 2
+
+    # pull in from existing docs instead
+    - name: Account Management
+      params:
+        ref_id: account_management
+    - name: Agent
+      params:
+        ref_id: agent
+    - name: Bits Ai
+      params:
+        ref_id: agent
+    - name: Dashboards
+      params:
+        ref_id: dashboards # This should match the identifier in main.en.yaml
+    - name: Error Tracking
+      params:
+        ref_id: error_tracking
+    - name: Integrations
+      params:
+        ref_id: integrations
+    - name: LLM Observability
+      params:
+        ref_id: llm_observability
+    - name: Logs
+      params:
+        ref_id: logs
+    - name: Monitors
+      params:
+        ref_id: monitors
+    - name: Metrics
+      params:
+        ref_id: metrics
+    - name: Notebooks
+      params:
+        ref_id: notebooks
+    - name: Product Analytics
+      params:
+        ref_id: product_analytics
+
+    # Mix of both
+#    - name: Notebooks
+#      url: notebooks/
+#      identifier: notebooks
+#    - name: Notebooks Analysis Features
+#      parent: notebooks
+#      params:
+#        ref_id: notebooks_advanced_analysis
