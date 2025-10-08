@@ -61,7 +61,7 @@ Events in per second
 : **Available for**: Sources, processors, and destinations.
 
 Events out per second
-: **Metric**: `pipelines.component_sent_event_bytes_total`
+: **Metric**: `pipelines.component_sent_events_total`
 : **Description**: The number of events the component sends to the destinations.
 : **Available for**: Sources, processors, and destinations.
 
