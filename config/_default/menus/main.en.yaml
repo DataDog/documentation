@@ -3824,6 +3824,61 @@ menu:
       parent: tracing_trace_collection
       identifier: auto_dd_libraries
       weight: 202
+    - name: Java
+      url: tracing/trace_collection/dd_libraries/java
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_java
+      weight: 2021
+    - name: Python
+      url: tracing/trace_collection/dd_libraries/python
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_python
+      weight: 2022
+    - name: Ruby
+      url: tracing/trace_collection/dd_libraries/ruby
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_ruby
+      weight: 2023
+    - name: Go
+      url: tracing/trace_collection/dd_libraries/go
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_go
+      weight: 2024
+    - name: Node.js
+      url: tracing/trace_collection/dd_libraries/nodejs
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_nodejs
+      weight: 2025
+    - name: PHP
+      url: tracing/trace_collection/dd_libraries/php
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_php
+      weight: 2026
+    - name: C++
+      url: tracing/trace_collection/dd_libraries/cpp
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_cpp
+      weight: 2027
+    - name: .NET Core
+      url: tracing/trace_collection/dd_libraries/dotnet-core
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_dotnet_core
+      weight: 2028
+    - name: .NET Framework
+      url: tracing/trace_collection/dd_libraries/dotnet-framework
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_dotnet_framework  
+      weight: 2029
+    - name: Android
+      url: tracing/trace_collection/dd_libraries/android
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_android
+      weight: 2030
+    - name: iOS
+      url: tracing/trace_collection/dd_libraries/ios
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_ios
+      weight: 2031
     - name: Code-based Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
