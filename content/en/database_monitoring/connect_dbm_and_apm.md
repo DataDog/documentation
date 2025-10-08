@@ -28,12 +28,14 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load. 
 - `disabled` mode disables propagation and does not send any information from applications.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |  MongoDB   |
-|:------------------------|:---------:|:-----------:|:----------:|:---------:|:----------:|
-| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} | {{< X >}}  |
-| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} | {{< X >}}  |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |    Oracle    |  MongoDB   |
+|:------------------------|:---------:|:-----------:|:----------:|:------------:|:----------:|
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} ** | {{< X >}}  |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}}    | {{< X >}}  |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
+
+\*\* Full propagation mode on Oracle is curerntly only supported when using Java.
 
 
 **Supported application tracers and drivers**
