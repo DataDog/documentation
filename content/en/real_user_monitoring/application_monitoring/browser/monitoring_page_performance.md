@@ -255,6 +255,7 @@ document.addEventListener("scroll", function handler() {
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/
 [7]: https://web.dev/lcp/
+[8]: https://web.dev/fid/
 [9]: https://web.dev/cls/
 [10]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [11]: https://www.w3.org/TR/paint-timing/#sec-terminology

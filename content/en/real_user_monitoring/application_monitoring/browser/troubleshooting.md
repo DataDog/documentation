@@ -47,6 +47,7 @@ You can also check your browser developer tools console or network tab if you no
 
 ### Data to the Datadog intake
 
+
 The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
 
 - Every 30 seconds

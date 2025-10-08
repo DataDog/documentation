@@ -13,8 +13,8 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
-{{< callout url="<https://forms.gle/RdVvDsmmzW21s2vd7>" header="Join the Preview!">}}
-  RUM Auto-Instrumentation through Java servlet-based web servers is in Preview.
+{{< callout url="https://forms.gle/RdVvDsmmzW21s2vd7" header="Join the Preview!">}}
+  RUM Auto-Instrumentation through Java servlet-based web servers is in Preview. 
 {{< /callout >}}
 
 ## Overview
@@ -28,7 +28,6 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
 ## Prerequisites
 
 ### Server requirements
-
 - Java web application server with Servlet API 3.0 or higher support:
   - Jetty 7+
   - Tomcat 7+
@@ -39,17 +38,15 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
   - WebSphere AS 8+ / Open Liberty 17+
 
 ### SDK requirements
-
 - Java SDK installed using either:
   - [Automatic instrumentation][1] (SSI)
   - [Manual Java SDK installation][2]
 
 ### Datadog configuration
-
 - RUM application [created in Datadog][3]
 - Configuration values ready:
   - `clientToken`
-  - `applicationId`
+  - `applicationId` 
   - `remoteConfigurationId`
 
 ## Configuration

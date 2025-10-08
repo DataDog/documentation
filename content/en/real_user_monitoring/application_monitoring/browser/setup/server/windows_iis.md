@@ -75,7 +75,6 @@ You can configure the log level in the IIS `applicationHost.config` file:
 ```
 
  The possible `logLevel` values are:
-
 - `debug`
 - `info` (default)
 - `error`
@@ -113,6 +112,7 @@ To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the *
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /real_user_monitoring/application_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
