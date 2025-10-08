@@ -215,7 +215,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /error_tracking/
-[2]: /real_user_monitoringapplication_monitoring/browser/data_collected/?tab=error#source-errors
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/?tab=error#source-errors
 [3]: /error_tracking/frontend/collecting_browser_errors/
 [4]: /error_tracking/frontend/collecting_browser_errors/?tab=npm#error-sources
 [5]: https://www.npmjs.com/package/@datadog/browser-rum

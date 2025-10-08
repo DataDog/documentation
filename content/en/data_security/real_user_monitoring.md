@@ -150,7 +150,7 @@ See [privacy options specific to Session Replay][19].
 [10]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
 [11]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
 [12]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[13]: /real_user_monitoring/application_monitoring/browser/advanced_configurationn/?tab=npm#user-session
+[13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [14]: /help/
 [15]: /account_management/rbac/permissions/#real-user-monitoring
 [16]: /real_user_monitoring/session_replay/privacy_options#override-an-html-element
