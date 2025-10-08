@@ -66,7 +66,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
    | ----------------- | ----------- |
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
-   | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
+   | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Subscriptions** *(optional)* | Enable users to receive email notifications about status page updates. When subscriptions are enabled, users can sign up to get notified about new notices and updates. You can turn subscriptions on or off for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in, email must be confirmed. |
    | **Company logo, Favicon, or Email Header Image** *(optional)* | Upload a logo, favicon, or image to personalize the appearance of your status page and email notifications. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
@@ -124,13 +124,28 @@ After a notice is published, the notice:
 
 You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
 
-{{< img src="/service_management/status_pages/live_status_page_incident_history.mp4" alt="Video showing the noticce history timeline on a live status page with published notices and updates" video=true >}}
-
 ## Email subscriptions
 
 Email subscriptions on status pages are **double opt-in**: users must confirm their email address before they are added as subscribers. After entering an email to subscribe, a confirmation email is sent, and the subscription is only activated after the user clicks the confirmation link.
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
+
+## Set a custom domain
+
+To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
+
+1. From your status page, click **Settings**.
+1. Select **Custom Domain**.
+1. Follow the instructions to enter your domain and add DNS records.
+1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.
+
+<div class="alert alert-warning">Custom domains require access to your DNS provider to add a CNAME or A record.</div>
+
+**Note**:
+
+- DNS propagation may take several minutes.
+- You can revert to the default Datadog domain at any time.
+- Ensure DNS changes are made by someone with access to your domain registrar.
 
 ## Further reading
 
