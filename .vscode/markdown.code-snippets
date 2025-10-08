@@ -81,7 +81,7 @@
         "scope": "markdown",
         "prefix": [";;alert", ";;admonition", ";;note"],
         "body": [
-            "<div class=\"alert alert-${1|info,tip,danger,warning|}\">${2:Text containing an <a href=\"https://google.com\">HTML link.}</a></div>"
+            "<div class=\"alert alert-${1|info,tip,danger,warning|}\">${2:Text containing an <a href=\"https://google.com\">HTML link.</a>}</div>"
         ],
         "description": "Alert box with choice of info, tip, danger, or warning"
     },
