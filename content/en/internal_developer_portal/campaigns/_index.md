@@ -24,3 +24,41 @@ You can create and manage Campaigns from the Campaigns tab on the Scorecards pag
 - Follow up with teams directly
 
 If your service is affected by a campaign, you will see related campaign rules and deadlines directly in the Software Catalog on your entity's Scorecards tab and on the entity's page in the Scorecards section. This visibility helps ensure your team can take action without relying on manual reminders or tracking external documentation. 
+
+## Creating a Campaign
+
+You can create and manage Campaigns from the Campaigns tab in Scorecards. 
+
+#### 1. Define Campaign Metadata
+
+When creating a campaign, you'll be asked to provide:
+- Name: A short, descriptive title (e.g., "Migrate to GitHub Actions")
+- Key: 
+- Description: A few sentences about the goal of the campaign
+- Owner: Team responsible for driving the campaign
+- Start and (optional) end date: The timeline for when work should be completed
+- Scope: Which entities the campaign applies to (e.g., `kind:service AND tier:1`)
+
+#### 2. Select Scorecard Rules
+
+Choose one or more existing Scorecard rules that are relevant to the campaign's goal. These rules must already be defined in Scorecards before they can be included in a campaign. 
+
+#### 3. Define Guidance
+
+For each rule, you can optionally provide: 
+- Linked documentation
+- Workflows through Workflow Automation to automatically remediate failing rules
+- Steps teams should follow to become compliant
+
+## Tracking Campaign Progress
+
+Once a campaign is created, the campaign page helps you stay on top of adoption and follow-through as work progresses. 
+
+From this page, you can: 
+
+- Monitor campaign progress at a glance, including how many entities and teams have completed their work
+- Filter and investigate specific entities, teams, or rules that are still outstanding
+- Identify bottlenecks early by comparing adoption across teams through a team leaderboard
+- Track momentum with historical progress over time
+- Take follow-up actions, like sending status updates or creating tickets for unblocked work
+
