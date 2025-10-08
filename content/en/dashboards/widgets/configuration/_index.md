@@ -32,14 +32,14 @@ Additional options are available for [timeseries widgets][1].
 
 ## Data preview
 
-You can join multiple data sources together in the graph editor to enrich your visualizations with additional context and metadata. Through Data Previews, you can see what data you're joining with or whether the query is working as expected. This inline data preview helps you:
+You can join multiple data sources together in the graph editor to enrich your visualizations with additional context and metadata. With Data Preview, you can see what data you're joining or whether the query is working as expected. This feature helps you:
 
 - Confirm data structure and column names
 - Identify matching keys
 - Validate results before running the full query
 
 {{% collapse-content title="Example" level="h4" expanded=false %}}
-You might join your payment logs with a Reference Table joins (lookup table) containing product details to display sale price or release date alongside transaction data. Or, you could enrich RUM session data by joining it with customer information from an external source, such as Salesforce or Snowflake, to segment users by customer tier.
+You could join your payment logs with a reference table (lookup table) containing product details to display sale price or release date alongside transaction data. Or, you could enrich RUM session data by joining it with customer information from an external source, such as Salesforce or Snowflake, to segment users by customer tier.
 
 Supported data sources for joins include (but are not limited to):
 
@@ -114,9 +114,9 @@ For more information, see [Datadog Clipboard][9].
 
 ## Groups of widgets
 
-Timeboard group widgets can be copied by hovering over the group widget area and using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd> or by selecting the share icon and choosing "Copy".
+Copy Timeboard group widgets by hovering over the group widget area and using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd> or by selecting the share icon and choosing "Copy".
 
-**Note**: When pasting graphs to screenboards or notebooks, individual widgets within the group are pasted.
+**Note**: When you paste graphs to a screenboard or notebook, Datadog pastes each widget in the group individually.
 
 To copy multiple screenboard widgets (edit mode only), <kbd>Shift</kbd> + click on the widgets and use <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>.
 
@@ -151,7 +151,7 @@ Click on the export icon of any dashboard graph to open an options menu:
 
 #### Share externally
 
-| Format | Instructions            |
+| Format | Description            |
 | -----  | ----------------------- |
 | Download as PNG    | Download the widget in PNG format. |
 | Download as SVG    | Download the widget in SVG format. |

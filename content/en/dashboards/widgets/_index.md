@@ -29,7 +29,7 @@ To begin using widgets in your dashboards:
 1. Navigate to the [Dashboards page][2] in Datadog.
 2. Click **New Dashboard** or select an existing dashboard to edit.
 3. Click **Add Widget**. Choose from a variety of widget types such as timeseries, bar chart, table, or event stream.
-4. Configure Your Widget:
+4. Configure your widget:
     - Select data source: Choose metrics, logs, traces, or other data sources.
     - Customize visualization: Adjust display settings, units, and timeframes to fit your needs.
     - Add context: Use custom links, conditional formatting, and grouping for enhanced insights.
