@@ -16,7 +16,7 @@ jobs:
         id: octo-sts
         with:
           scope: DataDog/documentation
-          policy: self.bump-versions.create-pr
+          policy: self.bump-private-action-runner-version.create-pr
 
       - id: set-versions
         name: Load latest SDK versions
