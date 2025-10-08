@@ -11,7 +11,8 @@ further_reading:
     - link: 'https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/'
       tag: 'Architecture Center'
       text: 'SD-WAN Reference Architecture'
-
+aliases:
+    - /network_monitoring/devices/sd-wan
 ---
 
 ## Overview
