@@ -13,7 +13,7 @@ further_reading:
 
 Use this guide to manually set up log forwarding from Azure to any Datadog site.
 
-**Note**: To collect logs from Azure Log Analytics workspaces, use the [automated ARM template][100] or [Azure Container App][2] process.
+**Note**: To collect logs from Azure Log Analytics workspaces, use the [automated ARM template][1] or [Azure Container App][2] process.
 
 <div class="alert alert-info">
 Starting April 30, 2025, Azure no longer supports Node.js 18. To ensure compatibility, update using the Azure Resource Manager (ARM) template with the same parameters.
