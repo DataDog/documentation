@@ -15,8 +15,8 @@ This article is all about SAML SSO and how to set it up in your account.
 
 ## Setting up SAML/SSO
 
-<div class="alert alert-info">If you want to set up SSO for your account, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.
-After the feature is enabled, only the account owner can complete the configuration.</div>
+<div class="alert alert-info">If you want to set up SSO for your account, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable the feature.
+After the feature is enabled, the account owner can complete the configuration.</div>
 
 1. Go to **User** > **Security & SSO**.
 2. Register Cloudcraft as a new application with your SAML identity provider. For detailed instructions, see the following articles:
