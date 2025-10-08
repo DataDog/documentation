@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Test Impact Analysis
+description: Skip irrelevant tests using code coverage analysis to reduce CI testing time while maintaining reliability and performance.
 aliases:
 - /getting_started/intelligent_test_runner
 further_reading:

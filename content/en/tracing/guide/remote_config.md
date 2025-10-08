@@ -1,5 +1,6 @@
 ---
 title: Setting up Remote Configuration for Tracing
+description: Learn how to set up and use Remote Configuration to dynamically manage tracing library settings without restarting applications.
 further_reading:
 - link: "remote_configuration"
   tag: "Documentation"

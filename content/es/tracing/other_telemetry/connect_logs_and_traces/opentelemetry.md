@@ -42,7 +42,7 @@ from opentelemetry import trace
 class CustomDatadogLogProcessor(object):
     def __call__(self, logger, method_name, event_dict):
         # Un ejemplo de agregar contexto de traza con formato de Datadog a logs
-        # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
+        # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129
         current_span = trace.get_current_span()
         if not current_span.is_recording():
             return event_dict
@@ -52,7 +52,7 @@ class CustomDatadogLogProcessor(object):
             event_dict["dd.trace_id"] = str(context.trace_id & 0xFFFFFFFFFFFFFFFF)
             event_dict["dd.span_id"] = str(context.span_id)
 
-        return event_dict        
+        return event_dict
 # ##########
 
 # ########## app.py
@@ -81,7 +81,7 @@ log.info("Example log line with trace correlation info")
 
 {{% tab "Node.js" %}}
 
-Para correlacionar manualmente tus trazas con tus logs, parchea el módulo de registro que estés utilizando con un procesador que traduzca `trace_id` y `span_id` con formato de OpenTelemetry al formato de Datadog. El siguiente ejemplo utiliza [la biblioteca de registro de winston][1]. Para otras bibliotecas de registro puede ser más apropiado [modificar los ejemplos del SDK de Datadog][2]. También puedes encontrar [un ejemplo de aplicación de Node.js instrumentada por OpenTelemetry con correlación de trazas y logs][3] en el repositorio `trace-examples` de GitHub.
+Para correlacionar manualmente tus trazas con tus logs, parchea el módulo de registro que estés utilizando con un procesador que traduzca `trace_id` y `span_id` con formato de OpenTelemetry al formato de Datadog. El siguiente ejemplo utiliza [la librería de registro de winston][1]. Para otras bibliotecas de registro puede ser más apropiado [modificar los ejemplos del SDK de Datadog][2]. También puedes encontrar [un ejemplo de aplicación de Node.js instrumentada por OpenTelemetry con correlación de trazas y logs][3] en el repositorio `trace-examples` de GitHub.
 
 ```js
 // ########## logger.js
@@ -116,8 +116,8 @@ module.exports = winston.createLogger({
 // ...
 // inicializar tu rastreador
 // ...
-// 
-const logger = require('./logger') 
+//
+const logger = require('./logger')
 //
 // usa el registrador en tu aplicación
 logger.info("Example log line with trace correlation info")
@@ -132,7 +132,7 @@ logger.info("Example log line with trace correlation info")
 
 {{% tab "Ruby" %}}
 
-Para correlacionar manualmente tus trazas con tus logs, parchea el módulo de registro que estés utilizando con un procesador que traduzca `trace_id` y `span_id` con formato de OpenTelemetry al formato de Datadog. El siguiente ejemplo utiliza [la biblioteca de registro estándar de Ruby][1]. Para aplicaciones de Rails u otras bibliotecas de registro, puede ser más apropiado [modificar los ejemplos del SDK de Datadog][2]. También puedes encontrar [un ejemplo de aplicación de Ruby instrumentada por OpenTelemetry con correlación de trazas y logs][3] en el repositorio `trace-examples` de GitHub.
+Para correlacionar manualmente tus trazas con tus logs, parchea el módulo de registro que estés utilizando con un procesador que traduzca `trace_id` y `span_id` con formato de OpenTelemetry al formato de Datadog. El siguiente ejemplo utiliza [la librería de registro estándar de Ruby][1]. Para aplicaciones de Rails u otras bibliotecas de registro, puede ser más apropiado [modificar los ejemplos del SDK de Datadog][2]. También puedes encontrar [un ejemplo de aplicación de Ruby instrumentada por OpenTelemetry con correlación de trazas y logs][3] en el repositorio `trace-examples` de GitHub.
 
 ```ruby
 logger = Logger.new(STDOUT)

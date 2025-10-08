@@ -150,7 +150,7 @@ También puedes definir o modificar variables de entorno con la ruta del script 
 
 #### Con un script de inicio global
 
-Un script de inicio global se ejecuta en cada clúster creado en tu área de trabajo. Las secuencias de scripts de inicio globales son útiles cuando se desea aplicar configuraciones o pantallas de seguridad de bibliotecas en toda la organización. 
+Un script de inicio global se ejecuta en cada clúster creado en tu área de trabajo. Las secuencias de scripts de inicio globales son útiles cuando se desea aplicar configuraciones o pantallas de seguridad de librerías en toda la organización.
 
 <div class="alert alert-info">Solo los administradores del área de trabajo pueden gestionar scripts de inicio globales.</div>
 <div class="alert alert-info">Los scripts de inicio globales solo se ejecutan en clústeres configurados con un único usuario o en el modo de acceso compartido sin aislamiento de legacy. Por lo tanto, Databricks recomienda configurar todos los scripts de inicio como ámbito de clúster y gestionarlos en toda el área de trabajo mediante políticas de clúster.</div>
@@ -173,7 +173,7 @@ Luego de estos pasos, cualquier clúster nuevo utiliza el script de manera autom
 {{% tab "Solo controlador" %}}
 ##### Instala el Datadog Agent en el controlador
 
-Instala el Datadog Agent en el nodo controlador del clúster. 
+Instala el Datadog Agent en el nodo controlador del clúster.
 
 <div class="alert alert-warning">Es necesario definir el valor de la variable `DD_API_KEY` en el script.</div>
 
@@ -349,7 +349,7 @@ chmod a+x /tmp/start_datadog.sh
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Con un script de inicio de ámbito de clúster 
+#### Con un script de inicio de ámbito de clúster
 
 Los scripts de inicio de ámbito de clúster son scripts de inicio definidos en la configuración del clúster. Los scripts de inicio de ámbito de clúster se aplican a los clústeres que creas y a los creados para ejecutar trabajos. Databricks admite la configuración y el almacenamiento de scripts de inicio a través de:
 - Archivos de área de trabajo
@@ -365,7 +365,7 @@ Utiliza la interfaz de usuario de Databricks para editar el clúster y ejecutar 
 5. En las **Variables de entorno**, especifica la variable de entorno `DD_API_KEY` y, opcionalmente, las variables de entorno `DD_ENV` y `DD_SITE`.
 6. Ve a la pestaña **Scripts de inicio**.
 7. En el menú desplegable **Destino**, selecciona el tipo de destino `Workspace`. Si utilizas **Unity Catalog Volume**, en el menú desplegable **Destino**, selecciona el tipo de destino `Volume`.
-8. Especifica una ruta al script de inicio. 
+8. Especifica una ruta al script de inicio.
 9. Haz clic en el botón **Añadir**.
 
 Si guardaste tu `datadog_init_script.sh` directamente en el área de trabajo `Shared`, puedes acceder al archivo en la siguiente ruta: `/Shared/datadog_init_script.sh`.
@@ -380,7 +380,7 @@ Puedes encontrar más información sobre los scripts de inicio del clúster en l
 {{% tab "Solo controlador" %}}
 ##### Instala el Datadog Agent en el controlador
 
-Instala el Datadog Agent en el nodo controlador del clúster. 
+Instala el Datadog Agent en el nodo controlador del clúster.
 
 ``script de shell
 #!/bin/bash
@@ -568,7 +568,7 @@ La integración de Databricks no incluye ningún evento.
 
 ## Resolución de problemas
 
-Puedes solucionar los problemas por tu cuenta al habilitar el [terminal web de Databricks][13] o mediante un [notebook de Databricks][14]. Para obtener información sobre los pasos útiles para solucionar problemas, consulta la documentación [Solucionar problemas del Agent][15]. 
+Puedes solucionar los problemas por tu cuenta al habilitar el [terminal web de Databricks][13] o mediante un [notebook de Databricks][14]. Para obtener información sobre los pasos útiles para solucionar problemas, consulta la documentación [Solucionar problemas del Agent][15].
 
 ¿Necesitas ayuda? Ponte en contacto con [el soporte de Datadog][16].
 

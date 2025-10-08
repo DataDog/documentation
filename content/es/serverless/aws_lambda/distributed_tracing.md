@@ -60,7 +60,7 @@ La Biblioteca de Lambda de Datadog y las bibliotecas de rastreo para Python y No
   - Integración directa de SNS y SQS
   - Kinesis
   - EventBridge
-- Rastreo de decenas de bibliotecas de [Python][3] y [Node.js][4] adicionales listas para usar.
+- Rastreo de decenas de librerías de [Python][3] y [Node.js][4] adicionales listas para usar.
 
 En el caso de las aplicaciones serverless de Python y Node.js, Datadog recomienda [instalar bibliotecas de rastreo de Datadog][5].
 
@@ -71,7 +71,7 @@ En el caso de las aplicaciones serverless de Python y Node.js, Datadog recomiend
 La Biblioteca de Lambda de Datadog y las bibliotecas de rastreo para Ruby admiten lo siguiente:
 - Correlación automática de logs y trazas de Lambda con ID de traza e inyección de etiquetas.
 - Rastreo de solicitudes HTTP que invocan contenedores o funciones de Lambda.
-- Rastreo de decenas de bibliotecas de [Ruby][8] adicionales listas para usar.
+- Rastreo de decenas de librerías de [Ruby][8] adicionales listas para usar.
 
 Puedes rastrear funciones serverless en Datadog con [bibliotecas de rastreo de Datadog][5].
 
@@ -82,7 +82,7 @@ Puedes rastrear funciones serverless en Datadog con [bibliotecas de rastreo de D
 La Biblioteca de Lambda de Datadog y las bibliotecas de rastreo para Go admiten lo siguiente:
 - Correlación manual de logs y trazas de Lambda con ID de traza e inyección de etiquetas.
 - Rastreo de solicitudes HTTP que invocan contenedores o funciones de Lambda.
-- Rastreo de decenas de bibliotecas de [Go][9] adicionales listas para usar.
+- Rastreo de decenas de librerías de [Go][9] adicionales listas para usar.
 
 En el caso de las aplicaciones serverless de Go, Datadog recomienda instalar [bibliotecas de rastreo de Datadog][5].
 
@@ -93,7 +93,7 @@ En el caso de las aplicaciones serverless de Go, Datadog recomienda instalar [bi
 La Biblioteca de Lambda de Datadog y las bibliotecas de rastreo para Java admiten lo siguiente:
 - Correlación de logs y trazas de Lambda con ID de traza e inyección de etiquetas. Consulta [Conexión de logs y trazas de Java][10] para obtener más detalles.
 - Rastreo de solicitudes HTTP que invocan contenedores o funciones de Lambda.
-- Rastreo de decenas de bibliotecas de [Java][11] adicionales listas para usar.
+- Rastreo de decenas de librerías de [Java][11] adicionales listas para usar.
 
 En el caso de las aplicaciones serverless de Java, Datadog recomienda [instalar bibliotecas de rastreo de Datadog][5].
 
@@ -101,9 +101,9 @@ En el caso de las aplicaciones serverless de Java, Datadog recomienda [instalar 
 
 #### .NET
 
-La biblioteca de rastreo para .NET admite lo siguiente:
+La librería de rastreo para .NET admite lo siguiente:
 - Rastreo de solicitudes HTTP que invocan contenedores o funciones de Lambda.
-- Rastreo de decenas de bibliotecas de [.NET][14] adicionales listas para usar.
+- Rastreo de decenas de librerías de [.NET][14] adicionales listas para usar.
 
 En el caso de las aplicaciones serverless de .NET, Datadog recomienda [instalar bibliotecas de rastreo de Datadog][5].
 
@@ -121,7 +121,7 @@ La [integración de AWS X-Ray][2] de Datadog solo ofrece trazas para las funcion
 
 <div class="alert alert-info">Durante el periodo beta, la creación de perfiles está disponible sin coste adicional.</div>
 
-[Continuous Profiler][27] de Datadog está disponible en beta para Python en la versión 4.62.0 y la versión de capa 62 y superiores. Esta característica opcional se habilita mediante la definición de la variable de entorno `DD_PROFILING_ENABLED` como `true`. 
+[Continuous Profiler][27] de Datadog está disponible en beta para Python en la versión 4.62.0 y la versión de capa 62 y superiores. Esta característica opcional se habilita mediante la definición de la variable de entorno `DD_PROFILING_ENABLED` como `true`.
 
 Continuous Profiler genera un subproceso que se activa periódicamente y toma una snapshot de la CPU y el montículo de todo el código de Python en ejecución. Esto puede incluir el propio generador de perfiles. Si quieres que el generador de perfiles se ignore a sí mismo, define `DD_PROFILING_IGNORE_PROFILER` como `true`.
 
@@ -129,13 +129,13 @@ Continuous Profiler genera un subproceso que se activa periódicamente y toma un
 
 ### Casos de uso
 
-Datadog recomienda usar solo la biblioteca de rastreo de Datadog APM (`dd-trace`), pero en algunas situaciones avanzadas los usuarios pueden combinar el rastreo de Datadog y AWS X-Ray mediante la fusión de trazas. La fusión de trazas está disponible para las funciones de AWS Lambda de Node.js y Python. Si no estás seguro de qué biblioteca de rastreo usar, lee sobre [cómo elegir una biblioteca de rastreo][17].
+Datadog recomienda usar solo la librería de rastreo de Datadog APM (`dd-trace`), pero en algunas situaciones avanzadas los usuarios pueden combinar el rastreo de Datadog y AWS X-Ray mediante la fusión de trazas. La fusión de trazas está disponible para las funciones de AWS Lambda de Node.js y Python. Si no estás seguro de qué biblioteca de rastreo usar, lee sobre [cómo elegir una biblioteca de rastreo][17].
 
 Hay dos razones principales para instrumentar las bibliotecas de rastreo de `dd-trace` y AWS X-Ray:
 - En un entorno serverless de AWS, ya rastreas tus funciones de Lambda con `dd-trace`, necesitas el rastreo activo de AWS X-Ray para los servicios administrados de AWS como AppSync y Step Functions, y quieres visualizar los tramos (spans) de `dd-trace` y AWS X-Ray en un sola traza.
 - En un entorno híbrido con hosts y funciones de Lambda, `dd-trace` instrumenta tus hosts, AWS X-Ray instrumenta tus funciones de Lambda, y quieres visualizar las trazas conectadas sobre las transacciones entre los hosts y las funciones de Lambda.
 
-**Nota:** Esto puede dar lugar a facturas de uso más elevadas. Los tramos de X-Ray siguen estando disponibles en tus trazas fusionadas después de 2 o 5 minutos. En muchos casos, Datadog recomienda utilizar una sola biblioteca de rastreo. Obtén más información sobre [cómo elegir una biblioteca de rastreo][17].
+**Nota:** Esto puede dar lugar a facturas de uso más elevadas. Los tramos de X-Ray siguen estando disponibles en tus trazas fusionadas después de 2 o 5 minutos. En muchos casos, Datadog recomienda utilizar una sola librería de rastreo. Obtén más información sobre [cómo elegir una biblioteca de rastreo][17].
 
 A continuación se ofrecen instrucciones de configuración para cada uno de los casos de uso mencionados:
 
@@ -144,7 +144,7 @@ A continuación se ofrecen instrucciones de configuración para cada uno de los 
 
 ### Fusión de trazas en un entorno serverless de AWS
 
-AWS X-Ray ofrece tanto un servicio backend de AWS (el rastreo activo de AWS X-Ray) como un conjunto de bibliotecas de clientes. La [Habilitación de solo el servicio backend de AWS en la consola de Lambda][18] te otorga los tramos `Initialization` e `Invocation` para tus funciones de AWS Lambda. También puedes habilitar el rastreo activo de AWS X-Ray desde las consolas de API Gateway y Step Functions.
+AWS X-Ray ofrece tanto un servicio backend de AWS (el rastreo activo de AWS X-Ray) como un conjunto de librerías de clientes. La [Habilitación de solo el servicio backend de AWS en la consola de Lambda][18] te otorga los tramos `Initialization` e `Invocation` para tus funciones de AWS Lambda. También puedes habilitar el rastreo activo de AWS X-Ray desde las consolas de API Gateway y Step Functions.
 
 Tanto el SDK de AWS X-Ray como las bibliotecas de clientes de Datadog APM (`dd-trace`) añaden metadatos y tramos para las llamadas descendentes mediante el acceso directo a la función. Suponiendo que utilizas `dd-trace` para rastrear en el nivel de controlador, tu configuración debe ser similar a la siguiente:
 

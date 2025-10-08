@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Cloud SIEM
+description: Learn to set up Datadog Cloud SIEM for real-time threat detection. Configure log ingestion, enable detection rules, and explore security signals for comprehensive monitoring.
 aliases:
     - /cloud-siem/getting_started/
     - /security_monitoring/getting_started/

@@ -1,5 +1,6 @@
 ---
 title: Dynamic Instrumentation
+description: Add instrumentation to your running production systems without restarts to collect logs, metrics, spans, and tags from any location in your code.
 aliases:
     - /dynamic_instrumentation/how-it-works/
     - /dynamic_instrumentation/
@@ -41,12 +42,12 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.45.0 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
 - For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
-- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
+- For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
@@ -80,8 +81,8 @@ For more detailed instructions, select your runtime below:
 ### Limitations
 
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
-- Full support is available only for applications built with Python, Java, .NET.
-- Limited previews are ongoing for applications built with Node.js, Ruby, and PHP.
+- Full support is available for applications built with Python, Java, .NET, and Node.js.
+- Limited previews are ongoing for applications built with Ruby and PHP.
 - The Java tracer library does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation

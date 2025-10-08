@@ -1,5 +1,6 @@
 ---
 title: Getting Started with API Tests
+description: Create Datadog API tests to proactively monitor your endpoints. Build single and multistep API tests with assertions, configure alerts, and troubleshoot issues.
 further_reading:
 - link: '/api/latest/synthetics/#create-an-api-test'
   tag: 'API'

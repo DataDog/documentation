@@ -20,7 +20,7 @@ title: Activación de .NET Profiler
 type: multi-code-lang
 ---
 
-El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][5] para tu aplicación, puedes omitir la instalación de biblioteca e ir directamente a habilitar el generador de perfiles.
+El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][5] para tu aplicación, puedes omitir la instalación de librería e ir directamente a habilitar el generador de perfiles.
 
 ## Requisitos
 
@@ -53,7 +53,7 @@ Tiempos de ejecución .NET compatibles (aplicaciones de 64 bits)
 Lenguajes compatibles
 : cualquier lenguaje dirigido al tiempo de ejecución de .NET, como C#, F# y Visual Basic.
 
-Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la biblioteca `dd-trace-dotnet`:
+Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la librería `dd-trace-dotnet`:
 
 | Función                   | Versión requerida de `dd-trace-dotnet`  | Versiones de tiempo de ejecución de .NET necesarias                                                           |
 |---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
@@ -69,7 +69,7 @@ Las siguientes funciones de generación de perfiles están disponibles en las si
 
 ## Instalación
 
-Asegúrate de que Datadog Agent v6+ está instalado y en funcionamiento. Datadog recomienda utilizar [Datadog Agent v7+][1]. El generador de perfiles se entrega junto con la biblioteca de rastreo (a partir de v2.8.0), por lo que si ya estás utilizando [APM para recopilar trazas][5] para tu aplicación, puedes omitir la instalación de la biblioteca e ir directamente a [Activación del generador de perfiles](#enabling-the-profiler).
+Asegúrate de que Datadog Agent v6+ está instalado y en funcionamiento. Datadog recomienda utilizar [Datadog Agent v7+][1]. El generador de perfiles se entrega junto con la librería de rastreo (a partir de v2.8.0), por lo que si ya estás utilizando [APM para recopilar trazas][5] para tu aplicación, puedes omitir la instalación de la librería e ir directamente a [Activación del generador de perfiles](#enabling-the-profiler).
 
 En caso contrario, instala el generador de perfiles siguiendo los pasos que se indican a continuación, en función de tu sistema operativo.
 
