@@ -19,12 +19,6 @@ title: Tests Swift
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-El sitio Datadog seleccionado ({{< region-param key="dd_site_name" >}}) no es compatible.
-</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Lenguajes compatibles:
@@ -56,11 +50,11 @@ Existen tres maneras de instalar el marco para tests:
 {{< img src="continuous_integration/swift_package.png" alt="Swift Package" >}}
 
 
-2. Vincula tus objetivos de tests con la biblioteca `DatadogSDKTesting` del paquete.
+2. Vincula tus objetivos de tests con la librería `DatadogSDKTesting` del paquete.
 
 {{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
 
-3. Si ejecutas tests de interfaz de usuario, vincula también la aplicación que ejecuta los tests con la biblioteca.
+3. Si ejecutas tests de interfaz de usuario, vincula también la aplicación que ejecuta los tests con la librería.
 
 ### Uso de un proyecto Swift Package
 
@@ -166,7 +160,7 @@ Configura todas estas variables en tu objetivo de test:
 **Por defecto**: `(empty)`
 
 `DD_SERVICE`
-: El nombre del servicio o la biblioteca a los que se realizan tests.<br/>
+: El nombre del servicio o la librería a los que se realizan tests.<br/>
 **Por defecto**: El nombre del repositorio.<br/>
 **Ejemplo**: `my-ios-app`
 
@@ -608,7 +602,7 @@ Un módulo de test representa la carga de una biblioteca o un paquete que incluy
 
 Para iniciar un módulo de test, llama a `DDTestModule.start()` y pasa el nombre del módulo o el paquete al que se va a realizar el test.
 
-Cuando todos tus tests hayan finalizado, llama a `module.end()`, que obliga a la biblioteca a enviar todos los resultados de los tests restantes al backend.
+Cuando todos tus tests hayan finalizado, llama a `module.end()`, que obliga a la librería a enviar todos los resultados de los tests restantes al backend.
 
 ### Conjuntos de tests
 

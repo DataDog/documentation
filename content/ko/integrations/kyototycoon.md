@@ -122,7 +122,7 @@ KyotoTycoon 점검은 [Datadog 에이전트][1] 패키지 에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kyototycoon" >}}
+{{< get-metrics-from-git "kyoto-tycoon" >}}
 
 
 ### 이벤트
@@ -130,7 +130,7 @@ KyotoTycoon 점검은 [Datadog 에이전트][1] 패키지 에 포함되어 있�
 KyotoTycoon 점검에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "kyototycoon" >}}
+{{< get-service-checks-from-git "kyoto-tycoon" >}}
 
 
 ## 트러블슈팅

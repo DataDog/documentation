@@ -22,8 +22,8 @@ author:
   sales_email: justin.morris@ferocia.com.au
   support_email: justin.morris@ferocia.com.au
 categories:
-- メトリクス
-custom_kind: integration
+- モニター
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: puma
 integration_id: puma
 integration_title: Puma
-integration_version: 1.2.1
+integration_version: 1.2.2
 is_public: true
 manifest_version: 2.0.0
 name: puma

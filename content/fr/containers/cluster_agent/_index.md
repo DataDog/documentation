@@ -45,7 +45,8 @@ Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, v
 |--------------------|----------------|-----------------------|---------------------------------------|
 | 1.16.0+            | 7.19.0+        | 1.9.0+                | Obsolescence des métriques Kubelet           |
 | 1.21.0+            | 7.36.0+        | 1.20.0+               | Obsolescence des ressources Kubernetes       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Prise en charge du token de compte de service dynamique |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | Prise en charge du jeton de compte de service dynamique |
+| 1.25.0+            | 7.40.0+        | 7.40.0+               | Prise en charge du groupe d'API `v1`               |
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Configuration</u> : configurez l'Agent de cluster Datadog sur votre cluster Kubernetes.{{< /nextlink >}}
@@ -56,6 +57,9 @@ Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, v
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Dépannage de l'Agent de cluster</u> : consultez des informations de dépannage sur l'Agent de cluster Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Surveillance de l'Agent de cluster
+L'Agent Datadog inclut une intégration qui surveille automatiquement l'Agent de cluster. Cette intégration s'exécute sur le pod de l'Agent Datadog standard situé sur le même nœud que l'Agent de cluster. Elle ne s'exécute pas dans l'Agent de cluster lui-même. Pour plus de détails, consultez la [documentation relative à l'intégration de l'Agent de cluster de Datadog][4].
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -63,3 +67,4 @@ Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, v
 [1]: /fr/containers/guide/cluster_agent_autoscaling_metrics
 [2]: https://hub.docker.com/r/datadog/cluster-agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
+[4]: https://docs.datadoghq.com/fr/integrations/datadog_cluster_agent/

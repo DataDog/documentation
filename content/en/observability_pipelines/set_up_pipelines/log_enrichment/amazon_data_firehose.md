@@ -38,7 +38,7 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
-<!-- {{% tab "Amazon Security Lake" %}}
+{{% tab "Amazon Security Lake" %}}
 
 ##### Prerequisites
 
@@ -48,7 +48,7 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
-{{% /tab %}} -->
+{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -68,7 +68,9 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-Follow the instructions for the cloud provider you are using to archive your logs.
+{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
+
+To set up the destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -112,6 +114,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/destination_settings/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
@@ -150,6 +157,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Add hostname" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Custom Processor" %}}
+
+{{% observability_pipelines/processors/custom_processor %}}
 
 {{% /tab %}}
 {{% tab "Dedupe" %}}
@@ -206,6 +218,20 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
+{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% observability_pipelines/processors/filter_syntax %}}
+
 {{% /tab %}}
 {{% tab "Sample" %}}
 
@@ -233,6 +259,16 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
+{{% tab "Tags Processor" %}}
+
+{{% observability_pipelines/processors/tags_processor %}}
+
+{{% /tab %}}
+{{% tab "Throttle" %}}
+
+{{% observability_pipelines/processors/throttle %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Add another set of processors and destinations
@@ -249,11 +285,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
-<!-- {{% tab "Amazon Security Lake" %}}
+{{% tab "Amazon Security Lake" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
-{{% /tab %}} -->
+{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
@@ -315,6 +351,11 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 {{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/destination_env_vars/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_env_vars/splunk_hec %}}
@@ -338,19 +379,9 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}

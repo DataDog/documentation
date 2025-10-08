@@ -26,7 +26,7 @@ author:
 categories:
 - notificaciones
 - tests
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -42,42 +42,42 @@ public_title: NeoLoad
 short_description: Monitorizar y analizar los resultados de tests de rendimiento de
   NeoLoad
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Notificaciones
+  - Category::Notifications
   - Categoría::Tests
-  - Oferta::Integración
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  configuration: README.md#Setup
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Configuración
   description: Monitorizar y analizar los resultados de tests de rendimiento de NeoLoad
   media:
-  - caption: Dashboard de tests rendimiento de NeoLoad
+  - caption: Dashboard de tests de rendimiento de NeoLoad
     image_url: images/neoload-dashboard.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: NeoLoad
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
 
 [Tricentis NeoLoad][1] simplifica y escala los tests de rendimiento de las API y los microservicios, así como los tests de aplicaciones de extremo a extremo mediante funciones basadas en protocolos y navegadores.
 
-Con la integración NeoLoad puedes realizar un seguimiento de las métricas de rendimiento de los tests de NeoLoad métricas para:
+Con la integración NeoLoad puedes realizar un seguimiento de las métricas de los tests de rendimiento de NeoLoad para:
 
-- Correlacionar el rendimiento de la aplicación con las métricas de tests de carga en NeoLoad.
+- Correlacionar el rendimiento de la aplicación con las métricas de los tests de carga en NeoLoad.
 - Analizar y visualizar métricas de NeoLoad en Datadog, como el rendimiento, los errores y el rendimiento, utilizando el dashboard predefinido o el [Explorador de métricas][2].
 
-## Instalación
+## Configuración
 
 ### Configuración
 
@@ -98,12 +98,12 @@ Todos los eventos de tests de rendimiento de NeoLoad se envían a tu [Explorador
 NeoLoad envía eventos a la API Datadog cuando comienza y termina un test de rendimiento.
 Define la opción en la configuración de **Push Counters** del conector de Datadog en NeoLoad. Disponible a partir de NeoLoad v9.1.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][6] o con el [servicio de asistencia de Tricentis NeoLoad][7].
 
 [1]: https://www.tricentis.com/products/performance-testing-neoload
-[2]: /es/metrics/explorer
+[2]: https://docs.datadoghq.com/es/metrics/explorer
 [3]: https://documentation.tricentis.com/neoload/latest/en/content/reference_guide/datadog.htm
 [4]: https://github.com/DataDog/integrations-extras/blob/master/neoload/metadata.csv
 [5]: https://docs.datadoghq.com/es/events/

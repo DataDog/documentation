@@ -71,7 +71,7 @@ tile:
 
 ## Présentation
 
-Ce check permet de surveiller [Snowflake][1] via l'Agent Datadog. Snowflake est un entrepôt de données analytique fourni en tant que SaaS et s'exécute entièrement sur une infrastructure cloud. 
+Ce check permet de surveiller [Snowflake][1] via l'Agent Datadog. Snowflake est un entrepôt de données analytique fourni en tant que SaaS et s'exécute entièrement sur une infrastructure cloud.
 Cette intégration permet de surveiller l'utilisation des crédits, la facturation, le stockage, l'historique des requêtes et bien plus encore.
 
 <div class="alert alert-info"><bold>Remarque</bold> :  les métriques sont recueillies par le biais de requêtes envoyées à Snowflake. Les requêtes transmises par l'intégration Datadog sont susceptibles d'être facturées par Snowflake.</div>
@@ -174,7 +174,7 @@ Le check Snowflake est inclus avec le package de l'[Agent Datadog][2].
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
+    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour.
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
@@ -345,7 +345,7 @@ Si vous souhaitez recueillir des métriques d'autres groupes, consultez l'<a hre
 </div>
 
 ### Métriques
-{{< get-metrics-from-git "snowflake" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### Événements
@@ -353,7 +353,7 @@ Si vous souhaitez recueillir des métriques d'autres groupes, consultez l'<a hre
 Snowflake n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "snowflake" >}}
+{{< get-service-checks-from-git "snowflake-web" >}}
 
 
 ## Dépannage

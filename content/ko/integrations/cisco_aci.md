@@ -18,8 +18,11 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 210
     source_type_name: Cisco ACI
+  logs:
+    source: cisco-aci
   monitors:
     CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
+    Cisco ACI critical severity fault: assets/monitors/critical_fault.json
     Health score of device is critical: assets/monitors/critical_health_score.json
     Interface for a Cisco ACI device is down: assets/monitors/interface_down.json
 author:
@@ -28,6 +31,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- log collection
 - network
 custom_kind: 통합
 dependencies:
@@ -37,7 +41,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.3.0
+integration_version: 4.5.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci
@@ -53,6 +57,7 @@ tile:
   - Supported OS:Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Category::Log Collection
   - Category::네트워크
   - Offering::Integration
   configuration: README.md#Setup
@@ -84,7 +89,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 ### 설정
 
 {{< tabs >}}
-{{% tab "호스트" %}}
+{{% tab "Host" %}}
 
 #### 호스트
 
@@ -124,6 +129,16 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
         ## Set to `true` to enable Network Device Monitoring metadata (for devices and interfaces) to be sent.
         #
         # send_ndm_metadata: false
+
+        ## @param send_faultinst_faults - boolean - optional - default: false
+        ## Set to `true` to enable collection of Cisco ACI faultInst faults as logs.
+        #
+        # send_faultinst_faults: false
+
+        ## @param send_faultdelegate_faults - boolean - optional - default: false
+        ## Set to `true` to enable collection of Cisco ACI faultDelegate faults as logs.
+        #
+        # send_faultdelegate_faults: false
    ```
 
    *참고*: 통합에 대한 모든 테넌트를 지정하여 애플리케이션, EPG 등에서 메트릭을 수집합니다.
@@ -134,7 +149,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 [2]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/datadog_checks/cisco_aci/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화된 환경" %}}
+{{% tab "Containerized" %}}
 
 #### 컨테이너화된 환경
 
@@ -161,7 +176,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cisco_aci" >}}
+{{< get-metrics-from-git "cisco-aci" >}}
 
 
 ### 이벤트
@@ -169,7 +184,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 Cisco ACI 점검은 이벤트로 테넌트 오류를 전송합니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cisco_aci" >}}
+{{< get-service-checks-from-git "cisco-aci" >}}
 
 
 ## 트러블슈팅

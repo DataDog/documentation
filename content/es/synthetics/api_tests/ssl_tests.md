@@ -47,7 +47,7 @@ Cuando decidas crear un test `SSL`, define la solicitud de tu test.
    * **Nombre de servidor**: Especifica en qué servidor quieres iniciar el enlace TLS. Esto permite que el servidor presente uno de los múltiples certificados posibles en la misma dirección IP y el mismo número de puerto TCP. Por defecto, el valor del **Host** se utiliza para rellenar el parámetro.
    * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`.
 
-   Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
+   Puedes utilizar la librería `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
    ```
    openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
@@ -92,7 +92,7 @@ Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el l
 
 Selecciona las **Localizaciones** desde donde ejecutar tu test SSL. Los tests SSL pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres monitorizar los certificados desde fuera o desde dentro de tu red.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Indicar la frecuencia del test
 
@@ -124,7 +124,7 @@ Entre las razones figuran las siguientes:
 `DNS`:
 No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
 
 `SSL`

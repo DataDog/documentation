@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/connect_logs_and_traces/go
+- /ko/tracing/connect_logs_and_traces/go
 code_lang: go
 code_lang_weight: 30
 description: Go 로그와 트레이스를 연결해 Datadog에서 상호 연결할 수 있습니다.

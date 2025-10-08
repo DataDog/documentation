@@ -1,0 +1,39 @@
+{{- if (or (eq hugo.Environment "live") (in (slice "typesense_sync_preview:manual") (os.Getenv "CI_JOB_NAME" | default "" ))) -}}
+    {{ $.Scratch.Add "partners_collection" slice }}
+
+    {{- range where .Site.AllPages "Type" "=" "partners" -}}
+        {{ $page := . }}
+        {{ $rel_path := "" }}
+
+        {{ with $page.File }}
+            {{ $rel_path = (print $page.Language.Lang "/" .Path) }}
+        {{ end }}
+
+        {{ $object_id := md5 $rel_path }}
+        {{ $title := $page.Title }}
+        {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
+        {{ $category := $page.Params.algolia.category | default "Partners" }}
+        {{ $subcategory := $page.Params.algolia.subcategory }}
+
+        {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
+        {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
+        {{- /* update each search result in Partners with this info  */ -}}
+        {{- $record := (
+            dict "id" $object_id
+            "title" $title
+            "content" $content
+            "type" $page.Type
+            "relpermalink" $page.RelPermalink
+            "distinct_base_url" $page.RelPermalink
+            "full_url" $page.Permalink
+            "language" $page.Language.Lang
+            "category" $category
+            "subcategory" $subcategory
+        ) -}}
+
+        {{- $.Scratch.Add "partners_collection" $record -}}
+    {{- end -}}
+
+    {{- /* Outputs final JSON object, copied to public/ folder. */ -}}
+    {{- $.Scratch.Get "partners_collection" | jsonify -}}
+{{- end -}}

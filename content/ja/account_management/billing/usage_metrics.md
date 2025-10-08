@@ -58,7 +58,6 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | データベースホスト                | `datadog.estimated_usage.dbm.hosts`, `datadog.estimated_usage.dbm.hosts.by_tag` | 過去 1 時間に確認された一意の DBM ホスト。 |
 | ASM ホスト                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | 過去 1 時間に確認された一意の ASM ホスト。 |
 | ASM タスク                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | 過去 5 分間に確認された一意の ASM Fargate タスク。 |
-| インシデント管理 (アクティブユーザー)   | `datadog.estimated_usage.incident_management.active_users` | (暦) 月累計の確認されたアクティブ IM ユーザー。 |
 | CI Visibility パイプラインのコミッター | `datadog.estimated_usage.ci_visibility.pipeline.committers` | (暦) 月累計の確認されたパイプラインコミッター。 |
 | CI Visibility テストのコミッター | `datadog.estimated_usage.ci_visibility.test.committers` | (暦) 月累計の確認されたテストコミッター。 |
 | IOT デバイス                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | 過去 1 時間に確認された一意の IoT デバイス。 |

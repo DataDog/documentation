@@ -1,29 +1,58 @@
 ---
-aliases:
-- /es/integrations/azure_datalakeanalytics
+app_id: azure-datalakeanalytics
+app_uuid: cf9c8822-5df9-451a-a84b-3acee9f6dc28
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.datalakeanalytics_accounts.job_ended_success
+      metadata_path: metadata.csv
+      prefix: azure.datalakeanalytics_accounts
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 288
+    source_type_name: Análisis de Azure Data Lake
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - nube
 - almacenes de datos
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas clave de Azure Data Lake Analytics.
-doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_data_lake_analytics
-has_logo: true
 integration_id: azure-datalakeanalytics
-integration_title: Microsoft Azure Data Lake Analytics
+integration_title: Análisis de Azure Data Lake
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_data_lake_analytics
-public_title: Integración de Datadog y Microsoft Azure Data Lake Analytics
+public_title: Análisis de Azure Data Lake
 short_description: Rastrea las métricas clave de Azure Data Lake Analytics.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas clave de Azure Data Lake Analytics.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Análisis de Azure Data Lake
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Data Lake Analytics es un servicio de trabajo de análisis bajo demanda que simplifica el big data.
@@ -39,18 +68,18 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_data_lake_analytics" >}}
+{{ get-metrics-from-git "azure-datalakeanalytics" }}
 
 
 ### Eventos
 
 La integración Azure Data Lake Analytics no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Data Lake Analytics no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

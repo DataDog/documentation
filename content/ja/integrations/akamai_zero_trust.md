@@ -87,7 +87,7 @@ Akamai Zero Trust は、Secure Internet Access (SIA) および Enterprise Applic
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "akamai_zero_trust" >}}
+{{< get-metrics-from-git "akamai-zero-trust" >}}
 
 
 ### Logs

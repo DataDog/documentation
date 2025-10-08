@@ -1,7 +1,12 @@
 ---
 title: Rollup
+description: Control time aggregation and data point intervals using custom rollup functions and moving rollups for metrics.
 aliases:
     - /graphing/functions/rollup/
+further_reading:
+- link: "/dashboards/guide/rollup-cardinality-visualizations"
+  tag: "Documentation"
+  text: "Understanding rollup function and cardinality in visualizations"
 ---
 
 Every metric query is inherently aggregated. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
@@ -77,20 +82,9 @@ Rollups should usually be avoided in [monitor][5] queries, because of the possib
 
 If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
 
-## Other functions
+## Further reading
 
-{{< whatsnext desc="Consult the other available functions:" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/functions/#add-a-function
 [2]: /metrics/faq/rollup-for-distributions-with-percentiles/

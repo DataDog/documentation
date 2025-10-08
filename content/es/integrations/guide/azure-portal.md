@@ -132,7 +132,7 @@ Existen tres tipos de logs que pueden emitirse desde Azure a Datadog utilizando 
 
 1. [Logs de actividades](#activity-logs)
 2. [Logs de recursos](#resource-logs)
-3. [Logs de Azure Active Directory](#azure-active-directory-logs)
+3. [Microsoft Entra ID](#microsoft-entra-id-logs)
 
 ##### Logs de actividades
 
@@ -158,17 +158,17 @@ Por ejemplo, la captura de pantalla a continuación muestra una regla de etiquet
 
 {{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="Una captura de pantalla que muestra una regla de etiqueta de métrica de Datadog=true establecida para máquinas virtuales, conjuntos de escala de máquinas virtuales y planes de App Service. La sección de logs también está configurada con la regla de etiqueta de Datadog=true" responsive="true" style="width:100%;">}}
 
-##### Logs de Azure Active Directory
+##### Logs de Microsoft Entra ID
 
-Los logs de Azure Active Directory (Azure AD) contienen el historial de la actividad de inicio de sesión y una traza de auditoría de los cambios realizados en Azure AD para un inquilino en particular. Para enviar logs de Azure AD:
+Los logs de Microsoft Entra ID contienen el historial de la actividad de inicio de sesión y un seguimiento de auditoría de los cambios realizados en Microsoft Entra ID para un arrendatario concreto. Para enviar logs de Microsoft Entra ID:
 
-1. Dirígete a Azure Active Directory en Azure y selecciona **Diagnostic Settings** en la barra de navegación izquierda.
+1. Navega a Microsoft Entra ID y selecciona **Diagnostic Settings** (Configuración de diagnóstico) en **Monitoring** (Monitorización) en la barra de navegación izquierda.
 2. Haz clic en **Add diagnostic setting** (Añadir parámetro de diagnóstico).
 3. Selecciona las categorías de logs que deseas enviar a Datadog. Datadog recomienda enviar todas las categorías.
 4. En **Destination details**, selecciona **Send to a partner solution**.
 5. Selecciona una suscripción. Escoge un recurso de Datadog del menú desplegable **Destination**.
 
-Todos los logs de Azure AD del inquilino se envían a la organización de Datadog vinculada al recurso de Datadog seleccionado. En los casos en los que tienes más de un recurso de Datadog que vincula suscripciones a la misma organización de Datadog, no importa qué recurso de Datadog esté seleccionado. Solo necesitas configurar esto una vez para cada inquilino de Azure.
+Todos los logs de Microsoft Entra ID del inquilino se envían a la organización de Datadog vinculada al recurso de Datadog seleccionado. En los casos en los que tienes más de un recurso de Datadog que vincula suscripciones a la misma organización de Datadog, no importa qué recurso de Datadog esté seleccionado. Solo necesitas configurar esto una vez para cada inquilino de Azure.
 
 ### Recursos monitorizados
 
@@ -285,9 +285,9 @@ Para desinstalar la extensión de Datadog, selecciona la aplicación correspondi
 
 Selecciona **Single sign-on** en la barra lateral izquierda para volver a configurar el inicio de sesión único.
 
-Para activar el inicio de sesión único a través de Azure Active Directory, selecciona **Enable single sign-on**. El portal recupera la aplicación de Datadog correspondiente de Azure Active Directory. El nombre de la aplicación es el nombre de la aplicación empresarial que elegiste al configurar la integración. Selecciona el nombre de la aplicación de Datadog como se muestra a continuación.
+Para activar el inicio de sesión único a través de Microsoft Entra ID, selecciona **Enable single sign-on** (Activar inicio de sesión único). El portal recupera la aplicación de Datadog correspondiente de Microsoft Entra ID. El nombre de la aplicación es el nombre de la aplicación empresarial que elegiste al configurar la integración. Selecciona el nombre de la aplicación de Datadog como se muestra a continuación.
 
-{{< img src="integrations/guide/azure_portal/sso.png" alt="El portal de Azure con la opción Enable Single sign-on through Azure active directory habilitada" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/sso.png" alt="El portal de Azure con Habilitar inicio de sesión único a través de Microsoft Entra ID activado" responsive="true" style="width:100%;">}}
 
 ### Claves de API
 
@@ -299,11 +299,11 @@ El portal de Azure ofrece una vista de solo lectura de las claves de API. Para g
 
 La integración de Azure de Datadog te permite instalar el Datadog Agent en una máquina virtual o un servicio de aplicaciones. Si no se selecciona ninguna clave predeterminada, se produce un error en la instalación del Datadog Agent.
 
-### Cloud Security Management Misconfigurations
+### Errores de configuración de Cloud Security
 
-Selecciona `Cloud Security Posture Management` en la barra lateral izquierda para configurar [Cloud Security Management Misconfigurations (CSM Misconfigurations)][8].
+Selecciona `Cloud Security Posture Management` en la barra lateral izquierda para configurar [Errores de configuración de Cloud Security][8].
 
-Por defecto, CSM Misconfigurations no está habilitado. Para habilitar CSM Misconfigurations, selecciona `Enable Datadog Cloud Security Posture Management` y haz clic en **Save**. Esto habilita Datadog CSM Misconfigurations para cualquier suscripción asociada con el recurso de Datadog.
+Por defecto, los errores de configuración de Cloud Security no están activado. Para activar los errores de configuración de Cloud Security, selecciona `Enable Datadog Cloud Security Posture Management` y haz clic en **Save** (Guardar). Esto habilita los errores de configuración de Datadog Cloud Security para cualquier suscripción asociada con el recurso de Datadog.
 
 Para deshabilitarlo, desmarca la casilla y haz clic en **Save**.
 

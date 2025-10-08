@@ -1,7 +1,7 @@
 ---
 title: Automate the Remediation of Detected Threats with Webhooks
 further_reading:
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
 aliases:
@@ -14,6 +14,8 @@ aliases:
 [Cloud SIEM][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog's [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks initiate any workflow you have defined.
 
 Choose a security scenario below to begin automating remediation.
+
+{{% sec-hipaa-limits %}}
 
 ## Delete misconfigured security groups
 
@@ -92,6 +94,6 @@ Datadog generates the Security Signal, which details the offense as well as the 
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security/cloud_siem/detection_rules/?tab=threshold#new-value
+[5]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#new-value
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /security/cloud_siem/detection_rules/?tab=threshold#define-a-search-query
+[7]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#define-a-search-query

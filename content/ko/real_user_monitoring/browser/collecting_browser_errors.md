@@ -36,6 +36,7 @@ title: Collecting Browser Errors
 | `error.type`    | 문자열 | 오류 유형(또는 경우에 따라 오류 코드).                     |
 | `error.message` | 문자열 | 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지. |
 | `error.stack`   | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보.     |
+| `error.causes` | [어레이][12] | 추가 컨텍스트를 제공하는 선택 사항 목록입니다. 이 속성은 별도로 오류를 표시하기 위해 사용되고 서식을 향상합니다. 자세한 정보는 [MDN 설명서][13]를 참고하세요. |
 
 ### 소스 오류
 
@@ -56,7 +57,7 @@ addError(
 );
 {{< /code-block >}}
 
-**참고**: [오류 추적][4]은 `custom`, `source`, `report`, `network` 또는 `console`로 설정된 소스를 전송하는 오류 및 스택 트레이스가 포함된 오류를 처리합니다.
+**참고**: [오류 추적][4]은 `custom`, `source` 또는 `report`, 또는 `console`로 설정된 소스를 전송하는 오류 및 스택 트레이스가 포함된 오류를 처리합니다. 오류 추적은 다른 소스(예: `network`) 또는 브라우저 확장 프로그램으로 전송된 오류는 처리하지 않습니다.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -255,3 +256,5 @@ class ErrorBoundary extends React.Component {
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [11]: /ko/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

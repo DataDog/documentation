@@ -44,7 +44,7 @@ draft: false
 git_integration_title: teamcity
 integration_id: teamcity
 integration_title: TeamCity
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: teamcity
@@ -137,23 +137,14 @@ TeamCity チェックは、データ収集の 2 つのメソッドを提供し�
    init_config: 
 
    instances:
-     - server: http://teamcity.<ACCOUNT_NAME>.com
+    - use_openmetrics: true
 
-       ## @param projects - mapping - optional
-       ## Mapping of TeamCity projects and build configurations to
-       ## collect events and metrics from the TeamCity REST API.
-       #
-       projects:
-         <PROJECT_A>:
-           include:    
-           - <BUILD_CONFIG_A>
-           - <BUILD_CONFIG_B>
-           exclude:
-           - <BUILD_CONFIG_C>
-         <PROJECT_B>:
-           include:
-           - <BUILD_CONFIG_D>
-         <PROJECT_C>: {}
+      ## @param server - string - required
+      ## Specify the server name of your TeamCity instance.
+      ## Enable Guest Authentication on your instance or specify `username` and `password` to
+      ## enable basic HTTP authentication.
+      #
+      server: http://teamcity.<ACCOUNT_NAME>.com
    ```
 
   [OpenMetrics 準拠][3]のヒストグラムとサマリーのメトリクスを収集するには (TeamCity Server 2022.10+ から利用可能)、内部プロパティである `teamcity.metrics.followOpenMetricsSpec=true` を追加してください。[TeamCity 内部プロパティ][4]を参照してください。

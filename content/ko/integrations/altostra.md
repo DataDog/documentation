@@ -24,9 +24,10 @@ author:
   support_email: support@altostra.com
 categories:
 - 자동화
-- cloud
+- 클라우드
 - 설정 및 배포
 - 로그 수집
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: altostra
 integration_title: Altostra
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: altostra
 public_title: Altostra
@@ -44,17 +44,18 @@ short_description: Altostra에서 Datadog로 애플리케이션 로그 자동으
 supported_os:
 - linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Automation
+  - 카테고리::자동화
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Altostra에서 Datadog로 애플리케이션 로그 자동으로 보내기
   media: []
@@ -103,4 +104,4 @@ Datadog 통합은 계정 설정 페이지에 있는 Altostra Web Console의 [통
 
 [1]: https://app.altostra.com/team/settings/integrations/logging
 [2]: https://app.altostra.com/environments
-[3]: /ko/help
+[3]: https://app.datadoghq.com/help

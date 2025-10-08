@@ -1,5 +1,6 @@
 ---
 title: Troubleshoot an Agent Check
+description: "Learn how to test and troubleshoot Datadog Agent checks using commands and systemd tools to diagnose integration issues."
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"

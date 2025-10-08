@@ -13,9 +13,9 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: '/developers/guide/data-collection-resolution-retention/'
+    - link: '/developers/guide/data-collection-resolution/'
       tag: 'Documentation'
-      text: 'Data collection, resolution, and retention'
+      text: 'Data collection and resolution'
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
       tag: 'Blog'
       text: 'Focus on code that matters with source code previews in Continuous Profiler'
@@ -37,6 +37,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
       tag: 'Blog'
       text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
+    - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
+      tag: 'Blog'
+      text: 'Making profiling visualizations accessible to engineers at all levels'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiling-fourth-pillar/'
+      tag: 'Blog'
+      text: 'Why continuous profiling is the fourth pillar of observability'
 cascade:
     algolia:
         rank: 70

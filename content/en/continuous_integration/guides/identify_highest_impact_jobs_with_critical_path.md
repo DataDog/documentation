@@ -28,15 +28,6 @@ The exclusive time of a job on the critical path represents the amount of time t
 
 If a CI job `job1` is on the critical path with a duration of 100ms and runs in parallel with a CI job `job2`, which has a duration of 80ms, the exclusive time of `job1` on the critical path is 20ms. This means that reducing the duration of the `job1` by more than 20ms would still only decrease the overall pipeline duration by 20ms.
 
-### Supported CI providers
-
-Filtering and computing the Exclusive Time of CI jobs on the critical path is available for the following CI providers:
-* [GitLab][3]
-
-<div class="alert alert-info">If you are interested in critical path but your CI provider is not supported yet, fill out <a href="https://forms.gle/zDgiDSGQxA1HgjXh6" target="_blank">this form</a>.</div>
-
-Even without Filtering and computing Exclusive Time, you can still [highlight which CI jobs are on the critical path][4] using the Pipeline Execution detail view across all CI providers.
-
 ## Identify the key CI jobs to improve your CI pipeline
 
 ### Using the facet
@@ -50,7 +41,7 @@ Notice that these facets are only available using the `ci_level:job` in your que
 ### Using the dashboard template
 
 You can also import the [CI Visibility - Critical Path][1] dashboard template:
-- Open the [civisibility-critical-path-gitlab-dashboard.json][1] dashboard template and copy the content in the clipboard.
+- Open the [civisibility-critical-path-dashboard.json][1] dashboard template and copy the content in the clipboard.
 - Create a [New Dashboard][2] in Datadog.
 - Paste the copied content in the new dashboard.
 - Save the dashboard.
@@ -77,7 +68,7 @@ Since we know this CI job is on the critical path 43.5% of the time, we could po
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /resources/json/civisibility-critical-path-gitlab-dashboard.json
+[1]: /resources/json/civisibility-critical-path-dashboard.json
 [2]: /dashboards/
 [3]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom
 [4]: /continuous_integration/search/#highlight-critical-path

@@ -3,6 +3,7 @@ categories:
 - azure
 - cloud
 - network
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés de vos pare-feux Azure.
 doc_link: https://docs.datadoghq.com/integrations/azure_firewall/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Pare-feu Microsoft Azure
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_firewall
 public_title: Intégration Datadog/Pare-feu Microsoft Azure
@@ -22,33 +22,33 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Pare-feu Azure est un service de sécurité réseau basé sur le cloud pour protéger les ressources de votre réseau virtuel Azure.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de vos pare-feux.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "azure_firewall" >}}
 
 
-### Aide
+### Événements
 
 L'intégration Pare-feu Azure n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Pare-feu Azure n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

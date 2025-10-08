@@ -15,10 +15,6 @@ further_reading:
 title: Datadog における CD Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CD Visibility は利用できません。</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="プレビューに参加しませんか？" >}}
 CD Visibility は現在プレビュー版です。この機能にご興味がある場合は、フォームにご記入いただき、アクセスをリクエストしてください。
 {{< /callout >}}

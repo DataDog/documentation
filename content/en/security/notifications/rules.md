@@ -7,6 +7,7 @@ aliases:
   - /security_platform/notifications/rules/
   - /security/notification_profiles/
   - /security/notification_rules/
+  - /security/upcoming_changes_notification_rules/
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
@@ -15,10 +16,10 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: Cloud Security Management
+- name: Cloud Security
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -29,7 +30,7 @@ products:
 
 Notification rules are predefined sets of conditions that automate the process of informing your team about security issues. By using notification rules, you no longer need to manually set up notifications for each individual detection rule. Notification rules can be configured to cover a wide range of scenarios by specifying parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-{{< img src="security/notification-rules-overview.png" alt="Notification Rules overview page" style="width:100%;" >}}
+{{< img src="security/notification-rules-overview-1.png" alt="Notification Rules overview page" style="width:100%;" >}}
 
 ## Create notification rules
 
@@ -40,15 +41,19 @@ To create a notification rule, specify the conditions under which the rule shoul
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 1. Enter a **Name** for the notification rule.
 1. Select the source type for the notification rule:
-    - **Vulnerability**: A potential security flaw in your infrastructure.
+    - **Finding**: A potential security flaw in your infrastructure.
     - **Signal**: Suspicious activity that poses an active threat against your infrastructure.
 1. Select one or more severity levels.
 1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+1. If you selected **Finding** in step 3, select the frequency of the notifications:
+   - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.
+   - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
 1. Click **Add Recipient**.
 1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
+1. To send test notifications for this rule, click **Test Notifications**.
+  1. In the modal, select the security products you want to test.
+  1. Click **Run Test**.
 1. Click **Save**.
-
-{{< img src="security/notification-rules-setup.png" alt="Setup page for creating a notification rule" style="width:100%;" >}}
 
 ## Manage notification rules
 

@@ -10,42 +10,42 @@ description: Instrumenta manualmente tu aplicación C++ para enviar trazas (trac
 further_reading:
 - link: tracing/connect_logs_and_traces
   tag: Documentación
-  text: Conecta tu logs y trazas juntos
+  text: Conectar tus logs y trazas
 - link: tracing/visualization/
   tag: Documentación
-  text: Explora tus servicios, recursos y trazas
-title: Instrumentación personalizada de C++ utilizando la API de Datadog
+  text: Explorar tus servicios, recursos y trazas
+title: Instrumentación personalizada de C++ con la API Datadog
 ---
 
 <div class="alert alert-info">
 Si aún no has leído las instrucciones de configuración, empieza por las <a href="https://docs.datadoghq.com/tracing/setup/cpp/">Instrucciones de configuración de C++</a>.
 </div>
 
-## Crear tramos
+## Creación de tramos (spans)
 
 Para instrumentar manualmente un método:
 
 ```cpp
 {
-  // Crea un tramo (span) de raíz para la solicitud actual.
+  // Create a root span for the current request.
   auto root_span = tracer.create_span();
   root_span.set_name("get_ingredients");
-  // Configura un nombre de recurso para el tramo de raíz.
+  // Set a resource name for the root span.
   root_span.set_resource_name("bologna_sandwich");
-  // Crea un tramo secundario con el tramo de raíz como primario.
+  // Create a child span with the root span as its parent.
   auto child_span = root_span.create_child();
   child_span.set_name("cache_lookup");
-  // Configura un nombre de recurso para el tramo secundario.
+  // Set a resource name for the child span.
   child_span.set_resource_name("ingredients.bologna_sandwich");
-  // Los tramos pueden terminar en un momento explícito ...
+  // Spans can be finished at an explicit time ...
   child_span.set_end_time(std::chrono::steady_clock::now());
-} // ... o implícitamente cuando se invoca el destructor.
-  // Por ejemplo, root_span termina aquí.
+} // ... or implicitly when the destructor is invoked.
+  // For example, root_span finishes here.
 ```
 
-## Añadir etiquetas
+## Añadir etiquetas (tags)
 
-Añade [etiquetas (tags) de tramos][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel de comercio, el importe del pago o el ID de usuario.
+Añade [span tagss][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación en Datadog. Las span tagss se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel de comercio, el importe del pago o el ID de usuario.
 
 Nota que algunas etiquetas de Datadog son necesarias para el [etiquetado de servicio unificado][3].
 
@@ -58,12 +58,12 @@ Nota que algunas etiquetas de Datadog son necesarias para el [etiquetado de serv
 Añade etiquetas directamente a un objeto de tramo llamando a `Span::set_tag`. Por ejemplo:
 
 ```cpp
-// Añade etiquetas directamente a un tramo llamando a `Span::set_tag`
+// Add tags directly to a span by calling `Span::set_tag`
 auto span = tracer.create_span();
 span.set_tag("key must be string", "value must also be a string");
 
-// O añade etiquetas configurando un `SpanConfig`
-Datadog::tracing::SpanConfig opts;
+// Or, add tags by setting a `SpanConfig`
+datadog::tracing::SpanConfig opts;
 opts.tags.emplace("team", "apm-proxy");
 auto span2 = tracer.create_span(opts);
 ```
@@ -83,16 +83,16 @@ export DD_TAGS=team:apm-proxy,key:value
 ### Manualmente
 
 ```cpp
-Datadog::tracing::TracerConfig tracer_config;
+datadog::tracing::TracerConfig tracer_config;
 tracer_config.tags = {
   {"team", "apm-proxy"},
   {"apply", "on all spans"}
 };
 
 const auto validated_config = datadog::tracing::finalize_config(tracer_config);
-auto tracer = datadog::tracing::Tracer(*validted_config);
+auto tracer = datadog::tracing::Tracer(*validated_config);
 
-// Todos los nuevos tramos contienen etiquetas definidas en `tracer_config.tags`
+// All new spans will have contains tags defined in `tracer_config.tags`
 auto span = tracer.create_span();
 ```
 
@@ -102,20 +102,20 @@ auto span = tracer.create_span();
 
 ### Configurar errores en un tramo
 
-Para asociar un tramo a un error, define una o varias etiquetas relacionadas con el error en el 
+Para asociar un tramo a un error, define una o varias etiquetas relacionadas con el error en el
 tramo. Por ejemplo:
 
 ```cpp
 span.set_error(true);
 ```
 
-Añade información más específica sobre el error configurando cualquier combinación de `error.msg`, `error.stack` o `error.type` utilizando respectivamente `Span::set_error_message`, `Span::set_error_stack` y `Span::set_error_type`. Consulta [Rastreo de errores][4] para obtener más información sobre las etiquetas de errores.
+Añade información más específica sobre el error configurando cualquier combinación de `error.message`, `error.stack` o `error.type` utilizando respectivamente `Span::set_error_message`, `Span::set_error_stack` y `Span::set_error_type`. Para obtener más información sobre las etiquetas de errores, consulta [Error Tracking][4].
 
 Ejemplo de añadir una combinación de etiquetas de errores:
 
 ```cpp
-// Asocia este tramo con el error "descriptor de archivo defectuoso" del estándar
-// biblioteca.
+// Associate this span with the "bad file descriptor" error from the standard
+// library.
 span.set_error_message("error");
 span.set_error_stack("[EBADF] invalid file");
 span.set_error_type("errno");
@@ -128,11 +128,11 @@ El uso de cualquiera de `Span::set_error_*` da lugar a una llamada subyacente a 
 Para anular un error en un tramo, configura `Span::set_error` en `false`, lo que elimina cualquier combinación de `Span::set_error_stack`, `Span::set_error_type` o `Span::set_error_message`.
 
 ```cpp
-// Borrar cualquier información de error asociada a este tramo.
+// Clear any error information associated with this span.
 span.set_error(false);
 ```
 
-## Propagar el contexto con extracción e inserción de cabeceras
+## Propagación del contexto con extracción e inserción de cabeceras
 
 Puedes configurar la propagación del contexto para trazas distribuidas insertando y extrayendo cabeceras. Lee [Propagación del contexto de trazas][5] para obtener información.
 
@@ -140,7 +140,7 @@ Puedes configurar la propagación del contexto para trazas distribuidas insertan
 
 Se pueden excluir trazas en función del nombre del recurso, para eliminar el tráfico Synthetic como las comprobaciones de estado a partir del envío de trazas y la influencia en las métricas de trazas. Para encontrar más información sobre esta y otras configuraciones de seguridad y ajuste, consulta la página [Seguridad][6].
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -148,5 +148,5 @@ Se pueden excluir trazas en función del nombre del recurso, para eliminar el tr
 [2]: /es/tracing/glossary/#spans
 [3]: /es/getting_started/tagging/unified_service_tagging
 [4]: /es/tracing/error_tracking/
-[5]: /es/tracing/trace_collection/trace_context_propagation/cpp
+[5]: /es/tracing/trace_collection/trace_context_propagation/
 [6]: /es/tracing/security

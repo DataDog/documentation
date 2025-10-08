@@ -5,7 +5,6 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
-
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -182,6 +181,7 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
+
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
@@ -207,63 +207,38 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
+Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres.
+If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
-1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
 
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+```yaml
+init_config:
+instances:
+ - dbm: true
+   host: localhost
+   port: 5432
+   username: datadog
+   password: 'ENC[datadog_user_database_password]'
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
+  ## Optional: Connect to a different database if needed for `custom_queries`
+  # dbname: '<DB_NAME>'
+```
 
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+**Note**: If your password includes special characters, wrap it in single quotes.
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-       pg_stat_statements_view: datadog.pg_stat_statements()
-       pg_stat_activity_view: datadog.pg_stat_activity()
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-**Note**: Wrap your password in single quotes if a special character is present.
-
-2. [Restart the Agent][10].
+[Restart the Agent][16] to apply the changes.
 
 ### Collecting logs (optional)
 
 PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][11] on this topic for additional details.
 
-1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
+1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, set the following parameters in the log section:
    ```conf
      logging_collector = on
-     log_directory = 'pg_log'  # directory where log files are written,
-                               # can be absolute or relative to PGDATA
-     log_filename = 'pg.log'   # log file name, can include pattern
-     log_statement = 'all'     # log all queries
-     #log_duration = on
-     log_line_prefix= '%m [%p] %d %a %u %h %c '
+     log_line_prefix = '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
      log_file_mode = 0644
+
      ## For Windows
      #log_destination = 'eventlog'
    ```
@@ -313,8 +288,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: https://www.postgresql.org/docs/12/contrib.html
+[1]: https://www.postgresql.org/docs/current/contrib.html
 [2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
@@ -329,3 +303,4 @@ If you have installed and configured the integrations and Agent as described and
 [13]: /agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /database_monitoring/troubleshooting/?tab=postgres
+[16]: /agent/configuration/agent-commands/#restart-the-agent

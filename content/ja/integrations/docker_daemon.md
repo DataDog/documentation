@@ -2,6 +2,8 @@
 app_id: docker
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
+  dashboards:
+    docker: assets/dashboards/docker_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -242,7 +244,7 @@ Docker インテグレーションは以下のイベントを生成します。
 * [Docker リソースメトリクスの監視方法][26]
 * [Docker メトリクスの収集方法][27]
 * [実際に Docker を採用してわかった驚きの 8 つの事実][28]
-* [AWS ECS での Docker の監視][29]
+* [Amazon ECS での Docker の監視][29]
 * [Datadog の Docker 化][30]
 * [Datadog を使用した Docker の監視][31]
 

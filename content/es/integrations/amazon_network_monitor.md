@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.networkmonitor.health_indicator
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.networkmonitor.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -78,7 +78,7 @@ Instala la [integración de Datadog y CloudWatch Network Monitor][2].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_network_monitor" >}}
+{{< get-metrics-from-git "amazon-network-monitor" >}}
 
 
 ### Eventos
@@ -101,6 +101,6 @@ Más enlaces, artículos y documentación útiles:
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-network-monitor
-[3]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_network_monitor/metadata.csv
+[3]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_network_monitor/assets/metrics/metric-spec.yaml
 [4]: https://docs.datadoghq.com/es/help/
 [5]: https://www.datadoghq.com/blog/amazon-cloudwatch-network-monitor-datadog/

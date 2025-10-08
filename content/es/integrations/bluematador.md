@@ -39,24 +39,24 @@ public_title: Blue Matador
 short_description: Blue Matador configura automáticamente y mantiene dinámicamente
   cientos de alertas
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Alerting
-  - Category::Automation
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Alertar
+  - Categoría::Automatización
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Blue Matador configura automáticamente y mantiene dinámicamente cientos
     de alertas
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Blue Matador
 ---
 
@@ -91,7 +91,7 @@ La integración Blue Matador no incluye ninguna métrica.
 
 Todos los eventos se envían al flujo (stream) de eventos de Datadog.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Blue Matador no incluye checks de servicio.
 

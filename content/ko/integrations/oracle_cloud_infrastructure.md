@@ -389,7 +389,7 @@ OCI 오브젝트 스토리지에 대한 자세한 내용은 [이벤트로 시작
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "oracle_cloud_infrastructure" >}}
+{{< get-metrics-from-git "oracle-cloud-infrastructure" >}}
 
 
 ### 서비스 점검

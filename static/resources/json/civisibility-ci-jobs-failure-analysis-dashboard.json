@@ -1,0 +1,764 @@
+{
+    "title": "CI Visibility - CI Jobs Failure Analysis",
+    "description": "Use CI Jobs Failure Analysis to identify the root cause of your failed CI Jobs",
+    "experience_type": "default",
+    "widgets": [
+        {
+            "id": 346286825205032,
+            "definition": {
+                "title": "Changes over time",
+                "background_color": "blue",
+                "show_title": true,
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 3521580660395390,
+                        "definition": {
+                            "title": "Failing job coverage per provider",
+                            "show_legend": true,
+                            "legend_layout": "auto",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Failing jobs with summarization",
+                                            "style": {
+                                                "palette": "green"
+                                            },
+                                            "formula": "query1"
+                                        },
+                                        {
+                                            "style": {
+                                                "palette": "red"
+                                            },
+                                            "alias": "Failing jobs without summarizations",
+                                            "formula": "query2"
+                                        }
+                                    ],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.provider.name",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query2",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.provider.name",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error -@error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "timeseries",
+                                    "style": {
+                                        "palette": "datadog16",
+                                        "order_by": "values",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "bars"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 4,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 2307601594320456,
+                        "definition": {
+                            "title": "Errors by domain",
+                            "show_legend": true,
+                            "legend_layout": "horizontal",
+                            "legend_columns": [
+                                "value",
+                                "sum"
+                            ],
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "style": {
+                                                "palette": "dog_classic"
+                                            },
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.domain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_domain:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "timeseries",
+                                    "style": {
+                                        "palette": "datadog16",
+                                        "order_by": "values",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "bars"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 4,
+                            "y": 0,
+                            "width": 4,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 1471406675702264,
+                        "definition": {
+                            "title": "Errors by domain and subdomain",
+                            "show_legend": true,
+                            "legend_layout": "horizontal",
+                            "legend_columns": [
+                                "value",
+                                "sum"
+                            ],
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "platform errors",
+                                            "style": {
+                                                "palette": "red"
+                                            },
+                                            "formula": "query1"
+                                        },
+                                        {
+                                            "alias": "code errors",
+                                            "style": {
+                                                "palette": "blue"
+                                            },
+                                            "formula": "query2"
+                                        },
+                                        {
+                                            "alias": "unknown errors",
+                                            "style": {
+                                                "palette": "orange"
+                                            },
+                                            "formula": "query3"
+                                        }
+                                    ],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.subdomain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_domain:platform $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query2",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.subdomain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_domain:code $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query3",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.subdomain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_domain:unknown $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "timeseries",
+                                    "style": {
+                                        "palette": "datadog16",
+                                        "order_by": "values",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "bars"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 8,
+                            "y": 0,
+                            "width": 4,
+                            "height": 4
+                        }
+                    }
+                ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 5
+            }
+        },
+        {
+            "id": 1276863570448766,
+            "definition": {
+                "title": "Failing jobs",
+                "background_color": "vivid_pink",
+                "show_title": true,
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 7988568207960176,
+                        "definition": {
+                            "title": "Jobs with the most platform failures",
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query2",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.pipeline.name",
+                                                    "limit": 15,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@ci.job.name",
+                                                    "limit": 15,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.pipeline.name",
+                                                    "limit": 15,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@ci.job.name",
+                                                    "limit": 15,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name @error.dd_domain:platform $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "sort": {
+                                        "count": 450,
+                                        "order_by": [
+                                            {
+                                                "type": "formula",
+                                                "index": 2,
+                                                "order": "desc"
+                                            }
+                                        ]
+                                    },
+                                    "formulas": [
+                                        {
+                                            "alias": "Total",
+                                            "cell_display_mode": "number",
+                                            "number_format": {
+                                                "unit": {
+                                                    "type": "custom_unit_label",
+                                                    "label": "fail"
+                                                }
+                                            },
+                                            "formula": "query2"
+                                        },
+                                        {
+                                            "alias": "Platform",
+                                            "cell_display_mode": "number",
+                                            "number_format": {
+                                                "unit": {
+                                                    "type": "custom_unit_label",
+                                                    "label": "fail"
+                                                }
+                                            },
+                                            "formula": "query1"
+                                        },
+                                        {
+                                            "cell_display_mode": "bar",
+                                            "alias": "Platform ratio",
+                                            "number_format": {
+                                                "unit": {
+                                                    "type": "canonical_unit",
+                                                    "unit_name": "percent"
+                                                }
+                                            },
+                                            "formula": "query1 / query2 * 100"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "has_search_bar": "never"
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 6,
+                            "height": 5
+                        }
+                    },
+                    {
+                        "id": 8595637081496108,
+                        "definition": {
+                            "title": "Recent failures",
+                            "requests": [
+                                {
+                                    "response_format": "event_list",
+                                    "query": {
+                                        "query_string": "ci_level:job @ci.status:error @error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain",
+                                        "data_source": "ci_pipeline_stream",
+                                        "indexes": []
+                                    },
+                                    "columns": [
+                                        {
+                                            "field": "@ci.status",
+                                            "width": "auto"
+                                        },
+                                        {
+                                            "field": "timestamp",
+                                            "width": "auto"
+                                        },
+                                        {
+                                            "field": "@error.message",
+                                            "width": "auto"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "list_stream"
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 0,
+                            "width": 6,
+                            "height": 5
+                        }
+                    }
+                ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 5,
+                "width": 12,
+                "height": 6
+            }
+        },
+        {
+            "id": 6543971469170406,
+            "definition": {
+                "title": "Top failure reasons",
+                "background_color": "yellow",
+                "show_title": true,
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 3457775743642620,
+                        "definition": {
+                            "title": "Error subdomain by number of failing jobs",
+                            "type": "treemap",
+                            "requests": [
+                                {
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.domain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@error.subdomain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "count"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_message:* @error.dd_subdomain:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "style": {
+                                        "palette": "datadog16"
+                                    },
+                                    "formulas": [
+                                        {
+                                            "number_format": {
+                                                "unit": {
+                                                    "type": "custom_unit_label",
+                                                    "label": "CI job"
+                                                }
+                                            },
+                                            "formula": "query1"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 6,
+                            "height": 6
+                        }
+                    },
+                    {
+                        "id": 6035138899628164,
+                        "definition": {
+                            "title": "Error domain by sum of job duration",
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "sum",
+                                                "metric": "@duration"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.domain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@duration"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "sort": {
+                                        "count": 10,
+                                        "order_by": [
+                                            {
+                                                "type": "formula",
+                                                "index": 0,
+                                                "order": "desc"
+                                            }
+                                        ]
+                                    },
+                                    "formulas": [
+                                        {
+                                            "cell_display_mode": "bar",
+                                            "alias": "Sum Job Duration",
+                                            "formula": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "has_search_bar": "auto"
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 0,
+                            "width": 6,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 4934874410965374,
+                        "definition": {
+                            "title": "Error subdomain by sum of job duration",
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "sum",
+                                                "metric": "@duration"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@error.domain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@duration"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@error.subdomain",
+                                                    "limit": 10,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@duration"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.status:error @error.dd_message:* $ci.job.name $git.repository.name $ci.pipeline.name $git.is_default_branch $git.branch $error.domain $error.subdomain"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "sort": {
+                                        "count": 100,
+                                        "order_by": [
+                                            {
+                                                "type": "formula",
+                                                "index": 0,
+                                                "order": "desc"
+                                            }
+                                        ]
+                                    },
+                                    "formulas": [
+                                        {
+                                            "cell_display_mode": "bar",
+                                            "alias": "Sum Job Duration",
+                                            "formula": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "has_search_bar": "auto"
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 3,
+                            "width": 6,
+                            "height": 3
+                        }
+                    }
+                ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 11,
+                "width": 12,
+                "height": 7,
+                "is_column_break": true
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "git.repository.name",
+            "prefix": "@git.repository.name",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "ci.pipeline.name",
+            "prefix": "@ci.pipeline.name",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "ci.job.name",
+            "prefix": "@ci.job.name",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "git.is_default_branch",
+            "prefix": "@git.is_default_branch",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "git.branch",
+            "prefix": "@git.branch",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "error.domain",
+            "prefix": "@error.domain",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "error.subdomain",
+            "prefix": "@error.subdomain",
+            "available_values": [],
+            "default": "*"
+        }
+    ],
+    "layout_type": "ordered",
+    "notify_list": [],
+    "reflow_type": "fixed",
+    "tags": [
+        "team:ci-app"
+    ]
+}

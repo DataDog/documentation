@@ -12,14 +12,8 @@ list_section:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
-{{< /site-region >}}
-
 The following resource types are available within [Resource catalog][2] for filtering.
-See [custom rules in CSM Misconfigurations][1] for more information.
+See [custom rules in Cloud Security Misconfigurations][1] for more information.
 
 [1]: /security/cloud_security_management/misconfigurations/custom_rules/
 [2]: /infrastructure/resource_catalog

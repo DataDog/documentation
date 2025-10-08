@@ -32,6 +32,8 @@ This widget supports template variables. Use the `$<VARIABLE_NAME>.value` syntax
 
 In this example, `$env.value` updates the value of a link to the selected environment.
 
+**Note**: Template variables in URLs are only populated in the URL pathname (not the hostname). For example, `https://$env.value.example.com/$env.value` renders as `https://$env.value.example.com/admin`.
+
 ## API
 
 This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:

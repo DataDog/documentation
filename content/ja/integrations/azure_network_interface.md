@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Network Interface のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Azure Network Interfa
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_network_interface" >}}
+{{ get-metrics-from-git "azure-networkinterface" }}
 
 
 ### イベント

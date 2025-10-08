@@ -91,7 +91,7 @@ Les logs qui ont déjà été indexés demeurent interrogeables jusqu'à la fin 
 
 Les vues historiques continuent à être stockées dans Datadog jusqu'à ce que la période de rétention sélectionnée expire, mais vous pouvez aussi choisir de les supprimer plus tôt si vous n'avez plus besoin de la vue. Vous pouvez indiquer qu'une vue historique doit être supprimée en sélectionnant l'icône de suppression à droite de la vue, puis en confirmant votre choix.
 
-Après 1 heure, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 1 heure pour annuler la suppression.
+Après 1 jour, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 1 jour pour annuler la suppression.
 
 {{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Suppression de vues historiques" video="true" width="75%" >}}
 

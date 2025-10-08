@@ -14,6 +14,9 @@ further_reading:
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Learn more about DogStatsD'
+    - link: '/metrics/units'
+      tag: 'Documentation'
+      text: 'Metrics Units'
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
@@ -178,7 +181,7 @@ The Agent submits the last reported number, in this case `71.5`, as the GAUGE me
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
+For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a 10-second flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
 
 | Metric Name                                    | Value  | Datadog In-App Type |
 | ---------------------------------------------- | ------ | ------------------- |
@@ -221,8 +224,7 @@ That is, for a distribution metric with added percentile aggregations during a g
 
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics without Limits™][1].
 
-**Note**: The exclusion of tags with `!` is not accepted with this feature.
-
+**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 [1]: /metrics/metrics-without-limits/
 {{% /tab %}}

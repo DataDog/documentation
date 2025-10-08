@@ -1,5 +1,6 @@
 ---
 title: Advanced Configuration
+description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, and control sampling for your application's needs."
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -43,6 +44,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
    import { datadogRum } from '@datadog/browser-rum';
 
@@ -52,8 +54,10 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
        ...
    });
    ```
+
    {{% /tab %}}
    {{% tab "CDN async" %}}
+
    ```javascript
    window.DD_RUM.onReady(function() {
        window.DD_RUM.init({
@@ -63,8 +67,10 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
        })
    })
    ```
+
    {{% /tab %}}
    {{% tab "CDN sync" %}}
+
    ```javascript
    window.DD_RUM &&
        window.DD_RUM.init({
@@ -73,15 +79,16 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
            ...
        });
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][17], you can also optionally define the associated service name and version.
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][16], you can also optionally define the associated service name and version.
 
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
-   - Context: Starting with [version 5.28.0][20], you can add context to views and the child events of views.
+   - Context: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
 
    For more information, see [Setup Browser Monitoring][4].
 
@@ -91,6 +98,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
    datadogRum.startView({
         name: 'checkout',
@@ -104,6 +112,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
    {{% /tab %}}
    {{% tab "CDN async" %}}
+
    ```javascript
    window.DD_RUM.onReady(function() {
       window.DD_RUM.startView({
@@ -116,8 +125,10 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
       })
    })
    ```
+
    {{% /tab %}}
    {{% tab "CDN sync" %}}
+
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
         name: 'checkout',
@@ -128,6 +139,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
         },
    })
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -138,6 +150,7 @@ The following example manually tracks the pageviews on the <code>checkout</code>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.startView({
   name: 'checkout',
@@ -148,6 +161,7 @@ datadogRum.startView({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
   window.DD_RUM.startView({
@@ -157,8 +171,10 @@ window.DD_RUM.onReady(function() {
   })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.startView({
   name: 'checkout',
@@ -166,6 +182,7 @@ window.DD_RUM && window.DD_RUM.startView({
   version: '1.2.3'
 })
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 </details>
@@ -176,22 +193,27 @@ window.DD_RUM && window.DD_RUM.startView({
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
    datadogRum.startView('checkout')
    ```
 
    {{% /tab %}}
    {{% tab "CDN async" %}}
+
    ```javascript
    window.DD_RUM.onReady(function() {
        window.DD_RUM.startView('checkout')
    })
    ```
+
    {{% /tab %}}
    {{% tab "CDN sync" %}}
+
    ```javascript
    window.DD_RUM && window.DD_RUM.startView('checkout')
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -211,6 +233,7 @@ To override default RUM view names so that they are aligned with how you've defi
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
       import { routes } from 'path/to/routes';
@@ -257,6 +280,7 @@ To override default RUM view names so that they are aligned with how you've defi
 
    {{% /tab %}}
    {{% tab "CDN async" %}}
+
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
       import { routes } from 'path/to/routes';
@@ -301,8 +325,10 @@ To override default RUM view names so that they are aligned with how you've defi
        return viewName || '/';
       }
    ```
+
    {{% /tab %}}
    {{% tab "CDN sync" %}}
+
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
       import { routes } from 'path/to/routes';
@@ -346,6 +372,7 @@ To override default RUM view names so that they are aligned with how you've defi
        return viewName || '/';
       }
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -355,6 +382,7 @@ Use `setViewName(name: string)` to update the name of the current view. This all
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -363,8 +391,10 @@ datadogRum.setViewName('<VIEW_NAME>');
 // Code example
 datadogRum.setViewName('Checkout');
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewName('<VIEW_NAME>');
@@ -375,14 +405,17 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewName('Checkout');
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
 
 // Code example
 window.DD_RUM && window.DD_RUM.setViewName('Checkout');
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -424,6 +457,7 @@ Along with attributes added with the [Global Context API](#global-context) or th
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -439,8 +473,10 @@ datadogRum.init({
     ...
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -456,8 +492,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -472,12 +510,13 @@ window.DD_RUM &&
         ...
     });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
 If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
 
-The RUM Browser SDK ignores attributes added outside of `event.context`
+The RUM Browser SDK ignores attributes added outside of `event.context`.
 
 ### Enrich RUM events with feature flags
 
@@ -489,6 +528,7 @@ For example, to redact email addresses from your web application URLs:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -501,8 +541,10 @@ datadogRum.init({
     ...
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -515,8 +557,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -528,6 +572,7 @@ window.DD_RUM &&
         ...
     });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -540,10 +585,10 @@ You can update the following event properties:
 | `view.name`                    | String | The name of the current view.                                                                                                                                                             |
 | `view.performance.lcp.resource_url` | String |   The resource URL for the Largest Contentful Paint.                                                                                                                                 |
 | `service`                      | String | The service name for your application.                                                                                                                                                    |
-| `version`                      | String | The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                                                                                                                  |
+| `version`                      | String | The application's version. For example: 1.2.3, 6c44da20, or 2020.02.13.                                                                                                                  |
 | `action.target.name`           | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
 | `error.message`                | String | A concise, human-readable, one-line message explaining the error.                                                                                                                         |
-| `error.stack `                 | String | The stack trace or complementary information about the error.                                                                                                                             |
+| `error.stack`                 | String | The stack trace or complementary information about the error.                                                                                                                             |
 | `error.resource.url`           | String | The resource URL that triggered the error.                                                                                                                                                |
 | `resource.url`                 | String | The resource URL.                                                                                                                                                                         |
 | `long_task.scripts.source_url` | String | The script resource url                                                                                                                                                                   |
@@ -551,6 +596,18 @@ You can update the following event properties:
 | `context`                      | Object | Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**). |
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
+
+**Note**: Unlike other events, view events are sent multiple times to Datadog to reflect the updates occurring during their lifecycle. An update on a previous view event can still be sent while a new view is active. Datadog recommends being mindful of this behavior when modifying the content of a view event.
+
+```javascript
+beforeSend: (event) => {
+    // discouraged, as the current view name could be applied to both the active view and the previous views
+    event.view.name = getCurrentViewName()
+
+    // recommended
+    event.view.name = getViewNameForUrl(event.view.url)
+}
+```
 
 ### Discard a RUM event
 
@@ -573,8 +630,10 @@ datadogRum.init({
     ...
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -589,8 +648,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -604,6 +665,7 @@ window.DD_RUM &&
         ...
     });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -613,11 +675,25 @@ window.DD_RUM &&
 
 Adding user information to your RUM sessions helps you:
 
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
+- Follow the journey of a given user
+- Know which users are the most impacted by errors
+- Monitor performance for your most important users
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+
+{{< tabs >}}
+{{% tab "6.4.0 and above" %}}
+
+The following attributes are available:
+
+| Attribute  | Type | Required |  Description                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | String | Yes | Unique user identifier.                                                                                  |
+| `usr.name`  | String | No | User friendly name, displayed by default in the RUM UI.                                                  |
+| `usr.email` | String | No | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+{{% /tab %}}
+{{% tab "Before 6.4.0" %}}
 
 The below attributes are optional but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
@@ -626,6 +702,9 @@ The below attributes are optional but Datadog strongly recommends providing at l
 | `usr.id`    | String | Unique user identifier.                                                                                  |
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
@@ -639,6 +718,7 @@ When making changes to the user session object, all RUM events collected after t
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.setUser({
     id: '1234',
@@ -648,8 +728,10 @@ datadogRum.setUser({
     ...
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setUser({
@@ -661,8 +743,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
@@ -682,18 +766,23 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.getUser()
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.getUser()
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.getUser()
 ```
@@ -707,18 +796,23 @@ window.DD_RUM && window.DD_RUM.getUser()
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.setUserProperty('name', 'John Doe')
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setUserProperty('name', 'John Doe')
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 ```
@@ -732,21 +826,27 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.removeUserProperty('name')
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeUserProperty('name')
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -756,21 +856,200 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.clearUser()
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.clearUser()
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Account
+
+To group users into different set, use the account concept.
+
+The following attributes are available:
+
+| Attribute      | Type   | Required | Description                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | String | Yes      | Unique account identifier.                                 |
+| `account.name` | String | No       | Account friendly name, displayed by default in the RUM UI. |
+
+### Identify account
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Access account
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.getAccount()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add/Override account property
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove account property
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear account properties
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.clearAccount()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -782,6 +1061,7 @@ The following example collects only 90% of all sessions on a given RUM applicati
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -792,8 +1072,10 @@ datadogRum.init({
     sessionSampleRate: 90,
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -804,8 +1086,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -815,6 +1099,7 @@ window.DD_RUM &&
         sessionSampleRate: 90,
     });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -822,7 +1107,7 @@ For a sampled out session, all pageviews and associated telemetry for that sessi
 
 ## User tracking consent
 
-To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][18].
+To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][17].
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
@@ -831,8 +1116,8 @@ The `trackingConsent` initialization parameter can be one of the following value
 
 To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:
 
-* when changed from `"granted"` to `"not-granted"`, the RUM session is stopped, data is no longer sent to Datadog.
-* when changed from `"not-granted"` to `"granted"`, a new RUM session is created if no previous session is active, and data collection resumes.
+- when changed from `"granted"` to `"not-granted"`, the RUM session is stopped, data is no longer sent to Datadog.
+- when changed from `"not-granted"` to `"granted"`, a new RUM session is created if no previous session is active, and data collection resumes.
 
 This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
 
@@ -840,6 +1125,7 @@ When `setTrackingConsent()` is used before `init()`, the provided value takes pr
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -852,8 +1138,10 @@ acceptCookieBannerButton.addEventListener('click', function() {
     datadogRum.setTrackingConsent('granted');
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -868,8 +1156,10 @@ acceptCookieBannerButton.addEventListener('click', () => {
     });
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
   ...,
@@ -880,6 +1170,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
     window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
 });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -897,6 +1188,7 @@ Enrich or modify the context of RUM view events and corresponding child events w
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -908,8 +1200,10 @@ datadogRum.setViewContextProperty('activity', {
     amount: 23.42
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -923,8 +1217,10 @@ window.DD_RUM.onReady(function() {
     });
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
@@ -934,9 +1230,9 @@ window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
     amount: 23.42
 });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### Replace view context
 
@@ -957,6 +1253,7 @@ datadogRum.setViewContext({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
@@ -969,6 +1266,7 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -1006,6 +1304,7 @@ After RUM is initialized, add extra context to all RUM events collected from you
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -1017,8 +1316,10 @@ datadogRum.setGlobalContextProperty('activity', {
     amount: 23.42
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -1032,8 +1333,10 @@ window.DD_RUM.onReady(function() {
     });
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
@@ -1043,6 +1346,7 @@ window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     amount: 23.42
 });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1063,6 +1367,7 @@ datadogRum.removeGlobalContextProperty('codeVersion');
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
@@ -1073,6 +1378,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -1087,7 +1393,6 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### Replace global context
 
@@ -1108,6 +1413,7 @@ datadogRum.setGlobalContext({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
@@ -1120,6 +1426,7 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -1152,11 +1459,13 @@ datadogRum.clearGlobalContext();
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
   window.DD_RUM.clearGlobalContext();
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -1182,11 +1491,13 @@ const context = datadogRum.getGlobalContext();
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
   const context = window.DD_RUM.getGlobalContext();
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -1206,7 +1517,7 @@ By default, global context and user context are stored in the current page memor
 
 To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][19], allowing the following behaviors:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][18], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
@@ -1216,6 +1527,71 @@ However, this feature comes with some **limitations**:
 - Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in `localStorage` outlives the user session
 - The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
 - `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
+
+## Internal context
+
+After the Datadog browser RUM SDK is initialized, you can access the internal context of the SDK. This provides core identifiers and metadata that the SDK uses internally, such as session IDs and application details.
+
+You can explore the following attributes:
+
+| Attribute      | Description                                                       |
+| -------------- | ----------------------------------------------------------------- |
+| application_id | ID of the application.                                            |
+| session_id     | ID of the session.                                                |
+| user_action    | Object containing action ID (or undefined if no action is found). |
+| view           | Object containing details about the current view event.           |
+
+For more information, see [RUM Browser Data Collected][2].
+
+### Example
+
+```json
+{
+  application_id : "xxx",
+  session_id : "xxx",
+  user_action: { id: "xxx" },
+  view : {
+    id : "xxx",
+    referrer : "",
+    url: "http://localhost:8080/",
+    name: "homepage"
+  }
+}
+```
+
+You can optionally use `startTime` parameter to get the context of a specific time. If the parameter is omitted, the current context is returned.
+
+```typescript
+getInternalContext (startTime?: 'number' | undefined)
+```
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function () {
+  window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Micro frontend
 
@@ -1227,6 +1603,7 @@ In the `beforeSend` property, you can override the service and version propertie
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -1247,8 +1624,10 @@ datadogRum.init({
     },
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN async" %}}
+
 ```javascript
 const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
@@ -1269,8 +1648,10 @@ window.DD_RUM.onReady(function() {
     });
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 ```javascript
 const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
@@ -1289,6 +1670,7 @@ window.DD_RUM && window.DD_RUM.init({
     },
 });
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1297,9 +1679,10 @@ Any query done in the RUM Explorer can use the service attribute to filter event
 ### Limitations
 
 Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
+
 - Action events collected automatically
 - Resource events other than XHR and Fetch.
-- View events (but you can [override default RUM view names][21] instead)
+- View events (but you can [override default RUM view names][20] instead)
 - CORS and CSP violations
 
 ## Further Reading
@@ -1317,13 +1700,12 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
-[17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
-[18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
-[19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-[21]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[16]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
+[17]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
+[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+[20]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names

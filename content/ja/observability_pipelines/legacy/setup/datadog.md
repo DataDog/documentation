@@ -395,10 +395,10 @@ Worker をスケーリングする際のロードバランサーの推奨事項�
 
 [1]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling/
 {{% /tab %}}
-{{% tab "APT ベースの Linux" %}}
+{{% tab "APT-based Linux" %}}
 インストールの単一マシンの性質上、ロードバランシングの組み込みサポートは提供されていません。会社の基準を使用して独自のロードバランサーをプロビジョニングする必要があります。
 {{% /tab %}}
-{{% tab "RPM ベースの Linux" %}}
+{{% tab "RPM-based Linux" %}}
 インストールの単一マシンの性質上、ロードバランシングの組み込みサポートは提供されていません。会社の基準を使用して独自のロードバランサーをプロビジョニングする必要があります。
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}

@@ -19,12 +19,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported languages:
@@ -214,7 +208,7 @@ Environment variables need to be set only in the test target, because the framew
 
 ### Test Optimisation SDK
 
-If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-intrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
+If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-instrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
 
 Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 

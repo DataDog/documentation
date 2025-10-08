@@ -1,0 +1,68 @@
+{{/*  
+    Renders html tables for audit events data sourced from data/audit_events.json
+
+    Note: 
+    - json file mounted from websites-sources: https://github.com/DataDog/websites-sources/tree/main/data/audit_events.json
+
+    @param additional_info: string - additional information displayed above the audit events tables
+*/}}
+
+<div>
+    {{ $audit_events_data := $.Site.Data.audit_events }}
+    {{ $platform_events := slice }}
+    {{ $product_events := slice }}
+    <div class="d-flex flex-column">
+        <div class="col-12 order-1">
+            <p>{{ .Get "additional_info" | markdownify }}</p>
+            <h2>Audit Events</h2>
+            {{ with $audit_events_data }}
+
+                {{ range . }}
+                    {{ if .IsProduct }}
+                        {{ $product_events = $product_events | append . }}  
+                    {{ else }}
+                        {{ $platform_events = $platform_events | append . }}
+                    {{ end }}
+                    <h3 id="{{ .Name | urlize }}">{{ .Name | title }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description of Audit Event</th>
+                                <th>Query In Audit Explorer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ range .Events }}
+                                <tr>
+                                    <td><a href="{{ .Link }}">{{ .Name }}</a></td>
+                                    <!-- convert description text with brackets into hyperlinks -->
+                                    {{ $description_link := (printf "<a href='%s'>$1</a>" .DescriptionLink) }}
+                                    <td>{{ (replaceRE `\[(.+)\]` $description_link .Description) | safeHTML }}</td>
+                                    <td><code>{{ .Query }}</code></td>
+                                </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                {{ end }}
+            {{ end }}
+        </div>
+        <!-- Keep here. Need to form the event lists first. -->
+        <div class="col-12">
+            <h4>Platform Events</h4>
+            <ul>
+                {{ range sort $platform_events "Name" }}
+                    <li><a href="#{{ .Name | urlize }}">{{ .Name | title }}</a></li>
+                {{ end }}
+            </ul>
+            <h4>Product-Specific Events</h4>
+            <ul>
+                {{ range sort $product_events "Name" }}
+                    <li><a href="#{{ .Name | urlize }}">{{ .Name | title }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+
+    </div>
+</div>
+

@@ -38,14 +38,14 @@ title: Datadog Heroku ビルドパック
    heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
    # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
-   heroku config:add DD_DYNO_HOST=true
+   heroku config:add DD_DYNO_HOST=true -a $APPNAME
 
    # Set the DD_SITE env variable automatically
-   heroku config:add DD_SITE=$DD_SITE
+   heroku config:add DD_SITE=$DD_SITE -a $APPNAME
 
    # Add this buildpack and set your Datadog API key
-   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-   heroku config:add DD_API_KEY=$DD_API_KEY
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git -a $APPNAME
+   heroku config:add DD_API_KEY=$DD_API_KEY -a $APPNAME
 
    # Deploy to Heroku forcing a rebuild
    git commit --allow-empty -m "Rebuild slug"
@@ -374,6 +374,9 @@ fi
 
 ```shell
 #!/usr/bin/env bash
+
+# Heroku の '$DYNO' 環境変数から dyno タイプを抽出します 
+DYNOTYPE="${DYNO%%.*}"
 
 # dyno タイプに基づいて Datadog Agent を無効にします
 if [ "$DYNOTYPE" == "run" ]; then

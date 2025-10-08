@@ -30,7 +30,7 @@ Esta guía te enseña a añadir métricas de traza a un dashboard, correlacionar
 * Crear un gráfico manualmente. _(Paso 4. y 5. )_
 * Exportar una consulta de análisis. _(Paso 7.)_
 
-1. **Abre el [Catálogo de servicios][1]** y elige el servicio `web-store`.
+1. **Abre el [Catálogo de software][1]** y elige el servicio `web-store`.
 
 2. **Busca el Gráfico de solicitudes totales** y haz clic en el botón `export` (Exportar) de la parte superior derecha para elegir `Export to Dashboard` (Exportar al dashboard). **Haz clic en `New Timeboard`** (Nuevo timeboard).
 

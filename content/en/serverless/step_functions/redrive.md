@@ -11,7 +11,7 @@ further_reading:
 
 This page explains how to [redrive][1] executions directly from Datadog to continue failed AWS Step Functions from the point of failure without a state machine restart.
 
-{{< img src="serverless/step_functions/redrive.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
+{{< img src="serverless/step_functions/redrive_2.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
 
 ## Enable redrive within Datadog
 To enable using redrive within Datadog, configure an [AWS Connection][3] with [Datadog App Builder][4]. Ensure that your IAM roles include permissions that allow executing a Step Function for the retry action (`StartExecution`) or redriving a Step Function for the redrive action (`RedriveExecution`).
@@ -28,9 +28,7 @@ To take action on a Step Function in Datadog:
 When monitoring redriven executions, use the Waterfall view, as the large gap between the original execution and redrive can make the Flame Graph view imperceptible.
 
 ### Troubleshooting missing redrive traces
-If a redrive is triggered within one minute of the original execution's failure, its corresponding trace may not appear.
-
-Also, a redrive may not always share the same sampling decision as the original execution. To ensure that the redriven execution is also sampled, you can reference the `@redrive:true` span tag in a retention query.
+A redrive may not always share the same sampling decision as the original execution. To ensure that the redriven execution is also sampled, you can reference the `@redrive:true` span tag in a retention query.
 
 ## Further Reading
 

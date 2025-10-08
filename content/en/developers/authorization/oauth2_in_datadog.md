@@ -49,7 +49,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
    If the `API_KEYS_WRITE` scope has not been added to your client, this step fails. This endpoint generates an API Key that is only shown once, and cannot be re-generated unless the user deletes it within their Datadog account. **Store this value in a secure database or location**. 
 
-For more information about OAuth client creation, testing and publishing, see [OAuth for Datadog Integrations][5].
+For more information about OAuth client creation, testing and publishing, see [Create an API-based integration][5].
 
 ### Initiate authorization from a third-party location 
 
@@ -101,7 +101,7 @@ The [PKCE protocol][11] integrates with the authorization code grant flow by com
 [2]: /api/latest/scopes/
 [3]: /developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /developers/integrations/oauth_for_integrations
+[5]: /developers/integrations/api_integration
 [6]: /developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

@@ -95,7 +95,7 @@ ENV DD_IAST_ENABLED=true
 
 {{% tab "Kubernetes" %}} 
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the AAP environment variable:
 
 ```yaml
 spec:

@@ -1,5 +1,6 @@
 ---
 title: DDSketch-based Metrics in APM
+description: Learn about DDSketch-based metrics in APM for computing accurate percentiles and latency distributions with improved accuracy.
 
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
@@ -15,13 +16,13 @@ further_reading:
   text: "Learn more about Trace Metrics"
 ---
 
-Trace metrics are collected automatically for your services and resources and are retained for 15 months. The latency percentiles exist as individual timeseries. These percentiles are also available as a [Datadog Distribution Metric][1]. Instead of having a different metric for each percentile; and separate metrics for services, resources, or second primary tags; Datadog offers a simple metric:
+Trace metrics are collected automatically for your services and resources and are retained for 15 months. The latency percentiles exist as individual timeseries. These percentiles are also available as a [Datadog Distribution Metric][1]. Instead of having a different metric for each percentile; and separate metrics for services, resources, or additional primary tags; Datadog offers a simple metric:
 
 - `trace.<SPAN_NAME>`:
   - *Prerequisite:* This metric exists for any APM service .
-  - *Description:* Represents latency distributions for all services, resources and versions across different environments and second primary tags.
+  - *Description:* Represents latency distributions for all services, resources and versions across different environments and additional primary tags.
   - *Metric type:* [DISTRIBUTION][2]
-  - *Tags:* `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [the second primary tag][3].
+  - *Tags:* `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [additional primary tags][3].
 
 The APM Service and Resource pages use this metric type automatically. You can use these metrics to power your dashboards and monitors.
 
@@ -64,5 +65,5 @@ max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
 
 [1]: /metrics/distributions/
 [2]: /metrics/types/?tab=distribution#metric-types
-[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[3]: /tracing/guide/setting_primary_tags_to_scope/#add-additional-primary-tags-in-datadog
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

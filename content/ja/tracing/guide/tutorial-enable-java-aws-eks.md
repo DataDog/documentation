@@ -20,7 +20,7 @@ title: チュートリアル - AWS Elastic Kubernetes Service 上の Java アプ
 
 ## 概要
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Kubernetes Service (EKS). In this scenario, the Datadog Agent is also installed in the cluster.
+このチュートリアルでは、AWS Elastic Kubernetes Service (EKS) クラスターにインストールしたサンプルの Java アプリケーションでトレーシングを有効化する手順を説明します。このシナリオでは、Datadog Agent も同じクラスターにインストールされています。
 
 ホスト、コンテナ、他のクラウドインフラストラクチャー、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。
 
@@ -52,7 +52,7 @@ helm repo update{{< /code-block >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to run inside a Kubernetes cluster. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-k8s.yaml` file, which builds containers for the application.
+リポジトリには、Kubernetes クラスター内で動作するようにあらかじめ構成されたマルチサービスの Java アプリが含まれています。サンプルアプリは基本的なメモアプリで、データの追加や変更を行うための REST API が用意されています。Kubernetes のポッド用コンテナを作成するための `docker-compose` YAML ファイルは `docker` ディレクトリに配置されています。このチュートリアルでは、アプリケーション用のコンテナをビルドする `service-docker-compose-k8s.yaml` ファイルを使用します。
 
 `notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
 
@@ -97,13 +97,13 @@ docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
 ### AWS クラスターのインバウンドセキュリティポリシーの更新
 
-To communicate with the sample applications, ensure that the cluster's security rules are configured with ports `30080` and `30090` open.
+サンプル アプリケーションと通信できるように、クラスターのセキュリティ ルールでポート `30080` と `30090` が開放されていることを確認してください。
 
-1. Open AWS Console and navigate to your deployed cluster within the EKS service.
+1. AWS Console を開き、EKS サービス内でデプロイ済みのクラスターに移動します。
 
 2. クラスターコンソールで、networking タブを選択し、クラスターセキュリティグループをクリックします。
 
-3. In your security group settings, edit the inbound rules. Add a rule allowing custom TCP traffic, a port range of `30060` to `30100`, and source of `0.0.0.0/0`.
+3. セキュリティ グループの設定でインバウンド ルールを編集し、カスタム TCP トラフィックを許可するルールを追加します。ポート範囲を `30060`～`30100`、送信元を `0.0.0.0/0` に設定してください。
 
 4. ルールを保存します。
 
@@ -244,7 +244,7 @@ helm upgrade -f datadog-values.yaml --install --debug latest --set datadog.apiKe
 
 しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
 
 `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 

@@ -16,15 +16,9 @@ title: Carga de archivos de informes de tests JUnit en Datadog
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-El sitio Datadog seleccionado ({{< region-param key="dd_site_name" >}}) no es compatible.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
  <strong>Nota</strong>: Datadog recomienda la instrumentación nativa de los tests sobre la carga de archivos XML JUnit,
-  ya que la instrumentación nativa proporciona resultados de tiempo más precisos, admite trazas distribuidas en tests de integraciones 
+  ya que la instrumentación nativa proporciona resultados de tiempo más precisos, admite trazas distribuidas en tests de integraciones
   y otras características que no están disponibles con las cargas XML JUnit.
   Para obtener más detalles, consulte la tabla <a href="/continuous_integration/tests/#supported-features">Características compatibles.
 </div>
@@ -193,7 +187,7 @@ Es posible que los informes de más de 250 MB no se procesen por completo, por l
 Esta es la lista completa de opciones disponibles cuando se utiliza el comando `datadog-ci junit upload`:
 
 `--service` (Requerido)
-: Nombre del servicio o de la biblioteca a los que se realizan tests.<br/>
+: Nombre del servicio o de la librería a los que se realizan tests.<br/>
 **Variable de entorno**: `DD_SERVICE`<br/>
 **Ejemplo**: `my-api-service`
 
@@ -282,7 +276,7 @@ Además, configura el sitio Datadog para utilizar el sitio ({{< region-param key
 
 {{% ci-git-metadata %}}
 
-## Recopilación de metadatos de configuración de entornos 
+## Recopilación de metadatos de configuración de entornos
 
 Datadog utiliza etiquetas especial exclusivas para identificar la configuración del entorno en el que se ejecutan los tests, incluyendo el sistema operativo, el tiempo de ejecución y la información del dispositivo, si corresponde. Cuando el mismo test para el mismo envío se ejecuta en más de una configuración (por ejemplo, en Windows y en Linux), las etiquetas se utilizan para diferenciar el test en la detección de fallos e irregularidades.
 

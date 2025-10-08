@@ -36,6 +36,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
   }
 
   table {
+    table-layout: fixed;
     tr {
         th:empty {
             display: none;

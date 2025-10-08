@@ -68,14 +68,13 @@ Para crear una aplicación para observar en Datadog:
 
 ## Configurar Datadog APM
 
-Para configurar Datadog APM sin necesidad de modificar el código de tu aplicación o el proceso de despliegue, utiliza instrumentación de APM en un solo paso:
+Para configurar Datadog APM sin necesidad de modificar el código o el proceso de despliegue de tu aplicación, utiliza la instrumentación APM de un solo paso. También puedes configurar APM utilizando [bibliotecas de rastreo de Datadog][8].
 
-<div class="alert alert-info"><strong>Nota</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">La instrumentación de APM en un solo paso</a> está en fase beta. Como alternativa, puedes configurar APM utilizando <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">bibliotecas de rastreo de Datadog</a>.</div>
 
 1. Ejecuta el comando de instalación:
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
 
     Sustituye `<YOUR_DD_API_KEY>` por tu [clave de API de Datadog][2], `<YOUR_DD_SITE>` por tu [sitio de Datadog][7] y `<AGENT_ENV>` por el entorno en el que está instalado tu Agent (por ejemplo, `development`).
@@ -141,7 +140,7 @@ Cada vez que se ejecuta el comando `curl`, se envía una nueva traza a Datadog.
 
 1. En Datadog, ve a [**APM** > **Services**][3] (APM > Servicios). Deberías ver un servicio de Python llamado `hello`:
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="El Catálogo de servicios muestra el nuevo servicio de Python." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="El Catálogo de software muestra el nuevo servicio Python." style="width:100%;" >}}
 
 1. Selecciona el servicio para ver tus métricas de rendimiento, como la latencia, el rendimiento y las tasas de error.
 1. Ve a [**APM** > **Traces**][4] (APM >Trazas). Deberías ver una traza para el servicio `hello`:
@@ -152,15 +151,15 @@ Cada vez que se ejecuta el comando `curl`, se envía una nueva traza a Datadog.
 
 ## Configuración avanzada de APM
 
-Hasta este punto, Datadog ha instrumentado automáticamente la aplicación `hello.py` mediante la instrumentación de un solo paso. Este enfoque es recomendado si deseas capturar trazas esenciales a través de bibliotecas y lenguajes comunes sin tocar código o instalar manualmente bibliotecas.
+Hasta este punto, Datadog ha instrumentado automáticamente la aplicación `hello.py` mediante la instrumentación de un solo paso. Este enfoque es recomendado si deseas capturar trazas esenciales a través de librerías y lenguajes comunes sin tocar código o instalar manualmente bibliotecas.
 
 Sin embargo, si necesitas recopilar trazas desde código personalizado o requieres un control más preciso, puedes añadir [Instrumentación personalizada][6].
 
-Para ilustrar esto, importarás la biblioteca de rastreo de Datadog Python en `hello.py` y crearás un tramo (span) y una etiqueta de tramo personalizados.
+Para ilustrar esto, importarás la librería de rastreo de Datadog Python en `hello.py` y crearás un tramo (span) y una etiqueta (tag) de tramo personalizados.
 
 Para añadir instrumentación personalizada:
 
-1. Instala la biblioteca de rastreo de Datadog:
+1. Instala la librería de rastreo de Datadog:
 
    ```shell
    pip install ddtrace
@@ -220,3 +219,4 @@ Para añadir instrumentación personalizada:
 [5]: /es/tracing/glossary/#instrumentation
 [6]: /es/tracing/trace_collection/custom_instrumentation/
 [7]: /es/getting_started/site/
+[8]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/

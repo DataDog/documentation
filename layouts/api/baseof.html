@@ -40,6 +40,7 @@ data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="5"
       </div>
       <div class="col-12 col-lg-9 main-api">
         {{ partial "api/api-toolbar.html" . }}
+        {{ partial "site_support_banner/site_support_banner.html" . }}
         {{ block "api-main" . }}{{ end }}
       </div>
     </div>

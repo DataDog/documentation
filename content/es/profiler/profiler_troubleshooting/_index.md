@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/profiler_troubleshooting/
+- /es/tracing/profiler/profiler_troubleshooting/
 further_reading:
 - link: /tracing/troubleshooting
   tag: Documentación

@@ -1,7 +1,7 @@
 {{ $dot := . }}
 <div class="logs-cloud">
     <div class="container cards-dd">
-        <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+        <div class="row row-cols-2 row-cols-sm-5 g-2 g-xl-3 justify-content-sm-center">
             <div class="col">
                 <a class="card h-100" href="/integrations/amazon_web_services/?tab=allpermissions#log-collection">
                     <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
@@ -20,6 +20,13 @@
                 <a class="card h-100" href="/integrations/google_cloud_platform/?tab=datadogussite#log-collection">
                     <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
                         {{ partial "img.html" (dict "root" . "src" "integrations_logos/google_cloud_platform.png" "class" "img-fluid" "alt" "Amazon ECS" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/integrations/oracle-cloud-infrastructure/?tab=ociquickstartpreviewrecommended#log-collection">
+                    <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/oracle_cloud_infrastructure.png" "class" "img-fluid" "alt" "Oracle Cloud Infrastructure" "width" "400") }}
                     </div>
                 </a>
             </div>

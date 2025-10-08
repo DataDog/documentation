@@ -48,7 +48,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 2. Instala la [integración de Datadog y Amazon FSx][4].
 
 
-### APM
+### Recopilación de logs
 
 #### Logs de eventos de auditoría para FSx para Windows File Server
 Para rastrear todos los accesos de usuarios a archivos individuales, carpetas y archivos compartidos, integra los logs de eventos de auditoría desde tu FSx para Windows File Server:
@@ -77,13 +77,13 @@ Habilita la [integración de CloudTrail][9] de Datadog para monitorizar todas la
 
 La integración de Amazon FSx no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon FSx no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

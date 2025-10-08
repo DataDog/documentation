@@ -139,7 +139,7 @@ Confluent Cloud Cluster ID 찾는 방법:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "confluent_cloud" >}}
+{{< get-metrics-from-git "confluent-cloud" >}}
 
 
 ### 이벤트

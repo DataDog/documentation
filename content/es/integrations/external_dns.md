@@ -20,9 +20,9 @@ author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
-  support_email: ayuda@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- la red
+- network
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
@@ -38,26 +38,26 @@ name: dns_externo
 public_title: DNS externo
 short_description: Seguimiento de las métricas de todos tus DNS externos con Datadog
 supported_os:
-- Linux
-- macOS
-- Windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Categoría::Red
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Seguimiento de las métricas de todos tus DNS externos con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: DNS externo
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general

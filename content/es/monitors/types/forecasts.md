@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar una caída del sistema para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Consultar el estado de tu monitor
 title: Monitor de predicción
@@ -34,7 +34,7 @@ Después de definir la métrica, el monitor de predicción proporciona dos gráf
 * La **Vista Histórica** te permite explorar los datos de métrica pasados en diferentes escalas temporales.
 * La **Vista previa de evaluación** muestra una combinación de datos históricos y previstos de métrica.
 
-### Definir las condiciones de alerta
+### Definir condiciones de alerta
 
 * Activa una alerta cuando el extremo de los límites de confianza de la predicción pase a ser `above` o `below`.
 * el umbral dentro de las siguientes `24 hours`, `1 week`, `1 month`, etc. o `custom` para fijar un valor entre 12 horas y 3 meses.
@@ -69,7 +69,7 @@ Utiliza el algoritmo lineal para métricas que tienen tendencias constantes, per
 
 | Modelo    | Descripción                                                                                |
 |----------|--------------------------------------------------------------------------------------------|
-| Predeterminada  | Se ajusta a la tendencia más reciente y extrapola los datos sin dejar de ser robusto frente al ruido reciente. |
+| Predeterminado  | Se ajusta a la tendencia más reciente y extrapola los datos sin dejar de ser robusto frente al ruido reciente. |
 | Simple   | Hace una regresión lineal robusta a través de toda la historia.                                |
 | Reactivo | Extrapola mejor el comportamiento reciente a riesgo de sobreajustarse al ruido, los picos o las caídas.  |
 
@@ -134,11 +134,11 @@ La propiedad `query` del cuerpo de la solicitud debe contener una cadena de cons
 Las siguientes funciones no pueden anidarse dentro de llamadas a las funciones `forecast()`:<br>
 `anomalies` `cumsum`, `integral`, `outliers`, `piecewise_constant`, `robust_trend`, o `trend_line`
 
-## Leer más
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/forecast
+[1]: https://app.datadoghq.com/monitors/create/forecast
 [2]: /es/monitors/types/metric/#define-the-metric
 [3]: /es/monitors/guide/recovery-thresholds/
 [4]: /es/monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -147,5 +147,5 @@ Las siguientes funciones no pueden anidarse dentro de llamadas a las funciones `
 [7]: /es/monitors/types/metric/#data-window
 [8]: /es/monitors/notify/
 [9]: /es/api/v1/monitors/#create-a-monitor
-[10]: /es/monitors/manage/status/#settings
+[10]: /es/monitors/status/#settings
 [11]: /es/api/v1/monitors/

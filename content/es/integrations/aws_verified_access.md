@@ -3,7 +3,7 @@ aliases:
 - /es/integrations/amazon_verified_access
 categories:
 - nube
-- AWS
+- aws
 - recopilación de logs
 custom_kind: integración
 dependencies: []
@@ -28,19 +28,19 @@ short_description: Recopila logs de AWS Verified Access.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Con AWS Verified Access, puedes proporcionar acceso seguro a tus aplicaciones corporativas sin necesidad de utilizar una red privada virtual red (VPN). Verified Access evalúa cada solicitud de aplicación y ayuda a garantizar que los usuarios puedan acceder a cada aplicación sólo cuando cumplen los requisitos de seguridad especificados.
 
 
-## Configuración 
+## Configuración
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración de Amazon Web Services][1].
+Si aún no lo has hecho, configura primero la [integración de Amazon Web Services][1].
 
-### APM
+### Recopilación de logs
 
 #### Habilitar logs de Verified Access
 
@@ -87,11 +87,11 @@ La integración AWS Verified Access incluye [logs de Verified Access][7].
 
 La integración AWS Verified Access no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

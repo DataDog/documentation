@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-firestore
+app_uuid: 16876032-6aa7-44a6-bc39-4c6d9a7f90c7
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.firestore.document.write_count
+      metadata_path: metadata.csv
+      prefix: gcp.firestore.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 268
+    source_type_name: Google Cloud Firestore
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - almacenes de datos
@@ -7,23 +27,38 @@ categories:
 - mobile
 custom_kind: integración
 dependencies: []
-description: Realiza el seguimiento de las métricas clave de Google Cloud Firestore.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_firestore/
+display_on_public_website: true
 draft: false
 git_integration_title: google_cloud_firestore
-has_logo: true
 integration_id: google-cloud-firestore
 integration_title: Google Cloud Firestore
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_firestore
-public_title: Integración de Datadog y Google Cloud Firestore
-short_description: Realiza el seguimiento de las métricas clave de Google Cloud Firestore.
-version: '1.0'
+public_title: Google Cloud Firestore
+short_description: Una base de datos flexible y escalable para el desarrollo móvil,
+  web y de servidor de Firebase y Google Cloud.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Nube
+  - Categoría::Almacenes de datos
+  - Categoría::Google Cloud
+  - Category::Log Collection
+  - Category::Mobile
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Una base de datos flexible y escalable para el desarrollo móvil, web
+    y de servidor de Firebase y Google Cloud.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Firestore
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Google Cloud Firestore es una base de datos flexible y escalable para el desarrollo móvil, web y de servidor de Firebase y Google Cloud Platform.
@@ -36,7 +71,7 @@ Utiliza la integración Google Cloud Platform en Datadog para recopilar métrica
 
 Si aún no lo has hecho, primero configura la [integración Google Cloud Platform][1]. No es necesario realizar ningún otro paso de instalación.
 
-### APM
+### Recopilación de logs
 
 Los logs de Google Cloud Firestore se recopilan con Google Cloud Logging y se envían a una tarea de Dataflow a través de un tema Cloud Pub/Sub. Si aún no lo has hecho, [configura la generación de logs con la plantilla Dataflow de Datadog][2].
 

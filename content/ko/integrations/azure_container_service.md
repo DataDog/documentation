@@ -1,6 +1,6 @@
 ---
 aliases:
-- /integrations/azure_containerservice
+- /ko/integrations/azure_containerservice
 categories:
 - 클라우드
 - 컨테이너
@@ -39,7 +39,7 @@ Datadog Azure 통합을 사용하여 Azure 쿠버네티스(Kubernetes) 서비스
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_container_service" >}}
+{{ get-metrics-from-git "azure-containerservice" }}
 
 
 ### 이벤트

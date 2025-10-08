@@ -25,29 +25,7 @@ title: Datadog 클러스터 에이전트 설정
 Helm 차트 v2.7.0+ 또는 Datadog 오퍼레이터 v0.7.0+를 사용해 Datadog 에이전트를 배포하려면 클러스터 에이전트가 기본적으로 활성화되어 있어야 합니다.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Helm 차트 v2.7.0 이래로 클러스터 에이전트는 기본적으로 활성화되어 있습니다.
-
-이전 버전을 활성화하려면 `clusterAgent` 키를 덮어쓰는 커스텀 [datadog-values.yaml][1]을 사용하는 경우, 다음 클러스터 에이전트 설정을 사용해 [datadog-values.yaml][1] 파일을 업데이트해야 합니다.
-
-  ```yaml
-  clusterAgent:
-    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
-    enabled: true
-  ```
-
-그런 다음 Datadog Helm 차트를 업그레이드합니다.
-
-이 작업은 자동으로 클러스터 에이전트와 Datadog 에이전트의 필수 RBAC 파일을 업데이트합니다. 양 에이전트는 동일한 API 키를 사용합니다.
-
-오퍼레이터는 또한 일반적으로 양 클러스터 에이전트와 Datadog 에이전트가 통신을 보호하기 위해 공유하는 `Secret`에서 임의 토큰을 생성합니다. `clusterAgent.token` 설정을 사용해 수동으로 이 토큰을 지정할 수 있습니다. 대신 `clusterAgent.tokenExistingSecret` 설정을 통해 `token` 값을 포함하는 기존 `Secret` 이름을 참조하여 이를 설정할 수도 있습니다.
-
-수동으로 설정하는 경우 이 토큰은 32자의 영숫자 문자여야 합니다.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Datadog 오퍼레이터 v1.0.0 이래로 클러스터 에이전트는 활성화됩니다. 오퍼레이터는 필수 RBAC를 생성하고, 클러스터 에이전트를 배포하고, 에이전트 DaemonSet 설정을 수정합니다.
 
@@ -70,6 +48,28 @@ Datadog 오퍼레이터 v1.0.0 이래로 클러스터 에이전트는 활성화�
 수동으로 설정하는 경우 이 토큰은 32자의 영숫자 문자여야 합니다.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Helm 차트 v2.7.0 이래로 클러스터 에이전트는 기본적으로 활성화되어 있습니다.
+
+이전 버전을 활성화하려면 `clusterAgent` 키를 덮어쓰는 커스텀 [datadog-values.yaml][1]을 사용하는 경우, 다음 클러스터 에이전트 설정을 사용해 [datadog-values.yaml][1] 파일을 업데이트해야 합니다.
+
+  ```yaml
+  clusterAgent:
+    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
+    enabled: true
+  ```
+
+그런 다음 Datadog Helm 차트를 업그레이드합니다.
+
+이 작업은 자동으로 클러스터 에이전트와 Datadog 에이전트의 필수 RBAC 파일을 업데이트합니다. 양 에이전트는 동일한 API 키를 사용합니다.
+
+오퍼레이터는 또한 일반적으로 양 클러스터 에이전트와 Datadog 에이전트가 통신을 보호하기 위해 공유하는 `Secret`에서 임의 토큰을 생성합니다. `clusterAgent.token` 설정을 사용해 수동으로 이 토큰을 지정할 수 있습니다. 대신 `clusterAgent.tokenExistingSecret` 설정을 통해 `token` 값을 포함하는 기존 `Secret` 이름을 참조하여 이를 설정할 수도 있습니다.
+
+수동으로 설정하는 경우 이 토큰은 32자의 영숫자 문자여야 합니다.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Manual (DaemonSet)" %}}
 
@@ -127,7 +127,7 @@ Datadog 에이전트와 클러스터 에이전트는 통신 보호를 위한 토
     * [`cluster-agent-deployment.yaml`: 클러스터 에이전트 매니페스트][8]
     * [`install_info-configmap.yaml`: 설치 정보 Configmap][9]
 
-2. `secret-api-key.yaml` 매니페스트에서 `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE`를 base64로 인코딩된 [Datadog API 키][19]로 바꿉니다. API 키의 base64 버전을 얻으려면 다음을 실행하세요:
+2. `secret-api-key.yaml` 매니페스트에서 `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE`을 base64에서 인코딩된 [Datadog API 키][10]로 바꿉니다. API 키의 base64 버전을 얻으려면 다음을 실행하세요.
 
     ```shell
     echo -n '<Your API key>' | base64
@@ -254,7 +254,7 @@ Datadog 클러스터 에이전트만 리눅스(Linux) 노드에 배포할 수 �
 
 윈도우즈(Windows) 컨테이너를 모니터링하려면 혼합된 클러스터에서 Helm 차트 두 개를 설치해야 합니다. 첫 번째 Helm 차트는 Datadog 클러스터 에이전트와 리눅스용 에이전트 DaemonSet를 배포합니다(`targetSystem: linux` 사용). 두 번째 Helm 차트(`targetSystem: windows` 사용) 윈도우즈 노드에서 에이전트만 배포하고 첫 번째 Helm 차트의 일부로 배포된 기존 클러스터 에이전트에 연결합니다.
 
-다음 `values.yaml` 파일을 사용해 윈도우즈 노드와 클러스터 에이전트에 배포된 에이전트 간 통신을 설정합니다.
+다음 `datadog-values.yaml` 파일을 사용하여 Windows 노드에 배포된 Agent와 Cluster Agent 간의 통신을 설정합니다.
 
 ```yaml
 targetSystem: windows
@@ -276,9 +276,9 @@ datadog:
 
 ## AWS 매니지드 서비스 모니터링
 
-MSK, ElastiCache 또는 RDS 등 AWS 매니지드 서비스를 모니터링하려면 `clusterChecksRunner`를 설정하여 Helm 차트에서 serviceAccountAnnotation을 통해 할당된 IAM 역할이 포함된 포드를 생성합니다. 그런 다음 `clusterAgent.confd` 아래에서 통합 설정을 설정합니다.
+AWS 관리형 서비스(예: Amazon Managed Streaming for Apache Kafka (MSK), ElastiCache, Relational Database Service (RDS))를 모니터링하려면 Helm 차트에서 `clusterChecksRunner`를 설정하세요. `serviceAccountAnnotation`를 통해 할당된 IAM 역할로 Pod를 생성할 수 있습니다. 그런 다음 `clusterAgent.confd`에서 통합 구성을 설정합니다.
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml">}}
 clusterChecksRunner:
   enabled: true
   rbac:
@@ -300,5 +300,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/ko/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/ko/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

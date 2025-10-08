@@ -29,7 +29,7 @@ short_description: Envía métricas de tiempo de ejecución desde tus aplicacion
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 La integración de Go te permite recopilar y monitorizar logs, trazas (traces) y métricas personalizadas de tu aplicación de Go.
@@ -44,7 +44,7 @@ Consulta la documentación específica para [recopilar métricas personalizadas 
 
 Consulta la documentación específica para [instrumentar tu aplicación de Go][2] a fin de enviar sus trazas a Datadog.
 
-### APM
+### Recopilación de logs
 
 _Disponible para la versión 6.0 o posterior del Agent_
 
@@ -64,15 +64,15 @@ Consulta la documentación específica para [habilitar el generador de perfiles 
 
 La integración de Go no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Go no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

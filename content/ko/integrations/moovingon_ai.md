@@ -119,6 +119,12 @@ moovingon 통합에는 이벤트가 포함되어 있지 않습니다.
 
 지원이 필요하세요? [moovingon.ai 지원][2]으로 문의하세요.
 
+## 참고 자료
+
+기타 유용한 문서, 링크 및 기사:
+
+- [moovingon.ai와 Datadog을 사용해 네트워크 인시던트의 가시성 높이기][3]
 
 [1]: https://moovingon.ai/
 [2]: mailto:support@moovingon.com
+[3]: https://www.datadoghq.com/blog/moovingon-datadog-marketplace/

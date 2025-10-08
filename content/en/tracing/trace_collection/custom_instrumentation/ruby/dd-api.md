@@ -293,10 +293,36 @@ There are additional configurations possible for both the tracing client and Dat
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][6] for information.
 
+#### Baggage
+
+Baggage is a hash that can be accessed through the API and is propagated by default. See the following example to manipulate [Baggage][7]:
+
+```ruby
+# set_baggage_item
+Datadog::Tracing.baggage['key1'] = 'value1'
+Datadog::Tracing.baggage['key2'] = 'value2'
+
+# get_all_baggage_items
+all_baggage = Datadog::Tracing.baggage
+puts(all_baggage) # {"key1"=>"value1", "key2"=>"value2"}
+
+# remove_baggage_item
+Datadog::Tracing.baggage.delete('key1')
+puts(Datadog::Tracing.baggage) # {"key2"=>"value2"}
+
+# get_baggage_item
+puts(Datadog::Tracing.baggage['key1']) # nil
+puts(Datadog::Tracing.baggage['key2']) # "value2"
+
+# remove_all_baggage_items
+Datadog::Tracing.baggage.clear
+puts(Datadog::Tracing.baggage) # {}
+```
+
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][7] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][8] page.
 
 ## Further Reading
 
@@ -308,5 +334,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 [6]: /tracing/trace_collection/trace_context_propagation/
-[7]: /tracing/security
-[8]: https://github.com/DataDog/dd-trace-rb/releases
+[7]: /tracing/trace_collection/trace_context_propagation/#baggage
+[8]: /tracing/security
+[9]: https://github.com/DataDog/dd-trace-rb/releases

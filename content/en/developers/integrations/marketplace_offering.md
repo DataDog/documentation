@@ -8,13 +8,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: Blog
   text: Expand your monitoring reach with the Datadog Marketplace
-- link: /developers/integrations/create_a_tile
+- link: /developers/integrations/
   tag: Documentation
-  text: Create a Tile
+  text: Create an integration
 - link: /developers/integrations/agent_integration
   tag: Documentation
   text: Create an Agent-based Integration
-title: Build A Marketplace Offering
+title: Build a Marketplace Offering
 type: documentation
 description: Learn about the Datadog marketplace.
 ---
@@ -80,7 +80,7 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 
 ## Get started
 
-To get started with creating an API-based integration, software license, or professional service, see [Create a Tile][13]. If you're interesting in building an Agent-based integration and selling it on the Datadog Marketplace, see [Create an Agent-based Integration][19].
+To get started with creating an integration, see [Build an Integration with Datadog][13].
 
 ## Further reading
 
@@ -97,7 +97,7 @@ To get started with creating an API-based integration, software license, or prof
 [10]: https://chat.datadoghq.com/
 [11]: https://docs.datadoghq.com/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
-[13]: https://docs.datadoghq.com/developers/integrations/create_a_tile
+[13]: /developers/integrations/build_integration/
 [15]: https://docs.datadoghq.com/developers/integrations/api_integration
 [19]: https://docs.datadoghq.com/developers/integrations/agent_integration
 [20]: https://www.dashcon.io/

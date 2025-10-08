@@ -28,7 +28,7 @@ draft: false
 git_integration_title: windows_service
 integration_id: windows-service
 integration_title: Servicios de Windows
-integration_version: 4.9.1
+integration_version: 6.2.0
 is_public: true
 manifest_version: 2.0.0
 name: windows_service
@@ -69,7 +69,7 @@ Este check monitoriza el estado de cualquier Servicio de Windows y envía un che
 
 ### Instalación
 
-El check del Servicio de Windows está incluido en el paquete del [Datadog Agent][1], por lo que no necesitas instalar nada más en tus nodos de Windows.
+El check de servicio de Windows está instalado por defecto con el [Agent][1], pero no está configurado. Consulta la siguiente sección para configurar el check.
 
 ### Configuración
 
@@ -118,16 +118,17 @@ Los valores posibles para `startup_type` son:
 A partir del Agent v7.50, el check puede seleccionar qué servicios monitorizar en función de si tienen un [activador de servicio asignado][6].
 A continuación se muestran algunos ejemplos de posibles configuraciones.
 ```yaml
-# Empareja todos los servicios que no tienen un activador
+# Matches all services that do not have a trigger
 services:
   - trigger_start: false
 
-# Empareja todos los servicios que tienen un tipo de inicio automático y excluye los servicios que tienen servicios activadores:
+# Matches all services with an automatic startup type and excludes services with triggers
+services:
   - startup_type: automatic
     trigger_start: false
 
-# Sólo empareja el servicio EventLog cuando tiene un tipo de inicio automático y tiene servicios
-activadores:
+# Only matches EventLog service when its startup type is automatic and has triggers
+services:
   - name: EventLog
     startup_type: automatic
     trigger_start: true

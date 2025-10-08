@@ -4,11 +4,12 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+{{< img src="database_monitoring/databases-list-4.png" alt="The Databases page in Datadog" style="width:100%;" >}}
 
-On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
+On the [Databases page][1], you can assess the health and activity of your database hosts and [clusters](#cluster-grouping). Sort and filter the list to prioritize hosts and clusters with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
-{{< img src="database_monitoring/db-list-details-panel-cropped-2.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
+
+{{< img src="database_monitoring/db-list-details-panel-cropped-3.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
 
@@ -19,9 +20,97 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           |
-| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           | {{< X >}} |
+| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
+
+## Cluster grouping
+A **Group into clusters** toggle appears with the list of database hosts if host tags indicate the presence of cluster topology. Enable this toggle to group hosts into clusters within the list.
+
+Cluster rows display a **Cluster** badge and show the number of instances in the cluster. Columns for cluster rows display aggregated data from all instances within the cluster. Select a cluster row to expand it and view a list of all instances that the cluster contains.
+
+Cluster grouping supports the following database technology and cluster topologies:
+
+<table>
+  <colgroup>
+    <col style="width:15%">
+    <col style="width:20%">
+    <col style="width:30%">
+    <col style="width:35%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Database</th>
+      <th>Topologies</th>
+      <th>Grouping Tags</th>
+      <th>Cluster Name Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amazon RDS<br><em>(AWS integration required)</em></td>
+      <td>
+        <ul>
+          <li>Multi-AZ clusters</li>
+          <li>Read replicas</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>dbclusteridentifier</code></li>
+          <li><code>region</code></li>
+          <li><code>aws_account</code></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>dbclusteridentifier</code></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>PostgreSQL<br><em>(Agent v7.58+ required)</em></td>
+      <td>
+        <ul>
+          <li>Physical replication</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>system_identifier</code></li>
+          <li><code>env</code></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>postgresql_cluster_name</code> (from instance <code>cluster_name</code> config)</li>
+          <li>Primary instance name</li>
+          <li><code>system_identifier</code></li>
+        </ul>
+      </td>
+    </tr>
+        <tr>
+      <td>MySQL<br><em>(Agent v7.68+ required)</em></td>
+      <td>
+        <ul>
+          <li>Regular replication (not group replication)</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>cluster_uuid</code></li>
+          <li><code>env</code></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Primary instance name</li>
+          <li><code>cluster_uuid</code></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Top queries
 

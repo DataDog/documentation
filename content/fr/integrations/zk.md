@@ -77,7 +77,7 @@ Après avoir configuré l'authentification SSL pour ZooKeeper, vous pouvez égal
 Les exemples de commandes suivants supposent que vos fichiers `truststore` et `keystore` JKS portent les noms suivants :
 
 - `server_truststore.jks`
-- `server_keystore.jks` 
+- `server_keystore.jks`
 - `client_truststore.jks`
 - `client_keystore.jks`
 
@@ -94,12 +94,12 @@ Pour convertir des fichiers JKS en fichiers PEM :
 2. Récupérez le fichier `cert.pem` à partir du fichier `client_keystore.jks`, puisque le `keystore` du client contient le certificat du client pour l'alias `client_cert` :
     ```
     keytool -importkeystore -srckeystore client_keystore.jks -destkeystore cert.p12 -srcstoretype jks -deststoretype pkcs12 -srcalias client_cert
-    ```   
+    ```
 
 3. Exécutez la commande `openssl pkcs12`, afin d'exporter le certificat client et la clé privée du certificat. L'option `tls_cert` peut lire et parser le fichier PEM, qui contient à la fois le certificat et la clé privée. Si vous souhaitez obtenir un fichier qui n'est pas protégé par un mot de passe, ajoutez `-nodes` à la commande :
    ```
    openssl pkcs12 -in cert.p12 -out cert.pem
-   ``` 
+   ```
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -202,7 +202,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "zk" >}}
+{{< get-metrics-from-git "zookeeper" >}}
 
 
 #### Métriques obsolètes
@@ -217,7 +217,7 @@ Bien qu'elles soient toujours envoyées, les métriques suivantes seront prochai
 Le check ZooKeeper n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "zk" >}}
+{{< get-service-checks-from-git "zookeeper" >}}
 
 
 ## Dépannage

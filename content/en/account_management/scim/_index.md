@@ -1,5 +1,6 @@
 ---
 title: User Provisioning with SCIM
+description: Automate user provisioning and deprovisioning in Datadog using SCIM integration with Microsoft Entra ID and Okta identity providers.
 further_reading:
     - link: '/account_management/scim/azure/'
       tag: 'Documentation'
@@ -26,8 +27,6 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 - Keep user attributes synchronized between the identity provider and Datadog
 - Single sign-on to Datadog (recommended)
 - Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.
-
-**Note:** To use managed teams, you must use the Okta IdP and request access to the feature from [support][8].
 
 Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. To configure SCIM, see the documentation for your IdP:
 - [Microsoft Entra ID][2]

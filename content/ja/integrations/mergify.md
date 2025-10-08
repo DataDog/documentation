@@ -104,7 +104,7 @@ Mergify チェックをホストにインストールするには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mergify" >}}
+{{< get-metrics-from-git "mergify-oauth" >}}
 
 
 ### イベント

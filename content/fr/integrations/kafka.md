@@ -295,7 +295,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "kafka_consumer" >}}
+{{< get-metrics-from-git "kafka-consumer" >}}
 
 
 ### Événements

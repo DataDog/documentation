@@ -13,4 +13,4 @@ further_reading:
 title: APM con Synthetics
 ---
 
-{{< include-markdown "synthetics/platform/apm/_index" >}}
+{{< include-markdown "synthetics/platform/apm" >}}

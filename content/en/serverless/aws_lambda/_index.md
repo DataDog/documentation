@@ -1,33 +1,39 @@
 ---
 title: Serverless Monitoring for AWS Lambda
 further_reading:
-- link: '/serverless/configuration/'
-  tag: 'Documentation'
-  text: 'Configure Serverless monitoring'
-- link: "/integrations/amazon_lambda/"
-  tag: "Documentation"
-  text: "AWS Lambda integration"
-- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
-  tag: "Blog"
-  text: "Monitor AWS Lambda functions deployed using container images"
-- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
-  tag: "Blog"
-  text: "Best practices for collecting and managing serverless logs"
-- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
-  tag: "Blog"
-  text: "Designing production-ready AWS serverless applications"
-- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
-  tag: "Blog"
-  text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
-- link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
-  tag: "Blog"
-  text: "Monitor your AWS Lambda functions' ephemeral storage usage"
-- link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
-  tag: "Blog"
-  text: "Understand serverless function performance with Cold Start Tracing"
-- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
-  tag: "Blog"
-  text: "Identify deprecated Lambda functions with Datadog"
+  - link: '/serverless/configuration/'
+    tag: 'Documentation'
+    text: 'Configure Serverless monitoring'
+  - link: "/integrations/amazon_lambda/"
+    tag: "Documentation"
+    text: "AWS Lambda integration"
+  - link: "/serverless/guide/disable_serverless"
+    tag: "Documentation"
+    text: "Disable Serverless Monitoring"
+  - link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+    tag: "Blog"
+    text: "Monitor AWS Lambda functions deployed using container images"
+  - link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
+    tag: "Blog"
+    text: "Best practices for collecting and managing serverless logs"
+  - link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+    tag: "Blog"
+    text: "Designing production-ready AWS serverless applications"
+  - link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+    tag: "Blog"
+    text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
+  - link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
+    tag: "Blog"
+    text: "Monitor your AWS Lambda functions' ephemeral storage usage"
+  - link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
+    tag: "Blog"
+    text: "Understand serverless function performance with Cold Start Tracing"
+  - link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+    tag: "Blog"
+    text: "Identify deprecated Lambda functions with Datadog"
+  - link: "https://www.datadoghq.com/blog/monitoring-lwa-with-datadog/"
+    tag: "Blog"
+    text: "Monitor Lambda-hosted web apps with the Lambda Web Adapter integration"
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
@@ -86,7 +92,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< whatsnext desc=" ">}}
     {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u>: Enable Datadog's Continuous Profiler to find the exact line of code in your Lambda function that is causing bottlenecks.{{< /nextlink >}}
-    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Secure Functions</u>: Use Application Security Management (ASM) to manage threats to your functions.{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Secure Functions</u>: Use App and API Protection (AAP) to manage threats to your functions.{{< /nextlink >}}
     {{< nextlink href="/serverless/deployment_tracking" >}}<u>Deployment Tracking</u>: Track deployments to see when a new version of code or a configuration change causes a regression.{{< /nextlink >}}
 {{< /whatsnext >}}
 

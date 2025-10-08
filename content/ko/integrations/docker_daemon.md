@@ -193,7 +193,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 
 ## 수집한 데이터
 ### 메트릭
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 
 ### 이벤트
@@ -211,7 +211,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 * 업데이트
 
 ### 서비스 점검
-{{< get-service-checks-from-git "docker_daemon" >}}
+{{< get-service-checks-from-git "docker" >}}
 
 
 **참고**: `docker.exit`를 사용하려면 [도커(Docker) YAML file][21] 파일에 `collect_exit_codes: true`를 추가하고 에이전트를 다시 시작합니다.

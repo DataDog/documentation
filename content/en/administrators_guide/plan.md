@@ -18,7 +18,7 @@ When you plan a new software installation, its crucial to understand its capabil
 
 ### Scoping exercise
 
-Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. Send your engineering organization a survey outline to size and whiteboard your needs.
+Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. 
 
 **Recommendations:**   
 Start collecting and consolidating a survey of your organization early. Create a comprehensive view of your ecosystems, application languages, data storage, networking, and infrastructure.
@@ -170,7 +170,7 @@ Synthetic Monitoring is a full synthetic testing suite, which includes testing f
 
 - Identify the API endpoints and user journeys that are central to your business and test those frequently.
 - Develop a roadmap of business transactions to test.
-- Use Synthetics in conjunction with [APM and RUM][49].
+- Use Synthetic Monitoring in conjunction with [APM and RUM][49].
 - Review [Synthetic monitoring consumption considerations][23].
 - Reduce test maintenance by using [subtests][24].
 - Make intentional choices in test location selection. Test from where your customers actually are.     
@@ -289,7 +289,7 @@ To begin mapping out your installation patterns, combine the information you gat
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
 | **APM** | Deny/Allow | Allow | Allow | Allow |
-| **Synthetics** | Deny | Deny/Allow | Allow | Allow |
+| **Synthetic Monitoring** | Deny | Deny/Allow | Allow | Allow |
 | **Log Management** | Allow | Allow | Allow | Allow |
 | **RUM** | Deny | Deny/Allow |  Allow | Allow |
 | **DBM** | Deny/Allow | Deny/Allow | Allow | Allow |
@@ -348,8 +348,8 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [32]: /error_tracking/
 [33]: /software_catalog/endpoints/
 [34]: /agent/fleet_automation/
-[35]: /agent/remote_config/
-[36]: /agent/remote_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
+[35]: /remote_configuration
+[36]: /remote_configuration#supported-products-and-features
 [37]: /notebooks/
 [38]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [39]: /account_management/billing/aws/#aws-resource-exclusion
@@ -362,7 +362,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [46]: /infrastructure/resource_catalog/
 [47]: https://www.datadoghq.com/blog/engineering/introducing-husky/
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
-[49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
+[49]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
 [51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
@@ -389,4 +389,3 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
 [75]: /tracing/trace_collection/
-

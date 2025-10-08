@@ -1,5 +1,5 @@
 ---
-title: Session Replay
+title: Replaying User Activity
 description: Learn about how to capture and visually replay your users' web browsing or mobile app experience with Session Replay.
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
@@ -57,9 +57,9 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: /real_user_monitoring/session_replay/browser/
-[4]: /real_user_monitoring/session_replay/mobile/
+[3]: /product_analytics/session_replay/browser/
+[4]: /product_analytics/session_replay/mobile/
 [5]: https://docs.datadoghq.com/notebooks/
 [6]: https://docs.datadoghq.com/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[8]: /real_user_monitoring/session_replay/playlists
+[8]: /product_analytics/session_replay/playlists

@@ -17,7 +17,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
+- incident-teams
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/podman/README.md
 display_on_public_website: true
@@ -27,7 +28,6 @@ integration_id: podman
 integration_title: Podman
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: podman
 public_title: Podman
@@ -40,6 +40,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Surveiller toutes vos métriques sur les conteneurs Podman avec Datadog
   media: []
@@ -53,25 +54,25 @@ tile:
 
 [Podman][1] est un moteur de conteneur sans daemon conçu pour développer, gérer et exécuter des conteneurs OCI sur votre système Linux. Les conteneurs peuvent être exécutés en mode root ou rootless.
 
-## Présentation
+## Section Overview
 
 Le runtime de conteneur Podman est pris en charge par le [check d'Agent Container][2]. Ce check transmet un ensemble de métriques sur tous les conteneurs en cours d'exécution, sans tenir compte du runtime utilisé pour démarrer ces conteneurs.
 
 **REMARQUE** : le check `container` transmet des métriques standardisées pour tous les conteneurs identifiés sur le système, peu importe le runtime des conteneurs.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Pour surveiller des conteneurs gérés par [Podman][1], consultez les [instructions d'installation][3] pour le [check d'Agent Container][2].
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 
 Consultez le fichier [metadata.csv][4] pour découvrir la liste des métriques fournies par cette intégration.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 

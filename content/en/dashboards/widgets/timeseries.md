@@ -135,9 +135,13 @@ For more information about editing and deleting context links, see [Context Link
 
 ### Full screen
 
-In addition to the [standard full screen options][11], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+In addition to the [standard full screen options][11], you can apply quick functions, adjust the Y scale, save changes, or save as a new graph.
 
 For more information, see [Explore your data in full-screen graph mode][12].
+
+### Metrics info
+
+On a metric graph, click on the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## API
 

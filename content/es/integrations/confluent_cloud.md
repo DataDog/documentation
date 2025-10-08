@@ -68,6 +68,8 @@ tile:
   resources:
   - resource_type: Blog
     url: https://www.datadoghq.com/blog/confluent-cloud-monitoring-datadog/
+  - resource_type: Blog
+    url: https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/
   support: README.md#Soporte
   title: Confluent Cloud
 ---
@@ -146,7 +148,7 @@ Por defecto, se muestran todas las métricas recopiladas en Confluent Cloud.
 
 La integración de Confluent Cloud no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Confluent Cloud no incluye checks de servicio.
 

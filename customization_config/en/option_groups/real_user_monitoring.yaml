@@ -1,0 +1,37 @@
+rum_sdk_platform_options:
+  - id: android
+    default: true
+  - id: ios
+  - id: react_native
+
+rum_sdk_platform_options_v2:
+  - id: android
+    default: true
+  - id: ios
+  - id: react_native
+  - id: flutter
+
+rum_session_replay_sdk_options:
+  - id: android
+    default: true
+  - id: ios
+  - id: kotlin_multiplatform
+  - id: react_native
+  - id: flutter
+
+rum_mobile_proxy_protocol_options:
+  - id: http_https
+    default: true
+  - id: socks
+
+rum_browser_sdk_source_options:
+  - id: npm
+    default: true
+  - id: cdn_async
+  - id: cdn_sync
+
+rum_browser_sdk_version_for_proxying_options:
+- id: gte_5_4_0
+  default: true
+- id: gte_4_34_0
+- id: lt_4_34_0

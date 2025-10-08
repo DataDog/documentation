@@ -71,10 +71,6 @@ Configurez de nouveaux canaux de notification sortante pour les monitors et les 
 
 La liste complète des ressources pouvant être ciblées est disponible sur le [site d'AWS][8].
 
-L'exemple ci-dessous montre comment envoyer un snapshot pour déclencher ce processus. Une fois déclenché, vous pouvez spécifier une règle de réception des actions dans AWS.
-
-{{< wistia uezo3fh61j >}}
-
 ## Données collectées
 
 ### Métriques

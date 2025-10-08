@@ -1,8 +1,8 @@
 ---
 aliases:
-- /serverless/troubleshooting/insights/
-- /serverless/insights/
-- /serverless/guide/insights
+- /es/serverless/troubleshooting/insights/
+- /es/serverless/insights/
+- /es/serverless/guide/insights
 further_reading:
 - link: https://www.datadoghq.com/blog/serverless-insights/
   tag: Blog

@@ -1,6 +1,7 @@
 {{- $headingLevel := default "h3" (.Get "level") -}}
 {{- $isExpanded := default false (.Get "expanded") -}}
-<details class="collapsible-section" {{ if $isExpanded }}open{{ end }}>
+{{- $accordionId := default "" (.Get "id") -}}
+<details class="collapsible-section" {{ if $isExpanded }}open{{ end }} {{ if ne $accordionId "" }}id="{{ $accordionId }}"{{- end -}}>
   <summary class="collapsible-header" tabindex="0" aria-expanded="{{ $isExpanded }}">
     <div class="header-content">
       <div class="header-icon">

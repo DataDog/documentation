@@ -3,11 +3,11 @@ title: Microsoft Sentinel Destination
 disable_toc: false
 ---
 
-Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel.
+Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for API call limits in Microsoft Sentinel.
 
 ## Setup
 
-Set up the Microsoft Sentinel destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Microsoft Sentinel destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI, except for [Prerequisites](#prerequisites) which provides instructions on how to find the information you need in Microsoft Azure.
 
 ### Set up the destination
 
@@ -29,3 +29,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api

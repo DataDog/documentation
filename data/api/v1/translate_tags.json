@@ -25,7 +25,7 @@
   },
   "downtimes": {
     "name": "Downtimes",
-    "description": "[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+    "description": "[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags.\n\n**Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html)."
   },
   "embeddable-graphs": {
     "name": "Embeddable Graphs",
@@ -49,7 +49,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "Monitors",
-    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/)."
+    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).\n\n**Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html)."
   },
   "notebooks": {
     "name": "Notebooks",
@@ -85,7 +85,7 @@
   },
   "screenboards": {
     "name": "Screenboards",
-    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
+    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead."
   },
   "security-monitoring": {
     "name": "Security Monitoring",
@@ -117,7 +117,7 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
+    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog's API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
     "name": "Tags",
@@ -125,7 +125,7 @@
   },
   "timeboards": {
     "name": "Timeboards",
-    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
+    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead."
   },
   "usage-metering": {
     "name": "Usage Metering",

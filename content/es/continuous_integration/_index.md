@@ -45,10 +45,6 @@ further_reading:
 title: Continuous Integration Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Esta página trata sobre traer tus métricas y datos de Continuous Integration (CI) a dashboards de Datadog. Si deseas ejecutar tests de Continuous Testing en tus pipelines de CI, consulta la sección <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing y CI/CD</a>.</div>
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?etiquetas (tags).topics-0=CI">}}

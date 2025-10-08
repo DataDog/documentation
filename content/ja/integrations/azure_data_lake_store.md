@@ -1,29 +1,58 @@
 ---
-aliases:
-- /ja/integrations/azure_datalakestore
+app_id: azure-datalakestore
+app_uuid: 56d73475-119f-498c-b8d8-b192f89aaba0
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.datalakestore_accounts.read_requests
+      metadata_path: metadata.csv
+      prefix: azure.datalakestore_accounts
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 289
+    source_type_name: Azure Data Lake Store
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Azure Data Lake Store のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_data_lake_store
-has_logo: true
 integration_id: azure-datalakestore
-integration_title: Microsoft Azure Data Lake Store
+integration_title: Azure Data Lake Store
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_data_lake_store
-public_title: Datadog-Microsoft Azure Data Lake Store インテグレーション
+public_title: Azure Data Lake Store
 short_description: Azure Data Lake Store のキーメトリクスを追跡
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Data Lake Store のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Data Lake Store
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Data Lake Store は、ビッグデータ分析を可能にする無制限のデータレイクです。
@@ -39,7 +68,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Store か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_data_lake_store" >}}
+{{ get-metrics-from-git "azure-datalakestore" }}
 
 
 **注**: このインテグレーションは、Data Lake Storage Gen 1 のメトリクスのみを収集します。Data Lake Storage Gen 2 は Azure Blob Storage に構築されているため、そのメトリクスは Datadog の Blob ストレージネームスペース、`azure.storage_storageaccounts_blobservices.*` に収集されます。詳細については、[Azure Data Lake Storage Gen 2][3]に関するドキュメントを参照してください。

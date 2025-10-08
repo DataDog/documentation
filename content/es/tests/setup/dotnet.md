@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/setup_tests/dotnet
-- /continuous_integration/tests/dotnet
-- /continuous_integration/tests/setup/dotnet
+- /es/continuous_integration/setup_tests/dotnet
+- /es/continuous_integration/tests/dotnet
+- /es/continuous_integration/tests/setup/dotnet
 code_lang: dotnet
 code_lang_weight: 0
 further_reading:
@@ -21,10 +21,6 @@ further_reading:
 title: Tests de .NET
 type: multi-code-lang
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) por el momento.</div>
-{{< /site-region >}}
 
 ## Compatibilidad
 
@@ -51,7 +47,7 @@ Marcos de test compatibles:
 
 ## Configuración del método de informe
 
-Para informar resultados de test a Datadog, debes configurar la biblioteca de Datadog .NET:
+Para informar resultados de test a Datadog, debes configurar la librería de Datadog .NET:
 
 {{< tabs >}}
 {{% tab "Github Actions" %}}
@@ -69,7 +65,7 @@ Si lo haces, el resto de los pasos de configuración a continuación pueden omit
 {{% /tab %}}
 
 {{% tab "Other cloud CI provider" %}}
-<div class="alert alert-info">El modo sin Agent está disponible en las versiones de biblioteca de Datadog .NET >= 2.5.1</div>
+<div class="alert alert-info">El modo sin Agent está disponible en las versiones de librería de Datadog .NET >= 2.5.1</div>
 {{% ci-agentless %}}
 
 {{% /tab %}}
@@ -310,7 +306,7 @@ Un módulo de test representa el ensamblado de .NET que incluye los tests.
 
 Para iniciar un módulo de test, llama a `TestModule.Create()` y pasa el nombre del módulo o el nombre del ensamblado de .NET donde se encuentran los tests.
 
-Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la biblioteca a enviar todos los resultados de los tests restantes al backend.
+Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la librería a enviar todos los resultados de los tests restantes al backend.
 
 ### Conjuntos de tests
 

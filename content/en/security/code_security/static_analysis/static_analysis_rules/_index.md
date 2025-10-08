@@ -9,6 +9,14 @@ aliases:
 is_beta: false
 type: static-analysis
 rulesets:
+  apex-code-style:
+    title: "Rules to enforce Apex code style and best practices."
+    description: |
+      Code Security rules to write Apex rules that follows established coding standards.
+  apex-security:
+    title: "Security rules for Apex"
+    description: |
+      Rules focused on finding security issues in your Apex code.
   csharp-best-practices:
     title: "Best Practices for C#"
     description: |
@@ -181,6 +189,14 @@ rulesets:
     title: "Security rules for Ruby"
     description: |
       Rules focused on finding security issues in your Ruby code.
+  swift-code-style:
+    title: "Rules to enforce Swift code style and best practices."
+    description: |
+      Code Security rules to write Swift rules that follows established coding standards.
+  swift-security:
+    title: "Security rules for Swift"
+    description: |
+      Rules focused on finding security issues in your Swift code.
   terraform-aws:
     title: "Terraform AWS"
     description: |
@@ -243,13 +259,13 @@ cascade:
       text: Use Datadog Code Security to catch code issues at every step of your development process
       link:
         name: Datadog Code Security
-        url: https://www.datadoghq.com/security/code_security/
+        url: https://www.datadoghq.com/product/code-security/
 
   banner:
     title: "<span>Seamless integrations.</span> Try Datadog Code Security"
     link:
       name: Datadog Code Security
-      url: https://www.datadoghq.com/security/code_security/
+      url: https://www.datadoghq.com/product/code-security/
 
 further_reading:
   - link: "/security/code_security/"

@@ -36,7 +36,7 @@ En el Mapa de topología de red, están disponibles las siguientes opciones de n
 
 ### Vista
 
-1. En **View By** (Ver por), utiliza las etiquetas (tags) para seleccionar cómo deseas visualizar los dispositivos: 
+1. En **View By** (Ver por), utiliza las etiquetas (tags) para seleccionar cómo deseas visualizar los dispositivos:
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-grouped.png" alt="La opción de navegación, con la vista por dispositivos y etiquetas seleccionada, resaltada la vista por ubicación" style="width:80%;" >}}
 
@@ -45,7 +45,7 @@ En el Mapa de topología de red, están disponibles las siguientes opciones de n
 2. En **Color by** (Color por), cambia cómo se colorean los nodos en el Mapa de topología de dispositivos basándose en:
 
 - **Estado del dispositivo**: muestra los nodos en el Mapa topológico de dispositivos por nivel de alcance de SNMP.
-- **Estado de ping**: muestra los nodos en el Mapa topológico de dispositivos por [estado de ping][6]. 
+- **Estado de ping**: muestra los nodos en el Mapa topológico de dispositivos por [estado de ping][6].
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-overview-intro.png" alt="La opción de navegación, con la vista por color seleccionada y la opción vista por estado de dispositivo resaltada" style="width:80%;" >}}
 
@@ -63,7 +63,7 @@ En el Mapa de topología de red, están disponibles las siguientes opciones de n
 
 ### Filtrar dispositivos
 
-3. En **Filter Devices** (Filtrar dispositivos), podrás controlar de forma más detallada qué dispositivos se muestran en el Mapa de topología de dispositivos. 
+3. En **Filter Devices** (Filtrar dispositivos), podrás controlar de forma más detallada qué dispositivos se muestran en el Mapa de topología de dispositivos.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_hide.png" alt="La opción de navegación, con la opción de filtro Ver seleccionada, que marca Ocultar dispositivos no monitorizados" style="width:80%;" >}}
 
@@ -75,9 +75,9 @@ Ocultar _N_ dispositivos no monitorizados: desactivado por defecto.
 Ocultar _N_ dispositivos desconectados: desactivado por defecto.
 : activar esta opción oculta los dispositivos que no tienen conexiones de enlace. Los dispositivos pueden estar desconectados por razones como una configuración incorrecta, o que el dispositivo no es compatible con [LLDP/CDP](#troubleshooting).
 
-### Leyenda del icono 
+### Leyenda del icono
 
-Los dispositivos SNMP se emparejan con un icono representativo en función de su tipo de dispositivo en cada nodo de dispositivo, tal y como se define en sus [perfiles de dispositivo][4]. 
+Los dispositivos SNMP se emparejan con un icono representativo en función de su tipo de dispositivo en cada nodo de dispositivo, tal y como se define en sus [perfiles de dispositivo][4].
 
 <table>
   <colgroup>
@@ -205,13 +205,13 @@ Puedes utilizar el conmutador "Hide _N_ Unmonitored Devices" (Ocultar _N_ dispos
 El Mapa de topología de dispositivos muestra todos los dispositivos detectados con LLDP o CDP. En algunos casos, estos dispositivos ya están monitorizados con SNMP, pero no pueden ser [resueltos](#device-resolution) al dispositivo monitorizado equivalente. En este caso, el dispositivo se muestra dos veces: un nodo que representa el dispositivo monitorizado y un nodo que representa el dispositivo LLDP/CDP detectado.
 Utiliza el conmutador "Hide _N_ Unmonitored Devices" (Ocultar _N_ dispositivos no monitorizados) para ocultar los nodos no monitorizados.
 
-### Nodos sin bordes o negros en el mapa 
+### Nodos sin bordes o negros en el mapa
 
 Los nodos sin bordes o negros en el Mapa de topología de dispositivos pueden representar dispositivos detectados con LLDP o CDP que no están configurados para monitorizarse con NDM, o dispositivos detectados con LLDP o CDP que no pueden ser resueltos al [dispositivo monitorizado](#device-resolution) equivalente.
 
 ## Resolución del dispositivo
 
-El Mapa de topología de dispositivos proporciona una visión general de los dispositivos monitorizados con NDM y sus conexiones físicas. Los datos de los enlaces topológicos se basan en la información LLDP (Link Layer Discovery Protocol) o CDP (Cisco Discovery Protocol) recopilada con SNMP. 
+El Mapa de topología de dispositivos proporciona una visión general de los dispositivos monitorizados con NDM y sus conexiones físicas. Los datos de los enlaces topológicos se basan en la información LLDP (Link Layer Discovery Protocol) o CDP (Cisco Discovery Protocol) recopilada con SNMP.
 Las conexiones detectadas con LLDP o CDP pueden corresponder a dispositivos ya monitorizados con SNMP. La resolución de dispositivos consiste en hacer coincidir el dispositivo detectado con el dispositivo monitorizado.
 
 ### Fallos en la resolución de dispositivos
@@ -225,7 +225,7 @@ La resolución del dispositivo puede fallar si el dispositivo no se monitoriza c
 
 
 [1]: /es/network_monitoring/netflow/
-[2]: https://app.datadoghq.com/infrastructure/devices?viewTab=topology
+[2]: https://app.datadoghq.com/devices?viewTab=topology
 [3]: /es/network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
 [4]: /es/network_monitoring/devices/profiles/
 [5]: /es/help

@@ -1,5 +1,6 @@
 ---
 title: Unified Service Tagging
+description: Connect telemetry across traces, metrics, and logs using standardized env, service, and version tags for consistent monitoring.
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -335,6 +336,9 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
   "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
+<div class="alert alert-warning">
+On ECS Fargate, you must add these tags to your application container, <strong>not</strong> the Datadog Agent container.
+</div>
 
 ##### Partial configuration
 
@@ -419,7 +423,7 @@ To form a single point of configuration for all telemetry emitted directly from 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /real_user_monitoring/platform/connect_rum_and_traces/
+[1]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [2]: /real_user_monitoring/browser/setup/
    {{% /tab %}}
 
@@ -577,7 +581,7 @@ processors:
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /real_user_monitoring/platform/connect_rum_and_traces/
+[10]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [11]: /getting_started/synthetics/
 [12]: /integrations/statsd/
 [13]: https://www.chef.io/

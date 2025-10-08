@@ -17,10 +17,6 @@ further_reading:
       text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [AWS CodePipeline][1] is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.
@@ -36,6 +32,8 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#collect-job-logs). |
 | [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 | [Custom spans][18] | Custom spans | Configure custom spans for your pipelines. |
+| [Filter CI Jobs on the critical path][19] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
 **AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
@@ -160,3 +158,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [17]: /glossary/#approval-wait-time
 [18]: /glossary/#custom-span
+[19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[20]: /glossary/#pipeline-execution-time

@@ -1,6 +1,7 @@
 ---
 title: Enable RUM on Your Shopify Store
-
+description: "Set up RUM monitoring on Shopify stores to track customer interactions, performance, and conversion rates for e-commerce optimization."
+private: true
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'

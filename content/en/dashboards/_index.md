@@ -58,13 +58,9 @@ Dashboards provide real-time insights into the performance and health of systems
 
 ## Get started
 
-{{< whatsnext desc="See the following resources:" >}}
-   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
-{{< /whatsnext >}}
-
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard: 
+1. Click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu.
+2. Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -76,6 +72,12 @@ Timeboards
 
 Screenboards
 : Dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real time or represent fixed points in the past.
+
+{{< whatsnext desc="See the following resources:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Refresh rate
 

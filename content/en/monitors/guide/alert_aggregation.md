@@ -1,5 +1,6 @@
 ---
-title: Alert aggregation 
+title: Alert aggregation
+description: "Learn about simple and multi alert aggregation strategies to manage alert noise and ensure actionable notifications for your monitoring system."
 further_reading:
 - link: "/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations"
   tag: "Documentation"
@@ -76,7 +77,7 @@ If you are managing your monitors with the API, use the variable `notify_by` to 
 
 | Type of Alert     | Configuration Example                  |
 |-------------------|----------------------------------------|
-| Simple Alert      | `"notify_by": [*]`                     |
+| Simple Alert      | `"notify_by": ["*"]`                     |
 | Multi Alert       | `"notify_by": [<group>]`, for example, `"notify_by": ["topic"]` |
 
 For more information, see the [API documentation][4].

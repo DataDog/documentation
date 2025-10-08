@@ -239,7 +239,7 @@ Snowflake 통합은 커스텀 쿼리 를 지원하며 커스텀 메트릭를 수
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "snowflake_web" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### 이벤트

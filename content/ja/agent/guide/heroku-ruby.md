@@ -615,9 +615,9 @@ APM Agent
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Datadog の Ruby アプリケーショントレース" >}}
 
-[サービスカタログ][20]に移動して、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認してください。
+[ソフトウェアカタログ][20]に移動して、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認してください。
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のサービスカタログ" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のソフトウェアカタログ" >}}
 {{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービス詳細ページ" >}}
 
 ## Logs
@@ -696,7 +696,7 @@ git push heroku main
 
 Heroku にはログドレインというネイティブのログルーターがあり、アプリケーションで動作しているすべてのダイノからログを収集し、Heroku に送信しています。このログには、アプリケーションのログ、Heroku ルーターのログ、Heroku システムのダイノのログが含まれます。これらのログを Datadog にルーティングするようにログドレインを設定することができます。ログドレインは、`ddsource=heroku` から Datadog に Heroku システムログを送信します。
 
-{{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku logs view" >}}
+{{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku ログビュー" >}}
 
 Heroku ログドレインをセットアップすると、dyno システムメトリクス（CPU、メモリ）を Datadog へ送ることも可能になります。
 

@@ -1,5 +1,6 @@
 ---
 title: Saved Views
+description: "Save and manage Quality Gates Explorer states with custom queries, facets, visualizations, and time ranges for effective troubleshooting."
 further_reading:
 - link: "/quality_gates/explorer/search_syntax/"
   tag: "Documentation"
@@ -9,10 +10,6 @@ further_reading:
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 Quality Gates is in Preview.
 {{< /callout >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 

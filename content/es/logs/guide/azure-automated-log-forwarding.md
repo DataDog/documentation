@@ -9,8 +9,6 @@ title: Configuración del reenvío automatizado de logs de Azure
 
 ## Información general
 
-<div class="alert alert-info">El reenvío automatizado de logs de Azure está en Vista previa.</div>
-
 Utiliza esta guía para automatizar la configuración del reenvío de logs de Azure con una plantilla de Azure Resource Manager (ARM). 
 
 La plantilla ARM despliega recursos de una serie de servicios Azure (cuentas de almacenamiento y aplicaciones de función) en tus suscripciones, que recopilan y reenvían logs a Datadog. Los escalados de estos servicios aumentan o disminuyen automáticamente para adaptarse al volumen de logs. El escalado se gestiona mediante un plano de control, que es un conjunto de aplicaciones de función desplegadas en una suscripción y región de tu elección. Las cuentas de almacenamiento y las aplicaciones de función se despliegan en cada una de las suscripciones que reenvían logs a Datadog.

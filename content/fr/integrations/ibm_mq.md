@@ -288,7 +288,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "ibm_mq" >}}
+{{< get-metrics-from-git "ibm-mq" >}}
 
 
 ### Checks de service

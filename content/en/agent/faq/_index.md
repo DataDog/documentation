@@ -25,4 +25,8 @@ aliases:
     {{< nextlink href="agent/guide/template_variables" >}}Template variables used for Autodiscovery{{< /nextlink >}}
     {{< nextlink href="logs/guide/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
     {{< nextlink href="agent/faq/docker-hub" >}}Docker Hub{{< /nextlink >}}
+    {{< nextlink href="agent/faq/proxy_example_haproxy" >}}Send traffix to Datadog using HAProxy{{< /nextlink >}}
+    {{< nextlink href="agent/faq/proxy_example_nginx" >}}Send traffix to Datadog using NGINX{{< /nextlink >}}
+    {{< nextlink href="agent/faq/fips_proxy" >}}Agent FIPS proxy{{< /nextlink >}}
+
 {{< /whatsnext >}}

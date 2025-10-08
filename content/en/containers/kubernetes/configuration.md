@@ -1,5 +1,6 @@
 ---
 title: Further Configure the Datadog Agent on Kubernetes
+description: Additional configuration options for APM, logs, processes, events, and other capabilities after installing the Datadog Agent
 aliases:
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection
@@ -607,11 +608,11 @@ Use the following configuration fields to configure the Datadog Agent.
 | `global.site` | Sets the Datadog [intake site][1] to which Agent data is sent. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right). |
 | `global.tags` | A list of tags to attach to every metric, event, and service check collected. |
 
-For a complete list of configuration fields for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see the [Operator v1alpha1 spec][3]. Configuration fields can also be queried using `kubectl explain datadogagent --recursive`.
+For a complete list of configuration fields for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see [Migrate DatadogAgent CRDs to v2alpha1][3]. Configuration fields can also be queried using `kubectl explain datadogagent --recursive`.
 
 [1]: /getting_started/
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md 
+[3]: /containers/guide/v2alpha1_migration/
 {{% /tab %}}
 {{% tab "Helm" %}}
 |  Helm | Description |

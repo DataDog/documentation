@@ -1,8 +1,8 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
-- 構成 & デプロイ
+- 構成とデプロイ
 - ログの収集
 custom_kind: インテグレーション
 dependencies: []
@@ -40,7 +40,7 @@ Amazon GameLift は、セッションベースのマルチプレーヤーゲー�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Game Lift` が有効になっていることを確認します。
 2. [Datadog - Amazon GameLift インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -72,7 +72,7 @@ Amazon GameLift インテグレーションには、サービスのチェック�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

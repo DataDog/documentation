@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: Documentación
-  text: Opciones adicionales de configuración de bibliotecas de rastreo
+  text: Opciones adicionales de configuración de librerías de rastreo
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
+  text: Instrucciones detalladas de configuración de librerías de rastreo
 - link: /tracing/trace_collection/compatibility/python/
   tag: Documentación
   text: Marcos de trabajo compatibles Java para la instrumentación automática
@@ -14,7 +14,7 @@ further_reading:
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-py
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de bibliotecas
+  text: Rastreo del repositorio de código fuente abierto de librerías
 title: Tutorial - Enabling Tracing for a Python Application in a Container and an
   Agent on a Host
 ---
@@ -40,7 +40,7 @@ Para obtener documentación general sobre la configuración del rastreo en Pytho
 Si no tienes instalado el Datadog Agent en tu máquina, ve a [**Integrations > Agent** (Integraciones > Agent)][5] y selecciona tu sistema operativo. Por ejemplo, en la mayoría de las plataformas Linux, puedes instalar el Agent ejecutando el siguiente script, sustituyendo `<YOUR_API_KEY>` por tu [clave de API Datadog][3]:
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 {{< /code-block >}}
 
 Para enviar datos a un sitio Datadog distinto de `datadoghq.com`, sustituye la variable de entorno `DD_SITE` por [tu sitio Datadog ][6].
@@ -48,7 +48,7 @@ Para enviar datos a un sitio Datadog distinto de `datadoghq.com`, sustituye la v
 Asegúrate de que tu Agent está configurado para recibir datos de rastreo de los contenedores. Abre su [archivo de configuración][15] y asegúrate de que `apm_config:` está sin comentar, y que `apm_non_local_traffic` está sin comentar y configurado como `true`.
 
 
-Si ya tienes un Agent instalado en el host, asegúrate de que es al menos la versión 7.28. Puedes consultar la versión mínima del Datadog Agent necesaria para utilizar las aplicaciones de rastreo Python `ddtrace` en la [documentación para desarrolladores de bibliotecas de rastreo][7].
+Si ya tienes un Agent instalado en el host, asegúrate de que es al menos la versión 7.28. Puedes consultar la versión mínima del Datadog Agent necesaria para utilizar las aplicaciones de rastreo Python `ddtrace` en la [documentación para desarrolladores de librerías de rastreo][7].
 
 
 ## Instalación de la aplicación de ejemplo Python en Docker
@@ -155,7 +155,7 @@ Ahora que ya tienes una aplicación Python en funcionamiento, configúrala para 
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Añade etiquetas (labels) Docker que correspondan a las etiquetas unificadas de servicios. Esto también te permite obtener métricas Docker una vez que ejecute tu aplicación.
+4. Añade etiquetas (labels) Docker que correspondan a las etiquetas (tags) unificadas de servicios. Esto también te permite obtener métricas Docker una vez que ejecute tu aplicación.
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -213,12 +213,12 @@ Verifica que el Agent se está ejecutando y enviando datos a Datadog, accediendo
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer que muestra un mensaje de Datadog que indica que el Agent se ha instalado en un host." style="width:70%;" >}}
 
-<div class="alert alert-info">Si al cabo de unos minutos no ves tu host en Datadog en (<strong>Infraestructure > Host map</strong> (Infraestructura > Asignación de hosts), asegúrate de haber utilizado la clave de API correcta para tu organización, disponible en <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a> (Parámetros de organización > Claves de API).</div>
+<div class="alert alert-info">Si al cabo de unos minutos no ves tu host en Datadog en (<strong>Infraestructure > Host map</strong> (Infraestructura > Asignación de hosts)), asegúrate de haber utilizado la clave de API correcta para tu organización, disponible en <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a> (Parámetros de organización > Claves de API).</div>
 
 
 ## Inicio de los contenedores para observar el rastreo automático
 
-Ahora que la biblioteca de rastreo está instalada y el Agent se está ejecutando, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
+Ahora que la librería de rastreo está instalada y el Agent se está ejecutando, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
 
 ```
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
@@ -280,7 +280,7 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-   Ahora, el rastreador etiqueta automáticamente el recurso con el nombre de la función por la cual está envuelto, en este caso, `long_running_process`.
+   Ahora, el rastreador etiqueta (label) automáticamente el recurso con el nombre de la función por la cual está envuelto, en este caso, `long_running_process`.
 
 4. Reconstruye los contenedores ejecutando:
    {{< code-block lang="sh" >}}
@@ -307,7 +307,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar_app` qu
    CMD ["ddtrace-run", "python", "-m", "calendar_app.app"]
    ```
 
-3. Aplica etiquetas de servicio unificadas, como lo hicimos para la aplicación de notas. Añade las siguientes variables de entorno en el archivo `Dockerfile.calendar`:
+3. Aplica etiquetas (tags) unificadas de servicios, como lo hicimos para la aplicación de notas. Añade las siguientes variables de entorno en el archivo `Dockerfile.calendar`:
 
    ```
    ENV DD_SERVICE="calendar"
@@ -323,7 +323,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar_app` qu
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-2. Al igual que hiciste anteriormente para la aplicación de notas, añade el nombre de host del contenedor del Agent, `DD_AGENT_HOST`, al contenedor de la aplicación de calendario para que envíe trazas (traces) a la localización correcta. Abre `docker/host-and-containers/exercise/docker-compose.yaml` y añade las siguientes líneas a la sección `calendar_app`:
+2. Al igual que hiciste anteriormente para la aplicación de notas, añade el nombre de host del contenedor del Agent, `DD_AGENT_HOST`, al contenedor de la aplicación de calendario para que envíe trazas a la localización correcta. Abre `docker/host-and-containers/exercise/docker-compose.yaml` y añade las siguientes líneas a la sección `calendar_app`:
 
    ```yaml
        environment:
@@ -402,7 +402,7 @@ def create_note(self, desc, add_date=None):
 5. Envía algunas solicitudes HTTP más, concretamente solicitudes a `POST`, con el argumento `add_date`.
 6. En el Trace Explorer, haz clic en una de las nuevas trazas `POST` para ver una traza personalizada a lo largo de varios servicios.
    {{< img src="tracing/guide/tutorials/tutorial-python-container-cust-dist.png" alt="Gráfico de llamas de una traza distribuida con instrumentación privada." style="width:100%;" >}}
-   Observa el nuevo tramo (span) etiquetado `notes_helper.another_process`.
+   Observa el nuevo tramo etiquetado (labeled) `notes_helper.another_process`.
 
 Si no recibes trazas como esperabas, configura el modo de depuración en el paquete Python `ddtrace`. Para obtener más información, consulta [Habilitar el modo de depuración][13].
 

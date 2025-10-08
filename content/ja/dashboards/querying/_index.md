@@ -47,6 +47,8 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 検索するか、**Metric** の隣にあるドロップダウンから選択して、グラフ化したいメトリクスを選択します。使用するメトリクスが分からない場合は、メトリクスのドロップダウンから `unit`、`type`、`interval`、`description`、`tags`、および `tag values` の数などの追加情報を得ることができます。
 
+Datadog または OpenTelemetry のソース インジケーターが表示される場合もあります。環境で両方を使用している場合は、Datadog の **Semantic Mode** セレクターを使って、1 つのグラフ内で [Datadog と OpenTelemetry のメトリクスを横断的にクエリ][18] できます。
+
 {{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:100%;">}}
 
 [メトリクスエクスプローラー][4]や[ノートブック][5]でメトリクスをさらに詳しく調べたり、[メトリクスの概要][6]ページでメトリクスのリストを閲覧することができます。
@@ -133,7 +135,7 @@ JSON ビューの使用方法については、[JSON を使用したグラフ作
 
 さらに、[メトリクスの定義](#define-the-metric)で使用されるメトリクスのドロップダウンでタグをクリックすると、データをグループ化したり、集計したりすることができます。
 
-### Nested Queries
+### ネストされたクエリ
 
 Datadog のネストされたクエリ機能により、既存のメトリクスクエリの結果に時間および/または空間集計の追加レイヤーを追加することができます。この高度なクエリ機能により、カウント/レート/ゲージタイプのメトリクスの集計クエリ結果のパーセンタイルや標準偏差を計算したり、より高解像度のクエリを過去の時間枠で実行したりすることも可能です。
 
@@ -259,3 +261,4 @@ min(status:error, status:warn)
 [15]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
 [16]: /ja/dashboards/widgets/timeseries/#event-overlay
 [17]: /ja/logs/explorer/search_syntax/
+[18]: /ja/metrics/open_telemetry/query_metrics

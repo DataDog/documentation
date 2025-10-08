@@ -14,6 +14,9 @@ further_reading:
 - link: "/logs/logs_to_metrics/"
   tag: "Documentation"
   text: "Learn how to generate metrics from ingested logs"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 algolia:
   tags: ['logging without limits']
 ---

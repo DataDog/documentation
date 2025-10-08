@@ -11,10 +11,6 @@ further_reading:
 title: TeamCity 파이프라인에서 트레이스 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서는 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 호환성
 
 - **지원되는 TeamCity 버전**: 2021.2 이상

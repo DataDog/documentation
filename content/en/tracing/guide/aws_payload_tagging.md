@@ -15,14 +15,6 @@ AWS Payload Extraction captures request and response data exchanged between your
 
 ## Requirements
 
-The following AWS services are supported:
-
-- Amazon Simple Notification Service (SNS)
-- Amazon Simple Queue Service (SQS)
-- Amazon Kinesis
-- Amazon S3
-- Amazon EventBridge
-
 The following tracer versions and AWS SDK packages are supported:
 
 | Language | Version            | Instrumented AWS SDK Packages  |
@@ -126,13 +118,14 @@ Each tracer implementation provides additional configuration options specific to
 {{< programming-lang lang="nodejs" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 
 - SNS
 - SQS
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 <div class="alert alert-info">To request support for additional services, open a feature request with the <a href="/help/">Datadog Support</a> team.</div>
 
@@ -147,12 +140,13 @@ The Node.js tracer applies redaction rules on a per-service basis. For example:
 {{< programming-lang lang="python" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 - SNS
 - SQS
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 #### Configure services
 
@@ -166,7 +160,7 @@ DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge
 Add services by appending to the comma-separated list. For example, to add support for AWS Amplify:
 
 ```sh
-DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,amplify
+DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,dynamodb,amplify
 ```
 
 <div class="alert alert-warning">

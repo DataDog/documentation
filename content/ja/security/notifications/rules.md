@@ -15,10 +15,10 @@ products:
   name: Cloud SIEM
   url: /security/cloud_siem/
 - icon: cloud-security-management
-  name: Cloud Security Management
+  name: Cloud Security
   url: /security/cloud_security_management/
 - icon: app-sec
-  name: Application Security Management
+  name: App and API Protection
   url: /security/application_security/
 title: 通知ルール
 ---

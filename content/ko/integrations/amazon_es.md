@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.es.cpuutilization
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.es.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -92,7 +92,7 @@ Amazon OpenSearch Service는 AWS Cloud에서 OpenSearch 클러스터를 손쉽�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_es" >}}
+{{< get-metrics-from-git "amazon-es" >}}
 
 
 ### 이벤트
@@ -114,5 +114,5 @@ Amazon OpenSearch Service 통합에는 서비스 점검이 포함되어 있지 �
 [5]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
 [6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [7]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#manually-set-up-triggers
-[8]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
+[8]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/assets/metrics/metric-spec.yaml
 [9]: https://docs.datadoghq.com/ko/help/

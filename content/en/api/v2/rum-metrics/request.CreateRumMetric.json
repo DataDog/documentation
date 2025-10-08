@@ -20,7 +20,7 @@
         "when": "match"
       }
     },
-    "id": "rum.sessions.webui.count",
+    "id": "examplerummetric",
     "type": "rum_metrics"
   }
 }

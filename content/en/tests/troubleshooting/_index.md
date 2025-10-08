@@ -6,10 +6,6 @@ further_reading:
     text: "Learn how to monitor your CI tests"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page provides information to help you troubleshot issues with Test Optimization. If you need additional help, contact [Datadog Support][2].
@@ -175,6 +171,10 @@ This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use
 
 This is also caused by an unstable test session fingerprint. See the [Session history, performance or code coverage tab only show a single execution](#session-history-performance-or-code-coverage-tab-only-show-a-single-execution) section for more information.
 
+## Flaky test management tags are missing or have an unexpected order in test events
+
+When retrying a flaky test multiple times within a short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky`, or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out of order, causing the tags to not follow the logical order of events.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -189,7 +189,7 @@ This is also caused by an unstable test session fingerprint. See the [Session hi
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /tests/test_impact_analysis/
 [13]: /tests/#parameterized-test-configurations
 [14]: /tests/#supported-features

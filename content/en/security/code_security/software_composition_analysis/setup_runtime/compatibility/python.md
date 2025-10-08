@@ -9,9 +9,9 @@ code_lang_weight: 50
 The following code security capabilities are supported in the Python library, for the specified tracer version:
 
 | Code Security capability                    | Minimum Python tracer version |
-| ------------------------------------------- | ------------------------------|
+| ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                |  Preview                      |
+| Runtime Code Analysis (IAST)                | Preview (`>=2.21.0`)          |
 
 ### Supported deployment types
 | Type        | Threat Detection support | Software Composition Analysis |
@@ -38,18 +38,11 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 
 ### Web framework compatibility
@@ -62,10 +55,11 @@ And the library supports the following runtimes:
 
 ### Supported frameworks
 
-| Framework                | Versions    | Runtime Code Analysis (IAST) |
-| ------------------------ | ----------- | ---------------------------- |
-| Django                   | 1.8         | {{< X >}}                    |
-| Flask                    | 0.10        | {{< X >}}                    |
+| Framework     | Versions    | Runtime Code Analysis (IAST) |
+|---------------|-------------|------------------------------|
+| Django        | `1.8`       | {{< X >}}                    |
+| FastAPI       | `0.86`      | {{< X >}}                    |
+| Flask         | `0.10`      | {{< X >}}                    |
 
 Support for query strings is not available for Flask.
 
@@ -84,7 +78,7 @@ Support for query strings is not available for Flask.
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 

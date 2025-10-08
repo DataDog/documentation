@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
   tag: "Blog"
   text: "Best practices for using DORA metrics to improve software delivery"
+- link: "https://www.datadoghq.com/blog/datadog-dora-metrics/"
+  tag: "Blog"
+  text: "3 ways to drive software delivery success with Datadog DORA Metrics"
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
@@ -25,12 +28,6 @@ further_reading:
   text: "Learn about the Software Catalog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
-
 ## Overview
 
 DevOps Research and Assessment (DORA) metrics are [four key metrics][1] that indicate the velocity and stability of software development.
@@ -38,7 +35,7 @@ DevOps Research and Assessment (DORA) metrics are [four key metrics][1] that ind
 Deployment frequency
 : How often an organization successfully releases to production.
 
-Lead time for changes
+Change lead time
 : The amount of time it takes a commit to get into production.
 
 Change failure rate
@@ -51,31 +48,40 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-To start configuring data sources to send deployment and incident events to Datadog, see the [Setup documentation][2].
+To start configuring data sources to send deployment and failure events to Datadog, see the [Setup documentation][2].
 
 ## Analyze DORA Metrics
 
-Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by service or environment, and compare trends over time.
+After you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
 
-{{< img src="dora_metrics/overview_2.png" alt="An overview of DORA Metrics calculations and insights in a given week" style="width:100%;" >}}
+{{< img src="dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
-You can examine visualizations and filter the collected data by team, service, repository, environment, and time period.
+Click **View Deployments** to open a new tab with the Deployment Frequency and Change Lead Time metrics in addition to a list of deployment events.
 
-Click **View Deployments** to open a side panel with the Deployment Frequency and Change Lead Time metrics in addition to a list of deployment events.
+{{< img src="dora_metrics/deployments_list.png" alt="The Deployments Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
-{{< img src="dora_metrics/deployments_2.png" alt="The Deployments Breakdown side panel on the DORA Metrics page displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
+Click **View Failures** to open a side panel with the Change Failure Rate and Time To Restore metrics in addition to a list of failure events.
 
-Click **View Failures** to open a side panel with the Change Failure Rate and Mean Time To Restore (MTTR) metrics in addition to a list of failure events.
-
-{{< img src="dora_metrics/failures_2.png" alt="The Failures Breakdown side panel on the DORA Metrics page displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
+{{< img src="dora_metrics/failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
 ## Use DORA Metrics data
 
-Export your visualization widgets to dashboards or notebooks, add them to existing incidents, and create [metric monitors][5] to trigger alerts on your metrics.
+### Export DORA Metrics widgets
+Export your visualization widgets to dashboards, notebooks, or add them to existing incidents.
 
-{{< img src="dora_metrics/export_2.png" alt="Click the Export icon to add the visualization widget to an incident or to a dashboard or notebook" style="width:100%;" >}}
+{{< img src="dora_metrics/dora_ui_2.png" alt="Click the Export icon to add the visualization widget to an incident or to a dashboard or notebook" style="width:100%;" >}}
 
 Click the **Export** icon on any visualization to add it to an incident, dashboard, or notebook. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
+
+### Create custom dashboards
+
+DORA metrics are highly flexible and can be used in custom dashboards to fit your team’s specific needs.
+
+{{< img src="dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
+
+Within dashboards and graphs, custom tags are treated as [attributes][7]. To filter or group by a custom tag, it must be prefixed with an `@` symbol.
+
+{{< img src="dora_metrics/graph_with_custom_tag.png" alt="An example of a custom DORA Metrics graph grouped by a custom tag" style="width:100%;" >}}
 
 ## Further Reading
 
@@ -87,3 +93,5 @@ Click the **Export** icon on any visualization to add it to an incident, dashboa
 [4]: https://app.datadoghq.com/ci/dora
 [5]: /monitors/types/metric/?tab=threshold
 [6]: /monitors/
+[7]: /dashboards/guide/quick-graphs/#graphing-events
+[8]: /dora_metrics/data_collected/#custom-tags

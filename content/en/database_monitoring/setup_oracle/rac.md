@@ -84,16 +84,6 @@ The Agent connects only to CDB. It queries the information about PDBs while conn
 
 Set the `rac_cluster` configuration parameter to the name of your RAC cluster or some user friendly alias. The `rac_cluster` filter helps you select all RAC nodes in the [DBM Oracle Database Overview dashboard][4]. You can set an additional filter for the database of interest.
 
-### Install or verify the Oracle integration
-
-#### First-time installations
-
-On the Integrations page in Datadog, install the [Oracle integration][10] for your organization. This installs an [Oracle dashboard][11] in your account that can be used to monitor the performance of your Oracle databases.
-
-#### Existing installations
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### Validate the setup
 
 [Run the Agent's status subcommand][1] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][11] and [Databases][2] page in Datadog to get started.

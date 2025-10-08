@@ -5,7 +5,7 @@ further_reading:
 - link: /tracing/trace_collection/
   tag: ドキュメント
   text: アプリケーションで APM トレースをセットアップする方法
-- link: /tracing/service_catalog/
+- link: /tracing/software_catalog/
   tag: ドキュメント
   text: Datadog に報告するサービスの発見とカタログ化
 - link: /tracing/services/service_page/
@@ -22,7 +22,7 @@ title: サービスのプライマリオペレーション
 
 ## APM サービス
 
-APM サービスは、エラー、スループット、レイテンシーのトレースメトリクスを計算します。メトリクスは 1 つのスパン名に一致する複数のリソースを基に計算され、プライマリオペレーションとみなされます。サービスメトリクスは、製品全体で、デフォルトのサービス詳細画面としてサービスカタログとサービスマップで使用されています。
+APM サービスは、エラー、スループット、レイテンシーのトレースメトリクスを計算します。メトリクスは 1 つのスパン名に一致する複数のリソースを基に計算され、プライマリオペレーションとみなされます。サービスメトリクスは、製品全体で、デフォルトのサービス詳細画面として Software Catalog とサービスマップで使用されています。
 
 **注**: トレースメトリクスは、`trace.*` [ネームスペース][1]に基づき照会できます。
 
@@ -68,7 +68,7 @@ APM サービスは、エラー、スループット、レイテンシーのト�
 
 Datadog を使用している場合、OpenTracing オペレーション名はリソース、OpenTracing "component" タグは Datadog のスパン名となります。たとえば、リソースが "/user/profile"、スパン名が "http.request" のスパンを OpenTracing 用語で定義するには、次のようになります。
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
 
@@ -123,18 +123,6 @@ end
 
 
 [1]: /ja/tracing/trace_collection/opentracing/ruby/#opentracing
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-
-
-```go
-opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
-```
-
-詳細は、[Go および OpenTracing のセットアップ][1]をご参照ください。
-
-
-[1]: /ja/tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

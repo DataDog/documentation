@@ -159,7 +159,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "nginx_ingress_controller" >}}
+{{< get-metrics-from-git "nginx-ingress-controller" >}}
 
 
 ### 이벤트

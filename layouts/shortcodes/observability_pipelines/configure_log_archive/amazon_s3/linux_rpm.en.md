@@ -1,18 +1,6 @@
-#### Create an IAM user
+#### Create an IAM user or role
 
-Create an IAM user and attach the IAM policy you created earlier to it.
+Create an IAM [user][1001] or [role][1002] and attach the policy to it.
 
-1. Navigate to the [IAM console][1001].
-1. Select **Users** in the left side menu.
-1. Click **Create user**.
-1. Enter a username.
-1. Click **Next**.
-1. Select **Attach policies directly**.
-1. Choose the IAM policy you created earlier to attach to the new IAM user.
-1. Click **Next**.
-1. Optionally, add tags.
-1. Click **Create user**.
-
-Create access credentials for the new IAM user. The AWS access key and AWS secret access key are added as environment variables in the [Install the Observability Pipelines Worker](#install-the-observability-pipelines-worker) step.
-
-[1001]: https://console.aws.amazon.com/iam/
+[1001]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html
+[1002]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html

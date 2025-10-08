@@ -8,11 +8,8 @@ further_reading:
   text: Más información sobre los perfiles NDM
 is_beta: true
 title: Empezando con perfiles de dispositivos
+site_support_id: snmp_profile_manager
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La experiencia de incorporación de dispositivos no es compatible con este sitio.</div>
-{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
 La incorporación de dispositivos está en Vista previa. Utiliza este formulario para solicitar acceso

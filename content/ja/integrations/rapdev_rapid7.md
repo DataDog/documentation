@@ -31,8 +31,8 @@ author:
   vendor_id: rapdev
 categories:
 - ログの収集
-- マーケットプレイス
-- セキュリティ
+- marketplace
+- security
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
@@ -108,7 +108,7 @@ tile:
 ログ収集はオプションで、デフォルトでは無効になっています。
 このインテグレーションでは、Rapid7 ログ API を呼び出し、最終インターバルで利用可能なすべてのログをクエリします。デフォルトのインターバル時間は最新の分数です。Rapid7 insightIDR [ログ検索ドキュメント][5]で詳しく説明されているとおり、特定の[ログセット][4]を指定して、そのログのみを取得することができます。
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io

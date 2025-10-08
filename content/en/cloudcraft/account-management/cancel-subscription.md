@@ -1,8 +1,8 @@
 ---
-title: Cancel your Cloudcraft Subscription
+title: Cancel your Cloudcraft (Standalone) Subscription
 ---
 
-Canceling your Cloudcraft subscription can be done from inside the Cloudcraft application.
+Canceling your Cloudcraft (Standalone) subscription can be done from inside the Cloudcraft application.
 
 Only the account owner can cancel a Cloudcraft subscription, which takes effect at the end of your current billing cycle. When you cancel your subscription, your account is downgraded to the free plan.
 

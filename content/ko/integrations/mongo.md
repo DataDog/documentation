@@ -305,7 +305,7 @@ db.createUser({
 
 ##### 데이터베이스 자동탐지
 
-Datadog Agent v7.56부터 데이터베이스 자동탐지를 활성화하여 MongoDB 인스턴스의 모든 데이터베이스에서 메트릭을 자동으로 수집할 수 있습니다. 
+Datadog Agent v7.56부터 데이터베이스 자동탐지를 활성화하여 MongoDB 인스턴스의 모든 데이터베이스에서 메트릭을 자동으로 수집할 수 있습니다.
 데이터베이스 자동탐지는 기본적으로 비활성화되어 있습니다. 메트릭을 수집하려면 자동탐지된 데이터베이스에 대한 읽기 액세스 권한이 필요합니다.
 `mongo.d/conf.yaml` 파일에 다음 구성을 추가하여 활성화하세요.
 
@@ -647,7 +647,7 @@ Agent 컨테이너의 필수 환경 변수:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "mongo" >}}
+{{< get-metrics-from-git "mongodb" >}}
 
 
 메트릭 일부에 대한 자세한 설명은 [MongoDB 3.0 매뉴얼][6]을 참조하세요.
@@ -681,7 +681,7 @@ Agent 컨테이너의 필수 환경 변수:
 이 점검은 Mongo 노드의 복제 상태가 변경될 때마다 이벤트를 생성합니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "mongo" >}}
+{{< get-service-checks-from-git "mongodb" >}}
 
 
 ## 트러블슈팅

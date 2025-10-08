@@ -1,5 +1,6 @@
 ---
 title: Log Monitor
+description: "Monitor indexed logs to detect security threats, troubleshoot issues, and alert when log patterns exceed defined thresholds."
 aliases:
 - /monitors/monitor_types/log
 - /monitors/create/types/log/
@@ -26,6 +27,8 @@ further_reading:
 Logs are essential for security investigations, aiding in threat detection, compliance tracking, and security monitoring. Log Management systems correlate logs with observability data for rapid root cause detection. Log management also enables efficient troubleshooting, issue resolution, and security audits.
 
 Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type  exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
+
+**Note**: Log monitors have a maximum rolling time window of `2 days`.
 
 ## Monitor creation
 

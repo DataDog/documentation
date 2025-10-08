@@ -1,13 +1,13 @@
 
 ## Prerequisites
 
-To deploy Agentless scanning in your AWS environment, in addition to having [Cloud Security Management][3] enabled, you must enable Remote Configuration.
+To deploy Agentless scanning in your AWS environment, in addition to having [Cloud Security][3] enabled, you must enable Remote Configuration.
 
 ### Enable Remote Configuration
 
 [Remote Configuration][1] (enabled by [default][2] as of **April 8th, 2024**) is required to allow Datadog to send information to Agentless scanners, such as which cloud resources should be scanned. If Remote Configuration has not been enabled for your organization, navigate to your [Organization Settings in Datadog][4] and follow [steps 1-4][2] in the Remote Configuration docs.
 
-**Note**: CSM-enabled AWS accounts that have scanners deployed require Remote-config enabled API keys.
+**Note**: Cloud Security-enabled AWS accounts that have scanners deployed require Remote-config enabled API keys.
 
 ### Permissions
 

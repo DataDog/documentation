@@ -14,7 +14,7 @@ further_reading:
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
-- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
+- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [App and API Protection][2]).
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
 - **Findings**: Security findings found on this API.
@@ -26,11 +26,11 @@ Using the API Security Inventory you can:
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 - See which endpoints are associated to your business's logic, and find business logic suggestions based on your endpoint's traffic history.
 
-{{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}}
+<!-- {{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}} -->
 
 ## Configuration
 
-To use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
+To use API Security on your services, **you must have AAP Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
 
 |Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
@@ -47,9 +47,9 @@ To use API Security on your services, **you must have ASM Threats Protection ena
 
 ## How it works
 
-API Inventory leverages the Datadog tracing library with ASM enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme. API information is evaluated per endpoint, every 30 seconds, which should ensure minimal performance impact.
+API Inventory leverages the Datadog tracing library with AAP enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme. API information is evaluated per endpoint, every 30 seconds, which should ensure minimal performance impact.
 
-API Inventory Security uses [Remote Configuration][4] to manage and configure scanning rules that detect sensitive data and authentication.
+API Inventory Security uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
 The following risks are calculated for each endpoint:
 
@@ -59,7 +59,7 @@ See the number of [attacks][2] your API experienced within the last week.
 
 ### Processing sensitive data
 
-[ASM][2] matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
+[AAP][2] matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
@@ -119,18 +119,13 @@ Datadog reports the type of authentication when available in a header through th
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
-### Vulnerabilities count
-
-Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to the [Software Composition Analysis][3] vulnerabilities of its service.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[2]: /security/application_security/threats/
+[1]: /tracing/guide/remote_config/
+[2]: /security/workload_protection/
 [3]: /security/code_security/software_composition_analysis/
-[4]: /agent/remote_config/
-[6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[6]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
 [8]: /security/code_security/iast/

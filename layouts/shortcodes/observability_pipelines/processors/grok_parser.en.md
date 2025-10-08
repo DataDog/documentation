@@ -4,6 +4,12 @@ If the `source` field of a log matches one of the grok parsing rule sets, the lo
 
 If there isn't a `source` field on the log, or no rule matches the log `message`, then no changes are made to the log and it is sent to the next step in the pipeline.
 
+Datadog's Grok patterns differ from the standard Grok pattern, where Datadog's Grok implementation provides:
+- Matchers that include options for how you define parsing rules
+- Filters for post-processing of extracted data
+- A set of built-in patterns tailored to common log formats
+
+See [Parsing][10031] for more information on Datadog's Grok patterns.
 
 To set up the grok parser, define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 
@@ -18,7 +24,7 @@ To add a custom parsing rule:
 1. If you want to clone a library rule, select **Clone library rule** and then the library source from the dropdown menu.
 1. If you want to create a custom rule, select **Custom** and then enter the `source`. The parsing rules are applied to logs with that `source`.
 1. Enter log samples to test the parsing rules.
-1. Enter the rules for parsing the logs. See [Parsing][10031] for more information on writing parsing rules.<br>**Note**: The `url`, `useragent`, and `csv` filters are not available.
+1. Enter the rules for parsing the logs. See [Parsing][10031] for more information on writing parsing rules with Datadog Grok patterns.<br>**Note**: The `url`, `useragent`, and `csv` filters are not available.
 1. Click **Advanced Settings** if you want to add helper rules. See [Using helper rules to factorize multiple parsing rules][10032] for more information.
 1. Click **Add Rule**.
 

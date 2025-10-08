@@ -3,6 +3,9 @@ title: Sensitive Data Redaction
 disable_toc: false
 aliases:
     - /observability_pipelines/sensitive_data_redaction/
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview
@@ -26,6 +29,7 @@ Select a log source to get started:
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
 - [Splunk Heavy or Universal Forwarders (TCP)][8]
+- [Socket (TCP or UDP)][14]
 - [Sumo Logic Hosted Collector][9]
 - [rsyslog or syslog-ng][10]
 
@@ -42,3 +46,4 @@ Select a log source to get started:
 [11]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/amazon_s3
 [12]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/amazon_data_firehose
 [13]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/kafka
+[14]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/socket

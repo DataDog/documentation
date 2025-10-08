@@ -12,10 +12,6 @@ further_reading:
 title: CI Visibility のトラブルシューティング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 このページでは、CI Visibility に関する問題のトラブルシューティングに役立つ情報を提供します。さらにヘルプが必要な場合は、[Datadog サポート][2]にお問い合わせください。
@@ -64,7 +60,7 @@ _Pipeline Details_ ページでステージやジョブが見つからないの�
 [6]: /ja/tracing/troubleshooting/tracer_debug_logs
 [7]: /ja/continuous_integration/tests/containers/
 [8]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[9]: https://app.datadoghq.com/ci/settings/repository
+[9]: https://app.datadoghq.com/source-code/repositories
 [10]: /ja/tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui

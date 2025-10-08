@@ -31,9 +31,9 @@ synthetics-pl-worker.exe --help
 {{% tab "Kubernetes" %}}
 
 Refer to the example in the [Datadog Helm repository][1].
-	
+
 [1]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
- 
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -109,7 +109,7 @@ The following parameters can be used to configure a default proxy to use for Syn
 `proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
-Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
+Proxy URL used by the private location to send test requests to the endpoint. This supports HTTP(S), SOCKS, and PAC files with the following syntax: `pac+http://...`, `pac+https://...`, `pac+file://...`, or `pac+data:...`.
 
 `proxyTestRequestsBypassList`
 : **Type**: Array of Strings <br>
@@ -128,6 +128,21 @@ Maximum number of tests executed in parallel.
 **Default**: `10`<br>
 Maximum number of tests fetched from Datadog.
 
+`maxAPIDownloadBodySize`
+: **Type**: Number <br>
+**Default**: `52428800`<br>
+Maximum HTTP body size for a download, in bytes. Default is 50 MB (50 * 1024 * 1024).
+
+`maxAPIBodySizeIfProcessed`
+: **Type**: Number <br>
+**Default**: `5242880`<br>
+Maximum HTTP body size for an assertion, in bytes. Default is 5 MB (5 * 1024 * 1024).
+
+`apiRequestMaxTimeout`
+: **Type**: Number <br>
+**Default**: `60000`<br>
+Maximum duration for API test execution, in milliseconds. Default is one minute (60 * 1000).
+
 **Note**: Private Location containers output logs to `stdout` and `stderr` without saving them within the container.
 
 ## All configuration options
@@ -140,14 +155,14 @@ Access key for Datadog API authentication.
 `--secretAccessKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Secret access key for Datadog API authentication.  
+Secret access key for Datadog API authentication.
 
 `--datadogApiKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Datadog API key to send browser tests artifacts (such as screenshots).  
- 
-`--privateKey`      
+Datadog API key to send browser tests artifacts (such as screenshots).
+
+`--privateKey`
 : **Type**: Array <br>
 **Default**: `none`<br>
 Private key used to decrypt test configurations.
@@ -202,7 +217,7 @@ Overrides the port for the private location status probes.
 **Default**: `/etc/datadog/synthetics-check-runner.json`</br>
 **Windows**: `C:\ProgramData\Datadog-Synthetics\worker-config.json`</br>
 Path to the JSON configuration file.
- 
+
 `--proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
@@ -237,7 +252,7 @@ All variables imported this way are obfuscated.
 : **Type**: String <br>
 Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
-All variables imported this way are obfuscated. 
+All variables imported this way are obfuscated.
 
 `--allowedIPRanges`
 : **Type**: Array of Strings <br>
@@ -296,7 +311,7 @@ ERROR | `-v` | `"verbosity": 1`
 Show the output for the help command.
 
 ## Environment variables
-Command options can also be set using environment variables such as `DATADOG_API_KEY="...", DATADOG_WORKER_CONCURRENCY="15", DATADOG_DNS_USE_HOST="true"`. For options that accept multiple arguments, use JSON string array notation (`DATADOG_TESTS_DNS_SERVER='["8.8.8.8", "1.1.1.1"]'`)
+Command options can also be set using environment variables such as `DATADOG_API_KEY="...", DATADOG_WORKER_CONCURRENCY="15", DATADOG_TESTS_DNS_USE_HOST="true"`. For options that accept multiple arguments, use JSON string array notation (`DATADOG_TESTS_DNS_SERVER='["8.8.8.8", "1.1.1.1"]'`)
 ### Supported environment variables:
 `DATADOG_ACCESS_KEY`, `DATADOG_API_KEY`, `DATADOG_PRIVATE_KEY`, `DATADOG_PUBLIC_KEY_PEM`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_SITE`, `DATADOG_WORKER_CONCURRENCY`, `DATADOG_WORKER_LOG_FORMAT`, `DATADOG_WORKER_LOG_VERBOSITY`, `DATADOG_WORKER_MAX_NUMBER_MESSAGES_TO_FETCH`, `DATADOG_WORKER_PROXY`, `DATADOG_TESTS_DNS_SERVER`, `DATADOG_TESTS_DNS_USE_HOST`, `DATADOG_TESTS_PROXY`, `DATADOG_TESTS_PROXY_ENABLE_CONNECT_TUNNEL`, `DATADOG_TESTS_PROXY_IGNORE_SSL_ERRORS`, `DATADOG_ALLOWED_IP_RANGES_4`, `DATADOG_ALLOWED_IP_RANGES_6`, `DATADOG_BLOCKED_IP_RANGES_4`, `DATADOG_BLOCKED_IP_RANGES_6`, `DATADOG_ENABLE_DEFAULT_WINDOWS_FIREWALL_RULES`, `DATADOG_ALLOWED_DOMAIN_NAMES`, `DATADOG_BLOCKED_DOMAIN_NAMES`, `DATADOG_WORKER_ENABLE_STATUS_PROBES`, `DATADOG_WORKER_STATUS_PROBES_PORT`
 

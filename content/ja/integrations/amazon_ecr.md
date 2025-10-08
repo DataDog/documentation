@@ -1,7 +1,7 @@
 ---
 categories:
 - クラウド
-- AWS
+- aws
 custom_kind: integration
 dependencies: []
 description: Amazon ECR のキーメトリクスを追跡

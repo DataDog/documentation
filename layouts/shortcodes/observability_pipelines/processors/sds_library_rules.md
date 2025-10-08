@@ -14,7 +14,8 @@
 
 ##### Path notation example {#path-notation-example-lib}
 
- For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+ For the following message structure:
+
 ```json
 {
     "outer_key": {
@@ -28,6 +29,9 @@
     "d": "d value"
 }
 ```
+
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
 ##### Add additional keywords
 

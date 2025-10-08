@@ -174,35 +174,25 @@ Create this assertion step to test the number of HTTP requests made to a specifi
 
 </br>
 
-### Navigation
+### Interaction
 
-{{< img src="synthetics/browser_tests/navigation_step.png" alt="Choose between three navigation types in a browser test recording" style="width:60%;" >}}
+In addition to recording steps based on your browser assertions, you can also manually create steps by clicking **Interaction**. Then, you can choose an action type to add an interaction.
 
-#### Refresh a page
+{{< img src="mobile_app_testing/test_steps/mobile_app_interaction_2.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
+
+#### Refresh page
 
 Create this navigation step to have your browser test refresh the current page of the recording.
 
-#### Go to an email and click on a link
+#### Click on email link
 
-Once you have [created an email variable][4], create this navigation step to have your browser test access unique Synthetic mail inboxes.
+After you have [created an email variable][4], create this navigation step to have your browser test access unique Synthetic mail inboxes.
 
 Select the email and links you want the browser test to click on. This step brings you to the corresponding page and allows you to move on with the rest of your journey from that specific page.
 
-#### Follow a specific link
+#### Navigate to link
 
 Create this navigation step to have your browser test go to a specific page. You must prepend your URLs with `http` or `https` in the **Enter link URL** box.
-
-### Special actions
-
-You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait**.
-
-Create this assertion step manually by clicking **Special Actions** and selecting an action type.
-
-#### Hover
-
-This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
-
-Select **Hover** and click on an element to add a step.
 
 #### Press key
 
@@ -219,6 +209,12 @@ To press keys that are not automatically recorded, specify the values that need 
  Select `Alt`, `Control`, `Meta`, and `Shift` modifiers to add to the inputted value.
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Press Key step in a browser test recording" style="width:50%;" >}}
+
+#### Hover on element
+
+This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
+
+Select **Hover** and click on an element to add a step.
 
 #### Scroll
 
@@ -239,6 +235,114 @@ If you know that a page or page element takes more than 60 seconds to load, you 
 {{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Wait step in a browser test recording" style="width:50%;" >}}
 
 This additional time is systematically added to **every run** of your browser test's recording.
+
+#### Run HTTP test
+
+You can run HTTP requests, add [assertions](#add-assertions), and [extract variables](#extract-a-variable-from-the-response) as part of your browser tests.
+
+{{< img src="synthetics/browser_tests/http_request_3.png" alt="HTTP Request step" style="width:70%;" >}}
+
+To define your HTTP request:
+
+1. Enter the URL you wish to test.
+2. Optionally, specify **Advanced Options**:
+   
+   {{< tabs >}}
+
+   {{% tab "Request Options" %}}
+
+   * **Follow redirects**: Select this option to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+
+   {{% /tab %}}
+
+   {{% tab "Authentication" %}}
+
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **Digest Auth**: Add Digest authentication credentials. 
+   * **AWS Signature**: Add AWS Access Key ID and Secret Access Key.
+   * **NTLM**: Add NTLM authentication credentials. Supports both NTLMv2 and NTLMv1.
+   * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password).
+
+   {{% /tab %}}
+
+   {{% tab "Query Parameters" %}}
+
+   * **Encode parameters**: Add the names and values of query parameters that require encoding. 
+
+   {{% /tab %}}
+
+   {{% tab "Request Body" %}}
+
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `application/octet-stream`, `multipart/form-data`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * **Request body**: Add the content of your HTTP request body. For file uploads in Browser HTTP steps, the body size is limited to 3MB, while the request body has a maximum size limit of 50 KB.
+
+   {{% /tab %}}
+
+   {{% tab "Proxy" %}}
+
+   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+
+   {{% /tab %}}
+  
+   {{% tab "Privacy" %}}
+
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
+
+[1]: /data_security/synthetics
+   {{% /tab %}}
+
+   {{< /tabs >}}
+   </br>
+
+3. Click **Send** to try out the request configuration. A response preview appears.
+
+{{< img src="mobile_app_testing/test_steps/http_mobile_request.png" alt="Make HTTP Request" style="width:80%;" >}}
+
+##### Add assertions
+
+Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
+
+| Type            | Operator                                                                                                               | Value type                                               |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                                       | _String_ <br> _[Regex][13]_                              |
+| `response time` | `is less than`                                                                                                         | _Integer (ms)_                                           |
+| `status code`   | `is`, `is not`                                                                                                         | _Integer_                                                |
+
+HTTP requests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+
+- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
+You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+
+{{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
+
+##### Extract a variable from the response
+
+Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Then, you can use the variable in [later steps](#use-variables) of your browser test.
+
+To start parsing a variable, click **Extract a variable from response content**. Then, define the variable:
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
+2. Decide whether to extract your variable from the response headers or the response body.
+
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with [`regex`][13].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with [`regex`][13], [`JSONPath`][11], or [`XPath`][12].
+
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
+
+### Special actions
+
+You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait**.
+
+Create this assertion step manually by clicking **Special Actions** and selecting an action type.
 
 ### Variables
 
@@ -348,108 +452,6 @@ For more information about advanced options for subtests, see [Advanced Options 
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][10].
 
-### HTTP requests
-
-You can run HTTP requests as part of your browser tests.
-
-{{< img src="synthetics/browser_tests/http_request_2.png" alt="HTTP Request step" style="width:70%;" >}}
-
-#### Set up
-
-To define your HTTP request:
-
-1. Select a **Method** and **URL** to query. Choose between `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
-2. Optionally, specify **Advanced Options**:
-   
-   {{< tabs >}}
-
-   {{% tab "Request Options" %}}
-
-   * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-
-   {{% /tab %}}
-
-   {{% tab "Authentication" %}}
-
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials. 
-   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-
-   {{% /tab %}}
-
-   {{% tab "Query Parameters" %}}
-
-   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
-
-   {{% /tab %}}
-
-   {{% tab "Request Body" %}}
-
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
-
-   {{% /tab %}}
-
-   {{% tab "Proxy" %}}
-
-   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
-
-   {{% /tab %}}
-  
-   {{% tab "Privacy" %}}
-
-   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
-
-[1]: /data_security/synthetics
-   {{% /tab %}}
-
-   {{< /tabs >}}
-   </br>
-3. Click **Test URL** to try out the request configuration. A response preview appears.
-
-{{< img src="synthetics/browser_tests/http_request2.png" alt="Make HTTP Request" style="width:80%;" >}}
-
-#### Add assertions
-
-Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
-
-| Type          | Operator                                                                                               | Value type                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]_                                      |
-| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
-
-HTTP requests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
-
-- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
-
-- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
-
-{{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
-
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
-
-#### Extract a variable from the response
-
-Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
-
-To start parsing a variable, click **Extract a variable from response content**:
-
-1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
-2. Decide whether to extract your variable from the response headers or the response body.
-
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][13].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][13], a [`JSONPath`][11], or a [`XPath`][12].
-
-{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
-
-
 ## Manage step order
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
@@ -488,7 +490,7 @@ In your browser test's recorder, add a step recording, and click **Extract varia
 
 To edit a browser recording after it's saved:
 
-- Navigate to [Synthetics > Tests.][14]
+- Navigate to [Synthetic Monitoring > Tests.][14]
 - Click on a previously saved browser test.
 - Click the gear icon on the top right hand corner and then click "edit recording".
 - Select multiple or single steps for deletion or replay, then click **Save & Quit**.

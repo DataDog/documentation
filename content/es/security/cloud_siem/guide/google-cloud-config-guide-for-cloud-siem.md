@@ -6,7 +6,7 @@ further_reading:
 - link: /security/cloud_siem/investigate_security_signals
   tag: Documentación
   text: Más información sobre Security Signals Explorer
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detection_rules/
   tag: Documentación
   text: Crear nuevas reglas de detección
 - link: /integrations/google_cloud_platform/#log-collection
@@ -111,7 +111,7 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
     | [Publicador de Pub/Sub][16] | `roles/pubsub.publisher` | Permitir que esta cuenta de servicio publique mensajes fallidos en una suscripción separada, lo que permite analizar o reenviar logs
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Permitir que esta cuenta de servicio acceda a la clave de API de Datadog en Secret Manager.
     | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Permitir que esta cuenta de servicio lea y escriba en el bucket de Cloud Storage especificado para los archivos de preparación |
-7. **Continue** (Continuar).
+7. Haz clic en **Continue** (Continuar).
 8. Haz clic en **Done** (Listo).
 
 ##  Crear un sink de log para publicar logs a Pub/Sub
@@ -169,7 +169,7 @@ Consulta nuevos eventos de registro entregados al tema Pub/Sub en la nube en el 
 
 Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados, incluidos los logs de auditoría de Google Cloud que acabas de configurar. Cuando se detecta una amenaza con una regla de detección, se genera una señal de seguridad que se puede ver en el Security Signals Explorer.
 
-- Ve al Cloud SIEM Signals Explorer para ver y clasificar las amenazas. Consulta Security Signals Explorer para obtener más información.
+- Ve al [Cloud SIEM Signals Explorer][23] para ver y clasificar las amenazas. Consulta Security Signals Explorer para obtener más información.
 - También puedes utilizar el [dashboard de log de auditoría de Google Cloud][24] para investigar actividades anómalas.
 - Consulta las [reglas de detección predefinidas][25] que se aplican a tus logs.
 - Crea [nuevas reglas][26] para detectar amenazas que coincidan con tu caso de uso específico.

@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: Agent の概要
   title: Agent のインストール
-- desc: 800 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
+- desc: 850 以上のビルトイン インテグレーションでメトリクス、トレース、ログを収集し、Datadog に送信します。
   link: getting_started/integrations/
   link_text: インテグレーションの概要
   title: インテグレーションをセットアップ
@@ -54,8 +54,12 @@ nav_sections:
       title: イベント
     - desc: 技術スタック全体のプロセスの自動化とオーケストレーション
       icon: workflows
-      link: workflows
+      link: service_management/workflows/
       title: Workflow Automation
+    - desc: 社内ツールを効率化するロー コード アプリケーションを作成
+      icon: app-builder
+      link: service_management/app_builder/
+      title: アプリビルダー
 - nav_section:
   - name: 製品
   - navtiles:
@@ -151,6 +155,10 @@ nav_sections:
       icon: llm-observability
       link: llm_observability/
       title: LLM Observability
+    - desc: デリバリーを加速するために、テレメトリー、メタデータ、ワークフローを統合
+      icon: internal-developer-portal-wui
+      link: internal_developer_portal
+      title: 内部開発者ポータル
 - nav_section:
   - name: 構成
   - navtiles:
@@ -170,6 +178,10 @@ nav_sections:
       icon: dev-code
       link: developers/
       title: 開発者
+    - desc: ベストプラクティスを学び、クライアント環境の監視を始めましょう。
+      icon: colab
+      link: partners/
+      title: パートナー
 popular_searches:
 - link: api/
   title: API ドキュメント

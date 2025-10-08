@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
+- rastreo
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
@@ -40,26 +40,26 @@ name: crio
 public_title: CRI-O
 short_description: Seguimiento de todas tus métricas de CRI-O con Datadog
 supported_os:
-- Linux
-- macOS
-- Windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Categoría::Contenedores
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Seguimiento de todas tus métricas de CRI-O con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: CRI-O
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -88,16 +88,16 @@ CRI-O recopila métricas del recuento y la latencia de las operaciones realizada
 La integración CRI-O en Datadog recopila el uso de CPU y de memoria del propio binario CRI-O golang.
 
 ### Métricas
-{{< get-metrics-from-git "crio" >}}
+{{< get-metrics-from-git "cri-o" >}}
 
 
 ### Checks de servicio
-{{< get-service-checks-from-git "crio" >}}
+{{< get-service-checks-from-git "cri-o" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 
 [1]: http://cri-o.io
