@@ -98,7 +98,7 @@ Service discovery provides complete visibility into the current state of applica
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step Instrumentation</a></th>
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/">SDK-based Auto Instrumentation</a></th>
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/custom_instrumentation/">Code-based Custom Instrumentation</a></th>
-    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/dynamic_instrumentation/">UI-based Custom Instrumentation</a><br>(a.k.a. Dynamic Instrumentation)</th>
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation</a><br>(UI-based Custom Instrumentation)</th>
   </tr>
 
   <!-- Body rows -->
