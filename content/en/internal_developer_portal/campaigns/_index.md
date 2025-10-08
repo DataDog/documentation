@@ -9,7 +9,7 @@ further_reading:
 {{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Campaigns!" >}}
 {{< /callout >}}
 
-[ADD IMAGE] 
+{{< img src="/tracing/software_catalog/campaign-manage.png" alt="List of Campaigns in Internal Developer Portal" style="width:90%;" >}}
 
 ## Overview
 
@@ -28,6 +28,8 @@ If your service is affected by a campaign, you will see related campaign rules a
 ## Creating a Campaign
 
 You can create and manage Campaigns from the Campaigns tab in Scorecards. 
+
+{{< img src="/tracing/software_catalog/campaign-creation.png" alt="Campaign creation page with fields filled out" style="width:90%;" >}}
 
 #### 1. Define Campaign Metadata
 
@@ -53,6 +55,8 @@ For each rule, you can optionally provide:
 ## Tracking Campaign Progress
 
 Once a campaign is created, the campaign page helps you stay on top of adoption and follow-through as work progresses. 
+
+{{< img src="/tracing/software_catalog/campaign-details.png" alt="Campaign page highlighting campaign details, progress, and next steps" style="width:90%;" >}}
 
 From this page, you can: 
 
