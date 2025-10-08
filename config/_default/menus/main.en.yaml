@@ -4787,7 +4787,7 @@ menu:
       weight: 401
     - name: Agent
       url: llm_observability/evaluations/managed_evaluations/agent_evals
-      parent: llm_obs_evaluations
+      parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
       weight: 40101
     - name: Ragas
