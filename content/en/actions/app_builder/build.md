@@ -24,13 +24,26 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 {{< img src="service_management/app_builder/app-builder-my-apps.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
+## See what's possible with App Playground
+
+If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
+- Data fetching
+- Displaying query data in a table
+- Configuring a button to fire a query
+- Configuring the loading states for a component to reflect a query's loading state
+- Visualizing data in a graph
+
+To access the App Playground:
+1. From [App Builder][1], click **New App**. 
+1. Click **App Playground**.
+
 ## Create an app
 
 ### Build an app from a blueprint
 
 Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
-1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **+ New App**, then **Start with Blueprint**.
+1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint**.
 1. Find the blueprint that you want to use and click **View**.
 1. Click **Use Blueprint** to open the app blueprint.
 1. To change the app name and description, click the app name.
@@ -81,18 +94,6 @@ If you don't want to use any of the methods above, you can create a new app from
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
-1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
-
-### Build with App Playground
-
-App Playground provides an interactive app-building demo. 
-
-1. From [App Builder][1], click **New App**. 
-1. Click **App Playground**.
-1. Click through the demo app and user guide. 
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
