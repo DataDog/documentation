@@ -106,7 +106,7 @@ end
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+<div class="alert alert-warning">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
 
