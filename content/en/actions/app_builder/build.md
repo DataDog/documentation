@@ -72,18 +72,6 @@ You can get started with an app by importing data from one of the integrations l
 1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
-### Build with App Playground
-
-App Playground provides an interactive app-building demo. 
-
-1. From [App Builder][1], click **New App**. 
-1. Click **App Playground**.
-1. Click through the demo app and user guide. 
-1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
-
 ### Create a custom app
 
 1. From [App Builder][1], click **New App**. 
@@ -91,6 +79,18 @@ App Playground provides an interactive app-building demo.
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### Build with App Playground
+
+App Playground provides an interactive app-building demo. 
+
+1. From [App Builder][1], click **New App**. 
+1. Click **App Playground**.
+1. Click through the demo app and user guide. 
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
