@@ -26,17 +26,6 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ## Create an app
 
-### Build an app with AI 
-
-1. From [App Builder][1], click **New App**.
-1. Click **Start with AI**.
-1. Click a suggested prompt, or enter a custom prompt. 
-1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
-1. To save the app, click **Save**. 
-1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
-1. After you finish modifying the app, click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
-
 ### Build an app from a blueprint
 
 Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.

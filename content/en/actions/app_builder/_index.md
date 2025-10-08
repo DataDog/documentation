@@ -43,7 +43,6 @@ Below are a few examples of what App Builder apps can do:
 ## Start with Onboarding
 
 When creating a new app, Datadog displays an onboarding modal with the following options: 
-- [Start with AI][11] 
 - [Start with Blueprint][5]
 - [Start with Layout][12]
 - [Start with Data][13]
