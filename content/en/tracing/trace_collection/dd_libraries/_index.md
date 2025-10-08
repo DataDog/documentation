@@ -5,6 +5,7 @@ aliases:
     - /tracing/languages
     - /tracing/setup_overview/setup/undefined
     - /tracing/setup_overview/setup/
+    - /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 ---
 
 ## Overview

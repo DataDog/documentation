@@ -3,7 +3,7 @@ title: Tracing iOS Applications
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/
-- /tracing/trace_collection/dd_libraries/ios
+- /tracing/trace_collection/automatic_instrumentation/dd_libraries/ios
 description: Collect traces from your iOS applications.
 code_lang: ios
 type: multi-code-lang

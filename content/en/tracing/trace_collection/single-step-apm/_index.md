@@ -1,9 +1,9 @@
 ---
 title: Single Step APM Instrumentation
 aliases:
-- /tracing/trace_collection/single-step-apm
 - /tracing/trace_collection/admission_controller/
 - /tracing/trace_collection/library_injection_local/
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/
 type: multi-code-lang
 further_reading:
   - link: /tracing/metrics/runtime_metrics/

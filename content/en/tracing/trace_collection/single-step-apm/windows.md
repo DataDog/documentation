@@ -3,6 +3,8 @@ title: Single Step APM Instrumentation on Windows
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 30
+aliases: 
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/windows
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation

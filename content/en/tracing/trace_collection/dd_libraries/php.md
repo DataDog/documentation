@@ -8,7 +8,7 @@ aliases:
 - /tracing/setup_overview/php
 - /tracing/setup_overview/setup/php
 - /tracing/faq/php-tracer-manual-installation/
-- /tracing/trace_collection/dd_libraries/php/
+- /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40

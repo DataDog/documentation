@@ -3,6 +3,8 @@ title: Single Step APM Instrumentation on Linux
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 0
+aliases:
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/linux/
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation

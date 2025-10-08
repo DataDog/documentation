@@ -3,6 +3,8 @@ title: Single Step APM Instrumentation on Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation

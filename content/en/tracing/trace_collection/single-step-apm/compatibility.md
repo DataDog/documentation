@@ -1,5 +1,7 @@
 ---
 title: Compatibility
+aliases:
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 further_reading:
 - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
   tag: "Documentation"

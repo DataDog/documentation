@@ -3,6 +3,8 @@ title: Single Step APM Instrumentation on Docker
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 10
+aliases:
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/docker
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation

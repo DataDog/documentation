@@ -7,7 +7,7 @@ aliases:
 - /tracing/setup/go
 - /tracing/setup_overview/go
 - /tracing/setup_overview/setup/go
-- /tracing/trace_collection/dd_libraries/go
+- /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20

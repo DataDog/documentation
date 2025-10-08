@@ -9,7 +9,7 @@ aliases:
     - /tracing/setup/nodejs
     - /tracing/setup_overview/nodejs
     - /tracing/setup_overview/setup/nodejs
-    - /tracing/trace_collection/dd_libraries/nodejs/
+    - /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30

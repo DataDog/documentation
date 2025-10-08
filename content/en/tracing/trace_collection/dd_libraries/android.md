@@ -2,7 +2,7 @@
 aliases:
 - /tracing/setup_overview/setup/android
 - /tracing/setup/android
-- /tracing/trace_collection/dd_libraries/android
+- /tracing/trace_collection/automatic_instrumentation/dd_libraries/android
 description: Collect traces from your Android applications.
 code_lang: android
 type: multi-code-lang

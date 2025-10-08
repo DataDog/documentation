@@ -1,5 +1,7 @@
 ---
 title: Troubleshooting Single Step APM
+aliases:
+- /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
 further_reading:
 - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
   tag: "Documentation"
