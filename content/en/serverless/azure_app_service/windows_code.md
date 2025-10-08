@@ -176,14 +176,14 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 3. Click **Save**. This restarts your application.
 
 4. Stop your application by clicking **Stop**.
-   <div class="alert alert-warning">You <u>must</u> stop your application to successfully install Datadog.</div>
+   <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
 5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
 6. Accept the legal terms, click **OK**, and wait for the installation to complete. 
-   <div class="alert alert-warning">This step requires that your application be in a stopped state.</div>
+   <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
 7.  Start the main application, click **Start**:
 
@@ -519,7 +519,7 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
+<div class="alert alert-danger">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
     Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 {{% /tab %}}

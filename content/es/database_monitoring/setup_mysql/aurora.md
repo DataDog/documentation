@@ -202,7 +202,7 @@ instances:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
-<div class="alert alert-warning"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
+<div class="alert alert-danger"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
 
 [Reinicia el Agent][3] para empezar a enviar métricas de MySQL a Datadog.
 
@@ -252,7 +252,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning"><strong>Importante</strong>: Utiliza el endpoint de la instancia de Aurora como host, no el endpoint del clúster.</div>
+<div class="alert alert-danger"><strong>Importante</strong>: Utiliza el endpoint de la instancia de Aurora como host, no el endpoint del clúster.</div>
 
 
 [1]: /es/agent/docker/integrations/?tab=docker
@@ -347,7 +347,7 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-<div class="alert alert-warning"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
+<div class="alert alert-danger"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
 
 El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de SQL Server.
 

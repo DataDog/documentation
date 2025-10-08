@@ -31,7 +31,7 @@ Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs fro
 1. [Create and run the Dataflow job](#create-and-run-the-dataflow-job)
 1. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Collecting Google Cloud logs with a Pub/Sub Push subscription</a> is in the process of being deprecated for the following reasons:
 

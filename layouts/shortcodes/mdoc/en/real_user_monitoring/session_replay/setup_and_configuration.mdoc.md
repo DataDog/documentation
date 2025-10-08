@@ -264,7 +264,7 @@ final configuration = DatadogConfiguration(
         textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskSensitiveInputs,
         touchPrivacyLevel: TouchPrivacyLevel.show,
         // Setup session replay sample rate.
-        replaySampleRate: 1.0,
+        replaySampleRate: 100.0,
     ),
 );
 ```

@@ -67,7 +67,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
   AWS Lambda や Azure Functions などのサーバーレス環境で Datadog APM を設定するには、<a href="/serverless">サーバーレス</a>を参照してください。
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> Datadog の自動インスツルメンテーションは .NET CLR Profiling API に依存します。この API で許可されるサブスクライバーは 1 つのみです (例: Datadog APM)。可視性を最大化するため、アプリケーション環境では 1 つの APM ソリューションだけを実行してください。
 </div>
 
@@ -102,7 +102,7 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
 </div>
 
@@ -138,14 +138,14 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
 #### IIS 以外のサービス
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された <em>あらゆる</em> .NET プロセスに .NET ライブラリを読み込もうとします。インスツルメンテーションは、必要なアプリケーションのみに限定してください。<strong>これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上の <em>すべての</em> .NET プロセスがインスツルメントされます。</strong>
 </div>
 
@@ -192,7 +192,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注:</strong> v3.0.0 以降、カスタム インスツルメンテーションを使用するには自動インスツルメンテーションも併用する必要があります。自動およびカスタム インスツルメンテーションのパッケージ バージョン (例: MSI と NuGet) は同期させ、メジャー バージョンを混在させないようにしてください。
 </div>
 
@@ -222,7 +222,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 サービスに自動インスツルメンテーションをアタッチするには、アプリケーションを起動する前に、必要な環境変数を設定します。.NET Tracer のインストール方法に応じて設定する環境変数を特定するために、 [サービスのトレーサーを有効にする](#enable-the-tracer-for-your-service)のセクションを参照し、以下の例に従って、インスツルメントされたサービスの環境に基づいて環境変数を正しく設定します。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された<em>あらゆる</em> .NET プロセスに .NET ライブラリをロードしようとします。インスツルメンテーションは、インスツルメントする必要のあるアプリケーションのみに制限する必要があります。<strong>これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上の<em>すべての</em> .NET プロセスがインスツルメントされます。</strong>
 </div>
 

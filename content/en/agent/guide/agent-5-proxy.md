@@ -26,7 +26,7 @@ For specific information regarding Squid, see the [Squid](#squid) section of thi
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
 </div>
 

@@ -9,7 +9,7 @@ title: Solucionar problemas del generador de perfiles nativo para lenguajes comp
 type: lenguaje de código múltiple
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> está en Vista previa. Datadog recomienda evaluar el generador de perfiles en un entorno no sensible antes de desplegarlo en producción.
 </div>
 
