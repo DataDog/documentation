@@ -34,7 +34,7 @@ RUM のビューイベントは、各ページビューについて広範囲の�
 
 ## イベントのタイミングとコア Web バイタル
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
 </div>
 

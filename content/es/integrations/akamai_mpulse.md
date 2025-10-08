@@ -49,7 +49,7 @@ Se necesitan `apiKey` y `apiToken` para configurar la integración de Akamai mPu
 
 La `apiKey` es un valor autogenerado que identifica de forma única los datos de tu sitio (balizas) que se encuentran en tu portal de mPulse.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La opción de menú "Apps" (Aplicaciones) y el atributo `apiKey` solo son visibles para los administradores de aplicaciones. 
 </div>
 

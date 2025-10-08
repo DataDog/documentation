@@ -250,7 +250,7 @@ Step replay allows you to re-run one or more steps of your browser test directly
 
 ### Debugger permission
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <p>The current version of the extension <strong>does not have <a href="https://developer.chrome.com/docs/extensions/reference/api/debugger">Chrome's debugger permission</a> yet</strong>, as a result:</p>
   <ul>
     <li><strong>JavaScript-based steps and keystroke simulations</strong> are <strong>not yet available</strong>.</li>

@@ -25,7 +25,7 @@ further_reading:
 title: Tests y monitorización de aplicaciones móviles
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing no es compatible en este <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Mobile Application Testing no es compatible en este <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Información general

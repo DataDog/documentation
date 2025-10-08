@@ -190,7 +190,7 @@ Si SELinux está en modo obligatorio, es recomendado conceder [el tipo `spc_t`][
 No olvides añadir una <a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">cuenta de servicio datadog-agent</a> a un <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">SCC datadog-agent</a> recientemente creado al añadir <code>system:serviceaccount:<datadog-agent namespace>:<datadog-agent service account name></code> a la sección <code>usuarios</code>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>OpenShift 4.0+</b>: Si has utilizado el instalador de OpenShift en un proveedor de nube compatible, debes desplegar el SCC con <code>allowHostNetwork: true</code> en el manifiesto <code>scc.yaml</code>, así como <code>hostNetwork: true</code> en la configuración del Agent para obtener etiquetas (tags) de host y alias. Por lo demás, el acceso a los servidores de metadatos desde la red de pod está restringido.
 </div>
 

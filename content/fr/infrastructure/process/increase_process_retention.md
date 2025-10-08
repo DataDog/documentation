@@ -46,7 +46,7 @@ Vous pouvez créer plusieurs métriques avec la même requête en cochant la cas
 
 **Remarque** : les points de données pour les métriques basées sur des processus sont générés selon des intervalles de 10 secondes. Jusqu'à 3 minutes peuvent être nécessaires entre la création ou la mise à jour de la métrique et l'envoi du premier point de données.
 
-<div class="alert alert-warning">Les métriques basées sur des processus sont considérées comme des <a href="/metrics/custom_metrics/">métriques custom</a> et facturées en conséquence. Évitez de regrouper les données en fonction de tags avec une cardinalité non délimitée ou extrêmement élevée, comme <code>command</code> et <code>user</code>, afin de ne pas nuire à la facturation.</div>
+<div class="alert alert-danger">Les métriques basées sur des processus sont considérées comme des <a href="/metrics/custom_metrics/">métriques custom</a> et facturées en conséquence. Évitez de regrouper les données en fonction de tags avec une cardinalité non délimitée ou extrêmement élevée, comme <code>command</code> et <code>user</code>, afin de ne pas nuire à la facturation.</div>
 
 ### Mettre à jour une métrique basée sur des processus
 

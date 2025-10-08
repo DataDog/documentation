@@ -144,7 +144,7 @@ UI、Databricks CLI を使用して、または Clusters API を呼び出して�
 {{% /site-region %}}
 
 
-<div class="alert alert-warning">セキュリティ上の理由から、環境変数 `DD_API_KEY` を UI で直接プレーンテキストで定義することは推奨されません。代わりに <a href="https://docs.databricks.com/en/security/secrets/index.html">Databricks シークレット</a>を使用してください。</div>
+<div class="alert alert-danger">セキュリティ上の理由から、環境変数 `DD_API_KEY` を UI で直接プレーンテキストで定義することは推奨されません。代わりに <a href="https://docs.databricks.com/en/security/secrets/index.html">Databricks シークレット</a>を使用してください。</div>
 
 
 
@@ -175,7 +175,7 @@ Databricks UI を使用してグローバル init スクリプトを編集しま
 
 クラスターのドライバーノードに Datadog Agent をインストールします。
 
-<div class="alert alert-warning">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
+<div class="alert alert-danger">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
 
 ```shell script
 #!/bin/bash
@@ -257,7 +257,7 @@ chmod a+x /tmp/start_datadog.sh
 
 クラスターのドライバーノードとワーカーノードに Datadog Agent をインストールします。
 
-<div class="alert alert-warning">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
+<div class="alert alert-danger">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
 
 ```shell script
 #!/bin/bash

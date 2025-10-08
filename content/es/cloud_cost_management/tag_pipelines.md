@@ -22,7 +22,7 @@ Los pipelines de etiquetas se aplican a las métricas de costes de nube de todos
 
 ## Crear un conjunto de reglas
 
-<div class="alert alert-warning">Puedes crear hasta 100 reglas. No se admiten tablas de referencia basadas en API.</div>
+<div class="alert alert-danger">Puedes crear hasta 100 reglas. No se admiten tablas de referencia basadas en API.</div>
 
 Antes de crear reglas individuales, crea un conjunto de reglas (una carpeta para tus reglas) haciendo clic en **+ New Ruleset** (+ Nuevo conjunto de reglas).
 

@@ -5,7 +5,7 @@ title: Instrumenter des applications Node.js sans serveur avec le Forwarder Data
 
 ## Présentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si vous commencez tout juste à utiliser la surveillance sans serveur Datadog, suivez plutôt les <a href="/serverless/installation/nodejs">instructions d'instrumentation des fonctions Lambda avec l'extension Lambda Datadog</a>. Si vous avez configuré la surveillance sans serveur Datadog avec le Forwarder Datadog avant que les fonctionnalités Lambda clés en main ne soient proposées, consultez ce guide pour gérer votre instance.
 </div>
 

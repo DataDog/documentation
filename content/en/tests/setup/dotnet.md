@@ -265,7 +265,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 ## Custom instrumentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Your custom instrumentation setup depends on the <code>dd-trace</code> version. To use the custom instrumentation, you must keep the package versions for <code>dd-trace</code> and <code>Datadog.Trace</code> NuGet packages in sync.
 </div>
 
@@ -279,7 +279,7 @@ For more information about how to add spans and tags for custom instrumentation,
 
 ## Manual testing API
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 

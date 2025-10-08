@@ -106,7 +106,8 @@ end
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+
+<div class="alert alert-danger">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
 
@@ -118,7 +119,7 @@ To enable testing instrumentation, add the following environment variables to yo
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
-<div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
+<div class="alert alert-danger">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
 For UI Tests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
@@ -241,7 +242,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning">If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+<div class="alert alert-danger">If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 

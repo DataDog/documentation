@@ -6,7 +6,7 @@ further_reading:
   text: アプリケーションのインスツルメンテーション
 title: (レガシー) PHP 互換性要件
 ---
-<div class="alert alert-warning">このドキュメントは PHP tracer v0.x 用です。PHP tracer v1.x のドキュメントをお探しの場合は、最新の <a href="/tracing/trace_collection/compatibility/php/">PHP 互換性要件</a> のドキュメントをご覧ください。</div>
+<div class="alert alert-danger">このドキュメントは PHP tracer v0.x 用です。PHP tracer v1.x のドキュメントをお探しの場合は、最新の <a href="/tracing/trace_collection/compatibility/php/">PHP 互換性要件</a> のドキュメントをご覧ください。</div>
 
 ## PHP APM のランタイムサポートポリシー
 

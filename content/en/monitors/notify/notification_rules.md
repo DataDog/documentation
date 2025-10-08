@@ -21,7 +21,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Creating notification rules
 
-<div class="alert alert-warning">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
+<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
 
 1. Navigate to [**Monitors > Settings > Notification Rules**][1].
 1. Click **New Rule**.

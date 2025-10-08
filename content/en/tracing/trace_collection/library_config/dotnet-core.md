@@ -55,7 +55,7 @@ To configure the tracer using environment variables, set the variables before la
 
 To configure the tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
 </div>
 
@@ -98,7 +98,7 @@ To configure the tracer using a JSON file, create `datadog.json` in the instrume
 
 ## Configuration settings
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   On Linux, the names of environment variables are case-sensitive.
 </div>
 

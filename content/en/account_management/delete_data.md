@@ -27,7 +27,7 @@ To grant an account access to delete data, perform the following steps:
 
 ### Start deletions
 
-<div class="alert alert-danger">Deleted data can never be recovered, and deletions cannot be undone.</div>
+<div class="alert alert-warning">Deleted data can never be recovered, and deletions cannot be undone.</div>
 
 <div class="alert alert-info"><strong>For Logs</strong>: Deletions cannot be scoped to a specific index, and deletions occur across Index, Flex Indexes, and Online Archives.
 </div>

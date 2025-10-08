@@ -78,7 +78,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 ### Create a storage bucket
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+<div class="alert alert-danger">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -87,7 +87,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notes:**

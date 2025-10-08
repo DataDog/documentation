@@ -68,7 +68,7 @@ tile:
 
 **참고**: 도커(Docker) Daemon 점검은 여전히 지원되나 **에이전트 v5**에서만 동작합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>에이전트 v6에서 도커(Docker) 통합을 사용하려면 하단 <a href="#에이전트-v6">에이전트 v6 섹션을</a> 참조하세요.</b>
 </div>
 

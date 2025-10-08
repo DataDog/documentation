@@ -66,7 +66,7 @@ Para las etiquetas de Google Cloud, selecciona **Google** en el menú desplegabl
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Los costes diarios de Datadog están en Vista previa.</div>
+<div class="alert alert-danger">Los costes diarios de Datadog están en Vista previa.</div>
 
 Para las etiquetas de Datadog, selecciona **Datadog** en el menú desplegable de la esquina superior derecha.
 
@@ -75,7 +75,7 @@ Para las etiquetas de Datadog, selecciona **Datadog** en el menú desplegable de
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-<div class="alert alert-warning">Los costes de Confluent Cloud están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de Confluent Cloud están en Vista previa.</div>
 
 Para las etiquetas de Confluent Cloud, selecciona **Confluent Cloud** en el menú desplegable de la esquina superior derecha.
 
@@ -84,7 +84,7 @@ Para las etiquetas de Confluent Cloud, selecciona **Confluent Cloud** en el men�
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
-<div class="alert alert-warning">Los costes de Databricks están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de Databricks están en Vista previa.</div>
 
 Para las etiquetas de Databricks, selecciona **Databricks** en el menú desplegable de la esquina superior derecha.
 
@@ -93,7 +93,7 @@ Para las etiquetas de Databricks, selecciona **Databricks** en el menú desplega
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">Los costes de Fastly están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de Fastly están en Vista previa.</div>
 
 Para las etiquetas de Fastly, selecciona **Fastly** en el menú desplegable de la esquina superior derecha.
 
@@ -102,7 +102,7 @@ Para las etiquetas de Fastly, selecciona **Fastly** en el menú desplegable de l
 {{% /tab %}}
 {{% tab "Elastic Cloud" %}}
 
-<div class="alert alert-warning">Los costes de Elastic Cloud están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de Elastic Cloud están en Vista previa.</div>
 
 Para las etiquetas de Elastic Cloud, selecciona **Elastic Cloud** en el menú desplegable de la esquina superior derecha.
 
@@ -111,7 +111,7 @@ Para las etiquetas de Elastic Cloud, selecciona **Elastic Cloud** en el menú de
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">Los costes de MongoDB están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de MongoDB están en Vista previa.</div>
 
 Para las etiquetas de MongoDB, selecciona **MongoDB** en el menú desplegable de la esquina superior derecha.
 
@@ -120,7 +120,7 @@ Para las etiquetas de MongoDB, selecciona **MongoDB** en el menú desplegable de
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">Los costes de OpenAI están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de OpenAI están en Vista previa.</div>
 
 Para las etiquetas de OpenAI, selecciona **OpenAI** en el menú desplegable de la esquina superior derecha.
 
@@ -129,7 +129,7 @@ Para las etiquetas de OpenAI, selecciona **OpenAI** en el menú desplegable de l
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">Los costes de Snowflake están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de Snowflake están en Vista previa.</div>
 
 Para las etiquetas de Snowflake, selecciona **Snowflake** en el menú desplegable de la esquina superior derecha.
 
@@ -138,7 +138,7 @@ Para las etiquetas de Snowflake, selecciona **Snowflake** en el menú desplegabl
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">Los costes de Twilio están en Vista previa.</div>
+<div class="alert alert-danger">Los costes de Twilio están en Vista previa.</div>
 
 Para las etiquetas de Twilio, selecciona **Twilio** en el menú desplegable de la esquina superior derecha.
 

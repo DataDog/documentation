@@ -17,7 +17,7 @@ private: true
 title: Online Archives
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Online Archives は、数に限りがあります。アクセス権をリクエストする場合は、<a href="/help/">Datadog サポート</a>にお問い合わせください。
 </div>
 

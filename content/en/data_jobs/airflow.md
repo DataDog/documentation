@@ -181,7 +181,7 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3]
 
 {{% tab "Astronomer" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
@@ -241,7 +241,7 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 

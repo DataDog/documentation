@@ -340,7 +340,7 @@ The default query duration threshold is `duration > 1000000` (1 second). Adjust 
 
 - **Capture more queries**: Lower the threshold (for example, `duration > 500000` for 500 ms)
 - **Capture fewer queries**: Raise the threshold (for example, `duration > 5000000` for 5 seconds)
-<div class="alert alert-warning">Setting thresholds too low can result in excessive event collection that affects server performance, event loss due to buffer overflow, and incomplete data, as Datadog only collects the most recent 1000 events per collection interval.</div>
+<div class="alert alert-danger">Setting thresholds too low can result in excessive event collection that affects server performance, event loss due to buffer overflow, and incomplete data, as Datadog only collects the most recent 1000 events per collection interval.</div>
 
 ### Memory allocation
 - The default value is `MAX_MEMORY = 1024 KB`.

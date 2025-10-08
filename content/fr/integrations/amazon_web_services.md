@@ -54,7 +54,7 @@ L'intégration Amazon Web Services de Datadog permet de recueillir les logs, les
 ## Configuration
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de <a href="?tab=accesskeysgovcloudorchinaonly#configuration">clés d'accès</a>.</div>
+<div class="alert alert-danger">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de <a href="?tab=accesskeysgovcloudorchinaonly#configuration">clés d'accès</a>.</div>
 {{< /site-region >}}
 
 Choisissez l'une des méthodes suivantes pour intégrer vos comptes AWS dans Datadog et ainsi recueillir vos métriques, vos événements, vos traces et vos logs :
