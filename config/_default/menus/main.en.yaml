@@ -3799,21 +3799,26 @@ menu:
       parent: tracing_trace_collection
       identifier: single_step_apm
       weight: 201
-    - name: Single Step APM Instrumentation on Linux
+    - name: Linux
       url: tracing/trace_collection/single-step-apm/linux
       parent: single_step_apm
       identifier: single_step_apm_linux
       weight: 2011
-    - name: Single Step APM Instrumentation on Docker
+    - name: Docker
       url: tracing/trace_collection/single-step-apm/docker
       parent: single_step_apm
       identifier: single_step_apm_docker
       weight: 2012
-    - name: Single Step APM Instrumentation on Kubernetes
+    - name: Kubernetes
       url: tracing/trace_collection/single-step-apm/kubernetes
       parent: single_step_apm
       identifier: single_step_apm_kubernetes
       weight: 2013
+    - name: Windows IIS
+      url: tracing/trace_collection/single-step-apm/windows
+      parent: single_step_apm
+      identifier: single_step_apm_windows
+      weight: 2014
     - name: Datadog Tracing Libraries
       url: tracing/trace_collection/dd_libraries/
       parent: tracing_trace_collection
