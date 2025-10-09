@@ -113,12 +113,18 @@ Navigate to [Synthetic Monitoring &Testing][y] in the app to get started. To lea
 
 ## Integrations
 
-{{< img src="getting_started/application/integrations-2024.png" alt="Integrations" >}}
+Use Datadog's {{< translate key="integration_count" >}} [integrations][14] to bring together all of the metrics and logs from your infrastructure, to gain insights into your entire observability system.
 
-- Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][14].
-- Custom integrations are available through the [Datadog API][15].
-- The Agent is [open source][16].
+{{< img src="getting_started/application/integrations-2024.png" alt="Integrations" >}}
+<!-- todo update screenshot -->
+
+- Available integrations cover cloud technologies, incident response, data layers, security, AI, and more
+- Build your own integration using the [developer documentation][16]
 - After integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a data center or in an online service.
+
+<!-- todo path in app -->
+
+
 
 ## Dashboards
 
@@ -161,8 +167,7 @@ Navigate to [Synthetic Monitoring &Testing][y] in the app to get started. To lea
 [13]: /synthetics/
 [y]: https://app.datadoghq.com/synthetics/tests
 [14]: https://www.datadoghq.com/product/platform/integrations/
-[15]: /api/
-[16]: https://github.com/DataDog/datadog-agent
+[16]: /developers/integrations/
 [17]: /dashboards/
 [18]: /dashboards/#screenboards
 [19]: /dashboards/functions/arithmetic/
