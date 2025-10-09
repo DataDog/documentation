@@ -305,9 +305,9 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 
 | macOS version | Agent 7               |
 |---------------|-----------------------|
-| >= 11.0       | >= 7.70.0<sup>*</sup> |
+| >= 11.0       | >= 7.70.0*            |
 
-<sup>*</sup>Earlier versions for 64-BIT X86 may be used on Apple ARM64 through [Rosetta 2](https://support.apple.com/en-us/102527) emulation.
+*Earlier versions for 64-BIT X86 may be used on Apple ARM64 through [Rosetta 2](https://support.apple.com/en-us/102527) emulation.
 
 {{% /tab %}}
 
