@@ -1,5 +1,5 @@
 ---
-title: Setting and querying user and account information in traces
+title: Setting and Querying User and Account Information in Traces
 disable_toc: false
 further_reading:
 - link: "/real_user_monitoring/correlate_with_other_telemetry/apm/"
@@ -15,14 +15,14 @@ further_reading:
 
 ## Overview
 
-Getting visibility into users and accounts in APM helps you understand which users are affected by performance issues or errors. User and account information is displayed in the [APM Investigator][8] and [Error Tracking issues][9]. Soon, this information will also be available in [service pages][13], [resource pages][14] and in the [trace panel][15].
+Getting visibility into users and accounts in APM helps you understand which users are affected by performance issues or errors. User and account information is displayed in the [APM Investigator][8] and [Error Tracking issues][9].
 
 {{< img src="tracing/guide/user-accounts/user-account-apm-investigator.png" alt="User and account information displayed in APM Investigator showing impacted users and accounts" style="width:100%;" >}}
 
 By tagging traces with user and account identifiers, you can:
-- Track which users are impacted by backend errors or latency issues
-- Analyze performance split by user or account segments
-- Monitor user-specific behaviors across your distributed systems
+- Track which users are impacted by backend errors or latency issues.
+- Analyze performance split by user or account segments.
+- Monitor user-specific behaviors across your distributed systems.
 
 ## Tag user and account information in spans
 
@@ -32,7 +32,7 @@ If you're already collecting Real User Monitoring data, you can propagate user a
 
 1. Set user and account information using the [`datadogRum.setUser()`][1] and [`datadogRum.setAccount()`][2] APIs in your browser application.
 
-2. Enable trace propagation by configuring `allowedTracingUrls` in your RUM SDK initialization. See [Connect RUM and Traces][3] for detailed setup instructions. Additionally, set `propagateTraceBaggage` to `true`, to automatically propagates user and account context in the [baggage][10] to backend traces alongside the trace context.
+2. Enable trace propagation by configuring `allowedTracingUrls` in your RUM SDK initialization. See [Connect RUM and Traces][3] for detailed setup instructions. Additionally, set `propagateTraceBaggage` to `true`, to automatically propagate user and account context in the [baggage][10] to backend traces alongside the trace context.
 
 The user and account information is automatically remapped in the backend to the [`usr.id` and `account.id` standard attributes][4], making it consistent across all your traces. Standard attributes allow you to filter and search your trace data consistently across all your services.
 
@@ -59,29 +59,31 @@ span.context.set_baggage_item("user.id", "user_123")
 span.context.set_baggage_item("account.id", "account_456")
 ```
 
-**Note**: When propagating user and account information through baggage, this information is currently only tagged on [service entry spans][11]. This means the `usr.id` and `account.id` attributes appear on the first span of each service in your distributed trace.
+**Note**: When propagating user and account information through baggage, this information is only tagged on [service entry spans][11]. This means the `usr.id` and `account.id` attributes appear on the first span of each service in your distributed trace.
 
 ## Query trace data with user and account information
 
-With user and account IDs tagged on spans throughout your distributed traces, this enables powerful analysis capabilities, bringing you visiblility onto how backend errors and latency affect end-users.
+Tagging spans with user and account IDs enables powerful analysis, giving you visibility into how backend errors and latency affect end-users.
 
-With [Product Analytics User and Account Profiles][7], you will soon be able to query span data by richer user and account attributes, providing even deeper insights into how your application performs for different user segments. [Reach out to support][12] to express interest in this.
+<div class="alert alert-info">
+Enrich your trace analysis by querying span data with attributes from <a href="/product_analytics/profiles/">Product Analytics User and Account Profiles</a>. To express interest in this upcoming capability, <a href="/help/">reach out to Support</a>.
+</div>
 
 #### Filter traces by user or account in the APM Trace Explorer
 
 Query traces using the `usr.id` or `account.id` attributes:
 
-- Search for all traces from a specific user or account: `@usr.id:user_123` / `@account.id:account_456`
-- Combine with other filters: `@usr.id:user_123 service:checkout status:error`
+- Search for all traces from a specific user or account: `@usr.id:user_123` or `@account.id:account_456`.
+- Combine with other filters: `@usr.id:user_123 service:checkout status:error`.
 
-This allows you to quickly investigate issues affecting specific users or accounts and understand their end-to-end experience across your distributed system.
+This allows you to investigate issues affecting specific users or accounts and understand their end-to-end experience across your distributed system.
 
 #### Identify which users or accounts are most affected by errors or latency
 
 Analyze error patterns and latency issues across your user base to prioritize fixes based on business impact:
 
-- Use [Tag Analysis][17] to identify which users or accounts are disproportionately affected by errors or high latency on backend services
-- [Group queries][18] by by `usr.id` or `account.id` to analyse error rates or latency percentiles by user or account.
+- Use [Tag Analysis][17] to identify which users or accounts are disproportionately affected by errors or high latency on backend services.
+- [Group queries][18] by `usr.id` or `account.id` to analyze error rates or latency percentiles by user or account.
 - View user and account impact directly in the [APM Investigator][8] and [Error Tracking issues][9] to understand the scope of production problems.
 
 This helps you prioritize incident response based on the number of affected users or the importance of affected accounts.
@@ -90,9 +92,9 @@ This helps you prioritize incident response based on the number of affected user
 
 Set up [APM monitors][19] that alert you when specific user segments experience degraded performance:
 
-- Create error rate monitors filtered by premium account tiers: `@account.id:premium_* status:error`
-- Alert on latency spikes for critical users: `@usr.id:vip_user_* @duration:>5s`
-- Monitor SLA compliance for enterprise accounts by setting monitors on specific account IDs
+- Create error rate monitors filtered by premium account tiers: `@account.id:premium_* status:error`.
+- Alert on latency spikes for critical users: `@usr.id:vip_user_* @duration:>5s`.
+- Monitor SLA compliance for enterprise accounts by setting monitors on specific account IDs.
 
 This enables proactive monitoring and ensures you can respond quickly when high-value users or accounts experience issues.
 
