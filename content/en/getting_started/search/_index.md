@@ -15,85 +15,44 @@ further_reading:
 
 ## Overview
 
-Datadog provides powerful search capabilities across its products and features. This guide introduces you to the fundamental concepts of searching in Datadog and helps you navigate to more detailed, feature-specific documentation.
+Datadog provides powerful and flexible search capabilities across its products and features. This guide introduces the core concepts of search syntax in Datadog, helping you understand how to construct effective queries across Logs, Metrics, APM, and more.
 
-## Common Search Patterns
+You'll learn about shared search semantics, product-specific syntax, and advanced techniques that enhance your querying experience. Each section also includes examples and links to detailed documentation for further reference.
 
-Across Datadog, you'll encounter these common search patterns:
+## Understanding Datadog search
 
-1. **Simple text search**: Find items containing specific text
-2. **Tag-based filtering**: Filter by metadata using key:value pairs
-3. **Resource filtering**: Target specific resources or metrics
-4. **Boolean logic**: Combine multiple conditions
-5. **Wildcard matching**: Use pattern matching for flexible searches
+Datadog provides a unified way to query data across products using text-based search syntax. All data in Datadog can be explored and filtered through queries, but the syntax and behavior differ depending on the type of data you're working with. There are two primary query formats in Datadog:
+- **Metric-based queries**: used in Metrics and Cloud Cost Management (CCM).
+- **Event-based queries**: used across most other products, including Logs, APM, RUM, Events, and Security.
 
-## Core Search Components
+Although both query types let you filter and analyze data, their syntax is not interchangeable. Each follows its own structure, operators, and supported functions designed for the type of data it handles.
 
-### Boolean Operators
+### Metric-Based Queries
 
-Use these operators to combine or exclude search terms:
+Metric-based queries are designed to retrieve and analyze numerical time series data. They rely on tags and attributes to filter metrics and often combine functions and arithmetic operations to calculate and visualize trends over time (for example, average latency, error rate, or cost over time).
 
-| Operator | Description | Example |
-|----------|-------------|---------|
-| `AND` | Both conditions must be true | `service:web AND env:prod` |
-| `OR` | Either condition can be true | `status:error OR status:warning` |
-| `NOT` | Exclude matches | `service:web NOT env:dev` |
+### Event-Based Queries
 
-### Tag-Based Filtering
+Event-based queries are used in most Datadog products to explore individual records such as log entries, traces, or browser events. These queries typically support full-text search, faceted filtering, and boolean logic to help users find, group, and analyze relevant events.
 
-Tags are key:value pairs that help you filter and group data:
+Compared to metric queries, event-based searches focus on discovering and filtering individual records rather than aggregating numerical values. They form the foundation for exploratory analysis—helping you identify patterns, troubleshoot issues, and drill into specific data before moving to metrics or dashboards for long-term trends.
 
-```text
-service:payment-api
-env:production
-team:backend
-```
 
-### Wildcard Filtering
+## Search fundamentals
 
-Use wildcards for flexible matching:
+Search Fundamentals introduces the common building blocks of Datadog search. It covers how to construct basic queries, use boolean operators, filter by tags and attributes, and understand how search fields work across products. Mastering these fundamentals helps you adapt quickly to product-specific syntax and avoid common query issues.
 
-* `*` matches multiple characters: `service:web-*`
-* `?` matches a single character: `host:web-server-?`
+Learn more in [Search Fundamentals][1].
 
-## Feature-Specific Search
+## Product-specific syntax
 
-Different Datadog features offer specialized search capabilities:
+Each Datadog product provides its own search syntax, tailored to the type of data it handles. The Product-Specific Search reference highlights the key capabilities and unique operators available in each product, such as log search facets, APM trace filters, or metric aggregation functions. These references help you understand where syntax differs across Datadog products.
 
-{{< tabs >}}
-{{% tab "Logs" %}}
-* Full-text search
-* Structured data queries
-* Pattern detection
-[Learn more about Log Search →](/logs/explorer/search)
-{{% /tab %}}
-{{% tab "APM" %}}
-* Trace filtering
-* Span queries
-* Service maps
-[Learn more about APM Search →](/tracing/trace_explorer/search)
-{{% /tab %}}
-{{% tab "Metrics" %}}
-* Metric queries
-* Tag-based filtering
-* Advanced aggregations
-[Learn more about Metrics Filtering →](/metrics/advanced-filtering)
-{{% /tab %}}
-{{< /tabs >}}
-
-## Getting Started
-
-1. **Start Simple**: Begin with basic text searches and single tag filters
-2. **Add Tags**: Use tags to filter your results more precisely
-3. **Combine Filters**: Use boolean operators to create more specific searches
-4. **Explore Features**: Learn about feature-specific search capabilities
-
-## Next Steps
-
-* Learn more about [Core Search Concepts](/getting_started/search/core_concepts)
-* Explore [Advanced Search Techniques](/getting_started/search/advanced_techniques)
-* Dive into [Feature-Specific Search](/getting_started/search/feature_specific)
+See the index of [Product-Specific Search][2].
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/search/fundamentals
+[2]: /getting_started/search/product_specific_reference
