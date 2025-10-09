@@ -1504,6 +1504,16 @@ menu:
       parent: dashboards
       identifier: dashboards_widgets
       weight: 3
+    - name: Configuration
+      identifier: dashboards_widgets_configuration
+      url: dashboards/widgets/configuration/
+      parent: dashboards_widgets
+      weight: 301
+    - name: Widget Types
+      identifier: dashboards_widgets_types
+      url: dashboards/widgets/types/
+      parent: dashboards_widgets
+      weight: 302
     - name: Querying
       identifier: dashboards_querying
       url: dashboards/querying/
