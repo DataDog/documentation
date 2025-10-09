@@ -85,7 +85,7 @@ ANRs are only reported through RUM (not through logs). For more information, see
 
 {{% tab "iOS" %}}
 
-**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled. 
+Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled. 
 
 All uncaught exceptions resulting in a crash are reported by the Kotlin Multiplatform SDK.
 
@@ -160,14 +160,239 @@ For more information about setting up a client token, see the [Client Token docu
 
 
 
+### step 4 - Initialize Datadog SDK
+
+In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][701].
+
+See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][702] to initialize the library.
+
+{{< site-region region="us" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.EU1)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.US3)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.US5)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.US1_FED)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.AP1)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.AP2)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
 
 
+## Get deobfuscated stack traces
+
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+Use the following guides to see how you can upload mapping files (Android) or dSYMs (iOS) to Datadog: [Android][7], [iOS][8].
 
 
+## Limitations
+
+### File sizing
+
+Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
+
+### Collection
+
+The SDK handles crash reporting with the following behaviors:
+
+- The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
+- RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
+- Only crashes that occur in sampled sessions are kept.
+
+## Test your implementation
+
+To verify your Kotlin Multiplatform Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on an Kotlin Multiplatform emulator or a real device.
+2. Execute some code containing an error or crash. For example:
+
+   ```kotlin
+   fun onEvent() {
+       throw RuntimeException("Crash the app")
+   }
+   ```
+
+3. After the crash happens, restart your application and wait for the Kotlin Multiplatform SDK to upload the crash report in [**Error Tracking**][1].
 
 
+## Advanced Error Tracking Features
+{{% collapse-content title="Sending data when device is offline" level="h4" %}}
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
+{{% /collapse-content %}}
 
 
+{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" %}}
+
+To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
+Tracking consent can be one of the following values:
+
+- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
+ collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+- `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or
+ RUM events.
+
+To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
+
+- `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+
+{{% /collapse-content %}}
 
 ## Further Reading
 
@@ -185,13 +410,15 @@ For more information about setting up a client token, see the [Client Token docu
 [602]: /real_user_monitoring/kotlin_multiplatform/data_collected/
 [603]: /account_management/api-app-keys/#api-keys
 [604]: /account_management/api-app-keys/#client-tokens
-
-<!-- 
-
-
+[701]: /getting_started/tagging/using_tags/
+[702]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
 [7]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
+
+
+<!-- 
+
 [10]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios -->
 
 
@@ -200,8 +427,7 @@ For more information about setting up a client token, see the [Client Token docu
 [2]: /error_tracking/
 
 
-[6]: /getting_started/tagging/using_tags/
-[7]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
+
 [8]: https://app.datadoghq.com/rum/application/create
 [9]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
 [10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
