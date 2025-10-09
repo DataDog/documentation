@@ -2,15 +2,9 @@
 title: Getting Started with Search in Datadog
 description: Learn the fundamentals of searching and filtering across Datadog products
 further_reading:
-    - link: "/getting_started/search/core_concepts"
-      tag: "Documentation"
-      text: "Core Search Concepts"
-    - link: "/getting_started/search/advanced_techniques"
-      tag: "Documentation"
-      text: "Advanced Search Techniques"
-    - link: "/getting_started/search/feature_specific"
-      tag: "Documentation"
-      text: "Feature-Specific Search Guide"
+- link: "/getting_started/search/product_specific_reference"
+  tag: "Documentation"
+  text: "Product-Specific Search"
 ---
 
 ## Overview
@@ -37,22 +31,14 @@ Event-based queries are used in most Datadog products to explore individual reco
 
 Compared to metric queries, event-based searches focus on discovering and filtering individual records rather than aggregating numerical values. They form the foundation for exploratory analysis—helping you identify patterns, troubleshoot issues, and drill into specific data before moving to metrics or dashboards for long-term trends.
 
-
-## Search fundamentals
-
-Search Fundamentals introduces the common building blocks of Datadog search. It covers how to construct basic queries, use boolean operators, filter by tags and attributes, and understand how search fields work across products. Mastering these fundamentals helps you adapt quickly to product-specific syntax and avoid common query issues.
-
-Learn more in [Search Fundamentals][1].
-
 ## Product-specific syntax
 
 Each Datadog product provides its own search syntax, tailored to the type of data it handles. The Product-Specific Search reference highlights the key capabilities and unique operators available in each product, such as log search facets, APM trace filters, or metric aggregation functions. These references help you understand where syntax differs across Datadog products.
 
-See the index of [Product-Specific Search][2].
+See the index of [Product-Specific Search][1].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/search/fundamentals
-[2]: /getting_started/search/product_specific_reference
+[1]: /getting_started/search/product_specific_reference

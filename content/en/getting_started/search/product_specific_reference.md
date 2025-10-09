@@ -1,244 +1,146 @@
 ---
-title: Product-specific search
+title: Product-Specific Search
 description: Learn about search capabilities across different Datadog products
 further_reading:
-    - link: "/getting_started/search/core_concepts"
-      tag: "Documentation"
-      text: "Core Search Concepts"
-    - link: "/getting_started/search/advanced_techniques"
-      tag: "Documentation"
-      text: "Advanced Search Techniques"
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search"
 ---
 
 ## Overview
 
-Each product offers unique search capabilities optimized for its use case. Use this guide to explore those capabilities and access related reference materials.
+Each Datadog product offers unique search capabilities optimized for its use case. This page provides a comprehensive index of product-specific search syntax resources to help you find the right documentation for your needs.
 
-{{% collapse-content title="Logs Management" level="h4" %}}
+## Search syntax families
 
-[Detailed Log Search Documentation →](/logs/explorer/search)
+There are two main families of search syntaxes across Datadog products:
 
-### Key Capabilities
-* Full-text search across log messages
-* Structured data queries
-* Pattern detection
-* Advanced facet filtering
+**Metrics-based syntax**: Used by Metrics and Cloud Cost Management for time-series data queries with tag-based filtering and aggregation.
 
-### Unique Syntax
+**Event-based syntax**: Used by Log Management and adopted by most other Datadog products including traces, RUM, CI/CD, and more. This syntax provides flexible faceted search with boolean operators and pattern matching.
+
+## Metrics
+
+Metrics use a specialized metrics-based syntax for filtering and aggregating time-series data.
+
+For more information, see [Advanced Filtering][1].
+
+### Key capabilties
+* Tag-based filtering with boolean logic (`AND`, `OR`, `NOT`) or symbolic operators (`&&`, `||`, `!`)
+* Wildcard matching on metric names and tag values
+* Aggregation by multiple tag dimensions
+* Template variable filtering for dynamic dashboards
+* Metric namespace filtering for organized queries
+* **Case-sensitive matching** for metric names
+
+{{% collapse-content title="Syntax examples" level="h5" expanded=false %}}
 ```text
-# Message content search
-message:"connection timeout"
+# Filter metrics by tag
+system.cpu.idle{host:prod-*}
 
-# Attribute search
+# Boolean operators for tag filtering
+avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
+
+# Combine multiple tag filters
+system.disk.used{env:production,datacenter:us-east-1}
+
+# Wildcard filtered query
+avg:system.disk.in_use{!device:/dev/loop*} by {device}
+
+# Wildcard matching on tags
+aws.ec2.cpuutilization{instance-type:t3.*}
+
+# Exclude specific tags
+system.mem.used{env:production AND NOT service:test}
+```
+{{% /collapse-content %}}
+
+
+## Logs
+
+Log Management uses event-based search syntax, serving as the foundation for many other products' search capabilities.
+
+For a complete reference for log search operators, wildcards, facets, and advanced queries, see [Log Search Syntax][2].
+
+### Key capabilities
+* Full-text search across log messages with wildcards and phrase matching
+* Structured faceted search on attributes (tags, custom fields, standard attributes)
+* Pattern detection and extraction using parsing patterns
+* Advanced boolean operators (AND, OR, NOT) and grouping
+* Range queries for numerical values and timestamps
+
+{{% collapse-content title="Syntax examples" level="h5" expanded=false %}}
+```text
+# Search for error messages containing "timeout"
+status:error "timeout"
+
+# Query HTTP errors with status codes 500-599
 @http.status_code:[500 TO 599]
 
-# Pattern search
-@message:%{date} ERROR %{word:component} failed
+# Combine multiple conditions
+service:web-api AND env:production AND @duration:>1000
+
+# Wildcard search for specific services
+service:payment-* AND status:error
+
+# Exclude specific values
+env:production NOT service:background-worker
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="APM & Continuous Profiling" level="h4" %}}
+## Traces
 
-[Detailed APM Search Documentation →](/tracing/trace_explorer/search)
+APM and Distributed Tracing use event-based search syntax for querying spans and traces.
 
-### Key Capabilities
-* Trace filtering
-* Span queries
-* Service topology search
-* Resource filtering
+To learn more about querying spans and traces with service, resource, and tag filters, see [Trace Query Syntax][3].
 
-### Unique Syntax
+### Key capabilites
+* Query spans by service, operation, and resource name
+* Filter by trace-level and span-level tags
+* Search across distributed traces spanning multiple services
+* Duration-based queries for performance analysis
+* Error tracking with status codes and error messages
+
+{{% collapse-content title="Syntax examples" level="h5" expanded=false %}}
 ```text
-# Trace queries
-service:payment-api AND @http.status_code:500
+# Find errors in a specific service
+service:payment-api status:error
 
-# Service topology
-@span.parent.service:frontend AND service:backend
+# Query by resource and HTTP method
+resource_name:"/api/v1/checkout" @http.method:POST
 
-# Resource patterns
-resource_name:"/api/v1/*" AND @http.method:POST
+# Search for slow traces
+service:web-api* @duration:>1s
+
+# Trace queries across service dependencies
+@span.parent.service:frontend service:backend
+
+# Filter by custom span tags
+service:database @db.statement:"SELECT *" @db.row_count:>1000
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Infrastructure Monitoring" level="h4" %}}
+## Additional product-specific resources
 
-[Detailed Infrastructure Search Documentation →](/infrastructure/search)
-
-### Key Capabilities
-* Host filtering
-* Container search
-* Cloud provider resource filtering
-* Integration-specific search
-
-### Unique Syntax
-```text
-# Host queries
-host:prod-* AND platform:linux
-
-# Container filtering
-container_name:web-* AND docker.image:nginx
-
-# Cloud resources
-cloud.provider:aws AND cloud.instance.type:t2.micro
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="Metrics" level="h4" %}}
-
-[Detailed Metrics Filtering Documentation →](/metrics/advanced-filtering)
-
-### Key Capabilities
-* Metric name filtering
-* Tag-based aggregation
-* Rate and threshold queries
-* Correlation searches
-
-### Unique Syntax
-```text
-# Metric filtering
-metric.name:system.cpu.idle AND host:prod-*
-
-# Tag aggregation
-avg:system.cpu.user{service:web} by {host}
-
-# Rate queries
-rate(metric.name):>100
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="Security Monitoring" level="h4" %}}
-
-[Detailed Security Search Documentation →](/security_monitoring/search)
-
-### Key Capabilities
-* Security signal search
-* Threat detection queries
-* Compliance filtering
-* CSPM rules search
-
-### Unique Syntax
-```text
-# Security signals
-security:attack AND severity:high
-
-# Compliance status
-compliance.status:failed AND framework:pci
-
-# Threat detection
-threat.source:ip AND threat.level:critical
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="Synthetic Monitoring" level="h4" %}}
-
-[Detailed Synthetics Search Documentation →](/synthetics/search)
-
-### Key Capabilities
-* Test result filtering
-* Location-based search
-* Browser test search
-* API test filtering
-
-### Unique Syntax
-```text
-# Test results
-test.type:browser AND status:failed
-
-# Location filtering
-location:aws:us-east-1 AND @dns.response_time:>1s
-
-# Browser tests
-@browser.error:* AND device:chrome
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="Real User Monitoring (RUM)" level="h4" %}}
-
-[Detailed RUM Search Documentation →](/real_user_monitoring/explorer/search)
-
-### Key Capabilities
-* User session search
-* Performance metrics filtering
-* Error tracking
-* User journey analysis
-
-### Unique Syntax
-```text
-# Session queries
-@session.type:user AND @performance.score:<0.5
-
-# Error tracking
-@error.source:js AND @error.type:TypeError
-
-# User journey
-@user.journey.step:checkout AND @performance.loading_time:>3s
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="CI Visibility" level="h4" %}}
-
-[Detailed CI Search Documentation →](/continuous_integration/explorer/search)
-
-### Key Capabilities
-* Pipeline filtering
-* Test result search
-* Git metadata search
-* Coverage metrics filtering
-
-### Unique Syntax
-```text
-# Pipeline queries
-@ci.pipeline.name:deploy AND @ci.status:failed
-
-# Test results
-@test.suite:integration AND @test.status:failed
-
-# Git metadata
-@git.branch:main AND @git.author.email:*@company.com
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="Monitor Management" level="h4" %}}
-
-[Detailed Monitor Search Documentation →](/monitors/manage/search)
-
-### Key Capabilities
-* Monitor status filtering
-* Alert condition search
-* Notification routing
-* SLO tracking
-
-### Unique Syntax
-```text
-# Monitor status
-status:Alert AND type:metric
-
-# Alert conditions
-query:"avg(last_5m):avg:system.cpu.user{*} > 80"
-
-# Notification
-notification:@slack-alerts AND priority:P1
-```
-{{% /collapse-content %}}
-
-## Best Practices
-
-### Choose the Right Search Context
-* Use feature-specific search when focusing on a single product
-* Combine searches across features for complex investigations
-* Leverage common patterns while respecting feature-specific syntax
-
-### Optimize Your Searches
-* Start with feature-specific facets
-* Use appropriate time ranges
-* Combine with global search patterns when needed
-
-## Next Steps
-
-* Review [Core Search Concepts](/getting_started/search/core_concepts)
-* Learn [Advanced Search Techniques](/getting_started/search/advanced_techniques)
-* Explore specific product documentation linked throughout this guide
+{{< whatsnext desc="Product-specific search syntax documentation for additional Datadog products:" >}}
+  {{< nextlink href="/continuous_integration/explorer/search_syntax" >}}CI Visibility Explorer: Query pipelines, tests, and CI/CD events{{< /nextlink >}}
+  {{< nextlink href="/continuous_delivery/explorer/search_syntax" >}}CD Visibility Explorer: Search and filter deployment events and executions{{< /nextlink >}}
+  {{< nextlink href="/monitors/manage/search" >}}Monitor Search: Find and filter monitors by status, type, tags, and alert conditions{{< /nextlink >}}
+  {{< nextlink href="/observability_pipelines/processors/filter" >}}Observability Pipelines Filter Processor: Query syntax for filtering pipeline data{{< /nextlink >}}
+  {{< nextlink href="/product_analytics/analytics_explorer/search_syntax" >}}Product Analytics Explorer Search: Search user interactions and product analytics events{{< /nextlink >}}
+  {{< nextlink href="/quality_gates/explorer/search_syntax" >}}Quality Gates Explorer Syntax: Query quality gate rules and evaluation results{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/explorer/search_syntax" >}}RUM Explorer Search: Search user sessions, views, actions, and errors{{< /nextlink >}}
+  {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/custom_rules" >}}Sensitive Data Scanner Custom Rules: Regex patterns and matching syntax for scanning sensitive data{{< /nextlink >}}
+  {{< nextlink href="/service_management/events/explorer/searching" >}}Service Management Events Search: Query and filter service management events{{< /nextlink >}}
+  {{< nextlink href="/logs/workspaces/sql_reference" >}}SQL Reference for Logs: SQL syntax for advanced log analysis in Workspaces{{< /nextlink >}}
+  {{< nextlink href="/tests/explorer/search_syntax" >}}Test Optimization Explorer Search Syntax: Search and analyze test execution data{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /metrics/advanced-filtering
+[2]: /logs/explorer/search_syntax
+[3]: /tracing/trace_explorer/query_syntax

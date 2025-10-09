@@ -160,16 +160,11 @@ menu:
       url: getting_started/search/
       parent: getting_started
       weight: 18
-    - name: Search Fundamentals
-      identifier: getting_started_search_fundamentals
-      url: getting_started/search/fundamentals
-      parent: getting_started_search
-      weight: 1801
     - name: Product-Specific Search
       identifier: getting_started_search_product_specific
       url: getting_started/search/product_specific_reference
       parent: getting_started_search
-      weight: 1802
+      weight: 1801
     - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
