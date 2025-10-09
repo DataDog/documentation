@@ -27,20 +27,22 @@ You can configure PR comments at the organization or repository level in [Reposi
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([in Preview][9]).  
 - Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** page][4].  
 
-## Set up GitHub pull request comments
-If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis).  
-If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` for comments to appear.  
+## Set up pull request comments
+Follow the steps below based on your source code management provider.
 
-### Set up the GitHub source code integration
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
+<div class="alert alert-info">If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis (SAST)) after completing the GitHub setup steps.
+If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` for comments to appear once the GitHub setup is complete.</div>
+
+### Connect your GitHub account(s) to Datadog
 For setup instructions, read the [Datadog GitHub source code integration][2] documentation.
 
-#### Configure a GitHub App
-To use Code Security on GitHub, you can do one of the following:
+### Create or update a GitHub App
+If you already have a GitHub App connected to Datadog, update it. Otherwise, create a new GitHub App.
 
-- Create a GitHub App in Datadog.
-- Update an existing GitHub App, if you have already created one in Datadog.
-
-The permissions you grant to the GitHub App determine which [GitHub integration][2] features are available for setup.
+<div class="alert alert-info">The permissions you grant to the GitHub App determine which [GitHub integration][2] features are available for setup.</div>
 
 #### Create and install a GitHub App
 
@@ -65,14 +67,31 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 1. Under the **Subscribe to events** heading, check the **Pull request** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
-## Set up GitLab merge request comments
-For setup instructions, read the [Datadog GitLab source code integration][8] documentation.
+{{% /tab %}}
+{{% tab "GitLab" %}}
 
-## Set up Azure DevOps pull request comments
+See the [GitLab Source Code][8] setup instructions to connect GitLab to Datadog.
+
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
 Azure DevOps for Code Security is currently in Preview. [Request access to join the Preview][9].
 
-## Configure PR comment settings for your repositories
-To configure PR comments for all repositories:
+{{% /tab %}}
+
+## Configuration options
+Before enabling PR comments, ensure that **at least one Code Security scan capability is enabled in the repository.** Even if PR comments are configured at the organization level, they are only added in repositories where a supported scan type (for example, SAST, SCA, or IaC) is active. Repositories without any enabled scan types will not receive PR comments.
+
+PR comments can be configured at the organization level or at the repository level:
+- **Organization level:** Settings apply to all repositories in the organization that have at least one scan capability enabled.
+- **Repository level:** Settings override the organization defaults for the selected repository.
+
+When configuring PR comments, you can:
+- Enable or disable comments for specific scan types (SAST, SCA, IaC).
+- Set minimum severity thresholds to control when comments appear.
+- Exclude comments for findings in test files or dev/test dependencies to avoid noise from low-priority issues.
+
+## Configure PR comments at the organization level
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
 1. In **Repository Settings**, click **Global PR Comment Configuration**.
@@ -83,7 +102,7 @@ To configure PR comments for all repositories:
     - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
 1. Click **Save**.
 
-To configure PR comments for a single repository:
+## Configure PR Comments at the repository level
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
 1. In **Repository Settings**, select a repository from the list.
