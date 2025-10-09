@@ -349,7 +349,7 @@ Since this feature is enabled by default, you can deploy a minimal DatadogAgent 
 #### Validation
 Check that checks are running:
 ```shell
-kubectl exec -it <cluster-agent-pod> -- agent clusterchecks
+kubectl exec <cluster-agent-pod> -- agent clusterchecks
 ```
 
 Look for:
@@ -474,7 +474,7 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
 #### Validation
 Check that checks are running:
 ```shell
-kubectl exec -it <cluster-agent-pod> -- agent clusterchecks
+kubectl exec <cluster-agent-pod> -- agent clusterchecks
 ```
 
 Look for:
