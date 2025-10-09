@@ -21,7 +21,7 @@ The diagrams in this guide provide a visual representation of the configuration 
 
 The setup processes documented in the [Azure integration page][1] are the recommended steps and result in the ideal configuration for the majority of users. Alternate configuration options in this document may be preferable for certain use cases. Any trade-offs in performance, features, or ease-of-management are outlined as needed.
 
-## Azure metric and data collection
+## Metric and data collection
 
 Enabling Datadog's Azure integration allows Datadog to:
 
@@ -32,11 +32,11 @@ Enabling Datadog's Azure integration allows Datadog to:
 
 The Azure APIs used and data collected are identical regardless of whether you use the standard or Azure Native version of the integration.
 
-### Standard Azure integration metric and data collection
+### Metric and data collection
 
 _Available in all Datadog Sites_
 
-Follow these steps to enable the standard Azure integration:
+Follow these steps to enable the Azure integration:
 
   1. Create an app registration in your Active Directory and enter the credentials in the [Datadog Azure integration page][4].
   2. Give the application read access (`Monitoring Reader` role) to the subscriptions or management group you would like to monitor.
@@ -49,13 +49,13 @@ Once this is completed, data collection begins automatically. The app registrati
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Diagram of the App Registration integration setup" >}}
 
-## Azure log collection
+## Log collection
 
 The diagram below provides a reference architecture for forwarding logs from Azure to Datadog, as described in the [Event Hub log forwarding guide][5].
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Diagram of the manual log forwarding setup" >}}
 
-### Alternate configuration options for log forwarding with the standard Azure integration
+### Alternate configuration options for log forwarding
 
 The default architecture above is suitable for most users. Depending on the scale and composition of your Azure environment, as well as the methods your organization uses to implement this architecture, the sections below detail additional considerations that may be relevant.
 
@@ -75,7 +75,6 @@ However, diagnostic settings are not limited to sending logs to Event Hubs in th
 
 As the volume of logs scales, you may see bottlenecks, typically arising in the Event Hubs. If you plan to submit high log volumes, you may want to consider adding additional partitions or using a Premium or Dedicated tier.
 For especially high log volumes, you may consider adding additional Event Hub and forwarder function pairs within the same region, and splitting traffic between them.
-
 
 {{% collapse-content title="Commands to install the Azure Datadog Extension" level="h4" expanded=false id="azure-datadog-extension-commands" %}}
 ## Install on Azure
@@ -118,6 +117,7 @@ The protected settings include:
 **Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. Also note that if an API key is set on the target machine, it's not possible to change it with `Set-AzVMExtension`.
 
 ### Specifying a configuration URI
+
 This example shows how to specify a configuration for the Datadog Agent to use.
 The Datadog Agent configuration URI must be an Azure blob storage URI.
 The Datadog Windows Agent Azure Extension will check that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
@@ -130,6 +130,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 **Note**: After the Datadog Agent is installed, the configuration can only be changed when upgrading to a newer version.
 
 ### Set a specific version of the Agent
+
 This example shows how to specify a version of the Agent to install. By default the Datadog Windows Agent Azure Extension installs the latest version of the Datadog Agent.
 
 **Note**: Downgrades are *not* supported, so it's not possible to install a *lower* version of the Datadog Agent than the one currently installed on the target machine. To install a lower version of the Datadog Agent, uninstall the previous version first by removing the Datadog Windows Agent Azure Extension on the target machine. Removing the Datadog Windows Agent Azure Extension does not remove the Datadog Agent configuration.
@@ -269,6 +270,7 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Azure integration troubleshooting" level="h4" expanded=false id="azure-integration-troubleshooting" %}}
+
 ## Find your tenant name
 
 1. Navigate to [portal.azure.com][1].
