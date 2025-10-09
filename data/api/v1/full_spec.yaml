@@ -981,6 +981,10 @@ components:
         increase_good:
           description: Whether to show increase as good.
           type: boolean
+        limit:
+          description: The number of items to show.
+          format: int64
+          type: integer
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
