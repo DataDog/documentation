@@ -1,5 +1,6 @@
 ---
 title: Suspect Commits
+description: Identify suspect commits in Error Tracking to pinpoint root causes and expedite error resolution.
 disable_toc: false
 further_reading:
 - link: 'https://www.datadoghq.com/blog/error-tracking-and-github/'

@@ -1,5 +1,6 @@
 ---
 title: Configuring Query Completion and Query Error Capture on SQL Server
+description: Configure SQL Server Extended Events to capture query completions, errors, and parameter values for enhanced monitoring.
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

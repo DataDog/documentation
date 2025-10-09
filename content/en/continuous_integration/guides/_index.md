@@ -1,5 +1,6 @@
 ---
 title: CI Visibility Guides
+description: Index of guides for advanced CI Visibility features including ingestion control, data models, and failure analysis.
 private: true
 disable_toc: true
 cascade:

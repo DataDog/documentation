@@ -1,5 +1,6 @@
 ---
 title: Tag Pipelines
+description: Create tag rules to enforce standardized tags and ensure accurate cost attribution across your cloud resources.
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

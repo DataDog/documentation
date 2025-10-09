@@ -1,3 +1,8 @@
+---
+title: TLS Ciphers Deprecation Notice
+description: Learn about Datadog's deprecation of certain TLS cipher suites and transition to modern cryptographic standards.
+---
+
 # Overview
 
 **Transport Layer Security (TLS)** is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. During the establishment of a TLS session, both parties agree on a cipher suite which dictates the cryptographic algorithms used to secure the communication.

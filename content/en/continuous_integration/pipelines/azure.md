@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on an Azure Pipeline
+description: Configure CI Visibility tracing for Azure Pipelines to monitor pipeline executions and performance.
 aliases:
   - /continuous_integration/setup_pipelines/azure
 further_reading:

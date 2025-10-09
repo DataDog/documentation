@@ -1,5 +1,6 @@
 ---
 title: Datadog Costs
+description: Visualize daily Datadog spending and utilization metrics alongside your cloud and SaaS costs.
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"

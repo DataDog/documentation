@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Get started with Backend Error Tracking using single step or manual instrumentation with Datadog tracing libraries.
 aliases:
 - /error_tracking/standalone_backend/getting_started
 further_reading:

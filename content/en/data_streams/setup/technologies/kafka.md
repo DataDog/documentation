@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for Kafka
+description: Set up Data Streams Monitoring for Kafka with supported languages and minimal tracer versions.
 ---
 
 ### Prerequisites

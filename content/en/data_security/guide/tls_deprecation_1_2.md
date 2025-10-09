@@ -1,5 +1,6 @@
 ---
 title: Deprecation notice for TLS version < 1.2
+description: Learn about Datadog's deprecation of TLS versions below 1.2 and ensure your clients support secure connections.
 ---
 
 

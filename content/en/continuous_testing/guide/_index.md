@@ -1,5 +1,6 @@
 ---
 title: Continuous Testing Guides
+description: Index of guides for using Continuous Testing features.
 private: true
 disable_toc: true
 cascade:

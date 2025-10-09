@@ -1,5 +1,6 @@
 ---
 title: Data Retention Periods
+description: View default data retention periods by data type and product across all Datadog services.
 disable_sidebar: true
 type: data_retention_periods
 aliases:

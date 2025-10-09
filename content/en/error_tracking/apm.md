@@ -1,5 +1,6 @@
 ---
 title: Error Tracking for APM
+description: Set up Error Tracking for APM applications with source code integration for enhanced debugging.
 ---
 
 Error Tracking is available for all the languages supported by APM and does not require using a different SDK.

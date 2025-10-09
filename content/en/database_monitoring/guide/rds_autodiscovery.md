@@ -1,6 +1,6 @@
 ---
 title: Configuring Database Monitoring for Amazon RDS DB Instances
-
+description: Set up Database Monitoring for Amazon RDS instances using Autodiscovery with automatic instance discovery.
 ---
 
 This guide assumes you have configured Database Monitoring for your Amazon RDS [Postgres][1] or [MySQL][11] databases.

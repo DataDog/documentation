@@ -1,5 +1,6 @@
 ---
 title: Oracle
+description: Configure Cloud Cost Management for Oracle Cloud Infrastructure to gain insights into your OCI billing data.
 aliases:
 - /cloud_cost_management/oracle/
 further_reading:

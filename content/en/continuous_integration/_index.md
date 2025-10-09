@@ -1,5 +1,6 @@
 ---
 title: Continuous Integration Visibility
+description: Monitor CI pipelines and tests with comprehensive visibility, metrics, and troubleshooting capabilities across all CI providers.
 aliases:
   - /ci
 further_reading:

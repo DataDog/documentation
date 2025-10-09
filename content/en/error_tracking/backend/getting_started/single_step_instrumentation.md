@@ -1,5 +1,6 @@
 ---
 title: Single Step Instrumentation for Backend Error Tracking
+description: Set up Backend Error Tracking with automatic instrumentation using single step installation for Linux, Kubernetes, and Docker.
 aliases:
 - /error_tracking/standalone_backend/getting_started/single_step_instrumentation
 further_reading:

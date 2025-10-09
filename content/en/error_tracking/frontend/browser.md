@@ -1,5 +1,6 @@
 ---
 title: Browser Error Tracking
+description: Set up Browser Error Tracking to collect and process JavaScript errors with source map support.
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 - /error_tracking/standalone_frontend/browser

@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for Python
+description: Set up Data Streams Monitoring for Python applications with supported messaging libraries.
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

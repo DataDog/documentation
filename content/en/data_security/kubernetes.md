@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Data Security
+description: Navigate permissions and security in Kubernetes when deploying the Datadog Agent while maintaining environment security.
 further_reading:
 - link: "/data_security/"
   tag: "Documentation"

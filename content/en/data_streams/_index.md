@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring
+description: Monitor streaming data pipelines end-to-end to understand data flow, latency, and bottlenecks.
 aliases:
 - /data_streams/troubleshooting
 further_reading:

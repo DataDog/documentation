@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for RabbitMQ
+description: Configure Data Streams Monitoring for RabbitMQ with supported languages and tracer requirements.
 ---
 
 ### Prerequisites

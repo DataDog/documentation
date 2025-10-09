@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for Java
+description: Enable Data Streams Monitoring for Java applications with automatic and manual instrumentation.
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

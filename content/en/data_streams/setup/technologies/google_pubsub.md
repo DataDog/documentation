@@ -1,5 +1,6 @@
 ---
-title: Data Streams Monitoring for Google Pub/Sub 
+title: Data Streams Monitoring for Google Pub/Sub
+description: Configure Data Streams Monitoring for Google Pub/Sub with Java and Node.js library support.
 ---
 
 ### Prerequisites

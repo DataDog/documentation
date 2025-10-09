@@ -1,5 +1,6 @@
 ---
 title: Architecture
+description: Learn about CloudPrem's decoupled architecture with components like Indexers, Searchers, Metastore, and Control Plane.
 further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for Go
+description: Configure Data Streams Monitoring for Go applications with automatic and manual instrumentation options.
 further_reading:
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'

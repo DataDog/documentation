@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on a Jenkins Pipeline
+description: Configure CI Visibility tracing for Jenkins pipelines to monitor build execution and performance.
 aliases:
   - /continuous_integration/setup_pipelines/jenkins
 further_reading:

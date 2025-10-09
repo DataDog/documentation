@@ -1,5 +1,6 @@
 ---
 title: Anomalies Page
+description: Detect and prioritize unexpected cloud cost changes with automated anomaly detection in Cloud Cost Management.
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

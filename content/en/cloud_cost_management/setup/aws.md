@@ -1,5 +1,6 @@
 ---
 title: AWS
+description: Configure Cloud Cost Management for AWS to gain insights into your AWS billing data and Cost and Usage Reports.
 aliases:
 - /integrations/awsbilling/
 - /cloud_cost_management/aws/

@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on a Buildkite Pipeline
+description: Configure CI Visibility tracing for Buildkite pipelines to monitor build execution and performance.
 aliases:
   - /continuous_integration/setup_pipelines/buildkite
 further_reading:

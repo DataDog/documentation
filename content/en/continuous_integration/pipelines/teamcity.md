@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on a TeamCity Pipeline
+description: Configure CI Visibility tracing for TeamCity pipelines to collect execution data and optimize workflows.
 aliases:
   - /continuous_integration/setup_pipelines/teamcity
 further_reading:

@@ -1,5 +1,6 @@
 ---
 title: Configuring Deadlock Monitoring on SQL Server
+description: Set up deadlock monitoring for SQL Server to explore deadlock events and analyze blocking processes.
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

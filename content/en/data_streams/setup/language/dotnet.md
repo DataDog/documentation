@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for .NET
+description: Configure Data Streams Monitoring for .NET applications with supported messaging libraries.
 further_reading:
   - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
     tag: 'Blog'

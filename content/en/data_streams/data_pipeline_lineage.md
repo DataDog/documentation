@@ -1,5 +1,6 @@
 ---
 title: Data Pipeline Lineage
+description: Visualize data flow through pipelines and understand data lineage across your data infrastructure.
 further_reading:
   - link: "/data_jobs"
     tag: "Documentation"

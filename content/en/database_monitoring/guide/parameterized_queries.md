@@ -1,5 +1,6 @@
 ---
 title: Capturing SQL Query Parameter Values With Database Monitoring
+description: Capture SQL query parameter values for enhanced debugging and performance analysis in PostgreSQL and SQL Server.
 private: true
 further_reading:
 - link: "/database_monitoring/"

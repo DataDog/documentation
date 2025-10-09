@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on a AWS CodePipeline Pipeline
+description: Configure CI Visibility tracing for AWS CodePipeline to monitor pipeline executions and performance.
 aliases:
   - /continuous_integration/setup_pipelines/codepipeline
 further_reading:

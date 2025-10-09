@@ -1,5 +1,6 @@
 ---
 title: Set up Tracing on Codefresh Pipelines
+description: Configure CI Visibility tracing for Codefresh pipelines to monitor execution results and performance.
 aliases:
   - /continuous_integration/setup_pipelines/codefresh
 further_reading:

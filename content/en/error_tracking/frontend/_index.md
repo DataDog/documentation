@@ -1,5 +1,6 @@
 ---
 title: Frontend Error Tracking
+description: Track, triage, and debug frontend application errors from browsers and mobile devices with detailed user timelines.
 is_beta: true
 private: false
 aliases:

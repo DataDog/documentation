@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for Amazon SQS
+description: Set up Data Streams Monitoring for Amazon SQS with supported tracer versions and configuration.
 ---
 
 ### Prerequisites

@@ -1,5 +1,6 @@
 ---
 title: CD Visibility in Datadog
+description: Set up CD Visibility in Datadog to get deployment-first insights into your CD health with providers like Argo CD and CI systems.
 further_reading:
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"

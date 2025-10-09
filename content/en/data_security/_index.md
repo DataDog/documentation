@@ -1,5 +1,6 @@
 ---
 title: Reducing Data Related Risks
+description: Learn about data security practices, compliance requirements, and risk mitigation strategies across Datadog products.
 further_reading:
 - link: "/data_security/logs/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Azure
+description: Configure Cloud Cost Management for Microsoft Azure to gain insights into your Azure billing data.
 aliases:
 - /cloud_cost_management/azure/
 further_reading:

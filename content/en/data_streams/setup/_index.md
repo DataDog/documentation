@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring
+description: Set up Data Streams Monitoring by language with supported libraries and configuration instructions.
 ---
 
 {{% site-region region="gov" %}}

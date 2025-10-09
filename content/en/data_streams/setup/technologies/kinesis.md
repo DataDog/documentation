@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for Amazon Kinesis
+description: Configure Data Streams Monitoring for Amazon Kinesis with language-specific setup instructions.
 ---
 
 ### Prerequisites

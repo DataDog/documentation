@@ -1,5 +1,6 @@
 ---
 title: Changes to Datadog's TLS certificate chain of trust
+description: Understand the changes to Datadog's TLS certificate authority and intermediate certificate authority chain.
 ---
 
 ## Overview
