@@ -90,10 +90,26 @@ Navigate to [APM][10] in the app to get started. To learn more, read the [APM do
 ## RUM & Session Replay
 
 Datadog [Real User Monitoring][11] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][12], you can capture and view the web browsing sessions of your users to better understand their behavior. In the RUM Explorer, you can not only visualize load times, frontend errors, and page dependencies, but also you can correlate business and application metrics to troubleshoot issues with application, infrastructure, and business metrics in one dashboard.
+<!-- cut down? -->
+
+**Key capabilities**:
+- Visualize load times, frontend errors, and resources for every user session
+- Filter and analyze data using custom attributes
+- Unify frontend and backend metrics in one view for faster troubleshooting
+
+Navigate to the [RUM explorer][x] in the app to get started. To learn more, read the [RUM documentation][11]
 
 ## Synthetic Monitoring
 
-Datadog [Synthetic Monitoring][13] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production.
+Datadog [Synthetic Monitoring][13] allows you to create and run API, browser, and mobile tests that proactively simulate user transactions on your applications. These tests monitor all internal and external network endpoints across your system's layers. 
+
+**Key capabilities**:
+
+- Test business-critical API endpoints and user journeys
+- Detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production
+- Find and alert on performance issues for users in various locations
+
+Navigate to [Synthetic Monitoring &Testing][y] in the app to get started. To learn more, read the [Synthetic Monitoring documentation][13].
 
 ## Integrations
 
@@ -141,7 +157,9 @@ Datadog [Synthetic Monitoring][13] allow you to create and run API and browser t
 [10]: https://app.datadoghq.com/apm/home
 [11]: /real_user_monitoring/
 [12]: /real_user_monitoring/session_replay/browser/
+[x]: https://app.datadoghq.com/rum/sessions
 [13]: /synthetics/
+[y]: https://app.datadoghq.com/synthetics/tests
 [14]: https://www.datadoghq.com/product/platform/integrations/
 [15]: /api/
 [16]: https://github.com/DataDog/datadog-agent
