@@ -125,11 +125,39 @@
     "description": "Delete Agentless scan options for an Azure subscription.",
     "summary": "Delete azure scan options"
   },
+  "GetAzureScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated subscription.",
+    "summary": "Get Azure scan options"
+  },
   "UpdateAzureScanOptions": {
     "description": "Update the Agentless scan options for an activated subscription.",
     "summary": "Update azure scan options",
     "request_description": "",
     "request_schema_description": "The definition of `AzureScanOptionsInputUpdate` object."
+  },
+  "ListGcpScanOptions": {
+    "description": "Fetches the scan options configured for GCP projects.",
+    "summary": "List GCP Scan Options"
+  },
+  "CreateGcpScanOptions": {
+    "description": "Activate Agentless scan options for a GCP project.",
+    "summary": "Post GCP Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "The definition of `GcpScanOptions` object."
+  },
+  "DeleteGcpScanOptions": {
+    "description": "Delete Agentless scan options for a GCP project.",
+    "summary": "Delete GCP Scan Options"
+  },
+  "GetGcpScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated project.",
+    "summary": "Get GCP scan options"
+  },
+  "UpdateGcpScanOptions": {
+    "description": "Update the Agentless scan options for an activated project.",
+    "summary": "Patch GCP Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "The definition of `GcpScanOptionsInputUpdate` object."
   },
   "ListAwsOnDemandTasks": {
     "description": "Fetches the most recent 1000 AWS on demand tasks.",
