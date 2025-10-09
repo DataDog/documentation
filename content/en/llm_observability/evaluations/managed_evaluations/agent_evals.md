@@ -18,7 +18,7 @@ aliases:
 Agent evaluations help ensure that your LLM-powered applications are making the right tool calls and resolving user requests successfully. These checks are designed to catch common failure modes when agents interact with external tools, APIs, or workflows.
 
 
-#### Tool Selection
+## Tool Selection
 
 This evaluation checks whether the agent successfully selected the appropriate tools to address the user’s request. Incorrect or irrelevant tool choices lead to wasted calls, higher latency, and failed tasks.
 
@@ -91,7 +91,7 @@ triage_agent = Agent(
 - Make sure you include descriptions of the tools (i.e. the quotes containing the tool description under the function name, the sdk autoparses this as the description)
 - <<todo>>
 
-#### Tool Argument Correctness
+## Tool Argument Correctness
 
 Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (e.g., a string instead of an integer) or irrelevant values cause failures in downstream execution.
 
@@ -203,7 +203,7 @@ result = triage_agent.run_sync(
 - Validate that your LLM prompt includes enough context for correct argument construction.
 
 
-#### Goal Completeness
+## Goal Completeness
 
 An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluation checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
 
