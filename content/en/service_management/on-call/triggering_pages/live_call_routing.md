@@ -52,7 +52,7 @@ In direct call routing, the system follows the On-Call team's escalation policy 
 Responders must have valid phone numbers in their profiles; On-Call skips any responders that don't.
 
 Responders then have the following options:
-- Press `1` to accept a call.
+- Press `1` to acknowledge the call.
 - Press `2` to escalate it.
 - Press `3` to resolve it.
 
