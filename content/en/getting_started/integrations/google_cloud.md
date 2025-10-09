@@ -166,21 +166,21 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 1. In the [Google Cloud integration page][200], select **+ Add GCP Account**.
 2. Click **Quick Start**.
-2. Click **Copy** in the setup script section.
-3. Click **Open Google Cloud Shell**.
-4. Paste the script into the shell prompt and run it.
+3. Click **Copy** in the setup script section.
    **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.  
-5. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.
-6. Under **Provide Service Account Details**:
+4. Click **Open Google Cloud Shell**, or go to [Google Cloud Shell][204].
+5. Paste the script into the shell prompt and run it.
+6. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.
+7. Under **Provide Service Account Details**:
    1. Give the service account a name.
    2. Select the project to contain the service account.
-7. Optionally, configure **Metric Collection**.
+8. Configure **Metric Collection** (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
-   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
-8. Optionally, choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
-9. A summary of the changes to be made is displayed. If confirmed, the script:
+   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
+9. Choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
+10. A summary of the changes to be made is displayed. If confirmed, the script:
    - Enables the required APIs
    - Assigns the necessary permissions to monitor each selected project and folder
    - Completes the integration setup in Datadog
@@ -189,6 +189,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 [201]: https://cloud.google.com/sdk/docs/install
 [202]: https://docs.datadoghq.com/account_management/rbac/permissions/#managed-roles
 [203]: https://docs.datadoghq.com/account_management/rbac/permissions/#custom-roles
+[204]: https://ssh.cloud.google.com/cloudshell
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
@@ -208,12 +209,12 @@ To use the Quick Start method, your Datadog user role must be able to create API
 5. Under **Provide Service Account Details**:
    1. Give the service account a name.
    2. Select the project to contain the service account.
-6. Optionally, configure **Metric Collection**.
+6. Configure **Metric Collection** (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
-7. Optionally, choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
+7. Choose whether to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 8. Copy the provided **Terraform Code**. If confirmed, the script:
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
    - Enables the required APIs
@@ -242,12 +243,12 @@ To use the Quick Start method, your Datadog user role must be able to create API
 5. Click the service account link under the **Email** column
 6. Copy the **Email** value.
 7. In Datadog, paste the service account email in the **Add Service Account Email** section.
-8. Optionally, configure **Metric Collection**.
+8. Configure **Metric Collection** (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
-9. Optionally, choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
+9. Choose whether to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. Click **Verify and Save Account**.
 
 [600]: https://app.datadoghq.com/integrations/google-cloud-platform
@@ -269,7 +270,9 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 
 Optionally, you can choose which Google Cloud services you monitor with Datadog. Configuring metrics collection for specific Google services lets you optimize your Google Cloud Monitoring API costs, while retaining visibility into your critical services.
 
-Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][43], unselect the metric namespaces to exclude. You can also choose to disable collection of all metric namespaces.
+Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][43], unselect the metric namespaces to exclude. You can also choose to disable collection of all existing metric namespaces.
+
+**Note**: This selection does not apply to metric namespaces added to this list in the future. When a metric namespace is added to this list, it is enabled by default.
 
 {{< img src="integrations/google_cloud_platform/limit_metric_namespaces.png" alt="The metric collection tab in the Datadog Google Cloud integration page" style="width:80%;">}}
 {{% /collapse-content %}}
