@@ -2,13 +2,13 @@
 title: Azure Advanced Configuration
 description: "Advanced configuration and architecture of the Datadog Azure integration"
 further_reading:
-- aliases:
-  - /integrations/guide/azure-architecture-and-configuration/
-  - /integrations/guide/powershell-command-to-install-azure-datadog-extension/
-  - /integrations/guide/azure-vms-appear-in-app-without-metrics/
-  - /integrations/guide/azure-troubleshooting/
-  - /integrations/guide/powered-down-azure-vm-on-infrastructure-list/
-  - /integrations/guide/azure-count-metric/
+aliases:
+- /integrations/guide/azure-architecture-and-configuration/
+- /integrations/guide/powershell-command-to-install-azure-datadog-extension/
+- /integrations/guide/azure-vms-appear-in-app-without-metrics/
+- /integrations/guide/azure-troubleshooting/
+- /integrations/guide/powered-down-azure-vm-on-infrastructure-list/
+- /integrations/guide/azure-count-metric/
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
   text: "Azure Integration"
