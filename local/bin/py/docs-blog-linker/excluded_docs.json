@@ -1,0 +1,5 @@
+{
+  "excluded_docs": {
+    "https://docs.datadoghq.com/security/default_rules/": "content/en/security/default_rules/_index.md"
+  }
+}
