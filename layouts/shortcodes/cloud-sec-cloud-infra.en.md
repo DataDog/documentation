@@ -1,0 +1,1 @@
+<div class="alert alert-info">In Cloud Security, rules with the <strong>infrastructure</strong> label are applicable to Agent installations.</div>
