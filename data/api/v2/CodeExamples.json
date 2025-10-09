@@ -1730,6 +1730,20 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "CreateTeamConnections": [
+    {
+      "group": "team_connections",
+      "suffix": "",
+      "description": "Create team connections returns \"Created\" response"
+    }
+  ],
+  "DeleteTeamConnections": [
+    {
+      "group": "team_connections",
+      "suffix": "",
+      "description": "Delete team connections returns \"No Content\" response"
+    }
+  ],
   "CreateTeamLink": [
     {
       "group": "teams",
