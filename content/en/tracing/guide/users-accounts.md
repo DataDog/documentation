@@ -50,7 +50,7 @@ For backend services or applications without RUM, you can tag spans directly usi
 from ddtrace import tracer
 
 # Tag the span with user and account information
-span = tracer.current_span()
+span = tracer.current_root_span()
 span.set_tag("usr.id", "user_123")
 span.set_tag("account.id", "account_456")
 
