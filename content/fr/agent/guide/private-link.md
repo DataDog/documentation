@@ -30,7 +30,7 @@ title: Connexion à Datadog via AWS PrivateLink
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink ne prend pas en charge le site Datadog sélectionné.</div>
+<div class="alert alert-danger">Datadog PrivateLink ne prend pas en charge le site Datadog sélectionné.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1,ap2" %}}

@@ -25,7 +25,7 @@ title: 호스트 모니터
 
 모든 Datadog Agent는 `datadog.agent.up` 서비스 점검을 상태 `OK`와 함께 보고합니다. 호스트 모니터를 사용하여 하나 이상의 호스트에서 이 검사를 모니터할 수 있습니다.
 
-<div class="alert alert-warning">AIX 에이전트는 <code>datadog.agent.up</code> 서비스 점검을 보고하지 않습니다. 메트릭 <code>datadog.agent.running</code>을 사용해 AIX 에이전트 가동 시간을 모니터링할 수 있습니다. 에이전트가 Datadog로 보고하면 메트릭에서 <code>1</code> 값을 방출합니다.</div>
+<div class="alert alert-danger">AIX 에이전트는 <code>datadog.agent.up</code> 서비스 점검을 보고하지 않습니다. 메트릭 <code>datadog.agent.running</code>을 사용해 AIX 에이전트 가동 시간을 모니터링할 수 있습니다. 에이전트가 Datadog로 보고하면 메트릭에서 <code>1</code> 값을 방출합니다.</div>
 
 ## 모니터 생성
 

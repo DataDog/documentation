@@ -63,7 +63,7 @@ Para ver la lista completa de los requisitos de compatibilidad para las bibliote
     Para configurar Datadog APM en AWS Lambda, consulta el <strong><a href="/tracing/serverless_functions/">rastreo de funciones serverless</a></strong>en Azure App Service y también el <strong><a href="/serverless/azure_app_services/">rastreo en Azure App Service</a></strong>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación.
 </div>
 
@@ -98,7 +98,7 @@ También puedes aplicar un script para la configuración del MSI ejecutando lo s
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota:</strong> Esta instalación no instrumenta aplicaciones que se ejecutan en IIS. En el caso de aplicaciones que se ejecutan en IIS, sigue el proceso de Windows para la instalación en toda la máquina.
 </div>
 
@@ -134,14 +134,14 @@ Para obtener más información sobre los diferentes métodos de configurar varia
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
 #### Servicios fuera de IIS
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar el .NET biblioteca en <em>cualquier</em>.NET proceso que se inicie con estas variables entorno configuradas. Debe limitar Instrumentación sólo a las aplicaciones que necesitan ser instrumentadas. <strong>No configure estas variables entorno de forma global, ya que esto provocaría la instrumentación de <em>todas</em> las aplicaciones .NET procesos en host.</strong>
 </div>
 
@@ -188,7 +188,7 @@ La instrumentación personalizada depende de tu instrumentación automática e i
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> A partir de la versión 3.0.0, la instrumentación personalizada requiere el uso de la instrumentación automática. Debes intentar mantener sincronizadas las versiones automáticas y personalizadas del paquete de instrumentación (por ejemplo: MSI y NuGet) y asegurarte de no mezclar versiones principales de paquetes.
 </div>
 
@@ -218,7 +218,7 @@ Para obtener más información sobre cómo añadir tramos y etiquetas (tags) par
 
 Para adjuntar la instrumentación automática a tu servicio, debes configurar las variables de entorno obligatorias antes de iniciar la aplicación. Consulta la sección [Activar el rastreador para tu servicio](#enable-the-tracer-for-your-service) para identificar las variables de entorno que debes configurar, dependiendo del método que has utilizado para instalar el rastreador .NET y sigue los siguientes ejemplos para configurar las variables de entorno correctamente, según el entorno de tu servicio instrumentado.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar el .NET biblioteca en <em>cualquier</em>.NET proceso que se inicie con estas variables entorno configuradas. Debe limitar Instrumentación sólo a las aplicaciones que necesitan ser instrumentadas. <strong>No configure estas variables entorno de forma global, ya que esto provocaría la instrumentación de <em>todas</em> las aplicaciones .NET procesos en host.</strong>
 </div>
 

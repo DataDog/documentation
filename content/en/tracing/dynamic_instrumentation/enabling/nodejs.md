@@ -13,12 +13,6 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< beta-callout-private url="https://www.datadoghq.com/product-preview/dynamic-instrumentation-for-nodejs/" >}}
-    Dynamic Instrumentation for Node.js is in limited preview, and is not available to all customers.
-    Request access to join the waiting list.
-    Note that <a href="#limitations">some limitations</a> apply to the preview.
-{{< /beta-callout-private >}}
-
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Installation
@@ -60,7 +54,7 @@ See [Dynamic Instrumentation][4] for information about adding instrumentations a
 
 ## Limitations
 
-The following limitations apply to the limited preview:
+The following limitations apply to the Node.js implementation:
 
 ### Supported features
 

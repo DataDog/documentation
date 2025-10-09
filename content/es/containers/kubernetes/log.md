@@ -136,7 +136,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Advertencia para instalaciones sin privilegios</strong>
 <br/><br/>
 Cuando se ejecuta una instalación sin privilegios, el Agent necesita poder leer archivos de logs en <code>/var/log/pods</code>.

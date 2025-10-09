@@ -30,7 +30,7 @@ Cuando te pongas en contacto con el servicio de asistencia de Datadog con la con
 ## Enviar un flare desde el sitio de Datadog 
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El envío de un flare del Agent desde Fleet Automation no es compatible con este sitio.</div>
+<div class="alert alert-danger">El envío de un flare del Agent desde Fleet Automation no es compatible con este sitio.</div>
 {{< /site-region >}}
 
 Para enviar un flare desde el sitio de Datadog, asegúrate de haber habilitado la [automatización de flotas][2] y la [configuración remota][3] en el Agent.

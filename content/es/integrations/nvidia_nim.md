@@ -81,7 +81,7 @@ Este check monitoriza [NVIDIA NIM][1] a través del Datadog Agent.
 
 ## Configuración
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta integración está actualmente en vista previa. Su disponibilidad está sujeta a cambios en el futuro. 
 </div>
 

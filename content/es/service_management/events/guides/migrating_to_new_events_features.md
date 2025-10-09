@@ -9,7 +9,7 @@ further_reading:
 title: Migración a las características de eventos nuevas
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El flujo de eventos y los monitores de eventos heredados de Datadog se retirarán el <strong>30 de junio de 2022</strong>. Datadog está migrando a todos los clientes a una experiencia de eventos nueva y mejorada. Esta página contiene información importante sobre esta migración. Antes de la fecha de retiro, sigue los pasos de esta página para asegurarte de que tus visualizaciones y monitores de eventos existentes sigan funcionando de manera correcta.</div>
 
 

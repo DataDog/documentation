@@ -113,7 +113,7 @@ Azure プラットフォームのログ (リソースログを含む) を送信�
 {{% tab "Blob Storage" %}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog {{< region-param key="dd_site_name" >}} サイトではサポートされていません。
 </div>
 {{% /site-region %}}

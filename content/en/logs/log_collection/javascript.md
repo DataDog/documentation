@@ -16,16 +16,20 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Forward frontend errors.
 - Record real client IP addresses and user agents.
 - Optimized network usage with automatic bulk posts.
+- Use in Worker and Service Worker environments.
 
 **Notes**:
 
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
+- **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs sent from Worker environments do not automatically include session information.
 
 ## Setup
 
 ### Step 1 - Create a client token
 
 In Datadog, navigate to [**Organization Settings > New Client Tokens**][1]
+
+**Supported environments**: The browser logs SDK supports all modern desktop and mobile browsers, as well as Worker and Service Worker environments. See the [Browser Support][4] table.
 
 <div class="alert alert-info">For security reasons, <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">API keys</a> cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">client token</a> must be used.</div>  
 

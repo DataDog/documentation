@@ -13,7 +13,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 

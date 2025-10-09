@@ -78,7 +78,7 @@ To restrict access to an On-Call resource:
 
 ## Start using Datadog On-Call
 
-<div class="alert alert-warning">To preserve incident history, Datadog On-Call does not support deletion of resources like Pages, escalation policies, or schedules. To test On-Call without affecting your production environment, create a trial organization as a sandbox.</div>
+<div class="alert alert-danger">To preserve incident history, Datadog On-Call does not support deletion of resources like Pages, escalation policies, or schedules. To test On-Call without affecting your production environment, create a trial organization as a sandbox.</div>
 
 To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
 

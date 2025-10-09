@@ -43,8 +43,8 @@ The following sections describe ways to configure SCA for your repositories.
 
 ### Scan with Datadog-hosted scanning
 
-You can run Datadog Static Code Analysis scans directly on Datadog infrastructure. Supported repository types include:
-- [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider)
+You can run Datadog Static SCA scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider) (excluding repositories that use [Git Large File Storage][21])
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
 
@@ -52,7 +52,6 @@ To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that:<br>
-- Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br>
 - Contain file paths with parent directory traversal (<code>..</code>)<br>
 - Contain file names longer than 255 characters<br>
 For these cases, use CI Pipelines.
@@ -93,7 +92,7 @@ See the [GitLab source code setup instructions][1] to connect GitLab to Datadog.
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
@@ -174,7 +173,7 @@ There are two ways to run SCA scans from within your CI Pipelines:
 You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
 
 {{< tabs >}}
-{{% tab "Github" %}}
+{{% tab "GitHub" %}}
 **GitHub Actions**
 
 SCA can run as a job in your GitHub Actions workflows. The action provided below invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][1], on your codebase and uploads the results into Datadog.
@@ -321,7 +320,7 @@ are set to your API key, APP key, and [Datadog site][12], respectively.
 datadog-ci sbom upload /path/to/third-party-sbom.json
 ```
 
-## Features
+## Link results to Datadog services and teams
 
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
@@ -387,7 +386,7 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
-### Reachability analysis
+## Filter by reachable vulnerabilities
 
 Datadog offers static reachability analysis to help teams assess whether vulnerable code paths in dependencies are referenced within their application code. This capability supports more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore present minimal immediate risk.
 
@@ -446,7 +445,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 ## Further Reading
 
 {{< whatsnext desc="More about SCA:">}}
-    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Runtime detection of libraries vulnerabilities{{< /nextlink >}}
+    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Set up runtime detection of library vulnerabilities{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Other Code Security scanning for your repositories:">}}
@@ -474,4 +473,5 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [18]: https://cyclonedx.org/docs/1.4/json/
 [19]: https://cyclonedx.org/docs/1.5/json/
 [20]: https://cyclonedx.org/docs/1.6/json/
+[21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 
