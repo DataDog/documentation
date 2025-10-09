@@ -25,9 +25,9 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 ### Step 1 - Create a client token
 
-In Datadog, navigate to [Organization Settings > New Client Tokens][1]
+In Datadog, navigate to [**Organization Settings > New Client Tokens**][1]
 
-**Note**: For security reasons, [API keys][2] cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used.
+<div class="alert alert-info">For security reasons, <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">API keys</a> cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">client token</a> must be used.</div>  
 
 ### Step 2 - Install the Logs Browser SDK
 
@@ -36,16 +36,16 @@ Choose the installation method for the Browser SDK.
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Installing through Node Package Manager (npm) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors and console logs triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+For modern web applications, Datadog recommends installing through Node Package Manager (npm). The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may not capture errors or console logs that occur before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.  
 
-Add [`@datadog/browser-logs`][13] to your `package.json` file, example if you use npm cli:
+Add [`@datadog/browser-logs`][13] to your `package.json` file. For example, if you use npm cli.  
 
 [13]: https://www.npmjs.com/package/@datadog/browser-logs
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-Installing through CDN async is recommended for web applications with performance targets. The Browser SDK loads from Datadog's CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors and console logs triggered before the SDK is initialized.
+Web applications with performance targets should install through CDN async. The Browser SDK loads from Datadog's CDN asynchronously, ensuring it doesn't impact page load performance. However, the SDK may not capture errors or console logs that occur before the SDK is initialized.  
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application.
 
@@ -144,7 +144,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-Installing through CDN sync is recommended for collecting all events. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
+To collect all events, you should install through CDN sync. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.  
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Placing the script tag higher and loading it synchronously ensures Datadog RUM can collect all performance data and errors.
 
@@ -1322,8 +1322,6 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 <!-- Note: all URLs should be absolute -->
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[3]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
 [4]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
 [5]: /logs/log_collection/javascript/#user-tracking-consent
 [6]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
