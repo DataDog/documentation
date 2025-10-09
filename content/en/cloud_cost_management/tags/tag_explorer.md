@@ -1,5 +1,7 @@
 ---
 title: Tag Explorer
+aliases:
+  - /cloud_cost_management/tag_explorer
 description: Search and manage all cost-related tags, including those from your bills, with insights into their sources.
 further_reading:
 - link: "/cloud_cost_management/"
@@ -14,16 +16,16 @@ further_reading:
 - link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
-- link: "/cloud_cost_management/tag_pipelines"
+- link: "/cloud_cost_management/tags/tag_pipelines"
   tag: "Documentation"
   text: "Learn about Tag Pipelines"
 ---
 
 ## Overview
 
-[Cloud Cost Management][1] detects the sources for all of your cost-related tags, allowing you to search and manage tags for breaking down costs, including [Custom costs][4], [Datadog costs][5], and [SaaS cost integrations][6].
+[Cloud Cost Management][1] detects the sources for all of your cost-related tags. You can search and manage tags for breaking down costs, including [Custom Costs][4], [Datadog costs][5], and [SaaS cost integrations][6].
 
-Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag, in addition to those managed through [Tag Pipelines][3]. [Tag Pipelines][3] allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
+Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. Tag Pipelines allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
 
 {{< img src="cloud_cost/tag_explorer/dropdown_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -35,7 +37,7 @@ See the respective documentation for your cloud provider:
 
 {{< partial name="cloud_cost/getting-started.html" >}}
 
-</br>
+<br>
 
 ## Search and manage tags
 
@@ -60,7 +62,7 @@ For Azure tags, select **Azure** from the dropdown menu on the top right corner.
 
 For Google Cloud tags, select **Google** from the dropdown menu on the top right corner.
 
-{{< img src="cloud_cost/tag_explorer/google_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
+{{< img src="cloud_cost/tag_explorer/google_1.png" alt="Search through the list of Google Cloud cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -147,7 +149,7 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 {{< /tabs >}}
 
 ## Set preferred tags
-Set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
+You can set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_1.png" alt="Preferred tags are shown throughout CCM" style="width:100%;" >}}
 
@@ -161,7 +163,7 @@ You can choose preferred tags from any of your existing cost data tags, includin
 
 [1]: /cloud_cost_management/
 [2]: https://app.datadoghq.com/cost/tags
-[3]: /cloud_cost_management/tag_pipelines
+[3]: /cloud_cost_management/tags/tag_pipelines
 [4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
 [6]: /cloud_cost_management/setup/saas_costs

@@ -120,7 +120,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 4. Under **People**, allow notifications from the Datadog On-Call contact. If you enabled critical alerts for Datadog push applications, then the Datadog mobile app also appears under **Apps**.
 
-5. To bypass silent mode, navigate to the Datadog On-Call contact >> tap **Ringstone** >> activate **Emergency Bypass**.
+5. To bypass silent mode, navigate to the Datadog On-Call contact >> tap **Ringtone** >> activate **Emergency Bypass**.
 {{% /tab %}}
 
 {{% tab "Android" %}}
