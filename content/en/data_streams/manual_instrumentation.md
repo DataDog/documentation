@@ -12,12 +12,12 @@ further_reading:
       text: 'Software Catalog'
 ---
 
-Data Streams Monitoring (DSM) tracks how data flows through queues and services. If your message system is **not automatically supported** (for example, your queue technology and language is not yet instrumented or the library you use in the language isn't automatically instrumented), you must **manually record checkpoints** so DSM can connect producers and consumers.
+Data Streams Monitoring (DSM) tracks how data flows through queues and services. If your message system is **not automatically supported** (for example, your queue technology and language is not instrumented or the library you use in the language isn't automatically instrumented), you must **manually record checkpoints** so DSM can connect producers and consumers.
 
 - **Produce checkpoint**: records when a message is published, injects DSM context into the message.
 - **Consume checkpoint**: records when a message is received, extracting the DSM context if it exists, and prepares future produce checkpoints to carry that context forward.
 
-> **Key rule:** the DSM context must travel *with the message*. If your system supports headers, store it there. Otherwise, embed it directly in the payload.
+**The DSM context must travel _with the message_**. If your system supports headers, store it there. Otherwise, embed it directly in the payload.
 
 ### Manual instrumentation installation
 Ensure you're using the [Datadog Agent v7.34.0 or later][1].
@@ -28,7 +28,7 @@ Ensure you're using the [Datadog Agent v7.34.0 or later][1].
 ## API reference
 
 ### `DataStreamsCheckpointer.get().setProduceCheckpoint(queueType, name, carrier)`
-- **queueType**: message system (e.g., `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
+- **queueType**: message system (such as `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
 - **name**: queue, topic, or subscription name.
 - **carrier**: an implementation of `DataStreamsContextCarrier`. This is where DSM context is **stored** with the message (typically a headers map, but could be payload fields if no headers exist).
 
@@ -36,7 +36,8 @@ Ensure you're using the [Datadog Agent v7.34.0 or later][1].
 - **queueType**: same as producer.
 - **name**: same as producer.
 - **carrier**: an implementation of `DataStreamsContextCarrier`. This is where DSM context is **retrieved** from the message.
-- **Note**: consume not only links this message but also prepares future produces in this consumer to carry the context forward.
+
+- **Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
 
 ---
 
@@ -127,7 +128,8 @@ private class Carrier implements DataStreamsContextCarrier {
 - **queueType**: same value used by the producer (recognized strings preferred, other strings allowed).
 - **name**: same queue, topic, or subscription name.
 - **carrier**: readable key/value container to **retrieve** DSM context from the message (headers object if supported; otherwise the parsed payload).
-- **Note**: consume links this message **and** prepares future produces in this handler to carry context forward.
+
+**Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
 
 ## Example in context (single block)
 
@@ -191,7 +193,8 @@ function handleMessage(msg) {
 - **getter**: a callable `(key)` used to **retrieve** DSM context from the message.
   - If headers are supported: use `headers.get`.
   - If not: use a function that reads from the payload.
-- **Note**: consume not only links this message but also prepares future produces in this handler to carry the context forward.
+
+**Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
 
 ---
 
@@ -253,7 +256,8 @@ def handle_message(message, properties):
 - **block**: yields `(key)`. Your block must *retrieve* the DSM context from the message.
   - If headers are supported: read from headers.
   - If not: read from payload fields.
-- **Note**: consume also prepares future produce checkpoints to continue the context downstream.
+
+**Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
 
 ---
 
