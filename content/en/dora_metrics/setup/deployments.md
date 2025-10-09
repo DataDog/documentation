@@ -116,8 +116,8 @@ export deploy_start=`date +%s`
 ./your-deploy-script.sh
 datadog-ci dora deployment --service shopist --env prod \
     --started-at $deploy_start --finished-at `date +%s` \
-    --version 1.0.1 --custom-tags department:engineering \
-    --custom-tags category:public-platform \
+    --version v1.12.07 --custom-tags department:engineering \
+    --custom-tags app_type:backend \
     --git-repository-url "https://github.com/organization/example-repository" \
     --git-commit-sha 66adc9350f2cc9b250b69abddab733dd55e1a588
 ```
