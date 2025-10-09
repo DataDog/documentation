@@ -44,7 +44,7 @@ To generate traces compatible with LLM Observability:
 1. Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37 gen_ai semantic conventions][1].
 2. Alternatively, create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes as defined in the semantic conventions.
 
-The traces will automatically appear in the [**LLM Observability Traces** page][3] once your application starts sending data. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your Opentelemetry span's `service` attribute.
+The traces will automatically appear in the [**LLM Observability Traces** page][3] once your application starts sending data. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your Opentelemetry root span's `service` attribute.
 
 **Note**: There may be a 3-5 minute delay between sending traces and seeing them appear in the LLM Observability Traces UI.
 
@@ -52,8 +52,8 @@ The traces will automatically appear in the [**LLM Observability Traces** page][
 
 LLM Observability supports spans that follow the OpenTelemetry 1.37 semantic conventions for generative AI, including:
 
-- LLM operations with `gen_ai.system`, `gen_ai.request.model`, and other gen_ai attributes
-- Chat completion and text generation operations
+- LLM operations with `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model`, and other gen_ai attributes
+- I/O on direct attributes or via events
 - Token usage metrics (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`)
 - Model parameters and metadata
 
