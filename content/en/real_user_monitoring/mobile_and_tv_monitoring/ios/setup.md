@@ -35,7 +35,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] using the Datadog iOS SDK. Follow the steps below to set up RUM monitoring, which includes Error Tracking. If you have purchased Error Tracking as a standalone product, [learn how to set it up][7].
+This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] using the Datadog iOS SDK. Follow the steps below to set up RUM monitoring, which includes Error Tracking.
 
 ## Prerequisites
 

@@ -643,14 +643,14 @@ To **change the tracking consent value** after the iOS SDK is initialized, use t
 
 For example, if the current tracking consent is `.pending`:
 
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog.
-- If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
+- If you change the value to `.granted`, the iOS SDK sends all current and future data to Datadog.
+- If you change the value to `.notGranted`, the iOS SDK wipes all current data and does not collect future data.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Sample session rates" level="h4" expanded=false id="sample-session-rates" %}}
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][14]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for sessions while [initializing the iOS SDK][14]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to only keep 50% of sessions, use:
 
@@ -658,7 +658,7 @@ For example, to only keep 50% of sessions, use:
 {{% tab "Swift" %}}
 ```swift
 let configuration = RUM.Configuration(
-    applicationID: "<rum application id>",
+    applicationID: "<application id>",
     sessionSampleRate: 50
 )
 ```
