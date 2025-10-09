@@ -11,7 +11,6 @@ further_reading:
 
 Datadog provides powerful and flexible search capabilities across its products and features. This guide introduces the core concepts of search syntax in Datadog, helping you understand how to construct effective queries across Logs, Metrics, APM, and more.
 
-You'll learn about shared search semantics, product-specific syntax, and advanced techniques that enhance your querying experience. Each section also includes examples and links to detailed documentation for further reference.
 
 ## Understanding Datadog search
 
