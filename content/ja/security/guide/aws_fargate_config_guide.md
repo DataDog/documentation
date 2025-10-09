@@ -334,7 +334,7 @@ spec:
 
 ### Agent がイベントを CSM に送信していることを確認する
 
-AWS Fargate ECS または EKS で CSM を有効にすると、Agent から Datadog にログが送信され、デフォルトのルールセットが正常にデプロイされたことが確認されます。ログを確認するには、Datadog の [Logs][9] ページに移動し、`@agent.rule_id:ruleset_loaded` を検索します。
+AWS Fargate ECS または EKS で CSM を有効にすると、Agent から Datadog にログが送信され、デフォルトのルールセットが正常にデプロイされたことが確認されます。ログを確認するには、Datadog の [Agent Events][9] ページに移動し、`@agent.rule_id:ruleset_loaded` を検索します。
 
 <div class="alert alert-info">また、AWS Fargate セキュリティシグナルを手動でトリガーすることで、Agent が CSM にイベントを送信していることを確認することもできます。</div>
 
