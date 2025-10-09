@@ -12,8 +12,10 @@ Code Security can post comments directly on pull requests in your source code ma
 
 There are two types of pull request comments:
 - **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available) . 
+        
     {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". The comment suggests replacing the code os.system(command) with os.system(shlex.quote(command)) to sanitize the process call." style="width:100%;" >}}
 - **Summary comment**: Combines all findings from Datadog into a single comment. 
+  
     {{< img src="/code_security/github_summary_comment_injections_light.png" alt="A Datadog bot has posted a summary comment on a GitHub pull request. The comment has a \"Warnings\" section that lists four critical code vulnerabilities, such as SQL and command injections, with links to the specific files and lines of code." style="width:100%;" >}}
 
 You can configure PR comments at the organization or repository level in [Repository Settings][7], with the following controls:
@@ -34,7 +36,7 @@ Follow the steps below based on your source code management provider.
 {{% tab "GitHub" %}}
 
 <div class="alert alert-info">If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis (SAST)) after completing the GitHub setup steps.
-If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` for comments to appear once the GitHub setup is complete.</div>
+If you are using <a href="/security/code_security/static_analysis/github_actions/">GitHub Actions</a> to run your scans, trigger the action on `push` for comments to appear once the GitHub setup is complete.</div>
 
 ### Connect your GitHub account(s) to Datadog
 For setup instructions, read the [Datadog GitHub source code integration][2] documentation.
@@ -42,44 +44,55 @@ For setup instructions, read the [Datadog GitHub source code integration][2] doc
 ### Create or update a GitHub App
 If you already have a GitHub App connected to Datadog, update it. Otherwise, create a new GitHub App.
 
-<div class="alert alert-info">The permissions you grant to the GitHub App determine which [GitHub integration][2] features are available for setup.</div>
+<div class="alert alert-info">The permissions you grant to the GitHub App determine which <a href="/integrations/github/">GitHub integration</a> features are available for setup.</div>
 
 #### Create and install a GitHub App
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications > Add New GitHub Application**][3].
-1. Fill out any required details, such as the GitHub organization name.
-1. Under **Select Features**, check the **Code Security: Pull Request Review Comments** box.
-1. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
-1. Click **Create App in GitHub**.
-1. Enter a name for your app, and submit it.
-1. Click **Install GitHub App**.
-1. Choose which repositories the app should be installed into, then click **Install & Authorize**.
+2. Fill out any required details, such as the GitHub organization name.
+3. Under **Select Features**, check the **Code Security: Pull Request Review Comments** box.
+4. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
+5. Click **Create App in GitHub**.
+6. Enter a name for your app, and submit it.
+7. Click **Install GitHub App**.
+8. Choose which repositories the app should be installed into, then click **Install & Authorize**.
 
-{{< img src="ci/static-analysis-install-github-app.png" alt="GitHub App installation screen" style="width:50%;" >}}
+    {{< img src="ci/static-analysis-install-github-app.png" alt="GitHub App installation screen" style="width:50%;" >}}
 
 #### Update an existing GitHub App
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Code Security.
-{{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Code Analysis comment on a pull request" style="width:90%;" >}}
-1. On the **Features** tab, look at the **Code Security: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
-1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
-{{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
-1. Under the **Subscribe to events** heading, check the **Pull request** box.
-{{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
+   {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Code Analysis comment on a pull request" style="width:90%;" >}}
+2. On the **Features** tab, look at the **Code Security: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
+3. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
+   {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
+4. Under the **Subscribe to events** heading, check the **Pull request** box.
+   {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
+
+
+[2]: /integrations/github/
+[3]: https://app.datadoghq.com/integrations/github/add
+[5]: https://app.datadoghq.com/integrations/github/configuration
 
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
 See the [GitLab Source Code][8] setup instructions to connect GitLab to Datadog.
 
+[8]: /integrations/gitlab-source-code/
+
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-Azure DevOps for Code Security is currently in Preview. [Request access to join the Preview][9].
+Azure DevOps for Code Security is in Preview. [Request access to join the Preview][9].
+
+[9]: https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/
 
 {{% /tab %}}
+{{< /tabs >}}
 
 ## Configuration options
+
 Before enabling PR comments, ensure that **at least one Code Security scan capability is enabled in the repository.** Even if PR comments are configured at the organization level, they are only added in repositories where a supported scan type (for example, SAST, SCA, or IaC) is active. Repositories without any enabled scan types will not receive PR comments.
 
 PR comments can be configured at the organization level or at the repository level:
