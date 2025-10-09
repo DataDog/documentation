@@ -29,7 +29,7 @@ When contacting Datadog Support with Remote Configuration enabled for an Agent, 
 ## Send a flare from the Datadog site
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending an Agent Flare from Fleet Automation is not supported for this site.</div>
+<div class="alert alert-danger">Sending an Agent Flare from Fleet Automation is not supported for this site.</div>
 {{< /site-region >}}
 
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.

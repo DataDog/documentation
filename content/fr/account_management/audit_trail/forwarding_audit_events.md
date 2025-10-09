@@ -1,49 +1,54 @@
 ---
+description: Redirigez les événements d'audit de Datadog vers des destinations personnalisées
+  comme Splunk, Elasticsearch et des endpoints HTTP pour la conformité et la surveillance
+  de la sécurité.
 disable_toc: false
 further_reading:
 - link: /account_management/audit_trail/
   tag: Documentation
   text: En savoir plus sur le journal d'audit
-title: Transmettre des événements d'audit à des destinations personnalisées
+title: Rediriger des événements d'audit vers des destinations personnalisées
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
-La fonctionnalité de transmission des événements d'audit n'est pas disponible pour le site US1-FED.
+<div class="alert alert-danger">
+La redirection des événements d'audit n'est pas disponible sur le site US1-FED.
 </div>
 {{% /site-region %}}
 
-{{% site-region region="US,US3,US5,EU,AP1" %}}
-<div class="alert alert-warning">La fonctionnalité de transmission des événements d'audit est disponible en version bêta. </div>
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+<div class="alert alert-danger">
+La redirection des événements d'audit est en préversion.
+</div>
 {{% /site-region %}}
 
 ## Présentation
 
-La fonctionnalité de transmission d'événements d'audit vous permet d'envoyer les événements d'audit de Datadog à des destinations personnalisées, telles que des endpoints Splunk, Elasticsearch et HTTP. Ces événements d'audit sont envoyés au format JSON, et vous pouvez ajouter jusqu'à trois destinations pour chaque organisation Datadog.
+La redirection des événements d'audit permet d'envoyer les événements d'audit de Datadog vers des destinations personnalisées comme Splunk, Elasticsearch et des endpoints HTTP. Les événements d'audit sont transmis au format JSON. Vous pouvez ajouter jusqu'à trois destinations pour chaque organisation Datadog.
 
-{{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="La section « Custom Destinations » affichant une destination Login-Event-to-SIEM active, avec un volume d'événements d'audit estimé à 10,4 Mo au cours des dernières 24 heures et le filtre de requête @action:login." >}}
+{{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="La section Custom Destinations montrant une destination Login-Event-to-SIEM active avec un volume estimé de 10,4 Mo d'événements d'audit au cours des dernières 24 heures et @action:login comme requête de filtrage." >}}
 
-**Remarque** : seuls les utilisateurs Datadog disposant de l'autorisation `audit_trail_write` peuvent créer, modifier ou supprimer des destinations personnalisées pour la transmission d'événements d'audit.
+**Remarque** : seuls les utilisateurs Datadog disposant de l'autorisation `audit_trail_write` peuvent créer, modifier ou supprimer des destinations personnalisées pour la redirection des événements d'audit.
 
-## Configurer la transmission d'événements d'audit à des destinations personnalisées
+## Configurer la redirection des événements d'audit vers des destinations personnalisées
 
-1. Ajoutez à la liste d'autorisation des IP de webhook figurant dans la [liste des plages d'IP][1], au besoin.
+1. Ajoutez les adresses IP des webhooks de la [liste des plages IP][1] à la liste d'autorisation si nécessaire.
 2. Accédez à [Audit Trail Settings][2].
-3. Cliquez sur **Add Destination** dans la section **Audit Event Forwarding**.
-4. Saisissez la requête qui servira à filtrer vos événements d'audit à transmettre. Ajoutez par exemple `@action:login` comme requête à filtrer si vous souhaitez uniquement transmettre des événements de connexion à votre SIEM ou à votre destination personnalisée. Consultez la section [Syntaxe de recherche][3] pour en savoir plus.
-5. Sélectionnez l'option **Destination Type**.
+3. Cliquer sur **Add Destination** dans la section **Audit Event Forwarding**.
+4. Saisissez la requête permettant de filtrer les événements d'audit à rediriger. Par exemple, ajouter `@action:login` comme requête pour ne rediriger que les événements de connexion vers votre SIEM ou une destination personnalisée. Consultez la section relative à la [syntaxe de recherche][3] pour plus d'informations. 
+5. Sélectionnez le **Destination Type**.
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
 
-6. Attribuez un nom à la destination.
-7. Dans le champ **Define endpoint**, saisissez l'endpoint vers lequel vous souhaitez envoyer les logs. Cet endpoint doit commencer par `https://`.
-    - À titre d'exemple, si vous souhaitez envoyer des logs à Sumo Logic, suivez la [documentation de l'entreprise relative à la configuration d'une source HTTP pour les logs et les métriques][1] pour récupérer l'URL de l'adresse source HTTP et ainsi envoyer les données à son collector. Saisissez l'URL de l'adresse source HTTP dans le champ **Define endpoint**.
-8. Dans la section **Configure Authentication**, sélectionnez l'un des types d'authentification suivants et fournissez les informations pertinentes suivantes :
-    - Authentification basique : spécifiez le nom d'utilisateur et le mot de passe du compte vers lequel vous souhaitez envoyer les logs.
-    - En-tête de la requête : spécifiez le nom de l'en-tête et la valeur associée. À titre d'exemple, si vous utilisez l'en-tête Authorization et que le nom d'utilisateur ainsi que le mot de passe du compte vers lequel vous souhaitez envoyer les logs sont respectivement `myaccount` et `mypassword`, procédez comme suit :
-        - Saisissez  `Authorization` pour **Header Name**.
-        - La valeur de l'en-tête est au format `Basic username:password`, avec `username:password` encodé en base64. Pour cet exemple, nous prenons comme valeur d'en-tête Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
+6. Saisissez un nom pour la destination.
+7. Dans le champ **Define endpoint**, indiquez l'endpoint vers lequel vous souhaitez envoyer les logs. L'endpoint doit commencer par `https://`. 
+    - Par exemple, pour envoyer des logs à Sumo Logic, suivez leur documentation [Configurer une source HTTP pour les logs et les métriques][1] afin d'obtenir l'URL de la source HTTP de leur collector. Indiquez ensuite cette URL dans le champ **Define endpoint**.
+8. Dans la section **Configure Authentication**, sélectionnez l'un des types d'authentification suivants et fournir les informations correspondantes :
+    - Basic Authentication : indiquez le nom d'utilisateur et le mot de passe du compte destinataire des logs.
+    - Request Header : indiquez le nom et la valeur de l'en-tête. Par exemple, si vous utilisez l'en-tête Authorization et que le nom d'utilisateur est `myaccount` et le mot de passe `mypassword` :
+        - Saisissez `Authorization` pour le **Header Name**.
+        - La valeur de l'en-tête suit le format `Basic username:password`, où `username:password` est encodé en base64. Dans cet exemple, la valeur de l'en-tête est `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
   9. Cliquez sur **Save**.
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
@@ -51,9 +56,9 @@ La fonctionnalité de transmission d'événements d'audit vous permet d'envoyer 
 
 {{% tab "Splunk" %}}
 
-6. Attribuez un nom à la destination.
-7. Dans la section **Configure Destination**, saisissez l'endpoint vers lequel vous souhaitez envoyer les logs. Cet endpoint doit commencer par `https://`. Saisissez par exemple `https://<votre_compte>.splunkcloud.com:8088`. **Remarque** : `/services/collector/event` est automatiquement ajouté à l'endpoint.
-8. Dans la section **Configure Authentication**, saisissez le token du HEC Splunk. Consultez la section [Configurer et utiliser le HTTP Event Collector][1] pour en savoir plus sur le token du HEC Splunk.
+6. Saisissez un nom pour la destination.
+7. Dans la section **Configure Destination**, indiquez l'endpoint vers lequel vous souhaitez envoyer les logs. L'endpoint doit commencer par `https://`. Par exemple : `https://<your_account>.splunkcloud.com:8088`. **Remarque** : `/services/collector/event` est automatiquement ajouté à l'endpoint.
+8. Dans la section **Configure Authentication**, indiquer le token HEC Splunk. Consultez [Configurez et utilisez HTTP Event Collector][1] pour plus d'informations sur le token HEC.
 9. Cliquez sur **Save**.
 
 **Remarque** : la [confirmation de l'indexeur (indexer acknowledgment)][2] doit être désactivée.
@@ -64,17 +69,31 @@ La fonctionnalité de transmission d'événements d'audit vous permet d'envoyer 
 
 {{% tab "Elasticsearch" %}}
 
-6. Attribuez un nom à la destination.
-7. Dans la section **Configure Destination**, saisissez les informations suivantes :
+6. Saisissez un nom pour la destination.
+7. Dans la section **Configure Destination**, indiquez les informations suivantes :
 
-   a. L'endpoint vers lequel vous souhaitez envoyer les logs. Cet endpoint doit commencer par `https://`. Voici un exemple d'endpoint pour Elasticsearch : `https://<votre_compte>.us-central1.gcp.cloud.es.io`.
+   a. L'endpoint vers lequel envoyer les logs, commençant par `https://`. Exemple pour Elasticsearch : `https://<your_account>.us-central1.gcp.cloud.es.io`.
 
-   b. Le nom de l'index de destination des logs.
+   b. Le nom de l'index de destination dans lequel vous souhaitez envoyer les logs.
 
-   c. Si vous le souhaitez, vous pouvez également définir la rotation de l'index pour choisir la fréquence de création d'un nouvel index. Vous avez le choix entre `No Rotation`, `Every Hour`, `Every Day`, `Every Week` ou `Every Month`. La valeur par défaut est `No Rotation`.
+   c. Facultativement, sélectionnez la rotation de l'index, selon la fréquence de création d'un nouvel index : `No Rotation`, `Every Hour`, `Every Day`, `Every Week` ou `Every Month`. La valeur par défaut est `No Rotation`.
 
-8. Dans la section **Configure Authentication**, saisissez le nom d'utilisateur et le mot de passe de votre compte Elasticsearch.
+8. Dans la section **Configure Authentication**, indiquez le nom d'utilisateur et le mot de passe de votre compte Elasticsearch.
 9. Cliquez sur **Save**.
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+<div class="alert alert-info">La redirection des logs vers Microsoft Sentinel est en préversion.</div>
+
+6. Saisissez un nom pour la destination.
+7. L'authentification pour le Microsoft Sentinel Forwarder nécessite la configuration d'un enregistrement d'application via l'intégration Azure de Datadog.
+8. Dans la section **Configure Destination**, saisissez les informations suivantes :
+  | Paramètre                   | Description                                                                                                          | Exemple                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Logs Ingestion Endpoint** | Indiquez l'endpoint sur le Data Collection Endpoint (DCE) où les logs sont envoyés. Cet élément est indiqué comme « Logs Ingestion » sur la page d'aperçu du DCE. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com` |
+| **Immutable ID** | Indiquez l'ID immuable de la Data Collection Rule (DCR) où sont définies les routes de journalisation, tel qu'il apparaît sur la page d'aperçu de la DCR sous « Immutable Id ». **Remarque** : assurez-vous que le rôle Monitoring Metrics Publisher est attribué dans les paramètres IAM de la DCR. | `dcr-000a00a000a00000a000000aa000a0aa` |
+| **Stream Declaration Name** | Indiquez le nom de la Stream Declaration cible figurant dans le JSON de la ressource de la DCR sous `streamDeclarations`. | `Custom-MyTable` |
 
 {{% /tab %}}
 {{< /tabs >}}

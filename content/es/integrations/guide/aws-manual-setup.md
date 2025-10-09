@@ -50,7 +50,7 @@ Utiliza esta guía para configurar manualmente la  [integración con AWS][1] de 
 Para configurar manualmente la integración de AWS, crea una política y un rol de IAM en tu cuenta de AWS y configura el rol con un ID externo de AWS generado en tu cuenta de Datadog. Esto permite que la cuenta de AWS de Datadog consulte las API de AWS en tu nombre y extraiga datos en tu cuenta de Datadog. Las siguientes secciones detallan los pasos para crear cada uno de estos componentes y luego completar la configuración en tu cuenta de Datadog.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <em>La configuración de archivos de logs de S3 mediante la Delegación de roles tiene una disponibilidad limitada. Ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a> para solicitar esta función en tu cuenta Datadog for Government</em>.
 </div>
 {{< /site-region >}}
@@ -121,7 +121,7 @@ Esta política define los permisos necesarios para que el rol de la integración
 5. Haz clic en **Save** (Guardar).
 6. Espera hasta 10 minutos para que se empiecen a recopilar datos y, a continuación, consulta el <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">dashboard de información general de AWS</a> para ver las métricas enviadas por tus servicios y tu infraestructura AWS.
 
-<div class="alert alert-warning">Si se produce un error <code>Datadog no tiene autorización para llevar a cabo sts:AssumeRole</code>. Sigue los pasos de resolución de problemas recomendados en la interfaz de usuario o lee la <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">guía de resolución de problemas</a>.</div>
+<div class="alert alert-danger">Si se produce un error <code>Datadog no tiene autorización para llevar a cabo sts:AssumeRole</code>. Sigue los pasos de resolución de problemas recomendados en la interfaz de usuario o lee la <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">guía de resolución de problemas</a>.</div>
 
 *\* Cualquier uso de los servicios Datadog en China continental (o relacionados con entornos de esta localización) está sujeto a la cláusula de exención de responsabilidad, publicada en la sección [Localizaciones con restricciones de servicio][8] de nuestro sitio web.*
 

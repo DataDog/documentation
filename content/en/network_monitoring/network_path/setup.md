@@ -307,7 +307,7 @@ spec:
 
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [exclude CIDR ranges](#exclude-cidr-ranges) to filter specific network ranges.
 
-<div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+<div class="alert alert-danger"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
 
 
 {{< tabs >}}

@@ -98,7 +98,7 @@ Debes instalar .NET versión 4.7.2 o posterior en tu ordenador antes de utilizar
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">El cumplimiento de FIPS no es compatible con las localizaciones privadas que informan a <code>ddog-gov.com</code>. Para deshabilitar este comportamiento, utiliza la opción <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code></a>.</div>
+<div class="alert alert-warning">El cumplimiento de FIPS no es compatible con las localizaciones privadas que informan a <code>ddog-gov.com</code>. Para deshabilitar este comportamiento, utiliza la opción <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code></a>.</div>
 
 {{< /site-region >}}
 
@@ -631,7 +631,7 @@ Como Datadog ya se integra con Kubernetes y AWS, está preparado para monitoriza
 
 Una vez completado el proceso, haz clic en **Finish** (Finalizar) en la página de finalización de la instalación.
 
-<div class="alert alert-warning">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio</code> para iniciar el worker de la localización privada Synthetics.</div>
+<div class="alert alert-danger">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio</code> para iniciar el worker de la localización privada Synthetics.</div>
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
@@ -843,7 +843,7 @@ readinessProbe:
 
 #### Configuraciones de checks de estado adicionales
 
-<div class="alert alert-danger">Este método de añadir checks de estado de localizaciones privadas ya no es compatible. Datadog recomienda utilizar sondeos de ejecución y preparación.</div>
+<div class="alert alert-warning">Este método de añadir checks de estado de localizaciones privadas ya no es compatible. Datadog recomienda utilizar sondeos de ejecución y preparación.</div>
 
 El archivo `/tmp/liveness.date` de contenedores de localización privada se actualiza después de cada análisis que se realiza correctamente desde Datadog (por defecto, 2s). Se considera que el estado del contenedor no es adecuado si ha pasado tiempo sin realizar ningún análisis, por ejemplo: sin recuperación en el último minuto.
 
@@ -1009,7 +1009,7 @@ Los usuarios que tienen el [rol de administrador de Datadog y el rol estándar d
 
 Si utilizas la [función de rol personalizado][21], añade tu usuario a un rol personalizado que incluya los permisos `synthetics_private_location_read` y `synthetics_private_location_write`.
 
-<div class="alert alert-danger"><strong>Nota</strong>: Si un test incluye localizaciones privadas restringidas, la actualización de test elimina dichas localizaciones de test.</div>
+<div class="alert alert-warning"><strong>Nota</strong>: Si un test incluye localizaciones privadas restringidas, la actualización de test elimina dichas localizaciones de test.</div>
 
 ## Restringir el acceso
 

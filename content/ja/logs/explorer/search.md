@@ -22,7 +22,7 @@ title: ログを検索
 ## 自然言語クエリ
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Natural Language Queries は <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では利用できません。
 </div>
 {{% /site-region %}}

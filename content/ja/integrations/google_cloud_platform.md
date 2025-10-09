@@ -46,7 +46,7 @@ version: '1.0'
 
 Google Cloud Platform に接続して、すべての Google Compute Engine (GCE) ホストを Datadog に表示できます。GCE ホストタグと追加した GCE ラベルがホストに自動的にタグ付けされるため、Datadog のインフラストラクチャー概要にホストを表示し、分類することができます。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog の GCP インテグレーションは、<a href="https://cloud.google.com/monitoring/api/metrics_gcp">すべての Google Cloud メトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
 </div>
 
@@ -264,7 +264,7 @@ GCE や GKE ログを含め、ログシンクで作成したロギングフィ�
 
 GCE または GKE で実行されているアプリケーションからログを収集するには、[Datadog Agent][51] を使用することもできます。
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push サブスクリプションを使用した Google Cloud のログ収集</a>は、以下の理由で非推奨となっています。
 

@@ -307,7 +307,7 @@ El motor de asignación no depende de la configuración de `/proc/sys/kernel/per
 
 Si los motores de CPU o tiempo real de Datadog Profiler están activados, puedes recopilar stack traces nativas. Estas incluyen cosas como las internas de la JVM, las bibliotecas nativas utilizadas por tu aplicación o la JVM, y syscalls.
 
-<div class="alert alert-warning">Las stack traces nativas no se recopilan de forma predeterminada porque normalmente no proporcionan información procesable y analizarlas puede afectar potencialmente a la estabilidad de la aplicación. Prueba esta configuración en un entorno que no sea de producción antes de intentar utilizarla en producción.</a></div>
+<div class="alert alert-danger">Las stack traces nativas no se recopilan de forma predeterminada porque normalmente no proporcionan información procesable y analizarlas puede afectar potencialmente a la estabilidad de la aplicación. Prueba esta configuración en un entorno que no sea de producción antes de intentar utilizarla en producción.</a></div>
 
 Para habilitar la recopilación de stack traces nativas, entendiendo que puede desestabilizar tu aplicación, establece:
 

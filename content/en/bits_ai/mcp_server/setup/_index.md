@@ -1,5 +1,6 @@
 ---
 title: Set Up the Datadog MCP Server
+description: "Learn how to set up and configure the Datadog MCP Server to connect your AI agents to Datadog observability tools and data."
 private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
@@ -23,12 +24,13 @@ further_reading:
 The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <h3>Disclaimers</h3>
 <ul>
 <li>The Datadog MCP Server is not supported for production use during the Preview.</li>
 <li>Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.</li>
 <li>The Datadog MCP Server is not available for organizations that require HIPAA compliance.</li>
+<li><i>Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (e.g., user prompts) leading to the use of MCP tools. The data is stored for 120 days.</i></li>
 </ul>
 </div>
 
@@ -56,7 +58,7 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -125,6 +127,19 @@ These examples are for the US1 site:
       "datadog": {
         "type": "http",
         "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      }
+    }
+  }
+  ```
+  * Amazon Q CLI: `~/.aws/amazonq/default.json`
+
+  ```json
+  {
+    "mcpServers": {
+      "datadog": {
+        "type": "http",
+        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+        "oauthScopes": []
       }
     }
   }

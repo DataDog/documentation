@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -128,7 +128,7 @@ The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4
 
 4. (Optional) Enable additional Datadog features:
 
-<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+<div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   # Enable Features
@@ -205,7 +205,7 @@ If you don't want to expose the port, you can use the Agent service instead:
 
 4. (Optional) Enable additional Datadog features:
 
-<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+<div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -226,7 +226,7 @@ When enabling additional Datadog features, always use the Datadog or OpenTelemet
 
 5. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 
-<div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+<div class="alert alert-warning">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -501,7 +501,7 @@ data:
           exporters: [debug, datadog]
 {{< /code-block >}}
 
-<div class="alert alert-warning">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
+<div class="alert alert-danger">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
 
 2. Reference the `otel-agent-config-map` ConfigMap in your `DatadogAgent` resource using `features.otelCollector.conf.configMap` parameter:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
