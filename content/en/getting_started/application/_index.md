@@ -51,7 +51,7 @@ Navigate to [**Infrastructure > Hosts**][3] in the app to get started. To learn 
 
 [Host and container maps][4] give you a visual overview of all your hosts and containers, color-coding them by key metrics like CPU usage so you can quickly spot issues.
 
-**Key capabilities:**
+**Key capabilities**:
 
 - View your entire infrastructure at once as a visual map
 - Color-code by a variety of metrics to help you spot performance issues, and filter and group by tags and metadata
@@ -62,44 +62,53 @@ Navigate to [**Infrastructure > Host Map**][5] in the app to get started. To lea
 ## Log Management
 
 [Datadog Log Management][6] lets you send and process every log produced by your applications and infrastructure. You can observe your logs in real-time using the Live Tail, without indexing them. You can ingest all of the logs from your applications and infrastructure, decide what to index dynamically with filters, and then store them in an archive.
+<!-- cut down this paragraph? a bit redundant with the list below -->
+
+**Key capabilities**:
+
+- Automatically collect logs from all services, applications, and platforms
+- View and search logs in real time and filter by things like service, host, and error type
+- Choose which logs to keep and for how long, reducing storage costs
+
+Navigate to [Logs][7] in the app to get started. To learn more, read the [Log Management documentation][6]
 
 ## APM & Continuous Profiler
 
-[Datadog Application Performance Monitoring][7] (APM or tracing) provides you with deep insight into your application's performance—from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests—side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and show you systematic data about precisely what is happening to this request.
+[Datadog Application Performance Monitoring][8] (APM or tracing) provides you with deep insight into your application's performance—from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests—side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and show you systematic data about precisely what is happening to this request.
 
 ## RUM & Session Replay
 
-Datadog [Real User Monitoring][8] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][9], you can capture and view the web browsing sessions of your users to better understand their behavior. In the RUM Explorer, you can not only visualize load times, frontend errors, and page dependencies, but also you can correlate business and application metrics to troubleshoot issues with application, infrastructure, and business metrics in one dashboard.
+Datadog [Real User Monitoring][9] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][10], you can capture and view the web browsing sessions of your users to better understand their behavior. In the RUM Explorer, you can not only visualize load times, frontend errors, and page dependencies, but also you can correlate business and application metrics to troubleshoot issues with application, infrastructure, and business metrics in one dashboard.
 
 ## Synthetic Monitoring
 
-Datadog [Synthetic Monitoring][10] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production.
+Datadog [Synthetic Monitoring][11] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production.
 
 ## Integrations
 
 {{< img src="getting_started/application/integrations-2024.png" alt="Integrations" >}}
 
-- Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][11].
-- Custom integrations are available through the [Datadog API][12].
-- The Agent is [open source][13].
+- Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][12].
+- Custom integrations are available through the [Datadog API][13].
+- The Agent is [open source][14].
 - After integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a data center or in an online service.
 
 ## Dashboards
 
-[Dashboards][14] contain graphs with real-time performance metrics.
+[Dashboards][15] contain graphs with real-time performance metrics.
 
-- Synchronous mousing across all graphs in a [screenboard][15].
+- Synchronous mousing across all graphs in a [screenboard][16].
 - Vertical bars are events. They put a metric into context.
 - Click and drag on a graph to zoom in on a particular time frame.
 - As you hover over the graph, the Event Stream moves with you.
 - Display by zone, host, or total usage.
-- Datadog exposes a JSON editor for the graph, allowing for [arithmetic][16] and [functions][17] to be applied to metrics.
+- Datadog exposes a JSON editor for the graph, allowing for [arithmetic][17] and [functions][18] to be applied to metrics.
 - Share a graph snapshot that appears in the stream.
 - Graphs can be embedded in an iframe. This enables you to give a third party access to a live graph without also giving access to your data or any other information.
 
 ## Monitors
 
-[Monitors][18] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
+[Monitors][19] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
 
 - Use any metric reporting to Datadog
 - Set up multi alerts by device, host, and more
@@ -115,15 +124,16 @@ Datadog [Synthetic Monitoring][10] allow you to create and run API and browser t
 [4]: /infrastructure/hostmap/
 [5]: https://app.datadoghq.com/infrastructure/map
 [6]: /logs/
-[7]: /tracing/
-[8]: /real_user_monitoring/
-[9]: /real_user_monitoring/session_replay/browser/
-[10]: /synthetics/
-[11]: https://www.datadoghq.com/product/platform/integrations/
-[12]: /api/
-[13]: https://github.com/DataDog/datadog-agent
-[14]: /dashboards/
-[15]: /dashboards/#screenboards
-[16]: /dashboards/functions/arithmetic/
-[17]: /dashboards/functions/
-[18]: /monitors/
+[7]: https://app.datadoghq.com/logs
+[8]: /tracing/
+[9]: /real_user_monitoring/
+[10]: /real_user_monitoring/session_replay/browser/
+[11]: /synthetics/
+[12]: https://www.datadoghq.com/product/platform/integrations/
+[13]: /api/
+[14]: https://github.com/DataDog/datadog-agent
+[15]: /dashboards/
+[16]: /dashboards/#screenboards
+[17]: /dashboards/functions/arithmetic/
+[18]: /dashboards/functions/
+[19]: /monitors/
