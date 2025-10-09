@@ -116,31 +116,33 @@ Agent `v7.61+` is required.
 
   3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-**Note**:
-In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example: 
+#### Known limitations:
 
-```yaml
-init_config:
-  min_collection_interval: 60 # in seconds, default 60 seconds
-instances:
-  - hostname: api.datadoghq.eu # endpoint hostname or IP
-    protocol: TCP
-    port: 443 # optional port number, default is 80
-```
-**Note**: In Windows Client OS environments, [raw packets][6] are not supported. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][7] are required. For example:
+- In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
 
-```yaml
-init_config:
-  min_collection_interval: 60 # in seconds, default 60 seconds
-instances:
-  - hostname: api.datadoghq.eu # endpoint hostname or IP
-    protocol: TCP
-    port: 443 # optional port number, default is 80
-    tcp_method: syn_socket
-```
+  ```yaml
+  init_config:
+    min_collection_interval: 60 # in seconds, default 60 seconds
+  instances:
+    - hostname: api.datadoghq.eu # endpoint hostname or IP
+      protocol: TCP
+      port: 443 # optional port number, default is 80
+  ```
 
-[6]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
-[7]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
+- In Windows Client OS environments, raw packets are [not supported][5]. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][6] are required. For example:
+
+  ```yaml
+  init_config:
+    min_collection_interval: 60 # in seconds, default 60 seconds
+  instances:
+    - hostname: api.datadoghq.eu # endpoint hostname or IP
+      protocol: TCP
+      port: 443 # optional port number, default is 80
+      tcp_method: syn_socket
+  ```
+
+[5]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
+[6]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -197,48 +199,48 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
 
 2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
 
-  ```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-  name: '<POD_NAME>'
-  annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
-      {
-        "network_path": {
-          "init_config": {
-            "min_collection_interval": 300
-          },
-          "instances": [
-                {
-                  "protocol": "TCP",
-                  "port": 443,
-                  "source_service": "<CONTAINER_NAME>",
-                  "tags": [
-                    "tag_key:tag_value",
-                    "tag_key2:tag_value2"
-                  ],
-                  "hostname": "api.datadoghq.eu"
-                },
-                {
-                  "protocol": "UDP",
-                  "source_service": "<CONTAINER_NAME>",
-                  "tags": [
-                    "tag_key:tag_value",
-                    "tag_key2:tag_value2"
-                  ],
-                  "hostname": "1.1.1.1"
-                },
-          ]
-        }
-      }
-    # (...)
-spec:
-  containers:
-    - name: '<CONTAINER_NAME>'
-# (...)
-  ```
+   ```yaml
+   apiVersion: v1
+   kind: Pod
+   # (...)
+   metadata:
+     name: '<POD_NAME>'
+     annotations:
+       ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+         {
+           "network_path": {
+             "init_config": {
+               "min_collection_interval": 300
+             },
+             "instances": [
+                   {
+                     "protocol": "TCP",
+                     "port": 443,
+                     "source_service": "<CONTAINER_NAME>",
+                     "tags": [
+                       "tag_key:tag_value",
+                       "tag_key2:tag_value2"
+                     ],
+                     "hostname": "api.datadoghq.eu"
+                   },
+                   {
+                     "protocol": "UDP",
+                     "source_service": "<CONTAINER_NAME>",
+                     "tags": [
+                       "tag_key:tag_value",
+                       "tag_key2:tag_value2"
+                     ],
+                     "hostname": "1.1.1.1"
+                   },
+             ]
+           }
+         }
+       # (...)
+   spec:
+     containers:
+       - name: '<CONTAINER_NAME>'
+   # (...)
+   ```
   If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
