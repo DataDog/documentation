@@ -293,6 +293,10 @@ The following table summarizes which Browser Test step types are supported by st
 | Assert file download     | {{< X >}}                       |       |
 | Assert page contains     | {{< X >}}                       |       |
 | Assert page lacks        | {{< X >}}                       |       |
+| Assert from JavaScript   | {{< X >}}                       |       |
+| Extract from JavaScript  | {{< X >}}                       |       |
+| Press key                | {{< X >}}                       |       |
+| Type text                | {{< X >}}                       |       |
 | Click                    | {{< X >}}*                      | *Click steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
 | Hover                    | {{< X >}}*                      | *Hover steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
 
@@ -300,10 +304,6 @@ The following table summarizes which Browser Test step types are supported by st
 
 | Step type                | Supported by step replay |
 |--------------------------|:------------------------:|
-| Assert from JavaScript   | Coming soon with the debugger permission |
-| Extract from JavaScript  | Coming soon with the debugger permission |
-| Press key                | Coming soon with the debugger permission |
-| Type text                | Coming soon with the debugger permission |
 | Assert email             | Not supported yet        |
 | Assert requests          | Not supported yet        |
 | Extract from email body  | Not supported yet        |
