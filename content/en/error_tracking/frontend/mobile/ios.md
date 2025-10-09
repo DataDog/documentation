@@ -665,7 +665,7 @@ let configuration = RUM.Configuration(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<application id>"];
 configuration.sessionSampleRate = 50;
 ```
 {{% /tab %}}
