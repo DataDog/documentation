@@ -162,9 +162,9 @@ cp -R ./node_modules path/to/bundle
 
 IAST support for bundled applications has some limitations, which are listed below:
 
-- Hardcoded password and Hardcoded secrets vulnerability detection
+- Hardcoded password and Hardcoded secrets vulnerabilities are not going to be detected
 
-- Security Controls feature
+- Security Controls feature is not supported
 
 
 ## Further Reading
