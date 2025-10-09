@@ -25,7 +25,7 @@ You can forward your logs through an [Azure Container App][4], or [Azure Blob St
 
 {{< tabs >}}
 
-{{% tab "Container App" %}}
+{{% tab "Container App (recommended)" %}}
 
 1. Click the button below, and fill in the form on the Azure Portal. Datadog automatically deploys the Azure resources required to forward logs into your Datadog account.
 
