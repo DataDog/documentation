@@ -1,5 +1,6 @@
 ---
 title: Instrumenting NGINX Server
+description: "Configure NGINX server to automatically inject RUM Browser SDK into HTML responses using the Datadog dynamic module."
 beta: true
 code_lang: nginx
 type: multi-code-lang

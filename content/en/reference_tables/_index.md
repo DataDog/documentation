@@ -1,5 +1,6 @@
 ---
 title: Reference Tables
+description: "Combine custom metadata with Datadog data by uploading CSV files or connecting cloud storage to enrich logs, security data, and analytics."
 aliases:
   - /logs/guide/enrichment-tables/
   - /logs/guide/reference-tables/

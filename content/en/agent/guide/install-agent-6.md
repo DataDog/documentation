@@ -1,9 +1,9 @@
 ---
 title: Install Datadog Agent 6
 further_reading:
-- link: "/agent/basic_agent_usage/"
+- link: "agent/"
   tag: "Documentation"
-  text: "Basic Agent Usage"
+  text: "The Datadog Agent"
 private: true  
 ---
 

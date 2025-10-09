@@ -1,5 +1,6 @@
 ---
 title: Instrumenting IBM Server
+description: "Configure IBM HTTP Server to automatically inject RUM Browser SDK into HTML responses using the Datadog module."
 beta: true
 code_lang: ibm
 type: multi-code-lang

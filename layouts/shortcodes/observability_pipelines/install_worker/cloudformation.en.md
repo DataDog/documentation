@@ -9,6 +9,7 @@
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
 1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][7002].
 1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 1. Select the VPC and subnet you want to use to install the Worker.
 1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
@@ -17,3 +18,4 @@
 See [Update Existing Pipelines][7001] if you want to make changes to your pipeline's configuration.
 
 [7001]: /observability_pipelines/update_existing_pipelines
+[7002]: https://app.datadoghq.com/organization-settings/remote-config/setup

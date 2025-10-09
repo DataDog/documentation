@@ -1,5 +1,6 @@
 ---
 title: Proxy Your Mobile RUM Data
+description: "Set up proxy configuration for mobile RUM data collection with multiple SDK options and protocol support for network routing."
 aliases:
     - /real_user_monitoring/faq/proxy_mobile_rum_data/
 further_reading:

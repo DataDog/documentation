@@ -1,5 +1,6 @@
 ---
 title: CoScreen
+description: "Use CoScreen for collaborative meeting and screen sharing. CoScreen is designed for engineering use cases like pair programming and incident management."
 further_reading:
 - link: 'https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/'
   tag: 'Blog'

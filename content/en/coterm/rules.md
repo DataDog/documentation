@@ -1,5 +1,6 @@
 ---
 title: CoTerm Configuration Rules
+description: "Configure CoTerm with Lua-based lints and rules to validate commands, require approvals, and control actions for specific terminal commands."
 further_reading:
 - link: "/coterm"
   tag: "documentation"

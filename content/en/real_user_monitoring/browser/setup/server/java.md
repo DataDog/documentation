@@ -1,5 +1,6 @@
 ---
 title: Java Servlet
+description: "Automatically inject RUM Browser SDK into Java servlet-based web applications using the Java SDK auto-instrumentation."
 beta: true
 code_lang: java
 type: multi-code-lang

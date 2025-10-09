@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Cluster Name Automatic Detection
+description: Automatic cluster name detection for Kubernetes clusters on GKE, AKS, and EKS to improve node identification
 aliases:
   - /agent/faq/kubernetes-cluster-name-detection
   - /agent/guide/kubernetes-cluster-name-detection

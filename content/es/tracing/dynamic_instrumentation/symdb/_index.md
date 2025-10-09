@@ -28,7 +28,7 @@ Para el autocompletado y la búsqueda, los símbolos y metadatos no sensibles se
 La función Autocompletar y buscar requiere lo siguiente:
 
 - [Dynamic Instrumentation][1] está activado para tu servicio.
-- [Datadog Agent][2] v7.45.0 o superior instalado junto a tu servicio.
+- [Datadog Agent][2] v7.49.0 o superior instalado junto a tu servicio.
 - [Configuración remota][3] activada en el Agent.
 - Las etiquetas (tags) `service` , `env` y `version` del [Etiquetado unificado de servicios][4] se aplican a tu despliegue.
 

@@ -25,9 +25,9 @@ SD-WAN es un tipo de tecnología de red que utiliza principios de redes definida
 
 Datadog admite los siguientes proveedores para la monitorización de redes SD-WAN:
 
-  - [Meraki SD-WAN][2] 
-  - [Cisco SD-WAN][3] 
-  - [VmWare VeloCloud][4] (En vista previa)
+  - [Meraki SD-WAN][2]
+  - [Cisco SD-WAN][3]
+  - [VeloCloud][4] (En vista previa)
 
 ## Referencias adicionales
 

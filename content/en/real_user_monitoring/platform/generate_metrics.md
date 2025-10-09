@@ -27,6 +27,8 @@ Real User Monitoring (RUM) allows you to capture events that occur in your brows
 
 RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
 
+**Note:** Custom metrics are computed based on 100% of the ingested RUM traffic, not only the data retained in the RUM Explorer. This ensures accurate metrics even when using [RUM without Limits][16] retention filters that may retain only a subset of your sessions.
+
 **Billing Note:** Metrics created from RUM events are billed as [Custom Metrics][3].
 
 ## Create a RUM-based custom metric
@@ -121,3 +123,4 @@ You can use RUM-based custom metrics for the following actions:
 [13]: /monitors/types/anomaly/
 [14]: /monitors/types/forecasts/
 [15]: /service_management/service_level_objectives/metric/
+[16]: /real_user_monitoring/rum_without_limits/

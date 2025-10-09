@@ -1,5 +1,6 @@
 ---
 title: Docker Deprecation in Kubernetes
+description: Handle Docker runtime deprecation in Kubernetes by migrating to containerd or CRI-O container runtimes
 aliases:
  - /agent/guide/docker-deprecation
 ---

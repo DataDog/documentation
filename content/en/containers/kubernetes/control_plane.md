@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Control Plane Monitoring
+description: Monitor Kubernetes control plane components including API server, etcd, controller manager, and scheduler
 aliases:
 - /agent/kubernetes/control_plane
 further_reading:

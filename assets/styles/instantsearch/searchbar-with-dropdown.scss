@@ -127,6 +127,15 @@
                 background-color: rgba(69, 142, 225, 0.05);
             }
         }
+        
+        &.selected-item {
+            & a {
+                outline: 2px solid #0196ed5c;
+                outline-radius: 3px;
+                background-color: rgba(69, 142, 225, 0.05);
+
+            }
+        }
 
         & .ais-Hits-subcategory {
             grid-column: span 1 / span 1;

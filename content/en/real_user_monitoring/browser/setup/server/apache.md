@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Apache Server
+description: "Configure Apache httpd server to automatically inject RUM Browser SDK into HTML responses using the Datadog module."
 beta: true
 code_lang: apache
 type: multi-code-lang

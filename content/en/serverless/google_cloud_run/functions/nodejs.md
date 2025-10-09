@@ -41,6 +41,10 @@ const tracer = require('dd-trace').init({
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform function="true" %}}
+   {{% /tab %}}
+
    {{% tab "Other" %}}
    {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}

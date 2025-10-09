@@ -63,6 +63,13 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "BulkDeleteDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk delete datastore items returns \"OK\" response"
+    }
+  ],
   "BulkWriteDatastoreItems": [
     {
       "group": "actions_datastores",
@@ -96,6 +103,13 @@
       "group": "actions_datastores",
       "suffix": "",
       "description": "Update datastore returns \"OK\" response"
+    }
+  ],
+  "CreateAzureScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create azure scan options returns \"Created\" response"
     }
   ],
   "UpdateAwsScanOptions": [
@@ -452,14 +466,14 @@
     {
       "group": "dora_metrics",
       "suffix": "",
-      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+      "description": "Send a deployment event returns \"OK\" response"
     }
   ],
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "_1768887482",
-      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -1007,6 +1021,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1181818787",
+      "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -1028,6 +1047,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1400905713",
+      "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [
@@ -1338,6 +1362,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2899714190",
+      "description": "Create a detection rule with detection method 'sequence_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_3367706049",
       "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
     },
@@ -1508,6 +1537,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_4152369508",
+      "description": "Validate a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringSuppression": [

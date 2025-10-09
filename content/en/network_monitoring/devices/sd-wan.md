@@ -1,5 +1,5 @@
 ---
-title: SD-WAN 
+title: SD-WAN
 description: Get started with your SD-WAN devices
 further_reading:
     - link: '/network_monitoring/devices/supported_devices'
@@ -28,9 +28,9 @@ SD-WAN is a type of networking technology that uses software-defined networking 
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
-  - [Meraki SD-WAN][2] 
-  - [Cisco SD-WAN][3] 
-  - [VmWare VeloCloud][4] (In Preview)
+  - [Meraki SD-WAN][2]
+  - [Cisco SD-WAN][3]
+  - [VeloCloud][4] (In Preview)
 
 ## Further Reading
 

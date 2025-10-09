@@ -1,5 +1,6 @@
 ---
 title: Kubernetes distributions
+description: Platform-specific installation and configuration instructions for Datadog Agent on various Kubernetes distributions
 aliases:
 - /agent/kubernetes/distributions
 further_reading:

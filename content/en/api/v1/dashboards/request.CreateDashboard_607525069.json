@@ -1,0 +1,55 @@
+{
+  "title": "Example-Dashboard with product_analytics datasource",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "product_analytics",
+                "name": "query1",
+                "search": {
+                  "query": "test_level:test"
+                },
+                "indexes": [
+                  "*"
+                ],
+                "compute": {
+                  "aggregation": "count"
+                },
+                "group_by": []
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ],
+  "layout_type": "ordered",
+  "reflow_type": "auto"
+}

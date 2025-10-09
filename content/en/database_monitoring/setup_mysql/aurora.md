@@ -339,6 +339,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
       enabled: true
     ```
 
+
 3. Deploy the Agent with the above configuration file from the command line:
 
     ```shell
@@ -369,7 +370,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 
 ```yaml

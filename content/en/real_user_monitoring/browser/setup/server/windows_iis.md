@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Windows IIS Server
+description: "Configure Windows IIS server to automatically inject RUM Browser SDK into HTML responses using the Datadog module installer."
 beta: true
 code_lang: windows_iis
 type: multi-code-lang

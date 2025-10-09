@@ -11,9 +11,6 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Engineering Reports!" >}}
-{{< /callout >}}
-
 ## Overview
 
 The DORA Metrics report includes an organization-wide view of software development velocity and stability metrics, including historical trends. With this report, you can:

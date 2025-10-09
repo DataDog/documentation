@@ -1,5 +1,6 @@
 ---
 title: "Autodiscovery: Scenarios & Examples"
+description: Detailed examples for configuring integrations in containerized Kubernetes environments using Autodiscovery
 further_reading:
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"

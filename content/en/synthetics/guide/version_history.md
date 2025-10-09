@@ -16,17 +16,17 @@ Version History automatically tracks changes made to your Synthetic Monitoring t
 
 Version History allows you to:
 
-- **Troubleshoot failing tests**: Determine whether a recent change introduced the failure. 
-- **Collaborate with teammates**: See who made changes and what was updated.  
-- **Roll back tests**: Restore a previous version after a deployment rollback or incorrect update.  
-- **Clone tests**: Create test based on a previous version, without changing the current test. 
+- **Troubleshoot failing tests**: Determine whether a recent change introduced the failure.
+- **Collaborate with teammates**: See who made changes and what was updated.
+- **Roll back tests**: Restore a previous version after a deployment rollback or incorrect update.
+- **Clone tests**: Create test based on a previous version, without changing the current test.
 - **Support multi-environment testing**: Deploy different test versions to match the code running in each environment, ensuring tests remain compatible with environment-specific deployments.
 
 ## Prerequisites
 
-All Synthetic Monitoring tests retain 30 days worth of version history by default. In order to see any previous versions, an edit must be made within the last 30 days. 
+All Synthetic Monitoring tests retain 30 days worth of version history by default. In order to see any previous versions, an edit must be made within the last 30 days.
 
-With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing Synthetic tests. 
+With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing Synthetic tests.
 
 ## View versions
 
@@ -50,11 +50,11 @@ To create a new test based on a previous version without modifying your current 
 
 ## Run any version
 
-From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Run this test version**. 
+From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Run this test version**.
 
 {{< img src="/synthetics/guide/version_history/synthetics_run_version.png" alt="Synthetic Monitoring Version history menu, highlighting run this test version" style="width:60%;" >}}
 
-Optionally, click **Copy version ID** to run the test version with the [Datadog CLI][2] or [Datadog API][3]: 
+Optionally, click **Copy version ID** to run the test version with the [Datadog CLI][2] or [Datadog API][3]:
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -110,5 +110,5 @@ Content-Type: application/json
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/audit_trail/
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics#run-tests-command
+[2]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics#run-tests-command
 [3]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines

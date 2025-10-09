@@ -1,6 +1,5 @@
 ---
 title: Dynamic Instrumentation Expression Language
-description: Learn the syntax and capabilities of the Dynamic Instrumentation Expression Language for creating probe conditions and message templates.
 private: false
 aliases:
     - /dynamic_instrumentation/expression-language
@@ -22,7 +21,7 @@ Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `!` or `not(...)`) to build complex Boolean conditions, for example: `!isEmpty(user.email) && not(contains(user.name, "abc"))`.
-* Using the `null` literal (equivalent to `nil` in Python).
+* Using the `null` literal (which is automatically translated to `None` in Python and `nil` in Ruby).
 
 It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.

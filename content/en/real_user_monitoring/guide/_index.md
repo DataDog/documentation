@@ -1,6 +1,6 @@
 ---
 title: Real User Monitoring & Session Replay Guides
-
+description: "Comprehensive guides for RUM and Session Replay implementation, optimization, and best practices for web and mobile applications."
 private: true
 disable_toc: true
 cascade:

@@ -3,7 +3,7 @@ aliases:
 - /es/real_user_monitoring/error_tracking/browser_errors
 - /es/error_tracking/standalone_frontend/browser
 further_reading:
-- link: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
   tag: Código fuente
   text: Código fuente de datadog-ci
 - link: /real_user_monitoring/guide/upload-javascript-source-maps
@@ -33,7 +33,7 @@ Además de enviar mapas de fuente, la [CLI de Datadog][10] reporta información 
 
 Error Tracking puede utilizar esta información para correlacionar los errores con tu código fuente, lo que te permite pivotar desde cualquier marco del stack trace a la línea de código relacionada en [GitHub][11], [GitLab][12] y [Bitbucket][13].
 
-<div class="alert alert-info">La vinculación de los marcos de stack tecnológico con el código fuente es compatible con la versión <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">0.12.0</a> y posteriores de la <code>CLI de Datadog</code>.</div>
+<div class="alert alert-info">La vinculación de los marcos de stack tecnológico con el código fuente es compatible con la versión <a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">0.12.0</a> y posteriores de la <code>CLI de Datadog</code>.</div>
 
 Para obtener más información, consulta [Integración de código fuente en Datadog][14].
 
@@ -63,7 +63,7 @@ Puedes monitorizar excepciones no gestionadas, rechazos de promesas no gestionad
 [7]: https://www.npmjs.com/package/@datadog/browser-rum
 [8]: /es/real_user_monitoring/browser/setup/#initialization-parameters
 [9]: /es/real_user_monitoring/guide/upload-javascript-source-maps
-[10]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
+[10]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [11]: https://github.com
 [12]: https://about.gitlab.com
 [13]: https://bitbucket.org/product

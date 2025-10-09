@@ -1,18 +1,18 @@
 ---
-title: Integrate Statuspage with Datadog Incident Management
+title: Integrate Atlassian Statuspage with Datadog Incident Management
 aliases:
 - /service_management/incident_management/guides/statuspage
 further_reading:
 - link: "integrations/statuspage/"
   tag: "Documentation"
-  text: "Install the Statuspage Integration"
+  text: "Install the Atlassian Statuspage Integration"
 - link: "https://app.datadoghq.com/integrations/statuspage"
   tag: "App"
   text: "In-app Statuspage integration tile"
 - link: "monitors/guide/integrate-monitors-with-statuspage/"
   tag: "Guide"
   text: "Integrating Monitors With Statuspage"
-- link: "synthetics/guide/synthetic-test-monitors/#integrate-your-synthetic-test-monitor-with-statuspage"
+- link: "synthetics/guide/synthetic-test-monitors/#integrate-your-synthetic-test-monitor-with-atlassian-statuspage"
   tag: "Guide"
   text: "Integrate your Synthetic test monitor with Statuspage"
 ---
@@ -28,10 +28,12 @@ Atlassian's Statuspage conveys real-time status of an organization's services on
 
 Install the integration through the [Statuspage Integration tile][1]. For more information, see the [Statuspage integration][2] documentation.
 
+You must have a role with the Incident Settings Write permission to enable the Atlassian Statuspage integration for Incident Management.
+
 ## Setup
 
-1. In the [Integration Settings page][3], find the Statuspage integration.
-1. Toggle **Enable Statuspage incident creation**.
+1. In the [Integration Settings page][3], find the Atlassian Statuspage integration.
+1. Toggle **Enable Atlassian Statuspage incident creation**.
 
 ## Add a Statuspage incident
 
@@ -60,5 +62,5 @@ After a Statuspage is added to an incident, you can continue updating the Status
 
 [1]: https://app.datadoghq.com/integrations/statuspage
 [2]: /integrations/statuspage/
-[3]: https://app.datadoghq.com/incidents/settings#Integrations
+[3]: https://app.datadoghq.com/incidents/settings?section=integrations
 [4]: https://app.datadoghq.com/incidents

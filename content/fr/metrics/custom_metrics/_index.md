@@ -83,12 +83,12 @@ Définissez les unités des métriques via le [Résumé des métriques][12] ou d
 
 ## Envoi de métriques custom
 
-{{< whatsnext desc="Il existe plusieurs façons d'envoyer des métriques à Datadog :">}}
-    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Check d'Agent custom{{{< /nextlink >}}
+{{< whatsnext desc="Il existe plusieurs façons d'envoyer des métriques à Datadog :" >}}
+    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Check d'Agent custom{{< /nextlink >}}
     {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
-    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}API HTTP Datadog{{{< /nextlink >}}
+    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}API HTTP Datadog{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Générer des métriques basées sur des logs{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Générer des métriques basées sur des spans APM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Générer des métriques basées sur les événements du RUM{{< /nextlink >}}

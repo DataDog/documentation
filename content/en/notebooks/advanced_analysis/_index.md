@@ -1,5 +1,6 @@
 ---
 title: Analysis Features
+description: "Perform advanced data analysis in Notebooks with SQL queries, data transformations, joins, and visualizations across multiple datasets."
 aliases:
 - /logs/workspaces/
 - /logs/workspaces/export/

@@ -1,4 +1,7 @@
 ---
+description: Comprendre les cycles de facturation, les méthodes de paiement, le calcul
+  de l'utilisation et le comptage des hosts avec des informations tarifaires détaillées
+  pour les produits Datadog.
 title: Facturation
 ---
 
@@ -12,13 +15,13 @@ Datadog mesure le nombre total de hosts et de métriques custom toutes les heure
 
 Un host est une instance de système d'exploitation physique ou virtuelle que vous surveillez avec Datadog. Il peut s'agir d'un serveur, d'une machine virtuelle, d'un nœud (pour Kubernetes), d'un plan App Service (pour Azure App Service), ou encore d'un dyno Heroku (dans le cas de la plateforme Heroku). Les hosts peuvent désigner les instances sur lesquelles l'Agent Datadog est installé, ainsi que toute machine virtuelle Amazon EC2, Google Cloud, Azure ou vSphere surveillée par les intégrations Datadog. Les instances EC2 ou les machines virtuelles sur lesquelles l'Agent est installé comptent comme une seule instance (pas de double facturation).
 
-Les hosts qui n'envoient pas de données (statut `???` dans votre [liste d'infrastructures][2]) ne sont pas pris en compte dans la facturation. Jusqu'à 2 heures peuvent être nécessaires pour que ces hosts disparaissent de la [liste d'infrastructures][2]. Datadog conserve les données historiques pour ces hosts (comptes abonnés à une offre). Les métriques peuvent être représentées graphiquement sur un dashboard en spécifiant le hostname spécifique ou les tags.
+Les hosts qui n'envoient pas de données (statut `INACTIVE` dans votre [liste d'infrastructures][2]) ne sont pas pris en compte dans la facturation. Jusqu'à 2 heures peuvent être nécessaires pour que ces hosts disparaissent de la [liste d'infrastructures][2]. Datadog conserve les données historiques pour ces hosts (comptes abonnés à une offre). Les métriques peuvent être représentées graphiquement sur un dashboard en spécifiant le hostname spécifique ou les tags.
 
 ### Conteneurs
 
 Il est conseillé de surveiller les conteneurs avec un seul Agent conteneurisé par host. Cet Agent recueille les métriques de conteneur et de host. Si vous choisissez d'installer l'Agent directement dans chaque conteneur, chaque conteneur est compté comme un host lors de la facturation. Pour en savoir plus, consultez la documentation relative à l'[installation de l'Agent][3].
 
-### Environnement sans serveur
+### Serverless
 
 La facturation de Datadog repose sur le nombre moyen de fonctions par heure sur un mois pour l'ensemble de vos comptes. Chaque heure, Datadog enregistre le nombre de fonctions exécutées une ou plusieurs fois et surveillées par votre compte Datadog. À la fin du mois, Datadog détermine le montant à facturer en calculant la moyenne horaire du nombre de fonctions enregistrées. Les offres Pro et Enterprise comprennent cinq métriques custom par fonction facturable.
 
@@ -76,13 +79,13 @@ Vous pouvez choisir parmi deux modes de paiement différents :
 
 ### Paiement par carte bancaire
 
-Si vous payez par carte bancaire, les [administrateurs][10] peuvent consulter les reçus des mois précédents dans [l'historique de facturation][11]. Pour obtenir un double d'une facture, envoyez un e-mail au [service Facturation de Datadog][12].
+Si vous payez par carte bancaire, les [administrateurs][10] peuvent consulter les reçus des mois précédents dans [l'historique de facturation][11]. Pour obtenir un double d'une facture, envoyez un e-mail au [service Facturation de Datadog][13].
 
-Consultez la section [Paiements par carte bancaire][13] pour en savoir plus.
+Consultez la section [Paiements par carte bancaire][12] pour en savoir plus.
 
 ### Factures
 
-Si vous payez par chèque, transfert ACH ou virement, les factures sont envoyées aux adresses e-mail de facturation renseignées aux alentours du 10e jour ouvrable de chaque mois. Pour obtenir un double d'une facture, envoyez un e-mail au [service Facturation de Datadog][12]. Les coordonnées de paiement à utiliser sont disponibles sur les factures.
+Si vous payez par chèque, transfert ACH ou virement, les factures sont envoyées aux adresses e-mail de facturation renseignées aux alentours du 10e jour ouvrable de chaque mois. Pour obtenir un double d'une facture, envoyez un e-mail au [service Facturation de Datadog][13]. Les coordonnées de paiement à utiliser sont disponibles sur les factures.
 
 ## Contact
 
@@ -95,24 +98,26 @@ Si vous payez par chèque, transfert ACH ou virement, les factures sont envoyée
 
 ## Pour aller plus loin
 
-{{< whatsnext desc="Rubriques concernant la facturation :">}}
-    {{< nextlink href="account_management/billing/pricing/" >}}Tarifs{{< /nextlink >}}
+{{< whatsnext desc="Sujets spécifiques à la facturation :" >}}
+    {{< nextlink href="account_management/billing/pricing/" >}}Tarification{{< /nextlink >}}
     {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Détails d'utilisation{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}Métriques d'utilisation{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/credit_card/" >}}Carte bancaire{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/credit_card/" >}}Carte de crédit{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Métriques custom{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}Conteneurs{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}Log Management{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (tracing distribué et profileur en continu){{< /nextlink >}}
-    {{< nextlink href="account_management/billing/serverless/" >}}Fonctions sans serveur{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
+    {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI Visibility{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}Intégration AWS{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Intégration Azure{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Intégration Alibaba{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/google_cloud/" >}}Intégration Google Cloud{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/google_cloud/" >}}Intégration Google Cloud{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}Intégration vSphere{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_attribution/" >}}Attribution de l'utilisation{{< /nextlink >}}
 {{< /whatsnext >}}
+
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
@@ -126,5 +131,5 @@ Si vous payez par chèque, transfert ACH ou virement, les factures sont envoyée
 [9]: https://app.datadoghq.com/billing/plan
 [10]: /fr/account_management/rbac/#datadog-default-roles
 [11]: https://app.datadoghq.com/account/billing_history
-[12]: mailto:billing@datadoghq.com
-[13]: /fr/account_management/billing/credit_card/
+[12]: /fr/account_management/billing/credit_card/
+[13]: mailto:billing@datadoghq.com

@@ -21,10 +21,6 @@ A Lambda function may launch many concurrent execution environments when traffic
 
 Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also [manage tags][3]. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][4]. To monitor a distribution for a count metric type, use `sum` for both the [time and space aggregations][4]. Refer to the guide [Query to the Graph][5] for how time and space aggregations work.
 
-### Submitting historical metrics
-
-To submit historical metrics (only timestamps that are within the last 20 minutes are allowed), you must use the [Datadog Forwarder](#with-the-datadog-forwarder). The [Datadog Lambda Extension](#with-the-datadog-lambda-extension) can only submit metrics with the current timestamp due to the limitation of the StatsD protocol.
-
 ### Submitting many data points
 
 When using the Forwarder to submit many data points for the same metric and the same set of tags, for example, inside a big `for` loop, there may be noticeable performance impact to the Lambda and also CloudWatch cost impact. You can aggregate the data points in your application to avoid the overhead, see the following Python example:

@@ -1,5 +1,6 @@
 ---
 title: Monitoring Page Performance
+description: "Monitor Core Web Vitals, loading times, and page performance telemetry with RUM Browser SDK to optimize user experience and troubleshoot issues."
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"

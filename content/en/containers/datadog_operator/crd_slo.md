@@ -1,5 +1,6 @@
 ---
 title: DatadogSLO CRD
+description: Create and manage Datadog Service Level Objectives (SLOs) using the DatadogSLO custom resource definition
 ---
 
 To create a [Service Level Objective][1] (SLO), you can use the Datadog Operator and `DatadogSLO` custom resource definition (CRD).

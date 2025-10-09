@@ -8,7 +8,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/full-host-profiler/" btn_hidden="false" header="Join the Preview!" >}}
-Full Host is in Preview.
+Full-Host is in Preview.
 {{< /callout >}}
 
 The Full-Host Profiler is an eBPF-based profiling solution built on OpenTelemetry that sends profiling data to Datadog using the Datadog Agent. It supports symbolication for compiled languages and is optimized for containerized environments such as Docker and Kubernetes.
@@ -19,21 +19,17 @@ The Full-Host Profiler is particularly valuable for:
 
 - Profiling open source software components that aren't instrumented with Datadog's tracing libraries.
 - Analyzing performance across multi-language processes and runtimes.
-- Identifying resource bottlenecks at the host level, including detection of noisy neighbor processes.
-
 
 ## Requirements
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
-
 Supported operating systems
-: Linux
+: Linux (5.4+ for amd64, 5.5+ for arm64)
 
 Supported architecture
 : `amd64` or `arm64` processors
 
 Serverless
-: `full host` is not supported on serverless platforms, such as AWS Lambda.
+: `full-host` is not supported on serverless platforms, such as AWS Lambda.
 
 Debugging information
 : Symbols should be available locally or can be uploaded in CI with `datadog-ci`
@@ -47,31 +43,17 @@ The Full-Host Profiler is distributed as a standalone executable.
 ### Container environments
 For hosts running containerized workloads, Datadog recommends running the profiler inside a container:
 
-- **Kubernetes**: Follow the [running in Kubernetes][8] instructions.
-- **Docker**: Follow the [running in Docker][9] instructions.
+- **Kubernetes**: Follow the [running in Kubernetes][7] instructions.
+- **Docker**: Follow the [running in Docker][8] instructions.
 - **Container image**: Available from the [container registry][5].
 
 
 ### Non-container environments
 
-For hosts without container runtimes, follow the instructions for [running directly on the host][10].
-
-### Configuration
-#### Local symbol upload
-For compiled languages (C/C++/Rust/Go), the profiler can upload local symbols to Datadog for symbolication when unstripped binaries are available. 
-The Full-Host Profiler handles this automatically.
-
-To upload symbols using datadog-ci, see <a href="#symbol-upload-using-datadog-ci">Symbol upload</a>.
-
-### Build
-To build the Full-Host Profiler directly on your machine, run:
-
-   ```shell
-   make
-   ```
+For hosts without container runtimes, follow the instructions for [running directly on the host][9].
 
 ## Service naming
-When using full-host profiling, Datadog captures profiles from all processes running on the host. The service name for each process depends on the `DD_SERVICE` environment variable.
+When using full-host profiling, Datadog profiles all processes on the host. Each process's service name is derived from its `DD_SERVICE` environment variable.
 
 If `DD_SERVICE` is set, the profiler uses the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
 
@@ -80,30 +62,20 @@ If `DD_SERVICE` is not set, Datadog infers a service name from the binary name. 
 
 If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, Datadog groups them together under the same service name. Datadog cannot distinguish between them unless you provide a unique service name.
 
-## Symbol upload using datadog-ci
+## Debug symbols
 
-1. Git clone the [datadog-ci][13] command line tool 
-2. Install `datadog-ci`, run:
+For compiled languages (such as Rust, C, C++, Go, etc.), the profiler uploads local symbols to Datadog for symbolication, ensuring that function names are available in profiles. For Rust, C, and C++, symbols need to be available locally (unstripped binaries).
 
-   ```shell
-   npm install -g @datadog/datadog-ci
+For binaries stripped of debug symbols, it's possible to upload symbols manually or in the CI:
+
+1. Install the [datadog-ci][12] command line tool.
+2. Provide a [Datadog API key][10] through the `DD_API_KEY` environment variable.
+3. Set the `DD_SITE` environment variable to your [Datadog site][11].
+4. Install the `binutils` package, which provides the `objcopy` CLI tool.
+5. Run:
    ```
-3. Provide a [Datadog API key][11] through the `DD_API_KEY` environment variable.
-4. Set the `DD_SITE` environment variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
-5. Set variables in an encrypted `datadog-ci.json` file at the root of your project:
-
+   DD_BETA_COMMANDS_ENABLED=1 datadog-ci elf-symbols upload ~/your/build/symbols/
    ```
-   {
-      "apiKey": "<API_KEY>",
-      "datadogSite": "<SITE>"
-   }
-   ```
-6. Install `binutils` 
-7. Run:
-
-```
-DD_BETA_COMMANDS_ENABLED=1 datadog-ci elf-symbols upload ~/your/build/bin/
-```
 
 
 ## What's next?
@@ -119,10 +91,9 @@ After installing the Full-Host Profiler, see the [Getting Started with Profiler]
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://github.com/DataDog/dd-otel-host-profiler/pkgs/container/dd-otel-host-profiler/.
 [6]: /getting_started/profiler/
-[7]: /profiler/enabling/supported_versions/
-[8]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-in-kubernetes.md
-[9]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-in-docker.md
-[10]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-on-host.md
-[11]: https://app.datadoghq.com/organization-settings/api-keys
-[12]: /getting_started/site/
-[13]: https://github.com/DataDog/datadog-ci/tree/master
+[7]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-in-kubernetes.md
+[8]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-in-docker.md
+[9]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-on-host.md
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: /getting_started/site/
+[12]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli

@@ -40,7 +40,7 @@ The **Datadog AppSec Gateway API Request Mirror** enhances application security 
 3. **Deploy the AppSec Gateway API Request Mirror** in the namespace of your choice (e.g., `datadog`) along with its service:
 
    ```bash
-   kubectl apply -f https://raw.githubusercontent.com/DataDog/dd-trace-go/main/contrib/k8s.io/gateway-api/cmd/request-mirror/deployment.yaml
+   kubectl apply -f https://raw.githubusercontent.com/DataDog/dd-trace-go/refs/heads/main/contrib/k8s.io/gateway-api/cmd/request-mirror/deployment.yml
    ```
 
 4. **Verify the deployment**:
@@ -52,7 +52,9 @@ The **Datadog AppSec Gateway API Request Mirror** enhances application security 
 5. **Patch your Gateway resources** to allow access to the namespace with the deployment:
 
    ```bash
-   go run github.com/DataDog/dd-trace-go/contrib/k8s.io/gateway-api/cmd/patch-gateways@latest
+   git clone https://github.com/DataDog/dd-trace-go.git
+   cd dd-trace-go
+   go run ./contrib/k8s.io/gateway-api/cmd/patch-gateways
    ```
 
    Use the `-help` flag to see options for customizing the patching behavior.
@@ -60,7 +62,7 @@ The **Datadog AppSec Gateway API Request Mirror** enhances application security 
 6. **Patch your HTTPRoute resources** to redirect traffic to the service:
 
    ```bash
-   go run github.com/DataDog/dd-trace-go/contrib/k8s.io/gateway-api/cmd/patch-httproutes@latest
+   go run ./contrib/k8s.io/gateway-api/cmd/patch-httproutes
    ```
 
    This command adds a [RequestMirror][14] filter to all `HTTPRoute` resources in all namespaces. Use the `-help` flag for configuration options.

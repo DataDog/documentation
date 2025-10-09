@@ -30,6 +30,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.8.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.8                     |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.7.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
+| 4.7.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.7                     |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.6.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | latest                     |                     |

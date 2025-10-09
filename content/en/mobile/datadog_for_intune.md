@@ -1,5 +1,6 @@
 ---
 title: Datadog for Intune
+description: "Deploy and configure the Datadog for Intune mobile app within your organization using Microsoft Intune admin center and Azure settings."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: "Blog"

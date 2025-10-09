@@ -1,4 +1,5 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][8002].
 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
     ```shell
     docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -18,3 +19,4 @@
 See [Update Existing Pipelines][8001] if you want to make changes to your pipeline's configuration.
 
 [8001]: /observability_pipelines/update_existing_pipelines
+[8002]: https://app.datadoghq.com/organization-settings/remote-config/setup

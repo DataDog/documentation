@@ -26,10 +26,10 @@ Code Security helps teams implement DevSecOps throughout the organization:
 ## Static Code Analysis (SAST)
 Static Code Analysis (SAST) analyzes pre-production code to identify security and quality issues. You can embed best security and development practices throughout the software development lifecycle with:
 - IDE integration to flag violations in real time with deterministic suggested fixes
-- In-line GitHub pull request comments with deterministic suggested fixes and incremental/diff-aware scanning
+- In-line pull request comments with deterministic suggested fixes and incremental/diff-aware scanning
 - Ability to open a pull request to fix a violation directly from Datadog 
 
-Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
+Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
 See [Static Code Analysis Setup][6] to get started.
 
 ## Software Composition Analysis
@@ -38,8 +38,8 @@ Software Composition Analysis (SCA) analyzes open source libraries in both your 
 - Ability to open a pull request to fix a library vulnerability directly from Datadog
 - Runtime-informed prioritization of vulnerabilities with the Datadog severity score
 
-SCA supports both static and runtime dependency detection.
-For static scanning, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). See [static setup][4] to get started.
+SCA supports both static and runtime dependency detection.  
+For static scanning, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning. See [static setup][4] to get started.  
 For runtime vulnerability detection, you can easily enable SCA on your services instrumented with Datadog APM. See [runtime setup][5] to get started.
 
 ## Runtime Code Analysis (IAST)
@@ -54,10 +54,7 @@ You can enable IAST on your services instrumented with Datadog APM. See [IAST se
 Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
 
 ## Supply Chain Security
-Developers are being actively targeted with supply chain attacks. Prevent malicious packages to enter your dev environments with Datadog Supply Chain Security Firewall, which is available in GitHub.
-{{< callout url="https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc" >}}
-  To enroll as a design partner, click Request Access.
-{{< /callout >}}
+Developers are being actively targeted with supply chain attacks. Prevent malicious packages to enter your dev environments with Datadog Supply Chain Security Firewall, which is available in GitHub. [Request access to the Preview][11].
 
 
 ## Further Reading
@@ -74,3 +71,4 @@ Developers are being actively targeted with supply chain attacks. Prevent malici
 [8]: /security/code_security/secret_scanning/
 [9]: https://www.datadoghq.com/product-preview/secret-scanning/
 [10]: /security/code_security/iac_security
+[11]: https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc

@@ -1,5 +1,6 @@
 ---
 title: Analyze Error Logs Using Sheets
+description: "Extract error details from log messages using calculated columns and pivot tables to identify patterns in retail application return errors."
 further_reading:
 - link: "/sheets/"
   tag: "Documentation"

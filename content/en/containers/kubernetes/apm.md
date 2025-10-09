@@ -1,5 +1,6 @@
 ---
 title: Kubernetes APM - Trace Collection
+description: Enable APM trace collection for containerized applications running in Kubernetes environments
 aliases:
     - /agent/kubernetes/apm
 further_reading:

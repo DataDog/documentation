@@ -1,5 +1,6 @@
 ---
 title: Kubernetes and Integrations
+description: Configure monitoring integrations for applications running in Kubernetes using Autodiscovery templates
 aliases:
   - /agent/autodiscovery/integrations
   - /guides/servicediscovery/

@@ -13,17 +13,27 @@ title: NDM プロファイル
 
 ## 概要
 
-Network Device Monitoring は、収集するメトリクスと関連タグを Datadog Agent に通知するためにプロファイルを使用します。プロファイルは、デバイスに関連付けられた OID のコレクションです。
+Network Device Monitoring は、収集するメトリクスと関連タグを Datadog Agent に伝えるためにプロファイルを使用します。プロファイルとは、デバイスに関連付けられた {{< tooltip text="OID (オブジェクト識別子)" tooltip="デバイス上の一意の ID またはアドレス。ポーリング時に、その値のレスポンス コードを返します。" >}} の集合です。
 
 ## 構成
+
+Datadog では、デバイス プロファイルを有効化する方法として、推奨の GUI ベースのワークフロー (SNMP Profile Manager) と、高度な構成ベースのセットアップのいずれかを使用できます:
+
+**[SNMP Profile Manager][9] (推奨)**
+- ガイド付き UI により、[Network Device Monitoring Configuration][8] ページから直接、ネットワーク デバイスから収集するメトリクスをカスタマイズできます。
+- ベンダーのドキュメントから OID を収集する必要がなくなります。関連性が高く、人間が読みやすいメトリクスのリストを自動で推奨します。
+- `.yaml` ファイルによる手動構成は不要です。
+- [Remote Configuration][11] を使うと、全ての Agent に対して変更をワン クリックで一括適用できます。
+
+**[高度なセットアップ][10]**
+- `.yaml` ファイルを使ってカスタム プロファイルを手動で作成して有効化し、デバイスのメトリクスとタグを指定します。
+- 大規模または動的な環境に最適です。
 
 デフォルトでは、Agent コンフィギュレーションディレクトリ内のすべてのプロファイルがロードされます。コレクションの特定のプロファイルをカスタマイズするには、`definition_file` でファイル名別に明示的に参照するか、`definition` でインラインリストを指定します。Datadog プロファイルはいずれも名前別にリストできます。追加のカスタムプロファイルは、コンフィギュレーション内でファイルパスで参照するか、コンフィギュレーションディレクトリに配置できます。
 
 **注**: 一般的なプロファイルは [generic-device.yaml][1] で、ルーターやスイッチなどのデバイスをサポートしています。
 
-<div class="alert alert-info">
-GUI を使用してデバイスプロファイルを作成する場合は、<a href="/network_monitoring/devices/guide/device_profiles/">デバイスプロファイルの概要</a>ドキュメントを参照してください。
-</div>
+## 用語と概念
 
 ### sysOID マップデバイス
 
@@ -98,3 +108,7 @@ Datadog Agent バージョン 7.52 以降では、デバイスメタデータ用
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [6]: https://app.datadoghq.com/devices/
 [7]: /ja/network_monitoring/devices/guide/device_profiles/
+[8]: https://app.datadoghq.com/devices/profiles
+[9]: /ja/network_monitoring/devices/guide/device_profiles/
+[10]: /ja/network_monitoring/devices/guide/build-ndm-profile/
+[11]: /ja/agent/remote_config/

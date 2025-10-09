@@ -166,7 +166,7 @@ L'exemple suivant représente une stack trace minifiée :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/#initialization-parameters
 [3]: https://docs.datadoghq.com/fr/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: エクスプローラーでエラー追跡データを視覚化する
-- link: https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: ソースコード
   text: ソースマップのコマンドリファレンス
 title: JavaScript ソースマップのアップロード
@@ -167,7 +167,7 @@ Datadog は、縮小化を解除されたスタックフレームにソースコ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

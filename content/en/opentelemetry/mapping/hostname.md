@@ -12,7 +12,7 @@ further_reading:
 
 OpenTelemetry defines certain semantic conventions for resource attributes related to hostnames. If an OpenTelemetry Protocol (OTLP) payload for any signal type has known hostname resource attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
 
-This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2]. When using the [recommended configuration][4] for the Datadog exporter, the [resource detection processor][1] adds the necessary resource attributes to the payload to ensure accurate hostname resolution.
+This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2] and [DDOT Collector][5]. When using the [recommended configuration][4] for the Datadog exporter, the [resource detection processor][1] adds the necessary resource attributes to the payload to ensure accurate hostname resolution.
 
 ## Conventions used to determine the hostname
 
@@ -87,6 +87,20 @@ If none of the above conventions are present, the `host.id` and `host.name` reso
 
 **Note:** The OpenTelemetry specification allows `host.id` and `host.name` to have values that may not match those used by other Datadog products in a given environment. If using multiple Datadog products to monitor the same host, you may have to override the hostname using `datadog.host.name` to ensure consistency.
 
+## Infra attributes processor
+
+The [infra attributes processor][6] automates the extraction of Kubernetes tags based on labels or annotations and assigns these tags as resource attributes on traces, metrics, and logs. The infra attributes processor requires the following [attributes][7] (such as `container.id`) to be set to extract the correct attributes and hostname.
+
+The infra attributes processor can also be configured to override the hostname extracted from attributes by the Agent hostname:
+
+```
+processors:
+ infraattributes:
+   allow_hostname_override: true
+```
+
+**Note**: This setting is only available for the DDOT Collector. 
+
 ## Fallback hostname logic
 
 If no valid host names are found in the resource attributes, the behavior varies depending on the ingestion path. 
@@ -133,3 +147,6 @@ The following host names are deemed invalid and discarded:
 [2]: /opentelemetry/interoperability/otlp_ingest_in_the_agent
 [3]: /opentelemetry/setup/collector_exporter/
 [4]: /opentelemetry/config/hostname_tagging/
+[5]: /opentelemetry/migrate/ddot_collector/
+[6]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor
+[7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#expected-attributes

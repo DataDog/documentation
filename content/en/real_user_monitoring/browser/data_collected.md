@@ -1,5 +1,6 @@
 ---
 title: RUM Browser Data Collected
+description: "Comprehensive guide to RUM Browser SDK event types, attributes, and telemetry data—including sessions, views, resources, errors, and user actions."
 aliases:
   - /real_user_monitoring/data_collected/
   - /real_user_monitoring/data_collected/view/

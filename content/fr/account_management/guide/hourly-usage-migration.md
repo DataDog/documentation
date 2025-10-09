@@ -1,4 +1,7 @@
 ---
+description: Apprenez à migrer des endpoints d'utilisation horaire V1 vers l'API V2
+  consolidée avec familles de produits, format JSON:API, pagination et prise en charge
+  multi-organisations.
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
@@ -7,7 +10,9 @@ title: Passer de la version 1 à la version 2 des API d'utilisation horaire
 ---
 
 ## Résumé
-Les utilisateurs de la version 1 des API devraient reconnaître dans la version 2 des API d'utilisation horaire les concepts auxquels ils sont habitués, malgré un format légèrement différent.
+Le 1er février 2025, les endpoints individuels d'utilisation horaire par produit seront obsolètes au profit de l'API v2 [utilisation horaire par famille de produits][1].
+
+Les utilisateurs de la version 1 des API devraient reconnaître dans la version 2 des API d'utilisation horaire consolidée les concepts auxquels ils sont habitués, malgré un format légèrement différent.
 
 Voici les différences les plus notables entre les versions 1 et 2. La version 2 :
 * regroupe tous les produits au sein d'un même endpoint ;
@@ -18,146 +23,11 @@ Voici les différences les plus notables entre les versions 1 et 2. La version�
 Chacune de ces différences est abordée plus en détail dans les rubriques qui suivent.
 
 ## Familles de produits consolidées
-La version 2 des API introduit les concepts de famille de produits et de type d'utilisation. Les familles de produits sont des groupes rassemblant un ou plusieurs types d'utilisation. Les types d'utilisation sont des mesures d'utilisation pour une organisation et une période données. L'ensemble initial de familles de produits est en grande partie aligné sur la version 1 des API ; vous trouverez ci-dessous le mappage complet. Une famille de produits spéciale `all` regroupe également les types d'utilisation de toutes les autres familles de produits.
+L'API v2 introduit les concepts de famille de produits et de type d'utilisation. Les familles de produits regroupent
+un ou plusieurs types d'utilisation. Les types d'utilisation correspondent aux mesures d'utilisation pour une organisation
+et une période données. La famille de produits `all` récupère l'utilisation de toutes les familles de produits, ou vous pouvez filtrer par familles de produits spécifiques.
 
-Familles et types d'utilisation :
-- **all**
-    * _Contient toutes les autres familles de produits_
-- **analyzed_logs**
-    * `analyzed_logs`
-- **application_security**
-    * `app_sec_host_count`
-- **audit_trail**
-    * `enabled`
-- **serverless**
-    * `func_count`
-    * `invocations_sum`
-- **ci_app**
-    * `ci_pipeline_indexed_spans`
-    * `ci_test_indexed_spans`
-    * `ci_visibility_pipeline_committers`
-    * `ci_visibility_test_committers`
-- **cloud_cost_management**
-    * `host_count`
-- **cspm**
-    * `aas_host_count`
-    * `azure_host_count`
-    * `compliance_host_count`
-    * `container_count`
-    * `host_count`
-- **cws**
-    * `cws_container_count`
-    * `cws_host_count`
-- **dbm**
-    * `dbm_host_count`
-    * `dbm_queries_count`
-- **fargate**
-    * `avg_profiled_fargate_tasks`
-    * `tasks_count`
-- **infra_hosts**
-    * `agent_host_count`
-    * `alibaba_host_count`
-    * `apm_azure_app_service_host_count`
-    * `apm_host_count`
-    * `aws_host_count`
-    * `azure_host_count`
-    * `container_count`
-    * `gcp_host_count`
-    * `heroku_host_count`
-    * `host_count`
-    * `infra_azure_app_service`
-    * `opentelemetry_host_count`
-    * `vsphere_host_count`
-- **incident_management**
-    * `monthly_active_users`
-- **indexed_logs**
-    * `logs_indexed_events_3_day_count`
-    * `logs_live_indexed_events_3_day_count`
-    * `logs_rehydrated_indexed_events_3_day_count`
-    * `logs_indexed_events_7_day_count`
-    * `logs_live_indexed_events_7_day_count`
-    * `logs_rehydrated_indexed_events_7_day_count`
-    * `logs_indexed_events_15_day_count`
-    * `logs_live_indexed_events_15_day_count`
-    * `logs_rehydrated_indexed_events_15_day_count`
-    * `logs_indexed_events_30_day_count`
-    * `logs_live_indexed_events_30_day_count`
-    * `logs_rehydrated_indexed_events_30_day_count`
-    * `logs_indexed_events_45_day_count`
-    * `logs_live_indexed_events_45_day_count`
-    * `logs_rehydrated_indexed_events_45_day_count`
-    * `logs_indexed_events_60_day_count`
-    * `logs_live_indexed_events_60_day_count`
-    * `logs_rehydrated_indexed_events_60_day_count`
-    * `logs_indexed_events_90_day_count`
-    * `logs_live_indexed_events_90_day_count`
-    * `logs_rehydrated_indexed_events_90_day_count`
-    * `logs_indexed_events_180_day_count`
-    * `logs_live_indexed_events_180_day_count`
-    * `logs_rehydrated_indexed_events_180_day_count`
-    * `logs_indexed_events_360_day_count`
-    * `logs_live_indexed_events_360_day_count`
-    * `logs_rehydrated_indexed_events_360_day_count`
-    * `logs_indexed_events_custom_day_count`
-    * `logs_live_indexed_events_custom_day_count`
-    * `logs_rehydrated_indexed_events_custom_day_count`
-- **indexed_spans**
-    * `indexed_events_count`
-    * `ingested_spans`
-    * `ingested_events_bytes`
-- **iot**
-    * `iot_device_count`
-- **lambda_traced_invocations**
-    * `lambda_traced_invocations_count`
-- **logs**
-    * `billable_ingested_bytes`
-    * `indexed_events_count`
-    * `ingested_events_bytes`
-    * `logs_forwarding_events_bytes`
-    * `logs_live_indexed_count`
-    * `logs_live_ingested_bytes`
-    * `logs_rehydrated_indexed_count`
-    * `logs_rehydrated_ingested_bytes`
-- **network_flows**
-    * `indexed_events_count`
-- **network_hosts**
-    * `host_count`
-- **observability_pipelines**
-    * `observability_pipelines_bytes_processed`
-- **online_archive**
-    * `online_archive_events_count`
-- **profiling**
-    * `avg_container_agent_count`
-    * `host_count`
-- **rum**
-    * `browser_rum_units`
-    * `mobile_rum_units`
-    * `rum_units`
-- **rum_browser_sessions**
-    * `replay_session_count`
-    * `session_count`
-- **rum_mobile_sessions**
-    * `session_count`
-    * `session_count_android`
-    * `session_count_ios`
-    * `session_count_reactnative`
-    * `session_count_flutter`
-- **sds**
-    * `logs_scanned_bytes`
-    * `total_scanned_bytes`
-- **snmp**
-    * `snmp_devices`
-- **synthetics_api**
-    * `check_calls_count`
-- **synthetics_browser**
-    * `browser_check_calls_count`
-- **timeseries**
-    * `num_custom_input_timeseries`
-    * `num_custom_output_timeseries`
-    * `num_custom_timeseries`
-
-
-Cette liste indique comment les familles et les types d'utilisation ci-dessus sont mappés aux endpoints d'utilisation horaire de la version 1. Le type d'utilisation et le point de données sont identiques, sauf mention contraire :
+La liste ci-dessous montre la correspondance entre les familles de produits et les types d'utilisation avec les endpoints v1 d'utilisation horaire. Le type d'utilisation et le point de données sont identiques, sauf indication explicite contraire :
 
 ENDPOINT | FAMILLE DE PRODUITS
 `<url_de_base>/api/v1/usage/hosts` | infra_hosts
@@ -209,15 +79,8 @@ ENDPOINT | FAMILLE DE PRODUITS
 : `func_count`
 : `invocations_sum`
 
-`<url_de_base>/api/v1/usage/rum_sessions?type=browser` | rum_browser_sessions
-: `replay_session_count`
-: `session_count`
-
-`<url_de_base>/api/v1/usage/rum_sessions?type=mobile` | rum_mobile_sessions
-: `session_count`
-: `session_count_android`
-: `session_count_ios`
-: `session_count_reactnative`
+`<base_url>/api/v1/usage/rum_sessions` | rum 
+: Consultez le [guide de migration RUM pour les instructions complètes de mappage][2]
 
 `<url_de_base>/api/v1/usage/network_hosts` | network_hosts
 : `host_count`
@@ -257,9 +120,6 @@ ENDPOINT | FAMILLE DE PRODUITS
 : `container_count`
 : `host_count`
 
-`<url_de_base>/api/v1/usage/audit_logs` | audit_logs
-: `lines_indexed`
-
 `<url_de_base>/api/v1/usage/cws` | cws
 : `cws_container_count`
 : `cws_host_count`
@@ -271,11 +131,6 @@ ENDPOINT | FAMILLE DE PRODUITS
 `<url_de_base>/api/v1/usage/sds` | sds
 : `logs_scanned_bytes`
 : `total_scanned_bytes`
-
-`<url_de_base>/api/v1/usage/rum` | rum
-: `browser_rum_units`
-: `mobile_rum_units`
-: `rum_units`
 
 `<url_de_base>/api/v1/usage/ci-app` | ci_app
 : `ci_pipeline_indexed_spans`
@@ -297,9 +152,11 @@ ENDPOINT | FAMILLE DE PRODUITS
 
 ## Format conforme à la spécification JSON:API
 
-Le corps des réponses et les noms des paramètres sont conformes à la [spécification JSON:API][1]. Toutes les données disponibles avec la version 1 des API le sont toujours. L'exemple ci-dessous illustre le mappage de l'API Hosts v1 avec l'API d'utilisation horaire v2.
+Le corps des réponses et les noms des paramètres sont conformes à la [spécification JSON:API][3]. Toutes les données
+disponibles avec la version 1 des API le sont toujours. L'exemple ci-dessous illustre le mappage de l'API Hosts v1
+avec l'API d'utilisation horaire v2.
 
-### API v1 : [Récupérer l'utilisation horaire pour les hosts et conteneurs][2]
+### API v1 : Récupérer l'utilisation horaire pour les hosts et conteneurs
 
 #### Requête
 
@@ -461,5 +318,6 @@ La version 2 des API prend en charge la récupération des données d'utilisati
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://jsonapi.org/format/
-[2]: /fr/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
+[1]: /fr/api/latest/usage-metering/#get-hourly-usage-by-product-family
+[2]: /fr/account_management/guide/relevant-usage-migration/#rum
+[3]: https://jsonapi.org/format/

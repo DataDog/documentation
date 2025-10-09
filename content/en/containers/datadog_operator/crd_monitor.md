@@ -1,5 +1,6 @@
 ---
 title: DatadogMonitor CRD
+description: Deploy and manage Datadog monitors using the DatadogMonitor custom resource definition with the Datadog Operator
 ---
 
 To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonitor` custom resource definition (CRD).

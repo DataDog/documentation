@@ -80,7 +80,7 @@ Datadog Collection は CentOS、Debian、Rocky Linux、OpenSUSE、Windows、macO
 
 サポートが必要な場合は、`ansible-collections` GitHub リポジトリに issue を作成するか、[Datadog サポート][1]に連絡してください。
 
-## リリースノート
+## リリース ノート
 
 変更点は [CHANGELOG][2] ファイルで確認できます。
 

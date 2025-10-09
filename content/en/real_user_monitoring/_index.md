@@ -236,6 +236,6 @@ You must have edit access to restore general access to a restricted application.
 [13]: /real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /real_user_monitoring/session_replay/browser/developer_tools/
 [15]: /real_user_monitoring/browser/setup/
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/
+[16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/

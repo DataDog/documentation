@@ -348,12 +348,12 @@ export default {
     ap2: 'https://trace.agent.ap2.datadoghq.com/v1/traces'
   },
   otlp_metrics_endpoint: {
-    us: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
-    us3: 'https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics',
-    us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
-    eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics',
-    ap1: 'https://api.ap1.datadoghq.com/api/intake/otlp/v1/metrics',
-    ap2: 'https://api.ap2.datadoghq.com/api/intake/otlp/v1/metrics'
+    us: 'https://otlp.datadoghq.com/v1/metrics',
+    us3: 'https://otlp.us3.datadoghq.com/v1/metrics',
+    us5: 'https://otlp.us5.datadoghq.com/v1/metrics',
+    eu: 'https://otlp.datadoghq.eu/v1/metrics',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/metrics',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics'
   },
   otlp_logs_endpoint: {
     us: 'https://http-intake.logs.datadoghq.com/v1/logs',

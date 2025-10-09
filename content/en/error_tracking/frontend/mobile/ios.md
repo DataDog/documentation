@@ -5,4 +5,4 @@ code_lang: ios
 code_lang_weight: 20
 ---
 
-{{< include-markdown "real_user_monitoring/mobile_and_tv_monitoring/ios/error_tracking" >}}
+{{< include-markdown "real_user_monitoring/application_monitoring/ios/error_tracking" >}}

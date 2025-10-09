@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Cluster and Endpoint Checks
+description: Troubleshoot issues with cluster checks and endpoint checks dispatched by the Datadog Cluster Agent
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"

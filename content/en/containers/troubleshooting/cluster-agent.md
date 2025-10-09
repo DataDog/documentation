@@ -1,5 +1,6 @@
 ---
 title: Cluster Agent Troubleshooting
+description: Troubleshoot common issues with the Datadog Cluster Agent deployment and configuration
 aliases:
 - /agent/cluster_agent/troubleshooting
 - /containers/cluster_agent/troubleshooting

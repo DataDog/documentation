@@ -103,7 +103,7 @@ To enable feature flag data collection for your Flutter application:
 
 1. Set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup
 {{% /tab %}}
 {{% tab "React Native" %}}
 

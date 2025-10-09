@@ -1,5 +1,6 @@
 ---
 title: Docker Agent for Docker, containerd, and Podman
+description: Install and configure the Datadog Agent for Docker containers and container runtimes
 aliases:
   - /guides/basic_agent_usage/docker/
   - /agent/docker

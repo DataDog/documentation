@@ -1,6 +1,6 @@
 ---
 title: Enable RUM on Your Squarespace Store
-
+description: "Implement RUM monitoring on Squarespace stores to understand customer behavior, track performance, and optimize user experience."
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'

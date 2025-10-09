@@ -59,6 +59,10 @@ platforms:
     link: "integrations/guide/cloud-foundry-setup/"
     image: "platform_cloud_foundry.png"
     category: "Cloud platforms"
+  - name: Amazon ECS
+    link: "/containers/amazon_ecs/"
+    image: "platform_ecs.png" 
+    category: "Container platforms"
   # - name: source
   #   link: "agent/basic_agent_usage/source/"
   #   image: "platform_fromsource.png"

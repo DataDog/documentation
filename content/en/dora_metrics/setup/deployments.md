@@ -238,7 +238,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ✅  Handled in 0.077 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 

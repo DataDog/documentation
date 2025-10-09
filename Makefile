@@ -31,6 +31,9 @@ GITHUB_TOKEN ?= ""
 FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
+# Set default S3 path for websites sources data
+FF_S3_PATH ?= "staging"
+
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
@@ -129,10 +132,16 @@ node_modules: package.json yarn.lock
 dependencies: clean
 	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt
 
-# Download files from S3 bucket and add them to the file system
+# Download files from S3 bucket and add them to the file system.
+# Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
+# e.g. make start-sources FF_S3_PATH=<websites-sources feature branch>
 websites_sources_data: hugpython
-	@echo "Downloading data from websites-sources S3 bucket..."
-	@. hugpython/bin/activate && python3 ./local/bin/py/build/get_websites_sources_data.py
+	@echo "Removing _vendor directory..."
+	rm -rf _vendor
+	@echo "Downloading fresh data from websites-sources S3 bucket..."
+	@. hugpython/bin/activate && \
+		export FF_S3_PATH=${FF_S3_PATH} && \
+		python3 ./local/bin/py/build/get_websites_sources_data.py
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -145,6 +154,7 @@ vector_data: integrations_data/extracted/vector
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/" 
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
@@ -163,18 +173,18 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
-# Automatically download the latest module from websites-sources repo
-update_websites_sources_module:
-	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
-	node_modules/hugo-bin/vendor/hugo mod clean
-	node_modules/hugo-bin/vendor/hugo mod tidy
-	cat go.mod
-	@if [ -n "$(CI_COMMIT_REF_NAME)" ]; then \
-		echo "In ci, vendoring integrations pages for placeholder generation"; \
-		node_modules/hugo-bin/vendor/hugo mod vendor; \
-		cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/; \
-		rm -rf _vendor; \
-	fi
+# # Automatically download the latest module from websites-sources repo
+# update_websites_sources_module:
+# 	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+# 	node_modules/hugo-bin/vendor/hugo mod clean
+# 	node_modules/hugo-bin/vendor/hugo mod tidy
+# 	cat go.mod
+# 	@if [ -n "$(CI_COMMIT_REF_NAME)" ]; then \
+# 		echo "In ci, vendoring integrations pages for placeholder generation"; \
+# 		node_modules/hugo-bin/vendor/hugo mod vendor; \
+# 		cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/; \
+# 		rm -rf _vendor; \
+# 	fi
 
 #######################################################################################################################
 # API Code Examples

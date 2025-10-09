@@ -21,7 +21,7 @@ Dynamic Instrumentation es una característica de apoyo para las bibliotecas de 
 
 ## Instalación
 
-1. Instala o actualiza tu Agent a la versión [7.45.0][2] o posterior.
+1. Instala o actualiza tu Agent a la versión [7.49.0][2] o posterior.
 2. Si aún no tienes APM habilitado, en tu configuración del Agent, establece la variable de entorno `DD_APM_ENABLED` en `true` y escuchando en el puerto `8126/TCP`.
 
 3. Descarga `dd-java-agent.jar`:

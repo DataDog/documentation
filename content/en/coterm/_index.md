@@ -1,5 +1,6 @@
 ---
 title: Datadog CoTerm
+description: "Record terminal sessions, analyze them in Datadog, and protect against dangerous terminal commands with CoTerm's validation layer."
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-coterm/"
   tag: "Blog"

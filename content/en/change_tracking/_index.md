@@ -1,5 +1,6 @@
 ---
 title: Change Tracking
+description: "Streamline troubleshooting with Change Tracking by monitoring deployments, feature flags, configuration changes, and other modifications to your services."
 further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
