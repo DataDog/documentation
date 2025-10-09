@@ -12,7 +12,7 @@ title: Requisitos de compatibilidad
 type: lenguaje de código múltiple
 ---
 
-Se admiten las siguientes capacidades de AAP en relación con la biblioteca de rastreo de cada lenguaje:
+Se admiten las siguientes capacidades de AAP en relación con la librería de rastreo de cada lenguaje:
 
 | Capacidad de la AAP                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
 |----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|

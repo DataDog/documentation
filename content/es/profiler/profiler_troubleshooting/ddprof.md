@@ -9,7 +9,7 @@ title: Solucionar problemas del generador de perfiles nativo para lenguajes comp
 type: lenguaje de código múltiple
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> está en Vista previa. Datadog recomienda evaluar el generador de perfiles en un entorno no sensible antes de desplegarlo en producción.
 </div>
 
@@ -79,7 +79,7 @@ error while loading shared libraries: libdd_profiling.so: cannot open shared obj
 
 Esto ocurre cuando tu aplicación se crea con `libdd_profiling.so` como dependencia, pero no puede ser encontrada en tiempo de ejecución durante la reconciliación de dependencias. Puedes solucionarlo realizando una de las siguientes acciones:
 
-- Vuelve a crear tu aplicación utilizando la biblioteca estática. En algunos sistemas de compilación, la elección entre bibliotecas dinámicas y estáticas puede ser ambigua, así que utiliza `ldd` para comprobar si el binario resultante incluye una dependencia dinámica no deseada en `libdd_profiling.so`.
+- Vuelve a crear tu aplicación utilizando la librería estática. En algunos sistemas de compilación, la elección entre bibliotecas dinámicas y estáticas puede ser ambigua, así que utiliza `ldd` para comprobar si el binario resultante incluye una dependencia dinámica no deseada en `libdd_profiling.so`.
 - Copia `libdd_profiling.so` en uno de los directorios de la ruta de búsqueda para el enlazador dinámico. Puedes obtener una lista de estos directorios ejecutando `ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` en la mayoría de los sistemas Linux.
 
 

@@ -1,5 +1,6 @@
 ---
 title: Automatic Faulty Cloud & SaaS API Detection
+description: "Detect third-party provider issues within minutes using Watchdog's monitoring of external APIs like AWS, Stripe, OpenAI, and other cloud services."
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-outage-detection/"
   tag: "Blog"
@@ -47,7 +48,6 @@ Watchdog monitors the status of the following external providers' APIs:
 | Mixpanel | api.mixpanel.com |
 | OpenAI | *.openai.com|
 | PagerDuty | api.pagerduty.com |
-| Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
 | Render | api.render.com |
 | SendGrid | *.sendgrid.com |
 | ServiceNow | *.service-now.com |

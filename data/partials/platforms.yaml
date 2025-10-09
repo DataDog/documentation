@@ -14,7 +14,7 @@ platforms:
   - name: sccm
     link: "agent/basic_agent_usage/sccm/"
     image: "platform_sccm.png"
-    category: "Host-based"
+    category: "configuration_management"
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macos.png"
@@ -56,9 +56,13 @@ platforms:
     image: "platform_saltstack.png"
     category: "configuration_management"
   - name: foundry
-    link: "https://app.datadoghq.com/fleet/install-agent/latest?platform=cloud_foundry"
+    link: "integrations/guide/cloud-foundry-setup/"
     image: "platform_cloud_foundry.png"
     category: "Cloud platforms"
+  - name: Amazon ECS
+    link: "/containers/amazon_ecs/"
+    image: "platform_ecs.png" 
+    category: "Container platforms"
   # - name: source
   #   link: "agent/basic_agent_usage/source/"
   #   image: "platform_fromsource.png"

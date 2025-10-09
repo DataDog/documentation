@@ -44,7 +44,7 @@ DogStatsD está disponible en Docker Hub y GCR:
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">Docker Hub está sujeto a límites en la tasa de extracción de imágenes. Si no eres cliente de Docker Hub, Datadog recomienda que actualices tu configuración del Datadog Agent y del Cluster Agent para extraer desde GCR o ECR. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambio de tu registro de contenedores</a>.</div>
+<div class="alert alert-danger">Docker Hub está sujeto a límites en la tasa de extracción de imágenes. Si no eres cliente de Docker Hub, Datadog recomienda que actualices tu configuración del Datadog Agent y del Cluster Agent para extraer desde GCR o ECR. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambio de tu registro de contenedores</a>.</div>
 
 ## Cómo funciona
 
@@ -111,8 +111,8 @@ Se añaden las siguientes etiquetas para [Docker][3]. Es importante señalar que
 
 La detección del origen en entornos distintos a Kubernetes se basa en una extensión del protocolo DogStatsD en [Datagram Format and Shell Usage][2]. Para habilitar la función en el Agent, establece la variable de entorno `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` en `true`.
 
-<div class="alert alert-warning">
-  Por defecto, la detección del origen está activada en todos los clientes DogStatsD, pero no está activada por defecto en el Datadog Agent. Para desactivar la detección del origen en un cliente, consulta la documentación de la biblioteca DogStatsD específica que estás utilizando.
+<div class="alert alert-danger">
+  Por defecto, la detección del origen está activada en todos los clientes DogStatsD, pero no está activada por defecto en el Datadog Agent. Para desactivar la detección del origen en un cliente, consulta la documentación de la librería DogStatsD específica que estás utilizando.
 </div>
 
 **Nota**: La detección del origen no es compatible con entornos de Fargate.
@@ -193,7 +193,7 @@ Se añaden las siguientes etiquetas para [Kubernetes][8]. Es importante señalar
             enabled: true
     ```
 
-**Notas**: 
+**Notas**:
 * Una alternativa a UDP son los [sockets de dominio UNIX][5].
 * La detección del origen con UDP puede utilizar el ID del pod como ID de entidad.
 
@@ -266,7 +266,7 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 
 ### Cliente DogStatsD
 
-Instala la biblioteca cliente DogStatsD con tu lenguaje preferido y configúrala para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
+Instala la librería cliente DogStatsD con tu lenguaje preferido y configúrala para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
 
 #### Instalar el cliente de DogStatsD
 
@@ -343,7 +343,7 @@ dotnet add package DogStatsD-CSharp-Client
 {{< /programming-lang-wrapper >}}
 
 
-#### Instanciar el cliente de DogStatsD 
+#### Instanciar el cliente de DogStatsD
 
 Una vez instalado tu cliente DogStatsD, instálalo en tu código:
 {{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
@@ -361,7 +361,7 @@ options = {
 initialize(**options)
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Por defecto, las instancias del cliente Python de DogStatsD (incluyendo la instancia global <code>statsd</code>) no pueden ser compartidas entre procesos, pero son thread-safe. Debido a esto, el proceso principal y cada proceso secundario deben crear sus propias instancias de cliente o el almacenamiento en buffer debe ser explícitamente deshabilitado configurando <code>disable_buffering</code> como <code>True</code>. Para ver más detalles, consulta la documentación sobre <a href="https://datadogpy.readthedocs.io/en/latest/#Datadog-DogStatsD">datadog.dogstatsd</a>.
 </div>
 

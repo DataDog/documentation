@@ -63,6 +63,55 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "BulkDeleteDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk delete datastore items returns \"OK\" response"
+    }
+  ],
+  "BulkWriteDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk write datastore items returns \"OK\" response"
+    }
+  ],
+  "CreateDatastore": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Create datastore returns \"OK\" response"
+    }
+  ],
+  "DeleteDatastoreItem": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Delete datastore item returns \"OK\" response"
+    }
+  ],
+  "UpdateDatastoreItem": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Update datastore item returns \"OK\" response"
+    }
+  ],
+  "UpdateDatastore": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Update datastore returns \"OK\" response"
+    }
+  ],
+  "CreateAzureScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create azure scan options returns \"Created\" response"
+    }
+  ],
   "UpdateAwsScanOptions": [
     {
       "group": "agentless_scanning",
@@ -179,6 +228,11 @@
       "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_2836340212",
+      "description": "Send several pipeline events returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [
@@ -314,7 +368,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Create Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "CreateArbitraryCostRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create arbitrary cost rule returns \"OK\" response"
+    }
+  ],
+  "CreateRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create ruleset returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -335,7 +403,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Update Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "UpdateArbitraryCostRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update arbitrary cost rule returns \"OK\" response"
+    }
+  ],
+  "UpdateRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update ruleset returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -343,6 +425,13 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
+  "ValidateQuery": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Validate query returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -377,14 +466,14 @@
     {
       "group": "dora_metrics",
       "suffix": "",
-      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+      "description": "Send a deployment event returns \"OK\" response"
     }
   ],
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "_1768887482",
-      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -657,6 +746,20 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentNotificationRule": [
+    {
+      "group": "incidents",
+      "suffix": "_3029800608",
+      "description": "Create incident notification rule returns \"Created\" response"
+    }
+  ],
+  "CreateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create incident notification template returns \"Created\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -676,6 +779,20 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationRule": [
+    {
+      "group": "incidents",
+      "suffix": "_1207309457",
+      "description": "Update incident notification rule returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update incident notification template returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -904,6 +1021,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1181818787",
+      "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -925,6 +1047,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1400905713",
+      "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [
@@ -1037,6 +1164,20 @@
       "group": "opsgenie_integration",
       "suffix": "",
       "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
+  "CreateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Create Org Connection returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Update Org Connection returns \"OK\" response"
     }
   ],
   "UpdateOrgConfig": [
@@ -1221,6 +1362,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2899714190",
+      "description": "Create a detection rule with detection method 'sequence_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_3367706049",
       "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
     },
@@ -1391,6 +1537,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_4152369508",
+      "description": "Validate a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringSuppression": [

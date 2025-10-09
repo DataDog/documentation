@@ -11,7 +11,7 @@ further_reading:
 title: Inicio de sesión único con SAML
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El sitio Datadog for Government sólo admite inicio de sesión SAML.</div>
+<div class="alert alert-danger">El sitio Datadog for Government sólo admite inicio de sesión SAML.</div>
 {{< /site-region >}}
 
 ## Información general
@@ -134,7 +134,7 @@ Es posible que algunas organizaciones no deseen invitar a todos sus usuarios a D
 
 Los administradores pueden establecer la función por defecto de los nuevos usuarios JIT. El rol por defecto es **Standard** (Estándar), pero puedes elegir añadir nuevos usuarios JIT como **Read-Only** (Solo lectura), **Administrators** (Administradores) o cualquier rol personalizado.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Importante:</strong> Si la asignación de roles está activada, tiene prioridad sobre los roles configurados durante el aprovisionamiento de JIT. Sin las sentencias de atributos de grupo adecuadas, los usuarios podrían quedarse sin roles and perder el acceso to Datadog. Para evitar que los usuarios queden bloqueados después del aprovisionamiento de JIT, asegúrate de revisar tus definiciones de asignación y check tus aserciones antes de activar las asignaciones y JIT.
 </div>
 

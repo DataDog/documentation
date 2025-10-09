@@ -34,6 +34,9 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 
 If you're new to IDP, start with the [Getting Started guide][5], which walks through setup and basic usage.
 
+{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
+{{< /callout >}}
+
 ## Common use cases
 
 {{< whatsnext desc=" " >}}
@@ -65,9 +68,6 @@ Use [Datadog Teams][6] to enable team-based features in IDP:
 If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
 {{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams" >}}
-{{< /callout >}}
-
-{{< callout url="https://www.datadoghq.com/product-preview/teams-hierarchy/" d_target="#signupModal" btn_hidden="false" header="Join the preview for the Teams hierarchy feature" >}}
 {{< /callout >}}
 
 

@@ -1,5 +1,6 @@
 ---
 title: List Widget
+description: Display filterable lists of events and issues from logs, RUM, events, and other sources in dashboard widgets.
 widget_type: list_stream
 further_reading:
 - link: "/dashboards/graphing_json/"

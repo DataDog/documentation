@@ -4,13 +4,13 @@ aliases:
 title: Errores de conexión de APM
 ---
 
-Si la aplicación con la biblioteca de rastreo no puede alcanzar el Datadog Agent, busca errores de conexión en los [logs de inicio del rastreador][1] o [logs de depuración del rastreador][2], que puedes encontrar con tus logs de aplicación.
+Si la aplicación con la librería de rastreo no puede alcanzar el Datadog Agent, busca errores de conexión en los [logs de inicio del rastreador][1] o [logs de depuración del rastreador][2], que puedes encontrar con tus logs de aplicación.
 
 ## Errores que indican un problema de conexión de APM
 
 Si ves estos mensajes, significa que tus trazas (traces) no se están enviando al Datadog Agent.
 
-### Errores de la biblioteca de rastreo
+### Errores de la librería de rastreo
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 
@@ -171,11 +171,11 @@ APM Agent
 ```
 
 ## Solucionar problemas de conexión
-Tanto si la biblioteca de rastreo o el Datadog Agent muestran el error, hay algunas formas de solucionar el problema.
+Tanto si la librería de rastreo o el Datadog Agent muestran el error, hay algunas formas de solucionar el problema.
 
 ### Configuraciones basadas en host
 
-Si tu aplicación y el Datadog Agent no están en contenedores, la aplicación con la biblioteca de rastreo debería estar intentando enviar trazas a `localhost:8126` o `127.0.0.1:8126`, porque ahí es donde el Datadog Agent está escuchando.
+Si tu aplicación y el Datadog Agent no están en contenedores, la aplicación con la librería de rastreo debería estar intentando enviar trazas a `localhost:8126` o `127.0.0.1:8126`, porque ahí es donde el Datadog Agent está escuchando.
 
 Si el Datadog Agent muestra que APM no está escuchando, comprueba si el puerto entra en conflicto con el puerto 8126, que es el que utiliza por defecto el componente APM del Datadog Agent.
 

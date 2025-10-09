@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Internal Developer Portal
+description: Unify software metadata, telemetry, and workflows with Software Catalog, Scorecards, Self Service Actions, and engineering reports.
 aliases: 
   - /getting_started/service_catalog
   - /getting_started/software_catalog/

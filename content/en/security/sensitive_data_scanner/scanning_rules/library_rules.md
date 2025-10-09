@@ -15,7 +15,7 @@ Human name PII detection in logs using machine learning is in Preview. To enroll
 
 ## Overview
 
-The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
+The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. The recommended keywords are used by default when library rules are created.
 
 These rules can also be viewed in Datadog:
 

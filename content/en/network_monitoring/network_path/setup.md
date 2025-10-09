@@ -15,7 +15,6 @@ further_reading:
 ---
 
 
-
 ## Overview
 
 Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
@@ -306,9 +305,9 @@ spec:
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
-Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
+Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [exclude CIDR ranges](#exclude-cidr-ranges) to filter specific network ranges.
 
-<div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+<div class="alert alert-danger"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
 
 
 {{< tabs >}}
@@ -348,6 +347,17 @@ Agent `v7.59+` is required.
         ## Recommendation: leave at default
         #
         # workers: <NUMBER OF WORKERS> # default 4
+
+        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+        # pathtest_interval: 10m
+
+        # @param pathtest_ttl - integer - optional - default: 35m
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+        # The TTL is reset each time the connection is seen again.
+        # pathtest_ttl: 35m
+
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -391,6 +401,16 @@ Agent `v7.61+` is required.
         ## Recommendation: leave at default
         #
         # workers: <NUMBER OF WORKERS> # default 4
+
+        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+        # pathtest_interval: 10m
+
+        # @param pathtest_ttl - integer - optional - default: 35m
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+        # The TTL is reset each time the connection is seen again.
+        # pathtest_ttl: 35m
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -423,6 +443,15 @@ datadog:
     ## The `workers` refers to the number of concurrent workers available for network path execution.
     #
     # workers: 4
+    #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+    # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+    # pathtest_interval: 10m
+
+    # @param pathtest_ttl - integer - optional - default: 35m
+    # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+    # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+    # The TTL is reset each time the connection is seen again.
+    # pathtest_ttl: 35m
 
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
@@ -431,6 +460,32 @@ datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Exclude CIDR ranges
+
+Classless Inter-Domain Routing (CIDR) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
+
+- Reduce monitoring overhead for internal networks
+- Focus on external traffic patterns
+- Exclude known infrastructure ranges that don't require monitoring
+
+To exclude specific CIDR ranges from network traffic paths, configure the following in your `/etc/datadog-agent/datadog.yaml` file:
+
+```yaml
+network_path:
+    connections_monitoring:
+        enabled: true # enable network path collection
+    collector:
+        source_excludes:
+            "10.0.0.0/8":
+                - "*" # all ports
+        dest_excludes:
+            "10.0.0.0/8":
+                - "*" # all ports
+            "8.8.8.8":
+                - "53" # dns
+                - "33434-33464" # traceroute range
+```
 
 ## Troubleshooting
 

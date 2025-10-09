@@ -71,7 +71,7 @@ tile:
 
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 このインテグレーションはメンテナンスモードで、Python 2 でのみ動作します。
 v7.37 以降の Agent には含まれていませんが、:6 のバグフィックスリリースには引き続き含まれます。
 </div>

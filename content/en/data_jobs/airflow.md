@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Apache Airflow
+description: "Monitor Apache Airflow DAG workflows with Data Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
 is_beta: true
 private: true
 further_reading:
@@ -31,7 +32,7 @@ To try the preview for Airflow monitoring, follow the setup instructions below.
 
 To get started, follow the instructions below.
 
-1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
+1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow dependencies are managed:
 
     For **Airflow 2.7 or later**:
 
@@ -183,7 +184,7 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3]
 
 {{% tab "Astronomer" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
@@ -243,7 +244,7 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 

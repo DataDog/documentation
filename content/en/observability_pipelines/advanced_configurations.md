@@ -26,11 +26,11 @@ further_reading:
 
 ## Overview
 
-This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker and how to [enable the liveness and readiness probe](#enable-liveness-and-readiness-probe).
+This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker and how to [enable the health check endpoint and the liveness and readiness probes](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
 
 ## Bootstrap Options
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>/DD_OP_DATA_DIR/config</code>.
+<div class="alert alert-danger">All configuration file paths specified in the pipeline need to be under <code>/DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
@@ -104,9 +104,13 @@ The following is a list of bootstrap options, their related pipeline environment
 : <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
 : <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
 
-## Enable liveness and readiness probe
+## Enable the health check endpoint and the liveness and readiness probes
 
-Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running. To expose the `/health` endpoint, you must set `DD_OP_API_ENABLED` to `true` and set the `DD_OP_API_ADDRESS` to `0.0.0.0:8686`. An example configuration:
+Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running.
+
+For Kubernetes, the liveness and readiness probes are already enabled in the [helm chart][9] and [values.yaml][10] file.
+
+For other installations such as VM-based ones, you must set `DD_OP_API_ENABLED` to `true` and set `DD_OP_API_ADDRESS` to `0.0.0.0:8686` to expose the `/health` endpoint. An example configuration:
 
 ```
 api:
@@ -126,3 +130,5 @@ api:
 [6]: /remote_configuration
 [7]: /observability_pipelines/set_up_pipelines/
 [8]: /observability_pipelines/install_the_worker/worker_commands/#run-tap-or-top-the-worker
+[9]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L33-L40
+[10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329

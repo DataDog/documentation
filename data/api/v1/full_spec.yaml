@@ -2982,6 +2982,7 @@ components:
       - ci_tests
       - ci_pipelines
       - incident_analytics
+      - product_analytics
       example: logs
       type: string
       x-enum-varnames:
@@ -2996,6 +2997,7 @@ components:
       - CI_TESTS
       - CI_PIPELINES
       - INCIDENT_ANALYTICS
+      - PRODUCT_ANALYTICS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3307,10 +3309,8 @@ components:
       - value
       type: object
     FunnelWidgetDefinition:
-      description: 'The funnel visualization displays a funnel of user sessions that
+      description: The funnel visualization displays a funnel of user sessions that
         maps a sequence of view navigation and user interaction in your application.
-
-        '
       properties:
         requests:
           description: Request payload used to query items.
@@ -3395,15 +3395,19 @@ components:
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         cloud_run_revision_filters:
-          description: 'Limit the Cloud Run revisions that are pulled into Datadog
-            by using tags.
+          deprecated: true
+          description: 'List of filters to limit the Cloud Run revisions that are
+            pulled into Datadog by using tags.
 
             Only Cloud Run revision resources that apply to specified filters are
-            imported into Datadog.'
+            imported into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=cloud_run_revision`'
           example:
           - $KEY:$VALUE
           items:
-            description: Cloud Run Filters
+            description: Cloud Run revision filters
             type: string
           type: array
         errors:
@@ -3416,11 +3420,16 @@ components:
             type: string
           type: array
         host_filters:
-          description: 'Limit the GCE instances that are pulled into Datadog by using
-            tags.
+          deprecated: true
+          description: 'A comma-separated list of filters to limit the VM instances
+            that are pulled into Datadog by using tags.
 
-            Only hosts that match one of the defined tags are imported into Datadog.'
-          example: key:value,filter:example
+            Only VM instance resources that apply to specified filters are imported
+            into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=gce_instance`'
+          example: $KEY1:$VALUE1,$KEY2:$VALUE2
           type: string
         is_cspm_enabled:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
@@ -3441,6 +3450,15 @@ components:
             account.'
           example: true
           type: boolean
+        monitored_resource_configs:
+          description: Configurations for GCP monitored resources.
+          example:
+          - filters:
+            - $KEY:$VALUE
+            type: gce_instance
+          items:
+            $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key
@@ -3473,6 +3491,37 @@ components:
       items:
         $ref: '#/components/schemas/GCPAccount'
       type: array
+    GCPMonitoredResourceConfig:
+      description: Configuration for a GCP monitored resource.
+      properties:
+        filters:
+          description: 'List of filters to limit the monitored resources that are
+            pulled into Datadog by using tags.
+
+            Only monitored resources that apply to specified filters are imported
+            into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: A monitored resource filter
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/GCPMonitoredResourceConfigType'
+      type: object
+    GCPMonitoredResourceConfigType:
+      description: The GCP monitored resource type. Only a subset of resource types
+        are supported.
+      enum:
+      - cloud_function
+      - cloud_run_revision
+      - gce_instance
+      example: gce_instance
+      type: string
+      x-enum-varnames:
+      - CLOUD_FUNCTION
+      - CLOUD_RUN_REVISION
+      - GCE_INSTANCE
     GeomapWidgetDefinition:
       description: This visualization displays a series of values by country on a
         world map.
@@ -4951,9 +5000,7 @@ components:
       description: 'The list stream visualization displays a table of recent events
         in your application that
 
-        match a search criteria using user-defined columns.
-
-        '
+        match a search criteria using user-defined columns.'
       properties:
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
@@ -5861,9 +5908,7 @@ components:
             line.
           example: 'rule_name_1 foo
 
-            rule_name_2 bar
-
-            '
+            rule_name_2 bar'
           type: string
         support_rules:
           default: ''
@@ -5871,9 +5916,7 @@ components:
             line.
           example: 'rule_name_1 foo
 
-            rule_name_2 bar
-
-            '
+            rule_name_2 bar'
           type: string
       required:
       - match_rules
@@ -7190,9 +7233,7 @@ components:
 
 
         This field is in preview. The draft value is only available to customers with
-        the feature enabled.
-
-        '
+        the feature enabled.'
       enum:
       - draft
       - published
@@ -9638,7 +9679,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -9880,7 +9921,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -10040,7 +10081,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -14211,9 +14252,7 @@ components:
       - LG
     SplitGraphWidgetDefinition:
       description: 'The split graph widget allows you to create repeating units of
-        a graph - one for each value in a group (for example: one per service)
-
-        '
+        a graph - one for each value in a group (for example: one per service)'
       properties:
         has_uniform_y_axes:
           description: Normalize y axes across graphs
@@ -14649,6 +14688,11 @@ components:
         extractedValuesFromScript:
           description: Generate variables using JavaScript.
           type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -14705,6 +14749,11 @@ components:
     SyntheticsAPIWaitStep:
       description: The Wait step used in a Synthetic multi-step API test.
       properties:
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         name:
           description: The name of the step.
           example: Example step name
@@ -15321,9 +15370,7 @@ components:
 
             rkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtp
 
-            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
-
-            '
+            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE'
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthSigv4Type'
@@ -17519,6 +17566,11 @@ components:
           description: Allows loading insecure content for an HTTP request in an API
             test.
           type: boolean
+        blockedRequestPatterns:
+          description: Array of URL patterns to block.
+          items:
+            type: string
+          type: array
         checkCertificateRevocation:
           description: For SSL tests, whether or not the test should fail on revoked
             certificate in stapled OCSP.
@@ -24515,7 +24567,7 @@ components:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n
             \ - A line type: dashed, solid, or bold\nIn this case of a Distribution
-            widget, this can be set to be `x_axis_percentile`.\n"
+            widget, this can be set to be `x_axis_percentile`."
           example: error dashed
           type: string
         label:
@@ -28017,6 +28069,7 @@ paths:
         type: safe
   /api/v1/integration/aws:
     delete:
+      deprecated: true
       description: Delete a Datadog-AWS integration matching the specified `account_id`
         and `role_name parameters`.
       operationId: DeleteAWSAccount
@@ -28066,6 +28119,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS integrations available in your Datadog organization.
       operationId: ListAWSAccounts
       parameters:
@@ -28119,6 +28173,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: 'Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
@@ -28191,6 +28246,7 @@ paths:
             }}"}'
         type: unsafe
     put:
+      deprecated: true
       description: Update a Datadog-Amazon Web Services integration.
       operationId: UpdateAWSAccount
       parameters:
@@ -28263,6 +28319,7 @@ paths:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
     get:
+      deprecated: true
       description: List all namespace rules for a given Datadog-AWS integration. This
         endpoint takes no arguments.
       operationId: ListAvailableAWSNamespaces
@@ -28422,6 +28479,7 @@ paths:
         type: unsafe
   /api/v1/integration/aws/filtering:
     delete:
+      deprecated: true
       description: Delete a tag filtering entry.
       operationId: DeleteAWSTagFilter
       requestBody:
@@ -28466,6 +28524,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: Get all AWS tag filters.
       operationId: ListAWSTagFilters
       parameters:
@@ -28507,6 +28566,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Set an AWS tag filter.
       operationId: CreateAWSTagFilter
       requestBody:
@@ -28557,6 +28617,7 @@ paths:
         type: unsafe
   /api/v1/integration/aws/generate_new_external_id:
     put:
+      deprecated: true
       description: Generate a new AWS external ID for a given AWS account ID and role
         name pair.
       operationId: CreateNewAWSExternalID
@@ -28648,6 +28709,7 @@ paths:
       x-undo:
         type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
       operationId: ListAWSLogsIntegrations
@@ -28800,6 +28862,7 @@ paths:
         type: safe
   /api/v1/integration/aws/logs/services:
     get:
+      deprecated: true
       description: Get the list of current AWS services that Datadog offers automatic
         log collection. Use returned service IDs with the services parameter for the
         Enable an AWS service log collection API endpoint.
@@ -28845,6 +28908,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Enable automatic log collection for a list of services. This should
         be run after running `CreateAWSLambdaARN` to save the configuration.
       operationId: EnableAWSLogServices
@@ -35734,7 +35798,7 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/search:
     get:
-      description: Search for Synthetic tests and Test Suites.
+      description: Search for Synthetic tests.
       operationId: SearchTests
       parameters:
       - description: The search query.
@@ -35747,12 +35811,6 @@ paths:
           response.
         in: query
         name: include_full_config
-        required: false
-        schema:
-          type: boolean
-      - description: If true, returns suites instead of tests.
-        in: query
-        name: search_suites
         required: false
         schema:
           type: boolean
@@ -39574,9 +39632,7 @@ paths:
                 summary: Multi Raw Messages
                 value: 'hello
 
-                  world
-
-                  '
+                  world'
               simple-raw-message:
                 description: 'Submit log string. Log attributes can be passed as query
                   parameters in the URL. This enables the addition of tags or the

@@ -1,5 +1,6 @@
 ---
 title: Advanced setup for Datadog Operator
+description: Advanced configuration and deployment options for the Datadog Operator on Kubernetes and OpenShift
 aliases:
  - /agent/guide/operator-advanced
 further_reading:

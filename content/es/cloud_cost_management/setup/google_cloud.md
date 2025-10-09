@@ -29,7 +29,7 @@ Para utilizar Google Cloud Cost Management en Datadog, sigue estos pasos:
 Ve a [Configuración][3] y selecciona una integración Google Cloud Platform.
 Si no ves la cuenta de servicio que buscas en la lista, ve a la [integración Google Cloud Platform][4] para configurarla.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración Datadog Google Cloud Platform permite a Cloud Cost monitorizar automáticamente todos los proyectos a los que esta cuenta de servicio tiene acceso.
 Para limitar los hosts de monitorización de infraestructuras a estos proyectos, aplica etiquetas (tags) a los hosts. Luego, decide si las etiquetas deben incluirse o excluirse de la monitorización, en la sección <strong>Limitar los filtros para la recopilación de métricas</strong> de la página de la integración.
 </div>
@@ -57,7 +57,7 @@ Los siguientes permisos permiten a Datadog acceder a la exportación de la factu
   2. Habilita la facturación en tu proyecto para todas las transferencias.
 
 - Habilita el [servicio de transferencia de datos de BigQuery][5].
-  1. Abre la página de la API de transferencia de datos de BigQuery en la biblioteca de la API.
+  1. Abre la página de la API de transferencia de datos de BigQuery en la librería de la API.
   2. En el menú desplegable, selecciona el proyecto que contiene la cuenta de servicio.
   3. Haz clic en el botón ENABLE (Habilitar).
 

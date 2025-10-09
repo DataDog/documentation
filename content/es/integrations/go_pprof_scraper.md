@@ -58,7 +58,7 @@ tile:
 
 Este check recopila perfiles de aplicaciones Go que exponen el endpoint [`/debug/pprof`][1].
 
-**NOTA**: Es preferible instrumentar servicios con la biblioteca de clientes de creación de perfiles [dd-trace-go][2]. La biblioteca de clientes
+**NOTA**: Es preferible instrumentar servicios con la librería de clientes de creación de perfiles [dd-trace-go][2]. La librería de clientes
 ofrece una mejor integración con otros servicios de Datadog, como por ejemplo a través de [zonas de código y filtrado del endpoint][3].
 Utiliza esta integración para servicios cuyo código fuente no controles.
 

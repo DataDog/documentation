@@ -42,7 +42,7 @@ Alternativamente, configura estas variables de entorno en tu configuración del 
 
 {{< code-block collapsible="true" lang="yaml" >}}
 
-DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true
 DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
@@ -70,7 +70,7 @@ Alternativamente, configura estas variables de entorno en tu configuración del 
 
 {{< code-block collapsible="true" lang="yaml" >}}
 
-DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true
 DD_APM_PEER_TAGS_AGGREGATION=true
 DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
 
@@ -106,7 +106,7 @@ exporters:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
 
 {{< /code-block >}}
 
@@ -161,9 +161,9 @@ Si la etiqueta con mayor prioridad, como `peer.db.name`, no se detecta como part
 
 Con los servicios inferidos, las dependencias de servicios se detectan automáticamente a partir de los atributos de tramo existentes. Como resultado, no es necesario cambiar los nombres de los servicios (utilizando la etiqueta `service`) para identificar estas dependencias.
 
-Habilita `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` para asegurarte de que ninguna integración Datadog defina nombres de servicios diferentes del nombre global del servicio por defecto. Esto también mejora la forma en que las conexiones servicio-a-servicio y los servicios inferidos son representados en las visualizaciones de Datadog, a través de todos los lenguajes de bibliotecas de rastreo e integraciones compatibles.
+Habilita `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` para asegurarte de que ninguna integración Datadog defina nombres de servicios diferentes del nombre global del servicio por defecto. Esto también mejora la forma en que las conexiones servicio-a-servicio y los servicios inferidos son representados en las visualizaciones de Datadog, a través de todos los lenguajes de librerías de rastreo e integraciones compatibles.
 
-<div class="alert alert-warning">La activación de esta opción puede afectar a métricas de APM, métricas de tramos personalizadas, análisis de trazas (traces), filtros de retención, análisis de datos confidenciales, monitores, dashboards o notebooks existentes que hacen referencia a los antiguos nombres de servicios. Actualiza estos recursos para utilizar la etiqueta global de servicio por defecto (<code>servicio:&lt;DD_SERVICE&gt;)</code>.</div>
+<div class="alert alert-danger">La activación de esta opción puede afectar a métricas de APM, métricas de tramos personalizadas, análisis de trazas (traces), filtros de retención, análisis de datos confidenciales, monitores, dashboards o notebooks existentes que hacen referencia a los antiguos nombres de servicios. Actualiza estos recursos para utilizar la etiqueta global de servicio por defecto (<code>servicio:&lt;DD_SERVICE&gt;)</code>.</div>
 
 Para obtener instrucciones sobre cómo eliminar servicios anulados y migrar a servicios inferidos, consulta la guía [Anulación de servicios][4].
 

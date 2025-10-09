@@ -29,7 +29,7 @@ El recorrido guiado te ayuda a lo largo de diferentes pasos para que puedas:
 
 ## Requisitos
 
-<div class="alert alert-warning">El recorrido guiado se encuentra en fase beta pública y está sujeto a cambios. En el transcurso del tiempo habrá nuevas compatibilidades para lenguajes e infraestructuras.</div>
+<div class="alert alert-danger">El recorrido guiado se encuentra en fase beta pública y está sujeto a cambios. En el transcurso del tiempo habrá nuevas compatibilidades para lenguajes e infraestructuras.</div>
 
 Para utilizar este recorrido guiado necesitas:
 * Un servicio Go que se ejecute en Kubernetes.

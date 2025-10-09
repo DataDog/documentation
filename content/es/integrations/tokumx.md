@@ -71,7 +71,7 @@
 
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta integración está en modo de mantenimiento. Sólo puede funcionar con Python 2.
 No se incluye con las versiones del Agent posteriores a la v7.37. Las versiones de corrección de errores del Agent 6 seguirán incluyéndola.
 </div>

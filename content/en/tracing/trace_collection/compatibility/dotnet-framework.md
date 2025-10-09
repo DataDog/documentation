@@ -30,6 +30,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.8.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.8                     |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.7.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
+| 4.7.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.7                     |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.6.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | latest                     |                     |
@@ -40,9 +41,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 
 Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
-<div class="alert alert-info">
-  <div class="alert-info"><b>Note:</b> When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
-  </div>
+<div class="alert alert-info">When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
 </div>
 
 ## Supported processor architectures
@@ -72,7 +71,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
 | Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                    | `CosmosDb`           |
+| Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                           | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
