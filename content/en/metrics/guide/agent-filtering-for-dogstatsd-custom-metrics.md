@@ -30,9 +30,23 @@ Agent-side filtering enables you to filter out unused or unwanted DogStatsD cust
 
 Filtering is performed at the Agent level but centrally managed through the Datadog UI, giving teams full visibility and control. You can create, update, and manage filtering policies in Datadog, streamlining metric governance while maintaining transparency.
 
+Creating and updating filtering policies requires the [`metric_tags_write`][1] RBAC permission. All users can view filtering policies.
+
+## Prerequisites
+
+- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended)
+- Ensure that your RBAC permissions include [`org_management`][2] and that [Remote Configuration][3] is enabled for your organization.
+- Ensure that your RBAC permissions include [`api_keys_write`][4] and that the [Remote Configuration capability is enabled on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, an Agent restart is required for Remote Configuration enablement to take effect.
+
+{{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
+
 ## Create a metric filtering policy
 
-You can create a metric filtering policy from the [Metrics Settings page][1] or the [Metrics Summary page][2].
+You can create a metric filtering policy from the [Metrics Settings page][6] or the [Metrics Summary page][7].
+
+Metric filtering policies are applied to all of the Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
+
+Policy updates are deployed to Agents in ~1min (up to 2 minutes).
 
 ### From the Metrics Settings page
 
@@ -184,5 +198,10 @@ This initial preview release includes the following limitations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/metric/settings/policies
-[2]: https://app.datadoghq.com/metric/summary
+[1]: /account_management/rbac/permissions/#metrics
+[2]: /account_management/rbac/permissions/#access-management
+[3]: https://app.datadoghq.com/organization-settings/remote-config
+[4]: /account_management/rbac/permissions#api-and-application-keys
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: https://app.datadoghq.com/metric/summary
+[7]: https://app.datadoghq.com/metric/settings/policies
