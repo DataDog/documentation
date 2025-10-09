@@ -166,7 +166,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 1. In the [Google Cloud integration page][200], select **+ Add GCP Account**.
 2. Click **Quick Start**.
-3. Click **Copy** in the setup script section.
+3. Click **Copy** in the setup script section.<br>
    **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.  
 4. Click **Open Google Cloud Shell**, or go to [Google Cloud Shell][204].
 5. Paste the script into the shell prompt and run it.
