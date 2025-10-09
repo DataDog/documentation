@@ -16,40 +16,88 @@ further_reading:
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
-- Status
-- Date that each app was last modified
+- Tags
+- Date that the app was last modified
 - Whether the app is published
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the **My apps** toggle to see only apps that you created:
 
 {{< img src="service_management/app_builder/app-builder-my-apps.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
+## See what's possible with App Playground
+
+If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
+- Data fetching
+- Displaying query data in a table
+- Configuring a button to fire a query
+- Configuring the loading states for a component to reflect a query's loading state
+- Visualizing data in a graph
+
+To access the App Playground:
+1. From [App Builder][1], click **New App**. 
+1. Click **App Playground**.
+
 ## Create an app
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
+Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
-1. From [App Builder][1], click the [Blueprints][2] tab.
-1. Find the blueprint that you want to use and click **Preview**.
+1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint**.
+1. Find the blueprint that you want to use and click **View**.
 1. Click **Use Blueprint** to open the app blueprint.
 1. To change the app name and description, click the app name.
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
+
+### Build an app from a layout
+
+Choosing a layout creates an app as a table, form, or custom chart. 
+
+1. From [App Builder][1], click **New App**.
+1. Click **Start with Layout**.
+1. Select a layout. The pane on the right displays a preview of the app.
+1. Click **Use Layout**.
+1. To change the app name and description, click the app name.
+1. Each layout template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
+
+### Build an app from data
+
+You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
+
+1. From [App Builder][1], click **New App**. 
+1. Click **Start with Data**. 
+1. Choose an integration, then click **Continue**.
+1. Choose one or more actions. There is no limit to the number of actions you can choose. 
+1. Click **Create**.
+1. To change the app name and description, click the app name.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
+1. Each layout template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
 
 ### Create a custom app
 
-1. From [App Builder][1], click **New App**.
+If you don't want to use any of the methods above, you can create a new app from the blank App Builder canvas.
+
+1. From [App Builder][1], click **New App**. 
+1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
 1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab, then click the component or drag it onto the canvas.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add to a dashboard, notebook, or Self-Service Actions.
 
 ## Customize your app
 
@@ -57,7 +105,7 @@ Apps are made up of UI components and queries which interact with each other to 
 
 Basic customization:
 - To edit the **Name**, **Description**, or **Canvas Color** of your app, click the app name at the top left.
-- Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
+- Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 - To save your app, click **Save**.
 - When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
@@ -165,3 +213,6 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [12]: /service_management/app_builder/queries
 [13]: /service_management/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
+[15]: /actions/app_builder/build/#customize-your-app
+[16]: /getting_started/integrations/
+[17]: /actions/actions_catalog/
