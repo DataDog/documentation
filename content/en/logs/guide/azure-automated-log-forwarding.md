@@ -1,6 +1,8 @@
 ---
 title: Azure Automated Log Forwarding Setup
-private: true
+aliases:
+- /logs/guide/azure-logging-guide/
+- /logs/guide/azure-automated-logs-architecture/
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-azure-platform-logs/"
   tag: "Blog"
