@@ -96,7 +96,7 @@ Data Access Control is separate from the existing [Logs RBAC permissions][11] fe
 ### Software Delivery repository info (CI Visibility pipelines)
 
 * **Supported telemetry**: Only CI Visibility pipelines are supported. Test Optimizations tests are not yet supported.
-* **CI Logs**: CI Logs are part of the general Logs product and require a specific dataset.
+* **CI Logs**: CI Logs are stored in the Log Management product. To restrict the access to CI Logs, you need to create a Logs dataset.
 * **Supported dataset tags**: Only the following tags are supported:
   * `@git.repository_url`
   * `@git.repository.id`
