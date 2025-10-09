@@ -27,101 +27,7 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
 
-To get started, copy the example configuration file, remove the `.example` extension, and update it with your desired settings. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
-
-For complete configuration options, see the [example config][5] or use one of the environment-specific configurations below:
-
-{{% collapse-content title="Example config" level="h4" expanded=false id="example-config" %}}
-```yaml
-init_config:
-    ## @param min_collection_interval - number - optional - default: 60
-    ## Specifies how frequently we should probe the endpoint.
-    ## Min collection interval is defined in seconds.
-    #
-    # min_collection_interval: 60
-
-    ## @param timeout - integer - optional - default: 1000
-    ## Specifies how much time in milliseconds the traceroute should
-    ## wait for a response from each hop before timing out.
-    #
-    # timeout: 1000
-
-# Network Path integration is used to monitor individual endpoints.
-# Supported platforms are Linux and Windows. macOS is not supported yet.
-instances:
-  - ## @param hostname - string - required
-    ## Hostname or IP of the target endpoint to monitor via Network Path.
-    #
-    hostname: <HOSTNAME>
-
-    ## @param port - integer - optional
-    ## Port of the target endpoint to monitor via Network Path.
-    ## For UDP, we do not recommend setting the port since it can make probes less reliable.
-    ## If port is not set, a random port will be used.
-    #
-    # port: <PORT>
-
-    ## @param protocol - string - optional - default: UDP
-    ## Protocol used to monitor an endpoint via Network Path.
-    ## Available protocols: UDP, TCP, ICMP
-    #
-    # protocol: <PROTOCOL>
-
-    ## @param max_ttl - integer - optional - default: 30
-    ## Specifies the maximum number of hops (max time-to-live value) traceroute will probe.
-    #
-    # max_ttl: <PORT>
-
-    ## @param timeout - integer - optional - default: 1000
-    ## Specifies how much time in milliseconds the traceroute should
-    ## wait for a response from each hop before timing out.
-    #
-    # timeout: 1000
-
-    ## @param min_collection_interval - number - optional - default: 60
-    ## Specifies how frequently we should probe the endpoint.
-    ## Min collection interval is defined in seconds.
-    #
-    # min_collection_interval: 60
-
-    ## @param source_service - string - optional
-    ## Source service name.
-    #
-    # source_service: <SOURCE_SERVICE>
-
-    ## @param destination_service - string - optional
-    ## Destination service name.
-    #
-    # destination_service: <DESTINATION_SERVICE>
-
-    ## @param tcp_method - string - optional - default: syn
-    ## Traceroute method used to monitor an endpoint via Network Path
-    ## Available methods: syn, sack, prefer_sack, syn_socket (syn_socket only works on Windows OSes)
-    ## Note: Windows client versions only support syn_socket
-    #
-    # tcp_method: <METHOD>
-
-    ## @param traceroute_queries - integer - optional - default: 3
-    ## Number of traceroutes to send for each check run.
-    #
-    # traceroute_queries: 3
-
-    ## @param e2e_queries - integer - optional - default: 50
-    ## Number of end-to-end probes to send for each check run.
-    #
-    # e2e_queries: 50
-
-    ## @param tags - list of strings - optional
-    ## A list of tags to attach to every metric and service check emitted by this instance.
-    ##
-    ## Learn more about tagging at https://docs.datadoghq.com/tagging
-    #
-    # tags:
-    #   - <KEY_1>:<VALUE_1>
-    #   - <KEY_2>:<VALUE_2>
-```
-{{% /collapse-content %}}
-
+To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -210,8 +116,8 @@ Agent `v7.61+` is required.
 
   3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-<div class="alert alert-danger">
-In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example: </div>
+**Note**:
+In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example: 
 
 ```yaml
 init_config:
@@ -221,7 +127,7 @@ instances:
     protocol: TCP
     port: 443 # optional port number, default is 80
 ```
-<div class="alert alert-warning">In Windows Client OS environments, <a href="https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets">raw packets are not supported</a>. To work around this, set <code>protocol: TCP</code> and <code>tcp_method: syn_socket</code>. Agent <code>v7.67+</code> and <a href="https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror">Windows version 2004 (10.0; Build 19041) or later</a> are required. For example:</div>
+**Note**: In Windows Client OS environments, [raw packets][6] are not supported. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][7] are required. For example:
 
 ```yaml
 init_config:
@@ -232,6 +138,9 @@ instances:
     port: 443 # optional port number, default is 80
     tcp_method: syn_socket
 ```
+
+[6]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
+[7]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -353,7 +262,7 @@ To increase the number of workers, add the following configuration to your `data
 ##
 ## The level of concurrency has effects on the Agent's: RSS memory, CPU load, resource contention overhead, etc.
 #
-check_runners: 20
+check_runners: <NUMBER_OF_WORKERS>
 ```
 
 ### Network traffic paths (experimental)
@@ -585,5 +494,6 @@ If you encounter an error like the following:
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+
 
 
