@@ -106,7 +106,7 @@ If you need additional assistance, contact [Datadog support][6].
 
 `dd-trace` provides esbuild support in the form of an esbuild plugin. Starting from `dd-trace@5.69.0`, this plugin also provides support for IAST product on CommonJS bundled applications.
 
-Here’s an example of how one might use dd-trace with esbuild:
+Here's an example of how one might use dd-trace with esbuild:
 
 ```javascript
 // esbuild/esbuilder.js
@@ -137,7 +137,7 @@ To enable IAST when running the bundler, set the `DD_IAST_ENABLED` environment v
 DD_IAST_ENABLED=true node esbuild/esbuilder.js
 ```
 
-Because the tracer uses native modules, these must be included in the `external` list. Currently, native modules used by `dd-trace` are provided in packages prefixed with `@datadog`. You must also distribute a `node_modules` directory alongside the bundled application.
+Because the tracer uses native modules, these must be included in the `external` list. Native modules used by `dd-trace` are provided in packages prefixed with `@datadog`. You must also distribute a `node_modules` directory alongside the bundled application.
 
 To generate a minimal `node_modules` directory containing only the required native modules and their dependencies:
 
@@ -147,7 +147,7 @@ To generate a minimal `node_modules` directory containing only the required nati
 
 3. Copy the resulting `node_modules` directory to the application's output directory.
 
-```she
+```sh
 cd path/to/project
 npm ls @datadog/native-iast-taint-tracking
 # dd-trace@5.69.0
@@ -158,7 +158,7 @@ npm install @datadog/native-iast-taint-tracking@4.0.0
 cp -R ./node_modules path/to/bundle
 ```
 
-### Unsupported IAST Features
+### Unsupported IAST features
 
 IAST support for bundled applications has some limitations, which are listed below:
 
