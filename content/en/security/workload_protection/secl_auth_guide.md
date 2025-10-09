@@ -1,16 +1,9 @@
 ---
-title: Getting Started with SECL Custom Rules
+title: Writing custom rule expressions
 disable_toc: false
 ---
 
-This guide shows you how to write effective SECL (Security Language) rules for Datadog Workload Protection. The guide includes the following:
-
-- How agent rules and detection rules fit together
-- Practical workflow for authoring rules
-- Checklist of best practices
-- Set of drop-in example expressions for Linux, Windows, and cross-platform use cases
-- Recommendations for tagging and noise reduction
-- Safe rollout plan so your team can ship low-noise, high-signal detections with confidence
+This guide shows you how to write effective SECL (Security Language) rules for Datadog Workload Protection.
 
 ## SECL overview
 
@@ -85,40 +78,27 @@ When viewing the backend logic for a detection rule, do the following:
 
 ## Rule authoring tips
 
-- Always set os: filter in the rule YAML when using OS-specific fields:
-    
-  {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-  id: my_linux_rule
-  expression: exec.file.path == "/usr/bin/passwd"
-  filters:
-    - os == "linux"
-  {{< /code-block >}}
-- Prefer exact matches over regex. Use glob-style `~"/path/*"` or `**` for subfolders.
-- Use `in [...]` lists instead of long `OR` chains. It makes expressions faster and easier to read.
+- Always set the operating system (OS). Filter in the rule YAML when using OS-specific fields:  
+     
+    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+    id: my_linux_rule
+    expression: exec.file.path == "/usr/bin/passwd"
+    filters:
+        - os == "linux"
+    {{< /code-block >}}
 - Anchor on ancestry to reduce noise. Use `process.ancestors.file.name`.
-- Treat regex as last resort. Use globs or `in` where possible.
 - Use durations (for example, `> 5s`, `10m`, `2h`) to target narrow execution windows.
+- Use exact match (`==`) whenever possible as it results in lowest noise.
+- List membership (`in [...]`) is best for allowlists or controlled sets of values.
+- Use a glob match (`~"/path/*"`) for path families as it is safer and faster than regex.
+- Use regex (`=~`) only when globs/lists can't be used. Keep the regex expression as narrow as possible. As a rule of thumb, start with `==` or `in [...]`. Reach for regex only as a last resort.
+- Use negation (`not in [...]`, `!~`) to carve out exceptions explicitly (for example, trusted tools).
+- use CIDR operators (`in CIDR`, `not in CIDR`) for network boundaries.
 - Name rules by behavior, with a format that follows *What + Who + Context*.
 - Tag generously: `team`, `app`, `env`, `MITRE`, `severity`.
 
 
-## Operators and matchers
-
-Exact match (==) → Fastest, lowest noise. Always prefer.
-
-List membership (in [...]) → Best for allowlists or controlled sets of values.
-
-Glob match (~"/path/*") → Use for path families; safer and faster than regex.
-
-Regex (=~) → Only when globs/lists can’t solve it. Keep as narrow as possible.
-
-Negation (not in [...], !~) → Use to carve out exceptions explicitly (e.g., trusted tools).
-
-CIDR operators (in CIDR, not in CIDR) → Use for network boundaries.
-
-👉 Rule of thumb: Start with == or in [...]. Reach for regex only as a last resort.
-
-## Avoid common mistakes
+### Avoid common mistakes
 
 | Pattern                   | Explanation                                 |
 | ------------------------- | -------------------------------------------- |
@@ -126,43 +106,124 @@ CIDR operators (in CIDR, not in CIDR) → Use for network boundaries.
 | `fd.name contains "/"`    | Matches nearly every file I/O event.     |
 | `container.id != ""`      | Useful only if scoped with a more specific field. |
 
+## Common building blocks
 
-## Rule authoring framework
+### Triggers
 
-1. Define the attack vector:
-   - **Process Execution:** Unusual binaries, suspicious args.
-   - **File Access:** Unauthorized file reads/writes.
-   - **Network Activity:** Suspicious connections.
-   - **System Calls:** Abnormal kernel activity.
-2. Use platform-specific fields that provide meaningful context:
-   - Linux context:
-    {{< code-block lang="secl" disable_copy="true" collapsible="true" >}}
-    # High-value fields
-    process.name and process.args and process.user and process.pid
-    file.path and file.name and file.permissions
-    network.destination.ip and network.destination.port
-    {{< /code-block >}}
+- Linux: `exec`, `open`, `dns`, `connect`, `chmod`, `unlink`, `load_module`.
+- Windows: `exec`, `create`, `write`, `rename`, `set_key_value`, `create_key`.
+  
+### High-signal fields
 
-   - Windows context:
-3. 
-
-## Examples
-
-### Linux examples
+| Category       | Field Examples                                            |
+| -------------- | --------------------------------------------------------- |
+| **Process**    | `exec.file.path`, `process.ancestors.*`, `process.user`   |
+| **File**       | `open.file.path`, `*.rights/mode`, package metadata       |
+| **Network**    | `network.destination.ip`, `dns.question.name`, `in CIDR`  |
+| **Containers** | `container.id`, `container.created_at`, `Kubernetes tags` |
+| **Time**       | `process.created_at > 5s`                                 |
 
 
-### Windows examples
+### Operators and matchers
+
+| Type                  | Syntax                        |
+| --------------------- | ----------------------------- |
+| Equality / Comparison | `==`, `!=`, `>`, `<=`         |
+| List membership       | `in [...]`, `not in [...]`    |
+| Logical               | `&&`, \` (backtick)           |
+| Pattern matching      | `=~`, `!~`, glob `~"/path/*"` |
+| CIDR                  | `in CIDR`, `not in CIDR`      |
 
 
-### Cross-platform example
+## Example library
 
+### Linux
 
+#### Access to sensitive files (allowlist safe tools)
 
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
+process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
+{{< /code-block >}}
+
+#### Nginx or PHP spawning bash
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+exec.file.path == "/usr/bin/bash" &&
+(
+  process.ancestors.file.name == "nginx" ||
+  process.ancestors.file.name =~ "php*"
+)
+{{< /code-block >}}
+
+#### Suspicious IMDS access from container
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+connect &&
+network.destination.ip in ["169.254.169.254"] &&
+container.id != ""
+{{< /code-block >}}
+
+#### Kernel module loads outside maintenance window
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+load_module &&
+process.user != "root" &&
+process.ancestors.file.name not in ["modprobe", "insmod"]
+{{< /code-block >}}
+
+#### Sensitive file read shortly after start
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+open.file.path == "/etc/secret" &&
+process.file.name == "java" &&
+process.created_at > 5s
+{{< /code-block >}}
+
+#### Outbound to non-corporate IPs (CIDR allowlist)
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+connect &&
+network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
+{{< /code-block >}}
+
+### Windows
+
+#### Registry persistence via run key
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+set_key_value &&
+open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
+{{< /code-block >}}
+
+#### Unsigned Binary Launching PowerShell
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
+process.parent.file.path !~ "*\\Program Files*" &&
+process.user_sid != "S-1-5-18"
+{{< /code-block >}}
+
+### Cross-platform
+
+#### Crypto-miner indicators
+
+{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
+exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
+{{< /code-block >}}
 
 ## Rollout strategy
 
+| Phase        | Action                                                       |
+| ------------ | ------------------------------------------------------------ |
+| **Draft**    | Author rule with YAML metadata and proper filters.               |
+| **Simulate** | Use Agent in read-only/simulation mode.                   |
+| **Validate** | Run in staging workloads. Validate behavior with real events. |
+| **Tune**     | Add suppressions, `not in`, `container.image`, etc.          |
+| **Activate** | Ship to a subset of workloads (tagged via policy).            |
+| **Scale**    | Reference in backend detection rules for full rollout.        |
 
-## Recommended tagging
 
 
 [1]: https://app.datadoghq.com/security/workload-protection/policies

@@ -6400,7 +6400,7 @@ menu:
       parent: workload_protection
       identifier: workload_protection_agent_expressions
       weight: 204
-    - name: Getting Started with SECL Custom Rules
+    - name: Writing Custom Rule Expressions
       url: security/workload_protection/secl_auth_guide
       parent: workload_protection_agent_expressions
       identifier: workload_protection_secl_guide
