@@ -70,6 +70,9 @@ build-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js;
 
+llm-support-demo:
+	@node ./assets/scripts/llm-support-demo.js;
+
 # build .mdoc.md files, then watch for changes
 watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
