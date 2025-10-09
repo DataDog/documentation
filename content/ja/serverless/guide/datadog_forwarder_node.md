@@ -4,7 +4,7 @@ title: Datadog Forwarder を使用した Node.js サーバーレスアプリケ�
 
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/nodejs">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
 

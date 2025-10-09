@@ -52,7 +52,7 @@ Si la sección no existe, añádela. Una vez hecho esto, guarda el archivo y sal
 
 <div class="alert alert-info">`groups` se refieren a los grupos de clústeres a los que se asigna el rol. Para obtener más información, consulta [Default Roles and Role Bindings][8] en la documentación de Kubernetes.</div>
 
-<div class="alert alert-danger">Los errores tipográficos y de sintaxis pueden afectar a los permisos de todos los usuarios y roles de IAM actualizados en el archivo ConfigMap. Para evitar que esto ocurra, Cloudcraft recomienda añadir un linter de YAML a tu editor de texto.</div>
+<div class="alert alert-warning">Los errores tipográficos y de sintaxis pueden afectar a los permisos de todos los usuarios y roles de IAM actualizados en el archivo ConfigMap. Para evitar que esto ocurra, Cloudcraft recomienda añadir un linter de YAML a tu editor de texto.</div>
 
 ## Conceder acceso de sólo visualización al rol de IAM de Cloudcraft
 

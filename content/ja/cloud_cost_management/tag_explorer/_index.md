@@ -65,7 +65,7 @@ Google Cloud のタグの場合は、右上のドロップダウンメニュー�
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Datadog の日次コストはプレビュー版です。</div>
+<div class="alert alert-danger">Datadog の日次コストはプレビュー版です。</div>
 
 Datadog タグの場合は、右上のドロップダウンメニューから **Datadog** を選択します。
 
@@ -74,7 +74,7 @@ Datadog タグの場合は、右上のドロップダウンメニューから **
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-<div class="alert alert-warning">Confluent Cloud のコストはプレビュー版です。</div>
+<div class="alert alert-danger">Confluent Cloud のコストはプレビュー版です。</div>
 
 Confluent Cloud タグの場合は、右上のドロップダウンメニューから **Confluent Cloud** を選択します。
 
@@ -83,7 +83,7 @@ Confluent Cloud タグの場合は、右上のドロップダウンメニュー�
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
-<div class="alert alert-warning">Databricks のコストはプレビュー版です。</div>
+<div class="alert alert-danger">Databricks のコストはプレビュー版です。</div>
 
 Databricks タグの場合は、右上のドロップダウンメニューから **Databricks** を選択します。
 
@@ -92,7 +92,7 @@ Databricks タグの場合は、右上のドロップダウンメニューから
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">Fastly のコストはプレビュー版です。</div>
+<div class="alert alert-danger">Fastly のコストはプレビュー版です。</div>
 
 Fastly のタグの場合は、右上のドロップダウンメニューから **Fastly** を選択します。
 
@@ -101,7 +101,7 @@ Fastly のタグの場合は、右上のドロップダウンメニューから 
 {{% /tab %}}
 {{% tab "Elastic Cloud" %}}
 
-<div class="alert alert-warning">Elastic Cloud のコストはプレビュー版です。</div>
+<div class="alert alert-danger">Elastic Cloud のコストはプレビュー版です。</div>
 
 Elastic Cloud タグの場合は、右上のドロップダウンメニューから **Elastic Cloud** を選択します。
 
@@ -110,7 +110,7 @@ Elastic Cloud タグの場合は、右上のドロップダウンメニューか
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">MongoDB のコストはプレビュー版です。</div>
+<div class="alert alert-danger">MongoDB のコストはプレビュー版です。</div>
 
 MongoDB タグの場合は、右上のドロップダウンメニューから **MongoDB** を選択します。
 
@@ -119,7 +119,7 @@ MongoDB タグの場合は、右上のドロップダウンメニューから **
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">OpenAI のコストはプレビュー版です。</div>
+<div class="alert alert-danger">OpenAI のコストはプレビュー版です。</div>
 
 OpenAI のタグの場合は、右上のドロップダウンメニューから **OpenAI** を選択します。
 
@@ -128,7 +128,7 @@ OpenAI のタグの場合は、右上のドロップダウンメニューから 
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">Snowflake のコストはプレビュー版です。</div>
+<div class="alert alert-danger">Snowflake のコストはプレビュー版です。</div>
 
 Snowflake タグの場合は、右上のドロップダウンメニューから **Snowflake** を選択します。
 
@@ -137,7 +137,7 @@ Snowflake タグの場合は、右上のドロップダウンメニューから 
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">Twilio のコストはプレビュー版です。</div>
+<div class="alert alert-danger">Twilio のコストはプレビュー版です。</div>
 
 Twilio タグの場合は、右上のドロップダウンメニューから **Twilio** を選択します。
 

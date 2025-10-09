@@ -7,7 +7,7 @@ further_reading:
 title: Shadow DOM コンポーネントでセッションリプレイ機能を強化する
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog では open モードの Shadow DOM のみがサポートされています。
 </div>
 

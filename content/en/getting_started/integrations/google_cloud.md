@@ -49,6 +49,8 @@ Datadog's Google Cloud integration collects <a href="https://cloud.google.com/mo
 
 ## Setup
 
+<div class="alert alert-danger">Ensure that any projects being monitored are not configured as <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">scoping projects</a> that pull in metrics from multiple other projects.</div>
+
 Set up Datadog's Google Cloud integration to collect metrics and logs from your Google Cloud services.
 
 ### Prerequisites
@@ -394,6 +396,8 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
    <pre>https://{{< region-param key="http_endpoint" code="true" >}}</pre>
 
    **Note**: Ensure that the Datadog site selector on the right of the page is set to your [Datadog site][97] before copying the URL above.
+   
+<div class="alert alert-danger">The <b>Dataflow API</b> must be enabled to use Google Cloud Dataflow. See <a href="https://cloud.google.com/apis/docs/getting-started#enabling_apis"><b>Enabling APIs</b></a> in the Google Cloud documentation for more information.</div>
 
    c. Select the topic created to receive message failures in the **Output deadletter Pub/Sub topic** dropdown.
    d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.

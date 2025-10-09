@@ -723,8 +723,8 @@ remoteDataSource.getData(query)
 [3]: https://app.datadoghq.com/rum/application/create
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /account_management/api-app-keys/#api-keys
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/application_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [8]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#attributes
 [10]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
@@ -733,8 +733,8 @@ remoteDataSource.getData(query)
 [13]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [14]: /account_management/api-app-keys/#client-tokens
 [15]: /account_management/api-app-keys/#api-keys
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[16]: /real_user_monitoring/application_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[17]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [18]: https://opentelemetry.io/docs/concepts/signals/traces/
 [19]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/rxjava
 [20]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3

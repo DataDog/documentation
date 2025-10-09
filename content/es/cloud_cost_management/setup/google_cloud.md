@@ -29,7 +29,7 @@ Para utilizar Google Cloud Cost Management en Datadog, sigue estos pasos:
 Ve a [Configuración][3] y selecciona una integración Google Cloud Platform.
 Si no ves la cuenta de servicio que buscas en la lista, ve a la [integración Google Cloud Platform][4] para configurarla.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración Datadog Google Cloud Platform permite a Cloud Cost monitorizar automáticamente todos los proyectos a los que esta cuenta de servicio tiene acceso.
 Para limitar los hosts de monitorización de infraestructuras a estos proyectos, aplica etiquetas (tags) a los hosts. Luego, decide si las etiquetas deben incluirse o excluirse de la monitorización, en la sección <strong>Limitar los filtros para la recopilación de métricas</strong> de la página de la integración.
 </div>

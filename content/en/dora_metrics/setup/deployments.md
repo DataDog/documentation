@@ -192,7 +192,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 GitHub workflows running on <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
 </div>
@@ -226,7 +226,7 @@ When this command is executed, Datadog receives the repository URL, the commit S
 
 Run this command in CI for every new commit. If a deployment is executed for a specific commit SHA, ensure that the `datadog-ci git-metadata upload` command is run for that commit **before** the deployment event is sent.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
 When that option is included, the commit information is not sent to Datadog and the change lead time metric is not calculated.
 </div>

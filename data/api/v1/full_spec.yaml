@@ -9679,7 +9679,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -9921,7 +9921,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -10081,7 +10081,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 

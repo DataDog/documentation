@@ -74,7 +74,7 @@ Pour interroger les données relatives aux coûts estimés via l'API, consultez 
 
 ### Synthèse des coûts (sous-organisation)
 
-<div class="alert alert-warning">Cette fonctionnalité est en disponibilité limitée. Pour demander l'accès et confirmer que votre organisation répond aux critères, contactez votre représentant de compte ou <a href="https://docs.datadoghq.com/help/">le service client</a>.</div>
+<div class="alert alert-danger">Cette fonctionnalité est en disponibilité limitée. Pour demander l'accès et confirmer que votre organisation répond aux critères, contactez votre représentant de compte ou <a href="https://docs.datadoghq.com/help/">le service client</a>.</div>
 
 En tant que sous-organisation, vous pouvez afficher uniquement les coûts de votre organisation. Cette restriction permet une répartition plus large de la responsabilité et supprime la nécessité d'accorder des autorisations Admin plus étendues à l'organisation parente.
 

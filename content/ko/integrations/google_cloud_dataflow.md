@@ -59,7 +59,7 @@ Google Cloud Dataflow 로그는 Google Cloud Logging으로 수집하여 클라�
 {{< get-metrics-from-git "google-cloud-dataflow" >}}
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Google Cloud Dataflow를 사용하여 Apache Beam 파이프라인 메트릭을 모니터링하는 경우 <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/metrics/Metrics.html">게이지 정적 메서드</a>에서 생성한 메트릭은 수집하지 않습니다. 해당 메트릭을 모니터링해야 하는 경우 <a href="https://micrometer.io/docs">마이크로미터(Micrometer)</a>를 사용할 수 있습니다.
 </div>
 
