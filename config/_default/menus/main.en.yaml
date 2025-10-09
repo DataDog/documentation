@@ -5790,6 +5790,11 @@ menu:
       parent: log_collection
       identifier: log_collection_opentelemetry
       weight: 115
+    - name: Log Submission From Agent Checks
+      url: logs/log_collection/agent_checks/
+      parent: log_collection
+      identifier: log_collection_agent_checks
+      weight: 115.5
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
