@@ -49,8 +49,6 @@ Datadog's Google Cloud integration collects <a href="https://cloud.google.com/mo
 
 ## Setup
 
-<div class="alert alert-danger">Ensure that any projects being monitored are not configured as <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">scoping projects</a> that pull in metrics from multiple other projects.</div>
-
 Set up Datadog's Google Cloud integration to collect metrics and logs from your Google Cloud services.
 
 ### Prerequisites
@@ -148,32 +146,21 @@ Metrics appear in Datadog approximately **15 minutes** after setup.
 
 [408]: https://cloud.google.com/identity/docs/overview
 
-#### Best practices for monitoring multiple projects
-
-##### Enable per-project cost and API quota attribution
-
-By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
-
-To enable this feature:
-1. Ensure that the Datadog service account has the [Service Usage Consumer][410] role at the desired scope (folder or organization).
-2. Click the **Enable Per Project Quota** toggle in the **Projects** tab of the [Google Cloud integration page][411].
-
-[410]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
-[411]: https://app.datadoghq.com/integrations/google-cloud-platform/
-
 {{% /tab %}}
 
 {{% tab "Project- and Folder-level" %}}
 
-#### Installation
-
 {{% collapse-content title="Quick Start (recommended)" level="h4" expanded=false id="quickstart-setup" %}}
+
+### Prerequisites
+
+To use the Quick Start method, your Datadog user role must be able to create API and application keys. If you're using a [Datadog-managed role][202], you must have the **Datadog Admin role**. If you're using a [custom role][203], your role needs to have at least the `api_keys_write` and `user_app_keys` permissions.
 
 ### Choose this if...
 
 - You are setting up the Google Cloud integration for the first time.
 - You prefer a UI-based workflow, and want to minimize the time it takes to create a service account with the required monitoring permissions.
-- You want to automate setup steps easily in scripts or CI/CD pipelines.
+- You want to automate setup steps in scripts or CI/CD pipelines.
 
 ### Instructions
 
@@ -190,7 +177,8 @@ To enable this feature:
 7. Optionally, configure **Metric Collection**.
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
-   3. Choose whether to disable metric collection for specific Google Cloud services, or to disable metric collection entirely. You can also filter metrics by tag.
+   3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
+   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
 8. Optionally, choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 9. A summary of the changes to be made is displayed. If confirmed, the script:
    - Enables the required APIs
@@ -199,6 +187,8 @@ To enable this feature:
 
 [200]: https://app.datadoghq.com/integrations/google-cloud-platform
 [201]: https://cloud.google.com/sdk/docs/install
+[202]: https://docs.datadoghq.com/account_management/rbac/permissions/#managed-roles
+[203]: https://docs.datadoghq.com/account_management/rbac/permissions/#custom-roles
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
@@ -213,15 +203,16 @@ To enable this feature:
 
 1. In the [Google Cloud integration page][500], select **+ Add GCP Account**.
 2. Select **Terraform**.
-3. Under **Provide GCP Resources**, add any project and folder IDs to be monitored.
-4. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.
+3. Under **Provide GCP Resources**, add any project IDs and folder IDs to be monitored.
+4. Select any folders and projects to be monitored.
 5. Under **Provide Service Account Details**:
    1. Give the service account a name.
    2. Select the project to contain the service account.
 6. Optionally, configure **Metric Collection**.
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
-   3. Choose whether to disable metric collection for specific Google Cloud services, or to disable metric collection entirely. You can also filter metrics by tag.
+   3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
+   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
 7. Optionally, choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 8. Copy the provided **Terraform Code**. If confirmed, the script:
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
@@ -254,7 +245,8 @@ To enable this feature:
 8. Optionally, configure **Metric Collection**.
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
-   3. Choose whether to disable metric collection for specific Google Cloud services, or to disable metric collection entirely. You can also filter metrics by tag.
+   3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
+   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
 9. Optionally, choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 10. Click **Verify and Save Account**.
 
@@ -284,7 +276,7 @@ Under the **Metric Collection** tab in Datadog's [Google Cloud integration page]
 
 {{% collapse-content title="Limit metric collection by tag" level="h5" %}}
 
-By default, you'll see all your Google Compute Engine (GCE) instances in Datadog's infrastructure overview. Datadog automatically tags them with GCE host tags and any GCE labels you may have added.
+By default, you see all your Google Compute Engine (GCE) instances in Datadog's infrastructure overview. Datadog automatically tags them with GCE host tags and any GCE labels you may have added.
 
 Optionally, you can use tags to limit the instances that are pulled into Datadog. Under a project's **Metric Collection** tab, enter the tags in the **Limit Metric Collection Filters** textbox. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
 
@@ -295,6 +287,19 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 See Google's [Organize resources using labels][56] page for more details.
 
 {{% /collapse-content %}}
+
+#### Best practices for monitoring multiple projects
+
+##### Enable per-project cost and API quota attribution
+
+By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
+
+To enable this feature:
+1. Ensure that the Datadog service account has the [Service Usage Consumer][410] role at the desired scope (folder or organization).
+2. Click the **Enable Per Project Quota** toggle in the **Projects** tab of the [Google Cloud integration page][411].
+
+[410]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
+[411]: https://app.datadoghq.com/integrations/google-cloud-platform/
 
 #### Leveraging the Datadog Agent
 
@@ -396,8 +401,6 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
    <pre>https://{{< region-param key="http_endpoint" code="true" >}}</pre>
 
    **Note**: Ensure that the Datadog site selector on the right of the page is set to your [Datadog site][97] before copying the URL above.
-   
-<div class="alert alert-danger">The <b>Dataflow API</b> must be enabled to use Google Cloud Dataflow. See <a href="https://cloud.google.com/apis/docs/getting-started#enabling_apis"><b>Enabling APIs</b></a> in the Google Cloud documentation for more information.</div>
 
    c. Select the topic created to receive message failures in the **Output deadletter Pub/Sub topic** dropdown.
    d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
