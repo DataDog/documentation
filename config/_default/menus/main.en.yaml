@@ -1504,6 +1504,16 @@ menu:
       parent: dashboards
       identifier: dashboards_widgets
       weight: 3
+    - name: Configuration
+      identifier: dashboards_widgets_configuration
+      url: dashboards/widgets/configuration/
+      parent: dashboards_widgets
+      weight: 301
+    - name: Widget Types
+      identifier: dashboards_widgets_types
+      url: dashboards/widgets/types/
+      parent: dashboards_widgets
+      weight: 302
     - name: Querying
       identifier: dashboards_querying
       url: dashboards/querying/
@@ -3728,21 +3738,26 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
       weight: 502
-    - name: Tag Pipelines
-      url: cloud_cost_management/tag_pipelines
+    - name: Tags
+      url: cloud_cost_management/tags
       parent: cloud_cost
-      identifier: cloud_cost_tag_pipelines
+      identifier: cloud_cost_tags
       weight: 6
     - name: Tag Explorer
-      url: cloud_cost_management/tag_explorer
-      parent: cloud_cost
+      url: cloud_cost_management/tags/tag_explorer
+      parent: cloud_cost_tags
       identifier: cloud_cost_tag_explorer
-      weight: 7
+      weight: 601
+    - name: Tag Pipelines
+      url: cloud_cost_management/tags/tag_pipelines
+      parent: cloud_cost_tags
+      identifier: cloud_cost_tag_pipelines
+      weight: 602
     - name: Multisource Querying
       url: cloud_cost_management/multisource_querying
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
-      weight: 8
+      weight: 7
     - name: Reports
       url: /cloud_cost_management/reports
       parent: cloud_cost
@@ -3757,27 +3772,27 @@ menu:
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 10
+      weight: 9
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 1001
+      weight: 901
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 11
+      weight: 10
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 12
+      weight: 11
     - name: Real-Time Costs
       url: cloud_cost_management/real_time_costs
       parent: cloud_cost
       identifier: cloud_cost_real_time_costs
-      weight: 13
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -4780,31 +4795,31 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 400
     - name: Managed
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_managed_evaluations
+      weight: 400
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 401
-    - name: Ragas
-      url: llm_observability/evaluations/ragas_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_ragas_evaluations
-      weight: 402
-    - name: NeMo
-      url: llm_observability/evaluations/submit_nemo_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_submit_nemo_evaluations
-      weight: 403
     - name: External
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
-      weight: 404
+      weight: 402
+    - name: Ragas
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 40201
+    - name: NeMo
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 40202
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs
@@ -6253,21 +6268,36 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_custom_detection_rules
       weight: 202
-    - name: Signal Correlation
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
+    - name: Create Rule
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
       parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_signal_correlation_rules
-      weight: 2101
+      identifier: cloud_siem_real_time_rule
+      weight: 2021
+    - name: Content Anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_content_anomaly_rule
+      weight: 2025
+    - name: Impossible Travel
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_impossible_travel_rule
+      weight: 2026
+    - name: Version History
+      url: security/cloud_siem/detect_and_monitor/version_history
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_version_history
+      weight: 203
     - name: Suppressions
       url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
-      weight: 203
+      weight: 204
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 204
+      weight: 205
     - name: MITRE ATT&CK Map
       url: security/cloud_siem/detect_and_monitor/mitre_attack_map
       parent: cloud_siem_detect_and_monitor
