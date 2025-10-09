@@ -4790,31 +4790,31 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 400
     - name: Managed
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_managed_evaluations
+      weight: 400
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 401
-    - name: Ragas
-      url: llm_observability/evaluations/ragas_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_ragas_evaluations
-      weight: 402
-    - name: NeMo
-      url: llm_observability/evaluations/submit_nemo_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_submit_nemo_evaluations
-      weight: 403
     - name: External
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
-      weight: 404
+      weight: 402
+    - name: Ragas
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 40201
+    - name: NeMo
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 40202
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs
