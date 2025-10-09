@@ -2126,66 +2126,71 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
+    - name: Campaigns
+      url: internal_developer_portal/campaigns
+      parent: internal_developer_portal
+      identifier: idp_campaigns
+      weight: 5
     - name: External Provider Status
       url: internal_developer_portal/external_provider_status
       parent: internal_developer_portal
       identifier: external_provider_status
-      weight: 5
+      weight: 6
     - name: Integrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
       identifier: idp_integrations
-      weight: 6
+      weight: 7
     - name: Use Cases
       url: internal_developer_portal/use_cases
       parent: internal_developer_portal
       identifier: idp_use_cases
-      weight: 7
-    - name: Onboarding Guide
-      url: internal_developer_portal/onboarding_guide
-      parent: internal_developer_portal
-      identifier: idp_onboarding_guide
       weight: 8
     - name: API Management
       url: internal_developer_portal/use_cases/api_management
       parent: idp_use_cases
       identifier: idp_use_cases_api_management
-      weight: 701
+      weight: 801
     - name: Cloud Cost Management
       url: internal_developer_portal/use_cases/cloud_cost_management
       parent: idp_use_cases
       identifier: idp_use_cases_cloud_cost_management
-      weight: 702
+      weight: 802
     - name: App and API Protection
       url: internal_developer_portal/use_cases/appsec_management
       parent: idp_use_cases
       identifier: idp_use_cases_appsec_management
-      weight: 703
+      weight: 803
     - name: Developer Onboarding
       url: internal_developer_portal/use_cases/dev_onboarding
       parent: idp_use_cases
       identifier: idp_use_cases_dev_onboarding
-      weight: 704
+      weight: 804
     - name: Dependency Management
       url: internal_developer_portal/use_cases/dependency_management
       parent: idp_use_cases
       identifier: idp_use_cases_dependency_management
-      weight: 705
+      weight: 805
     - name: Production Readiness
       url: internal_developer_portal/use_cases/production_readiness
       parent: idp_use_cases
       identifier: idp_use_cases_production_readiness
-      weight: 706
+      weight: 806
     - name: Incident Response
       url: internal_developer_portal/use_cases/incident_response
       parent: idp_use_cases
       identifier: idp_use_cases_incident_response
-      weight: 707
+      weight: 807
     - name: CI Pipeline Visibility
       url: internal_developer_portal/use_cases/pipeline_visibility
       parent: idp_use_cases
       identifier: idp_use_cases_pipeline_visibility
-      weight: 708
+      weight: 808
+    - name: Onboarding Guide
+      url: internal_developer_portal/onboarding_guide
+      parent: internal_developer_portal
+      identifier: idp_onboarding_guide
+      weight: 9
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
