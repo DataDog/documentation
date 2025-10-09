@@ -281,11 +281,10 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
 
 1. Enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.
 
-  ```yaml
-  datadog:
-    traceroute:
-      enabled: true
-  ```
+   ```yaml
+   datadog:
+     traceroute:
+       enabled: true
 
 2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
 
