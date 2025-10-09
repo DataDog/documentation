@@ -146,7 +146,7 @@ Los logs proceden de las siguientes fuentes:
 El SentinelOne integración no incluye ninguna eventos.
 
 ### Checks de servicios
-{{< get-servicio-checks-from-git "sentinelone" >}}
+{{< get-service-checks-from-git "sentinelone" >}}
 
 
 ## Solucionar problemas

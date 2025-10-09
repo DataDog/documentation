@@ -112,7 +112,7 @@ También puedes integrar la URL en una etiqueta HTML `<meta>`.
 
 Cada navegador interpreta el formato del informe de forma diferente:
 
-{{&lt; tabs &gt;}}
+{{< tabs >}}
 {{% tab "Firefox" %}}
 ```json
 {
