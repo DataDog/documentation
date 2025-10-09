@@ -69,8 +69,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-    - Choose **CSV** as the format. **Parquet is not supported.**
-    - Choose **Gzip** as the compression type. **None** is also supported.
+    - Choose **CSV** or **Parquet** as the format.
+    - Choose the compression type. For **CSV**: **Gzip** and **None** are supported. For **Parquet**: **Snappy** and **None** are supported.
     - Ensure that **File partitioning** is checked.
     - Ensure that **Overwrite data** is not checked.
         - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.

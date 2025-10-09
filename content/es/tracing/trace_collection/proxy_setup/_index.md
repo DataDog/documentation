@@ -284,7 +284,7 @@ Para configurar tu frecuencia de muestreo con `DD_TRACE_SAMPLING_RULES`, utiliza
 
 ## Variables de entorno
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Las variables <code>DD_AGENT_HOST</code>, <code>DD_TRACE_AGENT_PORT</code> y <code>DD_TRACE_AGENT_URL</code> no se aplican a Envoy, ya que la dirección del Datadog Agent se configura utilizando los parámetros del <code>clúster</code>.
 </div>
 
@@ -383,7 +383,7 @@ http {
 
 ### Controlador v1.10.0 o posterior
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota importante:</strong> Con el lanzamiento de <b>v1.10.0</b>, la integración OpenTracing y Datadog del controlador Ingress ha quedado obsoleta. Como alternativa, se recomienda la integración OpenTelemetry.<br><br>
   Para versiones anteriores, consulta las <a href="#controller-v190-and-older">instrucciones basadas en OpenTracing</a>.
 </div>
@@ -675,7 +675,7 @@ Dado que el servidor HTTP IHS es esencialmente una envoltura del servidor HTTP A
 
 ### Instalación
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Sólo se admite el servidor HTTP Apache v2.4.x para la arquitectura x86_64.
 </div>
 

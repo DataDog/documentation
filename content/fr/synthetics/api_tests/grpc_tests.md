@@ -27,7 +27,7 @@ Vous pouvez mettre en œuvre le mécanisme de checks de santé sous la forme d'u
 
 Les tests de check de santé gRPC peuvent être exécutés depuis des [emplacements gérés][2] et des [emplacements privés][3], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau. Les tests gRPC peuvent être exécutés selon un programme, à la demande ou directement dans vos [pipelines de CI/CD][4].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 N'hésitez pas à expliquer à l'<a href="https://docs.datadoghq.com/help/">équipe d'assistance</a> comment vous utilisez les tests Synthetic pour vos gRPC.
 </div>
 

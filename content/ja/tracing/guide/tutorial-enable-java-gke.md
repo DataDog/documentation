@@ -175,7 +175,7 @@ Java アプリケーションが動作するようになったので、トレー
 
    これにより、アプリケーションは自動的に Datadog のサービスにインスツルメンテーションされます。
 
-   <div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+   <div class="alert alert-danger"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
 
 3. 異なるバージョンやデプロイ環境間でトレースされたサービスを識別する[統合サービスタグ][10]により、Datadog 内で相関が取れるようになり、検索やフィルターに利用できるようになります。統合サービスタグ付けに使用する環境変数は、`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の 3 つです。Kubernetes でデプロイされるアプリケーションでは、これらの環境変数をデプロイメント YAML ファイル内、特にデプロイメントオブジェクト、ポッド仕様、ポッドコンテナテンプレートに追加することができます。
 
@@ -379,7 +379,7 @@ docker push gcr.io/<PROJECT_NAME>/notes-tutorial:notes
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>注</strong>: 繰り返しになりますが、フラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+   <div class="alert alert-danger"><strong>注</strong>: 繰り返しになりますが、フラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
 
 3. 両方のアプリケーションをビルドし、GCR に公開します。`docker` ディレクトリから、以下を実行します。
    {{< code-block lang="sh" >}}

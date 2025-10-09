@@ -89,7 +89,7 @@ tile:
 
 ## 개요
 
-<div class="alert alert-warning"> 이 페이지는 ECS Fargate 통합에 대해 설명합니다. EKS Fargate의 경우 Datadog의 <a href="http://docs.datadoghq.com/통합/eks_fargate">EKS Fargate 통합</a> 설명서를 참조하십시오.
+<div class="alert alert-danger"> 이 페이지는 ECS Fargate 통합에 대해 설명합니다. EKS Fargate의 경우 Datadog의 <a href="http://docs.datadoghq.com/통합/eks_fargate">EKS Fargate 통합</a> 설명서를 참조하십시오.
 </div>
 
 ECS Fargate에서 실행 중인 모든 컨테이너에서 메트릭를 받으세요:
@@ -860,7 +860,7 @@ CloudFormation 서식 지정 및 구문에 대한 자세한 내용은 [AWS Cloud
 
 ### 프로세스 수집
 
-<div class="alert alert-warning">Datadog에서 ECS Fargate 프로세스를 확인할 수 있습니다. ECS Fargate 컨테이너와의 관계를 확인하려면 Datadog 에이전트 v7.50.0 이상 버전을 사용하세요.</div>
+<div class="alert alert-danger">Datadog에서 ECS Fargate 프로세스를 확인할 수 있습니다. ECS Fargate 컨테이너와의 관계를 확인하려면 Datadog 에이전트 v7.50.0 이상 버전을 사용하세요.</div>
 
 Datadog 에서 ECS Fargate 프로세스를 모니터링할 수 있습니다. [실시간 페이지 처리[41]를 사용하세요. 프로세스 수집을 활성화하려면 작업 정의에 [`PidMode` 파라미터 ][42]를 추가하고 다음과 같이 `task`로 설정합니다:
 

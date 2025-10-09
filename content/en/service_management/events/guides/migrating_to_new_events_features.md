@@ -10,7 +10,7 @@ further_reading:
   text: "Troubleshoot faster with improved Datadog Events"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog's legacy event stream and event monitors retire on <strong>June 30, 2022</strong>. Datadog is migrating all customers to a new and improved events experience. This page contains important information about this migration. Before the retirement date, follow the steps on this page to ensure that your existing event visualizations and monitors continue to work properly.</div>
 
 

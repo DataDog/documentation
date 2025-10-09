@@ -23,7 +23,7 @@ Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your a
 
 If there are no debug symbols for your application, [upload them][2].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Ensure that the size of each debug symbol does not exceed the limit of **500 MB**, otherwise the upload is rejected.
 For iOS dSYMs, individual files up to **2 GB** are supported. 
 </div>

@@ -719,10 +719,11 @@ This table provides an overview of the supported window functions. For comprehen
 
 ## JSON functions and operators
 
-| Name | Return type | Description |
-|------|-------------|-------------|
-| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
-| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+| Name                                          | Return type  | Description                                                                                                                                                                                                                                                                                                    |
+|-----------------------------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| json_extract_path_text(text json, text path…) | text         | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax. |
+| json_extract_path(text json, text path…)      | JSON         | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.                                                                                                                                                                                                        |
+| json_array_elements(text json)                | rows of JSON | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
 

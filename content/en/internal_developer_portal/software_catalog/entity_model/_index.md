@@ -52,7 +52,7 @@ algolia:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Entity Model schema v3.0 is not available in the selected site at this time.</div>
+<div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}
 

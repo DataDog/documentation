@@ -21,7 +21,7 @@ _8 minutos para completarlo_
 
 {{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="Vista de análisis" style="width:90%;">}}
 
-<div class="alert alert-warning"><strong>Nota</strong>: En esta página se describe el uso de OpenTracing para la instrumentación personalizada de aplicaciones. OpenTracing está obsoleto. Los conceptos presentados aquí todavía se aplican, pero, en su lugar, sigue las instrucciones y ejemplos de <a href="/tracing/trace_collection/otel_instrumentation/">Instrumentación personalizada con OpenTelemetry</a> para tu idioma. </div>
+<div class="alert alert-danger"><strong>Nota</strong>: En esta página se describe el uso de OpenTracing para la instrumentación personalizada de aplicaciones. OpenTracing está obsoleto. Los conceptos presentados aquí todavía se aplican, pero, en su lugar, sigue las instrucciones y ejemplos de <a href="/tracing/trace_collection/otel_instrumentation/">Instrumentación personalizada con OpenTelemetry</a> para tu idioma. </div>
 
 Para proporcionarte una visibilidad profunda de tu lógica de negocio, la APM de Datadog te permite personalizar los tramos (spans) que componen tus trazas en función de tus necesidades e implementación. Esto te permite rastrear cualquier método de tu código base e incluso componentes específicos dentro de los métodos. Puedes utilizar esto para optimizar y monitorizar áreas críticas de tu aplicación en la granularidad que funcione para ti.
 

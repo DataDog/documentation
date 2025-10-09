@@ -12,7 +12,7 @@ further_reading:
 title: Azure Native 통합 관리
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   본 지침은 Datadog 리소스를 사용하여 Azure Native 통합을 관리하는 방법을 설명합니다.
 </div>
 
