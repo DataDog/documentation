@@ -30,14 +30,15 @@ The walkthrough guides you through several steps to:
 ## Requirements
 
 To use this walkthrough, you need:
-* A Go or Java service running on Kubernetes with the Datadog Kubernetes integration installed.
+* A containerized Go or Java service with either the Datadog Kubernetes integration or the Datadog Container integration installed.
 * [Continuous Profiler enabled][3].
+  * Ensure that your profiles are tagged with `container_id`. This is necessary to link between container memory utilization metrics and profiling data.
 
 ## Get started
 
 To investigate a memory leak using the guided walkthrough:
 
-1. Go to **[APM > Service Catalog][4]**.
+1. Go to **[APM > Software Catalog][4]**.
 1. Hover over the service you want to investigate and click **Service Page**.
 1. Click the **Memory Leaks** tab.
 1. Follow the guided steps to complete your investigation.

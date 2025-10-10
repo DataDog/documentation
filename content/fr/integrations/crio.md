@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
+- incident-teams
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: crio
@@ -62,7 +62,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Présentation
+## Section Overview
 
 Ce check surveille [CRI-O][1].
 
@@ -88,11 +88,11 @@ CRI-O recueille des métriques sur le nombre d'opérations effectuées par le ru
 L'intégration Datadog/CRI-O recueille des métriques sur l'utilisation du processeur et de la mémoire du binaire Golang CRI-O.
 
 ### Métriques
-{{< get-metrics-from-git "crio" >}}
+{{< get-metrics-from-git "cri-o" >}}
 
 
 ### Checks de service
-{{< get-service-checks-from-git "crio" >}}
+{{< get-service-checks-from-git "cri-o" >}}
 
 
 ## Dépannage

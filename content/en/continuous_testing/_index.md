@@ -12,6 +12,9 @@ further_reading:
 - link: '/getting_started/continuous_testing'
   tag: 'Documentation'
   text: 'Learn about Continuous Testing'
+- link: '/continuous_testing/guide'
+  tag: 'Guide'
+  text: 'Continuous Testing Guides'
 - link: '/synthetics/private_locations/#scale-your-private-location'
   tag: 'Documentation'
   text: 'Learn about Private Locations'
@@ -27,6 +30,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
   tag: 'Blog'
   text: 'Best practices for continuous testing with Datadog'
+- link: 'https://www.datadoghq.com/blog/progressive-web-application-monitoring/'
+  tag: 'Blog'
+  text: 'Best practices for monitoring progressive web applications'
 cascade:
     algolia:
         rank: 70

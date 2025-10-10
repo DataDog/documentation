@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS Log Collection
+description: Configure log collection from containerized applications running on Amazon ECS using the Datadog Agent
 aliases:
   - /agent/amazon_ecs/logs
 further_reading:
@@ -18,7 +19,7 @@ Datadog Agent 6+ collects logs from containers. The recommended way to collect l
 Once enabled, the Datadog Agent container collects the logs emitted from the other application containers on the same host as itself. This is limited to the logs emitted to the `stdout` and `stderr` log stream when using the `default` or `json-file` logging driver.
 
 - If your containers are creating log files isolated within *their* containers, you need to perform some [extra steps](#log-file-within-a-container) to ensure the Agent container has visibility to those log files.
-- If your containers are using the `awslogs` [logging driver to send the logs to CloudWatch][9], then those logs are not be visible to the Agent. Instead, use one of the [AWS log collection integrations][10] in order to collect those logs.
+- If your containers are using the `awslogs` [logging driver to send the logs to CloudWatch][9], then those logs are not visible to the Agent. Instead, use one of the [AWS log collection integrations][10] to collect those logs.
 
 #### AWS Fargate
 

@@ -23,7 +23,7 @@ Inject trace IDs into DBM data collection to correlate the two data sources. Vie
 
 Inject trace IDs into logs, and leverage unified service tagging to find the exact logs associated with a specific service and version, or all logs correlated to an observed trace. See [Connect Logs and Traces][1] to set it up.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
+{{< img src="tracing/connect_logs_and_traces/logs-trace-correlation.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
 ## Correlate RUM and traces
 
@@ -50,7 +50,7 @@ Read [Investigate Slow Traces or Endpoints][5] for more information.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
-[2]: /real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [3]: /synthetics/apm/
 [4]: /database_monitoring/connect_dbm_and_apm/
 [5]: /profiler/connect_traces_and_profiles/

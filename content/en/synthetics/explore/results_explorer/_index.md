@@ -30,7 +30,7 @@ The [Results Explorer][1] provides visibility into all test runs and CI batches 
 {{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{% tab "Test Runs" %}}
-{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/explorer_test_runs_2.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -79,7 +79,9 @@ For more information about test batches, see [Search Test Batches][4].
 
 ## Export
 
-Export your view as a [saved view][9] in the Synthetic Monitoring & Testing Results Explorer.
+You can [export test runs to CSV][9] from the Results Explorer for debugging, reporting, and integration with external systems.
+
+You can also save your Results Explorer configuration as a [saved view][10] to quickly revisit it during future investigations.
 
 ## Further reading
 
@@ -93,4 +95,5 @@ Export your view as a [saved view][9] in the Synthetic Monitoring & Testing Resu
 [6]: /continuous_testing/explorer/search_runs/
 [7]: /synthetics/
 [8]: /continuous_testing/
-[9]: /continuous_testing/explorer/saved_views/
+[9]: /synthetics/explore/results_explorer/export/
+[10]: /continuous_testing/explorer/saved_views/

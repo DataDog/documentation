@@ -3,11 +3,12 @@ title: Kubernetes Basic Agent Usage in Agent v5
 private: true
 aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
+private: true
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
 </div>
 

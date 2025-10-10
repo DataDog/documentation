@@ -20,9 +20,9 @@ Containerized Windows Applications Monitoring requires Datadog Agent 7.19+.
 
 The supported OS versions are:
 - Windows Server 2019 (LTSC / 1809)
-- Windows Server 2019 1909 (until Agent 7.39, as not supported by Microsoft anymore)
-- Windows Server 2019 2004 or 20H1 (until Agent 7.39, as not supported by Microsoft anymore)
-- Windows Server 2019 20H2 (Agent 7.33 to 7.39, as not supported by Microsoft anymore)
+- Windows Server 2019 1909 (until Agent 7.39, no longer supported by Microsoft)
+- Windows Server 2019 2004 or 20H1 (until Agent 7.39, no longer supported by Microsoft)
+- Windows Server 2019 20H2 (Agent 7.33 to 7.39, no longer supported by Microsoft)
 - Windows Server 2022 LTSC (Agent >=7.34)
 
 Hyper-V isolation mode is not supported.
@@ -43,23 +43,25 @@ The recommended way of deploying the Datadog Agent on a mixed cluster is to perf
 
 The Datadog Agent uses a `nodeSelector` to automatically select Linux or Windows nodes based on `targetSystem`.
 
-However it's not the case for Kube State Metrics (which is installed by default), leading to situations where Kube State Metrics cannot be scheduled on Windows nodes.
+However, this is not the case for Kube State Metrics (which is installed by default), leading to situations where Kube State Metrics cannot be scheduled on Windows nodes.
 
 Three options are available to avoid this issue:
 
 * Taint your Windows nodes. On Windows, the Agent always allows the `node.kubernetes.io/os=windows:NoSchedule` taint.
 * Set Kube State Metrics node selector through Datatog Helm chart `values.yaml`:
 
-```
-kube-state-metrics:
-  nodeSelector:
-    beta.kubernetes.io/os: linux // Kubernetes < 1.14
-    kubernetes.io/os: linux // Kubernetes >= 1.14
-```
+   ```
+   kube-state-metrics:
+     nodeSelector:
+       beta.kubernetes.io/os: linux // Kubernetes < 1.14
+       kubernetes.io/os: linux // Kubernetes >= 1.14
+   ```
 
 * Deploy Kube State Metrics yourself separately by setting `datadog.kubeStateMetricsEnabled` to `false`.
 
 **Note**: When using two Datadog installations (one with `targetSystem: linux`, one with `targetSystem: windows`), make sure the second one has `datadog.kubeStateMetricsEnabled` set to `false` to avoid deploying two instances of Kube State Metrics.
+
+Some metrics are not available for Windows deployments. See [available metrics](#limited-metrics-for-windows-deployments).
 
 #### Mixed clusters with the Datadog Cluster Agent
 
@@ -119,16 +121,16 @@ If your setup does not meet these requirements, APM and DogStatsD will only work
 ### Kubelet check
 
 Depending on your Kubernetes version, some Kubelet metrics might not be available (or Kubelet check might timeout).
-For optimal experience, please use any of the following:
+For optimal experience, please use any of the following with Datadog Agent v7.19.2+:
 
-* Kubelet >= 1.16.13 (1.16.11 on GKE)
-* Kubelet >= 1.17.9 (1.17.6 on GKE)
-* Kubelet >= 1.18.6
-* Kubelet >= 1.19
+* Kubelet v1.16.13+ (v1.16.11+ on GKE)
+* Kubelet v1.17.9+ (v1.17.6+ on GKE)
+* Kubelet v1.18.6+
+* Kubelet v1.19+
 
-With Agent version >= 7.19.2
+### Limited metrics for Windows deployments
 
-Please note that not all `kubernetes.*` are available on Windows, you can find the list of available ones below:
+The following `kubernetes.*` metrics are available for Windows containers:
 
 * `kubernetes.cpu.usage.total`
 * `kubernetes.containers.restarts`

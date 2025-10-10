@@ -11,17 +11,21 @@ To set up the deduplicate processor:
 
 ##### Path notation example
 
- For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+For the following message structure:
+
 ```json
 {
     "outer_key": {
         "inner_key": "inner_value",
-            "a": {
-                    "double_inner_key": "double_inner_value",
-                    "b": "b value"
-                },
-            "c": "c value"
+        "a": {
+            "double_inner_key": "double_inner_value",
+            "b": "b value"
         },
-        "d": "d value"
-    }
+        "c": "c value"
+    },
+    "d": "d value"
+}
 ```
+
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.

@@ -44,7 +44,7 @@ draft: false
 git_integration_title: etcd
 integration_id: etcd
 integration_title: etcd
-integration_version: 8.0.0
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: etcd

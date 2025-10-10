@@ -8,6 +8,9 @@ further_reading:
 - link: "data_security/logs"
   tag: "Documentation"
   text: "Data Security for Log Management"
+- link: "coterm"
+  tag: "Documentation"
+  text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
 ---
 
 ## Overview
@@ -16,7 +19,7 @@ The Health Insurance Portability and Accountability Act (HIPAA) is a set of rule
 
 Organizations use cloud-based solutions to manage patient data, which requires adherence to HIPAA regulations. Datadog provides HIPAA compliant observability and ensures compliance with regulatory requirements.
 
-## HIPAA-compliant Log Management
+## HIPAA-compliant services
 
 {{% hipaa-customers %}}
 

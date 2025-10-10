@@ -28,3 +28,9 @@ Environment variables that match any of the following patterns are blocked from 
 - `USER`
 
 The environment variable is matched to the pattern and not the literal word. For example, `PASSWORD` blocks environment variables like `USER_PASSWORD` and `PASSWORD_SECRET` from getting added to the log messages.
+
+##### Allowlist
+
+After you have added processors to your pipeline and clicked **Next: Install**, in the **Add environment variable processor(s) allowlist** field, enter a comma-separated list of environment variables you want to pull values from and use with this processor.
+
+The allowlist is stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.

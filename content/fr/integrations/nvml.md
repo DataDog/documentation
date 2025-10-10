@@ -18,7 +18,7 @@ draft: false
 git_integration_title: nvml
 guid: 5e997a76-f6a3-48e8-875f-6fbb2559f9e9
 integration_id: nvml
-integration_title: Nvidia NVML
+integration_title: NVIDIA NVML
 integration_version: 1.0.1
 is_public: true
 custom_kind: integration
@@ -27,8 +27,8 @@ manifest_version: 1.0.0
 metric_prefix: nvml.
 metric_to_check: nvml.device_count
 name: nvml
-public_title: Nvidia NVML
-short_description: Prise en charge des métriques de GPU Nvidia dans Kubernetes
+public_title: NVIDIA NVML
+short_description: Prise en charge des métriques de GPU NVIDIA dans Kubernetes
 support: contrib
 supported_os:
   - linux
@@ -65,7 +65,7 @@ Si vous utilisez Docker, il existe un [exemple de Dockerfile][6] dans le référ
 
 Si vous utilisez Docker et Kubernetes, vous devez exposer les variables d'environnement `NVIDIA_VISIBLE_DEVICES` et `NVIDIA_DRIVER_CAPABILITIES`. Consultez le Dockerfile inclus pour obtenir un exemple.
 
-Pour mettre en corrélation des appareils Nvidia Kubernetes réservés avec le pod Kubernetes utilisant l'appareil, montez le socket de domaine Unix `/var/lib/kubelet/pod-resources/kubelet.sock` sur la configuration de votre Agent. De plus amples informations sur ce socket sont disponibles sur le [site Web de Kubernetes][2] (en anglais). **Remarque** : la prise en charge de cet appareil est en bêta dans la version 1.15.
+Pour mettre en corrélation des appareils NVIDIA Kubernetes réservés avec le pod Kubernetes utilisant l'appareil, montez le socket de domaine Unix `/var/lib/kubelet/pod-resources/kubelet.sock` sur la configuration de votre Agent. De plus amples informations sur ce socket sont disponibles sur le [site Web de Kubernetes][2] (en anglais). **Remarque** : la prise en charge de cet appareil est en bêta dans la version 1.15.
 
 ### Configuration
 
@@ -81,9 +81,9 @@ Pour mettre en corrélation des appareils Nvidia Kubernetes réservés avec le p
 
 ### Métriques
 {{< get-metrics-from-git "nvml" >}}
- La documentation de référence relative aux métriques se trouve sur le [site Web de Nvidia][11] (en anglais).
+ La documentation de référence relative aux métriques se trouve sur le [site Web de NVIDIA][11] (en anglais).
 
-Lorsque cela est possible, les noms de métriques sont mis en correspondance avec [l'exportateur Data Center GPU Manager (DCGM)][14] de Nvidia.
+Lorsque cela est possible, les noms de métriques sont mis en correspondance avec [l'exportateur Data Center GPU Manager (DCGM)][14] de NVIDIA.
 
 ### Événements
 

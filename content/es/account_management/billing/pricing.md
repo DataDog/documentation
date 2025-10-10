@@ -13,7 +13,7 @@ Datadog ofrece varios planes de precios que se adaptan a tus necesidades. Para o
 * Un **host** es una instancia de sistema operativo físico o virtual. Cada hora, Datadog registra el número de hosts únicos que estás monitorizando en el servicio de la infraestructura.
   * En un plan de marca de agua alta (HWMP), el recuento facturable de hosts se calcula al final del mes utilizando el recuento máximo (marca de agua alta) del 99% inferior del consumo de esas horas. Datadog excluye el 1% superior para reducir el impacto de los picos de consumo en tu factura.
   * Con un plan híbrido mensual/hora (MHP), Datadog cobra por el compromiso mensual mínimo que seleccionas y aplica una tarifa horaria por cada hora de host que supera ese compromiso.
-* Un **contenedor** es un entorno operativo autónomo que incluye software de aplicación, además de bibliotecas y configuraciones del sistema operativo limitadas. Cada cinco minutos, Datadog registra el número de contenedores únicos que estás monitorizando en el servicio de la infraestructura de Datadog. Cada mes, Datadog te cobra en función del número de horas proporcionales dedicadas a la monitorización de tus contenedores.
+* Un **contenedor** es un entorno operativo autónomo que incluye software de aplicación, además de librerías y configuraciones del sistema operativo limitadas. Cada cinco minutos, Datadog registra el número de contenedores únicos que estás monitorizando en el servicio de la infraestructura de Datadog. Cada mes, Datadog te cobra en función del número de horas proporcionales dedicadas a la monitorización de tus contenedores.
 * Una [**métrica personalizada**][2] es una combinación única de un nombre de métrica, un ID de host y cualquier etiqueta (tag). Datadog te cobra en función del promedio mensual de métricas personalizadas únicas, enviadas al servicio de la infraestructura de Datadog por hora.
 * Un **dispositivo** es un sensor físico que incluye uno o más ordenadores monoplaca en un solo gabinete. Datadog registra y cobra en función del número de dispositivos y hosts que estás monitorizando de forma simultánea en el servicio de la infraestructura de Datadog.
 * Una **tarea de Fargate** de AWS es una recopilación de contenedores configurados a través de la plataforma de orquestación de contenedores ECS de AWS. Datadog registra cada cinco minutos el número de instancias de tareas que estás monitorizando en el servicio Infrastructure (o APM) de Datadog. Datadog suma estas mediciones a final de mes y cobra en función del número total de horas que tus aplicaciones se estuvieron ejecutando y monitorizando.
@@ -50,11 +50,11 @@ Puedes establecer sistemas de control tanto para los volúmenes de tramos indexa
 * Un **test de navegador** permite simular una secuencia de comandos de acciones de usuario en una aplicación web utilizando un navegador web virtualizado. Datadog cobra por cada mil tests de navegador ejecutados al servicio de monitorización Synthetic
  de Datadog.
 
-## Network Performance Monitoring
+## Monitorización de red en la nube
 
-* Datadog registra una vez por hora el número de hosts **Network Performance Monitoring** (NPM) que estás monitorizando de forma simultánea con el servicio NPM de Datadog.
+* Datadog registra el número de hosts de **Monitorización de red en la nube** (CNM) que estás monitorizando simultáneamente con el servicio de CNM de Datadog una vez por hora.
   * El recuento facturable de hosts se calcula al final del mes utilizando el recuento máximo (marca de agua alta) del 99% inferior del consumo de esas horas. Datadog excluye el 1% superior para reducir el impacto de los picos de consumo en tu factura.
-* Además, Datadog mide mensualmente el número total de flujos utilizados por todos los hosts NPM. Un **flujo** es un registro del tráfico enviado y recibido entre un origen (IP:Puerto) y un destino (IP:Puerto), medido en un periodo de tiempo de cinco minutos.
+* Además, Datadog mide el número total de flujos utilizados por todos los hosts de CNM al mes. Un **flujo** es un registro del tráfico enviado y recibido entre un origen (IP:Puerto) y un destino (IP:Puerto), medido en un periodo de tiempo de cinco minutos.
 
 ## Real User Monitoring
 

@@ -143,7 +143,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "cisco_aci" >}}
+{{< get-metrics-from-git "cisco-aci" >}}
 
 
 ### Événements
@@ -151,7 +151,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check Cisco ACI envoie les défaillances de locataire sous la forme d'événements.
 
 ### Checks de service
-{{< get-service-checks-from-git "cisco_aci" >}}
+{{< get-service-checks-from-git "cisco-aci" >}}
 
 
 ## Dépannage

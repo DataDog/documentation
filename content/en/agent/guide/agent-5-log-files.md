@@ -1,6 +1,7 @@
 ---
 title: Agent 5 Log Files
 disable_toc: false
+private: true
 ---
 
 ## Overview

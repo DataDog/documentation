@@ -7,10 +7,6 @@ further_reading:
 title: 품질 게이트 규칙 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 ({{< region-param key="dd_site_name" >}}) 사이트에서 품질 게이트를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" >}}
 품질 게이트는 퍼블릭 베타 서비스입니다.
 {{< /callout >}}
@@ -53,7 +49,7 @@ title: 품질 게이트 규칙 설정
 2. 매칭되는 모든 규칙을 평가합니다.
 3. 하나 이상의 차단 규칙이 실패하면 실패로 간주되며, 해당 파이프라인이 차단됩니다.
 
-<div class="alert alert-danger">명령이 정확하게 동작하려면 해당 이벤트(테스트, 정적 분석 위반)가
+<div class="alert alert-warning">명령이 정확하게 동작하려면 해당 이벤트(테스트, 정적 분석 위반)가
 <strong>datadog-ci 게이트 평가</strong> 명령이 실행되기 <code>전</code>에 Datadog에 전송되어야 합니다.
 그렇지 않으면 해당 규칙은 이벤트의 부재로 인해 잘못된 동작으로 간주될 수도 있습니다.
 </div>

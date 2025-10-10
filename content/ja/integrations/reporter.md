@@ -26,8 +26,8 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
-custom_kind: integration
+- marketplace
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -88,13 +88,13 @@ Datadog Reporter を使用すると、レポートをスケジュールして、
 
 このインテグレーションにより、**Datadog Reporter** と呼ばれる新しいダッシュボードが Datadog インスタンスにセットアップされます。ダッシュボードに移動し、その iFrame から新しいユーザーを作成することで、アプリケーションに直接アクセスできます。*Datadog アカウントは DD Reporter アプリケーションでは機能しません。別のアカウントを登録する必要があります*
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: support@rapdev.io
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222
+ - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
@@ -102,4 +102,4 @@ Datadog Reporter を使用すると、レポートをスケジュールして、
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-reporter" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-reporter" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

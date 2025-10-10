@@ -58,7 +58,7 @@ tile:
   title: Postman
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -97,7 +97,7 @@ Puede encontrar instrucciones detalladas en la [documentación de Postman][2]. L
 {{< get-metrics-from-git "postman" >}}
 
 
-### Checks de servicio
+### Checks de servicios
 
 Postman no incluye checks de servicio.
 

@@ -3,7 +3,7 @@ categories:
 - azure
 - クラウド
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Functions のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_functions/

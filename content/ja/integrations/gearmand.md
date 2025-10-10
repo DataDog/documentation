@@ -150,7 +150,7 @@ Kubernetes 環境でのログ収集のための Agent の構成については�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "gearmand" >}}
+{{< get-metrics-from-git "gearman" >}}
 
 
 ### イベント
@@ -158,7 +158,7 @@ Kubernetes 環境でのログ収集のための Agent の構成については�
 Gearman チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "gearmand" >}}
+{{< get-service-checks-from-git "gearman" >}}
 
 
 ## トラブルシューティング

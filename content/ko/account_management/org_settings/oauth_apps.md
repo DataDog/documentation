@@ -11,16 +11,16 @@ title: OAuth 앱
 
 {{< img src="account_management/oauth_apps/org-management-page.png" alt="Datadog의 OAuth Apps 관리 페이지" style="width:100%;">}}
 
-## 구성
-### 권한 허용
+## 설정
+### 권한
 
-기본적으로 [Datadog Standard 및 Datadog Admin 역할][2]이 지정된 사용자는 OAuth 앱 관리 페이지에 접근할 수 있습니다. 소속 조직에 [커스텀 역할][3]이 정의된 경우, 사용자에게 `org_authorized_apps_read` 및 `org_authorized_apps_write` 권한 허용을 이용하여 커스텀 역할에 추가하세요.
+기본적으로 [Datadog Admin 역할][2]이 지정된 사용자는 OAuth 앱 관리 페이지에 접근할 수 있습니다. 소속 조직에 [커스텀 역할][3]이 정의된 경우, 사용자에게 `org_management` 권한이 있는 커스텀 역할을 추가하세요.
 
-Datadog Admin role 또는 `org_authorized_apps_write` 권한이 허용된 사용자만이 이 페이지에서 OAuth 애플리케이션을 관리할 수 있습니다. 관리 범위에는 애플리케이션 비활성화 또는 사용자의 OAuth 액세스 권한 취소 등이 포함됩니다.
+Datadog Admin 역할 또는 `org_management` 권한이 허용된 사용자만이 이 페이지에서 OAuth 애플리케이션을 관리할 수 있습니다. 관리 범위에는 애플리케이션 비활성화 또는 사용자의 OAuth 액세스 권한 취소 등이 포함됩니다.
 
 ### 활성화
 
-활성화된 OAuth 애플리케이션은 필요한 권한을 가진 사용자가 대신 액세스를 승인하도록 해줍니다. Datadog 모바일 앱 및 [OAuth API 액세스][5]를 보유한 커스텀 [Datadog 앱][4] 등이 OAuth 애플리케이션에 포함됩니다.
+활성화된 OAuth 애플리케이션은 필요한 권한을 가진 사용자가 대신 액세스를 승인하도록 도와드립니다. Datadog 모바일 앱<!-- 및 [OAuth API 액세스][5]를 보유한 커스텀 [UI 확장 프로그램][4]이 OAuth 애플리케이션에 포함됩니다-->.
 
 ### 비활성화
 
@@ -47,5 +47,5 @@ OAuth 앱 관리 페이지에서 애플리케이션을 비활성화하는 방법
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /ko/account_management/rbac/permissions/#general-permissions
 [3]: /ko/account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /ko/developers/datadog_apps/
-[5]: /ko/developers/datadog_apps/#oauth-api-access
+[4]: /ko/developers/ui_extensions/
+[5]: /ko/developers/ui_extensions/#oauth-api-access

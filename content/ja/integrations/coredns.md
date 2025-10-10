@@ -12,7 +12,10 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: coredns.request_count
+      check:
+      - coredns.request_count
+      - coredns.request_count.count
+      - coredns.build_info
       metadata_path: metadata.csv
       prefix: coredns.
     process_signatures:
@@ -43,7 +46,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: coredns

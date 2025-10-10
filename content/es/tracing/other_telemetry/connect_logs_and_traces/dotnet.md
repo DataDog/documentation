@@ -35,7 +35,7 @@ Configura el .NET Tracer con el [etiquetado de servicios unificado][1] para obte
 
 Asegúrate de que la recopilación de log está configurada en el Datadog Agent y que la [configuración del Logs Agent][15] para los archivos especificados a la cola esté establecida en `source: csharp`, de modo que los pipelines de log puedan analizar los archivos de log. Para obtener más información, consulta [Recopilación de logs de C#][7]. Si `source` se establece en un valor distinto de `csharp`, es posible que tengas que añadir un [reasignador de traza][8] al pipeline de procesamiento de log apropiado para que la correlación funcione correctamente.
 
-<div class="alert alert-warning"><strong>Nota:</strong> La recopilación automática de log solo funciona para logs con formato JSON. Como alternativa, utiliza reglas personalizadas de parseo.</div>
+<div class="alert alert-danger"><strong>Nota:</strong> La recopilación automática de log solo funciona para logs con formato JSON. Como alternativa, utiliza reglas personalizadas de parseo.</div>
 
 ## Configuración de la inyección en logs
 
@@ -49,8 +49,8 @@ Para inyectar identificadores de correlación en tus mensajes de log, sigue las 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-<div class="alert alert-warning">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la biblioteca de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
+<div class="alert alert-danger">
+ <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -66,8 +66,8 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
 {{% /tab %}}
 {{% tab "log4net" %}}
 
-<div class="alert alert-warning">
- <strong>Nota: </strong>A partir de la versión 1.29.0 de .NET Tracer, la inyección automática para la biblioteca de registro log4net requiere que la aplicación esté instrumentada con la instrumentación automática.
+<div class="alert alert-danger">
+ <strong>Nota: </strong>A partir de la versión 1.29.0 de .NET Tracer, la inyección automática para la librería de registro log4net requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -111,8 +111,8 @@ Para ver ejemplos adicionales, consulta [el proyecto de inyección automática d
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-<div class="alert alert-warning">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la biblioteca de registro de NLog requiere que la aplicación esté instrumentada con la instrumentación automática.
+<div class="alert alert-danger">
+ <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de NLog requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -249,7 +249,7 @@ Ejemplos:
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-**Nota**: La biblioteca de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
+**Nota**: La librería de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
 
 ```csharp
 using Datadog.Trace;

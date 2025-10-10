@@ -4,6 +4,8 @@ algolia:
   - apm
   - application performance monitoring
   - distributed tracing
+  - trace
+  - tracing
 aliases:
 - /ko/tracing/faq/terminology
 - /ko/tracing/guide/terminology
@@ -19,6 +21,9 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=APM
   tag: 릴리스 노트
   text: 최신 Datadog 애플리케이션 성능 모니터링(APM) 릴리스를 확인하세요!(앱 로그인 필수)
+- link: https://www.datadoghq.com/blog/monitor-rust-otel/
+  tag: 블로그
+  text: OpenTelemetry로 Rust 애플리케이션 모니터링하는 방법
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: 블로그
   text: 애플리케이션 성능의 과거 추세를 추적하기 위해 범위 기반 메트릭을 생성하세요
@@ -31,6 +36,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
   tag: 블로그
   text: Datadog API 카탈로그를 사용하여 API 성능, 보안 및 소유권을 관리하세요
+- link: https://www.datadoghq.com/blog/software-catalog/
+  tag: 블로그
+  text: 개발자 경험을 개선하고 Software Catalog와 협업
 - link: https://dtdg.co/fe
   tag: 기초 구축
   text: 대화형 세션에 참여하여 애플리케이션 성능 모니터링(APM)에 대한 이해도를 높이세요

@@ -13,10 +13,10 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: Cloud Security Management
+- name: Cloud Security
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -93,7 +93,7 @@ The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, fo
 
 ## Attribute variables
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HIPAA-enabled Datadog organizations have access to only <a href="#template-variables">template variables</a> for security notifications. Attribute variables are not supported.
 </div>
 
@@ -139,7 +139,7 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 
 {{% /tab %}}
 
-{{% tab "Application Security Management" %}}
+{{% tab "App and API Protection" %}}
 
 ```json
 {
@@ -281,7 +281,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your signal message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your signal message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}

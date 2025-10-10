@@ -29,7 +29,7 @@ Select the scope to be alerted on with the following optional configurations (wi
 **1. Predefined selectors**
 * Environment. These values are derived from the `env` tag.
 * Alert Category. Scope the monitor to a subset of Watchdog alerts.
-* Team. These values are derived from the Service Catalog.
+* Team. These values are derived from the Software Catalog.
 
 **2. Additional scoping**
 * Filter on any additional tag available on the Watchdog event.

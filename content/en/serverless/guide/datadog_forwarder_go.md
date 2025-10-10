@@ -2,9 +2,10 @@
 title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
 
 ---
+
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/go">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
@@ -32,7 +33,7 @@ go get github.com/DataDog/datadog-lambda-go
 Follow these steps to instrument the function:
 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
-2. Import the required packages in the file declaring your Lambda function handler.
+2. Import the required packages in the file declaring your Lambda function handler. {{% tracing-go-v2 %}}
 
     ```go
     package main
@@ -40,8 +41,8 @@ Follow these steps to instrument the function:
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
 3. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
@@ -149,3 +150,4 @@ Learn more about [custom metric submission][7].
 [5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
+[8]: /tracing/trace_collection/custom_instrumentation/go/migration

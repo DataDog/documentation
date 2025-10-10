@@ -1,6 +1,7 @@
 ---
 title: Agent 6 Log Files
 disable_toc: false
+private: true
 ---
 
 ## Overview

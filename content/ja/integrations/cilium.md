@@ -41,7 +41,7 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 5.0.0
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: cilium
@@ -96,7 +96,7 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
      `prometheus.enabled=true` および `operator.prometheus.enabled=true`
 
 または、別途 Kubernetes のマニフェストで Prometheus のメトリクスを有効にします。
-<div class="alert alert-warning"><a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium <= v1.11</a> の場合は、<code>--prometheus-serve-addr=:9090</code> を使用してください。 </a></div>
+<div class="alert alert-danger"><a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium <= v1.11</a> の場合は、<code>--prometheus-serve-addr=:9090</code> を使用してください。 </a></div>
 
    - `cilium-agent` で、Cilium DaemonSet 構成の `args` セクションに `--prometheus-serve-addr=:9962` を追加します。
 

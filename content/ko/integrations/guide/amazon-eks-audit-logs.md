@@ -6,7 +6,7 @@ title: Amazon EKS 감사 로그용 로그 수집
 
 클러스터 관리자는 Amazon EKS 감사 로그를 통해 EKS 클러스터의 작업에 관한 인사이트를 얻을 수 있습니다. Amazon EKS 감사 로그 수집을 활성화하면 [Datadog Cloud SIEM][1]을 설정해 사용할 수 있고, 이를 통해 원치 않는 작업이나 위험이 발생할 때 즉각적으로 EKS 클러스터 내에서 모니터링할 수 있습니다.
 
-## 구성
+## 설정
 
 ### Amazon EKS 감사 로그
 
@@ -33,13 +33,13 @@ AWS 통합 설정을 완료한 후 Datadog Forwarder를 설치하고 구성하�
 
 **참고**: [설정 트리거][5] 단계에 Lambda ARN이 필요합니다. 내 Lambda ARN을 보려면 AWS 콘솔에서 [Lambda > Functions > `Your_Function_Name`][6]으로 이동하세요. Function 개요 아래에 Function ARN이 있습니다.
 
-## Log Explorer
+## 로그 탐색기
 
 Amazon EKS 감사 로그, Datadog AWS 통합, Datadog Forwarder를 모두 설정하고 나면 [Datadog Log Explorer][7]에서 EKS 감사 로그를 볼 수 있습니다.
 
 **참고**: Log Explorer로 로그를 스트리밍하는 데 몇 초 정도 걸릴 수 있습니다. 
 
-Log Explorer에서 EKS 감사 로그만 보려면 Log Explorer 검색 창에 `source:kubernetes.aduit`를 쿼리하거나 패싯 패널의 **Source** 아래에서 `kubernetes.audit` 패싯을 선택해 EKS 감사 로그를 필터링할 수 있습니다.
+Log Explorer에서 EKS 감사 로그만 보려면 Log Explorer 검색 창에 `source:kubernetes.audit`를 쿼리하거나 패싯 패널의 **Source** 아래에서 `kubernetes.audit` 패싯을 선택해 EKS 감사 로그를 필터링할 수 있습니다.
 
 ## Cloud SIEM
 
@@ -47,7 +47,7 @@ Datadog Cloud SIEM을 사용해 EKS 클러스터에 발생할 수 있는 잠재�
 
 Cloud SIEM으로 Amazon EKS 감사 로그를 모니터링하려면 Cloud SIEM을 설정하고 구성 이상이나 위협이 감지될 때 [Security Signals Explorer][10]에 [보안 신호][9]를 생성하는 커스텀 [로그 탐지 규칙][8]을 만드세요.
 
-### 구성
+### 설정
 
 Cloud SIEM을 설정하고 구성합니다. 인앱 [Cloud SIEM 설정 및 구성 지침][1]을 참고하세요.
 
@@ -75,10 +75,10 @@ Cloud SIEM을 설정하고 구성한 뒤, 새 Cloud SIEM 규칙을 처음부터 
 [5]: /ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /ko/security/cloud_siem/log_detection_rules/
+[8]: /ko/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [9]: /ko/getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
 [11]: /ko/security/default_rules/#cat-cloud-siem
 [12]: /ko/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /ko/security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /ko/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method

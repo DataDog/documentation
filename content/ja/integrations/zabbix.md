@@ -24,7 +24,7 @@ author:
 categories:
 - ネットワーク
 - イベント管理
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_on_public_website: true
@@ -115,25 +115,25 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 
 3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
-```
-    try {
-        Zabbix.Log(4, '[datadog webhook] received value=' + value);
+``` 
+try {
+    Zabbix.Log(4, '[datadog webhook] received value=' + value);
 
-        var params = JSON.parse(value);
-        var req = new CurlHttpRequest();
-        req.AddHeader('Content-Type: application/json');
-        var webhook_url = 'https://app.datadoghq.com/intake/webhook/zabbix?api_key=' + params.api_key;
-        var webhook_data = value;
-        var resp = req.Post(webhook_url, webhook_data);
-        if (req.Status() != 202) {
-            throw 'Response code: '+req.Status();
-        }
-        Zabbix.Log(4, '[datadog webhook] received response with status code ' + req.Status() + '\n' + resp);
-    } catch (error) {
-        Zabbix.Log(4, '[datadog webhook] event creation failed json : ' + webhook_data)
-        Zabbix.Log(4, '[datadog webhook] event creation failed : ' + error);
+    var params = JSON.parse(value);
+    var req = new HttpRequest();
+    req.addHeader('Content-Type: application/json');
+    var webhook_url = 'https://app.datadoghq.com/intake/webhook/zabbix?api_key=' + params.api_key;
+    var webhook_data = value;
+    var resp = req.post(webhook_url, webhook_data);
+    if (req.getStatus() != 202) {
+        throw 'Response code: '+req.getStatus();
     }
-    return JSON.stringify({});
+    Zabbix.Log(4, '[datadog webhook] received response with status code ' + req.getStatus() + '\n' + resp);
+} catch (error) {
+    Zabbix.Log(4, '[datadog webhook] event creation failed json : ' + webhook_data)
+    Zabbix.Log(4, '[datadog webhook] event creation failed : ' + error);
+}
+return JSON.stringify({});
 
 ```
 4. "Test" ボタンを使用して、Webhook が正しく設定されていることを確認します。

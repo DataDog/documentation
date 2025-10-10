@@ -61,7 +61,7 @@ Cette intégration nécessite l'accès au endpoint des métriques du gestionnair
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 
 ### Checks de service

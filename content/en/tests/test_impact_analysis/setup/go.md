@@ -16,10 +16,6 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Test optimization for Go is in Preview.
-{{< /callout >}}
-
 ## Compatibility
 
 Test Impact Analysis is only supported on `orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`.
@@ -46,7 +42,7 @@ orchestrion go test ./... -cover -covermode=count -coverpkg ./...
 
 3. `-coverpkg`: the code coverage analysis for each test must be configured to apply in all package dependencies and not only for the package being tested. This way, if a dependency changes, you can track the test affected by this change. If you run the test command from the root of the project (where the go.mod file is), you can use the `./...` wildcard. If not, you must manually list all package dependencies comma separated (`pattern1, pattern2, pattern3, ...`). For that, you could use the `go list ./...` command to get all the package names.
 
-<div class="alert alert-warning">Having an incorrect -coverpkg value affects the ability of Test Impact Analysis to correctly track test coverage.</div>
+<div class="alert alert-danger">Having an incorrect -coverpkg value affects the ability of Test Impact Analysis to correctly track test coverage.</div>
 
 ## Disable skipping for specific tests
 

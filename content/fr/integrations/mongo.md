@@ -340,9 +340,9 @@ metadata:
     ad.datadoghq.com/mongo.instances: |
       [
         {
-          "hosts": ["%%host%%:%%port%%"], 
-          "username": "datadog", 
-          "password": "<MOTDEPASSEUNIQUE>", 
+          "hosts": ["%%host%%:%%port%%"],
+          "username": "datadog",
+          "password": "<MOTDEPASSEUNIQUE>",
           "database": "<BASEDEDONNÉES>"
         }
       ]
@@ -471,7 +471,7 @@ Ensuite, [instrumentez votre conteneur d'application][5] et définissez `DD_AGEN
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "mongo" >}}
+{{< get-metrics-from-git "mongodb" >}}
 
 
 Consultez la [documentation sur MongoDB 3.0][4] (en anglais) pour en savoir plus sur certaines de ces métriques.

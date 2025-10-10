@@ -55,25 +55,29 @@ AWS WAF는 일반적인 웹 공격으로부터 웹 애플리케이션을 보호�
 
 ### 로그 수집
 
-#### 감사 로그
-
 웹 애플리케이션 방화벽 감사 로그를 활성화하여 웹 ACL 분석 트래픽에 대한 자세한 정보를 얻어보세요.
 
+#### WAF
 1. 이름이 `aws-waf-logs-`로 시작하는 `Amazon Data Firehose`를 만듭니다.
 2. `Amazon Data Firehose` 대상에서 `Amazon S3`을 선택한 다음 접두사 `waf`를 추가합니다.
-3. 원하는 웹 ACL을 선택하고 로그를 새로 생성한 Firehose로 전송합니다([상세 단계][4]).
+3. 원하는 웹 ACL을 선택하고 새로 생성한 Firehose에 로그를 전송하도록 구성합니다([상세 단계][4]).
 
-WAF 로그를 수집하여 S3 버킷으로 전송합니다.
+#### WAFV2
+1. 이름이 `aws-waf-logs-`로 시작하는 `S3 bucket`를 만듭니다.
+2. Amazon S3 버킷의 로깅 대상을 구성합니다([상세 단계][5]).
+
+WAF/WAFV2 로그를 수집하고 지정한 S3 버킷으로 전송합니다.
 
 #### Datadog로 로그 전송
 
-1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][5]를 설정하세요.
+1. 이미 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][6]를 설정합니다.
 2. Lambda 함수를 설치한 다음 AWS 콘솔에서 WAF 로그를 포함하는 S3 버킷에 트리거를 수동으로 추가합니다. Lambda 함수에서 다음 트리거 목록의 S3를 클릭합니다.
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 트리거 설정" popup="true" style="width:70%;">}}
-   WAF 로그가 포함된 S3 버킷을 선택하여 트리거를 설정하고 이벤트 유형을 `Object Created (All)`로 변경한 다음 추가 버튼을 클릭합니다.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda 트리거 설정" popup="true" style="width:70%;">}}
+3. 트리거를 구성하려면 WAF 로그가 포함된 S3 버킷을 선택하고 이벤트 유형을 `Object Created (All)`로 변경합니다.
+4. **Add**를 클릭합니다.
 
-**참고**: Datadog Lambda 포워더(Forwarder)는 쉽게 사용할 수 있도록 WAF 로그의 중첩된 오브젝트 어레이를 `key:value` 형식으로 자동 변환합니다.
+**참고**: 
+- Datadog Lambda Forwarder는 쉽게 사용할 수 있도록 WAF 로그의 중첩된 오브젝트 어레이를 `key:value` 형식으로 자동 변환합니다.
+- "Configurations on the same bucket cannot share a common event type(동일한 버킷의 구성은 공통 이벤트 유형을 공유할 수 없습니다)"의 오류 메시지가 나타난 경우, 버킷에 다른 Lambda Forwarder와 연결된 이벤트 알림이 없도록 다시 한번 확인하세요. S3 버킷에 여러 `All object create events` 인스턴스가 있어서는 안 됩니다.
 
 ## 수집한 데이터
 
@@ -95,12 +99,13 @@ AWS WAF 통합은 서비스 점검을 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][7]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
 [1]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-waf
-[4]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
-[5]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
-[7]: https://docs.datadoghq.com/ko/help/
+[4]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-logging.html
+[5]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+[6]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
+[8]: https://docs.datadoghq.com/ko/help/

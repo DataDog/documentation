@@ -9,12 +9,14 @@ private: true
 title: 에이전트 가이드
 ---
 
-{{< whatsnext desc="설정 가이드:" >}}
+{{< whatsnext desc="구성 가이드:" >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent 환경 변수{{< /nextlink >}}
-    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}인터넷 연결이 제한된 서버에 Agent 설치하기{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}독립형 Datadog 역할을 사용하여 Ansible 설정하기{{< /nextlink >}}
-    {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Agent 제거하기{{< /nextlink >}}
+    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}인터넷 연결이 제한된 서버에 Agent 설치{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}독립형 Datadog 역할을 사용하여 Ansible 설정{{< /nextlink >}}
+    {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Agent 제거 방법{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-key-rotation-2024" >}}2024 Linux 키 로테이션{{< /nextlink >}}
+    {{< nextlink href="agent/guide/fips-agent" >}}FIPS Agent 설치 및 구성{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Windows guides:" >}}
@@ -37,10 +39,11 @@ title: 에이전트 가이드
     {{< nextlink href="agent/guide/integration-management" >}}통합 관리{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="에이전트 버전 관리 가이드:" >}}
+{{< whatsnext desc="Agent versioning guides:" >}}
+    {{< nextlink href="agent/guide/upgrade" >}}에이전트 7으로 업그레이드{{< /nextlink >}}
     {{< nextlink href="agent/guide/version_differences" >}}에이전트 버전 차이{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Datadog 에이전트 부버전 업그레이드{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python 버전 관리: Datadog 에이전트 v6과 Python 3 함께 사용{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Datadog 에이전트의 부버전 간 업그레이드{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python 버전 관리: Datadog 에이전트 v6와 Python 3 함께 사용하기{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2에서 Python 3으로 커스텀 점검 마이그레이션{{< /nextlink >}}
 {{< /whatsnext >}}
 

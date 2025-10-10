@@ -40,7 +40,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 <div class="alert alert-info">Visual formatting rules should be based on the metric's raw value. If the metric base unit is in nanoseconds, but the Query Value autoformats to seconds, your conditional rules should be based on nanoseconds.</div>
 
-Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, internal servers must be updated to support cross origin requests to reference internal images.
+Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, you can either upload an image from your local computer or reference images from the public internet. Internal servers must be updated to support cross origin requests to reference internal images.
 
 {{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
 

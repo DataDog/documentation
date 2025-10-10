@@ -1,7 +1,7 @@
 
-### CSM Threats
+### Workload Protection
 
-CSM Threats supports the following Linux distributions:
+Workload Protection supports the following Linux distributions:
 
 | Linux Distributions        | Supported Versions                    |
 | ---------------------------| --------------------------------------|
@@ -19,27 +19,27 @@ CSM Threats supports the following Linux distributions:
 - For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 - Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported.
 
-### CSM Vulnerabilities
+### Cloud Security Vulnerabilities
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
 | [Helm Chart][103]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][104]              | v1.5.6 or later (Kubernetes and hosts only)|
 
-**Note**: CSM Vulnerabilities is **not** available for the following container runtimes:
+**Note**: Cloud Security Vulnerabilities is **not** available for the following container runtimes:
 
   - CRI-O runtime
   - podman runtime
 
-### CSM Identity Risks
+### Cloud Security Identity Risks
 
-<div class="alert alert-info"><strong>Note</strong>: At this time, CSM Identity Risks is available for AWS only.</div>
+<div class="alert alert-info">At this time, Cloud Security Identity Risks is available for AWS only.</div>
 
-To use CSM Identity Risks, you must [enable resource collection for AWS][105]. If you've already done this, no additional setup is required.
+To use Cloud Security Identity Risks, you must [enable resource collection for AWS][105]. If you've already done this, no additional setup is required.
 
 **Notes**: 
 
-- If you've [enabled CSM Misconfigurations for your AWS accounts][106], you already have cloud resource collection enabled.
+- If you've [enabled Cloud Security Misconfigurations for your AWS accounts][106], you already have cloud resource collection enabled.
 - Although not required, when you [enable CloudTrail logs forwarding][107], you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.
 
 [102]: /security/cloud_security_management/troubleshooting

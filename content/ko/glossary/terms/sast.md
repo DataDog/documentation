@@ -4,7 +4,7 @@ core_product:
 - appsec
 synonyms:
 - 정적 분석
-- 코드 분석
+- 코드 보안
 title: 정적 애플리케이션 보안 테스트(SAST)
 ---
 

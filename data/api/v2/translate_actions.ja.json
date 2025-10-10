@@ -1,4 +1,8 @@
 {
+  "ListAwsScanOptions": {
+    "description": "AWS アカウントに設定されているスキャンオプションを取得します。",
+    "summary": "AWS スキャンオプションを取得します"
+  },
   "ListAPIKeys": {
     "description": "アカウントで利用できるすべての API キーを一覧表示します。",
     "summary": "すべての API キーを取得"
@@ -23,6 +27,30 @@
     "request_description": "",
     "request_schema_description": "API キーの更新に使用されるリクエスト。"
   },
+  "ListAPIs": {
+    "description": "API とその ID を一覧表示します。",
+    "summary": "API をリストアップ"
+  },
+  "DeleteOpenAPI": {
+    "description": "特定の API を ID で削除します。",
+    "summary": "API を削除する"
+  },
+  "GetOpenAPI": {
+    "description": "特定の API に関する情報を [OpenAPI](https://spec.openapis.org/oas/latest.html) 形式のファイルで取得します。",
+    "summary": "API を取得する"
+  },
+  "UpdateOpenAPI": {
+    "description": "特定の API に関する情報を更新します。指定された内容は、指定された ID のすべての API 内容を置き換えます。\nID は作成 API によって返されるか、API カタログ UI の URL で確認できます。\n",
+    "summary": "API を更新する",
+    "request_description": "",
+    "request_schema_description": "`OpenAPI` 形式の API データをファイルとして扱うオブジェクト。"
+  },
+  "CreateOpenAPI": {
+    "description": "指定された [OpenAPI](https://spec.openapis.org/oas/latest.html) 仕様から新しい API を作成します。\n作成可能なメタデータに関する追加情報については [API カタログドキュメント](https://docs.datadoghq.com/api_catalog/add_metadata/)を参照してください。\n作成した API ID を返します。\n",
+    "summary": "新しい API を作成する",
+    "request_description": "",
+    "request_schema_description": "`OpenAPI` 形式の API データをファイルとして扱うオブジェクト。"
+  },
   "ListSpansMetrics": {
     "description": "構成されたスパンベースのメトリクスとその定義のリストを取得します。",
     "summary": "Get all span-based metrics"
@@ -46,6 +74,36 @@
     "summary": "スパンベースのメトリクスを更新する",
     "request_description": "スパンベースメトリクスの新しい定義。",
     "request_schema_description": "新しいスパンベースのメトリクス本文。"
+  },
+  "ListApmRetentionFilters": {
+    "description": "APM 保持フィルターのリストを取得します。",
+    "summary": "すべての APM 保持フィルターを一覧表示する"
+  },
+  "CreateApmRetentionFilter": {
+    "description": "組織のスパンをインデックス化するための保持フィルターを作成します。\nリクエストが成功すると、保持フィルターの定義を返します。\n\nspans-errors-sampling-processor および spans-appsec-sampling-processor タイプのデフォルトフィルターは作成できません。",
+    "summary": "保持フィルターを作成する",
+    "request_description": "新しい保持フィルターの定義。",
+    "request_schema_description": "作成される保持フィルターの本文。"
+  },
+  "ReorderApmRetentionFilters": {
+    "description": "保持フィルターの実行順序を並び替えます。",
+    "summary": "保持フィルターの並び替え",
+    "request_description": "新しい順序の保持フィルターのリスト。",
+    "request_schema_description": "並び替える保持フィルターのリスト。"
+  },
+  "DeleteApmRetentionFilter": {
+    "description": "組織内の特定の保持フィルターを削除します。\n\nspans-errors-sampling-processor および spans-appsec-sampling-processor タイプのデフォルトフィルターは削除できません。",
+    "summary": "保持フィルターを削除する"
+  },
+  "GetApmRetentionFilter": {
+    "description": "APM 保持フィルターを取得します。",
+    "summary": "特定の APM 保持フィルターを取得する"
+  },
+  "UpdateApmRetentionFilter": {
+    "description": "組織内の保持フィルターを更新します。\n\nデフォルトのフィルター (タイプが spans-errors-sampling-processor および spans-appsec-sampling-processor のフィルター) の名前を変更したり、削除したりすることはできません。",
+    "summary": "保持フィルターを更新する",
+    "request_description": "更新された保持フィルターの定義。",
+    "request_schema_description": "更新される保持フィルターの本文。"
   },
   "ListApplicationKeys": {
     "description": "組織で利用できるすべてのアプリケーションキーを一覧表示",
@@ -99,6 +157,88 @@
     "request_description": "",
     "request_schema_description": "AuthN Mapping の更新リクエスト。"
   },
+  "SearchCases": {
+    "description": "ケースを検索します。",
+    "summary": "ケースを検索"
+  },
+  "CreateCase": {
+    "description": "ケースの作成",
+    "summary": "ケースの作成",
+    "request_description": "ケースのペイロード",
+    "request_schema_description": "ケース作成リクエスト"
+  },
+  "GetProjects": {
+    "description": "すべてのプロジェクトを取得します。",
+    "summary": "すべてのプロジェクトを取得する"
+  },
+  "CreateProject": {
+    "description": "プロジェクトを作成します。",
+    "summary": "プロジェクトを作成する",
+    "request_description": "プロジェクトのペイロード",
+    "request_schema_description": "プロジェクト作成リクエスト"
+  },
+  "DeleteProject": {
+    "description": "プロジェクトの `id` を指定してプロジェクトを削除します。",
+    "summary": "プロジェクトを削除する"
+  },
+  "GetProject": {
+    "description": "プロジェクトの詳細を `project_id` で取得します。",
+    "summary": "プロジェクトの詳細を取得する"
+  },
+  "GetCase": {
+    "description": "`case_id` でケースの詳細を取得します。",
+    "summary": "ケースの詳細を取得する"
+  },
+  "ArchiveCase": {
+    "description": "ケースをアーカイブする",
+    "summary": "ケースをアーカイブする",
+    "request_description": "ケースペイロードをアーカイブ",
+    "request_schema_description": "ケースを空にするリクエスト"
+  },
+  "AssignCase": {
+    "description": "ユーザーにケースを割り当て",
+    "summary": "ケースを割り当てる",
+    "request_description": "ケースペイロードを割り当て",
+    "request_schema_description": "ケースの割り当てリクエスト"
+  },
+  "UpdatePriority": {
+    "description": "ケースの優先度を更新する",
+    "summary": "ケースの優先度を更新する",
+    "request_description": "ケース優先度更新ペイロード",
+    "request_schema_description": "ケース更新優先度リクエスト"
+  },
+  "UpdateStatus": {
+    "description": "ケースステータスを更新する",
+    "summary": "ケースステータスを更新する",
+    "request_description": "ケースステータス更新ペイロード",
+    "request_schema_description": "ケース更新ステータスリクエスト"
+  },
+  "UnarchiveCase": {
+    "description": "ケースのアーカイブを解除する",
+    "summary": "ケースのアーカイブを解除する",
+    "request_description": "ケースペイロードのアーカイブを解除",
+    "request_schema_description": "ケースを空にするリクエスト"
+  },
+  "UnassignCase": {
+    "description": "ケースの割り当てを解除する",
+    "summary": "ケースの割り当てを解除する",
+    "request_description": "ケースの割り当てを解除",
+    "request_schema_description": "ケースを空にするリクエスト"
+  },
+  "ListCatalogEntity": {
+    "description": "Software Catalog からエンティティ一覧を取得します。",
+    "summary": "Get a list of entities"
+  },
+  "UpsertCatalogEntity": {
+    "description": "Software Catalog にエンティティを作成または更新します。",
+    "summary": "Create or update entities",
+    "request_description": "エンティティ用の YAML または JSON。",
+    "request_schema_description": "エンティティの作成または更新リクエスト。"
+  },
+  "DeleteCatalogEntity": {
+    "description": "Software Catalog から単一のエンティティを削除します。",
+    "summary": "Delete a single entity"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "パイプラインイベントを HTTP 経由で Datadog プラットフォームに送信します。パイプライン実行がどのようにモデル化され、どのような実行データタイプをサポートしているかについては、[Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/) を参照してください。\n\nパイプラインイベントは、過去 18 時間までのタイムスタンプで送信できます。",
     "summary": "パイプラインイベントの送信",
@@ -128,14 +268,108 @@
     "request_schema_description": "組織からテストイベントの集計バケットを取得するリクエストと共に送信されたオブジェクト。"
   },
   "ListCIAppTestEvents": {
-    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility テストイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のテストイベントを確認するために使用します。",
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility テストイベントを返します。\n[結果はログと同様にページ分割されます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\n最新のテストイベントを見るにはこのエンドポイントを使用してください。",
     "summary": "テストイベント一覧の取得"
   },
   "SearchCIAppTestEvents": {
-    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility テストイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility テストイベントを返します。\n[結果はログと同様にページ分割されます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\n複雑なイベントのフィルタリングと検索を構築するには、このエンドポイントを使用してください。",
     "summary": "テストイベントの検索",
     "request_description": "",
     "request_schema_description": "テスト検索のリクエスト。"
+  },
+  "ListContainerImages": {
+    "description": "組織のすべてのコンテナイメージを取得します。",
+    "summary": "すべてのコンテナイメージを取得"
+  },
+  "ListContainers": {
+    "description": "組織のすべてのコンテナを取得します。",
+    "summary": "すべてのコンテナを取得"
+  },
+  "ListCostAWSCURConfigs": {
+    "description": "AWS CUR の構成を一覧表示します。",
+    "summary": "Confluent アカウントにリソースを追加する"
+  },
+  "CreateCostAWSCURConfig": {
+    "description": "AWS CUR 構成用の Cloud Cost Management アカウントを作成します。",
+    "summary": "Confluent アカウントからリソースを削除する",
+    "request_description": "",
+    "request_schema_description": "AWS CUR 構成ポストリクエスト。"
+  },
+  "DeleteCostAWSCURConfig": {
+    "description": "Cloud Cost Management アカウントをアーカイブします。",
+    "summary": "Confluent アカウントからリソースを取得する"
+  },
+  "UpdateCostAWSCURConfig": {
+    "description": "AWS CUR 構成のステータス (アクティブ/アーカイブ済み) を更新します。",
+    "summary": "Confluent アカウントのリソースを更新する",
+    "request_description": "",
+    "request_schema_description": "AWS CUR 構成パッチリクエスト。"
+  },
+  "ListCostAzureUCConfigs": {
+    "description": "Azure の構成を一覧表示します。",
+    "summary": "Cloudflare アカウントを一覧表示する"
+  },
+  "CreateCostAzureUCConfigs": {
+    "description": "Azure 構成用の Cloud Cost Management アカウントを作成します。",
+    "summary": "Cloudflare アカウントを追加する",
+    "request_description": "",
+    "request_schema_description": "Azure 構成ポストリクエスト。"
+  },
+  "DeleteCostAzureUCConfig": {
+    "description": "Cloud Cost Management アカウントをアーカイブします。",
+    "summary": "Cloudflare アカウントを削除する"
+  },
+  "UpdateCostAzureUCConfigs": {
+    "description": "Azure 構成のステータス (アクティブ/アーカイブ済み) を更新します。",
+    "summary": "Cloudflare アカウントを取得する",
+    "request_description": "",
+    "request_schema_description": "Azure 構成パッチリクエスト。"
+  },
+  "ListCustomCostsFiles": {
+    "description": "カスタムコストファイルをリストアップします。",
+    "summary": "カスタムコストファイルをリストアップ"
+  },
+  "UploadCustomCostsFile": {
+    "description": "カスタムコストファイルをアップロードします。",
+    "summary": "カスタムコストファイルをアップロード",
+    "request_description": "",
+    "request_schema_description": "カスタムコストファイルのアップロードをリクエストします。"
+  },
+  "DeleteCustomCostsFile": {
+    "description": "指定されたカスタムコストファイルを削除します。",
+    "summary": "カスタムコストファイルを削除"
+  },
+  "GetCustomCostsFile": {
+    "description": "指定されたカスタムコストファイルを取得します。",
+    "summary": "カスタムコストファイルを取得"
+  },
+  "GetActiveBillingDimensions": {
+    "description": "コスト属性用のアクティブな請求ディメンションを取得します。指定された月のコストデータは、翌月の 19 日までに利用可能になります。",
+    "summary": "コスト属性のアクティブな請求ディメンションの取得"
+  },
+  "GetMonthlyCostAttribution": {
+    "description": "複数組織および単一ルート組織のアカウントで、タグ別に月次コスト属性を取得します。\n指定された月のコスト属性データは、翌月の 19 日までに利用可能になります。\nこの API エンドポイントはページ分割されます。すべてのレコードを確実に受け取るには、レスポンスに `next_record_id` の値が設定されているか確認してください。設定されている場合は、別のリクエストを作成し、`next_record_id` をパラメーターとして渡します。\n擬似コードの例:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\nsleep(5 seconds) # レート制限にかからないようにします\nresponse := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\ncursor := response.metadata.pagination.next_record_id\nEND\n```\n\nこのエンドポイントは、[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)でのみアクセス可能です。このエンドポイントは、Government (US1-FED) サイトでは利用できません。",
+    "summary": "月次コスト属性の取得"
+  },
+  "ListAllCSMAgents": {
+    "description": "ホストおよびコンテナで実行中のすべての CSM エージェントの一覧を取得します。",
+    "summary": "すべての CSM エージェントを取得する"
+  },
+  "GetCSMCloudAccountsCoverageAnalysis": {
+    "description": "Cloud アカウントの CSM カバレッジ分析を取得します。\nこれは、セキュリティ上の問題に対してスキャンされている Cloud アカウントの数に基づいて計算されます。",
+    "summary": "CSM Cloud アカウントのカバレッジ分析を取得します"
+  },
+  "GetCSMHostsAndContainersCoverageAnalysis": {
+    "description": "ホストおよびコンテナの CSM カバレッジ分析を取得します。\nこれは、CSM 機能が有効なエージェントが稼働しているホストおよびコンテナの数に基づいて計算されます。",
+    "summary": "CSM ホストおよびコンテナのカバレッジ分析を取得します"
+  },
+  "GetCSMServerlessCoverageAnalysis": {
+    "description": "サーバーレスリソースの CSM カバレッジ分析を取得します。\nこれは、CSM 機能が有効なエージェントが稼働しているサーバーレスリソースの数に基づいて計算されます。",
+    "summary": "CSM サーバーレスのカバレッジ分析を取得します"
+  },
+  "ListAllCSMServerlessAgents": {
+    "description": "ホストおよびコンテナで実行中のすべての CSM Serverless エージェントの一覧を取得します。",
+    "summary": "すべての CSM サーバーレスエージェントを取得する"
   },
   "ListCurrentUserApplicationKeys": {
     "description": "現在のユーザーが利用できるすべてのアプリケーションキーを一覧表示",
@@ -183,6 +417,28 @@
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
   },
+  "GetDomainAllowlist": {
+    "description": "組織のドメイン許可リストを取得します。",
+    "summary": "Get Domain Allowlist"
+  },
+  "PatchDomainAllowlist": {
+    "description": "組織のドメイン許可リストを更新します。",
+    "summary": "Sets Domain Allowlist",
+    "request_description": "",
+    "request_schema_description": "望ましいメールドメイン許可リスト構成を含むリクエスト。"
+  },
+  "CreateDORADeployment": {
+    "description": "この API エンドポイントで、DORA メトリクスに関連するデプロイメントデータを提供します。\n\nこれは以下のために必要です。\n- デプロイメントの頻度\n- 変更リードタイム\n- 変更失敗率",
+    "summary": "DORA メトリクスのデプロイイベントを送信",
+    "request_description": "",
+    "request_schema_description": "DORA デプロイメントイベントの作成リクエスト。"
+  },
+  "CreateDORAIncident": {
+    "description": "この API エンドポイントで、DORA メトリクスに関連するインシデントデータを提供します。\n\nこれは以下のために必要です。\n- 変更失敗率\n- リストアまでの時間",
+    "summary": "DORA メトリクスのインシデントイベントを送信",
+    "request_description": "",
+    "request_schema_description": "DORA インシデントイベントの作成リクエスト。"
+  },
   "ListDowntimes": {
     "description": "すべてのスケジュール済みダウンタイムを取得します。",
     "summary": "すべてのダウンタイムを取得する"
@@ -211,6 +467,12 @@
     "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のイベントを確認するために使用します。",
     "summary": "イベントのリストを取得する"
   },
+  "CreateEvent": {
+    "description": "このエンドポイントを使用すると、イベントを送信できます。\n\n✅ **`change` カテゴリのイベントのみ**が一般提供 (GA) です。詳細は[変更追跡](https://docs.datadoghq.com/change_tracking)を参照してください。\n\n❌ 他のイベントカテゴリを扱うユースケースについては、V1 エンドポイントを使用してください。",
+    "summary": "イベントを投稿",
+    "request_description": "イベントリクエストオブジェクト",
+    "request_schema_description": "イベント作成用ペイロード。"
+  },
   "SearchEvents": {
     "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントを使用して、複雑なイベントのフィルタリングと検索を構築します。",
     "summary": "イベントの検索",
@@ -226,6 +488,30 @@
     "summary": "インシデントを作成",
     "request_description": "インシデントのペイロード。",
     "request_schema_description": "インシデントのリクエストを作成します。"
+  },
+  "ListIncidentTypes": {
+    "description": "すべてのインシデントタイプを取得します。",
+    "summary": "Get a list of incident types"
+  },
+  "CreateIncidentType": {
+    "description": "インシデントタイプを作成します。",
+    "summary": "Create an incident type",
+    "request_description": "インシデントタイプ用ペイロード。",
+    "request_schema_description": "インシデントタイプの作成リクエスト。"
+  },
+  "DeleteIncidentType": {
+    "description": "インシデントタイプを削除します。",
+    "summary": "Delete an incident type"
+  },
+  "GetIncidentType": {
+    "description": "インシデントタイプの詳細を取得します。",
+    "summary": "Get incident type details"
+  },
+  "UpdateIncidentType": {
+    "description": "インシデントタイプを更新します。",
+    "summary": "Update an incident type",
+    "request_description": "インシデントタイプ用ペイロード。",
+    "request_schema_description": "インシデントタイプのパッチリクエスト。"
   },
   "SearchIncidents": {
     "description": "特定のクエリに一致するインシデントを検索します。",
@@ -303,6 +589,42 @@
     "request_description": "インシデント Todo ペイロード。",
     "request_schema_description": "インシデント Todo のリクエストをパッチします。"
   },
+  "ListAWSAccounts": {
+    "description": "AWS アカウントインテグレーション構成の一覧を取得します。",
+    "summary": "すべての AWS インテグレーションをリストアップ"
+  },
+  "CreateAWSAccount": {
+    "description": "新たな AWS アカウントインテグレーション構成を作成します。",
+    "summary": "AWS インテグレーションを作成",
+    "request_description": "",
+    "request_schema_description": "AWS アカウント作成リクエストボディ。"
+  },
+  "DeleteAWSAccount": {
+    "description": "config ID を指定して AWS アカウントインテグレーションの設定を削除します。",
+    "summary": "AWS インテグレーションを削除"
+  },
+  "GetAWSAccount": {
+    "description": "config ID を指定して AWS アカウントインテグレーションの設定を取得します。",
+    "summary": "設定 ID を用いて AWS インテグレーションを取得 "
+  },
+  "UpdateAWSAccount": {
+    "description": "config ID を指定して AWS アカウントインテグレーションの設定を更新します。",
+    "summary": "AWS インテグレーションを更新",
+    "request_description": "",
+    "request_schema_description": "AWS アカウント更新リクエストボディ。"
+  },
+  "ListAWSNamespaces": {
+    "description": "Datadog にメトリクスを送信できる利用可能な AWS CloudWatch ネームスペースの一覧を取得します。",
+    "summary": "利用可能なネームスペース一覧を取得 "
+  },
+  "CreateNewAWSExternalID": {
+    "description": "AWS のロールベース認証に使用する新しい外部 ID を生成します。",
+    "summary": "新しい外部 ID の生成"
+  },
+  "ListAWSLogsServices": {
+    "description": "Datadog にログを送信できる AWS サービスの一覧を取得します。",
+    "summary": "AWS ログサービスの一覧を取得"
+  },
   "ListGCPSTSAccounts": {
     "description": "お使いの Datadog アカウントで構成された、GCP STS が有効なすべてのサービスアカウントを一覧表示します。",
     "summary": "GCP STS が有効なすべてのサービスアカウントを一覧表示します。"
@@ -332,6 +654,34 @@
     "summary": "Datadog GCP プリンシパルの作成",
     "request_description": "Datadog 内にデリゲートサービスアカウントを作成します。",
     "request_schema_description": ""
+  },
+  "GetChannelByName": {
+    "description": "Datadog Microsoft Teams インテグレーションでチャネルのテナント、チーム、およびチャネル ID を取得します。",
+    "summary": "Get channel information by name"
+  },
+  "ListTenantBasedHandles": {
+    "description": "Datadog Microsoft Teams インテグレーションから、すべてのテナントベースのハンドル一覧を取得します。",
+    "summary": "Get all tenant-based handles"
+  },
+  "CreateTenantBasedHandle": {
+    "description": "Datadog Microsoft Teams インテグレーションでテナントベースのハンドルを作成します。",
+    "summary": "Create tenant-based handle",
+    "request_description": "テナントベースのハンドル用ペイロード。",
+    "request_schema_description": "テナントベースのハンドル作成リクエスト。"
+  },
+  "DeleteTenantBasedHandle": {
+    "description": "Datadog Microsoft Teams インテグレーションからテナントベースのハンドルを削除します。",
+    "summary": "Delete tenant-based handle"
+  },
+  "GetTenantBasedHandle": {
+    "description": "Datadog Microsoft Teams インテグレーションからテナントベースのハンドルに関するテナント、チーム、チャネル情報を取得します。",
+    "summary": "Get tenant-based handle information"
+  },
+  "UpdateTenantBasedHandle": {
+    "description": "Datadog Microsoft Teams インテグレーションでテナントベースのハンドルを更新します。",
+    "summary": "Update tenant-based handle",
+    "request_description": "テナントベースのハンドル用ペイロード。",
+    "request_schema_description": "テナントベースのハンドル更新リクエスト。"
   },
   "ListOpsgenieServices": {
     "description": "Datadog Opsgenie インテグレーションからすべてのサービスのリストを取得します。",
@@ -477,6 +827,30 @@
     "request_description": "",
     "request_schema_description": "Fastly サービスリクエストのペイロードスキーマ。"
   },
+  "ListOktaAccounts": {
+    "description": "Okta アカウントを一覧表示します。",
+    "summary": "Okta アカウントをリストアップ"
+  },
+  "CreateOktaAccount": {
+    "description": "Okta アカウントを作成します。",
+    "summary": "Okta アカウントを追加",
+    "request_description": "",
+    "request_schema_description": "Okta アカウントのリクエストオブジェクト。"
+  },
+  "DeleteOktaAccount": {
+    "description": "Okta アカウントを削除します。",
+    "summary": "Okta アカウントを削除"
+  },
+  "GetOktaAccount": {
+    "description": "Okta アカウントを取得します。",
+    "summary": "Okta アカウントを取得"
+  },
+  "UpdateOktaAccount": {
+    "description": "Okta アカウントを更新します。",
+    "summary": "Okta アカウントを更新",
+    "request_description": "",
+    "request_schema_description": "Okta アカウントを更新する際のペイロードスキーマ。"
+  },
   "GetIPAllowlist": {
     "description": "IP 許可リストとその有効・無効の状態を返します。",
     "summary": "IP 許可リストを取得する"
@@ -548,6 +922,30 @@
     "summary": "アーカイブにロールを付与する",
     "request_description": "",
     "request_schema_description": "ロールとの関係。"
+  },
+  "ListLogsCustomDestinations": {
+    "description": "組織で構成されたカスタム宛先のリストを、その定義とともに取得します。",
+    "summary": "すべてのカスタム宛先を取得"
+  },
+  "CreateLogsCustomDestination": {
+    "description": "組織でカスタム宛先を作成します。",
+    "summary": "カスタム宛先を作成",
+    "request_description": "新しいカスタム宛先の定義。",
+    "request_schema_description": "カスタム宛先。"
+  },
+  "DeleteLogsCustomDestination": {
+    "description": "組織内の特定のカスタム宛先を削除します。",
+    "summary": "カスタム宛先を削除"
+  },
+  "GetLogsCustomDestination": {
+    "description": "組織内の特定のカスタム宛先を取得します。",
+    "summary": "カスタム宛先を取得"
+  },
+  "UpdateLogsCustomDestination": {
+    "description": "組織内の特定のカスタム宛先の所定のフィールドを更新します。",
+    "summary": "カスタム宛先を更新",
+    "request_description": "カスタム宛先のフィールドの新しい定義。",
+    "request_schema_description": "カスタム宛先。"
   },
   "ListLogsMetrics": {
     "description": "構成されたログベースのメトリクスとその定義のリストを取得します。",
@@ -622,17 +1020,17 @@
     "request_schema_description": "ロールとの関係。"
   },
   "ListLogsGet": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n最新のログを見るにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "ログのリストの取得"
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nログを検索およびフィルタリングするにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログを検索 (GET)"
   },
   "ListLogs": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n複雑なログフィルタリングおよび検索を構築するにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Search logs",
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nログを検索およびフィルタリングするにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログを検索 (POST)",
     "request_description": "",
     "request_schema_description": "ログリストのリクエスト。"
   },
   "ListTagConfigurations": {
-    "description": "Metrics Summary ページまたは Metrics without Limits™ で構成可能なすべてのメトリクスを返します (指定された場合は追加のフィルターに一致します)。",
+    "description": "Metrics Summary ページまたは Metrics without Limits™ で構成可能なすべてのメトリクスを返します (追加のフィルターが指定されている場合はそれにも一致します)。\nオプションとして、`page[cursor]` および/または `page[size]` クエリパラメーターを使用してページネーションすることができます。\n最初のページを取得するには、有効な `page[size]` を指定するか、`page[cursor]` に空の値 (例: `page[cursor]=`) を渡してください。次のページを取得するには、レスポンスから返される `next_cursor` の値を新しい `page[cursor]` の値として渡します。\n`meta.pagination.next_cursor` が null の場合、すべてのページを取得し終えたことを示します。",
     "summary": "メトリクスのリストを取得する"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -648,12 +1046,16 @@
     "request_schema_description": "1 回の一括タグコンフィギュレーションリクエストのラッパーオブジェクト。"
   },
   "ListActiveMetricConfigurations": {
-    "description": "指定されたメトリクス名に対して、ダッシュボードやモニターでアクティブにクエリされるタグや集計をリストアップします。",
+    "description": "指定したメトリクス名に対し、ダッシュボード、ノートブック、モニター、Metrics Explorer、および API でアクティブにクエリされているタグと集計を一覧表示します。",
     "summary": "アクティブなタグと集計をリストアップする"
   },
   "ListTagsByMetricName": {
-    "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",
+    "description": "指定したメトリクス名について、直近 1 時間におけるインデックス化されたタグのキーと値のペアを表示します。",
     "summary": "メトリクス名でタグを一覧表示する"
+  },
+  "ListMetricAssets": {
+    "description": "メトリクスが保存されているダッシュボード、モニター、ノートブック、SLO があれば、それを返します。24 時間ごとに更新されます。",
+    "summary": "メトリクスに関連するアセット"
   },
   "EstimateMetricsOutputSeries": {
     "description": "Metrics without Limits&amp;trade; を使用して、 指定されたタグ、パーセンタイル、および集計の数の構成で、 メトリクスの推定カーディナリティを返します。",
@@ -711,23 +1113,83 @@
     "description": "指定したモニターのすべてのアクティブダウンタイムを取得。",
     "summary": "モニターのアクティブなダウンタイムを取得"
   },
+  "ListDevices": {
+    "description": "デバイスのリストを取得します。",
+    "summary": "デバイスのリストを取得"
+  },
+  "GetDevice": {
+    "description": "デバイスの詳細を取得します。",
+    "summary": "デバイスの詳細を取得"
+  },
+  "GetInterfaces": {
+    "description": "デバイスのインターフェイスのリストを取得します。",
+    "summary": "デバイスのインターフェイスのリストを取得"
+  },
+  "ListDeviceUserTags": {
+    "description": "デバイスのタグのリストを取得します。",
+    "summary": "デバイスのタグのリストを取得します"
+  },
+  "UpdateDeviceUserTags": {
+    "description": "デバイスのタグを更新します。",
+    "summary": "デバイスのタグを更新します。",
+    "request_description": "",
+    "request_schema_description": "タグの応答をリストアップします。"
+  },
+  "ListOrgConfigs": {
+    "description": "すべての組織構成 (名前、説明、値) を返します。",
+    "summary": "組織の構成を一覧表示"
+  },
+  "GetOrgConfig": {
+    "description": "特定の組織構成の名前、説明、値を返します。",
+    "summary": "組織の特定の構成の値を取得"
+  },
+  "UpdateOrgConfig": {
+    "description": "特定の組織構成の値を更新します。",
+    "summary": "組織の特定の構成を更新",
+    "request_description": "",
+    "request_schema_description": "組織構成を更新するリクエスト。"
+  },
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
     "summary": "アクセス許可を一覧表示する"
   },
   "ListFindings": {
-    "description": "CSPM の発見のリストを取得します。\n\n### フィルター\n\nURL にクエリパラメータを付加することで、フィルターを適用することができます。\n\n  - フィルター単体の使用: `?filter[attribute_key]=attribute_value`\n  - フィルターの連結: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - タグでフィルターをかける: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nここで、`attribute_key` は、後述するフィルターキーのいずれかを指定することができます。\n\n`integer` 型のクエリパラメーターは、比較演算子 (`>`、`>=`、`<`、`<=`) をサポートしています。これは、`evaluation_changed_at` や `resource_discovery_timestamp` でフィルターをかける場合に特に有効です。例: `?filter[evaluation_changed_at]=>20123123121`\n\nまた、文字列に対して否定演算子を使うこともできます。例えば、`filter[resource_type]=-aws*` を使用すると、AWS 以外のリソースをフィルターにかけることができます。\n\n演算子は等号の後につける必要があります。例えば、`>=` 演算子でフィルターをかけるには、等号の後に演算子を追加します: `filter[evaluation_changed_at]=>=1678809373257`\n\nクエリパラメーターは、ドキュメントに記載されているもので、正しい型の値を持つものだけでなければなりません。重複するクエリーパラメーター (例: `filter[status]=low&filter[status]=info`) は認められません。\n\n### レスポンス\n\nレスポンスには、発見オブジェクトの配列、ページネーションメタデータ、クエリにマッチするアイテムのカウントが含まれます。\n\n各発見オブジェクトには、以下のものが含まれます。\n\n- 発見の詳細を取得するための `GetFinding` リクエストで使用することができる発見 ID。\n- ステータス、評価、高レベルのリソースの詳細、ミュート状態、ルールの詳細などのコア属性。\n- `evaluation_changed_at` および `resource_discovery_date` タイムスタンプ。\n- 関連するタグの配列。\n",
+    "description": "発見のリストを取得します。これらには、誤構成とアイデンティティリスクが含まれます。\n\n**注**: アイデンティティリスクのみを取得するには、次のクエリパラメータを追加します: `?filter[tags]=dd_rule_type:ciem` \n\n### フィルター\n\nURL にクエリパラメータを付加することで、フィルターを適用することができます。\n\n- フィルター単体の使用: `?filter[attribute_key]=attribute_value`\n- フィルターの連結: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n- タグでフィルターをかける: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nここで、`attribute_key` は、後述するフィルターキーのいずれかを指定することができます。\n\n`integer` 型のクエリパラメーターは、比較演算子 (`>`、`>=`、`<`、`<=`) をサポートしています。これは、`evaluation_changed_at` や `resource_discovery_timestamp` でフィルターをかける場合に特に有効です。例: `?filter[evaluation_changed_at]=>20123123121`\n\nまた、文字列に対して否定演算子を使うこともできます。例えば、`filter[resource_type]=-aws*` を使用すると、AWS 以外のリソースをフィルターにかけることができます。\n\n演算子は等号の後につける必要があります。例えば、`>=` 演算子でフィルターをかけるには、等号の後に演算子を追加します: `filter[evaluation_changed_at]=>=1678809373257`\n\nクエリパラメーターは、ドキュメントに記載されているもので、正しい型の値を持つものだけでなければなりません。重複するクエリーパラメーター (例: `filter[status]=low&filter[status]=info`) は認められません。\n\n### レスポンス\n\nレスポンスには、発見オブジェクトの配列、ページネーションメタデータ、クエリにマッチするアイテムのカウントが含まれます。\n\n各発見オブジェクトには、以下のものが含まれます。\n\n- 発見の詳細を取得するための `GetFinding` リクエストで使用することができる発見 ID。\n- ステータス、評価、高レベルのリソースの詳細、ミュート状態、ルールの詳細などのコア属性。\n- `evaluation_changed_at` および `resource_discovery_date` タイムスタンプ。\n- 関連するタグの配列。",
     "summary": "発見を一覧化する"
+  },
+  "MuteFindings": {
+    "description": "診断結果をミュートまたはミュート解除します。",
+    "summary": "発見の一括ミュートまたはミュート解除。",
+    "request_description": "### 属性\n\nすべての診断結果は同一の属性で更新されます。リクエストボディには最低限 `muted` と `reason` の 2 つの属性が含まれている必要があります。\n許可される理由は、診断結果がミュートされているかミュート解除されているかに依存します。\n- 診断結果をミュートするには: `PENDING_FIX`、`FALSE_POSITIVE`、`ACCEPTED_RISK`、`OTHER`\n- 診断結果のミュートを解除するには: `NO_PENDING_FIX`、`HUMAN_ERROR`、`NO_LONGER_ACCEPTED_RISK`、`OTHER`\n\n### メタ\n\nリクエストボディには更新する診断結果 ID のリストを含める必要があります。\n",
+    "request_schema_description": "新しい診断結果の一括ミュートリクエスト。"
   },
   "GetFinding": {
     "description": "メッセージとリソースの構成を持つ 1 つの発見を返します。",
     "summary": "発見を取得する"
   },
-  "UpdateFinding": {
-    "description": "特定の診断結果をミュートまたはミュート解除します。\nリクエストに成功すると、API は更新された診断結果オブジェクトを返します。",
-    "summary": "Mute or unmute a finding",
-    "request_description": "診断結果をミュートまたはミュート解除するには、リクエスト本文に少なくとも 2 つの属性 (`muted` と `reason`) を含める必要があります。許可される理由は、診断結果がミュートされるかミュート解除されるかに依存します。\n- 診断結果をミュートするには: `PENDING_FIX`、`FALSE_POSITIVE`、`ACCEPTED_RISK`、`OTHER`\n- 診断結果をミュート解除するには: `NO_PENDING_FIX`、`HUMAN_ERROR`、`NO_LONGER_ACCEPTED_RISK`、`OTHER` ",
-    "request_schema_description": "新しい診断結果のミュートリクエスト。"
+  "ListPowerpacks": {
+    "description": "すべてのパワーパックのリストを取得します。",
+    "summary": "すべてのパワーパックの取得"
+  },
+  "CreatePowerpack": {
+    "description": "パワーパックを作成します。",
+    "summary": "新しいパワーパックの作成",
+    "request_description": "パワーパックのリクエスト本文を作成します。",
+    "request_schema_description": "パワーパックは、ダッシュボードウィジェットのテンプレート化されたグループです。これらは既存のダッシュボードから保存することができ、ウィジェットトレイで再利用可能なパックに変換することができます。"
+  },
+  "DeletePowerpack": {
+    "description": "パワーパックを削除します。",
+    "summary": "パワーパックの削除"
+  },
+  "GetPowerpack": {
+    "description": "パワーパックを取得します。",
+    "summary": "パワーパックの取得"
+  },
+  "UpdatePowerpack": {
+    "description": "パワーパックを更新します。",
+    "summary": "パワーパックの更新",
+    "request_description": "パワーパックのリクエスト本文を更新します。",
+    "request_schema_description": "パワーパックは、ダッシュボードウィジェットのテンプレート化されたグループです。これらは既存のダッシュボードから保存することができ、ウィジェットトレイで再利用可能なパックに変換することができます。"
   },
   "ListProcesses": {
     "description": "組織のすべてのプロセスを取得します。",
@@ -745,6 +1207,34 @@
     "request_description": "",
     "request_schema_description": "実行する時系列クエリを 1 つ囲むリクエストラッパー。"
   },
+  "ListCSMThreatsAgentRules": {
+    "description": "Cloud Security Management Threats Agent のルール一覧を取得します。",
+    "summary": "すべての CSM Threats Agent ルールを取得"
+  },
+  "CreateCSMThreatsAgentRule": {
+    "description": "指定されたパラメーターで新しい Cloud Security Management Threats Agent ルールを作成します。",
+    "summary": "CSM Threats Agent ルールを作成",
+    "request_description": "新しい Agent ルールの定義。",
+    "request_schema_description": "作成する Agent ルールを含むオブジェクトをリクエストします。"
+  },
+  "DeleteCSMThreatsAgentRule": {
+    "description": "特定の Cloud Security Management Threats Agent ルールを削除します。",
+    "summary": "CSM Threats Agent ルールを削除"
+  },
+  "GetCSMThreatsAgentRule": {
+    "description": "特定の Cloud Security Management Threats Agent ルールの詳細を取得します。",
+    "summary": "CSM Threats Agent ルールを取得"
+  },
+  "UpdateCSMThreatsAgentRule": {
+    "description": "特定の Cloud Security Management Threats Agent ルールを更新します。\nリクエストが成功すると Agent ルールオブジェクトを返します。",
+    "summary": "CSM Threats Agent ルールを更新",
+    "request_description": "Agent ルールの新しい定義。",
+    "request_schema_description": "更新する属性のある Agent ルールを含むオブジェクトをリクエストします。"
+  },
+  "DownloadCSMThreatsPolicy": {
+    "description": "ダウンロードエンドポイントは、現在アクティブな CSM Threats ルールから CSM Threats ポリシーファイルを生成し、`.policy` ファイルとしてダウンロードします。このファイルを Agent にデプロイすると、環境で実行中のポリシーを更新できます。",
+    "summary": "最新の CSM 脅威ポリシーを入手"
+  },
   "DeleteRestrictionPolicy": {
     "description": "指定されたリソースに関連する制限ポリシーを削除します。",
     "summary": "Delete a restriction policy"
@@ -754,7 +1244,7 @@
     "summary": "制限ポリシーを取得する"
   },
   "UpdateRestrictionPolicy": {
-    "description": "リソースに関連する制限ポリシーを更新します。\n\n#### サポートされるリソース\n制限ポリシーは、以下のリソースに適用することができます。\n- 接続: `connection`\n- ダッシュボード: `dashboard`\n- ノートブック: `notebook`\n- セキュリティルール: `security-rule`\n- サービスレベル目標: `slo`\n\n#### リソースのサポートされる関係\nリソースタイプ            | サポートされる関係\n-------------------------|--------------------------\n接続              | `viewer`、`editor`、`resolver`\nダッシュボード               | `viewer`、`editor`\nノートブック                | `viewer`、`editor`\nセキュリティルール           | `viewer`、`editor`\nサービスレベル目標 | `viewer`、`editor`",
+    "description": "リソースに関連付けられている制限ポリシーを更新します。\n\n#### サポートされているリソース\n制限ポリシーは、次のリソースに適用できます。\n- ダッシュボード: `dashboard`\n- ノートブック: `notebook`\n- パワーパック: `powerpack`\n- リファレンステーブル: `reference-table`\n- セキュリティルール: `security-rule`\n- サービスレベル目標: `slo`\n- Synthetic グローバル変数: `synthetics-global-variable`\n- Synthetic テスト: `synthetics-test`\n- Synthetic プライベートロケーション: `synthetics-private-location`\n- モニター: `monitor`\n\n#### リソースのサポートされている関係\nリソースタイプ               | サポートされている関係\n----------------------------|--------------------------\nダッシュボード                  | `viewer`, `editor`\nノートブック                   | `viewer`, `editor`\nパワーパック                  | `viewer`, `editor`\nセキュリティルール              | `viewer`, `editor`\nサービスレベル目標    | `viewer`, `editor`\nSynthetic グローバル変数  | `viewer`, `editor`\nSynthetic テスト             | `viewer`, `editor`\nSynthetic プライベートロケーション | `viewer`, `editor`\nモニター                    | `viewer`, `editor`\nリファレンステーブル          | `viewer`, `editor`",
     "summary": "制限ポリシーを更新する",
     "request_description": "制限ポリシーペイロード",
     "request_schema_description": "制限ポリシーのリクエストを更新します。"
@@ -851,6 +1341,30 @@
     "request_description": "",
     "request_schema_description": "RUM アプリケーション更新リクエスト。"
   },
+  "ListRumMetrics": {
+    "description": "定義済みの RUM ベースメトリクスの一覧を、各定義とともに取得します。",
+    "summary": "Get all rum-based metrics"
+  },
+  "CreateRumMetric": {
+    "description": "組織の RUM データに基づいてメトリクスを作成します。\nリクエストが成功した場合、リクエストボディから RUM ベースメトリクスオブジェクトを返します。",
+    "summary": "Create a rum-based metric",
+    "request_description": "新しい RUM ベースメトリクスの定義。",
+    "request_schema_description": "新しい RUM ベースメトリクスのボディ。"
+  },
+  "DeleteRumMetric": {
+    "description": "組織から特定の RUM ベースメトリクスを削除します。",
+    "summary": "Delete a rum-based metric"
+  },
+  "GetRumMetric": {
+    "description": "組織から特定の RUM ベースメトリクスを取得します。",
+    "summary": "Get a rum-based metric"
+  },
+  "UpdateRumMetric": {
+    "description": "組織内の特定の RUM ベースメトリクスを更新します。\nリクエストが成功した場合、リクエストボディから RUM ベースメトリクスオブジェクトを返します。",
+    "summary": "Update a rum-based metric",
+    "request_description": "RUM ベースメトリクスの新しい定義。",
+    "request_schema_description": "新しい RUM ベースメトリクスのボディ。"
+  },
   "ListRUMEvents": {
     "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "RUM イベントのリストを取得"
@@ -864,11 +1378,110 @@
   "UploadIdPMetadata": {
     "description": "SAML 設定用の IdP メタデータをアップロードするためのエンドポイントです。\n\nこのエンドポイントを使用して、SAML ログイン構成用の IdP メタデータをアップロードまたは置き換えます。",
     "summary": "IdP メタデータをアップロード",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "IdP メタデータをアップロードするために送信されたフォームデータ"
+  },
+  "ListSCIMGroups": {
+    "description": "オーガニゼーション内のグループを一覧表示します。\n結果は `startIndex` と `count` パラメーターでページネーションされます。\n`filter` パラメーターを使用して結果を絞り込むことができます。",
+    "summary": "グループ一覧を取得する"
+  },
+  "CreateSCIMGroup": {
+    "description": "新しいグループを作成します。\nグループにはメンバーを含めることができます。",
+    "summary": "グループを作成する",
+    "request_description": "",
+    "request_schema_description": "グループの定義。"
+  },
+  "DeleteSCIMGroup": {
+    "description": "指定した `group_id` を持つグループを削除します。",
+    "summary": "グループを削除する"
+  },
+  "GetSCIMGroup": {
+    "description": "`group_id` を使用して 1 つのグループを取得します。",
+    "summary": "グループを取得する"
+  },
+  "PatchSCIMGroup": {
+    "description": "指定した `group_id` を持つグループをパッチ更新します。",
+    "summary": "グループを修正する",
+    "request_description": "",
+    "request_schema_description": "グループのパッチ更新用リクエストオブジェクト。"
+  },
+  "UpdateSCIMGroup": {
+    "description": "指定した `group_id` を持つグループを更新します。",
+    "summary": "グループを更新する",
+    "request_description": "",
+    "request_schema_description": "グループの定義。"
+  },
+  "ListSCIMUsers": {
+    "description": "オーガニゼーション内のユーザーを一覧表示します。\n結果は `startIndex` と `count` パラメーターでページネーションされます。\n`filter` パラメーターを使用して結果を絞り込むことができます。",
+    "summary": "ユーザー一覧を取得する"
+  },
+  "CreateSCIMUser": {
+    "description": "新しいユーザーを作成します。",
+    "summary": "ユーザーの作成",
+    "request_description": "",
+    "request_schema_description": "ユーザーの定義。"
+  },
+  "DeleteSCIMUser": {
+    "description": "指定した `user_uuid` を持つグループを削除します。",
+    "summary": "ユーザーを削除する"
+  },
+  "GetSCIMUser": {
+    "description": "`user_uuid` を使用して 1 人のユーザーを取得します。",
+    "summary": "ユーザーの取得"
+  },
+  "PatchSCIMUser": {
+    "description": "指定した `user_uuid` を持つユーザーをパッチ更新します。",
+    "summary": "ユーザーを修正する",
+    "request_description": "",
+    "request_schema_description": "ユーザーのパッチ更新用リクエストオブジェクト。"
+  },
+  "UpdateSCIMUser": {
+    "description": "指定した `user_uuid` を持つユーザーを更新します。",
+    "summary": "ユーザーの更新",
+    "request_description": "",
+    "request_schema_description": "ユーザーの定義。"
+  },
+  "ListScorecardOutcomes": {
+    "description": "すべてのルール成果を取得します。",
+    "summary": "すべてのルール結果をリストアップ"
+  },
+  "CreateScorecardOutcomesBatch": {
+    "description": "1 つのバッチリクエストで複数のサービスルール成果を設定します。",
+    "summary": "成果の一括作成",
+    "request_description": "スコアカード成果のセット。",
+    "request_schema_description": "スコアカード成果の一括リクエスト。"
+  },
+  "ListScorecardRules": {
+    "description": "すべてのルールを取得します。",
+    "summary": "すべてのルールをリストアップ"
+  },
+  "CreateScorecardRule": {
+    "description": "新しいルールを作成します。",
+    "summary": "新しいルールを作成",
+    "request_description": "ルール属性。",
+    "request_schema_description": "スコアカードのルール作成リクエスト。"
+  },
+  "DeleteScorecardRule": {
+    "description": "単一のルールを削除します。",
+    "summary": "ルールを削除"
+  },
+  "UpdateScorecardRule": {
+    "description": "既存のルールを更新します。",
+    "summary": "既存のルールを更新",
+    "request_description": "ルール属性。",
+    "request_schema_description": "スコアカードルールの更新リクエスト。"
+  },
+  "ListVulnerableAssets": {
+    "description": "脆弱性があるアセットの一覧を取得します。\n\n### ページネーション\n\n[「List Vulnerabilities」エンドポイントのページネーションのセクション](#pagination)を参照してください。\n\n### フィルタリング\n\n[「List Vulnerabilities」エンドポイントのフィルタリングのセクション](#filtering)を参照してください。\n\n### メタデータ\n\n[「List Vulnerabilities」エンドポイントのメタデータのセクション](#metadata)を参照してください。",
+    "summary": "脆弱性があるアセットの一覧"
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、.policy ファイルとしてダウンロードします。それからこのファイルは Agent にデプロイされ、環境で実行中のポリシーを更新します。",
     "summary": "最新のクラウドワークロードセキュリティポリシーを取得"
+  },
+  "ListVulnerabilities": {
+    "description": "脆弱性の一覧を取得します。\n\n### ページネーション\n\n`vulnerabilities` と `assets` の両方で、デフォルトでページネーションが有効になっています。ページサイズはエンドポイントによって異なり、変更できません。次のページのリクエストを自動化する場合は、レスポンスの links セクションを使用することができます。\n\nこのエンドポイントはページ分割されたレスポンスを返します。ページ情報はレスポンスの links セクションに格納されます:\n\n```JSON\n{\n\"data\": [...],\n\"meta\": {...},\n\"links\": {\n\"self\": \"https://.../api/v2/security/vulnerabilities\",\n\"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n\"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n\"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n}\n}\n```\n\n- 1 ページ目が要求された場合、`links.previous` は空です。\n- 最終ページが要求された場合、`links.next` は空です。\n\n#### トークン\n\n脆弱性はいつでも作成、更新、または削除できます。\n\n最初のリクエスト時に、後続のページ分割されたリクエスト全体で一貫性を保つためのトークンが作成されます。\n\nトークンは 24 時間のみ有効です。\n\n#### 最初のリクエスト\n\n`page[token]` パラメーターがない場合、そのリクエストは最初のリクエストとみなされます。\n\n最初のリクエストのレスポンスには、`links` セクションに新しく作成されたトークンが含まれます。\n\nこのトークンは、以降のページ分割リクエストで使用できます。\n\n#### 後続のリクエスト\n\n有効な `page[token]` と `page[number]` を含むリクエストは、後続のリクエストとみなされます。\n\nトークンが無効な場合、`404` レスポンスが返されます。\n\nページ番号が無効な場合、`400` レスポンスが返されます。\n\n### フィルタリング\n\nレスポンスからデータをフィルタリングするために、リクエストにフィルターパラメーターを含めることができます。フィルターパラメーターの形式は [JSON:API の形式](https://jsonapi.org/format/#fetching-filtering)に従います: `filter[$prop_name]` (ここで `prop_name` はエンティティのプロパティ名です)。\n\nすべてのフィルターは複数の値を指定できます。データは OR 句でフィルタリングされます。例: `filter[title]=Title1,Title2` は、タイトルが `Title1` または `Title2` に等しい脆弱性をすべて抽出します。\n\n文字列によるフィルターは大文字小文字を区別します。\n\nブール値によるフィルターでは `true` または `false` を使用します。\n\n数値によるフィルターは、2 つ目のフィルター入力として演算子を含める必要があります (例: `filter[cvss.base.score][lte]=8`)。\n\n使用可能な演算子は、`eq` (==), `lt` (<), `lte` (<=), `gt` (>) および `gte` (>=) です。\n\n### メタデータ\n\n[JSON:API 形式](https://jsonapi.org/format/#document-meta)に従い、標準外のメタ情報を含むオブジェクトです。\n\nこのエンドポイントのレスポンスには meta メンバーが含まれます。このセクションに含まれる各プロパティの詳細については、エンドポイントのレスポンステーブルを確認してください。\n\n```JSON\n{\n\"data\": [...],\n\"meta\": {\n\"total\": 1500,\n\"count\": 18732,\n\"token\": \"some_token\"\n},\n\"links\": {...}\n}\n```",
+    "summary": "脆弱性の一覧"
   },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Agent ルールのリストを取得します。",
@@ -918,6 +1531,30 @@
     "request_description": "セキュリティフィルターの新たな定義。",
     "request_schema_description": "新しいセキュリティフィルターの本文。"
   },
+  "ListSecurityMonitoringSuppressions": {
+    "description": "すべての抑制ルールのリストを取得します。",
+    "summary": "発見を一覧化する"
+  },
+  "CreateSecurityMonitoringSuppression": {
+    "description": "新しい抑制ルールを作成します。",
+    "summary": "抑制ルールを作成",
+    "request_description": "新しい抑制ルールの定義。",
+    "request_schema_description": "作成する抑制ルールを含むリクエストオブジェクト。"
+  },
+  "DeleteSecurityMonitoringSuppression": {
+    "description": "特定の抑制ルールを削除します。",
+    "summary": "診断結果のミュートまたはミュート解除"
+  },
+  "GetSecurityMonitoringSuppression": {
+    "description": "特定の抑制ルールの詳細を取得します。",
+    "summary": "抑制ルールを取得"
+  },
+  "UpdateSecurityMonitoringSuppression": {
+    "description": "特定の抑制ルールを更新します。",
+    "summary": "抑制ルールを更新",
+    "request_description": "抑制ルールの新しい定義。部分的な更新をサポートします。",
+    "request_schema_description": "抑制ルールで更新するフィールドを含むリクエストオブジェクト。"
+  },
   "ListSecurityMonitoringRules": {
     "description": "規則のリスト。",
     "summary": "規則のリスト"
@@ -928,6 +1565,24 @@
     "request_description": "",
     "request_schema_description": "新しい規則を作成します。"
   },
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
+    "description": "datadog provider resource datadog_security_monitoring_rule 用に、(まだ) 存在しないルールを JSON から Terraform に変換します。",
+    "summary": "ルールを JSON から Terraform に変換",
+    "request_description": "",
+    "request_schema_description": "ルールを JSON から Terraform に変換します。"
+  },
+  "TestSecurityMonitoringRule": {
+    "description": "ルールをテストします。",
+    "summary": "ルールをテスト",
+    "request_description": "",
+    "request_schema_description": "ルールのルールクエリをテストします (既存のルールに適用すると、ルールプロパティは無視されます)。"
+  },
+  "ValidateSecurityMonitoringRule": {
+    "description": "検出ルールを検証します。",
+    "summary": "検出ルールの検証",
+    "request_description": "",
+    "request_schema_description": "ルールを検証します。"
+  },
   "DeleteSecurityMonitoringRule": {
     "description": "既存の規則を削除します。デフォルトの規則は削除できません。",
     "summary": "既存の規則を削除します"
@@ -937,10 +1592,20 @@
     "summary": "規則の詳細を取得する"
   },
   "UpdateSecurityMonitoringRule": {
-    "description": "既存の規則を更新します。`cases`、`queries`、`options` を更新する場合、フィールド全体を\n含める必要があります。たとえば、クエリを変更する場合、全てのクエリを含める必要があります。\nデフォルトの規則は、有効にして通知を変更する場合にのみ更新できます。",
+    "description": "既存のルールを更新します。`cases`、`queries`、`options` を更新する場合、フィールド全体を含める必要があります。例えば、クエリを変更する場合、すべてのクエリを含める必要があります。\nデフォルトのルールは、有効化、通知の変更、タグの更新のみ更新できます (デフォルトのタグは削除できません)。",
     "summary": "既存の規則を更新します",
     "request_description": "",
     "request_schema_description": "既存の規則を更新します。"
+  },
+  "ConvertExistingSecurityMonitoringRule": {
+    "description": "datadog provider Resource datadog_security_monitoring_rule 用に、既存のルールを JSON から Terraform に変換します。",
+    "summary": "既存のルールを JSON から Terraform に変換"
+  },
+  "TestExistingSecurityMonitoringRule": {
+    "description": "既存のルールをテストします。",
+    "summary": "既存のルールをテスト",
+    "request_description": "",
+    "request_schema_description": "ルールのルールクエリをテストします (既存のルールに適用すると、ルールプロパティは無視されます)"
   },
   "ListSecurityMonitoringSignals": {
     "description": "リストエンドポイントは、検索クエリと一致するセキュリティシグナルを返します。\nこのエンドポイントと POST エンドポイントは、セキュリティシグナルを一覧表示する際に互いに交換して使用できます。 ",
@@ -1102,6 +1767,48 @@
     "request_description": "インシデントサービスのペイロード。",
     "request_schema_description": "インシデントサービスペイロードを使用してリクエストを更新します。"
   },
+  "ListHistoricalJobs": {
+    "description": "過去データジョブ一覧を取得します。",
+    "summary": "過去データジョブ一覧を取得 "
+  },
+  "RunHistoricalJob": {
+    "description": "過去データジョブを実行します。",
+    "summary": "過去データジョブを実行 ",
+    "request_description": "",
+    "request_schema_description": "過去データジョブのリクエストを実行します。"
+  },
+  "ConvertJobResultToSignal": {
+    "description": "ジョブ結果をシグナルへ変換します。",
+    "summary": "ジョブ結果をシグナルへ変換 ",
+    "request_description": "",
+    "request_schema_description": "過去データジョブの結果をシグナルに変換するためのリクエスト。"
+  },
+  "DeleteHistoricalJob": {
+    "description": "既存のジョブを削除します。",
+    "summary": "既存のジョブを削除 "
+  },
+  "GetHistoricalJob": {
+    "description": "ジョブの詳細を取得します。",
+    "summary": "ジョブの詳細を取得 "
+  },
+  "CancelHistoricalJob": {
+    "description": "過去データジョブをキャンセルします。",
+    "summary": "過去データジョブをキャンセル "
+  },
+  "CreateSLOReportJob": {
+    "description": "SLO レポートを生成するジョブを作成します。レポートジョブは非同期で処理され、最終的に CSV レポートがダウンロード可能になります。\n\nジョブのステータスを確認し、返された `report_id` を使用して CSV レポートをダウンロードしてください。",
+    "summary": "新しい SLO レポートを作成",
+    "request_description": "SLO レポートジョブリクエストボディを作成します。",
+    "request_schema_description": "SLO レポートリクエストボディ。"
+  },
+  "GetSLOReport": {
+    "description": "SLO レポートをダウンロードします。これはレポートジョブが完了した後にのみ実行できます。レポートは無期限に存在する保証はありません。\n\nDatadog は、レポートが利用可能になったらすぐにダウンロードすることを推奨します。",
+    "summary": "SLO レポートを取得"
+  },
+  "GetSLOReportJobStatus": {
+    "description": "SLO レポートジョブのステータスを取得します。",
+    "summary": "SLO レポートステータスを取得"
+  },
   "AggregateSpans": {
     "description": "スパンをバケットに集計し、メトリクスと時系列を計算するための API エンドポイント。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。",
     "summary": "スパンを集計する",
@@ -1231,19 +1938,23 @@
     "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
   },
   "GetUsageApplicationSecurityMonitoring": {
-    "description": "アプリケーションセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "アプリケーションセキュリティの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の 1 時間ごとの使用量データは [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で利用できるようになりました。",
     "summary": "アプリケーションセキュリティの時間単位使用量の取得"
   },
+  "GetBillingDimensionMapping": {
+    "description": "サポートされている使用量メータリングの公開 API エンドポイントに対応するキーへの課金ディメンションのマッピングを取得します。\nマッピングデータは月単位で更新されます。\n\nこのエンドポイントは[親レベル組織](https://docs.datadoghq.com/account_management/multi_organization/)にのみアクセス可能です。",
+    "summary": "Get billing dimension mapping for usage endpoints"
+  },
   "GetCostByOrg": {
-    "description": "複数組織のアカウントにまたがるコストを取得します。\nある月の組織別コストデータは、翌月 16 日までに利用可能になります。\n**注:** このエンドポイントは非推奨となりました。代わりに新しいエンドポイント [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account) を使用してください。",
+    "description": "複数組織アカウントのコストを取得します。\n指定された月の組織別コストデータは、翌月の 16 日までに利用可能になります。\n**注:** このエンドポイントは非推奨になりました。代わりに新しいエンドポイント [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account) をご利用ください。\n\nこのエンドポイントは[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)でのみアクセス可能です。",
     "summary": "マルチ組織のアカウントのコストを取得"
   },
   "GetEstimatedCostByOrg": {
-    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能で、発生した時点から最大 72 時間遅延します。\nそれ以前の過去のコストにアクセスするには、`/historical_cost` エンドポイントを使用します。",
+    "description": "複数組織および単一ルート組織アカウント全体の推定コストを取得します。\n推定コストデータは当月と前月にのみ利用可能で、発生から最大 72 時間遅れます。これより前の過去のコストにアクセスするには、`/historical_cost` エンドポイントを使用してください。\n\nこのエンドポイントは[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)でのみアクセス可能です。",
     "summary": "アカウントの推定コストを取得"
   },
   "GetHistoricalCostByOrg": {
-    "description": "複数組織および単一ルート組織のアカウントにまたがる過去のコストを取得します。\nある月のコストデータは、翌月 16 日までに利用可能になります。",
+    "description": "複数組織および単一ルート組織アカウント全体の過去のコストを取得します。\n指定された月のコストデータは、翌月の 16 日までに利用可能になります。\n\nこのエンドポイントは、[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)でのみアクセス可能です。",
     "summary": "アカウントの過去のコストを取得"
   },
   "GetHourlyUsage": {
@@ -1251,12 +1962,16 @@
     "summary": "製品ファミリーの時間単位使用量の取得"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Lambda のトレースされた起動の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリーの時間単位使用量の取得 API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
-    "summary": "Lambda のトレースされた起動の 1 時間単位使用量の取得"
+    "description": "Lambda でトレースされた呼び出しの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の 1 時間ごとの使用量データは [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で利用できるようになりました。",
+    "summary": "Lambda がトレースした呼び出しの 1 時間ごとの使用量を取得する"
   },
   "GetUsageObservabilityPipelines": {
-    "description": "観測可能性パイプラインの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリーの時間単位使用量の取得 API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "可観測性パイプラインの 1 時間ごとの使用量を取得します。\n**注:** このエンドポイントは非推奨になりました。全製品の 1 時間ごとの使用量データは [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で利用できるようになりました。",
     "summary": "観測可能性パイプラインの 1 時間単位使用量の取得"
+  },
+  "GetProjectedCost": {
+    "description": "複数組織および単一ルート組織アカウント全体の予測コストを取得します。\n予測コストデータは当月分のみ利用可能で、月の 12 日頃に利用可能になります。\n\nこのエンドポイントは、[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)でのみアクセス可能です。",
+    "summary": "アカウント全体の予測コストを取得"
   },
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",
@@ -1299,5 +2014,27 @@
   "ListUserPermissions": {
     "description": "ユーザーのアクセス許可を取得します。関連するユーザーのロールにより付与されたユーザーのアクセス許可のリストを返します。",
     "summary": "ユーザーアクセス許可を取得する"
+  },
+  "GetUserMemberships": {
+    "description": "ユーザーのメンバーシップのリストを取得する",
+    "summary": "ユーザーのメンバーシップを取得する"
+  },
+  "ListWorkflowInstances": {
+    "description": "指定したワークフローのすべてのインスタンスをリストアップします。この API を使用するには、workflows_read 権限でスコープされたアプリケーションキーが必要です。",
+    "summary": "ワークフローインスタンスをリストアップ"
+  },
+  "CreateWorkflowInstance": {
+    "description": "指定したワークフローを実行します。この API を使用するには、workflows_run 権限でスコープされたアプリケーションキーが必要です。",
+    "summary": "ワークフローを実行",
+    "request_description": "",
+    "request_schema_description": "ワークフローインスタンスの作成に使用するリクエスト。"
+  },
+  "GetWorkflowInstance": {
+    "description": "指定したワークフローの特定の実行を取得します。この API を使用するには、workflows_read 権限でスコープされたアプリケーションキーが必要です。",
+    "summary": "ワークフローインスタンスを取得"
+  },
+  "CancelWorkflowInstance": {
+    "description": "指定したワークフローの特定の実行をキャンセルします。この API を使用するには、workflows_run 権限でスコープされたアプリケーションキーが必要です。",
+    "summary": "ワークフローインスタンスをキャンセル"
   }
 }

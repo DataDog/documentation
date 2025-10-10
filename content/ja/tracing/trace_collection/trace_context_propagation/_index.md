@@ -23,79 +23,81 @@ title: トレースコンテキストの伝播
 type: multi-code-lang
 ---
 
-Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the APM SDK.
+トレースコンテキスト伝搬は、トレース ID、スパン ID、サンプリングの決定といったトレーシング情報を、分散アプリケーションのある部分から別の部分へ受け渡す仕組みです。これにより、リクエスト内のすべてのトレース (および追加のテレメトリー) が相互に関連付けられるようになります。自動インスツルメンテーションが有効な場合、APM SDK によってトレースコンテキスト伝搬は自動的に処理されます。
 
-By default, the Datadog SDK extracts and injects distributed tracing headers using the following formats:
+デフォルトでは、Datadog SDK は以下の形式を用いて分散トレーシングヘッダーの抽出と注入を行います:
 
-- [Datadog][1] (takes higher precedence when extracting headers)
+- [Datadog][1] (ヘッダーを抽出する際はこちらが優先されます) 
 - [W3C Trace Context][2]
+- [Baggage][10]
 
-This default configuration maximizes compatibility with older Datadog SDK versions and products while allowing interoperability with other distributed tracing systems like OpenTelemetry.
+このデフォルト設定により、以前の Datadog SDK バージョンや製品との互換性を最大限に保ちつつ、OpenTelemetry のような他の分散トレーシングシステムとの相互運用も可能になります。
 
-## Customize trace context propagation
+## トレースコンテキスト伝搬のカスタマイズ
 
-You may need to customize the trace context propagation configuration if your applications:
+以下のようなケースでは、トレースコンテキスト伝搬の設定をカスタマイズする必要があるかもしれません:
 
-- Communicate distributed tracing information in a different supported format
-- Need to prevent extracting or injecting distributed tracing headers
+- サポートされている別の形式で分散トレーシング情報をやりとりしている
+- 分散トレーシングヘッダーを抽出または注入しないようにしたい
 
-Use the following environment variables to configure formats for reading and writing distributed tracing headers. Refer to the [Language support][6] section for language-specific configuration values.
+分散トレーシングヘッダーの読み取り・書き込み形式を指定するには、次の環境変数を使用します。言語固有の設定値については、[言語別サポート][6]のセクションを参照してください。
 
 `DD_TRACE_PROPAGATION_STYLE`
-: Specifies trace context propagation formats for extraction and injection in a comma-separated list. May be overridden by extract-specific or inject-specific configurations.<br>
-**Default**: `datadog,tracecontext` <br>
-**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links.
+: 抽出と注入の両方に使用するトレースコンテキスト伝搬形式をカンマ区切りで指定します。抽出専用または注入専用の設定がある場合、それらが優先されます。<br>
+**デフォルト**: `datadog,tracecontext`<br>
+**注**: 複数形式を指定した場合、抽出時は指定された順序 (例: `datadog,tracecontext`) でチェックが行われます。最初に有効と判断されたコンテキストがトレースを継続し、その後に見つかった有効なコンテキストはスパンリンクとなります。
 
 `OTEL_PROPAGATORS`
-: Specifies trace context propagation formats for both extraction and injection (comma-separated list). Lowest precedence; ignored if any other Datadog trace context propagation environment variable is set.<br>
-**Note**: Only use this configuration when migrating an application from the OpenTelemetry SDK to the Datadog SDK. For more information on this configuration and other OpenTelemetry environment variables, see [Using OpenTelemetry Environment Variables with Datadog SDKs][9].
+: 抽出と注入の両方に使用するトレースコンテキスト伝搬形式をカンマ区切りで指定します。他の Datadog のトレースコンテキスト伝搬用環境変数が設定されている場合は無視されます (優先度が最も低い)。<br>
+**注**: この設定は、OpenTelemetry SDK から Datadog SDK に移行する際のみ使用してください。この設定やその他の OpenTelemetry 用環境変数について詳しくは、[Datadog SDKs で OpenTelemetry の環境変数を使用する][9]を参照してください。
 
 ### 高度なコンフィギュレーション
 
-Most services send and receive trace context headers using the same format. However, if your service needs to accept trace context headers in one format and send them in another, use these configurations:
+多くのサービスでは同じ形式を使ってトレースコンテキストヘッダーを送受信します。しかし、あるサービスで特定の形式のトレースコンテキストヘッダーを受け取り、別の形式で送信する必要がある場合は、以下の設定を使用できます:
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: Specifies trace context propagation formats for extraction only in a comma-separated list. Highest precedence for configuring extraction propagators.
+: トレースコンテキスト伝搬形式のうち「抽出専用」として使用する形式をカンマ区切りで指定します。抽出用設定としては最も優先度が高くなります。
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: Specifies trace context propagation formats for injection only in comma-separated list. Highest precedence for configuring injection propagators.
+: トレースコンテキスト伝搬形式のうち「注入専用」として使用する形式をカンマ区切りで指定します。注入用設定としては最も優先度が高くなります。
 
-## Supported formats
+## 対応している形式
 
-The Datadog SDK supports the following trace context formats:
+Datadog SDK は、以下のトレースコンテキスト形式をサポートしています:
 
-| 形式                 | Configuration Value           |
+| 形式                 | 設定値           |
 |------------------------|-------------------------------|
 | [Datadog][1]           | `datadog`                     |
 | [W3C Trace Context][2] | `tracecontext`                |
-| [B3 Single][3]         | _Language Dependent Value_    |
+| [B3 Single][3]         | 言語依存の値    |
 | [B3 Multi][4]          | `b3multi`                     |
+| [Baggage][10]          | `baggage`                     |
 | [None][5]              | `none`                        |
 
-## Language support
+## 言語別サポート
 
 {{< tabs >}}
 
 {{% tab "Java" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog Java SDK supports the following trace context formats, including deprecated configuration values:
+Datadog Java SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
+| 形式                 | 設定値 |
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `b3 single header`  |
 |                        | `b3single`          |
 | [B3 Multi][4]          | `b3multi`           |
-|                        | `b3` (deprecated)   |
+|                        | `b3` (非推奨)   |
 | [AWS X-Ray][5]         | `xray`              |
 | [None][6]              | `none`              |
 
 ### 追加構成
 
-In addition to the environment variable configuration, you can also update the propagators using System Property configuration:
+環境変数での設定に加えて、システムプロパティを使ってプロパゲータを更新することもできます:
 - `-Ddd.trace.propagation.style=datadog,b3multi`
 - `-Dotel.propagators=datadog,b3multi`
 - `-Ddd.trace.propagation.style.inject=datadog,b3multi`
@@ -112,17 +114,18 @@ In addition to the environment variable configuration, you can also update the p
 
 {{% tab "Python" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog Python SDK supports the following trace context formats, including deprecated configuration values:
+Datadog Python SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
-|------------------------|---------------------|
-| [Datadog][1]           | `datadog`           |
-| [W3C Trace Context][2] | `tracecontext`      |
-| [B3 Single][3]         | `b3`                |
-| [B3 Multi][4]          | `b3multi`           |
-| [None][5]              | `none`              |
+| 形式                 | 設定値             |
+|------------------------|---------------------------------|
+| [Datadog][1]           | `datadog`                       |
+| [W3C Trace Context][2] | `tracecontext`                  |
+| [B3 Single][3]         | `b3`                            |
+|                        | `b3 single header` (非推奨) |
+| [B3 Multi][4]          | `b3multi`                       |
+| [None][5]              | `none`                          |
 
 [1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
@@ -134,11 +137,11 @@ The Datadog Python SDK supports the following trace context formats, including d
 
 {{% tab "Ruby" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog Ruby SDK supports the following trace context formats, including deprecated configuration values:
+Datadog Ruby SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
+| 形式                 | 設定値 |
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -148,15 +151,15 @@ The Datadog Ruby SDK supports the following trace context formats, including dep
 
 ### 追加構成
 
-In addition to the environment variable configuration, you can also update the propagators in code by using `Datadog.configure`:
+環境変数での設定に加えて、コード内で Datadog.configure を使ってプロパゲータを更新することもできます:
 
 ```ruby
 Datadog.configure do |c|
-  # List of header formats that should be extracted
-  c.tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
+# 抽出に使用するヘッダー形式のリスト
+c.tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
 
-  # List of header formats that should be injected
-  c.tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
+# 注入に使用するヘッダー形式のリスト
+c.tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
 end
 ```
 
@@ -170,17 +173,17 @@ end
 
 {{% tab "Go" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog Go SDK supports the following trace context formats, including deprecated configuration values:
+Datadog Go SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
+| 形式                 | 設定値 |
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
-|                        | `b3` (deprecated)   |
+|                        | `b3` (非推奨)   |
 | [None][5]              | `none`              |
 
 [1]: #datadog-format
@@ -193,17 +196,17 @@ The Datadog Go SDK supports the following trace context formats, including depre
 
 {{% tab "Node.js" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog Node.js SDK supports the following trace context formats, including deprecated configuration values:
+Datadog Node.js SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
+| 形式                 | 設定値 |
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
-|                        | `B3` (deprecated)   |
+|                        | `B3` (非推奨)   |
 | [None][5]              | `none`              |
 
 [1]: #datadog-format
@@ -216,26 +219,26 @@ The Datadog Node.js SDK supports the following trace context formats, including 
 
 {{% tab "PHP" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog PHP SDK supports the following trace context formats, including deprecated configuration values:
+Datadog PHP SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
+| 形式                 | 設定値 |
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
-|                        | `B3` (deprecated)   |
+|                        | `B3` (非推奨)   |
 | [None][5]              | `none`              |
 
 ### さまざまな使用例
 
-The following use cases are specific to the Datadog PHP SDK:
+以下のユースケースは、Datadog PHP SDK 特有のものです:
 
-{{% collapse-content title="Distributed tracing on PHP script launch" level="h4" %}}
+{{% collapse-content title="PHPスクリプト起動時の分散トレーシング" level="h4" %}}
 
-When a new PHP script is launched, the Datadog SDK automatically checks for the presence of Datadog headers for distributed tracing:
+新しい PHP スクリプトが起動されると、Datadog SDK は分散トレーシング用の Datadog ヘッダーが存在するかどうかを自動的にチェックします。
 - `x-datadog-trace-id` (環境変数: `HTTP_X_DATADOG_TRACE_ID`)
 - `x-datadog-parent-id` (環境変数: `HTTP_X_DATADOG_PARENT_ID`)
 - `x-datadog-origin` (環境変数: `HTTP_X_DATADOG_ORIGIN`)
@@ -243,9 +246,9 @@ When a new PHP script is launched, the Datadog SDK automatically checks for the 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Manually setting the distributed tracing context" level="h4" %}}
+{{% collapse-content title="分散トレーシングコンテキストを手動で設定する" level="h4" %}}
 
-To manually set tracing information in a CLI script for new or existing traces, use the `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` function.
+新規または既存のトレースに対して CLI スクリプトでトレース情報を手動設定するには、`DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` 関数を使用します。
 
 ```php
 <?php
@@ -262,7 +265,7 @@ function processIncomingQueueMessage($message) {
 );
 ```
 
-For version **0.87.0** and later, if the raw headers are available, use the `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` function. **Note**: The header names must be in lowercase.
+バージョン **0.87.0** 以降では、未加工 (raw) のヘッダーを利用できる場合、`DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` 関数を使用します。**注**: ヘッダー名はすべて小文字である必要があります。
 
 ```php
 $headers = [
@@ -273,7 +276,7 @@ $headers = [
 \DDTrace\consume_distributed_tracing_headers($headers);
 ```
 
-To extract the trace context directly as headers, use the `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` function.
+トレースコンテキストをヘッダーとして直接取得するには、`DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` 関数を使用します。
 
 ```php
 $headers = DDTrace\generate_distributed_tracing_headers();
@@ -282,13 +285,13 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 ```
 
 
-This function's optional argument accepts an array of injection style names. It defaults to the configured injection style.
+この関数のオプション引数には、インジェクションスタイル名の配列を指定できます。デフォルトでは設定済みのインジェクションスタイルが使われます。
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="RabbitMQ" level="h4" %}}
 
-The PHP APM SDK supports automatic tracing of the `php-amqplib/php-amqplib` library (version 0.87.0+). However, in some cases, your distributed trace may be disconnected. For example, when reading messages from a distributed queue using the `basic_get` method outside an existing trace, you need to add a custom trace around the `basic_get` call and corresponding message processing:
+PHP APM SDK は `php-amqplib/php-amqplib` ライブラリ (バージョン 0.87.0+) の自動トレースをサポートしています。ただし、場合によっては分散トレースが途切れてしまうことがあります。たとえば、既存のトレースの外部で `basic_get` メソッドを使用して分散キューからメッセージを受信する場合、`basic_get` の呼び出しと該当するメッセージ処理部分をカスタムトレースで囲む必要があります。
 
 ```php
 // 囲むトレースを作成します
@@ -322,11 +325,11 @@ if ($msg) {
 
 {{% tab "C++" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog C++ SDK supports the following trace context formats, including deprecated configuration values:
+Datadog C++ SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value |
+| 形式                 | 設定値 |
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -336,47 +339,47 @@ The Datadog C++ SDK supports the following trace context formats, including depr
 
 ### 追加構成
 
-In addition to the environment variable configuration, you can also update the propagators in code:
+環境変数での設定に加えて、コード内でもプロパゲータを更新できます:
 
-```cpp
+"```cpp
 #include <datadog/tracer_config.h>
 #include <datadog/propagation_style.h>
 
 namespace dd = datadog::tracing;
 int main() {
-  dd::TracerConfig config;
-  config.service = "my-service";
+dd::TracerConfig config;
+config.service = "my-service";
 
-  // `injection_styles` indicates with which tracing systems trace propagation
-  // will be compatible when injecting (sending) trace context.
-  // All styles indicated by `injection_styles` are used for injection.
-  // `injection_styles` is overridden by the `DD_TRACE_PROPAGATION_STYLE_INJECT`
-  // and `DD_TRACE_PROPAGATION_STYLE` environment variables.
-  config.injection_styles = {dd::PropagationStyle::DATADOG, dd::PropagationStyle::B3};
+// `injection_styles` はトレースコンテキストの注入 (送信) 時に、
+// どのトレーシングシステムとの互換性を持たせるかを指定します。
+// ここに指定されたすべてのスタイルが注入に使用されます。
+// `injection_styles` は環境変数 `DD_TRACE_PROPAGATION_STYLE_INJECT` および
+// `DD_TRACE_PROPAGATION_STYLE` によって上書きされます。
+config.injection_styles = {dd::PropagationStyle::DATADOG, dd::PropagationStyle::B3};
 
-  // `extraction_styles` indicates with which tracing systems trace propagation
-  // will be compatible when extracting (receiving) trace context.
-  // Extraction styles are applied in the order in which they appear in
-  // `extraction_styles`. The first style that produces trace context or
-  // produces an error determines the result of extraction.
-  // `extraction_styles` is overridden by the
-  // `DD_TRACE_PROPAGATION_STYLE_EXTRACT` and `DD_TRACE_PROPAGATION_STYLE`
-  // environment variables.
-  config.extraction_styles = {dd::PropagationStyle::W3C};
+// `extraction_styles` はトレースコンテキストの抽出 (受信) 時に、
+// どのトレーシングシステムとの互換性を持たせるかを指定します。
+// `extraction_styles` に並んだ順番で抽出が試行されます。
+// 最初に有効なコンテキストが見つかるかエラーが発生した時点で
+// 抽出結果が決まります。
+// `extraction_styles` は環境変数
+// `DD_TRACE_PROPAGATION_STYLE_EXTRACT` および
+// `DD_TRACE_PROPAGATION_STYLE` によって上書きされます。
+config.extraction_styles = {dd::PropagationStyle::W3C};
 
-  ...
+...
 }
-```
+```"
 
 ### さまざまな使用例
 
-{{% collapse-content title="Manually extract propagated context" level="h4" %}}
+{{% collapse-content title="プロパゲートされたコンテキストを手動で抽出する" level="h4" %}}
 
-To extract propagation context, implement a custom `DictReader` interface and call `Tracer::extract_span` or `Tracer::extract_or_create_span`.
+プロパゲーションコンテキストを抽出するには、カスタムの `DictReader` インターフェイスを実装し、`Tracer::extract_span` または `Tracer::extract_or_create_span` を呼び出します。
 
-Here is an example of extracting propagation context from HTTP Headers:
+以下は、HTTP ヘッダーからプロパゲーションコンテキストを抽出するサンプルです:
 
-```cpp
+"```cpp
 #include <datadog/dict_reader.h>
 #include <datadog/optional.h>
 #include <datadog/string_view.h>
@@ -386,47 +389,48 @@ Here is an example of extracting propagation context from HTTP Headers:
 namespace dd = datadog::tracing;
 
 class HTTPHeadersReader : public datadog::tracing::DictReader {
-  std::unordered_map<dd::StringView, dd::StringView> headers_;
+std::unordered_map<dd::StringView, dd::StringView> headers_;
 
 public:
-  HTTPHeadersReader(std::unordered_map<dd::StringView, dd::StringView> headers)
-    : headers_(std::move(headers)) {}
+HTTPHeadersReader(std::unordered_map<dd::StringView, dd::StringView> headers)
+: headers_(std::move(headers)) {}
 
-  ~HTTPHeadersReader() override = default;
+~HTTPHeadersReader() override = default;
 
-  // Return the value at the specified `key`, or return `nullopt` if there
-  // is no value at `key`.
-  dd::Optional<dd::StringView> lookup(dd::StringView key) const override {
-    auto found = headers_.find(key);
-    if (found == headers_.cend()) return dd::nullopt;
+// 指定された `key` に対応する値を返します。
+// 値がない場合は `nullopt` を返します。
+dd::Optional<dd::StringView> lookup(dd::StringView key) const override {
+auto found = headers_.find(key);
+if (found == headers_.cend()) return dd::nullopt;
 
-    return found->second;
-  }
+return found->second;
+}
 
-  // Invoke the specified `visitor` once for each key/value pair in this object.
-  void visit(
-      const std::function<void(dd::StringView key, dd::StringView value)>& visitor)
-      const override {
-      for (const auto& [key, value] : headers_) {
-        visitor(key, value);
-      }
-  };
+// このオブジェクトに含まれるすべてのキー/値の組に対して、
+// 指定された `visitor` を呼び出します。
+void visit(
+const std::function<void(dd::StringView key, dd::StringView value)>& visitor)
+const override {
+for (const auto& [key, value] : headers_) {
+visitor(key, value);
+}
+};
 };
 
-// Usage example:
+// 使用例:
 void handle_http_request(const Request& request, datadog::tracing::Tracer& tracer) {
-  HTTPHeadersReader reader{request.headers};
-  auto maybe_span = tracer.extract_span(reader);
-  ..
+HTTPHeadersReader reader{request.headers};
+auto maybe_span = tracer.extract_span(reader);
+..
 }
-```
+```"
 {{% /collapse-content %}}
 
-{{% collapse-content title="Manually inject context for distributed tracing" level="h4" %}}
+{{% collapse-content title="分散トレーシング用コンテキストを手動で注入する" level="h4" %}}
 
-To inject propagation context, implement the `DictWriter` interface and call `Span::inject` on a span instance:
+プロパゲーションコンテキストを注入するには、DictWriter インターフェイスを実装し、スパンインスタンスに対して Span::inject を呼び出します。
 
-```cpp
+"```cpp
 #include <datadog/dict_writer.h>
 #include <datadog/string_view.h>
 
@@ -436,28 +440,28 @@ To inject propagation context, implement the `DictWriter` interface and call `Sp
 using namespace dd = datadog::tracing;
 
 class HTTPHeaderWriter : public dd::DictWriter {
-  std::unordered_map<std::string, std::string>& headers_;
+std::unordered_map<std::string, std::string>& headers_;
 
 public:
-  explicit HTTPHeaderWriter(std::unordered_map<std::string, std::string>& headers) : headers_(headers) {}
+explicit HTTPHeaderWriter(std::unordered_map<std::string, std::string>& headers): headers_(headers) {}
 
-  ~HTTPHeaderWriter() override = default;
+~HTTPHeaderWriter() override = default;
 
-  void set(dd::StringView key, dd::StringView value) override {
-    headers_.emplace(key, value);
-  }
+void set(dd::StringView key, dd::StringView value) override {
+headers_.emplace(key, value);
+}
 };
 
-// Usage example:
+// 使用例:
 void handle_http_request(const Request& request, dd::Tracer& tracer) {
-  auto span = tracer.create_span();
+auto span = tracer.create_span();
 
-  HTTPHeaderWriter writer(request.headers);
-  span.inject(writer);
-  // `request.headers` now populated with the headers needed to propagate the span.
-  ..
+HTTPHeaderWriter writer(request.headers);
+span.inject(writer);
+// これで `request.headers` にスパンを伝搬するために必要なヘッダーが設定されます。
+..
 }
-```
+```"
 {{% /collapse-content %}}
 
 [1]: #datadog-format
@@ -470,35 +474,35 @@ void handle_http_request(const Request& request, dd::Tracer& tracer) {
 
 {{% tab ".NET" %}}
 
-### Supported formats
+### 対応している形式
 
-The Datadog .NET SDK supports the following trace context formats, including deprecated configuration values:
+Datadog .NET SDK は、以下のトレースコンテキスト形式をサポートしています (非推奨の設定値も含む):
 
-| 形式                 | Configuration Value           |
+| 形式                 | 設定値           |
 |------------------------|-------------------------------|
 | [Datadog][1]           | `datadog`                     |
 | [W3C Trace Context][2] | `tracecontext`                |
-|                        | `W3C` (deprecated)            |
+|                        | `W3C` (非推奨)            |
 | [B3 Single][3]         | `B3 single header`            |
-|                        | `B3SingleHeader` (deprecated) |
+|                        | `B3SingleHeader` (非推奨) |
 | [B3 Multi][4]          | `b3multi`                     |
-|                        | `B3` (deprecated)             |
+|                        | `B3` (非推奨)             |
 | [None][5]              | `none`                        |
 
 ### さまざまな使用例
 
-{{% collapse-content title="Prior configuration defaults" level="h4" %}}
+{{% collapse-content title="従来の設定デフォルト" level="h4" %}}
 
-- As of version [2.48.0][6], the default propagation style is `datadog, tracecontext`. This means Datadog headers are used first, followed by W3C Trace Context.
-- Prior to version 2.48.0, the order was `tracecontext, Datadog` for both extraction and injection propagation.
-- Prior to version [2.22.0][7], only the `Datadog` injection style was enabled.
-- As of version [2.42.0][8], when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.
+- [2.48.0][6] 以降のバージョンでは、デフォルトのプロパゲーションスタイルは `datadog, tracecontext` です。これは、Datadog ヘッダーを先に使用し、その後に W3C Trace Context を使用することを意味します。
+- バージョン 2.48.0 より前は、抽出と注入の両方で `tracecontext, Datadog` の順序が用いられていました。
+- [2.22.0][7] より前のバージョンでは、`Datadog` のみが注入スタイルとして有効でした。
+- [2.42.0][8] 以降では、複数の抽出スタイルを指定した場合に `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` を設定すると、有効な `tracecontext` が最初に検出された時点で抽出を即座に終了するよう制御できます。デフォルト値は `false` です。
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Distributed tracing with message queues" level="h4" %}}
+{{% collapse-content title="メッセージキューを使用した分散トレーシング" level="h4" %}}
 
-In most cases, header extraction and injection are automatic. However, there are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In these cases, you can add a custom trace using the following code:
+多くの場合、ヘッダーの抽出と注入は自動的に行われます。しかし、いくつかのケースでは分散トレースが切断される可能性があります。たとえば、分散キューからメッセージを読み込む場合に、一部のライブラリがスパンコンテキストを失ってしまうことがあります。また、Kafka メッセージを取得するときに `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定している場合も同様です。こうしたケースでは、以下のコード例のようにカスタムトレースを追加できます。
 
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
@@ -599,30 +603,36 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 {{< /tabs >}}
 
-## Custom header formats
+## カスタムヘッダー形式
 
-### Datadog format
+### Datadog 形式
 
-When the Datadog SDK is configured with the Datadog format for extraction or injection (possibly both), the Datadog SDK interacts with the following request headers:
+Datadog SDK が抽出または注入 (あるいはその両方) で Datadog 形式を使用するように設定されている場合、Datadog SDK は以下のリクエストヘッダーを処理します:
 
 `x-datadog-trace-id`
-: Specifies the lower 64-bits of the 128-bit trace-id, in decimal format.
+: 128 ビットのトレース ID の下位 64 ビットを 10 進数で指定します。
 
 `x-datadog-parent-id`
-: Specifies the 64-bits span-id of the current span, in decimal format.
+: 現在のスパンに対応する 64 ビットのスパン ID を 10 進数で指定します。
 
 `x-datadog-origin`
-: Specifies the Datadog product that initiated the trace, such as [Real User Monitoring][7] or [Synthetic Monitoring][8]. If this header is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
+: トレースを開始した Datadog 製品 ([Real User Monitoring][7] や [Synthetic Monitoring][8] など) を示します。このヘッダーが存在する場合、値は `rum`、`synthetics`、`synthetics-browser` のいずれかである必要があります。
 
 `x-datadog-sampling-priority`
-: Specifies the sampling decision made for the represented span as an integer, in decimal format.
+: 表示されているスパンのサンプリング決定を 10 進数の整数で指定します。
 
 `x-datadog-tags`
-: Specifies supplemental Datadog trace state information, including but not limited to the higher 64-bits of the 128-bit trace-id (in hexadecimal format).
+: 128 ビットのトレースID の上位 64 ビット (16 進数表現) など、Datadog トレースの追加情報を指定します。
 
-### None format
+### None 形式
 
-When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK does _not_ interact with request headers, meaning that the corresponding context propagation operation does nothing.
+Datadog SDK が抽出または注入 (あるいはその両方) で None 形式を使用するように設定されている場合、Datadog SDK はリクエストヘッダーとやり取りを行いません。つまり、対応するコンテキスト伝搬処理は何もしません。
+
+### Baggage
+
+現時点では Python、Node.js、.NET で利用可能です。他の言語については[サポート][11]までお問い合わせください。
+
+デフォルトでは、Baggage は OpenTelemetry の [W3C 互換ヘッダー][10] を使用して分散リクエスト全体で自動的に伝搬されます。Baggage を無効化するには、[DD_TRACE_PROPAGATION_STYLE][12] を `datadog,tracecontext` に設定してください。
 
 ## 参考資料
 
@@ -637,3 +647,6 @@ When the Datadog SDK is configured with the None format for extraction or inject
 [7]: /ja/real_user_monitoring/platform/connect_rum_and_traces
 [8]: /ja/synthetics/platform/apm
 [9]: /ja/opentelemetry/interoperability/environment_variable_support
+[10]: https://www.w3.org/TR/baggage/
+[11]: /ja/help
+[12]: #customize-trace-context-propagation

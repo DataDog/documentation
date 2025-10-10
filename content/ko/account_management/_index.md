@@ -6,10 +6,14 @@ cascade:
   algolia:
     rank: 70
 description: Datadog 계정과 조직을 관리하세요
+further_reading:
+- link: https://www.datadoghq.com/blog/volkswagen-organizations/
+  tag: 블로그
+  text: 대규모 Datadog 조직 관리 모범 사례
 title: 계정 관리
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
+<div class="alert alert-danger">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
 {{< /site-region >}}
 
 ## 개인 설정
@@ -31,7 +35,10 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 #### 이메일 구독
 
-이메일을 구독하면 다음 보고서에 접근할 수 있습니다.
+이메일을 구독하면 다음 보고서에 액세스할 수 있습니다.
+{{< site-region region="us3,us5,gov,ap1" >}}
+<div class="alert alert-danger">이메일 다이제스트는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
+{{< /site-region >}}
 
 * 일간 다이제스트
 * 주간 다이제스트
@@ -56,7 +63,7 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 **참조**: 더 이상 조직 소속이 아닌 경우, 조직 관리자가 초대하지 않는 이상 다시 조직에 참여할 수 없습니다.
 
-기존 조직에 참여하려면 관리자가 초대해야 합니다. 초대를 받았다면 '<Organization Name>에 참여하도록 초대받았습니다'라는 제목의 이메일이 발송됩니다. 이메일의 **계정 참여** 버튼을 클릭합니다.
+기존 조직에 참여하려면 관리자가 초대해야 합니다. 초대를 받았다면 \<Organization Name>"에 참여하도록 초대받았습니다'라는 제목의 이메일이 발송됩니다. 이메일의 **계정 참여** 버튼을 클릭합니다.
 
 사용자가 조직 관리자인 경우 다음의 추가 설명서를 확인하시기 바랍니다.
 
@@ -84,13 +91,13 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 컴퓨터 디스플레이 설정에 맞게 조정하려면 *System* 옵션을 선택하세요. 이는 Datadog의 디스플레이를 OS 수준에서 설정한 테마와 자동으로 일치시킵니다.
 
-## GitHub로 연결
+## GitHub에 연결
 
-Datadog에서 이벤트를 생성하기 위해 [GitHub 통합][9]을 설치한 경우 개인 GitHub 계정을 Datadog 사용자 계정에 연결하세요. 계정을 연결하면 Datadog 내 GitHub 이벤트에 게시한 댓글이 자동으로 해당하는 GitHub  문제나 풀 요청에 게시됩니다.
+Datadog에서 이벤트를 생성하기 위해 [GitHub 통합][9]를 설치한 경우, 개인 GitHub 계정을 Datadog 사용자 계정에 연결합니다. 계정을 연결하면 Datadog에서 GitHub 이벤트에 게시한 모든 댓글이 자동으로 GitHub의 해당 이슈 또는 풀 리퀘스트에 재게시됩니다.
 
-## 조직 계정 비활성화
+## 조직의 계정 비활성화하기
 
-Datadog 조직 계정을 비활성화하려면 [Datadog 지원팀][10]에 문의하세요.
+Datadog 조직 계정을 비활성화하려면 [Datadog 지원 팀][10]에 문의하세요.
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en

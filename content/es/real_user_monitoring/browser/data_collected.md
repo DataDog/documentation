@@ -31,14 +31,14 @@ El SDK de RUM Browser genera eventos que tienen métricas y atributos asociados.
 
 Hay [métricas y atributos adicionales específicos de un tipo de evento determinado] (#event-specific-metrics-and-attributes). Por ejemplo, la métrica `view.loading_time` está asociada con eventos de vistas y el atributo `resource.method` está asociado con eventos de recursos.
 
-| Tipo de evento     | Retención | Descripción                                                                                                                                                                                                                                                   |
+| Tipo de evento     | Conservación | Descripción                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Sesión   | 30 días   | Una sesión del usuario comienza cuando un usuario empieza a navegar por la aplicación web. Contiene información muy clara sobre el usuario (navegador, dispositivo, geolocalización). Añade todos los eventos de RUM recopilados durante el recorrido del usuario con un atributo `session.id` único. **Nota:** La sesión se reinicia después de 15 minutos de inactividad. |
-| Vista      | 30 días   | Cada vez que un usuario visita una página de la aplicación web, se genera un evento de vista. Mientras el usuario permanece en la misma página, los eventos de recursos, tareas largas, errores y acciones están vinculados con la vista de RUM relacionada con el atributo `view.id`.                       |
-| Recurso  | 15 días   | Se genera un evento de recurso para bibliotecas de imágenes, XHR, Fetch, CSS o JS cargadas en una página web. Incluye información detallada sobre el tiempo de carga.                                                                                                              |
-| Tarea larga | 15 días   | Para cualquier tarea del navegador que bloquee el subproceso principal durante más de 50 ms, se genera un evento de tarea larga.                                                                                                                                                    |
-| Error     | 30 días   | RUM recopila todos los errores de frontend que emite el navegador.                                                                                                                                                                                                     |
-| Acción    | 30 días   | Los eventos de acciones de RUM rastrean interacciones de usuario durante un recorrido de usuario. Además, se pueden enviar manualmente para monitorizar acciones personalizadas del usuario.                                                                                                                                 |
+| Sesión   | 30 días   | Una sesión del usuario comienza cuando un usuario empieza a navegar por la aplicación web. Contiene información muy clara sobre el usuario (navegador, dispositivo, geolocalización). Añade todos los eventos de RUM recopilados durante el recorrido del usuario con un atributo `session.id` único. **Nota:** La sesión se reinicia después de 15 minutos de inactividad. |
+| Vista      | 30 días   | Cada vez que un usuario visita una página de la aplicación web, se genera un evento de vista. Mientras el usuario permanece en la misma página, los eventos de recursos, tareas prolongadas, errores y acciones se vinculan con la vista de RUM relacionada con el atributo `view.id`.                       |
+| Recurso  | 15 días   | Se genera un evento de recurso para bibliotecas de imágenes, XHR, Fetch, CSS o JS cargadas en una página web. Incluye información detallada sobre el tiempo de carga.                                                                                                              |
+| Tarea prolongada | 15 días   | Se genera un evento de tarea prolongada para cualquier tarea del navegador que bloquee el subproceso principal durante más de 50 ms.                                                                                                                                                    |
+| Error     | 30 días   | RUM recopila todos los errores de frontend que emite el navegador.                                                                                                                                                                                                     |
+| Acción    | 30 días   | Los eventos de acciones de RUM rastrean interacciones de usuario durante un recorrido de usuario. Además, se pueden enviar manualmente para monitorizar acciones personalizadas del usuario.                                                                                                                                 |
 
 El siguiente diagrama ilustra la jerarquía de eventos de RUM:
 
@@ -46,7 +46,7 @@ El siguiente diagrama ilustra la jerarquía de eventos de RUM:
 
 ## Atributos predeterminados
 
-Consulta una lista completa de [Atributos estándar][1] para el RUM Browser. Por defecto, los atributos se adjuntan a cada tipo evento, por lo que puedes utilizarlos independientemente del tipo de evento de RUM que se esté consultando.
+Consulta una lista completa de [Atributos estándar][1] para el RUM Browser. De forma predeterminada, los atributos se adjuntan a cada tipo evento, por lo que puedes utilizarlos independientemente del tipo de evento de RUM que se esté consultando.
 
 ## Métricas y atributos específicos de un evento
 
@@ -74,14 +74,14 @@ Consulta una lista completa de [Atributos estándar][1] para el RUM Browser. Por
 | `session.initial_view.url_host`        | cadena | La parte de host de la URL. |
 | `session.initial_view.url_path`        | cadena | La parte de ruta de la URL. |
 | `session.initial_view.url_path_group`  | cadena | El grupo de URL automático generado para URL similares (por ejemplo, `/dashboard/?` para `/dashboard/123` y `/dashboard/456`). |
-| `session.initial_view.url_query` | objeto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de los parámetros de la consulta. |
-| `session.initial_view.url_scheme` | objeto | La parte de esquema de la URL. |
+| `session.initial_view.url_query` | objecto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de parámetros de consulta. |
+| `session.initial_view.url_scheme` | objecto | La parte de esquema de la URL. |
 | `session.last_view.id`        | cadena | El ID de la última vista de RUM generada por el usuario. |
 | `session.last_view.url_host`        | cadena | La parte de host de la URL. |
 | `session.last_view.url_path`        | cadena | La parte de ruta de la URL. |
 | `session.last_view.url_path_group`  | cadena | El grupo de URL automático generado para URL similares (por ejemplo, `/dashboard/?` para `/dashboard/123` y `/dashboard/456`). |
-| `session.last_view.url_query` | objeto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de los parámetros de la consulta. |
-| `session.last_view.url_scheme` | objeto | La parte de esquema de la URL. |
+| `session.last_view.url_query` | objecto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de parámetros de consulta. |
+| `session.last_view.url_scheme` | objecto | La parte de esquema de la URL. |
 
 ### Métricas de tiempo de vista
 
@@ -116,7 +116,7 @@ Los datos detallados de temporización de red para la carga de los recursos de u
 
 | Métrica                              | Tipo           | Descripción                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | número         | Tiempo total empleado en cargar el recurso.                                                                                                   |
+| `resource.duration`            | número         | Tiempo total empleado en cargar el recurso.                                                                                                   |
 | `resource.size`                | número (bytes) | Tamaño del recurso.                                                                                                                            |
 | `resource.connect.duration`    | número (ns)    | Tiempo empleado en establecer una conexión con el servidor (connectEnd - connectStart).                                                            |
 | `resource.ssl.duration`        | número (ns)    | Tiempo empleado por el protocolo TLS. Si la última solicitud no es en HTTPS, esta métrica no aparece (connectEnd - secureConnectionStart). |
@@ -135,9 +135,9 @@ Los datos detallados de temporización de red para la carga de los recursos de u
 | `resource.url`             | cadena | La URL del recurso.                                                                                    |
 | `resource.url_host`        | cadena | La parte de host de la URL.                                                                            |
 | `resource.url_path`        | cadena | La parte de ruta de la URL.                                                                            |
-| `resource.url_query`       | objeto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de parámetros de consulta.                   |
+| `resource.url_query`       | objecto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de parámetros de consulta.                   |
 | `resource.url_scheme`      | cadena | El nombre del protocolo de la URL (HTTP o HTTPS).                                                        |
-| `resource.provider.name`   | cadena | El nombre del proveedor de recursos. De forma predeterminada es `unknown`.                                                    |
+| `resource.provider.name`   | cadena | El nombre del proveedor de recursos. Por defecto es `unknown`.                                                    |
 | `resource.provider.domain` | cadena | El dominio del proveedor del recurso.                                                                        |
 | `resource.provider.type`   | cadena | El tipo de proveedor del recurso (por ejemplo, `first-party`, `cdn`, `ad` o `analytics`).                |
 
@@ -147,14 +147,14 @@ Los datos detallados de temporización de red para la carga de los recursos de u
 |------------|--------|----------------------------|
 | `long_task.duration` | número | Duración de la tarea larga. |
 
-### Atributos de error
+### Atributos de errores
 
 | Atributo       | Tipo   | Descripción                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.source`  | cadena | Origen del error (por ejemplo, `console`). Consulta [Fuentes de error][11].   |
 | `error.type`    | cadena | El tipo de error (o código de error en algunos casos).                   |
 | `error.message` | cadena | Un mensaje conciso, legible, de una línea, en el cual se explica el evento. |
-| `error.stack`   | cadena | La traza (trace) del stack tecnológico o información complementaria sobre el error.     |
+| `error.stack`   | cadena | La traza (trace) de stack tecnológico o la información adicional sobre el error.     |
 
 #### Errores de origen
 
@@ -169,11 +169,11 @@ Los errores de origen incluyen información a nivel de código sobre el error. P
 | Métrica    | Tipo   | Descripción              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | número (ns) | El tiempo de carga de la acción. Consulta cómo se calcula en la [Documentación de rastreo de acciones de usuario][13]. |
-| `action.long_task.count`        | número      | Total de tareas largas recopiladas para esta acción. |
-| `action.resource.count`         | número      | Total de recursos recopilados para esta acción. |
-| `action.error.count`      | número      | Total de errores recopilados para esta acción.|
+| `action.long_task.count`        | número      | Número de tareas largas recopiladas para esta acción. |
+| `action.resource.count`         | número      | Número de recursos recopilados para esta acción. |
+| `action.error.count`      | número      | Número de errores recopilados para esta acción.|
 
-### Atributos de la acción
+### Atributos de las acciones
 
 | Atributo    | Tipo   | Descripción              |
 |--------------|--------|--------------------------|

@@ -26,6 +26,8 @@ categories:
 - metrics
 - issue tracking
 - network
+- event management
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,7 +36,6 @@ integration_id: catchpoint
 integration_title: Catchpoint
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: catchpoint
 public_title: Catchpoint
@@ -46,8 +47,10 @@ tile:
   - Category::Metrics
   - Category::Issue Tracking
   - Category::Network
+  - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Datadog 이벤트 스트림에 Catchpoint 알림을 발송하세요.
+  description: Datadog 이벤트 스트림으로 Catchpoint 알림 전송하기
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -69,7 +72,7 @@ Catchpoint 통합을 통해 다음 작업을 실행할 수 있습니다.
 
 ### 설치
 
-설치할 필요가 없습니다.
+설치가 필요하지 않습니다.
 
 ### 설정
 
@@ -77,7 +80,7 @@ Catchpoint 통합을 통해 다음 작업을 실행할 수 있습니다.
 
 1. 알림 API에서 활성화를 선택합니다.
 
-   {{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint 이벤트" popup="true">}}
+   ![catchpoint 이벤트][1]
 
 2. Datadog 엔드포인트 URL을 입력합니다.
 
@@ -85,12 +88,12 @@ Catchpoint 통합을 통해 다음 작업을 실행할 수 있습니다.
     https://app.datadoghq.com/api/v1/events?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
-   기존 Datadog API 키를 선택하거나 [통합 타일의 **설정** 탭][1]에서 API 키를 생성합니다.
+    기존 Datadog API 키를 선택하거나 [통합 타일의 **설정** 탭][2]에서 API 키를 생성합니다.
 
 3. 상태를 활성으로 설정합니다.
 4. 형식에 대한 템플릿을 선택합니다.
 5. 새로운 템플릿을 추가합니다.
-6. 템플릿 이름(예: `DataDog`)을 입력하고 형식을 JSON으로 설정합니다.
+6. `DataDog`와 같은 템플릿 이름을 입력하고 Format을 JSON으로 설정합니다.
 7. 다음 JSON 템플릿을 사용하여 저장합니다.
 
    ```json
@@ -106,9 +109,9 @@ Catchpoint 통합을 통해 다음 작업을 실행할 수 있습니다.
    }
    ```
 
-Catchpoint는 Datadog의 [이벤트 탐색기][2]에 직접 알림을 전송합니다.
+Catchpoint는 Datadog의 [이벤트 탐색기][3]에 직접 알림을 전송합니다.
 
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint 이벤트" popup="true">}}
+![catchpoint 이벤트][4]
 
 ### 메트릭 수집
 
@@ -821,7 +824,7 @@ Datadog에서 Catchpoint 메트릭을 수신하려면 Catchpoint 포털에서 Te
 }
 ```
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "catchpoint" >}}
@@ -829,18 +832,20 @@ Datadog에서 Catchpoint 메트릭을 수신하려면 Catchpoint 포털에서 Te
 
 ### 이벤트
 
-Catchpoint 이벤트가 [Catchpoint 대시보드][4]의 이벤트 스트림 위젯에 표시됩니다.
+Catchpoint 이벤트가 [Catchpoint 대시보드][6]의 이벤트 스트림 위젯에 표시됩니다.
 
-### 서비스 검사
+### 서비스 점검
 
-Catchpoint 통합에는 서비스 검사가 포함되어 있지 않습니다.
+Catchpoint 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][5]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][7]에 문의하세요.
 
-[1]: https://app.datadoghq.com/integrations/catchpoint
-[2]: https://docs.datadoghq.com/ko/service_management/events/
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
-[4]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
-[5]: https://docs.datadoghq.com/ko/help/
+[1]: images/configuration.png
+[2]: https://app.datadoghq.com/integrations/catchpoint
+[3]: https://docs.datadoghq.com/ko/service_management/events/
+[4]: images/screenshot.png
+[5]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
+[6]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
+[7]: https://docs.datadoghq.com/ko/help/

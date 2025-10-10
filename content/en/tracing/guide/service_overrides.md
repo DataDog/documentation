@@ -1,16 +1,12 @@
 ---
 title: Service Overrides
+description: Understand service overrides and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
-private: true
 further_reading:
-- link: "/tracing/guide/inferred-service-opt-in"
+- link: "/tracing/services/inferred_services"
   tag: "Documentation"
-  text: "Opting-in to the new service representation"
+  text: "Inferred services"
 ---
-
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
-Inferred service dependencies are in Preview. To request access, complete the form. For opt-in instructions, see the <a href="/tracing/guide/inferred-service-opt-in/">Inferred Service dependencies guide</a>.
-{{< /callout >}}
 
 ## Overview
 
@@ -60,7 +56,7 @@ To give less importance to service overrides, these are treated differently visu
 
 #### In service and resource pages
 
-Services that are service overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overriden, in a [custom](#custom-service-overrides) way, or as the default setting of the [integration](#integration-service-overrides).
+Services that are service overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overridden, in a [custom](#custom-service-overrides) way, or as the default setting of the [integration](#integration-service-overrides).
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
 
@@ -72,7 +68,7 @@ In service maps, service overrides are represented as part of the edge going fro
 
 #### In traces
 
-In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overriden service name, and the inferred entity name.
+In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overridden service name, and the inferred entity name.
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_traces.png" alt="Trace side panel service overrides" style="width:80%;">}}
 
@@ -87,7 +83,7 @@ DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
 
 This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example,`*-postgres`, `*-http-client`).
 
-<div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
+<div class="alert alert-warning">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
 
 It is recommended to remove service overrides progressively, proceeding service by service, to ensure that no critical assets (such as dashboards, monitors, retention filters, and so on) are affected by the change. Follow the [detailed instructions](#remove-service-overrides-progressively) to ensure a smooth transition to the new model.
 
@@ -145,9 +141,9 @@ The default `DD_SERVICE` name.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/inferred-service-opt-in
+[1]: /tracing/services/inferred_services
 [2]: /tracing/trace_pipeline/generate_metrics
 [3]: /monitors/types/apm/?tab=traceanalytics
 [4]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [5]: /tracing/metrics/metrics_namespace/
-[6]: https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/#list-of-newly-introduced-peer-tags
+[6]: /tracing/services/inferred_services/#peer-tags

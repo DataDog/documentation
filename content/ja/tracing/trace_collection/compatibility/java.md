@@ -288,9 +288,9 @@ GraalVM Native Image is a technology that allows you to compile Java application
 
 ### 要件
 
-Use the latest versions of:
+Use:
 
-- [GraalVM][7]
+- [GraalVM JDK 21][7]
 - [Datadog Java tracer][1]
 
 ### セットアップ
@@ -305,7 +305,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
 
 [6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -319,7 +319,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
 
 [6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -351,7 +351,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </build>
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
-3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true --enable-monitoring=jfr’`.
 
 [6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog

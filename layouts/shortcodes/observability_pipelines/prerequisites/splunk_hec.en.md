@@ -1,6 +1,6 @@
-To use Observability Pipelines's Splunk HTTP Event Collector (HEC) source, you have applications sending data to Splunk in the [expected HEC format][3001].
+To use Observability Pipelines' Splunk HTTP Event Collector (HEC) source, you have applications sending data to Splunk in the [expected HEC format][3001].
 
-To use Observability Pipelines's Splunk HEC destination, you have a Splunk Enterprise or Cloud instance configured with an HTTP Event Collector (HEC) input. You also have the following information available:
+To use Observability Pipelines' Splunk HEC destination, you have a Splunk Enterprise or Cloud instance configured with an HTTP Event Collector (HEC) input. You also have the following information available:
 
 - The Splunk HEC token.
 - The bind address that your Observability Pipelines Worker will listen on to receive logs from your applications. For example, `0.0.0.0:8080`. Later on, you [configure your applications](#send-logs-to-the-observability-pipelines-worker-over-splunk-hec) to send logs to this address.

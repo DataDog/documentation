@@ -3,7 +3,7 @@ title: Account Management
 ---
 
 {{< whatsnext desc="General:" >}}
-    {{< nextlink href="cloudcraft/account-management/cancel-subscription">}}Cancel your Cloudcraft subscription{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/account-management/cancel-subscription">}}Cancel your Cloudcraft (Standalone) subscription{{< /nextlink >}}
     {{< nextlink href="cloudcraft/account-management/transfer-ownership">}}Transfer account and team ownership{{< /nextlink >}}
     {{< nextlink href="cloudcraft/account-management/billing-and-invoices">}}Billing and invoices{{< /nextlink >}}
     {{< nextlink href="cloudcraft/account-management/manage-user-profile">}}Manage and update your user profile{{< /nextlink >}}

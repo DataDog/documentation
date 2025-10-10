@@ -4,6 +4,7 @@ app_uuid: f99b6e79-f50a-479d-b916-955a577e4f41
 assets:
   dashboards:
     Databricks Clusters Dashboard: assets/dashboards/clusters_dashboard.json
+    Databricks Model Serving Overview: assets/dashboards/model_serving_overview.json
     Databricks Overview Dashboard: assets/dashboards/overview_dashboard.json
     databricks_cost_overview: assets/dashboards/databricks_cost_overview.json
   integration:
@@ -11,12 +12,24 @@ assets:
     configuration: {}
     events:
       creates_events: false
+    metrics:
+      check: databricks.model_serving.provisioned_concurrent_requests_total
+      metadata_path: metadata.csv
+      prefix: databricks.model_serving.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10152
     source_type_name: Databricks
   logs:
     source: spark
+  monitors:
+    'Databricks Model Serving: High CPU memory usage': assets/monitors/cpu_memory_usage_high.json
+    'Databricks Model Serving: High CPU usage': assets/monitors/cpu_usage_high.json
+    'Databricks Model Serving: High GPU memory usage': assets/monitors/gpu_memory_usage_high.json
+    'Databricks Model Serving: High GPU usage': assets/monitors/gpu_usage_high.json
+    'Databricks Model Serving: High count 4xx errors': assets/monitors/4xx_errors.json
+    'Databricks Model Serving: High count 5xx errors': assets/monitors/5xx_errors.json
+    'Databricks Model Serving: High request latency': assets/monitors/request_latency_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -72,9 +85,9 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
-<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Databricks のジョブとクラスターを観察し、トラブルシューティングし、コストを最適化するのに役立ちます。<br/><br/>
-このページは、Databricks クラスターの利用状況メトリクスとログの取り込みに関するドキュメントに限定されています。
+<div class="alert alert-info">
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Databricks の ジョブおよびクラスターを監視、トラブルシューティング、コスト最適化するのに役立ちます。<br/><br/>
+このページは、Databricks の モデルサービングメトリクスおよびクラスター利用状況データの取り込みに関するドキュメントに限定されています。
 </div>
 
 ![Databricks のデフォルトのダッシュボード][1]
@@ -91,14 +104,31 @@ Datadog は、いくつかの Databricks の監視機能を提供しています
 
 [Infrastructure Monitoring][5] は、Data Jobs Monitoring の機能の一部に特化した限定的なサブセットであり、Databricks クラスターのリソース使用状況や Apache Spark のパフォーマンスメトリクスを可視化する機能を提供します。
 
+モデルサービングメトリクスは、Databricks の モデルサービング基盤がどのように機能しているかについての洞察を提供します。これらのメトリクスを用いることで、高いエラーレートやレイテンシーを示すエンドポイント、過剰/過少プロビジョニングのエンドポイントなどを検出できます。
 ## セットアップ
 
 ### インストール
+[モデルサービングの構成](#model-serving-configuration)の手順に従い、モデルサービング基盤の健全性に関する洞察を得てください。
 
-Databricks Spark アプリケーションを [Datadog Spark インテグレーション][6]で監視します。適切なクラスターの[構成](#configuration)方法に従って、クラスターに [Datadog Agent][7] をインストールしてください。その後、Datadog に [Spark インテグレーション][6]をインストールし、Databricks Overview ダッシュボードを自動インストールします。
+[Datadog Spark インテグレーション][6]を用いて、Databricks の Spark アプリケーションをモニタリングします。[Datadog Agent][7] をクラスターにインストールするには、適切なクラスター用の[構成](#spark-configuration)手順に従ってください。詳細については [Spark Configuration](#spark-configuration) を参照してください。
 
 ### 構成
+#### モデルサービングの構成
+1. Databricks ワークスペースで右上のプロフィールアイコンをクリックし、**Settings**を開きます。左側のサイドバーから **Developer**を選択し、**Access tokens**の横にある **Manage**をクリックします。
+2. **Generate new token**をクリックし、**Comment**フィールドに「Datadog Integration」と入力した上で、**Lifetime (days)**のデフォルト値を削除してから **Generate**をクリックしてください。生成されたトークンはメモしておきます。
 
+   **重要:**
+   * **Lifetime (days)** のデフォルト値を削除することで、トークンの有効期限切れによるインテグレーションの障害を防止できます。
+   * 監視対象の Databricks ジョブやクラスターに対して、トークンを生成するアカウントが [CAN VIEW アクセス][8]を有していることを確認してください。
+
+   また、[公式の Databricks ドキュメント][9]に従って[サービスプリンシパル][9]用のアクセストークンを生成することもできます。
+
+3. Datadog で、Databricks インテグレーションタイルを開きます。
+4. **Configure** タブで、**Add Databricks Workspace** をクリックします。
+5. ワークスペース名、Databricks ワークスペース URL、生成した Databricks トークンを入力します。
+6. **Select resources to set up collection** セクションにて、**Metrics - Model Serving** が **Enabled** になっていることを確認してください。
+
+#### Spark の構成
 Databricks で Apache Spark クラスターを監視し、システムと Spark のメトリクスを収集するように Sparkインテグレーションを構成します。
 
 以下に説明する各スクリプトは、ニーズに合わせて変更することができます。例えば、
@@ -114,7 +144,7 @@ UI、Databricks CLI を使用して、または Clusters API を呼び出して�
 {{% /site-region %}}
 
 
-<div class="alert alert-warning">セキュリティ上の理由から、環境変数 `DD_API_KEY` を UI で直接プレーンテキストで定義することは推奨されません。代わりに <a href="https://docs.databricks.com/en/security/secrets/index.html">Databricks シークレット</a>を使用してください。</div>
+<div class="alert alert-danger">セキュリティ上の理由から、環境変数 `DD_API_KEY` を UI で直接プレーンテキストで定義することは推奨されません。代わりに <a href="https://docs.databricks.com/en/security/secrets/index.html">Databricks シークレット</a>を使用してください。</div>
 
 
 
@@ -135,7 +165,7 @@ Databricks UI を使用してグローバル init スクリプトを編集しま
 6. **Enabled** トグルをクリックして有効にします。
 7. **Add** ボタンをクリックします。
 
-これらの手順の後、いずれの新しいクラスターもスクリプトを自動的に使用するようになります。グローバル init スクリプトの詳細については、[Databricks 公式ドキュメント][8]を参照してください。
+これらの手順を完了すると、新規クラスターは自動的にこのスクリプトを使用します。グローバル init スクリプトの詳細は [Databricks 公式ドキュメント][10]を参照してください。
 
 <div class="alert alert-info">複数の init スクリプトを定義し、UI でその順番を指定することができます。</div>
 
@@ -145,7 +175,7 @@ Databricks UI を使用してグローバル init スクリプトを編集しま
 
 クラスターのドライバーノードに Datadog Agent をインストールします。
 
-<div class="alert alert-warning">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
+<div class="alert alert-danger">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
 
 ```shell script
 #!/bin/bash
@@ -227,7 +257,7 @@ chmod a+x /tmp/start_datadog.sh
 
 クラスターのドライバーノードとワーカーノードに Datadog Agent をインストールします。
 
-<div class="alert alert-warning">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
+<div class="alert alert-danger">スクリプト内で `DD_API_KEY` 変数の値を定義する必要があります。</div>
 
 ```shell script
 #!/bin/bash
@@ -344,7 +374,7 @@ Databricks UI を使用してクラスターを編集し、init スクリプト�
 
 もし `datadog_init_script.sh` を `Unity Catalog Volume` に直接保存した場合は、パス `/Volumes/$VOLUME_PATH/datadog_init_script.sh` でファイルにアクセスできます。
 
-クラスター init スクリプトの詳細については、[Databricks 公式ドキュメント][8]を参照してください。
+クラスター init スクリプトの詳細については、[Databricks 公式ドキュメント][10]を参照してください。
 
 {{< tabs >}}
 {{% tab "ドライバーのみ" %}}
@@ -523,12 +553,14 @@ chmod a+x /tmp/start_datadog.sh
 ## 収集データ
 
 ### メトリクス
+{{< get-metrics-from-git "databricks" >}}
 
-収集されたメトリクスのリストについては、[Spark インテグレーションドキュメント][9]を参照してください。
+#### Spark メトリクス
+収集される Spark メトリクスの一覧については、[Spark インテグレーションドキュメント][11]を参照してください。
 
 ### サービスチェック
 
-収集されたサービスチェックのリストについては、[Spark インテグレーションドキュメント][10]を参照してください。
+収集されるサービスチェックの一覧については、[Spark インテグレーションドキュメント][12]を参照してください。
 
 ### イベント
 
@@ -536,15 +568,15 @@ Databricks インテグレーションには、イベントは含まれません
 
 ## トラブルシューティング
 
-[Databricks Web ターミナル][11]を有効にするか、[Databricks ノートブック][12]を使用することで、問題を自分でトラブルシューティングできます。有用なトラブルシューティング手順については、[Agent のトラブルシューティング][13]のドキュメントを参照してください。
+[Databricks Web ターミナル][13]を有効にするか、[Databricks Notebook][14] を利用することで、自分で問題をトラブルシューティングできます。詳細な手順については、[Agent トラブルシューティング][15]ドキュメント を参照してください。
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Unity カタログボリュームへのスクリプトのアップロード][15]
+- [Unity カタログボリュームへのスクリプトのアップロード][17]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/databricks/images/databricks_dashboard.png
@@ -554,11 +586,13 @@ Databricks インテグレーションには、イベントは含まれません
 [5]: https://docs.datadoghq.com/ja/integrations/databricks/?tab=driveronly
 [6]: https://app.datadoghq.com/integrations/spark
 [7]: https://app.datadoghq.com/account/settings/agent/latest
-[8]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
-[9]: https://docs.datadoghq.com/ja/integrations/spark/#metrics
-[10]: https://docs.datadoghq.com/ja/integrations/spark/#service-checks
-[11]: https://docs.databricks.com/en/clusters/web-terminal.html
-[12]: https://docs.databricks.com/en/notebooks/index.html
-[13]: https://docs.datadoghq.com/ja/agent/troubleshooting/
-[14]: https://docs.datadoghq.com/ja/help/
-[15]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume
+[8]: https://docs.databricks.com/en/security/auth-authz/access-control/index.html#job-acls
+[9]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
+[10]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
+[11]: https://docs.datadoghq.com/ja/integrations/spark/#metrics
+[12]: https://docs.datadoghq.com/ja/integrations/spark/#service-checks
+[13]: https://docs.databricks.com/en/clusters/web-terminal.html
+[14]: https://docs.databricks.com/en/notebooks/index.html
+[15]: https://docs.datadoghq.com/ja/agent/troubleshooting/
+[16]: https://docs.datadoghq.com/ja/help/
+[17]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume

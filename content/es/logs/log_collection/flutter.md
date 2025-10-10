@@ -12,9 +12,9 @@ title: Recopilación de logs de Flutter
 Envía logs a Datadog desde tus aplicaciones de Flutter con [el complemento de flutter de Datadog][1] y aprovecha las siguientes funciones:
 
 * Loguear en Datadog en formato JSON de forma nativa.
-* Utiliza los atributos predeterminados y añade atributos personalizados a cada log enviado.
-* Registra las direcciones IP reales de los clientes y los Agents de usuario.
-* Aprovecha el uso optimizado de red con publicaciones masivas automáticas.
+* Utilizar los atributos predeterminados y añadir atributos personalizados a cada log enviado.
+* Registrar las direcciones IP reales de los clientes y los Agents de usuario.
+* Aprovechar el uso optimizado de red con publicaciones masivas automáticas.
 
 ## Configuración
 
@@ -85,7 +85,7 @@ Por defecto, los siguientes atributos se añaden a todos los logs enviados por u
 * `http.useragent` y sus propiedades extraídas `device` y `OS` 
 * `network.client.ip` y sus propiedades geográficas extraídas (`country`, `city`)
 * `logger.version`, versión del SDK de Datadog
-* `logger.thread_name`, (`main`, `background`)
+* `logger.thread_name`(`main`, `background`)
 * `version`, la versión de la aplicación del cliente extraída de `Info.plist` o de `application.manifest`
 * `environment`, el nombre de entorno utilizado para inicializar el SDK
 
@@ -146,13 +146,13 @@ final datadogLogger = DatadogSdk.instance.logs?.createLogger(
 );
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
+[2]: /es/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogLoggerConfiguration-class.html
 [4]: /es/getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html

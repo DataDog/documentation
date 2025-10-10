@@ -34,27 +34,33 @@ $$\bo\text"Apdex"=({\bo\text"Satisfied"\text" requests" + {{\bo\text"Tolerated"\
 
 웹 애플리케이션 또는 서비스 애플리케이션 성능지표(Apdex)를 시각화하려면:
 
-1. [서비스 카탈로그][3]에서 웹 서비스를 클릭합니다. 오른쪽 상단 그래프에서 레이턴시 대신 애플리케이션 성능지표(Apdex)를 선택합니다. 해당 옵션이 표시되지 않으면 다음과 같이 웹 서비스를 클릭했는지 확인합니다.
+1. [Software Catalog][3]에서 웹 서비스에 마우스 커서를 올리고 **Service Page**를 선택합니다.
 
-   {{< img src="tracing/faq/apdex_selection.png" alt="애플리케이션 성능지표(Apdex) 섹션" >}}
+1. **Latency** 그래프 제목을 클릭해 드롭다운 메뉴를 열고 **Apdex**를 선택합니다.
 
-2. 위젯 왼쪽 상단의 연필 아이콘을 사용하여 애플리케이션 성능지표(Apdex)(이 아이콘이 표시되려면 관리자여야 함)를 설정합니다.
+   **참고**: Apdex 옵션은 웹 서비스에서만 사용할 수 있습니다.
 
-   {{< img src="tracing/faq/apdex_edit.png" alt="애플리케이션 성능지표(Apdex) 편집" >}}
+   {{< img src="tracing/faq/apdex_selection_2.png" alt="Apdex 옵션을 보여주는 Latency 그래프 드롭다운 메뉴" >}}
 
-3. 요청 분포를 시각화하려면 임계값을 직접 입력합니다.
+1. 위젯 왼쪽 상단에 있는 연필 아이콘을 사용해 Apdex 구성을 편집할 수 있습니다.
 
-   {{< img src="tracing/faq/apdex_update.png" alt="애플리케이션 성능지표(Apdex) 업데이트" >}}
+   **참고**: 관리자에게만 이 아이콘이 보입니다.
 
-4. 위젯을 저장하여 시간에 따라 애플리케이션 성능지표(Apdex)가 변화하는 모습을 추적합니다.
+   {{< img src="tracing/faq/apdex_edit.png" alt="Apdex 그래프 위에 있는 연필 아이콘, 선택하여 허용 가능 상한 값 편집 가능" >}}
 
-   {{< img src="tracing/faq/apm_save.png" alt="애플리케이션 성능지표(Apdex) 저장" >}}
+1. 상한 값을 입력해 요청 분포를 시각화합니다.
 
-## 서비스 카탈로그에 애플리케이션 성능지표(Apdex) 표시하기
+   {{< img src="tracing/faq/apdex_update.png" alt="Apdex 구성 편집 화면, 허용 가능 상한 값을 설정할 수 있는 텍스트 박스를 나타냄" >}}
 
-[서비스 카탈로그][2]에 애플리케이션 성능지표(Apdex) 점수를 표시하려면 페이지 오른쪽 상단의 설정 메뉴에서 해당 점수를 선택합니다.
+1. 위젯을 저장하여 시간에 따라 애플리케이션 Apdex가 변화하는 모습을 추적합니다.
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex 서비스 카탈로그" >}}
+   {{< img src="tracing/faq/apm_save.png" alt="구성 변경 사항을 저장한 후 Apdex 그래프" >}}
+
+## Software Catalog에서 Apdex 표시
+
+[Software Catalog][2]에서 Apdex 점수를 표시하려면 페이지 오른쪽 상단의 설정 메뉴에서 선택합니다.
+
+{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Software Catalog" >}}
 
 [1]: https://www.apdex.org/
 [2]: https://app.datadoghq.com/services

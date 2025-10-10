@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "type": "retention_filters",
+      "id": "325631eb-94c9-49c0-93f9-ab7e4fd24529"
+    },
+    {
+      "type": "retention_filters",
+      "id": "42d89430-5b80-426e-a44b-ba3b417ece25"
+    },
+    {
+      "type": "retention_filters",
+      "id": "bff0bc34-99e9-4c16-adce-f47e71948c23"
+    }
+  ]
+}

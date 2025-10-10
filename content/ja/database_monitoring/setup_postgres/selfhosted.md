@@ -157,7 +157,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### 検証する
@@ -221,7 +221,7 @@ Datadog Agent をインストールすると、Postgres でのデータベース
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
+       ## オプション: `custom_queries` に必要な場合は、別のデータベースに接続します
        # dbname: '<DB_NAME>'
    ```
 
@@ -238,12 +238,14 @@ Datadog Agent をインストールすると、Postgres でのデータベース
        password: 'ENC[datadog_user_database_password]'
        pg_stat_statements_view: datadog.pg_stat_statements()
        pg_stat_activity_view: datadog.pg_stat_activity()
-       ## Optional: Connect to a different database if needed for `custom_queries`
+       ## オプション: `custom_queries` に必要な場合は、別のデータベースに接続します
        # dbname: '<DB_NAME>'
    ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
 2. [Agent を再起動します][10]。
 

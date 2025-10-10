@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - iot
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
 display_on_public_website: true
@@ -59,14 +59,14 @@ tile:
 
 ## Información general
 
-Este check monitoriza una placa [Nvidia Jetson][1].
-Informa de las métricas recopiladas de `tegrastats`.
+Este check monitoriza una placa [NVIDIA Jetson][1].
+Informa las métricas recopiladas de `tegrastats`.
 
 ## Configuración
 
 ### Instalación
 
-El check de Nvidia Jetson está incluido en el paquete del [Datadog Agent][2].
+El check de NVIDIA Jetson está incluidoo en el paquete del [Datadog Agent ][2].
 No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
@@ -97,11 +97,11 @@ Algunas métricas solo se notifican si `use_sudo` está configurado como verdade
 
 ### Checks de servicio
 
-La integración de Nvidia Jetson no incluye ningún check de servicio.
+La integración de NVIDIA Jetson no incluye ningún check de servicio.
 
 ### Eventos
 
-La integración de Nvidia Jetson no incluye ningún evento.
+La integración de NVIDIA Jetson no incluye ningún evento.
 
 ## Solucionar problemas
 

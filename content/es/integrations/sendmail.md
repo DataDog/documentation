@@ -22,8 +22,8 @@ author:
   support_email: david.bouchare@datadoghq.com
 categories:
 - métricas
-- la red
-custom_kind: integration
+- red
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -54,7 +54,7 @@ tile:
   title: Sendmail
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -75,7 +75,7 @@ En el caso de las versiones 7.21/6.21 o posteriores del Agent, sigue las siguie
    datadog-agent integration install -t datadog-sendmail==<INTEGRATION_VERSION>
    ```
 
-2. Configura tu integración como si fuese una [integración][4] de base.
+2. Configura tu integración similar a las [integraciones][4] centrales.
 
 ### Configuración
 
@@ -103,7 +103,7 @@ Sendmail no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][10].
 
 
 [1]: https://www.proofpoint.com/us/open-source-email-solution

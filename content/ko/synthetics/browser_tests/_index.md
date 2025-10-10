@@ -10,9 +10,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: 블로그
   text: 엔드 투 엔드 테스트 생성 모범 사례
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: 학습 센터
-  text: 신서틱(Synthetic) 테스트 사용
+  text: 'Datadog 학습 센터: 신서틱 브라우저 테스팅 시작하기'
 - link: /getting_started/synthetics/browser_test
   tag: 설명서
   text: 브라우저 테스트 시작하기
@@ -33,25 +33,52 @@ title: 브라우저 테스트
 
 ## 테스트 설정
 
-브라우저 테스트의 설정을 정의합니다.
+다음 옵션 중 하나를 사용하여 테스트를 생성할 수 있습니다.
 
-1. **Starting URL** 입력: 브라우저 테스트가 시나리오를 시작하는 URL입니다.
+- **템플릿에서 테스트 생성하기**:
 
- <div class="alert alert-info">더 많은 옵션은 <a href=#advanced-options>고급 옵션</a>에서 확인하세요.</div>
+    1. 사전에 채워진 템플릿 중 하나에 마우스를 올리고 **템플릿 보기**를 클릭합니다. 테스트 세부 정보, 경고 조건, 단계, 옵션 변수가 포함된, 사전에 채워진 설정 정보가 표시되는 사이드 패널이 열립니다.
+    2. **+테스트 생성하기**를 클릭하면 사전 입력된 설정 옵션을 검토하고 편집할 수 있는 설정 페이지가 열립니다. 표시되는 필드는 테스트 처음 생성 시 사용할 수 있는 필드와 동일합니다.
+    3. 오른쪽 상단의 **저장 후 종료**를 클릭하여 브라우저 테스트를 제출합니다.<br /><br>
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="템플릿을 사용한 Synthetics 브라우저 테스트 랜딩 페이지 영상" video="true" >}}
 
-2. **이름** 추가: 브라우저 테스트의 이름입니다.
-3. **환경 및 추가 태그** 선택: 브라우저 테스트와 관련된 `env` 및 연관 태그를 설정합니다. `<KEY>:<VALUE>` 형식으로 대상 `<KEY>`의 `<VALUE>`을 필터링합니다.
-4. **브라우저 및 기기** 선택: 테스트를 실행할 브라우저(예: `Chrome`, `Firefox`, `Edge`)와 기기(예: `Laptop Large`, `Tablet`, `Mobile Small`)를 선택합니다. 
-   - 대형 노트북의 경우 크기는 1440 픽셀 x 1100 픽셀입니다. 
-   - 태블릿 기기의 경우 크기는 768 픽셀 x 1020 픽셀입니다. 
-   - 소형 모바일 기기의 경우 크기는 320 픽셀 x 550 픽셀입니다.  
-5. **관리 및 프라이빗 위치** 선택: Datadog이 관리하는 전 세계의 위치를 선택하거나 [프라이빗 위치][1]를 생성하여, 사용자 설정 위치 또는 내부 프라이빗 네트워크에서 브라우저 테스트를 실행합니다.
+- **테스트 처음부터 빌드하기**:
 
-   {{% managed-locations %}}
+    1. 새 브라우저 테스트를 처음부터 시작하려면 **+** 템플릿을 클릭합니다.
+    1. **Starting URL** 입력: 브라우저 테스트가 시나리오를 시작하는 URL입니다.
+    1. **이름** 추가: 브라우저 테스트의 이름입니다.
+    1. **환경 및 추가 태그** 선택: 브라우저 테스트와 관련된 `env` 및 연관 태그를 설정합니다. `<KEY>:<VALUE>` 형식으로 대상 `<KEY>`의 `<VALUE>`을 필터링합니다.
 
-   또한 [Continuous Testing Tunnel][2]을 통해 로컬 개발 설정 또는 CI/CD 파이프라인에서 테스트를 트리거하여 내부 환경을 테스트할 수도 있습니다.
+       <div class="alert alert-info">더 많은 옵션은 <a href=#advanced-options>고급 옵션</a>에서 확인하세요.</div>
 
-6. **테스트 주기** 설정: 주기는 매 5분마다부터 일주일에 한 번까지 다양하게 설정할 수 있습니다. 1분 주기로 테스트해야 하는 경우 [지원 팀에 문의][3]하세요.
+   1. **브라우저 및 기기** 선택: 테스트를 실행할 브라우저(예: `Chrome`, `Firefox`, `Edge`)와 기기(예: `Laptop Large`, `Tablet`, `Mobile Small`)를 선택합니다. 
+
+      - 대형 노트북의 경우 크기는 1440 픽셀 x 1100 픽셀입니다. 
+      - 태블릿 기기의 경우 크기는 768 픽셀 x 1020 픽셀입니다. 
+      - 소형 모바일 기기의 경우 크기는 320 픽셀 x 550 픽셀입니다.  
+
+   1. **관리 및 프라이빗 위치** 선택: Datadog이 관리하는 전 세계 위치 목록에서 선택하거나 [프라이빗 위치][1]를 생성하여, 사용자 설정 위치 또는 내부 프라이빗 네트워크에서 브라우저 테스트를 실행합니다.<br /><br>
+
+      {{% managed-locations %}}
+
+      또한 [Continuous Testing Tunnel][2]을 통해 로컬 개발 설정 또는 CI/CD 파이프라인에서 테스트를 트리거하여 내부 환경을 테스트할 수도 있습니다.<br /><br>
+
+   6. **테스트 주기** 설정: 주기는 매 5분마다부터 일주일에 한 번까지 다양하게 설정할 수 있습니다. 1분 주기로 테스트해야 하는 경우 [지원 팀에 문의][3]하세요.
+   7. 브라우저 테스트를 제출하려면 **레코딩 저장 및 편집**을 클릭합니다.
+
+### Snippets
+
+신서틱 모니터링 브라우저 테스트를 설정할 때 수동으로 옵션을 선택하지말고 코드 조각을 사용해 자동으로 디바이스와 리전 필드를 채우세요. 다음 코드 조각을 사용할 수 있습니다.
+
+* **화면 크기**: 브라우저 전체에서 특정 화면 크기에서 자동으로 브라우저를 테스트합니다.
+   * **Large**
+   * **Tablet**
+   * **Mobile**
+
+* **Multi-region check**: 세계의 주요 리전에서 자동으로 웹사이트를 테스트합니다(AMER, APAC, EMEA).
+</br><br>
+
+  {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="브라우저 테스트 생성 좌측 스크린샷, 코드 조각 예시가 표시되어 있음" width="70%" >}}
 
 ### 고급 옵션
 
@@ -126,11 +153,11 @@ title: 브라우저 테스트
 
 - 브라우저 테스트 세부 정보에서: 원하는 필드에 `{{`을 입력합니다.
 
-  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="전역 변수에서 지역 변수 정의" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/use_global_variables_1.mp4" alt="전역 변수에서 로컬 변수 정의" video="true" width="90%" >}}
 
 - 브라우저 테스트의 레코더에서: 테스트에서 변수를 내보낸 다음 원하는 필드에 `{{`을 입력하거나 애플리케이션에 변수를 삽입하여 사용합니다.
 
-  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="브라우저 기록 도중 필드에 지역 변수 삽입하기" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/use_global_variables_2.mp4" alt="브라우저 레코딩하는 동안 필드에 로컬 변수 삽입" video="true" width="90%" >}}
 
 브라우저 테스트 기록 시 변수 활용 방법을 알아보려면 [브라우저 테스트 단계][5]를 참고하세요. 
 
@@ -151,7 +178,7 @@ title: 브라우저 테스트
 
     | 조건 변수       | 설명                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | 모니터가 경고할 때 표시합니다.                                    |
+    | `{{#is_alert}}`            | 모니터가 경고할 때 표시됩니다.                                    |
     | `{{^is_alert}}`            | 모니터가 경고하지 않는 한 표시됩니다.                           |
     | `{{#is_recovery}}`         | 모니터가 `alert`로부터 복구된 시점을 표시합니다.                         |
     | `{{^is_recovery}}`         | 모니터가 `alert`에서 복구되지 않으면 표시됩니다.    |
@@ -194,11 +221,24 @@ title: 브라우저 테스트
 
 ### 액세스 제한 
 
-[커스텀 역할][16]으로 설정된 계정 고객의 경우 액세스 제한이 가능합니다.
+[액세스 컨트롤 세분화][17]을 사용해 테스트 기반 역할, 팀, 개인 사용자 액세스 제한:
 
-조직의 역할에 따라 브라우저 테스트에 대한 액세스를 제한할 수 있습니다. 브라우저 테스트를 생성할 때 사용자 외에 테스트를 읽고 쓸 수 있는 역할을 선택합니다.
+1. 형식의 권한 섹션을 엽니다.
+2. **Edit Access**를 클릭합니다.
+  {{< img src="synthetics/settings/grace_2.png" alt="프라이빗 위치 구성 형식에서 권한 설정" style="width:100%;" >}}
+3. **Restrict Access**을 클릭하세요.
+4. 팀, 역할, 사용자를 선택합니다.
+5. **Add**를 클릭합니다.
+6. 각 역할에 연결하려는 액세스 수준을 선택합니다.
+7. **Done**을 클릭합니다.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="테스트에 대한 권한 설정" style="width:70%;" >}}
+<div class="alert alert-info"><strong>참고</strong>: 해당 프라이빗 위치에 보기 액세스 없이도 프라이빗 위치에서 결과를 볼 수 있습니다.</div>
+
+| 액세스 수준 | 테스트 구성 보기 | 테스트 구성 편집 | 테스트 결과 보기 | 테스트 실행  | 레코딩 보기 | 레코딩 편집 |
+| ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
+| 액세스 없음    |                         |                         |                   |           |                |                |
+| 뷰어       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| 편집기       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
 
 ## 참고 자료
 
@@ -220,3 +260,4 @@ title: 브라우저 테스트
 [14]: /ko/synthetics/browser_tests/actions/
 [15]: /ko/account_management/rbac#custom-roles
 [16]: /ko/account_management/rbac/#create-a-custom-role
+[17]: /ko/account_management/rbac/granular_access

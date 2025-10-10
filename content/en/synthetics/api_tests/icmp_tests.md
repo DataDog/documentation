@@ -32,19 +32,30 @@ ICMP tests can run from both [managed](#select-locations) and [private locations
 
 ## Configuration
 
-After choosing to create an `ICMP` test, define your test's request.
+You may create a test using one of the following options:
 
-### Define request
+   - **Create a test from a template**:
 
-1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
-3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
-4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+       1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+       2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+       3. Click **Save Details** to submit your API test.<br /><br>
+          {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-{{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
+   - **Build a test from scratch**:
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+      1. To build a test from scratch, click the **+ Start from scratch** template, then select the `ICMP` request type.
+      1. Specify the **Domain Name** or **IP address** to run your test on.
+      1. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
+      1. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
+      1. **Name** your ICMP test.
+      1. Add Environment **Tags** as well as any other tags to your ICMP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+      1. Click **Test Host** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
+
+        {{< img src="synthetics/api_tests/icmp_test_config_2.png" alt="Define ICMP request" style="width:90%;" >}}
+      8. Click **Create Test** to submit your API test.
+
+
+      
 
 ### Snippets
 
@@ -73,7 +84,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your ICMP test from. ICMP tests can run from both managed and [private locations][1] depending on your preference for triggering trigger the ICMP pings from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -95,7 +106,7 @@ To display your list of variables, type `{{` in your desired field.
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
 These reasons include the following:
 
@@ -110,11 +121,7 @@ If you are using the [custom role feature][10], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts.
-
-You can restrict access to an ICMP test based on the roles in your organization. When creating an ICMP test, choose which roles (in addition to your user) can read and write your test. 
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## Further Reading
 
@@ -130,4 +137,3 @@ You can restrict access to an ICMP test based on the roles in your organization.
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
-[11]: /account_management/rbac/#create-a-custom-role

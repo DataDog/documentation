@@ -68,7 +68,7 @@ ls -al /opt/datadog-agent/run
 ファイルのオーナーが `dd-agent` **以外**の場合は、次のコマンドを実行して修正します。
 
 ```text
-chown dd-agent -R /opt/datadog-agent/run
+sudo chown -R dd-agent:dd-agent /opt/datadog-agent/run
 ```
 
 このように変更後は、[Agent 起動コマンド][5]が Agent を正常に起動させることができるはずです。上記のステップに従ったにもかかわらず、引き続きこの問題が発生する場合は、[Datadog サポートチーム][6]にご相談ください。
@@ -103,6 +103,10 @@ Agent を `root` 権限で実行するには
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
+
+## MacOS 上で Agent をシステム デーモンとして実行する際の権限の問題
+
+`DD_SYSTEMDAEMON_INSTALL` および `DD_SYSTEMDAEMON_USER_GROUP` オプションを使用して、システム全体の Launch Daemon として Agent をインストールした場合は、`DD_SYSTEMDAEMON_USER_GROUP` に指定したユーザーおよびグループが有効で、適切な権限を持っていることを確認してください。
 
 ## その他の参考資料
 

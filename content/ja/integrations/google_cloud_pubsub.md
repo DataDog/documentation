@@ -61,7 +61,7 @@ Google Cloud Pub/Sub のログは Google Cloud Logging で収集され、Cloud P
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_pubsub" >}}
+{{< get-metrics-from-git "google-cloud-pubsub" >}}
 
 
 ### イベント

@@ -56,7 +56,7 @@ Google Cloud  Storage 로그는 Google Cloud Logging으로 수집하여 클라�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_storage" >}}
+{{< get-metrics-from-git "google-cloud-storage" >}}
 
 
 ### 이벤트

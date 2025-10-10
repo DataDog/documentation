@@ -19,8 +19,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - iot
-- OS & システム
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_performance_counters/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::IoT
-  - Category::OS & System
+  - カテゴリー::Windows
   - Offering::Integration
   configuration: README.md#Setup
   description: Windows OS のパフォーマンスカウンターを監視します。
@@ -93,7 +93,7 @@ Windows パフォーマンスカウンターチェックにより収集された
 Windows パフォーマンスカウンターインテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "windows_performance_counters" >}}
+{{< get-service-checks-from-git "windows-performance-counters" >}}
 
 
 ## トラブルシューティング
@@ -104,7 +104,7 @@ Windows パフォーマンスカウンターインテグレーションには、
 
 お役に立つドキュメント、リンクや記事:
 
-- [Monitor Windows Performance Counters with Datadog][11]
+- [Datadog で Windows パフォーマンスカウンターを監視する][11]
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/perfctrs/about-performance-counters
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/

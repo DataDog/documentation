@@ -104,7 +104,7 @@ Disk space is low @ops-team@company.com
 
 모니터링 알림에는 해당 모니터링의 쿼리, 사용한 @ 멘션, 메트릭 스냅샷(메트릭 모니터링용), Datadog의 연관 페이지로 되돌아가는 링크 등의 콘텐츠가 포함됩니다. 개별 모니터링의 경우 알림에서 제외 또는 포함할 콘텐츠를 옵션으로 선택할 수 있습니다.
 
-<div class="alert alert-warning">분포 메트릭 백분위수 집계기(예: `p50`, `p75`, `p95`, 또는 `p99`)를 사용하면 알림에서 스냅샷 그래프를 생성하지 않습니다. </div>
+<div class="alert alert-danger">분포 메트릭 백분위수 집계기(예: `p50`, `p75`, `p95`, 또는 `p99`)를 사용하면 알림에서 스냅샷 그래프를 생성하지 않습니다. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="모니터링 프리셋 설정" style="width:70%;" >}}
 
@@ -116,12 +116,6 @@ Disk space is low @ops-team@company.com
 - **모두 숨기기**: 알림 메시지에 쿼리, 핸들, 스냅샷(메트릭 모니터링용) 또는 바닥글의 추가 링크가 포함되지 않습니다.
 
 **참고**: 통합 설정에 따라 일부 콘텐츠가 기본값으로 표시되지 않을 수도 있습니다.
-
-### 메타데이터
-
-메타데이터(우선순위, 태그, Datadog 팀)을 모니터에 추가하려면 모니터 우선순위를 사용하여 모니터의 중요도를 P 수준(P1~P5)로 설정할 수 있습니다. 메트릭 태그와는 다른 모니터 태그는 UI에서 모니터를 그룹화하고 검색하는 데 사용됩니다. 태그 정책이 설정되면 필수 태그와 태그 값을 추가해야 합니다. 자세한 내용은 [태그 정책][10]을 참조하세요. Datadog Teams는 이 모니터의 소유권 계층을 설정할 수 있도록 해줍니다. 또한 모니터와 연결된 모든 모니터를 확인할 수 있도록 해줍니다. 자세히 알아보려면 [Datadog Teams][11]를 참조하세요.
-
-{{< img src="monitors/notifications/notifications_metadata.png" alt="정책 태그 구성 보기 '정책 태그' 아래에는 '값 선택' 드롭다운 옆에 cost_center, product_id, env라는 세 가지 예시 태그가 있습니다." style="width:100%;" >}}
 
 ### 다시 알리기
 
@@ -149,6 +143,20 @@ Disk space is low @ops-team@company.com
 2. 그룹 하위 집합에 에스컬레이션 메시지를 전송합니다.
 
 [예시 섹션][12]에서 이러한 사용 사례에 맞게 모니터를 설정하는 방법을 알아보세요.
+
+### 메타데이터
+
+메타데이터(우선순위, 태그, Datadog 팀)을 모니터에 추가하려면 모니터 우선순위를 사용하여 모니터의 중요도를 P 수준(P1~P5)로 설정할 수 있습니다. 메트릭 태그와는 다른 모니터 태그는 UI에서 모니터를 그룹화하고 검색하는 데 사용됩니다. 태그 정책이 설정되면 필수 태그와 태그 값을 추가해야 합니다. 자세한 내용은 [태그 정책][10]을 참조하세요. Datadog Teams는 이 모니터의 소유권 계층을 설정할 수 있도록 해줍니다. 또한 모니터와 연결된 모든 모니터를 확인할 수 있도록 해줍니다. 자세히 알아보려면 [Datadog Teams][11]를 참조하세요.
+
+{{< img src="monitors/notifications/notifications_metadata.png" alt="정책 태그 구성 보기 '정책 태그' 아래에는 '값 선택' 드롭다운 옆에 cost_center, product_id, env라는 세 가지 예시 태그가 있습니다." style="width:100%;" >}}
+
+### 집계
+
+모니터의 쿼리가 그룹화된 경우 알림 그룹에서 하나 이상의 차원을 제거하거나 모두 제거하고 Simple Alert로 알릴 수 있습니다.
+
+{{< img src="monitors/notifications/notifications_aggregation.png" alt="다중 경고로 설정된 집계 구성 뷰" style="width:100%;" >}}
+
+[모니터 구성][18]에서 이 기능에 대한 자세한 내용을 확인하세요.
 
 
 ## 감사 알림
@@ -205,3 +213,4 @@ Disk space is low @ops-team@company.com
 [15]: /ko/monitors/configuration/
 [16]: /ko/monitors/guide/recovery-thresholds/
 [17]: /ko/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[18]: /ko/monitors/configuration/#set-alert-aggregation

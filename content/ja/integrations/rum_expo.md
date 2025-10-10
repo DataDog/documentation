@@ -13,7 +13,7 @@ categories:
 - apm
 - ネットワーク
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_expo/README.md
 display_on_public_website: true

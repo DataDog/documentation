@@ -34,8 +34,8 @@ author:
   vendor_id: rapdev
 categories:
 - コンプライアンス
-- 構成 & デプロイ
-- マーケットプレイス
+- 構成とデプロイ
+- marketplace
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
@@ -99,7 +99,7 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - メール: support@rapdev.io
@@ -112,4 +112,4 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

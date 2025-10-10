@@ -2,7 +2,7 @@
 categories:
 - クラウド
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Salesforce のリアルタイムプラットフォームイベントを Datadog ログとして収集します。
 doc_link: https://docs.datadoghq.com/integrations/salesforce/
@@ -30,7 +30,7 @@ version: '1.0'
 
 ## 概要
 
-Salesforce は顧客関係管理サービスと、カスタマーサービス、マーケティングオートメーション、アナリティクス、アプリケーション開発に特化したエンタープライズアプリケーションのスイートを提供しています。
+Salesforce は、顧客関係管理 (CRM) サービスを提供するほか、カスタマーサービス、マーケティングオートメーション、分析、アプリケーション開発に特化したエンタープライズ向けアプリケーションの補完的なスイートも提供しています。
 
 Salesforce と Datadog の統合により次のことが行えます:
 
@@ -64,21 +64,31 @@ Datadog にデータを送信するよう Salesforce を構成するには、[Sa
 
 #### 組織を接続する
 
-1. Salesforce の組織で、固有のシステムアカウントを作成します。
+1. Salesforce 組織内で一意のシステムアカウントを作成してください。
 2. [Salesforce インテグレーションタイル][9]の ** Configuration** タブにある **New Production Org** または **New Sandbox Org** をクリックします。
 3. これらのイベントに付けたいカスタムタグを、カンマ区切りのリストとして設定します。有効にするイベントを選択することができます。
 
     {{< img src="integrations/salesforce/salesforce-1.png" alt="Datadog 上で Salesforce org の構成が完了した際の成功画面" popup="true" style="width:90%" >}}
 
-4. **Save** をクリックします。これにより、Salesforce アカウントにログインし、Datadog のアクセス権限を付与するよう促されます。
+4. **Save** をクリックすると、Salesforce アカウントへのログインと Datadog へのアクセス許可の付与が求められます。
 5. ログインフローが完了したら、Datadog の [Salesforce インテグレーションタイル][9]に戻ります。組織には、すぐに使えるデフォルトのタグが含まれています。
 
     {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="Datadog 上で Salesforce org の構成が完了した際の成功画面" popup="true" style="width:90%" >}}
 
-6. 使用するタグを選択し、**Connect** をクリックします。
-7. この手順を繰り返して、残りの組織を接続します。追加しようとする組織へのアクセス権が必要です。
+6. 使用したいタグを選択し、**Connect** をクリックします。
+7. 同様の手順を繰り返して、他の組織を接続します。追加対象の組織へのアクセス権が必要です。
 
 **注**: Salesforce org ID にデフォルトタグが追加されますが、[このタグ][10]は企業にとってより意味の通りやすいものになるよう編集することができます。
+
+#### Salesforce カスタムオブジェクトの追加
+
+[Salesforce Custom Objects][11] は Datadog に取り込むことが可能です。
+
+1. Salesforce インテグレーションタイルで、Custom Objects セクションを開きます。
+2. Salesforce API 形式 (`CustomObject__c`) で記述したカスタムオブジェクトを 1 つ以上、`CustomObject1__c, CustomObject2__c` のようにカンマ区切りで追加します。
+3. これらのカスタムオブジェクトは、他の Salesforce イベントと同様に有効または無効にできます。
+
+カスタムオブジェクトは変更日を基準にログとして取り込まれます。すべてのカスタムオブジェクトログには、自動的に `salesforce_custom_object:true` タグが付与されます。
 
 #### 結果
 
@@ -92,13 +102,17 @@ Datadog にデータを送信するよう Salesforce を構成するには、[Sa
 {{< get-metrics-from-git "salesforce" >}}
 
 
-### イベント
+### ログ
 
-ログイベントの一覧は、[リアルタイムイベント監視データ保存][12]と [EventLogFile イベント][13]を参照してください。
+このインテグレーションにより、[Datadog Log Management][1] を使用して Salesforce ユーザーアクティビティ、プラットフォームアクセスアクティビティ、セキュリティ関連のログを閲覧できます。対応アクティビティの完全な一覧については、[Real-Time Event Monitoring Data Storage][13] および [EventLogFile Events][14] を参照してください。これらの情報は、Salesforce インテグレーションタイルの **Data Collected** タブでも確認できます。
 
 ### サービスチェック
 
 Salesforce インテグレーションには、サービスのチェック機能は含まれません。
+
+### イベント
+
+このインテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 
@@ -114,9 +128,9 @@ Configuration タブで `The authenticated connection does not have access` エ�
 
 ユーザーは、構成で選択されている基礎となるイベントオブジェクトの読み取り権限も持っている必要があります。
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は [Datadog サポート][15]までお問い合わせください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -130,7 +144,8 @@ Configuration タブで `The authenticated connection does not have access` エ�
 [8]: https://login.salesforce.com/
 [9]: https://app.datadoghq.com/integrations/salesforce
 [10]: /ja/getting_started/tagging/using_tags/
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/salesforce/salesforce_metadata.csv
-[12]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events
-[13]: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm
-[14]: https://docs.datadoghq.com/ja/help/
+[11]: https://help.salesforce.com/s/articleView?id=platform.dev_objectcreate_task_parent.htm&type=5
+[12]: https://github.com/DataDog/integrations-internal-core/blob/main/salesforce/metadata.csv
+[13]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events
+[14]: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm
+[15]: https://docs.datadoghq.com/ja/help/

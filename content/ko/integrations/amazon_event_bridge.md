@@ -23,7 +23,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog는 Amazon EventBridge를 지원하지 않습니다.</div>
+<div class="alert alert-danger">정부 사이트용 Datadog는 Amazon EventBridge를 지원하지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요
@@ -81,10 +81,6 @@ Amazon EventBridge 통합을 사용하여 Datadog에서 모니터와 스냅샷�
 * Windows 업데이트 실행 또는 애플리케이션 설치
 
 대상이 될 수 있는 리소스 전체 목록은 [AWS 웹사이트][10]에서 확인할 수 있습니다.
-
-아래 예에서 이 프로세스를 트리거하기 위해 스냅샷을 전송하는 방법을 알아보세요. 트리거되면 AWS에서 수신되는 액션을 지정할 수 있습니다.
-
-{{< wistia uezo3fh61j >}}
 
 ## 수집한 데이터
 

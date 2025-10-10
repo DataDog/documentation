@@ -41,7 +41,7 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: azure_iot_edge
@@ -177,7 +177,7 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### イベント
@@ -185,7 +185,7 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 Azure IoT Edge には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "azure_iot_edge" >}}
+{{< get-service-checks-from-git "azure-iot-edge" >}}
 
 
 ## トラブルシューティング

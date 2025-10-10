@@ -22,10 +22,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 For a list of supported runtimes and platforms, see [.NET Framework Compatibility][18] and [.NET/.NET Core Compatiblity][19].
@@ -44,18 +40,19 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
+
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}
-<div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
 {{% ci-agentless %}}
-
 {{% /tab %}}
+
 {{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ## Installing the .NET tracer CLI
@@ -75,7 +72,7 @@ Install or update the `dd-trace` command using one of the following ways:
 
 ## Instrumenting tests
 
-<div class="alert alert-warning"><strong>Note</strong>: For BenchmarkDotNet follow <a href="#instrumenting-benchmarkdotnet-tests">these instructions</a>.</div>
+<div class="alert alert-warning">For BenchmarkDotNet follow <a href="#instrumenting-benchmarkdotnet-tests">these instructions</a>.</div>
 
 To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
@@ -86,7 +83,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+dd-trace ci run --dd-service=my-dotnet-app -- dotnet test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -96,7 +93,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+dd-trace ci run --dd-service=my-dotnet-app -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -160,6 +157,12 @@ The following list shows the default values for key configuration settings:
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
+
+`test_session.name` (only available as an environment variable)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][6]. All other [Datadog Tracer configuration][7] options can also be used.
 
@@ -262,7 +265,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 ## Custom instrumentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Your custom instrumentation setup depends on the <code>dd-trace</code> version. To use the custom instrumentation, you must keep the package versions for <code>dd-trace</code> and <code>Datadog.Trace</code> NuGet packages in sync.
 </div>
 
@@ -276,7 +279,7 @@ For more information about how to add spans and tags for custom instrumentation,
 
 ## Manual testing API
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 
@@ -360,6 +363,34 @@ await module.CloseAsync();
 {{< /code-block >}}
 
 Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
+
+## Best practices
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `yarn test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
+
+- `dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Further reading
 

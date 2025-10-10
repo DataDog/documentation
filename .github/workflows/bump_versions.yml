@@ -1,22 +1,28 @@
 on:
   schedule:
     # At 08:00 on every day-of-week from Monday through Friday.
-    - cron: '0 8 * * 1-5'
+    - cron: "0 8 * * 1-5"
 
 permissions: {}
 jobs:
   sdk-versions:
     permissions:
       contents: write # for git push
-      pull-requests: write # to create pull request
+      id-token: write # Needed to federate tokens.
 
     runs-on: ubuntu-latest
     steps:
+      - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
+        id: octo-sts
+        with:
+          scope: DataDog/documentation
+          policy: self.bump-versions.create-pr
+
       - id: set-versions
         name: Load latest SDK versions
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ steps.octo-sts.outputs.token }}
           result-encoding: string
           script: |
             const clients = [
@@ -29,30 +35,31 @@ jobs:
               'integrations-core'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
-              const releases = await github.rest.repos.listReleases({
+              const release = await github.rest.repos.getLatestRelease({
                 owner: 'DataDog',
                 repo: repo
               })
-              return {client: repo, version: releases.data[0]["tag_name"]}
+              return {client: repo, version: release.data["tag_name"]}
             }))
             console.log(versions)
-            return JSON.stringify(versions)
-      - uses: actions/checkout@v4
+            return JSON.stringify(versions, null, 2)
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
-          persist-credentials: false
+          persist-credentials: true
       - name: Write version
         run: |-
-          echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
+          mkdir -p ./data
+          echo '${{steps.set-versions.outputs.result}}' > ./data/sdk_versions.json
           git add ./data/sdk_versions.json
-          git config user.name packages
-          git config user.email packages@datadoghq.com
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Bump SDK"
           git push -f origin HEAD:refs/heads/sdk/versions
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         name: Propose change with latest versions
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ steps.octo-sts.outputs.token }}
           result-encoding: string
           script: |
             await github.rest.pulls.create({

@@ -11,10 +11,6 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## Overview
@@ -335,7 +331,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
-1. Download the the [sample configuration][1]. 
+1. Download the [sample configuration][1]. 
 1. Set up the Worker module in your existing Terraform using the sample configuration. Make sure to update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment in the configuration. Also, update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
 [1]: /resources/yaml/observability_pipelines/archives/terraform_opw_archives.tf

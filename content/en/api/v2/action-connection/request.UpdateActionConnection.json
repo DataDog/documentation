@@ -1,0 +1,16 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "Cassette Connection",
+      "integration": {
+        "type": "AWS",
+        "credentials": {
+          "type": "AWSAssumeRole",
+          "role": "MyRoleUpdated",
+          "account_id": "123456789123"
+        }
+      }
+    }
+  }
+}

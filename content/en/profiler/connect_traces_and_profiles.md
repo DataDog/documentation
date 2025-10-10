@@ -40,7 +40,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#requirements">use the Datadog profiler</a> instead of Java Flight Recorder (JFR).
 </div>
 
@@ -116,15 +116,18 @@ The Trace to Profiling integration is enabled when you [turn on profiling for yo
 
 ### Span execution timeline view
 
-{{< img src="profiler/profiles_tab.png" alt="Profiles tab has a timeline view that breaks down threads and execution over time" >}}
+{{< img src="profiler/profiling_automated_analysis_individual.png" alt="Profiles tab has a timeline view that breaks down threads and execution over time" >}}
 
-The timeline view surfaces time-based patterns and work distribution over the period of the span.
+The timeline view surfaces time-based patterns and work distribution over the period of the span. It provides a visual breakdown of how threads contributed to the request over time.
 
 With the span timeline view, you can:
 
-- Isolate time-consuming methods.
-- Sort out complex interactions between threads.
-- Surface runtime activity that impacted the request.
+- Isolate time-consuming methods
+- Sort out complex interactions between threads
+- Surface runtime activity that impacted the request
+- Leverage [Automated Analysis][1] to highlight performance issues directly in the view, such as oversized thread pools or GC contention
+
+[1]: /profiler/automated_analysis/
 
 Depending on the runtime and language, the lanes vary:
 
@@ -158,7 +161,7 @@ See [prerequisites](#prerequisites) to learn how to enable this feature for Ruby
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitly created by code are grouped under _Managed Threads_.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
@@ -180,7 +183,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 ### Viewing a profile from a trace
 
-{{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
+{{< img src="profiler/view_profile_from_trace-2.png" alt="Opening a view of the profile in a flame graph" >}}
 
 From the timeline, click **Open in Profiling** to see the same data on a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:

@@ -26,7 +26,7 @@ author:
 categories:
 - マーケットプレイス
 - oracle
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -47,7 +47,7 @@ pricing:
   short_description: ホスト 1 個あたりの単価
   tag: ホスト
   unit_label: Solaris Agent
-  unit_price: 40
+  unit_price: 100.0
 public_title: Solaris Agent
 short_description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
 supported_os: []
@@ -90,9 +90,9 @@ Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用し
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: support@rapdev.io
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222
+ - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
@@ -100,4 +100,4 @@ Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用し
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-solaris-agent" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-solaris-agent" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

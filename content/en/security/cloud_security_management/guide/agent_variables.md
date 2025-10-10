@@ -1,10 +1,10 @@
 ---
-title: Cloud Security Management Agent Variables
+title: Cloud Security Agent Variables
 aliases:
   - /security/cloud_security_management/setup/agent_variables
 ---
 
-The Datadog Agent has several environment variables that can be enabled for Cloud Security Management. This article describes the purpose of each environment variable.
+The Datadog Agent has several environment variables that can be enabled for Cloud Security. This article describes the purpose of each environment variable.
 
 <table>
     <tr>
@@ -42,5 +42,13 @@ The Datadog Agent has several environment variables that can be enabled for Clou
     <tr>
         <td><code>DD_SBOM_HOST_ENABLED</code></td>
         <td>Enables SBOM collection on hosts.</td>
+    </tr>
+    <tr>
+        <td><code>DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE</code></td>
+        <td>Allows denylisting of specific containers from SBOM collection.</td>
+    </tr>
+    <tr>
+        <td><code>DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE</code></td>
+        <td>Allows allowlisting of specific containers in SBOM collection.</td>
     </tr>
 </table>

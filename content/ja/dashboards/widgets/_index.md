@@ -44,6 +44,8 @@ title: ウィジェット
         img="dashboards/widgets/icons/timeseries_light_large.png">}} 時系列{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} トップリスト{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+img="/dashboards/widgets/icons/wildcard_light_large.svg">}} ワイルドカード{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### グループ
@@ -152,7 +154,7 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## ウィジェットのコピーと貼り付け
 
-<div class="alert alert-warning">この機能を使用するには、<a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> 権限</a>を持ち、組織設定で<a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>静的パブリックデータ共有</strong></a>を有効にする必要があります。</div>
+<div class="alert alert-danger">この機能を使用するには、<a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> 権限</a>を持ち、組織設定で<a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>静的パブリックデータ共有</strong></a>を有効にする必要があります。</div>
 
 ウィジェットを[ダッシュボード][4]、[ノートブック][5]、[APM サービス][6]、および [APM リソース][7]ページにコピーするには、`Ctrl + C` (Mac の場合は `Cmd + C`) を使用するか、共有アイコンを選択して "Copy" を選択します。
 

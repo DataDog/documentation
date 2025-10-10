@@ -27,7 +27,7 @@ title: Adobe Experience Manager
 ---
 
 {{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Adobe Experience Manager インテグレーションは利用できません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Adobe Experience Manager インテグレーションは利用できません。</div>
 {{< /site-region >}}
 
 ## 概要

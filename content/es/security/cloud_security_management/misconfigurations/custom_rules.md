@@ -1,7 +1,7 @@
 ---
 aliases:
-- /security/cspm/custom_rules
-- /security/misconfigurations/custom_rules
+- /es/security/cspm/custom_rules
+- /es/security/misconfigurations/custom_rules
 cascade:
   algolia:
     rank: 30

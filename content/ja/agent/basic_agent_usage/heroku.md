@@ -38,14 +38,14 @@ title: Datadog Heroku ビルドパック
    heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
    # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
-   heroku config:add DD_DYNO_HOST=true
+   heroku config:add DD_DYNO_HOST=true -a $APPNAME
 
    # Set the DD_SITE env variable automatically
-   heroku config:add DD_SITE=$DD_SITE
+   heroku config:add DD_SITE=$DD_SITE -a $APPNAME
 
    # Add this buildpack and set your Datadog API key
-   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-   heroku config:add DD_API_KEY=$DD_API_KEY
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git -a $APPNAME
+   heroku config:add DD_API_KEY=$DD_API_KEY -a $APPNAME
 
    # Deploy to Heroku forcing a rebuild
    git commit --allow-empty -m "Rebuild slug"
@@ -218,6 +218,52 @@ heroku config:set DD_ENABLE_DBM=true
 
 データベースモニタリングは、Datadog Agent のデータベース資格情報を作成する必要があるため、Heroku Postgres Essential Tier プランでは DBM は利用できません。
 
+### Dogstatsd Mapper プロファイルを有効にする (Sidekiq)
+
+[Sidekiq](https://docs.datadoghq.com/integrations/sidekiq/) のようないくつかのインテグレーションでは、 [DogStatsD Mapper](https://docs.datadoghq.com/developers/dogstatsd/dogstatsd_mapper/) プロファイルが必要です。
+
+新しい DogStatsD Mapper プロファイルを追加するには、[prerun.sh スクリプト](#prerun-script)に次のスニペットを追加してください:
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: '<PROFILE_NAME>'
+    prefix: '<PROFILE_PREFIX>'
+    mappings:
+      - match: '<METRIC_TO_MATCH>'
+        match_type: '<MATCH_TYPE>'
+        name: '<MAPPED_METRIC_NAME>'
+        tags:
+          '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
+EOF
+```
+
+例えば、Sidekiq インテグレーションを有効にするには、次のスニペットを追加してください:
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: sidekiq
+    prefix: "sidekiq."
+    mappings:
+      - match: 'sidekiq\.sidekiq\.(.*)'
+        match_type: "regex"
+        name: "sidekiq.$1"
+      - match: 'sidekiq\.jobs\.(.*)\.perform'
+        name: "sidekiq.jobs.perform"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+      - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+        name: "sidekiq.jobs.worker.$2"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+EOF
+```
+
 ### その他のインテグレーションを有効にする
 
 任意の [Datadog-<INTEGRATION_NAME> インテグレーション][19]を有効にするには:
@@ -328,6 +374,9 @@ fi
 
 ```shell
 #!/usr/bin/env bash
+
+# Heroku の '$DYNO' 環境変数から dyno タイプを抽出します 
+DYNOTYPE="${DYNO%%.*}"
 
 # dyno タイプに基づいて Datadog Agent を無効にします
 if [ "$DYNOTYPE" == "run" ]; then

@@ -183,7 +183,7 @@ performance_schema_max_sql_text_length=4096
 
 ### クエリアクティビティがない
 
-<div class="alert alert-warning">クエリアクティビティと待機イベントコレクションは、Flexible Server ホストでは利用できない MySQL 設定が必要なため、Flexible Server ではサポートされていません。</div>
+<div class="alert alert-danger">クエリアクティビティと待機イベントコレクションは、Flexible Server ホストでは利用できない MySQL 設定が必要なため、Flexible Server ではサポートされていません。</div>
 
 クエリアクティビティの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリアクティビティが見つからない場合、以下のような原因が考えられます。
 
@@ -213,6 +213,38 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 `schema` タグ (別名 "database") は、クエリを実行した接続にデフォルトデータベースが設定されている場合のみ MySQL Query Metrics and Samples に存在します。デフォルトデータベースは、データベース接続パラメーターで "schema" を指定するか、すでに存在する接続で [USE Statement][9] を実行することで、アプリケーションによって構成されます。
 
 接続にデフォルトのデータベースが構成されていない場合、その接続で行われるクエリには `schema` タグは付きません。
+
+## MariaDB の既知の制限事項
+
+### 非互換の InnoDB メトリクス
+
+以下の InnoDB メトリクスは、一部の MariaDB バージョンでは利用できません。
+
+| メトリクス名                             | MariaDB バージョン        |
+| --------------------------------------- | ----------------------- |
+| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
+| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
+| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
+| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
+| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
+| `mysql.innodb.rows_read`                | 10.11, 11.1             |
+| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+
+### MariaDB の実行計画
+
+MariaDB は実行計画で MySQL と同じ JSON 形式を出力しません。そのため、MariaDB の実行計画では、`cost_info`、`rows_examined_per_scan`、`rows_produced_per_join`、`used_columns` など一部の実行計画のフィールドが欠落する場合があります。
 
 [1]: /ja/database_monitoring/setup_mysql/
 [2]: /ja/agent/troubleshooting/

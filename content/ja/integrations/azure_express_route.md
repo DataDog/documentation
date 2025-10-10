@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure ExpressRoute のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用すると、Azure ExpressRoute
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_express_route" >}}
+{{ get-metrics-from-git "azure-expressroute" }}
 
 
 ### イベント

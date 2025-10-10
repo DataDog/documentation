@@ -71,13 +71,21 @@ if (user.isAuthenticated) {
 
 세션 재생 기록을 중지하려면 `stopSessionReplayRecording()`를 호출합니다.
 
-<div class="alert alert-warning">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우  Session Replay 녹화가 자동으로 시작되지 않습니다. 녹화를 시작하려면 <code>startSessionReplayRecording</code>을 호출하세요.
+<div class="alert alert-danger">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우  Session Replay 녹화가 자동으로 시작되지 않습니다. 녹화를 시작하려면 <code>startSessionReplayRecording</code>을 호출하세요. </div>
+
+## 강제 Session Replay
+
+재생에서 처음 샘플링된 세션이더라도 세션이 이미 시작된 후에 녹화하고 싶은 경우가 있습니다. 예를 들어, 더 면밀한 모니터링을 위해 새로 배포된 페이지에서 Session Replay를 강제로 실행하거나, 재생 데이터가 완전할 수 있도록 오류를 감지한 후에 녹화를 시작하는 경우입니다.
+
+현재 세션의 나머지 부분에 대한 Session Replay 녹화를 강제로 실행하려면 `startSessionReplayRecording({ force: true })`를 호출하세요.
+
+강제 옵션을 사용하면 초기 샘플링 결정에 관계없이 세션은 남은 시간 동안 재생 세션으로 업그레이드됩니다.
 
 ## 세션 재생 비활성화
 
 세션 레코딩을 중단하려면 `sessionReplaySampleRate`을 `0`으로 설정하세요. 그러면 [Browser RUM & Session Replay 플랜][6]의 데이터 수집이 중단됩니다.
 
-<div class="alert alert-warning">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우 <code>replaySampleRate</code>를 <code>0</code>으로 설정하세요.</div>
+<div class="alert alert-danger">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우 <code>replaySampleRate</code>를 <code>0</code>으로 설정하세요.</div>
 
 ## 보존 기간
 

@@ -2,13 +2,11 @@
 title: Schema Tracking
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-<div class="alert alert-info">Schema tracking is in <b>Preview</b> for Java services using Protobuf and Avro. If you're interested in other languages and schemas, reach out <a href="https://www.datadoghq.com/private-beta/schema-tracking/">here</a>. </div>
 
 Data Streams Monitoring provides visibility into schemas used by producers and consumers, and how schema issues impact downstream services. You can track new schemas added, schemas with errors, and schema evolutions to manage schema migrations and identify issues.
 
@@ -16,9 +14,17 @@ Changing a schema produced by a service without updating the consumer can lead t
 
 ## Prerequisites
 
-You must have [Data Streams Monitoring installed][1] on your Java producer and consumer services.
+You must have [Data Streams Monitoring installed][1] on the producer and consumer services.
 
-Schema tracking requires version v1.36.0+ of [dd-trace-java][2] for Protobuf or Avro tracking.
+## Supported languages
+
+|        | Avro      | Protobuf  | Minimal tracer version |
+| ------ | --------- | --------- | ---------------------- |
+| Java   | {{< X >}} | {{< X >}} | v1.36+                 |
+| Node.js | {{< X >}} | {{< X >}} | v5.24+ or v4.48+       |
+| Python | {{< X >}} | {{< X >}} | v2.14+                 |
+| .NET   |           | {{< X >}} | v3.15+                 |
+| Golang |           |           |                        |
 
 ## View schemas
 

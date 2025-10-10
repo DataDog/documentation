@@ -1,5 +1,6 @@
 ---
 title: Log Monitor
+description: "Monitor indexed logs to detect security threats, troubleshoot issues, and alert when log patterns exceed defined thresholds."
 aliases:
 - /monitors/monitor_types/log
 - /monitors/create/types/log/
@@ -27,11 +28,13 @@ Logs are essential for security investigations, aiding in threat detection, comp
 
 Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type  exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
 
+**Note**: Log monitors have a maximum rolling time window of `2 days`.
+
 ## Monitor creation
 
 To create a log monitor in Datadog, use the main navigation: [**Monitors > New Monitor > Logs**][3].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 

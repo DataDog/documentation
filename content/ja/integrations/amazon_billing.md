@@ -80,7 +80,7 @@ AWS Billing and Cost Management は、推定請求額と予算メトリクスを
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_billing" >}}
+{{< get-metrics-from-git "amazon-billing" >}}
 
 
 ### イベント

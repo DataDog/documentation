@@ -13,23 +13,13 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
     - Repeat the process above to use multiple service accounts.
     - Use the same service account by updating the `project_id` in the downloaded JSON file. Then, upload the file to Datadog as described in steps 1-3.
 
-### Enable CSM for your Google Cloud projects
+### Enable Cloud Security for your Google Cloud projects
 
-Use one of the following methods to enable CSM for your Google Cloud projects:
-
-#### CSM Setup page
-
-1. On the [**Cloud Security Management Setup**][2] page, click **Cloud Integrations**.
+1. On the [**Cloud Security Setup**][2] page, click **Cloud Integrations**.
 2. Expand the **GCP** section.
 3. To enable resource scanning for a project, switch the **Resource Scanning** toggle to the on position.
-4. To create a filter that excludes certain resources from being evaluated by CSM, click the **Plus** (+) icon under **Resource Evaluation Filters (Optional)**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
+4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters (Optional)**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
 5. Click **Done**.
-
-#### Google Cloud Platform integration page
-
-1. On the [**Google Cloud Platform Integration**][10] page, select a Google Cloud project.
-2. Under **Resource Collection**, select **Enable Cloud Security Management**.
-3. Click **Save**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
 [2]: https://app.datadoghq.com/security/configuration/csm/setup

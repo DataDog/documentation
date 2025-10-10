@@ -4,10 +4,6 @@ aliases:
 title: (LEGACY) Datadog Processing Language / Vector Remap Language
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipeline은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 DPL(Datadog Processing Language) 또는 VRL(Vertor Remap Language)은 로그 변환을 위해 설계된 언어 식 및 도메인 기반 언어입니다. 관측 사용 사례에 맞게 간단한 구문과 [기본 기능][1]을 갖추고 있습니다.
 
 Datadog Processing Language의 경우 `remap` 변환이 지원됩니다.

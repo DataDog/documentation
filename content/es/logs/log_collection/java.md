@@ -50,16 +50,16 @@ Para remediar este problema, configura tu biblioteca de registro de logs para qu
 
 Las siguientes instrucciones muestran ejemplos de configuración para las bibliotecas de registro de logs Log4j, Log4j 2 y Logback.
 
-## Configurar tu logger
+## Configurar el registrador
 
 ### Formato JSON
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Para Log4j, genera los logs en formato JSON con el módulo SLF4J [log4j-over-slf4j][1] combinado con Logback. `log4j-over-slf4j` sustituye directamente el Log4j en tu aplicación, así que no tienes que hacer ningún cambio en el código. Para utilizarlo:
+Para Log4j, loguea en formato JSON utilizando el módulo [log4j-over-slf4j][1] de SLF4J combinado con Logback. `log4j-over-slf4j` sustituye sin problemas a Log4j en tu aplicación, por lo que no tendrás que realizar ningún cambio en el código.
 
-1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar`, y añade las dependencias Logback:
+1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar` y añade las dependencias de Logback. Por ejemplo:
     ```xml
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -77,7 +77,7 @@ Para Log4j, genera los logs en formato JSON con el módulo SLF4J [log4j-over-slf
       <version>6.6</version>
     </dependency>
     ```
-2. Configurar un appender utilizando el diseño de JSON en `logback.xml`:
+2. Configura un appender utilizando el diseño JSON en `logback.xml`. Consulta las siguientes configuraciones de ejemplo para archivo y consola.
 
     Para el archivo:
 
@@ -115,49 +115,44 @@ Para Log4j, genera los logs en formato JSON con el módulo SLF4J [log4j-over-slf
 
 Log4j 2 incluye una estructura JSON.
 
-1. Configurar un appender utilizando el diseño de JSON en `log4j2.xml`:
+1. Configura un appender utilizando el diseño JSON en `log4j2.xml`. Consulta las siguientes configuraciones de ejemplo para el appender de archivo y consola. Para una descripción completa de los complementos de Log4j, consulta [Referencia de complementos de Log4j][1].
+{{% collapse-content title="Appender de archivos" level="h4" %}}
+{{< code-block lang="xml" filename="log4j2.xml"  >}}
+<?xml version="1.0" encoding="UTF-8"?>
+  <Configuration>
+    <Appenders>
+      <File name="FILE" fileName="logs/app.log" >
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
+      </File>
+    </Appenders>
+    <Loggers>
+      <Root level="INFO">
+        <AppenderRef ref="FILE"/>
+      </Root>
+    </Loggers>
+  </Configuration>
+{{< /code-block >}}
+{{% /collapse-content %}}
 
-    Para un appender de archivos:
+{{% collapse-content title="Appender de consola" level="h4" %}}
+{{< code-block lang="xml" filename="log4j2.xml" >}}
+ <?xml version="1.0" encoding="UTF-8"?>
+  <Configuration>
+    <Appenders>
+      <Console name="console" target="SYSTEM_OUT">
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
+      </Console>
+    </Appenders>
+    <Loggers>
+      <Root level="INFO">
+        <AppenderRef ref="console"/>
+      </Root>
+    </Loggers>
+  </Configuration>
+{{< /code-block >}}
+{{% /collapse-content %}}
 
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration>
-      <Appenders>
-        <File name="FILE" fileName="logs/app.log" >
-          <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
-        </File>
-      </Appenders>
-
-      <Loggers>
-        <Root level="INFO">
-          <AppenderRef ref="FILE"/>
-        </Root>
-      </Loggers>
-    </Configuration>
-    ```
-
-    Para un appender de consola:
-
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration>
-
-        <Appenders>
-            <Console name="console" target="SYSTEM_OUT">
-                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
-            </Console>
-        </Appenders>
-
-        <Loggers>
-            <Root level="INFO">
-                <AppenderRef ref="console"/>
-            </Root>
-
-        </Loggers>
-    </Configuration>
-    ```
-
-2. Añade las dependencias de estructura JSON a tu `pom.xml`:
+2. Añade las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -181,12 +176,13 @@ Log4j 2 incluye una estructura JSON.
     </dependency>
     ```
 
+[1]: https://logging.apache.org/log4j/2.x/plugin-reference.html
 {{% /tab %}}
 {{% tab "Logback" %}}
 
 Utiliza el [logstash-logback-encoder][1] para los logs con formato JSON en Logback.
 
-1. Configura un appender de archivo con estructura JSON en `logback.xml`:
+1. Configura un appender de archivos utilizando el diseño JSON en `logback.xml`. Por ejemplo:
 
     ```xml
     <configuration>
@@ -201,7 +197,7 @@ Utiliza el [logstash-logback-encoder][1] para los logs con formato JSON en Logba
     </configuration>
     ```
 
-2. Añade la dependencia del codificador Logstash a tu archivo `pom.xml`:
+2. Añade la dependencia de codificador de Logstash a tu archivo `pom.xml`. Por ejemplo:
 
     ```xml
     <dependency>
@@ -241,8 +237,7 @@ writer.field.dd.env        = {context: dd.env}
 ```
 
 [1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 #### Inserta los ID de trazas en tus logs
 
@@ -253,7 +248,7 @@ Si tienes APM activado para esta aplicación, puedes correlacionar los logs y la
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Configura un appender de archivo en `log4j.xml`:
+Configura un appender de archivos en `log4j.xml`. Por ejemplo:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -280,7 +275,7 @@ Configura un appender de archivo en `log4j.xml`:
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-Configura un appender de archivo en `log4j2.xml`:
+Configura un appender de archivos en `log4j2.xml`. Por ejemplo:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -302,7 +297,7 @@ Configura un appender de archivo en `log4j2.xml`:
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Configura un appender de archivo en `logback.xml`:
+Configurar un anexador de archivos en `logback.xml`. Por ejemplo:
 
 ```xml
 <configuration>
@@ -338,8 +333,7 @@ writer.file     = log.txt
 ```
 
 [1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 #### Inserta los ID de trazas en tus logs
 
@@ -374,15 +368,15 @@ Cuando tengas la [recopilación de logs activada][4], configura la [recopilació
 3. [Reinicia el Agent][7].
 4. Ejecuta el [subcomando de estado del Agent][8] y busca `java` en la sección `Checks` para confirmar que los logs se envían correctamente a Datadog.
 
-Si los logs están en formato JSON, Datadog [parsea los mensajes del log][9] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][8] para ver tus logs y solucionar problemas relacionados.
+Si los logs están en formato JSON, Datadog [parsea los mensajes del log][9] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][10] para ver tus logs y solucionar problemas relacionados.
 
 ## Registro de logs sin Agent
 
-En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión. 
+En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión.
 
 Para transmitir logs directamente a Datadog:
 
-1. Añade la biblioteca de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
+1. Añade la librería de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
 2. **Configura Logback** para que envíe logs a Datadog.
 
 ### Crear un puente desde las bibliotecas de registro de logs de Java y Logback
@@ -392,9 +386,9 @@ Si todavía no utilizas Logback, las bibliotecas de registro de logs se pueden a
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Utiliza el módulo SLF4J [log4j-over-slf4j][1] con Logback para que envíe logs a otro servidor. `log4j-over-slf4j` sustituye directamente el Log4j de tu aplicación para que no tengas que hacer ningún cambio en el código. Para usarlo:
+Utiliza el módulo [log4j-over-slf4j][1] de SLF4J con Logback para que envíe logs a otro servidor. `log4j-over-slf4j` sustituye sin problemas Log4j de tu aplicación para que no tengas que hacer ningún cambio en el código. Para usarlo:
 
-1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar`, y añade las dependencias Logback:
+1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar` y añade las dependencias de Logback. Por ejemplo:
     ```xml
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -425,7 +419,7 @@ Utiliza el módulo SLF4J [log4j-over-slf4j][1] con Logback para que envíe logs 
 
 Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad de añadir una clave de API como prefijo en los logs. Debido a esto, utiliza el módulo SLF4J [log4j-over-slf4j][1] y Logback. `log4j-to-slf4j.jar` sustituye directamente Log4j 2 en tu aplicación para que no tengas que hacer ningún cambio en el código. Para usarlo:
 
-1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar`, y añade las dependencias Logback:
+1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar` y añade las dependencias de Logback. Por ejemplo:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -459,77 +453,50 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
 
 ### Configurar Logback
 
-Utiliza la biblioteca de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
+{{< site-region region="us3,us5,ap1,ap2,gov" >}}
+  <div class="alert alert-danger">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
+{{< /site-region >}}
 
-1. Configura un appender TCP en tu archivo `logback.xml`. Con esta configuración, tu clave API se recupera de la variable de entorno `DD_API_KEY`. Como alternativa, también puedes añadir tu clave API directamente al archivo de configuración:
 
-    {{< site-region region="us,us3,us5,ap1" >}}
+{{< site-region region="us,eu" >}}
 
-  ```xml
-  <configuration>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file>logs/app.log</file>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-    </appender>
-    <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <destination>intake.logs.datadoghq.com:10516</destination>
-      <keepAliveDuration>20 seconds</keepAliveDuration>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-          <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-              <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
-              </layout>
-            </prefix>
-      </encoder>
-      <ssl />
-    </appender>
+Utiliza la librería de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
 
-    <root level="DEBUG">
-      <appender-ref ref="FILE"/>
-      <appender-ref ref="JSON_TCP" />
-    </root>
-  </configuration>
-  ```
+1. Configura un appender TCP en tu archivo `logback.xml`. Con esta configuración, tu clave de API se recupera de la variable de entorno `DD_API_KEY`. Alternativamente, puedes insertar tu clave de API directamente en el archivo de configuración:
 
-    {{< /site-region >}}
+   Para la siguiente configuración, sustituye `<YOUR REGION INTAKE>` por la entrada basada en tu región:{{< region-param key="dd_site_name" code="true" >}}.
+    - **US1**: `intake.logs.datadoghq.com:10516`
+    - **UE**: `tcp-intake.logs.datadoghq.eu:443`
 
-    {{< site-region region="eu" >}}
+    ```xml
+    <configuration>
+      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+      </appender>
+      <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination><YOUR REGION INTAKE></destination>
+        <keepAliveDuration>20 seconds</keepAliveDuration>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
+                </layout>
+              </prefix>
+        </encoder>
+        <ssl />
+      </appender>
 
-  ```xml
-  <configuration>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file>logs/app.log</file>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-    </appender>
-    <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <destination>tcp-intake.logs.datadoghq.eu:443</destination>
-      <keepAliveDuration>20 seconds</keepAliveDuration>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-          <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-              <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
-              </layout>
-            </prefix>
-      </encoder>
-      <ssl />
-    </appender>
+      <root level="DEBUG">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="JSON_TCP" />
+      </root>
+    </configuration>
+    ```
 
-    <root level="DEBUG">
-      <appender-ref ref="FILE"/>
-      <appender-ref ref="JSON_TCP" />
-    </root>
-  </configuration>
-  ```
+    **Nota:** Se añade `%mdc{keyThatDoesNotExist}` porque la configuración XML quita los espacios en blanco. Para obtener más información sobre el parámetro prefijo, consulta la [documentación de Logback][12].
 
-    {{< /site-region >}}
-
-    {{< site-region region="gov" >}}
-  No compatible.
-    {{< /site-region >}}
-
-    **Nota:** `%mdc{keyThatDoesNotExist}` se añade porque la configuración XML suprime los espacios en blanco. Para obtener más información sobre el parámetro del prefijo, consulta la [documentación sobre Logback][12].
-
-2. Añade la dependencia del codificador Logstash a tu archivo `pom.xml`:
+2. Añade la dependencia de codificador de Logstash a tu archivo `pom.xml`. Por ejemplo:
 
     ```xml
     <dependency>
@@ -543,7 +510,9 @@ Utiliza la biblioteca de registro de logs [logstash-logback-encoder][11] junto c
       <version>6.6</version>
     </dependency>
     ```
-
+[11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+{{< /site-region >}}
 ## Para aprender más
 
 Enriquece los eventos de log con atributos contextuales.
@@ -601,9 +570,9 @@ Para generar este JSON:
 }
 ```
 
-**Nota:** MDC solo permite las cadenas de caracteres, así que no las utilices para las métricas de valor numérico.
+**Nota**: MDC sólo permite tipos de cadena, así que no los utilices para métricas de valor numérico.
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

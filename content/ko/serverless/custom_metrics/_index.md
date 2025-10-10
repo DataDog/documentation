@@ -21,10 +21,6 @@ Datadog이 동일한 타임스탬프 및 태그 세트를 공유하는 여러 �
 
 분포는 기본적으로 `avg`, `sum`, `max`, `min`, `count` 집계를 제공합니다. Metric Summary 페이지에서 백분위수 집계(p50, p75, p90, p95, p99)와 [태그 관리][3]를 활성화할 수 있습니다. 게이지 메트릭 유형에 대한 분포를 모니터링하려면 [시간 및 공간 집계][4]를 위해 `avg`를 사용합니다. 카운트 메트릭 유형에 대한 분포를 모니터링하려면 [시간 및 공간 집계][4]를 위해 `sum`을 사용합니다. 시간 및 공간 집계가 작동하는 방식은 [그래프에 쿼리하기][5] 가이드를 참조하세요.
 
-### 히스토리 메트릭 제출하기
-
-히스토리 메트릭(최근 20분 이내의 타임스탬프만 허용됨)을 제출하려면, [Datadog Forwarder](#with-the-datadog-forwarder)를 사용해야 합니다. [Datadog Lambda 확장](#with-the-datadog-lambda-extension)은 StatsD 프로토콜의 제한으로 인해 현재 타임스탬프가 있는 메트릭만 제출할 수 있습니다.
-
 ### 많은 데이터 포인트 전송하기
 
 Forwarder를 사용하여 동일한 메트릭과 동일한 태그 세트에 대해 많은 데이터 포인트를 제출하는 경우(예: 큰 `for` 루프 내부), Lambda의 성능에 눈에 띄는 영향이 있을 수 있으며 CloudWatch 비용에도 영향을 미칠 수 있습니다. 오버헤드를 피하기 위해 애플리케이션에서 데이터 포인트를 집계할 수 있으며, 다음 Python 예제를 참조하세요:
@@ -129,13 +125,13 @@ import com.timgroup.statsd.StatsDClient;
 
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
 
-    // statsd 클라이언트의 인스턴스 만들기
+    // statsd 클라이언트 시작
     private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
 
     @Override
     public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
 
-        // 분포 메트릭 제출
+        // 분배 메트릭 제출
         Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
 
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
@@ -144,7 +140,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
     }
 
     static {
-        // 종료 전에 모든 측정항목이 플러시되었는지 확인하세요
+        // 종료 전에 모든 메트릭을 비웠는지 확인
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {

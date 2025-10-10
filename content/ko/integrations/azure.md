@@ -113,7 +113,7 @@ Datadog의 Azure 통합 기능으로 Azure 환경에서 메트릭 및 로그를 
 - Datadog 생성 메트릭으로 Azure 환경에 대한 고유한 통찰을 제공합니다.
 - 로그, 메트릭, 애플리케이션 성능 모니터링(APM) 트레이싱, 사용자 활동, Datadog 조직 내 기타 데이터 등, Azure 애플리케이션의 데이터를 상호 연결합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog의 Azure 통합은 <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure 모니터링의 메트릭을 모두 수집하도록</a> 제작되었습니다. Datadog은 하위 통합을 모두 포괄하기 위해 문서를 지속적으로 업데이트하려고 노력하나, 클라우드 서비스는 신규 메트릭 및 서비스를 빠르게 출시하므로 통합 목록의 업데이트가 종종 늦어질 수도 있습니다.<br> <code>azure.*.status</code> 및 <code>azure.*.count</code> 메트릭은  Datadog Azure Resource Health가 생성합니다. 자세한 내용을 확인하려면 <a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure 상태 및 카운트 메트릭</a>을 참조하세요.
 </div>
 
@@ -154,50 +154,49 @@ Datadog의 Azure 통합은 <a href="https://docs.microsoft.com/en-us/azure/azure
 | [복구 서비스 볼트][34]    | 시간에 따라 생성된 백업 및 복구 지점을 저장하는 엔티티입니다.                                  |
 | [레디스(Redis) 캐시][35]               | 관리형 데이터 캐시입니다.                                                                                       |
 | [릴레이(Relay)][36]                     | 기업 네트워크에서 실행되는 서비스를 공용 클라우드에 안전하게 노출하도록 도와드립니다.                          |
-| [인지 검색][37]          | 검색 경험을 더욱 풍부하게 하는 도구를 제공해 드리는 서비스형 검색 클라우드 솔루션(search-as-a-service cloud solution)입니다.             |
-| 저장                         | [블롭(blob)][38], [파일][39], [대기열][40], [테이블][41]용 스토리지입니다.                                     |
-| [스트림 분석][42]          | 이벤트-프로세싱 엔진으로 기기에서 대용량 데이터 스트리밍을 검사합니다.                        |
-| [SQL 데이터베이스][43]              | 뛰어난 확장성의 관계형 클라우드 데이터베이스입니다.                                                         |
-| [SQL 데이터베이스 엘라스틱 풀][44] | 다중 데이터베이스의 성능을 관리합니다.                                                              |
-| [시냅스 분석][45]         | 데이터 통합, 엔터프라이즈 데이터 웨어하우징 및 빅 데이터 분석을 통합하는 분석 서비스입니다. |
-| [사용량 및 할당량][46]          | Azure 사용량을 추적합니다.                                                                                  |
-| [가상 머신][47]           | 가상 머신 관리 서비스입니다.                                                                       |
-| [가상 머신 확장 세트][48] | 동일한 VM 세트를 배포, 관리 및 오토스케일링합니다.                                                     |
-| [가상 네트워크][49]           | Azure 리소스가 서로, 인터넷, 온-프레미스와 안전하게 통신할 수 있도록 지원하는 서비스입니다.    |
+| 저장                         | [블롭(blob)][37], [파일][38], [대기열][39], [테이블][40]용 스토리지입니다.                                     |
+| [스트림 분석][41]          | 이벤트-프로세싱 엔진으로 기기에서 대용량 데이터 스트리밍을 검사합니다.                        |
+| [SQL 데이터베이스][42]              | 뛰어난 확장성의 관계형 클라우드 데이터베이스입니다.                                                         |
+| [SQL 데이터베이스 엘라스틱 풀][43] | 다중 데이터베이스의 성능을 관리합니다.                                                              |
+| [시냅스 분석][44]         | 데이터 통합, 엔터프라이즈 데이터 웨어하우징 및 빅 데이터 분석을 통합하는 분석 서비스입니다. |
+| [사용량 및 할당량][45]          | Azure 사용량을 추적합니다.                                                                                  |
+| [가상 머신][46]           | 가상 머신 관리 서비스입니다.                                                                       |
+| [가상 머신 확장 세트][47] | 동일한 VM 세트를 배포, 관리 및 오토스케일링합니다.                                                     |
+| [가상 네트워크][48]           | Azure 리소스가 서로, 인터넷, 온-프레미스와 안전하게 통신할 수 있도록 지원하는 서비스입니다.    |
 
 ## 설정
 
 ### 자동
 
 _모든 사이트:_  
-Azure에서 표준 Datadog 통합을 자동 설정하는 방법을 확인하려면 [표준 Azure 통합 프로그래밍 관리 가이드][50]를 참조하세요. Terraform 또는 Azure CLI로 통합을 설정하고, Datadog Azure VM 확장 프로그램으로 Datadog 에이전트를 Azure에 기본 배포하고, 자동 스크립트를 실행하여 로그 수집을 활성화합니다.
+Azure에서 표준 Datadog 통합을 자동 설정하는 방법을 확인하려면 [표준 Azure 통합 프로그래밍 관리 가이드][49]를 참조하세요. Terraform 또는 Azure CLI로 통합을 설정하고, Datadog Azure VM 확장 프로그램으로 Datadog 에이전트를 Azure에 기본 배포하고, 자동 스크립트를 실행하여 로그 수집을 활성화합니다.
 
 _US3:_  
-Azure의 Datadog 리소스를 사용하여 Terraform으로 Datadog Azure Native 통합을 설정하는 방법에 대한 지침을 확인하려면 [Azure Native 통합 프로그래밍 관리 지침][51]을 참조하세요.
+Azure의 Datadog 리소스를 사용하여 Terraform으로 Datadog Azure Native 통합을 설정하는 방법에 대한 지침을 확인하려면 [Azure Native 통합 프로그래밍 관리 지침][50]을 참조하세요.
 
 ### 수동
 
 _모든 사이트:_  
-Azure 포털 또는 CLI를 통해 Azure로 Datadog 통합을 수동으로 설정하는 방법, VM 확장 프로그램 또는 AKS 클러스터 확장 프로그램을 사용하여 Azure에 Datadog 에이전트를 직접 배포하는 방법에 대해 확인하려면 [표준 Azure 통합 수동 설정 지침][52]을 참조하세요.
+Azure 포털 또는 CLI를 통해 Azure로 Datadog 통합을 수동으로 설정하는 방법, VM 확장 프로그램 또는 AKS 클러스터 확장 프로그램을 사용하여 Azure에 Datadog 에이전트를 직접 배포하는 방법에 대해 확인하려면 [표준 Azure 통합 수동 설정 지침][51]을 참조하세요.
 
 _US3:_  
-Datadog으로 Azure Native 통합을 수동으로 설정하는 방법을 확인하려면 [Azure Native 통합 수동 설정 지침][53]을 참조하세요. 본 지침에는 VM 확장 프로그램 또는 AKS 클러스터 확장 프로그램을 사용하여 Azure에 Datadog 에이전트를 직접 배포하여 Azure에서 Datadog 리소스를 생성하는 방법과 SSO(single sign-on) 옵션 설정 방법이 포함됩니다.
+Datadog으로 Azure Native 통합을 수동으로 설정하는 방법을 확인하려면 [Azure Native 통합 수동 설정 지침][52]을 참조하세요. 본 지침에는 VM 확장 프로그램 또는 AKS 클러스터 확장 프로그램을 사용하여 Azure에 Datadog 에이전트를 직접 배포하여 Azure에서 Datadog 리소스를 생성하는 방법과 SSO(single sign-on) 옵션 설정 방법이 포함됩니다.
 
 ## 로그 수집
 
 _모든 사이트:_  
-Azure 로그를 Datadog에 전송하는 방법을 확인하려면 [Datadog에 Azure 로그 전송하기][54] 지침을 참조하세요. Datadog-Azure 함수와 Azure 이벤트 허브를 통해 로그 수집 프로세스를 자동 또는 수동으로 설정할 수 있습니다. Azure Blob 스토리지 함수로 모든 Azure 앱 서비스에서 로그를 수집할 수도 있습니다.
+Azure 로그를 Datadog에 전송하는 방법을 확인하려면 [Datadog에 Azure 로그 전송하기][53] 지침을 참조하세요. Datadog-Azure 함수와 Azure 이벤트 허브를 통해 로그 수집 프로세스를 자동 또는 수동으로 설정할 수 있습니다. Azure Blob 스토리지 함수로 모든 Azure 앱 서비스에서 로그를 수집할 수도 있습니다.
 
 _US3:_  
-구독 레벨, Azure 리소스, Azure Active Directory 로그를 Datadog으로 전송하는 방법을 확인하려면 [Datadog 리소스로 Azure 로그 전송][55] 지침을 참조하세요.
+구독 레벨, Azure 리소스, Azure Active Directory 로그를 Datadog으로 전송하는 방법을 확인하려면 [Datadog 리소스로 Azure 로그 전송][54] 지침을 참조하세요.
 
 ## 수집한 데이터
 
 ### 메트릭
 
-모든 표준 Azure 모니터링 메트릭과 [특정 Datadog 생성 메트릭][56]입니다.
+모든 표준 Azure 모니터링 메트릭과 [특정 Datadog 생성 메트릭][55]입니다.
 
-자세한 메트릭 목록을 확인하려면 [개요 섹션](#overview)에서 적절한 Azure 서비스를 선택하세요.
+자세한 메트릭 목록을 확인하려면 [개요 섹션](#overview)에서 적절한 Azure 서비스를 선택하세요.메트릭 수집에서 특정 VM 수집을 제외하려면 [Azure VM 제외][56]를 참조하세요.
 
 ### 이벤트
 
@@ -267,26 +266,26 @@ Azure 통합 메트릭, 이벤트, 서비스 점검은 Azure 환경에 정의된
 [34]: https://docs.datadoghq.com/ko/integrations/azure_recovery_service_vault/
 [35]: https://docs.datadoghq.com/ko/integrations/azure_redis_cache/
 [36]: https://docs.datadoghq.com/ko/integrations/azure_relay/
-[37]: https://docs.datadoghq.com/ko/integrations/azure_search/
-[38]: https://docs.datadoghq.com/ko/integrations/azure_blob_storage/
-[39]: https://docs.datadoghq.com/ko/integrations/azure_file_storage/
-[40]: https://docs.datadoghq.com/ko/integrations/azure_queue_storage/
-[41]: https://docs.datadoghq.com/ko/integrations/azure_table_storage/
-[42]: https://docs.datadoghq.com/ko/integrations/azure_stream_analytics/
-[43]: https://docs.datadoghq.com/ko/integrations/azure_sql_database/
-[44]: https://docs.datadoghq.com/ko/integrations/azure_sql_elastic_pool/
-[45]: https://docs.datadoghq.com/ko/integrations/azure_synapse/
-[46]: https://docs.datadoghq.com/ko/integrations/azure_usage_and_quotas/
-[47]: https://docs.datadoghq.com/ko/integrations/azure_vm/
-[48]: https://docs.datadoghq.com/ko/integrations/azure_vm_scale_set/
-[49]: https://docs.datadoghq.com/ko/integrations/azure_virtual_networks/
-[50]: https://docs.datadoghq.com/ko/integrations/guide/azure-programmatic-management/
-[51]: https://docs.datadoghq.com/ko/integrations/guide/azure-native-programmatic-management/
-[52]: https://docs.datadoghq.com/ko/integrations/guide/azure-manual-setup/
-[53]: https://docs.datadoghq.com/ko/integrations/guide/azure-native-manual-setup/
-[54]: https://docs.datadoghq.com/ko/logs/guide/azure-logging-guide/
-[55]: https://docs.datadoghq.com/ko/logs/guide/azure-native-logging-guide/
-[56]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
+[37]: https://docs.datadoghq.com/ko/integrations/azure_blob_storage/
+[38]: https://docs.datadoghq.com/ko/integrations/azure_file_storage/
+[39]: https://docs.datadoghq.com/ko/integrations/azure_queue_storage/
+[40]: https://docs.datadoghq.com/ko/integrations/azure_table_storage/
+[41]: https://docs.datadoghq.com/ko/integrations/azure_stream_analytics/
+[42]: https://docs.datadoghq.com/ko/integrations/azure_sql_database/
+[43]: https://docs.datadoghq.com/ko/integrations/azure_sql_elastic_pool/
+[44]: https://docs.datadoghq.com/ko/integrations/azure_synapse/
+[45]: https://docs.datadoghq.com/ko/integrations/azure_usage_and_quotas/
+[46]: https://docs.datadoghq.com/ko/integrations/azure_vm/
+[47]: https://docs.datadoghq.com/ko/integrations/azure_vm_scale_set/
+[48]: https://docs.datadoghq.com/ko/integrations/azure_virtual_networks/
+[49]: https://docs.datadoghq.com/ko/integrations/guide/azure-programmatic-management/
+[50]: https://docs.datadoghq.com/ko/integrations/guide/azure-native-programmatic-management/
+[51]: https://docs.datadoghq.com/ko/integrations/guide/azure-manual-setup/
+[52]: https://docs.datadoghq.com/ko/integrations/guide/azure-native-manual-setup/
+[53]: https://docs.datadoghq.com/ko/logs/guide/azure-logging-guide/
+[54]: https://docs.datadoghq.com/ko/logs/guide/azure-native-logging-guide/
+[55]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
+[56]: https://docs.datadoghq.com/ko/account_management/billing/azure/#azure-vm-exclusion
 [57]: https://app.datadoghq.com/event/explorer
 [58]: https://docs.datadoghq.com/ko/integrations/guide/azure-troubleshooting/
 [59]: https://docs.datadoghq.com/ko/help/

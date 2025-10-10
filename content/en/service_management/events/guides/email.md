@@ -8,7 +8,7 @@ aliases:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Events with email is not supported on {{< region-param key=dd_datacenter code="true" >}}</div>
+<div class="alert alert-danger">Events with email is not supported on {{< region-param key=dd_datacenter code="true" >}}</div>
 {{< /site-region >}}
 
 If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email. This can also be done with messages published to an Amazon SNS topic; read the [Create Datadog Events from Amazon SNS Emails][6] guide for more information.
@@ -21,9 +21,19 @@ Before you can send events with email, you need a dedicated email address from D
 2. From the **Account** menu at the bottom left, select **Organization Settings**.
 3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
-5. Click the **Create Email** button.
+5. Optionally, define any of the other attributes listed in this page's [attribute definitions section](#attribute-definitions).
+6. Click the **Create Email** button.
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
+
+### Attribute definitions
+
+| Name | Description | Example |
+|---|---|---|
+| Description | A description of the email's purpose. | "Used for MyService notifications" |
+| Tags | List of tags to be appended to each event received through the email. If other tags are present in the JSON message, they are all added.<br>There is a limit of **20** tags per email. | `tag1:val1`, `tag2:val2` |
+| Recipients | List of handles to be added to the beginning of the message for all events created through the email, without `@` prefix. For more information, see [Notification recipients][7].<br>There is a limit of **10** recipients per email. | `my@email.com`, `slack-acc-ch` |
+| Alert Type | The alert type for events created from the event email. When present, the `alertType` field in a JSON email takes precedence over any other `alertType` values. | `Info` |
 
 ## Submission
 
@@ -119,8 +129,12 @@ http://example.com/session_id%3A123456
 ### Email size
 The maximum allowed email size, including content and attachments, is 20MB. Emails exceeding this limit are ignored.
 
+### Usage tracking
+To understand which emails are being used and receiving events, check the `Last Used` column in the **Events API Emails** tab in organization settings. This displays the most recent date that an email was processed for each address, or `No data` if there are no records of it being used.
+
 [1]: /integrations/
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
 [5]: http://daringfireball.net/projects/markdown/syntax#lin
 [6]: /integrations/guide/events-from-sns-emails/
+[7]: /monitors/notify/#notification-recipients

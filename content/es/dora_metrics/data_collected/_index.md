@@ -15,11 +15,7 @@ further_reading:
 title: Datos recopilados de DORA Metrics
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">DORA Metrics están en fase de Vista previa.</div>
+<div class="alert alert-danger">DORA Metrics están en fase de Vista previa.</div>
 
 ## Información general
 

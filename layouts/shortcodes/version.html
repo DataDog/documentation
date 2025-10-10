@@ -1,0 +1,8 @@
+{{- $key := .Get "key" -}}
+{{- $code := .Get "code" | default "false" -}}
+
+{{- if eq $code "true" -}}
+<code>{{- index site.Data.versions $key -}}</code>
+{{- else -}}
+{{- index site.Data.versions $key -}}
+{{- end -}}

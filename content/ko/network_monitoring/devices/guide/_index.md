@@ -13,11 +13,12 @@ private: true
 title: NDM 가이드
 ---
 
-{{< whatsnext desc="일반 가이드:" >}}
-{{< nextlink href="network_monitoring/devices/guide/tags-with-regex" >}}정규식을 사용한 NDM 태그{{< /nextlink >}}
-{{< nextlink href="network_monitoring/devices/guide/cluster-agent" >}}클러스터 에이전트가 있는 NDM{{< /nextlink >}}
-{{< nextlink href="network_monitoring/devices/guide/build-ndm-profile" >}}NDM 프로필 구축{{< /nextlink >}}
-{{< nextlink href="network_monitoring/devices/guide/migrating-to-snmp-core-check" >}}Python 기반 검사에서 SNMP 코어 검사(Go에서)로 마이그레이션하기{{< /nextlink >}}
+{{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles" >}}디바이스 프로필 시작하기(GUI){{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/tags-with-regex" >}}Regex와 NDM 태그{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/cluster-agent" >}}클러스터 에이전트와 NDM{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/build-ndm-profile" >}}NDM 프로필 구축(고급){{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/migrating-to-snmp-core-check" >}}Python 기반 점검에서 SNMP 코어 점검(Go에서)으로 마이그레이션{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

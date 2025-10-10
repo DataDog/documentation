@@ -19,16 +19,17 @@ assets:
     source_type_id: 10068
     source_type_name: Active Directory
   monitors:
-    '[Active Directory] Anomalous number of sessions for connected LDAP clients for host: {{host.name}}': assets/monitors/ldap_client_sessions.json
-    '[Active Directory] Anomalous number of successful LDAP bindings for host: {{host.name}}': assets/monitors/ldap_binding_successful.json
-    '[Active Directory] Elevated LDAP binding duration for host {{host.name}}': assets/monitors/ldap_binding.json
+    LDAP binding duration is high: assets/monitors/ldap_binding.json
+    Number of LDAP bindings is anomalous: assets/monitors/ldap_binding_successful.json
+    Number of sessions for LDAP clients is anomalous: assets/monitors/ldap_client_sessions.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
+- windows
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 display_on_public_website: true
@@ -36,9 +37,8 @@ draft: false
 git_integration_title: active_directory
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 2.1.0
+integration_version: 4.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: active_directory
 public_title: Active Directory
@@ -49,7 +49,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Windows
-  - Category::OS & 시스템
+  - Category::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Microsoft Active Directory 메트릭을 수집하고 그래프로 표시하세요
   media: []
@@ -73,7 +74,7 @@ Agent의 Active Directory 검사는 [Datadog Agent][1] 패키지에 포함되어
 
 도메인 환경에 Datadog Agent를 설치하는 경우 [Agent 설치 요구 사항][2]을 참조하세요.
 
-### 설정
+### 구성
 
 #### 메트릭 수집
 
@@ -90,7 +91,7 @@ Agent의 Active Directory 검사는 [Datadog Agent][1] 패키지에 포함되어
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "active_directory" >}}
+{{< get-metrics-from-git "active-directory" >}}
 
 
 ### 이벤트

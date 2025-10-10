@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_i
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_i
@@ -48,7 +48,7 @@ tile:
   classifier_tags:
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::macOS
-  - Categoría::Sistema operativo
+  - Categoría::Sistema operativo y sistema
   - Oferta::Integración
   configuration: README.md#Configuración
   description: Monitoriza sistemas IBM i de forma remota, incluyendo tareas, colas
@@ -59,7 +59,7 @@ tile:
   title: IBM i
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -122,7 +122,7 @@ El nombre del controlador ODBC de IBM i es necesario para configurar el check de
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_i" >}}
+{{< get-metrics-from-git "ibm-i" >}}
 
 
 ### Eventos

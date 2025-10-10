@@ -46,7 +46,7 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: apache

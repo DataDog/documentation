@@ -7,7 +7,9 @@ title: Hourly Usage API の V1 から V2 への移行
 ---
 
 ## サマリー
-v1 API のユーザーは、v2 時間単位使用量 API でおなじみの概念を、若干異なるフォーマットで表現していることを認識できるはずです。
+2025 年 2 月 1 日より、製品別時間単位使用量エンド ポイントは非推奨となり、代わりに v2 の [製品ファミリー別時間単位使用量 API][1] が使用されます。
+
+v1 API のユーザーは、統合された v2 時間単位使用量 API でもおなじみの概念を確認できますが、フォーマットが少し異なるだけです。
 
 v1 API と v2 API の最も顕著な相違点は、v2 API の次の点です。
 * 全製品を 1 つのエンドポイントに集約する
@@ -18,160 +20,9 @@ v1 API と v2 API の最も顕著な相違点は、v2 API の次の点です。
 それぞれの違いについては、以下のセクションでさらに詳しく説明します。
 
 ## 統合製品ファミリー
-v2 API では、製品ファミリーと使用量という概念が導入されています。製品ファミリーは、1 つまたは複数の使用量をグループ化したものです。使用量タイプは、特定の組織および期間での使用量の測定値です。製品ファミリーの初期セットは、v1 API とほぼ一致しており、完全なマッピングは以下のとおりです。また、他のすべての製品ファミリーの使用量を取得する特別な `all` 製品ファミリーがあります。
+v2 API では、製品ファミリーと使用タイプという概念が導入されます。製品ファミリーは 1 つ以上の使用タイプをまとめたグループです。使用タイプは、特定の組織と期間における使用量を示す指標です。`all` 製品ファミリーを指定すると、すべての製品ファミリーの使用量を取得できます。また、特定の製品ファミリーをフィルタリングすることも可能です。
 
-ファミリーと使用量タイプ:
-- **all**
-    * _他のすべての製品ファミリーを含む_
-- **analyzed_logs**
-    * `analyzed_logs`
-- **application_security**
-    * `app_sec_host_count`
-- **audit_trail**
-    * `enabled`
-- **serverless**
-    * `func_count`
-    * `invocations_sum`
-- **ci_app**
-    * `ci_pipeline_indexed_spans`
-    * `ci_test_indexed_spans`
-    * `ci_visibility_pipeline_committers`
-    * `ci_visibility_test_committers`
-- **cloud_cost_management**
-    * `host_count`
-- **csm_container_enterprise**
-    * `cws_count`
-    * `compliance_count`
-    * `total_count`
-- **csm_host_enterprise**
-    * `total_host_count`
-    * `compliance_hosts`
-    * `cws_hosts`
-    * `aas_host_count`
-    * `azure_host_count`
-    * `aws_host_count`
-    * `gcp_host_count`
-- **cspm**
-    * `aas_host_count`
-    * `azure_host_count`
-    * `compliance_host_count`
-    * `container_count`
-    * `host_count`
-- **cws**
-    * `cws_container_count`
-    * `cws_host_count`
-- **dbm**
-    * `dbm_host_count`
-    * `dbm_queries_count`
-- **fargate**
-    * `avg_profiled_fargate_tasks`
-    * `tasks_count`
-- **infra_hosts**
-    * `agent_host_count`
-    * `alibaba_host_count`
-    * `apm_azure_app_service_host_count`
-    * `apm_host_count`
-    * `aws_host_count`
-    * `azure_host_count`
-    * `container_count`
-    * `gcp_host_count`
-    * `heroku_host_count`
-    * `host_count`
-    * `infra_azure_app_service`
-    * `opentelemetry_host_count`
-    * `vsphere_host_count`
-- **incident_management**
-    * `monthly_active_users`
-- **indexed_logs**
-    * `logs_indexed_events_3_day_count`
-    * `logs_live_indexed_events_3_day_count`
-    * `logs_rehydrated_indexed_events_3_day_count`
-    * `logs_indexed_events_7_day_count`
-    * `logs_live_indexed_events_7_day_count`
-    * `logs_rehydrated_indexed_events_7_day_count`
-    * `logs_indexed_events_15_day_count`
-    * `logs_live_indexed_events_15_day_count`
-    * `logs_rehydrated_indexed_events_15_day_count`
-    * `logs_indexed_events_30_day_count`
-    * `logs_live_indexed_events_30_day_count`
-    * `logs_rehydrated_indexed_events_30_day_count`
-    * `logs_indexed_events_45_day_count`
-    * `logs_live_indexed_events_45_day_count`
-    * `logs_rehydrated_indexed_events_45_day_count`
-    * `logs_indexed_events_60_day_count`
-    * `logs_live_indexed_events_60_day_count`
-    * `logs_rehydrated_indexed_events_60_day_count`
-    * `logs_indexed_events_90_day_count`
-    * `logs_live_indexed_events_90_day_count`
-    * `logs_rehydrated_indexed_events_90_day_count`
-    * `logs_indexed_events_180_day_count`
-    * `logs_live_indexed_events_180_day_count`
-    * `logs_rehydrated_indexed_events_180_day_count`
-    * `logs_indexed_events_360_day_count`
-    * `logs_live_indexed_events_360_day_count`
-    * `logs_rehydrated_indexed_events_360_day_count`
-    * `logs_indexed_events_custom_day_count`
-    * `logs_live_indexed_events_custom_day_count`
-    * `logs_rehydrated_indexed_events_custom_day_count`
-- **indexed_spans**
-    * `indexed_events_count`
-    * `ingested_spans`
-    * `ingested_events_bytes`
-- **iot**
-    * `iot_device_count`
-- **lambda_traced_invocations**
-    * `lambda_traced_invocations_count`
-- **logs**
-    * `billable_ingested_bytes`
-    * `indexed_events_count`
-    * `ingested_events_bytes`
-    * `logs_forwarding_events_bytes`
-    * `logs_live_indexed_count`
-    * `logs_live_ingested_bytes`
-    * `logs_rehydrated_indexed_count`
-    * `logs_rehydrated_ingested_bytes`
-- **network_flows**
-    * `indexed_events_count`
-- **network_hosts**
-    * `host_count`
-- **observability_pipelines**
-    * `observability_pipelines_bytes_processed`
-- **online_archive**
-    * `online_archive_events_count`
-- **profiling**
-    * `avg_container_agent_count`
-    * `host_count`
-- **rum**
-    * `browser_rum_units`
-    * `mobile_rum_units`
-    * `rum_units`
-- **rum_browser_sessions**
-    * `replay_session_count`
-    * `session_count`
-- **rum_mobile_sessions**
-    * `session_count`
-    * `session_count_android`
-    * `session_count_ios`
-    * `session_count_reactnative`
-    * `session_count_flutter`
-- **sds**
-    * `logs_scanned_bytes`
-    * `total_scanned_bytes`
-- **snmp**
-    * `snmp_devices`
-- **synthetics_api**
-    * `check_calls_count`
-- **synthetics_browser**
-    * `browser_check_calls_count`
-- **synthetics_mobile**
-    * `test_runs`
-- **timeseries**
-    * `num_custom_input_timeseries`
-    * `num_custom_output_timeseries`
-    * `num_custom_timeseries`
-
-
-このリストは、上記のファミリーと使用量タイプが、v1 時間単位使用量エンドポイントにどのようにマッピングされるかを示しています。使用量とデータポイントは、特に明記されている場合を除き、同じです。
+次のリストは、製品ファミリーと使用タイプが v1 の時間単位使用量エンド ポイントにどのようにマッピングされるかを示しています。使用タイプとデータ ポイントは、特に注記がない限り同一です。
 
 エンドポイント | 製品ファミリー
 `<base_url>/api/v1/usage/hosts` | infra_hosts
@@ -223,15 +74,8 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
 : `func_count`
 : `invocations_sum`
 
-`<base_url>/api/v1/usage/rum_sessions?type=browser` | rum_browser_sessions
-: `replay_session_count`
-: `session_count`
-
-`<base_url>/api/v1/usage/rum_sessions?type=mobile` | rum_mobile_sessions
-: `session_count`
-: `session_count_android`
-: `session_count_ios`
-: `session_count_reactnative`
+`<base_url>/api/v1/usage/rum_sessions` | RUM
+: 完全なマッピング手順は [RUM 移行ガイド][2] を参照してください。
 
 `<base_url>/api/v1/usage/network_hosts` | network_hosts
 : `host_count`
@@ -271,9 +115,6 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
 : `container_count`
 : `host_count`
 
-`<base_url>/api/v1/usage/audit_logs` | audit_logs
-: `lines_indexed`
-
 `<base_url>/api/v1/usage/cws` | cws
 : `cws_container_count`
 : `cws_host_count`
@@ -285,11 +126,6 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
 `<base_url>/api/v1/usage/sds` | sds
 : `logs_scanned_bytes`
 : `total_scanned_bytes`
-
-`<base_url>/api/v1/usage/rum` | rum
-: `browser_rum_units`
-: `mobile_rum_units`
-: `rum_units`
 
 `<base_url>/api/v1/usage/ci-app` | ci_app
 : `ci_pipeline_indexed_spans`
@@ -311,9 +147,9 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
 
 ## JSON:API 準拠のフォーマット
 
-レスポンス本文およびパラメーター名は、[JSON:API 仕様][1]に準拠しています。v1 API で利用可能なすべてのデータは、引き続き利用可能です。v1 のホスト API から v2 の時間単位使用量 API へのマッピングの例は以下をご参照ください。
+レスポンス ボディとパラメーター名は [JSON:API 仕様][3] に準拠しています。v1 API で利用できたデータはすべて v2 でも引き続き利用可能です。以下に、v1 hosts API と v2 時間単位使用量 API のマッピング例を示します。
 
-### V1 API: [ホストとコンテナの 1 時間あたり使用量の取得][2]
+### V1 API: ホストおよびコンテナの時間単位使用量を取得
 
 #### リクエスト
 
@@ -475,5 +311,6 @@ v2 API では、1 回のリクエストで全地域の子組織の使用量デ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://jsonapi.org/format/
-[2]: /ja/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
+[1]: /ja/api/latest/usage-metering/#get-hourly-usage-by-product-family
+[2]: /ja/account_management/guide/relevant-usage-migration/#rum
+[3]: https://jsonapi.org/format/

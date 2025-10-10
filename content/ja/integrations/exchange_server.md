@@ -34,7 +34,7 @@ draft: false
 git_integration_title: exchange_server
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 2.1.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: exchange_server
@@ -117,7 +117,7 @@ Exchange チェックは [Datadog Agent][1] パッケージに含まれていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "exchange_server" >}}
+{{< get-metrics-from-git "exchange-server" >}}
 
 
 ### イベント

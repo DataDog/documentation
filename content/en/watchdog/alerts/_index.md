@@ -1,5 +1,6 @@
 ---
 title: Watchdog Alerts
+description: "View and interpret Watchdog Alerts that proactively detect anomalies on your systems and applications using AI-powered monitoring."
 ---
 
 ## Overview
@@ -51,7 +52,7 @@ Available facets:
 | Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
 | End User Impacted   | (Requires RUM). If Watchdog found any end users impacted. See [Impact Analysis][4] for more information. |
 | Root Cause          | (Requires APM). If Watchdog found the root cause of the anomaly or the critical failure. See [Root Cause Analysis][9] for more information. |
-| Team                | The team owning the impacted services. Enriched from the [Service Catalog][7].  |
+| Team                | The team owning the impacted services. Enriched from the [Software Catalog][7].  |
 | Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
 | Log Source          | Only display alerts containing logs from this source.                           |
 | Log Status          | Only display alerts containing logs of this log status.                         |
@@ -102,7 +103,7 @@ Watchdog scans all services and resources to look for anomalies on the following
   * Latency
   * Hits (request rate)
 
-Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Watchdog requires at least 0.5 requests per second for an endpoint to be monitored. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
 
 #### Required data history
 
@@ -133,6 +134,10 @@ Watchdog looks at infrastructure metrics from the following integrations:
   * [System][1], for host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
   * [PostgreSQL][3]
+  * [MySQL][15]
+  * [SQLServer][16]
+  * [Cassandra][17]
+  * [Oracle Database][18]
   * [NGINX][4]
   * [Docker][13]
   * [Kubernetes][14]
@@ -164,6 +169,10 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [12]: /serverless/
 [13]: /containers/docker/?tab=standard
 [14]: /containers/kubernetes/installation/?tab=operator
+[15]: /integrations/mysql/
+[16]: /integrations/sqlserver/
+[17]: /integrations/cassandra/
+[18]: /integrations/oracle/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -181,14 +190,14 @@ Watchdog Alerts appear in the following places within Datadog:
 
 * The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]
-* In the [Service Catalog][7]
+* In the [Software Catalog][7]
 * In the [Watchdog Insights panel][8], available on all explorers 
 
 ### Watchdog binoculars on APM pages
 
-When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][7].
+When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Software Catalog][7].
 
-{{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="Screenshot of the Software Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
 You can see greater detail about a metric anomaly by navigating to the top of a [Service Page][3] with the [Watchdog Insights][8] carousel.
 
@@ -211,7 +220,7 @@ To see archived alerts, select the checkbox option to **Show _N_ archived alerts
 [4]: /watchdog/impact_analysis/
 [5]: /getting_started/tagging/unified_service_tagging/
 [6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: /tracing/service_catalog/
+[7]: /tracing/software_catalog/
 [8]: /watchdog/insights?tab=logmanagement#explore-insights
 [9]: /watchdog/rca/
 [10]: /monitors/types/anomaly/

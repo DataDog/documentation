@@ -25,9 +25,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
   tag: "Blog"
   text: "Monitor 1Password with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
+  tag: "Blog"
+  text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
 ---
 
 ## Overview
+
+<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/">Observability Pipelines</a>.</div>
 
 Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
@@ -72,6 +77,8 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `hostname`
 * `syslog.hostname`
 
+**Note**: In Kubernetes, if a JSON log ingested by the Datadog Agent contains a `host`, `hostname`, or `syslog.hostname` key attribute, that value overrides the default Agent hostname for that log. As a result, the log does not inherit the expected host-level tags, which are set at the host level, of the correct host. In this case, Datadog recommends clearing these attributes to ensure your logs can be attributed to the correct hosts.
+
 {{% /tab %}}
 {{% tab "Date" %}}
 
@@ -92,7 +99,7 @@ Specify alternate attributes to use as the source of a log's date by setting a [
 
 **Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
@@ -180,9 +187,8 @@ By default, Datadog tracers can [automatically inject span IDs into your logs][1
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
 4. Name your pipeline.
-5. (Optional) Grant editing access to processors in the pipeline. If you assign a role to a pipeline, the role receives `logs_write_processor` [permissions][12] specifically scoped to that pipeline. Roles with `logs_write_processor` permissions assigned globally (by editing role), cannot be selected, as they have access to all pipelines.
-6. (Optional) Add tags and a description to the pipeline. The description and tags can be used to state the pipeline's purpose and which team owns it.
-7. Press **Create**.
+5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][5].
+6. Press **Create**.
 
 An example of a log transformed by a pipeline:
 
@@ -203,6 +209,8 @@ To view an integration pipeline, navigate to the [Pipelines][5] page. To edit an
 See the ELB logs example below:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" style="width:70%;">}}
+
+**Note**: Integration pipelines cannot be deleted, only disabled.
 
 ### Integration pipeline library
 

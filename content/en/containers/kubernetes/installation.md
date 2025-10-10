@@ -1,5 +1,6 @@
 ---
 title: Install the Datadog Agent on Kubernetes
+description: Install and configure the Datadog Agent on Kubernetes using the Datadog Operator, Helm, or kubectl
 aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
@@ -112,9 +113,11 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    ```yaml
    datadog:
     apiKeyExistingSecret: datadog-secret
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
    ```
-
+   
+   - Replace `<CLUSTER_NAME>` with a name for your cluster.
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**
@@ -177,8 +180,10 @@ agent:
         - <GROUP_ID>
 {{< /highlight >}}
 
-- Replace `<USER_ID>` with the UID to run the Datadog Agent.
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
 - Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+[1]: /data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 
@@ -224,7 +229,7 @@ By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/dat
 
 If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -291,7 +296,7 @@ helm uninstall datadog-agent
 ### Monitor your infrastructure in Datadog
 Use the [Containers][13] page for visibility into your container infrastructure, with resource metrics and faceted search. For information on how to use the Containers page, see [Containers View][14].
 
-Use the [Container Images][18] page for insights into every image used in your environment. This page also displays vulnerabilities found in your container images from [Cloud Security Management][19] (CSM). For information on how to use the Container Images page, see the [Containers Images View][20].
+Use the [Container Images][18] page for insights into every image used in your environment. This page also displays vulnerabilities found in your container images from [Cloud Security][19]. For information on how to use the Container Images page, see the [Containers Images View][20].
 
 The [Kubernetes][21] section features an overview of all your Kubernetes resources. [Orchestrator Explorer][22] allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more. The [Resource Utilization][23] page provides insights into how your Kubernetes workloads are using your computing resources across your infrastructure. For information on how to use these pages, see [Orchestrator Explorer][24] and [Kubernetes Resource Utilization][25].
 

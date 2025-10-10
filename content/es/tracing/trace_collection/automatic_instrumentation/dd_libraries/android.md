@@ -16,7 +16,7 @@ further_reading:
 title: Rastreo de aplicaciones Android
 type: lenguaje de código múltiple
 ---
-Envía [trazas][1] a Datadog desde tus aplicaciones Android con [la biblioteca de rastreo del cliente `dd-sdk-android-logs` de Datadog][2] y aprovecha las siguientes características:
+Envía [trazas][1] a Datadog desde tus aplicaciones Android con [la librería de rastreo del cliente `dd-sdk-android-trace` de Datadog][2] y aprovecha las siguientes características:
 
 * Crea [tramos (spans)][3] personalizados para las operaciones de tu aplicación.
 * Añade `context` y atributos personalizados adicionales a cada tramo enviado.
@@ -24,11 +24,11 @@ Envía [trazas][1] a Datadog desde tus aplicaciones Android con [la biblioteca d
 
 <div class="alert alert-info"><strong>Nota</strong>: Datadog factura por la <strong>ingesta e indexación</strong> de tramos enviados desde tus aplicaciones Android, pero no factura  por los dispositivos subyacentes. Para obtener más información, consulta la <a href="/account_management/billing/apm_tracing_profiler/">documentación de facturación de APM</a>.</div>
 
-El rastreador Datadog implementa los estándares [Open Tracing][11] y [Open Telemetry][10]. 
+El rastreador Datadog implementa los estándares [Open Tracing][11] y [Open Telemetry][10].
 
 ## Configuración
 
-1. Añade la dependencia Gradle declarando la biblioteca como dependencia en tu archivo `build.gradle`:
+1. Añade la dependencia Gradle declarando la librería como dependencia en tu archivo `build.gradle`:
 
 ```groovy
 dependencies {
@@ -279,7 +279,7 @@ Utiliza el método de utilidad `isInitialized` para comprobar si el SDK se ha in
         // your code here
     }
    ```
-Cuando escribas tu aplicación, puedes activar logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos de la biblioteca, con una prioridad igual o superior al nivel proporcionado, se registran en Logcat de Android:
+Cuando escribas tu aplicación, puedes activar logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos de la librería, con una prioridad igual o superior al nivel proporcionado, se registran en Logcat de Android:
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```
@@ -307,21 +307,25 @@ Cuando escribas tu aplicación, puedes activar logs de desarrollo llamando al m�
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+import io.opentracing.util.GlobalTracer
+
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
-{{% /tab %}} 
+{{% /tab %}}
 {{% tab "Java" %}}
 ```java
+import io.opentracing.util.GlobalTracer;
+
 AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-5. (Opcional) - Configura el umbral de descarga parcial para optimizar la carga de trabajo del SDK en función del número de tramos que genere tu aplicación. La biblioteca espera hasta que el número de tramos terminados exceda el umbral, antes de escribirlos al disco. Configurar este valor como `1` escribe cada tramo tan pronto como termina.
+5. (Opcional) - Configura el umbral de descarga parcial para optimizar la carga de trabajo del SDK en función del número de tramos que genere tu aplicación. La librería espera hasta que el número de tramos terminados exceda el umbral, antes de escribirlos al disco. Configurar este valor como `1` escribe cada tramo tan pronto como termina.
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 
 ```kotlin
@@ -343,7 +347,7 @@ AndroidTracer tracer = new AndroidTracer.Builder()
 
 6. Inicia un tramo personalizado utilizando el siguiente método:
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
 val tracer = GlobalTracer.get()
@@ -412,7 +416,7 @@ try {
                 // Do something ...
             } finally {
                 innerScope.close();
-            }   
+            }
         } catch(Throwable e) {
             AndroidTracer.logThrowable(childSpan, e);
         } finally {
@@ -494,12 +498,12 @@ try {
 val tracer = GlobalTracer.get()
 val span = tracer.buildSpan("<SPAN_NAME>").start()
 val tracedRequestBuilder = Request.Builder()
-tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,         
-        TextMapInject { key, value -> 
-            tracedRequestBuilder.addHeader(key, value) 
+tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,
+        TextMapInject { key, value ->
+            tracedRequestBuilder.addHeader(key, value)
         }
 )
-val request = tracedRequestBuilder.build() 
+val request = tracedRequestBuilder.build()
 // Dispatch the request and finish the span after.
 ```
 {{% /tab %}}
@@ -512,7 +516,7 @@ tracer.inject(
         span.context(),
         Format.Builtin.TEXT_MAP_INJECT,
         new TextMapInject() {
-            @Override 
+            @Override
             public void put(String key, String value) {
                 tracedRequestBuilder.addHeader(key, value);
             }
@@ -528,18 +532,18 @@ b. Extrae el contexto des rastreador del cliente de los encabezados en el códig
    {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracer = GlobalTracer.get() 
+val tracer = GlobalTracer.get()
 val extractedContext = tracer.extract(
-        Format.Builtin.TEXT_MAP_EXTRACT, 
-        TextMapExtract { 
+        Format.Builtin.TEXT_MAP_EXTRACT,
+        TextMapExtract {
             request.headers().toMultimap()
             .map { it.key to it.value.joinToString(";") }
                     .toMap()
                     .entrySet()
                     .iterator()
             }
-        ) 
-val serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start()      
+        )
+val serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start()
 ```
    {{% /tab %}}
    {{% tab "Java" %}}
@@ -548,8 +552,8 @@ Tracer tracer = GlobalTracer.get();
 SpanContext extractedContext = tracer.extract(
         Format.Builtin.TEXT_MAP_EXTRACT,
         new TextMapExtract() {
-            @Override 
-            public Iterator<Map.Entry<String, String>> iterator() {                 
+            @Override
+            public Iterator<Map.Entry<String, String>> iterator() {
                 return request.headers().toMultimap()
                   .entrySet()
                   .stream()
@@ -595,13 +599,13 @@ AndroidTracer.logErrorMessage(span, message)
 
 12. Si necesitas modificar algunos atributos en eventos de tu tramo antes de la colocación en lotes, puedes hacerlo proporcionando una implementación de `SpanEventMapper` al habilitar la función de rastreo:
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val traceConfig = TraceConfiguration.Builder() 
-        // ...  
+val traceConfig = TraceConfiguration.Builder()
+        // ...
         .setEventMapper(spanEventMapper)
-        .build()    
+        .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -609,7 +613,7 @@ val traceConfig = TraceConfiguration.Builder()
 TraceConfiguration config = new TraceConfiguration.Builder()
         // ...
         .setEventMapper(spanEventMapper)
-        .build();    
+        .build();
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -669,9 +673,9 @@ Además del rastreo manual, el SDK de Datadog proporciona las siguientes integra
 
 ### OkHttp
 
-Si quieres rastrear tus solicitudes OkHttp, puedes añadir el [interceptor][6] proporcionado (que puedes encontrar en la biblioteca `dd-sdk-android-okhttp`) de la siguiente manera:
+Si quieres rastrear tus solicitudes OkHttp, puedes añadir el [interceptor][6] proporcionado (que puedes encontrar en la librería `dd-sdk-android-okhttp`) de la siguiente manera:
 
-1. Añade la dependencia Gradle a la biblioteca `dd-sdk-android-okhttp` en el archivo `build.gradle` a nivel del módulo:
+1. Añade la dependencia Gradle a la librería `dd-sdk-android-okhttp` en el archivo `build.gradle` a nivel del módulo:
 
     ```groovy
     dependencies {
@@ -684,19 +688,24 @@ Si quieres rastrear tus solicitudes OkHttp, puedes añadir el [interceptor][6] p
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val okHttpClient = OkHttpClient.Builder() 
+val tracedHosts = listOf("example.com", "example.eu")
+val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
-            DatadogInterceptor(listOf("example.com", "example.eu"), traceSampler = RateBasedSampler(20f))
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
         )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```
@@ -712,22 +721,34 @@ El interceptor rastrea solicitudes a nivel de la aplicación. Para obtener más 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracedHosts = listOf("example.com", "example.eu") 
+val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient =  OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
+        .addInterceptor(
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
+        )
+        .addNetworkInterceptor(
+            TracingInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(100f))
+                .build()
+        )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .addNetworkInterceptor(
-                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+            new TracingInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```
@@ -777,9 +798,9 @@ Para proporcionar una traza continua dentro de un flujo (stream) RxJava, tienes 
 {{% tab "Kotlin" %}}
 ```kotlin
 var spanScope: Scope? = null
-Single.fromSupplier { } 
+Single.fromSupplier { }
         .subscribeOn(Schedulers.io())
-        .map {  
+        .map {
             val span = GlobalTracer.get().buildSpan("<YOUR_OP_NAME>").start()
             // ...
             span.finish()
@@ -865,7 +886,7 @@ new Retrofit.Builder()
 var spanScope: Scope? = null
 remoteDataSource.getData(query)
     .subscribeOn(Schedulers.io())
-    .map { // ... } 
+    .map { // ... }
     .doOnSuccess {
         localDataSource.persistData(it)
     }
@@ -896,7 +917,7 @@ remoteDataSource.getData(query)
         Scope spanScope = GlobalTracer.get().scopeManager().activate(span);
         scopeStorage.set(spanScope);
     })
-    .doFinally(() -> { 
+    .doFinally(() -> {
         final Span activeSpan = GlobalTracer.get().scopeManager().activeSpan();
         if (activeSpan != null) {
             activeSpan.finish();

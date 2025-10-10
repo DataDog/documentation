@@ -31,7 +31,7 @@ version: '1.0'
 
 Amazon DocumentDB es un servicio de base de datos de documentos rápida, escalable, de alta disponibilidad y totalmente gestionada que admite cargas de trabajo de MongoDB.
 
-## Configuración
+## Configurar
 
 ### Instalación
 
@@ -42,7 +42,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 1. En la [página de la integración de AWS][2], asegúrate de que `DocumentDB` está habilitado en la pestaña `Metric Collection`.
 2. Instala la [integración de Datadog y Amazon DocumentDB][3].
 
-### APM
+### Recopilación de logs
 
 #### Activar logging
 
@@ -74,11 +74,11 @@ La integración de Amazon DocumentDB no incluye ningún evento.
 
 La integración de Amazon DocumentDB no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

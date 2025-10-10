@@ -31,7 +31,7 @@ title: Seguimiento de errores en aplicaciones web y móviles
 
 ## Información general
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Detalles de un problema en el Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="Detalles de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -41,7 +41,7 @@ Echa un vistazo a las principales funciones de Error Tracking en la documentaci�
 
 ## Configuración
 
-{{< whatsnext desc="A fin de empezar a usar Datadog Error Tracking para RUM, consulta la documentación correspondiente:" >}}
+{{< whatsnext desc="Para comenzar con Datadog Error Tracking para RUM, consulta la documentación correspondiente:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Navegador{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
@@ -49,7 +49,7 @@ Echa un vistazo a las principales funciones de Error Tracking en la documentaci�
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Referencias adicionales

@@ -21,21 +21,21 @@ title: ブラウザテストでパスキー (FIDO2) を使用する
 
 ## Virtual Authenticator グローバル変数を作成する
 
-Synthetic モニタリングのパスキーは、Virtual Authenticator グローバル変数を使って処理されます。パスキーを保存する Virtual Authenticator グローバル変数を作成するには、[Synthetic Monitoring & Continuous Testing の設定ページの **Global Variables** セクション][4]を参照してください。
+Synthetic Monitoring におけるパスキーは Virtual Authenticator グローバル変数で管理されます。パスキーを保存する Virtual Authenticator グローバル変数を作成するには、Synthetic Monitoring の [**Global Variables - Virtual Authenticator** セクション][4] を参照してください。
 
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Virtual Authenticator グローバル変数の作成" style="width:70%;" >}}
 
 ## Synthetic ブラウザテストでパスキーを使用する
-<div class="alert alert-warning">Synthetic モニタリングは、Chrome と Edge のブラウザテストでパスキーをサポートしています。</div>
+<div class="alert alert-danger">Synthetic モニタリングは、Chrome と Edge のブラウザテストでパスキーをサポートしています。</div>
 
-### Add passkeys to a browser test
+### ブラウザー テストにパスキーを追加する
 
-1. Click [Digital Experience > New Test > Browser Test][3].
+1. [Digital Experience > New Test > Browser Test][3] をクリックします。
 2. **Save & Edit Recording** をクリックします。
-3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
-4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
+3. 録画ページで **Add Variable** > **Create variable from Global Variable** をクリックします。
+4. [前のステップ](#create-your-virtual-authenticator-global-variable) で作成した Virtual Authenticator グローバル変数に保存されているパスキーを入力します。
 
-{{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
+{{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="ブラウザー テストに Virtual Authenticator グローバル変数を追加" style="width:70%;" >}}
 
 ### 登録フローのフロー
 
@@ -49,10 +49,12 @@ Synthetic モニタリングのパスキーは、Virtual Authenticator グロー
 
 [ブラウザテスト][3]でパスキーを使ってログインフローをテストするには、まず Datadog パスキーを Web アプリケーションに登録する必要があります (上記セクション参照)。この作業は、パスキーとアプリケーションごとに 1 回必要です。
 
-次のいずれかの方法を選択できます。
+次のいずれかのオプションを選択します。
 
-- レコーダー内から登録フローを完了する。ただし、登録のステップは記録しない。
-- 登録フローとログインフローの両方のステップを埋め込んだテストを作成する。
+- 登録フローとログイン フローの両方のステップを組み込んだテストを作成する
+- レコーダー内で登録フローを完了するが、登録ステップは記録しない
+
+**注**: パスキー認証を伴う各テスト シナリオで毎回新しいユーザーを作成しないよう、ユーザー作成と認証を同じステップにまとめることを推奨します。
 
 1. [Virtual Authenticator グローバル変数をインポート][5]します。 
 2. パスキーでログインするページに移動します。テストを記録する際、Datadog は選択された Virtual Authenticator を使って Web アプリケーションにあらかじめ登録されたパスキーを使用して、自動的にログインします。
@@ -65,5 +67,5 @@ Synthetic モニタリングのパスキーは、Virtual Authenticator グロー
 [1]: https://app.datadoghq.com/synthetics/settings/variables
 [2]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
 [3]: /ja/synthetics/browser_tests/
-[4]: /ja/synthetics/settings/?tab=virtualauthenticator
+[4]: /ja/synthetics/platform/settings?tab=virtualauthenticator#global-variables
 [5]: /ja/synthetics/browser_tests#use-global-variables

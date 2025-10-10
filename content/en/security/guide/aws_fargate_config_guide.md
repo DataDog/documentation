@@ -7,12 +7,12 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
   tag: "Blog"
-  text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
+  text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog Cloud Security"
 ---
 
-This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (AAP)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
+{{< img src="security/datadog_security_coverage_aws_fargate2.png" alt="Flow chart showing how Cloud Security, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
 ## Full stack coverage for AWS Fargate
 
@@ -33,13 +33,13 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
         <td>Software Composition Analysis (SCA) and Code Security</td>
-        <td>ASM - Threat Detection and Protection</td>
+        <td>AAP - Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
-        <td>Not yet supported</td>
-        <td>CSM Threats</td>
+        <td>Cloud Security</td>
+        <td>Workload Protection</td>
     </tr>
 </table>
 
@@ -55,24 +55,24 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>AWS IAM roles and policies</td>
         <td>Log Management</td>
-        <td>Cloud Security Management</td>
+        <td>Cloud Security</td>
         <td>Cloud SIEM</td>
     </tr>
     <tr>
         <td>AWS databases</td>
         <td>Log Management</td>
-        <td>Cloud Security Management</td>
+        <td>Cloud Security</td>
         <td>Cloud SIEM</td>
     </tr>
     <tr>
         <td>AWS S3 buckets</td>
         <td>Log Management</td>
-        <td>Cloud Security Management</td>
+        <td>Cloud Security</td>
         <td>Cloud SIEM</td>
     </tr>
 </table>
 
-## Cloud Security Management
+## Cloud Security
 
 ### Prerequisites
 
@@ -80,7 +80,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security Management.</div>
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security.</div>
 
 ### Images
 
@@ -242,9 +242,16 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+#### Datadog Cloud Security
+1. In Datadog, navigate to [Cloud Security > Setup > Cloud Integrations > AWS][9].
+2. Enable Vulnerability Management by deploying the [Datadog Agentless scanner][10] on your AWS accounts hosting your Amazon ECR.
+
+[6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[9]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=aws&vuln_container_enabled=true&vuln_host_enabled=true&vuln_lambda_enabled=true
+[10]: /security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
+
 
 {{% /tab %}}
 
@@ -260,7 +267,7 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 #### Deploy the Agent as a sidecar
 
-The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
+The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with Workload Protection enabled:
 
 ```yaml
 apiVersion: apps/v1
@@ -328,16 +335,16 @@ spec:
      shareProcessNamespace: true
 ```
 
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Verify that the Agent is sending events to CSM
+### Verify that the Agent is sending events to Cloud Security
 
-When you enable CSM on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-<div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
+<div class="alert alert-info">You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.</div>
 
 In the task definition, replace the "workload" container with the following:
 
@@ -355,14 +362,14 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Application Security
+## App and API Protection
 
 ### Prerequisites
 
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment
 - Datadog APM is configured for your application or service
 
-<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
+<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with App and API Protection.</div>
 
 ### Installation
 
@@ -415,21 +422,21 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [3]: /security/cloud_security_management/
 [4]: /security/application_security/
 [5]: /security/cloud_siem/
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /integrations/eks_fargate/#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/agent-events
-[10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
-[11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
-[12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate
-[13]: /security/application_security/threats/setup/threat_detection/ruby?tab=awsfargate
-[14]: /security/application_security/threats/setup/threat_detection/nodejs?tab=awsfargate
-[15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
+[10]: /security/application_security/setup/java/aws-fargate
+[11]: /security/application_security/setup/dotnet/aws-fargate
+[12]: /security/application_security/setup/aws/fargate
+[13]: /security/application_security/setup/ruby/aws-fargate
+[14]: /security/application_security/setup/nodejs/aws-fargate
+[15]: /security/application_security/setup/python/aws-fargate
 [16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/code_security/setup/java/
-[19]: /security/application_security/code_security/setup/dotnet/
-[20]: /security/application_security/code_security/setup/nodejs/
+[18]: /security/code_security/iast/setup/java/
+[19]: /security/code_security/iast/setup/dotnet/
+[20]: /security/code_security/iast/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
-[22]: /security/application_security/software_composition_analysis/
-[23]: /security/application_security/software_composition_analysis/setup/
+[22]: /security/code_security/software_composition_analysis/
+[23]: /security/code_security/software_composition_analysis/

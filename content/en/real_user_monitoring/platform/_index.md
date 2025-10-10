@@ -26,10 +26,6 @@ Generate [custom metrics][3] to track application KPIs over an extended period o
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a RUM-based custom metric" width="80%" >}}
 
-## Connect RUM and Traces
-[Connect RUM and Traces][4] to Link frontend requests to their corresponding backend traces and pinpoint issues anywhere in your stack.
-
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
 
 ## Further Reading
 
@@ -38,4 +34,3 @@ Generate [custom metrics][3] to track application KPIs over an extended period o
 [1]: /real_user_monitoring/platform/dashboards
 [2]: /monitors/types/real_user_monitoring/
 [3]: /real_user_monitoring/platform/generate_metrics
-[4]: /real_user_monitoring/platform/connect_rum_and_traces

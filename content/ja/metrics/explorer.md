@@ -9,6 +9,9 @@ further_reading:
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
+- link: /dashboards/guide/quick-graphs/
+  tag: ドキュメント
+  text: クイックグラフ
 title: メトリクスエクスプローラー
 ---
 
@@ -51,6 +54,12 @@ title: メトリクスエクスプローラー
 
 右上のボタンで、グラフをダッシュボードやノートブックにエクスポートします。また、**Split Graph in Notebook** を使用すると、データをリージョン、サービス、環境などで個別のグラフに分割して表示することも可能です。
 
+### クイックグラフ
+
+Quick Graphs を使用すれば、[Dashboard][4] や [Notebook][2] を作成する必要なく、より多くのオプションでデータを可視化することができます。これらのグラフは、永続的なダッシュボードや複雑な可視化設定を行うことなく、問題の理解やトラブルシューティングに役立ちます。
+
+詳細については、[Quick Graphs][7] のドキュメントをご覧ください。
+
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -60,4 +69,5 @@ title: メトリクスエクスプローラー
 [3]: /ja/dashboards/#screenboards
 [4]: /ja/dashboards/#get-started
 [5]: /ja/metrics/introduction/#space-aggregation
-[6]: https://docs.datadoghq.com/ja/dashboards/querying/#advanced-graphing
+[6]: /ja/dashboards/querying/#advanced-graphing
+[7]: /ja/dashboards/guide/quick-graphs/

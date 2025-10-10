@@ -1,5 +1,6 @@
 ---
 title: Docker Data Collected
+description: Reference guide for metrics and events collected by the Datadog Agent from Docker containers
 aliases:
 - /agent/docker/data_collected
 ---
@@ -10,7 +11,7 @@ aliases:
 
 Metrics collected by the Agent when deployed in a Docker container:
 
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ### Events
 

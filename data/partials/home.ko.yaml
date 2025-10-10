@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: 에이전트 시작하기
   title: 에이전트 설치하기
-- desc: 800개가 넘는 내장 통합을 사용해 메트릭, 트레이스와 로그를 수집하여 Datadog에 전송하세요.
+- desc: 850개 이상의 내장 통합을 통해 메트릭, 트레이스 및 로그를 수집하여 Datadog으로 전송하세요.
   link: getting_started/integrations/
   link_text: 통합 시작하기
   title: 통합 설정하기
@@ -54,8 +54,12 @@ nav_sections:
       title: 이벤트
     - desc: 기술 스택 전반에서 프로세스 자동화 및 오케스트레이션
       icon: workflows
-      link: workflows
+      link: service_management/workflows/
       title: 워크플로 자동화
+    - desc: 로우코드 애플리케이션으로 내부 도구 간소화하기
+      icon: app-builder
+      link: service_management/app_builder/
+      title: 앱 빌더
 - nav_section:
   - name: 제품
   - navtiles:
@@ -151,6 +155,10 @@ nav_sections:
       icon: llm-observability
       link: llm_observability/
       title: LLM 관찰 가능성
+    - desc: 원격 측정, 메타데이터, 워크플로를 통합하여 신속하게 전달하세요
+      icon: internal-developer-portal-wui
+      link: internal_developer_portal
+      title: 내부 개발자 포털
 - nav_section:
   - name: 구성
   - navtiles:
@@ -170,6 +178,10 @@ nav_sections:
       icon: dev-code
       link: developers/
       title: 개발자
+    - desc: 모범 사례에 대해 알아보고 고객 환경 모니터링 시작하기
+      icon: colab
+      link: partners/
+      title: 파트너
 popular_searches:
 - link: api/
   title: "API \b설명서"

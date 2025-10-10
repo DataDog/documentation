@@ -7,12 +7,9 @@ aliases:
   - /network_performance_monitoring/
   - /network_monitoring/performance/
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
-  tag: "Blog"
-  text: "Monitor cloud architecture and app dependencies with Datadog CNM"
-- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-  tag: "Blog"
-  text: "Cloud Network Monitoring"
+- link: '/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/'
+  tag: 'Guide'
+  text: 'Detecting Application Availability using Network Insights'
 - link: "https://www.datadoghq.com/blog/npm-windows-support/"
   tag: "Blog"
   text: "Monitor Windows hosts with Cloud Network Monitoring"
@@ -28,15 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
   tag: "Blog"
   text: "Quickstart network investigations with CNM's story-centric UX"
-- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
-  tag: "Blog"
-  text: "Monitor DNS logs for network and security analysis"
 - link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
   tag: "Blog"
   text: "Best practices for monitoring and remediating connection churn"
-- link: "https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/"
-  tag: "Architecture Center"
-  text: "Network Observability: SD-WAN Reference Architecture"
 algolia:
   tags: ['Cloud Network Monitoring', 'Network Performance Monitoring', 'CNM', 'NPM']
 ---
@@ -60,7 +51,7 @@ Additionally, [Network path][5], a feature of CNM, is available in Preview, whic
     {{< nextlink href="network_monitoring/cloud_network_monitoring/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
-    {{< nextlink href="monitors/types/cloud_network_monitoring/" >}}<u>Recommended Monitors</u>: Configure recommended CNM monitors.{{< /nextlink >}}
+    {{< nextlink href="monitors/types/cloud_network_monitoring/#common-monitors" >}}<u>Common Monitors</u>: Configure Common CNM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

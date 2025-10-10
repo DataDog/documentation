@@ -12,7 +12,7 @@
 | Category::Configuration & Deployment | 인프라스트럭처를 구성하고 배포할 수 있는 플랫폼 모니터링 통합 |
 | Category::Containers | 컨테이너와 컨테이너 관리 기술에서 메트릭, 로그, 이벤트, 트레이스를 추적하는 통합 |
 | Category::Cost Management | 클라우드 비용을 관리하고 추적하는 것을 도와주는 통합 |
-| Category::Data Store | 데이터베이스, 클러스터, 데이터 레이크 등 데이터 스토리지 솔루션을 모니터링하는 통합 |
+| Category::Data Stores | 데이터베이스, 클러스터, 데이터 레이크 등 데이터 스토리지 솔루션을 모니터링하는 통합 |
 | Category::Developer Tools | 버전 제어, CI/CD, 코드형 인프라스트럭처 등 개발자가 애플리케이션을 빌드하는 것을 돕는 기술 통합 |
 | Category::Event Management | Datadog나 쿼리 이벤트를 외부 플랫폼으로 전송하는 이벤트 통합 |
 | Category::Google Cloud | Google Cloud와 관련 서비스에서 데이터를 전송하는 통합 |
@@ -29,7 +29,7 @@
 | Category::Metrics | Datadog에서 메트릭을 전송하고 쿼리하는 통합  |
 | Category::Mobile | 모바일 기기 및 애플리케이션을 모니터링하는 통합 |
 | Category::Network | 네트워크 및 네트워크 기기를 모니터링하는 통합 |
-| Category::Notification | 알림 중심 기술(예: 인시던트 응답) 통합 |
+| Category::Notifications | 알림 중심 기술(예: 인시던트 응답) 통합 |
 | Category::Oracle | Oracle 기반 기술을 모니터링하는 통합 |
 | Category::Orchestration | 컨테이너 등 오케스트레이션을 제공하는 기술 통합 |
 | Category::OS & System | 운영 체제나 다른 저수준 시스템을 모니터링하는 통합 |

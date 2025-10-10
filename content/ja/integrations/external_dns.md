@@ -19,11 +19,11 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
+  sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 外部 DNS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: external_dns
@@ -72,7 +72,7 @@ tile:
 
 外部 DNS チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### 設定
 
 サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `external_dns.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[external_dns.d/conf.yaml のサンプル][4] を参照してください。
 
@@ -113,7 +113,7 @@ metadata:
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://github.com/kubernetes-incubator/external-dns
 [2]: https://app.datadoghq.com/account/settings/agent/latest

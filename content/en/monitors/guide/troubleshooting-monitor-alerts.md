@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Monitor Alerts
+description: "Troubleshoot common monitor alerting issues including state mismatches, data verification, alert conditions, and notification problems."
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
   tag: "Guide"
@@ -12,7 +13,7 @@ further_reading:
   text: Prevent alerts from monitors that were in downtime
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
-  text: Enable preconfigured alerts with recommended monitors
+  text: Enable preconfigured alerts with monitor templates
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
   text: Monitor alerts and events with OpsGenie and Datadog
@@ -49,7 +50,7 @@ For most use cases, disable the "Require Full Window" setting unless your specif
 
 ## Verify the presence of data
 
-If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. 
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. `N/A` groups are not included in monitors but are visible in dashboard queries. 
 
 ## Alert conditions
 

@@ -3,7 +3,7 @@ categories:
 - azure
 - nube
 - gestión de costes
-- la red
+- network
 custom_kind: integración
 dependencies: []
 description: Rastrea el uso en comparación con los límites preconfigurados de los
@@ -24,7 +24,7 @@ short_description: Rastrea el uso en comparación con los límites preconfigurad
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure establece límites preconfigurados para los recursos de tu suscripción. Para evitar errores de aprovisionamiento inesperados, ten en cuenta estos límites al diseñar y escalar tu entorno de Azure. Obtén métricas de Azure Usage and Quotas para:
@@ -41,20 +41,20 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_usage_and_quotas" >}}
+{{< get-metrics-from-git "azure-usage-and-quotas" >}}
 
 
 ### Eventos
 
 La integración Azure Quota no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de Azure Quota no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_usage_and_quotas/azure_usage_and_quotas_metadata.csv

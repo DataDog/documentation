@@ -38,7 +38,7 @@ draft: false
 git_integration_title: kyototycoon
 integration_id: kyoto-tycoon
 integration_title: Kyoto Tycoon
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kyototycoon
@@ -122,7 +122,7 @@ KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれてい
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kyototycoon" >}}
+{{< get-metrics-from-git "kyoto-tycoon" >}}
 
 
 ### イベント
@@ -130,7 +130,7 @@ KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれてい
 KyotoTycoon チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kyototycoon" >}}
+{{< get-service-checks-from-git "kyoto-tycoon" >}}
 
 
 ## トラブルシューティング

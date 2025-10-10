@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Data Lake Analytics のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Analytics �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_data_lake_analytics" >}}
+{{ get-metrics-from-git "azure-datalakeanalytics" }}
 
 
 ### イベント

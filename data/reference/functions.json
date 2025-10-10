@@ -484,6 +484,56 @@
       ],
       "deprecated": false,
       "pure": true
+    },
+    {
+      "anchor": "zip",
+      "name": "zip",
+      "category": "Array",
+      "description": "Iterate over several arrays in parallel, producing a new array containing arrays of items from each source.\nThe resulting array will be as long as the shortest input array, with all the remaining elements dropped.\nThis function is modeled from the `zip` function [in Python](https://docs.python.org/3/library/functions.html#zip),\nbut similar methods can be found in [Ruby](https://docs.ruby-lang.org/en/master/Array.html#method-i-zip)\nand [Rust](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.zip).\n\nIf a single parameter is given, it must contain an array of all the input arrays.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "array_0",
+          "description": "The first array of elements, or the array of input arrays if no other parameter is present.",
+          "required": true,
+          "type": [
+            "array"
+          ]
+        },
+        {
+          "name": "array_1",
+          "description": "The second array of elements. If not present, the first parameter contains all the arrays.",
+          "required": false,
+          "type": [
+            "array"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`array_0` and `array_1` must be arrays."
+      ],
+      "return": {
+        "types": [
+          "array"
+        ],
+        "rules": [
+          "`zip` is considered fallible if any of the parameters is not an array, or if only the first parameter is present and it is not an array of arrays."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Merge two arrays",
+          "source": "zip([1, 2, 3], [4, 5, 6, 7])",
+          "return": "[[1,4],[2,5],[3,6]]"
+        },
+        {
+          "title": "Merge three arrays",
+          "source": "zip([[1, 2], [3, 4], [5, 6]])",
+          "return": "[[1,3,5],[2,4,6]]"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
     }
   ],
   "Type": [
@@ -987,8 +1037,10 @@
       "anchor": "is_nullish",
       "name": "is_nullish",
       "category": "Type",
-      "description": "Determines whether `value` is nullish, where nullish denotes the absence of a\nmeaningful value.",
-      "notices": [],
+      "description": "Determines whether `value` is nullish. Returns `true` if the specified `value` is `null`,\nan empty string, a string containing only whitespace, or the string `\"-\"`. Returns `false` otherwise.",
+      "notices": [
+        "This function behaves inconsistently: it returns `false` for empty arrays (`[]`) and objects (`{}`),\nbut `true` for empty strings (`\"\"`) and `null`."
+      ],
       "arguments": [
         {
           "name": "value",
@@ -1563,6 +1615,51 @@
   ],
   "String": [
     {
+      "anchor": "camelcase",
+      "name": "camelcase",
+      "category": "String",
+      "description": "Takes the `value` string, and turns it into camelCase. Optionally, you can\npass in the existing case of the function, or else an attempt is made to determine the case automatically.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string to convert to camelCase.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "original_case",
+          "description": "Optional hint on the original case type. Must be one of: kebab-case, camelCase, PascalCase, SCREAMING_SNAKE, snake_case",
+          "required": false,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "camelCase a string",
+          "source": "camelcase(\"input-string\")",
+          "return": "\"inputString\""
+        },
+        {
+          "title": "camelCase a string",
+          "source": "camelcase(\"input-string\", \"kebab-case\")",
+          "return": "\"inputString\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "community_id",
       "name": "community_id",
       "category": "String",
@@ -1938,6 +2035,51 @@
       "pure": true
     },
     {
+      "anchor": "kebabcase",
+      "name": "kebabcase",
+      "category": "String",
+      "description": "Takes the `value` string, and turns it into kebab-case. Optionally, you can\npass in the existing case of the function, or else we will try to figure out the case automatically.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string to convert to kebab-case.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "original_case",
+          "description": "Optional hint on the original case type. Must be one of: kebab-case, camelCase, PascalCase, SCREAMING_SNAKE, snake_case",
+          "required": false,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "kebab-case a string",
+          "source": "kebabcase(\"InputString\")",
+          "return": "\"input-string\""
+        },
+        {
+          "title": "kebab-case a string",
+          "source": "kebabcase(\"InputString\", \"PascalCase\")",
+          "return": "\"input-string\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "match",
       "name": "match",
       "category": "String",
@@ -2038,7 +2180,9 @@
           ]
         }
       ],
-      "internal_failure_reasons": [],
+      "internal_failure_reasons": [
+        "`value` is not a string."
+      ],
       "return": {
         "types": [
           "float"
@@ -2059,6 +2203,51 @@
           "title": "Scientific notation",
           "source": "parse_float!(\"2.5e3\")",
           "return": "2500"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "pascalcase",
+      "name": "pascalcase",
+      "category": "String",
+      "description": "Takes the `value` string, and turns it into PascalCase. Optionally, you can\npass in the existing case of the function, or else we will try to figure out the case automatically.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string to convert to PascalCase.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "original_case",
+          "description": "Optional hint on the original case type. Must be one of: kebab-case, camelCase, PascalCase, SCREAMING_SNAKE, snake_case",
+          "required": false,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "PascalCase a string",
+          "source": "pascalcase(\"input-string\")",
+          "return": "\"InputString\""
+        },
+        {
+          "title": "PascalCase a string",
+          "source": "pascalcase(\"input-string\", \"kebab-case\")",
+          "return": "\"InputString\""
         }
       ],
       "deprecated": false,
@@ -2146,7 +2335,7 @@
       "anchor": "replace",
       "name": "replace",
       "category": "String",
-      "description": "Replaces all matching instances of `pattern` in `value`.\n\nThe `pattern` argument accepts regular expression capture groups. **Note**: Use `$$foo` instead of `$foo`, which is interpreted in a configuration file.",
+      "description": "Replaces all matching instances of `pattern` in `value`.\n\nThe `pattern` argument accepts regular expression capture groups.\n\n**Note when using capture groups**:\n- You will need to escape the `$` by using `$$` to avoid Vector interpreting it as an\n  [environment variable when loading configuration](/docs/reference/configuration/#escaping)\n- If you want a literal `$` in the replacement pattern, you will also need to escape this\n  with `$$`. When combined with environment variable interpolation in config files this\n  means you will need to use `$$$$` to have a literal `$` in the replacement pattern.",
       "notices": [],
       "arguments": [
         {
@@ -2216,35 +2405,26 @@
       "pure": true
     },
     {
-      "anchor": "replace_with",
-      "name": "replace_with",
+      "anchor": "screamingsnakecase",
+      "name": "screamingsnakecase",
       "category": "String",
-      "description": "Replaces all matching instances of `pattern` using a closure.\n\nThe `pattern` argument accepts a regular expression that can use capture groups.\n\nThe function uses the function closure syntax to compute the replacement values.\n\nThe closure takes a single parameter, which is an array, where the first item is always\npresent and contains the entire string that matched `pattern`. The items from index one on\ncontain the capture groups of the corresponding index. If a capture group is optional, the\nvalue may be null if it didn't match.\n\nThe value returned by the closure must be a string and will replace the section of\nthe input that was matched.\n\nThis returns a new string with the replacements, the original string is not mutated.",
+      "description": "Takes the `value` string, and turns it into SCREAMING_SNAKE case. Optionally, you can\npass in the existing case of the function, or else we will try to figure out the case automatically.",
       "notices": [],
       "arguments": [
         {
           "name": "value",
-          "description": "The original string.",
+          "description": "The string to convert to SCREAMING_SNAKE case.",
           "required": true,
           "type": [
             "string"
           ]
         },
         {
-          "name": "pattern",
-          "description": "Replace all matches of this pattern. Must be a regular expression.",
-          "required": true,
-          "type": [
-            "regex"
-          ]
-        },
-        {
-          "name": "count",
-          "description": "The maximum number of replacements to perform. `-1` means replace all matches.",
+          "name": "original_case",
+          "description": "Optional hint on the original case type. Must be one of: kebab-case, camelCase, PascalCase, SCREAMING_SNAKE, snake_case",
           "required": false,
-          "default": -1,
           "type": [
-            "integer"
+            "string"
           ]
         }
       ],
@@ -2256,24 +2436,70 @@
       },
       "examples": [
         {
-          "title": "Capitalize words",
-          "source": "\treplace_with(\"apples and bananas\", r'\\b(\\w)(\\w*)') -> |match| {\n\t\tupcase!(match.captures[0]) + string!(match.captures[1])\n\t}",
-          "return": "\"Apples And Bananas\""
+          "title": "SCREAMING_SNAKE a string",
+          "source": "screamingsnakecase(\"input-string\")",
+          "return": "\"INPUT_STRING\""
         },
         {
-          "title": "Replace with hash",
-          "source": "\treplace_with(\"email from test@example.com\", r'\\w+@example.com') -> |match| {\n\t\tsha2(match.string, variant: \"SHA-512/224\")\n\t}",
-          "return": "\"email from adf6e1bc4415d24912bd93072ad34ef825a7b6eb3bf53f68def1fc17\""
+          "title": "SCREAMING_SNAKE a string",
+          "source": "screamingsnakecase(\"input-string\", \"kebab-case\")",
+          "return": "\"INPUT_STRING\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "shannon_entropy",
+      "name": "shannon_entropy",
+      "category": "String",
+      "description": "Generates [Shannon entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)) from given string. It can generate it\nbased on string bytes, codepoints, or graphemes.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The input string.",
+          "required": true,
+          "type": [
+            "string"
+          ]
         },
         {
-          "title": "Replace first instance",
-          "source": "\treplace_with(\"Apples and Apples\", r'(?i)apples|cones', count: 1) -> |match| {\n\t\t\"Pine\" + downcase(match.string)\n\t}",
-          "return": "\"Pineapples and Apples\""
+          "name": "segmentation",
+          "description": "Defines how to split the string to calculate entropy, based on occurrences of\nsegments.\n\nByte segmentation is the fastest, but it might give undesired results when handling\nUTF-8 strings, while grapheme segmentation is the slowest, but most correct in these\ncases.",
+          "required": false,
+          "type": [
+            "string"
+          ],
+          "default": "byte",
+          "enum": {
+            "byte": "Considers individual bytes when calculating entropy",
+            "codepoint": "Considers codepoints when calculating entropy",
+            "grapheme": "Considers graphemes when calculating entropy"
+          }
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "float"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Simple byte segmentation example",
+          "source": "floor(shannon_entropy(\"vector.dev\"), precision: 4)",
+          "return": "2.9219"
         },
         {
-          "title": "Named capture group",
-          "source": "\treplace_with(\"level=error A message\", r'level=(?P<level>\\w+)') -> |match| {\n\t\tlvl = upcase!(match.level)\n\t\t\"[{{lvl}}]\"\n\t}",
-          "return": "\"[ERROR] A message\""
+          "title": "UTF-8 string with bytes segmentation",
+          "source": "floor(shannon_entropy(\"test123%456.فوائد.net.\"), precision: 4)",
+          "return": "4.0784"
+        },
+        {
+          "title": "UTF-8 string with grapheme segmentation",
+          "source": "floor(shannon_entropy(\"test123%456.فوائد.net.\", segmentation: \"grapheme\"), precision: 4)",
+          "return": "3.9362"
         }
       ],
       "deprecated": false,
@@ -2392,6 +2618,51 @@
           "title": "Slice a string (negative index)",
           "source": "slice!(\"Supercalifragilisticexpialidocious\", start: 5, end: -14)",
           "return": "\"califragilistic\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "snakecase",
+      "name": "snakecase",
+      "category": "String",
+      "description": "Takes the `value` string, and turns it into snake-case. Optionally, you can\npass in the existing case of the function, or else we will try to figure out the case automatically.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string to convert to snake-case.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "original_case",
+          "description": "Optional hint on the original case type. Must be one of: kebab-case, camelCase, PascalCase, SCREAMING_SNAKE, snake_case",
+          "required": false,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "snake-case a string",
+          "source": "snakecase(\"input-string\")",
+          "return": "\"input_string\""
+        },
+        {
+          "title": "snake-case a string",
+          "source": "snakecase(\"input-string\", \"kebab-case\")",
+          "return": "\"input_string\""
         }
       ],
       "deprecated": false,
@@ -2830,7 +3101,7 @@
         },
         {
           "name": "separator",
-          "description": "The separator to be used to join nested keys",
+          "description": "The separator to join nested keys",
           "required": false,
           "default": ".",
           "type": [
@@ -3246,6 +3517,71 @@
       "pure": true
     },
     {
+      "anchor": "unflatten",
+      "name": "unflatten",
+      "category": "Enumerate",
+      "description": "Unflattens the `value` into a nested representation.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The array or object to unflatten.",
+          "required": true,
+          "type": [
+            "object"
+          ]
+        },
+        {
+          "name": "separator",
+          "description": "The separator to split flattened keys.",
+          "required": false,
+          "default": ".",
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "recursive",
+          "description": "Whether to recursively unflatten the object values.",
+          "required": false,
+          "default": "true",
+          "type": [
+            "boolean"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "object"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unflatten",
+          "source": "unflatten({\n    \"foo.bar.baz\": true,\n    \"foo.bar.qux\": false,\n\t\"foo.quux\": 42\n})",
+          "return": "{\"foo\":{\"bar\":{\"baz\":true,\"qux\":false},\"quux\":42}}"
+        },
+        {
+          "title": "Unflatten recursively",
+          "source": "unflatten({\n    \"flattened.parent\": {\n\t\t\"foo.bar\": true,\n\t\t\"foo.baz\": false\n\t}\n})",
+          "return": "{\"flattened\":{\"parent\":{\"foo\":{\"bar\":true,\"baz\":false}}}}"
+        },
+        {
+          "title": "Unflatten non-recursively",
+          "source": "unflatten({\n    \"flattened.parent\": {\n\t\t\"foo.bar\": true,\n\t\t\"foo.baz\": false\n\t}\n}, recursive: false)",
+          "return": "{\"flattened\":{\"parent\":{\"foo.bar\":true,\"foo.baz\":false}}}"
+        },
+        {
+          "title": "Ignore inconsistent keys values",
+          "source": "unflatten({\n\t\"a\": 3,\n\t\"a.b\": 2,\n\t\"a.c\": 4\n})",
+          "return": "{\"a\":{\"b\":2,\"c\":4}}"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "unique",
       "name": "unique",
       "category": "Enumerate",
@@ -3313,6 +3649,171 @@
           },
           "source": "values({\"key1\": \"val1\", \"key2\": \"val2\"})",
           "return": "[\"val1\",\"val2\"]"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    }
+  ],
+  "Checksum": [
+    {
+      "anchor": "crc",
+      "name": "crc",
+      "category": "Checksum",
+      "description": "Calculates a CRC of the `value`.\nThe CRC `algorithm` used can be optionally specified.\n\nThis function is infallible if either the default `algorithm` value or a recognized-valid compile-time\n`algorithm` string literal is used. Otherwise, it is fallible.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string to calculate the checksum for.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "algorithm",
+          "description": "The CRC algorithm to use.",
+          "enum": {
+            "CRC_3_GSM": "3-bit CRC used in GSM telecommunications for error detection",
+            "CRC_3_ROHC": "3-bit CRC used in Robust Header Compression (ROHC) protocol",
+            "CRC_4_G_704": "4-bit CRC specified in ITU-T G.704 for synchronous communication systems",
+            "CRC_4_INTERLAKEN": "4-bit CRC used in Interlaken high-speed serial communication protocol",
+            "CRC_5_EPC_C1G2": "5-bit CRC used in EPC Gen 2 RFID (Radio-Frequency Identification) standard",
+            "CRC_5_G_704": "5-bit CRC variant in ITU-T G.704 telecommunication standard",
+            "CRC_5_USB": "5-bit CRC used in USB communication for detecting transmission errors",
+            "CRC_6_CDMA2000_A": "6-bit CRC variant used in CDMA2000 network protocols",
+            "CRC_6_CDMA2000_B": "Alternative 6-bit CRC variant for CDMA2000 network protocols",
+            "CRC_6_DARC": "6-bit CRC used in DARC (Digital Audio Radio Channel) communication",
+            "CRC_6_GSM": "6-bit CRC variant used in GSM telecommunications",
+            "CRC_6_G_704": "6-bit CRC specified in ITU-T G.704 for synchronous communication",
+            "CRC_7_MMC": "7-bit CRC used in MultiMediaCard (MMC) storage systems for error detection",
+            "CRC_7_ROHC": "7-bit CRC used in Robust Header Compression (ROHC) protocol",
+            "CRC_7_UMTS": "7-bit CRC used in UMTS (Universal Mobile Telecommunications System)",
+            "CRC_8_AUTOSAR": "8-bit CRC used in AUTOSAR (Automotive Open System Architecture) standard",
+            "CRC_8_BLUETOOTH": "8-bit CRC polynomial used in Bluetooth communication protocols",
+            "CRC_8_CDMA2000": "8-bit CRC used in CDMA2000 cellular communication standard",
+            "CRC_8_DARC": "8-bit CRC used in DARC (Digital Audio Radio Channel) communication",
+            "CRC_8_DVB_S2": "8-bit CRC used in DVB-S2 (Digital Video Broadcasting Satellite Second Generation)",
+            "CRC_8_GSM_A": "8-bit CRC variant A used in GSM telecommunications",
+            "CRC_8_GSM_B": "8-bit CRC variant B used in GSM telecommunications",
+            "CRC_8_HITAG": "8-bit CRC used in Hitag RFID and transponder systems",
+            "CRC_8_I_432_1": "8-bit CRC specified in IEEE 1432.1 standard",
+            "CRC_8_I_CODE": "8-bit CRC used in I-CODE RFID systems",
+            "CRC_8_LTE": "8-bit CRC used in LTE (Long-Term Evolution) cellular networks",
+            "CRC_8_MAXIM_DOW": "8-bit CRC used by Maxim/Dallas Semiconductor for 1-Wire and iButton devices",
+            "CRC_8_MIFARE_MAD": "8-bit CRC used in MIFARE MAD (Multiple Application Directory) protocol",
+            "CRC_8_NRSC_5": "8-bit CRC used in NRSC-5 digital radio broadcasting standard",
+            "CRC_8_OPENSAFETY": "8-bit CRC used in OpenSAFETY industrial communication protocol",
+            "CRC_8_ROHC": "8-bit CRC used in Robust Header Compression (ROHC) protocol",
+            "CRC_8_SAE_J1850": "8-bit CRC used in SAE J1850 automotive communication protocol",
+            "CRC_8_SMBUS": "8-bit CRC used in System Management Bus (SMBus) communication",
+            "CRC_8_TECH_3250": "8-bit CRC used in SMPTE (Society of Motion Picture and Television Engineers) standard",
+            "CRC_8_WCDMA": "8-bit CRC used in WCDMA (Wideband Code Division Multiple Access) networks",
+            "CRC_10_ATM": "10-bit CRC used in ATM (Asynchronous Transfer Mode) cell headers",
+            "CRC_10_CDMA2000": "10-bit CRC used in CDMA2000 cellular communication standard",
+            "CRC_10_GSM": "10-bit CRC variant used in GSM telecommunications",
+            "CRC_11_FLEXRAY": "11-bit CRC used in FlexRay automotive communication protocol",
+            "CRC_11_UMTS": "11-bit CRC used in UMTS (Universal Mobile Telecommunications System)",
+            "CRC_12_CDMA2000": "12-bit CRC used in CDMA2000 cellular communication standard",
+            "CRC_12_DECT": "12-bit CRC used in DECT (Digital Enhanced Cordless Telecommunications) standards",
+            "CRC_12_GSM": "12-bit CRC variant used in GSM telecommunications",
+            "CRC_12_UMTS": "12-bit CRC used in UMTS (Universal Mobile Telecommunications System)",
+            "CRC_13_BBC": "13-bit CRC used in BBC (British Broadcasting Corporation) digital transmission",
+            "CRC_14_DARC": "14-bit CRC used in DARC (Digital Audio Radio Channel) communication",
+            "CRC_14_GSM": "14-bit CRC variant used in GSM telecommunications",
+            "CRC_15_CAN": "15-bit CRC used in CAN (Controller Area Network) automotive communication",
+            "CRC_15_MPT1327": "15-bit CRC used in MPT 1327 radio trunking system",
+            "CRC_16_ARC": "16-bit CRC used in ARC (Adaptive Routing Code) communication",
+            "CRC_16_CDMA2000": "16-bit CRC used in CDMA2000 cellular communication standard",
+            "CRC_16_CMS": "16-bit CRC used in Content Management Systems for data integrity",
+            "CRC_16_DDS_110": "16-bit CRC used in DDS (Digital Data Storage) standard",
+            "CRC_16_DECT_R": "16-bit CRC variant R used in DECT communication",
+            "CRC_16_DECT_X": "16-bit CRC variant X used in DECT communication",
+            "CRC_16_DNP": "16-bit CRC used in DNP3 (Distributed Network Protocol) for utilities",
+            "CRC_16_EN_13757": "16-bit CRC specified in EN 13757 for meter communication",
+            "CRC_16_GENIBUS": "16-bit CRC used in GENIBUS communication protocol",
+            "CRC_16_GSM": "16-bit CRC variant used in GSM telecommunications",
+            "CRC_16_IBM_3740": "16-bit CRC used in IBM 3740 data integrity checks",
+            "CRC_16_IBM_SDLC": "16-bit CRC used in IBM SDLC (Synchronous Data Link Control)",
+            "CRC_16_ISO_IEC_14443_3_A": "16-bit CRC used in ISO/IEC 14443-3 Type A contactless smart cards",
+            "CRC_16_KERMIT": "16-bit CRC used in Kermit file transfer protocol",
+            "CRC_16_LJ1200": "16-bit CRC used in LJ1200 communication system",
+            "CRC_16_M17": "16-bit CRC used in M17 digital radio communication",
+            "CRC_16_MAXIM_DOW": "16-bit CRC used by Maxim/Dallas Semiconductor for data integrity",
+            "CRC_16_MCRF4XX": "16-bit CRC used in MCRF4XX RFID systems",
+            "CRC_16_MODBUS": "16-bit CRC used in Modbus communication protocol for error detection",
+            "CRC_16_NRSC_5": "16-bit CRC used in NRSC-5 digital radio broadcasting standard",
+            "CRC_16_OPENSAFETY_A": "16-bit CRC variant A in OpenSAFETY industrial communication",
+            "CRC_16_OPENSAFETY_B": "16-bit CRC variant B in OpenSAFETY industrial communication",
+            "CRC_16_PROFIBUS": "16-bit CRC used in PROFIBUS industrial communication protocol",
+            "CRC_16_RIELLO": "16-bit CRC used in Riello UPS communication",
+            "CRC_16_SPI_FUJITSU": "16-bit CRC used in Fujitsu SPI (Serial Peripheral Interface) communication",
+            "CRC_16_T10_DIF": "16-bit CRC used in T10 DIF (Data Integrity Field) standard",
+            "CRC_16_TELEDISK": "16-bit CRC used in Teledisk disk image format",
+            "CRC_16_TMS37157": "16-bit CRC used in TMS37157 microcontroller communication",
+            "CRC_16_UMTS": "16-bit CRC used in UMTS (Universal Mobile Telecommunications System)",
+            "CRC_16_USB": "16-bit CRC used in USB communication for error detection",
+            "CRC_16_XMODEM": "16-bit CRC used in XMODEM file transfer protocol",
+            "CRC_17_CAN_FD": "17-bit CRC used in CAN FD (Flexible Data-Rate) automotive communication protocol",
+            "CRC_21_CAN_FD": "21-bit CRC variant used in CAN FD (Flexible Data-Rate) automotive communication",
+            "CRC_24_BLE": "24-bit CRC used in Bluetooth Low Energy (BLE) packet error checking",
+            "CRC_24_FLEXRAY_A": "24-bit CRC variant A used in FlexRay automotive communication protocol",
+            "CRC_24_FLEXRAY_B": "24-bit CRC variant B used in FlexRay automotive communication protocol",
+            "CRC_24_INTERLAKEN": "24-bit CRC used in Interlaken high-speed serial communication protocol",
+            "CRC_24_LTE_A": "24-bit CRC variant A used in LTE (Long-Term Evolution) cellular networks",
+            "CRC_24_LTE_B": "24-bit CRC variant B used in LTE (Long-Term Evolution) cellular networks",
+            "CRC_24_OPENPGP": "24-bit CRC used in OpenPGP (Pretty Good Privacy) for data integrity",
+            "CRC_24_OS_9": "24-bit CRC used in OS-9 operating system for error detection",
+            "CRC_30_CDMA": "30-bit CRC used in CDMA (Code Division Multiple Access) communication standard",
+            "CRC_31_PHILIPS": "31-bit CRC used in Philips communication protocols",
+            "CRC_32_AIXM": "32-bit CRC used in Aeronautical Information Exchange Model (AIXM)",
+            "CRC_32_AUTOSAR": "32-bit CRC used in AUTOSAR (Automotive Open System Architecture) standard",
+            "CRC_32_BASE91_D": "32-bit CRC variant used in Base91 data encoding",
+            "CRC_32_BZIP2": "32-bit CRC used in bzip2 compression algorithm",
+            "CRC_32_CD_ROM_EDC": "32-bit CRC used for Error Detection Code in CD-ROM systems",
+            "CRC_32_CKSUM": "32-bit CRC used in UNIX cksum command for file integrity",
+            "CRC_32_ISCSI": "32-bit CRC used in iSCSI (Internet Small Computer Systems Interface)",
+            "CRC_32_ISO_HDLC": "32-bit CRC used in ISO HDLC (High-Level Data Link Control)",
+            "CRC_32_JAMCRC": "32-bit CRC variant used in JAM error detection",
+            "CRC_32_MEF": "32-bit CRC used in Metro Ethernet Forum (MEF) standards",
+            "CRC_32_MPEG_2": "32-bit CRC used in MPEG-2 transport streams for error detection",
+            "CRC_32_XFER": "32-bit CRC used in data transfer protocols",
+            "CRC_40_GSM": "40-bit CRC variant used in GSM telecommunications",
+            "CRC_64_ECMA_182": "64-bit CRC specified in ECMA-182 standard",
+            "CRC_64_GO_ISO": "64-bit CRC used in Go programming language and ISO standards",
+            "CRC_64_MS": "64-bit CRC variant used in Microsoft systems",
+            "CRC_64_REDIS": "64-bit CRC used in Redis key-value data store",
+            "CRC_64_WE": "64-bit CRC variant for wide-area error detection",
+            "CRC_64_XZ": "64-bit CRC used in the XZ compression format for integrity verification",
+            "CRC_82_DARC": "82-bit CRC used in DARC (Digital Audio Radio Channel) communication"
+          },
+          "required": false,
+          "default": "CRC_32_ISO_HDLC",
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` is not a string.",
+        "`algorithm` is not a supported algorithm."
+      ],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Create CRC checksum using the default algorithm",
+          "source": "crc(\"foo\")",
+          "return": "\"2356372769\""
+        },
+        {
+          "title": "Create CRC checksum using the CRC_32_CKSUM algorithm",
+          "source": "crc(\"foo\", algorithm: \"CRC_32_CKSUM\")",
+          "return": "\"4271552933\""
         }
       ],
       "deprecated": false,
@@ -3407,6 +3908,58 @@
       "pure": true
     },
     {
+      "anchor": "decode_charset",
+      "name": "decode_charset",
+      "category": "Codec",
+      "description": "Decodes the `value` (a non-UTF8 string) to a UTF8 string using the specified [character set](https://encoding.spec.whatwg.org/#names-and-labels).",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The non-UTF8 string to decode.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "from_charset",
+          "description": "The [character set](https://encoding.spec.whatwg.org/#names-and-labels) to use when decoding the data.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`from_charset` isn't a valid [character set](https://encoding.spec.whatwg.org/#names-and-labels)."
+      ],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Decode EUC-KR string",
+          "source": "decode_charset!(decode_base64!(\"vsiz58fPvLy/5A==\"), \"euc-kr\")",
+          "return": "\"안녕하세요\""
+        },
+        {
+          "title": "Decode EUC-JP string",
+          "source": "decode_charset!(decode_base64!(\"pLOk86TLpMGkzw==\"), \"euc-jp\")",
+          "return": "\"こんにちは\""
+        },
+        {
+          "title": "Decode GB2312 string",
+          "source": "decode_charset!(decode_base64!(\"xOO6ww==\"), \"gb2312\")",
+          "return": "\"你好\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "decode_gzip",
       "name": "decode_gzip",
       "category": "Codec",
@@ -3435,6 +3988,40 @@
           "title": "Decode Gzip data",
           "source": "encoded_text = decode_base64!(\"H4sIAHEAymMAA6vML1XISCxLVSguTU5OLS5OK83JqVRISU3OT0lNUchNBQD7BGDaIAAAAA==\")\ndecode_gzip!(encoded_text)",
           "return": "\"you have successfully decoded me\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "decode_lz4",
+      "name": "decode_lz4",
+      "category": "Codec",
+      "description": "Decodes the `value` (an lz4 string) into its original string.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The lz4 block data to decode.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` unable to decode value with lz4 decoder."
+      ],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Decode Lz4 data",
+          "source": "encoded_text = decode_base64!(\"LAAAAPAdVGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy4=\")\ndecode_lz4!(encoded_text)",
+          "return": "\"The quick brown fox jumps over 13 lazy dogs.\""
         }
       ],
       "deprecated": false,
@@ -3520,7 +4107,7 @@
       "anchor": "decode_punycode",
       "name": "decode_punycode",
       "category": "Codec",
-      "description": "Decodes a [punycode](https://en.wikipedia.org/wiki/Punycode) encoded `value`, like an internationalized domain name ([IDN](https://en.wikipedia.org/wiki/Internationalized_domain_name)).",
+      "description": "Decodes a [punycode](https://en.wikipedia.org/wiki/Punycode) encoded `value`, such as an internationalized domain name ([IDN](https://en.wikipedia.org/wiki/Internationalized_domain_name)). This function assumes that the value passed is meant to be used in IDN context and that it is either a domain name or a part of it.",
       "notices": [],
       "arguments": [
         {
@@ -3768,6 +4355,58 @@
       "pure": true
     },
     {
+      "anchor": "encode_charset",
+      "name": "encode_charset",
+      "category": "Codec",
+      "description": "Encodes the `value` (a UTF8 string) to a non-UTF8 string using the specified [character set](https://encoding.spec.whatwg.org/#names-and-labels).",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The UTF8 string to encode.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "to_charset",
+          "description": "The [character set](https://encoding.spec.whatwg.org/#names-and-labels) to use when encoding the data.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`to_charset` isn't a valid [character set](https://encoding.spec.whatwg.org/#names-and-labels)."
+      ],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Encode UTF8 string to EUC-KR",
+          "source": "encode_base64(encode_charset!(\"안녕하세요\", \"euc-kr\"))",
+          "return": "\"vsiz58fPvLy/5A==\""
+        },
+        {
+          "title": "Encode UTF8 string to EUC-JP",
+          "source": "encode_base64(encode_charset!(\"こんにちは\", \"euc-jp\"))",
+          "return": "\"pLOk86TLpMGkzw==\""
+        },
+        {
+          "title": "Encode UTF8 string to GB2312",
+          "source": "encode_base64(encode_charset!(\"你好\", \"gb2312\"))",
+          "return": "\"xOO6ww==\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "encode_gzip",
       "name": "encode_gzip",
       "category": "Codec",
@@ -4004,6 +4643,38 @@
       "pure": true
     },
     {
+      "anchor": "encode_lz4",
+      "name": "encode_lz4",
+      "category": "Codec",
+      "description": "Encodes the `value` to [Lz4](https://lz4.github.io/lz4/).",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string to encode.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Encode to Lz4",
+          "source": "encoded_text = encode_lz4!(\"The quick brown fox jumps over 13 lazy dogs.\")\nencode_base64(encoded_text)",
+          "return": "\"LAAAAPAdVGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy4=\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "encode_percent",
       "name": "encode_percent",
       "category": "Codec",
@@ -4115,7 +4786,7 @@
       "anchor": "encode_punycode",
       "name": "encode_punycode",
       "category": "Codec",
-      "description": "Encodes a `value` to [punycode](https://en.wikipedia.org/wiki/Punycode). Useful for internationalized domain names ([IDN](https://en.wikipedia.org/wiki/Internationalized_domain_name)).",
+      "description": "Encodes a `value` to [punycode](https://en.wikipedia.org/wiki/Punycode). Useful for internationalized domain names ([IDN](https://en.wikipedia.org/wiki/Internationalized_domain_name)). This function assumes that the value passed is meant to be used in IDN context and that it is either a domain name or a part of it.",
       "notices": [],
       "arguments": [
         {
@@ -4291,7 +4962,7 @@
       "anchor": "decrypt",
       "name": "decrypt",
       "category": "Cryptography",
-      "description": "Decrypts a string with a symmetric encryption algorithm.\n\nSupported Algorithms:\n\n* AES-256-CFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-CFB (key = 24 bytes, iv = 16 bytes)\n* AES-128-CFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-OFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-OFB  (key = 24 bytes, iv = 16 bytes)\n* AES-128-OFB (key = 16 bytes, iv = 16 bytes)\n* Deprecated - AES-256-CTR (key = 32 bytes, iv = 16 bytes)\n* Deprecated - AES-192-CTR (key = 24 bytes, iv = 16 bytes)\n* Deprecated - AES-128-CTR (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-LE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-LE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-LE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-BE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-BE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-BE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-PKCS7 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-PKCS7 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-PKCS7 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ANSIX923 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ANSIX923 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ANSIX923 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO7816 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO7816 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO7816 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO10126 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO10126 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO10126 (key = 16 bytes, iv = 16 bytes)\n* CHACHA20-POLY1305 (key = 32 bytes, iv = 12 bytes)\n* XCHACHA20-POLY1305 (key = 32 bytes, iv = 24 bytes)\n* XSALSA20-POLY1305 (key = 32 bytes, iv = 24 bytes)",
+      "description": "Decrypts a string with a symmetric encryption algorithm.\n\nSupported Algorithms:\n\n* AES-256-CFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-CFB (key = 24 bytes, iv = 16 bytes)\n* AES-128-CFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-OFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-OFB  (key = 24 bytes, iv = 16 bytes)\n* AES-128-OFB (key = 16 bytes, iv = 16 bytes)\n* AES-128-SIV (key = 32 bytes, iv = 16 bytes)\n* AES-256-SIV (key = 64 bytes, iv = 16 bytes)\n* Deprecated - AES-256-CTR (key = 32 bytes, iv = 16 bytes)\n* Deprecated - AES-192-CTR (key = 24 bytes, iv = 16 bytes)\n* Deprecated - AES-128-CTR (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-LE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-LE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-LE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-BE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-BE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-BE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-PKCS7 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-PKCS7 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-PKCS7 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ANSIX923 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ANSIX923 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ANSIX923 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO7816 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO7816 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO7816 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO10126 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO10126 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO10126 (key = 16 bytes, iv = 16 bytes)\n* CHACHA20-POLY1305 (key = 32 bytes, iv = 12 bytes)\n* XCHACHA20-POLY1305 (key = 32 bytes, iv = 24 bytes)\n* XSALSA20-POLY1305 (key = 32 bytes, iv = 24 bytes)",
       "notices": [],
       "arguments": [
         {
@@ -4351,7 +5022,7 @@
       "anchor": "encrypt",
       "name": "encrypt",
       "category": "Cryptography",
-      "description": "Encrypts a string with a symmetric encryption algorithm.\n\nSupported Algorithms:\n\n* AES-256-CFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-CFB (key = 24 bytes, iv = 16 bytes)\n* AES-128-CFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-OFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-OFB  (key = 24 bytes, iv = 16 bytes)\n* AES-128-OFB (key = 16 bytes, iv = 16 bytes)\n* Deprecated - AES-256-CTR (key = 32 bytes, iv = 16 bytes)\n* Deprecated - AES-192-CTR (key = 24 bytes, iv = 16 bytes)\n* Deprecated - AES-128-CTR (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-LE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-LE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-LE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-BE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-BE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-BE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-PKCS7 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-PKCS7 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-PKCS7 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ANSIX923 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ANSIX923 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ANSIX923 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO7816 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO7816 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO7816 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO10126 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO10126 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO10126 (key = 16 bytes, iv = 16 bytes)\n* CHACHA20-POLY1305 (key = 32 bytes, iv = 12 bytes)\n* XCHACHA20-POLY1305 (key = 32 bytes, iv = 24 bytes)\n* XSALSA20-POLY1305 (key = 32 bytes, iv = 24 bytes)",
+      "description": "Encrypts a string with a symmetric encryption algorithm.\n\nSupported Algorithms:\n\n* AES-256-CFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-CFB (key = 24 bytes, iv = 16 bytes)\n* AES-128-CFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-OFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-OFB  (key = 24 bytes, iv = 16 bytes)\n* AES-128-OFB (key = 16 bytes, iv = 16 bytes)\n* AES-128-SIV (key = 32 bytes, iv = 16 bytes)\n* AES-256-SIV (key = 64 bytes, iv = 16 bytes)\n* Deprecated - AES-256-CTR (key = 32 bytes, iv = 16 bytes)\n* Deprecated - AES-192-CTR (key = 24 bytes, iv = 16 bytes)\n* Deprecated - AES-128-CTR (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-LE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-LE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-LE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-BE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-BE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-BE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-PKCS7 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-PKCS7 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-PKCS7 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ANSIX923 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ANSIX923 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ANSIX923 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO7816 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO7816 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO7816 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO10126 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO10126 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO10126 (key = 16 bytes, iv = 16 bytes)\n* CHACHA20-POLY1305 (key = 32 bytes, iv = 12 bytes)\n* XCHACHA20-POLY1305 (key = 32 bytes, iv = 24 bytes)\n* XSALSA20-POLY1305 (key = 32 bytes, iv = 24 bytes)",
       "notices": [],
       "arguments": [
         {
@@ -4982,7 +5653,7 @@
       "anchor": "find_enrichment_table_records",
       "name": "find_enrichment_table_records",
       "category": "Enrichment",
-      "description": "Searches an [enrichment table](/docs/reference/glossary/#enrichment-tables) for rows that match the\nprovided condition.\n\nFor `file` enrichment tables, this condition needs to be a VRL object in which\nthe key-value pairs indicate a field to\tsearch mapped to a value to search in that field.\nThis function returns the rows that match the provided condition(s). _All_ fields need to\nmatch for rows to be returned; if any fields do not match, then no rows are returned.\n\nThere are currently two forms of search criteria:\n\n1. **Exact match search**. The given field must match the value exactly. Case sensitivity\n   can be specified using the `case_sensitive` argument. An exact match search can use an\n   index directly into the dataset, which should make this search fairly \"cheap\" from a\n   performance perspective.\n\n2. **Date range search**. The given field must be greater than or equal to the `from` date\n   and less than or equal to the `to` date. A date range search involves\n   sequentially scanning through the rows that have been located using any exact match\n   criteria. This can be an expensive operation if there are many rows returned by any exact\n   match criteria. Therefore, use date ranges as the _only_ criteria when the enrichment\n   data set is very small.\n\nFor `geoip` and `mmdb` enrichment tables, this condition needs to be a VRL object with a single key-value pair\nwhose value needs to be a valid IP address. Example: `{\"ip\": .ip }`. If a return field is expected\nand without a value, `null` is used. This table can return the following fields:\n\n* ISP databases:\n\t* `autonomous_system_number`\n\t* `autonomous_system_organization`\n\t* `isp`\n\t* `organization`\n\n* City databases:\n\t* `city_name`\n\t* `continent_code`\n\t* `country_code`\n\t* `country_name`\n\t* `region_code`\n\t* `region_name`\n\t* `metro_code`\n\t* `latitude`\n\t* `longitude`\n\t* `postal_code`\n\t* `timezone`\n\n* Connection-Type databases:\n\t* `connection_type`\n\nTo use this function, you need to update your configuration to\ninclude an\n[`enrichment_tables`](/docs/reference/configuration/global-options/#enrichment_tables)\nparameter.",
+      "description": "Searches an [enrichment table](/docs/reference/glossary/#enrichment-tables) for rows that match the\nprovided condition.\n\nFor `file` enrichment tables, this condition needs to be a VRL object in which\nthe key-value pairs indicate a field to\tsearch mapped to a value to search in that field.\nThis function returns the rows that match the provided condition(s). _All_ fields need to\nmatch for rows to be returned; if any fields do not match, then no rows are returned.\n\nThere are currently two forms of search criteria:\n\n1. **Exact match search**. The given field must match the value exactly. Case sensitivity\n   can be specified using the `case_sensitive` argument. An exact match search can use an\n   index directly into the dataset, which should make this search fairly \"cheap\" from a\n   performance perspective.\n\n2. **Date range search**. The given field must be greater than or equal to the `from` date\n   and/or less than or equal to the `to` date. A date range search involves\n   sequentially scanning through the rows that have been located using any exact match\n   criteria. This can be an expensive operation if there are many rows returned by any exact\n   match criteria. Therefore, use date ranges as the _only_ criteria when the enrichment\n   data set is very small.\n\nFor `geoip` and `mmdb` enrichment tables, this condition needs to be a VRL object with a single key-value pair\nwhose value needs to be a valid IP address. Example: `{\"ip\": .ip }`. If a return field is expected\nand without a value, `null` is used. This table can return the following fields:\n\n* ISP databases:\n\t* `autonomous_system_number`\n\t* `autonomous_system_organization`\n\t* `isp`\n\t* `organization`\n\n* City databases:\n\t* `city_name`\n\t* `continent_code`\n\t* `country_code`\n\t* `country_name`\n\t* `region_code`\n\t* `region_name`\n\t* `metro_code`\n\t* `latitude`\n\t* `longitude`\n\t* `postal_code`\n\t* `timezone`\n\n* Connection-Type databases:\n\t* `connection_type`\n\nTo use this function, you need to update your configuration to\ninclude an\n[`enrichment_tables`](/docs/reference/configuration/global-options/#enrichment_tables)\nparameter.",
       "notices": [],
       "arguments": [
         {
@@ -5044,7 +5715,7 @@
       "anchor": "get_enrichment_table_record",
       "name": "get_enrichment_table_record",
       "category": "Enrichment",
-      "description": "Searches an [enrichment table](/docs/reference/glossary/#enrichment-tables) for a row that matches the\nprovided condition. A single row must be matched. If no rows are found or more than one row is\nfound, an error is returned.\n\nFor `file` enrichment tables, this condition needs to be a VRL object in which\nthe key-value pairs indicate a field to\tsearch mapped to a value to search in that field.\nThis function returns the rows that match the provided condition(s). _All_ fields need to\nmatch for rows to be returned; if any fields do not match, then no rows are returned.\n\nThere are currently two forms of search criteria:\n\n1. **Exact match search**. The given field must match the value exactly. Case sensitivity\n   can be specified using the `case_sensitive` argument. An exact match search can use an\n   index directly into the dataset, which should make this search fairly \"cheap\" from a\n   performance perspective.\n\n2. **Date range search**. The given field must be greater than or equal to the `from` date\n   and less than or equal to the `to` date. A date range search involves\n   sequentially scanning through the rows that have been located using any exact match\n   criteria. This can be an expensive operation if there are many rows returned by any exact\n   match criteria. Therefore, use date ranges as the _only_ criteria when the enrichment\n   data set is very small.\n\nFor `geoip` and `mmdb` enrichment tables, this condition needs to be a VRL object with a single key-value pair\nwhose value needs to be a valid IP address. Example: `{\"ip\": .ip }`. If a return field is expected\nand without a value, `null` is used. This table can return the following fields:\n\n* ISP databases:\n\t* `autonomous_system_number`\n\t* `autonomous_system_organization`\n\t* `isp`\n\t* `organization`\n\n* City databases:\n\t* `city_name`\n\t* `continent_code`\n\t* `country_code`\n\t* `country_name`\n\t* `region_code`\n\t* `region_name`\n\t* `metro_code`\n\t* `latitude`\n\t* `longitude`\n\t* `postal_code`\n\t* `timezone`\n\n* Connection-Type databases:\n\t* `connection_type`\n\nTo use this function, you need to update your configuration to\ninclude an\n[`enrichment_tables`](/docs/reference/configuration/global-options/#enrichment_tables)\nparameter.",
+      "description": "Searches an [enrichment table](/docs/reference/glossary/#enrichment-tables) for a row that matches the\nprovided condition. A single row must be matched. If no rows are found or more than one row is\nfound, an error is returned.\n\nFor `file` enrichment tables, this condition needs to be a VRL object in which\nthe key-value pairs indicate a field to\tsearch mapped to a value to search in that field.\nThis function returns the rows that match the provided condition(s). _All_ fields need to\nmatch for rows to be returned; if any fields do not match, then no rows are returned.\n\nThere are currently two forms of search criteria:\n\n1. **Exact match search**. The given field must match the value exactly. Case sensitivity\n   can be specified using the `case_sensitive` argument. An exact match search can use an\n   index directly into the dataset, which should make this search fairly \"cheap\" from a\n   performance perspective.\n\n2. **Date range search**. The given field must be greater than or equal to the `from` date\n   and/or less than or equal to the `to` date. A date range search involves\n   sequentially scanning through the rows that have been located using any exact match\n   criteria. This can be an expensive operation if there are many rows returned by any exact\n   match criteria. Therefore, use date ranges as the _only_ criteria when the enrichment\n   data set is very small.\n\nFor `geoip` and `mmdb` enrichment tables, this condition needs to be a VRL object with a single key-value pair\nwhose value needs to be a valid IP address. Example: `{\"ip\": .ip }`. If a return field is expected\nand without a value, `null` is used. This table can return the following fields:\n\n* ISP databases:\n\t* `autonomous_system_number`\n\t* `autonomous_system_organization`\n\t* `isp`\n\t* `organization`\n\n* City databases:\n\t* `city_name`\n\t* `continent_code`\n\t* `country_code`\n\t* `country_name`\n\t* `region_code`\n\t* `region_name`\n\t* `metro_code`\n\t* `latitude`\n\t* `longitude`\n\t* `postal_code`\n\t* `timezone`\n\n* Connection-Type databases:\n\t* `connection_type`\n\nTo use this function, you need to update your configuration to\ninclude an\n[`enrichment_tables`](/docs/reference/configuration/global-options/#enrichment_tables)\nparameter.",
       "notices": [],
       "arguments": [
         {
@@ -5277,6 +5948,40 @@
       "pure": true
     },
     {
+      "anchor": "to_syslog_facility_code",
+      "name": "to_syslog_facility_code",
+      "category": "Convert",
+      "description": "Converts the `value`, a Syslog [facility keyword](https://en.wikipedia.org/wiki/Syslog#Facility), into a Syslog integer\nfacility code (`0` to `23`).",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The Syslog facility keyword to convert.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` is not a valid Syslog facility keyword."
+      ],
+      "return": {
+        "types": [
+          "integer"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Coerce to Syslog facility code",
+          "source": "to_syslog_facility_code!(\"authpriv\")",
+          "return": "10"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "to_syslog_level",
       "name": "to_syslog_level",
       "category": "Convert",
@@ -5406,41 +6111,6 @@
   ],
   "System": [
     {
-      "anchor": "get_env_var",
-      "name": "get_env_var",
-      "category": "System",
-      "description": "Returns the value of the environment variable specified by `name`.",
-      "notices": [],
-      "arguments": [
-        {
-          "name": "name",
-          "description": "The name of the environment variable.",
-          "required": true,
-          "type": [
-            "string"
-          ]
-        }
-      ],
-      "internal_failure_reasons": [
-        "Environment variable `name` does not exist.",
-        "The value of environment variable `name` is not valid Unicode"
-      ],
-      "return": {
-        "types": [
-          "string"
-        ]
-      },
-      "examples": [
-        {
-          "title": "Get an environment variable",
-          "source": "get_env_var!(\"HOME\")",
-          "return": "\"/root\""
-        }
-      ],
-      "deprecated": false,
-      "pure": true
-    },
-    {
       "anchor": "get_hostname",
       "name": "get_hostname",
       "category": "System",
@@ -5505,152 +6175,6 @@
       "pure": true
     }
   ],
-  "Event": [
-    {
-      "anchor": "get_secret",
-      "name": "get_secret",
-      "category": "Event",
-      "description": "Returns the value of the given secret from an event.",
-      "notices": [],
-      "arguments": [
-        {
-          "name": "key",
-          "description": "The name of the secret.",
-          "required": true,
-          "type": [
-            "string"
-          ]
-        }
-      ],
-      "internal_failure_reasons": [],
-      "return": {
-        "types": [
-          "string"
-        ]
-      },
-      "examples": [
-        {
-          "title": "Get the Datadog API key from the event metadata",
-          "source": "get_secret(\"datadog_api_key\")",
-          "return": "\"secret value\""
-        }
-      ],
-      "deprecated": false,
-      "pure": true
-    },
-    {
-      "anchor": "remove_secret",
-      "name": "remove_secret",
-      "category": "Event",
-      "description": "Removes a secret from an event.",
-      "notices": [],
-      "arguments": [
-        {
-          "name": "key",
-          "description": "The name of the secret to remove.",
-          "required": true,
-          "type": [
-            "string"
-          ]
-        }
-      ],
-      "internal_failure_reasons": [],
-      "return": {
-        "types": [
-          "null"
-        ]
-      },
-      "examples": [
-        {
-          "title": "Removes the Datadog API key from the event",
-          "source": "remove_secret(\"datadog_api_key\")",
-          "return": "null"
-        }
-      ],
-      "deprecated": false,
-      "pure": true
-    },
-    {
-      "anchor": "set_secret",
-      "name": "set_secret",
-      "category": "Event",
-      "description": "Sets the given secret in the event.",
-      "notices": [],
-      "arguments": [
-        {
-          "name": "key",
-          "description": "The name of the secret.",
-          "required": true,
-          "type": [
-            "string"
-          ]
-        },
-        {
-          "name": "secret",
-          "description": "The secret value.",
-          "required": true,
-          "type": [
-            "string"
-          ]
-        }
-      ],
-      "internal_failure_reasons": [],
-      "return": {
-        "types": [
-          "null"
-        ]
-      },
-      "examples": [
-        {
-          "title": "Set the Datadog API key to the given value",
-          "source": "set_secret(\"datadog_api_key\", \"abc122\")",
-          "return": "null"
-        }
-      ],
-      "deprecated": false,
-      "pure": true
-    },
-    {
-      "anchor": "set_semantic_meaning",
-      "name": "set_semantic_meaning",
-      "category": "Event",
-      "description": "Sets a semantic meaning for an event. **Note**: This function assigns\nmeaning at startup, and has _no_ runtime behavior. It is suggested\nto put all calls to this function at the beginning of a VRL function. The function\ncannot be conditionally called. For example, using an if statement cannot stop the meaning\nfrom being assigned.",
-      "notices": [],
-      "arguments": [
-        {
-          "name": "target",
-          "description": "The path of the value that is assigned a meaning.",
-          "required": true,
-          "type": [
-            "path"
-          ]
-        },
-        {
-          "name": "meaning",
-          "description": "The name of the meaning to assign.",
-          "required": true,
-          "type": [
-            "string"
-          ]
-        }
-      ],
-      "internal_failure_reasons": [],
-      "return": {
-        "types": [
-          "null"
-        ]
-      },
-      "examples": [
-        {
-          "title": "Sets custom field semantic meaning",
-          "source": "set_semantic_meaning(.foo, \"bar\")",
-          "return": "null"
-        }
-      ],
-      "deprecated": false,
-      "pure": true
-    }
-  ],
   "IP": [
     {
       "anchor": "ip_aton",
@@ -5698,7 +6222,8 @@
           "description": "The CIDR mask (v4 or v6).",
           "required": true,
           "type": [
-            "string"
+            "string",
+            "array"
           ]
         },
         {
@@ -5723,6 +6248,11 @@
         {
           "title": "IPv4 contains CIDR",
           "source": "ip_cidr_contains!(\"192.168.0.0/16\", \"192.168.10.32\")",
+          "return": "true"
+        },
+        {
+          "title": "IPv4 is private",
+          "source": "ip_cidr_contains!([\"10.0.0.0/8\", \"172.16.0.0/12\", \"192.168.0.0/16\"], \"192.168.10.32\")",
           "return": "true"
         },
         {
@@ -6112,8 +6642,8 @@
           "return": "false"
         },
         {
-          "title": "Facet wildcard",
-          "source": "match_datadog_query({\"custom\": {\"name\": \"foo\"}}, \"@name:foo*\")",
+          "title": "Attribute wildcard",
+          "source": "match_datadog_query({\"name\": \"foobar\"}, \"@name:foo*\")",
           "return": "true"
         },
         {
@@ -6178,6 +6708,57 @@
           "title": "Object merge (deep)",
           "source": "merge(\n\t{\n\t\t\"parent1\": {\n\t\t\t\"child1\": 1,\n\t\t\t\"child2\": 2\n\t\t},\n\t\t\"parent2\": {\n\t\t\t\"child3\": 3\n\t\t}\n\t},\n\t{\n\t\t\"parent1\": {\n\t\t\t\"child2\": 4,\n\t\t\t\"child5\": 5\n\t\t}\n\t},\n\tdeep: true\n)",
           "return": "{\"parent1\":{\"child1\":1,\"child2\":4,\"child5\":5},\"parent2\":{\"child3\":3}}"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "object_from_array",
+      "name": "object_from_array",
+      "category": "Object",
+      "description": "Iterate over either one array of arrays or a pair of arrays and create an object out of all the key-value pairs contained in them.\nWith one array of arrays, any entries with no value use `null` instead.\nAny keys that are `null` skip the  corresponding value.\n\nIf a single parameter is given, it must contain an array of all the input arrays.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "values",
+          "description": "The first array of elements, or the array of input arrays if no other parameter is present.",
+          "required": true,
+          "type": [
+            "array"
+          ]
+        },
+        {
+          "name": "keys",
+          "description": "The second array of elements. If not present, the first parameter must contain all the arrays.",
+          "required": false,
+          "type": [
+            "array"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`values` and `keys` must be arrays.",
+        "If `keys` is not present, `values` must contain only arrays."
+      ],
+      "return": {
+        "types": [
+          "object"
+        ],
+        "rules": [
+          "`object_from_array` is considered fallible in the following cases: if any of the parameters is not an array; if only the `value` parameter is present and it is not an array of arrays; or if any of the keys are not either a string or `null`."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Create an object from one array",
+          "source": "object_from_array([[\"one\", 1], [null, 2], [\"two\", 3]])",
+          "return": "{\"one\":1,\"two\":3}"
+        },
+        {
+          "title": "Create an object from separate key and value arrays",
+          "source": "object_from_array([1, 2, 3], keys: [\"one\", null, \"two\"])",
+          "return": "{\"one\":1,\"two\":3}"
         }
       ],
       "deprecated": false,
@@ -6473,6 +7054,124 @@
       "pure": true
     },
     {
+      "anchor": "parse_bytes",
+      "name": "parse_bytes",
+      "category": "Parse",
+      "description": "Parses the `value` into a human-readable bytes format specified by `unit` and `base`.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string of the duration with either binary or SI unit.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "unit",
+          "description": "The output units for the byte.",
+          "required": true,
+          "type": [
+            "string"
+          ],
+          "enum": {
+            "B": "Bytes",
+            "kiB": "Kilobytes (1024 bytes)",
+            "MiB": "Megabytes (1024 ** 2 bytes)",
+            "GiB": "Gigabytes (1024 ** 3 bytes)",
+            "TiB": "Terabytes (1024 gigabytes)",
+            "PiB": "Petabytes (1024 ** 2 gigabytes)",
+            "EiB": "Exabytes (1024 ** 3 gigabytes)",
+            "kB": "Kilobytes (1 thousand bytes in SI)",
+            "MB": "Megabytes (1 million bytes in SI)",
+            "GB": "Gigabytes (1 billion bytes in SI)",
+            "TB": "Terabytes (1 thousand gigabytes in SI)",
+            "PB": "Petabytes (1 million gigabytes in SI)",
+            "EB": "Exabytes (1 billion gigabytes in SI)"
+          }
+        },
+        {
+          "name": "base",
+          "description": "The base for the byte, either 2 or 10.",
+          "required": false,
+          "type": [
+            "string"
+          ],
+          "default": 2
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` is not a properly formatted bytes."
+      ],
+      "return": {
+        "types": [
+          "float"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Parse bytes (kilobytes)",
+          "source": "parse_bytes!(\"1024KiB\", unit: \"MiB\")",
+          "return": "1"
+        },
+        {
+          "title": "Parse bytes in SI unit (terabytes)",
+          "source": "parse_bytes!(\"4TB\", unit: \"MB\", base: \"10\")",
+          "return": "4000000"
+        },
+        {
+          "title": "Parse bytes in ambiguous unit (gigabytes)",
+          "source": "parse_bytes!(\"1GB\", unit: \"B\", base: \"2\")",
+          "return": "1073741824"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "parse_cbor",
+      "name": "parse_cbor",
+      "category": "Parse",
+      "description": "Parses the `value` as [CBOR](https://cbor.io).",
+      "notices": [
+        "Only CBOR types are returned."
+      ],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The CBOR payload to parse.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` is not a valid CBOR-formatted payload."
+      ],
+      "return": {
+        "types": [
+          "boolean",
+          "integer",
+          "float",
+          "string",
+          "object",
+          "array",
+          "null"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Parse CBOR",
+          "source": "parse_cbor!(decode_base64!(\"oWVmaWVsZGV2YWx1ZQ==\"))",
+          "return": "{\"field\":\"value\"}"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "parse_cef",
       "name": "parse_cef",
       "category": "Parse",
@@ -6630,6 +7329,50 @@
       "pure": true
     },
     {
+      "anchor": "parse_dnstap",
+      "name": "parse_dnstap",
+      "category": "Parse",
+      "description": "Parses the `value` as base64 encoded DNSTAP data.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The base64 encoded representation of the DNSTAP data to parse.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "lowercase_hostnames",
+          "description": "Whether to turn all hostnames found in resulting data lowercase, for consistency.",
+          "required": false,
+          "default": false,
+          "type": [
+            "boolean"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` is not a valid base64 encoded string.",
+        "dnstap parsing failed for `value`"
+      ],
+      "return": {
+        "types": [
+          "object"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Parse dnstap query message",
+          "source": "parse_dnstap!(\"ChVqYW1lcy1WaXJ0dWFsLU1hY2hpbmUSC0JJTkQgOS4xNi4zGgBy5wEIAxACGAEiEAAAAAAAAAAAAAAAAAAAAAAqECABBQJwlAAAAAAAAAAAADAw8+0CODVA7+zq9wVNMU3WNlI2kwIAAAABAAAAAAABCWZhY2Vib29rMQNjb20AAAEAAQAAKQIAAACAAAAMAAoACOxjCAG9zVgzWgUDY29tAGAAbQAAAAByZLM4AAAAAQAAAAAAAQJoNQdleGFtcGxlA2NvbQAABgABAAApBNABAUAAADkADwA1AAlubyBTRVAgbWF0Y2hpbmcgdGhlIERTIGZvdW5kIGZvciBkbnNzZWMtZmFpbGVkLm9yZy54AQ==\")",
+          "return": "{\"dataType\":\"Message\",\"dataTypeId\":1,\"extraInfo\":\"\",\"messageType\":\"ResolverQuery\",\"messageTypeId\":3,\"queryZone\":\"com.\",\"requestData\":{\"fullRcode\":0,\"header\":{\"aa\":false,\"ad\":false,\"anCount\":0,\"arCount\":1,\"cd\":false,\"id\":37634,\"nsCount\":0,\"opcode\":0,\"qdCount\":1,\"qr\":0,\"ra\":false,\"rcode\":0,\"rd\":false,\"tc\":false},\"opt\":{\"do\":true,\"ednsVersion\":0,\"extendedRcode\":0,\"options\":[{\"optCode\":10,\"optName\":\"Cookie\",\"optValue\":\"7GMIAb3NWDM=\"}],\"udpPayloadSize\":512},\"question\":[{\"class\":\"IN\",\"domainName\":\"facebook1.com.\",\"questionType\":\"A\",\"questionTypeId\":1}],\"rcodeName\":\"NoError\"},\"responseData\":{\"fullRcode\":16,\"header\":{\"aa\":false,\"ad\":false,\"anCount\":0,\"arCount\":1,\"cd\":false,\"id\":45880,\"nsCount\":0,\"opcode\":0,\"qdCount\":1,\"qr\":0,\"ra\":false,\"rcode\":16,\"rd\":false,\"tc\":false},\"opt\":{\"do\":false,\"ednsVersion\":1,\"extendedRcode\":1,\"ede\":[{\"extraText\":\"no SEP matching the DS found for dnssec-failed.org.\",\"infoCode\":9,\"purpose\":\"DNSKEY Missing\"}],\"udpPayloadSize\":1232},\"question\":[{\"class\":\"IN\",\"domainName\":\"h5.example.com.\",\"questionType\":\"SOA\",\"questionTypeId\":6}],\"rcodeName\":\"BADSIG\"},\"responseAddress\":\"2001:502:7094::30\",\"responsePort\":53,\"serverId\":\"james-Virtual-Machine\",\"serverVersion\":\"BIND 9.16.3\",\"socketFamily\":\"INET6\",\"socketProtocol\":\"UDP\",\"sourceAddress\":\"::\",\"sourcePort\":46835,\"time\":1593489007920014000,\"timePrecision\":\"ns\",\"timestamp\":\"2020-06-30T03:50:07.920014129Z\"}"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "parse_duration",
       "name": "parse_duration",
       "category": "Parse",
@@ -6678,6 +7421,11 @@
           "title": "Parse duration (milliseconds)",
           "source": "parse_duration!(\"1005ms\", unit: \"s\")",
           "return": "1.005"
+        },
+        {
+          "title": "Parse multiple durations (seconds & milliseconds)",
+          "source": "parse_duration!(\"1s 1ms\", unit: \"ms\")",
+          "return": "1001"
         }
       ],
       "deprecated": false,
@@ -6861,10 +7609,21 @@
           "type": [
             "object"
           ]
+        },
+        {
+          "name": "alias_sources",
+          "description": "Path to the file containing aliases in a JSON format.",
+          "required": false,
+          "type": [
+            "string"
+          ]
         }
       ],
       "internal_failure_reasons": [
-        "`value` fails to parse using the provided `pattern`."
+        "`value` fails to parse using the provided `pattern`.",
+        "`patterns` is not an array.",
+        "`aliases` is not an object.",
+        "`alias_sources` is not a string or doesn't point to a valid file."
       ],
       "return": {
         "types": [
@@ -6876,6 +7635,51 @@
           "title": "Parse using multiple Grok patterns",
           "source": "parse_groks!(\n\t\"2020-10-02T23:22:12.223222Z info Hello world\",\n\tpatterns: [\n\t\t\"%{common_prefix} %{_status} %{_message}\",\n\t\t\"%{common_prefix} %{_message}\",\n\t],\n\taliases: {\n\t\t\"common_prefix\": \"%{_timestamp} %{_loglevel}\",\n\t\t\"_timestamp\": \"%{TIMESTAMP_ISO8601:timestamp}\",\n\t\t\"_loglevel\": \"%{LOGLEVEL:level}\",\n\t\t\"_status\": \"%{POSINT:status}\",\n\t\t\"_message\": \"%{GREEDYDATA:message}\"\n\t}\n)",
           "return": "{\"timestamp\":\"2020-10-02T23:22:12.223222Z\",\"level\":\"info\",\"message\":\"Hello world\"}"
+        },
+        {
+          "title": "Parse using aliases from file",
+          "source": "parse_groks!(\n  \"username=foo\",\n  patterns: [ \"%{PATTERN_A}\" ],\n  alias_sources: [ \"path/to/aliases.json\" ]\n)\n# aliases.json contents:\n# {\n#   \"PATTERN_A\": \"%{PATTERN_B}\",\n#   \"PATTERN_B\": \"username=%{USERNAME:username}\"\n# }",
+          "skip_test": true
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "parse_influxdb",
+      "name": "parse_influxdb",
+      "category": "Parse",
+      "description": "Parses the `value` as an [InfluxDB line protocol](https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/)\nstring, producing a list of Vector-compatible metrics.",
+      "notices": [
+        "This function will return a log event with the shape of a Vector-compatible metric, but not a metric event itself.\nYou will likely want to pipe the output of this function through a `log_to_metric` transform with the option `all_metrics`\nset to `true` to convert the metric-shaped log events to metric events so _real_ metrics are produced.",
+        "The only metric type that is produced is a `gauge`. Each metric name is prefixed with the `measurement` field, followed\nby an underscore (`_`), and then the `field key` field.",
+        "`string` is the only type that is not supported as a field value,\ndue to limitations of Vector's metric model."
+      ],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The string representation of the InfluxDB line protocol to parse.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`value` is not a valid InfluxDB line protocol string.",
+        "field set contains a field value of type `string`.",
+        "field set contains a `NaN` field value."
+      ],
+      "return": {
+        "types": [
+          "array"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Parse InfluxDB line protocol",
+          "source": "parse_influxdb!(\"cpu,host=A,region=us-west usage_system=64i,usage_user=10u,temperature=50.5,on=true,sleep=false 1590488773254420000\")",
+          "return": "[{\"name\":\"cpu_usage_system\",\"tags\":{\"host\":\"A\",\"region\":\"us-west\"},\"timestamp\":\"2020-05-26T10:26:13.254420Z\",\"kind\":\"absolute\",\"gauge\":{\"value\":64}},{\"name\":\"cpu_usage_user\",\"tags\":{\"host\":\"A\",\"region\":\"us-west\"},\"timestamp\":\"2020-05-26T10:26:13.254420Z\",\"kind\":\"absolute\",\"gauge\":{\"value\":10}},{\"name\":\"cpu_temperature\",\"tags\":{\"host\":\"A\",\"region\":\"us-west\"},\"timestamp\":\"2020-05-26T10:26:13.254420Z\",\"kind\":\"absolute\",\"gauge\":{\"value\":50.5}},{\"name\":\"cpu_on\",\"tags\":{\"host\":\"A\",\"region\":\"us-west\"},\"timestamp\":\"2020-05-26T10:26:13.254420Z\",\"kind\":\"absolute\",\"gauge\":{\"value\":1}},{\"name\":\"cpu_sleep\",\"tags\":{\"host\":\"A\",\"region\":\"us-west\"},\"timestamp\":\"2020-05-26T10:26:13.254420Z\",\"kind\":\"absolute\",\"gauge\":{\"value\":0}}]"
         }
       ],
       "deprecated": false,
@@ -6967,6 +7771,15 @@
           "required": false,
           "type": [
             "integer"
+          ]
+        },
+        {
+          "name": "lossy",
+          "description": "Whether to parse the JSON in a lossy manner. Replaces invalid UTF-8 characters\nwith the Unicode character `�` (U+FFFD) if set to true, otherwise returns an error\nif there are any invalid UTF-8 characters present.",
+          "required": false,
+          "default": true,
+          "type": [
+            "boolean"
           ]
         }
       ],
@@ -7095,7 +7908,6 @@
       "name": "parse_klog",
       "category": "Parse",
       "description": "Parses the `value` using the [klog](https://github.com/kubernetes/klog) format used by Kubernetes components.",
-      "notices": [],
       "arguments": [
         {
           "name": "value",
@@ -7114,11 +7926,14 @@
           "object"
         ]
       },
+      "notices": [
+        "This function resolves the year for messages. If the current month is January and the provided month is December, it sets the year to the previous year. Otherwise, it sets the year to the current year."
+      ],
       "examples": [
         {
           "title": "Parse using klog",
           "source": "parse_klog!(\"I0505 17:59:40.692994   28133 klog.go:70] hello from klog\")",
-          "return": "{\"file\":\"klog.go\",\"id\":28133,\"level\":\"info\",\"line\":70,\"message\":\"hello from klog\",\"timestamp\":\"2024-05-05T17:59:40.692994Z\"}"
+          "return": "{\"file\":\"klog.go\",\"id\":28133,\"level\":\"info\",\"line\":70,\"message\":\"hello from klog\",\"timestamp\":\"2025-05-05T17:59:40.692994Z\"}"
         }
       ],
       "deprecated": false,
@@ -7153,8 +7968,8 @@
       "examples": [
         {
           "title": "Parse Linux authorization event",
-          "source": "parse_linux_authorization!(\n\ts'Mar 23 2023 01:49:58 localhost sshd[1111]: Accepted publickey for eng from 10.1.1.1 port 8888 ssh2: RSA SHA256:foobar'\n)",
-          "return": "{\"appname\":\"sshd\",\"hostname\":\"localhost\",\"message\":\"Accepted publickey for eng from 10.1.1.1 port 8888 ssh2: RSA SHA256:foobar\",\"procid\":1111,\"timestamp\":\"2023-03-23T01:49:58Z\"}"
+          "source": "parse_linux_authorization!(\n\ts'Mar 23 01:49:58 localhost sshd[1111]: Accepted publickey for eng from 10.1.1.1 port 8888 ssh2: RSA SHA256:foobar'\n)",
+          "return": "{\"appname\":\"sshd\",\"hostname\":\"localhost\",\"message\":\"Accepted publickey for eng from 10.1.1.1 port 8888 ssh2: RSA SHA256:foobar\",\"procid\":1111,\"timestamp\":\"2025-03-23T01:49:58Z\"}"
         }
       ],
       "deprecated": false,
@@ -7198,7 +8013,7 @@
       "anchor": "parse_nginx_log",
       "name": "parse_nginx_log",
       "category": "Parse",
-      "description": "Parses Nginx access and error log lines. Lines can be in [`combined`](https://nginx.org/en/docs/http/ngx_http_log_module.html),\n[`ingress_upstreaminfo`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/log-format/), or [`error`](https://github.com/nginx/nginx/blob/branches/stable-1.18/src/core/ngx_log.c#L102) format.",
+      "description": "\tParses Nginx access and error log lines. Lines can be in [`combined`](https://nginx.org/en/docs/http/ngx_http_log_module.html),\n\t[`ingress_upstreaminfo`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/log-format/), [`main`](https://hg.nginx.org/pkg-oss/file/tip/debian/debian/nginx.conf) or [`error`](https://github.com/nginx/nginx/blob/branches/stable-1.18/src/core/ngx_log.c#L102) format.",
       "notices": [
         "Missing information in the log message may be indicated by `-`. These fields are omitted in the result.",
         "In case of `ingress_upstreaminfo` format the following fields may be safely omitted in the log message: `remote_addr`, `remote_user`, `http_referer`, `http_user_agent`, `proxy_alternative_upstream_name`, `upstream_addr`, `upstream_response_length`, `upstream_response_time`, `upstream_status`."
@@ -7228,7 +8043,8 @@
           "enum": {
             "combined": "Nginx combined format",
             "error": "Default Nginx error format",
-            "ingress_upstreaminfo": "Provides detailed upstream information (Nginx Ingress Controller)"
+            "ingress_upstreaminfo": "Provides detailed upstream information (Nginx Ingress Controller)",
+            "main": "Nginx main format used by Docker images"
           },
           "type": [
             "string"
@@ -7260,6 +8076,11 @@
           "title": "Parse via Nginx log format (ingress_upstreaminfo)",
           "source": "parse_nginx_log!(\n    s'0.0.0.0 - bob [18/Mar/2023:15:00:00 +0000] \"GET /some/path HTTP/2.0\" 200 12312 \"https://10.0.0.1/some/referer\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36\" 462 0.050 [some-upstream-service-9000] [some-other-upstream-5000] 10.0.50.80:9000 19437 0.049 200 752178adb17130b291aefd8c386279e7',\n    \"ingress_upstreaminfo\"\n)",
           "return": "{\"body_bytes_size\":12312,\"http_referer\":\"https://10.0.0.1/some/referer\",\"http_user_agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36\",\"proxy_alternative_upstream_name\":\"some-other-upstream-5000\",\"proxy_upstream_name\":\"some-upstream-service-9000\",\"remote_addr\":\"0.0.0.0\",\"remote_user\":\"bob\",\"req_id\":\"752178adb17130b291aefd8c386279e7\",\"request\":\"GET /some/path HTTP/2.0\",\"request_length\":462,\"request_time\":0.05,\"status\":200,\"timestamp\":\"2023-03-18T15:00:00Z\",\"upstream_addr\":\"10.0.50.80:9000\",\"upstream_response_length\":19437,\"upstream_response_time\":0.049,\"upstream_status\":200}"
+        },
+        {
+          "title": "Parse via Nginx log format (main)",
+          "source": "parse_nginx_log!(\n    s'172.24.0.3 - alice [31/Dec/2024:17:32:06 +0000] \"GET / HTTP/1.1\" 200 615 \"https://domain.tld/path\" \"curl/8.11.1\" \"1.2.3.4, 10.10.1.1\"',\n    \"main\"\n)",
+          "return": "{\"body_bytes_size\":615,\"http_referer\":\"https://domain.tld/path\",\"http_user_agent\":\"curl/8.11.1\",\"http_x_forwarded_for\":\"1.2.3.4, 10.10.1.1\",\"remote_addr\":\"172.24.0.3\",\"remote_user\":\"alice\",\"request\":\"GET / HTTP/1.1\",\"status\":200,\"timestamp\":\"2024-12-31T17:32:06Z\"}"
         }
       ],
       "deprecated": false,
@@ -7458,7 +8279,8 @@
         }
       ],
       "internal_failure_reasons": [
-        "`value` fails to parse using the provided `pattern`."
+        "`value` is not a string.",
+        "`pattern` is not a regex."
       ],
       "return": {
         "types": [
@@ -7574,10 +8396,19 @@
           "type": [
             "string"
           ]
+        },
+        {
+          "name": "timezone",
+          "description": "The [TZ database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format. By default, this function parses the timestamp by global [`timezone` option](/docs/reference/configuration//global-options#timezone).\nThis argument overwrites the setting and is useful for parsing timestamps without a specified timezone, such as `16/10/2019 12:00:00`.",
+          "required": false,
+          "type": [
+            "string"
+          ]
         }
       ],
       "internal_failure_reasons": [
-        "`value` fails to parse using the provided `format`."
+        "`value` fails to parse using the provided `format`.",
+        "`value` fails to parse using the provided `timezone`."
       ],
       "return": {
         "types": [
@@ -7589,6 +8420,11 @@
           "title": "Parse timestamp",
           "source": "parse_timestamp!(\"10-Oct-2020 16:00+00:00\", format: \"%v %R %:z\")",
           "return": "\"2020-10-10T16:00:00Z\""
+        },
+        {
+          "title": "Parse timestamp with timezone",
+          "source": "parse_timestamp!(\"16/10/2019 12:00:00\", format: \"%d/%m/%Y %H:%M:%S\", timezone: \"Asia/Taipei\")",
+          "return": "\"2019-10-16T04:00:00Z\""
         }
       ],
       "deprecated": false,

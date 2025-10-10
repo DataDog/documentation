@@ -10,19 +10,19 @@ Otros recursos de Google Cloud (CloudSQL, Google App Engine, Pub/Sub y otros) no
 
 ## Exclusión de métricas de Google Cloud
 
-Utiliza el [cuadro de integración de Google Cloud][1] para controlar tu recopilación de métricas. Ve a la pestaña **Configuración** y selecciona un proyecto o añade uno nuevo. Cada proyecto se controla desde **Optionally Limit Metrics Collection to hosts with tag** (Opcionalmente limitar la recopilación de métricas a hosts con etiqueta). Limita las métricas por [etiqueta de host][2]:
+Usa el [cuadro de integración de Google Cloud][1] para controlar la recopilación de métricas. Dirígete a la pestaña **Configuration** (Configuración) y selecciona un proyecto o añade uno nuevo. Cada proyecto se controla en **Optionally Limit Metrics Collection to hosts with tag** (Limitar opcionalmente la recopilación de métricas a los hosts con etiqueta). Limita las métricas por [etiqueta (tag) de host][2]:
 
 {{< img src="account_management/billing/google_cloud_metric_filter.png" alt="La página de Google Cloud en Datadog, en la pestaña General, con la opción de limitar el conjunto de métricas resaltada" >}}
 
-Al añadir límites a proyectos de Google Cloud existentes en el cuadro de integración, las instancias previamente detectadas podrían permanecer en la [lista de infraestructuras][3] hasta dos horas. Durante el periodo de transición, las instancias de CME muestran un estado de `???`. Esto no cuenta a efectos de facturación.
+Al añadir límites a los proyectos de Google Cloud existentes dentro del cuadro de integración, las instancias detectadas anteriormente podrían permanecer en la [lista de infraestructuras][3] hasta 2 horas. Durante el período de transición, las instancias de GCE muestran el estado `???`. Esto no cuenta para tu facturación.
 
-Los hosts con un Agent en ejecución siguen mostrándose y se incluyen en la facturación. El uso de la opción de límite solo es aplicable a las de GCE sin ningún Agent en ejecución.
+Aún se muestran los hosts con un Agent en ejecución y se incluyen en la facturación. El uso de la opción de límite solo se aplica a instancias de GCE sin un Agent en ejecución.
 
 ## Solucionar problemas
 
-Si tienes alguna pregunta técnica, ponte en contacto con el [equipo de asistencia de Datadog][4].
+Si tienes preguntas técnicas, ponte en contacto con el [servicio de asistencia de Datadog][4].
 
-Si tienes alguna pregunta sobre facturación, ponte en contacto con tu [asesor de clientes][5].
+Si tienes preguntas sobre la facturación, ponte en contacto con tu [asesor de clientes][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [2]: /es/getting_started/tagging/using_tags/#integrations

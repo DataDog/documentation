@@ -11,7 +11,6 @@ assets:
     metrics:
       check:
       - azure.vm.percentage_cpu
-      - azure.vm.processor_total_pct_user_time
       metadata_path: metadata.csv
       prefix: azure.vm
     service_checks:
@@ -101,15 +100,15 @@ Para silenciar los monitores en VM de Azure apagadas o finalizadas, marca la cas
 
 Para crear monitores de métricas que se puedan silenciar automáticamente, asegúrate de activarlos en función de la etiqueta (tag) `host`. Los monitores de métricas que no incluyen la etiqueta `host` en el grupo monitorizado no se silencian automáticamente.
 
-{{< img src="integrations/azure_vm/azure_vm_automute2.png" alt="Un monitor que alerta sobre una consulta que incluye la etiqueta de host" >}}
+![Una alerta de monitor en una consulta que incluye etiqueta de host][5]
 
 **Nota:** Si no estás ejecutando el Datadog Agent, la etiqueta `host` en su VM de Azure es un GUID. Usa la variable de plantilla de mensaje `{{host.name_tag}}` en la respuesta de notificación para incluir también el nombre legible para humanos.
 
 ## Datos recopilados
 
-<div class="alert alert-warning">La métrica <code>azure.vm.status</code>está obsoleta y ya no se completa para las organizaciones de Datadog recién creadas. Para los usuarios existentes, esta métrica se deshabilitó el 1 de junio de 2023. .
+<div class="alert alert-danger">La métrica <code>azure.vm.status</code> está obsoleta y no se completa para organizaciones de Datadog recientemente creadas. Para los usuarios existentes, esta métrica se desactivó el 1 de junio de 2023. Usa la métrica <code>azure.vm.count</code> y sus valores de etiqueta <code>estado</code> asociados para determinar el estado de tus máquinas virtuales.
 
-Ante cualquier duda, ponte en contacto con el <a href="https://docs.datadoghq.com/help/" target="_blank">equipo de asistencia de Datadog</a>.</div>
+Para cualquier pregunta, contacta con el <a href="https://docs.datadoghq.com/help/" target="_blank">soporte de Datadog</a>.</div>
 
 ### Métricas
 {{< get-metrics-from-git "azure_vm" >}}
@@ -125,22 +124,23 @@ La integración Azure Virtual Machine no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 ## Referencias adicionales
 
-- [Cómo monitorizar VM de Microsoft Azure][7]
-- [Cómo recopilar métricas de Azure][8]
-- [Monitorizar VM de Azure con Datadog][9]
-- [Hacer una estrategia para tu migración de Azure para cargas de trabajo de SQL con Datadog][10]
+- [Cómo monitorizar máquinas virtuales de Microsoft Azure][8]
+- [Cómo recopilar métricas de Azure][9]
+- [Monitorizar máquinas virtuales de Azure mediante Datadog][10]
+- [Estrategiza tu migración de Azure para cargas de trabajo SQL con Datadog][11]
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://docs.datadoghq.com/es/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [3]: https://docs.microsoft.com/en-us/rest/api/resourcehealth/
 [4]: https://app.datadoghq.com/monitors/downtimes
-[5]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
-[6]: https://docs.datadoghq.com/es/help/
-[7]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
-[8]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
-[9]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog
-[10]: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
+[5]: images/azure_vm_automute2.png
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
+[7]: https://docs.datadoghq.com/es/help/
+[8]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
+[9]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
+[10]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog
+[11]: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/

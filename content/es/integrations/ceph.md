@@ -1,81 +1,23 @@
 ---
 app_id: ceph
-app_uuid: 485341cc-3dee-4136-b147-dda76171701a
-assets:
-  dashboards:
-    ceph: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: ceph.write_bytes_sec
-      metadata_path: metadata.csv
-      prefix: ceph.
-    process_signatures:
-    - ceph-mon
-    - ceph-mgr
-    - ceph-osd
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 138
-    source_type_name: Ceph
-  saved_views:
-    ceph_processes: assets/saved_views/ceph_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - data stores
 - os & system
 - log collection
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ceph
-integration_id: ceph
-integration_title: Ceph
-integration_version: 4.0.0
-is_public: true
-manifest_version: 2.0.0
-name: ceph
-public_title: Ceph
-short_description: Recopila métricas de rendimiento por grupo y monitoriza el estado
-  general del clúster.
+description: Recopila métricas de rendimiento por grupo y monitoriza el estado general del clúster.
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-ceph-datadog
+  tag: blog
+  text: 'Monitorizar Ceph: del estado del nodo al rendimiento de todo el clúster'
+integration_version: 4.1.0
+media: []
 supported_os:
 - linux
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Category::Almacenes de datos
-  - Category::Sistema operativo y sistema
-  - Category::Recopilación de logs
-  - Offering::integración
-  configuration: README.md#Configuración
-  description: Recopila métricas de rendimiento por grupo y monitoriza el estado general
-    del clúster.
-  media: []
-  overview: README.md#Información general
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-ceph-datadog
-  support: README.md#Soporte
-  title: Ceph
+title: Ceph
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
-![dashboard de Ceph][1]
+![Dashboard de Ceph](https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png)
 
 ## Información general
 
@@ -89,38 +31,37 @@ Habilita la integración de Ceph con Datadog para:
 
 ### Instalación
 
-El check de Ceph está incluido en el paquete del [Datadog Agent][2], por lo que no necesitas instalar nada más en tus servidores Ceph.
+El check de Ceph está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest), por lo que no necesitas instalar nada más en tus servidores Ceph.
 
 ### Configuración
 
-Edita el archivo `ceph.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][3].
-Para ver todas las opciones de configuración disponibles, consulta el [ceph.d/conf.yaml de ejemplo][4]:
+Edita el archivo `ceph.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory). Consulta el [ejemplo de ceph.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/ceph/datadog_checks/ceph/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
 ```yaml
 init_config:
 
 instances:
-  - ceph_cmd: /path/to/your/ceph # la opción predeterminada es /usr/bin/ceph
-    use_sudo: true # solo si el binario ceph necesita sudo en los nodos
+  - ceph_cmd: /path/to/your/ceph # default is /usr/bin/ceph
+    use_sudo: true # only if the ceph binary needs sudo on your nodes
 ```
 
 Si has habilitado `use_sudo`, añade una línea como la siguiente a tu archivo `sudoers`:
 
 ```text
-dd-agent ALL=(ALL) NOPASSWD:/ruta/a/tu/ceph
+dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 ```
 
 #### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones 6.0 o posteriores del Agent_
 
-1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Luego, edita `ceph.d/conf.yaml` al quitar los comentarios de las líneas `logs` de la parte inferior. Actualiza la `path` de los logs con la ruta correcta a tus archivos de logs de Ceph.
+1. Luego, edita `ceph.d/conf.yaml` al quitar los comentarios de las líneas `logs` de la parte inferior. Actualiza la `path` de los logs con la ruta correcta a tus archivos de logs de Ceph.
 
    ```yaml
    logs:
@@ -130,17 +71,46 @@ _Disponible para la versión 6.0 o posteriores del Agent_
        service: "<APPLICATION_NAME>"
    ```
 
-3. [Reinicia el Agent][5].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][6] y busca `ceph` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `ceph` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ceph" >}}
 
+| | |
+| --- | --- |
+| **ceph.aggregate_pct_used** <br>(gauge) | Métrica de uso de la capacidad global<br>_Se muestra como porcentaje_. |
+| **ceph.apply_latency_ms** <br>(gauge) | Tiempo que se tarda en enviar una actualización a los discos<br>_Se muestra como milisegundo_ |
+| **ceph.class_pct_used** <br>(gauge) | Porcentaje por clase de almacenamiento bruto utilizado<br>_Se muestra como porcentaje_ |
+| **ceph.commit_latency_ms** <br>(gauge) | Tiempo que se tarda en confirmar una operación en el diario<br>_Se muestra como milisegundo_ |
+| **ceph.misplaced_objects** <br>(gauge) | Número de objetos extraviados<br>_Se muestra como elemento_ |
+| **ceph.misplaced_total** <br>(gauge) | Número total de objetos si hay objetos extraviados<br>_Se muestra como elemento_ |
+| **ceph.num_full_osds** <br>(gauge) | Número de OSD completas<br>_Se muestra como elemento_ |
+| **ceph.num_in_osds** <br>(gauge) | Número de daemons de almacenamiento participantes<br>_Se muestra como elemento_ |
+| **ceph.num_mons** <br>(gauge) | Número de daemons de monitor<br>_Se muestra como elemento_ |
+| **ceph.num_near_full_osds** <br>(gauge) | Número de OSD casi completas<br>_Se muestra como elemento_ |
+| **ceph.num_objects** <br>(gauge) | Recuento de objetos de un grupo determinado<br>_Se muestra como elemento_ |
+| **ceph.num_osds** <br>(gauge) | Número de daemons de almacenamiento conocidos<br>_Se muestra como elemento_ |
+| **ceph.num_pgs** <br>(gauge) | Número de grupos de colocación disponibles<br>_Se muestra como elemento_ |
+| **ceph.num_pools** <br>(gauge) | Número de grupos<br>_Se muestra como elemento_ |
+| **ceph.num_up_osds** <br>(gauge) | Número de daemons de almacenamiento en línea<br>_Se muestra como elemento_ |
+| **ceph.op_per_sec** <br>(gauge) | Operaciones de E/S por segundo para un grupo determinado<br>_Se muestra como operación_ |
+| **ceph.osd.pct_used** <br>(gauge) | Porcentaje utilizado de OSD completas/casi completas<br>_Se muestra como porcentaje_. |
+| **ceph.pgstate.active_clean** <br>(gauge) | Número de grupos de colocación activos+limpios<br>_Se muestra como elemento_ |
+| **ceph.read_bytes** <br>(gauge) | Bytes de lectura por grupo<br>_Se muestra como byte_ |
+| **ceph.read_bytes_sec** <br>(gauge) | Bytes/segundo que se leen<br>_Se muestra como byte_ |
+| **ceph.read_op_per_sec** <br>(gauge) | Operaciones de lectura por grupo/segundo<br>_Se muestra como operación_ |
+| **ceph.recovery_bytes_per_sec** <br>(gauge) | Tasa de bytes recuperados<br>_Se muestra como byte_ |
+| **ceph.recovery_keys_per_sec** <br>(gauge) | Tasa de claves recuperadas<br>_Se muestra como elemento_ |
+| **ceph.recovery_objects_per_sec** <br>(gauge) | Tasa de objetos recuperados<br>_Se muestra como elemento_ |
+| **ceph.total_objects** <br>(gauge) | Recuento de objetos del almacén de objetos subyacente. \[v\<=3 only\]<br>_Se muestra como elemento_ |
+| **ceph.write_bytes** <br>(gauge) | Bytes de escritura por grupo<br>_Se muestra como byte_ |
+| **ceph.write_bytes_sec** <br>(gauge) | Bytes/segundo que se escriben<br>_Se muestra como byte_ |
+| **ceph.write_op_per_sec** <br>(gauge) | Operaciones de escritura por grupo/segundo<br>_Se muestra como operación_ |
 
 **Nota**: Si estás ejecutando Ceph Luminous o posterior, la métrica `ceph.osd.pct_used` no está incluida.
 
@@ -149,24 +119,125 @@ _Disponible para la versión 6.0 o posteriores del Agent_
 El check de Ceph no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ceph" >}}
 
+**ceph.overall_status**
+
+Devuelve `OK` si el estado de tu clúster Ceph es HEALTH_OK, `WARNING` si es HEALTH_WARNING, `CRITICAL` en caso contrario.
+
+_Estados: ok, warning, critical_
+
+**ceph.osd_down**
+
+Devuelve `OK` si no tienes ningún OSD caído. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.osd_orphan**
+
+Devuelve `OK` si no tienes ningún OSD huérfano. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.osd_full**
+
+Devuelve `OK` si tus OSD no están completas. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.osd_nearfull**
+
+Devuelve `OK` si tus OSD no están casi completas. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pool_full**
+
+Devuelve `OK` si tus grupos no han alcanzado su cuota. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pool_near_full**
+
+Devuelve `OK` si tus grupos no están cerca de alcanzar su cuota. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pg_availability**
+
+Devuelve `OK` si hay plena disponibilidad de datos. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pg_degraded**
+
+Devuelve `OK` si hay redundancia total de datos. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pg_degraded_full**
+
+Devuelve `OK` si hay espacio suficiente en el cluster para la redundancia de datos. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pg_damaged**
+
+Devuelve `OK` si no hay incoherencias tras la depuración de datos. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pg_not_scrubbed**
+
+Devuelve `OK` si los PG fueron depurados recientemente. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.pg_not_deep_scrubbed**
+
+Devuelve `OK` si los PG fueron enteramente depurados recientemente. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.cache_pool_near_full**
+
+Devuelve `OK` si los grupos de caché no están casi llenos. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.too_few_pgs**
+
+Devuelve `OK` si el número de PG supera el umbral mínimo. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.too_many_pgs**
+
+Devuelve `OK` si el número de PG está por debajo del umbral máximo. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.object_unfound**
+
+Devuelve `OK` si se pueden encontrar todos los objetos. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.request_slow**
+
+Devuelve `OK` si las solicitudes tardan un tiempo normal en procesarse. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
+
+**ceph.request_stuck**
+
+Devuelve `OK` si las solicitudes tardan un tiempo normal en procesarse. En caso contrario, devuelve `WARNING` si la gravedad es `HEALTH_WARN`, si no devuelve `CRITICAL`.
+
+_Estados: ok, warning, critical_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-- [Monitor Ceph: desde el estado del nodo hasta el rendimiento de todo el clúster][10]
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/ceph/datadog_checks/ceph/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/ceph/metadata.csv
-[8]: https://github.com/DataDog/integrations-core/blob/master/ceph/assets/service_checks.json
-[9]: https://docs.datadoghq.com/es/help/
-[10]: https://www.datadoghq.com/blog/monitor-ceph-datadog
+- [Monitorizar Ceph: del estado del nodo al rendimiento de todo el clúster](https://www.datadoghq.com/blog/monitor-ceph-datadog)

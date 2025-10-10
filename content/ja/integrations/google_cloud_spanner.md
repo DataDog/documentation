@@ -57,7 +57,7 @@ Google Cloud Spanner のログは Google Cloud Logging で収集され、Cloud P
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_spanner" >}}
+{{< get-metrics-from-git "google-cloud-spanner" >}}
 
 
 ### イベント

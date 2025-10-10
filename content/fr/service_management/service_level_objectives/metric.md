@@ -1,7 +1,7 @@
 ---
 aliases:
-- /monitors/service_level_objectives/event/
-- /monitors/service_level_objectives/metric/
+- /fr/monitors/service_level_objectives/event/
+- /fr/monitors/service_level_objectives/metric/
 description: Utiliser des métriques pour définir un Service Level Objective
 further_reading:
 - link: /metrics/

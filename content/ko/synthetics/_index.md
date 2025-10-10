@@ -25,9 +25,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
   tag: 블로그
   text: Datadog 신서틱(Synthetic) 모니터링을 사용해 API 테스트 범위  개선
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: 학습 센터
-  text: Synthetic 테스트 소개
+  text: 'Datadog 학습 센터: 신서틱 브라우저 테스팅 시작하기'
 - link: /synthetics/guide/
   tag: 설명서
   text: Synthetic 모니터링 가이드
@@ -68,7 +68,7 @@ API 테스트를 사용하면 [단일][4] 또는 [연쇄][5] 요청을 실행하
 
 [Synthetic 모바일 애플리케이션 테스트][21]를 사용하여 고객이 다양한 기기 유형에서 iOS 및 Android 애플리케이션을 엔드투엔드 방식으로 경험하는 방식을 모니터링하세요.
 
-{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Synthetic Mobile Test의 레코딩 워크플로 예시" style="width:100%;">}}
+{{< img src="synthetics/mobile_app_tests.png" alt="신서틱 모바일 테스트의 레코딩 워크플로우 예시" style="width:100%;">}}
 
 ## 프라이빗 위치 사용하기
 

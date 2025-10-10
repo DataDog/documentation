@@ -2,7 +2,7 @@
 core_product:
 - dashboards
 related_terms:
-- slo
+- objetivo de nivel de servicio (SLO)
 - dashboard
 title: widget de slo
 ---

@@ -83,6 +83,49 @@ Visualiza una única [medida][5] (o un recuento único de valores de [faceta][5]
 
 El geomapa de RUM Analytics muestra el percentil 75 del **Largest Contentful Paint** durante el último día.
 
+## Embudos
+
+El análisis del embudo te ayuda a realizar un seguimiento de las tasas de conversión en los flujos de trabajo clave para identificar y abordar los cuellos de botella en los recorridos integrales de los usuarios. En concreto, puedes:
+
+- Comprobar si los clientes abandonan el sitio web en un momento determinado debido a un rendimiento deficiente
+- Rastrear la evolución de la tasa de conversión a medida que se incorporan nuevas funciones
+- Medir cómo afecta a la tasa de abandono la adición de nuevos pasos a un flujo de trabajo
+
+**Nota**: La tasa de conversión es el número de visitantes de tu sitio web que completaron un objetivo deseado (una conversión) del número total de visitantes.
+
+### Construir un embudo
+
+Para construir un embudo, elige tu vista o acción inicial y haz clic en el icono más para construir pasos adicionales. También puedes utilizar la función de arrastrar y soltar para desplazar los pasos.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtrar el mapa de red con una búsqueda" video=true >}}
+
+### Próximos pasos sugeridos
+
+Cuando tengas un punto de partida en mente, pero no estés seguro de lo que tus usuarios hicieron después, despliega el panel **Quickly add a step** (Añadir rápidamente un paso) (disponible en un cajón a la derecha) para ver los siguientes pasos sugeridos. Después de introducir los pasos, este panel carga automáticamente las cinco **vistas** y **acciones** más comunes que los usuarios suelen ver y realizar a continuación. Esto te permite construir embudos más rápido sabiendo los caminos que tus usuarios están tomando en secuencia.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Crear un embudo" style="width:90%;" >}}
+
+**Nota**: Cualquier acción o vista que ocurra entre dos pasos de un embudo no afecta a la tasa de conversión paso a paso o global. Mientras el paso 1 y el paso 2 ocurran en el orden correcto en una sesión dada al menos una vez, cuentan como una única sesión convertida.
+
+### Filtrado
+
+Al construir su embudo, puedes añadir atributos [predeterminados][2] (núcleo, dispositivo, sistema operativo, geolocalización y usuario) y atributos [específicos de la sesión][3] para analizar los datos con más detalle. Haz clic en el botón **Add Filter** (Añadir filtro) para ver la lista completa de atributos disponibles.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Usa atributos para filtrar información al al construir un embudo" style="width:80%;" >}}
+
+### Analizar tu embudo
+
+Después de crear un embudo, haz clic en **View Funnel Insights** (Ver información del embudo) para abrir el panel **Funnel Analysis** (Análisis del embudo), que ofrece datos correlacionados sobre el rendimiento y las tendencias de comportamiento de los usuarios. Esta información te ayuda a comprender la tasa de conversión.
+
+- Para las tendencias generales, puedes ver la tasa de conversión de extremo a extremo para todo tu flujo de trabajo y también ver los pasos individuales para escalonar las tasas de conversión a abandono. Si quieres saber cómo se ve la conversión de alguien en comparación con el abandono de alguien, puedes ver una [Repetición de la sesión][4] para cada caso.
+
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-analyzing-funnel.jpg" alt="Uso del panel de información del embudo para revisar las tendencias de rendimiento y comportamiento del usuario" style="width:90%;" >}}
+
+- La sección **Performance** (Rendimiento) te permite comprender si un rendimiento deficiente podría haber afectado a la conversión. Puedes ver un gráfico con una correlación entre el tiempo de carga de esa página y la tasa de conversión y también ver si se produce algún problema (detectado por el [Rastreo de errores][5]) en esa página.
+- La sección **User Behavior** (Comportamiento del usuario) te permite comparar el recuento medio de frustración (a partir de [señales de frustración][6]) con la tasa de conversión, y analizar con más detalle las señales de frustración detectadas a partir de acciones individuales. Junto a esta sección, hay un gráfico que muestra la conversión y la tasa de abandono para países específicos, lo que te permite comprender si la región geográfica desempeña un papel en la conversión de un usuario. 
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="Sección de comportamiento del usuario con el análisis de embudo" style="width:90%;" >}}
+
 ## Gráficos circulares
 Un gráfico circular te ayuda a organizar y mostrar los datos como un porcentaje del total. Resulta útil cuando se compara la relación entre diferentes dimensiones como servicios, usuarios, hosts, países, etc. dentro de tus datos de logs.
 
@@ -101,6 +144,7 @@ Para el resto de las opciones de visualización, haz clic en el gráfico y luego
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/real_user_monitoring/explorer/
 [2]: /es/real_user_monitoring/explorer/events/

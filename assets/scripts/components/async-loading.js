@@ -85,10 +85,13 @@ function loadPage(newUrl) {
                 hitsContainer.classList.add("hits-container", "d-none");
                 const hits = document.createElement("div");
                 hits.setAttribute("id", "hits");
+                const hitsPartners = document.createElement("div");
+                hitsPartners.setAttribute("id", "hits-partners");
 
                 searchBoxContainer.append(searchBox);
                 searchBoxContainer.append(hitsContainer);
                 hitsContainer.append(hits);
+                hitsContainer.append(hitsPartners);
 
                 if(sidenavSearchbarMount) {
                   sidenavSearchbarMount.append(searchBoxContainer);

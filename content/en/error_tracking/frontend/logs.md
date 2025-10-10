@@ -123,7 +123,7 @@ If you have not setup the Datadog Kotlin Multiplatform Logs SDK yet, follow the 
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]: /logs/log_collection/kotlin-multiplatform/#setup
+[2]: /logs/log_collection/kotlin_multiplatform/#setup
 [3]: https://github.com/Datadog/dd-sdk-kotlin-multiplatform
 
 {{% /tab %}}

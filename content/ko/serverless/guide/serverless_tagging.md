@@ -15,7 +15,7 @@ title: 서버리스 태깅
 
 AWS Lambda 함수에 적용되는 태그는 자동으로 메트릭, 트레이스 및 로그를 필터링하고 그룹화할 수 있는 새로운 범위가 됩니다.
 
-태그는 Datadog 플랫폼 전체에서 일관성을 유지할 때 특히 강력합니다. 다음 태그를 최우선으로 지원합니다: `env`,`service`,`version`.
+태그는 Datadog 플랫폼 전체에서 일관성을 유지할 때 특히 강력합니다. 다음 태그를 최우선으로 지원합니다: `env`,`service`,`version`.
 
 이러한 태그를 사용하면 다음과 같이 할 수 있습니다:
 
@@ -26,7 +26,10 @@ AWS Lambda 함수에 적용되는 태그는 자동으로 메트릭, 트레이스
 
 서버리스 애플리케이션에 `env`,`service`,`version` 태그를 지정하려면 [통합 서비스 태깅 설명서][1]를 참조하세요.
 
-**참고**: Lambda 함수 이름은 [Datadog의 태깅 규칙][2]을 준수해야 합니다. 이렇게 하면 함수의 모든 트레이스, 로그, 메트릭을 원활하게 연결할 수 있습니다.
+**참고**: 
+
+- Lambda 함수 이름은 [Datadog 태깅 규칙][2]을 준수해야 합니다. 이렇게 하면 함수의 모든 트레이스, 로그, 메트릭을 원활하게 연결할 수 있습니다.
+- [향상된 Lambda 메트릭][5]은 AWS Lambda 함수에 적용된 태그를 선택하지 않습니다. 대신 `DD_TAGS` 환경 변수를 사용하세요.
 
 ### env 태그
 
@@ -59,5 +62,6 @@ AWS Lambda 함수에 적용되는 태그는 자동으로 메트릭, 트레이스
 
 [1]: /ko/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [2]: /ko/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
-[3]: /ko/tracing/deployment_tracking/
-[4]: /ko/tracing/visualization/services_map/
+[3]: /ko/tracing/services/deployment_tracking/
+[4]: /ko/tracing/services/services_map/
+[5]: /ko/serverless/aws_lambda/metrics#enhanced-lambda-metrics

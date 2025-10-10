@@ -4,8 +4,8 @@ title: Instrumentación de aplicaciones serverless de Node.js mediante el Datado
 
 ## Información general
 
-<div class="alert alert-warning">
-Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes que la funcionalidad de Lambda lista para usar, utiliza esta guía para mantener tu instancia.
+<div class="alert alert-danger">
+Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 
 ## Requisitos previos
@@ -44,7 +44,7 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 Para rellenar los parámetros, haz lo siguiente:
 - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tu función de Lambda.
 - Reemplaza `<aws_region>` por el nombre de la región de AWS.
-- Reemplaza `<layer_version>` por la versión de la biblioteca Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="node" >}}`.
+- Reemplaza `<layer_version>` por la versión de la librería Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="node" >}}`.
 - Reemplaza `<forwarder_arn>` por el nombre de recurso de Amazon (ARN) del Forwarder (consulta la [documentación del Forwarder][2]).
 
 Por ejemplo:
@@ -65,7 +65,7 @@ Obtén más información y parámetros adicionales en la [documentación de la C
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-El complemento [Datadog Serverless Plugin][1] añade la biblioteca Lambda de Datadog automáticamente a tus funciones mediante capas y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+El complemento [Datadog Serverless Plugin][1] añade la librería Lambda de Datadog automáticamente a tus funciones mediante capas y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][6] de tu función antes de poder instalar el Datadog Serverless Plugin.
 
@@ -98,7 +98,7 @@ Para instalar y configurar el Datadog Serverless Plugin, sigue estos pasos:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la biblioteca Lambda de Datadog a tus funciones mediante las capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la librería Lambda de Datadog a tus funciones mediante capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 ### Instalar
 
@@ -125,8 +125,8 @@ Transform:
       stackName: !Ref "AWS::StackName"
       nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<FORWARDER_ARN>"
-      service: "<SERVICE>" # Opcional
-      env: "<ENV>" # Opcional
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
 ```
 
 Para rellenar los parámetros, haz lo siguiente:
@@ -146,38 +146,38 @@ Obtén más información y parámetros adicionales en la [documentación de la m
 
 Las [Construcciones del Datadog CDK][1] configuran automáticamente la ingesta de métricas, trazas y logs de tus aplicaciones serverless mediante las siguientes acciones:
 
-- La instalación y configuración de la biblioteca Lambda de Datadog para tus funciones de Lambda de Python y Node.js.
+- La instalación y configuración de la librería Lambda de Datadog para tus funciones de Lambda de Python y Node.js.
 - La habilitación de la recopilación de trazas y métricas personalizadas de tus funciones de Lambda.
 - La gestión de las suscripciones del Datadog Forwarder a los grupos de logs de tus funciones de Lambda.
 
 ### Instalar
 
-Ejecuta el siguiente comando de Yarn o NPM en tu proyecto del CDK para instalar la biblioteca de Construcciones del Datadog CDK:
+Ejecuta el siguiente comando de Yarn o NPM en tu proyecto del CDK para instalar la librería de Construcciones del Datadog CDK:
 
 ```sh
 #Yarn
-yarn add --dev datadog-cdk-constructs
+yarn add --dev datadog-cdk-constructs-v2
 
 #NPM
-npm install datadog-cdk-constructs --save-dev
+npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
 ### Instrumentar
 
-Para instrumentar la función, importa el módulo `datadog-cdk-construct` en tu aplicación de AWS CDK y añade las siguientes configuraciones (este ejemplo es de TypeScript, pero el uso en otros lenguajes es similar):
+Para instrumentar la función, importa el módulo `datadog-cdk-construct` en tu aplicación del AWS CDK y añade las siguientes configuraciones (este ejemplo es de TypeScript, pero el uso en otros lenguajes es similar):
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
-import { Datadog } from "datadog-cdk-constructs";
+import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const datadog = new Datadog(this, "Datadog", {
+    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      service: "<SERVICE>",  // Opcional
-      env: "<ENV>",  // Opcional
+      service: "<SERVICE>",  // Optional
+      env: "<ENV>",  // Optional
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
@@ -194,7 +194,7 @@ Si configuraste tu función de Lambda para utilizar la firma de código, debes a
 Obtén más información y parámetros adicionales en la [página de NPM del Datadog CDK][1].
 
 
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs-v2
 [2]: https://docs.datadoghq.com/es/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
@@ -202,7 +202,7 @@ Obtén más información y parámetros adicionales en la [página de NPM del Dat
 
 ### Instalar
 
-Si vas a desplegar tu función de Lambda como una imagen de contenedor, no puedes utilizar la biblioteca Lambda de Datadog como una capa. En su lugar, debes instalar la biblioteca Lambda de Datadog como una dependencia de tu función dentro de la imagen. Si quieres utilizar el rastreo de Datadog, también debes instalar `dd-trace`.
+Si vas a desplegar tu función de Lambda como una imagen de contenedor, no puedes utilizar la librería Lambda de Datadog como una capa. En su lugar, debes instalar la librería Lambda de Datadog como una dependencia de tu función dentro de la imagen. Si quieres utilizar el rastreo de Datadog, también debes instalar `dd-trace`.
 
 **NPM**:
 
@@ -244,7 +244,7 @@ Suscribe la función de Lambda del Datadog Forwarder a cada uno de los grupos de
 
 ### Instalar
 
-La biblioteca Lambda de Datadog puede importarse como una capa o como un paquete de JavaScript.
+La librería Lambda de Datadog puede importarse como una capa o como un paquete de JavaScript.
 
 La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la versión de la capa. Por ejemplo, la versión 0.5.0 de datadog-lambda-js coincide con el contenido de la versión 5 de la capa.
 
@@ -253,11 +253,12 @@ La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la v
 [Configura las capas][8] de tu función de Lambda con el ARN en el siguiente formato.
 
 ```
-# Para las regiones us, us3, us5, eu y ap1
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# Para las regiones us-gov
+# For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
+
 ```
 
 Las opciones disponibles en `RUNTIME` son {{< latest-lambda-layer-version layer="node-versions" >}}. La última `VERSION` es `{{< latest-lambda-layer-version layer="node" >}}`. Por ejemplo:
@@ -266,7 +267,7 @@ Las opciones disponibles en `RUNTIME` son {{< latest-lambda-layer-version layer=
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][2] de tu función antes de poder añadir la biblioteca Lambda de Datadog como una capa.
+Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][2] de tu función antes de poder añadir la librería Lambda de Datadog como una capa.
 
 #### Como un paquete
 
@@ -331,39 +332,39 @@ Si quieres enviar una métrica o un tramo (span) personalizados, consulta el sig
 const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// envía un tramo personalizado con el nombre "sleep"
+// submit a custom span named "sleep"
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  // añade etiquetas personalizadas al tramo de la función de Lambda,
-  // NO funciona si el rastreo de X-Ray está habilitado
+  // add custom tags to the lambda function span,
+  // does NOT work when X-Ray tracing is enabled
   const span = tracer.scope().active();
   span.setTag('customer_id', '123456');
 
   await sleep(100);
 
-  // envía un tramo personalizado
+  // submit a custom span
   const sandwich = tracer.trace('hello.world', () => {
     console.log('Hello, World!');
   });
 
-  // envía una métrica personalizada
+  // submit a custom metric
   sendDistributionMetric(
-    "coffee_house.order_value", // el nombre de la métrica
-    12.45, // el valor de la métrica
-    "product:latte", // una etiqueta
-    "order:online", // otra etiqueta
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    "product:latte", // tag
+    "order:online", // another tag
   );
 
-  // envía una métrica personalizada con una marca de tiempo
+  // submit a custom metric with timestamp
   sendDistributionMetricWithDate(
-    "coffee_house.order_value", // el nombre de la métrica
-    12.45, // el valor de la métrica
-    new Date(Date.now()), // la fecha, debe estar dentro de los últimos 20 minutos
-    "product:latte", // una etiqueta
-    "order:online", // otra etiqueta
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    new Date(Date.now()), // date, must be within last 20 mins
+    "product:latte", // tag
+    "order:online", // another tag
   );
 
   const response = {

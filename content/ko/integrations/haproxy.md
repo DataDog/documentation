@@ -28,17 +28,17 @@ assets:
     source_type_id: 38
     source_type_name: HAProxy
   monitors:
-    '[HAProxy] Anomalous frontend request rate for host {{host.name}}': assets/monitors/request_rate.json
-    '[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_5xx.json
-    '[HAProxy] Anomalous number of frontend 5xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_4xx.json
-    '[HAProxy] Backend queue time went above 500ms for host: {{host.name}}': assets/monitors/backend_queue_time.json
-    '[HAProxy] Backend response time is above 500ms for host: {{host.name}}': assets/monitors/backend_rtime.json
-    '[HAProxy] High amount of backend session usage for host: {{host.name}}': assets/monitors/backend_sessions.json
-    '[HAProxy] High amount of frontend session usage for host: {{host.name}}': assets/monitors/frontend_sessions.json
-    '[HAProxy] High number of backend denied responses for host: {{host.name}}': assets/monitors/backend_dreq.json
-    '[HAProxy] High number of frontend denied requests for host: {{host.name}}': assets/monitors/frontend_dreq.json
-    '[HAProxy] Number of backend connection failures for host: {{host.name}} is above normal.': assets/monitors/backend_econ.json
-    '[HAProxy] Number of client-side request error for {{host.name}} is above normal.': assets/monitors/frontend_ereq.json
+    Backend queue time is high: assets/monitors/backend_queue_time.json
+    Backend sessions usage is high: assets/monitors/backend_sessions.json
+    Frontend request rate is anomalous: assets/monitors/request_rate.json
+    Frontend sessions usage is high: assets/monitors/frontend_sessions.json
+    Number of backend connection failures is high: assets/monitors/backend_econ.json
+    Number of client-side request error is high: assets/monitors/frontend_ereq.json
+    Number of denied response is high: assets/monitors/backend_dreq.json
+    Number of frontend 4xx HTTP responses is high: assets/monitors/frontend_4xx.json
+    Number of frontend 5xx HTTP responses is high: assets/monitors/frontend_5xx.json
+    Number of frontend denied requests is high: assets/monitors/frontend_dreq.json
+    Response time is high: assets/monitors/backend_rtime.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -61,7 +61,7 @@ draft: false
 git_integration_title: haproxy
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 5.2.2
+integration_version: 7.1.0
 is_public: true
 manifest_version: 2.0.0
 name: haproxy

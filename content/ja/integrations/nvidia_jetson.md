@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - iot
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
 display_on_public_website: true
@@ -59,14 +59,14 @@ tile:
 
 ## 概要
 
-このチェックは [Nvidia Jetson][1] ボードを監視します。
+このチェックは [NVIDIA Jetson][1] ボードを監視します。
 `tegrastats` から収集されたメトリクスを報告します。
 
 ## セットアップ
 
 ### インストール
 
-Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
+NVIDIA Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
 ### 構成
@@ -97,11 +97,11 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ### サービスチェック
 
-Nvidia Jetson インテグレーションには、サービスのチェック機能は含まれません。
+NVIDIA Jetson インテグレーションには、サービスのチェック機能は含まれません。
 
 ### イベント
 
-Nvidia Jetson インテグレーションには、イベントは含まれません。
+NVIDIA Jetson インテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 

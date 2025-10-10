@@ -15,7 +15,7 @@
 {{ with $filename }}
 <p class="code-filename my-0">{{ . }}</p>
 {{ end }}
-{{ if $collapsible }}
+{{ if eq $collapsible "true" }}
 <div class="js-code-block-visibility-toggle">
 <div class="chevron chevron-down d-none"></div>
 <div class="chevron chevron-up"></div>

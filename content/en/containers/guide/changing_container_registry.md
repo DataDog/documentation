@@ -1,10 +1,11 @@
 ---
 title: Changing Your Container Registry
+description: Switch between Datadog container image registries for different deployment environments and requirements
 aliases:
  - /agent/guide/changing_container_registry
 ---
 
-Datadog publishes container images in Google's gcr.io, AWS' ECR, and on Docker Hub:
+Datadog publishes container images in Google's gcr.io, Azure ACR, AWS' ECR, and on Docker Hub:
 
 {{% container-images-table %}}
 

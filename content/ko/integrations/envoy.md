@@ -22,7 +22,7 @@ assets:
     source_type_id: 10012
     source_type_name: Envoy
   monitors:
-    Envoy - connected state: assets/monitors/connected_state.json
+    Envoy instance disconnected from control plane: assets/monitors/connected_state.json
   saved_views:
     envoy_4xx: assets/saved_views/envoy_4xx.json
     envoy_5xx: assets/saved_views/envoy_5xx.json
@@ -45,7 +45,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 3.5.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: envoy

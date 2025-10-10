@@ -9,7 +9,7 @@ description: "Learn how to control span ingestion"
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
 
-Collect traces from your intrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
+Collect traces from your instrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
 
 With APM, both the **ingestion** and the **retention** of traces are fully customizable.
 
@@ -34,7 +34,7 @@ You can generate metrics from ingested spans, and use those custom metrics for q
 
 ## Trace retention
 
-After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][5] that have been set on your account. The Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
+After spans are ingested, [Retention Filters][5] determine which individual spans are indexed and stored for 15 days. The Datadog Intelligent Retention Filter automatically indexes a representative selection of spans to help you monitor application health. You can also define custom retention filters to index additional spans that are important for your organization's goals.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Retention Filters Page" >}}
 

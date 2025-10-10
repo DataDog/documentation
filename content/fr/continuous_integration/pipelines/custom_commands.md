@@ -8,10 +8,6 @@ further_reading:
 title: Ajouter des commandes personnalisées à des traces de pipeline
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Les commandes personnalisées vous permettent de tracer des commandes individuelles dans vos pipelines de CI. Vous pouvez ainsi mesurer la durée de votre commande, sans tenir compte des actions de configuration ou de nettoyage que la tâche peut comporter (par exemple, le temps passé à télécharger des images Docker ou à attendre un nœud disponible dans une infrastructure basée sur Kubernetes). Ces spans s'affichent dans la trace du pipeline :
 
 {{< img src="ci/ci-custom-spans.png" alt="Détails d'un pipeline avec des commandes personnalisées" style="width:100%;">}}
@@ -52,7 +48,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Paramètres de configuration

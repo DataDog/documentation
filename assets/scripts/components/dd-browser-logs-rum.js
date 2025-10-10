@@ -5,23 +5,23 @@ const lang = document.documentElement.lang || 'en';
 
 const Config = getConfig(env);
 
-const generateRumDeviceId = () => Math.floor(Math.random() * (2 ** 53)).toString(36)
+const generateRumDeviceId = () => Math.floor(Math.random() * 2 ** 53).toString(36);
 
 const getRumDeviceId = () => {
-    const matches = /_dd_device_id=(\w+)/.exec(document.cookie)
-    return matches ? matches[1] : generateRumDeviceId()
-}
+    const matches = /_dd_device_id=(\w+)/.exec(document.cookie);
+    return matches ? matches[1] : generateRumDeviceId();
+};
 
 // Temporary solution attributing website page views w. dd app user
 const setRumDeviceId = () => {
-    const deviceId = getRumDeviceId()
-    const domain = window.location.hostname.split('.').slice(-2).join('.')
-    const maxAge = 60 * 60 * 24 * 365
+    const deviceId = getRumDeviceId();
+    const domain = window.location.hostname.split('.').slice(-2).join('.');
+    const maxAge = 60 * 60 * 24 * 365;
 
-    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure; Partitioned`
+    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure; Partitioned`;
 
-    window.DD_RUM.setUserProperty('device_id', deviceId)
-}
+    window.DD_RUM.setUserProperty('device_id', deviceId);
+};
 
 if (window.DD_RUM) {
     if (env === 'preview' || env === 'live') {
@@ -49,7 +49,7 @@ if (window.DD_RUM) {
         }
 
         if (env === 'live') {
-            setRumDeviceId()
+            setRumDeviceId();
         }
     }
 }
@@ -77,3 +77,34 @@ if (window.DD_LOGS) {
     // Locally log to console
     window.DD_LOGS.logger.setHandler(Config.loggingHandler);
 }
+
+const handleCdocsCustomRumAction = () => {
+    const filterSelectorMenu = document.querySelector('.filter-selector-menu');
+
+    if (filterSelectorMenu) {
+        const filterButtons = filterSelectorMenu.querySelectorAll('.cdoc-filter__option');
+
+        for (const button of filterButtons) {
+            button.addEventListener('click', (e) => {
+                window.DD_RUM.addAction('cdocs_filter_button_clicked', {
+                    filter: e.target.dataset.filterId,
+                    option: e.target.dataset.optionId
+                });
+            });
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.clientFiltersManager) {
+        handleCdocsCustomRumAction();
+        clientFiltersManager.registerHook('afterRerender', handleCdocsCustomRumAction);
+
+        clientFiltersManager.registerHook('afterReveal', () => {
+            window.DD_RUM.addAction('cdocs_page_revealed', {});
+        });
+        clientFiltersManager.registerHook('afterRerender', () => {
+            window.DD_RUM.addAction('cdocs_page_rerendered', {});
+        });
+    }
+});

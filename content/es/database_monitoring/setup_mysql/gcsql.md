@@ -26,63 +26,53 @@ Versiones de MySQL compatibles
 Versiones compatibles del Agent 
 : 7.36.1+
 
-Impacto del rendimiento
-: el valor predeterminado de configuración del Agent para la Monitorización de base de datos es conservador, pero puedes ajustar parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas para que se adapten mejor a tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de consultas en la base de datos y menos del uno por ciento de la CPU. <br/><br/>
-La Monitorización de base de datos se ejecuta como integración sobre el Agent base ([ver valores de referencia][1]).
+Requisitos de RAM
+: Database Monitoring de Datadog requiere como mínimo 16 GB de RAM en la instancia SQL para funcionar correctamente.
+
+Impacto en el rendimiento
+: El valor predeterminado de configuración del Agent para la monitorización de bases de datos es conservador, pero puedes ajustar parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas para que se adapten mejor a tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de consultas en la base de datos y menos del uno por ciento de la CPU. <br/><br/>
+La monitorización de bases de datos se ejecuta como integración junto con el Agent de base ([consulta los valores de referencia][1]).
 
 Proxies, equilibradores de carga y agrupadores de conexiones
 : el Datadog Agent debe conectarse directamente al host que está siendo monitorizado, preferiblemente a través de la dirección IP que brinda la consola de Google Cloud. El Agent no debe conectarse a la base de datos a través de un proxy, equilibrador de carga o agrupador de conexiones. Si el Agent se conecta a diferentes hosts mientras se está ejecutando (como en el caso de la conmutación por error, equilibrio de carga, etc.), el Agent calcula la diferencia en las estadísticas entre dos hosts, produciendo métricas inexactas.
 
 Consideraciones sobre la seguridad de los datos
-: para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar su seguridad, consulta [Información confidencial][2].
+: Para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar su seguridad, consulta [Información confidencial][2].
 
-## Configuración de parámetros de MySQL
+## Configurar los parámetros de MySQL
 
 
 Configura lo siguiente en los [Indicadores de base de datos][3] y, a continuación, **reinicia el servidor** para que los ajustes surtan efecto:
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
+{{% tab "MySQL 5.7 o posterior" %}}
 | Parámetro | Valor | Descripción |
 | --- | --- | --- |
-| `performance_schema` | `on` | Obligatorio. Activa el [Esquema de rendimiento][9]. |
-| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Aumenta el tamaño del texto del compendio SQL en las tablas `events_statements_*`. Si se deja el valor por defecto, las consultas más largas que `1024` caracteres no se recopilarán. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
-{{% tab "MySQL ≥ 5.7" %}}
-| Parámetro | Valor | Descripción |
-| --- | --- | --- |
-| `performance_schema` | `on` | Obligatorio. Activa el [Esquema de rendimiento][9]. |
-| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Aumenta el tamaño del texto de compendio SQL en las tablas `events_statements_*`. Si se deja el valor por defecto, las consultas más largas que `1024` caracteres no se recopilarán. |
+| `performance_schema` | `on` | Obligatorio. Habilita el [esquema de rendimiento][9]. |
+| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Aumenta el tamaño del texto de síntesis de SQL en las tablas de `events_statements_*`. Si se deja el valor predeterminado, las consultas con más de `1024` caracteres no se recopilarán. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| Parámetro | Valor | Descripción |
+| --- | --- | --- |
+| `performance_schema` | `on` | Obligatorio. Habilita el [esquema de rendimiento][9]. |
+| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Aumenta el tamaño del texto de síntesis de SQL en las tablas de `events_statements_*`. Si se deja el valor predeterminado, las consultas con más de `1024` caracteres no se recopilarán. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
+
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
-El Datadog Agent requiere acceso de solo lectura a la base de datos para poder recopilar estadísticas y realizar consultas.
+El Datadog Agent requiere acceso de sólo lectura a la base de datos para poder recopilar estadísticas y realizar consultas.
 
-Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host con `datadog@'%'`. Puedes restringir al usuario `datadog` para que solo pueda iniciar sesión desde el host local usando `datadog@'localhost'`. Consulta la [documentación de MySQL][4] para obtener más información.
+Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host que use `datadog@'%'`. Puedes restringir al usuario `datadog` para que solo pueda iniciar sesión desde el host local mediante `datadog@'localhost'`. Para obtener más información, consulta la [documentación de MySQL][11].
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Crea el usuario `datadog` y concédele permisos básicos:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Crea el usuario `datadog` y concédele permisos básicos:
@@ -96,6 +86,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Crea el usuario `datadog` y concédele permisos básicos:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Crea el siguiente esquema:
@@ -103,10 +105,9 @@ Crea el siguiente esquema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Crea el procedimiento `explain_statement` para que el Agent pueda recopilar los planes de explicación:
+Crea el procedimiento `explain_statement` para que el Agent pueda recopilar planes de explicación:
 
 ```sql
 DELIMITER $$
@@ -121,7 +122,7 @@ END $$
 DELIMITER ;
 ```
 
-Además, crea este procedimiento **en cada esquema** del que desees recopilar planes de explicación. Sustituye `<YOUR_SCHEMA>` por el esquema de tu base de datos:
+Además, crea este procedimiento **en cada esquema** del que quieras recopilar planes de explicación. Sustituye `<YOUR_SCHEMA>` por el esquema de tu base de datos:
 
 ```sql
 DELIMITER $$
@@ -137,6 +138,14 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Para recopilar las métricas de índice, concede al usuario `datadog` un privilegio adicional:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+A partir del Agent v7.65, la aplicación del Datadog Agent puede recopilar información de esquemas de bases de datos MySQL. Consulta la sección [Recopilación de esquemas][12] a continuación para obtener más información sobre cómo conceder los permisos del Agent para esta recopilación.
+
 ### Consumidores de configuración en tiempo de ejecución
 Datadog recomienda crear el siguiente procedimiento para que el Agent pueda habilitar los consumidores de `performance_schema.events_*` en tiempo de ejecución.
 
@@ -151,6 +160,9 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
+
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
 
 ### Verificación
 
@@ -168,7 +180,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
 
-## Instalación y configuración del Agent
+## Instala y configura el Agent
 
 Para monitorizar hosts de Cloud SQL, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, solo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][4].
 
@@ -190,17 +202,15 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>' # desde el paso CREATE USER (crear usuario) anterior
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    # Después de añadir tu proyecto e instancia, configura la integración de Datadog Google Cloud (GCP) para extraer datos de nube adicionales, como CPU, Memoria, etc.
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-**Nota**: Escribe tu contraseña entre comillas simples en caso de que haya un carácter especial.
-
-Para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`, consulta las [especificaciones para la integración de MySQL][3].
+Para obtener información adicional sobre la configuración de los campos `project_id` e `instance_id`, consulta la [sección GCP del archivo `mysql.conf.yaml`][4].
 
 [Reinicia el Agent][3] para empezar a enviar métricas de MySQL a Datadog.
 
@@ -208,12 +218,14 @@ Para obtener información adicional sobre la configuración de los campos `proje
 [1]: /es/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /es/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 Para configurar el Agent de la Monitorización de base de datos que se ejecuta en un contenedor de Docker, como en Google Cloud Run, define las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en tu contenedor del Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que las etiquetas (labels) de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
 
 ### Línea de comandos
 
@@ -241,7 +253,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-### Archivo Docker
+### Archivo de Docker
 
 Las etiquetas también pueden especificarse en un `Dockerfile`, por lo que puedes crear y desplegar un Agent personalizado sin cambiar la configuración de tu infraestructura:
 
@@ -250,45 +262,43 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-Para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`, consulta las [especificaciones para la integración de MySQL][2].
-
-Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliza el [paquete de gestión de secretos][3] del Agent y declara la contraseña utilizando la sintaxis `ENC[]` o consulta la [documentación de variables de plantilla de Autodiscovery][2] para saber cómo pasar la contraseña como una variable de entorno.
+Para obtener información adicional sobre la configuración de los campos `project_id` e `instance_id`, consulta la [sección GCP del archivo `mysql.conf.yaml`][2].
 
 
 [1]: /es/agent/docker/integrations/?tab=docker
-[2]: /es/agent/faq/template_variables/
-[3]: /es/agent/configuration/secrets-management
+[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Si tienes un clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para la Monitorización de base de datos.
+Si tienes un clúster Kubernetes, utiliza el [Datadog Cluster Agent][1] para la monitorización de bases de datos.
 
-Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster de Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
+Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
 
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster de Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
+Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
 
 1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
 2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: <INSTANCE_ADDRESS>
-                port: 3306
-                username: datadog
-                password: '<UNIQUEPASSWORD>'
-                gcp:
-                  project_id: '<PROJECT_ID>'
-                  instance_id: '<INSTANCE_ID>'
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              gcp:
+                project_id: '<PROJECT_ID>'
+                instance_id: '<INSTANCE_ID>'
 
     clusterChecksRunner:
       enabled: true
@@ -300,35 +310,35 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```
 
 <div class="alert alert-info">
-Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>helm install</code>.
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /es/getting_started/site
 [3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
-### Configurar con archivos integrados
+### Configuración con archivos integrados
 
-Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/postgres.yaml`:
+Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/mysql.yaml`:
 
 ```yaml
-cluster_check: true  # Asegúrate de incluir este indicador
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
-    # Después de añadir tu proyecto e instancia, configura la integración de Datadog Google Cloud (GCP) para extraer datos de nube adicionales, como CPU, Memoria, etc.
+    password: 'ENC[datadog_user_database_password]'
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-### Configurar con anotaciones de servicios de Kubernetes
+### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
 ```yaml
 apiVersion: v1
@@ -348,7 +358,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -363,25 +373,24 @@ spec:
     name: mysql
 ```
 
-Para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`, consulta las [especificaciones para la integración de MySQL][4].
+Para obtener información adicional sobre la configuración de los campos `project_id` e `instance_id`, consulta la [sección GCP del archivo `mysql.conf.yaml`][4].
 
 El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de SQL Server.
-
-Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliza el [paquete de gestión de secretos][4] del Agent y declara la contraseña utilizando la sintaxis `ENC[]`.
 
 [1]: /es/agent/cluster_agent
 [2]: /es/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /es/agent/configuration/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Validar
+### Validación
 
-[Ejecuta el subcomando de estado del Agent][5] y busca `mysql` en la sección Checks. Si no, visita la página [Bases de datos][6] para empezar.
+[Ejecuta el subcomando de estado del Agent][5] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][6] para empezar.
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-mysql-agent-config-examples %}}
 
 ## Instalar la integración Cloud SQL
@@ -407,3 +416,6 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [7]: /es/integrations/google_cloudsql
 [8]: /es/database_monitoring/troubleshooting/?tab=mysql
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[10]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[11]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[12]: /es/database_monitoring/setup_mysql/gcsql?tab=mysql57#collecting-schemas

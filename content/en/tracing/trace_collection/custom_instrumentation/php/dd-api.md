@@ -34,10 +34,10 @@ If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to you
 ```php
 <?php
 class Server {
-    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
+    #[\DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
     static function process($arg) {}
 
-    #[DDTrace\Trace]
+    #[\DDTrace\Trace]
     function get() {
       Foo::simple(1);
     }
@@ -54,7 +54,7 @@ You can provide the following arguments:
 - `$recurse`: Whether recursive calls shall be traced.
 - `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If a namespace is present, you <strong>must</strong> use the fully qualified name of the attribute <code>#[\DDTrace\Trace]</code>. Alternatively, you can import the namespace with <code>use DDTrace\Trace;</code> and use <code>#[Trace]</code>.
 </div>
 
@@ -195,7 +195,7 @@ if (!extension_loaded('ddtrace')) {
 );
    {{< /code-block >}}
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
    When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
    </div>
 
@@ -344,7 +344,7 @@ if ($span) {
 
 ## Adding tags
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
 </div>
 

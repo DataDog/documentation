@@ -2,11 +2,11 @@
 aliases:
 - /es/logs/faq/partner_log_integration
 - /es/developers/integrations/log_integration/
-description: Aprende a crear una integración de logs en Datadog.
+description: Aprende a crear un pipeline de integración de logs en Datadog.
 further_reading:
 - link: /integrations/#cat-log-collection
   tag: Documentación
-  text: Consultar las integraciones de logs de Datadog existentes
+  text: Consultar las integraciones de logs en Datadog existentes
 - link: /logs/explorer/facets/
   tag: Documentación
   text: Obtener más información sobre facetas de logs
@@ -15,143 +15,196 @@ further_reading:
   text: Obtener más información sobre el Explorador de logs
 - link: /logs/log_configuration/pipelines/
   tag: Documentación
-  text: Obtener más información sobre pipelines de logs
-title: Crear un pipeline de logs
+  text: Obtener más información sobre pipelines de log
+title: Crear un pipeline de log
 ---
 ## Información general
 
-Esta página guía a los socios tecnológicos en la creación de un pipeline de logs. Se requiere un pipeline de logs si tu integración envía logs. 
+Esta página guía a los socios tecnológicos en la creación de un pipeline de log. Se requiere un pipeline de log, si tu integración envía logs a Datadog.
 
-## Integraciones de logs
 
-Utiliza el [endpoint HTTP de consumo de logs][1] para enviar logs a Datadog.
+Al desarrollar tu integración para enviar logs a Datadog, sigue estas instrucciones para garantizar una mejor experiencia a tus usuarios.
 
-## Proceso de desarrollo
+## Prácticas recomendadas
 
-### Directrices
+Antes de crear un pipeline de log, ten en cuenta las siguientes instrucciones y prácticas recomendadas:
 
-Al crear un pipeline de logs, ten en cuenta las siguientes prácticas recomendadas:
+La integración debe utilizar endpoints compatibles con los logs de Datadog
+: Tu integración debe utilizar uno de los [endpoints compatibles][23] expuestos por Datadog para la ingestión de logs. De lo contrario, puedes utilizar el [endpoint HTTP para la ingestión de logs][1] para enviar logs a Datadog.
 
-Mapea tus datos a atributos estándar de Datadog
-: La centralización de logs de varias tecnologías y aplicaciones puede generar decenas o centenas de atributos diferentes en un entorno de Log Management. En la medida de lo posible, las integraciones deben basarse en la [convención de nomenclatura estándar][17].
+La integración debe ser compatible con todos los sitios Datadog
+: Los usuarios deben poder elegir entre los diferentes sitios Datadog, siempre que sea posible. Consulta [Empezando con sitios Datadog][2] para obtener más información sobre las diferencias entre sitios. </br></br> El endpoint de tu sitio Datadog es `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
 
-Configura la etiqueta (tag) `source` con el nombre de la integración.
-: Datadog recomienda que la etiqueta `source` se configure como `<integration_name>` y que la etiqueta `service` se configure como el nombre del servicio que produce la telemetría. Por ejemplo, la etiqueta `service` puede utilizarse para diferenciar logs por línea de productos. </br></br> Para los casos en los que no haya diferentes servicios, configura `service` con el mismo valor que `source`. Las etiquetas `source` y `service` deben ser no editables por el usuario, ya que las etiquetas se utilizan para habilitar pipelines y dashboards de integraciones. Las etiquetas pueden configurarse en la carga útil o a través del parámetro de consulta, por ejemplo, `?ddsource=example&service=example`. </br></br> Las etiquetas `source` y `service` deben estar en letras minúsculas. 
+Permite a los usuarios adjuntar etiquetas (tags) personalizadas al configurar sus integraciones
+: Las etiquetas (tags) pueden configurarse como atributos clave-valor en el cuerpo JSON de la carga útil de los logs de tu integración. Datadog recomienda permitir a los usuarios configurar etiquetas (tags) personalizadas para una integración. Si la integración [envía logs a través de la API][1], las etiquetas (tags) también pueden configurarse utilizando el parámetro de consulta `ddtags=<TAGS>`.
 
-La integración debe admitir todos los sitios Datadog.
-: El usuario debe poder elegir entre los diferentes sitios Datadog, siempre que sea posible. Para obtener más información sobre las diferencias entre sitios, consulta [Empezando con sitios Datadog][2]. </br></br> El endpoint de tu sitio Datadog es `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
+Configura la etiqueta (tag) de log `source` de la integración con el nombre de la integración 
+: Datadog recomienda configurar la etiqueta (tag) `source`como `<integration_name>` (`source:okta`) para una aplicación. `source` debe configurarse antes de enviar logs a endpoints de Datadog, ya que no se puede reasignar en la interfaz de usuario Datadog. </br></br> La etiqueta (tag) `source` debe estar en minúsculas y no debe ser editable por los usuarios, ya que se utiliza para habilitar pipelines y dashboards de integración.
 
-Permite a los usuarios adjuntar etiquetas personalizadas mientras configuran la integración.
-: Datadog recomienda que las etiquetas manuales de usuario se envíen como atributos clave-valor en el cuerpo del JSON. Si no es posible añadir etiquetas manuales a los logs, puedes enviar etiquetas utilizando el parámetro de consulta `ddtags=<TAGS>`. Para ver ejemplos, consulta la [documentación sobre el envío de logs a la API][1].
+Evita enviar logs que contengan matrices en el cuerpo JSON, siempre que sea posible 
+: Aunque es posible enviar datos de matrices en tus logs, Datadog recomienda evitar las matrices, ya que no se pueden [facetar][24].
 
-Envía datos sin matrices en el cuerpo del JSON, siempre que sea posible. 
-: Aunque es posible enviar algunos datos como etiquetas, Datadog recomienda enviar los datos en el cuerpo del JSON y evitar las matrices. Esto te proporciona más flexibilidad en las operaciones que puedes realizar sobre los datos en Log Management de Datadog. 
+No registres claves de API Datadog
+: Las claves de API Datadog se pueden pasar en la cabecera o como parte de la ruta HTTP de tus solicitudes de API. Para ver ejemplos, consulta la [documentación sobre el envío de logs a la API][1]. Evita registrar la clave de API en tu configuración.
 
-No registres claves de API de Datadog.
-: Las claves API de Datadog pueden transferirse en el encabezado o como parte de la ruta HTTP. Para ver ejemplos, consulta la [documentación sobre el envío de logs a la API][1]. Datadog recomienda utilizar métodos que no registren la clave de API en tu configuración.
+No utilices claves de aplicación Datadog
+: Las claves de aplicación Datadog no son necesarias para enviar logs utilizando el endpoint HTTP. 
 
-No utilices claves de aplicación de Datadog.
-: La clave de aplicación de Datadog es diferente de la clave de API y no es necesaria para enviar logs utilizando el endpoint HTTP. 
+## Crear recursos de integración de logs
 
-## Configurar los recursos de integraciones de logs en tu cuenta de socio Datadog 
+Puedes crear y diseñar tus recursos de integración de logs directamente en tu cuenta de socio de Datadog.
 
-Para obtener más información sobre cómo convertirte en socio tecnológico de Datadog y acceder a un espacio aislado de desarrollo de integraciones, consulta [Crear una integración][18].
+Las integraciones de logs cuentan con dos conjuntos de recursos: los [pipelines][13] y las [facetas][12] asociados. Centralizar logs de varias tecnologías y aplicaciones puede producir muchos atributos únicos. Para utilizar dashboards predefinidos, las integraciones del socio tecnológico deben basarse en la [convención de nomenclatura estándar][17] de Datadog para la creación de integraciones.
 
-### Requisitos de los pipelines de logs
+Una vez que finalice el diseño de la integración de Datadog y se envéin los logs al endpoint de logs de Datadog, define tus pipelines y facetas de log para enriquecer y estructurar los logs de tu integración.
 
-Los logs enviados a Datadog se procesan en [pipelines de logs][13] para estandarizarlos y así facilitar su búsqueda y análisis.
+Para obtener más información sobre cómo convertirte en socio tecnológico de Datadog y acceder a un entorno aislado (sandbox) de desarrollo de integraciones, consulta [Crear una integración][18].
 
-Para configurar un pipeline de logs:
+<div class="alert alert-danger">Para ser revisadas por el equipo de integraciones de Datadog, las integraciones de logs deben incluir recursos y contar con procesadores o facetas de pipeline.</div>
+
+### Información general de los pipelines
+
+Los logs enviados a Datadog se procesan en [pipelines de log][13], utilizando procesadores de pipelines. Estos procesadores permiten a los usuarios analizar, reasignar y extraer información de atributos, enriqueciendo y normalizando los logs para su uso en toda la plataforma.
+
+#### Crear un pipeline
+
+Crea un pipeline de log para procesar logs especificado con procesadores de pipelines.
+
 
 1. En la página [**Pipelines**][3], haz clic en **+ New Pipeline** (+ Nuevo pipeline).
-2. En el campo **Filter** (Filtro), introduce una única etiqueta `source` que defina el origen de los logs para los logs del el socio tecnológico. Por ejemplo, `source:okta` para la integración con Okta. **Nota**: Asegúrate de que los logs enviados a través de la integración se etiquetan con las etiquetas de origen apropiadas, antes de ser enviados a Datadog.
-3. También puedes añadir etiquetas y una descripción.
+2. En el campo **Filtrar**, introduce la etiqueta (tag) `source` única que define la fuente de logs del socio tecnológico. Por ejemplo, `source:okta` para la integración Okta.
+**Nota**: Asegúrate de que los logs enviados a través de la integración están etiquetados con las etiquetas (tags) de fuente correctas antes de ser enviados a Datadog.
+3. También puedes añadir etiquetas (tags) y una descripción.
 4. Haz clic en **Create** (Crear).
 
-Puedes añadir procesadores dentro de tus pipelines para reestructurar tus datos y generar atributos.
+Una vez configurado un pipeline, añade procesadores para enriquecer y estructurar aún más los logs.
+#### Añadir procesadores de pipeline
 
-**Requisitos**
+Antes de definir tus procesadores de pipeline, consulta los [atributos estándar de Datadog][6].
 
-- Utiliza el [remapeador de fechas][4] para definir la marca de tiempo oficial de los logs.
-- Utiliza un remapeador de estados para remapear el `status` de un log o un [procesador de categorías][19] para estados mapeados según un rango (como con los códigos de estado HTTP).
-- Utiliza el [remapeador][5] de atributos para remapear claves de atributo a [atributos de Datadog][6] estándar. Por ejemplo, una clave de atributo que contenga la dirección IP del cliente debe remapearse a `network.client.ip`, para que Datadog pueda mostrar logs del socio tecnológico en dashboards listos para utilizar. Elimina los atributos originales al remapear, utilizando `preserveSource:false` para evitar duplicados.
-- Utiliza el [remapeador de servicios][7] para remapear el atributo `service` o configurarlo con el mismo valor que el atributo `source`.
-- Utiliza el [procesador de grok][8] para extraer valores en logs con el fin de mejorar las búsquedas y los análisis. Para mantener un rendimiento óptimo, el analizador de grok debe ser específico. Evita las coincidencias con comodines.
-- Utiliza el [remapeador de mensajes][9] para definir el mensaje oficial del log y hacer que determinados atributos se puedan buscar utilizando texto completo.
+Utiliza procesadores en tus pipelines para enriquecer y reestructurar tus datos y generar atributos de log. Para consultar la lista de todos los procesadores de logs, consulta la documentación [Procesadores][10].
 
-Para ver la lista de todos los procesadores de logs, consulta [Procesadores][10].
+##### Requisitos
 
-**Consejo**: Para obtener información general sobre procesadores de escritura y el aprovechamiento de los atributos estándar, sigue el curso gratuito [Profundizar los conocimientos sobre el procesamiento de logs][20]. 
+Asigna los atributos de log de la aplicación a los atributos estándar de Datadog 
+: Utiliza el [reasignador de atributos][5] para asignar claves de atributos a [atributos estándar de Datadog][6], siempre que sea posible. Por ejemplo, un atributo de un valor IP de cliente de servicio de red debe reasignarse a `network.client.ip`.
 
-### Requisitos de las facetas
+Asigna la etiqueta (tag) de log `service` al nombre del servicio que produce la telemetría
+: Utiliza el [reasignador de servicios][7] para reasignar el atributo `service`. Cuando la fuente y el [servicio][26] compartan el mismo valor, reasigna la etiqueta (tag) `service` a la etiqueta (tag) `source`. Las etiquetas (tags) `service` deben estar en minúsculas.
 
-También puedes crear [facetas][12] en el [Explorador de logs][16]. Las facetas son atributos específicos que pueden utilizarse para filtrar y acotar los resultados de las búsquedas. Aunque las facetas no son estrictamente necesarias para filtrar los resultados de las búsquedas, desempeñan un papel crucial a la hora de ayudar a los usuarios a conocer las dimensiones disponibles para refinar sus búsquedas.
+Asigna la marca de tiempo interna del log a tu marca de tiempo oficial de Datadog 
+: Utiliza el [reasignador de fechas][4] para definir la marca de tiempo de los logs. Si la marca de tiempo de un log no se corresponde a un [atributo de fecha estándar][28], Datadog define su marca de tiempo en el momento de la ingesta.
 
-Las medidas son un tipo específico de faceta que se utilizan para realizar búsquedas dentro de un rango. Por ejemplo, añadir una medida para la duración de la latencia permite a los usuarios buscar todos los logs que se encuentran por encima de una cierta latencia. 
-**Nota**: Define la [unidad][11] de una faceta de medida en función de lo que representa el atributo.
+Asigna los atributos de estado personalizados de los logs al atributo oficial `status` de Datadog 
+: Utiliza el [reasignador de estado][25] para reasignar el `status` de un log o un [procesador de categorías][19] para los estados asignados a un rango (como con los códigos de estado HTTP).
 
-Para añadir una faceta o medida:
+Asigna el atributo de mensaje personalizado de los logs al atributo oficial `message` de Datadog 
+: Utiliza el [reasignador de mensajes][9] para definir el mensaje oficial del log, si los logs de aplicación no se asignan al atributo de mensaje estándar. Esto permite a los usuarios buscar logs utilizando texto libre.
+
+Define un espacio de nombres para atributos personalizados de tus logs
+: Los atributos genéricos de logs que no se asignan a un [atributo estándar de Datadog][6] deben tener un espacio de nombres, si se asignan a [facetas][14]. Por ejemplo, `file` se reasignaría a `integration_name.file`.
+Utiliza el [reasignador de atributos][5] para definir las claves de atributo para un nuevo atributo con espacio de nombres.
+
+1. Expande el pipeline recientemente creado y haz clic en **Add Processor** (Añadir procesador) para empezar a crear tu pipeline utilizando procesadores.
+2. Si los logs de integraciones no están en formato JSON, añade el [procesador Grok][8] para extraer información de atributos. Los procesadores Grok analizan los atributos y enriquecen los logs antes de la reasignación o del procesamiento posterior.
+3. Después de extraer los atributos de los logs, reasígnalos a [atributos estándar de Datadog][6], cuando sea posible, utilizando [reasignadores de atributos][5].
+4. Define la marca de tiempo de los logs de una integración para que sea su marca de tiempo oficial de Datadog, utilizando el [reasignador de fechas][4].
+5. Para procesar y transformar datos de forma más avanzada, utiliza [procesadores][10] adicionales.
+Por ejemplo, el `Arithmetic Processor` puede utilizarse para calcular información basada en atributos o el `String Builder Processor` puede concatenar varios atributos de cadena.
+
+**Consejos**
+* Elimina los atributos originales al reasignar atributos de log utilizando `preserveSource:false`. Esto ayuda a evitar confusiones y elimina duplicados.
+* Para asegurar un rendimiento óptimo del análisis grok, evita los emparejadores comodín como `%{data:}` y `%{regex(".*"):}`. Haz que tus sentencias de análisis sean lo más específicas posible.
+* Sigue el curso gratuito [Profundizando en el procesamiento de logs][20] para obtener información general sobre los procesadores de texto y saber cómo aprovechar los atributos estándar.
+
+### Información general sobre las facetas
+
+Las facetas son atributos cualitativos o cuantitativos específicos que pueden utilizarse para filtrar y delimitar los resultados de las búsquedas. Aunque las facetas no son estrictamente necesarias para filtrar los resultados de las búsquedas, desempeñan un papel esencial a la hora de ayudar a los usuarios a comprender las dimensiones disponibles para refinar sus búsquedas.
+
+Las facetas para atributos estándar son añadidas automáticamente por Datadog cuando se publica un pipeline. Consulta si el atributo debe reasignarse a un [atributo estándar de Datadog][6].
+
+No todos los atributos están pensados para ser utilizados como facetas. La necesidad de facetas en las integraciones se centra en dos cosas:
+* Las facetas proporcionan una interfaz sencilla para filtrar logs. Son aprovechadas por las funciones de autocompletar de Log Management, lo que permite a los usuarios buscar y agregar la información clave que encuentran en sus logs.
+* Las facetas permiten renombrar los atributos poco legibles con una etiqueta (label) más fácil de entender. Por ejemplo: `@deviceCPUper` → `Device CPU Utilization Percentage`.
+
+Puedes crear [facetas][12] en el [Explorador de logs][16].
+
+#### Crear facetas
+
+Es importante definir correctamente las facetas, ya que mejoran la facilidad de uso de los logs indexados en análisis, monitores y funciones de agregación de todo el producto Log Management de Datadog.
+
+Permiten facilitar la búsqueda de logs de aplicaciones rellenando las funciones de autocompletar en Log Management.
+
+<div class="alert alert-info">Las facetas cuantitativas, denominadas "Medidas", permiten a los usuarios filtrar logs en un rango de valores numéricos utilizando operadores relacionales.  
+Por ejemplo, una medida de un atributo de latencia permite a los usuarios buscar todos los logs que superan una duración determinada. </div>
+
+##### Requisitos
+
+Los atributos asignados a facetas personalizadas primero deben tener un espacio de nombres
+: Los atributos personalizados genéricos que no se asignan a [atributos estándar de Datadog][6] deben tener un espacio de nombres cuando se utilizan con [facetas][14] personalizadas. Se puede utilizar un [reasignador de atributos][5] para colocar un espacio de nombres a un atributo con el nombre de la integración.  
+Por ejemplo, reasignando `attribute_name` a `integration_name.attribute_name`.
+
+Las facetas personalizadas no deben duplicar una faceta de Datadog existente
+: Para evitar confusiones con facetas ya existentes en Datadog, no crees facetas personalizadas que dupliquen cualquier faceta existente ya asignada a [atributos estándar de Datadog][6].
+
+Las facetas personalizadas deben agruparse bajo el nombre `source` 
+: Al crear una faceta personalizada se debe asignar un grupo. Configura el valor del `Group` como `source`, igual que con el nombre de la integración.
+
+Las facetas personalizadas deben tener el mismo tipo de datos que el atributo asignado
+: Configura el tipo de datos de la faceta (Cadena, Booleano, Doble o Entero) con el mismo tipo que el atributo asignado a ella. Los tipos no coincidentes impiden que la faceta se utilice según lo previsto y pueden hacer que se rellene incorrectamente.
+
+**Añadir una faceta o medida**
 
 1. Haz clic en un log que contenga el atributo al que quieres añadir una faceta o una medida. 
 2. En el panel de logs, haz clic en el icono con el engranaje, situado junto al atributo.
 3. Selecciona **Create facet/measure for @attribute** (Crear faceta/medida para @atributo).
 4. En el caso de una medida, para definir la unidad, haz clic en **Advanced options** (Opciones avanzadas). Seleccione la unidad en función de lo que representa el atributo.
-5. Haz clic en **Add** (Añadir).
+**Nota**: Define la [unidad][11] de una medida en función de lo que representa el atributo.
+5. Especifica un **Grupo** de facetas para facilitar la navegación por la lista de facetas. Si el grupo de facetas no existe, selecciona **Nuevo grupo**, introduce el nombre del grupo que coincide con la etiqueta (tag) de origen y añade una descripción para el nuevo grupo.
+6. Para crear la faceta, haz clic en **Add** (Añadir).
 
-Para ayudarte a navegar por la lista de facetas, estas se encuentran agrupadas. Para los campos específicos de logs de integraciones, crea un **grupo único con el mismo nombre** que la etiqueta `source`. 
+#### Configurar y editar facetas
 
-1. En el panel de logs, haz clic en el icono del engranaje, situado junto al atributo que quieres incluir en el nuevo grupo.
+1. En el panel de logs, haz clic en el icono de engranaje situado junto al atributo que quieres configurar o agrupar.
 2. Selecciona **Edit facet/measure for @attribute** (Editar faceta/medida para @atributo). Si aún no existe una faceta para el atributo, selecciona **Create facet/measure for @attribute** (Crear faceta/medida para @atributo).
-3. Haz clic en **Advanced options** (Opciones avanzadas).
-4. En el campo **Group** (Grupo), introduce el nombre del grupo que coincide con la etiqueta de origen y una descripción del nuevo grupo, y selecciona **New group** (Nuevo grupo).
-5. Haz clic en **Update** (Actualizar).
+3. Haz clic en **Add** (Añadir) o **Update** (Actualizar) cuando termines.
 
-**Directrices**
-- Antes de crear una nueva faceta para una integración, revisa si el atributo debería remapearse a un [atributo estándar][6]. Cuando se publica el pipeline de logs, Datadog añade automáticamente facetas para atributos estándar.
-- No todos los atributos están pensados para ser utilizados como facetas. Pero es posible seguir buscando atributos que no se utilizan como facetas. La necesidad de facetas en las integraciones se centra en tres cosas:
-1. Las facetas que son medidas permiten asociar unidades a un atributo. Por ejemplo, un atributo "response_time" podría tener una unidad de "ms" o "s". 
-2. Las facetas proporcionan una interfaz de filtrado directa para logs. Cada faceta aparece debajo del encabezado del grupo y puede utilizarse para filtrar.
-3. Las facetas permiten renombrar atributos poco legibles utilizando una etiqueta más fácil de comprender. Por ejemplo: @deviceCPUper → Device CPU Utilization Percentage (@deviceCPUper → Porcentaje de utilización de CPU del dispositivo).
-
-**Requisitos**
-- En la medida de lo posible, utiliza atributos estándar.
-- Todas las facetas que no se mapean a atributos reservados o estándar deben llevar un espacio de nombre con el nombre de la integración.
-- Una faceta tiene un origen. Puede ser `log` para atributos o `tag` para etiquetas.
-- Una faceta tiene un tipo (cadena, booleano, doble o entero) que coincide con el tipo de atributo. Si el tipo de valor del atributo no coincide con el de la faceta, el atributo no se indexa con la faceta.
-- Las facetas dobles y enteras pueden tener una unidad. Las unidades se componen de una familia (como tiempo o bytes) y de un nombre (como milisegundo o gibibyte).
-- Una faceta se almacena en grupos y tiene una descripción.
-- Si remapeas un atributo y conservas ambos, define la faceta de uno solo.
+**Consejos**
+* Las medidas deben tener una unidad siempre que sea posible. A las medidas se les puede asignar una [unidad][27]. Existen dos familias de unidades, `TIME` y `BYTES`, con unidades como `millisecond` o `gibibyte`.
+* A las facetas se les puede asignar una descripción. Una descripción clara de la faceta puede ayudar a los usuarios a entender cómo utilizarla mejor.
+* Si reasignas un atributo y conservas el atributo original mediante la opción `preserveSource:true`, define una faceta en uno solo de ellos.
+* Cuando configures manualmente facetas en los archivos de configuración `.yaml` de un pipeline, ten en cuenta que se les asigna una `source`. Ésta indica el lugar del que se obtuvo el atributo y puede ser `log` para atributos o `tag` para etiquetas (tags).
 
 ## Revisar y desplegar la integración
 
 Datadog revisa la integración del log basándose en las directrices y los requisitos documentados en esta página, y envía sus comentarios al socio tecnológico a través de GitHub. El socio tecnológico, por su parte, revisa y realiza cambios en consecuencia.
 
-Para iniciar un proceso de revisión, exporta tu pipeline de logs y las facetas personalizadas pertinentes utilizando el icono **Export** (Exportar) de la [página de configuración de logs][3]. 
+Para iniciar un proceso de revisión, exporta tu pipeline de log y las facetas personalizadas pertinentes utilizando el icono **Export** (Exportar) de la [página de configuración de logs][3]. 
 
-{{< img src="developers/integrations/export_pipeline.png" alt="Haz clic en el icono Exportar pipeline, para exportar tu pipeline de logs en Datadog" width="50%">}}
+{{< img src="developers/integrations/export_pipeline.png" alt="Haz clic en el icono Exportar pipeline, para exportar tu pipeline de log en Datadog" width="50%">}}
 
-Incluye un ejemplo de logs sin procesar, con todos los atributos que esperas que la integración envíe a Datadog. Los logs sin procesar incluyen los mensajes sin procesar, generados directamente desde el origen, antes de que Datadog los consuma.
+Incluye una muestra de logs sin procesar con **todos** los atributos que esperas que tu integración envíe a Datadog. Los logs sin procesar incluyen los mensajes sin procesar generados directamente desde la aplicación de origen, **antes** de ser enviados a Datadog.
 
-La exportación de tu pipeline de logs incluye dos archivos YAML:
+La exportación de tu pipeline de log incluye dos archivos YAML:
 
-- Uno con el pipeline de logs, que incluye facetas personalizadas, remapeadores de atributos y analizadores de grok.
-- Uno con el ejemplo de log sin procesar, con un resultado vacío. 
+* Uno con el pipeline de log, que incluya facetas personalizadas, reasignadores de atributos y analizadores grok. El archivo exportado se denomina `pipeline-name.yaml`.
+* Uno con la muestra de logs sin procesar proporcionada y una sección `result` vacía. El archivo exportado se denomina `pipeline-name_test.yaml`.
 
-Nota: Dependiendo de tu navegador, es posible que tengas que ajustar tus parámetros para permitir la descarga de archivos.
+**Nota**: Dependiendo de tu navegador, es posible que tengas que ajustar la configuración para permitir la descarga de archivos.
 
-Una vez descargados estos archivos, ve a tu [solicitud de extracción de la integración][22] en GitHub y añádelos en el directorio **Assets** > **Logs* (Recursos > Logs). Si aún no existe una carpeta de logs, puedes crear una.
+Una vez descargados estos archivos, ve a tu [pull request de la integración][22] en GitHub y añádelos en el directorio **Assets** > **Logs* (Recursos > Logs). Si aún no existe una carpeta de logs, puedes crear una.
 
-Las validaciones se ejecutan automáticamente en tu solicitud de extracción.
+Las validaciones se ejecutan automáticamente en tu pull request y validan tus pipelines frente a las muestras sin procesar proporcionadas. Éstas producirán un resultado que puedes definir como la sección `result` de tu archivo `pipeline-name_test.yaml`.
+Una vez que las validaciones se ejecuten nuevamente, si no se detectan problemas, la validación de los logs debería realizarse de forma correcta.
 
 Tres errores de validación comunes son:
 1. El campo `id` está presente en ambos archivos YAML: asegúrate de que el campo `id` coincide con el campo `app_id` del archivo `manifest.json` de tu integración, para conectar tu pipeline con tu integración. 
-2. No recibes el resultado de la ejecución de los logs sin procesar que proporcionaste con respecto a tu pipeline. Si el resultado de la validación es preciso, toma ese resultado y añádelo al campo `result` del archivo YAML que contiene el ejemplo de log sin procesar.
+2. No proporciones el `result` de la ejecución de logs sin procesar que proporcionaste para tu pipeline. Si el resultado de la validación es exacto, toma ese resultado y añádelo al campo `result` en el archivo YAML que contiene el ejemplo de logs sin procesar.
 3. Si envías `service` como parámetro, en lugar de enviarlo en la carga útil del log, debes incluir el campo `service` debajo de tus ejemplos de logs dentro del archivo yaml.
 
+Una vez aprobadas las validaciones, Datadog crea y despliega los nuevos recursos de integración de logs. Si tienes alguna pregunta, añádela como comentario en tu pull request. Los miembros del equipo de Datadog te responderán en un plazo de 2 a 3 días laborables.
 
-Una vez superadas las validaciones, Datadog crea y despliega los nuevos recursos de integraciones de logs. Si tienes alguna pregunta, añádela como comentario en tu solicitud de extracción. Un miembro del equipo de Datadog te responderá en un plazo de 2 a 3 días laborables.
-
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -177,3 +230,9 @@ Una vez superadas las validaciones, Datadog crea y despliega los nuevos recursos
 [20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
 [21]: https://partners.datadoghq.com/
 [22]: https://docs.datadoghq.com/es/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage#open-a-pull-request
+[23]: https://docs.datadoghq.com/es/logs/log_collection/?tab=http#additional-configuration-options
+[24]: https://docs.datadoghq.com/es/logs/explorer/search_syntax/#arrays
+[25]: https://docs.datadoghq.com/es/logs/log_configuration/processors/?tab=ui#log-status-remapper
+[26]: https://docs.datadoghq.com/es/getting_started/tagging/#overview
+[27]: https://docs.datadoghq.com/es/logs/explorer/facets/#units
+[28]: https://docs.datadoghq.com/es/logs/log_configuration/pipelines/?tab=date#date-attribute

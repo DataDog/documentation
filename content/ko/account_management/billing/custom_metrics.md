@@ -3,7 +3,7 @@ algolia:
   tags:
   - 커스텀 메트릭 빌링
 aliases:
-- /integrations/faq/what-standard-integrations-emit-custom-metrics/
+- /ko/integrations/faq/what-standard-integrations-emit-custom-metrics/
 title: 커스텀 메트릭 빌링
 ---
 

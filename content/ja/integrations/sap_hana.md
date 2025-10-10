@@ -26,7 +26,7 @@ author:
 categories:
 - data stores
 - sap
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: sap_hana
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 3.3.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: sap_hana
@@ -157,13 +157,20 @@ HANA テナント、シングルテナント、システムデータベースの
 
 #### ログ収集
 
+1. お使いの SAP HANA データベースで監査ログを読み取れるようにするには、次のコマンドを実行してください。
+
+    ```shell
+    GRANT AUDIT READ TO DD_MONITOR;
+    GRANT SELECT ON SYS.AUDIT_LOG TO DD_MONITOR
+    ```
+
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `sap_hana.d/conf.yaml` file to start collecting your SAP HANA logs, adjusting the `service` value to configure them for your environment:
+2. このコンフィギュレーションブロックを `sap_hana.d/conf.yaml` ファイルに追加して、SAP HANA ログの収集を開始します。このとき、お使いの環境に応じて構成するために `service` の値が調整されます。
 
    ```yaml
    logs:
@@ -172,7 +179,7 @@ HANA テナント、シングルテナント、システムデータベースの
        service: sap_hana
    ```
 
-    See the [sample sap_hana.d/conf.yaml][5] for all available configuration options.
+    使用可能なすべての構成オプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
 
 3. [Agent を再起動します][6]。
 
@@ -183,7 +190,7 @@ HANA テナント、シングルテナント、システムデータベースの
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "sap_hana" >}}
+{{< get-metrics-from-git "sap-hana" >}}
 
 
 ### イベント
@@ -191,7 +198,7 @@ HANA テナント、シングルテナント、システムデータベースの
 SAP HANA には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "sap_hana" >}}
+{{< get-service-checks-from-git "sap-hana" >}}
 
 
 ## トラブルシューティング

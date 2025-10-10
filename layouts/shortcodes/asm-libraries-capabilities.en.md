@@ -1,7 +1,7 @@
 
-The following ASM capabilities are supported relative to each language's tracing library:
+The following AAP capabilities are supported relative to each language's tracing library:
 
-| ASM capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
+| AAP capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
 |----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
 | Threat Detection                       | 1.8.0   | 2.23.0   | 4.0.0                                            | 1.9.0         | 1.47.0          | 1.9.0         | 0.84.0        |
 | API Security                           | 1.31.0  | 2.42.0   | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ | 2.6.0         | 1.59.0          | 1.15.0        | 0.98.0        |

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /serverless/serverless_integrations/plugin
+- /es/serverless/serverless_integrations/plugin
 dependencies:
 - https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md
 title: Complemento de Datadog Serverless Framework
@@ -14,7 +14,7 @@ title: Complemento de Datadog Serverless Framework
 Datadog recomienda el complemento de Severless Framework a los desarrolladores que utilicen el Serverless Framework para desplegar sus aplicaciones serverless.
 El complemento habilita automáticamente la instrumentación para que las aplicaciones recopilen métricas, trazas (traces) y logs mediante:
 
-- Instalación de la biblioteca Datadog Lambda en tus funciones Lambda como una capa Lambda.
+- Instalación de la librería Datadog Lambda en tus funciones Lambda como una capa Lambda.
 - Instalación de la extensión Datadog Lambda a tus funciones Lambda como una campa Lambda (`addExtension`) o la suscripción de Datadog Forwarder a los grupos de logs de tus funciones Lambda (`forwarderArn`).
 - Realización de los cambios de configuración necesarios, como añadir variables de entorno o capas de rastreo adicionales, a tus funciones Lambda.
 
@@ -54,7 +54,7 @@ Para configurar más tu complemento, utiliza los siguientes parámetros personal
 | `subscribeToAccessLogs`       | Activa la suscripción automática de Datadog Forwarder a los grupos de logs de acceso de API Gateway. Requiere la configuración de `forwarderArn`. Por defecto es `true`.                                                                                                                                                                                                                                                                                |
 | `subscribeToExecutionLogs`    | Activa la suscripción automática de Datadog Forwarder a los grupos de logs de API HTTP y Websocket. Requiere la configuración de `forwarderArn`. Por defecto es `true`.                                                                                                                                                                                                                                                                           |
 | `forwarderArn`                | El ARN de Datadog Forwarder que se suscribirá a los grupos de logs de Lambda o API Gateway.                                                                                                                                                                                                                                                                                                                                   |
-| `addLayers`                   | Si deseas instalar la biblioteca de Datadog Lambda como una capa. Por defecto es `true`. Configúralo en `false` cuando planees empaquetar la biblioteca Datadog Lambda al paquete de despliegue de tus funciones por tu cuenta para poder instalar una versión específica de la biblioteca Datadog Lambda ([Python][8] o [Node.js][9]).                                                                                                                   |
+| `addLayers`                   | Si deseas instalar la librería de Datadog Lambda como una capa. Por defecto es `true`. Configúralo en `false` cuando planees empaquetar la librería Datadog Lambda al paquete de despliegue de tus funciones por tu cuenta para poder instalar una versión específica de la librería Datadog Lambda ([Python][8] o [Node.js][9]).                                                                                                                   |
 | `addExtension`                | Si se instala la extensión Datadog Lambda como capa. El valor por defecto es `true`. Cuando se activa, es necesario configurar `apiKey` y `site`.                                                                                                                                                                                                                                                                                  |
 | `exclude`                     | Cuando se configura, este complemento ignora todas las funciones especificadas. Utiliza este parámetro si tienes algunas funciones que no deban incluir la funcionalidad Datadog. Por defecto es `[]`.                                                                                                                                                                                                                                                         |
 | `enabled`                     | Cuando se configura en `false`, el complemento de Datadog permanece inactivo. Por defecto es `true`. Puedes controlar esta opción utilizando una variable de entorno. Por ejemplo, utiliza `enabled: ${strToBool(${env:DD_PLUGIN_ENABLED, true})}` para activar/desactivar el complemento durante el despliegue. Como alternativa, también puedes utilizar el valor pasado a través de `--stage` para controlar esta opción-[consulta el ejemplo](#disable-plugin-for-particular-environment). |
@@ -62,21 +62,21 @@ Para configurar más tu complemento, utiliza los siguientes parámetros personal
 | `failOnError`                 | Cuando se configura, este complemento genera un error si no se crea o actualiza algún monitor Datadog personalizado. Esto ocurre después del despliegue, pero hará que el resultado de `serverless deploy` devuelva un código de salida distinto de cero (para un error de la CI de usuario). Por defecto es `false`.                                                                                                                                                                              |
 | `logLevel`                    | El nivel del log, configurado en `DEBUG` para un registro extendido.                                                                                                                                                                                                                                                                                                                                                                          |
 | `skipCloudformationOutputs`   | Se configura en `true` si deseas omitir añadir Datadog Cloudformation Outputs para tu stack. Esto es útil si se está ejecutando en el límite de 200 salidas que puede causar un error en la creación del stack.                                                                                                                                                                                                                              |
-| `enableColdStartTracing`      | Se configura en `false` para desactivar el rastreo de inicio en frío. Se utiliza en Node.js y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                                                 |
+| `enableColdStartTracing`      | Se configura en `false` para desactivar el rastreo de inicio en frío. Se utiliza en NodeJS y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                                                 |
 | `coldStartTraceMinDuration`   | Configura la duración mínima (en milisegundos) de un evento de carga de un módulo que se va a rastrear a través del rastreo de inicio en frío. Número. Por defecto es `3`.                                                                                                                                                                                                                                                                                            |
-| `coldStartTraceSkipLibs`      | Omite opcionalmente la creación de tramos de inicio en frío para un lista separada por comas de bibliotecas. Es útil para limitar la profundidad u omitir bibliotecas conocidas. El valor por defecto depende del tiempo de ejecución.                                                                                                                                                                                                                                                                |
+| `coldStartTraceSkipLibs`      | Omite opcionalmente la creación de tramos de inicio en frío para un lista separada por comas de librerías. Es útil para limitar la profundidad u omitir bibliotecas conocidas. El valor por defecto depende del tiempo de ejecución.                                                                                                                                                                                                                                                                |
 | `subdomain`                   | Configura el subdominio opcional que se utilizará para las URL de las aplicaciones que se imprimen en la salida. Por defecto es `app`.                                                                                                                                                                                                                                                                                                                                |
-| `enableProfiling`             | Activa el Datadog Continuous Profiler con `true`. Es compatible en Beta con Node.js y Python. Por defecto es `false`.                                                                                                                                                                                                                                                                                                            |
-| `encodeAuthorizerContext`     | Cuando se configura en `true` para los autorizadores Lambda, el contexto de rastreo se codificará en la respuesta para la propagación. Compatible con Node.js y Python. Por defecto es `true`.                                                                                                                                                                                                                                                       |
-| `decodeAuthorizerContext`     | Cuando se configura en `true` para Lambdas que están autorizadas a través de autorizadores Lambda, analizará y utilizará el contexto de rastreo codificado (si se encuentra). Compatible con Node.js y Python. Por defecto es `true`.                                                                                                                                                                                                                                |
-| `apmFlushDeadline`            | Se utiliza para determinar cuándo enviar tramos antes de que se agote el tiempo, en milisegundos. Cuando el tiempo restante en una invocación de AWS Lambda es inferior al valor configurado, el rastreador intenta enviar los tramos (spans) activos actuales y todos los tramos finalizados. Compatible con Node.js y Python. El valor por defecto es `100` milisegundos.                                                                                                             |
+| `enableProfiling`             | Activa el Datadog Continuous Profiler con `true`. Es compatible en Beta con NodeJS y Python. Por defecto es `false`.                                                                                                                                                                                                                                                                                                            |
+| `encodeAuthorizerContext`     | Cuando se configura en `true` para los autorizadores Lambda, el contexto de rastreo se codificará en la respuesta para la propagación. Compatible con NodeJS y Python. Por defecto es `true`.                                                                                                                                                                                                                                                       |
+| `decodeAuthorizerContext`     | Cuando se configura en `true` para Lambdas que están autorizadas a través de autorizadores Lambda, analizará y utilizará el contexto de rastreo codificado (si se encuentra). Compatible con NodeJS y Python. Por defecto es `true`.                                                                                                                                                                                                                                |
+| `apmFlushDeadline`            | Se utiliza para determinar cuándo enviar tramos antes de que se agote el tiempo, en milisegundos. Cuando el tiempo restante en una invocación de AWS Lambda es inferior al valor configurado, el rastreador intenta enviar los tramos (spans) activos actuales y todos los tramos finalizados. Compatible con NodeJS y Python. El valor por defecto es `100` milisegundos.                                                                                                             |
 | `enableStepFunctionsTracing`    | Activa la suscripción automática de los grupos de logs de Datadog Forwarder a Step Functions y el rastreo de Step Functions. Si no hay grupos de logs de Step Functions configurados, se crearán automáticamente. Requiere la configuración de `forwarderArn`. Por defecto es `false`.                                                                                                                                                                  |
 | `propagateUpstreamTrace` | Cuando se configura en `true`, las trazas de invocaciones de Stepfunction aguas abajo se fusionan con las invocaciones de Stepfunction aguas arriba. Por defecto es `false`. |
 | `redirectHandlers`    | Opcionalmente desactiva la redirección del controlador si se configura en `false`. Esto solo debe configurarse en `false` cuando APM está totalmente desactivada. Por defecto es `true`.                                                                                                                                                                  |
 Para utilizar cualquiera de estos parámetros, añade una sección `custom` > `datadog` a tu `serverless.yml` similar a este ejemplo:
 
 ```yaml
-personalizado:
+custom:
   datadog:
     apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}"
     enableXrayTracing: false
@@ -84,7 +84,7 @@ personalizado:
     enableDDLogs: true
     subscribeToAccessLogs: true
     forwarderArn: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
-    excluir:
+    exclude:
       - dd-excluded-function
 ```
 
@@ -99,7 +99,7 @@ Es posible que encuentres el error de que faltan definiciones de tipo. Para reso
 Si estás utilizando serverless-typescript, asegúrate de que `serverless-datadog` esté por encima de la entrada `serverless-typescript` en tu `serverless.yml`. El complemento detectará automáticamente los archivos `.ts`.
 
 ```yaml
-complementos:
+plugins:
   - serverless-plugin-datadog
   - serverless-typescript
 ```
@@ -109,18 +109,18 @@ complementos:
 Si deseas desconectar el complemento en función del entorno (pasado a través de `--stage`), puedes utilizar algo similar al ejemplo siguiente.
 
 ```yaml
-proveedor:
-  fase: ${self:opt.stage, 'dev'}
+provider:
+  stage: ${self:opt.stage, 'dev'}
 
-personalizado:
-  preconfigurado: ${self:custom.stageVars.${self:provider.stage}, {}}
+custom:
+  staged: ${self:custom.stageVars.${self:provider.stage}, {}}
 
   stageVars:
     dev:
       dd_enabled: false
 
   datadog:
-    activado: ${self:custom.staged.dd_enabled, true}
+    enabled: ${self:custom.staged.dd_enabled, true}
 ```
 
 ### Serverless Monitors
@@ -150,7 +150,7 @@ La creación de un Monitor se produce después del despliegue de la función. En
 Define el ID apropiado del serverless monitor sin especificar ningún valor de parámetro.
 
 ```yaml
-personalizado:
+custom:
   datadog:
     addLayers: true
     monitors:
@@ -224,7 +224,7 @@ Esta biblioteca es compatible en el mayor esfuerzo con [serverless-plugin-warmup
 
 Para que tu aplicación funcione correctamente en paquete, este complemento *debe* aparecer _después_ de `serverless-plugin-warmup` en tu archivo `serverless.yml`:
 ```yaml
-complementos:
+plugins:
   - serverless-plugin-warmup
   - serverless-plugin-datadog
 ```

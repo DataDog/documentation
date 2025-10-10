@@ -5,7 +5,7 @@
         -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
         -e DD_SITE=<DATADOG_SITE> \
         -e <SOURCE_ENV_VARIABLE> \
-        -e <DESINATION_ENV_VARIABLE> \
+        -e <DESTINATION_ENV_VARIABLE> \
         -p 8088:8088 \
         datadog/observability-pipelines-worker run
     ```

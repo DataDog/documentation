@@ -31,7 +31,7 @@ draft: false
 git_integration_title: go_expvar
 integration_id: go-expvar
 integration_title: Go-Expvar
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: go_expvar
@@ -130,7 +130,7 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "go_expvar" >}}
+{{< get-metrics-from-git "go-expvar" >}}
 
 
 ### イベント

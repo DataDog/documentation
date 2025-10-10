@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
   tag: "Blog"
   text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-monitors"
+  tag: "Learning Center"
+  text: "Create, configure, and use Datadog Monitors to stay ahead of issues"
 ---
 
 {{< whatsnext desc="Choose your monitor type:">}}
@@ -43,7 +46,7 @@ further_reading:
 {{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/service_check" >}}<strong>Service Check</strong>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/slo" >}}<strong>SLO Alerts</strong>: Monitor your SLO's error budget and burn rate.{{< /nextlink >}}
-{{< nextlink href="/synthetics/guide/synthetic-test-monitors" >}}<strong>Synthetic Monitoring</strong>: Monitor metric values or test status from Synthetic test runs.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/synthetic_monitoring" >}}<strong>Synthetic Monitoring</strong>: Use Synthetic Test Monitors{{< /nextlink >}}
 {{< nextlink href="/monitors/types/watchdog" >}}<strong>Watchdog</strong>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
 

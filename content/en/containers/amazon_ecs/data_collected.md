@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS Data Collection
+description: Reference guide for metrics, logs, and events collected by the Datadog Agent on Amazon ECS
 aliases:
   - /agent/amazon_ecs/data_collected
 further_reading:
@@ -22,7 +23,7 @@ Amazon ECS on EC2 is a container management service for Docker containers runnin
 
 The following table lists metrics collected by the Agent or API crawler for Amazon ECS:
 
-{{< get-metrics-from-git "amazon_ecs" >}}
+{{< get-metrics-from-git "amazon-ecs" >}}
 
 Metrics collected by the Agent when deployed in a Docker container also include the same metrics collected by the Docker integration. See the [Docker integration metrics][1] for a complete list of metrics.
 

@@ -1,0 +1,4 @@
+websites_sources:
+  includes:
+    - lang: en
+      path: '{/integrations,/integrations/**}'

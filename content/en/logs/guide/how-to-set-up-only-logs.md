@@ -8,10 +8,10 @@ further_reading:
   text: "Docker Log Collection"
 - link: "/containers/kubernetes/log/"
   tag: "Documentation"
-  text: "Kubenetes Log Collection"
+  text: "Kubernetes Log Collection"
 ---
 
-<div class="alert alert-danger">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>
+<div class="alert alert-warning">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>
 
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
 
@@ -19,7 +19,7 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% tab "Host " %}}
 
 1. Open the [datadog.yaml configuration file][1].
-2. Add the `enable_payloads` attribute with the following settings:
+2. Add the `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings:
 
     ```yaml
     enable_payloads:
@@ -58,6 +58,8 @@ docker run -d --name datadog-agent \
            -e DD_ENABLE_PAYLOADS_SERIES=false \
            -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false \
            -e DD_ENABLE_PAYLOADS_SKETCHES=false \
+           -e DD_PROCESS_AGENT_ENABLED=false \
+           -e DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED=false \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -78,6 +80,7 @@ datadog:
 [...]
   processAgent:
     enabled: false
+    containerCollection: false
 [...]
   env:
     - name: DD_ENABLE_PAYLOADS_EVENTS

@@ -1,5 +1,6 @@
 ---
 title: Usage Details
+description: Monitor your Datadog usage across all products with month-to-date summaries, usage trends, top custom metrics, and logs usage by index.
 aliases:
   - /account_management/billing/usage_details/
 ---
@@ -88,16 +89,20 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 ## Billable on-demand pills and committed lines
 
-<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+<div class="alert alert-danger">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 Purple on-demand pills highlight the portion of billable usage that is on-demand usage. Blue committed and allotted pills highlight the portion of your usage that is covered by commitments and <a href="https://www.datadoghq.com/pricing/allotments/">allotments</a> from parent products. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
+
+To display the committed and allotted pills on a card, ensure the **See included usage** toggle is on:
+1. On the total usage card where you want to see committed and allotted usage data, click the eye (**See included usage**) icon.
+1. The icon changes to an eye with a slash through it. Committed and allotted pills populate on the card.
 
 {{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
 
 
 ## Top custom metrics
 
-In the Custom Metrics tab, the Top Custom Metrics table provides two views for your month-to-date usage and most recent day usage, such as usage on the date of the last update).
+In the Custom Metrics tab, the Top Custom Metrics table provides two views for your month-to-date usage and most recent day usage, such as usage on the date of the last update.
 
 The "Top 5000" view provides the following information about your Top 5000 custom metrics:
 * Metric name
@@ -134,7 +139,7 @@ This data can be downloaded as a CSV file.
 
 ## First-time usage notifications
 
-<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+<div class="alert alert-danger">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 The first-time usage notifications feature sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent approximately 48 hours after the usage first occurs during a given month.
 

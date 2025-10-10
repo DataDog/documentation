@@ -14,6 +14,8 @@ assets:
       check: jboss.jdbc_connections.count
       metadata_path: metadata.csv
       prefix: jboss.
+    process_signatures:
+    - java jboss-modules.jar
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10060
@@ -25,7 +27,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_on_public_website: true
@@ -33,15 +35,15 @@ draft: false
 git_integration_title: jboss_wildfly
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
-integration_version: 2.2.0
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: jboss_wildfly
 public_title: JBoss/WildFly
 short_description: JBoss 및 WildFly 애플리케이션에서 다양한 JMX 메트릭을 수집합니다.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -50,7 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: JBoss 및 WildFly 애플리케이션에서 다양한 JMX 메트릭을 수집합니다.
   media: []
@@ -72,7 +74,7 @@ tile:
 
 JBoss/WildFly 점검은 [Datadog 에이전트 ][3] 패키지에 포함되어 있으므로 JBoss/WildFly 호스트에 다른 것을 설치할 필요가 없습니다.
 
-### 구성
+### 설정
 
 이 점검은 인스턴스당 메트릭을 350개로 제한한니다. 반환된 메트릭 개수는 [상태 페이지][4]에 표시됩니다. 아래 설정 을 편집하여 원하는 메트릭을 지정할 수 있습니다. 수집된 메트릭을 커스터마이즈하는 방법에 대한 자세한 내용은 [JMX 점검 설명서][5]를 참조하세요. 추가 메트릭을 모니터링해야 하는 경우, [Datadog 지원팀][6]에 문의하세요.
 
@@ -81,7 +83,7 @@ JBoss/WildFly 점검은 [Datadog 에이전트 ][3] 패키지에 포함되어 있
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 
@@ -96,13 +98,13 @@ JBoss/WildFly 점검은 [Datadog 에이전트 ][3] 패키지에 포함되어 있
 
     자세한 내용은 [WildFly JMX 하위 시스템 설정 페이지][2]를 참조하세요.
 
-2. [에이전트를 재시작][3]하세요.
+2. [에이전트를 다시 시작합니다][3].
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true
@@ -118,15 +120,15 @@ _Agent 버전 6.0 이상에서 사용 가능_
        service: '<APPLICATION_NAME>'
    ```
 
-3. [에이전트를 재시작][3]하세요.
+3. [에이전트를 다시 시작합니다][3].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [2]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
 [3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
 ##### 메트릭 수집
 
@@ -134,9 +136,9 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
+Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
 
 | 파라미터      | 값                                                      |
 | -------------- | ---------------------------------------------------------- |
@@ -154,7 +156,7 @@ Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "jboss_wildfly" >}}
+{{< get-metrics-from-git "jboss-wildfly" >}}
 
 
 ### 이벤트
@@ -162,7 +164,7 @@ Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습�
 JBoss/WildFly 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "jboss_wildfly" >}}
+{{< get-service-checks-from-git "jboss-wildfly" >}}
 
 
 ### JMXFetch를 사용한 메트릭 수집
@@ -172,7 +174,7 @@ JBoss/WildFly 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원 팀][6]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][6]에 문의하세요.
 
 
 

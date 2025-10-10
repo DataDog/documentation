@@ -158,7 +158,7 @@ hostname: mymachine.mydomain
 
 #### 環境変数
 
-コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS` を使用してホストタグを設定します。複数のタグを指定する場合は、カンマとスペースで区切ってください。
+コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS` を使用してホストタグを設定します。複数のタグを指定する場合は、スペースで区切ってください。
 
 Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
@@ -215,7 +215,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1, key2:value2, key3:value3"
+      - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:

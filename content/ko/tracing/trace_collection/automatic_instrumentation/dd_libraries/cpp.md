@@ -23,7 +23,7 @@ title: C++ 애플리케이션 추적하기
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> C++는 자동 계측을 위한 통합을 제공하지 않습니다. 하지만 <a href="/tracing/setup/envoy/">Envoy</a> 및 <a href="/tracing/setup/nginx/">Nginx</a> 등 프록시 추적에서 사용됩니다.
 </div>
 
@@ -33,7 +33,7 @@ C++ 추적 라이브러리는 빌드에 C++17 툴체인을 필요로 합니다. 
 ## 시작하기
 시작하기 전 이미 [에이전트를 설치하고 설정했는지 확인하세요][6].
 
-## 애플리케이션 계측
+## 애플리케이션의 계측
 
 `dd-trace-cpp` 테스트에 사용할 수 있는 예시 애플리케이션입니다.
 이 애플리케이션은 기본 설정을 사용해 트레이서 인스턴스를 생성하고 두 개의 스팬에서 트레이스를 생성합니다. 이는 서비스 이름 `my-service`에서 보고됩니다.
@@ -83,7 +83,7 @@ int main() {
 ````CMake
 # CMakeLists.txt
 
-CPMAddPackage("gh:DataDog/dd-trace-cpp#0.2.1")
+CPMAddPackage("gh:DataDog/dd-trace-cpp#1.0.0")
 
 # `tracer_example` 대상 추가
 add_executable(tracer_example tracer_example.cpp)
@@ -96,7 +96,7 @@ target_link_libraries(tracer_example dd_trace::static)
 다음 명령을 사용해 예시 빌드:
 
 ```bash
-cmake -B build .
+cmake -B build -DCMAKE_BUILD_TYPE=Release .
 cmake --build build --target tracer_example -j
 
 ./build/tracer_example
@@ -114,7 +114,7 @@ include(FetchContent)
 FetchContent_Declare(
   dd-trace-cpp
   GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
-  GIT_TAG        v0.2.0
+  GIT_TAG        v1.0.0
   GIT_SHALLOW    ON
   GIT_PROGRESS   ON
 )
@@ -124,7 +124,7 @@ FetchContent_MakeAvailable(dd-trace-cpp)
 # `tracer_example` 대상 추가
 add_executable(tracer_example tracer_example.cpp)
 
-# `dd-trace-cpp`에 대한 고정 연결
+# `dd-trace-cpp`에 대해 고정 연결
 # 참고: `dd-trace-cpp`에 대해 동적 연결을 하려면  `dd_trace_cpp_shared` 대상을 사용합니다.
 target_link_libraries(tracer_example dd_trace::static)
 ````
@@ -132,7 +132,7 @@ target_link_libraries(tracer_example dd_trace::static)
 다음 명령을 사용해 예시 빌드:
 
 ```bash
-cmake -B build .
+cmake -B build -DCMAKE_BUILD_TYPE=Release .
 cmake --build build --target tracer_example -j
 
 ./build/tracer_example
@@ -182,7 +182,7 @@ cmake --install build
 
 ````bash
 clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
-./tracer_example
+LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
 ````
 

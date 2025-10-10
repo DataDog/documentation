@@ -33,7 +33,7 @@ categories:
 - red
 - seguridad
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: cilium
@@ -98,7 +98,7 @@ Comenzando con la versión 1.10.0, esta integración basada en OpenMetrics tiene
      `prometheus.enabled=true` y `operator.prometheus.enabled=true`
 
 O bien, habilita métricas de Prometheus por separado en los manifiestos de Kubernetes:
-<div class="alert alert-warning">Para versiones de <a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium 1.11 o anteriores</a>, usa <code>--prometheus-serve-addr=:9090</code>.</a></div>
+<div class="alert alert-danger">Para versiones de <a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium 1.11 o anteriores</a>, usa <code>--prometheus-serve-addr=:9090</code>.</a></div>
 
    - En `cilium-agent`, añade `--prometheus-serve-addr=:9962` a la sección `args` de la configuración de DaemonSet de Cilium:
 

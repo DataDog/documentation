@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール。
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 title: ネットワークモニター
@@ -81,11 +81,11 @@ Datadog で[ネットワークモニター][3]を作成するには、メイン�
 
 #### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
+**Configure notifications and automations** セクション (通知と自動化の構成) の詳細な手順については、[通知][8]のページをご覧ください。
 
 ### ネットワークメトリクス
 
-Create a network metric monitor by following the instructions in the [metric monitor][10] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
+[メトリクスモニター][10]ドキュメントの手順に従って、ネットワークメトリクスモニターを作成します。モニタータイプにネットワークメトリクスを選択すると、[モニターの管理][9] ページで、確実にネットワークモニタータイプのファセットでモニターを選択できるようになります。
 
 ## その他の参考資料
 
@@ -93,7 +93,7 @@ Create a network metric monitor by following the instructions in the [metric mon
 
 [1]: /ja/integrations/http_check/
 [2]: /ja/integrations/tcp_check/
-[3]: https://app.datadoghq.com/monitors#create/network
+[3]: https://app.datadoghq.com/monitors/create/network
 [4]: /ja/monitors/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/configuration/#no-data
 [6]: /ja/monitors/configuration/#auto-resolve

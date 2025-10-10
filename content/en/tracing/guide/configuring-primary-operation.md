@@ -1,13 +1,14 @@
 ---
 title: Primary Operations in Services
+description: Understand how primary operations work in services and how to configure them to properly organize traces and resources in APM.
 
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+  text: "Learn how to set up APM tracing with your application"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -23,7 +24,7 @@ further_reading:
 
 ## APM services
 
-APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service Catalog, and the Service Map.
+APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Software Catalog, and the Service Map.
 
 **Note**: Trace Metrics can be queried based on their `trace.*` [namespace][1].
 
@@ -69,7 +70,7 @@ See [Custom Instrumentation][3] for your programming language for detailed infor
 
 When using Datadog, the OpenTracing operation name is a resource and the OpenTracing "component" tag is Datadog's span name. For example, to define (in OpenTracing terms) a span that has the resource "/user/profile", and the span name "http.request":
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
 
@@ -124,18 +125,6 @@ For more information, see [Setting up Ruby and OpenTracing][1].
 
 
 [1]: /tracing/trace_collection/opentracing/ruby/#opentracing
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-
-
-```go
-opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
-```
-
-For more information, see [Setting up Go and OpenTracing][1].
-
-
-[1]: /tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

@@ -1,5 +1,6 @@
 ---
 title: Setting Up APM with C++
+description: Learn how to set up APM and distributed tracing for C++ applications using Datadog tracing libraries and instrumentation.
 
 further_reading:
 - link: "/tracing/trace_collection/dd_libraries/cpp/"
@@ -29,15 +30,15 @@ Next, install the agent with the [instructions in the UI][2].
 
 Install `g++` and `cmake` with:
 
-```shell
+```bash
 sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
 Download and install `dd-trace-cpp` library with:
 
-```shell
-wget https://github.com/DataDog/dd-trace-cpp/archive/v0.2.0.tar.gz -O dd-trace-cpp.tar.gz
+```bash
+wget https://github.com/DataDog/dd-trace-cpp/archive/v1.0.0.tar.gz -O dd-trace-cpp.tar.gz
 ```
 
 If you get a rate limited message from GitHub, wait a few minutes and run the command again.
@@ -45,6 +46,7 @@ If you get a rate limited message from GitHub, wait a few minutes and run the co
 After downloading the `tar` file, unzip it:
 
 ```bash
+mkdir dd-trace-cpp
 tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 ```
 
@@ -52,7 +54,7 @@ Finally, build and install the library:
 
 ```bash
 cd dd-trace-cpp
-cmake -B build .
+cmake -B build -DCMAKE_BUILD_TYPE=Release .
 cmake --build build -j
 cmake --install build
 ```
@@ -63,6 +65,7 @@ Create a new file called `tracer_example.cpp` and populate it with the below cod
 
 ```cpp
 #include <datadog/tracer.h>
+#include <datadog/span_config.h>
 #include <iostream>
 #include <string>
 
@@ -70,7 +73,7 @@ int main(int argc, char* argv[]) {
   datadog::tracing::TracerConfig tracer_config;
   tracer_config.service = "compiled-in example";
 
-  const auto validated_config = dd::finalize_config(tracer_options);
+  const auto validated_config = dd::finalize_config(tracer_config);
   if (!validated_config) {
     std::cerr << validated_config.error() << '\n';
     return 1;
@@ -98,14 +101,14 @@ This creates a tracer that generates two spans, a parent span `span_a` and a chi
 
 Then, compile and link against `libdd_trace_cpp` with:
 
-```shell
-g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
+```bash
+g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp-static -lcurl
 ```
 
 Finally, run the app with:
 
-```shell
-LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
+```bash
+./tracer_example
 ```
 
 ## Sending traces
@@ -114,14 +117,14 @@ Now that an app exists, you can start sending traces and see the Trace Agent in 
 
 First, tail the Trace Agent log with:
 
-```shell
+```bash
 tail -f /var/log/datadog/trace-agent.log
 ```
 
 Next, open a new tab and run the example a couple times:
 
-```shell
-LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
+```bash
+./tracer_example
 ```
 
 On the Trace Agent tab, you will see something similar to:
@@ -130,7 +133,7 @@ On the Trace Agent tab, you will see something similar to:
 2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:0.2.0] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
 ```
 
-The service then shows up in the Service Catalog in Datadog.
+The service then shows up in the Software Catalog in Datadog.
 
 {{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" >}}
 

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /agent/faq/commonly-used-log-processing-rules
+- /ko/agent/faq/commonly-used-log-processing-rules
 further_reading:
 - link: /logs/log_configuration/processors
   tag: 설명서

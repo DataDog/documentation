@@ -22,12 +22,12 @@ assets:
     source_type_id: 43
     source_type_name: Tomcat
   monitors:
-    '[Tomcat] % of busy threads is high for host: {{host.name}}': assets/monitors/thread_busy.json
-    '[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}': assets/monitors/thread_count_max.json
-    '[Tomcat] Anomalous average processing time for host {{host.name}}': assets/monitors/processing_time.json
-    '[Tomcat] Anomalous max processing time for host {{host.name}}': assets/monitors/max_proc_time.json
-    '[Tomcat] Anomalous request rate for host {{host.name}}': assets/monitors/req_count.json
-    '[Tomcat] Increase of the errors/second rate for host: {{host.name}}': assets/monitors/error_count.json
+    All threads are busy: assets/monitors/thread_count_max.json
+    Busy threads number is high: assets/monitors/thread_busy.json
+    Error rate is high: assets/monitors/error_count.json
+    Processing time has a spike: assets/monitors/max_proc_time.json
+    Processing time is anomalous: assets/monitors/processing_time.json
+    Request rate is anomalous: assets/monitors/req_count.json
   saved_views:
     tomcat_4xx: assets/saved_views/tomcat_4xx.json
     tomcat_5xx: assets/saved_views/tomcat_5xx.json
@@ -42,7 +42,7 @@ author:
 categories:
 - caching
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
 display_on_public_website: true
@@ -50,7 +50,7 @@ draft: false
 git_integration_title: tomcat
 integration_id: tomcat
 integration_title: Tomcat
-integration_version: 2.0.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: tomcat

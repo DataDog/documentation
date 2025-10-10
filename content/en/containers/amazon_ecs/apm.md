@@ -1,5 +1,6 @@
 ---
 title: Tracing ECS Applications
+description: Configure APM trace collection for containerized applications running on Amazon ECS
 aliases:
   - /agent/amazon_ecs/apm
 further_reading:
@@ -31,7 +32,7 @@ Once enabled, the Datadog Agent container collects the traces emitted from the o
           "name": "datadog-agent",
           "image": "public.ecr.aws/datadog/agent:latest",
           "cpu": 100,
-          "memory": 256,
+          "memory": 512,
           "essential": true,
           "portMappings": [
             {
@@ -200,7 +201,7 @@ end
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
+{{< programming-lang lang="go">}}
 
 #### Launch time variable
 Update the Task Definition's `entryPoint` with the following, substituting your `<Go Startup Command>`:
@@ -214,7 +215,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly:
+You can alternatively update your code to have the tracer set the hostname explicitly. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,7 +223,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

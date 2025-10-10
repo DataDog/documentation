@@ -1,0 +1,11 @@
+branch=$(git branch --show-current)
+
+YELLOW="\033[1;33m"
+ENDCOLOR="\033[0m"
+WHITE="\033[1m"
+
+# If the current branch is master, abort the push
+if [ "$branch" = "master" ]; then
+  echo "${YELLOW}You're trying to push to master. Use a feature branch instead.${ENDCOLOR}"
+  exit 1
+fi

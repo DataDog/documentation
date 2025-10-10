@@ -3,11 +3,15 @@ categories:
 - AWS
 - クラウド
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS Transit Gateway のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_transit_gateway/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-transit-gateway/
+  tag: アーキテクチャセンター
+  text: AWS Transit Gateway を使用して AWS PrivateLink 経由で Datadog に接続する
 git_integration_title: amazon_transit_gateway
 has_logo: true
 integration_id: ''
@@ -50,7 +54,7 @@ AWS Transit Gateway を使用して、仮想プライベートクラウド (VPC)
 3. [Datadog - AWS Transit Gateway インテグレーション][4]をインストールします。
 
 
-### 収集データ
+### ログ収集
 
 #### Transit Gateway フローログ記録の有効化
 
@@ -93,6 +97,10 @@ AWS Transit Gateway インテグレーションには、サービスのチェッ
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

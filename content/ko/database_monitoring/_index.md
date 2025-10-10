@@ -8,6 +8,9 @@ cascade:
     rank: 70
 description: 데이터베이스 모니터링 시작하기
 further_reading:
+- link: https://www.datadoghq.com/blog/database-monitoring-recommendations/
+  tag: 블로그
+  text: 데이터베이스 모니터링 권장 사항을 통해 데이터베이스 호스트 및 쿼리 성능 향상
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
   tag: 블로그
   text: 데이터베이스 성능 모니터링 및 시각화
@@ -41,7 +44,7 @@ Datadog 데이터베이스 모니터링을 사용하면 호스트 전반에 있�
 
 ## 시작하기
 
-Datadog 데이터베이스 모니터링은 **Postgres**, **MySQL**, **Oracle**, **SQL Server** 및 **MongoDB**의 자체 호스팅 및 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 구성하고 Datadog Agent를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택합니다.
+Datadog 데이터베이스 모니터링은 **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**의 자체 호스팅 및 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 구성하고 Datadog Agent를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택합니다.
 
 ### Postgres
 
@@ -66,6 +69,11 @@ Datadog 데이터베이스 모니터링은 **Postgres**, **MySQL**, **Oracle**, 
 ### MongoDB
 
 {{< partial name="dbm/dbm-setup-mongodb" >}}
+<p></p>
+
+### Amazon DocumentDB
+
+{{< partial name="dbm/dbm-setup-documentdb" >}}
 <p></p>
 
 ## Datadog 데이터베이스 모니터링 탐색하기

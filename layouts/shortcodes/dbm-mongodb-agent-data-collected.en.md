@@ -2,8 +2,10 @@
 
 Database Monitoring for MongoDB captures slow operations from either MongoDB slow query logs or the `system.profile` collection. Slow operations are defined as those taking longer than the `slowms` threshold set in your MongoDB configuration.
 
--   With Database Profiling Enabled: When profiling is enabled at levels 1 or 2, Database Monitoring collects slow operations from the `system.profile` collection.
--   With Database Profiling Disabled: If profiling is disabled, Database Monitoring relies on MongoDB slow query logs to gather slow operations.
+- With Database Profiling Enabled: When profiling is enabled at levels 1 or 2, Database Monitoring collects slow operations from the `system.profile` collection.
+- With Database Profiling Disabled: If profiling is disabled, Database Monitoring relies on MongoDB `getLog` command to gather slow operations from slow query logs.
+
+**Note**: The `getLog` command retrieves the most recent 1024 `mongod` events. In busy databases with a high volume of slow queries or when the slow query collection interval is set to a higher interval (resulting in less frequent collection), some slow queries may not be captured.
 
 ### Operation samples and explain plans
 

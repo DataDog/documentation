@@ -8,6 +8,7 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
+custom_kind: 통합
 dependencies: []
 description: 핵심 Amazon ElasicCache 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
@@ -18,7 +19,6 @@ integration_id: ''
 integration_title: Amazon ElastiCache
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elasticache
 public_title: Datadog-Amazon ElastiCache 통합
@@ -112,13 +112,18 @@ instances:
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않습니다.
 
+**참고**: ElastiCache Serverless 배포용 메트릭은 동일한 `aws.elasticache` 네임스페이스에 보고됩니다. 태그로 이 메트릭을 구분할 수 있습니다.
+
+   - 자체 설계된 캐시의 기존 ElastiCache 메트릭은 개별 캐시를 구분할 때 cacheclusterid를 사용
+   - 서버리스 캐시 메트릭은 개별 캐시를 구분할 때 clusterid 태그를 사용
+
 ### 이벤트
 
 Amazon ElastiCache 통합은 클러스터, 캐ㅣ 보안 그룹 및 캐시 파라미터 그룹에 대한 이벤트를 포함합니다. 아래에서 예시 이벤트를 참조하세요.
 
-{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon Elasticache 이벤트" >}}
+{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon ElastiCache 이벤트" >}}
 
-### 서비스 검사
+### 서비스 점검
 
 Amazon ElastiCache 통합은 서비스 점검을 포함하지 않습니다.
 

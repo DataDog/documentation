@@ -33,34 +33,49 @@ SSL テストを使用すると、SSL/TLS 証明書の有効性と有効期限�
 
 SSL テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。SSL テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
 
-## コンフィギュレーション
+## 構成
 
-`SSL` テストの作成を選択した後、テストのリクエストを定義します。
+You may create a test using one of the following options:
 
-### リクエストを定義する
+- **Create a test from a template**:
 
-1. テストを実行する **Host** と **Port** を指定します。デフォルトの SSL ポートは `443` です。
-2. **Advanced Options** (オプション) をテストに追加します。
-   * **Accept self-signed certificates**: 自己署名証明書に関連するサーバーエラーをバイパスします。
-   * **Fail on revoked certificate in stapled OCSP**: 証明書が OCSP ステープリングによって取り消されたとラベル付けされた場合、テストに失敗します。
-   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
-   * **Server Name**: TLS ハンドシェイクを開始するサーバーを指定し、サーバーが同じ IP アドレスと TCP ポート番号上の複数の可能な証明書のうちの 1 つを提示することを可能にします。デフォルトでは、このパラメータは **Host** の値で埋められています。
-   * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-   `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
+- **Build a test from scratch**:
 
-   ```
-   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-   ```
+   1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、SSL リクエストタイプを選択します。
+   1. テストを実行する **Host** と **Port** を指定します。デフォルトの SSL ポートは `443` です。
+   1. **Advanced Options** (オプション) をテストに追加します。
+      * **Accept self-signed certificates**: 自己署名証明書に関連するサーバーエラーをバイパスします。
+      * **Fail on revoked certificate in stapled OCSP**: 証明書が OCSP ステープリングによって取り消されたとラベル付けされた場合、テストに失敗します。
+      * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
+      * **Server Name**: TLS ハンドシェイクを開始するサーバーを指定し、サーバーが同じ IP アドレスと TCP ポート番号上の複数の可能な証明書のうちの 1 つを提示することを可能にします。デフォルトでは、このパラメータは **Host** の値で埋められています。
+      * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
 
-3. SSL テストに**名前**を付けます。
+      `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
 
-4. SSL テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
-   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
+   1. SSL テストに**名前**を付けます。
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+   1. SSL テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+   1. **Test Certificate** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。<br /><br>
+
+      {{< img src="synthetics/api_tests/synthetics_ssl_test_cert.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
+
+   1. Click **Create Test** to submit your API test.
+
+
+
+### スニペット
+
+{{% synthetics-api-tests-snippets %}}
 
 ### アサーションを定義する
 
@@ -118,7 +133,7 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 : 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
+: テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
 
 `INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
@@ -140,11 +155,7 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 
 ### アクセス制限
 
-アカウントに[カスタムロール][13]を使用しているお客様は、アクセス制限が利用可能です。
-
-組織内の役割に基づいて、SSL テストへのアクセスを制限することができます。SSL テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## その他の参考資料
 
@@ -162,4 +173,3 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 [10]: /ja/synthetics/api_tests/errors/#ssl-errors
 [11]: /ja/account_management/rbac/
 [12]: /ja/account_management/rbac#custom-roles
-[13]: /ja/account_management/rbac/#create-a-custom-role

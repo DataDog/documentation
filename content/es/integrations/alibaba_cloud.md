@@ -1,7 +1,7 @@
 ---
 categories:
 - nube
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Integra tus servicios de Alibaba Cloud con Datadog.
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
@@ -25,7 +25,7 @@ version: '1.0'
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La integración de Datadog Alibaba Cloud no es compatible con el sitio de Datadog para el Gobierno.</div>
+<div class="alert alert-danger">La integración de Datadog Alibaba Cloud no es compatible con el sitio de Datadog para el Gobierno.</div>
 {{< /site-region >}}
 
 ## Información general
@@ -44,7 +44,7 @@ Conéctate a Alibaba Cloud para obtener métricas desde tu:
 
 ### Instalación
 
-Navega hasta [el cuadro de integración de Datadog y Alibaba Cloud][1] y pulsa _añadir cuenta_.
+Navega hasta [el cuadro de integración de Datadog y Alibaba Cloud][1] y pulsa _add account_(añadir cuenta).
 
 ### Configuración
 
@@ -52,7 +52,7 @@ Rellena los siguientes parámetros para integrar Datadog con la API de Alibaba C
 
 - **`Account Id`**
 
-Para ello, sitúa el cursor sobre el avatar en la parte superior derecha de la consola de Alibaba Cloud y selecciona _Configuración de seguridad_. El ID de la cuenta se muestra en la parte superior de esa página.
+Para ello, sitúa el cursor sobre el avatar en la parte superior derecha de la consola de Alibaba Cloud y selecciona _Security Settings (Configuración de seguridad)_. El ID de la cuenta se muestra en la parte superior de esa página.
 
 {{< img src="integrations/alibaba_cloud/account_id_ac.png" alt="ID de cuenta de AC" style="width:30%;">}}
 
@@ -66,7 +66,7 @@ En tu cuenta de Alibaba Cloud:
     - `display name`: Datadog
     - `description`: usuario de Datadog para la integración de Datadog y Alibaba Cloud
 
-2. Selecciona _Acceso programático_:
+2. Selecciona _Programmatic Access_ (Acceso programático):
 
     {{< img src="integrations/alibaba_cloud/ac_programmatic_access.png" alt="Acceso programático" style="width:40%;">}}
 
@@ -110,7 +110,7 @@ Eventos de Alibaba Cloud se cobran por servicio de Alibaba Cloud.
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

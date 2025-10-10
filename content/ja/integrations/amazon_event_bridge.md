@@ -3,7 +3,7 @@ categories:
 - AWS
 - クラウド
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS サービス、SaaS、アプリからのイベントをほぼリアルタイムに処理するサーバーレスイベントバス。
 doc_link: https://docs.datadoghq.com/integrations/amazon_event_bridge/
@@ -23,7 +23,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
+<div class="alert alert-danger">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
 {{< /site-region >}}
 
 ## 概要
@@ -81,10 +81,6 @@ Amazon EventBridge インテグレーションを使用して、Datadog のモ�
 * Windows Update を実行するか、アプリケーションをインストールします
 
 ターゲットにできるリソースの完全なリストは、[AWS ウェブサイト][10]にあります。
-
-このプロセスをトリガーするためにスナップショットを送信する方法の例を以下に示します。トリガーされると、AWS でアクション受信を指定できます。
-
-{{< wistia uezo3fh61j >}}
 
 ## 収集データ
 

@@ -11,10 +11,6 @@ is_beta: true
 title: Argo CD デプロイメントの監視
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CD Visibility は利用できません。</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
 Argo CD 用の CD Visibility は非公開ベータ版です。アクセスをリクエストするには、フォームに記入してください。
 {{< /callout >}}
@@ -77,7 +73,7 @@ data:
             }
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>commit_metadata</code> フィールドを入力するための呼び出しは必須ではありません。このフィールドは、ペイロードを Git の情報でリッチ化するために使用します。
 Helm リポジトリを Argo CD アプリケーションのソースとして使用している場合は、この行と前の行のカンマを削除して本文を調整してください。
 </div>

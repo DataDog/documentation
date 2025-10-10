@@ -8,11 +8,11 @@ title: Ejecutar tests en aplicaciones utilizando un Shadow DOM
 
 ## Información general
 
-La API del Shadow Objeto de documento de objeto (DOM) es un componente web que permite adjuntar un árbol del DOM encapsulado a un elemento de HTML. El [DOM de sombra][1] es autónomo y permanece aislado del DOM del documento principal. 
+La API del Shadow Objeto de documento de objeto (DOM) es un componente web que permite adjuntar un árbol del DOM encapsulado a un elemento de HTML. El [DOM de sombra][1] es autónomo y permanece aislado del DOM del documento principal.
 
 Puedes utilizar un DOM de sombra para los siguientes casos de uso:
 
-- Formularios y componentes de bibliotecas de terceros
+- Formularios y componentes de librerías de terceros
 - Contenido incrustado (como vídeo o una imagen)
 - Integraciones de chats emergentes
 
@@ -26,7 +26,7 @@ En función del [modo de encapsulación][2] y del objetivo del paso, aprovecha l
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Shadow DOM abierto" style="width:50%;" >}}
 
-En el modo `open`, las aserciones normales no están disponibles. Puedes utilizar las aserciones de JavaScript para interactuar y validar elementos representados en un DOM de sombra con la propiedad `Element.shadowRoot`. 
+En el modo `open`, las aserciones normales no están disponibles. Puedes utilizar las aserciones de JavaScript para interactuar y validar elementos representados en un DOM de sombra con la propiedad `Element.shadowRoot`.
 
 ### Aserción de la presencia de texto
 
@@ -35,47 +35,47 @@ En el modo `open`, las aserciones normales no están disponibles. Puedes utiliza
 Para validar que el texto "TODO" aparece en una página, consulta la propiedad `innerHTML` directamente desde el elemento `<body>` del documento principal.
 
 ```HTML
-devolver document.querySelector("body").innerHTML.includes("TODO")
+return document.querySelector("body").innerHTML.includes("TODO")
 ```
 
-### Validar texto representado
+### Validar el texto representado
 
 Para validar que el texto está representado en un elemento dado representado en un DOM de sombra, utiliza la propiedad `shadowRoot` para acceder al elemento respectivo y las propiedades `innerHTML` o `textContent` para validar que el texto está representado.
 
 Por ejemplo, el siguiente fragmento de código valida el texto "TODO" representado en una etiqueta (tag) `<h3>`:
 
 ```
-// encontrar el elemento al que se adjunta el Shadow DOM:
-si el elemento = document.querySelector("body > editable-list")
+// find element to which the Shadow DOM is attached:
+let element = document.querySelector("body > editable-list")
 
-// utilizar la propiedad shadowRoot para localizar el elemento <h3> en el Shadow DOM:
-si shadowDomElement = element.shadowRoot.querySelector("div > h3")
+// use the shadowRoot property to locate the <h3> element in the Shadow DOM:
+let shadowDomElement = element.shadowRoot.querySelector("div > h3")
 
-// check el textContent del elemento Shadow DOM:
-devolver shadowDomElement.textContent.includes("TODO")
+// check textContent of the Shadow DOM element:
+return shadowDomElement.textContent.includes("TODO")
 ```
 
 ### Introducir texto en los campos de entrada
 
-Cuando los campos de entrada de texto se representan en el árbol de DOM del documento principal, el grabador de tests del navegador Datadog graba automáticamente los valores introducidos y crea un paso de test [Escribir texto][3]. 
+Cuando los campos de entrada de texto se representan en el árbol del DOM del documento principal, el grabador de tests del navegador Datadog graba automáticamente los valores introducidos y crea un paso de test [Escribir texto][3].
 
-Cuando se trabaja con campos de entrada representados en un DOM de sombra, es posible que el grabador no pueda capturar un conjunto completo de puntos de referencia al elemento, lo que provoca que el paso falle en las ejecuciones de tests. Como solución para introducir texto en un campo de entrada de texto representado en un DOM de sombra, añade una aserción JavaScript que localice el elemento `<input>` respectivo y configure el campo `value`.
+Cuando se trabaja con campos de entrada representados en un DOM de sombra, es posible que el grabador no pueda capturar un conjunto completo de puntos de referencia al elemento, lo que provoca que el paso falle en las ejecuciones de tests. Como solución para introducir texto en un campo de entrada de texto representado en un DOM de sombra, añade una aserción de JavaScript que localice el elemento `<input>` respectivo y configure el campo `value`.
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-text-type.png" alt="Validar el texto introducido representado en un DOM de sombra" style="width:90%;" >}}
 
-Por ejemplo, el siguiente fragmento de código añade el texto "elemento añadido con aserción JS" en el campo de entrada:
+Por ejemplo, el siguiente fragmento de código añade el texto "elemento añadido con aserción de JS" en el campo de entrada:
 
 ```js
-// encontrar el elemento al que se adjunta el Shadow DOM:
+// find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
 
-// utilizar la propiedad shadowRoot para localizar el elemento <input> en el Shadow DOM:
-si shadowDomInput = element.shadowRoot.querySelector("input")
+// use the shadowRoot property to locate the <input> element in the Shadow DOM:
+let shadowDomInput = element.shadowRoot.querySelector("input")
 
-// configurar la propiedad de valor del elemento <input>:
-shadowDomInput.value = "Elemento añadido con aserción JS"
+// set the value property of the <input> element:
+shadowDomInput.value = "Item added with JS assertion"
 
-devolver true
+return true
 ```
 
 ### Haz clic en un elemento
@@ -87,29 +87,29 @@ Para activar un clic en un elemento representado en un DOM de sombra, localiza e
 Por ejemplo, el siguiente fragmento de código activa un clic en un elemento de botón.
 
 ```
-// encontrar elemento al que se adjunta el Shadow DOM:
-si el elemento = document.querySelector("body > editable-list")
+// find element to which the Shadow DOM is attached:
+let element = document.querySelector("body > editable-list")
 
-// utilizar la propiedad shadowRoot para localizar el elemento <button> en el Shadow DOM:
-si shadowDomButton = element.shadowRoot.querySelector("button.editable-list-add-item")
+// use the shadowRoot property to locate the <button> element in the Shadow DOM:
+let shadowDomButton = element.shadowRoot.querySelector("button.editable-list-add-item")
 
-// activar un clic en el botón:
+// trigger a click on the button:
 shadowDomButton.click()
 
-devolver true
+return true
 ```
 
 ## Modo cerrado
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/closed-shadow-dom.png" alt="Shadow DOM cerrado" style="width:30%;" >}}
 
-En el modo `closed`, las aserciones normales no están disponibles. Además, los elementos representados en un DOM de sombra no son accesibles con JavaScript, por lo que no puedes utilizar aserciones JavaScript en tus tests de navegador.
+En el modo `closed`, las aserciones normales no están disponibles. Además, los elementos representados en un DOM de sombra no son accesibles con JavaScript, por lo que no puedes utilizar aserciones de JavaScript en tus tests de navegador.
 
 Puedes utilizar la acción `Press Key` para seleccionar las opciones adecuadas. Por ejemplo, para ir a una página diferente seleccionando una opción de un menú de navegación y que el menú se represente en un DOM de sombra, utiliza la tecla `tab` para ir a la opción respectiva y haz clic en la tecla `enter` para seleccionar una opción.
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/using-tab-keys-for-shadow-dom.mp4" alt="Utilizar teclas de pestañas para solucionar un DOM de sombra en un test de navegador" video=true >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -35,7 +35,7 @@ Existen varias formas de modificar los [datos y el contexto recopilados][1] por 
 
 ## Sustituir los nombres de las vistas de RUM por defecto
 
-El SDK del RUM Browser genera automáticamente un [evento de vista][2] para cada nueva página visitada por tus usuarios o cuando se cambia la URL de la página (para aplicaciones de página única). El nombre de la vista se calcula a partir de la URL de la página actual, donde los ID alfanuméricos variables se eliminan automáticamente. Por ejemplo, `/dashboard/1234` se convierte en `/dashboard/?`.
+El SDK del RUM Browser genera automáticamente un [evento de vista][2] para cada nueva página visitada por tus usuarios o cuando se cambia la URL de la página (para aplicaciones de página única). El nombre de la vista se calcula a partir de la URL de la página actual, donde los ID alfanuméricos variables se eliminan automáticamente. Un segmento de ruta que contenga al menos un número se considera un ID de variable. Por ejemplo, `/dashboard/1234` y `/dashboard/9a` se convierten en `/dashboard/?`.
 
 A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarlos a un servicio dedicado propiedad de un equipo mediante el rastreo manual de eventos de vistas con la opción `trackViewsManually`:
 
@@ -203,7 +203,7 @@ Si utilizas React, Angular, Vue o cualquier otro marco de frontend, Datadog reco
 
 Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajusten a cómo los has definido en tu aplicación React, debes seguir los pasos a continuación.
 
-**Nota**: Estas instrucciones son específicas para la biblioteca del **React Router v6**.
+**Nota**: Estas instrucciones son específicas para la librería del **React Router v6**.
 
 1. Configura `trackViewsManually` en `true` al inicializar el SDK del RUM Browser como se describe [anteriormente](#override-default-rum-view-names).
 
@@ -349,6 +349,45 @@ Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajus
    {{% /tab %}}
    {{< /tabs >}}
 
+### Definir el nombre de la vista
+
+Utiliza `setViewName(name: string)` para actualizar el nombre de la vista actual. Esto te permite cambiar el nombre de la vista mientras está activa sin iniciar una nueva.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewName('<VIEW_NAME>');
+
+// Code example
+datadogRum.setViewName('Checkout');
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('<VIEW_NAME>');
+})
+
+// Code example
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('Checkout');
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
+
+// Code example
+window.DD_RUM && window.DD_RUM.setViewName('Checkout');
+```
+{{% /tab%}}
+{{< /tabs>}}
+
+**Nota**: Cambiar el nombre de la vista afecta a la vista y a sus eventos secundarios desde el momento en que se llama al método.
+
 ## Enriquecer y controlar los datos de RUM
 
 El SDK del RUM Browser captura los eventos de RUM y rellena sus atributos principales. La función de devolución de llamada `beforeSend` te da acceso a cada evento recopilado por el SDK del RUM Browser antes de enviarlo a Datadog.
@@ -381,7 +420,7 @@ Para más información, consulta la [Guía de enriquecimiento y control de datos
 
 ### Enriquecer eventos de RUM
 
-Junto con los atributos añadidos con la [API de Global Context](#global-context) o la [recopilación de datos de marcas de funciones](#enrich-rum-events-with-feature-flags), puedes añadir atributos de contexto adicionales al evento. Por ejemplo, etiquetar tus eventos de recursos del RUM con datos extraídos de un objeto de respuesta de acceso:
+Junto con los atributos añadidos con la [API de Global Context](#global-context) o la [recopilación de datos de indicadores de funciones](#enrich-rum-events-with-feature-flags), puedes añadir atributos de contexto adicionales al evento. Por ejemplo, etiquetar tus eventos de recursos del RUM con datos extraídos de un objeto de respuesta de acceso:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -391,7 +430,7 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
-        // recopila encabezados de respuesta de un recurso de RUM
+        // collect a RUM resource's response headers
         if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
@@ -407,7 +446,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
-            // recopila encabezados de respuesta de un recurso de RUM
+            // collect a RUM resource's response headers
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
@@ -424,7 +463,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
-            // recopila encabezados de respuesta de un recurso de RUM
+            // collect a RUM resource's response headers
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
@@ -433,19 +472,16 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 Si un usuario pertenece a varios equipos, añade pares clave-valor adicionales en tus llamadas a la API de Global Context.
 
-El SDK del RUM Browser ignora:
-
-- Atributos añadidos fuera de `event.context`
-- Modificaciones realizadas en un contexto de evento de vista de RUM
+El SDK del RUM Browser ignora los atributos añadidos fuera de `eventos.context`.
 
 ### Enriquecer eventos de RUM con indicadores de funciones
 
-Puedes [enriquecer tus datos de eventos de RUM con indicadores de características][14] para obtener mejor contexto y visibilidad de la monitorización del rendimiento. Esto te permite determinar a qué usuarios se les muestra una experiencia de usuario específica y si está afectando negativamente al rendimiento del usuario.
+Puedes [enriquecer tus datos de eventos de RUM con indicadores de funciones][14] para obtener mejor contexto y visibilidad de la monitorización del rendimiento. Esto te permite determinar a qué usuarios se les muestra una experiencia de usuario específica y si está afectando negativamente al rendimiento del usuario.
 
 ### Modificar el contenido de un evento de RUM
 
@@ -459,7 +495,7 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event) => {
-        // eliminar dirección de correo electrónico de la URL de la vista
+        // remove email from view url
         event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
     },
     ...
@@ -472,7 +508,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            // eliminar dirección de correo electrónico de la URL de la vista
+            // remove email from view url
             event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
@@ -486,7 +522,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            // eliminar dirección de correo electrónico de la URL de la vista
+            // remove email from view url
             event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
@@ -497,22 +533,36 @@ window.DD_RUM &&
 
 Puedes actualizar las siguientes propiedades de eventos:
 
-|   Atributo           |   Tipo    |   Descripción                                                                                       |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
-|   `view.url`            |   Cadena  |   La URL de la página web activa.                            |
-|   `view.referrer`       |   Cadena  |   La URL de la página web anterior desde la que se siguió un vínculo a la página solicitada actualmente.  |
-|   `view.name`           |   Cadena  |   El nombre de la vista actual.                            |
-|   `service`             |   Cadena  |   El nombre de servicio para tu aplicación.                                                            |
-|   `version`             |   Cadena  |   La versión de la aplicación, por ejemplo: 1.2.3, 6c44da20 y 2020.02.13.                          |
-|   `action.target.name`  |   Cadena  |   El elemento con el que ha interactuado el usuario. Solo para acciones recopiladas automáticamente.              |
-|   `error.message`       |   Cadena  |   Un mensaje conciso, legible, de una línea, en el cual se explica el error.                                 |
-|   `error.stack `        |   Cadena  |   La stack trace o la información complementaria sobre el error.                                     |
-|   `error.resource.url`  |   Cadena  |   La URL del recurso que provocó el error.                                                        |
-|   `resource.url`        |   Cadena  |   La URL del recurso.                                                                                 |
-|   `context`        |   Objeto  |   Atributos añadidos con la [Global Context API](#global-context), la [View Context API](#view-context) o al generar eventos manualmente (por ejemplo, `addError` y **`addAction`**).                                                                                 |
+| Atributo                      | Tipo   | Descripción                                                                                                                                                                               |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view.url`                     | Cadena | La URL de la página web activa.                                                                                                                                                           |
+| `view.referrer`                | Cadena | La URL de la página web anterior desde la que se siguió un vínculo a la página solicitada actualmente.                                                                                          |
+| `view.name`                    | Cadena | El nombre de la vista actual.                                                                                                                                                             |
+| `view.performance.lcp.resource_url` | Cadena |   La URL de recursos para Largest Contentful Paint.                                                                                                                                 |
+| `service`                      | Cadena | El nombre de servicio para tu aplicación.                                                                                                                                                    |
+| `version`                      | Cadena | La versión de la aplicación. Por ejemplo: 1.2.3, 6c44da20 o 2020.02.13.                                                                                                                  |
+| `action.target.name`           | Cadena | El elemento con el que ha interactuado el usuario. Solo para acciones recopiladas automáticamente.                                                                                                      |
+| `error.message`                | Cadena | Un mensaje conciso, legible, de una línea, en el cual se explica el error.                                                                                                                         |
+| `error.stack `                 | Cadena | La traza (trace) de stack tecnológico o la información adicional sobre el error.                                                                                                                             |
+| `error.resource.url`           | Cadena | La URL del recurso que provocó el error.                                                                                                                                                |
+| `resource.url`                 | Cadena | La URL del recurso.                                                                                                                                                                         |
+| `long_task.scripts.source_url` | Cadena | La url del recurso de script                                                                                                                                                                   |
+| `long_task.scripts.invoker`    | Cadena | Un nombre significativo que indique cómo se ha llamado al script                                                                                                                                    |
+| `context`                      | Objeto | Atributos añadidos con la [Global Context API](#global-context), la [View Context API](#view-context) o al generar eventos manualmente (por ejemplo, `addError` y **`addAction`**). |
 
 El SDK del RUM Browser ignora las modificaciones realizadas en las propiedades de eventos no enumeradas anteriormente. Para obtener más información sobre las propiedades de eventos, consulta el [repositorio GitHub del SDK del RUM Browser][15].
 
+**Nota**: A diferencia de otros eventos, los eventos de vista se envían varias veces a Datadog para reflejar las actualizaciones que se producen durante su ciclo de vida. Una actualización de un evento de vista anterior puede seguir enviándose mientras una nueva vista está activa. Datadog recomienda tener en cuenta este comportamiento al modificar el contenido de un evento de vista.
+
+```javascript
+beforeSend: (event) => {
+    // discouraged, as the current view name could be applied to both the active view and the previous views
+    event.view.name = getCurrentViewName()
+
+    // recommended
+    event.view.name = getViewNameForUrl(event.view.url)
+}
+```
 ### Descartar un evento de RUM
 
 Con la API `beforeSend`, descarta un evento de RUM devolviendo `false`:
@@ -572,20 +622,38 @@ window.DD_RUM &&
 
 ## Sesión del usuario
 
-Añadir información del usuario a tus sesiones de RUM puede ayudar a:
+Añadir información del usuario a tus sesiones de RUM te ayuda a:
+
 * Seguir el recorrido de un usuario concreto
 * Conocer qué usuarios se han visto más afectados por los errores
 * Monitorizar el rendimiento de tus usuarios más importantes
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" >}}
 
-Los siguientes atributos son opcionales, pero Datadog recomienda proporcionar al menos uno de ellos:
+{{< tabs >}}
+{{% tab "6.4.0 and above" %}}
+
+Están disponibles los siguientes atributos:
+
+| Atributo  | Tipo | Obligatorio |  Descripción                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | Cadena | Sí | Identificador único de usuario.                                                                                  |
+| `usr.name`  | Cadena | No | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
+| `usr.email` | Cadena | No | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+
+{{% /tab %}}
+{{% tab "Before 6.4.0" %}}
+
+Los siguientes atributos son opcionales, pero Datadog recomienda encarecidamente proporcionar al menos uno de ellos. Por ejemplo, debes establecer el ID de usuario en tus sesiones para ver los datos relevantes en algunos dashboards predeterminados de RUM, que dependen de `usr.id` como parte de la consulta.
 
 | Atributo  | Tipo | Descripción                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
-| `usr.id`    | Cadena | Identificador de usuario único.                                                                                  |
+| `usr.id`    | Cadena | Identificador único de usuario.                                                                                  |
 | `usr.name`  | Cadena | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
 | `usr.email` | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Aumentar tus posibilidades de filtrado añadiendo atributos adicionales a los recomendados. Por ejemplo, añade información sobre el plan del usuario o a qué grupo de usuarios pertenece.
 
@@ -734,6 +802,152 @@ window.DD_RUM && window.DD_RUM.clearUser()
 {{% /tab %}}
 {{< /tabs >}}
 
+## Cuenta
+
+Para agrupar a los usuarios en conjuntos diferentes, utiliza el concepto de cuenta.
+
+Están disponibles los siguientes atributos:
+
+| Atributo      | Tipo   | Obligatorio | Descripción                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | Cadena | Sí      | Identificador único de la cuenta.                                 |
+| `account.name` | Cadena | No       | Nombre descriptivo de la cuenta, mostrado por defecto en la interfaz de usuario RUM. |
+
+### Identificar cuenta
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Cuenta de acceso
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.getAccount()
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Añadir/Anular propiedad de cuenta
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Eliminar propiedad de cuenta
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Borrar propiedades de cuenta
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.clearAccount()
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Muestreo
 
 Por defecto, no se aplica ningún muestreo al número de sesiones recopiladas. Para aplicar un muestreo relativo (en porcentaje) al número de sesiones recopiladas, utiliza el parámetro `sessionSampleRate` al inicializar el RUM.
@@ -862,7 +1076,7 @@ import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -875,7 +1089,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('activity', {
         hasPaid: true,
@@ -888,7 +1102,7 @@ window.DD_RUM.onReady(function() {
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -909,7 +1123,7 @@ Sustituye el contexto de tus eventos de vista del RUM y de los eventos secundari
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewContext({
     originalUrl: 'shopist.io/department/chairs',
 });
@@ -922,7 +1136,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({
       originalUrl: 'shopist.io/department/chairs',
@@ -936,7 +1150,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.setViewContext({
         originalUrl: 'shopist.io/department/chairs',
@@ -945,6 +1159,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Contexto de error
+
+### Adjuntar contexto de error local con dd_context
+
+Al capturar errores, se puede proporcionar contexto adicional en el momento en que se genera un error. En lugar de pasar información adicional a través de la API `addError()`, puedes adjuntar una propiedad `dd_context` directamente a la instancia de error. El SDK del RUM Browser detecta automáticamente esta propiedad y la fusiona en el contexto final del evento de error.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## Contexto global
 
 ### Añadir la propiedad de contexto global
@@ -958,7 +1185,7 @@ import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
-// Ejemplo de código
+// Code example
 datadogRum.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -971,7 +1198,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
@@ -984,7 +1211,7 @@ window.DD_RUM.onReady(function() {
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -1004,7 +1231,7 @@ Puedes eliminar una propiedad de contexto global previamente definida.
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.removeGlobalContextProperty('<CONTEXT_KEY>');
 
-// Ejemplo de código
+// Code example
 datadogRum.removeGlobalContextProperty('codeVersion');
 ```
 
@@ -1015,7 +1242,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 })
@@ -1027,7 +1254,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
@@ -1047,7 +1274,7 @@ Sustituye el contexto por defecto de todos tus eventos de RUM con la API `setGlo
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 datadogRum.setGlobalContext({
     codeVersion: 34,
 });
@@ -1060,7 +1287,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({
         codeVersion: 34,
@@ -1074,7 +1301,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.setGlobalContext({
         codeVersion: 34,
@@ -1166,7 +1393,7 @@ Sin embargo, esta función tiene algunas **limitaciones**:
 
 ## Micro frontend
 
-A partir de la versión 5.22, el RUM Browser SDK soporta arquitecturas micro frontend. El mecanismo se basa en stacktrace. Para utilizarlo, debes ser capaz de extraer servicio y las propiedades de versión de las rutas y nombres de archivo de tu aplicación.
+A partir de la versión 5.22, el SDK del navegador RUM admite arquitecturas micro frontend. El mecanismo se basa en trazas del stack tecnológico. Para utilizarlo, debes poder extraer servicios y propiedades de versiones de las rutas y nombres de archivo de tu aplicación.
 
 ### Cómo utilizarlo
 
@@ -1174,20 +1401,20 @@ En la propiedad `beforeSend`, puede anular las propiedades servicio y version. P
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```JavaScript
-import { datadogRum } from '@Datadog/browser-rum';
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
 
-const SERVICE_REGEX = /some-pathname\/(?<servicio>\w+)\/(?<version>\w+)\//;
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
 datadogRum.init({
     ...,
-    beforeSend: (evento, context) => {
-        const stack = contexto?.handlingStack || evento?.error?.stack;
-        const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-        if (servicio && version) {
-         evento.servicio = servicio;
-         evento.version = versión;
+        if (service && version) {
+          event.service = service;
+          event.version = version;
         }
 
         return true;
@@ -1196,19 +1423,19 @@ datadogRum.init({
 ```
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
-```JavaScript
-const SERVICE_REGEX = /some-pathname/(?<servicio>\w+)\/(?<version>\w+)\//;
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
-window.DD_RUM.onReady(función() {
+window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
-        beforeSend: (evento, context) => {
-            const stack = contexto?.handlingStack || evento?.error?.stack;
-            const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-            if (servicio && version) {
-               evento.servicio = servicio;
-               evento.version = versión;
+            if (service && version) {
+                event.service = service;
+                event.version = version;
             }
 
             return true;
@@ -1218,18 +1445,18 @@ window.DD_RUM.onReady(función() {
 ```
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
-```JavaScript
-const SERVICE_REGEX = /some-pathname/(?<servicio>\w+)\/(?<version>\w+)\//;
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
 window.DD_RUM && window.DD_RUM.init({
     ...,
-    beforeSend: (evento, context) => {
-        const stack = contexto?.handlingStack || evento?.error?.stack;
-        const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-        if (servicio && version) {
-         evento.servicio = servicio;
-         evento.version = versión;
+        if (service && version) {
+          event.service = service;
+          event.version = version;
         }
 
         return true;
@@ -1245,8 +1472,8 @@ Cualquier consulta realizada en el Explorador RUM puede utilizar el atributo ser
 
 Algunos eventos no pueden atribuirse a un origen, por lo que no tienen una pila de manipulación asociada. Esto incluye:
 - Acción eventos recogida automáticamente
-- Ressource eventos distintos de XHR y Fetch.
-- Ver eventos (pero en su lugar puede [anular los nombres predeterminados de las vistas de ron][21])
+- Eventos de recursos distintos de XHR y Fetch.
+- Ver eventos (pero en su lugar puedes [sobrescribir los nombres de vistas de RUM predeterminados][21])
 - Violaciones de CORS y CSP
 
 ## Referencias adicionales
@@ -1256,7 +1483,7 @@ Algunos eventos no pueden atribuirse a un origen, por lo que no tienen una pila 
 [1]: /es/real_user_monitoring/browser/data_collected/
 [2]: /es/real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /es/real_user_monitoring/browser/setup
+[4]: /es/real_user_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -1264,7 +1491,7 @@ Algunos eventos no pueden atribuirse a un origen, por lo que no tienen una pila 
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /es/real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts

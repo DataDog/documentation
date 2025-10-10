@@ -12,7 +12,7 @@
 | Category::Configuration & Deployment | インフラストラクチャーを構成しデプロイできるプラットフォームを監視するインテグレーション。 |
 | Category::Containers | コンテナやコンテナ管理テクノロジーからのメトリクス、ログ、イベント、トレースを追跡するインテグレーション。 |
 | Category::Cost Management | クラウドコストの追跡と管理に役立つインテグレーション。 |
-| Category::Data Store | データベース、クラスター、データレイクなどのデータストレージソリューションを監視するインテグレーション。 |
+| Category::Data Stores | データベース、クラスター、データレイクなどのデータストレージソリューションを監視するインテグレーション。 |
 | Category::Developer Tools | バージョン管理、CI/CD、コードとしてのインフラストラクチャーなど、開発者がアプリケーションの構築に使用するテクノロジーのインテグレーション。 |
 | Category::Event Management | Datadog にイベントを送信したり、外部プラットフォームに送信するイベントをクエリするインテグレーション。 |
 | Category::Google Cloud | Google Cloud とその関連サービスからデータを送信するインテグレーション。 |
@@ -29,7 +29,7 @@
 | Category::Metrics | Datadog からメトリクスを送信し、クエリするインテグレーション。  |
 | Category::Mobile | モバイルデバイスとアプリケーションを監視するインテグレーション。 |
 | Category::Network | ネットワークとネットワークデバイスを監視するインテグレーション。 |
-| Category::Notification | 例えばインシデント対応など、通知に重点を置いたテクノロジーのインテグレーション。 |
+| Category::Notifications | 例えばインシデント対応など、通知に重点を置いたテクノロジーのインテグレーション。 |
 | Category::Oracle | Oracle ベースのテクノロジーを監視するインテグレーション。 |
 | Category::Orchestration | コンテナなどのオーケストレーションを提供するテクノロジーのインテグレーション。 |
 | Category::OS & System | オペレーティングシステムやその他の低レベルのシステムを監視するインテグレーション。 |

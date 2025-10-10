@@ -1,5 +1,6 @@
 ---
 title: Advanced setup for Datadog Operator
+description: Advanced configuration and deployment options for the Datadog Operator on Kubernetes and OpenShift
 aliases:
  - /agent/guide/operator-advanced
 further_reading:
@@ -20,6 +21,7 @@ Using the Datadog Operator requires the following prerequisites:
 
 ## Deploy the Datadog Operator
 
+To facilitate the command execution, define an environment variable called `DD_NAMESPACE` in your shell.
 To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
 
 1. Add the Datadog Helm repo:
@@ -29,7 +31,7 @@ To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a
 
 2. Install the Datadog Operator:
   ```
-  helm install my-datadog-operator datadog/datadog-operator
+  helm install my-datadog-operator datadog/datadog-operator -n $DD_NAMESPACE
   ```
 
 ## Deploy the Datadog Agents with the Operator
@@ -81,7 +83,7 @@ The following command deletes all the Kubernetes resources created by the above 
 
 ```shell
 kubectl delete datadogagent datadog
-helm delete my-datadog-operator
+helm delete my-datadog-operator -n $DD_NAMESPACE
 ```
 
 It is important to delete the `DatadogAgent` resource and let Operator perform a cleanup. When the `DatadogAgent` resource is created in a cluster, Operator adds a finalizer to prevent deletion until it finishes the cleanup of resources it created. If Operator is uninstalled first, attempts to delete the `DatadogAgent` resource are blocked indefinitely; this will block namespace deletion as well. A workaround in this situation is to remove the `metadata.finalizers` value from `DatadogAgent` resource.

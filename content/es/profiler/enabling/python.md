@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/python/
+- /es/tracing/profiler/enabling/python/
 code_lang: python
 code_lang_weight: 20
 further_reading:
@@ -17,7 +17,7 @@ title: Activación de Python Profiler
 type: multi-code-lang
 ---
 
-El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de biblioteca e ir directamente a habilitar el generador de perfiles.
+El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de librería e ir directamente a habilitar el generador de perfiles.
 
 ## Requisitos
 
@@ -37,7 +37,7 @@ Las siguientes funciones de generación de perfiles están disponibles según tu
 
 La instalación requiere pip versión 18 o posterior.
 
-Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la biblioteca `dd-trace-py`:
+Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la librería `dd-trace-py`:
 
 | Función                  | Versión requerida de `dd-trace-py`  |
 |--------------------------|--------------------------------|
@@ -54,7 +54,7 @@ Instala `ddtrace`, que proporciona funciones de rastreo y generación de perfile
 pip install ddtrace
 ```
 
-**Nota**: La generación de perfiles requiere la versión 0.40+ de la biblioteca `ddtrace`.
+**Nota**: La generación de perfiles requiere la versión 0.40+ de la librería `ddtrace`.
 
 Si utilizas una plataforma en la que no está disponible la distribución binaria de `ddtrace`, instala primero una versión de entorno de desarrollo.
 
@@ -117,7 +117,7 @@ Puedes configurar el generador de perfiles con las [variables de entorno][6].
 ### Procedencia del código
 
 El generador de perfiles de Python admite informes de procedencia del código, lo que permite
- comprobar que la biblioteca está ejecutando el código. Aunque está
+ comprobar que la librería está ejecutando el código. Aunque está
 desactivado por defecto, se puede activar mediante la configuración de
 `DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
 

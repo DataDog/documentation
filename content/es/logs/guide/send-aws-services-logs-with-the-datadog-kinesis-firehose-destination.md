@@ -12,6 +12,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: Blog
   text: Envía los logs del flujo de Amazon VPC a Amazon Kinesis Data Firehose y Datadog
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: Guía
+  text: Cómo enviar logs a Datadog reduciendo las tarifas de transferencia de datos
 title: Enviar logs de servicios de AWS con el destino Datadog Amazon Data Firehose
 ---
 
@@ -26,24 +29,25 @@ AWS administra completamente Amazon Data Firehose, por lo que no necesitas mante
 {{< tabs >}}
 {{% tab "Amazon Data Firehose Delivery stream" %}}
 
+<div class="alert alert-info">Datadog tiene un límite de admisión de <strong>65 536 eventos por lote</strong> y recomienda establecer el tamaño del búfer de Kinesis en <strong>2 MiB</strong>. Si tu sistema supera este límite, es posible que se omitan algunos logs.</div>
+
 Datadog recomienda utilizar un Kinesis Data Stream como entrada al utilizar el destino de Datadog con Amazon Data Firehose. Te ofrece la posibilidad de reenviar tus logs a varios destinos, en caso de que Datadog no sea el único consumidor de esos logs. Si Datadog es el único destino para tus logs, o si ya tienes un Kinesis Data Stream con tus logs, puedes ignorar el paso uno.
 
 1. Opcionalmente, utiliza la sección [Crear un flujo de datos][1] de la guía para desarrolladores de Amazon Kinesis Data Streams en AWS para crear un nuevo flujo de datos de Kinesis. Nombra el flujo de forma descriptiva, como `DatadogLogStream`.
 2. Ve a [Amazon Data Firehose][2].
 3. Haz clic en **Create Firehose stream** (Crear flujo de Firehose).
-   a. Establece la fuente:
+   1. Establece la fuente: 
       - `Amazon Kinesis Data Streams` si tus logs provienen de un Kinesis Data Stream
       - `Direct PUT` si tus logs proceden directamente de un grupo de log de CloudWatch
-
-   b. Establece el destino como `Datadog`.
-   c. Indica un nombre para el flujo de entrega.
-   d. En **Destination settings** (Configuración del destino), elige la URL del endpoint HTTP de `Datadog logs` que corresponda a tu [sitio de Datadog][5].
-   e. Pega tu clave de API en el campo **API key** (Clave de API). Puedes obtener o crear una clave de API en la [página claves de API de Datadog][3].
-   f. Opcionalmente, configura *Retry duration** (Duración de los reintentos), los ajustes de buffer, o añade **Parameters** (Parámetros), que se adjuntan como etiquetas a tus logs.  
-   **Nota**: Datadog recomienda establecer el **Buffer size** (Tamaño de buffer) en `2 MiB` si los logs son mensajes de una sola línea.
-   g. En **Backup settings** (Configuración de copia de seguridad), selecciona un bucket de copia de seguridad de S3 para recibir cualquier evento fallido que supere la duración de los reintentos.
-     **Nota**: Para asegurarte de que cualquier log que falle a través del flujo de entrega todavía se envía a Datadog, establece la función de Lambda Datadog Forwarder en [forward logs][4] (reenviar logs) desde este bucket de S3.
-   h. Haz clic en **Create Firehose stream** (Crear flujo de Firehose).
+   1. Establece el destino como `Datadog`. 
+   1. Proporciona un nombre para el flujo de entrega.
+   1. En **Destination settings** (Configuración del destino), elige la URL del endpoint HTTP de `Datadog log` que corresponda a tu [sitio de Datadog][5].  
+   1. Pega tu clave de API en el campo **API key** (Clave de API). Puedes obtener o crear una clave de API en la [página de Claves de API de Datadog][3]. Si prefieres utilizar la autenticación de Secret Manager, añade tu clave de API de Datadog en formato JSON completo en el campo de valor de la siguiente manera: `{"api_key":"<YOUR_API_KEY>"}`.
+   1. Opcionalmente, configura la **Retry duration** (Duración del reintento), los ajustes del búfer, o añade **Parameters** (Parámetros), que se adjuntan como etiquetas a tu log.  
+   **Nota**: Datadog tiene un límite de admisión de 65 536 eventos por lote y recomienda establecer el **Buffer size** (Tamaño del búfer*) en `2 MiB` si los logs son mensajes de una sola línea.
+   1. En **Backup settings** (Configuración de copia de seguridad), selecciona un bucket de copia de seguridad de S3 para recibir cualquier evento fallido que supere la duración del reintento.  
+     **Nota**: Para asegurarte de que cualquier log que falla a través del flujo de entrega todavía se envía a Datadog, establece la función de Lambda del Datadog Forwarder para [reenviar logs][4] de este bucket de S3.  
+   1. Haz clic en **Create Firehose stream** (Crear flujo de Firehose).
 
 [1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
@@ -149,9 +153,9 @@ Para rellenar todos los logs por ARN:
 1. Ve al [Log Explorer][5] en Datadog.
 2. En la barra de búsqueda, escribe `@aws.firehose.arn:"<ARN>"`, sustituye `<ARN>` por tu ARN de Amazon Data Firehose y pulsa **Enter** (Intro) para ver todos tus logs suscritos.
 
-**Nota**: Una sola carga útil de Kinesis no debe superar los 65.000 mensajes de log. Los mensajes de log que superen ese límite se descartarán.
+**Nota**: Una sola carga útil de Kinesis no debe superar los 65.000 mensajes de logs. Los mensajes de logs que superen ese límite se descartan.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

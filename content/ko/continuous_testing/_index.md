@@ -29,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: 블로그
   text: Datadog을 사용한 연속적 테스트 모범 사례
+- link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
+  tag: 블로그
+  text: 점진적 웹 애플리케이션 모범 사례
 title: 연속적 테스트
 ---
 

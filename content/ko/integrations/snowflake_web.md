@@ -101,9 +101,9 @@ Snowflake 데이터를 구문 분석한 후 Datadog는 [즉기 사용 가능한 
 
 1. [Snowflake 계정 URL][2]을 찾습니다. 
 
-{{< img src="integrations/snowflake/snowflake_account_url.png" alt="Snowflake UI에서 선택된 계정 URL 복사 옵션이 포함된 계정 메뉴" popup="true">}}
+![Snowflake UI에서 계정 URL 복사 옵션이 선택된 계정 메뉴][3]
 
-2. [Snowflake 통합 타일][3]의 **계정 URL** 필드에 Snowflake 계정 URL을 입력합니다.
+2. [Snowflake 통합 타일][4]에서  **Account URL** 필드에 Snowflake 계정 URL을 입력합니다.
 
 3. **리소스 컬렉션** 탭 에서 수집하려는 리소스를 활성화합니다.
 
@@ -145,7 +145,7 @@ Snowflake 데이터를 구문 분석한 후 Datadog는 [즉기 사용 가능한 
 
 ##### 클라우드 비용 관리
 
-클라우드 비용 관리를 사용 설정하여 [SNOWFLAKE.ORGANIZATION_USAGE.USAGE_IN_CURRENCY_DAILY][4] 테이블에서 집계된 Snowflake 비용 메트릭을 받습니다. 이 메트릭을 [클라우드 비용 관리][5]와 함께 사용하여 비용 및 사용량에 대한 추가 인사이트를 얻을 수 있습니다.
+[SNOWFLAKE.ORGANIZATION_USAGE.USAGE_IN_CURRENCY_DAILY][5] 테이블에서 집계된 Snowflake 비용 메트릭을 수신하려면 클라우드 비용 관리를 활성화하세요. [클라우드 비용 관리][6]와 함께 이러한 메트릭을 사용하여 비용 및 사용량에 대한 인사이트를 얻을 수 있습니다.
 
 4. Datadog에 대한 역할 및 사용자를 생성하여 Snowflake를 모니터링하는 데 사용합니다. Snowflake 환경에서 아래 일련의 명령을 실행하여 Datadog에 액세스할 수 있는 사용자를 생성할 수 있습니다.
 
@@ -198,12 +198,12 @@ grant role DATADOG to user <USERNAME>
 {{< /code-block >}}
 
 5. 키-쌍 인증을 설정합니다. 공개 키는 이전에 생성한 사용자에게 할당되며 비공개 키는 Datadog에 업로드되어 Datadog가 Snowflake 계정에 연결할 수 있도록 해줍니다.
-    a. [Snowflake 지침][6]에 따라 비공개 키를 생성하고 업로드합니다. Datadog는 현재 암호화되지 않은 비공개 키만 지원합니다.
-    b. [Snowflake 지침][7]에 따라 공개 키를 생성합니다.  
-    c. [Snowflake 지침][8]에 따라 앞서 생성한 사용자에게 공개 키를 할당합니다.  
+    a. [Snowflake 지침][7]에 따라 개인 키를 생성하고 업로드합니다. Datadog은 현재 암호화되지 않은 개인 키만 지원합니다.
+    b. [Snowflake 지침][8]에 따라 공개 키를 생성합니다.
+    c. [Snowflake 지침][9]에 따라 이전에 생성된 사용자에게 공개 키를 할당합니다.
 
 <div class="alert alert-info">
- Datadog가 Snowflake 계정에서 데이터를 수집하려면 특정 IP 주소 접두어를 허용 목록에 추가해야 합니다. <a href="https://ip-ranges.datadoghq.com/">IP 범위 페이지</a>에서 Datadog에 속한 IP 접두어  목록을 확인할 수 있으며, 허용할 범위는 <strong>웹훅</strong> 아래에서 확인할 수 있습니다.
+Datadog이 Snowflake 계정에서 데이터를 수집하려면 특정 IP 주소 접두사를 허용 목록에 추가해야 합니다. Datadog에 속한 IP 접두사 목록은 {{< region-param key="ip_ranges_url" link="true" text="IP ranges page">}}에서 확인할 수 있으며, 허용할 범위는 <strong>webhooks</strong>에서 확인할 수 있습니다..
 </div>
 
 #### 커스텀 메트릭
@@ -228,18 +228,18 @@ Snowflake 통합은 커스텀 쿼리 를 지원하며 커스텀 메트릭를 수
 
 **예**:
 
-{{< img src="integrations/snowflake/custom_query.png" alt="Snowflake 통합 타일의 커스텀 메트릭 탭" popup="true">}}
+![Snowflake 통합 타일의 커스텀 메트릭 탭][10]
 
 #### 검증
 
 결과를 확인하려면 메트릭 요약에서 메트릭을 사용하여 검색하세요.
 
-{{< img src="integrations/snowflake/snowflake_metrics.png" alt="메트릭 요약 페이지의 Snowflake 메트릭" popup="true">}}
+![Metric Summary 페이지의 Snowflake 메트릭][11]
 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "snowflake_web" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### 이벤트
@@ -252,16 +252,16 @@ Snowflake 웹 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 고객 지원팀][11]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원 팀][14]에 문의하세요.
 
 ## 에이전트 점검: Snowflake
 
-<div class="alert alert-danger">Snowflake 에이전트 점검은 더 이상 지원되지 않으며, 추가 기능을 사용하고 Snowflake로의 API 통화량을 줄이려면 새로운 Snowflake 통합으로 전환하는 것이 좋습니다.</div>
+<div class="alert alert-warning">Snowflake 에이전트 점검은 더 이상 지원되지 않으며, 추가 기능을 사용하고 Snowflake로의 API 통화량을 줄이려면 새로운 Snowflake 통합으로 전환하는 것이 좋습니다.</div>
 
 ## 에이전트: 개요
 
-이 점검은 Datadog 에이전트를 통해 [Snowflake][12]를 모니터링합니다. Snowflake는 SaaS 분석 데이터 웨어하우스이며 클라우드 인프라스트럭처에서 완벽하게 실행됩니다. 
-이 통합은 크레딧 사용량, 빌링, 스토리지, 쿼리 메트릭 등을 모니터링합니다.
+이 점검은 Datadog Agent를 통해 [Snowflake][15]를 모니터링합니다. Snowflake는 SaaS 분석 데이터 웨어하우스이며 클라우드 인프라스트럭처에서 완전히 실행됩니다. 
+이 통합은 크레딧 사용량, 빌링, 저장 공간, 쿼리 메트릭 등을 모니터링합니다.
 
 <div class="alert alert-info"><bold>참고</bold>: 메트릭은 Snowflake에 대한 쿼리를 통해 수집됩니다. Datadog 통합으로 생성된 쿼리는 Snowflake에서 청구 가능합니다..</div>
 
@@ -271,18 +271,18 @@ Snowflake 웹 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ### 에이전트: 설치
 
-Snowflake 점검이  [Datadog 에이전트][13] 패키지에 포함되어 있습니다.
+Snowflake 점검은 [Datadog Agent][16] 패키지에 포함되어 있습니다.
 
-**참고**: Datadog 에이전트 v6에서는 파이썬(Python) 2를 사용하여 스노우플레이크 점검을 사용할 수 없습니다. 에이전트 v6에서 Snowflake를 사용하려면 [Datadog 에이전트 v6에서 파이썬(Python) 3 사용][14]을 참조하거나 에이전트 v7로 업그레이드하세요.
+**참고**: Python 2를 사용하는 Datadog Agent v6에서는 Snowflake 점검을 사용할 수 없습니다. Agent v6에서 Snowflake를 사용하려면 [Datadog Agent v6에서 Python 3 사용][17]을 참조하거나 Agent v7로 업그레이드하세요.
 
 ### 에이전트: 설정
 
-<div class="alert alert-warning">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세한 내용은 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.
+<div class="alert alert-danger">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세한 내용은 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.
 
 1. Snowflake를 모니터링하려면 Datadog 특정 역할과 사용자를 생성하세요. Snowflake에서 다음을 실행하여 ACCOUNT_USAGE 스키마에 대한 액세스 권한이 있는 커스텀 역할을 생성합니다.
 
    참고: 기본적으로 이 통합은 `SNOWFLAKE` 데이터베이스와 `ACCOUNT_USAGE` 스키마를 모니터링합니다. `ORGANIZATION_USAGE` 스키마를 모니터링하는 방법에 대한 자세한 내용은 "Collecting Organization Data"를 참조하세요.
-    이 데이터베이스는 기본적으로 사용 가능하며 `ACCOUNTADMIN` 역할 또는 [계정 관리자가 부여한 모든 역할][15]의 사용자만 볼 수 있습니다.
+   이 데이터베이스는 기본적으로 사용 가능하며 `ACCOUNTADMIN` 역할 또는 [ACCOUNTADMIN이 부여한 모든 역할][18]의 사용자만 볼 수 있습니다.
 
 
     ```text
@@ -320,7 +320,7 @@ Snowflake 점검이  [Datadog 에이전트][13] 패키지에 포함되어 있습
     ```
 
 
-2. 에이전트 설정 디렉터리 루트의 `conf.d/` 폴더에 있는 `snowflake.d/conf.yaml` 파일을 편집하여 Snowflake 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [sample snowflake.d/conf.yaml][16]을 참조하세요.
+2. Snowflake 성능 데이터 수집을 시작하려면  Agent 구성 디렉터리 루트에 있는 `conf.d/` 폴더에서 `snowflake.d/conf.yaml` 파일을 편집하세요. 사용 가능한 모든 구성 옵션은 [샘플 snowflake.d/conf.yaml][19]을 참조하세요.
 
     ```yaml
         ## @param account - string - required
@@ -368,7 +368,7 @@ Snowflake 점검이  [Datadog 에이전트][13] 패키지에 포함되어 있습
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
-3. [에이전트를 다시 시작합니다.][17]
+3. [에이전트를 다시 시작합니다][20].
 
 #### 조직 데이터 수집
 
@@ -439,16 +439,16 @@ instances:
 
 #### 프록시 설정
 
-Snowflake에서는 [프록시 설정에 대한 환경 변수][18]를 설정할 것을 권장합니다.
+Snowflake에서는 [프록시 구성을 위한 환경 변수][21] 설정을 권장합니다.
 
-[snowflake.d/conf.yaml][16]의 `init_config`에서 `proxy_host`, `proxy_port`, `proxy_user` 및 `proxy_password`를 설정할 수도 있습니다.
+또한 [snowflake.d/conf.yaml][19]의 `init_config`에서 `proxy_host`, `proxy_port`, `proxy_user`,`proxy_password`를 설정할 수 있습니다.
 
-**참고**: Snowflake는 프록시 설정을 자동으로 포맷하고 [표준 프록시 환경 변수][19]를 설정합니다. 
-이러한 변수는 도커(Docker), ECS, 쿠버네티스(Kubernetes) 와 같은 오케스트레이터를 포함하여 통합의 모든 요청에도 영향을 미칩니다.
+**참고**: Snowflake는 자동으로 프록시 구성 형식을 지정하고 [표준 프록시 환경 변수][22]를 설정합니다. 
+이러한 변수는 Docker, ECS, Kubernetes와 같은 오케스트레이터를 포함한 통합의 모든 요청에도 영향을 미칩니다.
 
 #### Snowflake 구성에 대한 프라이빗 연결
 
-Snowflake에서 [비공개 연결][20](예: [AWS PrivateLink][21])이 활성화되어 있는 경우, `account` 설정 옵션을 다음 형식으로 업데이트하여 Snowflake 통합을 설정할 수 있습니다.
+Snowflake에서 [프라이빗 연결][23](예: [AWS PrivateLink][24])이 활성화된 경우 `account` 구성 옵션을 다음 형식으로 업데이트하여 Snowflake 통합을 구성할 수 있습니다.
 
   ```yaml
         - account: <ACCOUNT>.<REGION_ID>.privatelink
@@ -458,8 +458,8 @@ Snowflake에서 [비공개 연결][20](예: [AWS PrivateLink][21])이 활성화�
 
 Snowflake 통합은 커스텀 쿼리를 지원합니다. 기본적으로 통합은 공유 `SNOWFLAKE` 데이터베이스 및 `ACCOUNT_USAGE` 스키마에 연결됩니다.
 
-다른 스키마 또는 데이터베이스에서 커스텀 쿼리를 실행하려면 [sample snowflake.d/conf.yaml][16]에 다른 인스턴스를 추가하고 `database` 및 `schema` 옵션을 지정합니다.
-사용자 및 역할에 지정된 데이터베이스 또는 스키마에 대한 액세스 권한이 있는지 확인합니다.
+다른 스키마 또는 데이터베이스에서 커스텀 쿼리를 실행하려면 [샘플 snowflake.d/conf.yaml][19]에 다른 인스턴스를 추가하고 `database` 및 `schema` 옵션을 지정합니다.
+사용자 및 역할이 지정된 데이터베이스 또는 스키마에 대한 액세스 권한이 있는지 확인하세요.
 
 #### 설정 옵션
 `custom_queries` 옵션에는 다음과 같은 옵션이 있습니다.
@@ -490,7 +490,7 @@ custom_queries:
 ```
 
 #### 예시
-다음 예는 데이터베이스, 스키마 및 웨어하우스 이름으로 태그가 지정된 [`QUERY_HISTORY` 보기][22]에 있는 모든 쿼리 수를 계산하는 쿼리를 보여줍니다.
+다음 예는 데이터베이스, 스키마 및 웨어하우스 이름으로 태그가 지정된 [`QUERY_HISTORY` 보기][25]의 모든 쿼리를 계산하는 쿼리입니다.
 
 ```TEXT
 select count(*), DATABASE_NAME, SCHEMA_NAME, WAREHOUSE_NAME from QUERY_HISTORY group by 2, 3, 4;
@@ -518,7 +518,7 @@ custom_queries:
 
 ### 에이전트: 유효성 검사
 
-[에이전트 의 상태 하위 명령을 실행][23]하고 점검 섹션에서 `snowflake`를 찾습니다.
+[Agent의 상태 하위 명령을 실행][26]하고 Checks 섹션에서 `snowflake`를 찾습니다.
 
 ## 에이전트: 수집된 데이터
 
@@ -543,37 +543,46 @@ Snowflake는 이벤트를 포함하지 않습니다.
 
 ## 에이전트: 트러블슈팅
 
-도움이 필요하신가요? [Datadog 고객 지원팀][11]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원 팀][14]에 문의하세요.
 
 ## 참고 자료
 
 기타 유용한 문서, 링크 및 기사:
 
-- [Datadog를 사용한 Snowflake 모니터링][24]
-- [Datadog를 사용한 Snowflake Snowpark 모니터링][25]
+- [Datadog으로 Snowflake 모니터링][27]
+- [Datadog으로 Snowflake Snowpark 모니터링][28]
+- [Snowflake 비용 및 데이터 품질 모니터링을 위한 주요 메트릭][29]
+- [주요 Snowflake 메트릭 수집 및 모니터링 도구][30]
+- [Datadog으로 Snowflake 성능 및 데이터 품질 모니터링하는 방법][31]
 
 [1]: https://app.datadoghq.com/dash/integration/31321/snowflake-overview
 [2]: https://docs.snowflake.com/en/user-guide/organizations-connect
-[3]: https://app.datadoghq.com/integrations/snowflake-web
-[4]: https://docs.snowflake.com/en/sql-reference/organization-usage/usage_in_currency_daily
-[5]: https://app.datadoghq.com/cost/overview
-[6]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
-[7]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
-[8]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
-[9]: https://github.com/DataDog/integrations-internal-core/blob/main/snowflake_web/metadata.csv
-[10]: https://github.com/DataDog/integrations-internal-core/blob/main/snowflake_web/assets/logs/snowflake.yaml
-[11]: https://docs.datadoghq.com/ko/help
-[12]: https://www.snowflake.com/
-[13]: https://app.datadoghq.com/account/settings/agent/latest
-[14]: https://docs.datadoghq.com/ko/agent/guide/agent-v6-python-3/?tab=hostagent
-[15]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
-[16]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
-[17]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[18]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
-[19]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
-[20]: https://docs.snowflake.com/en/user-guide/private-snowflake-service.html
-[21]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink.html
-[22]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
-[23]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[24]: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/
-[25]: https://www.datadoghq.com/blog/snowflake-snowpark-monitoring-datadog/
+[3]: images/snowflake_account_url.png
+[4]: https://app.datadoghq.com/integrations/snowflake-web
+[5]: https://docs.snowflake.com/en/sql-reference/organization-usage/usage_in_currency_daily
+[6]: https://app.datadoghq.com/cost/overview
+[7]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
+[8]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
+[9]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
+[10]: images/custom_query.png
+[11]: images/snowflake_metrics.png
+[12]: https://github.com/DataDog/integrations-internal-core/blob/main/snowflake_web/metadata.csv
+[13]: https://github.com/DataDog/integrations-internal-core/blob/main/snowflake_web/assets/logs/snowflake.yaml
+[14]: https://docs.datadoghq.com/ko/help
+[15]: https://www.snowflake.com/
+[16]: https://app.datadoghq.com/account/settings/agent/latest
+[17]: https://docs.datadoghq.com/ko/agent/guide/agent-v6-python-3/?tab=hostagent
+[18]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
+[19]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
+[20]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[21]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
+[22]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
+[23]: https://docs.snowflake.com/en/user-guide/private-snowflake-service.html
+[24]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink.html
+[25]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
+[26]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
+[27]: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/
+[28]: https://www.datadoghq.com/blog/snowflake-snowpark-monitoring-datadog/
+[29]: https://www.datadoghq.com/blog/snowflake-metrics/
+[30]: https://www.datadoghq.com/blog/snowflake-monitoring-tools/
+[31]: https://www.datadoghq.com/blog/monitor-snowflake-with-datadog/

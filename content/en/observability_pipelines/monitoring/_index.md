@@ -26,7 +26,7 @@ A pipeline consists of components that collect, process, and route your observab
 
 ## View the status of your pipelines
 
-1. Navigate to [Observability Pipelines][1] to see how many bytes your pipelines are receiving and sending out.
+1. Navigate to [Observability Pipelines][1] to see how many events or bytes your pipelines are receiving and sending out. The **events/s** and **bytes/s** metrics shown on this page are based on an average over 15 minutes.
 1. Select a pipeline.
 1. Click the **Health** tab to see details about the pipeline and its components. You can view graphs of:
     - How much each component is being used, and the total number of events that the component receives and sends out.
@@ -68,6 +68,6 @@ To see available out-of-the-box monitors:
 
 [1]: https://app.datadoghq.com//observability-pipelines/
 [2]: /service_management/incident_management/
-[3]: /getting_started/dashboards/
+[3]: /monitors/types/metric/
 [4]: /notebooks/
 [5]: /observability_pipelines/monitoring/metrics/

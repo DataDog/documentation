@@ -19,8 +19,8 @@ assets:
     source_type_id: 10091
     source_type_name: Confluent Platform
   monitors:
-    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
-    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
+    Topic partition is not used: assets/monitors/unused_partition.json
+    Unclean leader election detected: assets/monitors/unclean_leader_election.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +28,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 로그 수집
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
 display_on_public_website: true
@@ -35,9 +36,8 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.10.2
+integration_version: 3.0.0
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: confluent_platform
 public_title: Confluent Platform
@@ -53,6 +53,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - 제공::통합
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: Confluent Platform 컴포넌트를 모니터링하세요.
   media: []
@@ -88,7 +90,7 @@ Confluent Platform 점검은 [Datadog Agent][1] 패키지에 포함되어 있습
 **참고**: 이 점검은 JMX를 사용하여 메트릭을 수집합니다. Agent가 [jmxfetch][2]를 실행하려면 각 노드에 JVM이 필요합니다. Oracle에서 제공하는 JVM 사용을 권장합니다.
 
 
-### 구성
+### 설정
 
 1. Confluent Platform 성능 데이터를 수집하려면 Agent 설정 디렉터리 루트의 `conf.d/` 폴더에서 `confluent_platform.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션은 [샘플 confluent_platform.d/conf.yaml][3]을 참조하세요.
 
@@ -109,13 +111,13 @@ Confluent Platform 점검은 [Datadog Agent][1] 패키지에 포함되어 있습
        name: rest_proxy_instance
     ```
 
-2. [Agent를 재시작합니다][5].
+2. [에이전트를 재시작하세요][5].
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-1. Datadog Agent에서는 로그 수집이 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화해야 합니다.
+1. Datadog 에이전트에서는 로그 수집이 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화해야 합니다.
 
    ```yaml
    logs_enabled: true
@@ -137,7 +139,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
    `path` 및 `service` 파라미터 값을 변경하고 환경에 맞게 구성합니다. 사용 가능한 모든 구성 옵션은 [샘플 confluent_platform.d/conf.yaml][3]을 참조하세요.
 
-3. [Agent를 재시작합니다][6].
+3. [에이전트를 재시작하세요][6].
 
 ##### 메트릭 수집
 
@@ -165,7 +167,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "confluent_platform" >}}
+{{< get-metrics-from-git "confluent-platform" >}}
 
 
 ### 이벤트
@@ -173,7 +175,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 Confluent Platform 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "confluent_platform" >}}
+{{< get-service-checks-from-git "confluent-platform" >}}
 
 
 ## 트러블슈팅

@@ -1,5 +1,6 @@
 ---
 title: Cloud Networking Monitor
+description: "Monitor network traffic and performance between services using Cloud Network Monitoring with alerts on throughput, latency, and failures."
 aliases:
 - /monitors/types/network_performance/
 further_reading:
@@ -15,9 +16,9 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "/monitors/recommended/"
+- link: "/monitors/templates/"
   tag: "Documentation"
-  text: "Recommended CNM Monitors"
+  text: "Monitor Templates"
 ---
 
 ## Overview

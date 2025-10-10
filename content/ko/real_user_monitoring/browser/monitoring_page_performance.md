@@ -3,12 +3,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/core-web-vitals-lab
   tag: 학습 센터
   text: '인터랙티브 랩: 코어 웹 바이탈'
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: 블로그
-  text: 실제 사용자 모니터링(RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: 블로그
   text: Datadog RUM 및 Synthetic 모니터링으로 코어 웹 바이탈 모니터링
+- link: https://www.datadoghq.com/blog/single-page-apps-inp/
+  tag: 블로그
+  text: Core Web Vitals 및 Datadog으로 단일 페이지 앱 상호 작용 모니터링
 - link: /real_user_monitoring/explorer/
   tag: 설명서
   text: Datadog에서 보기 탐색
@@ -34,7 +34,7 @@ RUM 보기 이벤트는 모든 페이지 보기에 대한 광범위한 성능 �
 
 ## 이벤트 타이밍 및 코어 웹 바이탈
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog의 Core Web Vitals 메트릭은 <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> 패키지 v2.2.0 이상부터 사용할 수 있습니다.
 </div>
 

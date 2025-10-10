@@ -20,7 +20,7 @@ UDP は`ローカルホスト`ではたいへんよく機能しますが、コ�
 - UDP にはエラー処理がありませんが、UDS では Agent をノンブロッキングで使用したまま、パケットの欠落や接続エラーを検出できます。
 - DogStatsD がメトリクスの生成元のコンテナを検出し、それに応じてメトリクスにタグを付けることができます。
 
-## UDS の仕組み
+## 仕組み
 
 `IP:port` ペアを使用して接続を確立する代わりに、Unix ドメインソケットは、プレースホルダーソケットファイルを使用します。いったん接続が開かれると、データは UDP と同じ[データグラム形式][1]で転送されます。Agent が再起動した場合、既存のソケットは削除され、新しいソケットに置き換わります。クライアントライブラリはこの変化を検出し、新しいソケットにシームレスに接続します。
 
@@ -37,6 +37,8 @@ Agent DogStatsD UDS を有効にするには
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
+
+<div class="alert alert-danger"><strong>注</strong>: Agent のインストールスクリプトは自動的に適切な権限を持つソケットファイルを作成し、<code>use_dogstatsd: true</code> および <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> がデフォルトで設定されています。</div> 
 
 1. DogStatsD がリスニングソケットとして使用するソケットファイルを作成します。例:
    ```shell
@@ -55,10 +57,9 @@ Agent DogStatsD UDS を有効にするには
       ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
       ## Set to a valid and existing filesystem path to enable.
       #
-      dogstatsd_socket: '/var/run/datadog/dsd.socket'
+      dogstatsd_socket: "/var/run/datadog/dsd.socket"
       ```
 1. [Agent を再起動します][2]。
-
 
 [1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/agent/configuration/agent-commands/
@@ -73,13 +74,56 @@ Agent DogStatsD UDS を有効にするには
     - `-v /var/run/datadog:/var/run/datadog:ro` でアプリケーションコンテナを起動します。
 
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. タスク定義内で、Agent コンテナの定義にある `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` (例: `/var/run/datadog/dsd.socket`) という環境変数を使用してソケットパスを設定してください。
+
+2. アプリケーションコンテナからソケットファイルにアクセスできるよう、Agent コンテナとアプリケーションコンテナの両方で共有ボリュームをマウントします。これにより、Datadog Agent コンテナから提供されるソケットをアプリケーションコンテナ側で利用できるようになります。
+
+    1. タスク定義の `volumes` セクションで、空のフォルダをマウントします。
+
+        ```json
+        "volumes": [
+            {
+                "name": "dsdsocket",
+                "host": {}
+            }
+        ],
+        ```
+
+    1. Agent コンテナの `mountPoints` セクションでソケットフォルダをマウントします。
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket"
+            }
+        ],
+        ```
+
+    1. アプリケーションコンテナの `mountPoints` セクションで、同じフォルダをアプリケーションコンテナ内に公開します。
+
+       <div class="alert alert-info">アプリケーションコンテナがソケットへの書き込み権限を必要とする場合は、<code>"readOnly": true</code> を削除してください。</div> 
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket",
+            "readOnly": true
+            }
+        ],
+        ```
+
+{{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` でソケットパスを設定します (例: `/var/run/datadog/dsd.socket`)。
 
 2. アプリケーションコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、ソケットファイルをアプリケーションコンテナへアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
 
-    - `datadog-agent` コンテナでソケットフォルダーをマウントします。
+    1. `datadog-agent` コンテナでソケットフォルダーをマウントします。
 
         ```yaml
         volumeMounts:
@@ -92,7 +136,9 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-    - 同じフォルダーをアプリケーションコンテナで公開します。
+    1. 同じフォルダーをアプリケーションコンテナで公開します。
+
+       <div class="alert alert-info">アプリケーションコンテナがソケットへの書き込み権限を必要とする場合は、<code>"readOnly": true</code> を削除してください。</div> 
 
         ```yaml
         volumeMounts:
@@ -106,8 +152,6 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-      **注**: アプリケーションコンテナでソケットへの書き込みアクセス許可が必要な場合は、 `readOnly: true` を削除してください。
-
 {{% /tab %}}
 {{% tab "EKS Fargate" %}}
 
@@ -115,7 +159,7 @@ Agent DogStatsD UDS を有効にするには
 
 2. アプリケーションコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側で空のディレクトリをマウントし、ソケットファイルをアプリケーションコンテナへアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
 
-    - Pod spec に空のフォルダーをマウントします。
+    1. Pod spec に空のフォルダーをマウントします。
 
         ```yaml
         volumes:
@@ -123,7 +167,7 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-    - `datadog-agent` コンテナでソケットフォルダーをマウントします。
+    1. `datadog-agent` コンテナでソケットフォルダーをマウントします。
 
         ```yaml
         volumeMounts:
@@ -131,7 +175,9 @@ Agent DogStatsD UDS を有効にするには
               mountPath: /var/run/datadog
         ```
 
-    - 同じフォルダーをアプリケーションコンテナで公開します。
+    1. 同じフォルダーをアプリケーションコンテナで公開します。
+
+       <div class="alert alert-info">アプリケーションコンテナがソケットへの書き込み権限を必要とする場合は、<code>"readOnly": true</code> を削除してください。</div> 
 
         ```yaml
         volumeMounts:
@@ -139,8 +185,6 @@ Agent DogStatsD UDS を有効にするには
               mountPath: /var/run/datadog
               readOnly: true
         ```
-
-      **注**: アプリケーションコンテナでソケットへの書き込みアクセス許可が必要な場合は、 `readOnly: true` を削除してください。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -209,6 +253,35 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 
 [1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. タスク定義内で、Agent コンテナの定義に `DD_DOGSTATSD_ORIGIN_DETECTION` 環境変数を true として設定します。
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_ORIGIN_DETECTION",
+        "value": "true"
+    },
+    ```
+
+2. タスク定義に [PidMode パラメータ][2]を追加し、次のように `task` に設定します。
+
+    ```json
+    "pidMode": "task"
+    ```
+
+3. 任意 - 発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][1]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト)、`orchestrator`、または `high` を使用します。
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_TAG_CARDINALITY",
+        "value": "low"
+    },
+    ```
+
+[1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -305,7 +378,7 @@ socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 
 追加の実装オプションの作成に関するガイドラインについては、[datadog-agent GitHub wiki][9] を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -221,7 +221,14 @@ Docker コンテナを使用しえいる場合、Docker を使用する、Micros
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-<div class="alert alert-info">Node.js クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
+<div class="alert alert-info">
+Node.js クライアントライブラリのバージョン 3.21.0 以降が必要です。
+</br>
+</br>
+TypeScript アプリケーションでコードリンクやスニペットを表示するには、以下のオプションを付けて Node アプリケーションを実行する必要があります。
+</br>
+<a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### コンテナ
 
@@ -293,6 +300,8 @@ Docker コンテナを使用している場合、Docker を使用する、また
 
 <div class="alert alert-info">Java クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
 
+#### コンテナ
+
 Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
 
 ##### オプション 1: Docker
@@ -310,6 +319,29 @@ Docker コンテナを使用している場合、Docker を使用する、また
 ##### オプション 1: Datadog ツール
 
 {{% sci-dd-serverless %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### ホスト
+
+ホストを使用している場合、`DD_GIT_*` 環境変数でアプリケーションを構成します。
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<div class="alert alert-info">PHP クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
+
+#### コンテナ
+
+Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
+
+##### オプション 1: Docker
+
+{{% sci-docker %}}
 
 ##### オプション 2: `DD_GIT_*` 環境変数
 
@@ -382,7 +414,7 @@ GitHub インテグレーションを設定することで、[**Error Tracking**
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 セルフマネージド GitLab インスタンスからのリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
@@ -420,7 +452,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{% tab "その他の Git プロバイダー" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 セルフホストインスタンスまたはプライベート URL 上のリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
@@ -488,7 +520,7 @@ GitHub インテグレーションを使用している場合、または GitLab
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Continuous Profiler から GitHub へのリンク" style="width:100%;">}}
 
 [1]: /ja/profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 

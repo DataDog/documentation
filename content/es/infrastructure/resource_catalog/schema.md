@@ -14,12 +14,6 @@ title: Referencia del esquema de recursos en la nube
 type: esquema
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations no se encuentra disponible en el sitio seleccionado.
-</div>
-{{< /site-region >}}
-
 Los siguientes tipos de recursos se encuentran disponibles en [Resource catalog][2] para filtrar.
 Consulta las [reglas personalizadas en CSM Misconfigurations][1] para obtener más información.
 

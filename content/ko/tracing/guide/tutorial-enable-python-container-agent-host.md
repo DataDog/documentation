@@ -1,19 +1,19 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tags: 설명서
+  tag: 설명서
   text: 추가 추적 라이브러리 설정 옵션
 - link: /tracing/trace_collection/dd_libraries/python/
-  tags: 설명서
+  tag: 설명서
   text: 상세한 추적 라이브러리 설정 지침
 - link: /tracing/trace_collection/compatibility/python/
-  tags: 설명서
+  tag: 설명서
   text: 자동 계측에 지원되는 파이썬 프레임워크
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tags: 설명서
+  tag: 설명서
   text: 수동으로 트레이스와 스팬 설정하기
 - link: https://github.com/DataDog/dd-trace-py
-  tags: GitHub
+  tag: 소스 코드
   text: 추적 라이브러리 오픈 소스 리포지토리
 title: 튜토리얼 - 컨테이너의 파이썬(Python) 애플리케이션 및 호스트 에이전트의 추적 활성화하기
 ---
@@ -28,18 +28,18 @@ title: 튜토리얼 - 컨테이너의 파이썬(Python) 애플리케이션 및 �
 
 [파이썬 추적 애플리케이션][2] 설명서에서 파이썬 추적 설정에 대한 포괄적인 정보를 확인하세요.
 
-### 전제 조건
+### 사전 필수 조건
 
 - Datadog 계정과 [조직 API 키][3]
 - Git
 - [추적 라이브러리 요구 사항][4]을 충족하는 파이썬
 
-## 에이전트 설치하기
+## 에이전트 설치
 
 시스템에 Datadog 에이전트를 설치하지 않은 경우, [**통합 > 에이전트**][5]로 이동하여 운영체제를 선택합니다. 예를 들어, 대부분의 Linux 플랫폼은 다음 스크립트를 실행하여 `<YOUR_API_KEY>`을 [Datadog API 키][3]로 대체하여 에이전트를 설치합니다.
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 {{< /code-block >}}
 
 `datadoghq.com` 이외의 Datadog 사이트로 데이터를 전송하려면 `DD_SITE` 환경변수를 [Datadog 사이트][6]로 교체합니다.
@@ -62,7 +62,7 @@ git clone https://github.com/DataDog/apm-tutorial-python.git
 
 ### 샘플 애플리케이션 시작 및 실행
 
-1. 실행별 애플리케이션 컨테이너 구축:
+1. 애플리케이션 컨테이너 빌드 실행:
 
    {{< code-block lang="sh" >}}
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
@@ -198,7 +198,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml rm
 
 올바르게 설정하였는지 확인하려면 `docker-compose.yaml` 파일을 샘플 리포지토리 솔루션 파일 `docker/host-and-containers/solution/docker-compose.yaml`과 비교합니다.
 
-## 에이전트 시작
+## Agent 시작
 
 호스트에서 에이전트 서비스를 시작합니다. 명령어는 다음과 같이 [운영 체제에 따라 달라집니다][14].
 
@@ -252,7 +252,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 
 `POST` 트레이스의 불꽃 그래프는 이와 비슷한 형태입니다.
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-post-flame.png" alt="POST 트레이스의 불꽃 그래프." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-post-flame.png" alt="POST 트레이스의 불꽃 그래프" style="width:100%;" >}}
 
 `GET /notes` 트레이스는 이와 비슷한 형태입니다.
 
@@ -267,7 +267,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 
 1. `notes_app/notes_helper.py`를 엽니다.
 2. 다음 가져오기 추가:
-   {{< code-block lang="파이썬(Python)" >}}
+   {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
 
 3. `NotesHelper` 클래스 내, `notes_helper`로 불리우는 트레이서 래퍼를 추가해 `notes_helper.long_running_process` 메서드가 작동하는 방법을 더 효과적으로 확인합니다.
@@ -295,7 +295,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 
 자세한 정보는 [커스텀 계측][12]을 참조하세요.
 
-## 두 번째 애플리케이션을 추가해 배포된 트레이스를 확인하세요.
+## 두 번째 애플리케이션을 추가해 분산된 트레이스를 확인하세요.
 
 단일 애플리케이션 추적은 좋은 시작이지만 추적의 진정한 가치는 서비스를 통한 요청의 흐름을 확인하는 데 있습니다. 이것을 _분산 추적_이라고 부릅니다.
 
@@ -338,7 +338,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 
    올바르게 설정했는지 확인하려면 샘플 리포지토리 `docker/host-and-containers/solution` 디렉토리에 제공된 Dockerfile 및 `docker-config.yaml` 파일과 설정을 비교하세요.
 
-5. 컨테이너를 다시 시작하여 다중 서비스 애플리케이션을 빌드합니다. 먼저 실행 중인 모든 컨테이너를 중지합니다.
+5. 컨테이너를 다시 시작하여 다중 서비스 애플리케이션을 빌드합니다. 먼저 실행 중인 모든 컨테이너를 중단합니다.
    ```
    docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml down
    ```
@@ -355,7 +355,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 : `(2, hello_again with date 2022-11-06)`
 
 
-7. 트레이스 탐색기에서 다음 최신 추적을 클릭하여 두 서비스 간의 분산 추적을 확인하세요.
+7. 트레이스 탐색기에서 다음 최신 트레이스를 클릭하여 두 서비스 간의 분산 트레이스를 확인하세요.
 
    {{< img src="tracing/guide/tutorials/tutorial-python-container-distributed.png" alt="분산 트레이스에 대한 불꽃 그래프" style="width:100%;" >}}
 
@@ -375,7 +375,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
    ```
    결과:
-   {{< code-block lang="파이썬(Python)" >}}
+   {{< code-block lang="python" >}}
 def create_note(self, desc, add_date=None):
         if (add_date):
             if (add_date.lower() == "y"):

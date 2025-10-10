@@ -16,7 +16,7 @@ Trace metrics can be exported to a dashboard from the **Service** or **Resource*
 Trace metrics are useful for monitoring. APM monitors can be set up on the [New Monitors][3], [Service][4], or [Resource][5] page. A set of suggested monitors is available on the [Service][4] or [Resource][5] page.
 
 
-[1]: /developers/guide/data-collection-resolution-retention/
+[1]: /developers/guide/data-collection-resolution/
 [2]: https://app.datadoghq.com/metric/summary
 [3]: https://app.datadoghq.com/monitors
 [4]: /tracing/services/service_page/

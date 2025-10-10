@@ -332,7 +332,7 @@ end
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_ACTION_CABLE_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTION_CABLE_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 
 ### Action Mailer
 
@@ -352,7 +352,7 @@ end
 
 | キー          | 環境変数 | タイプ   | 説明                                                                                                                                                                         | デフォルト |
 | ------------ | - | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_ACTION_MAILER_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTION_MAILER_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `email_data` | | `Bool` | `action_mailer.deliver` のスパンに、追加のメールペイロードメタデータを追加するかどうか。フィールドは `['subject', 'to', 'from', 'bcc', 'cc', 'date', 'perform_deliveries']` を含みます。 | `false` |
 
 ### Action Pack
@@ -372,7 +372,7 @@ end
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_ACTION_PACK_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTION_PACK_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 
 ### Action View
 
@@ -391,7 +391,7 @@ end
 
 | キー                  | 環境変数 | タイプ     | 説明                                                                                                                        | デフォルト    |
 | -------------------- | - | ------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `enabled` | `DD_TRACE_ACTION_VIEW_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTION_VIEW_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `template_base_path` | | `String` | テンプレート名がパースされるときに使用されます。テンプレートを `views/` フォルダーに保存していない場合、この値を変更する必要があるかもしれません | `'views/'` |
 
 ### Active Job
@@ -413,7 +413,7 @@ ExampleJob.perform_later
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_ACTIVE_JOB_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTIVE_JOB_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 
 ### Active Model Serializers
 
@@ -435,7 +435,7 @@ ActiveModelSerializers::SerializableResource.new(test_obj).serializable_hash
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_ACTIVE_MODEL_SERIALIZERS_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTIVE_MODEL_SERIALIZERS_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 
 ### Active Record
 
@@ -462,7 +462,7 @@ end
 
 | キー            | 環境変数 | タイプ     | 説明                                                                                                                                                    | デフォルト                                    |
 | -------------- | - | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `enabled` | `DD_TRACE_ACTIVE_RECORD_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTIVE_RECORD_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `service_name` | | `String` | SQL クエリインスツルメンテーションのサービス名を上書きします。ActiveRecord のインスタンス化インスツルメンテーションでは、常にアプリケーションで設定されたサービス名が使用されます。 | データベースアダプターの名前（例: `'mysql2'`） |
 
 **データベースごとのトレース設定の構成**
@@ -551,7 +551,7 @@ cache.read('city')
 
 | キー             | 環境変数 | タイプ     | 説明                                                                                                                                                                                        | デフォルト                |
 | --------------- | - | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| `enabled` | `DD_TRACE_ACTIVE_SUPPORT_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ACTIVE_SUPPORT_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `cache_service` | | `String` | `active_support` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `active_support-cache` |
 
 ### AWS
@@ -574,7 +574,7 @@ Aws::S3::Client.new.list_buckets
 
 | キー            | 環境変数                     | タイプ     | 説明                                                                                                                                                                             | デフォルト |
 | -------------- | --------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_AWS_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_AWS_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `service_name` | `DD_TRACE_AWS_SERVICE_NAME` | `String` | `aws` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `aws`   |
 | `peer_service` | `DD_TRACE_AWS_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                    | `nil`   |
 
@@ -585,18 +585,18 @@ Concurrent Ruby インテグレーションは、`::Concurrent::Future` およ�
 インテグレーションをアクティブ化するには、`Datadog.configure` メソッドを使用します。
 
 ```ruby
-# Inside Rails initializer or equivalent
+# Rails のイニシャライザまたは同等の場所で設定
 Datadog.configure do |c|
-  # Patches ::Concurrent::Future to use ExecutorService that propagates context
+  # ::Concurrent::Future にパッチを当てて、コンテキストを伝播する 
   c.tracing.instrument :concurrent_ruby, **options
 end
 
-# Pass context into code executed within Concurrent::Future
+# Concurrent::Future 内で実行されるコードにコンテキストを渡す
 Datadog::Tracing.trace('outer') do
   Concurrent::Future.execute { Datadog::Tracing.trace('inner') { } }.wait
 end
 
-# Pass context into code executed within Concurrent::Async
+# Concurrent::Async 内で実行されるコードにコンテキストを渡す
 class MyClass
   include ConcurrentAsync
 
@@ -614,7 +614,7 @@ end
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_CONCURRENT_RUBY_ENABLED` | `Bool` | Whether the integration propagates contexts. | `true` |
+| `enabled` | `DD_TRACE_CONCURRENT_RUBY_ENABLED` | `Bool` | インテグレーションがコンテキストを伝播するかどうか。  | `true` |
 
 ### Dalli
 
@@ -638,7 +638,7 @@ client.set('abc', 123)
 
 | キー               | 環境変数                              | タイプ     | 説明                                                                                                                                                                               | デフォルト     |
 | ----------------- | ------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `enabled` | `DD_TRACE_DALLI_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_DALLI_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `command_enabled` | `DD_TRACE_MEMCACHED_COMMAND_ENABLED` | `Bool`   | コマンドを `memcached.command` タグとして収集します。コマンド`keys` には機密情報が含まれている可能性があります。                                                                            | `false`     |
 | `service_name`    | `DD_TRACE_DALLI_SERVICE_NAME`        | `String` | `dalli` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `memcached` |
 | `peer_service`    | `DD_TRACE_DALLI_PEER_SERVICE`        | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                      | `nil`       |
@@ -661,7 +661,7 @@ end
 
 | キー        | 環境変数 | タイプ   | 説明                                                                                                                                                                 | デフォルト                                                           |
 | ---------- | - | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_DELAYED_JOB_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_DELAYED_JOB_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `on_error` | | `Proc` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトではスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 
 ### Elasticsearch
@@ -688,7 +688,7 @@ Datadog.configure_onto(client.transport, **options)
 
 | キー            | 環境変数                               | タイプ     | 説明                                                                                                                                                                                       | デフォルト         |
 | -------------- | ------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| `enabled` | `DD_TRACE_ELASTICSEARCH_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ELASTICSEARCH_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `service_name` | `DD_TRACE_ELASTICSEARCH_SERVICE_NAME` | `String` | `dalli` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `elasticsearch` |
 | `peer_service` | `DD_TRACE_ELASTICSEARCH_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                              | `nil`           |
 | `quantize`     |                                       | `Hash`   | 量子化のオプションを含むハッシュ。量子化しないキーの配列を含む `:show` (または量子化をスキップする場合は `:all`)、または完全に除外するキーの配列を含む `:exclude` を指定することができます。       | `{}`            |
@@ -715,7 +715,7 @@ end
 
 | キー                   | 環境変数                       | タイプ     | 説明                                                                                                                                                                               | デフォルト |
 | --------------------- | ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_ETHON_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_ETHON_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `service_name`        | `DD_TRACE_ETHON_SERVICE_NAME` | `String` | `ethon` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `ethon` |
 | `peer_service`        | `DD_TRACE_ETHON_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                      | `nil`   |
 | `distributed_tracing` |                               | `Bool`   | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                       | `true`  |
@@ -748,7 +748,7 @@ connection.get
 
 | キー                   | 環境変数                             | タイプ             | 説明                                                                                                                                                                                                                                                                        | デフォルト                                                           |
 | --------------------- | ----------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_EXCON_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_EXCON_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `service_name`        | `DD_TRACE_EXCON_SERVICE_NAME`       | `String`         | `excon` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                          | `excon`                                                           |
 | `peer_service`        | `DD_TRACE_EXCON_PEER_SERVICE`       | `String`         | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                               | `nil`                                                             |
 | `distributed_tracing` |                                     | `Bool`           | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                                                                                                                | `true`                                                            |
@@ -813,7 +813,7 @@ connection.get('/foo')
 
 | キー                   | 環境変数                               | タイプ             | 説明                                                                                                                                                                                                                                                                        | デフォルト                                                           |
 | --------------------- | ------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_FARADAY_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_FARADAY_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `service_name`        | `DD_TRACE_FARADAY_SERVICE_NAME`       | `String`         | `faraday` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                        | `faraday`                                                         |
 | `peer_service`        | `DD_TRACE_FARADAY_PEER_SERVICE`       | `String`         | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                               | `nil`                                                             |
 | `distributed_tracing` |                                       | `Bool`           | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                                                                                                                | `true`                                                            |
@@ -849,7 +849,7 @@ end
 
 | キー                  | 環境変数                             | タイプ             | 説明                                                                                                                                                                                                                                                                        | デフォルト     |
 | -------------------- | ----------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `enabled` | `DD_TRACE_GRAPE_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_GRAPE_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `error_status_codes` | `DD_TRACE_GRAPE_ERROR_STATUS_CODES` | `Array`\|`Range` | エラーとしてトレースされる HTTP ステータスコードを定義します。値は範囲 (`400...600`) か、範囲または整数の配列 `[403, 500...600]` で指定することができます。環境変数で設定する場合、範囲にはダッシュ (`'400-599'`) を使用し、配列に要素を追加するにはカンマ (`'403,500-599'`) を使用します。 | `500...600` |
 
 ### GraphQL
@@ -872,9 +872,9 @@ YourSchema.execute(query, variables: {}, context: {}, operation_name: nil)
 
 | キー                      | 環境変数 | タイプ     | 説明                                                                                                                                                  | デフォルト          |
 | ------------------------ | - | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| `enabled` | `DD_TRACE_GRAPHQL_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_GRAPHQL_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。  | `true` |
 | `schemas`                | | `Array`  | トレースする `GraphQL::Schema` オブジェクト (クラスベースのスキーマのみをサポート) の配列。 何も指定しない場合、すべてのスキーマにトレースが適用されます。 | `[]`             |
-| `with_unified_tracer`    | | `Bool`   | Enable to instrument with `UnifiedTrace` tracer, enabling support for API Catalog. `with_deprecated_tracer` has priority over this. Default is `false`, using `GraphQL::Tracing::DataDogTrace` (Added in v2.2)  | `false` |
+| `with_unified_tracer`    | | `Bool`   | `UnifiedTrace` トレーサーでのインストルメンテーションを有効にし、API Catalog をサポートします。`with_deprecated_tracer` が優先されます。デフォルトは `false` で、`GraphQL::Tracing::DataDogTrace` を使用します (v2.2 で追加)。  | `false` |
 | `with_deprecated_tracer` | | `Bool`   | 非推奨の `GraphQL::Tracing::DataDogTracing` を使ったインスツルメントを有効にします。デフォルトは `false` で、`GraphQL::Tracing::DataDogTrace` を使用します。                          | `false`          |
 | `service_name`           | | `String` | graphql インスツルメンテーションに使用されるサービス名                                                                                                                | `'ruby-graphql'` |
 
@@ -890,7 +890,7 @@ class YourSchema < GraphQL::Schema
 end
 ```
 
-With `UnifiedTracer` (Added in v2.2)
+`UnifiedTracer` を使用 (v2.2 で追加)
 
 ```ruby
 class YourSchema < GraphQL::Schema
@@ -910,9 +910,9 @@ end
 
 ダブルトレースを回避するために、手動で構成する場合は `Datadog.configure` で `instrument :graphql` を_使用しない_でください。GraphQL トレースを構成するこれらの 2 つの方法は、相互に排他的と見なされます。
 
-**Adding custom tags to Datadog spans**
+**Datadog スパンにカスタムタグを追加する**
 
-You can add custom tags to Datadog spans by implementing the `prepare_span` method in a subclass, then manually configuring your schema.
+Datadog スパンにカスタムタグを追加するには、サブクラスで `prepare_span` メソッドを実装し、その後スキーマを手動で設定します。
 
 ```ruby
 class YourSchema < GraphQL::Schema
@@ -956,7 +956,7 @@ client.my_endpoint(DemoMessage.new(contents: 'hello!'))
 
 | キー                   | 環境変数                      | タイプ     | 説明                                                                                                                                                                              | デフォルト                                                            |
 | --------------------- | ---------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `enabled` | `DD_TRACE_GRPC_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_GRPC_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_GRPC_SERVICE_NAME` | `String` | `grpc` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `grpc`                                                             |
 | `peer_service`        | `DD_TRACE_GRPC_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                     | `nil`                                                              |
 | `distributed_tracing` |                              | `Bool`   | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                      | `true`                                                             |
@@ -1001,7 +1001,7 @@ end
 
 | キー            | 環境変数 | タイプ     | 説明                                | デフォルト |
 | -------------- | - | ------- | ------------------------------------------ | ------- |
-| `enabled` | `DD_TRACE_HANAMI_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_HANAMI_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | | `String` | `hanami` インスツルメンテーションのサービス名。 | `nil`   |
 
 ### http.rb
@@ -1025,7 +1025,7 @@ end
 
 | キー                   | 環境変数                              | タイプ             | 説明                                                                                                                                                                                                                                                                            | デフォルト     |
 | --------------------- | ------------------------------------ | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `enabled` | `DD_TRACE_HTTPRB_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_HTTPRB_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_HTTPRB_SERVICE_NAME`       | `String`         | `httprb` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                             | `httprb`    |
 | `peer_service`        | `DD_TRACE_HTTPRB_PEER_SERVICE`       | `String`         | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                                   | `nil`       |
 | `distributed_tracing` |                                      | `Bool`           | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                                                                                                                    | `true`      |
@@ -1053,7 +1053,7 @@ end
 
 | キー                   | 環境変数                                  | タイプ             | 説明                                                                                                                                                                                                                                                                        | デフォルト      |
 | --------------------- | ---------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `enabled` | `DD_TRACE_HTTPCLIENT_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_HTTPCLIENT_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_HTTPCLIENT_SERVICE_NAME`       | `String`         | `httpclient` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                     | `httpclient` |
 | `peer_service`        | `DD_TRACE_HTTPCLIENT_PEER_SERVICE`       | `String`         | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                               | `nil`        |
 | `distributed_tracing` |                                          | `Bool`           | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                                                                                                                | `true`       |
@@ -1086,7 +1086,7 @@ Kafka インテグレーションは、`ruby-kafka` gem のトレース機能を
 `Datadog.configure` で有効にできます。
 
 ```ruby
-require 'active_support/notifications' # required to enable 'ruby-kafka' instrumentation
+require 'active_support/notifications' # 'ruby-kafka' のインスツルメンテーションを有効にするために必要
 require 'kafka'
 require 'datadog'
 
@@ -1099,7 +1099,7 @@ end
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_KAFKA_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_KAFKA_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 
 ### MongoDB
 
@@ -1126,7 +1126,7 @@ Datadog.configure_onto(client, **options)
 
 | キー            | 環境変数                       | タイプ     | 説明                                                                                                                                                                                 | デフォルト                                          |
 | -------------- | ----------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| `enabled` | `DD_TRACE_MONGO_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_MONGO_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | `DD_TRACE_MONGO_SERVICE_NAME` | `String` | `mongo` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。   | `mongodb`                                        |
 | `peer_service` | `DD_TRACE_MONGO_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                        | `nil`                                            |
 | `quantize`     |                               | `Hash`   | 量子化のオプションを含むハッシュ。量子化しないキーの配列を含む `:show` (または量子化をスキップする場合は `:all`)、または完全に除外するキーの配列を含む `:exclude` を指定することができます。 | `{ show: [:collection, :database, :operation] }` |
@@ -1182,7 +1182,7 @@ client.query("SELECT * FROM users WHERE group='x'")
 
 | キー                   | 環境変数                        | タイプ     | 説明                                                                                                                                                                                                                                                                                                                                                              | デフォルト                                                           |
 | --------------------- | ------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_MYSQL2_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_MYSQL2_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_MYSQL2_SERVICE_NAME` | `String` | `mysql2` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                                                                                                               | `mysql2`                                                          |
 | `peer_service`        | `DD_TRACE_MYSQL2_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                                                                                                                     | `nil`                                                             |
 | `comment_propagation` | `DD_DBM_PROPAGATION_MODE`      | `String` | データベースモニタリングのための SQL コメント伝搬モード。 <br />(例: `disabled` \| `service`\| `full`). <br /><br />**重要**: _SQL  コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がそのデータにアクセスする可能性があることに注意してください。_ | `'disabled'`                                                      |
@@ -1218,7 +1218,7 @@ content = Net::HTTP.get(URI('http://127.0.0.1/index.html'))
 
 | キー                   | 環境変数                            | タイプ             | 説明                                                                                                                                                                                                                                                                        | デフォルト     |
 | --------------------- | ---------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `enabled` | `DD_TRACE_HTTP_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_HTTP_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_NET_HTTP_SERVICE_NAME`   | `String`         | `net/http` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                       | `net/http`  |
 | `peer_service`        | `DD_TRACE_NET_HTTP_PEER_SERVICE`   | `String`         | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                               | `nil`       |
 | `distributed_tracing` |                                    | `Bool`           | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                                                                                                                | `true`      |
@@ -1257,7 +1257,7 @@ client.cluster.health
 
 | キー            | 環境変数                            | タイプ     | 説明                                                                                                                                                                                    | デフォルト      |
 | -------------- | ---------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `enabled` | `DD_TRACE_OPENSEARCH_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_OPENSEARCH_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | `DD_TRACE_OPENSEARCH_SERVICE_NAME` | `String` | `opensearch` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `opensearch` |
 | `peer_service` | `DD_TRACE_OPENSEARCH_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                           | `nil`        |
 | `quantize`     |                                    | `Hash`   | 量子化のオプションを含むハッシュ。量子化しないキーの配列を含む `:show` (または量子化をスキップする場合は `:all`)、または完全に除外するキーの配列を含む `:exclude` を指定することができます。    | `{}`         |
@@ -1283,7 +1283,7 @@ end
 
 | キー                   | 環境変数                    | タイプ                                       | 説明                                                                                                                                                                                                                                                                                                                                                            | デフォルト                                                           |
 | --------------------- | -------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled`             | `DD_TRACE_PG_ENABLED`      | `true`                                     | Whether the integration should create spans. | `true` |
+| `enabled`             | `DD_TRACE_PG_ENABLED`      | `true`                                     | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_PG_SERVICE_NAME` | `String`                                   | `pg` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。                                                                                                                                                                                 | `pg`                                                              |
 | `peer_service`        | `DD_TRACE_PG_PEER_SERVICE` | `String`                                   | アプリケーションが接続する外部サービスの名前                                                                                                                                                                                                                                                                                                                   | `nil`                                                             |
 | `comment_propagation` | `DD_DBM_PROPAGATION_MODE`  | `String`                                   | データベースモニタリングのための SQL コメント伝搬モード。 <br />(例: `disabled` \| `service`\| `full`). <br /><br />**重要**: _SQL コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がそのデータにアクセスする可能性があることに注意してください。_ | `'disabled'`                                                      |
@@ -1318,7 +1318,7 @@ client.run("select * from system.nodes")
 
 | キー            | 環境変数                        | タイプ     | 説明                                                                                                                                                                                | デフォルト  |
 | -------------- | ------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| `enabled` | `DD_TRACE_PRESTO_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_PRESTO_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | `DD_TRACE_PRESTO_SERVICE_NAME` | `String` | `presto` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `presto` |
 | `peer_service` | `DD_TRACE_PRESTO_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                       | `nil`    |
 
@@ -1340,7 +1340,7 @@ end
 
 | キー        | 環境変数                         | タイプ   | 説明                                                                                                                                                                 | デフォルト                                                            |
 | ---------- | ------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `enabled`  | `DD_TRACE_QUE_ENABLED`          | `Bool` | Whether the integration should create spans.                                                                           | `true`                                                             |
+| `enabled`  | `DD_TRACE_QUE_ENABLED`          | `Bool` | このインテグレーションがスパンを作成するかどうか。                                                                           | `true`                                                             |
 | `tag_args` | `DD_TRACE_QUE_TAG_ARGS_ENABLED` | `Bool` | ジョブの引数フィールドのタグ付けを有効にします。有効にするには `true`、無効にするには `false` を指定します。                                                                                                       | `false`                                                            |
 | `tag_data` | `DD_TRACE_QUE_TAG_DATA_ENABLED` | `Bool` | ジョブのデータフィールドのタグ付けを有効にします。有効にするには `true`、無効にするには `false` を指定します。                                                                                                       | `false`                                                            |
 | `on_error` |                                 | `Proc` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトではスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error \| span.set_error(error) unless span.nil? }` |
@@ -1363,7 +1363,7 @@ end
 
 | キー            | 環境変数                         | タイプ     | 説明                                                                                                                                                                                 | デフォルト   |
 | -------------- | ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `enabled` | `DD_TRACE_RACECAR_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_RACECAR_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | `DD_TRACE_RACECAR_SERVICE_NAME` | `String` | `racecar` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `racecar` |
 
 ### Rack
@@ -1393,7 +1393,7 @@ run app
 
 | キー                              | 環境変数 | タイプ     | 説明                                                                                                                                                                                                                                                                                                                                                                          | デフォルト                                          |
 | -------------------------------- | - | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| `enabled` | `DD_TRACE_RACK_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_RACK_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `application`                    | | [`Rack Application`](https://github.com/rack/rack/blob/800e53fbe15b3424b7a8946b067bf6f2e648d5a8/SPEC.rdoc#label-Rack+applications)      | Rack アプリケーション。`middleware_names` オプションに必要です。                                                                                                                                                                                                                                                                                                                              | `nil`                                            |
 | `distributed_tracing`            | | `Bool`   | [分散型トレーシング](#distributed-tracing)を有効にすると、トレースヘッダーが受信された場合、このサービストレースが他のサービスのトレースと接続されるようになります                                                                                                                                                                                                                          | `true`                                           |
 | `headers`                        | | `Hash`   | `rack.request` にタグとして追加するための HTTP リクエストまたは応答ヘッダーのハッシュ。配列の値を持つ `request` および `response` キーを受け入れます (例: `['Last-Modified']`)。それぞれ `http.request.headers.*` タグと `http.response.headers.*` タグを追加します。このオプションは、グローバルの `DD_TRACE_HEADER_TAGS` をオーバーライドします。詳しくは、[ルートスパンにヘッダータグを適用する][header tags]を参照してください。 | `{ response: ['Content-Type', 'X-Request-ID'] }` |
@@ -1469,9 +1469,9 @@ end
 
 Rails インテグレーションは、リクエスト、データベース呼び出し、テンプレートのレンダリング、およびキャッシュの読み取り/書き込み/削除操作をトレースします。このインテグレーションでは、Active Support インスツルメンテーションを利用し、Notification API をリッスンして、API によってインスツルメントされた操作をトレースします。
 
-To enable the Rails instrumentation, use the [Rails auto instrumentation instructions](#rails-or-hanami-applications).
+Rails のインスツルメンテーションを有効にするには、[Rails の自動インスツルメンテーション手順](#rails-or-hanami-applications)を使用してください。
 
-Alternatively, you can also create an initializer file in your `config/initializers` folder:
+あるいは、`config/initializers` フォルダにイニシャライザファイルを作成することもできます。
 
 ```ruby
 # config/initializers/datadog.rb
@@ -1486,7 +1486,7 @@ end
 
 | キー                   | 環境変数 | タイプ     | 説明                                                                                                                                                 | デフォルト                                                         |
 | --------------------- | - | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_RAILS_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_RAILS_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `distributed_tracing` | | `Bool`   | [分散型トレーシング](#distributed-tracing)を有効にすると、トレースヘッダーが受信された場合、このサービストレースが他のサービスのトレースと接続されるようになります | `true`                                                          |
 | `request_queuing`     | | `Bool`   | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。                      | `false`                                                         |
 | `middleware`          | | `Bool`   | トレースミドルウェアを Rails アプリケーションに追加します。ミドルウェアを読み込みたくない場合は、`false` に設定します。                                                 | `true`                                                          |
@@ -1536,7 +1536,7 @@ Rake::Task['my_task'].invoke
 | `quantize`     | | `Hash`   | タスク引数の量子化のオプションを含むハッシュ。詳細と例については、以下を参照してください。     | `{}`     |
 | `service_name` | | `String` | `rake` インスツルメンテーションに使用されるサービス名                                                             | `'rake'` |
 | `tasks`        | | `Array`  | インスツルメントする Rake タスクの名前                                                                    | `[]`     |
-| `enabled` | `DD_TRACE_RAKE_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_RAKE_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 
 **タスク量子化動作の構成**
 
@@ -1593,7 +1593,7 @@ redis.set 'foo', 'bar'
 
 | キー            | 環境変数                       | タイプ     | 説明                                                                                                                                                                               | デフォルト |
 | -------------- | ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_REDIS_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_REDIS_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | `DD_TRACE_REDIS_SERVICE_NAME` | `String` | `redis` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `redis` |
 | `peer_service` | `DD_TRACE_REDIS_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                      | `nil`   |
 | `command_args` | `DD_REDIS_COMMAND_ARGS`       | `Bool`   | コマンド引数 (例: `GET key` の `key`) をリソース名およびタグとして表示します。`false` の場合は、コマンド名のみを表示します (例: `GET`)。                                   | false   |
@@ -1709,7 +1709,7 @@ end
 
 | キー        | 環境変数 | タイプ   | 説明                                                                                                                                                                 | デフォルト                                                           |
 | ---------- | - | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_RESQUE_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_RESQUE_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `on_error` | | `Proc` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトではスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 
 ### Rest Client
@@ -1729,7 +1729,7 @@ end
 
 | キー                   | 環境変数                             | タイプ     | 説明                                                                                                                                                                                     | デフォルト       |
 | --------------------- | ----------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `enabled` | `DD_TRACE_REST_CLIENT_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_REST_CLIENT_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name`        | `DD_TRACE_REST_CLIENT_SERVICE_NAME` | `String` | `rest_client` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `rest_client` |
 | `peer_service`        | `DD_TRACE_REST_CLIENT_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                            | `nil`         |
 | `distributed_tracing` |                                     | `Bool`   | [分散型トレーシング](#distributed-tracing)を有効にします                                                                                                                                             | `true`        |
@@ -1766,7 +1766,7 @@ end
 
 | キー            | 環境変数 | タイプ     | 説明                              | デフォルト |
 | -------------- | - | ------- | ---------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_RODA_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_RODA_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | | `String` | `roda` インスツルメンテーションのサービス名。 | `nil`   |
 
 ### Sequel
@@ -1799,7 +1799,7 @@ articles.all
 
 | キー            | 環境変数 | タイプ     | 説明                               | デフォルト                                    |
 | -------------- | - | ------- | ----------------------------------------- | ------------------------------------------ |
-| `enabled` | `DD_TRACE_SEQUEL_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_SEQUEL_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | | `String` | `sequel` インスツルメンテーションのサービス名 | データベースアダプターの名前（例: `'mysql2'`） |
 
 **データベースを構成してさまざまな設定を使用する**
@@ -1833,7 +1833,7 @@ end
 
 | キー        | 環境変数 | タイプ   | 説明                                                                                                                                                                 | デフォルト                                                           |
 | ---------- | - | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_SHORYUKEN_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_SHORYUKEN_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `tag_body` | | `Bool` | SQS メッセージの本文が `true` または `false` であるスパンにタグ付け                                                                                                                       | `false`                                                           |
 | `on_error` | | `Proc` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトではスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 
@@ -1855,7 +1855,7 @@ end
 
 | キー                   | 環境変数 | タイプ   | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                           | デフォルト                                                           |
 | --------------------- | - | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled` | `DD_TRACE_SIDEKIQ_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_SIDEKIQ_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `distributed_tracing` | | `Bool` | [分散型トレーシング](#distributed-tracing)を有効にすると、`sidekiq.push` スパンと `sidekiq.job` スパンの間に親子関係が作成されます。<br /><br />**重要**: _非同期処理のために distributed_tracing を有効にすると、トレースグラフが大幅に変化することがあります。このようなケースには、長時間実行されているジョブ、再試行されたジョブ、遠い将来に予定されているジョブが含まれます。この機能を有効にした後は、必ずトレースを点検してください。_ | `false`                                                           |
 | `on_error`            | | `Proc` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトではスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。                                                                                                                                                                                                                                                                           | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 | `quantize`            | | `Hash` | ジョブ引数の量子化のためのオプションを含むハッシュ。                                                                                                                                                                                                                                                                                                                                                                                            | `{}`                                                              |
@@ -1912,7 +1912,7 @@ end
 
 | キー                     | 環境変数 | タイプ   | 説明                                                                                                                                                                                                                                                                                                                                                                             | デフォルト                                          |
 | ----------------------- | - | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| `enabled` | `DD_TRACE_SINATRA_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_SINATRA_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `distributed_tracing`   | | `Bool` | [分散型トレーシング](#distributed-tracing)を有効にすると、トレースヘッダーが受信された場合、このサービストレースが他のサービスのトレースと接続されるようになります                                                                                                                                                                                                                             | `true`                                           |
 | `headers`               | | `Hash` | `sinatra.request` にタグとして追加するための HTTP リクエストまたは応答ヘッダーのハッシュ。配列の値を持つ `request` および `response` キーを受け入れます (例: `['Last-Modified']`)。それぞれ `http.request.headers.*` タグと `http.response.headers.*` タグを追加します。このオプションは、グローバルの `DD_TRACE_HEADER_TAGS` をオーバーライドします。詳しくは、[ルートスパンにヘッダータグを適用する][header tags]を参照してください。 | `{ response: ['Content-Type', 'X-Request-ID'] }` |
 | `resource_script_names` | | `Bool` | リソース名にスクリプト名を付加します                                                                                                                                                                                                                                                                                                                                                 | `false`                                          |
@@ -1935,7 +1935,7 @@ end
 
 | キー        | 環境変数 | タイプ   | 説明                                                                                                                                                                 | デフォルト                                                           |
 | ---------- | - | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `enabled`  | `DD_TRACE_SNEAKERS_ENABLED` | `Bool` | Whether the integration should create spans.                                                                      | `true`                                                            |
+| `enabled`  | `DD_TRACE_SNEAKERS_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。                                                                      | `true`                                                            |
 | `tag_body` | | `Bool` | ジョブメッセージのタグ付けを有効にします。有効にするには `true`、無効にするには `false` を指定します。                                                                                                              | `false`                                                           |
 | `on_error` | | `Proc` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトではスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 
@@ -1957,7 +1957,7 @@ end
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_STRIPE_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_STRIPE_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 
 ### Sucker Punch
 
@@ -1970,7 +1970,7 @@ Datadog.configure do |c|
   c.tracing.instrument :sucker_punch, **options
 end
 
-# Execution of this job is traced
+# このジョブの実行はトレースされます
 LogJob.perform_async('login')
 ```
 
@@ -1978,7 +1978,7 @@ LogJob.perform_async('login')
 
 | キー       | 環境変数                         | タイプ   | 説明                                  | デフォルト |
 | --------- | ------------------------------- | ------ | -------------------------------------------- | ------- |
-| `enabled` | `DD_TRACE_SUCKER_PUNCH_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_SUCKER_PUNCH_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 
 ### Trilogy
 
@@ -2000,7 +2000,7 @@ client.query("SELECT * FROM users WHERE group='x'")
 
 | キー            | 環境変数                         | タイプ     | 説明                                                                                                                                                                                 | デフォルト   |
 | -------------- | ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `enabled` | `DD_TRACE_TRILOGY_ENABLED` | `Bool` | Whether the integration should create spans. | `true` |
+| `enabled` | `DD_TRACE_TRILOGY_ENABLED` | `Bool` | このインテグレーションがスパンを作成するかどうか。 | `true` |
 | `service_name` | `DD_TRACE_TRILOGY_SERVICE_NAME` | `String` | `trilogy` インスツルメンテーションを実行しているアプリケーションの名前。`global_default_service_name` で上書きすることができます。[詳しくは_追加構成_を参照してください](#additional-configuration)。 | `trilogy` |
 | `peer_service` | `DD_TRACE_TRILOGY_PEER_SERVICE` | `String` | アプリケーションが接続する外部サービスの名前                                                                                                                                        | `nil`     |
 

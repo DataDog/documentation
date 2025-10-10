@@ -11,10 +11,6 @@ further_reading:
 title: TeamCity 파이프라인에서 트레이스 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서는 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 호환성
 
 - **지원되는 TeamCity 버전**: 2021.2 이상
@@ -53,7 +49,7 @@ title: TeamCity 파이프라인에서 트레이스 설정
 플러그인은 [TeamCity 사용자 이름 스타일][7]을 기반으로 Git 작성자 이름과 이메일을 가져옵니다.
 Datadog은 사용자 이메일 정보를 제공하는 **Author Name and Email** 또는 **Author Email** 사용자 이름 스타일을 권장합니다. 다른 사용자 이름 스타일(**UserId** 또는 **Author Name**) 중 하나를 사용하는 경우 플러그인은 사용자 이름에 `@Teamcity`를 추가하여 사용자의 이메일을 자동으로 생성합니다. 예를 들어, **UserId** 사용자 이름 스타일이 사용되고 Git 작성자의 사용자 이름이 `john.doe`인 경우 플러그인은`john.doe@Teamcity`를 Git 작성자의 이메일로 생성합니다. 사용자 이름 스타일은 [VCS Roots][11]에 대해 정의되어 있으며, VCS Root 설정에서 변경할 수 있습니다.
 
-<div class="alert alert-danger"><strong>참고:</strong> Git 작성자 이메일은 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">청구</a>목적으로도 사용되기 때문에  이메일을 제공하지 않는 사용자 이름 스타일 (<strong>UserId</strong> 또는 <strong>Author Name</strong>)을 사용하면 비용이 발생할 수 있습니다. 사용 사례와 관련해 궁금한 사항은 <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog 지원팀에 문의</a>하시기 바랍니다.</div>
+<div class="alert alert-warning"><strong>참고:</strong> Git 작성자 이메일은 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">청구</a>목적으로도 사용되기 때문에  이메일을 제공하지 않는 사용자 이름 스타일 (<strong>UserId</strong> 또는 <strong>Author Name</strong>)을 사용하면 비용이 발생할 수 있습니다. 사용 사례와 관련해 궁금한 사항은 <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog 지원팀에 문의</a>하시기 바랍니다.</div>
 
 ## 플러그인 리포지토리
 

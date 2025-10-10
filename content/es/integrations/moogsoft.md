@@ -31,7 +31,7 @@ categories:
 - marketplace
 - notificaciones
 - ai/ml
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,7 +45,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: moogsoft
 pricing:
-- billing_type: tag_count
+- billing_type: recuento_etiquetas
   includes_assets: true
   metric: datadog.marketplace.moogsoft
   product_id: nube
@@ -91,7 +91,7 @@ tile:
   uninstallation: README.md#Desinstalación
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -110,7 +110,7 @@ Mejora la calidad de las entregas de servicios. Sólo elevamos las situaciones c
 
 Reduce el volumen de alertas y observa cómo aumenta la productividad. Nosotros ayudamos a eliminar la fatiga de evento con un panel de monitorización consolidado y correlacionando eventos similares para minimizar significativamente las alertas procesables.
 
-### Colaborar
+### Colabora
 
 Visualiza todo en una sola vista. Agrupamos todas tus alertas de aplicaciones, servicios e infraestructuras en una única consola para aumentar la agilidad, reducir el número de alertas y reducir los tiempos de resolución.
 
@@ -118,10 +118,10 @@ Visualiza todo en una sola vista. Agrupamos todas tus alertas de aplicaciones, s
 
 Los datos fluyen a través de Moogsoft ganando contexto y reduciendo el ruido en cada paso. Las métricas se convierten en eventos, los eventos se convierten en alertas de estado y las alertas se correlacionan en incidentes.
 
-## Compatibilidad
+## Ayuda
 Ponte en contacto con el servicio de asistencia de Moogsoft en [https://support.moogsoft.com][1].
 
 [1]: https://support.moogsoft.com
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/moogsoft" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/moogsoft" target="_blank">adquiere esta aplicación en el Marketplace</a>.

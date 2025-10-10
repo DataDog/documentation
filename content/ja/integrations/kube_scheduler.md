@@ -24,10 +24,10 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
 - ログの収集
-- orchestration
+- オーケストレーション
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_scheduler
@@ -108,7 +108,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ### イベント
@@ -116,7 +116,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Kube Scheduler には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 
 ## トラブルシューティング

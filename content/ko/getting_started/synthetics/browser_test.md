@@ -23,30 +23,37 @@ title: 브라우저 테스트 시작하기
 
 ## 개요
 
-[브라우저 테스트][1]는 Datadog가 웹 애플리케이션에서 실행하는 시나리오입니다. 정기적인 간격을 구성하여 여러 장소, 기기, 브라우저에서 테스트를 실행하거나 CI/CD 파이프라인에서 테스트를 할 수 있습니다.
+[브라우저 테스트][1]는 Datadog이 웹 애플리케이션에서 실행하는 시나리오입니다. 주기적 간격을 설정하여 여러 위치, 기기, 브라우저에서 테스트를 실행하거나 CI/CD 파이프라인에서 테스트를 할 수 있습니다. 이러한 테스트를 통해 사용자가 애플리케이션에서 **주요 비즈니스 트랜잭션**을 수행할 수 있는지, 그리고 최근 코드 변경으로 인해 부정적인 영향을 받지 않는지 확인할 수 있습니다.
 
-{{< img src="getting_started/synthetics/browser-test-overview.png" alt="신서틱 브라우저 테스트의 개요" style="width:100%;" >}}
+## 브라우저 테스트 생성
 
-이러한 테스트는 사용자가 애플리케이션에서 **주요 비즈니스 트랜잭션**을 수행할 수 있는지, 최신 코드 변경으로 인해 악영향을 받지 않았는지 확인합니다.
+아래 예시는 카트에 아이템을 추가한 후 결제에 성공하기까지의 사용자 여정을 매핑하는 브라우저 테스트를 생성하는 방법을 보여줍니다.
 
-## 브라우저 테스트 생성하기
-
-다음 예시에서는 장바구니에 상품을 추가하는 단계부터 결제 완료까지 사용자의 여정을 매핑하는 브라우저 테스트 생성 방법을 설명합니다.
-
-{{< img src="getting_started/synthetics/browser-test-1.png" alt="사용자 여정을 매핑하는 브라우저 테스트" style="width:100%;" >}}
 ### 테스트 상세 설정
 
-1. Datadog 사이트에서 왼쪽 메뉴의 **UX Monitoring** 위에 커서를 올리고 **[Synthetic Tests][2]**를 선택합니다.
+1. Datadog 사이트의 왼쪽 메뉴에서 **디지털 경험** 위로 마우스를 올리고 **[테스트][2]**(**신서틱(Synthetic) 모니터링 & 테스트** 하단의)를 선택합니다.
 2. 상단 오른쪽 모서리에서 **New Test** > **[Browser Test][3]**를 클릭합니다.
-3. 브라우저 테스트 정의하기:
 
-    - 모니터링할 웹사이트 URL을 추가합니다. 어디에서부터 시작해야 할지 모르겠다면 테스트용 이커머스 웹 애플리케이션인 `https://www.shopist.io`를 사용해보세요.
-    - **Advanced Options**를 선택해 사용자 설정 요청 옵션, 인증서, 인증 자격 등을 설정할 수 있습니다.
-      이번 예시에서는 특정 고급 옵션이 필요하지 않습니다.
-    - 테스트 이름을 지정하고 `env:prod` 및 `app:shopist` 등의 태그를 설정하세요. 태그를 사용하면 테스트 스위트(suite)를 정리하고, 홈페이지에서 관심 있는 테스트를 빠르게 찾을 수 있습니다.
-    - 테스트할 브라우저와 기기를 선택합니다.
+다음 옵션 중 하나를 사용하여 테스트를 생성할 수 있습니다.
 
-### 위치 선택
+- **템플릿에서 테스트 생성하기**:
+
+    1. 사전에 채워진 템플릿 중 하나에 마우스를 올리고 **템플릿 보기**를 클릭합니다. 테스트 세부 정보, 경고 조건, 단계, 옵션 변수가 포함된, 사전에 채워진 설정 정보가 표시되는 사이드 패널이 열립니다.
+    2. **+테스트 생성하기**를 클릭하면 사전 입력된 설정 옵션을 검토하고 편집할 수 있는 설정 페이지가 열립니다. 표시되는 필드는 테스트 처음 생성 시 사용할 수 있는 필드와 동일합니다.
+    3. 오른쪽 상단의 **저장 후 종료**를 클릭하여 브라우저 테스트를 제출합니다.<br /><br>
+
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="템플릿을 사용한 Synthetics 브라우저 테스트 랜딩 페이지 영상" video="true" >}}
+
+- **테스트 처음부터 빌드하기**:
+
+    1. 새 브라우저 테스트를 처음부터 시작하려면 **+** 템플릿을 클릭합니다.
+    1. 모니터링할 웹사이트 URL을 추가합니다. 어디에서부터 시작해야 할지 모르겠다면 테스트용 이커머스 웹 애플리케이션인 `https://www.shopist.io`를 사용해보세요.
+    2. **Advanced Options**를 선택해 사용자 설정 요청 옵션, 인증서, 인증 자격 등을 설정할 수 있습니다.
+    3. 테스트 이름을 지정하고 `env:prod` 및 `app:shopist` 등의 태그를 설정하세요. 태그를 사용하면 테스트 스위트(suite)를 정리하고, 홈페이지에서 관심 있는 테스트를 빠르게 찾을 수 있습니다.
+    4. 테스트할 브라우저와 기기를 선택합니다.
+    5. 브라우저 테스트를 제출하려면 **레코딩 저장 및 편집**을 클릭합니다.
+
+### 위치 선택하기
 
 테스트를 실행할 **Managed Locations** 또는 **Private Locations** 하나 이상을 선택하세요.
 
@@ -58,7 +65,7 @@ Shopist 애플리케이션은 `https://www.shopist.io/`에 공개되어 있으�
 
 테스트를 실행할 빈도를 선택합니다. 기본 빈도인 1시간을 그대로 둘 수도 있습니다.
 
-스케줄에 따라 신서틱 테스트를 실행할 뿐만 아니라 [CI/CD 파이프라인][5]에서 수동으로 또는 직접 트리거할 수 있습니다.
+신서틱 테스트를 일정대로 실행하는 것과 더불어 [CI/CD 파이프라인][5]에서 수동으로 또는 직접 트리거할 수 있습니다.
 
 ### 경고 조건 정의
 
@@ -76,25 +83,25 @@ Retry test 2 times after 300 ms in case of failure
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### 테스트 모니터 구성
+### 테스트 모니터링 설정
 
 경고 메시지를 설정하고 테스트 경고를 보낼 이메일 주소를 추가하세요
 
 {{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="브라우저 테스트 설정 예시" video="true" >}}
 
-또한 Slack, PagerDuty, Microsoft Teams, 웹훅 등의 [알림 통합][6]을 사용할 수도 있습니다. 이러한 도구에서 신서틱 경고를 트리거하려면 먼저 해당하는 [통합][7]을 설정해야 합니다.
+또한 Slack, PagerDuty, Microsoft Teams, 웹훅 등의 [알림 통합][6]을 사용할 수도 있습니다. 이러한 알림 도구에서 신서틱 경고를 트리거하려면 먼저 해당하는 [통합][7]을 설정하셔야 합니다.
 
-테스트 설정을 저장하고 모니터할 준비가 되면 **Save & Edit Recording**을 클릭합니다.
+테스트 설정 및 모니터링을 저장할 준비가 되면, **레코딩 저장 및 편집**을 클릭합니다.
 
-자세한 내용은 [신서틱 테스트 모니터 사용][8]을 참고하세요.
+자세한 내용은 [신서틱(Synthetic) 테스트 모니터링 사용][8]을 참조하세요.
 
 ## 기록 생성하기
 
-테스트 설정을 저장하면 Datadog은 [Datadog 테스트 레코더][9] Chrome 확장 프로그램을 다운로드하여 설치하라는 메시지를 표시합니다.
+테스트 설정을 저장하면 Datadog은 [Datadog 테스트 레코더][9] Chrome 확장 프로그램을 다운로드하여 설치하라는 메시지를 표시합니다. (해당 Chrome 확장 프로그램은 Microsoft Edge 브라우저에도 설치할 수 있습니다.)
 
 확장 프로그램을 설치했다면 **Start Recording**을 클릭해 테스트 절차 기록을 시작하세요.
 
-기록 페이지 오른쪽에 있는 iframe에서 탐색할 수 있습니다. div, 이미지, 페이지 중 한 곳을 선택하면 Datadog에서 브라우저 테스트와 관련된 단계를 기록하고 작성합니다.
+레코더 페이지 오른쪽의 iframe에서 페이지를 탐색합니다. div, 이미지 또는 페이지의 아무 영역이나 선택하면 Datadog이 브라우저 테스트에서 관련 단계를 기록 및 생성합니다.
 
 테스트 절차 기록을 종료하려면 **Stop Recording**을 클릭하세요.
 
@@ -110,7 +117,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 {{< img src="getting_started/synthetics/record-test.mp4" alt="테스트 절차 기록" video="true" >}}
 
-예시 웹 사이트에서는 정기적으로 오류를 발생시키고 의도적으로 실패하게 합니다. **Notify your team** 필드에 이메일 주소를 입력하면 테스트 실패 및 복구 시 이메일 알림을 받을 수 있습니다.
+예시 웹사이트는 의도적으로 실패하는 오류를 규칙적으로 발생시킵니다. **해당 테스트에 대한 모니터링 설정** 필드에 이메일 주소를 포함하면, 테스트가 실패하고 복원되었을 때 이메일 알림을 받게 됩니다.
 
 ## 테스트 결과 보기
 
@@ -120,9 +127,9 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 아래 예시에서는 서버 타임아웃으로 인하여 실패한 테스트 사례를 볼 수 있습니다.
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="브라우저 테스트 실패" video="true"  >}}
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="브라우저 테스트 실패" video="true" >}}
 
-Datadog의 [신서틱 모니터링과 APM 통합][14]을 사용하여 **Traces** 탭에서 실행된 테스트를 통해 백엔드에서 생성된 트레이스를 확인할 수 있습니다.
+Datadog의 [신서틱 모니터링과 APM 통합][14]을 이용하면 **트레이스** 탭에서 실행된 테스트를 통해 백엔드에서 생성된 트레이스를 확인할 수 있습니다.
 
 ## 참고 자료
 
@@ -130,7 +137,7 @@ Datadog의 [신서틱 모니터링과 APM 통합][14]을 사용하여 **Traces**
 
 
 [1]: /ko/synthetics/browser_tests/
-[2]: https://app.datadoghq.com/synthetics/list
+[2]: https://app.datadoghq.com/synthetics/tests
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /ko/getting_started/synthetics/private_location
 [5]: /ko/continuous_testing/cicd_integrations

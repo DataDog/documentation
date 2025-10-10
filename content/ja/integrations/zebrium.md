@@ -25,7 +25,7 @@ author:
 categories:
 - 自動化
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md
 display_on_public_website: true

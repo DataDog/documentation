@@ -73,7 +73,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 {{% /tab %}}
 {{% tab "Trace Analytics" %}}
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -90,7 +90,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**Note:** Analytics monitors can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).
+**Note:** Analytics monitors only evaluate spans retained by [custom retention filters][6] (not the intelligent retention filter). Additionally, spans indirectly indexed by [trace-level retention filters][7] (that is, spans that don't match the query directly but belong to traces that do) are not evaluated by trace analytics monitors.
 
 ### Select alert conditions
 
@@ -113,6 +113,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [4]: /tracing/glossary/#indexed-span
 [5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filter-types
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -120,7 +121,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-**Note**: Find service level monitors on the [Service Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
+**Note**: Find service level monitors on the [Software Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 
 ## Further Reading
 

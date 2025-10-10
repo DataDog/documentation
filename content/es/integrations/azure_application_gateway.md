@@ -22,7 +22,7 @@ short_description: Rastrea las métricas principales de Azure Application Gatewa
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Application Gateway es un equilibrador de carga de tráfico web que te permite gestionar el tráfico a tus aplicaciones web.
@@ -33,12 +33,12 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure A
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_application_gateway" >}}
+{{ get-metrics-from-git "azure-applicationgateway" }}
 
 
 ### Eventos
@@ -49,9 +49,9 @@ La integración Azure Application Gateway no incluye ningún evento.
 
 La integración Azure Application Gateway no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_application_gateway/azure_application_gateway_metadata.csv

@@ -1,5 +1,6 @@
 ---
 title: RUM Browser Data Collected
+description: "Comprehensive guide to RUM Browser SDK event types, attributes, and telemetry data—including sessions, views, resources, errors, and user actions."
 aliases:
   - /real_user_monitoring/data_collected/
   - /real_user_monitoring/data_collected/view/
@@ -27,9 +28,9 @@ further_reading:
 
 ## Overview
 
-The RUM Browser SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
+The RUM Browser SDK generates events that have associated telemetry and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [metrics and attributes specific to a given event type](#event-specific-metrics-and-attributes). For example, the `view.loading_time` metric is associated with view events, and the `resource.method` attribute is associated with resource events.
+There are additional [attributes specific to a given event type](#event-specific-attributes). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,11 +49,11 @@ The following diagram illustrates the RUM event hierarchy:
 
 See a complete list of [Standard Attributes][1] for RUM Browser. By default, the attributes are attached to each event type, so you can use them regardless of the RUM event type being queried.
 
-## Event-specific metrics and attributes
+## Event-specific attributes
 
-### Session metrics
+### Session attributes
 
-| Metric  | Type   | Description                |
+| Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
 | `session.time_spent` | number (ns) | Duration of the user session. |
 | `session.view.count`        | number      | Count of all views collected for this session. |
@@ -83,9 +84,9 @@ See a complete list of [Standard Attributes][1] for RUM Browser. By default, the
 | `session.last_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
-### View timing metrics
+### View timing attributes
 
-**Note**: View timing metrics include time that a page is open in the background.
+**Note**: View timing telemetry includes time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -110,16 +111,16 @@ See a complete list of [Standard Attributes][1] for RUM Browser. By default, the
 | `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
 | `view.action.count`             | number      | Count of all actions collected for this view.                                                                                                                                                                         |
 
-### Resource timing metrics
+### Resource timing attributes
 
 Detailed network timing data for the loading of an application's resources are collected with the [Performance Resource Timing API][10].
 
-| Metric                              | Type           | Description                                                                                                                               |
+| Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
+| `resource.duration`            | number         | Entire time spent loading the resource.                                                                                                   |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
-| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this attribute does not appear (connectEnd - secureConnectionStart). |
 | `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                               |
 | `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                      |
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
@@ -141,9 +142,9 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.provider.domain` | string | The resource provider domain.                                                                        |
 | `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
-### Long task timing metrics
+### Long task timing attributes
 
-| Metric  | Type   | Description                |
+| Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
 | `long_task.duration` | number | Duration of the long task. |
 
@@ -164,9 +165,9 @@ Source errors include code-level information about the error. For more informati
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                   |
 
-### Action timing metrics
+### Action timing attributes
 
-| Metric    | Type   | Description              |
+| Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [Tracking User Actions documentation][13]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
@@ -198,8 +199,8 @@ Source errors include code-level information about the error. For more informati
 |-------------------------------|--------|---------------------------------------------------------------|
 | `view.url_query.utm_source`     | string | The parameter in the URL tracking the source of traffic. |
 | `view.url_query.utm_medium`        | string | The parameter in the URL tracking the channel where the traffic is coming from.    |
-| `view.url_query.utm_campaign`  | string | The paramter in the URL identifying the specific marketing campaign tied to that view.              |
-| `view.url_query.utm_content`  | string | The paramter in the URL identifying the specific element a user clicked within a marketing campaign.           |
+| `view.url_query.utm_campaign`  | string | The parameter in the URL identifying the specific marketing campaign tied to that view.              |
+| `view.url_query.utm_content`  | string | The parameter in the URL identifying the specific element a user clicked within a marketing campaign.           |
 | `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
 
 ## Further Reading
@@ -218,5 +219,5 @@ Source errors include code-level information about the error. For more informati
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [11]: /real_user_monitoring/browser/collecting_browser_errors#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[13]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
+[13]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
 [14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

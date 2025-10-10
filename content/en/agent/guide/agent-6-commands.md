@@ -1,6 +1,7 @@
 ---
 title: Agent 6 Commands
 disable_toc: false
+private: true
 ---
 
 ## Overview

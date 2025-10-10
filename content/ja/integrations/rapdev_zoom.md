@@ -37,7 +37,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 - クラウド
 - コラボレーション
 custom_kind: インテグレーション
@@ -58,9 +58,9 @@ pricing:
   includes_assets: true
   metric: datadog.marketplace.rapdev.zoom
   product_id: zoom
-  short_description: ユーザー 1 人またはデバイス 1 台あたりの単価
+  short_description: ユーザーまたはデバイス 1 台あたりの単価
   tag: zoom_user_email
-  unit_label: Zoom 登録ユーザーと電話デバイス
+  unit_label: Zoom 登録ユーザーおよび電話デバイス
   unit_price: 1
 public_title: Zoom
 short_description: Zoom アカウントを監視し、ライセンスを最適化します
@@ -124,7 +124,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 5. RapDev Zoom ジオ概要
 6. RapDev Zoom Phones 概要
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io
@@ -143,4 +143,4 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

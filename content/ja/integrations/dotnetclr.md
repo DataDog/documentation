@@ -32,7 +32,7 @@ draft: false
 git_integration_title: dotnetclr
 integration_id: dotnetclr
 integration_title: .NET CLR
-integration_version: 2.1.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: dotnetclr

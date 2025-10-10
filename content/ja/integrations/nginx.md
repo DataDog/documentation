@@ -42,7 +42,7 @@ author:
 categories:
 - configuration & deployment
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
 display_on_public_website: true
@@ -50,7 +50,7 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 8.0.0
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: nginx

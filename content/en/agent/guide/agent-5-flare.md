@@ -3,6 +3,7 @@ title: Send an Agent 5 flare
 disable_toc: false
 aliases:
 - agent/guide/windows-flare-agent-5
+private: true
 ---
 
 This page covers the ports used by Agent 5. For information on the latest version of the Agent, see [Send a Flare][1].

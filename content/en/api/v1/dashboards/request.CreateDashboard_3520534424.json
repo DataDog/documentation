@@ -1,0 +1,55 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1",
+                "number_format": {
+                  "unit_scale": {
+                    "type": "canonical_unit",
+                    "unit_name": "apdex"
+                  },
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "fraction"
+                  }
+                }
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*}"
+              }
+            ],
+            "response_format": "timeseries",
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 5
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "ordered",
+  "notify_list": [],
+  "reflow_type": "fixed"
+}

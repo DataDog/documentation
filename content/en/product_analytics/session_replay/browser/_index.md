@@ -32,7 +32,7 @@ The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a
 
 Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
 
-The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
+The Session Replay recorder supports all browsers supported by the RUM Browser SDK. For more information, see the [Browser Support table][3].
 
 To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 
@@ -69,13 +69,13 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
+<div class="alert alert-danger">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
 
 ## Disable Session Replay
 
 To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
 
-<div class="alert alert-warning">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
+<div class="alert alert-danger">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
 
 ## Playback history
 

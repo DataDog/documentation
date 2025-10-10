@@ -11,7 +11,7 @@ title: 역할 매핑 API를 위한 타사 인증
 
 페더레이션 인증(Federated Authentication) 메커니즘을 사용할 경우 이 API를 이용하여 Datadog 내에서 ID 제공업체(Identity Provider)가 전송하는 속성을 사용하여 사용자 그룹을 역할에 자동으로 매핑할 수 있습니다. API를 사용하여 인증 매핑(Authentication Mapping)을 생성하고 관리하려면, 액세스 관리(Access Management) 권한을 받은 소유자가 보유한 애플리케이션 키를 사용해야 합니다.
 
-**참조**: SAML 사용자로서 기존 베타 페더레이션 매핑(Federated Mapping) 메커니즘(`roles_v2_saml`)을 사용하는 경우, 이 API를 사용하실 것을 강력하게 권장합니다.
+**참고**: SAML 사용자일 경우, Datadog에서는 이 API를 사용해 전환하는 것을 강력하게 추천합니다.
 
 User Management의 **Mappings** 탭에 있는 Datadog UI에서 매핑을 생성하고 관리할 수도 있습니다. 자세한 내용은 [SAML 그룹 매핑][1]을 참조하세요.
 
@@ -542,7 +542,7 @@ curl -X GET \
 
 ### 전체 매핑의 활성화/비활성화
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 매핑을 활성화하면 SAML로 로그인한 모든 사용자의 역할이 지워지고 각 SAML의 어셔션(Assertion) 값을 기반으로 역할이 재할당됩니다. 매핑 기능을 활성화하기 전에 로그인을 통해 원하는 SAML 어셔션을 수신하고 있는지 반드시 확인하시기 바랍니다.
 </div>
 

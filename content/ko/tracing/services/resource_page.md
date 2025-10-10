@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/visualization/resource/
+- /ko/tracing/visualization/resource/
 further_reading:
 - link: https://www.datadoghq.com/blog/dependency-map-navigator/
   tag: 블로그

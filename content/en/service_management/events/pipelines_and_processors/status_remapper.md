@@ -10,7 +10,7 @@ Use the status remapper processor to assign attributes as an official status to 
 Each incoming status value is mapped as follows:
 
 * Integers from 0 to 7 map to the [Syslog severity standards][4]
-* Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
+* Strings beginning with **emerg** or **f** (case-insensitive) map to **emergency (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
 * Strings beginning with **e** (case-insensitive)—that do not match `emerg`—map to **error (3)**
@@ -18,7 +18,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
-* Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
+* Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **ok**
 * All others map to **info (6)**
 
 **Note**: If multiple event status remapper processors are applied to a given event within a pipeline, only the first one in the pipeline's order is considered. Additionally, for all pipelines that match the event, only the first status remapper encountered (from all applicable pipelines) is applied.

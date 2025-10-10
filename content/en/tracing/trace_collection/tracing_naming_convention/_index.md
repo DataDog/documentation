@@ -49,7 +49,9 @@ Span tags provide context related to the span. For instance, host or container t
 - **Host tags**: `hostname`, `availability-zone`, `cluster-name`
 - **Container tags**: `container_name`, `kube_deployment`, `pod_name`
 
-Tags are usually enriched from other data sources like tags sourced from host, container, or service catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
+The list of added tags can be found for [Kubernetes][7], [Docker][8] and [Amazon ECS][9].
+
+Tags are usually enriched from other data sources like tags sourced from host, container, or Software Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
 To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 
@@ -63,7 +65,7 @@ Span attributes are the content of the span, collected with automatic or manual 
 - `http.status_code`
 - `error.message`
 
-To query span attributes, use the the `@` character followed by the attribute name in the search box. For example, `@http.url`.
+To query span attributes, use the `@` character followed by the attribute name in the search box. For example, `@http.url`.
 
 To find span attributes in Datadog, go to the **Info** tab in the Trace side panel:
 
@@ -79,3 +81,6 @@ To find span attributes in Datadog, go to the **Info** tab in the Trace side pan
 [4]: /tracing/setup_overview/configure_data_security/
 [5]: /tracing/trace_collection/library_config/
 [6]: /standard-attributes/?product=apm
+[7]: /containers/kubernetes/tag/
+[8]: /containers/docker/tag/
+[9]: /containers/amazon_ecs/tags/

@@ -224,7 +224,7 @@ LLDP または CDP で発見された接続は、既に SNMP で監視されて�
 
 
 [1]: /ja/network_monitoring/netflow/
-[2]: https://app.datadoghq.com/infrastructure/devices?viewTab=topology
+[2]: https://app.datadoghq.com/devices?viewTab=topology
 [3]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
 [4]: /ja/network_monitoring/devices/profiles/
 [5]: /ja/help

@@ -1,5 +1,6 @@
 ---
 title: Frustration Signals
+description: "Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment."
 aliases:
 - /real_user_monitoring/frustration_signals
 further_reading:
@@ -65,7 +66,7 @@ Frustration signals require actions. Enabling `trackFrustrations` automatically 
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
+Frustration signals appear as high-level datapoints representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
 
 ### Application list
 
@@ -147,7 +148,7 @@ Frustration signals are generated from mouse clicks, not keyboard strokes.
 
 If a session is live, it is fetching information and may cause the banners to reflect a different number than those in the timeline.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 To provide feedback or submit a feature request, contact <a href="/help/">Datadog Support</a>.
 </div>
 

@@ -1,21 +1,21 @@
 ---
 aliases:
-- /logs/dynamic_volume_control
-- /logs/indexes/
+- /ko/logs/dynamic_volume_control
+- /ko/logs/indexes/
 description: Datadog로 인덱싱된 로그 볼륨 제어
 further_reading:
 - link: /logs/explorer/#visualize
   tag: 설명서
-  text: 로그 분석 실행하기
+  text: 로그를 남기다 분석 수행
 - link: /logs/log_configuration/processors
   tag: 설명서
-  text: 로그 처리하는 방법 배우기
+  text: 로그 처리 방법
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 파싱에 대해 알아보기
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: 블로그
-  text: 제한없는 로그 수집
+  text: Logging without Limits*
 title: 인덱스
 ---
 
@@ -52,7 +52,7 @@ title: 인덱스
 
 {{< img src="logs/indexes/delete-index.png" alt="인덱스 삭제" style="width:70%;">}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 삭제된 인덱스와 같은 이름의 인덱스는 다시 생성할 수 없습니다. 
 </div>
 
@@ -77,7 +77,7 @@ title: 인덱스
 제외 필터를 추가하려면 다음을 수행하세요.
 
 1. [로그 인덱스][11]를 탐색합니다.
-2. 제외 필터를 추가할 파이프라인을 확장합니다. 
+2. 예외 필터를 추가하려는 인덱스 확장
 3. **제외 필터 추가**를 클릭합니다.
 
 제외 필터는 쿼리, 샘플링 규칙 및 활성/비활성 토글로 정의됩니다.
@@ -159,7 +159,7 @@ title: 인덱스
 
 일일 할당량 또는 경고 임계값에 도달하면 이벤트가 생성됩니다:
 
-{{< img src="logs/indexes/index_quota_event.png" alt="인덱스 할당량 알림" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_warning_events.png" alt="일일 할당량 및 경고 이벤트" style="width:90%;">}}
 
 사용량에 대한 모니터링과 알림 방법은 [로그 사용량 모니터링][20]을 참조하세요.
 

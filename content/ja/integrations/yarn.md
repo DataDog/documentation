@@ -29,7 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: yarn
 integration_id: yarn
 integration_title: Yarn
-integration_version: 5.3.1
+integration_version: 7.1.0
 is_public: true
 manifest_version: 2.0.0
 name: yarn
