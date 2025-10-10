@@ -1,6 +1,8 @@
 ---
 title: Real-Time Costs
 description: View and analyze cloud spend in real time.
+aliases:
+- /cloud_cost_management/real_time_costs
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

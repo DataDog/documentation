@@ -3,6 +3,7 @@ title: Monitors
 description: Learn how to create a monitor with Cloud Cost data.
 aliases:
 - /cloud_cost_management/monitors
+- /cloud_cost_management/reporting/monitors
 further_reading:
 - link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
   tag: "Blog"

@@ -1,5 +1,5 @@
 ---
-title: Cloud Cost Explorer
+title: Multisource Querying
 is_beta: true
 description: Learn how to use Multisource Querying to query costs across multiple providers in Cloud Cost Management.
 further_reading:
@@ -121,7 +121,7 @@ Cloud Cost Management retrieves the billing currency from each cloud provider's 
 [6]: https://app.datadoghq.com/cost/explorer
 [7]: /dashboards
 [8]: /notebooks
-[9]: /cloud_cost_management/reporting/monitors
+[9]: /cloud_cost_management/troubleshooting/monitors
 [10]: /cloud_cost_management
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://focus.finops.org/#obtain

@@ -3708,13 +3708,18 @@ menu:
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_pipelines
       weight: 202
+    - name: Multisource Querying
+      url: cloud_cost_management/tags/multisource_querying
+      parent: cloud_cost_tags
+      identifier: cloud_cost_multisource_querying
+      weight: 203
     - name: Allocation
       url: cloud_cost_management/allocation
       parent: cloud_cost
       identifier: cloud_cost_cost_allocation
       weight: 3
     - name: Container Cost Allocation
-      url: cloud_cost_management/allocation/container_cost_allocation/
+      url: cloud_cost_management/allocation/container_cost_allocation
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
       weight: 301
@@ -3734,7 +3739,7 @@ menu:
       identifier: cloud_cost_container_cost_allocation_google
       weight: 103
     - name: BigQuery Costs
-      url: cloud_cost_management/allocation/bigquery/
+      url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_cost_allocationbigquery
       weight: 302

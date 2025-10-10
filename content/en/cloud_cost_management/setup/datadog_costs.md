@@ -1,5 +1,7 @@
 ---
 title: Datadog Costs
+aliases:
+- /cloud_cost_management/datadog_costs
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -92,7 +94,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/reporting/monitors
+[1]: /cloud_cost_management/troubleshooting/monitors
 [2]: /cloud_cost_management/setup/saas_costs
 [3]: /cloud_cost_management/
 [4]: /account_management/plan_and_usage/cost_details/
