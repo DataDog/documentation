@@ -155,12 +155,12 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 
 ### Unprivileged installation
 
-To run an unprivileged installation add the following `securityContext` to your configuration relative to your desired `<USER_ID>` and `<GROUP ID>`:
+To run an unprivileged installation, add the following `securityContext` to your configuration relative to your desired `<USER_ID>` and `<GROUP ID>`:
 
 - Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends setting this value to `100` for the preexisting `dd-agent` user [for Datadog Agent v7.48+][26].
 - Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
 
-This will set the `securityContext` at the pod level for the Agent.
+This sets the `securityContext` at the pod level for the Agent.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
