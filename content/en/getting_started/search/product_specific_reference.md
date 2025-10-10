@@ -78,7 +78,7 @@ status:error "timeout"
 @http.status_code:[500 TO 599]
 
 # Combine multiple conditions
-service:web-api AND env:production AND @duration:>1000
+service:web-api env:(production OR dev) AND @duration:>1000
 
 # Wildcard search for specific services
 service:payment-* AND status:error
