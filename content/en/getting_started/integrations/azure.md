@@ -310,7 +310,7 @@ The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent nativel
 
 ## Troubleshooting
 
-See the [Azure Troubleshooting guide][16].
+See [Troubleshooting][16] in the Azure Advanced Configuration guide.
 
 Still need help? Contact [Datadog support][17].
 
@@ -320,13 +320,11 @@ Still need help? Contact [Datadog support][17].
 
 [1]: /getting_started/agent/
 [2]: https://www.datadoghq.com/
-
 [5]: https://learn.microsoft.com/azure/event-hubs/event-hubs-create
-[6]: /integrations/guide/azure-programmatic-management/?tab=windows
 [8]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index
 [9]: /integrations/#cat-azure
 [15]: /agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
-[16]: /integrations/guide/azure-troubleshooting/
+[16]: /integrations/guide/azure-advanced-configuration/#azure-integration-troubleshooting
 [17]: /help/
 [19]: /logs/guide/azure-automated-log-forwarding/
 [20]: https://app.datadoghq.com/integrations/azure
@@ -337,14 +335,14 @@ Still need help? Contact [Datadog support][17].
 [25]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
 [26]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [27]: /monitors/notify/#configure-notifications-and-automations
-[28]: /integrations/guide/azure-troubleshooting/#enable-diagnostics
+[28]: /integrations/guide/azure-advanced-configuration/#enable-diagnostics
 [29]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
 [30]: /logs/guide/azure-automated-log-forwarding/#basics
 [31]: /logs/guide/azure-automated-log-forwarding/#datadog-configuration
 [32]: /logs/guide/azure-automated-log-forwarding/#deployment
 [33]: /logs/guide/azure-automated-log-forwarding/#review--create
 [34]: /logs/guide/azure-automated-log-forwarding/#architecture
-[35]: /integrations/guide/azure-troubleshooting/#automated-log-collection
+[35]: /integrations/guide/azure-advanced-configuration/#automated-log-collection
 [36]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
 [38]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer
 [39]: https://azure.microsoft.com/services/storage/blobs/
