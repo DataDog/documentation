@@ -241,7 +241,7 @@ providers:
 
 {{< collapse-content title="Google Container-Optimized OS (COS)" level="h4" >}}
 
-If your cluster is running Google Container-Optimized OS (COS), add the following to your values file as well:
+If your cluster is running Google Container-Optimized OS (COS), add the following to your values file:
 
 ```
 providers:
