@@ -116,7 +116,7 @@ Agent `v7.61+` is required.
 
   3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-#### Known limitations:
+#### Limitations:
 
 - In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
 
@@ -149,9 +149,9 @@ Agent `v7.61+` is required.
 
 Agent `v7.59+` is required.
 
-To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-
 <div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, reference the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a> and the documentation <a href="https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration">for Kubernetes and Integrations.</a></div>
+
+To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 
   ```yaml
   datadog:
@@ -241,7 +241,7 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
        - name: '<CONTAINER_NAME>'
    # (...)
    ```
-  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
+    If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
