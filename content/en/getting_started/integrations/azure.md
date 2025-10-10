@@ -211,7 +211,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 ## Metric collection
 
-Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. The [Integrations page][9] shows a curated list of predefined sub-integrations that provide additional out-of-the-box dashboards and monitors for specific Azure services. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. However, Datadog can ingest metrics from **any Azure Monitor-supported resource**, even if it doesn’t have a dedicated sub-integration tile. 
+Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. The [Integrations page][9] shows a curated list of predefined sub-integrations that provide additional out-of-the-box dashboards and monitors for specific Azure services. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. However, Datadog can ingest metrics from **any Azure Monitor-supported resource**, even if it doesn't have a dedicated sub-integration tile. 
 
 You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to `Metrics > Summary` and searching for `Azure`.
 
