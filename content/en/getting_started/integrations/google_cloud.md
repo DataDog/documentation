@@ -228,7 +228,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 {{% collapse-content title="Manual" level="h4" expanded=false id="manual-setup" %}}
 
-### Choose this if...
+### Choose manual setup if...
 
 - You need to set up access manually for a smaller number of projects or folders.
 - You want more step-by-step control over assigning permissions and credentials within the GCP UI.
