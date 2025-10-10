@@ -153,10 +153,14 @@ datadogRum.stopSessionReplayRecording()
 Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data.
 See [Privacy Options][5].
 
-### Connect Session Replay to your Third-Party tools
+### Connect Session Replay to your third-party tools
 
 You can access the Session Replay URL to use in integrations, live from the browser where the session is taking place.
-See [Connect Session Replay to your Third-Party tools][6].
+See [Connect Session Replay to your third-party tools][6].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/setup/
 [2]: /real_user_monitoring/guide/sampling-browser-plans/
