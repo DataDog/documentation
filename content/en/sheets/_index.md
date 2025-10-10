@@ -79,7 +79,7 @@ Create tables and analyze the data pulled from the following data sources:
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Database Queries     | [Database Monitoring][16] |
 | Events               | [Event Management][14] |
-| Infrastructure Data  | [Infrastructure Data][6] |
+| Infrastructure       | [DDSQL Editor][6] |
 | LLM Observability    | [LLM Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
