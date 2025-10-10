@@ -5,7 +5,7 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-  OpenTelemetry instrumentation for LLM Observability is in beta. For access, <a href="/help">contact Datadog Support</a>.
+  OpenTelemetry instrumentation for LLM Observability is in Preview. For access, <a href="/help">contact Datadog Support</a>.
 {{< /callout >}}
 
 ## Overview
