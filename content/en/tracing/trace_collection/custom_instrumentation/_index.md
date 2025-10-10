@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation
+title: Code-Based Custom Instrumentation
 description: Add custom spans, tags, and instrumentation to capture application-specific observability data using Datadog APIs and OpenTelemetry.
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
@@ -16,20 +16,11 @@ algolia:
 
 ## Overview
 
-Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
+Code-based custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
 
-Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
+Code-based custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
 
 <div class="alert alert-info">To add custom instrumentation at specific application code locations from the Datadog UI, without code changes, see <a href="https://docs.datadoghq.com/tracing/dynamic_instrumentation/">Dynamic Instrumentation</a>.</div>
-
-## Use cases
-
-Some situations when you might use custom instrumentation include:
-
-- Collecting observability data from custom code with unique or complex business logic.
-- Providing deeper visibility and context into spans, including adding [span tags][1].
-- Precisely monitoring specific sequences of operations or user interactions that require fine-grained control.
-- Removing unwanted spans from traces.
 
 ## Getting started
 
