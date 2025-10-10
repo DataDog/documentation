@@ -253,7 +253,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 #### Example response body
 
-{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" disable_copy="true" collapsible="true" >}}
 {
   "data": [
     {
@@ -303,7 +303,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 #### Example response body
 
-{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" disable_copy="true" collapsible="true" >}}
 {
     "data": [
         {
