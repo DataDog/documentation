@@ -261,5 +261,5 @@ This configuration ensures evaluations run only on complete sessions. This provi
 - Ensure your agent is configured to signal the end of a user request cycle.
 
 
-[1] /llm_observability/evaluations/managed_evaluations/#create-new-evaluations
-[2] /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
+[1]: /llm_observability/evaluations/managed_evaluations/#create-new-evaluations
+[2]: /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
