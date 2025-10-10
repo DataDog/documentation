@@ -387,7 +387,7 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
 [4]: https://app.datadoghq.com/integrations/azure
 [5]: /integrations/guide/azure-event-hub-log-forwarding
 [6]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
-[7]: /integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
+[7]: /integrations/guide/azure-native-integration/#agent-extensions
 [8]: /getting_started/site/#access-the-datadog-site
 [9]: /account_management/api-app-keys/#api-keys
 [10]: /getting_started/integrations/azure/#install-the-agent-for-greater-visibility-into-your-application
