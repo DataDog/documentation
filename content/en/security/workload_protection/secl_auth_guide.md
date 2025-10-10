@@ -1,6 +1,9 @@
 ---
 title: Writing custom rule expressions
 disable_toc: false
+aliases:
+  - /security/cloud_security_management/guide/custom-rules-guidelines
+  - /security/workload_protection/guide/custom-rules-guidelines
 ---
 
 This guide shows you how to write effective SECL (Security Language) rules for Datadog Workload Protection.
