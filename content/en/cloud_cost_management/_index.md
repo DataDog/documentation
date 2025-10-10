@@ -34,6 +34,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-saved-millions/"
     tag: "Blog"
     text: "How we saved $1.5 million per year with Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-management-oci/"
+    tag: "Blog"
+    text: "Manage and optimize your OCI costs with Datadog Cloud Cost Management"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
