@@ -255,6 +255,8 @@ Virtual machines have more detailed statuses, including:
 - Degraded
 - Failed
 
+If you see a status of `query_failed` you need to enable the Resource Health provider in Azure.
+
 [1]: /integrations/azure/
 [2]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /collapse-content %}} 
@@ -357,9 +359,7 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
     The integration does not collect performance metrics for stopped or deallocated machines. Use the `azure.vm.count` metric and the `status` tag values of `running`, `stopped`, and `stopped_deallocated` to determine the status of your hosts. Make sure the host in question has `status:running`, and is running in the Azure portal.
     {{< img src="integrations/guide/azure_vms_appearing_in_the_app_without_metrics/azure_vm_running_2025-05-02.png" alt="A graph of the azure.vm.count metric from status:running" >}}
 
-## Status of `query_failed`
-
-If you see a status of `query_failed` you need to enable the Resource Health provider in Azure.
+## Issues with `azure.*.count` metrics
 
 If your Azure integration is reporting metrics but not `azure.*.count`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
 
