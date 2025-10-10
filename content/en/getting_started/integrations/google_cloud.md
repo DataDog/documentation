@@ -1,6 +1,6 @@
 ## Overview
 
-Use this guide to get started monitoring your Google Cloud environment. This approach simplifies the setup for Google Cloud environments with multiple projects, allowing you to maximize your monitoring coverage.
+Use this guide to get started with monitoring your Google Cloud environment. This approach simplifies the setup for Google Cloud environments with multiple projects, allowing you to maximize your monitoring coverage.
 
 {{% collapse-content title="See the full list of Google Cloud integrations" level="h4" %}}
 <div class="alert alert-warning">
@@ -11,34 +11,34 @@ Datadog's Google Cloud integration collects <a href="https://cloud.google.com/mo
 
 | Integration                         | Description                                                                           |
 |-------------------------------------|---------------------------------------------------------------------------------------|
-| [App Engine][1]                     | PaaS (platform as a service) to build scalable applications                           |
-| [BigQuery][2]                       | Enterprise data warehouse                                                             |
-| [Bigtable][3]                       | NoSQL Big Data database service                                                       |
-| [Cloud SQL][4]                      | MySQL database service                                                                |
-| [Cloud APIs][5]                     | Programmatic interfaces for all Google Cloud Platform services                        |
-| [Cloud Armor][6]                   | Network security service to help protect against denial-of-service and web attacks    |
-| [Cloud Composer][7]                 | A fully managed workflow orchestration service                                        |
-| [Cloud Dataproc][8]                 | A cloud service for running Apache Spark and Apache Hadoop clusters                   |
-| [Cloud Dataflow][9]                | A fully-managed service for transforming and enriching data in stream and batch modes |
-| [Cloud Filestore][10]                | High-performance, fully managed file storage                                          |
-| [Cloud Firestore][11]                | A flexible, scalable database for mobile, web, and server development                 |
-| [Cloud Interconnect][12]            | Hybrid connectivity                                                                   |
-| [Cloud IoT][13]                     | Secure device connection and management                                               |
-| [Cloud Load Balancing][14]          | Distribute load-balanced compute resources                                            |
-| [Cloud Logging][15]                 | Real-time log management and analysis                                                 |
-| [Cloud Memorystore for Redis][16]   | A fully managed in-memory data store service                                          |
-| [Cloud Router][17]                  | Exchange routes between your VPC and on-premises networks by using BGP                |
-| [Cloud Run][18]                     | Managed compute platform that runs stateless containers over HTTP                  |
-| [Cloud Security Command Center][19] | Security Command Center is a threat reporting service                                |
-| [Cloud Tasks][20]                   | Distributed task queues                                                               |
-| [Cloud TPU][21]                     | Train and run machine learning models                                                 |
-| [Compute Engine][22]                | High performance virtual machines                                                     |
-| [Container Engine][23]              | Kubernetes, managed by Google                                                         |
-| [Datastore][24]                     | NoSQL database                                                                        |
-| [Firebase][25]                      | Mobile platform for application development                                           |
-| [Functions][26]                     | Serverless platform for building event-based microservices                            |
-| [Kubernetes Engine][27]             | Cluster manager and orchestration system                                              |
-| [Machine Learning][28]              | Machine learning services                                                             |
+| [App Engine][1]                     | PaaS (Platform as a Service) to build scalable applications.                           |
+| [BigQuery][2]                       | Enterprise data warehouse.                                                             |
+| [Bigtable][3]                       | NoSQL Big Data database service.                                                       |
+| [Cloud SQL][4]                      | MySQL database service.                                                                |
+| [Cloud APIs][5]                     | Programmatic interfaces for all Google Cloud Platform services.                        |
+| [Cloud Armor][6]                   | Network security service to help protect against denial-of-service and web attacks.    |
+| [Cloud Composer][7]                 | A fully managed workflow orchestration service.                                        |
+| [Cloud Dataproc][8]                 | A cloud service for running Apache Spark and Apache Hadoop clusters.                   |
+| [Cloud Dataflow][9]                | A fully-managed service for transforming and enriching data in stream and batch modes. |
+| [Cloud Filestore][10]                | High-performance, fully managed file storage.                                          |
+| [Cloud Firestore][11]                | A flexible, scalable database for mobile, web, and server development.                 |
+| [Cloud Interconnect][12]            | Hybrid connectivity.                                                                   |
+| [Cloud IoT][13]                     | Secure device connection and management.                                               |
+| [Cloud Load Balancing][14]          | Distribute load-balanced compute resources.                                            |
+| [Cloud Logging][15]                 | Real-time log management and analysis.                                                 |
+| [Cloud Memorystore for Redis][16]   | A fully managed in-memory data store service.                                          |
+| [Cloud Router][17]                  | Exchange routes between your VPC and on-premises networks by using BGP.                |
+| [Cloud Run][18]                     | Managed compute platform that runs stateless containers over HTTP.                  |
+| [Cloud Security Command Center][19] | Security Command Center is a threat reporting service.                                |
+| [Cloud Tasks][20]                   | Distributed task queues.                                                               |
+| [Cloud TPU][21]                     | Train and run machine learning models.                                                 |
+| [Compute Engine][22]                | High performance virtual machines.                                                     |
+| [Container Engine][23]              | Kubernetes, managed by Google.                                                         |
+| [Datastore][24]                     | NoSQL database.                                                                        |
+| [Firebase][25]                      | Mobile platform for application development.                                           |
+| [Functions][26]                     | Serverless platform for building event-based microservices.                            |
+| [Kubernetes Engine][27]             | Cluster manager and orchestration system.                                              |
+| [Machine Learning][28]              | Machine learning services.                                                             |
 | [Private Service Connect][29]       | Access managed services with private VPC connections                                  |
 | [Pub/Sub][30]                       | Real-time messaging service                                                           |
 | [Spanner][31]                       | Horizontally scalable, globally consistent, relational database service               |
@@ -240,7 +240,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    1. Give the service account a descriptive name, and click **Create and continue**.
    2. Under **Permissions**, search for and add the **Service Account Token Creator** role from the dropdown, and click **Continue**.
    3. Under **Principals with access**, paste the **Datadog Principal** value into the **Service account users role** field, and click **Done**.
-5. Click the service account link under the **Email** column
+5. Click the service account link under the **Email** column.
 6. Copy the **Email** value.
 7. In Datadog, paste the service account email in the **Add Service Account Email** section.
 8. Configure **Metric Collection** (optional).
@@ -270,7 +270,7 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 
 Optionally, you can choose which Google Cloud services you monitor with Datadog. Configuring metrics collection for specific Google services lets you optimize your Google Cloud Monitoring API costs, while retaining visibility into your critical services.
 
-Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][43], unselect the metric namespaces to exclude. You can also choose to disable collection of all existing metric namespaces.
+Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][43], deselect the metric namespaces to exclude. You can also choose to disable collection of all existing metric namespaces.
 
 **Note**: This selection does not apply to metric namespaces added to this list in the future. When a metric namespace is added to this list, it is enabled by default.
 
@@ -943,9 +943,9 @@ Additionally, Datadog collects the following as tags:
 
 ## Troubleshooting
 
-### Incorrect metadata for user defined _gcp.logging_ metrics?
+### Incorrect metadata for user defined _gcp.logging_ metrics
 
-For non-standard _gcp.logging_ metrics, such as metrics beyond [Datadog's out of the box logging metrics][118], the metadata applied may not be consistent with Google Cloud Logging.
+For non-standard _gcp.logging_ metrics, such as metrics beyond [Datadog's out-of-the-box logging metrics][118], the metadata applied may not be consistent with Google Cloud Logging.
 
 In these cases, the metadata should be manually set by navigating to the [metric summary page][119], searching and selecting the metric in question, and clicking the pencil icon next to the metadata.
 
