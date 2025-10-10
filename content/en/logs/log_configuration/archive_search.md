@@ -30,7 +30,7 @@ This feature supports logs archived through:
 
 ### Typical use cases
 
-Archive Search is ideal when you need to query logs that are stored but not indexed.
+Archive Search is ideal when you need to query logs that are stored in an external archive.
 Common use cases include:
 
 - **Incident investigations:** Retrieve logs tied to a `transaction_id`, `user_id`, or `session_id` that fall outside your indexing retention.<br>
@@ -90,10 +90,8 @@ To retain more data or access logs in other Datadog products, choose one of the 
 From the **Archive Search list view**, you can:
 
 - **Stop** a running search: preserves logs already retrieved.
-- **Delete** a completed search: removes results and metadata.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
-{{< img src="logs/archive_search/list_view.png" alt="Archive Search list view showing stop, delete, and duplicate options" style="width:90%;" >}}
 
 ## Search performance and scan volume
 
@@ -101,14 +99,13 @@ Archive Search scans archived log files within the selected time range. **Scan v
 
 To improve query performance and reduce scan volume:
 - Narrow the time range and use selective filters.
-- Filter on **indexed attributes** such as `transaction_id` or `user_id`.
 - Define a **preferred indexed attribute** at the archive level to target specific data efficiently.
 - Administrators with **Logs Write Archives** permission can set maximum log limits and available retention durations.
 
 
 ## Cloud-specific permissions
 
-Datadog requires the permission to read from your archives to rehydrate content from them. This permission can be changed at any time.
+Datadog requires the permission to read your archives to search content from them. This permission can be changed at any time.
 
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
@@ -143,7 +140,7 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
 
 ### Adding role delegation to S3 archives
 
-Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog only supports searching from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon-web-services/#aws-iam-permissions
@@ -152,14 +149,14 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 {{% tab "Azure Storage" %}}
 
-Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
+Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to search log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
 [1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting **Storage > Storage Object Viewer**.
+In order to search log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting **Storage > Storage Object Viewer**.
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
