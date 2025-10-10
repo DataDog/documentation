@@ -139,7 +139,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% tab "Use an existing app registration" %}}
 
-Use this method if you already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups). If you don't already have an app registration created, see [Integrating through the Azure Portal][203] or [Integrating through the Azure CLI][202] for setup instructions.
+Use this method if you already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups).
 
 1. Configure the [Datadog Terraform provider][200] to interact with the Datadog API through a Terraform configuration.
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
@@ -163,8 +163,6 @@ resource "datadog_integration_azure" "sandbox" {
 
 [200]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [201]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
-[202]: /integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-cli
-[203]: /integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-portal
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -266,17 +264,49 @@ You prefer to manually configure [diagnostic settings][53] on the resources you 
 ## Get more from the Datadog Platform 
 
 ### Install the Agent for greater visibility into your application
+[l](#install-the-agent-for-greater-visibility-into-your-application)
+After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to: 
+- **Application health** 
+- **Process utilization**
+- **System-level metrics** 
 
-After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Use the [Azure extension to install the Datadog Agent on your Windows and Linux VMs][13], or use the [AKS Cluster Extension to deploy the Agent to your AKS Clusters][14].
+You can also use the built-in StatsD client to send custom metrics from your applications, to correlate what's happening with your applications, users, and system. See the guide on [_Why should I install the Datadog Agent on my cloud instances?_][15] for more information on the benefits of installing the Datadog Agent on your instances.
 
-Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to: 
-- **application health** 
-- **process utilization**
-- **system level metrics** 
+Use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs. You can also use the AKS Cluster Extension to deploy the Agent to your AKS Clusters.
 
-You can also use the built-in StatsD client to send custom metrics from your applications, to correlate what's happening with your applications, users, and system.
+{{< tabs >}}
+{{% tab "VM Extension" %}}
 
-See the guide on [_Why should I install the Datadog Agent on my cloud instances?_][15]  for more information on the benefits of installing the Datadog Agent on your instances.
+1. In the [Azure portal][4], select the appropriate VM.
+2. From the left sidebar, under **Settings**, select **Extensions + applications**.
+3. Click **+ Add**.
+4. Search for and select the `Datadog Agent` extension.
+5. Click **Next**.
+6. Enter your [Datadog API key][2] and [Datadog site][1], and click **OK**.
+
+To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][3].
+
+**Note**: Domain controllers are not supported when installing the Datadog Agent with the Azure extension.
+
+[1]: /getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://portal.azure.com
+{{% /tab %}}
+
+{{% tab "AKS Cluster Extension" %}}
+
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+
+1. Go to your AKS cluster in the Azure portal.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Search for and select the `Datadog AKS Cluster Extension`.
+4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
+
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
@@ -290,19 +320,14 @@ Still need help? Contact [Datadog support][17].
 
 [1]: /getting_started/agent/
 [2]: https://www.datadoghq.com/
-[4]: /integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration
+
 [5]: https://learn.microsoft.com/azure/event-hubs/event-hubs-create
 [6]: /integrations/guide/azure-programmatic-management/?tab=windows
-[7]: /integrations/guide/azure-manual-setup/?tab=azurecli
 [8]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index
 [9]: /integrations/#cat-azure
-[10]: /logs/guide/azure-logging-guide/?tab=automatedinstallation
-[13]: /integrations/guide/azure-manual-setup/?tab=vmextension#agent-installation
-[14]: /integrations/guide/azure-manual-setup/?tab=aksclusterextension#agent-installation
 [15]: /agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
 [16]: /integrations/guide/azure-troubleshooting/
 [17]: /help/
-[18]: /logs/guide/azure-native-logging-guide/
 [19]: /logs/guide/azure-automated-log-forwarding/
 [20]: https://app.datadoghq.com/integrations/azure
 [21]: https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest
