@@ -67,6 +67,8 @@ To see Kubernetes instrumentation insights:
    - Whether each instrumented workload is generating traces 
 1. Hover over any status icon to see contextual details about the state of instrumentation or trace collection. 
 
+{{< img src="tracing/trace_collection/k8s-ssi-tab.png" alt="The Single Step Instrumentation tab for a Kubernetes cluster, showing the SSI config yaml and a list of instrumented pods" style="width:100%;" >}}
+
 ### Manually verify injection in the application container
 
 If the Datadog UI does not show any instrumentation issues, or if you're troubleshooting a single service or container, you can manually verify whether injection occurred as expected. This method is helpful when debugging in environments where centralized visibility is limited or when a specific service isn't reporting traces.
