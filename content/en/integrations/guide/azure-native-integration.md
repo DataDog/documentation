@@ -232,11 +232,18 @@ For example, the screenshot below shows a tag rule where only those virtual mach
 
 ## Microsoft Entra ID logs 
 
-Microsoft Entra ID logs contain the history of sign-in activity and an audit trail of changes made in Microsoft Entra ID for a particular tenant. To send these logs to Datadog, first complete the process to create a Datadog resource. Once you have a Datadog resource in Azure, follow the setup steps in the [Datadog in the Azure Portal][3] guide.
+Microsoft Entra ID logs contain the history of sign-in activity and an audit trail of changes made in Microsoft Entra ID for a particular tenant. To send these logs to Datadog, first complete the process to create a Datadog resource. Then follow these steps:
+
+1. Navigate to Microsoft Entra ID, and select **Diagnostic Settings** under **Monitoring** in the left navigation bar.
+2. Click **Add diagnostic setting**.
+3. Select the log categories you want to send to Datadog. Datadog recommends sending all categories.
+4. In **Destination details**, select **Send to a partner solution**.
+5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
+
+All Microsoft Entra ID logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
 [2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
-[3]: https://docs.datadoghq.com/integrations/guide/azure-portal/#microsoft-entra-id-logs
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [5]: /getting_started/site/
 [6]: /logs/guide/azure-logging-guide
