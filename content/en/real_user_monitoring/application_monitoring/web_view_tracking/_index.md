@@ -55,7 +55,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 #### iOS
 
-To enable Web View tracking, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialization snippet.
+To enable Web View tracking, make sure to also enable [RUM][3]. Then, add the package according to your dependency manager and update your initialization snippet.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -71,7 +71,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 To enable Crash Reporting:
 
-1. Make sure to also enable [RUM][2] and, or [Logs][3].
+1. Make sure to also enable [RUM][2].
 2. Add the package according to your dependency manager.
 3. Update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
 
