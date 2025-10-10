@@ -3758,7 +3758,7 @@ menu:
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
       weight: 401
-    - name: Scheduled Cost Reports
+    - name: Scheduled Reports
       url: cloud_cost_management/reporting/scheduled_reports
       parent: cloud_cost_reporting
       identifier: cloud_cost_scheduled_reports
@@ -3788,24 +3788,24 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
       weight: 601
-    - name: Troubleshooting
-      url: cloud_cost_management/troubleshooting
+    - name: Investigating Cost Changes
+      url: cloud_cost_management/investigating
       parent: cloud_cost
-      identifier: cloud_cost_troubleshooting
+      identifier: cloud_cost_investigating
       weight: 7
     - name: Monitors
       url: cloud_cost_management/troubleshooting/monitors
       parent: cloud_cost_troubleshooting
-      identifier: cloud_cost_troubleshooting
+      identifier: cloud_cost_troubleshooting_monitors
       weight: 701
     - name: Anomalies
       url: cloud_cost_management/troubleshooting/anomalies
-      parent: cloud_cost_reporting
-      identifier: cloud_cost_troubleshooting
+      parent: cloud_cost_troubleshooting
+      identifier: cloud_cost_troubleshooting_anomalies
       weight: 702
     - name: Real-Time Costs
       url: cloud_cost_management/troubleshooting/real_time_costs
-      parent: cloud_cost_reporting
+      parent: cloud_cost_troubleshooting
       identifier: cloud_cost_real_time_costs
       weight: 703
     - name: APM

@@ -1,5 +1,5 @@
 ---
-title: Scheduled Cost Reports
+title: Scheduled Reports
 aliases:
 - /cloud_cost_management/scheduled_reports
 further_reading:
@@ -24,7 +24,7 @@ For emails, the report PDF is included as an email attachment and/or as a link, 
 
 {{< img src="cloud_cost/cost_reports/cost-report-email.png" alt="A report that has been sent as an email based on a schedule" style="width:70%;" >}}
 
-## Schedule a cost report
+## Schedule a CCM report
 1. Go to [**Cloud Cost > Analyze > Reports**][1] in Datadog.
 2. [Create a report][2] or select an existing report.
 3. Click **Share**, then **Schedule Report**.
