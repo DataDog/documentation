@@ -5,18 +5,18 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-  OpenTelemetry instrumentation for LLM Observability is in beta.
+  OpenTelemetry instrumentation for LLM Observability is in beta. For access, <a href="/help">contact Datadog Support</a>.
 {{< /callout >}}
 
 ## Overview
 By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in LLM Observability.
 
-LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37 semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Datadog LLM Observability SDK or a Datadog agent.
+LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37 semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Datadog LLM Observability SDK or a Datadog Agent.
 
 ## Prerequisites
 
 - A [Datadog API key][2]
-- An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37 gen_ai semantic conventions][1]
+- An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37 semantic conventions for generative AI][1]
 - Access to the OpenTelemetry instrumentation beta feature ([contact support][4] to request access)
 
 ## Setup
@@ -29,7 +29,7 @@ Set the following environment variables in your application:
 
 ```
 OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=http/protobuf
-OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://trace.agent.datadoghq.com/v1/traces
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" code="true" >}}
 OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=datadog
 ```
 
@@ -39,29 +39,25 @@ Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 
 ### Instrumentation
 
-To generate traces compatible with LLM Observability:
+To generate traces compatible with LLM Observability, do one of the following:
 
-1. Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37 gen_ai semantic conventions][1].
-2. Alternatively, create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes as defined in the semantic conventions.
+- Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37 semantic conventions for generative AI][1].
+- Create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes, as defined in the semantic conventions.
 
-The traces will automatically appear in the [**LLM Observability Traces** page][3] once your application starts sending data. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your Opentelemetry root span's `service` attribute.
+After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
-**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear in the LLM Observability Traces UI.
+**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page.
 
 ## Supported semantic conventions
 
 LLM Observability supports spans that follow the OpenTelemetry 1.37 semantic conventions for generative AI, including:
 
 - LLM operations with `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model`, and other gen_ai attributes
-- I/O on direct attributes or via events
+- I/O on direct attributes or through events
 - Token usage metrics (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`)
 - Model parameters and metadata
 
-For the complete list of supported attributes and their specifications, see the [OpenTelemetry gen_ai semantic conventions documentation][1].
-
-## Getting access
-
-This feature is currently in beta. If you are interested in using OpenTelemetry instrumentation for LLM Observability, [reach out to support][4] to request access for your organization.
+For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
 
 [1]: https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
