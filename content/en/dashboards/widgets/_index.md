@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Dashboard widgets are visual representations of data.  They serve as the building blocks for your [dashboards][2] to visualize and correlate your data across your infrastructure. They can contain different types of information, such as graphs, images, logs, and statuses, to give you an overview of your systems and environments.
+Dashboard widgets are visual representations of data. They serve as the building blocks for your [dashboards][2] to visualize and correlate your data across your infrastructure. They can contain different types of information, such as graphs, images, logs, and statuses, to give you an overview of your systems and environments.
 
 ## Get started
 
@@ -27,9 +27,9 @@ The fastest way to onboard widgets relevant to your data is to clone a dashboard
 
 
 {{< whatsnext desc="Additional guides and courses to learn about widgets:" >}}
-   {{< nextlink href="https://docs.datadoghq.com/getting_started/dashboards/" >}}<u>Getting Started with Dashboards</u>: Walkthrough of building out a dashboard with widgets{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}<u>Dashboard Graph Widgets</u>: Learning center course, create, configure, and utilize dashboard graph widgets{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}<u>Introduction to Dashboards</u>: Learning center course, build a dashboard in a sandbox environment{{< /nextlink >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}<u>Getting Started with Dashboards</u>: Walkthrough of building out a dashboard with widgets{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}<u>Dashboard Graph Widgets</u>: Learning center course explaining how to create, configure, and use dashboard graph widgets{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}<u>Introduction to Dashboards</u>: Learning center course explaining how to build a dashboard in a sandbox environment{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Add a widget to your dashboard
