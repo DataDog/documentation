@@ -98,7 +98,7 @@
 
                 {{ $mainMenuItem := $dot.Scratch.Get "mainMenuItem" }}
                 {{ if and $mainMenuItem $mainMenuItem.Name }}
-                    <li class="js-load {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+                    <li class=" {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
                         {{$url_without_anchor = ((index (split $mainMenuItem.URL "#") 0) | relLangURL)}}
                         <a href="{{ (strings.TrimLeft "/" $mainMenuItem.URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
                             <span>{{ .Name }}</span>
@@ -133,7 +133,7 @@
                                 {{ end }}
 
                                 {{ if $shouldInclude }}
-                                    <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent "main" $child }}active{{ end }}">
+                                    <li class=" row nav-item {{ if $currentPage.IsMenuCurrent "main" $child }}active{{ end }}">
                                         {{$identifier := $child.Identifier}}
                                         {{/*
                                             lookup english equivalent of non-english menu item identifier attr.
@@ -178,7 +178,7 @@
                                                 {{ end }}
 
                                                 {{ if $shouldIncludeGrandchild }}
-                                                    <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent "main" $grandchild }}active{{ end }}">
+                                                    <li class=" row nav-item {{ if $currentPage.IsMenuCurrent "main" $grandchild }}active{{ end }}">
                                                         {{$grandchildIdentifier := $grandchild.Identifier}}
                                                         {{ if ne $currentPage.Lang "en" }}
                                                         {{ $dot.Scratch.Set "grandchildName" (index $engMenuChildren $grandchildIdentifier) }}
@@ -205,7 +205,7 @@
                 {{/* Regular hardcoded menu item processing */}}
                 <!-- check if on /studio/ top level section page, don't generate sub anchors if true -->
                 {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/studio/" ) }}
-                    <li class="js-load {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+                    <li class=" {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
                         {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
                         <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
                             <span>{{ .Name }}</span>
@@ -244,7 +244,7 @@
 
                                     {{ $childMainMenuItem := $dot.Scratch.Get "childMainMenuItem" }}
                                     {{ if and $childMainMenuItem $childMainMenuItem.Name }}
-                                        <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent "main" $childMainMenuItem }}active{{ end }}">
+                                        <li class=" row nav-item {{ if $currentPage.IsMenuCurrent "main" $childMainMenuItem }}active{{ end }}">
                                             {{$identifier := $childMainMenuItem.Identifier}}
                                             {{/*
                                                 lookup english equivalent of non-english menu item identifier attr.
@@ -263,7 +263,7 @@
                                     {{ end }}
                                 {{ else }}
                                     {{/* Regular hardcoded child */}}
-                                    <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent $studioMenu . }}active{{ end }}">
+                                    <li class=" row nav-item {{ if $currentPage.IsMenuCurrent $studioMenu . }}active{{ end }}">
                                         {{$identifier := .Identifier}}
                                         {{/*
                                             lookup english equivalent of non-english menu item identifier attr.
@@ -284,7 +284,7 @@
                         </ul>
                     </li>
                 {{ else }}
-                    <li class="js-load {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+                    <li class=" {{ if or ($currentPage.IsMenuCurrent $studioMenu .) ($currentPage.HasMenuCurrent $studioMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
                         <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                             <span>{{ .Name }}</span>
                         </a>
