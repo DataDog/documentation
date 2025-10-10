@@ -27,7 +27,6 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Amazon Bedrock Agents](#amazon-bedrock-agents) | >= 1.38.26         | >= 3.10.0      |
 | [Anthropic](#anthropic)                         | >= 0.28.0          | >= 2.10.0      |
 | [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
-| [Google GenerativeAI](#google-generativeai)     | >= 0.7.2           | >= 2.14.0      |
 | [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
 | [Crew AI](#crew-ai)                             | >= 0.105.0         | >= 3.5.0       |
@@ -166,21 +165,6 @@ The Google GenAI integration instruments the following methods:
 - [Embedding content][51]
   -`models.embed_content()`
   -`aio.models.embed_content()`
-
-
-## Google GenerativeAI
-
-The Google GenerativeAI integration provides automatic tracing for the Google GenerativeAI Python SDK content generation calls.
-
-**Note:** The [Google Generative AI SDK][52] is deprecated, and succeeded by Google GenAI.
-
-### Traced methods
-
-The Google GenerativeAI integration instruments the following methods:
-
-- Generating content (including streamed calls):
-  - `model.generate_content()` (Also captures `chat.send_message()`)
-  - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
 
 ## Vertex AI
 
@@ -348,7 +332,6 @@ The MCP integration instruments the following methods:
 [49]: https://docs.litellm.ai/docs/text_completion
 [50]: https://platform.openai.com/docs/api-reference/responses
 [51]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
-[52]: https://github.com/google-gemini/deprecated-generative-ai-python
 [53]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 [54]: https://api-docs.deepseek.com/
 [55]: https://ai.pydantic.dev/
