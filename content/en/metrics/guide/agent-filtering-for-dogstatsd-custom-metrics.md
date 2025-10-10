@@ -34,7 +34,7 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Prerequisites
 
-- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended)
+- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended).
 - Ensure that your RBAC permissions include [`org_management`][2] and that [Remote Configuration][3] is enabled for your organization.
 - Ensure that your RBAC permissions include [`api_keys_write`][4] and that the [Remote Configuration capability is enabled on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, an Agent restart is required for Remote Configuration enablement to take effect.
 
@@ -44,9 +44,9 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 You can create a metric filtering policy from the [Metrics Settings page][6] or the [Metrics Summary page][7].
 
-Metric filtering policies are applied to all of the Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
+Metric filtering policies are applied to all Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
 
-Policy updates are deployed to Agents in ~1min (up to 2 minutes).
+Policy updates are deployed to Agents in 1–2 minutes.
 
 ### From the Metrics Settings page
 
