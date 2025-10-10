@@ -195,7 +195,7 @@ performance_schema_max_sql_text_length=4096
 
 ### Query activity is missing
 
-<div class="alert alert-warning">Query Activity and Wait Event collection are not supported for Flexible Server, as these features require MySQL settings that are not available on a Flexible Server host.</div>
+<div class="alert alert-danger">Query Activity and Wait Event collection are not supported for Flexible Server, as these features require MySQL settings that are not available on a Flexible Server host.</div>
 
 Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
 

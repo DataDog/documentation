@@ -8,10 +8,6 @@ further_reading:
 title: パイプライントレースへのカスタムコマンドの追加
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 カスタムコマンドは、CI パイプラインの個々のコマンドをトレースする方法を提供し、ジョブが持つかもしれないセットアップやティアダウンアクション (例えば、Docker イメージのダウンロードや Kubernetes ベースのインフラで利用できるノードの待機) を考慮せずにコマンドにかかる時間を測定することを可能にします。これらのスパンは、パイプラインのトレースの一部として表示されます。
 
 {{< img src="ci/ci-custom-spans.png" alt="カスタムコマンドを使用した単一パイプラインの詳細" style="width:100%;">}}
@@ -57,7 +53,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
+<div class="alert alert-danger">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
 ## 構成設定

@@ -1,0 +1,14 @@
+issuer: https://token.actions.githubusercontent.com
+
+subject: repo:DataDog/documentation:ref:refs/heads/master
+
+claim_pattern:
+  event_name: (schedule|workflow_dispatch)
+  ref: refs/heads/master
+  ref_protected: "true"
+  job_workflow_ref: DataDog/documentation/\.github/workflows/bump_synthetics_worker_version\.yml@refs/heads/master
+
+permissions:
+  contents: write
+  pull_requests: write
+

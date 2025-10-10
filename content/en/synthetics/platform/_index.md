@@ -1,6 +1,6 @@
 ---
 title: Platform
-description: Learn how to leverage Datadog platform capabilities to maximize Synthetics capabilities.
+description: Learn how to leverage Datadog platform capabilities to maximize Synthetic Monitoring capabilities.
 further_reading:
 - link: '/continuous_testing/explorer'
   tag: 'Documentation'
@@ -30,8 +30,8 @@ Explore the [Test Coverage][4] page to gain insights into the overall testing co
 
 {{< img src="synthetics/test_coverage/browser_actions.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
-## Connect Synthetic Testing and APM
-[Connect APM][4] to identify failing synthetic tests directly through to the root causes by digging into related traces.
+## Connect Synthetic Monitoring testing and APM
+[Connect APM][5] to identify failing synthetic tests directly through to the root causes by digging into related traces.
 
 {{< img src="tracing/index/Synthetics.png" alt="Synthetic tests" style="width:100%;">}}
 

@@ -14,10 +14,6 @@ further_reading:
   text: "Learn about RUM Browser Monitoring"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Test Optimization integrates with Datadog [Real User Monitoring][2] to provide you with the tools for deep analysis of your browser tests.

@@ -243,7 +243,7 @@ Snowflake インテグレーションは、カスタムメトリクスを収集�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "snowflake_web" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### イベント
@@ -260,7 +260,7 @@ Snowflake Web インテグレーションには、サービスのチェック機
 
 ## Agent チェック: Snowflake
 
-<div class="alert alert-danger">Snowflake Agent チェックはサポートされなくなりました。追加機能および Snowflake への API コール量の削減のため、新しい Snowflake インテグレーションへの切り替えをお勧めします。</div>
+<div class="alert alert-warning">Snowflake Agent チェックはサポートされなくなりました。追加機能および Snowflake への API コール量の削減のため、新しい Snowflake インテグレーションへの切り替えをお勧めします。</div>
 
 ## Agent: 概要
 
@@ -281,7 +281,7 @@ Snowflake チェックは [Datadog Agent][13] パッケージに含まれてい�
 
 ### Agent: 構成
 
-<div class="alert alert-warning">Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。</div>
+<div class="alert alert-danger">Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。</div>
 
 1. Snowflake を監視するための Datadog 固有のロールとユーザーを作成します。Snowflake で、以下を実行して、ACCOUNT_USAGE スキーマにアクセスできるカスタムロールを作成します。
 

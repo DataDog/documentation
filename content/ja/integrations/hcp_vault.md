@@ -23,7 +23,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories: []
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hcp_vault/README.md
 display_on_public_website: true

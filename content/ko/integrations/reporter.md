@@ -50,7 +50,7 @@ public_title: 리포터
 short_description: 모든 Datadog 대시보드에서 이메일 리포트 생성하기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:

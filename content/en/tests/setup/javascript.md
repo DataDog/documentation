@@ -22,10 +22,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported test frameworks:
@@ -49,7 +45,7 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
 </div>
 
@@ -211,7 +207,7 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
 ```
 **Note**: `description` values in annotations are [typed as strings][2]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
@@ -492,7 +488,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
@@ -636,7 +632,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 ## Manual testing API
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 

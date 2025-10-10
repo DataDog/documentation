@@ -56,20 +56,20 @@ apk add libgcc
 Exécutez le programme d'installation :
 
 ```shell
-# Installation complète : APM, ASM et profiling
+# Installation complète : APM + AAP + Profiling
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
-# APM seulement
+# APM uniquement
 php datadog-setup.php --php-bin=all
 
-# APM et ASM
+# APM + AAP
 php datadog-setup.php --php-bin=all --enable-appsec
 
-# APM et profiling
+# APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <strong>Remarque</strong> : Windows ne prend en charge que l'APM. N'utilisez pas les marqueurs <code>--enable-appsec</code> et <code>--enable-profiling</code> lorsque vous tracez les applications PHP sur Windows.
 </div>
 
@@ -84,12 +84,12 @@ Si vous ne spécifiez pas `--enable-appsec`, l'extension AppSec se charge peu de
 quelques minutes peuvent s'écouler avant que les traces soient visibles dans l'interface. Si elles n'apparaissent toujours pas une fois ce délai passé, créez une page <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> depuis la machine du host et faites défiler jusqu'à la section `ddtrace`. Vous y trouverez les checks de diagnostic qui ont échoué, pour vous aider à identifier les éventuels problèmes.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Apache ZTS :</strong>
 si le binaire CLI PHP créé est de type NTS (non thread-safe), puisqu'Apache utilise une version ZTS (Zend thread-safe) de PHP, vous devez modifier manuellement le chargement de l'extension pour le binaire ZTS. Exécutez <code>/chemin/vers/zts-php --ini</code> pour déterminer l'emplacement du fichier <code>.ini</code> de Datadog, puis ajoutez le suffixe <code>-zts</code> du nom du fichier. Par exemple, remplacez <code>extension=ddtrace-20210902.so</code> par <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>SELinux :</strong>
 Si les stratégies httpd de SELinux sont configurées sur le host, la fonctionnalité du traceur peut être limitée, à moins que l'écriture et l'exécution de fichiers temporaires ne soient explicitement autorisées dans la configuration SELinux :
 
@@ -387,7 +387,7 @@ echo 1 > /proc/sys/fs/suid_dumpable
 
 Pour obtenir des informations plus détaillées sur le crash, exécutez l'application avec Valgrind. Contrairement aux core dumps, cette méthode fonctionne toujours dans un conteneur sans privilège.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <strong>Remarque</strong> : une application exécutée à travers Valgrind est considérablement plus lente que lorsqu'elle est exécutée nativement. Cette méthode est uniquement recommandée en dehors d'un environnement de production.
 </div>
 
@@ -451,7 +451,7 @@ Par défaut, la trace Valgrind obtenue est générée vers stderr ; suivez la [
 
 Certains problèmes étant causés par des facteurs externes, il peut être utile d'obtenir une `strace`.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <strong>Remarque</strong> : une application exécutée à travers <code>strace</code> est considérablement plus lente que lorsqu'elle est exécutée nativement. Cette méthode est uniquement recommandée en dehors d'un environnement de production.
 </div>
 

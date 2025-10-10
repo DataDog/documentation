@@ -46,11 +46,8 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 ### High Availability
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-
+<div class="alert alert-danger"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-info"> High Availability support of the Datadog Agent is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 High Availability (HA) support of the Datadog Agent in Network Device Monitoring allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
 
@@ -71,7 +68,10 @@ To begin monitoring your network devices, enable SNMP monitoring using one of th
 [Ping][5]
 : Additionally, SNMP supports enabling ping on your devices.
 
-### Enrich network devices with tags 
+[VPN Monitoring][21]
+: Configure VPN monitoring to start monitoring your devices' VPN tunnels.
+
+### Enrich network devices with tags
 
 After NDM is configured on your devices, you can further enrich them by adding network device tags using the following methods:
 
@@ -97,7 +97,7 @@ Customize metrics and tags on your devices by viewing the [Supported Devices][9]
 [GUI based profile authoring][6]
 : Take advantage of Datadog Network Monitoring's GUI based device onboarding experience where you can add custom metrics and tags to your devices.
 
-### NetFlow Monitoring 
+### NetFlow Monitoring
 
 Configure [NetFlow Monitoring][11] to visualize and monitor your flow records from your NetFlow-enabled devices.
 
@@ -147,3 +147,4 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [18]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [19]: /network_monitoring/devices/troubleshooting
 [20]: /integrations/guide/high_availability
+[21]: /network_monitoring/devices/vpn_monitoring

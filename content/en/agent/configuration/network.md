@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
@@ -73,13 +73,16 @@ Add the following domains to your inclusion list to allow for Agent installation
 [Real User Monitoring (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+[Cloud Security Vulnerabilities][29]
+: `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Synthetic Monitoring Private Locations][8]
 : Synthetics Worker v1.5.0 or later: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint you need to configure.<br>
 API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -88,7 +91,7 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /agent/remote_config
+[101]: /remote_configuration
 [102]: /database_monitoring/
 
 {{% /site-region %}}
@@ -167,6 +170,16 @@ Other: See [logs endpoints][202]
 [202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
+{{% site-region region="ap2" %}}
+[Logs][200] & [HIPAA logs][201]
+: HTTP: `agent-http-intake.logs.ap2.datadoghq.com`<br>
+Other: See [logs endpoints][202]
+
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
+
 {{% site-region region="gov" %}}
 [Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
@@ -235,7 +248,7 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 ## Open ports
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 All outbound traffic is sent over SSL through TCP or UDP.
 <br><br>
 Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
@@ -277,7 +290,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
@@ -354,7 +367,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 
@@ -415,3 +428,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [26]: /metrics/
 [27]: /developers/service_checks/
 [28]: /events/
+[29]: /security/cloud_security_management/vulnerabilities/

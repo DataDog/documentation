@@ -1,8 +1,9 @@
 ---
 categories:
-- cloud
+- 클라우드
 - aws
 - 로그 수집
+custom_kind: 통합
 dependencies: []
 description: Azure Kinesis 데이터 분석의 핵심 메트릭 추적하기.
 doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis_data_analytics/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Amazon Kinesis 데이터 분석
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: amazon_kinesis_data_analytics
 public_title: Datadog-Amazon Kinesis 데이터 분석 통합

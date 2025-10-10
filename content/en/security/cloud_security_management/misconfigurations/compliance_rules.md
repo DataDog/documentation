@@ -71,8 +71,6 @@ On the [Rules][13] page, select a rule to open its details page. In the **Set se
 
 Alternatively, create [notification rules][21] that span across multiple compliance rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual compliance rules.
 
-**Note**: If a misconfiguration is detected for a rule with notifications enabled, the failed misconfiguration also appears on the [Signals Explorer][22].
-
 {{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="The Set severity and notifications section of the rule details page" >}}
 
 ## Create custom rules
@@ -112,5 +110,4 @@ The rule deprecation process is as follows:
 [19]: /integrations/webhooks/
 [20]: /security/cloud_security_management/misconfigurations/custom_rules/
 [21]: /security/notifications/rules/
-[22]: /security/cloud_security_management/misconfigurations/signals_explorer/
 [23]: /security/detection_rules/#clone-a-rule

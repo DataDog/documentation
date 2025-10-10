@@ -151,7 +151,7 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 
 Your specific list of metrics may vary based on the PCF version and the deployment. Datadog collects counter and gauge metrics emitted from the [Loggregator v2 API][19]. See [Cloud Foundry Component Metrics][20] for a list of metrics emitted by default.
 
-{{< get-metrics-from-git "cloud_foundry">}}
+{{< get-metrics-from-git "cloud-foundry">}}
 
 ## Further reading
 

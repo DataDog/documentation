@@ -38,17 +38,15 @@ To correlate your [traces][1] with your logs, complete the following steps:
 Activate automatic instrumentation using one of the following options:
  
 Option 1: [Library Injection][5]:
-  1. Set the environment variable `DD_LOGS_INJECTION=true` in the application `deployment/manifest` file.
-  2. Follow the instructions in [Library Injection][5] to set up tracing.
+  1. Follow the instructions in [Library Injection][5] to set up tracing.
+  2. For older trace versions (``ddtrace<3.11``) set the environment variable `DD_LOGS_INJECTION=true` in the application `deployment/manifest` file.
 
 Option 2: `ddtrace-run`:
-  1. Set the environment variable `DD_LOGS_INJECTION=true` in the environment where the application is running.
-  2. Import **ddtrace** into the application.
-  3. Run the application with `ddtrace-run` (for example, `ddtrace-run python appname.py`).
-     
-Option 3: `patch`:
   1. Import **ddtrace** into the application.
-  2. Add `ddtrace.patch(logging=True)` to the start of the application code.
+  2. Run the application with `ddtrace-run` (for example, `ddtrace-run python appname.py`).
+     
+Option 3: `import ddtrace.auto`:
+  1. Import **ddtrace.auto** into the application. This will automatically enable the logging, logback, loguru, and/or structlog integration.
 
 #### Step 2 - Include required attributes
 
@@ -58,7 +56,7 @@ Update your log format to include the required attributes from the log record.
 Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
 ``dd.span_id`` attributes for your log record in the format string.
 
-Here is an example using `logging.basicConfig` to configure the log injection:
+Here is an example using `logging.basicConfig` to configure the log injection. Note ``ddtrace-run`` or ``import ddtrace.auto`` are required:
 
 ``` python
 import logging

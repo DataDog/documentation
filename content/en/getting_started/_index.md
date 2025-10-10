@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Introduction to Datadog's observability platform with guides for installation, configuration, and getting started with key features.
 disable_sidebar: true
 aliases:
     - /overview
@@ -113,7 +114,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< whatsnext desc="Product:">}}
 {{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
-{{< nextlink href="/getting_started/software_catalog" >}}<u>Software Catalog</u>: Manage service ownership, reliability, and performance at scale in Software Catalog. {{< /nextlink >}}
+{{< nextlink href="/getting_started/internal_developer_portal" >}}<u>Internal Developer Portal</u>: Unify telemetry, metadata, and workflows to accelerate delivery. {{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
@@ -125,10 +126,15 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
+{{< nextlink href="/getting_started/feature_flags" >}}<u>Feature Flags</u>: Manage feature delivery and personalize user experiences, with built-in observability.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
 {{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analyze your first-party code and open source libraries in your applications from development to runtime.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Try a Preview product or feature
+
+Datadog Product teams are frequently adding new features that might help you. You can try some of these out before they are generally available to see if they help you and to give us feedback to make them better. To see a complete list of active previews, get more information, and sign up to participate, go to [Datadog Product Preview Program][5].
 
 ## Further Reading
 
@@ -138,3 +144,4 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 [2]: /integrations/amazon_web_services/
 [3]: https://learn.datadoghq.com/collections/getting-started
 [4]: https://learn.datadoghq.com/courses/course-quickstart
+[5]: https://www.datadoghq.com/product-preview/

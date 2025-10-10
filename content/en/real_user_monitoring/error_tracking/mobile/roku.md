@@ -13,11 +13,8 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
+site_support_id: roku_error_tracking
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM and Error Tracking for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -74,9 +71,9 @@ Whenever you perform an operation that might throw an exception, you can forward
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
-[5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
 
 
 ## Further Reading

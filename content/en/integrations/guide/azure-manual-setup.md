@@ -1,6 +1,5 @@
 ---
 title: Azure Integration Manual Setup Guide
-
 description: "Steps for manually setting up the Datadog Azure integration"
 further_reading:
 - link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
@@ -32,6 +31,33 @@ Use this guide to manually set up the [Datadog Azure integration][1] through an 
 **US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][12] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Azure Native manual setup][13] guide for more information.
 
 ## Setup
+
+{{% collapse-content title="Permissions required for integration setup" level="h4" expanded=false id="required-permissions" %}}
+
+#### In Azure
+
+Your Microsoft Entra ID user needs the following permissions:
+
+##### Permission to create an app registration
+
+**One** of the following must be true for the user:
+
+- `Users can register applications` has been set to `Yes`
+- The user has the [Application Developer][17] role
+
+##### Permission to assign roles within your subscriptions
+
+You must have one of the [Azure built-in roles in the Privileged category][14], or a custom role including the `Microsoft.Authorization/roleAssignments/write` action, in each of the subscriptions you wish to connect.
+
+##### Permission to add and grant consent for Graph API permissions
+
+The [Privileged Role Administrator role][15] contains the required permissions.
+
+#### In Datadog
+
+The `Datadog Admin Role`, or any other role with the `azure_configurations_manage` permission.
+
+{{% /collapse-content %}} 
 
 ### Integrating through the Azure CLI
 
@@ -258,8 +284,8 @@ When critical errors are encountered, the Azure integration generates events in 
 
 Datadog provides a monitor template to help you get started. To use the monitor template:
 
-1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][8] tab.
-2. Select the monitor template titled `[Azure] Integration Errors`.
+1. In Datadog, go to **Monitors** and click **Browse Templates**.
+2. Search for and select the monitor template titled [[Azure] Integration Errors][8].
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][9] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
@@ -319,7 +345,10 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [5]: /logs/guide/azure-logging-guide
 [6]: /integrations/guide/azure-native-manual-setup/
 [7]: https://learn.microsoft.com/azure/cloud-shell/get-started/
-[8]: https://app.datadoghq.com/monitors/recommended
+[8]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [9]: /monitors/notify/#configure-notifications-and-automations
 [12]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
+[14]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged
+[15]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
+[17]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer

@@ -1,7 +1,8 @@
 ---
 title: Adaptive Sampling
+description: Automatically adjust sampling rates to match specific budgets while maintaining visibility over service endpoints.
 disable_toc: false
-aliases: 
+aliases:
     - /tracing/guide/adaptive_sampling
 further_reading:
     - link: "/tracing/trace_pipeline/ingestion_mechanisms"
@@ -11,10 +12,6 @@ further_reading:
       tag: "Documentation"
       text: "Ingestion Controls"
 ---
-
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" header="Request access to the Preview!" >}}
-Adaptive sampling is in Preview. To request access, complete the form.
-{{< /callout >}}
 
 ## Overview
 
@@ -115,6 +112,8 @@ The table includes:
   - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the tracing library.
   - `CONFIGURED REMOTE`: Remote sampling rule set from the Datadog UI.
   - `ADAPTIVE REMOTE`: Adaptive sampling rules set by Datadog.
+
+Once a service is onboarded to adaptive sampling, the sampling rates are adjusted and recomputed every 10 minutes.
 
 ### Onboard a service to adaptive sampling
 

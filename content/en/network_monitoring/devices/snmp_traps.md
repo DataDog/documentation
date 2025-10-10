@@ -67,7 +67,7 @@ Binding to a port number under 1024 requires elevated permissions. To bind to a 
 1. Grant access to the port using the `setcap` command:
 
    ```
-   sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-agent/bin/agent/agent
+   sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-packages/datadog-agent/stable/bin/agent/agent
    ```
 
    **Note**: Re-run this setcap command every time you upgrade the Agent.
@@ -75,13 +75,13 @@ Binding to a port number under 1024 requires elevated permissions. To bind to a 
 2. Verify the setup is correct by running the `getcap` command:
 
    ```
-   sudo getcap /opt/datadog-agent/bin/agent/agent
+   sudo getcap /opt/datadog-packages/datadog-agent/stable/bin/agent/agent
    ```
 
    You should see the following output:
 
    ```
-   /opt/datadog-agent/bin/agent/agent = cap_net_bind_service+ep
+   /opt/datadog-packages/datadog-agent/stable/bin/agent/agent = cap_net_bind_service+ep
    ```
 
 3. [Restart the Agent][6].

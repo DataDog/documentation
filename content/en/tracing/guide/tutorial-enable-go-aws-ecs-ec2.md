@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with EC2
+description: Step-by-step tutorial to enable distributed tracing for a Go application deployed on Amazon ECS using the EC2 launch type.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
@@ -30,7 +31,7 @@ For other scenarios, including the application and Agent on a host, the applicat
 
 This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of Datadog APM setup, use one of the host or container tutorials instead.
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.
+See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.  {{% tracing-go-v2 %}}
 
 ### Prerequisites
 
@@ -160,16 +161,10 @@ To enable tracing support:
 1. Tp enable automatic tracing, uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-     sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
-     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-     
-     // If you are using v2, the lines look like this:
-     // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
-     // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
-     // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-     // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+     sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+     chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+     httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
 1. In the `main()` function, uncomment the following lines:
@@ -219,8 +214,7 @@ To enable tracing support:
    Also remove the comment around the following import:
 
    {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
    {{< /code-block >}}
 
 1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
@@ -472,3 +466,4 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/apm/traces
 [10]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
+[11]: /tracing/trace_collection/custom_instrumentation/go/migration

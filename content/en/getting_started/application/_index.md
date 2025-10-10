@@ -1,5 +1,6 @@
 ---
 title: Getting Started in Datadog
+description: Overview of Datadog's UI navigation, key features including dashboards, monitors, integrations, and core platform capabilities.
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/dd-101-dev'
     tag: 'Learning Center'

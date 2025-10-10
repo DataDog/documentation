@@ -23,7 +23,13 @@ In many cases, such as logging, it may be useful to correlate trace IDs to other
 
 #### Automatic injection
 
-For Rails applications using the default logger (`ActiveSupport::TaggedLogging`), `lograge`, or `semantic_logger`, trace ID injection is automatically configured. You need to add a [trace remapper][1] to connect the relevant logs with the traces.
+For Rails applications using `ActiveSupport::TaggedLogging` (default), `semantic_logger`, or `lograge`, trace ID injection is configured automatically.
+
+<div class="alert alert-danger">
+When using <code>lograge</code>, you must <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#for-logging-in-rails-applications">disable <code>TaggedLogging</code></a>.
+</div>
+
+You must also add a [trace remapper][1] to link the relevant logs to their corresponding traces.
 
 #### Manual injection
 
@@ -72,4 +78,3 @@ Datadog::Tracing.trace('my.operation') { logger.warn('This is a traced operation
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-

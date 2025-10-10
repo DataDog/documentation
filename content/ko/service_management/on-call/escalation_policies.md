@@ -6,10 +6,6 @@ further_reading:
 title: 에스컬레이션 정책
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 Datadog On-Call에서 에스컬레이션 정책은 페이지가 즉시 처리되도록 보장합니다. 페이지는 설정된 시간 내에 확인되지 않으면 미리 정의된 단계를 통해 에스컬레이션됩니다.
 
 Datadog은 [팀을 On-Call에 온보딩][1]할 때 기본 에스컬레이션 정책을 생성합니다.

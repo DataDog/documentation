@@ -1,5 +1,6 @@
 ---
 title: Export Monitor Alerts to CSV
+description: "Download monitor alert history as CSV files through hourly monitor data for the past 6 months (Datadog US site only)."
 aliases:
 - /monitors/faq/how-can-i-export-alert-history
 ---
@@ -34,7 +35,7 @@ hour,host_name,alert_name,user,cnt
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5,ap1" >}}
+{{< site-region region="eu,gov,us3,us5,ap1,ap2" >}}
 
 This feature is not supported.
 

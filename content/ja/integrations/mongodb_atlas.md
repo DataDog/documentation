@@ -108,7 +108,7 @@ MongoDB Atlas インテグレーションは、Atlas ポータルにログイン
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mongodb_atlas" >}}
+{{< get-metrics-from-git "mongodb-atlas" >}}
 
 
 ### イベント

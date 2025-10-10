@@ -35,7 +35,7 @@ Los hallazgos que aparecen en el Buzón de seguridad se generan a partir de Appl
 
 - [Configuraciones incorrectas][1] para [Configuraciones incorrectas de CSM][2].
 - [Riesgos de identidad][1] para [Riesgos de identidad de CSM][3].
-- Vulnerabilidades de la biblioteca de la aplicación para el [Análisis de composición del software (SCA)][4]. Todas las vulnerabilidades elevadas y críticas de la biblioteca de la aplicación en servicios de producción bajo ataque aparecen en el buzón.
+- Vulnerabilidades de la librería de la aplicación para el [Análisis de composición del software (SCA)][4]. Todas las vulnerabilidades elevadas y críticas de la librería de la aplicación en servicios de producción bajo ataque aparecen en el buzón.
 - Vulnerabilidades del código de la aplicación para [Vulnerabilidades de seguridad del código][5]. Todas las vulnerabilidades elevadas y críticas del código de la aplicación aparecen en el buzón.
 - [Rutas de ataque][1]. Una ruta de ataque resume una serie de interconexiones entre configuraciones incorrectas, imágenes de contenedores, hosts y vulnerabilidades de aplicaciones que los actores maliciosos podrían aprovechar para obtener acceso no autorizado, escalar privilegios o comprometer datos confidenciales en tu entorno de nube. Todas las rutas de ataque aparecen por defecto en el Buzón de seguridad.
 

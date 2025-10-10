@@ -17,10 +17,6 @@ further_reading:
 title: Configurar el rastreo en un pipeline de AWS CodePipeline
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [AWS CodePipeline][1] es un servicio de entrega continua totalmente gestionado que te ayuda a automatizar tus pipelines de entrega para obtener actualizaciones rápidas y fiables de las aplicaciones y la infraestructura.
@@ -118,7 +114,7 @@ Si estás utilizando [Test Optimization][8] y tu pipeline contiene una o más ac
 
 La integración AWS CodePipeline admite la correlación de acciones **CodeBuild** con sus respectivos tramos de trabajos y pipelines. Para habilitar la recopilación de logs para tus acciones CodeBuild, consulta la [guía de reenvío de logs de AWS][16].
 
-<div class="alert alert-warning"><strong>Nota</strong>: La correlación de logs para acciones CodeBuild requiere que el proyecto CodeBuild tenga los nombres del grupo de logs y del flujo (stream) de logs CloudWatch predeterminados.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: La correlación de logs para acciones CodeBuild requiere que el proyecto CodeBuild tenga los nombres del grupo de logs y del flujo (stream) de logs CloudWatch predeterminados.</div>
 
 Los logs se facturan por separado de CI Visibility. La conservación de logs, la exclusión y los índices se configuran en Parámetros de logs. Los logs de AWS CodeBuild se pueden identificar por las etiquetas (tags) `source:codebuild` y `sourcecategory:aws`.
 

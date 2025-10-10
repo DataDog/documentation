@@ -21,7 +21,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -54,45 +54,41 @@ tile:
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## Overview
+## 概要
 
 ### Akamai Application Security
 
-With the Akamai Application Security integration, Datadog can capture security event logs generated from your Akamai security configurations.
-This integration provide real time visibility and insights into web traffic patterns, enabling quick detection of
-malicious activity. It also helps identify security threats, such as DDoS attacks, botnet intrusions, and
-application layer vulnerabilities.
+Akamai Application Security のインテグレーションにより、Datadog は Akamai のセキュリティ構成から生成されたセキュリティイベントログをキャプチャすることができます。
+このインテグレーションにより、Web トラフィックのパターンをリアルタイムで視覚化し、悪質なアクティビティを迅速に検出することができます。また、DDoS 攻撃、ボットネットへの侵入、アプリケーション層の脆弱性などのセキュリティ脅威の特定にも役立ちます。
 
-After collecting events, Datadog populates the [out-of-the-box Akamai Application Security overview dashboard][1] with insights
-into attack data security events, threat intel, IP log activity, and rare IP activity.
+イベントの収集後、Datadog は[すぐに使える Akamai Application Security 概要ダッシュボード][1]に、攻撃データのセキュリティイベント、脅威情報、IP ログアクティビティ、および稀な IP アクティビティに関する情報を入力します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-No installation required.
+インストールは不要です。
 
-### Configuration
+### 構成
 
-#### Log collection
+#### ログ収集
 
-To capture security event logs generated from your Akamai security configuration, create an API client in your Akamai account, and then enter the generated credentials in the [Akamai integration tile][2] in Datadog.
+Akamai のセキュリティ構成から生成されたセキュリティイベントログをキャプチャするには、Akamai アカウントで API クライアントを作成し、生成された資格情報を Datadog の [Akamai インテグレーションタイル][2]に入力します。
 
-#### Creating an API client on Akamai
-1. Sign in to your [Akamai account][3].
-2. Search for **Identity and Access Management**.
-3. Click **Create API Client**.
-4. Under **Select APIs**, search for **SIEM** and provide **READ-ONLY** access.
-5. Under **Select groups**, assign **Manage SIEM** to the group associated with your security policy.
-6. After creating the API client, click **Create credential** to generate your set of credentials.
-<!--4. Follow the instructions below to assign the respective permissions for your Akamai product. -->
-<!-- TODO: When another Akamai product is added, remove #4-6 from above, uncomment #4 above, uncomment this section, and include
-other Akamai product instructions in the same format.
+#### Akamai での API クライアントの作成
+1. [Akamai アカウント][3]にサインインします。
+2. **Identity and Access Management** を検索します。
+3. **Create API Client** をクリックします。
+4. **Select APIs** で **SIEM** を検索し、**READ-ONLY** アクセスを提供します。
+5. **Select groups** で、**Manage SIEM** をセキュリティポリシーに関連するグループに割り当てます。
+6. API クライアントを作成したら、**Create credential** をクリックして資格情報を生成します。
+<!--4. 以下の手順に従って、Akamai 製品の各権限を割り当てます。-->
+<!-- TODO: 別の Akamai 製品が追加された場合は、上記の #4-6 を削除し、上記の #4 のコメントを解除し、このセクションのコメントを解除して、同じフォーマットで他の Akamai 製品の手順を含めるようにしてください。
 
-#### Akamai Security Events
-1. Under **Select APIs**, search for **SIEM** and provide **READ-ONLY** access.
-2. Under **SElect groups**, assign **Manage SIEM** to the group associated with your security policy.
-3. After creating the API client, click **Create credential** to generate your set of credentials.
+#### Akamai セキュリティイベント
+1. **Select APIs** で **SIEM** を検索し、**READ-ONLY** アクセスを提供します。
+2. **Select groups** で、**Manage SIEM** をセキュリティポリシーに関連するグループに割り当てます。
+3. API クライアントを作成したら、**Create credential** をクリックして資格情報を生成します。
 -->
 
 #### アカウントの構成 ID の取得
@@ -117,7 +113,7 @@ Akamai のインテグレーションは、Akamai アカウントのセキュリ
 Akamai インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "akamai_application_security" >}}
+{{< get-service-checks-from-git "akamai" >}}
 
 
 ## トラブルシューティング

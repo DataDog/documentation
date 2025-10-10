@@ -53,7 +53,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Function 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_functions" >}}
+{{< get-metrics-from-git "google-cloud-functions" >}}
 
 
 ### Événements

@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.mediaconvert.hdoutput_duration
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.mediaconvert.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -113,5 +113,5 @@ AWS Elemental MediaConvert インテグレーションには、サービスの�
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediaconvert/amazon_mediaconvert_metadata.csv
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_mediaconvert/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/ja/help/

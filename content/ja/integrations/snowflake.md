@@ -85,7 +85,7 @@ Snowflake チェックは [Datadog Agent][2] パッケージに含まれてい�
 **注**: Python 2 を使用する Datadog Agent v6 では、Snowflake チェックは利用できません。Agent v6 で Snowflake を使用するには、[Datadog Agent v6 で Python 3 を使用する][3]を参照するか、Agent v7 にアップグレードしてください。
 
 ### 構成
-<div class="alert alert-warning">Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。</div>
+<div class="alert alert-danger">Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。</div>
 
 1. Snowflake を監視するための Datadog 固有のロールとユーザーを作成します。Snowflake で、以下を実行して、ACCOUNT_USAGE スキーマにアクセスできるカスタムロールを作成します。
 
@@ -315,7 +315,7 @@ custom_queries:
 </div>
 
 ### メトリクス
-{{< get-metrics-from-git "snowflake" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### イベント
@@ -323,7 +323,7 @@ custom_queries:
 Snowflake には、イベントは含まれません。
 
 ### サービスのチェック
-{{< get-service-checks-from-git "snowflake" >}}
+{{< get-service-checks-from-git "snowflake-web" >}}
 
 
 ## トラブルシューティング

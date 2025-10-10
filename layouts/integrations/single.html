@@ -1,5 +1,6 @@
 {{ define "main" }}
     {{ $media := .Params.tile.media | default .Params.media | default "" }}
+    {{ $further_reading := .Params.further_reading }}
 
     <div class="row">
         <div class="col-12 order-1">
@@ -11,6 +12,7 @@
     </div>
 
     {{ partial "integration-labels/integration-labels.html" . }}
+    {{ partial "site_support_banner/site_support_banner.html" . }}
     {{ $dir := "" }}
     {{ with .File }}{{ $dir = .Dir }}{{ end }}
     {{ if and (eq $dir "integrations/") ($media | len) }}
@@ -18,4 +20,11 @@
     {{ end }}
 
     {{ .Content }}
+
+    {{- if ($further_reading) -}}
+
+    <h2>Further Reading</h2>
+        {{- partial "whats-next/whats-next.html" . -}}
+    {{- end -}}
+
 {{ end }}

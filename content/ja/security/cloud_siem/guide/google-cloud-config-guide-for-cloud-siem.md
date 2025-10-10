@@ -3,10 +3,10 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Cloud SIEM のデフォルト検出ルールの確認
-- link: /security/cloud_siem/investigate_security_signals
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentation
   text: セキュリティシグナルエクスプローラーについて学ぶ
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
   tag: Documentation
   text: 新しい検出ルールの作成
 - link: /integrations/google_cloud_platform/#log-collection
@@ -31,7 +31,7 @@ title: Cloud SIEM のための Google Cloud 構成ガイド
 1. [Dataflow ジョブを作成して実行](#create-and-run-the-dataflow-job)します。
 1. [Cloud SIEM でセキュリティシグナルのトリアージを行う](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push サブスクリプションを使用した Google Cloud のログ収集</a>は、以下の理由で非推奨となっています。
 

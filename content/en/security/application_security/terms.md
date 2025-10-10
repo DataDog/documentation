@@ -13,10 +13,6 @@ further_reading:
   text: "Accelerate security investigations with Datadog Threat Intelligence"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog App and API Protection monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General App and API Protection terms
@@ -78,11 +74,11 @@ threat intelligence
 
 suspicious attackers
 : A precursor to Flagged IPs. Suspicious IPs have met a minimum threshold of attack traffic to be classified as suspicious, but not the threshold for Flagged. Thresholds are not user-configurable.
-: See [Attacker Explorer][17]
+: See [Attackers Explorer][17]
 
 flagged attackers
 : IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
-: See [Attacker Explorer][17]
+: See [Attackers Explorer][17]
 
 attacker fingerprint
 : Identifiers computed from request characteristics to track an attacker across multiple requests.
@@ -137,7 +133,7 @@ Object-Graph Navigation Language Injection (OGNLi)
 [5]: https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
-[8]: /agent/remote_config/
+[8]: /remote_configuration
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /security/application_security/policies/inapp_waf_rules/

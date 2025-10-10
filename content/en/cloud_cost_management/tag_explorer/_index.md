@@ -65,7 +65,7 @@ For Google Cloud tags, select **Google** from the dropdown menu on the top right
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Daily Datadog costs are in Preview.</div>
+<div class="alert alert-danger">Daily Datadog costs are in Preview.</div>
 
 For Datadog tags, select **Datadog** from the dropdown menu on the top right corner.
 
@@ -74,7 +74,7 @@ For Datadog tags, select **Datadog** from the dropdown menu on the top right cor
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-<div class="alert alert-warning">Confluent Cloud costs are in Preview.</div>
+<div class="alert alert-danger">Confluent Cloud costs are in Preview.</div>
 
 For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on the top right corner.
 
@@ -83,7 +83,7 @@ For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on t
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
-<div class="alert alert-warning">Databricks costs are in Preview.</div>
+<div class="alert alert-danger">Databricks costs are in Preview.</div>
 
 For Databricks tags, select **Databricks** from the dropdown menu on the top right corner.
 
@@ -92,7 +92,7 @@ For Databricks tags, select **Databricks** from the dropdown menu on the top rig
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">Fastly costs are in Preview.</div>
+<div class="alert alert-danger">Fastly costs are in Preview.</div>
 
 For Fastly tags, select **Fastly** from the dropdown menu on the top right corner.
 
@@ -101,7 +101,7 @@ For Fastly tags, select **Fastly** from the dropdown menu on the top right corne
 {{% /tab %}}
 {{% tab "Elastic Cloud" %}}
 
-<div class="alert alert-warning">Elastic Cloud costs are in Preview.</div>
+<div class="alert alert-danger">Elastic Cloud costs are in Preview.</div>
 
 For Elastic Cloud tags, select **Elastic Cloud** from the dropdown menu on the top right corner.
 
@@ -110,7 +110,7 @@ For Elastic Cloud tags, select **Elastic Cloud** from the dropdown menu on the t
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">MongoDB costs are in Preview.</div>
+<div class="alert alert-danger">MongoDB costs are in Preview.</div>
 
 For MongoDB tags, select **MongoDB** from the dropdown menu on the top right corner.
 
@@ -119,7 +119,7 @@ For MongoDB tags, select **MongoDB** from the dropdown menu on the top right cor
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">OpenAI costs are in Preview.</div>
+<div class="alert alert-danger">OpenAI costs are in Preview.</div>
 
 For OpenAI tags, select **OpenAI** from the dropdown menu on the top right corner.
 
@@ -128,7 +128,7 @@ For OpenAI tags, select **OpenAI** from the dropdown menu on the top right corne
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">Snowflake costs are in Preview.</div>
+<div class="alert alert-danger">Snowflake costs are in Preview.</div>
 
 For Snowflake tags, select **Snowflake** from the dropdown menu on the top right corner.
 
@@ -137,7 +137,7 @@ For Snowflake tags, select **Snowflake** from the dropdown menu on the top right
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">Twilio costs are in Preview.</div>
+<div class="alert alert-danger">Twilio costs are in Preview.</div>
 
 For Twilio tags, select **Twilio** from the dropdown menu on the top right corner.
 
@@ -145,6 +145,15 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Set preferred tags
+Set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
+
+{{< img src="cloud_cost/tag_explorer/preferred_tags_1.png" alt="Preferred tags are shown throughout CCM" style="width:100%;" >}}
+
+You can choose preferred tags from any of your existing cost data tags, including [Tag Pipelines][3]. These settings apply to your entire organization.
+
+{{< img src="cloud_cost/tag_explorer/preferred_tags_2.png" alt="Select your preferred tags in Tag Explorer" style="width:100%;" >}}
 
 ## Further reading
 
@@ -156,3 +165,6 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 [4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
 [6]: /cloud_cost_management/setup/saas_costs
+[7]: https://app.datadoghq.com/cost/explorer
+[8]: /cloud_cost_management/reports
+[9]: /cloud_cost_management/custom_allocation_rules

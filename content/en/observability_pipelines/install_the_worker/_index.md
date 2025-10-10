@@ -12,13 +12,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker as part of the pipeline setup process. These are the general steps if you are setting up a pipeline in the UI:
-
-1. Select a log [source][2].
-1. Select [destinations][3] to which you want to send your logs.
-1. Select and configure [processors][4] to transform your logs.
-1. [Install the Worker](#install-the-worker).
-1. Deploy the pipeline.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs.
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
@@ -52,11 +46,12 @@ If you had set up the pipeline components using the [API][6] or Terraform, to ge
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-<div class="alert alert-warning">For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.</div>
+<div class="alert alert-danger">For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.</div>
 
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
 1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][2].
 1. Run the one-step command provided in the UI to install the Worker.
 
     **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
@@ -65,6 +60,7 @@ Follow the steps below if you want to use the one-line installation script to in
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
 [1]: /observability_pipelines/update_existing_pipelines
+[2]: https://app.datadoghq.com/organization-settings/remote-config/setup
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
@@ -125,7 +121,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{% tab "RPM" %}}
 
-<div class="alert alert-warning">For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.</div>
+<div class="alert alert-danger">For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.</div>
 
 1. Set up the Datadog `rpm` repo on your system with the below command.<br>**Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
     ```shell

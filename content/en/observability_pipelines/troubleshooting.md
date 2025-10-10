@@ -25,7 +25,7 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
  The Observability Pipelines Worker API allows you to interact with the Worker's processes with the `tap` and `top` command. If you are using the Helm charts provided when you [set up a pipeline][4], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`. See [Bootstrap options][5] for more information. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
 
- **Note**: When `DD_OP_API_ENABLED` is set to `true`, the `/health` endpoint is also exposed. Configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
+ **Note**: See [Enable liveness and readiness probe][15] for instructions on how to expose the `/health` endpoint. After the endpoint is exposed, configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
 
 ### Use `top` to find the component ID
 
@@ -79,6 +79,8 @@ If you see the error `Too many files` and the Worker processes repeatedly restar
 
 If you have configured your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
 
+If you are using RHEL and need to forward logs from one port (for example UDP/514) to the port the Worker is listening on (for example, UDP/1514, which is an unprivileged port), you can use [`firewalld`][14] to forward logs from port 514 to port 1514.
+
 ## Logs are not getting forwarded to the destination
 
 Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
@@ -127,6 +129,18 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
 
+## Certificate verify failed
+
+If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
+
+## Ensure your organization is enabled for RC
+
+If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17].
+
+## Missing environment variable
+
+If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you add the environment variables for your source, processors, and destinations when you install the Worker. See [Environment Variables][18] for a list of source, processor, and destination environment variables.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -140,3 +154,8 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/install_the_worker/worker_commands/
+[14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
+[15]: /observability_pipelines/advanced_configurations/#enable-liveness-and-readiness-probe
+[16]: /observability_pipelines/sources/#tls-certificates
+[17]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[18]: /observability_pipelines/environment_variables/

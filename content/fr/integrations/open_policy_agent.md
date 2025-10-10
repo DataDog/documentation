@@ -153,7 +153,7 @@ Une fois les facettes créées, générez la métrique souhaitée afin de compl�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "open_policy_agent" >}}
+{{< get-metrics-from-git "open-policy-agent" >}}
 
 
 ### Événements
@@ -161,7 +161,7 @@ Une fois les facettes créées, générez la métrique souhaitée afin de compl�
 open_policy_agent n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "open_policy_agent" >}}
+{{< get-service-checks-from-git "open-policy-agent" >}}
 
 
 ## Dépannage

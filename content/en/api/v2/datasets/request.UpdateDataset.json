@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Security Audit Dataset",
+      "principals": [
+        "role:94172442-be03-11e9-a77a-3b7612558ac1"
+      ],
+      "product_filters": [
+        {
+          "filters": [
+            "@application.id:1234"
+          ],
+          "product": "metrics"
+        }
+      ]
+    },
+    "type": "dataset"
+  }
+}

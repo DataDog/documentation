@@ -50,7 +50,7 @@ data:
 
 <div class="alert alert-info">`groups` は、ロールがマップされるクラスター内のグループを指します。詳細については、Kubernetes のドキュメントの[デフォルトのロールとロールバインディング][8]を参照してください。</div>
 
-<div class="alert alert-danger">タイプミスや構文エラーは、ConfigMap ファイルで更新されたすべての IAM ユーザーとロールの権限に影響する可能性があります。これを防ぐため、Cloudcraft ではテキストエディタに YAML 解析ツール (リンター) を追加することを推奨しています。</div>
+<div class="alert alert-warning">タイプミスや構文エラーは、ConfigMap ファイルで更新されたすべての IAM ユーザーとロールの権限に影響する可能性があります。これを防ぐため、Cloudcraft ではテキストエディタに YAML 解析ツール (リンター) を追加することを推奨しています。</div>
 
 ## Cloudcraft IAM ロールに読み取り専用アクセスを付与する
 

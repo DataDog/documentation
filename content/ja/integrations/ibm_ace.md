@@ -74,7 +74,7 @@ tile:
 
 IBM ACE からメトリクスメッセージを消費するためには、[IBM MQ][3] サーバーが必要です。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Linux, make sure to set the LD_LIBRARY_PATH environment variable as described in the <a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ setup</a> before continuing.
 </div>
 
@@ -146,7 +146,7 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm_ace" >}}
+{{< get-metrics-from-git "ibm-ace" >}}
 
 
 ### イベント
@@ -154,7 +154,7 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 IBM ACE インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ibm_ace" >}}
+{{< get-service-checks-from-git "ibm-ace" >}}
 
 
 ### ログ収集

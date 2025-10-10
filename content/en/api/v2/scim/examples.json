@@ -5,21 +5,55 @@
         "json": {
           "Resources": [
             {
-              "displayName": "My test group",
-              "externalId": "346af543-e5ab-4855-937d-133231cd59ed",
-              "id": "0e80d350-9519-4771-9aa8-ce849fc36c20",
+              "displayName": "Group 1",
+              "externalId": "group1",
+              "id": "e43536e9-33fe-43f8-90b8-d3e39a7dd6ad",
               "members": [
                 {
-                  "$ref": "https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6",
+                  "$ref": "https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4",
                   "display": "John Doe",
+                  "type": "User",
+                  "value": "d34a5f93-5690-4d3f-a293-f2ad5c7a82a4"
+                },
+                {
+                  "$ref": "https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6",
+                  "display": "Jane Doe",
                   "type": "User",
                   "value": "429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6"
                 }
               ],
               "meta": {
-                "created": "2024-10-17T12:53:35.793Z",
-                "lastModified": "2024-10-19T12:53:35.793Z",
-                "location": "https://app.datadoghq.com/api/scim/v2/Groups/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6",
+                "created": "2024-11-22T15:05:52.055138963Z",
+                "lastModified": "2024-11-22T15:05:52.055139017Z",
+                "location": "https://app.datadoghq.com/api/scim/v2/Groups/e43536e9-33fe-43f8-90b8-d3e39a7dd6ad",
+                "resourceType": "Group"
+              },
+              "schemas": [
+                "urn:ietf:params:scim:schemas:core:2.0:Group"
+              ]
+            },
+            {
+              "displayName": "Group 2",
+              "externalId": "group2",
+              "id": "79ef0d28-f257-4829-97e6-d23d2a26cb1a",
+              "members": [
+                {
+                  "$ref": "https://app.datadoghq.com/api/scim/v2/Users/29da9fb7-8fca-4e87-bf58-86652253deae",
+                  "display": "Alice Smith",
+                  "type": "User",
+                  "value": "29da9fb7-8fca-4e87-bf58-86652253deae"
+                },
+                {
+                  "$ref": "https://app.datadoghq.com/api/scim/v2/Users/f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9",
+                  "display": "Bob Smith",
+                  "type": "User",
+                  "value": "f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9"
+                }
+              ],
+              "meta": {
+                "created": "2024-11-22T15:05:52.055139748Z",
+                "lastModified": "2024-11-22T15:05:52.055139813Z",
+                "location": "https://app.datadoghq.com/api/scim/v2/Groups/79ef0d28-f257-4829-97e6-d23d2a26cb1a",
                 "resourceType": "Group"
               },
               "schemas": [
@@ -27,12 +61,12 @@
               ]
             }
           ],
-          "itemsPerPage": "integer",
+          "itemsPerPage": 2,
           "schemas": [
             "urn:ietf:params:scim:api:messages:2.0:ListResponse"
           ],
-          "startIndex": "integer",
-          "totalResults": "integer"
+          "startIndex": 1,
+          "totalResults": 2
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> Resources</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>List of groups matching the request criteria.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">displayName</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A human-readable name for the group.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">externalId</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>An identifier for the resource as defined by the provisioning client.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The identifier of the resource. Not required when creating a group.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> members</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>A list of members belonging to the team.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">$ref</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The URI corresponding to a resource that is a member of this group.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">display</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Full name of the user.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A label indicating the type of resource. Only supported value is &quot;User&quot;.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The identifier of the member of this group.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> meta</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Metadata associated with a group.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created</p>\n    </div>\n              <div class=\"col-2 column\"><p>date-time</p></div>\n              <div class=\"col-6 column\"><p>The date and time the group was created.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">lastModified</p>\n    </div>\n              <div class=\"col-2 column\"><p>date-time</p></div>\n              <div class=\"col-6 column\"><p>The date and time the group was last changed.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">location</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>URL identifying the resource.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">resourceType</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Type of resource.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">schemas</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Group JSON Schemas.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">itemsPerPage</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Number of groups returned per page.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">schemas</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List response JSON Schemas.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">startIndex</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Starting index of the groups for this page (1-indexed).</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">totalResults</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Total number of groups matching the request criteria.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
@@ -383,37 +417,62 @@
         "json": {
           "Resources": [
             {
-              "active": false,
+              "active": true,
               "emails": [
                 {
-                  "primary": false,
-                  "type": "string",
-                  "value": "string"
+                  "primary": true,
+                  "type": "work",
+                  "value": "john.doe@datadoghq.com"
                 }
               ],
-              "id": "string",
+              "id": "e43536e9-33fe-43f8-90b8-d3e39a7dd6ad",
               "meta": {
-                "created": "2024-10-17T12:53:35.793Z",
-                "lastModified": "2024-10-19T12:53:35.793Z",
-                "location": "https://app.datadoghq.com/api/scim/v2/Users/13a95654-b76d-478d-8636-157a7e461d7c",
+                "created": "2024-11-22T15:05:52.055138963Z",
+                "lastModified": "2024-11-22T15:05:52.055139017Z",
+                "location": "https://app.datadoghq.com/api/scim/v2/Users/e43536e9-33fe-43f8-90b8-d3e39a7dd6ad",
                 "resourceType": "User"
               },
               "name": {
-                "formatted": "string"
+                "formatted": "John Doe"
               },
               "schemas": [
                 "urn:ietf:params:scim:schemas:core:2.0:User"
               ],
-              "title": "string",
-              "userName": "string"
+              "title": "Mr.",
+              "userName": "john.doe@datadoghq.com"
+            },
+            {
+              "active": true,
+              "emails": [
+                {
+                  "primary": true,
+                  "type": "work",
+                  "value": "jane.doe@datadoghq.com"
+                }
+              ],
+              "id": "79ef0d28-f257-4829-97e6-d23d2a26cb1a",
+              "meta": {
+                "created": "2024-11-22T15:05:52.055139748Z",
+                "lastModified": "2024-11-22T15:05:52.055139813Z",
+                "location": "https://app.datadoghq.com/api/scim/v2/Users/79ef0d28-f257-4829-97e6-d23d2a26cb1a",
+                "resourceType": "User"
+              },
+              "name": {
+                "formatted": "Jane Doe"
+              },
+              "schemas": [
+                "urn:ietf:params:scim:schemas:core:2.0:User"
+              ],
+              "title": "Mrs.",
+              "userName": "jane.doe@datadoghq.com"
             }
           ],
-          "itemsPerPage": "integer",
+          "itemsPerPage": 2,
           "schemas": [
             "urn:ietf:params:scim:api:messages:2.0:ListResponse"
           ],
-          "startIndex": "integer",
-          "totalResults": "integer"
+          "startIndex": 1,
+          "totalResults": 2
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> Resources</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>List of users matching the request criteria.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">active</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>A Boolean value indicating the User&#39;s administrative status.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> emails</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>Email addresses for the user.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">primary</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Boolean indicating if this email is the primary email address.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of email. \nAllowed enum values: <code>work</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Email addresses for the user.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The identifier of the resource. Not required when creating a user.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> meta</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Metadata associated with a user.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created</p>\n    </div>\n              <div class=\"col-2 column\"><p>date-time</p></div>\n              <div class=\"col-6 column\"><p>The date and time the user was created.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">lastModified</p>\n    </div>\n              <div class=\"col-2 column\"><p>date-time</p></div>\n              <div class=\"col-6 column\"><p>The date and time the user was last changed.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">location</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>URL identifying the resource.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">resourceType</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Type of resource.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> name</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>The components of user&#39;s real name</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">formatted</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The full name, including all middle names, titles, and suffixes as appropriate, formatted for display.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">schemas</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>User JSON Schemas.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">title</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The user&#39;s title.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">userName</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Unique identifier for the User.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">itemsPerPage</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Number of users returned per page.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">schemas</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List response JSON Schemas.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">startIndex</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Starting index of the users for this page (1-indexed).</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">totalResults</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Total number of users matching the request criteria.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },

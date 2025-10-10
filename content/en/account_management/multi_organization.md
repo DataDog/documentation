@@ -1,5 +1,6 @@
 ---
 title: Managing Multiple-Organization Accounts
+description: Manage multiple child organizations from a parent account with separate billing, usage tracking, and access control for managed service providers.
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
@@ -63,7 +64,7 @@ Onboarding a new sub-organization with a set of baseline dashboards and monitors
 The custom sub-domain feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
 
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
-{{% site-region region="us,us3,us5,ap1" %}}
+{{% site-region region="us,us3,us5,ap1,ap2" %}}
 For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
 **Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`. {{% /site-region %}}

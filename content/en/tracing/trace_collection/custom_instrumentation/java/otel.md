@@ -55,9 +55,9 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 ```
 
-### Setting errors on a root span from a child span
+### Setting errors on span
 
-To set an error on a root span from a child span, you can use the `setStatus` method on the current span like this:
+To set an error on a span, you can use the `setStatus` method on the span like this:
 
 ```java
 import static io.opentelemetry.api.trace.StatusCode.ERROR;

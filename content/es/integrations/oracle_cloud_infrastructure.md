@@ -97,7 +97,7 @@ Ingresa el OCID y la región de origen de la tenencia que deseas monitorizar en 
 - Debes estar en la región de origen de la tenencia.
 {{% /collapse-content %}}
 
-<div class="alert alert-warning">Asegúrate de que la <strong>región de origen</strong> de la tenencia esté seleccionada en la parte superior derecha de la pantalla.</div>
+<div class="alert alert-danger">Asegúrate de que la <strong>región de origen</strong> de la tenencia esté seleccionada en la parte superior derecha de la pantalla.</div>
 
 Este stack tecnológico de políticas solo debe desplegarse una vez por tenencia.
 
@@ -191,7 +191,7 @@ Si utilizas una VCN existente, debes indicar el OCID de la subred en el stack te
 
 Consulta las métricas de `oci.*` en el [dashboard de información general de la integración de OCI][11] o en la [página del explorador de métricas][12] en Datadog.
 
-<div class="alert alert-warning">Las métricas de la función de OCI (espacio de nombres <code>oci.faas</code>) y las métricas de la instancia del contenedor (espacio de nombres <code>oci_computecontainerinstance</code>) se encuentran en versión preliminar.</div>
+<div class="alert alert-danger">Las métricas de la función de OCI (espacio de nombres <code>oci.faas</code>) y las métricas de la instancia del contenedor (espacio de nombres <code>oci_computecontainerinstance</code>) se encuentran en versión preliminar.</div>
 
 #### Configuración
 
@@ -391,7 +391,7 @@ Para más información sobre OCI Object Storage, consulta [Empezando con eventos
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oracle_cloud_infrastructure" >}}
+{{< get-metrics-from-git "oracle-cloud-infrastructure" >}}
 
 
 ### Checks de servicio

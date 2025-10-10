@@ -38,7 +38,7 @@ Azure Batch Service는 Azure 애플리케이션용 관리형 작업 스케줄러
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_batch" >}}
+{{< get-metrics-from-git "azure-batch" >}}
 
 
 ### 이벤트

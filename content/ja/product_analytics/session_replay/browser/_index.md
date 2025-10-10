@@ -32,7 +32,7 @@ RUM ブラウザ SDK は[オープンソース][1]であり、オープンソー
 
 その後、Datadog は Web ページを再構築し、記録されたイベントをリプレイビューの適切なタイミングで再適用します。セッションリプレイは、通常の RUM セッションと同じ 30 日間の保持ポリシーに従います。
 
-セッションリプレイレコーダーは、IE11 を除き、RUM ブラウザ SDK でサポートされているすべてのブラウザをサポートしています。詳しくは、[ブラウザサポートテーブル][3]を参照してください。
+Session Replay レコーダーは、RUM Browser SDK がサポートするすべてのブラウザーに対応しています。詳細は [ブラウザー サポート表][3] を参照してください。
 
 セッションリプレイのネットワークへの影響を軽減し、セッションリプレイレコーダーがアプリケーションのパフォーマンスに与えるオーバーヘッドを最小限に抑えるため、Datadog はデータを送信する前に圧縮を行います。また、Datadog は CPU に負荷のかかる作業 (圧縮など) のほとんどを専用 Web ワーカーに委ねることで、ブラウザの UI スレッドの負荷を軽減しています。ネットワーク帯域幅への影響は 100kB/分未満と予想されます。
 
@@ -69,13 +69,13 @@ if (user.isAuthenticated) {
 
 セッションリプレイの記録を停止するには、`stopSessionReplayRecording()` を呼び出してください。
 
-<div class="alert alert-warning">RUM Browser SDK のバージョンが v5.0.0 より古い場合、Session Replay の記録は自動的に開始されません。<code>startSessionReplayRecording()</code> を呼び出して記録を開始してください。</div>
+<div class="alert alert-danger">RUM Browser SDK のバージョンが v5.0.0 より古い場合、Session Replay の記録は自動的に開始されません。<code>startSessionReplayRecording()</code> を呼び出して記録を開始してください。</div>
 
 ## セッションリプレイを無効にする
 
 セッションの記録を停止するには、`sessionReplaySampleRate` を `0` に設定します。これにより、[Browser RUM & Session Replay プラン][6]のデータ収集が停止します。
 
-<div class="alert alert-warning">RUM Browser SDK のバージョンが v5.0.0 より前の場合は、<code>replaySampleRate</code> を <code>0</code> に設定してください。</div>
+<div class="alert alert-danger">RUM Browser SDK のバージョンが v5.0.0 より前の場合は、<code>replaySampleRate</code> を <code>0</code> に設定してください。</div>
 
 ## 再生履歴
 

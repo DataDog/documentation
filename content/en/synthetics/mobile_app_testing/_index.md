@@ -8,6 +8,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 - link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
@@ -21,9 +27,6 @@ cascade:
   algolia:
     tags: ['mobile_testing']
 ---
-
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -81,6 +84,60 @@ When configuring a new Mobile Application test, use snippets to automatically po
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
 
+### Advanced options
+
+You can configure advanced options when creating a mobile test to dynamically adjust app behavior without modifying your code. For example, you can auto-accept alerts, allow application crashes, and capture network resources. These configurations can be accessed in the **Advanced Options** section of your mobile test.
+
+#### Test behavior options:
+
+Auto-accept alerts
+: When enabled, automatically accepts all OS system alerts during test execution.
+
+Allow application crash
+: When enabled, prevents the test from failing if an application crash is detected. You must include a step to restart the application after the expected crash to continue the test.
+
+Capture network resources
+: When enabled, collects network requests and responses for each test step and displays them in the results. </br>
+**Note**: This setting can impact application performance and could prevent the app from starting.
+
+#### Application arguments:
+
+You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
+
+**Examples:**
+
+{{< tabs >}}
+{{% tab "Android (Initial Intent Extras)" %}}
+
+For Android tests, add the appropriate `key:value` pairs in the Advanced Options section of your test:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}"
+}
+```
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_android.png" alt="Mobile app test creation page, showing an example of an advanced option for an Android device." style="width:100%;" >}}
+{{% /tab %}}
+
+{{% tab "iOS (Process Arguments)" %}}
+
+For iOS tests, add the appropriate `key:value` pairs in the Advanced Options section:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}",
+  "enable_feature_x": "true"
+}
+```
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_iOS.png" alt="Mobile app test creation page, showing an example of an advanced option for an iOS device." style="width:100%;" >}}
+    
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Devices
 
 On the device selection screen, you can choose to test mobile devices that are located in either Europe (EU) or the United States (US). 
@@ -122,7 +179,7 @@ You can customize alert conditions to define how often you want to send an alert
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the mobile app test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+1. Enter a **message** or use pre-filled monitor messages for the mobile app test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -135,13 +192,28 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations.
+    Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+
+    {{< img src="/mobile_app_testing/mobile_app_synthetic_monitor.png" alt="Mobile app testing monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+
+    For example, to create a monitor that iterates over steps extracting variables for mobile tests, add the following to the monitor message:
+
+      ```text
+      {{! List extracted variables across all successful steps }}
+      # Extracted variables
+      {{#each synthetics.attributes.result.steps}}
+      {{#if extractedValue}}
+      * **Name**: `{{extractedValue.name}}`
+      **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+      {{/if}}
+      {{/each}}
+      ```
 
 2. Choose team members and services to notify.
-3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
 4. Click **Save & Edit Recording** to save your test configuration and record your mobile app test steps.
 
-For more information, see [Using Synthetic Test Monitors][7].
+For more information, see [Synthetic Monitoring notifications][7].
 
 ## Flakiness 
 
@@ -195,12 +267,12 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: https://daringfireball.net/projects/markdown/syntax
 [6]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[7]: /synthetics/guide/synthetic-test-monitors/
+[7]: /synthetics/notifications/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [11]: /mobile_app_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[15]: /real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices

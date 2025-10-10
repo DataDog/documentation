@@ -41,7 +41,7 @@ Datadog Azure 통합을 사용해 Cosmos DB 메트릭을 수집할 수 있습니
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_cosmosdb" >}}
+{{< get-metrics-from-git "azure-cosmosdb" >}}
 
 
 ### 이벤트

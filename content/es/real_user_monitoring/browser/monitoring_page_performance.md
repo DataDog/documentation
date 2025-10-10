@@ -24,29 +24,29 @@ title: Monitorizar el rendimiento de la página
 
 ## Información general
 
-En los eventos de vistas de RUM se recopilan métricas amplias del rendimiento de cada vista de página. Monitoriza las vistas de página de tu aplicación y explora las métricas del rendimiento en los dashboards y el RUM Explorer.
+Los eventos de vistas de RUM recopilan una amplia telemetría de rendimiento de cada página vista. Monitoriza las páginas vistas de tu aplicación y explora la telemetría de rendimiento en dashboards y en el Explorador RUM.
 
-{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="Un gráfico de cascada en la pestaña de Rendimiento de una vista de RUM en el RUM Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="Un gráfico de cascada en la pestaña de Rendimiento de una vista de RUM en el Explorador RUM" style="width:100%;" >}}
 
-Puedes acceder a las métricas del rendimiento de tus vistas en:
+Puedes acceder a la telemetría de rendimiento de tus vistas en:
 
-- Los [dashboards predefinidos de RUM][1], que proporcionan una vista muy clara del rendimiento de tu aplicación. Por ejemplo, puedes filtrar los [atributos por defecto][2] recopilados por RUM para sacar a la luz los problemas que afectan a un subconjunto de usuarios en el [dashboard de Información general del rendimiento][3]. También puedes clonar este dashboard, personalizarlo según tus necesidades y utilizar cualquier [métrica de rendimiento de RUM](#all-performance-metrics) en la consulta del dashboard.
-- Una cascada de rendimiento, accesible para cada evento de vista de RUM en el [RUM Explorer][4], que te permite solucionar problemas de rendimiento de una vista de página específica. Muestra cómo los activos y recursos de tu sitio web, las tareas largas y los errores de frontend afectan al rendimiento a nivel de la página para tus usuarios finales.
+- Dashboards de [RUM][1] predefinidos que proporcionan una vista clara del rendimiento de tu aplicación. Por ejemplo, puedes filtrar por [atributos predeterminados][2] recopilados por RUM para evidenciar los problemas que afectan a un subconjunto de usuarios en el [dashboard de información general del rendimiento][3]. También puedes clonar este dashboard, personalizarlo según tus necesidades y utilizar cualquier telemetría de rendimiento de RUM (#all-performance-telemetry) en la consulta del dashboard.
+- Una cascada de rendimiento, accesible para cada evento de vista de RUM en el [Explorador RUM][4], que te permite solucionar problemas de rendimiento de una vista de página específica. Muestra cómo los activos y recursos de tu sitio web, las tareas largas y los errores de frontend afectan al rendimiento a nivel de la página para tus usuarios finales.
 
 ## Tiempos de eventos y métricas de core web vitals
 
-<div class="alert alert-warning">
-Las métricas de Core Web Vitals de Datadog están disponibles en el paquete de <a href="https://github.com/Datadog/browser-sdk">@Datadog</a>/browser-rum v2.2.0+.
+<div class="alert alert-danger">
+  La telemetría de Core Web Vitals de Datadog está disponible en el paquete <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> v2.2.0 o posterior.
 </div>
 
-Las métricas de [Core Web Vitals de Google][5] son un conjunto de tres métricas diseñados para monitorizar la experiencia de usuario de un sitio. Estas métricas se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada métrica viene acompañada de orientaciones sobre el rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda la monitorización del percentil 75 para estas métricas.
+Los [Core Web Vitals de Google'][5] son un conjunto de tres KPI diseñados para monitorizar la experiencia de usuario de un sitio. Estos KPI se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada KPI viene acompañado de una guía del rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda monitorizar el percentil 75 de estos KPI.
 
 {{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Visualización del resumen de métricas de Core Web Vitals" >}}
 
 - La interacción con la siguiente pintura y la pintura de mayor contenido no se recopilan para las páginas abiertas en segundo plano (por ejemplo, en una nueva pestaña o en una ventana sin foco).
-- Las métricas recopiladas de las páginas de vistas de tus usuarios reales pueden diferir de las calculadas para páginas cargadas en un entorno fijo y controlado, como un [test de navegador Sintético][6]. La monitorización Sintético muestra la pintura de mayor contenido y el desplazamiento de diseño acumulativo como métricas de laboratorio, no como métricas reales.
+- La telemetría recopilada a partir de las páginas vistas por tus usuarios reales puede diferir de aquella calculada para páginas cargadas en un entorno fijo y controlado, como un [test de navegador Synthetic][6]. Synthetic Monitoring muestra Largest Contentful Paint y Cumulative Layout Shift como telemetría de laboratorio, no como telemetría real.
 
-| Métrica                   | Foco            | Descripción                                                                                           | Valor objetivo |
+| Punto de datos                   | Foco            | Descripción                                                                                           | Valor objetivo |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Pintura de mayor contenido][7] | Rendimiento de la carga | Momento en la línea de tiempo de carga de la página en el que se representa el objeto DOM más grande de la ventana gráfica (es decir, visible en pantalla).         | <2,5 s       |
 | [Interacción con la siguiente pintura][19]| Interactividad    | Duración más prolongada entre la interacción de un usuario con la página y la siguiente pintura. Requiere SDK de RUM v5.1.0. | <200 ms        |
@@ -54,7 +54,7 @@ Las métricas de [Core Web Vitals de Google][5] son un conjunto de tres métrica
 
 ### Elementos objetivo de Core Web Vitals
 
-Identificar qué elemento desencadenó una instancia alta de la métrica de Core Web Vitals es el primer paso para comprender la causa raíz y poder mejorar el rendimiento.
+Identificar qué elemento desencadenó un KPI de Core Web Vitals elevado es el primer paso para comprender la causa raíz y poder mejorar el rendimiento.
 RUM informa del elemento asociado a cada instancia de Core Web Vitals:
 
 - Para la pintura de mayor contenido, RUM informa del selector CSS del elemento correspondiente a la pintura de mayor contenido.
@@ -62,7 +62,7 @@ RUM informa del elemento asociado a cada instancia de Core Web Vitals:
 - Para el retardo de la primera entrada, RUM informa del selector CSS del primer elemento con el que interactuó el usuario.
 - Para el Desplazamiento de diseño acumulativo, RUM informa del selector CSS del elemento más desplazado que contribuye al CLS.
 
-## Todas las métricas del rendimiento
+## Toda la telemetría de rendimiento
 
 | Atributo                       | Tipo        | Descripción                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -91,7 +91,7 @@ RUM informa del elemento asociado a cada instancia de Core Web Vitals:
 
 Para las aplicaciones de página única (SPA), el SDK del RUM Browser diferencia entre la navegación `initial_load` y `route_change` con el atributo `loading_type`. Si una interacción en tu página web conduce a una URL diferente sin una actualización completa de la página, el SDK de RUM inicia un nuevo evento de vista con `loading_type:route_change`. RUM realiza un rastreo de los cambios de URL mediante la [API del historial][16].
 
-Datadog proporciona una métrica de rendimiento única, `loading_time`, que calcula el tiempo necesario para que se cargue una página. Este métrica funciona tanto para la navegación en `initial_load` como en `route_change`.
+Datadog proporciona un KPI único, `loading_time`, que calcula el tiempo necesario para que se cargue una página. Este KPI funciona tanto para la navegación en `initial_load` como en `route_change`.
 
 ### Cómo se calcula el tiempo de carga
 
@@ -145,7 +145,7 @@ window.DD_RUM.init({
 
 El SDK del RUM monitoriza automáticamente los marcos que dependen de la navegación hash (`#`). El SDK busca `HashChangeEvent` y emite una nueva vista. Los eventos procedentes de una etiqueta (tag) de ancla HTML que no afectan al contexto de la vista actual se ignoran.
 
-## Crear métricas de rendimiento personalizadas
+## Crear una telemetría de rendimiento personalizada
 
 ### Medir el rendimiento de los componentes con indicadores vitales personalizados
 
@@ -212,7 +212,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Una vez enviado el tiempo, este es accesible en nanosegundos como `@view.custom_timings.<timing_name>`, por ejemplo: `@view.custom_timings.first_scroll`. Debes [crear una medida][18] antes de crear una visualización en el RUM Explorer o en tus dashboards.
+Una vez enviado el tiempo, este es accesible en nanosegundos como `@view.custom_timings.<timing_name>`, por ejemplo: `@view.custom_timings.first_scroll`. Debes [crear una medida][18] antes de crear una visualización en el Explorador RUM o en tus dashboards.
 
 Para aplicaciones de página única, la API `addTiming` emite un tiempo relativo al inicio de la vista de RUM actual. Por ejemplo, si un usuario llega a tu aplicación (carga inicial), luego pasa a una página diferente después de 5 segundos (cambio de ruta) y finalmente activa `addTiming` después de 8 segundos, el tiempo es igual a `8-5 = 3` segundos.
 

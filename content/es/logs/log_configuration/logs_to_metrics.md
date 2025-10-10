@@ -20,6 +20,8 @@ title: Generar métricas a partir de logs consumidos
 
 ## Información general
 
+<div class="alert alert-info">Las soluciones descritas en esta documentación son específicas para entornos de generación de logs en la nube. Para generar métricas a partir de logs on-premises, consulta la documentación de <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/generate_metrics/">Observability Pipelines</a>.</div>
+
 Datadog [Logging without Limits][1]\* te permite decidir de forma dinámica qué incluir o excluir de tus índices para el almacenamiento y las consultas. Al mismo tiempo, muchos tipos de logs se utilizan en telemetrías como los KPI, para el seguimiento de tendencias durante largos periodos de tiempo. Las métricas basadas en logs son una forma rentable de resumir los datos de logs de todo el flujo (stream) de consumo. Esto significa que, incluso si utilizas [filtros de exclusión][2] para limitar lo que se almacena para la exploración, puedes seguir visualizando las tendencias y las anomalías de todos los datos de tus logs, con una granularidad de 10s durante 15 meses.
 
 Con las métricas basadas en logs puedes generar una métrica de recuento de los logs que coinciden con una consulta o una [métrica de distribución][3] de un valor numérico contenido en los logs, como la duración de la solicitud.
@@ -54,7 +56,7 @@ También puedes crear métricas a partir de una búsqueda de Analytics, seleccio
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="Página de configuración del gráfico de series temporales con el parámetro de consulta de recuento único resaltado" style="width:80%;">}}
 
-<div class="alert alert-warning">Las métricas basadas en logs se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión, para no afectar a tu facturación.</div>
+<div class="alert alert-danger">Las métricas basadas en logs se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión, para no afectar a tu facturación.</div>
 
 ### Actualizar una métrica basada en logs
 

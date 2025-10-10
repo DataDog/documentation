@@ -17,10 +17,6 @@ further_reading:
       text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [AWS CodePipeline][1] is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.
@@ -120,7 +116,7 @@ If you are using [Test Optimization][8] and your pipeline contains one or more [
 
 The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
 
-<div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
+<div class="alert alert-warning">Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the `source:codebuild` and `sourcecategory:aws` tags.
 

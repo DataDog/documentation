@@ -1,5 +1,6 @@
 ---
 title: Instrument a custom method to get deep visibility into your business logic
+description: Learn how to add custom instrumentation to methods and functions to get detailed visibility into your business logic and application performance.
 
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
@@ -20,7 +21,7 @@ _8 minutes to complete_
 
 {{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="Analytics View" style="width:90%;">}}
 
-<div class="alert alert-warning"><strong>Note</strong>: This page describes using OpenTracing to custom instrument applications. OpenTracing is deprecated. The concepts presented here still apply, but follow the <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with OpenTelemetry</a> instructions and examples for your language instead. </div>
+<div class="alert alert-danger">This page describes using OpenTracing to custom instrument applications. OpenTracing is deprecated. The concepts presented here still apply, but follow the <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with OpenTelemetry</a> instructions and examples for your language instead. </div>
 
 To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
@@ -40,7 +41,7 @@ The `http.request POST /charge/` span is taking a lot of time without having any
 
 In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-**Instument a method with a decorator**:
+**Instrument a method with a decorator**:
 
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
@@ -101,7 +102,7 @@ public class BackupLedger {
 
 In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-**Instument a method with a decorator**:
+**Instrument a method with a decorator**:
 
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
@@ -179,12 +180,13 @@ end
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
+  {{% tracing-go-v2 %}}
+
 ```go
 package ledger
 
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 // [...]
@@ -221,6 +223,8 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[2]: /tracing/trace_collection/custom_instrumentation/go/migration
+
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

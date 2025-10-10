@@ -11,9 +11,6 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for Engineering Reports!" >}}
-{{< /callout >}}
-
 ## Overview
 
 The Scorecards Performance report includes an organization-wide view of Scorecard performance by teams and rules, including historical trends. With this report, you can:
@@ -21,11 +18,9 @@ The Scorecards Performance report includes an organization-wide view of Scorecar
 - Filter information based on team, scorecard, rule, application, tier, and lifecycle.
 - Explore historical info for the last 12 months to identify trends over time.
 
-Access the Scorecards Performance report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Scorecards Performance" in the left-hand menu. 
+Access the Scorecards Performance report by searching for "Engineering Reports" (or clicking on the **Overview** tab in IDP) and selecting **Scorecards Performance** in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/scorecards-landing2.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
-
-**Note:** If you have not opted into the Datadog IDP Preview, you can access the Scorecards Performance report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
 ## Interact with your Scorecard Performance report
 
@@ -50,7 +45,7 @@ To schedule reports, click on **Schedule Report** in the top right corner (or **
 
 ### Customize your report
 
-On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Scorecards Performance report. The dashboard reflects the "team" aggregated view. 
+On the upper right corner of the report, click the three-dot menu and select **Clone as a Dashboard** to create a dashboard with content from the Scorecards Performance report. The dashboard reflects the "team" aggregated view. 
 
 To customize the dashboard, you can:
 - Update the Scorecard leaderboard view to aggregate by dimensions other than team or service (for example, you can create a leaderboard view by "system" or "tier")

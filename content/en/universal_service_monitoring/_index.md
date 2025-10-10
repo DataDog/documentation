@@ -1,5 +1,6 @@
 ---
 title: Universal Service Monitoring
+description: "Monitor service health metrics across your entire stack without code instrumentation using Universal Service Monitoring and the Datadog Agent."
 aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
@@ -31,10 +32,6 @@ cascade:
     algolia:
         rank: 70
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Universal Service Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Overview
 

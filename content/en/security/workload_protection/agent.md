@@ -90,5 +90,5 @@ SECL expressions support several platforms. You can use the documentation below 
 * [Windows][3]
 
 [1]: /security/workload_protection/workload_security_rules/custom_rules
-[2]: /security/threats/linux_expressions
-[3]: /security/threats/windows_expressions
+[2]: /security/workload_protection/linux_expressions
+[3]: /security/workload_protection/windows_expressions

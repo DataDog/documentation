@@ -23,13 +23,13 @@ type: multi-code-lang
 
 Si no has leído las instrucciones de configuración de la instrumentación automática, empieza por las [Instrucciones de configuración de Python][6].
 
-Si no utilizas la instrumentación de biblioteca compatible (consulta [Compatibilidad de bibliotecas][1]), puede que desees instrumentar manualmente tu código.
+Si no utilizas la instrumentación de librería compatible (consulta [Compatibilidad de librerías][1]), puede que desees instrumentar manualmente tu código.
 
-También es posible que desees ampliar la funcionalidad de la biblioteca `ddtrace` u obtener un control más preciso sobre la instrumentación de tu aplicación. La biblioteca proporciona varias técnicas para conseguirlo.
+También es posible que desees ampliar la funcionalidad de la librería `ddtrace` u obtener un control más preciso sobre la instrumentación de tu aplicación. La librería proporciona varias técnicas para conseguirlo.
 
 ## Creación de tramos
 
-La biblioteca `ddtrace` crea [tramos][2] automáticamente con `ddtrace-run` para [muchas bibliotecas y marcos][1]. Sin embargo, es posible que desees obtener visibilidad de tu propio código y esto se logra utilizando tramos.
+La librería `ddtrace` crea [tramos][2] automáticamente con `ddtrace-run` para [muchas bibliotecas y marcos][1]. Sin embargo, es posible que desees obtener visibilidad de tu propio código y esto se logra utilizando tramos.
 
 Dentro de tu solicitud web (por ejemplo, `make_sandwich_request`), puedes realizar varias operaciones, como `get_ingredients()` y `assemble_sandwich()`, que son útiles para hacer mediciones.
 

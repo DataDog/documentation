@@ -1,5 +1,6 @@
 ---
 title: Mobile Device Widgets
+description: "Add Datadog widgets to your mobile home screen or lock screen for quick access to SLOs, incidents, dashboards, monitors, and on-call information."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: "Blog"
@@ -30,6 +31,8 @@ Add widgets on your home screen to quickly access real-time critical information
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Widgets refresh every 30 minutes. Manually trigger refresh by tapping on timeframe located at top left of the widget.
 
 ### Incident widgets
 View your [open incidents][1] from your mobile home screen with Datadog widgets. To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app.

@@ -47,6 +47,8 @@ Select your visualization from the available [widgets][3].
 
 Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
+You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's **Semantic Mode** selector to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
+
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
 Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Summary][6] page.
@@ -197,6 +199,24 @@ min(status:error, status:warn)
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
+#### Exponentiation
+
+You can now use the `pow()` function to raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
+
+Here is an example of how to forecast user growth by applying an exponential growth factor to a prior time window:
+
+```text
+users.sessions{*} * pow(1.1, timeshift(-1))
+```
+
+Here is an example of how to surface anomalies by amplifying value using exponentiation: 
+
+```text
+pow(ping{region:*}, 2)
+```
+
+To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
+
 ### Create an alias
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
@@ -259,3 +279,4 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [15]: /metrics/advanced-filtering/#boolean-filtered-queries
 [16]: /dashboards/widgets/timeseries/#event-overlay
 [17]: /logs/explorer/search_syntax/
+[18]: /metrics/open_telemetry/query_metrics

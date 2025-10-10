@@ -6,7 +6,9 @@ title: Property Fields
 
 Custom property fields enable you to capture important attributes unique to your organization, such as specific product models in the automotive industry or unique codes in a software deployment. These attributes help you efficiently categorize incidents.
 
-## Incident details page
+You can use custom fields to filter for specific subsets of incidents on the [Incident Management][2] page and in [Incident Management Analytics][3]. You can also build conditions around custom fields in [incident notification rules][9].
+
+## Field sections
 
 Property fields are organized into three tables that correspond to where the fields appear in the [Overview tab][1] of the Incident Details page:
 
@@ -14,44 +16,64 @@ Property fields are organized into three tables that correspond to where the fie
 2. `Why It Happened`
 3. `Attributes`
 
-You can move any property field into a different table or reorder them in the same table by dragging and dropping the field using the drag handle icon. Preview what your property fields look like by clicking the **Preview** button on the top right.
+You can move or reorder property fields by dragging them using the drag handle icon.
 
-## Fields
+## Default fields
 
-{{< img src="/service_management/incidents/incident_settings/settings_property_fields.png" alt="Property Field Settings" style="width:100%;">}}
-
-Property fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents on the [Homepage][2] and make more robust queries in [Incident Management Analytics][3]. There are five default fields:
+There are five default fields:
 
 | Fields                   | Description |
-| ----------------------   | ----------- | 
+| ----------------------   | ----------- |
 |**Detection&nbsp;Method** | Add context on how this incident was declared.||
 |**Summary**               | Provide details on what happened to cause this incident.||
 |**Root&nbsp;Cause**       | List possible root causes or areas for investigation.||
-|**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically uses your APM Service names. To edit the values of `Services`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it. | 
-|**Teams**                 | The `Teams` property field automatically populates from the [teams][5] defined in your organization. | 
+|**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically uses your APM Service names. To add values to `Services`, you can upload a CSV. |
+|**Teams**                 | The `Teams` property field automatically populates from the [teams][5] defined in your organization. |
 
-You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this, the key of your property field is the start case of your metric tag's key (for example, the tag `scope_name` becomes field `Scope Name`) and the values for the property field are equal to the values reported by the metric tag.
+**Note**: You cannot delete default fields.
 
 ### Field types
 
-In addition to the five default fields and the fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are five kinds of custom fields you can create:
+You can define new fields of any of the following field types:
 
-**Single-Select**
-: A dropdown field that can only have one value assigned at a time per incident. You set the available values when defining the field.
+**Single Select**
+: A dropdown that accepts one value. You set the available values when defining the field.
 
-**Multi-Select**
-: A dropdown field that can have multiple values assigned per incident. You set the available values when defining the field.
+**Multi Select**
+: A dropdown that accepts multiple values. You set the available values when defining the field.
 
 **Text Array**
-: A free-form field that can have multiple values assigned per incident. Incident responders define arbitrary values when updating the field on an incident.
+: A free-form field that accepts multiple values. Incident responders set arbitrary values when setting the field on an incident.
 
 **Text Area**
-: A free-form text box. Values are entered by a responder on a per-incident basis.
+: A free-form text box that accepts a single value. Incident responders set arbitrary values when setting the field on an incident.
+
+**Metric Tag**
+: A dropdown that accepts multiple values. Incident responders are prompted to select any ingested values of the metric tag you select when defining the field.
 
 **Number**
-: A text area that only accepts digits and a single period as input. Values are entered by a responder on a per-incident basis.
+: Accepts any integer or decimal number.
 
-Single-Select, Multi-Select, and Number custom fields are searchable facets in the [Incident Homepage][2] and [Incident Management Analytics][3] for easy filtering of incidents. Number fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][7] and [Notebooks][8].
+**Datetime**
+: Accepts any datetime. Values are stored in UTC and are parsed and formatted using the user's local timezone.
+
+### Required at declaration
+
+If you mark a field as "Required at Declaration," users are required to enter a value when declaring incidents. This option does not affect Datadog Workflow automations or API requests.
+
+### Prompt user
+
+Incident Management can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
+
+**During declaration**: Users are prompted to enter a value for the field during declaration and at all state changes if the field is empty.
+
+**When the incident is moved to Stable/Resolved/Completed**: Users are prompted to enter a value for the field when moving the incident to the selected state and any later state. For example, if you select "When the incident is moved to Stable," users are prompted to fill out the field when moving incidents to Stable, Resolved, or Completed.
+
+### Custom fields in search and analytics
+
+Single-Select, Multi-Select, Text Array, Number, and Datetime fields are searchable facets in the [Incident Homepage][2] and [Incident Management Analytics][3].
+
+In Incident Management Analytics, number fields appear as measures that can be graphed and visualized in [Dashboards][7] and [Notebooks][8].
 
 [1]: /service_management/incident_management/investigate#overview-tab
 [2]: https://app.datadoghq.com/incidents
@@ -61,3 +83,4 @@ Single-Select, Multi-Select, and Number custom fields are searchable facets in t
 [6]: /getting_started/tagging/using_tags/?tab=assignment#metrics
 [7]: /dashboards/
 [8]: /notebooks/
+[9]: /service_management/incident_management/incident_settings/notification_rules

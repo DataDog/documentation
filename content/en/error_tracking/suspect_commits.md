@@ -1,6 +1,10 @@
 ---
 title: Suspect Commits
 disable_toc: false
+further_reading:
+- link: 'https://www.datadoghq.com/blog/error-tracking-and-github/'
+  tag: 'Blog'
+  text: 'Troubleshoot root causes with GitHub commit and ownership data in Error Tracking'
 ---
 ## Overview
 
@@ -37,6 +41,11 @@ The Suspect Commits feature requires [Source Code Integration][1]. To enable Sou
 ### Install the GitHub integration
 Install [the GitHub integration][2], enabling read permissions for pull requests and contents.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/guide/source-code-integration
 [2]: /integrations/github/
 [3]: https://app.datadoghq.com/integrations
+

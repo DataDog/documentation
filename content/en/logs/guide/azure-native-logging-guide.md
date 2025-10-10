@@ -27,7 +27,7 @@ Provide insight into the operations on your resources at the [control plane][1].
 
 To send activity logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the activity logs are sent to Datadog.
 
-<div class="alert alert-warning">When log collection is enabled, the Datadog resource automatically modifies the logging configurations of <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure triggers a <strong>restart</strong> for App Services when their logging configurations change.</div>
+<div class="alert alert-danger">When log collection is enabled, the Datadog resource automatically modifies the logging configurations of <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure triggers a <strong>restart</strong> for App Services when their logging configurations change.</div>
 
 ## Azure resource logs 
 
@@ -60,7 +60,7 @@ Microsoft Entra ID logs contain the history of sign-in activity and an audit tra
 [7]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us5,gov,ap1" >}}
+{{< site-region region="us,eu,us5,gov,ap1,ap2" >}}
 
 <div class="alert alert-info">The Datadog resource in Azure is only available for organizations on Datadog's US3 site. If you're using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
 

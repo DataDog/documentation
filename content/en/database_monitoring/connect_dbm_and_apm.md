@@ -30,7 +30,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |  MongoDB   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|:----------:|
-| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} | {{< X >}}  |
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  |           | {{< X >}}  |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} | {{< X >}}  |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
@@ -76,7 +76,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \*\* Full mode SQL Server for Java/.NET:
 
-<div class="alert alert-warning">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
 
   - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
   - Prerequisites:
@@ -111,25 +111,22 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
   sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
-<div class="alert alert-danger">Changing the obfuscation mode may alter the normalized SQL text. If you have monitors based on SQL text in APM traces, you may need to update them.</div>
+<div class="alert alert-warning">Changing the obfuscation mode may alter the normalized SQL text. If you have monitors based on SQL text in APM traces, you may need to update them.</div>
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
+Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater. {{% tracing-go-v2 %}}
 ```shell
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
-# go get github.com/DataDog/dd-trace-go/v2 # 2.x
+go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Update your code to import the `contrib/database/sql` package:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -156,10 +153,8 @@ Full example:
 ```go
 import (
 	"database/sql"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
@@ -228,6 +223,8 @@ Enable the prepared statements tracing for Postgres using **one** of the followi
 - Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
 **Note**: The prepared statements instrumentation overwrites the `Application` property with the text `_DD_overwritten_by_tracer`, and causes an extra round trip to the database. This additional round trip normally has a negligible impact on the SQL statement execution time.
+
+<div class="alert alert-danger">Enabling prepared statements tracing may cause increased connection pinning when using Amazon RDS Proxy, which reduces connection pooling efficiency. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">Connection pinning on RDS Proxy</a>.</div>
 
 **Tracer versions below 1.44**:
 Prepared statements are not supported in `full` mode for Postgres and MySQL, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
@@ -350,7 +347,7 @@ for doc in results:
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This feature requires automatic instrumentation to be enabled for your .NET service.
 </div>
 
@@ -370,7 +367,7 @@ Enable the database monitoring propagation feature by setting the following envi
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This feature requires the tracer extension to be enabled for your PHP service.
 </div>
 

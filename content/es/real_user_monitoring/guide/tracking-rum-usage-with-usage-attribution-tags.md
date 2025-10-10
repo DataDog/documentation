@@ -10,10 +10,6 @@ further_reading:
 title: Rastrear el uso de RUM con etiquetas de atribución de uso
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  <a href="/real_user_monitoring/guide/tracking-rum-usage-with-usage-attribution-tags/#enforce-tags-to-be-set-at-the-org-level">La atribución de uso de RUM impuesta</a> a nivel de la organización está en Vista previa. Para solicitar acceso, ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a>.
-{{< /callout >}}
-
 ## Información general
 
 La página [Atribución de uso][1] proporciona información y funciones relacionadas con el uso de datos y los tipos de uso. Por defecto, el uso de datos se puede ver y filtrar por categorías más amplias como producto, organización o claves de etiqueta. Puedes definir hasta tres etiquetas de atribución de uso por organización y gestionarlas directamente desde la interfaz de usuario para cada aplicación RUM.
@@ -63,10 +59,6 @@ Las sesiones recientemente etiquetadas se muestran en la página [Atribución de
 La información de uso también está disponible a través del endpoint [`GetHourlyUsageAttribution`][5].
 
 ## Imponer la configuración de etiquetas a nivel de la organización
-
-{{< callout url="#" btn_hidden="true" header="false">}}
-  La atribución de uso de RUM impuesta está en Vista previa. Para solicitar acceso, ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a>.
-{{< /callout >}}
 
 Impón etiquetas de atribución de uso en aplicaciones RUM para realizar un seguimiento de su contribución a tu factura de Datadog. Esta configuración puede aplicarse sin necesidad de instrumentar o volver a instrumentar tu aplicación. Cuando esta configuración está activa, las etiquetas deben definirse al crear o actualizar aplicaciones RUM en Datadog.
 

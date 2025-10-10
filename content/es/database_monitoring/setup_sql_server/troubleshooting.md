@@ -30,11 +30,11 @@ Si se produce un error de inicio de sesión al conectarse, es importante comprob
 Por ejemplo:
 
 ```bash
-# este ejemplo utiliza la autenticación de SQL
+# this example uses SQL Authentication
 sqlcmd -S <INSTANCE_ENDPOINT> -U datadog -P <DATADOG_PASSWORD> -d master
 
-# este ejemplo utiliza la autenticación de Windows
-# Ejecuta este comando en powershell seleccionando la opción `run as user...` para que se ejecute como el ddagentuser
+# this example uses Windows Authentication
+# Run this command in powershell via selecting the `run as user...` option to run as the ddagentuser
 sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 ```
 
@@ -113,7 +113,7 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 #### Controlador de bases de datos OLE Microsoft 2019
 
-Este error es común después de actualizar al controlador [`MSOLEDBSQL` 2019][6] debido a los [cambios de última hora][7] que se han introducido. En la última versión del controlador, todas las conexiones a la instancia SQL están cifradas por defecto.
+Este error es común después de actualizar al controlador [`MSOLEDBSQL` 2019][6] debido a los [cambios de última hora][7] que se han introducido. En la última versión del controlador, todas las conexiones a la instancia de SQL están cifradas por defecto.
 
 Si estás utilizando la última versión del controlador de bases de datos OLE Microsoft para SQL Server e intentas conectarte a una instancia de SQL Server que requiere conexiones cifradas, puedes utilizar una de las siguientes soluciones alternativas:
 
@@ -128,7 +128,6 @@ Este procedimiento se describe con más detalle [en la documentación de Microso
 2. Si tu instancia de SQL Server no requiere cifrado para conectarse (`rds.force_ssl=0` en AWS), entonces actualiza la cadena de conexión para incluir `Use Encryption for Data=False;`. Por ejemplo:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
@@ -139,7 +138,6 @@ Este procedimiento se describe con más detalle [en la documentación de Microso
 3. Instala la [versión 2018 del controlador MSOLEDBSQL][8], que no utiliza cifrado por defecto. Luego de instalar el controlador, actualiza `adoprovider` a `MSOLEDBSQL`. Por ejemplo:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trusted_Connection=yes;"
@@ -152,7 +150,7 @@ Este procedimiento se describe con más detalle [en la documentación de Microso
 Si utiliza un controlador de bases de datos OLE distinto de `MSOLEDBSQL` 2019 o de los controladores ODBC, este error puede resolverse configurando `TrustServerCertificate=yes` en la cadena de conexión. Por ejemplo, para el controlador `ODBC`:
 
   ```yaml
-  # este ejemplo utiliza la autenticación de SQL Server
+  # this example uses SQL Server authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       username: datadog
@@ -172,7 +170,7 @@ Este problema se describe con más detalles en esta [entrada del blog de Microso
 
 ### Cadena de conexión vacía {#empty-connection-string}
 
-El check de SQL Server de Datadog se basa en la biblioteca Python `adodbapi`, que tiene algunas limitaciones en cuanto a los caracteres que puede utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent tiene problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en los logs del recopilador de tu Agent, es posible que tu `sqlserver.yaml` incluya algunos caracteres que causan problemas con `adodbapi`.
+El check de SQL Server de Datadog se basa en la librería Python `adodbapi`, que tiene algunas limitaciones en cuanto a los caracteres que puede utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent tiene problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en los logs del recopilador de tu Agent, es posible que tu `sqlserver.yaml` incluya algunos caracteres que causan problemas con `adodbapi`.
 
 ```text
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
@@ -232,8 +230,8 @@ Este mensaje de error puede variar de un controlador a otro, pero normalmente ti
 
 Y para los proveedores de `MSOLEDBSQL`, el mensaje de error tiene el siguiente aspecto:
 
- ```text
-  No es posible encontrar el proveedor. Es posible que no esté instalado correctamente.
+  ```text
+  Provider cannot be found. It may not be properly installed.
   ```
 
 Esto significa que el controlador o el proveedor no está instalado correctamente en el host en que se ejecuta el Agent. Debes asegurarte de que has seguido todas las instrucciones de instalación del controlador que has decidido utilizar.
@@ -272,7 +270,7 @@ Para conectar SQL Server (ya sea alojado en Linux o Windows) a un host de Linux:
         # enable the odbc connector
         connector: odbc
         # enable the ODBC driver
-        driver: ODBC Driver 13 for SQL Server
+        driver: '{ODBC Driver 13 for SQL Server}'
         username: <USERNAME>
         password: <PASSWORD>
     ```
@@ -312,7 +310,7 @@ Esto se recomienda para mantener una actualización con la última versión disp
 
 ## Otros problemas comunes
 
-### Falta la etiqueta de usuario de SQL Server en Métricas de consultas y muestras de planes
+### Falta la etiqueta (tag) de usuario de SQL Server en Métricas de consultas y muestras de planes
 
 La etiqueta `user` ya no es compatible con Métricas de consultas y Muestras de planes debido a limitaciones técnicas en SQL Server que impiden la recopilación de las consultas correctas ejecutadas por el usuario.
 
@@ -321,6 +319,16 @@ La etiqueta `user` está disponible para Eventos de actividades de consulta y M�
 ### ¿Por qué hay tantas consultas "CREATE PROCEDURE"?
 
 En versiones del Agent anteriores a la v7.40.0, existe un error por el que las estadísticas de `PROCEDURE` se cuentan en exceso. Esto lleva a ver muchas ejecuciones de `CREATE PROCEDURE...` en la interfaz de usuario de las métricas de consultas de Database Monitoring. Para solucionar este problema, actualiza a la última versión del Datadog Agent.
+
+### Los trabajos del Agent de SQL Server no se recopilan con el error "The SELECT permission was denied on the object 'sysjobs'" (Se ha denegado el permiso SELECT en el objeto 'sysjobs').
+
+El check de los trabajos del Agent de SQL Server requiere el permiso `SELECT` en la base de datos `msdb`. Si aparece el error `The SELECT permission was denied on the object 'sysjobs'`, debes conceder el permiso `SELECT` al usuario que el Agent está utilizando para conectarse a la instancia de SQL Server.
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
 
 ## Limitaciones conocidas
 

@@ -32,9 +32,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 데이터 스토어
+- 데이터 저장소
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_on_public_website: true
@@ -42,25 +42,25 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 6.1.0
+integration_version: 6.1.1
 is_public: true
 manifest_version: 2.0.0
 name: marklogic
 public_title: MarkLogic
 short_description: MarkLogic 데이터베이스, 포레스트(forests), 호스트 및 서버에 대한 메트릭을 추적합니다.
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - 카테고리::데이터 저장
+  - Category::Data Stores
   - Category::Log Collection
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: MarkLogic 데이터베이스, 포레스트(forests), 호스트 및 서버에 대한 메트릭을 추적합니다.
   media: []
@@ -78,7 +78,7 @@ tile:
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 ### 설치
 
@@ -129,7 +129,7 @@ API 또는 관리자 인터페이스를 사용하여 최소 [`manage-user`][4] �
 
 4. 충분한 권한이 있는 사용자를 생성했는지 확인하려면 `<USER>` 및 `<PASSWORD>`을 사용하여 `http://<HOSTNAME>:8002`(기본 포트)에서 인증합니다.
 
-### 구성
+### 설정
 
 #### 호스트
 
@@ -139,9 +139,9 @@ API 또는 관리자 인터페이스를 사용하여 최소 [`manage-user`][4] �
 
 #### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-1. Datadog Agent에서는 로그 수집이 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화해야 합니다.
+1. Datadog 에이전트에서는 로그 수집이 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화해야 합니다.
 
    ```yaml
    logs_enabled: true
