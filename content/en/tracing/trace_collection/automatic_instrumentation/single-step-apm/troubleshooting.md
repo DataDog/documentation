@@ -48,6 +48,25 @@ To explore instrumentation troubleshooting data in Datadog:
    - A banner with the message: "Single Step Instrumentation is enabled on this host."
    - An **SDK Installations** section if there are issues to troubleshoot.
 
+#### Kubernetes instrumentation insights
+
+In Fleet Automation, you can also explore Kubernetes-level instrumentation insights for clusters managed by Datadog. These insights extend SSI troubleshooting beyond individual processes to show what's happening across your clusters.
+
+To see Kubernetes instrumentation insights: 
+
+1. Navigate to [**Fleet Automation**][9] > **View Agents**, and select **Kubernetes Clusters** in the upper-right corner.
+1. Select a cluster to open its details, including:
+   - Whether the cluster is managed by Helm or the Datadog Operator
+   - The Cluster Agent and Node Agent versions
+   - The integrations and services running on each host
+1. Open the **Single Step Instrumentation** tab to review:
+   - The cluster's SSI configuration (YAML view)
+   - The pods identified as instrumentation targets based on cluster configuration or pod-level annotations
+   - The status of each targeted pod, including whether instrumentation succeeded
+   - The SDKs injected into each pod, including language and version
+   - Whether each instrumented workload is generating traces 
+1. Hover over any status icon to see contextual details about the state of instrumentation or trace collection. 
+
 ### Manually verify injection in the application container
 
 If the Datadog UI does not show any instrumentation issues, or if you're troubleshooting a single service or container, you can manually verify whether injection occurred as expected. This method is helpful when debugging in environments where centralized visibility is limited or when a specific service isn't reporting traces.
