@@ -253,7 +253,7 @@ Step replay allows you to re-run one or more steps of your browser test directly
 JavaScript-based steps and keystroke simulations require the debugger permission.
 
 The first time the extension is updated to a version requiring debugger permission, you'll see a permission request and the extension is disabled until you approve it:
-{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_1.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
 <p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
 
 ### How to use step replay
