@@ -255,21 +255,6 @@ Virtual machines have more detailed statuses, including:
 - Degraded
 - Failed
 
-If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
-
-## Troubleshooting
-
-If your Azure integration is reporting metrics but not `azure.*.count`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
-
-Using the Azure Command Line Interface:
-```bash
-azure login # Login to the Azure user associated with your Datadog account
-azure config mode arm
-azure provider register Microsoft.ResourceHealth
-```
-
-The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
-
 [1]: /integrations/azure/
 [2]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /collapse-content %}} 
@@ -371,6 +356,21 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
 3. Make sure the Virtual machine is running.
     The integration does not collect performance metrics for stopped or deallocated machines. Use the `azure.vm.count` metric and the `status` tag values of `running`, `stopped`, and `stopped_deallocated` to determine the status of your hosts. Make sure the host in question has `status:running`, and is running in the Azure portal.
     {{< img src="integrations/guide/azure_vms_appearing_in_the_app_without_metrics/azure_vm_running_2025-05-02.png" alt="A graph of the azure.vm.count metric from status:running" >}}
+
+## Status of `query_failed`
+
+If you see a status of `query_failed` you need to enable the Resource Health provider in Azure.
+
+If your Azure integration is reporting metrics but not `azure.*.count`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
+
+Using the Azure Command Line Interface:
+```bash
+azure login # Login to the Azure user associated with your Datadog account
+azure config mode arm
+azure provider register Microsoft.ResourceHealth
+```
+
+The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 
 [1]: https://portal.azure.com
 [2]: https://manage.windowsazure.com
