@@ -20,6 +20,12 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 Troubleshooting in Fleet Automation is available in Preview.
 {{< /callout >}}
 
+Fleet Automation provides two types of instrumentation insights for SSI:
+- **Process-level insights** show instrumentation status and SDK installation details for individual hosts or containers.
+- **Kubernetes cluster insights** provide a higher-level view of instrumentation across your clusters, helping you understand how SSI configuration and injection are applied at scale.
+
+Together, these views let you diagnose injection issues from both the process and cluster perspectives.
+
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
 - Which hosts have SSI enabled
 - Which processes failed instrumentation and why
@@ -34,9 +40,9 @@ This functionality is available for:
 - **Environments**: Linux hosts, containers, Kubernetes
 - Datadog Agent v7.68.2+
 
-#### View SSI troubleshooting insights 
+#### View process-level insights 
 
-To explore instrumentation troubleshooting data in Datadog:
+Use process-level insights to verify whether SSI has been correctly applied to your application processes and to identify any injection failures.
 
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
@@ -48,11 +54,9 @@ To explore instrumentation troubleshooting data in Datadog:
    - A banner with the message: "Single Step Instrumentation is enabled on this host."
    - An **SDK Installations** section if there are issues to troubleshoot.
 
-#### Kubernetes instrumentation insights
+#### View Kubernetes cluster insights
 
-In Fleet Automation, you can also explore Kubernetes-level instrumentation insights for clusters managed by Datadog. These insights extend SSI troubleshooting beyond individual processes to show what's happening across your clusters.
-
-To see Kubernetes instrumentation insights: 
+Use cluster-level insights to understand how SSI is configured and functioning across your Kubernetes clusters. These insights extend troubleshooting beyond individual processes to show how instrumentation is applied to workloads at the cluster level.
 
 1. Navigate to [**Fleet Automation**][9] > **View Agents**, and select **Kubernetes Clusters** in the upper-right corner.
 1. Select a cluster to open its details, including:
