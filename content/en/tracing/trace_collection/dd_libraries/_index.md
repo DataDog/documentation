@@ -1,6 +1,5 @@
 ---
 title: Add the Datadog Tracing Library
-type: multi-code-lang
 aliases:
     - /tracing/languages
     - /tracing/setup_overview/setup/undefined
