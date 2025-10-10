@@ -6304,16 +6304,16 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Update ruleset
-      url: '#update-ruleset'
-      identifier: cloud-cost-management-update-ruleset
+    - name: Update tag pipeline ruleset
+      url: '#update-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-update-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateRuleset
+          - UpdateTagPipelinesRuleset
         unstable: []
         order: 18
     - name: Get ruleset
@@ -6325,19 +6325,19 @@ menu:
         versions:
           - v2
         operationids:
-          - GetRuleset
+          - GetTagPipelinesRuleset
         unstable: []
         order: 20
-    - name: Delete ruleset
-      url: '#delete-ruleset'
-      identifier: cloud-cost-management-delete-ruleset
+    - name: Delete tag pipeline ruleset
+      url: '#delete-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-delete-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteRuleset
+          - DeleteTagPipelinesRuleset
         unstable: []
         order: 19
     - name: Validate query
@@ -6352,40 +6352,40 @@ menu:
           - ValidateQuery
         unstable: []
         order: 22
-    - name: Reorder rulesets
-      url: '#reorder-rulesets'
-      identifier: cloud-cost-management-reorder-rulesets
+    - name: Reorder tag pipeline rulesets
+      url: '#reorder-tag-pipeline-rulesets'
+      identifier: cloud-cost-management-reorder-tag-pipeline-rulesets
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ReorderRulesets
+          - ReorderTagPipelinesRulesets
         unstable: []
         order: 21
-    - name: Create ruleset
-      url: '#create-ruleset'
-      identifier: cloud-cost-management-create-ruleset
+    - name: Create tag pipeline ruleset
+      url: '#create-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-create-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateRuleset
+          - CreateTagPipelinesRuleset
         unstable: []
         order: 17
-    - name: List rulesets
-      url: '#list-rulesets'
-      identifier: cloud-cost-management-list-rulesets
+    - name: List tag pipeline rulesets
+      url: '#list-tag-pipeline-rulesets'
+      identifier: cloud-cost-management-list-tag-pipeline-rulesets
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListRulesets
+          - ListTagPipelinesRulesets
         unstable: []
         order: 16
     - name: Update Google Cloud Usage Cost config
@@ -6664,76 +6664,76 @@ menu:
           - ListCostAWSCURConfigs
         unstable: []
         order: 1
-    - name: Update arbitrary cost rule
-      url: '#update-arbitrary-cost-rule'
-      identifier: cloud-cost-management-update-arbitrary-cost-rule
+    - name: Update custom allocation rule
+      url: '#update-custom-allocation-rule'
+      identifier: cloud-cost-management-update-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateArbitraryCostRule
+          - UpdateCustomAllocationRule
         unstable: []
         order: 25
-    - name: Get arbitrary cost rule
-      url: '#get-arbitrary-cost-rule'
-      identifier: cloud-cost-management-get-arbitrary-cost-rule
+    - name: Get custom allocation rule
+      url: '#get-custom-allocation-rule'
+      identifier: cloud-cost-management-get-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetArbitraryCostRule
+          - GetCustomAllocationRule
         unstable: []
         order: 27
-    - name: Delete arbitrary cost rule
-      url: '#delete-arbitrary-cost-rule'
-      identifier: cloud-cost-management-delete-arbitrary-cost-rule
+    - name: Delete custom allocation rule
+      url: '#delete-custom-allocation-rule'
+      identifier: cloud-cost-management-delete-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteArbitraryCostRule
+          - DeleteCustomAllocationRule
         unstable: []
         order: 26
-    - name: Reorder arbitrary cost rules
-      url: '#reorder-arbitrary-cost-rules'
-      identifier: cloud-cost-management-reorder-arbitrary-cost-rules
+    - name: Reorder custom allocation rules
+      url: '#reorder-custom-allocation-rules'
+      identifier: cloud-cost-management-reorder-custom-allocation-rules
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ReorderArbitraryCostRules
+          - ReorderCustomAllocationRules
         unstable: []
         order: 28
-    - name: Create arbitrary cost rule
-      url: '#create-arbitrary-cost-rule'
-      identifier: cloud-cost-management-create-arbitrary-cost-rule
+    - name: Create custom allocation rule
+      url: '#create-custom-allocation-rule'
+      identifier: cloud-cost-management-create-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateArbitraryCostRule
+          - CreateCustomAllocationRule
         unstable: []
         order: 24
-    - name: List arbitrary cost rules
-      url: '#list-arbitrary-cost-rules'
-      identifier: cloud-cost-management-list-arbitrary-cost-rules
+    - name: List custom allocation rules
+      url: '#list-custom-allocation-rules'
+      identifier: cloud-cost-management-list-custom-allocation-rules
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListArbitraryCostRules
+          - ListCustomAllocationRules
         unstable: []
         order: 23
     - name: Cloud Network Monitoring
@@ -9233,6 +9233,94 @@ menu:
           - v2
         operationids:
           - AggregateRUMEvents
+        unstable: []
+        order: 3
+    - name: Reference Tables
+      url: /api/latest/reference-tables/
+      identifier: reference-tables
+      generated: true
+    - name: Create reference table upload
+      url: '#create-reference-table-upload'
+      identifier: reference-tables-create-reference-table-upload
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReferenceTableUpload
+        unstable: []
+        order: 1
+    - name: Get rows by id
+      url: '#get-rows-by-id'
+      identifier: reference-tables-get-rows-by-id
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRowsByID
+        unstable: []
+        order: 5
+    - name: Update reference table
+      url: '#update-reference-table'
+      identifier: reference-tables-update-reference-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateReferenceTable
+        unstable: []
+        order: 6
+    - name: Get table
+      url: '#get-table'
+      identifier: reference-tables-get-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTable
+        unstable: []
+        order: 4
+    - name: Delete table
+      url: '#delete-table'
+      identifier: reference-tables-delete-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTable
+        unstable: []
+        order: 7
+    - name: Create reference table
+      url: '#create-reference-table'
+      identifier: reference-tables-create-reference-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReferenceTable
+        unstable: []
+        order: 2
+    - name: List tables
+      url: '#list-tables'
+      identifier: reference-tables-list-tables
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTables
         unstable: []
         order: 3
     - name: Restriction Policies

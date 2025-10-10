@@ -104,7 +104,7 @@ Las siguientes métricas se mantienen con fines de compatibilidad con versiones 
 
 ### Duración (legacy)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Importante:</strong> Las métricas de duración se mantienen sólo con fines de compatibilidad con versiones anteriores. Para todos los casos de uso de medición de la latencia, Datadog recomienda especialmente utilizar <a href="#latency-distribution">métricas de distribución de la latencia</a>, ya que proporcionan una mayor precisión para los cálculos de percentiles y el análisis general del rendimiento.
 </div>
 
@@ -118,7 +118,7 @@ Esta métrica no admite agregaciones de percentiles. Para obtener más informaci
 
 ### Duración (legacy)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Importante:</strong> Las métricas de duración se mantienen sólo con fines de compatibilidad con versiones anteriores. Para todos los casos de uso de medición de la latencia, Datadog recomienda especialmente utilizar <a href="#latency-distribution">métricas de distribución de la latencia</a>, ya que proporcionan una mayor precisión para los cálculos de percentiles y el análisis general del rendimiento.
 </div>
 

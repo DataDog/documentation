@@ -69,7 +69,7 @@ Para añadir una clave de aplicación de Datadog, ve a  [**Organization Settings
 {{< img src="account_management/app-key.png" alt="Navega a la página de Claves de aplicación para tu organización en Datadog" style="width:80%;" >}}
 
 {{< site-region region="ap2,gov" >}}
-<div class="alert alert-warning">Asegúrate de almacenar de forma segura tu clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
+<div class="alert alert-danger">Asegúrate de almacenar de forma segura tu clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
 {{< /site-region >}}
 
 **Notas:**

@@ -59,7 +59,7 @@ accessible by the main ingress-nginx container.
 When the main ingrees-nginx controller starts, the nginx configuration must be updated with the `load_module` directive,
 allowing it to load the Datadog module seamlessly.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 We provide a specific init container **for each ingress-nginx controller version**, starting with <code>v1.10.0</code>. This is crucial because **each** init container must match the underlying nginx version. To ensure compatibility, ensure the version of the Datadog init container matches your ingress-nginx version.
 </div>
 

@@ -25,7 +25,7 @@ In many cases, such as logging, it may be useful to correlate trace IDs to other
 
 For Rails applications using `ActiveSupport::TaggedLogging` (default), `semantic_logger`, or `lograge`, trace ID injection is configured automatically.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 When using <code>lograge</code>, you must <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#for-logging-in-rails-applications">disable <code>TaggedLogging</code></a>.
 </div>
 

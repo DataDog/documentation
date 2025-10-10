@@ -12,7 +12,7 @@ further_reading:
 title: Azure Native インテグレーションの管理
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   本ガイドは、Datadog リソースと Azure Native のインテグレーションを管理するためのものです。
 </div>
 

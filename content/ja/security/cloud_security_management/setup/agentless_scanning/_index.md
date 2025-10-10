@@ -10,7 +10,7 @@ title: Agentless Scanning の有効化
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management 向けの Agentless Scanning はサポートされていません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management 向けの Agentless Scanning はサポートされていません。</div>
 {{< /site-region >}}
 
 Agentless Scanning を使用すると、Datadog Agent をインストールする必要なくクラウドインフラに存在する脆弱性を可視化できます。Agentless Scanning の機能と仕組みについて詳しくは、[Agentless Scanning][12] のドキュメントを参照してください。
@@ -55,7 +55,7 @@ Agentless Scanning をセットアップする前に、以下の前提条件が�
 
 ## セットアップ
 
-<div class="alert alert-warning">Agentless スキャナーを実行すると追加のコストが発生します。コストを最適化しつつ、12 時間ごとのスキャンを確実に行うために、Datadog ではデフォルトのテンプレートとして <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Terraform を用いた Agentless Scanning のセットアップ</a>を推奨しています。</div>
+<div class="alert alert-danger">Agentless スキャナーを実行すると追加のコストが発生します。コストを最適化しつつ、12 時間ごとのスキャンを確実に行うために、Datadog ではデフォルトのテンプレートとして <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Terraform を用いた Agentless Scanning のセットアップ</a>を推奨しています。</div>
 
 Agentless Scanning を有効にするには、以下のいずれかのワークフローを使用してください。
 

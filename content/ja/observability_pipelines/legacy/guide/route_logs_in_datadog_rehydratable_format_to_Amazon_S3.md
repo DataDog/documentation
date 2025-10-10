@@ -15,7 +15,7 @@ further_reading:
 title: (レガシー) Datadog で再ハイドレート可能な形式でログを Amazon S3 にルーティングする
 ---
 
-<div class="alert alert-warning">Observability Pipelines の Datadog Archives 宛先はベータ版です。</div>
+<div class="alert alert-danger">Observability Pipelines の Datadog Archives 宛先はベータ版です。</div>
 
 ## 概要
 
@@ -194,7 +194,7 @@ Terraform で作成された IAM インスタンスプロファイルにポリ�
 
 `datadog_archives` 宛先は、[コンフィギュレーションファイル](#configuration-file)または[パイプラインビルダー UI](#configuration-file) を使用して構成できます。
 
-<div class="alert alert-warning">Worker が Datadog Agent から来ていないログを取り込み、それらのログが Datadog Archives 宛先にルーティングされる場合、これらのログには<a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">予約済み属性</a>がタグ付けされません。これは、Datadog のテレメトリーや<a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">統合サービスタグ付け</a>の利点を失うことを意味します。例えば、syslog が <code>datadog_archives</code> に送信され、そのログのステータスが予約済み属性の <code>status</code> ではなく <code>severity</code> としてタグ付けされ、ホストが予約済み属性の <code>host</code> ではなく <code>hostname</code> としてタグ付けされているとします。これらのログが Datadog で再ハイドレートされると、ログの <code>status</code> はすべて <code>info</code> に設定され、ログにはホスト名タグが付きません。</div>
+<div class="alert alert-danger">Worker が Datadog Agent から来ていないログを取り込み、それらのログが Datadog Archives 宛先にルーティングされる場合、これらのログには<a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">予約済み属性</a>がタグ付けされません。これは、Datadog のテレメトリーや<a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">統合サービスタグ付け</a>の利点を失うことを意味します。例えば、syslog が <code>datadog_archives</code> に送信され、そのログのステータスが予約済み属性の <code>status</code> ではなく <code>severity</code> としてタグ付けされ、ホストが予約済み属性の <code>host</code> ではなく <code>hostname</code> としてタグ付けされているとします。これらのログが Datadog で再ハイドレートされると、ログの <code>status</code> はすべて <code>info</code> に設定され、ログにはホスト名タグが付きません。</div>
 
 ### 構成ファイル
 

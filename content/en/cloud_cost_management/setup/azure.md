@@ -69,8 +69,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-    - Choose **CSV** as the format. **Parquet is not supported.**
-    - Choose **Gzip** as the compression type. **None** is also supported.
+    - Choose **CSV** or **Parquet** as the format.
+    - Choose the compression type. For **CSV**: **Gzip** and **None** are supported. For **Parquet**: **Snappy** and **None** are supported.
     - Ensure that **File partitioning** is checked.
     - Ensure that **Overwrite data** is not checked.
         - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
@@ -94,7 +94,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note:** If you do not see your App Registration listed, start typing the name for the UI to update and show it, if it is available.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note**: If you do not see your App Registration listed, start typing the name for the UI to update and show it, if it is available.
     - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.

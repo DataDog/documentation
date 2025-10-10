@@ -4,7 +4,7 @@ description: Configure Azure Private Link to send telemetry to Datadog securely 
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
-<div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
+<div class="alert alert-danger">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}

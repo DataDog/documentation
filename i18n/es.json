@@ -291,5 +291,17 @@
   },
   "available_for": {
     "other": "Disponible para"
+  },
+  "alert_note": {
+    "other": "NOTA"
+  },
+  "alert_warning": {
+    "other": "ADVERTENCIA"
+  },
+  "alert_caution": {
+    "other": "PRECAUCIÓN"
+  },
+  "alert_tip": {
+    "other": "CONSEJO"
   }
 }

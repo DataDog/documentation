@@ -97,7 +97,7 @@ Especifica los atributos alternativos que se utilizarán como origen de la fecha
 
 **Nota**: Datadog rechaza una entrada de log si su fecha oficial es anterior a las 18 horas pasadas.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (el formato EPOCH en milisegundos)</a> y <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 

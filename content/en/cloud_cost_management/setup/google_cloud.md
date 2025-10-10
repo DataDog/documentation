@@ -32,7 +32,7 @@ To use Google Cloud Cost Management in Datadog, follow these steps:
 Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
 To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the <strong>Limit Metric Collection Filters</strong> section of the integration page.
 </div>
@@ -146,7 +146,7 @@ You can visualize your ingested data using the following cost types:
 
 ### Out-of-the-box tags
 
-Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see the [Tags documentation][17].
+Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][17].
 
 The following out-of-the-box tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data:
 

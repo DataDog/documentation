@@ -38,7 +38,7 @@ El perfil de la instancia EC2 EMR es un rol IAM que se asigna a cada instancia E
 
 #### Permisos para obtener el valor secreto utilizando AWS Secrets Manager
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Estos permisos son <strong>necesarios</strong> si utilizas AWS Secrets Manager.
 </div>
 
@@ -54,7 +54,7 @@ Estos permisos son <strong>necesarios</strong> si utilizas AWS Secrets Manager.
 
 #### Permisos para describir clústeres
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Estos permisos son <strong>necesarios</strong> si <strong>NO</strong> utilizas el rol por defecto, <code>EMR_EC2_DefaultRole</code>.
 </div>
 

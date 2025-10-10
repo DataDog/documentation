@@ -26,7 +26,7 @@ further_reading:
   text: "How we use Scorecards to define and communicate best practices at scale"
 ---
 
-{{< img src="/tracing/software_catalog/scorecard-overview.png" alt="Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecard-overview-updated.png" alt="Scorecards dashboard highlighting rule performance" style="width:90%;" >}}
 
 ## Overview
 

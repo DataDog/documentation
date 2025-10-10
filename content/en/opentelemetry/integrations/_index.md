@@ -22,7 +22,7 @@ Datadog collects metrics from supported OpenTelemetry receivers at no extra cost
 
 For example, the [`dockerstatsreceiver`][15] `metadata.yaml` file lists metrics that you can collect at no extra cost.
 
-<div class="alert alert-warning">Ensure that you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.</div>
+<div class="alert alert-danger">Ensure that you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.</div>
 
 ## Datadog-supported OpenTelemetry integrations
 
