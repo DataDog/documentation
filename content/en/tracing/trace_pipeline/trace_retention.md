@@ -57,7 +57,7 @@ Enabled toggle
 
 The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read [Usage Metrics][2], or explore the [out-of-the-box usage dashboard][4] available in your account.
 
-<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
+<div class="alert alert-info">Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
 
 
 ### Retention filter types
@@ -140,7 +140,7 @@ To create a retention filter:
 1. Set a name for the filter.
 1. Click **Add Filter** to save the filter.
 
-<div class="alert alert-danger">Configuring a trace rate can significantly increase your indexed spans usage.</div>
+<div class="alert alert-warning">Configuring a trace rate can significantly increase your indexed spans usage.</div>
 
 For example, if you configure a retention filter to index spans from `service:my-service`:
 - Configuring a span rate of `100%` ensures that all spans matching `service:my-service` are indexed.

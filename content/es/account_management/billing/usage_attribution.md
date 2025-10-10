@@ -15,7 +15,7 @@ title: Atribución de uso
 
 ## Información general
 
-<div class="alert alert-warning">L
+<div class="alert alert-danger">L
 Atribución de uso es una prestación incluida en el plan empresarial. Si quieres usarla en otros planes, ponte en contacto con la persona encargada de tu cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitarla.
 </div>
 

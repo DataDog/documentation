@@ -13,7 +13,7 @@ further_reading:
     text: "Enable monitoring for enterprise-scale Azure environments in minutes with Datadog"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   This guide is for managing the Azure Native integration with the Datadog resource.
 </div>
 

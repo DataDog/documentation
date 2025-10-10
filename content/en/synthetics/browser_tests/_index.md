@@ -250,7 +250,7 @@ Step replay allows you to re-run one or more steps of your browser test directly
 
 ### Debugger permission
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <p>The current version of the extension <strong>does not have <a href="https://developer.chrome.com/docs/extensions/reference/api/debugger">Chrome's debugger permission</a> yet</strong>, as a result:</p>
   <ul>
     <li><strong>JavaScript-based steps and keystroke simulations</strong> are <strong>not yet available</strong>.</li>
@@ -339,7 +339,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |

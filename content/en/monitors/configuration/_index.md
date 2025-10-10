@@ -45,7 +45,7 @@ The Evaluation Data graph shows how your monitor would have evaluated the data u
 - Understand how your monitor would have behaved.
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, Deployment, and Network Performance monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, Deployment, and Cloud Network monitors.
 
 {{% /tab %}}
 

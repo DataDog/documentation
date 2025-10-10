@@ -200,7 +200,7 @@ instances:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
-<div class="alert alert-warning"><strong>중요</strong>: 여기에서는 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 여기에서는 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 [에이전트를 재시작][3]하여 MySQL 메트릭을 Datadog에 전송하기 시작합니다.
 
@@ -250,7 +250,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning"><strong>중요</strong>: 호스트로 클러스트 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 호스트로 클러스트 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 
 [1]: /ko/agent/docker/integrations/?tab=docker
@@ -345,7 +345,7 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-<div class="alert alert-warning"><strong>중요</strong>: 여기에서는 Aurora 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 여기에서는 Aurora 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 Cluster 에이전트가 자동으로 이 설정을 등록하고 MySQL 검사를 실행합니다. 
 

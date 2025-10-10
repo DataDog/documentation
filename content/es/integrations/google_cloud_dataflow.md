@@ -103,7 +103,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Dataflow desde Google Cloud
 {{< get-metrics-from-git "google_cloud_dataflow" >}}
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Al utilizar Google Cloud Dataflow para monitorizar métricas de pipelines Apache Beam, ten en cuenta que las métricas generadas a partir de <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/metrics/Metrics.html">métodos Gauge estáticos</a> no se recopilan. Si necesitas monitorizar estas métricas, puedes utilizar <a href="https://micrometer.io/docs">Micrometer</a>.
 </div>
 

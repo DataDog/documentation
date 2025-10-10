@@ -96,7 +96,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 }
 ```
 
-<div class="alert alert-info"></a><strong>Note</strong>: By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
+<div class="alert alert-info">By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
 
 [1]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws_account
@@ -189,7 +189,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 }
 ```
 
-<div class="alert alert-info"></a><strong>Note</strong>: By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
+<div class="alert alert-info">By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
 
 [1]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
@@ -276,7 +276,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 }
 ```
 
-<div class="alert alert-info"></a><strong>Note</strong>: By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
+<div class="alert alert-info">By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
 
 [1]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
@@ -449,7 +449,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 
 See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
-<div class="alert alert-info"></a><strong>Note</strong>: By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
+<div class="alert alert-info">By default, the above configuration doesn't include Cloud Security. To enable Cloud Security, under <code>resources_config</code>, set <code>cloud_security_posture_management_collection = true</code>.</div>
 
 [1]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws

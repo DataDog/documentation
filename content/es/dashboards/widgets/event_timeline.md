@@ -6,4 +6,4 @@ private: true
 title: Widget de línea de tiempo del evento
 ---
 
-<div class="alert alert-warning">El widget de línea de tiempo del evento es compatible con el <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widget de serie temporal</a>.</div>
+<div class="alert alert-danger">El widget de línea de tiempo del evento es compatible con el <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widget de serie temporal</a>.</div>

@@ -473,7 +473,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Importante</strong> Los patrones de expresiones regulares para logs multilínea deben comenzar al <em>principio</em> de un log. Los patrones no pueden coincidir a mitad de una línea. <em>Un patrón que no coincida nunca puede provocar pérdidas de líneas de logs</em>. <br><br>La recopilación de logs funciona con una precisión de hasta milisegundos. Los logs con mayor precisión no se envían aunque coincidan con el patrón.</div>
+<div class="alert alert-danger"><strong>Importante</strong> Los patrones de expresiones regulares para logs multilínea deben comenzar al <em>principio</em> de un log. Los patrones no pueden coincidir a mitad de una línea. <em>Un patrón que no coincida nunca puede provocar pérdidas de líneas de logs</em>. <br><br>La recopilación de logs funciona con una precisión de hasta milisegundos. Los logs con mayor precisión no se envían aunque coincidan con el patrón.</div>
 
 Más ejemplos:
 

@@ -23,7 +23,7 @@ title: Cloud Security Vulnerabilities
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Vulnerabilities está en vista previa para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).
+<div class="alert alert-danger">Cloud Security Vulnerabilities está en vista previa para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).
 Solicita acceso <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">rellenando este formulario</a>.
 </div>
 {{< /site-region >}}

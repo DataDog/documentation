@@ -56,7 +56,7 @@ tile:
 
 ## 概要
 
-<div class="alert alert-danger">New Relic APM インテグレーションは非推奨となり、機能が低下しています。APM メトリクスラベルは利用できません。</div>
+<div class="alert alert-warning">New Relic APM インテグレーションは非推奨となり、機能が低下しています。APM メトリクスラベルは利用できません。</div>
 
 New Relic に接続すると、イベントストリームに New Relic のアラートが表示されます。
 

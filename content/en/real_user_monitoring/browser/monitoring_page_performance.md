@@ -35,7 +35,7 @@ You can access performance telemetry for your views in:
 
 ## Event timings and core web vitals
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog's Core Web Vitals telemetry is available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 

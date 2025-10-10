@@ -372,6 +372,7 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
+| [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -524,6 +525,19 @@ async function main () {
 
 **Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to LLM Observability.
 
+## Anthropic
+
+The Anthropic integration provides automatic tracing for the [Anthropic Python SDK's][29] chat message calls.
+
+### Traced methods
+
+The Anthropic integration instruments the following methods:
+
+- [Chat messages][30] (including streamed calls):
+  - `anthropic.messages.create()`
+- [Streamed chat messages][31]:
+  - `anthropic.messages.stream()`
+
 ## ESM support
 
 Auto-instrumentation for ECMAScript Module projects is supported starting from `dd-trace@>=5.38.0`. To enable auto-instrumentation in your ESM projects, run your application with the following Node option:
@@ -629,6 +643,9 @@ module.exports = {
 [26]: https://ai-sdk.dev/docs/ai-sdk-core/embeddings
 [27]: https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling
 [28]: https://www.npmjs.com/package/openai#microsoft-azure-openai
+[29]: https://docs.claude.com/en/api/client-sdks#typescript
+[30]: https://docs.anthropic.com/en/api/messages
+[31]: https://docs.anthropic.com/en/api/messages-streaming
 {{% /tab %}}
 {{< /tabs >}}
 

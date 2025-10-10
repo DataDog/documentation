@@ -232,7 +232,7 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-warning">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
+<div class="alert alert-danger">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
 
 The [Datadog Terraform module for Linux Web Apps][1] wraps the [azurerm_linux_web_app][2] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
