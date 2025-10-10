@@ -64,8 +64,9 @@ To view Agent events that match the expression, view the rule details, and then 
 When viewing raw Agent events, do the following:
 1. Confirm the rule is firing on the intended activity.
 2. Measure the scope and frequency across hosts/environments.
-3. Decide if this is the expected baseline or a true threat?
-4. Act: Suppress/allowlist if benign, escalate/contain if suspicious.
+3. Decide if this is the expected baseline or a true threat.
+4. If events are benign, add a suppression or update your expression with allowlist conditions.
+5. If events are suspicious, escalate by passing the finding into your incident process, or take action to stop or isolate the suspicious workload.
     
 To test detection rules, view the rule details, and then click **[Number] detection rules found**. The Detection Rules explorer opens and displays the backend logic layer: the detection rule, linked signals, metadata, JSON definition, tags, and version history.
 
@@ -74,7 +75,7 @@ When viewing the backend logic for a detection rule, do the following:
 1. Confirm that the rule name, description, and JSON (net_util_in_container) clarify what the rule is supposed to catch.
 2. Measure whether the rule is noisy or precise by reviewing the aggregate metrics (query histogram, signals over time, affected hosts)..
 3. Decide if the detected activity is expected (baseline) or suspicious (threat).
-4. Act: Suppress/allowlist if benign, escalate/contain if suspicious.
+4. Suppress/allowlist if benign, escalate/contain if suspicious.
 
 ## Rule authoring tips
 
@@ -93,7 +94,7 @@ When viewing the backend logic for a detection rule, do the following:
 - Use a glob match (`~"/path/*"`) for path families as it is safer and faster than regex.
 - Use regex (`=~`) only when globs/lists can't be used. Keep the regex expression as narrow as possible. As a rule of thumb, start with `==` or `in [...]`. Reach for regex only as a last resort.
 - Use negation (`not in [...]`, `!~`) to carve out exceptions explicitly (for example, trusted tools).
-- use CIDR operators (`in CIDR`, `not in CIDR`) for network boundaries.
+- Use CIDR operators (`in CIDR`, `not in CIDR`) for network boundaries.
 - Name rules by behavior, with a format that follows *What + Who + Context*.
 - Tag generously: `team`, `app`, `env`, `MITRE`, `severity`.
 
@@ -130,7 +131,7 @@ When viewing the backend logic for a detection rule, do the following:
 | --------------------- | ----------------------------- |
 | Equality / Comparison | `==`, `!=`, `>`, `<=`         |
 | List membership       | `in [...]`, `not in [...]`    |
-| Logical               | `&&`, \` (backtick)           |
+| Logical               | `&&`, `\|\|`, `!`               |
 | Pattern matching      | `=~`, `!~`, glob `~"/path/*"` |
 | CIDR                  | `in CIDR`, `not in CIDR`      |
 
@@ -224,7 +225,7 @@ exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
 | **Activate** | Ship to a subset of workloads (tagged via policy).            |
 | **Scale**    | Reference in backend detection rules for full rollout.        |
 
-
+After validatation and deployment, continue monitoring rule performance to keep false positives low and coverage strong as workloads evolve.
 
 [1]: https://app.datadoghq.com/security/workload-protection/policies
 [2]: https://app.datadoghq.com/security/workload-protection/agent-events
