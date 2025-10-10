@@ -229,7 +229,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 ### Choose this if...
 
 - You need to set up access manually for a smaller number of projects or folders.
-- You want more step-by-step control over assigning permissions and credentials within the Azure UI.
+- You want more step-by-step control over assigning permissions and credentials within the GCP UI.
 
 ### Instructions
 
