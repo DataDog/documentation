@@ -155,16 +155,24 @@ Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `
 
 [Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
 
-An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. Therefore, when this event has been generated, you can [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor. 
+An event is generated when the daily quota is reached. These events have the `datadog_index` tag which includes the index name. Therefore, when this event has been generated, you can [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor. 
 
 To set up a monitor to alert when the daily quota is reached for an index:
 
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
-2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
-3. Add `datadog_index` to the **group by** field. It automatically updates to `datadog_index(datadog_index)`. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
-4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
-5. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
-6. Click **Save**.
+2. Enter: `source:datadog datadog_index:* "daily quota reached"` in the **Define the search query** section. Include `datadog_index:*` to ensure only index related events are selected.
+3. In the **Count of** field, add `datadog_index` to group by index. This updates the query to read `Show Count of * by datadog_index (datadog_index)`.
+4. For **Evaluate the query over**, select **current day**. For **Starting at**, select the time when indexes reset. This keeps the monitor in alert status until quota reset.
+
+This is an example of what the search query looks like when defined in Datadog:
+
+{{< img src="logs/guide/daily_quota_notification_search_query.png" alt="The Datadog Alert on Index Quota Reached Search Query configuration" style="width:70%;">}}
+
+5. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
+6. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+7. Click **Save**.
+
+**Note**: The `datadog_index(datadog_index)` tag is only available when an event has already been generated.
 
 This is an example of what the notification looks like in Slack:
 
