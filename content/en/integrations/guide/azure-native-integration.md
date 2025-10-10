@@ -1,6 +1,9 @@
 ---
 title: Azure Native Integration Setup & Reference
-
+aliases:
+- /integrations/guide/azure-portal/
+- /integrations/guide/azure-native-programmatic-management/
+- /integrations/guide/azure-native-manual-setup/
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
