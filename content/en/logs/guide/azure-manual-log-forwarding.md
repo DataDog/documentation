@@ -1,7 +1,5 @@
 ---
 title: Azure Manual Log Forwarding Setup
-aliases:
-- /logs/guide/azure-logging-guide/
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
