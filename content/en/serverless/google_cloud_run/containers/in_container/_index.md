@@ -1,5 +1,6 @@
 ---
 title: In-Container Instrumentation
+description: Instrument Google Cloud Run containers directly within the application code for comprehensive monitoring and tracing.
 type: multi-code-lang
 aliases:
   - /serverless/google_cloud_run/containers_in_process/

@@ -1,5 +1,6 @@
 ---
 title: Instrument Azure App Service with serverless-init - Linux Containers
+description: Instrument Azure App Service Linux containers using serverless-init for monitoring, tracing, and log collection.
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"

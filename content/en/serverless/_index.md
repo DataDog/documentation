@@ -1,5 +1,6 @@
 ---
 title: Serverless
+description: "Monitor serverless applications on AWS Lambda, Azure App Service, Azure Container Apps, and Google Cloud Run with comprehensive metrics, traces, and logs."
 aliases:
   - /graphing/infrastructure/cloudfunctions
   - /graphing/infrastructure/serverless_functions

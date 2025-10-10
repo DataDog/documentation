@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Serverless Package Too Large Errors
+description: Troubleshoot Lambda function package size errors when code exceeds the 250 MB limit with Datadog instrumentation.
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'

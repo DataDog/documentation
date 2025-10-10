@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Ruby Cloud Run Container with Sidecar
+description: Instrument Ruby applications in Google Cloud Run containers using the sidecar pattern with Datadog Agent for monitoring.
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 60

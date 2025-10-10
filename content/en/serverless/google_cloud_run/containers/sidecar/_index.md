@@ -1,5 +1,6 @@
 ---
 title: Sidecar Instrumentation
+description: Instrument Google Cloud Run containers using a sidecar pattern with the Datadog Agent for comprehensive monitoring.
 type: multi-code-lang
 aliases:
   - /serverless/google_cloud_run/containers_sidecar/

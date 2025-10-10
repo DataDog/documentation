@@ -1,5 +1,6 @@
 ---
 title: Serverless Monitoring for AWS Step Functions
+description: "Monitor AWS Step Functions with Datadog to track workflow execution, performance metrics, and distributed traces."
 further_reading:
   - link: "/serverless/step_functions/installation"
     tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Azure App Service - Linux Code
+description: Instrument Linux Azure App Service applications using a sidecar container with the Datadog Agent for monitoring and configuration.
 aliases:
   - /serverless/azure_app_services/azure_app_services_linux
 further_reading:

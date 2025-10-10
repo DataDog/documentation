@@ -1,5 +1,6 @@
 ---
 title: Tracing Distributed Map States
+description: Set up tracing for AWS Step Functions Distributed Map states with trace merging and proper workflow linking configuration.
 ---
 
 In AWS Step Functions, you can set up a large-scale parallel workload by including a [`Map` state in _Distributed_ mode][1]. Datadog supports tracing your Distributed Map states.

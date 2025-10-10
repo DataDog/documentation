@@ -1,5 +1,6 @@
 ---
 title: Install Serverless Monitoring for AWS Step Functions
+description: Install and configure Datadog serverless monitoring for AWS Step Functions to collect traces, metrics, and logs.
 further_reading:
     - link: '/serverless/configuration/'
       tag: 'Documentation'

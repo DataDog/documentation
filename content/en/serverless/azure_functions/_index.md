@@ -1,5 +1,6 @@
 ---
 title: Install Serverless Monitoring for Azure Functions
+description: "Install and configure Datadog serverless monitoring for Azure Functions to collect metrics, traces, and logs."
 further_reading:
   - link: "/serverless/guide/disable_serverless"
     tag: "Documentation"

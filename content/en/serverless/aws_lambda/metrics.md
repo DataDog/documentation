@@ -1,5 +1,6 @@
 ---
 title: AWS Lambda metrics
+description: "Learn how to collect AWS Lambda metrics through CloudWatch, enhanced metrics, and custom metrics for comprehensive serverless monitoring."
 aliases:
   - /serverless/custom_metrics
   - /serverless/enhanced_lambda_metrics

@@ -1,5 +1,6 @@
 ---
 title: Instrumenting 1st Gen Cloud Run Functions
+description: Collect traces, metrics, and custom metrics from Google Cloud Run functions (1st gen), previously known as Cloud Functions.
 ---
 
 ## Overview

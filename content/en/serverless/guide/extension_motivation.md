@@ -1,6 +1,6 @@
 ---
 title: Deciding to migrate to the Datadog Lambda extension
-
+description: "Compare the Datadog Lambda Extension vs. Forwarder to decide which serverless monitoring approach best fits your needs and infrastructure."
 further_reading:
   - link: '/serverless/configuration/#migrate-to-the-datadog-lambda-extension'
     tag: 'Documentation'

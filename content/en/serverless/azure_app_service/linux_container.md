@@ -1,5 +1,6 @@
 ---
 title: Instrument Azure App Service - Linux Containers
+description: Instrument Azure App Service Linux containers using sidecar configuration for comprehensive monitoring and tracing.
 aliases:
   - /serverless/guide/azure_app_service_linux_sidecar
   - /serverless/azure_app_services/azure_app_services_container

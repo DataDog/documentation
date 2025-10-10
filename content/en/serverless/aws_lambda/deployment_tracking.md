@@ -1,5 +1,6 @@
 ---
 title: Deployment Tracking for AWS Lambda Serverless Applications
+description: Track AWS Lambda deployments to understand how code changes affect error rates, performance, and configuration drift.
 further_reading:
     - link: '/serverless/distributed_tracing'
       tag: 'Documentation'

@@ -1,5 +1,6 @@
 ---
 title: Azure App Service - Linux Code
+description: Instrument Azure App Service Linux code deployments using the deprecated Datadog wrapper script (use sidecar method instead).
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
   tag: "Blog"

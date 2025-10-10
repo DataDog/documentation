@@ -1,6 +1,6 @@
 ---
 title: Serverless Monitoring Guides
-
+description: "Comprehensive guides for configuring, troubleshooting, and optimizing Datadog serverless monitoring across all cloud platforms."
 private: true
 disable_toc: true
 cascade:
