@@ -36,7 +36,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La integración de PagerDuty en Datadog tiene soporte limitado en el sitio de Datadog para el gobierno. La integración del catálogo de servicios y la resolución automática de la Gestión de Incidentes y la Automatización de flujos (flows) de trabajo no son compatibles.</div>
+<div class="alert alert-danger">La integración de PagerDuty en Datadog tiene soporte limitado en el sitio de Datadog para el gobierno. La integración del catálogo de servicios y la resolución automática de la Gestión de Incidentes y la Automatización de flujos (flows) de trabajo no son compatibles.</div>
 {{< /site-region >}}
 
 ## Información general

@@ -48,7 +48,6 @@ Watchdog monitors the status of the following external providers' APIs:
 | Mixpanel | api.mixpanel.com |
 | OpenAI | *.openai.com|
 | PagerDuty | api.pagerduty.com |
-| Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
 | Render | api.render.com |
 | SendGrid | *.sendgrid.com |
 | ServiceNow | *.service-now.com |

@@ -69,13 +69,13 @@ if (user.isAuthenticated) {
 
 세션 재생 기록을 중지하려면 `stopSessionReplayRecording()`를 호출합니다.
 
-<div class="alert alert-warning">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우  Session Replay 녹화가 자동으로 시작되지 않습니다. 녹화를 시작하려면 <code>startSessionReplayRecording</code>을 호출하세요.
+<div class="alert alert-danger">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우  Session Replay 녹화가 자동으로 시작되지 않습니다. 녹화를 시작하려면 <code>startSessionReplayRecording</code>을 호출하세요.
 
 ## 세션 재생 비활성화
 
 세션 레코딩을 중단하려면 `sessionReplaySampleRate`을 `0`으로 설정하세요. 그러면 [Browser RUM & Session Replay 플랜][6]의 데이터 수집이 중단됩니다.
 
-<div class="alert alert-warning">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우 <code>replaySampleRate</code>를 <code>0</code>으로 설정하세요.</div>
+<div class="alert alert-danger">v5.0.0 이전 버전의 RUM Browser SDK를 사용하는 경우 <code>replaySampleRate</code>를 <code>0</code>으로 설정하세요.</div>
 
 ## 재생 기록
 

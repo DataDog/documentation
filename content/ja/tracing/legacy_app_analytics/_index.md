@@ -6,7 +6,7 @@ aliases:
 title: App Analytics
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 このページは、レガシー版 App Analytics に関するコンフィギュレーション情報を伴う非推奨機能について説明します。トラブルシューティングまたは古い設定の修正に利用可能です。トレース全体を完全に制御するには、<a href="/tracing/trace_pipeline">取り込みコントロールおよび保持フィルター</a>を使用してください。
 </div>
 
@@ -478,7 +478,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### Datadog Agent で
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 このセクションでは、レガシー App Analytics に関連する構成情報とともに、非推奨の機能について説明します。
 </div>
 

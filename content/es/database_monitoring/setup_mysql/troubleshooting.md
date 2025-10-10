@@ -185,7 +185,7 @@ performance_schema_max_sql_text_length=4096
 
 ### Falta actividad de consulta
 
-<div class="alert alert-warning">La Actividad de consulta y la Recopilación de eventos de espera no son compatibles con Flexible Server, ya que estas características requieren la configuración de MySQL que no están disponibles en un host de Flexible Server.</div>
+<div class="alert alert-danger">La Actividad de consulta y la Recopilación de eventos de espera no son compatibles con Flexible Server, ya que estas características requieren la configuración de MySQL que no están disponibles en un host de Flexible Server.</div>
 
 Antes de seguir estos pasos para diagnosticar la falta de actividad de consulta, asegúrate de que el Agent se está ejecutando correctamente y de que has seguido [los pasos para diagnosticar la falta de datos del Agent](#no-data-is-showing-after-configuring-database-monitoring). A continuación, se indican las posibles causas de la falta de actividad de consulta.
 

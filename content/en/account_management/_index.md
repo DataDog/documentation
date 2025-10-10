@@ -13,7 +13,7 @@ further_reading:
       text: "Best practices for managing Datadog organizations at scale"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government platform supports only SAML or basic authentication using a username/email and password. Before configuring SAML authentication, ensure that at least one username/email and password account is established to maintain access during the setup process. Datadog recommends enabling multi-factor authentication (MFA) for password-based accounts.
+<div class="alert alert-danger">The Datadog for Government platform supports only SAML or basic authentication using a username/email and password. Before configuring SAML authentication, ensure that at least one username/email and password account is established to maintain access during the setup process. Datadog recommends enabling multi-factor authentication (MFA) for password-based accounts.
 
 If you need SAML enabled for a trial account, contact <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
 
@@ -40,7 +40,7 @@ You can manage your timezone, visual accessibility preference, and email subscri
 
 Under email subscriptions, you have access to the following reports:
 {{< site-region region="us3,us5,gov,ap1,ap2" >}}
-<div class="alert alert-warning">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest

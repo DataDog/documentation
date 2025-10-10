@@ -174,7 +174,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
    Ahora ambos servicios tendrán la instrumentación automática.
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Los indicadores de estos comandos de muestreo, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos fuera de este tutorial. Para obtener información sobre qué utilizar en tu entorno real , lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
+   <div class="alert alert-danger"><strong>Nota</strong>: Los indicadores de estos comandos de muestreo, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos fuera de este tutorial. Para obtener información sobre qué utilizar en tu entorno real , lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
 
 3. La instrumentación automática es práctica, pero a veces es preferible utilizar tramos más precisos. La API de rastreo DD Java de Datadog te permite especificar tramos en tu código mediante anotaciones o código. Añade algunas anotaciones al código para rastrear en algunos métodos de ejemplo.
 

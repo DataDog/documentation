@@ -27,7 +27,7 @@ L'aperçu de Code Analysis est disponible.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Analysis n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}
@@ -113,7 +113,7 @@ Les deux types de correctifs sont distingués visuellement dans l'interface util
 *Corrections suggérées par l'IA :*
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Indicateur visuel d'un correctif suggéré par l'IA de l'analyse statique" style="width:60%;">}}
 
-<div class="alert alert-warning">Les corrections suggérées par l'IA sont en avant-première. Pour en demander l'accès, contactez le service d'assistance <a href="/help/">.</div>
+<div class="alert alert-danger">Les corrections suggérées par l'IA sont en avant-première. Pour en demander l'accès, contactez le service d'assistance <a href="/help/">.</div>
 
 ### Correction d'une vulnérabilité ou d'un problème de qualité directement depuis Datadog
 {{< img src="ci/sast_one_click_light.png" alt="Exemple de correction en un clic pour Code Analysis" style="width:90%;" >}}

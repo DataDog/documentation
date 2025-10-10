@@ -144,7 +144,7 @@ También puedes definir o modificar variables de entorno con la ruta del script 
 {{% /site-region %}}
 
 
-<div class="alert alert-warning">Por razones de seguridad, no se recomienda definir la variable de entorno `DD_API_KEY` en texto simple directamente en la interfaz de usuario. En su lugar, utiliza <a href="https://docs.databricks.com/en/security/secrets/index.html">secretos de Databricks</a>.</div>
+<div class="alert alert-danger">Por razones de seguridad, no se recomienda definir la variable de entorno `DD_API_KEY` en texto simple directamente en la interfaz de usuario. En su lugar, utiliza <a href="https://docs.databricks.com/en/security/secrets/index.html">secretos de Databricks</a>.</div>
 
 
 
@@ -175,7 +175,7 @@ Luego de estos pasos, cualquier clúster nuevo utiliza el script de manera autom
 
 Instala el Datadog Agent en el nodo controlador del clúster.
 
-<div class="alert alert-warning">Es necesario definir el valor de la variable `DD_API_KEY` en el script.</div>
+<div class="alert alert-danger">Es necesario definir el valor de la variable `DD_API_KEY` en el script.</div>
 
 ``script de shell
 #!/bin/bash
@@ -257,7 +257,7 @@ chmod a+x /tmp/start_datadog.sh
 
 Instale el Datadog Agent en los nodos controlador y trabajador del clúster
 
-<div class="alert alert-warning">Deberás definir el valor de la variable `DD_API_KEY` en el script.</div>
+<div class="alert alert-danger">Deberás definir el valor de la variable `DD_API_KEY` en el script.</div>
 
 ```script de shell
 #!/bin/bash

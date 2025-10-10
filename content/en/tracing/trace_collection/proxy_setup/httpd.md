@@ -22,7 +22,7 @@ Since IHS HTTP Server is essentially a wrapper of the Apache HTTP Server, the mo
 
 ## Installation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
 </div>
 

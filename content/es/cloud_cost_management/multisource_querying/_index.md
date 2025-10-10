@@ -105,7 +105,7 @@ Las siguientes etiquetas de FOCUS están disponibles en Cloud Cost Management:
 
 La métrica `all.cost` tiene [costes de contenedor asignados][13] para costes de AWS, Azure y Google Cloud, por lo que se pueden realizar consultas por las [etiquetas de contenedor relevantes][14].
 
-<div class="alert alert-warning">Si tu organización utiliza cualquiera de estas etiquetas de FOCUS, Datadog recomienda actualizar tu clave de etiquetas en la infraestructura subyacente para que los valores de las etiquetas no se superpongan a los valores de las etiquetas de FOCUS en Cloud Cost Management.</div>
+<div class="alert alert-danger">Si tu organización utiliza cualquiera de estas etiquetas de FOCUS, Datadog recomienda actualizar tu clave de etiquetas en la infraestructura subyacente para que los valores de las etiquetas no se superpongan a los valores de las etiquetas de FOCUS en Cloud Cost Management.</div>
 
 ## Conversión de divisas
 Cloud Cost Management recupera la divisa de facturación de la factura de cada proveedor de nube. Cuando procesas costes de múltiples proveedores en diferentes divisas, los cargos por costes se convierten a USD. Esta conversión se realiza al tipo de cambio medio mensual, que se actualiza diariamente. Esto garantiza que Cloud Cost Management pueda representar de forma coherente y precisa todos los datos de costes, independientemente de su divisa original. Para ver tu coste en la divisa original de facturación, filtra a un único proveedor.

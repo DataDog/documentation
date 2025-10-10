@@ -22,7 +22,7 @@ title: JavaScript ソースマップのアップロード
 
 ソースコードを縮小するときに、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように JavaScript バンドラーを構成します。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< site-region region="us,us3,us5,eu" >}}
 関連する縮小ファイルのサイズを加えた各ソースマップのサイズが、**300** MB の制限を超えないようにしてください。
 {{< /site-region >}}
@@ -86,7 +86,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< site-region region="us,us3,us5,eu" >}}
 <code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>**300** MB</b> の制限を超える場合は、ソースコードを複数の小さなチャンクに分割するようにバントラーを構成することでファイルサイズを減らしてください。詳細については、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS でのコード分割</a>を参照してください。
 {{< /site-region >}}

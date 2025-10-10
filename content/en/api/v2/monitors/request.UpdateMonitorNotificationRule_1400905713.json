@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "tags": [
+          "test:example-monitor",
+          "host:abc"
+        ]
+      },
+      "name": "updated rule",
+      "conditional_recipients": {
+        "conditions": [
+          {
+            "scope": "transition_type:is_alert",
+            "recipients": [
+              "slack-test-channel",
+              "jira-test"
+            ]
+          }
+        ]
+      }
+    },
+    "id": "00000000-0000-1234-0000-000000000000",
+    "type": "monitor-notification-rule"
+  }
+}

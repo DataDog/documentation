@@ -62,7 +62,7 @@ The following examples assume a variable named `myString` with value `Hello, wor
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `len(value_src)`, `count(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(myString)" >}} |
+| `len(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(myString)" >}} |
 | `isEmpty(value_src)` | Checks whether the string is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(myString)" >}} |
 | `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(myString, 0, 2)" >}} |
 | `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(myString, \"He\")" >}} |
@@ -78,7 +78,7 @@ The following examples assume a variable named `mySequence` with value `[1,2,3,4
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `len(value_src)`, `count(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(mySequence)" >}} {{< expression-language-evaluator expression="len(myMap)" >}}  |
+| `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(mySequence)" >}} {{< expression-language-evaluator expression="len(myMap)" >}}  |
 | `isEmpty(value_src)` | Checks whether the collection is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(mySequence)" >}} {{< expression-language-evaluator expression="isEmpty(myMap)" >}} |
 | `[ i ]`, `[ key ]` | For sequential containers returns the `i`-th item in the collection (where `i` must be an integer). For dictionaries, returns the value that corresponds to the `key` (where `key` must match the key type of the dictionary). If the item does not exist, the expression yields an error or returns null, depending on the language. | {{< expression-language-evaluator expression="mySequence[3]" >}} {{< expression-language-evaluator expression="myMap[\"b\"]" >}} |
 | `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference for sequential containers, and with `@key`, `@value` for dictionaries. | {{< expression-language-evaluator expression="any(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="any(myMap, {@value > 2})" >}} |

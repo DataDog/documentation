@@ -6,7 +6,7 @@ private: true
 
 This page covers the ports used by Agent 5. For information on the latest version of the Agent, see [Network Traffic][1].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 All outbound traffic is sent over SSL through TCP or UDP.
 <br><br>
 Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.

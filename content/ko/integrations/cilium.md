@@ -96,7 +96,7 @@ Cilium 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있습니�
      `prometheus.enabled=true` 및 `operator.prometheus.enabled=true`
 
 또는 별도로 쿠버네티스(Kubernetes) 매니페스트에서 프로메테우스 메트릭을 활성화합니다.
-<div class="alert alert-warning"><a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium <= v1.11</a>의 경우 <code>--prometheus-serve-addr=:9090</code>를 사용합니다.</a></div>  
+<div class="alert alert-danger"><a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium <= v1.11</a>의 경우 <code>--prometheus-serve-addr=:9090</code>를 사용합니다.</a></div>  
 
    - `cilium-agent`에서 Cilium DaemonSet 설정의 `--prometheus-serve-addr=:9962` to the `args` 섹션을 추가합니다.
 

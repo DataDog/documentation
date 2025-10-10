@@ -46,7 +46,7 @@ Sensitive Data Scanner は、[プロセッサー][8]として [Observability Pip
 
 {{< site-region region="us" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 ログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 
