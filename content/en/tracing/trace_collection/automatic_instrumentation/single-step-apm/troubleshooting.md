@@ -26,12 +26,6 @@ Fleet Automation provides two types of instrumentation insights for SSI:
 
 Together, these views let you diagnose injection issues from both the process and cluster perspectives.
 
-Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
-- Which hosts have SSI enabled
-- Which processes failed instrumentation and why
-- Which services were instrumented successfully
-- Process-level details to help debug injection failures
-
 #### Prerequisites
 
 This functionality is available for:
