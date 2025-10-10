@@ -53,7 +53,7 @@ After your application starts sending data, the traces automatically appear in t
 LLM Observability supports spans that follow the OpenTelemetry 1.37 semantic conventions for generative AI, including:
 
 - LLM operations with `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model`, and other gen_ai attributes
-- I/O on direct attributes or through events
+- Operation inputs/outputs on direct span attributes or via span events
 - Token usage metrics (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`)
 - Model parameters and metadata
 
