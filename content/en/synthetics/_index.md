@@ -75,6 +75,12 @@ Use [Synthetic mobile application tests][21] to monitor how your customers exper
 
 {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
+## Create network tests
+
+Create [Synthetic network tests][25] from managed locations to perform TCP, UDP, and ICMP checks and visualize packet routes across global endpoints.
+
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Examples of a Synthetic TCP network test" style="width:100%;">}}
+
 ## Launch private locations
 
 Use [Synthetic private locations][15] to monitor internal APIs and websites or create custom locations in areas that are mission-critical to your business.
@@ -160,3 +166,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
 [24]: /synthetics/notifications/
+[25]: /synthetics/network_tests/
