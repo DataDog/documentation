@@ -597,37 +597,37 @@ menu:
       parent: otel-instrumentation
       weight: 302
     - name: Java
-      url: /opentelemetry/instrument/api_support/java
+      url: /opentelemetry/instrument/api_support/java/traces
       parent: otel-api-dd-sdk
       weight: 3021
       identifier: otel_api_java
     - name: Python
-      url: /opentelemetry/instrument/api_support/python
+      url: /opentelemetry/instrument/api_support/python/traces
       parent: otel-api-dd-sdk
       weight: 3022
       identifier: otel_api_python
     - name: Ruby
-      url: /opentelemetry/instrument/api_support/ruby
+      url: /opentelemetry/instrument/api_support/ruby/traces
       parent: otel-api-dd-sdk
       weight: 3023
       identifier: otel_api_ruby
     - name: Go
-      url: /opentelemetry/instrument/api_support/go
+      url: /opentelemetry/instrument/api_support/go/traces
       parent: otel-api-dd-sdk
       weight: 3024
       identifier: otel_api_go
     - name: Node.js
-      url: /opentelemetry/instrument/api_support/nodejs
+      url: /opentelemetry/instrument/api_support/nodejs/traces
       parent: otel-api-dd-sdk
       weight: 3025
       identifier: otel_api_nodejs
     - name: PHP
-      url: /opentelemetry/instrument/api_support/php
+      url: /opentelemetry/instrument/api_support/php/traces
       parent: otel-api-dd-sdk
       weight: 3026
       identifier: otel_api_php
     - name: .NET
-      url: /opentelemetry/instrument/api_support/dotnet
+      url: /opentelemetry/instrument/api_support/dotnet/traces
       parent: otel-api-dd-sdk
       weight: 3027
       identifier: otel_api_dotnet

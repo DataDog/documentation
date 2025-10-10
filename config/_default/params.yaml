@@ -135,6 +135,9 @@ code_language_ids:
     real_time_rule: "Real-Time Rule"
     scheduled_rule: "Scheduled Rule"
     historical_job: "Historical Job"
+    traces: "Traces"
+    metrics: "Metrics"
+    logs: "Logs"
 branch: ""
 
 signupclass: sign-up-trigger
