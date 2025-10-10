@@ -296,7 +296,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 ### Step 4 - Visualize your data
 
-Now that you’ve completed the basic setup for Logs, your application is collecting browser logs and you can start monitoring and debugging issues in real-time.
+Now that you've completed the basic setup for Logs, your application is collecting browser logs and you can start monitoring and debugging issues in real-time.
 
 Visualize the logs in the [Log Explorer][7].
 
