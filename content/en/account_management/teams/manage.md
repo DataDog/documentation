@@ -66,7 +66,7 @@ With subteams, you can nest teams within each other to mimic your company's hier
     {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
     
 On the **Subteams** tab, you can add and remove existing teams. For a clear view of a team's place in its hierarchy, go to [**Service Management** > **Teams** > **Map View**][4], then search for the team by name.
-You can also automate subteam management based on your organization’s hierarchical structure using our [APIs][5], with Terraform support coming soon.
+To automate subteam management based on your organization’s hierarchical structure, use the [Teams APIs][5].
 
 ## Manage teams through an identity provider
 
@@ -97,4 +97,4 @@ To enforce a strict membership model, configure your default team settings so **
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [3]: /account_management/scim/
 [4]: https://app.datadoghq.com/teams/map
-[5]: https://docs.datadoghq.com/network_monitoring/devices/setup/?utm_source=chatgpt.com#use-the-network-api
+[5]: https://docs.datadoghq.com/api/latest/teams/#add-a-member-team
