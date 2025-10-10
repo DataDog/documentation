@@ -97,4 +97,4 @@ To enforce a strict membership model, configure your default team settings so **
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [3]: /account_management/scim/
 [4]: https://app.datadoghq.com/teams/map
-[5]: https://docs.datadoghq.com/api/latest/teams/#add-a-member-team
+[5]: /api/latest/teams/#add-a-member-team
