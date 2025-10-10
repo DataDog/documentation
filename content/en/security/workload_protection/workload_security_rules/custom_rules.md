@@ -84,7 +84,7 @@ To use the Assisted rule creator:
 
 1. Go to [Agent Configuration][3].
 2. Create or open a policy.
-3. In **Actions**, select **Assisted rule creator**.
+3. In **Add Agent Rule**, select **Assisted rule creator**.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
    - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
