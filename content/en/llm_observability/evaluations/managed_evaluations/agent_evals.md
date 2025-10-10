@@ -12,7 +12,7 @@ further_reading:
   tag: "Blog"
   text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 aliases:
-    - /llm_observability/evaluations/ootb_evaluations
+    - /llm_observability/evaluations/agent_evaluations
 ---
 
 Agent evaluations help ensure that your LLM-powered applications are making the right tool calls and resolving user requests successfully. These checks are designed to catch common failure modes when agents interact with external tools, APIs, or workflows.
