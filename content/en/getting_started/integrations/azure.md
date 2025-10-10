@@ -1,5 +1,8 @@
 ---
 title: Getting Started with Azure
+aliases:
+- /integrations/guide/azure-manual-setup/
+- /integrations/guide/azure-programmatic-management/
 further_reading:
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'
