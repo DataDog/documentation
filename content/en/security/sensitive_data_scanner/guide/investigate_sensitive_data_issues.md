@@ -24,13 +24,13 @@ Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit
 - How severe is the issue in terms of spread and volume?
 - Where did the sensitive data come from?
 
-The Sensitive Data Scanner's [Summary][1] page categorizes and prioritizes sensitive data issues so that you can investigate, collaborate, and document your findings, and answer those questions.
+The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sensitive data issues so that you can investigate, collaborate, and document your findings, and answer those questions.
 
-{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The Findings page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
 
 ## Triage sensitive data issues
 
-Navigate to the [Summary][1] page to see all sensitive data issues within the selected time frame and start investigating issues.
+Navigate to the [Findings][1] page to see all sensitive data issues within the selected time frame and start investigating issues.
 
 {{< tabs >}}
 {{% tab "Telemetry Data" %}}
@@ -55,7 +55,7 @@ To investigate an issue:
 If you want to modify the Scanning Rule that was used to detect the sensitive data issue, click **Modify Rule** at the top of the panel.
 
 Additionally, you can also:
-- Use [Case Management][1] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. Associated cases are surfaced in the Summary page.
+- Use [Case Management][1] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. Associated cases are surfaced in the Findings page.
 - Use [Incident Management][2] to create an incident, you can add the issue to an existing incident or declare a new incident. Click the **Declare Incident** dropdown menu to add the issue to an existing incident. Click **Declare Incident** to declare a new incident.
 - Use [Audit Trail][3] to see who may have accessed this sensitive data within Datadog, **View in Audit Trail** in the **Users who accessed these events** section.
 
@@ -102,5 +102,5 @@ To investigate a datastore:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
+[1]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 
