@@ -112,6 +112,9 @@ On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb
 {{< /tabs >}}
 
 ### Custom sounds and volume for critical push
+
+<div class="alert alert-info"> Volume and sound controls are available only for On-Call notifications. Incident and workflow notifications use your device's default system settings. </div>
+
 For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention. Test your critical push notification preferences to confirm that they behave as expected.
 
 ## Incident notifications
