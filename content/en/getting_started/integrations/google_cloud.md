@@ -179,7 +179,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
-9. Choose to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
+9. Choose whether to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. A summary of the changes to be made is displayed. If confirmed, the script:
    - Enables the required APIs
    - Assigns the necessary permissions to monitor each selected project and folder
@@ -215,7 +215,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
 7. Choose whether to disable **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
-8. Copy the provided **Terraform Code**. If confirmed, the script:
+8. Copy the provided **Terraform Code**.
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
    - Enables the required APIs
    - Assigns the necessary permissions to monitor each selected project and folder
