@@ -29,6 +29,37 @@ This approach is useful for both extracting log data from the monitored applicat
 - A custom Agent integration or check. See [Create an Agent-based Integration][1] for setup instructions.
 - The Datadog Agent installed and running with [log collection enabled][2].
 
+## Configuration
+
+To enable log submission from your custom Agent check, you need to configure log collection in your integration's configuration file.
+
+1. Ensure log collection is enabled globally in the Agent's main configuration file (`datadog.yaml`):
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Add a `logs` section to your integration's configuration file (for example, `conf.d/my_integration.d/conf.yaml`):
+   ```yaml
+   init_config:
+
+   instances:
+     - <instance_configuration>
+
+   logs:
+     - type: integration
+       source: <integration_name>
+       service: <service_name>
+   ```
+
+   Where:
+   - `type`: Set to `integration` to indicate logs are collected by an integration
+   - `source`: The source of the logs (typically your integration name)
+   - `service`: The service name to associate with the logs (this can also be the integration name if nothing else applies)
+
+3. [Restart the Agent][6] if it is running for the configuration changes to take effect.
+
+Once configured, your integration can use the `send_log` method to submit logs, which will be tagged with the `source` and `service` specified in the configuration.
+
 ## Using the send_log method
 
 The `send_log` method is available on any `AgentCheck` class and allows you to submit log entries to Datadog.
@@ -58,8 +89,8 @@ All other keys in the `data` dictionary are passed through as log attributes. Co
 
 - `message`: The log message content
 - `status`: Log status level (such as `info`, `error`, `warning`, `debug`)
-- `service`: Service name for the log
-- `source`: Source of the log (typically your integration name)
+- `service`: Service name for the log (this should match the service name in the check's configuration)
+- `source`: Source of the log (typically your integration name; should also match the configured source name)
 - `hostname`: Hostname associated with the log
 - Any custom fields relevant to your integration
 
@@ -189,3 +220,4 @@ If logs are not appearing in Datadog:
 [3]: /logs/explorer/
 [4]: /logs/log_configuration/processors
 [5]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
