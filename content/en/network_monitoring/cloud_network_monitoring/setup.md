@@ -229,7 +229,7 @@ You may require one of the following additional steps depending on your environm
 
 {{< collapse-content title="Google GKE Autopilot" level="h4" >}}
 
-If your cluster is running Google's GKE Autopilot, add the following to your values file as well:
+If your cluster is running Google's GKE Autopilot, add the following to your values file:
 
 ```
 providers:
