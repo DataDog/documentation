@@ -224,7 +224,7 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 #### Azure Cloud Shell
 
-To use the [Datadog CLI][601] in [Azure Cloud Shell][603], open cloud shell and use `npx` to run the cli directly. Set your api key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the cli:
+To use the Datadog CLI in [Azure Cloud Shell][603], open cloud shell and use `npx` to run the cli directly. Set your api key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the cli:
 ```shell
 npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 ```
