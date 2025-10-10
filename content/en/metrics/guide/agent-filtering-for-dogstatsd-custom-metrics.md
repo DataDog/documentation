@@ -286,7 +286,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
         "failed_agent_count": 0,
         "failure_message": ""
     },
-    "deployment_status": "Deployed to all agents",
+    "deployment_status": "Deployed to all Agents",
     "deployment_strategy": "all",
     "policy_name": "test_policy_1",
     "total": 7,
@@ -311,7 +311,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
             "type": "filtered_metrics",
             "attributes": {
                 "count": 85,
-                "deployment_status": "Deployed to all agents",
+                "deployment_status": "Deployed to all Agents",
                 "deployment_strategy": "all",
                 "policy_name": "policy one",
                 "updated_by": "user@datadoghq.com",
@@ -324,7 +324,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
             "type": "filtered_metrics",
             "attributes": {
                 "count": 8,
-                "deployment_status": "Deployed to all agents",
+                "deployment_status": "Deployed to all Agents",
                 "deployment_strategy": "all",
                 "policy_name": "policy two",
                 "updated_by": "user@datadoghq.com",
