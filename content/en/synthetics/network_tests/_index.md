@@ -34,7 +34,24 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    6. **TCP traceroute strategy** (TCP tests only): Choose between Selective Acknowledgement (SACK) and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic.  
 4. Optional: Add **Tags** to your test, including environment tags. Use tags to filter your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][1].
 
-{{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
+  {{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
+
+5. Define assertions to determine the expected results for your test. At least one assertion is required.
+
+  {{< img src="synthetics/network_tests/network_path_assertions.png" alt="Network Path test creation form with assertions drop down." style="width:80%;">}}
+   | Type | Operator 1 | Operator 2 | Value type |
+   | :---- | :---- | :---- | :---- |
+   | latency | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
+   | packet loss |  | `is`, `<`, `<=`, `>`, `>=` | int (0 to 100\) |
+   | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
+   | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
+
+6. Select the locations from which to run your test. Network Path tests can run from managed locations to test from outside your network.
+
+  {{% managed-locations %}}
+
+7. Set the test frequency to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
+
 
 ## Further Reading
 
