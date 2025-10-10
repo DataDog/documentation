@@ -66,7 +66,7 @@ The default architecture above is suitable for most users. Depending on the scal
 
 #### Using the provided templates
 
-The **Deploy to Azure** button in the main Azure [log collection section][1] provides a template for creating an Event Hub and forwarder function pair. In addition to using this template to deploy directly, you can use the underlying ARM templates as a starting point for your own infrastructure as code deployments.
+The **Deploy to Azure** button in the main Azure [Event Hub Logging guide][13] provides a template for creating an Event Hub and forwarder function pair. In addition to using this template to deploy directly, you can use the underlying ARM templates as a starting point for your own infrastructure as code deployments.
 
 These templates do not add diagnostic settings, apart from one optional diagnostic setting for activity logs. For resource logs, Datadog recommends utilizing ARM templates or Terraform to add diagnostic settings to your resources programmatically. These diagnostic settings must be added to every resource that needs to send resource logs to Datadog.
 
@@ -87,8 +87,8 @@ For especially high log volumes, you may consider adding additional Event Hub an
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
 
 * [Introducing Azure monitoring with one-click Datadog deployment][6]
+* [Azure integration][10] _All sites_
 * [Azure Native integration][7] _US3 only_
-* [Standard Azure integration][10] _All sites_
 
 An alternative to the GUI installation is the command line.
 To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment. Replace `<SITE_PARAMETER>` with your Datadog account **site parameter** value in the [Datadog sites page][8], and `<DATADOG_API_KEY>` with your [Datadog API key][9].
@@ -125,7 +125,7 @@ The protected settings include:
 
 This example shows how to specify a configuration for the Datadog Agent to use.
 The Datadog Agent configuration URI must be an Azure blob storage URI.
-The Datadog Windows Agent Azure Extension will check that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
+The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
 The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
 
 {{< code-block lang="powershell" >}}
@@ -144,7 +144,7 @@ This example shows how to specify a version of the Agent to install. By default 
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
-[1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
+[1]: https://learn.microsoft.com/powershell/module/az.compute/set-azvmextension
 {{% /tab %}}
 {{% tab "Linux" %}}
 
@@ -184,7 +184,7 @@ This example shows how to specify a configuration for the Datadog Agent to use.
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 {{< /code-block >}}
 
-[1000]: https://learn.microsoft.com/en-us/cli/azure/vm/extension
+[1000]: https://learn.microsoft.com/cli/azure/vm/extension
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -390,6 +390,7 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
 [7]: /integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
 [8]: /getting_started/site/#access-the-datadog-site
 [9]: /account_management/api-app-keys/#api-keys
-[10]: /integrations/guide/azure-manual-setup/#agent-installation
+[10]: /getting_started/integrations/azure/#install-the-agent-for-greater-visibility-into-your-application
 [11]: /integrations/azure_arc/
 [12]: https://learn.microsoft.com/cli/azure/connectedmachine/extension
+[13]: /logs/guide/azure-event-hub-log-forwarding/
