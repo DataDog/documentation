@@ -35,7 +35,7 @@ This evaluation checks whether the agent successfully selected the appropriate t
 ### How to use
 1. Ensure you are running `dd-trace` v3.12+.
 1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
-1. Enable the `ToolSelection` evaluation in the Datadog UI <<insert specific instructions>>
+1. Enable the `ToolSelection` evaluation in the Datadog UI by [creating a new evaluation][1] or [editing an existing evaluation][2].
 
 This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
@@ -114,7 +114,7 @@ This evaluation is supported in `dd-trace` v3.12+. The example below uses the Op
 1. Install `dd-trace` v3.12+.
 1. Instrument your agent with .... The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
-Enable the ToolArgumentCorrectness evaluation in the Datadog UI <<insert specific instructions>>
+Enable the ToolArgumentCorrectness evaluation in the Datadog UI by [creating a new evaluation][1] or [editing an existing evaluation][2].
 
 {{< code-block lang="python" >}}
 import os
@@ -261,3 +261,5 @@ This configuration ensures evaluations run only on complete sessions. This provi
 - Ensure your agent is configured to signal the end of a user request cycle.
 
 
+[1] /llm_observability/evaluations/managed_evaluations/#create-new-evaluations
+[2] /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
