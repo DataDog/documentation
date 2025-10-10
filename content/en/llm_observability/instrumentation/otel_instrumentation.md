@@ -17,7 +17,7 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37 semantic conventions for generative AI][1]
-- Access to the OpenTelemetry instrumentation beta feature ([contact support][4] to request access)
+- Access to the OpenTelemetry instrumentation Preview feature ([contact support][4] to request access)
 
 ## Setup
 
