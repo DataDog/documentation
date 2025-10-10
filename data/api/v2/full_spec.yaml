@@ -4297,7 +4297,7 @@ components:
             provider:
             - aws
             - gcp
-            rule_name: Example Arbitrary Cost Rule
+            rule_name: Example custom allocation rule
             strategy:
               allocated_by_tag_keys:
               - team
@@ -4326,14 +4326,144 @@ components:
       type: object
     ArbitraryRuleResponseArray:
       description: The definition of `ArbitraryRuleResponseArray` object.
+      example:
+        data:
+        - attributes:
+            costs_to_allocate:
+            - condition: like
+              tag: service
+              value: orgstore-csm*
+              values: null
+            created: '2024-11-20T03:44:37Z'
+            enabled: true
+            last_modified_user_uuid: user-example-uuid
+            order_id: 1
+            processing_status: done
+            provider:
+            - gcp
+            rule_name: gcp-orgstore-csm-team-allocation
+            strategy:
+              allocated_by:
+              - allocated_tags:
+                - key: team
+                  value: csm-activation
+                percentage: 0.34
+              - allocated_tags:
+                - key: team
+                  value: csm-agentless
+                percentage: 0.66
+              method: percent
+            type: shared
+            updated: '2025-09-02T21:28:32Z'
+            version: 1
+          id: '19'
+          type: arbitrary_rule
+        - attributes:
+            costs_to_allocate:
+            - condition: is
+              tag: env
+              value: staging
+              values: null
+            created: '2025-05-27T18:48:05Z'
+            enabled: true
+            last_modified_user_uuid: user-example-uuid-2
+            order_id: 2
+            processing_status: done
+            provider:
+            - aws
+            rule_name: test-even-2
+            strategy:
+              allocated_by_tag_keys:
+              - team
+              based_on_costs:
+              - condition: is
+                tag: aws_product
+                value: s3
+                values: null
+              granularity: daily
+              method: even
+            type: shared
+            updated: '2025-09-03T21:00:49Z'
+            version: 1
+          id: '311'
+          type: arbitrary_rule
+        - attributes:
+            costs_to_allocate:
+            - condition: is
+              tag: servicename
+              value: s3
+              values: null
+            created: '2025-03-21T20:42:40Z'
+            enabled: false
+            last_modified_user_uuid: user-example-uuid-3
+            order_id: 3
+            processing_status: done
+            provider:
+            - aws
+            rule_name: test-s3-timeseries
+            strategy:
+              granularity: daily
+              method: proportional_timeseries
+            type: shared
+            updated: '2025-09-02T21:16:50Z'
+            version: 1
+          id: '289'
+          type: arbitrary_rule
+        - attributes:
+            costs_to_allocate:
+            - condition: '='
+              tag: aws_product
+              value: msk
+              values: null
+            - condition: is
+              tag: product
+              value: 'null'
+              values: null
+            created: '2025-08-27T14:39:31Z'
+            enabled: true
+            last_modified_user_uuid: user-example-uuid-4
+            order_id: 4
+            processing_status: done
+            provider:
+            - aws
+            rule_name: azure-unallocated-by-product-2
+            strategy:
+              allocated_by_tag_keys:
+              - aws_product
+              based_on_costs:
+              - condition: '='
+                tag: aws_product
+                value: msk
+                values: null
+              - condition: is not
+                tag: product
+                value: 'null'
+                values: null
+              granularity: daily
+              method: proportional
+            type: shared
+            updated: '2025-09-02T21:28:32Z'
+            version: 1
+          id: '523'
+          type: arbitrary_rule
       properties:
         data:
           description: The `ArbitraryRuleResponseArray` `data`.
           items:
             $ref: '#/components/schemas/ArbitraryRuleResponseData'
           type: array
+        meta:
+          $ref: '#/components/schemas/ArbitraryRuleResponseArrayMeta'
       required:
       - data
+      type: object
+    ArbitraryRuleResponseArrayMeta:
+      description: The `ArbitraryRuleResponseArray` `meta`.
+      properties:
+        total_count:
+          description: The `meta` `total_count`.
+          format: int64
+          type: integer
       type: object
     ArbitraryRuleResponseData:
       description: The definition of `ArbitraryRuleResponseData` object.
@@ -4374,6 +4504,10 @@ components:
           example: 0
           format: int64
           type: integer
+        processing_status:
+          description: The `attributes` `processing_status`.
+          example: ''
+          type: string
         provider:
           description: The `attributes` `provider`.
           example:
@@ -38984,6 +39118,14 @@ components:
       - ARBITRARY_RULE
     ReorderRulesetResourceArray:
       description: The definition of `ReorderRulesetResourceArray` object.
+      example:
+        data:
+        - id: 55ef2385-9ae1-4410-90c4-5ac1b60fec10
+          type: ruleset
+        - id: a7b8c9d0-1234-5678-9abc-def012345678
+          type: ruleset
+        - id: f1e2d3c4-b5a6-9780-1234-567890abcdef
+          type: ruleset
       properties:
         data:
           description: The `ReorderRulesetResourceArray` `data`.
@@ -40421,6 +40563,82 @@ components:
       type: object
     RulesetRespArray:
       description: The definition of `RulesetRespArray` object.
+      example:
+        data:
+        - attributes:
+            created: null
+            enabled: true
+            last_modified_user_uuid: ''
+            modified: null
+            name: Production Cost Allocation Rules
+            position: 0
+            rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: AWS Production Account Tagging
+              query:
+                addition:
+                  key: environment
+                  value: production
+                case_insensitivity: false
+                if_not_exists: true
+                query: billingcurrency:"USD" AND account_name:"prod-account"
+              reference_table: null
+            - enabled: true
+              mapping:
+                destination_key: team_owner
+                if_not_exists: true
+                source_keys:
+                - account_name
+                - service
+              metadata: null
+              name: Team Mapping Rule
+              query: null
+              reference_table: null
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: New table rule with new UI
+              query: null
+              reference_table:
+                case_insensitivity: true
+                field_pairs:
+                - input_column: status_type
+                  output_key: status
+                - input_column: status_description
+                  output_key: dess
+                if_not_exists: false
+                source_keys:
+                - http_status
+                - status_description
+                table_name: http_status_codes
+            version: 2
+          id: 55ef2385-9ae1-4410-90c4-5ac1b60fec10
+          type: ruleset
+        - attributes:
+            created: null
+            enabled: true
+            last_modified_user_uuid: ''
+            modified: null
+            name: Development Environment Rules
+            position: 0
+            rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: Dev Account Cost Center
+              query:
+                addition:
+                  key: cost_center
+                  value: engineering
+                case_insensitivity: true
+                if_not_exists: true
+                query: account_name:"dev-*"
+              reference_table: null
+            version: 1
+          id: a7b8c9d0-1234-5678-9abc-def012345678
+          type: ruleset
       properties:
         data:
           description: The `RulesetRespArray` `data`.
@@ -40468,6 +40686,10 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        processing_status:
+          description: The `attributes` `processing_status`.
+          example: ''
+          type: string
         rules:
           description: The `attributes` `rules`.
           items:
@@ -50670,7 +50892,20 @@ components:
           attributes:
             enabled: true
             last_version: 1
+            name: Updated Ruleset
             rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: Add Cost Center Tag
+              query:
+                addition:
+                  key: cost_center
+                  value: engineering
+                case_insensitivity: false
+                if_not_exists: true
+                query: account_id:"123456789" AND service:"web-api"
+              reference_table: null
             - enabled: true
               mapping:
                 destination_key: team_owner
@@ -50682,6 +50917,23 @@ components:
               name: Account Name Mapping
               query: null
               reference_table: null
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: New table rule with new UI
+              query: null
+              reference_table:
+                case_insensitivity: true
+                field_pairs:
+                - input_column: status_type
+                  output_key: status
+                - input_column: status_description
+                  output_key: dess
+                if_not_exists: false
+                source_keys:
+                - http_status
+                - status_description
+                table_name: http_status_codes
           type: update_ruleset
       properties:
         data:
@@ -57745,9 +57997,9 @@ paths:
         type: safe
   /api/v2/cost/arbitrary_rule:
     get:
-      description: List all arbitrary cost rules - Retrieve a list of all arbitrary
-        cost rules for the organization
-      operationId: ListArbitraryCostRules
+      description: List all custom allocation rules - Retrieve a list of all custom
+        allocation rules for the organization
+      operationId: ListCustomAllocationRules
       responses:
         '200':
           content:
@@ -57762,15 +58014,15 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: List arbitrary cost rules
+      summary: List custom allocation rules
       tags:
       - Cloud Cost Management
       x-menu-order: 23
       x-undo:
         type: safe
     post:
-      description: 'Create a new arbitrary cost rule with the specified filters and
-        allocation strategy.
+      description: 'Create a new custom allocation rule with the specified filters
+        and allocation strategy.
 
 
         **Strategy Methods:**
@@ -57798,7 +58050,7 @@ paths:
 
         **Supported operators**: is, is not, is all values, is untagged, contains,
         does not contain, in, not in, =, !=, like, not like'
-      operationId: CreateArbitraryCostRule
+      operationId: CreateCustomAllocationRule
       requestBody:
         content:
           application/json:
@@ -57819,7 +58071,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Create arbitrary cost rule
+      summary: Create custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 24
@@ -57827,15 +58079,15 @@ paths:
         type: idempotent
   /api/v2/cost/arbitrary_rule/reorder:
     post:
-      description: "Reorder arbitrary cost rules - Change the execution order of arbitrary
-        cost rules.\n\n**Important**: You must provide the **complete list** of all
-        rule IDs in the desired execution order. The API will reorder ALL rules according
-        to the provided sequence.\n\nRules are executed in the order specified, with
-        lower indices (earlier in the array) having higher priority.\n\n**Example**:
+      description: "Reorder custom allocation rules - Change the execution order of
+        custom allocation rules.\n\n**Important**: You must provide the **complete
+        list** of all rule IDs in the desired execution order. The API will reorder
+        ALL rules according to the provided sequence.\n\nRules are executed in the
+        order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**:
         If you have rules with IDs [123, 456, 789] and want to change order from 123\u2192456\u2192789
         to 456\u2192123\u2192789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\":
         \"789\"}]"
-      operationId: ReorderArbitraryCostRules
+      operationId: ReorderCustomAllocationRules
       requestBody:
         content:
           application/json:
@@ -57852,7 +58104,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Reorder arbitrary cost rules
+      summary: Reorder custom allocation rules
       tags:
       - Cloud Cost Management
       x-menu-order: 28
@@ -57860,11 +58112,11 @@ paths:
         type: idempotent
   /api/v2/cost/arbitrary_rule/{rule_id}:
     delete:
-      description: Delete an arbitrary cost rule - Delete an existing arbitrary cost
+      description: Delete a custom allocation rule - Delete an existing custom allocation
         rule by its ID
-      operationId: DeleteArbitraryCostRule
+      operationId: DeleteCustomAllocationRule
       parameters:
-      - description: The unique identifier of the arbitrary cost rule
+      - description: The unique identifier of the custom allocation rule
         in: path
         name: rule_id
         required: true
@@ -57881,18 +58133,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Delete arbitrary cost rule
+      summary: Delete custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 26
       x-undo:
         type: idempotent
     get:
-      description: Get a specific arbitrary cost rule - Retrieve a specific arbitrary
-        cost rule by its ID
-      operationId: GetArbitraryCostRule
+      description: Get a specific custom allocation rule - Retrieve a specific custom
+        allocation rule by its ID
+      operationId: GetCustomAllocationRule
       parameters:
-      - description: The unique identifier of the arbitrary cost rule
+      - description: The unique identifier of the custom allocation rule
         in: path
         name: rule_id
         required: true
@@ -57913,15 +58165,15 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: Get arbitrary cost rule
+      summary: Get custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 27
       x-undo:
         type: safe
     patch:
-      description: 'Update an existing arbitrary cost rule with new filters and allocation
-        strategy.
+      description: 'Update an existing custom allocation rule with new filters and
+        allocation strategy.
 
 
         **Strategy Methods:**
@@ -57951,9 +58203,9 @@ paths:
 
         **Supported operators**: is, is not, is all values, is untagged, contains,
         does not contain, in, not in, =, !=, like, not like'
-      operationId: UpdateArbitraryCostRule
+      operationId: UpdateCustomAllocationRule
       parameters:
-      - description: The unique identifier of the arbitrary cost rule
+      - description: The unique identifier of the custom allocation rule
         in: path
         name: rule_id
         required: true
@@ -57980,7 +58232,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Update arbitrary cost rule
+      summary: Update custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 25
@@ -79403,7 +79655,7 @@ paths:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline
         rulesets for the organization
-      operationId: ListRulesets
+      operationId: ListTagPipelinesRulesets
       responses:
         '200':
           content:
@@ -79418,7 +79670,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: List rulesets
+      summary: List tag pipeline rulesets
       tags:
       - Cloud Cost Management
       x-menu-order: 16
@@ -79427,7 +79679,7 @@ paths:
     post:
       description: Create a new tag pipeline ruleset with the specified rules and
         configuration
-      operationId: CreateRuleset
+      operationId: CreateTagPipelinesRuleset
       requestBody:
         content:
           application/json:
@@ -79448,7 +79700,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Create ruleset
+      summary: Create tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 17
@@ -79458,7 +79710,7 @@ paths:
     post:
       description: Reorder tag pipeline rulesets - Change the execution order of tag
         pipeline rulesets
-      operationId: ReorderRulesets
+      operationId: ReorderTagPipelinesRulesets
       requestBody:
         content:
           application/json:
@@ -79475,7 +79727,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Reorder rulesets
+      summary: Reorder tag pipeline rulesets
       tags:
       - Cloud Cost Management
       x-menu-order: 21
@@ -79516,7 +79768,7 @@ paths:
     delete:
       description: Delete a tag pipeline ruleset - Delete an existing tag pipeline
         ruleset by its ID
-      operationId: DeleteRuleset
+      operationId: DeleteTagPipelinesRuleset
       parameters:
       - description: The unique identifier of the ruleset
         in: path
@@ -79534,7 +79786,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Delete ruleset
+      summary: Delete tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 19
@@ -79543,7 +79795,7 @@ paths:
     get:
       description: Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline
         ruleset by its ID
-      operationId: GetRuleset
+      operationId: GetTagPipelinesRuleset
       parameters:
       - description: The unique identifier of the ruleset
         in: path
@@ -79574,7 +79826,7 @@ paths:
     patch:
       description: Update a tag pipeline ruleset - Update an existing tag pipeline
         ruleset with new rules and configuration
-      operationId: UpdateRuleset
+      operationId: UpdateTagPipelinesRuleset
       parameters:
       - description: The unique identifier of the ruleset
         in: path
@@ -79602,7 +79854,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Update ruleset
+      summary: Update tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 18

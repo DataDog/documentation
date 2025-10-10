@@ -371,18 +371,18 @@
       "description": "Create Google Cloud Usage Cost config returns \"OK\" response"
     }
   ],
-  "CreateArbitraryCostRule": [
+  "CreateCustomAllocationRule": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create arbitrary cost rule returns \"OK\" response"
+      "description": "Create custom allocation rule returns \"OK\" response"
     }
   ],
-  "CreateRuleset": [
+  "CreateTagPipelinesRuleset": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create ruleset returns \"OK\" response"
+      "description": "Create tag pipeline ruleset returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -406,18 +406,18 @@
       "description": "Update Google Cloud Usage Cost config returns \"OK\" response"
     }
   ],
-  "UpdateArbitraryCostRule": [
+  "UpdateCustomAllocationRule": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update arbitrary cost rule returns \"OK\" response"
+      "description": "Update custom allocation rule returns \"OK\" response"
     }
   ],
-  "UpdateRuleset": [
+  "UpdateTagPipelinesRuleset": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update ruleset returns \"OK\" response"
+      "description": "Update tag pipeline ruleset returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [

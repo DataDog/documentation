@@ -27,7 +27,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 
 ## Prerequisites
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([in Preview][9]).  
-- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** page][4].  
+- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** Settings page][4].  
 
 ## Set up pull request comments
 Follow the steps below based on your source code management provider.
@@ -36,7 +36,7 @@ Follow the steps below based on your source code management provider.
 {{% tab "GitHub" %}}
 
 <div class="alert alert-info">If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis (SAST)) after completing the GitHub setup steps.
-If you are using <a href="/security/code_security/static_analysis/github_actions/">GitHub Actions</a> to run your scans, trigger the action on `push` for comments to appear once the GitHub setup is complete.</div>
+If you are using <a href="/security/code_security/static_analysis/github_actions/">GitHub Actions</a> to run your scans, trigger the action on <code>push</code> for comments to appear once the GitHub setup is complete.</div>
 
 ### Connect your GitHub account(s) to Datadog
 For setup instructions, read the [Datadog GitHub source code integration][2] documentation.
@@ -115,7 +115,7 @@ When configuring PR comments, you can:
     - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
 1. Click **Save**.
 
-## Configure PR Comments at the repository level
+## Configure PR comments at the repository level
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
 1. In **Repository Settings**, select a repository from the list.
