@@ -13,14 +13,20 @@ further_reading:
   text: "Manage log retention and indexing"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
+Archive Search is in Preview. Request access to search archived logs in real time. No re-indexing, no delays. Instantly access years of data when you need it.
+{{< /callout >}}
+
 ## Overview
 
-Archive Search lets you query logs directly from long-term object storage archives, without indexing them in advance. Use Archive Search for **ad hoc access to archived logs**—for investigations, audits, or troubleshooting beyond your indexing retention period.
+Archive Search lets you query logs directly from long-term object storage archives, without indexing them in advance. Use Archive Search for **immediate access to archived logs**, for investigations, audits, or troubleshooting beyond your indexing retention period.
+
+Archive Search differs from Rehydration by streaming results in real time as data is scanned, rather than running as a background batch job. It's more cost-effective, charging only for the scan itself with the first 100,000 logs retained temporarily at no cost, and faster, especially when querying by a preferred attribute.
 
 When you launch a search:
 
 * Logs stream into a dedicated results page.
-* Up to **100,000 logs** are retained at no cost for **24 hours**.
+* Up to **100,000 logs** are retained for **24 hours**.
 * You can optionally **index results** before or after the search to keep them longer and make them available throughout Datadog.
 
 This feature supports logs archived through:
@@ -52,6 +58,8 @@ Before using Archive Search:
    * **Azure Storage:** Azure AD with *Storage Blob Data Contributor* role
    * **Google Cloud Storage:** Service account with *Storage Object Viewer* role
 
+<!-- TODO Who can access search results, who can conduct search. RBAC? Permissions? -->
+
 ## Launching a search
 
 1. Go to [**Logs > Archive Search > New Search**][4].
@@ -73,8 +81,7 @@ Use this preview to verify query syntax, inspect log structure, and adjust filte
 ## View and retain results
 
 By default:
-
-- Up to **100,000 logs** are stored for **24 hours** at no cost.
+- Charges only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly in Archive Search results pages.
 - Logs remain visible only in the **Archive Search Results** page.
 - After 24 hours, results expire automatically.
 
@@ -85,13 +92,18 @@ To retain more data or access logs in other Datadog products, choose one of the 
 - **Index after completion**:
   During the 24-hour window, you can index results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
 
+<!-- ## Analyze results -->
+
+<!-- Add more information on what you can do with search results -->
+
 ## Manage searches
 
-From the **Archive Search list view**, you can:
+<!-- {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}} -->
+
+From the [**Archive Search list view**][5], you can:
 
 - **Stop** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
-
 
 ## Search performance and scan volume
 
@@ -101,7 +113,6 @@ To improve query performance and reduce scan volume:
 - Narrow the time range and use selective filters.
 - Define a **preferred indexed attribute** at the archive level to target specific data efficiently.
 - Administrators with **Logs Write Archives** permission can set maximum log limits and available retention durations.
-
 
 ## Cloud-specific permissions
 
@@ -170,3 +181,4 @@ In order to search log events from your archives, Datadog uses a service account
 [2]: https://docs.datadoghq.com/observability_pipelines/destinations/amazon_s3/?tab=docker
 [3]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3&site=us
 [4]: https://app.datadoghq.com/logs/archive-search/new
+[5]: https://app.datadoghq.com/logs/archive-search/
