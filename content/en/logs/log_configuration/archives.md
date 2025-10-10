@@ -26,7 +26,7 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
-Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
+Navigate to the [**Log Archiving & Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
 2. Create a [storage bucket](#create-a-storage-bucket).
