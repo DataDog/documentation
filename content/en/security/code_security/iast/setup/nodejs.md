@@ -104,7 +104,7 @@ If you need additional assistance, contact [Datadog support][6].
 
 ## Bundling with esbuild
 
-`dd-trace` provides esbuild support in the form of an esbuild plugin. Starting from `dd-trace@5.69.0`, this plugin also provides support for IAST product on CommonJS bundled applications.
+`dd-trace` provides an esbuild plugin. Starting in `dd-trace@5.69.0`, the plugin also supports IAST for CommonJS bundled applications.
 
 Here's an example of how one might use dd-trace with esbuild:
 
@@ -137,14 +137,12 @@ To enable IAST when running the bundler, set the `DD_IAST_ENABLED` environment v
 DD_IAST_ENABLED=true node esbuild/esbuilder.js
 ```
 
-Because the tracer uses native modules, these must be included in the `external` list. Native modules used by `dd-trace` are provided in packages prefixed with `@datadog`. You must also distribute a `node_modules` directory alongside the bundled application.
+Because the tracer uses native modules, you must list them in `external` and ship a `node_modules` directory alongside the bundled app. Native modules used by `dd-trace` are published under the `@datadog/*` scope.
 
-To generate a minimal `node_modules` directory containing only the required native modules and their dependencies:
+To generate a minimal `node_modules` directory that contains only the required native modules and their dependencies:
 
 1. Determine the required package versions.
-
-2. Create a temporary directory for installation.
-
+2. Install them into a temporary directory.
 3. Copy the resulting `node_modules` directory to the application's output directory.
 
 ```sh
@@ -160,11 +158,10 @@ cp -R ./node_modules path/to/bundle
 
 ### Unsupported IAST features
 
-IAST support for bundled applications has some limitations, which are listed below:
+IAST support for bundled applications has the following limitations:
 
-- Hardcoded password and Hardcoded secrets vulnerabilities are not going to be detected
-
-- Security Controls feature is not supported
+- Detection of hardcoded passwords and hardcoded secrets is not supported.
+- Security Controls is not supported.
 
 
 ## Further Reading
