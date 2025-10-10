@@ -23,7 +23,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Test configuration
 
-1. Choose your request type (TCP, UDP, or ICMP) and specify the URL to query. Port information is optional.  
+1. Choose your **request type** (TCP, UDP, or ICMP) and specify the URL to query. Port information is optional.  
 2. Name your test.  
 3. Optional: Configure advanced options:  
    1. **Source service**: The label displayed for the source host in the Network Path visualization.  
@@ -36,9 +36,10 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
   {{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
 
-5. Define assertions to determine the expected results for your test. At least one assertion is required.
+5. Define **assertions** to determine the expected results for your test. At least one assertion is required.
 
-  {{< img src="synthetics/network_tests/network_path_assertions.png" alt="Network Path test creation form with assertions drop down." style="width:80%;">}}
+   {{< img src="synthetics/network_tests/network_path_assertions.png" alt="Network Path test creation form with assertions drop down." style="width:80%;">}}
+
    | Type | Operator 1 | Operator 2 | Value type |
    | :---- | :---- | :---- | :---- |
    | latency | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
@@ -46,15 +47,32 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the locations from which to run your test. Network Path tests can run from managed locations to test from outside your network.
+6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test from outside your network.
 
-  {{% managed-locations %}}
+   {{% managed-locations %}}
 
-7. Set the test frequency to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
+7. Set the **test frequency** to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
 
+## View test results
+
+Click on a Network Path test on the [Synthetic Tests page][1] to view the Test Details page, which displays comprehensive information about your test:
+
+- Test properties and configuration
+- Test history
+- Individual test runs
+- Aggregated Network Path visualizations across all test runs
+
+The Network Path visualization shows the routes packets take to complete queries during each test run. Use the health bar handles to control the time frame for displayed network paths. For more information about how Network Path visualizations are built, see the [Network Path documentation][2].
+
+  {{< img src="synthetics/network_tests/network_path_section.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
+
+To view details for a specific test run, click on a test run in the table at the bottom of the page. A side panel opens displaying run information, Network Path visualization, and assertion results.
+
+  {{< img src="synthetics/network_tests/test_run_side_panel.png" alt="A single test run from a network test, displaying the side panel" style="width:100%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/tests
+[2]: /network_monitoring/network_path/path_view/
