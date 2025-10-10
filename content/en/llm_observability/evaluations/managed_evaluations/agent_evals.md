@@ -89,7 +89,6 @@ triage_agent = Agent(
 
 - If you frequently see irrelevant tool calls, review your tool descriptions—they may be too vague for the LLM to distinguish.
 - Make sure you include descriptions of the tools (i.e. the quotes containing the tool description under the function name, the sdk autoparses this as the description)
-- <<todo>>
 
 ## Tool Argument Correctness
 
@@ -112,7 +111,7 @@ This evaluation is supported in `dd-trace` v3.12+. The example below uses the Op
 ### How to use
 
 1. Install `dd-trace` v3.12+.
-1. Instrument your agent with .... The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
 Enable the ToolArgumentCorrectness evaluation in the Datadog UI by [creating a new evaluation][1] or [editing an existing evaluation][2].
 
