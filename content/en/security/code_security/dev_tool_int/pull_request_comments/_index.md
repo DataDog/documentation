@@ -36,7 +36,7 @@ Follow the steps below based on your source code management provider.
 {{% tab "GitHub" %}}
 
 <div class="alert alert-info">If you are using Datadog-hosted scanning, enable the toggle for your desired scan type (for example, Static Code Analysis (SAST)) after completing the GitHub setup steps.
-If you are using <a href="/security/code_security/static_analysis/github_actions/">GitHub Actions</a> to run your scans, trigger the action on `push` for comments to appear once the GitHub setup is complete.</div>
+If you are using <a href="/security/code_security/static_analysis/github_actions/">GitHub Actions</a> to run your scans, trigger the action on <code>push</code> for comments to appear once the GitHub setup is complete.</div>
 
 ### Connect your GitHub account(s) to Datadog
 For setup instructions, read the [Datadog GitHub source code integration][2] documentation.
