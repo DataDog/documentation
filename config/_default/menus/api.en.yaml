@@ -5548,6 +5548,66 @@ menu:
       url: /api/latest/application-security/
       identifier: application-security
       generated: true
+    - name: Update a WAF Policy
+      url: '#update-a-waf-policy'
+      identifier: application-security-update-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafPolicy
+        unstable: []
+        order: 15
+    - name: Get a WAF Policy
+      url: '#get-a-waf-policy'
+      identifier: application-security-get-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafPolicy
+        unstable: []
+        order: 10
+    - name: Delete a WAF Policy
+      url: '#delete-a-waf-policy'
+      identifier: application-security-delete-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafPolicy
+        unstable: []
+        order: 16
+    - name: Create a WAF Policy
+      url: '#create-a-waf-policy'
+      identifier: application-security-create-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafPolicy
+        unstable: []
+        order: 12
+    - name: List all WAF policies
+      url: '#list-all-waf-policies'
+      identifier: application-security-list-all-waf-policies
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWAFPolicies
+        unstable: []
+        order: 13
     - name: Update a WAF exclusion filter
       url: '#update-a-waf-exclusion-filter'
       identifier: application-security-update-a-waf-exclusion-filter
@@ -5619,7 +5679,7 @@ menu:
         operationids:
           - UpdateApplicationSecurityWafCustomRule
         unstable: []
-        order: 15
+        order: 25
     - name: Get a WAF custom rule
       url: '#get-a-waf-custom-rule'
       identifier: application-security-get-a-waf-custom-rule
@@ -5631,7 +5691,7 @@ menu:
         operationids:
           - GetApplicationSecurityWafCustomRule
         unstable: []
-        order: 10
+        order: 20
     - name: Delete a WAF Custom Rule
       url: '#delete-a-waf-custom-rule'
       identifier: application-security-delete-a-waf-custom-rule
@@ -5643,7 +5703,7 @@ menu:
         operationids:
           - DeleteApplicationSecurityWafCustomRule
         unstable: []
-        order: 16
+        order: 26
     - name: Create a WAF custom rule
       url: '#create-a-waf-custom-rule'
       identifier: application-security-create-a-waf-custom-rule
@@ -5655,7 +5715,7 @@ menu:
         operationids:
           - CreateApplicationSecurityWafCustomRule
         unstable: []
-        order: 12
+        order: 22
     - name: List all WAF custom rules
       url: '#list-all-waf-custom-rules'
       identifier: application-security-list-all-waf-custom-rules
@@ -5667,7 +5727,7 @@ menu:
         operationids:
           - ListApplicationSecurityWAFCustomRules
         unstable: []
-        order: 13
+        order: 23
     - name: Audit
       url: /api/latest/audit/
       identifier: audit
