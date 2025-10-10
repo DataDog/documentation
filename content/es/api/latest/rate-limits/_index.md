@@ -1,6 +1,6 @@
 ---
 title: Límites de tasa
-type: documentación
+type: api
 ---
 
 {{< h2 >}}Límites de tasa{{< /h2 >}}

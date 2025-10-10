@@ -1,7 +1,7 @@
 ---
 disable_sidebar: true
 title: Contextos de autorización
-type: documentación
+type: api
 ---
 ## Contextos de autorización para clientes OAuth
 
