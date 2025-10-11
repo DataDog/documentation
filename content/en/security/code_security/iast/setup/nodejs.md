@@ -131,7 +131,7 @@ esbuild.build({
 })
 ```
 
-To enable IAST when running the bundler, set the `DD_IAST_ENABLED` environment variable to `true`:
+To enable IAST during bundling, set the `DD_IAST_ENABLED` environment variable:
 
 ```sh
 DD_IAST_ENABLED=true node esbuild/esbuilder.js
