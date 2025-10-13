@@ -54,7 +54,7 @@
 "manifest_version": "2.0.0"
 "name": "snmp"
 "public_title": "SNMP"
-"short_description": "Recopila métricas de SNMP de tus dispositivos de red".
+"short_description": "Recopila métricas de SNMP de tus dispositivos de red."
 "supported_os":
 - "linux"
 - "windows"
@@ -63,13 +63,13 @@
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Category::Red"
-  - "Category::Notificaciones"
+  - "Category::Notifications"
   - "Category::SNMP"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
+  - "Offering::Integration"
+  "configuration": "README.md#Setup"
   "description": "Recopila métricas de SNMP de tus dispositivos de red".
   "media": []
   "overview": "README.md#Información general"
