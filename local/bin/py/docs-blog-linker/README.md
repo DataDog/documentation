@@ -16,8 +16,9 @@ Automatically adds Datadog blog post links to the `further_reading` section of r
 
 3. **Run the script:**
    ```bash
-   python rss_blog_to_docs.py --repo /path/to/documentation --since 7
+   python rss_blog_to_docs.py --repo /path/to/documentation
    ```
+   (Processes blog posts from the last 14 days by default)
 
 ## Documentation
 
@@ -28,12 +29,11 @@ For detailed usage instructions, command-line options, and troubleshooting, see 
 - Fetches blog posts from the Datadog RSS feed
 - Extracts documentation URLs from blog post content
 - Updates the `further_reading` section of relevant markdown files, preserving existing YAML frontmatter formatting
-- Creates Git branch and pull request for changes
+- Creates Git branch and commits changes locally (you manually push and create PR)
 
 ## Requirements
 
 - Python 3.8+
-- GitHub token with repository permissions
 - Access to the documentation repository
 
 ## License

@@ -26,21 +26,12 @@ yaml_rt.indent(mapping=2, sequence=4, offset=2)
 
 BLOG_RSS = "https://www.datadoghq.com/blog/index.xml"
 DOCS_HOST = "docs.datadoghq.com"
-STATE_FILE = ".rss_state.json"
-GITHUB_API_BASE = os.getenv("GITHUB_API_BASE", "https://api.github.com")
 
 # Exclude list - documents that should not be modified
-def load_excluded_docs() -> dict:
-    """Load excluded docs from JSON file"""
-    excluded_file = Path(__file__).parent / "excluded_docs.json"
-    if excluded_file.exists():
-        try:
-            data = json.loads(excluded_file.read_text())
-            return data.get("excluded_docs", {})
-        except Exception as e:
-            print(f"Warning: Could not load excluded_docs.json: {e}")
-            return {}
-    return {}
+# Maps docs URLs to their file paths (either can be used for exclusion)
+EXCLUDED_DOCS = {
+    "https://docs.datadoghq.com/security/default_rules/": "content/en/security/default_rules/_index.md"
+}
 
 
 # ----------------------------
@@ -52,21 +43,6 @@ def run(cmd: list[str], cwd: Path | None = None) -> str:
     if p.returncode != 0:
         raise RuntimeError(f"Command failed: {' '.join(cmd)}\n{p.stdout}\n{p.stderr}")
     return p.stdout.strip()
-
-
-# ----------------------------
-# State
-# ----------------------------
-
-def load_state() -> dict:
-    p = Path(STATE_FILE)
-    if p.exists():
-        return json.loads(p.read_text())
-    return {"processed": []}
-
-
-def save_state(state: dict) -> None:
-    Path(STATE_FILE).write_text(json.dumps(state, indent=2))
 
 
 # ----------------------------
@@ -190,12 +166,129 @@ def ensure_title_first(meta: CommentedMap) -> None:
         meta.insert(0, "title", val)
 
 
+def link_already_exists_in_further_reading(further_reading: list, blog_url: str) -> bool:
+    """Check if the blog URL already exists in the further_reading list."""
+    normalized_url = blog_url.rstrip("/")
+    existing_links = set()
+    for item in further_reading:
+        if isinstance(item, dict):
+            link = (item.get("link") or "").rstrip("/")
+            if link:
+                existing_links.add(link)
+    return normalized_url in existing_links
+
+
+def find_further_reading_section(lines: list[str]) -> tuple[int | None, int | None]:
+    """
+    Find the line range of the further_reading section in YAML.
+    Returns (start_line, end_line) or (None, None) if not found.
+    """
+    for i, line in enumerate(lines):
+        if line.strip().startswith('further_reading:'):
+            start = i
+            # Find where this section ends
+            end = None
+            for j in range(i + 1, len(lines)):
+                if lines[j].strip() and not lines[j].startswith(' '):
+                    end = j
+                    break
+            if end is None:
+                end = len(lines)
+            return (start, end)
+    return (None, None)
+
+
+def detect_indentation_patterns(lines: list[str], section_start: int, section_end: int) -> tuple[int, int | None]:
+    """
+    Detect indentation patterns from existing further_reading items.
+    Returns (list_indent_level, sub_item_indent_level).
+    """
+    list_item_indents = []
+    sub_item_indents = []
+    
+    for i in range(section_start + 1, section_end):
+        line = lines[i]
+        if not line.strip():
+            continue
+        
+        indent = len(line) - len(line.lstrip())
+        if line.strip().startswith('- '):
+            list_item_indents.append(indent)
+        elif indent > 0:
+            sub_item_indents.append(indent)
+    
+    # Determine list item indentation
+    if list_item_indents and len(set(list_item_indents)) == 1:
+        list_indent = list_item_indents[0]
+    else:
+        list_indent = 0  # Default to no indentation
+    
+    # Determine sub-item indentation
+    sub_indent = min(sub_item_indents) if sub_item_indents else None
+    
+    return (list_indent, sub_indent)
+
+
+def format_new_further_reading_item(blog_url: str, blog_title: str | None, list_indent: int, sub_indent: int | None) -> list[str]:
+    """
+    Format a new further_reading item with proper indentation.
+    Returns list of formatted lines.
+    """
+    list_prefix = ' ' * list_indent + '- link: '
+    # Calculate sub-item indent to align with the "l" in "link"
+    if sub_indent is None:
+        sub_indent = len(list_prefix) - len('link: ')
+    
+    return [
+        list_prefix + blog_url,
+        ' ' * sub_indent + 'tag: Blog',
+        ' ' * sub_indent + 'text: ' + (blog_title or "Related blog post")
+    ]
+
+
+def create_new_further_reading_section(yaml_text: str, blog_url: str, blog_title: str | None) -> str:
+    """Create a new further_reading section when one doesn't exist."""
+    title = blog_title or "Related blog post"
+    new_section = f'\n\nfurther_reading:\n  - link: {blog_url}\n    tag: Blog\n    text: {title}\n'
+    
+    if yaml_text.strip():
+        return yaml_text.rstrip() + new_section
+    else:
+        return 'further_reading:\n  - link: ' + blog_url + '\n    tag: Blog\n    text: ' + title + '\n'
+
+
+def insert_item_into_further_reading(lines: list[str], section_start: int, section_end: int, 
+                                     blog_url: str, blog_title: str | None) -> str:
+    """Insert a new item into an existing further_reading section."""
+    list_indent, sub_indent = detect_indentation_patterns(lines, section_start, section_end)
+    
+    # Use defaults if needed
+    if list_indent is None:
+        list_indent = 2
+    if sub_indent is None:
+        sub_indent = list_indent + 2
+    
+    # Find the last line of the further_reading list
+    last_item_line = section_end - 1
+    for i in range(section_end - 1, section_start, -1):
+        if lines[i].strip() and lines[i].startswith(' ' * list_indent):
+            last_item_line = i
+            break
+    
+    # Format and insert the new item
+    new_item_lines = format_new_further_reading_item(blog_url, blog_title, list_indent, sub_indent)
+    updated_lines = lines[:last_item_line + 1] + new_item_lines + lines[last_item_line + 1:]
+    
+    return '\n'.join(updated_lines)
+
+
 def safe_update_further_reading(md_file: Path, blog_url: str, blog_title: str | None) -> tuple[bool, str]:
     """
     Edit YAML frontmatter surgically, preserving exact original formatting.
     Only modifies the 'further_reading' section by appending to existing list.
     Returns (updated_bool, status_str).
     """
+    # Parse the file
     delim, yaml_text, body = split_frontmatter(md_file)
     if delim != "---":
         return (False, "skipped:non-yaml-frontmatter")
@@ -205,118 +298,27 @@ def safe_update_further_reading(md_file: Path, blog_url: str, blog_title: str | 
     except Exception as e:
         return (False, f"skipped:yaml-parse-error:{e}")
 
-    fr = meta.get("further_reading")
-    if fr is None:
-        fr = []
-    elif not isinstance(fr, list):
+    # Get further_reading list
+    further_reading = meta.get("further_reading", [])
+    if not isinstance(further_reading, list):
         return (False, "skipped:unexpected-further_reading-type")
 
-    norm = blog_url.rstrip("/")
-    existing = set()
-    for item in fr:
-        if isinstance(item, dict):
-            link = (item.get("link") or "").rstrip("/")
-            if link:
-                existing.add(link)
-
-    if norm in existing:
-        # No changes needed, return without modifying the file
+    # Check if link already exists
+    if link_already_exists_in_further_reading(further_reading, blog_url):
         return (False, "noop:already-present")
 
-    # Instead of re-dumping the entire YAML, surgically append to the further_reading section
-    # Find the further_reading section in the original YAML text and append to it
-    new_item = {
-        "link": blog_url,
-        "tag": "Blog", 
-        "text": blog_title or "Related blog post",
-    }
-    
-    # Parse the YAML to find the further_reading section position
+    # Update the YAML text surgically
     lines = yaml_text.split('\n')
-    fr_start = None
-    fr_end = None
-    indent_level = None
-    sub_indent_level = None
+    section_start, section_end = find_further_reading_section(lines)
     
-    for i, line in enumerate(lines):
-        stripped = line.strip()
-        if stripped.startswith('further_reading:'):
-            fr_start = i
-            # Find the indentation level by looking at ALL existing items
-            # This ensures we match the existing pattern, even if it's no indentation
-            list_item_indents = []
-            sub_item_indents = []
-            
-            for j in range(i + 1, len(lines)):
-                next_line = lines[j]
-                if next_line.strip() and not next_line.startswith(' '):
-                    # Found next top-level key
-                    fr_end = j
-                    break
-                elif next_line.strip():
-                    # Found a line (could be indented or not)
-                    current_indent = len(next_line) - len(next_line.lstrip())
-                    if next_line.strip().startswith('- '):
-                        # This is a list item
-                        list_item_indents.append(current_indent)
-                    elif current_indent > 0:  # Only count sub-items that are actually indented
-                        # This is a sub-item (like "tag:" or "text:")
-                        sub_item_indents.append(current_indent)
-            
-            # Use the most common indentation pattern, or 0 if no indentation is used
-            if list_item_indents:
-                # If all items have the same indentation, use that; otherwise use 0
-                if len(set(list_item_indents)) == 1:
-                    indent_level = list_item_indents[0]
-                else:
-                    # Mixed indentation - use 0 (no indentation) as it's more common
-                    indent_level = 0
-            else:
-                # No existing items, use 0 (no indentation)
-                indent_level = 0
-                
-            if sub_item_indents:
-                sub_indent_level = min(sub_item_indents)  # Use the smallest sub-indentation
-            
-            if fr_end is None:
-                fr_end = len(lines)
-            break
-    
-    if fr_start is None:
-        # No further_reading section found, add it at the end
-        if yaml_text.strip():
-            new_yaml = yaml_text.rstrip() + '\n\nfurther_reading:\n  - link: ' + blog_url + '\n    tag: Blog\n    text: ' + (blog_title or "Related blog post") + '\n'
-        else:
-            new_yaml = 'further_reading:\n  - link: ' + blog_url + '\n    tag: Blog\n    text: ' + (blog_title or "Related blog post") + '\n'
+    if section_start is None:
+        # Create new further_reading section
+        new_yaml = create_new_further_reading_section(yaml_text, blog_url, blog_title)
     else:
-        # Insert new item at the end of the further_reading list
-        if indent_level is None:
-            indent_level = 2  # Default indentation
-        if sub_indent_level is None:
-            sub_indent_level = indent_level + 2  # Default sub-indentation
-        
-        # Find the last item in the further_reading list
-        last_item_line = fr_end - 1
-        for i in range(fr_end - 1, fr_start, -1):
-            if lines[i].strip() and lines[i].startswith(' ' * indent_level):
-                last_item_line = i
-                break
-        
-        # Insert the new item after the last item with matching indentation
-        # Calculate proper alignment: sub-items should align with the "l" in "link"
-        list_item_prefix = ' ' * indent_level + '- link: '
-        sub_item_indent = len(list_item_prefix) - len('link: ')  # Align with the "l" in "link"
-        
-        new_item_lines = [
-            list_item_prefix + blog_url,
-            ' ' * sub_item_indent + 'tag: Blog',
-            ' ' * sub_item_indent + 'text: ' + (blog_title or "Related blog post")
-        ]
-        
-        # Reconstruct the YAML
-        new_lines = lines[:last_item_line + 1] + new_item_lines + lines[last_item_line + 1:]
-        new_yaml = '\n'.join(new_lines)
+        # Insert into existing section
+        new_yaml = insert_item_into_further_reading(lines, section_start, section_end, blog_url, blog_title)
     
+    # Write the updated file
     new_text = f"---\n{new_yaml}\n---\n{body}"
     md_file.write_text(new_text, encoding="utf-8")
     return (True, "updated")
@@ -342,53 +344,6 @@ def docs_path(repo_root: Path, docs_url: str) -> Path | None:
     return None
 
 
-def get_origin_repo_slug(repo_root: Path) -> tuple[str, str]:
-    """
-    Returns (host, owner/repo) from the 'origin' remote.
-    """
-    url = run(["git", "remote", "get-url", "origin"], cwd=repo_root).rstrip(".git")
-    host = "github.com"
-    owner_repo = ""
-    if url.startswith("git@"):
-        host = url.split("@", 1)[1].split(":", 1)[0]
-        owner_repo = url.split(":", 1)[1]
-    elif url.startswith("https://") or url.startswith("http://"):
-        parts = url.split("/")
-        host = parts[2]
-        owner_repo = "/".join(parts[3:])
-    return host, owner_repo
-
-
-def create_or_get_github_pr(repo_root: Path, branch: str, title: str, body: str, base: str = "master") -> str | None:
-    """
-    Creates a PR from `branch` into `base` on GitHub. Requires ddtool authentication.
-    Returns PR html_url, or None if creation fails.
-    """
-    # ddtool handles authentication, so we don't need a token
-    # Just make the API call and let ddtool handle auth
-    _, owner_repo = get_origin_repo_slug(repo_root)
-    api = GITHUB_API_BASE.rstrip("/")
-    headers = {"Accept": "application/vnd.github+json"}
-
-    # If an open PR for this branch already exists, return it
-    r = requests.get(
-        f"{api}/repos/{owner_repo}/pulls",
-        headers=headers,
-        timeout=30,
-        params={"head": f"{owner_repo.split('/')[0]}:{branch}", "state": "open"},
-    )
-    try:
-        data = r.json()
-    except Exception:
-        data = []
-    if isinstance(data, list) and data:
-        return data[0].get("html_url")
-
-    payload = {"title": title, "head": branch, "base": base, "body": body}
-    r = requests.post(f"{api}/repos/{owner_repo}/pulls", headers=headers, json=payload, timeout=30)
-    if r.status_code in (200, 201):
-        return r.json().get("html_url")
-    return None
 
 
 # ----------------------------
@@ -399,14 +354,13 @@ def update_docs_with_blog_links(
     repo_root: Path,
     blog_url: str,
     doc_urls: list[str],
-    branch: str,                  # <— new param
+    branch: str,
     dry_run: bool = False,
-    local_only: bool = False,
 ) -> dict:
     """
-    For each docs URL: map to repo file, update further_reading, and commit.
+    For each docs URL: map to repo file, update further_reading, and commit locally.
     - dry_run: no edits, no branch.
-    - local_only: create branch, write & commit, but do NOT push or open a PR.
+    Script does NOT push or create PRs - user must manually push and create PR.
     """
     out = {"branch": None, "changes": []}
     title = clean_title(fetch_title(blog_url))
@@ -424,10 +378,9 @@ def update_docs_with_blog_links(
         
         # Check if this document is in the exclude list
         relative_path = str(path.relative_to(repo_root))
-        excluded_docs = load_excluded_docs()
             
-        # Skip docs in the excluded_docs.json file
-        if d in excluded_docs or relative_path in excluded_docs.values():
+        # Skip docs in the EXCLUDED_DOCS list
+        if d in EXCLUDED_DOCS or relative_path in EXCLUDED_DOCS.values():
             out["changes"].append({"doc": d, "status": "skipped:excluded", "file": relative_path})
             continue
             
@@ -447,25 +400,12 @@ def update_docs_with_blog_links(
         out["branch"] = "(no branch created)"
         return out
 
-    # Stage & commit if changes exist (branch already created above)
+    # Stage & commit if changes exist
     if any_updates:
         run(["git", "add", "."], cwd=repo_root)
         commit_msg = f"add '{title}' link(s) to further_reading in relevant docs\n\nSource: {blog_url}" if title else f"add blog link(s) to further_reading in relevant docs\n\nSource: {blog_url}"
         run(["git", "commit", "-m", commit_msg], cwd=repo_root)
-    out["branch"] = branch + (" (local-only)" if local_only else "")
-
-    # Local-only: stop here (no push, no PR)
-    if local_only:
-        return out
-
-    # Push and open PR if changes exist
-    if any_updates:
-        run(["git", "push", "-u", "origin", branch], cwd=repo_root)
-        pr_title = f"Add blog link(s) to further_reading"
-        pr_body = "Automated update from RSS script.\n\nSource: " + blog_url + "\n\n```json\n" + json.dumps(out, indent=2) + "\n```"
-        pr_url = create_or_get_github_pr(repo_root, branch, pr_title, pr_body, base="master")
-        if pr_url:
-            out["pr"] = pr_url
+        out["branch"] = branch
     else:
         out["branch"] = branch + " (no changes)"
 
@@ -569,43 +509,32 @@ def main():
     ap = argparse.ArgumentParser(description="Pull new Datadog blog posts and update docs further_reading.")
     ap.add_argument("--rss", default=BLOG_RSS, help="RSS URL (default: Datadog blog index.xml)")
     ap.add_argument("--repo", required=False, help="Path to local documentation repo (enables editing)")
-    ap.add_argument("--since", type=int, default=None, help="Only process posts published in the last N days")
-    ap.add_argument("--limit", type=int, default=20, help="Max new items to consider")
-    ap.add_argument("--latest", type=int, default=None, help="Process the most recent N items (ignores state/--since)")
+    ap.add_argument("--since", type=int, default=14, help="Only process posts published in the last N days (default: 14)")
+    ap.add_argument("--limit", type=int, default=20, help="Max items to process (default: 20)")
+    ap.add_argument("--latest", type=int, default=None, help="Process the most recent N items (ignores --since)")
     ap.add_argument("--dry-run", action="store_true", help="Do not modify files, do not create a branch")
-    ap.add_argument("--local-only", action="store_true",
-                    help="Make local changes and commit to a new branch, but do NOT push or open a PR")
     args = ap.parse_args()
-
-    state = load_state()
-    processed = set(state.get("processed", []))
 
     feed = feedparser.parse(args.rss)
     entries = feed.entries
     now = time.time()
-    
-    
 
     # Choose entries
     if args.latest:
+        # Process the N most recent items regardless of age
         sorted_entries = sorted(entries, key=lambda x: x.get("published_parsed") or time.gmtime(0), reverse=True)
         new_entries = sorted_entries[: args.latest]
     else:
+        # Process posts from the last N days (default: 14 days)
         new_entries = []
-        
-        # Sort entries by publication date (newest first) to find recent posts
         sorted_entries = sorted(entries, key=lambda x: x.get("published_parsed") or time.gmtime(0), reverse=True)
         
         for e in sorted_entries:
-            guid = e.get("id") or e.get("guid") or e.get("link")
-            if not guid:
+            if not e.get("published_parsed"):
                 continue
-            if guid in processed:
+            age_days = (now - time.mktime(e.published_parsed)) / 86400.0
+            if age_days > args.since:
                 continue
-            if args.since and e.get("published_parsed"):
-                age_days = (now - time.mktime(e.published_parsed)) / 86400.0
-                if age_days > args.since:
-                    continue
             new_entries.append(e)
             if len(new_entries) >= args.limit:
                 break
@@ -627,7 +556,6 @@ def main():
 
     results = []
     for e in sorted(new_entries, key=lambda x: x.get("published_parsed") or time.gmtime(0)):
-        guid = e.get("id") or e.get("guid") or e.get("link")
         blog_url = normalize_url(e.link)
 
         # Extract docs links and canonicalize before mapping
@@ -642,21 +570,32 @@ def main():
                 docs,
                 branch=run_branch, 
                 dry_run=args.dry_run,
-                local_only=args.local_only,
             )
             summary.update(fx)
         else:
             summary.update({"branch": None, "changes": []})
 
         results.append(summary)
-        if not args.latest:
-            processed.add(guid)
-
-    state["processed"] = sorted(processed)
-    save_state(state)
     
-    # Print readable summary instead of JSON
+    # Print readable summary
     print_readable_summary(results)
+    
+    # Print next steps if a branch was created
+    if run_branch and any(r.get("changes") for r in results):
+        any_actual_updates = any(
+            c.get("status") == "updated" 
+            for r in results 
+            for c in r.get("changes", [])
+        )
+        if any_actual_updates:
+            print("\n" + "=" * 50)
+            print("NEXT STEPS")
+            print("=" * 50)
+            print(f"\nBranch created: {run_branch}")
+            print("\nTo push and create a PR:")
+            print(f"  cd {repo_root}")
+            print(f"  git push -u origin {run_branch}")
+            print("  # Then create a PR on GitHub\n")
 
 
 if __name__ == "__main__":
