@@ -521,7 +521,9 @@ def print_readable_summary(results: list) -> None:
     
     for result in results:
         blog_url = result.get("blog", "")
-        blog_links_reviewed.append(blog_url)
+        pub_date = result.get("published", "")
+        # Store as tuple (url, date)
+        blog_links_reviewed.append((blog_url, pub_date))
         
         changes = result.get("changes", [])
         for change in changes:
@@ -539,8 +541,11 @@ def print_readable_summary(results: list) -> None:
     print("=" * 50)
     
     print("\nBlog links reviewed:")
-    for link in blog_links_reviewed:
-        print(f"- {link}")
+    for link, pub_date in blog_links_reviewed:
+        if pub_date:
+            print(f"- {link} ({pub_date})")
+        else:
+            print(f"- {link}")
     
     print("\nDocuments updated:")
     if documents_updated:
@@ -562,9 +567,13 @@ def print_readable_summary(results: list) -> None:
     
     for i, result in enumerate(results, 1):
         blog_url = result.get("blog", "")
+        pub_date = result.get("published", "")
         changes = result.get("changes", [])
         
-        print(f"\n{i}. {blog_url}")
+        if pub_date:
+            print(f"\n{i}. {blog_url} ({pub_date})")
+        else:
+            print(f"\n{i}. {blog_url}")
         
         # Separate changes by status
         updated_changes = [c for c in changes if c.get("status") == "updated"]
@@ -669,12 +678,17 @@ def main():
     results = []
     for e in sorted(new_entries, key=lambda x: x.get("published_parsed") or time.gmtime(0)):
         blog_url = normalize_url(e.link)
+        
+        # Format publication date
+        pub_date = None
+        if e.get("published_parsed"):
+            pub_date = time.strftime("%Y-%m-%d", e.published_parsed)
 
         # Extract docs links and canonicalize before mapping
         docs = fetch_blog_links(blog_url)
         docs = [canonicalize_docs_url(d) for d in docs]
 
-        summary = {"blog": blog_url, "docs": docs}
+        summary = {"blog": blog_url, "published": pub_date, "docs": docs}
         if docs:
             fx = update_docs_with_blog_links(
                 repo_root,

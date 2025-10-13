@@ -187,8 +187,8 @@ The script provides a human-readable summary showing:
 ```
 SUMMARY
 Blog links reviewed:
-- https://www.datadoghq.com/blog/example-post-1/
-- https://www.datadoghq.com/blog/example-post-2/
+- https://www.datadoghq.com/blog/example-post-1/ (2025-01-15)
+- https://www.datadoghq.com/blog/example-post-2/ (2025-01-10)
 
 Documents updated:
 - https://docs.datadoghq.com/example-page-1/ (content/en/example-page-1.md)
@@ -199,7 +199,7 @@ Documents unable to update:
 
 DETAILS
 
-1. https://www.datadoghq.com/blog/example-post-1/
+1. https://www.datadoghq.com/blog/example-post-1/ (2025-01-15)
    documents updated:
       https://docs.datadoghq.com/example-page-1/ (content/en/example-page-1.md)
    documents unable to update:
