@@ -13,7 +13,7 @@ The `rss_blog_to_docs.py` script:
 
 ## Quick Start
 
-### Option 1: Using the Docs Makefile (Easiest & Most Integrated)
+### Recommended: Using the Docs Makefile
 
 From the documentation repository root:
 
@@ -25,29 +25,18 @@ make update-blog-links
 
 This uses the existing docs build infrastructure (`hugpython` virtual environment) - **no separate setup needed!**
 
-### Option 2: Using the Wrapper Script
+### Alternative: Using Python Directly
 
-```bash
-cd /path/to/documentation
-./local/bin/py/docs-blog-linker/update-blog-links.sh
-```
+For advanced users or custom workflows:
 
-The wrapper script automatically:
-- Checks and installs dependencies if needed
-- Runs the tool with sensible defaults
-- Provides colored output for better readability
-
-**Dry run mode:** `./local/bin/py/docs-blog-linker/update-blog-links.sh --dry-run`
-
-### Option 3: Using Python directly
-
-1. **Install dependencies** (if not using the docs Makefile):
+1. **Install dependencies** (one time):
    ```bash
    pip install -r local/bin/py/docs-blog-linker/requirements.txt
    ```
 
-2. **Run the script from within the docs repository:**
+2. **Run the script:**
    ```bash
+   cd /path/to/documentation
    python local/bin/py/docs-blog-linker/rss_blog_to_docs.py
    ```
 
@@ -55,6 +44,7 @@ The wrapper script automatically:
 - Auto-detects the documentation repository
 - Processes blog posts from the last 14 days
 - Uses your git config for branch naming (no environment variables needed!)
+- Checks dependencies and provides helpful error messages if anything is missing
 
 ## Prerequisites
 
@@ -90,9 +80,9 @@ The wrapper script automatically:
     - `status: "would-update"` for each mapped doc file
     - `branch: "(no branch created)"`
 
-## Example Workflows
+## Example Workflow
 
-### Using the docs Makefile (recommended - fully integrated)
+### Standard Workflow (using Makefile)
 
 1. Navigate to documentation repo
    ```bash
@@ -122,43 +112,22 @@ The wrapper script automatically:
 
 6. Navigate to the [Documentation repo in GitHub](https://github.com/DataDog/documentation) to create and review the PR.
 
-### Using the wrapper script
+### Advanced: Using Python Directly
 
-1. Navigate to documentation repo
-   ```bash
-   cd /path/to/documentation
-   ```
+If you need more control (e.g., custom date ranges):
 
-2. Test the changes first (dry-run mode)
-   ```bash
-   ./local/bin/py/docs-blog-linker/update-blog-links.sh --dry-run
-   ```
+```bash
+cd /path/to/documentation
 
-3. Run the script to create branch and commit changes
-   ```bash
-   ./local/bin/py/docs-blog-linker/update-blog-links.sh
-   ```
+# Dry run
+python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --dry-run
 
-4. Review and push as shown above
+# Process last 7 days
+python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --since 7
 
-### Using Python directly
-
-1. Navigate to documentation repo
-   ```bash
-   cd /path/to/documentation
-   ```
-
-2. Test the changes first (processes last 2 weeks by default)
-   ```bash
-   python /path/to/rss_blog_to_docs.py --dry-run
-   ```
-
-3. Run the script to create branch and commit changes
-   ```bash
-   python /path/to/rss_blog_to_docs.py
-   ```
-   
-4. Review and push as shown above
+# Process most recent 5 posts regardless of age
+python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --latest 5
+```
 
 ## How It Works
 
