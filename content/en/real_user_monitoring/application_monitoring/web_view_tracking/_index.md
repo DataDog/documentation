@@ -53,10 +53,6 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 ### Declare `DatadogWebViewTracking` as a dependency (iOS or Kotlin Multiplatform only)
 
-#### iOS
-
-To enable Web View tracking, make sure to also enable [RUM][3]. Then, add the package according to your dependency manager and update your initialization snippet.
-
 {{< tabs >}}
 {{% tab "Android" %}}
 
@@ -67,12 +63,10 @@ Set up the RUM Browser SDK for the web page you want rendered on your mobile app
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
-To enable Crash Reporting:
-
-1. Make sure to also enable [RUM][2].
-2. Add the package according to your dependency manager.
+1. Make sure to also enable [RUM][2] and/or [Logs][3].
+2. Add the `DatadogWebViewTracking` library according to your dependency manager.
 3. Update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
 
 {{% collapse-content title="CocoaPods" level="h4" %}}
