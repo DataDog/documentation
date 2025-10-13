@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import sys
 import json
 import time
 import argparse
@@ -7,6 +8,51 @@ import subprocess
 from pathlib import Path
 from urllib.parse import urlparse, urlunparse
 from datetime import datetime
+
+# Check dependencies and provide helpful error messages
+def check_dependencies():
+    """Check if required dependencies are installed by parsing requirements.txt."""
+    # Get the directory where this script lives
+    script_dir = Path(__file__).parent
+    requirements_file = script_dir / "requirements.txt"
+    
+    if not requirements_file.exists():
+        print("WARNING: requirements.txt not found, skipping dependency check", file=sys.stderr)
+        return
+    
+    # Parse requirements.txt
+    requirements = []
+    import_names = {
+        'beautifulsoup4': 'bs4',
+        'ruamel.yaml': 'ruamel.yaml',
+    }
+    
+    with open(requirements_file) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#'):
+                # Extract package name (before any version specifier)
+                pkg = line.split('>=')[0].split('==')[0].split('<')[0].split('>')[0].strip()
+                requirements.append(pkg)
+    
+    # Check each dependency
+    missing = []
+    for pkg in requirements:
+        import_name = import_names.get(pkg, pkg)
+        try:
+            __import__(import_name)
+        except ImportError:
+            missing.append(pkg)
+    
+    if missing:
+        print("ERROR: Missing required dependencies:", ", ".join(missing), file=sys.stderr)
+        print("\nTo install dependencies, run:", file=sys.stderr)
+        print(f"  pip install -r {requirements_file}", file=sys.stderr)
+        print("\nOr install them individually:", file=sys.stderr)
+        print(f"  pip install {' '.join(missing)}", file=sys.stderr)
+        sys.exit(1)
+
+check_dependencies()
 
 import feedparser
 import requests
@@ -43,6 +89,50 @@ def run(cmd: list[str], cwd: Path | None = None) -> str:
     if p.returncode != 0:
         raise RuntimeError(f"Command failed: {' '.join(cmd)}\n{p.stdout}\n{p.stderr}")
     return p.stdout.strip()
+
+
+def get_git_username(repo_path: Path | None = None) -> str:
+    """
+    Get git username from git config, falling back to sensible defaults.
+    Tries user.name first, then user.email (without domain), then a generic fallback.
+    """
+    try:
+        # Try git config user.name
+        name = run(["git", "config", "user.name"], cwd=repo_path)
+        if name:
+            # Convert to lowercase and replace spaces with hyphens for branch names
+            return name.lower().replace(" ", "-")
+    except Exception:
+        pass
+    
+    try:
+        # Try git config user.email and extract username part
+        email = run(["git", "config", "user.email"], cwd=repo_path)
+        if email and "@" in email:
+            username = email.split("@")[0]
+            return username.lower().replace(".", "-")
+    except Exception:
+        pass
+    
+    # Fallback to generic username
+    return "blog-linker"
+
+
+def find_docs_repo() -> Path | None:
+    """
+    Try to find the documentation repo by looking for telltale signs.
+    Searches current directory and parents for a directory containing
+    content/en/ (Hugo docs structure).
+    """
+    cwd = Path.cwd()
+    
+    # Check current directory and up to 3 levels of parents
+    for path in [cwd] + list(cwd.parents)[:3]:
+        # Look for content/en/ directory (Hugo docs structure)
+        if (path / "content" / "en").exists():
+            return path
+    
+    return None
 
 
 # ----------------------------
@@ -506,9 +596,12 @@ def print_readable_summary(results: list) -> None:
 # ----------------------------
 
 def main():
-    ap = argparse.ArgumentParser(description="Pull new Datadog blog posts and update docs further_reading.")
+    ap = argparse.ArgumentParser(
+        description="Pull new Datadog blog posts and update docs further_reading.",
+        epilog="If --repo is not specified, the script will try to auto-detect the docs repository."
+    )
     ap.add_argument("--rss", default=BLOG_RSS, help="RSS URL (default: Datadog blog index.xml)")
-    ap.add_argument("--repo", required=False, help="Path to local documentation repo (enables editing)")
+    ap.add_argument("--repo", required=False, help="Path to local documentation repo (auto-detects if not specified)")
     ap.add_argument("--since", type=int, default=14, help="Only process posts published in the last N days (default: 14)")
     ap.add_argument("--limit", type=int, default=20, help="Max items to process (default: 20)")
     ap.add_argument("--latest", type=int, default=None, help="Process the most recent N items (ignores --since)")
@@ -539,20 +632,39 @@ def main():
             if len(new_entries) >= args.limit:
                 break
 
-    # Create ONE branch for the entire run (if we have a repo and not dry-run)
-    run_branch = None
+    # Determine repository path (auto-detect if not specified)
     repo_root = None
     if args.repo:
         repo_root = Path(args.repo).resolve()
-        if not args.dry_run:
-            git_user = os.getenv("GIT_USER", "ddtool-user")
-            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-            run_branch = f"{git_user}/blog-links-update-{timestamp}"
-            
-            # Create and switch to the branch ONCE for this run
-            run(["git", "checkout", "master"], cwd=repo_root)
-            run(["git", "pull", "origin", "master"], cwd=repo_root)
-            run(["git", "checkout", "-b", run_branch], cwd=repo_root)
+    else:
+        repo_root = find_docs_repo()
+        if repo_root:
+            print(f"Auto-detected documentation repository at: {repo_root}")
+    
+    if not repo_root:
+        print("ERROR: Could not find documentation repository.", file=sys.stderr)
+        print("Please run this script from within the docs repo, or use --repo to specify the path.", file=sys.stderr)
+        sys.exit(1)
+    
+    # Verify repo_root looks like a docs repo
+    if not (repo_root / "content" / "en").exists():
+        print(f"ERROR: {repo_root} does not appear to be a documentation repository.", file=sys.stderr)
+        print("Expected to find content/en/ directory.", file=sys.stderr)
+        sys.exit(1)
+    
+    # Create ONE branch for the entire run (if not dry-run)
+    run_branch = None
+    if not args.dry_run:
+        git_user = get_git_username(repo_root)
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        run_branch = f"{git_user}/blog-links-update-{timestamp}"
+        
+        print(f"Creating branch: {run_branch}")
+        
+        # Create and switch to the branch ONCE for this run
+        run(["git", "checkout", "master"], cwd=repo_root)
+        run(["git", "pull", "origin", "master"], cwd=repo_root)
+        run(["git", "checkout", "-b", run_branch], cwd=repo_root)
 
     results = []
     for e in sorted(new_entries, key=lambda x: x.get("published_parsed") or time.gmtime(0)):
@@ -563,7 +675,7 @@ def main():
         docs = [canonicalize_docs_url(d) for d in docs]
 
         summary = {"blog": blog_url, "docs": docs}
-        if docs and args.repo:
+        if docs:
             fx = update_docs_with_blog_links(
                 repo_root,
                 blog_url,

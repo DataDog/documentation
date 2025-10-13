@@ -121,6 +121,14 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
 	./local/bin/py/integration-finder.py $(int)
 
+update-blog-links: hugpython ## Update docs with blog post links from RSS feed
+	@echo "Running blog link updater..."
+	@. hugpython/bin/activate && ${PY3} ./local/bin/py/docs-blog-linker/rss_blog_to_docs.py
+
+update-blog-links-dry-run: hugpython ## Dry-run: Show what blog links would be updated
+	@echo "Running blog link updater (dry-run mode)..."
+	@. hugpython/bin/activate && ${PY3} ./local/bin/py/docs-blog-linker/rss_blog_to_docs.py --dry-run
+
 # install the root level node modules
 node_modules: package.json yarn.lock
 	@yarn install --immutable
