@@ -103,6 +103,8 @@ The LangChain integration instruments the following methods:
 - [Retrieval][25]
   - `langchain_community.<vectorstore>.similarity_search()`
   - `langchain_pinecone.similarity_search()`
+- [Prompt Templating][60]
+  - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
 
 ## Amazon Bedrock
 
@@ -356,6 +358,7 @@ The MCP integration instruments the following methods:
 [57]: https://modelcontextprotocol.io/docs/getting-started/intro
 [58]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
 [59]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
+[60]: https://python.langchain.com/docs/concepts/#prompt-templates
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
