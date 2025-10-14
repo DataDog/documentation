@@ -227,14 +227,8 @@ trigger:
       # Optionally specify a specific branch to trigger on when merging
       - "*"
 
-pr:
-  branches:
-    include:
-      - "*"
-
 variables:
   - group: "Datadog"
-
 
 jobs:
   - job: DatadogSoftwareCompositionAnalysis
