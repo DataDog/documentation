@@ -32,7 +32,7 @@ A continuación, se describe la configuración para la recopilación de logs a t
 ### Recopilación de logs a través de TCP
 
 {{< site-region region="us3,us5,ap1,gov" >}}
-  <div class="alert alert-warning">El endpoint de TCP no es compatible con tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para una lista de los endpoints de registro, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
+  <div class="alert alert-danger">El endpoint de TCP no es compatible con tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para una lista de los endpoints de registro, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
 {{< /site-region >}}
 
 

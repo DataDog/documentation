@@ -18,7 +18,7 @@ further_reading:
   tag: ドキュメント
   text: レート制限
 title: API リファレンス
-type: documentation
+type: api
 ---
 
 {{< h2 >}}API リファレンス{{< /h2 >}}
@@ -35,7 +35,7 @@ API を試すには [![Postman で実行][3]](https://god.gw.postman.com/run-col
 
 [API の使用][4]でエンドポイントについて説明しています。
 
-**注**: 
+**注**:
    - Datadog API コレクションの **Variables** タブに API とアプリケーションキーの値を追加します。
    - cURL コード例は、BASH と GNU coreutils の使用を前提としています。macOS をお使いの場合は [Homebrew package manager][5] を使って Coreutils をダウンロードして、コマンド `brew install coreutils` でインストールできます。
 

@@ -300,7 +300,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% tab "Roku RUM" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
+<div class="alert alert-danger">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
 {{< /site-region >}}
 
 1. [RUM Roku モニタリング][1]を設定します。

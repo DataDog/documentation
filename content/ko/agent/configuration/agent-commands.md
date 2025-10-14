@@ -14,7 +14,7 @@ further_reading:
 title: Agent 명령
 ---
 
-<div class="alert alert-warning"><code>service</code> 래퍼 명령을 사용할 수 없는 Linux 기반 시스템의 경우 <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">사용 가능한 대안 목록을 확인하세요</a>.
+<div class="alert alert-danger"><code>service</code> 래퍼 명령을 사용할 수 없는 Linux 기반 시스템의 경우 <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">사용 가능한 대안 목록을 확인하세요</a>.
 </div>
 
 ## Agent 시작/중지/다시 시작

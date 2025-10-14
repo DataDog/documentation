@@ -194,9 +194,30 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Collect custom resources
 
-The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default.
+The [Kubernetes Explorer][3] automatically collects Custom Resource Definitions (CRDs) by default.
 
-Follow these steps to collect the custom resources that these CRDs define:
+#### Automatic custom resource collection compatibility matrix
+
+When the following CRDs are present in your cluster, the Agent automatically collects their Custom Resources (CRs). If a CRD you use is **not** listed here—or your Agent version is older—follow the **manual configuration** steps below.
+
+| CRD group          | CRD kind             | CRD versions | Minimal Agent version |
+| ------------------ | -------------------- | ------------ | --------------------- |
+| datadoghq.com      | datadogslo           | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogdashboard     | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogagentprofile  | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmonitor       | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmetric        | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogpodautoscaler | v1alpha2     | 7.71.0                |
+| datadoghq.com      | datadogagent         | v2alpha1     | 7.71.0                |
+| argoproj.io        | rollout              | v1alpha1     | 7.71.0                |
+| karpenter.sh       | *                    | v1           | 7.71.0                |
+| karpenter.k8s.aws  | *                    | v1           | 7.71.0                |
+| azure.karpenter.sh | *                    | v1beta1      | 7.71.0                |
+
+
+#### Manual Configuration
+
+For the other CRDs, follow these steps to collect the custom resources that these CRDs define:
 
 1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
 

@@ -132,6 +132,9 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
+    real_time_rule: "Real-Time Rule"
+    scheduled_rule: "Scheduled Rule"
+    historical_job: "Historical Job"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -286,7 +289,6 @@ unsupported_sites:
   iac_security: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
-  network_path: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
   otlp_agentless: [gov]
@@ -298,6 +300,7 @@ unsupported_sites:
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
   rum_roku: [gov]
+  safety_center: [gov]
   scorecards: [gov]
   self_service_actions: [gov]
   snmp_profile_manager: [gov]

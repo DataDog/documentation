@@ -148,7 +148,7 @@ Frustration signals are generated from mouse clicks, not keyboard strokes.
 
 If a session is live, it is fetching information and may cause the banners to reflect a different number than those in the timeline.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 To provide feedback or submit a feature request, contact <a href="/help/">Datadog Support</a>.
 </div>
 

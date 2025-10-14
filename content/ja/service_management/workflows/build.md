@@ -24,7 +24,7 @@ title: ワークフローの構築
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
 {{< /site-region >}}
 
 [Workflow Automation][1] ページからワークフローを作成するか、既存のワークフローを編集できます。このページには、既存のワークフローに関する情報として、ワークフローの所有者、トリガー タイプ、各ワークフローの最終更新日と実行日、公開済みかどうかが一覧表示されます。 

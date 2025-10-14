@@ -39,6 +39,12 @@
     "request_description": "",
     "request_schema_description": "Request to update specific fields on an existing datastore item."
   },
+  "BulkDeleteDatastoreItems": {
+    "description": "Deletes multiple items from a datastore by their keys in a single operation.",
+    "summary": "Bulk delete datastore items",
+    "request_description": "",
+    "request_schema_description": "Request to delete items from a datastore."
+  },
   "BulkWriteDatastoreItems": {
     "description": "Creates or replaces multiple items in a datastore by their keys in a single operation.",
     "summary": "Bulk write datastore items",
@@ -105,6 +111,26 @@
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object that includes the scan options to update."
   },
+  "ListAzureScanOptions": {
+    "description": "Fetches the scan options configured for Azure accounts.",
+    "summary": "List azure scan options"
+  },
+  "CreateAzureScanOptions": {
+    "description": "Activate Agentless scan options for an Azure subscription.",
+    "summary": "Create azure scan options",
+    "request_description": "",
+    "request_schema_description": "The definition of `AzureScanOptions` object."
+  },
+  "DeleteAzureScanOptions": {
+    "description": "Delete Agentless scan options for an Azure subscription.",
+    "summary": "Delete azure scan options"
+  },
+  "UpdateAzureScanOptions": {
+    "description": "Update the Agentless scan options for an activated subscription.",
+    "summary": "Update azure scan options",
+    "request_description": "",
+    "request_schema_description": "The definition of `AzureScanOptionsInputUpdate` object."
+  },
   "ListAwsOnDemandTasks": {
     "description": "Fetches the most recent 1000 AWS on demand tasks.",
     "summary": "Get AWS On Demand tasks"
@@ -156,13 +182,13 @@
     "summary": "Get an API"
   },
   "UpdateOpenAPI": {
-    "description": "Update information about a specific API. The given content will replace all API content of the given ID.\nThe ID is returned by the create API, or can be found in the URL in the API catalog UI.\n",
+    "description": "Update information about a specific API. The given content will replace all API content of the given ID.\nThe ID is returned by the create API, or can be found in the URL in the API catalog UI.",
     "summary": "Update an API",
     "request_description": "",
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
   },
   "CreateOpenAPI": {
-    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nSee the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/) for additional\ninformation about the possible metadata.\nIt returns the created API ID.\n",
+    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nSee the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/) for additional\ninformation about the possible metadata.\nIt returns the created API ID.",
     "summary": "Create a new API",
     "request_description": "",
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
@@ -493,33 +519,33 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
-  "ListArbitraryCostRules": {
-    "description": "List all arbitrary cost rules - Retrieve a list of all arbitrary cost rules for the organization",
-    "summary": "List arbitrary cost rules"
+  "ListCustomAllocationRules": {
+    "description": "List all custom allocation rules - Retrieve a list of all custom allocation rules for the organization",
+    "summary": "List custom allocation rules"
   },
-  "CreateArbitraryCostRule": {
-    "description": "Create a new arbitrary cost rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
-    "summary": "Create arbitrary cost rule",
+  "CreateCustomAllocationRule": {
+    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Create custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
   },
-  "ReorderArbitraryCostRules": {
-    "description": "Reorder arbitrary cost rules - Change the execution order of arbitrary cost rules.\n\n**Important**: You must provide the **complete list** of all rule IDs in the desired execution order. The API will reorder ALL rules according to the provided sequence.\n\nRules are executed in the order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**: If you have rules with IDs [123, 456, 789] and want to change order from 123→456→789 to 456→123→789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\": \"789\"}]",
-    "summary": "Reorder arbitrary cost rules",
+  "ReorderCustomAllocationRules": {
+    "description": "Reorder custom allocation rules - Change the execution order of custom allocation rules.\n\n**Important**: You must provide the **complete list** of all rule IDs in the desired execution order. The API will reorder ALL rules according to the provided sequence.\n\nRules are executed in the order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**: If you have rules with IDs [123, 456, 789] and want to change order from 123→456→789 to 456→123→789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\": \"789\"}]",
+    "summary": "Reorder custom allocation rules",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
   },
-  "DeleteArbitraryCostRule": {
-    "description": "Delete an arbitrary cost rule - Delete an existing arbitrary cost rule by its ID",
-    "summary": "Delete arbitrary cost rule"
+  "DeleteCustomAllocationRule": {
+    "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
+    "summary": "Delete custom allocation rule"
   },
-  "GetArbitraryCostRule": {
-    "description": "Get a specific arbitrary cost rule - Retrieve a specific arbitrary cost rule by its ID",
-    "summary": "Get arbitrary cost rule"
+  "GetCustomAllocationRule": {
+    "description": "Get a specific custom allocation rule - Retrieve a specific custom allocation rule by its ID",
+    "summary": "Get custom allocation rule"
   },
-  "UpdateArbitraryCostRule": {
-    "description": "Update an existing arbitrary cost rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
-    "summary": "Update arbitrary cost rule",
+  "UpdateCustomAllocationRule": {
+    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Update custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
   },
@@ -740,8 +766,8 @@
     "request_schema_description": "Request containing the desired email domain allowlist configuration."
   },
   "CreateDORADeployment": {
-    "description": "Use this API endpoint to provide data about deployments for DORA metrics.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
-    "summary": "Send a deployment event for DORA Metrics",
+    "description": "Use this API endpoint to provide deployment data.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
+    "summary": "Send a deployment event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
@@ -760,8 +786,8 @@
     "summary": "Get a deployment event"
   },
   "CreateDORAFailure": {
-    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
-    "summary": "Send a failure event for DORA Metrics",
+    "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send a failure event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
   },
@@ -780,8 +806,8 @@
     "summary": "Get a failure event"
   },
   "CreateDORAIncident": {
-    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
-    "summary": "Send an incident event for DORA Metrics",
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send an incident event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA failure event."
   },
@@ -1698,21 +1724,21 @@
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
   "CreateOnCallPage": {
-    "description": "Trigger a new On-Call Page.\n",
+    "description": "Trigger a new On-Call Page.",
     "summary": "Create On-Call Page",
     "request_description": "",
     "request_schema_description": "Full request to trigger an On-Call Page."
   },
   "AcknowledgeOnCallPage": {
-    "description": "Acknowledges an On-Call Page.\n",
+    "description": "Acknowledges an On-Call Page.",
     "summary": "Acknowledge On-Call Page"
   },
   "EscalateOnCallPage": {
-    "description": "Escalates an On-Call Page.\n",
+    "description": "Escalates an On-Call Page.",
     "summary": "Escalate On-Call Page"
   },
   "ResolveOnCallPage": {
-    "description": "Resolves an On-Call Page.\n",
+    "description": "Resolves an On-Call Page.",
     "summary": "Resolve On-Call Page"
   },
   "CreateOnCallSchedule": {
@@ -1792,13 +1818,13 @@
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
     "summary": "List findings"
   },
   "MuteFindings": {
     "description": "Mute or unmute findings.",
     "summary": "Mute or unmute a batch of findings",
-    "request_description": "### Attributes\n\nAll findings are updated with the same attributes. The request body must include at least two attributes: `muted` and `reason`.\nThe allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Meta\n\nThe request body must include a list of the finding IDs to be updated.\n",
+    "request_description": "### Attributes\n\nAll findings are updated with the same attributes. The request body must include at least two attributes: `muted` and `reason`.\nThe allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Meta\n\nThe request body must include a list of the finding IDs to be updated.",
     "request_schema_description": "The new bulk mute finding request."
   },
   "GetFinding": {
@@ -1844,6 +1870,40 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "ListTables": {
+    "description": "List all reference tables in this organization.",
+    "summary": "List tables"
+  },
+  "CreateReferenceTable": {
+    "description": "Create a new reference table. You can provide data in two ways: 1) Call POST api/v2/reference-tables/upload first to get an upload ID, then PUT chunks of CSV data to each provided URL, and finally call this POST endpoint with the upload_id in file_metadata, OR 2) Provide access_details in file_metadata pointing to a CSV file in cloud storage (Amazon S3, Azure Blob Storage, or GCP Cloud Storage).",
+    "summary": "Create reference table",
+    "request_description": "",
+    "request_schema_description": "The definition of `CreateTableRequest` object."
+  },
+  "DeleteTable": {
+    "description": "Delete a reference table by ID",
+    "summary": "Delete table"
+  },
+  "GetTable": {
+    "description": "Get a reference table by ID",
+    "summary": "Get table"
+  },
+  "UpdateReferenceTable": {
+    "description": "Update a reference table by ID. You can update the table's data, description, and tags. Note: The source type cannot be changed after table creation. For data updates: For existing tables of type `source:LOCAL_FILE`, call POST api/v2/reference-tables/uploads first to get an upload ID, then PUT chunks of CSV data to each provided URL, and finally call this PATCH endpoint with the upload_id in file_metadata. For existing tables with `source:` types of `S3`, `GCS`, or `AZURE`, provide updated access_details in file_metadata pointing to a CSV file in the same type of cloud storage.",
+    "summary": "Update reference table",
+    "request_description": "",
+    "request_schema_description": "The definition of `PatchTableRequest` object."
+  },
+  "GetRowsByID": {
+    "description": "Get reference table rows by their primary key values.",
+    "summary": "Get rows by id"
+  },
+  "CreateReferenceTableUpload": {
+    "description": "Create a reference table upload for bulk data ingestion",
+    "summary": "Create reference table upload",
+    "request_description": "",
+    "request_schema_description": "The definition of `CreateUploadRequest` object."
   },
   "ListApplicationSecurityWAFCustomRules": {
     "description": "Retrieve a list of WAF custom rule.",
@@ -1956,7 +2016,7 @@
     "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
   },
   "ValidatePipeline": {
-    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.\n",
+    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
     "summary": "Validate an observability pipeline",
     "request_description": "",
     "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
@@ -1998,6 +2058,10 @@
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
+  },
+  "ListRoleTemplates": {
+    "description": "List all role templates",
+    "summary": "List role templates"
   },
   "DeleteRole": {
     "description": "Disables a role.",
@@ -2248,7 +2312,7 @@
     "request_schema_description": "Request to update a scorecard rule."
   },
   "ListVulnerableAssets": {
-    "description": "Get a list of vulnerable assets.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.\n",
+    "description": "Get a list of vulnerable assets.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.",
     "summary": "List vulnerable assets"
   },
   "DownloadCloudWorkloadPolicyFile": {
@@ -2260,7 +2324,7 @@
     "summary": "List assets SBOMs"
   },
   "GetSBOM": {
-    "description": "Get a single SBOM related to an asset by its type and name.\n",
+    "description": "Get a single SBOM related to an asset by its type and name.",
     "summary": "Get SBOM"
   },
   "GetSignalNotificationRules": {
@@ -2270,7 +2334,7 @@
   "CreateSignalNotificationRule": {
     "description": "Create a new notification rule for security signals and return the created rule.",
     "summary": "Create a new signal-based notification rule",
-    "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
+    "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteSignalNotificationRule": {
@@ -2288,7 +2352,7 @@
     "request_schema_description": "Body of the notification rule patch request."
   },
   "ListVulnerabilities": {
-    "description": "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination is enabled by default in both `vulnerabilities` and `assets`. The size of the page varies depending on the endpoint and cannot be modified. To automate the request of the next page, you can use the links section in the response.\n\nThis endpoint will return paginated responses. The pages are stored in the links section of the response:\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {...},\n  \"links\": {\n    \"self\": \"https://.../api/v2/security/vulnerabilities\",\n    \"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n    \"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n    \"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n  }\n}\n```\n\n\n- `links.previous` is empty if the first page is requested.\n- `links.next` is empty if the last page is requested.\n\n#### Token\n\nVulnerabilities can be created, updated or deleted at any point in time.\n\nUpon the first request, a token is created to ensure consistency across subsequent paginated requests.\n\nA token is valid only for 24 hours.\n\n#### First request\n\nWe consider a request to be the first request when there is no `page[token]` parameter.\n\nThe response of this first request contains the newly created token in the `links` section.\n\nThis token can then be used in the subsequent paginated requests.\n\n#### Subsequent requests\n\nAny request containing valid `page[token]` and `page[number]` parameters will be considered a subsequent request.\n\nIf the `token` is invalid, a `404` response will be returned.\n\nIf the page `number` is invalid, a `400` response will be returned.\n\n### Filtering\n\nThe request can include some filter parameters to filter the data to be retrieved. The format of the filter parameters follows the [JSON:API format](https://jsonapi.org/format/#fetching-filtering): `filter[$prop_name]`, where `prop_name` is the property name in the entity being filtered by.\n\nAll filters can include multiple values, where data will be filtered with an OR clause: `filter[title]=Title1,Title2` will filter all vulnerabilities where title is equal to `Title1` OR `Title2`.\n\nString filters are case sensitive.\n\nBoolean filters accept `true` or `false` as values.\n\nNumber filters must include an operator as a second filter input: `filter[$prop_name][$operator]`. For example, for the vulnerabilities endpoint: `filter[cvss.base.score][lte]=8`.\n\nAvailable operators are: `eq` (==), `lt` (<), `lte` (<=), `gt` (>) and `gte` (>=).\n\n### Metadata\n\nFollowing [JSON:API format](https://jsonapi.org/format/#document-meta), object including non-standard meta-information.\n\nThis endpoint includes the meta member in the response. For more details on each of the properties included in this section, check the endpoints response tables.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n  },\n  \"links\": {...}\n}\n```\n",
+    "description": "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination is enabled by default in both `vulnerabilities` and `assets`. The size of the page varies depending on the endpoint and cannot be modified. To automate the request of the next page, you can use the links section in the response.\n\nThis endpoint will return paginated responses. The pages are stored in the links section of the response:\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {...},\n  \"links\": {\n    \"self\": \"https://.../api/v2/security/vulnerabilities\",\n    \"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n    \"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n    \"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n  }\n}\n```\n\n\n- `links.previous` is empty if the first page is requested.\n- `links.next` is empty if the last page is requested.\n\n#### Token\n\nVulnerabilities can be created, updated or deleted at any point in time.\n\nUpon the first request, a token is created to ensure consistency across subsequent paginated requests.\n\nA token is valid only for 24 hours.\n\n#### First request\n\nWe consider a request to be the first request when there is no `page[token]` parameter.\n\nThe response of this first request contains the newly created token in the `links` section.\n\nThis token can then be used in the subsequent paginated requests.\n\n#### Subsequent requests\n\nAny request containing valid `page[token]` and `page[number]` parameters will be considered a subsequent request.\n\nIf the `token` is invalid, a `404` response will be returned.\n\nIf the page `number` is invalid, a `400` response will be returned.\n\n### Filtering\n\nThe request can include some filter parameters to filter the data to be retrieved. The format of the filter parameters follows the [JSON:API format](https://jsonapi.org/format/#fetching-filtering): `filter[$prop_name]`, where `prop_name` is the property name in the entity being filtered by.\n\nAll filters can include multiple values, where data will be filtered with an OR clause: `filter[title]=Title1,Title2` will filter all vulnerabilities where title is equal to `Title1` OR `Title2`.\n\nString filters are case sensitive.\n\nBoolean filters accept `true` or `false` as values.\n\nNumber filters must include an operator as a second filter input: `filter[$prop_name][$operator]`. For example, for the vulnerabilities endpoint: `filter[cvss.base.score][lte]=8`.\n\nAvailable operators are: `eq` (==), `lt` (<), `lte` (<=), `gt` (>) and `gte` (>=).\n\n### Metadata\n\nFollowing [JSON:API format](https://jsonapi.org/format/#document-meta), object including non-standard meta-information.\n\nThis endpoint includes the meta member in the response. For more details on each of the properties included in this section, check the endpoints response tables.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n  },\n  \"links\": {...}\n}\n```",
     "summary": "List vulnerabilities"
   },
   "GetVulnerabilityNotificationRules": {
@@ -2298,7 +2362,7 @@
   "CreateVulnerabilityNotificationRule": {
     "description": "Create a new notification rule for security vulnerabilities and return the created rule.",
     "summary": "Create a new vulnerability-based notification rule",
-    "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
+    "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteVulnerabilityNotificationRule": {
@@ -2709,19 +2773,19 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
-  "ListRulesets": {
+  "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
-    "summary": "List rulesets"
+    "summary": "List tag pipeline rulesets"
   },
-  "CreateRuleset": {
+  "CreateTagPipelinesRuleset": {
     "description": "Create a new tag pipeline ruleset with the specified rules and configuration",
-    "summary": "Create ruleset",
+    "summary": "Create tag pipeline ruleset",
     "request_description": "",
     "request_schema_description": "The definition of `CreateRulesetRequest` object."
   },
-  "ReorderRulesets": {
+  "ReorderTagPipelinesRulesets": {
     "description": "Reorder tag pipeline rulesets - Change the execution order of tag pipeline rulesets",
-    "summary": "Reorder rulesets",
+    "summary": "Reorder tag pipeline rulesets",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
   },
@@ -2731,17 +2795,17 @@
     "request_description": "",
     "request_schema_description": "The definition of `RulesValidateQueryRequest` object."
   },
-  "DeleteRuleset": {
+  "DeleteTagPipelinesRuleset": {
     "description": "Delete a tag pipeline ruleset - Delete an existing tag pipeline ruleset by its ID",
-    "summary": "Delete ruleset"
+    "summary": "Delete tag pipeline ruleset"
   },
-  "GetRuleset": {
+  "GetTagPipelinesRuleset": {
     "description": "Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline ruleset by its ID",
     "summary": "Get ruleset"
   },
-  "UpdateRuleset": {
+  "UpdateTagPipelinesRuleset": {
     "description": "Update a tag pipeline ruleset - Update an existing tag pipeline ruleset with new rules and configuration",
-    "summary": "Update ruleset",
+    "summary": "Update tag pipeline ruleset",
     "request_description": "",
     "request_schema_description": "The definition of `UpdateRulesetRequest` object."
   },
@@ -2866,6 +2930,12 @@
     "summary": "Update an existing incident team",
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
+  },
+  "SearchFlakyTests": {
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "summary": "Search flaky tests",
+    "request_description": "",
+    "request_schema_description": "The request for a flaky tests search."
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",

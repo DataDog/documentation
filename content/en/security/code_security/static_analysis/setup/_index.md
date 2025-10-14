@@ -11,7 +11,7 @@ algolia:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -23,10 +23,10 @@ To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1]
 
 ### Scan with Datadog-hosted scanning
 
-You can run Datadog Static Code Analysis scans directly on Datadog infrastructure. Supported repository types include:
-- GitHub (excluding repositories that use [Git Large File Storage][17])
-- GitLab.com and GitLab Self-Managed
-- Azure DevOps
+You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub][18] (excluding repositories that use [Git Large File Storage][17])
+- [GitLab.com and GitLab Self-Managed][20]
+- [Azure DevOps][19]
 
 To get started, navigate to the [**Code Security** page][1].
 
@@ -71,7 +71,7 @@ See the [GitLab source code setup instructions][1] to connect GitLab to Datadog.
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
@@ -147,7 +147,7 @@ There are three levels of configuration:
 * Repo Level Configuration (Datadog)
 * Repo Level Configuration (Repo File)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
 </div>
 
@@ -706,3 +706,6 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
 [16]: https://www.first.org/cvss/
 [17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
+[19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
+[20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider

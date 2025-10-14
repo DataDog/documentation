@@ -7,7 +7,7 @@ aliases:
   - /tracing/advanced_usage/
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_pipeline">ingestion controls and retention filters</a> instead.
 </div>
 
@@ -480,7 +480,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### In the Datadog Agent
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This section describes deprecated features with configuration information relevant to legacy App Analytics.
 </div>
 

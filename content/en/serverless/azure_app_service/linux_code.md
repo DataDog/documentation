@@ -111,29 +111,35 @@ This bash script is intended to run as the startup command, which installs the t
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-First, install the [Datadog CLI][201] and [Azure CLI][202].
+#### Locally
 
-Login to your Azure account using the Azure CLI:
-
-{{< code-block lang="shell" >}}
-az login
-{{< /code-block >}}
+Install the [Datadog CLI][201] and [Azure CLI][202], and login to your Azure account using the Azure CLI by running `az login`.
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="shell" >}}
+```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
 datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+```
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][203], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
+
 
 [201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[203]: https://portal.azure.com/#cloudshell/
 
 {{% /tab %}}
 {{% tab "Terraform" %}}

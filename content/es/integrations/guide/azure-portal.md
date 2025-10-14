@@ -14,7 +14,7 @@ further_reading:
 title: Gestión de la integración nativa de Azure
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Esta guía es para la gestión de la integración nativa de Azure con el recurso de Datadog.
 </div>
 

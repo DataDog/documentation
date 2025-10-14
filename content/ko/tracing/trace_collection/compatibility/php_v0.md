@@ -6,7 +6,7 @@ further_reading:
   text: 애플리케이션 계측
 title: (레거시) PHP 호환성 요구 사항
 ---
-<div class="alert alert-warning">본 문서는 PHP 트레이서 v0.x용 지침입니다. PHP 트레이서 v1.x 문서를 찾고 있으시다면 최신 <a href="/tracing/trace_collection/compatibility/php/">PHP 호환성 요구 사항
+<div class="alert alert-danger">본 문서는 PHP 트레이서 v0.x용 지침입니다. PHP 트레이서 v1.x 문서를 찾고 있으시다면 최신 <a href="/tracing/trace_collection/compatibility/php/">PHP 호환성 요구 사항
 </a>문서를 참조하세요.</div>
 
 ## PHP 애플리케이션 성능 모니터링(APM)용 런타임 지원 정책

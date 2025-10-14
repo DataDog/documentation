@@ -1,4 +1,4 @@
-The [Datadog Terraform module for Google Cloud Run][1001] wraps the [google_cloud_run_v2_service][1002] resource and automatically configures your Cloud Run service for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+The [Datadog Terraform module for Google Cloud Run][1001] wraps the [google_cloud_run_v2_service][1002] resource and automatically configures your Cloud Run app for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
 Create a `.tf` file that contains your configuration. You can use the following example and adapt it to your needs:
 
@@ -25,11 +25,18 @@ module "my-cloud-run-app" {
   datadog_enable_logging = true
 
   deletion_protection = false
+  {{ if eq (.Get "function") "true" }}build_config = {
+    function_target          = "helloHttp" // your function entry point
+    image_uri                = "us-docker.pkg.dev/cloudrun/container/hello"
+    base_image               = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/your-runtime" // base image for your runtime
+    enable_automatic_updates = true
+  }{{ end }}
   template = {
     containers = [
       {
         name  = "main"
         image = "us-docker.pkg.dev/cloudrun/container/hello"
+        {{ if eq (.Get "function") "true" }}base_image_uri = "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/your-runtime" // base image for your runtime{{ end }}
         resources = {
           limits = {
             cpu    = "1"

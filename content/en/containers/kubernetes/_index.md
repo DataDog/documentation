@@ -1,5 +1,6 @@
 ---
 title: Kubernetes
+description: Install and configure the Datadog Agent on Kubernetes 
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes

@@ -1,5 +1,6 @@
 ---
 title: Analyze RUM Sessions Using Sheets
+description: "Enrich RUM session data with Reference Tables and analyze premium user error impact using lookups and pivot tables in Sheets."
 further_reading:
 - link: "/sheets/"
   tag: "Documentation"
