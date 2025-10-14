@@ -73,6 +73,9 @@ build-cdocs:
 llm-support-demo:
 	@node ./assets/scripts/llm-support-demo.js;
 
+html_to_mdoc:
+	@node ./assets/scripts/llm-support-demo.js;
+
 # build .mdoc.md files, then watch for changes
 watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
