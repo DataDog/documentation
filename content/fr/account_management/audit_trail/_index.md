@@ -161,7 +161,7 @@ L'onglet Inspect Changes (Diff) du volet de détails des événements d'audit vo
 
 ## Filtrer les événements d'audit en fonction des tables de référence
 
-<div class="alert alert-warning">Les tables de référence contenant plus de 1 000 000 de lignes ne peuvent pas être utilisées pour filtrer les événements. Consultez <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Ajouter des métadonnées personnalisées avec les tables de référence</a> pour plus d'informations sur la création et la gestion des tables de référence.</div>
+<div class="alert alert-danger">Les tables de référence contenant plus de 1 000 000 de lignes ne peuvent pas être utilisées pour filtrer les événements. Consultez <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Ajouter des métadonnées personnalisées avec les tables de référence</a> pour plus d'informations sur la création et la gestion des tables de référence.</div>
 
 Les tables de référence permettent de combiner des métadonnées avec des événements d'audit, fournissant davantage d'informations pour analyser le comportement des utilisateurs Datadog. Ajoutez un filtre de requête basé sur une table de référence pour effectuer des requêtes de recherche. Pour plus d'informations sur l'activation et la gestion de cette fonctionnalité, consultez le guide sur les [tables de référence][2].
 

@@ -7,10 +7,6 @@ further_reading:
   text: "Analysis Features"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}} 
-  Advanced Analysis is in Preview. To enable, reach out to your Customer Success Manager.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="logs/workspace/datasets_example.png" alt="The workspace datasets" style="width:100%;" >}}

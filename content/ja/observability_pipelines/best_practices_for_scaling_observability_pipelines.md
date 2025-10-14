@@ -3,7 +3,7 @@ title: Best Practices for Scaling Observability Pipelines
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
+<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">

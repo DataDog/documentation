@@ -813,7 +813,7 @@ Más información sobre los controles de muestreo en la [documentación de la li
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"> El mecanismo de <a href="/tracing/legacy_app_analytics/">App Analytics</a> está totalmente obsoleto. Para ingerir tramos únicos sin la traza completa, utiliza la configuración del <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-tramos (spans)">muestreo del tramo único </a>. Para ingerir trazas completas, utiliza las configuraciones del <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">muestreo basado en la fase inicial</a>.</div>
+<div class="alert alert-danger"> El mecanismo de <a href="/tracing/legacy_app_analytics/">App Analytics</a> está totalmente obsoleto. Para ingerir tramos únicos sin la traza completa, utiliza la configuración del <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-tramos (spans)">muestreo del tramo único </a>. Para ingerir trazas completas, utiliza las configuraciones del <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">muestreo basado en la fase inicial</a>.</div>
 
 ## Tramos ingeridos por productos
 

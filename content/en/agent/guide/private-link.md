@@ -26,7 +26,7 @@ further_reading:
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
+<div class="alert alert-danger">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1,ap2" %}}

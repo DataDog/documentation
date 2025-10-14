@@ -10,7 +10,7 @@ title: AWS CloudWatch Metric Streams con Amazon Data Firehose
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">AWS CloudWatch Metric Streams con Amazon Data Firehose no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">AWS CloudWatch Metric Streams con Amazon Data Firehose no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 Utilizando AWS CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener métricas de CloudWatch en Datadog con sólo una latencia de dos a tres minutos. Esta opción es mucho más rápida que el método de sondeo de la API predeterminado de Datadog, que proporciona métricas actualizadas cada 10 minutos. Puedes obtener más información sobre el método de sondeo de la API en la [documentación sobre el retraso de métricas de Cloud][1].
@@ -23,7 +23,7 @@ Utilizando AWS CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener 
    - Opcionalmente, especifica un conjunto limitado de espacios de nombres o métricas para transmitir.
 2. Una vez creado el Metric Stream, Datadog comienza inmediatamente a recibir las métricas transmitidas y las muestra en el sitio Datadog sin necesidad de una configuración adicional.
 
-<div class="alert alert-danger">El filtrado por espacio de nombres configurado en el cuadro de la integración AWS <b>también se aplica a </b> CloudWatch Metric Streams</div>.
+<div class="alert alert-warning">El filtrado por espacio de nombres configurado en el cuadro de la integración AWS <b>también se aplica a </b> CloudWatch Metric Streams</div>.
 
 ### Transmisión de métricas versus sondeo de API {#streaming-vs-polling}
 

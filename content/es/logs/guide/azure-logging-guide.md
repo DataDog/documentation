@@ -119,7 +119,7 @@ Para transferir logs de actividades y de recursos, ejecuta el primer script incl
 {{% tab "Blob Storage (Almacenamiento de blobs)" %}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Esto no es compatible con el sitio Datadog {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}
@@ -193,7 +193,7 @@ Consulta los siguientes temas para configurar tu instalación según tus necesid
 
 ### Cumplimiento de PCI
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El cumplimiento de PCI DSS para APM y Log Management sólo está disponible para las organizaciones Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 

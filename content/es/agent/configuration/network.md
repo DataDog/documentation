@@ -30,7 +30,7 @@ title: Tráfico de red
 
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El Agent siempre inicia el tráfico hacia Datadog. Nunca se inician sesiones desde Datadog hacia el Agent.
 </div>
 
@@ -250,7 +250,7 @@ Añade todos los `ip-ranges` a tu lista de inclusión. Aunque solo un subconjunt
 
 ## Puertos abiertos
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Todo el tráfico saliente se envía a través de SSL por TCP o UDP.
 <br><br>
 Utiliza una regla de cortafuegos, o una restricción de red similar, para asegurarte de que el Agent solo es accesible para tus aplicaciones o fuentes de red de confianza. Si se accede a él desde una fuente no fiable, los agentes maliciosos pueden realizar diversas acciones invasivas, entre las que se incluyen escribir trazas y métricas en tu cuenta de Datadog u obtener información sobre tu configuración y servicios.
@@ -369,7 +369,7 @@ El receptor de APM y los puertos DogStatsD se encuentran en las secciones **Trac
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">Si modificas aquí el valor del puerto DogStatsD o del puerto del receptor de APM, también deberás cambiar la configuración de la librería de rastreo de APM para el puerto correspondiente. Consulta la información sobre cómo configurar puertos en los <a href="/tracing/trace_collection/library_config/">documentos de configuración de librerías disponibles en tu idioma</a>.</div>
+<div class="alert alert-danger">Si modificas aquí el valor del puerto DogStatsD o del puerto del receptor de APM, también deberás cambiar la configuración de la librería de rastreo de APM para el puerto correspondiente. Consulta la información sobre cómo configurar puertos en los <a href="/tracing/trace_collection/library_config/">documentos de configuración de librerías disponibles en tu idioma</a>.</div>
 
 ## Utilizar proxies
 

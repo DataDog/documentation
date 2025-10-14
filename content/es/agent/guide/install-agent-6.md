@@ -1,8 +1,8 @@
 ---
 further_reading:
-- link: /agent/basic_agent_usage/
+- link: agent/
   tag: Documentación
-  text: Uso básico del Agent
+  text: El Datadog Agent
 private: true
 title: Instalar el Datadog Agent 6
 ---
@@ -40,7 +40,7 @@ La aplicación de la bandeja del sistema no es compatible con las instalaciones 
 
 #### Interfaz gráfica de usuario (GUI)
 
-1. Descarga e instala el [paquete DMG][3].
+1. Descarga e instala el [paquete de DMG][3].
 1. Añade la siguiente línea a `/opt/datadog-agent/etc/datadog.yaml`, sustituyendo `MY_API_KEY` por tu clave de la API de Datadog:
    {{< code-block lang="shell" >}}
 api_key: MY_API_KEY
@@ -50,7 +50,7 @@ sitio: datad0g.com
 ### Administrar el Agent
 
 Para administrar el Agent, utiliza:
-- la aplicación del Datadog Agent en la bandeja del sistema para una instalación de un solo usuario.
+- la aplicación del Datadog Agent en la bandeja del sistema para una instalación en un solo usuario.
 - `launchctl` para instalar LaunchDaemon en todo el sistema.
 - el comando `datadog-agent`. El binario está en `/usr/local/bin`.
 
@@ -58,15 +58,15 @@ Activar o desactivar integraciones en `/opt/datadog-agent/etc/conf.d.`
 
 ## Windows
 
-A partir de la versión 6.11.0, el núcleo y los componentes APM/traza de Windows Agent se ejecutan en la cuenta `ddagentuser` y se crean en el momento de la instalación, en lugar de ejecutarse en la cuenta `LOCAL_SYSTEM`. Si estás actualizando desde una versión del Datadog Agent 6.x a 6.11 o superior, revisa la documentación del [usuario de Windows Agent][10] antes de realizar la actualización.
+A partir de la versión 6.11.0, el núcleo y los componentes de APM/trazas de Windows Agent se ejecutan en la cuenta `ddagentuser` y se crean en el momento de la instalación, en lugar de ejecutarse en la cuenta `LOCAL_SYSTEM`. Si estás actualizando desde una versión del Datadog Agent 6.x a 6.11 o superior, revisa la documentación del [usuario de Windows Agent][10] antes de realizar la actualización.
 
-Los enlaces a todas las versiones disponibles del instalador de Windows están disponibles en [formato JSON][6].
+Los enlaces a todas las versiones disponibles del instalador de Windows están disponibles en el [formato JSON][6].
 
 ### Instalación del Agent
 
 #### Interactivo
 
-1. Descarga y ejecute el [instalador del Datadog Agent][4].
+1. Descarga y ejecuta el [instalador del Datadog Agent][4].
 1. Ejecuta el instalador (como administrador) abriendo `datadog-agent-6-latest.amd64.msi`.
 1. Sigue las instrucciones, acepta el contrato de licencia e introduce tu clave de la API de Datadog.
 1. Introduce tu región de Datadog: {{< region-param key=dd_site code="true" >}}.
@@ -78,7 +78,7 @@ Los enlaces a todas las versiones disponibles del instalador de Windows están d
 1. Ejecuta uno de los siguientes comandos en el directorio donde descargaste el instalador, sustituyendo `MY_API_KEY` por tu clave de la API de Datadog:
    - Aviso del comando:
      {{< code-block lang="shell" >}}
-iniciar/esperar msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datad0g.com"
+start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datad0g.com"
 {{< /code-block >}}
    - Powershell:
      {{< code-block lang="powershell" >}}
@@ -98,10 +98,10 @@ Para instalar el Agent en Azure, consulta la [documentación de Microsoft Azure]
 {{% tab "Debian" %}}
 ### Instalación en un solo paso
 
-El comando de un solo paso instala los paquetes de APT para el Datadog Agent y te pide tu contraseña.
+El comando de un solo paso instala los paquetes de APT para el Datadog Agent y te pide la contraseña.
 - Si el Agent aún no está instalado en tu equipo y no deseas que se inicie automáticamente tras la instalación, añade `DD_INSTALL_ONLY=true` al comando antes de ejecutarlo.
 - Si dispones de un archivo de configuración actual del Agent, los valores actuales se conservarán durante la actualización.
-- Puedes configurar algunas de las opciones del Agent durante el proceso de instalación inicial. Para obtener más información, check el [las opciones de configuración install_script][101].
+- Puedes configurar algunas de las opciones del Agent durante el proceso de instalación inicial. Para obtener más información, check las [opciones de configuración de install_script][101].
 
 Para instalar el Agent, ejecuta el siguiente comando, sustituyendo `MY_API_KEY` por tu clave de la API de Datadog:
 ```shell
@@ -240,7 +240,7 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 El comando de un solo paso instala los paquetes de YUM para el Datadog Agent y te pide la contraseña.
 - Si el Agent aún no está instalado en tu máquina y no deseas que se inicie automáticamente tras la instalación, añade `DD_INSTALL_ONLY=true` al comando antes de ejecutarlo.
 - Si dispones de un archivo de la configuración actual del Agent, los valores actuales se conservarán durante la actualización.
-- Puedes configurar algunas de las opciones del Agent durante el proceso la instalación inicial. Para obtener más información, check las [opciones de configuración install_script][101].
+- Puedes configurar algunas de las opciones del Agent durante el proceso de la instalación inicial. Para obtener más información, check las [opciones de configuración de install_script][101].
 
 1. Ejecuta el siguiente comando, sustituyendo `MY_API_KEY` por tu clave de la API de Datadog:
    ```shell
@@ -620,7 +620,7 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
 {{% tab "AIX" %}}
 ### Instalación en un solo paso
 
-The one-step command installs the latest BFF package for the Datadog Agent and prompts you for your password if necessary. Si el Agent aún no está instalado en su equipo y no deseas que se inicie automáticamente tras la instalación, añade `DD_INSTALL_ONLY=true` al comando antes de ejecutarlo.
+The one-step command installs the latest BFF package for the Datadog Agent and prompts you for your password if necessary. Si el Agent aún no está instalado en tu equipo y no deseas que se inicie automáticamente tras la instalación, añade `DD_INSTALL_ONLY=true` al comando antes de ejecutarlo.
 
 Ejecuta el siguiente comando, sustituyendo `MY_API_KEY` por tu clave de la API de Datadog:
 ```shell
@@ -777,7 +777,7 @@ If the one-step installation command does not work, it's possible that your syst
 
 If CGroups are enabled, but the check is failing because of an unexpected `cgroup` directory location:
 1. Run `mount | grep "cgroup type tmpfs"` to retrieve the location of the `cgroup` directory.
-1. Replace the first occurence of `/sys/fs/cgroup` in the one-step installation command with the location of the `cgroup` directory.
+1. Replace the first occurrence of `/sys/fs/cgroup` in the one-step installation command with the location of the `cgroup` directory.
 
 ### Send custom metrics with DogStatsD
 
