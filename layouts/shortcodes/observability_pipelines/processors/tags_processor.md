@@ -9,4 +9,4 @@ To set up the processor:
 1. In the **Configure tags** section, choose whether to **Exclude tags** or **Include tags**. If you provided a tag array in the previous step, select the tag keys you want to configure. You can also manually add tag keys. **Note**: You can select up to 100 tags.
 
 [10200]: /getting_started/tagging/#define-tags
-[10200]: /observability_pipelines/guide/get_started_with_the_custom_processor/#append-tags
+[10201]: /observability_pipelines/guide/get_started_with_the_custom_processor/#append-tags-to-datadog-logs

@@ -31,7 +31,7 @@ It also goes over example scripts that address common use cases, such as:
 - [Remove attributes containing null values](#remove-attributes-containing-null-values)
 - [Merge nested attributes to root level](#merge-nested-attributes-to-root-level)
 - [Serialize outbound logs in _raw format](#serialize-outbound-logs-in-_raw-format)
-- [Append tags to Datadog logs](#append-tags)
+- [Append tags to Datadog logs](#append-tags-to-datadog-logs)
 
 ## Decode Base64
 
