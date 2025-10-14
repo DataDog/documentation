@@ -19,7 +19,7 @@
                 {{ if eq site.Language.Lang "studio" }}
                     {{ partialCached "nav/left-nav-studio.html" . .Section .Site.Language.Lang }}
                 {{ else }}
-                    {{ partialCached "nav/left-nav.html" . }}
+                    {{ partialCached "nav/left-nav.html" . .Section .Site.Language.Lang }}
                 {{ end }}
             </div>
         </div>
