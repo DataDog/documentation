@@ -73,6 +73,7 @@ If you haven't already, set up the [Datadog-Azure integration][5]. You can verif
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
+The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
 If you don't already have Terraform set up, [install Terraform][1], create a new directory, and make a file called `main.tf`.
 
@@ -100,7 +101,7 @@ resource "azurerm_service_plan" "my_asp" {
 
 module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/windows"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   name                = "my-web-app"        // Replace with your web app name
   resource_group_name = "my-resource-group" // Replace with your resource group
@@ -130,7 +131,8 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 [1]: https://developer.hashicorp.com/terraform/install
 [2]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
 [3]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
-
+[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
+[5]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_web_app
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -174,14 +176,14 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 3. Click **Save**. This restarts your application.
 
 4. Stop your application by clicking **Stop**.
-   <div class="alert alert-warning">You <u>must</u> stop your application to successfully install Datadog.</div>
+   <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
 5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
 6. Accept the legal terms, click **OK**, and wait for the installation to complete. 
-   <div class="alert alert-warning">This step requires that your application be in a stopped state.</div>
+   <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
 7.  Start the main application, click **Start**:
 
@@ -517,7 +519,7 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
+<div class="alert alert-danger">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
     Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 {{% /tab %}}

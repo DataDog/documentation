@@ -167,7 +167,7 @@ The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configur
 
 1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
 2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda Layer.
-3. Create an `esbuild` file for each of your Lambda functions. A seperate `esbuild` file is required per Lambda function so that each entry point can be specified seperately. Notice the `entryPoint` and `outfile` properties. For example, if you had a second Lambda function in your project named `producer`, then the entry point would be `./functions/producer.ts` and the outfile would be `/out/producer/index.js`
+3. Create an `esbuild` file for each of your Lambda functions. A separate `esbuild` file is required per Lambda function so that each entry point can be specified separately. Notice the `entryPoint` and `outfile` properties. For example, if you had a second Lambda function in your project named `producer`, then the entry point would be `./functions/producer.ts` and the outfile would be `/out/producer/index.js`
 
     **buildConsumer.js**
     ```javascript

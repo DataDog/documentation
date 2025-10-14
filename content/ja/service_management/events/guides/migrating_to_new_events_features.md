@@ -9,7 +9,7 @@ further_reading:
 title: 新イベント機能への移行
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog のレガシーイベントストリームとイベントモニターは、<strong>2022 年 6 月 30 日</strong>に廃止します。Datadog は、すべてのお客様を新しく改良されたイベントエクスペリエンスに移行します。このページには、この移行に関する重要な情報が記載されています。廃止日までに、このページの手順に従って、既存のイベント可視化およびモニターが引き続き適切に動作することを確認してください。</div>
 
 

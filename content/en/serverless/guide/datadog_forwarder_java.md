@@ -4,11 +4,11 @@ title: Instrumenting Java Serverless Applications Using the Datadog Forwarder
 ---
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/java">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.14.0</code> as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below.
 </div>
 

@@ -27,7 +27,7 @@ A partir de la versión `0.89.0`, el rastreador PHP inyecta automáticamente ide
 
 El rastreador PHP admite registradores compatibles con PSR-3, como [Monolog][4] o [Laminas Log][5].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Configura tu biblioteca de registro para que produzca logs en formato JSON de forma que:
   <ul>
     <li>No necesites <a href="/logs/log_configuration/parsing">reglas personalizadas de parseo</a>.</li>
@@ -93,7 +93,7 @@ El rastreador PHP sustituye los marcadores de posición por los valores correspo
 
 ## Inyección manual
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> La función <code>\DDTrace\current_context()</code> ha sido introducida en la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> y devuelve identificadores de traza decimales.
 </div>
 
