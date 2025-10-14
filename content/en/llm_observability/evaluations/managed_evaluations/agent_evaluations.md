@@ -198,7 +198,7 @@ result = triage_agent.run_sync(
 
 ### Troubleshooting
 - Make sure your tools use type hints—the evaluation relies on schema definitions.
-- Make sure to include a tool description (i.e. the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
+- Make sure to include a tool description (for example, the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
 - Validate that your LLM prompt includes enough context for correct argument construction.
 
 
