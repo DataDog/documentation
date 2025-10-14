@@ -650,7 +650,7 @@ For example, if the current tracking consent is `.pending`:
 
 {{% collapse-content title="Sample session rates" level="h4" expanded=false id="sample-session-rates" %}}
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for sessions while [initializing the iOS SDK][14]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog, you can specify a sampling rate for sessions while [initializing the iOS SDK][14]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to only keep 50% of sessions, use:
 
