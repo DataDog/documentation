@@ -19,7 +19,7 @@ Distributions provide enhanced query functionality and configuration options tha
 * **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
 
   * **Single percentile value over any timeframe**:
-  
+ 
      _"What has the 99.9th percentile load time for my application been over the past week?"_
 
   * **Standard deviation over any timeframe**:
