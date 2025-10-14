@@ -3890,7 +3890,7 @@ menu:
       identifier: custom_instrumentation_dotnet
       weight: 2028
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android/otel
+      url: tracing/trace_collection/custom_instrumentation/android/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
       weight: 2029

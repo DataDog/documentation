@@ -519,33 +519,33 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
-  "ListArbitraryCostRules": {
-    "description": "List all arbitrary cost rules - Retrieve a list of all arbitrary cost rules for the organization",
-    "summary": "List arbitrary cost rules"
+  "ListCustomAllocationRules": {
+    "description": "List all custom allocation rules - Retrieve a list of all custom allocation rules for the organization",
+    "summary": "List custom allocation rules"
   },
-  "CreateArbitraryCostRule": {
-    "description": "Create a new arbitrary cost rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
-    "summary": "Create arbitrary cost rule",
+  "CreateCustomAllocationRule": {
+    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Create custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
   },
-  "ReorderArbitraryCostRules": {
-    "description": "Reorder arbitrary cost rules - Change the execution order of arbitrary cost rules.\n\n**Important**: You must provide the **complete list** of all rule IDs in the desired execution order. The API will reorder ALL rules according to the provided sequence.\n\nRules are executed in the order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**: If you have rules with IDs [123, 456, 789] and want to change order from 123→456→789 to 456→123→789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\": \"789\"}]",
-    "summary": "Reorder arbitrary cost rules",
+  "ReorderCustomAllocationRules": {
+    "description": "Reorder custom allocation rules - Change the execution order of custom allocation rules.\n\n**Important**: You must provide the **complete list** of all rule IDs in the desired execution order. The API will reorder ALL rules according to the provided sequence.\n\nRules are executed in the order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**: If you have rules with IDs [123, 456, 789] and want to change order from 123→456→789 to 456→123→789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\": \"789\"}]",
+    "summary": "Reorder custom allocation rules",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
   },
-  "DeleteArbitraryCostRule": {
-    "description": "Delete an arbitrary cost rule - Delete an existing arbitrary cost rule by its ID",
-    "summary": "Delete arbitrary cost rule"
+  "DeleteCustomAllocationRule": {
+    "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
+    "summary": "Delete custom allocation rule"
   },
-  "GetArbitraryCostRule": {
-    "description": "Get a specific arbitrary cost rule - Retrieve a specific arbitrary cost rule by its ID",
-    "summary": "Get arbitrary cost rule"
+  "GetCustomAllocationRule": {
+    "description": "Get a specific custom allocation rule - Retrieve a specific custom allocation rule by its ID",
+    "summary": "Get custom allocation rule"
   },
-  "UpdateArbitraryCostRule": {
-    "description": "Update an existing arbitrary cost rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
-    "summary": "Update arbitrary cost rule",
+  "UpdateCustomAllocationRule": {
+    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Update custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
   },
@@ -2773,19 +2773,19 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
-  "ListRulesets": {
+  "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
-    "summary": "List rulesets"
+    "summary": "List tag pipeline rulesets"
   },
-  "CreateRuleset": {
+  "CreateTagPipelinesRuleset": {
     "description": "Create a new tag pipeline ruleset with the specified rules and configuration",
-    "summary": "Create ruleset",
+    "summary": "Create tag pipeline ruleset",
     "request_description": "",
     "request_schema_description": "The definition of `CreateRulesetRequest` object."
   },
-  "ReorderRulesets": {
+  "ReorderTagPipelinesRulesets": {
     "description": "Reorder tag pipeline rulesets - Change the execution order of tag pipeline rulesets",
-    "summary": "Reorder rulesets",
+    "summary": "Reorder tag pipeline rulesets",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
   },
@@ -2795,17 +2795,17 @@
     "request_description": "",
     "request_schema_description": "The definition of `RulesValidateQueryRequest` object."
   },
-  "DeleteRuleset": {
+  "DeleteTagPipelinesRuleset": {
     "description": "Delete a tag pipeline ruleset - Delete an existing tag pipeline ruleset by its ID",
-    "summary": "Delete ruleset"
+    "summary": "Delete tag pipeline ruleset"
   },
-  "GetRuleset": {
+  "GetTagPipelinesRuleset": {
     "description": "Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline ruleset by its ID",
     "summary": "Get ruleset"
   },
-  "UpdateRuleset": {
+  "UpdateTagPipelinesRuleset": {
     "description": "Update a tag pipeline ruleset - Update an existing tag pipeline ruleset with new rules and configuration",
-    "summary": "Update ruleset",
+    "summary": "Update tag pipeline ruleset",
     "request_description": "",
     "request_schema_description": "The definition of `UpdateRulesetRequest` object."
   },
