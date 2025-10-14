@@ -50,19 +50,19 @@ The [Home][3] page gives you a bird's-eye view of your users' activity and a pul
 By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provides additional context about your product's users and usage:
 
 [Users](https://app.datadoghq.com/product-analytics/user-trends)
-: see at a glance who is actually using your product.
+: See at a glance who is actually using your product.
 
 [App & Devices](https://app.datadoghq.com/product-analytics/app-and-device)
-: visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
+: Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
 [Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
-: understand how users are engaging with your product to answer questions like how long are users staying on pages and what their top actions are. 
+: Understand how users are engaging with your product to answer questions like how long are users staying on pages and what their top actions are. 
 
 [Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
-: get a view into bounce rates, top traffic sources, and where your growth is really coming from.
+: Get a view into bounce rates, top traffic sources, and where your growth is really coming from.
 
 [Performance](https://app.datadoghq.com/product-analytics/performance)
-: view surface top errors and frustrations, and see exactly which views they impact
+: View surface top errors and frustrations, and see exactly which views they impact
 
 <br>
 
@@ -75,16 +75,16 @@ The Product Analytics charts help you visualize your users' journey as they use 
 Each chart type provides a different view into the user's journey:
 
 [Pathways][5]
-: you can visualize all user journeys across your application to analyze the critical path.
+: You can visualize all user journeys across your application to analyze the critical path.
 
 [Funnel][4]
-: track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance or measure how adding new steps to a workflow impacts drop off rate.
+: Track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance or measure how adding new steps to a workflow impacts drop off rate.
 
 [Retention][2]
-:  measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
+: Measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
 
 [Analytics][13]
-: contains views data aggregation for understanding how your product is being used.
+: Contains views data aggregation for understanding how your product is being used.
 
 <br>
 
