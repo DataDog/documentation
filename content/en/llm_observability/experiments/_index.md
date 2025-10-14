@@ -356,7 +356,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run pytest -vv -s
+        run: poetry run pytest -vv -s # Or poetry run python path_to_file_with_experiment.py
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
