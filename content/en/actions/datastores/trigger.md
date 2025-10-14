@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-datastore/"
   tag: "Blog"
   text: "Enhance your automated workflows and apps with Datastore"
+- link: "https://www.datadoghq.com/blog/datadog-automation-rules/"
+  tag: "Blog"
+  text: "Respond to changes in your data with Datadog automation rules"
 ---
 
 This page explains how to use and audit automation rules for datastores. With automation rules, you can add workflows to your datastores that automatically trigger when records are created, updated, or deleted.
