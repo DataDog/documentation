@@ -3,6 +3,7 @@ title: Getting Started with Azure
 aliases:
 - /integrations/guide/azure-manual-setup/
 - /integrations/guide/azure-programmatic-management/
+description: Connect Microsoft Azure with Datadog using Azure app registration integration options. Configure metric collection, log forwarding, and Agent installation.
 further_reading:
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'
@@ -22,30 +23,33 @@ If you haven't already, create a [Datadog account][2].
 
 {{% collapse-content title="Permissions required for integration setup" level="h4" expanded=false id="required-permissions" %}}
 
-#### In Azure
+### In Azure
 
 Your Microsoft Entra ID user needs the following permissions:
 
-##### Permission to create an app registration
+#### Permission to create an app registration
 
 **One** of the following must be true for the user:
 
 - `Users can register applications` has been set to `Yes`
 - The user has the [Application Developer][38] role
 
-##### Permission to assign roles within your subscriptions
+#### Permission to assign roles within your subscriptions
 
 You must have one of the [Azure built-in roles in the Privileged category][24], or a custom role including the `Microsoft.Authorization/roleAssignments/write` action, in each of the subscriptions you wish to connect.
 
-##### Permission to add and grant consent for Graph API permissions
+#### Permission to add and grant consent for Graph API permissions
 
 The [Privileged Role Administrator role][25] contains the required permissions.
 
-#### In Datadog
+### In Datadog
 
 The `Datadog Admin Role`, or any other role with the `azure_configurations_manage` permission.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
+
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, you need to create an <a href="#">app registration</a> to access these functionalities.
+</div>
 
 ## Setup
 
@@ -233,6 +237,10 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 3. Enter your Datadog credentials on the [Datadog Configuration tab][31].
 4. Acknowledge deployment warnings on the [Deployment tab][32].
 5. Start the deployment process on the [Review + create tab][33].
+
+
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, you need to create an <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration">App registration</a> to access this functionality.
+</div>
 
 See [Azure Automated Log Forwarding Architecture][34] for more details.
 
