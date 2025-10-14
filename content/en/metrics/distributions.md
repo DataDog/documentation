@@ -13,25 +13,21 @@ further_reading:
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
 
-Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2].
+Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2]. 
 
 Distributions provide enhanced query functionality and configuration options that aren't offered with other metric types (count, rate, gauge, histogram):
-* **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as:
+* **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
 
   * **Single percentile value over any timeframe**:
-
      _"What has the 99.9th percentile load time for my application been over the past week?"_
 
   * **Standard deviation over any timeframe**:
-
      _"What is the standard deviation (stddev) of my application's CPU consumption over the past month?"_
 
   * **Percentile thresholds on metric monitors**:
-
     _"Alert me when the p95 of my application's request latency is greater than 200 ms for the last 5 min."_
 
   * **Threshold Queries**:
-
     _"I'd like to define a 30-day SLO where 95% of requests to my service are completed in under 5 seconds."_
 
 
@@ -41,7 +37,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 ## Enabling advanced query functionality
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric.
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
 However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Summary page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries and standard deviation.
 
@@ -51,7 +47,7 @@ After electing to apply percentile aggregations on a distribution metric, these 
 
 {{< img src="metrics/distributions/graph_percentiles.mp4" alt="Distribution metric aggregations" video=true" >}}
 
-You can use percentile aggregations in a variety of other widgets and for alerting:
+You can use percentile aggregations in a variety of other widgets and for alerting: 
 * **Single percentile value over any timeframe**
 
    _"What has the 99.9th percentile request duration for my application been over the past week?"_
