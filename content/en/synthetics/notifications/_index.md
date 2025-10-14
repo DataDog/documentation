@@ -24,6 +24,17 @@ You can customize notifications using:
 - **[Templated variables][2]**: Enrich your notifications with dynamic content.
 - **[Conditional logic][3]**: Adapt alert messages across different test types and workflows.
 - **[Advanced usage][4]**: Structure complex messages using handlebars templating.
+### Display Local (Config) Variables
+
+You can reference variables defined in your API or step-based tests directly in notification messages.
+
+- Local (Config) variables: `{{synthetics.attributes.result.variables.config}}`
+
+{{< further-reading >}}
+- [Synthetic Monitoring Template Variables](/synthetics/notifications/template_variables/)
+- [Synthetic Monitoring Advanced Notifications](/synthetics/notifications/advanced_notifications/)
+{{< /further-reading >}}
+
 - **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
 - **[Simulate notifications](#simulate-notifications)**: Test your notification messages by sending simulated notifications.
 

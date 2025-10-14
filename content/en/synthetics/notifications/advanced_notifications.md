@@ -91,6 +91,31 @@ You can loop over lists (like steps or variables) or access items directly:
    <div class="alert alert-info">Use <code>#if</code> over <code>#is_exact_match</code> for checking if a variable is empty or unset.</div>
 
 ### Iteration
+#### Example: Prefer step-extracted value, then fallback to extracted globals, then config
+
+```handlebars
+#### Example: Use Local (Config) variables in a notification
+
+```handlebars
+Synthetic Test Failed!
+
+Application: {{ synthetics.attributes.result.variables.config[APP_NAME].value }}
+URL Tested: {{ synthetics.attributes.result.variables.config[APP_URL].value }}
+Random value: {{ synthetics.attributes.result.variables.config[NAME].value }}
+
+Test: {{ synthetics.attributes.test.name }} ({{ synthetics.attributes.test.id }})
+Failed step: {{ synthetics.failed_step.name }}
+Location: {{ synthetics.attributes.location.id }}
+Result: {{ synthetics.result_url }}
+
+@your-email
+
+> Tip: Loop all config variables and print safe values:
+{{#each synthetics.attributes.result.variables.config}}
+- {{@key}}: {{#if this.secure}}[secure]{{else}}{{this.value}}{{/if}}
+{{/each}}
+
+
 
 Use `#each` to loop over dictionaries or lists. You can access:
 

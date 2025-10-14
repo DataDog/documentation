@@ -10,6 +10,11 @@ further_reading:
   tag: "Documentation"
   text: "Learn more about monitor templates"
 ---
+{{< callout >}}
+**Local (Config) variables** are available at `result.variables.config`. Each entry has `name`, `type`, `secure`, and (when not secure) `value`.  
+Access a specific variable with bracket notation, for example:
+`{{ synthetics.attributes.result.variables.config[APP_NAME].value }}`.
+{{< /callout >}}
 
 ## Overview
 
