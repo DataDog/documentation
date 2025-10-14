@@ -170,8 +170,8 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 
 {{% observability_pipelines/processors/dedupe %}}
 
-{{% /pestaña %}}
-{{% pestaña "Editar campos" %}}
+{{% /tab %}}
+{{% tab "Editar campos" %}}
 
 {{% observability_pipelines/processors/remap %}}
 

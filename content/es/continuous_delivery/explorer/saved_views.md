@@ -1,5 +1,5 @@
 ---
-descriptions: Aprende a crear y compartir vistas guardadas en el CD Visibility Explorer.
+description: Aprende a crear y compartir vistas guardadas en el CD Visibility Explorer.
 further_reading:
 - link: /continuous_delivery/explorer/search_syntax/
   tag: Documentación

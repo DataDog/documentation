@@ -70,7 +70,7 @@
   - "Supported OS::macOS"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Recopila métricas de SNMP de tus dispositivos de red".
+  "description": "Recopila métricas de SNMP de tus dispositivos de red."
   "media": []
   "overview": "README.md#Información general"
   "resources":
