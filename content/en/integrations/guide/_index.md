@@ -50,7 +50,6 @@ cascade:
 
 {{< header-list header="AWS Marketplace guides:" >}}
     {{< nextlink href="integrations/guide/aws-marketplace-datadog-trial" tag=" AWS Marketplace" >}}AWS Marketplace Datadog trial setup{{< /nextlink >}}
-
 {{< /header-list >}}
 
 {{< header-list header="Azure guides" >}}
