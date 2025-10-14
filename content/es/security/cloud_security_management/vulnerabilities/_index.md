@@ -22,12 +22,6 @@ further_reading:
 title: Cloud Security Vulnerabilities
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Cloud Security Vulnerabilities está en vista previa para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).
-Solicita acceso <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">rellenando este formulario</a>.
-</div>
-{{< /site-region >}}
-
 ## Información general
 
 Cloud Security Vulnerabilities te ayuda a mejorar tu postura de seguridad y lograr el cumplimiento mediante el análisis continuo de imágenes de contenedor, hosts, imágenes de host y funciones serverless en busca de vulnerabilidades, desde los pipelines CI/CD hasta la producción en directo. Aprovechando la capacidad de observación en tiempo de ejecución, te ayuda a priorizar y corregir vulnerabilidades explotables en tus flujos de trabajo diarios, todo en una única vista y sin dependencias de otros productos de Datadog.

@@ -20,11 +20,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la librería de rastreo de Node.js
+title: Configuración de la biblioteca de rastreo de Node.js
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
+Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
 
 Los parámetros del rastreador pueden configurarse con las siguientes variables de entorno:
 
@@ -51,8 +51,8 @@ Se recomienda utilizar `DD_ENV`, `DD_SERVICE` y `DD_VERSION` para configurar `en
 
 `DD_TRACE_ENABLED`
 : **Configuración**: N/A<br>
-**Predeterminado**: `true`<br>
-Si se habilita dd-trace. Configurar esto a `false` desactiva todas las funciones de la librería.<br/>
+**Por defecto**: `true`<br>
+Si se habilita dd-trace. Configurar esto a `false` desactiva todas las funciones de la biblioteca.<br/>
 Consulta también [DD_APM_TRACING_ENABLED][16].
 
 `DD_TRACE_DEBUG`
@@ -124,14 +124,6 @@ Si se informa el nombre de host del sistema para cada traza. Si se deshabilita, 
 **Por defecto**: `false`<br>
 Habilita la configuración del inicio del rastreador y el log de diagnóstico.
 
-`DD_SPAN_SAMPLING_RULES`
-: **Configuración**: `spanSamplingRules`<br>
-**Por defecto**: `[]`<br>
-Las reglas de muestreo de tramos para conservar tramos individuales cuando, de otro modo, el resto de la traza se descartaría. Una matriz de objetos JSON. Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo de tramos. El valor de `sample_rate` debe estar comprendido entre 0,0 y 1,0 (inclusive).
-Para obtener más información, consulta [Mecanismos de consumo][3].<br>
-**Ejemplo<br>
-  - Define la frecuencia de muestreo de tramos en 50% para el servicio `my-service` y el nombre de operación `http.request`, hasta 50 trazas por segundo: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Configuración**: N/A<br>
 **Por defecto**: N/A<br>
@@ -148,26 +140,26 @@ Características experimentales
 **Por defecto**: `{}`<br>
 Las funciones experimentales pueden habilitarse añadiendo claves predefinidas con un valor de `true`. Para obtener más información sobre las funciones experimentales disponibles, [ponte en contacto con el servicio de asistencia][4].
 
-Instrumentación automática de librerías externas
+Instrumentación automática de bibliotecas externas
 : **Configuración**: `plugins`<br>
 **Por defecto**: `true`<br>
-Si se habilita la instrumentación automática de librerías externas utilizando los complementos incorporados.
+Si se habilita la instrumentación automática de bibliotecas externas utilizando los complementos incorporados.
 
 `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`
 : **Configuración**: `cloudPayloadTagging.request`<br>
-**Predeterminado**: N/A (desactivado)<br>
+**Por defecto**: N/A (desactivado)<br>
 **Ejemplo**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
 Una cadena separada por comas de entradas JSONPath para redactar a partir de las solicitudes del SDK AWS. Configurar esto activa el [etiquetado de carga útil de AWS][6] para las solicitudes.
 
 `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`
 : **Configuración**: `cloudPayloadTagging.response`<br>
-**Predeterminado**: N/A (desactivado)<br>
+**Por defecto**: N/A (desactivado)<br>
 **Ejemplo**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
 Una cadena separada por comas de entradas JSONPath para redactar a partir de respuestas de SDK de AWS. Configurar esto activa el [etiquetado de carga útil de AWS][6] para las respuestas.
 
 `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`
 : **Configuración**: `cloudPayloadTagging.maxDepth`<br>
-**Predeterminado**: 10<br>
+**Por defecto**: 10<br>
 **Ejemplo**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH=10`<br>
 Un número entero que representa la profundidad máxima de una carga útil de solicitud/respuesta del SDK de AWS a utilizar para el [etiquetado de carga útil de AWS][6].
 
@@ -181,7 +173,7 @@ Configura etiquetas (tags) globales que se apliquen a todos los tramos (spans) y
 `DD_TRACE_AGENT_URL`
 : **Configuración**: `url`<br>
 **Por defecto**: `http://localhost:8126`<br>
-La URL del Trace Agent a la que envía trazas el rastreador. Tiene prioridad sobre el nombre del host y el puerto, si están definidos. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor predeterminado `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él. Compatible con sockets de dominio Unix, en combinación con el `apm_config.receiver_socket` de tu archivo `datadog.yaml` o con la variable de entorno `DD_APM_RECEIVER_SOCKET`.
+La URL del Trace Agent a la que envía trazas el rastreador. Tiene prioridad sobre el nombre del host y el puerto, si están definidos. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor por defecto `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él. Compatible con sockets de dominio Unix, en combinación con el `apm_config.receiver_socket` de tu archivo `datadog.yaml` o con la variable de entorno `DD_APM_RECEIVER_SOCKET`.
 
 `DD_TRACE_AGENT_HOSTNAME`
 : **Configuración**: `hostname`<br>
@@ -191,12 +183,12 @@ La dirección del Agent a la que envía trazas el rastreador.
 `DD_TRACE_AGENT_PORT`
 : **Configuración**: `port`<br>
 **Por defecto**: `8126`<br>
-El puerto del Trace Agent al que envía trazas el rastreador. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor predeterminado `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
+El puerto del Trace Agent al que envía trazas el rastreador. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor por defecto `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
 
 `DD_DOGSTATSD_PORT`
 : **Configuración**: `dogstatsd.port`<br>
 **Por defecto**: `8125`<br>
-El puerto del Agent DogStatsD al que se envían métricas. Si la [configuración del Agent][13] define `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto del valor predeterminado `8125`, este `DD_DOGSTATSD_PORT` de la librería de rastreo debe coincidir con él.
+El puerto del Agent DogStatsD al que se envían métricas. Si la [configuración del Agent][13] define `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto del valor por defecto `8125`, este `DD_DOGSTATSD_PORT` de la biblioteca de rastreo debe coincidir con él.
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Configuración**: `remoteConfig.pollInterval`<br>
@@ -207,7 +199,7 @@ Intervalo de sondeo de configuración remota en segundos.
 
 `DD_APPSEC_ENABLED`
 : **Configuración**: `appsec.enabled`<br>
-**Predeterminado**: `false`<br>
+**Por defecto**: `false`<br>
 Activa las funciones de protección de aplicaciones y API.
 
 `DD_APPSEC_RULES`
@@ -241,8 +233,8 @@ Para habilitar el enlace entre DBM y APM mediante la inyección de etiquetas. Pu
 
 `DD_LOGS_INJECTION`
 : **Configuración**: `logInjection`<br>
-**Por defecto**: `false`<br>
-Habilita la inyección automática de los ID de rastreo en logs para bibliotecas de registro compatibles.
+**Por defecto**: `true`<br>
+Activa la inyección automática de ID de trazas (traces) en logs de bibliotecas de generación de logs compatibles.
 
 `DD_TRACE_LOG_LEVEL`
 : **Configuración**: `logLevel`<br>
@@ -253,7 +245,7 @@ Una cadena para el nivel mínimo de logs, para que el rastreador utilice cuando 
 
 `DD_TRACE_OTEL_ENABLED`
 : **Configuración**: N/A<br>
-**Predeterminado**: `undefined`<br>
+**Por defecto**: `undefined`<br>
 Cuando `true`, el rastreo basado en OpenTelemetry para la instrumentación [personalizada][15] está activado.
 
 ### Generación de perfiles
@@ -276,20 +268,20 @@ Para obtener información sobre los valores válidos y el uso de las siguientes 
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuración**: `tracePropagationStyle.inject`<br>
-**Predeterminado**: `Datadog,tracecontext,baggage`<br>
+**Por defecto**: `Datadog,tracecontext,baggage`<br>
 Una lista separada por comas de formatos de encabezados a incluir para propagar traces (trazas) distribuidas entre servicios.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Configuración**: `tracePropagationStyle.extract`<br>
-**Predeterminado**: `Datadog,tracecontext,baggage`<br>
+**Por defecto**: `Datadog,tracecontext,baggage`<br>
 Una lista separada por comas de formatos de encabezados de los que intentar extraer datos de propagación de rastreo distribuido. El primer formato encontrado con encabezados completos y válidos se utiliza para definir la trace (traza) para continuar.
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **Configuración**: `tracePropagationStyle`<br>
-**Predeterminado**: `Datadog,tracecontext,baggage`<br>
+**Por defecto**: `Datadog,tracecontext,baggage`<br>
 Un lista separada por comas de formatos de encabezados de los que intentar insertar y extraer datos de propagación de rastreo distribuido. El primer formato encontrado con encabezados completos y válidos se utiliza para definir la trace (traza) para continuar. Las configuraciones más específicas `DD_TRACE_PROPAGATION_STYLE_INJECT` y `DD_TRACE_PROPAGATION_STYLE_EXTRACT` tienen prioridad cuando están presentes.
 
-Para ver más ejemplos de cómo trabajar con la librería, consulta la [documentación de la API][2].
+Para ver más ejemplos de cómo trabajar con la biblioteca, consulta la [documentación de la API][2].
 
 ## Referencias adicionales
 
