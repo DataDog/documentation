@@ -56,7 +56,7 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 | Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
 | Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     | .NET 6+ only, added in version 3.2.0   |
 
-Note that instrumenting x86 applications is supported on Windows x64.
+Note that instrumenting `x86` applications is supported on Windows `x64`.
 
 ## Supported operating systems
 
