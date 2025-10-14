@@ -4,6 +4,9 @@ description: Search all of your PR gates or rule executions.
 aliases:
   - /quality_gates/explorer/search_syntax/
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/pr_gates/search"
   tag: "Documentation"
   text: "Filter and group PR gates"
