@@ -4805,8 +4805,8 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
-    - name: Agent
-      url: llm_observability/evaluations/managed_evaluations/agent_evals
+    - name: Agentic Evaluation
+      url: llm_observability/evaluations/managed_evaluations/agentic_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
       weight: 40101
