@@ -61,13 +61,16 @@ The .NET Tracer supports automatic instrumentation of .NET Framework application
 
 ### Windows
 
-| Operating System             | Version      | Support level         | Package version                        |
-| -----------------------------|--------------|-----------------------|----------------------------------------|
-| Windows Server (x64)         | >= 2012      | [GA](#support-ga)     | latest                                 |
-| Windows Client (x64)         | >= 8.1       | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | < 2012       | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x64)         | < 2012       | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x86)         | All versions | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Operating System             | Version     | Support level         | Package version                        |
+| -----------------------------|-------------|-----------------------|----------------------------------------|
+| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
+| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | 2012+       | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+
+Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
 
 ## Integrations
 

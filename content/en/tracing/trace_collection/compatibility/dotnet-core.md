@@ -68,6 +68,7 @@ The .NET Tracer supports automatic instrumentation of .NET and .NET Core applica
 | -----------------------------|-------------|-----------------------|----------------------------------------|
 | Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
 | Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | 2012+       | [GA](#support-ga)     | latest                                 |
 | Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
 | Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
 | Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
