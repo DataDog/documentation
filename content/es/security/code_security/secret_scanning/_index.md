@@ -16,7 +16,7 @@ Secret Scanning está en Vista previa. Para obtener acceso, ponte en contacto co
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Secret Scanning no está disponible en el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}

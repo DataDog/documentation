@@ -11,7 +11,7 @@ algolia:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -23,7 +23,12 @@ To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1]
 
 ### Scan with Datadog-hosted scanning
 
-For GitHub repositories, you can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub][18] (excluding repositories that use [Git Large File Storage][17])
+- [GitLab.com and GitLab Self-Managed][20]
+- [Azure DevOps][19]
+
+To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
 Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
@@ -43,7 +48,7 @@ Datadog Static Code Analysis supports all source code management providers, with
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
+Configure a GitHub App with the [GitHub integration tile][1] and set up the [source code integration][2] to enable inline code snippets and [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
@@ -59,22 +64,18 @@ When installing a GitHub App, the following permissions are required to enable c
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
+See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
-
-[1]: https://github.com/DataDog/gitlab-integration-setup
+[1]: /integrations/gitlab-source-code/#setup 
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
+Before you can begin installation, request access to the closed Preview using the form above. After being granted access, see the following instructions to complete the setup process.
 
 **Note:** Azure DevOps Server is not supported.
 
@@ -146,7 +147,7 @@ There are three levels of configuration:
 * Repo Level Configuration (Datadog)
 * Repo Level Configuration (Repo File)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
 </div>
 
@@ -704,3 +705,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
 [16]: https://www.first.org/cvss/
+[17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
+[19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
+[20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider

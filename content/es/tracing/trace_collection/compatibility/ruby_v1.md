@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md
 title: Requisitos de compatibilidad de Ruby (heredado)
 ---
-<div class="alert alert-warning">Esta documentación es para <code>ddtrace</code> gem v1.x. Si estás utilizando <code>Datadog</code> gem v2.0 o posterior, consulta la documentación más reciente sobre los <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Requisitos de compatibilidad de Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación es para <code>ddtrace</code> gem v1.x. Si estás utilizando <code>Datadog</code> gem v2.0 o posterior, consulta la documentación más reciente sobre los <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Requisitos de compatibilidad de Ruby</a>.</div>
 
 ## Compatibilidad
 

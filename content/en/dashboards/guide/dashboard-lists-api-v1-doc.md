@@ -15,7 +15,7 @@ Interact with your dashboard lists through the API to make it easier to organize
 
 ## Get items of a dashboard list
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">get items of a dashboard list v2 endpoint</a> instead.
 </div>
 
@@ -375,7 +375,7 @@ curl -X GET \
 
 ## Add items to a dashboard list
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list">add items to a dashboard list v2 endpoint</a> instead.
 </div>
 
@@ -626,7 +626,7 @@ curl -X ADD -H "Content-type: application/json" \
 
 ## Update items of a dashboard list
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">update items of a dashboard list v2 endpoint</a> instead.
 </div>
 
@@ -879,7 +879,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 
 ## Delete items from a dashboard list
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">delete items from a dashboard list v2 endpoint</a> instead.
 </div>
 

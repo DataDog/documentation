@@ -188,7 +188,7 @@ agent diagnose show-metadata agent-telemetry
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
 | **Events**                                  |                                                                                                                        |
-| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled)       |
+| agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
 

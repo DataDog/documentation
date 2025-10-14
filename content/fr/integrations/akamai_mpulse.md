@@ -50,7 +50,7 @@ Une `apiKey` et un `apiToken` sont nécessaires pour configurer lʼintégration 
 
 La `apiKey` est une valeur générée automatiquement qui identifie de manière unique les données (balises) de votre site qui se trouvent dans votre portail mPulse. 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Seuls les administrateurs d'application peuvent accéder à l'option Apps et à l'attribut `apiKey`.
 </div>
 

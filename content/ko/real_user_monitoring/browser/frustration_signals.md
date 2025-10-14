@@ -147,7 +147,7 @@ Frustration Count
 
 세션이 라이브 상태인 경우 정보를 가져오는 중이므로 배너에 타임라인에 표시된 숫자와 다른 숫자가 반영될 수 있습니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 피드백을 제공하거나 기능 요청을 제출하려면 <a href="/help/">Datadog 지원팀</a>에 문의하세요.
 </div>
 

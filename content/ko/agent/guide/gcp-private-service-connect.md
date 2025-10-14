@@ -10,7 +10,7 @@ title: Google Cloud Private Service Connect로 Datadog 연결하기
 ---
 
 {{% site-region region="us,us3,gov,ap1" %}}
-<div class="alert alert-warning">선택한 Datadog 사이트에서는 이 기능이 지원되지 않습니다.</div>
+<div class="alert alert-danger">선택한 Datadog 사이트에서는 이 기능이 지원되지 않습니다.</div>
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}

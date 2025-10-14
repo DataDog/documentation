@@ -223,6 +223,10 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "reference-tables": {
+    "name": "Reference Tables",
+    "description": "Auto-generated tag Reference Tables"
+  },
   "restriction-policies": {
     "name": "Restriction Policies",
     "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
@@ -290,6 +294,10 @@
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
+  },
+  "test-optimization": {
+    "name": "Test Optimization",
+    "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."
   },
   "usage-metering": {
     "name": "Usage Metering",

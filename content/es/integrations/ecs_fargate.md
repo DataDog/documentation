@@ -91,7 +91,7 @@ tile:
 
 ## Información general
 
-<div class="alert alert-warning"> En esta página se describe la integración de ECS Fargate. Para ECS Fargate, consulta la documentación sobre la <a href="http://docs.datadoghq.com/integrations/eks_fargate">integración de EKS Fargate</a> de Datadog.
+<div class="alert alert-danger"> En esta página se describe la integración de ECS Fargate. Para ECS Fargate, consulta la documentación sobre la <a href="http://docs.datadoghq.com/integrations/eks_fargate">integración de EKS Fargate</a> de Datadog.
 </div>
 
 Obtén métricas de todos tus contenedores que se ejecutan en ECS Fargate:
@@ -1226,7 +1226,7 @@ Monitoriza los logs de Fargate mediante el controlador de logs `awslogs` y una f
 
 ### Recopilación de procesos
 
-<div class="alert alert-warning">Puedes ver tus procesos de ECS Fargate en Datadog. Para ver su relación con los contenedores de ECS Fargate, utiliza la versión del Datadog Agent 7.50.0 o una posterior.</div>
+<div class="alert alert-danger">Puedes ver tus procesos de ECS Fargate en Datadog. Para ver su relación con los contenedores de ECS Fargate, utiliza la versión del Datadog Agent 7.50.0 o una posterior.</div>
 
 Puedes monitorizar los procesos en ECS Fargate en Datadog mediante la [página de Live Processes][41]. Para habilitar la recopilación de procesos, añade el [parámetro `PidMode`] [42] en la definición de tarea y establécelo en `task` de la siguiente manera:
 

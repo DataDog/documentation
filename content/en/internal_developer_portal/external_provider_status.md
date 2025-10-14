@@ -66,7 +66,6 @@ External Provider Status monitors the following third-party providers:
 | Mixpanel | `api.mixpanel.com` |
 | OpenAI | `*.openai.com` |
 | PagerDuty | `api.pagerduty.com` |
-| Palo Alto Networks | `api.urlcloud.paloaltonetworks.com` |
 | Render | `api.render.com` |
 | SendGrid | `*.sendgrid.com` |
 | ServiceNow | `*.service-now.com` |

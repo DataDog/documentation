@@ -1,5 +1,5 @@
 --- 
-title: Using LLM Observability and APM
+title: Correlating LLM Observability and APM
 description: Learn how to navigate between LLM Observability spans and APM spans so you can gain insights into LLM-specific operations and your broader application ecosystem.
 aliases:
   - /llm_observability/guide/llm_observability_and_apm
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-This guide explains how you can use both LLM Observability and APM to link LLM Observability and APM [spans][6] in Datadog. 
+This guide explains how you can use both LLM Observability and APM to correlate LLM Observability and APM [spans][6] in Datadog. 
 
 By instrumenting your LLM-specific operations with LLM Observability and your broader application with APM, you can accomplish the following:
 

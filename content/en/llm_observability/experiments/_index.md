@@ -23,12 +23,8 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
-pip install ddtrace>=3.14.0
+pip install ddtrace>=3.15.0
 ```
-
-### Cookbooks
-
-To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
 
 ### Setup
 
@@ -47,7 +43,17 @@ LLMObs.enable(
 
 **Notes**:
 - You need *both* an API key and an application key
-- All datasets and experiments live in a project
+  
+## Projects
+_Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
+You can create a project manually in the Datadog console, API, and SDK by specifying a project name that does not already exist in `LLMObs.enable`.
+
+```python
+LLMObs.enable(
+    ...
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+)
+```
 
 ## Datasets
 
@@ -211,9 +217,10 @@ Evaluators are functions that measure how well the model or agent performs by co
 - score: returns a numeric value (float)
 - categorical: returns a labeled category (string)
 
-### Creating an experiment
+### Summary Evaluators
+Summary Evaluators are optionally defined functions that measure how well the model or agent performs, by providing an aggregated score against the entire dataset, outputs, and evaluation results. The supported evaluator types are the same as above.
 
-Create an experiment using `LLMObs.experiment()`:
+### Creating an experiment
 
 1. Load a dataset
    ```python
@@ -223,20 +230,23 @@ Create an experiment using `LLMObs.experiment()`:
    dataset = LLMObs.pull_dataset("capitals-of-the-world")
    ```
 
-2. Define a task function that processes a single dataset record.
+2. Define a task function that processes a single dataset record  
+
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
        question = input_data["question"]
        # Your LLM or processing logic here
        return "Beijing" if "China" in question else "Unknown"
    ```
-
-   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.
-
+   A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.  
+   This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
+     
+   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.  
    If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-3. Define evaluator functions.
+4. Define evaluator functions.  
+   
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
        return output_data == expected_output
@@ -253,15 +263,28 @@ Create an experiment using `LLMObs.experiment()`:
    def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
        fake_llm_call = "excellent"
        return fake_llm_call
-   ```
+   ```  
+   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.  
+   Evaluators can only return a string, a number, or a Boolean.  
 
-4. Create and run the experiment.
+5. (Optional) Define summary evaluator function(s).  
+   
+   ```python
+    def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
+        return evaluators_results["exact_match"].count(True)
+
+   ```  
+   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
+   Summary evaluators can only return a string, a number, or a Boolean.  
+
+6. Create and run the experiment.
    ```python
    experiment = LLMObs.experiment(
        name="capital-cities-test",
        task=task,
        dataset=dataset,
        evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+       summary_evaluators=[num_exact_matches], # optional
        description="Testing capital cities knowledge",
        config={
            "model_name": "gpt-4",
@@ -273,7 +296,7 @@ Create an experiment using `LLMObs.experiment()`:
    results = experiment.run()  # Run on all dataset records
 
    # Process results
-   for result in results:
+   for result in results.get("rows", []):
        print(f"Record {result['idx']}")
        print(f"Input: {result['input']}")
        print(f"Output: {result['output']}")
@@ -297,20 +320,18 @@ Create an experiment using `LLMObs.experiment()`:
    results = experiment.run(raise_errors=True)
    ```
 
-5. View your experiment results in Datadog:
+7. View your experiment results in Datadog.
    ```
    print(f"View experiment: {experiment.url}")
    ```
 
-## Setting Up An Automated Experiment (CI/CD)
-You can run an `experiment` once, or set it to run automatically in your pipelines (like CI/CD). For example, kick it off against your dataset on every change to compare with your baseline and catch any impact on your system.
+## Setting up an automated experiment in CI/CD
+You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
 ### GitHub Actions
-The following example assumses:
-- You have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections above and can write and run an experiment end to end.
-- You are using a native testing framework like pytest else you can call the main function directly from the action.
-- Workflow files live within the `.github/workflows` directory of your root repository.
-- Workflow files use `YAML syntax` and use the `.yml`extension
+This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
+
+**Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
 
 ```yaml
 name: Experiment SDK Test
@@ -323,7 +344,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: protected-main-env # This job will use secrets defined in the 'protected-main-env' environment
+    environment: protected-main-env # The job uses secrets defined in this environment
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -340,6 +361,10 @@ jobs:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
 ```
+
+## Cookbooks
+
+To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
 
 ## HTTP API
 

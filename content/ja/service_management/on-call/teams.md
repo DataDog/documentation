@@ -7,7 +7,7 @@ title: チームをオンボーディングする
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では On-Call はサポートされていません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では On-Call はサポートされていません。</div>
 {{< /site-region >}}
 
 [Datadog On-Call][2] において、チームは中心的な組織単位です。ページ (通知) はチームに送信され、チームのスケジュールやエスカレーションポリシーによって、適切なチームメンバーにルーティングされます。
