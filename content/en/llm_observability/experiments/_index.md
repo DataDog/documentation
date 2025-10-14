@@ -306,6 +306,9 @@ Create an experiment using `LLMObs.experiment()`:
 You can run an `experiment` once, or set it to run automatically in your pipelines (like CI/CD). For example, kick it off against your dataset on every change to compare with your baseline and catch any impact on your system.
 
 ### GitHub Actions
+The following example assumses:
+- You have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections above and can write and run an experiment end to end.
+- You are using a native testing framework like pytest else you can call the main function directly from the action.
 - Workflow files live within the `.github/workflows` directory of your root repository.
 - Workflow files use `YAML syntax` and use the `.yml`extension
 
@@ -888,3 +891,7 @@ Empty body on success.
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[14]: /llm_observability/experiments/?tab=manual#setup
+[15]: /llm_observability/experiments/?tab=manual#projects
+[16]: /llm_observability/experiments/?tab=manual#datasets
+[17]: /llm_observability/experiments/?tab=manual#experiments
