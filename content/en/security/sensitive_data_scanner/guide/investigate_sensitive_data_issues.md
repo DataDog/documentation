@@ -26,7 +26,7 @@ Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit
 
 The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sensitive data issues so that you can investigate, collaborate, and document your findings, and answer those questions.
 
-{{< img src="sensitive_data_scanner/findings_20251010.png" alt="The Findings page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/findings_20251014.png" alt="The Findings page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
 
 ## Triage sensitive data issues
 
