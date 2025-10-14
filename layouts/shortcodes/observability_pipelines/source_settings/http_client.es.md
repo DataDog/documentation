@@ -1,0 +1,15 @@
+Para configurar tu fuente de cliente HTTP/S:
+
+1. Selecciona tu estrategia de autorización.
+2. Selecciona el decodificador que deseas utilizar en los mensajes HTTP. Los logs extraídos de la fuente HTTP debe estar en este formato.
+3. Opcionalmente, activa el interruptor para habilitar TLS. Si activas TLS, se requieren los siguientes archivos de certificados y claves.<br>**Nota**: Todas las rutas de archivos son relativas al directorio de datos de configuración, que es `/var/lib/observability-pipelines-worker/config/` por defecto. Consulta [Configuraciones avanzadas][10172] para obtener más información. El archivo debe ser propiedad del usuario `observability-pipelines-worker group` y `observability-pipelines-worker`, o al menos legible por el grupo o usuario.
+   - `Server Certificate Path`: la ruta al archivo del certificado que ha sido firmado por tu archivo raíz de autoridad de certificación (CA) en formato DER o PEM (X.509).
+   - `CA Certificate Path`: la ruta al archivo de certificado que es tu archivo raíz de autoridad de certificación (CA) en formato DER o PEM (X.509).
+   - `Private Key Path`: la ruta al archivo de clave privada `.key` que pertenece a la ruta de tu certificado de servidor en formato DER o PEM (PKCS#8).
+4. Introduce el intervalo entre extracciones.
+   - Tu servidor HTTP debe ser capaz de gestionar solicitudes GET en este intervalo.
+   - Dado que las solicitudes se ejecutan simultáneamente, si una extracción tarda más que el intervalo dado, se inicia una nueva extracción, lo que puede consumir recursos adicionales. Establece el tiempo de espera en un valor inferior al intervalo de extracción para evitar que esto ocurra.
+5. Introduce el tiempo de espera para cada solicitud de extracción.
+
+[10172]: /es/observability_pipelines/advanced_configurations/
+<!-- El enlace 10172 se utiliza en múltiples códigos cortos, de modo de que si cambia, te aseguras de actualizar esos códigos cortos mediante buscar y reemplazar -->

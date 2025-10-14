@@ -1,4 +1,5 @@
 ---
+description: ターミナル セッションを記録し、Datadog で分析し、CoTerm のバリデーション レイヤーによって危険なターミナル コマンドから保護します。
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-coterm/
   tag: ブログ
@@ -43,7 +44,7 @@ CoTerm でできること:
 - 機密データが複数行にまたがる場合、[機密データのマスキング][2] が失敗することがあります。
 - Linux では、`seccomp` ベースのトレーシングにより、記録中に権限を昇格させることはできません。
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 
