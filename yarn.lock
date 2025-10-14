@@ -7024,7 +7024,7 @@ __metadata:
     eslint-plugin-standard: "npm:^4.1.0"
     fancy-log: "npm:^1.3.3"
     geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
-    html-to-mdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llm-support/html-to-mdoc-v1.0.3.tgz"
+    html-to-mdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llm-support-testing/html-to-mdoc-v1.0.1.tgz"
     hugo-bin: "npm:0.148.0"
     husky: "npm:^9.1.7"
     instantsearch.js: "npm:^4.74.1"
@@ -9237,9 +9237,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-to-mdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llm-support/html-to-mdoc-v1.0.3.tgz":
-  version: 1.0.3
-  resolution: "html-to-mdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llm-support/html-to-mdoc-v1.0.3.tgz"
+"html-to-mdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llm-support-testing/html-to-mdoc-v1.0.1.tgz":
+  version: 1.0.1
+  resolution: "html-to-mdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llm-support-testing/html-to-mdoc-v1.0.1.tgz"
   dependencies:
     "@markdoc/markdoc": "npm:0.5.2"
     htmlnano: "npm:^2.1.5"
@@ -9249,7 +9249,7 @@ __metadata:
     svgo: "npm:^3.3.2"
     typescript: "npm:^5.8.3"
     zod: "npm:^3.25.28"
-  checksum: 10/52c225c448fe16865399b62429205369c0e8e7d79b3855c727ae488f00f1640f527db0268771fa1d85985c4b57027575e119b0c39d6276b4570d88b8cb662658
+  checksum: 10/ade035877a684ade0457167d779158ca288798ae322c51418b3a849cd33e51bb927810a88c11f8ce6a35b5c1070eb02f8b83d1a9473c09dd9bd0cafe3d3466e8
   languageName: node
   linkType: hard
 
