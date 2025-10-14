@@ -344,7 +344,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [15]: https://arxiv.org/pdf/2312.06674
 [16]: https://arxiv.org/pdf/2404.05993
 [17]: https://arxiv.org/pdf/2309.11998
-[18]: /llm_observability/evaluations/managed_evaluations/agent_evals
-[19]: /llm_observability/evaluations/managed_evaluations/agent_evals#tool-selection
-[20]: /llm_observability/evaluations/managed_evaluations/agent_evals#tool-argument-correctness
-[21]: /llm_observability/evaluations/managed_evaluations/agent_evals#goal-completeness
+[18]: /llm_observability/evaluations/managed_evaluations/agent_evaluations
+[19]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
+[20]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
+[21]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#goal-completeness
