@@ -37,7 +37,7 @@ This evaluation checks whether the agent successfully selected the appropriate t
 1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 1. Enable the `ToolSelection` evaluation in the Datadog UI by [creating a new evaluation][1] or [editing an existing evaluation][2].
 
-This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -92,7 +92,7 @@ triage_agent = Agent(
 
 ## Tool Argument Correctness
 
-Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (e.g., a string instead of an integer) or irrelevant values cause failures in downstream execution.
+Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (for example, a string instead of an integer) or irrelevant values cause failures in downstream execution.
 
 ### Evaluation summary
 
@@ -198,7 +198,7 @@ result = triage_agent.run_sync(
 
 ### Troubleshooting
 - Make sure your tools use type hints—the evaluation relies on schema definitions.
-- Make sure to include a tool description (i.e. the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
+- Make sure to include a tool description (for example, the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
 - Validate that your LLM prompt includes enough context for correct argument construction.
 
 
