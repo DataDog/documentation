@@ -1,5 +1,5 @@
 ---
-title: Network Tests
+title: Network Path Tests
 description: Analyze global Network Paths with managed locations.
 aliases:
 further_reading:
