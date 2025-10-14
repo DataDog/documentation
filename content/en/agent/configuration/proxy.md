@@ -1,5 +1,6 @@
 ---
 title: Datadog Agent Proxy Configuration
+description: "Configure the Datadog Agent to send traffic through HTTP/HTTPS proxies with authentication and bypass options."
 aliases:
 - /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 - /agent/proxy
@@ -73,7 +74,7 @@ DD_PROXY_HTTP="http://<USER>:<PASSWORD>@<PROXY_HOST>:<PROXY_PORT>"
 DD_PROXY_HTTPS="http://<USER>:<PASSWORD>@<PROXY_HOST>:<PROXY_PORT>"
 
 DD_PROXY_NO_PROXY="<HOST_TO_BYPASS_1> <HOST_TO_BYPASS_2>"
-DD_PROXY_NO_PROXY_NONE_EXACT_MATCH=true
+DD_NO_PROXY_NONEXACT_MATCH=true
 
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 ```

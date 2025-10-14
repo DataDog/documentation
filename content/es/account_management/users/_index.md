@@ -18,7 +18,7 @@ further_reading:
 title: Gestión de usuarios
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El sitio Datadog for Government solo permite el inicio de sesión con SAML.</div>
+<div class="alert alert-danger">El sitio Datadog for Government solo permite el inicio de sesión con SAML.</div>
 {{< /site-region >}}
 
 La pestaña **User** (Usuario) en **Organization Settings** (Parámetros de la organización) te permite gestionar los usuarios y sus roles asociados. Puedes alternar entre las vistas de lista y de cuadrícula haciendo clic en **List View** (Vista de lista) y **Grid View** (Vista de cuadrícula) a la derecha.

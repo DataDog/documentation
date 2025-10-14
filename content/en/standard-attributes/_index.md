@@ -1,6 +1,7 @@
 ---
 title: Default Standard Attributes
 disable_sidebar: true
+description: "A table of the attributes automatically applied to data sent to Datadog by the Agent by each of the RUM, Logs, and APM products, as applicable to the data domain."
 further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
@@ -606,26 +607,29 @@ attributes:
     product_source:
       - icon-rum
       - ios
+      - browser
     type: string
-    domain: RUM user attributes (iOS)
+    domain: RUM user attributes (iOS, Browser)
   - name: usr.name
     description: Name of the user.
     product_source:
       - icon-rum
       - android
       - ios
+      - browser
       - roku
     type: string
-    domain: Global user attributes (Android, iOS, Roku)
+    domain: Global user attributes (Android, iOS, Browser, Roku)
   - name: usr.email
     description: Email of the user.
     product_source:
       - icon-rum
       - android
       - ios
+      - browser
       - roku
     type: string
-    domain: Global user attributes (Android, iOS, Roku)
+    domain: Global user attributes (Android, iOS, Browser, Roku)
  
   - name: session.id
     description: Unique ID of the session.

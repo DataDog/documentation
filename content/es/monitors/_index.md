@@ -18,7 +18,6 @@ cascade:
     - monitorización
 description: Crea monitores, configura notificaciones y automatizaciones, y gestiona
   tus monitores utilizando la plataforma de alertas
-disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Alerting
   tag: Notas de la versión
@@ -33,6 +32,10 @@ further_reading:
 - link: /api/v1/monitors/
   tag: Documentación
   text: API de monitores de Datadog
+- link: https://www.datadoghq.com/blog/monitor-notification-rules/
+  tag: Blog
+  text: Enruta tus alertas de monitores con las reglas de notificación de monitores
+    de Datadog
 title: Monitores
 ---
 
@@ -51,10 +54,10 @@ La forma más rápida de empezar con los monitores de Datadog es con [Monitores 
 
 También puedes crear tus propios monitores desde cero en los entornos de laboratorio en el Centro de aprendizaje, o en tu aplicación siguiendo la guía Empezando con monitores.
 
-{{< whatsnext desc="Usa los siguientes recursos para crear un monitor:" >}}
-    {{< nextlink href="/getting_started/monitors/" >}}Empezando con monitores: guía sobre cómo crear un monitor basado en métricas{{< /nextlink >}}
-    {{< nextlink href="/monitors/types/" >}}Crear un monitor desde tipos de monitora monitor{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Centro de aprendizaje: crear un monitor basado en métricas en un entorno de laboratorio de prueba{{< /nextlink >}}
+{{< whatsnext desc="Use the following resources to create a monitor:" >}}
+    {{< nextlink href="/getting_started/monitors/" >}}Empezando con los monitores: Guía sobre cómo crear un monitor basado en métricas{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/" >}}Crear un monitor desde Tipos de monitores{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}Centro de aprendizaje: Crear un monitor en un entorno de laboratorio de espacio aislado{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Analizar datos agregados
@@ -75,12 +78,11 @@ Los monitores y las alertas son herramientas esenciales para garantizar la fiabi
 1. [Programa tiempos de inactividad para silenciar monitores.][4].
 1. [Organiza y gestiona monitores.][5]
 1. [Investiga las alertas a través de la página de estado.][6].
-1. [Soluciona errores de configuración de monitores en la página Monitor Quality][7].
+1. [Soluciona errores de configuración de monitores en la page (página) Calidad de monitores][7].
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/monitors/recommended
 [2]: /es/monitors/notify

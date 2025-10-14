@@ -1,5 +1,6 @@
 ---
 title: Kubernetes log collection
+description: Configure log collection from containerized applications running on Kubernetes using the Datadog Agent
 aliases:
   - /agent/kubernetes/log
 further_reading:
@@ -136,7 +137,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Warning for unprivileged installations</strong>
 <br/><br/>
 When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.
@@ -392,7 +393,7 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IMAGE>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
+However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_NAME>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 

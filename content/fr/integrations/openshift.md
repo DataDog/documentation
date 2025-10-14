@@ -92,7 +92,7 @@ En fonction de vos besoins et des [contraintes de sécurité][1] de votre cluste
 | Surveillance des live containers      | Non prise en charge                            | Non prise en charge         | Prise en charge                                             |
 | Surveillance des live processes        | Non prise en charge                            | Non prise en charge         | Prise en charge                                             |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <bold>OpenShift 4.0+</bold> : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec <code>hostNetwork: true</code> dans le fichier de configuration <code>datadog.yaml</code> pour récupérer les tags et alias. L'accès aux serveurs de métadonnées à partir du réseau des POD est autrement impossible.
 </div>
 
@@ -140,7 +140,7 @@ Si SELinux est en mode strict, il est conseillé d'accorder le [type `spc_t`][7]
 N'oubliez pas d'ajouter le <a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">compte de service datadog-agent</a> à la <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">SCC datadog-agent</a> nouvellement créée en ajoutant <code>system:serviceaccount:<espace de nommage datadog-agent>:<nom du compte de service datadog-agent ></code> à la section <code>users</code>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>OpenShift 4.0+</b> : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec <code>allowHostNetwork: true</code> dans le fichier de configuration <code>datadog.yaml</code> pour récupérer les tags et alias des hosts. L'accès aux serveurs de métadonnées à partir du réseau des pods est autrement impossible.
 </div>
 

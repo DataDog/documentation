@@ -123,7 +123,7 @@ The example below shows the **New Connection** dialog box for the OpenAI connect
 
 ### Restrict connection use
 
-To learn how to restrict connection use, see Access and Authentication for [Workflow Automation][4] or [App Builder][15].
+To learn how to restrict connection use, see Access and Authentication for [Workflow Automation][12] or [App Builder][15].
 
 ## HTTP connection
 
@@ -153,7 +153,7 @@ Each connection in the group must have a set of unique identifier tags so that a
 
 ### Create a connection group
 
-<div class="alert alert-info"><strong>Note</strong>: You can only add connections to a group if you have <a href="/service_management/workflows/access/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
+<div class="alert alert-info">You can only add connections to a group if you have <a href="/actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
 
 To create a connection group:
 
@@ -176,7 +176,7 @@ To use a connection group:
 
 **Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow or app tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure the workflow or app so that it can't point to a connection that doesn't have a Resolver permission.
-- Remove the connection that doesn't have a Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
+- Remove the connection that doesn't have a Resolver permission from the connection group. <div class="alert alert-warning">If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
 
@@ -192,7 +192,7 @@ To delete a connection group:
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
 
-<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group impacts any workflows and apps that are using that group.</div>
+<div class="alert alert-danger">Deleting a connection group impacts any workflows and apps that are using that group.</div>
 
 ## Further reading
 
@@ -202,13 +202,12 @@ To delete a connection group:
 
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
-[4]: /service_management/workflows/access/#restrict-connection-use
 [6]: /integrations/
 [8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
 [11]: https://datadoghq.slack.com/
-[12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
+[12]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection
 [13]: /getting_started/tagging/
 [14]: https://app.datadoghq.com/app-builder/
-[15]: /service_management/app_builder/auth/
+[15]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-connection

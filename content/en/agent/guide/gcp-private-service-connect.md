@@ -1,5 +1,6 @@
 ---
 title: Connect to Datadog over Google Cloud Private Service Connect
+description: Configure Google Cloud Private Service Connect endpoints and DNS zones to send telemetry to Datadog privately without using the public internet.
 further_reading:
     - link: '/integrations/google_cloud_platform/'
       tag: 'Documentation'
@@ -10,7 +11,7 @@ further_reading:
 ---
 
 {{% site-region region="us,us3,gov,ap1,ap2" %}}
-<div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
+<div class="alert alert-danger">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}

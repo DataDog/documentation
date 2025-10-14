@@ -1,57 +1,57 @@
 ---
-description: Aprende a configurar reglas de la puerta de calidad en Datadog.
+description: Aprende a configurar reglas para Puertas de calidad en Datadog.
 further_reading:
 - link: /quality_gates
   tag: Documentación
-  text: Más información sobre las puertas de calidad
-title: Configurar reglas de la puerta calidad
+  text: Más información sobre Puertas de calidad
+title: Configurar reglas para Puertas de calidad
 ---
 
 ## Información general
 
-Para usar las puertas de calidad de Datadog, puedes definir una o más reglas en la página de [**Reglas de la puerta de calidad**][2] e integrarlas en tu pipeline de CI con el comando [`datadog-ci gate evaluate`][4].
+Para utilizar Datadog Quality Gates, puedes definir una o varias reglas en la [página **Quality Gate Rules**][2] e integrarlas en tu CI pipeline con el [comando`datadog-ci gate evaluate`][4].
 
-{{< img src="quality_gates/rules_list_2.png" alt="Página de puertas de calidad en Datadog" style="width:100%" >}}
+{{< img src="quality_gates/rules_list_2.png" alt="Página Quality Gates en Datadog" style="width:100%" >}}
 
-Las puertas de calidad garantizan que solo se despliegue el código que cumple con tus estándares de calidad, lo que automatiza tus procesos de control de calidad y mejora la fiabilidad del software.
+Quality Gates garantiza que sólo se despliegue el código que cumpla tus normas de calidad, automatizando tus procesos de control de calidad y mejorando la fiabilidad del software.
 
 ## Crear una regla
 
-Para crear una regla de puertas de calidad en Datadog:
+Para crear una regla de Quality Gates en Datadog:
 
-1. Dirígete a [**Software Delivery** > **Quality Gates** > **Quality Gate Rules**][2] (Entrega de software > Puertas de calidad > Reglas de la puerta de calidad) y haz clic en **+ New Rule** (+ Regla nueva).
-2. Selecciona un tipo de regla: `Test`, `Static Analysis` (análisis estático) o `Software Composition Analysis`.
-3. Establece el contexto de la regla, que define cuándo se debe evaluar, al seleccionar `Always evaluate` (Evaluar siempre) o `Select when to evaluate` (Seleccionar cuándo evaluar). Puedes añadir ramas o repositorios para incluirlos o excluirlos del contexto de la regla, o añadir un contexto personalizado.
+1. Ve a [**Software Delivery** > **Quality Gates** > **Quality Gate Rules**][2] (Entrega de software > Quality Gates > Reglas de Quality Gate) y haz clic en **+ New Rule** (+ Nueva regla).
+2. Selecciona un tipo de regla: `Test`, `Static Analysis`, o `Software Composition Analysis`.
+3. Establece el ámbito de la regla, que define cuándo debe evaluarse la regla, seleccionando `Always evaluate` o `Select when to evaluate`. Puedes añadir ramas o repositorios para incluirlos o excluirlos del ámbito de la regla, o añadir un ámbito personalizado.
 
-   {{< img src="quality_gates/setup/custom_scope_1.png" alt="Cómo añadir un contexto personalizado al contexto de una regla en las puertas de calidad" style="width:80%;">}}
+   {{< img src="quality_gates/setup/custom_scope_1.png" alt="Añadir un ámbito personalizado a un ámbito de regla en Quality Gates" style="width:80%;">}}
 
-   Puedes crear una regla que solo se evalúe en repositorios y ramas específicos. Para personalizar el contexto de la regla, haz clic en `Select when to evaluate` (Seleccionar cuándo evaluar) y especifica la rama o el repositorio que se debe incluir o excluir.
+   Puedes crear una regla que se evalúe sólo en repositorios y ramas específicos. Para personalizar el alcance de la regla, haz clic en `Select when to evaluate` y especifica la rama o el repositorio que debe incluirse o excluirse.
 
-   Para añadir un contexto personalizado (como el nombre de un equipo), haz clic en **+ Add Filter** (+ Añadir filtro) y selecciona **Custom scope** (Contexto personalizado). Ingresa un nombre de etiqueta (tag) sin espacios (como `documentation` o `team-documentation`) y haz clic en **Add Custom Scope** (Añadir contexto personalizado). Ingresa los valores que se deben incluir o excluir. 
+   Para añadir un ámbito personalizado (como el nombre de un equipo), haz clic en **+ Add Filter** (+ Añadir filtro) y selecciona **Custom scope** (Ámbito personalizado). Introduce un nombre de etiqueta sin espacios (como `documentation` o `team-documentation`) y haz clic en **Add Custom Scope** (Añadir ámbito personalizado). Introduce los valores que deben incluirse o excluirse. 
 
-   Al añadir un contexto personalizado a una regla, los contextos personalizados se deben pasar al comando `datadog-ci gate evaluate` mediante la opción `--scope`. Para obtener más información, consulta [Comprensión de los contextos de las reglas][13].
+   Al añadir un ámbito personalizado a una regla, los ámbitos personalizados deben pasarse al comando `datadog-ci gate evaluate` utilizando la opción `--scope`. Para obtener más información, consulta [Comprender los ámbitos de las reglas][13].
 
-4. Define las condiciones de la regla. La condición de la regla indica en qué escenario falla la regla, lo que hace que falle el pipeline relacionado (si la regla está bloqueando). Puedes seleccionar una de las condiciones de regla existentes para el tipo de regla que hayas seleccionado. Si el contexto de la regla se establece en `always evaluate` (evaluar siempre), la regla se evalúa en todos los repositorios y ramas.
+4. Define las condiciones de la regla. La condición de la regla establece en qué escenario falla la regla, fallando el pipeline relacionado (si la regla es de bloqueo). Puedes seleccionar una de las condiciones de regla existentes para el tipo de regla que hayas seleccionado. Si el ámbito de la regla se establece en `always evaluate`, la regla se evalúa en todos los repositorios y ramas.
 
-   En el siguiente ejemplo se demuestra cómo crear una regla de análisis estático que falla cuando hay una o más infracciones de calidad de código de análisis estático con el estado `error` en un repositorio.
+   El siguiente ejemplo muestra cómo crear una regla de Static Analysis que falla cuando una o más violaciones de calidad del código de Static Analysis con estado `error` están contenidas dentro de un repositorio.
 
-   Selecciona **Static Analysis** (Análsis estático) para el tipo de regla y haz clic en `Always evaluate` (Evaluar siempre) para el contexto de la regla. 
+   Selecciona **Static Analysis** para el tipo de regla y haz clic en `Always evaluate` para el ámbito de la regla. 
 
-   {{< img src="quality_gates/setup/static_analysis_2.png" alt="Una regla de análisis estático que falla cuando hay cualquier infracción de calidad del código con un estado de error en cualquier servicio" style="width:100%" >}}
+   {{< img src="quality_gates/setup/static_analysis_2.png" alt="Una regla de Static Analysis que falla cuando cualquier violación de la calidad del código con un estado de error está contenida en cualquier servicio" style="width:100%" >}}
 
-   En la sección **Define rule conditions** (Definir condiciones de la regla), selecciona `code quality violations` (infracciones de calidad del código) en el menú desplegable. Luego, selecciona el tipo de estado `error`, selecciona `above or equal to` (superior o igual a) e ingresa el valor `1`. 
+   En la sección **Define rule conditions** (Definir condiciones de regla), selecciona `code quality violations` en el menú desplegable. A continuación, selecciona el tipo de estado `error`, selecciona `above or equal to`, e introduce el valor de `1`. 
 
 5. Especifica un nombre de regla que describa la regla que estás creando.
-6. Selecciona si la regla debe bloquear el pipeline cuando falla. Las reglas sin capacidad de bloqueo son útiles cuando implementas una regla nueva y quieres verificar su comportamiento antes de darle la capacidad de bloqueo.
-7. Integra la regla de la puerta de calidad en tu configuración de compilación incluido el [comando `datadog-ci gate evaluate`](#integrate-quality-gates-in-your-cicd-pipeline).
-8. Habilita un [check de estado de GitHub](#enable-github-check-creation) para la regla de tu puerta de calidad al configurar los permisos adecuados (como `Checks: Write`) en tus aplicaciones de GitHub. Para darle a este check la capacidad de bloqueo en tus solicitudes pull, debes hacer clic en la casilla de verificación **Required** (Requerido) en la [configuración de ramas protegidas][14] de tu aplicación de GitHub.
+6. Selecciona si la regla debe bloquear el pipeline cuando falla. Las reglas que no son de bloqueo son útiles cuando se despliega una nueva regla y se desea verificar su comportamiento antes de hacerla de bloqueo.
+7. Integra la regla de Quality Gate en tu configuración de compilación incluyendo el [comando`datadog-ci gate evaluate`](#integrate-quality-gates-in-your-cicd-pipeline).
+8. Habilita una [comprobación de estado de GitHub](#enable-github-check-creation) para tu regla de Quality Gate estableciendo los permisos adecuados (como `Checks: Write`) en tus aplicaciones de GitHub. Para establecer esta comprobación como bloqueo en tus solicitudes pull, debes hacer clic en la casilla **Required** (Obligatorio) de la [configuración de Protected Branches][14] de tu aplicación de GitHub.
 9. Haz clic en **Create Rule** (Crear regla).
 
-### Integrar puertas de calidad en tu pipeline de CI/CD
+### Integrar Quality Gates en tu pipeline de CI/CD
 
-Invoca la evaluación de puertas de calidad al llamar al comando [`datadog-ci gate evaluate`][4]. Las puertas de calidad requieren la versión `2.27.0` o posterior de [`datadog-ci`][7].
+Invoca la evaluación de Quality Gates llamando al comando [`datadog-ci gate evaluate`][4]. Quality Gates requiere [`datadog-ci`][7] versión `2.27.0` o posterior.
 
-<div class="alert alert-info">Para que el comando funcione de forma adecuada, asegúrate de que los eventos (tests, análisis estático e infracciones de Software Composition Analysis) se envíen a Datadog <strong>antes</strong> de que se ejecute el comando <code>datadog-ci gate evaluate</code>. De lo contrario, es posible que las reglas muestren un comportamiento incorrecto debido a la ausencia de estos eventos.
+<div class="alert alert-info">Para que el comando funcione correctamente, asegúrate de que los eventos (tests, análisis estático y violaciones de análisis de composición de software) se envían a Datadog <strong>antes de que</strong> se ejecute el comando <code>datadog-ci gate evaluate</code>. De lo contrario, las reglas pueden mostrar un comportamiento incorrecto debido a la ausencia de estos eventos.
 </div>
 
 Este comando:
@@ -108,25 +108,25 @@ Para habilitar los checks de GitHub:
 
 Una vez que se otorgue el permiso, podrás ver los checks en GitHub.
 
-**Nota**: Volver a ejecutar un check no vuelve a ejecutar la regla de puertas de calidad correspondiente.
+**Nota**: Volver a ejecutar un check no vuelve a ejecutar la regla de Puertas de calidad correspondiente.
 
 ## Gestionar reglas
 
-Puedes editar y eliminar reglas de puertas de calidad al colocar el ratón sobre una regla en la [página de **Reglas de puertas de calidad**][2].
+Puedes editar y eliminar reglas de puertas de calidad al colocar el ratón sobre una regla en la [página de **Reglas de Puertas de calidad**][2].
 
 {{< img src="quality_gates/setup/delete_2.png" alt="Edita, clona o elimina una regla de puertas de calidad" style="width:100%;">}}
 
 De manera alternativa, haz clic en una regla de la lista y haz clic en los iconos para **editar**, **clonar** o **eliminar**.
 
-## {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Sintético Mobile Test" style="width:100%;">}}
+## Permisos
 
-Lanzar localizaciones privadas
+Sólo los usuarios con el permiso `quality_gate_rules_write` pueden crear y editar reglas de Puertas de calidad. Los usuarios con el permiso `quality_gate_rules_read` pueden ver las reglas de Puertas de calidad.
 
-Utiliza [Localizaciones privadas sintéticas][15] para monitorizar APIs y sitios web internos, o crea localizaciones personalizadas en áreas críticas para tu negocio.
+Para obtener más información, consulta la [documentación de permisos RBAC][1].
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/account_management/rbac/permissions
 [2]: https://app.datadoghq.com/ci/quality-gates

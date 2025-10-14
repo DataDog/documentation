@@ -3,9 +3,9 @@ title: Delete Logs with Sensitive Data
 
 disable_toc: false
 further_reading:
-- link: "logs/guide/control-sensitive-logs-data/"
+- link: "logs/guide/manage-sensitive-logs-data-access/"
   tag: "Documentation"
-  text: "Control Sensitive Logs Data"
+  text: "Manage sensitive logs data access"
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
@@ -49,7 +49,7 @@ Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in D
 
 ## Submit a request for log deletion
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin on the request so they can confirm the deletion request.
 </div>
 
@@ -61,7 +61,7 @@ If the options for changing your retention period, making logs un-queryable, and
 1. If the request is for targeted deletion by time frame, the exact time range, in Epoch or UTC format, of the logs that contained sensitive data.
 1. The name of the indexes where the sensitive data is in.
 1. Confirmation that you understand the following requirement:
-   <div class="alert alert-danger">
+   <div class="alert alert-warning">
    Datadog deletes logs by time buckets, not by query scope or precise time frame. Therefore, Datadog might have to delete a larger amount of data than your exposed logs. For example. if you need to delete all error logs from <code>service:x</code> that came in between 10:00 a.m. to 12:00 p.m. from <code>index:main</code>, Datadog might have to delete all logs in that index from 1:00 a.m. to 5:00 p.m. Datadog support will work with you to ensure that only the necessary data is deleted.
    </div>
 
@@ -70,7 +70,7 @@ If the options for changing your retention period, making logs un-queryable, and
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /logs/guide/control-sensitive-logs-data/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
+[2]: /logs/guide/manage-sensitive-logs-data-access/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
 [3]: /help/
 [4]: /getting_started/site/
 [5]: https://www.datadoghq.com/product/sensitive-data-scanner/

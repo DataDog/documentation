@@ -14,7 +14,7 @@ further_reading:
 title: Azure パイプラインでトレースを設定する
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server is not officially supported.
 </div>
 

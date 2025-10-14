@@ -8,13 +8,13 @@ title: PCI DSS 準拠
 ---
 
 {{% site-region region="us3,us5,eu,ap1,gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 APM およびログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 APM およびログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 

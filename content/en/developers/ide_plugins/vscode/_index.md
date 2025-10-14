@@ -28,18 +28,20 @@ further_reading:
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
 ## Overview
 
-The Datadog extension for Visual Studio Code (VS Code) brings Datadog to your code editor to accelerate your development. It can also be used in Cursor and other forks of VS Code.
+The Datadog extension for VS Code and Cursor brings Datadog to your code editor to accelerate your development.
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="Datadog extension for VS Code and Cursor" style="width:100%;" >}}
 
 The extension includes these features:
+
+- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and contexts from Datadog.
 
 - [**Log Annotations**](#log-annotations): Gauge log volumes and search logs from your code.
 
@@ -53,15 +55,13 @@ The extension includes these features:
 
 - [**Fix in Chat**](?tab=cursor#fix-in-chat): (Cursor only) Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
 
-- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): (Cursor only) Connect Cursor's AI agent to production telemetry, tools, and contexts from Datadog.
-
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
 ## Requirements
 
 - **Datadog account**: Most features require a Datadog account.  
   - New to Datadog? [Learn more][3] about Datadog's monitoring and security tools and sign up for a free trial.  
-  - If your organization uses a custom sub-domain such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting.
+  - If your organization uses a [custom sub-domain][18] such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting in the IDE.
 
 - **Git**: The extension works better when Git is enabled in the IDE. Ensure this is enabled by checking the `git.enabled` setting.
 
@@ -77,7 +77,19 @@ Install the extension either directly in the IDE, or from the web:
 
 - **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
 
+### MCP Server setup
+
+<div class="alert alert-info">The Datadog MCP Server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
+
+The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
+
+1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
+    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
+
+1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
+
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+[3]: /bits_ai/mcp_server/
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
@@ -87,14 +99,14 @@ Install the extension either directly in the IDE, or from the web:
 
 - **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
-### MCP Server setup (Cursor only)
+### MCP Server setup
 
 <div class="alert alert-info">The Datadog MCP Server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
 
-In Cursor, the extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Enable the MCP Server to enhance Cursor's AI capabilities with your specific Datadog environment.
+The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
 
-1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP Tools** tab.
-2. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
+1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
+1. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 [3]: /bits_ai/mcp_server/
@@ -107,7 +119,7 @@ Use **Log Annotations** to gauge the volume of logs generated by a given log lin
 
 {{< img src="/developers/ide_plugins/vscode/logs_navigation.mp4" alt="Preview of Logs Navigation" style="width:100%" video=true >}}
 
-You can also search Datadog logs from within VS Code. Select any text in the code editor, then right-click and select **Datadog \> Search Logs With Selected Text**.
+You can also search Datadog logs from within the IDE. Select any text in the code editor, then right-click and select **Datadog \> Search Logs With Selected Text**.
 
 {{< img src="developers/ide_plugins/vscode/log_search.png" alt="Using the Datadog Log explorer feature" style="width:100%;" >}}
 
@@ -207,7 +219,7 @@ The **Fix in Chat** button appears in several contexts when the extension identi
 
 ## License
 
-Read the [End-User License Agreement][12] carefully before downloading or using the Datadog Visual Studio Code extension.
+Read the [End-User License Agreement][12] carefully before downloading or using this extension.
 
 ## Data and telemetry
 
@@ -246,3 +258,4 @@ Do you use [Cursor][17], or another fork of VS Code? Find the extension on the [
 [15]: https://github.com/DataDog/datadog-for-vscode
 [16]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [17]: https://www.cursor.com/
+[18]: /account_management/multi_organization/#custom-sub-domains

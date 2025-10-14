@@ -38,6 +38,52 @@ To get notified when a new case is created, create a view:
 | PagerDuty       | Select a service. |
 | Webhooks        | Select the name of a webhook. |
 
+## Notification rules
+
+You can configure notification rules in your project settings to receive alerts for key case-related updates. To create a notification rule:
+
+1. Go to [**Project Settings**][1] and click on a project to expand its settings.
+1. In the expanded menu, click **Notifications**.
+1. Click **+ Create Rule** to add a notification rule.
+1. In the query field, enter a filter to scope notifications to specific cases. For example:
+   ```
+   priority:P1 OR priority:P2
+   ```
+   To receive notifications for **all cases**, leave the query blank.
+1. Select which conditions will send a notification. You can choose one or more of the following:
+   - Case creation
+   - Status transitions
+   - Priority changes
+   - Assignee changes
+   - New alert correlation (for event management cases)
+1. Choose a notification destination. Supported destinations include:
+   - Email
+   - Slack
+   - Microsoft Teams
+   - PagerDuty
+   - Webhook
+1. Click **Save** to activate the rule.
+
+## On-Call paging rules
+
+From cases, you can manually or automatically page users with [Datadog On-Call][4].
+
+To manually trigger a page:
+1. Open the case details.
+2. Click the **Page** button.
+
+To automatically trigger a page, configure automated paging rules in your project settings:
+1. Go to [**Project Settings**][1] and click on a project to expand its settings.
+1. In the expanded menu, click **Integrations** > **Datadog On-Call**.
+1. Toggle on **Automatically page cases to On-Call**. This opens the Paging Rule modal, where you can define your first rule.
+1. In the modal, enter a query. If a case matches the specified query at any point in its lifecycle, Datadog automatically pages the designated team.
+1. Choose which team to page:
+   - **Specific Team**: Select a particular team to always be paged when the rule is triggered.
+   - **Dynamic Team Selection**: Automatically page the team associated with the case through the `Team` attribute.
+1. Click **Add Rule**.
+1. View your rule on the Datadog On-Call settings page. You can return to this page to manage this configuration or add multiple rules by clicking **New Paging Rule**.
+1. (Optional) Toggle on the ability to automatically assign the case to the on-call user when a page is triggered.
+
 ## Third party tickets
 In Project Settings, you can manage membership, configure the auto-closing of cases, and set up third-party integrations like Jira and ServiceNow.
 
@@ -49,23 +95,23 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 1. Select a Jira account, a project to create issues in, and the desired issue type (such as story, epic, bug, or task).
 1. You can opt into the automatic creation of a Jira issue for each case created in the project.
 1. For the following attributes—case title, description, assignee, comments, status, and priority—select one of the options below:
-  | Option     | Description    |
-  | ---  | ----------- |
-  |Once to Jira at case creation|The field syncs from Case Management to Jira only at the time the case is created. Subsequent changes are not reflected on either side.|
-  |Two-way sync (bi-directional)|Changes in Case Management are reflected in Jira, and vice versa|
-  |Don't sync|The field does not sync to Jira.|
+  | Option                        | Description                                                                                                                             |
+  |-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+  | Once to Jira at case creation | The field syncs from Case Management to Jira only at the time the case is created. Subsequent changes are not reflected on either side. |
+  | Two-way sync (bi-directional) | Changes in Case Management are reflected in Jira, and vice versa                                                                        |
+  | Don't sync                    | The field does not sync to Jira.                                                                                                        |
 1. For case status and priority, select which values they map to on the Jira side.
 1. Save changes.
 
-**Notes**: 
-- A case can only be synced with one external resource at a time, per project. To enable Jira syncing, ServiceNow automatic creation and syncing must be disabled. 
+**Notes**:
+- A case can only be synced with one external resource at a time, per project. To enable Jira syncing, ServiceNow automatic creation and syncing must be disabled.
 - Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with Jira.
-- Two-way syncing requires [webhook support][3].
-- Available for Jira Cloud, not Jira Data Center.
+- Two-way syncing requires [webhook support][2].
+- Issue creation is available for Jira Cloud and Data Center. Field syncing is only available for Jira Cloud.
 {{% /collapse-content %}}
 
-{{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false %}}
-1. Configure the ServiceNow integration by following the [ITOM and ITSM setup instructions][2].
+{{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false id="servicenow" %}}
+1. Configure the ServiceNow integration by following the [ITOM and ITSM setup instructions][3].
 1. In Case Management project settings, enable ServiceNow for manual ServiceNow incident creation from the project.
 1. Select a ServiceNow instance and assignment group.
 1. You can opt into the automatic creation of a ServiceNow incident for each case created in the project.
@@ -86,7 +132,7 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 
 Manual incident declaration during high event volumes can cause delays and increase risk exposure during critical situations. Incident auto-escalation from Cases allows you to automatically declare incidents when cases match your defined criteria, removing the need for manual intervention.
 
-Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate cases to Incidents**. 
+Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate cases to Incidents**.
 
 {{< img src="/service_management/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
 
@@ -97,6 +143,6 @@ When enabled, any case that meets your specified query criteria (at any point in
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases/settings
-[2]: /integrations/servicenow/#itom-and-itsm-setup
-[3]: /integrations/jira/#configure-a-jira-webhook
-[4]: https://app.datadoghq.com/cases/settings
+[2]: /integrations/jira/#configure-a-jira-webhook
+[3]: /integrations/servicenow/#itom-and-itsm-setup
+[4]: /service_management/on-call/

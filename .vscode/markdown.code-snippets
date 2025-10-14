@@ -27,7 +27,7 @@
         "scope": "markdown",
         "prefix": ";;gov-region",
         "body": [
-            "{{< site-region region=\"gov\" >}}<div class=\"alert alert-warning\"> Enter summary here <a href=\"/getting_started/site\">Datadog site</a> ({{< region-param key=\"dd_site_name\" >}}).</div>",
+            "{{< site-region region=\"gov\" >}}<div class=\"alert alert-danger\"> Enter summary here <a href=\"/getting_started/site\">Datadog site</a> ({{< region-param key=\"dd_site_name\" >}}).</div>",
             "{{< /site-region >}}"
         ],
         "description": "Gov Site region shortcode"
@@ -79,11 +79,11 @@
 
     "Alert box": {
         "scope": "markdown",
-        "prefix": ";;alert",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": [
-            "<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
+            "<div class=\"alert alert-${1|info,tip,danger,warning|}\">${2:Text containing an <a href=\"https://google.com\">HTML link.</a>}</div>"
         ],
-        "description": "Alert box with choice of info, danger, or warning"
+        "description": "Alert box with choice of info, tip, danger, or warning"
     },
 
     "Callout": {
@@ -269,6 +269,16 @@
             "   {{< nextlink href=\"link/here\" >}}Link description goes here{{< /nextlink >}}",
             "{{< /whatsnext >}}"
         ]
+    },
+    "Header list": {
+        "scope": "markdown",
+        "prefix": ";;header-list",
+        "body": [
+            "{{< header-list header=\"${1:}\" >}}",
+            "   {{< nextlink href=\"link/here\" >}}Link description goes here{{< /nextlink >}}",
+            "{{< /header-list >}}"
+        ],
+        "description": "Header list"
     },
     "Eng Blog Frontmatter": {
         "scope": "markdown",

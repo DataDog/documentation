@@ -22,13 +22,16 @@ products:
 - name: App and API Protection
   url: /security/application_security/
   icon: app-sec
+- name: Code Security
+  url: /security/code_security/
+  icon: security-code-security
 ---
 
 {{< product-availability >}}
 
 ## Overview
 
-Notifications help you keep your team informed when a vulnerability or security signal is detected. Vulnerabilities and security signals are generated when at least one case defined in a [detection rule][2] is matched over a given period of time. By promptly alerting your team, notifications ensure that immediate action can be taken to address any potential security issues, enhancing your organization's overall security posture.
+Notifications help you keep your team informed when a finding or security signal is detected. Findings and security signals are generated when at least one case defined in a [detection rule][2] is matched over a given period of time. By promptly alerting your team, notifications ensure that immediate action can be taken to address any potential security issues, enhancing your organization's overall security posture.
 
 ## Notification types
 
@@ -42,7 +45,7 @@ You can also customize the notification message using Markdown and [notification
 
 ### Notification rules
 
-Notification rules allow you to set general alerting preferences that span across multiple detection rules, vulnerabilities, and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences that span across multiple detection rules, findings, and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## Notification channels
 

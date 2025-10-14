@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/network-path/"
+  tag: "Blog"
+  text: "Identify slowdowns across your entire network with Datadog Network Path"
 ---
 
 ## Overview
@@ -13,7 +16,7 @@ further_reading:
 Network Path illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a path from a source to its destination, as depicted in the `source` and `destination` facet panel.
 
 
-{{< img src="network_performance_monitoring/network_path/network_path_default_view_3.png" alt="The Network Path default view, showing the path from source to destination" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_default_view_4.png" alt="The Network Path default view, showing the path from source to destination, with the legend expanded" >}}
 
 ## How it works
 

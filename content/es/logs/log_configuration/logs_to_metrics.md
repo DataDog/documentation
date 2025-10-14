@@ -56,7 +56,7 @@ También puedes crear métricas a partir de una búsqueda de Analytics, seleccio
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="Página de configuración del gráfico de series temporales con el parámetro de consulta de recuento único resaltado" style="width:80%;">}}
 
-<div class="alert alert-warning">Las métricas basadas en logs se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión, para no afectar a tu facturación.</div>
+<div class="alert alert-danger">Las métricas basadas en logs se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión, para no afectar a tu facturación.</div>
 
 ### Actualizar una métrica basada en logs
 

@@ -2,6 +2,7 @@
 {{- $filters := .filters -}}
 {{- $listGroups := .listgroups -}}
 {{- $transformGroupTitle := .transformGroupTitle | default false -}}
+{{- $activeAttr := .activeAttr -}}
 
 {{ with $filters }}
 <div class="controls" data-ref="controls">
@@ -21,7 +22,7 @@
   <div class="js-empty-results d-none font-semibold"></div>
   {{ range $i, $v := $listGroups }}
   <div class="js-group js-group-{{ $i }}" id="{{ $v.Key | anchorize }}">
-    <div class="js-group-header mb-1 d-flex align-items-center active" id="">
+    <div class="js-group-header mb-1 d-flex align-items-center {{$activeAttr}}" id="">
       <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
         {{ range last 1 $v.Pages }}
           {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}

@@ -20,9 +20,6 @@ further_reading:
   text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Engineering Reports!" >}}
-{{< /callout >}}
-
 ## Overview
 
 Engineering Reports provide you with out-of-the-box, executive-level reports on product reliability, adherence to engineering standards, DORA metrics, and more. You can use these reports to uncover key insights, identify gaps, and drive improvements across your organization. The reports include aggregated views of key engineering metrics that are well suited for directors and executive leadership.

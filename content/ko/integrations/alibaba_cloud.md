@@ -25,7 +25,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Alibaba Cloud 통합은 Datadog for Government 사이트를 지원하지 않습니다.</div>
+<div class="alert alert-danger">Datadog Alibaba Cloud 통합은 Datadog for Government 사이트를 지원하지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요

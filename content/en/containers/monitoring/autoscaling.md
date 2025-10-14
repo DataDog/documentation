@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Autoscaling
+description: Automatically scale Kubernetes workloads using Datadog metrics and intelligent scaling recommendations
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
@@ -13,9 +14,6 @@ further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
-- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
-  tag: "Blog"
-  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
 {{< site-region region="gov" >}}
@@ -43,15 +41,17 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 
 ### Requirements
 
-- [Remote Configuration][1] must be enabled for your organization. See [Enabling Remote Configuration][2].
+- [Remote Configuration][1] must be enabled both at the organization level and on the Agents in your target cluster. See [Enabling Remote Configuration][2] for setup instructions.
 - [Helm][3], for updating your Datadog Agent.
 - (For Datadog Operator users) [`kubectl` CLI][4], for updating the Datadog Agent.
+- Scaling recommendations are available for workloads monitored with Datadog Agent v7.50+, with the [Kubernetes State Core][9] integration enabled. Datadog recommends upgrading to the latest Datadog Agent version to deploy live Kubernetes Autoscaling.
 - The following user permissions:
    - Org Management (required for Remote Configuration)
    - API Keys Write (required for Remote Configuration)
    - Workload Scaling Read
    - Workload Scaling Write
    - Autoscaling Manage
+- (Recommended) Linux kernel v5.19+ and cgroup v2
 
 ## Setup
 
@@ -163,13 +163,21 @@ Cloud Cost Management data enhances Kubernetes Autoscaling, but it is not requir
 {{% tab "Default" %}}
 If Cloud Cost Management is **not** enabled, Datadog Kubernetes Autoscaling shows idle cost and savings estimates using the following formulas and fixed values:
 
-**Cluster idle**: `(max(cpu_usage, cpu_requests, cpu_capacity) - max(cpu_usage, cpu_requests)) *0.0295 + (max(memory_usage, memory_requests, memory_capacity) - max(memory_usage, memory_requests)) * 0.0053`
+**Cluster idle**:
+```
+  (cpu_capacity - max(cpu_usage, cpu_requests)) * core_rate_per_hour
++ (mem_capacity - max(mem_usage, mem_requests)) * memory_rate_per_hour
+```
 
-**Workload idle**: `(max(cpu_usage, cpu_requests) - cpu_usage) *0.0295 + (max(memory_usage, memory_requests) - memory_usage) * 0.0053`
+**Workload idle**:
+```
+  (max(cpu_usage, cpu_requests) - cpu_usage) * core_rate_per_hour
++ (max(mem_usage, mem_requests) - mem_usage) * memory_rate_per_hour
+```
 
 **Fixed values**:
-- $0.0295 per CPU core hour
-- $0.0053 per memory GB hour
+- core_rate_per_hour = $0.0295 per CPU core hour
+- memory rate_per_hour = $0.0053 per memory GB hour
 
 
 _Fixed cost values are subject to refinement over time._
@@ -242,3 +250,4 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 [6]: https://app.datadoghq.com/orchestration/scaling/summary
 [7]: https://app.datadoghq.com/orchestration/scaling/cluster
 [8]: https://app.datadoghq.com/orchestration/scaling/workload
+[9]: /integrations/kubernetes_state_core/

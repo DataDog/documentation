@@ -22,14 +22,16 @@ title: Utilizar métricas de uso estimado
 Los tests de Synthetics vienen con [métricas de uso estimado][1] que te permiten llevar un seguimiento de tu uso. Gracias a ellas conseguirás lo siguiente:
 
 * Saber cómo cambia tu uso a lo largo del tiempo.
-* Ver qué equipos, aplicaciones o servicios representan el grueso del uso que haces de Synthetics
+* Visualiza qué equipos, aplicaciones o servicios contribuyen en mayor medida a su uso de Synthetic Monitoring.
 * Recibir alertas cuando se producen picos de uso imprevistos que repercutirán en tu factura
 
-Para consultar el uso de Synthetics o recibir alertas, utiliza estas consultas:
+Para visualizar o alertar sobre el uso de Synthetic Monitoring, utiliza las siguientes consultas:
 
 * [Tests de API simples][2] y [multipaso][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 
 * [Tests de navegador][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
+
+  **Nota:** El precio de los navegadores {{< tooltip glossary="test run">}}s se basa en el número de pasos. Consulta la [Documentación sobre precios][7] para obtener más información.
 
 Para conseguir una mayor precisión, acota o agrupa las métricas por las etiquetas asociadas al test; por ejemplo, `team` o `application`.
 
@@ -45,3 +47,4 @@ Puedes representar las métricas en un gráfico y monitorizarlas tomando como re
 [4]: /es/synthetics/browser_tests
 [5]: /es/monitors/types/anomaly/
 [6]: /es/monitors/types/forecasts
+[7]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#synthetic-monitoring-api--browser-what-counts-as-a-browser-test-run

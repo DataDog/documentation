@@ -132,10 +132,6 @@ Una vez de terminar de configurar el Agent, [reinicia el Datadog Agent ][4].
 
 En la página de integraciones de Datadog, instala la [integración Oracle][9] para tu organización. Se instala un [dashboard de Oracle][7] en tu cuenta que puedes utilizar para monitorizar el rendimiento de tus bases de datos Oracle.
 
-#### Instalaciones existentes
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### Confirmar la configuración
 
 [Ejecuta el subcomando de estado del Agent][5] y busca `oracle` en la sección **Checks**. Para comenzar, ve al dashboard con [información general de la base de datos Oracle para DBM][7] y a la página [Bases de datos][6] en Datadog.
@@ -144,7 +140,7 @@ En la página de integraciones de Datadog, instala la [integración Oracle][9] p
 
 Database Monitoring admite consultas personalizadas para bases de datos Oracle. Para obtener más información sobre las opciones de configuración disponibles, consulta [conf.yaml.example][12].
 
-<div class="alert alert-warning">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
+<div class="alert alert-danger">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
 
 [1]: /es/database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /es/database_monitoring/data_collected/#sensitive-information

@@ -41,7 +41,7 @@ Echa un vistazo a las principales funciones de Error Tracking en la documentaci√
 
 ## Configuraci√≥n
 
-{{< whatsnext desc="A fin de empezar a usar Datadog Error Tracking para RUM, consulta la documentaci√≥n correspondiente:" >}}
+{{< whatsnext desc="Para comenzar con Datadog Error Tracking para RUM, consulta la documentaci√≥n correspondiente:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Navegador{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
@@ -49,7 +49,7 @@ Echa un vistazo a las principales funciones de Error Tracking en la documentaci√
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Referencias adicionales

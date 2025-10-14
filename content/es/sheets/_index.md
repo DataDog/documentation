@@ -3,6 +3,10 @@ further_reading:
 - link: /sheets/functions_operators
   tag: Documentation
   text: Funciones y operadores
+- link: https://www.datadoghq.com/blog/advanced-analysis-tools/
+  tag: Blog
+  text: Explora tus datos con Sheets, DDSQL Editor y Notebooks para análisis avanzado
+    en Datadog
 title: Sheets
 ---
 

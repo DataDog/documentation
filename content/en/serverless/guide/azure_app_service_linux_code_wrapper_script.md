@@ -5,6 +5,13 @@ further_reading:
   tag: "Blog"
   text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
+
+<div class="alert alert-danger">
+The AAS Linux Wrapper is now deprecated. It will continue to receive layer bumps but no new features.
+It will be retired on January 1, 2026, at which point no further updates will be provided.
+Datadog strongly recommends switching to the <a href="https://docs.datadoghq.com/serverless/azure_app_service/linux_code">sidecar instrumentation method</a> as soon as possible.
+</div>
+
 ## Overview
 
 This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
@@ -59,7 +66,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 Go to **General settings** and add the following to the **Startup Command** field:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.11.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.13.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}
@@ -118,4 +125,3 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
 [11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
 [14]: /help
-

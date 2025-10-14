@@ -16,6 +16,9 @@ further_reading:
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD について
+- link: /metrics/units
+  tag: ドキュメント
+  text: メトリクス単位
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
@@ -179,7 +182,7 @@ Agent は、最後に報告された数値 (この場合は `71.5`) を GAUGE �
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-たとえば、フラッシュ時間間隔で値 `[1,1,1,2,2,2,3,3]` を報告するウェブサーバーから HISTOGRAM メトリクス `request.response_time.histogram` を送信するとします。デフォルトでは、Agent は、この時間間隔のこれらの値の統計分布を表す以下のメトリクスを Datadog に送信します。
+たとえば、10 秒のフラッシュ時間間隔で値 `[1,1,1,2,2,2,3,3]` を報告するウェブサーバーから HISTOGRAM メトリクス `request.response_time.histogram` を送信するとします。デフォルトでは、Agent は、この時間間隔のこれらの値の統計分布を表す以下のメトリクスを Datadog に送信します。
 
 | メトリクス名                                    | 値  | Datadog アプリ内タイプ |
 | ---------------------------------------------- | ------ | ------------------- |
@@ -222,8 +225,7 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 
 この機能を使用すると、ホストレベルの粒度を必要としない場合に、メトリクスのタグ付けを制御できます。[Metrics without Limits™][1] の詳細についてはこちらをご覧ください。
 
-**注**: この機能では、`!` によるタグの除外を使用できません。
-
+**注**: 許可リストベースのタグのカスタマイズでは、タグの除外はサポートされていません。`!` で始まるタグは追加できません。
 
 [1]: /ja/metrics/metrics-without-limits/
 {{% /tab %}}

@@ -9,39 +9,39 @@ further_reading:
   text: Catálogo de software
 - link: /api/latest/service-scorecards/
   tag: Documentación
-  text: API de tarjetas de puntuación
+  text: API de cuadros de mando
 - link: https://www.datadoghq.com/blog/service-scorecards/
   tag: Blog
   text: Priorizar y promover las prácticas de observabilidad recomendadas del servicio
-    con tarjetas de puntuación
+    con cuadros de mando
 - link: https://www.datadoghq.com/blog/datadog-custom-scorecards/
   tag: Blog
-  text: Formalizar las prácticas recomendadas con tarjetas de puntuación personalizadas
+  text: Formalizar las prácticas recomendadas con cuadros de mando personalizados
 - link: /continuous_integration/dora_metrics/
   tag: Documentación
   text: Seguimiento de las métricas DORA con Datadog
-title: Configuración de las tarjetas de puntuación
+title: Configuración de los cuadros de mando
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Las tarjetas de puntuación están en vista previa.
+Los cuadros de mando están en Vista previa.
 {{< /callout >}}
 
-Datadog proporciona las siguientes tarjetas de puntuación predefinidas basadas en un conjunto de reglas predeterminadas: Preparación para la producción, Prácticas de observabilidad recomendadas, Propiedad y documentación.
+Datadog proporciona los siguientes cuadros de mando predefinidos basados en un conjunto de reglas predeterminadas: Preparación para la producción, Prácticas de observabilidad recomendadas, Propiedad y documentación.
 
-## Configurar tarjetas de puntuación predeterminadas
+## Configurar cuadros de mando predeterminados
 
-Para seleccionar cuáles de las reglas predefinidas se evalúan para cada una de las tarjetas de puntuación predeterminadas:
+Para seleccionar cuáles de las reglas predefinidas se evalúan para cada uno de los cuadros de mando predeterminados:
 
-1. Abre la página [Tarjetas de puntuación][1] en el Catálogo de software.
+1. Abre la página de [Cuadros de mando][1] en el Catálogo de software.
 2. Activa o desactiva las reglas para personalizar el cálculo de las puntuaciones. 
 3. Haz clic en **View your scores** (Ver tus puntuaciones) para empezar a seguir tu progreso hacia las reglas seleccionadas en tus servicios definidos.
 
-{{< img src="/tracing/software_catalog/scorecards-setup.png" alt="Página de configuración de tarjetas de puntuación" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecards-setup.png" alt="Página de configuración de cuadros de mando" style="width:90%;" >}}
 
 ## Evaluación de los servicios
 
-Una vez configuradas las tarjetas de puntuación predeterminadas, la página Tarjetas de puntuación del Catálogo de software muestra la lista de reglas predefinidas y el porcentaje de servicios que aprueban esas reglas. Haz clic en una regla para ver más detalles sobre los servicios aprobados y fallidos, y los equipos que los poseen.
+Una vez configurados los cuadros de mando predeterminados, la página Cuadros de mando del Catálogo de software muestra la lista de reglas predefinidas y el porcentaje de servicios que aprueban esas reglas. Haz clic en una regla para ver más detalles sobre los servicios aprobados y fallidos, y los equipos que los poseen.
 
 ### Preparación para la producción
 
@@ -67,7 +67,7 @@ El seguimiento del despliegue está activo
 : Para servicios monitorizados por APM o USM. [Asegúrate de que los despliegues se realizan sin problemas, implementando una versión de etiqueta (tag) con el Etiquetado unificado de servicios][4]. A medida que despliegas nuevas versiones de tu funcionalidad, Datadog detecta y alerta sobre las diferencias entre versiones en cuanto a tasas de error, número de solicitudes y más. Esto te permite saber cuándo debes volver a versiones anteriores para mejorar la experiencia del usuario final.
 
 La correlación de logs está activa
-: Para servicios APM, se evalúa en función de la última hora de logs detectados. [La correlación entre APM y Logs][5] mejora la velocidad de resolución de problemas de los usuarios finales, ahorrándoles tiempo durante incidentes y cortes.
+: Para servicios APM, se evalúa en función de la última hora de logs detectados. [La correlación entre APM y logs][5] mejora la velocidad de resolución de problemas de los usuarios finales, ahorrándoles tiempo durante incidentes y cortes.
 
 ### Propiedad y documentación
 
@@ -87,12 +87,37 @@ Cualquier documento definido
 
 ## Cálculo de las puntuaciones
 
-Cada tarjeta de puntuación (Preparación para la producción, Prácticas de observabilidad recomendadas, Propiedad y documentación) se compone de un conjunto predeterminado de reglas. Éstas reflejan las condiciones de aprobación y fallo, y se evalúan automáticamente una vez al día. La puntuación de un servicio en relación con las reglas personalizadas se basa en los resultados enviados mediante la API de tarjetas de puntuación. Para excluir una regla personalizada concreta del cálculo de la puntuación de un servicio, configura su resultado en `skip` en la API de tarjetas de puntuación.
+Cada cuadro de mando (Preparación para la producción, Prácticas de observabilidad recomendadas, Propiedad y documentación) se compone de un conjunto predeterminado de reglas. Éstas reflejan las condiciones de aprobación y fallo, y se evalúan automáticamente una vez al día. La puntuación de un servicio en relación con las reglas personalizadas se basa en los resultados enviados mediante la API de cuadros de mando. Para excluir una regla personalizada concreta del cálculo de la puntuación de un servicio, configura su resultado en `skip` en la API de cuadros de mando.
 
 Las reglas individuales pueden tener restricciones basadas en la disponibilidad de los datos. Por ejemplo, las reglas relacionadas con los despliegues dependen de la disponibilidad de las etiquetas de versión a través del [Etiquetado unificado de servicios][6] de APM.
 
-Cada regla indica una puntuación para el porcentaje de servicios aprobados. Cada tarjeta de puntuación tiene un porcentaje de puntuación general que suma cuántos servicios aprueban, de entre todas las reglas, y **no** cuántos servicios aprueban absolutamente todas las reglas. Las reglas omitidas y desactivadas no se incluyen en este cálculo.
+Cada regla indica una puntuación para el porcentaje de servicios aprobados. Cada cuadro de mando tiene un porcentaje de puntuación general que suma cuántos servicios aprueban, de entre todas las reglas, y **no** cuántos servicios aprueban absolutamente todas las reglas. Las reglas omitidas y desactivadas no se incluyen en este cálculo.
 
+## Agrupar reglas por niveles
+
+Puedes agrupar las reglas por niveles para clasificarlas según su criticidad. Existen tres niveles predefinidos:
+
+- Nivel 1 - Reglas básicas: Estas reglas reflejan las expectativas básicas para cada servicio de producción, como tener definidos un propietario de guardia, una monitorización en el lugar o un equipo.
+- Nivel 2 - Reglas intermedias: Estas reglas reflejan sólidas prácticas de ingeniería que deberían adoptarse en la mayoría de los servicios. Por ejemplo, la definición de SLOs o la vinculación de la documentación en el Catálogo de software.
+- Nivel 3 - Reglas avanzadas: Estas ambiciosas reglas representan prácticas de ingeniería maduras. Puede que no se apliquen a todos los servicios, pero son objetivos valiosos para los equipos.
+
+Puedes establecer niveles para cualquier regla predefinida o personalizada. Por defecto, las reglas sin niveles se colocan automáticamente en el nivel 3. Puedes cambiar esta asignación por defecto editando la regla.
+
+{{< img src="/tracing/software_catalog/scorecard-levels.png" alt="Interfaces de usuario de cuadros de mando agrupadas por niveles" style="width:90%;" >}}
+
+Puedes agrupar reglas por cuadro de mando o nivel en la interfaz de usuario de cuadros de mando. En el Catálogo de software, puedes realizar un seguimiento el progreso de un servicio específico en cada nivel. Cada servicio comienza en el nivel 0. El servicio progresa al nivel 1 una vez que pasa todas las reglas del nivel 1, hasta que alcanza un estado de nivel 3.
+
+{{< img src="/tracing/software_catalog/scorecard-levels-software-catalog.png" alt="Vista de cuadros de mando en el Catálogo de software que muestra el estado del servicio por nivel" style="width:90%;" >}}
+
+## Delimitar reglas de cuadros de mando
+
+Los contextos te permiten definir a qué entidades se aplica una regla, utilizando metadatos de definiciones de entidades del Catálogo de software. Si no hay un contexto definido, una regla se aplica a todos los servicios definidos en el catálogo. Puedes delimitar por cualquier campo de una definición de entidad, incluyendo `team`, `tier` y etiquetas personalizadas.
+
+Por defecto, un servicio debe coincidir con todas las condiciones especificadas para ser evaluado según la regla. Puedes utilizar las sentencias `OR` para incluir varios valores para el mismo campo. 
+
+{{< img src="/tracing/software_catalog/scorecard-edit-scope.png" alt="Página de configuración de cuadros de mando" style="width:90%;" >}}
+
+Puedes configurar contextos tanto para las reglas predefinidas como para las personalizadas. Al añadir un contexto a una regla, los resultados registrados anteriormente de los servicios que ya no coinciden con el contexto se ocultan de la interfaz de usuario y se excluyen de los cálculos de puntuación. Si luego eliminas el contexto, estos resultados vuelven a aparecer y se contabilizan de nuevo.
 
 ## Referencias adicionales
 

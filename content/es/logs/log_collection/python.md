@@ -7,19 +7,19 @@ further_reading:
   text: Cómo recopilar, personalizar y centralizar logs de Python
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende a procesar tus logs
+  text: Aprender a procesar tus logs
 - link: /logs/log_configuration/parsing
   tag: Documentación
-  text: Obtén más información sobre el parseo
+  text: Obtener más información sobre el análisis
 - link: /logs/explorer/
   tag: Documentación
-  text: Aprende a explorar tus logs
+  text: Aprender a explorar tus logs
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: Documentación
-  text: Guía para solucionar problemas relacionados con la recopilación de logs
+  text: Guía para la resolución de problemas con la recopilación de logs
 - link: /glossary/#tail
   tag: Glosario
-  text: Entrada de glosario para "tail" (cola)
+  text: Entrada del glosario para "rastreo"
 title: Recopilación de logs de Python
 ---
 
@@ -27,7 +27,7 @@ title: Recopilación de logs de Python
 
 Para enviar tus logs de Python a Datadog, configura un registrador de Python para loguear un archivo en tu host y luego [supervisa][12] ese archivo con el Datadog Agent.
 
-## Configurar tu logger
+## Configurar el registrador
 
 Los logs de Python pueden ser complejos de manejar debido a los "tracebacks". Los tracesbacks hacen que los logs se dividan en varias líneas, lo que dificulta su asociación con el evento de log original. Para solucionar este problema, Datadog recomienda encarecidamente el uso de un formateador JSON al realizar el registro, de modo que puedas:
 
@@ -40,7 +40,7 @@ Consulta los ejemplos de configuración de las siguientes bibliotecas de registr
 * [Python-json-logger][2]
 * [django-datadog-logger][3]*
 
-*El [registrador de Python][6] tiene un parámetro `extra` para añadir atributos personalizados. Utiliza `DJANGO_Datadog_LOGGER_EXTRA_INCLUDE` para especificar una expresión regular que coincida con el nombre de los registradores para los que deseas añadir el parámetro `extra`.
+*El [registrador de Python][6] tiene un parámetro `extra` para añadir atributos personalizados. Utiliza `DJANGO_DATADOG_LOGGER_EXTRA_INCLUDE` para especificar una expresión regular que coincida con el nombre de los registradores para los que deseas añadir el parámetro `extra`.
 
 ## Configurar el Datadog Agent
 
@@ -68,15 +68,15 @@ Una vez activada la [recopilación de logs][7], configura la [recopilación de l
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
 3. [Reinicia el Agent][5].
-4. Ejecuta el [subcomando de estado del Agent][7] y busca `python` en la sección `Checks` para confirmar que los logs se han enviado correctamente a Datadog.
+4. Ejecuta el [subcomando de estado del Agent][9] y busca `python` en la sección `Checks` para confirmar que los logs se han enviado correctamente a Datadog.
 
-Si los logs están en formato JSON, Datadog [parsea los mensajes del log][7] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][8] para ver tus logs y solucionar problemas relacionados.
+Si los logs están en formato JSON, Datadog [parsea los mensajes del log][10] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][11] para ver tus logs y solucionar problemas relacionados.
 
-## Conectar tus servicios al conjunto de logs y trazas (traces)
+## Conectar los servicios a logs y trazas
 
 Si tienes APM activado para esta aplicación, conecta tus logs y trazas añadiendo automáticamente los ID de traza (trace) y los ID de tramo (span), `env`, `service` y `version` a tus logs mediante [las siguientes instrucciones de APM para Python][4].
 
-**Nota**: Si el rastreador APM inyecta `service` en tus logs, este reemplazará al valor definido en la configuración del Agent.
+**Nota**: Si el rastreador de APM inyecta `service` en tus logs, este reemplazará al valor definido en la configuración del Agent.
 
 Una vez hecho esto, el log debe tener el siguiente formato:
 
@@ -125,12 +125,12 @@ Si los logs están en formato JSON, los valores de traza se extraen automáticam
 }
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/
-[2]: https://github.com/madzak/python-json-logger
+[2]: https://github.com/nhairs/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /es/tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /es/agent/configuration/agent-commands/

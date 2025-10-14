@@ -136,6 +136,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
 {{% /tab %}}
+{{% tab "HTTP Client" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}
+
+{{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}

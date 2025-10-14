@@ -450,6 +450,11 @@
       "group": "dashboards",
       "suffix": "_3066042014",
       "description": "Create a new timeseries widget with new live span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_607525069",
+      "description": "Create a new timeseries widget with product_analytics data source"
     }
   ],
   "CreatePublicDashboard": [
@@ -637,6 +642,11 @@
       "group": "logs_pipelines",
       "suffix": "_1267211320",
       "description": "Create a pipeline with Array Processor Select Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_3336967838",
+      "description": "Create a pipeline with Decoder Processor returns \"OK\" response"
     },
     {
       "group": "logs_pipelines",

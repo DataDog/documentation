@@ -153,7 +153,7 @@ function getVisibleParentPath(ancestralEl, path){
 function hasParentLi(el) {
     while (el) {
         if (el.classList) {
-            if (el.classList.contains('sidenav-nav-main')) {
+            if (el.classList.contains('sidenav-nav-js-load')) {
                 break;
             }
 
@@ -174,7 +174,7 @@ function hasParentLi(el) {
 
 function getPathElement(event = null) {
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active');
 
     // remove active class from all sidenav links to close all open menus
     for (let i = 0; i < activeMenus.length; i++) {
@@ -237,8 +237,8 @@ function getPathElement(event = null) {
 
 // remove open class from li elements and active class from <a> elements
 function closeNav() {
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
-    const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active');
+    const openMenus = document.querySelectorAll('.side .sidenav-nav-js-load .open, header .sidenav-nav-js-load .open');
 
     for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i].classList.remove('active');
@@ -293,8 +293,8 @@ function updateSidebar(event) {
     }
 }
 
-const sideNav = document.querySelector('.side .sidenav-nav-main');
-const mobileNav = document.querySelector('header .sidenav-nav-main');
+const sideNav = document.querySelector('.side .sidenav-nav-js-load');
+const mobileNav = document.querySelector('header .sidenav-nav-js-load');
 
 if (sideNav) {
     sideNav.addEventListener('click', navClickEventHandler);
@@ -407,6 +407,55 @@ window.addEventListener('click', (event) => {
 window.onload = function () {
     getPathElement();
     setMobileNav();
+    
+    // Handle glossary anchor scrolling from search results
+    if (window.location.pathname.includes('/glossary/')) {
+        const scrollTarget = sessionStorage.getItem('glossaryScrollTarget');
+        if (scrollTarget) {
+            sessionStorage.removeItem('glossaryScrollTarget');
+            // Use requestAnimationFrame to ensure DOM is fully rendered
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(scrollTarget);
+                    if (targetElement) {
+                        const header = document.querySelector('.navbar');
+                        const glossaryNav = document.querySelector('.glossary-nav');
+                        let offset = 20;
+                        
+                        if (header) offset += header.offsetHeight;
+                        if (glossaryNav) offset += glossaryNav.offsetHeight;
+                        
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300); // Longer delay for Chrome's rendering
+            });
+        } else if (window.location.hash) {
+            // Handle direct hash navigation with Chrome-compatible timing
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(window.location.hash.substring(1));
+                    if (targetElement) {
+                        const header = document.querySelector('.navbar');
+                        const glossaryNav = document.querySelector('.glossary-nav');
+                        let offset = 20;
+                        
+                        if (header) offset += header.offsetHeight;
+                        if (glossaryNav) offset += glossaryNav.offsetHeight;
+                        
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300);
+            });
+        }
+    }
 };
 
 function replaceURL(inputUrl) {

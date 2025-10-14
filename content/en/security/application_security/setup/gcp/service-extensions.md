@@ -1,11 +1,11 @@
 ---
 title: Enabling App and API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
-type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/gcp-service-extensions
   - /security/application_security/threats_detection/gcp-service-extensions
+  - /security/application_security/setup/gcp-service-extensions
   - /security/application_security/setup/gcp/alb
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
@@ -23,10 +23,10 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="App and API Protection Service Extensions is in Preview" >}}
-To try the preview of App and API Protection Service Extensions for GCP, follow the setup instructions below.
+To try the preview of App and API Protection Service Extensions for GCP, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection (AAP) with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
+You can enable App and API Protection with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
 
 ## Prerequisites
 
@@ -42,14 +42,14 @@ You can enable App and API Protection (AAP) with GCP Service Extensions within G
 
 ## Enabling threat detection
 
-To set up the App and API Protection Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
+To set up the App and API Protection Service Extension in GCP, use the Google Cloud Console with VM Compute Engine or Terraform scripts, and complete the following steps.
 
 **Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog's App and API Protection integration.
 
 {{< tabs >}}
-{{% tab "Google Cloud Console" %}}
+{{% tab "VM Compute Engine" %}}
 
-1. Create a VM Compute instance using the [Datadog App and API Protection Service Extensions Docker image][1].
+1. Create a VM Compute Engine instance using the [Datadog App and API Protection Service Extensions Callout][1] container image.
 
     See [Configuration](#configuration) for available environment variables when setting up your VM instance.
 
@@ -81,20 +81,18 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
     2. For **Programability type**, select `Callouts`.
     3. Select the backend service you created in the previous step.
-    4. Select only **Events** from the list where you want App and API Protection to run detection (Request Headers and Response Headers are **required**).
+    4. In **Events**, select **only** `Request Headers` and `Response Headers`. These are required. Do not select the bodies events. These are supported out-of-the-box by configuring the Service Extension callout with the body processing size limit.
     5. Optionally, enable the `fail_open` to still allow the traffic to pass through if the service extension fails or times out.
 
     <br>
-    <div class="alert alert-warning">
-      <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 500 error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
+    <div class="alert alert-danger">
+      <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 5xx error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
     </div>
 
     <div class="alert alert-info">
-    <p><strong>Notes:</strong></p>    
-      <ul>
-        <li>Currently, the service extension doesn't process request bodies. If you select request and response body events in the extension chain events, the service extension does not inspect the request body. For more information, see <a href="#limitations">Limitations</a>.</li>
-        <li>If you select the <code>Request Body</code> and <code>Response Body</code> events, processing time will increase as the service extension needs to transfer and analyze these bodies. <strong>Adjust your timeout</strong> settings to accommodate the additional processing time.</li>
-      </ul>
+      <p>
+        <strong>Note:</strong> When body processing is enabled, the service extension decides based on its configuration whether to receive the request body, the response body, or both, along with the headers which are always included. This decision is made separately for requests and responses. Receiving body content can increase processing time, especially for large payloads. If you enable body processing, make sure to <strong>adjust your timeout settings</strong> to allow for the additional processing time required for body inspection and transfer.
+      </p>
     </div>
 </br>
 
@@ -224,12 +222,17 @@ The App and API Protection Service Extension deployment requires several compone
      source = "terraform-google-modules/container-vm/google"
 
      container = {
-       image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.72.1" # Replace with the latest version
+       image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.2.2" # Replace with the latest version
        env = [
          {
            name = "DD_AGENT_HOST",
            value = google_compute_instance.datadog_agent.network_interface.0.network_ip,
-         }
+         },
+         # Enable the body processing by uncommenting the following lines. Set accordingly the body processing size limit.
+         # {
+         #   name = "DD_APPSEC_BODY_PARSING_SIZE_LIMIT",
+         #   value = "10000000" # Body processing size limit in bytes. (10MB)
+         # }
        ]
      }
    }
@@ -343,18 +346,28 @@ The App and API Protection Service Extension deployment requires several compone
 
        extensions {
          name      = "${var.project_prefix}-service-extension-chain-ext"
-         authority = "datadoghq.com"
          service   = google_compute_backend_service.se_backend_service.self_link
-         timeout   = "0.5s"
-         fail_open = false # If the extension fails, the request is dropped
 
-         # Supported events for the App and API Protection Service Extension
-         supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
+         # Required: Please set your application hostname.
+         authority = "datadoghq.com"
+
+         # By default, if the service extension fails or times out, the proxy will return a 500 error.
+         # To prevent this, enable the fail_open setting.
+         # When enabled, the request processing is stopped when an error occurs but the request is not dropped, ensuring the availability of the application.
+         fail_open = true
+
+         # Mandatory, do not touch: Only set the Request and Response Headers events.
+         # If bodies events are selected, the service extension will transfer and analyze the bodies for every request without applying relevant selection rules.
+         # Please use the DD_APPSEC_BODY_PARSING_SIZE_LIMIT environment variable on the callout container to enable body processing.
+         supported_events = ["REQUEST_HEADERS", "RESPONSE_HEADERS"]
+
+         # Adjust your timeout settings depending of your processing needs (e.g. with body processing)
+         # Note: This is the same option as the "message_timeout" for an Envoy ext_proc configuration.
+         timeout   = "0.5s"
        }
      }
    }
    ```
-
 
 3. Add the following content to the `variables.tf` file. This file defines all the required input variables for your Terraform configuration:
 
@@ -467,50 +480,46 @@ The service extension automatically inspects all traffic passing through your lo
 
 The Datadog App and API Protection Service Extension Docker image supports the following configuration settings:
 
-| Environment variable                   | Default value   | Description                                                       |
-|----------------------------------------|-----------------|-------------------------------------------------------------------|
-| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                    |
-| `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                 |
-| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                               |
+| Environment variable                    | Default value       | Description                                                                                                                              |
+|-----------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_SERVICE_EXTENSION_HOST`             | `0.0.0.0`           | gRPC server listening address.                                                                                                           |
+| `DD_SERVICE_EXTENSION_PORT`             | `443`               | gRPC server port.                                                                                                                        |
+| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT` | `80`                | HTTP server port for health checks.                                                                                                      |
+| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`     | `0`                 | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
+| `DD_SERVICE`                            | `serviceextensions` | Service name shown in the Datadog UI.                                                                                                    |
 
 Configure the container to send traces to your Datadog Agent using the following environment variables:
 
-| Environment variable                   | Default value | Description                                                           |
-|----------------------------------------|---------------|-----------------------------------------------------------------------|
-| `DD_AGENT_HOST`                        | `localhost`   | Hostname where your Datadog Agent is running.                         |
-| `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
+| Environment variable                   | Default value | Description                                                                      |
+|----------------------------------------|---------------|----------------------------------------------------------------------------------|
+| `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
+| `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+The App and API Protection GCP Service Extensions integration is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+
+<div class="alert alert-danger">
+  <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
-
-The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 ## Limitations
 
-The GCP Service Extensions have the following limitations:
+The GCP Service Extensions integration has the following limitations:
 
-* The request body is not inspected, regardless of its content type.
+* Inspection of request and response bodies is supported when using service extension callout image version `v2.2.2` or later.
+* Currently, GCP Service Extensions does not support an asynchronous (observability) mode.
 
-## Using AAP without APM tracing
-
-If you want to use App and API Protection without APM tracing functionality, you can deploy with tracing disabled:
-
-1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
-2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
-
-For more details, see [Standalone App and API Protection][standalone_billing_guide].
-[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
+For additional details on the GCP Service Extensions integration compatibilities, refer to the [GCP Service Extensions integration compatibility page][9].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: https://cloud.google.com/service-extensions/docs/lb-extensions-overview#supported-lbs
 [4]: https://cloud.google.com/service-extensions/docs/configure-callout-backend-service
 [5]: https://cloud.google.com/service-extensions/docs/configure-traffic-extensions
 [6]: https://github.com/DataDog/dd-trace-go
-[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/
+[7]: /tracing/trace_collection/library_config/go/
+[8]: /security/application_security/policies/library_configuration/
+[9]: /security/application_security/setup/compatibility/gcp-service-extensions

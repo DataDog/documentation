@@ -120,7 +120,7 @@ IBM i ODBC ドライバーの名前は、IBM i のチェックを構成するた
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm-i" >}}
+{{< get-metrics-from-git "ibm_i" >}}
 
 
 ### イベント

@@ -1,17 +1,17 @@
 ---
 disable_toc: false
 further_reading:
-- link: /security/application_security/threats/attacker_clustering
+- link: /security/application_security/security_signals/attacker_clustering
   tag: Documentación
   text: Agrupación de atacantes
-title: Huella digital del atacante
+title: Attacker Fingerprint
 ---
 
-Este tema describe una característica llamada **Huella digital del atacante en Datadog** para identificar atacantes más allá de las direcciones IP.
+Este tema describe una característica llamada **Datadog Attacker Fingerprint** para identificar atacantes más allá de las direcciones IP.
 
 ## Información general
 
-La huella digital del atacante en Datadog identifica a los atacantes más allá de las direcciones IP. Las huellas digitales de los atacantes en Datadog se calculan automáticamente y se añaden a tus trazas (traces) en los intentos de ataque o inicio de sesión cuando Application Security Management (ASM) está activado en tu servicio.
+Datadog Attacker Fingerprint identifica a los atacantes más allá de las direcciones IP. Las huellas digitales de los atacantes a Datadog se computan automáticamente y se añaden a tus trazas (trace) durante los intentos de ataque o de inicio de sesión cuando App and API Protection (AAP) está activado en tu servicio.
 
 Las huellas digitales de los atacantes en Datadog se componen de varios fragmentos:
 * Identificador de endpoint
@@ -21,7 +21,7 @@ Las huellas digitales de los atacantes en Datadog se componen de varios fragment
 
 Cada fragmento identifica las especificidades de la solicitud buscando determinadas cabeceras y campos del cuerpo de la consulta y haciendo un hash de los valores de las cookies y los parámetros de la consulta.
 
-## Detalles del fragmento de la huella digital del atacante
+## Detalles del fragmento de Attacker Fingerprint
 
 ### Identificador de endpoint
 
@@ -57,11 +57,11 @@ El fragmento identificador de red proporciona información sobre la parte de red
 * Presencia o ausencia de cabeceras XFF conocidas
 
 
-## Uso de las huellas digitales del atacante
+## Uso de Attacker Fingerprint
 
-Los fragmentos pueden utilizarse como filtros en el Explorador de trazas ASM filtrando el campo de huellas digitales elegido. Por ejemplo: `@appsec.fingerprint.header.ua_hash:e462fa45` filtrará todas las solicitudes que tengan el mismo hash del Agent del usuario.
+Los fragmentos pueden utilizarse como filtros en el Explorador de trazas de AAP filtrando el campo de huella deseado. Por ejemplo: `@appsec.fingerprint.header.ua_hash:e462fa45` filtrará todas las solicitudes que tengan el mismo hash de Agent de usuario.
 
-{{< img src="security/application_security/threats/attacker-fingerprint-trace.png" alt="Captura de pantalla de una traza ASM con la huella digital del atacante en el panel lateral de trazas"  >}}
+{{< img src="security/application_security/threats/attacker-fingerprint-trace.png" alt="Catura de pantalla de una traza AAP con la huella del atacante en el panel lateral de trazas"  >}}
 
 Las huellas digitales de los atacantes se utilizan en la función [Agrupación de atacantes][1]. Si una parte significativa de tu tráfico presenta los mismos atributos de huella digital, la agrupación de atacantes mostrará que tiene un atributo de ataque común.
 
@@ -70,4 +70,4 @@ Las huellas digitales de los atacantes se utilizan en la función [Agrupación d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/application_security/threats/attacker_clustering
+[1]: /es/security/application_security/security_signals/attacker_clustering

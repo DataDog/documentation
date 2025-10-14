@@ -3,6 +3,10 @@ title: Investigate Security Signals
 disable_toc: false
 aliases:
   - /security/threats/security_signals
+  - /security_platform/cspm/signals_explorer
+  - /security/cspm/signals_explorer
+  - /security/misconfigurations/signals_explorer
+  - /security/cloud_security_management/misconfigurations/signals_explorer/
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
@@ -39,7 +43,7 @@ You can triage a signal by assigning it to a user for further investigation. The
 ## Create a case
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Use [Case Management][6] to track, triage, and investigate security signals.

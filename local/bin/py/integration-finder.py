@@ -13,7 +13,6 @@ def filter_out_dots(array):
 
 # Hardcode integration data
 integrations_repos = {
-    'dogweb': 'prod',
     'integrations-core': 'master',
     'integrations-extras': 'master',
     'integrations-internal-core': 'main',
@@ -53,9 +52,6 @@ def find_integration(integrations_repos, integration_name):
         integration_list = []
         location = os.path.join('..', repo)
         url = f'https://github.com/DataDog/{repo}/blob/{branch}/{integration_name}/README.md'
-        if repo == 'dogweb':
-            location = location + '/integration'
-            url = f'https://github.com/DataDog/{repo}/blob/{branch}/integration/{integration_name}/README.md'
         integration_list = [f.name for f in os.scandir(location) if f.is_dir()]
         integration_list = filter_out_dots(integration_list)
         if integration_name in integration_list:

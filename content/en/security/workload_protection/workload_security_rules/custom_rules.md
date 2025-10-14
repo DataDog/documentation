@@ -74,11 +74,6 @@ You can create custom rules using these methods:
 
 ## Create the custom Agent and detection rules together
 
-Workload Protection custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
-
-
-## Create the custom Agent and detection rules together
-
 When you create an Agent configuration policy it contains the default Agent rules only. You can add custom Agent rules to the policy to apply specific rules to specific Agents.
 
 When you add an Agent configuration policy you can use the **Assisted rule creator** option to create the Agent and dependent detection rules together. This method ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than creating the Agent and detection rules separately and then referencing the Agent rules in the detection rules.
@@ -233,7 +228,7 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/workload_protection/workload_security_rules
 [8]: /security/workload_protection/
-[9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
+[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
 [12]: /security/workload_protection/guide/active-protection

@@ -98,7 +98,7 @@ Después de analizar los datos de Snowflake, Datadog completa el [dashboard de i
 No se requiere ningún paso de instalación.
 
 ### Configuración
-<div class="alert alert-warning">Nota: Las cuentas de Snowflake conectadas a través de PrivateLink no son compatibles actualmente con la integración Snowflake.
+<div class="alert alert-danger">Nota: Las cuentas de Snowflake conectadas a través de PrivateLink no son compatibles actualmente con la integración Snowflake.
 Se recomienda la integración del Snowflake original con el Agent para configuraciones de PrivateLink.</div>
 
 #### Conecta tu cuenta de Snowflake
@@ -167,51 +167,51 @@ Activa Cloud Cost Management para recibir las métricas de costes de Snowflake a
 - Opcionalmente, utilizar un almacén XS existente que suela estar activo a lo largo del día puede ser la opción más rentable. **Nota**: Las consultas realizadas desde esta integración pueden afectar potencialmente al rendimiento de un almacén existente. No se recomienda ejecutar la integración en un almacén donde el rendimiento de las consultas es crítica.
 </div>
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="true" >}}
+```bash
 
--- Crea un nuevo rol destinado a monitorizar el uso de Snowflake. El nombre del rol es personalizable.
+-- Create a new role intended to monitor Snowflake usage. The name of the role is customizable.
 create role DATADOG;
 
--- Concede privilegios en la base de datos SNOWFLAKE al nuevo rol.
+-- Grant privileges on the SNOWFLAKE database to the new role.
 grant imported privileges on database SNOWFLAKE to role DATADOG;
 
--- Concede el uso de tu almacén predeterminado al rol DATADOG.
+-- Grant usage to your default warehouse to the role DATADOG.
 grant usage on warehouse <WAREHOUSE> to role DATADOG;
 
--- Concede las siguientes vistas ACCOUNT_USAGE al nuevo rol. Haz esto si deseas recopilar logs y métricas de uso de la cuenta de Snowflake.
+-- Grant the following ACCOUNT_USAGE views to the new role. Do this if you wish to collect Snowflake account usage logs and metrics.
 grant database role SNOWFLAKE.OBJECT_VIEWER to role DATADOG;
 grant database role SNOWFLAKE.USAGE_VIEWER to role DATADOG;
 grant database role SNOWFLAKE.GOVERNANCE_VIEWER to role DATADOG;
 grant database role SNOWFLAKE.SECURITY_VIEWER to role DATADOG;
 
--- Concede ORGANIZATION_USAGE_VIEWER al nuevo rol. Haz esto si deseas recopilar métricas de uso de la organización de Snowflake.
+-- Grant ORGANIZATION_USAGE_VIEWER to the new role. Do this if you wish to collect Snowflake organization usage metrics.
 grant database role SNOWFLAKE.ORGANIZATION_USAGE_VIEWER to role DATADOG;
 
--- Concede ORGANIZATION_BILLING_VIEWER al nuevo rol. Haz esto si deseas recopilar datos de costes de Snowflake.
+-- Grant ORGANIZATION_BILLING_VIEWER to the new role. Do this if you wish to collect Snowflake cost data.
 grant database role SNOWFLAKE.ORGANIZATION_BILLING_VIEWER to role DATADOG;
 
--- Conceder uso en la base de datos, esquema y tabla de la tabla del evento.
-conceder uso en la base de datos <EVENT_TABLE_DATABASE> al rol de Datadog;
-conceder uso en el esquema <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA> al rol de Datadog;
-conceder selección en la tabla <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA>.<EVENT_TABLE_NAME> al rol de Datadog;
-conceder rol de aplicación SNOWFLAKE.EVENTS_VIEWER al rol de DATADOG;
-conceder rol de aplicación SNOWFLAKE.EVENTS_ADMIN al rol de DATADOG;
+-- Grant usage on the database, schema, and table of the event table.
+grant usage on database <EVENT_TABLE_DATABASE> to role DATADOG;
+grant usage on schema <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA> to role DATADOG;
+grant select on table <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA>.<EVENT_TABLE_NAME> to role DATADOG;
+grant application role SNOWFLAKE.EVENTS_VIEWER to role DATADOG;
+grant application role SNOWFLAKE.EVENTS_ADMIN to role DATADOG;
 
--- Concede el uso de la base de datos, del esquema y de la tabla de tus tablas para la recopilación de métricas de tus consultas personalizadas.
+-- Grant usage on the database, schema, and table of your tables for metric collection of your custom queries.
 grant usage on database <CUSTOM_QUERY_DATABASE> to role DATADOG;
 grant usage on schema <CUSTOM_QUERY_DATABASE>.<CUSTOM_QUERY_SCHEMA> to role DATADOG;
 grant select on table <CUSTOM_QUERY_DATABASE>.<CUSTOM_QUERY_SCHEMA>.<CUSTOM_QUERY_TABLE> to role DATADOG;
 
--- Crea un usuario.
+-- Create a user.
 create user <USERNAME>
 LOGIN_NAME = <USERNAME>
 password = '<PASSWORD>'
 default_warehouse =<WAREHOUSE>
 default_role = DATADOG;
 
--- Concede el rol de monitor al usuario.
+-- Grant the monitor role to the user.
 grant role DATADOG to user <USERNAME>
-{{< /code-block >}}
+```
 
 5. Configura la autenticación por par de claves. La clave pública se asigna al usuario creado anteriormente y la clave privada se carga en Datadog, lo que permite que Datadog se conecte a tu cuenta de Snowflake.
    a. Crea y carga una clave privada siguiendo las [instrucciones de Snowflake][7]. Actualmente, Datadog solo admite claves privadas sin cifrar.
@@ -371,7 +371,7 @@ Siguiendo estas prácticas recomendadas, puedes garantizar una integración efic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "snowflake-web" >}}
+{{< get-metrics-from-git "snowflake_web" >}}
 
 
 ### Eventos
@@ -388,7 +388,7 @@ La integración de Snowflake Web no incluye ningún check de servicio.
 
 ## Check del Agent: Snowflake
 
-<div class="alert alert-danger">El check del Agent de Snowflake ya no es compatible; se recomienda cambiar a la nueva integración de Snowflake para obtener funciones adicionales y un menor volumen de llamadas a la API para Snowflake.</div>
+<div class="alert alert-warning">El check del Agent de Snowflake ya no es compatible; se recomienda cambiar a la nueva integración de Snowflake para obtener funciones adicionales y un menor volumen de llamadas a la API para Snowflake.</div>
 
 ## Agent: información general
 
@@ -409,7 +409,7 @@ El check de Snowflake está incluido en el paquete del [Datadog Agent][24].
 
 ### Agent: configuración
 
-<div class="alert alert-warning">Snowflake recomienda otorgar permisos a un rol alternativo como `SYSADMIN`. Lee más sobre cómo controlar el <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">rol ACCOUNTADMIN</a> para obtener más información.</div>
+<div class="alert alert-danger">Snowflake recomienda otorgar permisos a un rol alternativo como `SYSADMIN`. Lee más sobre cómo controlar el <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">rol ACCOUNTADMIN</a> para obtener más información.</div>
 
 1. Crea un rol y un usuario específicos de Datadog para monitorizar Snowflake. En Snowflake, ejecuta lo siguiente para crear un rol personalizado con acceso al esquema ACCOUNT_USAGE.
 

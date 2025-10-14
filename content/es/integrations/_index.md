@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - integración
+  - configuración de la integración
 aliases:
 - /es/integrations/verisign_openhybrid/
 - /es/integrations/snyk/
@@ -9,10 +13,12 @@ aliases:
 - /es/integrations/shoreline/
 - /es/integrations/shoreline_license/
 - /es/integrations/shoreline_software_license/
+- /es/integrations/pingdom_v3/
+- /es/integrations/perimeterx/
 cascade:
 - _target:
     lang: en
-    path: /integrations/akamai_datastream_2
+    path: /integrations/akamai-datastream-2
   aliases:
   - /integrations/akamai_datastream
 - _target:
@@ -62,31 +68,26 @@ cascade:
     rank: 60
     subcategory: Integraciones
     tags:
-    - eks logging
+    - generación de logs eks
 - _target:
     lang: en
-    path: /integrations/win32_event_log
+    path: /integrations/event-viewer
   algolia:
     category: Documentación
     rank: 60
     subcategory: Integraciones
     tags:
-    - event viewer
+    - visor de eventos
   aliases:
   - /integrations/eventviewer/
 - _target:
     lang: en
-    path: /integrations/lambdatest_license
+    path: /integrations/lambdatest-software-license
   aliases:
   - /integrations/lambdatest_software_license/
 - _target:
     lang: en
-    path: /integrations/mongo
-  aliases:
-  - /integrations/mongodb/
-- _target:
-    lang: en
-    path: /integrations/rapdev_validator
+    path: /integrations/rapdev-validator
   aliases:
   - /integrations/rapdev_dashboard_widget_pack/
 - _target:
@@ -96,7 +97,7 @@ cascade:
   - /integrations/wmi/
 - _target:
     lang: en
-    path: /integrations/jfrog_platform_self_hosted
+    path: /integrations/jfrog-platform
   aliases:
   - /integrations/jfrog_platform/
 - _target:
@@ -122,32 +123,62 @@ cascade:
   - /agent/faq/docker-jmx/
 - _target:
     lang: en
-    path: /integrations/amazon_elb
+    path: /integrations/amazon-elb
   aliases:
   - /integrations/awselb
 - _target:
     lang: en
-    path: /integrations/elastic
+    path: /integrations/amazon-es
   aliases:
   - /integrations/awses
 - _target:
     lang: en
-    path: /integrations/amazon_s3
+    path: /integrations/amazon-s3
   aliases:
   - /integrations/awss3
 - _target:
     lang: en
-    path: /integrations/snowflake_web
+    path: /integrations/snowflake-web
   aliases:
   - /integrations/snowflake/
+- _target:
+    lang: en
+    path: /integrations/redpeaks-sap-netweaver
+  aliases:
+  - /integrations/agentil_software_sap_netweaver/
+- _target:
+    lang: en
+    path: /integrations/redpeaks-sap-businessobjects
+  aliases:
+  - /integrations/agentil_software_sap_businessobjects/
+- _target:
+    lang: en
+    path: /integrations/redpeaks-services-5-days
+  aliases:
+  - /integrations/agentil_software_services_5_days/
+- _target:
+    lang: en
+    path: /integrations/redpeaks-sap-hana
+  aliases:
+  - /integrations/agentil_software_sap_hana/
+- _target:
+    lang: en
+    path: /integrations/azure-virtual-network
+  aliases:
+  - /integrations/azure_virtual_networks
+- _target:
+    lang: en
+    path: /integrations/amazon-event-bridge
+  aliases:
+  - /integrations/amazon_event_bridge
 description: Reúne datos de todos tus sistemas, aplicaciones y servicios
 disable_sidebar: true
 title: Integraciones
 ---
 
-Más de {{< translate key="integration_count" >}} integraciones incorporadas. Ve todos tus sistemas, aplicaciones y servicios.
+Más de {{< translate key="integration_count" >}} integraciones incorporadas. Visualiza todos tus sistemas, aplicaciones y servicios.
 
-¿Qué es una integración? Consulta [Introducción a integraciones][1].
+¿Qué es una integración? Consulta [Introducción a las integraciones][1].
 
 {{< integrations >}}
 

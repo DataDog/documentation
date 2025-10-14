@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 22 and upward</td>
+    <td>from 26 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 21</td>
+    <td>from 18 to 25</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -57,7 +57,7 @@ Datadog does not officially support any early-access versions of Java.
 
 | Java versions      | Operating Systems                                                               | Support level                     |
 |--------------------|---------------------------------------------------------------------------------|-----------------------------------|
-| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) ([End-of-life](#levels-of-support) on July 31, 2025) |
+| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [End-of-life](#levels-of-support) |
 | 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support) |
 
 ### Levels of support
@@ -88,30 +88,30 @@ Integrations in Preview are disabled by default but can be enabled individually:
 - error and stacktrace capturing
 - linking work created within a web request and Distributed Tracing
 
-| Server                  | Versions     | Support Type                                           | Instrumentation Names (used for configuration)           |
-|-------------------------|--------------|--------------------------------------------------------|----------------------------------------------------------|
-| Akka-Http Server        | 10.0+        | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
-| Apache Pekko            | 1.0+         | Fully Supported                                        | `pekko-http`, `pekko-http-server`                        |
-| Finatra Web             | 2.9+         | Fully Supported                                        | `finatra`                                                |
-| Grizzly                 | 2.0+         | Fully Supported                                        | `grizzly`                                                |
-| Grizzly-HTTP            | 2.3.20+      | Fully Supported                                        | `grizzly-filterchain`                                    |
-| Java Servlet Compatible | 2.3+, 3.0+   | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                      |
-| Jax-RS Annotations      | JSR311-API   | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty                   | 7.0-12.x     | Fully Supported                                        | `jetty`                                                  |
-| Micronaut HTTP Server   | 2.x+         | Fully Supported                                        | `micronaut`                                              |
-| Mulesoft                | 4.5.0+       | Fully Supported                                        | `mule`                                                   |
-| Netty HTTP Server       | 3.8+         | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
-| Play                    | 2.3-2.8      | Fully Supported                                        | `play`, `play-action`                                    |
-| Ratpack                 | 1.5+         | Fully Supported                                        | `ratpack`                                                |
-| Restlet HTTP Server     | 2.2 - 2.4    | Fully Supported                                        | `restlet-http`.                                          |
-| Spark Java              | 2.3+         | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5+         | Fully Supported                                        | `spring-web` or `spring-webflux`                         |
-| Spring Web (MVC)        | 4.0+         | Fully Supported                                        | `spring-web`                                             |
-| Spring WebFlux          | 5.0+         | Fully Supported                                        | `spring-webflux`                                         |
-| Tomcat                  | 5.5+         | Fully Supported                                        | `tomcat`                                                 |
-| Undertow                | 2.0+         | Fully Supported                                        | `undertow`                                               |
-| Vert.x                  | 3.4 - 4.5.15 | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
-| Websocket (JSR356)      | 1.0+         | [Preview](#framework-integrations-disabled-by-default) | `websocket`                                              |
+| Server                  | Versions     | Support Type                                           | Instrumentation Names (used for configuration)             |
+|-------------------------|--------------|--------------------------------------------------------|------------------------------------------------------------|
+| Akka-Http Server        | 10.0+        | Fully Supported                                        | `akka-http`, `akka-http-server`                            |
+| Apache Pekko            | 1.0+         | Fully Supported                                        | `pekko-http`, `pekko-http-server`                          |
+| Finatra Web             | 2.9+         | Fully Supported                                        | `finatra`                                                  |
+| Grizzly                 | 2.0+         | Fully Supported                                        | `grizzly`                                                  |
+| Grizzly-HTTP            | 2.3.20+      | Fully Supported                                        | `grizzly-filterchain`                                      |
+| Java Servlet Compatible | 2.3+, 3.0+   | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                        |
+| Jax-RS Annotations      | JSR311-API   | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter`   |
+| Jetty                   | 7.0-12.x     | Fully Supported                                        | `jetty`                                                    |
+| Micronaut HTTP Server   | 2.x+         | Fully Supported                                        | `micronaut`                                                |
+| Mulesoft                | 4.5.0+       | Fully Supported                                        | `mule`                                                     |
+| Netty HTTP Server       | 3.8+         | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`             |
+| Play                    | 2.3-2.8      | Fully Supported                                        | `play`, `play-action`                                      |
+| Ratpack                 | 1.5+         | Fully Supported                                        | `ratpack`                                                  |
+| Restlet HTTP Server     | 2.2 - 2.4    | Fully Supported                                        | `restlet-http`.                                            |
+| Spark Java              | 2.3+         | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                             |
+| Spring Boot             | 1.5+         | Fully Supported                                        | `spring-web` or `spring-webflux`                           |
+| Spring Web (MVC)        | 4.0+         | Fully Supported                                        | `spring-web`                                               |
+| Spring WebFlux          | 5.0+         | Fully Supported                                        | `spring-webflux`                                           |
+| Tomcat                  | 5.5+         | Fully Supported                                        | `tomcat`                                                   |
+| Undertow                | 2.0+         | Fully Supported                                        | `undertow`                                                 |
+| Vert.x                  | 3.4 - 5.x    | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`, `vertx-5.0`|
+| Websocket (JSR356)      | 1.0+         | [Preview](#framework-integrations-disabled-by-default) | `websocket`                                                |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -292,6 +292,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
+- When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
 
 ## GraalVM Native Image support
 
@@ -301,7 +302,7 @@ GraalVM Native Image is a technology that allows you to compile Java application
 
 Use:
 
-- [GraalVM JDK 21][7]
+- [GraalVM JDK 21 or JDK 25][7]
 - [Datadog Java tracer][1]
 
 ### Setup
@@ -316,7 +317,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -331,7 +332,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -364,7 +365,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </build>
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
-3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr’`.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true --enable-monitoring=jfr’`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -372,6 +373,8 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+<div class="alert alert-info">For GraalVM 25, you may see errors related to <code>Use of Unsafe</code>. Add <code>-Dnet.bytebuddy.safe=false</code> when building the native executable to address this.</div>
 
 #### Usage
 
@@ -447,3 +450,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /tracing/trace_collection/library_config/#agent
+[13]: https://openjdk.org/jeps/472
+[14]: https://openjdk.org/jeps/498

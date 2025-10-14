@@ -1,5 +1,6 @@
 ---
 title: Datadog FIPS Compliance
+description: "Configure FIPS-compliant cryptographic modules for the Datadog Agent in highly regulated environments like FedRAMP."
 disable_toc: false
 aliases:
 - /agent/guide/agent-fips-proxy
@@ -27,10 +28,9 @@ The FIPS Agent also includes [limited support for integrations][3] that need to 
 
 ## Supported platforms and limitations
 
-
 Supported platforms:
 
-|||
+|      |             |
 | ---  | ----------- |
 | Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12<br>Windows Server >= 2016<br>Windows >= 10|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)<br>Docker|
@@ -48,12 +48,11 @@ Supported products (Agent 7.65.0 and above):
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents
 - Outbound communication to anything other than GovCloud
-- Datadog [DDOT Collector][1]
+- Datadog [DDOT Collector][4]
 
-[1]: /opentelemetry/setup/ddot_collector
 
 ## Compliance guidelines
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This is not an exhaustive list. These requirements are a baseline only. You are responsible for evaluating your environment and implementing any additional controls needed to achieve full FIPS compliance.
 </div>
 The following baseline controls apply to each platform. Your system may require additional controls:
@@ -154,30 +153,26 @@ if ($p.ExitCode -ne 0) {
 
 {{% tab "AWS Lambda" %}}
 
-For AWS Lambda FIPS compliance, follow the instructions in the [AWS Lambda FIPS Compliance](/serverless/aws_lambda/fips-compliance/) documentation.
+For AWS Lambda FIPS compliance, follow the instructions in the [AWS Lambda FIPS Compliance][1] documentation.
+
+[1]: /serverless/aws_lambda/fips-compliance/
 
 {{% /tab %}}
 
 {{% tab "AWS ECS" %}}
 
-When following the [ECS installation instructions](/containers/amazon_ecs/), make sure to use these FIPS-specific configuration values for your Task Definition:
+When following the [ECS installation instructions][1], make sure to use these FIPS-specific configuration values for your Task Definition:
 - Set `image` in the `containerDefinitions` object to `public.ecr.aws/datadog/agent:7-fips`  
 - Set `DD_SITE` environment variable to `ddog-gov.com`
 
+[1]: /containers/amazon_ecs/
 {{% /tab %}}
 
 {{% tab "AWS EKS" %}}
 
-When following the [Datadog Agent installation on Kubernetes](/containers/kubernetes/installation/) instructions, make sure to include these FIPS-specific configuration values in the `datadog-agent.yaml` file depending on your chosen installation method:
+When following the [Datadog Agent installation on Kubernetes][1] instructions, make sure to include these FIPS-specific configuration values in the `datadog-agent.yaml` file depending on your chosen installation method:
 
 For the Datadog Operator:
-```yaml
-datadog:
-   site: "ddog-gov.com"
-useFIPSAgent: true
-```
-
-For the Datadog Helm Chart:
 ```yaml
 spec:
    global:
@@ -185,6 +180,14 @@ spec:
       useFIPSAgent: true
 ```
 
+For the Datadog Helm Chart:
+```yaml
+datadog:
+   site: "ddog-gov.com"
+useFIPSAgent: true
+```
+
+[1]: /containers/kubernetes/installation/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -206,4 +209,4 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [3]: /integrations/guide/fips-integrations
-[4]: /integrations/guide/jmxfetch-fips
+[4]: /opentelemetry/setup/ddot_collector

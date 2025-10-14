@@ -16,7 +16,7 @@ title: 데이터베이스 모니터링 시작하기
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">선택한 Datadog 사이트 ({{< region-param key="dd_site_name" >}})에서 Database Monitoring을 사용할 수 없습니다.</div>
+<div class="alert alert-danger">선택한 Datadog 사이트 ({{< region-param key="dd_site_name" >}})에서 Database Monitoring을 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 ## 개요

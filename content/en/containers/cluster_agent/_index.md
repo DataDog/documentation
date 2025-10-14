@@ -1,5 +1,6 @@
 ---
 title: Cluster Agent for Kubernetes
+description: Centralized approach to collecting cluster-level monitoring data with the Datadog Cluster Agent
 aliases:
 - /agent/kubernetes/cluster/
 - /agent/cluster_agent/
@@ -12,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
+- link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+  tag: "Blog"
+  text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 
 ## Overview
@@ -34,7 +38,7 @@ If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ### Minimum Agent and Cluster Agent versions
 

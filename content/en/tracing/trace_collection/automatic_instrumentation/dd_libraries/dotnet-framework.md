@@ -17,6 +17,8 @@ aliases:
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70
+algolia:
+    tags: ["C#","APM"]
 further_reading:
   - link: "/tracing/other_telemetry/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
@@ -60,10 +62,10 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ## Installation and getting started
 
 <div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
@@ -98,7 +100,7 @@ You can also script the MSI setup by running the following in PowerShell: `Start
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
 </div>
 
@@ -134,14 +136,14 @@ For information about the different methods for setting environment variables, s
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
 #### Services outside IIS
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 
@@ -188,7 +190,7 @@ Custom instrumentation depends on your automatic instrumentation and includes ad
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
@@ -218,7 +220,7 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 To attach automatic instrumentation to your service, set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 

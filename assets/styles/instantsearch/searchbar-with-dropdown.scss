@@ -127,6 +127,15 @@
                 background-color: rgba(69, 142, 225, 0.05);
             }
         }
+        
+        &.selected-item {
+            & a {
+                outline: 2px solid #0196ed5c;
+                outline-radius: 3px;
+                background-color: rgba(69, 142, 225, 0.05);
+
+            }
+        }
 
         & .ais-Hits-subcategory {
             grid-column: span 1 / span 1;
@@ -187,4 +196,40 @@
             color: #33363d;
         }
     }
+
+    .ais-SearchBox {
+        position: relative;
+
+        &::after {
+            z-index: 1000;
+            content: "/";
+            position: absolute;
+            right: 115px;
+            top: 20%;
+            border: 1px solid #787b7c;
+            border-radius: 4px;
+            width: 20px;
+            height: 24px;
+            padding-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #7d8081;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+
+            @media screen and (max-width: 1280px) {
+                display: none;
+            }
+        }
+        &:focus-within::after {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+    }
+
 }

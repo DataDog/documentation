@@ -120,7 +120,7 @@ Since the Lambda Web Adapter sends readiness check requests once it is loaded, t
 
 The configuration differs depending on the runtime. Assuming the readiness endpoint is the default (`GET` at `/`):
 
-**NodeJs**
+**Node.js**
 
 ```js
 const tracer = require('dd-trace').init();

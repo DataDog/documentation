@@ -15,6 +15,9 @@ further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
+- link: "/actions/app_builder/saved_actions/"
+  tag: "Documentation"
+  text: "Save and reuse actions in apps"
 
 ---
 
@@ -23,12 +26,12 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 ## Save an action
 
 1. From the workflow canvas, click an action that you'd like to save.
-1. Click the **Saved Actions** icon and select **Save action configurations**.
+1. Click **Save Action**.
 1. Enter a name and description for the action.
 1. If you want anyone in your organization to have access to the action, toggle **Usable by others in the organization**.
 1. Verify the configuration details for the action and click **Save Action Configuration**.
 
-{{< img src="service_management/workflows/save_action.mp4" alt="Click the Saved Action icon to save an action for later use." video="true" width=80% >}}
+{{< img src="service_management/workflows/save_action_1.mp4" alt="Click the Saved Action icon to save an action for later use." video="true" width=80% >}}
 
 ## Use a saved action in your workflow
 
