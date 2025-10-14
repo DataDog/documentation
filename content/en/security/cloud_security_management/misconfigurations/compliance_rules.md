@@ -22,9 +22,7 @@ Cloud Security Misconfigurations [out-of-the-box compliance rules][1] evaluate t
 
 The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For Cloud Security Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
-Cloud Security Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure.
-
-{{% cloud-sec-cloud-infra %}}
+Cloud Security Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
 
 - [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [CloudFront distribution should be encrypted][3] rule assesses whether an Amazon CloudFront distribution enforces HTTPS to secure communications.
 - [**Infrastructure configuration**][5] checks evaluate:
@@ -32,6 +30,8 @@ Cloud Security Misconfigurations uses the following rule types to validate the c
   - **Linux workloads**, using CIS host benchmarks for Linux distributions including Ubuntu, Red Hat, Amazon Linux, and AlmaLinux.
 
     Cloud Security Misconfigurations supports a subset of the Linux distributions that the Agent supports. For more information, see [Supported Platforms][6].
+  
+  {{% cloud-sec-cloud-infra %}}
 
 ## Explore default compliance rules
 
