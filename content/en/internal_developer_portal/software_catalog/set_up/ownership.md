@@ -12,12 +12,10 @@ further_reading:
 
 ## Overview
 
-Connect entities in the Software Catalog to the Datadog Teams responsible for them to define ownership. Ownership links your services and components to the teams that build and maintain them, enabling Datadog to:
-- Filter views across products by team.
+Define ownership in Software Catalog to connect entities to the Datadog Teams responsible for them. Ownership information appears on each entity's details page and allows you to: 
+- Filter views by team across Datadog products.
 - Attribute Scorecards and Campaigns to the right owners.
 - Route notifications and on-call context to the correct team.
-
-Once defined, ownership information appears on each entity's details page in Software Catalog and is used across Datadog products.
 
 ## Create a Team
 
@@ -35,7 +33,7 @@ After creating a Team, you can add reference links, configure notifications, and
 
 ### In Datadog
 
-To add or update an entity's owner in the Datadog UI:
+To add or update an entity's owner in Datadog:
 
 1. Go to **Service Management** > **Software Catalog**, and open the entity.
 2. Click **Edit in UI** on the entity page.

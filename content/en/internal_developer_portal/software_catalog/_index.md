@@ -17,7 +17,7 @@ algolia:
   tags: ['software catalog']
 ---
 
-{{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/software-catalog-oct2025ui.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 
@@ -26,9 +26,6 @@ algolia:
 Built on real-time telemetry and automated metadata collection, Software Catalog offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
 
 ## What you can do in Software Catalog
-<br>
-{{< img src="tracing/software_catalog/software_catalog_tabs.mp4" video=true alt="A video overview of the Software Catalog, with the Services component type selected, that scrolls through the Ownership, Reliability, Performance, Security, Costs, and Delivery tabs" style="width:100%;" >}}
-<br>
 
 Software Catalog offers multiple views to help you explore and manage your entities.
 
