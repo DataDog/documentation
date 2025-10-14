@@ -7024,11 +7024,16 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
       weight: 406
+    - name: Test Suites
+      url: synthetics/test_suites/
+      parent: synthetics
+      identifier: synthetics_test_suites
+      weight: 5
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 5
+      weight: 6
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
