@@ -148,15 +148,15 @@ Don't see the library you're looking for? First, check if the library produces o
 
 The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-| Issue                                         | Affected .NET Versions                    | Solution                                                                | More information                        |
-|-----------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                     | [dotnet/runtime/issues/23938][7]        |
-| JIT Compiler bug causing crash on shutdown    | 2.0.0-2.2.x                               | Upgrade .NET Core to 3.1.0 or above | [dotnet/runtime/pull/11885][15]   |
-| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET to 8.0.6 or above    | [dotnet/runtime/pull/73760][16]     |
-| JIT Compiler bug                              | All versions of .NET                      | No current workaround    | [dotnet/runtime/issues/85777][17]            |
-| .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10            | Upgrade .NET 6.0.11 or above, or disable runtime metrics                | [dotnet/runtime/pull/76431][18]   |
-| JIT Compiler bug causing crashes              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x              | Upgrade .NET to 9.0.0 or above    | [dotnet/runtime/pull/95653][22]     |
+| Issue                                                                          | Affected .NET Versions                                   | Solution                                                                           | More information                        |
+|--------------------------------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------|
+| JIT Compiler bug on Linux/x64                                                  | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5                 | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
+| Resource lookup bug with a non `en-US` locale                                  | 2.0.0                                                    | Upgrade .NET Core to 2.0.3 or above                                                | [dotnet/runtime/issues/23938][7]        |
+| JIT Compiler bug causing crash on shutdown                                     | 2.0.0-2.2.x                                              | Upgrade .NET Core to 3.1.0 or above                                                | [dotnet/runtime/pull/11885][15]         |
+| JIT Compiler bug                                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5                     | Upgrade .NET to 8.0.6 or above                                                     | [dotnet/runtime/pull/73760][16]         |
+| JIT Compiler bug                                                               | All versions of .NET                                     | No current workaround                                                              | [dotnet/runtime/issues/85777][17]       |
+| .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10 | Upgrade .NET 6.0.11 or above, or disable runtime metrics | [dotnet/runtime/pull/76431][18]                                                    |                                         |
+| JIT Compiler bug causing crashes                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x                             | Upgrade .NET to 9.0.0 or above                                                     | [dotnet/runtime/pull/95653][22]         |
 
 ## Supported Datadog Agent versions
 
@@ -172,13 +172,13 @@ The .NET Tracer depends on the host operating system, .NET runtime, certain .NET
 
 ### Levels of support
 
-| **Level**                                              | **Support provided**                                                                                                                                                          |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][10]                                                             |
-| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+| **Level**                                              | **Support provided**                                                                                                                       |
+|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][10]                                                                   |
+| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis. |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                 |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                           |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                               |
 
 ### Package versioning
 
