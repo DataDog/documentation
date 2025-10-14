@@ -2,6 +2,7 @@
 title: Saved Views
 aliases:
   - /quality_gates/explorer/saved_views/
+description: "Save and manage PR Gates Explorer states with custom queries, facets, visualizations, and time ranges for effective troubleshooting."
 further_reading:
 - link: "/pr_gates/explorer/search_syntax/"
   tag: "Documentation"

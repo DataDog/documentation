@@ -28,7 +28,7 @@ is_beta: true
 title: Configurar datos de incidentes para métricas de DORA
 ---
 
-<div class="alert alert-warning">Las métricas de DORA están en vista previa.</div>
+<div class="alert alert-danger">Las métricas de DORA están en vista previa.</div>
 
 ## Información general
 

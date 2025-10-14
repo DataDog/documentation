@@ -81,7 +81,7 @@ Si has seleccionado:
 
 ## Añade un incident (incidente)
 
-<div class="alert alert-warning">Los incidents (incidentes) publicados en las páginas de estado no son los mismos que los incidentes declarados en Incident Management de Datadog. Los incidentes de las páginas de estado son mensajes cuidadosamente elaborados que se publican en un sitio web público para comunicar el estado del sistema y pueden englobar varios incidentes internos de Incident Management.</div>
+<div class="alert alert-danger">Los incidents (incidentes) publicados en las páginas de estado no son los mismos que los incidentes declarados en Incident Management de Datadog. Los incidentes de las páginas de estado son mensajes cuidadosamente elaborados que se publican en un sitio web público para comunicar el estado del sistema y pueden englobar varios incidentes internos de Incident Management.</div>
 
 Cuando surja un problema, puedes comunicarlo claramente a través de tu página de estado.
 
@@ -115,7 +115,7 @@ Para que coincida con tu marca, tienes la opción de asignar tu página de estad
 1. Sigue las instrucciones para introducir tu dominio y añadir registros DNS.  
 1. Datadog detecta automáticamente la configuración DNS y proporciona un certificado SSL.  
 
-<div class="alert alert-warning">Los dominios personalizados requieren acceso a tu proveedor de DNS para añadir un registro CNAME o A.</div>
+<div class="alert alert-danger">Los dominios personalizados requieren acceso a tu proveedor de DNS para añadir un registro CNAME o A.</div>
 
 **Notas**:
 

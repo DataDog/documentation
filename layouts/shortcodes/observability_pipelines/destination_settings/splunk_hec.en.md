@@ -1,4 +1,4 @@
-<div class="alert alert-warning">Observability Pipelines compresses logs with the gzip (level 6) algorithm.</div>
+<div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.</div>
 
 The following fields are optional:
 1. Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][10051] if you want to route logs to different indexes based on specific fields in your logs.

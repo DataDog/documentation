@@ -10,7 +10,7 @@ title: Configuración del poveedor de identidad Okta SAML
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     En el sitio {{< region-param key="dd_site_name" >}}, debes configurar manualmente la aplicación Datadog en Okta siguiendo las <a href="/account_management/FAQ/okta/">instrucciones heredadas </a>. Ignora las instrucciones de esta página sobre la aplicación Datadog preconfigurada en el catálogo de aplicaciones de Okta.
 </div>
 {{% /site-region %}}

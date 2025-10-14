@@ -33,19 +33,19 @@ To create a PR Gates rule in Datadog:
 
    You can create a rule that is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify the branch or repository that should be included or excluded.
 
-   To add a custom scope (such as a team name), click **+ Add Filter** and select **Custom scope**. Enter a tag name without spaces (such as `documentation` or `team-documentation`) and click **Add Custom Scope**. Enter values that should be included or excluded. 
-   
+   To add a custom scope (such as a team name), click **+ Add Filter** and select **Custom scope**. Enter a tag name without spaces (such as `documentation` or `team-documentation`) and click **Add Custom Scope**. Enter values that should be included or excluded.
+
    When adding a custom scope to a rule, custom scopes must be passed to the `datadog-ci gate evaluate` command using the `--scope` option. For more information, see [Understanding Rule Scopes][13].
 
 4. Define the rule conditions. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected. If the rule scope is set to `always evaluate`, the rule is evaluated on all repositories and branches.
-   
+
    The following example demonstrates how to create a Static Analysis rule that fails when one or more Static Analysis code quality violations with `error` status are contained within a repository.
 
-   Select **Static Analysis** for the rule type and click `Always evaluate` for the rule scope. 
+   Select **Static Analysis** for the rule type and click `Always evaluate` for the rule scope.
 
    {{< img src="pr_gates/setup/static_analysis_2.png" alt="A Static Analysis rule that fails when any code quality violations with an error status are contained in any service" style="width:100%" >}}
 
-   In the **Define rule conditions** section, select `code quality violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`. 
+   In the **Define rule conditions** section, select `code quality violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`.
 
 5. Specify a rule name that describes the rule that you are creating.
 6. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
@@ -137,7 +137,7 @@ For more information, see the [RBAC Permissions documentation][1].
 [1]: /account_management/rbac/permissions
 [2]: https://app.datadoghq.com/ci/pr-gates
 [3]: /account_management/audit_trail/events/#ci-visibility-events
-[4]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/gate/README.md
+[4]: https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/blob/master/README.md

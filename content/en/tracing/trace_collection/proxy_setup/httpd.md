@@ -22,7 +22,7 @@ Since IHS HTTP Server is essentially a wrapper of the Apache HTTP Server, the mo
 
 ## Installation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
 </div>
 
@@ -34,17 +34,22 @@ To install the module:
 1. Run the following script to download the latest version of the module:
 
    ```bash
-   curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
-   | grep "mod_datadog-linux-x86_64.tar.gz" \
-   | cut -d : -f 2,3 \
-   | tr -d \" \
-   | wget -qi -
+   cd /tmp && \
+       # Get latest release info using curl and basic text processing
+       RELEASE_DATA=$(curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest) && \
+       
+       # Extract download URL for the zip file using grep and sed
+       DOWNLOAD_URL=$(echo "$RELEASE_DATA" | grep '"browser_download_url".*mod_datadog_artifact.zip' | sed 's/.*"browser_download_url": *"\([^"]*\)".*/\1/') && \
+       
+       # Download and install
+       curl -Lf -o mod_datadog_artifact.zip "$DOWNLOAD_URL" && \
+       unzip -j mod_datadog_artifact.zip -d /usr/lib/apache2/modules/ && \
+       rm mod_datadog_artifact.zip
    ```
 
-   When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
-   be loaded by the server.
+   This script downloads the latest release artifact zip file, extracts the `mod_datadog.so` shared library directly to the Apache modules directory, and cleans up the temporary files.
 
-1. Place the file in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules`.
+1. If you used a different installation method or need to place the file manually, ensure the `mod_datadog.so` file is in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules` or `/usr/lib/apache2/modules/`.
 
 1. Load the module by adding the following line in the configuration file:
 
