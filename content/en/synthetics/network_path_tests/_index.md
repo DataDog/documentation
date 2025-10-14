@@ -13,20 +13,20 @@ further_reading:
 
 ## Overview
 
-Network Path testing in Synthetic Monitoring gives you complete visibility into the routes your synthetic tests follow, enabling you to pinpoint where failures happen, whether in applications, on-premises networks, or with ISPs. This accelerates root cause analysis, enables proactive issue detection, and triggers actionable alerts when tests fail. It also provides uptime data to help you measure and communicate the value of your network reliability investments.
+Network Path testing in Synthetic Monitoring gives you complete visibility into the routes your synthetic tests follow. You can pinpoint where failures happen, whether in applications, on-premises networks, or with ISPs. This accelerates root cause analysis, enables proactive issue detection, and triggers actionable alerts when tests fail. It also provides uptime data to help you measure and communicate the value of your network reliability investments.
 
-Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application to visualize the Network Path packets follow when executing queries from different global locations.
+Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations.
 
 ## Test creation
 
-1. In the Datadog site, hover over **Digital Experience** in the left hand menu and select Tests (under Synthetic Monitoring & Testing).
+1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
 2. Click **New Test > Network Path Test**.
 
 {{< img src="synthetics/network_tests/network_path_test.png" alt="Network Path test creation from New Synthetics Test" style="width:60%;">}}
 
 ## Test configuration
 
-1. Choose your **request type** (TCP, UDP, or ICMP) and specify the URL to query. Port information is optional.  
+1. Choose your **request type** (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional.  
 2. Name your test.  
 3. Optional: Configure advanced options:  
    1. **Source service**: The label displayed for the source host in the Network Path visualization.  
@@ -46,11 +46,11 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | Type | Operator 1 | Operator 2 | Value type |
    | :---- | :---- | :---- | :---- |
    | latency | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
-   | packet loss |  | `is`, `<`, `<=`, `>`, `>=` | int (0 to 100\) |
+   | packet loss |  | `is`, `<`, `<=`, `>`, `>=` | int (0 to 100) |
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test from outside your network.
+6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test your endpoints from global locations.
 
    {{% managed-locations %}}
 
