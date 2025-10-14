@@ -135,7 +135,7 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 
 ## Ensure your organization is enabled for RC
 
-If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17].
+If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
 
 ## Missing environment variable
 
@@ -159,3 +159,4 @@ If you see the error `Configuration is invalid. Missing environment variable $<e
 [16]: /observability_pipelines/configuration/sources/#tls-certificates
 [17]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [18]: /observability_pipelines/guide/environment_variables/
+[19]: /remote_configuration/#security-considerations

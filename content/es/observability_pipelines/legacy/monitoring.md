@@ -4,7 +4,7 @@ title: (LEGACY) Monitorización
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED de Datadog.</div>
+<div class="alert alert-danger">Observability Pipelines no está disponible en el sitio US1-FED de Datadog.</div>
 {{< /site-region >}}
 
 ## Información general

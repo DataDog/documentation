@@ -61,7 +61,7 @@ instances:
 
 <div class="alert alert-info">To enable monitoring of SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database.</div>
 
-<div class="alert alert-warning">SQL Server Agent Jobs monitoring is not available for Azure SQL Database.</div>
+<div class="alert alert-danger">SQL Server Agent Jobs monitoring is not available for Azure SQL Database.</div>
 
 Monitoring of SQL Server Agent jobs is supported on SQL Server versions 2016 and newer. Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
 
@@ -80,7 +80,7 @@ instances:
 ```
 
 ### Collecting schemas
-<div class="alert alert-warning">Datadog Agent v7.56+ and SQL Server 2017 or higher are required for SQL Server schema collection.</div>
+<div class="alert alert-danger">Datadog Agent v7.56+ and SQL Server 2017 or higher are required for SQL Server schema collection.</div>
 
 To enable this feature, use the `collect_schemas` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
 

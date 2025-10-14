@@ -1,5 +1,6 @@
 ---
 title: Containers Guides
+description: List of guides for container monitoring setup and configuration
 private: true
 disable_toc: true
 ---

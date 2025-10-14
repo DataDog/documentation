@@ -13,7 +13,7 @@ further_reading:
 
 Datadog's [Continuous Profiler][1] for AWS Lambda functions gives you visibility into the exact method name, class name, and line number in your Lambda code that is causing CPU or I/O bottlenecks.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Continuous Profiler for AWS Lambda is in Preview.
 </div>
 

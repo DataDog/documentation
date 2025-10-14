@@ -40,7 +40,7 @@ When an organization exceeds a threshold, pending execution requests queue up to
 
 ## Workflow-level limits
 
-* A workflow can contain up to 100 steps. If you need more than 100 steps in a workflow, you can use the **Trigger workflow** action to [call a child workflow][2]. Use output parameters to pass the output of a child workflow back to your main workflow.
+* A workflow can contain up to 150 steps. If you need more than 150 steps in a workflow, you can use the **Trigger workflow** action to [call a child workflow][2]. Use output parameters to pass the output of a child workflow back to your main workflow.
 * A workflow can run for up to 7 days. Workflows terminate when they attempt to run for longer than 7 days.
 * A workflow can start up to 60 steps per minute. If you exceed this rate, steps are throttled and start at a rate of 60 per minute.
 * The sum of all step outputs for a workflow can be up to 150 MB.

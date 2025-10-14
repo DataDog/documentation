@@ -5,7 +5,7 @@ aliases:
   - /observability_pipelines/destinations/microsoft_sentinel/
 ---
 
-Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel.
+Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for API call limits in Microsoft Sentinel.
 
 ## Setup
 
@@ -30,4 +30,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | None           | 10,000,000       | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/configuration/destinations/#event-batching
+[2]: /observability_pipelines/destinations/#event-batching
+[3]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api

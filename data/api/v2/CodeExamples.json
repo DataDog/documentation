@@ -63,6 +63,13 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "BulkDeleteDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk delete datastore items returns \"OK\" response"
+    }
+  ],
   "BulkWriteDatastoreItems": [
     {
       "group": "actions_datastores",
@@ -264,6 +271,11 @@
       "group": "csm_threats",
       "suffix": "_1295653933",
       "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1363354233",
+      "description": "Create a Workload Protection agent rule with set action with expression returns \"OK\" response"
     }
   ],
   "CreateCSMThreatsAgentPolicy": [
@@ -364,18 +376,18 @@
       "description": "Create Google Cloud Usage Cost config returns \"OK\" response"
     }
   ],
-  "CreateArbitraryCostRule": [
+  "CreateCustomAllocationRule": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create arbitrary cost rule returns \"OK\" response"
+      "description": "Create custom allocation rule returns \"OK\" response"
     }
   ],
-  "CreateRuleset": [
+  "CreateTagPipelinesRuleset": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create ruleset returns \"OK\" response"
+      "description": "Create tag pipeline ruleset returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -399,18 +411,18 @@
       "description": "Update Google Cloud Usage Cost config returns \"OK\" response"
     }
   ],
-  "UpdateArbitraryCostRule": [
+  "UpdateCustomAllocationRule": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update arbitrary cost rule returns \"OK\" response"
+      "description": "Update custom allocation rule returns \"OK\" response"
     }
   ],
-  "UpdateRuleset": [
+  "UpdateTagPipelinesRuleset": [
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update ruleset returns \"OK\" response"
+      "description": "Update tag pipeline ruleset returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -459,14 +471,14 @@
     {
       "group": "dora_metrics",
       "suffix": "",
-      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+      "description": "Send a deployment event returns \"OK\" response"
     }
   ],
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "_1768887482",
-      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -1014,6 +1026,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1181818787",
+      "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -1035,6 +1052,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1400905713",
+      "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [

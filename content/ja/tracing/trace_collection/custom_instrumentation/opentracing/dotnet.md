@@ -19,7 +19,7 @@ type: multi-code-lang
 
 ## セットアップ
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> v3.0.0 以降、OpenTracing のサポートには自動インスツルメンテーションも併用する必要があります。自動およびカスタム インスツルメンテーションのパッケージ バージョン (例: MSI と NuGet) は同期させ、メジャー バージョンを混在させないようにしてください。
 </div>
 

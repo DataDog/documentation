@@ -15,7 +15,7 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   AAP for Gateway API is experimental. Please follow the instructions below to try it out.
 </div>
 
@@ -148,7 +148,7 @@ spec:
 ## Datadog Go Tracer and Gateway API integration
 
 <div class="alert alert-info">
-  <strong>Note:</strong> The AAP Gateway API integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+  The AAP Gateway API integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
 The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [AAP Library Configuration][8].

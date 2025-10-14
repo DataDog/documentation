@@ -52,7 +52,7 @@ Here is an example of `system.load.1` with the `hour_before()` value shown as a 
 
 ## Day before
 
-<div class="alert alert-danger">The day before feature is being deprecated. Use calendar shift with a value of "-1d" instead.</div>
+<div class="alert alert-warning">The day before feature is being deprecated. Use calendar shift with a value of "-1d" instead.</div>
 
 | Function       | Description                                                          | Example                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
@@ -64,7 +64,7 @@ Here is an example of `nginx.net.connections` with the `day_before()` value show
 
 ## Week before
 
-<div class="alert alert-danger">The week before feature is being deprecated. Use calendar shift with a value of "-7d" instead.</div>
+<div class="alert alert-warning">The week before feature is being deprecated. Use calendar shift with a value of "-7d" instead.</div>
 
 | Function        | Description                                                                    | Example                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
@@ -76,7 +76,7 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 ## Month before
 
-<div class="alert alert-danger">The month before feature is being deprecated. Use calendar shift with a value of "-1mo", "-30d" or "-4w" instead, depending on your use case.</div>
+<div class="alert alert-warning">The month before feature is being deprecated. Use calendar shift with a value of "-1mo", "-30d" or "-4w" instead, depending on your use case.</div>
 
 | Function         | Description                                                                                | Example                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|

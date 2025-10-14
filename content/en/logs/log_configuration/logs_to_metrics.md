@@ -53,7 +53,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
-<div class="alert alert-warning">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
+<div class="alert alert-danger">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 ### Update a log-based metric
 

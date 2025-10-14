@@ -14,7 +14,7 @@ algolia:
   tags: ['agent status command']
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 

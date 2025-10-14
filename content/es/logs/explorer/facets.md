@@ -221,7 +221,7 @@ Esta es la mejor opción si incorporas logs desde nuevas fuentes. En lugar de cr
 
 ## Borrar una faceta
 
-<div class="alert alert-danger">Borrar una faceta que está siendo utilizada en índices, monitores, dashboards, consultas de restricción o por otros equipos puede causar que las configuraciones se rompan.</div>
+<div class="alert alert-warning">Borrar una faceta que está siendo utilizada en índices, monitores, dashboards, consultas de restricción o por otros equipos puede causar que las configuraciones se rompan.</div>
 
 Para eliminar una faceta, sigue estos pasos:
 

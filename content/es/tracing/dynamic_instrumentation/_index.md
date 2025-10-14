@@ -31,7 +31,7 @@ title: Instrumentación dinámica
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  Dynamic Instrumentation no es compatible con el <a href="/getting_started/site">sitioDatadog </a> seleccionado ({{< region-param key="dd_site_name" >}}), ya que requiere que <a href="/agent/remote_config/">la configuración remota</a> esté activada.
 </div>
 {{% /site-region %}}

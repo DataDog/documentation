@@ -3,7 +3,7 @@ title: Conectarse a Datadog a través de Azure Private Link
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
-<div class="alert alert-warning">Esta función no es compatible con el sitio de Datadog seleccionado.</div>
+<div class="alert alert-danger">Esta función no es compatible con el sitio de Datadog seleccionado.</div>
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}
