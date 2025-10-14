@@ -49,19 +49,19 @@ The [Home][3] page gives you a bird's-eye view of your users' activity and a pul
 
 By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provides additional context about your product's users and usage:
 
-Users
+[Users](https://app.datadoghq.com/product-analytics/user-trends)
 : see at a glance who is actually using your product.
 
-App & Devices
+[App & Devices](https://app.datadoghq.com/product-analytics/app-and-device)
 : visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
-Engagement
+[Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
 : understand how users are engaging with your product to answer questions like how long are users staying on pages and what their top actions are. 
 
-Traffic
+[Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
 : get a view into bounce rates, top traffic sources, and where your growth is really coming from.
 
-Performance
+[Performance](https://app.datadoghq.com/product-analytics/performance)
 : view surface top errors and frustrations, and see exactly which views they impact
 
 <br>
