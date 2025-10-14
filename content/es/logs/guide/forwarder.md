@@ -125,7 +125,7 @@ Si no puedes instalar el Forwarder utilizando la plantilla de CloudFormation pro
 aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' out
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Las <a href="#cloudformation-parameters">variables de entorno proporcionadas en esta página</a> tienen un formato para CloudFormation y Terraform. Si estás instalando el Forwarder manualmente, convierte estos nombres de parámetros de PascalCase a Screaming Snake Case. Por ejemplo, <code>DdApiKey</code> se convierte en <code>DD_API_KEY</code>, y <code>ExcludeAtMatch</code> se convierte en <code>EXCLUDE_AT_MATCH</code>.
 </div>
 
@@ -286,7 +286,7 @@ Nos encantan las solicitudes de extracción. Aquí tienes una guía rápida.
 
 Si necesitas enviar logs a varias organizaciones Datadog u otros destinos, configura el parámetro `AdditionalTargetLambdaArns` de CloudFormation para que el Datadog Forwarder copie los logs entrantes en las funciones Lambda especificadas. Estas funciones Lambda adicionales se llaman de forma asíncrona con exactamente el mismo `event` que recibe el Datadog Forwarder.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El envío de logs a dos o más destinos implica el uso de dos o más funciones Lambda que pueden empezar a generar logs entre sí en un bucle infinito. Utiliza <code>ExcludeAtMatch</code> para filtrar logs de Lambda y evitar este bucle infinito. Consulta la sección <a href="#log-filtering-optional">Filtrado de logs</a> para obtener más información.
 </div>
 
@@ -340,7 +340,7 @@ El Datadog Forwarder está firmado por Datadog. Para verificar la integridad del
 
 ## Parámetros de CloudFormation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los siguientes parámetros se utilizan en CloudFormation y Terraform. Si estás instalando el Forwarder manualmente, convierte estos nombres de parámetros de PascalCase a Screaming Snake Case. Por ejemplo, <code>DdApiKey</code> se convierte en <code>DD_API_KEY</code>, y <code>ExcludeAtMatch</code> se convierte en <code>EXCLUDE_AT_MATCH</code>.
 </div>
 

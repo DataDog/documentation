@@ -227,7 +227,7 @@ To set up Mobile Session Replay for React Native:
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 
-{% alert level="warning" %}
+{% alert level="info" %}
 Datadog Session Replay for Flutter is currently in Preview.
 {% /alert %}
 
@@ -264,7 +264,7 @@ final configuration = DatadogConfiguration(
         textAndInputPrivacyLevel: TextAndInputPrivacyLevel.maskSensitiveInputs,
         touchPrivacyLevel: TouchPrivacyLevel.show,
         // Setup session replay sample rate.
-        replaySampleRate: 1.0,
+        replaySampleRate: 100.0,
     ),
 );
 ```

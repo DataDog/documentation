@@ -91,7 +91,7 @@ Des options sont disponibles pour la sélection horaire, permettant de visualise
 
 ## Capsules à la demande et lignes engagées facturables
 
-<div class="alert alert-warning">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
+<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
 
 Les capsules à la demande violettes mettent en évidence la partie de l'utilisation facturable correspondant à l'utilisation à la demande. Les capsules bleues engagées et allouées mettent en évidence la partie de votre utilisation couverte par les engagements et les <a href="https://www.datadoghq.com/pricing/allotments/">allocations</a> des produits parents. La ligne en pointillés `Committed` indique les engagements par produit, sans aucune allocation (comme pour les métriques custom ou les conteneurs).
 
@@ -141,7 +141,7 @@ Ces données peuvent être téléchargées sous forme de fichier CSV.
 
 ## Notifications d'utilisation pour la première fois
 
-<div class="alert alert-warning">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
+<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
 
 La fonctionnalité de notifications d'utilisation pour la première fois envoie des emails lorsqu'une utilisation facturable apparaît pour la première fois pour un nouveau produit non inclus dans votre contrat actuel. Les emails sont envoyés environ 48 heures après la première utilisation au cours d'un mois donné.
 

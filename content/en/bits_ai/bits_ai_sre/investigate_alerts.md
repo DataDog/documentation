@@ -43,7 +43,7 @@ You can configure monitors so Bits runs automatically whenever they transition t
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations.
 
 ### Supported monitors
-<div class="alert alert-info"> Note: Prior to general availability, monitor requirements may change.  </div>
+<div class="alert alert-info">Prior to general availability, monitor requirements may change.</div>
 
 Bits is able to run investigations on the following monitor types:
   - Metric

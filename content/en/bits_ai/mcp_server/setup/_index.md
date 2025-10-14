@@ -24,7 +24,7 @@ further_reading:
 The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <h3>Disclaimers</h3>
 <ul>
 <li>The Datadog MCP Server is not supported for production use during the Preview.</li>

@@ -72,7 +72,7 @@ Configura la [integración de Google Cloud][1] para el proyecto que contiene tu 
 ### Crear un bucket de almacenamiento
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El envío de logs a un archivo queda fuera del entorno GovCloud de Datadog, que está fuera del control de Datadog. Datadog no será responsable de ningún log que haya salido del entorno GovCloud de Datadog, incluidas, entre otras, las obligaciones o requisitos que el usuario pueda tener en relación con FedRAMP, DoD Impact Levels, ITAR, cumplimiento de las normas de exportación, residencia de datos o normativas similares aplicables a dicho log.</div>
+<div class="alert alert-danger">El envío de logs a un archivo queda fuera del entorno GovCloud de Datadog, que está fuera del control de Datadog. Datadog no será responsable de ningún log que haya salido del entorno GovCloud de Datadog, incluidas, entre otras, las obligaciones o requisitos que el usuario pueda tener en relación con FedRAMP, DoD Impact Levels, ITAR, cumplimiento de las normas de exportación, residencia de datos o normativas similares aplicables a dicho log.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -81,7 +81,7 @@ Configura la [integración de Google Cloud][1] para el proyecto que contiene tu 
 Entra en tu [consola de AWS][1] y [crea un bucket de S3][2] al que enviar tus archivos.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog Archives no admiten nombres de bucket con puntos (.) cuando se integran con un endpoint FIPS de S3 que se basa en el direccionamiento de estilo virtual-host. Obtén más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Datadog Archives no admiten nombres de bucket con puntos (.) cuando se integran con un endpoint FIPS de S3 que se basa en el direccionamiento de estilo virtual-host. Obtén más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notas:**

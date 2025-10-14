@@ -161,7 +161,7 @@ Si tu sistema operativo no es compatible con curl, puedes ir directamente a `'ht
 
 Para empezar a generar y recopilar trazas, reinicia la aplicación de ejemplo con marcas adicionales que hagan que los datos de rastreo se envíen a Datadog.
 
-<div class="alert alert-warning"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
 
 
 {{< tabs >}}

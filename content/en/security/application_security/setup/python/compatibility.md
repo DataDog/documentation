@@ -21,9 +21,9 @@ The following App and API Protection capabilities are supported in the Python li
 
 {{< partial name="app_and_api_protection/python/capabilities.html" >}}
 
-<div class="alert alert-warning">Datadog strongly encourages you to always use the last stable release of the tracer.</div>
+<div class="alert alert-danger">Datadog strongly encourages you to always use the last stable release of the tracer.</div>
 
-<div class="alert alert-info">**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.</div>
+<div class="alert alert-info">Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.</div>
 
 ### Supported deployment types
 
