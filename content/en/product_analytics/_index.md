@@ -47,7 +47,25 @@ The [Home][3] page gives you a bird's-eye view of your users' activity and a pul
 
 {{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
-By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. You can navigate to anywhere in Product Analytics from the home page. 
+By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provides additional context about your product's users and usage:
+
+Users
+: see at a glance who is actually using your product.
+
+App & Devices
+: visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
+
+Engagement
+: understand how users are engaging with your product to answer questions like how long are users staying on pages and what their top actions are. 
+
+Traffic
+: get a view into bounce rates, top traffic sources, and where your growth is really coming from.
+
+Performance
+: view surface top errors and frustrations, and see exactly which views they impact
+
+<br>
+
 
 ### Track conversion rates and their evolution over time
 The Product Analytics charts help you visualize your users' journey as they use your product.
