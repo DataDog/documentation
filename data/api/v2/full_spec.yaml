@@ -9527,6 +9527,10 @@ components:
           description: The name of the policy
           example: my_agent_policy
           type: string
+        pinned:
+          description: Whether the policy is pinned
+          example: false
+          type: boolean
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -9554,6 +9558,8 @@ components:
           type: integer
         updater:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdaterAttributes'
+        versions:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyVersions'
       type: object
     CloudWorkloadSecurityAgentPolicyCreateAttributes:
       description: Create a new Cloud Workload Security Agent policy
@@ -9700,6 +9706,23 @@ components:
           nullable: true
           type: string
       type: object
+    CloudWorkloadSecurityAgentPolicyVersion:
+      description: The versions of the policy
+      properties:
+        Date:
+          description: The date and time the version was created
+          nullable: true
+          type: string
+        Name:
+          description: The version of the policy
+          example: 1.47.0-rc2
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentPolicyVersions:
+      description: The versions of the policy
+      items:
+        $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyVersion'
+      type: array
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered
       properties:
@@ -9737,23 +9760,32 @@ components:
       description: The set action applied on the scope matching the rule
       properties:
         append:
-          description: Whether the value should be appended to the field
+          description: Whether the value should be appended to the field.
           type: boolean
+        default_value:
+          description: The default value of the set action
+          type: string
+        expression:
+          description: The expression of the set action.
+          type: string
         field:
           description: The field of the set action
           type: string
+        inherited:
+          description: Whether the value should be inherited.
+          type: boolean
         name:
           description: The name of the set action
           type: string
         scope:
-          description: The scope of the set action
+          description: The scope of the set action.
           type: string
         size:
-          description: The size of the set action
+          description: The size of the set action.
           format: int64
           type: integer
         ttl:
-          description: The time to live of the set action
+          description: The time to live of the set action.
           format: int64
           type: integer
         value:
@@ -9834,6 +9866,10 @@ components:
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
         updateAuthorUuId:
           description: The ID of the user who updated the rule
           example: e51c9744-d158-11ec-ad23-da7ad0900002
@@ -9861,8 +9897,11 @@ components:
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        agent_version:
+          description: Constrain the rule to specific versions of the Datadog Agent.
+          type: string
         blocking:
-          description: The blocking policies that the rule belongs to
+          description: The blocking policies that the rule belongs to.
           items:
             type: string
           type: array
@@ -9871,12 +9910,12 @@ components:
           example: My Agent rule
           type: string
         disabled:
-          description: The disabled policies that the rule belongs to
+          description: The disabled policies that the rule belongs to.
           items:
             type: string
           type: array
         enabled:
-          description: Whether the Agent rule is enabled
+          description: Whether the Agent rule is enabled.
           example: true
           type: boolean
         expression:
@@ -9884,12 +9923,12 @@ components:
           example: exec.file.name == "sh"
           type: string
         filters:
-          description: The platforms the Agent rule is supported on
+          description: The platforms the Agent rule is supported on.
           items:
             type: string
           type: array
         monitoring:
-          description: The monitoring policies that the rule belongs to
+          description: The monitoring policies that the rule belongs to.
           items:
             type: string
           type: array
@@ -9898,14 +9937,18 @@ components:
           example: my_agent_rule
           type: string
         policy_id:
-          description: The ID of the policy where the Agent rule is saved
+          description: The ID of the policy where the Agent rule is saved.
           example: a8c8e364-6556-434d-b798-a4c23de29c0b
           type: string
         product_tags:
-          description: The list of product tags associated with the rule
+          description: The list of product tags associated with the rule.
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
       required:
       - name
       - expression
@@ -9985,6 +10028,9 @@ components:
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        agent_version:
+          description: Constrain the rule to specific versions of the Datadog Agent
+          type: string
         blocking:
           description: The blocking policies that the rule belongs to
           items:
@@ -10021,6 +10067,10 @@ components:
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
       type: object
     CloudWorkloadSecurityAgentRuleUpdateData:
       description: Object for a single Agent rule
