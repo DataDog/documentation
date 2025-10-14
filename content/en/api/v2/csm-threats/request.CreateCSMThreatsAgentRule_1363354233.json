@@ -1,7 +1,7 @@
 {
   "data": {
     "attributes": {
-      "description": "My Agent rule with set action",
+      "description": "My Agent rule with set action with expression",
       "enabled": true,
       "expression": "exec.file.name == \"sh\"",
       "filters": [],
@@ -12,13 +12,10 @@
         {
           "set": {
             "name": "test_set",
-            "value": "test_value",
-            "scope": "process",
-            "inherited": true
+            "expression": "open.file.path",
+            "default_value": "/dev/null",
+            "scope": "process"
           }
-        },
-        {
-          "hash": {}
         }
       ]
     },
