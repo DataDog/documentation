@@ -96,6 +96,10 @@ From the default view entry in the Views panel:
 * **Update** your default view with the current parameters.
 * **Reset** your default view to Datadog's defaults for a fresh restart.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /monitors/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
