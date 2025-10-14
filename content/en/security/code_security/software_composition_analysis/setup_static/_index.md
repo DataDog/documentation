@@ -171,6 +171,10 @@ There are two ways to run SCA scans from within your CI Pipelines:
 
 You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
 
+<div class="alert alert-danger">
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, etc.) are not supported and can cause issues with the product.
+</div>
+
 {{< tabs >}}
 {{% tab "GitHub" %}}
 **GitHub Actions**
