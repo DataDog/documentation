@@ -166,4 +166,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
 [24]: /synthetics/notifications/
-[25]: /synthetics/network_tests/
+[25]: /synthetics/network_path_tests/
