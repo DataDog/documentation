@@ -118,21 +118,6 @@ def get_git_username(repo_path: Path | None = None) -> str:
     return "blog-linker"
 
 
-def find_docs_repo() -> Path | None:
-    """
-    Try to find the documentation repo by looking for telltale signs.
-    Searches current directory and parents for a directory containing
-    content/en/ (Hugo docs structure).
-    """
-    cwd = Path.cwd()
-    
-    # Check current directory and up to 3 levels of parents
-    for path in [cwd] + list(cwd.parents)[:3]:
-        # Look for content/en/ directory (Hugo docs structure)
-        if (path / "content" / "en").exists():
-            return path
-    
-    return None
 
 
 # ----------------------------
@@ -607,10 +592,10 @@ def print_readable_summary(results: list) -> None:
 def main():
     ap = argparse.ArgumentParser(
         description="Pull new Datadog blog posts and update docs further_reading.",
-        epilog="If --repo is not specified, the script will try to auto-detect the docs repository."
+        epilog="Run this script from the documentation repository root, or use --repo to specify the path."
     )
     ap.add_argument("--rss", default=BLOG_RSS, help="RSS URL (default: Datadog blog index.xml)")
-    ap.add_argument("--repo", required=False, help="Path to local documentation repo (auto-detects if not specified)")
+    ap.add_argument("--repo", required=False, help="Path to local documentation repo (default: current directory)")
     ap.add_argument("--since", type=int, default=14, help="Only process posts published in the last N days (default: 14)")
     ap.add_argument("--limit", type=int, default=20, help="Max items to process (default: 20)")
     ap.add_argument("--latest", type=int, default=None, help="Process the most recent N items (ignores --since)")
@@ -641,24 +626,16 @@ def main():
             if len(new_entries) >= args.limit:
                 break
 
-    # Determine repository path (auto-detect if not specified)
-    repo_root = None
-    if args.repo:
-        repo_root = Path(args.repo).resolve()
-    else:
-        repo_root = find_docs_repo()
-        if repo_root:
-            print(f"Auto-detected documentation repository at: {repo_root}")
+    # Determine repository path (use --repo or current directory)
+    repo_root = Path(args.repo).resolve() if args.repo else Path.cwd()
     
-    if not repo_root:
-        print("ERROR: Could not find documentation repository.", file=sys.stderr)
-        print("Please run this script from within the docs repo, or use --repo to specify the path.", file=sys.stderr)
-        sys.exit(1)
-    
-    # Verify repo_root looks like a docs repo
+    # Verify we're in a docs repo
     if not (repo_root / "content" / "en").exists():
         print(f"ERROR: {repo_root} does not appear to be a documentation repository.", file=sys.stderr)
         print("Expected to find content/en/ directory.", file=sys.stderr)
+        print("\nPlease run this script from the documentation repository root:", file=sys.stderr)
+        print("  cd /path/to/documentation", file=sys.stderr)
+        print("  make update-blog-links", file=sys.stderr)
         sys.exit(1)
     
     # Create ONE branch for the entire run (if not dry-run)

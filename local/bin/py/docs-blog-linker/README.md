@@ -51,7 +51,7 @@ For custom workflows:
 
 ### Optional arguments
 
-- `--repo PATH`: Path to the documentation repository. If not specified, the script auto-detects the repo by looking for `content/en/` directory.
+- `--repo PATH`: Path to the documentation repository (default: current directory).
 
 ### Processing control
 - `--since DAYS`: Process only blog posts published within the last N days.
