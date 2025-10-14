@@ -25,7 +25,7 @@ Metrics use a specialized metrics-based syntax for filtering and aggregating tim
 
 For more information, see [Advanced Filtering][1].
 
-### Key capabilties
+### Key capabilities
 * Tag-based filtering with boolean logic (`AND`, `OR`, `NOT`) or symbolic operators (`&&`, `||`, `!`)
 * Wildcard matching on metric names and tag values
 * Aggregation by multiple tag dimensions
@@ -94,7 +94,7 @@ APM and Distributed Tracing use event-based search syntax for querying spans and
 
 To learn more about querying spans and traces with service, resource, and tag filters, see [Trace Query Syntax][3].
 
-### Key capabilites
+### Key capabilities
 * Query spans by service, operation, and resource name
 * Filter by trace-level and span-level tags
 * Search across distributed traces spanning multiple services
@@ -136,7 +136,7 @@ service:database @db.statement:"SELECT *" @db.row_count:>1000
   {{< nextlink href="/tests/explorer/search_syntax" >}}Test Optimization Explorer Search Syntax: Search and analyze test execution data{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
