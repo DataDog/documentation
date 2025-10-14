@@ -131,7 +131,11 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 
 ### Agent evaluations
 
-[Agent evaluations][18] help ensure that your LLM-powered applications are making the right tool calls and resolving user requests successfully. These checks are designed to catch common failure modes when agents interact with external tools, APIs, or workflows. [Tool selection][19], which checks that the tool(s) selected by an agent are correct, [tool argument correctness][20], which checks that the arguments provided to a tool by the agent are correct, and [goal completeness][21], which checks if a user's goal is met by the end of the session, are the current agent evaluations Datadog offers.
+[Agent evaluations][18] help ensure your LLM-powered applications are making the right tool calls and successfully resolving user requests. These checks are designed to catch common failure modes when agents interact with external tools, APIs, or workflows. Datadog offers the following agent evaluations:
+
+- [Tool selection](#tool-selection) - Verifies that the tool(s) selected by an agent are correct
+- [Tool argument correctness](#tool-argument-correctness) - Ensures the arguments provided to a tool by the agent are correct
+- [Goal completeness](##goal-completeness) - Checks if a user's goal is met by the end of the session
 
 ### Quality evaluations
 
