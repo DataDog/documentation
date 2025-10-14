@@ -16,7 +16,7 @@ further_reading:
 title: Uso de integraciones con Software Catalog
 ---
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Las integraciones de PagerDuty y OpsGenie para Software Catalog no son compatibles con el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}

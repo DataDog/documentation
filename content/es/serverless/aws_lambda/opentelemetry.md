@@ -28,7 +28,7 @@ Para instrumentar AWS Lambda con la API de OpenTelemetry, define la variable de 
 
 ### Enviar trazas de OpenTelemetry desde cualquier SDK de OpenTelemetry a través de la extensión Datadog Lambda {#sdk}
 
-<div class="alert alert-warning">Esta característica está en fase beta.</div>
+<div class="alert alert-danger">Esta característica está en fase beta.</div>
 
 Este enfoque es análogo a la [Ingesta de OLTP en el Datadog Agent][4]. Se recomienda en situaciones en las que la compatibilidad del rastreo puede no estar disponible para un tiempo de ejecución (por ejemplo, Rust o PHP).
 

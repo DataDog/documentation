@@ -65,7 +65,7 @@ Una vez que hayas configurado tu pipeline, consulta [Actualizar pipelines existe
 {{% /tab %}}
 {{% tab "API" %}}
 
-<div class="alert alert-warning">La creación de pipelines utilizando la API de Datadog está en vista previa. Rellena el <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> formulario</a> para solicitar acceso.</div>
+<div class="alert alert-danger">La creación de pipelines utilizando la API de Datadog está en vista previa. Rellena el <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> formulario</a> para solicitar acceso.</div>
 
 Puedes utilizar la API de Datadog para [crear un pipeline][1]. Una vez creado el pipeline, [instala el worker][2] para empezar a enviar logs a través del pipeline.
 
@@ -78,7 +78,7 @@ Los pipelines creados mediante la API son de sólo lectura en la interfaz de usu
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-warning">Crear pipelines usando Terraform está en Vista previa. Rellena el <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> formulario</a> para solicitar acceso.</div>
+<div class="alert alert-danger">Crear pipelines usando Terraform está en Vista previa. Rellena el <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> formulario</a> para solicitar acceso.</div>
 
 Puedes usar el módulo [datadog_observability_pipeline][1] para crear un pipeline usando Terraform. Una vez creado el pipeline, [instala el worker][2] para empezar a enviar logs a través del pipeline.
 

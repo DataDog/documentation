@@ -3,7 +3,7 @@ title: Instrumentación de aplicaciones serverless de Python mediante el Datadog
 ---
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/python">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 

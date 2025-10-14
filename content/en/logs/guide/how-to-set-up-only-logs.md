@@ -11,7 +11,7 @@ further_reading:
   text: "Kubernetes Log Collection"
 ---
 
-<div class="alert alert-danger">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>
+<div class="alert alert-warning">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>
 
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
 

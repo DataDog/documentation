@@ -35,7 +35,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
+<div class="alert alert-danger">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 
 ## Overview

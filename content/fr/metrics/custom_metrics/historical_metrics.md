@@ -20,7 +20,7 @@ title: Ingestion historique de métriques
 {{< jqmath-vanilla >}}
 
 {{% site-region region="gov" %}}
-"<div class="alert alert-warning">L'ingestion des métriques historiques n'est pas prise en charge pour le <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+"<div class="alert alert-danger">L'ingestion des métriques historiques n'est pas prise en charge pour le <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Section Overview
