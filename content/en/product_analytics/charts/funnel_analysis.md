@@ -99,7 +99,7 @@ If a user performs the actions as in the example above, Datadog counts it as one
 
 If you select the **unique** conversion measure, then a conversion (session, user, or account) is counted only once per session, user or account. So, if the user performs  A → B → C → A → B → C during the session or timeframe then `unique` will count 1 conversion.
 
-If total is selected, then in the example above we will count 2 conversions. 
+If **total** is selected, then in the example above we will count 2 conversions. 
 
 <!-- 
 If you analyze your funnel by user or account, you can define your conversion timeframe (default: 1 day). This means that we use a 24-hour window (not calendar dates) to determine if a conversion happened or not.
