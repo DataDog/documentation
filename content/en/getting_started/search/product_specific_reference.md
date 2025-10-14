@@ -140,7 +140,6 @@ service:database @db.statement:"SELECT *" @db.row_count:>1000
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /metrics/advanced-filtering
 [2]: /logs/explorer/search_syntax
 [3]: /tracing/trace_explorer/query_syntax
