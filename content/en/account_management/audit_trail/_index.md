@@ -4,6 +4,9 @@ description: Monitor Datadog user activity, API requests, and resource changes w
 aliases:
     - /account_management/audit_logs/
 further_reading:
+- link: https://www.datadoghq.com/blog/irap-protected
+  tag: Blog
+  text: Datadog achieves IRAPâs PROTECTED status in Australia
 - link: "/account_management/audit_trail/events/"
   tag: "Documentation"
   text: "Learn about Audit Trail events"
