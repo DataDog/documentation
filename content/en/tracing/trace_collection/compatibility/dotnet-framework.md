@@ -44,11 +44,11 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 <div class="alert alert-info">When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
 </div>
 
-## Supported process architectures
+## Supported processor architectures
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Process architectures   | Support level       | Package version |
+| Processor architectures | Support level       | Package version |
 | ----------------------- | ------------------- | --------------- |
 | Windows x64 (`win-x64`) | [GA](#support-ga)   | latest          |
 | Windows x86 (`win-x86`) | [GA](#support-ga)   | latest          |

@@ -43,11 +43,11 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
-## Supported process architectures
+## Supported processor architectures
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Process architecture                      | Support level         | Package version                        |
+| Processor architecture                    | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
 | Windows x86 (`win-x86`)                   | [GA](#support-ga)     | latest                                 |
