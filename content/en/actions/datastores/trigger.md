@@ -12,7 +12,7 @@ further_reading:
 
 This page explains how to use and audit automation rules for datastores. With automation rules, you can add workflows to your datastores that automatically trigger when records are created, updated, or deleted.
 
-## Use Automation Rules 
+## Use automation rules 
 
 ### Create a new automation rule
 
@@ -45,7 +45,7 @@ To delete an automation rule:
 1. Click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
 1. When prompted, confirm deletion.
 
-## Audit Automation Rules
+## Audit automation rules
 
 
 
