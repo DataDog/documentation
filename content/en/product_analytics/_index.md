@@ -18,8 +18,6 @@ further_reading:
 
 ## Overview
 
-{{< img src="product_analytics/overview-1.png" alt="Landing page of Product Analytics.">}}
-
 Product Analytics helps you gain insight into user behavior and make data-driven decisions. It can help solve the following types of use cases in your application:
 
 - [Understand product adoption](#understand-product-adoption)
