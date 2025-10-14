@@ -57,7 +57,7 @@ Here's a summary of the process:
    - User info: `process.user`, `process.uid`
    - Containers: `container.*`
    - Time: `process.created_at > 5s`
-9.  Insert safe exceptions. Examples: `not in [...]`, `!~`, `allowlists`.
+9.  Insert safe exceptions. Examples: `not in [...]`, `!~`. In SECL, you can implement "allowlists" (the conditions that are included or excluded from detection) using ordinary operators like `not in`, `!~`, or conditional exclusions.
 10. Name and save the rule.
 
 ### Test the rule
@@ -82,14 +82,7 @@ When viewing the backend logic for a detection rule, do the following:
 
 ## Rule authoring tips
 
-- Always set the operating system (OS). Filter in the rule YAML when using OS-specific fields:  
-     
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    id: my_linux_rule
-    expression: exec.file.path == "/usr/bin/passwd"
-    filters:
-        - os == "linux"
-    {{< /code-block >}}
+- Always set the operating system (OS).
 - Anchor on ancestry to reduce noise. Use `process.ancestors.file.name`.
 - Use durations (for example, `> 5s`, `10m`, `2h`) to target narrow execution windows.
 - Use exact match (`==`) whenever possible as it results in lowest noise.
@@ -106,38 +99,13 @@ When viewing the backend logic for a detection rule, do the following:
 
 | Pattern                   | Explanation                                 |
 | ------------------------- | -------------------------------------------- |
-| `proc.args contains "rm"` | Too broad. Matches a lot of valid use cases.  |
+| `open.file.path == "/etc/passwd"`, `exec.comm != ""` | Too broad. Matches a lot of valid use cases.  |
 | `fd.name contains "/"`    | Matches nearly every file I/O event.     |
 | `container.id != ""`      | Useful only if scoped with a more specific field. |
 
 ## Common building blocks
 
-### Triggers
-
-- Linux: `exec`, `open`, `dns`, `connect`, `chmod`, `unlink`, `load_module`.
-- Windows: `exec`, `create`, `write`, `rename`, `set_key_value`, `create_key`.
-  
-### High-signal fields
-
-| Category       | Field Examples                                            |
-| -------------- | --------------------------------------------------------- |
-| **Process**    | `exec.file.path`, `process.ancestors.*`, `process.user`   |
-| **File**       | `open.file.path`, `*.rights/mode`, package metadata       |
-| **Network**    | `network.destination.ip`, `dns.question.name`, `in CIDR`  |
-| **Containers** | `container.id`, `container.created_at`, `Kubernetes tags` |
-| **Time**       | `process.created_at > 5s`                                 |
-
-
-### Operators and matchers
-
-| Type                  | Syntax                        |
-| --------------------- | ----------------------------- |
-| Equality / Comparison | `==`, `!=`, `>`, `<=`         |
-| List membership       | `in [...]`, `not in [...]`    |
-| Logical               | `&&`, `\|\|`, `!`               |
-| Pattern matching      | `=~`, `!~`, glob `~"/path/*"` |
-| CIDR                  | `in CIDR`, `not in CIDR`      |
-
+For information and examples of common building blocks like operators, patterns, regular expressions, duration, and platform-specific syntax, see [Creating Agent Rule Expressions][3].
 
 ## Example library
 
@@ -222,13 +190,13 @@ exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
 | Phase        | Action                                                       |
 | ------------ | ------------------------------------------------------------ |
 | **Draft**    | Author rule with YAML metadata and proper filters.               |
-| **Simulate** | Use Agent in read-only/simulation mode.                   |
+| **Simulate** | Use Agent in read-only mode.                   |
 | **Validate** | Run in staging workloads. Validate behavior with real events. |
 | **Tune**     | Add suppressions, `not in`, `container.image`, etc.          |
-| **Activate** | Ship to a subset of workloads (tagged via policy).            |
 | **Scale**    | Reference in backend detection rules for full rollout.        |
 
 After validatation and deployment, continue monitoring rule performance to keep false positives low and coverage strong as workloads evolve.
 
 [1]: https://app.datadoghq.com/security/workload-protection/policies
 [2]: https://app.datadoghq.com/security/workload-protection/agent-events
+[3]: /security/workload_protection/agent_expressions
