@@ -92,7 +92,7 @@ triage_agent = Agent(
 
 ## Tool Argument Correctness
 
-Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (e.g., a string instead of an integer) or irrelevant values cause failures in downstream execution.
+Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (for example, a string instead of an integer) or irrelevant values cause failures in downstream execution.
 
 ### Evaluation summary
 
