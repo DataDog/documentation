@@ -46,7 +46,7 @@ You can create a metric filtering policy from the [Metrics Settings page][6] or 
 
 Metric filtering policies are applied to all Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
 
-Policy updates are deployed to Agents in 1–2 minutes.
+Policy updates are deployed to Agents in 1-2 minutes.
 
 ### From the Metrics Settings page
 
