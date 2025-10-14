@@ -6989,10 +6989,10 @@ menu:
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
       weight: 304
-    - name: Network Testing
-      url: synthetics/network_tests/
+    - name: Network Path Tests
+      url: synthetics/network_path_tests/
       parent: synthetics
-      identifier: synthetics_network_tests
+      identifier: synthetics_network_path_tests
       weight: 4
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/

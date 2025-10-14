@@ -6,6 +6,9 @@ further_reading:
 - link: "/network_monitoring/network_path/"
   tag: "Doc"
   text: "Learn more about Network Path"
+- link: "https://www.datadoghq.com/blog/network-path/"
+  tag: "Blog"
+  text: "Identify slowdowns across your entire network with Datadog Network Path"
 ---
 
 ## Overview
@@ -29,9 +32,9 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    1. **Source service**: The label displayed for the source host in the Network Path visualization.  
    2. **Destination service**: The label displayed for the destination host in the Network Path visualization.  
    3. **Max TTL**: Maximum time-to-live (maximum number of hops) for outgoing probe packets. Defaults to 30 hops.  
-   4. **E2E Queries**: Number of packets sent to the destination to measure packet loss, latency, and jitter.  
+   4. **E2E Queries**: Number of packets sent to the destination to measure packet loss, latency, and jitter. Defaults to 50.
    5. **Traceroute Queries**: Number of traceroute path tracings to perform. Results are aggregated in each test run details panel.  
-   6. **TCP traceroute strategy** (TCP tests only): Choose between Selective Acknowledgement (SACK) and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic.  
+   6. **TCP traceroute strategy** (TCP tests only): Choose between Selective Acknowledgement (SACK) and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic. Defaults to 3.
 4. Optional: Add **Tags** to your test, including environment tags. Use tags to filter your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][1].
 
   {{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
@@ -62,7 +65,9 @@ Click on a Network Path test on the [Synthetic Tests page][1] to view the Test D
 - Individual test runs
 - Aggregated Network Path visualizations across all test runs
 
-The Network Path visualization shows the routes packets take to complete queries during each test run. Use the health bar handles to control the time frame for displayed network paths. For more information about how Network Path visualizations are built, see the [Network Path documentation][2].
+The Network Path visualization shows the routes packets take to complete queries during each test run. Drag the [health bar][3] handles to adjust the time frame and view a snapshot of end-to-end latency and packet loss for a specific time interval. For more information about how Network Path visualizations are built, see the [Network Path documentation][2].
+
+  <div class="alert alert-info">Changing the health bar does not affect the global time range at the top of the page.</div>
 
   {{< img src="synthetics/network_tests/network_path_section.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
 
@@ -76,3 +81,4 @@ To view details for a specific test run, click on a test run in the table at the
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /network_monitoring/network_path/path_view/
+[3]: /network_monitoring/network_path/path_view/#health-bar
