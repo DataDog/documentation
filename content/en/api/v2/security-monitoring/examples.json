@@ -2840,7 +2840,7 @@
         "options": {
           "complianceRuleOptions": {
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -2896,7 +2896,7 @@
           "complianceRuleOptions": {
             "complexRule": false,
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -3377,7 +3377,7 @@
                 "complianceRuleOptions": {
                   "complexRule": false,
                   "regoRule": {
-                    "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                    "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                     "resourceTypes": [
                       "gcp_iam_service_account",
                       "gcp_iam_policy"
@@ -3568,7 +3568,7 @@
             "complianceRuleOptions": {
               "complexRule": false,
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -3706,7 +3706,7 @@
         "options": {
           "complianceRuleOptions": {
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -3762,7 +3762,7 @@
           "complianceRuleOptions": {
             "complexRule": false,
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -3925,7 +3925,7 @@
         "options": {
           "complianceRuleOptions": {
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -3983,7 +3983,7 @@
           "complianceRuleOptions": {
             "complexRule": false,
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -4146,7 +4146,7 @@
           "options": {
             "complianceRuleOptions": {
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -4204,7 +4204,7 @@
             "complianceRuleOptions": {
               "complexRule": false,
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -4358,7 +4358,7 @@
         "options": {
           "complianceRuleOptions": {
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -4416,7 +4416,7 @@
           "complianceRuleOptions": {
             "complexRule": false,
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -4609,7 +4609,7 @@
             "complianceRuleOptions": {
               "complexRule": false,
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -4792,7 +4792,7 @@
             "complianceRuleOptions": {
               "complexRule": false,
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -4941,7 +4941,7 @@
         "options": {
           "complianceRuleOptions": {
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -5001,7 +5001,7 @@
           "complianceRuleOptions": {
             "complexRule": false,
             "regoRule": {
-              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+              "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
               "resourceTypes": [
                 "gcp_iam_service_account",
                 "gcp_iam_policy"
@@ -5210,7 +5210,7 @@
           "options": {
             "complianceRuleOptions": {
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -5268,7 +5268,7 @@
             "complianceRuleOptions": {
               "complexRule": false,
               "regoRule": {
-                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                 "resourceTypes": [
                   "gcp_iam_service_account",
                   "gcp_iam_policy"
@@ -5455,7 +5455,7 @@
                       "complianceRuleOptions": {
                         "complexRule": false,
                         "regoRule": {
-                          "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}\n",
+                          "policy": "package datadog\n\nimport data.datadog.output as dd_output\nimport future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource) = \"skip\" if {\n  # Logic that evaluates to true if the resource should be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that evaluates to true if the resource is not compliant\n  true\n}\n\n# This part remains unchanged for all rules\nresults contains result if {\n  some resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource, eval(resource))\n}",
                           "resourceTypes": [
                             "gcp_iam_service_account",
                             "gcp_iam_policy"

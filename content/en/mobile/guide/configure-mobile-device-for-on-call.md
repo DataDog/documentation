@@ -1,5 +1,6 @@
 ---
 title: Set Up Your Mobile Device for Datadog On-Call
+description: "Configure your mobile device for reliable on-call notifications with critical alerts, Do Not Disturb bypass, and telephony contact setup."
 further_reading:
 - link: "https://docs.datadoghq.com/service_management/on-call/"
   tag: "Documentation"
@@ -97,7 +98,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
 </div>
 

@@ -63,7 +63,7 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
     AWS Lambda や Azure Functions などのサーバーレス環境で Datadog APM を設定するには、<a href="/serverless">サーバーレス</a>を参照してください。
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> Datadog の自動インスツルメンテーションは .NET CLR Profiling API に依存します。この API で許可されるサブスクライバーは 1 つのみです (例: Datadog APM)。可視性を最大化するため、アプリケーション環境では 1 つの APM ソリューションだけを実行してください。
 </div>
 
@@ -139,7 +139,7 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
 </div>
 
@@ -166,7 +166,7 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
 
 1. .NET Tracer の MSI インストーラーは、必要な環境変数をすべて追加します。構成する必要のある環境変数はありません。
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
    </div>
 
@@ -178,7 +178,7 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
@@ -242,7 +242,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> v3.0.0 以降、カスタム インスツルメンテーションを使用するには自動インスツルメンテーションも併用する必要があります。自動およびカスタム インスツルメンテーションのパッケージ バージョン (例: MSI と NuGet) は同期させ、メジャー バージョンを混在させないようにしてください。
 </div>
 
@@ -257,7 +257,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 {{% tab "Linux" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> v3.0.0 以降、カスタム インスツルメンテーションを使用するには自動インスツルメンテーションも併用する必要があります。自動およびカスタム インスツルメンテーションのパッケージ バージョン (例: MSI と NuGet) は同期させ、メジャー バージョンを混在させないようにしてください。
 </div>
 
@@ -287,7 +287,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 ### Windows
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された<em>あらゆる</em> .NET プロセスに .NET ライブラリをロードしようとします。インスツルメンテーションは、インスツルメントする必要のあるアプリケーションのみに制限する必要があります。<strong>これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上の<em>すべての</em> .NET プロセスがインスツルメントされます。</strong>
 </div>
 
@@ -420,7 +420,7 @@ Linux Docker コンテナに必要な環境変数を設定するには
 
 #### `systemctl` (all services)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された<em>あらゆる</em> .NET プロセスに .NET ライブラリをロードしようとします。インスツルメンテーションは、インスツルメントする必要のあるアプリケーションのみに制限する必要があります。<strong>これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上の<em>すべての</em> .NET プロセスがインスツルメントされます。</strong>
 </div>
 

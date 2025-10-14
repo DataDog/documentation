@@ -15,7 +15,7 @@ further_reading:
 title: Configurer le tracing sur un pipeline Azure
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server n'est pas officiellement pris en charge.
 </div>
 

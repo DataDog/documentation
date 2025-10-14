@@ -6,7 +6,12 @@ pygmentsCodeFences: true
 enableRobotsTXT: true
 
 # don't publish cdocs source files
-ignoreFiles: ["\\.mdoc\\.md$"]
+ignoreFiles:
+  - "\\.mdoc\\.md$"
+  - "^integrations_data/"
+  - "^hugpython/"
+  - "^examples/"
+  - "^local/"
 
 publishDir: "./public"
 
@@ -149,6 +154,18 @@ module:
     - source: _vendor/content/en
       target: content
       lang: en
+    - source: _vendor/content/fr
+      target: content
+      lang: fr
+    - source: _vendor/content/ja
+      target: content
+      lang: ja
+    - source: _vendor/content/ko
+      target: content
+      lang: ko
+    - source: _vendor/content/es
+      target: content
+      lang: es
     - source: _vendor/data
       target: data
     - source: _vendor/layouts

@@ -14,7 +14,7 @@ further_reading:
 {{< /callout >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -111,7 +111,7 @@ DDOT automatically binds the OpenTelemetry Collector to ports 4317 (grpc) and 43
 
 ### (Optional) Enable additional Datadog features
 
-<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+<div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 For a complete list of available options, refer to the fully commented reference file at `/etc/datadog-agent/datadog.yaml.example` or the sample [`config_template.yaml`][12] file.
 

@@ -30,7 +30,7 @@ Este documento explica el bootstrapping para el worker de Observability Pipeline
 
 ## Opciones de bootstrap
 
-<div class="alert alert-warning">Todas las rutas de archivos de configuración especificadas en el pipeline deben estar bajo <code>DD_OP_DATA_DIR/config</code>.
+<div class="alert alert-danger">Todas las rutas de archivos de configuración especificadas en el pipeline deben estar bajo <code>DD_OP_DATA_DIR/config</code>.
 La modificación de archivos en esta localización, mientras OPW se está ejecutando, podría tener efectos negativos.
 </div>
 

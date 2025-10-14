@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md
 title: (Heredado) Rastreo de aplicaciones Ruby
 ---
-<div class="alert alert-warning">Esta documentación corresponde a la gema <code>ddtrace</code> v1.x. Si estás utilizando la gema <code>Datadog</code> v2.0 o posterior, consulta la documentación más reciente sobre el <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">rastreo de aplicaciones Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación corresponde a la gema <code>ddtrace</code> v1.x. Si estás utilizando la gema <code>Datadog</code> v2.0 o posterior, consulta la documentación más reciente sobre el <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">rastreo de aplicaciones Ruby</a>.</div>
 
 `ddtrace` es el cliente de rastreo de Datadog para Ruby. Se utiliza para rastrear solicitudes a medida que circulan a través de servidores web,
 bases de datos y microservicios, para que los desarrolladores tengan una amplia visibilidad de los cuellos de botella y las solicitudes problemáticas.

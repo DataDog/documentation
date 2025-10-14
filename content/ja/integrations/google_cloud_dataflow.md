@@ -59,7 +59,7 @@ Google Cloud Dataflow のログは Google Cloud Logging で収集され、Cloud 
 {{< get-metrics-from-git "google-cloud-dataflow" >}}
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Google Cloud Dataflow を使って Apache Beam パイプラインのメトリクスを監視する場合、Gauge の静的メソッドから生成されたメトリクスは収集されないことに注意してください。これらのメトリクスを監視する必要がある場合は、<a href="https://micrometer.io/docs">Micrometer</a> を使用できます。
 </div>
 

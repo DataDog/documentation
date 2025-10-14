@@ -48,7 +48,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Paramètres de configuration

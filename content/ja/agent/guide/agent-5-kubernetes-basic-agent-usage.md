@@ -7,7 +7,7 @@ title: Agent v5 と Kubernetes での基本的な Agent の利用方法
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Agent v5 は、バージョン 1.8 以前の Kubernetes をサポートしています。最新バージョンの Kubernetes には Datadog Agent v6 をご使用ください。
 </div>
 

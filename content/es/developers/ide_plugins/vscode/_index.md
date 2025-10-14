@@ -22,7 +22,7 @@ title: Extensión de Datadog para Visual Studio Code
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     La extensión de Datadog para Visual Studio Code no es compatible con el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}

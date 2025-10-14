@@ -2,6 +2,9 @@
 title: Quality Gates Explorer Search Syntax
 description: Search all of your quality gates or rule executions.
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/quality_gates/search"
   tag: "Documentation"
   text: "Filter and group quality gates"
