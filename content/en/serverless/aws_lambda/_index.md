@@ -1,5 +1,6 @@
 ---
 title: Serverless Monitoring for AWS Lambda
+description: "Monitor AWS Lambda functions with enhanced metrics, distributed tracing, and custom metrics for complete serverless observability."
 further_reading:
   - link: '/serverless/configuration/'
     tag: 'Documentation'

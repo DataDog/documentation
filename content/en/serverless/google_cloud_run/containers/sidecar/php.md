@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a PHP Cloud Run Container with Sidecar
+description: Instrument PHP applications in Google Cloud Run containers using the sidecar pattern with Datadog Agent for monitoring.
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70

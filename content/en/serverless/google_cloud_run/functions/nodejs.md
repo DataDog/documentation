@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Node.js Cloud Run Function
+description: Instrument Node.js applications running as Google Cloud Run functions with Datadog monitoring for traces and metrics.
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20

@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Go Serverless Applications
+description: "Instrument Go Lambda functions with Datadog for comprehensive serverless monitoring including metrics, traces, and logs."
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'

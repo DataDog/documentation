@@ -1,5 +1,6 @@
 ---
 title: Securing Functions
+description: Secure serverless functions using Datadog App and API Protection to detect application-level attacks and vulnerabilities.
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

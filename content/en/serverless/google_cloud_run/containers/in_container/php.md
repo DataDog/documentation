@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a PHP Cloud Run Container In-Container
+description: Instrument PHP applications running in Google Cloud Run containers using in-container monitoring for traces and metrics.
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70

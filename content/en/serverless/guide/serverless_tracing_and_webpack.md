@@ -1,5 +1,6 @@
 ---
-title: Node.js Lambda Tracing and Webpack Compatibility 
+title: Node.js Lambda Tracing and Webpack Compatibility
+description: "Learn how to configure Datadog tracing for Node.js Lambda functions when using webpack or esbuild bundlers for compatibility."
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'

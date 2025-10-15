@@ -1,5 +1,6 @@
 ---
 title: Azure Container Apps with serverless-init
+description: Instrument Azure Container Apps applications using serverless-init for monitoring, tracing, and direct log collection.
 further_reading:
     - link: 'https://www.datadoghq.com/blog/azure-container-apps/'
       tag: 'Blog'

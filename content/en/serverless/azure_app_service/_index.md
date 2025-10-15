@@ -1,5 +1,6 @@
 ---
 title: Serverless Monitoring for Azure App Service
+description: "Monitor Azure App Service applications with Datadog using the Azure extension for comprehensive tracing and observability."
 aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/

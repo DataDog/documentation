@@ -1,6 +1,6 @@
 ---
 title: Deeper Visibility into Resources Invoking Lambda Functions
-
+description: "Learn how to connect managed AWS resources like API Gateway, SQS, and S3 to Lambda functions for better serverless monitoring visibility."
 aliases:
     - /serverless/troubleshooting/connect_invoking_resources/
 ---

@@ -1,5 +1,6 @@
 ---
 title: Choosing an Instrumentation Method for Containers
+description: "Choose between in-container instrumentation and sidecar deployment methods for monitoring Google Cloud Run containers."
 further_reading:
   - link: "/integrations/google-cloud-run/"
     tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Lambda Web Adapter
+description: Monitor AWS Lambda functions that use Lambda Web Adapter to run web applications and APIs in serverless environments.
 further_reading:
     - link: '/serverless/configuration/'
       tag: 'Documentation'

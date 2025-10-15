@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a .NET Cloud Run Container with Sidecar
+description: Instrument .NET applications in Google Cloud Run containers using the sidecar pattern with Datadog Agent for monitoring.
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
