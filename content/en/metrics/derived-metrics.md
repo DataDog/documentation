@@ -2,7 +2,6 @@
 
 ---
 title: Derived Metrics 
-private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-smoother-asap/"
   tag: "Blog"
