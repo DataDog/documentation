@@ -18,7 +18,7 @@ With this view, you can:
 - Track tasks assigned to you across GitHub and Jira.
 - Identify alerting monitors or failed deployments.
 
-{{< callout url="https://forms.gle/xTPHV3XeTLuEmoqh9" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Developer Homepage!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Developer Homepage!" >}}
 {{< /callout >}}
 
 ## Services and entities
@@ -65,15 +65,6 @@ Each PR includes:
 
 If your organization hasn't configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub Integration tile][1].
 
-### Jira tasks
-
-This section displays Jira issues assigned to you. Each issue includes:
-- **Issue Number**  
-- **Title**  
-- **Status**  
-- **Assignee**
-
-If your organization hasn't configured the Jira integration, this section displays an empty state with a prompt to enable it from the [Jira Integration tile][2].
 
 ## Further reading
 
