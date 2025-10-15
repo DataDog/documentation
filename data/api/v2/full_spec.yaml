@@ -4297,7 +4297,7 @@ components:
             provider:
             - aws
             - gcp
-            rule_name: Example Arbitrary Cost Rule
+            rule_name: Example custom allocation rule
             strategy:
               allocated_by_tag_keys:
               - team
@@ -4326,14 +4326,144 @@ components:
       type: object
     ArbitraryRuleResponseArray:
       description: The definition of `ArbitraryRuleResponseArray` object.
+      example:
+        data:
+        - attributes:
+            costs_to_allocate:
+            - condition: like
+              tag: service
+              value: orgstore-csm*
+              values: null
+            created: '2024-11-20T03:44:37Z'
+            enabled: true
+            last_modified_user_uuid: user-example-uuid
+            order_id: 1
+            processing_status: done
+            provider:
+            - gcp
+            rule_name: gcp-orgstore-csm-team-allocation
+            strategy:
+              allocated_by:
+              - allocated_tags:
+                - key: team
+                  value: csm-activation
+                percentage: 0.34
+              - allocated_tags:
+                - key: team
+                  value: csm-agentless
+                percentage: 0.66
+              method: percent
+            type: shared
+            updated: '2025-09-02T21:28:32Z'
+            version: 1
+          id: '19'
+          type: arbitrary_rule
+        - attributes:
+            costs_to_allocate:
+            - condition: is
+              tag: env
+              value: staging
+              values: null
+            created: '2025-05-27T18:48:05Z'
+            enabled: true
+            last_modified_user_uuid: user-example-uuid-2
+            order_id: 2
+            processing_status: done
+            provider:
+            - aws
+            rule_name: test-even-2
+            strategy:
+              allocated_by_tag_keys:
+              - team
+              based_on_costs:
+              - condition: is
+                tag: aws_product
+                value: s3
+                values: null
+              granularity: daily
+              method: even
+            type: shared
+            updated: '2025-09-03T21:00:49Z'
+            version: 1
+          id: '311'
+          type: arbitrary_rule
+        - attributes:
+            costs_to_allocate:
+            - condition: is
+              tag: servicename
+              value: s3
+              values: null
+            created: '2025-03-21T20:42:40Z'
+            enabled: false
+            last_modified_user_uuid: user-example-uuid-3
+            order_id: 3
+            processing_status: done
+            provider:
+            - aws
+            rule_name: test-s3-timeseries
+            strategy:
+              granularity: daily
+              method: proportional_timeseries
+            type: shared
+            updated: '2025-09-02T21:16:50Z'
+            version: 1
+          id: '289'
+          type: arbitrary_rule
+        - attributes:
+            costs_to_allocate:
+            - condition: '='
+              tag: aws_product
+              value: msk
+              values: null
+            - condition: is
+              tag: product
+              value: 'null'
+              values: null
+            created: '2025-08-27T14:39:31Z'
+            enabled: true
+            last_modified_user_uuid: user-example-uuid-4
+            order_id: 4
+            processing_status: done
+            provider:
+            - aws
+            rule_name: azure-unallocated-by-product-2
+            strategy:
+              allocated_by_tag_keys:
+              - aws_product
+              based_on_costs:
+              - condition: '='
+                tag: aws_product
+                value: msk
+                values: null
+              - condition: is not
+                tag: product
+                value: 'null'
+                values: null
+              granularity: daily
+              method: proportional
+            type: shared
+            updated: '2025-09-02T21:28:32Z'
+            version: 1
+          id: '523'
+          type: arbitrary_rule
       properties:
         data:
           description: The `ArbitraryRuleResponseArray` `data`.
           items:
             $ref: '#/components/schemas/ArbitraryRuleResponseData'
           type: array
+        meta:
+          $ref: '#/components/schemas/ArbitraryRuleResponseArrayMeta'
       required:
       - data
+      type: object
+    ArbitraryRuleResponseArrayMeta:
+      description: The `ArbitraryRuleResponseArray` `meta`.
+      properties:
+        total_count:
+          description: The `meta` `total_count`.
+          format: int64
+          type: integer
       type: object
     ArbitraryRuleResponseData:
       description: The definition of `ArbitraryRuleResponseData` object.
@@ -4374,6 +4504,10 @@ components:
           example: 0
           format: int64
           type: integer
+        processing_status:
+          description: The `attributes` `processing_status`.
+          example: ''
+          type: string
         provider:
           description: The `attributes` `provider`.
           example:
@@ -5927,7 +6061,7 @@ components:
       - type
       type: object
     AzureScanOptions:
-      description: The definition of `AzureScanOptions` object.
+      description: Response object containing Azure scan options for a single subscription.
       example:
         data:
           attributes:
@@ -5940,7 +6074,7 @@ components:
           $ref: '#/components/schemas/AzureScanOptionsData'
       type: object
     AzureScanOptionsArray:
-      description: The definition of `AzureScanOptionsArray` object.
+      description: Response object containing a list of Azure scan options.
       example:
         data:
         - attributes:
@@ -5950,7 +6084,7 @@ components:
           type: azure_scan_options
       properties:
         data:
-          description: The `AzureScanOptionsArray` `data`.
+          description: A list of Azure scan options.
           items:
             $ref: '#/components/schemas/AzureScanOptionsData'
           type: array
@@ -5958,12 +6092,12 @@ components:
       - data
       type: object
     AzureScanOptionsData:
-      description: The definition of `AzureScanOptionsData` object.
+      description: Single Azure scan options entry.
       properties:
         attributes:
           $ref: '#/components/schemas/AzureScanOptionsDataAttributes'
         id:
-          description: The `AzureScanOptionsData` `id`.
+          description: The Azure subscription ID.
           example: ''
           type: string
         type:
@@ -5973,13 +6107,14 @@ components:
       - id
       type: object
     AzureScanOptionsDataAttributes:
-      description: The definition of `AzureScanOptionsDataAttributes` object.
+      description: Attributes for Azure scan options configuration.
       properties:
         vuln_containers_os:
-          description: The `attributes` `vuln_containers_os`.
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
           type: boolean
         vuln_host_os:
-          description: The `attributes` `vuln_host_os`.
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
           type: boolean
       type: object
     AzureScanOptionsDataType:
@@ -5992,7 +6127,7 @@ components:
       x-enum-varnames:
       - AZURE_SCAN_OPTIONS
     AzureScanOptionsInputUpdate:
-      description: The definition of `AzureScanOptionsInputUpdate` object.
+      description: Request object for updating Azure scan options.
       example:
         data:
           id: 12345678-90ab-cdef-1234-567890abcdef
@@ -6002,13 +6137,13 @@ components:
           $ref: '#/components/schemas/AzureScanOptionsInputUpdateData'
       type: object
     AzureScanOptionsInputUpdateData:
-      description: The definition of `AzureScanOptionsInputUpdateData` object.
+      description: Data object for updating the scan options of a single Azure subscription.
       properties:
         attributes:
           $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataAttributes'
         id:
-          description: The `AzureScanOptionsInputUpdateData` `id`.
-          example: ''
+          description: The Azure subscription ID.
+          example: 12345678-90ab-cdef-1234-567890abcdef
           type: string
         type:
           $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataType'
@@ -6017,13 +6152,14 @@ components:
       - id
       type: object
     AzureScanOptionsInputUpdateDataAttributes:
-      description: The definition of `AzureScanOptionsInputUpdateDataAttributes` object.
+      description: Attributes for updating Azure scan options configuration.
       properties:
         vuln_containers_os:
-          description: The `attributes` `vuln_containers_os`.
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
           type: boolean
         vuln_host_os:
-          description: The `attributes` `vuln_host_os`.
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
           type: boolean
       type: object
     AzureScanOptionsInputUpdateDataType:
@@ -9393,6 +9529,10 @@ components:
           description: The name of the policy
           example: my_agent_policy
           type: string
+        pinned:
+          description: Whether the policy is pinned
+          example: false
+          type: boolean
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -9420,6 +9560,8 @@ components:
           type: integer
         updater:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdaterAttributes'
+        versions:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyVersions'
       type: object
     CloudWorkloadSecurityAgentPolicyCreateAttributes:
       description: Create a new Cloud Workload Security Agent policy
@@ -9566,6 +9708,23 @@ components:
           nullable: true
           type: string
       type: object
+    CloudWorkloadSecurityAgentPolicyVersion:
+      description: The versions of the policy
+      properties:
+        Date:
+          description: The date and time the version was created
+          nullable: true
+          type: string
+        Name:
+          description: The version of the policy
+          example: 1.47.0-rc2
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentPolicyVersions:
+      description: The versions of the policy
+      items:
+        $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyVersion'
+      type: array
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered
       properties:
@@ -9603,23 +9762,32 @@ components:
       description: The set action applied on the scope matching the rule
       properties:
         append:
-          description: Whether the value should be appended to the field
+          description: Whether the value should be appended to the field.
           type: boolean
+        default_value:
+          description: The default value of the set action
+          type: string
+        expression:
+          description: The expression of the set action.
+          type: string
         field:
           description: The field of the set action
           type: string
+        inherited:
+          description: Whether the value should be inherited.
+          type: boolean
         name:
           description: The name of the set action
           type: string
         scope:
-          description: The scope of the set action
+          description: The scope of the set action.
           type: string
         size:
-          description: The size of the set action
+          description: The size of the set action.
           format: int64
           type: integer
         ttl:
-          description: The time to live of the set action
+          description: The time to live of the set action.
           format: int64
           type: integer
         value:
@@ -9700,6 +9868,10 @@ components:
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
         updateAuthorUuId:
           description: The ID of the user who updated the rule
           example: e51c9744-d158-11ec-ad23-da7ad0900002
@@ -9727,8 +9899,11 @@ components:
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        agent_version:
+          description: Constrain the rule to specific versions of the Datadog Agent.
+          type: string
         blocking:
-          description: The blocking policies that the rule belongs to
+          description: The blocking policies that the rule belongs to.
           items:
             type: string
           type: array
@@ -9737,12 +9912,12 @@ components:
           example: My Agent rule
           type: string
         disabled:
-          description: The disabled policies that the rule belongs to
+          description: The disabled policies that the rule belongs to.
           items:
             type: string
           type: array
         enabled:
-          description: Whether the Agent rule is enabled
+          description: Whether the Agent rule is enabled.
           example: true
           type: boolean
         expression:
@@ -9750,12 +9925,12 @@ components:
           example: exec.file.name == "sh"
           type: string
         filters:
-          description: The platforms the Agent rule is supported on
+          description: The platforms the Agent rule is supported on.
           items:
             type: string
           type: array
         monitoring:
-          description: The monitoring policies that the rule belongs to
+          description: The monitoring policies that the rule belongs to.
           items:
             type: string
           type: array
@@ -9764,14 +9939,18 @@ components:
           example: my_agent_rule
           type: string
         policy_id:
-          description: The ID of the policy where the Agent rule is saved
+          description: The ID of the policy where the Agent rule is saved.
           example: a8c8e364-6556-434d-b798-a4c23de29c0b
           type: string
         product_tags:
-          description: The list of product tags associated with the rule
+          description: The list of product tags associated with the rule.
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
       required:
       - name
       - expression
@@ -9851,6 +10030,9 @@ components:
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        agent_version:
+          description: Constrain the rule to specific versions of the Datadog Agent
+          type: string
         blocking:
           description: The blocking policies that the rule belongs to
           items:
@@ -9887,6 +10069,10 @@ components:
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
       type: object
     CloudWorkloadSecurityAgentRuleUpdateData:
       description: Object for a single Agent rule
@@ -12266,6 +12452,349 @@ components:
       type: string
       x-enum-varnames:
       - CREATE_RULESET
+    CreateTableRequest:
+      description: The definition of `CreateTableRequest` object.
+      example:
+        data:
+          attributes:
+            description: this is a cloud table generated via a cloud bucket sync
+            file_metadata:
+              access_details:
+                aws_detail:
+                  aws_account_id: test-account-id
+                  aws_bucket_name: test-bucket
+                  file_path: test_rt.csv
+              sync_enabled: true
+            schema:
+              fields:
+              - name: name
+                type: STRING
+              - name: account_id
+                type: STRING
+              primary_keys:
+              - account_id
+            source: S3
+            table_name: test_reference_table
+            tags:
+            - test_tag
+          type: reference_table
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateTableRequestData'
+      type: object
+    CreateTableRequestData:
+      description: The definition of `CreateTableRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributes'
+        id:
+          description: The ID of the reference table.
+          type: string
+        type:
+          $ref: '#/components/schemas/CreateTableRequestDataType'
+      required:
+      - type
+      type: object
+    CreateTableRequestDataAttributes:
+      description: The definition of `CreateTableRequestDataAttributes` object.
+      properties:
+        description:
+          description: The description of the reference table.
+          type: string
+        file_metadata:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadata'
+        schema:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributesSchema'
+        source:
+          $ref: '#/components/schemas/ReferenceTableCreateSourceType'
+        table_name:
+          description: The name of the reference table.
+          example: ''
+          type: string
+        tags:
+          description: The tags of the reference table.
+          items:
+            type: string
+          type: array
+      required:
+      - table_name
+      - schema
+      - source
+      type: object
+    CreateTableRequestDataAttributesFileMetadata:
+      description: The definition of `CreateTableRequestDataAttributesFileMetadata`
+        object.
+      oneOf:
+      - $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataCloudStorage'
+      - $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataLocalFile'
+    CreateTableRequestDataAttributesFileMetadataCloudStorage:
+      additionalProperties: false
+      description: Cloud storage file metadata for create requests. Both access_details
+        and sync_enabled are required.
+      properties:
+        access_details:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails'
+        sync_enabled:
+          description: Whether this table is synced automatically.
+          example: false
+          type: boolean
+      required:
+      - access_details
+      - sync_enabled
+      title: CloudFileMetadataV2
+      type: object
+    CreateTableRequestDataAttributesFileMetadataLocalFile:
+      additionalProperties: false
+      description: Local file metadata for create requests using the upload ID.
+      properties:
+        upload_id:
+          description: The upload ID.
+          example: ''
+          type: string
+      required:
+      - upload_id
+      title: LocalFileMetadataV2
+      type: object
+    CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails:
+      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails`
+        object.
+      properties:
+        aws_detail:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
+        azure_detail:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail'
+        gcp_detail:
+          $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
+      type: object
+    CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
+      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
+        object.
+      properties:
+        aws_account_id:
+          description: The ID of the AWS account.
+          example: '123456789000'
+          type: string
+        aws_bucket_name:
+          description: The name of the Amazon S3 bucket.
+          example: example-data-bucket
+          type: string
+        file_path:
+          description: The relative file path from the S3 bucket root to the CSV file.
+          example: reference-tables/users.csv
+          type: string
+      required:
+      - aws_account_id
+      - aws_bucket_name
+      - file_path
+      type: object
+      x-oneOf-parent:
+      - AwsDetail
+    CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
+      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
+        object.
+      properties:
+        azure_client_id:
+          description: The Azure client ID.
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        azure_container_name:
+          description: The name of the Azure container.
+          example: reference-data
+          type: string
+        azure_storage_account_name:
+          description: The name of the Azure storage account.
+          example: examplestorageaccount
+          type: string
+        azure_tenant_id:
+          description: The ID of the Azure tenant.
+          example: cccccccc-4444-5555-6666-dddddddddddd
+          type: string
+        file_path:
+          description: The relative file path from the Azure container root to the
+            CSV file.
+          example: tables/users.csv
+          type: string
+      required:
+      - azure_client_id
+      - azure_container_name
+      - azure_storage_account_name
+      - azure_tenant_id
+      - file_path
+      type: object
+      x-oneOf-parent:
+      - AzureDetail
+    CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
+      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
+        object.
+      properties:
+        file_path:
+          description: The relative file path from the GCS bucket root to the CSV
+            file.
+          example: data/reference_tables/users.csv
+          type: string
+        gcp_bucket_name:
+          description: The name of the GCP bucket.
+          example: example-data-bucket
+          type: string
+        gcp_project_id:
+          description: The ID of the GCP project.
+          example: example-gcp-project-12345
+          type: string
+        gcp_service_account_email:
+          description: The email of the GCP service account.
+          example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
+          type: string
+      required:
+      - file_path
+      - gcp_bucket_name
+      - gcp_project_id
+      - gcp_service_account_email
+      type: object
+      x-oneOf-parent:
+      - GcpDetail
+    CreateTableRequestDataAttributesSchema:
+      description: The definition of `CreateTableRequestDataAttributesSchema` object.
+      properties:
+        fields:
+          description: The `schema` `fields`.
+          items:
+            $ref: '#/components/schemas/CreateTableRequestDataAttributesSchemaFieldsItems'
+          type: array
+        primary_keys:
+          description: List of field names that serve as primary keys for the table.
+            Only one primary key is supported, and it is used as an ID to retrieve
+            rows.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - fields
+      - primary_keys
+      type: object
+    CreateTableRequestDataAttributesSchemaFieldsItems:
+      description: The definition of `CreateTableRequestDataAttributesSchemaFieldsItems`
+        object.
+      properties:
+        name:
+          description: The field name.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
+      required:
+      - name
+      - type
+      type: object
+    CreateTableRequestDataType:
+      default: reference_table
+      description: Reference table resource type.
+      enum:
+      - reference_table
+      example: reference_table
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLE
+    CreateUploadRequest:
+      description: The definition of `CreateUploadRequest` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateUploadRequestData'
+      type: object
+    CreateUploadRequestData:
+      description: The definition of `CreateUploadRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateUploadRequestDataAttributes'
+        id:
+          description: The ID of the upload.
+          type: string
+        type:
+          $ref: '#/components/schemas/CreateUploadRequestDataType'
+      required:
+      - type
+      type: object
+    CreateUploadRequestDataAttributes:
+      description: The definition of `CreateUploadRequestDataAttributes` object.
+      properties:
+        headers:
+          description: The headers of the file to upload.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        part_count:
+          description: The number of parts in the upload.
+          example: 3
+          format: int32
+          maximum: 20
+          type: integer
+        part_size:
+          description: The size of each part in the upload in bytes. For multipart
+            uploads (part_count > 1), all parts except the last one must be at least
+            5,000,000 bytes. For single-part uploads (part_count = 1), any size is
+            allowed.
+          example: 10000000
+          format: int64
+          type: integer
+        table_name:
+          description: The name of the reference table.
+          example: ''
+          type: string
+      required:
+      - headers
+      - table_name
+      - part_count
+      - part_size
+      type: object
+    CreateUploadRequestDataType:
+      default: upload
+      description: Upload resource type.
+      enum:
+      - upload
+      example: upload
+      type: string
+      x-enum-varnames:
+      - UPLOAD
+    CreateUploadResponse:
+      description: The definition of `CreateUploadResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateUploadResponseData'
+      type: object
+    CreateUploadResponseData:
+      description: The definition of `CreateUploadResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateUploadResponseDataAttributes'
+        id:
+          description: The ID of the upload.
+          type: string
+        type:
+          $ref: '#/components/schemas/CreateUploadResponseDataType'
+      required:
+      - type
+      type: object
+    CreateUploadResponseDataAttributes:
+      description: The definition of `CreateUploadResponseDataAttributes` object.
+      properties:
+        part_urls:
+          description: The URLs of the parts in the upload.
+          items:
+            type: string
+          type: array
+      type: object
+    CreateUploadResponseDataType:
+      default: upload
+      description: Upload resource type.
+      enum:
+      - upload
+      example: upload
+      type: string
+      x-enum-varnames:
+      - UPLOAD
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
       example:
@@ -20103,6 +20632,117 @@ components:
       required:
       - data
       type: object
+    GcpScanOptions:
+      description: Response object containing GCP scan options for a single project.
+      example:
+        data:
+          attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: company-project-id
+          type: gcp_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/GcpScanOptionsData'
+      type: object
+    GcpScanOptionsArray:
+      description: Response object containing a list of GCP scan options.
+      example:
+        data:
+        - attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: company-project-id
+          type: gcp_scan_options
+      properties:
+        data:
+          description: A list of GCP scan options.
+          items:
+            $ref: '#/components/schemas/GcpScanOptionsData'
+          type: array
+      required:
+      - data
+      type: object
+    GcpScanOptionsData:
+      description: Single GCP scan options entry.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GcpScanOptionsDataAttributes'
+        id:
+          description: The GCP project ID.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GcpScanOptionsDataType'
+      required:
+      - type
+      - id
+      type: object
+    GcpScanOptionsDataAttributes:
+      description: Attributes for GCP scan options configuration.
+      properties:
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          type: boolean
+      type: object
+    GcpScanOptionsDataType:
+      default: gcp_scan_options
+      description: GCP scan options resource type.
+      enum:
+      - gcp_scan_options
+      example: gcp_scan_options
+      type: string
+      x-enum-varnames:
+      - GCP_SCAN_OPTIONS
+    GcpScanOptionsInputUpdate:
+      description: Request object for updating GCP scan options.
+      example:
+        data:
+          id: company-project-id
+          type: gcp_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/GcpScanOptionsInputUpdateData'
+      type: object
+    GcpScanOptionsInputUpdateData:
+      description: Data object for updating the scan options of a single GCP project.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GcpScanOptionsInputUpdateDataAttributes'
+        id:
+          description: The GCP project ID.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GcpScanOptionsInputUpdateDataType'
+      required:
+      - type
+      - id
+      type: object
+    GcpScanOptionsInputUpdateDataAttributes:
+      description: Attributes for updating GCP scan options configuration.
+      properties:
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          type: boolean
+      type: object
+    GcpScanOptionsInputUpdateDataType:
+      default: gcp_scan_options
+      description: GCP scan options resource type.
+      enum:
+      - gcp_scan_options
+      example: gcp_scan_options
+      type: string
+      x-enum-varnames:
+      - GCP_SCAN_OPTIONS
     GcpUcConfigResponse:
       description: The definition of `GcpUcConfigResponse` object.
       example:
@@ -35922,6 +36562,225 @@ components:
         version:
           $ref: '#/components/schemas/Version'
       type: object
+    PatchTableRequest:
+      description: The definition of `PatchTableRequest` object.
+      example:
+        data:
+          attributes:
+            description: this is a cloud table generated via a cloud bucket sync
+            file_metadata:
+              access_details:
+                aws_detail:
+                  aws_account_id: test-account-id
+                  aws_bucket_name: test-bucket
+                  file_path: test_rt.csv
+              sync_enabled: true
+            schema:
+              fields:
+              - name: id
+                type: INT32
+              - name: name
+                type: STRING
+              primary_keys:
+              - id
+            sync_enabled: false
+            tags:
+            - test_tag
+          id: 00000000-0000-0000-0000-000000000000
+          type: reference_table
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchTableRequestData'
+      type: object
+    PatchTableRequestData:
+      description: The definition of `PatchTableRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributes'
+        id:
+          description: The ID of the reference table.
+          type: string
+        type:
+          $ref: '#/components/schemas/PatchTableRequestDataType'
+      required:
+      - type
+      type: object
+    PatchTableRequestDataAttributes:
+      description: The definition of `PatchTableRequestDataAttributes` object.
+      properties:
+        description:
+          description: The description of the reference table.
+          type: string
+        file_metadata:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
+        schema:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
+        sync_enabled:
+          description: Whether this table is synced automatically.
+          type: boolean
+        tags:
+          description: The tags of the reference table.
+          items:
+            type: string
+          type: array
+      type: object
+    PatchTableRequestDataAttributesFileMetadata:
+      description: The definition of `PatchTableRequestDataAttributesFileMetadata`
+        object.
+      oneOf:
+      - $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataCloudStorage'
+      - $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataLocalFile'
+    PatchTableRequestDataAttributesFileMetadataCloudStorage:
+      additionalProperties: false
+      description: Cloud storage file metadata for patch requests. Allows partial
+        updates of access_details and sync_enabled.
+      properties:
+        access_details:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails'
+        sync_enabled:
+          description: Whether this table is synced automatically.
+          example: false
+          type: boolean
+      title: CloudFileMetadataV2
+      type: object
+    PatchTableRequestDataAttributesFileMetadataLocalFile:
+      additionalProperties: false
+      description: Local file metadata for patch requests using upload ID.
+      properties:
+        upload_id:
+          description: The upload ID.
+          example: ''
+          type: string
+      required:
+      - upload_id
+      title: LocalFileMetadataV2
+      type: object
+    PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails:
+      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails`
+        object.
+      properties:
+        aws_detail:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
+        azure_detail:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail'
+        gcp_detail:
+          $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
+      type: object
+    PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
+      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
+        object.
+      properties:
+        aws_account_id:
+          description: The ID of the AWS account.
+          example: '123456789000'
+          type: string
+        aws_bucket_name:
+          description: The name of the AWS bucket.
+          example: example-data-bucket
+          type: string
+        file_path:
+          description: The relative file path from the S3 bucket root to the CSV file.
+          example: reference-tables/users.csv
+          type: string
+      type: object
+      x-oneOf-parent:
+      - AwsDetail
+    PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
+      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
+        object.
+      properties:
+        azure_client_id:
+          description: The Azure client ID.
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        azure_container_name:
+          description: The name of the Azure container.
+          example: reference-data
+          type: string
+        azure_storage_account_name:
+          description: The name of the Azure storage account.
+          example: examplestorageaccount
+          type: string
+        azure_tenant_id:
+          description: The ID of the Azure tenant.
+          example: cccccccc-4444-5555-6666-dddddddddddd
+          type: string
+        file_path:
+          description: The relative file path from the Azure container root to the
+            CSV file.
+          example: tables/users.csv
+          type: string
+      type: object
+      x-oneOf-parent:
+      - AzureDetail
+    PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
+      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
+        object.
+      properties:
+        file_path:
+          description: The relative file path from the GCS bucket root to the CSV
+            file.
+          example: data/reference_tables/users.csv
+          type: string
+        gcp_bucket_name:
+          description: The name of the GCP bucket.
+          example: example-data-bucket
+          type: string
+        gcp_project_id:
+          description: The ID of the GCP project.
+          example: example-gcp-project-12345
+          type: string
+        gcp_service_account_email:
+          description: The email of the GCP service account.
+          example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
+          type: string
+      type: object
+      x-oneOf-parent:
+      - GcpDetail
+    PatchTableRequestDataAttributesSchema:
+      description: The definition of `PatchTableRequestDataAttributesSchema` object.
+      properties:
+        fields:
+          description: The `schema` `fields`.
+          items:
+            $ref: '#/components/schemas/PatchTableRequestDataAttributesSchemaFieldsItems'
+          type: array
+        primary_keys:
+          description: List of field names that serve as primary keys for the table.
+            Only one primary key is supported, and it is used as an ID to retrieve
+            rows.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - fields
+      - primary_keys
+      type: object
+    PatchTableRequestDataAttributesSchemaFieldsItems:
+      description: The definition of `PatchTableRequestDataAttributesSchemaFieldsItems`
+        object.
+      properties:
+        name:
+          description: The field name.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
+      required:
+      - name
+      - type
+      type: object
+    PatchTableRequestDataType:
+      default: reference_table
+      description: Reference table resource type.
+      enum:
+      - reference_table
+      example: reference_table
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLE
     Permission:
       description: Permission object.
       properties:
@@ -37557,6 +38416,73 @@ components:
       type: string
       x-enum-varnames:
       - RECOMMENDATION
+    ReferenceTableCreateSourceType:
+      description: The source type for creating reference table data. Only these source
+        types can be created through this API.
+      enum:
+      - LOCAL_FILE
+      - S3
+      - GCS
+      - AZURE
+      example: LOCAL_FILE
+      type: string
+      x-enum-varnames:
+      - LOCAL_FILE
+      - S3
+      - GCS
+      - AZURE
+    ReferenceTableSchemaFieldType:
+      description: The field type for reference table schema fields.
+      enum:
+      - STRING
+      - INT32
+      example: STRING
+      type: string
+      x-enum-varnames:
+      - STRING
+      - INT32
+    ReferenceTableSortType:
+      default: -updated_at
+      description: Sort field and direction for reference tables. Use field name for
+        ascending, prefix with "-" for descending.
+      enum:
+      - updated_at
+      - table_name
+      - status
+      - -updated_at
+      - -table_name
+      - -status
+      type: string
+      x-enum-varnames:
+      - UPDATED_AT
+      - TABLE_NAME
+      - STATUS
+      - MINUS_UPDATED_AT
+      - MINUS_TABLE_NAME
+      - MINUS_STATUS
+    ReferenceTableSourceType:
+      description: The source type for reference table data. Includes all possible
+        source types that can appear in responses.
+      enum:
+      - LOCAL_FILE
+      - S3
+      - GCS
+      - AZURE
+      - SERVICENOW
+      - SALESFORCE
+      - DATABRICKS
+      - SNOWFLAKE
+      example: LOCAL_FILE
+      type: string
+      x-enum-varnames:
+      - LOCAL_FILE
+      - S3
+      - GCS
+      - AZURE
+      - SERVICENOW
+      - SALESFORCE
+      - DATABRICKS
+      - SNOWFLAKE
     RegisterAppKeyResponse:
       description: The response object after creating an app key registration.
       properties:
@@ -38355,6 +39281,14 @@ components:
       - ARBITRARY_RULE
     ReorderRulesetResourceArray:
       description: The definition of `ReorderRulesetResourceArray` object.
+      example:
+        data:
+        - id: 55ef2385-9ae1-4410-90c4-5ac1b60fec10
+          type: ruleset
+        - id: a7b8c9d0-1234-5678-9abc-def012345678
+          type: ruleset
+        - id: f1e2d3c4-b5a6-9780-1234-567890abcdef
+          type: ruleset
       properties:
         data:
           description: The `ReorderRulesetResourceArray` `data`.
@@ -39792,6 +40726,82 @@ components:
       type: object
     RulesetRespArray:
       description: The definition of `RulesetRespArray` object.
+      example:
+        data:
+        - attributes:
+            created: null
+            enabled: true
+            last_modified_user_uuid: ''
+            modified: null
+            name: Production Cost Allocation Rules
+            position: 0
+            rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: AWS Production Account Tagging
+              query:
+                addition:
+                  key: environment
+                  value: production
+                case_insensitivity: false
+                if_not_exists: true
+                query: billingcurrency:"USD" AND account_name:"prod-account"
+              reference_table: null
+            - enabled: true
+              mapping:
+                destination_key: team_owner
+                if_not_exists: true
+                source_keys:
+                - account_name
+                - service
+              metadata: null
+              name: Team Mapping Rule
+              query: null
+              reference_table: null
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: New table rule with new UI
+              query: null
+              reference_table:
+                case_insensitivity: true
+                field_pairs:
+                - input_column: status_type
+                  output_key: status
+                - input_column: status_description
+                  output_key: dess
+                if_not_exists: false
+                source_keys:
+                - http_status
+                - status_description
+                table_name: http_status_codes
+            version: 2
+          id: 55ef2385-9ae1-4410-90c4-5ac1b60fec10
+          type: ruleset
+        - attributes:
+            created: null
+            enabled: true
+            last_modified_user_uuid: ''
+            modified: null
+            name: Development Environment Rules
+            position: 0
+            rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: Dev Account Cost Center
+              query:
+                addition:
+                  key: cost_center
+                  value: engineering
+                case_insensitivity: true
+                if_not_exists: true
+                query: account_name:"dev-*"
+              reference_table: null
+            version: 1
+          id: a7b8c9d0-1234-5678-9abc-def012345678
+          type: ruleset
       properties:
         data:
           description: The `RulesetRespArray` `data`.
@@ -39839,6 +40849,10 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        processing_status:
+          description: The `attributes` `processing_status`.
+          example: ''
+          type: string
         rules:
           description: The `attributes` `rules`.
           items:
@@ -47683,6 +48697,394 @@ components:
           format: double
           type: number
       type: object
+    TableResultV2:
+      description: The definition of `TableResultV2` object.
+      example:
+        data:
+          attributes:
+            created_by: 00000000-0000-0000-0000-000000000000
+            description: example description
+            file_metadata:
+              access_details: {}
+              upload_id: 00000000-0000-0000-0000-000000000000
+            last_updated_by: ''
+            row_count: 5
+            schema:
+              fields:
+              - name: id
+                type: INT32
+              - name: name
+                type: STRING
+              primary_keys:
+              - id
+            source: LOCAL_FILE
+            status: DONE
+            table_name: test_reference_table
+            tags:
+            - tag1
+            - tag2
+            updated_at: '2000-01-01T01:00:00+00:00'
+          id: 00000000-0000-0000-0000-000000000000
+          type: reference_table
+      properties:
+        data:
+          $ref: '#/components/schemas/TableResultV2Data'
+      type: object
+    TableResultV2Array:
+      description: The definition of `TableResultV2Array` object.
+      example:
+        data:
+        - attributes:
+            created_by: 00000000-0000-0000-0000-000000000000
+            description: example description
+            file_metadata:
+              access_details: {}
+              error_message: ''
+              error_row_count: 0
+              upload_id: 00000000-0000-0000-0000-000000000000
+            last_updated_by: ''
+            row_count: 5
+            schema:
+              fields:
+              - name: id
+                type: INT32
+              - name: name
+                type: STRING
+              primary_keys:
+              - id
+            source: LOCAL_FILE
+            status: DONE
+            table_name: test_reference_table
+            tags:
+            - tag1
+            - tag2
+            updated_at: '2000-01-01T01:00:00+00:00'
+          id: 00000000-0000-0000-0000-000000000000
+          type: reference_table
+        - attributes:
+            created_by: 00000000-0000-0000-0000-000000000000
+            description: example description
+            file_metadata:
+              access_details:
+                aws_detail:
+                  aws_account_id: test-account-id
+                  aws_bucket_name: test-bucket
+                  file_path: test_rt.csv
+              error_message: ''
+              error_row_count: 0
+              sync_enabled: true
+            last_updated_by: 00000000-0000-0000-0000-000000000000
+            row_count: 5
+            schema:
+              fields:
+              - name: location
+                type: STRING
+              - name: file_name
+                type: STRING
+              primary_keys:
+              - location
+            source: S3
+            status: DONE
+            table_name: test_reference_table_2
+            tags:
+            - test_tag1
+            - tag2
+            - '3'
+            updated_at: '2000-01-01T01:00:00+00:00'
+          id: 00000000-0000-0000-0000-000000000000
+          type: reference_table
+      properties:
+        data:
+          description: The reference tables.
+          items:
+            $ref: '#/components/schemas/TableResultV2Data'
+          type: array
+      required:
+      - data
+      type: object
+    TableResultV2Data:
+      description: The definition of `TableResultV2Data` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableResultV2DataAttributes'
+        id:
+          description: The ID of the reference table.
+          type: string
+        type:
+          $ref: '#/components/schemas/TableResultV2DataType'
+      required:
+      - type
+      type: object
+    TableResultV2DataAttributes:
+      description: The definition of `TableResultV2DataAttributes` object.
+      properties:
+        created_by:
+          description: UUID of the user who created the reference table.
+          type: string
+        description:
+          description: The description of the reference table.
+          type: string
+        file_metadata:
+          $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadata'
+        last_updated_by:
+          description: UUID of the user who last updated the reference table.
+          type: string
+        row_count:
+          description: The number of successfully processed rows in the reference
+            table.
+          format: int64
+          type: integer
+        schema:
+          $ref: '#/components/schemas/TableResultV2DataAttributesSchema'
+        source:
+          $ref: '#/components/schemas/ReferenceTableSourceType'
+        status:
+          description: The status of the reference table.
+          type: string
+        table_name:
+          description: The name of the reference table.
+          type: string
+        tags:
+          description: The tags of the reference table.
+          items:
+            type: string
+          type: array
+        updated_at:
+          description: The timestamp of the last update to the reference table in
+            ISO 8601 format.
+          type: string
+      type: object
+    TableResultV2DataAttributesFileMetadata:
+      description: The definition of `TableResultV2DataAttributesFileMetadata` object.
+      oneOf:
+      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
+      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
+    TableResultV2DataAttributesFileMetadataCloudStorage:
+      description: File metadata for reference tables created by cloud storage.
+      properties:
+        access_details:
+          $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails'
+        error_message:
+          description: The error message returned from the sync.
+          type: string
+        error_row_count:
+          description: The number of rows that failed to sync.
+          format: int64
+          type: integer
+        error_type:
+          $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType'
+        sync_enabled:
+          description: Whether this table is synced automatically.
+          type: boolean
+      title: CloudFileMetadataV2
+      type: object
+    TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
+      description: The type of error that occurred during file processing. This field
+        provides high-level error categories for easier troubleshooting and is only
+        present when there are errors.
+      enum:
+      - TABLE_SCHEMA_ERROR
+      - FILE_FORMAT_ERROR
+      - CONFIGURATION_ERROR
+      - QUOTA_EXCEEDED
+      - CONFLICT_ERROR
+      - VALIDATION_ERROR
+      - STATE_ERROR
+      - OPERATION_ERROR
+      - SYSTEM_ERROR
+      type: string
+      x-enum-varnames:
+      - TABLE_SCHEMA_ERROR
+      - FILE_FORMAT_ERROR
+      - CONFIGURATION_ERROR
+      - QUOTA_EXCEEDED
+      - CONFLICT_ERROR
+      - VALIDATION_ERROR
+      - STATE_ERROR
+      - OPERATION_ERROR
+      - SYSTEM_ERROR
+    TableResultV2DataAttributesFileMetadataLocalFile:
+      description: File metadata for reference tables created by upload.
+      properties:
+        error_message:
+          description: The error message returned from the creation/update.
+          type: string
+        error_row_count:
+          description: The number of rows that failed to create/update.
+          format: int64
+          type: integer
+        upload_id:
+          description: The upload ID that was used to create/update the table.
+          type: string
+      title: LocalFileMetadataV2
+      type: object
+    TableResultV2DataAttributesFileMetadataOneOfAccessDetails:
+      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetails`
+        object.
+      properties:
+        aws_detail:
+          $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
+        azure_detail:
+          $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail'
+        gcp_detail:
+          $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
+      type: object
+    TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
+      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
+        object.
+      properties:
+        aws_account_id:
+          description: The ID of the AWS account.
+          example: '123456789000'
+          type: string
+        aws_bucket_name:
+          description: The name of the AWS bucket.
+          example: example-data-bucket
+          type: string
+        file_path:
+          description: The relative file path from the S3 bucket root to the CSV file.
+          example: reference-tables/users.csv
+          type: string
+      type: object
+      x-oneOf-parent:
+      - AwsDetail
+    TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
+      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
+        object.
+      properties:
+        azure_client_id:
+          description: The Azure client ID.
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        azure_container_name:
+          description: The name of the Azure container.
+          example: reference-data
+          type: string
+        azure_storage_account_name:
+          description: The name of the Azure storage account.
+          example: examplestorageaccount
+          type: string
+        azure_tenant_id:
+          description: The ID of the Azure tenant.
+          example: cccccccc-4444-5555-6666-dddddddddddd
+          type: string
+        file_path:
+          description: The relative file path from the Azure container root to the
+            CSV file.
+          example: tables/users.csv
+          type: string
+      type: object
+      x-oneOf-parent:
+      - AzureDetail
+    TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
+      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
+        object.
+      properties:
+        file_path:
+          description: The relative file path from the GCS bucket root to the CSV
+            file.
+          example: data/reference_tables/users.csv
+          type: string
+        gcp_bucket_name:
+          description: The name of the GCP bucket.
+          example: example-data-bucket
+          type: string
+        gcp_project_id:
+          description: The ID of the GCP project.
+          example: example-gcp-project-12345
+          type: string
+        gcp_service_account_email:
+          description: The email of the GCP service account.
+          example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
+          type: string
+      type: object
+      x-oneOf-parent:
+      - GcpDetail
+    TableResultV2DataAttributesSchema:
+      description: The definition of `TableResultV2DataAttributesSchema` object.
+      properties:
+        fields:
+          description: The `schema` `fields`.
+          items:
+            $ref: '#/components/schemas/TableResultV2DataAttributesSchemaFieldsItems'
+          type: array
+        primary_keys:
+          description: List of field names that serve as primary keys for the table.
+            Only one primary key is supported, and it is used as an ID to retrieve
+            rows.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - fields
+      - primary_keys
+      type: object
+    TableResultV2DataAttributesSchemaFieldsItems:
+      description: The definition of `TableResultV2DataAttributesSchemaFieldsItems`
+        object.
+      properties:
+        name:
+          description: The field name.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
+      required:
+      - name
+      - type
+      type: object
+    TableResultV2DataType:
+      default: reference_table
+      description: Reference table resource type.
+      enum:
+      - reference_table
+      example: reference_table
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLE
+    TableRowResourceArray:
+      description: The definition of `TableRowResourceArray` object.
+      properties:
+        data:
+          description: The rows.
+          items:
+            $ref: '#/components/schemas/TableRowResourceData'
+          type: array
+      required:
+      - data
+      type: object
+    TableRowResourceData:
+      description: The definition of `TableRowResourceData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableRowResourceDataAttributes'
+        id:
+          description: The ID of the row.
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      type: object
+    TableRowResourceDataAttributes:
+      description: The definition of `TableRowResourceDataAttributes` object.
+      properties:
+        values:
+          additionalProperties: {}
+          description: The values of the row.
+          type: object
+      type: object
+    TableRowResourceDataType:
+      default: row
+      description: Row resource type.
+      enum:
+      - row
+      example: row
+      type: string
+      x-enum-varnames:
+      - ROW
     TagFilter:
       description: Tag filter for the budget's entries.
       properties:
@@ -49653,7 +51055,20 @@ components:
           attributes:
             enabled: true
             last_version: 1
+            name: Updated Ruleset
             rules:
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: Add Cost Center Tag
+              query:
+                addition:
+                  key: cost_center
+                  value: engineering
+                case_insensitivity: false
+                if_not_exists: true
+                query: account_id:"123456789" AND service:"web-api"
+              reference_table: null
             - enabled: true
               mapping:
                 destination_key: team_owner
@@ -49665,6 +51080,23 @@ components:
               name: Account Name Mapping
               query: null
               reference_table: null
+            - enabled: true
+              mapping: null
+              metadata: null
+              name: New table rule with new UI
+              query: null
+              reference_table:
+                case_insensitivity: true
+                field_pairs:
+                - input_column: status_type
+                  output_key: status
+                - input_column: status_description
+                  output_key: dess
+                if_not_exists: false
+                source_keys:
+                - http_status
+                - status_description
+                table_name: http_status_codes
           type: update_ruleset
       properties:
         data:
@@ -52639,7 +54071,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAwsScanOptions
         parameters:
@@ -52702,7 +54134,7 @@ paths:
       summary: Get AWS scan options
       tags:
       - Agentless Scanning
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -52761,7 +54193,7 @@ paths:
       summary: List azure scan options
       tags:
       - Agentless Scanning
-      x-menu-order: 12
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -52790,7 +54222,7 @@ paths:
       summary: Create azure scan options
       tags:
       - Agentless Scanning
-      x-menu-order: 11
+      x-menu-order: 7
       x-undo:
         operationId: DeleteAzureScanOptions
         parameters:
@@ -52825,6 +54257,43 @@ paths:
       x-menu-order: 10
       x-undo:
         type: idempotent
+    get:
+      description: Fetches the Agentless scan options for an activated subscription.
+      operationId: GetAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Get Azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 8
+      x-undo:
+        type: safe
     patch:
       description: Update the Agentless scan options for an activated subscription.
       operationId: UpdateAzureScanOptions
@@ -52862,6 +54331,193 @@ paths:
       x-menu-order: 9
       x-undo:
         type: idempotent
+  /api/v2/agentless_scanning/accounts/gcp:
+    get:
+      description: Fetches the scan options configured for all GCP projects.
+      operationId: ListGcpScanOptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptionsArray'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-given:
+        gcp_scan_options:
+          source: data[0]
+          step: there is a valid "gcp_scan_options" in the system
+      x-menu-order: 11
+      x-undo:
+        type: safe
+    post:
+      description: Activate Agentless scan options for a GCP project.
+      operationId: CreateGcpScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcpScanOptions'
+        description: The definition of the new scan options.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptions'
+          description: Agentless scan options enabled successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Post GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        operationId: DeleteGcpScanOptions
+        parameters:
+        - name: project_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/gcp/{project_id}:
+    delete:
+      description: Delete Agentless scan options for a GCP project.
+      operationId: DeleteGcpScanOptions
+      parameters:
+      - description: The GCP project ID.
+        in: path
+        name: project_id
+        required: true
+        schema:
+          example: company-project-id
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Delete GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 15
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetches the Agentless scan options for an activated GCP project.
+      operationId: GetGcpScanOptions
+      parameters:
+      - description: The GCP project ID.
+        in: path
+        name: project_id
+        required: true
+        schema:
+          example: company-project-id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptions'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Get GCP scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 13
+      x-undo:
+        type: safe
+    patch:
+      description: Update the Agentless scan options for an activated GCP project.
+      operationId: UpdateGcpScanOptions
+      parameters:
+      - description: The GCP project ID.
+        in: path
+        name: project_id
+        required: true
+        schema:
+          example: company-project-id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcpScanOptionsInputUpdate'
+        description: New definition of the scan options.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptions'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Patch GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 14
+      x-undo:
+        type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
     get:
       description: Fetches the most recent 1000 AWS on demand tasks.
@@ -52885,7 +54541,7 @@ paths:
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
-      x-menu-order: 6
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -52926,7 +54582,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 17
       x-permission:
         operator: OR
         permissions:
@@ -52962,7 +54618,7 @@ paths:
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
-      x-menu-order: 7
+      x-menu-order: 18
       x-permission:
         operator: OR
         permissions:
@@ -56728,9 +58384,9 @@ paths:
         type: safe
   /api/v2/cost/arbitrary_rule:
     get:
-      description: List all arbitrary cost rules - Retrieve a list of all arbitrary
-        cost rules for the organization
-      operationId: ListArbitraryCostRules
+      description: List all custom allocation rules - Retrieve a list of all custom
+        allocation rules for the organization
+      operationId: ListCustomAllocationRules
       responses:
         '200':
           content:
@@ -56745,15 +58401,15 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: List arbitrary cost rules
+      summary: List custom allocation rules
       tags:
       - Cloud Cost Management
       x-menu-order: 23
       x-undo:
         type: safe
     post:
-      description: 'Create a new arbitrary cost rule with the specified filters and
-        allocation strategy.
+      description: 'Create a new custom allocation rule with the specified filters
+        and allocation strategy.
 
 
         **Strategy Methods:**
@@ -56781,7 +58437,7 @@ paths:
 
         **Supported operators**: is, is not, is all values, is untagged, contains,
         does not contain, in, not in, =, !=, like, not like'
-      operationId: CreateArbitraryCostRule
+      operationId: CreateCustomAllocationRule
       requestBody:
         content:
           application/json:
@@ -56802,7 +58458,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Create arbitrary cost rule
+      summary: Create custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 24
@@ -56810,15 +58466,15 @@ paths:
         type: idempotent
   /api/v2/cost/arbitrary_rule/reorder:
     post:
-      description: "Reorder arbitrary cost rules - Change the execution order of arbitrary
-        cost rules.\n\n**Important**: You must provide the **complete list** of all
-        rule IDs in the desired execution order. The API will reorder ALL rules according
-        to the provided sequence.\n\nRules are executed in the order specified, with
-        lower indices (earlier in the array) having higher priority.\n\n**Example**:
+      description: "Reorder custom allocation rules - Change the execution order of
+        custom allocation rules.\n\n**Important**: You must provide the **complete
+        list** of all rule IDs in the desired execution order. The API will reorder
+        ALL rules according to the provided sequence.\n\nRules are executed in the
+        order specified, with lower indices (earlier in the array) having higher priority.\n\n**Example**:
         If you have rules with IDs [123, 456, 789] and want to change order from 123\u2192456\u2192789
         to 456\u2192123\u2192789, send: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\":
         \"789\"}]"
-      operationId: ReorderArbitraryCostRules
+      operationId: ReorderCustomAllocationRules
       requestBody:
         content:
           application/json:
@@ -56835,7 +58491,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Reorder arbitrary cost rules
+      summary: Reorder custom allocation rules
       tags:
       - Cloud Cost Management
       x-menu-order: 28
@@ -56843,11 +58499,11 @@ paths:
         type: idempotent
   /api/v2/cost/arbitrary_rule/{rule_id}:
     delete:
-      description: Delete an arbitrary cost rule - Delete an existing arbitrary cost
+      description: Delete a custom allocation rule - Delete an existing custom allocation
         rule by its ID
-      operationId: DeleteArbitraryCostRule
+      operationId: DeleteCustomAllocationRule
       parameters:
-      - description: The unique identifier of the arbitrary cost rule
+      - description: The unique identifier of the custom allocation rule
         in: path
         name: rule_id
         required: true
@@ -56864,18 +58520,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Delete arbitrary cost rule
+      summary: Delete custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 26
       x-undo:
         type: idempotent
     get:
-      description: Get a specific arbitrary cost rule - Retrieve a specific arbitrary
-        cost rule by its ID
-      operationId: GetArbitraryCostRule
+      description: Get a specific custom allocation rule - Retrieve a specific custom
+        allocation rule by its ID
+      operationId: GetCustomAllocationRule
       parameters:
-      - description: The unique identifier of the arbitrary cost rule
+      - description: The unique identifier of the custom allocation rule
         in: path
         name: rule_id
         required: true
@@ -56896,15 +58552,15 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: Get arbitrary cost rule
+      summary: Get custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 27
       x-undo:
         type: safe
     patch:
-      description: 'Update an existing arbitrary cost rule with new filters and allocation
-        strategy.
+      description: 'Update an existing custom allocation rule with new filters and
+        allocation strategy.
 
 
         **Strategy Methods:**
@@ -56934,9 +58590,9 @@ paths:
 
         **Supported operators**: is, is not, is all values, is untagged, contains,
         does not contain, in, not in, =, !=, like, not like'
-      operationId: UpdateArbitraryCostRule
+      operationId: UpdateCustomAllocationRule
       parameters:
-      - description: The unique identifier of the arbitrary cost rule
+      - description: The unique identifier of the custom allocation rule
         in: path
         name: rule_id
         required: true
@@ -56963,7 +58619,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Update arbitrary cost rule
+      summary: Update custom allocation rule
       tags:
       - Cloud Cost Management
       x-menu-order: 25
@@ -69723,6 +71379,309 @@ paths:
         - timeseries_query
       x-undo:
         type: idempotent
+  /api/v2/reference-tables/tables:
+    get:
+      description: List all reference tables in this organization.
+      operationId: ListTables
+      parameters:
+      - description: Number of tables to return.
+        example: 15
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 15
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: Number of tables to skip for pagination.
+        example: 0
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int64
+          minimum: 0
+          type: integer
+      - description: Sort field and direction. Use field name for ascending, prefix
+          with "-" for descending.
+        example: -updated_at
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReferenceTableSortType'
+      - description: Filter by table status.
+        example: DONE
+        in: query
+        name: filter[status]
+        required: false
+        schema:
+          type: string
+      - description: Filter by exact table name match.
+        example: my_reference_table
+        in: query
+        name: filter[table_name][exact]
+        required: false
+        schema:
+          type: string
+      - description: Filter by table name containing substring.
+        example: user
+        in: query
+        name: filter[table_name][contains]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableResultV2Array'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List tables
+      tags:
+      - Reference Tables
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new reference table. You can provide data in two ways:
+        1) Call POST api/v2/reference-tables/upload first to get an upload ID, then
+        PUT chunks of CSV data to each provided URL, and finally call this POST endpoint
+        with the upload_id in file_metadata, OR 2) Provide access_details in file_metadata
+        pointing to a CSV file in cloud storage (Amazon S3, Azure Blob Storage, or
+        GCP Cloud Storage).'
+      operationId: CreateReferenceTable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTableRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableResultV2'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create reference table
+      tags:
+      - Reference Tables
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteTable
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/reference-tables/tables/{id}:
+    delete:
+      description: Delete a reference table by ID
+      operationId: DeleteTable
+      parameters:
+      - description: The ID of the reference table to delete
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete table
+      tags:
+      - Reference Tables
+      x-menu-order: 7
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a reference table by ID
+      operationId: GetTable
+      parameters:
+      - description: The ID of the reference table to retrieve
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableResultV2'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get table
+      tags:
+      - Reference Tables
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a reference table by ID. You can update the table''s data,
+        description, and tags. Note: The source type cannot be changed after table
+        creation. For data updates: For existing tables of type `source:LOCAL_FILE`,
+        call POST api/v2/reference-tables/uploads first to get an upload ID, then
+        PUT chunks of CSV data to each provided URL, and finally call this PATCH endpoint
+        with the upload_id in file_metadata. For existing tables with `source:` types
+        of `S3`, `GCS`, or `AZURE`, provide updated access_details in file_metadata
+        pointing to a CSV file in the same type of cloud storage.'
+      operationId: UpdateReferenceTable
+      parameters:
+      - description: The ID of the reference table to update
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchTableRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update reference table
+      tags:
+      - Reference Tables
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/reference-tables/tables/{id}/rows:
+    get:
+      description: Get reference table rows by their primary key values.
+      operationId: GetRowsByID
+      parameters:
+      - description: The ID of the reference table
+        example: table-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: List of row IDs (primary key values) to retrieve from the reference
+          table.
+        example:
+        - row1
+        - row2
+        explode: true
+        in: query
+        name: row_id
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableRowResourceArray'
+          description: Some or all requested rows were found.
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get rows by id
+      tags:
+      - Reference Tables
+      x-menu-order: 5
+      x-undo:
+        type: safe
+  /api/v2/reference-tables/uploads:
+    post:
+      description: Create a reference table upload for bulk data ingestion
+      operationId: CreateReferenceTableUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUploadRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUploadResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create reference table upload
+      tags:
+      - Reference Tables
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/remote_config/products/asm/waf/custom_rules:
     get:
       description: Retrieve a list of WAF custom rule.
@@ -78083,7 +80042,7 @@ paths:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline
         rulesets for the organization
-      operationId: ListRulesets
+      operationId: ListTagPipelinesRulesets
       responses:
         '200':
           content:
@@ -78098,7 +80057,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: List rulesets
+      summary: List tag pipeline rulesets
       tags:
       - Cloud Cost Management
       x-menu-order: 16
@@ -78107,7 +80066,7 @@ paths:
     post:
       description: Create a new tag pipeline ruleset with the specified rules and
         configuration
-      operationId: CreateRuleset
+      operationId: CreateTagPipelinesRuleset
       requestBody:
         content:
           application/json:
@@ -78128,7 +80087,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Create ruleset
+      summary: Create tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 17
@@ -78138,7 +80097,7 @@ paths:
     post:
       description: Reorder tag pipeline rulesets - Change the execution order of tag
         pipeline rulesets
-      operationId: ReorderRulesets
+      operationId: ReorderTagPipelinesRulesets
       requestBody:
         content:
           application/json:
@@ -78155,7 +80114,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Reorder rulesets
+      summary: Reorder tag pipeline rulesets
       tags:
       - Cloud Cost Management
       x-menu-order: 21
@@ -78196,7 +80155,7 @@ paths:
     delete:
       description: Delete a tag pipeline ruleset - Delete an existing tag pipeline
         ruleset by its ID
-      operationId: DeleteRuleset
+      operationId: DeleteTagPipelinesRuleset
       parameters:
       - description: The unique identifier of the ruleset
         in: path
@@ -78214,7 +80173,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Delete ruleset
+      summary: Delete tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 19
@@ -78223,7 +80182,7 @@ paths:
     get:
       description: Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline
         ruleset by its ID
-      operationId: GetRuleset
+      operationId: GetTagPipelinesRuleset
       parameters:
       - description: The unique identifier of the ruleset
         in: path
@@ -78254,7 +80213,7 @@ paths:
     patch:
       description: Update a tag pipeline ruleset - Update an existing tag pipeline
         ruleset with new rules and configuration
-      operationId: UpdateRuleset
+      operationId: UpdateTagPipelinesRuleset
       parameters:
       - description: The unique identifier of the ruleset
         in: path
@@ -78282,7 +80241,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_write
-      summary: Update ruleset
+      summary: Update tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 18
@@ -81784,6 +83743,8 @@ tags:
     aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
     for more information
   name: RUM
+- description: Auto-generated tag Reference Tables
+  name: Reference Tables
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 

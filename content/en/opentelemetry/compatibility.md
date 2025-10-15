@@ -66,6 +66,12 @@ For more information, see [Cloud Network Monitoring Setup][3].
 
 For unsupported languages in OpenTelemetry setups, [configure telemetry tagging][5] to link data to a specific commit.
 
+## Platform and environment support
+
+While the OpenTelemetry Collector can be deployed in many environments, certain platforms have specific limitations or support requirements.
+
+* **AWS EKS Fargate**: This environment is **not currently supported** and will result in incorrect infrastructure host billing when used with the OpenTelemetry Collector. Official support is planned for a future release. See the [Collector setup guide][7] for the most up-to-date information.
+
 ## Best practices
 
 When using Datadog and OpenTelemetry together, Datadog recommends the following best practices to ensure optimal performance and to avoid potential issues:
