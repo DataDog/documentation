@@ -24,7 +24,7 @@ multifiltersearch:
     - name: Type
       id: type
   data:
-    - opentelemetry_convention: '`deployment.environment.name` <sup>*</sup>'
+    - opentelemetry_convention: '`deployment.environment.name`'
       datadog_convention: '`env`'
       type: Unified service tagging
     - opentelemetry_convention: '`service.name`'
