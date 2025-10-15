@@ -143,6 +143,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | value   | string | Input or output value. If not set, this value is inferred from messages or documents. |
 | messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
 | documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
+| prompt | [Prompt](#prompt) | A prompt template used to format the LLM input. |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
@@ -164,6 +165,14 @@ If the request is successful, the API responds with a 202 network code and an em
 | name    | string | The name of the document.  |
 | score | float | The score associated with this document. |
 | id    | string | The id of this document.  |
+
+#### Prompt
+| Field                | Type   | Description              |
+|----------------------|--------|--------------------------|
+| id    | string | An id to identify this prompt template.  |
+| template | string | A string version of a prompt template. Embed variables with handlebar notation. This should not be set with `chat_template`. |
+| chat_template | [Message](#message) | A message list version of a prompt template. Embed variables with handlebar notation. This should not be set with `template`. |
+| variables | Dict[key (string), string] | A dictionary of the values that each template variable took in this invocation of the prompt. |
 
 
 #### Meta
