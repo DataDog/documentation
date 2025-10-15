@@ -25,11 +25,11 @@ title: Guías de monitores
 
 {{< whatsnext desc="Tutorial:" >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Crear alertas de cluster para la métrica monitor (noun){{< /nextlink >}}
-    {{< nextlink href="monitors/guide/create-monitor (noun)-dependencies" >}}Crear dependencias de monitor (noun) {< /nextlink >}}
+    {{< nextlink href="monitors/guide/create-monitor (noun)-dependencies" >}}Crear dependencias de monitor (noun) {{< /nextlink >}}
     {{< nextlink href="monitors/types/synthetic_monitoring" >}}Cómo crear monitores en pruebas sintéticas{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reducir el aleteo de alertas{{< /nextlink >}}
-        {{< nextlink href="monitors/guide/clean_up_monitor_clutter" >}}Limpiar el desorden de monitor (noun) {< /nextlink >}}
-    {{< nextlink href="monitors/guide/troubleshooting-monitor (noun)-alerts" >}}Solución de problemas de las alertas de monitor (noun) {< /nextlink >}}
+    {{< nextlink href="monitors/guide/clean_up_monitor_clutter" >}}Limpiar el desorden de monitor (noun) {{< /nextlink >}}
+    {{< nextlink href="monitors/guide/troubleshooting-monitor (noun)-alerts" >}}Solución de problemas de las alertas de monitor (noun) {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Monitor configuration:" >}}
