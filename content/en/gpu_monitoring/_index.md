@@ -49,3 +49,5 @@ See [Set up GPU Monitoring][2] for instructions on how to set up Datadog's GPU M
 
 [1]: https://app.datadoghq.com/gpu-monitoring
 [2]: /gpu_monitoring/setup
+[3]: /gpu_monitoring/summary
+[4]: /gpu_monitoring/fleet/?tab=clustersidepanel
