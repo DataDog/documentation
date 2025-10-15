@@ -3699,46 +3699,10 @@ menu:
       identifier: cloud_cost_custom
       weight: 110
     - name: Datadog Costs
-      url: cloud_cost_management/setup/datadog_costs
-      parent: cloud_cost_setup
-      identifier: cloud_cost_datadog_costs
-      weight: 111
-
-    - name: Allocation
-      url: cloud_cost_management/allocation
+      url: cloud_cost_management/datadog_costs
       parent: cloud_cost
-      identifier: cloud_cost_cost_allocation
+      identifier: cloud_cost_datadog_costs
       weight: 2
-    - name: Container Cost Allocation
-      url: cloud_cost_management/allocation/container_cost_allocation
-      parent: cloud_cost_cost_allocation
-      identifier: cloud_cost_container_cost_allocation
-      weight: 201
-    - name: AWS
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 101
-    - name: Azure
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=azure
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 102
-    - name: Google Cloud
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=google
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 103
-    - name: BigQuery Costs
-      url: cloud_cost_management/allocation/bigquery
-      parent: cloud_cost_cost_allocation
-      identifier: cloud_cost_cost_allocationbigquery
-      weight: 202
-    - name: Custom Allocation Rules
-      url: cloud_cost_management/allocation/custom_allocation_rules
-      parent: cloud_cost_cost_allocation
-      identifier: cloud_cost_custom_allocation_rules
-      weight: 203
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost
@@ -3759,35 +3723,55 @@ menu:
       parent: cloud_cost_tags
       identifier: cloud_cost_multisource_querying
       weight: 303
+    - name: Allocation
+      url: cloud_cost_management/allocation
+      parent: cloud_cost
+      identifier: cloud_cost_cost_allocation
+      weight: 4
+    - name: Container Cost Allocation
+      url: cloud_cost_management/allocation/container_cost_allocation
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_container_cost_allocation
+      weight: 401
+    - name: AWS
+      url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_aws
+      weight: 101
+    - name: Azure
+      url: cloud_cost_management/allocation/container_cost_allocation/?tab=azure
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_azure
+      weight: 102
+    - name: Google Cloud
+      url: cloud_cost_management/allocation/container_cost_allocation/?tab=google
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_google
+      weight: 103
+    - name: BigQuery Costs
+      url: cloud_cost_management/allocation/bigquery
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_cost_allocationbigquery
+      weight: 402
+    - name: Custom Allocation Rules
+      url: cloud_cost_management/allocation/custom_allocation_rules
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_custom_allocation_rules
+      weight: 403
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost
       identifier: cloud_cost_reporting
-      weight: 4
+      weight: 5
     - name: Explorer
       url: cloud_cost_management/reporting/explorer
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
-      weight: 401
+      weight: 501
     - name: Scheduled Reports
       url: cloud_cost_management/reporting/scheduled_reports
       parent: cloud_cost_reporting
       identifier: cloud_cost_scheduled_reports
-      weight: 402
-    - name: Planning
-      url: cloud_cost_management/planning
-      parent: cloud_cost
-      identifier: cloud_cost_planning
-      weight: 5
-    - name: Budgets
-      url: cloud_cost_management/planning/budgets
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_budgets
-      weight: 501
-    - name: Commitment Programs
-      url: cloud_cost_management/planning/commitment_programs
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_commitment_programs
       weight: 502
     - name: Recommendations
       url: cloud_cost_management/recommendations
@@ -3799,26 +3783,41 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
       weight: 601
-    - name: Investigating Cost Changes
-      url: cloud_cost_management/investigating
+    - name: Planning
+      url: cloud_cost_management/planning
       parent: cloud_cost
-      identifier: cloud_cost_investigating
+      identifier: cloud_cost_planning
       weight: 7
-    - name: Monitors
-      url: cloud_cost_management/investigating/monitors
-      parent: cloud_cost_investigating
-      identifier: cloud_cost_investigating_monitors
+    - name: Budgets
+      url: cloud_cost_management/planning/budgets
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_budgets
       weight: 701
-    - name: Anomalies
-      url: cloud_cost_management/investigating/anomalies
-      parent: cloud_cost_investigating
-      identifier: cloud_cost_investigating_anomalies
+    - name: Commitment Programs
+      url: cloud_cost_management/planning/commitment_programs
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_commitment_programs
       weight: 702
+    - name: Cost Change Investigation
+      url: cloud_cost_management/investigation
+      parent: cloud_cost
+      identifier: cloud_cost_investigation
+      weight: 8
+    - name: Monitors
+      url: cloud_cost_management/investigation/monitors
+      parent: cloud_cost_investigation
+      identifier: cloud_cost_investigation_monitors
+      weight: 801
+    - name: Anomalies
+      url: cloud_cost_management/investigation/anomalies
+      parent: cloud_cost_investigation
+      identifier: cloud_cost_investigation_anomalies
+      weight: 802
     - name: Real-Time Costs
-      url: cloud_cost_management/investigating/real_time_costs
-      parent: cloud_cost_investigating
+      url: cloud_cost_management/investigation/real_time_costs
+      parent: cloud_cost_investigation
       identifier: cloud_cost_real_time_costs
-      weight: 703
+      weight: 803
     - name: APM
       url: tracing/
       pre: apm
