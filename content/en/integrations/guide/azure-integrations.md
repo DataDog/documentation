@@ -1,4 +1,3 @@
-
 ---
 title: Azure Integrations
 aliases:

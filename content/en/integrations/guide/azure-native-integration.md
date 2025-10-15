@@ -1,4 +1,3 @@
-
 ---
 title: Azure Native Integration Setup & Reference
 aliases:

@@ -1,4 +1,3 @@
-
 ---
 title: Azure Manual Log Forwarding Setup
 further_reading:

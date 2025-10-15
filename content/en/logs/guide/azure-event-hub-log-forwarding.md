@@ -1,4 +1,3 @@
-
 ---
 title: Send Azure Logs to Datadog from an Event Hub
 private: true

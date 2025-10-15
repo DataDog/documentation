@@ -1,4 +1,3 @@
-
 ---
 title: Azure Resource Manager (ARM)
 private: true
