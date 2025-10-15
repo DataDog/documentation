@@ -33,7 +33,7 @@ This visualization provides a breakdown of your entire GPU fleet across multiple
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
-{{< img src="gpu_monitoring/funnel.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-2.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows: 
 - **Total**: Any GPU device that is sending data during the selected time frame
