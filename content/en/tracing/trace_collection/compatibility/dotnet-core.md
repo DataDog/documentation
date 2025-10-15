@@ -74,14 +74,14 @@ The .NET Tracer supports Linux distributions as best-effort, based on minimum li
 | Operating System         | Version | Architectures | Support level                         | Package version                 |
 | -------------------------|---------|---------------|---------------------------------------|---------------------------------|
 | Alpine Linux (x64)       | 3.14+   |  x64          | [GA](#support-ga)                     | latest (.NET 5+ only, v1.27.0+) |
-| Alpine Linux (arm64)     | 3.18+   |  Arm64        | [GA](#support-ga)                     | latest (.NET 6+ only, v3.2.0+)  |
+| Alpine Linux (arm64)     | 3.18+   |  arm64        | [GA](#support-ga)                     | latest (.NET 6+ only, v3.2.0+)  |
 | CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)          |
 | CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)          |
-| Debian                   | 10+     |  x64, Arm64   | [GA](#support-ga)                     | latest                          |
+| Debian                   | 10+     |  x64, arm64   | [GA](#support-ga)                     | latest                          |
 | Fedora                   | 29+     |  x64          | [GA](#support-ga)                     | latest                          |
 | openSUSE                 | 15+     |  x64          | [GA](#support-ga)                     | latest                          |
 | Red Hat Enterprise Linux | 7+      |  x64          | [GA](#support-ga)                     | latest                          |
-| Ubuntu                   | 18.04+  |  x64, Arm64   | [GA](#support-ga)                     | latest                          |
+| Ubuntu                   | 18.04+  |  x64, arm64   | [GA](#support-ga)                     | latest                          |
 
 ### macOS
 
@@ -89,9 +89,9 @@ The .NET Tracer supports macOS for CI Test Optimization only.
 
 | Operating System         | Version | Architectures | Support level           | Package version            |
 | -------------------------|---------|---------------|-------------------------|----------------------------|
-| macOS                    | 12.0+   |  x64, Arm64   | [GA](#support-ga)       | latest                     |
+| macOS                    | 12.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
 | macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
-| macOS                    | 11.0    |  Arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
+| macOS                    | 11.0    |  arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
 
 ## Integrations
 
