@@ -45,22 +45,22 @@ The [Home][3] page gives you a bird's-eye view of your users' activity and a pul
 
 {{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
-By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provides additional context about your product's users and usage:
+By default, this page displays the `active users`, `page views`, and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provide additional context about your product's users and usage:
 
 [Users](https://app.datadoghq.com/product-analytics/user-trends)
-: See at a glance who is actually using your product.
+: At a glance, see who is using your product.
 
 [App & Devices](https://app.datadoghq.com/product-analytics/app-and-device)
 : Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
 [Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
-: Understand how users are engaging with your product to answer questions like how long are users staying on pages and what their top actions are. 
+: Understand how users are engaging with your product to answer questions like how long users are staying on pages and what their top actions are. 
 
 [Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
 : Get a view into bounce rates, top traffic sources, and where your growth is really coming from.
 
 [Performance](https://app.datadoghq.com/product-analytics/performance)
-: View surface top errors and frustrations, and see exactly which views they impact
+: View surface top errors and frustrations, and see exactly which views they impact.
 
 <br>
 
