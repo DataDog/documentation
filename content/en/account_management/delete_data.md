@@ -48,6 +48,7 @@ From the [Deletion History][5] tab, you can see the status of deletions. You can
 **Notes**:
 - Deletions start instantly after confirmation. In some cases, records arriving after the job has started might not be deleted because the deletion has already processed the time window that record occurred in.
 - When deleting a record, data derived from that record is not deleted (for example, Metrics generated from Logs).
+- A maximum of 5 concurrent deletions are supported.
 
 ### Cancel deletions
 
