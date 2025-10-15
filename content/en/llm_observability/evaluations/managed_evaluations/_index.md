@@ -129,6 +129,14 @@ If you need more details, the following metrics allow you to track the LLM resou
 
 Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
 
+### Agent evaluations
+
+[Agent evaluations][18] help ensure your LLM-powered applications are making the right tool calls and successfully resolving user requests. These checks are designed to catch common failure modes when agents interact with external tools, APIs, or workflows. Datadog offers the following agent evaluations:
+
+- [Tool selection][19] - Verifies that the tool(s) selected by an agent are correct
+- [Tool argument correctness][20] - Ensures the arguments provided to a tool by the agent are correct
+- [Goal completeness][21] - Checks if a user's goal is met by the end of the session
+
 ### Quality evaluations
 
 #### Topic relevancy
@@ -259,210 +267,6 @@ This check helps understand the overall mood of the conversation, gauge user sat
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
 
-#### Goal completeness
-
-This check evaluates whether your LLM chatbot can successfully carry out a full session by effectively meeting the user's needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
-
-{{< img src="llm_observability/evaluations/goal_completeness.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
-
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
-|---|---|---|
-| Evaluated on session | Evaluated using LLM | Goal Completeness assesses whether all user intentions within a multi-turn interaction were successfully resolved. The evaluation identifies resolved and unresolved intentions, providing a completeness score based on the ratio of unresolved to total intentions. |
-
-For optimal evaluation accuracy and cost control, it is preferable to send a tag when the session is finished and configure the evaluation to run only on session with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
-
-##### Instrumentation
-
-To enable Goal Completeness evaluation, you need to instrument your application to track sessions and their completion status. This evaluation works by analyzing complete sessions to determine if all user intentions were successfully addressed.
-
-The evaluation requires sending a span with a specific tag when the session ends. This signal allows the evaluation to identify session boundaries and trigger the completeness assessment:
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import llm
-
-# Call this function whenever your session has ended
-@llm(model_name="model_name", model_provider="model_provider")
-def send_session_ended_span(input_data, output_data) -> None:
-    """Send a span to indicate the chat session has ended."""
-    LLMObs.annotate(
-        input_data=input_data,
-        output_data=output_data,
-        tags={"session_status": "completed"}
-    )
-{{< /code-block >}}
-
-Replace `session_status` and `completed` with your preferred tag key and value.
-
-The span should contain meaningful `input_data` and `output_data` that represent the final state of the session. This helps the evaluation understand the session's context and outcomes when assessing completeness.
-
-##### Goal completeness configuration
-
-After instrumenting your application to send session-end spans, configure the evaluation to run only on sessions with your specific tag. This targeted approach ensures the evaluation analyzes complete sessions rather than partial interactions.
-
-1. Go to the **Goal Completeness** settings
-2. Configure the evaluation data:
-   - Select **spans** as the data type since Goal Completeness runs on LLM spans which contains the full session history.
-   - Choose the tag name associated with the span that corresponds to your session-end function (for example, `send_session_ended_span`).
-   - In the **tags** section, specify the tag you configured in your instrumentation (for example, `session_status:completed`).
-
-This configuration ensures evaluations run only on complete sessions. This provides accurate assessments of user intention resolution.
-
-#### Tool selection
-
-This check evaluates whether the agent has successfully selected the appropriate tools to address the user's request.
-
-{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
-
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
-|---|---|---|
-| Evaluated on LLM spans| Evaluated using LLM | Tool Selection verifies that the tools chosen by the LLM align with the user's request and the available tools. The evaluation identifies cases where irrelevant or incorrect tool calls were made.|
-
-##### Instrumentation
-
-This evaluation is supported in dd-trace version 3.12 and above. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from agents import Agent, ModelSettings, function_tool
-
-@function_tool
-def add_numbers(a: int, b: int) -> int:
-    """
-    Adds two numbers together.
-    """
-    return a + b
-
-@function_tool
-def subtract_numbers(a: int, b: int) -> int:
-    """
-    Subtracts two numbers.
-    """
-    return a - b
-    
-
-# List of tools available to the agent 
-math_tutor_agent = Agent(
-    name="Math Tutor",
-    handoff_description="Specialist agent for math questions",
-    instructions="You provide help with math problems. Please use the tools to find the answer.",
-    model="o3-mini",
-    tools=[
-        add_numbers, subtract_numbers
-    ],
-)
-
-history_tutor_agent = Agent(
-    name="History Tutor",
-    handoff_description="Specialist agent for history questions",
-    instructions="You provide help with history problems.",
-    model="o3-mini",
-)
-
-# The triage agent decides which specialized agent to hand off the task to — another type of tool selection covered by this evaluation.
-triage_agent = Agent(  
-    'openai:gpt-4o',
-    model_settings=ModelSettings(temperature=0),
-    instructions='What is the sum of 1 to 10?',  
-    handoffs=[math_tutor_agent, history_tutor_agent],
-)
-{{< /code-block >}}
-
-#### Tool argument correctness
-
-This check looks at the arguments provided to a selected tool, and it evaluates whether these arguments match the expected type and make sense given the tool's context. 
-
-{{< img src="llm_observability/evaluations/tool_argument_correctness_error.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
-
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
-|---|---|---|
-| Evaluated on LLM spans| Evaluated using LLM | Tool Argument Correctness verifies that the arguments provided to a tool by the LLM are correct and contextually relevant. This evaluation identifies cases where the arguments provided to the tool are incorrect according to the tool schema (for example: the argument is expected to be an integer rather than a string) and are not relevant (for example: the argument is a country, but the model provides the name of a city).|
-
-##### Instrumentation
-
-This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
-
-{{< code-block lang="python" >}}
-import os
-
-from ddtrace.llmobs import LLMObs
-from pydantic_ai import Agent
-
-
-# Define tools as regular functions with type hints
-def add_numbers(a: int, b: int) -> int:
-    """
-    Adds two numbers together.
-    """
-    return a + b
-
-
-def subtract_numbers(a: int, b: int) -> int:
-    """
-    Subtracts two numbers.
-    """
-    return a - b
-
-    
-def multiply_numbers(a: int, b: int) -> int:
-    """
-    Multiplies two numbers.
-    """
-    return a * b
-
-
-def divide_numbers(a: int, b: int) -> float:
-    """
-    Divides two numbers.
-    """
-    return a / b
-
-
-# Enable LLMObs
-LLMObs.enable(
-    ml_app="jenn_test",
-    api_key=os.environ["DD_API_KEY"],
-    site=os.environ["DD_SITE"],
-    agentless_enabled=True,
-)
-
-
-# Create the Math Tutor agent with tools
-math_tutor_agent = Agent(
-    'openai:gpt-5-nano',
-    instructions="You provide help with math problems. Please use the tools to find the answer.",
-    tools=[add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
-)
-
-# Create the History Tutor agent (note: gpt-5-nano doesn't exist, using gpt-4o-mini)
-history_tutor_agent = Agent(
-    'openai:gpt-5-nano',
-    instructions="You provide help with history problems.",
-)
-
-# Create the triage agent
-# Note: pydantic_ai handles handoffs differently - you'd typically use result_type 
-# or custom logic to route between agents
-triage_agent = Agent(
-    'openai:gpt-5-nano',
-    instructions=(
-        'DO NOT RELY ON YOUR OWN MATHEMATICAL KNOWLEDGE, '
-        'MAKE SURE TO CALL AVAILABLE TOOLS TO SOLVE EVERY SUBPROBLEM.'
-    ),
-    tools=[add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
-)
-
-
-# Run the agent synchronously
-result = triage_agent.run_sync(
-    '''
-    Help me solve the following problem:
-    What is the sum of the numbers between 1 and 100?
-    Make sure you list out all the mathematical operations (addition, subtraction, multiplication, division) in order before you start calling tools in that order.
-    '''
-)
-{{< /code-block >}}
-
 ### Security and Safety evaluations
 
 #### Toxicity
@@ -544,3 +348,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [15]: https://arxiv.org/pdf/2312.06674
 [16]: https://arxiv.org/pdf/2404.05993
 [17]: https://arxiv.org/pdf/2309.11998
+[18]: /llm_observability/evaluations/managed_evaluations/agent_evaluations
+[19]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
+[20]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
+[21]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#goal-completeness
