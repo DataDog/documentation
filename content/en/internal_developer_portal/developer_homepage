@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The **Developer Homepage** provides a centralized view of your team’s entities and your daily tasks.  
+The [Developer Homepage][3] provides a centralized view of your team’s entities and your daily tasks.  
 
 With this view, you can:
 - Monitor your team’s key entities at a glance, including **scorecards, deployments, monitors, issues, incidents, dashboards**, and **on-call** status.  
@@ -83,4 +83,5 @@ If your organization hasn’t configured the Jira integration, you’ll see an e
 {{< partial name="whats-next/whats-next.html" >}}  
 
 [1]: /integrations/github/  
-[2]: /integrations/jira/  
+[2]: /integrations/jira/
+[3]: /idp/overview/developer
