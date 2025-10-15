@@ -26,7 +26,7 @@ algolia:
 
 ## Setup
 
-Error Tracking is available for all the languages supported by APM and does not require using a different SDK.
+Error Tracking is available for all the languages supported by APM, does not require using a different SDK and no configuration change is required.
 
 Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
 
