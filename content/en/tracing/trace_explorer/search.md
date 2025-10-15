@@ -5,6 +5,9 @@ further_reading:
     - link: 'tracing/trace_explorer/query_syntax'
       tag: 'Documentation'
       text: 'Query Syntax'
+    - link: "/getting_started/search/"
+      tag: "Documentation"
+      text: "Getting Started with Search in Datadog"
 ---
 
 ## Overview
