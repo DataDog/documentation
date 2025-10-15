@@ -63,15 +63,11 @@ If the departing user is in any escalation policies:
 
 ### Remove user notification preferences
 
-If the user is still part of your organization you can ask them to remove their Notification Preferences in their On-Call profile by visiting **On-Call > Settings > My On-Call Profile**. 
+If the user is still part of your organization you can ask them to remove their Notification Preferences in their On-Call profile by visiting **On-Call > Settings > My On-Call Profile**.
 
 As an admin, you can also manage this yourself by navigating to **On-Call > Settings > Notification Preferences**. Find the appropriate user and remove their notification preferences as needed. You will need the "On-Call Admin" permission to perform this.
 
 **Note**, Notification Preferences make a user pageable and therefore billable. Having only contact methods (for example, push notifications) defined is a non-billable action and won't incur charges.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/on-call/
 [2]: /service_management/on-call/teams/
