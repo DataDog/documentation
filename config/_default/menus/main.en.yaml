@@ -2030,16 +2030,21 @@ menu:
       parent: metrics_top_level
       identifier: composite_metrics_queries
       weight: 11
+    - name: Derived Metrics
+      url: metrics/derived_metrics
+      parent: metrics_top_level
+      identifier: metrics_derived_metrics
+      weight: 12
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 12
+      weight: 13
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 13
+      weight: 14
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
