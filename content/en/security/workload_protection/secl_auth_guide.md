@@ -26,13 +26,13 @@ In summary, the Agent rule finds raw behavior and the detection rule turns it in
 
 The standard format of a SECL expression is:
 
-{{< code-block lang="javascript" >}}
+{{< code-block lang="plaintext" >}}
 <event-type>.<event-attribute> <operator> <value> [<operator> <event-type>.<event-attribute>] ...
 {{< /code-block >}}
 
 Using this format, an example rule for a Linux system looks like this:
 
-{{< code-block lang="javascript" >}}
+{{< code-block lang="plaintext" >}}
 
 open.file.path == "/etc/shadow" && process.file.path not in ["/usr/sbin/vipw"]
 
@@ -113,14 +113,14 @@ For information and examples of common building blocks like operators, patterns,
 
 #### Access to sensitive files (allowlist safe tools)
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
 process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
 {{< /code-block >}}
 
 #### Nginx or PHP spawning bash
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 exec.file.path == "/usr/bin/bash" &&
 (
   process.ancestors.file.name == "nginx" ||
@@ -130,7 +130,7 @@ exec.file.path == "/usr/bin/bash" &&
 
 #### Suspicious IMDS access from container
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 connect &&
 network.destination.ip in ["169.254.169.254"] &&
 container.id != ""
@@ -138,7 +138,7 @@ container.id != ""
 
 #### Kernel module loads outside maintenance window
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 load_module &&
 process.user != "root" &&
 process.ancestors.file.name not in ["modprobe", "insmod"]
@@ -146,7 +146,7 @@ process.ancestors.file.name not in ["modprobe", "insmod"]
 
 #### Sensitive file read shortly after start
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 open.file.path == "/etc/secret" &&
 process.file.name == "java" &&
 process.created_at > 5s
@@ -154,7 +154,7 @@ process.created_at > 5s
 
 #### Outbound to non-corporate IPs (CIDR allowlist)
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 connect &&
 network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
 {{< /code-block >}}
@@ -163,14 +163,14 @@ network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
 
 #### Registry persistence via run key
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 set_key_value &&
 open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
 {{< /code-block >}}
 
 #### Unsigned Binary Launching PowerShell
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
 process.parent.file.path !~ "*\\Program Files*" &&
 process.user_sid != "S-1-5-18"
@@ -180,7 +180,7 @@ process.user_sid != "S-1-5-18"
 
 #### Crypto-miner indicators
 
-{{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
 exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
 {{< /code-block >}}
