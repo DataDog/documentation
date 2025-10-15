@@ -1,5 +1,3 @@
-
-
 ---
 title: Derived Metrics 
 further_reading:
