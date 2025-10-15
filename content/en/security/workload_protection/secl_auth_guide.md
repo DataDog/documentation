@@ -1,5 +1,5 @@
 ---
-title: Writing custom rule expressions
+title: Writing Custom Rule Expressions
 disable_toc: false
 aliases:
   - /security/cloud_security_management/guide/custom-rules-guidelines
@@ -10,7 +10,7 @@ This guide shows you how to write effective SECL (Security Language) rules for D
 
 ## SECL overview
 
-Datadog SECL is a custom domain-specific language used to create agent expressions and policies within Datadog Workload Protection. SECL allows security teams to define real-time threat detection rules by specifying conditions, operators, and patterns that security agents can monitor across hosts, containers, applications, and cloud infrastructure.
+Datadog SECL is a custom domain-specific language used to create Agent expressions and policies within Datadog Workload Protection. SECL allows security teams to define real-time threat detection rules by specifying conditions, operators, and patterns that security agents can monitor across hosts, containers, applications, and cloud infrastructure.
 
 ## How SECL rules fit together
 
@@ -43,7 +43,7 @@ open.file.path == "/etc/shadow" && process.file.path not in ["/usr/sbin/vipw"]
 Here's a summary of the process:
 
 1. Go to Workload Protection [Policies][1].
-2. Click **New Policy** to create a policy or open an existing policy.
+2. Click **New Policy** to create a policy, or select an existing policy from the list to open it.
 3. In the policy, click **Add Agent Rule**, and then click **Manual rule creator**.
 4. In **Define the agent expression**, enter your expression using the following steps.
 5. Select **Linux** or **Windows**. Most expression fields are OS-specific.
@@ -85,7 +85,7 @@ When viewing the backend logic for a detection rule, do the following:
 - Always set the operating system (OS).
 - Anchor on ancestry to reduce noise. Use `process.ancestors.file.name`.
 - Use durations (for example, `> 5s`, `10m`, `2h`) to target narrow execution windows.
-- Use exact match (`==`) whenever possible as it results in lowest noise.
+- Use exact match (`==`) whenever possible as it results in the lowest noise.
 - List membership (`in [...]`) is best for allowlists or controlled sets of values.
 - Use a glob match (`~"/path/*"`) for path families as it is safer and faster than regex.
 - Use regex (`=~`) only when globs/lists can't be used. Keep the regex expression as narrow as possible. As a rule of thumb, start with `==` or `in [...]`. Reach for regex only as a last resort.
