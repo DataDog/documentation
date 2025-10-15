@@ -80,15 +80,12 @@ You can create rules to block code from being merged when a pull request causes 
 
 {{< img src="pr_gates/setup/code_coverage.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
-
 {{% /tab %}}
 
 {{% tab "Infrastructure as Code Scanning" %}}
 You can create rules to block code from being merged when a pull request introduces at least one infrastructure as code (IaC) vulnerability of a certain severity.
 
-
 {{< img src="pr_gates/setup/iac.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
-
 
 {{% /tab %}}
 {{< /tabs >}}
