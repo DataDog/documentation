@@ -154,7 +154,7 @@ API changes:
 We made minor improvements to the RUM modules. They don't require significant changes to your code, but it's worth checking if you can refactor some redundant parameters.
 
 The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
-(e.g.: https://example.com/rum/upload), not just the hostname, i.e:
+(`https://example.com/rum/upload`), not just the hostname:
 ```kotlin
 Rum.enable(
   RumConfiguration.Builder(...)
