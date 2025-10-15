@@ -1,30 +1,88 @@
 menu:
   studio:
     # Studio specific labels
+    - name: Onboarding
+      identifier: onboarding_heading
+      weight: 1000000
     - name: Essentials
       identifier: essentials_heading
-      weight: 1000000
-    - name: In The App
-      identifier: platform_heading
       weight: 2000000
-
+    - name: Administration
+      identifier: administration_heading
+      weight: 3000000
+    - name: Platform
+      identifier: platform_heading
+      weight: 4000000
 
     # Menu items that appear under labels starts below here
 
     - name: Getting Started
       url: /studio/getting_started/
-      parent: essentials_heading
+      parent: onboarding_heading
       identifier: getting_started
       weight: 1
+    - name: Getting Started Child Page
+      url: /studio/getting_started/
+      parent: getting_started
+      identifier: getting_started_child_page
+      weight: 101
     - name: Test
       url: /studio/test/
       parent: essentials_heading
       identifier: test
       weight: 2
-
+    - name: Dashboards
+      parent: essentials_heading
+      params:
+        ref_id: dashboards # This should match the identifier in main.en.yaml
+        # Include all children by default, but exclude specific ones
+    - name: Notebooks
+      parent: essentials_heading
+      params:
+        ref_id: notebooks
+    - name: Monitors
+      parent: essentials_heading
+      params:
+        ref_id: alerting
+        # Exclude specific monitor types
+        includes:
+          - monitors_types_metric
+          - monitors_types_error_tracking
+          - monitors_types_logs
+    - name: Bits AI
+      parent: essentials_heading
+      params:
+        ref_id: bits_ai
+        excludes:
+          - bits_ai_sre
+    - name: LLM Observability
+      parent: essentials_heading
+      params:
+        ref_id: llm_observability
+    - name: Metrics
+      parent: essentials_heading
+      params:
+        ref_id: metrics
+    - name: Error Tracking
+      parent: essentials_heading
+      params:
+        ref_id: error_tracking
     # pull in from existing docs instead with granular control
+    - name: Logs
+      parent: essentials_heading
+      params:
+        ref_id: logs
+        # Include everything (no filters)
+    - name: Product Analytics
+      parent: essentials_heading
+      params:
+        ref_id: product_analytics
+    - name: Session Replay
+      parent: essentials_heading
+      params:
+        ref_id: session_replay
     - name: Account Management
-      parent: platform_heading
+      parent: administration_heading
       params:
         ref_id: account_management
         # Include specific child items only
@@ -34,74 +92,39 @@ menu:
         # Or exclude specific items
         # excludes:
         #   - account_management_saml
-
-    - name: Agent
-      parent: platform_heading
+    - name: Data Security
+      parent: administration_heading
       params:
-        ref_id: agent
-        # Include only configuration and troubleshooting sections
+        ref_id: data_security
         includes:
-          - agent_configuration
-          - agent_troubleshooting
-        # Exclude IoT and architecture
-        excludes:
-          - agent_iot
-          - architecture
-
-    - name: Bits Ai
-      parent: platform_heading
-      params:
-        ref_id: agent
-
-    - name: Dashboards
-      parent: platform_heading
-      params:
-        ref_id: dashboards # This should match the identifier in main.en.yaml
-        # Include all children by default, but exclude specific ones
-        excludes:
-          - dashboard_widgets_advanced
-
-    - name: Error Tracking
-      parent: platform_heading
-      params:
-        ref_id: error_tracking
-
+          - data_security_agent
+          - data_security_log_management
+          - data_security_pci_compliance
+          - data_security_hipaa_compliance
+          - data_retention_periods
+          - data_security_guide
     - name: Integrations
       parent: platform_heading
       params:
         ref_id: integrations_top_level
-        # Only include guides, exclude everything else
-        includes:
-          - integration_guides
+    - name: API
+      parent: platform_heading
+      params:
+        ref_id: api
+    - name: Agent
+      parent: platform_heading
+      params:
+        ref_id: agent
 
-    - name: LLM Observability
-      parent: platform_heading
-      params:
-        ref_id: llm_observability
 
-    - name: Logs
-      parent: platform_heading
-      params:
-        ref_id: logs
-        # Include everything (no filters)
 
-    - name: Monitors
-      parent: platform_heading
-      params:
-        ref_id: alerting
-        # Exclude specific monitor types
-        excludes:
-          - monitors_notify_downtimes
 
-    - name: Metrics
-      parent: platform_heading
-      params:
-        ref_id: metrics
-    - name: Notebooks
-      parent: platform_heading
-      params:
-        ref_id: notebooks
-    - name: Product Analytics
-      parent: platform_heading
-      params:
-        ref_id: product_analytics
+
+
+
+
+
+
+
+
+
