@@ -4,6 +4,7 @@ aliases:
 - /integrations/guide/azure-portal/
 - /integrations/guide/azure-native-programmatic-management/
 - /integrations/guide/azure-native-manual-setup/
+- /logs/guide/azure-native-logging-guide/
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
