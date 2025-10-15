@@ -36,7 +36,7 @@ Natural Language Queries is not available in the <a href="/getting_started/site"
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, making it easier to explore metrics without needing to write complex syntax. To access this feature, click **Ask** in the search field.
 
-{{< img src="/metrics/explorer/metrics_nlq_example_10102025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
+{{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
 
 The system translates natural language input into Datadog queries and understands context such as services, attributes, and tags. 
 
