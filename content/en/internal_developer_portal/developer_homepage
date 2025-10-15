@@ -1,0 +1,109 @@
+---
+title: Developer Homepage
+aliases:  
+- /software_catalog/eng_reports/team_overview/  
+further_reading:  
+- link: "/integrations/github/"  
+  tag: "Documentation"  
+  text: "GitHub Integration"  
+- link: "/integrations/jira/"  
+  tag: "Documentation"  
+  text: "Jira Integration"  
+- link: "/service_management/incident_management/"  
+  tag: "Documentation"  
+  text: "Incident Management"  
+- link: "/dashboards/"  
+  tag: "Documentation"  
+  text: "Datadog Dashboards"  
+---
+
+## Overview
+
+The **Developer Homepage** provides a centralized view of your team’s entities and your daily tasks.  
+
+With this view, you can:
+- Monitor your team’s key entities at a glance, including **scorecards, deployments, monitors, issues, incidents, dashboards**, and **on-call** status.  
+- See all **tasks assigned to you** across GitHub and Jira.  
+- Identify alerting monitors or faulty deployments quickly.
+
+
+
+---
+
+## View your team’s entities
+
+{{< img src="tracing/eng_reports/team-overview-entities.png" alt="Team Overview showing service scorecards, incidents, and monitors" style="width:100%;" >}}  
+
+The top section of the Team Overview displays a scoped-down view of your team’s key entities. This view automatically aggregates data from your linked Datadog products and integrations.
+
+You can view the following fields for each service or entity:
+
+| Field | Description |
+|--------|-------------|
+| **Type** | The entity type (for example, Service, Monitor, Incident). |
+| **Name** | The entity’s display name or identifier. |
+| **Scorecards** | Summary of the service’s health based on reliability, performance, and error budgets. |
+| **Last Deploy** | The most recent deployment detected by APM or CI integrations. |
+| **Monitors** | Count and state of monitors affecting the service. |
+| **Issues** | Active issues related to the service, aggregated from linked tracking tools. |
+| **Incidents** | Open incidents associated with the team’s services. |
+| **Dashboards** | Key dashboards linked to the service. |
+| **On-Call** | The current on-call responder for the team or service. |
+
+---
+
+## Tasks assigned to you
+
+{{< img src="tracing/eng_reports/team-overview-tasks.png" alt="Team Overview showing PRs and Jira tickets assigned to the user" style="width:100%;" >}}  
+
+The **Tasks** section consolidates your personal action items from GitHub so you can focus on what matters most.
+
+### GitHub PRs
+Displays pull requests that:
+- **Needs your review**
+- **Returned to you**  
+- **Approved**  
+- **Waiting for reviewers**
+- **Recently merged**  
+
+
+Each PR entry includes:
+- **Repository and PR number**  
+- **Title**  
+- **Status** (Open / Draft / Merged)  
+- **Assignee / Reviewer**  
+
+If your organization hasn’t configured the GitHub integration yet, you’ll see an empty state with a prompt to enable it by visiting the [GitHub Integration tile][1].
+
+### Jira Tasks (coming soon)
+Lists Jira issues assigned to you, including:
+- **Issue Number**  
+- **Title**  
+- **Status**  
+- **Assignee**
+
+If your organization hasn’t configured the Jira integration, you’ll see an empty state that directs you to the [Jira Integration tile][2] to complete setup.
+
+---
+
+## Customize your view (coming soon)
+
+You can adjust your view to fit your needs:
+
+- **Filter by Team or Service:** Focus on specific teams or subsets of services.  
+- **Sort by Entity Type or Health:** Quickly identify top and bottom performers.  
+- **Add Sections:** Collapse or expand the *Entities* and *Tasks* panels for a cleaner view.  
+
+To personalize your dashboard further, click the **three-dot menu** on the top right of the report and select **Clone as Dashboard**.  
+From there, you can:
+- Modify filters and groupings (for example, view only production services).  
+- Add custom widgets, such as deployment frequency or issue throughput.  
+- Combine this view with other reports like **Reliability Overview** or **Delivery Insights**.  
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}  
+
+[1]: /integrations/github/  
+[2]: /integrations/jira/  
