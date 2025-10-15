@@ -7741,6 +7741,19 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Create a page from an incident
+      url: '#create-a-page-from-an-incident'
+      identifier: incidents-create-a-page-from-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePageFromIncident
+        unstable:
+          - v2
+        order: 6
     - name: Delete an incident impact
       url: '#delete-an-incident-impact'
       identifier: incidents-delete-an-incident-impact
