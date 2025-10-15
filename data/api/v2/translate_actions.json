@@ -1981,6 +1981,30 @@
     "request_description": "The exclusion filter to update.",
     "request_schema_description": "Request object for updating a single WAF exclusion filter."
   },
+  "ListApplicationSecurityWAFPolicies": {
+    "description": "Retrieve a list of WAF policies.",
+    "summary": "List all WAF policies"
+  },
+  "CreateApplicationSecurityWafPolicy": {
+    "description": "Create a new WAF policy.",
+    "summary": "Create a WAF Policy",
+    "request_description": "The new WAF policy.",
+    "request_schema_description": "Request object that includes the policy to create."
+  },
+  "DeleteApplicationSecurityWafPolicy": {
+    "description": "Delete a specific WAF policy.",
+    "summary": "Delete a WAF Policy"
+  },
+  "GetApplicationSecurityWafPolicy": {
+    "description": "Retrieve a WAF policy by ID.",
+    "summary": "Get a WAF Policy"
+  },
+  "UpdateApplicationSecurityWafPolicy": {
+    "description": "Update a specific WAF policy.\nReturns the Policy object when the request is successful.",
+    "summary": "Update a WAF Policy",
+    "request_description": "New WAF Policy.",
+    "request_schema_description": "Request object that includes the policy to update."
+  },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get all Workload Protection agent rules"

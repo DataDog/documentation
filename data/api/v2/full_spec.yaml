@@ -167,6 +167,14 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/ApplicationKeysSort'
+    ApplicationSecurityPolicyIDParam:
+      description: The ID of the policy.
+      example: recommended
+      in: path
+      name: policy_id
+      required: true
+      schema:
+        type: string
     ApplicationSecurityWafCustomRuleIDParam:
       description: The ID of the custom rule.
       example: 3b5-v82-ns6
@@ -3196,6 +3204,292 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    ApplicationSecurityPolicyAttributes:
+      description: A WAF policy.
+      properties:
+        description:
+          description: Description of the WAF policy.
+          example: Policy applied to internal web applications.
+          type: string
+        isDefault:
+          description: Make this policy the default policy. The default policy is
+            applied to every services not specifically added to another policy.
+          example: false
+          type: boolean
+        name:
+          description: The Name of the WAF policy.
+          example: Internal Network Policy
+          type: string
+        protectionPresets:
+          description: Presets enabled on this policy.
+          items:
+            example: attack-tools
+            type: string
+          type: array
+        rules:
+          description: Rule overrides applied by the policy.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyRuleOverride'
+          type: array
+        scope:
+          description: The scope of the WAF policy.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyScope'
+          type: array
+        version:
+          default: 0
+          description: Version of the WAF ruleset maintained by Datadog used by this
+            policy. 0 is the default value.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - name
+      - description
+      type: object
+    ApplicationSecurityPolicyCreateAttributes:
+      description: Create a new WAF policy.
+      properties:
+        basedOn:
+          description: When creating a new policy, clone the policy indicated by this
+            identifier.
+          example: recommended
+          type: string
+        description:
+          description: Description of the WAF policy.
+          example: Policy applied to internal web applications.
+          type: string
+        isDefault:
+          description: Make this policy the default policy. The default policy is
+            applied to every services not specifically added to another policy.
+          example: false
+          type: boolean
+        name:
+          description: The Name of the WAF policy.
+          example: Internal Network Policy
+          type: string
+        protectionPresets:
+          description: Presets enabled on this policy.
+          items:
+            example: attack-tools
+            type: string
+          type: array
+        rules:
+          description: Rule overrides applied by the policy.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyRuleOverride'
+          type: array
+        scope:
+          description: The scope of the WAF policy.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyScope'
+          type: array
+        version:
+          default: 0
+          description: Version of the WAF ruleset maintained by Datadog used by this
+            policy. 0 is the default value.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - name
+      - description
+      - basedOn
+      type: object
+    ApplicationSecurityPolicyCreateData:
+      description: Object for a single WAF policy.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityPolicyCreateRequest:
+      description: Request object that includes the policy to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyCreateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityPolicyData:
+      description: Object for a single WAF policy.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyAttributes'
+        id:
+          description: The ID of the policy.
+          example: 2857c47d-1e3a-4300-8b2f-dc24089c084b
+          readOnly: true
+          type: string
+        metadata:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyMetadata'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyType'
+      type: object
+    ApplicationSecurityPolicyListResponse:
+      description: Response object that includes a list of WAF policies.
+      properties:
+        data:
+          description: The WAF policy data.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyData'
+          type: array
+      type: object
+    ApplicationSecurityPolicyMetadata:
+      description: Metadata associated with the WAF policy.
+      properties:
+        added_at:
+          description: The date and time the WAF policy was created.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        added_by:
+          description: The handle of the user who created the WAF policy.
+          example: john.doe@datadoghq.com
+          type: string
+        added_by_name:
+          description: The name of the user who created the WAF policy.
+          example: John Doe
+          type: string
+        modified_at:
+          description: The date and time the WAF policy was last updated.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        modified_by:
+          description: The handle of the user who last updated the WAF policy.
+          example: john.doe@datadoghq.com
+          type: string
+        modified_by_name:
+          description: The name of the user who last updated the WAF policy.
+          example: John Doe
+          type: string
+      readOnly: true
+      type: object
+    ApplicationSecurityPolicyResponse:
+      description: Response object that includes a single WAF policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyData'
+      type: object
+    ApplicationSecurityPolicyRuleOverride:
+      description: Override WAF rule parameters for services in a policy.
+      properties:
+        blocking:
+          description: When blocking is enabled, the rule will block the traffic matched
+            by this rule.
+          example: false
+          type: boolean
+        enabled:
+          description: When false, this rule will not match any traffic.
+          example: true
+          type: boolean
+        id:
+          description: Override the parameters for this WAF rule identifier.
+          example: rasp-001-002
+          type: string
+      required:
+      - id
+      - enabled
+      - blocking
+      type: object
+    ApplicationSecurityPolicyScope:
+      description: The scope of the WAF policy.
+      properties:
+        env:
+          description: The environment scope for the WAF policy.
+          example: prod
+          type: string
+        service:
+          description: The service scope for the WAF policy.
+          example: billing-service
+          type: string
+      required:
+      - service
+      - env
+      type: object
+    ApplicationSecurityPolicyType:
+      default: policy
+      description: The type of the resource. The value should always be `policy`.
+      enum:
+      - policy
+      example: policy
+      type: string
+      x-enum-varnames:
+      - POLICY
+    ApplicationSecurityPolicyUpdateAttributes:
+      description: Update a WAF policy.
+      properties:
+        description:
+          description: Description of the WAF policy.
+          example: Policy applied to internal web applications.
+          type: string
+        isDefault:
+          description: Make this policy the default policy. The default policy is
+            applied to every services not specifically added to another policy.
+          example: false
+          type: boolean
+        name:
+          description: The Name of the WAF policy.
+          example: Internal Network Policy
+          type: string
+        protectionPresets:
+          description: Presets enabled on this policy.
+          example:
+          - attack-tools
+          items:
+            example: attack-tools
+            type: string
+          type: array
+        rules:
+          description: Rule overrides applied by the policy.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyRuleOverride'
+          type: array
+        scope:
+          description: The scope of the WAF policy.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityPolicyScope'
+          type: array
+        version:
+          default: 0
+          description: Version of the WAF ruleset maintained by Datadog used by this
+            policy. 0 is the default value.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - name
+      - description
+      - version
+      - isDefault
+      - rules
+      - protectionPresets
+      - scope
+      type: object
+    ApplicationSecurityPolicyUpdateData:
+      description: Object for a single WAF policy.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityPolicyUpdateRequest:
+      description: Request object that includes the policy to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityPolicyUpdateData'
+      required:
+      - data
+      type: object
     ApplicationSecurityWafCustomRuleAction:
       description: The definition of `ApplicationSecurityWafCustomRuleAction` object.
       properties:
@@ -71700,7 +71994,7 @@ paths:
       summary: List all WAF custom rules
       tags:
       - Application Security
-      x-menu-order: 13
+      x-menu-order: 23
       x-undo:
         type: safe
     post:
@@ -71748,7 +72042,7 @@ paths:
               \       }\n      ],\n      \"tags\": {\n        \"category\": \"attack_attempt\",\n
               \       \"type\": \"test\"\n      }\n    }\n  }\n}"
           step: there is a valid "custom_rule" in the system
-      x-menu-order: 12
+      x-menu-order: 22
       x-undo:
         operationId: DeleteApplicationSecurityWafCustomRule
         parameters:
@@ -71775,7 +72069,7 @@ paths:
       summary: Delete a WAF Custom Rule
       tags:
       - Application Security
-      x-menu-order: 16
+      x-menu-order: 26
       x-terraform-resource: appsec_waf_custom_rule
       x-undo:
         type: idempotent
@@ -71798,7 +72092,7 @@ paths:
       summary: Get a WAF custom rule
       tags:
       - Application Security
-      x-menu-order: 10
+      x-menu-order: 20
       x-terraform-resource: appsec_waf_custom_rule
       x-undo:
         type: safe
@@ -71837,7 +72131,7 @@ paths:
       tags:
       - Application Security
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 25
       x-terraform-resource: appsec_waf_custom_rule
       x-undo:
         type: idempotent
@@ -72026,6 +72320,157 @@ paths:
         permissions:
         - appsec_protect_write
       x-terraform-resource: appsec_waf_exclusion_filter
+      x-undo:
+        type: idempotent
+  /api/v2/remote_config/products/asm/waf/policies:
+    get:
+      description: Retrieve a list of WAF policies.
+      operationId: ListApplicationSecurityWAFPolicies
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityPolicyListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all WAF policies
+      tags:
+      - Application Security
+      x-menu-order: 13
+      x-undo:
+        type: safe
+    post:
+      description: Create a new WAF policy.
+      operationId: CreateApplicationSecurityWafPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityPolicyCreateRequest'
+        description: The new WAF policy.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityPolicyResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a WAF Policy
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-given:
+        policy:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"policy\",\n    \"attributes\":
+              {\n      \"name\": \"Test policy\",\n      \"description\": \"This is
+              a test policy.\",\n      \"basedOn\": \"recommended\"\n    }\n  }\n}"
+          step: there is a valid "policy" in the system
+      x-menu-order: 12
+      x-undo:
+        operationId: DeleteApplicationSecurityWafPolicy
+        parameters:
+        - name: policy_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/asm/waf/policies/{policy_id}:
+    delete:
+      description: Delete a specific WAF policy.
+      operationId: DeleteApplicationSecurityWafPolicy
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityPolicyIDParam'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a WAF Policy
+      tags:
+      - Application Security
+      x-menu-order: 16
+      x-terraform-resource: appsec_waf_policy
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieve a WAF policy by ID.
+      operationId: GetApplicationSecurityWafPolicy
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityPolicyIDParam'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityPolicyResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a WAF Policy
+      tags:
+      - Application Security
+      x-menu-order: 10
+      x-terraform-resource: appsec_waf_policy
+      x-undo:
+        type: safe
+    put:
+      description: 'Update a specific WAF policy.
+
+        Returns the Policy object when the request is successful.'
+      operationId: UpdateApplicationSecurityWafPolicy
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityPolicyIDParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityPolicyUpdateRequest'
+        description: New WAF Policy.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a WAF Policy
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-terraform-resource: appsec_waf_policy
       x-undo:
         type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
