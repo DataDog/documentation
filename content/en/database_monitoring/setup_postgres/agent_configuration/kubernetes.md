@@ -18,8 +18,6 @@ To configure an integration for an Agent running in a Docker container such as i
 
 The examples below show how to use [Docker Labels][102] and [Autodiscovery Templates][103] to configure the Postgres integration. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][100]. 
 
-<div class="alert alert-warning"><strong>Important</strong>: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.</div>
-
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 ### Datadog Operator
@@ -194,7 +192,7 @@ Going through this section will ensure that we can correlate the DBM data collec
 If you are using AWS RDS or AWS Aurora you should add the addition `aws` key to the [base configuration](#base-configuration), this ensures that we can correlation the [AWS Integration](/integrations/amazon-web-services/) data to your Database instance.
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 {{< highlight yaml "hl_lines=38-40" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -315,7 +313,7 @@ spec:
 If you are using Google Cloud SQL you should add the addition `gcp` key to the [base configuration](#base-configuration), this ensures that we can correlation the [GCP Integration](/integrations/google-cloudsql/) and [GCP AlloyDB](/integrations/google-cloud-alloydb/) data to your Database instance.
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 {{< highlight yaml "hl_lines=38-40" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -425,7 +423,6 @@ spec:
     name: postgres
 {{< /highlight >}}
 {{% /tab %}}
-
 {{< /tabs >}}
 {{% /collapse-content %}} 
 
@@ -435,8 +432,8 @@ spec:
 If you are monitoring a Azure Managed Database you should add the addition `azure` key to the [base configuration](#base-configuration), this ensures that we can correlation the [Azure Integration](/integrations/azure/) data to your Database instance.
 
 {{< tabs >}}
-{{% tab "Operator" %}}
-{{< highlight yaml "hl_lines=29-37" >}}
+{{% tab "Datadog Operator" %}}
+{{< highlight yaml "hl_lines=38-41" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -474,11 +471,15 @@ spec:
               port: <DATABASE_PORT>
               username: <DATADOG_USER>
               password: 'ENC[datadog_user_database_password]'
+              ssl: require
+              azure:
+                deployment_type: <DEPLOYMENT_TYPE>
+                fully_qualified_domain_name: <INSTANCE_ENDPOINT>
 {{< /highlight >}}
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-{{< highlight yaml "hl_lines=12-20" >}}
+{{< highlight yaml "hl_lines=21-24" >}}
 datadog:
   clusterChecks:
     enabled: true
@@ -499,11 +500,15 @@ clusterAgent:
         port: <DATABASE_PORT>
         username: <DATADOG_USER>
         password: 'ENC[datadog_user_database_password]'
+        ssl: require
+        azure:
+          deployment_type: <DEPLOYMENT_TYPE>
+          fully_qualified_domain_name: <INSTANCE_ENDPOINT>
 {{< /highlight >}}
 {{% /tab %}}
 
 {{% tab "Annotations" %}}
-```yaml
+{{< highlight yaml "hl_lines=20-24" >}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -522,7 +527,12 @@ metadata:
               "host": <INSTANCE_ENDPOINT>,
               "port": <DATABASE_PORT>,
               "username": <DATADOG_USER>,
-              "password": "ENC[datadog_user_database_password]"
+              "password": "ENC[datadog_user_database_password]",
+              "ssl": require,
+              "azure": {
+                "deployment_type": <DEPLOYMENT_TYPE>,
+                "fully_qualified_domain_name": <INSTANCE_ENDPOINT>
+              }
             }
           ]
         }
@@ -533,7 +543,7 @@ spec:
     protocol: TCP
     targetPort: 5432
     name: postgres
-```
+{{< /highlight >}}
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}} 
