@@ -34,11 +34,14 @@ The Agent can autodiscover and attach tags to all data emitted by the entire tas
   | `short_image`                 | Low          | Docker               |
   | `image_tag`                   | Low          | Docker               |
   | `aws_account`                 | Low          | ECS API              |
+  | `cluster_arn`                 | Low          | ECS API              |
+  | `service_arn`                 | Low          | ECS API              |
   | `region`                      | Low          | ECS API              |
   | `ecs_cluster_name`            | Low          | ECS API              |
   | `ecs_container_name`          | Low          | ECS API              |
   | `ecs_service_name`            | Low          | ECS API              |
   | `task_arn`                    | Orchestrator | ECS API              |
+  | `task_definition_arn`         | Orchestrator | ECS API              |
   | `task_family`                 | Low          | ECS API              |
   | `task_name`                   | Low          | ECS API              |
   | `task_version`                | Low          | ECS API              |
