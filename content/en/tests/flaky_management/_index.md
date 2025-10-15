@@ -42,7 +42,7 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
 
-1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][11] in Software Delivery settings.
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][12] in Software Delivery settings.
 2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
     {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
 
@@ -128,6 +128,7 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 | [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
 | [Python][9]     | 3.3.0+                        | 3.8.0+                       |
 | [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
+| [Swift][11]     | 2.6.1+                        | 2.6.1+                       |
 
 ## Further reading
 
@@ -143,4 +144,5 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [8]: /tests/setup/javascript/
 [9]: /tests/setup/python/
 [10]: /tests/setup/ruby/
-[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[11]: /tests/setup/swift/
+[12]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
