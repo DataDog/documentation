@@ -1,16 +1,17 @@
 ---
-title: Understanding How Rule Scopes Work in Quality Gates
-
-description: Learn how to configure rule scopes for Quality Gate rules.
+title: Understanding How Rule Scopes Work in PR Gates
+aliases:
+  - /quality_gates/guide/understanding_rule_scopes/
+description: Learn how to configure rule scopes for PR Gate rules.
 further_reading:
-  - link: "/quality_gates/setup"
+  - link: "/pr_gates/setup"
     tag: "Documentation"
-    text: "Learn how to set up Quality Gates"
+    text: "Learn how to set up PR Gates"
 ---
 
 ## Overview
 
-Quality Gates allows you to gate your workflows based on signals in Datadog. When creating a rule, you can define a rule scope, which states when the rule should be evaluated. 
+PR Gates allows you to gate your workflows based on signals in Datadog. When creating a rule, you can define a rule scope, which states when the rule should be evaluated. 
 
 To filter rules that are evaluated for a specific CI pipeline, you can add a custom scope when creating a rule. This process requires you to use the `--scope` option with the [`datadog-ci gate evaluate` command][1] in your build configuration.
 
@@ -47,7 +48,7 @@ For example, if a rule does not contain the `repository` scope, it is evaluated 
 
 In addition to branch and repository, you can define custom scopes to filter rules that are evaluated for a specific CI pipeline.
 
-{{< img src="quality_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in Quality Gates" style="width:80%;">}}
+{{< img src="pr_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
 
 To add a custom scope when creating a rule:
 
@@ -64,7 +65,7 @@ For example, you can create a rule that is evaluated for the `example-repository
 1. Click **Add Filter** and select **Custom scope**. 
 1. Enter a tag name and click **Add Custom Scope**.
    
-   {{< img src="quality_gates/setup/add_tag.png" alt="Rule scope for example-repository and team backend" style="width:50%;">}}
+   {{< img src="pr_gates/setup/add_tag.png" alt="Rule scope for example-repository and team backend" style="width:50%;">}}
 
 1. Enter `backend` in the **team** field and click **Include**.
 

@@ -1,21 +1,27 @@
 ---
-title: Quality Gates Explorer Search Syntax
-description: Search all of your quality gates or rule executions.
+title: PR Gates Explorer Search Syntax
+description: Search all of your PR gates or rule executions.
+aliases:
+  - /quality_gates/explorer/search_syntax/
 further_reading:
 - link: "/getting_started/search/"
   tag: "Documentation"
   text: "Getting Started with Search in Datadog"
-- link: "/quality_gates/search"
+- link: "/pr_gates/search"
   tag: "Documentation"
-  text: "Filter and group quality gates"
-- link: "/quality_gates/explorer/facets"
+  text: "Filter and group PR gates"
+- link: "/pr_gates/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Quality Gates is in Preview.
+PR Gates is in Preview.
 {{< /callout >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">PR Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -74,7 +80,7 @@ When searching for an attribute or tag value that contains special characters or
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /quality_gates/explorer/facets
+[1]: /pr_gates/explorer/facets
 [2]: /getting_started/tagging/using_tags
 [3]: /infrastructure
 [4]: /integrations

@@ -4825,6 +4825,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Agent Evaluations
+      url: llm_observability/evaluations/managed_evaluations/agent_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_agent
+      weight: 40101
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
@@ -5275,47 +5280,17 @@ menu:
       parent: code_coverage
       identifier: code_coverage_data_collected
       weight: 2
-    - name: Quality Gates
-      url: quality_gates/
+    - name: PR Gates
+      url: pr_gates/
       pre: ci
       parent: software_delivery_heading
-      identifier: quality_gates
+      identifier: pr_gates
       weight: 60000
     - name: Setup
-      url: quality_gates/setup
-      parent: quality_gates
-      identifier: quality_gates_setup
+      url: pr_gates/setup
+      parent: pr_gates
+      identifier: pr_gates_setup
       weight: 1
-    - name: Search and Manage
-      url: quality_gates/search
-      parent: quality_gates
-      identifier: quality_gates_search
-      weight: 2
-    - name: Explorer
-      url: quality_gates/explorer
-      parent: quality_gates
-      identifier: quality_gates_explorer
-      weight: 3
-    - name: Search Syntax
-      url: quality_gates/explorer/search_syntax
-      parent: quality_gates_explorer
-      identifier: quality_gates_explorer_search_syntax
-      weight: 301
-    - name: Facets
-      url: quality_gates/explorer/facets
-      parent: quality_gates_explorer
-      identifier: quality_gates_explorer_facets
-      weight: 302
-    - name: Saved Views
-      url: quality_gates/explorer/saved_views
-      parent: quality_gates_explorer
-      identifier: quality_gates_explorer_saved_views
-      weight: 303
-    - name: Guides
-      url: quality_gates/guide
-      parent: quality_gates
-      identifier: quality_gates_guide
-      weight: 4
     - name: DORA Metrics
       url: dora_metrics/
       pre: ci
