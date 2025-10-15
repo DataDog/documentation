@@ -5291,36 +5291,6 @@ menu:
       parent: pr_gates
       identifier: pr_gates_setup
       weight: 1
-    - name: Search and Manage
-      url: pr_gates/search
-      parent: pr_gates
-      identifier: pr_gates_search
-      weight: 2
-    - name: Explorer
-      url: pr_gates/explorer
-      parent: pr_gates
-      identifier: pr_gates_explorer
-      weight: 3
-    - name: Search Syntax
-      url: pr_gates/explorer/search_syntax
-      parent: pr_gates_explorer
-      identifier: pr_gates_explorer_search_syntax
-      weight: 301
-    - name: Facets
-      url: pr_gates/explorer/facets
-      parent: pr_gates_explorer
-      identifier: pr_gates_explorer_facets
-      weight: 302
-    - name: Saved Views
-      url: pr_gates/explorer/saved_views
-      parent: pr_gates_explorer
-      identifier: pr_gates_explorer_saved_views
-      weight: 303
-    - name: Guides
-      url: pr_gates/guide
-      parent: pr_gates
-      identifier: pr_gates_guide
-      weight: 4
     - name: DORA Metrics
       url: dora_metrics/
       pre: ci
