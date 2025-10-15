@@ -4830,6 +4830,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Agent Evaluations
+      url: llm_observability/evaluations/managed_evaluations/agent_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_agent
+      weight: 40101
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
@@ -5291,36 +5296,6 @@ menu:
       parent: pr_gates
       identifier: pr_gates_setup
       weight: 1
-    - name: Search and Manage
-      url: pr_gates/search
-      parent: pr_gates
-      identifier: pr_gates_search
-      weight: 2
-    - name: Explorer
-      url: pr_gates/explorer
-      parent: pr_gates
-      identifier: pr_gates_explorer
-      weight: 3
-    - name: Search Syntax
-      url: pr_gates/explorer/search_syntax
-      parent: pr_gates_explorer
-      identifier: pr_gates_explorer_search_syntax
-      weight: 301
-    - name: Facets
-      url: pr_gates/explorer/facets
-      parent: pr_gates_explorer
-      identifier: pr_gates_explorer_facets
-      weight: 302
-    - name: Saved Views
-      url: pr_gates/explorer/saved_views
-      parent: pr_gates_explorer
-      identifier: pr_gates_explorer_saved_views
-      weight: 303
-    - name: Guides
-      url: pr_gates/guide
-      parent: pr_gates
-      identifier: pr_gates_guide
-      weight: 4
     - name: DORA Metrics
       url: dora_metrics/
       pre: ci
@@ -6465,16 +6440,21 @@ menu:
       parent: workload_protection
       identifier: workload_protection_agent_expressions
       weight: 204
+    - name: Writing Custom Rule Expressions
+      url: security/workload_protection/secl_auth_guide
+      parent: workload_protection_agent_expressions
+      identifier: workload_protection_secl_guide
+      weight: 1
     - name: Linux Syntax
       url: security/workload_protection/linux_expressions
       parent: workload_protection_agent_expressions
       identifier: linux_expressions
-      weight: 1
+      weight: 2
     - name: Windows Syntax
       url: security/workload_protection/windows_expressions
       parent: workload_protection_agent_expressions
       identifier: windows_expressions
-      weight: 2
+      weight: 3
     - name: Coverage and Posture Management
       url: security/workload_protection/inventory
       parent: workload_protection
