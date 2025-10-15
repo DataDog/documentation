@@ -6435,16 +6435,21 @@ menu:
       parent: workload_protection
       identifier: workload_protection_agent_expressions
       weight: 204
+    - name: Writing Custom Rule Expressions
+      url: security/workload_protection/secl_auth_guide
+      parent: workload_protection_agent_expressions
+      identifier: workload_protection_secl_guide
+      weight: 1
     - name: Linux Syntax
       url: security/workload_protection/linux_expressions
       parent: workload_protection_agent_expressions
       identifier: linux_expressions
-      weight: 1
+      weight: 2
     - name: Windows Syntax
       url: security/workload_protection/windows_expressions
       parent: workload_protection_agent_expressions
       identifier: windows_expressions
-      weight: 2
+      weight: 3
     - name: Coverage and Posture Management
       url: security/workload_protection/inventory
       parent: workload_protection
