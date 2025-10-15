@@ -1,20 +1,12 @@
 ---
 title: Developer Homepage
 aliases:  
-- /software_catalog/eng_reports/team_overview/  
+- /software_catalog/developer_homepage  
 further_reading:  
 - link: "/integrations/github/"  
   tag: "Documentation"  
-  text: "GitHub Integration"  
-- link: "/integrations/jira/"  
-  tag: "Documentation"  
-  text: "Jira Integration"  
-- link: "/service_management/incident_management/"  
-  tag: "Documentation"  
-  text: "Incident Management"  
-- link: "/dashboards/"  
-  tag: "Documentation"  
-  text: "Datadog Dashboards"  
+  text: "Learn aboout the GitHub Integration"   
+
 ---
 
 ## Overview
@@ -26,15 +18,16 @@ With this view, you can:
 - See all **tasks assigned to you** across GitHub and Jira.  
 - Identify alerting monitors or faulty deployments quickly.
 
-
+{{< callout url="https://forms.gle/xTPHV3XeTLuEmoqh9" d_target="#signupModal" btn_hidden="false" header="Request acess" >}}
+{{< /callout >}}
 
 ---
 
-## View your team’s entities
+## Your team’s entities
 
-{{< img src="tracing/eng_reports/team-overview-entities.png" alt="Team Overview showing service scorecards, incidents, and monitors" style="width:100%;" >}}  
+{{< img src="tracing/software_catalog/services_entities_table.png" alt="Services & entities for the user" style="width:100%;" >}}  
 
-The top section of the Team Overview displays a scoped-down view of your team’s key entities. This view automatically aggregates data from your linked Datadog products and integrations.
+The top section of the Team Overview displays a scoped-down view of your team’s key entities. This view automatically aggregates data from your linked Datadog products and integrations. View recently viewed entities, entities owned by your team, or explicitly favorited entities.
 
 You can view the following fields for each service or entity:
 
@@ -54,7 +47,7 @@ You can view the following fields for each service or entity:
 
 ## Tasks assigned to you
 
-{{< img src="tracing/eng_reports/team-overview-tasks.png" alt="Team Overview showing PRs and Jira tickets assigned to the user" style="width:100%;" >}}  
+{{< img src="tracing/software_catalog/github_prs_table.png" alt="PRs assigned to the user" style="width:100%;" >}}  
 
 The **Tasks** section consolidates your personal action items from GitHub so you can focus on what matters most.
 
@@ -83,22 +76,6 @@ Lists Jira issues assigned to you, including:
 - **Assignee**
 
 If your organization hasn’t configured the Jira integration, you’ll see an empty state that directs you to the [Jira Integration tile][2] to complete setup.
-
----
-
-## Customize your view (coming soon)
-
-You can adjust your view to fit your needs:
-
-- **Filter by Team or Service:** Focus on specific teams or subsets of services.  
-- **Sort by Entity Type or Health:** Quickly identify top and bottom performers.  
-- **Add Sections:** Collapse or expand the *Entities* and *Tasks* panels for a cleaner view.  
-
-To personalize your dashboard further, click the **three-dot menu** on the top right of the report and select **Clone as Dashboard**.  
-From there, you can:
-- Modify filters and groupings (for example, view only production services).  
-- Add custom widgets, such as deployment frequency or issue throughput.  
-- Combine this view with other reports like **Reliability Overview** or **Delivery Insights**.  
 
 
 ## Further reading
