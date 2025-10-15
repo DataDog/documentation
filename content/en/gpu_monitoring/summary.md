@@ -131,3 +131,4 @@ Zombie processes are often the primary source of wasted GPU spend, as they inapp
 
 [0]: https://app.datadoghq.com/gpu-monitoring
 [1]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=fleet
+[2]: /gpu_monitoring/fleet/?tab=clustersidepanel
