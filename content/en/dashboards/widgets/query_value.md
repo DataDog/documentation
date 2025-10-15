@@ -46,13 +46,13 @@ Customize the background of your Query Value widget with conditional rules. You 
 
 #### Change indicator
 
-Enable the **Change Indicator** to highlight how the current value compares to a previous timeframe.
+Enable the **Change Indicator** to highlight how the current value compares to a previous time frame.
 
 {{< img src="/dashboards/widgets/query_value/change_indicator_config.png" alt="Query value widget change indicator configuration options" style="width:90%;" >}}
 
 * **Display**: `Relative Change` (percentage), `Absolute Change` (raw value), `Both`, or `Off`
 * **Color**: `Increases as better` (green ↑, red ↓), `Decreases as better` (red ↑, green ↓), or `Neutral`
-* **Compared to**: `Previous Period`, `Previous Day/Week/Month`, or `Custom` timeframe
+* **Compared to**: `Previous Period`, `Previous Day/Week/Month`, or `Custom` time frame
 
 The widget displays the difference below the primary metric, helping highlight recent trends at a glance.
 
