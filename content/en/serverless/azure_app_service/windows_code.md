@@ -4,9 +4,9 @@ aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/azure_app_services_windows
 further_reading:
-- link: "/integrations/guide/azure-portal/"
+- link: "/integrations/guide/azure-native-integration/"
   tag: "Documentation"
-  text: "Azure Portal Integration Guide"
+  text: "Azure Native Integration Guide"
 - link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
   tag: "Blog"
   text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
@@ -50,10 +50,10 @@ The Datadog .NET, Java, and Node.js APM extensions support the following runtime
 {{% tab ".NET" %}}
 Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution within your application environment.
 
-Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Portal guide][2].
+Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Native integration guide][2].
 
-[1]: /integrations/guide/azure-portal/?tab=vmextension#app-service-extension
-[2]: /integrations/guide/azure-portal/
+[1]: /integrations/guide/azure-native-integration/#app-service-extension
+[2]: /integrations/guide/azure-native-integration/
 {{% /tab %}}
 {{% tab "Java" %}}
 Support for Java Web Apps is in Preview for extension v2.4+.
