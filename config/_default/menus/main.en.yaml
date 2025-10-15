@@ -3618,11 +3618,16 @@ menu:
       pre: cloud-cost-management
       parent: cloud_cost_heading
       weight: 10000
+    - name: Datadog Costs
+      url: cloud_cost_management/datadog_costs
+      parent: cloud_cost
+      identifier: cloud_cost_datadog_costs
+      weight: 1
     - name: Setup
       url: cloud_cost_management/setup/
       parent: cloud_cost
       identifier: cloud_cost_setup
-      weight: 1
+      weight: 2
     - name: AWS
       url: cloud_cost_management/setup/aws/
       parent: cloud_cost_setup
@@ -3698,11 +3703,6 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
       weight: 110
-    - name: Datadog Costs
-      url: cloud_cost_management/datadog_costs
-      parent: cloud_cost
-      identifier: cloud_cost_datadog_costs
-      weight: 2
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost
