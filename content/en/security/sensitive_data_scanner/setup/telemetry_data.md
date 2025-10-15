@@ -148,7 +148,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
 - When you add rules to a scanning group with sampling enabled, you will not be able to select the **redact**, **partially redact**, or **hash** actions. For complete obfuscation, disable sampling in your scanning group settings.
 
-See [Investigate Sensitive Data Issues][7] for details on how to use the [Findings][8] page to triage your sensitive data issues.
+See [Investigate Sensitive Data Findings][7] for details on triaging sensitive data using the [Findings][8] page.
 
 #### Excluded namespaces
 
@@ -311,7 +311,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
+[7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
 [8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /logs/guide/logs-rbac/
 [10]: /logs/log_configuration/processors/?tab=ui#remapper
