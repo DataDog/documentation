@@ -54,7 +54,7 @@ Enable the **Change Indicator** to highlight how the current value compares to a
 * **Color**: `Increases as better` (green ↑, red ↓), `Decreases as better` (red ↑, green ↓), or `Neutral`
 * **Compared to**: `Previous Period`, `Previous Day/Week/Month`, or `Custom` timeframe
 
-The widget displays the difference inline with the primary metric, helping highlight recent trends at a glance.
+The widget displays the difference below the primary metric, helping highlight recent trends at a glance.
 
 #### Context links
 
