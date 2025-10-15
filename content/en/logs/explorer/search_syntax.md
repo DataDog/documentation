@@ -5,6 +5,9 @@ aliases:
     - /logs/search-syntax
     - /logs/search_syntax/
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Learn how to visualize logs"

@@ -6061,7 +6061,7 @@ components:
       - type
       type: object
     AzureScanOptions:
-      description: The definition of `AzureScanOptions` object.
+      description: Response object containing Azure scan options for a single subscription.
       example:
         data:
           attributes:
@@ -6074,7 +6074,7 @@ components:
           $ref: '#/components/schemas/AzureScanOptionsData'
       type: object
     AzureScanOptionsArray:
-      description: The definition of `AzureScanOptionsArray` object.
+      description: Response object containing a list of Azure scan options.
       example:
         data:
         - attributes:
@@ -6084,7 +6084,7 @@ components:
           type: azure_scan_options
       properties:
         data:
-          description: The `AzureScanOptionsArray` `data`.
+          description: A list of Azure scan options.
           items:
             $ref: '#/components/schemas/AzureScanOptionsData'
           type: array
@@ -6092,12 +6092,12 @@ components:
       - data
       type: object
     AzureScanOptionsData:
-      description: The definition of `AzureScanOptionsData` object.
+      description: Single Azure scan options entry.
       properties:
         attributes:
           $ref: '#/components/schemas/AzureScanOptionsDataAttributes'
         id:
-          description: The `AzureScanOptionsData` `id`.
+          description: The Azure subscription ID.
           example: ''
           type: string
         type:
@@ -6107,13 +6107,14 @@ components:
       - id
       type: object
     AzureScanOptionsDataAttributes:
-      description: The definition of `AzureScanOptionsDataAttributes` object.
+      description: Attributes for Azure scan options configuration.
       properties:
         vuln_containers_os:
-          description: The `attributes` `vuln_containers_os`.
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
           type: boolean
         vuln_host_os:
-          description: The `attributes` `vuln_host_os`.
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
           type: boolean
       type: object
     AzureScanOptionsDataType:
@@ -6126,7 +6127,7 @@ components:
       x-enum-varnames:
       - AZURE_SCAN_OPTIONS
     AzureScanOptionsInputUpdate:
-      description: The definition of `AzureScanOptionsInputUpdate` object.
+      description: Request object for updating Azure scan options.
       example:
         data:
           id: 12345678-90ab-cdef-1234-567890abcdef
@@ -6136,13 +6137,13 @@ components:
           $ref: '#/components/schemas/AzureScanOptionsInputUpdateData'
       type: object
     AzureScanOptionsInputUpdateData:
-      description: The definition of `AzureScanOptionsInputUpdateData` object.
+      description: Data object for updating the scan options of a single Azure subscription.
       properties:
         attributes:
           $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataAttributes'
         id:
-          description: The `AzureScanOptionsInputUpdateData` `id`.
-          example: ''
+          description: The Azure subscription ID.
+          example: 12345678-90ab-cdef-1234-567890abcdef
           type: string
         type:
           $ref: '#/components/schemas/AzureScanOptionsInputUpdateDataType'
@@ -6151,13 +6152,14 @@ components:
       - id
       type: object
     AzureScanOptionsInputUpdateDataAttributes:
-      description: The definition of `AzureScanOptionsInputUpdateDataAttributes` object.
+      description: Attributes for updating Azure scan options configuration.
       properties:
         vuln_containers_os:
-          description: The `attributes` `vuln_containers_os`.
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
           type: boolean
         vuln_host_os:
-          description: The `attributes` `vuln_host_os`.
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
           type: boolean
       type: object
     AzureScanOptionsInputUpdateDataType:
@@ -9527,6 +9529,10 @@ components:
           description: The name of the policy
           example: my_agent_policy
           type: string
+        pinned:
+          description: Whether the policy is pinned
+          example: false
+          type: boolean
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -9554,6 +9560,8 @@ components:
           type: integer
         updater:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdaterAttributes'
+        versions:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyVersions'
       type: object
     CloudWorkloadSecurityAgentPolicyCreateAttributes:
       description: Create a new Cloud Workload Security Agent policy
@@ -9700,6 +9708,23 @@ components:
           nullable: true
           type: string
       type: object
+    CloudWorkloadSecurityAgentPolicyVersion:
+      description: The versions of the policy
+      properties:
+        Date:
+          description: The date and time the version was created
+          nullable: true
+          type: string
+        Name:
+          description: The version of the policy
+          example: 1.47.0-rc2
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentPolicyVersions:
+      description: The versions of the policy
+      items:
+        $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyVersion'
+      type: array
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered
       properties:
@@ -9737,23 +9762,32 @@ components:
       description: The set action applied on the scope matching the rule
       properties:
         append:
-          description: Whether the value should be appended to the field
+          description: Whether the value should be appended to the field.
           type: boolean
+        default_value:
+          description: The default value of the set action
+          type: string
+        expression:
+          description: The expression of the set action.
+          type: string
         field:
           description: The field of the set action
           type: string
+        inherited:
+          description: Whether the value should be inherited.
+          type: boolean
         name:
           description: The name of the set action
           type: string
         scope:
-          description: The scope of the set action
+          description: The scope of the set action.
           type: string
         size:
-          description: The size of the set action
+          description: The size of the set action.
           format: int64
           type: integer
         ttl:
-          description: The time to live of the set action
+          description: The time to live of the set action.
           format: int64
           type: integer
         value:
@@ -9834,6 +9868,10 @@ components:
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
         updateAuthorUuId:
           description: The ID of the user who updated the rule
           example: e51c9744-d158-11ec-ad23-da7ad0900002
@@ -9861,8 +9899,11 @@ components:
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        agent_version:
+          description: Constrain the rule to specific versions of the Datadog Agent.
+          type: string
         blocking:
-          description: The blocking policies that the rule belongs to
+          description: The blocking policies that the rule belongs to.
           items:
             type: string
           type: array
@@ -9871,12 +9912,12 @@ components:
           example: My Agent rule
           type: string
         disabled:
-          description: The disabled policies that the rule belongs to
+          description: The disabled policies that the rule belongs to.
           items:
             type: string
           type: array
         enabled:
-          description: Whether the Agent rule is enabled
+          description: Whether the Agent rule is enabled.
           example: true
           type: boolean
         expression:
@@ -9884,12 +9925,12 @@ components:
           example: exec.file.name == "sh"
           type: string
         filters:
-          description: The platforms the Agent rule is supported on
+          description: The platforms the Agent rule is supported on.
           items:
             type: string
           type: array
         monitoring:
-          description: The monitoring policies that the rule belongs to
+          description: The monitoring policies that the rule belongs to.
           items:
             type: string
           type: array
@@ -9898,14 +9939,18 @@ components:
           example: my_agent_rule
           type: string
         policy_id:
-          description: The ID of the policy where the Agent rule is saved
+          description: The ID of the policy where the Agent rule is saved.
           example: a8c8e364-6556-434d-b798-a4c23de29c0b
           type: string
         product_tags:
-          description: The list of product tags associated with the rule
+          description: The list of product tags associated with the rule.
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
       required:
       - name
       - expression
@@ -9985,6 +10030,9 @@ components:
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        agent_version:
+          description: Constrain the rule to specific versions of the Datadog Agent
+          type: string
         blocking:
           description: The blocking policies that the rule belongs to
           items:
@@ -10021,6 +10069,10 @@ components:
           items:
             type: string
           type: array
+        silent:
+          description: Whether the rule is silent.
+          example: false
+          type: boolean
       type: object
     CloudWorkloadSecurityAgentRuleUpdateData:
       description: Object for a single Agent rule
@@ -20580,6 +20632,117 @@ components:
       required:
       - data
       type: object
+    GcpScanOptions:
+      description: Response object containing GCP scan options for a single project.
+      example:
+        data:
+          attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: company-project-id
+          type: gcp_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/GcpScanOptionsData'
+      type: object
+    GcpScanOptionsArray:
+      description: Response object containing a list of GCP scan options.
+      example:
+        data:
+        - attributes:
+            vuln_containers_os: true
+            vuln_host_os: true
+          id: company-project-id
+          type: gcp_scan_options
+      properties:
+        data:
+          description: A list of GCP scan options.
+          items:
+            $ref: '#/components/schemas/GcpScanOptionsData'
+          type: array
+      required:
+      - data
+      type: object
+    GcpScanOptionsData:
+      description: Single GCP scan options entry.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GcpScanOptionsDataAttributes'
+        id:
+          description: The GCP project ID.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GcpScanOptionsDataType'
+      required:
+      - type
+      - id
+      type: object
+    GcpScanOptionsDataAttributes:
+      description: Attributes for GCP scan options configuration.
+      properties:
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          type: boolean
+      type: object
+    GcpScanOptionsDataType:
+      default: gcp_scan_options
+      description: GCP scan options resource type.
+      enum:
+      - gcp_scan_options
+      example: gcp_scan_options
+      type: string
+      x-enum-varnames:
+      - GCP_SCAN_OPTIONS
+    GcpScanOptionsInputUpdate:
+      description: Request object for updating GCP scan options.
+      example:
+        data:
+          id: company-project-id
+          type: gcp_scan_options
+      properties:
+        data:
+          $ref: '#/components/schemas/GcpScanOptionsInputUpdateData'
+      type: object
+    GcpScanOptionsInputUpdateData:
+      description: Data object for updating the scan options of a single GCP project.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GcpScanOptionsInputUpdateDataAttributes'
+        id:
+          description: The GCP project ID.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GcpScanOptionsInputUpdateDataType'
+      required:
+      - type
+      - id
+      type: object
+    GcpScanOptionsInputUpdateDataAttributes:
+      description: Attributes for updating GCP scan options configuration.
+      properties:
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          type: boolean
+      type: object
+    GcpScanOptionsInputUpdateDataType:
+      default: gcp_scan_options
+      description: GCP scan options resource type.
+      enum:
+      - gcp_scan_options
+      example: gcp_scan_options
+      type: string
+      x-enum-varnames:
+      - GCP_SCAN_OPTIONS
     GcpUcConfigResponse:
       description: The definition of `GcpUcConfigResponse` object.
       example:
@@ -53908,7 +54071,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAwsScanOptions
         parameters:
@@ -53971,7 +54134,7 @@ paths:
       summary: Get AWS scan options
       tags:
       - Agentless Scanning
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -54030,7 +54193,7 @@ paths:
       summary: List azure scan options
       tags:
       - Agentless Scanning
-      x-menu-order: 12
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -54059,7 +54222,7 @@ paths:
       summary: Create azure scan options
       tags:
       - Agentless Scanning
-      x-menu-order: 11
+      x-menu-order: 7
       x-undo:
         operationId: DeleteAzureScanOptions
         parameters:
@@ -54094,6 +54257,43 @@ paths:
       x-menu-order: 10
       x-undo:
         type: idempotent
+    get:
+      description: Fetches the Agentless scan options for an activated subscription.
+      operationId: GetAzureScanOptions
+      parameters:
+      - description: The Azure subscription ID.
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: 12345678-90ab-cdef-1234-567890abcdef
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureScanOptions'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Get Azure scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 8
+      x-undo:
+        type: safe
     patch:
       description: Update the Agentless scan options for an activated subscription.
       operationId: UpdateAzureScanOptions
@@ -54131,6 +54331,193 @@ paths:
       x-menu-order: 9
       x-undo:
         type: idempotent
+  /api/v2/agentless_scanning/accounts/gcp:
+    get:
+      description: Fetches the scan options configured for all GCP projects.
+      operationId: ListGcpScanOptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptionsArray'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-given:
+        gcp_scan_options:
+          source: data[0]
+          step: there is a valid "gcp_scan_options" in the system
+      x-menu-order: 11
+      x-undo:
+        type: safe
+    post:
+      description: Activate Agentless scan options for a GCP project.
+      operationId: CreateGcpScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcpScanOptions'
+        description: The definition of the new scan options.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptions'
+          description: Agentless scan options enabled successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Post GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        operationId: DeleteGcpScanOptions
+        parameters:
+        - name: project_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/gcp/{project_id}:
+    delete:
+      description: Delete Agentless scan options for a GCP project.
+      operationId: DeleteGcpScanOptions
+      parameters:
+      - description: The GCP project ID.
+        in: path
+        name: project_id
+        required: true
+        schema:
+          example: company-project-id
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Delete GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 15
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetches the Agentless scan options for an activated GCP project.
+      operationId: GetGcpScanOptions
+      parameters:
+      - description: The GCP project ID.
+        in: path
+        name: project_id
+        required: true
+        schema:
+          example: company-project-id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptions'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Get GCP scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 13
+      x-undo:
+        type: safe
+    patch:
+      description: Update the Agentless scan options for an activated GCP project.
+      operationId: UpdateGcpScanOptions
+      parameters:
+      - description: The GCP project ID.
+        in: path
+        name: project_id
+        required: true
+        schema:
+          example: company-project-id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcpScanOptionsInputUpdate'
+        description: New definition of the scan options.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpScanOptions'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Patch GCP Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 14
+      x-undo:
+        type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
     get:
       description: Fetches the most recent 1000 AWS on demand tasks.
@@ -54154,7 +54541,7 @@ paths:
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
-      x-menu-order: 6
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -54195,7 +54582,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 17
       x-permission:
         operator: OR
         permissions:
@@ -54231,7 +54618,7 @@ paths:
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
-      x-menu-order: 7
+      x-menu-order: 18
       x-permission:
         operator: OR
         permissions:

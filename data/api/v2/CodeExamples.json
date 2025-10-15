@@ -119,6 +119,20 @@
       "description": "Patch AWS Scan Options returns \"No Content\" response"
     }
   ],
+  "UpdateGcpScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Patch GCP Scan Options returns \"OK\" response"
+    }
+  ],
+  "CreateGcpScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Post GCP Scan Options returns \"Agentless scan options enabled successfully.\" response"
+    }
+  ],
   "CreateAwsOnDemandTask": [
     {
       "group": "agentless_scanning",
@@ -271,6 +285,11 @@
       "group": "csm_threats",
       "suffix": "_1295653933",
       "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1363354233",
+      "description": "Create a Workload Protection agent rule with set action with expression returns \"OK\" response"
     }
   ],
   "CreateCSMThreatsAgentPolicy": [
