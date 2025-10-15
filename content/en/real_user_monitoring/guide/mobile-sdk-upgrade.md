@@ -194,11 +194,11 @@ Logs.enable(
 ### Trace
 
 The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
-(e.g.: https://example.com/trace/upload), not just the hostname, i.e:
+(e.g.: `https://example.com/trace/upload`), not just the hostname, i.e:
 ```kotlin
 Trace.enable(
   TraceConfiguration.Builder()
-      .useCustomEndpoint("https://example.com/trace/upload")
+      .useCustomEndpoint(`https://example.com/trace/upload`)
       .build()
 )
 ```
@@ -324,7 +324,7 @@ API changes:
 ### Session Replay
 
 The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
-(e.g.: https://example.com/session_replay/upload), not just the hostname, i.e:
+(e.g.: `https://example.com/session_replay/upload`), not just the hostname, i.e:
 
 ```kotlin
 SessionReplay.enable(
