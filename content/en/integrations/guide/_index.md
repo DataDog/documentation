@@ -54,7 +54,7 @@ cascade:
 {{< header-list header="Azure guides:" >}}
     {{< nextlink href="integrations/guide/azure-integrations" tag=" Azure" >}}Azure Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-advanced-configuration" tag=" Azure" >}}Azure Advanced Configuration{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-native-integration" tag=" Azure" >}}Azure Native Integration{{< /nextlink >}}<<<<<<< HEAD
+    {{< nextlink href="integrations/guide/azure-native-integration" tag=" Azure" >}}Azure Native Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
 {{< /header-list >}}
