@@ -219,7 +219,7 @@ Ensure that the IP address in the response matches the one associated with your 
 
 
 [1]: https://cloud.google.com/vpc/docs/private-service-connect
-[2]: https://cloud.google.com/vpc/docs/private-service-connect#published-services-1
+[2]: https://cloud.google.com/vpc/docs/private-service-connect#published-services
 [3]: https://cloud.google.com/dns/docs/zones/zones-overview
 
 {{% /site-region %}}
