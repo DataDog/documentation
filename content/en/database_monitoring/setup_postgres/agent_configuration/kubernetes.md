@@ -91,13 +91,14 @@ Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, 
 
 Update your `datadog-values.yaml` file (used in the Cluster Agent installation instructions) with the following configuration:
 
-{{< highlight yaml "hl_lines=11-19" >}}
+{{< highlight yaml "hl_lines=12-20" >}}
 datadog:
   clusterChecks:
     enabled: true
 
 clusterChecksRunner:
   enabled: true
+  replicas: 2
 
 clusterAgent:
   enabled: true
@@ -134,7 +135,7 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 {{% tab "Annotations" %}}
 ### Annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
+You can declare the instance configuration as a Kubernetes service . To configure this check for an Agent running on Kubernetes, create a service with the Postgres integration configruaiton defined as annotations:
 
 ```yaml
 apiVersion: v1
@@ -145,24 +146,17 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+    ad.datadoghq.com/service.checks: |
       {
         "postgres": {
-          "init_config": <INIT_CONFIG>,
+          "init_config": {},
           "instances": [
             {
               "dbm": true,
-              "host": "<AWS_INSTANCE_ENDPOINT>",
-              "port": 5432,
-              "username": "datadog",
-              "password": "ENC[datadog_user_database_password]",
-              "aws": {
-                "instance_endpoint": "<AWS_INSTANCE_ENDPOINT>",
-                "region": "<REGION>"
-              },
-              "tags": [
-                "dbinstanceidentifier:<DB_INSTANCE_NAME>"
-              ]
+              "host": <INSTANCE_ENDPOINT>,
+              "port": <DATABASE_PORT>,
+              "username": <DATADOG_USER>,
+              "password": "ENC[datadog_user_database_password]"
             }
           ]
         }
@@ -185,8 +179,6 @@ If you're using Postgres 9.6, add the following to the instance configuration:
 ```
 
 The Cluster Agent automatically registers this configuration and begins running the Postgres check.
-{{< highlight yaml "hl_lines=3-16" >}}
-{{< /highlight >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -194,7 +186,7 @@ This would the configuration to start with and should be enough if you are self 
 
 ## Cloud Hosted Database
 
-Going through this section will ensure that we can correlate the DBM data collected by the agent and the cloud data 
+Going through this section will ensure that we can correlate the DBM data collected by the agent and your cloud data,. 
 
 {{% collapse-content title="AWS Managed Database" level="h4" id="aws-managed-database" %}}
 #### AWS Managed Database
@@ -202,97 +194,114 @@ Going through this section will ensure that we can correlate the DBM data collec
 If you are using AWS RDS or AWS Aurora you should add the addition `aws` key to the [base configuration](#base-configuration), this ensures that we can correlation the [AWS Integration](/integrations/amazon-web-services/) data to your Database instance.
 
 {{< tabs >}}
-{{% tab "Command Line" %}}
+{{% tab "Operator" %}}
+{{< highlight yaml "hl_lines=38-40" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DD_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-agent-secret
+        keyName: api-key
 
-{{< highlight bash "hl_lines=19-22" >}}
-export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_SITE="datadoghq.com"
+  features:
+    clusterChecks:
+      enabled: true
+      useClusterChecksRunners: true
 
-docker run \
-  -e "DD_API_KEY=${DD_API_KEY}" \
-  -e "DD_SITE=${DD_SITE}" \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
-  -l com.datadoghq.ad.checks='{"postgres": {
-    "init_config": {},
-    "instances": [{
-      "dbm": true,
-      "host": "<INSTANCE_ENDPOINT>",
-      "port": <DATABASE_PORT>,
-      "username": "<DATADOG_USER>",
-      "password": "ENC[datadog_user_datadog_password]",
-      "aws": {
-        "instance_endpoint": "<INSTANCE_ENDPOINT>",
-        "region": "<AWS_REGION>"
-      }
-    }]
-  }}' \
-  gcr.io/datadoghq/agent:latest
+  override:
+    nodeAgent:
+      image:
+        name: agent
+        tag: <AGENT_VERSION>
+
+    clusterAgent:
+      replicas: 2
+      extraConfd:
+        configDataMap:
+          postgres.yaml: |-
+            cluster_check: true
+            init_config:
+            instances:
+            - dbm: true
+              host: <INSTANCE_ENDPOINT>
+              port: <DATABASE_PORT>
+              username: <DATADOG_USER>
+              password: 'ENC[datadog_user_database_password]'
+              aws:
+                instance_endpoint: <INSTANCE_ENDPOINT>
+                region: <AWS_REGION>
 {{< /highlight >}}
 {{% /tab %}}
 
-{{% tab "Compose File" %}}
+{{% tab "Helm" %}}
+{{< highlight yaml "hl_lines=21-23" >}}
+datadog:
+  clusterChecks:
+    enabled: true
 
-{{< highlight yaml "hl_lines=23-26" >}}
-services:
-  datadog-agent:
-    environment:
-    - DD_API_KEY=${DD_API_KEY}
-    - DD_SITE=${DD_SITE}
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /var/lib/docker/containers:/var/lib/docker/containers:ro 
-    labels:
-      com.datadoghq.ad.checks: |
-        {
-          "postgres": {
-            "init_config": {},
-            "instances": [
-              {
-                "dbm": true,
-                "host": "<INSTANCE_ENDPOINT>",
-                "port": <DATABASE_PORT>,
-                "username": "<DATADOG_USER>",
-                "password": "ENC[datadog_user_datadog_password]",
-                "aws": {
-                  "instance_endpoint": "<INSTANCE_ENDPOINT>",
-                  "region": "<AWS_REGION>"
-                }
+clusterChecksRunner:
+  enabled: true
+  replicas: 2
+
+clusterAgent:
+  enabled: true
+  confd:
+    postgres.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+      - dbm: true
+        host: <INSTANCE_ENDPOINT>
+        port: <DATABASE_PORT>
+        username: <DATADOG_USER>
+        password: 'ENC[datadog_user_database_password]'
+        aws:
+          instance_endpoint: <INSTANCE_ENDPOINT>
+          region: <AWS_REGION>
+{{< /highlight >}}
+{{% /tab %}}
+
+{{% tab "Annotations" %}}
+{{< highlight yaml "hl_lines=20-23" >}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      {
+        "postgres": {
+          "init_config": {},
+          "instances": [
+            {
+              "dbm": true,
+              "host": <INSTANCE_ENDPOINT>,
+              "port": <DATABASE_PORT>,
+              "username": <DATADOG_USER>,
+              "password": "ENC[datadog_user_database_password]",
+              "aws": {
+                "instance_endpoint": <INSTANCE_ENDPOINT>,
+                "region": <AWS_REGION>
               }
-            ]
-          }
+            }
+          ]
         }
-    image: gcr.io/datadoghq/agent:latest
-{{< /highlight >}}
-{{% /tab %}}
-
-{{% tab "Dockerfile" %}}
-
-{{< highlight dockerfile "hl_lines=13-16" >}}
-FROM gcr.io/datadoghq/agent:latest
-
-LABEL "com.datadoghq.ad.checks"='{ \
-  "postgres": { \
-    "init_config": {}, \
-    "instances": [ \
-      { \
-        "dbm": true, \
-        "host": "<INSTANCE_ENDPOINT>", \
-        "port": <DATABASE_PORT>, \
-        "username": "<DATADOG_USER>", \
-        "password": "ENC[datadog_user_database_password]" \
-        "aws": { \
-          "instance_endpoint": "<INSTANCE_ENDPOINT>", \
-          "region": "<REGION>" \
-        } \
-      } \
-    ] \
-  } \
-}'
+      }
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+    name: postgres
 {{< /highlight >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -306,97 +315,117 @@ LABEL "com.datadoghq.ad.checks"='{ \
 If you are using Google Cloud SQL you should add the addition `gcp` key to the [base configuration](#base-configuration), this ensures that we can correlation the [GCP Integration](/integrations/google-cloudsql/) and [GCP AlloyDB](/integrations/google-cloud-alloydb/) data to your Database instance.
 
 {{< tabs >}}
-{{% tab "Command Line" %}}
+{{% tab "Operator" %}}
+{{< highlight yaml "hl_lines=38-40" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DD_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-agent-secret
+        keyName: api-key
 
-{{< highlight bash "hl_lines=19-22" >}}
-export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_SITE="datadoghq.com"
+  features:
+    clusterChecks:
+      enabled: true
+      useClusterChecksRunners: true
 
-docker run \
-  -e "DD_API_KEY=${DD_API_KEY}" \
-  -e "DD_SITE=${DD_SITE}" \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
-  -l com.datadoghq.ad.checks='{"postgres": {
-    "init_config": {},
-    "instances": [{
-      "dbm": true,
-      "host": "<INSTANCE_ENDPOINT>",
-      "port": <DATABASE_PORT>,
-      "username": "<DATADOG_USER>",
-      "password": "ENC[datadog_user_datadog_password]",
-      "gcp": {
-        "project_id": "<PROJECT_ID>",
-        "instance_id": "<INSTANCE_ID>"
-      }
-    }]
-  }}' \
-  gcr.io/datadoghq/agent:latest
+  override:
+    nodeAgent:
+      image:
+        name: agent
+        tag: <AGENT_VERSION>
+
+    clusterAgent:
+      replicas: 2
+      extraConfd:
+        configDataMap:
+          postgres.yaml: |-
+            cluster_check: true
+            init_config:
+            instances:
+            - dbm: true
+              host: <INSTANCE_ENDPOINT>
+              port: <DATABASE_PORT>
+              username: <DATADOG_USER>
+              password: 'ENC[datadog_user_database_password]'
+              gcp:
+                project_id: <PROJECT_ID>
+                instance_id: <INSTANCE_ID>
 {{< /highlight >}}
 {{% /tab %}}
 
-{{% tab "Compose File" %}}
-{{< highlight yaml "hl_lines=23-26" >}}
-services:
-  datadog-agent:
-    environment:
-    - DD_API_KEY=${DD_API_KEY}
-    - DD_SITE=${DD_SITE}
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /var/lib/docker/containers:/var/lib/docker/containers:ro 
-    labels:
-      com.datadoghq.ad.checks: |
-        {
-          "postgres": {
-            "init_config": {},
-            "instances": [
-              {
-                "dbm": true,
-                "host": "<INSTANCE_ENDPOINT>",
-                "port": <DATABASE_PORT>,
-                "username": "<DATADOG_USER>",
-                "password": "ENC[datadog_user_datadog_password]",
-                "gcp": {
-                  "project_id": "<PROJECT_ID>",
-                  "instance_id": "<INSTANCE_ID>"
-                }
+{{% tab "Helm" %}}
+{{< highlight yaml "hl_lines=21-23" >}}
+datadog:
+  clusterChecks:
+    enabled: true
+
+clusterChecksRunner:
+  enabled: true
+  replicas: 2
+
+clusterAgent:
+  enabled: true
+  confd:
+    postgres.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+      - dbm: true
+        host: <INSTANCE_ENDPOINT>
+        port: <DATABASE_PORT>
+        username: <DATADOG_USER>
+        password: 'ENC[datadog_user_database_password]'
+        gcp:
+          project_id: <PROJECT_ID>
+          instance_id: <INSTANCE_ID>
+{{< /highlight >}}
+{{% /tab %}}
+
+{{% tab "Annotations" %}}
+{{< highlight yaml "hl_lines=20-23" >}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      {
+        "postgres": {
+          "init_config": {},
+          "instances": [
+            {
+              "dbm": true,
+              "host": <INSTANCE_ENDPOINT>,
+              "port": <DATABASE_PORT>,
+              "username": <DATADOG_USER>,
+              "password": "ENC[datadog_user_database_password]",
+              "gcp": {
+                "project_id": <PROJECT_ID>,
+                "instance_id": <INSTANCE_ID>
               }
-            ]
-          }
+            }
+          ]
         }
-    image: gcr.io/datadoghq/agent:latest
+      }
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+    name: postgres
 {{< /highlight >}}
 {{% /tab %}}
 
-{{% tab "Dockerfile" %}}
-{{< highlight dockerfile "hl_lines=13-16" >}}
-FROM gcr.io/datadoghq/agent:latest
-
-LABEL "com.datadoghq.ad.checks"='{ \
-  "postgres": { \
-    "init_config": {}, \
-    "instances": [ \
-      { \
-        "dbm": true, \
-        "host": "<INSTANCE_ENDPOINT>", \
-        "port": <DATABASE_PORT>, \
-        "username": "<DATADOG_USER>", \
-        "password": "ENC[datadog_user_database_password]" \
-        "gcp": { \
-          "project_id": "<PROJECT_ID>", \
-          "instance_id": "<INSTANCE_ID>" \
-        } \
-      } \
-    ] \
-  } \
-}'
-{{< /highlight >}}
-{{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}} 
 
@@ -406,104 +435,108 @@ LABEL "com.datadoghq.ad.checks"='{ \
 If you are monitoring a Azure Managed Database you should add the addition `azure` key to the [base configuration](#base-configuration), this ensures that we can correlation the [Azure Integration](/integrations/azure/) data to your Database instance.
 
 {{< tabs >}}
-{{% tab "Command Line" %}}
-{{< highlight bash "hl_lines=19-23" >}}
-export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_SITE="datadoghq.com"
+{{% tab "Operator" %}}
+{{< highlight yaml "hl_lines=29-37" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DD_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-agent-secret
+        keyName: api-key
 
-docker run \
-  -e "DD_API_KEY=${DD_API_KEY}" \
-  -e "DD_SITE=${DD_SITE}" \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
-  -l com.datadoghq.ad.checks='{"postgres": {
-    "init_config": {},
-    "instances": [{
-      "dbm": true,
-      "host": "<INSTANCE_ENDPOINT>",
-      "port": <DATABASE_PORT>,
-      "username": "<DATADOG_USER>",
-      "password": "ENC[datadog_user_datadog_password]",
-      "ssl": "require",
-      "azure": {
-        "deployment_type": "<DEPLOYMENT_TYPE>",
-        "fully_qualified_domain_name": "<FULLY_QUALIFIED_DOMAIN_NAME>"
-      }
-    }]
-  }}' \
-  gcr.io/datadoghq/agent:latest
+  features:
+    clusterChecks:
+      enabled: true
+      useClusterChecksRunners: true
+
+  override:
+    nodeAgent:
+      image:
+        name: agent
+        tag: <AGENT_VERSION>
+
+    clusterAgent:
+      replicas: 2
+      extraConfd:
+        configDataMap:
+          postgres.yaml: |-
+            cluster_check: true
+            init_config:
+            instances:
+            - dbm: true
+              host: <INSTANCE_ENDPOINT>
+              port: <DATABASE_PORT>
+              username: <DATADOG_USER>
+              password: 'ENC[datadog_user_database_password]'
 {{< /highlight >}}
 {{% /tab %}}
 
-{{% tab "Compose File" %}}
-{{< highlight yaml "hl_lines=23-27" >}}
-services:
-  datadog-agent:
-    environment:
-    - DD_API_KEY=${DD_API_KEY}
-    - DD_SITE=${DD_SITE}
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /var/lib/docker/containers:/var/lib/docker/containers:ro 
-    labels:
-      com.datadoghq.ad.checks: |
-        {
-          "postgres": {
-            "init_config": {},
-            "instances": [
-              {
-                "dbm": true,
-                "host": "<INSTANCE_ENDPOINT>",
-                "port": <DATABASE_PORT>,
-                "username": "<DATADOG_USER>",
-                "password": "ENC[datadog_user_datadog_password]",
-                "ssl": "require",
-                "azure": {
-                  "deployment_type": "<DEPLOYMENT_TYPE>",
-                  "fully_qualified_domain_name": "<FULLY_QUALIFIED_DOMAIN_NAME>"
-                }
-              }
-            ]
-          }
+{{% tab "Helm" %}}
+{{< highlight yaml "hl_lines=12-20" >}}
+datadog:
+  clusterChecks:
+    enabled: true
+
+clusterChecksRunner:
+  enabled: true
+  replicas: 2
+
+clusterAgent:
+  enabled: true
+  confd:
+    postgres.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+      - dbm: true
+        host: <INSTANCE_ENDPOINT>
+        port: <DATABASE_PORT>
+        username: <DATADOG_USER>
+        password: 'ENC[datadog_user_database_password]'
+{{< /highlight >}}
+{{% /tab %}}
+
+{{% tab "Annotations" %}}
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      {
+        "postgres": {
+          "init_config": {},
+          "instances": [
+            {
+              "dbm": true,
+              "host": <INSTANCE_ENDPOINT>,
+              "port": <DATABASE_PORT>,
+              "username": <DATADOG_USER>,
+              "password": "ENC[datadog_user_database_password]"
+            }
+          ]
         }
-    image: gcr.io/datadoghq/agent:latest
-{{< /highlight >}}
-{{% /tab %}}
-
-{{% tab "Dockerfile" %}}
-{{< highlight dockerfile "hl_lines=13-17" >}}
-FROM gcr.io/datadoghq/agent:latest
-
-LABEL "com.datadoghq.ad.checks"='{ \
-  "postgres": { \
-    "init_config": {}, \
-    "instances": [ \
-      { \
-        "dbm": true, \
-        "host": "<INSTANCE_ENDPOINT>", \
-        "port": <DATABASE_PORT>, \
-        "username": "<DATADOG_USER>", \
-        "password": "ENC[datadog_user_database_password]" \
-        "ssl": "require", \
-        "azure": { \
-          "deployment_type": "<DEPLOYMENT_TYPE>", \
-          "fully_qualified_domain_name": "<FULLY_QUALIFIED_DOMAIN_NAME>" \
-        } \
-      } \
-    ] \
-  } \
-}'
-{{< /highlight >}}
+      }
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+    name: postgres
+```
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}} 
-
-## Example Agent Configurations
-{{% dbm-postgres-agent-config-examples %}}
 
 ## Troubleshooting
 
