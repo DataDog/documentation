@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "type": "team_connection",
+      "attributes": {
+        "source": "github",
+        "managed_by": "datadog"
+      },
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
+            "type": "team"
+          }
+        },
+        "connected_team": {
+          "data": {
+            "id": "@MyGitHubAccount/my-team-name",
+            "type": "github_team"
+          }
+        }
+      }
+    }
+  ]
+}
