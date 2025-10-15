@@ -26,7 +26,7 @@ aliases:
 
 ### Installation
 
-.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. 
+.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services.
 
 {{< tabs >}}
 {{% tab ".NET Tracer >= v3.22.0 (Recommended)" %}}
@@ -54,7 +54,7 @@ If you have any questions regarding default-enabled behavior, reach out to your 
 {{% /tab %}}
 {{% tab ".NET Tracer < v3.22.0 (Legacy)" %}}
 
-To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) your streaming applications.
+To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on **application services that are sending or consuming messages**.
 
 For example:
 ```yaml
