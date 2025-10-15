@@ -91,7 +91,7 @@ Instala o actualiza el comando `dd-trace` de una de las siguientes maneras:
 
 ## Instrumentación de tests
 
-<div class="alert alert-warning"><strong>Nota</strong>: Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
 
 Para instrumentar tu conjunto de tests, antepone a tu comando de test `dd-trace ci run`, proporcionando el nombre de servicio o biblioteca en proceso de test como el parámetro `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env`. Por ejemplo:
 
@@ -278,7 +278,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 ## Instrumentación personalizada
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Tu configuración de instrumentación personalizada depende de la versión <code>dd-trace</code>. Para utilizar la instrumentación personalizada, debes mantener sincronizadas las versiones del paquete para <code>dd-trace</code> y <code>Datadog.Trace</code> de NuGet.
 </div>
 
@@ -292,7 +292,7 @@ Para más información sobre cómo añadir tramos y etiquetas para la instrument
 
 ## API para tests manuales
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Para utilizar la API de tests manuales, debes añadir el paquete de NuGet <code>Datadog.Trace</code> en el proyecto .NET de destino.
 </div>
 

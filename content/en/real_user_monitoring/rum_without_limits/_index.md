@@ -45,7 +45,7 @@ To get started with RUM without Limits for new applications, at the [instrumenta
 
 4. Enable `traceContextInjection: sampled` to allow backend tracing libraries to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
 
-   <div class="alert alert-warning">Steps 1, 3, and 4 may impact your APM traces ingestion. To ensure that ingested span volumes remain stable, configure the <code>traceSampleRate</code> to the previously configured <code>sessionSampleRate</code>. For instance, if you used to have <code>sessionSampleRate</code> set to 10% and you bump it to 100% for RUM without Limits, decrease the <code>traceSampleRate</code> from 100% to 10% accordingly to ingest the same amount of traces.</div>
+   <div class="alert alert-danger">Steps 1, 3, and 4 may impact your APM traces ingestion. To ensure that ingested span volumes remain stable, configure the <code>traceSampleRate</code> to the previously configured <code>sessionSampleRate</code>. For instance, if you used to have <code>sessionSampleRate</code> set to 10% and you bump it to 100% for RUM without Limits, decrease the <code>traceSampleRate</code> from 100% to 10% accordingly to ingest the same amount of traces.</div>
 
 5. Deploy your application to apply the configuration.
 

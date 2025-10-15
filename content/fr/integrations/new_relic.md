@@ -60,7 +60,7 @@ Associez New Relic pour :
 3. Choisissez si vous souhaitez recueillir vos métriques par host ou sur l'ensemble de votre app
     **Remarque** : si vous activez ces options, cela importera les hosts New Relic dans Datadog.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Vous devrez peut-être attendre 5 à 10 minutes avant que les métriques New Relic custom apparaissent dans Datadog.
 <br>
 Les 5 000 premières métriques custom sont automatiquement proposées lors de la saisie.

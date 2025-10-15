@@ -33,7 +33,7 @@ version: '1.0'
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.</div>
+<div class="alert alert-danger">L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.</div>
 {{< /site-region >}}
 
 ## Présentation
@@ -62,7 +62,7 @@ L'intégration PagerDuty n'inclut aucune métrique.
 
 Vos événements PagerDuty résolus/déclenchés s'affichent dans l'[Events Explorer][2].
 
-<div class="alert alert-warning">Les Webhooks V3 PagerDuty envoient uniquement les événements à l'application Incidents de Datadog.</div>
+<div class="alert alert-danger">Les Webhooks V3 PagerDuty envoient uniquement les événements à l'application Incidents de Datadog.</div>
 
 ### Checks de service
 

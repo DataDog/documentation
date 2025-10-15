@@ -94,7 +94,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
 </div>
 
@@ -120,7 +120,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 4. Under **People**, allow notifications from the Datadog On-Call contact. If you enabled critical alerts for Datadog push applications, then the Datadog mobile app also appears under **Apps**.
 
-5. To bypass silent mode, navigate to the Datadog On-Call contact >> tap **Ringstone** >> activate **Emergency Bypass**.
+5. To bypass silent mode, navigate to the Datadog On-Call contact >> tap **Ringtone** >> activate **Emergency Bypass**.
 {{% /tab %}}
 
 {{% tab "Android" %}}

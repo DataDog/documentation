@@ -3,11 +3,11 @@ title: Datadog Forwarder を使用した Java サーバーレスアプリケー�
 ---
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/java">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <code>datadog-lambda-java</code> の一部の古いバージョンでは、推移的依存関係として <code>log4j <=2.14.0</code> をインポートします。<a href="#upgrading">アップグレードの手順</a>は以下の通りです。
 </div>
 

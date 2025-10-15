@@ -58,7 +58,7 @@ Para generar métricas a partir de tramos, en la página [Instalación y configu
 
 1. **Nomenclatura de tu métrica:** Los nombres de las métricas deben seguir la [convención de nomenclatura de métricas][11]. Los nombres de las métricas que empiecen con `trace.*` no están permitidos y no se guardarán.
 
-<div class="alert alert-warning"> Las métricas en función de tramos se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión para no afectar tu facturación.</div>
+<div class="alert alert-danger"> Las métricas en función de tramos se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión para no afectar tu facturación.</div>
 
 ## Actualizar métricas en función de tramos existentes
 

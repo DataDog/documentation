@@ -225,7 +225,7 @@ To visualize the raw bytes/packets (sampled) sent by your devices, you can query
 
 NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention.
 
-<div class="alert alert-danger">To retain NetFlow data for longer periods of time, contact your account representative.</div>
+<div class="alert alert-warning">To retain NetFlow data for longer periods of time, contact your account representative.</div>
 
 ## Troubleshooting
 

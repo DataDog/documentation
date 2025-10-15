@@ -69,7 +69,7 @@ Pour ajouter une clé d'application Datadog, accédez à [**Organization Setting
 {{< img src="account_management/app-key.png" alt="Accédez à la page des clés dʼapplication de votre organisation dans Datadog" style="width:80%;" >}}
 
 {{< site-region region="ap2,gov" >}}
-<div class="alert alert-warning">Assurez-vous de stocker votre clé d'application en toute sécurité dès sa création, car le secret de la clé ne peut pas être récupéré ultérieurement.</div>
+<div class="alert alert-danger">Assurez-vous de stocker votre clé d'application en toute sécurité dès sa création, car le secret de la clé ne peut pas être récupéré ultérieurement.</div>
 {{< /site-region >}}
 
 **Remarques :**

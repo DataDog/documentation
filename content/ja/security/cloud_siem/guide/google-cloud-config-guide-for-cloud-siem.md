@@ -31,7 +31,7 @@ title: Cloud SIEM のための Google Cloud 構成ガイド
 1. [Dataflow ジョブを作成して実行](#create-and-run-the-dataflow-job)します。
 1. [Cloud SIEM でセキュリティシグナルのトリアージを行う](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push サブスクリプションを使用した Google Cloud のログ収集</a>は、以下の理由で非推奨となっています。
 

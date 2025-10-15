@@ -236,7 +236,7 @@ service:
       processors: [batch, cumulativetodelta]
       exporters: [otlphttp]
 ```
-<div class="alert alert-info">Note the <code>cumulativetodelta</code> processor in the pipeline, which converts cumulative metrics to delta metrics. Delta metrics are required for the OTLP metrics intake endpoint. For more information, see <a href="/opentelemetry/guide/otlp_delta_temporality/">Configure delta temporality in OpenTelemetry</a>.</div>
+<div class="alert alert-info">The <code>cumulativetodelta</code> processor in the pipeline converts cumulative metrics to delta metrics. Delta metrics are required for the OTLP metrics intake endpoint. For more information, see <a href="/opentelemetry/guide/otlp_delta_temporality/">Configure delta temporality in OpenTelemetry</a>.</div>
 
 ## Troubleshooting
 

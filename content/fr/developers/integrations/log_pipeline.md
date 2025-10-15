@@ -50,7 +50,7 @@ Les ressources d'intégration de logs comprennent :
 2. [Des facettes][12] - Attributs utilisés pour filtrer et rechercher les logs.
 Les intégrations créées par des partenaires technologiques doivent respecter la [convention de nommage standard][17] de Datadog afin de garantir la compatibilité avec les dashboards intégrés.
 
-<div class="alert alert-warning">Pour être examinées par l'équipe chargée des intégrations chez Datadog, les intégrations de logs doivent inclure des ressources et comporter des processeurs de pipeline ou des facettes.</div>
+<div class="alert alert-danger">Pour être examinées par l'équipe chargée des intégrations chez Datadog, les intégrations de logs doivent inclure des ressources et comporter des processeurs de pipeline ou des facettes.</div>
 
 ### Présentation des pipelines
 
