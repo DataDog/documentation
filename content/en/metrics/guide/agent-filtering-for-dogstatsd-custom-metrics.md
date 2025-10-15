@@ -35,8 +35,8 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 ## Prerequisites
 
 - Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended).
-- Ensure that your RBAC permissions include [`org_management`][2] and that [Remote Configuration][3] is enabled for your organization.
-- Ensure that your RBAC permissions include [`api_keys_write`][4] and that the [Remote Configuration capability is enabled on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, an Agent restart is required for Remote Configuration enablement to take effect.
+- With [`org_management`][2] permissions, enable [Remote Configuration][3] for your organization.
+- With [`api_keys_write`][4] permissions, enable the [Remote Configuration capability on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, restart your Agents for the change to take effect.
 
 {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 
