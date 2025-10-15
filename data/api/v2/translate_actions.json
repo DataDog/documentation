@@ -119,17 +119,45 @@
     "description": "Activate Agentless scan options for an Azure subscription.",
     "summary": "Create azure scan options",
     "request_description": "",
-    "request_schema_description": "The definition of `AzureScanOptions` object."
+    "request_schema_description": "Response object containing Azure scan options for a single subscription."
   },
   "DeleteAzureScanOptions": {
     "description": "Delete Agentless scan options for an Azure subscription.",
     "summary": "Delete azure scan options"
   },
+  "GetAzureScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated subscription.",
+    "summary": "Get Azure scan options"
+  },
   "UpdateAzureScanOptions": {
     "description": "Update the Agentless scan options for an activated subscription.",
     "summary": "Update azure scan options",
     "request_description": "",
-    "request_schema_description": "The definition of `AzureScanOptionsInputUpdate` object."
+    "request_schema_description": "Request object for updating Azure scan options."
+  },
+  "ListGcpScanOptions": {
+    "description": "Fetches the scan options configured for all GCP projects.",
+    "summary": "List GCP Scan Options"
+  },
+  "CreateGcpScanOptions": {
+    "description": "Activate Agentless scan options for a GCP project.",
+    "summary": "Post GCP Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "Response object containing GCP scan options for a single project."
+  },
+  "DeleteGcpScanOptions": {
+    "description": "Delete Agentless scan options for a GCP project.",
+    "summary": "Delete GCP Scan Options"
+  },
+  "GetGcpScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated GCP project.",
+    "summary": "Get GCP scan options"
+  },
+  "UpdateGcpScanOptions": {
+    "description": "Update the Agentless scan options for an activated GCP project.",
+    "summary": "Patch GCP Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "Request object for updating GCP scan options."
   },
   "ListAwsOnDemandTasks": {
     "description": "Fetches the most recent 1000 AWS on demand tasks.",
