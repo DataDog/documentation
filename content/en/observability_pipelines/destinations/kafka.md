@@ -11,17 +11,17 @@ Use Observability Pipelines' Kafka destination to send logs to Kafka topics.
 
 Common scenarios when you might use this destination:
 - To route logs to the following destinations:
-    - Clickhouse: An open-source column-oriented database management system used for analyzing large volumes of logs.
-    - Snowflake: A data warehouse used for storage and query.
+    - [Clickhouse][1]: An open-source column-oriented database management system used for analyzing large volumes of logs.
+    - [Snowflake][2]: A data warehouse used for storage and query.
         - Snowflake's API integration utilizes Kafka as a method to ingest logs into their platform.
-    - Databricks: A data lakehouse for analytics and storage.
-    - Azure Event Hub: An ingest and processing service in the Microsoft and Azure ecosystem.
+    - [Databricks][3]: A data lakehouse for analytics and storage.
+    - [Azure Event Hub][4]: An ingest and processing service in the Microsoft and Azure ecosystem.
 - To route data to Kafka and use the Kafka Connect ecosystem.
 - To process and normalize your data with Observability Pipelines before routing to Apache Spark with Kafka to analyze data and run Machine Learning workloads.
 
 ## Setup
 
-Set up the Kafka destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Kafka destination and its environment variables when you [set up a pipeline][5]. The information below is configured in the pipelines UI.
 
 ### Set up the destination
 
@@ -32,7 +32,7 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 
 ##### Enable TLS
 
-Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
@@ -74,7 +74,7 @@ Click **Advanced** if you want to set any of the following fields:
 1. Click **Add Option** to add additional [librdkafka options](#librdkafka-options).
     1. Select an option in the dropdown menu.
         1. Enter a value for that option.
-        1. Check your values against the [librdkafka documentation][3] to make sure they have the correct type and are within the set range.
+        1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
         1. Click **Add Option** to add another librdkafka option.
 
 ### Set environment variables
@@ -106,11 +106,11 @@ These are the available librdkafka options:
 - enable.idempotence
 - acks
 
-See the [librdkafka documentation][3] for more information and to ensure your values have the correct type and are within range.
+See the [librdkafka documentation][7] for more information and to ensure your values have the correct type and are within range.
 
 ## How the destination works
 
-See the [Observability Pipelines Metrics][4] for a full list of available health metrics.
+See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
 
 ### Worker health metrics
 
@@ -124,14 +124,18 @@ See the [Observability Pipelines Metrics][4] for a full list of available health
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | 10,000         | 1,000,000       | 1                   |
 
-[1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/advanced_configurations/
-[3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
-[4]: /observability_pipelines/monitoring/metrics/
-[5]: /observability_pipelines/destinations/#event-batching
+[1]: https://clickhouse.com/docs/engines/table-engines/integrations/kafka
+[2]: https://docs.snowflake.com/en/user-guide/kafka-connector
+[3]: https://docs.databricks.com/aws/en/connect/streaming/kafka
+[4]: https://learn.microsoft.com/en-us/azure/event-hubs/azure-event-hubs-apache-kafka-overview
+[5]: https://app.datadoghq.com/observability-pipelines
+[6]: /observability_pipelines/advanced_configurations/
+[7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
+[8]: /observability_pipelines/monitoring/metrics/
+[9]: /observability_pipelines/destinations/#event-batching
