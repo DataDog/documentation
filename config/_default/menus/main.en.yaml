@@ -1619,6 +1619,11 @@ menu:
       parent: dashboards
       weight: 9
       identifier: dashboards_overlays
+    # - name: Annotations
+    #   url: dashboards/annotations/
+    #   parent: dashboards
+    #   weight: 901
+    #   identifier: dashboards_annotations
     - name: Sharing
       identifier: dashboards_sharing
       url: dashboards/sharing/
