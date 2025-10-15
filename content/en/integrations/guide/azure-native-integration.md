@@ -17,6 +17,8 @@ further_reading:
     text: "Enable monitoring for enterprise-scale Azure environments in minutes with Datadog"
 ---
 
+{{< site-region region="us3" >}}
+
 This guide is for setting up and managing the Datadog Monitor resource in Azure, which connects your Datadog organization and your Azure environment. Choose this integration setup method if:
 
 - You're using the [US3 Site][1]
@@ -65,22 +67,22 @@ There are two options when you create a Datadog resource in the Azure portal:
 
 **Note**: Trials are not available through the **Create a new Datadog organization** option in Azure. To get started with a free trial, first [create a trial Datadog org on the US3 site][1]. Then use the linking flow to add any subscriptions you want to monitor.
 
-Once you create a Datadog resource, data collection begins for the associated subscription. See details for using this resource to configure, manage, and deploy Datadog in the [Managing the Azure Native Integration][2] guide.
+After creating a Datadog resource, data collection begins for the associated subscription.
 
 ### Create a Datadog resource
 
-To start monitoring an Azure subscription, navigate to the [Datadog Service page in Azure][3] and select the option to create a new Datadog resource:
+To start monitoring an Azure subscription, navigate to the [Datadog Service page in Azure][2] and select the option to create a new Datadog resource:
 {{< img src="integrations/azure/azure-us3-dd-service.png" alt="Azure US3 Datadog Service" responsive="true" style="width:90%;">}}
 
 Choose **Link Azure subscription to an existing Datadog organization** or **Create a new Datadog organization**. Linking is the more common action. Use this to configure monitoring for an Azure subscription that hasn't been linked yet. Only choose the **Create** flow if you are not yet a Datadog customer and want to get started with a new, paid plan.
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource1.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
 
-**Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][4] if applicable.
+**Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][3] if applicable.
 
 ### SSO configuration
 
-_(Optional)_: You can configure [single sign-on (SSO)][5] during the process of creating a new Datadog organization in Azure. You can also configure SSO later. To configure SSO during the initial creation, first create a Datadog enterprise gallery app.
+_(Optional)_: You can configure single sign-on (SSO) during the process of creating a new Datadog organization in Azure. You can also configure SSO later. To configure SSO during the initial creation, first create a Datadog enterprise gallery app.
 
 ### Configuration {#configuration-us3}
 
@@ -97,7 +99,7 @@ Provide the following values:
 | Property             | Description                                                                                                                                                                                                                  |
 |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Subscription         | The Azure subscription you want to monitor with Datadog. The Datadog resource exists in this subscription. You must have owner access.                                                                                       |
-| Resource group       | Create a new resource group or use an existing one. A [resource group][5] is a container that holds related resources for an Azure solution.                                                                                 |
+| Resource group       | Create a new resource group or use an existing one. A [resource group][2] is a container that holds related resources for an Azure solution.                                                                                 |
 | Resource name        | Specify a name for the Datadog resource. The recommended naming convention is: `subscription_name-datadog_org_name`.                                                                                                         |
 | Location             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
 | Datadog organization | After the authentication step is completed, the Datadog organization name is set to the name of the Datadog organization being linked. The Datadog site is set to US3.                                                                                                                                |
@@ -111,8 +113,7 @@ By default, Azure links your current Datadog organization to your Datadog resour
 When the OAuth flow is complete, verify the Datadog organization name is correct.
 
 [1]: /getting_started/site/
-[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
-[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+[2]: https://docs.microsoft.com/azure/azure-resource-manager/management/overview#resource-groups
 {{% /tab %}}
 {{% tab "Create" %}}
 
@@ -126,21 +127,24 @@ Provide the following values:
 | Property             | Description                                                                                                                                                                                                                  |
 |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Subscription         | The Azure subscription you want to monitor with Datadog. The Datadog resource exists in this subscription. You must have owner access.                                                                                       |
-| Resource group       | Create a new resource group or use an existing one. A [resource group][2] is a container that holds related resources for an Azure solution.                                                                                 |
+| Resource group       | Create a resource group or use an existing one. A [resource group][2] is a container that holds related resources for an Azure solution.                                                                                 |
 | Resource name        | The name for the Datadog resource. This name is assigned to the new Datadog organization.                                                                                                                                    |
 | Location             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
 | Datadog organization | The Datadog organization name is set to the resource name, and the Datadog site is set to US3.                                                                                                                                |
 | Pricing plan         | A list of the available Datadog pricing plans. If you have a private offer, it iss available in this dropdown.                                                                                                                 |
 | Billing term         | Monthly.                                                                                                                                                                                                                      |
-
 [1]: /getting_started/site/
-[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+[2]: https://docs.microsoft.com/azure/azure-resource-manager/management/overview#resource-groups
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /getting_started/site/
+[2]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
+[3]: https://learn.microsoft.com/partner-center/marketplace-offers/azure-consumption-commitment-enrollment
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
-1. Ensure that you have configured the [Terraform Azure provider][2].
+1. Ensure that you have configured the [Terraform Azure provider][1].
 
 2. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment with Terraform:
 
@@ -191,6 +195,8 @@ resource "azurerm_role_assignment" "example" {
 {{< /code-block >}}
 
 3. Run `terraform apply`.
+
+[1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 {{% /collapse-content %}} 
 
 ### Metrics and logs
@@ -214,19 +220,17 @@ Optionally, limit metric collection for Azure VMs and App Service Plans using Az
 
 ## Log collection
 
-{{< site-region region="us3" >}}
-
 You can manage the collection of three kinds of Azure logs. Find instructions and additional details in the sections below:
 
    - [Activity logs](#activity-logs)
    - [Azure resource logs](#azure-resource-logs)
    - [Microsoft Entra ID logs](#microsoft-entra-id-logs)
 
-**Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][5], see the [Send Azure Logs to Datadog][6] guide for configuration options.
+**Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][1], see the [Azure Automated Log Forwarding][12] guide for configuration options.
 
 ## Activity logs 
 
-Provide insight into the operations on your resources at the [control plane][1]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
+Provide insight into the operations on your resources at the [control plane][10]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
 
 To send activity logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the activity logs are sent to Datadog.
 
@@ -234,9 +238,9 @@ To send activity logs to Datadog, select **Send subscription activity logs**. If
 
 ## Azure resource logs 
 
-Provide insight into operations taken on Azure resources at the [data plane][1]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
+Provide insight into operations taken on Azure resources at the [data plane][10]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
 
-To send Azure resource logs to Datadog, select **Send Azure resource logs for all defined resources**. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][2]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
+To send Azure resource logs to Datadog, select **Send Azure resource logs for all defined resources**. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][11]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
 
 You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
 
@@ -261,20 +265,6 @@ Microsoft Entra ID logs contain the history of sign-in activity and an audit tra
 5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
 All Microsoft Entra ID logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
-
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
-[2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
-[4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
-[5]: /getting_started/site/
-[6]: /logs/guide/azure-logging-guide
-[7]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
-{{< /site-region >}}
-
-{{< site-region region="us,eu,us5,gov,ap1,ap2" >}}
-
-<div class="alert alert-info">The Datadog resource in Azure is only available for organizations on Datadog's US3 site. If you're using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
-
-{{< /site-region >}}
 
 ## Use the Datadog resource
 
@@ -329,7 +319,7 @@ For Datadog organizations billed through the Azure Marketplace:
 - If the deleted Datadog resource is the only Datadog resource mapped to its associated Datadog organization, logs and metrics are no longer sent to Datadog and all billing stops for Datadog through Azure. Datadog support will reach out to confirm next steps with your account.
 - If there are additional Datadog resources mapped to the associated Datadog organization, deleting a Datadog resource only stops sending logs and metrics for its associated Azure subscription.
 
-If your Datadog organization is **not** billed through the Azure Marketplace, deleting a Datadog resource just removes the integration for that Azure subscription.
+If your Datadog organization is **not** billed through the Azure Marketplace, deleting a Datadog resource only removes the integration for that Azure subscription.
 
 ### Change plan
 
@@ -419,18 +409,20 @@ For each app service, the following information is displayed:
 
 #### Install
 
-To install the [Datadog extension][6], select the appropriate app, then click **Install Extension**. The portal asks for confirmation to install the extension. Select **OK** to begin installation. This restarts your app and adds the following settings:
+To install the [Datadog extension](#agent-extensions), select the appropriate app, then click **Install Extension**. The portal asks for confirmation to install the extension. Select **OK** to begin installation. This restarts your app and adds the following settings:
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
 
 Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-**Note**: Ensure you are adding the extension to apps with [supported runtimes][7]. The Datadog resource does not limit or filter the list of apps.
+**Note**: Ensure you are adding the extension to apps with [supported runtimes][1]. The Datadog resource does not limit or filter the list of apps.
 
 #### Uninstall
 
 To uninstall the Datadog extension, select the appropriate app, then click **Uninstall Extension**.
+
+[1]: /serverless/azure_app_services/#requirements
 {{% /collapse-content %}} 
 
 ## Next steps
@@ -438,16 +430,25 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 - Check out the [Azure Overview dashboard][5] to start getting insights into your Azure environment
 - Check out [Azure monitor templates][6] to start getting alerts for the data that's important to your organization
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /getting_started/site/
-[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 [3]: https://docs.microsoft.com/cli/azure/datadog?view=azure-cli-latest
-[4]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [5]: https://app.datadoghq.com/dash/integration/71/azure-overview
 [6]: https://app.datadoghq.com/monitors/templates?q=azure
 [7]: /integrations/guide/storage-monitoring-setup/#setup-for-azure-blob-storage
 [8]: /cloud_cost_management/setup/azure/
 [9]: /logs/guide/azure-automated-log-forwarding/#log-archiving
+[10]: https://docs.microsoft.com/azure/azure-resource-manager/management/control-plane-and-data-plane
+[11]: https://docs.microsoft.com/azure/azure-monitor/essentials/resource-logs-categories
+[12]: /logs/guide/azure-automated-log-forwarding
+{{< /site-region >}}
+
+{{< site-region region="us,eu,us5,gov,ap1,ap2" >}}
+
+<div class="alert alert-info">The Datadog resource in Azure is only available for organizations on Datadog's US3 site. If you're using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Azure Automated Log Forwarding</a> guide for configuration options. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
+
+{{< /site-region >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
