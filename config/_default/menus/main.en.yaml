@@ -2061,7 +2061,7 @@ menu:
       parent: software_catalog_set_up
       identifier: software_catalog_import_entities
       weight: 1013
-    - name: Ownership
+    - name: Define Ownership
       url: internal_developer_portal/software_catalog/set_up/ownership
       parent: software_catalog_set_up
       identifier: software_catalog_ownership
