@@ -148,7 +148,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
 - When you add rules to a scanning group with sampling enabled, you will not be able to select the **redact**, **partially redact**, or **hash** actions. For complete obfuscation, disable sampling in your scanning group settings.
 
-See [Investigate Sensitive Data Findings][7] for details on how to use the [Findings][8] page to triage your sensitive data findings.
+See [Investigate Sensitive Data Findings][7] for details on triaging sensitive data using the [Findings][8] page.
 
 #### Excluded namespaces
 
