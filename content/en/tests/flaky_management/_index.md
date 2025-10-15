@@ -118,11 +118,11 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 
 ## Receive notifications
 
-Set up notifications to avoid missing changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]) and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Notifications are configured per repository from the  [**Flaky Test Policies**][12] page in Software Delivery settings.
-
-{{< img src="tests/flaky_management_notifications_settings.png" alt="Notifications settings UI" style="width:100%;" >}}
+Set up notifications to track changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notification for each repository from the  [**Flaky Test Policies**][12] page in Software Delivery settings.
 
 Notifications are not sent immediately; they are batched every few minutes to reduce noise.
+
+{{< img src="tests/flaky_management_notifications_settings.png" alt="Notifications settings UI" style="width:100%;" >}}
 
 ## Compatibility
 
