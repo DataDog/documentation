@@ -162,7 +162,7 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 This check identifies instances where the LLM makes a claim that disagrees with the provided input context.
 
-{{< img src="llm_observability/evaluations/hallucination_1.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/hallucination_2.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -223,7 +223,7 @@ Hallucination detection is only available for OpenAI.
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_2.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -302,7 +302,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][14]
 
 This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_2.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
