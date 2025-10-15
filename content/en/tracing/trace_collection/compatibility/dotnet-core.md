@@ -43,44 +43,31 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
-## Supported processor architectures
-
-The .NET Tracer supports automatic instrumentation on the following architectures:
-
-| Processor architecture                    | Support level         | Package version                        |
-| ------------------------------------------|-----------------------|----------------------------------------|
-| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
-| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | latest                                 |
-| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
-| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
-| Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
-| Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     | .NET 6+ only, added in version 3.2.0   |
-
-Note that instrumenting `x86` applications is supported on Windows `x64`.
-
 ## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation of .NET and .NET Core applications on Windows and Linux operating systems. It supports macOS for CI Test Optimization only.
+The .NET Tracer supports automatic instrumentation of .NET and .NET Core applications on Windows and Linux operating systems. It supports macOS for CI Test Optimization only. Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
 
 ### Windows
 
-| Operating System             | Version     | Support level         | Package version                        |
-| -----------------------------|-------------|-----------------------|----------------------------------------|
-| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
-| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | 2012+       | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Operating System             | Version      | Support level       | Package version       |
+| -----------------------------|--------------|---------------------|-----------------------|
+| Windows Server               | 2012+        | [GA](#support-ga)   | latest                |
+| Windows Client               | 8.1+         | [GA](#support-ga)   | latest                |
+| Windows Server (x86)         | All versions | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
+| Windows Server               | < 2012       | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
 
-Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
+**Note:** "Windows Server" includes all editions and installation options:
+- **Editions:** Datacenter, Standard, Essentials, etc.
+- **Installation options:** Server Core, Server with Desktop Experience, Nano Server (container image only)
+
+Instrumenting 32-bit (x86) applications is supported on 64-bit (x64) Windows. Windows on ARM64 is not supported.
 
 ### Linux
 
 The .NET Tracer supports Linux distributions as best-effort, based on minimum libc version compatibility:
 
 - x64: [glibc][20] 2.17 (from CentOS 7)
-- Arm64: [glibc][20] 2.23 (from Debian 10)
+- arm64: [glibc][20] 2.23 (from Debian 10)
 - Alpine x64: [musl][21] 1.2.2 (from Alpine 3.14)
 - Alpine arm64: [musl][21] 1.2.4 (from Alpine 3.18)
 

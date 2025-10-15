@@ -44,33 +44,24 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 <div class="alert alert-info">When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
 </div>
 
-## Supported processor architectures
-
-The .NET Tracer supports automatic instrumentation on the following architectures:
-
-| Processor architectures | Support level       | Package version |
-| ----------------------- | ------------------- | --------------- |
-| Windows x64 (`win-x64`) | [GA](#support-ga)   | latest          |
-| Windows x86 (`win-x86`) | [GA](#support-ga)   | latest          |
-
-Note that instrumenting `x86` applications is supported on Windows `x64`.
-
 ## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation of .NET Framework applications on Windows operating systems.
+The .NET Tracer supports automatic instrumentation of .NET Framework applications on Windows operating systems. Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][12]
 
 ### Windows
 
-| Operating System             | Version     | Support level         | Package version                        |
-| -----------------------------|-------------|-----------------------|----------------------------------------|
-| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
-| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | 2012+       | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Operating System             | Version      | Support level       | Package version       |
+| -----------------------------|--------------|---------------------|-----------------------|
+| Windows Server               | 2012+        | [GA](#support-ga)   | latest                |
+| Windows Client               | 8.1+         | [GA](#support-ga)   | latest                |
+| Windows Server (x86)         | All versions | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
+| Windows Server               | < 2012       | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
 
-Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
+**Note:** "Windows Server" includes all editions and installation options:
+- **Editions:** Datacenter, Standard, Essentials, etc.
+- **Installation options:** Server Core, Server with Desktop Experience, Nano Server (container image only)
+
+Instrumenting 32-bit (x86) applications is supported on 64-bit (x64) Windows. Windows on ARM64 is not supported.
 
 ## Integrations
 
@@ -159,3 +150,4 @@ Version updates imply the following changes to runtime support:
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
 [11]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
+[12]: https://github.com/dotnet/core/tree/main/release-notes
