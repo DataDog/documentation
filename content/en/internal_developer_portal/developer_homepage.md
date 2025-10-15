@@ -18,7 +18,7 @@ With this view, you can:
 - Track tasks assigned to you across GitHub and Jira.
 - Identify alerting monitors or failed deployments.
 
-{{< callout url="https://forms.gle/xTPHV3XeTLuEmoqh9" d_target="#signupModal" btn_hidden="false" header="Request acess" >}}
+{{< callout url="https://forms.gle/xTPHV3XeTLuEmoqh9" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Developer Homepage!" >}}
 {{< /callout >}}
 
 ## Services and entities
