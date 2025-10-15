@@ -21,8 +21,8 @@ menu:
       parent: onboarding_heading
       identifier: getting_started
       weight: 1
-    - name: Getting Started Child Page
-      url: /studio/getting_started/
+    - name: Child Page
+      url: /studio/getting_started/child_page
       parent: getting_started
       identifier: getting_started_child_page
       weight: 101
