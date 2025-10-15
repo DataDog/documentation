@@ -293,7 +293,7 @@ unsupported_sites:
   on-call: [gov]
   otlp_agentless: [gov]
   overview_pages: [gov]
-  quality_gates: [gov]
+  pr_gates: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
   resource_catalog: [gov]
