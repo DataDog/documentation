@@ -300,3 +300,5 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
 [4]: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html
 [5]: https://github.com/DataDog/datadog-operator
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[7]: /gpu_monitoring/summary
+[8]: /gpu_monitoring/fleet/?tab=clustersidepanel
