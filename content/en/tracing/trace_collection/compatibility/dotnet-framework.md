@@ -46,7 +46,7 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 
 ## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation of .NET Framework applications on Windows operating systems. Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][12]
+The .NET Tracer supports automatic instrumentation of .NET Framework applications on Windows operating systems. Additional information on the operating systems supported by .NET Framework can be found in the [.NET Framework system requirements][12]
 
 ### Windows
 
@@ -150,4 +150,4 @@ Version updates imply the following changes to runtime support:
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
 [11]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
-[12]: https://github.com/dotnet/core/tree/main/release-notes
+[12]: https://learn.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
