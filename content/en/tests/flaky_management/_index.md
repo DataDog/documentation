@@ -116,18 +116,26 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 | **Environment Dependency** | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
 | **Unknown**             | Test is flaky for an unknown reason. |
 
+## Receive notifications
+
+Set up notifications to avoid missing changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]) and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository.
+
+{{< img src="tests/flaky_management_notifications_settings.png" alt="Notifications settings UI" style="width:100%;" >}}
+
+Notifications are not sent immediately; they are batched every few minutes to reduce noise.
+
 ## Compatibility
 
 To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
-| Language        | Quarantine & Disable          | Attempt to fix               |
-| --------------- | ----------------------------- | ---------------------------- |
-| [.NET][5]       | 3.13.0+                       | 3.17.0+                      |
-| [Go][6]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
-| [Java][7]       | 1.48.0+                       | 1.50.0+                      |
-| [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
-| [Python][9]     | 3.3.0+                        | 3.8.0+                       |
-| [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
+| Language        | Quarantine & Disable | Attempt to fix   |
+| --------------- | -------------------- | ---------------- |
+| [.NET][6]       | 3.13.0+              | 3.17.0+          |
+| [Go][7]         | 1.73.0+              | Not available    |
+| [Java][8]       | 1.48.0+              | 1.50.0+          |
+| [JavaScript][9] | 5.44.0+              | 5.52.0+          |
+| [Python][10]     | 3.3.0+               | 3.8.0+           |
+| [Ruby][11]       | 1.13.0+              | 1.17.0+          |
 
 ## Further reading
 
@@ -137,10 +145,11 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [2]: https://app.datadoghq.com/source-code/repositories
 [3]: /tests/explorer
 [4]: /service_management/case_management
-[5]: /tests/setup/dotnet/
-[6]: /tests/setup/go/
-[7]: /tests/setup/java/
-[8]: /tests/setup/javascript/
-[9]: /tests/setup/python/
-[10]: /tests/setup/ruby/
-[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[5]: /integrations/slack/?tab=datadogforslack
+[6]: /tests/setup/dotnet/
+[7]: /tests/setup/go/
+[8]: /tests/setup/java/
+[9]: /tests/setup/javascript/
+[10]: /tests/setup/python/
+[11]: /tests/setup/ruby/
+>>>>>>> Stashed changes
