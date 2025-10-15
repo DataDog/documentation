@@ -182,7 +182,7 @@ API changes:
 The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
 
 The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
-(e.g.: https://example.com/logs/upload), not just the hostname, i.e:
+(`https://example.com/logs/upload`), not just the hostname:
 ```kotlin
 Logs.enable(
   LogsConfiguration.Builder()
