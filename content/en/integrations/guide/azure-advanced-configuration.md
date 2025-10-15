@@ -20,11 +20,11 @@ This guide provides advanced configuration options and reference architectures f
 
 ### Reference architectures
 
-The diagrams in this guide provide a visual representation of the configuration process and outcome when following the steps in the [Azure integration page][1]. This guide provides a detailed overview of Datadog's interaction with your Azure environment and answers common security, compliance, and governance questions.
+The diagrams in this guide provide a visual representation of the configuration process and outcome when following the steps in the [Getting Started with Azure][1]. This guide provides a detailed overview of Datadog's interaction with your Azure environment and answers common security, compliance, and governance questions.
 
 ### Alternate configurations
 
-The setup processes documented in the [Azure integration page][1] are the recommended steps and result in the ideal configuration for the majority of users. Alternate configuration options in this document may be preferable for certain use cases. Any trade-offs in performance, features, or ease-of-management are outlined as needed.
+The setup processes documented in [Getting Started with Azure][1] are the recommended steps and result in the ideal configuration for the majority of users. Alternate configuration options in this document may be preferable for certain use cases. Any trade-offs in performance, features, or ease-of-management are outlined as needed.
 
 ## Metric and data collection
 
@@ -37,20 +37,11 @@ Enabling Datadog's Azure integration allows Datadog to:
 
 The Azure APIs used and data collected are identical regardless of whether you use the standard or Azure Native version of the integration.
 
-### Metric and data collection
-
-_Available in all Datadog Sites_
-
-Follow these steps to enable the Azure integration:
-
-  1. Create an app registration in your Active Directory and enter the credentials in the [Datadog Azure integration page][4].
-  2. Give the application read access (`Monitoring Reader` role) to the subscriptions or management group you would like to monitor.
-
-The diagram below outlines the process and resulting architecture of the Azure integration configuration described in the main documentation.
+The diagram below outlines the process and resulting architecture of the Azure integration configuration described in [Getting Started with Azure][1].
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_integration_setup.png" alt="Diagram of the app registration integration setup" >}}
 
-Once this is completed, data collection begins automatically. The app registration information entered in Datadog allows Datadog to [request a token from Azure Active Directory][3] (AD). Datadog uses this token as the authorization for API calls to various Azure APIs, to discover resources within the scope provided, and collect data. This continuous process runs with two-minute intervals by default, and is used to discover and collect data from your Azure environment. The data collection process is pictured below.
+After this is completed, data collection begins automatically. The app registration allows Datadog to [request a token from Azure Active Directory][3] (AD). Datadog uses this token as the authorization for API calls to various Azure APIs, to discover resources within the scope provided, and collect data. This continuous process runs with two-minute intervals by default, and is used to discover and collect data from your Azure environment. The data collection process is pictured below.
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Diagram of the App Registration integration setup" >}}
 
@@ -82,6 +73,7 @@ As the volume of logs scales, you may see bottlenecks, typically arising in the 
 For especially high log volumes, you may consider adding additional Event Hub and forwarder function pairs within the same region, and splitting traffic between them.
 
 {{% collapse-content title="Commands to install the Azure Datadog Extension" level="h4" expanded=false id="azure-datadog-extension-commands" %}}
+
 ## Install on Azure
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
@@ -285,7 +277,7 @@ For other missing metrics, contact [Datadog support][3] with the following infor
 - resource name
 - subscription ID or subscription name 
 
-Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric. **Important**: Graph 1-minute data points in the screenshot.
+Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric. **Important**: Graph 1-minute datapoints in the screenshot.
 
 ### Enable diagnostics
 
@@ -305,7 +297,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
-**Note:** If you are re-running the template due to this failure, it is also advised that you remove the entire resource group to create a fresh deployment. 
+**Note**: If you are re-running the template due to this failure, it is also advised that you remove the entire resource group to create a fresh deployment. 
 
 ### Unregistered resource provider
 
@@ -325,13 +317,13 @@ Did you install the script successfully, but you are still not seeing activity/p
 
 Ensure that you have not exceeded your [daily quota][4] for log retention.
 
-**Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
+**Note**: It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
 
 ## Monitoring multiple app registrations
 
 Subscriptions monitored by multiple app registrations can introduce overlapping access configurations. This setup is not recommended and may result in integration issues or system conflicts, and may also increase your Azure Monitor costs.
 
-## Powered-down Azure VMs on the Infrastructure List
+## Powered-down Azure VMs on the infrastructure list
 
 When you power down your VMs in Azure, the Datadog Azure integration still collects the metric `azure.vm.status` for that VM. This metric is tagged with `status:running`, `status:not_running`, or `status:unknown`.
 
@@ -339,7 +331,7 @@ This is intended, but causes the VM to remain on your infrastructure list. If yo
 
 If you destroy your Azure VM, it phases out of your infrastructure list within 3 hours.
 
-## Azure VMs appear in the App without metrics
+## Azure VMs appear in the app without metrics
 
 After properly installing the Azure Integration within Datadog, metrics from you Azure VMs and other services should begin to flow in about 15 minutes.
 
@@ -348,7 +340,7 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
 1. Make sure you are looking for the right metrics.
     **Classic** virtual machine metrics begin with the azure.vm namespace and ARM deployed virtual machine metrics begin with the `azure.compute_virtualmachines` namespace.
 
-2. If neither of these namespaces are returning metrics, make sure **Diagnostics** is turned on for the Virtual Machines within the Azure Portal. NOTE, only Boot diagnostics and Basic metrics are required.
+2. If neither of these namespaces are returning metrics, make sure **Diagnostics** is turned on for the Virtual Machines within the Azure Portal. Only Boot diagnostics and Basic metrics are required.
     * For **Classic** VMs:
     {{< img src="integrations/guide/azure_vms_appearing_in_the_app_without_metrics/classic_vm.png" alt="The azure portal showing the diagnostics view of a classic virtual machine with status set to on" >}}
 
@@ -381,10 +373,9 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/azure/
+[1]: /getting_started/integrations/azure/
 [2]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
 [3]: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/aad/
-[4]: https://app.datadoghq.com/integrations/azure
 [5]: /integrations/guide/azure-event-hub-log-forwarding
 [6]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
 [7]: /integrations/guide/azure-native-integration/#agent-extensions
