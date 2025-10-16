@@ -261,7 +261,7 @@ Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegi
 
 This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-{{< img src="llm_observability/evaluations/sentiment_1.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_2.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -323,7 +323,7 @@ You can configure the prompt injection evaluation to use specific categories of 
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_2.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
