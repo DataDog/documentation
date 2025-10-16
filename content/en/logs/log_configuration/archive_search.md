@@ -95,16 +95,16 @@ To retain more data or access logs in other Datadog products, choose one of the 
 
 ## Analyze results
 
-After launching a search, logs stream into the **Archive Search Results** page. From this page, you can use filters to narrow down the results and drill into specific log details to investigate issues.
+After launching a search, logs stream into the **Archive Search Results** page. From this page, you can use filters to narrow down the results and open specific log details to investigate issues.
 
 ### Limitations
 
-While Archive Search provides quick access to archived logs, it has limited analytical capabilities compared to indexed logs:
+While Archive Search provides access to archived logs, it has limited analytical capabilities compared to indexed logs:
 
 - **No aggregations or analytics**: You cannot run aggregations, create visualizations, or perform advanced analytics directly on Archive Search results.
 - **Results page only**: Archive Search results are only available in the dedicated results page and cannot be queried from other parts of the Datadog platform (such as Dashboards, Notebooks, or Log Explorer).
 
-To unlock full analytics and platform-wide visibility, you need to index the search results (either before launching the search or after completion within the 24-hour window). When indexed, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
+To enable full analytics and platform-wide visibility, you need to index the search results (either before launching the search or after completion within the 24-hour window). When indexed, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
 
 
 ## Manage searches
