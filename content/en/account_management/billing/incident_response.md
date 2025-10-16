@@ -35,6 +35,9 @@ A user needs an On-Call seat if they:
 - Are part of an [on-call schedule][5].
 - Are included in an [escalation policy][6].
 - Have set up [notification preferences][7] to receive pages.
+Note that for On-Call only:
+- Anyone can view existing pages, escalation policies, teams, and schedules without a seat. 
+
 
 A user needs an Incident Management seat if they:
 - Modify an incident (for example, update severity).
