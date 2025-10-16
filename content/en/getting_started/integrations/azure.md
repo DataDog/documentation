@@ -48,7 +48,7 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 {{% /collapse-content %}}
 
-<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, you need to create an <a href="#">app registration</a> to access these functionalities.
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, use the instructions on this page to create an app registration.
 </div>
 
 ## Setup
