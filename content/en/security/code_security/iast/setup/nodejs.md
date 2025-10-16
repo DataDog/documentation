@@ -168,7 +168,7 @@ IAST support for bundled applications has the following limitations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
 [3]: /security/code_security/iast/setup/
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
