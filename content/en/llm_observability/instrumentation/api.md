@@ -143,7 +143,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | value   | string | Input or output value. If not set, this value is inferred from messages or documents. |
 | messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
 | documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
-| prompt | [Prompt](#prompt) | A prompt template used to format the LLM input. |
+| prompt | [Prompt](#prompt) | Structured prompt metadata that includes the template and variables used for the LLM input. |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
@@ -169,10 +169,14 @@ If the request is successful, the API responds with a 202 network code and an em
 #### Prompt
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
-| id    | string | An id to identify this prompt template.  |
-| template | string | A string version of a prompt template. Embed variables with handlebar notation. This should not be set with `chat_template`. |
-| chat_template | [Message](#message) | A message list version of a prompt template. Embed variables with handlebar notation. This should not be set with `template`. |
-| variables | Dict[key (string), string] | A dictionary of the values that each template variable took in this invocation of the prompt. |
+| id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
+| version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, LLM Observability automatically generates a version by computing a hash of the template content. |
+| template | string | Single string template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables. This should not be set with `chat_template`. |
+| chat_template | [Message](#message) | Multi-message template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables in message content. This should not be set with `template`. |
+| variables | Dict[key (string), string] | Variables used to render the template. Keys correspond to placeholder names in the template. |
+| rag_query_variables | List[string] | Variable keys that contain the user query. Used for hallucination detection. |
+| rag_context_variables | List[string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
+| tags | Dict[key (string), string] | Tags to attach to the prompt run. |
 
 
 #### Meta
