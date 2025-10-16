@@ -143,7 +143,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | value   | string | Input or output value. If not set, this value is inferred from messages or documents. |
 | messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
 | documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
-| prompt | [Prompt](#prompt) | Structured prompt metadata that includes the template and variables used for the LLM input. |
+| prompt | [Prompt](#prompt) | Structured prompt metadata that includes the template and variables used for the LLM input. This should only be used for input IO on LLM spans. |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
