@@ -1,6 +1,6 @@
 ---
 title: Archive Search
-description: Archive Search lets you query logs directly from long-term storage archives without indexing them first.
+description: Instantly search and analyze logs from long-term archives without re-indexing.
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -21,7 +21,7 @@ Archive Search is in Preview. Request access to search archived logs in real tim
 
 Archive Search lets you query logs directly from long-term object storage archives, without indexing them in advance. Use Archive Search for **immediate access to archived logs**, for investigations, audits, or troubleshooting beyond your indexing retention period.
 
-Archive Search differs from Rehydration by streaming results in real time as data is scanned, rather than running as a background batch job. It's more cost-effective, charging only for the scan itself with the first 100,000 logs retained temporarily at no cost, and faster, especially when querying by a preferred attribute.
+Archive Search differs from Rehydration by streaming results in real time as data is scanned, rather than running as a background batch job. It's more cost-effective, charging only for the scan itself with the first 100,000 logs retained temporarily at no cost, and faster.
 
 When you launch a search:
 
@@ -58,7 +58,11 @@ Before using Archive Search:
    * **Azure Storage:** Azure AD with *Storage Blob Data Contributor* role
    * **Google Cloud Storage:** Service account with *Storage Object Viewer* role
 
-<!-- TODO Who can access search results, who can conduct search. RBAC? Permissions? -->
+### Permissions
+
+Archive Search results are visible to all users in your organization who have access to the Archive Search feature. However, **restriction queries**, such as log security filters and data restrictions configured in Datadog, are still enforced on the result page and apply to all users. This means each user may only see logs they are authorized to view based on organization-wide permissions and filters.
+
+For more information on access controls and log security, see [How to Set Up RBAC for Logs][6].
 
 ## Launching a search
 
@@ -80,10 +84,7 @@ Use this preview to verify query syntax, inspect log structure, and adjust filte
 
 ## View and retain results
 
-By default:
-- Charges only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly in Archive Search results pages.
-- Logs remain visible only in the **Archive Search Results** page.
-- After 24 hours, results expire automatically.
+By default, you are charged only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly in Archive Search results pages, where you can click on any log to see its full details and context. After 24 hours, results expire automatically.
 
 To retain more data or access logs in other Datadog products, choose one of the following:
 
@@ -92,9 +93,19 @@ To retain more data or access logs in other Datadog products, choose one of the 
 - **Index after completion**:
   During the 24-hour window, you can index results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
 
-<!-- ## Analyze results -->
+## Analyze results
 
-<!-- Add more information on what you can do with search results -->
+After launching a search, logs stream into the **Archive Search Results** page. From this page, you can use filters to narrow down the results and drill into specific log details to investigate issues.
+
+### Limitations
+
+While Archive Search provides quick access to archived logs, it has limited analytical capabilities compared to indexed logs:
+
+- **No aggregations or analytics**: You cannot run aggregations, create visualizations, or perform advanced analytics directly on Archive Search results.
+- **Results page only**: Archive Search results are only available in the dedicated results page and cannot be queried from other parts of the Datadog platform (such as Dashboards, Notebooks, or Log Explorer).
+
+To unlock full analytics and platform-wide visibility, you need to index the search results (either before launching the search or after completion within the 24-hour window). When indexed, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
+
 
 ## Manage searches
 
@@ -182,3 +193,4 @@ In order to search log events from your archives, Datadog uses a service account
 [3]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3&site=us
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
+[6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
