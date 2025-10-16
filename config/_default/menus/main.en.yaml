@@ -2033,7 +2033,7 @@ menu:
     - name: Derived Metrics
       url: metrics/derived_metrics
       parent: metrics_top_level
-      identifier: metrics_derived_metrics
+      identifier: derived_metrics
       weight: 12
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
