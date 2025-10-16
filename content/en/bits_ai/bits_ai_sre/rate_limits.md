@@ -1,23 +1,23 @@
-# Rate Limits
+# Rate limits
 
-Rate limits let you control how many investigations Bits AI SRE will automatically run. You can configure limits both **per monitor** and **across your entire organization**, applied over a rolling 24-hour window.
+Rate limits let you control how many investigations Bits AI SRE automatically runs. You can configure limits both **per monitor** and **across your entire organization**, applied over a rolling 24-hour window.
 
-Once a rate limit is reached, automatic investigations stop until the window resets. Manual investigations—triggered from the Datadog app or Slack—are still allowed even when limits are reached.
+After a rate limit is reached, automatic investigations stop until the window resets. Manual investigations—triggered from Datadog or Slack—are still allowed even when limits are reached.
 
-## Types of Rate Limits
+## Types of rate limits
 
-### Monitor Limits
+### Monitor limits
 
 Monitor limits control how often a specific monitor can trigger an investigation.
 While usage is tracked per monitor, the limit value is set globally and applies to all monitors.
 
 **Default:** Each monitor can trigger one automatic investigation per 24 hours.
 
-### Org-wide Limits
+### Org-wide limits
 
 Org-wide limits define the total number of investigations Bits AI SRE can run across your entire organization within 24 hours.
 
-**Default:** No limit — Bits AI SRE can run an unlimited number of investigations organization-wide.
+**Default:** No limit—Bits AI SRE can run an unlimited number of investigations organization-wide.
 
 ## Set a rate limit
 
@@ -32,4 +32,4 @@ To set a rate limit:
 <img width="504" height="246" alt="image" src="https://github.com/user-attachments/assets/71a7d267-88dd-4b7d-8cba-7f74957f44d2" />
 </p>
 
-Once enabled, Bits AI SRE will automatically enforce your configured limits. You can update or disable limits at any time from the same page.
+After enabling, Bits AI SRE automatically enforces your configured limits. You can update or disable limits at any time from the same page.
