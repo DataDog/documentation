@@ -92,7 +92,7 @@ You can similarly create a metric-based SLO using threshold queries:
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
 2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the "count values..." aggregator.
 3. Specify a threshold value and comparison operator.
-{{< img src="metrics/distributions/threshold_SLO.jpg" alt="Threshold Queries for SLOs" style="width:80%;">}}
+{{< img src="metrics/distributions/threshold_SLO.png" alt="Threshold Queries for SLOs" style="width:80%;">}}
 
 ## Customize tagging
 

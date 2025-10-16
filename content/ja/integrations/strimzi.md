@@ -89,7 +89,7 @@ tile:
 
 Strimzi チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-<div class="alert alert-warning">このチェックでは <a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a> を使用しており、Python 3 が必要です。</div>
+<div class="alert alert-danger">このチェックでは <a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a> を使用しており、Python 3 が必要です。</div>
 
 ### 構成
 

@@ -1,5 +1,6 @@
 ---
 title: Set up DORA Metrics
+description: "Configure deployment and failure event data sources for DORA Metrics including APM Deployment Tracking, API, CLI, and incident management."
 aliases:
 - /continuous_integration/dora_metrics/setup/
 further_reading:

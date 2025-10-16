@@ -542,7 +542,7 @@ curl -X GET \
 
 ### Activar o desactivar las asignaciones
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Al activar las asignaciones, se eliminan los roles de todos los usuarios que inician sesión con SAML y se les reasignan unos teniendo en cuenta los valores de su aserción SAML. Recuerda verificar que recibes las aserciones SAML previstas en tu conexión antes de activar la aplicación de asignaciones.
 </div>
 

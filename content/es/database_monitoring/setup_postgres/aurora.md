@@ -222,7 +222,7 @@ Para configurar la recopilación de métricas de Database Monitoring para un Age
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
+<div class="alert alert-danger"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
 
 2. [Reinicia el Agent][2].
 

@@ -1,5 +1,6 @@
 ---
 title: Code Coverage
+description: "Upload coverage reports to Datadog, visualize coverage data for pull requests, and block merges based on configurable thresholds."
 further_reading:
   - link: "/code_coverage/setup"
     tag: "Documentation"

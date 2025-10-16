@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-danger">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -36,13 +36,13 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
 | **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm a fix and automatically apply this status, instead of manually changing it. |
 
-<div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
+<div class="alert alert-info">Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
 ## Configure policies to automate the flaky test lifecycle
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
 
-1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][11] in Software Delivery settings.
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][12] in Software Delivery settings.
 2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
     {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
 
@@ -82,7 +82,7 @@ For any flaky test, you can create a case and use [Case Management][4] to track 
 
 When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
 
-1. For the test you are fixing, click **Fix this test** in the Flaky Test Management UI.
+1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Test Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
@@ -95,7 +95,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 Flaky Test Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
 
-<div class="alert alert-info"><strong>Note:</strong> A test must have at least one failed execution that includes both <code>@error.message</code> and <code>@error.stack</code> tags to be eligible for categorization. If the test was recently detected, categorization may take several minutes to complete.</div>
+<div class="alert alert-info">A test must have at least one failed execution that includes both <code>@error.message</code> and <code>@error.stack</code> tags to be eligible for categorization. If the test was recently detected, categorization may take several minutes to complete.</div>
 
 ### Categories
 
@@ -128,6 +128,7 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 | [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
 | [Python][9]     | 3.3.0+                        | 3.8.0+                       |
 | [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
+| [Swift][11]     | 2.6.1+                        | 2.6.1+                       |
 
 ## Further reading
 
@@ -143,4 +144,5 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [8]: /tests/setup/javascript/
 [9]: /tests/setup/python/
 [10]: /tests/setup/ruby/
-[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[11]: /tests/setup/swift/
+[12]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
