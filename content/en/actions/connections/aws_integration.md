@@ -1,6 +1,6 @@
 ---
-title: Using AWS Integration in Workflows
-description: Use Datadog's built-in AWS Integration to run Workflows Read actions without additional configuration in AWS.
+title: Using AWS Integration in Actions
+description: Use Datadog's built-in AWS Integration to run Workflows read Actions without additional configuration in AWS.
 disable_toc: false
 further_reading:
 - link: "/actions/connections/"
