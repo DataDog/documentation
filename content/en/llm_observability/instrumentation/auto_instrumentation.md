@@ -35,6 +35,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
 | [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
+| [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -297,6 +298,20 @@ The MCP integration instruments the following methods:
   - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
 
 
+## Google ADK
+
+The Google ADK integration automatically agent runs, tool calls, and code executions made through [Google's ADK Python SDK][60].
+
+### Traced methods
+
+The Google ADK integration instruments the following methods:
+
+- [Agent Runs][61]
+- [Tool Calls][62]
+- [Code Executions][63]
+
+Both the `run_live` and `run_async` methods are supported.
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -356,6 +371,10 @@ The MCP integration instruments the following methods:
 [57]: https://modelcontextprotocol.io/docs/getting-started/intro
 [58]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
 [59]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
+[60]: https://google.github.io/adk-docs/#python
+[61]: https://google.github.io/adk-docs/agents/
+[62]: https://google.github.io/adk-docs/tools
+[63]: https://google.github.io/adk-docs/agents/llm-agents/#code-execution
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
