@@ -1,6 +1,6 @@
 ---
 title: Agents
-description: Build custom AI agents that can access our Action Catalog. 
+description: Build custom AI agents that can access the Action Catalog. 
 disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"
