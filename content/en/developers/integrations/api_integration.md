@@ -33,7 +33,7 @@ After your integration is published, it appears in Datadog as a tile. This tile 
 - Your integration must implement OAuth for authorization (see below for more details)
 
 ## Building an API integration
-These steps assume you've [joined the Datadog Partner Network][7] and have access to a partner developer organization.
+These steps assume you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][16].
 
 1. [Implement OAuth 2.0 for Datadog in your product](#implement-oauth).
 2. [Add your OAuth client details in the Developer Platform](#add-oauth-details-in-the-developer-platform).
@@ -44,7 +44,7 @@ OAuth 2.0 is an industry-standard authorization framework that enables secure ac
 
 1. Determine the required [scopes][8] for your integration use case.
 2. Implement OAuth following [these steps][9]. 
-3. Ensure the following Datadog-specific concepts are account for:
+3. Ensure the following Datadog-specific concepts are accounted for:
     - Datadog organizations may be deployed in different regions, represented by the `domain` parameter (for example, `datadoghq.com`, `ap1.datadoghq.com`). This affects both the OAuth handshake and the API endpoints you use.
     - Some customers use a custom subdomain, represented by the `site` parameter (for example, `customsub.datadoghq.com`). This is only used in the OAuth handshake and doesn't affect API endpoints.
     - Your product must direct users to initiate the OAuth flow from Datadog, so Datadog can provide the `domain` and `site` parameters to your onboarding URL. These parameters are not included if the flow starts from your product.
@@ -55,7 +55,7 @@ These steps assume you've already created a listing in the Developer Platform.
 
 1. Navigate to the **Configuration Method** tab for your listing and select **API with OAuth**.
 2. Enter your **OAuth Client Name** (this should match your integration name).
-3. Enter your **Onboarding URL**. This is where users are redirected after clicking **Connect Accounts** from the Datadog integration tile.
+3. Enter your **Onboarding URL**. This is where users are redirected after clicking **Connect Accounts** from the Datadog integration tile to start the OAuth flow and associate their Datadog account with your product.
 4. Add one or more **Redirect URIs**.
 5. Click **Generate OAuth Client Secret** to create credentials for testing.
 6. Record the client secret, as it is not displayed again.
@@ -175,3 +175,4 @@ If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.c
 [13]: /developers/authorization/oauth2_endpoints/#exchange-authorization-code-for-access-token
 [14]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#
 [15]: https://app.datadoghq.com/organization-settings/api-keys
+[16]: /developers/integrations/build_integration/#create-a-listing
