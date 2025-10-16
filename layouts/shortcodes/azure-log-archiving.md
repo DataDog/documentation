@@ -6,6 +6,6 @@ After configuring an App Registration, [create a log archive][1002] that writes 
 
 **Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration Tile about the App Registration being redundant. You can ignore this warning.
 
-[1000]: /integrations/guide/azure-programmatic-management/#datadog-azure-integration
-[1001]: /integrations/guide/azure-manual-setup/#setup
+[1000]: /logs/guide/azure-automated-log-forwarding
+[1001]: /logs/guide/azure-manual-log-forwarding
 [1002]: /logs/log_configuration/archives/?tab=azurestorage#configure-an-archive
