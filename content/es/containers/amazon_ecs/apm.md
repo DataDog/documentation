@@ -149,7 +149,7 @@ tracer.configure(hostname=get_aws_ip())
 [2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all
 {{< /programming-lang >}}
 
-{{< programming-lang lenguaje="nodeJS" >}}
+{{< programming-lang lang="nodeJS" >}}
 
 #### Variable de momento de inicio
 Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituyendo tu `<Node.js Startup Command>`:
