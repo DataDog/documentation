@@ -251,7 +251,7 @@ otelAgentGateway:
 ```
 
 <div class="alert alert-info">
-If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name becomes <code><fullnameOverride>-otel-agent-gateway</code>. The ports defined in <code>otelAgentGateway.ports</code> are exposed on this service. Ensure these ports match the receiver configuration in the gateway and the exporter configuration in the daemonset.
+If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name becomes <code><fullnameOverride>-otel-agent-gateway</code>. The ports defined in <code>otelAgentGateway.ports</code> are exposed on this service. Ensure these ports match the OTLP receiver configuration in the gateway and the OTLP exporter configuration in the daemonset.
 </div>
 
 ## Advanced use cases
@@ -347,7 +347,7 @@ To ensure APM Stats are calculated on 100% of your traces before sampling, the <
 
 ### Using a custom Collector image
 
-To use a custom-built Collector image for your gateway, specify the image repository and tag under `otelAgentGateway.image`. This follows the same process as the daemonset deployment. For more details, see [Use Custom OpenTelemetry Components][5].
+To use a custom-built Collector image for your gateway, specify the image repository and tag under `agents.image`. This follows the same process as the daemonset deployment. For more details, see [Use Custom OpenTelemetry Components][5].
 
 ```yaml
 # values.yaml
@@ -499,7 +499,7 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
   * **Gateway Pods on Fleet Automation**: Standalone gateway pods are not yet visible on the Fleet Automation page. Only daemonset Collectors are displayed. This is being actively addressed.
   * **Startup Race Condition**: When deploying the daemonset and gateway in the same release, daemonset pods may start before the gateway service is ready, causing initial connection error logs. The OTLP exporter automatically retries, so these logs can be safely ignored. Alternatively, deploy the gateway first and wait for it to become ready before deploying the daemonset.
   * **`infraattributes` Processor Requirement**: The `infraattributes` processor requires a `datadog` exporter to be defined in the same Collector configuration, even if it's not used in a pipeline. The Collector will fail to start if the exporter is missing. To resolve this, add a `datadog` exporter to your configuration, even if you do not reference it in a service pipeline.
-  * **Ignorable Core Agent Connection Logs**: Gateway pods may generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored.
+  * **Ignorable Core Agent Connection Logs**: Gateway pods may generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored. This is being actively addressed.
   
 ## Further reading
   
