@@ -64,10 +64,11 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
-
+# Convert HTML files to .mdoc files for LLM support
 llm-support-demo:
 	@node ./assets/scripts/llm-support-demo.js;
 
+# Convert HTML files to .mdoc files for LLM support
 html_to_mdoc:
 	@node ./assets/scripts/llm-support-demo.js;
 
