@@ -33,9 +33,9 @@ API integrations can both submit and query data. A majority of integrations subm
 ## Building an API integration
 These steps assume you've [joined the Datadog Partner Network][7] and have access to a partner developer organization.
 
-1. Implement OAuth 2.0 for Datadog in your product.
-2. Add your OAuth client details in the Developer Platform.
-3. Test OAuth in your partner developer organization.
+1. [Implement OAuth 2.0 for Datadog in your product](#implement-oauth-20-for-datadog-in-your-product).
+2. [Add your OAuth client details in the Developer Platform](#add-your-oauth-client-details-in-the-developer-platform).
+3. [Test OAuth in your partner developer organization](#test-oauth-in-your-partner-developer-organization).
 
 ### Implement OAuth 2.0 for Datadog in your product
 OAuth 2.0 is an industry-standard authorization framework that enables secure access to Datadog APIs without exposing user credentials. It issues scoped, revocable tokens, offering stronger security and a better user experience than API or application keys.
@@ -44,24 +44,25 @@ OAuth 2.0 is an industry-standard authorization framework that enables secure ac
 2. Implement OAuth following [these steps][9]. 
 3. Ensure the following Datadog-specific concepts are account for:
     - Datadog organizations may be deployed in different regions, represented by the `domain` parameter (for example, `datadoghq.com`, `ap1.datadoghq.com`). This affects both the OAuth handshake and the API endpoints you use.
-    - Some customers use a custom subdomain, represented by the `site` parameter (for example, `customsub.datadoghq.com`). This is only used in the OAuth handshake and doesn’t affect API endpoints.. 
-    - Your product must direct users to initiate the OAuth flow from Datadog, so Datadog can provide domain and site parameters to your onboarding URL. These parameters are not included if the flow starts from your product.
+    - Some customers use a custom subdomain, represented by the `site` parameter (for example, `customsub.datadoghq.com`). This is only used in the OAuth handshake and doesn’t affect API endpoints.
+    - Your product must direct users to initiate the OAuth flow from Datadog, so Datadog can provide the `domain` and `site` parameters to your onboarding URL. These parameters are not included if the flow starts from your product.
     - To submit data to Datadog, your integration must request the `api_keys_write` scope and make an [API call during the OAuth handshake][10] to create an API key on behalf of the user.
 
 ### Add your OAuth client details in the Developer Platform
 These steps assume you've already created a listing in the Developer Platform.
 
 1. Navigate to the **Configuration Method** tab for your listing and select **API with OAuth**.
-2. Enter your OAuth client name (this should match your integration name).
-3. Enter your onboarding url. This is where users are redirected after clicking **Connect Accounts** from the Datadog integration tile.
+2. Enter your **OAuth Client Name** (this should match your integration name).
+3. Enter your **Onboarding URL**. This is where users are redirected after clicking **Connect Accounts** from the Datadog integration tile.
 4. Add one or more **Redirect URIs**.
 5. Click **Generate OAuth Client Secret** to create credentials for testing.
 6. Record the client secret (it won't be shown again).
-7. Select the minimum scopes required for your integration. **Note**: Enable the `api_keys_write` scope to submit data (metrics, logs, events, etc.) to Datadog.
-8. Click **Save Changes** to apply the scopes.
+7. Select the minimum scopes required for your integration.
+    - **Note**: Enable the `api_keys_write` scope to submit data (metrics, logs, events, etc.) to Datadog.
+8. Click **Save Changes**.
 
 ### Test OAuth in your partner developer organization 
-Until your integration is published, your OAuth test credentials will only work within your Datadog partner developer organization.
+Until your integration is published by Datadog, you can only test OAuth within your Datadog partner developer organization.
 
 1. Click **Test Authorization** to simulate initiation from the Datadog integration tile. This replicates a redirect to your onboarding URL with the `domain` and `site` parameters.
 2. Complete the OAuth flow using your Datadog partner developer organization.
@@ -113,14 +114,13 @@ Refresh tokens do not expire unless the user revokes authorization or the partne
 
 #### Retrieving API keys in your partner sandbox account
 
-After you create a key using the [api_keys/marketplace][14] endpoint, the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
+After you create a key using the [`/api/v2/api_keys/marketplace` endpoint][14], the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
 
 1. Navigate to the [Datadog API Keys Management page][15].
-1. Look for the API key named `OAuth Client API Key` and select it.
-1. Click **Revoke** to disable the API key.
-1. Follow the steps in [Create an API key](#create-an-api-key) to create a new key.
-1. Reinstall the integration and repeat the OAuth flow.
-
+2. Look for the API key named `OAuth Client API Key` and select it.
+3. Click **Revoke** to disable the API key.
+4. Follow the steps in [Create an API key](#create-an-api-key) to create a new key.
+5. Reinstall the integration and repeat the OAuth flow.
 
 ### Hostname/IP does not match certificate's altnames
 
@@ -154,11 +154,9 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 
 If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.com][11]. Only one secret can be active at a time. After you regenerate your secret, the existing secret is deleted. You do not need to re-authorize the integration.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /api/latest/using-the-api/
 [2]: https://docs.datadoghq.com/api/latest/metrics/
