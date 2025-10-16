@@ -6875,7 +6875,7 @@ menu:
       weight: 6
     - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
-      url: /security/code_security/dev_tool_int/github_pull_requests/
+      url: /security/code_security/dev_tool_int/pull_request_comments/
       parent: dev_tool_int
       weight: 1
     - name: PR Gates
