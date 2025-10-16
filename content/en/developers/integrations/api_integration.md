@@ -19,115 +19,56 @@ further_reading:
 
 ## Overview
 
-This page walks Technology Partners through creating a Datadog API integration. 
+This page walks Technology Partners through creating an official Datadog API integration. API integrations are ideal for Technology Partners that are SaaS-based, and can host a service that interacts with the [Datadog API][12].
 
-Use [Datadog API endpoints][21] to enrich the customer's experience by submitting data from your backend and pulling data from a user's Datadog account. Technology Partners write and host their code within their environment. 
+API integrations can submit and query data . API integrations commonly submit [metrics][22], [logs][23], and [events][24]. However, you may also interact with other endpoints as needed, such as creating [incidents][27] or querying [users][28].
 
-API integrations are ideal for Technology Partners that are SaaS-based, and have an existing platform that authenticates users.
+## Requirements
 
-API integrations can send the following types of data to Datadog:
+- Your product must be Generally Available
+- Your product must host the source code the submits or queries the Datadog API
+- Your integration must send telemetry to Datadog
+- Your integraiton must implement OAuth for authorization (see Step 6 for more details)
 
-- [Metrics][22]
-- [Logs][23]
-- [Events][24]
-- [Service Checks][25]
-- [Traces][26]
-- [Incidents][27]
+## Building an API integration
+These steps assume you've [joined the Datadog Partner Network][29] and have access to a Datadog partner developer organization.
 
-## Development process
+1. Implement the OAuth protocol in your product.
+2. Configure OAuth client details in the Developer Platform.
+3. Test OAuth in your partner developer organization.
 
-### OAuth
+#### Implement OAuth in your product
+OAuth 2.0 is an industry-standard authorization framework that allows integrations to securely access Datadog APIs without requiring user credentials. It issues scoped, revocable access tokens, offering stronger security and a better user experience than API or application keys. 
 
-Instead of requesting API and Application keys directly from a user, Datadog requires using an [OAuth client][14] to handle authorization and access for API-based integrations. OAuth implementations must support all [Datadog sites][12].
+1. Determine neccessary scopes. The full list can be found here.
+2. Implement OAuth according to [these steps][1]. 
+3. Confirm you've accounted for the Datadog-specific concepts:
+    - A customer's Datadog organization may deployed in one of several datacenters, which is represented via the `domain` parameter (e.g., `datadoghq.com`, `ap1.datadoghq.com`, etc.). This is used in the OAuth handshake as well as determines the endpoint you should use when interacting with the Datadog API.
+    - A customer may have a custom subdomain, which is represented in the `site` parameter (e.g., `customsub.datadoghq.com`). This parameter is only used in the OAuth handshake and doesn't affect endpoint values used for interacting with the Datadog API. 
+    - Your product must direct users to initiate the OAuth flow from the Datadog side in order to receive the `domain` and `site` parameters to your onboarding URL. These parameters are not provided if the OAuth flow is initiated from your side.
+    - In general, an API key is required to submit data to Datadog. This means if your integration is submitting data to Datadog, you'll need to request the `api_keys_write` scope and make an extra [API call during the OAuth handshake to create an API key][20] on behalf of the user.
 
-OAuth enables Datadog customers to securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool with read access to their Datadog organization's monitors.
+#### Configure OAuth in the Developer Platform
+These steps assume you've created an app listing in the Developer Platform.
 
-Note: This functionality is only available for approved Technology Partners intending on building integrations. OAuth clients for other purposes are not supported.
+1. Navigate to the "Configuration Method" tab for your app listing and select "API with OAuth".
+2. Enter your OAuth client name. This should be the same as your integration name.
+3. Enter your onboarding url. This is where your users will be redirected upon clicking "Connect Accounts" from the integration tile in Datadog.
+4. Add one or more Redirect URIs.
+5. Click **Generate OAuth Client Secret**. This will generate client credentials for testing.
+6. Take note of your client secret for testing as it won't be displayed again.
+7. Select the minimum scopes necessary for your integration. **Note**: Enable the `api_keys_write` scope to submit data (metrics, logs, events, etc.)to Datadog.
+8. Click **Save Changes** for the scopes to take effect.
 
-Publishing an OAuth client does not result in a published integration. Your integration only appears on the [Integrations page][16] after you've completed a separate publication process. For information on creating and publishing an integration, see [Build an integration][18].
+### Test 
+Until the integration is published, you'll only be able to complete these testing steps in your Datadog partner developer organization.
 
-### When to use OAuth in an integration
-
-OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks.
-
-You can include OAuth in a new integration (or add it to an existing integration) on the [Marketplace][2] or [Integrations][3] page by following the steps below.
-
-### Create an OAuth client
-The client is the component of an application that enables users to authorize the application access to the customer's Datadog data. To gain access, the client requires the appropriate access token. 
-1. Before setting up OAuth, follow the Integration Developer Platform documentation to set up your integration. When selecting a configuration method, select **API with OAuth**.
-2. Enter your client details such as the name, onboarding URL, and redirect URIs.
-3. Generate your OAuth client secret.
-4. Save your client secret as it won't show again. You can regenerate a new secret if you lost it.
-
-   The client you create in this step is a private version, and its credentials can be used for testing within your own organization only. When your integration is published, a new, published version of this client will be created, and you will receive a new set of credentials that allow authorization across any Datadog organization.
-
-5. Select the appropriate scopes.
-
-   Scopes determine the types of data your app can access in the customer's Datadog account. This allows your integration to access the necessary scopes. Only request the minimum amount of scopes required for your use case, as more can be added later on as needed. To submit data into Datadog, you must select the `api_keys_write` scope.
-6. Save your changes.
-
-### Implement the OAuth protocol
-
-See [Datadog OAuth2][1] for specific steps to implement the OAuth protocol.
-
-### Test the OAuth client
-
-Once you have implemented the OAuth protocol, test your OAuth client to ensure that you can send data into Datadog, or pull data out, according to your use case.
-
-**Note**: Until your integration tile is published, you can only authorize the OAuth client from your sandbox organization. This means that you can only send data into or pull data out of your sandbox account.
-
-To test your OAuth client, complete the following steps:
-1. Test that authorization is working properly
-2. Create an API Key
-3. Test multiple Datadog sites
-4. Confirm cross-regional support
-5. Confirm dataflow for all scopes
-6. Submit your integration and OAuth client for review
-
-#### Test that authorization is working properly
-
-1. Within the OAuth client page in the Developer Platform, select **Test Authorization**. This directs you to the onboarding URL and starts the authorization flow from a user's perspective. By clicking this button, the `domain` parameter is provided on the redirect to the `onboarding_url`.
-2. Go through the OAuth flow and authorize your integration.
-
-#### Create an API Key
-
-If your OAuth client requests the `api_keys_write` scope, ensure that you can successfully make a request to the `marketplace` endpoint with your token in the headers of the request. For more information, see [the OAuth2 Authorization Endpoints Reference][20].
-
-If successful, this request returns an API key that you can find on the [API Keys Management page][10]. You must securely save this key to use it for submitting data into Datadog on behalf of the user. **You cannot access this API key value again after the initial request response**.
-
-#### Test multiple Datadog sites
-
-Testing across different [Datadog sites][8] is only available once your integration is available for preview in your developer sandbox after approval.
-1. If you do not have access to a sandbox account on a different site, contact `ecosystems@datadog.com`.
-2. Your integration will be made available in your other sandbox.
-3. Connect the integration and go through the OAuth flow.
-
-
-##### Confirm cross-regional support
-
-To make OAuth work for users across all Datadog regions, you need to ensure that you're making the correct API calls based on a user's region. When the user kicks off authorization from the Datadog tile, a site parameter is sent on redirect from the onboarding URL. You use this site parameter in your calls to the authorization and token endpoints.
-
-If a user kicks off authorization directly from your platform, this site parameter is not sent and the user is instead prompted to select their site on the Datadog authorization page.
-
-Make sure you test calls to the Datadog API that match the user's region. For example, `https://trace.browser-intake-datadoghq.com` for US, and `https://public-trace-http-intake.logs.datadoghq.eu` for EU.
-
-To see a list of destinations based on the Datadog site, go to the [Network traffic][19] page and use the **DATADOG SITE** selector on the right to switch regions.
-
-#### Confirm data flow for all scopes
-
-Ensure that you are able to send data in, pull data out, or edit data for each scope you've requested.
-
-### Publish the OAuth client
-
-#### Submit your Integration and OAuth client for review
-1. After you’ve completed all the required fields for your integration, submit it for review.
-2. Upon submitting, you will receive a new set of credentials for the public version of your integration. **These credentials are not shown again. Copy them to a secure location.**
-3. When your integration is approved by Datadog and is ready to be released, at that point your OAuth client gets published as well. Once published, your integration tile will be available in your sandbox account but not to any customers. Additionally, your OAuth client can be authorized by any Datadog organization, not just your sandbox organization.
-4. At this point, Datadog recommends doing final testing with your OAuth client to ensure authorization is working smoothly.
-
-#### Making changes after submitting your client for publishing
-
-You cannot edit a published OAuth client directly. To update the OAuth client after it has been published, you'll need to go through the publishing flow again and re-submit.
+1. Click **Test Authorization** to replicate initiation from the Datadog integration tile. This button replicates the `domain` and `site` parameter that will be sent to your onboarding URL.
+2. Complete the OAuth flow using your Datadog partner developer organization.
+3. Ensure that you are able to submit data, query data, or update data according to your integration's use case.
+4. Once the OAuth flow is working as expected, you're ready to submit your OAuth information with the rest of your app listing. However, a couple notes before submitting:
+    - Be sure to remove or replace any testing urls from the **Onboarding URL** and **Redirect URIs** fields.
+    - Upon submission, you'll receive a product set of client credentials. Be prepared to store safely store the client secret as it will not be displayed again. 
 
 ## Troubleshooting
 
@@ -232,12 +173,9 @@ If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.c
 [11]: mailto:ecosystems@datadog.com
 [12]: /api/latest/using-the-api/
 [13]: /developers/authorization/oauth2_endpoints/#exchange-authorization-code-for-access-token
-[14]: /developers/authorization/oauth2_endpoints/#post-apiv2api_keysmarketplace
 [15]: https://app.datadoghq.com/organization-settings/api-keys
 [16]: https://app.datadoghq.com/integrations
 [17]: /developers/authorization/oauth2_in_datadog/#implement-the-oauth-protocol
-[18]: /developers/integrations/
-[19]: /agent/configuration/network/
 [20]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints
 [21]: https://docs.datadoghq.com/api/latest/using-the-api/
 [22]: https://docs.datadoghq.com/api/latest/metrics/
@@ -246,3 +184,5 @@ If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.c
 [25]: https://docs.datadoghq.com/api/latest/service-checks/
 [26]: https://docs.datadoghq.com/tracing/guide/send_traces_to_agent_by_api/
 [27]: https://docs.datadoghq.com/api/latest/incidents/
+[28]: https://docs.datadoghq.com/api/latest/users/
+[29] /developers/integrations/?tab=integrations#join-the-datadog-partner-network
