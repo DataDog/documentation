@@ -2880,6 +2880,19 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 26
     - name: Patch a vulnerability-based notification rule
       url: '#patch-a-vulnerability-based-notification-rule'
       identifier: security-monitoring-patch-a-vulnerability-based-notification-rule
@@ -3013,6 +3026,19 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 15
+    - name: List scanned assets metadata
+      url: '#list-scanned-assets-metadata'
+      identifier: security-monitoring-list-scanned-assets-metadata
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScannedAssetsMetadata
+        unstable:
+          - v2
+        order: 28
     - name: Get SBOM
       url: '#get-sbom'
       identifier: security-monitoring-get-sbom
@@ -3039,19 +3065,6 @@ menu:
         unstable:
           - v2
         order: 28
-    - name: List vulnerable assets
-      url: '#list-vulnerable-assets'
-      identifier: security-monitoring-list-vulnerable-assets
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListVulnerableAssets
-        unstable:
-          - v2
-        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
