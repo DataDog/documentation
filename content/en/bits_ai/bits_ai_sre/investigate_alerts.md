@@ -141,7 +141,7 @@ To set a rate limit:
 4. Click Save
 
 <p align="center">
-<img width="504" height="246" alt="image" src="https://github.com/user-attachments/assets/71a7d267-88dd-4b7d-8cba-7f74957f44d2" />
+<img width="444" height="185" alt="image" src="https://github.com/user-attachments/assets/69f2dd81-8c83-4a0c-85d4-9eaa5bc18970" />
 </p>
 
 ## How Bits AI SRE investigates
