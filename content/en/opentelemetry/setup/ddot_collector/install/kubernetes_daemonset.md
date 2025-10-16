@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector as a Daemonset on Kubernetes
+title: Install the DDOT Collector as a Kubernetes DaemonSet 
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
 - "/opentelemetry/setup/ddot_collector/install/kubernetes"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector as a daemonset on Kubernetes using Helm or the Datadog Operator.
+Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector as a Kubernetes DaemonSet using Helm or the Datadog Operator.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
