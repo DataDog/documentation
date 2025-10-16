@@ -174,8 +174,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | template | string | Single string template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables. This should not be set with `chat_template`. |
 | chat_template | [Message](#message) | Multi-message template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables in message content. This should not be set with `template`. |
 | variables | Dict[key (string), string] | Variables used to render the template. Keys correspond to placeholder names in the template. |
-| query_variable_keys | List[string] | Variable keys that contain the user query. Used for hallucination detection. |
-| context_variable_keys | List[string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
+| query_variable_keys | [string] | Variable keys that contain the user query. Used for hallucination detection. |
+| context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
 | tags | Dict[key (string), string] | Tags to attach to the prompt run. |
 
 
