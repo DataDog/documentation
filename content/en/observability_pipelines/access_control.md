@@ -65,13 +65,11 @@ To restore full access to a pipeline:
 
 You can restrict access to Live Capture **for a specific pipeline** with the following options:
 
-- **Editor** is allowed to:
-    - View captured events.
-    - Run new captures.
-    - Restrict access to Live Capture.
-- **Viewer** is allowed to:
-    - View captured events.
-- **No Access** has no default access to the pipeline.
+| Role | View captured events | Run new captures | Restrict access to Live Capture |
+|:----:|:--------------------:|:----------------:|:-------------------------------:|
+| Editor | ✓ | ✓ | ✓ |
+| Viewer | ✓ |  |  |
+| No Access |  |  |  |
 
 **Notes**:
 
