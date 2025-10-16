@@ -132,6 +132,33 @@ To onboard a service to adaptive sampling:
 
 The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources that have been configured remotely display as `Configured Remote` in the **Configuration** column.
 
+## Permissions
+
+By default, only users with the `Datadog Admin` role can modify adaptive sampling configurations or onboard services to adaptive sampling.
+To make changes, ensure your user account is upgraded to the default `Datadog Admin` role.
+
+If your organization uses custom roles, assign your user to a custom role that includes `APM Remote Configuration Write` and `APM Service Ingest Write` [permissions.][4]
+
+### Restrict access
+Use [granular access controls][19] to manage who can modify a specific service’s adaptive sampling configuration. You can restrict access based on roles, teams or individual users.
+
+{{< img src="/tracing/guide/adaptive_sampling/add_restriction.png" alt="Restrict permission" style="width:100%;">}}
+
+To restrict access:
+
+{{< img src="/tracing/guide/adaptive_sampling/restrict_service_ingestion_permissions.png" alt="Open granular access control modal" style="width:100%;">}}
+
+1. Open the **Permissions** section in the Ingestion Control side panel of the service.
+
+2. Click **Restrict access**.
+
+3. Select the teams, roles or users to grant access.
+
+4. Click **Add**.
+
+Note: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -154,3 +181,4 @@ The configuration should take effect in 5-6 minutes, the time it takes for Datad
 [16]: /tracing/trace_pipeline/ingestion_controls
 [17]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0
 [18]: https://app.datadoghq.com/apm/traces/ingestion-control
+[19]: /account_management/rbac/granular_access/
