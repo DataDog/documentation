@@ -1801,8 +1801,6 @@ Attach structured prompt metadata to the LLM span so you can reproduce results, 
 
 ### Inline annotation (Python)
 
-Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata immediately before the LLM call. Use this for one-off or ad‑hoc prompts inside a function. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call). For more details on span annotation, see [Annotating a span](#annotating-a-span).
-
 #### Example: single-template prompt
 
 {{< code-block lang="python" >}}
@@ -1857,6 +1855,9 @@ def rag_answer(question, context):
     )
     return completion
 {{< /code-block >}}
+
+Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata immediately before the LLM call. Use this for one-off or ad‑hoc prompts inside a function. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call). For more details on span annotation, see [Annotating a span](#annotating-a-span).
+
 
 `prompt`
 : required - dictionary
