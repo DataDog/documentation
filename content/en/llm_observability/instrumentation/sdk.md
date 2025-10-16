@@ -1772,10 +1772,10 @@ def rag_workflow(user_question):
 
     with LLMObs.annotation_context(
         prompt = Prompt(
-            id= "chatbot_prompt",
-            version = "1.0.0",
-            template = "Please answer the question using the provided context: {{question}}\n\nContext:\n{{context}}",
-            variables = {
+            id="chatbot_prompt",
+            version="1.0.0",
+            template="Please answer the question using the provided context: {{question}}\n\nContext:\n{{context}}",
+            variables={
                 "question": user_question,
                 "context": context_str,
             }
@@ -1802,32 +1802,6 @@ Attach structured prompt metadata to the LLM span so you can reproduce results, 
 ### Inline annotation (Python)
 
 Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata immediately before the LLM call. Use this for one-off or ad‑hoc prompts inside a function. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call). For more details on span annotation, see [Annotating a span](#annotating-a-span).
-
-`prompt`
-: required - dictionary
-<br />A typed dictionary that follows the Prompt schema below.
-
-{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
-
-Supported keys:
-
-- `id` (string): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
-- `version` (string): Version tag for the prompt (for example, "1.0.0"). See [version tracking](#version-tracking) for more details.
-- `variables` (object: Dict[str, str]): Variables used to render the template.
-- `template` (string): Single string template form.
-- `chat_template` (list of objects or Messages): Multi-message template form. Provide a list of `{ "role": "<role>", "template": "<template>" }` objects, or a list of `Message` objects.
-- `tags` (object: Dict[str, str]): Tags to attach to the prompt run.
-- `rag_context_variables` (list of strings): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `rag_query_variables` (list of strings): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-
-{{% /collapse-content %}}
-
-Notes:
-- Annotating a prompt is only available on LLM spans.
-- Place the annotation immediately before the provider call so it applies to the correct LLM span.
-- Use a unique prompt `id` to distinguish different prompts within your application.
-- Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
-- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
 
 #### Example: single-template prompt
 
@@ -1884,7 +1858,33 @@ def rag_answer(question, context):
     return completion
 {{< /code-block >}}
 
-### Version Tracking
+`prompt`
+: required - dictionary
+<br />A typed dictionary that follows the Prompt schema below.
+
+{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
+
+Supported keys:
+
+- `id` (str): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
+- `version` (str): Version tag for the prompt (for example, "1.0.0"). See [version tracking](#version-tracking) for more details.
+- `variables` (Dict[str, str]): Variables used to render the template.
+- `template` (str): Single string template form.
+- `chat_template` (list of objects or Messages): Multi-message template form. Provide a list of `{ "role": "<role>", "template": "<template>" }` objects, or a list of `Message` objects.
+- `tags` (Dict[str, str]): Tags to attach to the prompt run.
+- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+
+{{% /collapse-content %}}
+
+Notes:
+- Annotating a prompt is only available on LLM spans.
+- Place the annotation immediately before the provider call so it applies to the correct LLM span.
+- Use a unique prompt `id` to distinguish different prompts within your application.
+- Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
+- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
+
+### Version tracking
 
 LLM Observability provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, LLM Observability uses your specified version label instead of auto-generating one.
 
