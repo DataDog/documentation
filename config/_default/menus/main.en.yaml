@@ -6878,16 +6878,21 @@ menu:
       url: /security/code_security/dev_tool_int/github_pull_requests/
       parent: dev_tool_int
       weight: 1
+    - name: PR Gates
+      identifier: dev_tool_int_pr_gates
+      url: /pr_gates/
+      parent: dev_tool_int
+      weight: 2
     - name: IDE Plugins
       identifier: dev_tool_int_ide_plugins
       url: /security/code_security/dev_tool_int/ide_plugins/
       parent: dev_tool_int
-      weight: 2
+      weight: 3
     - name: Git Hooks
       identifier: dev_tool_int_git_hooks
       url: /security/code_security/dev_tool_int/git_hooks/
       parent: dev_tool_int
-      weight: 3
+      weight: 4
     - name: Troubleshooting
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
