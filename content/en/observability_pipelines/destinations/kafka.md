@@ -17,7 +17,7 @@ Common scenarios when you might use this destination:
     - [Databricks][3]: A data lakehouse for analytics and storage.
     - [Azure Event Hub][4]: An ingest and processing service in the Microsoft and Azure ecosystem.
 - To route data to Kafka and use the Kafka Connect ecosystem.
-- To process and normalize your data with Observability Pipelines before routing to Apache Spark with Kafka to analyze data and run Machine Learning workloads.
+- To process and normalize your data with Observability Pipelines before routing to Apache Spark with Kafka to analyze data and run machine learning workloads.
 
 ## Setup
 
@@ -50,7 +50,7 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 
 ##### Buffering options (Preview)
 
-Toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access to the Preview.
+Toggle the switch to enable **Buffering Options** ({{< tooltip glossary="preview" case="title" >}}).<br>**Note**: Contact your account manager to request access to the Preview.
 - If disabled (default): Up to 500 events are buffered before flush.
 - If enabled:
 	1. Select the buffer type you want to set.
@@ -87,7 +87,7 @@ Click **Advanced** if you want to set any of the following fields:
 #### TLS (when enabled)
 
 - If TLS is enabled, the Kafka TLS passphrase is needed.
-- Stored as the environment variable: `DD_OP_DESTINATION_KAFKA_KEY_PASS`
+- Stored as the environment variable: `DD_OP_DESTINATION_KAFKA_KEY_PASS`.
 
 #### SASL (when enabled)
 
