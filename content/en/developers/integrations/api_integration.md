@@ -21,7 +21,9 @@ further_reading:
 
 This page guides Technology Partners through creating an official Datadog API integration. API integrations are best suited for SaaS-based vendors that can host a service to interact with the [Datadog API][1].
 
-API integrations can both submit and query data. A majority of integrations submit [metrics][2], [logs][3], and/or [events][4], but you can also use other endpoints as needed, such as creating [incidents][5] or querying [users][6].
+Most integrations submit [metrics][2], [logs][3], or [events][4], but you can also use other endpoints as needed, such as creating [incidents][5] or querying [users][6].
+
+Once published, your integration appears in the Datadog app as a tile. This tile is where users connect their accounts and can learn more about the integration.
 
 ## Requirements
 
