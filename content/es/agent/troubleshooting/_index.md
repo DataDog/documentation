@@ -30,7 +30,7 @@ further_reading:
 title: Solucionar problemas del Agent
 ---
 
-Si aún no has instalado el Datadog Agent, ve [a la página exclusiva para la integración del Agent][1] para obtener instrucciones de instalación. Si acabas de instalar el Agent, pueden pasar unos instantes antes de que aparezcab métricas. El primer lugar donde deberías buscar métricas es el [Explorador de métricas][2].
+Si aún no has instalado el Datadog Agent, ve [a la página exclusiva para la integración del Agent][1] para obtener instrucciones de instalación. Si acabas de instalar el Agent, pueden pasar unos instantes antes de que aparezca métricas. El primer lugar donde deberías buscar métricas es el [Explorador de métricas][2].
 
 Si crees que tienes problemas, sigue primero esta lista de comprobación:
 

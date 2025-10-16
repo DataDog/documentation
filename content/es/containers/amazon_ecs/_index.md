@@ -177,7 +177,7 @@ Si estás utilizando [DogStatsD][8], edita tu definición del contenedor de Data
 }
 {{< /highlight >}}
 
-Esta configuración permite enrutar el tráfico de DogStatsD desde los contenedores de la aplicación, a través del host y los puertos de host, hasta el contenedor de Datadog Agent. Sin embargo, el contenedor de aplicación debe utilizar la dirección IP privada del host para este tráfico. Pueded habilitar esto configurando la variable de entorno `DD_AGENT_HOST` a la dirección IP privada de la instancia de EC2, que puedes recuperar desde Instance Metadata Service (IMDS). Alternativamente, puedes establecer esto en el código durante la inicialización. La implementación para DogStatsD es la misma que para APM. Consulta [Configurar el endpoint del Trace Agent][17] para ejemplos de configuración del endpoint del Agent.
+Esta configuración permite enrutar el tráfico de DogStatsD desde los contenedores de la aplicación, a través del host y los puertos de host, hasta el contenedor de Datadog Agent. Sin embargo, el contenedor de aplicación debe utilizar la dirección IP privada del host para este tráfico. Puedes habilitar esto configurando la variable de entorno `DD_AGENT_HOST` a la dirección IP privada de la instancia de EC2, que puedes recuperar desde Instance Metadata Service (IMDS). Alternativamente, puedes establecer esto en el código durante la inicialización. La implementación para DogStatsD es la misma que para APM. Consulta [Configurar el endpoint del Trace Agent][17] para ejemplos de configuración del endpoint del Agent.
 
 Asegúrate de que la configuración de grupo de seguridad de tus instancias EC2 no exponga públicamente los puertos para APM y DogStatsD.
 

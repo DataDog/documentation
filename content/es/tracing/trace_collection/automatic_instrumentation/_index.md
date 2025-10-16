@@ -60,7 +60,7 @@ En el caso de los entornos contenedorizados, sigue los siguientes enlaces para a
 
 3. El cliente de rastreo intenta enviar trazas al socket de dominio Unix `/var/run/datadog/apm.socket` por defecto. Si el socket no existe, las trazas se envían a `http://localhost:8126`.
 
-   Si se requiere un socket, host o puerto diferente, utiliza la variable de entorno`DD_TRACE_Agent_URL`. Por ejemplo:
+   Si se requiere un socket, host o puerto diferente, utiliza la variable de entorno`DD_TRACE_AGENT_URL`. Por ejemplo:
 
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
