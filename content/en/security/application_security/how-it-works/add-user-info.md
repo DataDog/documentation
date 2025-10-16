@@ -281,7 +281,8 @@ Starting in dd-trace-py v3.7, this example shows how to set user monitoring tags
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
 
-# starting in dd-trace-py v3.17, you can use track_user_id without login information but mandatory user_id
+# starting in dd-trace-py v3.17, you can use track_user_id
+# without login information but mandatory user_id
 track_user_id(
     "some_user_id",
     session_id="session_id",
