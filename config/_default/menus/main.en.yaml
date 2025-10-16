@@ -5694,21 +5694,26 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_environment_variables
       weight: 12
+    - name: Access Control
+      url: observability_pipelines/access_control/
+      parent: observability_pipelines
+      identifier: observability_pipelines_access_control
+      weight: 13
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 13
+      weight: 14
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 14
+      weight: 15
     - name: Troubleshooting
       url: observability_pipelines/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines
-      weight: 15
+      weight: 16
     - name: Log Management
       url: logs/
       pre: log
