@@ -16,7 +16,7 @@ Derived Metrics allow you to save any metrics query as a new metric, so you can 
 
 - **Simplify querying**: Define a query once, save it as a derived metric, and reuse it everywhere.
 - **Reduce errors and increase consistency**: Maintain formulas centrally to avoid errors and ensure uniformity across teams.
-- **Accelerate workflows**: No code changes or new metric submissions needed — create new metrics directly from existing metrics in Datadog.
+- **Accelerate workflows**: No code changes or new metric submissions needed-—-create new metrics directly from existing metrics in Datadog.
 - **Gain control and auditability**: Manage, and improve derived formulas in a single place.
 
 **Note**: Derived Metrics are **not** billed as Custom Metrics, because they are computed dynamically at query time and are not stored or indexed.
