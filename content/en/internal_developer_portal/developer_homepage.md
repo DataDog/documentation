@@ -9,6 +9,9 @@ further_reading:
 
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Developer Homepage!" >}}
+{{< /callout >}}
+
 ## Overview
 
 The [Developer Homepage][3] provides a centralized view of your team's entities and your daily tasks.  
@@ -17,9 +20,6 @@ With this view, you can:
 - View key information about your team's entities, including scorecards, recent deployments, monitors, issues, incidents, dashboards, and on-call status. 
 - Track tasks assigned to you across GitHub and Jira.
 - Identify alerting monitors or failed deployments.
-
-{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Developer Homepage!" >}}
-{{< /callout >}}
 
 ## Services and entities
 
