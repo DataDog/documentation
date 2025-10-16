@@ -256,7 +256,7 @@ You prefer to manually configure [diagnostic settings][53] on the resources you 
 
 1. Click the button below, and fill in the form on the Azure Portal. Datadog automatically deploys the Azure resources required to forward logs into your Datadog account.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)][52]
+   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)][52]
 
 2. After the template deployment finishes, set up [diagnostic settings][53] for each log source to send Azure platform logs (including resource logs) to the Storage Account created during deployment.
 
