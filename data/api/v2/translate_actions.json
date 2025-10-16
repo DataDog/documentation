@@ -2829,7 +2829,7 @@
   },
   "GetTagPipelinesRuleset": {
     "description": "Get a specific tag pipeline ruleset - Retrieve a specific tag pipeline ruleset by its ID",
-    "summary": "Get ruleset"
+    "summary": "Get a tag pipeline ruleset"
   },
   "UpdateTagPipelinesRuleset": {
     "description": "Update a tag pipeline ruleset - Update an existing tag pipeline ruleset with new rules and configuration",
