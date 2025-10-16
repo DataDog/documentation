@@ -72232,10 +72232,15 @@ paths:
           step: there is a valid "agent_rule_rc" in the system
       x-menu-order: 3
       x-undo:
-        operationId: DeleteCSMThreatsAgentRule
+      - operationId: DeleteCSMThreatsAgentRule
         parameters:
         - name: agent_rule_id
           source: data.id
+        type: unsafe
+      - operationId: DeleteCSMThreatsAgentPolicy
+        parameters:
+        - name: policy_id
+          source: data.attributes.monitoring[0]
         type: unsafe
   /api/v2/remote_config/products/cws/agent_rules/{agent_rule_id}:
     delete:
