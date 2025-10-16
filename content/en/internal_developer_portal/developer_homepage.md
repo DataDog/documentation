@@ -42,15 +42,11 @@ Each entity includes the following information:
 | **On-Call** | The current on-call responder for the team or entity. |
 
 
-## Tasks assigned to you
+## GitHub PRs
 
 {{< img src="tracing/software_catalog/github_prs_table.png" alt="PRs assigned to the user" style="width:100%;" >}}  
 
-The **Tasks** section consolidates your personal action items from GitHub and Jira.
-
-### GitHub PRs
-
-This section displays PRs in the following states:
+The **GitHub PRs** section consolidates your personal action items from GitHub, displaying PRs in the following states:
 - **Needs your review**
 - **Returned to you**  
 - **Approved**  
