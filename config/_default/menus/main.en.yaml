@@ -2749,6 +2749,12 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
+    - name: Agents
+      url: actions/agents/
+      pre: robot-wui
+      identifier: agents
+      parent: actions_heading
+      weight: 10000
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
