@@ -71,11 +71,10 @@ Click **Advanced** if you want to set any of the following fields:
 1. **Rate Limit Time Window (secs)**: The time window used for the rate limit option.
     - This setting has no effect if the rate limit for events is not set.
     - Default is `1 second` if **Rate Limit Events** is set, but **Rate Limit Time Window** is not set.
-1. Click **Add Option** to add additional [librdkafka options](#librdkafka-options).
-    1. Select an option in the dropdown menu.
-        1. Enter a value for that option.
-        1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
-        1. Click **Add Option** to add another librdkafka option.
+1. To add additional [librdkafka options](#librdkafka-options), click **Add Option** and select an option in the dropdown menu.
+    1. Enter a value for that option.
+    1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
+    1. Click **Add Option** to add another librdkafka option.
 
 ### Set environment variables
 
