@@ -23,10 +23,10 @@ You can restrict access to a specific pipeline with the following role options:
 
 | Role | View pipeline | Edit pipeline | Deploy pipeline | Delete pipeline | Can restrict access to pipeline |
 |:----:|:-------------:|:-------------:|:---------------:|:---------------:|:--------------------------:|
-| Editor | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Runner | ✓ | ✓ | ✓ |  |  |
-| Contributor* | ✓ | ✓ |  |  |  |
-| Viewer | ✓ |  |  |  |  |
+| Editor | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Runner | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| Contributor* | {{< X >}} | {{< X >}} |  |  |  |
+| Viewer | {{< X >}} |  |  |  |  |
 | No Access |  |  |  |  |  |
 
 *Contributor can only edit pipeline configuration when the pipeline is in draft mode and has not been deployed yet.
@@ -67,8 +67,8 @@ You can restrict access to Live Capture **for a specific pipeline** with the fol
 
 | Role | View captured events | Run new captures | Restrict access to Live Capture |
 |:----:|:--------------------:|:----------------:|:-------------------------------:|
-| Editor | ✓ | ✓ | ✓ |
-| Viewer | ✓ |  |  |
+| Editor | {{< X >}} | {{< X >}} | {{< X >}} |
+| Viewer | {{< X >}} |  |  |
 | No Access |  |  |  |
 
 **Notes**:
@@ -94,9 +94,9 @@ To restore full access to Live Capture for a pipeline:
 1. Click **Restore Full Access**.
 1. Click **Save**.
 
-[1]: https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#role-based-access-control
-[2]: https://docs.datadoghq.com/account_management/teams/
-[3]: https://docs.datadoghq.com/account_management/rbac/permissions/#observability-pipelines
-[4]: https://docs.datadoghq.com/account_management/rbac/granular_access/
+[1]: /account_management/rbac/?tab=datadogapplication#role-based-access-control
+[2]: /account_management/teams/
+[3]: /account_management/rbac/permissions/#observability-pipelines
+[4]: /account_management/rbac/granular_access/
 [5]: https://app.datadoghq.com/observability-pipelines
-[6]: https://docs.datadoghq.com/observability_pipelines/live_capture/
+[6]: /observability_pipelines/live_capture/
