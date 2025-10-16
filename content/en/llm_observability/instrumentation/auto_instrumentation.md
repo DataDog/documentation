@@ -300,7 +300,7 @@ The MCP integration instruments the following methods:
 
 ## Google ADK
 
-The Google ADK integration automatically agent runs, tool calls, and code executions made through [Google's ADK Python SDK][60].
+The Google ADK integration provides automatic tracing for agent runs, tool calls, and code executions made through [Google's ADK Python SDK][60].
 
 ### Traced methods
 
