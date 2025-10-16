@@ -20,7 +20,7 @@ When using any Datadog cloud integration (AWS, Azure, Google Cloud, etc.), metri
 | Provider   | Default crawler  |
 |------------|------------------|
 | Alibaba    | Every 10 minutes |
-| AWS        | Every 10 minutes (with the exception of [RDS metrics][3], which are crawled for every 3 minutes) |
+| AWS        | Every 10 minutes (with the exception of [RDS metrics][3], which are collected every 3 minutes) |
 | Azure      | Every 2 minutes  |
 | Cloudflare | Every 5 minutes |
 | GCP        | Every 5 minutes  |
