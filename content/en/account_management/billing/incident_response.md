@@ -68,7 +68,7 @@ You can also find users by searching by name, email, or team.
 
 ### Assigning Seats
 
-Billing admins can manually assign seats so team members have access before they need it. 
+Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it. 
 
 **To assign a seat:**
 
@@ -96,7 +96,7 @@ Once unassigned, the users lose access to features that require a seat but can s
 
 ### Claiming a Seaet
 
-If you try to perform an action that requires a seat such as joining an on-call schedule, updating an incident, or adding information to an incident tiemline, Datadog will prompt you to claim a seat. 
+If you try to perform an action that requires a seat such as joining an on-call schedule, updating an incident, or adding information to an incident tiemline, Datadog will prompt you to claim a seat. Claiming a seat requires the `billing_read`, `on_call_read`, or `incident_read` permission. 
 
 Once you confirm: 
 
