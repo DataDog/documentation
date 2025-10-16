@@ -3798,24 +3798,24 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
       weight: 702
-    - name: Cost Change Investigation
-      url: cloud_cost_management/investigation
+    - name: Cost Changes
+      url: cloud_cost_management/cost_changes
       parent: cloud_cost
-      identifier: cloud_cost_investigation
+      identifier: cloud_cost_cost_changes
       weight: 8
     - name: Monitors
-      url: cloud_cost_management/investigation/monitors
-      parent: cloud_cost_investigation
-      identifier: cloud_cost_investigation_monitors
+      url: cloud_cost_management/cost_changes/monitors
+      parent: cloud_cost_cost_changes
+      identifier: cloud_cost_cost_changes_monitors
       weight: 801
     - name: Anomalies
-      url: cloud_cost_management/investigation/anomalies
-      parent: cloud_cost_investigation
-      identifier: cloud_cost_investigation_anomalies
+      url: cloud_cost_management/cost_changes/anomalies
+      parent: cloud_cost_cost_changes
+      identifier: cloud_cost_cost_changes_anomalies
       weight: 802
     - name: Real-Time Costs
-      url: cloud_cost_management/investigation/real_time_costs
-      parent: cloud_cost_investigation
+      url: cloud_cost_management/cost_changes/real_time_costs
+      parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
       weight: 803
     - name: APM
