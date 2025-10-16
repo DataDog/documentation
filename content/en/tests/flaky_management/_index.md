@@ -42,7 +42,7 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
 
-1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][12] in Software Delivery settings.
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][13] in Software Delivery settings.
 2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
     {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
 
@@ -118,7 +118,7 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 
 ## Receive notifications
 
-Set up notifications to track changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notification for each repository from the  [**Flaky Test Policies**][12] page in Software Delivery settings.
+Set up notifications to track changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notification for each repository from the  [**Flaky Test Policies**][13] page in Software Delivery settings.
 
 Notifications are not sent immediately; they are batched every few minutes to reduce noise.
 
@@ -130,12 +130,14 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
+<<<<<<< HEAD
 | [.NET][6]       | 3.13.0+                       | 3.17.0+                      |
 | [Go][7]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
 | [Java][8]       | 1.48.0+                       | 1.50.0+                      |
 | [JavaScript][9] | 5.44.0+                       | 5.52.0+                      |
 | [Python][10]    | 3.3.0+                        | 3.8.0+                       |
 | [Ruby][11]      | 1.13.0+                       | 1.17.0+                      |
+| [Swift][12]     | 2.6.1+                        | 2.6.1+                       |
 
 ## Further reading
 
@@ -152,4 +154,5 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [9]: /tests/setup/javascript/
 [10]: /tests/setup/python/
 [11]: /tests/setup/ruby/
-[12]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[12]: /tests/setup/swift/
+[13]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management

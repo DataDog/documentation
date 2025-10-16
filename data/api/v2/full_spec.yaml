@@ -44568,6 +44568,14 @@ components:
             for scheduled rules - in other words, when the `schedulingOptions` field
             is present in the rule payload.'
           type: string
+        indexes:
+          description: List of indexes to query when the `dataSource` is `logs`. Only
+            used for scheduled rules, such as when the `schedulingOptions` field is
+            present in the rule payload.
+          items:
+            description: Index.
+            type: string
+          type: array
         metric:
           deprecated: true
           description: '(Deprecated) The target field to aggregate over when using
@@ -80204,7 +80212,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - cloud_cost_management_read
-      summary: Get ruleset
+      summary: Get a tag pipeline ruleset
       tags:
       - Cloud Cost Management
       x-menu-order: 20
