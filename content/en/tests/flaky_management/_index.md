@@ -130,7 +130,6 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
-<<<<<<< HEAD
 | [.NET][6]       | 3.13.0+                       | 3.17.0+                      |
 | [Go][7]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
 | [Java][8]       | 1.48.0+                       | 1.50.0+                      |
