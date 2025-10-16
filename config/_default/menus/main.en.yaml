@@ -5845,11 +5845,16 @@ menu:
       url: logs/log_configuration/rehydrating
       parent: log_configuration
       weight: 210
+    - name: Archive Search
+      identifier: log_configuration_archive_search
+      url: logs/log_configuration/archive_search
+      parent: log_configuration
+      weight: 211
     - name: Forwarding
       identifier: log_configuration_forwarding
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
-      weight: 211
+      weight: 212
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
