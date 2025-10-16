@@ -135,7 +135,7 @@ code_language_ids:
     real_time_rule: "Real-Time Rule"
     scheduled_rule: "Scheduled Rule"
     historical_job: "Historical Job"
-    kubernetes_daemonset: "Kubernetes (Daemonset)"
+    kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
 branch: ""
 
