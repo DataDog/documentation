@@ -41,7 +41,7 @@ You may also be a partner who wants to build on Datadog and contribute to the [D
     {{< nextlink href="/developers/integrations/agent_integration" >}}Create an Agent-based Integration{{< /nextlink >}}
     {{< nextlink href="/developers/integrations/api_integration" >}}Create an API Integration{{< /nextlink >}}
     {{< nextlink href="/developers/integrations/log_integration" >}}Create a Log Integration{{< /nextlink >}}
-    {{< nextlink href="/developers/integrations/marketplace_offering" >}}Build a Marketplace Offering{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/?tab=marketplace#out-of-the-box-integrations-vs-marketplace-offerings" >}}Build a Marketplace Offering{{< /nextlink >}}
 {{< /whatsnext >}}
 
 For more information about becoming a Datadog partner, navigate to the [Datadog Partner Network][2]. 
@@ -129,7 +129,7 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 [7]: https://github.com/DataDog/integrations-extras
 [8]: https://www.datadoghq.com/pricing/
 [9]: https://github.com/DataDog/integrations-core
-[10]: /developers/integrations/marketplace_offering
+[10]: /developers/integrations/?tab=marketplace#out-of-the-box-integrations-vs-marketplace-offerings
 [11]: /developers/custom_checks/
 [12]: /developers/service_checks/
 [13]: /developers/integrations/agent_integration

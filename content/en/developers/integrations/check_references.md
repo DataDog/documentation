@@ -145,5 +145,5 @@ You can find the complete list of mandatory and optional attributes for the `met
 [8]: https://docs.datadoghq.com/getting_started/tagging/
 [9]: https://app.datadoghq.com/marketplace/
 [10]: https://docs.datadoghq.com/developers/datadog_apps/
-[11]: https://docs.datadoghq.com/developers/integrations/marketplace_offering
+[11]: https://docs.datadoghq.com/developers/integrations/?tab=marketplace#out-of-the-box-integrations-vs-marketplace-offerings
 [12]: https://app.datadoghq.com/integrations
