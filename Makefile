@@ -64,6 +64,14 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
+
+llm-support-demo:
+	@node ./assets/scripts/llm-support-demo.js;
+
+html_to_mdoc:
+	@node ./assets/scripts/llm-support-demo.js;
+
+
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-cdocs:
