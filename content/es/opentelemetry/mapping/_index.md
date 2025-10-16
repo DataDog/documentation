@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: /opentelemetry/correlate/
   tag: Documentación
-  text: Explorar datos en Datadog
+  text: Correlacionar datos
 title: Mapeo semántico
 ---
 

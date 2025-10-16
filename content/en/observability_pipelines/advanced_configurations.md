@@ -60,7 +60,7 @@ The following is a list of bootstrap options, their related pipeline environment
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
 : **Priority**: `DD_API_KEY`
-: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key.
+: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key. See [Security considerations][11] for information on safeguards implemented for Remote Configuration.
 
 `pipeline_id`
 : **Pipeline environment variable**: `DD_OP_PIPELINE_ID`
@@ -132,3 +132,4 @@ api:
 [8]: /observability_pipelines/install_the_worker/worker_commands/#run-tap-or-top-the-worker
 [9]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L33-L40
 [10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
+[11]: /remote_configuration/#security-considerations

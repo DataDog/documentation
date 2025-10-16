@@ -2880,6 +2880,19 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 26
     - name: Patch a vulnerability-based notification rule
       url: '#patch-a-vulnerability-based-notification-rule'
       identifier: security-monitoring-patch-a-vulnerability-based-notification-rule
@@ -3013,6 +3026,19 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 15
+    - name: List scanned assets metadata
+      url: '#list-scanned-assets-metadata'
+      identifier: security-monitoring-list-scanned-assets-metadata
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScannedAssetsMetadata
+        unstable:
+          - v2
+        order: 28
     - name: Get SBOM
       url: '#get-sbom'
       identifier: security-monitoring-get-sbom
@@ -3039,19 +3065,6 @@ menu:
         unstable:
           - v2
         order: 28
-    - name: List vulnerable assets
-      url: '#list-vulnerable-assets'
-      identifier: security-monitoring-list-vulnerable-assets
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListVulnerableAssets
-        unstable:
-          - v2
-        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -5311,7 +5324,7 @@ menu:
         operationids:
           - GetAwsOnDemandTask
         unstable: []
-        order: 7
+        order: 18
     - name: Post an AWS on demand task
       url: '#post-an-aws-on-demand-task'
       identifier: agentless-scanning-post-an-aws-on-demand-task
@@ -5323,7 +5336,7 @@ menu:
         operationids:
           - CreateAwsOnDemandTask
         unstable: []
-        order: 8
+        order: 17
     - name: Get AWS On Demand tasks
       url: '#get-aws-on-demand-tasks'
       identifier: agentless-scanning-get-aws-on-demand-tasks
@@ -5335,7 +5348,67 @@ menu:
         operationids:
           - ListAwsOnDemandTasks
         unstable: []
-        order: 6
+        order: 16
+    - name: Patch GCP Scan Options
+      url: '#patch-gcp-scan-options'
+      identifier: agentless-scanning-patch-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGcpScanOptions
+        unstable: []
+        order: 14
+    - name: Get GCP scan options
+      url: '#get-gcp-scan-options'
+      identifier: agentless-scanning-get-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGcpScanOptions
+        unstable: []
+        order: 13
+    - name: Delete GCP Scan Options
+      url: '#delete-gcp-scan-options'
+      identifier: agentless-scanning-delete-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGcpScanOptions
+        unstable: []
+        order: 15
+    - name: Post GCP Scan Options
+      url: '#post-gcp-scan-options'
+      identifier: agentless-scanning-post-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGcpScanOptions
+        unstable: []
+        order: 12
+    - name: List GCP Scan Options
+      url: '#list-gcp-scan-options'
+      identifier: agentless-scanning-list-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGcpScanOptions
+        unstable: []
+        order: 11
     - name: Update azure scan options
       url: '#update-azure-scan-options'
       identifier: agentless-scanning-update-azure-scan-options
@@ -5348,6 +5421,18 @@ menu:
           - UpdateAzureScanOptions
         unstable: []
         order: 9
+    - name: Get Azure scan options
+      url: '#get-azure-scan-options'
+      identifier: agentless-scanning-get-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAzureScanOptions
+        unstable: []
+        order: 8
     - name: Delete azure scan options
       url: '#delete-azure-scan-options'
       identifier: agentless-scanning-delete-azure-scan-options
@@ -5371,7 +5456,7 @@ menu:
         operationids:
           - CreateAzureScanOptions
         unstable: []
-        order: 11
+        order: 7
     - name: List azure scan options
       url: '#list-azure-scan-options'
       identifier: agentless-scanning-list-azure-scan-options
@@ -5383,7 +5468,7 @@ menu:
         operationids:
           - ListAzureScanOptions
         unstable: []
-        order: 12
+        order: 6
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
@@ -5407,7 +5492,7 @@ menu:
         operationids:
           - GetAwsScanOptions
         unstable: []
-        order: 2
+        order: 3
     - name: Delete AWS Scan Options
       url: '#delete-aws-scan-options'
       identifier: agentless-scanning-delete-aws-scan-options
@@ -5431,7 +5516,7 @@ menu:
         operationids:
           - CreateAwsScanOptions
         unstable: []
-        order: 3
+        order: 2
     - name: List AWS Scan Options
       url: '#list-aws-scan-options'
       identifier: agentless-scanning-list-aws-scan-options
@@ -6316,9 +6401,9 @@ menu:
           - UpdateTagPipelinesRuleset
         unstable: []
         order: 18
-    - name: Get ruleset
-      url: '#get-ruleset'
-      identifier: cloud-cost-management-get-ruleset
+    - name: Get a tag pipeline ruleset
+      url: '#get-a-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-get-a-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
