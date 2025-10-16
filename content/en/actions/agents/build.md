@@ -8,7 +8,15 @@ further_reading:
   text: "Action Catalog"
 ---
 
-You can create a new agent from the [Agents][1] page. 
+You can create a new agent from the [Agents][1] page. The page lists information about existing agents, including the following:
+- Agent Name
+- Description
+- Author
+- Creation date
+
+On the Agents page, you can access and filter your apps. Hover over an agent for options to clone or delete it. You can also enable the **My agents** toggle to see only agents that you've created:
+
+{{< img src="/actions/agents/agent-dashboard.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
 ## Create an agent
 
