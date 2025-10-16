@@ -77,7 +77,7 @@ Use [Synthetic mobile application tests][21] to monitor how your customers exper
 
 ## Test suites
 
-Use [Synthetic Test Suites][25] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and reporting. 
+Use [Synthetic Test Suites][25] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
 
 {{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 

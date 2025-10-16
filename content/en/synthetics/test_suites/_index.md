@@ -16,14 +16,12 @@ further_reading:
 
 ## Overview
 
-Synthetic Monitoring [Test Suites][1] let you organize multiple tests into a single collection for streamlined management, troubleshooting, and reporting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
+Synthetic Monitoring [Test Suites][1] let you organize multiple tests into a single collection for streamlined management, and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
 
 ## Key features
 
 - **Centralized visibility**: View all tests and their results in one place.
-- **Faster troubleshooting**: Identify and correlate failures across related tests.
-- **Simplified management**: Create, edit, and run test groups instead of managing individual tests separately.
-- **High-level reporting**: Provide an aggregated view of test performance and failures for stakeholders.
+- **Simplified management**: Create and run test groups instead of managing individual tests separately.
 
 ## Create a test suite
 
