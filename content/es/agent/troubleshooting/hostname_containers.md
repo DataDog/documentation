@@ -44,7 +44,7 @@ rules:
       - get
 ```
 
-El error más común que impide la conexión a la API de Kubelet es la verificación del certificado TLS de Kubelet. En muchas distribuciones de Kubernetes el certificado Kubelet o bien:
+El error más común que impide la conexión a la API de Kubelet es la verificación del certificado TLS de Kubelet. En muchas distribuciones de Kubernetes, el certificato de Kubelet presenta una de dos limitaciones comunes:
 * No está firmado por la CA clúster.
 * No contiene un SAN correspondiente a la dirección a la que se puede acceder.
 
