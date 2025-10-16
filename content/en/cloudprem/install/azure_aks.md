@@ -119,13 +119,22 @@ azure:
      create: true
      name: cloudprem
 
-   # CloudPrem node configuration
-   config:
-     # The root URI where index data is stored. This should be an Azure path.
-     # All indexes created in CloudPrem are stored under this location.
-     default_index_root_uri: azure://<CONTAINER_NAME>/indexes
+  # CloudPrem node configuration
+  config:
+    # The root URI where index data is stored. This should be an Azure path.
+    # All indexes created in CloudPrem are stored under this location.
+    default_index_root_uri: azure://<CONTAINER_NAME>/indexes
 
-   # Ingress configuration
+    # Reverse connection configuration
+    # When enabled, CloudPrem initiates the connection to Datadog, eliminating the need for public ingress.
+    # This is useful for environments with strict network policies or when you prefer not to expose CloudPrem publicly.
+    # cloudprem:
+    #   enable_reverse_connection: true
+    #   site: "datadoghq.com"
+    #   dd_api_key: "${DD_API_KEY}"
+    #   dd_application_key: "${DD_APP_KEY}"
+
+  # Ingress configuration
    # The chart supports two ingress configurations:
    # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
    # 2. An internal ingress for access within the VPC
