@@ -112,6 +112,38 @@ There are two RBAC permissions that apply to Bits AI SRE:
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or have previously modified the default roles, an admin with the User Access Manage permission will need to manually add the permission to the appropriate roles. For details, see [Access Control][11].
 
+### Configure rate limits
+
+Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period.
+
+Manual investigations can still be triggered even after rate limits are reached. See [Manual investigations](#manually-start-an-investigation) for more information.
+
+#### Types of rate limits
+
+##### Per monitor limit
+
+Controls how often an investigation is triggered from a single monitor alert within a rolling 24 hour window.
+
+**Default:** Each monitor can trigger one automatic investigation per 24 hours.
+
+##### Organization limit
+
+The Organization limit defines the total number of investigations Bits AI SRE can run across your entire organization within 24 hours.
+
+**Default:** No limit
+
+#### Set a rate limit
+
+To set a rate limit:
+1. Navigate to [Bits AI SRE > Settings > Rate Limits](https://app.datadoghq.com/bits-ai/settings/rate-limits)
+2. Toggle on the rate limit you want to enable
+3. Set the maximum number of investigations that can run within a rolling 24-hour window
+4. Click Save
+
+<p align="center">
+<img width="504" height="246" alt="image" src="https://github.com/user-attachments/assets/71a7d267-88dd-4b7d-8cba-7f74957f44d2" />
+</p>
+
 ## How Bits AI SRE investigates
 
 Investigations happen in two phases:
