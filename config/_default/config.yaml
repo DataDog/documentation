@@ -142,9 +142,11 @@ module:
       target: content
       lang: studio
       includeFiles:
+        - "/api/latest/**"
         - "/account_management/**"
         - "/agent/**"
         - "/bits_ai/**"
+        - "/data_security/**"
         - "/dashboards/**"
         - "/error_tracking/**"
         - "/integrations/**"
@@ -154,6 +156,10 @@ module:
         - "/metrics/**"
         - "/notebooks/**"
         - "/product_analytics/**"
+    # load in integrations
+    - source: _vendor/content/en
+      target: content
+      lang: studio
     # end studio
     - source: static
       target: static

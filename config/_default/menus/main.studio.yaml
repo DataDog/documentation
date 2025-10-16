@@ -107,10 +107,16 @@ menu:
       parent: platform_heading
       params:
         ref_id: integrations_top_level
+    # Instead of sourcing the api nav from main menu which has no children
+    # Lets define our own so we can load /api/latest/ and not have to handle redirect for just /api/
     - name: API
       parent: platform_heading
-      params:
-        ref_id: api
+      url: /studio/api/latest/
+      identifier: studio_api
+    #- name: API
+    #  parent: platform_heading
+    #  params:
+    #    ref_id: api
     - name: Agent
       parent: platform_heading
       params:
