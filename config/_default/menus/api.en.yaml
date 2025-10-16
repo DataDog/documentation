@@ -6388,9 +6388,9 @@ menu:
           - UpdateTagPipelinesRuleset
         unstable: []
         order: 18
-    - name: Get ruleset
-      url: '#get-ruleset'
-      identifier: cloud-cost-management-get-ruleset
+    - name: Get a tag pipeline ruleset
+      url: '#get-a-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-get-a-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
