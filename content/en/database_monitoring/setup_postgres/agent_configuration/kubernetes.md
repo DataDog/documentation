@@ -14,17 +14,15 @@ Your Postgres database should now be ready for monitoring. If you haven't set it
 
 ## Base Configuration
 
-To configure an integration for an Agent running in a Docker container such as in ECS or Fargate, you have a couple of methods available, all of which are covered in detail in the Docker Configuration Documentation.
-
-The examples below show how to use [Docker Labels][102] and [Autodiscovery Templates][103] to configure the Postgres integration. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][100]. 
+To configure an integration for an Agent running on Kuberentes, there are a couple of options depending on your agent deployment method.  Below are examples on how to configuration the integration for the most common agent deployment options. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][1]. 
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 ### Datadog Operator
 
-If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring.
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][10] to enable Database Monitoring.
 
-Using the [Operator instructions in Kubernetes and Integrations][3] as a reference, follow the steps below to set up the Postgres integration:
+Using the [Operator instructions in Kubernetes and Integrations][11] as a reference, follow the steps below to set up the Postgres integration:
 
 Create or update the `datadog-agent.yaml` file with the following configuration:
 
@@ -80,12 +78,15 @@ Apply the changes to the Datadog Operator using the following command:
 ```shell
 kubectl apply -f datadog-agent.yaml
 ```
+
+[10]: /containers/cluster_agent/setup/
+[11]: /containers/kubernetes/integrations/?tab=datadogoperator
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 ### Helm
 
-Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
+Using the [Helm instructions in Kubernetes and Integrations][20] as a reference, follow the steps below to set up the Postgres integration:
 
 Update your `datadog-values.yaml` file (used in the Cluster Agent installation instructions) with the following configuration:
 
@@ -128,12 +129,14 @@ helm install datadog-agent -f datadog-values.yaml datadog/datadog
 <div class="alert alert-info">
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
+
+[20]: /containers/kubernetes/integrations/?tab=helm
 {{% /tab %}}
 
 {{% tab "Annotations" %}}
 ### Annotations
 
-You can declare the instance configuration as a Kubernetes service . To configure this check for an Agent running on Kubernetes, create a service with the Postgres integration configruaiton defined as annotations:
+Using the [Autodiscovery Annotations][30] as a reference, you can declare the instance configuration as a Kubernetes service . To configure this check for an Agent running on Kubernetes, create a service with the Postgres integration configruaiton defined as annotations:
 
 ```yaml
 apiVersion: v1
@@ -167,8 +170,6 @@ spec:
     name: postgres
 ```
 
-For more information, see [Autodiscovery Annotations][5].
-
 If you're using Postgres 9.6, add the following to the instance configuration:
 
 ```json
@@ -177,6 +178,8 @@ If you're using Postgres 9.6, add the following to the instance configuration:
 ```
 
 The Cluster Agent automatically registers this configuration and begins running the Postgres check.
+
+[30]: /containers/kubernetes/integrations/?tab=annotations#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -556,20 +559,19 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 
-[1]: https://www.postgresql.org/docs/12/contrib.html
-
-[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
-[3]: /database_monitoring/data_collected/#sensitive-information
-[4]: https://www.postgresql.org/docs/current/config-setting.html
-[5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /integrations/faq/postgres-custom-metric-collection-explained/
-[7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings/agent/latest
-[9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
-[12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[13]: /agent/configuration/agent-commands/#agent-status-and-information
-[14]: https://app.datadoghq.com/databases
-[15]: /database_monitoring/troubleshooting/?tab=postgres
+[20]: /database_monitoring/agent_integration_overhead/?tab=postgres
+[30]: /database_monitoring/data_collected/#sensitive-information
+[40]: https://www.postgresql.org/docs/current/config-setting.html
+[50]: https://www.postgresql.org/docs/current/pgstatstatements.html
+[60]: /integrations/faq/postgres-custom-metric-collection-explained/
+[70]: https://www.postgresql.org/docs/current/app-psql.html
+[80]: https://app.datadoghq.com/account/settings/agent/latest
+[90]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[100]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[101]: https://www.postgresql.org/docs/11/runtime-config-logging.html
+[102]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
+[103]: /agent/configuration/agent-commands/#agent-status-and-information
+[104]: https://app.datadoghq.com/databases
+[105]: /database_monitoring/troubleshooting/?tab=postgres
