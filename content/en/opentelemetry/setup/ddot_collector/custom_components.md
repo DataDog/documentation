@@ -2,15 +2,12 @@
 title: Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector
 aliases:
 - "/opentelemetry/agent/agent_with_custom_components"
+site_support_id: ddot_collector
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with DDOT Collector"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
-{{< /site-region >}}
 
 This guide explains how to build a DDOT Collector image with additional OpenTelemetry components not included in the default DDOT Collector. To see a list of components already included in the DDOT Collector by default, see [Included components][1].
 
