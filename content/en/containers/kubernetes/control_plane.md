@@ -362,7 +362,7 @@ You should see control plane metrics in Datadog including:
 - `kube_controller_manager.*`
 - `kube_scheduler.*`
 
-### Legacy Setup
+### Legacy setup
 
 Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks.
 
