@@ -110,7 +110,7 @@ import { DdSdkReactNative, DdSdkReactNativeConfiguration } from 'expo-datadog';
 const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true, // track user interactions (set to false if using Error Tracking only)
     true, // track XHR resources (set to false if using Error Tracking only)
     true  // track errors
