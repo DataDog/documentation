@@ -348,13 +348,13 @@ To be compliant with the GDPR regulation, the React Native SDK requires the trac
 The `trackingConsent` setting can be one of the following values:
 
 `.PENDING`
-: The React Native SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOReact NativeS SDK waits for the new tracking consent value to decide what to do with the batched data.
+: The React Native SDK starts collecting and batching the data but does not send it to Datadog. The React Native SDK waits for the new tracking consent value to decide what to do with the batched data.
 
 `.GRANTED`
 : The React Native SDK starts collecting the data and sends it to Datadog.
 
 `.NOTGRANTED`
-: The RUM iReact NativeOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
+: The React Native SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
 
 
 To change the tracking consent value and behavior after the React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
@@ -368,7 +368,7 @@ For example, assuming the current tracking consent is `.PENDING`:
 
 {{% collapse-content title="Set sample session rates" level="h4" %}}
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][101] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
+To control the data your application sends to Datadog, you can specify a sampling rate for sessions while [initializing the React Native SDK][101] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
 
 [101]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
 
@@ -387,7 +387,7 @@ Datadog recommends using a `versionSuffix` to the `DatadogProviderConfiguration`
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true,
     true,
     true
