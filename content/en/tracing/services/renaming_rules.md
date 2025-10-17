@@ -54,7 +54,7 @@ You must have the `apm_service_catalog_write` permission to create renaming rule
 1. Enter a descriptive name for the renaming rule so you can identify it later.
 1. Review and save your renaming rule.
 
-**Note:** Rules are processed at intake and applied to data as it comes in. Therefore, they are irreversible and should be created with caution. 
+**Note:** Rules are processed at intake and applied to data as it comes in. Changes affect only spans ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
 
 {{< img src="tracing/services/renaming_rules/create-service-rename-rule-reviewandsave.png" alt="The final step of the Create Service Rename Rule UI, prompting the user to review and save their renaming rule" style="width:100%;" >}}
 

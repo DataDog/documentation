@@ -27,7 +27,7 @@ Brinda información sobre las operaciones en tus recursos en el [plano de contro
 
 Para enviar los logs de actividad a Datadog, selecciona **Send subscription activity logs** (Enviar logs de actividad de suscripción). Si esta opción se deja sin marcar, no se enviará ninguno de los logs de actividad a Datadog.
 
-<div class="alert alert-warning">Cuando se habilita la recopilación de logs, el recurso de Datadog modifica automáticamente las configuraciones de registro de los <a href="https://learn.microsoft.com/azure/app-service/">servicios de aplicación</a>. Azure activa un <strong>reinicio</strong> para los servicios de aplicación cuando cambian sus configuraciones de registro.</div>
+<div class="alert alert-danger">Cuando se habilita la recopilación de logs, el recurso de Datadog modifica automáticamente las configuraciones de registro de los <a href="https://learn.microsoft.com/azure/app-service/">servicios de aplicación</a>. Azure activa un <strong>reinicio</strong> para los servicios de aplicación cuando cambian sus configuraciones de registro.</div>
 
 ## Logs de recursos de Azure
 

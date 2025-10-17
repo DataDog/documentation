@@ -1,4 +1,7 @@
 ---
+description: Monitoriza datos reales de usuarios y el rendimiento del frontend con
+  el kit de desarrollo de software (SDK) del navegador de Datadog RUM para optimizar
+  las experiencias web e identificar problemas en toda la pila.
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: Documentación

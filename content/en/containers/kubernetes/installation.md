@@ -155,11 +155,18 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 
 ### Unprivileged installation
 
+To run an unprivileged installation, add the following `securityContext` to your configuration relative to your desired `<USER_ID>` and `<GROUP ID>`:
+
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends setting this value to `100` for the preexisting `dd-agent` user [for Datadog Agent v7.48+][26].
+- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+This sets the `securityContext` at the pod level for the Agent.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 To run an unprivileged installation, add the following to `datadog-agent.yaml`:
 
-{{< highlight yaml "hl_lines=13-18" >}}
+{{< highlight yaml "hl_lines=14-19" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -172,18 +179,14 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
+
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser:  <USER_ID>
+        supplementalGroups:
+          - <GROUP_ID>
 {{< /highlight >}}
-
-- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
-- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
-
-[1]: /data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 
@@ -195,18 +198,16 @@ kubectl apply -f datadog-agent.yaml
 {{% tab "Helm" %}}
 To run an unprivileged installation, add the following to your `datadog-values.yaml` file:
 
-{{< highlight yaml "hl_lines=4-7" >}}
+{{< highlight yaml "hl_lines=5-8" >}}
 datadog:
   apiKeyExistingSecret: datadog-secret
+  clusterName: <CLUSTER_NAME>
   site: <DATADOG_SITE>
   securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
+    runAsUser: <USER_ID>
+    supplementalGroups:
+      - <GROUP_ID>
 {{< /highlight >}}
-
-- Replace `<USER_ID>` with the UID to run the Datadog Agent.
-- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
 
 Then, deploy the Agent:
 
@@ -229,7 +230,7 @@ By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/dat
 
 If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -339,3 +340,4 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [23]: https://app.datadoghq.com/orchestration/resource/pod
 [24]: /infrastructure/containers/orchestrator_explorer
 [25]: /infrastructure/containers/kubernetes_resource_utilization
+[26]: /data_security/kubernetes/#running-container-as-root-user

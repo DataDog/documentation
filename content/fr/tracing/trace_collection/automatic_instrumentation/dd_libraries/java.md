@@ -67,7 +67,7 @@ Pour commencer à tracer vos applications :
     ```
     Si vous avez besoin de réduire la taille de votre image et d'omettre des modules, vous pouvez utiliser la commande [jdeps][19] pour identifier les dépendances. Cependant, les modules requis peuvent changer au fil du temps, c'est donc à vos risques et périls.
 
-    <div class="alert alert-danger">L'activation du profilage peut avoir un impact sur votre facture en fonction de votre forfait APM. Pour plus d'informations, consultez la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">page des tarifs</a>.</div>
+    <div class="alert alert-warning">L'activation du profilage peut avoir un impact sur votre facture en fonction de votre forfait APM. Pour plus d'informations, consultez la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">page des tarifs</a>.</div>
 
 | Variable d'environnement      | Propriété système                     | Rôle|
 | --------- | --------------------------------- | ------------ |

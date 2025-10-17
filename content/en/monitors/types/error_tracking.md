@@ -31,7 +31,7 @@ With Error Tracking enabled for your organization, you can create an Error Track
 
 To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Error Tracking**][3].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Error Tracking monitors per account. <a href="/help/">Contact Support</a> to increase this limit for your account.</div>
+<div class="alert alert-info">There is a default limit of 1000 Error Tracking monitors per account. <a href="/help/">Contact Support</a> to increase this limit for your account.</div>
 
 ### Select the alerting condition
 

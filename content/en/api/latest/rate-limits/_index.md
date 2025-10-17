@@ -1,6 +1,6 @@
 ---
 title: Rate Limits
-type: documentation
+type: api
 ---
 
 {{< h2 >}}Rate Limits{{< /h2 >}}
@@ -18,7 +18,7 @@ Regarding the API rate limit policy:
 - The rate limit for event submission is `250,000` events per minute per organization.
 - The rate limits for endpoints vary and are included in the headers detailed below. These can be extended on demand.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The list above is not comprehensive of all rate limits on Datadog APIs. If you are experiencing rate limiting, reach out to <a href="https://www.datadoghq.com/support/">support</a> for more information about the APIs you're using and their limits.</div>
 
 | Rate Limit Headers      | Description                                              |

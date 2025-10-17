@@ -323,7 +323,7 @@ El registro de logs sin Agent (también denominado «envío directo de logs») e
 
 No es necesario que modifiques el código de tu aplicación ni que instales dependencias adicionales.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota:</strong> Si usas log4net o NLog, debes configurar un adicionador (log4net) o un registrador (NLog) para poder habilitar el registro de logs sin Agent. En esos casos, puedes añadir dependencias adicionales o usar el <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">registro de logs sin Agent con el receptor Serilog</a>.
 </div>
 
@@ -358,7 +358,7 @@ Habilitado de manera predeterminada al usar el registro de logs sin Agent a part
 : Permite el registro de logs sin Agent. Habilita esta funcionalidad en tu marco de registro de logs al establecer `Serilog`, `NLog`, `Log4Net` o `ILogger` (para `Microsoft.Extensions.Logging`). Si usas varios marcos de registro de logs, usa una lista de variables separadas por punto y coma.<br>
 **Ejemplo**: `Serilog;Log4Net;NLog`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota:</strong> Si usas un marco de registro de logs junto con <code>Microsoft.Extensions.Logging</code>, lo normal es que debas usar el nombre del marco. Por ejemplo, si usas <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, deberías establecer <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
 </div>
 

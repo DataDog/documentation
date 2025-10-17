@@ -132,6 +132,11 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
+    real_time_rule: "Real-Time Rule"
+    scheduled_rule: "Scheduled Rule"
+    historical_job: "Historical Job"
+    kubernetes_daemonset: "Kubernetes (DaemonSet)"
+    kubernetes_gateway: "Kubernetes (Gateway)"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -290,7 +295,7 @@ unsupported_sites:
   on-call: [gov]
   otlp_agentless: [gov]
   overview_pages: [gov]
-  quality_gates: [gov]
+  pr_gates: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
   resource_catalog: [gov]

@@ -32,6 +32,8 @@ Static Code Analysis (SAST) analyzes pre-production code to identify security an
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
 See [Static Code Analysis Setup][6] to get started.
 
+Static Code Analysis can also scan your pull requests at scale to detect and prevent malicious code changes. This allows Datadog to not only check for known code vulnerabilities, but also detect potentially malicious intent in PRs submitted to default branches of your repositories. [Request access to the Preview][12].
+
 ## Software Composition Analysis
 Software Composition Analysis (SCA) analyzes open source libraries in both your repositories and running services. You can track and manage dependencies across the software development lifecycle with:
 - IDE integration to flag vulnerabilities affecting libraries running on your services
@@ -72,3 +74,4 @@ Developers are being actively targeted with supply chain attacks. Prevent malici
 [9]: https://www.datadoghq.com/product-preview/secret-scanning/
 [10]: /security/code_security/iac_security
 [11]: https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc
+[12]: https://www.datadoghq.com/product-preview/malicious-pr-protection/

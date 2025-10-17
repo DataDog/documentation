@@ -16,7 +16,7 @@ If you are already using a standalone OpenTelemetry (OTel) Collector for your OT
 
 To migrate to the DDOT Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   The DDOT Collector only supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>), not as a <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a>. If you have an existing gateway architecture, you can use the DDOT Collector with the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/loadbalancingexporter">loadbalancingexporter</a> to connect to your existing gateway layer.
 </div>
 
@@ -212,7 +212,7 @@ datadog:
       ```
 
 1. (Optional) Enable additional Datadog features:
-   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+   <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   ...
@@ -228,7 +228,7 @@ datadog:
     processCollection: true
    {{< /code-block >}}
 1. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
-   <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+   <div class="alert alert-warning">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   ...

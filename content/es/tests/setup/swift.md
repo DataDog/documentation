@@ -113,7 +113,7 @@ En comparación con otros métodos, como la vinculación de Cocoapods and Framew
 [1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>Nota</strong>: Este marco sólo es útil para realizar tests y debes vincularlo sólo con la aplicación durante la ejecución de tests. No debes distribuir el marco entre tus usuarios. </div>
+<div class="alert alert-danger"><strong>Nota</strong>: Este marco sólo es útil para realizar tests y debes vincularlo sólo con la aplicación durante la ejecución de tests. No debes distribuir el marco entre tus usuarios. </div>
 
 ## Instrumentación de tus pruebas
 
@@ -125,7 +125,7 @@ Para habilitar la instrumentación de los tests añade las siguientes variables 
 
 {{< img src="continuous_integration/swift_env.png" alt="Entornos Swift" >}}
 
-<div class="alert alert-warning">Tu objetivo principal debe encontrarse en la expansión de variables de las variables de entorno. Si no se selecciona, las variables no son válidas.</div>
+<div class="alert alert-danger">Tu objetivo principal debe encontrarse en la expansión de variables de las variables de entorno. Si no se selecciona, las variables no son válidas.</div>
 
 Para los tests de interfaz de usuario, las variables de entorno sólo deben configurarse en el objetivo del test, ya que el marco inyecta automáticamente estos valores en la aplicación.
 
@@ -241,7 +241,7 @@ El marco habilita la instrumentación automática de todas los bibliotecas compa
 
 `DD_DISABLE_CRASH_HANDLER`
 : Deshabilita la gestión y la notificación de fallos. (Booleano)
-<div class="alert alert-warning"><strong>Importante</strong>: Si deshabilitas la notificación de fallos, los tests fallidos no se notificarán y no aparecerán como fallos del test. Si necesitas deshabilitar la gestión de fallos para alguno de tus tests, ejecútala como un objetivo separado, para no deshabilitarla para los demás.</div>
+<div class="alert alert-danger"><strong>Importante</strong>: Si deshabilitas la notificación de fallos, los tests fallidos no se notificarán y no aparecerán como fallos del test. Si necesitas deshabilitar la gestión de fallos para alguno de tus tests, ejecútala como un objetivo separado, para no deshabilitarla para los demás.</div>
 
 ### Instrumentación automática de la red
 

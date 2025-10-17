@@ -69,7 +69,7 @@ Las aplicaciones de OpenTelemetry Go son [instrumentadas manualmente][3]. Para a
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">La versión mínima compatible del SDK de .NET OpenTelemetry es <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
+<div class="alert alert-danger">La versión mínima compatible del SDK de .NET OpenTelemetry es <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
 #### Instrumentación automática
 
@@ -120,7 +120,7 @@ Las métricas en tiempo de ejecución de OpenTelemetry tienen los siguientes pre
 
 Las siguientes tablas enumeran las métricas de tiempo de ejecución de Datadog que son compatibles a través de la asignación de OpenTelemetry. "N/A" indica que no hay métrica equivalente de OpenTelemetry disponible.
 
-<div class="alert alert-warning"> Las métricas en tiempo de ejecución de OpenTelemetry se asignan a Datadog por el nombre métrica. No cambies el nombre de las métricas de host por métricas de tiempo de ejecución de OpenTelemetry, ya que esto rompe la asignación.</div>
+<div class="alert alert-danger"> Las métricas en tiempo de ejecución de OpenTelemetry se asignan a Datadog por el nombre métrica. No cambies el nombre de las métricas de host por métricas de tiempo de ejecución de OpenTelemetry, ya que esto rompe la asignación.</div>
 
 [100]: /es/opentelemetry/setup/collector_exporter/
 [101]: /es/opentelemetry/setup/otlp_ingest_in_the_agent

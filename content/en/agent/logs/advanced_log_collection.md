@@ -551,7 +551,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em> <br><br>Log collection works with precision of up to millisecond. Logs with greater precision are not sent even if they match the pattern.</div>
+<div class="alert alert-danger"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em> <br><br>Log collection works with precision of up to millisecond. Logs with greater precision are not sent even if they match the pattern.</div>
 
 More examples:
 
