@@ -21,79 +21,6 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 
  
 
-<!-- 
-### Installation
-To install the React Native SDK using the command line, select the appropriate tab.
-
-{{< tabs >}}
-
-
-{{% tab "NPM" %}}
-To install with NPM, run:
-
-```sh
-npm install @datadog/mobile-react-native
-```
-
-{{% /tab %}}
-
-
-{{% tab "Yarn" %}}
-To install with Yarn, run:
-
-```sh
-yarn add @datadog/mobile-react-native
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-To install the React Native SDK for your specific operating system, select the appropriate tab.
-
-{{< tabs >}}
-
-
-{{% tab "Android" %}}
-
-To begin, ensure that your React Native version and Java version are compatible. Datadog recommends using a React Native version that is actively supported.
-
-|React Native version| Java Version|
-|--------------------|-------------|
-|0.67 or less        |           11|
-|0.68 or higher      |           17|
-
-Then, modify the following to match the Datadog React Native SDK requirements for the Android application setup: 
-
-- `compileSdkVersion` 31 or higher 
-- Build Tools version 31 or higher 
-- Android Gradle Plugin version 7 
-- Gradle version 7 or higher 
-
-To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. 
-
-
-Finally, in your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
-
-```groovy
-buildscript {
-    ext {
-        // targetSdkVersion = ...
-        kotlinVersion = "1.8.21"
-    }
-}
-```
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-Install the added pod:
-
-```sh
-(cd ios && pod install)
-```
-{{% /tab %}}
-{{< /tabs >}} -->
-
-
 ### Step 1 - Specify application details in the UI
 
 1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
@@ -120,7 +47,7 @@ import {
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true, // Track user interactions (such as a tap on buttons).
     true, // Track XHR resources
     true // Track errors
