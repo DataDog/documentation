@@ -64,7 +64,7 @@ Capabilities:
 [3]: /integrations/azure_app_services/#metrics
 [4]: https://app.datadoghq.com/serverless/azure/app-service-plan
 [5]: /integrations/azure/#setup
-[6]: /logs/guide/azure-logging-guide/
+[6]: /logs/guide/azure-automated-log-forwarding/
 [7]: /serverless/azure_app_service/linux_code
 [8]: /serverless/azure_app_service/linux_container
 [9]: /serverless/azure_app_service/windows_code
