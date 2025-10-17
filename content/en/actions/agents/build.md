@@ -26,12 +26,25 @@ Blueprints are helpful starter agents that cover common use cases. They come loa
 
 To build an agent from a blueprint:
 
-1. 
-
+1. Navigate to the [Agents][1] page. 
+1. In **Agent Blueprints**, click the blueprint you want to use. 
+    1. Alternatively, you can click **New Agent** and browse the full list of blueprints.
+1. Click **Create From Blueprint**.
+1. Your new agent will have pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it][2]. 
+1. Click the gear icon to close the agent's settings.
 
 ### Create a custom agent
 
+To build an agent from scratch: 
+
+1. Navigate to the [Agents][1] page. 
+1. Click **New Agent**. 
+1. [Customize your agent][2]. Changes are saved automatically.
+
+
 ## Customize your agent
+
+
 
 ## Further reading
 
@@ -40,3 +53,4 @@ To build an agent from a blueprint:
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
 
 [1]: https://app.datadoghq.com/actions/agents
+[2]: /actions/agents/build/#create-a-custom-agent
