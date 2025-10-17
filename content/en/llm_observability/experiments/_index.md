@@ -188,31 +188,6 @@ Dataset versions are **NOT** created when:
 - On day 25, you run an experiment on `v11`. The 90-day window **restarts** from that day.
 - If `v11` isn’t used again for 90 days after that, it may be deleted.
 
-#### Versioning workflow
-
-**Example: Standard versioning workflow**
-
-```python
-# Create dataset (starts at version 0)
-dataset = LLMObs.create_dataset(
-    dataset_name="my-dataset",
-    records=[
-        {"input_data": "test1", "expected_output": "output1"}
-    ]
-)
-print(f"Current version: {dataset.current_version}")  # 0
-
-# Add more records (creates version 1)
-dataset.append({"input_data": "test2", "expected_output": "output2"})
-dataset.push()  # Default: create_new_version=True
-print(f"Current version: {dataset.current_version}")  # 1
-
-# Update a record (creates version 2)
-dataset.update(0, {"input_data": "test1-updated", "expected_output": "output1"})
-dataset.push()
-print(f"Current version: {dataset.current_version}")  # 2
-```
-
 ### Accessing dataset records
 
 You can access dataset records using standard Python indexing:
