@@ -489,7 +489,7 @@ You should see control plane metrics in Datadog including:
 - `kube_scheduler.*`
 - `etcd.*` 
 
-### Legacy Setup
+### Legacy setup
 
 On OpenShift 4, all control plane components can be monitored using endpoint checks.
 
