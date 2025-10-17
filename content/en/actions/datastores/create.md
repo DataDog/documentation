@@ -16,10 +16,6 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You can create and manage datastores from the [Datastore page][1].
 
 ## Create a datastore
