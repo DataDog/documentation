@@ -56,7 +56,7 @@ Changes you make to a datastore are evaluated by whether they match any of your 
 
 In the screenshot below, audit logs were created for automation rules run when new entries were added, entries were changed, and entries were deleted. Each run generates three logs: one for the rule match, one for the workflow beginning execution, and one for the workflow execution result.
 
-{{< img src="/actions/datastore/datastore-automation-audit.png" alt="An example of a datastore's audit logs" caption="An example of a datastore's audit logs" style="width:100%;" >}}
+{{< img src="/actions/datastore/datastore-automation-audit-2.png" alt="An example of a datastore's audit logs" style="width:100%;" >}}
 
 ### View audit logs
 
