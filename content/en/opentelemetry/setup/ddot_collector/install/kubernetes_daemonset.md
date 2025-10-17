@@ -6,7 +6,6 @@ aliases:
 code_lang: kubernetes_daemonset
 type: multi-code-lang
 code_lang_weight: 1
-site_support_id: ddot_collector
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"

@@ -2,7 +2,6 @@
 title: Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector
 aliases:
 - "/opentelemetry/agent/agent_with_custom_components"
-site_support_id: ddot_collector
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"

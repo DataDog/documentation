@@ -3,7 +3,6 @@ title: Install the DDOT Collector as a gateway on Kubernetes
 code_lang: kubernetes_gateway
 type: multi-code-lang
 code_lang_weight: 2
-site_support_id: ddot_collector
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
