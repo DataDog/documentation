@@ -14,10 +14,9 @@ further_reading:
 title: Unity Crash Reporting and Error Tracking
 ---
 
-<<<<<<< HEAD
 ## Overview
 
-Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
+Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends.
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -81,7 +80,7 @@ Unity forwards all uncaught exceptions to its logger using `Debug.LogException`.
 
 Native crash reporting is enabled for all Datadog Unity SDK projects.
 
-If your application suffers a fatal crash, the Datadog Unity SDK uploads a crash report to Datadog *after* your application restarts. For non-fatal errors or exceptions, the Datadog Unity SDK uploads these errors with other RUM data.
+If your application suffers a fatal crash, the Datadog Unity SDK uploads a crash report to Datadog *after* your application restarts. For non-fatal errors or exceptions, the Datadog Unity SDK uploads these errors with other session data.
 
 
 ### Step 5 - Get deobfuscated and symbolicated stack traces
@@ -217,7 +216,7 @@ The following parameters are available when creating a new logger:
 
 {{% collapse-content title="Sending data when device is offline" level="h4" %}}
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches.
+The Datadog SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches.
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
@@ -269,6 +268,3 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
 [6]: https://app.datadoghq.com/source-code/setup/rum 
-=======
-{{< include-markdown "real_user_monitoring/application_monitoring/unity/error_tracking" >}}
->>>>>>> master
