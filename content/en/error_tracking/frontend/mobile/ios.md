@@ -32,7 +32,7 @@ To start sending Error Tracking data from your iOS or tvOS application to Datado
 
 ### Step 1 - Declare the iOS SDK as a dependency
 
-Declare the iOS library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
+Declare the iOS library as a dependency depending on your package manager. Datadog recommends using Swift Package Manager (SPM).
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -358,7 +358,7 @@ For more information, see [Web View Tracking][3].
 
 Crash reporting captures fatal crashes when your app terminates unexpectedly, in addition to the errors that Error Tracking displays in a unified interface.
 
-To enable crash reporting, add the package according to your dependency manager and update your initialize snippet.
+To enable crash reporting, add the package according to your dependency manager and update your initialization snippet.
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -415,7 +415,7 @@ CrashReporting.enable()
 
 ### Step 5 - Add app hang reporting
 
-App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]). By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a _hang_ in [**Error Tracking**][1]. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]). By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
 
 There are two types of hangs:
 
@@ -490,7 +490,7 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 **Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture. `.dSYM` files are limited in size to **2 GB** each.
 
-To help you debug errors, Datadog uses a unique generated build ID to deobfuscated stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
+To help you debug errors, Datadog uses a unique generated build ID to deobfuscate stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
