@@ -17,7 +17,7 @@ This eliminates the need to manually configure a separate AWS Connection, simpli
 When configured, Datadog uses the same AWS credentials that power integrations such as **AWS EC2**, **RDS**, and **S3 monitoring**, to securely execute supported read-only actions.
 
 <div class="alert alert-info">
-This feature is limited to <strong>read-only AWS actions</strong> and integrations configured with "Role Delegation" access type. It also requires that your Datadog AWS integration role has the appropriate permissions defined in AWS. All actions under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html" target="_blank">ReadOnlyAccess permissions</a> should work, as long as the IAM role used by the AWS Integration has been granted the permissions needed and that an Action exists.
+This feature is limited to <strong>read-only AWS actions</strong> and AWS integrations configured with "Role Delegation" access type. It also requires that your Datadog AWS integration role has the appropriate permissions defined in AWS. All actions under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html" target="_blank">ReadOnlyAccess permissions</a> should work, as long as the IAM role used by the AWS Integration has been granted the permissions needed, and that an Action exists for the operation.
 </div>
 
 ---
@@ -34,8 +34,8 @@ Examples include:
 
 To successfully execute actions with this integration:
 
-- The **AWS Integration Role** configured in Datadog must have permissions in AWS needed for the operations desired.
-- The selected action must be read-only — write or mutating actions (such as `Put*`, `Delete*`, `Update*`) are not supported and will fail when running.
+- The **AWS Integration IAM Role** configured for Role Delegation must have the permissions required for the operations desired (e.g., `ecs:ListClusters`).
+- The selected action must be read-only. Write or mutating actions (such as `Put*`, `Delete*`, `Update*`) are not supported and will fail when running.
 - The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (see next section for details).
 
 ---
@@ -48,15 +48,15 @@ If you haven’t already configured the AWS Integration, follow the [AWS Integra
 
 Make sure that:
 - The AWS integration is active for your target AWS Account.
-- The IAM Role associated with the integration includes the permissions for the operations.
-- The integration is configured with the **Executor** permission in the AWS integration tile in Datadog for fine-grained control.
+- The IAM Role associated with the integration includes the permissions for the operations (e.g., `ecs:ListClusters`).
+- The integration is configured with the **Executor** permission in the AWS Integration tile in Datadog for fine-grained control.
 
 <image of integration to click on "Set permissions">
 <image of Grace modal with configured user acces>
 
 ### 2. Select the Integration in Your Action
 
-When creating or editing an Action within **Workflows**, you can now choose your existing AWS integration as the credential source.
+When creating or editing an Action within **Workflows**, you can now choose your existing AWS integration in the Connections field.
 
 1. Open your Workflow in the Datadog UI.
 2. Add an AWS Action (for example, **List ECS Clusters**).
