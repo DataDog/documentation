@@ -6,6 +6,9 @@ aliases:
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"

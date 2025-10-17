@@ -11,6 +11,7 @@ algolia:
     - performance recommendations
     - reliability recommendations
     - tracing
+site_support_id: apm_recommendations
 further_reading:
   - link: "/tracing/"
     tag: "Documentation"

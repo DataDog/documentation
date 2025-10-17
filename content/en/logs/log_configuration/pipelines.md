@@ -4,6 +4,9 @@ description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/pipelines/
 further_reading:
+- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+  tag: Blog
+  text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"

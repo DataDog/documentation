@@ -6,6 +6,9 @@ aliases:
 - /monitors/monitor_types/forecasts
 - /monitors/create/types/forecasts/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"

@@ -662,7 +662,7 @@ menu:
       parent: otel_collect
       weight: 401
     - name: Install the DDOT Collector
-      url: /opentelemetry/setup/ddot_collector/install/kubernetes
+      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
       identifier: otel-setup-ddot-install
       parent: otel-setup-ddot
       weight: 4011
@@ -1207,6 +1207,11 @@ menu:
       identifier: ddsql_reference
       parent: essentials_heading
       weight: 110000
+    - name: Data Directory
+      url: ddsql_reference/data_directory/
+      identifier: ddsql_reference_data_directory
+      parent: ddsql_reference
+      weight: 1
     - name: CoScreen
       url: coscreen/
       pre: coscreen
@@ -2030,16 +2035,21 @@ menu:
       parent: metrics_top_level
       identifier: composite_metrics_queries
       weight: 11
+    - name: Derived Metrics
+      url: metrics/derived-metrics
+      parent: metrics_top_level
+      identifier: derived_metrics
+      weight: 12
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 12
+      weight: 13
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 13
+      weight: 14
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -5654,46 +5664,51 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
       weight: 1112
+    - name: Kafka
+      url: observability_pipelines/destinations/kafka/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_kafka
+      weight: 1113
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 1113
+      weight: 1114
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 1114
+      weight: 1115
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 1115
+      weight: 1116
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 1116
+      weight: 1117
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 1117
+      weight: 1118
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 1118
+      weight: 1119
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 1119
+      weight: 1120
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 1120
+      weight: 1121
     - name: Environment Variables
       url: observability_pipelines/environment_variables/
       parent: observability_pipelines
@@ -6885,19 +6900,24 @@ menu:
       weight: 6
     - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
-      url: /security/code_security/dev_tool_int/github_pull_requests/
+      url: /security/code_security/dev_tool_int/pull_request_comments/
       parent: dev_tool_int
       weight: 1
+    - name: PR Gates
+      identifier: dev_tool_int_pr_gates
+      url: /pr_gates/
+      parent: dev_tool_int
+      weight: 2
     - name: IDE Plugins
       identifier: dev_tool_int_ide_plugins
       url: /security/code_security/dev_tool_int/ide_plugins/
       parent: dev_tool_int
-      weight: 2
+      weight: 3
     - name: Git Hooks
       identifier: dev_tool_int_git_hooks
       url: /security/code_security/dev_tool_int/git_hooks/
       parent: dev_tool_int
-      weight: 3
+      weight: 4
     - name: Troubleshooting
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/

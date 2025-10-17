@@ -11,10 +11,6 @@ further_reading:
 
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-recommendations/" btn_hidden="false" header="Join the Preview!">}}
-  Custom Recommendations is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="cloud_cost/recommendations/custom-recommendations-without-history.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:100%;" >}}
