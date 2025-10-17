@@ -294,7 +294,7 @@ track_user_id(
     },
 )
 
-# or you can use track_user if you prefer
+# Alternatively, you can use track_user
 user_login = "some_login"
 # to enable all features (user_id and/or session_id monitoring and blocking), 
 # make sure you provide the corresponding optional arguments
