@@ -212,6 +212,22 @@ components:
       required: true
       schema:
         type: string
+    CaseCustomAttributeIDPathParameter:
+      description: Case Custom attribute's UUID
+      example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de505
+      in: path
+      name: custom_attribute_id
+      required: true
+      schema:
+        type: string
+    CaseCustomAttributeKeyPathParameter:
+      description: Case Custom attribute's key
+      example: aws_region
+      in: path
+      name: custom_attribute_key
+      required: true
+      schema:
+        type: string
     CaseIDPathParameter:
       description: Case's UUID or key
       example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
@@ -227,6 +243,22 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/CaseSortableField'
+    CaseTypeIDPathParameter:
+      description: Case type's UUID
+      example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de505
+      in: path
+      name: case_type_id
+      required: true
+      schema:
+        type: string
+    CellIDPathParameter:
+      description: Timeline cell's UUID
+      example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
+      in: path
+      name: cell_id
+      required: true
+      schema:
+        type: string
     CloudAccountID:
       description: Cloud Account id.
       in: path
@@ -8519,6 +8551,11 @@ components:
           format: date-time
           readOnly: true
           type: string
+        custom_attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/CustomAttributeValue'
+          description: Case custom attributes
+          type: object
         description:
           description: Description
           type: string
@@ -8546,6 +8583,39 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/CaseType'
+        type_id:
+          description: Case type UUID
+          example: 3b010bde-09ce-4449-b745-71dd5f861963
+          type: string
+      type: object
+    CaseComment:
+      description: Case comment
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseCommentAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseCommentAttributes:
+      description: Case comment attributes
+      properties:
+        comment:
+          description: The `CaseCommentAttributes` `message`.
+          example: This is my comment !
+          type: string
+      required:
+      - comment
+      type: object
+    CaseCommentRequest:
+      description: Case comment request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseComment'
+      required:
+      - data
       type: object
     CaseCreate:
       description: Case creation data
@@ -8572,11 +8642,13 @@ components:
           description: Title
           example: Security breach investigation
           type: string
-        type:
-          $ref: '#/components/schemas/CaseType'
+        type_id:
+          description: Case type UUID
+          example: 3b010bde-09ce-4449-b745-71dd5f861963
+          type: string
       required:
       - title
-      - type
+      - type_id
       type: object
     CaseCreateRelationships:
       description: Relationships formed with the case on creation
@@ -8707,6 +8779,7 @@ components:
       - caseTrigger
       type: object
     CaseType:
+      deprecated: true
       description: Case type
       enum:
       - STANDARD
@@ -8714,6 +8787,85 @@ components:
       type: string
       x-enum-varnames:
       - STANDARD
+    CaseTypeCreate:
+      description: Case type
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseTypeResourceAttributes'
+        type:
+          $ref: '#/components/schemas/CaseTypeResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseTypeCreateRequest:
+      description: Case type create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseTypeCreate'
+      required:
+      - data
+      type: object
+    CaseTypeResource:
+      description: The definition of `CaseType` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseTypeResourceAttributes'
+        id:
+          description: Case type's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseTypeResourceType'
+      type: object
+    CaseTypeResourceAttributes:
+      description: Case Type resource attributes
+      properties:
+        deleted_at:
+          description: Timestamp of when the case type was deleted
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        description:
+          description: Case type description.
+          example: Investigations done in case management
+          type: string
+        emoji:
+          description: Case type emoji.
+          example: "\U0001F575\U0001F3FB\u200D\u2642\uFE0F"
+          type: string
+        name:
+          description: Case type name.
+          example: Investigation
+          type: string
+      required:
+      - name
+      type: object
+    CaseTypeResourceType:
+      default: case_type
+      description: Case type resource type
+      enum:
+      - case_type
+      example: case_type
+      type: string
+      x-enum-varnames:
+      - CASE_TYPE
+    CaseTypeResponse:
+      description: Case type response
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseTypeResource'
+      type: object
+    CaseTypesResponse:
+      description: Case types response.
+      properties:
+        data:
+          description: List of case types
+          items:
+            $ref: '#/components/schemas/CaseTypeResource'
+          type: array
+      type: object
     CaseUpdateAttributes:
       description: Case update attributes
       properties:
@@ -8738,6 +8890,54 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/CaseUpdateAttributes'
+      required:
+      - data
+      type: object
+    CaseUpdateCustomAttribute:
+      description: Case update custom attribute
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomAttributeValue'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateCustomAttributeRequest:
+      description: Case update custom attribute request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateCustomAttribute'
+      required:
+      - data
+      type: object
+    CaseUpdateDescription:
+      description: Case update description
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateDescriptionAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateDescriptionAttributes:
+      description: Case update description attributes
+      properties:
+        description:
+          description: Case new description
+          example: Seeing some weird memory increase... We shouldn't ignore this
+          type: string
+      required:
+      - description
+      type: object
+    CaseUpdateDescriptionRequest:
+      description: Case update description request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateDescription'
       required:
       - data
       type: object
@@ -8792,6 +8992,35 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/CaseUpdateStatus'
+      required:
+      - data
+      type: object
+    CaseUpdateTitle:
+      description: Case update title
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateTitleAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateTitleAttributes:
+      description: Case update title attributes
+      properties:
+        title:
+          description: Case new title
+          example: Memory leak investigation on API
+          type: string
+      required:
+      - title
+      type: object
+    CaseUpdateTitleRequest:
+      description: Case update title request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateTitle'
       required:
       - data
       type: object
@@ -13121,6 +13350,177 @@ components:
         data:
           $ref: '#/components/schemas/CsmServerlessCoverageAnalysisData'
       type: object
+    CustomAttributeConfig:
+      description: The definition of `CustomAttributeConfig` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomAttributeConfigResourceAttributes'
+        id:
+          description: Custom attribute configs identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomAttributeConfigResourceType'
+      type: object
+    CustomAttributeConfigAttributesCreate:
+      description: Custom attribute config resource attributes
+      properties:
+        description:
+          description: Custom attribute description.
+          example: AWS Region, must be a valid region supported by AWS
+          type: string
+        display_name:
+          description: Custom attribute name.
+          example: AWS Region
+          type: string
+        is_multi:
+          description: Whether multiple values can be set
+          example: true
+          type: boolean
+        key:
+          description: Custom attribute key. This will be the value use to search
+            on this custom attribute
+          example: aws_region
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomAttributeType'
+      required:
+      - display_name
+      - key
+      - type
+      - is_multi
+      type: object
+    CustomAttributeConfigCreate:
+      description: Custom attribute config
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomAttributeConfigAttributesCreate'
+        type:
+          $ref: '#/components/schemas/CustomAttributeConfigResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CustomAttributeConfigCreateRequest:
+      description: Custom attribute config create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomAttributeConfigCreate'
+      required:
+      - data
+      type: object
+    CustomAttributeConfigResourceAttributes:
+      description: Custom attribute resource attributes
+      properties:
+        case_type_id:
+          description: Custom attribute config identifier.
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        description:
+          description: Custom attribute description.
+          example: AWS Region, must be a valid region supported by AWS
+          type: string
+        display_name:
+          description: Custom attribute name.
+          example: AWS Region
+          type: string
+        is_multi:
+          description: Whether multiple values can be set
+          example: true
+          type: boolean
+        key:
+          description: Custom attribute key. This will be the value use to search
+            on this custom attribute
+          example: aws_region
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomAttributeType'
+      required:
+      - case_type_id
+      - display_name
+      - key
+      - type
+      - is_multi
+      type: object
+    CustomAttributeConfigResourceType:
+      default: custom_attribute
+      description: Custom attributes config JSON:API resource type
+      enum:
+      - custom_attribute
+      example: custom_attribute
+      type: string
+      x-enum-varnames:
+      - CUSTOM_ATTRIBUTE
+    CustomAttributeConfigResponse:
+      description: Custom attribute config response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomAttributeConfig'
+      type: object
+    CustomAttributeConfigsResponse:
+      description: Custom attribute configs response.
+      properties:
+        data:
+          description: List of custom attribute configs of case type
+          items:
+            $ref: '#/components/schemas/CustomAttributeConfig'
+          type: array
+      type: object
+    CustomAttributeMultiNumberValue:
+      description: Values of multi NUMBER custom attribute
+      items:
+        description: NUMBER value
+        format: double
+        type: number
+      type: array
+    CustomAttributeMultiStringValue:
+      description: Value of multi TEXT/URL custom attribute
+      items:
+        description: TEXT/URL Value
+        type: string
+      type: array
+    CustomAttributeNumberValue:
+      description: Value of NUMBER custom attribute
+      format: double
+      type: number
+    CustomAttributeStringValue:
+      description: Value of TEXT/URL custom attribute
+      type: string
+    CustomAttributeType:
+      description: Custom attributes type
+      enum:
+      - URL
+      - TEXT
+      - NUMBER
+      example: NUMBER
+      type: string
+      x-enum-varnames:
+      - URL
+      - TEXT
+      - NUMBER
+    CustomAttributeValue:
+      description: Custom attribute values
+      properties:
+        is_multi:
+          description: If true, value must be an array
+          example: false
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomAttributeType'
+        value:
+          $ref: '#/components/schemas/CustomAttributeValuesUnion'
+      required:
+      - type
+      - is_multi
+      - value
+      type: object
+    CustomAttributeValuesUnion:
+      description: Union of supported value for a custom attribute
+      oneOf:
+      - $ref: '#/components/schemas/CustomAttributeStringValue'
+      - $ref: '#/components/schemas/CustomAttributeMultiStringValue'
+      - $ref: '#/components/schemas/CustomAttributeNumberValue'
+      - $ref: '#/components/schemas/CustomAttributeMultiNumberValue'
     CustomConnection:
       description: A custom connection used by an app.
       properties:
@@ -50333,6 +50733,120 @@ components:
       - time_zone
       - restrictions
       type: object
+    TimelineCell:
+      description: timeline cell
+      properties:
+        author:
+          $ref: '#/components/schemas/TimelineCellAuthor'
+        cell_content:
+          $ref: '#/components/schemas/TimelineCellContent'
+        created_at:
+          description: Timestamp of when the cell was created
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_at:
+          description: Timestamp of when the cell was deleted
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Timestamp of when the cell was last modified
+          format: date-time
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/TimelineCellType'
+      type: object
+    TimelineCellAuthor:
+      description: author of the timeline cell
+      oneOf:
+      - $ref: '#/components/schemas/TimelineCellAuthorUser'
+    TimelineCellAuthorUser:
+      description: timeline cell user author
+      properties:
+        content:
+          $ref: '#/components/schemas/TimelineCellAuthorUserContent'
+        type:
+          $ref: '#/components/schemas/TimelineCellAuthorUserType'
+      type: object
+    TimelineCellAuthorUserContent:
+      description: user author content.
+      properties:
+        email:
+          description: user email
+          type: string
+        handle:
+          description: user handle
+          type: string
+        id:
+          description: user UUID
+          type: string
+        name:
+          description: user name
+          type: string
+      type: object
+    TimelineCellAuthorUserType:
+      description: user author type.
+      enum:
+      - USER
+      example: USER
+      type: string
+      x-enum-varnames:
+      - USER
+    TimelineCellContent:
+      description: timeline cell content
+      oneOf:
+      - $ref: '#/components/schemas/TimelineCellContentComment'
+    TimelineCellContentComment:
+      description: comment content
+      properties:
+        message:
+          description: comment message
+          type: string
+      type: object
+    TimelineCellResource:
+      description: Timeline cell JSON:API resource
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimelineCell'
+        id:
+          description: Timeline cell's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TimelineCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    TimelineCellResourceType:
+      default: timeline_cell
+      description: Timeline cell JSON:API resource type
+      enum:
+      - timeline_cell
+      example: timeline_cell
+      type: string
+      x-enum-varnames:
+      - TIMELINE_CELL
+    TimelineCellType:
+      description: Timeline cell content type
+      enum:
+      - COMMENT
+      example: COMMENT
+      type: string
+      x-enum-varnames:
+      - COMMENT
+    TimelineResponse:
+      description: Timeline response
+      properties:
+        data:
+          description: The `TimelineResponse` `data`.
+          items:
+            $ref: '#/components/schemas/TimelineCellResource'
+          type: array
+      type: object
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
       properties:
@@ -56847,12 +57361,23 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"My
-              new case\",\n      \"type\": \"STANDARD\",\n      \"priority\": \"P4\"\n
-              \   },\n    \"relationships\": {\n      \"project\": {\n        \"data\":
+              new case\",\n      \"type_id\": \"00000000-0000-0000-0000-000000000001\",\n
+              \     \"priority\": \"P4\"\n    },\n    \"relationships\": {\n      \"project\":
+              {\n        \"data\": {\n          \"id\": \"d4bbe1af-f36e-42f1-87c1-493ca35c320e\",\n
+              \         \"type\": \"project\"\n        }\n      }\n    },\n    \"type\":
+              \"case\"\n  }\n}"
+          source: data
+          step: there is a valid "case" in the system
+        case_with_type:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"My
+              new case\",\n      \"type_id\": \"{{ case_type.id }}\",\n      \"priority\":
+              \"P4\"\n    },\n    \"relationships\": {\n      \"project\": {\n        \"data\":
               {\n          \"id\": \"d4bbe1af-f36e-42f1-87c1-493ca35c320e\",\n          \"type\":
               \"project\"\n        }\n      }\n    },\n    \"type\": \"case\"\n  }\n}"
           source: data
-          step: there is a valid "case" in the system
+          step: there is a valid "case" with a custom "case_type" in the system
       x-menu-order: 2
       x-undo:
         type: safe
@@ -56993,6 +57518,211 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/cases/types:
+    get:
+      description: Get all case types
+      operationId: GetAllCaseTypes
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseTypesResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all case types
+      tags:
+      - Case Management Type
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a Case Type
+      operationId: CreateCaseType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseTypeCreateRequest'
+        description: Case type payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseTypeResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a case type
+      tags:
+      - Case Management Type
+      x-given:
+        case_type:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"case_type\",\n    \"attributes\":
+              {\n      \"description\": \"Worldwide case type\",\n      \"emoji\":
+              \"\U0001F30D\",\n      \"name\": \"World\"\n    }\n  }\n}"
+          source: data
+          step: there is a valid "case_type" in the system
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/cases/types/custom_attributes:
+    get:
+      description: Get all custom attributes
+      operationId: GetAllCustomAttributes
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAttributeConfigsResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all custom attributes
+      tags:
+      - Case Management Attribute
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/cases/types/{case_type_id}:
+    delete:
+      description: Delete a case type
+      operationId: DeleteCaseType
+      parameters:
+      - $ref: '#/components/parameters/CaseTypeIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a case type
+      tags:
+      - Case Management Type
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+  /api/v2/cases/types/{case_type_id}/custom_attributes:
+    get:
+      description: Get all custom attribute config of case type
+      operationId: GetAllCustomAttributeConfigsByCaseType
+      parameters:
+      - $ref: '#/components/parameters/CaseTypeIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAttributeConfigsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all custom attributes config of case type
+      tags:
+      - Case Management Attribute
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    post:
+      description: Create custom attribute config for a case type
+      operationId: CreateCustomAttributeConfig
+      parameters:
+      - $ref: '#/components/parameters/CaseTypeIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAttributeConfigCreateRequest'
+        description: Custom attribute config payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAttributeConfigResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create custom attribute config for a case type
+      tags:
+      - Case Management Attribute
+      x-given:
+        custom_attribute:
+          parameters:
+          - name: case_type_id
+            source: case_type.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"custom_attribute\",\n    \"attributes\":
+              {\n      \"display_name\":\"Attribute {{uuid}}\",\n      \"key\":\"attribute_{{unique_hash}}\",\n
+              \     \"description\":\"And its brand new description\",\n      \"type\":\"TEXT\",\n
+              \     \"is_multi\":true\n    }\n  }\n}"
+          source: data
+          step: there is a valid "custom_attribute" in the system
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/cases/types/{case_type_id}/custom_attributes/{custom_attribute_id}:
+    delete:
+      description: Delete custom attribute config
+      operationId: DeleteCustomAttributeConfig
+      parameters:
+      - $ref: '#/components/parameters/CaseTypeIDPathParameter'
+      - $ref: '#/components/parameters/CaseCustomAttributeIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete custom attributes config
+      tags:
+      - Case Management Attribute
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/cases/{case_id}:
     get:
       description: Get the details of case by `case_id`
@@ -57150,6 +57880,193 @@ paths:
       x-menu-order: 10
       x-undo:
         type: idempotent
+  /api/v2/cases/{case_id}/comment:
+    post:
+      description: Comment case
+      operationId: CommentCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseCommentRequest'
+        description: Case comment payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimelineResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Comment case
+      tags:
+      - Case Management
+      x-given:
+        comment:
+          parameters:
+          - name: case_id
+            source: case.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"case\",\n    \"attributes\":
+              {\n      \"comment\": \"This is my new comment !\"\n    }\n  }\n}"
+          source: data[0]
+          step: there is a valid "comment" in the system
+      x-menu-order: 11
+      x-undo:
+        type: safe
+  /api/v2/cases/{case_id}/comment/{cell_id}:
+    delete:
+      description: Delete case comment
+      operationId: DeleteCaseComment
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      - $ref: '#/components/parameters/CellIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete case comment
+      tags:
+      - Case Management
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/custom_attributes/{custom_attribute_key}:
+    delete:
+      description: Delete custom attribute from case
+      operationId: DeleteCaseCustomAttribute
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      - $ref: '#/components/parameters/CaseCustomAttributeKeyPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Delete custom attribute from case
+      tags:
+      - Case Management
+      x-menu-order: 14
+      x-undo:
+        type: idempotent
+    post:
+      description: Update case custom attribute
+      operationId: UpdateCaseCustomAttribute
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      - $ref: '#/components/parameters/CaseCustomAttributeKeyPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateCustomAttributeRequest'
+        description: Update case custom attribute payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case custom attribute
+      tags:
+      - Case Management
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/description:
+    post:
+      description: Update case description
+      operationId: UpdateCaseDescription
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateDescriptionRequest'
+        description: Case description update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case description
+      tags:
+      - Case Management
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -57227,6 +58144,47 @@ paths:
       - AuthZ:
         - cases_write
       summary: Update case status
+      tags:
+      - Case Management
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/title:
+    post:
+      description: Update case title
+      operationId: UpdateCaseTitle
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateTitleRequest'
+        description: Case title update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case title
       tags:
       - Case Management
       x-menu-order: 4
@@ -83697,6 +84655,14 @@ tags:
     [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
     for more information.
   name: Case Management
+- description: View and configure custom attributes within Case Management. See the
+    [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
+    for more information.
+  name: Case Management Attribute
+- description: View and configure case types within Case Management. See the [Case
+    Management page](https://docs.datadoghq.com/service_management/case_management/)
+    for more information.
+  name: Case Management Type
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query
     your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
