@@ -7,9 +7,7 @@ aliases:
 
 Podman is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. Read more on [https://podman.io/][1].
 
-With Podman, we can deploy rootless or rootful containers. Rootless containers can be run by users that do not have admin rights, whereas rootful containers are the ones that run as root.
-The main advantage that rootless containers provide is that potential attackers cannot gain root permissions on the host when the container is compromised.
-The Datadog Agent works with both rootless and rootful containers.
+With Podman, you can deploy rootless or rootful containers. Rootless containers can be run by users that do not have admin rights, whereas rootful containers run as root. The main advantage that rootless containers provide is that potential attackers cannot gain root permissions on the host when the container is compromised. The Datadog Agent works with both rootless and rootful containers.
 
 ## Requirements
 
@@ -18,103 +16,124 @@ The Datadog Agent works with both rootless and rootful containers.
 
 ## Host Agent installation
 
-Host Agent installation requires quite a few manual steps and permission tweaks for the Agent to be able to collect the data. Those fixes are not always permanent and are required again if containers restart.
-We advice to follow `rootles` and `rootful` installation instead since it is easier to perform and maintain.
+Host Agent installations require multiple manual steps and permission tweaks for the Agent to be able to collect data. Those fixes are not always permanent and are required again if containers restart. Instead of using a host installation, Datadog recommends using `rootles` or `rootful` installations, which are easier to perform and maintain.
 
 ## Agent deployment as a Podman rootless container
 
-To deploy the Agent as a rootless Podman container, the command to run is similar to the one used for [Docker][2].
+The commands for installing the Agent as a rootless Podman container are similar to those used for [Docker][2].
 
-The main difference is that as the Agent does not need to have access to the runtime socket, it relies on the Podman DB to extract the container information that it needs. Instead of mounting the Docker socket and setting `DOCKER_HOST`, the only thing needed is to mount the Podman DB location into the container.
+The main difference is that the Agent does not need to have access to the runtime socket. Instead, it relies on the Podman DB to extract the container information that it needs. Instead of mounting the Docker socket and setting `DOCKER_HOST`, the only thing needed is to mount the Podman DB location into the container.
 
-Setting up Podman DB path depends on the Agent version.
+Setting up Podman DB path depends on your Agent version.
 
-**Agent < v7.54.0**
-User needs to set the path to Podman DB (`<PODMAN_DB_PATH>` in the command below).
+### Agent versions v7.54.0 and below
 
-To discover the exact location of Podman DB, run the following command:
-```
-$ podman info -f json | jq '.store.graphRoot'
-"$HOME/.local/share/containers/storage"
-```
-Check which DB you have at that path and set `<PODMAN_DB_PATH>` accordingly.
+{{< tabs >}}
 
-Before version 4.8 Podman uses BoltDB as the default database backend.
-In some systems the path of the Podman DB is `$HOME/.local/share/containers/storage/libpod/bolt_state.db` but it might be different in your system. Set `<PODMAN_DB_PATH>` in the command below accordingly.
+{{% tab "Podman version &ge; 4.8" %}}
 
-```
-$ podman run -d --name dd-agent \
-    --cgroupns host --pid host \
-    -v <PODMAN_DB_PATH>:/var/lib/containers/storage/libpod/bolt_state.db:ro \
-    -v /proc/:/host/proc/:ro \
-    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-    -e DD_API_KEY=<API_KEY> \
-    -e DD_HOSTNAME=<DD_HOSTNAME> \
-    gcr.io/datadoghq/agent:latest
-```
+Podman versions 4.8 or greater use SQLite as the default database backend, and BoltDB is deprecated from v5.
 
-<div class="alert alert-info">
-<strong>Podman version 4.8+</strong> uses SQLite as the default database backend, and BoltDB is deprecated from v5. You may need to update the <code>&lt;PODMAN_DB_PATH&gt;</code> to your <code>db.sql</code> path. Generally, this path is <code>/var/lib/containers/storage/db.sql</code>, but it may differ in some systems.
-</div>
+1. Find the path to your Podman DB using the following command:
+   **Note:** In most cases the Podman DB path is `/var/lib/containers/storage/db.sql`, but it might be different on your system.
 
-```
-$ podman run -d --name dd-agent \
-    --cgroupns host --pid host \
-    -v <PODMAN_DB_PATH>:/var/lib/containers/storage/db.sql:ro \
-    -v /proc/:/host/proc/:ro \
-    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-    -e DD_API_KEY=<API_KEY> \
-    -e DD_HOSTNAME=<DD_HOSTNAME> \
-    gcr.io/datadoghq/agent:latest
-```
+   ```shell
+   GRAPH_ROOT=$(podman info -f json | jq -r '.store.graphRoot') && \
+   find "$GRAPH_ROOT" -name "bolt_state.db" -o -name "db.sql" 2>/dev/null | head -1
+   ```
+
+1. Run the following command to deploy the Agent. Replace `<PODMAN_DB_PATH>` with the path to your Podman DB, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
+   ```shell
+   $ podman run -d --name dd-agent \
+       --cgroupns host --pid host \
+       -v <PODMAN_DB_PATH>:/var/lib/containers/storage/db.sql:ro \
+       -v /proc/:/host/proc/:ro \
+       -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+       -e DD_API_KEY=<API_KEY> \
+       -e DD_HOSTNAME=<DD_HOSTNAME> \
+       gcr.io/datadoghq/agent:latest
+   ```
+
+{{% /tab %}}
+
+{{% tab "Podman versions &lt; 4.8" %}}
+
+Podman versions below 4.8 use BoltDB as the default database backend.
+
+1. Find the path to your Podman DB using the following command:
+   **Note:** In most cases the Podman DB path is `/var/lib/containers/storage/db.sql`, but it might be different on your system.
+
+   ```shell
+   GRAPH_ROOT=$(podman info -f json | jq -r '.store.graphRoot') && \
+   find "$GRAPH_ROOT" -name "bolt_state.db" -o -name "db.sql" 2>/dev/null | head -1
+   ```
+
+1. Run the following command to deploy the Agent. Replace `<PODMAN_DB_PATH>` with the path to your Podman DB, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
+
+   ```shell
+   podman run -d --name dd-agent \
+       --cgroupns host --pid host \
+       -v $PODMAN_DB_PATH:/var/lib/containers/storage/libpod/bolt_state.db:ro \
+       -v /proc/:/host/proc/:ro \
+       -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+       -e DD_API_KEY=<API_KEY> \
+       -e DD_HOSTNAME=<DD_HOSTNAME> \
+       gcr.io/datadoghq/agent:latest
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 The Agent should detect all the containers managed by the non-admin user that ran the Podman command and emit `container.*` metrics for all of them.
 
-**Agent v7.54.0 and above**
+### Agent v7.54.0 or greater
 
-Starting with Agent v7.54.0 it can auto-detect Podman DB if the prorper `containers` path is provided.
+Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `containers` path is provided.
 
-To discover the exact location of containers folder, run the following command:
-```
-$ podman info -f json | jq '.store.graphRoot'
-"$HOME/.local/share/containers/storage"
-```
-In the example above, the containers folder is located at `$HOME/.local/share/containers`.
+1. To discover the exact location of containers folder, run the following command:
+   ```shell
+   $ podman info -f json | jq '.store.graphRoot'
+   "$HOME/.local/share/containers/storage"
+   ```
 
-```
-$ podman run -d --name dd-agent \
-    --cgroupns host --pid host \
-    -v /home/<user>/.local/share/containers:/var/lib/containers:ro \
-    -v /proc/:/host/proc/:ro \
-    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-    -e DD_API_KEY=<api key> \
-    -e DD_HOSTNAME=<DD_HOSTNAME> \
-    gcr.io/datadoghq/agent:latest
-```
+   In the example above, the containers folder is located at `$HOME/.local/share/containers`.
 
-To enable log collection run the agent as follows:
+1. Run one of the following commands to deploy the Agent. 
+   1. To deploy the Agent without logging:
 
-```
-$ podman run -d --name dd-agent \
-    --cgroupns host --pid host \
-    -v /home/<user>/.local/share/containers:/var/lib/containers:ro \
-    -v /proc/:/host/proc/:ro \
-    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-    -e DD_API_KEY=<api key> \
-    -e DD_HOSTNAME=<DD_HOSTNAME> \
-    -e DD_LOGS_ENABLED=true \
-    -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-    -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
-    gcr.io/datadoghq/agent:latest
-```
+      **Note**: Replace `<CONTAINERS_PATH>` with the path to your containers directory, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
+      ```shell
+      podman run -d --name dd-agent \
+        --cgroupns host --pid host \
+        -v <CONTAINERS_PATH>:/var/lib/containers:ro \
+        -v /proc/:/host/proc/:ro \
+        -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+        -e DD_API_KEY=<API_KEY> \
+        -e DD_HOSTNAME=<DD_HOSTNAME> \
+        gcr.io/datadoghq/agent:latest
+      ```
+
+    1. To deploy the Agent with log collection run the agent as follows:
+       ```shell
+       $ podman run -d --name dd-agent \
+          --cgroupns host --pid host \
+          -v <CONTAINERS_PATH>:/var/lib/containers:ro \
+          -v /proc/:/host/proc/:ro \
+          -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+          -e DD_API_KEY=<API_KEY> \
+          -e DD_HOSTNAME=<DD_HOSTNAME> \
+          -e DD_LOGS_ENABLED=true \
+          -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+          -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
+          gcr.io/datadoghq/agent:latest
+       ```
 
 ## Agent deployment as a Podman rootful container
 
-When running rootful containers, we have two options: we can rely on the Podman DB as in the example above with rootless containers, or we can use the Podman socket.
+When running rootful containers, you have two options. You can rely on the Podman DB as in the example above with rootless containers, or you can use the Podman socket.
 
 ### Using the Podman DB
 
-The command to run using the DB is identical to the one provided above, but note that the DB path is different for each user, including root. Use the same discovery command as above.
+The command to run using the DB is identical to the one provided above for [rootless containers](#agent-deployment-as-a-podman-rootless-container), but note that the DB path is different for each user, including root. Use the same discovery command as above.
 
 ### Using the Podman socket
 
