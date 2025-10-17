@@ -46,9 +46,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/archive-search/"
     tag: "Blog"
     text: "Search your historical logs more efficiently with Datadog Archive Search"
-  - link: https://www.datadoghq.com/blog/irap-protected
-    tag: Blog
-    text: Datadog achieves IRAPâs PROTECTED status in Australia
 cascade:
     algolia:
         rank: 70

@@ -23,9 +23,6 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
       tag: "Blog"
       text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
-    - link: https://www.datadoghq.com/blog/irap-protected
-      tag: Blog
-      text: Datadog achieves IRAPâs PROTECTED status in Australia
 algolia:
   tags: ["rbac"]
 ---
