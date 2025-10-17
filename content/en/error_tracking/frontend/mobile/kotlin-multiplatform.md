@@ -368,7 +368,7 @@ To test your implementation:
 ## Advanced Error Tracking Features
 {{% collapse-content title="Sending data when device is offline" level="h4" %}}
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+The Datadog SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  
@@ -381,11 +381,9 @@ This means that even if users open your application while offline, no data is lo
 To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
 Tracking consent can be one of the following values:
 
-- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
- collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
 - `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or
- RUM events.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or RUM events.
 
 To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
 
