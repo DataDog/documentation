@@ -1,0 +1,30 @@
+<div class="dbm-setup-postgres">
+  <div class="container cards-dd">
+    <div class="row row-cols-2 row-cols-sm-6 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_postgres/agent_configuration/host_agent">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/postgres.png" "class" "img-fluid" "alt" "Selfhosted" "width" "175") }}
+            <br/>Host Agent
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_postgres/agent_configuration/docker">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_rds.png" "class" "img-fluid" "alt" "RDS" "width" "175") }}
+            <br/>Docker Agent
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_postgres/agent_configuration/kubernetes">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/aurora.png" "class" "img-fluid" "alt" "Aurora" "width" "175") }}
+            <br/>Kubernetes Agent
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
