@@ -10,10 +10,9 @@ further_reading:
     text: "Set up Code Coverage"
 ---
 
-<div class="alert alert-info">
-This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated.
-</div>
-
+{{< callout url="#" btn_hidden="true" header="Try the Preview!" >}}
+Code Coverage is in Preview. There is no charge for using Code Coverage during the Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated.
+{{< /callout >}}
 
 ## Source Code Provider Integration
 
