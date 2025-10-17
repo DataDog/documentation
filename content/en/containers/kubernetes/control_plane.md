@@ -435,7 +435,7 @@ The Datadog Operator can automatically configure monitoring for Kubernetes contr
 
 **Note**: `etcd` not supported on versions 4.0-4.13, 
 
-#### General Setup
+#### General setup
 
 Control plane monitoring is enabled by default, but requires introspection to be enabled.
 
