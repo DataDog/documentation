@@ -27,10 +27,10 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 ## Start with onboarding
 
 When creating a new app, Datadog displays an onboarding modal with the following options: 
-- [Start with Blueprint][5]
-- [Start with Layout][12]
-- [Start with Data][13]
-- [Start from Scratch][10] 
+- [Start with Blueprint][18]
+- [Start with Layout][19]
+- [Start with Data][20]
+- [Start from Scratch][21] 
 
 ## See what's possible with App Playground
 
@@ -224,3 +224,7 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [15]: /actions/app_builder/build/#customize-your-app
 [16]: /getting_started/integrations/
 [17]: /actions/actions_catalog/
+[18]: /actions/app_builder/build/#build-an-app-from-a-blueprint
+[19]: /actions/app_builder/build/#build-an-app-from-a-layout
+[20]: /actions/app_builder/build/#build-an-app-from-data
+[21]: /actions/app_builder/build/#create-a-custom-app
