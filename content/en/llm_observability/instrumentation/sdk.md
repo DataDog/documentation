@@ -1819,9 +1819,9 @@ Supported keys:
 
 - `id` (str): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
 - `version` (str): Version tag for the prompt (for example, "1.0.0"). See [version tracking](#version-tracking) for more details.
-- `variables` (Dict[str, str]): Variables used to render the template.
-- `template` (str): Single string template form.
-- `chat_template` (list of objects or Messages): Multi-message template form. Provide a list of `{ "role": "<role>", "template": "<template>" }` objects, or a list of `Message` objects.
+- `variables` (Dict[str, str]): Variables used to populate the template placeholders.
+- `template` (str): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`).
+- `chat_template` (List[Message]): Multi-message template form. Provide a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Dict[str, str]): Tags to attach to the prompt run.
 - `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
 - `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
@@ -1860,8 +1860,8 @@ def rag_answer(question, context):
         "id": "rag-qa",
         "version": "2.1.3",
         "chat_template": [
-            {"role": "system", "template": "You are a helpful assistant."},
-            {"role": "user",   "template": "Use the context to answer: {{question}}\nContext:\n{{context}}"}
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user",   "content": "Use the context to answer: {{question}}\nContext:\n{{context}}"}
         ],
         "variables": {
             "question": question,
