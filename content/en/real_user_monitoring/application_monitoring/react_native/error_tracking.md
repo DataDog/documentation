@@ -33,8 +33,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native Crash Reporting and Error Tracking][3].
-
+If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native Crash Reporting and Error Tracking][3]. After setting up React Native, [follow these steps to enable React Native Crash Reporting and Error Tracking][101].
 
 ## Further reading
 
@@ -42,21 +41,5 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-<<<<<<< HEAD:content/en/real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking.md
-[3]: /error_tracking/frontend/mobile/reactnative/
-=======
 [3]: /real_user_monitoring/application_monitoring/react_native/
-[4]: /real_user_monitoring/application_monitoring/ios/error_tracking/?tabs=cocoapods#symbolicate-crash-reports
-[5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
-[6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[7]: https://github.com/cwhenderson20/react-native-crash-tester
-[9]: https://fastlane.tools/
-[10]: https://appcenter.ms/
-[11]: https://www.bitrise.io/
-[12]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#xcode
-[13]: https://github.com/DataDog/datadog-react-native-wizard
-[14]: https://github.com/DataDog/react-native-performance-limiter
-[15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
-[16]: https://app.datadoghq.com/source-code/setup/rum
-[17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
->>>>>>> master:content/en/real_user_monitoring/application_monitoring/react_native/error_tracking.md
+[101]: /error_tracking/frontend/mobile/reactnative
