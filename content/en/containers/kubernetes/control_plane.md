@@ -483,7 +483,7 @@ Look for:
 - `kube_scheduler`
 - `etcd`
 
-You should see control plane metrics in Datadog like:
+You should see control plane metrics in Datadog including:
 - `kube_apiserver.*`
 - `kube_controller_manager.*`
 - `kube_scheduler.*`
