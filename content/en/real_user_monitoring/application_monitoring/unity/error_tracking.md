@@ -29,12 +29,5 @@ If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup i
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-<<<<<<< HEAD:content/en/real_user_monitoring/mobile_and_tv_monitoring/unity/error_tracking.md
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
 [4]: /error_tracking/frontend/mobile/unity.md
-=======
-[3]: /real_user_monitoring/application_monitoring/unity/setup/#setup
-[4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
-[6]: https://app.datadoghq.com/source-code/setup/rum
->>>>>>> master:content/en/real_user_monitoring/application_monitoring/unity/error_tracking.md
