@@ -277,10 +277,8 @@ To test your implementation:
 [3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters 
-
 [101]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
-
 [501]: /account_management/api-app-keys/#api-keys
 [601]: /account_management/api-app-keys/#client-tokens
 [701]: /getting_started/tagging/using_tags/#rum--session-replay
