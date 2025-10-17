@@ -678,7 +678,6 @@ Appends records for a given dataset.
 | Field | Type | Description |
 | ---- | ---- | --- |
 | `deduplicate` | bool | If `true`, deduplicates appended records. Defaults to `true`. |
-| `create_new_version` | bool | If `true`, creates a new dataset version. If `false`, adds records to the current version (draft mode). Defaults to `true`. |
 | `records` (_required_) | [][RecordReq](#object-recordreq) | List of records to create. |
 
 #### Object: RecordReq
