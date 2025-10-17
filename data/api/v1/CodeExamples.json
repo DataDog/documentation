@@ -650,8 +650,23 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_519056831",
+      "description": "Create a pipeline with Schema Processor Schema Remapper and Category Mapper with preserve_source false returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_4074712436",
+      "description": "Create a pipeline with Schema Processor Schema Remapper and Category Mapper with preserve_source true returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_2707101123",
       "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_501419705",
+      "description": "Create a pipeline with schema processor"
     }
   ],
   "SubmitDistributionPoints": [
