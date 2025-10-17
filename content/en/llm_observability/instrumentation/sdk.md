@@ -1801,13 +1801,17 @@ Attach structured prompt metadata to the LLM span so you can reproduce results, 
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotate(prompt=...)` to attach prompt metadata immediately before the LLM call. The metadata is added to the current active span (for example, a span from a decorator or an auto-instrumented LLM call). For more details on span annotation, see [Annotating a span](#annotating-a-span).
+Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
 
 #### Arguments
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : required - dictionary
 <br />A typed dictionary that follows the Prompt schema below.
+
+{{% /collapse-content %}}
 
 {{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
 
@@ -1830,20 +1834,19 @@ Supported keys:
 from ddtrace.llmobs import LLMObs
 
 def answer_question(text):
-    # Attach prompt metadata to the upcoming LLM span using LLMObs.annotate()
-    LLMObs.annotate(prompt={
+    # Attach prompt metadata to the upcoming LLM span using LLMObs.annotation_context()
+    with LLMObs.annotation_context(prompt={
         "id": "translate-v1",
         "version": "1.0.0",
-        "template": "Translate to {{lang}}: {{text}}",
+        "chat_template": [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
         "variables": {"lang": "fr", "text": text},
         "tags": {"team": "nlp"}
-    })
-
-    # Example provider call (replace with your client)
-    completion = openai_client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": text}]
-    )
+    }):
+        # Example provider call (replace with your client)
+        completion = openai_client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": f"Translate to fr: {text}"}]
+        )
     return completion
 {{< /code-block >}}
 
