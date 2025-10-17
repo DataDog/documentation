@@ -141,7 +141,7 @@ La méthode à suivre pour appliquer ces annotations varie en fonction de la [st
 Dans ces annotations, la valeur `<IDENTIFICATEUR_CONTENEUR>` est utilisée pour `discovery`, afin d'appliquer le nom du conteneur par défaut pour les pods du déploiement `istiod`. Si le nom de votre conteneur est différent, ajustez la valeur en conséquence.
 
 ##### OpenMetrics V2 et V1
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>Remarque importante</b> : lorsque plusieurs instances de Datadog recueillent des métriques Istio, veillez à utiliser la même implémentation d'OpenMetrics pour l'ensemble des instances. Dans le cas contraire, les données des métriques ne seront pas cohérentes sur le site Datadog.
 </div>
 

@@ -44,7 +44,7 @@ L'intégration HipChat permet à Datadog d'envoyer des notifications à votre ro
 
 Vous pouvez également partager des graphiques ou envoyer des alertes de monitor à des rooms HipChat en précisant `@hipchat-<NOM_CONVERSATION>`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si vous utilisez un token HipChat API V1 et que votre handle de conversation contient des caractères spéciaux, comme des virgules, des parenthèses ou des crochets, vous n'avez pas besoin de les échapper lorsque vous saisissez le handle ; la zone de saisie automatique s'en charge pour vous.
 </div>
 

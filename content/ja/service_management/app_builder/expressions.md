@@ -10,7 +10,7 @@ title: JavaScript 式
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では App Builder はサポートされていません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では App Builder はサポートされていません。</div>
 {{< /site-region >}}
 
 App Builder の任意の場所で JavaScript (JS) 式を使用して、アプリのさまざまな要素間のカスタムインタラクションを作成できます。式の入力を開始すると、App Builder がアプリ内の既存のクエリとコンポーネントに基づいてオートコンプリートの候補を表示します。オートコンプリートの候補をクリックして式で使用するか、キーボードの矢印キーを使用して Enter キーで選択します。

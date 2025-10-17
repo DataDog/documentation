@@ -89,7 +89,7 @@ service:
 | `timeout` | Timeout for HTTP requests | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification | `false` |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it <strong>must</strong> match the <code>hostname</code> value in the Datadog Exporter configuration. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans. It only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname attributes</a> than the hostname reported by the extension, the telemetry will not be correlated to the correct host, and you may see duplicate hosts in Datadog.
 </div>
 

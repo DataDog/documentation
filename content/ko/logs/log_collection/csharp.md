@@ -322,7 +322,7 @@ JSON 형식으로 로깅할 때의 장점에도 불구하고 원시 문자열 �
 
 애플리케이션 코드를 수정하거나 애플리케이션에 추가 종속성을 설치할 필요가 없습니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> log4net이나 NLog를 사용하는 경우 에이전트리스 로깅을 활성화하려면 어펜더(log4net)나 로거  (NLog)를 설정해야 합니다. 이러한 경우, 이 같은 종속성을 추가하거나 <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog 싱크로 에이전트리스 로깅</a>을 사용하세요.
 </div>
 
@@ -357,7 +357,7 @@ Tracer 버전 2.7.0에서 에이전트리스 로깅을 사용할 때 기본적�
 : 에이전트리스 로깅을 활성화합니다. `Serilog`, `NLog`, `Log4Net` 또는 `ILogger`(`Microsoft.Extensions.Logging`을 사용하는 경우)로 설정해 로깅 프레임워크에 맞게 활성화하세요. 로깅 프레임워크를 여러 개 사용하는 경우 세미콜론으로 구분된 변수 목록을 사용합니다. <br>
 **예**: `Serilog;Log4Net;NLog`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> 로깅 프레임워크를 <code>Microsoft.Extensions.Logging</code>와 함께 사용하는 경우, 일반적으로 프레임워크 이름을 사용해야 합니다. 예를 들어, <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>을 사용하면 <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>와 같이 설정합니다.
 </div>
 

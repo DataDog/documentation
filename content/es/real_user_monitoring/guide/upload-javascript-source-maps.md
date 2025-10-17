@@ -22,7 +22,7 @@ Si el código fuente de tu frontend JavaScript está minificado, carga tus mapas
 
 Configura tu empaquetador de JavaScript para que, al minificar tu código fuente, genere mapas de fuente que incluyan directamente el código fuente relacionado en el atributo `sourcesContent`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Asegúrate de que el tamaño de cada mapa fuente aumentado con el tamaño del archivo minificado relacionado no supere el límite de **500 MB**.
 </div>
 
@@ -81,7 +81,7 @@ Consulta el siguiente ejemplo:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si la suma del tamaño de los archivos <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> supera el límite de <b>500 MB</b>, redúcelo configurando el empaquetador para dividir el código fuente en varios fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 

@@ -8,6 +8,8 @@ algolia:
 aliases:
 - /es/tracing/faq/my-trace-agent-log-renders-empty-service-error/
 - /es/tracing/troubleshooting/faq_apm/
+description: Guía completa para la resolución de problemas de APM, incluida la retención
+  de trazas (traces), la configuración del servicio y los errores de conexión.
 further_reading:
 - link: /tracing/troubleshooting/connection_errors
   tag: Documentación
@@ -33,9 +35,9 @@ further_reading:
 - link: /integrations/
   tag: Documentación
   text: Lista completa de integraciones de Datadog
-- link: /tracing/guide/inferred-service-opt-in/
+- link: /tracing/services/inferred_services
   tag: Documentación
-  text: Dependencias inferidas de servicios (Vista previa)
+  text: Dependencias de servicio inferidas
 title: Solucionar problemas de APM
 ---
 
@@ -102,9 +104,9 @@ Por ejemplo, puedes tener un único servicio como `service:test` mostrando múlt
 
 Puedes utilizar [dependencias inferidas de servicios (Vista previa)][30]. Las API externas inferidas utilizan la nomenclatura por defecto `net.peer.name`. Por ejemplo: `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan la nomenclatura por defecto `scheme db.instance`.
 
-O bien, puedes fusionar los nombres de servicio utilizando una variable de entorno como `DD_SERVICE_MAPPING` o `DD_TRACE_SERVICE_MAPPING`, según el lenguaje.
+O bien, puedes fusionar los nombres de servicio utilizando una variable de entorno como `DD_SERVICE_MAPPING` o `DD_TRACE_SERVICE_MAPPING`, según el lenguaje. 
 
-Para más información, consulta [Configurar la librería de rastreo de Datadog][27] o elige tu lenguaje aquí:
+Para más información, consulta [Configurar la biblioteca de rastreo de Datadog][27] o elige tu lenguaje aquí:
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -174,7 +176,7 @@ Los picos en la ingesta e indexación de datos pueden deberse a varios factores.
 
 | TIPO DE USO | MÉTRICA | DESCRIPCIÓN |
 | ------- | ------------ |------------ |
-| Tramos indexados de APM     | `datadog.estimated_usage.apm.indexed_spans` | Número total de tramos (spans) indexados por filtros de retención basados en etiquetas.|
+| Tramos (spans) indexados de APM     | `datadog.estimated_usage.apm.indexed_spans` | Número total de tramos indexados por filtros de retención basados en etiquetas (tags).|
 | Tramos ingeridos de APM     | `datadog.estimated_usage.apm.ingested_spans`| Número total de incorporación de tramos. |
 
 El [dashboard de uso de trazas de APM][28] contiene varios grupos de widget que muestran KPI muy importantes e información de uso adicional.
@@ -183,13 +185,13 @@ El [dashboard de uso de trazas de APM][28] contiene varios grupos de widget que 
 
 {{% collapse-content title="Falta el mensaje de error y el stack trace" level="h4" %}}
 
-En algunas trazas con un estado de error, la pestaña **Errors** (Errores) muestra `Missing error message and stack trace` en lugar de los detalles de la excepción.
+En algunas trazas con un estado de error, la pestaña **Errors** (Errores) muestra `Missing error message and stack trace` en lugar de los detalles de la excepción. 
 
 Un tramo puede mostrar este mensaje por dos posibles razones:
 - El tramo contiene una excepción no controlada.
 - Una respuesta HTTP dentro de tramo devuelve un código de estado HTTP entre 400 y 599.
 
-Cuando se maneja una excepción en un bloque try/catch, las span tags `error.message`, `error.type` y `error.stack` no se rellenan. Para rellenar las span tags de error detallado, utiliza el código [Instrumentación personalizada][18].
+Cuando se maneja una excepción en un bloque try/catch, las etiquetas de tramo `error.message`, `error.type` y `error.stack` no se rellenan. Para rellenar las etiquetas de tramo de error detallado, utiliza el código [Instrumentación personalizada][18].
 
 {{% /collapse-content %}}
 
@@ -199,7 +201,7 @@ Si te encuentras con alguno de los siguientes problemas, puede que estés excedi
 
 - Tus métricas de traza no están informando como deberían en la plataforma de Datadog.
 - Te faltan algunos de los recursos que esperabas ver en la plataforma de Datadog.
-- Estás viendo trazas desde tu servicio, pero no puedes encontrar este servicio en la página del [Catálogo de servicios][32].
+- Estás viendo trazas (traces) desde tu servicio, pero no puedes encontrar este servicio en la [página de Software Catalog][32].
 
 {{% collapse-content title="Directrices sobre el volumen de datos" level="h4" %}}
 
@@ -207,8 +209,8 @@ Tu aplicación instrumentada puede enviar tramos con marcas temporales de hasta 
 
 Datadog acepta las siguientes combinaciones para un intervalo determinado de 40 minutos:
 
-- 5000 combinaciones únicas de `environments` y `service`
-- 30 `second primary tag values` únicos por entorno
+- 5000 combinaciones únicas de `environments` y `service` 
+- 100 `primary tag values` únicos por etiqueta primaria adicional
 - 100 `operation names` únicos por entorno y servicio
 - 1000 `resources` únicos por entorno, servicio y nombre de operación
 - 30 `versions` únicas por entorno y servicio
@@ -226,7 +228,7 @@ Datadog trunca las siguientes cadenas si superan el número de caracteres indica
 | [clave de etiqueta][8]    |  200       |
 | [valor de etiqueta][8]  |  25000     |
 
-Además, el número de [span tags][8] presentes en cualquier tramo no puede exceder de 1024.
+Además, el número de [etiquetas de tramo][8] presentes en cualquier tramo no puede exceder de 1024.
 
 {{% /collapse-content %}}
 
@@ -234,15 +236,15 @@ Además, el número de [span tags][8] presentes en cualquier tramo no puede exce
 
 Si el número de servicios excede lo especificado en las [directrices de volumen de datos](#data-volume-guidelines), intenta seguir estas prácticas recomendadas para las convenciones de nomenclatura de servicio.
 
-### Excluir los valores de etiqueta de entorno de los nombres de servicio
+### Excluir los valores de etiqueta de entorno de los nombres de servicio 
 
 Por defecto, el entorno (`env`) es la etiqueta primaria para [Datadog APM][17].
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="El entorno es la etiqueta primaria por defecto" style="width:100%;" >}}
 
-Un servicio suele desplegarse en varios entornos, como `prod`, `staging` y `dev`. Las métricas de rendimiento, como el recuento de solicitudes, la latencia y la tasa de errores, difieren entre varios entornos. El menú desplegable de entorno en el Catálogo de servicios te permite limitar los datos de la pestaña **Performance** (Rendimiento) a un entorno específico.
+Un servicio se despliega típicamente en múltiples entornos, como `prod`, `staging` y `dev`. Las métricas de rendimiento, como los recuentos de solicitud, la latencia y la tasa de error, difieren en función de los distintos entornos. El menú desplegable de entorno de Software Catalog te permite limitar los datos de la pestaña **Performance** (Rendimiento) a un entorno específico.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Elegir un entorno específico con el menú desplegable `env` en el Catálogo de servicios" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Elige un entorno específico en el menú desplegable `env` en Software Catalog" style="width:100%;" >}}
 
 Un patrón que suele provocar problemas con un número abrumador de servicios es incluir el valor de entorno en los nombres de servicio. Por ejemplo, es posible que tengas dos servicios únicos en lugar de uno, ya que funcionan en dos entornos distintos: `prod-web-store` y `dev-web-store`.
 
@@ -250,15 +252,15 @@ Datadog recomienda ajustar tu instrumentación renombrando los servicios.
 
 Las métricas de traza no están muestreadas, lo que significa que tu aplicación instrumentada muestra todos los datos, en lugar de subsecciones de ellos. También se aplican las [directrices de volumen](#data-volume-guidelines).
 
-### Utilizar la segunda etiqueta primaria en lugar de poner particiones de métrica o agrupar variables en nombres de servicio
+### Utilizar etiquetas primarias adicionales en lugar de poner particiones de métrica o agrupar variables en nombres de servicio
 
-Las segundas etiquetas primarias son etiquetas adicionales que puedes utilizar para agrupar y añadir tus métricas de traza. Puedes utilizar el menú desplegable para limitar los datos de rendimiento a un determinado nombre de clúster o valor de centro de datos.
+Puedes utilizar etiquetas primarias adicionales para agrupar y agregar tus métricas de traza. Utiliza el menú desplegable para limitar los datos de rendimiento a un determinado nombre de clúster o valor de centro de datos.
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Utilizar el menú desplegable para seleccionar un clúster específico o un valor de centro de datos" style="width:100%;" >}}
 
-Incluir particiones de métrica o variables de agrupación en los nombres de servicio en lugar de aplicar la segunda etiqueta primaria aumenta innecesariamente el número de servicios únicos en una cuenta y provoca posibles retrasos o pérdidas de datos.
+Incluir particiones de métrica o variables de agrupación en los nombres de servicio en lugar de aplicar etiquetas primarias adicionales aumenta innecesariamente el número de servicios únicos en una cuenta y provoca posibles retrasos o pérdidas de datos.
 
-Por ejemplo, en lugar del servicio `web-store`, podrías decidir nombrar diferentes instancias de un servicio `web-store-us-1`, `web-store-eu-1` y `web-store-eu-2` para ver las métricas de rendimiento para estas particiones en paralelo. Datadog recomienda implementar el **valor de región** (`us-1`, `eu-1`, `eu-2`) como una segunda etiqueta primaria.
+Por ejemplo, en lugar del servicio `web-store` , podrías decidir nombrar diferentes instancias de un servicio `web-store-us-1` , `web-store-eu-1` y `web-store-eu-2` para ver las métricas de rendimiento de estas particiones una al lado de la otra. Datadog recomienda implementar el **region value** (valor de región) (`us-1`, `eu-1`, `eu-2`) como etiqueta primaria.
 
 {{% /collapse-content %}}
 
@@ -337,9 +339,9 @@ Cuando abres un [tique de soporte][1], el equipo de soporte de Datadog puede ped
 
 5. **Una descripción de tu entorno**: entender la configuración del despliegue de tu aplicación ayuda al equipo de soporte a identificar posibles problemas de comunicación entre el Agent y el rastreador e identificar errores de configuración. Para problemas complejos, el equipo de soporte puede solicitar manifiestos de Kubernetes, definiciones de tareas de ECS o archivos de configuración de despliegue similares.
 
-6. **Código de rastreo personalizado**: la instrumentación personalizada, la configuración y añadir span tags puede afectar significativamente a las visualizaciones de trazas en Datadog.
+6. **Código de rastreo personalizado**: la instrumentación personalizada, la configuración y añadir etiquetas de tramo puede afectar significativamente a las visualizaciones de trazas en Datadog.
 
-7. **Información sobre la versión**: saber qué versiones de lenguaje, marco, Datadog Agent y rastreador de Datadog estás utilizando permite al soporte verificar [requisitos de compatibilidad][15], buscar problemas conocidos, o recomendar una actualización de versión. Por ejemplo:
+7. **Información sobre la versión**: saber qué versiones de lenguaje, marco, Datadog Agent y rastreador de Datadog estás utilizando permite al servicio de asistencia verificar los [requisitos de compatibilidad][15], comprobar problemas conocidos o recomendar una actualización de versión. Por ejemplo:
 
 {{% /collapse-content %}}
 
@@ -362,20 +364,20 @@ Cuando abres un [tique de soporte][1], el equipo de soporte de Datadog puede ped
 [13]: /es/agent/troubleshooting/debug_mode/?tab=agentv6v7
 [14]: /es/tracing/custom_instrumentation/
 [15]: /es/tracing/compatibility_requirements/
-[16]: /es/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[16]: /es/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
 [17]: /es/tracing/guide/setting_primary_tags_to_scope/
 [18]: /es/tracing/trace_collection/custom_instrumentation/?tab=datadogapi
 [19]: /es/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [20]: https://app.datadoghq.com/apm/traces
 [21]: /es/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
 [22]: /es/tracing/trace_pipeline/trace_retention/#retention-filters
-[23]: /es/developers/guide/data-collection-resolution-retention/
+[23]: /es/data_security/data_retention_periods/
 [24]: /es/tracing/metrics/metrics_namespace/
 [25]: /es/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [26]: /es/tracing/trace_pipeline/generate_metrics/
 [27]: /es/tracing/trace_collection/library_config/
 [28]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [29]: /es/tracing/troubleshooting/#data-volume-guidelines
-[30]: /es/tracing/guide/inferred-service-opt-in/?tab=java
+[30]: /es/tracing/services/inferred_services
 [31]: /es/tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
