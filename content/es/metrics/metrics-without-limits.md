@@ -38,7 +38,7 @@ De manera predeterminada, el modal de configuración de etiquetas se completa pr
 4. Revisa el *Estimated New Volume* (Nuevo volumen estimado) de métricas personalizadas indexadas que resultan de esta posible configuración de etiquetas.
 5. Haz clic en **Save** (Guardar).
 
-{{< img src="metrics/mwl_example_include_tags-compressed_03182025.mp4" alt="Configuración de etiquetas con la lista de permitidos" video=true style="width:100%" >}}
+{{< img src="metrics/mwl_example_include_tags-compressed_03182025.mp4" alt="Configuración de etiquetas con la lista de permitidos" video="true" style="width:100%" >}}
 
 {{< img src="metrics/tags_used_assets.png" alt="Mostrar a los clientes que pueden añadir etiquetas utilizadas en activos en su configuración de MWL" style="width:100%" >}}
 
@@ -52,7 +52,7 @@ Puedes [crear][2], [editar][3], [eliminar][4] y [estimar el impacto][5] de la co
 4. Revisa el *Estimated New Volume* (Nuevo volumen estimado) de métricas personalizadas indexadas que resultan de esta posible configuración de etiquetas.
 5. Haz clic en **Save** (Guardar).
 
-{{< img src="metrics/mwl-example-tag-exclusion-compressed_04032025.mp4" alt="Configuración de etiquetas con exclusión de etiquetas" video=true style="width:100%" >}}
+{{< img src="metrics/mwl-example-tag-exclusion-compressed_04032025.mp4" alt="Configuración de etiquetas con exclusión de etiquetas" video="true" style="width:100%" >}}
 
 Establece el parámetro `exclude_tags_mode: true` en la API de Metrics para [crear][2] y [editar][3] una lista de etiquetas bloqueadas.
 

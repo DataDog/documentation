@@ -425,7 +425,7 @@ Algunos de los rastreadores específicos del lenguaje tienen una opción para mo
 <div class="alert alert-warning">1. Si la solicitud está asociada a una traza distribuida, la traza resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Al filtrar las trazas de esta manera se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de trazas, consulta los <a href="/tracing/trace_ingestion/ingestion_controls">controles de ingesta</a>.</div>
 
 
-{{< programming-lang-wrapper lenguajes="ruby,python,nodeJS,java" >}}
+{{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
