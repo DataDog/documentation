@@ -26,7 +26,7 @@ You can enable App and API Protection for your HAProxy instances. The Datadog HA
 ## Prerequisites
 
 - The [Datadog Agent][1] is installed and configured for your environment (host, container, or orchestrator).
-- [Configure the Agent with Remote Configuration][2] to block attackers using the Datadog UI.
+- [Configure the Agent with Remote Configuration][2] in the Datadog UI to block attackers.
 
 ## Enabling threat detection
 
@@ -34,19 +34,19 @@ You can enable App and API Protection for your HAProxy instances. The Datadog HA
 
 The App and API Protection HAProxy integration uses HAProxy's [Stream Processing Offload Engine][3] (SPOE) to call a Datadog Stream Processing Offload Agent (SPOA). The SPOA analyzes requests and responses.
 
-Enabling App and API Protection for HAProxy involves two main steps:
+To enable App and API Protection for HAProxy, do the following:
 1. Deploy the Datadog HAProxy SPOA container.
 2. Update your HAProxy configuration files to integrate with the SPOA
 
 ### SPOA container
 
-Deploy the Datadog HAProxy SPOA image available in the Datadog GitHub Container Registry [here][4]. The SPOA listens for SPOE connections from HAProxy and sends security events to your Datadog Agent.
+Deploy the Datadog HAProxy SPOA image available in the [Datadog GitHub Container Registry][4]. The SPOA listens for SPOE connections from HAProxy and sends security events to your Datadog Agent.
 
 See [Configuration](#configuration) for available configuration options about the SPOA container.
 
 ### HAProxy configuration files
 
-All required HAProxy configuration files are available in the [repository folder][8]. For information about updates and changes about the configuration, refer to the [Configuration changelog][9].
+All required HAProxy configuration files are available in the [repository folder][8]. For information about updates and changes about the configuration, refer to the [configuration changelog][9].
 
 The following files are needed for your setup:
 
@@ -56,7 +56,7 @@ The following files are needed for your setup:
 - `backend.cfg`: Defines the SPOA backend used by the SPOE engine.
 - `datadog_aap_blocking_response.lua`: Lua script for blocking responses.
 
-Refer to the guidance below for each file to install and customize them as needed.
+Guidance for setting up each file is provided below.
 
 #### spoe.cfg
 
@@ -68,7 +68,7 @@ It is important that no custom modifications are made to this file.
 
 The `global-config.cfg` file loads the required Lua script and configures the necessary variables for the integration. Its contents should be incorporated into the `global` section of your `haproxy.cfg` configuration file.
 
-You can adjust the values as needed for your environment. It is recommended to review the comments within the file for further guidance on each setting.
+You can adjust the values as needed for your environment. Review the comments within the file for further guidance on each setting.
 
 #### frontend-config.cfg
 
@@ -88,7 +88,7 @@ The `backend.cfg` file defines the `spoa-backend` used by the SPOE engine and fo
 Be sure to modify the `server spoa1 <host>:<port>` line so that it references your deployed SPOA container instance.
 
 <div class="alert alert-info">
-  <strong>Note:</strong> For high availability and redundancy, you can configure multiple SPOA agent servers by adding additional <code>server</code> lines (for example, <code>server spoa1 ...</code>, <code>server spoa2 ...</code>, etc.). HAProxy will automatically load-balance and fail over between these SPOA agents, ensuring continued protection even if one agent becomes unavailable.
+  <strong>Note:</strong> For high availability and redundancy, you can configure multiple SPOA agent servers by adding additional <code>server</code> lines (for example, <code>server spoa1 ...</code>, <code>server spoa2 ...</code>, etc.). HAProxy will automatically load-balance and failover between these SPOA agents, ensuring continued protection even if one agent becomes unavailable.
 </div>
 
 #### datadog_aap_blocking_response.lua
@@ -98,7 +98,7 @@ The `datadog_aap_blocking_response.lua` script is responsible for sending a cust
 It is important that no custom modifications are made to this file.
 
 <div class="alert alert-info">
-  <strong>Note:</strong> This lua script is not invoked on every request processed by HAProxy. It is only invoked when a request is blocked by App and API Protection. This design ensures optimal performance by avoiding the overhead of running Lua code for all requests.
+  <strong>Note:</strong> This Lua script is not invoked on every request processed by HAProxy. It is only invoked when a request is blocked by App and API Protection. This design ensures optimal performance by avoiding the overhead of running Lua code for all requests.
 </div>
 
 ### Validation
