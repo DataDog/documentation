@@ -22,6 +22,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
       tag: "Blog"
       text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"  
+    - link: https://www.datadoghq.com/blog/irap-protected
+      tag: Blog
+      text: Datadog achieves IRAPâs PROTECTED status in Australia
 ---
 
 ## Overview

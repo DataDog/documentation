@@ -5,6 +5,9 @@ aliases:
   - /tracing/servicemap
   - /tracing/visualization/services_map/
 further_reading:
+- link: https://www.datadoghq.com/blog/irap-protected
+  tag: Blog
+  text: Datadog achieves IRAPâs PROTECTED status in Australia
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
