@@ -81,6 +81,7 @@ If the Datadog Agent is deployed using the Datadog Operator, you must install th
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
 
+
 3. **Activate Datadog CSI in your `DatadogAgent` resource.**
 
    ```
@@ -132,6 +133,23 @@ If the Datadog Agent is deployed using a DaemonSet, you must install the Datadog
 
 {{< /tabs >}}
 
+### GKE Autopilot Support
+
+Starting with **Helm chart version 3.138.0**, the Datadog CSI Driver can now be installed on **Google Kubernetes Engine (GKE) Autopilot** clusters.
+
+> **Note:**  
+> GKE Autopilot support is **only available when installing via the Helm chart**.  
+> For non-Helm installations, render and apply the CSI Driver manifests manually, then create the following `AllowlistSynchronizer` resource to enable installation on GKE Autopilot:
+
+```yaml
+apiVersion: auto.gke.io/v1
+kind: AllowlistSynchronizer
+metadata:
+  name: datadog-csi-synchronizer
+spec:
+  allowlistPaths:
+    - Datadog/datadog-csi-driver/datadog-datadog-csi-driver-daemonset-exemption-v1.0.1.yaml
+```
 
 ## Datadog CSI volumes
 
