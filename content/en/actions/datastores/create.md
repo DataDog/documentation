@@ -2,6 +2,8 @@
 title: Create and Manage Datastores
 description: Create datastores with primary keys, seed initial data, and manage datastore contents through manual editing or file uploads.
 disable_toc: false
+aliases:
+- /actions/datastore/create
 further_reading:
 - link: "service_management/app_builder/build"
   tag: "Documentation"
@@ -14,17 +16,13 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You can create and manage datastores from the [Datastore page][1].
 
 ## Create a datastore
 
 To create a datastore:
 
-1. Navigate to the [Datastore page][1].
+1. Navigate to the [Datastores page][1].
 1. Click **+ New Datastore**.
 1. Enter a **Name** for your datastore.
 1. Enter a **Primary Key** or toggle the option to **Autogenerate a Primary Key** if a primary key is not essential to your use case.
@@ -50,8 +48,8 @@ You can create a datastore from an app or workflow by clicking the **Datastore I
 ### Manually edit your data
 
 To manually edit a row in your datastore:
-1. On the [Datastore page][1], locate your datastore and click to open it.
-1. Hover over the row you want to change and click the pencil (**Edit**) icon.
+1. On the [Datastores page][1], locate your datastore and click to open it.
+1. Hover over the row you want to change and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Use the **JSON** or **Raw text** tabs to edit keys in the row.
 
 **Note:** You cannot manually edit the primary key in a row. If you need to edit a primary key, delete the row and re-add it or re-upload the data from a file.
@@ -59,7 +57,7 @@ To manually edit a row in your datastore:
 ### Update using a file
 
 To update a datastore using a file:
-1. On the [Datastore page][1], locate your datastore and click to open it.
+1. On the [Datastores page][1], locate your datastore and click to open it.
 1. Click **Add Data**.
 1. Select an option for how your data should be handled.
    - **Overwrite** replaces existing rows in your table with the data for your file.
@@ -68,7 +66,7 @@ To update a datastore using a file:
 
 ## View a datastore
 
-To view a datastore, locate your datastore on the [Datastore page][1] and click to open it.
+To view a datastore, locate your datastore on the [Datastores page][1] and click to open it.
 
 After you've opened a datastore, you can:
 - Export the dataset to a JSON or CSV file.
@@ -98,7 +96,7 @@ Reach out to [support][5] if you have a use case that exceeds these limits.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/app-builder/datastore
+[1]: https://app.datadoghq.com/actions/datastores
 [2]: /actions/datastore/use#create-workflow-app
 [3]: /actions/datastore/auth/
 [4]: /actions/datastore/use#multiple-datastores

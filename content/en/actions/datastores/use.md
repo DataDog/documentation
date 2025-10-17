@@ -2,6 +2,8 @@
 title: Use Datastores with Apps and Workflows
 description: Reference and perform CRUD operations on datastores within workflows and apps, and create workflows or apps from existing datastores.
 disable_toc: false
+aliases:
+- /actions/datastore/use
 further_reading:
 - link: "service_management/app_builder/build"
   tag: "Documentation"
@@ -14,10 +16,6 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You can reference and perform CRUD (Create, Read, Update, and Delete) operations on a datastore inside a workflow or an app. Additionally, you can create a workflow or app directly from an existing datastore.
 
 ## Create a workflow or app from a datastore {#create-workflow-app}
@@ -29,7 +27,7 @@ You can get started with a workflow or app directly from a datastore. Each time 
 ### Workflow Automation
 
 To create a workflow from a datastore:
-1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. On the [Datastores page][1], locate your datastore in the list and click to open it.
 1. Click **Create** > **Workflow from Datastore**.
 
 Datadog creates a workflow with a **List items** workflow step prepopulated with your datastore ID. From here, follow the [Workflow Automation][2] documentation to build your workflow. For a list of available datastore actions, see the [Action Catalog][4].
@@ -37,7 +35,7 @@ Datadog creates a workflow with a **List items** workflow step prepopulated with
 ### App Builder
 
 To create an app from a datastore:
-1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. On the [Datastores page][1], locate your datastore in the list and click to open it.
 1. Click **Create** > **App from Datastore**.
 
 Datadog creates an app prepopulated with your datastore ID. From here, follow the [App Builder][3] documentation to build your app. For a list of available datastore actions, see the [Action Catalog][4].
@@ -82,7 +80,7 @@ The table uses the output from the List Items action to display the data from th
 ### Retrieve a UUID
 
 To retrieve the UUID for a datastore:
-1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. On the [Datastores page][1], locate your datastore in the list and click to open it.
 1. Click **Table Options** > **Copy datastore UUID**.
 
 ## Use a datastore in a workflow {#use-workflow}
@@ -106,7 +104,7 @@ You can use a workflow to update a Datastore with Terraform by following these s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/app-builder/datastore
+[1]: https://app.datadoghq.com/actions/datastores
 [2]: /actions/workflows/build/
 [3]: /actions/app_builder/build/
 [4]: /actions/actions_catalog/#datadog-actions-datastore
