@@ -1,5 +1,6 @@
 ---
 title: Workflow Logic
+description: Add control logic to workflows using if conditions, switch statements, loops, sleep intervals, and branching actions.
 disable_toc: false
 type: workflows
 is_beta: false

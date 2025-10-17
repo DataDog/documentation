@@ -49,7 +49,7 @@ Akamai mPulse インテグレーションを構成するには、`apiKey` と `a
 
 `apiKey` は、mPulse ポータルにあるユーザーサイトのデータ (ビーコン) を一意に識別するために自動生成される値です。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 "Apps" メニューオプションと `apiKey` 属性は、アプリ管理者にのみ表示されます。
 </div>
 

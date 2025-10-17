@@ -31,7 +31,7 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][18].
 
 ### Instrumentar tu solicitud
 
-Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
+Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la librería de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
 Para empezar a rastrear tus aplicaciones:
 
@@ -67,7 +67,7 @@ Para empezar a rastrear tus aplicaciones:
     ```
    Si tienes mucha necesidad de reducir el tamaño de tu imagen y omitir módulos, puedes utilizar el comando [jdeps][19] para identificar dependencias. Sin embargo, los módulos necesarios pueden cambiar con el tiempo, así que hazlo bajo tu propia responsabilidad.
 
-    <div class="alert alert-danger">Habilitar la creación de perfiles puede afectar a tu factura en función de tu paquete APM. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de tarifas</a>.</div>
+    <div class="alert alert-warning">Habilitar la creación de perfiles puede afectar a tu factura en función de tu paquete APM. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de tarifas</a>.</div>
 
 | Variable de entorno      | Propiedad del sistema                     | Descripción|
 | --------- | --------------------------------- | ------------ |
@@ -214,7 +214,7 @@ La instrumentación puede venir de la instrumentación automática, de la API Op
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][9].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][9].
 
 ## Referencias adicionales
 

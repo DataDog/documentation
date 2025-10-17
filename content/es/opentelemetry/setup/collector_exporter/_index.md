@@ -280,7 +280,7 @@ Puedes encontrar ejemplos de configuración predefinida del Datadog Exporter en 
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
 [6]: /es/api/latest/logs/
 [7]: /es/api/latest/metrics/#submit-metrics
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/collector.yaml
 [9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
 [10]: /es/getting_started/tagging/unified_service_tagging/
 [11]: https://opentelemetry.io/docs/instrumentation/

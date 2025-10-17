@@ -4,6 +4,8 @@ aliases:
 - /es/tracing/setup/docker/
 - /es/agent/apm/docker
 - /es/agent/docker/apm
+description: Configura la recopilación de traces (trazas) de APM para las aplicaciones
+  que se ejecutan en los contenedores de Docker mediante el Datadog Agent
 further_reading:
 - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/trace
   tag: Código fuente

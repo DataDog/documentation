@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentación
   text: Visualización de tus datos de rastreo de errores en el Explorer
-- link: https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: Código fuente
   text: Referencia del comando Sourcemaps
 title: Carga de mapas de fuente de JavaScript
@@ -22,7 +22,7 @@ Si el código fuente de tu frontend JavaScript está minificado, carga tus mapas
 
 Configura tu empaquetador de JavaScript para que, al minificar tu código fuente, genere mapas de fuente que incluyan directamente el código fuente relacionado en el atributo `sourcesContent`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Asegúrate de que el tamaño de cada mapa fuente aumentado con el tamaño del archivo minificado relacionado no supere el límite de **500 MB**.
 </div>
 
@@ -81,7 +81,7 @@ Consulta el siguiente ejemplo:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si la suma del tamaño de los archivos <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> supera el límite de <b>500 MB</b>, redúcelo configurando el empaquetador para dividir el código fuente en varios fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 
@@ -157,7 +157,7 @@ Por otro lado, un stack trace sin minificar te proporciona todo el contexto que 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/es/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/es/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

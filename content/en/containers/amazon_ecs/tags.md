@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS Tag Extraction
+description: Configure automatic tag extraction from container labels and environment variables in Amazon ECS
 aliases:
   - /agent/amazon_ecs/tags
 further_reading:

@@ -86,7 +86,7 @@ tile:
 
 **Nota**: El check de Docker Daemon todavía se mantiene, pero solo funciona con el **Agent v5**.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>Para utilizar la integración de Docker con el Agent v6 consulta la <a href="#Agent-v6">sección Agent v6</a> a continuación.</b>
 </div>
 

@@ -40,7 +40,7 @@ Para combinar varios términos en una consulta compleja, puedes utilizar cualqui
 
 ## Búsqueda de texto completo
 
-<div class="alert alert-warning">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en las consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no puede utilizarse para definir filtros de índice, filtros de archivo, filtros de pipeline de log ni en Live Tail. </div>
+<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en las consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no puede utilizarse para definir filtros de índice, filtros de archivo, filtros de pipeline de log ni en Live Tail. </div>
 
 Utiliza la sintaxis `*:search_term` para realizar una búsqueda de texto completo en todos los atributos de log, incluido el mensaje de log.
 

@@ -52,7 +52,7 @@ title: 인덱스
 
 {{< img src="logs/indexes/delete-index.png" alt="인덱스 삭제" style="width:70%;">}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 삭제된 인덱스와 같은 이름의 인덱스는 다시 생성할 수 없습니다. 
 </div>
 

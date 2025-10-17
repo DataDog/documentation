@@ -85,7 +85,7 @@ Snowflake 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 **참고**: Python 2를 사용하는 Datadog Agent v6에서는 Snowflake 검사를 사용할 수 없습니다. Agent v6에서 Snowflake를 사용하려면 [Datadog Agent v6에서 Python 3 사용][3]을 참조하거나 Agent v7로 업그레이드하세요.
 
 ### 구성
-<div class="alert alert-warning">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세히 알아보려면 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.</div>
+<div class="alert alert-danger">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세히 알아보려면 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.</div>
 
 1. Snowflake를 모니터링하려면 Datadog 특정 역할과 사용자를 생성하세요. Snowflake에서 다음을 실행하여 ACCOUNT_USAGE 스키마에 대한 액세스 권한이 있는 커스텀 역할을 생성합니다.
 

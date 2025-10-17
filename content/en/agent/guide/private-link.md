@@ -1,5 +1,6 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
+description: Configure AWS PrivateLink endpoints to send telemetry data to Datadog securely through internal VPC connections, including cross-region setups.
 further_reading:
     - link: 'https://www.datadoghq.com/architecture/using-cross-region-aws-privatelink-to-send-telemetry-to-datadog/'
       tag: "Architecture Center"
@@ -25,7 +26,7 @@ further_reading:
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
+<div class="alert alert-danger">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1,ap2" %}}

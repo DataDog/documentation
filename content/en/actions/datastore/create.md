@@ -1,5 +1,6 @@
 ---
 title: Create and Manage Datastores
+description: Create datastores with primary keys, seed initial data, and manage datastore contents through manual editing or file uploads.
 disable_toc: false
 further_reading:
 - link: "service_management/app_builder/build"
@@ -14,7 +15,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 You can create and manage datastores from the [Datastore page][1].

@@ -26,17 +26,16 @@ further_reading:
   text: "How we use Scorecards to define and communicate best practices at scale"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
-{{< /callout >}}
-
-{{< img src="/tracing/software_catalog/scorecard-overview.png" alt="Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecard-overview-updated.png" alt="Scorecards dashboard highlighting rule performance" style="width:90%;" >}}
 
 ## Overview
 
 Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your software's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All entities with defined metadata in the Software Catalog are automatically evaluated against a set of pass-fail criteria.
 
 You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
+
+{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
+{{< /callout >}}
 
 ## Get started
 
