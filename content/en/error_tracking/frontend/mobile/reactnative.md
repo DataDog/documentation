@@ -55,7 +55,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US1';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
+// Optional: Sample sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -76,7 +76,6 @@ export default function App() {
     );
 }
 
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 
 {{< /site-region >}}
@@ -92,7 +91,7 @@ import {
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true, // Track user interactions (such as a tap on buttons).
     true, // Track XHR resources
     true // Track errors
@@ -100,7 +99,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US3';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
+// Optional: Sample sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -117,7 +116,6 @@ export default function App() {
     );
 }
 
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 
 {{< /site-region >}}
@@ -133,7 +131,7 @@ import {
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true, // Track User interactions (e.g.: Tap on buttons).
     true, // Track XHR Resources
     true // Track Errors
@@ -141,7 +139,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US5';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
+// Optional: Sample sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -157,7 +155,6 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 
 {{< /site-region >}}
@@ -173,7 +170,7 @@ import {
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true, // Track User interactions (e.g.: Tap on buttons).
     true, // Track XHR Resources
     true // Track Errors
@@ -181,7 +178,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'EU1';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
+// Optional: Sample sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -197,7 +194,6 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -213,7 +209,7 @@ import {
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true, // Track User interactions (e.g.: Tap on buttons).
     true, // Track XHR Resources
     true // Track Errors
@@ -221,7 +217,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US1_FED';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%)
+// Optional: Sample sessions (here, 80% of sessions are sent to Datadog. Default = 100%)
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%).
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -237,7 +233,6 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 {{< /site-region >}}
 
