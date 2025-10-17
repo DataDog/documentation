@@ -1850,37 +1850,6 @@ def answer_question(text):
     return completion
 {{< /code-block >}}
 
-#### Example: chat-style prompt with RAG variables
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-def rag_answer(question, context):
-    LLMObs.annotate(prompt={
-        "id": "rag-qa",
-        "version": "2.1.3",
-        "chat_template": [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user",   "content": "Use the context to answer: {{question}}\nContext:\n{{context}}"}
-        ],
-        "variables": {
-            "question": question,
-            "context": context
-        },
-        "rag_query_variables": ["question"],
-        "rag_context_variables": ["context"],
-        "tags": {"pipeline": "semantic-retrieval"}
-    })
-
-    completion = openai_client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Use the context to answer: {question}\nContext:\n{context}"}
-        ]
-    )
-    return completion
-{{< /code-block >}}
 
 #### Notes
 - Annotating a prompt is only available on LLM spans.
