@@ -414,24 +414,3 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
 
-
-<!-- 
-
-[10]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios -->
-
-
-<!-- 
-[1]: /real_user_monitoring/
-[2]: /error_tracking/
-
-
-
-[8]: https://app.datadoghq.com/rum/application/create
-[9]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
-[10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[11]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
-[12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
-[13]: /real_user_monitoring/explorer/
-
-
- -->
