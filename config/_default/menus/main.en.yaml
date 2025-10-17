@@ -1207,6 +1207,11 @@ menu:
       identifier: ddsql_reference
       parent: essentials_heading
       weight: 110000
+    - name: Data Directory
+      url: ddsql_reference/data_directory/
+      identifier: ddsql_reference_data_directory
+      parent: ddsql_reference
+      weight: 1
     - name: CoScreen
       url: coscreen/
       pre: coscreen
