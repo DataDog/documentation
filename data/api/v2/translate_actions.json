@@ -393,6 +393,38 @@
     "description": "Get the details of a project by `project_id`.",
     "summary": "Get the details of a project"
   },
+  "GetAllCaseTypes": {
+    "description": "Get all case types",
+    "summary": "Get all case types"
+  },
+  "CreateCaseType": {
+    "description": "Create a Case Type",
+    "summary": "Create a case type",
+    "request_description": "Case type payload",
+    "request_schema_description": "Case type create request"
+  },
+  "GetAllCustomAttributes": {
+    "description": "Get all custom attributes",
+    "summary": "Get all custom attributes"
+  },
+  "DeleteCaseType": {
+    "description": "Delete a case type",
+    "summary": "Delete a case type"
+  },
+  "GetAllCustomAttributeConfigsByCaseType": {
+    "description": "Get all custom attribute config of case type",
+    "summary": "Get all custom attributes config of case type"
+  },
+  "CreateCustomAttributeConfig": {
+    "description": "Create custom attribute config for a case type",
+    "summary": "Create custom attribute config for a case type",
+    "request_description": "Custom attribute config payload",
+    "request_schema_description": "Custom attribute config create request"
+  },
+  "DeleteCustomAttributeConfig": {
+    "description": "Delete custom attribute config",
+    "summary": "Delete custom attributes config"
+  },
   "GetCase": {
     "description": "Get the details of case by `case_id`",
     "summary": "Get the details of a case"
@@ -415,6 +447,32 @@
     "request_description": "Case attributes update payload",
     "request_schema_description": "Case update attributes request"
   },
+  "CommentCase": {
+    "description": "Comment case",
+    "summary": "Comment case",
+    "request_description": "Case comment payload",
+    "request_schema_description": "Case comment request"
+  },
+  "DeleteCaseComment": {
+    "description": "Delete case comment",
+    "summary": "Delete case comment"
+  },
+  "DeleteCaseCustomAttribute": {
+    "description": "Delete custom attribute from case",
+    "summary": "Delete custom attribute from case"
+  },
+  "UpdateCaseCustomAttribute": {
+    "description": "Update case custom attribute",
+    "summary": "Update case custom attribute",
+    "request_description": "Update case custom attribute payload",
+    "request_schema_description": "Case update custom attribute request"
+  },
+  "UpdateCaseDescription": {
+    "description": "Update case description",
+    "summary": "Update case description",
+    "request_description": "Case description update payload",
+    "request_schema_description": "Case update description request"
+  },
   "UpdatePriority": {
     "description": "Update case priority",
     "summary": "Update case priority",
@@ -426,6 +484,12 @@
     "summary": "Update case status",
     "request_description": "Case status update payload",
     "request_schema_description": "Case update status request"
+  },
+  "UpdateCaseTitle": {
+    "description": "Update case title",
+    "summary": "Update case title",
+    "request_description": "Case title update payload",
+    "request_schema_description": "Case update title request"
   },
   "UnarchiveCase": {
     "description": "Unarchive case",
@@ -540,7 +604,7 @@
     "request_schema_description": "Request object to update a resource filter."
   },
   "ListContainerImages": {
-    "description": "Get all Container Images for your organization.",
+    "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
   },
   "ListContainers": {
