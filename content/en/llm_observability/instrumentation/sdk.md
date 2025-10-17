@@ -1859,7 +1859,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 {{% tab "Python" %}}
 `LLMObs.submit_evaluation()` can be used to submit your custom evaluation associated with a given span.
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). As an alternative, use <code>LLMObs.submit_evaluation</code>.</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). To migrate, rename your <code>LLMObs.submit_evaluation_for</code> calls with <code>LLMObs.submit_evaluation</code>.</div>
 
 **Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][1] page in Datadog.
 
@@ -1903,6 +1903,10 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 `assessment`
 : optional - _string_
 <br />An assessment of the validity of this evaluation. Must be either "pass" or "fail".
+
+`reasoning`
+: optional - _string_
+<br />An explanation of the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
