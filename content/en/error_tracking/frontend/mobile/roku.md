@@ -16,7 +16,7 @@ further_reading:
 
 Error Tracking processes errors collected from the Roku SDK. 
 
-Enable Roku Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
+Enable Roku Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
 
 - Aggregated Roku crash dashboards and attributes
 - Trend analysis with Roku error tracking
@@ -224,7 +224,7 @@ Whenever you perform an operation that might throw an exception, you can forward
 {{% collapse-content title="Sending data when device is offline" level="h4" %}}
 
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+The Datadog SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  
@@ -285,8 +285,3 @@ To test your implementation:
 [601]: /account_management/api-app-keys/#client-tokens
 [701]: /getting_started/tagging/using_tags/#rum--session-replay
 
-
-
-<!-- 
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected -->
