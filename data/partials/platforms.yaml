@@ -11,25 +11,25 @@ platforms:
     link: "agent/basic_agent_usage/windows/"
     image: "platform_windows.png"
     category: "Host-based"
-  - name: sccm
-    link: "agent/basic_agent_usage/sccm/"
-    image: "platform_sccm.png"
-    category: "configuration_management"
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macos.png"
     category: "Host-based"
-  - name: ansible
-    link: "agent/basic_agent_usage/ansible/"
-    image: "platform_ansible.png"
-    category: "configuration_management"
-  - name: chef
-    link: "agent/basic_agent_usage/chef/"
-    image: "platform_chef.png"
-    category: "configuration_management"
   - name: docker
     link: "agent/docker/"
     image: "platform_docker.png"
+    category: "Container platforms"
+  - name: kubernetes
+    link: "agent/kubernetes/"
+    image: "platform_kubernetes.png"
+    category: "Container platforms"
+  - name: Google Cloud Run
+    link: "serverless/google_cloud_run/containers/sidecar/"
+    image: "platform_gcr.png" 
+    category: "Container platforms"
+  - name: Amazon ECS
+    link: "/containers/amazon_ecs/"
+    image: "platform_ecs.png" 
     category: "Container platforms"
   - name: heroku
     link: "agent/basic_agent_usage/heroku/"
@@ -39,14 +39,18 @@ platforms:
     link: "serverless/aws_lambda/instrumentation/"
     image: "platform_awslambda.png"
     category: "Cloud platforms"
-  - name: kubernetes
-    link: "agent/kubernetes/"
-    image: "platform_kubernetes.png"
-    category: "Container platforms"
-  - name: Google Cloud Run
-    link: "serverless/google_cloud_run/containers/sidecar/"
-    image: "platform_gcr.png" 
-    category: "Container platforms"
+  - name: foundry
+    link: "integrations/guide/cloud-foundry-setup/"
+    image: "platform_cloud_foundry.png"
+    category: "Cloud platforms"
+  - name: ansible
+    link: "agent/basic_agent_usage/ansible/"
+    image: "platform_ansible.png"
+    category: "configuration_management"
+  - name: chef
+    link: "agent/basic_agent_usage/chef/"
+    image: "platform_chef.png"
+    category: "configuration_management"
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
     image: "platform_puppet.png"
@@ -55,14 +59,10 @@ platforms:
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
     category: "configuration_management"
-  - name: foundry
-    link: "integrations/guide/cloud-foundry-setup/"
-    image: "platform_cloud_foundry.png"
-    category: "Cloud platforms"
-  - name: Amazon ECS
-    link: "/containers/amazon_ecs/"
-    image: "platform_ecs.png" 
-    category: "Container platforms"
+  - name: sccm
+    link: "agent/basic_agent_usage/sccm/"
+    image: "platform_sccm.png"
+    category: "configuration_management"
   # - name: source
   #   link: "agent/basic_agent_usage/source/"
   #   image: "platform_fromsource.png"
