@@ -1293,6 +1293,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     DashboardDeleteResponse:
       description: Response from the delete dashboard call.
       properties:
@@ -1444,6 +1445,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     DashboardShareType:
       description: Type of sharing access (either open to anyone who has the public
         URL or invite-only).
@@ -1716,6 +1718,7 @@ components:
       type: string
       x-enum-varnames:
       - DISTRIBUTION
+      x-ignore-duplicate-object: true
     DistributionWidgetDefinition:
       description: "The Distribution visualization is another way of showing metrics\naggregated
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
@@ -1781,6 +1784,7 @@ components:
       type: string
       x-enum-varnames:
       - DISTRIBUTION
+      x-ignore-duplicate-object: true
     DistributionWidgetHistogramRequestQuery:
       description: Query definition for Distribution Widget Histogram Request
       example:
@@ -1875,6 +1879,7 @@ components:
           description: Specifies the scale type. Possible values are `linear` or `log`.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     Downtime:
       description: 'Downtiming gives you greater control over monitor notifications
         by
@@ -2511,6 +2516,7 @@ components:
           description: A status.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     EventListResponse:
       description: An event list response.
       properties:
@@ -2559,6 +2565,7 @@ components:
           description: A status.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     EventStreamWidgetDefinition:
       description: 'The event stream is a widget version of the stream of events
 
@@ -2870,6 +2877,7 @@ components:
       - MIN
       - MAX
       - AVG
+      x-ignore-duplicate-object: true
     FormulaAndFunctionEventQueryDefinition:
       description: A formula and functions events query.
       properties:
@@ -3217,6 +3225,7 @@ components:
       - METRIC
       - MONITOR
       - TIME_SLICE
+      x-ignore-duplicate-object: true
     FormulaType:
       description: Set the sort type to formula.
       enum:
@@ -5277,12 +5286,14 @@ components:
         error:
           $ref: '#/components/schemas/LogsAPIError'
       type: object
+      x-ignore-duplicate-object: true
     LogsAPILimitReachedResponse:
       description: Response returned by the Logs API when the max limit has been reached.
       properties:
         error:
           $ref: '#/components/schemas/LogsAPIError'
       type: object
+      x-ignore-duplicate-object: true
     LogsArithmeticProcessor:
       description: "Use the Arithmetic Processor to add a new attribute (without spaces
         or special characters\nin the new attribute name) to a log with the result
@@ -6549,6 +6560,7 @@ components:
       x-enum-varnames:
       - TIME_ASCENDING
       - TIME_DESCENDING
+      x-ignore-duplicate-object: true
     LogsSpanRemapper:
       description: "There are two ways to define correlation between application spans
         and logs:\n\n  1. Follow the documentation on [how to inject a span ID in
@@ -7327,6 +7339,7 @@ components:
       - MIN
       - MAX
       - AVG
+      x-ignore-duplicate-object: true
     MonitorFormulaAndFunctionEventQueryDefinition:
       description: A formula and functions events query.
       properties:
@@ -9548,6 +9561,7 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      x-ignore-duplicate-object: true
     NotebookCellResourceType:
       default: notebook_cells
       description: Type of the Notebook Cell resource.
@@ -9603,6 +9617,7 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      x-ignore-duplicate-object: true
     NotebookCellTime:
       description: Timeframe for the notebook cell. When 'null', the notebook global
         time is used.
@@ -9657,6 +9672,7 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      x-ignore-duplicate-object: true
     NotebookCreateData:
       description: The data for a notebook create request.
       properties:
@@ -12428,6 +12444,7 @@ components:
       - METRIC
       - MONITOR
       - TIME_SLICE
+      x-ignore-duplicate-object: true
     SLOTypeNumeric:
       description: 'A numeric representation of the type of the service level objective
         (`0` for
@@ -14633,6 +14650,7 @@ components:
       required:
       - config
       type: object
+      x-ignore-duplicate-object: true
     SyntheticsAPITestResultShort:
       description: Object with the results of a single Synthetic API test.
       properties:
@@ -15752,6 +15770,7 @@ components:
       required:
       - config
       type: object
+      x-ignore-duplicate-object: true
     SyntheticsBrowserTestResultShort:
       description: Object with the results of a single Synthetic browser test.
       properties:
@@ -16274,6 +16293,7 @@ components:
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
       type: object
+      x-ignore-duplicate-object: true
     SyntheticsGlobalVariableOptions:
       description: Options for the Global Variable for MFA.
       properties:
@@ -17074,6 +17094,7 @@ components:
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
       type: object
+      x-ignore-duplicate-object: true
     SyntheticsPrivateLocationSecrets:
       description: Secrets for the private location. Only present in the response
         when creating the private location.
@@ -18926,6 +18947,7 @@ components:
       x-enum-varnames:
       - ABSOLUTE
       - RELATIVE
+      x-ignore-duplicate-object: true
     ToplistWidgetStacked:
       description: Top list widget stacked display options.
       properties:
@@ -19996,6 +20018,7 @@ components:
           description: The organization public ID.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     UsageIndexedSpansResponse:
       description: A response containing indexed spans usage.
       properties:
@@ -20283,6 +20306,7 @@ components:
           description: The organization public ID.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     UsageNetworkFlowsResponse:
       description: Response containing the number of netflow events indexed for each
         hour for a given organization.
@@ -24038,6 +24062,7 @@ components:
             `sqrt`, and `pow##` (for example `pow2` or `pow0.5`).
           type: string
       type: object
+      x-ignore-duplicate-object: true
     WidgetChangeType:
       description: Show the absolute or the relative change.
       enum:
@@ -24047,6 +24072,7 @@ components:
       x-enum-varnames:
       - ABSOLUTE
       - RELATIVE
+      x-ignore-duplicate-object: true
     WidgetColorPreference:
       description: Which color to use on the widget.
       enum:
@@ -24374,6 +24400,7 @@ components:
       - CENTER
       - LEFT
       - RIGHT
+      x-ignore-duplicate-object: true
     WidgetImageSizing:
       description: 'How to size the image on the widget. The values are based on the
         image `object-fit` CSS properties.
@@ -24826,6 +24853,7 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+      x-ignore-duplicate-object: true
     WidgetSortBy:
       description: The controls for sorting the widget.
       properties:
@@ -24874,6 +24902,7 @@ components:
       - CENTER
       - LEFT
       - RIGHT
+      x-ignore-duplicate-object: true
     WidgetTickEdge:
       description: Define how you want to align the text on the widget.
       enum:

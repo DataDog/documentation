@@ -1410,6 +1410,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     APITriggerWrapper:
       description: Schema for an API-based trigger.
       properties:
@@ -1784,6 +1785,7 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+      x-ignore-duplicate-object: true
     AWSIntegrationType:
       description: The definition of `AWSIntegrationType` object.
       enum:
@@ -2622,6 +2624,7 @@ components:
       - RUNBOOK
       - DOCUMENTATION
       - DASHBOARD
+      x-ignore-duplicate-object: true
     AlertEventAttributesPriority:
       description: The priority of the alert.
       enum:
@@ -2650,6 +2653,7 @@ components:
       - WARN
       - ERROR
       - OK
+      x-ignore-duplicate-object: true
     AlertEventCustomAttributes:
       additionalProperties: false
       description: Alert event attributes.
@@ -2712,6 +2716,7 @@ components:
       - RUNBOOK
       - DOCUMENTATION
       - DASHBOARD
+      x-ignore-duplicate-object: true
     AlertEventCustomAttributesPriority:
       default: '5'
       description: The priority of the alert.
@@ -2741,6 +2746,7 @@ components:
       - WARN
       - ERROR
       - OK
+      x-ignore-duplicate-object: true
     Annotation:
       description: A list of annotations used in the workflow. These are like sticky
         notes for your workflow!
@@ -3470,6 +3476,7 @@ components:
       - tags
       - conditions
       type: object
+      x-ignore-duplicate-object: true
     ApplicationSecurityWafCustomRuleCreateData:
       description: Object for a single WAF custom rule.
       properties:
@@ -3542,6 +3549,7 @@ components:
           type: string
       readOnly: true
       type: object
+      x-ignore-duplicate-object: true
     ApplicationSecurityWafCustomRuleResponse:
       description: Response object that includes a single WAF custom rule.
       properties:
@@ -3648,6 +3656,7 @@ components:
       - tags
       - conditions
       type: object
+      x-ignore-duplicate-object: true
     ApplicationSecurityWafCustomRuleUpdateData:
       description: Object for a single WAF Custom Rule.
       properties:
@@ -3767,6 +3776,7 @@ components:
       - description
       - enabled
       type: object
+      x-ignore-duplicate-object: true
     ApplicationSecurityWafExclusionFilterCreateData:
       description: Object for creating a single WAF exclusion filter.
       properties:
@@ -3816,6 +3826,7 @@ components:
           type: string
       readOnly: true
       type: object
+      x-ignore-duplicate-object: true
     ApplicationSecurityWafExclusionFilterOnMatch:
       description: The action taken when the exclusion filter matches. When set to
         `monitor`, security traces are emitted but the requests are not blocked. By
@@ -3932,6 +3943,7 @@ components:
       - description
       - enabled
       type: object
+      x-ignore-duplicate-object: true
     ApplicationSecurityWafExclusionFilterUpdateData:
       description: Object for updating a single WAF exclusion filter.
       properties:
@@ -4107,6 +4119,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryCostUpsertRequestDataAttributesStrategy:
       description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategy`
         object.
@@ -4180,6 +4193,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItems:
       description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyAllocatedByItems`
         object.
@@ -4240,6 +4254,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryCostUpsertRequestDataAttributesStrategyEvaluateGroupedByFiltersItems:
       description: The definition of `ArbitraryCostUpsertRequestDataAttributesStrategyEvaluateGroupedByFiltersItems`
         object.
@@ -4265,6 +4280,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryCostUpsertRequestDataType:
       default: upsert_arbitrary_rule
       description: Upsert arbitrary rule resource type.
@@ -4577,6 +4593,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryRuleResponseDataAttributesStrategy:
       description: The definition of `ArbitraryRuleResponseDataAttributesStrategy`
         object.
@@ -4650,6 +4667,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryRuleResponseDataAttributesStrategyAllocatedByItems:
       description: The definition of `ArbitraryRuleResponseDataAttributesStrategyAllocatedByItems`
         object.
@@ -4710,6 +4728,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryRuleResponseDataAttributesStrategyEvaluateGroupedByFiltersItems:
       description: The definition of `ArbitraryRuleResponseDataAttributesStrategyEvaluateGroupedByFiltersItems`
         object.
@@ -4735,6 +4754,7 @@ components:
       - condition
       - tag
       type: object
+      x-ignore-duplicate-object: true
     ArbitraryRuleResponseDataType:
       default: arbitrary_rule
       description: Arbitrary rule resource type.
@@ -4744,6 +4764,7 @@ components:
       type: string
       x-enum-varnames:
       - ARBITRARY_RULE
+      x-ignore-duplicate-object: true
     AsanaAccessToken:
       description: The definition of the `AsanaAccessToken` object.
       properties:
@@ -5128,6 +5149,7 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+      x-ignore-duplicate-object: true
     AuditLogsSearchEventsRequest:
       description: The request for a Audit Logs events list.
       properties:
@@ -5149,6 +5171,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     AuditLogsWarning:
       description: Warning message indicating something that went wrong with the query.
       properties:
@@ -5244,6 +5267,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
       - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
+      x-ignore-duplicate-object: true
     AuthNMappingCreateRequest:
       description: Request for creating an AuthN Mapping.
       properties:
@@ -5394,6 +5418,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
       - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
+      x-ignore-duplicate-object: true
     AuthNMappingUpdateRequest:
       description: Request to update an AuthN Mapping.
       properties:
@@ -5657,6 +5682,7 @@ components:
       type: string
       x-enum-varnames:
       - AWS_CUR_CONFIG
+      x-ignore-duplicate-object: true
     AwsCURConfigsResponse:
       description: List of AWS CUR configs.
       properties:
@@ -5779,6 +5805,7 @@ components:
       type: string
       x-enum-varnames:
       - AWS_CUR_CONFIG
+      x-ignore-duplicate-object: true
     AwsOnDemandAttributes:
       description: Attributes for the AWS on demand task.
       properties:
@@ -5896,6 +5923,7 @@ components:
           example: true
           type: boolean
       type: object
+      x-ignore-duplicate-object: true
     AwsScanOptionsCreateAttributes:
       description: Attributes for the AWS scan options to create.
       properties:
@@ -6001,6 +6029,7 @@ components:
           example: true
           type: boolean
       type: object
+      x-ignore-duplicate-object: true
     AwsScanOptionsUpdateData:
       description: Object for the scan options of a single AWS account.
       properties:
@@ -6126,6 +6155,7 @@ components:
       type: string
       x-enum-varnames:
       - AZURE_SCAN_OPTIONS
+      x-ignore-duplicate-object: true
     AzureScanOptionsInputUpdate:
       description: Request object for updating Azure scan options.
       example:
@@ -6171,6 +6201,7 @@ components:
       type: string
       x-enum-varnames:
       - AZURE_SCAN_OPTIONS
+      x-ignore-duplicate-object: true
     AzureStorageDestination:
       description: The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
@@ -6422,6 +6453,7 @@ components:
       type: string
       x-enum-varnames:
       - AZURE_UC_CONFIGS
+      x-ignore-duplicate-object: true
     AzureUCConfigPairsResponse:
       description: Response of Azure config pair.
       properties:
@@ -6635,6 +6667,7 @@ components:
           description: The type of the object, must be `budget`.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     BudgetArray:
       description: An array of budgets.
       example:
@@ -6752,6 +6785,7 @@ components:
           description: The type of the object, must be `budget`.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
@@ -6792,6 +6826,7 @@ components:
       type: string
       x-enum-varnames:
       - ITEMS
+      x-ignore-duplicate-object: true
     BulkMuteFindingsRequest:
       description: The new bulk mute finding request.
       properties:
@@ -6976,6 +7011,7 @@ components:
       x-enum-varnames:
       - ALPHABETICAL
       - MEASURE
+      x-ignore-duplicate-object: true
     CIAppAggregationFunction:
       description: An aggregation function.
       enum:
@@ -7077,6 +7113,7 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - TOTAL
+      x-ignore-duplicate-object: true
     CIAppComputes:
       additionalProperties:
         $ref: '#/components/schemas/CIAppAggregateBucketValue'
@@ -7627,6 +7664,7 @@ components:
       - ERROR
       - CANCELED
       - SKIPPED
+      x-ignore-duplicate-object: true
     CIAppPipelineEventMetrics:
       description: A list of user-defined metrics. The metrics must follow the `key:value`
         pattern and the value must be numeric.
@@ -7814,6 +7852,7 @@ components:
       - ERROR
       - CANCELED
       - SKIPPED
+      x-ignore-duplicate-object: true
     CIAppPipelineEventStep:
       description: Details of a CI step.
       properties:
@@ -8023,6 +8062,7 @@ components:
         computes:
           $ref: '#/components/schemas/CIAppComputes'
       type: object
+      x-ignore-duplicate-object: true
     CIAppPipelinesGroupBy:
       description: A group-by rule.
       properties:
@@ -8046,6 +8086,7 @@ components:
       required:
       - facet
       type: object
+      x-ignore-duplicate-object: true
     CIAppPipelinesQueryFilter:
       description: The search and filter query settings.
       properties:
@@ -8178,6 +8219,7 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+      x-ignore-duplicate-object: true
     CIAppSort:
       description: Sort parameters when querying events.
       enum:
@@ -8187,6 +8229,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     CIAppSortOrder:
       description: The order to use, ascending or descending.
       enum:
@@ -8197,6 +8240,7 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+      x-ignore-duplicate-object: true
     CIAppTestEvent:
       description: Object description of test event after being processed and stored
         by Datadog.
@@ -8311,6 +8355,7 @@ components:
         computes:
           $ref: '#/components/schemas/CIAppComputes'
       type: object
+      x-ignore-duplicate-object: true
     CIAppTestsGroupBy:
       description: A group-by rule.
       properties:
@@ -8334,6 +8379,7 @@ components:
       required:
       - facet
       type: object
+      x-ignore-duplicate-object: true
     CIAppTestsQueryFilter:
       description: The search and filter query settings.
       properties:
@@ -8402,6 +8448,7 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_AGENT
+      x-ignore-duplicate-object: true
     CVSS:
       description: Vulnerability severity.
       properties:
@@ -8650,6 +8697,7 @@ components:
         project:
           $ref: '#/components/schemas/ProjectRelationship'
       type: object
+      x-ignore-duplicate-object: true
     CaseResourceType:
       default: case
       description: Case resource type
@@ -8696,6 +8744,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     CaseTriggerWrapper:
       description: Schema for a Case-based trigger.
       properties:
@@ -8903,6 +8952,7 @@ components:
       - SYSTEM
       - API
       - AUTOMATION
+      x-ignore-duplicate-object: true
     ChangeEventAttributesChangedResource:
       description: A uniquely identified resource.
       properties:
@@ -8922,6 +8972,7 @@ components:
       x-enum-varnames:
       - FEATURE_FLAG
       - CONFIGURATION
+      x-ignore-duplicate-object: true
     ChangeEventAttributesImpactedResourcesItem:
       description: A uniquely identified resource.
       properties:
@@ -8938,6 +8989,7 @@ components:
       type: string
       x-enum-varnames:
       - SERVICE
+      x-ignore-duplicate-object: true
     ChangeEventCustomAttributes:
       additionalProperties: false
       description: Change event attributes.
@@ -9027,6 +9079,7 @@ components:
       - SYSTEM
       - API
       - AUTOMATION
+      x-ignore-duplicate-object: true
     ChangeEventCustomAttributesChangedResource:
       additionalProperties: false
       description: A uniquely identified resource.
@@ -9053,6 +9106,7 @@ components:
       x-enum-varnames:
       - FEATURE_FLAG
       - CONFIGURATION
+      x-ignore-duplicate-object: true
     ChangeEventCustomAttributesImpactedResourcesItems:
       additionalProperties: false
       description: Object representing a uniquely identified resource.
@@ -9077,6 +9131,7 @@ components:
       type: string
       x-enum-varnames:
       - SERVICE
+      x-ignore-duplicate-object: true
     ChangeEventTriggerWrapper:
       description: Schema for a Change Event-based trigger.
       properties:
@@ -10830,6 +10885,7 @@ components:
       required:
       - resource_type
       type: object
+      x-ignore-duplicate-object: true
       x-merge-override:
         required: false
     ConfluentAccountResponse:
@@ -11030,6 +11086,7 @@ components:
       required:
       - resource_type
       type: object
+      x-ignore-duplicate-object: true
       x-merge-override:
         required: false
     ConfluentResourceResponseData:
@@ -11478,6 +11535,7 @@ components:
       type: string
       x-enum-varnames:
       - CURSOR_LIMIT
+      x-ignore-duplicate-object: true
     ContainerImageType:
       default: container_image
       description: Type of Container Image.
@@ -11553,6 +11611,7 @@ components:
           description: Link to current page.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     ContainerItem:
       description: Possible Container models.
       oneOf:
@@ -11599,6 +11658,7 @@ components:
       type: string
       x-enum-varnames:
       - CURSOR_LIMIT
+      x-ignore-duplicate-object: true
     ContainerType:
       default: container
       description: Type of container.
@@ -11643,6 +11703,7 @@ components:
           description: Link to current page.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -11862,6 +11923,7 @@ components:
         data:
           $ref: '#/components/schemas/ActionConnectionData'
       type: object
+      x-ignore-duplicate-object: true
     CreateAppRequest:
       description: A request object for creating a new app.
       example:
@@ -11950,6 +12012,7 @@ components:
             type: string
           type: array
       type: object
+      x-ignore-duplicate-object: true
     CreateAppResponse:
       description: The response object after a new app is successfully created, with
         the app ID.
@@ -11971,6 +12034,7 @@ components:
       - id
       - type
       type: object
+      x-ignore-duplicate-object: true
     CreateAppsDatastoreRequest:
       description: Request to create a new datastore with specified configuration
         and metadata.
@@ -12050,6 +12114,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     CreateCustomFrameworkResponse:
       description: Response object to create a custom framework.
       properties:
@@ -12058,6 +12123,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -12204,6 +12270,7 @@ components:
       type: string
       x-enum-varnames:
       - PAGES
+      x-ignore-duplicate-object: true
     CreatePageResponse:
       description: The full response object after creating a new On-Call Page.
       example:
@@ -12234,6 +12301,7 @@ components:
       type: string
       x-enum-varnames:
       - PAGES
+      x-ignore-duplicate-object: true
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -12248,6 +12316,7 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+      x-ignore-duplicate-object: true
     CreateRuleResponse:
       description: Created rule in response.
       properties:
@@ -12266,6 +12335,7 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+      x-ignore-duplicate-object: true
     CreateRulesetRequest:
       description: The definition of `CreateRulesetRequest` object.
       example:
@@ -12699,6 +12769,7 @@ components:
       - name
       - type
       type: object
+      x-ignore-duplicate-object: true
     CreateTableRequestDataType:
       default: reference_table
       description: Reference table resource type.
@@ -12708,6 +12779,7 @@ components:
       type: string
       x-enum-varnames:
       - REFERENCE_TABLE
+      x-ignore-duplicate-object: true
     CreateUploadRequest:
       description: The definition of `CreateUploadRequest` object.
       properties:
@@ -12770,6 +12842,7 @@ components:
       type: string
       x-enum-varnames:
       - UPLOAD
+      x-ignore-duplicate-object: true
     CreateUploadResponse:
       description: The definition of `CreateUploadResponse` object.
       properties:
@@ -12807,6 +12880,7 @@ components:
       type: string
       x-enum-varnames:
       - UPLOAD
+      x-ignore-duplicate-object: true
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
       example:
@@ -12875,6 +12949,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     CreateWorkflowResponse:
       description: The response object after creating a new workflow.
       properties:
@@ -12883,6 +12958,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     Creator:
       description: Creator of the object.
       properties:
@@ -13563,6 +13639,7 @@ components:
       type: string
       x-enum-varnames:
       - ELASTICSEARCH
+      x-ignore-duplicate-object: true
     CustomDestinationForwardDestinationHttp:
       description: The HTTP destination.
       properties:
@@ -13590,6 +13667,7 @@ components:
       type: string
       x-enum-varnames:
       - HTTP
+      x-ignore-duplicate-object: true
     CustomDestinationForwardDestinationMicrosoftSentinel:
       description: The Microsoft Sentinel destination.
       properties:
@@ -13633,6 +13711,7 @@ components:
       type: string
       x-enum-varnames:
       - MICROSOFT_SENTINEL
+      x-ignore-duplicate-object: true
     CustomDestinationForwardDestinationSplunk:
       description: The Splunk HTTP Event Collector (HEC) destination.
       properties:
@@ -13664,6 +13743,7 @@ components:
       type: string
       x-enum-varnames:
       - SPLUNK_HEC
+      x-ignore-duplicate-object: true
     CustomDestinationHttpDestinationAuth:
       description: Authentication method of the HTTP requests.
       oneOf:
@@ -13700,6 +13780,7 @@ components:
       type: string
       x-enum-varnames:
       - BASIC
+      x-ignore-duplicate-object: true
     CustomDestinationHttpDestinationAuthCustomHeader:
       description: Custom header access authentication.
       properties:
@@ -13729,6 +13810,7 @@ components:
       type: string
       x-enum-varnames:
       - CUSTOM_HEADER
+      x-ignore-duplicate-object: true
     CustomDestinationResponse:
       description: The custom destination.
       properties:
@@ -13866,6 +13948,7 @@ components:
       type: string
       x-enum-varnames:
       - ELASTICSEARCH
+      x-ignore-duplicate-object: true
     CustomDestinationResponseForwardDestinationHttp:
       description: The HTTP destination.
       properties:
@@ -13893,6 +13976,7 @@ components:
       type: string
       x-enum-varnames:
       - HTTP
+      x-ignore-duplicate-object: true
     CustomDestinationResponseForwardDestinationMicrosoftSentinel:
       description: The Microsoft Sentinel destination.
       properties:
@@ -13936,6 +14020,7 @@ components:
       type: string
       x-enum-varnames:
       - MICROSOFT_SENTINEL
+      x-ignore-duplicate-object: true
     CustomDestinationResponseForwardDestinationSplunk:
       description: The Splunk HTTP Event Collector (HEC) destination.
       properties:
@@ -13960,6 +14045,7 @@ components:
       type: string
       x-enum-varnames:
       - SPLUNK_HEC
+      x-ignore-duplicate-object: true
     CustomDestinationResponseHttpDestinationAuth:
       description: Authentication method of the HTTP requests.
       oneOf:
@@ -13982,6 +14068,7 @@ components:
       type: string
       x-enum-varnames:
       - BASIC
+      x-ignore-duplicate-object: true
     CustomDestinationResponseHttpDestinationAuthCustomHeader:
       description: Custom header access authentication.
       properties:
@@ -14004,6 +14091,7 @@ components:
       type: string
       x-enum-varnames:
       - CUSTOM_HEADER
+      x-ignore-duplicate-object: true
     CustomDestinationType:
       default: custom_destination
       description: The type of the resource. The value should always be `custom_destination`.
@@ -14493,6 +14581,7 @@ components:
           format: date-time
           type: string
       type: object
+      x-ignore-duplicate-object: true
     DORAListDeploymentsRequestData:
       description: The JSON:API data.
       properties:
@@ -14542,6 +14631,7 @@ components:
           format: date-time
           type: string
       type: object
+      x-ignore-duplicate-object: true
     DORAListFailuresRequestData:
       description: The JSON:API data.
       properties:
@@ -14795,6 +14885,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAMS
+      x-ignore-duplicate-object: true
     DataScalarColumn:
       description: A column containing the numerical results for a formula or query.
       properties:
@@ -15033,6 +15124,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     DatasetRequest:
       description: "**Datasets Object Constraints**\n- **Tag limit per dataset**:\n
         \ - Each restricted dataset supports a maximum of 10 key:value pairs per product.\n\n-
@@ -15102,6 +15194,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     Datastore:
       description: A datastore's complete configuration and metadata.
       properties:
@@ -15219,6 +15312,7 @@ components:
       type: string
       x-enum-varnames:
       - ITEMS
+      x-ignore-duplicate-object: true
     DatastorePrimaryKeyGenerationStrategy:
       description: Can be set to `uuid` to automatically generate primary keys when
         new items are added. Default value is `none`, which requires you to supply
@@ -15237,6 +15331,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     DatastoreTriggerWrapper:
       description: Schema for a Datastore-based trigger.
       properties:
@@ -15272,6 +15367,7 @@ components:
       - id
       - type
       type: object
+      x-ignore-duplicate-object: true
     DeleteAppsDatastoreItemRequest:
       description: Request to delete a specific item from a datastore by its primary
         key.
@@ -15336,6 +15432,7 @@ components:
       required:
       - type
       type: object
+      x-ignore-duplicate-object: true
     DeleteAppsRequest:
       description: A request object for deleting multiple apps by ID.
       example:
@@ -15367,6 +15464,7 @@ components:
       - id
       - type
       type: object
+      x-ignore-duplicate-object: true
     DeleteAppsResponse:
       description: The response object after multiple apps are successfully deleted.
       properties:
@@ -15390,6 +15488,7 @@ components:
       - id
       - type
       type: object
+      x-ignore-duplicate-object: true
     DeleteCustomFrameworkResponse:
       description: Response object to delete a custom framework.
       properties:
@@ -16012,6 +16111,7 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-ignore-duplicate-object: true
     DowntimeRelationshipsMonitor:
       description: The monitor identified by the downtime.
       properties:
@@ -16482,6 +16582,7 @@ components:
       items:
         $ref: '#/components/schemas/EntityData'
       type: array
+      x-ignore-duplicate-object: true
     EntityResponseIncludedIncident:
       description: Included incident.
       properties:
@@ -16687,30 +16788,35 @@ components:
         data:
           $ref: '#/components/schemas/RelationshipArray'
       type: object
+      x-ignore-duplicate-object: true
     EntityToOncalls:
       description: Entity to oncalls relationship.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipArray'
       type: object
+      x-ignore-duplicate-object: true
     EntityToRawSchema:
       description: Entity to raw schema relationship.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipItem'
       type: object
+      x-ignore-duplicate-object: true
     EntityToRelatedEntities:
       description: Entity to related entities relationship.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipArray'
       type: object
+      x-ignore-duplicate-object: true
     EntityToSchema:
       description: Entity to detail schema relationship.
       properties:
         data:
           $ref: '#/components/schemas/RelationshipItem'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3:
       description: Entity schema v3.
       oneOf:
@@ -16761,6 +16867,7 @@ components:
         pipelines:
           $ref: '#/components/schemas/EntityV3DatadogPipelines'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3APIKind:
       description: The definition of Entity V3 API Kind object.
       enum:
@@ -17001,6 +17108,7 @@ components:
           description: The type of datastore.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     EntityV3Integrations:
       additionalProperties: false
       description: A base schema for defining third-party integrations.
@@ -17206,6 +17314,7 @@ components:
           description: The type of queue.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     EntityV3Service:
       additionalProperties: false
       description: Schema for service entities.
@@ -17248,6 +17357,7 @@ components:
         pipelines:
           $ref: '#/components/schemas/EntityV3DatadogPipelines'
       type: object
+      x-ignore-duplicate-object: true
     EntityV3ServiceKind:
       description: The definition of Entity V3 Service Kind object.
       enum:
@@ -17256,6 +17366,7 @@ components:
       type: string
       x-enum-varnames:
       - SERVICE
+      x-ignore-duplicate-object: true
     EntityV3ServiceSpec:
       additionalProperties: false
       description: The definition of Entity V3 Service Spec object.
@@ -17545,6 +17656,7 @@ components:
         teams:
           $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
+      x-ignore-duplicate-object: true
     EscalationPolicyCreateRequestDataType:
       default: policies
       description: Indicates that the resource is of type `policies`.
@@ -17554,6 +17666,7 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+      x-ignore-duplicate-object: true
     EscalationPolicyData:
       description: Represents the data for a single escalation policy, including its
         attributes, ID, relationships, and resource type.
@@ -17636,6 +17749,7 @@ components:
       type: string
       x-enum-varnames:
       - STEPS
+      x-ignore-duplicate-object: true
     EscalationPolicyDataType:
       default: policies
       description: Indicates that the resource is of type `policies`.
@@ -17645,6 +17759,7 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+      x-ignore-duplicate-object: true
     EscalationPolicyIncluded:
       description: Represents included related resources when retrieving an escalation
         policy, such as teams, steps, or targets.
@@ -17731,6 +17846,7 @@ components:
       type: string
       x-enum-varnames:
       - STEPS
+      x-ignore-duplicate-object: true
     EscalationPolicyUpdateRequest:
       description: Represents a request to update an existing escalation policy, including
         the updated policy data.
@@ -17841,6 +17957,7 @@ components:
         teams:
           $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
+      x-ignore-duplicate-object: true
     EscalationPolicyUpdateRequestDataType:
       default: policies
       description: Indicates that the resource is of type `policies`.
@@ -17850,6 +17967,7 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+      x-ignore-duplicate-object: true
     EscalationPolicyUser:
       description: Represents a user object in the context of an escalation policy,
         including their `id`, type, and basic attributes.
@@ -17879,6 +17997,7 @@ components:
         status:
           $ref: '#/components/schemas/UserAttributesStatus'
       type: object
+      x-ignore-duplicate-object: true
     EscalationPolicyUserType:
       default: users
       description: Users resource type.
@@ -17888,6 +18007,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     EscalationRelationships:
       description: Contains the relationships of an escalation object, including its
         responders.
@@ -17928,6 +18048,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     EscalationTarget:
       description: Represents an escalation target, which can be a team, user, or
         schedule.
@@ -17954,6 +18075,7 @@ components:
       type: string
       x-enum-varnames:
       - ESCALATION_POLICY_STEPS
+      x-ignore-duplicate-object: true
     Estimation:
       description: Recommended resource values for a Spark driver or executor, derived
         from recent real usage metrics. Used by SPA to propose more efficient pod
@@ -18100,6 +18222,7 @@ components:
       x-enum-varnames:
       - CHANGE
       - ALERT
+      x-ignore-duplicate-object: true
     EventCreateRequest:
       description: An event object.
       properties:
@@ -18253,6 +18376,7 @@ components:
       type: string
       x-enum-varnames:
       - CUSTOM_EVENTS
+      x-ignore-duplicate-object: true
     EventPriority:
       description: The priority of the event's monitor. For example, `normal` or `low`.
       enum:
@@ -18355,6 +18479,7 @@ components:
       x-enum-varnames:
       - CHANGE
       - ALERT
+      x-ignore-duplicate-object: true
     EventSystemAttributesIntegrationId:
       description: Integration ID sourced from integration manifests.
       enum:
@@ -18363,6 +18488,7 @@ components:
       type: string
       x-enum-varnames:
       - CUSTOM_EVENTS
+      x-ignore-duplicate-object: true
     EventType:
       default: event
       description: Type of the event.
@@ -18631,6 +18757,7 @@ components:
       - data_source
       - compute
       type: object
+      x-ignore-duplicate-object: true
     EventsSearch:
       description: Configuration of the search/filter for an events query.
       properties:
@@ -18648,6 +18775,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     EventsSortType:
       description: The type of sort to use on the calculated value.
       enum:
@@ -18684,6 +18812,7 @@ components:
       - data_source
       - compute
       type: object
+      x-ignore-duplicate-object: true
     EventsWarning:
       description: A warning message indicating something is wrong with the query.
       properties:
@@ -20633,6 +20762,7 @@ components:
       type: string
       x-enum-varnames:
       - GCP_UC_CONFIG
+      x-ignore-duplicate-object: true
     GCPUsageCostConfigsResponse:
       description: List of Google Cloud Usage Cost configs.
       properties:
@@ -20710,6 +20840,7 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SCAN_OPTIONS
+      x-ignore-duplicate-object: true
     GcpScanOptionsInputUpdate:
       description: Request object for updating GCP scan options.
       example:
@@ -20755,6 +20886,7 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SCAN_OPTIONS
+      x-ignore-duplicate-object: true
     GcpUcConfigResponse:
       description: The definition of `GcpUcConfigResponse` object.
       example:
@@ -20848,6 +20980,7 @@ components:
       type: string
       x-enum-varnames:
       - GCP_UC_CONFIG
+      x-ignore-duplicate-object: true
     GeminiAPIKey:
       description: The definition of the `GeminiAPIKey` object.
       properties:
@@ -20923,12 +21056,14 @@ components:
         data:
           $ref: '#/components/schemas/ActionConnectionData'
       type: object
+      x-ignore-duplicate-object: true
     GetAppKeyRegistrationResponse:
       description: The response object after getting an app key registration.
       properties:
         data:
           $ref: '#/components/schemas/AppKeyRegistrationData'
       type: object
+      x-ignore-duplicate-object: true
     GetAppResponse:
       description: The full app definition response object.
       properties:
@@ -20998,6 +21133,7 @@ components:
             type: string
           type: array
       type: object
+      x-ignore-duplicate-object: true
     GetCustomFrameworkResponse:
       description: Response object to get a custom framework.
       properties:
@@ -21249,6 +21385,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     GithubWebhookTriggerWrapper:
       description: Schema for a GitHub webhook-based trigger.
       properties:
@@ -22093,6 +22230,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
       - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
+      x-ignore-duplicate-object: true
     IncidentAttachmentData:
       description: A single incident attachment.
       example:
@@ -22192,6 +22330,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     IncidentAttachmentRelationships:
       description: The incident attachment's relationships.
       properties:
@@ -22212,6 +22351,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
       - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
+      x-ignore-duplicate-object: true
     IncidentAttachmentUpdateData:
       description: A single incident attachment.
       properties:
@@ -22343,6 +22483,7 @@ components:
       description: An object related to an attachment that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
+      x-ignore-duplicate-object: true
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -22726,6 +22867,7 @@ components:
       - type
       - attributes
       type: object
+      x-ignore-duplicate-object: true
     IncidentIntegrationMetadataCreateRequest:
       description: Create request for an incident integration metadata.
       properties:
@@ -22770,6 +22912,7 @@ components:
       - type
       - attributes
       type: object
+      x-ignore-duplicate-object: true
     IncidentIntegrationMetadataPatchRequest:
       description: Patch request for an incident integration metadata.
       properties:
@@ -22814,6 +22957,7 @@ components:
         in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
+      x-ignore-duplicate-object: true
     IncidentIntegrationMetadataType:
       default: incident_integrations
       description: Integration metadata resource type.
@@ -22831,6 +22975,7 @@ components:
         last_modified_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+      x-ignore-duplicate-object: true
     IncidentNonDatadogCreator:
       description: Incident's non Datadog creator.
       nullable: true
@@ -22963,6 +23108,7 @@ components:
       - ALL
       - ORGANIZATION
       - PRIVATE
+      x-ignore-duplicate-object: true
     IncidentNotificationRuleConditions:
       description: The conditions that trigger this notification rule.
       example:
@@ -23030,6 +23176,7 @@ components:
       - ALL
       - ORGANIZATION
       - PRIVATE
+      x-ignore-duplicate-object: true
     IncidentNotificationRuleCreateData:
       description: Notification rule data for a create request.
       properties:
@@ -23314,6 +23461,7 @@ components:
       - id
       - type
       type: object
+      x-ignore-duplicate-object: true
     IncidentNotificationTemplateRelationships:
       description: The notification template's resource relationships.
       properties:
@@ -23342,6 +23490,7 @@ components:
       - id
       - type
       type: object
+      x-ignore-duplicate-object: true
     IncidentNotificationTemplateType:
       description: Notification templates resource type.
       enum:
@@ -23625,6 +23774,7 @@ components:
           $ref: '#/components/schemas/IncidentResponseMetaPagination'
       readOnly: true
       type: object
+      x-ignore-duplicate-object: true
     IncidentResponseMetaPagination:
       description: Pagination properties.
       properties:
@@ -23803,6 +23953,7 @@ components:
           $ref: '#/components/schemas/IncidentResponseMetaPagination'
       readOnly: true
       type: object
+      x-ignore-duplicate-object: true
     IncidentSearchResponseNumericFacetData:
       description: Facet data numeric attributes of an incident.
       properties:
@@ -23925,6 +24076,7 @@ components:
         included payload.
       oneOf:
       - $ref: '#/components/schemas/User'
+      x-ignore-duplicate-object: true
     IncidentServiceRelationships:
       description: The incident service's relationships.
       properties:
@@ -23934,6 +24086,7 @@ components:
           $ref: '#/components/schemas/RelationshipToUser'
       readOnly: true
       type: object
+      x-ignore-duplicate-object: true
     IncidentServiceResponse:
       description: Response with an incident service payload.
       properties:
@@ -24103,6 +24256,7 @@ components:
         payload.
       oneOf:
       - $ref: '#/components/schemas/User'
+      x-ignore-duplicate-object: true
     IncidentTeamRelationships:
       description: The incident team's relationships.
       properties:
@@ -24112,6 +24266,7 @@ components:
           $ref: '#/components/schemas/RelationshipToUser'
       readOnly: true
       type: object
+      x-ignore-duplicate-object: true
     IncidentTeamResponse:
       description: Response with an incident team payload.
       properties:
@@ -24167,6 +24322,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAMS
+      x-ignore-duplicate-object: true
     IncidentTeamUpdateAttributes:
       description: The incident team's attributes for an update request.
       properties:
@@ -24363,6 +24519,7 @@ components:
       - type
       - attributes
       type: object
+      x-ignore-duplicate-object: true
     IncidentTodoCreateRequest:
       description: Create request for an incident todo.
       properties:
@@ -24401,6 +24558,7 @@ components:
       - type
       - attributes
       type: object
+      x-ignore-duplicate-object: true
     IncidentTodoPatchRequest:
       description: Patch request for an incident todo.
       properties:
@@ -24417,6 +24575,7 @@ components:
         last_modified_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+      x-ignore-duplicate-object: true
     IncidentTodoResponse:
       description: Response with an incident todo.
       properties:
@@ -24452,6 +24611,7 @@ components:
       description: An object related to an incident todo that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
+      x-ignore-duplicate-object: true
     IncidentTodoType:
       default: incident_todos
       description: Todo resource type.
@@ -24468,6 +24628,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     IncidentTriggerWrapper:
       description: Schema for an Incident-based trigger.
       properties:
@@ -24992,6 +25153,7 @@ components:
       - ARRAY_NUMBER
       - ARRAY_BOOLEAN
       - ARRAY_OBJECT
+      x-ignore-duplicate-object: true
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
@@ -25262,6 +25424,7 @@ components:
           example: ET
           type: string
       type: object
+      x-ignore-duplicate-object: true
     IssueCaseReference:
       description: The case the issue is attached to.
       properties:
@@ -25295,6 +25458,7 @@ components:
         project:
           $ref: '#/components/schemas/ProjectRelationship'
       type: object
+      x-ignore-duplicate-object: true
     IssueCaseResourceType:
       description: Type of the object.
       enum:
@@ -26054,6 +26218,7 @@ components:
           description: Jira project key
           type: string
       type: object
+      x-ignore-duplicate-object: true
     JobCreateResponse:
       description: Run a historical job response.
       properties:
@@ -26438,6 +26603,7 @@ components:
       type: string
       x-enum-varnames:
       - MEMBERS
+      x-ignore-duplicate-object: true
     LayerType:
       default: layers
       description: Layers resource type.
@@ -26447,6 +26613,7 @@ components:
       type: string
       x-enum-varnames:
       - LAYERS
+      x-ignore-duplicate-object: true
     LeakedKey:
       description: The definition of LeakedKey object.
       properties:
@@ -27111,6 +27278,7 @@ components:
         meta:
           $ref: '#/components/schemas/KindResponseMeta'
       type: object
+      x-ignore-duplicate-object: true
     ListPipelinesResponse:
       description: Represents the response payload containing a list of pipelines
         and associated metadata.
@@ -27169,6 +27337,7 @@ components:
       items:
         $ref: '#/components/schemas/EntityData'
       type: array
+      x-ignore-duplicate-object: true
     ListRelationCatalogResponseLinks:
       description: List relation response links.
       properties:
@@ -27209,6 +27378,7 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+      x-ignore-duplicate-object: true
     ListRulesResponseLinks:
       description: Links attributes.
       properties:
@@ -27482,6 +27652,7 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+      x-ignore-duplicate-object: true
     LogsAggregateSort:
       description: A sort rule
       example:
@@ -27509,6 +27680,7 @@ components:
       x-enum-varnames:
       - ALPHABETICAL
       - MEASURE
+      x-ignore-duplicate-object: true
     LogsAggregationFunction:
       description: An aggregation function
       enum:
@@ -27539,6 +27711,7 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      x-ignore-duplicate-object: true
     LogsArchive:
       description: The logs archive.
       properties:
@@ -27962,6 +28135,7 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - TOTAL
+      x-ignore-duplicate-object: true
     LogsGroupBy:
       description: A group by rule
       properties:
@@ -28127,6 +28301,7 @@ components:
       x-enum-varnames:
       - COUNT
       - DISTRIBUTION
+      x-ignore-duplicate-object: true
     LogsMetricComputeIncludePercentiles:
       description: 'Toggle to include or exclude percentile aggregations for distribution
         metrics.
@@ -28243,6 +28418,7 @@ components:
       x-enum-varnames:
       - COUNT
       - DISTRIBUTION
+      x-ignore-duplicate-object: true
     LogsMetricResponseData:
       description: The log-based metric properties.
       properties:
@@ -28438,6 +28614,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     LogsSortOrder:
       description: The order to use, ascending or descending
       enum:
@@ -28448,6 +28625,7 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+      x-ignore-duplicate-object: true
     LogsStorageTier:
       default: indexes
       description: Specifies storage type as indexes, online-archives or flex
@@ -28960,6 +29138,7 @@ components:
       items:
         $ref: '#/components/schemas/MetricCustomAggregation'
       type: array
+      x-ignore-duplicate-object: true
     MetricCustomSpaceAggregation:
       description: A space aggregation for use in query.
       enum:
@@ -29211,6 +29390,7 @@ components:
       type: string
       x-enum-varnames:
       - CURSOR_LIMIT
+      x-ignore-duplicate-object: true
     MetricMetadata:
       description: Metadata for the metric.
       properties:
@@ -29440,6 +29620,7 @@ components:
       items:
         $ref: '#/components/schemas/MetricCustomAggregation'
       type: array
+      x-ignore-duplicate-object: true
     MetricSuggestedTagsAndAggregations:
       description: Object for a single metric's actively queried tags and aggregations.
       properties:
@@ -29866,6 +30047,7 @@ components:
           description: Link to current page.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -29953,6 +30135,7 @@ components:
       type: string
       x-enum-varnames:
       - MICROSOFT_SENTINEL
+      x-ignore-duplicate-object: true
     MicrosoftTeamsChannelInfoResponseAttributes:
       description: Channel attributes.
       properties:
@@ -30783,6 +30966,7 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+      x-ignore-duplicate-object: true
     MonitorNotificationRuleResourceType:
       default: monitor-notification-rule
       description: Monitor notification rule resource type.
@@ -30831,6 +31015,7 @@ components:
       description: An object related to a monitor notification rule.
       oneOf:
       - $ref: '#/components/schemas/User'
+      x-ignore-duplicate-object: true
     MonitorNotificationRuleScope:
       description: The scope to which the monitor applied.
       example: transition_type:alert
@@ -30865,6 +31050,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     MonitorTriggerWrapper:
       description: Schema for a Monitor-based trigger.
       properties:
@@ -31765,6 +31951,7 @@ components:
       type: string
       x-enum-varnames:
       - AMAZON_S3
+      x-ignore-duplicate-object: true
     ObservabilityPipelineAmazonS3Source:
       description: 'The `amazon_s3` source ingests logs from an Amazon S3 bucket.
 
@@ -31800,6 +31987,7 @@ components:
       type: string
       x-enum-varnames:
       - AMAZON_S3
+      x-ignore-duplicate-object: true
     ObservabilityPipelineAmazonSecurityLakeDestination:
       description: The `amazon_security_lake` destination sends your logs to Amazon
         Security Lake.
@@ -32029,6 +32217,7 @@ components:
       x-enum-varnames:
       - JSON
       - RAW_MESSAGE
+      x-ignore-duplicate-object: true
     ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType:
       default: crowdstrike_next_gen_siem
       description: The destination type. The value should always be `crowdstrike_next_gen_siem`.
@@ -32178,6 +32367,7 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_AGENT
+      x-ignore-duplicate-object: true
     ObservabilityPipelineDatadogLogsDestination:
       description: The `datadog_logs` destination forwards logs to Datadog Log Management.
       properties:
@@ -32408,6 +32598,7 @@ components:
       type: string
       x-enum-varnames:
       - ELASTICSEARCH
+      x-ignore-duplicate-object: true
     ObservabilityPipelineEnrichmentTableFile:
       description: Defines a static enrichment table loaded from a CSV file.
       properties:
@@ -32881,6 +33072,7 @@ components:
       x-enum-varnames:
       - JSON
       - RAW_MESSAGE
+      x-ignore-duplicate-object: true
     ObservabilityPipelineGoogleChronicleDestinationType:
       default: google_chronicle
       description: The destination type. The value should always be `google_chronicle`.
@@ -33029,6 +33221,7 @@ components:
       x-enum-varnames:
       - JSON
       - RAW_MESSAGE
+      x-ignore-duplicate-object: true
     ObservabilityPipelineGooglePubSubDestinationType:
       default: google_pubsub
       description: The destination type. The value should always be `google_pubsub`.
@@ -33038,6 +33231,7 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_PUBSUB
+      x-ignore-duplicate-object: true
     ObservabilityPipelineGooglePubSubSource:
       description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
@@ -33081,6 +33275,7 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_PUBSUB
+      x-ignore-duplicate-object: true
     ObservabilityPipelineHttpClientSource:
       description: The `http_client` source scrapes logs from HTTP endpoints at regular
         intervals.
@@ -34032,6 +34227,7 @@ components:
       type: string
       x-enum-varnames:
       - RSYSLOG
+      x-ignore-duplicate-object: true
     ObservabilityPipelineRsyslogSource:
       description: The `rsyslog` source listens for logs over TCP or UDP from an `rsyslog`
         server using the syslog protocol.
@@ -34062,6 +34258,7 @@ components:
       type: string
       x-enum-varnames:
       - RSYSLOG
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSampleProcessor:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
@@ -34560,6 +34757,7 @@ components:
       x-enum-varnames:
       - JSON
       - RAW_MESSAGE
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketDestinationFraming:
       description: Framing method configuration.
       oneOf:
@@ -34583,6 +34781,7 @@ components:
       type: string
       x-enum-varnames:
       - BYTES
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketDestinationFramingCharacterDelimited:
       description: Each log event is separated using the specified delimiter character.
       properties:
@@ -34607,6 +34806,7 @@ components:
       type: string
       x-enum-varnames:
       - CHARACTER_DELIMITED
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketDestinationFramingNewlineDelimited:
       description: Each log event is delimited by a newline character.
       properties:
@@ -34624,6 +34824,7 @@ components:
       type: string
       x-enum-varnames:
       - NEWLINE_DELIMITED
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketDestinationMode:
       description: Protocol used to send logs.
       enum:
@@ -34634,6 +34835,7 @@ components:
       x-enum-varnames:
       - TCP
       - UDP
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketDestinationType:
       default: socket
       description: The destination type. The value should always be `socket`.
@@ -34643,6 +34845,7 @@ components:
       type: string
       x-enum-varnames:
       - SOCKET
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketSource:
       description: The `socket` source ingests logs over TCP or UDP.
       properties:
@@ -34693,6 +34896,7 @@ components:
       type: string
       x-enum-varnames:
       - BYTES
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketSourceFramingCharacterDelimited:
       description: Byte frames which are delimited by a chosen character.
       properties:
@@ -34716,6 +34920,7 @@ components:
       type: string
       x-enum-varnames:
       - CHARACTER_DELIMITED
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketSourceFramingChunkedGelf:
       description: Byte frames which are chunked GELF messages.
       properties:
@@ -34748,6 +34953,7 @@ components:
       type: string
       x-enum-varnames:
       - NEWLINE_DELIMITED
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketSourceFramingOctetCounting:
       description: Byte frames according to the octet counting format as per RFC6587.
       properties:
@@ -34774,6 +34980,7 @@ components:
       x-enum-varnames:
       - TCP
       - UDP
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSocketSourceType:
       default: socket
       description: The source type. The value should always be `socket`.
@@ -34783,6 +34990,7 @@ components:
       type: string
       x-enum-varnames:
       - SOCKET
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSpec:
       description: Input schema representing an observability pipeline configuration.
         Used in create and validate requests.
@@ -34859,6 +35067,7 @@ components:
       x-enum-varnames:
       - JSON
       - RAW_MESSAGE
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSplunkHecDestinationType:
       default: splunk_hec
       description: The destination type. Always `splunk_hec`.
@@ -34868,6 +35077,7 @@ components:
       type: string
       x-enum-varnames:
       - SPLUNK_HEC
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSplunkHecSource:
       description: The `splunk_hec` source implements the Splunk HTTP Event Collector
         (HEC) API.
@@ -34895,6 +35105,7 @@ components:
       type: string
       x-enum-varnames:
       - SPLUNK_HEC
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSplunkTcpSource:
       description: 'The `splunk_tcp` source receives logs from a Splunk Universal
         Forwarder over TCP.
@@ -35002,6 +35213,7 @@ components:
       type: string
       x-enum-varnames:
       - SUMO_LOGIC
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSumoLogicSource:
       description: The `sumo_logic` source receives logs from Sumo Logic collectors.
       properties:
@@ -35026,6 +35238,7 @@ components:
       type: string
       x-enum-varnames:
       - SUMO_LOGIC
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSyslogNgDestination:
       description: The `syslog_ng` destination forwards logs to an external `syslog-ng`
         server over TCP or UDP using the syslog protocol.
@@ -35066,6 +35279,7 @@ components:
       type: string
       x-enum-varnames:
       - SYSLOG_NG
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSyslogNgSource:
       description: The `syslog_ng` source listens for logs over TCP or UDP from a
         `syslog-ng` server using the syslog protocol.
@@ -35096,6 +35310,7 @@ components:
       type: string
       x-enum-varnames:
       - SYSLOG_NG
+      x-ignore-duplicate-object: true
     ObservabilityPipelineSyslogSourceMode:
       description: Protocol used by the syslog source to receive messages.
       enum:
@@ -35106,6 +35321,7 @@ components:
       x-enum-varnames:
       - TCP
       - UDP
+      x-ignore-duplicate-object: true
     ObservabilityPipelineThrottleProcessor:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
@@ -35721,6 +35937,7 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+      x-ignore-duplicate-object: true
     OrgConfigGetResponse:
       description: A response with a single Org Config.
       properties:
@@ -36068,6 +36285,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     Organization:
       description: Organization object.
       properties:
@@ -36228,6 +36446,7 @@ components:
       items:
         $ref: '#/components/schemas/OutcomesResponseDataItem'
       type: array
+      x-ignore-duplicate-object: true
     OutcomesBatchResponseMeta:
       description: Metadata pertaining to the bulk operation.
       properties:
@@ -36251,6 +36470,7 @@ components:
       type: string
       x-enum-varnames:
       - BATCHED_OUTCOME
+      x-ignore-duplicate-object: true
     OutcomesResponse:
       description: Scorecard outcomes - the result of a rule for a service.
       properties:
@@ -36266,6 +36486,7 @@ components:
       items:
         $ref: '#/components/schemas/OutcomesResponseDataItem'
       type: array
+      x-ignore-duplicate-object: true
     OutcomesResponseDataItem:
       description: A single rule outcome.
       properties:
@@ -36368,6 +36589,7 @@ components:
       - ARRAY_NUMBER
       - ARRAY_BOOLEAN
       - ARRAY_OBJECT
+      x-ignore-duplicate-object: true
     PageUrgency:
       default: high
       description: On-Call Page urgency level.
@@ -36723,6 +36945,7 @@ components:
           example: tables/users.csv
           type: string
       type: object
+      x-ignore-duplicate-object: true
       x-oneOf-parent:
       - AzureDetail
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
@@ -36747,6 +36970,7 @@ components:
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       type: object
+      x-ignore-duplicate-object: true
       x-oneOf-parent:
       - GcpDetail
     PatchTableRequestDataAttributesSchema:
@@ -36784,6 +37008,7 @@ components:
       - name
       - type
       type: object
+      x-ignore-duplicate-object: true
     PatchTableRequestDataType:
       default: reference_table
       description: Reference table resource type.
@@ -36793,6 +37018,7 @@ components:
       type: string
       x-enum-varnames:
       - REFERENCE_TABLE
+      x-ignore-duplicate-object: true
     Permission:
       description: Permission object.
       properties:
@@ -36850,6 +37076,7 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+      x-ignore-duplicate-object: true
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -36995,6 +37222,7 @@ components:
       - width
       - height
       type: object
+      x-ignore-duplicate-object: true
     PowerpackInnerWidgetLayout:
       description: Powerpack inner widget layout.
       properties:
@@ -37030,6 +37258,7 @@ components:
       - width
       - height
       type: object
+      x-ignore-duplicate-object: true
     PowerpackInnerWidgets:
       description: Powerpack group widget definition of individual widgets.
       properties:
@@ -37088,6 +37317,7 @@ components:
           example: https://app.datadoghq.com/api/v2/powerpacks
           type: string
       type: object
+      x-ignore-duplicate-object: true
     PowerpackTemplateVariable:
       description: Powerpack template variables.
       properties:
@@ -37439,6 +37669,7 @@ components:
         data:
           $ref: '#/components/schemas/Deployment'
       type: object
+      x-ignore-duplicate-object: true
     PutAppsDatastoreItemResponseArray:
       description: Response after successfully inserting multiple items into a datastore,
         containing the identifiers of the created items.
@@ -37465,6 +37696,7 @@ components:
       required:
       - type
       type: object
+      x-ignore-duplicate-object: true
     PutIncidentNotificationRuleRequest:
       description: Put request for a notification rule.
       properties:
@@ -37585,6 +37817,7 @@ components:
       x-enum-varnames:
       - ALPHABETICAL
       - MEASURE
+      x-ignore-duplicate-object: true
     RUMAggregationBucketsResponse:
       description: The query results.
       properties:
@@ -37624,6 +37857,7 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      x-ignore-duplicate-object: true
     RUMAnalyticsAggregateResponse:
       description: The response object for the RUM events aggregate API endpoint.
       properties:
@@ -37865,6 +38099,7 @@ components:
       type: string
       x-enum-varnames:
       - RUM_APPLICATION
+      x-ignore-duplicate-object: true
     RUMApplicationResponse:
       description: RUM application response.
       properties:
@@ -37880,6 +38115,7 @@ components:
       type: string
       x-enum-varnames:
       - RUM_APPLICATION
+      x-ignore-duplicate-object: true
     RUMApplicationUpdate:
       description: RUM application update.
       properties:
@@ -37990,6 +38226,7 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - TOTAL
+      x-ignore-duplicate-object: true
     RUMEvent:
       description: Object description of a RUM event after being processed and stored
         by Datadog.
@@ -38315,6 +38552,7 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+      x-ignore-duplicate-object: true
     RUMSearchEventsRequest:
       description: The request for a RUM events list.
       properties:
@@ -38336,6 +38574,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     RUMSortOrder:
       description: The order to use, ascending or descending.
       enum:
@@ -38346,6 +38585,7 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+      x-ignore-duplicate-object: true
     RUMWarning:
       description: A warning message indicating something that went wrong with the
         query.
@@ -38501,6 +38741,7 @@ components:
         data:
           $ref: '#/components/schemas/AppKeyRegistrationData'
       type: object
+      x-ignore-duplicate-object: true
     RelationAttributes:
       description: Relation attributes.
       properties:
@@ -39291,6 +39532,7 @@ components:
       type: string
       x-enum-varnames:
       - ARBITRARY_RULE
+      x-ignore-duplicate-object: true
     ReorderRulesetResourceArray:
       description: The definition of `ReorderRulesetResourceArray` object.
       example:
@@ -39330,6 +39572,7 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+      x-ignore-duplicate-object: true
     ResourceFilterAttributes:
       description: Attributes of a resource filter.
       example:
@@ -39450,6 +39693,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     RestrictionPolicyType:
       default: restriction_policy
       description: Restriction policy type.
@@ -39467,6 +39711,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     RestrictionQueryAttributes:
       description: Attributes of the restriction query.
       properties:
@@ -40130,6 +40375,7 @@ components:
         permissions:
           $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
+      x-ignore-duplicate-object: true
     RoleResponse:
       description: Response containing information about a single role.
       properties:
@@ -40142,6 +40388,7 @@ components:
         permissions:
           $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
+      x-ignore-duplicate-object: true
     RoleTemplateArray:
       description: The definition of `RoleTemplateArray` object.
       properties:
@@ -40185,6 +40432,7 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+      x-ignore-duplicate-object: true
     RoleUpdateAttributes:
       description: Attributes of the role.
       properties:
@@ -40294,6 +40542,7 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+      x-ignore-duplicate-object: true
     RoutingRule:
       description: Represents a routing rule, including its attributes, relationships,
         and unique identifier.
@@ -40372,6 +40621,7 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+      x-ignore-duplicate-object: true
     RoutingRuleType:
       default: team_routing_rules
       description: Team routing rules resource type.
@@ -40381,6 +40631,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAM_ROUTING_RULES
+      x-ignore-duplicate-object: true
     RuleAttributes:
       description: Details of a rule.
       properties:
@@ -41055,6 +41306,7 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+      x-ignore-duplicate-object: true
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -41082,6 +41334,7 @@ components:
       x-enum-varnames:
       - COUNT
       - DISTRIBUTION
+      x-ignore-duplicate-object: true
     RumMetricComputeIncludePercentiles:
       description: 'Toggle to include or exclude percentile aggregations for distribution
         metrics.
@@ -41151,6 +41404,7 @@ components:
       - RESOURCE
       - LONG_TASK
       - VITAL
+      x-ignore-duplicate-object: true
     RumMetricFilter:
       description: The rum-based metric filter. Events matching this filter will be
         aggregated in this metric.
@@ -41353,6 +41607,7 @@ components:
         sample_rate:
           $ref: '#/components/schemas/RumRetentionFilterSampleRate'
       type: object
+      x-ignore-duplicate-object: true
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
       properties:
@@ -41424,6 +41679,7 @@ components:
       - RESOURCE
       - LONG_TASK
       - VITAL
+      x-ignore-duplicate-object: true
     RumRetentionFilterID:
       description: ID of retention filter in UUID.
       example: 051601eb-54a0-abc0-03f9-cc02efa18892
@@ -41468,6 +41724,7 @@ components:
         sample_rate:
           $ref: '#/components/schemas/RumRetentionFilterSampleRate'
       type: object
+      x-ignore-duplicate-object: true
     RumRetentionFilterUpdateData:
       description: The new RUM retention filter properties to update.
       properties:
@@ -42365,6 +42622,7 @@ components:
         teams:
           $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
+      x-ignore-duplicate-object: true
     ScheduleCreateRequestDataType:
       default: schedules
       description: Schedules resource type.
@@ -42374,6 +42632,7 @@ components:
       type: string
       x-enum-varnames:
       - SCHEDULES
+      x-ignore-duplicate-object: true
     ScheduleData:
       description: Represents the primary data object for a schedule, linking attributes
         and relationships.
@@ -42453,6 +42712,7 @@ components:
       type: string
       x-enum-varnames:
       - LAYERS
+      x-ignore-duplicate-object: true
     ScheduleDataType:
       default: schedules
       description: Schedules resource type.
@@ -42462,6 +42722,7 @@ components:
       type: string
       x-enum-varnames:
       - SCHEDULES
+      x-ignore-duplicate-object: true
     ScheduleMember:
       description: Represents a single member entry in a schedule, referencing a specific
         user.
@@ -42514,6 +42775,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     ScheduleMemberType:
       default: members
       description: Schedule Members resource type.
@@ -42523,6 +42785,7 @@ components:
       type: string
       x-enum-varnames:
       - MEMBERS
+      x-ignore-duplicate-object: true
     ScheduleRequestDataAttributesLayersItemsMembersItems:
       description: Defines a single member within a schedule layer, including the
         reference to the underlying user.
@@ -42562,6 +42825,7 @@ components:
       type: string
       x-enum-varnames:
       - SCHEDULES
+      x-ignore-duplicate-object: true
     ScheduleTrigger:
       description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
@@ -42715,6 +42979,7 @@ components:
         teams:
           $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
+      x-ignore-duplicate-object: true
     ScheduleUpdateRequestDataType:
       default: schedules
       description: Schedules resource type.
@@ -42724,6 +42989,7 @@ components:
       type: string
       x-enum-varnames:
       - SCHEDULES
+      x-ignore-duplicate-object: true
     ScheduleUser:
       description: Represents a user object in the context of a schedule, including
         their `id`, type, and basic attributes.
@@ -42753,6 +43019,7 @@ components:
         status:
           $ref: '#/components/schemas/UserAttributesStatus'
       type: object
+      x-ignore-duplicate-object: true
     ScheduleUserType:
       default: users
       description: Users resource type.
@@ -42762,6 +43029,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -43253,6 +43521,7 @@ components:
       - SIX_HOURS
       - TWELVE_HOURS
       - ONE_DAY
+      x-ignore-duplicate-object: true
     SecurityMonitoringRuleHardcodedEvaluatorType:
       description: Hardcoded evaluator type.
       enum:
@@ -43308,6 +43577,7 @@ components:
       - SIX_HOURS
       - TWELVE_HOURS
       - ONE_DAY
+      x-ignore-duplicate-object: true
     SecurityMonitoringRuleMaxSignalDuration:
       description: 'A signal will "close" regardless of the query being matched once
         the time exceeds the maximum duration.
@@ -43341,6 +43611,7 @@ components:
       - SIX_HOURS
       - TWELVE_HOURS
       - ONE_DAY
+      x-ignore-duplicate-object: true
     SecurityMonitoringRuleNewValueOptions:
       description: Options on new value detection method.
       properties:
@@ -44425,6 +44696,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     SecurityMonitoringStandardDataSource:
       default: logs
       description: Source of events, either logs, audit trail, or Datadog events.
@@ -45273,6 +45545,7 @@ components:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
       type: object
+      x-ignore-duplicate-object: true
     SecurityTriggerWrapper:
       description: Schema for a Security-based trigger.
       properties:
@@ -45484,6 +45757,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerGroupType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupAttributes:
       description: Attributes of the Sensitive Data Scanner group.
       properties:
@@ -45544,12 +45818,14 @@ components:
       required:
       - meta
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupDeleteResponse:
       description: Delete group response.
       properties:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupIncludedItem:
       description: A Scanning Group included item.
       properties:
@@ -45563,6 +45839,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerGroupType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupItem:
       description: Data related to a Sensitive Data Scanner Group.
       properties:
@@ -45572,6 +45849,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerGroupType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupList:
       description: List of groups, ordered.
       properties:
@@ -45602,6 +45880,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerGroupType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupType:
       default: sensitive_data_scanner_group
       description: Sensitive Data Scanner group type.
@@ -45624,6 +45903,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerGroupType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerGroupUpdateRequest:
       description: Update group request.
       properties:
@@ -45641,6 +45921,7 @@ components:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerIncludedKeywordConfiguration:
       description: 'Object defining a set of keywords and a number of characters that
         help reduce noise.
@@ -45860,12 +46141,14 @@ components:
       required:
       - meta
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerRuleDeleteResponse:
       description: Delete rule response.
       properties:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerRuleIncludedItem:
       description: A Scanning Rule included item.
       properties:
@@ -45879,6 +46162,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerRuleType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerRuleRelationships:
       description: Relationships of a scanning rule.
       properties:
@@ -45900,6 +46184,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerRuleType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerRuleType:
       default: sensitive_data_scanner_rule
       description: Sensitive Data Scanner rule type.
@@ -45922,6 +46207,7 @@ components:
         type:
           $ref: '#/components/schemas/SensitiveDataScannerRuleType'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerRuleUpdateRequest:
       description: Update rule request.
       properties:
@@ -45939,6 +46225,7 @@ components:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
       type: object
+      x-ignore-duplicate-object: true
     SensitiveDataScannerSamplings:
       description: Sampling configurations for the Scanning Group.
       properties:
@@ -46361,6 +46648,7 @@ components:
       - ONCALL
       - CODE
       - LINK
+      x-ignore-duplicate-object: true
     ServiceDefinitionV1Version:
       default: v1
       description: Schema version being used.
@@ -46547,6 +46835,7 @@ components:
       type: string
       x-enum-varnames:
       - EMAIL
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot1Integrations:
       description: Third party integrations that Datadog supports.
       properties:
@@ -46618,6 +46907,7 @@ components:
       type: string
       x-enum-varnames:
       - MICROSOFT_TEAMS
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot1Opsgenie:
       description: Opsgenie integration for the service.
       properties:
@@ -46640,6 +46930,7 @@ components:
       x-enum-varnames:
       - US
       - EU
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot1Pagerduty:
       description: PagerDuty integration for the service.
       properties:
@@ -46674,6 +46965,7 @@ components:
       type: string
       x-enum-varnames:
       - SLACK
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot1Version:
       default: v2.1
       description: Schema version being used.
@@ -46846,6 +47138,7 @@ components:
       x-enum-varnames:
       - US
       - EU
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot2Pagerduty:
       description: PagerDuty integration for the service.
       properties:
@@ -46893,6 +47186,7 @@ components:
       type: string
       x-enum-varnames:
       - EMAIL
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Integrations:
       description: Third party integrations that Datadog supports.
       properties:
@@ -46943,6 +47237,7 @@ components:
       - ONCALL
       - CODE
       - LINK
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2MSTeams:
       description: Service owner's Microsoft Teams.
       properties:
@@ -46968,6 +47263,7 @@ components:
       type: string
       x-enum-varnames:
       - MICROSOFT_TEAMS
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Opsgenie:
       description: Opsgenie integration for the service.
       properties:
@@ -46990,6 +47286,7 @@ components:
       x-enum-varnames:
       - US
       - EU
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Pagerduty:
       description: PagerDuty service URL for the service.
       example: https://my-org.pagerduty.com/service-directory/PMyService
@@ -47038,6 +47335,7 @@ components:
       type: string
       x-enum-varnames:
       - SLACK
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Version:
       default: v2
       description: Schema version being used.
@@ -47261,6 +47559,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     ShiftDataType:
       default: shifts
       description: Indicates that the resource is of type 'shifts'.
@@ -47805,6 +48104,7 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+      x-ignore-duplicate-object: true
     SpansAggregateSort:
       description: A sort rule.
       example:
@@ -47832,6 +48132,7 @@ components:
       x-enum-varnames:
       - ALPHABETICAL
       - MEASURE
+      x-ignore-duplicate-object: true
     SpansAggregationFunction:
       description: An aggregation function.
       enum:
@@ -47862,6 +48163,7 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      x-ignore-duplicate-object: true
     SpansAttributes:
       description: JSON object containing all span attributes and their associated
         values.
@@ -47980,6 +48282,7 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - TOTAL
+      x-ignore-duplicate-object: true
     SpansFilter:
       description: The spans filter used to index spans.
       properties:
@@ -48208,6 +48511,7 @@ components:
       x-enum-varnames:
       - COUNT
       - DISTRIBUTION
+      x-ignore-duplicate-object: true
     SpansMetricComputeIncludePercentiles:
       description: 'Toggle to include or exclude percentile aggregations for distribution
         metrics.
@@ -48461,6 +48765,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-ignore-duplicate-object: true
     SpansSortOrder:
       description: The order to use, ascending or descending.
       enum:
@@ -48471,6 +48776,7 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+      x-ignore-duplicate-object: true
     SpansType:
       default: spans
       description: Type of the span.
@@ -49084,6 +49390,7 @@ components:
           example: tables/users.csv
           type: string
       type: object
+      x-ignore-duplicate-object: true
       x-oneOf-parent:
       - AzureDetail
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
@@ -49108,6 +49415,7 @@ components:
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       type: object
+      x-ignore-duplicate-object: true
       x-oneOf-parent:
       - GcpDetail
     TableResultV2DataAttributesSchema:
@@ -49145,6 +49453,7 @@ components:
       - name
       - type
       type: object
+      x-ignore-duplicate-object: true
     TableResultV2DataType:
       default: reference_table
       description: Reference table resource type.
@@ -49154,6 +49463,7 @@ components:
       type: string
       x-enum-varnames:
       - REFERENCE_TABLE
+      x-ignore-duplicate-object: true
     TableRowResourceArray:
       description: The definition of `TableRowResourceArray` object.
       properties:
@@ -49374,6 +49684,7 @@ components:
       - handle
       - name
       type: object
+      x-ignore-duplicate-object: true
     TeamCreateRelationships:
       description: Relationships formed with the team on creation
       properties:
@@ -49575,6 +49886,7 @@ components:
       type: string
       x-enum-varnames:
       - ESCALATION_POLICY_STEPS
+      x-ignore-duplicate-object: true
     TeamOnCallRespondersDataRelationshipsResponders:
       description: Defines the list of users assigned as on-call responders for the
         team.
@@ -49608,6 +49920,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     TeamOnCallRespondersDataType:
       default: team_oncall_responders
       description: Represents the resource type for a group of users assigned to handle
@@ -49778,6 +50091,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAMS
+      x-ignore-duplicate-object: true
     TeamRelationships:
       description: Resources related to a team
       properties:
@@ -49899,6 +50213,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAM_ROUTING_RULES
+      x-ignore-duplicate-object: true
     TeamRoutingRulesDataType:
       default: team_routing_rules
       description: Team routing rules resource type.
@@ -49908,6 +50223,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAM_ROUTING_RULES
+      x-ignore-duplicate-object: true
     TeamRoutingRulesIncluded:
       description: Represents additional included resources for team routing rules,
         such as associated routing rules.
@@ -49984,6 +50300,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAM_ROUTING_RULES
+      x-ignore-duplicate-object: true
     TeamRoutingRulesRequestRule:
       description: Defines an individual routing rule item that contains the rule
         data for the request.
@@ -50091,6 +50408,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAMS
+      x-ignore-duplicate-object: true
     TeamType:
       default: team
       description: Team type
@@ -50100,6 +50418,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAM
+      x-ignore-duplicate-object: true
     TeamUpdate:
       description: Team update request
       properties:
@@ -50156,6 +50475,7 @@ components:
       - handle
       - name
       type: object
+      x-ignore-duplicate-object: true
     TeamUpdateRelationships:
       description: Team update relationships
       properties:
@@ -50244,6 +50564,7 @@ components:
           description: Current link.
           type: string
       type: object
+      x-ignore-duplicate-object: true
     TeamsResponseMeta:
       description: Teams response metadata.
       properties:
@@ -50682,6 +51003,7 @@ components:
       type: string
       x-enum-varnames:
       - AZURE_UC_CONFIGS
+      x-ignore-duplicate-object: true
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -50716,6 +51038,7 @@ components:
         data:
           $ref: '#/components/schemas/Deployment'
       type: object
+      x-ignore-duplicate-object: true
     UpdateActionConnectionRequest:
       description: Request used to update an action connection.
       properties:
@@ -50730,6 +51053,7 @@ components:
         data:
           $ref: '#/components/schemas/ActionConnectionData'
       type: object
+      x-ignore-duplicate-object: true
     UpdateAppRequest:
       description: A request object for updating an existing app.
       example:
@@ -50832,6 +51156,7 @@ components:
             type: string
           type: array
       type: object
+      x-ignore-duplicate-object: true
     UpdateAppResponse:
       description: The response object after an app is successfully updated.
       properties:
@@ -50902,6 +51227,7 @@ components:
             type: string
           type: array
       type: object
+      x-ignore-duplicate-object: true
     UpdateAppsDatastoreItemRequest:
       description: Request to update specific fields on an existing datastore item.
       properties:
@@ -50959,6 +51285,7 @@ components:
       type: string
       x-enum-varnames:
       - ITEMS
+      x-ignore-duplicate-object: true
     UpdateAppsDatastoreRequest:
       description: Request to update a datastore's configuration such as its name
         or description.
@@ -50998,6 +51325,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     UpdateCustomFrameworkResponse:
       description: Response object to update a custom framework.
       properties:
@@ -51006,6 +51334,7 @@ components:
       required:
       - data
       type: object
+      x-ignore-duplicate-object: true
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
       properties:
@@ -51080,6 +51409,7 @@ components:
       type: string
       x-enum-varnames:
       - BATCHED_OUTCOME
+      x-ignore-duplicate-object: true
     UpdateResourceEvaluationFiltersRequest:
       description: Request object to update a resource filter.
       properties:
@@ -51103,6 +51433,7 @@ components:
       - attributes
       - type
       type: object
+      x-ignore-duplicate-object: true
     UpdateResourceEvaluationFiltersResponse:
       description: The definition of `UpdateResourceEvaluationFiltersResponse` object.
       properties:
@@ -51126,6 +51457,7 @@ components:
       - attributes
       - type
       type: object
+      x-ignore-duplicate-object: true
     UpdateRuleRequest:
       description: Request to update a scorecard rule.
       properties:
@@ -51140,6 +51472,7 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+      x-ignore-duplicate-object: true
     UpdateRuleResponse:
       description: The response from a rule update request.
       properties:
@@ -51158,6 +51491,7 @@ components:
         type:
           $ref: '#/components/schemas/RuleType'
       type: object
+      x-ignore-duplicate-object: true
     UpdateRulesetRequest:
       description: The definition of `UpdateRulesetRequest` object.
       example:
@@ -51503,6 +51837,7 @@ components:
         meta:
           $ref: '#/components/schemas/KindResponseMeta'
       type: object
+      x-ignore-duplicate-object: true
     Urgency:
       description: Specifies the level of urgency for a routing rule (low, high, or
         dynamic).
@@ -51913,6 +52248,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -52048,6 +52384,7 @@ components:
       type: string
       x-enum-varnames:
       - TEAM
+      x-ignore-duplicate-object: true
     UserTeamType:
       default: team_memberships
       description: Team membership type
@@ -52084,6 +52421,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     UserTeamsResponse:
       description: Team memberships response
       properties:
@@ -52179,6 +52517,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     V2Event:
       description: An event object.
       properties:
@@ -53056,6 +53395,7 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+      x-ignore-duplicate-object: true
     WorklflowCancelInstanceResponse:
       description: Information about the canceled instance.
       properties:
