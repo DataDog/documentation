@@ -1,5 +1,6 @@
 ---
 title: Watchdog Alerts
+description: "View and interpret Watchdog Alerts that proactively detect anomalies on your systems and applications using AI-powered monitoring."
 ---
 
 ## Overview

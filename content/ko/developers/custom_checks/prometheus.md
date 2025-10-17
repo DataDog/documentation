@@ -59,7 +59,7 @@ instances:
 
 ### 설정
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 설정 파일과 검사 파일의 이름이 일치해야 합니다. 만약 검사 파일의 이름이 <code>mycheck.py </code>인 경우, 설정 파일의 이름은 <em>반드시</em> <code>mycheck.svl</code>이어야 합니다.
 </div>
 

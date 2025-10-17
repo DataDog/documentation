@@ -46,7 +46,7 @@ Puedes visualizar cómo progresan las puntuaciones de los equipos a lo largo del
 
 Puede generar informes scorecard, que envían resúmenes programados de información scorecard al canal Slack de su equipo para ayudar a todos a comprender cómo las entidades y Teams están cumpliendo los estándares esperados. La creación de un informe genera un workflow (UI) / proceso (generic) mediante [Datadog workflow (UI) / proceso (generic) Automatización (automatización de procesos)][2], que se ejecuta a una hora programada. 
 
-<div class="alert alert-warning">La ejecución de este flujo de trabajo puede afectar a tu facturación. Para obtener más información, consulta la <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">página de precios</a>.</div>
+<div class="alert alert-danger">La ejecución de este flujo de trabajo puede afectar a tu facturación. Para obtener más información, consulta la <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">página de precios</a>.</div>
 
 Para crear un informe:
 

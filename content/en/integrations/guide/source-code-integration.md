@@ -51,8 +51,8 @@ Datadog supports the following features for the following source code management
 | **Connect SaaS Instance** | Yes <br />(GitHub.com and GitHub Enterprise Cloud) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
 | **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed or Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center or Server)|
 | **Context Links** | Yes | Yes | Yes | Yes |
-| **Code Snippets** | Yes | Yes | Yes | No | 
-| **PR Comments** | Yes | Yes | Yes | No | 
+| **Code Snippets** | Yes | Yes | Yes | No |
+| **PR Comments** | Yes | Yes | Yes | No |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
@@ -69,7 +69,7 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
@@ -81,18 +81,19 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration while onboarding to [Datadog Code Security][101]. This integration's functionality is limited to Code Security.
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
 
 [101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
+[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
@@ -117,7 +118,7 @@ Successfully synced git DB in 3.579 seconds.
 ✅ Uploaded in 5.207 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -310,31 +311,45 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 #### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have several options: using a plugin if your application is bundled, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-##### Option 1: Docker
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Docker
 
 {{% sci-docker %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have several options depending on your serverless application's setup.
 
-##### Option 1: Datadog Tooling
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Datadog Tooling
 
 {{% sci-dd-serverless %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+For host-based environments, you have two options based on your build and deploy configuration.
+
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -577,7 +592,7 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
-PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request. 
+PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
@@ -588,9 +603,9 @@ To disable PR comments for CI Visibility, go to the [CI Visibility Repository Se
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests: 
+PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
 
-1. A single comment summarizing the new violations detected in your pull request. 
+1. A single comment summarizing the new violations detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
 
@@ -605,7 +620,7 @@ To disable PR comments for Code Security, go to the [Code Security Repository Se
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request. 
+PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 

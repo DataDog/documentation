@@ -416,7 +416,7 @@ Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available vers
 - [Ruby][38]
 - [PHP][39]
 
-<div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
+<div class="alert alert-danger">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
 
 For example, to automatically instrument Java applications:
 
@@ -559,6 +559,22 @@ To use SSI with a private container registry:
 
 For more details on changing your container registry, see [Changing Your Container Registry][33].
 
+### Using a Container Network Interface on EKS
+
+When using a CNI like Calico, the control plane nodes are not able to initiate network connections to Datadog's Admission Controller and report an "Address is not allowed" error.
+To use Single Step instrumentation, modify Datadog's Cluster Agent with the `useHostNetwork: true` parameter.
+
+```
+datadog:
+  ...
+
+clusterAgent:
+  useHostNetwork: true
+
+  admissionController:
+    ...
+```
+
 ## Remove Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
@@ -575,7 +591,7 @@ With workload selection (available for Agent v7.64+), you can enable and disable
 
 As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
 
-<div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
+<div class="alert alert-danger">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml

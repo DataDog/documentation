@@ -3,7 +3,7 @@
 
     <!-- From imported files -->
     {{ $list := sort .Pages }}
-    
+
 
     <div class="row">
         <div class="col-12 order-1">
@@ -13,7 +13,7 @@
             {{ partial "breadcrumbs.html" . }}
         </div>
     </div>
-     
+
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
     {{ .Content }}
 
@@ -31,7 +31,7 @@
 
     {{ $valid_clouds := $pad.Get "providers" }}
     {{ $valid_frameworks := $pad.Get "frameworks" }}
-    <div 
+    <div
     class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
     x-data="{
         filterTypes: {
@@ -74,7 +74,7 @@
         shouldShowRule (ruleEl) {
             // Determines rule display
             // Compares search values and filter values against ruleInfo
-            
+
             const ruleInfo = ruleEl.dataset.info.split(';')
             const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
             const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
@@ -101,7 +101,7 @@
             if(containsSearchValues && containsFilteredValue){
                 ruleEl.classList.add('show')
             }else{
-                ruleEl.classList.remove('show')    
+                ruleEl.classList.remove('show')
             }
 
             return containsSearchValues && containsFilteredValue
@@ -134,12 +134,12 @@
         },
         updateWithURLParams (validClouds, validFrameworks) {
             // Updates x-data properties with url param values
-            
+
             const validCloudsArr = validClouds.replaceAll(/[\[\]]/g, '').split(' ')
             const validFrameworksArr = validFrameworks.replaceAll(/[\[\]]/g, '').split(' ')
             const url = new URL(window.location.href)
             const cloudAliasMap = validCloudsArr.reduce((acc,l) => {
-                // map to appropriate cloud display name 
+                // map to appropriate cloud display name
                 const [cloud, displayName] = l.split(';')
                 acc[cloud.toLowerCase()] = displayName
                 return acc
@@ -149,7 +149,7 @@
                 acc[framework.toLowerCase()] = displayName
                 return acc
             }, {})
-            
+
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
                 if (key === 'search'){
                     this.searchValue = value
@@ -247,7 +247,7 @@
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
                             {{ $rule_provider := ( .Params.meta.cloud_provider ) }}
-                            {{/*  
+                            {{/*
                                 build a string with rule's lookup info for filtering and searching against
                             */}}
                             {{ $rule_id := index (split .Params.meta.name "/") 1}}
@@ -261,7 +261,7 @@
                             >
                                 <div class="row">
                                     <div class="item-name-container col-8 d-flex align-items-center">
-                                        {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $rule_provider "variant" "avatar") }}
+                                        {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $rule_provider "variant" "avatar") $rule_provider "avatar" }}
                                         {{ if $int_logo }}
                                         <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                         {{ end }}
@@ -275,8 +275,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            {{/*  
+
+                            {{/*
                                 build object with unique values for filter dropdowns (.filter-selection-container)
                                 e.g:
                                 filters: {
@@ -295,7 +295,7 @@
                                 cloudProvidersByRuleset: {
                                     rulesetID: [<providers>],
                                     ...
-                                }    
+                                }
                             */}}
                             {{ $pad.SetInMap "cloudProviderByRuleSet" $group_id (union (index ($pad.Get "cloudProviderByRuleSet") $group_id) (slice $rule_provider)) }}
                             {{ end }}
@@ -311,7 +311,7 @@
                         <div class="d-flex align-items-center h-100">
                             {{$ruleset_providers := index ($pad.Get "cloudProviderByRuleSet") $group_id}}
                             <div class="d-flex align-items-center h-100">
-                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_providers 0) "variant" "avatar") }}
+                                {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_providers 0) "variant" "avatar") (index $ruleset_providers 0) "avatar" }}
                                 {{ if $int_logo }}
                                 <img class="set-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                 {{ if gt (len $ruleset_providers) 1 }}
@@ -345,7 +345,7 @@
                     <p class="filter-type-name fw-semibold">{{ . }}</p>
                     <div class="filter-component position-relative">
                         {{/*  FILTER TOGGLER  */}}
-                        <button 
+                        <button
                         data-id="{{$filter_type}}"
                         class="toggler w-100 rounded position-relative"
                         @click.stop="toggleFilterForm($el)">
@@ -356,15 +356,15 @@
                                 </template>
                                 {{/*  Show filter selections from `filterTypes` data */}}
                                 <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
-                                    <div 
-                                    :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                    <div
+                                    :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')"
                                     class="selection-container rounded d-flex align-items-center">
                                         <template x-if="filter.split(',')[1]">
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
                                         </template>
                                         <span class="selection-name" x-text="filter.split(',')[0]"></span>
-                                        <div 
-                                        :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                        <div
+                                        :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')"
                                         class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
                                             {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                         </div>
@@ -383,7 +383,7 @@
                             </div>
                         </button>
                         {{/*  FILTER FORM  */}}
-                        <form 
+                        <form
                         data-id="{{$filter_type}}"
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
                         x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
@@ -396,18 +396,18 @@
                             <div class="filter-selection-container">
 
                                 {{ $cloud_lookup_name := . }}
-                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $cloud_lookup_name "variant" "avatar") }}
+                                {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $cloud_lookup_name "variant" "avatar") $cloud_lookup_name "avatar" }}
                                 {{/*  store $int_logo and $cloud_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
                                 {{ $value := (printf "%s,%s" $cloud_lookup_name $int_logo)}}
-                                <input 
-                                id="{{ $cloud_lookup_name | anchorize }}" 
-                                type="checkbox" 
-                                value='{{ cond ($int_logo | not ) . $value }}' 
+                                <input
+                                id="{{ $cloud_lookup_name | anchorize }}"
+                                type="checkbox"
+                                value='{{ cond ($int_logo | not ) . $value }}'
                                 x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
                                 @change.debounce="pushState('{{ $filter_type }}', '{{ $cloud_lookup_name }}')"
-                                >  
-                                
+                                >
+
                                 <label for="{{ $cloud_lookup_name | anchorize }}" class="d-flex align-items-center">
                                     {{ if and ( or (eq $filter_type "providers") (eq $filter_type "frameworks")) $int_logo }}
                                     <img src="{{ $int_logo }}" height="16" alt="{{ $cloud_lookup_name }}"/>
@@ -417,7 +417,7 @@
                             </div>
                             {{ end }}
                         </form>
-                    </div>                      
+                    </div>
 
                 </div>
                 {{ end }}

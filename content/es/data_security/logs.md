@@ -47,7 +47,7 @@ Sensitive Data Scanner también está disponible como [procesador][8] en [Observ
 
 {{< site-region region="us" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El cumplimiento del PCI DSS para Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 

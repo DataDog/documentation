@@ -69,7 +69,7 @@ _Default: disabled_
 
 When timestamp overrides are enabled in an incident type, any user with the **Incidents Write** permission can define timestamp overrides in any incident of that incident type.
 
-When enabled, you can define overrides for the `declared`, `detected`, and `resolved` timestamps on an incident. These overrides apply only in incident search and [analytics][3]. Overrides do not affect entries on the incident timeline. You can delete overrides.
+When enabled, you can define overrides for the `declared`, `detected`, and `resolved` timestamps on an incident. To learn more, see [Incident Analytics][3].
 
 ## Test incidents
 

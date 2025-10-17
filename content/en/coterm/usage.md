@@ -1,5 +1,6 @@
 ---
 title: Using Datadog CoTerm
+description: "Learn how to record terminal sessions, create shims for automatic recording, and configure CoTerm to protect against dangerous commands."
 further_reading:
 - link: "/coterm"
   tag: "documentation"
