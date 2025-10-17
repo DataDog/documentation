@@ -36,7 +36,7 @@ An operating system with glibc 2.17 or newer is required. The following versions
   - Debian 8
   - Ubuntu 14.04
 
-All of them have reached end of life (EOL), Datadog recommends running an OS version that is not EOL.
+**Note**: The operating system versions above have all reached end of life (EOL), Datadog recommends running more recent versions.
 
 {{% /tab %}}
 {{% tab "Alpine Linux" %}}
