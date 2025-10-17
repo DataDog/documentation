@@ -10,6 +10,7 @@ aliases:
 - /es/security/application_security/enabling
 - /es/security/application_security/getting_started
 - /es/security/application_security/threats
+- /es/security/application_security/setup/standalone
 description: Monitoriza amenazas dirigidas al sistema de producción basándote en el
   contexto de ejecución proporcionado por las trazas (traces) distribuidas.
 further_reading:

@@ -2,7 +2,7 @@
 title: Install the Datadog Distribution of OTel Collector on Linux
 code_lang: linux
 type: multi-code-lang
-code_lang_weight: 2
+code_lang_weight: 3
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
