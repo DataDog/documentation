@@ -1836,7 +1836,7 @@ from ddtrace.llmobs import LLMObs
 def answer_question(text):
     # Attach prompt metadata to the upcoming LLM span using LLMObs.annotation_context()
     with LLMObs.annotation_context(prompt={
-        "id": "translate-v1",
+        "id": "translation-template",
         "version": "1.0.0",
         "chat_template": [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
         "variables": {"lang": "fr", "text": text},
