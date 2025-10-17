@@ -262,6 +262,7 @@ unsupported_sites:
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
+  apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
