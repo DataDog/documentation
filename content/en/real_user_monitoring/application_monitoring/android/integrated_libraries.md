@@ -124,26 +124,7 @@ RUM error event for it.
 
 ## Apollo (GraphQL)
 
-If you use Apollo, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-   ```kotlin
-        val apolloClient = ApolloClient.builder()
-            .okHttpClient(okHttpClient)
-            .serverUrl(<APOLLO_SERVER_URL>)
-            .build()
-   ```
-{{% /tab %}}
-{{% tab "Java" %}}
-   ```java
-        ApolloClient apolloClient = new ApolloClient.builder()
-            .okHttpClient(okHttpClient)
-            .serverUrl(<APOLLO_SERVER_URL>)
-            .build();
-   ```
-{{% /tab %}}
-{{< /tabs >}}
+If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for Apollo][11] and [andndroid advanced network configuration][12].
 
 ## Android TV (Leanback)
 
@@ -167,3 +148,5 @@ If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions f
 [8]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rx
 [9]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rum-coroutines
 [10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
+[11]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-apollo
+[12]: /real_user_monitoring/application_monitoring/android/advanced_configuration?tab=kotlin#apollo-instrumentation
