@@ -40,15 +40,6 @@ Below are a few examples of what App Builder apps can do:
 
 {{< img src="/service_management/app_builder/app-builder-app.png" alt="A screenshot of an app in App Builder" caption="An app in App Builder" style="width:100%;" >}}
 
-## Start with Onboarding
-
-When creating a new app, Datadog displays an onboarding modal with the following options: 
-- [Start with Blueprint][5]
-- [Start with Layout][12]
-- [Start with Data][13]
-- [Start with App Playground][14]
-- [Start from Scratch][10] 
-
 ## Configure App Builder actions
 
 Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.

@@ -24,6 +24,14 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 {{< img src="service_management/app_builder/app-builder-my-apps.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
+## Start with onboarding
+
+When creating a new app, Datadog displays an onboarding modal with the following options: 
+- [Start with Blueprint][5]
+- [Start with Layout][12]
+- [Start with Data][13]
+- [Start from Scratch][10] 
+
 ## See what's possible with App Playground
 
 If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
