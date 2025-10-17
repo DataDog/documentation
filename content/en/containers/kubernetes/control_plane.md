@@ -347,7 +347,7 @@ helm install datadog-operator datadog/datadog-operator --set introspection.enabl
 Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec. 
 
 #### Validation
-Check that checks are running:
+Verify that checks are running:
 ```shell
 kubectl exec <cluster-agent-pod> -- agent clusterchecks
 ```
