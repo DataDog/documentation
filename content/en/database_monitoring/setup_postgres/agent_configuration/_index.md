@@ -18,4 +18,15 @@ To learn how to set up Database Monitoring on a Postgres database, select your h
 
 {{< partial name="dbm/dbm-setup-postgres-agent-configuration" >}}
 
+### Autodiscover Postgres Instances
+
+Have multiple Postgres instances you would like to monitor? Try one of our Autodiscovery options below:
+
+- [Amazon Aurora Autodiscovery][1]
+
+- [Amazon RDS Autodiscovery][2]
+
 <br>
+
+[1]: /database_monitoring/guide/aurora_autodiscovery?tab=postgres
+[2]: /database_monitoring/guide/rds_autodiscovery/?tab=postgres
