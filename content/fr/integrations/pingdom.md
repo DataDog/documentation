@@ -26,7 +26,7 @@ version: '1.0'
 
 ## Présentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cette intégration est obsolète. Utilisez plutôt l'<a href="https://docs.datadoghq.com/integrations/pingdom_v3/" class="alert-link">intégration Datadog/Pingdom v3</a>.
 </div>
 

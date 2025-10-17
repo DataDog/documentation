@@ -1,5 +1,6 @@
 ---
 title: Coordinate Incidents
+description: "Use Bits AI SRE to streamline incident response workflow with proactive updates, stakeholder notifications, and AI-assisted postmortems."
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"

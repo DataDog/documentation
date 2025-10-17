@@ -10,6 +10,10 @@ further_reading:
   text: "Connections"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datastores are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Required Datadog role permissions
 
 To interact with Datastores, your Datadog account must have the following [permissions][1], which are included in the Datadog Standard Role:

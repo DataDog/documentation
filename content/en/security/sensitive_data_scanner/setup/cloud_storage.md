@@ -22,7 +22,7 @@ Deploy Datadog Agentless scanners in your environment to scan for sensitive info
 
 When an Agentless scanner finds a match with any of the [SDS library rules][2], the scanning instance sends the rule type and location of the match to Datadog. **Note**: Cloud storage resources and their files are only read in your environment - no sensitive data that was scanned is sent back to Datadog.
 
-In the Sensitive Data Scanner [Summary page][3], you can see what cloud storage resources have been scanned and any matches found, including the rules that matched them.
+In the Sensitive Data Scanner [Findings page][3], you can see what cloud storage resources have been scanned and any matches found, including the rules that matched them.
 
 This document walks you through:
 - [Enabling Remote Configuration](#enable-remote-configuration) to use Sensitive Data Scanner for Cloud Storage

@@ -9,16 +9,16 @@ cascade:
     subcategory: API リファレンス
 further_reading:
 - link: /api/latest/using-the-api/
-  tag: Documentation
+  tag: ドキュメント
   text: API の使用
 - link: /api/latest/scopes/
-  tag: Documentation
-  text: 認証スコープ
+  tag: ドキュメント
+  text: 認可スコープ
 - link: /api/latest/rate-limits/
   tag: ドキュメント
   text: レート制限
 title: API リファレンス
-type: documentation
+type: api
 ---
 
 {{< h2 >}}API リファレンス{{< /h2 >}}
@@ -35,7 +35,7 @@ API を試すには [![Postman で実行][3]](https://god.gw.postman.com/run-col
 
 [API の使用][4]でエンドポイントについて説明しています。
 
-**注**: 
+**注**:
    - Datadog API コレクションの **Variables** タブに API とアプリケーションキーの値を追加します。
    - cURL コード例は、BASH と GNU coreutils の使用を前提としています。macOS をお使いの場合は [Homebrew package manager][5] を使って Coreutils をダウンロードして、コマンド `brew install coreutils` でインストールできます。
 
@@ -62,7 +62,7 @@ Gradle - この依存関係をプロジェクトのビルドファイルに追�
 compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
-#### 使用方法
+#### Usage
 
 ```java
 import com.datadog.api.client.ApiClient;
@@ -126,7 +126,7 @@ application {
 ```sh
 pip install datadog
 ```
-#### 使用方法
+#### Usage
 ```python
 import datadog
 ```
@@ -137,7 +137,7 @@ import datadog
 ```console
 pip3 install datadog-api-client
 ```
-#### 使用方法
+#### Usage
 ```python
 import datadog_api_client
 ```
@@ -148,7 +148,7 @@ import datadog_api_client
 ```sh
 gem install dogapi
 ```
-#### 使用方法
+#### Usage
 ```ruby
 require 'dogapi'
 ```
@@ -159,7 +159,7 @@ require 'dogapi'
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
-#### 使用方法
+#### Usage
 ```ruby
 require 'datadog_api_client'
 ```
@@ -170,7 +170,7 @@ require 'datadog_api_client'
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
-#### 使用方法
+#### Usage
 ```go
 import (
         "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
@@ -192,7 +192,7 @@ npm install @datadog/datadog-api-client
 yarn add @datadog/datadog-api-client
 ```
 
-#### 使用方法
+#### Usage
 ```js
 import { <VERSION> } from 'datadog-api-client';
 ```
@@ -209,7 +209,7 @@ import { <VERSION> } from 'datadog-api-client';
 datadog-api-client = "0"
 ```
 
-#### 使用方法
+#### Usage
 Datadog API キーを検証するには、次のスニペットを試してください。
 ```rust
 use datadog_api_client::datadog::Configuration;
@@ -240,7 +240,7 @@ async fn main() {
 </br>
 代わりにアプリケーションのセットアップから始めたい場合は、Datadog の一般向け[「はじめに」ドキュメント][7]をご覧ください。
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

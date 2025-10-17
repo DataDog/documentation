@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
+description: "Configure Data Jobs Monitoring for Apache Spark applications on Amazon EMR clusters using AWS Secrets Manager and bootstrap actions."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -40,7 +41,7 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 
 #### Permissions to get secret value using AWS Secrets Manager
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
 </div>
 
@@ -56,7 +57,7 @@ These permissions are <strong>required</strong> if you are using AWS Secrets Man
 
 #### Permissions to describe cluster
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These permissions are <strong>required</strong> if you are <strong>NOT</strong> using the default role, <code>EMR_EC2_DefaultRole</code>.
 </div>
 

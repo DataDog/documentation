@@ -1,5 +1,6 @@
 ---
 title: Datadog CSI Driver
+description: High-performance observability for secure Kubernetes environments using the Datadog CSI Driver
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
   tag: "Blog"

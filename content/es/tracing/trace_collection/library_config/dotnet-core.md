@@ -22,7 +22,7 @@ Para configurar el rastreador mediante variables de entorno, establece las varia
 
 Para configurar el rastreador en el código de la aplicación, crea una instancia `TracerSettings` a partir de las fuentes de configuración predeterminadas. Establece las propiedades de esta instancia `TracerSettings` antes de llamar a `Tracer.Configure()`. Por ejemplo:
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> La configuración debe establecerse en <code>TracerSettings</code> <em>antes de</em> crear el <code>rastreador</code>. Los cambios realizados en las propiedades de <code>TracerSettings</code> después de crear el <code>rastreador</code> se ignoran.
 </div>
 
@@ -64,7 +64,7 @@ Para configurar el rastreador mediante un archivo JSON, crea `datadog.json` en e
 
 ### Ajustes de configuración
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> En Linux, los nombres de las variables de entorno distinguen entre mayúsculas y minúsculas.
 </div>
 

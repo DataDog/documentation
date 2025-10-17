@@ -113,7 +113,7 @@ Azure 플랫폼 로그(리소스 포함 로그)을 전송하려면 이벤트 허
 {{% tab "Blob Storage" %}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog {{< region-param key="dd_site_name" >}} 사이트에서는 지원되지 않습니다.
 </div>
 {{% /site-region %}}

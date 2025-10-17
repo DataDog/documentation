@@ -24,7 +24,7 @@ Al habilitar Session Replay para móviles puedes enmascarar automáticamente los
 
 ## Configuración
 
-<div class="alert alert-warning"><code>defaultPrivacyLevel</code> y <code>mask-user-input</code> están disponibles en el SDK v3.6.0 o posterior.</div>
+<div class="alert alert-danger"><code>defaultPrivacyLevel</code> y <code>mask-user-input</code> están disponibles en el SDK v3.6.0 o posterior.</div>
 
 Para habilitar tus parámetros de privacidad, configura `defaultPrivacyLevel` como `mask`, `mask-user-input` o `allow` en tu configuración de JavaScript.
 

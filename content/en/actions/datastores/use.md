@@ -16,6 +16,10 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can reference and perform CRUD (Create, Read, Update, and Delete) operations on a datastore inside a workflow or an app. Additionally, you can create a workflow or app directly from an existing datastore.
 
 ## Create a workflow or app from a datastore {#create-workflow-app}
