@@ -22,6 +22,13 @@ On the Agents page, you can access and filter your apps. Hover over an agent for
 
 ### Build an agent from a blueprint
 
+Blueprints are helpful starter agents that cover common use cases. They come loaded with instructions for the agent's behavior and helpful tools from the Action Catalog. Blueprints also showcase best practices for setting up agent functionality.
+
+To build an agent from a blueprint:
+
+1. 
+
+
 ### Create a custom agent
 
 ## Customize your agent
