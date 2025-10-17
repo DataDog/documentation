@@ -69,7 +69,7 @@ If you keep getting errors while trying to login with SAML, your identity provid
 
 ##### Subdomain login
 
-1. Tap subdomain and enter your custom subdomain[29].
+1. Tap subdomain and enter your custom [subdomain][29].
 2. Proceed with login steps as prompted.
 
 ### Switch organizations
