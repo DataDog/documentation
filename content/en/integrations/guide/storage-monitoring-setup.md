@@ -40,7 +40,7 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
 
 {{< img src="integrations/guide/storage_monitoring/add-bucket.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.** Ensure all S3 related permission are granted for Resource Collection.
+1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.** Ensure all S3 related permissions are granted for [Resource Collection][509].
 
 2. **Enable S3 Inventory to get prefix level monitoring.**
 
@@ -132,6 +132,7 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
 [506]: https://docs.datadoghq.com/integrations/guide/storage-monitoring-setup/?tab=existings3inventory#setup-for-amazon-s3
 [507]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 [508]: https://docs.datadoghq.com/integrations/amazon-web-services/#aws-iam-permissions
+[509]: https://docs.datadoghq.com/integrations/amazon-web-services/#resource-collection
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
