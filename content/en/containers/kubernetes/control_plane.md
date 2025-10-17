@@ -451,7 +451,7 @@ Using the command line:
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
-Or, for **OpenShift users** who installed the operator via OperatorHub/Marketplace (the [recommended method](install-openshift.md)), by patching the operator cluster service version:
+Or, for **OpenShift users** who installed the operator through OperatorHub/Marketplace (the [recommended method](install-openshift.md)), by patching the operator cluster service version:
 
 ```shell
 oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
