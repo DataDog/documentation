@@ -107,13 +107,6 @@ DatadogRUM.xcframework
 1. Navigate to [**Digital Experience** > **Add an Application**][10].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][11].
-4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][12].
-
-   {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Create a RUM application for iOS in Datadog" style="width:100%;border:none" >}}
-
-To ensure the safety of your data, you must use a client token. Using only [Datadog API keys][2] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code.
-
-For more information about setting up a client token, see the [Client token documentation][3].
 
 ### Step 3 - Initialize the library
 
@@ -517,6 +510,20 @@ struct BarView: View {
 
 [iOS Crash Reporting and Error Tracking][7] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][8].
 
+## Disable automatic user data collection
+
+You may want to disable automatic collection of user data to comply with privacy regulations or organizational data governance policies.
+
+To disable automatic user data collection for client IP or geolocation data:
+
+1. After creating your application, go to the [Application Management][13] page and click your application.
+2. Click **User Data Collection**.
+3. Use the toggles for those settings. For more information, see [RUM iOS Data Collected][12].
+
+To ensure the safety of your data, you must use a client token. Using only [Datadog API keys][2] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code.
+
+For more information about setting up a client token, see the [Client token documentation][3].
+
 ## Sending data when device is offline
 
 The iOS SDK ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
@@ -545,4 +552,4 @@ See [Supported versions][9] for a list of operating system versions and platform
 [10]: https://app.datadoghq.com/rum/application/create
 [11]: /real_user_monitoring/ios/web_view_tracking/
 [12]: /real_user_monitoring/ios/data_collected/
-
+[13]: https://app.datadoghq.com/rum/application/

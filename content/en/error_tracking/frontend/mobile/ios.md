@@ -683,7 +683,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Add watchdog termination reporting" level="h4" expanded=false id="add-watchdog-termination-reporting" %}}
+{{% collapse-content title="Add watchdog terminations reporting" level="h4" expanded=false id="add-watchdog-terminations-reporting" %}}
 
 In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These watchdog terminations are fatal and not recoverable (more details in the official [Apple documentation][13]).
 
