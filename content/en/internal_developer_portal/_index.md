@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and self-service workflows to standardize and accelerate software delivery. 
+Creating an IDP is a critical part of [Platform Engineering][7] best practices. Datadog's Internal Developer Portal (IDP) is a fully managed solution that unifies live telemetry, metadata, and self-service workflows to standardize and accelerate software delivery and optimize developer experience. 
 
 - Powered by live telemetry, [Software Catalog][1] inventories every service and environment in real time and enriches each entry with descriptive metadata for ownership and operational context.
 - [Self-Service Actions][2] and [Scorecards][3] translate platform policies into one-click tasks, ensuring every change meets observability, security, and production criteria. 
@@ -81,3 +81,4 @@ If your organization manages team structure in GitHub, join the preview for GitH
 [4]: /internal_developer_portal/eng_reports
 [5]: /getting_started/internal_developer_portal/
 [6]: /account_management/teams/
+[7]: https://www.datadoghq.com/knowledge-center/platform-engineering/

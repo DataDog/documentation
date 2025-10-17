@@ -43,6 +43,8 @@ To use the Datadog Exporter and Datadog Connector, configure them in your [OpenT
 
 {{% otel-endpoint-note %}}
 
+<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
+
 ```yaml
 receivers:
   otlp:
@@ -193,6 +195,8 @@ To get the `service` field correctly populated in your logs, you can specify `se
 
 {{% collapse-content title="Optional: Using Kubernetes" level="h4" %}}
 
+<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
+
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 
 In containerized environments, applications write logs to `stdout` or `stderr`. Kubernetes collects the logs and writes them to a standard location. You need to mount the location on the host node into the Collector for the filelog receiver. Below is an [extension example][17] with the mounts required for sending logs.
@@ -280,7 +284,7 @@ Configure each of the following components to suit your needs:
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
 [6]: /api/latest/logs/
 [7]: /api/latest/metrics/#submit-metrics
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/collector.yaml
 [9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
 [10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://opentelemetry.io/docs/instrumentation/

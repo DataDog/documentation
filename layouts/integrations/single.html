@@ -21,7 +21,8 @@
 
     {{ .Content }}
 
-    {{- if ($further_reading) -}}
+    {{/* "We don't want to do this on integration guides/faqs for now" */}}
+    {{- if and ($further_reading) (eq .Params.custom_kind "integration") -}}
 
     <h2>Further Reading</h2>
         {{- partial "whats-next/whats-next.html" . -}}
