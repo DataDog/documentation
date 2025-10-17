@@ -32,7 +32,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 - `!env:staging, !testing` excludes resources that have both the `env:staging` and `testing` tags.
 - `datadog:monitored !region:us-east1` collects metrics for resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
 
-## Exclude resources from evaluation
+## Exclude cloud resources from evaluation
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -70,6 +70,12 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Exclude containers from evaluation using the Datadog Agent
+
+For information on how to configure your Datadog Agent to exclude containers from security monitoring, see [Container Discovery Management][1].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /containers/guide/container-discovery-management/#security-configuration

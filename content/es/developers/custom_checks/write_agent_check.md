@@ -20,7 +20,7 @@ Esta página te guía por el proceso para crear un check básico personalizado d
 
 Antes de crear un check del Agent personalizado, instala el [Datadog Agent][1].
 
-<div class="alert alert-warning">Para trabajar con la última versión del Agent, tu check del Agent personalizado debe ser compatible con Python 3.</div>
+<div class="alert alert-danger">Para trabajar con la última versión del Agent, tu check del Agent personalizado debe ser compatible con Python 3.</div>
 
 ### Configuración
 

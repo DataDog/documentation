@@ -53,7 +53,7 @@ tile:
 <!--  EXTRAÍDO de https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Este integración está obsoleto, y la API en la que se basa podría perder soporte en cualquier momento. Utilice en su lugar <a href="https://docs.datadoghq.com/integraciones/pingdom_v3/" class="alert-link">Datadog Pingdom V3 integración</a>.
 </div>
 

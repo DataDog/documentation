@@ -53,7 +53,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
+<div class="alert alert-danger">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
 ## 構成設定

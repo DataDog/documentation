@@ -11,7 +11,7 @@ further_reading:
 title: (Legacy) Propagación del contexto de rastreo de Ruby
 ---
 
-<div class="alert alert-warning">Esta documentación es para e gem <code>ddtrace</code> v1.x. Si estás utilizando el gem <code>datadog</code> v2.0 o posterior, consulta la documentación más reciente de <a href="/tracing/trace_collection/trace_context_propagation/">Propagación del contexto de rastreo Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación es para e gem <code>ddtrace</code> v1.x. Si estás utilizando el gem <code>datadog</code> v2.0 o posterior, consulta la documentación más reciente de <a href="/tracing/trace_collection/trace_context_propagation/">Propagación del contexto de rastreo Ruby</a>.</div>
 
 ### Extracción e inyección de encabezados
 

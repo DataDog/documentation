@@ -89,7 +89,7 @@ Create custom tags so you can organize custom log usage metrics into categories 
 
 ### Create a `retention_period` tag
 
-<div class="alert alert-warning">Datadog recommends that you set up the <code>retention_period</code> tag even if your indexes all have the same retention period. This makes sure that if you start using multiple retention periods, all logs are tagged with its retention period.</div>
+<div class="alert alert-danger">Datadog recommends that you set up the <code>retention_period</code> tag even if your indexes all have the same retention period. This makes sure that if you start using multiple retention periods, all logs are tagged with its retention period.</div>
 
 `retention_period` is the number of days your logs are retained in Datadog indexes. Since indexing billing costs are incurred based on the number of days that the logs are retained, use the `retention_period` tag to associate each log with its retention period to see cost attribution.
 
@@ -150,7 +150,7 @@ Use a [Category Processor][6] to create a new `retention_period` attribute to as
 
 ### Create an `online_archives` tag
 
-<div class="alert alert-warning">Datadog recommends that you set up the <code>online_archives</code> tag even if none of your indexes have online archives enabled. This ensures that if you start using Online Archives, the relevant logs are tagged with <code>online_archives</code>.</div>
+<div class="alert alert-danger">Datadog recommends that you set up the <code>online_archives</code> tag even if none of your indexes have online archives enabled. This ensures that if you start using Online Archives, the relevant logs are tagged with <code>online_archives</code>.</div>
 
 The `online_archives` tag indicates whether or not your logs have been routed to Online Archives. Since Online Archives are charged differently than standard indexing, use the `online_archives` tag to determine which logs have been routed to Online Archives and see cost attribution.
 
@@ -195,7 +195,7 @@ Datadog highly recommends automating this process by using the [Datadog API endp
 
 ### Create a `sds` tag
 
-<div class="alert alert-warning">Datadog recommends that you still set up the <code>sds</code> tag even if you are not using the Sensitive Data Scanner. This makes sure that if you start using Sensitive Data Scanner, all the relevant logs are tagged with <code>sds</code>.</div>
+<div class="alert alert-danger">Datadog recommends that you still set up the <code>sds</code> tag even if you are not using the Sensitive Data Scanner. This makes sure that if you start using Sensitive Data Scanner, all the relevant logs are tagged with <code>sds</code>.</div>
 
 The `sds` tag indicates whether or not your logs have been scanned by the Sensitive Data Scanner. Use the `sds` tag to estimate the costs associated with the specific usage of Sensitive Data Scanner.
 

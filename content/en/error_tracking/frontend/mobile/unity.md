@@ -14,6 +14,7 @@ further_reading:
 title: Unity Crash Reporting and Error Tracking
 ---
 
+<<<<<<< HEAD
 ## Overview
 
 Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
@@ -268,3 +269,6 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
 [6]: https://app.datadoghq.com/source-code/setup/rum 
+=======
+{{< include-markdown "real_user_monitoring/application_monitoring/unity/error_tracking" >}}
+>>>>>>> master
