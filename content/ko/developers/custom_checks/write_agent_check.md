@@ -20,7 +20,7 @@ title: 커스텀 에이전트 점검 작성
 
 사용자 정의 Agent 점검을 생성하기 전에 [Datadog Agent][1]를 설치하세요.
 
-<div class="alert alert-warning">최신 버전의 Agent를 사용하려면 사용자 정의 Agent 점검이 Python 3와 호환되어야 합니다.</div>
+<div class="alert alert-danger">최신 버전의 Agent를 사용하려면 사용자 정의 Agent 점검이 Python 3와 호환되어야 합니다.</div>
 
 ### 구성
 

@@ -41,21 +41,21 @@ El componente Trace Agent dentro del Datadog Agent tiene dos métodos para evita
 
 La configuración del Trace Agent para ignorar ciertos tramos o recursos se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Si tienes requisitos específicos de la aplicación, utiliza, en su lugar, el método de [Configuración del rastreador](#tracer-configuration).
 
-#### Ignorar en función de las etiquetas de tramos
+#### Ignorar en función de las span tagss
 
-Empezando con el Datadog Agent 6.27.0/7.27.0, con la opción **filtrar por etiquetas**, se descartan trazas con tramos de raíz que coincidan con etiquetas de tramos especificadas. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Las trazas que se descartan debido al filtro por etiquetas no se incluyen en las métricas de trazas.
+Empezando con el Datadog Agent 6.27.0/7.27.0, con la opción **filtrar por etiquetas**, se descartan trazas con tramos de raíz que coincidan con span tagss especificadas. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Las trazas que se descartan debido al filtro por etiquetas no se incluyen en las métricas de trazas.
 
 Si puedes identificar mediante programación un conjunto de trazas que sabes que no deseas enviar a Datadog y ninguna otra opción de esta guía resuelve tu necesidad, puedes considerar añadir una [etiqueta de tramo personalizada][2] para poder descartar las trazas. [Ponte en contacto con el servicio de soporte técnico][1] para tratar tu caso de uso con más detalle, de modo que Datadog pueda seguir ampliando esta funcionalidad.
 
 La opción de filtrar por etiquetas requiere una coincidencia exacta de las cadenas. Si tu caso de uso requiere ignorar por expresiones regulares, consulta [Ignorar en función de los recursos](#ignoring-based-on-resources).
 
-Puedes especificar etiquetas de tramos para requerir o rechazar utilizando un lista de claves y valores separados por espacios en variables de entorno:
+Puedes especificar span tagss para requerir o rechazar utilizando un lista de claves y valores separados por espacios en variables de entorno:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Recopila solo las trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si no coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
+: Recopila solo las trazas que tienen tramos de raíz con una coincidencia exacta con las span tagss y valores especificados. Si no coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rechaza las trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
+: Rechaza las trazas que tienen tramos de raíz con una coincidencia exacta con las span tagss y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 
 {{< tabs >}}
@@ -134,7 +134,7 @@ En el backend, Datadog crea y añade las siguientes etiquetas (tags) de spans (t
 | `http.useragent_details.browser.family` | La familia de navegadores informada por el User-Agent.    |
 | `http.useragent_details.device.family`  | La familia de dispositivos informada por el User-Agent.     |
 
-<div class="alert alert-warning"><strong>Nota</strong>: Desde el 1.º de octubre de 2022, el backend Datadog aplica una reasignación para aplicar la <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de etiquetas (tags) de spans (tramos)
+<div class="alert alert-danger"><strong>Nota</strong>: Desde el 1.º de octubre de 2022, el backend Datadog aplica una reasignación para aplicar la <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de etiquetas (tags) de spans (tramos)
 </a> a través de rastreadores en todos los spans (tramos) ingeridos. Si deseas descartar spans (tramos) en función de las etiquetas (tags) en el nivel del Datadog Agent, utiliza las etiquetas (tags) en la columna <strong>Reasignar desde</strong>.</div>
 
 ##### Comunicaciones de red
@@ -413,13 +413,13 @@ Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datad
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Nota</strong>: Al filtrar trazas de esta manera, se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Al filtrar trazas de esta manera, se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
 
 ## Opciones de configuración del rastreador
 
 Algunos de los rastreadores específicos del lenguaje tienen una opción para modificar tramos antes de que se envíen al Datadog Agent. Utiliza esta opción si tienes requisitos específicos de la aplicación y utilizas uno de los lenguajes que se enumeran a continuación.
 
-<div class="alert alert-warning"><strong>Notas</strong>:<br>1. Si la solicitud está asociada a una trace (traza) distribuida, la trace (traza) resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Filtrar traces (trazas) de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">las métricas de traces (trazas) </a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de traces (trazas), consulta <a href="/tracing/trace_ingestion/ingestion_controls">los controles de ingesta</a>.</div>
+<div class="alert alert-danger"><strong>Notas</strong>:<br>1. Si la solicitud está asociada a una trace (traza) distribuida, la trace (traza) resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Filtrar traces (trazas) de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">las métricas de traces (trazas) </a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de traces (trazas), consulta <a href="/tracing/trace_ingestion/ingestion_controls">los controles de ingesta</a>.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}

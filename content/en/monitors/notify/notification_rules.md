@@ -1,5 +1,6 @@
 ---
 title: Notification Rules
+description: "Automate monitor alert routing using predefined notification rules based on tags and conditions to streamline team notifications."
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -20,16 +21,16 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Creating notification rules
 
-<div class="alert alert-warning">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
+<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
 
 1. Navigate to [**Monitors > Settings > Notification Rules**][1].
 1. Click **New Rule**.
 1. Add specific tags and values to set the scope for the rule. Notification rules use an AND logic for multiple tags. Both monitor tags and group tags are considered when matching the scope. For an example of this, see [Routing logic](#routing-logic).
-1. Add up to 50 notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
+1. Define your routing conditions by specifying **when** and **to whom** a notification should be sent. Notifications can be sent to emails, Team channels, or Integration channels. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2]. 
 1. Add a name for the rule.
 1. Click **Create Rule**.
 
-{{< img src="/monitors/notifications/notification_rules/notification_rules_form.png" alt="Configuration for a notification rule showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_form_with_conditional_recipients.png" alt="Configuration for a notification rule showing tag scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
 
 ## Managing notification rules
 

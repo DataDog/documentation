@@ -45,7 +45,7 @@ Datadog también puede generar [métricas mejoradas](https://docs.datadoghq.com/
 
 ### Recopilación de trazas
 
-Puedes habilitar la recopilación de trazas de dos formas: a través de [Datadog APM para AWS Step Functions](https://docs.datadoghq.com/serverless/step_functions) o a través de AWS X-Ray. 
+Puedes habilitar la recopilación de trazas de dos formas: a través de [Datadog APM para AWS Step Functions](https://docs.datadoghq.com/serverless/step_functions) o a través de AWS X-Ray.
 
 #### Habilitar el rastreo a través de Datadog APM para AWS Step Functions
 
@@ -53,7 +53,7 @@ Para habilitar el rastreo distribuido para tus AWS Step Functions. Consulta [Mon
 
 #### Habilitar el rastreo a través de AWS X-Ray
 
-<div class="alert alert-warning">Esta opción no recopila <a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">métricas mejoradas para AWS Step Functions</a>. Para recopilar estas métricas, debes habilitar el rastreo a través de <a href="https://docs.datadoghq.com/serverless/step_functions">Datadog APM para AWS Step Functions</a>.</div>
+<div class="alert alert-danger">Esta opción no recopila <a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">métricas mejoradas para AWS Step Functions</a>. Para recopilar estas métricas, debes habilitar el rastreo a través de <a href="https://docs.datadoghq.com/serverless/step_functions">Datadog APM para AWS Step Functions</a>.</div>
 
 Para recopilar trazas de tus AWS Step Functions a través de AWS X-Ray:
 
@@ -62,7 +62,7 @@ Para recopilar trazas de tus AWS Step Functions a través de AWS X-Ray:
 1. Ve a **Step Functions.**
 1. Selecciona una de tus Step Functions y haz clic en **Edit** (Editar).
 1. Desplázate a la sección **Rastreo** en la parte inferior de la página y selecciona la casilla para **Habilitar el rastreo X-Ray**.
-1. Recomendado: [Instala la biblioteca de rastreo AWS X-Ray](https://docs.datadoghq.com/tracing/guide/serverless_enable_aws_xray/#installing-the-x-ray-client-libraries) en tus funciones para obtener trazas más detalladas.
+1. Recomendado: [Instala la librería de rastreo AWS X-Ray](https://docs.datadoghq.com/tracing/guide/serverless_enable_aws_xray/#installing-the-x-ray-client-libraries) en tus funciones para obtener trazas más detalladas.
 
 ## Datos recopilados
 

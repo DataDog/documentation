@@ -50,7 +50,7 @@ Puedes crear varias métricas con la misma consulta al seleccionar la casilla **
 
 **Nota**: Los puntos de datos para métricas basadas en procesos se generan en intervalos de diez segundos. Es posible que se produzca un retraso de hasta 3 minutos desde el momento en que se crea o actualiza la métrica hasta el momento en que se informa el primer punto de datos.
 
-<div class="alert alert-warning">Las métricas basadas en procesos se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por etiquetas ilimitadas o de cardinalidad extremadamente alta, como <code>comando</code> y <code>usuario</code>, para evitar afectar tu facturación.</div>
+<div class="alert alert-danger">Las métricas basadas en procesos se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por etiquetas ilimitadas o de cardinalidad extremadamente alta, como <code>comando</code> y <code>usuario</code>, para evitar afectar tu facturación.</div>
 
 ### Actualizar una métrica basada en procesos
 

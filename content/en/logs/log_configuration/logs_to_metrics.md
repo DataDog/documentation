@@ -53,7 +53,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
-<div class="alert alert-warning">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
+<div class="alert alert-danger">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 ### Update a log-based metric
 
@@ -84,7 +84,7 @@ Log Management usage metrics come with three tags that can be used for more gran
 |  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
 |  `service`              | The service attribute of the log event.                               |
 
-**Note**: The `datadog_is_excluded` and `datadog_index` fields can have a value of `N/A`. This indicates that the log(s) was ingested, but didn't match any inclusion or exclusion criteria to be explicity routed to an index.
+**Note**: The `datadog_is_excluded` and `datadog_index` fields can have a value of `N/A`. This indicates that the log(s) was ingested, but didn't match any inclusion or exclusion criteria to be explicitly routed to an index.
 
 An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested_events` metric to reflect the log status (`info`, `warning`, etc.).
 

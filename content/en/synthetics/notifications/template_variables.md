@@ -19,6 +19,8 @@ Template variables allow you to insert dynamic values from your test results and
 Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
 ```
 
+**Note**: For information about accessing local (config) variables, see the [Variables](#variables) section.
+
 ### Common variable shortcuts
 
 `{{synthetics.failed_step.name}}`

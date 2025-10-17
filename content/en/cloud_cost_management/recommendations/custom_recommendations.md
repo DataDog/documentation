@@ -28,7 +28,7 @@ With custom recommendations, you can:
   
 ## Customize a recommendation
 
-<div class="alert alert-warning">To customize a recommendation, you must be assigned the **Cloud Cost Management - Cloud Cost Management Write** permission. </div>
+<div class="alert alert-danger">To customize a recommendation, you must be assigned the **Cloud Cost Management - Cloud Cost Management Write** permission. </div>
 
 <div class="alert alert-info">Customizations reflect within 24 hours, when recommendations are generated next.</div>
 

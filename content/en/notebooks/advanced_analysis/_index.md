@@ -1,5 +1,6 @@
 ---
 title: Analysis Features
+description: "Perform advanced data analysis in Notebooks with SQL queries, data transformations, joins, and visualizations across multiple datasets."
 aliases:
 - /logs/workspaces/
 - /logs/workspaces/export/
@@ -13,7 +14,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Notebooks Advanced Analysis is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
@@ -35,7 +36,8 @@ To run complex queries in a notebook, first add a **Data Source** cell. There ar
 
 **From a notebook**:
 1. Type `/datasource` and press <kbd>Enter</kbd>, or click the **Data Source** tile at the bottom of the page.
-2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.
+2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.<br/>
+**Note**: if there is a data source you want that is not available, request it [here][5].
 3. Enter your query. Reserved attributes from the filtered logs are automatically added as columns.
 
 **From the [Log Explorer][1]**:
@@ -157,3 +159,4 @@ To download your dataset as a CSV file:
 [2]: /logs/log_configuration/parsing/
 [3]: /logs/explorer/calculated_fields/expression_language/
 [4]: /ddsql_reference/
+[5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/

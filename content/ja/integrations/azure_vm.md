@@ -105,7 +105,7 @@ Azure VM がシャットダウンまたは停止したモニターをミュー�
 
 ## 収集データ
 
-<div class="alert alert-warning"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化されました。
+<div class="alert alert-danger"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化されました。
 
 ご不明な点は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までお問い合わせください。</div>
 

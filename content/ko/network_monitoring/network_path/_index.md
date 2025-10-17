@@ -17,7 +17,7 @@ is_beta: true
 title: 네트워크 경로
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Cloud Network Monitoring용 Network Path는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
+<div class="alert alert-danger">Datadog Cloud Network Monitoring용 Network Path는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">Datadog Cloud Network Monitoring용 Network Path는 제한적으로 제공됩니다. 사용하려면 Datadog 담당자에게 문의해 주세요.</div>

@@ -1,5 +1,6 @@
 ---
 title: DDSQL Reference
+description: "Complete reference for DDSQL syntax, data types, functions, operators, and statements for querying Datadog data with SQL."
 aliases:
 - /logs/workspaces/sql_reference
 - /ddsql_reference/ddsql_default
@@ -108,6 +109,13 @@ WHERE delivery_date IS NULL {{< /code-block >}}
     {{< code-block lang="sql" >}}SELECT *
 FROM customers
 LIMIT 10 {{< /code-block >}}
+
+`OFFSET`
+: Skips a specified number of records before starting to return records from the query.
+
+    {{< code-block lang="sql" >}}SELECT *
+FROM employees
+OFFSET 20 {{< /code-block >}}
 
 `ORDER BY`
 : Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.
@@ -223,9 +231,12 @@ The following SQL functions are supported. For Window function, see the separate
 | `COUNT(any a)`                                   | numeric                               | Returns the number of input values that are not null.                                                                                                                                             |
 | `SUM(numeric n)`                                 | numeric                               | Returns the summation across all input values.                                                                                                                                                    |
 | `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.                                                                                                                              |
+| `BOOL_AND(boolean b)`                            | boolean                               | Returns whether all non-null input values are true.                                                                                                                                               |
+| `BOOL_OR(boolean b)`                             | boolean                               | Returns whether any non-null input value is true.                                                                                                                                                 |
 | `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
 | `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
+| `POWER(numeric base, numeric exponent)`          | numeric                               | Returns the value of base raised to the power of exponent.                                                                                                                                        |
 | `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                                                                                                                                                  |
 | `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                                                                                                                                                  |
 | `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                                                                                                                                       |
@@ -240,6 +251,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval.                                                                                                     |
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.                                                                                                                                   |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.                                                                                                                                   |
+| `DATE_BIN(interval stride, timestamp source, timestamp origin)` | timestamp                             | Aligns a timestamp (source) to buckets of even length (stride). Returns the start of the bucket containing the source, calculated as the largest timestamp that is less than or equal to source and is a multiple of stride lengths from origin. |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.                                                                                                                        |
 | `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
 | `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current query.                                                                                                                                  |
@@ -284,6 +296,16 @@ WHERE status_code = 200
 GROUP BY service_name
 {{< /code-block >}}
 
+### `BOOL_AND`
+{{< code-block lang="sql" >}}SELECT BOOL_AND(status_code = 200) AS all_success
+FROM logs
+{{< /code-block >}}
+
+### `BOOL_OR`
+{{< code-block lang="sql" >}}SELECT BOOL_OR(status_code = 200) AS some_success
+FROM logs
+{{< /code-block >}}
+
 ### `CEIL`
 {{< code-block lang="sql" >}}
 SELECT CEIL(price) AS rounded_price
@@ -300,6 +322,12 @@ FROM products
 {{< code-block lang="sql" >}}
 SELECT ROUND(price) AS rounded_price
 FROM products
+{{< /code-block >}}
+
+### `POWER`
+{{< code-block lang="sql" >}}
+SELECT POWER(response_time, 2) AS squared_response_time
+FROM logs
 {{< /code-block >}}
 
 ### `LOWER`
@@ -469,6 +497,15 @@ SELECT
   TO_CHAR(order_date, 'MM-DD-YYYY') AS formatted_date
 FROM
   orders
+{{< /code-block >}}
+
+### `DATE_BIN`
+{{< code-block lang="sql" >}}
+SELECT DATE_BIN('15 minutes', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01')
+-- Returns 2025-09-15 12:30:00
+
+SELECT DATE_BIN('1 day', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01')
+-- Returns 2025-09-15 00:00:00
 {{< /code-block >}}
 
 ### `DATE_TRUNC`
@@ -696,10 +733,12 @@ This table provides an overview of the supported window functions. For comprehen
 
 ## JSON functions and operators
 
-| Name | Return type | Description |
-|------|-------------|-------------|
-| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
-| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+| Name                                          | Return type  | Description                                                                                                                                                                                                                                                                                                    |
+|-----------------------------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| json_extract_path_text(text json, text path…) | text         | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax. |
+| json_extract_path(text json, text path…)      | JSON         | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.                                                                                                                                                                                                        |
+| json_array_elements(text json)                | rows of JSON | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
+| json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
 

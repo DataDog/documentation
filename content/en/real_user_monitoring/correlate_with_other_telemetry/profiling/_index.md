@@ -1,5 +1,6 @@
 ---
 title: Correlate RUM and Profiling
+description: "Use browser profiling with RUM to understand JavaScript execution and rendering performance issues affecting user experience."
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

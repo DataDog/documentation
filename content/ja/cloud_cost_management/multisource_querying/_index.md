@@ -104,7 +104,7 @@ Cloud Cost Management では、以下の FOCUS タグが使用できます。
 
 `all.cost` メトリクスには、AWS、Azure、および Google Cloud のコストに対して[コンテナコストが割り当てられている][13]ため、[関連するコンテナタグ][14]でクエリできます。
 
-<div class="alert alert-warning">組織がこれらの FOCUS タグでタグ付けしている場合、Datadog は、タグの値が Cloud Cost Management の FOCUS タグの値と重複しないように、基礎となるインフラストラクチャー上のタグキーを更新することを推奨します。</div>
+<div class="alert alert-danger">組織がこれらの FOCUS タグでタグ付けしている場合、Datadog は、タグの値が Cloud Cost Management の FOCUS タグの値と重複しないように、基礎となるインフラストラクチャー上のタグキーを更新することを推奨します。</div>
 
 ## 通貨換算
 Cloud Cost Management は、各クラウド プロバイダーの請求書から請求通貨を取得します。異なる通貨の複数プロバイダーからのコストを処理する際は、課金額を USD に換算します。換算は毎日更新される月次平均為替レートを使用して実行されます。これにより、Cloud Cost Management は原通貨に関係なく、すべてのコスト データを一貫して正確に表現できます。原通貨でコストを表示するには、Provider を 1 つだけ選択してください。

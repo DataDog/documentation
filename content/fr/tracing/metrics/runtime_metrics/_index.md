@@ -43,7 +43,7 @@ Les métriques runtime sont disponibles pour plusieurs langages de programmation
 - **Version de la bibliothèque** : 0.29.0+
 - **Runtime** : Java 8+
 
-<div class="alert alert-warning">La collecte des métriques JMX n'est pas prise en charge dans les environnements AWS Lambda.</div>
+<div class="alert alert-danger">La collecte des métriques JMX n'est pas prise en charge dans les environnements AWS Lambda.</div>
 
 {{% /tab %}}
 

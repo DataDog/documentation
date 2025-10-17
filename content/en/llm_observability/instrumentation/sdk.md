@@ -9,6 +9,9 @@ aliases:
     - /llm_observability/setup/sdk/java
     - /llm_observability/sdk/java
     - /llm_observability/sdk/
+    - /llm_observability/instrumentation/custom_instrumentation
+    - /tracing/llm_observability/trace_an_llm_application
+    - /llm_observability/setup
 ---
 
 ## Overview
@@ -503,6 +506,8 @@ To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm(
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
+<br />The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `model_provider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `session_id`
 : optional - _string_
@@ -542,6 +547,7 @@ To trace an LLM span, specify the span kind as `llm`, and optionally specify the
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
 <br/>The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `modelProvider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `sessionId`
 : optional - _string_
@@ -585,6 +591,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 `modelProvider`
 : optional - _String_ - **default**: `"custom"`
 <br/>The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `modelProvider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `mlApp`
 : optional - _String_
@@ -1176,6 +1183,68 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{% /tab %}}
 {{< /tabs >}}
 
+## Nesting spans
+
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def extract_data(document):
+    preprocess_document(document)
+    ... # performs data extraction on the document
+    return
+
+@task
+def preprocess_document(document):
+    ... # preprocesses a document for data extraction
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function preprocessDocument (document) {
+  ... // preprocesses a document for data extraction
+  return
+}
+preprocessDocument = llmobs.wrap({ kind: 'task' }, preprocessDocument)
+
+function extractData (document) {
+  preprocessDocument(document)
+  ... // performs data extraction on the document
+  return
+}
+extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+
+public class MyJavaClass {
+  public void preprocessDocument(String document) {
+  LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
+   ...   // preprocess document for data extraction
+   taskSpan.annotateIO(...); // record the input and output
+   taskSpan.finish();    
+  }
+
+  public String extractData(String document) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("extractData", null, "session-141");
+    preprocessDocument(document);
+    ... // perform data extraction on the document
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+  }
+}
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Tracking user sessions
 
@@ -1683,7 +1752,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `prompt`
 : optional - _dictionary_
-<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
+<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.llmobs.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
 : optional - _dictionary_
@@ -1723,7 +1792,6 @@ def rag_workflow(user_question):
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 ## Evaluations
@@ -1989,9 +2057,10 @@ public class MyJavaClass {
 
 ## Span processing
 
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
+
 {{< tabs >}}
 {{% tab "Python" %}}
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
 
 ### Example
 
@@ -2041,6 +2110,89 @@ def call_openai():
         # make call to openai
         ...
 {{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+from typing import Optional
+
+def filter_processor(span: LLMObsSpan) -> Optional[LLMObsSpan]:
+    # Skip spans that are marked as internal or contain sensitive data
+    if span.get_tag("internal") == "true" or span.get_tag("sensitive") == "true":
+        return None  # This span will not be emitted
+
+    # Process and return the span normally
+    return span
+
+LLMObs.register_processor(filter_processor)
+
+# This span will be filtered out and not sent to Datadog
+with LLMObs.workflow("internal_workflow"):
+    LLMObs.annotate(tags={"internal": "true"})
+    # ... workflow logic
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+### Example
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function redactProcessor(span) {
+  if (span.getTag("no_output") === "true") {
+    for (const message of span.output) {
+      message.content = ""
+    }
+  }
+  return span
+}
+
+llmobs.registerProcessor(redactProcessor)
+{{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function filterProcessor(span) {
+  // Skip spans that are marked as internal or contain sensitive data
+  if (span.getTag("internal") === "true" || span.getTag("sensitive") === "true") {
+    return null  // This span will not be emitted
+  }
+
+  // Process and return the span normally
+  return span
+}
+
+llmobs.registerProcessor(filterProcessor)
+
+// This span will be filtered out and not sent to Datadog
+function internalWorkflow() {
+  return llmobs.trace({ kind: 'workflow', name: 'internalWorkflow' }, (span) => {
+    llmobs.annotate({ tags: { internal: "true" } })
+    // ... workflow logic
+  })
+}
+{{< /code-block >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
