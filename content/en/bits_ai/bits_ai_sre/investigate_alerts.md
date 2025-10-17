@@ -116,7 +116,7 @@ These permissions are added by default to Managed Roles. If your organization us
 
 Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period.
 
-Manual investigations can still be triggered even after rate limits are reached. See [Manual investigations](#manually-start-an-investigation) for more information.
+[Manual investigations](#manually-start-an-investigation) can still be triggered even after rate limits.
 
 #### Types of rate limits
 
@@ -130,15 +130,15 @@ Controls how often an investigation is triggered from a single monitor alert wit
 
 The Organization limit defines the total number of investigations Bits AI SRE can run across your entire organization within 24 hours.
 
-**Default:** No limit
+**Default:** No limit.
 
 #### Set a rate limit
 
 To set a rate limit:
-1. Navigate to [Bits AI SRE > Settings > Rate Limits](https://app.datadoghq.com/bits-ai/settings/rate-limits)
-2. Toggle on the rate limit you want to enable
-3. Set the maximum number of investigations that can run within a rolling 24-hour window
-4. Click Save
+1. Navigate to **Bits AI SRE** > **Settings** > [**Rate Limits**](https://app.datadoghq.com/bits-ai/settings/rate-limits).
+2. Toggle on the rate limit you want to enable.
+3. Set the maximum number of investigations that can run within a rolling 24-hour window.
+4. Click **Save**.
 
 {{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
