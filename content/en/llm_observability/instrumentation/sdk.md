@@ -1921,7 +1921,7 @@ def llm_call():
         tags = {'msg_id': msg_id}
     )
 
-    LLMObs.submit_evaluation_for(
+    LLMObs.submit_evaluation(
         span_with_tag_value = {
             "tag_key": "msg_id",
             "tag_value": msg_id
