@@ -423,9 +423,9 @@ annotations:
 ## Kubernetes on OpenShift 4 {#OpenShift4}
 
 ### Using the Operator (v1.18.0+)
-The Datadog Operator can automatically configure monitoring for Kubernetes control plane components including the API Server, etcd, Controller Manager, and Scheduler.
+<div class="alert alert-info">This feature is in Preview.</div>
 
-This feature was introduced in Datadog Operator v1.18.0 for Openshift and Amazon EKS clusters and is currently in Preview.
+The Datadog Operator can automatically configure monitoring for Kubernetes control plane components including the API Server, etcd, Controller Manager, and Scheduler.
 
 #### Prerequisites
 
