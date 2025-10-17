@@ -10,7 +10,7 @@ aliases:
 description: 'Instrument your code with the Datadog Go APM tracer.'
 code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 1
+code_lang_weight: 2
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'

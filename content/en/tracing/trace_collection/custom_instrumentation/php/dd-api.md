@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/php
 description: 'Manually instrument your PHP application to send custom traces to Datadog.'
 code_lang: dd-api
-code_lang_weight: 1
+code_lang_weight: 2
 type: multi-code-lang
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'

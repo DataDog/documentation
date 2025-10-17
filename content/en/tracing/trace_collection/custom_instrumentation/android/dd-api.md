@@ -2,7 +2,7 @@
 description: 'Instrument your code with the Datadog API.'
 code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 0
+code_lang_weight: 2
 further_reading:
   - link: https://github.com/DataDog/dd-sdk-android
     tag: "Source Code"
