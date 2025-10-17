@@ -140,9 +140,7 @@ To set a rate limit:
 3. Set the maximum number of investigations that can run within a rolling 24-hour window
 4. Click Save
 
-<p align="center">
-<img width="444" height="185" alt="image" src="https://github.com/user-attachments/assets/69f2dd81-8c83-4a0c-85d4-9eaa5bc18970" />
-</p>
+{{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
 ## How Bits AI SRE investigates
 
