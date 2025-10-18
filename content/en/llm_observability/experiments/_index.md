@@ -329,7 +329,7 @@ Summary Evaluators are optionally defined functions that measure how well the mo
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
 ### GitHub Actions
-Use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
+This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
 
 **Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
 
@@ -356,7 +356,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run pytest -vv -s
+        run: poetry run pytest -vv -s # Or poetry run python path_to_file_with_experiment.py
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
@@ -916,3 +916,7 @@ Empty body on success.
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[14]: /llm_observability/experiments/?tab=manual#setup
+[15]: /llm_observability/experiments/?tab=manual#projects
+[16]: /llm_observability/experiments/?tab=manual#datasets
+[17]: /llm_observability/experiments/?tab=manual#experiments
