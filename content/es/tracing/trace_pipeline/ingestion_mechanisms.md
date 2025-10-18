@@ -35,7 +35,7 @@ Como la decisión se toma al comienzo de la traza y, luego, se transmite a todas
 
 Puedes configurar la frecuencias de muestreo para el muestreo basado en la fase inicial en dos lugares:
 - En el **[Agent](#in-the-agent)** (por defecto)
-- A nivel de la **[biblioteca de rastreo](#in-tracing-libraries-user-defined-rules)**: los mecanismos de la librería de rastreo sustituyen a la configuración del Agent.
+- A nivel de la **[biblioteca de rastreo](#in-tracing-libraries-user-defined-rules)**: los mecanismos de la biblioteca de rastreo sustituyen a la configuración del Agent.
 
 ### En el Agent
 `ingestion_reason: auto`
@@ -65,7 +65,7 @@ Todos los tramos de una traza muestreada utilizando el Datadog Agent [frecuencia
 ### En las bibliotecas de rastreo: reglas definidas por el usuario
 `ingestion_reason: rule`
 
-Para llevar a cabo un control más pormenorizado, utiliza las opciones de configuración de muestreo de la librería de rastreo:
+Para llevar a cabo un control más pormenorizado, utiliza las opciones de configuración de muestreo de la biblioteca de rastreo:
 - Configura una **frecuencia de muestreo específica que se aplicará a la raíz del rastreo**, por servicio y/o nombre del recurso, sustituyendo el [mecanismo por defecto] del Agent(#in-the-agent).
 - Configura un **límite de frecuencia** para restringir el número de trazas ingeridas por segundo. El límite de la frecuencia por defecto es de 100 trazas por segundo por instancia de servicio (cuando se utiliza el [mecanismo por defecto](#in-the-agent) del Agent, se omite el limitador de frecuencia).
 
@@ -103,14 +103,14 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por 
 
 **Nota**: El uso de `DD_TRACE_SAMPLE_RATE` está obsoleto. Utiliza `DD_TRACE_SAMPLING_RULES` en su lugar. Por ejemplo, si ya has establecido `DD_TRACE_SAMPLE_RATE` en `0.1`, establece`DD_TRACE_SAMPLING_RULES` en `[{"sample_rate":0.1}]` en su lugar.
 
-Más información sobre los controles de muestreo en la [documentación de librerías de rastreo de Java][2].
+Más información sobre los controles de muestreo en la [documentación de bibliotecas de rastreo de Java][2].
 
 [1]: /es/tracing/guide/resource_based_sampling
 [2]: /es/tracing/trace_collection/dd_libraries/java
 [3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
 {{% /tab %}}
 {{% tab "Python" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0">2.9.0</a>, para las aplicaciones Python, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -131,14 +131,14 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por 
 
 **Nota**: El uso de `DD_TRACE_SAMPLE_RATE` está obsoleto. Utiliza `DD_TRACE_SAMPLING_RULES` en su lugar. Por ejemplo, si ya has establecido `DD_TRACE_SAMPLE_RATE` en `0.1`, establece `DD_TRACE_SAMPLING_RULES` en `[{"sample_rate":0.1}]` en su lugar.
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Python][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Python][2].
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
 [2]: /es/tracing/trace_collection/dd_libraries/python
 [3]: /es/tracing/guide/resource_based_sampling/
 {{% /tab %}}
 {{% tab "Ruby" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, para las aplicaciones Ruby, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -147,7 +147,7 @@ Para obtener más información sobre cómo configurar remotamente las frecuencia
 **Nota**: La configuración remota tiene prioridad sobre la configuración local.
 
 **Configuración local**
-Para aplicaciones Ruby, configura una frecuencia de muestreo global para la librería utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Configura frecuencias de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
+Para aplicaciones Ruby, configura una frecuencia de muestreo global para la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Configura frecuencias de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de las trazas:
 
@@ -158,7 +158,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 
 Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia de servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
 
-Obtén más información sobre los controles de muestreo en la [documentación acerca de la librería de rastreo de Ruby][1].
+Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de rastreo de Ruby][1].
 
 [1]: /es/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
@@ -185,14 +185,14 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por 
 
 **Nota**: El uso de `DD_TRACE_SAMPLE_RATE` está obsoleto. Utiliza `DD_TRACE_SAMPLING_RULES` en su lugar. Por ejemplo, si ya has establecido `DD_TRACE_SAMPLE_RATE` en `0.1`, establece `DD_TRACE_SAMPLING_RULES` en `[{"sample_rate":0.1}]` en su lugar.
 
-Obtén más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Go][1].
+Obtén más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Go][1].
 
 [1]: /es/tracing/trace_collection/dd_libraries/go
 [2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 [3]: /es/tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, para las aplicaciones Node.js, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -202,7 +202,7 @@ Para obtener más información sobre cómo configurar remotamente las frecuencia
 
 **Configuración local**
 
-Para aplicaciones Node.js, configura una frecuencia de muestreo global en la librería utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
+Para aplicaciones Node.js, configura una frecuencia de muestreo global en la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
 
 También puedes configurar las frecuencias de muestreo por servicio. Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % para el resto de las trazas:
 
@@ -221,12 +221,12 @@ tracer.init({
 
 Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia de servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Node.js][1].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Node.js][1].
 
 [1]: /es/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, para las aplicaciones PHP, configura las frecuencias de muestreo por servicio y por recurso desde la <a href="https://app.datadoghq.com/apm/traces/ingestion-control">página de control de la ingesta</a>.
 
@@ -236,7 +236,7 @@ Para obtener más información sobre cómo configurar remotamente las frecuencia
 
 **Configuración local**
 
-Para aplicaciones PHP, configura una frecuencia de muestreo global para la librería con la variable de entorno `DD_TRACE_SAMPLE_RATE`. Configura frecuencias de muestreo por servicio utilizando la variable de entorno `DD_TRACE_SAMPLING_RULES`.
+Para aplicaciones PHP, configura una frecuencia de muestreo global para la biblioteca con la variable de entorno `DD_TRACE_SAMPLE_RATE`. Configura frecuencias de muestreo por servicio utilizando la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50% de las trazas del servicio denominado `my-service`, el 20% de las trazas de otros endpoints y el 10% del resto de las trazas, configura:
 
@@ -245,12 +245,12 @@ export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-Obtén más información sobre los controles de muestreo en la [documentación de la librería de rastreo de PHP][1].
+Obtén más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de PHP][1].
 
 [1]: /es/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, para las aplicaciones C++, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -259,7 +259,7 @@ Para obtener más información sobre cómo configurar remotamente las frecuencia
 **Nota**: La configuración remota tiene prioridad sobre la configuración local.
 
 **Configuración local**
-A partir de [v0.1.0][1], la librería C++ de Datadog admite las siguientes configuraciones:
+A partir de [v0.1.0][1], la biblioteca C++ de Datadog admite las siguientes configuraciones:
 - Frecuencia de muestreo global: variable de entorno `DD_TRACE_SAMPLE_RATE`
 - Frecuencias de muestreo por servicio: variable de entorno `DD_TRACE_SAMPLING_RULES`.
 - Configuración del límite de frecuencia: variable de entorno `DD_TRACE_RATE_LIMIT`.
@@ -277,20 +277,27 @@ C++ no proporciona integraciones para la instrumentación automática, pero la u
 [2]: /es/tracing/trace_collection/proxy_setup
 {{% /tab %}}
 {{% tab ".NET" %}}
-Para las aplicaciones .NET, establece una frecuencia de rastreo global para la librería utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
+Para las aplicaciones .NET, establece una frecuencia de rastreo global para la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de las trazas:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+#using powershell
+$env:DD_TRACE_SAMPLE_RATE=0.1
+$env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+
+#using JSON file   
+{
+    "DD_TRACE_SAMPLE_RATE": "0.1",
+    "DD_TRACE_SAMPLING_RULES": "[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\": 0.5}]"
+}
 ```
 
 <div class="alert alert-info">A partir de la versión 2.35.0, si la <a href="/remote_configuration">configuración remota del Agent</a> está activada donde se ejecuta el servicio, puedes configurar un <code>DD_TRACE_SAMPLE_RATE</code> por servicio en la interfaz de usuario del <a href="/tracing/software_catalog">Catálogo de software</a>.</div>
 
 Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia de servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
 
-Lee más acerca de los controles de muestreo en la [documentación de librerías de rastreo de .NET][1].\
+Lee más acerca de los controles de muestreo en la [documentación de bibliotecas de rastreo de .NET][1].\
 Más información sobre la [configuración de variables de entorno para .NET][2].
 
 [1]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
@@ -298,7 +305,7 @@ Más información sobre la [configuración de variables de entorno para .NET][2]
 {{% /tab %}}
 {{< /tabs >}}
 
-**Nota**: Todos los tramos de una traza muestreada utilizando una configuración de librería de rastreo se etiquetan (tag) con el motivo de la ingesta `rule`. Los servicios  configurados con reglas de muestreo definidas por el usuario se marcan como `Configured` en la columna de configuración de la [Página de control de la ingesta][5].
+**Nota**: Todos los tramos de una traza muestreada utilizando una configuración de biblioteca de rastreo se etiquetan (tag) con el motivo de la ingesta `rule`. Los servicios  configurados con reglas de muestreo definidas por el usuario se marcan como `Configured` en la columna de configuración de la [Página de control de la ingesta][5].
 
 ## Trazas con errores o poco frecuentes
 
@@ -307,7 +314,7 @@ Para las trazas que no se capturan a través del muestreo basado en la fase inic
 - **Trazas con errores**: Es importante muestrear los errores, dado que así se pueden observar los posibles errores del sistema.
 - **Trazas poco frecuentes**: Muestrear las trazas poco frecuentes te permite mantener la visibilidad sobre la totalidad del sistema, puesto que te aseguras de que los servicios y recursos con poco tráfico se sigan monitorizando.
 
-**Nota**: Los muestreadores de trazas con errores o poco frecuentes se omitirán en los servicios en los que hayas configurado las [reglas de muestreo de librerías](#in-tracing-libraries-user-defined-rules).
+**Nota**: Los muestreadores de trazas con errores o poco frecuentes se omitirán en los servicios en los que hayas configurado las [reglas de muestreo de bibliotecas](#in-tracing-libraries-user-defined-rules).
 
 ### Trazas con errores
 `ingestion_reason: error`
@@ -325,7 +332,7 @@ Con el Agent 7.33 y sus versiones posteriores, puedes configurar el muestreador
 **Notas**:
 1. Establece el parámetro en `0` para desactivar el muestreador de errores.
 2. El muestreador de errores captura trazas locales con tramos con errores en el nivel del Agent. Si se distribuye la traza, no hay ninguna garantía de que la traza completa se envíe a Datadog.
-3. Por defecto, los tramos descartados mediante las reglas de rastreo de la librería o la lógica personalizada como `manual.drop` se **excluyen** en el muestreador de errores.
+3. Por defecto, los tramos descartados mediante las reglas de rastreo de la biblioteca o la lógica personalizada como `manual.drop` se **excluyen** en el muestreador de errores.
 
 #### Datadog Agent 7.42.0 y superiores
 
@@ -333,7 +340,7 @@ El muestreo de errores se puede configurar de forma remota si utilizas el Agent 
 
 #### Datadog Agent 6/7.41.0 y superiores
 
-Para sustituir el comportamiento por defecto de modo que el muestreador de errores **incluya** los tramos descartados a través de las reglas de la librería de rastreo o la lógica personalizada como `manual.drop`, activa la función con: `DD_APM_FEATURES=error_rare_sample_tracer_drop` en el Datadog Agent (o el contenedor del Trace Agent dedicado en el pod del Datadog Agent en Kubernetes).
+Para sustituir el comportamiento por defecto de modo que el muestreador de errores **incluya** los tramos descartados a través de las reglas de la biblioteca de rastreo o la lógica personalizada como `manual.drop`, activa la función con: `DD_APM_FEATURES=error_rare_sample_tracer_drop` en el Datadog Agent (o el contenedor del Trace Agent dedicado en el pod del Datadog Agent en Kubernetes).
 
 
 #### Datadog Agent 6/7.33 a 6/7.40.x
@@ -356,7 +363,7 @@ La frecuencia de muestreo de trazas poco frecuentes se puede configurar de forma
 
 Por defecto, el muestreador de trazas poco frecuentes está **no activado**.
 
-**Nota: Cuando se **habilita**, los tramos descartados a través de las reglas de la librería de rastreo o la lógica personalizada como `manual.drop` se **excluyen** en este muestreador.
+**Nota: Cuando se **habilita**, los tramos descartados a través de las reglas de la biblioteca de rastreo o la lógica personalizada como `manual.drop` se **excluyen** en este muestreador.
 
 Para configurar el muestreador de trazas poco frecuentes, actualiza la configuración `apm_config.enable_rare_sampler` en el archivo principal de la configuración del Agent (`datadog.yaml`) o con la variable de entorno `DD_APM_ENABLE_RARE_SAMPLER` :
 
@@ -365,7 +372,7 @@ Para configurar el muestreador de trazas poco frecuentes, actualiza la configura
 @env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-Para evaluar los tramos descartados a través de las reglas de la librería de rastreo o la lógica personalizada como `manual.drop`,
+Para evaluar los tramos descartados a través de las reglas de la biblioteca de rastreo o la lógica personalizada como `manual.drop`,
  activa la función con: `DD_APM_FEATURES=error_rare_sample_tracer_drop` en el Trace Agent .
 
 
@@ -373,7 +380,7 @@ Para evaluar los tramos descartados a través de las reglas de la librería de r
 
 Por defecto, el muestreador de trazas poco frecuentes está activado.
 
-**Nota: Cuando **está activado**, los tramos descartados a través de las reglas de la librería de rastreo o la lógica personalizada como `manual.drop` **están excluidos** en este muestreador. Para incluir estos tramos en esta lógica, actualiza al Datadog Agent 6.41.0/7.41.0 o superior.
+**Nota: Cuando **está activado**, los tramos descartados a través de las reglas de la biblioteca de rastreo o la lógica personalizada como `manual.drop` **están excluidos** en este muestreador. Para incluir estos tramos en esta lógica, actualiza al Datadog Agent 6.41.0/7.41.0 o superior.
 
 Para cambiar la configuración por defecto del muestreador de trazas poco frecuentes, actualiza la configuración `apm_config.disable_rare_sampler` en el archivo principal de la configuración del Agent (`datadog.yaml`) o con la variable entorno `DD_APM_DISABLE_RARE_SAMPLER` :
 
@@ -385,7 +392,7 @@ Para cambiar la configuración por defecto del muestreador de trazas poco frecue
 ## Forzar la conservación y el descarte
 `ingestion_reason: manual`
 
-El mecanismo de muestreo basado en la fase inicial se puede sustituir en la librería de rastreo. Por ejemplo, si necesitas monitorizar una transacción crítica, puedes forzar la conservación de la traza asociada. Por otro lado, también puedes forzar el descarte de la traza en caso de que contenga información repetitiva o innecesaria, como los checks de estado.
+El mecanismo de muestreo basado en la fase inicial se puede sustituir en la biblioteca de rastreo. Por ejemplo, si necesitas monitorizar una transacción crítica, puedes forzar la conservación de la traza asociada. Por otro lado, también puedes forzar el descarte de la traza en caso de que contenga información repetitiva o innecesaria, como los checks de estado.
 
 - Configura Manual Keep en un tramo para indicar que se deben ingerir este y todos los tramos secundarios. El rastreo resultante puede aparecer incompleto en la interfaz de usuario si el tramo en cuestión no es el tramo raíz de la traza.
 
@@ -499,7 +506,7 @@ package main
 import (
     "log"
     "net/http"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" 
     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
@@ -695,7 +702,7 @@ Esta función está disponible para el Datadog Agent v[7.40.0][19] o posterior.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-A partir de la librería de rastreo [versión 1.7.0][1], para las aplicaciones Java, establece las reglas de muestreo del **tramo** del nombre por servicio y por operación con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
+A partir de la biblioteca de rastreo [versión 1.7.0][1], para las aplicaciones Java, establece las reglas de muestreo del **tramo** del nombre por servicio y por operación con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
 
 Por ejemplo, para recopilar el 100 % de los tramos del servicio llamado `my-service`, para la operación `http.request`, hasta 50 tramos por segundo:
 
@@ -703,7 +710,7 @@ Por ejemplo, para recopilar el 100 % de los tramos del servicio llamado `my-ser
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Java][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Java][2].
 
 [1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
 [2]: /es/tracing/trace_collection/dd_libraries/java
@@ -718,7 +725,7 @@ Por ejemplo, para recopilar `100%` de los tramos del servicio llamado `my-servic
 ```
 
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Python][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Python][2].
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
 [2]: /es/tracing/trace_collection/dd_libraries/python
@@ -732,7 +739,7 @@ Por ejemplo, para recopilar `100%` de los tramos del servicio llamado `my-servic
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Ruby][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Ruby][2].
 
 [1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
 [2]: /es/tracing/trace_collection/dd_libraries/ruby#sampling
@@ -753,7 +760,7 @@ Por ejemplo, para recopilar `100%` de los tramos del servicio para el recurso `P
 @env DD_SPAN_SAMPLING_RULES=[{"resource": "POST /api/create_issue", "tags": { "priority":"high" }, "sample_rate":1.0}]
 ```
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Go][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Go][2].
 
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
 [2]: /es/tracing/trace_collection/dd_libraries/go
@@ -768,7 +775,7 @@ Por ejemplo, para recopilar `100%` de los tramos del servicio llamado `my-servic
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de Node.js][1].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de Node.js][1].
 
 [1]: /es/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
@@ -781,7 +788,7 @@ Por ejemplo, para recopilar `100%` de los tramos del servicio llamado `my-servic
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de PHP][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de PHP][2].
 
 [1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
 [2]: /es/tracing/trace_collection/dd_libraries/php
@@ -803,17 +810,23 @@ A partir de la versión [v2.18.0][1], para las aplicaciones .NET, establece las 
 Por ejemplo, para recopilar `100%` de los tramos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` tramos por segundo:
 
 ```
-@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+#using powershell
+$env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+
+#using JSON file   
+{
+    "DD_SPAN_SAMPLING_RULES": "[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\": 1.0, \"max_per_second\": 50}]"
+}
 ```
 
-Más información sobre los controles de muestreo en la [documentación de la librería de rastreo de .NET][2].
+Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de .NET][2].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
 [2]: /es/tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger"> El mecanismo de <a href="/tracing/legacy_app_analytics/">App Analytics</a> está totalmente obsoleto. Para ingerir tramos únicos sin la traza completa, utiliza la configuración del <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-tramos (spans)">muestreo del tramo único </a>. Para ingerir trazas completas, utiliza las configuraciones del <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">muestreo basado en la fase inicial</a>.</div>
+<div class="alert alert-danger"> El mecanismo <a href="/tracing/legacy_app_analytics/">App Analytics</a> está totalmente obsoleto. Para ingerir tramos individuales sin la traza completa, utiliza la configuración de <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">muestreo de tramo único</a>. Para ingerir trazas completas, utiliza las configuraciones de muestreo <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based</a>.</div>
 
 ## Tramos ingeridos por productos
 
@@ -881,5 +894,5 @@ Según tu configuración con los SDK de OpenTelemetry (mediante la utilización 
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: tracing/guide/remote_config
+[21]: /es/tracing/guide/remote_config/
 [22]: /es/opentelemetry/guide/ingestion_sampling_with_opentelemetry

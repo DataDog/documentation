@@ -11,18 +11,18 @@ title: Recopilación de logs de iOS
 ---
 ## Información general
 
-Envía logs a Datadog desde tus aplicaciones de iOS con [la librería de registro del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
+Envía logs a Datadog desde tus aplicaciones de iOS con [la biblioteca de registro del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
 
 * Loguear en Datadog en formato JSON de forma nativa.
 * Utilizar los atributos predeterminados y añadir atributos personalizados a cada log enviado.
 * Registrar las direcciones IP reales de los clientes y los Agents de usuario.
 * Aprovechar el uso optimizado de red con publicaciones masivas automáticas.
 
-La librería `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o posteriores.
+La biblioteca `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o posteriores.
 
 ## Configuración
 
-1. Declara la librería como una dependencia dependiente de tu gestor de paquete. Se recomienda el gestor de paquete Swift.
+1. Declara la biblioteca como una dependencia dependiente de tu gestor de paquete. Se recomienda el gestor de paquete Swift.
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -69,7 +69,7 @@ DatadogLogs.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 
@@ -349,7 +349,7 @@ El SDK cambia su comportamiento según el nuevo valor. Por ejemplo, si el consen
 
 Antes de que los datos se carguen en Datadog, se almacenan en texto claro en el directorio de caché (`Library/Caches`) de tu [entorno de prueba de aplicaciones][6]. El directorio de caché no puede ser leído por ninguna otra aplicación instalada en el dispositivo.
 
-Al redactar tu aplicación, habilita los logs de desarrollo para loguear en consola todos los mensajes internos del SDK con una prioridad igual o superior al nivel proporcionado.
+Al redactar tu aplicación, habilita los logs de desarrollo para registrar en consola todos los mensajes internos del SDK con una prioridad igual o superior al nivel proporcionado.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -500,7 +500,7 @@ Para más información, consulta [Empezando con etiquetas][5].
 
 Por defecto, los siguientes atributos se añaden a todos los logs enviados por un registrador:
 
-* `http.useragent` y sus propiedades extraídas `device` y `OS`
+* `http.useragent` y sus propiedades extraídas `device` y `OS` 
 * `network.client.ip` y sus propiedades geográficas extraídas (`country`, `city`)
 * `logger.version`, versión del SDK de Datadog
 * `logger.thread_name`(`main`, `background`)
@@ -512,13 +512,29 @@ Utiliza el método `addAttribute(forKey:value:)` para añadir un atributo person
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// Esto añade un atributo "device-model" con un valor de cadena
+// This adds an attribute "device-model" with a string value for this logger instance.
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Los atributos pueden añadirse globalmente en todas las instancias de logs (por ejemplo: nombre del servicio, entorno) utilizando:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This adds an attribute "device-model" with a string value in all Logs instances.
+Logs.addAttribute(forKey: "device-model", value: UIDevice.current.model)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -532,13 +548,29 @@ Utiliza el método `removeAttribute(forKey:)` para eliminar un atributo personal
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// Esto elimina el atributo "device-model" de todos los logs enviados en el futuro.
+// This removes the attribute "device-model" from all further logs sent from this logger instance.
 logger.removeAttribute(forKey: "device-model")
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger removeAttributeForKey:@"device-model"];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Para eliminar un atributo global de todas las instancias de logs:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This removes the attribute "device-model" from all further logs sent from all logger instances.
+Logs.removeAttribute(forKey: "device-model")
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs removeAttributeForKey:@"device-model"];
 ```
 {{% /tab %}}
 {{< /tabs >}}

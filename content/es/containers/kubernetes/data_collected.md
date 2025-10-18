@@ -2,6 +2,8 @@
 aliases:
 - /es/agent/kubernetes/metrics
 - /es/agent/kubernetes/data_collected
+description: Guía de referencia para las métricas y eventos recopilados por el Datadog
+  Agent de clústeres de Kubernetes
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación

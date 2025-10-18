@@ -3,8 +3,8 @@ guides:
   link: getting_started/agent/
   link_text: Empezando con el Agent
   title: Instalar el Agent
-- desc: Recopila métricas, trazas (traces) y logs con más de 850 integraciones incorporadas
-    para enviar a Datadog.
+- desc: Recopila métricas, trazas y logs con más de 1000 integraciones incorporadas
+    para enviarlos a Datadog.
   link: getting_started/integrations/
   link_text: Empezando con las integraciones
   title: Configurar integraciones
@@ -171,6 +171,11 @@ nav_sections:
       icon: internal-developer-portal-wui
       link: internal_developer_portal
       title: Portal interno para desarrolladores
+    - desc: Gestiona los avisos, la escalada y los horarios de guardia en una sola
+        plataforma
+      icon: on-call
+      link: service_management/on-call/
+      title: On-Call
 - nav_section:
   - name: Configuración
   - navtiles:

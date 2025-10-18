@@ -1,89 +1,46 @@
 ---
 app_id: journald
-app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10167
-    source_type_name: journald
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - recopilación de logs
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/journald/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: journald
-integration_id: journald
-integration_title: journald
+description: Monitoriza tus logs systemd-journald con Datadog.
 integration_version: 3.0.0
-is_public: true
-manifest_version: 2.0.0
-name: journald
-public_title: journald
-short_description: Monitoriza tus logs systemd-journald con Datadog.
+media: []
 supported_os:
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Log Collection
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Monitoriza tus logs systemd-journald con Datadog.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: journald
+title: journald
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Systemd-journald es un servicio de sistema que recopila y almacena datos de registro. 
-Crea y mantiene diarios estructurados e indexados basados en información de registro procedente de diversas fuentes.
+Systemd-journald es un servicio de sistema que recopila y almacena datos de generación de logs.
+Este servicio crea y conserva registros estructurados e indexados basados en la información de generación de logs procedente de diversas fuentes.
 
 ## Configuración
 
 ### Instalación
 
-El check de journald está incluido en el paquete del [Datadog Agent ][1].
+El check de journald está incluido en el paquete del [Datadog Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
 
-Los archivos del diario, por defecto, son propiedad del grupo del sistema systemd-journal y pueden ser leidos por él. Para empezar a recopilar tus logs de diario, debes hacer lo siguiente:
+Los archivos del registro, por defecto, son propiedad del grupo del sistema systemd-journal y pueden ser leidos por él. Para empezar a recopilar tus logs de registro, debes hacer lo siguiente:
 
-1. [Instala el Agent][2] en la instancia que ejecuta el diario.
-2. Añade el usuario `dd-agent` al grupo `systemd-journal` ejecutando:
-    ```text
-     usermod -a -G systemd-journal dd-agent
-    ```
+1. [Instala el Agent](https://app.datadoghq.com/account/settings/agent/latest) en la instancia que ejecuta el registro.
+1. Añade el usuario `dd-agent` al grupo `systemd-journal` ejecutando:
+   ```text
+    usermod -a -G systemd-journal dd-agent
+   ```
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
 Para configurar este check para un Agent que se ejecuta en un host:
 
-Edita el archivo `journald.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent][1] para empezar a recopilar logs.
+Edita el archivo `journald.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) para empezar a recopilar logs.
 
 #### Recopilación de logs
 
@@ -105,49 +62,43 @@ Para rellenar los atributos `source` y `service`, el Agent recopila `SYSLOG_IDEN
 
 **Nota**: Con Agent 7.17+, si `container_mode` se establece en `true`, el comportamiento por defecto cambia para logs procedentes de contenedores de Docker. El atributo `source` de tus logs se establecen automáticamente en el nombre corto de imagen correspondiente del contenedor en lugar de simplemente `docker`.
 
-[Reinicia el Agent][2].
+[Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-
-[1]: https://docs.datadoghq.com/es/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+{{% tab "En contenedores" %}}
+
+Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 #### Recopilación de logs
 
-
-La recopilación de logs está desactivada por defecto en Datadog Agent. Para activarla, consulta [recopilación de logs de Kubernetes][2].
+La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent. Para activarla, consulta [Recopilación de logs de Kubernetes](https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup).
 
 | Parámetro      | Valor                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "journald", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
-{{< /tabs >}}
 
+{{< /tabs >}}
 
 #### Funciones avanzadas
 
-##### Cambiar la localización del diario
+##### Cambiar la localización del registro
 
-Por defecto, el Agent busca el diario en las siguientes localizaciones:
+Por defecto, el Agent busca el registro en las siguientes localizaciones:
 
 - `/var/log/journal`
 - `/run/log/journal`
 
-Si tu diario se encuentra en otro lugar, añade un parámetro `path` con la ruta del diario correspondiente.
+Si tu registro se encuentra en otro lugar, añade un parámetro `path` con la ruta del registro correspondiente.
 
-##### Filtrar unidades del diario
+##### Filtrar unidades del registro
 
 Puedes filtrar unidades específicas _a nivel de sistema_ utilizando estos parámetros:
 
 - `include_units`: incluye todas las unidades de nivel de sistema especificadas.
 - `exclude_units`: excluye todas las unidades de nivel de sistema especificadas.
-
 
 Ejemplo:
 
@@ -177,13 +128,12 @@ logs:
           - '*'
 ```
 
-##### Filtrar los mensajes del diario
+##### Filtrar los mensajes del registro
 
 En el Datadog Agent versión `7.39.0`+, puedes filtrar mensajes arbitrarios utilizando pares de clave-valor con estos parámetros:
 
 - `include_matches`: incluye mensajes coincidentes con `key=value`
 - `exclude_matches`: excluye los mensajes que coinciden con `key=value`
-
 
 Ejemplo:
 
@@ -195,11 +145,11 @@ logs:
           - _TRANSPORT=kernel
 ```
 
-##### Seguimiento del mismo diario varias veces
+##### Seguimiento del mismo registro varias veces
 
 Si deseas informar de unidades con diferentes fuentes o etiquetas de servicio, éstas deben aparecer en configuraciones de journald separadas.
 
-Para ello debes identificar unívocamente la configuración del diario con un `config_id` (disponible en Agent `7.41.0` +).
+Para ello debes identificar unívocamente la configuración del registro con un `config_id` (disponible en Agent `7.41.0` +).
 
 ```yaml
 logs:
@@ -222,34 +172,28 @@ logs:
 
 Las etiquetas son fundamentales para encontrar información en entornos en contenedores altamente dinámicos, por lo que el Agent puede recopilar etiquetas de contenedor en logs de journald.
 
-Esto funciona automáticamente cuando el Agent se está ejecutando desde el host. Si estás utilizando la versión en contenedores del Datadog Agent, integra la ruta de tu diario y el siguiente archivo:
+Esto funciona automáticamente cuando el Agent se está ejecutando desde el host. Si estás utilizando la versión en contenedores del Datadog Agent, integra la ruta de tu registro y el siguiente archivo:
 
-- `/etc/machine-id`: esto asegura que el Agent puede consultar el diario almacenado en el host.
+- `/etc/machine-id`: esto asegura que el Agent puede consultar el registro almacenado en el host.
 
 ### Validación
 
-Ejecuta el [subcomando de estado][3] del Agent y busca `journald` en la sección Logs del Agent.
+[Ejecuta el [subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `journald` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
 
-journald no incluye ninguna métrica.
+Journald no incluye métricas.
 
 ### Checks de servicio
 
-journald no incluye ningún check de servicio.
+Journald no incluye checks de servicio.
 
 ### Eventos
 
-journald no incluye ningún evento.
+Journald no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][4].
-
-
-[1]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

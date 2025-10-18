@@ -36,6 +36,8 @@ aliases:
 - /es/videos/apm
 - /es/videos/aws
 - /es/videos/host-map
+description: Accede a cursos prácticos y tutoriales para conocer las funciones de
+  la plataforma Datadog, las prácticas recomendadas y las estrategias de implementación.
 title: Centro de aprendizaje de Datadog
 ---
 

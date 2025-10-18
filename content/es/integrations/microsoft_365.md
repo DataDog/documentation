@@ -1,35 +1,22 @@
 ---
+app_id: microsoft_365
 categories:
 - recopilación de logs
 - seguridad
-custom_kind: integration
-dependencies: []
-description: Conéctate a Microsoft 365 para extraer los logs de auditoría de una organización
-  a la plataforma de registro de Datadog.
-doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
-draft: false
+custom_kind: integración
+description: 'Visualiza los logs de auditoría de Microsoft 365 en Datadog desde servicios
+  como: Microsoft Teams, Power BI, Azure Active Directory, Dynamics 365 y más'
 further_reading:
 - link: https://www.datadoghq.com/blog/microsoft-365-integration/
   tag: Blog
   text: Recopilar y monitorizar logs de auditoría de Microsoft 365 con Datadog
-git_integration_title: microsoft_365
-has_logo: true
-integration_id: ''
-integration_title: Logs de auditoría y seguridad de Microsoft 365
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: microsoft_365
-public_title: Logs de auditoría y seguridad de Microsoft 365 y Datadog
-short_description: 'Visualiza los logs de auditoría de Microsoft 365 en Datadog desde
-  servicios como: Microsoft Teams, Power BI, Azure Active Directory, Dynamics 365
-  y más'
-team: web-integrations
-version: '1.0'
+title: Logs de auditoría y seguridad de Microsoft 365
 ---
-
-<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
+
+<div class="alert alert-warning">
+Si utilizas Cloud SIEM, Datadog recomienda utilizar la integración de <a href="https://docs.datadoghq.com/integrations/azure-active-directory/">Microsoft Entra ID</a> para una mejor cobertura de detección de seguridad.
+</div>
 
 Integra con Microsoft 365 para:
 
@@ -41,19 +28,19 @@ Integra con Microsoft 365 para:
 
 ### Instalación
 
-Usa el [cuadro de Microsoft 365 y Datadog][1] para instalar la integración.
+Utiliza el [ícono de Datadog Microsoft 365](https://app.datadoghq.com/integrations/microsoft-365) para instalar la integración.
 
 Haz clic en **Install a New Tenant** (Instalar un inquilino nuevo). Esto te indicará que debes iniciar sesión en tu cuenta de Microsoft 365 para obtener autorización. Debes iniciar sesión con una cuenta de administrador.
 
 De manera opcional, añade etiquetas (tags) personalizadas separadas por comas que se adjunten a cada log para este inquilino recién configurado, por ejemplo, `environment:prod,team:us`. Estas etiquetas se pueden usar para filtrar o analizar logs.
 
-**Nota**: Tu organización debe tener el [registro de auditoría habilitado][2] para usar el registro de auditoría de Datadog.
+**Nota**: Tu organización debe tener [activado el registro de auditoría](https://docs.microsoft.com/en-us/microsoft-365/compliance/turn-audit-log-search-on-or-off?view=o365-worldwide#turn-on-audit-log-search) para utilizar el registro de auditoría de Datadog.
 
 ## Datos recopilados
 
 ### Logs
 
-Puedes recopilar logs de auditoría para todos los servicios que se mencionan en los [esquemas de la API de gestión de Office 365][3], como:
+Puedes recopilar logs de auditoría de todos los servicios mencionados en los [esquemas de la API de gestión de Office 365](https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema#office-365-management-api-schemas), como:
 
 - Microsoft Teams
 - Power BI
@@ -65,90 +52,90 @@ Puedes recopilar logs de auditoría para todos los servicios que se mencionan en
 La integración de Microsoft 365 produce un evento de log por log de auditoría. Los logs recopilados se etiquetan con la fuente `microsoft-365`. Haz clic a continuación para obtener una lista de fuentes de log comunes con resúmenes y enlaces a consultas de log preestablecidas en Datadog.
 
 <details>
-  <summary><strong>Haz clic para ver las fuentes de log comunes</strong></summary>
+  <summary><strong>Haz clic para ver las sources (fuentes) de logs habituales</strong></summary>
 
-[`AirInvestigation`][4]
-: Relacionado con las investigaciones de Advanced eDiscovery y Advanced Threat Protection (ATP) dentro de Microsoft 365. Estos logs contienen información sobre incidencias de seguridad, investigaciones y acciones tomadas para mitigar amenazas, como alertas, pasos de corrección y datos forenses.
+[`AirInvestigation`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AAirInvestigation%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Relacionado con investigaciones de Advanced eDiscovery y Advanced Threat Protection (ATP) en Microsoft 365. Estos logs contienen información sobre incidents (incidentes) de seguridad, investigaciones y medidas tomadas para mitigar amenazas, como alertas, steps (UI) / pasos (generic) de corrección y datos forenses.
 
-[`Audit.AzureActiveDirectory`][5]
-: Representa a los logs que genera Azure Active Directory (Azure AD), el servicio de gestión de identidad y acceso basado en la nube de Microsoft. Los logs de Azure AD proporcionan información sobre las actividades de inicio de sesión de los usuarios, la gestión de directorios y grupos, el acceso a las aplicaciones, y los eventos relacionados con la seguridad. Permite a las organizaciones gestionar el acceso de los usuarios y detectar posibles riesgos de seguridad.
+[`Audit.AzureActiveDirectory`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AAzureActiveDirectory%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Representa logs generados Azure Active Directory (Azure AD), identidad basada en la nube de Microsoft y servicio de gestión de acceso. Los logs de Azure AD brindan información sobre las actividades de inicio de sesión del usuario, gestión de grupos y directorios, acceso a aplicaciones y eventos relacionados con la seguridad. Permite que las organizaciones gestionen el acceso del usuario y detecten posibles riesgos de seguridad.
 
-[`Audit.Exchange`][6]
-: Se refiere a los logs que genera Microsoft Exchange Server. Los logs de Exchange contienen información sobre la entrega de correos electrónicos, el acceso al buzón, las conexiones de clientes y las acciones administrativas dentro del entorno de Exchange. Ayuda a las organizaciones a monitorizar y solucionar problemas relacionados con correos electrónicos.
+[`Audit.Exchange`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AExchange%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se relaciona con logs generados por Microsoft Exchange Server. Los logs de Exchange contienen información sobre entrega de correo electrónico, acceso al buzón, conexiones de clientes y acciones administrativas en el entorno de Exchange. Ayda a las organizaciones a monitorizar y solucionar problemas relacionados con el correo electrónico.
 
-[`Audit.General`][7]
-: Contiene información sobre diversas actividades y eventos que se producen en tu entorno de Microsoft 365, como actividades de usuarios y administradores, eventos del sistema, incidencias de seguridad y otras acciones que no están directamente asociadas con servicios específicos como Exchange o SharePoint.
+[`Audit.General`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Contiene información sobre distintas actividades y eventos que se producen en tu entorno de Microsoft 365, como actividades del usuario y del administrador, eventos del sistema, incidents (incidentes) de seguridad y otras medidas que no se relacionan directamente con servicios específicos como Exchange o SharePoint.
 
-[`Audit.MicrosoftForms`][8]
-: Representa a los logs que genera Microsoft Forms, una herramienta para crear encuestas, cuestionarios y formularios. Los logs de Forms incluyen información sobre la creación de formularios, el acceso, las respuestas y las actividades de los usuarios. Ayuda a las organizaciones a rastrear y proteger los datos de sus formularios.
+[`Audit.MicrosoftForms`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftForms%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Representa logs generados por Microsoft Forms, una herramienta para crear encuestas, cuestionarios y formularios. Los logs de formularios incluyen información sobre creación de formularios, acceso, respuestas y actividades del usuario. Brinda asistencia a las organizaciones en el rastreo y la obtención de datos de sus formularios.
 
-[`Audit.MicrosoftStream`][9]
-: Hace referencia a los logs que genera Microsoft Stream, una plataforma para compartir vídeos dentro del ecosistema de Microsoft. Los logs de Stream contienen información sobre las cargas de vídeos, el acceso, el uso compartido y las actividades de los usuarios. Ayuda a las organizaciones a rastrear y proteger su contenido de vídeos.
+[`Audit.MicrosoftStream`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftStream%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs generados por Microsoft Stream, una plataforma para compartir videos en el ecosistema de Microsoft. Los logs de Stream contienen información sobre cargas de videos, acceso, compartir y actividades del usuario. Ayuda a las organizaciones a rastrear y obtener su contenido de video.
 
-[`Audit.MicrosoftTeams`][10]
-: Incluye los logs que genera Microsoft Teams, una plataforma de colaboración y comunicación. Los logs de Teams incluyen información sobre las actividades de los usuarios, la gestión de equipos y canales, el uso compartido de archivos, y los eventos de reuniones. Ayuda a las organizaciones a monitorizar las interacciones de los usuarios y garantizar una colaboración segura.
+[`Audit.MicrosoftTeams`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftTeams%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Comprende logs producidos por Microsoft Teams, una plataforma de colaboración y comunicación. Los logs de Teams incluyen información sobre actividades del usuario, gestión de equipos y canales, archivos compartidos y eventos de reuniones. Ayuda a las organizaciones a monitorizar interacciones de usuarios y garantizar una colaboración segura.
 
-[`Audit.OneDrive`][11]
-: Hace referencia a los logs que genera OneDrive, el servicio de sincronización y almacenamiento de archivos basado en la nube de Microsoft. Los logs de OneDrive incluyen información sobre el acceso a los archivos, el uso compartido, las modificaciones y las actividades de los usuarios. Ayuda a las organizaciones a monitorizar y proteger sus datos basados ​​en la nube.
+[`Audit.OneDrive`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AOneDrive%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs generados por OneDrive, el servicio de almacenamiento y sincronización de archivos basado en la nube de Microsoft.  Los logs de OneDrive incluyen información sobre acceso a archivos, compartida, modificaciones y actividades del usuario. Ayuda a las organizaciones a monitorizar y obtener datos basados en la nube.
 
-[`Audit.PowerBI`][12]
-: Hace referencia a los logs que genera Power BI, la herramienta de análisis empresarial y visualización de datos de Microsoft. Los logs de Power BI contienen información sobre el acceso a los datos, la generación de informes, las actividades del dashboard y las interacciones de los usuarios. Ayuda a las organizaciones a monitorizar y proteger sus datos de inteligencia empresarial.
+[`Audit.PowerBI`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3APowerBI%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs producidos por Power BI, la herramienta de análisis comerciales y visualización de datos de Microsoft. Los logs de Power BI contienen información sobre acceso a datos, generación de informes, actividades de dashboard e interacciones de usuarios. Ayuda a las organizaciones a monitorizar y obtener sus datos de inteligencia comercial.
 
-[`Audit.Project`][13]
-: Hace referencia a los logs de auditoría de Microsoft Project, una herramienta de gestión de proyectos dentro del conjunto de aplicaciones de Microsoft 365. Estos logs capturan eventos relacionados con actividades de los usuarios, acciones administrativas y eventos del sistema dentro de Microsoft Project, como la creación de proyectos, actualizaciones de tareas, asignación de recursos y cambios de permisos.
+[`Audit.Project`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AProject%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs de auditoría de Microsoft Project, una herramienta de gestión de projects (proyectos) en la serie Microsoft 365. Estos logs capturan eventos relacionados con actividades del usuario, medidas administrativas y eventos del sistema en Microsoft Project, como creación de projects (proyectos), actualizaciones de tareas, asignación de recursos y cambios de permisos.
 
-[`Audit.SharePoint`][14]
-: Hace referencia a los logs que genera Microsoft SharePoint. Los logs de SharePoint registran el acceso de los usuarios, las modificaciones de documentos, la administración del sitio y los eventos relacionados con la seguridad. Permite a las organizaciones mantener la integridad de los datos y proteger sus sitios y contenidos de SharePoint.
+[`Audit.SharePoint`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASharePoint%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs producidos por Microsoft SharePoint. Los logs de SharePoint registran el acceso del usuario, modificaciones de documentos, administración de sitios y eventos relacionados con la seguridad. Permite que las organizaciones mantengan la integridad de los datos y obtengan sus sitios y contenido de SharePoint.
 
-[`Audit.SkypeForBusiness`][15]
-: Hace referencia a los logs de auditoría de las actividades de Skype Empresarial. Estos logs capturan eventos relacionados con acciones administrativas y de usuarios dentro del servicio de Skype Empresarial, como registros de detalles de llamadas, registros de detalles de conferencias, actividades de mensajería y acciones de administración, como la administración de usuarios y actualizaciones de políticas.
+[`Audit.SkypeForBusiness`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASkypeForBusiness%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a los logs de auditoría de actividades de Skype for Business. Estos logs capturan eventos relacionados con acciones del usuario y administrativas en el servicio de Skype for Business, como registros de detalles de llamadas, registros de detalles de conferencias, actividades de mensajería y medidas administrativas como actualizaciones de gestión y políticas del usuario.
 
-[`Audit.Yammer`][16]
-: Representa a los logs que genera Yammer, una plataforma de redes sociales para empresas. Los logs de Yammer incluyen información sobre las actividades de los usuarios, la gestión de grupos y comunidades, y el uso compartido de contenido. Ayuda a las organizaciones a monitorizar y proteger sus redes sociales internas.
+[`Audit.Yammer`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AYammer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Representa logs producidos por Yammer, una plataforma de redes sociales para empresas. Los logs de Yammer incluyen información sobre actividades del usuario, gestión de grupos y comunidades y contenido compartido. Ayuda a las organizaciones a monitorizar y obtener sus redes sociales internas.
 
-[`ComplianceManager`][17]
-: Relacionado con la herramienta Microsoft Compliance Manager, que ayuda a las organizaciones a evaluar, gestionar y rastrear sus actividades de cumplimiento en Microsoft 365. Estos logs contienen información sobre evaluaciones de cumplimiento, tareas, acciones de mejora y progreso hacia el cumplimiento de los requisitos normativos.
+[`ComplianceManager`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AComplianceManager%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se relaciona con la herramienta Microsoft Compliance Manager, que ayuda a las organizaciones a evaluar, gestionar y rastrear sus actividades de cumplimiento en Microsoft 365. Estos logs contienen información sobre evaluaciones de complimiento, tareas, medidas de mejoramiento y progreso hacia requisitos regulatorios de reuniones.
 
 `DLP.All`
-: Captura eventos relacionados con políticas, detecciones y acciones de DLP en todos los servicios de Microsoft 365, incluidos Exchange, SharePoint, OneDrive, Microsoft Teams y otros. Estos logs proporcionan información sobre infracciones de políticas, detecciones de información confidencial y acciones tomadas para proteger los datos, como bloquear contenido, notificar a usuarios o administradores, y más.
+: Captura eventos relacionados con políticas de DLP, detecciones y acciones en todos los servicios de Microsoft 365, incluidos Exchange, SharePoint, OneDrive, Microsoft Teams y otros. Estos logs brindan información sobre incumplimientos de políticas detecciones de información confidencial y las medidas tomadas para proteger los datos, como bloqueo de contenido, notificación a usuarios o administradores y más.
 
 `Dynamics365`
-: Recopila eventos de cualquiera de tus servicios y aplicaciones de [Microsoft Dynamics 365][18].
+: Recopila eventos de cualquiera de tus servicios y aplicaciones de [Microsoft Dynamics 365](https://learn.microsoft.com/dynamics365/).
 
-[`MicrosoftFlow`][19]
-: Asociado con el servicio de Microsoft Power Automate (antes conocido como Microsoft Flow), una plataforma basada en la nube que permite a los usuarios crear y gestionar flujos de trabajo automatizados entre varias aplicaciones y servicios. Estos logs capturan eventos relacionados con ejecuciones de flujos de trabajo, errores y acciones administrativas, como la creación, actualización o eliminación de flujos.
+[`MicrosoftFlow`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftFlow%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Asociado con el servicio Microsoft Power Automate (anteriormente denominado Microsoft Flow), una plataforma basada en la nube que permite que los usuarios creen y gestionen workflows (UI) / procesos (generic) automatizados entre distintas aplicaciones y servicios. Estos logs capturan eventos relacionados con ejecuciones de workflows, errores y medidas administrativas, como la creación, actualización o eliminación de flujos.
 
-[`Mip`][20]
-: Se refiere a los logs que genera Microsoft Information Protection (MIP), un conjunto de herramientas y servicios para clasificar, etiquetar y proteger datos confidenciales. Los logs de MIP proporcionan información sobre la clasificación de datos, el acceso y los eventos de protección. Permite a las organizaciones gestionar y proteger su información confidencial.
+[`Mip`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMip%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se relaciona con logs generados por Microsoft Information Protection (MIP), una serie de herramientas y servicios para clasificar, etiquetar y proteger datos confidenciales. Los logs de MIP brindan información sobre eventos de clasificación, acceso y protección de datos. Permite que las organizaciones gestionen y aseguren su información confidencial.
 
-[`MyAnalytics`][21]
-: Relacionado con el servicio de Microsoft MyAnalytics, que proporciona información sobre los hábitos de trabajo y las tendencias de productividad de una persona dentro del conjunto de aplicaciones de Microsoft 365. Estos logs contienen información sobre las actividades de los usuarios, como el tiempo dedicado a reuniones, correos electrónicos, colaboración y tiempo de concentración.
+[`MyAnalytics`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMyAnalytics%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Relacionado con el servicio Microsoft MyAnalytics, que brinda información sobre los hábitos laborales y las tendencias de productividad de una persona en la serie Microsoft 365. Estos logs contienen información sobre actividades de usuarios, el tiempo transcurrido en reuniones, correos electrónico, colaboración y tiempo de concentración.
 
-[`PowerApps`][22]
-: Hace referencia a los logs que genera Power Apps, la plataforma de desarrollo de aplicaciones de poco código de Microsoft. Los logs de Power Apps contienen información sobre la creación de aplicaciones, el acceso, el uso y las actividades del usuario.
+[`PowerApps`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3APowerApps%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs generados por Power Apps, la plataforma  de código mínimo para el desarrollo de aplicaciones de  Microsoft. Los logs de Power Apps contienen información sobre creación de aplicaciones, acceso, uso y actividades del usuario.
 
-[`Quarantine`][23]
-: Representa a los logs que generan los sistemas de cuarentena de correos electrónicos que se usan para aislar y revisar los correos electrónicos potencialmente maliciosos o no deseados. Los logs de cuarentena incluyen información sobre los correos electrónicos en cuarentena, los detalles del remitente y el destinatario, y las medidas adoptadas. Ayuda a las organizaciones a gestionar la seguridad de los correos electrónicos y a prevenir amenazas.
+[`Quarantine`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AQuarantine%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Representa logs generados por sistemas de cuarentena de correo electrónico utilizados para aislar y revisar correos electrónicos posiblemente maliciosos o no deseados. Los logs de cuarentena incluyen información sobre correos electrónicos en cuarentena, datos del remitente y del destinatario y medidas tomadas. Ayuda a las organizaciones a gestionar la seguridad del correo electrónico email y a protegerse de amenazas.
 
-[`Rdl`][24]
-: Relacionado con SQL Server Reporting Services (SSRS), una plataforma de generación de informes basada en servidores que permite a los usuarios crear, publicar y gestionar informes en varios formatos. La fuente de log Rdl captura eventos relacionados con la ejecución de informes, el acceso y las acciones administrativas, como la generación, actualización o eliminación de informes.
+[`Rdl`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ARdl%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Relacionado con SQL Server Reporting Services (SSRS), una plataforma de informes basada en el servidor que permite que los usuarios creen, publiquen y gestionen informes en distintos formatos. La source (fuente) de logs de Rdl captura eventos relacionados con la ejecución de informes, el acceso y las medidas administrativas, como generar, actualizar o eliminar informes.
 
-[`SecurityComplianceCenter`][25]
-: Se refiere a los logs que genera el Centro de seguridad y cumplimiento de Microsoft, una plataforma centralizada para gestionar las funciones de seguridad y cumplimiento en todos los servicios de Microsoft 365. Estos logs proporcionan información sobre incidencias de seguridad, infracciones de políticas y actividades de gestión del cumplimiento. Ayuda a las organizaciones a mantener un entorno de TI seguro y que cumpla con las normas.
+[`SecurityComplianceCenter`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityComplianceCenter%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Se refiere a logs generados por Microsoft's Security & Compliance Center, una plataforma centralizada para gestionar funciones de seguridad y cumplimiento en todos los servicios de Microsoft 365. Estos logs brindan información sobre incidents (ncidentes) de seguridad, incumplimientos de políticas y actividades de gestión de cumplimiento. Ayuda a las organizaciones a mantener un entorno seguro y cumplidor de TI.
 
-[`SecurityMonitoringEntityReducer`][26]
-: Asociado con logs de eventos de seguridad y actividades de agregación de alertas en Microsoft 365. Estos logs proporcionan información sobre eventos de seguridad, anomalías y posibles amenazas detectadas en el entorno de Microsoft 365.
+[`SecurityMonitoringEntityReducer`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityMonitoringEntityReducer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Asociado con logs de eventos de seguridad y actividades de agregación de alertas en Microsoft 365. Estos logs brindan informaciones sobre eventos de seguridad, anomalías y posibles amenazas detectadas en todo el entorno de Microsoft 365.
 
-[`ThreatIntelligence`][27]
-: Incluye logs que generan los sistemas o herramientas de inteligencia de amenazas que recopilan, analizan y comparten información sobre amenazas de seguridad emergentes. Los logs de inteligencia de amenazas proporcionan información sobre posibles amenazas, vulnerabilidades e indicadores de riesgo. Ayuda a las organizaciones a defenderse de manera proactiva contra los ciberataques.
+[`ThreatIntelligence`](https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AThreatIntelligence%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true)
+: Comprende logs generados por sistemas o herramientas de inteligencia de amenazas que recopilan, analizan y comparten información sobre amenazas a la seguridad surgidas. Los logs de inteligencia de amenazas brindan información sobre posibles amenazas, vulnerabilidades e indicadores de compromiso. Ayuda a las organizaciones a defenderse en forma proactiva de ciberataques.
 
 </details>
 
-Consulta los [esquemas de la API de gestión de Office 365][3] para obtener la lista completa de posibles fuentes de log.
+Consulta [Esquemas de la API de gestión de Office 365](https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema#office-365-management-api-schemas) para ver la lista completa de posibles sources (fuentes) de logs.
 
 ### Seguridad
 
-Puedes usar [Cloud SIEM][28] de Datadog para detectar amenazas en tiempo real en tu entorno con logs de auditoría de Microsoft 365. Consulta la lista completa de [reglas de detección de Microsoft 365 predefinidas][29] o [crea una regla de detección personalizada][30].
+Puedes utilizar [Cloud SIEM] de Datadog (https://docs.datadoghq.com/security/#cloud-siem) para detectar amenazas en tiempo real en tu entorno con logs de auditoría de Microsoft 365. Consulte la lista completa de [reglas de detección predefinidas de Microsoft 365](https://docs.datadoghq.com/security/default_rules/?category=cat-cloud-siem-log-detection&search=microsoft+365) o [crea una regla de detección personalizada](https://docs.datadoghq.com/security/detection_rules/#create-detection-rules).
 
 {{< img src="integrations/microsoft_365/microsoft_365_rules.png" alt="La página de reglas de seguridad predefinidas con Cloud SIEM seleccionado y Microsoft 365 ingresado en la barra de búsqueda" style="width:80;" popup="true">}}
 
@@ -156,50 +143,18 @@ Puedes usar [Cloud SIEM][28] de Datadog para detectar amenazas en tiempo real en
 
 La integración de Microsoft 365 no recopila métricas.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de Microsoft 365 no recopila checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 La entrada de logs de Datadog solo permite retrotraer eventos de log hasta 18 horas atrás. Se descartan los eventos de log con una marca de tiempo anterior.
 
 Datadog no es compatible con los inquilinos de DoD, gobierno de CCG o gobierno de GCC High, porque requieren diferentes endpoints de Microsoft.
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][31].
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog](https://docs.datadoghq.com/help/).
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/integrations/microsoft-365
-[2]: https://docs.microsoft.com/en-us/microsoft-365/compliance/turn-audit-log-search-on-or-off?view=o365-worldwide#turn-on-audit-log-search
-[3]: https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema#office-365-management-api-schemas
-[4]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AAirInvestigation%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[5]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AAzureActiveDirectory%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[6]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AExchange%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[7]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[8]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftForms%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[9]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftStream%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[10]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftTeams%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[11]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AOneDrive%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[12]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3APowerBI%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[13]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AProject%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[14]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASharePoint%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[15]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASkypeForBusiness%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[16]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AYammer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[17]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AComplianceManager%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[18]: https://learn.microsoft.com/dynamics365/
-[19]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMicrosoftFlow%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[20]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMip%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[21]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AMyAnalytics%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[22]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3APowerApps%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[23]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AQuarantine%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[24]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ARdl%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[25]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityComplianceCenter%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[26]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityMonitoringEntityReducer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[27]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AThreatIntelligence%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[28]: https://docs.datadoghq.com/es/security/#cloud-siem
-[29]: https://docs.datadoghq.com/es/security/default_rules/?category=cat-cloud-siem-log-detection&search=microsoft+365
-[30]: https://docs.datadoghq.com/es/security/detection_rules/#create-detection-rules
-[31]: https://docs.datadoghq.com/es/help/

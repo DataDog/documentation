@@ -5,6 +5,8 @@ algolia:
   subcategory: Permisos de Rol en Datadog
 aliases:
 - /es/account_management/faq/managing-global-role-permissions
+description: Referencia completa de los permisos de Datadog, incluidas los roles gestionados,
+  los roles personalizados, los permisos confidenciales y la lista de permisos.
 disable_toc: true
 further_reading:
 - link: /account_management/rbac/
@@ -47,17 +49,19 @@ El modo de vista previa ofrece a los administradores de tu organización la posi
 
 Por defecto, los usuarios existentes están asociados a uno de los tres roles gestionados:
 
-- Administrador Datadog
-- Datadog Estándar
-- Datadog Solo lectura
+- Rol de administrador de Datadog
+- Rol estándar de Datadog
+- Rol de sólo lectura de Datadog
 
-Todos los usuarios con uno de estos roles pueden leer todos los tipos de datos, excepto los recursos [de lectura restringida individualmente][1]. Los usuarios Administradores y Estándar tienen permisos de escritura sobre los recursos. Los usuarios Administradores tienen permisos adicionales de lectura y escritura para los recursos sensibles relacionados con la gestión de usuarios, la gestión de la organización, la facturación y el uso.
+Todos los usuarios con uno de estos roles pueden leer datos, excepto los recursos [con restricción de lectura individual][1]. Los usuarios Admin y Standard tienen permisos de escritura sobre los recursos. Los usuarios Admin tienen permisos adicionales de lectura y escritura para activos confidenciales relacionados con la gestión de usuarios, la gestión de la organización, la facturación y el uso.
 
 Los roles gestionados son creados y mantenidos por Datadog. Sus permisos pueden ser actualizados automáticamente por Datadog a medida que se añaden nuevas funciones o cambian los permisos. Los usuarios no pueden modificar los roles gestionados directamente, pero pueden clonarlos para crear [roles personalizados](#custom-roles) con permisos específicos. Si es necesario, los usuarios pueden eliminar roles gestionados de sus cuentas.
 
 ### Roles personalizados
 
 Crea un rol personalizado para combinar permisos en nuevos roles. Un rol personalizado te permite definir una persona, por ejemplo, un administrador de facturación, y luego asignar los permisos apropiados para ese rol. Después de crear un rol, asigna permisos a este rol o elimínalos directamente [updating the role in Datadog (actualizando el rol en Datadog)][2], o a través de la [Datadog Permission API (API de permiso de Datadog)][3].
+
+A diferencia de los roles gestionados, los roles personalizados no reciben nuevos permisos cuando Datadog lanza nuevos productos y funciones. Los roles personalizados solo reciben nuevos permisos para mantener la compatibilidad cuando Datadog lanza un nuevo permiso que bloquea una funcionalidad existente.
 
 **Nota**: Al añadir un nuevo rol personalizado a un usuario, asegúrate de eliminar el rol de Datadog gestionado, asociado a ese usuario, para aplicar los permisos del nuevo rol.
 

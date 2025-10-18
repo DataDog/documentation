@@ -17,7 +17,7 @@ title: Lista de infraestructuras
 
 ## Información general
 
-La lista de infraestructuras muestra todos tus hosts con actividad durante las últimas dos horas (por defecto) y hasta una semana, monitorizados por Datadog. Busca tus hosts o agrúpalos por etiquetas (tags). En Datadog, ve a [**infraestructura > Hosts**][10] para ver la lista de infraestructuras. Esta lista no debe utilizarse para estimar tu facturación por el host de la infraestructura. Para obtener más información sobre facturación, consulta la página [Facturación][11].
+La lista de infraestructuras te ofrece un inventario en tiempo real de todos los hosts que se comunican con Datadog a través de las integraciones en el Agent o en la nube. En forma predeterminada, muestra los hosts con actividad en las últimas dos horas, pero puedes ampliar la vista para cubrir hasta una semana. Busca tus hosts o agrúpalos por etiquetas. En Datadog, ve a [**Infraestructure > Hosts**][10]  (Infraestructura > Hosts) para ver la lista de infraestructuras. Esta lista no debe utilizarse para estimar la facturación de tu host de infraestructura. Consulta la page (página) de [facturación][11] para obtener más información sobre la facturación.
 
 ## Hosts
 
@@ -47,7 +47,7 @@ Carga 15
 Aplicaciones
 : Las integraciones de Datadog que informan métricas del host.
 
-Sistema operativo 
+Sistema operativo
 : El sistema operativo rastreado.
 
 Plataforma en la nube
@@ -74,6 +74,7 @@ Haz clic en un host para ver más detalles, incluido:
 - [contenedores][4]
 - [logs][5] (si se encuentra habilitado)
 - [Configuración del Agent](#agent-configuration) (si se encuentra habilitado)
+- [Configuración del recopilador de OpenTelemetry](#OpenTelemetry-collector-configuration) (si está activada)
 
 {{< img src="infrastructure/index/infra-list2.png" alt="Detalles del host de la lista de infraestructuras" style="width:100%;">}}
 
@@ -85,17 +86,26 @@ Datadog crea alias para nombres de host cuando hay varios nombres unívocos para
 
 #### Configuración del Agent
 
-El Agent puede enviar su propia configuración a Datadog para que se muestre en la sección `Agent Configuration` del panel de detalles del host.
+Puedes ver y gestionar las configuraciones del Agent en toda tu infraestructura utilizando [Fleet Automation][12].
 
-La configuración del Agent no incluye información confidencial y sólo contiene la configuración que has establecido mediante el archivo de configuración o las variables de entorno. Los cambios de configuración se actualizan cada 10 minutos.
+Para ver las configuraciones del Agent:
+1. Haz clic en **Open Host** (Abrir host) en la esquina superior derecha del panel de detalles del host.
+2. Selecciona **View Agent Configurations** (Ver configuraciones del Agent) en el menú desplegable para ir directamente a Fleet Automation.
 
-La vista de la configuración del Agent está activada en forma predeterminada en el Agent versión >= 7.47.0/6.47.0. En el Agent versiones >= 7.39/6.39, puedes activarla manualmente:
+{{< img src="infrastructure/index/infra-list-config-4.png" alt="Ver configuraciones del Agent en Fleet Automation" style="width:100%;">}}
 
-Para activar o desactivar la vista de la configuración:
-- Configura el valor de `inventories_configuration_enabled` en tu [archivo de configuración del Agent][6] en `true` para activar la vista de configuración o `false` para desactivarla.
-- También puedes utilizar la variable de entorno`DD_INVENTORIES_CONFIGURATION_ENABLED` para activar o desactivar la vista de configuración.
+#### Configuración de OpenTelemetry Collector
 
-{{< img src="infrastructure/index/infra-list-config3.png" alt="La vista de configuración del Agent" style="width:100%;">}}
+Cuando la [extensión de Datadog][14] está configurada con tu recopilador de OpenTelemetry, puedes ver la configuración del recopilador y la información de creación directamente en el panel de detalles del host de la lista de infraestructuras. La extensión de Datadog proporciona visibilidad de tu flota de recopiladores desde la interfaz de usuario de Datadog, lo que te ayuda a gestionar y depurar tus despliegues de recopiladores de OpenTelemetry.
+
+Para ver las configuraciones del recopilador de OpenTelemetry:
+1. Haz clic en un host que ejecute el recopilador de OpenTelemetry en la lista Infraestructuras.
+2. En el panel de detalles del host, selecciona la pestaña **OpenTelemetry Collector** (Recopilador de OpenTelemetry) para ver la información de creación y la configuración completa del recopilador.
+
+Para obtener instrucciones y requisitos de configuración detallados, como la coincidencia de nombres de host y la configuración de pipeline, consulta la [documentación principal de la extensión de Datadog][14].
+
+{{< img src="infrastructure/index/infra-list-config-OpenTelemetry.png" alt="Ver configuraciones del recopilador de OpenTelemetry en la lista de infraestructuras" style="width:100%;">}}
+
 
 ### Exportar
 
@@ -106,7 +116,7 @@ Para obtener una lista con formato JSON de tus hosts que informan a Datadog, uti
 
 #### Agent version
 
-En ciertas ocasiones, también puede resultar útil auditar tus versiones del Agent para asegurarte de que estás ejecutando la última versión. Para ello, utiliza el [script get_host_agent_list][9], que aprovecha el enlace permanente de JSON para generar los Agents en ejecución actuales con sus números de versión. También puedes utilizar el script `json_to_csv` para convertir el resultado JSON en un archivo CSV.
+Puede ser útil auditar tus versiones del Agent para asegurarte de que estés ejecutando la última versión. Para ello, utiliza el [script get_host_agent_list][9], que aprovecha el vínculo permanente a JSON para mostrar los Agents que se están ejecutando con los números de versión. También hay un script `json_to_csv` para convertir la salida JSON en un archivo CSV.
 
 #### Sin Agent
 
@@ -142,7 +152,6 @@ for host in infra['rows']:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /es/agent/faq/how-datadog-agent-determines-the-hostname/
 [2]: /es/getting_started/tagging/
 [3]: /es/metrics/
@@ -154,3 +163,6 @@ for host in infra['rows']:
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/es/account_management/billing/
+[12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
+[13]: /es/agent/fleet_automation
+[14]: /es/opentelemetry/integrations/datadog_extension/

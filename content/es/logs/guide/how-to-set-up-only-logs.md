@@ -11,7 +11,7 @@ further_reading:
 title: Uso exclusivo del Datadog Agent para la recopilación de logs
 ---
 
-<div class="alert alert-warning">La Monitorización de la infraestructura es un requisito previo para usar APM. Si eres cliente de APM, no desactives la recopilación de métricas o podrías perder información importante de telemetría y recopilación de métricas.</div>
+<div class="alert alert-warning">La monitorización de la infraestructura es un requisito previo para utilizar APM. Si eres cliente de APM, no desactives la recopilación de métricas, ya que podrías perder información importante de telemetría y recopilación de métricas.</div>
 
 Para deshabilitar las cargas útiles, debes ejecutar la versión 6.4 o posterior del Agent. Esto deshabilita el envío de datos de métricas (incluidas las métricas personalizadas) para que los hosts dejen de aparecer en Datadog. Sigue estos pasos:
 

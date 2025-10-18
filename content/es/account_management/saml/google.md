@@ -1,6 +1,9 @@
 ---
 aliases:
 - /es/account_management/faq/how-do-i-configure-google-as-a-saml-idp/
+description: Configura Google como proveedor de identidad SAML para Datadog con los
+  detalles del proveedor de servicios y la asignación de atributos para un inicio
+  de sesión único seguro.
 further_reading:
 - link: /account_management/saml/
   tag: Documentación

@@ -2,6 +2,8 @@
 aliases:
 - /es/graphing/faq/how-to-graph-percentiles-in-datadog
 - /es/graphing/guide/how-to-graph-percentiles-in-datadog
+description: Envía datos de histograma a través de DogStatsD para generar métricas
+  de percentiles, incluidos los percentiles 95 y 50, la media, el máximo y el recuento.
 title: ¿Cómo representar gráficamente los percentiles en Datadog?
 ---
 

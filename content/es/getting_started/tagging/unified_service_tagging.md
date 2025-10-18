@@ -5,6 +5,9 @@ algolia:
   - unificado
   - servicio unificado
   - etiquetas (tags) de servicios
+description: Conecta la telemetría a través de trazas, métricas y logs utilizando
+  etiquetas estandarizadas de entorno, servicio y versión para una monitorización
+  coherente.
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentación
@@ -45,7 +48,7 @@ Estas tres etiquetas (tags) te permiten:
 
 | Lenguaje         | Versión mínima del rastreador |
 |--------------|------------|
-| .NET    |  1.17.0 o posterior       |
+| .NET    |  1.17.0+       |
 | C++    |  v0.1.0 o posterior       |
 | Go         |  1.24.0 o posterior       |
 | Java   |  0.50.0 o posterior      |
@@ -131,7 +134,7 @@ También puedes utilizar las variables de atributos de recursos de OpenTelemetry
          - name: OTEL_SERVICE_NAME
            value: "<SERVICE>"
 ```
-<div class="alert alert-danger"><strong>Nota</strong>: La variable de entorno <code>OTEL_SERVICE_NAME</code> tiene prioridad sobre el atributo <code>service.name</code> de la variable de entorno <code>OTEL_RESOURCE_ATTRIBUTES</code>.</div>
+<div class="alert alert-danger">La variable de entorno <code>OTEL_SERVICE_NAME</code> tiene prioridad sobre el atributo <code>service.name</code> de la variable de entorno <code>OTEL_RESOURCE_ATTRIBUTES</code>.</div>
 
 ##### Configuración parcial
 
@@ -210,7 +213,7 @@ containers:
 
 Puedes utilizar la etiqueta (tag) `version` en APM para [monitorizar despliegues][7] e identificar despliegues de código fallidos mediante la [detección automática de despliegues fallidos][8].
 
-Para los datos de APM, Datadog configura la etiqueta (tag) `version` en el siguiente orden de prioridad. Si configuras `version` manualmente, Datadog no anula su valor `version`.
+Para datos de APM, Datadog configura la etiqueta (tag) `version` en el siguiente orden de prioridad. Si configuras `version` manualmente, Datadog no anula su valor `version`.
 
 | Prioridad         | Valor de versión |
 |--------------|------------|
@@ -287,7 +290,7 @@ Como se explica en la configuración completa, estas etiquetas (labels) se puede
 
 Puedes utilizar la etiqueta (tag) `version` en APM para [monitorizar despliegues][1] e identificar despliegues de código fallidos mediante la [detección automática de despliegues fallidos][2].
 
-Para los datos de APM, Datadog configura la etiqueta (tag) `version` en el siguiente orden de prioridad. Si configuras `version` manualmente, Datadog no anula su valor `version`.
+Para datos de APM, Datadog configura la etiqueta (tag) `version` en el siguiente orden de prioridad. Si configuras `version` manualmente, Datadog no anula su valor `version`.
 
 | Prioridad         | Valor de versión |
 |--------------|------------|
@@ -310,7 +313,7 @@ Requisitos:
 {{% tab "ECS" %}}
 
 <div class="alert alert-danger">
-En ECS Fargate que utiliza Fluent Bit o FireLens, el etiquetado de servicios unificado sólo está disponible para métricas y trazas, no para la recopilación de logs.
+En ECS Fargate con Fluent Bit o FireLens, el etiquetado de servicios unificado solo está disponible para métricas y trazas, no para la recopilación de logs.
 </div>
 
 ##### Configuración completa
@@ -339,6 +342,9 @@ Configura las variables de entorno `DD_ENV`, `DD_SERVICE` y `DD_VERSION` (con el
   "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
+<div class="alert alert-danger">
+En ECS Fargate, debes añadir estas etiquetas a tu contenedor de aplicaciones, <strong>no</strong> al contenedor del Datadog Agent.
+</div>
 
 ##### Configuración parcial
 
@@ -407,14 +413,14 @@ Para crear un único punto de configuración de toda la telemetría emitida dire
 
 [1]: /es/tracing/setup/
 [2]: /es/developers/dogstatsd/
-{{% /tab %}}
+   {{% /tab %}}
 
    {{% tab "Logs" %}}
 
  Si utilizas [trazas y logs conectados][1], activa la introducción automática de logs siempre que tu rastreador de APM lo permita. De esta forma, el rastreador de APM introducirá automáticamente `env`, `service` y `version` en tus logs, lo que significa que no tendrás que configurar esos campos manualmente en otros lugares.
 
 [1]: /es/tracing/other_telemetry/connect_logs_and_traces/
-{{% /tab %}}
+   {{% /tab %}}
 
    {{% tab "RUM y Session Replay" %}}
 
@@ -423,9 +429,9 @@ Si utilizas [RUM y trazas conectados][1], especifica la aplicación de navegador
    Cuando [crees una aplicación de RUM][2], confirma los nombres de `env` y `service`.
 
 
-[1]: /es/real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /es/real_user_monitoring/browser/setup
-{{% /tab %}}
+[1]: /es/real_user_monitoring/correlate_with_other_telemetry/apm/
+[2]: /es/real_user_monitoring/browser/setup/
+   {{% /tab %}}
 
    {{% tab "Synthetics" %}}
 
@@ -435,7 +441,7 @@ Si utilizas [trazas y tests conectados del navegador Synthetic][1], especifica u
 
 [1]: /es/synthetics/apm/
 [2]: https://app.datadoghq.com/synthetics/settings/integrations
-{{% /tab %}}
+   {{% /tab %}}
 
    {{% tab "Métricas personalizadas" %}}
 
@@ -446,7 +452,7 @@ Si tu servicio tiene acceso a `DD_ENV`, `DD_SERVICE` y `DD_VERSION`, el cliente 
    **Nota**: Los clientes DogStatsD de Datadog en .NET y PHP no admiten esta funcionalidad.
 
 [1]: /es/metrics/
-{{% /tab %}}
+   {{% /tab %}}
 
    {{% tab "Métricas de sistema" %}}
 
@@ -498,7 +504,7 @@ instances:
 
 ### Entorno serverless
 
-Para obtener más información sobre las funciones de AWS Lambda, consulta [cómo conectar tu telemetría de Lambda mediante el uso de etiquetas (tags))][15].
+Para obtener más información sobre las funciones de AWS Lambda, consulta [cómo conectar tu telemetría de Lambda mediante el uso de etiquetas (tags)][15].
 
 ### OpenTelemetry
 
@@ -514,10 +520,10 @@ Cuando utilices OpenTelemetry, asigna los siguientes [atributos de recursos][16]
 1: `deployment.environment` queda obsoleto en favor de `deployment.environment.name` en [convenciones semánticas de OpenTelemetry v1.27.0][17].  
 2: `deployment.environment.name` es compatible con el Datadog Agent v7.58.0 o posterior y con Datadog Exporter v0.110.0 o posterior.
 
-<div class="alert alert-danger">Algunas variables de entorno específicas de Datadog como <code>DD_SERVICE</code>, <code>DD_ENV</code> o <code>DD_VERSION</code> no son compatibles de forma predefinida en tu configuración de OpenTelemetry.</div>
+<div class="alert alert-danger">Las variables de entorno específicas de Datadog como <code>DD_SERVICE</code>, <code>DD_ENV</code> o <code>DD_VERSION</code> no se admiten predefinidas en la configuración de OpenTelemetry.</div>
 
 {{< tabs >}}
-{{% tab "Variables de entorno" %}}
+{{% tab "Environment variables" %}}
 
 Para definir atributos de recursos utilizando variables de entorno, configura `OTEL_RESOURCE_ATTRIBUTES` con los valores adecuados:
 
@@ -581,7 +587,7 @@ processors:
 [7]: /es/agent/docker/?tab=standard#optional-collection-agents
 [8]: /es/getting_started/tracing/
 [9]: /es/getting_started/logs/
-[10]: /es/real_user_monitoring/platform/connect_rum_and_traces/
+[10]: /es/real_user_monitoring/correlate_with_other_telemetry/apm/
 [11]: /es/getting_started/synthetics/
 [12]: /es/integrations/statsd/
 [13]: https://www.chef.io/
