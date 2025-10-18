@@ -135,4 +135,4 @@ Learn how to [create a budget-based monitor][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
-[2]: /cloud_cost_management/monitors/
+[2]: /cloud_cost_management/cost_changes/monitors/

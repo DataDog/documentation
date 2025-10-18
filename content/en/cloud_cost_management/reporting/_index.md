@@ -1,11 +1,16 @@
 ---
-title: Reports
+title: Cost Reports
 private: true
+aliases:
+- /cloud_cost_management/reports
 description: Track your organization spending with Cloud Cost Management Reports.
 further_reading:
-- link: "/cloud_cost_management/reports/scheduled_reports"
+- link: "/cloud_cost_management/reporting/scheduled_reports"
   tag: "Documentation"
   text: "Scheduled cost reports"
+- link: "/cloud_cost_management/reporting/explorer"
+  tag: "Documentation"
+  text: "Cost Explorer"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -17,12 +22,22 @@ Datadog's Cloud Cost Monitoring (CCM) Reports empower financial operations and f
 
 With Reports, you can:
 
-- **Centralize cloud spend analysis**: View and manage costs from [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][12], and [SaaS providers][4] in one place.
-- **Filter and group**: Filter by provider, tags, regions, and group by service, provider, or custom tags.
-- **Visualize graphs**: Use bar charts, summaries, and day-over-day views to spot trends and anomalies.
-- **Use advanced controls**: Switch between cost types, toggle container allocation, and focus on usage charges or all spend.
-- **Create budget reports**: Build budget reports in addition to cost reports to track spending against budget targets and forecast future costs.
-- **Collaborate and share**: Save, star, export, and share reports with your team.
+- Centralize and analyze costs from [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][12], and [SaaS providers][4]
+- Visualize and customize with filters, groupings, and multiple chart types
+- Build cost and budget reports to track spending and forecast future costs
+- Save, schedule, and share reports with your team
+
+## Choose the right tool
+
+Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for standardized, recurring analysis.
+
+| Feature | Cost Explorer | Cost Reports |
+|---------|---------------|--------------|
+| Use case | Ad-hoc analysis and investigation | Saved views and scheduled delivery |
+| Queries | Dynamic, unsaved by default | Saved and reusable |
+| Templates | No templates | Pre-built templates available |
+| Scheduling | Cannot be scheduled | Can be scheduled for email/Slack |
+| Workflow | Iterative exploration | Recurring reporting |
 
 ## Create a CCM report
 
@@ -105,5 +120,6 @@ After you've created and customized your report, you can save and share it from 
 [8]: /cloud_cost_management/setup/azure/#cost-types
 [9]: /cloud_cost_management/setup/google_cloud/#cost-types
 [10]: /cloud_cost_management/setup/custom/#cost-metric-types
-[11]: /cloud_cost_management/reports/scheduled_reports
+[11]: /cloud_cost_management/reporting/scheduled_reports
 [12]: /cloud_cost_management/oracle/
+[13]: /cloud_cost_management/reporting/explorer
