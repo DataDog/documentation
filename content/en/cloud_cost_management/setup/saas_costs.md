@@ -41,7 +41,7 @@ SaaS Cost Integrations allow you to send cost data **directly from your provider
 
 </br>
 
-If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
+If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services. Only SaaS costs in USD are supported at this time.
 
 ## Setup
 
