@@ -13,7 +13,7 @@ further_reading:
 
 Automations allow you to trigger actions based on events in On-Call. There are two types:
 - **Handover automations**: Triggered automatically when an on-call shift changes.
-- **[Workflow automations][1]**: A low-code/no-code solution that lets you define actions based on various on-call activities.
+- **[Workflow automations][1]**: A low-code/no-code solution that can include on-call actions (such as paging or updating schedules) within automated workflows. For all on-call related actions, see the [Actions Catalog][5].
 
 
 ## Handover automations
@@ -45,3 +45,4 @@ Post a message to Microsoft Teams at the start or end of a shift using a handove
 [2]: /integrations/slack/?tab=datadogforslack#install-the-datadog-app-in-your-slack-workspace
 [3]: /integrations/microsoft_teams/?tab=datadogapprecommended#overview
 [4]: https://app.datadoghq.com/on-call/teams
+[5]: /actions/actions_catalog/?search=datadog+on-call
