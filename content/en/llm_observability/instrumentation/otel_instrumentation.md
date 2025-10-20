@@ -45,7 +45,7 @@ If you are using the [`strands-agents` library][5], you need to set an additiona
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 ```
 
-This environment variable ensures that strands-agents emits traces following the OpenTelemetry 1.37 semantic conventions for generative AI, which are required by LLM Observability.
+This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37 semantic conventions for generative AI, which are required by LLM Observability.
 
 ### Instrumentation
 
