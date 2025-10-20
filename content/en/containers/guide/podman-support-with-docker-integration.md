@@ -38,7 +38,7 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
    ```
    "$HOME/.local/share/containers/storage"
    ```
-   In the example above, the containers folder is located at `$HOME/.local/share/containers`.
+   In the example above, the `<CONTAINERS_PATH>` wiil be `$HOME/.local/share/containers`.
 
 1. Run one of the following commands to deploy the Agent.
    1. To deploy the Agent without logging:
