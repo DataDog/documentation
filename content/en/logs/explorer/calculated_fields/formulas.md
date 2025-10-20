@@ -1,6 +1,8 @@
 ---
-title: Formula Expression Language
+title: Formulas
 disable_toc: false
+aliases:
+- /logs/explorer/calculated_fields/expression_language
 further_reading:
 - link: "/logs/explorer/calculated_fields/"
   tag: "Documentation"

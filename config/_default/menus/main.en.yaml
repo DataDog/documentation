@@ -5875,14 +5875,14 @@ menu:
       url: logs/explorer/calculated_fields/
       parent: log_explorer
       weight: 506
-    - name: Formula Expression Language
-      identifier: log_explorer_calculated_fields_expression_language
-      url: logs/explorer/calculated_fields/expression_language/
+    - name: Formulas
+      identifier: log_explorer_calculated_fields_formulas
+      url: logs/explorer/calculated_fields/formulas/
       parent: log_explorer_calculated_fields
       weight: 5061
-    - name: Extraction Grok Parsing
-      identifier: log_explorer_calculated_fields_extraction
-      url: logs/explorer/calculated_fields/extraction/
+    - name: Extractions
+      identifier: log_explorer_calculated_fields_extractions
+      url: logs/explorer/calculated_fields/extractions/
       parent: log_explorer_calculated_fields
       weight: 5062
     - name: Analytics
