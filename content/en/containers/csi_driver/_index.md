@@ -81,7 +81,6 @@ If the Datadog Agent is deployed using the Datadog Operator, you must install th
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
 
-
 3. **Activate Datadog CSI in your `DatadogAgent` resource.**
 
    ```
@@ -121,6 +120,7 @@ If the Datadog Agent is deployed using a DaemonSet, you must install the Datadog
    ```shell
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
+
 3. **Activate Datadog CSI**.
 
    To activate the Datadog CSI driver, set the following environment variable in the Datadog Cluster Agent container:
