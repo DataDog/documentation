@@ -39,7 +39,7 @@ Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 
 #### Using strands-agents
 
-If you are using the [strands-agents library][5], you need to set an additional environment variable to enable 1.37-compliant OpenTelemetry traces:
+If you are using the [`strands-agents` library][5], you need to set an additional environment variable to enable traces that are compliant with OpenTelemetry v1.37:
 
 ```
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
