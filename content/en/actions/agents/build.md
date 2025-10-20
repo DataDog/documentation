@@ -93,7 +93,7 @@ This section displays features that are still in development. Click the toggle b
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
+<br>Do you have questions or feedback? Join the **#ai-agents** channel on the [Datadog Community Slack][8].
 
 [1]: https://app.datadoghq.com/actions/agents
 [2]: /actions/agents/build/#create-a-custom-agent
