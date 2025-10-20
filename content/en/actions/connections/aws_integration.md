@@ -13,7 +13,7 @@ further_reading:
 Datadog Workflows and Actions can use your existing **Datadog AWS integration credentials** to perform read-only operations in your AWS environment.
 This eliminates the need to manually configure a separate AWS Connection, simplifying onboarding and allowing immediate access to your AWS data.
 
-When configured, Datadog uses the same AWS credentials that power integrations such as **Amazon EC2**, **RDS**, and **S3 monitoring**, to securely execute supported read-only actions.
+When configured, Datadog uses the same AWS credentials that power integrations such as **Amazon EC2**, **RDS**, and **S3 monitoring** to securely execute supported read-only actions.
 
 <div class="alert alert-info">
 This feature is limited to <strong>read-only AWS actions</strong> and AWS integrations configured with "Role Delegation" access type. It also requires that your Datadog AWS integration role has the appropriate permissions defined in AWS. All actions under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html" target="_blank">ReadOnlyAccess permissions</a> should work, as long as the IAM role used by the AWS Integration has been granted the permissions needed, and that an Action exists for the operation.
@@ -49,11 +49,11 @@ Make sure that:
 To configure the **Executor** permission in Datadog AWS Integration: 
 - Navigate to "Integrations" then "AWS"
 - Select the AWS Account connected to Datadog that you want to run actions with. If you haven't already configured the AWS Integration, follow the [AWS Integration setup guide](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).
-- Click on "Set Permissions"
+- Click on "**Set Permissions**":
 
 {{< img src="service_management/aws_integration_tile_set_permission.png" alt="An integration on the AWS Integration configuration where the Set permission button is usable" style="width:100%;" >}}
 
-Then in the Permissions modal opened, you must select a user, team or organization to be granted "Executor" permissions, then Save.
+In the Permissions modal opened select a user, team or organization to be granted "**Executor**" permissions:
 
 {{< img src="service_management/aws_integration_tile_permission_modal.png" alt="A permission modal with Executor permission highlighted" style="width:100%;" >}}
 
