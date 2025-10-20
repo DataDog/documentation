@@ -16,7 +16,7 @@ This eliminates the need to manually configure a separate AWS Connection, simpli
 When configured, Datadog uses the same AWS credentials that power integrations such as **Amazon EC2**, **RDS**, and **S3 monitoring** to securely execute supported read-only actions.
 
 <div class="alert alert-info">
-This feature is limited to <strong>read-only AWS actions</strong> and AWS integrations configured with "Role Delegation" access type. It also requires that your Datadog AWS integration role has the appropriate permissions defined in AWS. All actions under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html" target="_blank">ReadOnlyAccess permissions</a> should work, as long as the IAM role used by the AWS Integration has been granted the permissions needed, and that an Action exists for the operation.
+This feature is limited to <strong>read-only AWS actions</strong> and AWS integrations configured with "Role Delegation" access type. It also requires that your Datadog AWS integration role has the appropriate permissions defined in AWS. All actions under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> should work, as long as the IAM role used by the AWS Integration has been granted the permissions needed, and that an Action exists for the operation.
 </div>
 
 ## Supported use cases
