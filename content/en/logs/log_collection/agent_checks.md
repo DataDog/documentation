@@ -222,4 +222,3 @@ If logs are not appearing in Datadog:
 [5]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck.send_log
-[7]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck.send_log
