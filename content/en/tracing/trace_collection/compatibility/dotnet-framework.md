@@ -25,35 +25,43 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version            | Datadog End of Life |
-| ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
-| 4.8.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.8                     |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7                     |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | latest                     |                     |
-| 4.6                     | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.2                   | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| .NET Framework Version  | Microsoft End of Life | Support level       | Package version            | Datadog End of Life |
+| ----------------------- | --------------------- | --------------------| -------------------------- | ------------------- |
+| 4.8.1                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.8                     |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.7.2                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.7.1                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.7                     |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.6.2                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.6.1                   | April 26, 2022        | [GA](#support-ga)   | latest                     |                     |
+| 4.6                     | April 26, 2022        | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
+| 4.5.2                   | April 26, 2022        | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
+| 4.5.1                   | January 12, 2016      | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
+| 4.5                     | January 12, 2016      | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
 
 Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
 <div class="alert alert-info">When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
 </div>
 
-## Supported processor architectures
+## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation on the following architectures:
+The .NET Tracer supports automatic instrumentation of .NET Framework applications on Windows operating systems. Additional information on the operating systems supported by .NET Framework can be found in the [.NET Framework system requirements][12]
 
-| Processor architectures | Support level       | Package version       |
-| ----------------------- | ------------------- | --------------------- |
-| Windows x64 (`win-x64`) | [GA](#support-ga)   | latest                |
-| Windows x86 (`win-x86`) | [EOL](#support-eol) | < 3.0.0 (e.g. 2.56.0) |
+### Windows
 
-Note that running x86 applications on Windows x64 is supported.
+| Operating System             | Version      | Support level       | Package version       |
+| -----------------------------|--------------|---------------------|-----------------------|
+| Windows Server               | 2012+        | [GA](#support-ga)   | latest                |
+| Windows Client               | 8.1+         | [GA](#support-ga)   | latest                |
+| Windows Server (x86)         | All versions | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
+| Windows Server               | < 2012       | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
+
+**Note:** "Windows Server" includes all editions and installation options:
+- **Editions:** Datacenter, Standard, Essentials, etc.
+- **Installation options:** Server Core, Server with Desktop Experience, Nano Server (container image only)
+
+Instrumenting 32-bit (x86) applications is supported on 64-bit (x64) Windows. Windows on ARM64 is not supported.
 
 ## Integrations
 
@@ -85,7 +93,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
+| Process                         | built-in                                                                                  | `Process`            |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+,                                                                 | `RabbitMQ`           |
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
@@ -98,11 +106,11 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## Supported Datadog Agent versions
 
-| **Datadog Agent version**   | **Package version** |
-|-----------------------------|---------------------|
-| [7.x][7]                    | latest              |
-| [6.x][7]                    | latest              |
-| [5.x][8]                    | latest              |
+| Datadog Agent version | Package version |
+|-----------------------|-----------------|
+| [7.x][7]              | latest          |
+| [6.x][7]              | latest          |
+| [5.x][8]              | latest          |
 
 ## .NET runtime support policy
 
@@ -142,3 +150,4 @@ Version updates imply the following changes to runtime support:
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
 [11]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
+[12]: https://learn.microsoft.com/en-us/dotnet/framework/get-started/system-requirements

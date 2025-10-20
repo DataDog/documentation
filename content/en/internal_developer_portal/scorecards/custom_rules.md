@@ -23,10 +23,6 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
-{{< /callout >}}
-
 Datadog provides [default rules][1] so you can get started quickly with Scorecards, but you can also create custom rules.
 
 ## Create custom rules
