@@ -9,7 +9,7 @@ further_reading:
 <div class="alert alert-danger">
 The AAS Linux Wrapper is now deprecated. It will continue to receive layer bumps but no new features.
 It will be retired on March 1, 2026, at which point no further updates will be provided.
-You can continue to use the wrapper after March 1, 2026. However, no further updates, fixes, or support will be provided beyond that point.
+You can continue to use the wrapper after March 1, 2026, but its use will not be supported.
 Datadog strongly recommends switching to the <a href="https://docs.datadoghq.com/serverless/azure_app_service/linux_code">sidecar instrumentation method</a> as soon as possible.
 </div>
 
