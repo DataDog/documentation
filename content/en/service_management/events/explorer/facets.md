@@ -18,7 +18,7 @@ A facet displays the distinct members of an attribute or a tag and provides basi
 
 To add a facet, use the **+ Add** in the left side panel.
 
-After you add the facet, the value of this attribute is stored for all new views, and you can use it in facet side panels. You can also use it to group by in [pattern-based correlations][1], event monitors and graph widgets.
+After you add the facet, the value of this attribute is stored for all new views, and you can use it in facet side panels. You can also use it to group by in [pattern-based correlations][1], event monitors, and graph widgets.
 
 ### Reserved attributes
 **Host**, **Service** and **Status** are part of the core Event Attributes. You can not create new facet on service, host and status tag. 
