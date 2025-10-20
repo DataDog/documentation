@@ -42,12 +42,12 @@ To successfully execute actions with this integration:
 ### 1. Configure AWS Integration permissions
 
 Make sure that:
-- The AWS integration is active for your target AWS Account.
-- The IAM Role associated with the integration includes the permissions for the operations (for example `ecs:ListClusters`).
-- The integration is configured with the **Executor** permission in the AWS Integration tile in Datadog for fine-grained control.
+- The AWS integration is **active** for your target **AWS Account** and no integration issues are detected by Datadog.
+- The **IAM Role** associated with the integration has the permissions for the operations (for example `ecs:ListClusters`).
+- The integration is configured with the **Executor** permission in the Datadog AWS Integration configuration page (see below).
 
 To configure the **Executor** permission in Datadog AWS Integration: 
-- Navigate to "Integrations" then "AWS"
+- In Datadog, navigate to "Integrations" then open the "Amazon Web Services" configuration page.
 - Select the AWS Account connected to Datadog that you want to run actions with. If you haven't already configured the AWS Integration, follow the [AWS Integration setup guide](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).
 - Click on "**Set Permissions**":
 
@@ -57,6 +57,9 @@ In the Permissions modal opened select a user, team or organization to be grante
 
 {{< img src="service_management/aws_integration_tile_permission_modal.png" alt="A permission modal with Executor permission highlighted" style="width:100%;" >}}
 
+<div class="alert alert-info">
+If instead of a **Set Permissions** button, you have a **Request Edit Access** button, you need to request the AWS Configuration Edit permission from an Admin in your organization.
+</div>
 
 ### 2. Select the Integration in Action
 
