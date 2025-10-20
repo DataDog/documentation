@@ -32,10 +32,12 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
 
 1. To discover the exact location of containers folder, run the following command:
    ```shell
-   $ podman info -f json | jq '.store.graphRoot'
+   podman info -f json | jq '.store.graphRoot'
+   ```
+   Output should be similar to the following:
+   ```
    "$HOME/.local/share/containers/storage"
    ```
-
    In the example above, the containers folder is located at `$HOME/.local/share/containers`.
 
 1. Run one of the following commands to deploy the Agent.
@@ -54,8 +56,8 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
       ```
 
     1. To deploy the Agent with log collection run the agent as follows:
-       ```shell
-       $ podman run -d --name dd-agent \
+      ```shell
+      podman run -d --name dd-agent \
           --cgroupns host --pid host \
           -v <CONTAINERS_PATH>:/var/lib/containers:ro \
           -v /proc/:/host/proc/:ro \
@@ -66,7 +68,7 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
           -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
           gcr.io/datadoghq/agent:latest
-       ```
+      ```
 
 ### Agent versions v7.54.0 and below
 
@@ -85,8 +87,8 @@ Podman versions 4.8 or greater use SQLite as the default database backend, and B
    ```
 
 1. Run the following command to deploy the Agent. Replace `<PODMAN_DB_PATH>` with the path to your Podman DB, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
-   ```shell
-   $ podman run -d --name dd-agent \
+    ```shell
+    podman run -d --name dd-agent \
        --cgroupns host --pid host \
        -v <PODMAN_DB_PATH>:/var/lib/containers/storage/db.sql:ro \
        -v /proc/:/host/proc/:ro \
@@ -94,7 +96,7 @@ Podman versions 4.8 or greater use SQLite as the default database backend, and B
        -e DD_API_KEY=<API_KEY> \
        -e DD_HOSTNAME=<DD_HOSTNAME> \
        gcr.io/datadoghq/agent:latest
-   ```
+    ```
 
 {{% /tab %}}
 
@@ -112,8 +114,8 @@ Podman versions below 4.8 use BoltDB as the default database backend.
 
 1. Run the following command to deploy the Agent. Replace `<PODMAN_DB_PATH>` with the path to your Podman DB, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
 
-   ```shell
-   podman run -d --name dd-agent \
+    ```shell
+    podman run -d --name dd-agent \
        --cgroupns host --pid host \
        -v $PODMAN_DB_PATH:/var/lib/containers/storage/libpod/bolt_state.db:ro \
        -v /proc/:/host/proc/:ro \
@@ -121,7 +123,7 @@ Podman versions below 4.8 use BoltDB as the default database backend.
        -e DD_API_KEY=<API_KEY> \
        -e DD_HOSTNAME=<DD_HOSTNAME> \
        gcr.io/datadoghq/agent:latest
-   ```
+    ```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -141,8 +143,8 @@ The Podman socket is compatible with the Docker one. That's why in this case, th
 
 To deploy the Agent relying on the Podman socket run as root:
 
-```
-$ sudo podman run -d --name dd-agent \
+```shell
+sudo podman run -d --name dd-agent \
     --cgroupns host --pid host \
     -v /run/podman/podman.sock:/run/podman/podman.sock:ro \
     -v /proc/:/host/proc/:ro \
