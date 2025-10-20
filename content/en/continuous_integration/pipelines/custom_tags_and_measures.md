@@ -119,7 +119,6 @@ To create a measure, click the gear icon next to a measures name on the [Pipelin
 
 ## Add tags and measures to GitHub jobs
 
-To add tags and measures to GitHub jobs, `datadog-ci CLI` version `2.29.0` or higher is required.
 
 Starting with `datadog-ci` version `4.1.0`, no additional action is required, even when using custom names or matrix strategies.
 
