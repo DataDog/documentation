@@ -38,7 +38,7 @@ Before you begin, make sure you've already [installed and configured the Agent][
 Follow the relevant documentation for your custom instrumentation approach to learn more:
 
 {{< tabs >}}
-{{% tab "OpenTelemetry API" %}}
+{{% tab "OpenTelemetry API (Recommended)" %}}
 
 Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
 
@@ -58,7 +58,7 @@ Use the Datadog API to add custom instrumentation that allows you to programmati
 
 {{% /tab %}}
 
-{{% tab "OpenTracing (legacy)" %}}
+{{% tab "OpenTracing (Legacy)" %}}
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
 
