@@ -1,5 +1,5 @@
 ---
-title: Log Submission From Agent Checks
+title: Agent Integration Log Collection
 further_reading:
 - link: "/developers/integrations/agent_integration/"
   tag: "Documentation"
@@ -14,8 +14,8 @@ further_reading:
   tag: "Documentation"
   text: "Learn how to explore your logs"
 - link: "https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck.send_log"
-  tag: "API Reference"
-  text: "AgentCheck.send_log API documentation"
+  tag: "Agent Integrations API"
+  text: "API parameters to send_logs"
 ---
 
 ## Overview
@@ -58,7 +58,7 @@ To enable log submission from your custom Agent check, you need to configure log
 
 3. [Restart the Agent][6] if it is running for the configuration changes to take effect.
 
-Once configured, your integration can use the `send_log` method to submit logs, which will be tagged with the `source` and `service` specified in the configuration.
+After it's configured, your integration can use the [`send_log` method][7] to submit logs. These logs are tagged with the `source` and `service` specified in the configuration.
 
 ## Using the send_log method
 
@@ -187,7 +187,7 @@ class MyCustomCheck(AgentCheck):
 
 ## View your logs
 
-Once submitted, logs from your custom check appear in the [Log Explorer][3] alongside other logs. You can:
+After submission, logs from your custom check appear in the [Log Explorer][3]. You can:
 
 - Filter logs by `source`, `service`, or custom tags
 - Parse structured log data using [log processing pipelines][4]
@@ -221,3 +221,4 @@ If logs are not appearing in Datadog:
 [4]: /logs/log_configuration/processors
 [5]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck.send_log
