@@ -39,7 +39,7 @@ To successfully execute actions with this integration:
 
 ## Configuration
 
-### 1. Enable the AWS Integration
+### 1. Configure AWS Integration permissions
 
 Make sure that:
 - The AWS integration is active for your target AWS Account.
@@ -58,7 +58,7 @@ Then in the Permissions modal opened, you must select a user, team or organizati
 {{< img src="service_management/aws_integration_tile_permission_modal.png" alt="A permission modal with Executor permission highlighted" style="width:100%;" >}}
 
 
-### 2. Select the Integration in Your Action
+### 2. Select the Integration in Action
 
 When creating or editing an Action within **Workflows**, you can now choose your existing AWS integration in the Connections field.
 
