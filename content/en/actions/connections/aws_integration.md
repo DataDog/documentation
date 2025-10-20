@@ -6,7 +6,6 @@ further_reading:
 - link: "/actions/connections/"
   tag: "Documentation"
   text: "Find out more about connection credentials"
-aliases:
 ---
 
 ## Overview
