@@ -139,7 +139,7 @@ Starting with **Helm chart version 3.138.0**, the Datadog CSI Driver can be inst
 
 > **Note:**  
 > GKE Autopilot support is **only available when installing using the Helm chart**.  
-> For non-Helm installations, render and apply the CSI Driver manifests manually, then create the following `AllowlistSynchronizer` resource to enable installation on GKE Autopilot:
+> If CSI driver is not installed using the helm chart, create the following `AllowlistSynchronizer` resource to activate GKE Autopilot support:
 
 ```yaml
 apiVersion: auto.gke.io/v1
