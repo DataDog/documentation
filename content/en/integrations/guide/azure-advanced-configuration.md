@@ -20,7 +20,7 @@ This guide provides advanced configuration options and reference architectures f
 
 ### Reference architectures
 
-The diagrams in this guide provide a visual representation of the configuration process and outcome when following the steps in the [Getting Started with Azure][1]. This guide provides a detailed overview of Datadog's interaction with your Azure environment and answers common security, compliance, and governance questions.
+The diagrams in this guide provide a visual representation of the configuration process and outcome when following the steps in [Getting Started with Azure][1]. This guide provides a detailed overview of Datadog's interaction with your Azure environment and answers common security, compliance, and governance questions.
 
 ### Alternate configurations
 
@@ -39,17 +39,17 @@ The Azure APIs used and data collected are identical regardless of whether you u
 
 The diagram below outlines the process and resulting architecture of the Azure integration configuration described in [Getting Started with Azure][1].
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_integration_setup.png" alt="Diagram of the app registration integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_integration_setup.png" alt="Workflow diagram showing Azure App Registration integration setup: create app registration with service principal and client secrets in Azure, assign monitoring reader role to subscription or management resources, then configure integration with metric tag filters in the Datadog backend." >}}
 
 After this is completed, data collection begins automatically. The app registration allows Datadog to [request a token from Azure Active Directory][3] (AD). Datadog uses this token as the authorization for API calls to various Azure APIs, to discover resources within the scope provided, and collect data. This continuous process runs with two-minute intervals by default, and is used to discover and collect data from your Azure environment. The data collection process is pictured below.
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Diagram of the App Registration integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Workflow diagram showing Azure metric collection process: the Datadog backend reads configuration, authenticates through service principal to Azure Active Directory, collects subscription and resource metadata using RBAC permissions, filters resources by tags, then retrieves metrics from Azure Monitor for ingestion into Datadog." >}}
 
 ## Log collection
 
 The diagram below provides a reference architecture for forwarding logs from Azure to Datadog, as described in the [Event Hub log forwarding guide][5].
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Diagram of the manual log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Architecture diagram showing manual Azure log forwarding setup across two regions where Azure resources use diagnostic settings to send logs through Event Hubs and Log Forwarding Functions to Datadog Logs Ingestion." >}}
 
 ### Alternate configuration options for log forwarding
 

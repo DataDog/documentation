@@ -62,7 +62,7 @@ A form to create a new app registration is displayed:
 
 11. Paste the value of the client secret in the corresponding field on the template, and click **Next**.
 
-12. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
+12. Provide a Datadog API key and Datadog application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and application keys in the Access section of the Organization Settings page in Datadog.
 
     **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
 

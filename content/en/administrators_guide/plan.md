@@ -107,7 +107,7 @@ Usually, the default APM setup is sufficient for most use cases, but if, for exa
 
 ### Log Management
 
-Log Management capabilities allow you and your teams to diagnose and fix your infrastructure issues. With [Logging without Limits™][14] you can create tunable log collection patterns and extract information from your log data into custom metrics. You can also be alerted to critical errors in your logs, without needing to index (that is, store) them.
+Log Management capabilities allow you and your teams to diagnose and fix your infrastructure issues. [Logging without Limits™][14] enables you to create tunable log collection patterns and extract information from your log data into custom metrics. You can also receive alerts about critical errors in your logs, without needing to index your logs.
 
 {{< img src="/administrators_guide/logging_without_limits.png" alt="Logging without Limits diagram" style="width:90%;">}}
 

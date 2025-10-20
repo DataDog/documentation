@@ -269,7 +269,6 @@ You prefer to manually configure [diagnostic settings][53] on the resources you 
 ## Get more from the Datadog Platform 
 
 ### Install the Agent for greater visibility into your application
-[l](#install-the-agent-for-greater-visibility-into-your-application)
 After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to: 
 - **Application health** 
 - **Process utilization**
