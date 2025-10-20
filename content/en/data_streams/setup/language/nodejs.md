@@ -29,8 +29,8 @@ aliases:
 | Amazon SNS      | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)                          | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="minimal" >}}                 | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="recommended" >}}                 |
 | Google Pub/Sub  | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}}        | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}}        |
 
-#### Support for AWS SQS with AWS Lambda
-To monitor data streams for Node.js Lambda functions calling AWS SQS, SNS, or Kinesis, use Datadog's Node.js Lambda tracer, [`datadog-lambda-js` v.12.128.0+][8].
+#### Support for Amazon SQS with AWS Lambda
+To monitor data streams for Node.js Lambda functions calling Amazon SQS, SNS, or Kinesis, use Datadog's Node.js Lambda tracer, [`datadog-lambda-js` v.12.128.0][8] or later.
 
 ### Installation
 
