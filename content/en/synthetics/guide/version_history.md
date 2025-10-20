@@ -8,6 +8,9 @@ further_reading:
     - link: "/account_management/audit_trail/"
       tag: "documentation"
       text: "Audit Trail Overview"
+    - link: https://www.datadoghq.com/blog/version-history-for-synthetic-monitoring-tests
+      tag: Blog
+      text: Track, debug, and roll back changes with Version History for Synthetic Monitoring tests
 ---
 
 ## Overview

@@ -14,6 +14,9 @@ further_reading:
   - link: "https://opentelemetry.io/docs/reference/specification/protocol/exporter/"
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
+  - link: https://www.datadoghq.com/blog/otlp-metrics-api
+    tag: Blog
+    text: Ingest OTLP metrics directly into Datadog with the new OTLP Metrics API
 site_support_id: otlp_agentless
 ---
 

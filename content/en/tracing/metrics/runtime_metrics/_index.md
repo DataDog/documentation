@@ -23,6 +23,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
+    - link: https://www.datadoghq.com/blog/understanding-java-gc
+      tag: Blog
+      text: A deep dive into Java garbage collectors
 ---
 
 ## Overview 

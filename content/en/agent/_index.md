@@ -2,6 +2,9 @@
 title: Agent
 description: Install and configure the Agent to collect data
 further_reading:
+- link: https://www.datadoghq.com/blog/otlp-metrics-api
+  tag: Blog
+  text: Ingest OTLP metrics directly into Datadog with the new OTLP Metrics API
 - link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
