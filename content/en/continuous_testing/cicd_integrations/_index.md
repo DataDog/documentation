@@ -6,6 +6,9 @@ aliases:
   - /synthetics/cicd_testing
   - /synthetics/cicd_integrations
 further_reading:
+- link: https://www.datadoghq.com/blog/version-history-for-synthetic-monitoring-tests
+  tag: Blog
+  text: Track, debug, and roll back changes with Version History for Synthetic Monitoring tests
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
   text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"

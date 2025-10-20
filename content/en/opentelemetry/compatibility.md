@@ -2,6 +2,9 @@
 title: Datadog and OpenTelemetry Compatibility
 disable_sidebar: false
 further_reading:
+- link: https://www.datadoghq.com/blog/otlp-metrics-api
+  tag: Blog
+  text: Ingest OTLP metrics directly into Datadog with the new OTLP Metrics API
 - link: /opentelemetry/troubleshooting/
   tag: "Documentation"
   text: "OpenTelemetry Troubleshooting"
