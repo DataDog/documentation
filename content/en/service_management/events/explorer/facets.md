@@ -29,4 +29,4 @@ For Datadog monitor events, the first event tag in alphabetic order is used to s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/service_management/events/correlation/patterns/
+[1]: /service_management/events/correlation/patterns/
