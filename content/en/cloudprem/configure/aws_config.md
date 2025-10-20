@@ -27,7 +27,7 @@ To deploy CloudPrem on AWS, you need to configure:
 - AWS region selection
 - IAM permissions for S3 object storage
 - RDS PostgreSQL database (recommended)
-- EKS cluster with AWS Load Balancer Controller
+- EKS cluster with AWS Load Balancer Controller (optional)
 
 ## AWS credentials
 

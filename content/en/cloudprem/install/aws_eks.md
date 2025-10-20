@@ -27,7 +27,6 @@ Before getting started with CloudPrem, ensure you have:
 
 - AWS account with necessary permissions
 - Kubernetes `1.25+` ([EKS][1] recommended)
-- [AWS Load Balancer Controller installed][2]
 - PostgreSQL database ([RDS][3] recommended)
 - S3 bucket for log storage
 - Datadog Agent
@@ -92,13 +91,24 @@ echo ""
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-3. Store the PostgreSQL database connection string as a Kubernetes secret:
+3. Store the credentials in Kubernetes secrets:
+
+Store your PostgreSQL database connection string in a dedicated secret:
 
    ```shell
-   kubectl create secret generic <SECRET_NAME> \
+   kubectl create secret generic <POSTGRES_SECRET_NAME> \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
+
+If using the reverse [connection feature](../configure/reverse_connection.md), store your API and application keys in a dedicated secret:
+
+   ```shell
+   kubectl create secret generic <DD_SECRET_NAME> \
+   -n <NAMESPACE_NAME> \
+   --from-literal DD_API_KEY=<YOUR API KEY> \
+   ```
+
 
 4. Customize the Helm chart
 
@@ -143,7 +153,7 @@ echo ""
 
    # Ingress configuration
    # The chart supports two ingress configurations:
-   # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
+   # 1. A public ingress for external access. Useful only if you use the forward connection. In this case, Datadog will send HTTP queries over the internet that will be used exclusively by Datadog's control plane and query service.
    # 2. An internal ingress for access within the VPC
    #
    # Both ingresses provision an Application Load Balancers (ALBs) in AWS.
@@ -152,16 +162,6 @@ echo ""
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
-     # The public ingress is configured to only accept TLS traffic and requires mutual TLS (mTLS) authentication.
-     # Datadog's control plane and query service authenticate themselves using client certificates,
-     # ensuring that only authorized Datadog services can access CloudPrem nodes through the public ingress.
-     public:
-       enabled: true
-       name: cloudprem-public
-       host: cloudprem.acme.corp
-       extraAnnotations:
-         alb.ingress.kubernetes.io/load-balancer-name: cloudprem-public
-
      # The internal ingress is used by Datadog Agents and other collectors running outside
      # the Kubernetes cluster to send their logs to CloudPrem.
      internal:
