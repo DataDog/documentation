@@ -107,6 +107,8 @@ The LangChain integration instruments the following methods:
 - [Prompt Templating][64]
   - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
 
+  **Note**: For best results, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
+
 ## Amazon Bedrock
 
 The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Python SDK's chat model calls (using [Boto3][5]/[Botocore][6]).
