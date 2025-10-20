@@ -13,10 +13,6 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-danger">
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
-
 Administrators or users with the Usage Read permission can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 - Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).

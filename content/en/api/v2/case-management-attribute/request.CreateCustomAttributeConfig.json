@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "display_name": "AWS Region 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+      "is_multi": true,
+      "key": "region_d9fe56bc9274fbb6",
+      "type": "NUMBER"
+    },
+    "type": "custom_attribute"
+  }
+}
