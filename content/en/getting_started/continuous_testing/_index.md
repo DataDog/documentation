@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Continuous Testing
+description: Automate end-to-end testing with Synthetic tests in CI/CD pipelines to accelerate application development and deployment.
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'

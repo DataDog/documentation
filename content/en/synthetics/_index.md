@@ -8,9 +8,6 @@ further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
-- link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
-  tag: "Blog"
-  text: "Improve your API test coverage with Datadog Synthetic Monitoring"
 - link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
   text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
@@ -35,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
   tag: "Blog"
   text: "How to build reliable and accurate synthetic tests for your mobile apps"
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 algolia:
   tags: ['synthetics']
 cascade:
@@ -125,7 +125,7 @@ For more information, see [Synthetic Monitoring notifications][24].
 
 ## Version History
 
-Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, or clone a version to create a new Synthetic Monitoring test.
+Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
 
 ## Ready to start?
 

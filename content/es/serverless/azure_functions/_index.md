@@ -22,13 +22,13 @@ En este Page ( página) se explica cómo recopilar trazas, métricas de trace (t
    ```js
    require('@datadog/serverless-compat').start();
 
-   // This line must come before importing any instrumented module. 
+   // This line must come before importing any instrumented module.
    const tracer = require('dd-trace').init()
    ```
 
 3. **Configurar el trazador Datadog Node.js**
 
-   [Configuración de la biblioteca de seguimiento de Node.js][1]
+   [Configuración de la librería de seguimiento de Node.js][1]
 
 [1]:/es/tracing/trace_collection/library_config/nodejs
 {{< /programming-lang >}}
@@ -52,7 +52,7 @@ En este Page ( página) se explica cómo recopilar trazas, métricas de trace (t
 
 3. **Configurar el trazador Python Datadog **
 
-   [Configuración de la biblioteca de seguimiento de Python][1]
+   [Configuración de la librería de seguimiento de Python][1]
 
 [1]:/es/tracing/trace_collection/library_config/python
 {{< /programming-lang >}}
@@ -76,7 +76,7 @@ En este Page ( página) se explica cómo recopilar trazas, métricas de trace (t
 
 3. **Configurar el trazador Java Datadog **
 
-   [Configuración de la biblioteca de seguimiento de Java][3]
+   [Configuración de la librería de seguimiento de Java][3]
 
 [1]: https://repo1.maven.org/maven2/com/datadoghq/dd-serverless-compat-java-agent/
 [2]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-java?tabs=bash%2Cconsumption#customize-jvm
@@ -154,8 +154,8 @@ En este Page ( página) se explica cómo recopilar trazas, métricas de trace (t
 
 4. **Configurar el trazador Datadog.NET**
 
-   - [Configuración de la biblioteca de rastreo de .NET Core][1]
-   - [Configuración de la biblioteca de seguimiento de .NET Framework][2]
+   - [Configuración de la librería de rastreo de .NET Core][1]
+   - [Configuración de la librería de seguimiento de .NET Framework][2]
 
 [1]:/es/tracing/trace_collection/library_config/dotnet-core
 [2]:/es/tracing/trace_collection/library_config/dotnet-framework
@@ -191,9 +191,9 @@ En este Page ( página) se explica cómo recopilar trazas, métricas de trace (t
 Puede recopilar [registros de depuración][6] para solucionar problemas. Para configurar los registros de depuración, utilice las siguientes variables de entorno:
 
 `DD_TRACE_DEBUG`
-: Activa (`true`) o desactiva (`false`) el registro de depuración para la biblioteca de Datadog Tracing. El valor predeterminado es `false`.
+: Activa (`true`) o desactiva (`false`) el registro de depuración para la librería de Datadog Tracing. El valor predeterminado es `false`.
 
-  **Valores**: `true`, `false` 
+  **Valores**: `true`, `false`
 
 `DD_LOG_LEVEL`
 : Configura el nivel de registro para la capa de compatibilidad serverless de Datadog. El valor predeterminado es `info`.

@@ -10,7 +10,7 @@ title: Analysis Features
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Analysis Features para notebooks no está disponible en el <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}

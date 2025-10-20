@@ -72,7 +72,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 ### ストレージバケットを作成
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
+<div class="alert alert-danger">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -81,7 +81,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog アーカイブは、仮想ホスト型アドレッシングに依存する S3 FIPS エンドポイントとの統合時、バケット名にドット (.) を含む場合はサポートされません。詳細は AWS のドキュメント、<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> および <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS バーチャルホスティング</a>をご参照ください。</div>
+<div class="alert alert-danger"> Datadog アーカイブは、仮想ホスト型アドレッシングに依存する S3 FIPS エンドポイントとの統合時、バケット名にドット (.) を含む場合はサポートされません。詳細は AWS のドキュメント、<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> および <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS バーチャルホスティング</a>をご参照ください。</div>
 {{< /site-region >}}
 
 **注:**

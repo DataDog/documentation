@@ -12,7 +12,7 @@ further_reading:
 title: Pub/Sub Push 구독으로 Google Cloud 로그 수집
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 페이지에서는 레거시 Pub/Sub Push 구독과 관련된 구성 정보와 함께 지원 중단된 기능을 다루고 있어 레거시 설정 문제를 해결하거나 수정하는 데 유용합니다. Datadog Dataflow 템플릿과 함께 <strong>Pull</strong> 구독을 사용하여 Google Cloud 로그를 Datadog에 전달합니다. 자세한 내용은 Google Cloud 통합 페이지의 <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">로그 수집</a>을 참조하세요.
 </div>
 

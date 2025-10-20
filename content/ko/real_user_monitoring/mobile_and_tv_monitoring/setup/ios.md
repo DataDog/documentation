@@ -329,7 +329,7 @@ iOS SDK에서는 SDK 초기화에서 제공된 옵션에 따라 사용자 세션
 
 ### RUM 세션 예시
 
-<div class="alert alert-warning">Error Tracking에는 세션 샘플 속도 구성이 적용되지 않습니다.</div>
+<div class="alert alert-danger">Error Tracking에는 세션 샘플 속도 구성이 적용되지 않습니다.</div>
 
 애플리케이션이 Datadog RUM으로 전송하는 데이터를 제어하려면 [RUM iOS SDK 초기화][7] 중에 RUM 세션의 샘플링 속도를 지정합니다. 비율은 0에서 100 사이의 백분율입니다. 기본적으로 `sessionSamplingRate`은 100으로 설정되어 있습니다(모든 세션 유지).
 

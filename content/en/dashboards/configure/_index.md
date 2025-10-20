@@ -1,5 +1,6 @@
 ---
 title: Configure
+description: Configure dashboard details, template variables, permissions, and access controls to customize your Datadog dashboards.
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -74,7 +75,7 @@ Copy, import, or export a dashboard's JSON using the export icon (upper right) w
 
 ### Delete dashboard
 
-<div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
+<div class="alert alert-danger">Dashboards must be unstarred before deletion.</div>
 
 Use this option to permanently delete your dashboard. Use the preset **Recently Deleted** list to restore deleted dashboards. Dashboards in **Recently Deleted** are permanently deleted after 30 days. For more information, see the [Dashboard list][7] documentation.
 

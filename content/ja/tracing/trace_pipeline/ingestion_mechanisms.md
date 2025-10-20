@@ -280,7 +280,7 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 
 #### Datadog Agent 7.42.0 以降
 
-<div class="alert alert-warning"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
+<div class="alert alert-danger"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
 
 The error sampling is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
 
@@ -303,7 +303,7 @@ The error sampling is remotely configurable if you're using the Agent version [7
 
 #### Datadog Agent 7.42.0 以降
 
-<div class="alert alert-warning"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
+<div class="alert alert-danger"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
 
 The rare sampling rate is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
 
@@ -765,7 +765,7 @@ Starting from version [v0.1.0][1], for C++ applications, set by-service and by-o
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><a href="/tracing/legacy_app_analytics/">App Analytics</a> のメカニズムは完全に非推奨となります。完全なトレースなしでシングルスパンを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">シングルスパンサンプリング</a>構成を使用します。完全なトレースを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">ヘッドベースサンプリング</a>構成を使用します。</div>
+<div class="alert alert-danger"><a href="/tracing/legacy_app_analytics/">App Analytics</a> のメカニズムは完全に非推奨となります。完全なトレースなしでシングルスパンを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">シングルスパンサンプリング</a>構成を使用します。完全なトレースを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">ヘッドベースサンプリング</a>構成を使用します。</div>
 
 ## 製品の取り込まれたスパン
 

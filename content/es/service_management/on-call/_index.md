@@ -78,7 +78,7 @@ Para restringir el acceso a un recurso de On-Call:
 
 ## Empiece a utilizar Datadog On-Call
 
-<div class="alert alert-warning">Para conservar el historial de incidentes, Datadog On-Call no admite la eliminación de recursos como localizadores, políticas de escalado o cronogramas. Para probar On-Call sin afectar a tu entorno de producción, crea una organización de prueba como sandbox.</div>
+<div class="alert alert-danger">Para conservar el historial de incidentes, Datadog On-Call no admite la eliminación de recursos como localizadores, políticas de escalado o cronogramas. Para probar On-Call sin afectar a tu entorno de producción, crea una organización de prueba como sandbox.</div>
 
 Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que todos los miembros del equipo configuran sus [ajustes del perfil de On-Call][2] para recibir notificaciones.
 

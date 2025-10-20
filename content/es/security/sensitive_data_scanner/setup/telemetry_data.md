@@ -5,7 +5,7 @@ disable_toc: false
 further_reading:
 - link: /security/sensitive_data_scanner/scanning_rules/library_rules
   tag: Documentación
-  text: Más información sobre las reglas de biblioteca predefinidas
+  text: Más información sobre las reglas de librería predefinidas
 - link: /security/sensitive_data_scanner/scanning_rules/custom_rules
   tag: Documentación
   text: Más información sobre la creación de reglas personalizadas
@@ -70,7 +70,7 @@ De manera predeterminada, los grupos de análisis recién creados se encuentran 
 
 ### Añadir reglas de análisis
 
-Una regla de análisis determina qué información confidencial debe coincidir con los datos definidos por un grupo de análisis. Puedes añadir reglas de análisis predefinidas desde la biblioteca de reglas de análisis de Datadog o puedes crear tus propias reglas mediante patrones de expresión regular. Los datos se analizan en el momento de la ingesta durante el procesamiento. Para los logs, esto significa que el análisis se realiza antes de la indexación y otras decisiones de enrutamiento.
+Una regla de análisis determina qué información confidencial debe coincidir con los datos definidos por un grupo de análisis. Puedes añadir reglas de análisis predefinidas desde la librería de reglas de análisis de Datadog o puedes crear tus propias reglas mediante patrones de expresión regular. Los datos se analizan en el momento de la ingesta durante el procesamiento. Para los logs, esto significa que el análisis se realiza antes de la indexación y otras decisiones de enrutamiento.
 
 Para Terraform, consulta el recurso [regla de Datadog Sensitive Data Scanner][6].
 
@@ -79,14 +79,14 @@ Para añadir reglas de análisis, realiza los siguientes pasos:
 1. Ve a la página de configuración de [Sensitive Data Scanner][5].
 1. Haz clic en el grupo de análisis en el que quieres añadir las reglas de análisis.
 1. Haz clic en **Add Scanning Rule** (Añadir regla de análisis). Como alternativa, haz clic en el menú desplegable **Add** (Añadir) situado en la esquina superior derecha de la página y selecciona **Add Scanning Rule** (Añadir regla de análisis).
-1. Selecciona si quires añadir una regla de biblioteca o crear una regla de análisis personalizada.
+1. Selecciona si quires añadir una regla de librería o crear una regla de análisis personalizada.
 
-{{% collapse-content title="Añadir regla de análisis desde las reglas de biblioteca" level="p" %}}
+{{% collapse-content title="Añadir regla de análisis desde las reglas de librería" level="p" %}}
 
-La biblioteca de reglas de análisis contiene reglas predefinidas para detectar patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, etc.
+La librería de reglas de análisis contiene reglas predefinidas para detectar patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, etc.
 
 1. Selecciona un grupo de análisis si no has creado esta regla dentro de un grupo de análisis.
-1. En la sección **Add library rules to the scanning group** (Añadir reglas de biblioteca al grupo de análisis), selecciona las reglas de biblioteca que quieres utilizar.
+1. En la sección **Add library rules to the scanning group** (Añadir reglas de librería al grupo de análisis), selecciona las reglas de librería que quieres utilizar.
 {{% sds-scanning-rule %}}
 1. Haz clic en **Add Rules** (Añadir reglas).
 
@@ -113,8 +113,8 @@ Puedes crear reglas de análisis personalizadas utilizando patrones de expresion
     - Patrones condicionales
     - Verbos de control del backtracking
     - La directiva `\C` "single-byte" (que rompe las secuencias UTF-8)
-    - La coincidencia de nueva línea `\R` 
-    - La directiva de reinicio de la coincidencia `\K` 
+    - La coincidencia de nueva línea `\R`
+    - La directiva de reinicio de la coincidencia `\K`
     - Llamadas y código integrado
     - Agrupación atómica y cuantificadores posesivos
 1. En **Create keyword dictionary** (Crear diccionario de palabras clave), añade palabras clave para mejorar la precisión de la detección cuando coincida con condiciones de expresión regular. Por ejemplo, si estás analizando un número de tarjeta de crédito Visa de dieciséis dígitos, puedes añadir palabras clave como `visa`, `credit` y `card`. También puedes exigir que estas palabras clave estén dentro de un número especificado de caracteres de una coincidencia. Por defecto, las palabras clave deben estar dentro de los 30 caracteres anteriores a un valor coincidente.
@@ -163,7 +163,7 @@ Los espacios de nombres excluidos son:
 
 1. Ve a la página de configuración de [Sensitive Data Scanner][5].
 1. Pasa el ratón por encima de la regla de análisis que quieres editar y haz clic en el icono **Edit** (Editar) (lápiz).
-   La sección **Define match conditions** (Definir condiciones de coincidencia) muestra la expresión regular que escribiste para tu regla personalizada o una explicación de la regla de análisis de biblioteca que elegiste junto con ejemplos de información confidencial coincidente.
+   La sección **Define match conditions** (Definir condiciones de coincidencia) muestra la expresión regular que escribiste para tu regla personalizada o una explicación de la regla de análisis de librería que elegiste junto con ejemplos de información confidencial coincidente.
 1. Para asegurarte de que una regla coincide con tus datos, puedes proporcionar una muestra en la sección **Add sample data** (Añadir datos de muestra). Si la regla encuentra coincidencias en los datos de muestra, aparecerá una etiqueta verde **Match** (Coincidencia) junto al campo de entrada.
 1. En **Create keyword dictionary** (Crear diccionario de palabras clave), puedes añadir palabras clave para mejorar la precisión de la detección. Por ejemplo, si buscas un número de tarjeta de crédito Visa de dieciséis dígitos, puedes añadir palabras clave como `visa`, `credit` y `card`.
 1. Elige el número de caracteres antes de una coincidencia en los que debe aparecer la palabra clave. Por defecto, las palabras clave deben estar dentro de los 30 caracteres anteriores a una coincidencia.
@@ -195,7 +195,7 @@ Para redactar el atributo:
 
 1. Ve a tu [grupo de análisis][5].
 2. Haz clic en **Add Scanning Rule** (Añadir regla de análisis).
-3. Comprueba las reglas de biblioteca que quieres utilizar.
+3. Comprueba las reglas de librería que quieres utilizar.
 4. Selecciona **Specific Attributes** (Atributos específicos) en **Scan entire event or portion of it** (Analizar el evento completo o una parte).
 5. Introduce el nombre del atributo que creaste anteriormente para especificar que quieres que se analice.
 6. Selecciona la acción deseada cuando haya una coincidencia.

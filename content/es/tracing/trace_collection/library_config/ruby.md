@@ -11,13 +11,13 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la biblioteca de rastreo de Ruby
+title: Configuración de la librería de rastreo de Ruby
 type: multi-code-lang
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado unificado de servicios][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [etiquetado unificado de servicios][1].
 
-Para obtener información sobre la configuración de la biblioteca de rastreo Ruby, consulta [configuraciones adicionales de Ruby][2].
+Para obtener información sobre la configuración de la librería de rastreo Ruby, consulta [configuraciones adicionales de Ruby][2].
 ## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -18,7 +18,7 @@ further_reading:
   tag: Documentación
   text: Límites de frecuencias
 title: Referencia de API
-type: documentación
+type: api
 ---
 
 {{< h2 >}}Referencia de API{{< /h2 >}}
@@ -35,7 +35,7 @@ Para probar la API [![Ejecuta en Postman][3]](https://god.gw.postman.com/run-col
 
 El [uso de la API][4] es una guía de los endpoints.
 
-**Notas**: 
+**Notas**:
    - Añade tus valores de API y de clave de aplicación a la pestaña **Variables** de la recopilación de la API Datadog.
    - Los ejemplos de código cURL suponen el uso de coreutils BASH y GNU. En macOS, puedes instalar coreutils con el [Gestor de paquetes Homebrew][5]: `brew install coreutils`
 

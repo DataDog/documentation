@@ -1,5 +1,6 @@
 ---
 title: Sheets
+description: "Analyze Datadog data in a familiar spreadsheet interface with pivot tables, lookups, calculated columns, and complex analysis tools."
 further_reading:
 - link: "/sheets/functions_operators"
   tag: "Documentation"
@@ -24,7 +25,8 @@ Start by creating a table of data, either by building a new query from Sheets or
 {{< img src="/sheets/create_table.png" alt="Modal to create to create a table from Sheets, showing a Logs query with status:error" style="width:90%;" >}}
 
 1. On the [Datadog Sheets page][1], click **New Spreadsheet**.
-1. Click **Add Data**.
+1. Click **Add Data**.<br/>
+**Note**: if there is a data source you want that is not available, request it [here][19].
 1. Start building your query by selecting your Data source, and adding filtering parameters.
 1. Select the columns you want to display and preview the resulting table.
 1. Click **Create Table**.
@@ -77,7 +79,7 @@ Create tables and analyze the data pulled from the following data sources:
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Database Queries     | [Database Monitoring][16] |
 | Events               | [Event Management][14] |
-| Infrastructure Data (Preview) | [Infrastructure Data][6] |
+| Infrastructure       | [DDSQL Editor][6] |
 | LLM Observability    | [LLM Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
@@ -119,7 +121,7 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [3]: /sheets/functions_operators
 [4]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
 [5]: https://app.datadoghq.com/cost
-[6]: https://app.datadoghq.com/infrastructure
+[6]: https://app.datadoghq.com/ddsql/editor
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: https://app.datadoghq.com/rum/sessions
 [9]: https://app.datadoghq.com/reference-tables
@@ -132,3 +134,4 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [16]: https://app.datadoghq.com/databases/queries
 [17]: https://app.datadoghq.com/ci/pipelines
 [18]: https://app.datadoghq.com/apm/traces
+[19]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/

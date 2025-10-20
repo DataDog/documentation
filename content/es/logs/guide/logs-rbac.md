@@ -14,10 +14,6 @@ further_reading:
 title: Cómo configurar el control de acceso basado en roles (RBAC) para logs
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
-El desenmascaramiento basado en roles de los datos confidenciales en logs está en Vista previa. Para inscribirte, haz clic en <b>Request Access</b> (Solicitar acceso).
-{{< /callout >}}
-
 ## Información general
 
 En muchas organizaciones, los logs pueden contener información confidencial que requiere [depuración][1] o acceso restringido para garantizar el cumplimiento y la privacidad. El control de acceso basado en roles (RBAC) permite gestionar los permisos de acceso de los usuarios de forma eficaz, permitiendo que sólo el personal autorizado acceda a logs y funciones específicos. Esta guía detalla cómo configurar RBAC para logs en Datadog, centrándose en la creación de roles personalizados y la asignación de los permisos adecuados.
@@ -85,7 +81,7 @@ Esta sección te guiará a través de la creación de dos roles, `ACME Admin` y 
 ### Creación de un rol
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 1. Ve a la sección [Roles][1] en Parámetros de organización de Datadog.
 1. Haz clic en **New Role** (Nuevo rol) para crear los roles `ACME Admin` y `ACME User`.
@@ -126,7 +122,7 @@ Para obtener más información sobre la creación de roles, consulta [Control de
 ### Asignación de roles a usuarios
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 1. En la [sección de usuarios][1] de Datadog, selecciona un usuario y asígnale el rol `ACME Admin` o `ACME User`.
 
@@ -160,7 +156,7 @@ En esta sección se explica cómo:
 ### Definición de una consulta de restricción
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 1. Ve a la página [Acceso a datos][1].
 1. Crea una consulta de restricción `team:acme` y aplícala a los roles ACME.

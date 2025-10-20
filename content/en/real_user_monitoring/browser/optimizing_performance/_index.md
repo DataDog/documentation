@@ -1,11 +1,12 @@
 ---
 title: Optimizing Performance
+description: "Use the RUM Optimization page to identify and troubleshoot browser performance issues with Core Web Vitals analysis and user experience visualization."
 aliases:
   - real_user_monitoring/browser/monitoring_performance_vitals/
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+  - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
-    text: "Interactive Lab: Core Web Vitals"
+    text: "Interactive Lab: Optimize Frontend Performance with Datadog RUM Browser Monitoring"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"

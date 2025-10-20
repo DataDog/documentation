@@ -1,5 +1,6 @@
 ---
 title: Microsoft Active Directory Federation Services SAML IdP
+description: Configure Microsoft Active Directory Federation Services as a SAML identity provider for Datadog with user management and authentication setup.
 aliases:
   - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:

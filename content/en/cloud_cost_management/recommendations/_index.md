@@ -19,6 +19,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
     tag: "Blog"
     text: "How we've created a successful FinOps practice at Datadog"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-recommendations/"
+    tag: "Blog"
+    text: "Eliminate cloud waste across AWS, Azure, and Google Cloud with Cloud Cost Recommendations"
 
 
 multifiltersearch:
@@ -51,6 +54,12 @@ multifiltersearch:
       resource_type: Autoscaling Group
       recommendation_type: Migrate Legacy Autoscaling Group instances to new types
       recommendation_description: An autoscaling group that includes legacy instance types.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Cloudtrail Trail
+      recommendation_type: Delete unnecessary Cloudtrail Trails
+      recommendation_description: More than the necessary number of Cloudtrails Trails are active on an account.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -472,12 +481,6 @@ multifiltersearch:
       recommendation_type: Terminate Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    - category: Downsize
-      cloud_provider: Azure
-      resource_type: VM Instance
-      recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type.
-      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Purchase
       cloud_provider: GCP
       resource_type: Cloud Run Job
@@ -613,6 +616,7 @@ For each cloud account that you would like to receive recommendations for:
 1. Enable [resource collection][3] for recommendations.
    - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
    - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
+   - For GCP, enable resource collection in the **Resource Collection** tab on the [Google Cloud Platform integration tile][10].
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
@@ -641,3 +645,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [7]: /integrations/amazon_s3_storage_lens/
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
+[10]: https://app.datadoghq.com/integrations/gcp

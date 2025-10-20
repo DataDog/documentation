@@ -873,7 +873,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
     "source": "httpRequest.headers",
     "target": "referrer",
     "filter": "name:Referrer",
-    "value_to_xtract": "value"
+    "value_to_extract": "value"
   }
 }
 ```
@@ -1067,7 +1067,7 @@ For more information, see [Threat Intelligence][9].
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/log_configuration/pipelines/
-[2]: /logs/log_configuration/parsing/
+[2]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [5]: /logs/log_collection/?tab=host#attributes-and-tags

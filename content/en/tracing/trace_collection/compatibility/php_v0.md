@@ -6,7 +6,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-<div class="alert alert-warning">This documentation is for the PHP tracer v0.x. If you are looking for the PHP tracer v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
+<div class="alert alert-danger">This documentation is for the PHP tracer v0.x. If you are looking for the PHP tracer v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
 </a> documentation.</div>
 
 ## Runtime support policy for PHP APM

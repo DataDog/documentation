@@ -18,7 +18,7 @@ Puedes utilizar expresiones JavaScript (JS) directamente en los pasos del flujo 
 
 Para utilizar una expresión en línea en tu flujo de trabajo, encierra la expresión en `${}`. Por ejemplo, para convertir un ID de cadena (`Trigger.stringId`) en un número entero, utiliza `${ parseInt(Trigger.stringId) }`.
 
-La biblioteca de utilidades [Lodash][1] está disponible en expresiones en línea. El prefijo de guión bajo de Lodash (`_`) es opcional. Por ejemplo, tanto `${ _.toNumber("1") }` como `${ toNumber("1") }` son expresiones en línea válidas.
+La librería de utilidades [Lodash][1] está disponible en expresiones en línea. El prefijo de guión bajo de Lodash (`_`) es opcional. Por ejemplo, tanto `${ _.toNumber("1") }` como `${ toNumber("1") }` son expresiones en línea válidas.
 
 ### Ejemplos
 

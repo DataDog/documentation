@@ -5,10 +5,11 @@ on:
   workflow_dispatch: # allows manual trigger
 
 jobs:
-  synthetics-worker-version:
+  synthetics_worker_version:
     permissions:
       contents: write # for git push
       id-token: write # Needed to federate tokens.
+      pull-requests: write # Action creates a PR.
     runs-on: ubuntu-latest
     name: Find latest synthetics-worker version
     steps:
@@ -17,7 +18,7 @@ jobs:
         with:
           scope: DataDog/documentation
           policy: self.bump-synthetics-worker-version.create-pr
-
+        
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: false
@@ -25,20 +26,22 @@ jobs:
       - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
         with:
           python-version: "3.11"
-      - run: pip install requests semver defusedxml
+      - run: pip install requests semver
 
-      - name: Find latest synthetic-worker version
-        id: write-synthetics-worker-version
+      - name: Find and write latest version
+        id: write-version
         run: |
-          python local/bin/py/version_getter.py
+          python local/bin/py/version_getter.py \
+          --url "https://ddsynthetics-windows.s3.amazonaws.com/installers.json" \
+          --file-name "synthetics_worker_versions.json"
 
       - name: Save modified file
         run: |
-          mkdir -p $RUNNER_TEMP/synthetics
-          cp ./data/synthetics_worker_versions.json $RUNNER_TEMP/synthetics/
+          mkdir -p $RUNNER_TEMP/temp
+          cp ./data/synthetics_worker_versions.json $RUNNER_TEMP/temp/
 
       - name: echo new version
-        run: echo ${{ steps.write-synthetics-worker-version.outputs.new_version }}
+        run: echo ${{ steps.write-version.outputs.new_version }}
 
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
@@ -46,20 +49,20 @@ jobs:
 
       - name: Restore modified file
         run: |
-          cp $RUNNER_TEMP/synthetics/synthetics_worker_versions.json ./data/
+          cp $RUNNER_TEMP/temp/synthetics_worker_versions.json ./data/
 
       - name: Write version
-        if: steps.write-synthetics-worker-version.outputs.new_version == 'true'
+        if: steps.write-version.outputs.new_version == 'true'
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add ./data/synthetics_worker_versions.json
-          git commit -m "(Automated) Bump synthetics-worker version"
-          git push -f origin HEAD:refs/heads/synthetics-worker/versions
+          git commit -m "(Automated) Bump synthetic worker version"
+          git push -f origin HEAD:refs/heads/automatic-version-update/synthetics-worker
 
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         name: Propose change with latest versions
-        if: steps.write-synthetics-worker-version.outputs.new_version == 'true'
+        if: steps.write-version.outputs.new_version == 'true'
         with:
           github-token: ${{ steps.octo-sts.outputs.token }}
           result-encoding: string
@@ -67,9 +70,9 @@ jobs:
             await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: "(Automated) Bump synthetics-worker version",
+              title: "(Automated) Bump version",
               body: "### Merge instructions\n- [x] Please merge after reviewing",
-              head: "synthetics-worker/versions",
+              head: "automatic-version-update/synthetics-worker",
               base: "master",
               maintainer_can_modify: true
             })

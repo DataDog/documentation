@@ -49,7 +49,7 @@ Para activar la gestión remota de Agents:
 
 ### Actualizar los Agents
 
-<div class="alert alert-warning">Las actualizaciones remotas de Agents se encuentran en vista previa. Prueba la característica solo en hosts que no sean esenciales para las cargas de trabajo de producción. Intenta actualizar los Agents de uno en uno antes de probar las actualizaciones masivas.</div>
+<div class="alert alert-danger">Las actualizaciones remotas de Agents se encuentran en vista previa. Prueba la característica solo en hosts que no sean esenciales para las cargas de trabajo de producción. Intenta actualizar los Agents de uno en uno antes de probar las actualizaciones masivas.</div>
 
 Para actualizar tus Agents:
 1. [Activa la gestión remota de Agents](#setup).

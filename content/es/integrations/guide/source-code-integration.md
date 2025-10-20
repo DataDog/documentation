@@ -54,8 +54,8 @@ Datadog admite las siguientes funciones para los siguientes proveedores de gesti
 | **Conectar instancia SaaS** | Sí <br />(GitHub.com y GitHub Enterprise Cloud) | Sí <br />(GitLab.com) | Sí <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
 | **Conectar instancia On-Prem** | Sí <br />(GitHub Enterprise Server) | Sí <br />(GitLab autogestionado o exclusivo) | No <br />(Azure DevOps Server) | No <br />(Centro de datos o servidor Bitbucket)|
 | **Enlaces de contexto** | Sí | Sí | Sí | Sí |
-| **Fragmentos de código** | Sí | Sí | Sí | No | 
-| **Comentarios en solicitudes pull** | Sí | Sí | Sí | No | 
+| **Fragmentos de código** | Sí | Sí | Sí | No |
+| **Comentarios en solicitudes pull** | Sí | Sí | Sí | No |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
@@ -72,7 +72,7 @@ Instala la [integración GitHub][101] de Datadog utilizando el [cuadro de la int
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios de las instancias de GitLab son compatibles con la vista previa cerrada. Los repositorios de las instancias de GitLab son compatibles tanto con GitLab.com (SaaS) como con GitLab Self-Managed/Dedicated (On-Prem). Para GitLab Self-Managed, tu instancia debe ser accesible desde Internet. Si es necesario, puedes permitir <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">direcciones IP de <code> webhooks</code> de Datadog</a> para que Datadog pueda conectarse a tu instancia. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Únete a la vista previa</a>.
 </div>
 
@@ -84,7 +84,7 @@ Instala la [integración del código fuente de GitHub][101] de Datadog utilizand
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios de Azure DevOps son compatibles con la vista previa cerrada. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Únete a la vista previa</a>.
 </div>
 
@@ -95,7 +95,7 @@ Instala la integración del código fuente de Azure DevOps de Datadog mientras a
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios en instancias autoalojadas o URL privadas no son compatibles de forma predefinida. Para activar esta función, <a href="/help">ponte en contacto con el servicio de asistencia</a>.
 </div>
 
@@ -145,11 +145,11 @@ Selecciona uno de los siguientes lenguajes que sea compatible con la integració
 {{< tabs >}}
 {{% tab "Go" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente Go versión 1.48.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la librería del cliente Go versión 1.48.0 o posterior.</div>
 
 #### Contenedores
 
-Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar la biblioteca de rastreo de Datadog o configurar tu aplicación con variables de entorno `DD_GIT_*`.
+Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar la librería de rastreo de Datadog o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
 ##### Opción 1: Docker
 
@@ -200,11 +200,11 @@ Si utilizas un host, tienes dos opciones.
 
 {{% tab "Python" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente Python versión 1.12.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la librería del cliente Python versión 1.12.0 o posterior.</div>
 
 #### Contenedores
 
-Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar la biblioteca de rastreo de Datadog o configurar tu aplicación con variables de entorno `DD_GIT_*`.
+Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar la librería de rastreo de Datadog o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
 ##### Opción 1: Docker
 
@@ -252,14 +252,14 @@ Si utilizas un host, tienes dos opciones.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente .NET versión 2.24.1 o posterior.</div>
+<div class="alert alert-info">Se requiere la librería del cliente .NET versión 2.24.1 o posterior.</div>
 
 Como primer paso, asegúrate de que tus archivos `.pdb` se despliegan junto con tus ensamblados .NET (`.dll` o `.exe`) en la misma carpeta.
 A continuación, sigue el resto de las instrucciones en función de tu modelo de despliegue específico:
 
 #### Contenedores
 
-Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar la biblioteca de rastreo de Datadog o configurar tu aplicación con variables de entorno `DD_GIT_*`.
+Si utilizas contenedores Docker, tienes tres opciones: utilizar Docker, utilizar la librería de rastreo de Datadog o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
 ##### Opción 1: Docker
 
@@ -305,7 +305,7 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 {{% tab "Node.js" %}}
 
 <div class="alert alert-info">
-  Se requiere la biblioteca de cliente de Node.js versión 3.21.0 o posterior.
+  Se requiere la librería de cliente de Node.js versión 3.21.0 o posterior.
   </br>
   </br>
   Para aplicaciones de Node.js transpiladas (por ejemplo, TypeScript), asegúrate de generar y publicar mapas de fuentes con la aplicación desplegada, y de ejecutar Node.js con la opción <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a>. De lo contrario, los enlaces de código y fragmentos no funcionarán.
@@ -344,7 +344,7 @@ Si utilizas un host, configura tu aplicación con variables de entorno `DD_GIT_*
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente Ruby versión 1.6.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la librería del cliente Ruby versión 1.6.0 o posterior.</div>
 
 #### Contenedores
 
@@ -379,7 +379,7 @@ Si utilizas un host, configura tu aplicación con la variable de entorno `DD_TAG
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente Java versión 1.12.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la librería del cliente Java versión 1.12.0 o posterior.</div>
 
 #### Contenedores
 
@@ -414,7 +414,7 @@ Si utilizas un host, configura tu aplicación con variables de entorno `DD_GIT_*
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente PHP versión 1.2.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la librería del cliente PHP versión 1.2.0 o posterior.</div>
 
 #### Contenedores
 
@@ -557,7 +557,7 @@ Puedes ver los enlaces de los errores en los stack traces asociados de tus seña
 {{% /tab %}}
 {{% tab "Dynamic Instrumentation" %}}
 
-Puedes ver los archivos de código fuente completos en [**Dynamic Instrumentation**][102] al crear o editar una instrumentación (log dinámico, métrica, tramo o etiquetas de tramo).
+Puedes ver los archivos de código fuente completos en [**Dynamic Instrumentation**][102] al crear o editar una instrumentación (log dinámico, métrica, tramo o span tags).
 
 #### Crear nueva instrumentación
 
@@ -587,7 +587,7 @@ Para más información, consulta la [documentación de Dynamic Instrumentation][
 {{% tab "CI Visibility" %}}
 Los comentarios en solicitudes pull están habilitados por defecto cuando se accede por primera vez a CI Visibility, si la integración GitHub o GitLab está instalada correctamente. Estas integraciones publican un comentario resumiendo los trabajos fallidos detectados en tu solicitud pull.
 
-{{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="Comentario en solicitud pull que resume los trabajos fallidos detectados por CI Visibility" style="width:100%;">}} 
+{{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="Comentario en solicitud pull que resume los trabajos fallidos detectados por CI Visibility" style="width:100%;">}}
 
 Para desactivar los comentarios en solicitudes pull para CI Visibility, ve a los [parámetros de repositorios de CI Visibility][101].
 
