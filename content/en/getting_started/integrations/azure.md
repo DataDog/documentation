@@ -81,13 +81,13 @@ Follow the instructions on this page to set up the **Azure integration** through
 You can also click to enable custom metric collection from [Azure Application Insights][36], and disable the collection of usage metrics.
 
 6. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
-7. Enable log collection to setup and configure the services and diagnostic settings needed to forward logs to Datadog:
-   1. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
+7. Enable log collection to set up and configure the services and diagnostic settings needed to forward logs to Datadog:
+   1. If a log forwarder already exists in the tenant, it is modified to extend its scope. Any changed settings apply to existing as well as newly-selected subscriptions or management groups.
    2. If you're creating a new log forwarder:
       1. Enter a resource group name to store the log forwarder control plane
       2. Select a control plane subscription for the log-forwarding orchestration (LFO).
       3. Select a region for the control plane.<br>
-   **Note**: This section only appears when creating a new log forwarder.
+   **Note**: The resource group name, control plane subscription, and region fields only appear when creating a new log forwarder.
    3. Optionally, open **Log filtering options** to filter logs by tags, or apply filtering for specific information (such as PII) using regex.
 
    See the [Architecture section][34] of the automated log forwarding guide for more information about this architecture.
