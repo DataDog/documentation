@@ -146,7 +146,7 @@ This gives you full control over your Git workflow and follows standard security
 - Adds blog post links to the `further_reading` section of relevant documentation pages.
 - Preserves existing formatting and indentation.
 - Skips files listed in the `EXCLUDED_DOCS` constant (in the script).
-- Skips integration documentation pages (`/integrations/*`).
+- Skips dirs that match patterns in the `EXCLUDED_URL_PATTERNS` constant (in the script).
 - Updates files on whatever branch you're on.
 
 ## Output format

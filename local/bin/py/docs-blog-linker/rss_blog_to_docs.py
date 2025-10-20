@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-import os
-import sys
-import json
-import time
+"""
+RSS Blog to Docs Linker
+
+Automatically adds Datadog blog post links to the further_reading section
+of relevant documentation pages by parsing the blog RSS feed.
+"""
+
+# Standard library imports
 import argparse
+import sys
+import time
+from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse, urlunparse
-from datetime import datetime
 
-# Check dependencies and provide helpful error messages
+# Dependency check before importing third-party packages
 def check_dependencies():
     """Check if required dependencies are installed by parsing requirements.txt."""
-    # Get the directory where this script lives
     script_dir = Path(__file__).parent
     requirements_file = script_dir / "requirements.txt"
     
@@ -19,13 +24,14 @@ def check_dependencies():
         print("WARNING: requirements.txt not found, skipping dependency check", file=sys.stderr)
         return
     
-    # Parse requirements.txt
-    requirements = []
+    # Map package names to their import names
     import_names = {
         'beautifulsoup4': 'bs4',
         'ruamel.yaml': 'ruamel.yaml',
     }
     
+    # Parse requirements.txt
+    requirements = []
     with open(requirements_file) as f:
         for line in f:
             line = line.strip()
@@ -53,14 +59,14 @@ def check_dependencies():
 
 check_dependencies()
 
+# Third-party imports (checked above)
 import feedparser
 import requests
 from bs4 import BeautifulSoup
-
-# YAML (round-trip safe) for frontmatter editing
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap
 
+# Configure YAML parser for frontmatter editing
 yaml_rt = YAML()
 yaml_rt.preserve_quotes = True
 yaml_rt.indent(mapping=2, sequence=4, offset=2)
@@ -78,6 +84,13 @@ EXCLUDED_DOCS = {
     "https://docs.datadoghq.com/security/default_rules/": "content/en/security/default_rules/_index.md"
 }
 
+# URL patterns for automatic exclusion
+# Documents matching these patterns will be automatically skipped
+EXCLUDED_URL_PATTERNS = [
+    ("https://docs.datadoghq.com/integrations", "integration-doc"),
+    ("https://docs.datadoghq.com/api/", "api-doc"),
+]
+
 
 # ----------------------------
 # URL helpers
@@ -86,6 +99,17 @@ EXCLUDED_DOCS = {
 def normalize_url(u: str) -> str:
     p = urlparse(u)
     return urlunparse((p.scheme, p.netloc, p.path.rstrip("/"), "", "", ""))
+
+
+def should_exclude_url(url: str) -> tuple[bool, str | None]:
+    """
+    Check if a URL should be excluded based on pattern matching.
+    Returns (should_exclude, reason) where reason is the exclusion status or None.
+    """
+    for pattern, reason in EXCLUDED_URL_PATTERNS:
+        if url.startswith(pattern):
+            return (True, f"skipped:{reason}")
+    return (False, None)
 
 
 def canonicalize_docs_url(u: str) -> str:
@@ -399,9 +423,10 @@ def update_docs_with_blog_links(
     title = clean_title(fetch_title(blog_url))
 
     for d in doc_urls:
-        # Skip integration docs (pattern-based exclusion) - check before path resolution
-        if d.startswith("https://docs.datadoghq.com/integrations"):
-            out["changes"].append({"doc": d, "status": "skipped:integration-doc", "file": "N/A"})
+        # Check URL pattern exclusions
+        excluded, exclusion_reason = should_exclude_url(d)
+        if excluded:
+            out["changes"].append({"doc": d, "status": exclusion_reason, "file": "N/A"})
             continue
             
         path = docs_path(repo_root, d)
@@ -461,7 +486,7 @@ def print_readable_summary(results: list) -> None:
             
             if status == "updated":
                 documents_updated.append(f"{doc_url} ({file_path})")
-            elif status not in ["noop:already-present", "skipped:excluded", "skipped:integration-doc"]:
+            elif status not in ["noop:already-present", "skipped:excluded", "skipped:integration-doc", "skipped:api-doc"]:
                 documents_unable_to_update.append(f"{doc_url} ({status})")
     
     # Print SUMMARY section
@@ -505,7 +530,7 @@ def print_readable_summary(results: list) -> None:
         
         # Separate changes by status
         updated_changes = [c for c in changes if c.get("status") == "updated"]
-        unable_changes = [c for c in changes if c.get("status") not in ["updated", "noop:already-present", "skipped:excluded", "skipped:integration-doc"]]
+        unable_changes = [c for c in changes if c.get("status") not in ["updated", "noop:already-present", "skipped:excluded", "skipped:integration-doc", "skipped:api-doc"]]
         
         if updated_changes:
             print("   documents updated:")
