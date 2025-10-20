@@ -12,10 +12,6 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector as a Kubernetes DaemonSet using Helm or the Datadog Operator.
