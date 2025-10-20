@@ -7,17 +7,16 @@ Automatically adds Datadog blog post links to the `further_reading` section of r
 The `rss_blog_to_docs.py` script:
 1. Processes the [Datadog blog RSS feed](https://www.datadoghq.com/blog/index.xml)
 2. Finds documentation links in blog posts
-3. Updates the corresponding markdown files
-4. Commits the changes to a new local branch
+3. Updates the corresponding markdown files on your current branch
 
-By default, the script processes blog posts from the last 14 days. After it finishes running, you can manually push the branch and create a PR.
+By default, the script processes blog posts from the last 14 days. After it finishes running, you can manually push your branch and create a PR.
 
 ## Prerequisites
 
 - Python 3.8+
 - Access to the documentation repository
 
-Dependencies are checked automatically with helpful error messages.
+Dependencies are checked automatically.
 
 ## Run the script
 
@@ -55,28 +54,28 @@ For custom workflows:
 
 ### Processing control
 - `--since DAYS`: Process only blog posts published within the last N days.
-  - Example: `--since 7` processes posts from the last week.
+  - Example: `--since 7` (processes posts from the last week).
   - Default: `14` (processes posts from the last 2 weeks).
 
 - `--latest N`: Process only the N most recent blog posts (ignores `--since`).
-  - Example: `--latest 5` processes the 5 newest posts regardless of age.
+  - Example: `--latest 5` (processes the 5 newest posts regardless of age).
 
 - `--rss URL`: Custom RSS feed URL.
   - Default: `https://www.datadoghq.com/blog/index.xml`
 
 ### Execution modes
-- `--dry-run`: Skips file changes and Git operations, but shows what _would_ change.
+- `--dry-run`: Skips file changes, but shows what _would_ change.
   Output shows:
     - `status: "would-update"` for each mapped doc file
-    - `branch: "(no branch created)"`
 
 ## Example workflow
 
 ### Standard workflow (using Makefile)
 
-1. Navigate to documentation repo
+1. Navigate to documentation repo and create a branch
    ```bash
    cd /path/to/documentation
+   git checkout -b your-handle/blog-links-update
    ```
 
 2. Test the changes first (dry-run mode)
@@ -84,21 +83,22 @@ For custom workflows:
    make update-blog-links-dry-run
    ```
 
-3. Run the script to create branch and commit changes
+3. Run the script to update files
    ```bash
    make update-blog-links
    ```
 
-4. Review the changes locally
+4. Review the changes
    ```bash
-   git diff master
+   git diff
    ```
 
-5. Push the branch and create a PR
+5. Commit and push the changes
    ```bash
-   git push -u origin <branch-name>
+   git add .
+   git commit -m "Add blog links to further_reading"
+   git push origin your-handle/blog-links-update
    ```
-   (The branch name is shown in the script output)
 
 6. Navigate to the [Documentation repo in GitHub](https://github.com/DataDog/documentation) to create and review the PR.
 
@@ -108,6 +108,7 @@ If you need more control (for example, custom date ranges):
 
 ```bash
 cd /path/to/documentation
+git checkout -b your-handle/blog-links-update
 
 # Dry run
 python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --dry-run
@@ -117,6 +118,11 @@ python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --since 7
 
 # Process most recent 5 posts regardless of age
 python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --latest 5
+
+# Commit and push
+git add .
+git commit -m "Add blog links to further_reading"
+git push origin your-handle/blog-links-update
 ```
 
 ## How it works
@@ -127,18 +133,21 @@ python local/bin/py/docs-blog-linker/rss_blog_to_docs.py --latest 5
   - This design allows the script to be run multiple times safely without duplicating links.
 
 ### Git workflow
-1. Creates a branch for the changes (based on `master`).
-   - Detects your git username from `git config user.name` or `git config user.email`, and uses this for branch naming.
-2. Pulls the latest changes from the main branch.
-3. Updates documentation files with `further_reading` entries.
-4. Commits changes with a descriptive message.
-5. **Stops here** - you manually push and create the PR.
+The script does **not** interact with Git. You are responsible for:
+1. Creating a branch before running the script
+2. Reviewing the changes the script makes
+3. Committing the changes
+4. Pushing the branch
+5. Creating a PR
+
+This gives you full control over your Git workflow and follows standard security practices.
 
 ### File updates
 - Adds blog post links to the `further_reading` section of relevant documentation pages.
 - Preserves existing formatting and indentation.
 - Skips files listed in the `EXCLUDED_DOCS` constant (in the script).
 - Skips integration documentation pages (`/integrations/*`).
+- Updates files on whatever branch you're on.
 
 ## Output format
 

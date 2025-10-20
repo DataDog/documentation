@@ -4,7 +4,6 @@ import sys
 import json
 import time
 import argparse
-import subprocess
 from pathlib import Path
 from urllib.parse import urlparse, urlunparse
 from datetime import datetime
@@ -78,46 +77,6 @@ DOCS_HOST = "docs.datadoghq.com"
 EXCLUDED_DOCS = {
     "https://docs.datadoghq.com/security/default_rules/": "content/en/security/default_rules/_index.md"
 }
-
-
-# ----------------------------
-# Shell utils
-# ----------------------------
-
-def run(cmd: list[str], cwd: Path | None = None) -> str:
-    p = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)
-    if p.returncode != 0:
-        raise RuntimeError(f"Command failed: {' '.join(cmd)}\n{p.stdout}\n{p.stderr}")
-    return p.stdout.strip()
-
-
-def get_git_username(repo_path: Path | None = None) -> str:
-    """
-    Get git username from git config, falling back to sensible defaults.
-    Tries user.name first, then user.email (without domain), then a generic fallback.
-    """
-    try:
-        # Try git config user.name
-        name = run(["git", "config", "user.name"], cwd=repo_path)
-        if name:
-            # Convert to lowercase and replace spaces with hyphens for branch names
-            return name.lower().replace(" ", "-")
-    except Exception:
-        pass
-    
-    try:
-        # Try git config user.email and extract username part
-        email = run(["git", "config", "user.email"], cwd=repo_path)
-        if email and "@" in email:
-            username = email.split("@")[0]
-            return username.lower().replace(".", "-")
-    except Exception:
-        pass
-    
-    # Fallback to generic username
-    return "blog-linker"
-
-
 
 
 # ----------------------------
@@ -400,7 +359,7 @@ def safe_update_further_reading(md_file: Path, blog_url: str, blog_title: str | 
 
 
 # ----------------------------
-# Repo mapping & PR helpers
+# Repo mapping
 # ----------------------------
 
 def docs_path(repo_root: Path, docs_url: str) -> Path | None:
@@ -429,15 +388,14 @@ def update_docs_with_blog_links(
     repo_root: Path,
     blog_url: str,
     doc_urls: list[str],
-    branch: str,
     dry_run: bool = False,
 ) -> dict:
     """
-    For each docs URL: map to repo file, update further_reading, and commit locally.
-    - dry_run: no edits, no branch.
-    Script does NOT push or create PRs - user must manually push and create PR.
+    For each docs URL: map to repo file, update further_reading.
+    - dry_run: no edits.
+    Script does NOT interact with Git - user manages their own Git workflow.
     """
-    out = {"branch": None, "changes": []}
+    out = {"changes": []}
     title = clean_title(fetch_title(blog_url))
 
     for d in doc_urls:
@@ -468,21 +426,6 @@ def update_docs_with_blog_links(
             "status": "updated" if updated else status,
             "file": relative_path,
         })
-
-    any_updates = any(c["status"] == "updated" for c in out["changes"])
-
-    if dry_run:
-        out["branch"] = "(no branch created)"
-        return out
-
-    # Stage & commit if changes exist
-    if any_updates:
-        run(["git", "add", "."], cwd=repo_root)
-        commit_msg = f"add '{title}' link(s) to further_reading in relevant docs\n\nSource: {blog_url}" if title else f"add blog link(s) to further_reading in relevant docs\n\nSource: {blog_url}"
-        run(["git", "commit", "-m", commit_msg], cwd=repo_root)
-        out["branch"] = branch
-    else:
-        out["branch"] = branch + " (no changes)"
 
     return out
 
@@ -599,7 +542,7 @@ def main():
     ap.add_argument("--since", type=int, default=14, help="Only process posts published in the last N days (default: 14)")
     ap.add_argument("--limit", type=int, default=20, help="Max items to process (default: 20)")
     ap.add_argument("--latest", type=int, default=None, help="Process the most recent N items (ignores --since)")
-    ap.add_argument("--dry-run", action="store_true", help="Do not modify files, do not create a branch")
+    ap.add_argument("--dry-run", action="store_true", help="Do not modify files")
     args = ap.parse_args()
 
     feed = feedparser.parse(args.rss)
@@ -637,20 +580,6 @@ def main():
         print("  cd /path/to/documentation", file=sys.stderr)
         print("  make update-blog-links", file=sys.stderr)
         sys.exit(1)
-    
-    # Create ONE branch for the entire run (if not dry-run)
-    run_branch = None
-    if not args.dry_run:
-        git_user = get_git_username(repo_root)
-        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        run_branch = f"{git_user}/blog-links-update-{timestamp}"
-        
-        print(f"Creating branch: {run_branch}")
-        
-        # Create and switch to the branch ONCE for this run
-        run(["git", "checkout", "master"], cwd=repo_root)
-        run(["git", "pull", "origin", "master"], cwd=repo_root)
-        run(["git", "checkout", "-b", run_branch], cwd=repo_root)
 
     results = []
     for e in sorted(new_entries, key=lambda x: x.get("published_parsed") or time.gmtime(0)):
@@ -671,34 +600,34 @@ def main():
                 repo_root,
                 blog_url,
                 docs,
-                branch=run_branch, 
                 dry_run=args.dry_run,
             )
             summary.update(fx)
         else:
-            summary.update({"branch": None, "changes": []})
+            summary.update({"changes": []})
 
         results.append(summary)
     
     # Print readable summary
     print_readable_summary(results)
     
-    # Print next steps if a branch was created
-    if run_branch and any(r.get("changes") for r in results):
-        any_actual_updates = any(
-            c.get("status") == "updated" 
-            for r in results 
-            for c in r.get("changes", [])
-        )
-        if any_actual_updates:
-            print("\n" + "=" * 50)
-            print("NEXT STEPS")
-            print("=" * 50)
-            print(f"\nBranch created: {run_branch}")
-            print("\nTo push and create a PR:")
-            print(f"  cd {repo_root}")
-            print(f"  git push -u origin {run_branch}")
-            print("  # Then create a PR on GitHub\n")
+    # Print next steps if files were updated
+    any_actual_updates = any(
+        c.get("status") == "updated" 
+        for r in results 
+        for c in r.get("changes", [])
+    )
+    
+    if any_actual_updates and not args.dry_run:
+        print("\n" + "=" * 50)
+        print("NEXT STEPS")
+        print("=" * 50)
+        print("\nFiles have been updated on your current branch.")
+        print("\nTo commit and push your changes:")
+        print("  git add .")
+        print("  git commit -m 'Add blog links to further_reading'")
+        print("  git push")
+        print("\nThen create a PR on GitHub.\n")
 
 
 if __name__ == "__main__":
