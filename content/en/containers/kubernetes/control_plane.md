@@ -328,7 +328,7 @@ The Datadog Operator can automatically configure monitoring for Kubernetes contr
 1. Datadog Operator v1.18.0+
 1. Datadog Agent v7.69+
 
-#### General Setup
+#### General setup
 
 Control plane monitoring is enabled by default, but requires introspection to be enabled.
 
@@ -439,7 +439,7 @@ The Datadog Operator can automatically configure monitoring for Kubernetes contr
 
 Control plane monitoring is enabled by default, but requires introspection to be enabled.
 
-You can enable introspection using the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+You can enable introspection using the [datadog-operator Helm chart][12]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -1197,3 +1197,4 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [9]: https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/nodes-and-node-pools
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
 [11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html
+[12]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
