@@ -162,12 +162,8 @@ To set up a monitor to alert when the daily quota is reached for an index:
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
 2. Enter: `source:datadog datadog_index:* "daily quota reached"` in the **Define the search query** section. Include `datadog_index:*` to ensure only index related events are selected.
 3. In the **Count of** field, add `datadog_index` to group by index. This updates the query to read `Show Count of * by datadog_index (datadog_index)`.
-4. For **Evaluate the query over**, select **current day**. For **Starting at**, select the time when indexes reset. This keeps the monitor in alert status until quota reset.
-
-This is an example of what the search query looks like when defined in Datadog:
-
-{{< img src="logs/guide/daily_quota_notification_search_query.png" alt="The Datadog Alert on Index Quota Reached Search Query configuration" style="width:70%;">}}
-
+4. For **Evaluate the query over**, select **current day**. For **Starting at**, select the time when indexes reset. This keeps the monitor in alert status until quota reset. This is an example of what the search query looks like when defined in Datadog:
+  {{< img src="logs/guide/daily_quota_notification_search_query.png" alt="The Datadog Alert on Index Quota Reached Search Query configuration" style="width:100%;">}}
 5. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
 6. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
 7. Click **Save**.
