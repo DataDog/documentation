@@ -26,6 +26,48 @@ The main difference is that the Agent does not need to have access to the runtim
 
 Setting up Podman DB path depends on your Agent version.
 
+### Agent v7.54.0 or greater
+
+Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `containers` path is provided.
+
+1. To discover the exact location of containers folder, run the following command:
+   ```shell
+   $ podman info -f json | jq '.store.graphRoot'
+   "$HOME/.local/share/containers/storage"
+   ```
+
+   In the example above, the containers folder is located at `$HOME/.local/share/containers`.
+
+1. Run one of the following commands to deploy the Agent.
+   1. To deploy the Agent without logging:
+
+      **Note**: Replace `<CONTAINERS_PATH>` with the path to your containers directory, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
+      ```shell
+      podman run -d --name dd-agent \
+        --cgroupns host --pid host \
+        -v <CONTAINERS_PATH>:/var/lib/containers:ro \
+        -v /proc/:/host/proc/:ro \
+        -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+        -e DD_API_KEY=<API_KEY> \
+        -e DD_HOSTNAME=<DD_HOSTNAME> \
+        gcr.io/datadoghq/agent:latest
+      ```
+
+    1. To deploy the Agent with log collection run the agent as follows:
+       ```shell
+       $ podman run -d --name dd-agent \
+          --cgroupns host --pid host \
+          -v <CONTAINERS_PATH>:/var/lib/containers:ro \
+          -v /proc/:/host/proc/:ro \
+          -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+          -e DD_API_KEY=<API_KEY> \
+          -e DD_HOSTNAME=<DD_HOSTNAME> \
+          -e DD_LOGS_ENABLED=true \
+          -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+          -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
+          gcr.io/datadoghq/agent:latest
+       ```
+
 ### Agent versions v7.54.0 and below
 
 {{< tabs >}}
@@ -84,48 +126,6 @@ Podman versions below 4.8 use BoltDB as the default database backend.
 {{< /tabs >}}
 
 The Agent should detect all the containers managed by the non-admin user that ran the Podman command and emit `container.*` metrics for all of them.
-
-### Agent v7.54.0 or greater
-
-Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `containers` path is provided.
-
-1. To discover the exact location of containers folder, run the following command:
-   ```shell
-   $ podman info -f json | jq '.store.graphRoot'
-   "$HOME/.local/share/containers/storage"
-   ```
-
-   In the example above, the containers folder is located at `$HOME/.local/share/containers`.
-
-1. Run one of the following commands to deploy the Agent. 
-   1. To deploy the Agent without logging:
-
-      **Note**: Replace `<CONTAINERS_PATH>` with the path to your containers directory, `<API_KEY>` with your API key, and `<DD_HOSTNAME>` with your Datadog hostname:
-      ```shell
-      podman run -d --name dd-agent \
-        --cgroupns host --pid host \
-        -v <CONTAINERS_PATH>:/var/lib/containers:ro \
-        -v /proc/:/host/proc/:ro \
-        -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-        -e DD_API_KEY=<API_KEY> \
-        -e DD_HOSTNAME=<DD_HOSTNAME> \
-        gcr.io/datadoghq/agent:latest
-      ```
-
-    1. To deploy the Agent with log collection run the agent as follows:
-       ```shell
-       $ podman run -d --name dd-agent \
-          --cgroupns host --pid host \
-          -v <CONTAINERS_PATH>:/var/lib/containers:ro \
-          -v /proc/:/host/proc/:ro \
-          -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-          -e DD_API_KEY=<API_KEY> \
-          -e DD_HOSTNAME=<DD_HOSTNAME> \
-          -e DD_LOGS_ENABLED=true \
-          -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-          -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
-          gcr.io/datadoghq/agent:latest
-       ```
 
 ## Agent deployment as a Podman rootful container
 
