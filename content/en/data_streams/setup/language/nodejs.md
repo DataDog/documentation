@@ -30,7 +30,7 @@ aliases:
 | Google Pub/Sub  | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}}        | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}}        |
 
 #### Support for AWS SQS with AWS Lambda
-To monitor data streams for Node.js Lambda functions calling AWS SQS, use Datadog's Node.js Lambda tracer, [`datadog-lambda-js` v.12.128.0][8].
+To monitor data streams for Node.js Lambda functions calling AWS SQS, SNS, or Kinesis, use Datadog's Node.js Lambda tracer, [`datadog-lambda-js` v.12.128.0+][8].
 
 ### Installation
 
