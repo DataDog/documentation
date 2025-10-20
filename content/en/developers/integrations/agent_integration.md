@@ -201,7 +201,7 @@ At the core of each Agent-based integration is an *Agent Check* that periodicall
 
 For Awesome, the Agent Check is composed of a [service check][25] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible.
 
-To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7]. To learn how to submit logs from your Agent Check, see [Log Submission From Agent Checks][36].
+To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7]. To learn how to submit logs from your Agent Check, see [Agent Integration Log Collection][36].
 
 The code contained within `awesome/datadog_checks/awesome/check.py` looks something like this:
 

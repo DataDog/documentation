@@ -56,7 +56,7 @@ To enable log submission from your custom Agent check, you need to configure log
    - `source`: The source of the logs (typically your integration name)
    - `service`: The service name to associate with the logs (this can also be the integration name if nothing else applies)
 
-3. [Restart the Agent][6] if it is running for the configuration changes to take effect.
+3. [Restart the Agent][6] to apply the configuration changes.
 
 After it's configured, your integration can use the [`send_log` method][7] to submit logs. These logs are tagged with the `source` and `service` specified in the configuration.
 
@@ -221,4 +221,5 @@ If logs are not appearing in Datadog:
 [4]: /logs/log_configuration/processors
 [5]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck.send_log
 [7]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck.send_log

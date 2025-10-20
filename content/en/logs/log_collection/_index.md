@@ -130,7 +130,7 @@ For more information, see [How to send logs to Datadog while reducing data trans
 
 If you are developing a custom Agent integration, you can submit logs programmatically from within your Agent check using the `send_log` method. This allows your custom integration to emit logs alongside metrics, events, and service checks.
 
-To learn how to submit logs from your custom Agent check, see [Log Submission From Agent Checks][15].
+To learn how to submit logs from your custom Agent check, see [Agent Integration Log Collection][15].
 
 [15]: /logs/log_collection/agent_checks/
 {{% /tab %}}
