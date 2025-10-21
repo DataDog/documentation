@@ -27,6 +27,8 @@ You can customize notifications using:
 - **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
 - **[Simulate notifications](#simulate-notifications)**: Test your notification messages by sending simulated notifications.
 
+**Note**: For information about accessing local (config) variables, see the [Variables][6] section.
+
 ## Pre-filled monitor messages
 
 Synthetic Monitoring provides pre-filled messages with metadata such as:
@@ -247,5 +249,6 @@ Simulated notifications include **[TEST]** in their subject lines and use a defa
 [3]: /synthetics/notifications/conditional_alerting
 [4]: /synthetics/notifications/advanced_notifications
 [5]: /monitors/notifications
+[6]: /synthetics/notifications/template_variables/?tab=testinfo#variables
 
 

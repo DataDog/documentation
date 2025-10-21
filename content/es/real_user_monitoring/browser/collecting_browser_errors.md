@@ -1,16 +1,19 @@
 ---
 aliases:
-- /es/error_tracking/standalone_frontend/collecting_browser_errors
+- /error_tracking/standalone_frontend/collecting_browser_errors
+description: Aprende a recopilar y realizar un seguimiento de errores frontend de
+  varias fuentes utilizando el SDK del navegador RUM, incluida la recopilación manual
+  de errores y los límites de errores React.
 further_reading:
-- enlace: /error_tracking/explorer/
-  etiqueta: Documentation
-  texto: Explora tus errores en Datadog
-- enlace: /error_tracking/monitors/
-  etiqueta: Documentation
-  texto: Alerta proactiva sobre cuestiones de impacto
-- etiqueta: Documentation
+- link: /error_tracking/explorer/
+  tag: Documentation
+  text: Explora tus errores en Datadog
+- link: /error_tracking/monitors/
+  tag: Documentation
+  text: Alerta proactiva sobre cuestiones de impacto
+- tag: Documentation
   link: /real_user_monitoring
-  texto: Medir el rendimiento y el impacto en el usuario
+  text: Medir el rendimiento y el impacto en el usuario
 title: Recopilación de errores del navegador
 ---
 ## Información general
@@ -50,7 +53,7 @@ Los errores de origen incluyen información a nivel de código sobre el error. P
 
 Excepciones manejadas por Monitor, rechazos de promesas manejados y otros errores no rastreados automáticamente por el SDK del navegador con la API `addError()`:
 
-{{< code-block lang="JavaScript" >}}
+{{< code-block lang="javascript" >}}
 addError(
     error: unknown,
     context?: Context

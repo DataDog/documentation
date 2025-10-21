@@ -106,7 +106,7 @@ public class DogStatsdClient {
     public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
-            .prefix("statsd").
+            .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
@@ -115,6 +115,7 @@ public class DogStatsdClient {
           .withTitle("An error occurred")
           .withText("Error message")
           .withAlertType(Event.AlertType.ERROR)
+          .withTags("env:prod", "tagkey:value")
           .build();
 
         Statsd.recordEvent(event);
@@ -125,25 +126,25 @@ public class DogStatsdClient {
 
 {{< programming-lang lang=".NET" >}}
 ```csharp
-using StatsdClient;
+using StatsdClient; 
 
-public class DogStatsdClient
-{
-    public static void Main()
-    {
-        var dogstatsdConfig = new StatsdConfig
-        {
-            StatsdServerName = "127.0.0.1",
-            StatsdPort = 8125,
-        };
+public class DogStatsdClient    
+{   
+    public static void Main()   
+    {   
+        var dogstatsdConfig = new StatsdConfig  
+        {   
+            StatsdServerName = "127.0.0.1", 
+            StatsdPort = 8125,  
+        };  
 
-        using (var dogStatsdService = new DogStatsdService())
-        {
+        using (var dogStatsdService = new DogStatsdService())   
+        {   
             if (!dogStatsdService.Configure(dogstatsdConfig))
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
-            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });
-        }
-    }
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" }); 
+        }   
+    }   
 }
 ```
 {{< /programming-lang >}}
@@ -170,8 +171,8 @@ $statsd->event('An error occurred.',
   );
 ```
 
-Con la librería de DogStatsD-PHP puedes enviar eventos a través de TCP directamente a la API de Datadog. Es más lento pero más fiable que utilizar la instancia de DogStatsD del Agent, ya que los eventos se reenvían desde tu aplicación al Agent mediante UDP.
-Para utilizarlo, debes configurar la librería con tus [claves de aplicación y API de Datadog][1] en lugar de la instancia local de DogStatS:
+Con la biblioteca de DogStatsD-PHP puedes enviar eventos a través de TCP directamente a la API de Datadog. Es más lento pero más fiable que utilizar la instancia de DogStatsD del Agent, ya que los eventos se reenvían desde tu aplicación al Agent mediante UDP.
+Para utilizarlo, debes configurar la biblioteca con tus [claves de aplicación y API de Datadog][1] en lugar de la instancia local de DogStatS:
 
 ```php
 <?php
@@ -205,7 +206,7 @@ $statsd->event('An error occurred.',
 * Debes utilizar un bloque de código `try`/`catch` para evitar advertencias o errores sobre problemas de comunicación con la API de Datadog.
 
 
-## Lectura adicional
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
