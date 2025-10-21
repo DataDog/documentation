@@ -1815,7 +1815,6 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 {{< code-block lang="javascript" >}}
 const { llmobs } = require('dd-trace');
 
-@workflow
 function ragWorkflow(userQuestion) {
     const contextStr = retrieveDocuments(userQuestion).join(" ");
 
@@ -2215,19 +2214,19 @@ const { llmobs } = require('dd-trace');
 function redactProcessor(span) {
   if (span.getTag("no_input") == "true") {
     for (const message of span.input) {
-      message.content = ""
+      message.content = "";
     }
   }
 
   return span
 }
 
-llmobs.registerProcessor(redactProcessor)
+llmobs.registerProcessor(redactProcessor);
 
-function callOpenai() {
-  llmobs.annotationContext({ tags: { no_input: "true" } }, async () => {
+async function callOpenai() {
+  await llmobs.annotationContext({ tags: { no_input: "true" } }, async () => {
     // make call to openai
-  })
+  });
 }
 {{< /code-block >}}
 
