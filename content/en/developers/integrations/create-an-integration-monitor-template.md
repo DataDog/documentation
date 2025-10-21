@@ -5,7 +5,7 @@ further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentation
   text: Configure Monitors
-title: Create an Integration-Monitor Template
+title: Create a Monitor Template
 description: Learn how to create a monitor for your integration.
 ---
 ## Overview
