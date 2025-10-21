@@ -143,7 +143,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 </div>
 
 ## On-Call mobile widgets
-Add On-Call homescreen and lockscreen widgets to easily access your pages and shifts.
+Add On-Call home screen and lock screen widgets to easily access your pages and shifts.
 
 ### On-Call home screen widget
 
