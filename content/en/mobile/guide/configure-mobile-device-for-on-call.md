@@ -146,7 +146,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 <a href="https://datadog-on-call.s3.amazonaws.com/datadog-on-call.vcf">Download the current version of the Datadog On-Call contact card</a>. <strong>Note</strong>: The contact card is subject to change at any time.
 </div>
 
-## On-Call Mobile Widgets
+## On-Call mobile widgets
 Add On-Call home screen and lock screen widgets to access your pages and shifts.
 
 ### On-Call homescreen widget
