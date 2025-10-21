@@ -24,7 +24,7 @@ title: Configuración avanzada de Flutter
 Si aún no has configurado el SDK de Datadog Flutter para RUM, sigue las [instrucciones de configuración dentro de la aplicación][1] o consulta la [documentación de configuración de RUM Flutter][2]. Aprende a configurar [OpenTelemetry con RUM Flutter](#opentelemetry-setup). Para obtener funciones de instrumentación manual adicionales, como el rastreo automático de vistas, consulta [Bibliotecas de Flutter para RUM][3].
 
 ## Parámetros de inicialización
-Puedes especificar los siguientes parámetros en tu configuración al inicializar el SDK:
+Puedes especificar los siguientes parámetros en tu configuración al inicializar el kit de desarrollo de software (SDK).
 
 `clientToken`
 : obligatorio<br/>
@@ -135,7 +135,7 @@ La frecuencia de muestreo para el rastreo de recursos. Debe estar entre `0.0` (n
 : opcional<br/>
 **Tipo**: enum<br/>
 **Predeterminado**: `all`<br/>
-La estrategia para inyectar el contexto de trazas en las solicitudes. Los valores enum pueden ser `all` (inyectar el contexto de trazas en todas las solicitudes) o `sampled` (inyectar el contexto de trazas sólo en las solicitudes muestreadas).
+La estrategia para inyectar el contexto de trazas en las solicitudes. Los valores enum pueden ser `all` (inyectar el contexto de trazas en todas las solicitudes) o `sampled` (inyectar el contexto de trazas solo en las solicitudes muestreadas).
 
 `detectLongTasks`
 : opcional<br/>

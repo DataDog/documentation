@@ -147,7 +147,7 @@ Las señales de frustración se generan a partir de los clics del ratón, no al 
 
 Si una sesión está en vivo, está obteniendo información y puede hacer que los banners reflejen un número diferente a los de la línea de tiempo.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Para hacernos llegar tus comentarios o solicitar una función, ponte en contacto con el <a href="/ayuda/">Servicio de asistencia de Datadog </a>.
 </div>
 

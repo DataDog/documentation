@@ -42,7 +42,7 @@ orchestrion go test ./... -cover -covermode=count -coverpkg ./...
 
 3. `-coverpkg`: 各テストのコード カバレッジ分析は、テスト対象のパッケージだけでなく、すべての依存パッケージにも適用されるように構成する必要があります。こうすることで、依存関係が変更された場合に、その変更の影響を受けるテストを特定できます。プロジェクト ルート (go.mod ファイルのあるディレクトリ) で `go test` を実行する場合は、ワイルド カードの `./...` を使用できます。そうでない場合は、すべての依存パッケージをカンマ区切りで手動で列挙する必要があります (`pattern1, pattern2, pattern3, ...`)。その際は、`go list ./...` コマンドで、すべてのパッケージ名を取得できます。
 
-<div class="alert alert-warning">-coverpkg の値が正しくない場合、Test Impact Analysis はテスト カバレッジを正しく追跡できなくなります。</div>
+<div class="alert alert-danger">-coverpkg の値が正しくない場合、Test Impact Analysis はテスト カバレッジを正しく追跡できなくなります。</div>
 
 ## 特定のテストに対するスキップの無効化
 

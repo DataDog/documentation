@@ -52,7 +52,6 @@ To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that:<br>
-- Contain file paths with parent directory traversal (<code>..</code>)<br>
 - Contain file names longer than 255 characters<br>
 For these cases, use CI Pipelines.
 </div>
@@ -87,12 +86,12 @@ When installing a GitHub App, the following permissions are required to enable c
 
 See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-[1]: /integrations/gitlab-source-code/#setup 
+[1]: /integrations/gitlab-source-code/#setup
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
@@ -172,6 +171,10 @@ There are two ways to run SCA scans from within your CI Pipelines:
 
 You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
 
+<div class="alert alert-danger">
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
+</div>
+
 {{< tabs >}}
 {{% tab "GitHub" %}}
 **GitHub Actions**
@@ -228,14 +231,8 @@ trigger:
       # Optionally specify a specific branch to trigger on when merging
       - "*"
 
-pr:
-  branches:
-    include:
-      - "*"
-
 variables:
   - group: "Datadog"
-
 
 jobs:
   - job: DatadogSoftwareCompositionAnalysis

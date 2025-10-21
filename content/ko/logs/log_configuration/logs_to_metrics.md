@@ -55,7 +55,7 @@ Datadog의 [제한 없는 로그 수집][1]\*을 사용하면 저장용 인덱�
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="강조 표시된 고유한 개수 쿼리 파라미터를 포함하는 시계열 그래프 설정" style="width:80%;">}}
 
-<div class="alert alert-warning">로그 기반 메트릭은 <a href="/메트릭/custom_metrics/">커스텀 메트릭</a>으로 간주되어 그에 따라 요금이 청구됩니다. 빌링에 영향을 미치지 않도록 타임스탬프, 사용자 ID, 요청 ID 또는 세션 ID 등 제한이 없거나 카디널리티가 매우 높은 태그를 기준으로 그룹을 생성하지 않아야 합니다</div>
+<div class="alert alert-danger">로그 기반 메트릭은 <a href="/메트릭/custom_metrics/">커스텀 메트릭</a>으로 간주되어 그에 따라 요금이 청구됩니다. 빌링에 영향을 미치지 않도록 타임스탬프, 사용자 ID, 요청 ID 또는 세션 ID 등 제한이 없거나 카디널리티가 매우 높은 태그를 기준으로 그룹을 생성하지 않아야 합니다</div>
 
 ### 로그 기반 메트릭 업데이트
 

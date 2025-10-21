@@ -130,7 +130,7 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 
 If you are initializing the SDK in a TypeScript project, use the code snippet below. Types are compatible with TypeScript >= 3.8.2.
 
-<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+<div class="alert alert-info">For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'

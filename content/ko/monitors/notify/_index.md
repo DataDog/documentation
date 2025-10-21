@@ -104,7 +104,7 @@ Disk space is low @ops-team@company.com
 
 모니터링 알림에는 해당 모니터링의 쿼리, 사용한 @ 멘션, 메트릭 스냅샷(메트릭 모니터링용), Datadog의 연관 페이지로 되돌아가는 링크 등의 콘텐츠가 포함됩니다. 개별 모니터링의 경우 알림에서 제외 또는 포함할 콘텐츠를 옵션으로 선택할 수 있습니다.
 
-<div class="alert alert-warning">분포 메트릭 백분위수 집계기(예: `p50`, `p75`, `p95`, 또는 `p99`)를 사용하면 알림에서 스냅샷 그래프를 생성하지 않습니다. </div>
+<div class="alert alert-danger">분포 메트릭 백분위수 집계기(예: `p50`, `p75`, `p95`, 또는 `p99`)를 사용하면 알림에서 스냅샷 그래프를 생성하지 않습니다. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="모니터링 프리셋 설정" style="width:70%;" >}}
 

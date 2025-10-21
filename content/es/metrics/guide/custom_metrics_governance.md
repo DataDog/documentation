@@ -29,7 +29,7 @@ Esta guía proporciona las mejores prácticas para gestionar sus métricas perso
 
 ## Requisitos previos
 
-<div class="alert alert-warning">Algunas funciones del producto requieren acceso de administrador.</div>
+<div class="alert alert-danger">Algunas funciones del producto requieren acceso de administrador.</div>
 
 {{< whatsnext desc="Esta guía asume que comprendes los siguientes conceptos de las métricas personalizadas:" >}}
     {{< nextlink href="/metrics/custom_metrics/" >}}qué se considera una métrica personalizada{{< /nextlink >}}
@@ -45,7 +45,7 @@ Consulta los pasos de esta sección para revisar el uso mensual de métrica de t
 
 ### Visibilidad a nivel de cuenta
 
-<div class="alert alert-warning">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog</a> para acceder a la página Plan y uso.</div>
+<div class="alert alert-danger">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog</a> para acceder a la página Plan y uso.</div>
 
 El [Plan y uso][1] te proporciona un resumen predefinido (OOTB) del uso mensual facturable de las métricas personalizadas de tu cuenta con información detallada sobre tus costes, tasa de consumo y nombres de métrica personalizada principal.
 
@@ -75,7 +75,7 @@ La visibilidad a nivel de equipo permite a los administradores de cuentas respon
 Los equipos pueden tener un conocimiento limitado de los costes de métrica y etiquetas que envían. Esto hace que los equipos estén menos motivados para controlar su uso o incluso limitar su crecimiento. Es crucial que todos tengan visibilidad de su uso y se sientan capacitados para asumir la responsabilidad de gestionar esos volúmenes y los costes asociados.
 
 #### Encontrar el origen de tus métricas personalizadas más grandes
-<div class="alert alert-warning">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog</a> para acceder a la página Plan y uso.</div>
+<div class="alert alert-danger">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog</a> para acceder a la página Plan y uso.</div>
 
 {{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navega a Resumen de métricas desde la página Plan y uso y por la tabla Métricas personalizadas principales" style="width:90%;" >}}
 

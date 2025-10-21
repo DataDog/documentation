@@ -23,7 +23,7 @@ recurso "datadog_dashboard" "ejemplo" {
 
 ## Restringir un dashboard utilizando una política de restricción
 
-<div class="alert alert-warning">Las políticas de restricción están en Vista previa. Para obtener acceso, ponte en contacto con el <a href="/help/">servicio de asistencia de Datadog</a> o con tu asesor de clientes.</div>
+<div class="alert alert-danger">Las políticas de restricción están en Vista previa. Para obtener acceso, ponte en contacto con el <a href="/help/">servicio de asistencia de Datadog</a> o con tu asesor de clientes.</div>
 
 Las [políticas de restricción][1] te permiten restringir la edición de dashboards y otros recursos a responsables específicos, incluyendo roles, equipos, usuarios y cuentas de servicio.
 

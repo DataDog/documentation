@@ -74,7 +74,7 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ### ダッシュボードを削除
 
-<div class="alert alert-warning">削除する前に、ダッシュボードのスターを解除する必要があります。</div>
+<div class="alert alert-danger">削除する前に、ダッシュボードのスターを解除する必要があります。</div>
 
 このオプションを使用して、ダッシュボードを完全に削除します。削除したダッシュボードを復元するには、プリセットの **Recently Deleted** リストを使用します。**Recently Deleted** にあるダッシュボードは 30 日後に完全に削除されます。詳細については、[ダッシュボード リスト][7] のドキュメントを参照してください。
 

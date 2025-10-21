@@ -38,7 +38,7 @@ La integración de Java te permite recopilar métricas, trazas (traces) y logs d
 
 ### Recopilación de métricas
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los checks de JMX tiene un límite de 350 métricas por instancia. Consulta <a href="/integrations/java/?tab=host#configuration-options">las opciones de configuración</a>. Si necesitas más métricas, ponte en contacto con <a href="https://docs.datadoghq.com/help/">el soporte de Datadog.</a>
 </div>
 

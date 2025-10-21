@@ -373,7 +373,7 @@ Las menciones de usuarios te permiten notificar a usuarios específicos de tus c
    - Ve a `Microsoft Entra ID` > `Manage` > `Users`.
    - Localiza al usuario en la lista y copia su UPN de la columna `User principal name`.
 
-<div class="alert alert-warning">Las menciones de usuarios NO son compatibles con los identificadores de webhooks de Workflows publicados como usuario (para canales privados). Incluir una mención de usuario al publicar un webhook de Workflows como usuario fallará. Para incluir menciones de usuarios utilizando webhooks de Workflows debes utilizar el Flow Bot.</div>
+<div class="alert alert-danger">Las menciones de usuarios NO son compatibles con los identificadores de webhooks de Workflows publicados como usuario (para canales privados). Incluir una mención de usuario al publicar un webhook de Workflows como usuario fallará. Para incluir menciones de usuarios utilizando webhooks de Workflows debes utilizar el Flow Bot.</div>
 
 Datadog recomienda probar tus notificaciones de monitor para garantizar una entrega fiable. Para obtener instrucciones, consulta [Probar notificaciones][6].
 
@@ -942,7 +942,7 @@ Sí, puedes incluir varias menciones de usuarios en una sola notificación para 
 
 **Ejemplo**: `@Teams-handle <at>user1@microsoft.com</at> <at>user2@microsoft.com</at> <at>user3@microsoft.com</at>`
 
-<div class="alert alert-warning">Cuando se incluyen diferentes menciones de usuarios en una notificación y una de ellas no es válida, los usuarios válidos seguirán recibiendo notificaciones, pero las menciones de usuarios no válidas pueden hacer que las menciones aparezcan desordenadas.</div>
+<div class="alert alert-danger">Cuando se incluyen diferentes menciones de usuarios en una notificación y una de ellas no es válida, los usuarios válidos seguirán recibiendo notificaciones, pero las menciones de usuarios no válidas pueden hacer que las menciones aparezcan desordenadas.</div>
 
 {{< /site-region >}}
 

@@ -12,7 +12,7 @@ title: AWS X-Ray
 ---
 {{< site-region region="gov" >}}
 
-<div class="alert alert-warning">La integración de AWS Lambda X-Ray con Datadog solo es compatible con las cuentas comerciales de AWS. Sin una cuenta comercial de Lambda, la integración de AWS Lambda X-Ray con Datadog no es compatible con el sitio Datadog for Government.</div>
+<div class="alert alert-danger">La integración de AWS Lambda X-Ray con Datadog solo es compatible con las cuentas comerciales de AWS. Sin una cuenta comercial de Lambda, la integración de AWS Lambda X-Ray con Datadog no es compatible con el sitio Datadog for Government.</div>
 
 {{< /site-region >}}
 

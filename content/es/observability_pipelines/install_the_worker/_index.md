@@ -52,7 +52,7 @@ Si has configurado los componentes del pipeline utilizando la [API][6] o Terrafo
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-<div class="alert alert-warning">Para RHEL y CentOS, Observability Pipelines Worker es compatible con la versión 8.0 o posteriores.</div>
+<div class="alert alert-danger">Para RHEL y CentOS, Observability Pipelines Worker es compatible con la versión 8.0 o posteriores.</div>
 
 Sigue los pasos que se indican a continuación si quieres utilizar el script de instalación de una línea para instalar el Worker. De lo contrario, consulta [Instalar manualmente el Worker en Linux](#manually-install-the-worker-on-linux).
 
@@ -125,7 +125,7 @@ Consulta [Actualizar pipelines existentes][1] si quieres realizar cambios en la 
 {{% /tab %}}
 {{% tab "RPM" %}}
 
-<div class="alert alert-warning">Para RHEL y CentOS, Observability Pipelines Worker es compatible con la versión 8.0 o posteriores.</div>
+<div class="alert alert-danger">Para RHEL y CentOS, Observability Pipelines Worker es compatible con la versión 8.0 o posteriores.</div>
 
 1. Configura el repositorio de Datadog `rpm` en tu sistema con el siguiente comando.<br>**Nota**: Si estás ejecutando RHEL v8.1 o CentOS v8.1, utiliza `repo_gpgcheck=0` en lugar de `repo_gpgcheck=1` en la configuración.
     ```shell

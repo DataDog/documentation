@@ -45,4 +45,4 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master
-[3]: https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md
+[3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html

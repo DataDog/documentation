@@ -79,7 +79,7 @@ To install and set up Orchestrion:
    ```sh
    go install github.com/DataDog/orchestrion@latest
    ```
-   <div class="alert alert-info"><strong>Note</strong>: Ensure that <code>$(go env GOBIN)</code> or <code>$(go env GOPATH)/bin</code> is in your <code>$PATH</code>.</div>
+   <div class="alert alert-info">Ensure that <code>$(go env GOBIN)</code> or <code>$(go env GOPATH)/bin</code> is in your <code>$PATH</code>.</div>
 
 1. Register Orchestrion in your project's `go.mod`:
    ```sh

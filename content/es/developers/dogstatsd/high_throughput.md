@@ -83,7 +83,7 @@ con dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Por defecto, las instancias del cliente Python de DogStatsD (incluyendo la instancia global <code>statsd</code>) no pueden ser compartidas entre procesos, pero son thread-safe. Debido a esto, el proceso principal y cada proceso secundario deben crear sus propias instancias de cliente o el almacenamiento en búfer debe ser explícitamente deshabilitado configurando <code>disable_buffering</code> como <code>True</code>. Para ver más detalles, consulta la documentación sobre <a href="https://datadogpy.readthedocs.io/en/latest/#Datadog-DogStatsD">datadog.dogstatsd</a>.
 </div>
 
@@ -368,7 +368,7 @@ Evita enviar métricas en ráfagas en tu aplicación. Esto evita que el Datadog 
 
 Otra cosa que necesitas tener en cuenta para limitar el uso máximo de memoria es reducir el almacenamiento en buffer. El buffer principal del servidor DogStatsD en el Agent es configurable con el campo `dogstatsd_queue_size` (a partir del Datadog Agent v6.1.0). Su valor por defecto de `1024` induce un uso máximo aproximado de memoria de 768MB.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Reducir el tamaño de buffer podría aumentar el número de paquetes perdidos.
 </div>
 
@@ -384,7 +384,7 @@ Consulta la siguiente sección sobre detección de ráfagas, para ayudar a detec
 
 DogStatsD tiene un modo de estadísticas en el que puedes ver qué métricas son las más procesadas.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: La activación del modo de estadísticas de métricas puede disminuir el rendimiento de DogStatsD.
 </div>
 

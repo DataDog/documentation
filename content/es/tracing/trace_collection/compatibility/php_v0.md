@@ -6,7 +6,7 @@ further_reading:
   text: Instrumentar tu aplicación
 title: Requisitos de compatibilidad de PHC (heredado)
 ---
-<div class="alert alert-warning">Esta documentación es para el rastreador de PHP v0.x. Si estás buscando la documentación del rastreador de PHP v1.x, consulta la última documentación de <a href="/tracing/trace_collection/compatibility/PHP/">Requisitos de compatibilidad de PHP </a>.
+<div class="alert alert-danger">Esta documentación es para el rastreador de PHP v0.x. Si estás buscando la documentación del rastreador de PHP v1.x, consulta la última documentación de <a href="/tracing/trace_collection/compatibility/PHP/">Requisitos de compatibilidad de PHP </a>.
 .</div>
 
 ## Política de soporte técnico de tiempo de ejecución de PHP APM
