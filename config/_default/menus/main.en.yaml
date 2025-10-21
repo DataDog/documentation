@@ -3729,17 +3729,17 @@ menu:
       identifier: cloud_cost_container_cost_allocation
       weight: 301
     - name: AWS
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws/
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#prerequisites
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
       weight: 101
     - name: Azure
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=azure
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=azure#prerequisites
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
       weight: 102
     - name: Google Cloud
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=google
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=google#prerequisites
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
       weight: 103
