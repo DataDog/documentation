@@ -18,12 +18,11 @@ further_reading:
 
 Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for streamlined management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
 
-Test suites also help you maintain tests more effectively. When you organize them by scope, it's easier to identify which tests need updates after changes to a specific area of your application.
-
 ## Key features
 
-- **Centralized visibility**: View all tests and their results in one place.
+- **Centralized visibility**: View all tests in a suite and their results in one place.
 - **Simplified management**: Create and run test groups instead of managing individual tests separately.
+- **Easier maintenance**: Identify which tests need updates when application changes are made.
 
 ## Create a test suite
 
@@ -47,7 +46,7 @@ To create a new Test Suite:
 
 ## View and manage
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page. Click on a test suite to display the following:
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from the **Digital Experience > Test Suites**. Click on a test suite to display the following:
 
 - A **summary** of test results (success, failures, skipped).
 - **Execution details** such as timing, environment, and test type.
