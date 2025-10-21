@@ -152,7 +152,7 @@ View your On-Call shifts and On-Call pages on your mobile home screen with Datad
 You can customize your On-Call shifts widgets by filtering on:
 
 - Organization
-- Timeframe period
+- Period of time
 
 You can customize your On-Call pages widgets by filtering on:
 
