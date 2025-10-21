@@ -1798,7 +1798,7 @@ The SDK's `llmobs.annotationContext()` accepts a callback function that can be u
 
 The `llmobs.annotationContext()` method accepts the following options on the first argument:
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+{{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
 : optional - _str_
