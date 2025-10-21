@@ -198,7 +198,7 @@ On-Call lock screen widget displays your On-Call status. Lockscreen widgets are 
 4. Scroll to and tap on the **Datadog** app.
 4. Tap the On-Call lock screen widget.
 5. Tap the widget on the lock screen to pull up the configuration panel.
-6. Select the organization you would like to display your On-Call status.
+6. Select the organization you would like to display your On-Call status for.
 
 **Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widget by tapping the **-** button on top left of the widget you would like to delete.
 
