@@ -34,6 +34,7 @@ With Datadog integrations for the [API server][1], [Etcd][2], [Controller Manage
 * [Kubernetes on Amazon EKS](#EKS)
 * [Kubernetes on OpenShift 4](#OpenShift4)
 * [Kubernetes on OpenShift 3](#OpenShift3)
+* [Kubernetes on Talos Linux](#TalosLinux)
 * [Kubernetes on Rancher Kubernetes Engine (v2.5+)](#RKE)
 * [Kubernetes on Rancher Kubernetes Engine (\<v2.5)](#RKEBefore2_5)
 * [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
