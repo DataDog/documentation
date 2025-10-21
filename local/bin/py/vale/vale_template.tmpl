@@ -1,2 +1,0 @@
-{{range .Files}}{{$file_name := .Path}}{{range .Alerts}}{{$file_name}}:{{.Line}}:{{(index .Span 0)}}:{{.Severity}}:{{.Check}}:{{.Message}}
-{{end}}{{end}}
