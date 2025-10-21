@@ -32,7 +32,7 @@ With Forecasts, you can:
 
 Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your cost reports.
 
-1. Create a new report or open an existing **Cost** report. Forecasts are available for cost reports only.
+1. Create a report or open an existing **Cost** or **Budget** report.
 2. In the left panel, toggle **Show forecast** to enable forecasting.
 3. Select the forecast period from the **Until end of** dropdown (next period, current month, current year, or a custom range).
 4. Choose your preferred rollup interval: **Daily**, **Weekly**, or **Monthly**.
@@ -92,7 +92,6 @@ If you don't see forecasts in your reports or budgets:
 
 - **Check your data**: Ensure you have at least 31 consecutive days of cost data for the resources or services you're analyzing.
 - **Verify cost data is flowing**: Confirm that Datadog is receiving cost data from your cloud providers.
-- **Select a Cost report**: Forecasts are only available for Cost reports, not Budget reports.
 
 ## Further reading
 
