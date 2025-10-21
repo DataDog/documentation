@@ -22,14 +22,14 @@ At least one monitor template is required if your integration collects metrics.
 These steps assume you've [joined the Datadog Partner Network][3], have access to a partner developer organization, and have already [created a listing in the Developer Platform][4]. 
 
 1. [Determine which telemetry you want to monitor](#determine-which-telemetry-to-monitor).
-2. [Create and configure monitors][5] in your partner developer organization.
-3. [Test your monitors](#test-your-monitors).
-4. [Import your monitors into the Developer Platform](#import-your-monitors). 
+2. [Create and configure a monitor][5] in your partner developer organization.
+3. [Test your monitor](#test-your-monitor).
+4. [Add your monitor to your integration](#add-your-monitor-to-your-integration). 
 
 ### Determine which telemetry to monitor
 Start by reviewing the [full list of monitor types][6] to understand what kinds of telemetry you can alert on. As the product owner, you likely already know what's most valuable for users to track, but the examples below can help you identify common use cases.
 
-#### Track your service's RED (rate, errors, duration) metrics
+#### Monitor your service's RED (rate, errors, duration) metrics
 - Rate: Monitor the number of requests your service receives.
 - Errors: Track how many of those requests fail.
 - Duration: Measure how long those requests take (latency).
@@ -39,21 +39,25 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 - Memory Utilization: Monitor how much system memory is being used to detect and prevent issues like memory leaks or crashes.
 - Storage: Monitor disk space to prevent problems such as data loss, service interruptions, or write failures.
 
-## Test your monitors
+#### Monitor your logs
+- Error spikes: Alert when error logs exceed a threshold, such as repeated `connection refused` or `timeout` messages within a short period.
+- Missing activity: Detect when expected logs stop appearing, indicating a stalled process or failed service.
+
+## Test your monitor
 
 1. Ingest telemetry that triggers your monitor.
 2. Navigate to the [Monitor list][7] page and select your monitor.
 3. Confirm that your monitor is triggered as expected. 
     - Use [Status Events][8] to view when your monitor was triggered and review details for each event.
     
-## Import your monitors
-After your monitors are created and tested, import them into the Developer Platform.
+## Add your monitor to your integration
+After your monitor is created and tested, add it to your listing in the Developer Platform. When your integration is published, the monitor becomes a searchable template linked to your integration. 
 
 {{< img src="developers/integrations/content_tab.png" alt="The Content tab in the Integration Developer Platform" style="width:100%;" >}}
 
 1. In the Developer Platform, go to the **Content** tab.
 2. Click **Import Monitor**.
-3. Search for and select you the monitors you created. You can include up to 10 monitors per integration.
+3. Search for and select the monitor you created. You can include up to 10 monitors per integration.
 4. For each monitor, provide the following:
     - **Display Name**: A concise title that clearly communicates what the alert covers. Use active voice (for example, Database latency exceeds threshold).
     - **Description**: A short explanation that helps users decide whether the monitor is relevant to them. Describe why this alert matters and what impact it addresses.
