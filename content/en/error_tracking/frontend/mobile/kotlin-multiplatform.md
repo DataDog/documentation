@@ -148,7 +148,7 @@ By default, app hangs reporting is **disabled**, but you can enable it and set y
 
 1. Navigate to [**Digital Experience** > **Add an Application**][601].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][602].
+3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see the [Kotlin Multiplatform Data Collected][602].
 
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][603] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
 
@@ -340,7 +340,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files can go up
 The SDK handles crash reporting with the following behaviors:
 
 - The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
-- RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
+- Crashes must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
 - Only crashes that occur in sampled sessions are kept.
 
 ## Test your implementation
@@ -379,7 +379,7 @@ Tracking consent can be one of the following values:
 
 - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
 - `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or RUM events.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or events.
 
 To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
 
