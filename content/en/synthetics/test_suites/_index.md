@@ -5,7 +5,7 @@ further_reading:
 - link: /synthetics/
   tag: Documentation
   text: Learn about Synthetic Monitoring
-- link: /monitors/types/synthetics/
+- link: /monitors/types/synthetic_monitoring/
   tag: Documentation
   text: Configure Synthetic test monitors
 - link: "/synthetics/troubleshooting/"
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Synthetic Monitoring [Test Suites][1] let you organize multiple tests into a single collection for streamlined management, and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
+Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for streamlined management, and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
 
 ## Key features
 
@@ -35,7 +35,7 @@ To create a new Test Suite:
 2. Click **Add Tests** to include existing Synthetic Monitoring tests.  
    You can:
    - **Search** by name or tag.  
-   - **Filter** by test type (Browser, API, Private Location, Mobile, etc.).
+   - **Filter** by test type (such as Browser, API, Private Location, or Mobile).
    - **Select** one or more tests to include.
 3. Click **Add Selected Tests** to confirm.
 4. Optionally, remove tests using the **Remove Test from Suite** icon next to each entry.
@@ -45,7 +45,7 @@ To create a new Test Suite:
 
 ## View and manage
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page. Clicking on a test suite displays the following:
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page. Click on a test suite to display the following:
 
 - A **summary** of test results (success, failures, skipped).
 - **Execution details** such as timing, environment, and test type.
