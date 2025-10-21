@@ -40,7 +40,7 @@ You can create and deploy different custom policies containing rules you want to
 
 ### Pin a Datadog-managed policy to its current version
 
-<div class="alert alert-info">The minimum Agent version required for policy pinning is version 7.71.0. Policy pinning will not work on versions that do not meet the requirements. These Agents will continue to receive the latest policy updates automatically.</div>
+<div class="alert alert-info">Policy pinning is supported in Agent version 7.71.0 and later. Previous Agents will continue to receive the latest policy updates automatically.</div>
 
 When Datadog-managed policies are updated by Datadog they are automatically deployed to your infrastructure.
 
