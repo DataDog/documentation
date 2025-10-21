@@ -192,7 +192,7 @@ You can customize your On-Call page widgets by filtering on:
 {{% /tab %}}
 {{< /tabs >}}
 
-### On-Call lockscreen widget
+### On-Call lock screen widget
 
 The On-Call lock screen widget displays your On-Call status. Lock screen widgets are only available on iOS.
 
