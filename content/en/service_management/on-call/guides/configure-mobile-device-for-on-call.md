@@ -171,7 +171,7 @@ You can customize your On-Call page widgets by filtering on:
 
 1. Long press on the widget to configure.
 2. Tap **Edit Widget** to bring up the configuration screen.
-3. Select the **Organization** and **Period** you would like to see your On-Call shifts.
+3. Select the **Organization** and **Period** you would like to see your On-Call shifts for.
 4. Tap out of the widget to validate your selection and exit the configuration screen.
 
 
