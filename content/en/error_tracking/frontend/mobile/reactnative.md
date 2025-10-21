@@ -7,7 +7,7 @@ code_lang_weight: 60
 
 ## Overview 
 
-Enable React Native Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
+Enable React Native Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
 
 -   Aggregated React Native crash dashboards and attributes
 -   Symbolicated React Native (JavaScript and native iOS or Android) crash reports
