@@ -73,9 +73,7 @@ NdkCrashReports.enable()
 
 An "Application Not Responding" ([ANR][4]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 
-For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK.
-
-ANRs are only reported through RUM (not through logs). For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][5].
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK. For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][5].
 
 
 [4]: https://developer.android.com/topic/performance/vitals/anr
