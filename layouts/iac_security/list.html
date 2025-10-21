@@ -49,7 +49,6 @@
             // map to appropriate integration logo name (e.g. csharp: 'net')
             gcp: 'google-cloud-platform',
             aws: 'amazon-web-services',
-            k8s: 'kubernetes'
         },
         platform_aliases: {
             cicd: 'github_cicd',
@@ -398,7 +397,16 @@
                             <div class="filter-selection-container">
 
                                 {{ $cloud_lookup_name := . }}
-                                {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $cloud_lookup_name "variant" "avatar") $cloud_lookup_name "avatar" }}
+                                {{ $int_logo := partialCached "integrations-logo.html" 
+                                    (dict "context" $dot "basename"
+                                        (cond (eq
+                                        $cloud_lookup_name "CICD") "github"
+                                        $cloud_lookup_name
+                                        )
+                                    )
+                                    "variant" "avatar"
+                                     $cloud_lookup_name "avatar" 
+                                }}
                                 {{/*  store $int_logo and $cloud_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
                                 {{ $value := (printf "%s,%s" $cloud_lookup_name $int_logo)}}
                                 <input
