@@ -14,7 +14,7 @@ This page guides Technology Partners through creating and packaging monitor temp
 
 [Datadog Monitors][1] continuously evaluate data (metrics, logs, events, and more) to detect conditions that indicate performance issues and availability risks. They act as proactive alerting tools that automatically notify users when behavior deviates from expected thresholds, enabling teams to take action before incidents impact customers.
 
-For integration developers, monitors transform the telemetry your integration collects into actionable insights. When you package monitor templates with your integration, Datadog customers can find them on the [**Monitors > Templates**][2] page and enable them in a single click, ensuring easier setup and faster time to value. 
+For Technology Partners, monitors transform the telemetry your integration collects into actionable insights. When you package monitor templates, users can enable them directly from the [**Monitors > Templates**][2] page for faster setup and time to value.
 
 At least one monitor template is required if your integration collects metrics. 
 
@@ -27,7 +27,7 @@ These steps assume you've [joined the Datadog Partner Network][3], have access t
 4. [Import your monitors into the Developer Platform](#import-your-monitors). 
 
 ### Determine which telemetry to monitor
-Start by reviewing the [full list of monitor types][6] to understand what kinds of telemetry you can alert on. As the product owner, you likely already know what’s most valuable for users to track, but the examples below can help you identify common use cases.
+Start by reviewing the [full list of monitor types][6] to understand what kinds of telemetry you can alert on. As the product owner, you likely already know what's most valuable for users to track, but the examples below can help you identify common use cases.
 
 #### Track your service's RED (rate, errors, duration) metrics
 - Rate: Monitor the number of requests your service receives.
@@ -35,7 +35,7 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 - Duration: Measure how long those requests take (latency).
 
 #### Monitor your infrastructure 
-- CPU utilization: Track CPU usage to ensure they’re neither under nor over-utilized, to prevent system slowdowns or application failures.
+- CPU utilization: Track CPU usage to ensure they're neither under nor over-utilized, to prevent system slowdowns or application failures.
 - Memory Utilization: Monitor how much system memory is being used to detect and prevent issues like memory leaks or crashes.
 - Storage: Monitor disk space to prevent problems such as data loss, service interruptions, or write failures.
 
