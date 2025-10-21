@@ -149,7 +149,7 @@ Add On-Call homescreen and lockscreen widgets to easily access your pages and sh
 
 View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
 
-You can customize your On-Call shifts widgets by filtering on:
+You can customize your On-Call shift widgets by filtering on:
 
 - Organization
 - Period of time
