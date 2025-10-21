@@ -158,7 +158,7 @@ You can customize your On-Call shift widgets by filtering on:
 - Organization
 - Period of time
 
-You can customize your On-Call pages widgets by filtering on:
+You can customize your On-Call page widgets by filtering on:
 
 - Organization
 - Team
