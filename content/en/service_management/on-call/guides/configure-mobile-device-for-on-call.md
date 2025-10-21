@@ -181,7 +181,7 @@ You can customize your On-Call page widgets by filtering on:
 {{< img src="service_management/mobile/android_shifts_widget_may_2025.png" alt="Configured home screen On-Call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap on the widget to configure.
-2. Select the **Organization** and **Time Period** you would like to see your On-Call shifts.
+2. Select the **Organization** and **Time Period** you would like to see your On-Call shifts for.
 3. Tap **✓** to save the configuration.
 4. Long press and resize the widget to fit your preference.
 
