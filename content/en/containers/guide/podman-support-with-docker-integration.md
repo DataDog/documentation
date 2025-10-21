@@ -16,7 +16,7 @@ With Podman, you can deploy rootless or rootful containers. Rootless containers 
 
 ## Host Agent installation
 
-Host Agent installations require multiple manual steps and permission tweaks for the Agent to be able to collect data. Those fixes are not always permanent and are required again if containers restart. Instead of using a host installation, Datadog recommends using `rootles` or `rootful` installations, which are easier to perform and maintain.
+Host Agent installations require multiple manual steps and permission tweaks for the Agent to be able to collect data. Those fixes are not always permanent and are required again if containers restart. Instead of using a host installation, Datadog recommends using `rootless` or `rootful` installations, which are easier to perform and maintain.
 
 ## Agent deployment as a Podman rootless container
 
@@ -56,19 +56,19 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
       ```
 
     1. To deploy the Agent with log collection run the agent as follows:
-      ```shell
-      podman run -d --name dd-agent \
-          --cgroupns host --pid host \
-          -v <CONTAINERS_PATH>:/var/lib/containers:ro \
-          -v /proc/:/host/proc/:ro \
-          -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-          -e DD_API_KEY=<API_KEY> \
-          -e DD_HOSTNAME=<DD_HOSTNAME> \
-          -e DD_LOGS_ENABLED=true \
-          -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-          -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
-          gcr.io/datadoghq/agent:latest
-      ```
+       ```shell
+       podman run -d --name dd-agent \
+           --cgroupns host --pid host \
+           -v <CONTAINERS_PATH>:/var/lib/containers:ro \
+           -v /proc/:/host/proc/:ro \
+           -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+           -e DD_API_KEY=<API_KEY> \
+           -e DD_HOSTNAME=<DD_HOSTNAME> \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
+           gcr.io/datadoghq/agent:latest
+       ```
 
 **Note:** The Datadog Agent can only collect logs for Podman containers started with `--log-driver=k8s-file`.
 
@@ -81,6 +81,7 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
 Podman versions 4.8 or greater use SQLite as the default database backend, and BoltDB is deprecated from v5.
 
 1. Find the path to your Podman DB using the following command:
+   
    **Note:** In most cases the Podman DB path is `/var/lib/containers/storage/db.sql`, but it might be different on your system.
 
    ```shell
