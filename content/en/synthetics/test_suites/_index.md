@@ -18,7 +18,7 @@ further_reading:
 
 Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for streamlined management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
 
-Test suites also help you maintain your tests more effectively, when organized by scope, it becomes easier to identify which tests need updates after changes to a specific area of your application. 
+Test suites also help you maintain tests more effectively. When you organize them by scope, it's easier to identify which tests need updates after changes to a specific area of your application.
 
 ## Key features
 
