@@ -90,7 +90,11 @@ In Software Catalog, an API (`kind:API`) refers to a collection of endpoints tha
 
 To define components within an API, you can specify values for the `components` key in the `spec` field of the entity's v3 definition. 
 
-Example YAML for `kind:api`:
+You can also include an OpenAPI spec in your entity definition in two ways: inline, or through a file reference.
+
+**Inline:** 
+Add the OpenAPI definition under the spec field using `type: openapi`.
+
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 {
  "apiVersion": "v3",
@@ -182,14 +186,61 @@ Example YAML for `kind:api`:
 }
 {{< /code-block >}}
 
+**File reference:** 
+Point to an OpenAPI file stored in GitHub using the `fileref` field.
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+{
+ "apiVersion": "v3",
+ "kind": "api",
+ "metadata": {
+   "name": "payments",
+   "displayName": "Payments",
+   "owner": "Payments Team",
+ },
+ "spec": {
+   "type": "openapi",
+   "implementedBy": [
+     "service:payment",
+     "service:payments-go"
+   ],
+   "interface": {
+     fileRef: https://github.com/openapi.yaml
+   },
+   "lifecycle": "production",
+   "tier": "Tier 0"
+ }
+}
+{{< /code-block >}}
+
 The user-defined API appears in Software Catalog as shown:
 {{< img src="/tracing/software_catalog/api-page-v3.png" alt="API page for Payments API in Software Catalog" style="width:90%;" >}}
 
 This page holds relationship data of how the API interacts with dependencies, the API components, an OpenAPI preview, and logs and events aggregated across all endpoints. 
 
+**Test API Endpoints** 
+
+You can use the **Play Request** feature in Software Catalog to send test HTTP requests to your endpoints and inspect the responses. 
+
+To send a test request: 
+
+1. Navigate to an endpoint in Software Catalog.
+2. Click an endpoint to open its details in the side panel.
+3. Click **Play Request** to configure and send the request.
+
+{{< img src="/tracing/software_catalog/play-request.png" alt="Play Request modal to test API requests in Software Catalog" style="width:90%;" >}}
+
+Before sending the request, you can configure the following: 
+- **Inputs**: Provide values for any required query parameters, path variables, or request body fields.
+- **Authentication**: Select an authentication method if required by the endpoint.
+- **Location**: Choose where the request should be sent from:
+    - Public Location (default)
+    - Private Location, for APIs accessible only within your private network. These must be configured using [Synthetics Private Locations][2]. Any Private Locations you've already set up appear automatically in the dropdown.
+
 **Note**: Software Catalog contains HTTP endpoints that are automatically discovered by APM. The concept of endpoints correspond to [APM resources][1] for an APM web service.
 
 [1]: /tracing/glossary/#resources
+[2]: /synthetics/platform/private_locations
 
 {{% /tab %}}
 

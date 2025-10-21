@@ -53,7 +53,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Configuration settings
@@ -124,7 +124,7 @@ DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} data
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Configuration settings

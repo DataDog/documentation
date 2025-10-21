@@ -92,6 +92,13 @@ It means that you are either:
 - running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
   run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
 
+### Services or teams in the SAST explorer or Repositories view are not updating
+
+Results for services and teams in Static Code Analysis (SAST) are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability for that branch.
+
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
+
 ### Results are not being surfaced in the Datadog UI
 
 **If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
@@ -223,7 +230,7 @@ If you're running a Flask application, ensure that you are calling the `ddtrace_
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
-- If you are scanning GitHub repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning your repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services

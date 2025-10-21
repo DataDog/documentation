@@ -1,5 +1,6 @@
 ---
 title: Correlate LLM Observability with RUM
+description: "Connect RUM sessions with LLM Observability to track user interactions with AI agents and understand the complete user journey."
 further_reading:
   - link: "/llm_observability/sdk"
     tag: "Documentation"

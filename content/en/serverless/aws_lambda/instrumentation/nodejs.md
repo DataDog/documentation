@@ -24,15 +24,17 @@ aliases:
 
 ## Setup
 
-### Remote instrumentation
-
-If you are instrumenting your Node.js AWS Lambda application for the first time, Datadog recommends that you use remote instrumentation. See [Remote instrumentation for AWS Lambda][11].
-
-### Other instrumentation methods
-
 If your application is deployed as a container image, use the _Container Image_ method.
 
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+If [remote instrumentation][1] is enabled, you can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select **Instrument Functions**.
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
@@ -272,7 +274,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "3.2.1"
+  version = "4.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -429,7 +431,7 @@ To configure Datadog using SST v3, follow these steps:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
+<div class="alert alert-danger">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
 ## FIPS compliance
 

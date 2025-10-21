@@ -3,13 +3,13 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md
 title: Requisitos de compatibilidad de Ruby (heredado)
 ---
-<div class="alert alert-warning">Esta documentación es para <code>ddtrace</code> gem v1.x. Si estás utilizando <code>Datadog</code> gem v2.0 o posterior, consulta la documentación más reciente sobre los <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Requisitos de compatibilidad de Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación es para <code>ddtrace</code> gem v1.x. Si estás utilizando <code>Datadog</code> gem v2.0 o posterior, consulta la documentación más reciente sobre los <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Requisitos de compatibilidad de Ruby</a>.</div>
 
 ## Compatibilidad
 
-La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
+La librería de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
 
-### Intérpretes compatibles de Ruby 
+### Intérpretes compatibles de Ruby
 
 | Tipo  | Documentación              | Versión | Tipo de soporte técnico                         | Compatibilidad con versiones de Gem |
 | ----- | -------------------------- | -----   | ------------------------------------ | ------------------- |
@@ -56,7 +56,7 @@ La compatibilidad *total* indica que todas las funciones del rastreador están d
 
 El uso de `ddtrace` en macOS es compatible con el desarrollo, pero no con las implementaciones de producción.
 
-### Soporte de Microsoft Windows 
+### Soporte de Microsoft Windows
 
 El uso de `ddtrace` en Microsoft Windows no tiene soporte técnico en la actualidad. Seguiremos aceptando contribuciones y problemas de la comunidad,
 pero los consideraremos de baja prioridad.

@@ -6,13 +6,44 @@ aliases:
     - /actions/app_builder/auth
 ---
 
-A few tools control access and authentication for apps and their components. 
+A few tools control access and authentication for apps and their components.
 
 ## App execution identity
 
-A published app runs using the Datadog user identity of its author. The author is listed both in the **All Apps** view and in **App Properties**.
+A published app runs using the Datadog user identity of its author, or a service account associated with the app. The author is listed both in the **All Apps** view and in **App Properties**.
 
 In edit mode, an app runs as the current editor.
+
+### Use a service account
+
+A service account can be associated with an app and act as the identity of the app when it runs. A service account can:
+- resolve the connections defined in the app queries at runtime
+- provide an identity for app executions
+- provide an identity for app [audit trails][7]
+
+To create a service account for an app, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
+
+#### Configure your app to run as a service account
+
+1. Click the cog (**Settings**) icon.
+1. Click **Manage app identity**.
+1. Select **Run as Service Account**.
+1. Select a role for your service account user or select an existing service account.
+1. Click **Save** to save the service account and apply the changes.
+
+When you run an app, the service account user resolves the connections defined in the app queries. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
+
+#### View service account details
+
+1. Click the cog (**Settings**) icon.
+1. Select **Manage app identity**.
+1. Click on your service account next to *Run As*.
+
+#### Remove a service account associated with an app
+
+1. Click the cog (**Settings**) icon.
+1. Select **Manage app identity**.
+1. Click **Remove service account**.
 
 ## Action credentials
 
@@ -23,7 +54,7 @@ Actions can be authenticated in the following ways:
 - Connection credentials
 
 By default, viewers of a published app do not need access to the app's connections. Instead, actions use the identity of the app's author. This simplifies sharing and improves security by preventing apps from performing sensitive operations using the identity of arbitrary viewers.
-For more information on configuring credentials, see [Connections][2]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][3].
+For more information on configuring credentials, see [Connections][8]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][9].
 
 ## App permissions
 
@@ -35,7 +66,7 @@ You can expand access to a draft of published app using access control.
 
 ### Permissions and access control
 
-Use [role-based access control (RBAC)][4] to control access to your apps and connections.
+Use [role-based access control (RBAC)][3] to control access to your apps and connections.
 
 The coarse permissions that apply to apps include the following:
 
@@ -103,9 +134,11 @@ To restrict access to the app, perform the following steps in the app canvas:
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
 
-[1]: https://app.datadoghq.com/app-builder/action-catalog
-[2]: /service_management/app_builder/connections/
-[3]: /service_management/workflows/
-[4]: /account_management/rbac/
+[1]: https://app.datadoghq.com/actions/action-catalog/
+[2]: /account_management/org_settings/service_accounts#permissions
+[3]: /account_management/rbac/?tab=datadogapplication#role-based-access-control
 [5]: https://app.datadoghq.com/app-builder/
 [6]: https://datadoghq.slack.com/
+[7]: /account_management/audit_trail/#overview
+[8]: /actions/connections/
+[9]: /actions/workflows/

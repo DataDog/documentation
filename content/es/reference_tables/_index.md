@@ -17,7 +17,7 @@ further_reading:
 - link: /service_management/events/pipelines_and_processors/lookup_processor/
   tag: Documentación
   text: Procesador de búsqueda de eventos
-- link: '/cloud_cost_management/tag_pipelines/ #map-multiple-tags'
+- link: '/cloud_cost_management/tag_pipelines/#map-multiple-tags'
   tag: Documentación
   text: Uso de las tablas de referencia para añadir varias etiquetas (tags) a los
     datos de costes
@@ -147,7 +147,7 @@ Para obtener más información, consulta la [documentación de la integración A
 ### Google Cloud Storage
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">Las tablas de referencia no están disponibles para el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
+<div class="alert alert-danger">Las tablas de referencia no están disponibles para el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
 1. Si no has configurado la integración Google Cloud con Datadog o si estás utilizando archivos de ID de proyectos Google legacy (los proyectos legacy se indican en el cuadro de tu integración GCP), sigue las instrucciones para configurar la [integración Google Cloud Platform][1]. Esto implica la creación de una [cuenta de servicio Google Cloud][2].

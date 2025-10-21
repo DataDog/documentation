@@ -15,7 +15,7 @@ further_reading:
 title: Débuter avec les données des feature flags dans RUM
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Le suivi des feature flags est disponible en version bêta.
 </div>
 

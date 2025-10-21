@@ -1,5 +1,6 @@
 ---
 title: Dual Shipping
+description: "Configure the Datadog Agent to send metrics, logs, and traces to multiple Datadog organizations simultaneously."
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
@@ -11,7 +12,7 @@ further_reading:
   text: "Send logs to external destinations with Observability Pipelines"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Dual shipping can impact billing if you are sending data to multiple Datadog organizations. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>.
 </div>
 

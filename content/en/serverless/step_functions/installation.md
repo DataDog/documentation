@@ -30,7 +30,7 @@ Ensure that the [AWS Step Functions integration][9] is installed.
 
 Then, to send your Step Functions logs to Datadog:
 {{< tabs >}}
-{{% tab "Custom" %}}
+{{% tab "Custom (Terraform)" %}}
 1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
    {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
@@ -107,7 +107,7 @@ Then, to send your Step Functions logs to Datadog:
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder
 [3]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
-[4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-stepfunctions#readme
 {{% /tab %}}
 {{% tab "Serverless Plugin" %}}
 

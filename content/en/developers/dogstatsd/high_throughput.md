@@ -83,7 +83,7 @@ with dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. See the documentation on <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> for more details.
 </div>
 
@@ -368,7 +368,7 @@ Avoid sending metrics in bursts in your application - this prevents the Datadog 
 
 Another thing to look at to limit the maximum memory usage is to reduce the buffering. The main buffer of the DogStatsD server within the Agent is configurable with the `dogstatsd_queue_size` field (since Datadog Agent 6.1.0), its default value of `1024` induces an approximate maximum memory usage of 768MB.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Reducing the buffer size could increase the number of packet drops.
 </div>
 
@@ -384,7 +384,7 @@ See the next section on burst detection to help you detect bursts of metrics fro
 
 DogStatsD has a stats mode in which you can see which metrics are the most processed.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Enabling metrics stats mode can decrease DogStatsD performance.
 </div>
 

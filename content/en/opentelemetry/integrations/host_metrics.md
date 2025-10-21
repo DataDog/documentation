@@ -25,6 +25,12 @@ For more information, including supported operating systems, see the OpenTelemet
 Add the following lines to your Collector configuration:
 
 ```yaml
+processors:
+  resourcedetection:
+    detectors: [system]
+    system:
+      hostname_sources: [os]
+
 receivers:
   hostmetrics:
     collection_interval: 10s
@@ -46,6 +52,13 @@ receivers:
       memory:
       network:
       processes:
+
+service:
+  pipelines:
+    metrics:
+      receivers: [hostmetrics]
+      processors: [resourcedetection]
+      exporters: [datadog]
 ```
 
 {{% /tab %}}
@@ -161,7 +174,7 @@ Value: 1153183744
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
 [2]: /opentelemetry/guide/metrics_mapping/#host-metrics
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/host-metrics.yaml
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [5]: /opentelemetry/otel_collector_datadog_exporter/
 [6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone

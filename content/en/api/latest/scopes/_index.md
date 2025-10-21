@@ -1,13 +1,13 @@
 ---
 title: Authorization Scopes
-type: documentation
+type: api
 disable_sidebar: true
 ---
 ## Authorization scopes for OAuth clients
 
 Scopes are an authorization mechanism that allow you to limit and define the specific access applications have to an organization's Datadog data. When authorized to access data on behalf of a user or service account, applications can only access the information explicitly permitted by their assigned scopes.
 
-<div class="alert alert-warning">This page lists only the authorization scopes that can be assigned to OAuth clients. To view the full list of assignable permissions for scoped application keys, see <a href="/account_management/rbac/permissions/#permissions-list">Datadog Role Permissions</a>.
+<div class="alert alert-danger">This page lists only the authorization scopes that can be assigned to OAuth clients. To view the full list of assignable permissions for scoped application keys, see <a href="/account_management/rbac/permissions/#permissions-list">Datadog Role Permissions</a>.
 
 <ul>
   <li><strong>OAuth clients</strong> → Can only be assigned authorization scopes (limited set).</li>

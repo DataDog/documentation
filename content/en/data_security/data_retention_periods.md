@@ -9,6 +9,8 @@ further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
+algolia:
+  tags: ['data retention']
 filter_all: All
 content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
 attributes: 
@@ -28,7 +30,8 @@ attributes:
        - **Audit logs (Audit Trail disabled)**: 7 days
   - product: Browser RUM
     data_type: |
-       - **Events**: 30 days
+       - **Session, View, Action, and Error Events**: 30 days
+       - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Case Management
     data_type: | 
        - **Cases**: Retained for the duration of the account
@@ -52,7 +55,7 @@ attributes:
     data_type: | 
        - **Events**: 90 days
        - **Security signals**: 15 months
-  - product: Code Analysis
+  - product: Code Security SAST
     data_type: | 
        - **Scans**: 15 months
   - product: Code Security IAST
@@ -87,7 +90,7 @@ attributes:
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
-       - **Error samples**: 15 days
+       - **Error samples**: 30 days
        - **Issues**: 1 year after last activity
   - product: Event Management
     data_type: | 
@@ -111,7 +114,8 @@ attributes:
        - **Mobile application binaries**: Retained for the duration of the account
   - product: Mobile RUM
     data_type: | 
-       - **Events**: 30 days
+       - **Session, View, Action, and Error Events**: 30 days
+       - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: | 
        - **Netflow**: 30 days
@@ -123,7 +127,7 @@ attributes:
     data_type: | 
        - **Events**: 15 months
        - **User Profiles**: 30 days
-  - product: Quality Gates
+  - product: PR Gates
     data_type: | 
        - **Gate evaluations**: 30 days
   - product: Reference Tables

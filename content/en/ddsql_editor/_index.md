@@ -1,5 +1,6 @@
 ---
 title: DDSQL Editor
+description: "Query infrastructure resources and telemetry data using natural language or DDSQL syntax with support for tags as table columns."
 aliases:
 - /dashboards/ddsql_editor/
 further_reading:
@@ -11,9 +12,11 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}} 
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+Querying Logs, Metrics, Spans, RUM, and Product Analytics as data sources in DDSQL is in Preview. Use this form to request access.
+
+If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
+{{< /callout >}}
 
 ## Overview
 
@@ -23,7 +26,7 @@ With [DDSQL Editor][1], you can get deeper visibility into your infrastructure b
 
 ## Query in natural language
 
-Type your question into the search box, and Datadog builds the SQL query for you. If you haven't already, [reach out to support][5] to enable this feature.
+Type your question into the search box, and Datadog builds the SQL query for you. You can accept or discard changes, and can provide feedback to help improve the feature.
 
 {{< img src="ddsql_editor/natural-language-query-2.png" alt="A query inputted into the natural language search box" style="width:90%;" >}}
 
@@ -40,7 +43,10 @@ GROUP BY instance_type
 
 ## Explore your telemetry
 
-<div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.</div>
+<div class="alert alert-danger">Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
+
+If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
+</div>
 
 View, filter, and built queries in the Data Explorer.
 
@@ -50,7 +56,7 @@ Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
-For Logs and Metrics, use the query builder to help you generate table functions.
+For data sources such as Logs, use the query builder to generate table functions.
 
 ## Save and share queries
 

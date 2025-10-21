@@ -43,7 +43,7 @@ Los archivos de log se guardan por defecto en los siguientes directorios. Utiliz
 |------------------------------------------------------|--------------------------------------------------|
 | Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
 | Linux                                                | `/var/log/datadog/dotnet/`                       |
-| Linux (cuando se utiliza la [inyección de la biblioteca de Kubernetes][1]) | `/datadog-lib/logs`                              |
+| Linux (cuando se utiliza la [inyección de la librería de Kubernetes][1]) | `/datadog-lib/logs`                              |
 | Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Nota:** En Linux, debes crear el directorio de logs antes de activar el modo de depuración.

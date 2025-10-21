@@ -1,5 +1,5 @@
 ### Automatically enabling App and API Protection through Remote Configuration
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 APM Tracing cannot be disabled for the time being with remote config.
 </div>
 <p>You can enable remote configuration on your <u><b><a href="https://app.datadoghq.com/security/configuration/asm/setup?services=recommended">services dashboard</a></b></u>.

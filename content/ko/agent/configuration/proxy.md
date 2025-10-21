@@ -45,7 +45,7 @@ Squid와 관련한 자세한 정보는 이 페이지에서 [Squid](#Squid) 섹�
 
 에이전트 `datadog.yaml` 구성 파일에서 `https`와 `http` 요청에 다른 프록시 서버를 설정하세요. 에이전트는 Datadog로 데이터를 전송할 때 `https`를 사용하나 통합에서 메트릭을 수집할 때는 `http`를 사용할 수 있습니다. 프록시를 사용한 요청이 무엇이든, 프록시 서버에서 SSL을 활성화할 수 있습니다. 다음은 `datadog.yaml` 파일 구성 예시입니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 로그 수집이 활성화되면 지정한 특정 전송이 <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">적용</a>되도록 하세요.
 권장하는 설정은 HTTPS를 사용하는 것입니다. 이 경우, 프록시 메트릭과 프록시 로그에 <code>&ltHOST&gt;:&ltPORT&gt;</code>가 사용됩니다.
 TCP 전송을 사용하는 경우 <a href="/agent/logs/proxy">로그용 TCP 프록시</a>를 참고하세요.
@@ -130,7 +130,7 @@ Unix 호스트의 경우, 시스템 수준 프록시가 `HTTPS_PROXY`, `HTTP_PRO
 
 **에이전트 v5**
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>&ltHOST&gt;:&ltPORT&gt;</code>는 프록시 메트릭에서 사용될 수 있으나 프록시 로그에는 사용되지 않습니다. 자세한 내용은 <a href="/agent/logs/proxy">로그용 프록시</a> 페이지를 참고하세요.
 </div>
 

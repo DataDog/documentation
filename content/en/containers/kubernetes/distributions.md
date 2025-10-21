@@ -1,5 +1,6 @@
 ---
 title: Kubernetes distributions
+description: Platform-specific installation and configuration instructions for Datadog Agent on various Kubernetes distributions
 aliases:
 - /agent/kubernetes/distributions
 further_reading:
@@ -289,7 +290,6 @@ Datadog recommends that you specify resource limits for the Agent container. Aut
 
 Starting with Agent `7.65.0+` and version `3.113.0+` of the Helm chart, Datadog recommends using `datadog.kubelet.useApiServer` for the Agent to query the pod list from the API server. Avoid using the [deprecated read-only kubelet port][12].
 
-**Note**: Cloud Network Monitoring is supported from version `3.100.0` of the Helm chart and with GKE version `1.32.1-gke.1729000` or later.
 
 {{< tabs >}}
 {{% tab "Helm" %}}

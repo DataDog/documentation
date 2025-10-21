@@ -1,5 +1,6 @@
 ---
 title: Version History for Notebooks
+description: "Track, preview, and restore previous versions of your notebooks with automatic change tracking and 30-90 day retention."
 disable_toc: false
 further_reading:
 - link: "/notebooks/"

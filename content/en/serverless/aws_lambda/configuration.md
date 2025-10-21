@@ -44,6 +44,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Using Datadog Lambda Extension v67+](#using-datadog-lambda-extension-v67)
 - [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
+- [Send logs to Observability Pipelines](#sending-data-to-observability-pipelines)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -486,7 +487,7 @@ Set the environment variable `DD_TRACE_ENABLED` to `false` on your Lambda functi
 
 If you are using the [Lambda extension][2] to collect traces and logs, Datadog automatically adds the AWS Lambda request ID to the `aws.lambda` span under the `request_id` tag. Additionally, Lambda logs for the same request are added under the `lambda.request_id` attribute. The Datadog trace and log views are connected using the AWS Lambda request ID.
 
-If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]).
+If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by default with the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]).
 
 If you are using a runtime or custom logger that isn't supported, follow these steps:
 - When logging in JSON, you need to obtain the Datadog trace ID using `dd-trace` and add it to your logs under the `dd.trace_id` field:
@@ -788,6 +789,15 @@ You may prefer the older service representation model if your dashboards and mon
 
 The updated service modeling configuration is recommended. 
 
+## Send logs to Observability Pipelines
+Version 87+ of the Datadog Lambda Extension allows users to send logs to [Observability Pipelines][58].
+
+To enable this feature, set these environment variables:
+- `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`: `true`
+- `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`: `<YOUR_OBSERVABILITY_PIPELINE_URL>`
+
+**Note**: Your Observability Pipeline must use `Http Server` as the source to process logs from the Lambda extension. Do not use `Datadog Agent` as the source.
+
 ## Troubleshoot
 
 If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][39].
@@ -854,3 +864,4 @@ If you have trouble configuring your installations, set the environment variable
 [55]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
+[58]: https://www.datadoghq.com/product/observability-pipelines/

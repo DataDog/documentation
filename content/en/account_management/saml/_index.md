@@ -1,5 +1,6 @@
 ---
 title: Single Sign On With SAML
+description: Configure SAML authentication for Datadog with identity providers like Active Directory, Auth0, Google, Okta, and Microsoft Entra ID for secure single sign-on.
 aliases:
   - /guides/saml
 further_reading:
@@ -10,7 +11,7 @@ algolia:
   tags: ['saml']
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-danger">The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -133,7 +134,7 @@ Some organizations might not want to invite all of their users to Datadog. If yo
 
 Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only**, **Administrators**, or any custom role.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Important:</strong> If Role Mapping is enabled, it takes priority over the roles set during JIT provisioning. Without the proper Group Attribute statements, users might end up without roles and lose access to Datadog. To prevent users from being locked out after JIT provisioning, make sure to review your mapping definitions and check your assertions before enabling both Mappings and JIT.
 </div>
 

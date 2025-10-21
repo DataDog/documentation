@@ -14,9 +14,9 @@ DogStatsD funciona enviando al [Agent][1] métricas generadas por tu aplicación
 
 Cuando se utiliza DogStatsD para enviar un gran volumen de métricas a un único Agent, si no se toman las medidas adecuadas, es frecuente encontrar los siguientes síntomas:
 
-- Uso elevado de CPU por parte del Agent 
+- Uso elevado de CPU por parte del Agent
 - Datagramas y métricas perdidos
-- La biblioteca cliente de DogStatsD (UDS) devuelve errores
+- La librería cliente de DogStatsD (UDS) devuelve errores
 
 La mayoría de las veces los síntomas pueden aliviarse modificando algunas opciones de configuración que se describen a continuación.
 
@@ -39,7 +39,7 @@ Los siguientes son algunos ejemplos para [clientes oficiales compatibles con Dog
 {{< programming-lang-wrapper langs="go,python,ruby,java,.NET,PHP" >}}
 {{< programming-lang lang="go" >}}
 
-Por defecto, la biblioteca Golang oficial de Datadog [DataDog/datadog-go][1] utiliza el almacenamiento en búfer. El tamaño de cada paquete y el número de mensajes utilizan diferentes valores por defecto para `UDS` y `UDP`. Para obtener más información sobre la configuración del cliente, consulta [Datadog/Datadog-go][1].
+Por defecto, la librería Golang oficial de Datadog [DataDog/datadog-go][1] utiliza el almacenamiento en búfer. El tamaño de cada paquete y el número de mensajes utilizan diferentes valores por defecto para `UDS` y `UDP`. Para obtener más información sobre la configuración del cliente, consulta [Datadog/Datadog-go][1].
 
 ```go
 package main
@@ -64,7 +64,7 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Cuando se utiliza la biblioteca Python oficial de Datadog [datadogpy][1], el ejemplo siguiente utiliza un cliente de DogStatsD almacenado en búfer que envía métricas en un número mínimo de paquetes. El vaciado automático del almacenamiento se realiza al límite de tamaño de paquete y cada 300ms (configurable).
+Cuando se utiliza la librería Python oficial de Datadog [datadogpy][1], el ejemplo siguiente utiliza un cliente de DogStatsD almacenado en búfer que envía métricas en un número mínimo de paquetes. El vaciado automático del almacenamiento se realiza al límite de tamaño de paquete y cada 300ms (configurable).
 
 ```python
 desde Datadog importar DogStatsd
@@ -76,14 +76,14 @@ dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
 dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 dsd.flush()  # Optional manual flush
 
-# Cuando se utiliza el cliente anterior a v0.43.0, el gestor de contextos es necesario para utilizar el almacenamiento en buffer 
+# Cuando se utiliza el cliente anterior a v0.43.0, el gestor de contextos es necesario para utilizar el almacenamiento en buffer
 dsd = DogStatsd(host="127.0.0.1", port=8125)
 con dsd:
     dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Por defecto, las instancias del cliente Python de DogStatsD (incluyendo la instancia global <code>statsd</code>) no pueden ser compartidas entre procesos, pero son thread-safe. Debido a esto, el proceso principal y cada proceso secundario deben crear sus propias instancias de cliente o el almacenamiento en búfer debe ser explícitamente deshabilitado configurando <code>disable_buffering</code> como <code>True</code>. Para ver más detalles, consulta la documentación sobre <a href="https://datadogpy.readthedocs.io/en/latest/#Datadog-DogStatsD">datadog.dogstatsd</a>.
 </div>
 
@@ -92,7 +92,7 @@ Por defecto, las instancias del cliente Python de DogStatsD (incluyendo la insta
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Cuando de utiliza la biblioteca Ruby oficial de Datadog [dogstatsd-ruby][1], el siguiente ejemplo crea una instancia de cliente de DogStatsD almacenada en búfer que envía métricas en un paquete cuando se activa el vaciado:
+Cuando de utiliza la librería Ruby oficial de Datadog [dogstatsd-ruby][1], el siguiente ejemplo crea una instancia de cliente de DogStatsD almacenada en búfer que envía métricas en un paquete cuando se activa el vaciado:
 
 ```ruby
 require 'datadog/statsd'
@@ -110,7 +110,7 @@ statsd.flush(sync: true)
 {{< programming-lang lang="java" >}}
 
 
-Cuando se utiliza la biblioteca Java oficial de Datadog [java-dogstatsd-client][1], el ejemplo siguiente crea una instancia de cliente de DogStatsD almacenada en buffer, con un tamaño máximo de paquete de 1500 bytes, lo que significa que todas las métricas enviadas desde esta instancia del cliente se almacenan en buffer y se envían en paquetes con una extensión de paquete de `1500` como máximo:
+Cuando se utiliza la librería Java oficial de Datadog [java-dogstatsd-client][1], el ejemplo siguiente crea una instancia de cliente de DogStatsD almacenada en buffer, con un tamaño máximo de paquete de 1500 bytes, lo que significa que todas las métricas enviadas desde esta instancia del cliente se almacenan en buffer y se envían en paquetes con una extensión de paquete de `1500` como máximo:
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -138,7 +138,7 @@ public class DogStatsdClient {
 [1]: https://github.com/DataDog/java-dogstatsd-client
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
-Cuando se utiliza la biblioteca C# oficial de Datadog [dogstatsd-csharp-client][1], el siguiente ejemplo crea un cliente DogStatsD con UDP como transporte:
+Cuando se utiliza la librería C# oficial de Datadog [dogstatsd-csharp-client][1], el siguiente ejemplo crea un cliente DogStatsD con UDP como transporte:
 
 ```csharp
 using StatsdClient;
@@ -171,7 +171,7 @@ public class DogStatsdClient
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-Cuando de utiliza la biblioteca PHP oficial de Datadog [php-datadogstatsd][1], el siguiente ejemplo crea una instancia de cliente de DogStatsD almacenada en búfer que envía métricas en un paquete cuando se completa el bloque:
+Cuando de utiliza la librería PHP oficial de Datadog [php-datadogstatsd][1], el siguiente ejemplo crea una instancia de cliente de DogStatsD almacenada en búfer que envía métricas en un paquete cuando se completa el bloque:
 
 ```php
 <?php
@@ -265,7 +265,7 @@ También puedes configurar tu servidor DogStatsD si la telemetría del cliente i
 
 Para reducir la cantidad de pérdidas de paquetes:
 
-1. Aumenta el tamaño de la cola de clientes a `8192`. Para obtener más información, consulta la configuración de la biblioteca cliente. Puede que veas disminuir la cantidad de pérdidas y que tu aplicación utilice más RAM.
+1. Aumenta el tamaño de la cola de clientes a `8192`. Para obtener más información, consulta la configuración de la librería cliente. Puede que veas disminuir la cantidad de pérdidas y que tu aplicación utilice más RAM.
 2. Además, puedes activar la función `dogstatsd_pipeline_autoadjust: true` en la configuración de tu Datadog Agent. El Agent utiliza varios núcleos para procesar métricas personalizadas, lo que puede suponer un mayor uso de CPU, pero reducir las pérdidas de paquetes.
 
 ## Buffers de kernel del sistema operativo
@@ -368,7 +368,7 @@ Evita enviar métricas en ráfagas en tu aplicación. Esto evita que el Datadog 
 
 Otra cosa que necesitas tener en cuenta para limitar el uso máximo de memoria es reducir el almacenamiento en buffer. El buffer principal del servidor DogStatsD en el Agent es configurable con el campo `dogstatsd_queue_size` (a partir del Datadog Agent v6.1.0). Su valor por defecto de `1024` induce un uso máximo aproximado de memoria de 768MB.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Reducir el tamaño de buffer podría aumentar el número de paquetes perdidos.
 </div>
 
@@ -384,13 +384,13 @@ Consulta la siguiente sección sobre detección de ráfagas, para ayudar a detec
 
 DogStatsD tiene un modo de estadísticas en el que puedes ver qué métricas son las más procesadas.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: La activación del modo de estadísticas de métricas puede disminuir el rendimiento de DogStatsD.
 </div>
 
 Para activar el modo de estadísticas, puedes:
 
-- Configurar `dogstatsd_stats_enable` como `true` en tu archivo de configuración 
+- Configurar `dogstatsd_stats_enable` como `true` en tu archivo de configuración
 - Configurar la variable de entorno `DD_DogStatsD_STATS_ENABLE` como `true`
 - Utiliza el comando `datadog-agent config set dogstatsd_stats true` para activarlo durante el tiempo de ejecución. Puedes desactivarlo durante el tiempo de ejecución, utilizando el comando `datadog-agent config set dogstatsd_stats false`.
 
@@ -445,7 +445,7 @@ Número de bytes descartados por el cliente de DogStatsD.
 : **Tipo de métrica**: recuento<br>
 Número de datagramas enviados correctamente al Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Tipo de métrica**: recuento<br>
 Número de datagramas descartados por el cliente DogStatsD.
 
@@ -488,7 +488,7 @@ Número de bytes descartados por el cliente de DogStatsD.
 : **Tipo de métrica**: recuento<br>
 Número de datagramas enviados correctamente al Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Tipo de métrica**: recuento<br>
 Número de datagramas descartados por el cliente de DogStatsD.
 
@@ -530,7 +530,7 @@ Número de bytes enviados correctamente al Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Tipo de métrica**: recuento<br>
-Número de bytes descartados por el cliente de DogStatsD (esto incluye `datadog.dogstatsd.client.bytes_dropped_queue` 
+Número de bytes descartados por el cliente de DogStatsD (esto incluye `datadog.dogstatsd.client.bytes_dropped_queue`
 y `datadog.dogstatsd.client.bytes_dropped_writer`).
 
 `datadog.dogstatsd.client.bytes_dropped_queue`
@@ -547,7 +547,7 @@ Número de datagramas enviados correctamente al Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Tipo de métrica**: recuento<br>
-Número de datagramas descartados por el cliente de DogStatsD (esto incluye `datadog.dogstatsd.client.packets_dropped_queue` 
+Número de datagramas descartados por el cliente de DogStatsD (esto incluye `datadog.dogstatsd.client.packets_dropped_queue`
 y `datadog.dogstatsd.client.packets_dropped_writer`).
 
 `datadog.dogstatsd.client.packets_dropped_queue`
@@ -558,20 +558,20 @@ Número de datagramas descartados porque la cola de clientes de DogStatsD estaba
 : **Tipo de métrica**: recuento<br>
 Número de bytes perdidos por un error al escribir en Datadog, debido a un tiempo de espera o un error de red.
 
-`datadog.dogstatsd.client.metric_dropped_on_receive` 
+`datadog.dogstatsd.client.metric_dropped_on_receive`
 : **Tipo de métrica**: recuento<br>
-Número de métricas perdidas porque el canal de recepción interno estaba lleno (cuando se utiliza `WithChannelMode()`). A partir 
+Número de métricas perdidas porque el canal de recepción interno estaba lleno (cuando se utiliza `WithChannelMode()`). A partir
 de la versión 3.6.0 del cliente de Go, cuando `WithChannelMode()` está habilitado.
 
 `datadog.dogstatsd.client.aggregated_context`
 : **Tipo de métrica**: recuento
-Número total de contextos vaciados por el cliente, cuando la agregación del lado del cliente está habilitada. A partir de la versión 5.0.0 
+Número total de contextos vaciados por el cliente, cuando la agregación del lado del cliente está habilitada. A partir de la versión 5.0.0
 del cliente de Go. Esta métrica sólo se informa cuando la agregación está habilitada (opción predeterminada).
 
 `datadog.dogstatsd.client.aggregated_context_by_type`
 : **Tipo de métrica**: recuento
-Número total de contextos vaciados por el cliente, cuando la agregación del lado del cliente está habilitada, etiquetados por tipo de métrica 
-(`gauge`, `set`, `count`, `timing`, `histogram` o `distribution`). A partir de la versión 5.0.0 del cliente de Go. Esta métrica 
+Número total de contextos vaciados por el cliente, cuando la agregación del lado del cliente está habilitada, etiquetados por tipo de métrica
+(`gauge`, `set`, `count`, `timing`, `histogram` o `distribution`). A partir de la versión 5.0.0 del cliente de Go. Esta métrica
 sólo se informa cuando la agregación está habilitada (opción predeterminada).
 
 Para desactivar la telemetría, utiliza el parámetro `WithoutTelemetry`:
@@ -613,7 +613,7 @@ Número de bytes descartados por el cliente de DogStatsD.
 : **Tipo de métrica**: recuento<br>
 Número de datagramas enviados correctamente al Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Tipo de métrica**: recuento<br>
 Número de datagramas descartados por el cliente de DogStatsD.
 
@@ -650,8 +650,8 @@ Para obtener más información sobre la configuración del cliente, consulta [Da
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-A partir de la versión `1.5.0` del cliente de PHP la telemetría está activada 
-por defecto, para el cliente de `BatchedDogStatsd`, y está desactivada por defecto, para el 
+A partir de la versión `1.5.0` del cliente de PHP la telemetría está activada
+por defecto, para el cliente de `BatchedDogStatsd`, y está desactivada por defecto, para el
 cliente de `DogStatsd`.
 
 `datadog.dogstatsd.client.metrics`
@@ -678,12 +678,12 @@ Número de bytes descartados por el cliente de DogStatsD.
 : **Tipo de métrica**: recuento<br>
 Número de datagramas enviados correctamente al Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Tipo de métrica**: recuento<br>
 Número de datagramas descartados por el cliente de DogStatsD.
 
 Para activar o desactivar la telemetría, utiliza el argumento `disable_telemetry`. Atención,
-utilizar telemetrías con clientes de `DogStatsd` incrementa el uso de red 
+utilizar telemetrías con clientes de `DogStatsd` incrementa el uso de red
 significativamente. Se aconseja utilizar el `BatchedDogStatsd` cuando se utiliza la telemetría.
 
 Para activarlo en el cliente `DogStatsd`:

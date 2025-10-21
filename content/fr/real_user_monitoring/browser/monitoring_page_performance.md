@@ -3,13 +3,14 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/core-web-vitals-lab
   tag: Centre d'apprentissage
   text: 'Atelier interactif : signaux Web essentiels'
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: Blog
-  text: Real User Monitoring
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: Blog
   text: Surveiller les signaux Web essentiels avec la surveillance Synthetic et la
     solution RUM de Datadog
+- link: https://www.datadoghq.com/blog/single-page-apps-inp/
+  tag: Blog
+  text: Surveiller l'interactivité des applications monopage avec Core Web Vitals
+    et Datadog (en anglais)
 - link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Explorer vos vues dans Datadog
@@ -22,49 +23,49 @@ further_reading:
 title: Surveillance des performances de pages
 ---
 
-## Présentation
+## Section Overview
 
-Les événements de vue RUM recueillent un large éventail de métriques de performance pour chaque vue de page. Surveillez les vues de page de votre application et explorez les métriques de performance dans les dashboards et le RUM Explorer.
+Les événements de vue RUM collectent des données de télémétrie détaillées sur les performances pour chaque page vue. Surveillez les pages vues de votre application et explorez les données de télémétrie de performance dans les dashboards et le RUM Explorer.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="Un graphique en cascade dans l'onglet Performance d'une vue RUM dans le RUM Explorer" style="width:100%;" >}}
 
-Les métriques de performance de vos vues sont accessibles via les ressources suivantes :
+Vous pouvez accéder aux données de télémétrie de performance de vos vues dans :
 
-- Les [dashboards RUM][1] prêts à l'emploi, qui offrent une vue d'ensemble des performances de votre application. Par exemple, dans le [dahsboard Performance Overview][3], vous pouvez appliquer un filtre basé sur des [attributs par défaut][2] recueillis par la fonctionnalité RUM afin d'afficher les problèmes qui concernent un sous-ensemble d'utilisateurs. Vous pouvez également dupliquer ce dashboard, l'adapter à vos besoins et utiliser n'importe quelle [métrique de performance RUM](#toutes-les-metriques-de-performance) dans la requête du dashboard.
+- Les [dashboards RUM][1] prêts à l'emploi, qui offrent une vue d'ensemble des performances de votre application. Par exemple, dans le [dahsboard Performance Overview][3], vous pouvez appliquer un filtre basé sur des [attributs par défaut][2] recueillis par la fonctionnalité RUM afin d'afficher les problèmes qui concernent un sous-ensemble d'utilisateurs. Vous pouvez également dupliquer ce dashboard, l'adapter à vos besoins et utiliser n'importe quelles [données de télémétrie de performance RUM](#toutes-les-donnees-de-telemetrie-de-performance) dans la requête du dashboard.
 - Un graphique en cascade, disponible pour chaque événement de vue RUM du [RUM Explorer][4]. Il vous permet d'analyser les performances associées à une vue de page en particulier. Vous pouvez ainsi visualiser l'impact des ressources de votre site Web, des tâches longues et des erreurs frontend sur les performances de vos utilisateurs finaux, et ce pour chaque page.
 
 ## Durées des événements et signaux Web essentiels
 
-<div class="alert alert-warning">
-  Les métriques sur les signaux Web essentiels de Datadog sont disponibles depuis le package <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> pour la version 2.2.0 et les versions ultérieures.
+<div class="alert alert-danger">
+  Les données de télémétrie Core Web Vitals de Datadog sont disponibles à partir du package <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> v2.2.0+.
 </div>
 
-Les [signaux Web essentiels de Google][5] désignent trois métriques visant à surveiller l'expérience utilisateur d'un site. Ces métriques sont conçues pour vous offrir une vue globale des performances de chargement, de l'interactivité et de la stabilité visuelle. Une plage de valeurs correspondant à une expérience utilisateur acceptable est fournie pour chaque métrique. Nous vous conseillons de surveiller le 75e centile de ces métriques.
+Les [Core Web Vitals de Google][5] sont un ensemble de trois indicateurs clés (KPI) conçus pour surveiller l'expérience utilisateur d'un site. Ces KPI permettent d'avoir une vue sur les performances de chargement, l'interactivité et la stabilité visuelle. Chaque KPI est accompagné de recommandations sur les plages de valeurs correspondant à une bonne expérience utilisateur. Datadog recommande de surveiller le 75e percentile pour ces KPI.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Visualisation de la synthèse des signaux Web essentiels" >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Visualisation de la synthèse de Core Web Vitals" >}}
 
-- Les métriques First Input Delay et Largest Contentful Paint ne sont pas recueillies pour les pages ouvertes en arrière-plan (par exemple, dans une fenêtre ou un nouvel onglet non actif).
-- Les métriques recueillies à partir des vues de page de vos utilisateurs réels peuvent différer de celles calculées à partir des chargements de page d'un environnement contrôlé et fixe, comme celui des [tests Browser Synthetic][6]. La surveillance Synthetic considère les métriques Largest Contentful Paint et Cumulative Layout Shift comme des métriques expérimentales, et non réelles.
+- Les KPI « Interaction to Next Paint » et « Largest Contentful Paint » ne sont pas collectés pour les pages ouvertes en arrière-plan (par exemple dans un nouvel onglet ou une fenêtre sans focus).
+- Les données de télémétrie collectées à partir des pages vues par vos utilisateurs réels peuvent différer de celles calculées pour des pages chargées dans un environnement fixe et contrôlé, comme un [test de navigateur Synthetic][6]. Synthetic Monitoring affiche Largest Contentful Paint et Cumulative Layout Shift comme des données de télémétrie de lab, et non comme des données réelles.
 
-| Métrique                   | Caractéristique            | Description                                                                                           | Valeur cible |
+| Point de données                   | Caractéristique            | Rôle                                                                                           | Valeur cible |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Performances de chargement | Moment où l'objet DOM le plus volumineux est affiché dans la fenêtre d'affichage (à savoir, visible à l'écran) lors du chargement de la page.         | < 2,5 s       |
-| [First Input Delay][8]        | Interactivité    | Délai entre le moment où l'utilisateur interagit pour la première fois avec la page et le moment où le navigateur répond à cette interaction.             | < 100 ms      |
-| [Cumulative Layout Shift][9]  | Stabilité visuelle | Nombre de mouvements de page inattendus causés par le chargement de contenu dynamique (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0. | < 0,1        |
 | [Interaction To Next Paint][19]| Interactivité    | Durée la plus longue entre l'interaction d'un utilisateur avec la page et le rendu suivant. Requiert la version 5.1.0 du SDK RUM. | <200 ms        |
+| [Cumulative Layout Shift][9]  | Stabilité visuelle | Nombre de mouvements de page inattendus causés par le chargement de contenu dynamique (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0. | < 0,1        |
 
 ### Éléments cibles des signaux Web essentiels
 
-L'identification de l'élément ayant déclenché une métrique de signaux Web essentiels élevée est la première étape dans la compréhension de son origine et l'amélioration des performances. RUM transmet l'élément associé à chaque instance des signaux Web essentiels :
+La première étape pour comprendre la cause d'un KPI Core Web Vitals élevé et améliorer les performances consiste à identifier l'élément qui l'a déclenché. 
+RUM indique l'élément lié à chaque instance de Core Web Vital :
 
 - Pour la métrique Largest Contentful Paint, RUM transmet le sélecteur CSS de l'élément correspondant au rendu du contenu principal.
 - Pour la métrique Interaction to Next Paint, RUM transmet le sélecteur CSS de l'élément associé à l'interaction la plus longue avant le rendu suivant.
 - Pour la métrique First Input Delay, RUM transmet le sélecteur CSS du premier élément avec lequel l'utilisateur a interagi.
 - Pour Cumulative Layout Shift, le service RUM transmet le sélecteur CSS de lʼélément le plus modifié contribuant au CLS.
 
-## Toutes les métriques de performance
+## Toutes les données télémétriques sur les performances
 
-| Attribut                       | Type        | Description                                                                                                                                                                                                                      |
+| Attribut                       | Type        | Rôle                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | nombre (ns) | Temps passé sur la vue actuelle.                                                                                                                                                                                                  |
 | `view.first_byte`               | nombre (ns) | Temps écoulé avant la réception du premier octet de la vue.                                                                                                |
@@ -91,7 +92,7 @@ L'identification de l'élément ayant déclenché une métrique de signaux Web e
 
 Pour les applications monopages, le SDK Browser RUM différencie les navigations `initial_load` et `route_change` avec l'attribut `loading_type`. Si une interaction sur votre page Web redirige vers une nouvelle URL sans actualisation complète de la page, le SDK RUM initie un nouvel événement de vue avec `loading_type:route_change`. La solution RUM détecte les changements d'URL à l'aide de l'[API History][16].
 
-Datadog fournit une métrique de performance unique, `loading_time`, qui calcule le temps nécessaire au chargement d'une page. Cette métrique fonctionne pour les navigations `initial_load` et `route_change`.
+Datadog fournit un KPI unique, `loading_time`, qui mesure le temps nécessaire au chargement d'une page. Ce KPI s'applique à la fois à la navigation `initial_load` et `route_change`.
 
 ### Méthode de calcul du temps de chargement
 
@@ -145,7 +146,50 @@ window.DD_RUM.init({
 
 Le SDK RUM surveille automatiquement les frameworks qui reposent sur une navigation par hash (`#`). Il détecte les `HashChangeEvent` et génère une nouvelle vue. Les événements issus d'une ancre HTML n'affectent pas le contexte de la vue actuelle et sont ignorés.
 
-## Ajouter vos propres durées de performance
+## Créer des données de télémétrie de performance personnalisées
+
+### Mesurer les performances au niveau des composants avec des indicateurs personnalisés
+
+Utilisez l'API `customVital` pour mesurer les performances de votre application au niveau des composants. Par exemple, vous pouvez mesurer le temps nécessaire au rendu d'une partie de votre page ou à la réaction d'un composant à une interaction utilisateur. **Remarque** : les noms d'indicateurs personnalisés ne doivent pas contenir d'espaces ni de caractères spéciaux.
+
+#### Démarrer et arrêter les mesures de durée
+
+Démarrez une mesure de durée en appelant `startDurationVital` et arrêtez-la avec `stopDurationVital` :
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering")
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+Une fois la méthode `stopDurationVital` appelée, la durée de l'indicateur personnalisé est envoyée à Datadog et peut être interrogée avec `@vital.name:dropdownRendering`. Vous pouvez également filtrer par durée, par exemple avec `@vital.duration:>10`.
+
+#### Utiliser des références et des descriptions
+
+Utilisez la référence renvoyée par `startDurationVital` et indiquez une chaîne `description` pour différencier les instances d'un même indicateur personnalisé sur plusieurs pages. Par exemple, pour suivre la durée de `dropdownRendering` sur la page `login` :
+
+```javascript
+const reference = window.DD_RUM.startDurationVital("dropdownRendering", { description: "login" })
+window.DD_RUM.stopDurationVital(reference)
+```
+
+Ce code effectue un regroupement par `@vital.description`, ce qui permet de suivre le comportement de rendu d'un même composant sur différentes pages.
+
+Vous pouvez également ajouter du contexte à votre indicateur personnalisé en utilisant la propriété `context` :
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering", {context: { clientId: "xxx" }})
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+#### Signaler un indicateur personnalisé avec `addDurationVital`
+
+Plutôt que de définir les variables d'un indicateur personnalisé individuellement, vous pouvez le signaler en une seule opération avec `addDurationVital` :
+
+```javascript
+window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
+```
+
+### Suivre des mesures de performance supplémentaires
 
 Outre les durées de performance proposées par défaut par la solution RUM, il est possible de mesurer de façon flexible combien de temps votre application consacre à chaque tâche. Grâce à l'API `addTiming`, vous pouvez facilement ajouter des durées de performance supplémentaires.
 
@@ -175,7 +219,7 @@ Pour les applications monopages, l'API `addTiming` envoie une durée relative au
 
 Si votre configuration est basée sur une approche asynchrone, vous pouvez définir votre propre durée (sous forme de timestamp epoch UNIX) comme paramètre secondaire.
 
-Par exemple :
+Exemple :
 
 ```javascript
 document.addEventListener("scroll", function handler() {

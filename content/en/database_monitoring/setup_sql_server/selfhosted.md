@@ -11,6 +11,9 @@ further_reading:
 - link: "/database_monitoring/guide/sql_deadlock/"
   tag: "Documentation"
   text: "Configure Deadlock Monitoring"
+- link: "/database_monitoring/guide/sql_extended_events/"
+  tag: "Documentation"
+  text: "Configure Query Completion and Query Error Collection"
 - link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
   tag: "Blog"
   text: "Strategize your Azure migration for SQL workloads with Datadog"
@@ -93,14 +96,6 @@ It's recommended to install the agent directly on the SQL Server host as that en
 {{% tab "Linux Host" %}}
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
-{{% /tab %}}
-{{% tab "Docker" %}}
-{{% dbm-alwayson %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-{{% dbm-alwayson %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 

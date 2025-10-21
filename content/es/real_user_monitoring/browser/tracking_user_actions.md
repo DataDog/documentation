@@ -75,7 +75,7 @@ Por ejemplo:
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
 
-<div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
+<div class="alert alert-warning" role="alert" data-dd-action-name="Dismiss alert">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     <span class="visually-hidden">Error:</span>
     Ingresar una dirección de correo electrónico válida
