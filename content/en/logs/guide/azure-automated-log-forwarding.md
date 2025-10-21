@@ -29,8 +29,6 @@ Use the automated setup method if you want to:
    - redeploy your resources in the correct order and in a consistent way
    - save costs by using a storage account rather than an event hub
 
-Add that automated setup method 
-
 ## Setup
 
 Begin by opening the Azure Log Forwarding ARM template corresponding to your Azure environment, or by clicking **+ Add Log Collection** in the [Azure integration tile][14].

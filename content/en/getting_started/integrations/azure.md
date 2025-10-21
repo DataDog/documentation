@@ -59,7 +59,7 @@ Follow the instructions on this page to set up the **Azure integration** through
 
 {{% collapse-content title="Quickstart (recommended)" level="h4" expanded=false id="azure-quickstart-setup" %}}
 
-### Choose this if...
+### Choose the Quickstart setup method if...
 
 - You are setting up Datadog for the first time.
 - You prefer a UI-based workflow and want to minimize the time it takes to create a service principal with the required monitoring permissions.
@@ -98,7 +98,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% collapse-content title="Terraform" expanded=false level="h4" id="terraform-setup" %}}
 
-### Choose this if...
+### Choose the Terraform setup method if...
 
 - You manage infrastructure as code and want to keep the Datadog Azure integration under version control.
 - You need to configure multiple tenants or subscriptions consistently with reusable provider blocks.
@@ -140,7 +140,9 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% tab "Use an existing app registration" %}}
 
-Use this method if you already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups).
+### Choose the existing app registration setup method if...
+
+- You already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
 
 1. Configure the [Datadog Terraform provider][200] to interact with the Datadog API through a Terraform configuration.
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
@@ -224,7 +226,7 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 
 {{% collapse-content title="Automated (recommended)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
 
-### Choose this if...
+### Choose the automated log forwarding setup method if...
 
 - You haven't already set up logs through the [Quickstart setup method](#azure-quickstart-setup).
 - You prefer a UI-based workflow and want to minimize the time it takes to create a service principal with the required monitoring permissions.
@@ -269,6 +271,7 @@ You prefer to manually configure [diagnostic settings][53] on the resources you 
 ## Get more from the Datadog Platform 
 
 ### Install the Agent for greater visibility into your application
+
 After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to: 
 - **Application health** 
 - **Process utilization**
