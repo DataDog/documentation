@@ -190,7 +190,7 @@ You can customize your On-Call pages widgets by filtering on:
 
 ### On-Call lockscreen widget
 
-On-Call lock screen widget displays your On-Call status. Lockscreen widgets are only available on iOS.
+The On-Call lock screen widget displays your On-Call status. Lock screen widgets are only available on iOS.
 
 1. Long press on your lock screen.
 2. Tap **Customize**, then **Lock Screen**.
