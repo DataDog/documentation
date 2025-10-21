@@ -134,9 +134,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method.
-
-App hangs are only reported through RUM (not through logs). For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
 
 
 [501]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
