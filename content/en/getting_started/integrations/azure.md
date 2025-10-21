@@ -57,7 +57,7 @@ Follow the instructions on this page to set up the **Azure integration** through
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
 
-{{% collapse-content title="Quickstart (recommended)" level="h4" expanded=false id="azure-quickstart-setup" %}}
+{{% collapse-content title="Quickstart (recommended)" level="h4" expanded=false id="quickstart-setup" %}}
 
 ### Choose the Quickstart setup method if...
 
@@ -140,7 +140,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% tab "Use an existing app registration" %}}
 
-### Choose the existing app registration setup method if...
+
 
 - You already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
 
@@ -189,7 +189,15 @@ Datadog provides a monitor template to help you get started. To use the monitor 
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Use an existing app registration" level="h4" expanded=false id="azure-existing-app-registration-setup" %}}
+{{% collapse-content title="Use an existing app registration" level="h4" expanded=false id="existing-app-registration-setup" %}}
+
+### Choose the existing app registration setup method if..
+
+- You already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
+
+If you need to set up an app registration for Datadog, see the [Quickstart](#quickstart-setup) or [Terraform](#terraform-setup) setup methods.
+
+### Instructions 
 
 1. In the [Datadog Azure integration tile][20], select **Add Existing**.
 2. In the **Tenant ID** field, paste your Directory (tenant) ID.

@@ -227,7 +227,7 @@ Azure integration metrics, events, and service checks receive the following tags
 [56]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged
 [57]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
 [58]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer
-[59]: /getting_started/integrations/azure/#azure-quickstart-setup
+[59]: /getting_started/integrations/azure/#quickstart-setup
 [60]: /integrations/guide/azure-advanced-configuration/
 [61]: /logs/guide/azure-automated-log-forwarding
 [62]: /account_management/billing/azure/
