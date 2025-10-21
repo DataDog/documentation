@@ -70,6 +70,8 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
           gcr.io/datadoghq/agent:latest
       ```
 
+**Note:** The Datadog Agent can only collect logs for Podman containers started with `--log-driver=k8s-file`.
+
 ### Agent versions v7.54.0 and below
 
 {{< tabs >}}
