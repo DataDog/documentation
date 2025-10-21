@@ -129,7 +129,6 @@ Change Tracking follows these types of changes across your infrastructure:
 | Feature Flags                                                                    | Use the LaunchDarkly integration or send custom events using the Events API. See the [Feature Flag Tracking documentation][14] for setup and advanced options.                          |
 | Custom Configuration Change Events                                               | [Event Management API][6].                                                                                                                                                               |
 | Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.                                                                                          |
-
 | Traffic Spikes (APM)                                                             | [Application Performance Monitoring (APM)][15]
 | CrashLoopBackOff Kubernetes Pod Crashes                                          | Kubernetes Integration (Add service label to Kubernetes yaml file if possible).                                                                                                          |
 | PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                 | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation. |
