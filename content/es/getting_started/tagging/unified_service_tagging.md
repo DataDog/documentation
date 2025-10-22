@@ -131,7 +131,7 @@ También puedes utilizar las variables de atributos de recursos de OpenTelemetry
          - name: OTEL_SERVICE_NAME
            value: "<SERVICE>"
 ```
-<div class="alert alert-warning"><strong>Nota</strong>: La variable de entorno <code>OTEL_SERVICE_NAME</code> tiene prioridad sobre el atributo <code>service.name</code> de la variable de entorno <code>OTEL_RESOURCE_ATTRIBUTES</code>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: La variable de entorno <code>OTEL_SERVICE_NAME</code> tiene prioridad sobre el atributo <code>service.name</code> de la variable de entorno <code>OTEL_RESOURCE_ATTRIBUTES</code>.</div>
 
 ##### Configuración parcial
 
@@ -309,7 +309,7 @@ Requisitos:
 
 {{% tab "ECS" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 En ECS Fargate que utiliza Fluent Bit o FireLens, el etiquetado de servicios unificado sólo está disponible para métricas y trazas, no para la recopilación de logs.
 </div>
 
@@ -514,7 +514,7 @@ Cuando utilices OpenTelemetry, asigna los siguientes [atributos de recursos][16]
 1: `deployment.environment` queda obsoleto en favor de `deployment.environment.name` en [convenciones semánticas de OpenTelemetry v1.27.0][17].  
 2: `deployment.environment.name` es compatible con el Datadog Agent v7.58.0 o posterior y con Datadog Exporter v0.110.0 o posterior.
 
-<div class="alert alert-warning">Algunas variables de entorno específicas de Datadog como <code>DD_SERVICE</code>, <code>DD_ENV</code> o <code>DD_VERSION</code> no son compatibles de forma predefinida en tu configuración de OpenTelemetry.</div>
+<div class="alert alert-danger">Algunas variables de entorno específicas de Datadog como <code>DD_SERVICE</code>, <code>DD_ENV</code> o <code>DD_VERSION</code> no son compatibles de forma predefinida en tu configuración de OpenTelemetry.</div>
 
 {{< tabs >}}
 {{% tab "Variables de entorno" %}}

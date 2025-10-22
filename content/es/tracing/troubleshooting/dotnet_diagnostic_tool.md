@@ -1,10 +1,12 @@
 ---
+description: Utiliza la herramienta de diagnóstico dd-dotnet para solucionar problemas
+  de configuración del rastreo .NET y de conectividad del Agent.
 title: Uso de la herramienta de diagnóstico de .NET para solucionar problemas
 ---
 
 Si tu aplicación no produce trazas como esperabas después de instalar el rastreador de .NET, ejecuta la herramienta de diagnóstico `dd-dotnet` descrita en esta página para obtener información básica para solucionar problemas. Te ayudará a determinar problemas con tu configuración, como variables de entorno faltantes, instalación incompleta o un Agent inaccesible.
 
-La herramienta de diagnóstico `dd-dotnet` se incluye con la librería de rastreo a partir de la versión 2.42.0. Se encuentra en la carpeta de instalación de la librería de rastreo y se añade automáticamente a la `PATH` del sistema para poder invocarla desde cualquier lugar.
+La herramienta de diagnóstico `dd-dotnet` se incluye con la biblioteca de rastreo a partir de la versión 2.42.0. Se encuentra en la carpeta de instalación de la biblioteca de rastreo y se añade automáticamente a la `PATH` del sistema para poder invocarla desde cualquier lugar.
 
 ## Instalación de `dd-trace`
 
@@ -29,9 +31,9 @@ Cuando invoques los comandos de las secciones siguientes, asegúrate de sustitui
 
 ## Diagnóstico del proceso
 
-Para la mayoría de las aplicaciones, utiliza los diagnósticos del proceso para encontrar el problema.
+Para la mayoría de las aplicaciones, utiliza los diagnósticos del proceso para encontrar el problema. 
 
-1. Asegúrate de que la aplicación se está ejecutando y obtén el ID (pid) de proceso.
+1. Asegúrate de que la aplicación se está ejecutando y obtén el ID (pid) de proceso. 
 
    Para obtener el pid de un proceso de Windows, abre el Administrador de tareas, abre la pestaña **Details** (Detalles), y busca la columna PID. También puedes ejecutar el comando `tasklist /FI "IMAGENAME eq target.exe"`donde `target.exe` es el nombre del proceso.
 

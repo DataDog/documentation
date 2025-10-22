@@ -13,7 +13,7 @@ You can investigate alerts with Bits AI SRE in two ways:
 You can manually invoke Bits on an individual monitor alert or warn event from several entry points:
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to [**Bits AI SRE** > **Monitors** > **Ready for Bits**][5].
+1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
 1. Click the **Investigate Recent Alerts** dropdown and select an alert.
 
 #### Option 2: Monitor Status page
@@ -31,7 +31,7 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 You can configure monitors so Bits runs automatically whenever they transition to the alert state:
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to [**Bits AI SRE** > **Monitors** > **Ready for Bits**][5].
+1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
 1. Toggle **Enable** under **Automatic investigations** for a single monitor, or bulk-edit multiple monitors by selecting a set of monitors, followed by **Edit automatic investigations**.
 
 #### Option 2: Configure for a single monitor
@@ -43,7 +43,7 @@ You can configure monitors so Bits runs automatically whenever they transition t
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations.
 
 ### Supported monitors
-<div class="alert alert-info"> Note: Prior to general availability, monitor requirements may change.  </div>
+<div class="alert alert-info">Prior to general availability, monitor requirements may change.</div>
 
 Bits is able to run investigations on the following monitor types:
   - Metric
@@ -111,6 +111,36 @@ There are two RBAC permissions that apply to Bits AI SRE:
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role |
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or have previously modified the default roles, an admin with the User Access Manage permission will need to manually add the permission to the appropriate roles. For details, see [Access Control][11].
+
+### Configure rate limits
+
+Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period.
+
+[Manual investigations](#manually-start-an-investigation) can still be triggered even after rate limits.
+
+#### Types of rate limits
+
+##### Per monitor limit
+
+Controls how often an investigation is triggered from a single monitor alert within a rolling 24 hour window.
+
+**Default:** Each monitor can trigger one automatic investigation per 24 hours.
+
+##### Organization limit
+
+The Organization limit defines the total number of investigations Bits AI SRE can run across your entire organization within 24 hours.
+
+**Default:** No limit.
+
+#### Set a rate limit
+
+To set a rate limit:
+1. Navigate to **Bits AI SRE** > **Settings** > [**Rate Limits**](https://app.datadoghq.com/bits-ai/settings/rate-limits).
+2. Toggle on the rate limit you want to enable.
+3. Set the maximum number of investigations that can run within a rolling 24-hour window.
+4. Click **Save**.
+
+{{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
 ## How Bits AI SRE investigates
 

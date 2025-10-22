@@ -4,6 +4,9 @@ description: Configure log collection from containerized applications running on
 aliases:
   - /agent/kubernetes/log
 further_reading:
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitor logs from Amazon EKS on Fargate with Datadog
 - link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
@@ -137,7 +140,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Warning for unprivileged installations</strong>
 <br/><br/>
 When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.

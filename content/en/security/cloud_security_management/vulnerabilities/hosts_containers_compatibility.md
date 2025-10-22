@@ -11,7 +11,7 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 | Alpine Linux             | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk                       | {{< X >}}         | {{< X >}}         |
 | Wolfi Linux              | N/A                                                 | apk                       | {{< X >}}         | {{< X >}}         |
 | Chainguard               | N/A                                                 | apk                       | {{< X >}}         | {{< X >}}         |
-| Red Hat Enterprise Linux | 6, 7, 8                                             | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
+| Red Hat Enterprise Linux | 6, 7, 8, 9                                          | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
 | CentOS                   | 6, 7, 8                                             | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
 | AlmaLinux                | 8, 9                                                | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
 | Rocky Linux              | 8, 9                                                | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |

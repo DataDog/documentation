@@ -53,7 +53,7 @@ npm install --save-dev nyc
 }
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Jest includes Istanbul by default, so you don't need to install <code>nyc</code>. Simply pass <code>--coverage</code>.
 </div>
 

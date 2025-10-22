@@ -28,7 +28,7 @@ En esta guía, se explica lo siguiente:
 
 Cuando Datadog detecta un aumento de la cardinalidad, antes de que se aplique ningún límite de tasa, se crea un [evento][2] de advertencia. Si la cardinalidad de las métricas sigue aumentando, es posible que se aplique un límite de tasa. Si la métrica tiene un límite de tasa, se genera un segundo evento con la indicación de que se ha puesto un límite de tasa. Puedes ver estos eventos en el [Explorador de eventos][3]. 
 
-<div class="alert alert-warning">Datadog no envía una notificación por cada evento de límite de tasa subsiguiente. Como práctica recomendada, crea un monitor de eventos para enviar alertas cuando las métricas se limiten en el futuro.</div>
+<div class="alert alert-danger">Datadog no envía una notificación por cada evento de límite de tasa subsiguiente. Como práctica recomendada, crea un monitor de eventos para enviar alertas cuando las métricas se limiten en el futuro.</div>
 
 ## Monitorizar eventos de límites de tasa
 
@@ -51,7 +51,7 @@ Para obtener más información, consulta la guía [Prácticas recomendadas para 
 
 ## Enviar una solicitud para eliminar el límite de tasa
 
-<div class="alert alert-warning">Solo un administrador de Datadog puede solicitar la eliminación de un límite de tasa de métricas. Si no eres administrador, asegúrate de incluir a un administrador en el ticket de soporte que pueda confirmar la solicitud.</div>
+<div class="alert alert-danger">Solo un administrador de Datadog puede solicitar la eliminación de un límite de tasa de métricas. Si no eres administrador, asegúrate de incluir a un administrador en el ticket de soporte que pueda confirmar la solicitud.</div>
 
 Después de hacer los cambios para eliminar las etiquetas sin límites, envía una solicitud al [Soporte de Datadog][5] para eliminar el límite de tasa. En la solicitud, facilita la siguiente información: 
 - Nombre de la métrica con el límite de tasa 

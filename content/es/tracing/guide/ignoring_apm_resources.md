@@ -134,7 +134,7 @@ En el backend, Datadog crea y añade las siguientes etiquetas (tags) de spans (t
 | `http.useragent_details.browser.family` | La familia de navegadores informada por el User-Agent.    |
 | `http.useragent_details.device.family`  | La familia de dispositivos informada por el User-Agent.     |
 
-<div class="alert alert-warning"><strong>Nota</strong>: Desde el 1.º de octubre de 2022, el backend Datadog aplica una reasignación para aplicar la <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de etiquetas (tags) de spans (tramos)
+<div class="alert alert-danger"><strong>Nota</strong>: Desde el 1.º de octubre de 2022, el backend Datadog aplica una reasignación para aplicar la <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de etiquetas (tags) de spans (tramos)
 </a> a través de rastreadores en todos los spans (tramos) ingeridos. Si deseas descartar spans (tramos) en función de las etiquetas (tags) en el nivel del Datadog Agent, utiliza las etiquetas (tags) en la columna <strong>Reasignar desde</strong>.</div>
 
 ##### Comunicaciones de red
@@ -413,13 +413,13 @@ Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datad
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Nota</strong>: Al filtrar trazas de esta manera, se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Al filtrar trazas de esta manera, se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
 
 ## Opciones de configuración del rastreador
 
 Algunos de los rastreadores específicos del lenguaje tienen una opción para modificar tramos antes de que se envíen al Datadog Agent. Utiliza esta opción si tienes requisitos específicos de la aplicación y utilizas uno de los lenguajes que se enumeran a continuación.
 
-<div class="alert alert-warning"><strong>Notas</strong>:<br>1. Si la solicitud está asociada a una trace (traza) distribuida, la trace (traza) resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Filtrar traces (trazas) de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">las métricas de traces (trazas) </a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de traces (trazas), consulta <a href="/tracing/trace_ingestion/ingestion_controls">los controles de ingesta</a>.</div>
+<div class="alert alert-danger"><strong>Notas</strong>:<br>1. Si la solicitud está asociada a una trace (traza) distribuida, la trace (traza) resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Filtrar traces (trazas) de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">las métricas de traces (trazas) </a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de traces (trazas), consulta <a href="/tracing/trace_ingestion/ingestion_controls">los controles de ingesta</a>.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}

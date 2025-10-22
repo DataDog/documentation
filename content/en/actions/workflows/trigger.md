@@ -8,6 +8,9 @@ aliases:
 - /workflows/trigger
 - /service_management/workflows/trigger
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-automation-rules
+  tag: Blog
+  text: Instantly respond to changes in your data with Datadog automation rules
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
@@ -171,7 +174,7 @@ Run the workflow from your Software Catalog entity:
 
 ## GitHub triggers
 
-<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
+<div class="alert alert-info">Your GitHub account must have permission to create webhooks to use this feature.</div>
 
 You can trigger a workflow from GitHub using the following steps.
 
@@ -190,7 +193,7 @@ You can trigger a workflow from GitHub using the following steps.
 
 ## Slack triggers
 
-<div class="alert alert-info"><strong>Note</strong>: You must install the Datadog App in your Slack workspace to use this feature. For more information, see <a href="/integrations/slack/?tab=datadogforslack#setup">Slack Setup</a>.</div>
+<div class="alert alert-info">You must install the Datadog App in your Slack workspace to use this feature. For more information, see <a href="/integrations/slack/?tab=datadogforslack#setup">Slack Setup</a>.</div>
 
 <div class="alert alert-info"><strong>Quick start</strong>: Click to create a <a href="https://app.datadoghq.com/workflow/create?source=slack">workflow</a> with a Slack trigger.</div>
 

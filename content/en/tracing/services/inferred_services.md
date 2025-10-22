@@ -114,7 +114,7 @@ exporters:
 **Example**: [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/collector.yaml#L375-L395
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -164,7 +164,7 @@ With inferred services, service dependencies are automatically detected from exi
 
 Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
-<div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
+<div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 

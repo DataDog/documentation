@@ -588,6 +588,8 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 
 You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
 
+Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -616,6 +618,7 @@ For each cloud account that you would like to receive recommendations for:
 1. Enable [resource collection][3] for recommendations.
    - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
    - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
+   - For GCP, enable resource collection in the **Resource Collection** tab on the [Google Cloud Platform integration tile][10].
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
@@ -644,3 +647,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [7]: /integrations/amazon_s3_storage_lens/
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
+[10]: https://app.datadoghq.com/integrations/gcp
+[11]: /cloud_cost_management/tags/tag_pipelines/

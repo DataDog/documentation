@@ -103,7 +103,7 @@ AWS CodePipeline でトレースをセットアップすると、パイプライ
 
 AWS CodePipeline インテグレーション は、**CodeBuild** アクションとそれぞれのジョブおよびパイプラインスパンとの相関付けをサポートしています。CodeBuild アクションに対してログ収集を有効にするには、[AWS ログ転送ガイド][16]を参照してください。
 
-<div class="alert alert-warning"><strong>注</strong>: CodeBuild アクションを対象としたログの相関付けを行うには、CodeBuild プロジェクトにデフォルトの CloudWatch ロググループおよびログストリーム名が必要です。</div>
+<div class="alert alert-danger"><strong>注</strong>: CodeBuild アクションを対象としたログの相関付けを行うには、CodeBuild プロジェクトにデフォルトの CloudWatch ロググループおよびログストリーム名が必要です。</div>
 
 <div class="alert alert-info"><strong>注</strong>: ログは CI Visibility とは別に課金されます。ログの保持、除外、インデックスの構成は、ログの設定で行います。AWS CodeBuild のログは <code>source:codebuild</code> と <code>sourcecategory:aws</code> のタグで識別できます。</div>
 

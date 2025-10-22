@@ -213,7 +213,7 @@ Para recopilar la información de Live Process de todos tus contenedores y envia
 
 #### Cloud Network Monitoring
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta función sólo está disponible para Linux.
 </div>
 

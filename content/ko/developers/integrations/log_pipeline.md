@@ -50,7 +50,7 @@ title: 로그 파이프라인 생성
 2. [Facets][12] - 로그 필터링 및 검색에 사용되는 속성입니다.
 Technology Partner 통합은 기본 대시보드와의 호환성을 보장하기 위해 Datadog의 [표준 명명 규칙][17]을 따라야 합니다.
 
-<div class="alert alert-warning">Datadog 통합팀에서 검토하려면 로그 통합에 자산이 포함되어야 하며 파이프라인 프로세서 또는 패싯이 있어야 합니다.</div>
+<div class="alert alert-danger">Datadog 통합팀에서 검토하려면 로그 통합에 자산이 포함되어야 하며 파이프라인 프로세서 또는 패싯이 있어야 합니다.</div>
 
 ### 파이프라인 개요
 
