@@ -1,4 +1,6 @@
 ---
+description: Aprende a probar los checks del Datadog Agent y a solucionar sus problemas
+  utilizando comandos y herramientas systemd para diagnosticar problemas de integraciones.
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: Documentación
@@ -62,7 +64,7 @@ Si el Agent no se inicia y no aparece más información, utiliza el siguiente co
 sudo journalctl -u datadog-agent.service
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
