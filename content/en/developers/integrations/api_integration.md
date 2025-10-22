@@ -42,6 +42,10 @@ These steps assume you've [joined the Datadog Partner Network][7], have access t
 ### Implement OAuth
 OAuth 2.0 is an industry-standard authorization framework that enables secure access to Datadog APIs without exposing user credentials. It issues scoped, revocable tokens, offering stronger security and a better user experience than API or application keys.
 
+<div class="alert alert-info">
+OAuth is available only to approved Technology Partners developing official Datadog integrations. Standalone OAuth clients are not supported.
+</div>
+
 1. Determine the required [scopes][8] for your integration use case.
 2. Implement OAuth following [these steps][9]. 
 3. Ensure the following Datadog-specific concepts are accounted for:
