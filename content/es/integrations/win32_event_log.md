@@ -266,7 +266,7 @@ Datadog recomienda crear y probar la consulta en el editor de filtros del Visor 
 A continuación, copia y pega la consulta en la configuración del Agent. 
 
 ```yaml
-  # collect Critical, Warning, and Error events
+  # recopilar eventos Críticos, de Advertencia y de Error
   - type: windows_event
     channel_path: Application
     source: windows.events
@@ -447,7 +447,7 @@ Puedes utilizar la [opción`query`][2] para filtrar eventos con [consultas XPATH
   ```yaml
   init_config:
   instances:
-    # collect Critical, Warning, and Error events
+    # recopilar eventos Críticos, de Advertencia y de Error
     - path: Application
       legacy_mode: false
       query: '*[System[(Level=1 or Level=2 or Level=3)]]'

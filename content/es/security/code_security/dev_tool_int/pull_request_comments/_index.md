@@ -12,7 +12,7 @@ title: Comentarios de solicitudes de incorporación de cambios
 Code Security puede publicar comentarios directamente en las solicitudes de incorporación de cambios de tu sistema de gestión de código (SCM) source (fuente) cuando se detecten vulnerabilidades. Esto te ayuda a ver y solucionar los problemas en contexto antes de fusionar el código. Los comentarios tienen reconocimiento diferente, lo que significa que solo marcan los nuevos problemas introducidos en las líneas modificadas en la solicitud de incorporación de cambios.
 
 Existen dos tipos de comentarios de solicitudes de incorporación de cambios:
-- **Comentario en línea**: Marca una conclusión individual de Code Security en líneas específicas de código y sugiere una corrección (si está disponible) . 
+- **Comentario en línea**: Marca una conclusión individual de Code Security en líneas específicas de código y sugiere una corrección (si está disponible).
 
     {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". Este comentario sugiere sustituir el código os.system(command) con os.system(shlex.quote(command)) para depurar la llamada de proceso." style="width:100%;" >}}
 - **Comentario resumido**: Combina todas las conclusiones de Datadog en un único comentario. 

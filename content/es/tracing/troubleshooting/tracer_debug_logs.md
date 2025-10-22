@@ -129,9 +129,9 @@ Los mensajes de log de cliente de Datadog se marcan con `[ddtrace]`, para que pu
 Puedes anular el registrador predeterminado y sustituirlo por uno personalizado con el atributo `log` del rastreador:
 
 ```ruby
-f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
+f = File.new("<FILENAME>.log", "w+")           # Los mesajes de log van aquí
 Datadog.configure do |c|
-  c.logger.instance = Logger.new(f)                 # Overriding the default tracer
+  c.logger.instance = Logger.new(f)                 # Anular el rastreador por defecto
 end
 
 Datadog::Tracing.logger.info { "this is typically called by tracing code" }

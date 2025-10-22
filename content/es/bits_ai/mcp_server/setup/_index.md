@@ -54,7 +54,7 @@ Los siguientes clientes de la IA son compatibles con el servidor MCP de Datadog.
 |--------|------|------|
 | [Cursor][8] | Anysphere | Se recomienda la [extensión Cursor y VS Code](#connect-in-cursor-and-vs-code) de Datadog. |
 | [Claude Code][5] | Anthropic | |
-| [Claude&nbsp;Desktop][6] | Anthropic | Compatibilidad limitada para la autenticación remota. Utiliza la [autenticación binaria local](?tab=localbinaryauthentication#connect-in-supported-ai-clients) según sea necesario. |
+| [Claude Desktop][6] | Anthropic | Compatibilidad limitada para la autenticación remota. Utiliza la [autenticación binaria local](?tab=localbinaryauthentication#connect-in-supported-ai-clients) según sea necesario. |
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Se recomienda la [extensión Cursor y VS](#connect-in-cursor-and-vs-code) de Datadog. |
 | [Goose][9] | Bloque | |

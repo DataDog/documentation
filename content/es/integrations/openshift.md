@@ -101,7 +101,7 @@ El método de ingesta recomendado para DogStatsD, APM y logs consiste en vincula
 
 El Agent permite trabajar en un modo de ejecución de `sidecar`, para habilitar la ejecución del Agent en el pod de tu aplicación para facilitar la detección.
 
-#### host
+#### Host
 
 Añade el permiso `allowHostPorts` al pod con el SCC estándar `hostnetwork` o `hostaccess`, o creando uno propio. En este caso, puedes añadir los enlaces de puerto relevantes en las especificaciones de tu pod:
 
@@ -124,7 +124,7 @@ ports:
 El Helm Chart y Datadog Operator gestionan el SCC por ti de forma predeterminada. Para gestionarlo tú mismo en su lugar, asegúrate de incluir las configuraciones correctas en función de las características que hayas habilitado.
 
 Si SELinux está en modo permisivo o deshabilitado, habilita el SCC `hostaccess` para beneficiarte de todas las características.
-Si SELinux está en modo enforcing, se recomienda conceder [el tipo `spc_t`](https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept) al pod del datadog-agent. Para desplegar el agent puedes utilizar el siguiente [SCC de datadog-agent](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml) que puede aplicarse después de [crear la cuenta de servicio del datadog-agent](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions). Concede los siguientes permisos:
+Si SELinux está en modo enforcing, se recomienda conceder [el tipo `spc_t`](https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept) al pod del datadog-agent. Para desplegar el Agent puedes utilizar el siguiente [SCC de datadog-agent](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml) que puede aplicarse después de [crear la cuenta de servicio del datadog-agent](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions). Concede los siguientes permisos:
 
 - `allowHostPorts: true`: vincula las entradas de DogStatsD/APM/logs a la IP del nodo.
 - `allowHostPID: true`: activa la Detección de origen para las métricas de DogStatsD enviadas por Unix Socket.
