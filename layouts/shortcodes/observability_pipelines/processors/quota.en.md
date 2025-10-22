@@ -5,7 +5,11 @@ You can also use field-based partitioning, such as `service`, `env`, `status`. E
 **Notes**:
 - Each pipeline can have up to 1000 buckets. If you need to increase the bucket limit, contact your account manager.
 - The pipeline uses the name of the quota to identify the quota across multiple Remote Configuration deployments of the Worker.
-
+- The quota processor is synchronized across all Workers in a Datadog organization. For the synchronization, there is a default rate limit of 50 Workers per organization. When there are more than 50 Workers for an organization:
+    - The processor continues to run, but does not sync correctly with the other Workers, which can result in logs being sent after the quota limit has been reached.
+    - The Worker prints `Failed to sync quota state` errors.
+    - Contact your account manager if you want to increase the default number of Workers per organization.
+- The quota processor periodically synchronizes counts across Workers a few times per minute. The limit set on the processor can therefore be overshot, depending on the number of Workers and the logs throughput. Datadog recommends setting a limit that is at least one order of magnitude higher than the volume of logs that the processor is expected to receive per minute. You can use a throttle processor along with the quota processor to control short bursts.
 
 To set up the quota processor:
 1. Enter a name for the quota processor.
