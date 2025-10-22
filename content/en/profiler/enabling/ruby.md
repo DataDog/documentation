@@ -40,6 +40,7 @@ This utility is available on the software repositories of most Linux distributio
 - The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+[Single Step APM Instrumentation][25] currently cannot be used to set up the Ruby Profiler.
 
 ## Installation
 
@@ -173,3 +174,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [22]: https://pkgs.alpinelinux.org/packages?name=pkgconf
 [23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
 [24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
+[25]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/
