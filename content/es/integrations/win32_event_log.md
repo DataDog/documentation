@@ -33,7 +33,7 @@ draft: false
 git_integration_title: win32_event_log
 integration_id: event-viewer
 integration_title: Log de eventos de Windows
-integration_version: 5.0.0
+integration_version: 5.2.1
 is_public: true
 manifest_version: 2.0.0
 name: win32_event_log
@@ -188,7 +188,7 @@ Para recopilar logs de eventos de Windows como eventos de Datadog, configura can
   ```yaml
   init_config:
   instances:
-    - # API de logs de eventos 
+    - # Event Log API 
       path: Security
       legacy_mode: false
       filters: {}
@@ -204,7 +204,7 @@ Las versiones 7.49 y posteriores del Agent permiten configurar `legacy_mode` en 
   init_config:
       legacy_mode: false
   instances:
-    - # API de logs de eventos
+    - # Event Log API
       path: Security
       filters: {}
 
@@ -225,7 +225,7 @@ Para recopilar logs de eventos de Windows como eventos de Datadog, configura can
   ```yaml
   init_config:
   instances:
-    - # WMI (por defecto)
+    - # WMI (default)
       legacy_mode: true
       log_file:
         - Security
@@ -266,7 +266,7 @@ Datadog recomienda crear y probar la consulta en el editor de filtros del Visor 
 A continuación, copia y pega la consulta en la configuración del Agent. 
 
 ```yaml
-  # recopilar eventos Críticos, de Advertencia y de Error
+  # collect Critical, Warning, and Error events
   - type: windows_event
     channel_path: Application
     source: windows.events
@@ -447,7 +447,7 @@ Puedes utilizar la [opción`query`][2] para filtrar eventos con [consultas XPATH
   ```yaml
   init_config:
   instances:
-    # recopilar eventos Críticos, de Advertencia y de Error
+    # collect Critical, Warning, and Error events
     - path: Application
       legacy_mode: false
       query: '*[System[(Level=1 or Level=2 or Level=3)]]'
