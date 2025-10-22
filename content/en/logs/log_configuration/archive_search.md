@@ -122,7 +122,6 @@ Archive Search scans archived log files within the selected time range. **Scan v
 
 To improve query performance and reduce scan volume:
 - Narrow the time range and use selective filters.
-- Define a **preferred indexed attribute** at the archive level to target specific data efficiently.
 - Administrators with **Logs Write Archives** permission can set maximum log limits and available retention durations.
 
 ## Cloud-specific permissions
