@@ -45,11 +45,15 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 You can use Bits AI to create an app. To get started:
 1. From [App Builder][1], click **New App**.
 1. Click **Start with AI**.
-1. Enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example queries:
+1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example queries:
    - `Display a list of lambda functions in a table. Allow the user to filter by function name and specify the limit.`
    - `Provide a list of PagerDuty services and their status in a table. Include a search input above the table.`
    - `Display GitHub pull requests in a table.`
-1. Click **Submit** (**↑**).
+1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 To iterate on an existing app:
 1. From an existing app, click **UI Agent Chat** (**<i class="icon-bits-ai"></i>**).
@@ -181,3 +185,4 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [12]: /service_management/app_builder/queries
 [13]: /service_management/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
+[15]: /actions/app_builder/build/#customize-your-app
