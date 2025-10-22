@@ -37,7 +37,7 @@ This evaluation checks whether the agent successfully selected the appropriate t
 1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 1. Enable the `ToolSelection` evaluation in the Datadog UI by [creating a new evaluation][1] or [editing an existing evaluation][2].
 
-This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. The complete code and packages required to run this evaluation are located [here][3].  
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -106,7 +106,7 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 ##### Instrumentation
 
-This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. The complete code and packages required to run this evaluation are located [here][4].  
 
 ### How to use
 
@@ -262,3 +262,5 @@ This configuration ensures evaluations run only on complete sessions. This provi
 
 [1]: /llm_observability/evaluations/managed_evaluations/#create-new-evaluations
 [2]: /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
+[3]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/1-tool-selection-demo.py
+[4]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/2-tool-argument-correctness-demo.py
