@@ -29,7 +29,7 @@ Check the [Policies page][4] in OCI to ensure that the `dd-svc-policy` and `dd-d
 
 ## OCI tenancy reaching service connector hub limit
 
-For each tenancy, at least one service connector hub is required per five compartments. [Request a service limit change][5] in your OCI account.
+For each tenancy, at least one service connector hub is required per five compartments. [Request a service limit increase][5] in your OCI account.
 
 ## Cannot collect data from one or more subscribed regions
 
