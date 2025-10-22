@@ -5825,11 +5825,16 @@ menu:
       parent: log_collection
       identifier: log_collection_opentelemetry
       weight: 115
+    - name: Agent Integrations
+      url: logs/log_collection/agent_checks/
+      parent: log_collection
+      identifier: log_collection_agent_checks
+      weight: 116
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 116
+      weight: 117
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
