@@ -154,39 +154,30 @@ dataset.push()
 
 ### Dataset versioning
 
-Datasets are automatically versioned to track changes over time. This enables reproducibility and allows experiments to reference specific dataset versions.
+Datasets are automatically versioned to track changes over time. Versioning information enables reproducibility and allows experiments to reference specific dataset versions. 
 
-#### When are new versions created?
+The `Dataset` object has a field, `current_version`, which corresponds to the latest version; previous versions are subject to a 90-day retention window. 
 
-Dataset versions start at 0 and increment automatically when:
+Dataset versions start at `0`, and each new version increments the version by 1.
 
-- **Adding records**: By default, adding new records creates a new version.
-- **Updating records**: Changes to `input` or `expected_output` fields create a new version
-- **Deleting records**: Deleting records creates a new version
+#### When new dataset versions are created
 
-Dataset versions are **NOT** created when:
+A new dataset version is created when:
+- Adding records
+- Updating records (changes to `input` or `expected_output` fields)
+- Deleting records
 
-- **Metadata-only updates**: Updating only the `metadata` field on records or the dataset itself
-- **Dataset changes**: Updating the dataset name or description
+Dataset versions are **NOT** created for changes to `metadata` fields, or when updating the dataset name or description.
 
-#### Version numbering
+#### Version retention
 
-- Datasets start at version 0 when created
-- Each versioning operation increments the version by 1
-- The `current_version` field in the Dataset object shows the latest version
+- Previous versions (**NOT** the content of `current_version`) are retained for 90 days. 
+- The 90-day retention period resets when a previous version is used — for example, when an experiment reads a version.
+- After 90 consecutive days without use, a previous version is eligible for permanent deletion and may no longer be accessible.
 
-#### Old versions (retention / TTL)
+**Example of version retention behavior**
 
-- **What’s kept:** Only *previous* versions are subject to TTL. The `current_version` is not affected.
-- **How long:** Each previous version has a **90-day retention window**.
-- **Auto-refresh:** **Any use of a previous version resets its 90-day clock** (e.g., experiments that read that version).
-- **Expiration:** If a previous version isn’t used for 90 consecutive days, it becomes eligible for permanent deletion and may no longer be accessible.
-
-**Example**
-
-- You publish `v12`. Now `v11` becomes a previous version with a 90-day window.
-- On day 25, you run an experiment on `v11`. The 90-day window **restarts** from that day.
-- If `v11` isn’t used again for 90 days after that, it may be deleted.
+After you publish `12`, `11` becomes a previous version with a 90-day window. After 25 days, you run an experiment with version `11`, which causes the 90-day window to **restart**. After another 90 days, during which you have not used version `11`, version `11` may be deleted.
 
 ### Accessing dataset records
 
