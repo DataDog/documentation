@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for streamlined management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
+Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for simplified management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. 
 
 ## Key features
 
@@ -27,8 +27,9 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 ## Create a test suite
 
 To create a new Test Suite:
-1. In Datadog, navigate to [**Digital Experience > Tests**][1].
+1. In Datadog, navigate to **Digital Experience > Tests**.
 2. Click **New Test > New Test Suite**.
+3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click **+ New Suite**.
 
 ## Test suite configuration
 
