@@ -2781,11 +2781,6 @@ menu:
       identifier: agents
       parent: actions_heading
       weight: 20000
-    - name: Build Agents
-      url: actions/agents/build/
-      parent: agents
-      identifier: agents_build
-      weight: 1
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
