@@ -2214,7 +2214,7 @@ function redactProcessor(span) {
     }
   }
 
-  return span
+  return span;
 }
 
 llmobs.registerProcessor(redactProcessor);
