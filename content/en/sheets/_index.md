@@ -79,7 +79,7 @@ Create tables and analyze the data pulled from the following data sources:
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Database Queries     | [Database Monitoring][16] |
 | Events               | [Event Management][14] |
-| Infrastructure Data (Preview) | [Infrastructure Data][6] |
+| Infrastructure       | [DDSQL Editor][6] |
 | LLM Observability    | [LLM Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
@@ -121,7 +121,7 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [3]: /sheets/functions_operators
 [4]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
 [5]: https://app.datadoghq.com/cost
-[6]: https://app.datadoghq.com/infrastructure
+[6]: https://app.datadoghq.com/ddsql/editor
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: https://app.datadoghq.com/rum/sessions
 [9]: https://app.datadoghq.com/reference-tables

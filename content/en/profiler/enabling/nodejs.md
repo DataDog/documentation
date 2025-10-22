@@ -27,6 +27,8 @@ The Datadog Profiler requires at least Node.js 18.
 
 Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][8].
 
+Continuous Profiler support is in Preview for Google Cloud Run.
+
 ## Installation
 
 To begin profiling applications:
