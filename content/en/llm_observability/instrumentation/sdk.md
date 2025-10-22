@@ -1805,8 +1805,8 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 <br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
 
 `tags`
-: optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][1].
+: optional - _object_
+<br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][1].
 
 {{% /collapse-content %}}
 
