@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/dashboards/ddsql_editor/
+description: Consulta de recursos de infraestructura y datos telemétricos mediante
+  lenguaje natural o sintaxis de DDSQL compatible con etiquetas como columnas de tabla.
 further_reading:
 - link: ddsql_reference/ddsql_default
   tag: Documentación
@@ -12,9 +14,11 @@ further_reading:
 title: Editor DDSQL
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-La consulta de logs y métricas mediante DDSQL está en vista previa. Utiliza este formulario para solicitar acceso.
-{{< /callout >}} 
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+La consulta de logs, métricas, spans  (tramos), RUM y Product Analytics como sources (fuentes) de datos en DDSQL está en vista previa. Utiliza este formulario para solicitar acceso.
+
+Si deseas acceder a spans (tramos), RUM u otras sources (fuentes) de datos no enumeradas en la sección de casos de uso, menciónalas en el formulario de solicitud de acceso.
+{{< /callout >}}
 
 ## Información general
 
@@ -24,7 +28,7 @@ Con el [Editor DDSQL][1], puedes lograr una visibilidad más profunda de tu infr
 
 ## Consulta en lenguaje natural
 
-Escribe tu pregunta en el cuadro de búsqueda y Datadog creará la consulta SQL por ti. Si aún no lo has hecho, [ponte en contacto con el servicio de asistencia][5] para activar esta función.
+Escribe tu pregunta en el cuadro de búsqueda y Datadog creará la consulta de SQL por ti. Puedes aceptar o descartar los cambios y aportar tus comentarios para mejorar la función.
 
 {{< img src="ddsql_editor/natural-language-query-2.png" alt="Una consulta ingresada en el cuadro de búsqueda en lenguaje natural" style="width:90%;" >}}
 
@@ -41,7 +45,10 @@ GROUP BY instance_type
 
 ## Explorar tu telemetría
 
-<div class="alert alert-danger">La consulta de logs y métricas mediante DDSQL está en vista previa. Utiliza este <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">formulario</a> para solicitar acceso.</div>
+<div class="alert alert-danger">La consulta de logs, métricas, spans (tramos) and RUM mediante DDSQL está en vista previa. Utiliza este <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">formulario</a> para solicitar acceso.
+
+Si deseas acceder a spans (tramos), RUM u otras sources (fuentes) de datos no enumeradas en la sección de casos de uso, menciónalas en el formulario de solicitud de acceso.
+</div>
 
 Visualiza, filtra y crea consultas en el Explorador de datos.
 
@@ -51,7 +58,7 @@ Haz clic en el nombre de una tabla para ver tus columnas y relaciones:
 
 {{< img src="ddsql_editor/data-tab.png" alt="La pestaña de datos que muestra la información de la tabla para aws.ec2_instance" style="width:70%;" >}}
 
-Para logs y métricas, utiliza el creador de consultas para ayudarte a generar funciones de tabla.
+Para sources (fuentes) de datos como logs, utiliza el creador de consultas para generar funciones de tabla.
 
 ## Guardar y compartir consultas
 

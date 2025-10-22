@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "new-project",
+    "type": "gcp_scan_options",
+    "attributes": {
+      "vuln_host_os": true,
+      "vuln_containers_os": true
+    }
+  }
+}

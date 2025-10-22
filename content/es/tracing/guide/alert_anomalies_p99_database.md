@@ -1,4 +1,6 @@
 ---
+description: Aprende a crear monitores y alertas para patrones de latencia p99 anómalos
+  en servicios de bases de datos utilizando métricas de APM y la detección de anomalías.
 further_reading:
 - link: /tracing/guide/week_over_week_p50_comparison/
   tag: 2 minutos
@@ -71,7 +73,7 @@ Datadog te permite configurar monitores para realizar un seguimiento del estado 
 
     Para cada servicio del mapa: un círculo verde significa que todos los monitores están estables, amarillo significa que uno o más monitores están enviando advertencias, pero ninguno alerta, rojo significa que uno o más monitores alertan, y gris significa que no hay monitores configurados para el servicio.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
