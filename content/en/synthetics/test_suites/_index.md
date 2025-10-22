@@ -28,7 +28,7 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 
 To create a new Test Suite:
 1. In Datadog, navigate to **Digital Experience > Tests**.
-2. Click **New Test > New Test Suite**.
+2. Click **New Test Suite**.
 3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click **+ New Suite**.
 
 ## Test suite configuration
