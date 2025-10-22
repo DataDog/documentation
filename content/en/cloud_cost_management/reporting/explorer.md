@@ -2,7 +2,7 @@
 title: Cost Explorer
 description: Query and analyze cloud costs in real time with flexible filters and visualizations.
 further_reading:
-- link: "/cloud_cost_management/reporting/reports"
+- link: "/cloud_cost_management/reporting/"
   tag: "Documentation"
   text: "Create and save cost reports"
 - link: "/cloud_cost_management/tags/multisource_querying"
@@ -132,4 +132,4 @@ Copy the URL from your browser to share your current cost query with team member
 [6]: /cloud_cost_management/saas_costs/
 [7]: /cloud_cost_management/datadog_costs/
 [8]: /monitors/types/cloud_cost/
-[9]: /cloud_cost_management/reporting/reports
+[9]: /cloud_cost_management/reporting/
