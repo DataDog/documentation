@@ -63,6 +63,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
+      resource_type: CloudWatch Logs
+      recommendation_type: Delete Lambda Cloudwatch Logs and write permissions
+      recommendation_description: Lambda function that can have write CloudWatch Logs permissions removed.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
       resource_type: DynamoDB
       recommendation_type: Delete DynamoDB Global Secondary Index
       recommendation_description: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
@@ -258,6 +264,12 @@ multifiltersearch:
       resource_type: ElastiCache Cluster
       recommendation_type: Terminate ElastiCache Cluster
       recommendation_description: ElastiCache Redis Cluster with 0 cache hits and 0 replication bytes.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Lambda
+      recommendation_type: Downsize Lambda Function Provisioned Concurrency
+      recommendation_description: AWS Lambda function with over-allocated provisioned concurrency.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
