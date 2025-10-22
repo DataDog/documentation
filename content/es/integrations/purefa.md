@@ -46,7 +46,7 @@ Sigue las instrucciones a continuación para instalar y configurar este check pa
 1. [Descarga e inicia el Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest).
 1. Instala manualmente la integración Pure FlashArray. Consulta [Uso de integraciones comunitarias](https://docs.datadoghq.com/agent/guide/community-integrations-installation-with-docker-agent) para obtener más información en función de tu entorno.
 
-#### host
+#### Host
 
 Para configurar este check para un Agent que se ejecuta en un host, ejecuta `sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>`.
 

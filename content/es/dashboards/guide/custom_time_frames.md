@@ -13,7 +13,7 @@ Muchas de las vistas de Datadog pueden ajustarse a un marco temporal específico
 
 Para incrementar por mes, día, año, hora o minuto, resalta una parte del marco temporal y utiliza las teclas `[↑]` y `[↓]`:
 
-{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" video="true" alt="Incrementar el tiempo con teclas de flechas"="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" video="true" alt="Incrementar el tiempo con teclas de flechas" width="500" >}}
 
 ## Sintaxis admitidas
 

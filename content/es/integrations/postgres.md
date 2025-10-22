@@ -103,7 +103,7 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 
 **Nota**: Al generar métricas personalizadas que requieren que se consulten tablas adicionales, puede que sea necesario conceder el permiso `SELECT` al usuario `datadog` para acceder a esas tablas. Ejemplo: `grant SELECT on <TABLE_NAME> to datadog;`. Para obtener más información, consulta la [sección FAQ](https://docs.datadoghq.com/integrations/postgres/?tab=host#faq).
 
-#### host
+#### Host
 
 Para configurar este check para un Agent que se ejecuta en un host:
 

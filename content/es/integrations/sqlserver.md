@@ -48,7 +48,7 @@
 "manifest_version": "2.0.0"
 "name": "sqlserver"
 "public_title": "SQL Server"
-"short_description": "Recopila métricas de rendimiento y estado importantes de SQL Server".
+"short_description": "Recopila métricas de rendimiento y estado importantes de SQL Server."
 "supported_os":
 - "linux"
 - "macos"
@@ -63,7 +63,7 @@
   - "Category::Recopilación de logs"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Recopila métricas de rendimiento y estado importantes de SQL Server".
+  "description": "Recopila métricas de rendimiento y estado importantes de SQL Server."
   "media": []
   "overview": "README.md#Overview"
   "resources":

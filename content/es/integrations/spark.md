@@ -43,7 +43,7 @@
 "manifest_version": "2.0.0"
 "name": "spark"
 "public_title": "Spark"
-"short_description": "Rastrea los índices de tareas fallidas, bytes aleatorios y mucho más".
+"short_description": "Rastrea los índices de tareas fallidas, bytes aleatorios y mucho más."
 "supported_os":
 - "linux"
 - "windows"
@@ -57,7 +57,7 @@
   - "Supported OS::macOS"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Rastrea los índices de tareas fallidas, bytes aleatorios y mucho más".
+  "description": "Rastrea los índices de tareas fallidas, bytes aleatorios y mucho más."
   "media": []
   "overview": "README.md#Overview"
   "resources":

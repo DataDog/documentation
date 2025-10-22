@@ -316,7 +316,7 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 
 Si utilizas contenedores de Docker, tienes varias opciones: utilizar un complemento si tu aplicación está empaquetada, utilizar Docker, o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
-##### Opción 1: complemento empaquetador
+##### Opción 1: Complemento empaquetador
 
 {{% sci-dd-tags-bundled-node-js %}}
 
@@ -332,7 +332,7 @@ Si utilizas contenedores de Docker, tienes varias opciones: utilizar un compleme
 
 Si estás utilizando Serverless, tienes varias opciones dependiendo de la configuración de tu aplicación serverless.
 
-##### Opción 1: complemento empaquetador
+##### Opción 1: Complemento empaquetador
 
 {{% sci-dd-tags-bundled-node-js %}}
 
@@ -348,7 +348,7 @@ Si estás utilizando Serverless, tienes varias opciones dependiendo de la config
 
 Para entornos basados en host, tienes dos opciones basadas en tu configuración de compilación y despliegue.
 
-##### Opción 1: complemento empaquetador
+##### Opción 1: Complemento empaquetador
 
 {{% sci-dd-tags-bundled-node-js %}}
 

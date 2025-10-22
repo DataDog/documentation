@@ -44,7 +44,7 @@
 "manifest_version": "2.0.0"
 "name": "solr"
 "public_title": "Solr"
-"short_description": "Monitoriza tasa de solicitudes, errores de gestor, fallos de caché y desalojos y más".
+"short_description": "Monitoriza tasa de solicitudes, errores de gestor, fallos de caché y desalojos y más."
 "supported_os":
 - "linux"
 - "windows"
@@ -60,7 +60,7 @@
   - "Supported OS::macOS"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Monitoriza tasa de solicitudes, errores de gestor, fallos de caché y desalojos y más".
+  "description": "Monitoriza tasa de solicitudes, errores de gestor, fallos de caché y desalojos y más."
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

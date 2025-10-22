@@ -8,7 +8,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/feature-flags/
   tag: Blog
   text: Envía funciones de forma más rápida y segura con Datadog Feature Flags
-site_support_id: empezando_con_feature_flags
+site_support_id: getting_started_feature_flags
 title: Empezando con los Feature Flags
 ---
 

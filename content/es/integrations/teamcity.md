@@ -49,7 +49,7 @@
 "manifest_version": "2.0.0"
 "name": "teamcity"
 "public_title": "TeamCity"
-"short_description": "Realiza un seguimiento de las compilaciones y comprende el impacto en el rendimiento de cada despliegue".
+"short_description": "Realiza un seguimiento de las compilaciones y comprende el impacto en el rendimiento de cada despliegue."
 "supported_os":
 - "linux"
 - "windows"
@@ -65,7 +65,7 @@
   - "Supported OS::macOS"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Realiza un seguimiento de las compilaciones y comprende el impacto en el rendimiento de cada despliegue".
+  "description": "Realiza un seguimiento de las compilaciones y comprende el impacto en el rendimiento de cada despliegue."
   "media": []
   "overview": "README.md#Overview"
   "resources":

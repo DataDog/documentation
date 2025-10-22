@@ -1,7 +1,6 @@
 ---
 title: Tipos de widgets
-description: |
-Descubre los tipos de widgets de dashboard disponibles en Datadog para visualizar y analizar tus datos, incluidos gráficos, tablas, grupos y widgets de análisis.
+description: Descubre los tipos de widgets de dashboard disponibles en Datadog para visualizar y analizar tus datos, incluidos gráficos, tablas, grupos y widgets de análisis.
 further_reading:
 - link: /dashboards/widgets/
   tag: Documentación
@@ -28,7 +27,7 @@ further_reading:
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Valor de consulta{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
-        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Diagrama de dispersión{< /nextlink >}}
+        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Diagrama de dispersión{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
         img="dashboards/widgets/icons/table_light_large.png">}} Tabla{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/treemap"

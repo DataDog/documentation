@@ -432,7 +432,7 @@ Reacción
 
 Función de estado
 : setValue<br>
-**Ejemplo**: `form0.setValue({name: 'node-group-1'})` drfine el valor del componente `form0` en `{name: 'node-group-1'}`.
+**Ejemplo**: `form0.setValue({name: 'node-group-1'})` define el valor del componente `form0` en `{name: 'node-group-1'}`.
 
 Para obtener más información sobre eventos, consulta [Eventos][1].
 
