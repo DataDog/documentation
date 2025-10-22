@@ -1,7 +1,5 @@
 ---
 title: Datadog Costs
-aliases:
-- /cloud_cost_management/datadog_costs
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
