@@ -72,7 +72,7 @@ Until your integration is published by Datadog, you can only test OAuth within y
 
 1. Click **Test Authorization** to simulate initiation from the Datadog integration tile. This replicates a redirect to your onboarding URL with the `domain` and `site` parameters.
 2. Complete the OAuth flow using your Datadog partner developer organization.
-3. Verify that your integration can submit, query, or interact with data as intended.
+3. Verify that your integration can submit, query, or interact with the Datadog API as needed.
 4. After testing is complete and OAuth is working as expected, you're ready to submit your OAuth information with your listing. Before submitting:
     - Replace or remove any testing URLs from the **Onboarding URL** and **Redirect URIs** fields.
     - Upon submission in the Developer Platform, production client credentials are provided. Store the client secret securely, as it is not displayed again. 
