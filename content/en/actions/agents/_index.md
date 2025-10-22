@@ -108,6 +108,38 @@ Click the toggle button to enable [MCP (Model Context Protocol)][8]. MCP servers
 
 This section displays features that are still in development. Click the toggle button next to a feature to enable it. 
 
+## Add an agent action
+
+After you create an agent, you can add it to a workflow or app. 
+
+### Add to a workflow 
+
+To invoke an agent in a workflow step:
+1. In [Workflow Automation][9], navigate to a workflow and click **Edit**. 
+1. Click the plus **<i class="icon-plus-circled-wui"></i>** icon. 
+1. Select the **Execute Custom Agent** action. 
+1. Configure the action:
+    1. Enter a **Step name**.
+    1. Selection a **Connection**.
+    1. Select a **Custom Agent ID**.
+    1. Enter a **User Prompt**.
+    1. Optionally, add a [**Wait until condition**][11]. 
+    1. Optionally, add [**Retries**][12].
+1. Click **Save**.
+
+### Add to an app
+
+To invoke an agent in an app:
+1. In [App Builder][10], navigate to an app and click **Edit**. 
+1. Click the plus **<i class="icon-plus-2"></i>** icon, then click **Actions**. 
+1. Select the **Execute Custom Agent** action. 
+1. Configure the action:
+    1. Select the **Run Settings**.
+    1. Selection a **Connection**.
+    1. Select a **Custom Agent ID**.
+    1. Enter a **User Prompt**.
+1. Click **Save**.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -120,3 +152,7 @@ This section displays features that are still in development. Click the toggle b
 [6]: https://platform.openai.com/docs/models
 [7]: /actions/actions_catalog/
 [8]: /bits_ai/mcp_server
+[9]: https://app.datadoghq.com/workflow
+[10]: https://app.datadoghq.com/app-builder/apps/list
+[11]: /actions/workflows/build/#wait-until-condition
+[12]: /actions/workflows/build/#retries
