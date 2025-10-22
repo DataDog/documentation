@@ -46,6 +46,7 @@ Supported Agent versions
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
       MAX_DISPATCH_LATENCY = 30 SECONDS,
+      MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
       STARTUP_STATE = ON
   );
   GO
@@ -53,6 +54,8 @@ Supported Agent versions
   ALTER EVENT SESSION datadog ON SERVER STATE = START;
   GO
 ```
+
+   **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from the session configuration, as this option is not supported on RDS instances.
 
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml

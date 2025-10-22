@@ -35,7 +35,7 @@ Auto-instrumentation automatically captures:
 - Model parameters (temperature, max_tokens, etc.)
 - Framework-specific metadata
 
-<div class="alert alert-info"><strong>Note</strong>: When using supported frameworks, no manual span creation is required for LLM calls. The SDK automatically creates appropriate spans with rich metadata.</div>
+<div class="alert alert-info">When using supported frameworks, no manual span creation is required for LLM calls. The SDK automatically creates appropriate spans with rich metadata.</div>
 
 #### Custom instrumentation
 All supported SDKs provide advanced capabilities for custom instrumentation of your LLM applications in addition to auto-instrumentation, including:

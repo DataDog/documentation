@@ -67,7 +67,7 @@ Para empezar a rastrear tus aplicaciones:
     ```
    Si tienes mucha necesidad de reducir el tamaño de tu imagen y omitir módulos, puedes utilizar el comando [jdeps][19] para identificar dependencias. Sin embargo, los módulos necesarios pueden cambiar con el tiempo, así que hazlo bajo tu propia responsabilidad.
 
-    <div class="alert alert-danger">Habilitar la creación de perfiles puede afectar a tu factura en función de tu paquete APM. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de tarifas</a>.</div>
+    <div class="alert alert-warning">Habilitar la creación de perfiles puede afectar a tu factura en función de tu paquete APM. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de tarifas</a>.</div>
 
 | Variable de entorno      | Propiedad del sistema                     | Descripción|
 | --------- | --------------------------------- | ------------ |

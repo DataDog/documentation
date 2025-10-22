@@ -29,7 +29,7 @@ Pour autoriser un compte à supprimer des données, procédez comme suit :
 
 ### Commencer les suppressions
 
-<div class="alert alert-danger">Les données supprimées ne peuvent jamais être récupérées et les suppressions sont irréversibles.</div>
+<div class="alert alert-warning">Les données supprimées ne peuvent jamais être récupérées et les suppressions sont irréversibles.</div>
 
 <div class="alert alert-info"><strong>Pour les logs</strong> : les suppressions ne peuvent pas être limitées à un index spécifique et s'appliquent aux Index, Flex Indexes et Online Archives.
 </div>

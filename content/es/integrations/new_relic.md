@@ -56,9 +56,9 @@
 
 ## Información general
 
-<div class="alert alert-danger">La integración de New Relic APM está obsoleta y tiene una funcionalidad reducida. Las etiquetas de métrica de APM no están disponibles.</div>
+<div class="alert alert-warning">La integración de New Relic APM está obsoleta y tiene una funcionalidad reducida. Las etiquetas de métrica de APM no están disponibles.</div>
 
-<div class="alert alert-warning">A partir del 1 de marzo de 2025, la API REST v2 de NewRelic ya no acepta claves de la API REST.
+<div class="alert alert-danger">A partir del 1 de marzo de 2025, la API REST v2 de NewRelic ya no acepta claves de la API REST.
 
 Con el fin de mantener la funcionalidad de esta integración, reemplaza tu clave de la API REST existente con una clave de la API de usuario en la configuración de integración.</div>
 

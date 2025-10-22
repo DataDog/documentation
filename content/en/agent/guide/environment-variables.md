@@ -16,7 +16,7 @@ further_reading:
     text: "Proxy environment variables"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub repo</a>.
 </div>
 

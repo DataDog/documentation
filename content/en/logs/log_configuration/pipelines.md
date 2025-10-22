@@ -4,6 +4,9 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
+- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+  tag: Blog
+  text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
@@ -114,7 +117,7 @@ Specify alternate attributes to use as the source of a log's date by setting a [
 
 **Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 

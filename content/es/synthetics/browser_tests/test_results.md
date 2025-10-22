@@ -43,11 +43,11 @@ En la sección **Historial**, puedes ver tres gráficos:
 
 {{< img src="synthetics/browser_tests/history.png" alt="Sección Historial y ejecuciones de muestra, en la página de detalles de tests" style="width=80%" >}}
 
-## Resultados de muestra
+## Resultados de ejemplo
 
 Las ejecuciones de tests de navegador incluyen componentes como [capturas de pantalla](#screenshots-and-actions), [datos de rendimiento de página](#page-performance), [errores](#errors-and-warnings), [recursos](#resources) y [trazas (traces) de backend](#backend-traces) para ayudar a solucionar [tests fallidos](#failed-results).
 
-En la sección **Ejecuciones de muestra**, se pueden analizar las ejecuciones de tests fallidas más recientes y compararlas con las ejecuciones de tests que han tenido éxito recientes.
+En la sección **Ejecuciones de ejemplo**, se pueden analizar las ejecuciones de tests fallidas más recientes y compararlas con ejecuciones de tests recientes superadas.
 
 ### Atributos de información general
 
@@ -80,7 +80,7 @@ Tipo de ejecución
 
 ### Sesiones RUM
 
-Para ver sesiones asociadas y reproducciones disponibles en el [Explorador RUM][22], haz clic en **Ver Sesión en RUM**. Para acceder a una sesión de usuario para realizar una acción o un paso específico en [Session Replay][23], haz clic en **Reproducir sesión**. Para obtener más información, consulta [Explorar RUM y Session Replay en Synthetics][16].
+Para ver sesiones relacionadas y reproducciones disponibles en el [Explorador RUM][22], haz clic en **View Session in RUM** (Ver Sesión en RUM). Para acceder a una sesión de usuario para ver una acción o un paso específico en [Session Replay][23], haz clic en **Replay Session** (Reproducir sesión). Para obtener más información, consulta [Explorar RUM y Session Replay en Synthetic Monitoring][16].
 
 ### Capturas de pantalla y acciones
 
@@ -113,7 +113,7 @@ Se pueden filtrar los recursos por tipo y realizar una búsqueda por nombre en l
 {{< img src="synthetics/browser_tests/resources_panel.png" alt="Panel de recursos" style="width:100%" >}}
 
 Tiempo relativo 
-: La duración del recurso durante el tiempo total de interacción.
+: momento en el que el recurso comenzó a cargarse durante el paso de test.
 
 CDN
 : El proveedor CDN que ha proporcionado el recurso. Pasa el cursor sobre el icono de un proveedor CDN para ver el estado del cache sin procesar.

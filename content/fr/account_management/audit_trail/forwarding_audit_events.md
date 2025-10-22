@@ -11,13 +11,13 @@ title: Rediriger des événements d'audit vers des destinations personnalisées
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La redirection des événements d'audit n'est pas disponible sur le site US1-FED.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La redirection des événements d'audit est en préversion.
 </div>
 {{% /site-region %}}

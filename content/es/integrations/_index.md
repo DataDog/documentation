@@ -14,6 +14,7 @@ aliases:
 - /es/integrations/shoreline_license/
 - /es/integrations/shoreline_software_license/
 - /es/integrations/pingdom_v3/
+- /es/integrations/perimeterx/
 cascade:
 - _target:
     lang: en
@@ -165,12 +166,17 @@ cascade:
     path: /integrations/azure-virtual-network
   aliases:
   - /integrations/azure_virtual_networks
+- _target:
+    lang: en
+    path: /integrations/amazon-event-bridge
+  aliases:
+  - /integrations/amazon_event_bridge
 description: Reúne datos de todos tus sistemas, aplicaciones y servicios
 disable_sidebar: true
 title: Integraciones
 ---
 
-Más de {{< translate key="integration_count" >}} integraciones incorporadas. Ve todos tus sistemas, aplicaciones y servicios.
+Más de {{< translate key="integration_count" >}} integraciones incorporadas. Visualiza todos tus sistemas, aplicaciones y servicios.
 
 ¿Qué es una integración? Consulta [Introducción a las integraciones][1].
 
