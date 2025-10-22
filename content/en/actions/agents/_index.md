@@ -102,7 +102,7 @@ Click **+ Add Tool** to add actions from our [Action Catalog][7] for the agent t
 
 ### MCP Servers
 
-Click the toggle button to enable MCP (Model Context Protocol). MCP servers provide additional tools and capabilities that the agent can use to interact with external systems.
+Click the toggle button to enable [MCP (Model Context Protocol)][8]. MCP servers provide additional tools and capabilities that the agent can use to interact with external systems.
 
 ### Feature Lab
 
@@ -119,3 +119,4 @@ This section displays features that are still in development. Click the toggle b
 [5]: https://openai.com/gpt-5/
 [6]: https://platform.openai.com/docs/models
 [7]: /actions/actions_catalog/
+[8]: /bits_ai/mcp_server
