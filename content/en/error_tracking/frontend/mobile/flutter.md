@@ -25,6 +25,7 @@ If you have not set up the Datadog Flutter SDK for yet, follow the [in-app setup
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application-1.png" alt="Create an application for Flutter in Datadog" style="width:90%;">}}
 
+To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][303].
 
 
 ## Further reading
@@ -36,6 +37,7 @@ If you have not set up the Datadog Flutter SDK for yet, follow the [in-app setup
 [3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup
 [301]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [302]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/data_collected/#overview
+[303]: /account_management/api-app-keys/#client-tokens
 
 
 <!-- ET DOCS 
