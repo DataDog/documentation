@@ -937,6 +937,10 @@
     "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
     "summary": "Get the details of an error tracking issue"
   },
+  "DeleteIssueAssignee": {
+    "description": "Remove the assignee of an issue by `issue_id`.",
+    "summary": "Remove the assignee of an issue"
+  },
   "UpdateIssueAssignee": {
     "description": "Update the assignee of an issue by `issue_id`.",
     "summary": "Update the assignee of an issue",

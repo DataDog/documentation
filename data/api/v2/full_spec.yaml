@@ -61462,6 +61462,36 @@ paths:
       - Error Tracking
       x-menu-order: 2
   /api/v2/error-tracking/issues/{issue_id}/assignee:
+    delete:
+      description: Remove the assignee of an issue by `issue_id`.
+      operationId: DeleteIssueAssignee
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+        - error_tracking_write
+        - cases_read
+        - cases_write
+      summary: Remove the assignee of an issue
+      tags:
+      - Error Tracking
+      x-menu-order: 5
     put:
       description: Update the assignee of an issue by `issue_id`.
       operationId: UpdateIssueAssignee

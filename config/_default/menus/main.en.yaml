@@ -3880,32 +3880,32 @@ menu:
       identifier: custom_instrumentation
       weight: 202
     - name: Java
-      url: tracing/trace_collection/custom_instrumentation/java/dd-api
+      url: tracing/trace_collection/custom_instrumentation/java/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_java
       weight: 2021
     - name: Python
-      url: tracing/trace_collection/custom_instrumentation/python/dd-api
+      url: tracing/trace_collection/custom_instrumentation/python/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_python
       weight: 2022
     - name: Ruby
-      url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
+      url: tracing/trace_collection/custom_instrumentation/ruby/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ruby
       weight: 2023
     - name: Go
-      url: tracing/trace_collection/custom_instrumentation/go/dd-api
+      url: tracing/trace_collection/custom_instrumentation/go/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_go
       weight: 2024
     - name: Node.js
-      url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
+      url: tracing/trace_collection/custom_instrumentation/nodejs/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_nodejs
       weight: 2025
     - name: PHP
-      url: tracing/trace_collection/custom_instrumentation/php/dd-api
+      url: tracing/trace_collection/custom_instrumentation/php/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_php
       weight: 2026
@@ -3915,12 +3915,12 @@ menu:
       identifier: custom_instrumentation_cpp
       weight: 2027
     - name: .NET
-      url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
+      url: tracing/trace_collection/custom_instrumentation/dotnet/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
       weight: 2028
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android/dd-api
+      url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
       weight: 2029
@@ -5825,11 +5825,16 @@ menu:
       parent: log_collection
       identifier: log_collection_opentelemetry
       weight: 115
+    - name: Agent Integrations
+      url: logs/log_collection/agent_checks/
+      parent: log_collection
+      identifier: log_collection_agent_checks
+      weight: 116
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 116
+      weight: 117
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
@@ -5885,11 +5890,16 @@ menu:
       url: logs/log_configuration/rehydrating
       parent: log_configuration
       weight: 210
+    - name: Archive Search
+      identifier: log_configuration_archive_search
+      url: logs/log_configuration/archive_search
+      parent: log_configuration
+      weight: 211
     - name: Forwarding
       identifier: log_configuration_forwarding
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
-      weight: 211
+      weight: 212
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
