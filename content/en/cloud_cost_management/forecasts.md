@@ -66,7 +66,6 @@ To view detailed forecast information:
 
 {{< img src="cloud_cost/forecasts/budget-performance-with-forecast.png" alt="Budget performance view showing the forecast toggle and forecasted costs displayed with a hatched pattern" style="width:100%;" >}}
 
-
 ## How forecasting works
 
 Cloud Cost Management uses your historical spending data to predict future costs. The forecasting model analyzes patterns in your cloud spending, including:
@@ -90,7 +89,7 @@ If you have newly created resources or services, forecasts become available once
 
 If you don't see forecasts in your reports or budgets:
 
-- **Check your data**: Ensure you have at least 31 consecutive days of cost data for the resources or services you're analyzing.
+- **Check your data**: Ensure you have at least 31 **consecutive** days of cost data for the resources or services you're analyzing.
 - **Verify cost data is flowing**: Confirm that Datadog is receiving cost data from your cloud providers.
 
 ## Further reading
