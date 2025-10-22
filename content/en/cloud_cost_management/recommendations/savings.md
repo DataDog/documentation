@@ -31,9 +31,9 @@ The Savings tab represents **potential daily savings** and **net daily savings**
 
 {{< img src="cloud_cost/recommendations/savings-page-ui.png" alt="Cloud Cost Recommendations Savings Page." style="width:100%;" >}}
 
-<div class="alert alert-info">**Filter and Group By:** When tracking a specific cost initiative, the Savings tab is most useful when you filter and group by the resources and tags that your cost initiative targets. For example: one team may be causing more recommendations to be generated, increasing your overall potential daily savings value. This might cancel out any specific savings initiatives you might have for other teams. In this case, you may wish to filter by team to track the progress of a team-specific cost initiative. Suggested tags are provided in the filter and group by options, but you can also enter your tag of choice as needed.</div>
+<div class="alert alert-info"><strong>Filter and Group By:</strong> When tracking a specific cost initiative, the Savings tab is most useful when you filter and group by the resources and tags that your cost initiative targets. For example: one team may be causing more recommendations to be generated, increasing your overall potential daily savings value. This might cancel out any specific savings initiatives you might have for other teams. In this case, you may wish to filter by team to track the progress of a team-specific cost initiative. Suggested tags are provided in the filter and group by options, but you can also enter your tag of choice as needed.</div>
 
-<div class="alert alert-info">**Clone Dashboard and Schedule Report:** Sharing data from the Savings tab can also help propel your cost savings initiatives. With the Clone button, you can copy these widgets into an editable dashboard. You can also use the Schedule Report feature to receive regular updates on the status of your savings.</div>
+<div class="alert alert-info"><strong>Clone Dashboard and Schedule Report:</strong> Sharing data from the Savings tab can also help propel your cost savings initiatives. With the Clone button, you can copy these widgets into an editable dashboard. You can also use the Schedule Report feature to receive regular updates on the status of your savings.</div>
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
