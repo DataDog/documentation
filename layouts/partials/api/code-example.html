@@ -5,7 +5,11 @@
 {{ $endpoint := .endpoint }}
 {{ $version := .version }}
 {{ $securitySchemes := .securitySchemes }}
-{{- $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") -}}
+{{ $codeExampleLookup := dict }}
+{{ $spec := partial "api/load-specs.html" (dict "version" $version) }}
+{{ if $spec }}
+  {{ $codeExampleLookup = (index $spec "CodeExamples" | default dict) }}
+{{ end }}
 
 <h3 class="mb-2">{{ i18n "code_example" }}</h3>
 <div class="programming-lang-wrapper js-code-snippet-wrapper" >

@@ -5,8 +5,12 @@
 {{ $resourcePage := .resourcePage }}
 {{ $translate_action := .translate_action }}
 {{ $version := .version }}
-{{ $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") }}
 {{ $s := newScratch }}
+{{ $codeExampleLookup := dict }}
+{{ $spec := partial "api/load-specs.html" (dict "version" $version) }}
+{{ if $spec }}
+  {{ $codeExampleLookup = (index $spec "CodeExamples" | default dict) }}
+{{ end }}
 
 {{ if $body }}
 

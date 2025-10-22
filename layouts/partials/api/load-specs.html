@@ -1,0 +1,15 @@
+{{/* Shared partial for loading API specs with caching */}}
+{{ $version := .version | default "v1" }}
+
+{{ $specKey := printf "%s_spec" $version }}
+{{ if not (hugo.Store.Get $specKey) }}
+  {{ $specPath := printf "api/%s/full_spec.yaml" $version }}
+  {{ $specResource := resources.Get $specPath }}
+  {{ if $specResource }}
+    {{/* $spec := $specResource | openapi3.Unmarshal */}}
+    {{ $spec := $specResource | transform.Unmarshal }}
+    {{ hugo.Store.Set $specKey $spec }}
+  {{ end }}
+{{ end }}
+
+{{ return (hugo.Store.Get $specKey) }}
