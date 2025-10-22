@@ -37,7 +37,7 @@ Asegúrate de que [Test Optimization][1] ya está configurado para tu lenguaje.
 * `cucumber-js>=7.0.0`.
 * `vitest>=2.0.0`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota</strong>: El rastreador de DataDog no genera cobertura de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
 </div>
 
@@ -286,7 +286,7 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 * `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Datadog biblioteca no genera la cobertura total del código. Si sus pruebas se ejecutan con la cobertura de código activada, <code>Datadog-ci-rb informa de ello en</code> <code>test.code_coverage.lines_pct</code> etiquetar para sus sesiones de prueba automáticamente.
 </div>
 
@@ -303,7 +303,7 @@ Esta función está activada por defecto. Utiliza la variable de entorno `DD_CIV
 
 * `go test -cover`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota</strong>: La librería de DataDog no genera cobertura total de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace-go</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
 </div>
 

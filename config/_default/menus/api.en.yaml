@@ -2880,6 +2880,19 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 26
     - name: Patch a vulnerability-based notification rule
       url: '#patch-a-vulnerability-based-notification-rule'
       identifier: security-monitoring-patch-a-vulnerability-based-notification-rule
@@ -3013,6 +3026,19 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 15
+    - name: List scanned assets metadata
+      url: '#list-scanned-assets-metadata'
+      identifier: security-monitoring-list-scanned-assets-metadata
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScannedAssetsMetadata
+        unstable:
+          - v2
+        order: 28
     - name: Get SBOM
       url: '#get-sbom'
       identifier: security-monitoring-get-sbom
@@ -3039,19 +3065,6 @@ menu:
         unstable:
           - v2
         order: 28
-    - name: List vulnerable assets
-      url: '#list-vulnerable-assets'
-      identifier: security-monitoring-list-vulnerable-assets
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListVulnerableAssets
-        unstable:
-          - v2
-        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -5311,7 +5324,7 @@ menu:
         operationids:
           - GetAwsOnDemandTask
         unstable: []
-        order: 7
+        order: 18
     - name: Post an AWS on demand task
       url: '#post-an-aws-on-demand-task'
       identifier: agentless-scanning-post-an-aws-on-demand-task
@@ -5323,7 +5336,7 @@ menu:
         operationids:
           - CreateAwsOnDemandTask
         unstable: []
-        order: 8
+        order: 17
     - name: Get AWS On Demand tasks
       url: '#get-aws-on-demand-tasks'
       identifier: agentless-scanning-get-aws-on-demand-tasks
@@ -5335,7 +5348,67 @@ menu:
         operationids:
           - ListAwsOnDemandTasks
         unstable: []
-        order: 6
+        order: 16
+    - name: Patch GCP Scan Options
+      url: '#patch-gcp-scan-options'
+      identifier: agentless-scanning-patch-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGcpScanOptions
+        unstable: []
+        order: 14
+    - name: Get GCP scan options
+      url: '#get-gcp-scan-options'
+      identifier: agentless-scanning-get-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGcpScanOptions
+        unstable: []
+        order: 13
+    - name: Delete GCP Scan Options
+      url: '#delete-gcp-scan-options'
+      identifier: agentless-scanning-delete-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGcpScanOptions
+        unstable: []
+        order: 15
+    - name: Post GCP Scan Options
+      url: '#post-gcp-scan-options'
+      identifier: agentless-scanning-post-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGcpScanOptions
+        unstable: []
+        order: 12
+    - name: List GCP Scan Options
+      url: '#list-gcp-scan-options'
+      identifier: agentless-scanning-list-gcp-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGcpScanOptions
+        unstable: []
+        order: 11
     - name: Update azure scan options
       url: '#update-azure-scan-options'
       identifier: agentless-scanning-update-azure-scan-options
@@ -5348,6 +5421,18 @@ menu:
           - UpdateAzureScanOptions
         unstable: []
         order: 9
+    - name: Get Azure scan options
+      url: '#get-azure-scan-options'
+      identifier: agentless-scanning-get-azure-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAzureScanOptions
+        unstable: []
+        order: 8
     - name: Delete azure scan options
       url: '#delete-azure-scan-options'
       identifier: agentless-scanning-delete-azure-scan-options
@@ -5371,7 +5456,7 @@ menu:
         operationids:
           - CreateAzureScanOptions
         unstable: []
-        order: 11
+        order: 7
     - name: List azure scan options
       url: '#list-azure-scan-options'
       identifier: agentless-scanning-list-azure-scan-options
@@ -5383,7 +5468,7 @@ menu:
         operationids:
           - ListAzureScanOptions
         unstable: []
-        order: 12
+        order: 6
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
@@ -5407,7 +5492,7 @@ menu:
         operationids:
           - GetAwsScanOptions
         unstable: []
-        order: 2
+        order: 3
     - name: Delete AWS Scan Options
       url: '#delete-aws-scan-options'
       identifier: agentless-scanning-delete-aws-scan-options
@@ -5431,7 +5516,7 @@ menu:
         operationids:
           - CreateAwsScanOptions
         unstable: []
-        order: 3
+        order: 2
     - name: List AWS Scan Options
       url: '#list-aws-scan-options'
       identifier: agentless-scanning-list-aws-scan-options
@@ -6156,6 +6241,18 @@ menu:
           - UnarchiveCase
         unstable: []
         order: 9
+    - name: Update case title
+      url: '#update-case-title'
+      identifier: case-management-update-case-title
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseTitle
+        unstable: []
+        order: 4
     - name: Update case status
       url: '#update-case-status'
       identifier: case-management-update-case-status
@@ -6180,6 +6277,66 @@ menu:
           - UpdatePriority
         unstable: []
         order: 5
+    - name: Update case description
+      url: '#update-case-description'
+      identifier: case-management-update-case-description
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseDescription
+        unstable: []
+        order: 4
+    - name: Update case custom attribute
+      url: '#update-case-custom-attribute'
+      identifier: case-management-update-case-custom-attribute
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseCustomAttribute
+        unstable: []
+        order: 13
+    - name: Delete custom attribute from case
+      url: '#delete-custom-attribute-from-case'
+      identifier: case-management-delete-custom-attribute-from-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseCustomAttribute
+        unstable: []
+        order: 14
+    - name: Delete case comment
+      url: '#delete-case-comment'
+      identifier: case-management-delete-case-comment
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseComment
+        unstable: []
+        order: 12
+    - name: Comment case
+      url: '#comment-case'
+      identifier: case-management-comment-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CommentCase
+        unstable: []
+        order: 11
     - name: Update case attributes
       url: '#update-case-attributes'
       identifier: case-management-update-case-attributes
@@ -6300,44 +6457,136 @@ menu:
           - SearchCases
         unstable: []
         order: 1
+    - name: Case Management Attribute
+      url: /api/latest/case-management-attribute/
+      identifier: case-management-attribute
+      generated: true
+    - name: Delete custom attributes config
+      url: '#delete-custom-attributes-config'
+      identifier: case-management-attribute-delete-custom-attributes-config
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomAttributeConfig
+        unstable: []
+        order: 4
+    - name: Create custom attribute config for a case type
+      url: '#create-custom-attribute-config-for-a-case-type'
+      identifier: case-management-attribute-create-custom-attribute-config-for-a-case-type
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomAttributeConfig
+        unstable: []
+        order: 3
+    - name: Get all custom attributes config of case type
+      url: '#get-all-custom-attributes-config-of-case-type'
+      identifier: case-management-attribute-get-all-custom-attributes-config-of-case-type
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllCustomAttributeConfigsByCaseType
+        unstable: []
+        order: 2
+    - name: Get all custom attributes
+      url: '#get-all-custom-attributes'
+      identifier: case-management-attribute-get-all-custom-attributes
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllCustomAttributes
+        unstable: []
+        order: 1
+    - name: Case Management Type
+      url: /api/latest/case-management-type/
+      identifier: case-management-type
+      generated: true
+    - name: Delete a case type
+      url: '#delete-a-case-type'
+      identifier: case-management-type-delete-a-case-type
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseType
+        unstable: []
+        order: 3
+    - name: Create a case type
+      url: '#create-a-case-type'
+      identifier: case-management-type-create-a-case-type
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseType
+        unstable: []
+        order: 2
+    - name: Get all case types
+      url: '#get-all-case-types'
+      identifier: case-management-type-get-all-case-types
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllCaseTypes
+        unstable: []
+        order: 1
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Update ruleset
-      url: '#update-ruleset'
-      identifier: cloud-cost-management-update-ruleset
+    - name: Update tag pipeline ruleset
+      url: '#update-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-update-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateRuleset
+          - UpdateTagPipelinesRuleset
         unstable: []
         order: 18
-    - name: Get ruleset
-      url: '#get-ruleset'
-      identifier: cloud-cost-management-get-ruleset
+    - name: Get a tag pipeline ruleset
+      url: '#get-a-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-get-a-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetRuleset
+          - GetTagPipelinesRuleset
         unstable: []
         order: 20
-    - name: Delete ruleset
-      url: '#delete-ruleset'
-      identifier: cloud-cost-management-delete-ruleset
+    - name: Delete tag pipeline ruleset
+      url: '#delete-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-delete-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteRuleset
+          - DeleteTagPipelinesRuleset
         unstable: []
         order: 19
     - name: Validate query
@@ -6352,40 +6601,40 @@ menu:
           - ValidateQuery
         unstable: []
         order: 22
-    - name: Reorder rulesets
-      url: '#reorder-rulesets'
-      identifier: cloud-cost-management-reorder-rulesets
+    - name: Reorder tag pipeline rulesets
+      url: '#reorder-tag-pipeline-rulesets'
+      identifier: cloud-cost-management-reorder-tag-pipeline-rulesets
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ReorderRulesets
+          - ReorderTagPipelinesRulesets
         unstable: []
         order: 21
-    - name: Create ruleset
-      url: '#create-ruleset'
-      identifier: cloud-cost-management-create-ruleset
+    - name: Create tag pipeline ruleset
+      url: '#create-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-create-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateRuleset
+          - CreateTagPipelinesRuleset
         unstable: []
         order: 17
-    - name: List rulesets
-      url: '#list-rulesets'
-      identifier: cloud-cost-management-list-rulesets
+    - name: List tag pipeline rulesets
+      url: '#list-tag-pipeline-rulesets'
+      identifier: cloud-cost-management-list-tag-pipeline-rulesets
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListRulesets
+          - ListTagPipelinesRulesets
         unstable: []
         order: 16
     - name: Update Google Cloud Usage Cost config
@@ -6664,76 +6913,76 @@ menu:
           - ListCostAWSCURConfigs
         unstable: []
         order: 1
-    - name: Update arbitrary cost rule
-      url: '#update-arbitrary-cost-rule'
-      identifier: cloud-cost-management-update-arbitrary-cost-rule
+    - name: Update custom allocation rule
+      url: '#update-custom-allocation-rule'
+      identifier: cloud-cost-management-update-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateArbitraryCostRule
+          - UpdateCustomAllocationRule
         unstable: []
         order: 25
-    - name: Get arbitrary cost rule
-      url: '#get-arbitrary-cost-rule'
-      identifier: cloud-cost-management-get-arbitrary-cost-rule
+    - name: Get custom allocation rule
+      url: '#get-custom-allocation-rule'
+      identifier: cloud-cost-management-get-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetArbitraryCostRule
+          - GetCustomAllocationRule
         unstable: []
         order: 27
-    - name: Delete arbitrary cost rule
-      url: '#delete-arbitrary-cost-rule'
-      identifier: cloud-cost-management-delete-arbitrary-cost-rule
+    - name: Delete custom allocation rule
+      url: '#delete-custom-allocation-rule'
+      identifier: cloud-cost-management-delete-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteArbitraryCostRule
+          - DeleteCustomAllocationRule
         unstable: []
         order: 26
-    - name: Reorder arbitrary cost rules
-      url: '#reorder-arbitrary-cost-rules'
-      identifier: cloud-cost-management-reorder-arbitrary-cost-rules
+    - name: Reorder custom allocation rules
+      url: '#reorder-custom-allocation-rules'
+      identifier: cloud-cost-management-reorder-custom-allocation-rules
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ReorderArbitraryCostRules
+          - ReorderCustomAllocationRules
         unstable: []
         order: 28
-    - name: Create arbitrary cost rule
-      url: '#create-arbitrary-cost-rule'
-      identifier: cloud-cost-management-create-arbitrary-cost-rule
+    - name: Create custom allocation rule
+      url: '#create-custom-allocation-rule'
+      identifier: cloud-cost-management-create-custom-allocation-rule
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateArbitraryCostRule
+          - CreateCustomAllocationRule
         unstable: []
         order: 24
-    - name: List arbitrary cost rules
-      url: '#list-arbitrary-cost-rules'
-      identifier: cloud-cost-management-list-arbitrary-cost-rules
+    - name: List custom allocation rules
+      url: '#list-custom-allocation-rules'
+      identifier: cloud-cost-management-list-custom-allocation-rules
       parent: cloud-cost-management
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListArbitraryCostRules
+          - ListCustomAllocationRules
         unstable: []
         order: 23
     - name: Cloud Network Monitoring
@@ -6988,9 +7237,9 @@ menu:
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
       generated: true
-    - name: Send an incident event for DORA Metrics
-      url: '#send-an-incident-event-for-dora-metrics'
-      identifier: dora-metrics-send-an-incident-event-for-dora-metrics
+    - name: Send an incident event
+      url: '#send-an-incident-event'
+      identifier: dora-metrics-send-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7036,9 +7285,9 @@ menu:
           - DeleteDORAFailure
         unstable: []
         order: 7
-    - name: Send a failure event for DORA Metrics
-      url: '#send-a-failure-event-for-dora-metrics'
-      identifier: dora-metrics-send-a-failure-event-for-dora-metrics
+    - name: Send a failure event
+      url: '#send-a-failure-event'
+      identifier: dora-metrics-send-a-failure-event
       parent: dora-metrics
       generated: true
       params:
@@ -7084,9 +7333,9 @@ menu:
           - DeleteDORADeployment
         unstable: []
         order: 8
-    - name: Send a deployment event for DORA Metrics
-      url: '#send-a-deployment-event-for-dora-metrics'
-      identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
+    - name: Send a deployment event
+      url: '#send-a-deployment-event'
+      identifier: dora-metrics-send-a-deployment-event
       parent: dora-metrics
       generated: true
       params:
@@ -7221,6 +7470,18 @@ menu:
           - UpdateIssueAssignee
         unstable: []
         order: 4
+    - name: Remove the assignee of an issue
+      url: '#remove-the-assignee-of-an-issue'
+      identifier: error-tracking-remove-the-assignee-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIssueAssignee
+        unstable: []
+        order: 5
     - name: Get the details of an error tracking issue
       url: '#get-the-details-of-an-error-tracking-issue'
       identifier: error-tracking-get-the-details-of-an-error-tracking-issue
@@ -9233,6 +9494,94 @@ menu:
           - v2
         operationids:
           - AggregateRUMEvents
+        unstable: []
+        order: 3
+    - name: Reference Tables
+      url: /api/latest/reference-tables/
+      identifier: reference-tables
+      generated: true
+    - name: Create reference table upload
+      url: '#create-reference-table-upload'
+      identifier: reference-tables-create-reference-table-upload
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReferenceTableUpload
+        unstable: []
+        order: 1
+    - name: Get rows by id
+      url: '#get-rows-by-id'
+      identifier: reference-tables-get-rows-by-id
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRowsByID
+        unstable: []
+        order: 5
+    - name: Update reference table
+      url: '#update-reference-table'
+      identifier: reference-tables-update-reference-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateReferenceTable
+        unstable: []
+        order: 6
+    - name: Get table
+      url: '#get-table'
+      identifier: reference-tables-get-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTable
+        unstable: []
+        order: 4
+    - name: Delete table
+      url: '#delete-table'
+      identifier: reference-tables-delete-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTable
+        unstable: []
+        order: 7
+    - name: Create reference table
+      url: '#create-reference-table'
+      identifier: reference-tables-create-reference-table
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReferenceTable
+        unstable: []
+        order: 2
+    - name: List tables
+      url: '#list-tables'
+      identifier: reference-tables-list-tables
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTables
         unstable: []
         order: 3
     - name: Restriction Policies

@@ -19,7 +19,7 @@ _읽는 데 걸리는 시간 8분_
 
 {{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="분석 보기" style="width:90%;">}}
 
-<div class="alert alert-warning"><strong>참고</strong>: 이 페이지에서는 OpenTracing를 사용해 애플리케이션을 커스텀 계측하는 방법을 설명합니다. OpenTracing은 이제 더 이상 사용되지 않습니다. 여기에 나와 있는 내용을 적용할 수는 있으나 내가 사용하는 언어에 따라 <a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry로 커스텀 계측</a>에 안내된 지침과 예시를 따르세요.</div>
+<div class="alert alert-danger"><strong>참고</strong>: 이 페이지에서는 OpenTracing를 사용해 애플리케이션을 커스텀 계측하는 방법을 설명합니다. OpenTracing은 이제 더 이상 사용되지 않습니다. 여기에 나와 있는 내용을 적용할 수는 있으나 내가 사용하는 언어에 따라 <a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry로 커스텀 계측</a>에 안내된 지침과 예시를 따르세요.</div>
 
 Datadog APM에서는 내 비즈니스 논리를 더 깊게 가시화하기 위해 내 트레이스를 구성하는 스팬을 필요와 구현에 따라 맞춤화할 수 있는 기능을 제공합니다. 이 기능을 통해 내 코드 베이스에 있는 메서드를 추적할 수 있도록 도와주고, 더 나아가 메서드 안의 특정 구성 요소도 추적할 수 있습니다. 이 방법을 사용해 내게 맞도록 세분화하여 애플리케이션의 중요 영역을 모니터링하고 최적화할 수 있습니다.
 

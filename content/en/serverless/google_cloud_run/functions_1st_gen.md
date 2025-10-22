@@ -6,7 +6,7 @@ title: Instrumenting 1st Gen Cloud Run Functions
 
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions (1st gen), previously known as Cloud Functions.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Migrating to 2nd gen Cloud Run functions</strong> 
 <br/>
 Datadog recommends using 2nd gen <a href="/serverless/google_cloud_run/functions">Cloud Run functions</a>, which offer improved performance, better scaling, and better monitoring with Datadog.

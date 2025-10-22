@@ -6,7 +6,7 @@ further_reading:
 title: Kubernetes 上の Datadog Agent を DaemonSet で手動でインストール、構成する
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog では、手動で行う DaemonSet による Datadog Agent のデプロイはエラーを招きやすいため推奨していません。Kubernetes に Agent をインストールする場合は、<a href="/containers/kubernetes/installation">Datadog Operator または Helm の利用</a>を推奨します。
 </div>
 

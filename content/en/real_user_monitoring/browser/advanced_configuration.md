@@ -1111,7 +1111,7 @@ To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK le
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
-1. `"granted"`: The RUM Browser SDK starts collecting data and sends it to Datadog.
+1. `"granted"` (default): The RUM Browser SDK starts collecting data and sends it to Datadog.
 2. `"not-granted"`: The RUM Browser SDK does not collect any data.
 
 To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:

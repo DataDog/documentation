@@ -25,7 +25,7 @@ version: '1.0'
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La integración de Datadog Alibaba Cloud no es compatible con el sitio de Datadog para el Gobierno.</div>
+<div class="alert alert-danger">La integración de Datadog Alibaba Cloud no es compatible con el sitio de Datadog para el Gobierno.</div>
 {{< /site-region >}}
 
 ## Información general

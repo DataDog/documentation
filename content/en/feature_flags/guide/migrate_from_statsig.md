@@ -19,7 +19,7 @@ This guide walks you through the process of migrating feature flags from Statsig
 6. [Recreate critical feature flags in Eppo.](#recreate-critical-flags)
 7. [Switch existing flags to the new application.](#switch-to-new-app)
 
-<div class="alert alert-info"><strong>Note</strong>: Unless otherwise specified, all code examples are in TypeScript.</div>
+<div class="alert alert-info">Unless otherwise specified, all code examples are in TypeScript.</div>
 
 ## Migration process
 
@@ -215,7 +215,7 @@ export function getJSONVariationWrapper(
 
 ### 6. Recreate critical flags in Eppo {#recreate-critical-flags}
 
-<div class="alert alert-info"><strong>Note</strong>: Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
+<div class="alert alert-info">Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
  
 1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig's][4] and [Eppo's][5] REST APIs.
 1. Ensure that the flag configurations—such as rollout percentages, targeting rules, and variations—are accurately replicated in the new service.
