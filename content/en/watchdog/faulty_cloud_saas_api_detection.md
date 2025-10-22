@@ -52,7 +52,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Square | connect.squareup.com |
 | Stripe | api.stripe.com |
 | Twilio | api.twilio.com |
-| Twitter | api.twitter.com |
+| X | api.twitter.com |
 | Zendesk | *.zendesk.com |
 | Zoom    | api.zoom.us |
 
