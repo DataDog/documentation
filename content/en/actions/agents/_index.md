@@ -104,10 +104,6 @@ Click **+ Add Tool** to add actions from our [Action Catalog][7] for the agent t
 
 Click the toggle button to enable [MCP (Model Context Protocol)][8]. MCP servers provide additional tools and capabilities that the agent can use to interact with external systems.
 
-### Feature Lab
-
-This section displays features that are still in development. Click the toggle button next to a feature to enable it. 
-
 ## Add an agent action
 
 After you create an agent, you can add it to a workflow or app. 
