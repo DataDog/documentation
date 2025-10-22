@@ -1756,7 +1756,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1788,8 +1788,6 @@ def rag_workflow(user_question):
 
 {{< /code-block >}}
 
-[1]: /getting_started/tagging/
-
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1806,7 +1804,7 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 
 `tags`
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][1].
+<br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1830,8 +1828,6 @@ function ragWorkflow(userQuestion) {
 }
 
 {{< /code-block >}}
-
-[1]: /getting_started/tagging/
 
 {{% /tab %}}
 {{< /tabs >}}
