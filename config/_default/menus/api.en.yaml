@@ -2880,6 +2880,19 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 26
     - name: Patch a vulnerability-based notification rule
       url: '#patch-a-vulnerability-based-notification-rule'
       identifier: security-monitoring-patch-a-vulnerability-based-notification-rule
@@ -3013,6 +3026,19 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 15
+    - name: List scanned assets metadata
+      url: '#list-scanned-assets-metadata'
+      identifier: security-monitoring-list-scanned-assets-metadata
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScannedAssetsMetadata
+        unstable:
+          - v2
+        order: 28
     - name: Get SBOM
       url: '#get-sbom'
       identifier: security-monitoring-get-sbom
@@ -3039,19 +3065,6 @@ menu:
         unstable:
           - v2
         order: 28
-    - name: List vulnerable assets
-      url: '#list-vulnerable-assets'
-      identifier: security-monitoring-list-vulnerable-assets
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListVulnerableAssets
-        unstable:
-          - v2
-        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -6228,6 +6241,18 @@ menu:
           - UnarchiveCase
         unstable: []
         order: 9
+    - name: Update case title
+      url: '#update-case-title'
+      identifier: case-management-update-case-title
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseTitle
+        unstable: []
+        order: 4
     - name: Update case status
       url: '#update-case-status'
       identifier: case-management-update-case-status
@@ -6252,6 +6277,66 @@ menu:
           - UpdatePriority
         unstable: []
         order: 5
+    - name: Update case description
+      url: '#update-case-description'
+      identifier: case-management-update-case-description
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseDescription
+        unstable: []
+        order: 4
+    - name: Update case custom attribute
+      url: '#update-case-custom-attribute'
+      identifier: case-management-update-case-custom-attribute
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseCustomAttribute
+        unstable: []
+        order: 13
+    - name: Delete custom attribute from case
+      url: '#delete-custom-attribute-from-case'
+      identifier: case-management-delete-custom-attribute-from-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseCustomAttribute
+        unstable: []
+        order: 14
+    - name: Delete case comment
+      url: '#delete-case-comment'
+      identifier: case-management-delete-case-comment
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseComment
+        unstable: []
+        order: 12
+    - name: Comment case
+      url: '#comment-case'
+      identifier: case-management-comment-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CommentCase
+        unstable: []
+        order: 11
     - name: Update case attributes
       url: '#update-case-attributes'
       identifier: case-management-update-case-attributes
@@ -6372,6 +6457,98 @@ menu:
           - SearchCases
         unstable: []
         order: 1
+    - name: Case Management Attribute
+      url: /api/latest/case-management-attribute/
+      identifier: case-management-attribute
+      generated: true
+    - name: Delete custom attributes config
+      url: '#delete-custom-attributes-config'
+      identifier: case-management-attribute-delete-custom-attributes-config
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomAttributeConfig
+        unstable: []
+        order: 4
+    - name: Create custom attribute config for a case type
+      url: '#create-custom-attribute-config-for-a-case-type'
+      identifier: case-management-attribute-create-custom-attribute-config-for-a-case-type
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomAttributeConfig
+        unstable: []
+        order: 3
+    - name: Get all custom attributes config of case type
+      url: '#get-all-custom-attributes-config-of-case-type'
+      identifier: case-management-attribute-get-all-custom-attributes-config-of-case-type
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllCustomAttributeConfigsByCaseType
+        unstable: []
+        order: 2
+    - name: Get all custom attributes
+      url: '#get-all-custom-attributes'
+      identifier: case-management-attribute-get-all-custom-attributes
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllCustomAttributes
+        unstable: []
+        order: 1
+    - name: Case Management Type
+      url: /api/latest/case-management-type/
+      identifier: case-management-type
+      generated: true
+    - name: Delete a case type
+      url: '#delete-a-case-type'
+      identifier: case-management-type-delete-a-case-type
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseType
+        unstable: []
+        order: 3
+    - name: Create a case type
+      url: '#create-a-case-type'
+      identifier: case-management-type-create-a-case-type
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseType
+        unstable: []
+        order: 2
+    - name: Get all case types
+      url: '#get-all-case-types'
+      identifier: case-management-type-get-all-case-types
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllCaseTypes
+        unstable: []
+        order: 1
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
@@ -6388,9 +6565,9 @@ menu:
           - UpdateTagPipelinesRuleset
         unstable: []
         order: 18
-    - name: Get ruleset
-      url: '#get-ruleset'
-      identifier: cloud-cost-management-get-ruleset
+    - name: Get a tag pipeline ruleset
+      url: '#get-a-tag-pipeline-ruleset'
+      identifier: cloud-cost-management-get-a-tag-pipeline-ruleset
       parent: cloud-cost-management
       generated: true
       params:
@@ -7293,6 +7470,18 @@ menu:
           - UpdateIssueAssignee
         unstable: []
         order: 4
+    - name: Remove the assignee of an issue
+      url: '#remove-the-assignee-of-an-issue'
+      identifier: error-tracking-remove-the-assignee-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIssueAssignee
+        unstable: []
+        order: 5
     - name: Get the details of an error tracking issue
       url: '#get-the-details-of-an-error-tracking-issue'
       identifier: error-tracking-get-the-details-of-an-error-tracking-issue

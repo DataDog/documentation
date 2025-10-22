@@ -4,6 +4,8 @@ aliases:
 - /es/tracing/setup/docker/
 - /es/agent/apm/docker
 - /es/agent/docker/apm
+description: Configura la recopilación de traces (trazas) de APM para las aplicaciones
+  que se ejecutan en los contenedores de Docker mediante el Datadog Agent
 further_reading:
 - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/trace
   tag: Código fuente
@@ -30,7 +32,7 @@ A partir de Agent 6.0.0, el Trace Agent se activa por defecto. Si ha sido desact
 
 Los comandos de CLI en esta página son para el tiempo de ejecución de Docker. Sustituye `docker` por `nerdctl` para el tiempo de ejecución del containerd, o `podman` para el tiempo de ejecución del Podman.
 
-<div class="alert alert-info">Si estás recopilando trazas de una aplicación contenedorizada (tu Agent y tu app se están ejecutando en contenedores separados), una alternativa a las siguientes instrucciones es inyectar la librería de trazas automáticamente en tu aplicación. Consulta <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Inyectar bibliotecas</a> para ver las instrucciones.</div>
+<div class="alert alert-info">Si estás recopilando trazas de una aplicación contenedorizada (tu Agent y tu app se están ejecutando en contenedores separados), una alternativa a las siguientes instrucciones es inyectar la biblioteca de trazas automáticamente en tu aplicación. Consulta <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Inyectar bibliotecas</a> para ver las instrucciones.</div>
 
 ## Rastrear desde el host
 
@@ -76,7 +78,7 @@ Donde tu `<DATADOG_SITE>` es {{< region-param key="dd_site" code="true" >}} (por
 
 Utiliza las siguientes variables de entorno para configurar la traza del Docker Agent. Consulta el [archivo de ejemplo `config_template.yaml`][8] para obtener más detalles.
 
-`DD_API_KEY`
+`DD_API_KEY`                      
 : obligatorio - _cadena_
 <br/>tu [clave API de Datadog][1].
 
@@ -85,73 +87,73 @@ Utiliza las siguientes variables de entorno para configurar la traza del Docker 
 <br/>Tu [sitio de Datadog][7]. Establécelo en `{{< region-param key="dd_site" >}}`.
 <br/>**Predeterminado**: `datadoghq.com`
 
-`DD_APM_ENABLED`
+`DD_APM_ENABLED`                  
 : opcional; _booleano_ - **por defecto**: `true`
 <br/>Cuando se establece en `true` (por defecto), el Datadog Agent acepta trazas y métricas de traza.
 
-`DD_APM_RECEIVER_PORT`
-: opcional - _entero_ - **por defecto**: `8126`
+`DD_APM_RECEIVER_PORT`            
+: opcional - _entero_ - **por defecto**: `8126` 
 <br/>Establece el puerto en el que escucha el receptor de la traza del Datadog Agent. Establece `0` para desactivar el receptor HTTP.
 
-`DD_APM_RECEIVER_SOCKET`
+`DD_APM_RECEIVER_SOCKET`          
 : opcional: _cadena_
-<br/>Para recopilar tus trazas a través de UNIX Domain Sockets, proporciona la ruta al socket UNIX. Si se establece, tiene prioridad sobre el nombre de host y la configuración del puerto, y debe apuntar a un archivo de socket válido.
+<br/>Para recopilar tus trazas a través de UNIX Domain Sockets, proporciona la ruta al socket UNIX. Si se establece, tiene prioridad sobre el nombre de host y la configuración del puerto, y debe apuntar a un archivo de socket válido. 
 
-`DD_APM_NON_LOCAL_TRAFFIC`
+`DD_APM_NON_LOCAL_TRAFFIC`        
 : opcional - _Booleano_ - **por defecto**: `false`
-<br/>Cuando se establece en `true`, el Datadog Agent escucha el tráfico no local. Si estás [rastreando desde otros contenedores](#tracing-from-other-containers), establece esta variable de entorno en `true`.
+<br/>Cuando se establece en `true`, el Datadog Agent escucha el tráfico no local. Si estás [rastreando desde otros contenedores](#tracing-from-other-containers), establece esta variable de entorno en `true`. 
 
-`DD_APM_DD_URL`
+`DD_APM_DD_URL`                   
 : opcional - _cadena_
 <br/>Para utilizar un proxy para APM, proporciona el endpoint y el puerto como `<ENDPOINT>:<PORT>`. El proxy debe poder manejar conexiones TCP.
 
-`DD_APM_CONNECTION_LIMIT`
+`DD_APM_CONNECTION_LIMIT`         
 : obligatorio - _entero_ - **por defecto**: `2000`
 <br/>Establece el máximo de conexiones APM para una ventana temporal de 30 segundos. Consulta [Límites de frecuencia del Agent][6] para obtener más detalles.
 
-`DD_APM_IGNORE_RESOURCES`
-: opcional - _[cadena]_
-<br/>Proporciona una lista de exclusión de recursos para que Datadog Agent los ignore. Si el nombre de recurso de una traza coincide con una o más de las expresiones regulares de esta lista, la traza no se envía a Datadog.
-<br/>Ejemplo: `"GET /ignore-me","(GET\|POST) and-also-me"`.
+`DD_APM_IGNORE_RESOURCES`         
+: opcional - _[cadena]_ 
+<br/>Proporciona una lista de exclusión de recursos para que Datadog Agent los ignore. Si el nombre de recurso de una traza coincide con una o más de las expresiones regulares de esta lista, la traza no se envía a Datadog. 
+<br/>Ejemplo: `"GET /ignore-me","(GET\|POST) and-also-me"`. 
 
-`DD_APM_FILTER_TAGS_REQUIRE`
+`DD_APM_FILTER_TAGS_REQUIRE`      
 : opcional - _objeto_
-<br/>Define reglas para el filtrado de trazas basadas en etiqueta. Para enviarlas a Datadog, las trazas deben tener estas etiquetas (tags). Consulta [Ignorar recursos no deseados en APM][5].
+<br/>Define reglas para el filtrado de trazas basadas en etiqueta. Para enviarlas a Datadog, las trazas deben tener estas etiquetas (tags). Consulta [Ignorar recursos no deseados en APM][5]. 
 
-`DD_APM_FILTER_TAGS_REGEX_REQUIRE`
+`DD_APM_FILTER_TAGS_REGEX_REQUIRE` 
 : opcional - _objeto_
-<br/>Compatible con Agent 7.49+. Define reglas para el filtrado de trazas basadas en etiquetas con expresiones regulares. Para enviarlas a Datadog, las trazas deben tener etiquetas que coincidan con estos patrones regex.
+<br/>Compatible con Agent 7.49+. Define reglas para el filtrado de trazas basadas en etiquetas con expresiones regulares. Para enviarlas a Datadog, las trazas deben tener etiquetas que coincidan con estos patrones regex. 
 
-`DD_APM_FILTER_TAGS_REJECT`
-: opcional - _objeto_
-<br/>Define reglas para el filtrado de trazas basadas en etiquetas. Si una traza tiene estas etiquetas, no se envía a Datadog. Consulta [Ignorar recursos no deseados en APM][5] para obtener más detalles.
+`DD_APM_FILTER_TAGS_REJECT`       
+: opcional - _objeto_ 
+<br/>Define reglas para el filtrado de trazas basadas en etiquetas. Si una traza tiene estas etiquetas, no se envía a Datadog. Consulta [Ignorar recursos no deseados en APM][5] para obtener más detalles. 
 
-`DD_APM_FILTER_TAGS_REGEX_REJECT`
-: opcional - _objeto_
-<br/>Compatible con Agent 7.49+. Define reglas para el filtrado de trazas basadas en etiquetas con expresiones regulares. Si una traza tiene etiquetas que coinciden con estos patrones regex, la traza no se envía a Datadog.
+`DD_APM_FILTER_TAGS_REGEX_REJECT` 
+: opcional - _objeto_ 
+<br/>Compatible con Agent 7.49+. Define reglas para el filtrado de trazas basadas en etiquetas con expresiones regulares. Si una traza tiene etiquetas que coinciden con estos patrones regex, la traza no se envía a Datadog. 
 
-`DD_APM_REPLACE_TAGS`
-: opcional - _[objeto]_
+`DD_APM_REPLACE_TAGS`             
+: opcional - _[objeto]_ 
 <br/>Define un conjunto de reglas para [reemplazar o eliminar etiquetas que contienen información potencialmente sensible][2].
 
-`DD_HOSTNAME`
-: opcional - _cadena_ - **por defecto**: detectado automáticamente
+`DD_HOSTNAME`                     
+: opcional - _cadena_ - **por defecto**: detectado automáticamente 
 <br/>Establece el nombre de host que se utilizará para métricas si falla la detección automática del nombre de host, o cuando se ejecuta el Datadog Cluster Agent.
 
-`DD_DOGSTATSD_PORT`
-: opcional - _entero_ - **por defecto**: `8125`
+`DD_DOGSTATSD_PORT`               
+: opcional - _entero_ - **por defecto**: `8125` 
 <br/>Establece el puerto DogStatsD.
 
-`DD_PROXY_HTTPS`
+`DD_PROXY_HTTPS`                  
 : opcional - _cadena_
-<br/>Para utilizar un [proxy][4] para conectarse a Internet, indica la URL.
+<br/>Para utilizar un [proxy][4] para conectarse a Internet, indica la URL. 
 
-`DD_BIND_HOST`
-: opcional - _cadena_ - **por defecto**: `localhost`
+`DD_BIND_HOST`                    
+: opcional - _cadena_ - **por defecto**: `localhost` 
 <br/>Establece el host para escuchar en DogStatsD y trazas.
 
-`DD_LOG_LEVEL`
-: opcional - _cadena_ - **por defecto**: `info`
+`DD_LOG_LEVEL`                    
+: opcional - _cadena_ - **por defecto**: `info` 
 <br/>Establece el nivel mínimo de registro. Opciones válidas: `trace`, `debug`, `info`, `warn`, `error`, `critical` y `off`.
 
 ## Rastreando desde otros contenedores

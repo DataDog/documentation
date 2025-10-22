@@ -83,6 +83,9 @@ Cloud Cost Management normalizes tag **values** as well, while maintaining human
 - Replace any other characters with an underscore `_`
 - Tag values up to 5000 characters are supported
 
+Cloud Cost Recommendations use [standard Datadog metrics normalization rules][14]. Tag values in recommendations are converted to lowercase and limited to 200 characters.
+For example, a tag `Team:Engineering-Services` would appear as `team:engineering-services` in recommendations, but as `team:Engineering-Services` in cost data.
+
 ## How tags are prioritized
 
 A cost data row can have multiple values for the same tag key when tag values from two or more sources are combined and one is not prioritized over the other.
@@ -128,3 +131,4 @@ Other tag sources (such as AWS Organization tags, integration tile tags, and sim
 [11]: /cloud_cost_management/cost_allocation/container_cost_allocation/
 [12]: /network_monitoring/cloud_network_monitoring/
 [13]: /cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#data-transfer
+[14]: /getting_started/tagging/#define-tags
