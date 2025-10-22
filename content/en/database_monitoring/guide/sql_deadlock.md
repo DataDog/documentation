@@ -59,7 +59,7 @@ Supported Agent versions
 
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
-  deadlocks_collection:
+  collect_deadlocks: #prior to agent version 7.70, the setting was named deadlocks_collection
       enabled: true
 ```
 
@@ -88,7 +88,7 @@ Supported Agent versions
 
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
-  deadlocks_collection:
+  collect_deadlocks: #prior to agent version 7.70, the setting was named deadlocks_collection
       enabled: true
 ```
 
