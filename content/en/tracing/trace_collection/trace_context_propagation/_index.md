@@ -133,7 +133,7 @@ The Datadog Python SDK supports the following trace context formats, including d
 | [Datadog][1]           | `datadog`                       |
 | [W3C Trace Context][2] | `tracecontext`                  |
 | [Baggage][6]           | `baggage`                       |
-| [B3 Single][3]         | `b3`                            |
+| [B3 Single][3]         | `b3 single header` (removed in v3.0) |
 | [B3 Multi][4]          | `b3multi`                       |
 | [None][5]              | `none`                          |
 
