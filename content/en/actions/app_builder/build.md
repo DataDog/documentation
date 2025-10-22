@@ -70,7 +70,6 @@ Choosing a layout creates an app as a table, form, or custom chart.
 1. Select a layout. The pane on the right displays a preview of the app.
 1. Click **Use Layout**.
 1. To change the app name and description, click the app name.
-1. Each layout template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
