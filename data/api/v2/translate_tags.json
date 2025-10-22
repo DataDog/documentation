@@ -131,6 +131,10 @@
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
+  "fleet-automation": {
+    "name": "Fleet Automation",
+    "description": "Manage automated configuration updates across your fleet of hosts.\nUse these endpoints to create, retrieve, and cancel configuration updates\nthat apply configuration changes to multiple hosts simultaneously."
+  },
   "gcp-integration": {
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."

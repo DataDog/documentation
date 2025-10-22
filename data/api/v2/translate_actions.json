@@ -1,4 +1,10 @@
 {
+  "CreateUpdateConfig": {
+    "description": "Create a new configuration update to apply automated configuration changes\nto a fleet of hosts matching the specified filter query.",
+    "summary": "Create an update config",
+    "request_description": "Request payload containing the configuration update details.",
+    "request_schema_description": "Request payload for creating a new configuration update."
+  },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
     "summary": "List datastores"
