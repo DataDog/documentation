@@ -27,7 +27,7 @@ You can chain multiple patterns together to parse complex log messages.
 
 ## Supported matchers and filters at query time
 
-<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>) For long-term parsing needs, define a log pipeline..</div>
+<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>) For long-term parsing needs, define a log pipeline.</div>
 
 Query-time Grok parsing in the Log Explorer supports a limited subset of matchers and filters. Each matcher or filter is used in a Grok pattern with the format:
 
@@ -46,7 +46,7 @@ Query-time Grok parsing in the Log Explorer supports a limited subset of matcher
 | `NOTSPACE`<br>_Non-whitespace characters_ | `path=%{NOTSPACE:request_path}` |
 
 ### Filters
-Filters can be applied in combination with matchers to cast values into numeric types.
+Apply filters to cast extracted values into numeric types. Filters use the same pattern syntax as matches.
 
 | Filter | Example Grok Pattern |
 | ------ | -------------------- |
@@ -54,7 +54,7 @@ Filters can be applied in combination with matchers to cast values into numeric 
 | `INTEGER`<br>_Parses numeric strings as integers_ | `users=%{INTEGER:user_count}` |
 
 ### Example
-
+Use this feature to analyze log fields on-demand without modifying your ingestion pipeline.
 **Log line**:
 
 ```

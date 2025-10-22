@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The formula (or expression) defines the value of the value of the calculated field for each log event. You can reference log attributes, other calculated fields, and supported functions and operators. As you write or edit a formula, the editor automatically suggestion relevant fields, functions, and operators.
+The formula (or expression) defines the value of the value of the calculated field for each log event. You can reference log attributes, other calculated fields, and supported functions and operators. As you write or edit a formula, the editor automatically suggests relevant fields, functions, and operators.
 
 ## Basic syntax and language constructs
 

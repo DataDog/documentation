@@ -35,12 +35,12 @@ There are two types of calculated fields: **Extractions** and **Formulas**. Both
 
 Use calculated fields in the following scenarios:
 
-- When you need to perform a short-term investigation or analysis that requires a field that you don't need to keep in the long-term.
+- When you need a temporary field for a short-term investigation or analysis.
 - When you need to retroactively analyze indexed logs (pipelines changes only affect logs ingested after the update).
 - When you don't have the permission or expertise to modify log pipelines quickly.
 - When you want a calculated field visible only to you, useful for quick exploration and low-risk experimentation.
 
-If you find that a calculated field is valuable in the long-term, update your [log pipelines][2] so the your team benefits from automated processing.
+If you find that a calculated field is valuable in the long-term, update your [log pipelines][2] so your team benefits from automated processing.
 
 ## Create a calculated field
 
@@ -52,7 +52,7 @@ You can create a calculated field from two entry points in the Log Explorer: fro
 1. Click the **Add** button next to the search bar.
 1. Select **Calculated field**.
 
-This is useful when you are already familiar with the structure and content of the logs and want to quickly define formula or parsing rule.
+This is useful when you are already familiar with the structure and content of the logs and want to quickly define a formula or parsing rule.
 
 ### From a specific log event or attribute
 
@@ -69,7 +69,7 @@ This approach is useful for extractions, since it provides a concrete log sample
 
 ### Formula
 
-Formula fields use the calculated fields formulas to compute new values from existing attributes. You can:
+Formula fields use calculated fields formulas to compute new values from existing attributes. You can:
 - Manipulate text values.
 - Perform arithmetic on numeric attributes.
 - Evaluate conditional logic.
@@ -86,14 +86,14 @@ For a complete list of supported syntax, operators, and functions, see [Formulas
 Extraction uses Grok parsing rules to capture values from raw log messages or attributes. You can use Grok rules to:
 - Capture values from raw log messages.
 - Retroactively extract attributes from already indexed logs without editing pipelines.
-- Test against sample logs
+- Test against sample logs.
 
 For example, you can extract the first three words of a message into separate fields:
 ```
 %{WORD:first} %{WORD:second} %{WORD:third}
 ```
 
-Extraction rules are evaluated globally across all logs in your session. For more details and syntax example, see [Extractions][4].
+Extraction rules are evaluated globally across all logs in your session. For more details and syntax examples, see [Extractions][4].
 
 ## Using calculated fields
 
