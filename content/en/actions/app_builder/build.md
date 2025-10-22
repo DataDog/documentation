@@ -86,7 +86,6 @@ You can get started with an app by importing data from one of the integrations l
 1. Click **Create**.
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
-1. Each layout template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
