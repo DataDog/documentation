@@ -12,6 +12,7 @@ Database Monitoring provides deep visibility into your Supabase databases by exp
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Supabase database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
 
 ## Before you begin
 
@@ -26,7 +27,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
 
 Proxies, load balancers, and connection poolers
-: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as Supabase's 'Dedicated Pooler' (pgbouncer) or 'Session Pooler' (Supavisor). If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as Supabase’s 'Dedicated Pooler' (pgbouncer) or 'Session Pooler' (Supavisor). If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -143,13 +144,17 @@ When it prompts for a password, use the password you entered when you created th
 Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Supabase.
 If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
+<div class="alert alert-info">Supabase’s default direct connection string is only valid on IPv6 networks.
+To connect the Agent to a Supabase instance with this method you need to ensure your machine running the Agent is IPv6 enabled. You should reference your cloud provider’s documentation to achieve this.
+Supabase instances on the Pro plan or above support IPv4 addresses as an add-on.</div>
+
 Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Supabase instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
 
 ```yaml
 init_config:
 instances:
     - dbm: true
-      host: localhost
+      host: <SUPABASE_INSTANCE_ENDPOINT>
       port: 5432
       username: datadog
       password: 'ENC[datadog_user_database_password]'
@@ -168,38 +173,6 @@ instances:
 
 ## Example Agent Configurations
 
-### With an IPv6 address
-
-Supabase's default direct connection string is only valid on IPv6 networks. To connect the Agent to a Supabase instance with this method you need to ensure your machine running the Agent is IPv6 enabled. You should reference your cloud provider's documentation to achieve this.
-
-Go to your Supabase account, click the Connect button on the top bar of the page and select Direct connection as the connection method. Click view parameters and copy them into your Agent configuration file:
-
-```yaml
-init_config:
-instances:
-    - dbm: true
-      host: db.someidentifier.supabase.co
-      port: 5432
-      username: datadog
-      password: 'ENC[datadog_user_database_password]'
-```
-
-### With an IPv4 address
-
-Supabase instances on the Pro plan or above support IPv4 addresses as an [add-on](17).
-
-Go to your Supabase account, click the Connect button on the top bar of the page and select Direct connection as the connection method. Click view parameters and copy them into your Agent configuration file:
-
-```yaml
-init_config:
-instances:
-    - dbm: true
-      host: db.someidentifier.supabase.co
-      port: 5432
-      username: datadog
-      password: 'ENC[datadog_user_database_password]'
-```
-
 ### With Supavisor's session pooler
 
 Although we recommend having a direct connection to the database instead of connecting via proxy, you can still connect the Agent to your Supabase instance if the above options are not available to you. This will work best when you only have one instance in your Supabase project.
@@ -210,7 +183,7 @@ Go to your Supabase account, click the Connect button on the top bar of the page
 init_config:
 instances:
     - dbm: true
-      host: aws-1-us-east-2.pooler.supabase.com
+      host: <SUPABASE_POOLER_ENDPOINT>
       port: 5432
       username: datadog.some-project-id
       password: 'ENC[datadog_user_database_password]'
