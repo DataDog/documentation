@@ -8308,31 +8308,36 @@ menu:
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
       weight: 1212
+    - name: Incident Response
+      identifier: account_management_billing_incident_response
+      url: account_management/billing/incident_response/
+      parent: account_management_billing
+      weight: 1213
     - name: AWS Integration
       identifier: account_management_billing_aws
       url: account_management/billing/aws/
       parent: account_management_billing
-      weight: 1213
+      weight: 1214
     - name: Azure Integration
       identifier: account_management_billing_azure
       url: account_management/billing/azure/
       parent: account_management_billing
-      weight: 1214
+      weight: 1215
     - name: Google Cloud Integration
       identifier: account_management_billing_google_cloud
       url: account_management/billing/google_cloud/
       parent: account_management_billing
-      weight: 1215
+      weight: 1216
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1216
+      weight: 1217
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1217
+      weight: 1218
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
