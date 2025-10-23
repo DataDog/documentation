@@ -902,14 +902,16 @@ end
 [8]: https://github.com/DataDog/datadog-react-native-wizard
 [9]: https://app.datadoghq.com/source-code/setup/rum
 [10]: https://github.com/DataDog/react-native-performance-limiter
-[11]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#xcode
 [12]: /real_user_monitoring/mobile_and_tv_monitoring/ios/error_tracking/?tabs=cocoapods#symbolicate-crash-reports
 [13]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [14]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [15]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/rum/application/create
 [17]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/
-
+[18]: https://app.datadoghq.com/error-tracking
+[19]: https://source.android.com/docs/security/app-sandbox
+[20]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 
 
 

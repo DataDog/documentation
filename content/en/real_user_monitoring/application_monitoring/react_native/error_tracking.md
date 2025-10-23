@@ -33,7 +33,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native Crash Reporting and Error Tracking][3]. After setting up React Native, [follow these steps to enable React Native Crash Reporting and Error Tracking][101].
+If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see [React Native Crash Reporting and Error Tracking][3]. After setting up React Native, [follow these steps to enable React Native Crash Reporting and Error Tracking][101].
 
 ## Further reading
 
