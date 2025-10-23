@@ -34,9 +34,12 @@ Your Microsoft Entra ID user needs the following permissions:
 - `Users can register applications` has been set to `Yes`
 - The user has the [Application Developer][38] role
 
-#### Permission to assign roles within your subscriptions
+##### Admin roles within your subscriptions
 
-You must have one of the [Azure built-in roles in the Privileged category][24], or a custom role including the `Microsoft.Authorization/roleAssignments/write` action, in each of the subscriptions you wish to connect.
+Within the subscriptions you wish to monitor, you must have either:
+
+- The **Owner** role
+- Both the **Contributor** and **User Access Admin** roles
 
 #### Permission to add and grant consent for Graph API permissions
 
@@ -346,7 +349,6 @@ Still need help? Contact [Datadog support][17].
 [21]: https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest
 [22]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [23]: https://www.terraform.io
-[24]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged
 [25]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
 [26]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [27]: /monitors/notify/#configure-notifications-and-automations
