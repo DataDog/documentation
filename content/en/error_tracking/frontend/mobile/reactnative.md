@@ -370,7 +370,7 @@ For example, assuming the current tracking consent is `.PENDING`:
 
 To control the data your application sends to Datadog, you can specify a sampling rate for sessions while [initializing the React Native SDK][101] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
 
-[101]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
+[101]: /real_user_monitoring/application_monitoring/react_native/setup/reactnative?tab=rum#initialize-the-library-with-application-context
 
 {{% /collapse-content %}}
 
@@ -446,11 +446,11 @@ This means that even if users open your application while offline, no data is lo
 {{% collapse-content title="Data storage" level="h4" %}}
 ##### Android
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][11], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][19], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
 
 ##### iOS
 
-Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][12], which can't be read by any other app installed on the device.
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][20], which can't be read by any other app installed on the device.
 
 {{% /collapse-content %}}
 
@@ -479,7 +479,7 @@ The [React Native new architecture][601] is supported by the React Native SDK in
 
 The minimum supported React Native version for the new architecture is `0.71`.
 
-[601]: https://source.android.com/security/app-sandbox
+[601]: https://reactnative.dev/architecture/landing-page
 
 {{% /collapse-content %}}
 
@@ -522,8 +522,8 @@ To test your implementation:
    }
    ```
 
-3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
-4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][18].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][18].
 
 To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][10] package.
 
