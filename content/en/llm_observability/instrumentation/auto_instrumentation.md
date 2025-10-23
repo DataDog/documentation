@@ -109,6 +109,12 @@ The LangChain integration instruments the following methods:
 
   **Note**: For best results, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
 
+  ```python
+  # "translation_template" will be used to identify the template in Datadog
+  translation_template = PromptTemplate.from_template("Translate {text} to {language}")
+  chain = translation_template | llm
+  ```
+
 ## Amazon Bedrock
 
 The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Python SDK's chat model calls (using [Boto3][5]/[Botocore][6]).
