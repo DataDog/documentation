@@ -209,8 +209,6 @@ datadog:
   ...
   apm:
     portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
     peer_service_aggregation: true
   orchestratorExplorer:
     enabled: true
@@ -251,8 +249,6 @@ datadog:
         name: otel-http
   apm:
     portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
     peer_service_aggregation: true
   orchestratorExplorer:
     enabled: true
