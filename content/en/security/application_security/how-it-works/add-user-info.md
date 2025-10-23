@@ -283,6 +283,7 @@ from ddtrace.appsec.track_user_sdk import track_user
 
 # starting in dd-trace-py v3.17, you can use track_user_id
 # without login information, but user_id is required
+# this is the recommended API since it enables best product functionality with least room for mistakes
 track_user_id(
     "some_user_id",
     session_id="session_id",
