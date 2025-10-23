@@ -23,7 +23,7 @@ In Datadog RUM, a feature represents a major user-facing area of your applicatio
 
 For example, the checkout experience of an eCommerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After the SDK has been instrumented, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
 
-The table below describes additional sample use cases and operations by industry.
+The following table shows additional example features and their associated feature operations by industry.
 
 | Industry       | Feature  | Feature Operations                                                                                                               |
 |----------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
