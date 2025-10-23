@@ -591,7 +591,7 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 ### PR comments
 
 <div class="alert alert-warning">
-  PR comments are not supported in pull requests in public repositories or that are targeting a destination branch that is in a different repository from the source branch (i.e. forked repositories trying to merge into the main repository).
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (such as forked repositories trying to merge into the main repository).
 </div>
 
 {{< tabs >}}
