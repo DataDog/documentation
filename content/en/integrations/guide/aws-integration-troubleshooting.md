@@ -20,9 +20,9 @@ The `sts:Assumerole` permission error indicates an issue with the trust policy a
 
 **Note**: This error may persist in the Datadog UI for a few hours while the changes propagate.
 
-### Resolve All AWS permissions issues
-**Resolve All AWS Permissions Issues** in the AWS Integration tile allows you to use a CloudFormation QuickStart stack to update your IAM role and resolve missing permissions issues. 
-Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a CloudFormation stack that calls our public API [endpoint][13] and fetches the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches these to the integration role. It will also attach the `SecurityAudit` Managed AWS policy if it is not present.
+### Resolve all AWS permissions issues
+**Resolve all AWS permissions issues** in the AWS Integration tile allows you to use a CloudFormation QuickStart stack to update your IAM role and resolve missing permissions issues. 
+Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a CloudFormation stack that calls Datadog's public API [endpoint][13] and fetches the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches these to the integration role. It also attaches the `SecurityAudit` Managed AWS policy if it is not present.
 
 **Notes**:
 
@@ -39,7 +39,16 @@ Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a 
 
 There are two important distinctions to be aware of:
 
-1. Datadog displays raw data from AWS in per-second values, regardless of the time frame selected in AWS. This is why Datadog's value could appear lower.
+#### Time aggregation
+
+Datadog displays raw data from AWS in per-second values, regardless of the time frame selected in AWS. This is why Datadog's value could appear lower.
+
+To confirm if a metric discrepancy is due to time aggregation:
+
+1. Match the time frame in the [Datadog Metric Explorer][15] with the **Period** selected in the [CloudWatch Metric Explorer][16].
+2. Confirm that the tags 
+
+#### Space aggregation
 
 2. `min`, `max`, and `avg` have a different meaning within AWS than in Datadog. In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS CloudWatch, the average latency is received as a single timeseries per Elastic Load Balancer (ELB). Within Datadog, when you are selecting `min`, `max`, or `avg`, you are controlling how multiple timeseries are combined. For example, requesting `system.cpu.idle` without any filter returns one series for each host that reports that metric, and those series need to be combined to be graphed. If instead you requested `system.cpu.idle` from a single host, no aggregation is necessary and switching between average and max yields the same result.
 
@@ -123,3 +132,5 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py
 [13]: https://api.datadoghq.com/api/v2/integration/aws/iam_permissions
 [14]: https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions
+[15]: /metric/explorer
+[16]: https://console.aws.amazon.com/cloudwatch/#explorer
