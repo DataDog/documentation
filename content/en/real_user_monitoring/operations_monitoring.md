@@ -1,6 +1,6 @@
 ---
 title: Operations Monitoring
-description:  
+description: Monitor critical technical operations within user-facing features to identify exactly when and why users fail to complete key workflows.
 private: true
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -8,9 +8,8 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url=
- btn_hidden="false" header="Join the Preview!">}}
-Operations Monitoring is in Preview. Use this form to submit your request today.
+{{< callout url="" btn_hidden="true" header="Join the Preview!">}}
+Operations Monitoring is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -37,36 +36,14 @@ For example, the checkout experience of an eCommerce platform is a feature. With
 
 The client-side APIs to define operations are available in the following platforms:
 
-{{< tabs >}}
-{{% tab "Browser" %}}
-[6.20.0][1]
-
-[1]: https://github.com/DataDog/browser-sdk/releases/tag/v6.20.0
-{{% /tab %}}
-
-{{% tab "Android" %}}
-[3.1.0][1]
-
-[1]: https://github.com/DataDog/dd-sdk-android/releases/tag/3.1.0
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-[3.1.0][1]
-
-[1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/3.1.0
-{{% /tab %}}
-
-{{% tab "Kotlin Multiplatform" %}}
-
-[1.4.0][1]
-
-[1]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/releases/tag/1.4.0
-{{% /tab %}}
-{{< /tabs >}}
+- [Browser (6.20.0)][1]
+- [Android (3.1.0)][2]
+- [iOS (3.1.0)][3]
+- [Kotlin Multiplatform (1.4.0)][4]
 
 ### RUM without Limits
 
-Operations are only available to RUM without Limits customers.
+Operations are only available to [RUM without Limits][5] customers.
 
 ## Setup
 
@@ -222,18 +199,21 @@ reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .oth
 ### Parallelization
 You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startFeatureOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedFeatureOperation`.
 
-<div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with `@operation.failure_reason:timeout`. If an operation stop API was called that was not started in the first place, the stop event emitted by the SDK will be dropped upon ingestion.</div>
+<div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with <code>@operation.failure_reason:timeout</code>. <br><br> If an operation stop API was called that was not started in the first place, the stop event emitted by the SDK is dropped upon ingestion.</div>
 
 ## Monitor your availability on Datadog
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
 
-Datadog groups together all operations with the same name into a catalog. Each operation has two out-of-the-box metrics computed over your full, ingested, unsampled traffic:
+Datadog groups together all operations with the same name into a catalog. This catalog is listed under the **Operations** tab within RUM.
+
+Each operation has two out-of-the-box metrics computed over your full, ingested, unsampled traffic:
 
 - `rum.measure.operation`, which counts the volume of operations reported to Datadog
 - `rum.measure.operation.duration`, which measures the elapsed time between the start and end of all the operations reported to Datadog
 
 Both metrics are retained for 15 months, and include several dimensions:
+
 - `operation.name`, which is defined on the client side
 - `operation.status`, which is either a success or failure
 - `operation.failure_reason`, which can be an error, or abandoned, or timeout, or other
@@ -259,4 +239,8 @@ Similarly to metrics, those events come with specific attributes you can use in 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
+[1]: https://github.com/DataDog/browser-sdk/releases/tag/v6.20.0
+[2]: https://github.com/DataDog/dd-sdk-android/releases/tag/3.1.0
+[3]: https://github.com/DataDog/dd-sdk-ios/releases/tag/3.1.0
+[4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/releases/tag/1.4.0
+[5]: /real_user_monitoring/rum_without_limits/
