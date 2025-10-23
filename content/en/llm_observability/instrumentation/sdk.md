@@ -1854,7 +1854,7 @@ def answer_question(text):
 
 #### Example: LangChain prompt templates
 
-When using LangChain's prompt templating with auto-instrumentation, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
+When you use LangChain's prompt templating with auto-instrumentation, assign templates to variables with meaningful names. Auto-instrumentation uses these names to identify prompts.
 
 {{< code-block lang="python" >}}
 # "translation_template" will be used to identify the template in Datadog
