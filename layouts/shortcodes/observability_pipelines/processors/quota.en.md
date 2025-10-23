@@ -6,7 +6,7 @@ You can also use field-based partitioning, such as `service`, `env`, `status`. E
 
 ### Limits
 
-- Each pipeline can have up to 1000 buckets. If you need to increase the bucket limit, contact your account manager.
+- Each pipeline can have up to 1000 buckets. If you need to increase the bucket limit, [contact support][5005].
 - The quota processor is synchronized across all Workers in a Datadog organization. For the synchronization, there is a default rate limit of 50 Workers per organization. When there are more than 50 Workers for an organization:
     - The processor continues to run, but does not sync correctly with the other Workers, which can result in logs being sent after the quota limit has been reached.
     - The Worker prints `Failed to sync quota state` errors.
