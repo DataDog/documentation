@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use Observability Pipelines' Google Pub/Sub destination to publish logs to the Google Cloud Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
+Use Observability Pipelines' Google Pub/Sub destination to publish logs to the Google Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
 
 ### When to use this destination
 
@@ -145,47 +145,11 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 #### Component metrics
 
-Monitor the health of your Pub/Sub destination with the following key metrics:
-
-`pipelines.component_sent_events_total`
-: Events successfully delivered.
-
-`pipelines.component_discarded_events_total`
-: Events dropped.
-
-`pipelines.component_errors_total`
-: Errors in the destination component.
-
-`pipelines.component_sent_event_bytes_total`
-: Total event bytes sent.
-
-`pipelines.utilization`
-: Worker resource usage.
+{{% observability_pipelines/metrics/component %}}
 
 #### Buffer metrics (when buffering is enabled)
 
-Track buffer behavior with these additional metrics:
-
-`pipelines.buffer_events`
-: Number of events currently in the buffer.
-
-`pipelines.buffer_byte_size`
-: Current buffer size in bytes.
-
-`pipelines.buffer_received_events_total`
-: Total events added to the buffer.
-
-`pipelines.buffer_received_event_bytes_total`
-: Total bytes added to the buffer.
-
-`pipelines.buffer_sent_events_total`
-: Total events successfully flushed from the buffer.
-
-`pipelines.buffer_sent_event_bytes_total`
-: Total bytes successfully flushed from the buffer.
-
-`pipelines.buffer_discarded_events_total`
-: Events discarded from the buffer (for example, due to overflow).
+{{% observability_pipelines/metrics/buffer %}}
 
 ### Event batching
 

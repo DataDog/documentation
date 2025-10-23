@@ -37,7 +37,7 @@ If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2
 
 ### Add crash reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][3]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -482,7 +482,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
-[14]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry
+[14]: /real_user_monitoring/application_monitoring/mobile_vitals?tab=ios#telemetry
 [15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
 [16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [17]: /real_user_monitoring/explorer/search/#facets

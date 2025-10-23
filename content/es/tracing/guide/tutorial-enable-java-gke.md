@@ -176,7 +176,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
    De este modo, la aplicación se instrumenta automáticamente con servicios Datadog.
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-danger"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
 
 3. El [Etiquetado unificado de servicios][10] identifica servicios rastreados en diferentes versiones y entornos de despliegue, para que puedan correlacionarse en Datadog y puedas utilizarlos para buscar y filtrar. Las tres variables de entorno utilizadas para el etiquetado unificado de servicios son `DD_SERVICE`, `DD_ENV` y `DD_VERSION`. Para las aplicaciones desplegadas con Kubernetes, estas variables de entorno pueden añadirse en el archivo YAML de despliegue, específicamente para el objeto de despliegue, las especificaciones del pod y la plantilla del contenedor del pod.
 
@@ -380,7 +380,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que de
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Nuevamente, las marcas, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-danger"><strong>Nota</strong>: Nuevamente, las marcas, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
 
 3. Crea ambas aplicaciones y publícalas en GCR. Desde el directorio `docker`, ejecuta:
    {{< code-block lang="sh" >}}

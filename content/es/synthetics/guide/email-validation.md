@@ -8,6 +8,7 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
   text: Configurar opciones avanzadas en los pasos
+site_support_id: synthetics_email_validation
 title: Utiliza la validación de correo electrónico en los tests de navegador
 ---
 
@@ -24,7 +25,7 @@ Para añadir una variable de correo electrónico llamada `EMAIL`, sigue estos pa
 1. Haz clic en **Variables** y selecciona **Email** (Correo electrónico) en el menú desplegable.
 2. Haz clic en **Add Variable** (Añadir variable) para que puedas usar la variable cuando empieces a grabar. 
 
-{{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="Crear una variable de correo electrónico" video="true" width="100%">}}
+{{< img src="synthetics/guide/email-validation/adding-variable-email.mp4" alt="Crear una variable de email" video="true" width="100%">}}
 
 La variable de correo electrónico genera un buzón único de cuyo mantenimiento se encarga Datadog cada vez que se ejecuta el test, lo que permite que los tests de navegador se desarrollen sin ningún conflicto.
 
@@ -34,7 +35,7 @@ Cuando has creado la variable de correo electrónico, puedes [confirmar que el c
 
 Haz clic en **Start Recording** (Iniciar grabación) y graba todos los pasos que hacen que el correo se active con la variable de correo electrónico. Haz clic en el icono de la mano de una de las variables para introducir su valor en la entrada de texto de un formulario o un campo.
 
-{{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Grabar los pasos" video="true" width="100%">}}
+{{< img src="synthetics/guide/email-validation/record_steps_2.mp4" alt="Registrar tus pasos" video="true" width="100%">}}
 
 Después de haber grabado los pasos para completar el formulario, haz clic en el botón **Sign Up** (Registro) para activar una notificación por correo electrónico. Con ello, se envía un mensaje específico de la sesión de grabación al buzón de Datadog; por ejemplo, `838-n3q-q2y.6238933596@synthetics.dtdg.co`.
 
@@ -42,9 +43,9 @@ Después de haber grabado los pasos para completar el formulario, haz clic en el
 
 Para confirmar que se ha enviado el correo electrónico, haz clic en **Assertion** (Aserción) y selecciona **Test that an email was received** (Comprobar que se ha recibido un correo electrónico). Si quieres asegurarte de que el contenido del correo electrónico se adhiere a unas directrices concretas, puedes añadir más verificaciones que engloben el asunto y el cuerpo.
 
-{{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="Añadir una aserción" video="true" width="100%">}}
+{{< img src="synthetics/guide/email-validation/assertion-step_2.mp4" alt="Añadir una afirmación" video="true" width="100%">}}
 
-En este ejemplo, la aserción da buen resultado si el asunto es `Welcome to Shopist!`, si el cuerpo contiene `Your verification code is...` y si el código de verificación se ajusta a la expresión regular `\d{1,6}`.
+En este ejemplo, la aserción tiene éxito si el asunto del email contiene `Welcome to Shopist!`, el cuerpo contiene la frase `Your verification code is...` y el código de verificación coincide con el patrón de expresión regular `\d{1,6}`.
 
 ### Desplazarse por los enlaces de un correo electrónico
 

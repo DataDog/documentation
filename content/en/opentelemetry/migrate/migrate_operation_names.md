@@ -15,7 +15,7 @@ When using OpenTelemetry with Datadog, you might see unclear or lengthy operatio
 
 Datadog has introduced new logic for generating operation names for OpenTelemetry traces, controlled by the `enable_operation_and_resource_name_logic_v2` feature flag. This new logic improves trace visibility in service pages and standardizes operation naming according to the rules outlined below.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <strong>Breaking Change:</strong> When this new logic is active (either by opting-in or future default), it is a breaking change for monitors or dashboards that reference operation names based on the old conventions. You must update your monitors and dashboards to use the new naming conventions described in <a href="#new-mapping-logic">New mapping logic</a>. If you cannot update them yet, you can <a href="#disabling-the-new-logic-opt-out">opt out</a> .
 </div>
 

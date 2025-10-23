@@ -24,7 +24,7 @@ version: '1.0'
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">L'intégration Datadog/AWS Lambda X-Ray est uniquement prise en charge sur les comptes AWS commerciaux. Sans compte commercial, l'intégration Datadog/AWS Lambda X-Ray ne peut pas être utilisée sur le site gouvernemental de Datadog.</div>
+<div class="alert alert-danger">L'intégration Datadog/AWS Lambda X-Ray est uniquement prise en charge sur les comptes AWS commerciaux. Sans compte commercial, l'intégration Datadog/AWS Lambda X-Ray ne peut pas être utilisée sur le site gouvernemental de Datadog.</div>
 
 {{< /site-region >}}
 ## Présentation

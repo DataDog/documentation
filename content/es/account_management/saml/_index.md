@@ -4,6 +4,9 @@ algolia:
   - saml
 aliases:
 - /es/guides/saml
+description: Configura la autenticación SAML para Datadog con proveedores de identidad
+  como Active Directory, Auth0, Google, Okta y Microsoft Entra ID para un inicio de
+  sesión único seguro.
 further_reading:
 - link: /account_management/multi_organization/
   tag: Documentación
@@ -11,23 +14,23 @@ further_reading:
 title: Inicio de sesión único con SAML
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El sitio Datadog for Government sólo admite inicio de sesión SAML.</div>
+<div class="alert alert-danger">El sitio Datadog for Government solo admite el inicio de sesión SAML.</div>
 {{< /site-region >}}
 
 ## Información general
 
-La configuración de [SAML (Security Assertion Markup Language)][1] para tu cuenta de Datadog te permite a ti y a todos tus compañeros de equipo iniciar sesión en Datadog utilizando las credenciales almacenadas en Active Directory, LDAP u otro almacén de identidades de tu organización que se haya configurado con un proveedor de identidades SAML.
+La configuración de [SAML (Security Assertion Markup Language)][1] para tu cuenta Datadog te permite a ti y a todos tus compañeros de equipo iniciar sesión en Datadog utilizando las credenciales almacenadas en Active Directory, LDAP u otro almacén de identidades de tu organización que se haya configurado con un proveedor de identidades SAML.
 
 **Notas**: 
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-- Si no tienes SAML activado en tu cuenta de Datadog, ponte en contacto con [asistencia técnica][2] para activarlo.
-- Esta documentación asume que ya tienes un proveedor de identidad (IdP) SAML. Si no tienes un IdP SAML, hay varios IdP que tienen integraciones con Datadog, como [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], y [SafeNet][8].
-- La configuración de SAML requiere acceso al [Datadog Administrator][9].
+- Si no tienes SAML activado en tu cuenta de Datadog, ponte en contacto con el [servicio de asistencia][2] para activarlo.
+- Esta documentación asume que ya tienes un proveedor de identidad (IdP) SAML. Si no tienes un IdP SAML, hay varios IdP que tienen integraciones con Datadog como [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7] y [SafeNet][8].
+- La configuración de SAML requiere acceso a [Datadog Administrator][9].
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-- Esta documentación asume que ya tienes un proveedor de identidades (IdP) SAML. Si no tienes un IdP SAML, existen varios IdP que disponen de integración con Datadog, como [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7] y [SafeNet][8].
+- Esta documentación asume que ya tienes un proveedor de identidad (IdP) SAML. Si no tienes un IdP SAML, hay varios IdP que tienen integraciones con Datadog, como [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7] y [SafeNet][8].
 - La configuración de SAML requiere acceso a [Datadog Administrator][9].
 {{% /site-region %}}
 
@@ -43,36 +46,36 @@ La configuración de [SAML (Security Assertion Markup Language)][1] para tu cuen
     * [Okta][15]
     * [SafeNet][16]
 
-2. En la aplicación Datadog, sitúa el cursor sobre tu nombre de usuario en la esquina inferior izquierda y selecciona Configuración de la organización. Selecciona [Métodos de inicio de sesión][17] y haz clic en **Configurar** en SAML.
+2. En la aplicación Datadog, coloca el cursor sobre tu nombre de usuario en la esquina inferior izquierda y selecciona Organization Settings (Parámetros de la organización). Selecciona [Login Methods (Métodos de inicio de sesión)][17] y haz clic en **Configure** (Configurar) en SAML.
 
-3. 3. Carga los metadatos de IdP de tu proveedor de identidad SAML haciendo clic en el botón **Seleccionar archivo**. Después de elegir el archivo, haz clic en **Cargar archivo**.
+3. Carga los metadatos de IdP de tu proveedor de identidad SAML haciendo clic en el botón **Choose File** (Seleccionar archivo). Después de elegir el archivo, haz clic en **Upload File** (Cargar archivo).
 
 **Nota:** Los metadatos de IdP deben contener únicamente caracteres ASCII.
 
-4. Descarga los [metadatos del proveedor de servicios][18] de Datadog para configurar tu IdP de modo que reconozca a Datadog como proveedor de servicios.
+4. Descarga [metadatos del proveedor de servicios][18] de Datadog para configurar tu IdP de modo que reconozca a Datadog como proveedor de servicios.
 
-5. Después de cargar los metadatos del IdP y configurar tu IdP, activa SAML en Datadog haciendo clic en el botón **Cargar y activar**.
-    {{< img src="account_management/saml/saml_enable_cropped.png" alt="Configura SAML cargando los metadatos de tu IdP" >}}
+5. Después de cargar los metadatos IdP y configurar su IdP, active SAML en Datadog haciendo clic en el botón **Cargar y activar**.
+    {{< img src="account_management/saml/saml_enable_cropped.png" alt="Configurar SAML cargando los metadatos de tu IdP" >}}
 
-6. Después de cargar los metadatos del IdP, vuelva a la page (página) **Métodos de inicio de sesión** y activa SAML `on` en forma predeterminada. 
+6. Después de cargar los metadatos de IdP, vuelve a la página Login Methods (Métodos de inicio de sesión) y activa SAML `on` por defecto. 
 
 **Nota**: Para configurar SAML para varias organizaciones, consulta [Gestión de cuentas de varias organizaciones][21].
 
 ## Uso de SAML
 
-Una vez que SAML esté configurado en Datadog y que tu IdP esté configurado para aceptar solicitudes de Datadog, los usuarios pueden iniciar sesión.
+Una vez que SAML está configurado en Datadog y tu IdP está configurado para aceptar solicitudes de Datadog, los usuarios pueden acceder a log.
 
-### Sesión iniciada por el SP
+### Inicio de sesión por el PS
 
-Sesión iniciada por SP o iniciada por el proveedor de servicios significa sesión iniciada desde Datadog. Los usuarios inician sesión a través de la **URL de inicio de sesión única** mostrada en el cuadro de estado en la parte superior de la [Page (página) de configuración de SAML][19]. La **URL de inicio de sesión único** también se muestra en la [Page (página) del equipo][20]. Al cargar esta URL se inicia una autenticación SAML contra tu IdP. **Nota**: Esta URL sólo se muestra si SAML está habilitado para tu cuenta y está utilizando el inicio de sesión por el SP.
+Iniciado por el PS o por el Proveedor de servicio se refiere a un inicio de sesión iniciado desde Datadog. Los usuarios inician sesión a través de la **URL de inicio de sesión único** mostrada en el cuadro de estado en la parte superior de la [página Configuración de SAML][19]. La **URL de inicio de sesión único** también se muestra en la [página Equipo][20]. Al cargar esta URL se inicia una autenticación SAML con tu IdP. **Nota**: Esta URL solo se muestra si SAML está habilitado para tu cuenta y estás utilizando el inicio de sesión iniciado por el PS.
 
-{{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmación de que tu SAML está activado" >}}
+{{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmación de que SAML está habilitado" >}}
 
-Cuando un usuario inicia sesión a través de SAML iniciado por el SP y la organización no tiene un subdominio personalizado, Datadog requiere seguridad adicional. Los usuarios reciben un único código de verificación por correo electrónico que es necesario para iniciar sesión.
+Cuando un usuario inicia sesión a través de SAML iniciado por el PS y la organización no tiene un subdominio personalizado, Datadog requiere seguridad adicional. Los usuarios reciben un único código de verificación por correo electrónico que es necesario para iniciar la sesión.
 
-### Inicio de sesión con IdP
+### Inicio de sesión iniciado por el IdP
 
-Sesión iniciada por IdP iniciada por el proveedor de identidad significa iniciar sesión desde tu portal de aplicaciones. Los usuarios inician sesión haciendo clic en el icono de la aplicación en tu portal de aplicaciones, por ejemplo, en el cajón de aplicaciones de Google o en el portal de aplicaciones de Okta. Los usuarios que inician sesión por el SP también pueden utilizar el inicio de sesión por el IdP, en función de la configuración de tu proveedor de identidad.
+Iniciado por el IdP o por el Proveedor de identidad se refiere a un inicio de sesión iniciado desde tu portal de aplicaciones. Los usuarios inician sesión haciendo clic en el icono de la aplicación en tu portal de aplicaciones, por ejemplo, en el cajón de Google App o en el portal de aplicaciones de Okta. Los usuarios con inicio de sesión iniciado por el PS también pueden utilizar el inicio de sesión iniciado por el IdP, dependiendo de la configuración de su proveedor de identidad.
 
 ## Aserciones y atributos
 
@@ -80,7 +83,7 @@ Cuando se produce un inicio de sesión, el proveedor de identidad envía a Datad
 
 ### Capacidades
 
-* Datadog admite el enlace **HTTP-POST** para **SAML2**:
+* Datadog soporta el enlace **HTTP-POST** para **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 * Datadog especifica `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` para el formato del **NameIDPolicy** en solicitudes de aserción.
 
@@ -88,15 +91,15 @@ Cuando se produce un inicio de sesión, el proveedor de identidad envía a Datad
 
 * Las aserciones deben estar firmadas.
 * Las aserciones pueden estar cifradas, pero se aceptan aserciones sin cifrar.
-* Consulta [Metadatos del proveedor de servicios de Datadog][18] para obtener más información. Debes iniciar sesión en Datadog para acceder al archivo.
+* Consulta los [metadatos de proveedores de servicios de Datadog][18] para obtener más información. Debes iniciar sesión en Datadog para acceder al archivo.
 
-### Atributos admitidos
+### Atributos compatibles
 
-Se pueden incluir atributos en una aserción SAML. Datadog busca tres atributos en un `AttributeStatement`:
+Es posible incluir atributos en una aserción SAML. Datadog busca tres atributos en un `AttributeStatement`:
 
-  1. **eduPersonPrincipalName**: Si se especifica, el eduPersonPrincipalName debe corresponder al nombre de usuario de Datadog del usuario. El nombre de usuario suele ser la dirección de correo electrónico del usuario.
-  2. **sn**: Esto es opcional y debe configurar con el apellido del usuario.
-  3. **Nombre de pila**: Es opcional y debe ser el nombre del usuario.
+  1. **eduPersonPrincipalName**: Si se especifica, el eduPersonPrincipalName debe corresponder al nombre de usuario del usuario Datadog. El nombre de usuario suele ser la dirección de correo electrónico del usuario.
+  2. **sn**: Es opcional y debe configurarse con el apellido del usuario.
+  3. **givenName**: Es opcional y debe ser el nombre del usuario.
 
 <div class="alert alert-info">Para el IdP de Microsoft Entra ID, utiliza el atributo `surname` en lugar de `sn` en la aserción.</div>
 
@@ -130,23 +133,23 @@ Las siguientes funciones pueden activarse a través del [cuadro de diálogo de c
 
 Con el suministro JIT, un usuario se crea en Datadog la primera vez que intenta iniciar sesión. Esto elimina la necesidad de que los administradores creen manualmente las cuentas de usuario una a la vez. En este caso, no se envía el correo electrónico de invitación.
 
-Es posible que algunas organizaciones no deseen invitar a todos sus usuarios a Datadog. Si deseas realizar cambios en el funcionamiento de SAML para tu cuenta, ponte en contacto con el [soporte de Datadog][2]. Depende de la organización configurar que su IdP no envíe afirmaciones a Datadog si no desea que un usuario concreto acceda a Datadog.
+Es posible que algunas organizaciones no deseen invitar a todos sus usuarios a Datadog. Si deseas realizar cambios en el funcionamiento de SAML para tu cuenta, ponte en contacto con el [soporte de Datadog][2]. Depende de la organización configurar que su IdP no envíe aserciones a Datadog si no desea que un usuario concreto acceda a Datadog.
 
 Los administradores pueden establecer la función por defecto de los nuevos usuarios JIT. El rol por defecto es **Standard** (Estándar), pero puedes elegir añadir nuevos usuarios JIT como **Read-Only** (Solo lectura), **Administrators** (Administradores) o cualquier rol personalizado.
 
-<div class="alert alert-warning">
-  <strong>Importante:</strong> Si la asignación de roles está activada, tiene prioridad sobre los roles configurados durante el aprovisionamiento de JIT. Sin las sentencias de atributos de grupo adecuadas, los usuarios podrían quedarse sin roles and perder el acceso to Datadog. Para evitar que los usuarios queden bloqueados después del aprovisionamiento de JIT, asegúrate de revisar tus definiciones de asignación y check tus aserciones antes de activar las asignaciones y JIT.
+<div class="alert alert-danger">
+  <strong>Importante:</strong> Si Role Mapping está activado, tiene prioridad sobre los roles definidos durante el aprovisionamiento de JIT. Sin las sentencias de atributo de grupo adecuadas, los usuarios podrían quedarse sin roles y perder el acceso a Datadog. Para evitar que los usuarios queden bloqueados tras el aprovisionamiento de JIT, asegúrate de revisar las definiciones de asignación y comprobar las aserciones antes de habilitar tanto las asignaciones como JIT.
 </div>
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT predeterminado" style="width:50%;" >}}
 
 ### Inicio de sesión iniciado por IdP
 
-Cuando se carga la URL de Datadog, el navegador es redirigido al IdP del cliente donde el usuario introduce sus credenciales, después el IdP lo redirige de nuevo a Datadog. Algunos IdP tienen la capacidad de enviar una afirmación directamente a Datadog sin obtener primero una AuthnRequest (inicio de sesión iniciado por el IdP).
+Cuando se carga la URL de Datadog, el navegador es redirigido al IdP del cliente donde el usuario introduce sus credenciales, después el IdP lo redirige de nuevo a Datadog. Algunos IdP tienen la capacidad de enviar una aserción directamente a Datadog sin obtener primero una AuthnRequest (inicio de sesión iniciado por el IdP).
 
-Tras activar la función de inicio de sesión iniciado por el IdP y guardar tu configuración, puedes descargar la última versión de los metadatos del proveedor de servicio (SP) para tu proveedor de identidades. Tus nuevos metadatos SP contienen un endpoint `AssertionConsumerService` diferente y específico de la organización al que enviar las afirmaciones.
+Tras activar la función de inicio de sesión iniciado por el IdP y guardar tu configuración, puedes descargar la última versión de los metadatos del proveedor de servicio (SP) para tu proveedor de identidades. Tus nuevos metadatos SP contienen un endpoint `AssertionConsumerService` diferente y específico de la organización al que enviar aserciones.
 
-Si no utilizas los metadatos del SP actualizados, Datadog no podrá asociar la afirmación con tu organización y mostrará una página de error con el mensaje de que a la respuesta SAML le falta el atributo "InResponseTo".
+Si no utilizas los metadatos del SP actualizados, Datadog no podrá asociar la aserción con tu organización y mostrará una página de error con el mensaje de que a la respuesta SAML le falta el atributo "InResponseTo".
 
 ### SAML estricto
 

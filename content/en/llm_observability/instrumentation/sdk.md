@@ -9,6 +9,9 @@ aliases:
     - /llm_observability/setup/sdk/java
     - /llm_observability/sdk/java
     - /llm_observability/sdk/
+    - /llm_observability/instrumentation/custom_instrumentation
+    - /tracing/llm_observability/trace_an_llm_application
+    - /llm_observability/setup
 ---
 
 ## Overview
@@ -1180,6 +1183,68 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{% /tab %}}
 {{< /tabs >}}
 
+## Nesting spans
+
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def extract_data(document):
+    preprocess_document(document)
+    ... # performs data extraction on the document
+    return
+
+@task
+def preprocess_document(document):
+    ... # preprocesses a document for data extraction
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function preprocessDocument (document) {
+  ... // preprocesses a document for data extraction
+  return
+}
+preprocessDocument = llmobs.wrap({ kind: 'task' }, preprocessDocument)
+
+function extractData (document) {
+  preprocessDocument(document)
+  ... // performs data extraction on the document
+  return
+}
+extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+
+public class MyJavaClass {
+  public void preprocessDocument(String document) {
+  LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
+   ...   // preprocess document for data extraction
+   taskSpan.annotateIO(...); // record the input and output
+   taskSpan.finish();
+  }
+
+  public String extractData(String document) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("extractData", null, "session-141");
+    preprocessDocument(document);
+    ... // perform data extraction on the document
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+  }
+}
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Tracking user sessions
 
@@ -1675,7 +1740,7 @@ public class MyJavaClass {
 {{< tabs >}}
 {{% tab "Python" %}}
 
-The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
+The SDK's `LLMObs.annotation_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
 
 The `LLMObs.annotation_context()` method accepts the following arguments:
 
@@ -1691,7 +1756,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1723,11 +1788,49 @@ def rag_workflow(user_question):
 
 {{< /code-block >}}
 
-[1]: /getting_started/tagging/
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+The SDK's `llmobs.annotationContext()` accepts a callback function that can be used to modify all auto-instrumented spans started while inside the scope of the callback function.
+
+The `llmobs.annotationContext()` method accepts the following options on the first argument:
+
+{{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+
+`name`
+: optional - _str_
+<br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
+
+`tags`
+: optional - _object_
+<br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+function ragWorkflow(userQuestion) {
+    const contextStr = retrieveDocuments(userQuestion).join(" ");
+
+    const completion = await llmobs.annotationContext({
+      tags: {
+        retrieval_strategy: "semantic_similarity"
+      },
+      name: "augmented_generation"
+    }, async () => {
+      const completion = await openai_client.chat.completions.create(...);
+      return completion.choices[0].message.content;
+    });
+}
+
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 ## Evaluations
@@ -2095,6 +2198,32 @@ function redactProcessor(span) {
 }
 
 llmobs.registerProcessor(redactProcessor)
+{{< /code-block >}}
+
+### Example: conditional modification with auto-instrumentation
+
+When using auto instrumentation, the span is not always contextually accessible. To conditionally modify the inputs and outputs on auto-instrumented spans, `llmobs.annotationContext()` can be used in addition to a span processor.
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+function redactProcessor(span) {
+  if (span.getTag("no_input") == "true") {
+    for (const message of span.input) {
+      message.content = "";
+    }
+  }
+
+  return span;
+}
+
+llmobs.registerProcessor(redactProcessor);
+
+async function callOpenai() {
+  await llmobs.annotationContext({ tags: { no_input: "true" } }, async () => {
+    // make call to openai
+  });
+}
 {{< /code-block >}}
 
 ### Example: preventing spans from being emitted
