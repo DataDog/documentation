@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs
 description: 'Manually instrument your Node.js application to send custom traces to Datadog.'
 code_lang: dd-api
-code_lang_weight: 1
+code_lang_weight: 2
 type: multi-code-lang
 further_reading:
     - link: "/tracing/trace_collection/trace_context_propagation/"

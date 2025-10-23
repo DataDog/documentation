@@ -188,6 +188,7 @@ Wall Time
 
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
 
 [1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
