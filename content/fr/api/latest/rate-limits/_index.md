@@ -1,6 +1,6 @@
 ---
 title: Limites de débit
-type: documentation
+type: api
 ---
 
 {{< h2 >}}Limites de débit{{< /h2 >}}
@@ -170,19 +170,19 @@ Requêtes par nom de limite de débit
 : Créez un graphique représentant la somme de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` et `datadog.apis.usage.per_api_key` par `limit_name`<br /><br />
   **Exemple :** `default_zero(sum:datadog.apis.usage.per_org{*} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_user{*} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_api_key{*} by {limit_name})`
 
-Bloquées par nom de limite de débit 
+Bloquées par nom de limite de débit
 : Créez un graphique représentant la somme de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` et `datadog.apis.usage.per_api_key` par `limit_name` avec `rate_limit_status:blocked`<br /><br />
   **Exemple :** `default_zero(sum:datadog.apis.usage.per_org{rate_limit_status:blocked} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_user{rate_limit_status:blocked} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_api_key{rate_limit_status:blocked} by {limit_name})`
 
-Endpoint bloqué par utilisateur 
+Endpoint bloqué par utilisateur
 : Créez un graphique représentant la somme de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` et `datadog.apis.usage.per_api_key` par `user_uuid` avec `rate_limit_status:blocked` et `limit_name:example`<br /><br />
   **Exemple :** `default_zero(sum:datadog.apis.usage.per_org{rate_limit_status:blocked,limit_name:example} by {user_uuid}) + default_zero(sum:datadog.apis.usage.per_user{rate_limit_status:blocked,limit_name:example} by {user_uuid}) + default_zero(sum:datadog.apis.usage.per_api_key{rate_limit_status:blocked,limit_name:example} by {user_uuid})`
 
-Endpoint bloqué par ID de clé d'application 
+Endpoint bloqué par ID de clé d'application
 : Créez un graphique représentant la somme de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` et `datadog.apis.usage.per_api_key` par `app_key_id` avec `rate_limit_status:blocked` et `limit_name:example`<br /><br />
   **Exemple :** `default_zero(sum:datadog.apis.usage.per_org{rate_limit_status:blocked,limit_name:example} by {app_key_id}) + default_zero(sum:datadog.apis.usage.per_user{rate_limit_status:blocked,limit_name:example} by {app_key_id}) + default_zero(sum:datadog.apis.usage.per_api_key{rate_limit_status:blocked,limit_name:example} by {app_key_id})`
 
-Ratio des limites de débit utilisées par nom de limite 
+Ratio des limites de débit utilisées par nom de limite
 : Créez un graphique représentant la somme de `datadog.apis.usage.per_org_ratio`, `datadog.apis.usage.per_user_ratio` et `datadog.apis.usage.per_api_key_ratio` par `limit_name`<br /><br />
   **Exemple :** `default_zero(max:datadog.apis.usage.per_org_ratio{*} by {limit_name}) + default_zero(max:datadog.apis.usage.per_user_ratio{*} by {limit_name}) + default_zero(max:datadog.apis.usage.per_api_key_ratio{*} by {limit_name})`
 
