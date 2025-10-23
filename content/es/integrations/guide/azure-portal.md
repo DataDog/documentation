@@ -15,7 +15,7 @@ title: Gestión de la integración nativa de Azure
 ---
 
 <div class="alert alert-danger">
-  Esta guía es para la gestión de la integración nativa de Azure con el recurso de Datadog.
+  Esta guía sirve para gestionar la integración nativa de Azure con el recurso Datadog.
 </div>
 
 Esta guía es para gestionar la integración entre Azure y Datadog en el portal de Azure mediante el recurso de Datadog. El recurso de Datadog en Azure representa la conexión entre tu organización de Datadog y tu entorno de Azure. Puedes configurar un recurso de Datadog para vincular tantas suscripciones como desees monitorizar. [Crea un recurso de Datadog][1] en Azure antes de continuar con esta guía.
@@ -270,7 +270,6 @@ Para instalar la [extensión de Datadog][6], selecciona la aplicación adecuada 
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
-- `DD_LOGS_INJECTION:true`
 
 Azure muestra el estado `Installing` hasta que el Agent esté instalado y aprovisionado. Una vez instalado el Datadog Agent, el estado cambia a `Installed`.
 
@@ -280,7 +279,7 @@ Azure muestra el estado `Installing` hasta que el Agent esté instalado y aprovi
 
 Para desinstalar la extensión de Datadog, selecciona la aplicación correspondiente y haz clic en **Uninstall Extension**.
 
-## Parámetros
+## Configuración
 ### Inicio de sesión único
 
 Selecciona **Single sign-on** en la barra lateral izquierda para volver a configurar el inicio de sesión único.
@@ -299,7 +298,7 @@ El portal de Azure ofrece una vista de solo lectura de las claves de API. Para g
 
 La integración de Azure de Datadog te permite instalar el Datadog Agent en una máquina virtual o un servicio de aplicaciones. Si no se selecciona ninguna clave predeterminada, se produce un error en la instalación del Datadog Agent.
 
-### Errores de configuración de Cloud Security
+### Cloud Security Misconfigurations
 
 Selecciona `Cloud Security Posture Management` en la barra lateral izquierda para configurar [Errores de configuración de Cloud Security][8].
 
@@ -309,7 +308,7 @@ Para deshabilitarlo, desmarca la casilla y haz clic en **Save**.
 
 {{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="La página Azure Portal con Cloud Security Posture Management seleccionado en la pestaña Settings" responsive="true" style="width:100%;">}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

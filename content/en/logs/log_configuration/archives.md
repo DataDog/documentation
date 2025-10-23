@@ -200,7 +200,7 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 
 ### Route your logs to a bucket
 
-Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
+Navigate to the [Log Archiving & Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
 
 **Notes:**
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.

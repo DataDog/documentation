@@ -3,6 +3,8 @@ aliases:
 - /es/integrations/faq/gathering-kubernetes-events
 - /es/agent/kubernetes/event_collection
 - /es/agent/kubernetes/configuration
+description: Opciones de configuración adicionales para APM, logs, procesos, eventos
+  y otras funciones después de instalar el Datadog Agent
 title: Configurar mejor el Datadog Agent en Kubernetes
 ---
 

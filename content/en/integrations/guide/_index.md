@@ -72,6 +72,10 @@ cascade:
     {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}Google Cloud Metric Discrepancy{{< /nextlink >}}
 {{< /header-list >}}
 
+{{< header-list header="OCI guides" >}}
+    {{< nextlink href="integrations/guide/oci-integration-troubleshooting" tag=" oci" >}}OCI Integration Troubleshooting{{< /nextlink >}}
+{{< /header-list >}}
+
 {{< header-list header="JMX guides" >}}
     {{< nextlink href="integrations/guide/running-jmx-commands-in-windows" tag=" jmx" >}}Running JMX commands in Windows{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Collecting composite-type JMX attributes{{< /nextlink >}}
