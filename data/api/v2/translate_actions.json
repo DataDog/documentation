@@ -2863,6 +2863,18 @@
     "request_description": "",
     "request_schema_description": "The request for a spans list."
   },
+  "CreateSCAResult": {
+    "description": "Post dependencies for analysis",
+    "summary": "Post dependencies for analysis",
+    "request_description": "",
+    "request_schema_description": "The definition of `ScaRequest` object."
+  },
+  "CreateSCAResolveVulnerableSymbols": {
+    "description": "Post vulnerable symbols",
+    "summary": "POST request to resolve vulnerable symbols",
+    "request_description": "",
+    "request_schema_description": "The definition of `ResolveVulnerableSymbolsRequest` object."
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"

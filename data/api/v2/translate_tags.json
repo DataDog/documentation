@@ -295,6 +295,10 @@
     "name": "Spans Metrics",
     "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
   },
+  "static-analysis": {
+    "name": "Static Analysis",
+    "description": "API for static analysis"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
