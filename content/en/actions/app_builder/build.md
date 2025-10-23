@@ -40,7 +40,7 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
-### Start with AI
+### Build an app with AI
 
 You can use Bits AI to create an app. To get started:
 1. From [App Builder][1], click **New App**.
