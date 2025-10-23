@@ -255,7 +255,7 @@ const config = new DdSdkReactNativeConfiguration(
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [**Error Tracking**][18].
 
 ### Step 4 - Get deobfuscated stack traces
 To symbolicate your stack traces, manually upload your native debug symbols and source maps into Datadog.
