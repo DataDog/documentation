@@ -7470,6 +7470,18 @@ menu:
           - UpdateIssueAssignee
         unstable: []
         order: 4
+    - name: Remove the assignee of an issue
+      url: '#remove-the-assignee-of-an-issue'
+      identifier: error-tracking-remove-the-assignee-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIssueAssignee
+        unstable: []
+        order: 5
     - name: Get the details of an error tracking issue
       url: '#get-the-details-of-an-error-tracking-issue'
       identifier: error-tracking-get-the-details-of-an-error-tracking-issue

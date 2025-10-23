@@ -17,7 +17,7 @@ algolia:
   tags: ['software catalog']
 ---
 
-{{< img src="tracing/software_catalog/software-catalog-landing-vid.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/software-catalog-landing-page.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 

@@ -122,6 +122,15 @@ paths:
 - path/to/service/code/**
 {{< /code-block >}}
 
+### Link results to teams
+Datadog associates scan results with the team attached to a service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team `myservice` will be associated to any violation
+detected in this file.
+
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
+
+**Note**: You must [accurately map][15] your Git provider teams to your [Datadog teams][14] for this feature to function properly.
+
 ## Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
@@ -181,3 +190,6 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [11]: /getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
 [13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
+[14]: /account_management/teams/
+[15]: /integrations/github/#connect-github-teams-to-datadog-teams
+
