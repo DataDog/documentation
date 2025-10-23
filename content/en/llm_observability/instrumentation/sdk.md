@@ -1850,6 +1850,15 @@ def answer_question(text):
     return completion
 {{< /code-block >}}
 
+#### Example: LangChain prompt templates
+
+When using LangChain's prompt templating with auto-instrumentation, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
+
+{{< code-block lang="python" >}}
+# "translation_template" will be used to identify the template in Datadog
+translation_template = PromptTemplate.from_template("Translate {text} to {language}")
+chain = translation_template | llm
+{{< /code-block >}}
 
 #### Notes
 - Annotating a prompt is only available on LLM spans.
