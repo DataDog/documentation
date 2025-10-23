@@ -18,8 +18,12 @@ Operations Monitoring is in Preview.
 
 In Datadog RUM, a feature represents a major user-facing area of your application like checkout, login, or search. Each feature includes operations, which are the critical technical steps that make the experience work. 
 
-- **Business teams** use features to track and improve user conversion.
-- **Engineering teams** use operations to monitor and minimize technical failures that impact key user moments. 
+- Business teams use **features** to track and improve user conversion.
+- Engineering teams use **operations** to monitor and minimize technical failures that impact key user moments. 
+
+For example, the checkout experience of an eCommerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After the SDK has been instrumented, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
+
+The table below describes additional sample use cases and operations by industry.
 
 | Industry       | Feature  | Feature Operations                                                                                                               |
 |----------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
@@ -27,8 +31,6 @@ In Datadog RUM, a feature represents a major user-facing area of your applicatio
 | E-Commerce     | Checkout | Users can enter payment details <br> Users can save their payment method <br> Users can pay                                      |
 | Streaming      | Search   | Users can find results for their search <br> Users can load the description of a title <br> Users can start watching the trailer |
 | CRM            | Quote    | Users can start a new quote <br> Users can add line items to the quote <br> Users can send a quote to recipients                 |
-
-For example, the checkout experience of an eCommerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After the SDK has been instrumented, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
 
 ## Prerequisites
 
