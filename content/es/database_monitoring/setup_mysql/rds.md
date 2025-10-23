@@ -14,7 +14,7 @@ title: Configuración de la monitorización de bases de datos para MySQL gestion
 
 La monitorización de bases de datos proporciona una amplia visibilidad de tus bases de datos MySQL mediante la exposición de métricas de consultas, ejemplos de consultas, planes de explicación, datos de conexión, métricas de sistemas y telemetría para el motor de almacenamiento InnoDB.
 
-El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de sólo lectura. Realiza la siguiente configuración para habilitar la monitorización de bases de datos con tu base de datos MySQL:
+El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de solo lectura. Realiza la siguiente configuración para habilitar la monitorización de bases de datos con tu base de datos MySQL:
 
 1. [Configura la integración AWS](#configure-the-aws-integration).
 1. [Configura parámetros de bases de datos](#configure-mysql-settings).
@@ -77,9 +77,9 @@ Configura lo siguiente en el [grupo de parámetros de base de datos][3] y luego 
 
 ## Conceder acceso al Agent
 
-El Datadog Agent requiere acceso de sólo lectura a la base de datos para poder recopilar estadísticas y realizar consultas.
+El Datadog Agent requiere acceso de solo lectura a la base de datos para poder recopilar estadísticas y realizar consultas.
 
-Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host que utilice `datadog@'%'`. Puedes restringir al usuario `datadog` para que sólo pueda iniciar sesión desde el host local utilizando `datadog@'localhost'`. Para obtener más información, consulta la [documentación de MySQL][4].
+Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host que utilice `datadog@'%'`. Puedes restringir al usuario `datadog` para que solo pueda iniciar sesión desde el host local utilizando `datadog@'localhost'`. Para obtener más información, consulta la [documentación de MySQL][4].
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 5.7" %}}
@@ -175,7 +175,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ## Instala y configura el Agent
 
-Para monitorizar hosts de RDS, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, sólo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][5].
+Para monitorizar hosts de RDS, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, solo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][5].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -192,13 +192,14 @@ init_config:
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
-    port: 3306
+    port: <PORT>
     username: datadog
     password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+      region: <AWS_REGION>
 ```
 
 [Reinicia el Agent][3] para empezar a enviar métricas de MySQL a Datadog.
@@ -220,7 +221,7 @@ Ponte en marcha rápidamente con el siguiente comando para ejecutar el Agent des
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.1
+export DD_AGENT_VERSION=<AGENT_VERSION>
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -229,9 +230,13 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
     "host": "<AWS_INSTANCE_ENDPOINT>",
-    "port": 3306,
+    "port": <PORT>,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "aws": {
+      "instance_endpoint": "<AWS_INSTANCE_ENDPOINT>",
+      "region": "<AWS_REGION>"
+    }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
@@ -241,11 +246,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Las etiquetas también pueden especificarse en un `Dockerfile`, por lo que puedes crear y desplegar un Agent personalizado sin cambiar la configuración de tu infraestructura:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.1
+FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": <PORT>,"username": "datadog","password": "ENC[datadog_user_database_password]", "aws": {"instance_endpoint": "<AWS_INSTANCE_ENDPOINT>", "region": "<AWS_REGION>"}}]'
 ```
 
 [1]: /es/agent/docker/integrations/?tab=docker
@@ -256,11 +261,62 @@ Si tienes un clúster Kubernetes, utiliza el [Datadog Cluster Agent][1] para la 
 
 Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
 
+### Operator
+
+Utilizando como referencia las [Instrucciones para operadores en Kubernetes e integraciones][3], sigue los pasos que se indican a continuación para configurar la integración de MySQL:
+
+1. Cree o actualice el archivo `datadog-agent.yaml` con la siguiente configuración:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              mysql.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <AWS_INSTANCE_ENDPOINT>
+                  port: <PORT>
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  dbm: true
+                  aws:
+                    instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+                    region: <AWS_REGION>
+    ```
+
+2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
+
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
-
-1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
+1. Complete las [instrucciones de instalación del Datadog Agent][4] para Helm.
 2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
     ```yaml
     clusterAgent:
@@ -270,16 +326,20 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
           init_config:
           instances:
             - dbm: true
-              host: <INSTANCE_ADDRESS>
-              port: 3306
+              host: <AWS_INSTANCE_ENDPOINT>
+              port: <PORT>
               username: datadog
               password: 'ENC[datadog_user_database_password]'
+              aws:
+                instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+                region: <AWS_REGION>
 
     clusterChecksRunner:
       enabled: true
     ```
 
 3. Despliega el Agent con el archivo de configuración anterior desde la línea de comandos:
+
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
@@ -287,10 +347,6 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
 <div class="alert alert-info">
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /es/getting_started/site
-[3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
 ### Configuración con archivos integrados
 
@@ -302,14 +358,17 @@ init_config:
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
-    port: 3306
+    port: <PORT>
     username: datadog
     password: 'ENC[datadog_user_database_password]'
+    aws:
+      instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+      region: <AWS_REGION>
 ```
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio utilizando la siguiente sintaxis:
 
 
 ```yaml
@@ -328,24 +387,34 @@ metadata:
         {
           "dbm": true,
           "host": "<AWS_INSTANCE_ENDPOINT>",
-          "port": 3306,
+          "port": <PORT>,
           "username": "datadog",
-          "password": "ENC[datadog_user_database_password]"
+          "password": "ENC[datadog_user_database_password]",
+          "aws": {
+            "instance_endpoint": "<AWS_INSTANCE_ENDPOINT>",
+            "region": "<AWS_REGION>"
+          }
         }
       ]
 spec:
   ports:
-  - port: 3306
+  - port: <PORT>
     protocol: TCP
-    targetPort: 3306
+    targetPort: <PORT>
     name: mysql
 ```
 
 El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de SQL Server.
 
-[1]: /es/agent/cluster_agent
-[2]: /es/agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
+Para evitar exponer la contraseña del usuario de `datadog` en texto plano, utilice el [paquete de gestión de secretos][6] de Agent y declare la contraseña utilizando la sintaxis de `ENC[]`.
+
+[1]: /es/containers/cluster_agent/setup/
+[2]: /es/containers/cluster_agent/clusterchecks/
+[3]: /es/containers/kubernetes/integrations/?tab=datadogoperator
+[4]: /es/containers/kubernetes/integrations/?tab=helm
+[5]: /es/containers/kubernetes/integrations/?tab=annotations#configuration
+[6]: /es/agent/configuration/secrets-management
+
 {{% /tab %}}
 {{< /tabs >}}
 

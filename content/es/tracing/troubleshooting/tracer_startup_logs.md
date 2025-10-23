@@ -1,4 +1,6 @@
 ---
+description: Configura y analiza los logs de inicio del rastreador para solucionar
+  problemas de configuración y conectividad del Agent.
 further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: Documentación
@@ -20,7 +22,7 @@ Si no ves logs en absoluto, asegúrate de que tus logs de aplicación no están 
 {{< programming-lang-wrapper langs="java,.NET,php,go,nodejs,python,ruby,cpp" >}}
 {{< programming-lang lang="java" >}}
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 ```text
 {"os_name":"Mac OS X","os_version":"10.15.4","architecture":"x86_64","lang":"jvm","lang_version":"11.0.6","jvm_vendor":"AdoptOpenJDK","jvm_version":"11.0.6+10","java_class_version":"55.0","enabled":true,"service":"unnamed-java-app","agent_url":"http://localhost:8126","agent_error":false,"debug":false,"analytics_enabled":false,"sampling_rules":[{},{}],"priority_sampling_enabled":true,"logs_correlation_enabled":false,"profiling_enabled":false,"dd_version":"null","health_checks_enabled":false,"configuration_file":"no config file present","runtime_id":"b69deb26-8bc3-4c00-8952-d42bf8c2123b"}
@@ -43,18 +45,18 @@ Los archivos de log se guardan por defecto en los siguientes directorios. Utiliz
 |------------------------------------------------------|--------------------------------------------------|
 | Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
 | Linux                                                | `/var/log/datadog/dotnet/`                       |
-| Linux (cuando se utiliza la [inyección de la librería de Kubernetes][1]) | `/datadog-lib/logs`                              |
+| Linux (cuando se utiliza la [inyección de la biblioteca de Kubernetes][1]) | `/datadog-lib/logs`                              |
 | Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Nota:** En Linux, debes crear el directorio de logs antes de activar el modo de depuración.
 
-Desde la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de registro actual al iniciarse. El rastreador borra archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `32`.
+A partir de la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de generación de logs actual al iniciarse. El rastreador elimina archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `32`.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contiene los logs de configuración.
 
 - `dotnet-tracer-native-{processName}-{processID}.log` contiene los logs de diagnóstico, si se genera alguno.
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 ```text
 2020-06-29 12:26:39.572 +02:00 [INF] DATADOG TRACER CONFIGURATION -
@@ -124,7 +126,7 @@ ddtrace.disable => Off => Off
 ...
 ```
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 Si el rastreador está en [modo DEBUG][1] (depuración), los logs de inicio aparecerán en `error_log` una vez por proceso en la primera solicitud.
 
@@ -153,7 +155,7 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 ```text
 2020/07/09 15:57:07 Datadog Tracer v1.26.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2020-07-09T15:57:07-05:00","os_name":"darwin","os_version":"10.15.4","version":"v1.26.0","lang":"Go","lang_version":"go1.14.2","env":"","service":"splittest2","agent_url":"http://127.0.0.1:8126/v0.4/traces","agent_error":"","debug":true,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","tags":{"runtime-id":"d269781c-b1bf-4d7b-9a55-a8174930554f"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"dd_version":"","architecture":"amd64","global_service":""}
@@ -175,7 +177,7 @@ El rastreador de Go imprime una de las dos líneas de diagnóstico posibles, una
 
 Los logs de inicio están desactivados por defecto a partir de la versión 2.x del rastreador. Pueden activarse utilizando la variable de entorno `DD_TRACE_STARTUP_LOGS=true`.
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 ```text
 [2020-07-02 14:51:16.421] [INFO] app - host:port==localhost:9080
@@ -208,7 +210,7 @@ Para ver los logs de inicio del rastreador, añade un registrador, o establece `
 
 Para ver las opciones de registro en un archivo con `DD_TRACE_LOG_FILE`, lee [Logs de depuración del rastreador][1].
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 ```text
 2020-07-09 11:04:08,098 INFO [ddtrace.tracer] [tracer.py:338] - - DATADOG TRACER CONFIGURATION - {"date": "2020-07-09T15:04:08.092797", "os_name": "Darwin", "os_version": "19.5.0", "is_64_bit": true, "architecture": "64bit", "vm": "CPython", "version": "0.38.1.dev79+gd22e2972.d20200707", "lang": "python", "lang_version": "3.7.6", "pip_version": "20.0.2", "in_virtual_env": true, "agent_url": "http://localhost:1234", "agent_error": "Agent not reachable. Exception raised: [Errno 61] Connection refused", "env": "", "is_global_tracer": true, "enabled_env_setting": null, "tracer_enabled": true, "sampler_type": "DatadogSampler", "priority_sampler_type": "RateByServiceSampler", "service": "", "debug": true, "enabled_cli": true, "analytics_enabled": false, "log_injection_enabled": false, "health_metrics_enabled": false, "dd_version": "", "priority_sampling_enabled": true, "global_tags": "", "tracer_tags": "", "integrations": {"asyncio": "N/A", "boto": "N/A", "botocore": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.15.32", "module_imported": false, "config": "N/A"}, "bottle": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "0.12.18", "module_imported": false, "config": null}, "cassandra": "N/A", "celery": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "4.2.2", "module_imported": false, "config": "N/A"}, "consul": "N/A", "django": "N/A", "elasticsearch": "N/A", "algoliasearch": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.2.0", "module_imported": false, "config": "N/A"}, "futures": "N/A", "grpc": "N/A", "mongoengine": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.19.1", "module_imported": false, "config": "N/A"}, "mysql": "N/A", "mysqldb": "N/A", "pymysql": "N/A", "psycopg": "N/A", "pylibmc": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.6.1", "module_imported": false, "config": "N/A"}, "pymemcache": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.4.4", "module_imported": false, "config": "N/A"}, "pymongo": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.10.1", "module_imported": false, "config": "N/A"}, "redis": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.5.3", "module_imported": false, "config": "N/A"}, "rediscluster": "N/A", "requests": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.23.0", "module_imported": false, "config": "N/A"}, "sqlalchemy": "N/A", "sqlite3": "N/A", "aiohttp": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.6.2", "module_imported": false, "config": "N/A"}, "aiopg": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.15.0", "module_imported": false, "config": "N/A"}, "aiobotocore": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.0.1", "module_imported": false, "config": null}, "httplib": "N/A", "vertica": "N/A", "molten": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.7.4", "module_imported": false, "config": "N/A"}, "jinja2": "N/A", "mako": "N/A", "flask": "N/A", "kombu": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "4.3.0", "module_imported": false, "config": null}, "falcon": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.4.1", "module_imported": false, "config": null}, "pylons": "N/A", "pyramid": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.10.4", "module_imported": false, "config": null}, "logging": "N/A"}}
@@ -251,7 +253,7 @@ export DD_TRACE_STARTUP_LOGS=true
 
 Cuando se activan los logs de inicio, el rastreador emite información de configuración y diagnóstico.
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 El rastreador Ruby imprime una línea de configuración para cada producto (por ejemplo, Profiling, Core y Tracing).
 
@@ -274,7 +276,7 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR -
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**Configuration:**
+**Configuration:** (Configuración)
 
 ```text
 {"agent_url":"http://localhost:8126","analytics_enabled":false,"analytics_sample_rate":null,"date":"2020-07-03T00:44:37+0000","dd_version":"","enabled":true,"env":"test-env","lang":"cpp","lang_version":"201402","operation_name_override":"","report_hostname":false,"sampling_rules":"[{\"sample_rate\": 1.0}]","service":"service_name","tags":{},"version":"v1.2.0"}
@@ -305,7 +307,7 @@ Si una integración que estás utilizando no es compatible, o deseas un análisi
 
 Para cada lenguaje, puedes desactivar los logs de inicio configurando la variable de entorno `DD_TRACE_STARTUP_LOGS=false`, pero hazlo solo si los logs emitidos plantean un problema. Si más tarde envías logs de [depuración][8], recuerda habilitar los logs de inicio y enviar todos los logs relevantes juntos para acelerar el análisis de tu caso de soporte.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
