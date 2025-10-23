@@ -212,7 +212,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```
@@ -222,7 +222,7 @@ reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .oth
 ### Parallelization
 You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startFeatureOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedFeatureOperation`.
 
-<div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with `@operation.failure_reason:timeout`. If an operation stop API was called that was not started in the first place, the stop event emitted by the SDK will be dropped upon ingestion.</div>
+<div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with `@operation.failure_reason:timeout`. If an operation ended without having started in the first place, the stop event emitted by the SDK will be dropped upon ingestion.</div>
 
 ## Monitor your availability on Datadog
 
