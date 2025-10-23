@@ -186,7 +186,7 @@ instances:
 
 ### With an IPv4 address
 
-Supabase instances on the Pro plan or above support IPv4 addresses as an [add-on][https://supabase.com/docs/guides/platform/ipv4-address].
+Supabase instances on the Pro plan or above support IPv4 addresses as an [add-on](17).
 
 Go to your Supabase account, click the Connect button on the top bar of the page and select Direct connection as the connection method. Click view parameters and copy them into your Agent configuration file:
 
@@ -242,3 +242,4 @@ If you have installed and configured the integrations and Agent as described and
 [14]: https://app.datadoghq.com/databases
 [15]: /database_monitoring/troubleshooting/?tab=postgres
 [16]: /agent/configuration/agent-commands/#restart-the-agent
+[17]: https://supabase.com/docs/guides/platform/ipv4-address
