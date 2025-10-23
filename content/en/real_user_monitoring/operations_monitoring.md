@@ -29,7 +29,7 @@ In Datadog RUM, a feature represents a major user-facing area of your applicatio
 | Streaming      | Search   | Users can find results for their search <br> Users can load the description of a title <br> Users can start watching the trailer |
 | CRM            | Quote    | Users can start a new quote <br> Users can add line items to the quote <br> Users can send a quote to recipients                 |
 
-For example, the checkout experience of an eCommerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. Datadog RUM automatically measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
+For example, the checkout experience of an eCommerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. Once instrumented, Datadog RUM automatically measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
 
 ## Prerequisites
 
