@@ -23,7 +23,7 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 
 ### Step 1 - Specify application details in the UI
 
-1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
+1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile**][1] and click **+ New Application**.
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
