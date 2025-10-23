@@ -908,10 +908,12 @@ end
 [14]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [15]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/rum/application/create
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/
+[17]: /real_user_monitoring/application_monitoring/react_native/setup/
+
 [18]: https://app.datadoghq.com/error-tracking
 [19]: https://source.android.com/docs/security/app-sandbox
 [20]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[21]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 
 
 
