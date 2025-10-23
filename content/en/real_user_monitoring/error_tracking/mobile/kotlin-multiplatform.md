@@ -128,11 +128,11 @@ To test your implementation:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
+[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
 [4]: https://developer.android.com/topic/performance/vitals/anr
 [5]: /real_user_monitoring/error_tracking/mobile/android/#add-anr-reporting
 [6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [7]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/#track-background-events
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios
+[9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
+[10]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios

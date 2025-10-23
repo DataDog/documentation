@@ -47,6 +47,6 @@ Request request = new Request.Builder()
 Response response = client.newCall(request).execute();
 {{- end -}}
 
-{{- $p := printf "partials/api/openapi-code-java-%s.html" .method -}}
+{{- $p := printf "api/openapi-code-java-%s.html" .method -}}
 {{- $pr := partial $p (dict "payload" .payload "path" .path) }}
 {{- highlight (trim $pr "\n\r") "java" -}}

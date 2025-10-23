@@ -20,6 +20,9 @@ aliases:
  - /tracing/trace_search_and_analytics/query_syntax
  - /tracing/trace_explorer/trace_groups
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"

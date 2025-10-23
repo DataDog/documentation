@@ -161,7 +161,7 @@ If your operating system does not support curl, you can go directly to `'https:/
 
 To start generating and collecting traces, restart the sample application with additional flags that cause tracing data to be sent to Datadog.
 
-<div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+<div class="alert alert-warning">The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
 
 {{< tabs >}}

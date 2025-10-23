@@ -14,7 +14,7 @@ further_reading:
 title: Comandos del Agent
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 En sistemas basados en Linux en los que no se encuentre disponible el comando del contenedor <code>service</code>, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consulta la lista de alternativas</a>.
 </div>
 

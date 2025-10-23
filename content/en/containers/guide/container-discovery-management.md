@@ -39,7 +39,7 @@ Use the environment variables in the table below to configure container filterin
 - container image name (`image`)
 - Kubernetes namespace (`kube_namespace`)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 
 The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
 

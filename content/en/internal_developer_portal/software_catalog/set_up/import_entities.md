@@ -57,7 +57,7 @@ During import, Datadog maps Backstage data to Datadog data:
 | `spec.dependsOn` | `dependsOn` |
 | Other `spec` values | Mapped to custom tags |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Software Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have <code>kind:component</code> or <code>kind:system</code>, the entire <code>catalog-info.yaml</code> file is rejected. Schema version v3.0 is required to use kind:system and the <code>dependsOn</code> field.
 </div>
 

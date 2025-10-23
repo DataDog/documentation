@@ -13,21 +13,21 @@ cascade:
   aliases:
   - /security/threats/agent_expressions
 - _target:
-    path: /seguridad/carga_protección/backend_linux
+    path: /security/workload_protection/backend_linux
   aliases:
-  - /seguridad/amenazas/backend_linux
+  - /security/threats/backend_linux
 - _target:
     path: /security/workload_protection/backend_windows
   aliases:
   - /security/threats/backend_windows
 - _target:
-    path: /seguridad/carga_proteccion/expresiones_linux
+    path: /security/workload_protection/linux_expressions
   aliases:
-  - /seguridad/amenazas/expresiones_linux
+  - /security/threats/linux_expressions
 - _target:
-    path: /seguridad/carga_protección/expresiones_windows
+    path: /security/workload_protection/windows_expressions
   aliases:
-  - /seguridad/amenazas/expresiones_windows
+  - /security/threats/windows_expressions
 title: Workload Protection
 ---
 
@@ -56,7 +56,7 @@ Por defecto, todas las reglas de detección de amenazas de minería de criptomon
 
 Workload Protection Threats viene con más de 50 reglas de detección predefinidas que son mantenidas por un equipo de expertos en seguridad. Las reglas identifican los riesgos más importantes para que puedas tomar medidas correctivas de inmediato. Las reglas de expresión del Agent definen las actividades de carga de trabajo que deben recopilarse para el análisis, mientras que las reglas de detección de backend analizan las actividades e identifican técnicas de ataque y otros patrones de comportamiento peligrosos.
 
-Utiliza la [configuración remota][7] para desplegar automáticamente reglas nuevas y actualizadas en el Agent. [Personaliza las reglas][5] definiendo cómo cada regla monitoriza la actividad de proceso, red y archivos, [crea reglas personalizadas][6], y [configura notificaciones en tiempo real](#set-up-real-time-notifications) para nuevas señales.
+Configura [Cloud Security][1] con {{< tooltip glossary="Configuración remota" case="title" >}} para desplegar automáticamente reglas nuevas y actualizadas en el Agent. [Personaliza las reglas][5] definiendo cómo cada regla monitoriza la actividad de procesos, redes y archivos, [crea reglas personalizadas][6] y [configura notificaciones en tiempo real](#set-up-real-time-notifications) para nuevas señales.
 
 <!-- {{< img src="security/cws/threats_detection_rules.png" alt="Reglas de detección de Workload Protection en la aplicación Datadog" width="100%">}} -->
 
@@ -80,20 +80,19 @@ Datadog está introduciendo una nueva función llamada Active Protection para ha
 ## Para empezar
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/threats/setup">}}Instalación y configuración completas{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/setup/">}}Finalizar la configuración{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Permisos de roles de Datadog para Workload Protection{{< /nextlink >}}
-  {{< nextlink href="/security/workload_protection/workload_security_rules">}}Más información sobre las reglas de detección de Workload Protection{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-workload-security">}}Empieza a utilizar reglas de detección de Workload Protection predefinidas{{< /nextlink >}}
+  {{< nextlink href="/security/workload_protection/workload_security_rules">}}Más información sobre reglas de detección de Workload Protection{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-workload-security">}}Empezar a utilizar reglas de detección de Workload Protection predefinidas{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Empezando con Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /es/security/threats/setup/?tab=kuberneteshelm#prerequisites
+[1]: /es/security/cloud_security_management/setup/
 [2]: /es/agent/
 [3]: /es/security/notifications/
 [4]: /es/security/notifications/#notification-channels
 [5]: /es/security/notifications/#detection-rule-notifications
 [6]: /es/security/workload_protection/agent_expressions
-[7]: /es/security/threats/setup
 [8]: /es/security/workload_protection/security_signals
 [9]: /es/network_monitoring/performance/
 [10]: /es/security/workload_protection/guide/active-protection

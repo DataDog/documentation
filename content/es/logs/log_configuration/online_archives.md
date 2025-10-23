@@ -18,7 +18,7 @@ private: true
 title: Archivos en línea
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La disponibilidad de Archivos en línea es limitada. Para solicitar acceso, ponte en contacto con <a href="/help/">el soporte de Datadog</a>.
 </div>
 

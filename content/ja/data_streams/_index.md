@@ -29,7 +29,7 @@ title: データストリーム モニタリング
 
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
 </div>
 {{% /site-region %}}

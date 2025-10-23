@@ -153,7 +153,7 @@ En la pestaña Inspect Changes (Diff) (Inspeccionar cambios [diferencias]) del p
 
 ### Auditoría de claves de API
 
-<div class="alert alert-warning">La auditoría de claves de API está en fase beta privada.</div>
+<div class="alert alert-danger">La auditoría de claves de API está en fase beta privada.</div>
 
 Los usuarios de Log Management pueden auditar el uso de claves de API utilizando Audit Trail. Para auditar claves de API, los logs tienen una etiqueta (tag) `datadog.api_key_uuid` que contiene el UUID de la clave de API utilizada para recopilar esos logs. Utiliza la siguiente información para determinar:
 - Cómo se utilizan las claves de API en tu organización y las fuentes de telemetría.

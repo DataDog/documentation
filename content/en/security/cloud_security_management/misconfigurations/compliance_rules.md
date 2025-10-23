@@ -30,6 +30,8 @@ Cloud Security Misconfigurations uses the following rule types to validate the c
   - **Linux workloads**, using CIS host benchmarks for Linux distributions including Ubuntu, Red Hat, Amazon Linux, and AlmaLinux.
 
     Cloud Security Misconfigurations supports a subset of the Linux distributions that the Agent supports. For more information, see [Supported Platforms][6].
+  
+  {{% cloud-sec-cloud-infra %}}
 
 ## Explore default compliance rules
 
