@@ -205,7 +205,7 @@ You may have cases where users are starting several feature operations in parall
 
 ## Monitor your availability on Datadog
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
 
 Datadog groups together all operations with the same name into a catalog. This catalog is listed under the **Operations** tab within RUM.
 
