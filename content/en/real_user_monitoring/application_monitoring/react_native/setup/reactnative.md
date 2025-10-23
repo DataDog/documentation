@@ -459,5 +459,5 @@ end
 [11]: https://source.android.com/security/app-sandbox
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
-[14]: /error_tracking/frontend/mobile/reactnative.md
+[14]: /error_tracking/frontend/mobile/reactnative
 [101]: https://app.datadoghq.com/rum/application/create

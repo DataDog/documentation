@@ -41,5 +41,5 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/react_native/
+[3]: /real_user_monitoring/application_monitoring/react_native/error_tracking/
 [101]: /error_tracking/frontend/mobile/reactnative
