@@ -662,7 +662,7 @@ menu:
       parent: otel_collect
       weight: 401
     - name: Install the DDOT Collector
-      url: /opentelemetry/setup/ddot_collector/install/kubernetes
+      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
       identifier: otel-setup-ddot-install
       parent: otel-setup-ddot
       weight: 4011
@@ -1207,6 +1207,11 @@ menu:
       identifier: ddsql_reference
       parent: essentials_heading
       weight: 110000
+    - name: Data Directory
+      url: ddsql_reference/data_directory/
+      identifier: ddsql_reference_data_directory
+      parent: ddsql_reference
+      weight: 1
     - name: CoScreen
       url: coscreen/
       pre: coscreen
@@ -2030,16 +2035,21 @@ menu:
       parent: metrics_top_level
       identifier: composite_metrics_queries
       weight: 11
+    - name: Derived Metrics
+      url: metrics/derived-metrics
+      parent: metrics_top_level
+      identifier: derived_metrics
+      weight: 12
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 12
+      weight: 13
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 13
+      weight: 14
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2071,6 +2081,11 @@ menu:
       parent: software_catalog_set_up
       identifier: software_catalog_import_entities
       weight: 1013
+    - name: Define Ownership
+      url: internal_developer_portal/software_catalog/set_up/ownership
+      parent: software_catalog_set_up
+      identifier: software_catalog_ownership
+      weight: 1014
     - name: Entity Model
       url: internal_developer_portal/software_catalog/entity_model
       parent: software_catalog
@@ -3865,32 +3880,32 @@ menu:
       identifier: custom_instrumentation
       weight: 202
     - name: Java
-      url: tracing/trace_collection/custom_instrumentation/java/dd-api
+      url: tracing/trace_collection/custom_instrumentation/java/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_java
       weight: 2021
     - name: Python
-      url: tracing/trace_collection/custom_instrumentation/python/dd-api
+      url: tracing/trace_collection/custom_instrumentation/python/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_python
       weight: 2022
     - name: Ruby
-      url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
+      url: tracing/trace_collection/custom_instrumentation/ruby/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ruby
       weight: 2023
     - name: Go
-      url: tracing/trace_collection/custom_instrumentation/go/dd-api
+      url: tracing/trace_collection/custom_instrumentation/go/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_go
       weight: 2024
     - name: Node.js
-      url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
+      url: tracing/trace_collection/custom_instrumentation/nodejs/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_nodejs
       weight: 2025
     - name: PHP
-      url: tracing/trace_collection/custom_instrumentation/php/dd-api
+      url: tracing/trace_collection/custom_instrumentation/php/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_php
       weight: 2026
@@ -3900,12 +3915,12 @@ menu:
       identifier: custom_instrumentation_cpp
       weight: 2027
     - name: .NET
-      url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
+      url: tracing/trace_collection/custom_instrumentation/dotnet/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
       weight: 2028
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android/dd-api
+      url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
       weight: 2029
@@ -5810,11 +5825,16 @@ menu:
       parent: log_collection
       identifier: log_collection_opentelemetry
       weight: 115
+    - name: Agent Integrations
+      url: logs/log_collection/agent_checks/
+      parent: log_collection
+      identifier: log_collection_agent_checks
+      weight: 116
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 116
+      weight: 117
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
@@ -5870,11 +5890,16 @@ menu:
       url: logs/log_configuration/rehydrating
       parent: log_configuration
       weight: 210
+    - name: Archive Search
+      identifier: log_configuration_archive_search
+      url: logs/log_configuration/archive_search
+      parent: log_configuration
+      weight: 211
     - name: Forwarding
       identifier: log_configuration_forwarding
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
-      weight: 211
+      weight: 212
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
@@ -6890,19 +6915,24 @@ menu:
       weight: 6
     - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
-      url: /security/code_security/dev_tool_int/github_pull_requests/
+      url: /security/code_security/dev_tool_int/pull_request_comments/
       parent: dev_tool_int
       weight: 1
+    - name: PR Gates
+      identifier: dev_tool_int_pr_gates
+      url: /pr_gates/
+      parent: dev_tool_int
+      weight: 2
     - name: IDE Plugins
       identifier: dev_tool_int_ide_plugins
       url: /security/code_security/dev_tool_int/ide_plugins/
       parent: dev_tool_int
-      weight: 2
+      weight: 3
     - name: Git Hooks
       identifier: dev_tool_int_git_hooks
       url: /security/code_security/dev_tool_int/git_hooks/
       parent: dev_tool_int
-      weight: 3
+      weight: 4
     - name: Troubleshooting
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
@@ -7029,111 +7059,116 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
       weight: 406
+    - name: Test Suites
+      url: synthetics/test_suites/
+      parent: synthetics
+      identifier: synthetics_test_suites
+      weight: 5
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 5
+      weight: 6
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
       identifier: synthetics_platform_dashboards
-      weight: 501
+      weight: 601
     - name: API Testing
       url: synthetics/platform/dashboards/api_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_api_test
-      weight: 5101
+      weight: 6101
     - name: Browser Testing
       url: synthetics/platform/dashboards/browser_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_browser_test
-      weight: 5102
+      weight: 6102
     - name: Test Summary
       url: synthetics/platform/dashboards/test_summary
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_test_summary
-      weight: 5103
+      weight: 6103
     - name: Metrics
       url: synthetics/platform/metrics/
       parent: synthetics_platform
       identifier: synthetics_platform_metrics
-      weight: 502
+      weight: 602
     - name: Test Coverage
       url: synthetics/platform/test_coverage
       parent: synthetics_platform
       identifier: synthetics_platform_test_coverage
-      weight: 503
+      weight: 603
     - name: Private Locations
       url: synthetics/platform/private_locations
       parent: synthetics_platform
       identifier: synthetics_private_location
-      weight: 504
+      weight: 604
     - name: Configuration
       url: synthetics/platform/private_locations/configuration
       parent: synthetics_private_location
       identifier: synthetics_private_location_configuration
-      weight: 5401
+      weight: 6041
     - name: Dimensioning
       url: synthetics/platform/private_locations/dimensioning
       parent: synthetics_private_location
       identifier: synthetics_private_location_dimensioning
-      weight: 5402
+      weight: 6042
     - name: Monitoring
       url: synthetics/platform/private_locations/monitoring
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
-      weight: 5402
+      weight: 6043
     - name: Connect APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
       identifier: synthetics_platform_apm
-      weight: 505
+      weight: 605
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 506
+      weight: 606
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
-      weight: 6
+      weight: 7
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
       identifier: synthetics_explore_saved_views
-      weight: 601
+      weight: 701
     - name: Results Explorer
       url: synthetics/explore/results_explorer
       parent: synthetics_explore
       identifier: synthetics_results_explorer
-      weight: 602
+      weight: 702
     - name: Search Test Batches
       url: synthetics/explore/results_explorer/search
       parent: synthetics_results_explorer
       identifier: synthetcis_results_explorer_search
-      weight: 6200
+      weight: 7200
     - name: Search Test Runs
       url: synthetics/explore/results_explorer/search_runs
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_runs
-      weight: 6201
+      weight: 7201
     - name: Search Syntax
       url: synthetics/explore/results_explorer/search_syntax
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_syntax
-      weight: 6203
+      weight: 7203
     - name: Export Test Runs
       url: synthetics/explore/results_explorer/export
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_export_test_runs
-      weight: 6204
+      weight: 7204
     - name: Saved Views
       url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_saved_views
-      weight: 6205
+      weight: 7205
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
