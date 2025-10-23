@@ -527,7 +527,7 @@ To test your implementation:
 
 To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][10] package.
 
-Install it with yarn or npm then re-install your pods:
+Install it with yarn or npm then reinstall your pods:
 
 ```shell
 yarn add react-native-performance-limiter # or npm install react-native-performance-limiter
@@ -544,7 +544,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Rebuild your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
 
 To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
 
@@ -850,7 +850,7 @@ Inside the loop, add the following snippet:
         }
 ```
 
-**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+**Note**: Reuploading a source map does not override the existing one if the version has not changed.
 
 {{% /collapse-content %}}
 
@@ -892,7 +892,7 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /error_tracking/
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [2]: https://microsoft.github.io/code-push/
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/codepush
 [4]: https://docs.expo.dev/
@@ -901,7 +901,7 @@ end
 [7]: /account_management/api-app-keys/#client-tokens
 [8]: https://github.com/DataDog/datadog-react-native-wizard
 [9]: https://app.datadoghq.com/source-code/setup/rum
-[10]: https://github.com/DataDog/react-native-performance-limite
+[10]: https://github.com/DataDog/react-native-performance-limiter
 [11]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
 [12]: /real_user_monitoring/mobile_and_tv_monitoring/ios/error_tracking/?tabs=cocoapods#symbolicate-crash-reports
 [13]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
