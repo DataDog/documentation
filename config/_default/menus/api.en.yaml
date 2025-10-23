@@ -7630,6 +7630,23 @@ menu:
           - ListFastlyAccounts
         unstable: []
         order: 1
+    - name: Fleet Automation
+      url: /api/latest/fleet-automation/
+      identifier: fleet-automation
+      generated: true
+    - name: Create an update config
+      url: '#create-an-update-config'
+      identifier: fleet-automation-create-an-update-config
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateUpdateConfig
+        unstable:
+          - v2
+        order: 1
     - name: IP Allowlist
       url: /api/latest/ip-allowlist/
       identifier: ip-allowlist
