@@ -1,5 +1,6 @@
 ---
 title: Investigate Alerts
+description: "Configure Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
 ---
 
 ## Get started with alert investigations
@@ -12,7 +13,7 @@ You can investigate alerts with Bits AI SRE in two ways:
 You can manually invoke Bits on an individual monitor alert or warn event from several entry points:
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to [**Bits AI SRE** > **Monitors** > **Ready for Bits**][5].
+1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
 1. Click the **Investigate Recent Alerts** dropdown and select an alert.
 
 #### Option 2: Monitor Status page
@@ -27,10 +28,10 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 
 ### Enable automatic investigations
 
-You can configure monitors so Bits runs automatically whenever they transition to the alert state: 
+You can configure monitors so Bits runs automatically whenever they transition to the alert state:
 
 #### Option 1: Bits AI SRE Monitors list
-1. Go to [**Bits AI SRE** > **Monitors** > **Ready for Bits**][5].
+1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
 1. Toggle **Enable** under **Automatic investigations** for a single monitor, or bulk-edit multiple monitors by selecting a set of monitors, followed by **Edit automatic investigations**.
 
 #### Option 2: Configure for a single monitor
@@ -41,32 +42,29 @@ You can configure monitors so Bits runs automatically whenever they transition t
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations.
 
-### Monitor requirements for Bits AI SRE
+### Supported monitors
+<div class="alert alert-info">Prior to general availability, monitor requirements may change.</div>
 
-Bits is able to run investigations on monitors that fulfill all three of the following requirements:
-1. **Monitor Type**: The monitor must be a metric, logs, APM (`APM Metrics` type only), anomaly, forecast, integration, or outlier monitor.
+Bits is able to run investigations on the following monitor types:
+  - Metric
+  - Anomaly
+  - Forecast
+  - Integration
+  - Outlier
+  - Logs
+  - APM (`APM Metrics` type only)
 
-2. **Service scope**: The monitor must have one of the following:
-   - A monitor query filtered by a service
-   - A monitor query grouped by service
-   - A service tag on the monitor
+#### Best practices: Add investigation context to your monitors
+Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
 
-3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful link:
-   - A Datadog dashboard
-   - A logs query
-   - A trace query
-   - A Datadog notebook with helpful widgets
-   - A [Confluence page](#configure-knowledge-base-integrations) 
+1. **Include telemetry links:** Add at least one helpful telemetry link in the monitor message. This link could be a Datadog dashboard, logs query, trace query, a Datadog notebook with helpful widgets, or a [Confluence runbook page](#configure-knowledge-base-integrations) containing these links. Think about the first place you'd normally look in Datadog when this monitor triggers.
+Bits uses these links during the “Executing Runbook” step of the initial investigation to identify potential problem areas. Because these links are user-defined, you have control over what Bits reviews; ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team’s workflows.
 
-Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors.
+2. **Add service scoping:** For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
 
-{{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
+   {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-<div class="alert alert-info">
-	<strong>Preview: No service scope or link requirements</strong><br>
-	Certain customers can run Bits investigations on the above supported monitor types without the service scope or telemetry link requirements.<br><br>
-	Contact your Datadog representative to learn more about the Preview.
-	</div>
+For additional suggestions on how to optimize investigations, see the section on [Memories](#help-bits-ai-sre-learn).
 
 ### Configure where investigation findings are sent
 
@@ -76,10 +74,10 @@ By default, Bits' investigation findings appear in two places:
 
 Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation findings to appear:
 
-#### Slack 
+#### Slack
 1. Ensure the [Datadog Slack app][7] is installed in your Slack workspace.
 1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [**Bits AI** > **SRE Agent** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
+1. Lastly, go to [**Bits AI SRE** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
 
 #### Case Management
 In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14].
@@ -113,6 +111,36 @@ There are two RBAC permissions that apply to Bits AI SRE:
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role |
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or have previously modified the default roles, an admin with the User Access Manage permission will need to manually add the permission to the appropriate roles. For details, see [Access Control][11].
+
+### Configure rate limits
+
+Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period.
+
+[Manual investigations](#manually-start-an-investigation) can still be triggered even after rate limits.
+
+#### Types of rate limits
+
+##### Per monitor limit
+
+Controls how often an investigation is triggered from a single monitor alert within a rolling 24 hour window.
+
+**Default:** Each monitor can trigger one automatic investigation per 24 hours.
+
+##### Organization limit
+
+The Organization limit defines the total number of investigations Bits AI SRE can run across your entire organization within 24 hours.
+
+**Default:** No limit.
+
+#### Set a rate limit
+
+To set a rate limit:
+1. Navigate to **Bits AI SRE** > **Settings** > [**Rate Limits**](https://app.datadoghq.com/bits-ai/settings/rate-limits).
+2. Toggle on the rate limit you want to enable.
+3. Set the maximum number of investigations that can run within a rolling 24-hour window.
+4. Click **Save**.
+
+{{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
 ## How Bits AI SRE investigates
 

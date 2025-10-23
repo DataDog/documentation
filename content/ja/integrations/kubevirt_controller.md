@@ -67,7 +67,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 このインテグレーションは公開ベータ版で、本番ワークロードでの有効化は慎重に行う必要があります。
 </div>
 

@@ -230,7 +230,7 @@ If you're running a Flask application, ensure that you are calling the `ddtrace_
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
-- If you are scanning GitHub repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning your repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services

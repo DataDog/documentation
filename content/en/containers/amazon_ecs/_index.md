@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS
+description: Install and configure the Datadog Agent on Amazon Elastic Container Service
 aliases:
   - /agent/amazon_ecs/
 further_reading:
@@ -222,7 +223,7 @@ To collect Live Process information for all your containers and send it to Datad
 
 #### Cloud Network Monitoring
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This feature is only available for Linux.
 </div>
 
@@ -366,4 +367,4 @@ Need help? Contact [Datadog support][11].
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
 [32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
-[33]:https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs

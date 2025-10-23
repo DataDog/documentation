@@ -10,7 +10,7 @@ title: アプリの構築
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では App Builder はサポートされていません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では App Builder はサポートされていません。</div>
 {{< /site-region >}}
 
 [App Builder][1] ページから、新しいアプリを作成したり、既存のアプリを編集したりできます。このページには、既存のアプリに関する情報が一覧表示されます。内容は次のとおりです:

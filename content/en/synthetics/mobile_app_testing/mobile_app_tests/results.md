@@ -86,9 +86,9 @@ Screenshots can be disabled by checking "Do not capture screenshot for this step
 
 Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue. Video replay requires [screenshots to be enabled](#screenshots-and-actions). Disabling screenshots for a step prevents video replay for all test runs.
 
-Click on an individual test run from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the **Video Replay** tab to watch the complete test execution.
+Click the video icon ▶️ for a failed test run on the [Mobile Application test details page][11] to watch the complete test execution. You can also access video replay for all test runs using the **Video Replay** tab in the test run side panel, which provides detailed test run information.
 
-{{< img src="mobile_app_testing/mobile_app_video_replay.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
+{{< img src="mobile_app_testing/video_replay_2.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
 
 **Note**: Mobile Application test session replays are not available in RUM.
 

@@ -1,5 +1,6 @@
 ---
 title: Automatic Faulty Cloud & SaaS API Detection
+description: "Detect third-party provider issues within minutes using Watchdog's monitoring of external APIs like AWS, Stripe, OpenAI, and other cloud services."
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-outage-detection/"
   tag: "Blog"
@@ -34,32 +35,24 @@ Watchdog monitors the status of the following external providers' APIs:
 | Auth0 | *.auth0.com |
 | Binance | api.binance.com     |
 | Braintree | api.braintreegateway.com |
-| Coreweave | *.coreweave.com |
 | Cloudflare | api.cloudflare.com |
-| Confluent | api.confluent.cloud & api.telemetry.confluent.cloud |
 | Databricks | *.cloud.databricks.com |
-| Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
-| Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
 | Mapbox | api.mapbox.com |
 | Mixpanel | api.mixpanel.com |
 | OpenAI | *.openai.com|
 | PagerDuty | api.pagerduty.com |
-| Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
-| Render | api.render.com |
 | SendGrid | *.sendgrid.com |
 | ServiceNow | *.service-now.com |
 | Slack | *.slack.com |
 | Snowflake | *.snowflakecomputing.com |
-| SoundCloud | api.soundcloud.com |
 | Splunk | *.splunkcloud.com |
 | Square | connect.squareup.com |
 | Stripe | api.stripe.com |
-| Towerdata | api.towerdata.com |
 | Twilio | api.twilio.com |
-| Twitter | api.twitter.com |
+| X | api.twitter.com |
 | Zendesk | *.zendesk.com |
 | Zoom    | api.zoom.us |
 
@@ -72,7 +65,6 @@ The following AWS services are monitored (.*amazonaws.com):
 - Kinesis
 - KMS
 - Lambda
-- RDS
 - S3
 - SNS
 - SQS

@@ -10,20 +10,20 @@ title: AWS CloudWatch Metric Streams con Amazon Data Firehose
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">AWS CloudWatch Metric Streams con Amazon Data Firehose no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Los flujos de métricas de AWS CloudWatch con Amazon Data Firehose no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
-Utilizando AWS CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener métricas de CloudWatch en Datadog con sólo una latencia de dos a tres minutos. Esta opción es mucho más rápida que el método de sondeo de la API predeterminado de Datadog, que proporciona métricas actualizadas cada 10 minutos. Puedes obtener más información sobre el método de sondeo de la API en la [documentación sobre el retraso de métricas de Cloud][1].
+Cuando utilizas los flujos de métricas de AWS CloudWatch con Amazon Data Firehose, puedes obtener métricas de CloudWatch en Datadog con una latencia de solo dos a tres minutos. Esta estrategia es significativamente más rápida que la estrategia de sondeo de API por defecto de Datadog, que proporciona métricas actualizadas cada 10 minutos. Puedes obtener más información sobre la estrategia de sondeo de API en la [documentación sobre el retraso de métricas en la nube][1].
 
 ## Información general
 
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric_streaming_diagram.png" alt="Diagrama del flujo de métricas" responsive="true">}}
 
-1. Crea un CloudWatch Metric Stream en cada cuenta y región de AWS para las que quieras transmitir métricas.
-   - Opcionalmente, especifica un conjunto limitado de espacios de nombres o métricas para transmitir.
-2. Una vez creado el Metric Stream, Datadog comienza inmediatamente a recibir las métricas transmitidas y las muestra en el sitio Datadog sin necesidad de una configuración adicional.
+1. Crea un flujo de métricas de CloudWatch en cada cuenta y región de AWS de la que quieras transmitir métricas.
+   - También puedes especificar un conjunto limitado de espacios de nombres o de métricas para transmitir.
+2. Una vez creado el flujo de métricas de CloudWatch, Datadog empieza inmediatamente a recibir las métricas transmitidas y las muestra en el sitio Datadog sin necesidad de otra configuración adicional.
 
-<div class="alert alert-danger">El filtrado por espacio de nombres configurado en el cuadro de la integración AWS <b>también se aplica a </b> CloudWatch Metric Streams</div>.
+<div class="alert alert-warning">El filtrado por cada espacio de nombre configurado en el cuadro de la integración de AWS <b>también se aplica</b> a los flujos de métricas de CloudWatch.</div>
 
 ### Transmisión de métricas versus sondeo de API {#streaming-vs-polling}
 
