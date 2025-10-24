@@ -1,6 +1,5 @@
 ---
 title: Capturing SQL Query Parameter Values With Database Monitoring
-private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -12,10 +11,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting Database Monitoring"
 ---
-
-<div class="alert alert-info">
-This feature is in preview. To enable collection of raw SQL query text and execution plans with parameter values, please contact your Datadog representative or support.
-</div>
 
 The Database Monitoring integrations collect aggregated query metrics, in-flight query executions, and query explain plans across your database. By default, query SQL texts and explain plans are obfuscated and normalized in the Agent before being sent to Datadog in order to protect sensitive data, which may be exposed in query parameters.
 
@@ -51,7 +46,8 @@ To capture SQL query text and execution plans with parameter values, update the 
     enabled: true
 ```
 
-For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture via Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up.
+<div class="alert alert-info">
+For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture via Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up. </div>
 
 ```yaml
   xe_collection:
