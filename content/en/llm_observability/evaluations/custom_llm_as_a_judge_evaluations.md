@@ -25,20 +25,22 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability.
 
+### Configure the prompt
+
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
    {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
 
-1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name when querying evaluation results. The name must be unique within your application.
+2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name when querying evaluation results. The name must be unique within your application.
 
-1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+3. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
 
-1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
+4. Use the **Model** drop-down menu to select a model to use for your LLM judge.
 
-1. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
+5. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
    - **Create from scratch**: Use your own custom prompt (defined in the next step).
    - **Failure to Answer**, **Prompt Injection**, **Sentiment**, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
 
-1. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
+6. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
    For custom prompts, provide clear instructions describing what the evaluator should assess. 
 
    - Focus on a single evaluation goal 
@@ -79,14 +81,22 @@ Span Input: {{span_input}}
 
 7. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
 
-7. Select an evaluation output type:
+### Define the Evaluation Output
+You can configure Reasoning and Assessment Criteria directly in the UI when defining your evaluation schema.
+
+1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
    - **Score**: Numeric ratings (for example, a 1–5 scale for helpfulness)
    - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
    <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
 
-7. Define the structure of your output.
+2. Add Reasoning
+
+When **Enable Reasoning** is checked, the LLM-as-a-Judge provides a short justification for its decision (for example, why a score of 8 was given).
+This helps you understand how and why evaluations are made — particularly useful for auditing subjective metrics like tone, empathy, or helpfulness.
+   
+3. Define the structure of your output.
 
    {{< tabs >}}
    {{% tab "OpenAI" %}}
@@ -106,7 +116,16 @@ Span Input: {{span_input}}
    {{% /tab %}}
    {{< /tabs >}}
 
-7. Under **Evaluation Scope**, define the scope of your evaluation:
+4. Configure Assessment Criteria
+   Assessment Criteria determines how results are interpreted as Pass or Fail.
+   - For Boolean: Select True to mark a result as “Pass” and False to mark a result as “Fail.”
+   - For Score: Define numerical thresholds to determine passing performance
+   - For Categorical: Map specific label values to Pass or Fail states (for example, “Excellent” and “Good” = Pass, “Poor” = Fail).
+
+This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+
+### Filtering and Sampling 
+Under Evaluation Scope, define where and how your evaluation runs. This helps control both coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
       - **Traces**: Evaluate only root spans
@@ -115,16 +134,27 @@ Span Input: {{span_input}}
    - **Tags**: (Optional) Limit evaluation to spans with certain tags.
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
-7. Use the **Test Evaluation** panel on the right to preview how your evaluator performs. You can input sample `{{span_input}}` and `{{span_output}}` values, then click **Run Evaluation** to see the LLM-as-a-Judge's output before saving. Modify your evaluation until you are satisfied with the results.
+### Test and Preview 
+Use the Test Evaluation panel on the right to preview results.
+You can enter sample {{span_input}} and {{span_output}} values and click Run Evaluation to see both the result, the reasoning explanation, and whether it passed or failed returned by your LLM judge.
+
+Refine your prompt and schema until outputs are consistent and interpretable.
+
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
 
 
 ## Viewing and using results
 
-After you save your evaluation, Datadog automatically runs your evaluation on targeted spans. Results are available across LLM Observability in near-real-time. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, next to all other evaluations.
+After you save your evaluation, Datadog automatically runs your evaluation on targeted spans. Results are available across LLM Observability in near-real-time. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
+
+Each evaluation result includes:
+
+- The evaluated value (e.g., True, 9, or Neutral)
+- The reasoning (when enabled)
+- The pass/fail indicator (based on your assessment criteria)
 
 Use the syntax `@evaluations.custom.<evaluation_name>` to query or visualize results.
 
@@ -137,7 +167,8 @@ For example:
 
 
 You can:
-- Filter traces by evaluation results
+- Filter traces by evaluation results (example, `@evaluations.custom.helpfulness-check`)
+- Filter by pass/fail assessment status (example, `@evaluations.assessment.custom.helpfulness-check:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
@@ -145,6 +176,7 @@ You can:
 ## Best practices for reliable custom evaluations
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
+- **Enable reasoning**  when you need explainable decisions and to improve the accuracy on complex reasoning tasks.
 - **Iterate**: Run, inspect outputs, and refine your prompt.
 - **Validate**: Periodically check evaluator accuracy using sampled traces.
 - **Document your rubric**: Clearly define what "Pass" and "Fail" mean to avoid drift over time.
