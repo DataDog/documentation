@@ -74,9 +74,9 @@ Add the following in the Collector configuration:
 ```yaml
 processors:
   k8sattributes:
-        passthrough: false
-        auth_type: "serviceAccount"
-   pod_association:
+    passthrough: false
+    auth_type: "serviceAccount"
+    pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip
@@ -149,8 +149,8 @@ DaemonSet:
 ```yaml
 processors:
   k8sattributes:
-        passthrough: true
-        auth_type: "serviceAccount"
+    passthrough: true
+    auth_type: "serviceAccount"
   resourcedetection:
     detectors: [env, <eks/ec2>, <aks/azure>, <gke/gce>, system]
     timeout: 2s
@@ -162,10 +162,10 @@ Gateway:
 
 ```yaml
 processors:
- k8sattributes:
-        passthrough: false
-        auth_type: "serviceAccount"
-   pod_association:
+  k8sattributes:
+    passthrough: false
+    auth_type: "serviceAccount"
+    pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip
@@ -232,9 +232,9 @@ Add the following in the Collector configuration:
 ```yaml
 processors:
   k8sattributes:
-        passthrough: false
-        auth_type: "serviceAccount"
-   pod_association:
+    passthrough: false
+    auth_type: "serviceAccount"
+    pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip

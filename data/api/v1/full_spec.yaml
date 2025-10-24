@@ -9753,6 +9753,8 @@ components:
       type: object
     NotebookGlobalTime:
       description: Notebook global timeframe.
+      example:
+        live_span: 1h
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
@@ -15056,6 +15058,7 @@ components:
     SyntheticsAssertionTargetValue:
       description: Value used by the operator in assertions. Can be either a number
         or string.
+      example: 0.0
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
