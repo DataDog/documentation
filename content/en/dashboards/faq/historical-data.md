@@ -24,7 +24,7 @@ If you're planning to frequently churn hosts, add a tag to the [Agent][2] in `da
 
 Additionally, you can still manually apply tags or attributes by entering them in the value input field within template variable dropdown panels.
 
-### Template Variables
+### Template variables
 Template variable dropdown panels have values that are populated from different sources based on the sources used by the dashboard.
 The age-out period for template variable values that are queried depends on the data source:
 | Source            | Age Out  |
