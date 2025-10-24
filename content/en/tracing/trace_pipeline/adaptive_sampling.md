@@ -147,6 +147,8 @@ To restrict access:
 
 {{< img src="/tracing/guide/adaptive_sampling/restrict_service_ingestion_permissions.png" alt="Open granular access control modal" style="width:100%;">}}
 
+**Note**: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
+
 1. Open the **Permissions** section in the Ingestion Control side panel of the service.
 
 2. Click **Restrict access**.
@@ -154,9 +156,6 @@ To restrict access:
 3. Select the teams, roles, or users to grant access to.
 
 4. Click **Add**.
-
-**Note**: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
-
 
 ## Further reading
 
