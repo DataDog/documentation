@@ -4,6 +4,9 @@ description: After starting to ingest costs in Cloud Cost Management, set up bud
 aliases:
 - /cloud_cost_management/budgets/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"

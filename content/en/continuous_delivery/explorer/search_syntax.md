@@ -2,6 +2,9 @@
 title: CD Visibility Explorer Search Syntax
 description: Search all of your deployment executions.
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/continuous_delivery/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"
