@@ -30,7 +30,7 @@ You can create and manage custom evaluations from the [Evaluations page][1] in L
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
    {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
 
-2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name when querying evaluation results. The name must be unique within your application.
+2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 
 3. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
 
@@ -81,7 +81,7 @@ Span Input: {{span_input}}
 
 7. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
 
-### Define the Evaluation Output
+### Define the evaluation output
 
 You can configure Reasoning and Assessment Criteria directly in the UI when defining your evaluation schema.
 
@@ -95,7 +95,7 @@ You can configure Reasoning and Assessment Criteria directly in the UI when defi
 2. Add Reasoning
 
 When **Enable Reasoning** is checked, the LLM-as-a-Judge provides a short justification for its decision (for example, why a score of 8 was given).
-This helps you understand how and why evaluations are made — particularly useful for auditing subjective metrics like tone, empathy, or helpfulness.
+This helps you understand how and why evaluations are made, particularly useful for auditing subjective metrics like tone, empathy, or helpfulness.
 
 Adding reasoning is also helpful to [make the LLM judge more accurate][5].
    
@@ -129,7 +129,7 @@ This flexibility allows you to align evaluation outcomes with your team’s qual
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_5.png" alt="Configuring the LLM output including reasoning and assessment criteria." style="width:100%;" >}}
 
-### Filtering and Sampling
+### Filtering and sampling
 
 Under Evaluation Scope, define where and how your evaluation runs. This helps control both coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
@@ -140,7 +140,7 @@ Under Evaluation Scope, define where and how your evaluation runs. This helps co
    - **Tags**: (Optional) Limit evaluation to spans with certain tags.
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
-### Test and Preview
+### Test and preview
 
 Use the **Test Evaluation** panel on the right to preview results.
 You can enter sample `{{span_input}}` and `{{span_output}}` values and click **Run Evaluation** to see both the result, the reasoning explanation, and whether it passed or failed returned by your LLM judge.
@@ -159,7 +159,7 @@ After you save your evaluation, Datadog automatically runs your evaluation on ta
 
 Each evaluation result includes:
 
-- The evaluated value (e.g., `True`, `9`, or `Neutral`)
+- The evaluated value (for example `True`, `9`, or `Neutral`)
 - The reasoning (when enabled)
 - The pass/fail indicator (based on your assessment criteria)
 
