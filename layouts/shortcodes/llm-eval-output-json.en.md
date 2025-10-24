@@ -20,7 +20,8 @@ An example schema for a categorical evaluation:
     "schema": {
         "type": "object",
         "required": [
-            "categorical_eval"
+            "categorical_eval",
+            "reasoning"
         ],
         "properties": {
             "categorical_eval": {
@@ -47,6 +48,10 @@ An example schema for a categorical evaluation:
                         "description": "This is a catch-all category for things not related to budgeting or financial advice."
                     }
                 ]
+            },
+            "reasoning": {
+                "type": "string",
+                "description": "Describe how you decided the category"
             }
         },
         "additionalProperties": false

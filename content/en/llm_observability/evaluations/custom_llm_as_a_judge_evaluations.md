@@ -95,6 +95,8 @@ You can configure Reasoning and Assessment Criteria directly in the UI when defi
 
 When **Enable Reasoning** is checked, the LLM-as-a-Judge provides a short justification for its decision (for example, why a score of 8 was given).
 This helps you understand how and why evaluations are made — particularly useful for auditing subjective metrics like tone, empathy, or helpfulness.
+
+Adding reasoning is also helpful to [make the LLM judge more accurate][5].
    
 1. Define the structure of your output.
 
@@ -190,3 +192,4 @@ You can:
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
 [3]: /service_management/events/explorer/facets/
 [4]: /monitors/
+[5]: https://arxiv.org/abs/2504.00050
