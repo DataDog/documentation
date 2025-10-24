@@ -10685,6 +10685,36 @@ menu:
           - ListSpansMetrics
         unstable: []
         order: 1
+    - name: Static Analysis
+      url: /api/latest/static-analysis/
+      identifier: static-analysis
+      generated: true
+    - name: POST request to resolve vulnerable symbols
+      url: '#post-request-to-resolve-vulnerable-symbols'
+      identifier: static-analysis-post-request-to-resolve-vulnerable-symbols
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCAResolveVulnerableSymbols
+        unstable:
+          - v2
+        order: 1
+    - name: Post dependencies for analysis
+      url: '#post-dependencies-for-analysis'
+      identifier: static-analysis-post-dependencies-for-analysis
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCAResult
+        unstable:
+          - v2
+        order: 2
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
