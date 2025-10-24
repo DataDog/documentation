@@ -94,7 +94,7 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-t
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 {{% /tab %}}
-{{% tab "ECS container metadata file" ("Archivo de metadatos del contenedor de ECS") %}}
+{{% tab "ECS container metadata file (Archivo de metadatos del contenedor de ECS)" %}}
 
 El [archivo de metadatos del contenedor de ECS de Amazon][1] permite detectar la dirección IP privada. Para obtener la dirección IP privada de cada host, ejecuta el siguiente comando:
 
