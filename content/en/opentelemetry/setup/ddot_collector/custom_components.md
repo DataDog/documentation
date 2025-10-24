@@ -58,25 +58,32 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
    The highlighted line in this example adds a [metrics transform processor][7]:
    {{< highlight json "hl_lines=19" >}}
-dist:
-  module: github.com/DataDog/comp/otelcol/collector-contrib
-  name: otelcol-contrib
-  description: Datadog OpenTelemetry Collector
-  version: {{< version key="collector_version" >}}
-  output_path: ./comp/otelcol/collector-contrib/impl
-  otelcol_version: {{< version key="collector_version" >}}
+connectors:
+# You will see a list of connectors already included by Datadog
+# Add your desired connectors here
 
-extensions:
-# You will see a list of extensions already included by Datadog
-# Add your desired extensions here
+dist:
+  description: Datadog OpenTelemetry Collector
+  module: github.com/DataDog/datadog-agent/comp/otelcol/collector-contrib/impl
+  name: otelcol-contrib
+  output_path: ./comp/otelcol/collector-contrib/impl
+  version: {{< version key="collector_version" >}}
 
 exporters:
 # You will see a list of exporters already included by Datadog
 # Add your desired exporters here
 
+extensions:
+# You will see a list of extensions already included by Datadog
+# Add your desired extensions here
+
 processors:
 # adding metrics transform processor to modify metrics
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v{{< version key="collector_version" >}}
+
+providers:
+# You will see a list of config providers already included by Datadog
+# Add your desired providers here
 
 receivers:
   - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v{{< version key="collector_version" >}}
@@ -89,9 +96,9 @@ receivers:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v{{< version key="collector_version" >}}
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v{{< version key="collector_version" >}}
 
-connectors:
-# You will see a list of connectors already included by Datadog
-# Add your desired connectors here
+replaces:
+# You will see a list of go module replacements included by Datadog
+# Add your desired dependency overrides here
 {{< /highlight >}}
 1. Save your changes to the manifest file.
 
