@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/guide/community-integrations-installation-with-docker-agent
+description: Guía de instalación y configuración para integraciones desarrolladas
+  por la comunidad y Marketplace con el Datadog Agent en distintos entornos.
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentación
@@ -40,7 +42,7 @@ En las versiones 7.21/6.21 del Agent (y posteriores):
 [1]: /es/getting_started/integrations/
 [2]: /es/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 Para utilizar una integración de la comunidad o el mercado en un entorno contenerizado debes crear una imagen personalizada que incluya la integración comunitaria que quieras.
 
@@ -51,7 +53,7 @@ FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-El comando `datadog-agent integration install` (ejecutado dentro de Docker) emite la siguiente advertencia inofensiva: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. Puedes ignorarla.
+El comando `agent integration install` (ejecutado dentro de Docker) emite la siguiente advertencia inofensiva: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. Puedes ignorar esta advertencia.
 
 Si utilizas Kubernetes, actualiza tu gráfico de Helm o tu configuración de operador Datadog para extraer tu imagen personalizada.
 
