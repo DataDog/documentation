@@ -2368,6 +2368,7 @@ components:
       - $ref: '#/components/schemas/ActionQueryMockedOutputsObject'
     ActionQueryMockedOutputsEnabled:
       description: Whether to enable the mocked outputs for testing.
+      example: false
       oneOf:
       - type: boolean
       - description: If this is a string, it must be a valid JavaScript expression
@@ -2457,6 +2458,7 @@ components:
         type: string
     ActionQuerySpec:
       description: The definition of the action query.
+      example: ''
       oneOf:
       - type: string
       - $ref: '#/components/schemas/ActionQuerySpecObject'
@@ -13444,6 +13446,7 @@ components:
       type: object
     CustomAttributeValuesUnion:
       description: Union of supported value for a custom attribute
+      example: ''
       oneOf:
       - $ref: '#/components/schemas/CustomAttributeStringValue'
       - $ref: '#/components/schemas/CustomAttributeMultiStringValue'
@@ -33810,6 +33813,7 @@ components:
     ObservabilityPipelineOcsfMapperProcessorMappingMapping:
       description: Defines a single mapping rule for transforming logs into the OCSF
         schema.
+      example: CloudTrail Account Change
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingLibrary'
     ObservabilityPipelineOcsfMapperProcessorType:
