@@ -238,6 +238,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 #### Remove integrations
 
 You can remove integrations by modifying the imports in the `orchestrion.tool.go` file.
+You can also create your own `orchestrion.tool.go` file before you run `orchestrion`.
 You might do this if you don't want an integration,
 or if you want to reduce the number of transitive dependencies for integrations your program doesn't use.
 By default, Orchestrion imports `github.com/DataDog/dd-trace-go/orchestrion/all/v2`,
