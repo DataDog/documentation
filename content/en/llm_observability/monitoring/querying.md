@@ -14,7 +14,7 @@ In LLM Observability, a _span_ represents a unit of work representing a single o
 
 In the [LLM Observability Trace Explorer][1], choose whether to search across traces or spans:
 - Select **Traces** to find traces where the root span matches your query.
-- Select **All Spans** to search across all your spans, including nested child spans.
+- Select **Spans** to search across all your spans, including nested child spans.
 
 Some search terms are only applicable to traces. For examples, see [Trace-level queries](#trace-level-queries).
 
