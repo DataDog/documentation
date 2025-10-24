@@ -82,6 +82,7 @@ Span Input: {{span_input}}
 1. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
 
 ### Define the Evaluation Output
+
 You can configure Reasoning and Assessment Criteria directly in the UI when defining your evaluation schema.
 
 1. Select an evaluation output type:
@@ -126,7 +127,10 @@ Adding reasoning is also helpful to [make the LLM judge more accurate][5].
 
 This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
 
-### Filtering and Sampling 
+{{< img src="llm_observability/evaluations/custom_llm_judge_5.png" alt="Configuring the LLM output including reasoning and assessment criteria." style="width:100%;" >}}
+
+### Filtering and Sampling
+
 Under Evaluation Scope, define where and how your evaluation runs. This helps control both coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
@@ -136,7 +140,8 @@ Under Evaluation Scope, define where and how your evaluation runs. This helps co
    - **Tags**: (Optional) Limit evaluation to spans with certain tags.
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
-### Test and Preview 
+### Test and Preview
+
 Use the Test Evaluation panel on the right to preview results.
 You can enter sample {{span_input}} and {{span_output}} values and click Run Evaluation to see both the result, the reasoning explanation, and whether it passed or failed returned by your LLM judge.
 
