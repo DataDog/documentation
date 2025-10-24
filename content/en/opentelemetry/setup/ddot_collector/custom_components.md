@@ -57,7 +57,7 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
    The highlighted line in this example adds a [metrics transform processor][7]:
-   {{< highlight json "hl_lines=19" >}}
+   {{< highlight json "hl_lines=22" >}}
 connectors:
 # You will see a list of connectors already included by Datadog
 # Add your desired connectors here
@@ -86,15 +86,8 @@ providers:
 # Add your desired providers here
 
 receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v{{< version key="collector_version" >}}
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v{{< version key="collector_version" >}}
+# You will see a list of receivers already included by Datadog
+# Add your desired receivers here
 
 replaces:
 # You will see a list of go module replacements included by Datadog
