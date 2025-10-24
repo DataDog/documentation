@@ -135,12 +135,11 @@ The configuration should take effect in 5-6 minutes, the time it takes for Datad
 ## Permissions
 
 By default, only users with the `Datadog Admin` role can modify adaptive sampling configurations or onboard services to adaptive sampling.
-To make changes, ensure your user account is upgraded to the default `Datadog Admin` role.
 
 If your organization uses custom roles, assign your user to a custom role that includes `APM Remote Configuration Write` and `APM Service Ingest Write` [permissions.][4]
 
 ### Restrict access
-Use [granular access controls][19] to manage who can modify a specific service’s adaptive sampling configuration. You can restrict access based on roles, teams or individual users.
+Use [granular access controls][19] to manage who can modify a service's adaptive sampling configuration. You can restrict access based on roles, teams, or individual users.
 
 {{< img src="/tracing/guide/adaptive_sampling/add_restriction.png" alt="Restrict permission" style="width:100%;">}}
 
@@ -152,11 +151,11 @@ To restrict access:
 
 2. Click **Restrict access**.
 
-3. Select the teams, roles or users to grant access.
+3. Select the teams, roles, or users to grant access to.
 
 4. Click **Add**.
 
-Note: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
+**Note**: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
 
 
 ## Further reading
