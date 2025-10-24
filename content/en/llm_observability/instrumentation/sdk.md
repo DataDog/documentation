@@ -1902,7 +1902,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `assessment`
 : optional - _string_
-<br />A text assessment of the validity of this evaluation. Accepted values are "pass" and "fail".
+<br />A text assessment of the validity of this evaluation. Accepted values are `pass` and `fail`.
 
 `reasoning`
 : optional - _string_
