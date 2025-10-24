@@ -34,8 +34,6 @@ To apply an annotation to multiple timeseries at once:
 
 To edit an annotation you've created, hover over the annotation line, click the three dots menu, and choose **Edit** or **Edit for all widgets**.
 
-<div class="alert alert-info">You can't .</a></div>
-
 ## Deleting an annotation
 
 To delete an annotation you've created, hover over the annotation line, click the three dots menu, and choose **Delete** or **Delete from all widgets**.
