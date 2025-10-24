@@ -83,7 +83,7 @@ const logger = createLogger({
   ],
 });
 
-logger.info(`Hello world!`);
+logger.info('Hello world!');
 {{< /code-block >}}
 
    Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=nodejs` (in your sidecar container) to enable advanced Datadog log parsing.

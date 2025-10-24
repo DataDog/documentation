@@ -66,7 +66,7 @@ const logger = createLogger({
   ],
 });
 
-logger.info(`Hello world!`);
+logger.info('Hello world!');
 {{< /code-block >}}
 
    For more information, see [Correlating Node.js Logs and Traces][2].
