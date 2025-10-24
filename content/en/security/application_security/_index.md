@@ -35,7 +35,7 @@ algolia:
   tags: ["asm", "App and API Protection"]
 ---
 
-{{< learning-center-callout header="Get real-time AI security guardrails" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
   AI Guard helps secure your AI apps and agents in real-time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
 {{< /learning-center-callout >}}
 
