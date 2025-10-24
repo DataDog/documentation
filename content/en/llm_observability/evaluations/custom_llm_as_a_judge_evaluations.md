@@ -30,17 +30,17 @@ You can create and manage custom evaluations from the [Evaluations page][1] in L
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
    {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
 
-2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name when querying evaluation results. The name must be unique within your application.
+1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You will use this name when querying evaluation results. The name must be unique within your application.
 
-3. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
 
-4. Use the **Model** drop-down menu to select a model to use for your LLM judge.
+1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
 
-5. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
+1. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
    - **Create from scratch**: Use your own custom prompt (defined in the next step).
    - **Failure to Answer**, **Prompt Injection**, **Sentiment**, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
 
-6. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
+1. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
    For custom prompts, provide clear instructions describing what the evaluator should assess. 
 
    - Focus on a single evaluation goal 
@@ -79,7 +79,7 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-7. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
+1. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
 
 ### Define the Evaluation Output
 You can configure Reasoning and Assessment Criteria directly in the UI when defining your evaluation schema.
@@ -91,12 +91,12 @@ You can configure Reasoning and Assessment Criteria directly in the UI when defi
    - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
    <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
 
-2. Add Reasoning
+1. Add Reasoning
 
 When **Enable Reasoning** is checked, the LLM-as-a-Judge provides a short justification for its decision (for example, why a score of 8 was given).
 This helps you understand how and why evaluations are made — particularly useful for auditing subjective metrics like tone, empathy, or helpfulness.
    
-3. Define the structure of your output.
+1. Define the structure of your output.
 
    {{< tabs >}}
    {{% tab "OpenAI" %}}
@@ -116,7 +116,7 @@ This helps you understand how and why evaluations are made — particularly usef
    {{% /tab %}}
    {{< /tabs >}}
 
-4. Configure Assessment Criteria
+1. Configure Assessment Criteria
    Assessment Criteria determines how results are interpreted as Pass or Fail.
    - For Boolean: Select True to mark a result as “Pass” and False to mark a result as “Fail.”
    - For Score: Define numerical thresholds to determine passing performance
@@ -152,7 +152,7 @@ After you save your evaluation, Datadog automatically runs your evaluation on ta
 
 Each evaluation result includes:
 
-- The evaluated value (e.g., True, 9, or Neutral)
+- The evaluated value (e.g., `True`, `9`, or `Neutral`)
 - The reasoning (when enabled)
 - The pass/fail indicator (based on your assessment criteria)
 
