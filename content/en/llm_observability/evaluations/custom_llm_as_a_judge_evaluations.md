@@ -121,9 +121,9 @@ Adding reasoning is also helpful to [make the LLM judge more accurate][5].
 
 4. Configure Assessment Criteria
    Assessment Criteria determines how results are interpreted as Pass or Fail.
-   - For Boolean: Select True to mark a result as “Pass” and False to mark a result as “Fail.”
+   - For Boolean: Select **True** to mark a result as "Pass" and **False** to mark a result as "Fail".
    - For Score: Define numerical thresholds to determine passing performance
-   - For Categorical: Map specific label values to Pass or Fail states (for example, “Excellent” and “Good” = Pass, “Poor” = Fail).
+   - For Categorical: Map specific label values to Pass or Fail states (for example, "Excellent" and "Good" = Pass, "Poor" = Fail).
 
 This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
 
@@ -142,8 +142,8 @@ Under Evaluation Scope, define where and how your evaluation runs. This helps co
 
 ### Test and Preview
 
-Use the Test Evaluation panel on the right to preview results.
-You can enter sample {{span_input}} and {{span_output}} values and click Run Evaluation to see both the result, the reasoning explanation, and whether it passed or failed returned by your LLM judge.
+Use the **Test Evaluation** panel on the right to preview results.
+You can enter sample `{{span_input}}` and `{{span_output}}` values and click **Run Evaluation** to see both the result, the reasoning explanation, and whether it passed or failed returned by your LLM judge.
 
 Refine your prompt and schema until outputs are consistent and interpretable.
 
