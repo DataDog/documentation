@@ -42,7 +42,9 @@ A template variable is defined by:
 ### Template variable values
 Template variable values (values available using the template variable dropdown menus) are populated based on the sources that widgets in the dashboard are using. For example, if your dashboard has widgets querying logs, only values from logs are shown. If your dashboard has widgets querying logs, metrics, and RUM, values from logs, metrics, and RUM are shown.
 
-For most sources, template variable values are relevant to your dashboard's global timeframe. If your dashboard's timeframe is set to the last 15 minutes, only template variable values from the last 15 minutes are shown. If your dashboard timeframe is set to last August 15th from 12:00 AM to 11:59 PM, only values from that timeframe are shown.
+For most sources, template variable values are relevant to your dashboard's global time frame. For example:
+- If your dashboard's time frame is set to the last 15 minutes, only template variable values from the last 15 minutes are shown. 
+- If your dashboard time frame is set to last August 15th from 12:00 a.m. to 11:59 p.m., only values from that timeframe are shown.
 
 | Data Source                                     | Data query period   |
 |--------------------------------------           |---------------------|
