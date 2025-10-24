@@ -11,7 +11,7 @@ further_reading:
   text: Source code for dd-sdk-ios
 - link: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
   tag: "Source Code"
-  text: Source code for dd-sdk-ios-apollo-interceptor
+  text: Datadog Integration for Apollo iOS
 ---
 
 This page lists integrated libraries you can use for iOS and tvOS applications.
@@ -45,31 +45,31 @@ import DatadogRUM
 URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
 For additional information on sampling rate, distributed tracing, and adding custom 
-attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track 
+attributes to tracked RUM resources, see [Advanced Configuration > Automatically track 
 network requests][4].
 
 3. Add the [Datadog Apollo interceptor][8] package to your `Package.swift` file:
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
-]
-```
+   ```swift
+   dependencies: [
+       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
+   ]
+   ```
 
 4. Add the Datadog interceptor to your Apollo Client setup:
 
-```swift
-import Apollo
-import DatadogApollo
+   ```swift
+   import Apollo
+   import DatadogApollo
 
-class CustomInterceptorProvider: DefaultInterceptorProvider {
-    override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
-        var interceptors = super.interceptors(for: operation)
-        interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
-        return interceptors
-    }
-}
-```
+   class CustomInterceptorProvider: DefaultInterceptorProvider {
+       override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
+           var interceptors = super.interceptors(for: operation)
+           interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
+           return interceptors
+       }
+   }
+   ```
 
 For additional information on distributed tracing, adding custom attributes, and enabling GraphQL payload tracking, see [Advanced Configuration > Apollo instrumentation][7].
 

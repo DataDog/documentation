@@ -17,7 +17,7 @@ further_reading:
     text: "RUM iOS and tvOS monitoring supported versions"
   - link: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor"
     tag: "Source Code"
-    text: "Source code for dd-sdk-ios-apollo-interceptor"
+    text: "Datadog Integration for Apollo iOS"
 ---
 
 If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].
@@ -755,32 +755,32 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 
 #### Apollo instrumentation
 
-1. [Set up][2] RUM monitoring with Datadog iOS RUM.
+1. Set up [RUM monitoring with Datadog iOS RUM][2].
 
-2. [Set up](#basic-network-instrumentation) URLSession instrumentation with the Datadog RUM SDK.
+2. Set up [URLSession instrumentation with the Datadog RUM SDK](#basic-network-instrumentation).
 
 3. Add the following to your `Package.swift` file:
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
-]
-```
+   ```swift
+   dependencies: [
+       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
+   ]
+   ```
 
 4. Add the Datadog interceptor to your Apollo Client setup:
 
-```swift
-import Apollo
-import DatadogApollo
+   ```swift
+   import Apollo
+   import DatadogApollo
 
-class CustomInterceptorProvider: DefaultInterceptorProvider {
-    override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
-        var interceptors = super.interceptors(for: operation)
-        interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
-        return interceptors
-    }
-}
-```
+   class CustomInterceptorProvider: DefaultInterceptorProvider {
+       override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
+           var interceptors = super.interceptors(for: operation)
+           interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
+           return interceptors
+       }
+   }
+   ```
 
 This automatically adds Datadog headers to your GraphQL requests, allowing them to be tracked by Datadog.
 
