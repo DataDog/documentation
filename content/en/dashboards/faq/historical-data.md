@@ -26,6 +26,15 @@ If you're planning to frequently churn hosts, add a tag to the [Agent][2] in `da
 
 Additionally, you can still manually apply tags or attributes by entering them in the value input field within template variable dropdown panels.
 
+### Template Variables
+Template variable dropdown panels have values that are populated from different sources based on the sources used by the dashboard
+The age out period for template variable values will be queried for depends on the data source:
+| Source            | Age Out  |
+|------------------ |----------|
+| Metrics           | 48 hours |
+| Cloud cost        | 48 hours |
+| All other sources | [Standard retention period for source](https://docs.datadoghq.com/data_security/data_retention_periods/) |
+
 ## Deleting
 
 ### Metrics and tags
