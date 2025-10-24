@@ -1902,7 +1902,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `assessment`
 : optional - _string_
-<br />A text assessment of the validity of this evaluation. Accepted values are `pass` and `fail`.
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
 
 `reasoning`
 : optional - _string_
@@ -1935,7 +1935,7 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
-        assessment="pass",
+        assessment="fail",
         reasoning="Malicious intent was detected in the user instructions."
     )
 
@@ -1948,7 +1948,7 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
-        assessment="pass",
+        assessment="fail",
         reasoning="Malicious intent was detected in the user instructions."
     )
     return completion
