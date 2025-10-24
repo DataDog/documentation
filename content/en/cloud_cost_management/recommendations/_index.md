@@ -620,6 +620,7 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 - Cloud provider accounts (for all desired Cloud Cost recommendations)
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
+- [GCP integration and resource collection][10] (for GCP recommendations)
 
 ## Setup
 
