@@ -388,7 +388,7 @@
                     "type": "undefined"
                   },
                   "spec": {
-                    "type": "undefined"
+                    "type": ""
                   }
                 },
                 "type": "action"
@@ -590,7 +590,7 @@
                       "type": "undefined"
                     },
                     "spec": {
-                      "type": "undefined"
+                      "type": ""
                     }
                   },
                   "type": "action"
@@ -834,7 +834,7 @@
                       "type": "undefined"
                     },
                     "spec": {
-                      "type": "undefined"
+                      "type": ""
                     }
                   },
                   "type": "action"
@@ -1067,7 +1067,7 @@
                     "type": "undefined"
                   },
                   "spec": {
-                    "type": "undefined"
+                    "type": ""
                   }
                 },
                 "type": "action"

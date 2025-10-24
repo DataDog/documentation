@@ -590,6 +590,10 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 ### PR comments
 
+<div class="alert alert-warning">
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
+
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
 PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
