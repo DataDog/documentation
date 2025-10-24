@@ -20117,6 +20117,179 @@ components:
       - PIPELINES_FAILED_DESCENDING
       - PIPELINES_DURATION_LOST_ASCENDING
       - PIPELINES_DURATION_LOST_DESCENDING
+    FleetDeployment:
+      description: A deployment that defines automated configuration changes for a
+        fleet of hosts.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetDeploymentAttributes'
+        id:
+          description: Unique identifier for the deployment.
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetDeploymentResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetDeploymentAttributes:
+      description: Attributes of a deployment in the response.
+      properties:
+        config_operations:
+          description: Ordered list of configuration file operations to perform on
+            the target hosts.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentOperation'
+          type: array
+        estimated_end_time_unix:
+          description: Estimated completion time of the deployment as a Unix timestamp
+            (seconds since epoch).
+          example: 1699999999
+          format: int64
+          type: integer
+        filter_query:
+          description: Query used to filter and select target hosts for the deployment.
+            Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        high_level_status:
+          description: Current high-level status of the deployment (for example, "pending",
+            "running", "completed", "failed").
+          example: pending
+          type: string
+        total_hosts:
+          description: Total number of hosts targeted by this deployment.
+          example: 42
+          format: int64
+          type: integer
+      type: object
+    FleetDeploymentConfigureAttributes:
+      description: Attributes for creating a new configuration deployment.
+      properties:
+        config_operations:
+          description: Ordered list of configuration file operations to perform on
+            the target hosts.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentOperation'
+          type: array
+        filter_query:
+          description: Query used to filter and select target hosts for the deployment.
+            Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+      required:
+      - config_operations
+      type: object
+    FleetDeploymentConfigureCreate:
+      description: Data for creating a new deployment.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetDeploymentConfigureAttributes'
+        type:
+          $ref: '#/components/schemas/FleetDeploymentResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    FleetDeploymentConfigureCreateRequest:
+      description: Request payload for creating a new deployment.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetDeploymentConfigureCreate'
+      required:
+      - data
+      type: object
+    FleetDeploymentFileOp:
+      description: "Type of file operation to perform on the target configuration
+        file.\n- `merge-patch`: Merges the provided patch data with the existing configuration
+        file.\n  Creates the file if it doesn't exist.\n- `delete`: Removes the specified
+        configuration file from the target hosts."
+      enum:
+      - merge-patch
+      - delete
+      example: merge-patch
+      type: string
+      x-enum-varnames:
+      - MERGE_PATCH
+      - DELETE
+    FleetDeploymentOperation:
+      description: A single configuration file operation to perform on the target
+        hosts.
+      properties:
+        file_op:
+          $ref: '#/components/schemas/FleetDeploymentFileOp'
+        file_path:
+          description: Absolute path to the target configuration file on the host.
+          example: /datadog.yaml
+          type: string
+        patch:
+          additionalProperties: {}
+          description: 'Patch data in JSON format to apply to the configuration file.
+
+            When using `merge-patch`, this object is merged with the existing configuration,
+
+            allowing you to add, update, or override specific fields without replacing
+            the entire file.
+
+            The structure must match the target configuration file format (for example,
+            YAML structure for Datadog Agent config).
+
+            Not applicable when using the `delete` operation.'
+          example:
+            apm_config:
+              enabled: true
+            log_level: debug
+            logs_enabled: true
+          type: object
+      required:
+      - file_op
+      - file_path
+      type: object
+    FleetDeploymentResourceType:
+      default: deployment
+      description: The type of deployment resource.
+      enum:
+      - deployment
+      example: deployment
+      type: string
+      x-enum-varnames:
+      - DEPLOYMENT
+    FleetDeploymentResponse:
+      description: Response containing a single deployment.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetDeployment'
+      type: object
+    FleetDeploymentsPage:
+      description: Pagination details for the list of deployments.
+      properties:
+        total_count:
+          description: Total number of deployments available across all pages.
+          example: 25
+          format: int64
+          type: integer
+      type: object
+    FleetDeploymentsResponse:
+      description: Response containing a paginated list of deployments.
+      properties:
+        data:
+          description: Array of deployments matching the query criteria.
+          items:
+            $ref: '#/components/schemas/FleetDeployment'
+          type: array
+        meta:
+          $ref: '#/components/schemas/FleetDeploymentsResponseMeta'
+      required:
+      - data
+      type: object
+    FleetDeploymentsResponseMeta:
+      description: Metadata for the list of deployments, including pagination information.
+      properties:
+        page:
+          $ref: '#/components/schemas/FleetDeploymentsPage'
+      type: object
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -53527,6 +53700,253 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/unstable/fleet/deployments:
+    get:
+      description: 'Retrieve a list of all deployments for fleet automation.
+
+        Use the `page_size` and `page_offset` parameters to paginate results.'
+      operationId: ListFleetDeployments
+      parameters:
+      - description: Number of deployments to return per page. Maximum value is 100.
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 100
+          type: integer
+      - description: Index of the first deployment to return. Use this with `page_size`
+          to paginate through results.
+        in: query
+        name: page_offset
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all deployments
+      tags:
+      - Fleet Automation
+      x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/configure:
+    post:
+      description: 'Create a new deployment to apply configuration changes
+
+        to a fleet of hosts matching the specified filter query.'
+      operationId: CreateFleetDeploymentConfigure
+      requestBody:
+        content:
+          application/json:
+            examples:
+              add_log_integration:
+                summary: Add log integrations for multiple services
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /conf.d/postgres.d/logs.yaml
+                        patch:
+                          logs:
+                          - path: /var/log/postgres.log
+                            service: postgres1
+                            source: postgres
+                            type: file
+                      - file_op: merge-patch
+                        file_path: /conf.d/kafka.d/logs.yaml
+                        patch:
+                          logs:
+                          - path: /var/log/kafka.log
+                            service: kafka1
+                            source: kafka
+                            type: file
+                      filter_query: env:prod
+                    type: deployment
+              delete_config_file:
+                summary: Delete a configuration file
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: delete
+                        file_path: /conf.d/old-integration.yaml
+                      filter_query: env:dev
+                    type: deployment
+              enable_apm_and_logs:
+                summary: Enable APM and Logs products
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /datadog.yaml
+                        patch:
+                          apm_config:
+                            enabled: true
+                          log_level: debug
+                          logs_enabled: true
+                      filter_query: env:prod AND service:web
+                    type: deployment
+              simple_log_level:
+                summary: Set log level to info
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /datadog.yaml
+                        patch:
+                          log_level: info
+                      filter_query: env:staging
+                    type: deployment
+            schema:
+              $ref: '#/components/schemas/FleetDeploymentConfigureCreateRequest'
+        description: Request payload containing the deployment details.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create a deployment
+      tags:
+      - Fleet Automation
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+        - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/{deployment_id}:
+    get:
+      description: Retrieve the details of a specific deployment using its unique
+        identifier.
+      operationId: GetFleetDeployment
+      parameters:
+      - description: The unique identifier of the deployment to retrieve.
+        example: abc-def-ghi
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a deployment by ID
+      tags:
+      - Fleet Automation
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/{deployment_id}/cancel:
+    post:
+      description: 'Cancel this deployment and stop all associated operations.
+
+        If a workflow is currently running for this deployment, it is canceled immediately.
+
+        Changes already applied to hosts are not rolled back.'
+      operationId: CancelFleetDeployment
+      parameters:
+      - description: The unique identifier of the deployment to cancel.
+        example: abc-def-ghi
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deployment successfully canceled.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Cancel a deployment
+      tags:
+      - Fleet Automation
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+        - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/actions-datastores:
     get:
       description: Lists all datastores for the organization.
@@ -81708,6 +82128,12 @@ tags:
     through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/)
     for more information.
   name: Fastly Integration
+- description: 'Manage automated deployments across your fleet of hosts.
+
+    Use these endpoints to create, retrieve, and cancel deployments
+
+    that apply configuration changes to multiple hosts at once.'
+  name: Fleet Automation
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
     through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
