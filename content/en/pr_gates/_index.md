@@ -56,6 +56,10 @@ You can configure PR Gates rules for the following categories:
 
 After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][13] or [Azure DevOps integration][14]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
+<div class="alert alert-warning">
+  PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
+
 ## Rule types
 
 PR Gates offers the following rule types:
