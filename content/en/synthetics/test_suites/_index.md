@@ -13,7 +13,7 @@ further_reading:
   text: "Synthetic Monitoring Troubleshooting"
 - link: "https://www.datadoghq.com/blog/test-suites/"
   tag: "Blog"
-  text: "Get organized, actionable insights from complex test environments with Datadog Test Suites"
+  text: "Get organized, actionable insights from complex test environments"
 ---
 
 
