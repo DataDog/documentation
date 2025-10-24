@@ -858,6 +858,58 @@ menu:
           - SearchEvents
         unstable: []
         order: 2
+    - name: Create on-call event email address
+      url: '#create-on-call-event-email-address'
+      identifier: events-create-on-call-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallEventEmailAddress
+        unstable:
+          - v2
+        order: 6
+    - name: Get on-call event email address
+      url: '#get-on-call-event-email-address'
+      identifier: events-get-on-call-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallEventEmailAddress
+        unstable:
+          - v2
+        order: 7
+    - name: Create event email address
+      url: '#create-event-email-address'
+      identifier: events-create-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEventEmailAddress
+        unstable:
+          - v2
+        order: 8
+    - name: List event email addresses
+      url: '#list-event-email-addresses'
+      identifier: events-list-event-email-addresses
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEventEmailAddresses
+        unstable:
+          - v2
+        order: 9
     - name: Get an event
       url: '#get-an-event'
       identifier: events-get-an-event

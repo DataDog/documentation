@@ -12217,6 +12217,46 @@ components:
       required:
       - data
       type: object
+    CreateEventEmailAddressRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateEventEmailAddressRequestData'
+      type: object
+    CreateEventEmailAddressRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateEventEmailAddressRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/EventEmailsType'
+      required:
+      - type
+      type: object
+    CreateEventEmailAddressRequestDataAttributes:
+      properties:
+        alert_type:
+          type: string
+        description:
+          type: string
+        format:
+          example: ''
+          type: string
+        notify_handles:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        tags:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - format
+      - notify_handles
+      - tags
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -12268,6 +12308,41 @@ components:
       - selectors
       - name
       - targets
+      type: object
+    CreateOnCallEventEmailAddressRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateOnCallEventEmailAddressRequestData'
+      type: object
+    CreateOnCallEventEmailAddressRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateOnCallEventEmailAddressRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/EventEmailsType'
+      required:
+      - type
+      type: object
+    CreateOnCallEventEmailAddressRequestDataAttributes:
+      properties:
+        alert_type:
+          type: string
+        description:
+          type: string
+        format:
+          example: ''
+          type: string
+        tags:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        team_handle:
+          type: string
+      required:
+      - format
+      - tags
       type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
@@ -18500,6 +18575,112 @@ components:
             the default subdomain.
           type: string
       type: object
+    EventEmailAddressResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressResponseData'
+      type: object
+    EventEmailAddressResponseArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EventEmailAddressResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    EventEmailAddressResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventEmailAddressResponseDataAttributes'
+        id:
+          example: ''
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EventEmailAddressResponseDataRelationships'
+        type:
+          $ref: '#/components/schemas/EventEmailsType'
+      required:
+      - type
+      - id
+      type: object
+    EventEmailAddressResponseDataAttributes:
+      properties:
+        alert_type:
+          type: string
+        created_at:
+          example: ''
+          format: date-time
+          type: string
+        description:
+          type: string
+        email:
+          example: ''
+          type: string
+        format:
+          example: ''
+          type: string
+        last_used_at:
+          format: date-time
+          type: string
+        notify_handles:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        revoked_at:
+          format: date-time
+          type: string
+        tags:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - created_at
+      - email
+      - format
+      - notify_handles
+      - tags
+      type: object
+    EventEmailAddressResponseDataRelationships:
+      properties:
+        created_by:
+          $ref: '#/components/schemas/EventEmailAddressResponseDataRelationshipsUser'
+        revoked_by:
+          $ref: '#/components/schemas/EventEmailAddressResponseDataRelationshipsUser'
+      required:
+      - created_by
+      type: object
+    EventEmailAddressResponseDataRelationshipsUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressResponseDataRelationshipsUserData'
+      required:
+      - data
+      type: object
+    EventEmailAddressResponseDataRelationshipsUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      required:
+      - type
+      - id
+      type: object
+    EventEmailsType:
+      default: event_emails
+      description: Event emails resource type.
+      enum:
+      - event_emails
+      example: event_emails
+      type: string
+      x-enum-varnames:
+      - EVENT_EMAILS
     EventPayload:
       additionalProperties: false
       description: Event attributes.
@@ -62203,6 +62384,96 @@ paths:
       - Events
       x-codegen-request-body-name: body
       x-menu-order: 2
+  /api/v2/events/mail:
+    get:
+      operationId: ListEventEmailAddresses
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressResponseArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List event email addresses
+      tags:
+      - Events
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+    post:
+      operationId: CreateEventEmailAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventEmailAddressRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressResponse'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create event email address
+      tags:
+      - Events
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/events/mail/on-call:
+    get:
+      operationId: GetOnCallEventEmailAddress
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressResponseArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get on-call event email address
+      tags:
+      - Events
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+    post:
+      operationId: CreateOnCallEventEmailAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOnCallEventEmailAddressRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressResponse'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create on-call event email address
+      tags:
+      - Events
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -62231,6 +62502,9 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
       summary: Search events
       tags:
       - Events

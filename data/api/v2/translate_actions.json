@@ -981,6 +981,22 @@
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
   },
+  "ListEventEmailAddresses": {
+    "summary": "List event email addresses"
+  },
+  "CreateEventEmailAddress": {
+    "summary": "Create event email address",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetOnCallEventEmailAddress": {
+    "summary": "Get on-call event email address"
+  },
+  "CreateOnCallEventEmailAddress": {
+    "summary": "Create on-call event email address",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "SearchEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search events",
