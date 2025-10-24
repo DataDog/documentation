@@ -26,7 +26,7 @@ Additionally, you can still manually apply tags or attributes by entering them i
 
 ### Template Variables
 Template variable dropdown panels have values that are populated from different sources based on the sources used by the dashboard.
-The age out period for template variable values will be queried for depends on the data source:
+The age-out period for template variable values that are queried depends on the data source:
 | Source            | Age Out  |
 |------------------ |----------|
 | Metrics           | 48 hours |
