@@ -39673,6 +39673,121 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+    ResolveVulnerableSymbolsRequest:
+      description: The definition of `ResolveVulnerableSymbolsRequest` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsRequestData'
+      type: object
+    ResolveVulnerableSymbolsRequestData:
+      description: The definition of `ResolveVulnerableSymbolsRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsRequestDataAttributes'
+        id:
+          description: The `ResolveVulnerableSymbolsRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsRequestDataType'
+      required:
+      - type
+      type: object
+    ResolveVulnerableSymbolsRequestDataAttributes:
+      description: The definition of `ResolveVulnerableSymbolsRequestDataAttributes`
+        object.
+      properties:
+        purls:
+          description: The `attributes` `purls`.
+          items:
+            type: string
+          type: array
+      type: object
+    ResolveVulnerableSymbolsRequestDataType:
+      default: resolve-vulnerable-symbols-request
+      description: Resolve vulnerable symbols request resource type.
+      enum:
+      - resolve-vulnerable-symbols-request
+      example: resolve-vulnerable-symbols-request
+      type: string
+      x-enum-varnames:
+      - RESOLVE_VULNERABLE_SYMBOLS_REQUEST
+    ResolveVulnerableSymbolsResponse:
+      description: The definition of `ResolveVulnerableSymbolsResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseData'
+      type: object
+    ResolveVulnerableSymbolsResponseData:
+      description: The definition of `ResolveVulnerableSymbolsResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseDataAttributes'
+        id:
+          description: The `ResolveVulnerableSymbolsResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseDataType'
+      required:
+      - type
+      type: object
+    ResolveVulnerableSymbolsResponseDataAttributes:
+      description: The definition of `ResolveVulnerableSymbolsResponseDataAttributes`
+        object.
+      properties:
+        results:
+          description: The `attributes` `results`.
+          items:
+            $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseResults'
+          type: array
+      type: object
+    ResolveVulnerableSymbolsResponseDataType:
+      default: resolve-vulnerable-symbols-response
+      description: Resolve vulnerable symbols response resource type.
+      enum:
+      - resolve-vulnerable-symbols-response
+      example: resolve-vulnerable-symbols-response
+      type: string
+      x-enum-varnames:
+      - RESOLVE_VULNERABLE_SYMBOLS_RESPONSE
+    ResolveVulnerableSymbolsResponseResults:
+      description: The definition of `ResolveVulnerableSymbolsResponseResults` object.
+      properties:
+        purl:
+          description: The `items` `purl`.
+          type: string
+        vulnerable_symbols:
+          description: The `items` `vulnerable_symbols`.
+          items:
+            $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseResultsVulnerableSymbols'
+          type: array
+      type: object
+    ResolveVulnerableSymbolsResponseResultsVulnerableSymbols:
+      description: The definition of `ResolveVulnerableSymbolsResponseResultsVulnerableSymbols`
+        object.
+      properties:
+        advisory_id:
+          description: The `items` `advisory_id`.
+          type: string
+        symbols:
+          description: The `items` `symbols`.
+          items:
+            $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseResultsVulnerableSymbolsSymbols'
+          type: array
+      type: object
+    ResolveVulnerableSymbolsResponseResultsVulnerableSymbolsSymbols:
+      description: The definition of `ResolveVulnerableSymbolsResponseResultsVulnerableSymbolsSymbols`
+        object.
+      properties:
+        name:
+          description: The `items` `name`.
+          type: string
+        type:
+          description: The `items` `type`.
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+      type: object
     ResourceFilterAttributes:
       description: Attributes of a resource filter.
       example:
@@ -42276,6 +42391,243 @@ components:
           example: report_id
           type: string
       type: object
+    ScaRequest:
+      description: The definition of `ScaRequest` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScaRequestData'
+      type: object
+    ScaRequestData:
+      description: The definition of `ScaRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScaRequestDataAttributes'
+        id:
+          description: The `ScaRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScaRequestDataType'
+      required:
+      - type
+      type: object
+    ScaRequestDataAttributes:
+      description: The definition of `ScaRequestDataAttributes` object.
+      properties:
+        commit:
+          $ref: '#/components/schemas/ScaRequestDataAttributesCommit'
+        dependencies:
+          description: The `attributes` `dependencies`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItems'
+          type: array
+        env:
+          description: The `attributes` `env`.
+          type: string
+        files:
+          description: The `attributes` `files`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesFilesItems'
+          type: array
+        relations:
+          description: The `attributes` `relations`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesRelationsItems'
+          type: array
+        repository:
+          $ref: '#/components/schemas/ScaRequestDataAttributesRepository'
+        service:
+          description: The `attributes` `service`.
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: The `attributes` `tags`.
+          type: object
+        vulnerabilities:
+          description: The `attributes` `vulnerabilities`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesVulnerabilitiesItems'
+          type: array
+      type: object
+    ScaRequestDataAttributesCommit:
+      description: The definition of `ScaRequestDataAttributesCommit` object.
+      properties:
+        author_date:
+          description: The `commit` `author_date`.
+          type: string
+        author_email:
+          description: The `commit` `author_email`.
+          type: string
+        author_name:
+          description: The `commit` `author_name`.
+          type: string
+        branch:
+          description: The `commit` `branch`.
+          type: string
+        committer_email:
+          description: The `commit` `committer_email`.
+          type: string
+        committer_name:
+          description: The `commit` `committer_name`.
+          type: string
+        sha:
+          description: The `commit` `sha`.
+          type: string
+      type: object
+    ScaRequestDataAttributesDependenciesItems:
+      description: The definition of `ScaRequestDataAttributesDependenciesItems` object.
+      properties:
+        exclusions:
+          description: The `items` `exclusions`.
+          items:
+            type: string
+          type: array
+        group:
+          description: The `items` `group`.
+          type: string
+        is_dev:
+          description: The `items` `is_dev`.
+          type: boolean
+        is_direct:
+          description: The `items` `is_direct`.
+          type: boolean
+        language:
+          description: The `items` `language`.
+          type: string
+        locations:
+          description: The `items` `locations`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems'
+          type: array
+        name:
+          description: The `items` `name`.
+          type: string
+        package_manager:
+          description: The `items` `package_manager`.
+          type: string
+        purl:
+          description: The `items` `purl`.
+          type: string
+        reachable_symbol_properties:
+          description: The `items` `reachable_symbol_properties`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems'
+          type: array
+        version:
+          description: The `items` `version`.
+          type: string
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItems:
+      description: The definition of `ScaRequestDataAttributesDependenciesItemsLocationsItems`
+        object.
+      properties:
+        block:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+        name:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+        namespace:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+        version:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition:
+      description: A position in a file
+      properties:
+        end:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition'
+        file_name:
+          description: The `file_name`.
+          type: string
+        start:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition'
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition:
+      description: A position
+      properties:
+        col:
+          description: The `col`.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        line:
+          description: The `line`.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems:
+      description: The definition of `ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems`
+        object.
+      properties:
+        name:
+          description: The `items` `name`.
+          type: string
+        value:
+          description: The `items` `value`.
+          type: string
+      type: object
+    ScaRequestDataAttributesFilesItems:
+      description: The definition of `ScaRequestDataAttributesFilesItems` object.
+      properties:
+        name:
+          description: The `items` `name`.
+          type: string
+        purl:
+          description: The `items` `purl`.
+          type: string
+      type: object
+    ScaRequestDataAttributesRelationsItems:
+      description: The definition of `ScaRequestDataAttributesRelationsItems` object.
+      properties:
+        depends_on:
+          description: The `items` `depends_on`.
+          items:
+            type: string
+          type: array
+        ref:
+          description: The `items` `ref`.
+          type: string
+      type: object
+    ScaRequestDataAttributesRepository:
+      description: The definition of `ScaRequestDataAttributesRepository` object.
+      properties:
+        url:
+          description: The `repository` `url`.
+          type: string
+      type: object
+    ScaRequestDataAttributesVulnerabilitiesItems:
+      description: The definition of `ScaRequestDataAttributesVulnerabilitiesItems`
+        object.
+      properties:
+        affects:
+          description: The `items` `affects`.
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesVulnerabilitiesItemsAffectsItems'
+          type: array
+        bom_ref:
+          description: The `items` `bom_ref`.
+          type: string
+        id:
+          description: The `items` `id`.
+          type: string
+      type: object
+    ScaRequestDataAttributesVulnerabilitiesItemsAffectsItems:
+      description: The definition of `ScaRequestDataAttributesVulnerabilitiesItemsAffectsItems`
+        object.
+      properties:
+        ref:
+          description: The `items` `ref`.
+          type: string
+      type: object
+    ScaRequestDataType:
+      default: scarequests
+      description: Scarequests resource type.
+      enum:
+      - scarequests
+      example: scarequests
+      type: string
+      x-enum-varnames:
+      - SCAREQUESTS
     ScalarColumn:
       description: A single column in a scalar query response.
       oneOf:
@@ -78821,6 +79173,60 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.data.attributes.page.limit
         resultsPath: data
+  /api/v2/static-analysis-sca/dependencies:
+    post:
+      description: Post dependencies for analysis
+      operationId: CreateSCAResult
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScaRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Post dependencies for analysis
+      tags:
+      - Static Analysis
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis-sca/vulnerabilities/resolve-vulnerable-symbols:
+    post:
+      description: Post vulnerable symbols
+      operationId: CreateSCAResolveVulnerableSymbols
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveVulnerableSymbolsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveVulnerableSymbolsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: POST request to resolve vulnerable symbols
+      tags:
+      - Static Analysis
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -82455,6 +82861,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
   name: Spans Metrics
+- description: API for static analysis
+  name: Static Analysis
 - description: "Datadog Synthetics uses simulated user requests and browser rendering
     to help you ensure uptime,\nidentify regional issues, and track your application
     performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
