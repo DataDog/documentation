@@ -50,7 +50,7 @@ For most sources, template variable values are relevant to your dashboard's glob
 |--------------------------------------           |---------------------|
 | Metrics                                         | Now - 48 hours      |
 | Cloud cost                                      | Now - 48 hours      |
-| All other sources                               | Dashboard timeframe |
+| All other sources                               | Dashboard time frame |
 
 **Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. In addition, all data queried for template variables are subject to the data retention policy. For more information, see [Historical Data][4].
 
