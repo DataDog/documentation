@@ -241,7 +241,9 @@ SCA can be enabled on your running services using one of the following two metho
 
 To disable SCA, you must use the *same method* you used to enable SCA.
 
-**Note**: If you enabled SCA manually, you must disable it manually. You cannot disable it using the UI.
+{{< tabs >}}
+{{% tab "UI" %}}
+**Note**: If you enabled SCA through the `DD_APPSEC_SCA_ENABLED` environment variable you cannot disable it using the UI.
 
 To disable SCA through the UI, you can:
 
@@ -252,9 +254,14 @@ or
 * Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
 
-To disable SCA manually:
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+**Note**: If you enabled SCA through the UI, you cannot disable it by removing the `DD_APPSEC_SCA_ENABLED` environment variable.
 
 * Remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP applications.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Disabling Runtime Code Analysis (IAST)
 
