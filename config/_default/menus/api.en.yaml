@@ -7630,6 +7630,62 @@ menu:
           - ListFastlyAccounts
         unstable: []
         order: 1
+    - name: Fleet Automation
+      url: /api/latest/fleet-automation/
+      identifier: fleet-automation
+      generated: true
+    - name: Cancel a deployment
+      url: '#cancel-a-deployment'
+      identifier: fleet-automation-cancel-a-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelFleetDeployment
+        unstable:
+          - v2
+        order: 4
+    - name: Get a deployment by ID
+      url: '#get-a-deployment-by-id'
+      identifier: fleet-automation-get-a-deployment-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetDeployment
+        unstable:
+          - v2
+        order: 3
+    - name: Create a deployment
+      url: '#create-a-deployment'
+      identifier: fleet-automation-create-a-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentConfigure
+        unstable:
+          - v2
+        order: 1
+    - name: List all deployments
+      url: '#list-all-deployments'
+      identifier: fleet-automation-list-all-deployments
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetDeployments
+        unstable:
+          - v2
+        order: 0
     - name: IP Allowlist
       url: /api/latest/ip-allowlist/
       identifier: ip-allowlist

@@ -235,6 +235,19 @@ You can use the [tracing library][4] in your Orchestrion-built application. This
 Your Orchestrion-built application includes [continuous profiler][12] instrumentation.
 To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true` at runtime.
 
+#### Remove integrations
+
+You can remove integrations by modifying the imports in the `orchestrion.tool.go` file.
+You can also create your own `orchestrion.tool.go` file before you run `orchestrion`.
+You might do this if you don't want an integration,
+or if you want to reduce the number of transitive dependencies for integrations your program doesn't use.
+By default, Orchestrion imports `github.com/DataDog/dd-trace-go/orchestrion/all/v2`,
+which imports every library for which there is an Orchestrion integration.
+You can replace this import with imports of only the integrations you want to use.
+See [the tracer source code][17] for the list of supported integrations.
+
+**Note**: If you choose to import specific integrations, you must manually update `orchestrion.tool.go` each time you want to add a new integration.
+
 ### Troubleshooting
 
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
@@ -250,6 +263,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: /security/application_security/exploit-prevention/
 [16]: /tracing/trace_collection/library_config/go/#traces
+[17]: https://github.com/DataDog/dd-trace-go/blob/main/orchestrion/all/orchestrion.tool.go
 
 
 {{% /tab %}}

@@ -1,4 +1,22 @@
 {
+  "ListFleetDeployments": {
+    "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
+    "summary": "List all deployments"
+  },
+  "CreateFleetDeploymentConfigure": {
+    "description": "Create a new deployment to apply configuration changes\nto a fleet of hosts matching the specified filter query.",
+    "summary": "Create a deployment",
+    "request_description": "Request payload containing the deployment details.",
+    "request_schema_description": "Request payload for creating a new deployment."
+  },
+  "GetFleetDeployment": {
+    "description": "Retrieve the details of a specific deployment using its unique identifier.",
+    "summary": "Get a deployment by ID"
+  },
+  "CancelFleetDeployment": {
+    "description": "Cancel this deployment and stop all associated operations.\nIf a workflow is currently running for this deployment, it is canceled immediately.\nChanges already applied to hosts are not rolled back.",
+    "summary": "Cancel a deployment"
+  },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
     "summary": "List datastores"
