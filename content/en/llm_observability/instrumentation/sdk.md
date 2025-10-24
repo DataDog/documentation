@@ -2027,6 +2027,14 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][2].
+
+`assessment`
+: optional - _string_
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
@@ -2055,6 +2063,8 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        assessment="fail",
+        reasoning="Malicious intent was detected in the user instructions."
     )
 
     # joining an evaluation to a span via span ID and trace ID
@@ -2066,6 +2076,8 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        assessment="fail",
+        reasoning="Malicious intent was detected in the user instructions."
     )
     return completion
 {{< /code-block >}}
