@@ -242,9 +242,9 @@ SCA can be enabled on your running services using one of the following two metho
 To disable SCA, you must use the *same method* you used to enable SCA.
 
 {{< tabs >}}
-{{% tab "Enabled via UI" %}}
+{{% tab "Enabled in the UI" %}}
 <div class="alert alert-danger">
-If you enabled SCA through the `DD_APPSEC_SCA_ENABLED` environment variable you cannot disable it using the UI.
+If you enabled SCA through the <code>DD_APPSEC_SCA_ENABLED</code> environment variable, you cannot disable it using the UI.
 </div>
 
 To disable SCA through the UI, you can:
@@ -259,9 +259,9 @@ or
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://app.datadoghq.com/security/code-security/inventory/services
 {{% /tab %}}
-{{% tab "Enabled via environment variable" %}}
+{{% tab "Enabled using environment variable" %}}
 <div class="alert alert-danger">
-If you enabled SCA through the UI, you cannot disable it by removing the `DD_APPSEC_SCA_ENABLED` environment variable.
+If you enabled SCA through the UI, you cannot disable it by removing the <code>DD_APPSEC_SCA_ENABLED</code> environment variable.
 </div>
 
 * Remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP applications.
