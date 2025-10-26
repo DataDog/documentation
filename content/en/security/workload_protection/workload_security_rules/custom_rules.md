@@ -42,7 +42,7 @@ You can create and deploy different custom policies containing rules you want to
 
 <div class="alert alert-info">Policy pinning is supported in Agent version 7.71.0 and later. Previous Agents will continue to receive the latest policy updates automatically.</div>
 
-When Datadog-managed policies are updated by Datadog they are automatically deployed to your infrastructure.
+When Datadog-managed policies are updated by Datadog, they are automatically deployed to your infrastructure.
 
 To control when a new policy version is deployed to your infrastructure, you can pin the policy to its current version. Pinning a policy version prevents policy updates from being automatically rolled out when Datadog releases a new policy version. 
 
