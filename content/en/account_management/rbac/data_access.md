@@ -71,7 +71,7 @@ Terraform support will be announced after Data Access Control is generally avail
 - Software Delivery repository info (CI Visibility pipelines)
 - Cloud costs
 - Custom metrics
-    - **Note:** Standard metrics are not supported
+    - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - Logs
 - RUM sessions

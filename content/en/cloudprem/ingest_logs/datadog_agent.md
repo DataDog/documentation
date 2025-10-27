@@ -23,11 +23,24 @@ This document provides configuration steps for using the Datadog Agent to send l
 ## Key requirements
 To send logs with the Datadog Agent to CloudPrem, you must configure two environment variables:
 
-`DD_LOGS_CONFIG_LOGS_DD_URL` 
+`DD_LOGS_CONFIG_LOGS_DD_URL`
 : Set this to your CloudPrem indexer endpoint, usually `http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`. This tells the Agent where to send the logs
 
-`DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` 
+`DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION`
 : (Optional) This is an optional but highly recommended variable. Set it to a large value, like "100000" (approximately 5 years). This ensures the Agent adds host-level tags to every log it sends. The Datadog SaaS platform automatically enriches logs with these tags after ingestion, but CloudPrem requires the Agent to add them upfront.
+
+### Proxy
+
+If you have configured the Datadog Agent to use a proxy and CloudPrem is hosted in your internal network, you need to configure the `no_proxy` setting so the Agent can send logs directly to CloudPrem without passing through the proxy.
+
+```yaml
+# In the no_proxy section, add the CloudPrem DNS
+no_proxy:
+ - http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280
+```
+
+Additionally, you need to set `DD_NO_PROXY_NONEXACT_MATCH` to true. For more details, see [Datadog Agent Proxy Configuration][2].
+
 
 ## Send Kubernetes logs with the Datadog Operator
 
@@ -199,3 +212,4 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/containers/datadog_operator/#installation-and-deployment
+[2]: /agent/configuration/proxy/#proxy-server-setup-examples
