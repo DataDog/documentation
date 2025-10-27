@@ -40,9 +40,6 @@ Instrumenting your application allows observability data to be sent to the Agent
 
 {{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Service discovery is in Preview">}}
-Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
-{{< /callout >}}
 
 ## Instrumentation types
 
