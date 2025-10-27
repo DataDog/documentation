@@ -45,13 +45,15 @@ Click **Configure** to open a menu of configuration options available for your d
 
 | Configuration    | Description |
 | ----------- | ----------- |
+| Clone dashboard | Copy the entire dashboard to a new dashboard. You are prompted to name the clone. |
+| Display UTC time | Toggle between UTC time and your default time zone. |
+| Include Flex Logs | Control whether widgets search [Flex Logs][10] or [Standard Indexed][11] logs. Switch between recent and historical data without editing individual widgets. This is a user-level preference that persists across sessions for this dashboard. |
+| Increase density | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
+| Keyboard&nbsp;shortcuts | View a list of available keyboard shortcuts. |
+| Pause Auto-Refresh | Pause automatic refresh for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |
+| TV Mode | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
 | Version history | Preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][3]. |
 | View audit events | See who is using this dashboard within your organization. As an individual, you can see a stream of your own actions. For more information, see [Datadog Audit Trail][4]. |
-| Clone dashboard | Copy the entire dashboard to a new dashboard. You are prompted to name the clone. |
-| Keyboard&nbsp;shortcuts | View a list of available keyboard shortcuts. |
-| Display UTC time | Toggle between UTC time and your default time zone. |
-| Increase density | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
-| TV Mode | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
 
 ### Notifications
 
@@ -123,3 +125,5 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [7]: /dashboards/list
 [8]: /account_management/rbac/
 [9]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[10]: /logs/log_configuration/flex_logs/
+[11]: /logs/log_configuration/indexes
