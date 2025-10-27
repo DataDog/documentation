@@ -84,7 +84,7 @@ Cloud Cost Management normalizes tag **values** as well, while maintaining human
 - Tag values up to 5000 characters are supported
 
 Cloud Cost Recommendations use [standard Datadog metrics normalization rules][14]. Tag values in recommendations are converted to lowercase and limited to 200 characters.
-For example, a tag `Team:Engineering-Services` would appear as `team:engineering-services` in recommendations, but as `team:Engineering-Services` in cost data. 
+For example, a tag `Team:Engineering-Services` appears as `team:engineering-services` in recommendations, but as `team:Engineering-Services` in cost data. 
 
 ## Override tag value normalization
 
