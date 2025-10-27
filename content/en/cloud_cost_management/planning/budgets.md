@@ -144,4 +144,4 @@ For more information about how forecasting works and data requirements, see [Clo
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /cloud_cost_management/monitors/
-[3]: /cloud_cost_management/planning/forecasts
+[3]: /cloud_cost_management/planning/forecasting

@@ -1,5 +1,5 @@
 ---
-title: Forecasts
+title: Forecasting
 description: Predict future cloud costs and make informed decisions with Cloud Cost Management Forecasts.
 further_reading:
 - link: "/cloud_cost_management/reports/"

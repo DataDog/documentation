@@ -3759,9 +3759,9 @@ menu:
       identifier: cloud_cost_planning
       weight: 5
     - name: Forecasting
-      url: cloud_cost_management/planning/forecasts
+      url: cloud_cost_management/planning/forecasting
       parent: cloud_cost_planning
-      identifier: cloud_cost_planning_forecasts
+      identifier: cloud_cost_planning_forecasting
       weight: 501
     - name: Budgets
       url: cloud_cost_management/planning/budgets
