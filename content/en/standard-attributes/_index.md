@@ -1,6 +1,7 @@
 ---
 title: Default Standard Attributes
 disable_sidebar: true
+description: "A table of the attributes automatically applied to data sent to Datadog by the Agent by each of the RUM, Logs, and APM products, as applicable to the data domain."
 further_reading:
     - link: '/data_security/'
       tag: 'Documentation'

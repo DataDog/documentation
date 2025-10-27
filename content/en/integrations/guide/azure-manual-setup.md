@@ -45,9 +45,12 @@ Your Microsoft Entra ID user needs the following permissions:
 - `Users can register applications` has been set to `Yes`
 - The user has the [Application Developer][17] role
 
-##### Permission to assign roles within your subscriptions
+##### Admin roles within your subscriptions
 
-You must have one of the [Azure built-in roles in the Privileged category][14], or a custom role including the `Microsoft.Authorization/roleAssignments/write` action, in each of the subscriptions you wish to connect.
+Within the subscriptions you wish to monitor, you must have either:
+
+- The **Owner** role
+- Both the **Contributor** and **User Access Admin** roles
 
 ##### Permission to add and grant consent for Graph API permissions
 
@@ -349,6 +352,5 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [9]: /monitors/notify/#configure-notifications-and-automations
 [12]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
-[14]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged
 [15]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
 [17]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer

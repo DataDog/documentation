@@ -1,5 +1,6 @@
 ---
 title: Tracking User Actions
+description: "Automatically track user interactions and custom actions in web applications to understand user behavior, performance, and feature adoption."
 further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
@@ -72,7 +73,7 @@ For example:
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
 
-<div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
+<div class="alert alert-warning" role="alert" data-dd-action-name="Dismiss alert">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     <span class="visually-hidden">Error:</span>
     Enter a valid email address

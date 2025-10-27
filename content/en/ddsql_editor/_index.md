@@ -1,5 +1,6 @@
 ---
 title: DDSQL Editor
+description: "Query infrastructure resources and telemetry data using natural language or DDSQL syntax with support for tags as table columns."
 aliases:
 - /dashboards/ddsql_editor/
 further_reading:
@@ -11,11 +12,11 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this form to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+Querying Logs, Metrics, Spans, RUM, and Product Analytics as data sources in DDSQL is in Preview. Use this form to request access.
 
 If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
-{{< /callout >}} 
+{{< /callout >}}
 
 ## Overview
 
@@ -42,7 +43,7 @@ GROUP BY instance_type
 
 ## Explore your telemetry
 
-<div class="alert alert-warning">Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
+<div class="alert alert-danger">Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
 
 If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
 </div>

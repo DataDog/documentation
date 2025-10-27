@@ -9,7 +9,7 @@ title: Formatos de ID de traza (trace) y tramo
 ---
 {{< jqmath-vanilla >}}
 
-Esta página detalla la compatibilidad de la biblioteca de rastreo de Datadog con las trazas y {{< tooltip glossary="span id" >}}s.
+Esta página detalla la compatibilidad de la librería de rastreo de Datadog con las trazas y {{< tooltip glossary="span id" >}}s.
 
 - **ID generados**: oor defecto, todas las bibliotecas de rastreo generan ID de traza de 128 bits e ID de tramo de 64 bits.
 - **ID aceptados**: Datadog acepta ID de traza de 128 o 64 bits, e ID de tramo de 64 bits.
@@ -19,13 +19,13 @@ Esta página detalla la compatibilidad de la biblioteca de rastreo de Datadog co
 Los ID de traza de 128 bits se generan y aceptan por defecto en las últimas versiones de las bibliotecas de rastreo de Datadog:
 
 - [Node.js][1]
-- [Java][2]   
-- [Go][3]     
-- [Python][4] 
-- [Ruby][5]   
-- [.NET][6]   
-- [PHP][7]    
-- [C++][8]   
+- [Java][2]
+- [Go][3]
+- [Python][4]
+- [Ruby][5]
+- [.NET][6]
+- [PHP][7]
+- [C++][8]
 
 ## ID de traza y tramo de 64 bits
 

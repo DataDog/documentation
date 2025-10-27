@@ -3,7 +3,7 @@ title: Scaling Observability Pipelines 확장 모범 사례
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Observability Pipelines는 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
+<div class="alert alert-warning">Observability Pipelines는 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">

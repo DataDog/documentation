@@ -6,7 +6,7 @@ title: Instrumenting 1st Gen Cloud Run Functions
 
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions (1st gen), previously known as Cloud Functions.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Migrating to 2nd gen Cloud Run functions</strong> 
 <br/>
 Datadog recommends using 2nd gen <a href="/serverless/google_cloud_run/functions">Cloud Run functions</a>, which offer improved performance, better scaling, and better monitoring with Datadog.
@@ -122,7 +122,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `datadog-serverless-compat-go/datadogserverlesscompat` and `dd-trace-go.v1/ddtrace/trace` to ensure you have access to enhancements and bug fixes.
 
-   For more information, see [Tracing Go Applications][1] and [Datadog Severless Compatability Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
+   For more information, see [Tracing Go Applications][1] and [Datadog Serverless Compatibility Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
 
 
 2. **Start the Datadog serverless compatibility layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):

@@ -129,6 +129,25 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
 
+## Certificate verify failed
+
+If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
+
+## Ensure your organization is enabled for RC
+
+If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
+
+## Missing environment variable
+
+If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you add the environment variables for your source, processors, and destinations when you install the Worker. See [Environment Variables][18] for a list of source, processor, and destination environment variables.
+
+## Failed to sync quota state
+
+The quota processor is synchronized across all Workers in a Datadog organization. For the synchronization, there is a default rate limit of 50 Workers per organization. When there are more than 50 Workers for an organization:
+- The processor continues to run, but does not sync correctly with the other Workers, which can result in logs being sent after the quota limit has been reached.
+- The Worker prints `Failed to sync quota state errors`.
+- [Contact support][20] if you want to increase the default number of Workers per organization.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -144,3 +163,8 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 [13]: /observability_pipelines/install_the_worker/worker_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
 [15]: /observability_pipelines/advanced_configurations/#enable-liveness-and-readiness-probe
+[16]: /observability_pipelines/sources/#tls-certificates
+[17]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[18]: /observability_pipelines/environment_variables/
+[19]: /remote_configuration/#security-considerations
+[20]: /help/

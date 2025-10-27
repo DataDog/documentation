@@ -1,5 +1,6 @@
 ---
 title: Getting Started with the Wildcard Widget
+description: Learn to build custom visualizations using the Wildcard widget with Vega-Lite grammar and imported queries.
 further_reading:
 - link: "/dashboards/widgets/wildcard/"
   tag: "Documentation"

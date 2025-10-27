@@ -1,5 +1,6 @@
 ---
 title: JavaScript Expressions
+description: Use JavaScript expressions in App Builder to create custom interactions between components, queries, and app state.
 aliases:
     - /service_management/app_builder/expressions
 further_reading:
@@ -92,7 +93,7 @@ For example, you can enable a component only for users who are in the Product Ma
 
 ### Disable a component while loading
 
-Another common use case is disabling a component while a query is in a loading state. In the [EC2 Instance Manager blueprint][3], the `instanceType` select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
+Another common use case is disabling a component while a query is in a loading state. In the [EC2 Management blueprint][3], the `instanceType` select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
 
 {{< img src="service_management/app_builder/isloading.png" alt="The 'instanceType' Select component is disabled while the 'listInstances' query is loading." style="width:100%;" >}}
 
@@ -102,7 +103,7 @@ Similar to components, you can use JS expressions to alter your queries based on
 
 ### Filter query results on user input
 
-The [PagerDuty On-call Manager blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` select components.
+The [PagerDuty On-call Schedules blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` select components.
 
 Inside the `listSchedules` query, the following post-query transformation filters the results based on the values of `team` and `user`:
 
@@ -129,6 +130,6 @@ Setting the query's **Run Settings** to **Auto** allows the query to run each ti
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/app_builder/build/#post-query-transformation
+[1]: /actions/app_builder/queries/#post-query-transformation
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ec2_instance_manager
 [4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=pagerduty_oncall_manager

@@ -1,10 +1,14 @@
 ---
 title: Datastore
+description: Scalable, structured data storage solution that integrates with App Builder and Workflow Automation for persistent data without external databases.
 disable_toc: false
 aliases:
 - service_management/workflows/datastore/
 - service_management/app_builder/datastore/
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-automation-rules
+  tag: Blog
+  text: Instantly respond to changes in your data with Datadog automation rules
 - link: "https://www.datadoghq.com/blog/datadog-datastore/"
   tag: "Blog"
   text: "Enhance your automated workflows and apps with Datastore"

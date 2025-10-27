@@ -1,5 +1,6 @@
 ---
 title: Shared Dashboards
+description: Create public, invite-only, and embedded dashboards for external access with customizable timeframes and variables.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
@@ -147,6 +148,7 @@ The following widget types are not supported on shared dashboards. Widgets of th
 * Topology Map
 * List Widget (all data sources)
 * Legacy treemap widget
+* SLO Summary widget
 
 ### Limited timeframe options
 
@@ -154,7 +156,7 @@ Shared dashboards support a limited number of timeframe options and do not allow
 
 ## Edit Shared Dashboards
 
-<div class="alert alert-warning">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
+<div class="alert alert-danger">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
 
 To make a change to the share type, configuration, or recipients of a shared dashboard:
 

@@ -63,6 +63,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
+      resource_type: CloudWatch Logs
+      recommendation_type: Delete Lambda Cloudwatch Logs and write permissions
+      recommendation_description: Lambda function that can have write CloudWatch Logs permissions removed.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
       resource_type: DynamoDB
       recommendation_type: Delete DynamoDB Global Secondary Index
       recommendation_description: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
@@ -258,6 +264,12 @@ multifiltersearch:
       resource_type: ElastiCache Cluster
       recommendation_type: Terminate ElastiCache Cluster
       recommendation_description: ElastiCache Redis Cluster with 0 cache hits and 0 replication bytes.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Lambda
+      recommendation_type: Downsize Lambda Function Provisioned Concurrency
+      recommendation_description: AWS Lambda function with over-allocated provisioned concurrency.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -481,12 +493,6 @@ multifiltersearch:
       recommendation_type: Terminate Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    - category: Downsize
-      cloud_provider: Azure
-      resource_type: VM Instance
-      recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type.
-      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Purchase
       cloud_provider: GCP
       resource_type: Cloud Run Job
@@ -594,6 +600,8 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 
 You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
 
+Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -612,6 +620,8 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 - Cloud provider accounts (for all desired Cloud Cost recommendations)
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
+- [GCP integration and resource collection][10] (for GCP recommendations)
+- [Datadog Agent integration][5] (for Downsize recommendations)
 
 ## Setup
 
@@ -622,6 +632,7 @@ For each cloud account that you would like to receive recommendations for:
 1. Enable [resource collection][3] for recommendations.
    - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
    - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
+   - For GCP, enable resource collection in the **Resource Collection** tab on the [Google Cloud Platform integration tile][10].
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
@@ -650,3 +661,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [7]: /integrations/amazon_s3_storage_lens/
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
+[10]: https://app.datadoghq.com/integrations/gcp
+[11]: /cloud_cost_management/tags/tag_pipelines/

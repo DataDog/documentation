@@ -1,9 +1,10 @@
 ---
 title: Monitoring Page Performance
+description: "Monitor Core Web Vitals, loading times, and page performance telemetry with RUM Browser SDK to optimize user experience and troubleshoot issues."
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+  - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
-    text: "Interactive Lab: Core Web Vitals"
+    text: "Interactive Lab: Optimizing Frontend Performance with Datadog RUM Browser Monitoring"
   - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
     tag: "Blog"
     text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"
@@ -34,7 +35,7 @@ You can access performance telemetry for your views in:
 
 ## Event timings and core web vitals
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog's Core Web Vitals telemetry is available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
@@ -138,6 +139,15 @@ window.DD_RUM.init({
         (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
+```
+
+You can also ignore specific DOM mutations by marking an element (or one of its ancestors) with the attribute `data-dd-excluded-activity-mutations`.  
+This is useful for elements that constantly update but don't indicate real UI instability like loading spinners, progress bars, or live clocks.
+
+```html
+<div id="loading-spinner" data-dd-excluded-activity-mutations>
+  <svg> ... </svg>
+</div>
 ```
 
 ### Hash SPA navigation

@@ -46,7 +46,7 @@ Datadog은 유휴 상태인 인덱싱된 로그에 대칭형 암호화(AES-256)�
 
 {{< site-region region="us" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 로그 관리에 대한 PCI DSS 규정 준수는 <a href="/getting_started/site/">US1 사이트의 Datadog 조직에서만 사용 가능합니다</a>.
 </div>
 

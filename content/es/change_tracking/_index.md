@@ -34,7 +34,7 @@ title: Rastreo de cambios
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Change Tracking no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}})</div>
+<div class="alert alert-danger">Change Tracking no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 
 ## Información general

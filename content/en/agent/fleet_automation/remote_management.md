@@ -30,20 +30,9 @@ Remotely upgrading Agents in containerized environments is not supported.
 Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
 
 ## Enable Remote Agent Management
-If you are running Agent version 7.69+:
-1. Ensure that your Agent configuration includes the environment variable `DD_REMOTE_UPDATES=true` set. This alone enables Remote Agent Management on the Agent.
-
-If you are running older Agent versions:
-1. Ensure that [Remote Configuration is enabled for your organization][15].
-1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
-1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
-
-   {{< img src="/agent/fleet_automation/remote-agent-management-toggle.png" alt="Enable the Remote Agent Management toggle." style="width:100%;" >}}
-
-1. Use the generated Agent installation command to upgrade your Agent to version 7.66+.
-
-<div class="alert alert-info">For Agent versions prior to 7.69, you must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
-
+1. Verify that [Remote Configuration is enabled for your organization][15].
+2. Confirm that your Agent version is 7.69 or later (for Windows hosts, use 7.71.1 or later).
+3. Ensure that your Datadog Agent configuration (`datadog.yaml`) includes `remote_updates: true`, or alternatively set the environment variable `DD_REMOTE_UPDATES=true`. Enabling either option turns on Remote Agent Management for the Agent.
 
 ## Upgrade Agents remotely
 
@@ -146,29 +135,6 @@ To diagnose and fix the issue:
 Manual Agent upgrades are not required after you've updated to 7.66 or higher. Future upgrades are handled automatically without requiring manual intervention.
 
 If you don't upgrade an earlier Agent version to 7.66 or higher, there is no impact on your existing Agent. However, remote upgrades remain unavailable until you update the Agent.
-
-## Uninstall Remote Agent Management
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-To uninstall Remote Agent Management from your Linux environment, follow the steps below. Ensure that you have the necessary permissions to perform the uninstall process.
-
-To uninstall the Agent after installing it with Remote Agent Management, in a shell, run `sudo datadog-installer purge`.
-
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-There are no steps needed to uninstall Remote Agent Management on Windows, it is packaged with the Agent itself.
-
-To disable Remote Agent Management, configure `remote_updates: false` in `datadog.yaml`.
-
-To uninstall the Agent, see [Uninstall the Agent][1].
-
-[1]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#uninstall-the-agent
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further reading
 

@@ -17,7 +17,7 @@ title: Facilitar la resolución de problemas a través de la correlación entre 
 
 ## Información general
 
-El [etiquetado unificado de servicios][1] ofrece capacidades de correlación de alto nivel. En ocasiones, es posible que los puntos de partida de tu investigación sean un log, una traza, una vista o un test Synthetic únicos. Correlacionar logs, trazas y vistas con otros datos proporciona un contexto útil que te permite calcular el impacto en tus actividades e identificar la causa raíz de un problema rápidamente.
+El [etiquetado unificado de servicios][1] ofrece capacidades de correlación de alto nivel. En ocasiones, es posible que los puntos de partida de tu investigación sean un log, una traza (trace), una vista o un test Synthetic únicos. Correlacionar logs, trazas y vistas con otros datos proporciona un contexto útil que te permite calcular el impacto en tus actividades e identificar la causa raíz de un problema rápidamente.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="Correlación de pila completa" style="width:100%;" >}}
 
@@ -66,39 +66,9 @@ El rastreador de aplicaciones genera los ID de rastreo por defecto. Esto se pued
 
 #### NGINX
 
-##### Configurar OpenTracing
+Para correlacionar logs de NGINX con trazas, debes configurar tu `log_format` de NGINX para incluir el ID de rastreo y luego configurar un pipeline de Datadog para analizar ese ID en tus logs.
 
-Consulta la [integración de rastreo NGINX][5].
-
-##### Inyectar ID de rastreo en logs
-
-El ID de traza se almacena como variable `opentelemetry_trace_id`. Actualiza el formato de log de NGINX añadiendo el siguiente bloque de configuración en la sección HTTP de tu archivo de configuración de NGINX `/etc/nginx/nginx.conf`:
-
-```conf
-http {
-  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
-          '$status $body_bytes_sent "$http_referer" '
-          '"$http_user_agent" "$http_x_forwarded_for" ';
-
-  access_log /var/log/nginx/access.log;
-}
-```
-
-##### Analizar los ID de rastreo en pipelines
-
-1. Clona el pipeline NGINX.
-
-2. Personaliza el primer [analizador grok][6]:
-   - En **Parsing rules** (Reglas de análisis), sustituye la primera regla de análisis por:
-   ```text
-   access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
-   ```
-   - En **Advanced settings** (Configuración avanzada), en **Helper Rules** (Reglas de ayuda), añade la línea:
-   ```text
-   _trace_id %{notSpace:dd.trace_id:nullIf("-")}
-   ```
-
-3. Añade un [reasignador de ID de rastreo][7] en el atributo `dd.trace_id`.
+Consulta la [Instrumentación NGINX][20] para obtener instrucciones completas de configuración de extremo a extremo.
 
 ### Correlacionar logs de base de datos
 
@@ -219,7 +189,7 @@ Después de habilitar APM en el endpoint de tu aplicación, puedes acceder a las
 
 Para obtener más información, consulta [Conectar tests Synthetic y trazas][19].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -242,3 +212,4 @@ Para obtener más información, consulta [Conectar tests Synthetic y trazas][19]
 [17]: /es/synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /es/synthetics/apm
+[20]: /es/tracing/trace_collection/proxy_setup/nginx

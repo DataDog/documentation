@@ -110,7 +110,7 @@ Más información sobre los controles de muestreo en la [documentación de bibli
 [3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
 {{% /tab %}}
 {{% tab "Python" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0">2.9.0</a>, para las aplicaciones Python, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -138,7 +138,7 @@ Más información sobre los controles de muestreo en la [documentación de la bi
 [3]: /es/tracing/guide/resource_based_sampling/
 {{% /tab %}}
 {{% tab "Ruby" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, para las aplicaciones Ruby, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -192,7 +192,7 @@ Obtén más información sobre los controles de muestreo en la [documentación d
 [3]: /es/tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, para las aplicaciones Node.js, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -226,7 +226,7 @@ Más información sobre los controles de muestreo en la [documentación de la bi
 [1]: /es/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, para las aplicaciones PHP, configura las frecuencias de muestreo por servicio y por recurso desde la <a href="https://app.datadoghq.com/apm/traces/ingestion-control">página de control de la ingesta</a>.
 
@@ -250,7 +250,7 @@ Obtén más información sobre los controles de muestreo en la [documentación d
 [1]: /es/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-**Remote configuration**
+**Configuración remota**
 
 A partir de la versión <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, para las aplicaciones C++, configura las frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">página de control de la ingesta</a>.
 
@@ -282,8 +282,15 @@ Para las aplicaciones .NET, establece una frecuencia de rastreo global para la b
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de las trazas:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+#using powershell
+$env:DD_TRACE_SAMPLE_RATE=0.1
+$env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+
+#using JSON file   
+{
+    "DD_TRACE_SAMPLE_RATE": "0.1",
+    "DD_TRACE_SAMPLING_RULES": "[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\": 0.5}]"
+}
 ```
 
 <div class="alert alert-info">A partir de la versión 2.35.0, si la <a href="/remote_configuration">configuración remota del Agent</a> está activada donde se ejecuta el servicio, puedes configurar un <code>DD_TRACE_SAMPLE_RATE</code> por servicio en la interfaz de usuario del <a href="/tracing/software_catalog">Catálogo de software</a>.</div>
@@ -803,7 +810,13 @@ A partir de la versión [v2.18.0][1], para las aplicaciones .NET, establece las 
 Por ejemplo, para recopilar `100%` de los tramos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` tramos por segundo:
 
 ```
-@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+#using powershell
+$env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+
+#using JSON file   
+{
+    "DD_SPAN_SAMPLING_RULES": "[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\": 1.0, \"max_per_second\": 50}]"
+}
 ```
 
 Más información sobre los controles de muestreo en la [documentación de la biblioteca de rastreo de .NET][2].
@@ -813,7 +826,7 @@ Más información sobre los controles de muestreo en la [documentación de la bi
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"> El mecanismo de <a href="/tracing/legacy_app_analytics/">App Analytics</a> está totalmente obsoleto. Para ingerir tramos únicos sin la traza completa, utiliza la configuración del <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-tramos (spans)">muestreo del tramo único </a>. Para ingerir trazas completas, utiliza las configuraciones del <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">muestreo basado en la fase inicial</a>.</div>
+<div class="alert alert-danger"> El mecanismo <a href="/tracing/legacy_app_analytics/">App Analytics</a> está totalmente obsoleto. Para ingerir tramos individuales sin la traza completa, utiliza la configuración de <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">muestreo de tramo único</a>. Para ingerir trazas completas, utiliza las configuraciones de muestreo <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based</a>.</div>
 
 ## Tramos ingeridos por productos
 
@@ -881,5 +894,5 @@ Según tu configuración con los SDK de OpenTelemetry (mediante la utilización 
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: tracing/guide/remote_config
+[21]: /es/tracing/guide/remote_config/
 [22]: /es/opentelemetry/guide/ingestion_sampling_with_opentelemetry

@@ -24,7 +24,7 @@ Fournissent des informations clés sur les opérations réalisées sur vos resso
 
 Pour envoyer les logs dʼactivité à Datadog, sélectionnez **Send subscription activity logs**. Si vous ne sélectionnez pas cette option, aucun log dʼactivité ne sera envoyé à Datadog.
 
-<div class="alert alert-warning">Lorsque la collecte des logs est activée, la ressource Datadog modifie automatiquement les configurations de journalisation des <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure déclenche un <strong>redémarrage</strong> des App services lorsque leurs configurations de journalisation changent.</div>
+<div class="alert alert-danger">Lorsque la collecte des logs est activée, la ressource Datadog modifie automatiquement les configurations de journalisation des <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure déclenche un <strong>redémarrage</strong> des App services lorsque leurs configurations de journalisation changent.</div>
 
 ## Logs de ressource Azure
 

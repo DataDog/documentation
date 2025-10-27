@@ -26,20 +26,20 @@ type: multi-code-lang
 - Biblioteca de rastreo de Datadog Ruby `dd-trace-rb` versión 1.9.0 o posterior.
 - Compatibilidad con la versión del gem 1.1.0 o posterior.
 
-Las siguientes funciones de OpenTelemetry implementadas en la biblioteca de Datadog como se indica:
+Las siguientes funciones de OpenTelemetry implementadas en la librería de Datadog como se indica:
 
 | Función                               | Notas de compatibilidad                       |
 |---------------------------------------|--------------------------------------|
-| [Propagación del contexto de OpenTelemetry][1]         | Los [formatos de encabezado de Datadog y W3C Trace Context][9] están activados por defecto. | 
-| [Procesadores de tramo][2]                  | No compatible                                          | 
+| [Propagación del contexto de OpenTelemetry][1]         | Los [formatos de encabezado de Datadog y W3C Trace Context][9] están activados por defecto. |
+| [Procesadores de tramo][2]                  | No compatible                                          |
 | [Exportadores de tramo][3]                   | No compatible                                            |
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` se establece en el mismo objeto que `Datadog.logger`. Configura a través del [registro personalizado][10]. |
-| [Generadores de ID][4] de traza/tramo         | La generación de ID se realiza mediante la biblioteca de rastreo, con soporte para [IDs de traza de 128-bit][12].     |
+| [Generadores de ID][4] de traza/tramo         | La generación de ID se realiza mediante la librería de rastreo, con soporte para [IDs de traza de 128-bit][12].     |
 
 
-## Configuración de OpenTelemetry para utilizar la biblioteca de rastreo de Datadog
+## Configuración de OpenTelemetry para utilizar la librería de rastreo de Datadog
 
-1. Añade la instrumentación manual de OpenTelemetry deseada a tu código Ruby siguiendo la [documentación de la Instrumentación manual de OpenTelemetry Ruby][5]. **Importante**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la biblioteca de rastreo de Datadog en su lugar.
+1. Añade la instrumentación manual de OpenTelemetry deseada a tu código Ruby siguiendo la [documentación de la Instrumentación manual de OpenTelemetry Ruby][5]. **Importante**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la librería de rastreo de Datadog en su lugar.
 
 1. Añade el gem `datadog` a tu Gemfile:
 
