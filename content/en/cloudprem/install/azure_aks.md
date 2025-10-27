@@ -56,11 +56,19 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
    kubectl config set-context --current --namespace=cloudprem
    ```
 
-1. Store the PostgreSQL database connection string as a Kubernetes secret:
+1. Store your Datadog API key as a Kubernetes secret:
+
+   ```shell
+   kubectl create secret generic datadog-secret \
+   -n <NAMESPACE_NAME> \
+   --from-literal api-key="<DD_API_KEY>"
+   ```
+
+2. Store the PostgreSQL database connection string as a Kubernetes secret:
    To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to **All resources**, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the **Getting started** tab, click on the _View connection strings_ link in the **Connect card**.
 
    ```shell
-   kubectl create secret generic <SECRET_NAME> \
+   kubectl create secret generic cloudprem-metastore-uri \
      -n <NAMESPACE_NAME> \
      --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>
    ```
@@ -77,14 +85,14 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
      --from-literal QW_METASTORE_URI="postgres://$USERNAME:$PASSWORD@$HOST:$PORT/$DATABASE"
    ```
 
-1. Store the client secret or storage account access key as a Kubernetes secret:
+3. Store the client secret or storage account access key as a Kubernetes secret:
    ```shell
    kubectl create secret generic <SECRET_NAME> \
      -n <NAMESPACE_NAME> \
      --from-literal <SECRET_KEY>=<SECRET_VALUE>
    ```
 
-1. Customize the Helm chart:
+4. Customize the Helm chart:
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, Azure tenant ID, service account, ingress setup, resource requests and limits, and more.
 
@@ -97,6 +105,13 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
    Here is an example of a `datadog-values.yaml` file with overrides for Azure:
 
    {{< code-block lang="yaml" filename="datadog-values.yaml">}}
+# Datadog configuration
+datadog:
+  # The Datadog site (https://docs.datadoghq.com/getting_started/site/) to connect to. Defaults to `datadoghq.com`.
+  # site: datadoghq.com
+  # The name of the existing Secret containing the Datadog API key. The secret key name must be `api-key`.
+  apiKeyExistingSecret: datadog-secret
+
 azure:
   tenantId: <TENANT_ID> # required
   clientId: <CLIENT_ID> # required when using AD App to authenticate with Blob Storage
@@ -119,70 +134,55 @@ azure:
      create: true
      name: cloudprem
 
-   # CloudPrem node configuration
-   config:
-     # The root URI where index data is stored. This should be an Azure path.
-     # All indexes created in CloudPrem are stored under this location.
-     default_index_root_uri: azure://<CONTAINER_NAME>/indexes
+# CloudPrem node configuration
+config:
+  # The root URI where index data is stored. This should be an Azure path.
+  # All indexes created in CloudPrem are stored under this location.
+  default_index_root_uri: azure://<CONTAINER_NAME>/indexes
 
-   # Ingress configuration
-   # The chart supports two ingress configurations:
-   # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
-   # 2. An internal ingress for access within the VPC
-   #
-   # Both ingresses provision a Network Load Balancers (NLBs) in Azure
-   # The public ingress NLB is created in public subnets and has a public IP.
-   # The internal ingress NLB is created in private subnets.
-   #
-   # Additional annotations can be added to customize the ALB behavior.
-   ingress:
-     # The public ingress is configured to only accept TLS traffic and requires mutual TLS (mTLS) authentication.
-     # Datadog's control plane and query service authenticate themselves using client certificates,
-     # ensuring that only authorized Datadog services can access CloudPrem nodes through the public ingress.
-     public:
-       enabled: true
-       ingressClassName: nginx-public
-       host: cloudprem.acme.corp
-       extraAnnotations: {}
+# Internal ingress configuration
+# The internal ingress NLB is created in private subnets.
+#
+# Additional annotations can be added to customize the ALB behavior.
+ingress:
+  # The internal ingress is used by Datadog Agents and other collectors running outside
+  # the Kubernetes cluster to send their logs to CloudPrem.
+  internal:
+    enabled: true
+    ingressClassName: nginx-internal
+    host: cloudprem.acme.internal
+    extraAnnotations: {}
 
-     # The internal ingress is used by Datadog Agents and other collectors running outside
-     # the Kubernetes cluster to send their logs to CloudPrem.
-     internal:
-       enabled: true
-       ingressClassName: nginx-internal
-       host: cloudprem.acme.internal
-       extraAnnotations: {}
+# Metastore configuration
+# The metastore is responsible for storing and managing index metadata.
+# It requires a PostgreSQL database connection string to be provided by a Kubernetes secret.
+# The secret should contain a key named `QW_METASTORE_URI` with a value in the format:
+# postgresql://<username>:<password>@<host>:<port>/<database>
+#
+# The metastore connection string is mounted into the pods using extraEnvFrom to reference the secret.
+metastore:
+  extraEnvFrom:
+    - secretRef:
+        name: cloudprem-metastore-uri
 
-   # Metastore configuration
-   # The metastore is responsible for storing and managing index metadata.
-   # It requires a PostgreSQL database connection string to be provided by a Kubernetes secret.
-   # The secret should contain a key named `QW_METASTORE_URI` with a value in the format:
-   # postgresql://<username>:<password>@<host>:<port>/<database>
-   #
-   # The metastore connection string is mounted into the pods using extraEnvFrom to reference the secret.
-   metastore:
-     extraEnvFrom:
-       - secretRef:
-           name: metastore-uri
+# Indexer configuration
+# The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
+# and transforms it into searchable files called "splits" stored in S3.
+#
+# The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
+# Resource requests and limits should be tuned based on your indexing workload.
+#
+# The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+indexer:
+  replicaCount: 2
 
-   # Indexer configuration
-   # The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
-   # and transforms it into searchable files called "splits" stored in S3.
-   #
-   # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-   # Resource requests and limits should be tuned based on your indexing workload.
-   #
-   # The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
-   indexer:
-     replicaCount: 2
-
-     resources:
-       requests:
-         cpu: "4"
-         memory: "8Gi"
-       limits:
-         cpu: "4"
-         memory: "8Gi"
+  resources:
+    requests:
+      cpu: "4"
+      memory: "8Gi"
+    limits:
+      cpu: "4"
+      memory: "8Gi"
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.

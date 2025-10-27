@@ -9,10 +9,6 @@ further_reading:
 title: Endpoint de ingreso del OTLP de Datadog
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  El endpoint de ingreso del OTLP de Datadog está en Vista previa. Para solicitar acceso, ponte en contacto con tu representante de cuenta.
-{{< /callout >}}
-
 ## Información general
 
 El endpoint de la API de ingreso del protocolo OpenTelemetry (OTLP) de Datadog te permite enviar datos de observabilidad directamente a Datadog. Con esta función, no necesitas ejecutar el [Agent][1] u [OpenTelemetry Collector + Datadog Exporter][2].
