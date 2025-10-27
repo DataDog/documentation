@@ -93,7 +93,7 @@ Turn on **Tag Normalization** in the Tag Pipelines page to normalize all cost ta
 Tag normalization allows you to:
 - View, filter and group Cost Recommendations and cost data with the same tag values
 - Correlate cost and observability data with the same tag values
-- Automatically combine tag values with different casing (ex: `env:Engineering-Prod` and `env:engineering-Prod` will both be normalized to `env:engineering-prod` without having to manually set up Tag Pipelines)
+- Automatically combine tag values with different casing (For example: `env:Engineering-Prod` and `env:engineering-Prod` are both normalized to `env:engineering-prod` without having to manually set up Tag Pipelines)
 
 {{< img src="cloud_cost/tag_normalization_toggle.png" alt="Tag Pipelines interface showing optional toggle to normalize all tags on cost data" style="width:80%;" >}}
 
