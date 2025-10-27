@@ -29,21 +29,31 @@ Whenever Watchdog detects a provider degradation, it creates an event in the [Ev
 Watchdog monitors the status of the following external providers' APIs: 
 
 | External Provider | API monitored |  
-|----------|--------------------|
+|----------|--------------------| 
+| Adyen | *.adyenpayments.com |
 | Amplitude | api.amplitude.com |
-| Atlassian | *.atlassian.net |
+| Anthropic | api.anthropic.com |
+| Atlassian | *.atlassian.net, *.atlassian.com |
 | Auth0 | *.auth0.com |
-| Binance | api.binance.com     |
+| Azure DevOps | dev.azure.com |
+| Binance | api.binance.com |
 | Braintree | api.braintreegateway.com |
 | Cloudflare | api.cloudflare.com |
 | Databricks | *.cloud.databricks.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
+| GitLab | *.gitlab.com |
+| HubSpot | api.hubspot.com, api.hubapi.com |
 | Intercom | api.intercom.io |
+| LaunchDarkly | app.launchdarkly.com |
 | Mapbox | api.mapbox.com |
 | Mixpanel | api.mixpanel.com |
-| OpenAI | *.openai.com|
+| Okta | *.okta.com |
+| OpenAI | *.openai.com |
 | PagerDuty | api.pagerduty.com |
+| Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
+| PayPal | *.paypal.com |
+| Salesforce | *.salesforce.com |
 | SendGrid | *.sendgrid.com |
 | ServiceNow | *.service-now.com |
 | Slack | *.slack.com |
@@ -54,7 +64,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Twilio | api.twilio.com |
 | X | api.twitter.com |
 | Zendesk | *.zendesk.com |
-| Zoom    | api.zoom.us |
+| Zoom | api.zoom.us |
 
 The following AWS services are monitored (.*amazonaws.com):
 - CloudWatch
