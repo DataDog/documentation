@@ -27,7 +27,7 @@ Tag Pipelines apply to Cloud Cost metrics from all providers, affecting both cos
 
 When tag pipelines change, the new rules are automatically applied to the most recent three months of data. It may take up to 24 hours for the historical data update to complete after rules are added or modified.
 
-All new customers have the recommended rule for [turning on tag normalization][6] turned on by default.
+All new customers have the recommended rule for [turning on tag normalization][6] enabled by default.
 
 ## Create a ruleset
 
