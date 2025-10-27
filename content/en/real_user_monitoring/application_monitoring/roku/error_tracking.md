@@ -35,7 +35,7 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-After setting up Roku, [follow the steps on this page to enable React Native Crash Reporting and Error Tracking][101].
+After setting up Roku, [follow the steps on this page to enable Roku Crash Reporting and Error Tracking][6].
 
 
 [1]: https://app.datadoghq.com/rum/error-tracking
@@ -43,6 +43,7 @@ After setting up Roku, [follow the steps on this page to enable React Native Cra
 [3]: /real_user_monitoring/application_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[6]: /error_tracking/frontend/mobile/roku/
 
 
 ## Further Reading

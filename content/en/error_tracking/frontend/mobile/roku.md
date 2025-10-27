@@ -39,7 +39,7 @@ After setting up Roku, follow the steps on this page to enable React Native Cras
 
 #### Using ROPM (recommended)
 
-`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][3]. Once your project is set up to use `ROPM`, you can use the following command to install the Datadog dependency:
+`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][6]. Once your project is set up to use `ROPM`, you can use the following command to install the Datadog dependency:
 
 ```shell
 ropm install datadog-roku
@@ -57,7 +57,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 ### Step 2 - Specify application details in Datadog
 
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][101].
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile**][101] and click **+ New Application**.
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][201].
 
@@ -277,6 +277,7 @@ To test your implementation:
 [3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters 
+[6]: https://github.com/rokucommunity/ropm
 [101]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
 [501]: /account_management/api-app-keys/#api-keys
