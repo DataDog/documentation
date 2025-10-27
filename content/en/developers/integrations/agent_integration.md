@@ -22,7 +22,7 @@ description: Learn how to develop and publish a Datadog Agent integration.
 
 This page walks Technology Partners through how to create a Datadog Agent integration, which you can list as out-of-the-box on the [Integrations page][23], or for a price on the [Marketplace page][24].
 
-An Agent-based integration uses the [Datadog Agent][17] to submit data through custom checks written by developers. These checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. While the Agent itself can submit [logs][26], this is configured outside of the check.
+An Agent-based integration uses the [Datadog Agent][17] to submit data through custom checks written by developers. These checks can emit [metrics][34], [events][18], [service checks][25], and [logs][36] into a customer's Datadog account.
 
 ## When to use Agent-based integrations
 
@@ -201,13 +201,14 @@ At the core of each Agent-based integration is an *Agent Check* that periodicall
 
 For Awesome, the Agent Check is composed of a [service check][25] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible.
 
-To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7].
+To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7]. To learn how to submit logs from your Agent Check, see [Agent Integration Log Collection][36].
 
 The code contained within `awesome/datadog_checks/awesome/check.py` looks something like this:
 
 {{< code-block lang="python" filename="check.py" collapsible="true" >}}
 
 import requests
+import time
 
 from datadog_checks.base import AgentCheck, ConfigurationError
 
@@ -231,14 +232,40 @@ class AwesomeCheck(AgentCheck):
         except Exception as e:
             # Ideally we'd use a more specific message...
             self.service_check('awesome.search', self.CRITICAL, message=str(e))
+            # Submit an error log
+            self.send_log({
+                'message': f'Failed to access {url}: {str(e)}',
+                'timestamp': time.time(),
+                'status': 'error',
+                'service': 'awesome',
+                'url': url
+            })
         # Page is accessible
         else:
             # search_string is present
             if search_string in response.text:
                 self.service_check('awesome.search', self.OK)
+                # Submit an info log
+                self.send_log({
+                    'message': f'Successfully found "{search_string}" at {url}',
+                    'timestamp': time.time(),
+                    'status': 'info',
+                    'service': 'awesome',
+                    'url': url,
+                    'search_string': search_string
+                })
             # search_string was not found
             else:
                 self.service_check('awesome.search', self.WARNING)
+                # Submit a warning log
+                self.send_log({
+                    'message': f'String "{search_string}" not found at {url}',
+                    'timestamp': time.time(),
+                    'status': 'warning',
+                    'service': 'awesome',
+                    'url': url,
+                    'search_string': search_string
+                })
 {{< /code-block >}}
 
 To learn more about the base Python class, see [Anatomy of a Python Check][8].
@@ -504,3 +531,4 @@ In addition to any code changes, the following is required when bumping an integ
 [33]: https://docs.datadoghq.com/developers/integrations/check_references/
 [34]: https://docs.datadoghq.com/metrics/
 [35]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[36]: https://docs.datadoghq.com/logs/log_collection/agent_checks/

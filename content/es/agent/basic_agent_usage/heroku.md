@@ -9,7 +9,9 @@ Este [paquete de compilación de Heroku][1] instala el Datadog Agent en tu dyno 
 
 ## Instalación
 
-En esta guía, se da por sentado que ya ejecutas tu aplicación en Heroku. Consulta la documentación de Heroku para obtener más información acerca de cómo puedes desplegar tu aplicación en Heroku.
+Sigue la [guía de instalación en la aplicación en Fleet Automation][33] para instalar el Datadog Agent en Heroku.
+
+Esta guía supone que tu aplicación ya se está ejecutando en Heroku. Consulta la [documentación de Heroku][34] para aprender a desplegar tu aplicación en Heroku.
 
 1. Ve a los [parámetros de la API de Datadog][3] y copia tu clave de API de Datadog. Luego, expórtala a una variable de entorno:
 
@@ -38,14 +40,14 @@ En esta guía, se da por sentado que ya ejecutas tu aplicación en Heroku. Consu
    heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
    # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
-   heroku config:add DD_DYNO_HOST=true
+   heroku config:add DD_DYNO_HOST=true -a $APPNAME
 
    # Set the DD_SITE env variable automatically
-   heroku config:add DD_SITE=$DD_SITE
+   heroku config:add DD_SITE=$DD_SITE -a $APPNAME
 
    # Add this buildpack and set your Datadog API key
-   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-   heroku config:add DD_API_KEY=$DD_API_KEY
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git -a $APPNAME
+   heroku config:add DD_API_KEY=$DD_API_KEY -a $APPNAME
 
    # Deploy to Heroku forcing a rebuild
    git commit --allow-empty -m "Rebuild slug"
@@ -146,6 +148,7 @@ De forma predeterminada, el Datadog Agent se ejecuta en todos los dynos que form
 Para deshabilitar el Datadog Agent según el tipo de dyno, adapta el siguiente fragmento de código a los tipos de dyno que no desees monitorizar y añádelo a tu [script prerun.sh](#prerun-script):
 
 ```shell
+DYNOTYPE=${DYNO%%.*}
 # Disable the Datadog Agent based on dyno type
 if [ "$DYNOTYPE" == "run" ] || [ "$DYNOTYPE" == "scheduler" ] || [ "$DYNOTYPE" == "release" ]; then
   DISABLE_DATADOG_AGENT="true"
@@ -218,28 +221,28 @@ heroku config:set DD_ENABLE_DBM=true
 
 La Monitorización de bases de datos requiere la creación de credenciales de base de datos para el Datadog Agent. Por lo tanto, no se puede utilizar DBM en los planes de Heroku Postgres Essential Tier.
 
-### Activación de los perfiles de DogStatsD Mapper (Sidekiq)
+### Activación de los perfiles Dogstatsd Mapper (Sidekiq)
 
-Algunos sitios integraciones, como [Sidekiq](https://docs.datadoghq.com/integraciones/sidekiq/), requieren perfiles [DogStatsD Mapper](https://docs.datadoghq.com/developers/DogStatsD/dogstatsd_mapper/).
+Algunas integraciones, como [Sidekiq](https://docs.datadoghq.com/integrations/sidekiq/), requieren perfiles [DogStatsD Mapper](https://docs.datadoghq.com/developers/dogstatsd/dogstatsd_mapper/).
 
-Para añadir un nuevo perfil DogStatsD Mapper, añada el siguiente fragmento en su script [prerun.sh](#prerun-script):
+Para añadir un nuevo perfil DogStatsD Mapper, añade el siguiente fragmento en tu [script prerun.sh](#prerun-script):
 
 ```
 cat << 'EOF' >> "$DATADOG_CONF"
 
 dogstatsd_mapper_profiles:
   - name: '<PROFILE_NAME>'
-    prefijo: '<PROFILE_PREFIX>'
-    mapeos:
+    prefix: '<PROFILE_PREFIX>'
+    mappings:
       - match: '<METRIC_TO_MATCH>'
         match_type: '<MATCH_TYPE>'
-        nombre: '<MAPPED_METRIC_NAME>'
-       etiquetas (tags):
+        name: '<MAPPED_METRIC_NAME>'
+        tags:
           '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
 EOF
 ```
 
-Por ejemplo, para activar Sidekiq integración, añada el siguiente fragmento:
+Por ejemplo, para activar la integración Sidekiq, añade el siguiente fragmento:
 
 ```
 cat << 'EOF' >> "$DATADOG_CONF"
@@ -342,7 +345,8 @@ Todos los dynos terminarán compartiendo el sistema de archivos de una aplicaci�
 
 Por ejemplo, si la integración de Gunicorn necesita ejecutarse únicamente en los dynos de tipo `web`, añade lo siguiente a tu script prerun:
 
-```
+```shell
+DYNOTYPE=${DYNO%%.*}
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
@@ -374,6 +378,9 @@ En el siguiente ejemplo, te mostramos algunas de las cosas que puedes hacer en e
 
 ```shell
 #!/usr/bin/env bash
+
+# Extract dyno type from Heroku's '$DYNO' environment variable 
+DYNOTYPE="${DYNO%%.*}"
 
 # Disable the Datadog Agent based on dyno type
 if [ "$DYNOTYPE" == "run" ]; then
@@ -500,7 +507,7 @@ Consulta las [directrices de contribución][29] para informarte acerca de cómo 
 
 Las versiones anteriores de este proyecto se bifurcaron a partir del [proyecto miketheman/heroku-buildpack-datadog][31]. Se reescribió en gran medida para la versión 6 del Datadog Agent. Para ver los cambios y obtener más información, consulta el [log de cambios][32].
 
-## Resolución de problemas
+## Solucionar problemas
 
 ### Cómo obtener el estado del Agent
 
@@ -636,7 +643,7 @@ Después de actualizar el paquete de compilación o el Agent, debes volver a com
 [15]: https://docs.datadoghq.com/es/logs/guide/collect-heroku-logs
 [16]: https://docs.datadoghq.com/es/logs/logs_to_metrics/
 [17]: https://docs.datadoghq.com/es/database_monitoring/
-[18]: https://docs.datadoghq.com/es/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
+[18]: https://docs.datadoghq.com/es/database_monitoring/setup_postgres/heroku/
 [19]: https://docs.datadoghq.com/es/integrations/
 [20]: https://docs.datadoghq.com/es/getting_started/integrations/#configuring-agent-integrations
 [21]: https://docs.datadoghq.com/es/integrations/mcache/
@@ -651,3 +658,5 @@ Después de actualizar el paquete de compilación o el Agent, debes volver a com
 [30]: https://github.com/DataDog/heroku-buildpack-datadog
 [31]: https://github.com/miketheman/heroku-buildpack-datadog
 [32]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=heroku
+[34]: https://devcenter.heroku.com/categories/deployment
