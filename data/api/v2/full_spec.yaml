@@ -458,20 +458,6 @@ components:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
         type: array
-    HistoricalJobID:
-      description: The ID of the job.
-      in: path
-      name: job_id
-      required: true
-      schema:
-        type: string
-    HistoricalSignalID:
-      description: The ID of the historical signal.
-      in: path
-      name: histsignal_id
-      required: true
-      schema:
-        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -1095,6 +1081,20 @@ components:
       description: The name of the span-based metric.
       in: path
       name: metric_id
+      required: true
+      schema:
+        type: string
+    ThreatHuntingJobID:
+      description: The ID of the job.
+      in: path
+      name: job_id
+      required: true
+      schema:
+        type: string
+    ThreatHuntingSignalID:
+      description: The ID of the threat hunting signal.
+      in: path
+      name: histsignal_id
       required: true
       schema:
         type: string
@@ -11814,7 +11814,7 @@ components:
       - GZIP
       - DEFLATE
     ConvertJobResultsToSignalsAttributes:
-      description: Attributes for converting historical job results to signals.
+      description: Attributes for converting threat hunting job results to signals.
       properties:
         id:
           description: Request ID.
@@ -11846,7 +11846,7 @@ components:
       - notifications
       type: object
     ConvertJobResultsToSignalsData:
-      description: Data for converting historical job results to signals.
+      description: Data for converting threat hunting job results to signals.
       properties:
         attributes:
           $ref: '#/components/schemas/ConvertJobResultsToSignalsAttributes'
@@ -11861,7 +11861,7 @@ components:
       x-enum-varnames:
       - HISTORICALDETECTIONSJOBRESULTSIGNALCONVERSION
     ConvertJobResultsToSignalsRequest:
-      description: Request for converting historical job results to signals.
+      description: Request for converting threat hunting job results to signals.
       properties:
         data:
           $ref: '#/components/schemas/ConvertJobResultsToSignalsData'
@@ -22204,130 +22204,6 @@ components:
       - type
       - value
       type: object
-    HistoricalJobDataType:
-      description: Type of payload.
-      enum:
-      - historicalDetectionsJob
-      type: string
-      x-enum-varnames:
-      - HISTORICALDETECTIONSJOB
-    HistoricalJobListMeta:
-      description: Metadata about the list of jobs.
-      properties:
-        totalCount:
-          description: Number of jobs in the list.
-          format: int32
-          maximum: 2147483647
-          type: integer
-      type: object
-    HistoricalJobOptions:
-      description: Job options.
-      properties:
-        detectionMethod:
-          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
-        evaluationWindow:
-          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
-        impossibleTravelOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
-        keepAlive:
-          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
-        maxSignalDuration:
-          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
-        newValueOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
-        sequenceDetectionOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
-        thirdPartyRuleOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
-      type: object
-    HistoricalJobQuery:
-      description: Query for selecting logs analyzed by the historical job.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        dataSource:
-          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        hasOptionalGroupByFields:
-          default: false
-          description: When false, events without a group-by value are ignored by
-            the query. When true, events with missing group-by fields are processed
-            with `N/A`, replacing the missing values.
-          example: false
-          type: boolean
-        metrics:
-          description: Group of target fields to aggregate over when using the sum,
-            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
-            only accept one value in this list, whereas the new value aggregation
-            accepts up to five values.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
-          example: a > 3
-          type: string
-      type: object
-    HistoricalJobResponse:
-      description: Historical job response.
-      properties:
-        data:
-          $ref: '#/components/schemas/HistoricalJobResponseData'
-      type: object
-    HistoricalJobResponseAttributes:
-      description: Historical job attributes.
-      properties:
-        createdAt:
-          description: Time when the job was created.
-          type: string
-        createdByHandle:
-          description: The handle of the user who created the job.
-          type: string
-        createdByName:
-          description: The name of the user who created the job.
-          type: string
-        createdFromRuleId:
-          description: ID of the rule used to create the job (if it is created from
-            a rule).
-          type: string
-        jobDefinition:
-          $ref: '#/components/schemas/JobDefinition'
-        jobName:
-          description: Job name.
-          type: string
-        jobStatus:
-          description: Job status.
-          type: string
-        modifiedAt:
-          description: Last modification time of the job.
-          type: string
-      type: object
-    HistoricalJobResponseData:
-      description: Historical job response data.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/HistoricalJobResponseAttributes'
-        id:
-          description: ID of the job.
-          type: string
-        type:
-          $ref: '#/components/schemas/HistoricalJobDataType'
-      type: object
     HourlyUsage:
       description: Hourly usage for a product family for an org.
       properties:
@@ -26508,7 +26384,7 @@ components:
           type: string
       type: object
     JobCreateResponse:
-      description: Run a historical job response.
+      description: Run a threat hunting job response.
       properties:
         data:
           $ref: '#/components/schemas/JobCreateResponseData'
@@ -26520,10 +26396,10 @@ components:
           description: ID of the created job.
           type: string
         type:
-          $ref: '#/components/schemas/HistoricalJobDataType'
+          $ref: '#/components/schemas/ThreatHuntingJobDataType'
       type: object
     JobDefinition:
-      description: Definition of a historical job.
+      description: Definition of a threat hunting job.
       properties:
         calculatedFields:
           description: Calculated fields.
@@ -26562,11 +26438,11 @@ components:
           example: Excessive number of failed attempts.
           type: string
         options:
-          $ref: '#/components/schemas/HistoricalJobOptions'
+          $ref: '#/components/schemas/ThreatHuntingJobOptions'
         queries:
           description: Queries for selecting logs analyzed by the job.
           items:
-            $ref: '#/components/schemas/HistoricalJobQuery'
+            $ref: '#/components/schemas/ThreatHuntingJobQuery'
           type: array
         referenceTables:
           description: Reference tables used in the queries.
@@ -26603,7 +26479,8 @@ components:
       - message
       type: object
     JobDefinitionFromRule:
-      description: Definition of a historical job based on a security monitoring rule.
+      description: Definition of a threat hunting job based on a security monitoring
+        rule.
       properties:
         from:
           description: Starting time of data analyzed by the job.
@@ -27545,17 +27422,6 @@ components:
       - data
       - meta
       type: object
-    ListHistoricalJobsResponse:
-      description: List of historical jobs.
-      properties:
-        data:
-          description: Array containing the list of historical jobs.
-          items:
-            $ref: '#/components/schemas/HistoricalJobResponseData'
-          type: array
-        meta:
-          $ref: '#/components/schemas/HistoricalJobListMeta'
-      type: object
     ListKindCatalogResponse:
       description: List kind response.
       properties:
@@ -27723,6 +27589,17 @@ components:
       - _NAME
       - USER_COUNT
       - _USER_COUNT
+    ListThreatHuntingJobsResponse:
+      description: List of threat hunting jobs.
+      properties:
+        data:
+          description: Array containing the list of threat hunting jobs.
+          items:
+            $ref: '#/components/schemas/ThreatHuntingJobResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ThreatHuntingJobListMeta'
+      type: object
     ListVulnerabilitiesResponse:
       description: The expected response schema when listing vulnerabilities.
       properties:
@@ -41956,14 +41833,18 @@ components:
             $ref: '#/components/schemas/RumRetentionFilterData'
           type: array
       type: object
-    RunHistoricalJobRequest:
-      description: Run a historical job request.
+    RunRetentionFilterName:
+      description: The name of a RUM retention filter.
+      example: Retention filter for session
+      type: string
+    RunThreatHuntingJobRequest:
+      description: Run a threat hunting job request.
       properties:
         data:
-          $ref: '#/components/schemas/RunHistoricalJobRequestData'
+          $ref: '#/components/schemas/RunThreatHuntingJobRequestData'
       type: object
-    RunHistoricalJobRequestAttributes:
-      description: Run a historical job request.
+    RunThreatHuntingJobRequestAttributes:
+      description: Run a threat hunting job request.
       properties:
         fromRule:
           $ref: '#/components/schemas/JobDefinitionFromRule'
@@ -41973,25 +41854,21 @@ components:
         jobDefinition:
           $ref: '#/components/schemas/JobDefinition'
       type: object
-    RunHistoricalJobRequestData:
-      description: Data for running a historical job request.
+    RunThreatHuntingJobRequestData:
+      description: Data for running a threat hunting job request.
       properties:
         attributes:
-          $ref: '#/components/schemas/RunHistoricalJobRequestAttributes'
+          $ref: '#/components/schemas/RunThreatHuntingJobRequestAttributes'
         type:
-          $ref: '#/components/schemas/RunHistoricalJobRequestDataType'
+          $ref: '#/components/schemas/RunThreatHuntingJobRequestDataType'
       type: object
-    RunHistoricalJobRequestDataType:
+    RunThreatHuntingJobRequestDataType:
       description: Type of data.
       enum:
       - historicalDetectionsJobCreate
       type: string
       x-enum-varnames:
       - HISTORICALDETECTIONSJOBCREATE
-    RunRetentionFilterName:
-      description: The name of a RUM retention filter.
-      example: Retention filter for session
-      type: string
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -50875,6 +50752,130 @@ components:
         type:
           description: Offset type.
           type: string
+      type: object
+    ThreatHuntingJobDataType:
+      description: Type of payload.
+      enum:
+      - historicalDetectionsJob
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOB
+    ThreatHuntingJobListMeta:
+      description: Metadata about the list of jobs.
+      properties:
+        totalCount:
+          description: Number of jobs in the list.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    ThreatHuntingJobOptions:
+      description: Job options.
+      properties:
+        detectionMethod:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        impossibleTravelOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
+        keepAlive:
+          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
+        maxSignalDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
+        newValueOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
+        thirdPartyRuleOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
+      type: object
+    ThreatHuntingJobQuery:
+      description: Query for selecting logs analyzed by the threat hunting job.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        hasOptionalGroupByFields:
+          default: false
+          description: When false, events without a group-by value are ignored by
+            the query. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          type: boolean
+        metrics:
+          description: Group of target fields to aggregate over when using the sum,
+            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
+            only accept one value in this list, whereas the new value aggregation
+            accepts up to five values.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          example: a > 3
+          type: string
+      type: object
+    ThreatHuntingJobResponse:
+      description: Threat hunting job response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ThreatHuntingJobResponseData'
+      type: object
+    ThreatHuntingJobResponseAttributes:
+      description: Threat hunting job attributes.
+      properties:
+        createdAt:
+          description: Time when the job was created.
+          type: string
+        createdByHandle:
+          description: The handle of the user who created the job.
+          type: string
+        createdByName:
+          description: The name of the user who created the job.
+          type: string
+        createdFromRuleId:
+          description: ID of the rule used to create the job (if it is created from
+            a rule).
+          type: string
+        jobDefinition:
+          $ref: '#/components/schemas/JobDefinition'
+        jobName:
+          description: Job name.
+          type: string
+        jobStatus:
+          description: Job status.
+          type: string
+        modifiedAt:
+          description: Last modification time of the job.
+          type: string
+      type: object
+    ThreatHuntingJobResponseData:
+      description: Threat hunting job response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ThreatHuntingJobResponseAttributes'
+        id:
+          description: ID of the job.
+          type: string
+        type:
+          $ref: '#/components/schemas/ThreatHuntingJobDataType'
       type: object
     TimeAggregation:
       description: 'Time aggregation period (in seconds) is used to aggregate the
@@ -78302,7 +78303,7 @@ paths:
         permissions:
         - incident_settings_write
       x-unstable: '**Note**: This endpoint is deprecated.'
-  /api/v2/siem-historical-detections/histsignals:
+  /api/v2/siem-threat-hunting/histsignals:
     get:
       description: List hist signals.
       operationId: ListSecurityMonitoringHistsignals
@@ -78344,7 +78345,7 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/histsignals/search:
+  /api/v2/siem-threat-hunting/histsignals/search:
     get:
       description: Search hist signals.
       operationId: SearchSecurityMonitoringHistsignals
@@ -78385,12 +78386,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/histsignals/{histsignal_id}:
+  /api/v2/siem-threat-hunting/histsignals/{histsignal_id}:
     get:
       description: Get a hist signal's details.
       operationId: GetSecurityMonitoringHistsignal
       parameters:
-      - $ref: '#/components/parameters/HistoricalSignalID'
+      - $ref: '#/components/parameters/ThreatHuntingSignalID'
       responses:
         '200':
           content:
@@ -78422,10 +78423,10 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs:
+  /api/v2/siem-threat-hunting/jobs:
     get:
-      description: List historical jobs.
-      operationId: ListHistoricalJobs
+      description: List threat hunting jobs.
+      operationId: ListThreatHuntingJobs
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
@@ -78448,7 +78449,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListHistoricalJobsResponse'
+                $ref: '#/components/schemas/ListThreatHuntingJobsResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -78460,7 +78461,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: List historical jobs
+      summary: List threat hunting jobs
       tags:
       - Security Monitoring
       x-menu-order: 20
@@ -78468,13 +78469,13 @@ paths:
 
         Please check the documentation regularly for updates.'
     post:
-      description: Run a historical job.
-      operationId: RunHistoricalJob
+      description: Run a threat hunting job.
+      operationId: RunThreatHuntingJob
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RunHistoricalJobRequest'
+              $ref: '#/components/schemas/RunThreatHuntingJobRequest'
         required: true
       responses:
         '201':
@@ -78498,7 +78499,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_rules_write
-      summary: Run a historical job
+      summary: Run a threat hunting job
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -78510,7 +78511,7 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/signal_convert:
+  /api/v2/siem-threat-hunting/jobs/signal_convert:
     post:
       description: Convert a job result to a signal.
       operationId: ConvertJobResultToSignal
@@ -78545,12 +78546,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/{job_id}:
+  /api/v2/siem-threat-hunting/jobs/{job_id}:
     delete:
       description: Delete an existing job.
-      operationId: DeleteHistoricalJob
+      operationId: DeleteThreatHuntingJob
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       responses:
         '204':
           description: OK
@@ -78579,15 +78580,15 @@ paths:
         Please check the documentation regularly for updates.'
     get:
       description: Get a job's details.
-      operationId: GetHistoricalJob
+      operationId: GetThreatHuntingJob
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HistoricalJobResponse'
+                $ref: '#/components/schemas/ThreatHuntingJobResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -78613,12 +78614,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/{job_id}/cancel:
+  /api/v2/siem-threat-hunting/jobs/{job_id}/cancel:
     patch:
-      description: Cancel a historical job.
-      operationId: CancelHistoricalJob
+      description: Cancel a threat hunting job.
+      operationId: CancelThreatHuntingJob
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       responses:
         '204':
           description: OK
@@ -78639,7 +78640,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_rules_write
-      summary: Cancel a historical job
+      summary: Cancel a threat hunting job
       tags:
       - Security Monitoring
       x-menu-order: 22
@@ -78650,12 +78651,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/{job_id}/histsignals:
+  /api/v2/siem-threat-hunting/jobs/{job_id}/histsignals:
     get:
       description: Get a job's hist signals.
       operationId: GetSecurityMonitoringHistsignalsByJobId
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       - $ref: '#/components/parameters/QueryFilterSearch'
       - $ref: '#/components/parameters/QueryFilterFrom'
       - $ref: '#/components/parameters/QueryFilterTo'

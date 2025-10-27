@@ -2815,33 +2815,33 @@
     "description": "Get a hist signal's details.",
     "summary": "Get a hist signal's details"
   },
-  "ListHistoricalJobs": {
-    "description": "List historical jobs.",
-    "summary": "List historical jobs"
+  "ListThreatHuntingJobs": {
+    "description": "List threat hunting jobs.",
+    "summary": "List threat hunting jobs"
   },
-  "RunHistoricalJob": {
-    "description": "Run a historical job.",
-    "summary": "Run a historical job",
+  "RunThreatHuntingJob": {
+    "description": "Run a threat hunting job.",
+    "summary": "Run a threat hunting job",
     "request_description": "",
-    "request_schema_description": "Run a historical job request."
+    "request_schema_description": "Run a threat hunting job request."
   },
   "ConvertJobResultToSignal": {
     "description": "Convert a job result to a signal.",
     "summary": "Convert a job result to a signal",
     "request_description": "",
-    "request_schema_description": "Request for converting historical job results to signals."
+    "request_schema_description": "Request for converting threat hunting job results to signals."
   },
-  "DeleteHistoricalJob": {
+  "DeleteThreatHuntingJob": {
     "description": "Delete an existing job.",
     "summary": "Delete an existing job"
   },
-  "GetHistoricalJob": {
+  "GetThreatHuntingJob": {
     "description": "Get a job's details.",
     "summary": "Get a job's details"
   },
-  "CancelHistoricalJob": {
-    "description": "Cancel a historical job.",
-    "summary": "Cancel a historical job"
+  "CancelThreatHuntingJob": {
+    "description": "Cancel a threat hunting job.",
+    "summary": "Cancel a threat hunting job"
   },
   "GetSecurityMonitoringHistsignalsByJobId": {
     "description": "Get a job's hist signals.",
