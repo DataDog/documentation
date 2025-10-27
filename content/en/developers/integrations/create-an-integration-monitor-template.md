@@ -40,8 +40,8 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 - **Storage**: Monitor disk space to prevent problems such as data loss, service interruptions, or write failures.
 
 #### Monitor your logs
-- Error spikes: Alert when error logs exceed a threshold, such as repeated `connection refused` or `timeout` messages within a short period.
-- Missing activity: Detect when expected logs stop appearing, indicating a stalled process or failed service.
+- **Error spikes**: Alert when error logs exceed a threshold, such as repeated `connection refused` or `timeout` messages within a short period.
+- **Missing activity**: Detect when expected logs stop appearing, indicating a stalled process or failed service.
 
 ## Test your monitor
 
