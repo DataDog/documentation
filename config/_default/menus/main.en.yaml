@@ -1624,26 +1624,31 @@ menu:
       parent: dashboards
       weight: 9
       identifier: dashboards_overlays
+    - name: Annotations
+      url: dashboards/annotations/
+      parent: dashboards
+      weight: 10
+      identifier: dashboards_annotations
     - name: Sharing
       identifier: dashboards_sharing
       url: dashboards/sharing/
       parent: dashboards
-      weight: 10
+      weight: 1001
     - name: Shared Dashboards
       identifier: dashboards_sharing_shared_dashboards
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
-      weight: 1001
+      weight: 1002
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1002
+      weight: 1003
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
