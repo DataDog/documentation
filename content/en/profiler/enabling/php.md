@@ -32,11 +32,11 @@ PHP ZTS builds are supported since `dd-trace-php` version 0.99+, while PHP debug
 {{% tab "GNU C Linux" %}}
 
 An operating system with glibc 2.17 or newer is required. The following versions or newer meet this requirement:
-  - CentOS 7.
-  - Debian 8, which has reached end of life (EOL).
-  - Ubuntu 14.04, which is EOL.
+  - CentOS 7
+  - Debian 8
+  - Ubuntu 14.04
 
-Datadog recommends running an OS version that is not EOL.
+**Note**: The operating system versions above have all reached end of life (EOL), Datadog recommends running more recent versions.
 
 {{% /tab %}}
 {{% tab "Alpine Linux" %}}
@@ -70,26 +70,43 @@ To begin profiling applications:
 
 2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
 
-3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
-
-4. Configure the profiler using config mode through the `datadog-setup.php`:
-
+    ```shell
+    curl --proto '=https' --tlsv1.2 -sSfLO \
+      https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
     ```
-    # `datadog.profiling.enabled` is not required for v0.82.0+.
-    php datadog-setup.php config set -d datadog.profiling.enabled=1
 
+3. Run the installer to install both the tracer and profiler. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
+
+    ```shell
+    php datadog-setup.php --enable-profiling --php-bin=all
+    ```
+
+4. **Optional:** Configure the profiler using config mode through the `datadog-setup.php`:
+
+    ```shell
     php datadog-setup.php config set \
       -d datadog.service=app-name \
       -d datadog.env=prod \
       -d datadog.version=1.3.2
-
-    php hello.php
     ```
 
-    Apache, PHP-FPM and other servers require a restart after changing the INI
-settings.
+    Apache, PHP-FPM, FrankenPHP and other servers require a restart after changing the INI settings.
 
     See the [configuration docs][4] for more INI settings.
+
+5. Validate the profiler extension is loaded and enabled by executing `php -v` and validate that you see `datadog-profiling` in the output.
+
+    ```shell
+    php -v
+    ```
+
+    ```
+    PHP 8.4.13 (cli) (built: Sep  5 2025 11:52:54) (ZTS)
+    Copyright (c) The PHP Group
+    Zend Engine v4.4.13, Copyright (c) Zend Technologies
+        with Zend OPcache v8.4.13, Copyright (c), by Zend Technologies
+        with datadog-profiling v1.13.0, Copyright Datadog, by Datadog
+    ```
 
 5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
