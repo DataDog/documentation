@@ -33,15 +33,15 @@ Free text search only searches the `message` field and is case insensitive. It i
 
 The following are free text search examples:
 
-Search syntax: `hello`
+`hello`
 : Searches for the exact string `hello`. For example, `{"message": "hello world"}` is a matching log.
 
-Search syntax: `Hello world`
+`Hello world`
 : Searches for `hello` and `world`. For example, `"hello beautiful world"` is a match.
 : This query can also be written as `Hello AND world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
-Search syntax: `"hello world"`
+`"hello world"`
 : Searches for a sequence of words. For example `"hello world"`, `"hello-world"`, and `"Hello, world"` are all matches.
 
 ### Attribute search
@@ -54,33 +54,33 @@ To filter for events that have a specific attribute key, use the `_exists_` synt
 
 Here are some attribute search syntax examples and logs that match the syntax:
 
-Search syntax: `status:ok service:flask-web-app`
+`status:ok service:flask-web-app`
 : Matches logs with the status `ok` from your `flask-web-app` service.
 : This query can also be written as: `status:ok AND service:flask-web-app`.
 
-Search syntax: `user.status:inactive`
+`user.status:inactive`
 : Matches logs with the status `inactive` nested under the `user` attribute.
 
-Search syntax: `http.url:/api-v1/*`
+`http.url:/api-v1/*`
 : Matches logs containing a value in the `http.url` attribute that starts with `/api-v1/`.
 
-Search syntax: `http.status_code:[200 TO 299] http.url_details.path:/api-v1/*`
+`http.status_code:[200 TO 299] http.url_details.path:/api-v1/*`
 : Matches logs containing an `http.status_code` value that is greater than or equal to `200` and less than or equal to `299`, and containing a value in the `http.url_details.path` attribute that start with `/api-v1/`.
 
-Search syntax: `http.status:[200 TO 299]`
+`http.status:[200 TO 299]`
 : Matches logs containing an `http.status` value that is greater than or equal to `200` and less than or equal to `299`.
 : **Notes**:
 : - `[..]` Square brackets mean the ranges are inclusive.
 : - Ranges can be used across any attribute.
 
-Search syntax: `http.status:{200 TO 299}`
+`http.status:{200 TO 299}`
 : Matches logs containing an `http.status` value that is greater than `200` or less than `299`. **Notes**: - `{..}` Curly brackets mean the ranges are exclusive. - Ranges can be used across any attribute.
 
-Search syntax: `"service.status":disabled`
+`"service.status":disabled`
 : Matches logs with `"service.status": "disabled"`. This filter syntax searches for a literal `.` in the attribute key.
 : See [Path notation](#path-notation) for more information.
 
-Search syntax: `_exists_:service`
+`_exists_:service`
 : Matches logs with the attribute key `service`. For example, the query matches `{"service": "postgres"}`, but does not match `{"env": "prod"}`.
 
 #### Path notation
@@ -118,24 +118,24 @@ You can use the following case sensitive Boolean operators to combine multiple t
 
 The follow are example queries that use Boolean operators:
 
-Search syntax: `NOT (status:debug)`
+`NOT (status:debug)`
 : Matches logs that do not have the status `DEBUG`.
 
-Search syntax: `host:COMP-A9JNGYK OR host:COMP-J58KAS`
+`host:COMP-A9JNGYK OR host:COMP-J58KAS`
 : Only matches logs from those specific hosts.
 
-Search syntax: `Hello AND World`
+`Hello AND World`
 : Searches for `hello` and `world`. For example, "hello beautiful world" is a match.
 : This query can also be written as: `Hello world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
-Search syntax: `hello` AND `status:info`
+`hello` AND `status:info`
 : Matches logs with a message field that contains `hello` and with `status:info`.
 
-Search syntax: `-http.status_code:200`
+`-http.status_code:200`
 : Matches logs where http.status_code is not equal to 200
 
-Search syntax: `service:(postgres OR datadog_agent)`
+`service:(postgres OR datadog_agent)`
 : Matches logs with the values `postgres` or `datadog_agent` for the `service` attribute. This query can also be written as: `service:postgres OR service:datadog_agent`
 
 ## Escape special characters and spaces
@@ -175,22 +175,22 @@ To learn how to escape special characters and spaces in a search, let's look at 
 
 The following are search syntax examples that escape special characters and spaces in the log example:
 
-Search syntax: `tags:env*`
+`tags:env*`
 : Matches logs with a `tag` attribute value of `env`.
 
-Search syntax: `tags:(env\:prod OR env\:test)`
+`tags:(env\:prod OR env\:test)`
 : Matches logs with the tag `env:prod` or `env:test` in the `tags` array.
 : This query can also be written as `tags:("env:prod" OR "env:test")`.
 
-Search syntax: `tags:env\:prod AND -tags:version\:beta`
+`tags:env\:prod AND -tags:version\:beta`
 : Matches logs that have `env:prod` and does not have `version:beta` in the `tag` array.
 : This query can also be written as `tags:"env:prod" AND -tags:"version:beta"`.
 
-Search syntax: `my_app:hello\:world`
+`my_app:hello\:world`
 : Matches logs that contain `my_app:hello:world`.
 : This query can also be written as `my_app:"hello:world"`.
 
-Search syntax: `my_app:hello?world?again`
+`my_app:hello?world?again`
 : Matches logs that contain `"my_app":"hello world again"`.
 
 ### Arrays
@@ -216,19 +216,19 @@ If you use the filter query `Event.EventData.Data.Name:ObjectServer`, the above 
 
 ​​You can use `*` for wildcard searches. The following are wildcard search examples:
 
-Search syntax: `*network*`
+`*network*`
 : Matches logs with a `message` field value that contains `network`.
 
-Search syntax: `web*`
+`web*`
 : Matches logs with a `message` field value that starts with `web`.
 
-Search syntax: `*web`
+`*web`
 : Matches logs with a `message` field value that ends with `web`.
 
-Search syntax: `service:*mongo`
+`service:*mongo`
 : Matches logs with `service` attribute values that ends with `mongo`.
 
-Search syntax: `service:web*`
+`service:web*`
 : Matches logs that have a `service` attribute value that starts with `web`.
 
 **Notes**:
