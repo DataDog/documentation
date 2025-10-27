@@ -23,10 +23,34 @@ Forecasts are available in:
 
 With Forecasts, you can:
 
-- **Predict future costs**: Forecast costs for the next billing period, current month, current year, or a custom date range based on your historical spending data.
+- **Predict future costs**: Anticipate spending trends based on your historical data.
 - **Understand cost trends**: Visualize projected costs alongside actual spending to identify patterns.
 - **Plan budgets**: Use forecast data to set realistic budget targets and avoid cost overruns.
 - **Track budget health**: See if forecasted costs are projected to exceed your budget targets.
+
+## How forecasting works
+
+Cloud Cost Management leverages advanced algorithms to deliver highly accurate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
+
+- **Regular spending patterns**: Recurring costs that happen on a predictable schedule (such as weekly or monthly cycles).
+- **Spending trends**: Whether your costs are increasing, decreasing, or staying stable over time.
+- **Seasonal variations**: Changes in spending that correspond to specific periods or events.
+
+### Flexible forecasting options
+
+Forecasts can be generated for various time horizons and rollup intervals to match your planning needs:
+
+- **Forecast periods**: Predict costs for the next billing period, current month, current year, or a custom date range based on your historical spending data.
+- **Rollup intervals**: View forecasts at daily, weekly, or monthly intervals depending on your analysis requirements.
+
+### Data requirements
+
+To generate accurate forecasts, CCM requires:
+
+- **At least 31 **consecutive** days of cost data**: This ensures the model has sufficient information to identify meaningful patterns.
+- **Recent data**: The model uses up to the last 100 days of your cost history to generate predictions.
+
+If you have newly created resources or services, forecasts become available once sufficient historical data is collected.
 
 ## View forecasts in reports
 
@@ -65,32 +89,6 @@ To view detailed forecast information:
    - **Forecasted Past**: A vertical line indicating where the forecast begins
 
 {{< img src="cloud_cost/forecasts/budget-performance-with-forecast.png" alt="Budget performance view showing the forecast toggle and forecasted costs displayed with a hatched pattern" style="width:100%;" >}}
-
-## How forecasting works
-
-Cloud Cost Management uses your historical spending data to predict future costs. The forecasting model analyzes patterns in your cloud spending, including:
-
-- **Regular spending patterns**: Recurring costs that happen on a predictable schedule (such as weekly or monthly cycles).
-- **Spending trends**: Whether your costs are increasing, decreasing, or staying stable over time.
-- **Seasonal variations**: Changes in spending that correspond to specific periods or events.
-
-### Data requirements
-
-To generate accurate forecasts, CCM needs:
-
-- **At least 31 consecutive days of cost data**: This ensures the model has enough information to identify meaningful patterns.
-- **Recent data**: The model uses up to the last 100 days of your cost history to generate predictions.
-
-If you have newly created resources or services, forecasts become available once sufficient historical data is collected.
-
-## Troubleshooting
-
-### Forecasts are not available
-
-If you don't see forecasts in your reports or budgets:
-
-- **Check your data**: Ensure you have at least 31 **consecutive** days of cost data for the resources or services you're analyzing.
-- **Verify cost data is flowing**: Confirm that Datadog is receiving cost data from your cloud providers.
 
 ## Further reading
 
