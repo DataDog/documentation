@@ -1532,11 +1532,11 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
-  "RunHistoricalJob": [
+  "RunThreatHuntingJob": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Run a historical job returns \"Status created\" response"
+      "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [
