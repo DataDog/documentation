@@ -64,7 +64,7 @@ These steps assume you've already created a listing in the Developer Platform.
 5. Click **Generate OAuth Client Secret** to create credentials for testing.
 6. Record the client secret, as it is not displayed again.
 7. Select the minimum scopes required for your integration.
-    - **Note**: Enable the `api_keys_write` scope to submit data (metrics, logs, events, etc.) to Datadog.
+    - **Note**: Enable the `api_keys_write` scope to submit data (such as metrics, logs, or events) to Datadog.
 8. Click **Save Changes**.
 
 ### Test OAuth
