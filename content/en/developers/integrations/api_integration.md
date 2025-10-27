@@ -165,11 +165,11 @@ If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/using-the-api/
-[2]: https://docs.datadoghq.com/api/latest/metrics/
-[3]: https://docs.datadoghq.com/logs/faq/partner_log_integration/
-[4]: https://docs.datadoghq.com/api/latest/events/
-[5]: https://docs.datadoghq.com/api/latest/incidents/
-[6]: https://docs.datadoghq.com/api/latest/users/
+[2]: /api/latest/metrics/
+[3]: /logs/faq/partner_log_integration/
+[4]: /api/latest/events/
+[5]: /api/latest/incidents/
+[6]: /api/latest/users/
 [7]: /developers/integrations/?tab=integrations#join-the-datadog-partner-network
 [8]: /api/latest/scopes/
 [9]: /developers/authorization/oauth2_in_datadog/
