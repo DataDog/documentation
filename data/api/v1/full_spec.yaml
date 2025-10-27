@@ -6438,6 +6438,7 @@ components:
       - $ref: '#/components/schemas/LogsSpanRemapper'
       - $ref: '#/components/schemas/LogsArrayProcessor'
       - $ref: '#/components/schemas/LogsDecoderProcessor'
+      - $ref: '#/components/schemas/LogsSchemaProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6499,6 +6500,243 @@ components:
             periods.
           type: string
       type: object
+    LogsSchemaCategoryMapper:
+      description: "Use the Schema Category Mapper to categorize log event into enum
+        fields.\nIn the case of OCSF, they can be used to map sibling fields which
+        are composed of an ID and a name.\n\n**Notes**:\n\n- The syntax of the query
+        is the one of Logs Explorer search bar.\n  The query can be done on any log
+        attribute or tag, whether it is a facet or not.\n  Wildcards can also be used
+        inside your query.\n- Categories are executed in order and processing stops
+        at the first match.\n  Make sure categories are properly ordered in case a
+        log could match multiple queries.\n- Sibling fields always have a numerical
+        ID field and a human-readable string name.\n- A fallback section handles cases
+        where the name or ID value matches a specific value.\n  If the name matches
+        \"Other\" or the ID matches 99, the value of the sibling name field will be
+        pulled from a source field from the original log."
+      properties:
+        categories:
+          description: 'Array of filters to match or not a log and their
+
+            corresponding `name` to assign a custom value to the log.'
+          example:
+          - filter:
+              query: '@eventName:(ConsoleLogin OR ExternalIdPDirectoryLogin OR UserAuthentication
+                OR Authenticate)'
+            id: 1
+            name: Logon
+          - filter:
+              query: '@eventName:*'
+            id: 99
+            name: Other
+          items:
+            $ref: '#/components/schemas/LogsSchemaCategoryMapperCategory'
+          type: array
+        fallback:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperFallback'
+        name:
+          description: Name of the logs schema category mapper.
+          example: activity_id and activity_name
+          type: string
+        targets:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperTargets'
+        type:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperType'
+      required:
+      - categories
+      - targets
+      - type
+      - name
+      type: object
+    LogsSchemaCategoryMapperCategory:
+      description: Object describing the logs filter with corresponding category ID
+        and name assignment.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        id:
+          description: ID to inject into the category.
+          example: 1
+          format: int64
+          type: integer
+        name:
+          description: Value to assign to target schema field.
+          example: Password Change
+          type: string
+      required:
+      - filter
+      - id
+      - name
+      type: object
+    LogsSchemaCategoryMapperFallback:
+      description: Used to override hardcoded category values with a value pulled
+        from a source attribute on the log.
+      properties:
+        sources:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Fallback sources used to populate value of field.
+          example: {}
+          type: object
+        values:
+          additionalProperties:
+            type: string
+          description: Values that define when the fallback is used.
+          example: {}
+          type: object
+      type: object
+    LogsSchemaCategoryMapperTargets:
+      description: Name of the target attributes which value is defined by the matching
+        category.
+      properties:
+        id:
+          description: ID of the field to map log attributes to.
+          example: ocsf.activity_id
+          type: string
+        name:
+          description: Name of the field to map log attributes to.
+          example: ocsf.activity_name
+          type: string
+      type: object
+    LogsSchemaCategoryMapperType:
+      description: Type of logs schema category mapper.
+      enum:
+      - schema-category-mapper
+      example: schema-category-mapper
+      type: string
+      x-enum-varnames:
+      - SCHEMA_CATEGORY_MAPPER
+    LogsSchemaData:
+      description: Configuration of the schema data to use.
+      properties:
+        class_name:
+          description: Class name of the schema to use.
+          example: Account Change
+          type: string
+        class_uid:
+          description: Class UID of the schema to use.
+          example: 3001
+          format: int64
+          type: integer
+        profiles:
+          description: Optional list of profiles to modify the schema.
+          example:
+          - security_control
+          - host
+          items:
+            type: string
+          type: array
+        schema_type:
+          description: Type of schema to use.
+          example: ocsf
+          type: string
+        version:
+          description: Version of the schema to use.
+          example: 1.5.0
+          type: string
+      required:
+      - schema_type
+      - version
+      - class_uid
+      - class_name
+      type: object
+    LogsSchemaMapper:
+      description: Configuration of the schema processor mapper to use.
+      oneOf:
+      - $ref: '#/components/schemas/LogsSchemaRemapper'
+      - $ref: '#/components/schemas/LogsSchemaCategoryMapper'
+    LogsSchemaProcessor:
+      description: A processor that has additional validations and checks for a given
+        schema. Currently supported schema types include OCSF.
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        mappers:
+          description: The `LogsSchemaProcessor` `mappers`.
+          example:
+          - name: Map userIdentity to ocsf.user.uid
+            sources:
+            - userIdentity.principalId
+            target: ocsf.user.uid
+            type: schema-remapper
+          items:
+            $ref: '#/components/schemas/LogsSchemaMapper'
+          type: array
+        name:
+          description: Name of the processor.
+          example: Map additionalEventData.LoginTo to ocsf.dst_endpoint.svc_name
+          type: string
+        schema:
+          $ref: '#/components/schemas/LogsSchemaData'
+        type:
+          $ref: '#/components/schemas/LogsSchemaProcessorType'
+      required:
+      - name
+      - mappers
+      - type
+      - schema
+      type: object
+    LogsSchemaProcessorType:
+      default: schema-processor
+      description: Type of logs schema processor.
+      enum:
+      - schema-processor
+      example: schema-processor
+      type: string
+      x-enum-varnames:
+      - SCHEMA_PROCESSOR
+    LogsSchemaRemapper:
+      description: The schema remapper maps source log fields to their correct fields.
+      properties:
+        name:
+          description: Name of the logs schema remapper.
+          example: Map userIdentity.principalId, responseElements.role.roleId, responseElements.user.userId
+            to ocsf.user.uid
+          type: string
+        override_on_conflict:
+          default: false
+          description: Override or not the target element if already set.
+          type: boolean
+        preserve_source:
+          default: false
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        sources:
+          description: Array of source attributes.
+          example:
+          - userIdentity.principalId
+          - responseElements.role.roleId
+          - responseElements.user.userId
+          items:
+            description: Attribute used as a source to remap its value to the target
+              attribute.
+            type: string
+          type: array
+        target:
+          description: Target field to map log source field to.
+          example: ocsf.user.uid
+          type: string
+        target_format:
+          $ref: '#/components/schemas/TargetFormatType'
+        type:
+          $ref: '#/components/schemas/LogsSchemaRemapperType'
+      required:
+      - name
+      - sources
+      - target
+      - type
+      type: object
+    LogsSchemaRemapperType:
+      description: Type of logs schema remapper.
+      enum:
+      - schema-remapper
+      example: schema-remapper
+      type: string
+      x-enum-varnames:
+      - SCHEMA_REMAPPER
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
         as the official service.
@@ -9753,6 +9991,8 @@ components:
       type: object
     NotebookGlobalTime:
       description: Notebook global timeframe.
+      example:
+        live_span: 1h
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
@@ -15056,6 +15296,7 @@ components:
     SyntheticsAssertionTargetValue:
       description: Value used by the operator in assertions. Can be either a number
         or string.
+      example: 0.0
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'

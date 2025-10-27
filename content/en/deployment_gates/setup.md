@@ -258,13 +258,13 @@ jobs:
           # Your deployment commands here
 
       - name: Evaluate Deployment Gate
-        uses: DataDog/deployment-gate-github-action@v1
+        uses: DataDog/deployment-gate-github-action@v1.0.0
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
         with:
-          service: 'my-service'
-          env: 'production'
+          service: my-service
+          env: production
 
       - name: Deploy
         if: success()
