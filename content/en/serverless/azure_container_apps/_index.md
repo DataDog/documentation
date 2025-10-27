@@ -12,7 +12,7 @@ further_reading:
     text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
-<div class="alert alert-info">To instrument your Azure Container Apps applications with an in-container agent, see <a href="/serverless/guide/aca_serverless_init">Azure Container Apps with serverless-init</a>.</div>
+<div class="alert alert-info">To instrument your Azure Container Apps applications with an in-container Datadog Agent, see <a href="/serverless/guide/aca_serverless_init">Azure Container Apps with serverless-init</a>.</div>
 
 ## Overview
 Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides standard metrics and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
@@ -36,7 +36,7 @@ Instrument your main application with the `dd-trace-js` library. See [Tracing No
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-Instead of collecting logs through the Azure integration, alternatively you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -53,7 +53,7 @@ Instrument your main application with the `dd-trace-py` library. See [Tracing Py
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-Instead of collecting logs through the Azure integration, alternatively you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Python Log Collection][3]. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -70,7 +70,7 @@ Instrument your main application with the `dd-trace-java` library. See [Tracing 
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-Instead of collecting logs through the Azure integration, alternatively you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -87,7 +87,7 @@ Instrument your main application with the `dd-trace-go` library. See [Tracing Go
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-Instead of collecting logs through the Azure integration, alternatively you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -121,7 +121,7 @@ Instrument your main application with the `dd-trace-php` library. See [Tracing P
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-Instead of collecting logs through the Azure integration, alternatively you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [PHP Log Collection][3]. To set up trace log correlation, see [Correlating PHP Logs and Traces][4].
 
@@ -137,7 +137,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
-The [Datadog Terraform module for Container Apps][1] wraps the [azurerm_container_app][2] resource and automatically configures your Container App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+The [Datadog Terraform module for Container Apps][1] wraps the [`azurerm_container_app`][2] resource and automatically configures your Container App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
 If you don't already have Terraform set up, [install Terraform][3], create a new directory, and make a file called `main.tf`.
 
@@ -209,7 +209,7 @@ The [Datadog Container App module][1] only deploys the Container App resource, s
 {{% tab "Manual" %}}
 
 
-### Application Environment variables
+### Application environment variables
 Because Azure Container Apps is built on Kubernetes, you cannot share environment variables between containers.
 
 | Name | Description |
@@ -245,7 +245,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 
 ### Logging
 
-If using the agent for log collection, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][2]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+If using the Datadog Agent for log collection, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][2]. Use type **Ephemeral storage** when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
