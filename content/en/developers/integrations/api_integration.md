@@ -47,7 +47,7 @@ OAuth is available only to approved Technology Partners developing official Data
 </div>
 
 1. Determine the required [scopes][8] for your integration use case.
-2. Implement OAuth following [these steps][9]. 
+2. [Implement OAuth][9]. 
 3. Ensure the following Datadog-specific concepts are accounted for:
     - Datadog organizations may be deployed in different regions, represented by the `domain` parameter (for example, `datadoghq.com`, `ap1.datadoghq.com`). This affects both the OAuth handshake and the API endpoints you use.
     - Some customers use a custom subdomain, represented by the `site` parameter (for example, `customsub.datadoghq.com`). This is only used in the OAuth handshake and doesn't affect API endpoints.
