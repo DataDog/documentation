@@ -135,7 +135,7 @@ For **internal** status pages, the subscription process is the same, but users m
 
 ### Importing
 
-Email subscribers may be imported in subscription settings using a .txt file. Each subscriber's email address must be on a new line. Subscribers will need to confirm their subscription by clicking the link in the confirmation email.
+Email subscribers can be imported in subscription settings using a .txt file. Each subscriber's email address must be on a new line. Subscribers must confirm their subscription by clicking the link in the confirmation email.
 
 ## Set a custom domain
 
