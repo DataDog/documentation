@@ -9,6 +9,9 @@ further_reading:
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: Documentación
   text: Más información sobre las variables globales
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Cómo ayudé a mi cliente a ampliar sus tests de navegador con Datadog
 title: Utiliza contraseñas de un solo uso basadas en el tiempo (TOTP) para la autenticación
   multifactor (MFA) en los tests de navegador
 ---
@@ -25,8 +28,8 @@ Algunos códigos QR están limitados a métodos de verificación específicos y 
 
 ## Guarda tu clave secreta o código QR en una variable global
 
-Crea una variable global donde introducir una clave secreta o cargar un código QR de tu proveedor de autenticación. En la pestaña **Variables globales** de tu página **Configuración**, haz clic en **Crear variable global**.
-1. En **Choose variable type** (Elegir el tipo de variable), selecciona **MFA Token**.
+Crea una variable global donde introducir una clave secreta o cargar un código QR de tu proveedor de autenticación. En la pestaña **Variables globales** de tu página **Configuración**, haz clic en **Create Global Variable** (Crear variable global).
+1. En **Choose variable type** (Elegir el tipo de variable), selecciona **MFA Token** (Token para MFA).
 2. En **Definir variable**, introduce un **Nombre de variable**. Tu nombre de variable solo puede utilizar letras mayúsculas, números y guiones bajos.
 3. Introduce una **Descripción** para tu variable (opcional).
 4. Selecciona **Etiquetas** (tags) para asociarlas a tu variable (opcional).
@@ -35,7 +38,7 @@ Crea una variable global donde introducir una clave secreta o cargar un código 
 7. Haz clic en **+ Generar** para crear una TOTP. Puedes copiar la TOTP generada con el icono **Copiar**.
 8. En **Configuración de permisos**, restringe el acceso a tu variable en función de los roles en tu organización. Para más información sobre roles, consulta la [documentación de RBAC][1].
 
-{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Crear un token MFA" style="width:100%;" >}}
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Crear un token para MFA" style="width:100%;" >}}
 
 ## Utiliza TOTP en tus tests Sintético 
 Puedes utilizar la clave secreta o el código QR almacenados en una variable global en todos tus tests de Sintético. Cuando crees un [test de navegador][2], inserta la TOTP generada a partir de la clave secreta o el código QR almacenado en la variable global para verificar el flujo de trabajo de autenticación de tu aplicación.
