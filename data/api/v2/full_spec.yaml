@@ -20606,9 +20606,20 @@ components:
             to this GCP metric namespace.
           example: true
           type: boolean
+        filters:
+          description: When enabled, Datadog applies these additional filters to limit
+            metric collection. A metric is collected only if it does not match all
+            exclusion filters and matches at least one allow filter.
+          example:
+          - snapshot.*
+          - '!*_by_region'
+          items:
+            description: A metric namespace filter
+            type: string
+          type: array
         id:
           description: The id of the GCP metric namespace.
-          example: aiplatform
+          example: pubsub
           type: string
       type: object
     GCPMonitoredResourceConfig:
@@ -20770,6 +20781,10 @@ components:
           example:
           - disabled: true
             id: aiplatform
+          - filters:
+            - snapshot.*
+            - '!*_by_region'
+            id: pubsub
           items:
             $ref: '#/components/schemas/GCPMetricNamespaceConfig'
           type: array
