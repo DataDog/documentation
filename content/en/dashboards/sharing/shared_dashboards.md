@@ -128,9 +128,8 @@ In the **Configure Dashboard** step, make changes to the shared dashboard.
 
 **Default Timeframe**
 : This sets the default timeframe for viewers of the shared dashboard. If "Allow viewers to change the timeframe" is toggled off, this is the only available timeframe. 
-
-- **Public and embedded dashboards**: Toggling this on allows viewers to choose from a fixed set of timeframe options.
-- **Invite-only shared dashboards**: Toggling this on allows viewers to choose from a fixed set of timeframe options or create a custom timeframe, including timeframe-scrubbing on the graph to zoom in.
+- ***Public and embedded dashboards***: Toggling this on allows viewers to choose from a fixed set of timeframe options.
+- ***Invite-only shared dashboards***: Toggling this on allows viewers to choose from a fixed set of timeframe options or create a custom timeframe, including timeframe-scrubbing on the graph to zoom in.
 
 **Variables**
 : This setting lets users specify which template variables on the dashboard are available to viewers. Setting the same default and available value for a template variable makes it unchangeable by viewers. <br>**Note**: This applies even if the values are set to a wildcard (\*). <br><br>By default, the shared dashboard inherits the selected and available values currently used by the sharer.
