@@ -13,12 +13,12 @@ further_reading:
 
 ## Overview
 
-Worker versions 2.11 and newer use an updated search syntax. This document goes over:
+Worker versions 2.11 and newer use an updated search syntax. This document covers the following:
 
-- [How to upgrade to the new syntax](#how-to-upgrade-to-the-new-search-syntax)
+- [How to upgrade existing queries to the new syntax](#how-to-upgrade-to-the-new-search-syntax)
 - [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax)
 
-## How to upgrade to the new search syntax
+## How to upgrade queries to the new search syntax
 
 See the steps based on whether you:
 
@@ -31,15 +31,18 @@ If you created your pipeline using the Pipeline UI:
 
 1. [Upgrade to Observability Pipelines Worker][1] version 2.11.
 1. Navigate to the [Pipeline UI][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
-1. On the pipeline editor page, by default the `Use legacy search syntax` box is checked because your pipeline is running Worker 2.10 or older, which uses the old search syntax.
+1. On the pipeline editor page, by default the `Use legacy search syntax` box is checked because your pipeline is running the old search syntax of Worker 2.10 or older.
 {{< img src="observability_pipelines/guide/legacy_search_checkbox.png" alt="The pipelines editor showing the legacy search checkbox selected" style="width:100%;" >}}
-1. After you've updated all your queries in that pipeline, uncheck the `Use legacy search syntax` box and deploy your pipeline
+1. After you've updated all queries in that pipeline, uncheck the `Use legacy search syntax` box and deploy your pipeline.
 
 ### Created the pipeline using the API or Terraform
 
 If your pipeline was created using the public API or Terraform:
 - Within the same request that you make to update your pipeline queries to the new search syntax, set `use_legacy_search_syntax` to `false`.
-- **Note**: You **must** set `use_legacy_search_syntax` to `false` when you update your queries because if `use_legacy_search_syntax` is left unpopulated, it defaults to `true` in the Worker.
+
+<div class="alert alert-warning">You <b>must</b> set <code>use_legacy_search_syntax</code> to <code>false</code> when you update your queries. If <code>use_legacy_search_syntax</code> is unpopulated, it defaults to <code>true</code> in the Worker.</div>
+
+**Note**: 
 
 
 ## What's new in the updated search syntax
@@ -48,13 +51,13 @@ The following table lists the differences between the legacy and new search synt
 
 | Legacy syntax | New syntax                        |
 | ------------- | ------------------------------- |
-| Must use the `@` symbol for attribute search, except when referencing [reserved fields](#legacy-syntax-reserved-fields). | Do not need to use the `@` symbol for attribute search. **Note**: The `@` symbol in queries gets stripped to preserve backwards compatibility. |
-| Since `@` indicates an attribute search, tag searches do not include an `@` so are matched under the attributes `tags` and `ddtags`.<br><br>Attribute search queries without an `@` symbol are matched against the `tags` or `ddtags` array.<br><br>Example attribute search syntax: `env:prod` | Tags syntax must be explicitly entered.<br><br>Inspect your data with Live Capture to determine which fields to match against.<br><br>Example attribute search syntax: `tags:"env:prod" OR ddtags:"env:prod"`  |
-| [Reserved fields](#legacy-syntax-reserved-fields) do not need the `@` symbol. | Reserved fields do not need the `@` symbol. |
+| Requires the `@` symbol for attribute search, except when referencing [reserved fields](#legacy-syntax-reserved-fields). | Does not require the `@` symbol for attribute search. **Note**: The `@` symbol in queries is removed to preserve backwards compatibility. |
+| Since `@` indicates an attribute search, tag searches do not include an `@`, and are matched under the attributes `tags` and `ddtags`.<br><br>Attribute search queries without an `@` symbol are matched against the `tags` or `ddtags` array.<br><br>Example attribute search syntax: `env:prod` | Tags syntax must be explicitly entered.<br><br>Inspect your data with [Live capture][5] to determine which fields to match.<br><br>Example attribute search syntax: `tags:"env:prod" OR ddtags:"env:prod"`  |
+| [Reserved fields](#legacy-syntax-reserved-fields) do not require the `@` symbol. | Reserved fields do not require the `@` symbol. |
 
 **Note**: The upgraded search syntax does not need the `@` symbol for attribute searches. While you do not need to remove the `@` symbol from filter queries that were previously using them, Datadog recommends that you remove the `@` symbol.
 
-The following examples show matched logs, along with the legacy syntax and new syntax that matche the logs.
+The following examples show matched logs, along with the legacy syntax and new syntax that matches the logs.
 
 `{"user": "firstname.lastname"}`
 : **Legacy syntax**: `@user:firstname.lastname`
@@ -101,7 +104,7 @@ The following examples show matched logs, along with the legacy syntax and new s
 : **New syntax**: `source:postgres OR ddsource:postgres`
 : **Difference**: With the legacy syntax, attribute search with `source` field matches both `source` and `ddsource` fields. The new syntax no longer does this so you must enter `source` or `ddsource` explicitly.
 
-**Note**: Using wildcards for field names in attribute search is not supported for either the legacy or new syntax. For example, the following usage of wildcard does not work:
+**Note**: Using wildcards for field names in attribute search is not supported for either the legacy or new syntax. For example, the following wildcard usage does not work:
 
 - Legacy syntax: `*:something`
 - New syntax: `*:something`
@@ -129,3 +132,4 @@ See [Reserved attributes][3] for more information.
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [4]: /observability_pipelines/search_syntax/#attribute-search
+[5]: /observability_pipelines/live_capture/

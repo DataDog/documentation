@@ -1,21 +1,21 @@
 ---
 title: Search Syntax
-description: Learn the search syntax to create filter queries for your Observability Pipelines processors.
+description: Learn the new filter query search syntax for your Observability Pipelines processors.
 disable_toc: false
 private: true
 ---
 ## Overview
 
-When you add a processor to a pipeline, you can filter your logs so only a subset of them go through a processor. This document goes over the following information:
+When you add a processor to a pipeline, you can filter logs to process only a defined subset. This document goes over the following information:
 
-- [Free text search](#free-text-search): when you want to search the `message` field.
-- [Attribute search](#attribute-search): when you want to search attribute keys and values.
-- [Arrays](#arrays) when you want to search within an array of nested values.
-- [Boolean operators](#boolean-operators) that you can use in your search query.
-- [Special characters and spaces that need to be escaped](#escape-special-characters-and-spaces) in search queries.
-- Using [wildcards](#wildcards) in your search queries.
+- [Free text search](#free-text-search): to search the `message` field.
+- [Attribute search](#attribute-search): to search attribute keys and values.
+- [Arrays](#arrays): to search within an array of nested values.
+- [Boolean operators](#boolean-operators).
+- [Special characters and spaces that must be escaped](#escape-special-characters-and-spaces).
+- [Wildcards](#wildcards).
 
-**Note**: Worker version 2.11 and newer uses an upgraded search syntax. After you upgrade the Worker to version 2.11, you might need to update your filter queries to match the new syntax. See the [Upgrade to the New Search Syntax](/observability_pipelines/guide/upgrade_to_the_next_search_syntax/) for more information.
+**Note**: Worker version 2.11 and newer uses an upgraded search syntax. After you upgrade the Worker to version 2.11, you might need to update your filter queries to match the new syntax. See [Upgrade to the New Search Syntax](/observability_pipelines/guide/upgrade_to_the_next_search_syntax/) for more information.
 
 ## Search syntax
 
@@ -38,7 +38,7 @@ Search syntax: `hello`
 
 Search syntax: `Hello world`
 : Searches for `hello` and `world`. For example, `"hello beautiful world"` is a match.
-: This query can also be written as: `Hello AND world`.
+: This query can also be written as `Hello AND world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
 Search syntax: `"hello world"`
@@ -48,11 +48,11 @@ Search syntax: `"hello world"`
 
 You can search attribute keys and values. For example, if your attribute key is `url` and you want to filter on the `url` value `www.datadoghq.com`, enter: `url:www.datadoghq.com`.
 
-To filter for events that have a specific attribute key, use the `_exists_` syntax. For example if you use the query `_exists_:service`, the event `{"service": "postgres"}` matches the query, but the event `{"env": "prod"}` does not match.
+To filter for events that have a specific attribute key, use the `_exists_` syntax. For example, if you use the query `_exists_:service`, the event `{"service": "postgres"}` matches the query, but the event `{"env": "prod"}` does not match.
 
 **Note**: Attribute searches are case sensitive.
 
-The following are attribute search syntax examples and logs that match the syntax:
+Here are some attribute search syntax examples and logs that match the syntax:
 
 Search syntax: `status:ok service:flask-web-app`
 : Matches logs with the status `ok` from your `flask-web-app` service.
@@ -85,7 +85,7 @@ Search syntax: `_exists_:service`
 
 #### Path notation
 
-For the following log structure:
+To understand path notation, let's look at the following log structure:
 
 ```json
 {
@@ -100,7 +100,7 @@ For the following log structure:
     "d": "d value"
 }
 ```
-
+In this example, use the following reference rules:
 - Use `outer_key.inner_key` to reference the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to reference the key with the value `double_inner_value`.
 
@@ -158,7 +158,7 @@ To match a single special character or space, use the `?` wildcard. For example,
 
 ### Examples
 
-For the following example log:
+To learn how to escape special characters and spaces in a search, let's look at a log example:
 
 ```
 {
@@ -173,7 +173,7 @@ For the following example log:
 }
 ```
 
-The following are search syntax examples that escape special characters and spaces:
+The following are search syntax examples that escape special characters and spaces in the log example:
 
 Search syntax: `tags:env*`
 : Matches logs with a `tag` attribute value of `env`.
@@ -210,7 +210,7 @@ EventData {
 }
 ```
 
-If you use the filter query: `Event.EventData.Data.Name:ObjectServer`, the above log event is matched because it contains a nested object with the attribute key `Name` and the value `ObjectServer`.
+If you use the filter query `Event.EventData.Data.Name:ObjectServer`, the above log event is matched because it contains a nested object with the attribute key `Name` and the value `ObjectServer`.
 
 ## Wildcards
 
