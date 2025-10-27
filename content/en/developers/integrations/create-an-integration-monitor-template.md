@@ -12,7 +12,7 @@ description: Learn how to create a monitor for your integration.
 
 This page guides Technology Partners through creating and packaging monitor templates with their official Datadog integration.
 
-[Datadog Monitors][1] continuously evaluate data (metrics, logs, events, and more) to detect conditions that indicate performance issues and availability risks. They act as proactive alerting tools that automatically notify users when behavior deviates from expected thresholds, enabling teams to take action before incidents impact customers.
+[Datadog Monitors][1] continuously evaluate data (such as metrics, logs, and events) to detect conditions that indicate performance issues and availability risks. They act as proactive alerting tools that automatically notify users when behavior deviates from expected thresholds, enabling teams to take action before incidents impact customers.
 
 For Technology Partners, monitors transform the telemetry your integration collects into actionable insights. When you package monitor templates, users can enable them directly from the [**Monitors > Templates**][2] page for faster setup and time to value.
 
