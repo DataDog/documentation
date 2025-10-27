@@ -3,9 +3,6 @@ title: Agents
 description: Build custom AI agents that can access the Action Catalog. 
 disable_toc: false
 further_reading:
-- link: "/actions/agents/build/"
-  tag: "Documentation"
-  text: "Create an agent"
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Action Catalog"
@@ -50,7 +47,7 @@ To build an agent from a blueprint:
 1. In **Agent Blueprints**, click the blueprint you want to use. 
     1. Alternatively, you can click **New Agent** and browse the full list of blueprints.
 1. Click **Create From Blueprint**.
-1. Your new agent will have pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it][2]. 
+1. Your new agent will have pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it](#customize-your-agent). 
 1. Click the gear icon to close the agent's settings.
 
 ### Create a custom agent
@@ -59,7 +56,7 @@ To build an agent from scratch:
 
 1. Navigate to the [Agents][1] page. 
 1. Click **New Agent**. 
-1. [Customize your agent][2]. Changes are saved automatically.
+1. [Customize your agent](#customize-your-agent). Changes are saved automatically.
 1. Start chatting with your agent. 
 
 ## Customize your agent
@@ -141,7 +138,6 @@ To invoke an agent in an app:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/actions/agents
-[2]: /actions/agents/build/#create-a-custom-agent
 [3]: https://openai.com/index/hello-gpt-4o/
 [4]: https://openai.com/index/gpt-4-1/
 [5]: https://openai.com/gpt-5/
