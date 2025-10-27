@@ -88,7 +88,7 @@ For example, a tag `Team:Engineering-Services` would appear as `team:engineering
 
 ## Override tag value normalization
 
-Enable **Tag Normalization** in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. The Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically, for all new customers. To backfill normalized tags for a longer period up to 15 months, create a support ticket.
+Turn on **Tag Normalization** in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. The Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically, for all new customers. To backfill normalized tags for a longer period up to 15 months, create a support ticket.
 
 Tag normalization allows you to:
 - View, filter and group Cost Recommendations and cost data with the same tag values
@@ -96,7 +96,6 @@ Tag normalization allows you to:
 - Automatically combine tag values with different casing (ex: `env:Engineering-Prod` and `env:engineering-Prod` will both be normalized to `team:engineering-prod` without having to manually set up Tag Pipelines)
 
 {{< img src="cloud_cost/tag_normalization_toggle.png" alt="Tag Pipelines interface showing optional toggle to normalize all tags on cost data" style="width:80%;" >}}
-
 
 ## How tags are prioritized
 
