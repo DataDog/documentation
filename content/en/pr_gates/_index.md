@@ -11,6 +11,13 @@ aliases:
   - /quality_gates/search/
   - /quality_gates/guide/
   - /quality_gates/guide/understanding_rule_scopes/
+  - /pr_gates/explorer/
+  - /pr_gates/explorer/search_syntax/
+  - /pr_gates/explorer/facets/
+  - /pr_gates/explorer/saved_views/
+  - /pr_gates/search/
+  - /pr_gates/guide/
+  - /pr_gates/guide/understanding_rule_scopes/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
