@@ -55,7 +55,7 @@ The Seat Management page contains tabs for each product enabled in your organiza
 
 Each tab includes:
 - A header showing the total seats in use and your committed seat count (for example, 130 of 180 seats in use)
-- A table listing all users who currently occupy seats, including:
+- A table listing all users who occupy seats, including:
     - Name
     - Email
     - Upgraded date (when the user was assigned a seat)
@@ -82,7 +82,7 @@ To remove users and free up seats:
 2. Click **Unassign Seats**.
 3. Confirm your selection.
 
-Once unassigned, the user loses access to features that require a seat. They can still perform the following actions:
+After they are unassigned, the user loses access to features that require a seat. They can still perform the following actions:
 - Create incidents
 - View incidents
 - Join incident channels
@@ -105,7 +105,7 @@ Datadog bills for Incident Management, On-Call, and Incident Response based on t
 
 Each billing period reflects the maximum number of concurrently assigned seats across your organization for that product. Your contract includes a committed number of seats, and any usage beyond that amount is billed at your on-demand rate. 
 
-Once a user claims a seat, the seat remains active and is billed month-to-month until it is unassigned. If a user is removed during a given month, the seat remains billable for that month. In the following month's billing cycle, the seat will no longer appear.
+After a user claims a seat, the seat remains active and is billed month-to-month until it is unassigned. If a user is removed during a given month, the seat remains billable for that month. In the following month's billing cycle, the seat will no longer appear.
 
 You can add or remove seat licenses at any time. Removing a user before the end of a billing period prevents future charges for that seat.
 
