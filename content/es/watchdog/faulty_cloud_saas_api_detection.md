@@ -31,42 +31,41 @@ Cada vez que se detecta un despliegue defectuoso, Watchdog crea un evento en el 
 Watchdog monitoriza el estado de las API de los siguientes proveedores externos: 
 
 | Proveedor externo | API supervisada |  
-|----------|--------------------| 
-| Adyen | *.adyenpayments.com |
+|----------|--------------------|
 | Amplitude | api.amplitude.com |
-| Anthropic | api.anthropic.com |
-| Atlassian | *.atlassian.net, *.atlassian.com |
+| Atlassian | *.atlassian.net |
 | Auth0 | *.auth0.com |
-| Azure DevOps | dev.azure.com |
-| Binance | api.binance.com |
+| Binance | api.binance.com     |
 | Braintree | api.braintreegateway.com |
+| Coreweave | *.coreweave.com |
 | Cloudflare | api.cloudflare.com |
+| Confluent | api.confluent.cloud y api.telemetry.confluent.cloud |
 | Databricks | *.cloud.databricks.com |
+| Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
-| GitLab | *.gitlab.com |
-| HubSpot | api.hubspot.com, api.hubapi.com |
+| Google | developers.google.com |
+| Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
-| LaunchDarkly | app.launchdarkly.com |
 | Mapbox | api.mapbox.com |
 | Mixpanel | api.mixpanel.com |
-| Okta | *.okta.com |
-| OpenAI | *.openai.com |
+| OpenAI | *.openai.com|
 | PagerDuty | api.pagerduty.com |
 | Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
-| PayPal | *.paypal.com |
-| Salesforce | *.salesforce.com |
+| Render | api.render.com |
 | SendGrid | *.sendgrid.com |
 | ServiceNow | *.service-now.com |
 | Slack | *.slack.com |
 | Snowflake | *.snowflakecomputing.com |
-| Splunk | *.splunkcloud.com |
+| SoundCloud | api.soundcloud.com |
+| PHP | *.splunkcloud.com |
 | Square | connect.squareup.com |
 | Stripe | api.stripe.com |
+| Towerdata | api.towerdata.com |
 | Twilio | api.twilio.com |
-| X | api.twitter.com |
+| Twitter | api.twitter.com |
 | Zendesk | *.zendesk.com |
-| Zoom | api.zoom.us |
+| Zoom    | api.zoom.us |
 
 Se monitorizan los siguientes servicios de AWS (.*amazonaws.com):
 - CloudWatch
@@ -77,6 +76,7 @@ Se monitorizan los siguientes servicios de AWS (.*amazonaws.com):
 - Kinesis
 - KMS
 - Lambda
+- RDS
 - S3
 - SNS
 - SQS
