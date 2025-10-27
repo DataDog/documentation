@@ -43,7 +43,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 
 **Requirements:** 
 - Datadog Terraform provider version 3.70 or later.
-- **Your AWS account must be integrated with Datadog** via the AWS Integration. See the AWS Integration docs: https://docs.datadoghq.com/integrations/amazon-web-services/
+- **Your AWS account must be integrated with Datadog** via the AWS Integration. See the [AWS Integration docs][3].
 
 Setting up cloud-provider based authentication for AWS involves two parts: configuring your AWS identity mapping in Datadog, and updating your Terraform provider configuration.
 
@@ -68,7 +68,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
   "data": {
     "type": "aws_cloud_auth_config",
     "attributes": {
-      "account_identifier": "terraform-service-account@myorg.com", // If mapping a user
+      "account_identifier": "terraform-service-account@myorg.com", // If mapping a user account
       "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6" // If mapping a service account
       "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
     }
@@ -133,3 +133,4 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 
 [1]: https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html
 [2]: https://app.datadoghq.com/api/v2/current_user
+[3]: /integrations/amazon-web-services/
