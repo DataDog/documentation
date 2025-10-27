@@ -60,6 +60,7 @@ The UUID after `service_account_id=` is the ID you should use when mapping to th
 #### Create an AWS identity mapping
 
 ```bash
+# Example: map an AWS ARN to a Datadog Service Account
 curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -68,8 +69,23 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
   "data": {
     "type": "aws_cloud_auth_config",
     "attributes": {
-      "account_identifier": "terraform-service-account@myorg.com", // If mapping a user account
-      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6" // If mapping a service account
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+
+```bash
+# Example: map an AWS ARN to a Datadog User
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "john.doe@myorg.com",
       "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
     }
   }
