@@ -27,10 +27,10 @@ After your integration is published, it appears in Datadog as a tile. This tile 
 
 ## Requirements
 
-- Your product must be generally available
-- Your product must host the source code that interacts with the Datadog API
-- Your integration must submit telemetry to Datadog
-- Your integration must implement OAuth for authorization (see below for more details)
+- Your product must be generally available.
+- Your product must host the source code that interacts with the Datadog API.
+- Your integration must submit telemetry to Datadog.
+- Your integration must implement OAuth for authorization (see below for more details).
 
 ## Building an API integration
 These steps assume you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][16].
