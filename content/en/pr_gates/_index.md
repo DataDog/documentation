@@ -110,7 +110,7 @@ You can see all of the rules defined by the organization.
 
 [1]: /security/code_security/static_analysis
 [2]: /security/code_security/software_composition_analysis
-[3]: https://www.datadoghq.com/product-preview/code-coverage
+[3]: /code_coverage/
 [4]: /security/code_security/iac_security/
 [5]: /integrations/github/
 [6]: /integrations/azure_devops_source_code/
