@@ -50,7 +50,7 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 3. Confirm that your monitor is triggered as expected. Use [Status Events][8] to view when your monitor was triggered and review details for each event.
     
 ## Add your monitor to your integration
-After your monitor is created and tested, add it to your listing in the Developer Platform. When your integration is published, the monitor becomes a searchable template linked to your integration. 
+After you've created and tested your monitor, add it to your listing in the Developer Platform. When your integration is published, the monitor becomes a searchable template linked to your integration. 
 
 {{< img src="developers/integrations/content_tab.png" alt="The Content tab in the Integration Developer Platform" style="width:100%;" >}}
 
