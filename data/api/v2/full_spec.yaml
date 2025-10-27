@@ -44285,6 +44285,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -44292,6 +44294,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SecurityMonitoringSignalAssigneeUpdateAttributes:
       description: Attributes describing the new assignee of a security signal.
