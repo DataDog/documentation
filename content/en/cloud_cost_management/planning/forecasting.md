@@ -18,23 +18,23 @@ further_reading:
 Cloud Cost Management (CCM) Forecasts help you predict future cloud costs based on historical spending patterns. Use forecasts to anticipate cost trends, plan budgets more effectively, and make data-driven decisions about resource allocation.
 
 Forecasts are available in:
-- **Reports**: Enable the forecast toggle to visualize predicted costs alongside your actual spending with daily, weekly, or monthly rollups.
-- **Budgets**: View forecasted costs directly on budget cards to see if you're projected to go over budget.
+- [**Reports**](#view-forecasts-in-reports): Enable the forecast toggle to visualize predicted costs alongside your actual spending with daily, weekly, or monthly rollups.
+- [**Budgets**](#view-forecasts-in-budgets): View forecasted costs directly on budget cards to see if you're projected to go over budget.
 
 With Forecasts, you can:
 
-- **Predict future costs**: Anticipate spending trends based on your historical data.
-- **Understand cost trends**: Visualize projected costs alongside actual spending to identify patterns.
-- **Plan budgets**: Use forecast data to set realistic budget targets and avoid cost overruns.
-- **Track budget health**: See if forecasted costs are projected to exceed your budget targets.
+- Anticipate **spending trends** based on your historical data to predict future costs.
+- Visualize **projected costs** alongside actual spending to identify patterns and understand cost trends.
+- Use forecast data to set **realistic budget targets** and avoid cost overruns.
+- See if forecasted costs are projected to **exceed your budget** targets to track budget health.
 
 ## How forecasting works
 
-Cloud Cost Management leverages advanced algorithms to deliver highly accurate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
+Cloud Cost Management leverages advanced algorithms to deliver accurate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
 
-- **Regular spending patterns**: Recurring costs that happen on a predictable schedule (such as weekly or monthly cycles).
-- **Spending trends**: Whether your costs are increasing, decreasing, or staying stable over time.
-- **Seasonal variations**: Changes in spending that correspond to specific periods or events.
+- Recurring costs that happen on a **predictable schedule** (such as weekly or monthly cycles).
+- Whether your costs are **increasing, decreasing, or staying stable** over time.
+- Changes in spending that correspond to **specific periods or events**.
 
 ### Flexible forecasting options
 
