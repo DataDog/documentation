@@ -41,13 +41,21 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 
 ## AWS setup
 
-**Requirements:** Datadog Terraform provider version 3.70 or later.
+**Requirements:** 
+- Datadog Terraform provider version 3.70 or later.
+- **Your AWS account must be integrated with Datadog** via the AWS Integration. See the AWS Integration docs: https://docs.datadoghq.com/integrations/amazon-web-services/
 
 Setting up cloud-provider based authentication for AWS involves two parts: configuring your AWS identity mapping in Datadog, and updating your Terraform provider configuration.
 
 ### Configure AWS identity mapping in Datadog
 
 First, map your AWS identities (ARNs) to Datadog service accounts or user accounts. During the preview, you must perform the mapping using the Datadog API.
+
+**Important — AWS integration & identifier to use**
+- The AWS account **must be integrated** with Datadog for identity mapping to work. If an AWS account is not integrated, the authentication flow cannot verify the caller and mapping will fail.
+- If you are mapping a **user** and prefer to use an email-like identifier, make sure that email is the one shown in the user's Datadog profile.
+- If you want to map to a **service account**, go to **Organization settings > Service accounts**, click the service account you want to map, and copy the `service_account_id` from the URL. For example: `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`. 
+The UUID after `service_account_id=` is the ID you should use when mapping to that service account.
 
 #### Create an AWS identity mapping
 
@@ -60,7 +68,8 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
   "data": {
     "type": "aws_cloud_auth_config",
     "attributes": {
-      "account_identifier": "terraform-service-account@myorg.com",
+      "account_identifier": "terraform-service-account@myorg.com", // If mapping a user
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6" // If mapping a service account
       "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
     }
   }
