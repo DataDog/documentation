@@ -41,7 +41,7 @@ This endpoint is particularly useful in the following scenarios:
 
 - **Technical constraints using the Datadog Exporter or Agent**: Ideal for scenarios where installing additional software is impractical or restrictive, such as third-party managed services (for example, Vercel), applications on customer devices, or environments requiring streamlined, Agentless observability pipelines. The OTLP metrics endpoint enables direct OTLP metric ingestion in these scenarios.
 
-<div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="https://app.datadoghq.com/infrastructure">Infrastructure Host List</a>.</div>
+<div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
 ## Configuration
 
