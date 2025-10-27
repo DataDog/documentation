@@ -1,8 +1,9 @@
 ---
-title: Install the Datadog Distribution of OTel Collector on Kubernetes
+title: Install the DDOT Collector as a Kubernetes DaemonSet
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
-code_lang: kubernetes
+- "/opentelemetry/setup/ddot_collector/install/kubernetes"
+code_lang: kubernetes_daemonset
 type: multi-code-lang
 code_lang_weight: 1
 further_reading:
@@ -11,13 +12,9 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
-{{< /site-region >}}
-
 ## Overview
 
-Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm or the Datadog Operator.
+Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector as a Kubernetes DaemonSet using Helm or the Datadog Operator.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -212,8 +209,6 @@ datadog:
   ...
   apm:
     portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
     peer_service_aggregation: true
   orchestratorExplorer:
     enabled: true
@@ -254,8 +249,6 @@ datadog:
         name: otel-http
   apm:
     portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
     peer_service_aggregation: true
   orchestratorExplorer:
     enabled: true
@@ -735,10 +728,11 @@ Deploy the Datadog Agent with the configuration file:
 kubectl apply -f datadog-agent.yaml
 ```
 
-This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
+This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
+[3]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{% tab "Helm" %}}
 To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use one of the following Helm commands:
@@ -760,10 +754,11 @@ Replace `<RELEASE_NAME>` with the Helm release name you are using.
 
 <div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
-This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
+This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
+[3]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{< /tabs >}}
 
