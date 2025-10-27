@@ -59,7 +59,7 @@ Each PR includes:
 - **Status** (Open / Draft / Merged)  
 - **Assignee / Reviewer**  
 
-If your organization hasn't configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub Integration tile][1].
+If your organization hasn't configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub Integration tile][1]. The integration requires **Members: Read**, **Metadata: Read**, **Pull Requests: Read** and **Pull Requests: Read** to read PRs from GitHub.
 
 
 ## Further reading
