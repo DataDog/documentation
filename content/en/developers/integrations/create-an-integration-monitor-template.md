@@ -67,7 +67,7 @@ After you've created and tested your monitor, add it to your listing in the Deve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/monitors/
+[1]: /monitors/
 [2]: https://app.datadoghq.com/monitors/templates
 [3]: /developers/integrations/?tab=integrations#join-the-datadog-partner-network
 [4]: /developers/integrations/build_integration/#create-a-listing
