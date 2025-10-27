@@ -27,7 +27,7 @@ These steps assume you've [joined the Datadog Partner Network][3], have access t
 4. [Add your monitor to your integration](#add-your-monitor-to-your-integration). 
 
 ### Determine which telemetry to monitor
-Start by reviewing the [full list of monitor types][6] to understand what kinds of telemetry you can alert on. As the product owner, you likely already know what's most valuable for users to track, but the examples below can help you identify common use cases.
+Start by reviewing the [full list of monitor types][6] to understand what kinds of telemetry you can alert on. Determine the insights that matter most to your users. Refer to the examples below for common use cases and examples.
 
 #### Monitor your service's RED (rate, errors, duration) metrics
 - Rate: Monitor the number of requests your service receives.
