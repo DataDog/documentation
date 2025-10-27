@@ -34,7 +34,7 @@ The following table shows additional example features and their associated featu
 
 ## Prerequisites
 
-- Operations are only available to [RUM without Limits][5] customers.
+- [RUM without Limits][5] must be enabled in your organization.
 - Make sure you've downloaded a supported Datadog RUM SDK version with client-side APIs to define operations:
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]
