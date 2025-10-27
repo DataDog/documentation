@@ -81,7 +81,7 @@ Until your integration is published by Datadog, you can only test OAuth within y
 
 ### The list of API scopes does not include sending metrics, events, and logs
 
-To send data to Datadog, use the `api_keys_write` scope when generating an API key on behalf of the user. For more information, see [Create an API key](#create-an-api-key).
+To send data to Datadog, use the `api_keys_write` scope when generating an API key on behalf of the user. For more information, see Step 3 in [Implement OAuth](#implement-oauth).
 
 
 ### Invalid client ID
@@ -89,7 +89,7 @@ To send data to Datadog, use the `api_keys_write` scope when generating an API k
 Error
 : `invalid_request - Invalid client_id parameter value`
 
-Until an OAuth client is published, you can only authorize the client from the account it was created in (the partner's sandbox account). This error occurs if you try to authorize the client outside of that account before the client is published.
+Until an OAuth client is published, you can only authorize the client from the partner developer organization it was created in. This error occurs if you try to authorize the client outside of that account before the client is published.
 
 If you've already published your OAuth client, remember to use the client ID and the client secret you were given at submission. The client secret was displayed only once, so if you've lost it, contact [ecosystems@datadog.com][11] for assistance.
 
@@ -118,15 +118,16 @@ If you're getting a forbidden error when trying to make an API call to a specifi
 
 Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the token, the user must reauthorize the integration to generate new refresh and access tokens. For more information, see the [OAuth2 Authorization Endpoints Reference][13].
 
-#### Retrieving API keys in your partner sandbox account
+#### Revoking and recreating API keys in your partner developer organization
 
-After you create a key using the [`/api/v2/api_keys/marketplace` endpoint][14], the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
+When you create an API key using the [`/api/v2/api_keys/marketplace` endpoint][14], the key value is returned once in the reponse. For security reasons, it cannot be viewed or regenerated later. Make sure to store the key securely.
+
+If your API key is lost or compromised, revoke and recreate it by following these steps:
 
 1. Navigate to the [Datadog API Keys Management page][15].
-2. Look for the API key named `OAuth Client API Key` and select it.
-3. Click **Revoke** to disable the API key.
-4. Follow the steps in [Create an API key](#create-an-api-key) to create a new key.
-5. Reinstall the integration and repeat the OAuth flow.
+2. Locate the API key named `OAuth Client API Key`.
+3. Click **Revoke** to disable the existing key.
+4. Reinstall your integration and complete the OAuth authorization flow again to generate a new key.
 
 ### Hostname/IP does not match certificate's altnames
 
@@ -143,7 +144,7 @@ Error
 This error is usually the result of configuration differences between your testing client and your published client. Verify the following:
 - Ensure you are using the correct `client_id` during authorization. For example, you might be using the `client_id` of your testing client instead of the client_id of your published client.
 - Confirm you are using the correct redirect URI. For example, if your client is published, the redirect URI should match the one configured for production, and not the URI you used for testing.
-- Ensure you are using the correct client. Use your testing client until the integration is published to your sandbox account.
+- Ensure you are using the correct client. Use your testing client until the integration tile is published to your partner developer organization.
 
 ### Applications with subdomains
 
