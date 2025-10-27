@@ -137,10 +137,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
-
-<div class="alert alert-danger">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
-
-The [Datadog Terraform module for Linux Web Apps][1] wraps the [azurerm_linux_web_app][2] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+The [Datadog Terraform module for Container Apps][1] wraps the [azurerm_container_app][2] resource and automatically configures your Container App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
 
 If you don't already have Terraform set up, [install Terraform][3], create a new directory, and make a file called `main.tf`.
 
@@ -201,13 +198,11 @@ module "my_container_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][4] only deploys the Web App resource, so you need to [deploy your code][5] separately.
+The [Datadog Container App module][1] only deploys the Container App resource, so you need to build and push your container separately.
 
-[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
+[1]: https://registry.terraform.io/modules/DataDog/container-app-datadog/azurerm/latest
+[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_app
 [3]: https://developer.hashicorp.com/terraform/install
-[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[5]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 
 {{% /tab %}}
