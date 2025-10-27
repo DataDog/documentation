@@ -54,7 +54,7 @@ You can configure PR Gates rules for the following categories:
 | [**Code Coverage**][3] | - Total code coverage<br/> - Patch code coverage |
 | [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities |
 
-After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
+After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
 <div class="alert alert-warning">
   PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
