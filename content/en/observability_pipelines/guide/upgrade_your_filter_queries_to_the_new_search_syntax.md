@@ -55,7 +55,7 @@ The following table lists the differences between the legacy and new search synt
 | Since `@` indicates an attribute search, tag searches do not include an `@`, and are matched under the attributes `tags` and `ddtags`.<br><br>Attribute search queries without an `@` symbol are matched against the `tags` or `ddtags` array.<br><br>Example attribute search syntax: `env:prod` | Tags syntax must be explicitly entered.<br><br>Inspect your data with [Live capture][5] to determine which fields to match.<br><br>Example attribute search syntax: `tags:"env:prod" OR ddtags:"env:prod"`  |
 | [Reserved fields](#legacy-syntax-reserved-fields) do not require the `@` symbol. | Reserved fields do not require the `@` symbol. |
 
-**Note**: The upgraded search syntax does not need the `@` symbol for attribute searches. While you do not need to remove the `@` symbol from filter queries that were previously using them, Datadog recommends that you remove the `@` symbol.
+**Note**: The upgraded search syntax does not require the `@` symbol for attribute searches. You do not need to remove the `@` symbol from existing filter queries, but Datadog recommends that you remove the `@` symbol from your queries.
 
 The following examples show matched logs, along with the legacy syntax and new syntax that matches the logs.
 
