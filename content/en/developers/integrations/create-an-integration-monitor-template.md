@@ -30,9 +30,9 @@ These steps assume you've [joined the Datadog Partner Network][3], have access t
 Start by reviewing the [full list of monitor types][6] to understand what kinds of telemetry you can alert on. Determine the insights that matter most to your users. Refer to the examples below for common use cases and examples.
 
 #### Monitor your service's RED (rate, errors, duration) metrics
-- Rate: Monitor the number of requests your service receives.
-- Errors: Track how many of those requests fail.
-- Duration: Measure how long those requests take (latency).
+- **Rate**: Monitor the number of requests your service receives.
+- **Errors**: Track how many of those requests fail.
+- **Duration**: Measure how long those requests take (latency).
 
 #### Monitor your infrastructure 
 - CPU utilization: Track CPU usage to ensure they're neither under nor over-utilized, to prevent system slowdowns or application failures.
