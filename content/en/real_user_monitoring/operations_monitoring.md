@@ -34,18 +34,12 @@ The following table shows additional example features and their associated featu
 
 ## Prerequisites
 
-### Datadog RUM SDK versions
-
-The client-side APIs to define operations are available in the following platforms:
-
-- [Browser (6.20.0)][1]
-- [Android (3.1.0)][2]
-- [iOS (3.1.0)][3]
-- [Kotlin Multiplatform (1.4.0)][4]
-
-### RUM without Limits
-
-Operations are only available to [RUM without Limits][5] customers.
+- Operations are only available to [RUM without Limits][5] customers.
+- Make sure you've downloaded a supported Datadog RUM SDK version with client-side APIs to define operations:
+  - [Browser (6.20.0)][1]
+  - [Android (3.1.0)][2]
+  - [iOS (3.1.0)][3]
+  - [Kotlin Multiplatform (1.4.0)][4]
 
 ## Setup
 
@@ -88,7 +82,7 @@ GlobalRumMonitor.get().startFeatureOperation(
 {{% /tab %}}
 
 {{% tab "iOS" %}}
-```
+```swift
 RUMMonitor.shared().startFeatureOperation(
 	name: String,
 	operationKey: String?,
@@ -136,7 +130,7 @@ GlobalRumMonitor.get().succeedFeatureOperation(
 
 {{% tab "iOS" %}}
 
-```
+```swift
 RUMMonitor.shared().succeedFeatureOperation(
 	name: String,
 	operationKey: String?,
@@ -174,7 +168,7 @@ options?: {
 
 {{% tab "Android" %}}
 
-```
+```kotlin
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
@@ -187,7 +181,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 
 {{% tab "iOS" %}}
 
-```
+```swift
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
@@ -206,6 +200,8 @@ You may have cases where users are starting several feature operations in parall
 ## Monitor your availability on Datadog
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+
+
 
 Datadog groups together all operations with the same name into a catalog. This catalog is listed under the **Operations** tab within RUM.
 
