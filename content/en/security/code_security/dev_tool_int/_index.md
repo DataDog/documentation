@@ -4,7 +4,7 @@ disable_toc: false
 
 ---
 
-{{< whatsnext desc="You can integrate Code Security with several types of tools throughout the developer workflow." >}}
+{{< whatsnext desc="You can integrate Code Security with several types of tools throughout the developer workflow. Pull request comments and gates require setup of Datadog's integrations with your source code provider(s)." >}}
    {{< nextlink href="/security/code_security/dev_tool_int/github_pull_requests/" >}}Pull Requests Comments
 {{< /nextlink >}}
    {{< nextlink href="/pr_gates/" >}}Pull Request Gates{{< /nextlink >}}
