@@ -16,15 +16,15 @@ further_reading:
 
 Datadog's [Incident Management][1], [On-Call][2], and Incident Response SKUs use a seat-based billing model. 
 
-Each organization has two options for incident response billing:
+Organizations have two options for incident response billing:
 - Incident Management or On-Call as separate SKUs, each billed individually
 - The Incident Response bundle, which unifies billing for both Incident Management and On-Call under a single SKU
 
-Each product bills by seat, so every user who performs qualifying actions requires a seat license. For detailed pricing information, see the [Incident Response pricing page][3].
+Each product bills by seat, so each user who performs qualifying actions requires a seat license. For detailed pricing information, see the [Incident Response pricing page][3].
 
 View and manage seat usage for each product in the [Seat Management][4] section of the Plan & Usage page in Datadog.
 
-## Seat allocation
+## Allocate seats
 
 A **Seat** is a license for a user to actively participate in the on-call or incident management process in Datadog. 
 
@@ -45,7 +45,7 @@ In Incident Management, anyone can create incidents, view incidents, and join in
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 
-## Manage Seats
+## Manage seats
 
 The [Seat Management page][1] gives billing admins visibility and control over users who occupy seats for Incident Management, On-Call, or the Incident Response bundle. 
 
@@ -62,7 +62,7 @@ Each tab includes:
 
 You can also find users by searching by name, email, or team. 
 
-### Assign Seats
+### Assign seats
 
 Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it.
 
@@ -75,23 +75,21 @@ To assign a seat:
 
 Assigned users immediately appear in the Seats table and can access the product's features. 
 
-### Unassign Seats
+### Unassign seats
 
 To remove users and free up seats: 
-
 1. In the Seats table, check the box next to one or more users.
 2. Click **Unassign Seats**.
 3. Confirm your selection.
 
-Once unassigned, the users lose access to features that require a seat but can still: 
-
+Once unassigned, the user loses access to features that require a seat. They can still perform the following actions:
 - Create incidents
 - View incidents
 - Join incident channels
 
-### Claim a Seat
+### Claim a seat
 
-When you try to perform an action that requires a seat such as joining an on-call schedule, updating an incident, or adding information to an incident tiemline, Datadog prompts you to claim a seat. Claiming a seat requires the `billing_read`, `on_call_read`, or `incident_read` permission.
+When you try to perform an action that requires a seat, such as joining an on-call schedule, updating an incident, or adding information to an incident timeline, Datadog prompts you to claim a seat. Claiming a seat requires the `billing_read`, `on_call_read`, or `incident_read` permission.
 
 After you claim a seat, the following items change in Datadog:
 - You immediately gain access to the product features you need (for example, receiving pages or managing incidents).
@@ -101,20 +99,23 @@ If your organization has committed seats available, you occupy one of them. If a
 
 You only need to claim a seat once. After it's assigned, you continue to have access until a billing admin unassigns it.
 
-## Billing and Overages
+## Billing and overages
 
 Datadog bills for Incident Management, On-Call, and Incident Response based on the total number of seats in use during each billing period. 
 
 Each billing period reflects the maximum number of concurrently assigned seats across your organization for that product. Your contract includes a committed number of seats, and any usage beyond that amount is billed at your on-demand rate. 
 
-Once a user claims a seat, the seat remains active and billed month-to-month until it is unassigned. If a user is removed during a given month, the seat remains billable for that month. In the following month's billing cycle, the seat no longer appears.
+Once a user claims a seat, the seat remains active and is billed month-to-month until it is unassigned. If a user is removed during a given month, the seat remains billable for that month. In the following month's billing cycle, the seat will no longer appear.
 
 You can add or remove seat licenses at any time. Removing a user before the end of a billing period prevents future charges for that seat.
 
 ### Example
 
-If your contract includes 182 committed seats and your organization's peak usage during the month was 190 seats, 
-- 182 seats are billed at your committed rate, and
+- Your contract includes 182 committed seats.
+- Your organization's peak usage during the month was 190 seats.
+
+Your monthly bill contains the following:
+- 182 seats are billed at your committed rate.
 - 8 seats are billed at your on-demand rate for that billing cycle.
 
 ## Further Reading
