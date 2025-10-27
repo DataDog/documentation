@@ -141,7 +141,7 @@ If your organization uses custom roles, assign your user to a custom role that i
 ### Restrict access
 Use [granular access controls][19] to manage who can modify a service's adaptive sampling configuration. You can restrict access based on roles, teams, or individual users.
 
-{{< img src="/tracing/guide/adaptive_sampling/add_restriction.png" alt="Restrict permission" style="width:100%;">}}
+{{< img src="/tracing/guide/adaptive_sampling/add_restriction.png" alt="Restrict permission modal" style="width:60%;">}}
 
 To restrict access:
 
