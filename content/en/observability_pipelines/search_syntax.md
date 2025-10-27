@@ -140,7 +140,7 @@ The follow are example queries that use Boolean operators:
 
 ## Escape special characters and spaces
 
-The following characters are considered special and require escaping with the following characters: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `#`, and spaces.
+The following characters are considered special and must be escaped with `\`: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `#`, and spaces.
 
 **Notes**:
 
