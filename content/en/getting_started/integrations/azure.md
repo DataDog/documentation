@@ -261,9 +261,9 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 
 {{% collapse-content title="Container App" level="h4" expanded=false id="container-app-log-forwarding-setup" %}}
 
-### Choose this if...
+### Choose the Container App log forwarding method if...
 
-You prefer to manually configure [diagnostic settings][53] on the resources you want to forward logs from.
+- You prefer to manually configure [diagnostic settings][53] on the resources you want to forward logs from.
 
 ## Instructions
 
