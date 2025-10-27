@@ -1,4 +1,22 @@
 {
+  "ListFleetDeployments": {
+    "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
+    "summary": "List all deployments"
+  },
+  "CreateFleetDeploymentConfigure": {
+    "description": "Create a new deployment to apply configuration changes\nto a fleet of hosts matching the specified filter query.",
+    "summary": "Create a deployment",
+    "request_description": "Request payload containing the deployment details.",
+    "request_schema_description": "Request payload for creating a new deployment."
+  },
+  "GetFleetDeployment": {
+    "description": "Retrieve the details of a specific deployment using its unique identifier.",
+    "summary": "Get a deployment by ID"
+  },
+  "CancelFleetDeployment": {
+    "description": "Cancel this deployment and stop all associated operations.\nIf a workflow is currently running for this deployment, it is canceled immediately.\nChanges already applied to hosts are not rolled back.",
+    "summary": "Cancel a deployment"
+  },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
     "summary": "List datastores"
@@ -89,17 +107,17 @@
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "List AWS Scan Options"
+    "summary": "List AWS scan options"
   },
   "CreateAwsScanOptions": {
     "description": "Activate Agentless scan options for an AWS account.",
-    "summary": "Post AWS Scan Options",
+    "summary": "Create AWS scan options",
     "request_description": "The definition of the new scan options.",
     "request_schema_description": "Request object that includes the scan options to create."
   },
   "DeleteAwsScanOptions": {
     "description": "Delete Agentless scan options for an AWS account.",
-    "summary": "Delete AWS Scan Options"
+    "summary": "Delete AWS scan options"
   },
   "GetAwsScanOptions": {
     "description": "Fetches the Agentless scan options for an activated account.",
@@ -107,23 +125,23 @@
   },
   "UpdateAwsScanOptions": {
     "description": "Update the Agentless scan options for an activated account.",
-    "summary": "Patch AWS Scan Options",
+    "summary": "Update AWS scan options",
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object that includes the scan options to update."
   },
   "ListAzureScanOptions": {
     "description": "Fetches the scan options configured for Azure accounts.",
-    "summary": "List azure scan options"
+    "summary": "List Azure scan options"
   },
   "CreateAzureScanOptions": {
     "description": "Activate Agentless scan options for an Azure subscription.",
-    "summary": "Create azure scan options",
+    "summary": "Create Azure scan options",
     "request_description": "",
     "request_schema_description": "Response object containing Azure scan options for a single subscription."
   },
   "DeleteAzureScanOptions": {
     "description": "Delete Agentless scan options for an Azure subscription.",
-    "summary": "Delete azure scan options"
+    "summary": "Delete Azure scan options"
   },
   "GetAzureScanOptions": {
     "description": "Fetches the Agentless scan options for an activated subscription.",
@@ -131,23 +149,23 @@
   },
   "UpdateAzureScanOptions": {
     "description": "Update the Agentless scan options for an activated subscription.",
-    "summary": "Update azure scan options",
+    "summary": "Update Azure scan options",
     "request_description": "",
     "request_schema_description": "Request object for updating Azure scan options."
   },
   "ListGcpScanOptions": {
     "description": "Fetches the scan options configured for all GCP projects.",
-    "summary": "List GCP Scan Options"
+    "summary": "List GCP scan options"
   },
   "CreateGcpScanOptions": {
     "description": "Activate Agentless scan options for a GCP project.",
-    "summary": "Post GCP Scan Options",
+    "summary": "Create GCP scan options",
     "request_description": "The definition of the new scan options.",
     "request_schema_description": "Response object containing GCP scan options for a single project."
   },
   "DeleteGcpScanOptions": {
     "description": "Delete Agentless scan options for a GCP project.",
-    "summary": "Delete GCP Scan Options"
+    "summary": "Delete GCP scan options"
   },
   "GetGcpScanOptions": {
     "description": "Fetches the Agentless scan options for an activated GCP project.",
@@ -155,23 +173,23 @@
   },
   "UpdateGcpScanOptions": {
     "description": "Update the Agentless scan options for an activated GCP project.",
-    "summary": "Patch GCP Scan Options",
+    "summary": "Update GCP scan options",
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object for updating GCP scan options."
   },
   "ListAwsOnDemandTasks": {
     "description": "Fetches the most recent 1000 AWS on demand tasks.",
-    "summary": "Get AWS On Demand tasks"
+    "summary": "List AWS on demand tasks"
   },
   "CreateAwsOnDemandTask": {
     "description": "Trigger the scan of an AWS resource with a high priority. Agentless scanning must be activated for the AWS account containing the resource to scan.",
-    "summary": "Post an AWS on demand task",
+    "summary": "Create AWS on demand task",
     "request_description": "The definition of the on demand task.",
     "request_schema_description": "Request object that includes the on demand task to submit."
   },
   "GetAwsOnDemandTask": {
     "description": "Fetch the data of a specific on demand task.",
-    "summary": "Get AWS On Demand task by id"
+    "summary": "Get AWS on demand task"
   },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
@@ -2862,6 +2880,16 @@
     "summary": "Search spans",
     "request_description": "",
     "request_schema_description": "The request for a spans list."
+  },
+  "CreateSCAResult": {
+    "summary": "Post dependencies for analysis",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateSCAResolveVulnerableSymbols": {
+    "summary": "POST request to resolve vulnerable symbols",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",

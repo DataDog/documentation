@@ -496,7 +496,7 @@ processors:
 [1]: https://opentelemetry.io/docs/specs/semconv/resource/
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
-[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/k8s-chart/k8s-values.yaml
+[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
 [5]: https://opentelemetry.io/docs/languages/js/resources/
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/collector.yaml
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [7]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  
