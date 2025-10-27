@@ -8,7 +8,7 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url="" btn_hidden="true" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="Join the Preview!">}}
 Operations Monitoring is in Preview.
 {{< /callout >}}
 
