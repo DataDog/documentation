@@ -121,6 +121,10 @@ For the legacy syntax, these are the reserved fields:
 
 See [Reserved attributes][3] for more information.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /observability_pipelines/install_the_worker/?tab=docker#upgrade-the-worker
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

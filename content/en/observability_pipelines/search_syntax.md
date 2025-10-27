@@ -8,14 +8,14 @@ private: true
 
 When you add a processor to a pipeline, you can filter your logs so only a subset of them go through a processor. This document goes over the following information:
 
-- [Free text search](#free-text-search): when you want to search the `message` field value.
-- [Attribute search](#attribute-search)): when you want to search attribute keys and values.
-- [Arrays]() when you want to search within an array of nested values.
+- [Free text search](#free-text-search): when you want to search the `message` field.
+- [Attribute search](#attribute-search): when you want to search attribute keys and values.
+- [Arrays](#arrays) when you want to search within an array of nested values.
 - [Boolean operators](#boolean-operators) that you can use in your search query.
 - [Special characters and spaces that need to be escaped](#escape-special-characters-and-spaces) in search queries.
 - Using [wildcards](#wildcards) in your search queries.
 
-**Note**: Worker version 2.11 and newer uses an upgraded search syntax. After you upgrade from Worker version 2.10 or older to version 2.11, you might need to update your filter queries to match the new syntax. See the [Upgrade to the New Search Syntax](?tab=t.lxlscm3ib5qp#heading=h.cxcjarr1kri8) for more information.
+**Note**: Worker version 2.11 and newer uses an upgraded search syntax. After you upgrade the Worker to version 2.11, you might need to update your filter queries to match the new syntax. See the [Upgrade to the New Search Syntax](/observability_pipelines/guide/upgrade_to_the_next_search_syntax/) for more information.
 
 ## Search syntax
 
@@ -33,55 +33,55 @@ Free text search only searches the `message` field and is case insensitive. It i
 
 The following are free text search examples:
 
-`hello`
+Search syntax: `hello`
 : Searches for the exact string `hello`. For example, `{"message": "hello world"}` is a matching log.
 
-`Hello world`
-: Searches for `hello` and `world`. For example, "hello beautiful world" is a match.
+Search syntax: `Hello world`
+: Searches for `hello` and `world`. For example, `"hello beautiful world"` is a match.
 : This query can also be written as: `Hello AND world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
-`"hello world"`
-: Searches for a sequence of words. For example "hello world", "hello-world", and "Hello, world" are all matches.
+Search syntax: `"hello world"`
+: Searches for a sequence of words. For example `"hello world"`, `"hello-world"`, and `"Hello, world"` are all matches.
 
 ### Attribute search
 
-You can search attribute key and values. For example, if your attribute key is `url` and you want to filter on the `url` value `www.datadoghq.com`, enter: `url:www.datadoghq.com`.
+You can search attribute keys and values. For example, if your attribute key is `url` and you want to filter on the `url` value `www.datadoghq.com`, enter: `url:www.datadoghq.com`.
 
-To filter for events that have a specific attribute key, use the `_exists_` syntax. For example if you use the query `_exists_:service`,`{"service": "postgres"}` matches the query, but `{"env": "prod"}` does not match.
+To filter for events that have a specific attribute key, use the `_exists_` syntax. For example if you use the query `_exists_:service`, the event `{"service": "postgres"}` matches the query, but the event `{"env": "prod"}` does not match.
 
 **Note**: Attribute searches are case sensitive.
 
-The following are attribute search syntax examples:
+The following are attribute search syntax examples and logs that match the syntax:
 
-`status:ok service:flask-web-app`
-: Matches logs with the status `ok` from your `flask-web-app` service. 
+Search syntax: `status:ok service:flask-web-app`
+: Matches logs with the status `ok` from your `flask-web-app` service.
 : This query can also be written as: `status:ok AND service:flask-web-app`.
 
-`user.status:inactive`
+Search syntax: `user.status:inactive`
 : Matches logs with the status `inactive` nested under the `user` attribute.
 
-`http.url:/api-v1/*`
+Search syntax: `http.url:/api-v1/*`
 : Matches logs containing a value in the `http.url` attribute that starts with `/api-v1/`.
 
-`http.status_code:[200 TO 299] http.url_details.path:/api-v1/*`
+Search syntax: `http.status_code:[200 TO 299] http.url_details.path:/api-v1/*`
 : Matches logs containing an `http.status_code` value that is greater than or equal to `200` and less than or equal to `299`, and containing a value in the `http.url_details.path` attribute that start with `/api-v1/`.
 
-`http.status:[200 TO 299]`
+Search syntax: `http.status:[200 TO 299]`
 : Matches logs containing an `http.status` value that is greater than or equal to `200` and less than or equal to `299`.
 : **Notes**:
 : - `[..]` Square brackets mean the ranges are inclusive.
 : - Ranges can be used across any attribute.
 
-`http.status:{200 TO 299}`
+Search syntax: `http.status:{200 TO 299}`
 : Matches logs containing an `http.status` value that is greater than `200` or less than `299`. **Notes**: - `{..}` Curly brackets mean the ranges are exclusive. - Ranges can be used across any attribute.
 
-`"service.status":disabled`
-: Matches logs with `"service.status": "disabled"`. This filter syntax searches for a literal `.` in the attribute key. 
+Search syntax: `"service.status":disabled`
+: Matches logs with `"service.status": "disabled"`. This filter syntax searches for a literal `.` in the attribute key.
 : See [Path notation](#path-notation) for more information.
 
-`_exists_:service`
-: Matches logs with the attribute key `service`. For example, the query matches `{"service": "postgres"}`, but does not match {"env": "prod"}.
+Search syntax: `_exists_:service`
+: Matches logs with the attribute key `service`. For example, the query matches `{"service": "postgres"}`, but does not match `{"env": "prod"}`.
 
 #### Path notation
 
@@ -104,10 +104,6 @@ For the following log structure:
 - Use `outer_key.inner_key` to reference the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to reference the key with the value `double_inner_value`.
 
-For this example log:```{"http": {"url_details": {"path": "/api/v1/test" } } }```
-
-The filter syntax `http.url_details.path:"/api/v1/test"`, matches logs with a value of `/api/v1/test` for the `url_details` attribute path nested under `http`.
-
 If you want to search for a literal `.` in the attribute key, wrap the key in escaped quotes in the search query. For example, the search query `"service.status":disabled` matches the event `{"service.status": "disabled"}`.
 
 ### Boolean operators
@@ -122,24 +118,24 @@ You can use the following case sensitive Boolean operators to combine multiple t
 
 The follow are example queries that use Boolean operators:
 
-`NOT (status:debug)`
+Search syntax: `NOT (status:debug)`
 : Matches logs that do not have the status `DEBUG`.
 
-`host:COMP-A9JNGYK OR host:COMP-J58KAS`
+Search syntax: `host:COMP-A9JNGYK OR host:COMP-J58KAS`
 : Only matches logs from those specific hosts.
 
-`Hello AND World`
+Search syntax: `Hello AND World`
 : Searches for `hello` and `world`. For example, "hello beautiful world" is a match.
 : This query can also be written as: `Hello world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
-`hello` AND `status:info`
+Search syntax: `hello` AND `status:info`
 : Matches logs with a message field that contains `hello` and with `status:info`.
 
-`-http.status_code:200`
+Search syntax: `-http.status_code:200`
 : Matches logs where http.status_code is not equal to 200
 
-`service:(postgres OR datadog_agent)`
+Search syntax: `service:(postgres OR datadog_agent)`
 : Matches logs with the values `postgres` or `datadog_agent` for the `service` attribute. This query can also be written as: `service:postgres OR service:datadog_agent`
 
 ## Escape special characters and spaces
@@ -150,15 +146,15 @@ The following characters are considered special and require escaping with the fo
 
 - `/` is not considered a special character and doesn't need to be escaped.
 - You can search for special characters inside of an attribute. See [Search an attribute that contains special characters](#search-an-attribute-that-contains-special-characters).
-- You cannot use free text search queries to filter for log messages with special characters. For example, if you want to match logs that contain the special character `!` in the `message` field, use the attribute search query: `message:*!*`.
+- If you want to match logs that contain the special character `!` in the `message` field, use the attribute search syntax: `message:*!*`. **Note**: You cannot use free text search queries to filter for log messages with special characters.
 
 ### Search an attribute that contains special characters
 
-Searching for an attribute value that contains special characters requires escaping or double quotes. For example, for an attribute `my_app` with the value `hello:world`, search using: `my_app:hello:world` or `my_app:"hello:world"`.
+Searching for an attribute value that contains special characters requires escaping or double quotes. For example, to search for an attribute `my_app` with the value `hello:world`, use the syntax: `my_app:hello:world` or `my_app:"hello:world"`.
 
 ### Match a single special character or space
 
-To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_app` with the value `hello world again`, search using: `my_app:hello?world?again`.
+To match a single special character or space, use the `?` wildcard. For example, to search for an attribute `my_app` with the value `hello world again`, use the syntax: `my_app:hello?world?again`.
 
 ### Examples
 
@@ -179,22 +175,22 @@ For the following example log:
 
 The following are search syntax examples that escape special characters and spaces:
 
-`tags:env`
+Search syntax: `tags:env*`
 : Matches logs with a `tag` attribute value of `env`.
 
-`tags:(env\:prod OR env\:test)`
-: Matches logs `env:prod` or the tag `env:test` in the `tags` array.
+Search syntax: `tags:(env\:prod OR env\:test)`
+: Matches logs with the tag `env:prod` or `env:test` in the `tags` array.
 : This query can also be written as `tags:("env:prod" OR "env:test")`.
 
-`tags:env\:prod AND -tags:version\:beta`
+Search syntax: `tags:env\:prod AND -tags:version\:beta`
 : Matches logs that have `env:prod` and does not have `version:beta` in the `tag` array.
 : This query can also be written as `tags:"env:prod" AND -tags:"version:beta"`.
 
-`my_app:hello\:world`
+Search syntax: `my_app:hello\:world`
 : Matches logs that contain `my_app:hello:world`.
 : This query can also be written as `my_app:"hello:world"`.
 
-`my_app:hello?world?again`
+Search syntax: `my_app:hello?world?again`
 : Matches logs that contain `"my_app":"hello world again"`.
 
 ### Arrays
@@ -220,25 +216,25 @@ If you use the filter query: `Event.EventData.Data.Name:ObjectServer`, the above
 
 ​​You can use `*` for wildcard searches. The following are wildcard search examples:
 
-`*network*`
+Search syntax: `*network*`
 : Matches logs with a `message` field value that contains `network`.
 
-`web*`
+Search syntax: `web*`
 : Matches logs with a `message` field value that starts with `web`.
 
-`*web`
+Search syntax: `*web`
 : Matches logs with a `message` field value that ends with `web`.
 
-`service:*mongo`
+Search syntax: `service:*mongo`
 : Matches logs with `service` attribute values that ends with `mongo`.
 
-`service:web*`
+Search syntax: `service:web*`
 : Matches logs that have a `service` attribute value that starts with `web`.
 
 **Notes**:
 - You cannot use wildcards to search attribute keys, such as `*:app` or `service*:app`.
 - Wildcards only work as wildcards outside of double quotes.
-- For example, `"*test*"` matches a log which has the string `*test*` in its `message` field, while `*test*` matches a log which has the string `test` anywhere in the `message` field.
+    - For example, `"*test*"` matches a log which has the string `*test*` in its `message` field, while `*test*` matches a log which has the string `test` anywhere in the `message` field.
 
 #### Search for special characters or escaped characters
 
