@@ -88,7 +88,7 @@ For example, a tag `Team:Engineering-Services` would appear as `team:engineering
 
 ## Override tag value normalization
 
-Turn on **Tag Normalization** in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. The Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically, for all new customers. To backfill normalized tags for a longer period up to 15 months, create a support ticket.
+Turn on **Tag Normalization** in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. The Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically, for all new customers. To backfill normalized tags for a longer period up to 15 months, contact [Datadog support][13].
 
 Tag normalization allows you to:
 - View, filter and group Cost Recommendations and cost data with the same tag values
@@ -143,3 +143,4 @@ Other tag sources (such as AWS Organization tags, integration tile tags, and sim
 [12]: /network_monitoring/cloud_network_monitoring/
 [13]: /cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#data-transfer
 [14]: /getting_started/tagging/#define-tags
+[15]: /help/
