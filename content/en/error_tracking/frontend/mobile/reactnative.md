@@ -329,7 +329,7 @@ Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different re
 
 When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
 
-[301]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[301]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#xcode
 {{% /collapse-content %}}
 <br>
 
@@ -885,7 +885,7 @@ pre_install do |installer|
 end
 ```
 
-**Note**: This solution comes from this [StackOverflow][8] post.
+**Note**: This solution comes from this [StackOverflow][21] post.
 
 
 ## Further Reading
