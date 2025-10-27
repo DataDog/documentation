@@ -2891,6 +2891,16 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "ListMultipleRulesets": {
+    "description": "Get rules for multiple rulesets in batch.",
+    "summary": "Ruleset get multiple",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetSecretsRules": {
+    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
+    "summary": "Returns list of Secrets rules"
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"
