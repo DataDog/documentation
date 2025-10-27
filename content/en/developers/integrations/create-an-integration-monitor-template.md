@@ -45,7 +45,7 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 
 ### Create your monitor
 
-[Create and configure your monitor][5] within your partner developer organization. These monitors will later serve as reusable templates that integration users can enable directly in their own Datadog organizations.
+[Create and configure your monitor][5] within your partner developer organization. These monitors serve as reusable templates that integration users can enable directly in their own Datadog organizations.
 
 ### Test your monitor
 
@@ -74,7 +74,7 @@ After you've created and tested your monitor, add it to your listing in the Deve
 [2]: https://app.datadoghq.com/monitors/templates
 [3]: /developers/integrations/?tab=integrations#join-the-datadog-partner-network
 [4]: /developers/integrations/build_integration/#create-a-listing
-[5]: https://docs.datadoghq.com/getting_started/monitors/#create-a-monitor
-[6]: https://docs.datadoghq.com/monitors/types/
+[5]: /getting_started/monitors/#create-a-monitor
+[6]: /monitors/types/
 [7]: https://app.datadoghq.com/monitors/manage
-[8]: https://docs.datadoghq.com/monitors/status/events/
+[8]: /monitors/status/events/
