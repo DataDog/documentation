@@ -35,9 +35,9 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 - **Duration**: Measure how long those requests take (latency).
 
 #### Monitor your infrastructure 
-- CPU utilization: Track CPU usage to ensure they're neither under nor over-utilized, to prevent system slowdowns or application failures.
-- Memory Utilization: Monitor how much system memory is being used to detect and prevent issues like memory leaks or crashes.
-- Storage: Monitor disk space to prevent problems such as data loss, service interruptions, or write failures.
+- **CPU utilization**: Track CPU usage to ensure they're neither under nor over-utilized, to prevent system slowdowns or application failures.
+- **Memory utilization**: Monitor how much system memory is being used to detect and prevent issues like memory leaks or crashes.
+- **Storage**: Monitor disk space to prevent problems such as data loss, service interruptions, or write failures.
 
 #### Monitor your logs
 - Error spikes: Alert when error logs exceed a threshold, such as repeated `connection refused` or `timeout` messages within a short period.
