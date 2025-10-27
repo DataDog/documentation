@@ -22,7 +22,7 @@ At least one monitor template is required if your integration collects metrics.
 These steps assume you've [joined the Datadog Partner Network][3], have access to a partner developer organization, and have already [created a listing in the Developer Platform][4]. 
 
 1. [Determine which telemetry you want to monitor](#determine-which-telemetry-to-monitor).
-2. [Create and configure a monitor][5] in your partner developer organization.
+2. [Create and configure a monitor](#create-your-monitor) in your partner developer organization.
 3. [Test your monitor](#test-your-monitor).
 4. [Add your monitor to your integration](#add-your-monitor-to-your-integration). 
 
@@ -43,7 +43,11 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 - **Error spikes**: Alert when error logs exceed a threshold, such as repeated `connection refused` or `timeout` messages within a short period.
 - **Missing activity**: Detect when expected logs stop appearing, indicating a stalled process or failed service.
 
-## Test your monitor
+### Create your monitor
+
+[Create and configure your monitor][5] within your partner developer organization. These monitors will later serve as reusable templates that integration users can enable directly in their own Datadog organizations.
+
+### Test your monitor
 
 1. Ingest telemetry that triggers your monitor.
 2. Navigate to the [Monitor list][7] page and select your monitor.
