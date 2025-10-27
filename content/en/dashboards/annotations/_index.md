@@ -10,13 +10,13 @@ Annotations let you manually place vertical markers with descriptions on timeser
 
 Annotations are available in both dashboards and notebooks. If you export a widget from a dashboard to a notebook, any annotations you've added to the widget persist.
 
-<!-- screenshot -->
+{{< img src="dashboards/annotations.png" alt="Timeseries showing a drop-off in availability with a vertical annotation line at the end of the drop-off and a comment that says 'Rollback completed — service availability restored.'" style="width:100%;" >}}
 
 ## Adding an annotation
 
 1. Create an annotation by:
     - Left-clicking anywhere on a timeseries widget and selecting **Add annotation** from the context menu that appears, or
-    - Clicking the X-axis on a timeseries graph
+    - Clicking the x-axis on a timeseries graph
 3. Type your comment, and optionally click the timestamp field to manually adjust to the precise time you want to annotate.
 4. (Optional) Change the color of the annotation from the dropdown in the bottom left.
 5. Click **Save**.
@@ -25,10 +25,11 @@ Annotations are available in both dashboards and notebooks. If you export a widg
 
 To apply an annotation to multiple timeseries at once:
 
-1. Select the widgets you want to apply the annotation to (or leave everything unselected to apply to all widgets).
-2. Follow steps 1-4 in [Adding an annotation](#adding-an-annotation) to create an annotation.
-3. From the **Applying to** dropdown, choose **All widgets** or **Selected widgets**.
-4. Click **Save**.
+1. Follow steps 1-4 in [Adding an annotation](#adding-an-annotation) to create an annotation.
+2. From the **Applying to** dropdown, choose **All widgets** or **Selected widgets**.
+
+    If you choose **Selected widgets**, select from a list of all the widgets in the dashboard or notebook and check or uncheck the ones you want to apply the annotation to.
+3. Click **Save**.
 
 ## Editing an annotation
 
