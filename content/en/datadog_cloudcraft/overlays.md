@@ -29,7 +29,7 @@ The infrastructure view provides a broad overview, grouping resources by Account
 
 The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway to reduce visual clutter and highlight the most important parts of your architecture.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_infra_diagram_with_ccm_2.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/getting_started_4.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}</div>
 
 ### Observability 
 

@@ -27,11 +27,14 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - Onboard new team members.
 - Accelerate incident MTTR and proactive governance tasks by simplifying infrastructure navigation.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Cloudcraft in Datadog video" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_azure_tab_2.mp4" alt="Cloudcraft in Datadog video" video=true >}}
 
-<div class="alert alert-info">Cloudcraft in Datadog is currently only available for AWS accounts.</a></div>
+<div class="alert alert-info">Cloudcraft in Datadog is only available for AWS and Azure accounts.</a></div>
 
 ### Prerequisites
+
+{{< tabs >}}
+{{% tab "AWS" %}}
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - [Resource collection][2] must be enabled for your AWS accounts.
@@ -46,17 +49,47 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
+[2]: /integrations/amazon_web_services/#resource-collection
+[3]: /security/cloud_security_management
+[5]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/SecurityAudit.html
+[6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
+[10]: /datadog_cloudcraft/overlays#security
+[12]: /security/sensitive_data_scanner
+[13]: /account_management/rbac/permissions/#compliance
+
+{{% /tab %}}
+{{% tab "Azure" %}}
+
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
+- Resource collection must be enabled for your Azure accounts. How to enable for Azure?
+- What are the other list of permissions?
+- Viewing content on the [Security overlay][10] requires additional products to be enabled:
+  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
+
+[3]: /security/cloud_security_management
+[5]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/SecurityAudit.html
+[6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
+[10]: /datadog_cloudcraft/overlays#security
+[12]: /security/sensitive_data_scanner
+[13]: /account_management/rbac/permissions/#compliance
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Getting started
 
 To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
 2. A real-time diagram of the resources is displayed in your environment.
 
- **Note**: For environments with more than 10,000 resources, you must filter the diagram by account, region, or tags before it can be displayed.
+**Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags before it can be displayed.
 
-{{< img src="datadog_cloudcraft/getting_started_3.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
+{{< img src="datadog_cloudcraft/getting_started_4.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}</div>
 
-**Note**: The account name in the **Account** dropdown originates from your AWS account tags in the AWS integration tile.
+<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Azure Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions.
+</div>
 
 ### Group By
 
