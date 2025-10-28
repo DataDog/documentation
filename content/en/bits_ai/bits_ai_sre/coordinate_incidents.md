@@ -1,5 +1,6 @@
 ---
 title: Coordinate Incidents
+description: "Use Bits AI SRE to streamline incident response workflow with proactive updates, stakeholder notifications, and AI-assisted postmortems."
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"
@@ -94,7 +95,6 @@ Use natural language prompts to request for information or take action from Slac
 | Dive into specific incidents       | `@Datadog What was the root cause of incident-123?` Or<br />`@Datadog What remediation actions did the responders take in incident-123?`        |
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDOS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
-| Draft a Datadog Status Page update | `@Datadog Create a Status Page`                                                                                                                 |
 
 ## Proactive follow-up task suggestion
 

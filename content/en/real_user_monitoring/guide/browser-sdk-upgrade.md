@@ -1,6 +1,6 @@
 ---
 title: Upgrade the RUM Browser SDK
-
+description: "Upgrade guide for migrating between major versions of RUM Browser SDK with breaking changes, new features, and compatibility updates."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

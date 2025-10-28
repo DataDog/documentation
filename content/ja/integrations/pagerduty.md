@@ -36,7 +36,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、Datadog for Government サイトで限定的にサポートされています。Incident Management と Workflow Automation からのサービスカタログインテグレーションと自動解決はサポートされていません。</div>
+<div class="alert alert-danger">Datadog PagerDuty インテグレーションは、Datadog for Government サイトで限定的にサポートされています。Incident Management と Workflow Automation からのサービスカタログインテグレーションと自動解決はサポートされていません。</div>
 {{< /site-region >}}
 
 ## 概要

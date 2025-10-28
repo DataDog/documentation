@@ -354,7 +354,7 @@ title: モバイルセッションリプレイの設定と構成
     </ol>
   </div>
   <div class="cdoc__toggleable cdoc__hidden" data-if="3">
-    <div class="alert alert-warning">
+    <div class="alert alert-danger">
       <p>
         To enable Session Replay, you must use at least version
         <code>2.0.4</code> of the Datadog

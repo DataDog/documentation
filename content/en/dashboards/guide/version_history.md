@@ -1,5 +1,6 @@
 ---
 title: Version History for Dashboards
+description: Track dashboard changes, preview versions, restore previous states, and clone dashboards using version history.
 disable_toc: false
 further_reading:
 - link: "/dashboards/"

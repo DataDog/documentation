@@ -17,7 +17,12 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 ## Setup
 
-Begin by opening the [Automated Log Forwarding ARM template][1]. The sections below provide instructions for completing each page of the template.
+Begin by opening the Azure Log Forwarding ARM template corresponding to your Azure environment:
+  - [Azure Public][1]
+  - [Azure Government][6]
+  - [Azure China][7]
+
+The sections below provide instructions for completing each page of the template.
 
 ### Basics
 
@@ -72,3 +77,5 @@ The script first discovers any instances running in each subscription, then prom
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
 [5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
+[6]: https://portal.azure.us/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
+[7]: https://portal.azure.cn/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json

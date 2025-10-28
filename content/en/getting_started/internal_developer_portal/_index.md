@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Internal Developer Portal
+description: Unify software metadata, telemetry, and workflows with Software Catalog, Scorecards, Self Service Actions, and engineering reports.
 aliases: 
   - /getting_started/service_catalog
   - /getting_started/software_catalog/
@@ -10,7 +11,7 @@ further_reading:
     - link: '/internal_developer_portal/software_catalog/'
       tag: 'Documentation'
       text: 'Software Catalog'
-    - link: 'https://learn.datadoghq.com/courses/managing-service-catalog'
+    - link: 'https://learn.datadoghq.com/courses/managing-software-catalog'
       tag: 'Learning Center'
       text: 'Managing Services with the Service Catalog'
     - link: 'https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/'

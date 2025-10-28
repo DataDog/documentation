@@ -14,7 +14,7 @@ further_reading:
 title: Gérer l'intégration Azure native
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Les informations figurant sur cette page permettent de gérer l'intégration Azure native avec la ressource Datadog.
 </div>
 

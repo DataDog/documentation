@@ -29,11 +29,11 @@ To enable APM on a Linux host:
 
 ## Set SDK tracer versions
 
-By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.
+By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
 
-You may want to customize SDK versions based on your application's language version or specific environment requirements. You can control the major and minor versions used by customizing library versions during setup.
+You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
 
-To customize tracer versions:
+To customize SDK versions:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
@@ -42,8 +42,8 @@ To customize tracer versions:
    {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
 1. Find your language(s) and use the dropdown to either:
-   - Pin an exact tracer version, or
-   - Select the major version you want to use.
+   - Select an exact SDK version, or
+   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
 1. Copy and run the updated installation command.
 
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
@@ -63,8 +63,8 @@ To customize tracer versions:
    ```
 
 1. Find your language(s) and use the dropdown to either:
-   - Pin an exact tracer version, or
-   - Select the major version you want to use.
+   - Select an exact SDK version, or
+   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
 1. Copy and run the updated installation command.
 
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
@@ -97,6 +97,15 @@ Use one of the following setup methods:
 - **[Set environment variables][17]**:
 
   Enable products by setting environment variables directly in your application configuration. 
+
+## Update SDK version
+
+The SDK version is fixed when you run the Agent installation command.
+
+To update the SDK versions:
+
+1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
+1. Restart your applications.
 
 ## Remove Single Step APM instrumentation from your Agent
 

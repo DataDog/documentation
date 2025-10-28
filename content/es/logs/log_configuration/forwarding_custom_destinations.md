@@ -16,7 +16,7 @@ title: Reenvío de logs a destinos personalizados
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El reenvío de logs no está disponible para el sitio del Gobierno. Ponte en contacto con tu representante de cuenta para obtener más información.
 </div>
 {{% /site-region %}}

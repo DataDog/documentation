@@ -8,6 +8,7 @@ aliases:
 - /security/application_security/vulnerability_management/
 ---
 ## Overview
+
 Software Composition Analysis (SCA) detects open source libraries in both your repositories and running services, providing end-to-end visibility of library vulnerabilities and license management from development to production.
 
 Using Software Composition Analysis provides organizations with the following benefits:
@@ -18,13 +19,16 @@ Using Software Composition Analysis provides organizations with the following be
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
 ## Set up Software Composition Analysis
+
+{{% security-products/sca-supported-lang %}}  
+
 SCA supports both static and runtime dependency detection:
-- For **static detection**, you can scan from your CI/CD pipelines or from Datadog's infrastructure (GitHub-only). See [static setup][1] to get started.
+- For **static detection**, you can scan your repositories from your CI/CD pipelines or directly from Datadog's infrastructure. See [static setup][1] to get started.
 - For **runtime detection**, you can enable SCA on services instrumented with Datadog APM. See [runtime setup][2] to get started.
 
 ## Search and filter results
 ### Vulnerabilities explorer
-The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities shown in this explorer are detected on the default branch and the last commit of a scanned repository and/or affecting a running service.
+The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 ### Datadog severity score
 Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.
@@ -66,7 +70,7 @@ SCA enriches the information Application Performance Monitoring (APM) is already
 - Software supply chain & Software Bill of Materials (SBOM) management
 
 
-### Vulnerabilities lifecycle
+### Vulnerability lifecycle
 Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
 
 - **Hot Libraries:**

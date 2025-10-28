@@ -141,15 +141,17 @@ Define variables para tus tests de API HTTP con JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Definir tests de API HTTP con Javascript" style="width:90%;" >}}
 
+<div class="alert alert-info">Las capacidades de JavaScript no son compatibles con los tests de API en ubicaciones privadas de Windows.</div>
+
    {{% /tab %}}
 
-{{< /tabs >}}
+   {{< /tabs >}}
 
 ### Definición de aserciones
 
 Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **URL del test**, se añaden aserciones básicas de `response time`, `status code` y `header` `content-type` basadas en la respuesta obtenida. Debes definir al menos una aserción para que sea monitorizada por tu test.
 
-| Tipo          | Operador                                                                                               | Tipo de valor                                                      |
+| Tipo          | Operator                                                                                               | Tipo de valor                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | cuerpo          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | Cadena <br> [Expresión regular][6] |
 | encabezado        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | Cadena <br> [Expresión regular][6]                                      |
@@ -236,7 +238,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 `TIMEOUT`
 : La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60s).
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60s).
   Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
 

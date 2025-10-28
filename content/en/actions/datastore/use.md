@@ -1,5 +1,6 @@
 ---
 title: Use Datastores with Apps and Workflows
+description: Reference and perform CRUD operations on datastores within workflows and apps, and create workflows or apps from existing datastores.
 disable_toc: false
 further_reading:
 - link: "service_management/app_builder/build"
@@ -14,7 +15,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 You can reference and perform CRUD (Create, Read, Update, and Delete) operations on a datastore inside a workflow or an app. Additionally, you can create a workflow or app directly from an existing datastore.

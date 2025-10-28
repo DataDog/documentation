@@ -55,7 +55,7 @@
 {{ with index .Site.Menus "api" }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
-  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus "api") }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.Default.Menus "api") }}
 {{ end }}
 {{ $menu := .Scratch.Get "menu" }}
 
@@ -66,7 +66,7 @@
 {{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag) }}
 
 <!-- Loop over the menu to determine what to pull in -->
-{{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
+{{ range (where .Sites.Default.Menus.api ".Name" "==" $ParamTitleEn) }}
   {{ range $menuChild := sort .Children ".Params.order" "asc" }}
 
     {{ $anchorStr := $menuChild.Name }}
@@ -133,7 +133,7 @@
                     <!-- if this is deprecated and we have a higher version link to that -->
                     {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}}}
                       {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
-                      <div class="alert alert-danger">
+                      <div class="alert alert-warning">
                         <p class="alert-warning">This endpoint is deprecated use the latest endpoint here <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
                       </div>
                     {{ end }}

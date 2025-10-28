@@ -1,5 +1,6 @@
 ---
 title: Remote Configuration for Fleet Automation
+description: Configure Remote Configuration with Fleet Automation to enable Agent flares, remote upgrades, and centralized configuration management.
 disable_toc: false
 further_reading:
 - link: "/remote_configuration"
@@ -99,7 +100,7 @@ datadog:
 
 ### At the organization level
 
-<div class="alert alert-danger"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
+<div class="alert alert-warning"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
 
 To disable Remote Configuration at the organization level:
 1. Ensure you have the required `org_management` permission.

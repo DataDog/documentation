@@ -144,7 +144,7 @@ Spark 통합을 구성해 Databricks에서 Apache Spark 클러스터를 모니�
 {{% /site-region %}}
 
 
-<div class="alert alert-warning">UI에서 직접 일반 텍스트로 환경 변수 `DD_API_KEY`를 정의하는 것은 보안에 좋지 않습니다. 대신 <a href="https://docs.databricks.com/en/security/secrets/index.html">Databricks 비밀</a>을 사용하세요.
+<div class="alert alert-danger">UI에서 직접 일반 텍스트로 환경 변수 `DD_API_KEY`를 정의하는 것은 보안에 좋지 않습니다. 대신 <a href="https://docs.databricks.com/en/security/secrets/index.html">Databricks 비밀</a>을 사용하세요.
 
 
 
@@ -175,7 +175,7 @@ Spark 통합을 구성해 Databricks에서 Apache Spark 클러스터를 모니�
 
 클러스터 노드의 드라이버에 Datadog 에이전트를 설치하세요.
 
-<div class="alert alert-warning">스크립트 내 `DD_API_KEY` 변수 값을 정의해야 합니다.</div>
+<div class="alert alert-danger">스크립트 내 `DD_API_KEY` 변수 값을 정의해야 합니다.</div>
 
 ```shell script
 #!/bin/bash
@@ -257,7 +257,7 @@ chmod a+x /tmp/start_datadog.sh
 
 Install the Datadog Agent on the driver and worker nodes of the cluster.
 
-<div class="alert alert-warning">You will need to define the value of the `DD_API_KEY` variable inside the script.</div>
+<div class="alert alert-danger">You will need to define the value of the `DD_API_KEY` variable inside the script.</div>
 
 ```shell script
 #!/bin/bash

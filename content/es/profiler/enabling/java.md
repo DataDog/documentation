@@ -6,7 +6,7 @@ code_lang_weight: 10
 further_reading:
 - link: getting_started/profiler
   tag: Documentación
-  text: Empezando con el generador de perfiles
+  text: Empezando con Profiler
 - link: profiler/profile_visualizations
   tag: Documentación
   text: Más información sobre las visualizaciones de perfiles disponibles
@@ -23,7 +23,7 @@ El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si
 
 Para obtener un resumen de las versiones mínimas y recomendadas del tiempo de ejecución y del rastreador en todos los lenguajes, consulta [Versiones de lenguaje y rastreadores compatibles][13].
 
-A partir de dd-trace-java 1.0.0, tienes dos opciones para el motor que genera datos de perfil para las aplicaciones de Java: [Java Flight Recorder (JFR)][2] o el Datadog Profiler. A partir de dd-trace-java 1.7.0, Datadog Profiler es el predeterminado. Cada motor de perfil tiene diferentes efectos secundarios, requisitos, configuraciones disponibles y limitaciones, y esta página describe cada uno. Puedes activar uno o ambos motores. Activando ambos se capturan los dos tipos de perfil al mismo tiempo.
+A partir de dd-trace-java 1.0.0, tienes dos opciones para el motor que genera datos de perfil para las aplicaciones de Java: [Java Flight Recorder (JFR)][2] o el Datadog Profiler. A partir de dd-trace-java 1.7.0, Datadog Profiler es el predeterminado. Cada motor de generador de perfiles tiene diferentes efectos secundarios, requisitos, configuraciones disponibles y limitaciones, y esta página describe cada uno. Puedes activar uno o ambos motores. Activando ambos se capturan los dos tipos de perfil al mismo tiempo.
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
@@ -32,15 +32,17 @@ Sistemas operativos compatibles:
 - Linux
 
 Versiones mínimas de JDK:
-- OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ (incluidas las primeras compilaciones: Amazon Corretto, Azul Zulu y otras).
-- Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+
-- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (utilizado en Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). El generador de perfiles está deshabilitado por defecto para OpenJ9 debido a la posibilidad de que la JVM se bloquee a causa de un sutil error en la implementación de JVTMI. Si no experimentas ningún error, puedes activar el generador de perfiles añadiendo `-Ddd.profiling.ddprof.enabled=true`.
-- Azul Platform Prime 23.05.0.0+ (antes Azul Zing)
+- OpenJDK 8u352 o posterior, 11.0.17 o posterior, 17.0.5 o posterior, 21 o posterior (incluidas las primeras compilaciones: Amazon Corretto, Azul Zulu y otras).
+- Oracle JDK 8u351 o posterior, 11.0.17 o posterior, 17.0.5 o posterior, 21 o posterior
+- OpenJ9 JDK 8u372 o posterior, 11.0.18 o posterior, 17.0.6 o posterior (utilizado en Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime).
+
+**Nota:** El generador de perfiles está deshabilitado por defecto para OpenJ9 debido a la posibilidad de fallos de la JVM causados por un sutil error en la implementación de JVTMI. Si **no** experimentas ningún fallo, puedes habilitar el generador de perfiles añadiendo `-Ddd.profiling.ddprof.enabled=true` o `DD_PROFILING_DDPROF_ENABLED=true`.
+- Azul Platform Prime 23.05.0.0 o posterior (antes Azul Zing)
 
 
 **Nota:** El Datadog Profiler está inactivado en el compilador GraalVM (JVMCI) y necesita ser habilitado explícitamente con `-Ddd.profiling.ddprof.enabled=true` o `DD_PROFILING_DDPROF_ENABLED=true`.
 
-Datadog Profiler utiliza la función `AsyncGetCallTrace` de JVMTI, en la que existe un [problema conocido][1] anterior a la versión 17.0.5 del JDK. Esta corrección se ha trasladado a la versión 11.0.17 y 8u352. Datadog Profiler no está habilitado a menos que la JVM en la que se despliega el generador de perfiles tenga esta corrección. Actualiza al menos a 8u352, 11.0.17, 17.0.5 o a la última versión de JVM que no sea LTS para utilizar Datadog Profiler.
+El Datadog Profiler utiliza la función `AsyncGetCallTrace` de JVMTI, en la que existe un [problema conocido][1] anterior a la versión 17.0.5 del JDK. Esta corrección se ha trasladado a la versión 11.0.17 y 8u352. El Datadog Profiler no está habilitado a menos que la JVM en la que se despliega el generador de perfiles tenga esta corrección. Actualiza al menos a 8u352, 11.0.17, 17.0.5 o a la última versión de JVM que no sea LTS para utilizar el Datadog Profiler.
 
 [1]: https://bugs.openjdk.org/browse/JDK-8283849
 {{% /tab %}}
@@ -52,20 +54,20 @@ Sistemas operativos compatibles:
 - Windows
 
 Versiones mínimas de JDK:
-- OpenJDK [1.8.0.262/8u262+][3], 11+ (incluidas las versiones basadas en él: Amazon Corretto y otras)
-- Oracle JDK 11+ (la activación del JFR puede requerir una licencia comercial de Oracle. Ponte en contacto con tu representante de Oracle para confirmar si esto forma parte de tu licencia).
-- Azul Zulu 8 (versión 1.8.0.212/8u212+), 11+
-- GraalVM 17+ - ambas versiones, JIT y AOT (imagen nativa)
+- OpenJDK [1.8.0.262/8u262 o posterior][3], 11+ (incluidas las versiones basadas en él: Amazon Corretto y otras)
+- Oracle JDK 11 o posterior (la activación del JFR puede requerir una licencia comercial de Oracle. Ponte en contacto con tu representante de Oracle para confirmar si esto forma parte de tu licencia).
+- Azul Zulu 8 (versión 1.8.0.212/8u212 o posterior), 11 o posterior
+- GraalVM 17 o posterior - ambas versiones, JIT y AOT (imagen nativa)
 
-Dado que las versiones de JDK que no son LTS pueden no contener correcciones de estabilidad y rendimiento relacionadas con la biblioteca de Datadog Profiler, utiliza las versiones 8, 11 y 17 del JDK de soporte a largo plazo.
+Dado que las versiones de JDK que no son LTS pueden no contener correcciones de estabilidad y rendimiento relacionadas con la biblioteca del Datadog Profiler, utiliza las versiones 8, 11 y 17 del JDK de soporte a largo plazo.
 
 Requisitos adicionales para la formación de perfiles [trace (traza) to integración de perfil][12]:
- - OpenJDK 17.0.5+ y `dd-trace (traza)-java` versión 1.17.0+.
- - OpenJDK 11.0.17+ y `dd-trace (traza)-java` versión 1.17.0+
- - OpenJDK 8 8u352+ y `dd-trace (traza)-java` versión 1.17.0+
- - OpenJ9 17.0.6+ y `dd-trace (traza)-java` versión 1.17.0+
- - OpenJ9 11.0.18+ y `dd-trace (traza)-java` versión 1.17.0+
- - OpenJ9 8.0.362+ y `dd-trace (traza)-java` versión 1.17.0+
+ - OpenJDK 17.0.5 o posterior y `dd-trace (traza)-java` versión 1.17.0 o posterior.
+ - OpenJDK 11.0.17 o posterior y `dd-trace (traza)-java` versión 1.17.0 o posterior
+ - OpenJDK 8 8u352 o posterior y `dd-trace (traza)-java` versión 1.17.0 o posterior
+ - OpenJ9 17.0.6 o posterior y `dd-trace (traza)-java` versión 1.17.0 o posterior
+ - OpenJ9 11.0.18 o posterior y `dd-trace (traza)-java` versión 1.17.0 o posterior
+ - OpenJ9 8.0.362 o posterior y `dd-trace (traza)-java` versión 1.17.0 o posterior
 
 [3]: /es/profiler/profiler_troubleshooting/java/#java-8-support
 [12]: /es/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
@@ -81,7 +83,7 @@ Continuous Profiler no es compatible con algunas plataformas serverless, como AW
 
 Para empezar a crear perfiles de aplicaciones:
 
-1. Asegúrate de que Datadog Agent v6+ está instalado y en ejecución. Datadog recomienda utilizar [Datadog Agent v7+][4]. Si no tienes APM habilitado para configurar tu aplicación para enviar datos a Datadog, en tu Agent, configura la variable de entorno `DD_APM_ENABLED` en `true` y escuchando en el puerto `8126/TCP`.
+1. Asegúrate de que Datadog Agent v6 o posterior está instalado y en ejecución. Datadog recomienda utilizar [Datadog Agent v7 o posterior][4]. Si no tienes APM habilitado para configurar tu aplicación para enviar datos a Datadog, en tu Agent, configura la variable de entorno `DD_APM_ENABLED` en `true` y escuchando en el puerto `8126/TCP`.
 
 2. Descarga `dd-java-agent.jar`, que contiene los archivos de clase de Java Agent:
 
@@ -103,7 +105,7 @@ Para empezar a crear perfiles de aplicaciones:
    {{% /tab %}}
    {{< /tabs >}}
 
-     **Nota**: El generador de perfiles está disponible en la biblioteca `dd-java-agent.jar` para las versiones 0.55+.
+   **Nota**: Profiler está disponible en la biblioteca `dd-java-agent.jar` para las versiones 0.55 o posterior.
 
 3. Habilita el generador de perfiles configurando el indicador `-Ddd.profiling.enabled` o la variable de entorno `DD_PROFILING_ENABLED` en `true`. Especifica `dd.service`, `dd.env` y `dd.version` para poder filtrar y agrupar tus perfiles a través de estas dimensiones:
    {{< tabs >}}
@@ -159,16 +161,16 @@ Cuando se crea el archivo binario de servicio, puedes utilizar variables de ento
 
 Desde la versión 1.5.0 de dd-trace-java, tienes dos opciones para el generador de perfiles de CPU utilizado, Datadog o Java Flight Recorder (JFR). Desde la versión 1.7.0, Datadog es el predeterminado, pero también puedes habilitar opcionalmente JFR para los perfiles de CPU. Puedes activar uno o ambos motores. Activando ambos se capturan los dos tipos de perfiles al mismo tiempo.
 
-El perfilador Datadog registra el span (tramo) activo en cada muestra, lo que mejora la fidelidad de la integración de la trace (traza) a Profiling y las funciones de perfilado de endpoint. Habilitar este motor admite una integración mucho mejor con el rastreo de APM.
+El Datadog Profiler registra el span (tramo) activo en cada muestra, lo que mejora la fidelidad de la integración de la trace (traza) a Profiling y las funciones de perfilado de endpoint. Habilitar este motor admite una integración mucho mejor con el rastreo de APM.
 
 El Datadog Profiler consta de varios motores de perfiles, incluidos los generadores de perfiles de CPU, tiempo real, asignación y fugas de memoria.
 
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
-_Consulta los requisitos mínimos de la versión JDK para activar el perfilador DataDog._
+_Consulta los requisitos mínimos de la versión JDK para activar el Datadog Profiler._
 
-El Datadog Profiler está activado por defecto en las versiones 1.7.0+ de dd-trace-java. El perfil de CPU de Datadog se programa a través de eventos perf y es más preciso que el perfil de CPU de JFR. Para habilitar la generación de perfiles de CPU:
+El Datadog Profiler está activado por defecto en las versiones 1.7.0 o posterior de dd-trace-java. El perfil de CPU de Datadog se programa a través de eventos perf y es más preciso que el perfil de CPU de JFR. Para habilitar la generación de perfiles de CPU:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
@@ -196,7 +198,7 @@ sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 
 {{% tab "JFR" %}}
 
-Para la versión 1.7.0+, para cambiar del perfil por defecto de Datadog al perfil de CPU de JFR:
+Para la versión 1.7.0 o posterior, para cambiar del perfil por defecto de Datadog al perfil de CPU de JFR:
 
 ```
 export DD_PROFILING_DDPROF_CPU_ENABLED=false
@@ -220,7 +222,7 @@ El motor de perfil de tiempo real es útil para perfilar la latencia y se integr
 -Ddd.profiling.ddprof.wall.enabled=true
 ```
 
-Para la versión 1.7.0+, para desactivar el perfil de tiempo real:
+Para la versión 1.7.0 o posterior, para desactivar el generador de perfiles de tiempo real:
 
 ```
 export DD_PROFILING_DDPROF_WALL_ENABLED=false
@@ -234,7 +236,7 @@ Para los usuarios de JMC, el evento `datadog.MethodSample` se emite para las mue
 
 El motor de tiempo real no depende de la configuración de `/proc/sys/kernel/perf_event_paranoid`.
 
-### Motor de asignación de perfiles
+### Motor de asignación del generador de perfiles
 
 {{< tabs >}}
 {{% tab "JFR" %}}
@@ -274,16 +276,16 @@ o:
 
 Para los usuarios de JMC, los eventos de asignación de Datadog son `datadog.ObjectAllocationInNewTLAB` y `datadog.ObjectAllocationOutsideTLAB`.
 
-El motor de perfiles de asignación no depende de la configuración de `/proc/sys/kernel/perf_event_paranoid`.
+El motor del generador de perfiles de asignación no depende de la configuración de `/proc/sys/kernel/perf_event_paranoid`.
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Motor de perfilado Live-heap
+### Motor del generador de perfiles live-heap
 
-_Desde: v1.39.0. Requiere JDK 11.0.23+, 17.0.11+, 21.0.3+, o 22+._
+_A partir de: v1.39.0. Requiere JDK 11.0.23 o posterior, 17.0.11 o posterior, 21.0.3 o posterior, o 22 o posterior._
 
-El motor de perfiles de heap en directo es útil para investigar el uso general de memoria de tu servicio e identificar posibles fugas de memoria.
+El motor del generador de perfiles live-heap en directo es útil para investigar el uso general de memoria de tu servicio e identificar posibles fugas de memoria.
 El motor muestrea las asignaciones y mantiene un registro de si esas muestras sobrevivieron al ciclo de recopilación de elementos no usados más reciente. El número de muestras que sobreviven se utiliza para estimar el número de objetos activos en el stack.
 El número de muestras rastreadas está limitado para evitar un crecimiento ilimitado del uso de memoria del generador de perfiles.
 
@@ -305,21 +307,21 @@ El motor de asignación no depende de la configuración de `/proc/sys/kernel/per
 
 ### Recopilación de stack traces nativas
 
-Si los motores de CPU o tiempo real de Datadog Profiler están activados, puedes recopilar stack traces nativas. Estas incluyen cosas como las internas de la JVM, las bibliotecas nativas utilizadas por tu aplicación o la JVM, y syscalls.
+Si los motores de CPU o tiempo real del Datadog Profiler están activados, puedes recopilar stack traces nativas. Estas incluyen cosas como las internas de la JVM, las bibliotecas nativas utilizadas por tu aplicación o la JVM, y syscalls.
 
-<div class="alert alert-warning">Las stack traces nativas no se recopilan de forma predeterminada porque normalmente no proporcionan información procesable y analizarlas puede afectar potencialmente a la estabilidad de la aplicación. Prueba esta configuración en un entorno que no sea de producción antes de intentar utilizarla en producción.</a></div>
+<div class="alert alert-danger">Las stack traces nativas no se recopilan de forma predeterminada, ya que normalmente no proporcionan información procesable y analizarlas puede afectar potencialmente a la estabilidad de la aplicación. Prueba esta configuración en un entorno que no sea de producción antes de intentar utilizarla en producción.</a></div>
 
 Para habilitar la recopilación de stack traces nativas, entendiendo que puede desestabilizar tu aplicación, establece:
 
 ```
-export DD_PROFILING_DDPROF_ENABLED=true # predeterminado en v1.7.0+
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
 export DD_PROFILING_DDPROF_CSTACK=dwarf
 ```
 
 o:
 
 ```
--Ddd.profiling.ddprof.enabled=true # predeterminado en v1.7.0+
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.cstack=dwarf
 ```
 
@@ -332,7 +334,7 @@ Puedes configurar el generador de perfiles utilizando las siguientes variables d
 | Variable de entorno                             | Tipo          | Descripción                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Booleano       | Alternativa para el argumento `-Ddd.profiling.enabled`. Establece la opción en `true` para habilitar el generador de perfiles.               |
-| `DD_PROFILING_ALLOCATION_ENABLED`                | Booleano       | Alternativa para el argumento `-Ddd.profiling.allocation.enabled`. Establece la opción en `true` para habilitar el perfil de asignación. Requiere que el generador de perfiles ya esté habilitado. |
+| `DD_PROFILING_ALLOCATION_ENABLED`                | Booleano       | Alternativa para el argumento `-Ddd.profiling.allocation.enabled`. Establece la opción en `true` para habilitar el generador de perfiles de asignación. Requiere que el generador de perfiles ya esté habilitado. |
 | `DD_ENV`                                         | Cadena        | El nombre de [entorno][10], por ejemplo: `production`. |
 | `DD_SERVICE`                                     | Cadena        | El nombre de [servicio][10], por ejemplo, `web-backend`. |
 | `DD_VERSION`                                     | Cadena        | La [versión][10] de tu servicio. |
@@ -340,7 +342,7 @@ Puedes configurar el generador de perfiles utilizando las siguientes variables d
 
 ## ¿No sabes qué hacer a continuación?
 
-La guía [Empezando con el generador de perfiles][11] toma un ejemplo de servicio con un problema de rendimiento y te muestra cómo utilizar Continuous Profiler para comprender y solucionar el problema.
+La guía [Empezando con el Profiler][11] toma un ejemplo de servicio con un problema de rendimiento y te muestra cómo utilizar Continuous Profiler para comprender y solucionar el problema.
 
 ## Referencias adicionales
 

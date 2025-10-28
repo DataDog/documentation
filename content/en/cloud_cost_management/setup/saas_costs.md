@@ -18,6 +18,9 @@ further_reading:
 - link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
+- link: "/cloud_cost_management/setup/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 - link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
@@ -38,11 +41,11 @@ SaaS Cost Integrations allow you to send cost data **directly from your provider
 
 </br>
 
-If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
+If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services. Only SaaS costs in USD are supported at this time.
 
 ## Setup
 
-To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud.
+To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, Google Cloud, or Oracle Cloud.
 
 See the respective documentation for your cloud provider:
 
@@ -283,7 +286,7 @@ You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
 {{< tabs >}}
-{{% tab "Snowflake" %}} 
+{{% tab "Snowflake" %}}
 
 <table>
   <thead>

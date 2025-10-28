@@ -3,7 +3,7 @@ aliases:
 - /es/serverless/datadog_lambda_library/
 - /es/serverless/serverless_integrations/cli/
 dependencies:
-- https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
+- https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-lambda/README.md
 title: Datadog Serverless CLI
 ---
 Puedes utilizar la interfaz de línea de comandos (CLI) para instrumentar tus funciones de AWS Lambda con Datadog. La CLI habilita la instrumentación mediante la modificación de la configuración de las funciones de Lambda existentes y, por lo tanto, *no* requiere redistribución. Es la forma más rápida de empezar a trabajar con la monitorización serverless de Datadog.

@@ -90,7 +90,7 @@ process_config:
 
 #### Recopilación de trazas
 
-Cuando la aplicación no está en un contenedor y el Datadog Agent está configurado con `99datadog.config`, el rastreo se habilita sin ninguna configuración adicional, siempre que la aplicación esté instrumentada con la [configuración de la biblioteca de rastreo][8].
+Cuando la aplicación no está en un contenedor y el Datadog Agent está configurado con `99datadog.config`, el rastreo se habilita sin ninguna configuración adicional, siempre que la aplicación esté instrumentada con la [configuración de la librería de rastreo][8].
 
 
 
@@ -348,12 +348,12 @@ Para obtener más información, consulta [DogStatsD y Docker][5].
 
 {{< /tabs >}}
 
-#### Múltiples contenedores Docker 
+#### Múltiples contenedores Docker
 
 1. En el mismo `Dockerrun.aws.json` de la aplicación, añade un contenedor de Datadog Agent utilizando la imagen `datadog/agent`. Añade lo siguiente:
     - En la sección `portMappings`, añade un `hostPort` 8126 con un `containerPort` 8126.
     - En la sección `environment`, configura `DD_APM_ENABLED` y `DD_APM_NON_LOCAL_TRAFFIC` como `true`.
-2. En el contenedor de tu aplicación, que se instrumentó con la [configuración de la biblioteca de rastreo][14], añade lo siguiente:
+2. En el contenedor de tu aplicación, que se instrumentó con la [configuración de la librería de rastreo][14], añade lo siguiente:
     - En la sección `environment`, añade una variable de entorno llamada `DD_AGENT_HOST` al nombre del contenedor de Datadog Agent.
     - En la sección `links`, establezca Agent Contenedor para que se utilice como variable entorno.
 

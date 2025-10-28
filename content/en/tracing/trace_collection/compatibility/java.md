@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 22 and upward</td>
+    <td>from 26 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 21</td>
+    <td>from 18 to 25</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -88,30 +88,30 @@ Integrations in Preview are disabled by default but can be enabled individually:
 - error and stacktrace capturing
 - linking work created within a web request and Distributed Tracing
 
-| Server                  | Versions     | Support Type                                           | Instrumentation Names (used for configuration)           |
-|-------------------------|--------------|--------------------------------------------------------|----------------------------------------------------------|
-| Akka-Http Server        | 10.0+        | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
-| Apache Pekko            | 1.0+         | Fully Supported                                        | `pekko-http`, `pekko-http-server`                        |
-| Finatra Web             | 2.9+         | Fully Supported                                        | `finatra`                                                |
-| Grizzly                 | 2.0+         | Fully Supported                                        | `grizzly`                                                |
-| Grizzly-HTTP            | 2.3.20+      | Fully Supported                                        | `grizzly-filterchain`                                    |
-| Java Servlet Compatible | 2.3+, 3.0+   | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                      |
-| Jax-RS Annotations      | JSR311-API   | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty                   | 7.0-12.x     | Fully Supported                                        | `jetty`                                                  |
-| Micronaut HTTP Server   | 2.x+         | Fully Supported                                        | `micronaut`                                              |
-| Mulesoft                | 4.5.0+       | Fully Supported                                        | `mule`                                                   |
-| Netty HTTP Server       | 3.8+         | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
-| Play                    | 2.3-2.8      | Fully Supported                                        | `play`, `play-action`                                    |
-| Ratpack                 | 1.5+         | Fully Supported                                        | `ratpack`                                                |
-| Restlet HTTP Server     | 2.2 - 2.4    | Fully Supported                                        | `restlet-http`.                                          |
-| Spark Java              | 2.3+         | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5+         | Fully Supported                                        | `spring-web` or `spring-webflux`                         |
-| Spring Web (MVC)        | 4.0+         | Fully Supported                                        | `spring-web`                                             |
-| Spring WebFlux          | 5.0+         | Fully Supported                                        | `spring-webflux`                                         |
-| Tomcat                  | 5.5+         | Fully Supported                                        | `tomcat`                                                 |
-| Undertow                | 2.0+         | Fully Supported                                        | `undertow`                                               |
-| Vert.x                  | 3.4 - 4.5.15 | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
-| Websocket (JSR356)      | 1.0+         | [Preview](#framework-integrations-disabled-by-default) | `websocket`                                              |
+| Server                  | Versions     | Support Type                                           | Instrumentation Names (used for configuration)             |
+|-------------------------|--------------|--------------------------------------------------------|------------------------------------------------------------|
+| Akka-Http Server        | 10.0+        | Fully Supported                                        | `akka-http`, `akka-http-server`                            |
+| Apache Pekko            | 1.0+         | Fully Supported                                        | `pekko-http`, `pekko-http-server`                          |
+| Finatra Web             | 2.9+         | Fully Supported                                        | `finatra`                                                  |
+| Grizzly                 | 2.0+         | Fully Supported                                        | `grizzly`                                                  |
+| Grizzly-HTTP            | 2.3.20+      | Fully Supported                                        | `grizzly-filterchain`                                      |
+| Java Servlet Compatible | 2.3+, 3.0+   | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                        |
+| Jax-RS Annotations      | JSR311-API   | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter`   |
+| Jetty                   | 7.0-12.x     | Fully Supported                                        | `jetty`                                                    |
+| Micronaut HTTP Server   | 2.x+         | Fully Supported                                        | `micronaut`                                                |
+| Mulesoft                | 4.5.0+       | Fully Supported                                        | `mule`                                                     |
+| Netty HTTP Server       | 3.8+         | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`             |
+| Play                    | 2.3-2.8      | Fully Supported                                        | `play`, `play-action`                                      |
+| Ratpack                 | 1.5+         | Fully Supported                                        | `ratpack`                                                  |
+| Restlet HTTP Server     | 2.2 - 2.4    | Fully Supported                                        | `restlet-http`.                                            |
+| Spark Java              | 2.3+         | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                             |
+| Spring Boot             | 1.5+         | Fully Supported                                        | `spring-web` or `spring-webflux`                           |
+| Spring Web (MVC)        | 4.0+         | Fully Supported                                        | `spring-web`                                               |
+| Spring WebFlux          | 5.0+         | Fully Supported                                        | `spring-webflux`                                           |
+| Tomcat                  | 5.5+         | Fully Supported                                        | `tomcat`                                                   |
+| Undertow                | 2.0+         | Fully Supported                                        | `undertow`                                                 |
+| Vert.x                  | 3.4 - 5.x    | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`, `vertx-5.0`|
+| Websocket (JSR356)      | 1.0+         | [Preview](#framework-integrations-disabled-by-default) | `websocket`                                                |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -302,7 +302,7 @@ GraalVM Native Image is a technology that allows you to compile Java application
 
 Use:
 
-- [GraalVM JDK 21][7]
+- [GraalVM JDK 21 or JDK 25][7]
 - [Datadog Java tracer][1]
 
 ### Setup
@@ -373,6 +373,8 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+<div class="alert alert-info">For GraalVM 25, you may see errors related to <code>Use of Unsafe</code>. Add <code>-Dnet.bytebuddy.safe=false</code> when building the native executable to address this.</div>
 
 #### Usage
 

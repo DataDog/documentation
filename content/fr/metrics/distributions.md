@@ -63,7 +63,7 @@ Les agrégations par centile peuvent être ajoutées à différents widgets et g
 
 ### Requêtes avec seuil
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Les requêtes avec seuil sont disponibles en version bêta publique.
 </div>
 

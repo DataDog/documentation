@@ -17,7 +17,7 @@ Datadog's Cloud Cost Monitoring (CCM) Reports empower financial operations and f
 
 With Reports, you can:
 
-- **Centralize cloud spend analysis**: View and manage costs from [AWS][1], [Azure][2], [Google Cloud][3], and [SaaS providers][4] in one place.
+- **Centralize cloud spend analysis**: View and manage costs from [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][12], and [SaaS providers][4] in one place.
 - **Filter and group**: Filter by provider, tags, regions, and group by service, provider, or custom tags.
 - **Visualize graphs**: Use bar charts, summaries, and day-over-day views to spot trends and anomalies.
 - **Use advanced controls**: Switch between cost types, toggle container allocation, and focus on usage charges or all spend.
@@ -35,7 +35,7 @@ With Reports, you can:
    - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
    - **Azure Spend by Service Name**: Break down costs by Azure services like Virtual Machines and Azure Monitor.
    - **GCP Spend by Service Name**: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
-   - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, and more.
+   - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, Oracle Cloud, and more.
 
 ## Customizing your report
 
@@ -106,3 +106,4 @@ After you've created and customized your report, you can save and share it from 
 [9]: /cloud_cost_management/setup/google_cloud/#cost-types
 [10]: /cloud_cost_management/setup/custom/#cost-metric-types
 [11]: /cloud_cost_management/reports/scheduled_reports
+[12]: /cloud_cost_management/oracle/

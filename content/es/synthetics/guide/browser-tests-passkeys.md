@@ -27,7 +27,7 @@ En la monitorización Synthetic, las claves de paso se gestionan mediante las va
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Crear una variable global del autenticador virtual" style="width:70%;" >}}
 
 ## Uso de claves de paso en tests de navegador Synthetics
-<div class="alert alert-warning">La monitorización Synthetic admite el uso de claves de paso en tests de navegadores Chrome y Edge.</div>
+<div class="alert alert-danger">La monitorización Synthetic admite el uso de claves de paso en tests de navegadores Chrome y Edge.</div>
 
 ### Añadir claves de paso a un test de navegador
 

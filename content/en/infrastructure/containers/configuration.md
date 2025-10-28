@@ -194,22 +194,41 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Collect custom resources
 
-The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default.
+The [Kubernetes Explorer][3] automatically collects Custom Resource Definitions (CRDs) by default.
 
-Follow these steps to collect the custom resources that these CRDs define:
+#### Automatic custom resource collection compatibility matrix
+
+When the following CRDs are present in your cluster, the Agent automatically collects their Custom Resources (CRs). If a CRD you use is **not** listed here—or your Agent version is older—follow the **manual configuration** steps below.
+
+| CRD group          | CRD kind             | CRD versions | Minimal Agent version |
+| ------------------ | -------------------- | ------------ | --------------------- |
+| datadoghq.com      | datadogslo           | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogdashboard     | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogagentprofile  | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmonitor       | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmetric        | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogpodautoscaler | v1alpha2     | 7.71.0                |
+| datadoghq.com      | datadogagent         | v2alpha1     | 7.71.0                |
+| argoproj.io        | rollout              | v1alpha1     | 7.71.0                |
+| karpenter.sh       | *                    | v1           | 7.71.0                |
+| karpenter.k8s.aws  | *                    | v1           | 7.71.0                |
+| azure.karpenter.sh | *                    | v1beta1      | 7.71.0                |
+
+
+#### Manual Configuration
+
+For the other CRDs, follow these steps to collect the custom resources that these CRDs define:
 
 1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
 
-1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Indexing** column, click **ENABLED** or **DISABLED**.
+1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Versions** column, click the `version` tag you want to configure indexing for.
 
-   <div class="alert alert-info">If your CRD has multiple versions, you are prompted to select which version you want to configure indexing for.</div>
-
-   {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
+   {{< img src="infrastructure/containers_view/CRD_indexing_access_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Versions' column, clicks on one of the versions. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
 
    A modal appears:
-   {{< img src="infrastructure/containers_view/indexing_modal.png" alt="The Collecting and Indexing modal. Contains two sections: Agent Setup, with copyable snippets for updating an Agent configuration, and Indexing Configuration, with checkboxes for fields to index.">}}
+   {{< img src="infrastructure/containers_view/indexing_modal_1.png" alt="The Collecting and Indexing modal. Contains two sections: Set up Datadog Agent, with copyable snippets for updating an Agent configuration, and Select indexed fields for filtering/sorting, with checkboxes for fields to index and a preview.">}}
 
-1. Follow the instructions in the modal's **Agent Setup** section to update your Datadog Agent configuration:
+1. Follow the instructions in the modal's **Set up Datadog Agent** section to update the Agent configuration for clusters that are not collecting custom resources. The modal lists all such clusters, either because the Agent is not configured to collect custom resources, or because none are available in that cluster. If the Agent is configured and no custom resources exist, no action is required.
 
    {{< tabs >}}
    {{% tab "Helm Chart" %}}
@@ -229,6 +248,7 @@ Follow these steps to collect the custom resources that these CRDs define:
       ```
       helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
       ```
+
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
 
@@ -264,19 +284,22 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
-1. On the modal, under **Indexing Configuration**, select the fields you want to index from the custom resource.
+1. In the modal, under **Select indexed fields for filtering/sorting**, select the fields you want to index from the custom resource for filtering and sorting. For some CRDs, Datadog provides a default configuration. You can select additional fields if needed.
 
-    {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
+    <div class="alert alert-info">After the Datadog Agent is set up, it collects available custom resources automatically. Indexing fields is optional.</div>
+
+
+    {{< img src="infrastructure/containers_view/CRD_indexing_modal_1.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Update Fields. A success message displays." video="true">}}
 
     For arrays of objects, see the [Indexing complex types](#indexing-complex-types) section.
 
-1.  Select **Enable Indexing** to save.
+1.  Select **Update Fields** to save.
 
 After the fields are indexed, you can add them as columns in the explorer and sort them, or include them in Saved Views. You can also filter on indexed fields using the prefix `field#`.
 
 ### Indexing complex types
 
-{{< img src="containers/explorer/crd_groupby.png" alt="Indexing Configuration: A conditions object[] array, with 'Group by' drop down options: no field, type, lastTransitionTime, message, reason, status" style="width:100%;" >}}
+{{< img src="containers/explorer/crd_groupby_1.png" alt="Indexing Configuration: A targets object[] array, with 'Group by' drop down options: no field, containerResource.container, containerResource.name, containerResource.value.type, etc." style="width:100%;" >}}
 
 For arrays of objects, two group-by strategies are available:
 

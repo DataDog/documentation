@@ -1,5 +1,6 @@
 ---
 title: Granular Access Control
+description: Control access to individual Datadog resources like dashboards, monitors, and notebooks by teams, roles, or users for fine-grained permission management.
 ---
 ## Manage access to individual resources
 
@@ -23,8 +24,10 @@ Use the different principals to control access patterns in your organization and
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Services][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Logs Pipelines][24]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Observability Pipelines][23]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [On-Call][22]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -64,3 +67,5 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [20]: /account_management/org_settings/cross_org_visibility/#permissions
 [21]: /sheets/#permissions
 [22]: /service_management/on-call/#granular-access-control
+[23]: /observability_pipelines/access_control/
+[24]: /logs/log_configuration/pipelines/#pipeline-permissions
