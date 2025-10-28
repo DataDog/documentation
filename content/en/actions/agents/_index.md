@@ -69,7 +69,7 @@ Click the dropdown menu to choose your GPT model. Current options include [GPT-4
 
 ### Instructions
 
-Enter the instructions your agent will follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click **Suggest With AI** to get help with writing and refining your instructions. 
+Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click **Suggest With AI** to get help with writing and refining your instructions. 
 
 Below is a sample set of instructions for an agent acting as an incident responder.
 
