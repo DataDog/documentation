@@ -26,7 +26,7 @@ View and manage seat usage for each product in the [Seat Management][4] section 
 
 ## Allocate seats
 
-A **Seat** is a license for a user to actively participate in the on-call or incident management process in Datadog. 
+A **seat** is a license for a user to actively participate in the on-call or incident management process in Datadog. 
 
 Any user can claim a seat for On-Call, Incident Management, or Incident Response as they perform actions that require a seat. Billing admins can also assign seats ahead of time to simplify the process for their teams.
 
@@ -35,13 +35,13 @@ A user needs an **On-Call seat** if they perform any of the following:
 - Are included in an [escalation policy][6]
 - Have set up [notification preferences][7] to receive pages
 
-In the On-Call product, anyone can view existing pages, escalation policies, teams, and schedules without a seat. 
+In the On-Call product, a user does not need a seat to view existing pages, escalation policies, teams, or schedules.
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
 - Add a comment, graph, or link to an [incident timeline][8]
 
-In Incident Management, anyone can create incidents, view incidents, and join incident channels without a seat. 
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. 
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 
@@ -89,7 +89,7 @@ After they are unassigned, the user loses access to features that require a seat
 
 ### Claim a seat
 
-When you try to perform an action that requires a seat, such as joining an on-call schedule, updating an incident, or adding information to an incident timeline, Datadog prompts you to claim a seat. Claiming a seat requires the `billing_read`, `on_call_read`, or `incident_read` permission.
+When you try to perform an action that requires a seat (such as joining an On-Call schedule, updating an incident, or adding information to an incident timeline) Datadog prompts you to claim a seat. Claiming a seat requires at least one of the following permissions: `billing_read`, `on_call_read`, or `incident_read`.
 
 After you claim a seat, the following items change in Datadog:
 - You immediately gain access to the product features you need (for example, receiving pages or managing incidents).
@@ -97,11 +97,11 @@ After you claim a seat, the following items change in Datadog:
 
 If your organization has committed seats available, you occupy one of them. If all committed seats are already in use, the new assignment succeeds, but the additional seat counts as an on-demand seat. 
 
-You only need to claim a seat once. After it's assigned, you continue to have access until a billing admin unassigns it.
+You only need to claim a seat once. After a seat is assigned, you continue to have access until a billing admin unassigns it.
 
 ## Billing and overages
 
-Datadog bills for Incident Management, On-Call, and Incident Response based on the total number of seats in use during each billing period. 
+Datadog bills for On-Call, Incident Management, and Incident Response based on the total number of seats in use during each billing period. 
 
 Each billing period reflects the maximum number of concurrently assigned seats across your organization for that product. Your contract includes a committed number of seats, and any usage beyond that amount is billed at your on-demand rate. 
 
