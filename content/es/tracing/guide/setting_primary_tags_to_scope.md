@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/advanced/setting_primary_tags_to_scope/
+description: Aprende a establecer etiquetas primarias para delimitar y filtrar los
+  datos de APM en diferentes entornos, servicios y versiones para una mejor organización.
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: Documentación

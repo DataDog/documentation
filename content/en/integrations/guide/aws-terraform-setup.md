@@ -515,7 +515,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::065115117704:root"]
+      identifiers = ["arn:aws-us-gov:iam::065115117704:root"]
     }
     condition {
       test     = "StringEquals"

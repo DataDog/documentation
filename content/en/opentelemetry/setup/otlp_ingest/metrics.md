@@ -23,6 +23,9 @@ further_reading:
   - link: "/metrics/otlp/?tab=summary#mapping"
     tag: "Documentation"
     text: "OTLP Metrics Mapping in Datadog"
+  - link: "https://www.datadoghq.com/blog/otlp-metrics-api/"
+    tag: "Blog"
+    text: "Ingest OTLP metrics directly into Datadog with the new OTLP Metrics API"
 site_support_id: otlp_agentless
 ---
 
@@ -37,6 +40,8 @@ This endpoint is particularly useful in the following scenarios:
 - **OpenTelemetry distributions without Datadog Exporter support**: Some OpenTelemetry distributions, such as the [AWS Distro for OpenTelemetry (ADOT)][8], have removed vendor-specific exporters in favor of a unified OTLP exporter. The OTLP metrics endpoint enables these distributions to send metrics directly to Datadog seamlessly.
 
 - **Technical constraints using the Datadog Exporter or Agent**: Ideal for scenarios where installing additional software is impractical or restrictive, such as third-party managed services (for example, Vercel), applications on customer devices, or environments requiring streamlined, Agentless observability pipelines. The OTLP metrics endpoint enables direct OTLP metric ingestion in these scenarios.
+
+<div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
 ## Configuration
 

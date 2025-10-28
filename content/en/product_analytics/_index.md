@@ -50,7 +50,7 @@ By default, this page displays the `active users`, `page views`, and `average ti
 [Users](https://app.datadoghq.com/product-analytics/user-trends)
 : At a glance, see who is using your product.
 
-[App & Devices](https://app.datadoghq.com/product-analytics/app-and-device)
+[App & Devices](https://app.datadoghq.com/product-analytics/app-and-devices)
 : Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
 [Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
