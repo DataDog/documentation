@@ -137,7 +137,7 @@ Budget cards automatically display forecast information when available, showing 
 
 To view detailed forecast information in a budget, click **View Performance** and toggle **Show Forecast** to visualize predicted costs alongside actual spending.
 
-For more information about how forecasting works and data requirements, see [Cloud Cost Management Forecasts][3].
+Learn more about how [forecasting][3] works and data requirements.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
