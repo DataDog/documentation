@@ -21912,6 +21912,207 @@ components:
       - ASSIGNEE
       - CASE
       - TEAM_OWNERS
+    GetMultipleRulesetsRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestData'
+      type: object
+    GetMultipleRulesetsRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsRequestDataAttributes:
+      properties:
+        include_testing_rules:
+          type: boolean
+        include_tests:
+          type: boolean
+        rulesets:
+          items:
+            type: string
+          type: array
+      type: object
+    GetMultipleRulesetsRequestDataType:
+      default: get_multiple_rulesets_request
+      description: Get multiple rulesets request resource type.
+      enum:
+      - get_multiple_rulesets_request
+      example: get_multiple_rulesets_request
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_REQUEST
+    GetMultipleRulesetsResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseData'
+      type: object
+    GetMultipleRulesetsResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributes:
+      properties:
+        rulesets:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItems'
+          type: array
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItems:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsData'
+        description:
+          type: string
+        name:
+          type: string
+        rules:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems'
+          type: array
+        short_description:
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsData:
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType:
+      default: rulesets
+      description: Rulesets resource type.
+      enum:
+      - rulesets
+      example: rulesets
+      type: string
+      x-enum-varnames:
+      - RULESETS
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems'
+          type: array
+        category:
+          type: string
+        checksum:
+          type: string
+        code:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        cve:
+          type: string
+        cwe:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData'
+        description:
+          type: string
+        documentation_url:
+          type: string
+        entity_checked:
+          type: string
+        is_published:
+          type: boolean
+        is_testing:
+          type: boolean
+        language:
+          type: string
+        last_updated_at:
+          format: date-time
+          type: string
+        last_updated_by:
+          type: string
+        name:
+          type: string
+        regex:
+          type: string
+        severity:
+          type: string
+        short_description:
+          type: string
+        should_use_ai_fix:
+          type: boolean
+        tests:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems'
+          type: array
+        tree_sitter_query:
+          type: string
+        type:
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData:
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType:
+      default: rules
+      description: Rules resource type.
+      enum:
+      - rules
+      example: rules
+      type: string
+      x-enum-varnames:
+      - RULES
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems:
+      properties:
+        annotation_count:
+          format: int64
+          maximum: 65535
+          minimum: 0
+          type: integer
+        code:
+          type: string
+        filename:
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataType:
+      default: get_multiple_rulesets_response
+      description: Get multiple rulesets response resource type.
+      enum:
+      - get_multiple_rulesets_response
+      example: get_multiple_rulesets_response
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_RESPONSE
     GetResourceEvaluationFiltersResponse:
       description: The definition of `GetResourceEvaluationFiltersResponse` object.
       properties:
@@ -43564,6 +43765,116 @@ components:
       - ISSUE_ASSIGNEE
       - ISSUE_CASE
       - ISSUE_TEAM_OWNERS
+    SecretRuleArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SecretRuleData'
+          type: array
+      required:
+      - data
+      type: object
+    SecretRuleData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecretRuleDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SecretRuleDataType'
+      required:
+      - type
+      type: object
+    SecretRuleDataAttributes:
+      properties:
+        default_included_keywords:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        license:
+          type: string
+        match_validation:
+          $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidation'
+        name:
+          type: string
+        pattern:
+          type: string
+        priority:
+          type: string
+        sds_id:
+          type: string
+        validators:
+          items:
+            type: string
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidation:
+      properties:
+        endpoint:
+          type: string
+        hosts:
+          items:
+            type: string
+          type: array
+        http_method:
+          type: string
+        invalid_http_status_code:
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems'
+          type: array
+        request_headers:
+          additionalProperties:
+            type: string
+          type: object
+        timeout_seconds:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        type:
+          type: string
+        valid_http_status_code:
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems'
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems:
+      properties:
+        end:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems:
+      properties:
+        end:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataType:
+      default: secret_rule
+      description: Secret rule resource type.
+      enum:
+      - secret_rule
+      example: secret_rule
+      type: string
+      x-enum-varnames:
+      - SECRET_RULE
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -79544,6 +79855,59 @@ paths:
       tags:
       - Static Analysis
       x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/rulesets:
+    post:
+      description: Get rules for multiple rulesets in batch.
+      operationId: ListMultipleRulesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMultipleRulesetsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMultipleRulesetsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Ruleset get multiple
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/secrets/rules:
+    get:
+      description: Returns list of Secrets rules with ID, Pattern, Description, Priority,
+        and SDS ID
+      operationId: GetSecretsRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretRuleArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Returns list of Secrets rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
       x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
