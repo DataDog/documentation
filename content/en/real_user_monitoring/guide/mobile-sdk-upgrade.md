@@ -41,7 +41,7 @@ All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular an
 {{% tab "Android" %}}
 
 <div class="alert alert-danger">
-We are following Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is `23`.
+Datadog follows Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is <code>23</code>.
 </div>
 
 **Requirements**:
