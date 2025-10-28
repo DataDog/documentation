@@ -64,12 +64,20 @@ components:
           additionalProperties:
             description: A list of additional properties.
             type: boolean
-          description: 'An object, (in the form `{"namespace1":true/false, "namespace2":true/false}`),
+          description: 'An object (in the form `{"namespace1":true/false, "namespace2":true/false}`)
+            containing user-supplied overrides
 
-            that enables or disables metric collection for specific AWS namespaces
-            for this
+            for AWS namespace metric collection. **Important**: This field only contains
+            namespaces explicitly configured through API calls,
 
-            AWS account only.'
+            not the comprehensive enabled or disabled status of all namespaces. If
+            a namespace is absent from this field, it uses Datadog''s
+
+            internal defaults (all namespaces enabled by default, except `AWS/SQS`,
+            `AWS/ElasticMapReduce`, and `AWS/Usage`).
+
+            For a complete view of all namespace statuses, use the V2 AWS Integration
+            API instead.'
           example:
             auto_scaling: false
             opswork: false
@@ -28114,8 +28122,9 @@ paths:
   /api/v1/integration/aws:
     delete:
       deprecated: true
-      description: Delete a Datadog-AWS integration matching the specified `account_id`
-        and `role_name parameters`.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete a Datadog-AWS integration matching the specified `account_id` and `role_name
+        parameters`.'
       operationId: DeleteAWSAccount
       requestBody:
         content:
@@ -28162,7 +28171,8 @@ paths:
         - aws_configurations_manage
     get:
       deprecated: true
-      description: List all Datadog-AWS integrations available in your Datadog organization.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all Datadog-AWS integrations available in your Datadog organization.'
       operationId: ListAWSAccounts
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28214,7 +28224,8 @@ paths:
         - aws_configuration_read
     post:
       deprecated: true
-      description: 'Create a Datadog-Amazon Web Services integration.
+      description: '"**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
 
@@ -28267,7 +28278,8 @@ paths:
         - aws_configurations_manage
     put:
       deprecated: true
-      description: Update a Datadog-Amazon Web Services integration.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Update a Datadog-Amazon Web Services integration.'
       operationId: UpdateAWSAccount
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28338,8 +28350,9 @@ paths:
   /api/v1/integration/aws/available_namespace_rules:
     get:
       deprecated: true
-      description: List all namespace rules for a given Datadog-AWS integration. This
-        endpoint takes no arguments.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all namespace rules for a given Datadog-AWS integration. This endpoint
+        takes no arguments.'
       operationId: ListAvailableAWSNamespaces
       responses:
         '200':
@@ -28621,8 +28634,8 @@ paths:
   /api/v1/integration/aws/generate_new_external_id:
     put:
       deprecated: true
-      description: Generate a new AWS external ID for a given AWS account ID and role
-        name pair.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Generate a new AWS external ID for a given AWS account ID and role name pair.'
       operationId: CreateNewAWSExternalID
       requestBody:
         content:
@@ -28854,9 +28867,10 @@ paths:
   /api/v1/integration/aws/logs/services:
     get:
       deprecated: true
-      description: Get the list of current AWS services that Datadog offers automatic
-        log collection. Use returned service IDs with the services parameter for the
-        Enable an AWS service log collection API endpoint.
+      description: '**This endpoint is deprecated - use the V2 endpoint instead.**
+        Get the list of current AWS services that Datadog offers automatic log collection.
+        Use returned service IDs with the services parameter for the Enable an AWS
+        service log collection API endpoint.'
       operationId: ListAWSLogsServices
       responses:
         '200':
