@@ -227,14 +227,14 @@ You can enter sample `{{span_input}}` and `{{span_output}}` values and click **R
 Refine your prompt and schema until outputs are consistent and interpretable.
 
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_2.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-2.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
 
 
 ## Viewing and using results
 
 After you save your evaluation, Datadog automatically runs your evaluation on targeted spans. Results are available across LLM Observability in near-real-time. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_3.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
 Each evaluation result includes:
 
