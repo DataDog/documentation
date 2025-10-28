@@ -97,7 +97,7 @@ Focus on clear communication, structured processes, and continuous improvement o
 
 Click **+ Add Tool** to add actions from our [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action. 
 
-### MCP Servers
+### MCP Server
 
 Click the toggle button to enable the [Datadog MCP Server][8]. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
 
