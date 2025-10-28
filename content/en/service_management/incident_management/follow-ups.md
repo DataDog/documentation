@@ -13,28 +13,29 @@ Incident follow-ups are tasks to be performed following an incident's resolution
 
 You can use Datadog Incident Management to define, manage, and track follow-up tasks for your incidents.
 
-## Define follow-ups
+## Create and manage follow-ups
 
-Your incident responders can define incident follow-ups at any point during an incident.
+You can define and modify incident follow-ups at any point during an incident. To manage an incident's follow-ups:
 
-When defining a follow-up or at any time later, you can add due date and multiple assignees.
+**From the Web app**: Go to the incident's **Remediation** tab to manage its follow-ups.
+**From Slack**: In the incident channel, run `/datadog followup` to create a follow-up or `/datadog followup list` to manage existing follow-ups.
 
 ## Export follow-ups
 
-Incident Management can export and sync follow-ups to work management applications help you manage, track, and analyze your organization's follow-up work.
+You can use Incident Management to export your follow-ups to either [Case Management][2] or Jira.
 
-To do this, you must first define at least one **export template**. Export templates deterine the application to which Datadog writes the follow-up, as well as how Datadog syncs information to and from that application.
+To export follow-ups, you must first go to "Follow-ups" in [Incident Management settings][1] and define an **export template**. An export templates describes one way that Datadog can export and sync a follow-up.
 
-To define export templates, go to "Follow-ups" in [Incident Management settings][1] and define an **export template**. Two types of export templates are supported: **Case Management** and **Jira**.
+Two types of export templates are supported: **Case Management** and **Jira**.
 
-When defining a template of either type, you can configure how Datadog should set the fields on the case or Jira issue, using variables provided by the follow-up and its incident. For example:
+When defining a template of either type, you can configure how Datadog should set the fields on the resulting Datadog case or the Jira issue, using variables provided by the follow-up and its incident. For example:
 
 * `{{ title }}` represents the incident's title
 * `{{ severity }}` represents the incident's severity
 * `{{ follow_up_description }}` represents the follow-up's description
 * `{{ follow_up_due_date }}` represents the follow-ups due date
 
-You can also define how status is mapped on each side.
+You can also define how status is mapped on each side. Follow-ups have two statuses: **Open** and **Done**.
 
 After defining an export template, you can configure Incident Management to automatically export all follow-ups using the template.
 
