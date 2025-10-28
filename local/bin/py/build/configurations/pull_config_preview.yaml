@@ -505,9 +505,10 @@
               - 'docs/configuration_public.md'
             options:
               dest_path: '/containers/datadog_operator/'
-              file_name: 'configuration_public.md'
+              file_name: 'config.md'
               front_matters:
-                title: Datadog Operator Configuration
+                title: Configure the Datadog Operator
+                description: Configure Datadog Agent deployment options using DatadogAgent custom resource specifications and example manifests
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/eokye/public_config_doc/docs/configuration_public.md"]
       - repo_name: dd-trace-rb
         contents:
