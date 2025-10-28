@@ -23,7 +23,7 @@ When building an agent, choose a template to get started. Templates come with pr
 
 {{< img src="/actions/agents/blank-new-agent.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
-## The Agents dashboard
+## Agents dashboard
 
 You can create a new agent from the [Agents][1] page. The page lists information about existing agents, including the following:
 - Agent Name
