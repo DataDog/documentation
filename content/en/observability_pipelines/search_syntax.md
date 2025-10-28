@@ -8,14 +8,14 @@ private: true
 
 When you add a processor to a pipeline, you can filter logs to process only a defined subset. This document goes over the following information:
 
-- [Free text search](#free-text-search): to search the `message` field.
-- [Attribute search](#attribute-search): to search attribute keys and values.
-- [Arrays](#arrays): to search within an array of nested values.
-- [Boolean operators](#boolean-operators).
-- [Special characters and spaces that must be escaped](#escape-special-characters-and-spaces).
-- [Wildcards](#wildcards).
+- [Free text search](#free-text-search): to search the `message` field
+- [Attribute search](#attribute-search): to search attribute keys and values
+- [Arrays](#arrays): to search within an array of nested values
+- [Boolean operators](#boolean-operators)
+- [Special characters and spaces that must be escaped](#escape-special-characters-and-spaces)
+- [Wildcards](#wildcards)
 
-**Note**: Worker version 2.11 and newer uses an upgraded search syntax. After you upgrade the Worker to version 2.11, you might need to update your filter queries to match the new syntax. See [Upgrade to the New Search Syntax](/observability_pipelines/guide/upgrade_to_the_next_search_syntax/) for more information.
+**Note**: Worker version 2.11 and newer uses an upgraded search syntax. After you upgrade the Worker to version 2.11, you might need to update your filter queries to match the new syntax. See [Upgrade Your Filter Queries to the New Search Syntax][1] for more information.
 
 ## Search syntax
 
@@ -42,7 +42,7 @@ The following are free text search examples:
 : **Note**: The message must contain both `hello` and `world` to match.
 
 `"hello world"`
-: Searches for a sequence of words. For example `"hello world"`, `"hello-world"`, and `"Hello, world"` are all matches.
+: Searches for a sequence of words. For example, `"hello world"`, `"hello-world"`, and `"Hello, world"` are all matches.
 
 ### Attribute search
 
@@ -64,17 +64,16 @@ Here are some attribute search syntax examples and logs that match the syntax:
 `http.url:/api-v1/*`
 : Matches logs containing a value in the `http.url` attribute that starts with `/api-v1/`.
 
-`http.status_code:[200 TO 299] http.url_details.path:/api-v1/*`
-: Matches logs containing an `http.status_code` value that is greater than or equal to `200` and less than or equal to `299`, and containing a value in the `http.url_details.path` attribute that start with `/api-v1/`.
-
 `http.status:[200 TO 299]`
 : Matches logs containing an `http.status` value that is greater than or equal to `200` and less than or equal to `299`.
-: **Notes**:
-: - `[..]` Square brackets mean the ranges are inclusive.
-: - Ranges can be used across any attribute.
+: **Notes**:<br>- `[..]` Square brackets mean the ranges are inclusive.<br>- Ranges can be used across any attribute.
 
 `http.status:{200 TO 299}`
-: Matches logs containing an `http.status` value that is greater than `200` or less than `299`. **Notes**: - `{..}` Curly brackets mean the ranges are exclusive. - Ranges can be used across any attribute.
+: Matches logs containing an `http.status` value that is greater than `200` or less than `299`.
+: **Notes**:<br>- `{..}` Curly brackets mean the ranges are exclusive.<br>- Ranges can be used across any attribute.
+
+`http.status_code:[200 TO 299] http.url_details.path:/api-v1/*`
+: Matches logs containing both:<br>- An `http.status_code` value that is greater than or equal to `200` and less than or equal to `299`<br>- A value in the `http.url_details.path` attribute that start with `/api-v1/`.
 
 `"service.status":disabled`
 : Matches logs with `"service.status": "disabled"`. This filter syntax searches for a literal `.` in the attribute key.
@@ -125,7 +124,7 @@ The follow are example queries that use Boolean operators:
 : Only matches logs from those specific hosts.
 
 `Hello AND World`
-: Searches for `hello` and `world`. For example, "hello beautiful world" is a match.
+: Searches for `hello` and `world`. For example, `"hello beautiful world"` is a match.
 : This query can also be written as: `Hello world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
@@ -140,13 +139,16 @@ The follow are example queries that use Boolean operators:
 
 ## Escape special characters and spaces
 
-The following characters are considered special and must be escaped with `\`: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `#`, and spaces.
+The following characters are considered special and must be escaped with a backslash (`\`): 
+
+`-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `#`, and spaces.
 
 **Notes**:
 
 - `/` is not considered a special character and doesn't need to be escaped.
 - You can search for special characters inside of an attribute. See [Search an attribute that contains special characters](#search-an-attribute-that-contains-special-characters).
-- If you want to match logs that contain the special character `!` in the `message` field, use the attribute search syntax: `message:*!*`. **Note**: You cannot use free text search queries to filter for log messages with special characters.
+- If you want to match logs that contain the special character `!` in the `message` field, use the attribute search syntax: `message:*!*`.
+    - **Note**: You cannot use free text search queries to filter for log messages with special characters.
 
 ### Search an attribute that contains special characters
 
@@ -239,3 +241,5 @@ If you use the filter query `Event.EventData.Data.Name:ObjectServer`, the above 
 #### Search for special characters or escaped characters
 
 When searching for an attribute that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`, use the syntax: `my_attribute:hello?world`.
+
+[1]: /observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/
