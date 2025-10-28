@@ -29,9 +29,9 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 {{< img src="datadog_cloudcraft/cloudcraft_with_azure_tab_2.mp4" alt="Cloudcraft in Datadog video" video=true >}}
 
-<div class="alert alert-info">Cloudcraft in Datadog is only available for AWS and Azure accounts.</a></div>
+<div class="alert alert-info">Cloudcraft in Datadog is only available for AWS and Azure accounts.</div>
 
-### Prerequisites
+## Prerequisites
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -45,9 +45,11 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
-<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+<div class="alert alert-warning">
+Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.
+</div>
 
-{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}
 
 [2]: /integrations/amazon_web_services/#resource-collection
 [3]: /security/cloud_security_management
@@ -72,8 +74,6 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
   - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
 [3]: /security/cloud_security_management
-[5]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/SecurityAudit.html
-[6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
 [10]: /datadog_cloudcraft/overlays#security
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
@@ -84,7 +84,6 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Getting started
 
 To get started using Cloudcraft, use the following steps:
@@ -93,7 +92,7 @@ To get started using Cloudcraft, use the following steps:
 
 **Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags before it can be displayed.
 
-{{< img src="datadog_cloudcraft/getting_started.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}</div>
+{{< img src="datadog_cloudcraft/getting_started.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
 <div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Azure Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions.
 </div>
