@@ -28,7 +28,9 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 - Single sign-on to Datadog (recommended)
 - Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.
 
-Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. To configure SCIM, see the documentation for your IdP:
+Datadog implements the SCIM server protocol. Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. Other identity providers may work, but are not explicitly supported.
+
+To configure SCIM for supported identity providers, see the documentation for your IdP:
 - [Microsoft Entra ID][2]
 - [Okta][3]
 
