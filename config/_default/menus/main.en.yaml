@@ -2520,7 +2520,7 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
       weight: 903
-    - name: Statuspage
+    - name: Atlassian Statuspage
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
