@@ -39,7 +39,7 @@ Hover over an agent for options to clone or delete it. You can also enable the *
 
 ### Build an agent from a blueprint
 
-Blueprints are helpful starter agents that cover common use cases. They come loaded with instructions for the agent's behavior and helpful tools from the Action Catalog. Blueprints also showcase best practices for setting up agent functionality.
+Blueprints are starter agents that cover common use cases. They come loaded with instructions for the agent's behavior and related tools from the Action Catalog. Blueprints also showcase best practices for setting up agent functionality.
 
 To build an agent from a blueprint:
 
