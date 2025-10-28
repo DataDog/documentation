@@ -19,7 +19,7 @@ further_reading:
 1. **Install the Datadog .NET tracer** in your Dockerfile.
 
    {{< tabs >}}
-   {{% tab "ManyLinux (glibc)" %}}
+   {{% tab "Standard Linux (glibc)" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ARG TRACER_VERSION
 RUN curl -L -s "https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm_${TRACER_VERSION}_amd64.deb" --output datadog-dotnet-apm.deb && \

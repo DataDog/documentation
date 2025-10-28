@@ -23,7 +23,7 @@ further_reading:
    Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
 
    {{< tabs >}}
-   {{% tab "ManyLinux (glibc)" %}}
+   {{% tab "Standard Linux (glibc)" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
     chmod +x /app/dotnet.sh && /app/dotnet.sh
