@@ -18,7 +18,7 @@ SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plan
 
 ## Overview
 
-The System for Cross-domain Identity Management, or [SCIM][9], is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
+The System for Cross-domain Identity Management, or [SCIM][9], is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in-sync with your organization's identity provider (IdP).
 
 ### Supported capabilities
 
