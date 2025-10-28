@@ -28372,6 +28372,7 @@ paths:
         - aws_configuration_read
   /api/v1/integration/aws/event_bridge:
     delete:
+      deprecated: true
       description: Delete an Amazon EventBridge source.
       operationId: DeleteAWSEventBridgeSource
       requestBody:
@@ -28413,6 +28414,7 @@ paths:
         permissions:
         - manage_integrations
     get:
+      deprecated: true
       description: Get all Amazon EventBridge sources.
       operationId: ListAWSEventBridgeSources
       parameters: []
@@ -28445,6 +28447,7 @@ paths:
         operator: OPEN
         permissions: []
     post:
+      deprecated: true
       description: Create an Amazon EventBridge source.
       operationId: CreateAWSEventBridgeSource
       requestBody:
