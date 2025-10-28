@@ -95,7 +95,7 @@ Focus on clear communication, structured processes, and continuous improvement o
 
 ### Tools
 
-Click **+ Add Tool** to add actions from our [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action. 
+Click **Add Tool** to add actions from the [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action. 
 
 ### MCP Server
 
