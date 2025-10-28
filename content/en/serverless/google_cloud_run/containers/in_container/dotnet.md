@@ -23,14 +23,14 @@ further_reading:
    Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
 
    {{< tabs >}}
-   {{% tab "Linux/AMD64" %}}
+   {{% tab "ManyLinux (glibc)" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
     chmod +x /app/dotnet.sh && /app/dotnet.sh
 {{< /code-block >}}
    {{% /tab %}}
 
-   {{% tab "Alpine" %}}
+   {{% tab "Alpine (musl)" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
 ARG TRACER_VERSION
