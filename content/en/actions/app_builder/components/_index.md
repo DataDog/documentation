@@ -657,6 +657,90 @@ Displays property and value pairs in JSON format.
 
 
 
+{{% collapse-content title="React Renderer" level="h3" %}}
+React Renderer components have the following properties.
+
+### General
+
+React Component Definition
+: The code that will be executed to create a React component.<br>
+**Example**:<br>
+:    ```js
+     const App = (props) => {
+        // Local component state
+        const [localState, setLocalState] = React.useState(0);
+  
+        // Access shared state from props
+        const { count = 0 } = props.state;
+  
+        const incrementShared = () => {
+        // Update shared state that persists outside component
+        
+      props.setComponentState({...props.state, count: count + 1});
+      };
+  
+        return (
+          <div>
+            <h3>Shared Count: {count}</h3>
+            <button onClick={incrementShared}>Increment Shared</button>
+          </div>
+      );
+     }
+      return App;
+     ```
+
+Component Input Props
+: The props that will be passed to the React component and can be accessed in the props object of the component.<br>
+**Example**:<br>
+:    ```json
+     ${{
+        queryData: query0.outputs,
+        name: global?.user?.name,
+        state: self.state,
+      }}
+     ```
+
+Initial Component State
+: Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data via <code>props.state</code>.<br>
+**Example**:<br>
+:    ```json
+     ${{
+        count: 0,
+        items: [],
+        isLoading: false,
+        selectedId: null,
+      }}
+     ```
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+Event
+: **Values**: set component state, callback function
+
+Function Name
+: **Value**: <code>props.customFunctionName</code>
+
+Reaction
+: **Values**: close modal, custom, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Relationships
+
+Displays data dependencies between React Renderer and components in the app.
+{{% /collapse-content %}}
+
+
+
 {{% collapse-content title="Search" level="h3" %}}
 Search components have the following properties.
 
