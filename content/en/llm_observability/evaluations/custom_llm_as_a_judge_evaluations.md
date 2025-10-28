@@ -83,55 +83,134 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-You can configure Reasoning and Assessment Criteria directly in the UI when defining your evaluation schema.
+For OpenAI or Azure OpenAI models, configure [Structured Output](#structured-output).
 
+For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
+
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
    - **Score**: Numeric ratings (for example, a 1–5 scale for helpfulness)
    - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
+
+2. Optionally, select **Enable Reasoning**. This configures the LLM judge to provide a short justification for its decision (for example, why a score of 8 was given). Reasoning helps you understand how and why evaluations are made, and is particularly useful for auditing subjective metrics like tone, empathy, or helpfulness. Adding reasoning can also [make the LLM judge more accurate](https://arxiv.org/abs/2504.00050).
+   
+3. Edit a JSON schema that defines your evaluations output type:
+
+{{< tabs >}}
+{{% tab "Boolean" %}}
+For the **Boolean** output type, edit the `description` field to further explain what true and false mean in your use case.
+{{% /tab %}}
+
+{{% tab "Score" %}}
+For the **Score** output type:
+- Set a `min` and `max` score for your evaluation.
+- Edit the `description` field to further explain the scale of your evaluation.
+{{% /tab %}}
+{{% tab "Categorical" %}}
+For the **Categorical** output type:
+- Add or remove categories by editing the JSON schema.
+- Edit category names.
+- Edit the `description` field of categories to further explain what they mean in the context of your evaluation.
+
+An example schema for a categorical evaluation:
+
+```
+{
+    "name": "categorical_eval",
+    "schema": {
+        "type": "object",
+        "required": [
+            "categorical_eval",
+            "reasoning"
+        ],
+        "properties": {
+            "categorical_eval": {
+                "type": "string",
+                "anyOf": [
+                    {
+                        "const": "budgeting_question",
+                        "description": "The user is asking a question about their budget. The answer can be directly determined by looking at their budget and spending."
+                    },
+                    {
+                        "const": "budgeting_request",
+                        "description": "The user is asking to change something about their budget. This should involve an action that changes their budget."
+                    },
+                    {
+                        "const": "budgeting_advice",
+                        "description": "The user is asking for advice on their budget. This should not require a change to their budget, but it should require an analysis of their budget and spending."
+                    },
+                    {
+                        "const": "general_financial_advice",
+                        "description": "The user is asking for general financial advice which is not directly related to their specific budget. However, this can include advice about budgeting in general."
+                    },
+                    {
+                        "const": "unrelated",
+                        "description": "This is a catch-all category for things not related to budgeting or financial advice."
+                    }
+                ]
+            },
+            "reasoning": {
+                "type": "string",
+                "description": "Describe how you decided the category"
+            }
+        },
+        "additionalProperties": false
+    },
+    "strict": true
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+4. Configure **Assessment Criteria**.
+   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+
+{{< tabs >}}
+{{% tab "Boolean" %}}
+Select **True** to mark a result as "Pass", or **False** to mark a result as "Fail".
+{{% /tab %}}
+
+{{% tab "Score" %}}
+Define numerical thresholds to determine passing performance.
+{{% /tab %}}
+{{% tab "Categorical" %}}
+Select the categories that should map to a passing state. For example, if you have the categories `Excellent`, `Good`, and `Poor`, where only `Poor` should correspond to a failing state, select `Excellent` and `Good`.
+{{% /tab %}}
+{{< /tabs >}}
+
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock)" level="h4" expanded="true" id="keyword-search-output" %}}
+1. Select the **Boolean** output type.
    <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
 
-2. Add Reasoning
+2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively. 
 
-When **Enable Reasoning** is checked, the LLM-as-a-Judge provides a short justification for its decision (for example, why a score of 8 was given).
-This helps you understand how and why evaluations are made, particularly useful for auditing subjective metrics like tone, empathy, or helpfulness.
+   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords. 
 
-Adding reasoning is also helpful to [make the LLM judge more accurate][5].
-   
-3. Define the structure of your output.
+   For example, if you set:
 
-   {{< tabs >}}
-   {{% tab "OpenAI" %}}
-   {{% llm-eval-output-json %}}
-   {{% /tab %}}
+   - **True keywords**: Yes, yes
+   - **False keywords**: No, no
 
-   {{% tab "Azure OpenAI" %}}
-   {{% llm-eval-output-json %}}
-   {{% /tab %}}
+   Then your system prompt should include something like `Respond with "yes" or "no"`.
 
-   {{% tab "Anthropic" %}}
-   {{% llm-eval-output-keyword %}}
-   {{% /tab %}}
+3. For **Assessment Criteria**:
+   - Select **True** to mark a result as "Pass"
+   - Select **False** to mark a result as "Fail"
 
-   {{% tab "Amazon Bedrock" %}}
-   {{% llm-eval-output-keyword %}}
-   {{% /tab %}}
-   {{< /tabs >}}
+   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+{{% /collapse-content %}}
 
-4. Configure Assessment Criteria
-   Assessment Criteria determines how results are interpreted as Pass or Fail.
-   - For Boolean: Select **True** to mark a result as "Pass" and **False** to mark a result as "Fail".
-   - For Score: Define numerical thresholds to determine passing performance
-   - For Categorical: Map specific label values to Pass or Fail states (for example, "Excellent" and "Good" = Pass, "Poor" = Fail).
+{{< img src="llm_observability/evaluations/custom_llm_judge_5.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
 
-This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+### Define the evaluation scope: Filtering and sampling
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_5.png" alt="Configuring the LLM output including reasoning and assessment criteria." style="width:100%;" >}}
-
-### Filtering and sampling
-
-Under Evaluation Scope, define where and how your evaluation runs. This helps control both coverage (which spans are included) and cost (how many spans are sampled).
+Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
       - **Traces**: Evaluate only root spans
@@ -183,7 +262,7 @@ You can:
 ## Best practices for reliable custom evaluations
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
-- **Enable reasoning**  when you need explainable decisions and to improve the accuracy on complex reasoning tasks.
+- **Enable reasoning** when you need explainable decisions and to improve the accuracy on complex reasoning tasks.
 - **Iterate**: Run, inspect outputs, and refine your prompt.
 - **Validate**: Periodically check evaluator accuracy using sampled traces.
 - **Document your rubric**: Clearly define what "Pass" and "Fail" mean to avoid drift over time.
