@@ -8,6 +8,10 @@ aliases:
 - /integrations/guide/azure-troubleshooting/
 - /integrations/guide/powered-down-azure-vm-on-infrastructure-list/
 - /integrations/guide/azure-count-metric/
+- /integrations/guide/azure-status-metric
+- /integrations/faq/azure-vm-status-is-not-reporting
+- /integrations/faq/azure-status-metric
+- /integrations/faq/azure-count-metric
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
