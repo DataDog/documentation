@@ -22,15 +22,15 @@ Worker versions 2.11 and newer use an updated search syntax. This document cover
 
 See the steps based on whether you:
 
-- [Created the pipeline in the Pipeline UI](#created-the-pipeline-in-pipeline-ui)
+- [Created the pipeline in the UI](#created-the-pipeline-in-the-ui)
 - [Created the pipeline using the API or Terraform](#created-the-pipeline-using-the-api-or-terraform)
 
-### Created the pipeline in Pipeline UI
+### Created the pipeline in the UI
 
-If you created your pipeline using the Pipeline UI:
+If you created your pipeline in the UI:
 
 1. [Upgrade to Observability Pipelines Worker][1] version 2.11.
-1. Navigate to the [Pipeline UI][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
+1. Navigate to the [Pipeline page][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
 1. On the pipeline editor page, by default the `Use legacy search syntax` box is checked because your pipeline is running the old search syntax of Worker 2.10 or older.
 {{< img src="observability_pipelines/guide/legacy_search_checkbox.png" alt="The pipelines editor showing the legacy search checkbox selected" style="width:100%;" >}}
 1. After you've updated all queries in that pipeline, uncheck the `Use legacy search syntax` box and deploy your pipeline.
