@@ -7311,81 +7311,81 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 20000
-    - name: Browser Monitoring
-      url: real_user_monitoring/browser/
-      parent: rum
-      identifier: rum_browser
-      weight: 1
-    - name: Setup
-      url: real_user_monitoring/browser/setup/
-      parent: rum_browser
-      identifier: rum_browser_setup
-      weight: 101
-    - name: Client-Side
-      url: real_user_monitoring/browser/setup/client
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_client
-      weight: 1101
-    - name: Auto-Instrumentation
-      url: real_user_monitoring/browser/setup/server
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_server
-      weight: 1102
-    - name: Advanced Configuration
-      url: real_user_monitoring/browser/advanced_configuration/
-      parent: rum_browser
-      identifier: rum_advanced
-      weight: 102
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
-      parent: rum_browser
-      identifier: rum_data_collected
-      weight: 103
-    - name: Monitoring Page Performance
-      url: real_user_monitoring/browser/monitoring_page_performance/
-      parent: rum_browser
-      identifier: page_performance
-      weight: 104
-    - name: Optimizing Performance
-      url: real_user_monitoring/browser/optimizing_performance/
-      parent: rum_browser
-      identifier: rum_optimizing_performance
-      weight: 105
-    - name: Monitoring Resource Performance
-      url: real_user_monitoring/browser/monitoring_resource_performance/
-      parent: rum_browser
-      identifier: resource_performance
-      weight: 106
-    - name: Collecting Browser Errors
-      url: real_user_monitoring/browser/collecting_browser_errors/
-      parent: rum_browser
-      identifier: collect_errors
-      weight: 107
-    - name: Tracking User Actions
-      url: real_user_monitoring/browser/tracking_user_actions/
-      parent: rum_browser
-      identifier: track_actions
-      weight: 108
-    - name: Frustration Signals
-      url: real_user_monitoring/browser/frustration_signals/
-      parent: rum_browser
-      identifier: rum_frustration_signals
-      weight: 109
-    - name: Error Tracking
-      url: real_user_monitoring/browser/error_tracking/
-      parent: rum_browser
-      identifier: rum_browser_error_tracking
-      weight: 110
-    - name: Troubleshooting
-      url: real_user_monitoring/browser/troubleshooting/
-      parent: rum_browser
-      identifier: troubleshooting
-      weight: 111
-    - name: Mobile and TV Monitoring
+    - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
       identifier: application_monitoring
       weight: 2
+    - name: Browser
+      url: real_user_monitoring/application_monitoring/browser/
+      parent: application_monitoring
+      identifier: rum_browser
+      weight: 200
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/browser/setup/
+      parent: rum_browser
+      identifier: rum_browser_setup
+      weight: 101
+    - name: Client-Side
+      url: real_user_monitoring/application_monitoring/browser/setup/client
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_client
+      weight: 1101
+    - name: Auto-Instrumentation
+      url: real_user_monitoring/application_monitoring/browser/setup/server
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_server
+      weight: 1102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/browser/advanced_configuration/
+      parent: rum_browser
+      identifier: rum_advanced
+      weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
+      weight: 103
+    - name: Monitoring Page Performance
+      url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
+      parent: rum_browser
+      identifier: page_performance
+      weight: 104
+    - name: Optimizing Performance
+      url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
+      parent: rum_browser
+      identifier: rum_optimizing_performance
+      weight: 105
+    - name: Monitoring Resource Performance
+      url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
+      parent: rum_browser
+      identifier: resource_performance
+      weight: 106
+    - name: Collecting Browser Errors
+      url: real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+      parent: rum_browser
+      identifier: collect_errors
+      weight: 107
+    - name: Tracking User Actions
+      url: real_user_monitoring/application_monitoring/browser/tracking_user_actions/
+      parent: rum_browser
+      identifier: track_actions
+      weight: 108
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/browser/frustration_signals/
+      parent: rum_browser
+      identifier: rum_frustration_signals
+      weight: 109
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/browser/error_tracking/
+      parent: rum_browser
+      identifier: rum_browser_error_tracking
+      weight: 110
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/browser/troubleshooting/
+      parent: rum_browser
+      identifier: troubleshooting
+      weight: 111
     - name: Android and Android TV
       url: real_user_monitoring/application_monitoring/android
       parent: application_monitoring

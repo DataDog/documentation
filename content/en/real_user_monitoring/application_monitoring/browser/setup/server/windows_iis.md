@@ -5,8 +5,10 @@ beta: true
 code_lang: windows_iis
 type: multi-code-lang
 code_lang_weight: 6
+aliases:
+  - /real_user_monitoring/browser/setup/server/windows_iis
 further_reading:
-- link: '/real_user_monitoring/browser/setup/server/'
+- link: '/real_user_monitoring/application_monitoring/browser/setup/server/'
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
@@ -110,7 +112,7 @@ To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the *
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/server/#limitations
+[1]: /real_user_monitoring/application_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/

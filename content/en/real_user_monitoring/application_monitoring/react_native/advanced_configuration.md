@@ -635,7 +635,7 @@ See [Monitor hybrid React Native applications][18].
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /getting_started/tagging/#define-tags
 [6]: /getting_started/site/
-[7]: /real_user_monitoring/browser/frustration_signals/
+[7]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
 [8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
