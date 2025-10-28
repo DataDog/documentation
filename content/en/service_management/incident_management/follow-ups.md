@@ -50,20 +50,15 @@ When Datadog exports an incident follow-up to Case Management, it creates a case
 
 **Status syncing:** Datadog syncs status between the follow-up and the case **in both directions**, following the mapping you defined in the export template.
 
-**Assignee syncing:** Datadog sync assignee between the follow-up and the case **in both directions**. Because a case can have only one assignee, only the first assignee of the follow-up is added to it.
-
+**Assignee syncing:** Datadog syncs assignee between the follow-up and the case **in both directions**. Because a case can have only one assignee, only the first assignee of the follow-up is added to it.
 
 ### Jira exports
 
-To export follow-ups to Jira, you must first install the Jira integration through the [Jira Integration tile][3]. For more information, see the [Jira integration][4] documentation.
-
-To define a Jira export template, you must first install and set up the Jira integration for Datadog.
+To export follow-ups to Jira, you must first install the Jira integration in your Datadog organization through the [Jira Integration tile][3]. For more information, see the [Jira integration][4] documentation.
 
 When Datadog exports an incident follow-up to Jira, it creates a Jira issue for the follow-up in the project you selected in the export template.
 
 **Status syncing:** When you close or open a incident follow-up, Datadog automatically syncs the status of connected Jira issue based on the mapping you defined in the export template. **This is a one-way sync.**
-
-Organizations that need two-way sync should export to a Case Management project that is configured for two-way sync with a Jira project.
 
 ## Further reading
 
