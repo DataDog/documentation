@@ -385,7 +385,7 @@ Both the `run_live` and `run_async` methods are supported.
 [61]: https://google.github.io/adk-docs/agents/
 [62]: https://google.github.io/adk-docs/tools
 [63]: https://google.github.io/adk-docs/agents/llm-agents/#code-execution
-[64]: https://python.langchain.com/docs/concepts/#prompt-templates
+[64]: https://docs.langchain.com/langsmith/manage-prompts-programmatically#pull-a-prompt
 
 {{% /tab %}}
 {{% tab "Node.js" %}}

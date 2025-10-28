@@ -69,7 +69,7 @@ Multisource Querying uses the `all.cost` metric, which combines all individual c
 
 ### Out-of-the-box tags
 
-Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags shared across each integration.
+Cloud Cost Management collects tags for the AWS, Azure, Google Cloud, and Oracle Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags shared across each integration.
 
 | Tag Name | Tag Description |
 |---|---|

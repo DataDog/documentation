@@ -15,7 +15,9 @@ This feature is in Preview. If you have any feedback, contact <a href="/help/">D
 
 ## Overview
 
-The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
+The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys.
+
+<div class="alert alert-danger">Only metadata sent through the Datadog Exporter will populate the Infrastructure Host List. Metadata sent using the direct OTLP ingest endpoint does not support this feature.</div>
 
 Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
