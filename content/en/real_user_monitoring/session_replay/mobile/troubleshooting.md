@@ -65,4 +65,5 @@ At any time during the lifetime of the host app, it's possible to change the tra
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /real_user_monitoring/session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking
