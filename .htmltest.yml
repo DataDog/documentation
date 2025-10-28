@@ -1,8 +1,8 @@
 DirectoryPath: "public"
 
 # Speeds things up but may cause errors in some cases, the two other settings limit the amount of docs and links processed at one time
-TestFilesConcurrently: true
-DocumentConcurrencyLimit: 10 #defaults to 128
+TestFilesConcurrently: false
+DocumentConcurrencyLimit: 2 #defaults to 128
 HTTPConcurrencyLimit: 4 #defaults to 16
 
 # General config
