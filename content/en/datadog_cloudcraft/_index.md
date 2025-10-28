@@ -61,8 +61,12 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 {{% tab "Azure" %}}
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
-- Resource collection must be enabled for your Azure accounts. How to enable for Azure?
-- What are the other list of permissions?
+- [Resource collection][14] must be enabled for your Azure accounts:
+  1. Navigate to [**Integrations > Azure**][15].
+  2. Select the App Registration that contains your Azure subscription.
+  3. On the Resource Collection tab, enable the **Resource Collection** toggle.
+  4. Optionally, if the subscription hasn't been added to Datadog yet, select **+ Add New App Registration** to add the account to Datadog first.
+- You need the Datadog Admin Role, or any role with the `azure_configurations_manage` permission. For more information, see the [Azure setup][16] instructions.
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
   - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
@@ -73,6 +77,9 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 [10]: /datadog_cloudcraft/overlays#security
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
+[14]: /getting_started/integrations/azure/
+[15]: https://app.datadoghq.com/integrations?search=azure
+[16]: /integrations/guide/azure-manual-setup/?tab=azurecli#setup
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -86,7 +93,7 @@ To get started using Cloudcraft, use the following steps:
 
 **Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags before it can be displayed.
 
-{{< img src="datadog_cloudcraft/getting_started_4.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}</div>
+{{< img src="datadog_cloudcraft/getting_started.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}</div>
 
 <div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Azure Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions.
 </div>
