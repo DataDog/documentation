@@ -99,7 +99,7 @@ Click **+ Add Tool** to add actions from our [Action Catalog][7] for the agent t
 
 ### MCP Servers
 
-Click the toggle button to enable [MCP (Model Context Protocol)][8]. MCP servers provide additional tools and capabilities that the agent can use to interact with external systems.
+Click the toggle button to enable the [Datadog MCP Server][8]. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
 
 ## Add an agent action
 
