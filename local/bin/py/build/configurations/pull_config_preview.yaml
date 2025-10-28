@@ -499,6 +499,16 @@
               front_matters:
                 title: Migrate DatadogAgent CRDs to v2alpha1
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/v2alpha1_migration.md"]
+          - action: pull-and-push-file
+            branch: eokye/public_config_doc
+            globs:
+              - 'docs/configuration_public.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'configuration_public.md'
+              front_matters:
+                title: Datadog Operator Configuration
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/eokye/public_config_doc/docs/configuration_public.md"]
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file
