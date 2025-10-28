@@ -42,9 +42,6 @@ If your pipeline was created using the public API or Terraform:
 
 <div class="alert alert-warning">You <b>must</b> set <code>use_legacy_search_syntax</code> to <code>false</code> when you update your queries. If <code>use_legacy_search_syntax</code> is unpopulated, it defaults to <code>true</code> in the Worker.</div>
 
-**Note**: 
-
-
 ## What's new in the updated search syntax
 
 The following table lists the differences between the legacy and new search syntax:
