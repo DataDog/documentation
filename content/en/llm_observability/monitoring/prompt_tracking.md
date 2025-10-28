@@ -1,11 +1,12 @@
 ---
 title: Prompt Tracking
+description: Use Prompt Tracking to track your prompt templates and versions.
+private: true
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
   Prompt Tracking for LLM Observability is in Preview. For access, <a href="/help">contact Datadog Support</a>.
 {{< /callout >}}
-
 
 In Datadog's LLM Observability, the _Prompt Tracking_ feature links prompt templates and versions to LLM calls. Prompt Tracking works alongside LLM Observability's traces, spans, and Playground.
 
@@ -47,7 +48,7 @@ View your app in LLM Observability and select **Prompts** on the left. The _Prom
 
 Click on a prompt to open a detailed side-panel view that features information about version activity and various metrics. You can also see a diff view of two versions, open Trace Explorer pre-filtered to spans that use a selected version, or start a Playground session pre-populated with the selected version's template and variables.
 
-{{< img src="llm_observability/prompt_tracking_trace_explorer.png" alt="Prompts view for an app in LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/prompt_tracking_trace_explorer2.png" alt="Prompts view for an app in LLM Observability." style="width:100%;" >}}
 
 You can use the LLM Observability Trace Explorer to locate requests by prompt usage. You can use a prompt's name, ID, and version as facets for both trace-level and span-level search. Click any LLM span to see the prompt that generated it.
 
