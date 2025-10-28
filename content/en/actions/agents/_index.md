@@ -64,7 +64,7 @@ When configuring your agent, you have the following options for customization.
 
 ### Model
 
-Click the dropdown menu to choose your GPT model. Current options include [GPT-4o][3], [GPT-4.1][4], and [GPT-5][5]. You can compare these models using [OpenAI's tool comparison tool][6].
+Click the dropdown menu to choose a GPT model. You can compare these models using [OpenAI's comparison tool][6].
 
 ### Instructions
 
