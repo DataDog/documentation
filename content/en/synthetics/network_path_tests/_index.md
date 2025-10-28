@@ -1,5 +1,5 @@
 ---
-title: Network Path Tests
+title: Network Path Testing
 description: Analyze global Network Paths with managed locations.
 aliases:
 further_reading:
@@ -33,8 +33,8 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    2. **Destination service**: The label displayed for the destination host in the Network Path visualization.  
    3. **Max TTL**: Maximum time-to-live (maximum number of hops) for outgoing probe packets. Defaults to 30 hops.  
    4. **E2E Queries**: Number of packets sent to the destination to measure packet loss, latency, and jitter. Defaults to 50.
-   5. **Traceroute Queries**: Number of traceroute path tracings to perform. Results are aggregated in each test run details panel.  
-   6. **TCP traceroute strategy** (TCP tests only): Choose between Selective Acknowledgement (SACK) and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic. Defaults to 3.
+   5. **Traceroute Queries**: Number of traceroute path tracings to perform. Results are aggregated in each test run details panel. Defaults to 3.
+   6. **TCP traceroute strategy** (TCP tests only): Choose between Selective Acknowledgement (SACK) and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic.
 4. Optional: Add **Tags** to your test, including environment tags. Use tags to filter your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][1].
 
   {{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
@@ -55,6 +55,10 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    {{% managed-locations %}}
 
 7. Set the **test frequency** to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
+
+8. [Define alert conditions][4] and [configure the test monitor][5] for your Network Path test.
+
+{{% synthetics-alerting-monitoring-network-path %}}
 
 ## View test results
 
@@ -82,3 +86,5 @@ To view details for a specific test run, click on a test run in the table at the
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /network_monitoring/network_path/path_view/
 [3]: /network_monitoring/network_path/path_view/#health-bar
+[4]: /synthetics/network_path_tests/#define-alert-conditions
+[5]: /synthetics/network_path_tests/#configure-the-test-monitor
