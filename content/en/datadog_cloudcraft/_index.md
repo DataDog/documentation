@@ -142,4 +142,4 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
-[14]: /account_management/rbac/
+[14]: /account_management/rbac/permissions/#infrastructure
