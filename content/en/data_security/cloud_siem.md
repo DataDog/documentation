@@ -41,7 +41,7 @@ Contact [support][2] if you want to prevent users from adding template variables
 
 ## Security rules can include triggering group-by values in the notification title
 
-In the **Describe your playbook** sections for [log detection rules][3] and [signal correlation rules][4], you can add group-by values in the notification title. For example, if you are grouping by `service`, the service name shows in the title. Uncheck **Include triggering group-by values in notification title** to prevent group-by values from appearing in the title.
+In the **Describe your playbook** sections for [detection rules][3], you can add group-by values in the notification title. For example, if you are grouping by `service`, the service name shows in the title. Uncheck **Include triggering group-by values in notification title** to prevent group-by values from appearing in the title.
 
 Contact [support][2] if you want to remove the **Include triggering group-by values in notification title** option.
 
@@ -49,14 +49,13 @@ Contact [support][2] if you want to remove the **Include triggering group-by val
 
 <div class="alert alert-warning">If your organization had HIPAA enabled in 2024 or earlier, reach out to <a href = "https://docs.datadoghq.com/help/">Datadog support</a> to enable webhooks for security rules.</a></div>
 
-Security notifications can be sent to [integrations][5], such as Jira, PagerDuty, and [webhooks][6]. Contact [support][2] to prevent users from sending notifications to third-party services using webhooks.
+Security notifications can be sent to [integrations][4], such as Jira, PagerDuty, and [webhooks][5]. Contact [support][2] to prevent users from sending notifications to third-party services using webhooks.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/notifications/variables/?tab=cloudsiem#template-variables
 [2]: /help/
-[3]: /security/cloud_siem/log_detection_rules/?tab=threshold#describe-your-playbook
-[4]: /security/cloud_siem/signal_correlation_rules#describe-your-playbook
-[5]: /security/notifications/#integrations
-[6]: /integrations/webhooks/
+[3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=threshold#describe-your-playbook
+[4]: /security/notifications/#integrations
+[5]: /integrations/webhooks/
