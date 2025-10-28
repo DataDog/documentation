@@ -35,11 +35,17 @@ Admins have read and write permissions by default. Standard users only have read
 1. Click the cog for the source or processor that you want to capture events for.
 1. Select **Capture and view events** in the side panel.
 1. Click **Capture**.
-1. Click **Confirm** to start capturing events.<br>**Note**: Capturing events usually takes up to 60 seconds. Captured data is visible to all users with view access, and is stored in the Datadog Platform for 72 hours.
+1. **Optional configurations**:
+    1. Enter a query to specify which events you want to capture. See [filter query](#filter-query-syntax) for more information.
+    1. Enter a capture duration (in seconds or minutes) for how long you want events to be captured for.
+    1. Select which Workers you want to capture events from. If no Workers are selected, a random Worker is chosen.
+1. Click **Capture** to start capturing events.<br>**Note**: Capturing events usually takes up to 60 seconds. Captured data is visible to all users with view access, and is stored in the Datadog Platform for 72 hours.
 1. After the capture is complete, click a specific capture event to see the data that was received and sent out. You can also search for specific events in the search bar. Use the dropdown menu next to the search bar to show events based on status (`MODIFIED`, `UNMODIFIED`, `DROPPED`, and `REDUCED`).
     - **Capture N** is the capture request number. For example, Capture N is `1` for the first capture and `6` for the sixth capture.
     - Data highlighted in red indicates data that was modified or dropped.
     - Data highlighted in green indicates data that was added.
+
+{{% observability_pipelines/processors/filter_syntax %}}
 
 ## Further reading
 
