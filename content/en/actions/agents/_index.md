@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://app.datadoghq.com/actions/agents" btn_hidden="false" header="Join the Preview!" >}}
-Agents is in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
+Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 ## Overview
