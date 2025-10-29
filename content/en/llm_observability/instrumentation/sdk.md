@@ -1343,7 +1343,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1400,6 +1400,7 @@ def similarity_search():
     return
 
 {{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1436,7 +1437,7 @@ The `annotationOptions` object can contain the following:
 
 `tags`
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][1].
+<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1492,8 +1493,6 @@ function similaritySearch () {
 similaritySearch = llmobs.wrap({ kind: 'retrieval', name: 'getRelevantDocs' }, similaritySearch)
 
 {{< /code-block >}}
-
-[1]: /getting_started/tagging/
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1985,13 +1984,13 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{< tabs >}}
 {{% tab "Python" %}}
-`LLMObs.submit_evaluation_for()` can be used to submit your custom evaluation associated with a given span.
+`LLMObs.submit_evaluation()` can be used to submit your custom evaluation associated with a given span.
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). To migrate, rename your <code>LLMObs.submit_evaluation_for</code> calls with <code>LLMObs.submit_evaluation</code>.</div>
 
 **Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][1] page in Datadog.
 
-The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
+The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="submit-evals-arguments" %}}
 `label`
@@ -2026,7 +2025,15 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][2].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment`
+: optional - _string_
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
@@ -2045,7 +2052,7 @@ def llm_call():
         tags = {'msg_id': msg_id}
     )
 
-    LLMObs.submit_evaluation_for(
+    LLMObs.submit_evaluation(
         span_with_tag_value = {
             "tag_key": "msg_id",
             "tag_value": msg_id
@@ -2055,6 +2062,8 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        assessment="fail",
+        reasoning="Malicious intent was detected in the user instructions."
     )
 
     # joining an evaluation to a span via span ID and trace ID
@@ -2066,12 +2075,14 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        assessment="fail",
+        reasoning="Malicious intent was detected in the user instructions."
     )
     return completion
 {{< /code-block >}}
 
 [1]: https://app.datadoghq.com/llm/settings/evaluations
-[2]: /getting_started/tagging/
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -2106,7 +2117,7 @@ The `evaluationOptions` object can contain the following:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Example
@@ -2150,7 +2161,7 @@ The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 
 `tags`
 : optional - _Map<String, Object>_
-<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Example

@@ -1624,26 +1624,31 @@ menu:
       parent: dashboards
       weight: 9
       identifier: dashboards_overlays
+    - name: Annotations
+      url: dashboards/annotations/
+      parent: dashboards
+      weight: 10
+      identifier: dashboards_annotations
     - name: Sharing
       identifier: dashboards_sharing
       url: dashboards/sharing/
       parent: dashboards
-      weight: 10
+      weight: 1001
     - name: Shared Dashboards
       identifier: dashboards_sharing_shared_dashboards
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
-      weight: 1001
+      weight: 1002
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1002
+      weight: 1003
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -6368,6 +6373,11 @@ menu:
       parent: cloud_siem
       identifier: siem_guides
       weight: 11
+    - name: Data Security
+      url: data_security/cloud_siem/
+      parent: cloud_siem
+      identifier: siem_data_security
+      weight: 12
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -7306,81 +7316,81 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 20000
-    - name: Browser Monitoring
-      url: real_user_monitoring/browser/
-      parent: rum
-      identifier: rum_browser
-      weight: 1
-    - name: Setup
-      url: real_user_monitoring/browser/setup/
-      parent: rum_browser
-      identifier: rum_browser_setup
-      weight: 101
-    - name: Client-Side
-      url: real_user_monitoring/browser/setup/client
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_client
-      weight: 1101
-    - name: Auto-Instrumentation
-      url: real_user_monitoring/browser/setup/server
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_server
-      weight: 1102
-    - name: Advanced Configuration
-      url: real_user_monitoring/browser/advanced_configuration/
-      parent: rum_browser
-      identifier: rum_advanced
-      weight: 102
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
-      parent: rum_browser
-      identifier: rum_data_collected
-      weight: 103
-    - name: Monitoring Page Performance
-      url: real_user_monitoring/browser/monitoring_page_performance/
-      parent: rum_browser
-      identifier: page_performance
-      weight: 104
-    - name: Optimizing Performance
-      url: real_user_monitoring/browser/optimizing_performance/
-      parent: rum_browser
-      identifier: rum_optimizing_performance
-      weight: 105
-    - name: Monitoring Resource Performance
-      url: real_user_monitoring/browser/monitoring_resource_performance/
-      parent: rum_browser
-      identifier: resource_performance
-      weight: 106
-    - name: Collecting Browser Errors
-      url: real_user_monitoring/browser/collecting_browser_errors/
-      parent: rum_browser
-      identifier: collect_errors
-      weight: 107
-    - name: Tracking User Actions
-      url: real_user_monitoring/browser/tracking_user_actions/
-      parent: rum_browser
-      identifier: track_actions
-      weight: 108
-    - name: Frustration Signals
-      url: real_user_monitoring/browser/frustration_signals/
-      parent: rum_browser
-      identifier: rum_frustration_signals
-      weight: 109
-    - name: Error Tracking
-      url: real_user_monitoring/browser/error_tracking/
-      parent: rum_browser
-      identifier: rum_browser_error_tracking
-      weight: 110
-    - name: Troubleshooting
-      url: real_user_monitoring/browser/troubleshooting/
-      parent: rum_browser
-      identifier: troubleshooting
-      weight: 111
-    - name: Mobile and TV Monitoring
+    - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
       identifier: application_monitoring
       weight: 2
+    - name: Browser
+      url: real_user_monitoring/application_monitoring/browser/
+      parent: application_monitoring
+      identifier: rum_browser
+      weight: 200
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/browser/setup/
+      parent: rum_browser
+      identifier: rum_browser_setup
+      weight: 101
+    - name: Client-Side
+      url: real_user_monitoring/application_monitoring/browser/setup/client
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_client
+      weight: 1101
+    - name: Auto-Instrumentation
+      url: real_user_monitoring/application_monitoring/browser/setup/server
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_server
+      weight: 1102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/browser/advanced_configuration/
+      parent: rum_browser
+      identifier: rum_advanced
+      weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
+      weight: 103
+    - name: Monitoring Page Performance
+      url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
+      parent: rum_browser
+      identifier: page_performance
+      weight: 104
+    - name: Optimizing Performance
+      url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
+      parent: rum_browser
+      identifier: rum_optimizing_performance
+      weight: 105
+    - name: Monitoring Resource Performance
+      url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
+      parent: rum_browser
+      identifier: resource_performance
+      weight: 106
+    - name: Collecting Browser Errors
+      url: real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+      parent: rum_browser
+      identifier: collect_errors
+      weight: 107
+    - name: Tracking User Actions
+      url: real_user_monitoring/application_monitoring/browser/tracking_user_actions/
+      parent: rum_browser
+      identifier: track_actions
+      weight: 108
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/browser/frustration_signals/
+      parent: rum_browser
+      identifier: rum_frustration_signals
+      weight: 109
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/browser/error_tracking/
+      parent: rum_browser
+      identifier: rum_browser_error_tracking
+      weight: 110
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/browser/troubleshooting/
+      parent: rum_browser
+      identifier: troubleshooting
+      weight: 111
     - name: Android and Android TV
       url: real_user_monitoring/application_monitoring/android
       parent: application_monitoring
@@ -7951,21 +7961,26 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 1002
+    - name: Operations Monitoring
+      url: real_user_monitoring/operations_monitoring/
+      parent: rum
+      identifier: rum_operations_monitoring
+      weight: 11
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 11
+      weight: 12
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 12
+      weight: 13
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 13
+      weight: 14
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics
@@ -8409,51 +8424,56 @@ menu:
       url: data_security/agent/
       parent: data_security
       weight: 1
-    - name: Tracing
-      identifier: data_security_tracing
-      url: /tracing/configure_data_security/
+    - name: Cloud SIEM
+      identifier: data_security_cloud_siem
+      url: data_security/cloud_siem/
       parent: data_security
       weight: 2
-    - name: Log Management
-      identifier: data_security_log_management
-      url: data_security/logs/
-      parent: data_security
-      weight: 3
     - name: Kubernetes
       identifier: data_security_kubernetes
       url: data_security/kubernetes
       parent: data_security
       weight: 4
-    - name: Synthetic Monitoring
-      identifier: data_security_synthetic_monitoring
-      url: data_security/synthetics/
+    - name: Log Management
+      identifier: data_security_log_management
+      url: data_security/logs/
       parent: data_security
-      weight: 5
+      weight: 4
     - name: Real User Monitoring
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: data_security
+      weight: 5
+    - name: Synthetic Monitoring
+      identifier: data_security_synthetic_monitoring
+      url: data_security/synthetics/
+      parent: data_security
       weight: 6
+    - name: Tracing
+      identifier: data_security_tracing
+      url: /tracing/configure_data_security/
+      parent: data_security
+      weight: 7
     - name: PCI Compliance
       identifier: data_security_pci_compliance
       url: data_security/pci_compliance/
       parent: data_security
-      weight: 7
+      weight: 8
     - name: HIPAA Compliance
       identifier: data_security_hipaa_compliance
       url: data_security/hipaa_compliance/
       parent: data_security
-      weight: 8
+      weight: 9
     - name: Data Retention Periods
       identifier: data_retention_periods
       url: data_security/data_retention_periods/
       parent: data_security
-      weight: 9
+      weight: 10
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/
       parent: data_security
-      weight: 9
+      weight: 11
     - name: Help
       url: help/
       pre: info-fill

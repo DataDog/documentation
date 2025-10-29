@@ -11,6 +11,9 @@ further_reading:
 - link: "/synthetics/troubleshooting/"
   tag: "Documentation"
   text: "Synthetic Monitoring Troubleshooting"
+- link: "https://www.datadoghq.com/blog/test-suites/"
+  tag: "Blog"
+  text: "Get organized, actionable insights from complex test environments"
 ---
 
 
