@@ -16,9 +16,23 @@ further_reading:
 
 ## Overview
 
-Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
+The NetFlow view in Network Device Monitoring provides visibility into network traffic flows collected from devices that export flow data (for example, routers, firewalls, or switches). You can analyze traffic volume, identify top talkers, and understand how data moves through your network.
+
+The NetFlow view displays traffic metrics aggregated by device and interface. Use it to identify which devices or interfaces are consuming the most bandwidth, generating the most packets, or contributing to traffic spikes.
 
 {{< img src="network_device_monitoring/netflow/netflow_home_2.png" alt="The NetFlow Monitoring page containing a collapsible legend for traffic volume, device health, flows and more." style="width:100%;" >}}
+
+## Side Navigation
+
+Use the left-hand navigation to explore additional NetFlow views:
+
+- **Traffic Volume**: Overall flow metrics by device and interface.
+- **Device Health**: Status and utilization of monitored devices.
+- **Flows**: Detailed individual flow records.
+- **Conversations**: Aggregated source–destination pairs.
+- **Autonomous Systems**: Flow data grouped by Autonomous System Numbers (ASNs).
+- **Geo IP**: Flow data grouped by geographic origin/destination.
+- **Source Ports / Destination Ports / Protocols / Flags**: Traffic breakdown by packet metadata.
 
 ## Installation
 
@@ -93,9 +107,15 @@ Search for **DNS** in the **+ Filter** menu to locate flows associated with Reve
 
 **Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, see the [full configuration file][8].
 
+## IP Pill
+
+In the **Conversations** view, you can view the Public IP address of the Destination IP. Hover over the IP to display an IP pill that provides rich metadata about the IP and a link to **View Related Network Connections** where you can inspect the connectivity in more detail.
+
+{{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="Hover over an IP address to display the IP Pill and View Related Network Connections" width="100%" >}}
+
 ## Sankey diagram
 
-You can visualize the flows in NetFlow Monitoring by clicking on the **Flows** menu and hovering over **NetFlow Volume Flows** from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
+You can visualize the flows in NetFlow Monitoring by clicking on the **Flows** menu and hovering over a flow from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
 
 {{< img src="network_device_monitoring/netflow/flows.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
 
@@ -203,14 +223,6 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
-
-By monitoring these key fields and using facets to analyze NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
-
-{{< img src="monitors/monitor_types/netflow/monitor.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
-
-This data is also available in dashboards and notebooks, enabling precise queries and correlation with other data sources. When creating a dashboard with NetFlow data, select **NetFlow** as the source in the **Graph your data** section.
-
-{{< img src="network_device_monitoring/netflow/dashboard.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 
 ## Sampling rate
 
