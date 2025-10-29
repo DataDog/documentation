@@ -152,7 +152,7 @@ The following characters are considered special and must be escaped with a backs
 
 ### Search an attribute that contains special characters
 
-Searching for an attribute value that contains special characters requires escaping or double quotes. For example, to search for an attribute `my_app` with the value `hello:world`, use the syntax: `my_app:hello:world` or `my_app:"hello:world"`.
+Searching for an attribute value that contains special characters requires escaping or double quotes. For example, to search for an attribute `my_app` with the value `hello:world`, use the syntax: `my_app:hello\:world` or `my_app:"hello:world"`.
 
 ### Match a single special character or space
 
