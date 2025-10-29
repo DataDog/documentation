@@ -178,6 +178,24 @@ This approach combines OpenTelemetry semantic conventions with Datadog-specific 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Infrastructure tags are missing from telemetry
+
+**Symptom**: You have enabled the `infraattributes` processor in your DDOT Collector configuration, but Kubernetes-level tags (like `k8s.pod.name`, `k8s.namespace.name`, or pod labels) are not appearing on your traces, metrics, or logs.
+
+**Cause**: The `infraattributes` processor requires specific resource attributes on the incoming telemetry to identify the source container. The most common missing attribute is `container.id`. Without this attribute, the processor cannot look up the corresponding Kubernetes metadata.
+
+**Resolution**:
+
+Ensure your application is configured to send the `container.id` as a resource attribute with its telemetry.
+
+This is typically handled by your language's OpenTelemetry SDK, often through auto-instrumentation. If it's not present, you may need to configure it manually:
+
+-  **Use SDK Auto-Instrumentation**: Ensure you are using a recent version of your language's OTel auto-instrumentation, as many include container detection.
+-  **Configure Resource Detection**: If the SDK doesn't provide these attributes, configure the OpenTelemetry Collector to use the [`resourcedetection` processor][6]. This processor can automatically detect and add attributes like `container.id`.
+-  **Verify Attributes**: Use the `debug` exporter in your DDOT Collector pipeline to inspect the resource attributes of your telemetry and confirm if `container.id` is present.
+
+For more details on the attributes used by this processor, see the [Infrastructure Attribute Processor documentation][7].
+
 ## Unable to map 'team' attribute to Datadog team tag
 
 **Symptom**: The team tag is not appearing in Datadog for logs and traces, despite being set as a resource attribute in OpenTelemetry configurations.
@@ -282,3 +300,5 @@ features:
 [3]: /opentelemetry/schema_semantics/host_metadata/
 [4]: /opentelemetry/schema_semantics/semantic_mapping/
 [5]: /opentelemetry/schema_semantics/metrics_mapping/#metrics-mappings
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#readme
+[7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
