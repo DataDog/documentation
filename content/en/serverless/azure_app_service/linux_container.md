@@ -27,7 +27,7 @@ If you would prefer to not use the sidecar approach (Not Recommended), you can i
 2. **Understand container instrumentation:** This guide instruments a containerized app with a sidecar. For other deployment models, see:
    - [Windows Code](/serverless/azure_app_service/windows_code) - Extension-based
    - [Linux Code](/serverless/azure_app_service/linux_code) - Sidecar for non-containerized apps
-3. **Review container setup basics:** If you're new to Datadog's .NET tracer in containers, see [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) for background.
+3. **Review container setup basics:** If new to Datadog's .NET tracer in containers, see [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) for background.
 4. **Check compatibility:** See [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core) for supported runtimes.
 
 ## Setup

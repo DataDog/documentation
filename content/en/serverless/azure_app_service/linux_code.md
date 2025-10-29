@@ -18,10 +18,12 @@ If you would prefer to not use the sidecar approach (Not Recommended), you can i
 ## Prerequisites
 
 1. **Install the Azure integration:** Install the [Datadog-Azure integration](/integrations/azure/) to collect Azure metrics and logs.
-2. **Understand the sidecar approach:** This setup uses a sidecar container pattern, which differs from:
-   - [Windows Code deployment](/serverless/azure_app_service/windows_code) (uses extension)
-   - [Standard .NET APM setup](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) (uses Agent or NuGet)
-3. **Review .NET compatibility:** See [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core) for supported runtimes and integrations.
+2. **Understand the sidecar approach:** This setup uses a sidecar container pattern. For other deployment models, see [Windows Code](/serverless/azure_app_service/windows_code) or [Linux Container](/serverless/azure_app_service/linux_container).
+3. **Review runtime compatibility:**
+   - .NET: [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core)
+   - Java: [Java Compatibility](/tracing/trace_collection/compatibility/java)
+   - Node.js: [Node.js Compatibility](/tracing/trace_collection/compatibility/nodejs)
+   - Python: [Python Compatibility](/tracing/trace_collection/compatibility/python)
 
 <div class="alert alert-info">
 Using Windows instead? See <a href="/serverless/azure_app_service/windows_code">Windows Code setup</a>. Using containers? See <a href="/serverless/azure_app_service/linux_container">Linux Container setup</a>.
@@ -358,10 +360,15 @@ Share the content of the **Log stream** with [Datadog Support][9].
 
 ## Additional Resources
 
-- [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) - Core APM concepts
-- [.NET Core Library Configuration](/tracing/trace_collection/library_config/dotnet-core/) - Full configuration reference
-- [.NET Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/dotnet/) - Adding custom spans
-- [Connecting .NET Logs and Traces](/tracing/other_telemetry/connect_logs_and_traces/dotnet) - Log correlation
+### By Language
+- .NET: [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core), [Configuration](/tracing/trace_collection/library_config/dotnet-core/), [Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/dotnet/)
+- Java: [Tracing Java Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/), [Configuration](/tracing/trace_collection/library_config/java/)
+- Node.js: [Tracing Node.js Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/), [Configuration](/tracing/trace_collection/library_config/nodejs/)
+- Python: [Tracing Python Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/), [Configuration](/tracing/trace_collection/library_config/python/)
+
+### General Resources
+- [Custom Metrics](/serverless/custom_metrics/)
+- [Troubleshooting Serverless Monitoring](/serverless/guide/troubleshoot_serverless_monitoring)
 
 ## Further reading
 
