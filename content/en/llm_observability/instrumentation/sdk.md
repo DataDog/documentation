@@ -83,6 +83,18 @@ This section covers setup for the LLM Observability SDKs. If you're using the HT
 [1]: https://github.com/DataDog/dd-trace-java
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "HTTP API" %}}
+To use the HTTP API, you need:
+- A [Datadog API key][1] - Required for authenticating API requests
+- Your [Datadog site][2] (e.g., `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, etc.)
+- An HTTP client capable of making POST requests with JSON payloads
+
+No installation is required. You can start sending spans and evaluations directly to the API endpoints.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% collapse-content title="Command-line setup" level="h3" expanded=false id="command-line-setup" %}}
@@ -1606,6 +1618,65 @@ public class MyJavaClass {
 
 {{< /code-block >}}
 {{% /tab %}}
+
+{{% tab "HTTP API" %}}
+To create nested spans with the HTTP API, set the `parent_id` field of the child span to the `span_id` of the parent span. All spans in the same trace must share the same `trace_id`.
+
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "span",
+    "attributes": {
+      "ml_app": "document-processor",
+      "session_id": "session-789",
+      "spans": [
+        {
+          "span_id": "11111111111111111111",
+          "trace_id": "99999999999999999999",
+          "parent_id": "undefined",
+          "name": "extract_data",
+          "meta": {
+            "kind": "workflow",
+            "input": {
+              "value": "document.pdf"
+            },
+            "output": {
+              "value": "extracted data results"
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 5000000000
+        },
+        {
+          "span_id": "22222222222222222222",
+          "trace_id": "99999999999999999999",
+          "parent_id": "11111111111111111111",
+          "name": "preprocess_document",
+          "meta": {
+            "kind": "task",
+            "input": {
+              "value": "document.pdf"
+            },
+            "output": {
+              "value": "preprocessed document"
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 2000000000
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+**Key points:**
+- The child span's `parent_id` must match the parent span's `span_id`
+- Both spans must have the same `trace_id`
+- Child span's start time should be >= parent's start time
+- Child span should finish before the parent (child's start + duration <= parent's start + duration)
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Tracking user sessions
@@ -1666,6 +1737,58 @@ public class MyJavaClass {
   }
 }
 {{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "HTTP API" %}}
+To track user sessions with the HTTP API, include the `session_id` field in your span request. You can set it at the top level (applies to all spans) or on individual spans.
+
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "span",
+    "attributes": {
+      "ml_app": "chatbot",
+      "session_id": "session-abc-123",
+      "tags": [
+        "user_handle:poodle@dog.com",
+        "user_id:1234",
+        "user_name:poodle"
+      ],
+      "spans": [
+        {
+          "span_id": "11111111111111111111",
+          "trace_id": "99999999999999999999",
+          "parent_id": "undefined",
+          "name": "process_user_message",
+          "meta": {
+            "kind": "workflow",
+            "input": {
+              "value": "Hello, what can you do?"
+            },
+            "output": {
+              "value": "I can help you with various tasks..."
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 3000000000
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+### Session tracking tags
+
+Use tags to associate additional user information with the session:
+
+| Tag | Description |
+|---|---|
+| `session_id` | The ID representing a single user session (set as a field, not a tag). |
+| `user_handle` | The handle/email for the user (set as a tag: `user_handle:email@example.com`). |
+| `user_name` | The name for the user (set as a tag: `user_name:John Doe`). |
+| `user_id` | The ID for the user (set as a tag: `user_id:1234`). |
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -2094,6 +2217,148 @@ public class MyJavaClass {
 
 [1]: /getting_started/tagging/
 {{% /tab %}}
+
+{{% tab "HTTP API" %}}
+To annotate spans with the HTTP API, include the relevant fields directly in the span's `meta`, `metrics`, and `tags` fields.
+
+#### Annotating inputs and outputs
+
+Use the `meta.input` and `meta.output` fields to add input and output data:
+
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "span",
+    "attributes": {
+      "ml_app": "my-app",
+      "spans": [
+        {
+          "span_id": "11111111111111111111",
+          "trace_id": "99999999999999999999",
+          "parent_id": "undefined",
+          "name": "chat_completion",
+          "meta": {
+            "kind": "llm",
+            "input": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hello world!"
+                }
+              ]
+            },
+            "output": {
+              "messages": [
+                {
+                  "role": "assistant",
+                  "content": "How can I help?"
+                }
+              ]
+            },
+            "metadata": {
+              "temperature": 0.7,
+              "max_tokens": 200,
+              "model_name": "gpt-4",
+              "model_provider": "openai"
+            }
+          },
+          "metrics": {
+            "input_tokens": 4,
+            "output_tokens": 6,
+            "total_tokens": 10
+          },
+          "tags": ["env:production", "host:server-1"],
+          "start_ns": 1713889389104152000,
+          "duration": 2000000000
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+#### For non-LLM spans
+
+Use simple string values for `input` and `output`:
+
+{{< code-block lang="json" >}}
+{
+  "meta": {
+    "kind": "workflow",
+    "input": {
+      "value": "process this document"
+    },
+    "output": {
+      "value": "document processed successfully"
+    }
+  }
+}
+{{< /code-block >}}
+
+#### For embedding spans
+
+{{< code-block lang="json" >}}
+{
+  "meta": {
+    "kind": "embedding",
+    "input": {
+      "value": "Text to embed"
+    },
+    "metadata": {
+      "model_name": "text-embedding-3",
+      "model_provider": "openai"
+    }
+  },
+  "metrics": {
+    "input_tokens": 4
+  }
+}
+{{< /code-block >}}
+
+#### For retrieval spans
+
+Use the `documents` array format for output:
+
+{{< code-block lang="json" >}}
+{
+  "meta": {
+    "kind": "retrieval",
+    "input": {
+      "value": "search query"
+    },
+    "output": {
+      "documents": [
+        {
+          "text": "Document content...",
+          "name": "doc1.pdf",
+          "id": "doc-123",
+          "score": 0.95
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+#### Adding tags
+
+Tags are added as an array of strings in `key:value` format:
+
+{{< code-block lang="json" >}}
+{
+  "tags": [
+    "env:production",
+    "version:1.0.0",
+    "host:server-1",
+    "user_id:12345"
+  ]
+}
+{{< /code-block >}}
+
+For more information about tags, see [Getting Started with Tags][1].
+
+[1]: /getting_started/tagging/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Annotating auto-instrumented spans
@@ -2268,6 +2533,128 @@ chain = translation_template | llm
 - Use a unique prompt `id` to distinguish different prompts within your application.
 - Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
 - For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
+
+{{% /tab %}}
+
+{{% tab "HTTP API" %}}
+To track prompts with the HTTP API, include prompt metadata in the `meta.input.prompt` field of your LLM span.
+
+#### Prompt structure
+
+The prompt object supports the following fields:
+
+- `id` (string): Logical identifier for this prompt template. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`.
+- `version` (string): Version tag for the prompt (e.g., "1.0.0"). If not provided, LLM Observability automatically generates a version by computing a hash of the template content.
+- `template` (string): Single string template form with placeholders (e.g., `"Translate {{text}} to {{lang}}"`). Do not use with `chat_template`.
+- `chat_template` (array of Message objects): Multi-message template form with placeholders in message content. Do not use with `template`.
+- `variables` (object): Key-value pairs used to render the template placeholders.
+- `query_variable_keys` (array of strings): Variable keys that contain the user query. Used for hallucination detection.
+- `context_variable_keys` (array of strings): Variable keys that contain ground-truth or context content. Used for hallucination detection.
+- `tags` (object): Key-value pairs to attach as tags to the prompt run.
+
+#### Example: Single-template prompt
+
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "span",
+    "attributes": {
+      "ml_app": "translation-app",
+      "spans": [
+        {
+          "span_id": "11111111111111111111",
+          "trace_id": "99999999999999999999",
+          "parent_id": "undefined",
+          "name": "translate_text",
+          "meta": {
+            "kind": "llm",
+            "input": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Translate to fr: Hello world"
+                }
+              ],
+              "prompt": {
+                "id": "translation-template",
+                "version": "1.0.0",
+                "template": "Translate to {{lang}}: {{text}}",
+                "variables": {
+                  "lang": "fr",
+                  "text": "Hello world"
+                },
+                "tags": {
+                  "team": "nlp"
+                }
+              }
+            },
+            "output": {
+              "messages": [
+                {
+                  "role": "assistant",
+                  "content": "Bonjour le monde"
+                }
+              ]
+            },
+            "metadata": {
+              "model_name": "gpt-4o",
+              "model_provider": "openai"
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 2000000000
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+#### Example: Chat template prompt
+
+{{< code-block lang="json" >}}
+{
+  "meta": {
+    "kind": "llm",
+    "input": {
+      "prompt": {
+        "id": "customer-support-template",
+        "version": "2.1.0",
+        "chat_template": [
+          {
+            "role": "system",
+            "content": "You are a {{role}} assistant."
+          },
+          {
+            "role": "user",
+            "content": "{{user_query}}"
+          }
+        ],
+        "variables": {
+          "role": "customer support",
+          "user_query": "How do I reset my password?"
+        }
+      },
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a customer support assistant."
+        },
+        {
+          "role": "user",
+          "content": "How do I reset my password?"
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+#### Notes
+- Prompt tracking is only applicable to LLM spans (`meta.kind` = `"llm"`).
+- Use a unique prompt `id` to distinguish different prompts within your application.
+- Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` field.
+- Either `template` or `chat_template` should be provided, but not both.
 
 {{% /tab %}}
 {{< /tabs >}}
