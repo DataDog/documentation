@@ -182,17 +182,63 @@ This approach combines OpenTelemetry semantic conventions with Datadog-specific 
 
 **Symptom**: You have enabled the `infraattributes` processor in your DDOT Collector configuration, but Kubernetes-level tags (like `k8s.pod.name`, `k8s.namespace.name`, or pod labels) are not appearing on your traces, metrics, or logs.
 
-**Cause**: The `infraattributes` processor requires specific resource attributes on the incoming telemetry to identify the source container. The most common missing attribute is `container.id`. Without this attribute, the processor cannot look up the corresponding Kubernetes metadata.
+**Cause**: The `infraattributes` processor requires specific resource attributes on incoming telemetry to identify the source container.
+
+If the `container.id` resource attribute is not present on the input, the processor attempts to automatically detect it. The following methods are tried, in order from highest to lowest precedence:
+
+| Resource attributes                              | Detection method                  |
+|--------------------------------------------------|-----------------------------------|
+| `process.pid` (int)                              | Based on container's external PID |
+| `datadog.container.cgroup_inode` (int)           | Based on container's cgroup inode |
+| `k8s.pod.uid` (str) + `k8s.container.name` (str) | Based on container's pod and name |
+
+If your telemetry does not provide attributes for any of these detection methods, the processor cannot look up the corresponding Kubernetes metadata.
 
 **Resolution**:
 
-Ensure your application is configured to send the `container.id` as a resource attribute with its telemetry.
+Ensure your telemetry includes the required attributes by following these steps in order:
 
-This is typically handled by your language's OpenTelemetry SDK, often through auto-instrumentation. If it's not present, you may need to configure it manually:
+1.  **Use SDK Auto-Instrumentation (Preferred)**: Upgrade to a recent version of your language's OpenTelemetry auto-instrumentation. This is the preferred first step, as it often provides `container.id` or `process.pid` automatically.
 
--  **Use SDK Auto-Instrumentation**: Ensure you are using a recent version of your language's OTel auto-instrumentation, as many include container detection.
--  **Configure Resource Detection**: If the SDK doesn't provide these attributes, configure the OpenTelemetry Collector to use the [`resourcedetection` processor][6]. This processor can automatically detect and add attributes like `container.id`.
--  **Verify Attributes**: Use the `debug` exporter in your DDOT Collector pipeline to inspect the resource attributes of your telemetry and confirm if `container.id` is present.
+2.  **Manually Set Resource Attributes**: If auto-instrumentation doesn't add the necessary attributes, set them manually using `OTEL_RESOURCE_ATTRIBUTES`. This allows the processor to use the `k8s.pod.uid` and `k8s.container.name` detection method. For example:
+    ```yaml
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: {{ .Chart.Name }}
+      - name: OTEL_K8S_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: OTEL_K8S_NODE_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.nodeName
+      - name: OTEL_K8S_POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: OTEL_K8S_POD_ID
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.uid
+      - name: OTEL_RESOURCE_ATTRIBUTES
+        value: >-
+          service.name=$(OTEL_SERVICE_NAME),
+          k8s.namespace.name=$(OTEL_K8S_NAMESPACE),
+          k8s.node.name=$(OTEL_K8S_NODE_NAME),
+          k8s.pod.name=$(OTEL_K8S_POD_NAME),
+          k8s.pod.uid=$(OTEL_K8S_POD_ID),
+          k8s.container.name={{ .Chart.Name }},
+          host.name=$(OTEL_K8S_NODE_NAME),
+          deployment.environment.name=$(OTEL_K8S_NAMESPACE)
+    ```
+3.  **Use the Collector's `resourcedetection` processor**: If you cannot set resource attributes at the SDK or application level, you can use the Collector's `resourcedetection` processor. Place it before `infraattributes`.
+
+4.  **Verify Attributes**: Use the `debug` exporter in your DDOT Collector pipeline to confirm that the required resource attributes (like `container.id`, `process.pid`, or `k8s.pod.uid`) are present on your telemetry.
 
 For more details on the attributes used by this processor, see the [Infrastructure Attribute Processor documentation][7].
 
