@@ -3818,6 +3818,11 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
       weight: 901
+    - name: Savings
+      url: cloud_cost_management/recommendations/savings
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_savings
+      weight: 902
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
