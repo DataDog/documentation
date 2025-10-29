@@ -63,7 +63,7 @@ Choose the setup guide for your deployment environment:
 | **Azure App Service (Windows)** | [Azure App Service - Windows Code](/serverless/azure_app_service/windows_code) | ✅ Supported |
 | **Azure App Service (Linux)** | N/A | ❌ Not supported - requires .NET Core/.NET 5+ |
 | **Google Cloud Run** | N/A | ❌ Not supported - requires .NET Core/.NET 5+ |
-| **All other environments** | Continue with this guide ↓ | ✅ Supported |
+| **All other environments** | Continue below | ✅ Supported |
 
 <div class="alert alert-warning">
 <strong>Important:</strong> .NET Framework is only supported on Windows-based platforms. For Linux or AWS Lambda, use <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">.NET Core or .NET 5+</a>.
@@ -81,7 +81,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 
 <div class="alert alert-danger">
 <strong>Are you deploying to a serverless environment?</strong><br/>
-If you're using Azure Functions or Azure App Service, <strong>STOP</strong> and use the appropriate serverless setup guide instead:
+If using Azure Functions or Azure App Service, <strong>stop:</strong> use the appropriate serverless setup guide instead:
 <ul>
   <li><a href="/serverless/azure_functions/">Azure Functions Setup</a> (In-Process model only)</li>
   <li><a href="/serverless/azure_app_service/windows_code">Azure App Service - Windows Setup</a></li>

@@ -59,7 +59,7 @@ Choose the setup guide for your deployment environment:
 | **Azure App Service (Linux - Code)** | [Azure App Service - Linux Code](/serverless/azure_app_service/linux_code) |
 | **Azure App Service (Linux - Container)** | [Azure App Service - Linux Container](/serverless/azure_app_service/linux_container) |
 | **Google Cloud Run** | [Google Cloud Run - .NET](/serverless/google_cloud_run/containers/in_container/dotnet) |
-| **All other environments** | Continue with this guide ↓ |
+| **All other environments** | Continue below |
 
 <div class="alert alert-warning">
 <strong>Important:</strong> Serverless environments require different installation steps than traditional hosts. Do not install the Datadog Agent or MSI installer for serverless environments.
@@ -77,7 +77,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 
 <div class="alert alert-danger">
 <strong>Are you deploying to a serverless environment?</strong><br/>
-If you're using AWS Lambda, Azure Functions, Azure App Service, or Google Cloud Run, <strong>STOP</strong> and use the appropriate serverless setup guide instead:
+If using AWS Lambda, Azure Functions, Azure App Service, or Google Cloud Run, <strong>stop:</strong> use the appropriate serverless setup guide instead:
 <ul>
   <li><a href="/serverless/aws_lambda/instrumentation/dotnet">AWS Lambda .NET Setup</a></li>
   <li><a href="/serverless/azure_functions/">Azure Functions Setup</a></li>
