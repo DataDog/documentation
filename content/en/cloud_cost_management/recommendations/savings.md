@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="cloud_cost/recommendations/savings-overview.png" alt="The Savings tab under CCM Recommendations." style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/savings-overview-1.png" alt="The Savings tab under CCM Recommendations." style="width:100%;" >}}
 
 The Savings tab within Recommendations gives you visibility into how your savings opportunities change over time. This information can be useful for tracking cost saving initiatives. The Savings tab visualizes two kinds of savings values:
 
