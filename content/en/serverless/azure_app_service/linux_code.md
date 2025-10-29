@@ -15,6 +15,18 @@ If you would prefer to not use the sidecar approach (Not Recommended), you can i
 
 **Supported runtimes**: Java, Node.js, .NET, PHP, Python
 
+## Prerequisites
+
+1. **Install the Azure integration:** Install the [Datadog-Azure integration](/integrations/azure/) to collect Azure metrics and logs.
+2. **Understand the sidecar approach:** This setup uses a sidecar container pattern, which differs from:
+   - [Windows Code deployment](/serverless/azure_app_service/windows_code) (uses extension)
+   - [Standard .NET APM setup](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) (uses Agent or NuGet)
+3. **Review .NET compatibility:** See [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core) for supported runtimes and integrations.
+
+<div class="alert alert-info">
+Using Windows instead? See <a href="/serverless/azure_app_service/windows_code">Windows Code setup</a>. Using containers? See <a href="/serverless/azure_app_service/linux_container">Linux Container setup</a>.
+</div>
+
 ## Setup
 
 ### Azure integration
@@ -54,13 +66,17 @@ Instrumentation starts when the application is launched.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Add the `Datadog.Trace.Bundle` Nuget package to your project. See [the Nuget package page for more details][102].
+Add the `Datadog.Trace.Bundle` Nuget package to your project. See [the Nuget package page for more details][102] or [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) for background.
 
 For example:
 
 ```shell
 dotnet add package Datadog.Trace.Bundle --version 3.21.0
 ```
+
+**Important:** The environment variables shown in the [.NET: Additional required environment variables](#dotnet-additional-settings) section are critical for .NET to work with the sidecar pattern.
+
+For more on these environment variables, see [Library Configuration](/tracing/trace_collection/library_config/dotnet-core/).
 
 [102]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
@@ -339,6 +355,13 @@ Be sure to enable **App Service logs** to receive debugging logs.
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
 Share the content of the **Log stream** with [Datadog Support][9].
+
+## Additional Resources
+
+- [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) - Core APM concepts
+- [.NET Core Library Configuration](/tracing/trace_collection/library_config/dotnet-core/) - Full configuration reference
+- [.NET Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/dotnet/) - Adding custom spans
+- [Connecting .NET Logs and Traces](/tracing/other_telemetry/connect_logs_and_traces/dotnet) - Log correlation
 
 ## Further reading
 
