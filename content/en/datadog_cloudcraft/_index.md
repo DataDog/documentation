@@ -101,9 +101,9 @@ To get started using Cloudcraft, use the following steps:
 
 With Group By, Cloudcraft divides your diagram into distinct sections based on different group types. This feature offers a clear and organized perspective of your resources, making it especially helpful for visualizing complex cloud environments.
 
-Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **More** dropdown.
+Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **+ Tags** menu.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu" >}}
 
 #### Group by tags
 
