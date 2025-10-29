@@ -87,6 +87,10 @@
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
   },
+  "cohort": {
+    "name": "Cohort",
+    "description": "API for Cohort."
+  },
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
@@ -134,6 +138,10 @@
   "fleet-automation": {
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\nUse these endpoints to create, retrieve, and cancel deployments\nthat apply configuration changes to multiple hosts at once."
+  },
+  "funnel": {
+    "name": "Funnel",
+    "description": "API for funnel."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -318,6 +326,10 @@
   "usage-metering": {
     "name": "Usage Metering",
     "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
+  },
+  "user-flow": {
+    "name": "User Flow",
+    "description": "API for user flow."
   },
   "users": {
     "name": "Users",

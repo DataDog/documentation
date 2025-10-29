@@ -20847,6 +20847,326 @@ components:
       - name
       - requirements
       type: object
+    FunnelRequest:
+      example:
+        data:
+          attributes:
+            data_source: rum
+            enforced_execution_type: ''
+            request_id: ''
+            search:
+              cross_session_filter: ''
+              query_string: '@type:view'
+              steps:
+              - facet: '@view.name'
+                step_filter: ''
+                value: /apm/home
+              - facet: '@view.name'
+                step_filter: ''
+                value: /apm/traces
+              subquery_id: ''
+            time:
+              from: 1756425600000
+              to: 1756857600000
+          id: funnel_request
+          type: funnel_request
+      properties:
+        data:
+          $ref: '#/components/schemas/FunnelRequestData'
+      type: object
+    FunnelRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FunnelRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelRequestDataType'
+      required:
+      - type
+      type: object
+    FunnelRequestDataAttributes:
+      properties:
+        data_source:
+          type: string
+        enforced_execution_type:
+          type: string
+        request_id:
+          type: string
+        search:
+          $ref: '#/components/schemas/FunnelRequestDataAttributesSearch'
+        time:
+          $ref: '#/components/schemas/FunnelRequestDataAttributesTime'
+      type: object
+    FunnelRequestDataAttributesSearch:
+      properties:
+        cross_session_filter:
+          type: string
+        query_string:
+          type: string
+        steps:
+          items:
+            $ref: '#/components/schemas/FunnelRequestDataAttributesSearchStepsItems'
+          type: array
+        subquery_id:
+          type: string
+      type: object
+    FunnelRequestDataAttributesSearchStepsItems:
+      properties:
+        facet:
+          type: string
+        step_filter:
+          type: string
+        value:
+          type: string
+      type: object
+    FunnelRequestDataAttributesTime:
+      properties:
+        from:
+          format: int64
+          type: integer
+        to:
+          format: int64
+          type: integer
+      type: object
+    FunnelRequestDataType:
+      default: funnel_request
+      enum:
+      - funnel_request
+      example: funnel_request
+      type: string
+      x-enum-varnames:
+      - FUNNEL_REQUEST
+    FunnelResponse:
+      example:
+        data:
+          attributes:
+            end_to_end_conversion_rate: 0.1161386890038228
+            funnel_steps:
+            - label: '@type:view @view.name:/apm/home'
+              value: 284608
+            - label: '@type:view @view.name:/apm/traces'
+              value: 33054
+            initial_count: 3925047
+          id: funnel_response
+          type: funnel_response
+      properties:
+        data:
+          $ref: '#/components/schemas/FunnelResponseData'
+      type: object
+    FunnelResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FunnelResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelResponseDataType'
+      required:
+      - type
+      type: object
+    FunnelResponseDataAttributes:
+      properties:
+        end_to_end_conversion_rate:
+          format: double
+          type: number
+        end_to_end_elapsed_time:
+          $ref: '#/components/schemas/FunnelResponseElapsedTime'
+        funnel_steps:
+          items:
+            $ref: '#/components/schemas/FunnelResponseDataAttributesFunnelStepsItems'
+          type: array
+        initial_count:
+          format: int64
+          type: integer
+      type: object
+    FunnelResponseDataAttributesFunnelStepsItems:
+      properties:
+        elapsed_time_to_next_step:
+          $ref: '#/components/schemas/FunnelResponseElapsedTime'
+        label:
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    FunnelResponseDataType:
+      default: funnel_response
+      enum:
+      - funnel_response
+      example: funnel_response
+      type: string
+      x-enum-varnames:
+      - FUNNEL_RESPONSE
+    FunnelResponseElapsedTime:
+      properties:
+        avg:
+          format: int64
+          type: integer
+        max:
+          format: int64
+          type: integer
+        min:
+          format: int64
+          type: integer
+        p5:
+          format: int64
+          type: integer
+        p50:
+          format: int64
+          type: integer
+        p95:
+          format: int64
+          type: integer
+      type: object
+    FunnelSuggestionRequest:
+      example:
+        data:
+          attributes:
+            data_source: ''
+            search:
+              cross_session_filter: ''
+              query_string: '@type:view'
+              steps:
+              - facet: '@view.name'
+                step_filter: ''
+                value: /apm/home
+              subquery_id: ''
+            term_search:
+              query: apm
+            time:
+              from: 1756425600000
+              to: 1756857600000
+          id: funnel_suggestion_request
+          type: funnel_suggestion_request
+      properties:
+        data:
+          $ref: '#/components/schemas/FunnelSuggestionRequestData'
+      type: object
+    FunnelSuggestionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FunnelSuggestionRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelSuggestionRequestDataType'
+      required:
+      - type
+      type: object
+    FunnelSuggestionRequestDataAttributes:
+      properties:
+        data_source:
+          type: string
+        search:
+          $ref: '#/components/schemas/FunnelSuggestionRequestDataAttributesSearch'
+        term_search:
+          $ref: '#/components/schemas/FunnelSuggestionRequestDataAttributesTermSearch'
+        time:
+          $ref: '#/components/schemas/FunnelSuggestionRequestDataAttributesTime'
+      type: object
+    FunnelSuggestionRequestDataAttributesSearch:
+      properties:
+        cross_session_filter:
+          type: string
+        query_string:
+          type: string
+        steps:
+          items:
+            $ref: '#/components/schemas/FunnelSuggestionRequestDataAttributesSearchStepsItems'
+          type: array
+        subquery_id:
+          type: string
+      type: object
+    FunnelSuggestionRequestDataAttributesSearchStepsItems:
+      properties:
+        facet:
+          type: string
+        step_filter:
+          type: string
+        value:
+          type: string
+      type: object
+    FunnelSuggestionRequestDataAttributesTermSearch:
+      properties:
+        query:
+          type: string
+      type: object
+    FunnelSuggestionRequestDataAttributesTime:
+      properties:
+        from:
+          format: int64
+          type: integer
+        to:
+          format: int64
+          type: integer
+      type: object
+    FunnelSuggestionRequestDataType:
+      default: funnel_suggestion_request
+      enum:
+      - funnel_suggestion_request
+      example: funnel_suggestion_request
+      type: string
+      x-enum-varnames:
+      - FUNNEL_SUGGESTION_REQUEST
+    FunnelSuggestionResponse:
+      example:
+        data:
+          attributes:
+            actions:
+            - name: view_trace_details
+            - name: filter_by_service
+            - name: analyze_performance
+            views:
+            - name: /apm/traces
+            - name: /apm/services
+            - name: /apm/service-map
+          id: funnel_suggestion_response
+          type: funnel_suggestion_response
+      properties:
+        data:
+          $ref: '#/components/schemas/FunnelSuggestionResponseData'
+      type: object
+    FunnelSuggestionResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FunnelSuggestionResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelSuggestionResponseDataType'
+      required:
+      - type
+      type: object
+    FunnelSuggestionResponseDataAttributes:
+      properties:
+        actions:
+          items:
+            $ref: '#/components/schemas/FunnelSuggestionResponseDataAttributesActionsItems'
+          type: array
+        views:
+          items:
+            $ref: '#/components/schemas/FunnelSuggestionResponseDataAttributesViewsItems'
+          type: array
+      type: object
+    FunnelSuggestionResponseDataAttributesActionsItems:
+      properties:
+        name:
+          type: string
+      type: object
+    FunnelSuggestionResponseDataAttributesViewsItems:
+      properties:
+        name:
+          type: string
+      type: object
+    FunnelSuggestionResponseDataType:
+      default: funnel_suggestion_response
+      enum:
+      - funnel_suggestion_response
+      example: funnel_suggestion_response
+      type: string
+      x-enum-varnames:
+      - FUNNEL_SUGGESTION_RESPONSE
     GCPCredentials:
       description: The definition of the `GCPCredentials` object.
       oneOf:
@@ -21759,6 +22079,369 @@ components:
             type: string
           type: array
       type: object
+    GetCohortRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetCohortRequestData'
+      type: object
+    GetCohortRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetCohortRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetCohortRequestDataType'
+      required:
+      - type
+      type: object
+    GetCohortRequestDataAttributes:
+      properties:
+        data_source:
+          type: string
+        definition:
+          $ref: '#/components/schemas/GetCohortRequestDataAttributesDefinition'
+        enforced_execution_type:
+          type: string
+        request_id:
+          type: string
+        time:
+          $ref: '#/components/schemas/GetCohortRequestDataAttributesTime'
+        window_size:
+          type: string
+      type: object
+    GetCohortRequestDataAttributesDefinition:
+      properties:
+        audience_filters:
+          $ref: '#/components/schemas/GetCohortRequestDataAttributesDefinitionAudienceFilters'
+        inclusion_search:
+          type: string
+        return_search:
+          type: string
+        segment_id:
+          type: string
+      type: object
+    GetCohortRequestDataAttributesDefinitionAudienceFilters:
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/GetCohortRequestDataAttributesDefinitionAudienceFiltersAccountsItems'
+          type: array
+        formula:
+          type: string
+        segments:
+          items:
+            $ref: '#/components/schemas/GetCohortRequestDataAttributesDefinitionAudienceFiltersSegmentsItems'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/GetCohortRequestDataAttributesDefinitionAudienceFiltersUsersItems'
+          type: array
+      type: object
+    GetCohortRequestDataAttributesDefinitionAudienceFiltersAccountsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        query:
+          type: string
+      required:
+      - name
+      type: object
+    GetCohortRequestDataAttributesDefinitionAudienceFiltersSegmentsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        segment_id:
+          example: ''
+          type: string
+      required:
+      - name
+      - segment_id
+      type: object
+    GetCohortRequestDataAttributesDefinitionAudienceFiltersUsersItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        query:
+          type: string
+      required:
+      - name
+      type: object
+    GetCohortRequestDataAttributesTime:
+      properties:
+        from:
+          format: int64
+          type: integer
+        to:
+          format: int64
+          type: integer
+      type: object
+    GetCohortRequestDataType:
+      default: cohort_request
+      enum:
+      - cohort_request
+      example: cohort_request
+      type: string
+      x-enum-varnames:
+      - COHORT_REQUEST
+    GetCohortResponse:
+      example:
+        data:
+          attributes:
+            cohorts:
+            - cohort: '2024-01-01'
+              cohort_size: 1000
+              start_time: 1704067200000
+              values:
+              - absolute_value: 1000
+                end_time: 1704672000000
+                relative_value: 100
+                start_time: 1704067200000
+                window: 0
+              - absolute_value: 750
+                end_time: 1705276800000
+                relative_value: 75
+                start_time: 1704672000000
+                window: 1
+              - absolute_value: 600
+                end_time: 1705881600000
+                relative_value: 60
+                start_time: 1705276800000
+                window: 2
+          id: cohort_response
+          type: cohort_response
+      properties:
+        data:
+          $ref: '#/components/schemas/GetCohortResponseData'
+      type: object
+    GetCohortResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetCohortResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetCohortResponseDataType'
+      required:
+      - type
+      type: object
+    GetCohortResponseDataAttributes:
+      properties:
+        cohorts:
+          items:
+            $ref: '#/components/schemas/GetCohortResponseDataAttributesCohortsItems'
+          type: array
+      type: object
+    GetCohortResponseDataAttributesCohortsItems:
+      properties:
+        cohort:
+          type: string
+        cohort_size:
+          format: int64
+          type: integer
+        start_time:
+          format: int64
+          type: integer
+        values:
+          items:
+            $ref: '#/components/schemas/GetCohortResponseDataAttributesCohortsItemsValuesItems'
+          type: array
+      type: object
+    GetCohortResponseDataAttributesCohortsItemsValuesItems:
+      properties:
+        absolute_value:
+          format: int64
+          type: integer
+        end_time:
+          format: int64
+          type: integer
+        relative_value:
+          format: double
+          type: number
+        start_time:
+          format: int64
+          type: integer
+        window:
+          format: int64
+          type: integer
+      type: object
+    GetCohortResponseDataType:
+      default: cohort_response
+      enum:
+      - cohort_response
+      example: cohort_response
+      type: string
+      x-enum-varnames:
+      - COHORT_RESPONSE
+    GetCohortUsersRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetCohortUsersRequestData'
+      type: object
+    GetCohortUsersRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetCohortUsersRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetCohortUsersRequestDataType'
+      required:
+      - type
+      type: object
+    GetCohortUsersRequestDataAttributes:
+      properties:
+        data_source:
+          type: string
+        definition:
+          $ref: '#/components/schemas/GetCohortUsersRequestDataAttributesDefinition'
+        execution:
+          format: int64
+          type: integer
+        time:
+          $ref: '#/components/schemas/GetCohortUsersRequestDataAttributesTime'
+        user_selection:
+          type: string
+        window_size:
+          type: string
+      type: object
+    GetCohortUsersRequestDataAttributesDefinition:
+      properties:
+        audience_filters:
+          $ref: '#/components/schemas/GetCohortUsersRequestDataAttributesDefinitionAudienceFilters'
+        cohort:
+          type: string
+        inclusion_search:
+          type: string
+        return_search:
+          type: string
+        segment_id:
+          type: string
+        window:
+          format: int64
+          type: integer
+      type: object
+    GetCohortUsersRequestDataAttributesDefinitionAudienceFilters:
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/GetCohortUsersRequestDataAttributesDefinitionAudienceFiltersAccountsItems'
+          type: array
+        formula:
+          type: string
+        segments:
+          items:
+            $ref: '#/components/schemas/GetCohortUsersRequestDataAttributesDefinitionAudienceFiltersSegmentsItems'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/GetCohortUsersRequestDataAttributesDefinitionAudienceFiltersUsersItems'
+          type: array
+      type: object
+    GetCohortUsersRequestDataAttributesDefinitionAudienceFiltersAccountsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        query:
+          type: string
+      required:
+      - name
+      type: object
+    GetCohortUsersRequestDataAttributesDefinitionAudienceFiltersSegmentsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        segment_id:
+          example: ''
+          type: string
+      required:
+      - name
+      - segment_id
+      type: object
+    GetCohortUsersRequestDataAttributesDefinitionAudienceFiltersUsersItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        query:
+          type: string
+      required:
+      - name
+      type: object
+    GetCohortUsersRequestDataAttributesTime:
+      properties:
+        from:
+          format: int64
+          type: integer
+        to:
+          format: int64
+          type: integer
+      type: object
+    GetCohortUsersRequestDataType:
+      default: cohort_users_request
+      enum:
+      - cohort_users_request
+      example: cohort_users_request
+      type: string
+      x-enum-varnames:
+      - COHORT_USERS_REQUEST
+    GetCohortUsersResponse:
+      example:
+        data:
+          attributes:
+            users:
+            - email: user@example.com
+              id: user123
+              name: John Doe
+            - email: jane@example.com
+              id: user456
+              name: Jane Smith
+          id: cohort_users_response
+          type: cohort_users_response
+      properties:
+        data:
+          $ref: '#/components/schemas/GetCohortUsersResponseData'
+      type: object
+    GetCohortUsersResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetCohortUsersResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetCohortUsersResponseDataType'
+      required:
+      - type
+      type: object
+    GetCohortUsersResponseDataAttributes:
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/GetCohortUsersResponseDataAttributesUsersItems'
+          type: array
+      type: object
+    GetCohortUsersResponseDataAttributesUsersItems:
+      properties:
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    GetCohortUsersResponseDataType:
+      default: cohort_users_response
+      enum:
+      - cohort_users_response
+      example: cohort_users_response
+      type: string
+      x-enum-varnames:
+      - COHORT_USERS_RESPONSE
     GetCustomFrameworkResponse:
       description: Response object to get a custom framework.
       properties:
@@ -42745,6 +43428,294 @@ components:
           example: report_id
           type: string
       type: object
+    SankeyRequest:
+      example:
+        data:
+          attributes:
+            data_source: ''
+            definition:
+              entries_per_step: 10
+              number_of_steps: 5
+              source: '@view.name'
+              target: '@view.name'
+            enforced_execution_type: ''
+            request_id: ''
+            sampling:
+              enabled: true
+            search:
+              audience_filters: {}
+              query: '@type:view @application.id:*'
+              subquery_id: ''
+            time:
+              from: 1756425600000
+              to: 1756857600000
+          id: sankey_request
+          type: sankey_request
+      properties:
+        data:
+          $ref: '#/components/schemas/SankeyRequestData'
+      type: object
+    SankeyRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SankeyRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SankeyRequestDataType'
+      required:
+      - type
+      type: object
+    SankeyRequestDataAttributes:
+      properties:
+        data_source:
+          type: string
+        definition:
+          $ref: '#/components/schemas/SankeyRequestDataAttributesDefinition'
+        enforced_execution_type:
+          type: string
+        request_id:
+          type: string
+        sampling:
+          $ref: '#/components/schemas/SankeyRequestDataAttributesSampling'
+        search:
+          $ref: '#/components/schemas/SankeyRequestDataAttributesSearch'
+        time:
+          $ref: '#/components/schemas/SankeyRequestDataAttributesTime'
+      type: object
+    SankeyRequestDataAttributesDefinition:
+      properties:
+        entries_per_step:
+          format: int64
+          type: integer
+        number_of_steps:
+          format: int64
+          type: integer
+        source:
+          type: string
+        target:
+          type: string
+      type: object
+    SankeyRequestDataAttributesSampling:
+      properties:
+        enabled:
+          description: The `sampling` `enabled`.
+          type: boolean
+      type: object
+    SankeyRequestDataAttributesSearch:
+      properties:
+        audience_filters:
+          $ref: '#/components/schemas/SankeyRequestDataAttributesSearchAudienceFilters'
+        occurrences:
+          $ref: '#/components/schemas/SankeyRequestDataAttributesSearchOccurrences'
+        query:
+          type: string
+        subquery_id:
+          type: string
+      type: object
+    SankeyRequestDataAttributesSearchAudienceFilters:
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/SankeyRequestDataAttributesSearchAudienceFiltersAccountsItems'
+          type: array
+        formula:
+          type: string
+        segments:
+          items:
+            $ref: '#/components/schemas/SankeyRequestDataAttributesSearchAudienceFiltersSegmentsItems'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/SankeyRequestDataAttributesSearchAudienceFiltersUsersItems'
+          type: array
+      type: object
+    SankeyRequestDataAttributesSearchAudienceFiltersAccountsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        query:
+          type: string
+      required:
+      - name
+      type: object
+    SankeyRequestDataAttributesSearchAudienceFiltersSegmentsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        segment_id:
+          example: ''
+          type: string
+      required:
+      - name
+      - segment_id
+      type: object
+    SankeyRequestDataAttributesSearchAudienceFiltersUsersItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        query:
+          type: string
+      required:
+      - name
+      type: object
+    SankeyRequestDataAttributesSearchOccurrences:
+      properties:
+        meta:
+          additionalProperties:
+            type: string
+          type: object
+        operator:
+          example: ''
+          type: string
+        value:
+          example: ''
+          type: string
+      required:
+      - operator
+      - value
+      type: object
+    SankeyRequestDataAttributesTime:
+      properties:
+        from:
+          format: int64
+          type: integer
+        to:
+          format: int64
+          type: integer
+      type: object
+    SankeyRequestDataType:
+      default: sankey_request
+      enum:
+      - sankey_request
+      example: sankey_request
+      type: string
+      x-enum-varnames:
+      - SANKEY_REQUEST
+    SankeyResponse:
+      example:
+        data:
+          attributes:
+            links:
+            - column: 0
+              id: apm_home-to-apm_traces
+              source: apm_home
+              target: apm_traces
+              value: 33054
+            nodes:
+            - aggregated_nodes: null
+              column: 0
+              id: apm_home
+              incoming_value: 0
+              name: /apm/home
+              outgoing_value: 33054
+              type: regular
+              value: 284608
+            - aggregated_nodes: null
+              column: 1
+              id: apm_traces
+              incoming_value: 33054
+              name: /apm/traces
+              outgoing_value: 15000
+              type: regular
+              value: 33054
+          id: sankey_response
+          type: sankey_response
+      properties:
+        data:
+          $ref: '#/components/schemas/SankeyResponseData'
+      type: object
+    SankeyResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SankeyResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SankeyResponseDataType'
+      required:
+      - type
+      type: object
+    SankeyResponseDataAttributes:
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/SankeyResponseDataAttributesLinksItems'
+          type: array
+        nodes:
+          items:
+            $ref: '#/components/schemas/SankeyResponseDataAttributesNodesItems'
+          type: array
+      type: object
+    SankeyResponseDataAttributesLinksItems:
+      properties:
+        column:
+          format: int64
+          type: integer
+        id:
+          type: string
+        source:
+          type: string
+        target:
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    SankeyResponseDataAttributesNodesItems:
+      properties:
+        aggregated_nodes:
+          items:
+            $ref: '#/components/schemas/SankeyResponseDataAttributesNodesItemsAggregatedNodesItems'
+          type: array
+        column:
+          format: int64
+          type: integer
+        id:
+          type: string
+        incoming_value:
+          format: int64
+          type: integer
+        name:
+          type: string
+        outgoing_value:
+          format: int64
+          type: integer
+        type:
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    SankeyResponseDataAttributesNodesItemsAggregatedNodesItems:
+      properties:
+        id:
+          type: string
+        incoming_value:
+          format: int64
+          type: integer
+        name:
+          type: string
+        outgoing_value:
+          format: int64
+          type: integer
+        type:
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    SankeyResponseDataType:
+      default: sankey_response
+      enum:
+      - sankey_response
+      example: sankey_response
+      type: string
+      x-enum-varnames:
+      - SANKEY_RESPONSE
     ScaRequest:
       properties:
         data:
@@ -74179,6 +75150,56 @@ paths:
         operator: OR
         permissions:
         - rum_apps_write
+  /api/v2/rum/cohort:
+    post:
+      description: Analyze user cohorts for retention and conversion analysis
+      operationId: GetRumCohort
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCohortRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCohortResponse'
+          description: Successful response with cohort analysis data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Get rum cohort
+      tags:
+      - Cohort
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/rum/cohort/users:
+    post:
+      description: Get users within a specific cohort for retention analysis
+      operationId: GetRumCohortUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCohortUsersRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCohortUsersResponse'
+          description: Successful response with cohort users
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Get rum cohort users
+      tags:
+      - Cohort
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/rum/config/metrics:
     get:
       description: Get the list of configured rum-based metrics with their definitions.
@@ -74440,6 +75461,82 @@ paths:
         operator: OR
         permissions:
         - rum_apps_read
+  /api/v2/rum/funnel:
+    post:
+      description: Analyze conversion funnels to understand user drop-off patterns
+      operationId: GetRumFunnel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FunnelRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FunnelResponse'
+          description: Successful response with funnel analysis data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Get rum funnel
+      tags:
+      - Funnel
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/rum/funnel/new_step_suggestions:
+    post:
+      description: Get suggested steps for building conversion funnels
+      operationId: GetRumFunnelStepSuggestions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FunnelSuggestionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FunnelSuggestionResponse'
+          description: Successful response with funnel step suggestions
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Get rum funnel step suggestions
+      tags:
+      - Funnel
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/rum/sankey:
+    post:
+      description: Generate Sankey diagrams to visualize user flow paths and drop-off
+        points
+      operationId: GetRumSankey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SankeyRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SankeyResponse'
+          description: Successful response with Sankey diagram data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Get rum sankey
+      tags:
+      - User Flow
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/saml_configurations/idp_metadata:
     post:
       description: 'Endpoint for uploading IdP metadata for SAML setup.
@@ -83147,6 +84244,8 @@ tags:
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
   name: Cloudflare Integration
+- description: API for Cohort.
+  name: Cohort
 - description: Manage your Datadog Confluent Cloud integration accounts and account
     resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/)
     for more information.
@@ -83226,6 +84325,8 @@ tags:
 
     that apply configuration changes to multiple hosts at once.'
   name: Fleet Automation
+- description: API for funnel.
+  name: Funnel
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
     through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
@@ -83579,6 +84680,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/
   name: Usage Metering
+- description: API for user flow.
+  name: User Flow
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users

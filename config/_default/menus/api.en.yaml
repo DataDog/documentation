@@ -7106,6 +7106,36 @@ menu:
           - ListCloudflareAccounts
         unstable: []
         order: 1
+    - name: Cohort
+      url: /api/latest/cohort/
+      identifier: cohort
+      generated: true
+    - name: Get rum cohort users
+      url: '#get-rum-cohort-users'
+      identifier: cohort-get-rum-cohort-users
+      parent: cohort
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumCohortUsers
+        unstable:
+          - v2
+        order: 2
+    - name: Get rum cohort
+      url: '#get-rum-cohort'
+      identifier: cohort-get-rum-cohort
+      parent: cohort
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumCohort
+        unstable:
+          - v2
+        order: 1
     - name: Confluent Cloud
       url: /api/latest/confluent-cloud/
       identifier: confluent-cloud
@@ -7715,6 +7745,36 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Funnel
+      url: /api/latest/funnel/
+      identifier: funnel
+      generated: true
+    - name: Get rum funnel step suggestions
+      url: '#get-rum-funnel-step-suggestions'
+      identifier: funnel-get-rum-funnel-step-suggestions
+      parent: funnel
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumFunnelStepSuggestions
+        unstable:
+          - v2
+        order: 1
+    - name: Get rum funnel
+      url: '#get-rum-funnel'
+      identifier: funnel-get-rum-funnel
+      parent: funnel
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumFunnel
+        unstable:
+          - v2
+        order: 2
     - name: IP Allowlist
       url: /api/latest/ip-allowlist/
       identifier: ip-allowlist
@@ -11018,6 +11078,23 @@ menu:
           - v2
         operationids:
           - SearchFlakyTests
+        unstable:
+          - v2
+        order: 1
+    - name: User Flow
+      url: /api/latest/user-flow/
+      identifier: user-flow
+      generated: true
+    - name: Get rum sankey
+      url: '#get-rum-sankey'
+      identifier: user-flow-get-rum-sankey
+      parent: user-flow
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumSankey
         unstable:
           - v2
         order: 1

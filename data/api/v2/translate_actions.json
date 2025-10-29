@@ -2305,6 +2305,18 @@
     "request_description": "",
     "request_schema_description": "RUM application update request."
   },
+  "GetRumCohort": {
+    "description": "Analyze user cohorts for retention and conversion analysis",
+    "summary": "Get rum cohort",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetRumCohortUsers": {
+    "description": "Get users within a specific cohort for retention analysis",
+    "summary": "Get rum cohort users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListRumMetrics": {
     "description": "Get the list of configured rum-based metrics with their definitions.",
     "summary": "Get all rum-based metrics"
@@ -2338,6 +2350,24 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "GetRumFunnel": {
+    "description": "Analyze conversion funnels to understand user drop-off patterns",
+    "summary": "Get rum funnel",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetRumFunnelStepSuggestions": {
+    "description": "Get suggested steps for building conversion funnels",
+    "summary": "Get rum funnel step suggestions",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetRumSankey": {
+    "description": "Generate Sankey diagrams to visualize user flow paths and drop-off points",
+    "summary": "Get rum sankey",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
