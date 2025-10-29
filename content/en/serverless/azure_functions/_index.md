@@ -12,6 +12,21 @@ further_reading:
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
 
+## Prerequisites
+
+1. **Install the Azure integration:** The [Datadog-Azure integration](/integrations/azure/) provides infrastructure metrics. Install it first for full observability.
+2. **Review runtime compatibility:** See compatibility requirements for your language:
+   - [.NET Core](/tracing/trace_collection/compatibility/dotnet-core) (Isolated Worker model)
+   - [.NET Framework](/tracing/trace_collection/compatibility/dotnet-framework) (In-Process model)
+   - [Node.js](/tracing/trace_collection/compatibility/nodejs)
+   - [Python](/tracing/trace_collection/compatibility/python)
+   - [Java](/tracing/trace_collection/compatibility/java)
+3. **Understand Azure Functions-specific approach:** This guide uses runtime-specific packages and the serverless compatibility layer, which differs from standard APM setup.
+
+<div class="alert alert-info">
+Deploying to Azure App Service instead? See <a href="/serverless/azure_app_service/">Azure App Service documentation</a>.
+</div>
+
 ## Setup
 
 If you haven't already, install the [Datadog-Azure integration][5] to collect metrics and logs. Then instrument your application with the following steps:
@@ -163,8 +178,14 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
 4. **Configure the Datadog .NET tracer**
 
-   - [Configuring the .NET Core Tracing Library][1]
-   - [Configuring the .NET Framework Tracing Library][2]
+   The `Datadog.AzureFunctions` package includes the Datadog .NET tracer. For configuration options, see:
+   - [Configuring the .NET Core Tracing Library](/tracing/trace_collection/library_config/dotnet-core)
+   - [Configuring the .NET Framework Tracing Library](/tracing/trace_collection/library_config/dotnet-framework)
+
+   **Azure Functions considerations:**
+   - Configuration is set via Function App Settings, not local files
+   - Some configurations may not be supported in the Functions sandbox environment
+   - The compatibility layer automatically handles some Agent-related settings
 
 [1]:/tracing/trace_collection/library_config/dotnet-core
 [2]:/tracing/trace_collection/library_config/dotnet-framework
@@ -189,12 +210,22 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][7].  |
    | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][7]. |
 
+## Custom Instrumentation
+
+To add custom spans and metrics:
+- [.NET Custom Instrumentation with Datadog API](/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/)
+- [Submitting Custom Metrics](/serverless/custom_metrics/)
+
 ## What's next?
 
 - You can view your Azure Functions traces in [Trace Explorer][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
 - You can use the [Serverless > Azure Functions][4] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][5].
 
 ## Troubleshooting
+
+For common issues and debugging steps, see:
+- [Troubleshoot Serverless Monitoring](/serverless/guide/troubleshoot_serverless_monitoring)
+- [.NET Diagnostic Tool](/tracing/troubleshooting/dotnet_diagnostic_tool)
 
 ### Enable debug logs
 
