@@ -124,6 +124,11 @@ Click **Add Root Query** to add additional queries.
 [1]: /logs/search_syntax/
 
 {{% /tab %}}
+{{% tab "Sequence" %}}
+
+TKTK
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Set conditions
@@ -273,6 +278,21 @@ Click **Add Root Query** to add additional queries.
 #### 2. Decrease severity for non-production environments {#decrease-severity-rt-signal-correlation}
 
 {{% cloud_siem/enable_decrease_severity %}}
+
+{{% /tab %}}
+{{% tab "Sequence" %}}
+
+#### 1. Rule multi-triggering {#rule-multi-triggering-rt-sequence}
+
+{{% cloud_siem/rule_multi_triggering %}}
+
+#### 2. Decrease severity for non-production environments {#decrease-severity-rt-sequence}
+
+{{% cloud_siem/enable_decrease_severity %}}
+
+#### 3. Enable optional group by {#enable-group-by-rt-sequence}
+
+{{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
 {{< /tabs >}}
