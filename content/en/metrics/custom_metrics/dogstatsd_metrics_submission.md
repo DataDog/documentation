@@ -32,16 +32,17 @@ After you [install DogStatsD][1], the following functions are available for subm
 | `<METRIC_VALUE>` | Double          | Yes      | Value associated with your metric.                                                                                                                                                             |
 | `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (everything is sampled, so nothing is sent) and `1` (no sample). See the [Sample Rate section](#sample-rates) to learn more. |
 | `<TAGS>`         | List of strings | No       | A list of tags to apply to the metric. See the [Metrics Tagging](#metric-tagging) section to learn more.                                                                                       |
+| `<CARDINALITY>`  | Enum            | No       | The [cardinality][10] of tags to assign to this metric.                                                                                                                               |
 
 ### COUNT
 
-`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
+`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY> )`
 : Used to increment a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
-`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
+`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Used to decrement a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
-`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
 **Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
@@ -100,7 +101,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -168,8 +169,8 @@ public class DogStatsdClient
 
             while (true)
             {
-                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"}, cardinality: Cardinality.Low);
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"}, cardinality: Cardinality.High);
                 dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
             }
@@ -194,8 +195,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'));
-    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
+    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'), 'low');
+    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'), 'high');
     sleep(10);
 }
 ```
@@ -223,7 +224,7 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 
 ### GAUGE
 
-`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for the metric during the StatsD flush period.
 
 #### Code examples
@@ -252,7 +253,7 @@ i = 0
 
 while(1):
   i += 1
-  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
+  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"], cardinality="low")
   time.sleep(10)
 ```
 {{< /programming-lang >}}
@@ -267,7 +268,7 @@ i = 0
 
 while true do
     i += 1
-    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
+    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'], cardinality: 'low')
     sleep 10
 end
 ```
@@ -281,7 +282,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -292,7 +293,7 @@ func main() {
 	var i float64
 	for true {
 		i += 1
-		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
+		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1, CardinalityHigh)
 		time.Sleep(10 * time.Second)
 	}
 }
@@ -346,7 +347,7 @@ public class DogStatsdClient
 
             for (int i = 0; true; i++)
             {
-                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"}, cardinality: Cardinality.High);
                 System.Threading.Thread.Sleep(100000);
             }
         }
@@ -372,7 +373,7 @@ $statsd = new DogStatsd(
 $i = 0;
 while (TRUE) {
     $i++;
-    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
+    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'), 'low');
     sleep(10);
 }
 ```
@@ -399,7 +400,7 @@ After running the code above, your metric data is available to graph in Datadog:
 
 ### SET
 
-`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period.
 
 #### Code examples
@@ -455,7 +456,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -547,7 +548,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', $i, 1, array('environment'=>'dev'), 'low');
     sleep(rand(0, 10));
 }
 ```
@@ -560,7 +561,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 ### HISTOGRAM
 
-`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more.
 
 #### Configuration
@@ -618,7 +619,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -682,7 +683,7 @@ public class DogStatsdClient
 
             while (true)
             {
-                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"}, Cardinality: Cardinality.High);
                 System.Threading.Thread.Sleep(2000);
             }
         }
@@ -706,7 +707,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
+    $statsd->histogram('example_metric.histogram', rand(0, 20), 1, array('environment'=>'dev'), 'low');
     sleep(2);
 }
 ```
@@ -732,7 +733,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 `TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute.
 
-`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more.
 
 ##### Configuration
@@ -835,7 +836,7 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 ### DISTRIBUTION
 
-`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)`
+`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>, <CARDINALITY>)`
 : Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][8] to learn more.
 
 #### Code examples
@@ -872,7 +873,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
+    statsd.distribution('example_metric.distribution', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 ```
@@ -887,7 +888,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -975,7 +976,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
+    $statsd->distribution('example_metric.distribution', rand(0, 20), 1, array('environment'=>'dev'), 'high');
     sleep(2);
 }
 ```
@@ -1104,13 +1105,13 @@ dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment
 The `tags` argument can be a string:
 
 ```php
-$statsd->increment('example_metric.increment', "environment:dev,account:local");
+$statsd->increment('example_metric.increment', 1.0, "environment:dev,account:local");
 ```
 
 or an array:
 ```php
 <?php
-$statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
+$statsd->increment('example_metric.increment', 1.0, array('environment' => 'dev', 'account' => 'local'));
 ```
 {{< /programming-lang >}}
 
@@ -1139,3 +1140,4 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
 [9]: /metrics/types/?tab=distribution#definition
+[10]: /containers/kubernetes/tag

@@ -7,14 +7,8 @@ further_reading:
 - link: "/network_monitoring/devices/glossary"
   tag: "Documentation"
   text: "Network Device Monitoring Terms and Concepts"
+site_support_id: high_availability_datadog_agent
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"> High Availability support of the Datadog Agent is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-
-{{< /site-region >}}
-
-<div class="alert alert-info"> High Availability support of the Datadog Agent is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 
@@ -28,8 +22,11 @@ The following integrations are supported for High Availability:
 
 | Category                | Supported Integrations       |
 |-------------------------|------------------------------|
-| **Network Monitoring**  | [SNMP][1], [Network Path][2], [HTTP Check][3] |
-| **Vendor-Specific**     | [Cisco ACI][4], [Cisco SD-WAN][5]|
+| **Database Monitoring**  | [PostgreSQL][15], [MySQL][16], [MongoDB][17], [Oracle][18], [SQL Server][19] |
+| **Network Monitoring**   | [SNMP][1], [Network Path][2], [HTTP Check][3] |
+| **Vendor-Specific**      | [Cisco ACI][4], [Cisco SD-WAN][5], [Versa][23]|
+| **Virtualization**  | [Proxmox][20], [vSphere][21] |
+| **Cloud platforms** | [OpenStack Controller][22]|
 
 ## Prerequisites
 
@@ -67,7 +64,7 @@ The following integrations are supported for High Availability:
    - The installed integration runs only on the _active_ Agent.
    - If the active Agent or host fails (due to a crash or shutdown), the standby Agent automatically takes over, maintaining uninterrupted monitoring.
 
-### Define a preferred active Agent 
+### Define a preferred active Agent
 
 1. Go to [**Integrations > Fleet Automation > View Agents**][13].
 
@@ -133,4 +130,14 @@ The following integrations are supported for High Availability:
 [12]: /agent/remote_config/?tab=configurationyamlfile#setup
 [13]: https://app.datadoghq.com/fleet
 [14]: /account_management/rbac/permissions/#fleet-automation
+[15]: /database_monitoring/#postgres
+[16]: /database_monitoring/#mysql
+[17]: /database_monitoring/#mongodb
+[18]: /database_monitoring/#oracle
+[19]: /database_monitoring/#sql-server
+[20]: https://docs.datadoghq.com/integrations/proxmox/
+[21]: https://docs.datadoghq.com/integrations/vsphere/
+[22]: https://docs.datadoghq.com/integrations/openstack-controller
+[23]: https://docs.datadoghq.com/integrations/versa/
+
 

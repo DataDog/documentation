@@ -17,8 +17,6 @@ Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguie
 
 ## Autenticación de AWS
 
-{{% observability_pipelines/aws_authentication/amazon_s3_source/intro %}}
-
 {{% observability_pipelines/aws_authentication/instructions %}}
 
 ### Permisos

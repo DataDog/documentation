@@ -20,7 +20,7 @@ title: Activación de .NET Profiler
 type: multi-code-lang
 ---
 
-El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][5] para tu aplicación, puedes omitir la instalación de biblioteca e ir directamente a habilitar el generador de perfiles.
+El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][5] para tu aplicación, puedes omitir la instalación de librería e ir directamente a habilitar el generador de perfiles.
 
 ## Requisitos
 
@@ -46,14 +46,14 @@ Tiempos de ejecución .NET compatibles (aplicaciones de 64 bits)
 .NET 7<br/>
 .NET 8
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Para los contenedores, se requiere <strong>al menos un núcleo</strong>. Consulta la <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">documentación para Solucionar problemas</a> para obtener más detalles.
 </div>
 
 Lenguajes compatibles
 : cualquier lenguaje dirigido al tiempo de ejecución de .NET, como C#, F# y Visual Basic.
 
-Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la biblioteca `dd-trace-dotnet`:
+Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la librería `dd-trace-dotnet`:
 
 | Función                   | Versión requerida de `dd-trace-dotnet`  | Versiones de tiempo de ejecución de .NET necesarias                                                           |
 |---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
@@ -69,11 +69,11 @@ Las siguientes funciones de generación de perfiles están disponibles en las si
 
 ## Instalación
 
-Asegúrate de que Datadog Agent v6+ está instalado y en funcionamiento. Datadog recomienda utilizar [Datadog Agent v7+][1]. El generador de perfiles se entrega junto con la biblioteca de rastreo (a partir de v2.8.0), por lo que si ya estás utilizando [APM para recopilar trazas][5] para tu aplicación, puedes omitir la instalación de la biblioteca e ir directamente a [Activación del generador de perfiles](#enabling-the-profiler).
+Asegúrate de que Datadog Agent v6+ está instalado y en funcionamiento. Datadog recomienda utilizar [Datadog Agent v7+][1]. El generador de perfiles se entrega junto con la librería de rastreo (a partir de v2.8.0), por lo que si ya estás utilizando [APM para recopilar trazas][5] para tu aplicación, puedes omitir la instalación de la librería e ir directamente a [Activación del generador de perfiles](#enabling-the-profiler).
 
 En caso contrario, instala el generador de perfiles siguiendo los pasos que se indican a continuación, en función de tu sistema operativo.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de perfiles de .NET CLR. Dado que esta API solo permite un suscriptor, ejecuta solo una solución de APM en tu entorno de aplicación.
 </div>
 
@@ -118,7 +118,7 @@ Para instalar .NET Profiler en toda la máquina:
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota:</strong> Esta instalación no instrumenta aplicaciones que se ejecutan en IIS. En el caso de aplicaciones que se ejecutan en IIS, sigue el proceso de Windows para la instalación en toda la máquina.
 </div>
 
@@ -131,7 +131,7 @@ Para instalar el .NET Profiler por aplicación:
 
 {{% tab "Azure App Service" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Solo se admiten aplicaciones web. Las funciones no son compatibles.
 </div>
 
@@ -234,7 +234,7 @@ Para instalar el .NET Profiler por aplicación web:
    net start w3svc
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
@@ -416,7 +416,7 @@ Puede configurar el generador de perfiles utilizando las siguientes variables de
 | `DD_PROFILING_HEAP_ENABLED` | Booleano        | Si se establece en `true`, habilita el perfil de heap en directo (fase beta). Por defecto es `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Booleano        | Si se establece en `false`, se desactiva el perfil de recopilación de elementos no usados utilizado en la interfaz de usuario de Cronología. Por defecto es `true`.  |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Note</strong>: Para las aplicaciones IIS, debes establecer las variables de entorno en el registro (en nodos <code>HKLM\System\CurrentControlSet\Services\WAS</code> y <code>HKLM\System\CurrentControlSet\Services\W3SVC</code>) como se muestra en la pestaña <a href="?tab=windowsservices#installation">Windows Service anterior</a>. Las variables de entorno se aplican a <em>todas</em> las aplicaciones de IIS.
 Desde IIS 10, puedes establecer variables de entorno para cada aplicación IIS en el archivo <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code>.</a> Consulta la <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">documentación de Microsoft</a> para obtener más detalles.
 </div>

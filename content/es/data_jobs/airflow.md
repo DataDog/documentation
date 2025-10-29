@@ -161,7 +161,7 @@ Establece `OPENLINEAGE_CLIENT_LOGGING` en `DEBUG` en el [script de inicio de Ama
 
 {{% tab "Astronomer" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Para los clientes de Astronomer que utilizan Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro ofrece funciones de linaje que dependen del proveedor Airflow OpenLineage</a>. Data Jobs Monitoring depende del mismo proveedor OpenLineage y utiliza el transporte <a href=https://openlineage.io/docs/client/python#composite>Composite</a> para añadir transporte adicional.
 </div>
 

@@ -21,6 +21,8 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
+{{% tracing-go-v2 %}}
+
 ## Manual injection
 
 The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
@@ -31,8 +33,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +53,6 @@ The above example illustrates how to use the span's context in the standard libr
 ## Injection into logrus logs
 
 A hook for the logrus package is available to automatically link your log and spans.
-The package is available in the Go tracer.
 
 ```go
 package main
@@ -60,10 +60,8 @@ package main
 import (
     "github.com/sirupsen/logrus"
 
-    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus" // 1.x
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2" // 2.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -89,3 +87,4 @@ This automatically injects the trace id to your logs when you log with the conte
 
 [1]: /logs/log_collection/go/#configure-your-logger
 [2]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[3]: /tracing/trace_collection/custom_instrumentation/go/migration

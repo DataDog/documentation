@@ -1,16 +1,19 @@
 ---
 aliases:
-- /es/error_tracking/standalone_frontend/collecting_browser_errors
+- /error_tracking/standalone_frontend/collecting_browser_errors
+description: Aprende a recopilar y realizar un seguimiento de errores frontend de
+  varias fuentes utilizando el SDK del navegador RUM, incluida la recopilación manual
+  de errores y los límites de errores React.
 further_reading:
-- enlace: /error_tracking/explorer/
-  etiqueta: Documentation
-  texto: Explora tus errores en Datadog
-- enlace: /error_tracking/monitors/
-  etiqueta: Documentation
-  texto: Alerta proactiva sobre cuestiones de impacto
-- etiqueta: Documentation
+- link: /error_tracking/explorer/
+  tag: Documentation
+  text: Explora tus errores en Datadog
+- link: /error_tracking/monitors/
+  tag: Documentation
+  text: Alerta proactiva sobre cuestiones de impacto
+- tag: Documentation
   link: /real_user_monitoring
-  texto: Medir el rendimiento y el impacto en el usuario
+  text: Medir el rendimiento y el impacto en el usuario
 title: Recopilación de errores del navegador
 ---
 ## Información general
@@ -36,6 +39,7 @@ Para obtener información sobre los atributos por defecto para todos los tipos d
 | `error.type`    | cadena | El tipo de error (o código de error en algunos casos).                     |
 | `error.message` | cadena | Un mensaje conciso, legible, de una línea, en el cual se explica el evento. |
 | `error.stack`   | cadena | El stack trace o información complementaria sobre el error.     |
+| `error.causes` | [Matriz][12] | Una lista de errores opcional que proporciona contexto adicional. Este atributo se utiliza para mostrar los errores por separado y mejorar el formato. Para más información, consulta la [documentación de MDN][13]. |
 
 ### Errores de origen
 
@@ -49,14 +53,14 @@ Los errores de origen incluyen información a nivel de código sobre el error. P
 
 Excepciones manejadas por Monitor, rechazos de promesas manejados y otros errores no rastreados automáticamente por el SDK del navegador con la API `addError()`:
 
-{{< code-block lang="JavaScript" >}}
+{{< code-block lang="javascript" >}}
 addError(
     error: unknown,
     context?: Context
 );
 {{< /code-block >}}
 
-**Nota**: El [Seguimiento de errores][4] procesa errores que se envían con la fuente configurada en `custom`, `source` o `report` y que contienen una traza de stack tecnológico. El Seguimiento de errores no procesa errores enviados con cualquier otra fuente (como `console`) o enviados desde extensiones del navegador.
+**Nota**: [Error Tracking][4] procesa errores que se envían con la fuente establecida en `custom`, `source`, `report` o `console` y contienen un stack trace. Los errores enviados con cualquier otra fuente (como `network`) o enviados desde extensiones del navegador no son procesados por Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -255,3 +259,5 @@ Obtén visibilidad de los scripts de origen cruzado siguiendo estos dos pasos:
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [11]: /es/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

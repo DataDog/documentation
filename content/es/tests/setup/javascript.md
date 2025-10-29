@@ -22,10 +22,6 @@ title: Tests de JavaScript y TypeScript
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Marcos de test compatibles:
@@ -43,7 +39,7 @@ La instrumentación funciona en el tiempo de ejecución, por lo que los transcom
 
 ## Configuración del método de informes
 
-Para informar resultados de tests a Datadog, debes configurar la biblioteca de Datadog JavaScript:
+Para informar resultados de tests a Datadog, debes configurar la librería de Datadog JavaScript:
 
 {{< tabs >}}
 {{% tab "Acciones de Github" %}}
@@ -62,7 +58,7 @@ Si lo haces, el resto de los pasos de configuración a continuación pueden omit
 
 
 {{% tab "Otro proveedor de CI en la nube" %}}
-<div class="alert alert-info">El modo sin Agent está disponible en las versiones de la biblioteca de Datadog JavaScript >= 2.5.0</div>
+<div class="alert alert-info">El modo sin Agent está disponible en las versiones de la librería de Datadog JavaScript >= 2.5.0</div>
 {{% ci-agentless %}}
 
 {{% /tab %}}
@@ -211,7 +207,7 @@ El formato de las anotaciones es el siguiente, donde `$TAG_NAME` es una *cadena*
 ```
 **Nota*: Los valores `description` en anotaciones se [escriben como cadenas][2]. Los números también funcionan, pero debes desactivar el error de escritura con `// @ts-expect-error`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Importante</strong>: El prefijo <code>DD_TAGS</code> es obligatorio y distingue entre mayúscula y minúscula.
 </div>
 
@@ -487,7 +483,7 @@ Si la aplicación de navegador que se está probando se instrumenta con la [Moni
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest es ESM primero</a>, por lo que su configuración es diferente de otros marcos de test.
 </div>
 
@@ -624,11 +620,11 @@ Para más información sobre etiquetas `service` y `env` reservadas, consulta [E
 
 ## API para tests manuales
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Para utilizar la API de tests manuales, debes pasar <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> como variable de entorno.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: La API de tests manuales está en <strong>fase beta</strong>, por lo que podría sufrir modificaciones. Está disponible a partir de las versiones <code>4.4.0</code>, <code>3.25.0</code> y <code>2.38.0</code> de <code>dd-trace</code>.
 </div>
 

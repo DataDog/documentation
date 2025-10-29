@@ -221,7 +221,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "ibm_db2" >}}
+{{< get-metrics-from-git "ibm-db2" >}}
 
 
 ### Événements
@@ -229,7 +229,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 - `ibm_db2.tablespace_state_change` se déclenche à chaque changement d'état d'un tablespace.
 
 ### Checks de service
-{{< get-service-checks-from-git "ibm_db2" >}}
+{{< get-service-checks-from-git "ibm-db2" >}}
 
 
 ## Dépannage

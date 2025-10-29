@@ -166,7 +166,7 @@ Una vez que se haya configurado correctamente la gateway, dirígete al [explorad
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "akeyless_gateway" >}}
+{{< get-metrics-from-git "akeyless-gateway" >}}
 
 
 ### Checks de servicio

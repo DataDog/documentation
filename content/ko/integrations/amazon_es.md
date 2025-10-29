@@ -92,7 +92,7 @@ Amazon OpenSearch Service는 AWS Cloud에서 OpenSearch 클러스터를 손쉽�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_es" >}}
+{{< get-metrics-from-git "amazon-es" >}}
 
 
 ### 이벤트

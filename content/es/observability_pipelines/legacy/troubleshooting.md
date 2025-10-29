@@ -7,10 +7,6 @@ further_reading:
 title: (LEGACY) Solucionar problemas
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
-{{< /site-region >}}
-
 ## Información general
 Si experimentas un comportamiento inesperado en Observability Pipelines (OP) de Datadog, hay algunos problemas comunes que puedes investigar y esta guía puede ayudarte a resolver los problemas rápidamente. Si sigues teniendo problemas, ponte en contacto con el [servicio de asistencia de Datadog][3] para obtener más ayuda.
 

@@ -15,10 +15,6 @@ further_reading:
   text: "Use CI jobs failure analysis to identify root causes in failed jobs"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The [Pipelines page][1] is useful for developers who want to keep an eye on the build pipeline for their service.

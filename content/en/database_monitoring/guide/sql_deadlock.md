@@ -46,6 +46,7 @@ Supported Agent versions
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
       MAX_DISPATCH_LATENCY = 30 SECONDS,
+      MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
       STARTUP_STATE = ON
   );
   GO
@@ -54,9 +55,11 @@ Supported Agent versions
   GO
 ```
 
+   **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from the session configuration, as this option is not supported on RDS instances.
+
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
-  deadlocks_collection:
+  collect_deadlocks: # Renamed from deadlocks_collection in Agent version 7.70.
       enabled: true
 ```
 
@@ -85,7 +88,7 @@ Supported Agent versions
 
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
-  deadlocks_collection:
+  collect_deadlocks: # Renamed from deadlocks_collection in Agent version 7.70.
       enabled: true
 ```
 
@@ -95,8 +98,8 @@ Supported Agent versions
 
 ## Exploring deadlock events
 
-To access the deadlock view, navigate to the **APM** > **Database Monitoring** > **Databases** tab, select a SQL Server host, and then click the **Deadlocks** tab.
-The deadlock tab displays details about the victim and survivor processes, and includes a link to the deadlock diagram.
+To access the deadlock view, navigate to the **APM** > **Database Monitoring** > **Databases** tab, then select a SQL Server host. Next, select the **Queries** tab, then select the **Deadlocks** tab.
+The Deadlocks tab displays details about the victim and survivor processes, and includes a link to the deadlock diagram.
 
 **Note**: Because deadlocks occur infrequently, it's unlikely that any deadlock information will be visible right away.
 

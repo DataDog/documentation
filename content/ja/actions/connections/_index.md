@@ -16,10 +16,6 @@ further_reading:
 title: 接続
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択された <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Workflow Automation と App Builder はサポートされていません。</div>
-{{< /site-region >}}
-
 アクションは外部のソフトウェアシステムと連携するため、対応するインテグレーションで Datadog アカウントを認証する必要がある場合があります。認証が必要なすべてのアクションが Datadog アカウントの ID を検証できて初めて、アプリやワークフローは正常に実行されます。Datadog に権限を付与する際は、セキュリティのベストプラクティスに従い、アプリまたはワークフローの実行に必要な権限のみを付与していることを確認してください。
 
 アクションの認証方法は次の 2 種類があります:
@@ -147,7 +143,7 @@ title: 接続
 
 ## コネクショングループ
 
-<div class="alert alert-warning"><strong>注</strong>: コネクショングループは Workflow Automation でのみ利用できます。App Builder では利用できません。</div>
+<div class="alert alert-danger"><strong>注</strong>: コネクショングループは Workflow Automation でのみ利用できます。App Builder では利用できません。</div>
 
 ワークフローが入力に応じて正しいアカウントへ認証できるように、コネクションをグループ化できます。同じグループにまとめるには、同一のインテグレーションである必要があります (例：同じグループに GCP と AWS のコネクションを混在させることはできません) 。
 
@@ -182,7 +178,7 @@ title: 接続
 
 **注**: コネクショングループ内のコネクションを使用するには、そのコネクションの [Resolver 権限][12]が必要です。ワークフローが Resolver 権限を持たないコネクションを使用しようとすると、`403 Forbidden` エラーで失敗します。この問題を解決するには、以下のいずれかを行います:
 - Resolver 権限を持たないコネクションを参照しないようにワークフローを構成する。
-- Resolver 権限を持たないコネクションをコネクショングループから削除する。<div class="alert alert-danger"><strong>注</strong>: 複数のワークフローでコネクショングループを使用している場合、ほかのワークフローが依存しているコネクションを削除すると、そのワークフローが失敗します。</div>
+- Resolver 権限を持たないコネクションをコネクショングループから削除する。<div class="alert alert-warning"><strong>注</strong>: 複数のワークフローでコネクショングループを使用している場合、ほかのワークフローが依存しているコネクションを削除すると、そのワークフローが失敗します。</div>
 
 ### コネクショングループを更新する
 
@@ -198,7 +194,7 @@ title: 接続
 1. 削除したいグループにカーソルを合わせ、**delete (trash can)** アイコンをクリックします。
 1. **Delete** をクリックします。
 
-<div class="alert alert-warning"><strong>注</strong>: コネクショングループを削除すると、そのグループを使用しているワークフローに影響します。</div> 
+<div class="alert alert-danger"><strong>注</strong>: コネクショングループを削除すると、そのグループを使用しているワークフローに影響します。</div> 
 
 ## 参考資料
 

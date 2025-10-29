@@ -20,10 +20,6 @@ title: (레거시) 관측성 파이프라인 작업자 설정하기
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipeline은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## 개요

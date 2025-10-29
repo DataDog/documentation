@@ -31,7 +31,7 @@ Event monitors alert on ingested events that match a search query, allowing you 
 
 To create an event monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Event**][1].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/#set-alert-aggregation">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 

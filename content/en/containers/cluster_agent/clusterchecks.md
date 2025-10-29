@@ -1,5 +1,6 @@
 ---
 title: Cluster Checks
+description: Configure and manage cluster checks for monitoring noncontainerized workloads and cluster services
 aliases:
     - /agent/autodiscovery/clusterchecks
     - /agent/faq/kubernetes-state-cluster-check

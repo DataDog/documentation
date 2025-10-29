@@ -34,7 +34,7 @@ Datadog Azure インテグレーションを使用して SQL Managed Instances �
 
 ## 収集データ
 ### メトリクス
-{{< get-metrics-from-git "azure_sql_managed_instance" >}}
+{{< get-metrics-from-git "azure-sql-managed-instance" >}}
 
 
 ### イベント

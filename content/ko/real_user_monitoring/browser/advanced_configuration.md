@@ -540,7 +540,7 @@ window.DD_RUM &&
 | `view.name`                    | 문자열 | 현재 보기의 이름.                                                                                                                                                             |
 | `view.performance.lcp.resource_url` | 문자열 |   Largest Contentful Paint에 대한 리소스 URL.                                                                                                                                 |
 | `service`                      | 문자열 | 애플리케이션의 서비스 이름입니다.                                                                                                                                                    |
-| `version`                      | 문자열 | 애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)입니다.                                                                                                                  |
+| `version`                      | 문자열 | 애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)                                                                                                                  |
 | `action.target.name`           | 문자열 | 사용자가 상호 작용한 요소. 자동으로 수집된 액션에만 해당합니다.                                                                                                      |
 | `error.message`                | 문자열 | 오류를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.                                                                                                                         |
 | `error.stack `                 | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보.                                                                                                                             |
@@ -552,6 +552,17 @@ window.DD_RUM &&
 
 RUM Browser SDK는 위에 나열되지 않은 이벤트 속성에 대한 수정 사항은 무시합니다. 이벤트 속성에 대한 자세한 내용은 [RUM Browser SDK GitHub 리포지토리][15]를 참조하세요.
 
+**참고**: 다른 이벤트와 달리 뷰 이벤트는 수명 주기 동안 발생하는 업데이트를 반영하기 위해 Datadog에 여러 번 전송됩니다. 새 뷰가 활성화된 상태에서도 이전 뷰 이벤트 업데이트를 전송할 수 있으므로 뷰 이벤트 수정 시 유의하는 것이 좋습니다.
+
+```javascript
+beforeSend: (event) => {
+    // 현재 뷰 이름이 현재 뷰와 이전 뷰 모두에 적용될 수 있으므로 권장하지 않습니다
+    event.view.name = getCurrentViewName()
+
+    // 권장
+    event.view.name = getViewNameForUrl(event.view.url)
+}
+```
 ### RUM 이벤트 삭제
 
 `beforeSend` API과 함께 `false`를 반환하여 RUM 이벤트를 삭제합니다:
@@ -619,6 +630,20 @@ RUM 세션에 사용자 정보를 추가하면 다음과 같은 장점이 있습
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI의 사용자 API" >}}
 
+{{< tabs >}}
+{{% tab "6.4.0 and above" %}}
+
+다음 속성을 사용할 수 있습니다.
+
+| 속성  | 유형 | 필수 |  설명                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | 문자열 | Yes | 고유한 사용자 식별자.                                                                                  |
+| `usr.name`  | 문자열 | No | RUM UI에 기본적으로 표시되는 사용자 친화적인 이름.                                                  |
+| `usr.email` | 문자열 | No | 사용자 이메일. 사용자 이름이 없는 경우 RUM UI에 표시됨. Gravatars를 가져오는 데 사용되기도 함.  |
+
+{{% /tab %}}
+{{% tab "Before 6.4.0" %}}
+
 다음 속성은 선택 사항이나, Datadog에서는 이 중에서 최소 하나의 정보를 제공하는 것을 강력히 권고합니다. 예를 들어, 세션에서 사용자 ID를 설정해서 일부 기본 RUM 대시보드에서 관련 정보를 확인할 수 있는데, 이를 위해 `usr.id`가 쿼리 일부로 사용됩니다.
 
 | 속성  | 유형 | 설명                                                                                              |
@@ -626,6 +651,9 @@ RUM 세션에 사용자 정보를 추가하면 다음과 같은 장점이 있습
 | `usr.id`    | 문자열 | 고유한 사용자 식별자.                                                                                  |
 | `usr.name`  | 문자열 | RUM UI에 기본적으로 표시되는 사용자 친화적인 이름.                                                  |
 | `usr.email` | 문자열 | 사용자 이메일. 사용자 이름이 없는 경우 RUM UI에 표시됨. Gravatars를 가져오는 데 사용되기도 함.  |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 권장 속성 외에 추가 속성을 추가하여 필터링 기능을 향상시킬 수 있습니다. 예를 들어 사용자 요금제 또는 해당 사용자가 속한 사용자 그룹에 대한 정보를 추가할 수 있습니다.
 
@@ -770,6 +798,152 @@ window.DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## 계정
+
+To group users into different set, use the account concept.
+
+다음 속성을 사용할 수 있습니다.
+
+| 속성      | 유형   | 필수 | 설명                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | 문자열 | Yes      | Unique account identifier.                                 |
+| `account.name` | 문자열 | No       | Account friendly name, displayed by default in the RUM UI. |
+
+### Identify account
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Access account
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.getAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add/Override account property
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove account property
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear account properties
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.clearAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -1317,9 +1491,9 @@ RUM 탐색기에서 수행한 모든 쿼리에 대해 서비스 속성을 사용
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[14]: /ko/real_user_monitoring/feature_flag_tracking/using_feature_flags/#feature-flag-naming
+[14]: /ko/real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /ko/logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130

@@ -6,30 +6,10 @@ title: Data Streams Monitoring for Google Pub/Sub
 
 * [Datadog Agent v7.34.0 or later][1]
 
-<table>
-  <thead>
-    <tr>
-      <th>Language</th>
-      <th>Library</th>
-      <th>Minimal tracer version</th>
-      <th>Recommended tracer version</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="/data_streams/java">Java</a></td>
-      <td><a href="https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub">google-cloud/pubsub</a></td>
-      <td>1.25.0</td>
-      <td>1.42.2 or later</td>
-    </tr>
-    <tr>
-      <td><a href="/data_streams/nodejs">NodeJs</a></td>
-      <td><a href="https://www.npmjs.com/package/@google-cloud/pubsub">google-cloud/pubsub</a></td>
-      <td>5.25.0 or 4.49.0</td>
-      <td>5.25.0 or later</td>
-    </tr>
-  </tbody>
-</table>
+| Language     | Library                                                                                        | Minimal tracer version                                                            | Recommended tracer version                                                            |
+|--------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| [Java][2]    | [google-cloud/pubsub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub) | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="minimal" >}}         | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="recommended" >}}         |
+| [Node.js][3] | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                      | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}} | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}} |
 
 ### Setting up Data Streams Monitoring
 See setup instructions for [Java][2] or [Node.js][3].

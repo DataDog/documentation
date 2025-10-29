@@ -1,5 +1,6 @@
 ---
 title: Kubernetes and Integrations
+description: Configure monitoring integrations for applications running in Kubernetes using Autodiscovery templates
 aliases:
   - /agent/autodiscovery/integrations
   - /guides/servicediscovery/
@@ -122,6 +123,29 @@ You can store Autodiscovery templates as local files inside the mounted `conf.d`
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
 
+   For Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   For Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -236,6 +260,7 @@ spec:
             logs:
               <LOGS_CONFIG>
 ```
+<div class="alert alert-info">When multiple deployed <code>DatadogAgent</code> CRDs use <code>configDataMap</code>, each CRD writes to a shared ConfigMap named <code>nodeagent-extra-confd</code>. This can cause configurations to override each other. </div>
 
 To monitor a [Cluster Check][1], add an override `extraConfd.configDataMap` to the `clusterAgent` component. You must also enable cluster checks by setting `features.clusterChecks.enabled: true`. 
 
@@ -393,7 +418,7 @@ metadata:
   annotations:
     ad.datadoghq.com/postgres.checks: |
       {
-        "postgresql": {
+        "postgres": {
           "instances": [
             {
               "host": "%%host%%",
@@ -426,7 +451,7 @@ kind: Pod
 metadata:
   name: postgres
   annotations:
-    ad.datadoghq.com/postgres.check_names: '["postgresql"]'
+    ad.datadoghq.com/postgres.check_names: '["postgres"]'
     ad.datadoghq.com/postgres.init_configs: '[{}]'
     ad.datadoghq.com/postgres.instances: |
       [
@@ -472,6 +497,30 @@ spec:
    ```
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+
+   For Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   For Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -527,7 +576,7 @@ The following etcd commands create a Postgres integration template with a custom
 
 ```conf
 etcdctl mkdir /datadog/check_configs/postgres
-etcdctl set /datadog/check_configs/postgres/check_names '["postgresql"]'
+etcdctl set /datadog/check_configs/postgres/check_names '["postgres"]'
 etcdctl set /datadog/check_configs/postgres/init_configs '[{}]'
 etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","port":"5432","username":"datadog","password":"%%env_PG_PASSWORD%%"}]'
 ```

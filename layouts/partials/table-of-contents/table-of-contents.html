@@ -7,7 +7,23 @@
             {{ end }}
             <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">{{ i18n "table_of_contents_heading"}}</p>
             {{ if ne .Params.disable_toc true }}
-              {{ if eq .Page.Type "reference" }}
+              {{ if eq .Page.Name "Custom Processor" }}
+              {{ $functions := $.Site.Data.reference.functions | default (dict) }}
+              <nav id="TableOfContents">
+                <ul>
+                  {{ range $category, $arrayOfFunctionObjs := $functions }}
+                    <li>
+                      <a href="#{{ $category | anchorize }}">{{ $category }} Functions</a>
+                      <ul>
+                      {{ range $obj := $arrayOfFunctionObjs }}
+                        <li><a href="#{{ $obj.name | anchorize }}">{{ $obj.name }}</a></li>
+                      {{ end }}
+                      </ul>
+                    </li>
+                  {{ end }}
+                </ul>
+              </nav>
+              {{ else if eq .Page.Type "reference" }}
                 {{ if eq .Page.File.TranslationBaseName "errors" }}
                     {{ $errors := $.Site.Data.reference.errors | default (dict) }}
                     <nav id="TableOfContents">
@@ -33,7 +49,7 @@
                         {{ end }}
                       </ul>
                     </nav>
-                {{ else }}
+            {{ else }}
                     {{ $t := (index .Site.Data.reference "schema.tables") }}
                     {{ $iterable_data := (index $t (.Title | lower)) }}
                     <nav id="TableOfContents">

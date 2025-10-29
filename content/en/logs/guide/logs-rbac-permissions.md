@@ -21,6 +21,7 @@ Assign or remove permission to a role directly by [updating the role on the Data
 
 
 [1]: https://app.datadoghq.com/access/roles
+
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -86,43 +87,7 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 - Setting the name of the pipeline
 - Setting pipelines filters for what logs should enter the processing pipeline
 - Reorder pipelines
-- Granting another role the [Logs Write Processors](#logs_write_processors) permission, scoped for that pipeline
 - Managing [standard attributes][10] or [aliasing facets][11]
-
-### `logs_write_processors`
-
-Grants a role the ability to create, edit, or delete processors and nested pipelines.
-
-This permission can be assigned either globally or restricted to a subset of pipelines.
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-Assign the role(s) in the `Edit` modal of a specific pipeline.
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
-2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
-3. Grant permission to that role with the following call:
-
-```sh
-curl -X POST \
-        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
-        -H "Content-Type: application/json" \
-        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
-        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
-        -d '{
-                "id": "<PERMISSION_UUID>",
-                "type": "permissions"
-            }'
-```
-
-[1]: /api/v2/roles/#list-roles
-[2]: /api/v2/roles/#list-permissions
-{{% /tab %}}
-{{< /tabs >}}
 
 ### `logs_write_archives`
 
@@ -282,15 +247,14 @@ Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 
 ## Legacy permissions
 
-These permissions are globally enabled by default for all users.
+These permissions are either globally enabled by default for all users, or only available to users who were previously granted access (grandfathered in).
 
 [Logs Read Data](#logs_read_data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
 
 * If this user has scoped [Read Index Data](#logs_read_index_data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
 * If this user has [livetail](#logs_live_tail) permission, this user only sees `service:api` logs in the livetail.
 
-
-### `logs_read_index_data`
+{{% collapse-content title="logs_read_index_data" level="h4" expanded=false %}}
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
 
@@ -330,11 +294,55 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-### `logs_live_tail`
+{{% /collapse-content %}}
+
+{{% collapse-content title="logs_live_tail" level="h4" expanded=false %}}
 
 Grants a role the ability to use the [Live Tail][16] feature.
 
 This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs_read_index_data) permission.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="logs_write_processors" level="h4" expanded=false %}}
+
+
+This permission is only available to users who were previously granted access (grandfathered in). 
+
+Grants a role the ability to create, edit, or delete processors and nested pipelines.
+
+This permission can be assigned either globally or restricted to a subset of pipelines.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Assign the role(s) in the `Edit` modal of a specific pipeline.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+3. Grant permission to that role with the following call:
+
+```sh
+curl -X POST \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
+            }'
+```
+
+[1]: /api/v2/roles/#list-roles
+[2]: /api/v2/roles/#list-permissions
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
 
 ## Further reading
 

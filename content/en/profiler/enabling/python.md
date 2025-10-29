@@ -21,29 +21,14 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+To use profiling, ensure the following requirements are met:
+- Enable profiling through the Datadog tracing library. Using the latest stable release is recommended.
+- Verify your Python and tracing library versions are compatible by reviewing the [Python Compatibility Requirements][17].
+**Note**: Some features depend on newer Python versions than the minimum required version for the tracing library. For more details, read [Profile Types][8].
+
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-The Datadog Profiler requires Python 2.7+.
-
-The following profiling features are available depending on your Python version. For more details, read [Profile Types][8]:
-
-|      Feature         | Supported Python versions          |
-|----------------------|------------------------------------|
-| Wall time profiling  | Python 2.7+                      |
-| CPU time profiling   | Python 2.7+ on POSIX platforms   |
-| Exception profiling  | Python 3.7+ on POSIX platforms   |
-| Lock profiling       | Python 2.7+                      |
-| Memory profiling     | Python 3.5+                      |
-
 The installation requires pip version 18 or above.
-
-The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
-
-| Feature                              | Required `dd-trace-py` version |
-|--------------------------------------|--------------------------------|
-| [Trace to Profiling integration][12] | 2.12.0+, 2.11.4+, or 2.10.7+ |
-| [Endpoint Profiling][13]             | 0.54.0+                        |
-| [Timeline][15]                       | 2.12.0+, 2.11.4+, or 2.10.7+   |
 
 Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][16].
 
@@ -56,8 +41,6 @@ Install `ddtrace`, which provides both tracing and profiling functionalities:
 ```shell
 pip install ddtrace
 ```
-
-**Note**: Profiling requires the `ddtrace` library version 0.40+.
 
 If you are using a platform where `ddtrace` binary distribution is not available, first install a development environment.
 
@@ -127,23 +110,18 @@ enabled by default, you can turn it off by setting
 
 ### Stack V2
 
-Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on Linux.
-It enhances the performance, accuracy, and reliability of Python CPU profiling.
-The feature is enabled by default from `ddtrace` versions 2.20+ and we highly recommend
-using the most recent release of the library to benefit from latest improvements
-and bug fixes. This feature activates our new stack sampling, collection and
-export system.
+Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on
+Linux and macOS. It enhances the performance, accuracy, and reliability of
+Python CPU profiling. The feature is enabled by default from `ddtrace` versions
+2.20+. It is recommended to use the most recent release of the library to
+benefit from latest improvements and bug fixes. This feature activates a new
+stack sampling, collection, and export system.
 
-The following are known issues and missing features from Stack V2:
-
-- `gunicorn` and Stack V2 results in performance degradation of services
-- `gevent` support is lacking
-- Exception sampling is missing
-
-If you find these as a blocker for enabling Stack V2 for your services, you can
-turn it off via setting `DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other
-issue, then please proceed to escalate using appropriate support channels or
-file an issue on the [GitHub repository](https://github.com/DataDog/dd-trace-py).
+Exception sampling is missing from Stack V2. If you find this as a blocker for
+enabling Stack V2 for your services, you can turn it off by setting
+`DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other issue,
+escalate using appropriate support channels or file an issue on the
+[GitHub repository](https://github.com/DataDog/dd-trace-py).
 
 
 ## Not sure what to do next?
@@ -161,9 +139,10 @@ The [Getting Started with Profiler][7] guide takes a sample service with a perfo
 [5]: https://app.datadoghq.com/profiling
 [6]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [7]: /getting_started/profiler/
-[8]: /profiler/profile_types/?code-lang=python
+[8]: /profiler/profile_types/?tab=python
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
 [15]: /profiler/profile_visualizations/#timeline-view
 [16]: /serverless/aws_lambda/profiling/
+[17]: /tracing/trace_collection/compatibility/python

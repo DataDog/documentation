@@ -1,5 +1,6 @@
 ---
 title: Tracer Debug Logs
+description: Enable and collect debug logs from APM tracers to troubleshoot configuration and connectivity issues.
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -7,7 +8,7 @@ further_reading:
 ---
 
 ## Automated debug log collection
-<div class="alert alert-warning">Automated debug logs are supported for Java, Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+<div class="alert alert-danger">Automated debug logs are supported for Java, Python, Node.js, and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
@@ -16,12 +17,16 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 - Your API key must be configured for Remote Configuration.
 - You must have a supported tracer version:
   - Java: `1.26.0` or greater
+  - Python: `3.12.0` or greater
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
   - .NET: `2.46.0` or greater
 
 ### Send a flare
-To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][3] on the Agent.
 {{% remote-flare %}}
+
+<div class="alert alert-danger">If you don't see the option for your service, there is likely a connection error between the application and the Datadog Agent and you should default to the manual option of providing debug tracer logs.</div>
+
 For example:
 
 {{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
@@ -38,9 +43,14 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file:
+**Notes**:
+- Datadog Java Tracer implements SLF4J SimpleLogger, so [all of its settings can be applied][1]. For example, you can configure it to log to a dedicated log file:
 ```
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
+```
+- To output Datadog Java Tracer logs in a JSON format compatible with the Datadog Logs UI, use:
+```
+-Ddatadog.slf4j.simpleLogger.jsonEnabled=true
 ```
 
 
@@ -134,6 +144,8 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
 or enable the debug mode during the `Start` config:
 
@@ -141,8 +153,7 @@ or enable the debug mode during the `Start` config:
 package main
 
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -163,8 +174,7 @@ package main
 import (
   "time"
 
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -242,7 +252,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `32`.
 
 For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 
@@ -507,6 +517,5 @@ Available starting in 0.98.0:
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
-[3]: /agent/remote_config
-[4]: /agent/fleet_automation/
-[5]: /agent/remote_config#enabling-remote-configuration
+[3]: /tracing/guide/remote_config
+[5]: /remote_configuration#enabling-remote-configuration

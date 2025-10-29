@@ -7,12 +7,6 @@ further_reading:
   text: "Create a case"
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 A project is a container object that holds a set of cases. Organize your work around the groups that make sense to your organization, whether that's teams, services, or initiatives. Cases in each project are isolated from one another, helping you to focus on what's relevant.
@@ -28,7 +22,7 @@ To create a project:
 
 ## Delete a project
 
-<div class="alert alert-warning">Deleted cases cannot be recovered.</div>
+<div class="alert alert-danger">Deleted cases cannot be recovered.</div>
 
 You can delete a project from a project's Settings page.
 

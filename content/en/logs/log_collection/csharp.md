@@ -323,7 +323,7 @@ Agentless logging (also known as "direct log submission") supports the following
 
 It does not require modifying your application code, or installing additional dependencies into your application.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
 </div>
 
@@ -352,13 +352,13 @@ To enable Agentless logging, set the following environment variables:
 `DD_LOGS_INJECTION`
 : Enables [connecting logs and traces][9]:<br>
 **Default**: `true` <br>
-Enabled by default when using Agentless logging from Tracer version 2.7.0.
+Enabled by default from Tracer version 3.24.0.
 
 `DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
 : Enables Agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
 **Example**: `Serilog;Log4Net;NLog`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> If you are using a logging framework in conjunction with <code>Microsoft.Extensions.Logging</code>, you will generally need to use the framework name. For example, if you are using <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, you should set <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
 </div>
 
@@ -412,6 +412,14 @@ The following configuration values should generally not be modified, but may be 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
 **Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap2.datadoghq.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 

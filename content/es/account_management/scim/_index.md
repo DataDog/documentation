@@ -4,6 +4,8 @@ algolia:
   - scim
   - proveedor de identidad
   - IdP
+description: Automatiza el suministro y la quita de usuarios en Datadog mediante la
+  integración de SCIM con los proveedores de identidades Microsoft Entra ID y Okta.
 further_reading:
 - link: /account_management/scim/azure/
   tag: Documentación
@@ -28,6 +30,7 @@ El Sistema de administración de identidades entre dominios, o SCIM, es un está
 - Eliminar usuarios en Datadog cuando ya no necesiten acceso
 - Mantener sincronizados los atributos del usuario entre el proveedor de identidad (IdP) y Datadog
 - Inicio de sesión único en Datadog (recomendado)
+- Teams gestionados: crea Teams de Datadog a partir de grupos del proveedor de identidades y mantén sincronizada la pertenencia a los Teams de Datadog con la pertenencia a grupos en el proveedor de identidades.
 
 Datadog admite el uso de SCIM con los proveedores de identidad Microsoft Entra ID y Okta. Para configurar SCIM, consulta la documentación de tu IdP:
 - [Microsoft Entra ID][2]
@@ -66,3 +69,4 @@ Al crear un nuevo usuario con SCIM, se le envía un correo electrónico. Para ac
 [5]: /es/account_management/api-app-keys
 [6]: /es/account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users
+[8]: /es/help/

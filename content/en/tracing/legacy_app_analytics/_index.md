@@ -1,12 +1,13 @@
 ---
 title: App Analytics
+description: Documentation for deprecated App Analytics features with configuration information for legacy setups and migration guidance to new ingestion controls.
 aliases:
   - /tracing/visualization/search/
   - /tracing/trace_search_and_analytics/
   - /tracing/advanced_usage/
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_pipeline">ingestion controls and retention filters</a> instead.
 </div>
 
@@ -59,7 +60,7 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 
 App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
-* the [`WithAnalytics`][1] ([v2 documentation][2]) tracer start option, for example:
+* the [`WithAnalytics`][2] ([v1 documentation][1]) tracer start option, for example:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
@@ -186,16 +187,16 @@ Where `integration` is the name of the integration. See the [list of available i
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 In addition to the global setting, you can enable or disable App Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
 
 ```go
 package main
 
 import (
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -479,7 +480,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### In the Datadog Agent
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This section describes deprecated features with configuration information relevant to legacy App Analytics.
 </div>
 

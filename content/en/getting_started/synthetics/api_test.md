@@ -1,18 +1,13 @@
 ---
 title: Getting Started with API Tests
+description: Create Datadog API tests to proactively monitor your endpoints. Build single and multistep API tests with assertions, configure alerts, and troubleshoot issues.
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
 - link: '/api/latest/synthetics/#create-an-api-test'
   tag: 'API'
   text: 'Create an API test programmatically'
 - link: '/synthetics/api_tests'
   tag: 'Documentation'
   text: 'Learn more about single API tests'
-- link: '/synthetics/multistep'
-  tag: 'Documentation'
-  text: 'Learn more about multistep API tests'
 - link: '/getting_started/synthetics/private_location'
   tag: 'Documentation'
   text: 'Learn about private locations'

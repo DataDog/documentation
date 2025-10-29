@@ -1,5 +1,6 @@
 ---
 title: Integration Management
+description: Guide to managing official Datadog integrations using the datadog-agent integration command, including install, remove, show, and freeze operations.
 algolia:
   tags: ['integration management']
 ---
@@ -8,7 +9,7 @@ algolia:
 
 The Agent comes with a set of bundled official Datadog integrations to allow users to start monitoring their applications quickly. These integrations are available as single Python packages, and you can upgrade them separately.
 
-**Note**: Community, Partner, and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
+**Note**: Starting with Agent version 7.69, Community, Partner, and Marketplace integrations are automatically retained during upgrades. To opt out of this functionality, create an empty file named `.skip_install_python_third_party_deps` in the  `/etc/datadog-agent/` directory prior to upgrading. If this file is present, integrations are not retained and must be manually reinstalled after the upgrade.
 
 For Agent v6.8+, the `datadog-agent integration` command allows users to manage the official Datadog integrations that are available for the Agent. It has the following subcommands:
 

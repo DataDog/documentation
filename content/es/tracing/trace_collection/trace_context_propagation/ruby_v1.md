@@ -11,7 +11,7 @@ further_reading:
 title: (Legacy) Propagación del contexto de rastreo de Ruby
 ---
 
-<div class="alert alert-warning">Esta documentación corresponde al gem <code>ddtrace</code> v1.x. Si estás utilizando el gem de<code>Datadog</code> v2.0 o posterior, consulta la documentación más reciente de <a href="/tracing/trace_collection/trace_context_propagation/ruby">Propagación del contexto de rastreo de Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación es para e gem <code>ddtrace</code> v1.x. Si estás utilizando el gem <code>datadog</code> v2.0 o posterior, consulta la documentación más reciente de <a href="/tracing/trace_collection/trace_context_propagation/">Propagación del contexto de rastreo Ruby</a>.</div>
 
 ### Extracción e inyección de encabezados
 
@@ -45,17 +45,17 @@ También puedes activar o desactivar el uso de estos formatos en el código medi
 
 ```ruby
 Datadog.configure do |c|
-  # Lista de formatos de encabezado que deben extraerse
+  # List of header formats that should be extracted
   c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
 
-  # ista de formatos de encabezado que deben inyectarse
+  # List of header formats that should be injected
   c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
 end
 ```
 
-Para más información sobre la configuración de la propagación de contextos de rastreo, lee [la sección Rastreo distribuido][1] en los documentos de configuración de la biblioteca de rastreo de Ruby.
+Para más información sobre la configuración de la propagación de contextos de rastreo, lee [la sección Rastreo distribuido][1] en los documentos de configuración de la librería de rastreo de Ruby.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

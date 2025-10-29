@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Azure Cosmos DB for P
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_cosmosdb_for_postgresql" >}}
+{{< get-metrics-from-git "azure-cosmosdb-for-postgresql" >}}
 
 
 ### イベント

@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo"
   tag: "Blog"
   text: "Best practices for managing your SLOs with Datadog"
+- link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
+  tag: "Blog"
+  text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
 ---
 
 ## Overview

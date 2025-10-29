@@ -40,6 +40,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
       tag: 'Blog'
       text: 'Making profiling visualizations accessible to engineers at all levels'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiling-fourth-pillar/'
+      tag: 'Blog'
+      text: 'Why continuous profiling is the fourth pillar of observability'
 cascade:
     algolia:
         rank: 70

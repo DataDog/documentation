@@ -159,7 +159,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "nginx_ingress_controller" >}}
+{{< get-metrics-from-git "nginx-ingress-controller" >}}
 
 
 ### イベント

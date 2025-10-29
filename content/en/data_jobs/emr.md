@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
+description: "Configure Data Jobs Monitoring for Apache Spark applications on Amazon EMR clusters using AWS Secrets Manager and bootstrap actions."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -40,7 +41,7 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 
 #### Permissions to get secret value using AWS Secrets Manager
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
 </div>
 
@@ -56,7 +57,7 @@ These permissions are <strong>required</strong> if you are using AWS Secrets Man
 
 #### Permissions to describe cluster
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These permissions are <strong>required</strong> if you are <strong>NOT</strong> using the default role, <code>EMR_EC2_DefaultRole</code>.
 </div>
 
@@ -116,7 +117,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    ```
 
    Optionally, the script can be configured adding the following environment variables:
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.3.sh` to use version `0.13.3`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
 
    Optionally, the script can be configured by adding the following environment variables:
 

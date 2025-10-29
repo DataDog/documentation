@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Using Azure's Cloud Adoption Framework with Datadog can help you ensure safe, speedy migrations to a new cloud environment, whether from on-premises or other cloud enivornments.
+Using Azure's Cloud Adoption Framework with Datadog can help you ensure safe, speedy migrations to a new cloud environment, whether from on-premises or other cloud environments.
 
 You can:
 

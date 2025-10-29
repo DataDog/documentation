@@ -47,7 +47,7 @@ Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub grâce à un red
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_stackdriver_logging" >}}
+{{< get-metrics-from-git "google-stackdriver-logging" >}}
 
 
 **Remarque** : Datadog recueille des [métriques Google Cloud Logging définies par l'utilisateur][4] avec le préfixe `gcp.logging.user`.

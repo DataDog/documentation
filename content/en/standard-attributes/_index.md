@@ -1,6 +1,7 @@
 ---
 title: Default Standard Attributes
 disable_sidebar: true
+description: "A table of the attributes automatically applied to data sent to Datadog by the Agent by each of the RUM, Logs, and APM products, as applicable to the data domain."
 further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
@@ -43,7 +44,7 @@ attributes:
     type: string
     domain: Reserved
   - name: service
-    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
+    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
     product_source: 
       - icon-log
       - icon-rum
@@ -606,26 +607,29 @@ attributes:
     product_source:
       - icon-rum
       - ios
+      - browser
     type: string
-    domain: RUM user attributes (iOS)
+    domain: RUM user attributes (iOS, Browser)
   - name: usr.name
     description: Name of the user.
     product_source:
       - icon-rum
       - android
       - ios
+      - browser
       - roku
     type: string
-    domain: Global user attributes (Android, iOS, Roku)
+    domain: Global user attributes (Android, iOS, Browser, Roku)
   - name: usr.email
     description: Email of the user.
     product_source:
       - icon-rum
       - android
       - ios
+      - browser
       - roku
     type: string
-    domain: Global user attributes (Android, iOS, Roku)
+    domain: Global user attributes (Android, iOS, Browser, Roku)
  
   - name: session.id
     description: Unique ID of the session.
@@ -950,7 +954,7 @@ attributes:
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.type
-    description: Type of the user action (for example, `tap` or `application_start`). For [Custom Browser User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), it is set to `custom`. 
+    description: Type of the user action (for example, `tap` or `application_start`). For [Custom Browser User Actions](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), it is set to `custom`. 
     product_source:
       - icon-rum
       - android
@@ -960,7 +964,7 @@ attributes:
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.name
-    description: A user-friendly name (for example, `Click on checkout`). For [Custom Browser User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
+    description: A user-friendly name (for example, `Click on checkout`). For [Custom Browser User Actions](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
     product_source:
       - icon-rum
       - android
@@ -989,7 +993,7 @@ attributes:
     domain: View (Browser)
     
   - name: view.loading_type
-    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
+    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
     product_source:
       - icon-rum
       - browser

@@ -46,7 +46,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 2. En la [página de la integración de AWS][3], asegúrate de que `S3 Storage Lens` está habilitado en la pestaña `Metric Collection`.
 3. Instala la [integración de Datadog y Amazon S3 Storage Lens][4].
 
-**Nota:** Las métricas de S3 Storage Lens son métricas diarias y se publican en CloudWatch una vez al día. 
+**Nota:** Las métricas de S3 Storage Lens son métricas diarias y se publican en CloudWatch una vez al día.
 
 ## Datos recopilados
 
@@ -58,15 +58,15 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 
 La integración de Amazon S3 Storage Lens no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon S3 Storage Lens no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -2,6 +2,9 @@
 aliases:
 - /es/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 - /es/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+description: Aprende a configurar las puntuaciones de Apdex en tus servicios para
+  medir la satisfacción de los usuarios en función de los tiempos de respuesta y umbrales
+  de rendimiento de las aplicaciones.
 title: Configuración de la puntuación del Apdex por servicio
 ---
 {{< jqmath-vanilla >}}
@@ -34,27 +37,33 @@ Los administradores deben establecer los umbrales del Apdex, por servicio, antes
 
 Para visualizar el servicio o la aplicación web del Apdex: 
 
-1. En el [Catálogo de servicios][3], haz clic en un servicio web. En el gráfico superior derecho, selecciona Apdex en lugar de Latency (Latencia). Si no ves esta opción, verifica que hayas hecho clic en un servicio web:
+1. En [Software Catalog][3], pasa el ratón por encima de tu servicio web y selecciona **Service Page** (Página de servicios).
 
-   {{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection" >}}
+1. Haz clic en el título del gráfico **Latencia** para abrir un menú desplegable y selecciona **Apdex**. 
 
-2. Utiliza el icono del lápiz en la parte superior izquierda del widget para configurar el Apdex (debes ser administrador para ver este icono):
+   **Nota**: La opción Apdex sólo está disponible para los servicios web. 
 
-   {{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit" >}}
+   {{< img src="tracing/faq/apdex_selection_2.png" alt="Menú desplegable del gráfico de Latencia que muestra la opción Apdex" >}}
 
-3. Introduce directamente el umbral para visualizar la distribución de las solicitudes:
+1. Utiliza el icono del lápiz en la parte superior izquierda de tu widget para editar tu configuración de Apdex.
 
-   {{< img src="tracing/faq/apdex_update.png" alt="Apdex Update" >}}
+   **Nota**: Debes ser administrador para ver este icono.
 
-4. Guarda el widget para seguir la evolución del Apdex a lo largo del tiempo:
+   {{< img src="tracing/faq/apdex_edit.png" alt="Icono de lapiz sobre el gráfico de Apdex, que puede seleccionarse para editar el umbral tolerable" >}}
 
-   {{< img src="tracing/faq/apm_save.png" alt="Apdex Save" >}}
+1. Introduce tu umbral para visualizar la distribución de tus solicitudes.
 
-## Mostrar el Apdex en el Catálogo de servicios
+   {{< img src="tracing/faq/apdex_update.png" alt="Pantalla de edición de la Configuración de Apdex, que muestra el cuadro de texto para establecer el umbral tolerable" >}}
 
-Para visualizar las puntuaciones del Apdex en el [Catálogo de servicios][2], selecciónalo en el menú de configuración situado en la esquina superior derecha de la página:
+1. Guarda tu widget para seguir tu evolución de Apdex a lo largo del tiempo.
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service Catalog" >}}
+   {{< img src="tracing/faq/apm_save.png" alt="Gráfico de Apdex después de guardar los cambios de configuración" >}}
+
+## Muestra tu Apdex en el Software Catalog
+
+Para visualizar la puntuación de Apdex en el [Software Catalog][2], selecciónala en el menú de configuración situado en la esquina superior derecha de la página:
+
+{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Software Catalog" >}}
 
 [1]: https://www.apdex.org/
 [2]: https://app.datadoghq.com/services

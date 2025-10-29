@@ -1,5 +1,6 @@
 ---
 title: Install the Datadog Agent on Kubernetes
+description: Install and configure the Datadog Agent on Kubernetes using the Datadog Operator, Helm, or kubectl
 aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
@@ -28,13 +29,15 @@ For dedicated documentation and examples for monitoring the Kubernetes control p
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version | Reason                                |
-| ------------------ | ------------- | ------------------------------------- |
-| 1.16.0+            | 7.19.0+       | Kubelet metrics deprecation           |
-| 1.21.0+            | 7.36.0+       | Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+       | Support dynamic service account token |
+| Kubernetes version | Agent version  | Cluster Agent version | Reason                                                                         |
+|--------------------|----------------|-----------------------|--------------------------------------------------------------------------------|
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation                                                    |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation                                                |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | Supports dynamic service account token                                         |
+| 1.25.0+            | 7.40.0+        | 7.40.0+               | Supports `v1` API group                                                        |
+| 1.33.0+            | 7.67.0+        | 7.67.0+               | Fixes incompatibilities with Kubernetes `AllocatedResources` in `/pods` output |
 
-See also: [Minimum Kubernetes and Cluster Agent versions][8].
+For optimal compatibility Datadog recommends to keep your Cluster Agent and Agent on matching versions.
 
 ## Installation
 
@@ -112,9 +115,11 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    ```yaml
    datadog:
     apiKeyExistingSecret: datadog-secret
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
    ```
-
+   
+   - Replace `<CLUSTER_NAME>` with a name for your cluster.
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**
@@ -152,11 +157,18 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 
 ### Unprivileged installation
 
+To run an unprivileged installation, add the following `securityContext` to your configuration relative to your desired `<USER_ID>` and `<GROUP ID>`:
+
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends setting this value to `100` for the preexisting `dd-agent` user [for Datadog Agent v7.48+][26].
+- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+This sets the `securityContext` at the pod level for the Agent.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 To run an unprivileged installation, add the following to `datadog-agent.yaml`:
 
-{{< highlight yaml "hl_lines=13-18" >}}
+{{< highlight yaml "hl_lines=14-19" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -169,18 +181,14 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
+
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser:  <USER_ID>
+        supplementalGroups:
+          - <GROUP_ID>
 {{< /highlight >}}
-
-- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
-- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
-
-[1]: /data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 
@@ -192,18 +200,16 @@ kubectl apply -f datadog-agent.yaml
 {{% tab "Helm" %}}
 To run an unprivileged installation, add the following to your `datadog-values.yaml` file:
 
-{{< highlight yaml "hl_lines=4-7" >}}
+{{< highlight yaml "hl_lines=5-8" >}}
 datadog:
   apiKeyExistingSecret: datadog-secret
+  clusterName: <CLUSTER_NAME>
   site: <DATADOG_SITE>
   securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
+    runAsUser: <USER_ID>
+    supplementalGroups:
+      - <GROUP_ID>
 {{< /highlight >}}
-
-- Replace `<USER_ID>` with the UID to run the Datadog Agent.
-- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
 
 Then, deploy the Agent:
 
@@ -226,7 +232,7 @@ By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/dat
 
 If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -318,7 +324,6 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [5]: /agent/kubernetes/integrations/
 [6]: /agent/kubernetes/apm/
 [7]: /agent/kubernetes/log/
-[8]: /containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
 [9]: /containers/datadog_operator
 [10]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [11]: https://helm.sh
@@ -336,3 +341,4 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [23]: https://app.datadoghq.com/orchestration/resource/pod
 [24]: /infrastructure/containers/orchestrator_explorer
 [25]: /infrastructure/containers/kubernetes_resource_utilization
+[26]: /data_security/kubernetes/#running-container-as-root-user

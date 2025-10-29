@@ -40,11 +40,9 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 - **Enabled By Default**: Yes
 - **Library Version**: 0.29.0+
-- **Support Level**: GA
-- **Generates runtime-id granularity**: Yes
 - **Runtimes**: Java 8+
 
-<div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
+<div class="alert alert-danger">JMX metrics collection is not supported in AWS Lambda environments.</div>
 
 {{% /tab %}}
 
@@ -53,7 +51,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
   - **Enabled By Default**: No
   - **Library Version**: 0.30.0+
   - **Support Level**: Preview
-  - **Generates runtime-id granularity**: No
   - **Runtimes**: All supported Python versions
 
 {{% /tab %}}
@@ -62,8 +59,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 0.44.0+
-  - **Support Level**: GA
-  - **Generates runtime-id granularity**: No
   - **Runtimes**: All supported Ruby versions
 
 
@@ -75,8 +70,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 1.18.0+
-  - **Support Level**: GA
-  - **Generates runtime-id granularity**: Yes
   - **Runtimes**: All supported Go versions
 
 {{% /tab %}}
@@ -85,8 +78,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 3.0.0+
-  - **Support Level**: GA
-  - **Generates runtime-id granularity**: No
   - **Runtimes**: All supported Node.js versions
 
 {{% /tab %}}
@@ -95,8 +86,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 1.23.0+
-  - **Support Level**: GA
-  - **Generates runtime-id granularity**: Yes
   - **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
 #### Permissions for Internet Information Services (IIS)
@@ -114,12 +103,12 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">Runtime metrics for PHP is not supported.</div>
+<div class="alert alert-danger">Runtime metrics for PHP is not supported.</div>
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-<div class="alert alert-warning">Runtime metrics for C++ is not supported.</div>
+<div class="alert alert-danger">Runtime metrics for C++ is not supported.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -143,7 +132,7 @@ When running the Agent in containerized environments, additional configuration i
 
 <br>
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
 
 3. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the correct Datadog location.
 
@@ -162,6 +151,10 @@ Use the following environment variables to configure runtime metrics in your app
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**: `true` for Java, `false` for all other languages <br>
 **Description**: Enables the collection of runtime metrics. Metrics are sent to the Datadog agent, as configured for the instrumented application.
+
+`DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED`
+: **Default**: `true` for Java, `false` for Node.js, Ruby, and Python. Does not exist for .NET and Go; the `runtime_id` is always reported. <br>
+**Description**: Enables enhanced runtime metrics, providing a `runtime_id` tag along with every metric. The `runtime_id` represents the application's process identifier and allows you to directly correlate runtime metrics with individual running applications. 
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
@@ -194,7 +187,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-warning">This only applies if you are not using <code>ddtrace-run</code></div>
+<div class="alert alert-danger">This only applies if you are not using <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
@@ -232,10 +225,10 @@ tracer.Start(
 )
 ```
 
-The `WithDogstatsdAddr` option allows you to specify a custom address for the DogStatsD server. Use the [`WithDogstatsdAddress`][100] (or [`WithDogstatsdAddress` v2][101]) option if your address differs from the default `localhost:8125`. (Available for 1.18.0+)
+The `WithDogstatsdAddr` option allows you to specify a custom address for the DogStatsD server. Use the [`WithDogstatsdAddr`][101] (or [`WithDogstatsdAddress` v1][100]) option if your address differs from the default `localhost:8125`. (Available for 1.18.0+)
 
 [100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
-[101]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
+[101]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddr
 {{% /tab %}}
 
 {{% tab "Node.js" %}}

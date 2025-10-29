@@ -15,7 +15,7 @@ Agent のデプロイ方法には、以下の 3 つがあります。
 
 2. [Amazon ECS][2] や [Amazon ECS 環境の Fargate][3]、[Amazon EKS][4] などの**クラウド環境**で
 
-3. In a [Kubernetes environment][16]
+3. [Kubernetes 環境][16]で
 
 これらの異なる方法には、独自のデプロイメント上の課題があります。このページは、問題を解決するための出発点として使用してください。問題が解決しない場合は、[Datadog サポート][6]に連絡してください。
 
@@ -31,7 +31,7 @@ Agent のリリース更新や変更の詳細については、Datadog の[リ�
 
 以下が正しいことを確認します。
 
-- The metrics endpoint is exposed and is open for the Agent to reach.
+- メトリクスエンドポイントは公開され、Agent がアクセスできるようになっている。
 
 - Agent がエンドポイントにアクセスするのを妨げるようなプロキシやファイアウォールは存在しない。
 
@@ -84,7 +84,7 @@ IAM ポリシーが更新されていることを確認します。
 
   - [ECS][12]: ログを収集するコンテナにログルーターがアタッチされていることを確認します。
 
-  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Amazon Data Firehose][14]. Using Amazon Data Firehose to collect logs requires the successful implementation of the Amazon Data Firehose delivery stream, as well as some command line tools. 
+  - [EKS][13]: EKS Fargate 環境において Agent がログを収集する一般的な方法は 2 つあります。CloudWatch のログを利用したログ転送と、[Amazon Data Firehose][14] を利用したログ転送です。Amazon Data Firehose を使用してログを収集するには、Amazon Data Firehose の配信ストリームを正常に実装する必要があり、いくつかのコマンドラインツールも必要です。
 
 
 ## Kubernetes
@@ -99,7 +99,16 @@ IAM ポリシーが更新されていることを確認します。
 
 Azure Kubernetes Service (AKS) や Google Kubernetes Engine (GKE) などのマネージドサービスでは、ユーザーは Control Plane コンポーネントにアクセスできません。そのため、これらの環境では `kube_apiserver`、`kube_controller_manager`、`kube_scheduler`、または `etcd` チェックを実行することができません。
 
+## ECS Fargate
 
+### Windows Agent がサービスの起動時にタイムアウトする
+
+```text
+[ENTRYPOINT][ERROR] Could not start the service: The service did not respond to the start or control request in a timely fashion.
+. Error: [1053 (0x41d)]
+```
+
+このエラーを回避するには、 Datadog Agent に対して **CPU units** のリザベーションを少なくとも `512` に設定してください。
 
 # Datadog サポートが収集するトラブルシューティングのデータ
 

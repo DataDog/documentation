@@ -1,5 +1,6 @@
 ---
 title: Actions
+description: Use generic workflow actions for logic control, data transformation, HTTP requests, and JavaScript operations in your workflows.
 disable_toc: false
 disable_sidebar: false
 type: documentation
@@ -14,10 +15,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about integrations"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog provides a suite of workflow actions that are not associated with a specific tool or integration. These actions give you more control over your workflows by allowing you to do things like:
 - Add logic to control the execution path of your workflow.

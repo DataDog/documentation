@@ -8,10 +8,6 @@ further_reading:
 title: Configuration de Database Monitoring pour MySQL avec une gestion sur Aurora
 ---
 
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
 
 La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données MySQL, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des données sur les connexions, des métriques système et des données de télémétrie à propos du moteur de stockage InnoDB.
 
@@ -168,7 +164,7 @@ instances:
     password: '<MOT_DE_PASSE_CHOISI>' # Le mot de passe créé auparavant lors de l'étape CREATE USER
 ```
 
-<div class="alert alert-warning"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, mais pas l'endpoint du cluster Aurora.</div>
+<div class="alert alert-danger"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, mais pas l'endpoint du cluster Aurora.</div>
 
 **Remarque** : ajoutez des guillemets simples autour de votre mot de passe s'il contient un caractère spécial.
 
@@ -219,7 +215,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<ENDPOINT_INSTANCE_AWS>", "port": 3306,"username": "datadog","password": "<MOT_DE_PASSE_UNIQUE>"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora en tant que host, pas l'endpoint du cluster.</div>
+<div class="alert alert-danger"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora en tant que host, pas l'endpoint du cluster.</div>
 
 Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, utilisez le [package de gestion des secrets][2] de l'Agent et déclarez le mot de passe à l'aide de la syntaxe `ENC[]`. Sinon, consultez la section [Template variables Autodiscovery][3] pour découvrir comment transmettre le mot de passe en tant que variable d'environnement.
 
@@ -304,7 +300,7 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-<div class="alert alert-warning"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, pas l'endpoint du cluster Aurora.</div>
+<div class="alert alert-danger"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, pas l'endpoint du cluster Aurora.</div>
 
 L'Agent de cluster enregistre automatiquement cette configuration et commence à exécuter le check MySQL.
 

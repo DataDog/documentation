@@ -1,9 +1,11 @@
 ---
 core_product:
 - apm
+short_definition: El tiempo de ejecución es el tiempo total que se considera que un
+  tramo (span) está activo o que no está esperando a que se complete un tramo secundario.
 title: tiempo de ejecución
 ---
-En APM, el tiempo de ejecución es el tiempo total que un tramo (span) se considera activo o que no está esperando a que se complete un tramo secundario.
+En APM, el tiempo de ejecución es el tiempo total que se considera que un tramo está activo o que no está esperando a que se complete un tramo secundario.
 
 El tiempo de ejecución se calcula al sumar el tiempo que un tramo está activo, es decir, que no tiene tramos secundarios. En el caso del trabajo no simultáneo, esto es sencillo. En la siguiente imagen, el tiempo de ejecución del tramo 1 es $\D1 + \D2 + \D3$. El tiempo de ejecución para los tramos 2 y 3 son sus respectivos anchos.
 

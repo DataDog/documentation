@@ -69,8 +69,8 @@ php datadog-setup.php --php-bin=all --enable-appsec
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
-<div class="alert alert-danger">
-<strong>Note</strong>: Windows only supports APM. Do not use the <code>--enable-appsec</code> and <code>--enable-profiling</code> flags when tracing PHP applications on Windows.
+<div class="alert alert-warning">
+<strong>Note</strong>: Only APM is supported on Windows. Do not use the <code>--enable-appsec</code> and <code>--enable-profiling</code> flags when tracing PHP applications on Windows.
 </div>
 
 This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
@@ -80,16 +80,15 @@ Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of
 When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
 
 <div class="alert alert-info">
-<strong>Note:</strong>
 It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>SELinux:</strong>
 If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
 
@@ -387,7 +386,7 @@ echo 1 > /proc/sys/fs/suid_dumpable
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <strong>Note</strong>: An application that runs through Valgrind is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
 </div>
 
@@ -451,7 +450,7 @@ The resulting Valgrind trace is printed by default to the standard error, follow
 
 Some issues are caused by external factors, so it can be valuable to have a `strace`.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <strong>Note</strong>: An application that runs through <code>strace</code> is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
 </div>
 

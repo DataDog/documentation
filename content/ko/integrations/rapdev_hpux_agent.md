@@ -43,7 +43,7 @@ pricing:
   includes_assets: true
   metric: datadog.marketplace.rapdev.hpux_agent
   product_id: hpux-agent
-  short_description: 호스트별 단위 가격
+  short_description: 호스트별 유닛 비용
   tag: 호스트
   unit_label: HP-UX 에이전트
   unit_price: 100.0
@@ -78,7 +78,7 @@ tile:
 
 ## 개요
 
-HP-UX 에이전트로 Datadog 내에서 시스템 메트릭 을 수집 및 보고할 수 있습니다. 본 통합은 PA-RISC 및 Itanium 아키텍처 모두에서 HP-UX 11.31을 지원합니다. HP-UX 에이전트는 기본 HP-UX Perl 시스템 배포를 사용하며 추가 라이브러리 종속성이 필요하지 않아 설치 및 호환성이 간소화됩니다.
+HP-UX 에이전트로 Datadog 내에서 시스템 메트릭을 수집 및 보고할 수 있습니다. 본 통합은 PA-RISC 및 Itanium 아키텍처 모두에서 HP-UX 11.31을 지원합니다. HP-UX 에이전트는 기본 HP-UX Perl 시스템 배포를 사용하며 추가 라이브러리 종속성이 필요하지 않아 설치 및 호환성이 간소화됩니다.
 
 HP-UX 에이전트는 Datadog 인프라스트럭처 목록을 지원하는 데 필요한 호스트 메타데이터를 제공하여 조직이 지원되는 다른 Datadog 호스트 운영 체제와 유사한 HP-UX 호스트 시스템으로 작업할 수 있도록 도와드립니다.
 

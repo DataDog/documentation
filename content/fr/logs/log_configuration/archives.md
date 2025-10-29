@@ -43,10 +43,10 @@ Accédez à la [page **Log Forwarding**][14] pour configurer une archive afin de
 {{% tab "AWS S3" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
+<div class="alert alert-danger">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
 {{< /site-region >}}
 
-Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3. 
+Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3.
 
 * En général, il est nécessaire de créer un rôle pouvant être utilisé par Datadog pour l'intégration à AWS S3.
 * Pour les comptes AWS GovCloud ou China uniquement, utilisez les clés d'accès comme alternative à la délégation de rôles.
@@ -75,7 +75,7 @@ Si vous ne l'avez pas encore fait, configurez l'[intégration Google Cloud][1] 
 ### Créer un compartiment de stockage
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">L'envoi de logs vers une archive s'effectue en dehors de l'environnement GovCloud Datadog, et échappe donc au contrôle de Datadog. Datadog ne saurait en aucun cas être tenu responsable des logs quittant l'environnement GovCloud Datadog. Cela inclut, sans toutefois s'y limiter, toutes les obligations ou exigences incombant à l'utilisateur au sujet du programme FedRAMP, des niveaux d'impact du Département de la Défense des États-Unis, de la Réglementation américaine sur le trafic d'armes au niveau international (ITAR), de la conformité relative aux exportations, de la résidence des données ou de toute autre réglementation applicable auxdits logs. ( </div>
+<div class="alert alert-danger">L'envoi de logs vers une archive s'effectue en dehors de l'environnement GovCloud Datadog, et échappe donc au contrôle de Datadog. Datadog ne saurait en aucun cas être tenu responsable des logs quittant l'environnement GovCloud Datadog. Cela inclut, sans toutefois s'y limiter, toutes les obligations ou exigences incombant à l'utilisateur au sujet du programme FedRAMP, des niveaux d'impact du Département de la Défense des États-Unis, de la Réglementation américaine sur le trafic d'armes au niveau international (ITAR), de la conformité relative aux exportations, de la résidence des données ou de toute autre réglementation applicable auxdits logs. ( </div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -196,7 +196,7 @@ Seuls les utilisateurs Datadog bénéficiant de l'[autorisation `logs_write_arch
 
 Accédez à la [page Log Forwarding][5], puis sélectionnez **Add a new archive** depuis l'onglet **Archives**.
 
-**Remarques :** 
+**Remarques :**
 * Seuls les utilisateurs de Datadog bénéficiant de l'[autorisation `logs_write_archive`][3] peuvent effectuer cette étape ainsi que la suivante.
 * Pour archiver des logs dans Stockage Blob Azure, une inscription d'application est requise. Consultez les instructions disponibles à la [section relative à l'intégration Azure][6] et définissez le site en haut à droite de la page sur US. Les inscriptions d'application créées exclusivement à des fins d'archivage nécessitent le rôle Storage Blob Data Contributor. Si votre compartiment de stockage est inclus dans un abonnement surveillé via une ressource Datadog, un avertissement s'affiche pour vous prévenir que l'inscription d'application est superflue. Vous pouvez ignorer cet avertissement.
 * Si seules certaines adresses IP peuvent accéder au réseau au sein de votre compartiment, ajoutez les IP de webhook de la [liste de plages d'IP][4] à la liste d'autorisation.
@@ -386,7 +386,7 @@ Datadog prend également en charge le chiffrement côté serveur à l'aide d'une
 
 3. Accédez à l'onglet **Properties** dans votre compartiment S3 et sélectionnez **Default Encryption**. Choisissez l'option "AWS-KMS", sélectionnez l'ARN de votre CMK et cliquez sur Save.
 
-Si vous souhaitez apporter des modifications à des clés KSM existantes, contactez l'[assistance Datadog][3] afin d'obtenir de l'aide.
+Si vous souhaitez apporter des modifications à des clés KMS existantes, contactez l'[assistance Datadog][3] afin d'obtenir de l'aide.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -447,6 +447,7 @@ Cette structure de répertoire vous permet d'interroger plus facilement vos arch
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: /fr/logs/indexes/#exclusion-filters

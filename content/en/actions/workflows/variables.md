@@ -1,5 +1,6 @@
 ---
 title: Variables and parameters
+description: Use context variables, input parameters, output parameters, and custom variables to pass data between workflow steps.
 disable_toc: false
 aliases:
   - /service_management/workflows/actions/set_variables/
@@ -12,10 +13,6 @@ further_reading:
   text: "Use a for loop to perform an action iteratively"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 The following variables and parameters are available in workflows:
 - [Context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
@@ -134,7 +131,7 @@ You can access a custom variable in your workflow using `{{ Variables.variableNa
 
 ### Iteration
 
-Setting a custom variable inside a **For loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a custom variable and append the data you need to it on each iteration. Outside of the loop, you can access the custom variable and handle the data you collected.
+Setting a custom variable inside a **For loop** or a **While loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a custom variable and append the data you need to it on each iteration. Outside of the loop, you can access the custom variable and handle the data you collected.
 
 To avoid a type error resulting from an undefined variable, assign a custom variable before you use it in a loop. In the example below, the custom variable `evenList` is set to an empty array before it is used in the loop.
 
@@ -153,3 +150,4 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 [5]: /service_management/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
 [7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
+[8]: /service_management/workflows/expressions/#inline-javascript-expressions

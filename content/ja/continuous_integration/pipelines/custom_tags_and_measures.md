@@ -12,10 +12,6 @@ further_reading:
 title: パイプライントレースへのカスタムタグとメジャーの追加
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [CI Pipeline Visibility][11] でカスタムタグとメジャーのコマンドを使用して、パイプライントレースにユーザー定義のテキストおよび数値のタグを追加できます。パイプライントレースやジョブスパンにカスタムタグやメジャーを追加するには、[`datadog-ci` NPM パッケージ][1]を使用できます。これらのカスタムタグとメジャーから、ファセット (文字列値のタグ) またはメジャー (数値のタグ) を作成できます。

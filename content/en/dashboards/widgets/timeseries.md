@@ -139,6 +139,10 @@ In addition to the [standard full screen options][11], you can apply quick funct
 
 For more information, see [Explore your data in full-screen graph mode][12].
 
+### Metrics info
+
+On a metric graph, click on the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+
 ## API
 
 This widget can be used with the **[Dashboards API][13]**. See the following table for the [widget JSON schema definition][14]:

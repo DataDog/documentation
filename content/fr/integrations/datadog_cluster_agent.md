@@ -66,7 +66,7 @@ Vous n'avez rien d'autre à installer sur votre serveur.
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "datadog_cluster_agent" >}}
+{{< get-metrics-from-git "datadog-cluster-agent" >}}
 
 
 ### Événements
@@ -74,7 +74,7 @@ Vous n'avez rien d'autre à installer sur votre serveur.
 L'intégration Datadog-Cluster-Agent n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "datadog_cluster_agent" >}}
+{{< get-service-checks-from-git "datadog-cluster-agent" >}}
 
 
 ## Dépannage

@@ -14,10 +14,6 @@ further_reading:
 title: RUM による Swift テストのインスツルメント
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [Test Visibility][3] がすでに Swift に設定されていることを確認してください。

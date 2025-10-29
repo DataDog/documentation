@@ -15,13 +15,9 @@ further_reading:
 title: Configurar el rastreo en un pipeline de Azure
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server no ofrece una compatibilidad oficial.
 </div>
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
 
 ## Información general
 

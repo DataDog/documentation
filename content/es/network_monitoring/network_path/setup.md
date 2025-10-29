@@ -11,10 +11,6 @@ is_beta: true
 title: Ajustes
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path para Datadog Cloud Network Monitoring no es compatible con tu <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Network Path para Datadog Cloud Network Monitoring tiene disponibilidad limitada. Ponte en contacto con tu representante de Datadog para inscribirte y, a continuación, utiliza las siguientes instrucciones para configurar el Datadog Agent para recopilar datos de Network Path.</div>
 
 ## Información general
@@ -199,7 +195,7 @@ Se requiere el Agent `v7.59+`.
 
 Configura rutas de tráfico de red para permitir que el Agent detecte automáticamente y monitorice rutas de red basadas en el tráfico de red real, sin necesidad de especificar los endpoints manualmente.
 
-<div class="alert alert-warning">Habilitar Network Path para detectar automáticamente rutas puede generar una cantidad importante de logs, especialmente cuando se monitorizan rutas de red en un gran número de hosts. </div>
+<div class="alert alert-danger">Habilitar Network Path para detectar automáticamente rutas puede generar una cantidad importante de logs, especialmente cuando se monitorizan rutas de red en un gran número de hosts. </div>
 
 {{< tabs >}}
 {{% tab "Linux" %}}

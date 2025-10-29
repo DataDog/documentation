@@ -23,7 +23,7 @@ author:
 categories:
 - métricas
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -66,19 +66,19 @@ Realiza un seguimiento de las métricas de rendimiento de Pingdom basadas en usu
 
 La integración Pingdom V3 actúa de forma similar a la [integración Pingdom en Datadog (obsoleta)][1], pero utiliza la versión 3.1 de la [API Pingdom][2].
 
-{{< img src="integrations/pingdom/pingdom_dashboard.png" alt="Gráficos de Pingdom en un dashboard de Datadog" popup="true">}}
+![Gráficos Pingdom en un dashboard de Datadog][3]
 
 ## Configuración
 
 ### Generar token de API
 
-1. Inicia sesión en tu [cuenta de Pingdom][3].
+1. Inicia sesión en tu [cuenta de Pingdom][4].
 2. Ve a Settings > Pingdom API (Configuración > API Pingdom).
 3. Haz clic en Add API token (Añadir token de API). Dale un nombre y permisos de lectura-escritura al token. Guarda el token en algún sitio, ya que no podrás volver a acceder a él.
 
 ### Instalación y configuración
 
-1. Abre el [cuadro de la integración Pingdom V3][4].
+1. Abre el [cuadro de integración de Pingdom V3][5].
 2. Introduce el nombre y el token de API en los campos correspondientes. Las métricas y los checks configurados en Pingdom se recopilan en Datadog.
 3. Administra etiquetas (tags) de checks en Pingdom. Las etiquetas añadidas a un check en Pingdom se añaden automáticamente a un check en Datadog. Excluya checks añadiendo la etiqueta `datadog-exclude`. 
 
@@ -107,11 +107,12 @@ En el caso del check `pingdom.status`, los resultados de los checks de transacci
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 [1]: https://docs.datadoghq.com/es/integrations/pingdom/
 [2]: https://docs.pingdom.com/api/
-[3]: https://my.pingdom.com/
-[4]: https://app.datadoghq.com/account/settings#integrations/pingdom-v3
-[5]: https://github.com/DataDog/integrations-internal-core/blob/main/pingdom/metadata.csv
-[6]: https://docs.datadoghq.com/es/help
+[3]: images/pingdom_dashboard.png
+[4]: https://my.pingdom.com/
+[5]: https://app.datadoghq.com/account/settings#integrations/pingdom-v3
+[6]: https://github.com/DataDog/integrations-internal-core/blob/main/pingdom/metadata.csv
+[7]: https://docs.datadoghq.com/es/help

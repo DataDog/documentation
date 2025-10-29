@@ -78,7 +78,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_auto_scaling" >}}
+{{< get-metrics-from-git "amazon-auto-scaling" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

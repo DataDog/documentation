@@ -79,7 +79,7 @@ Por diseño, los checks de endpoint se distribuyen hacia los Agents que se ejecu
 ## Configurar la distribución de checks de endpoint
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 La distribución de checks de endpoint se habilita en el despliegue del Operator del Cluster Agent a través de la clave de configuración de `features.clusterChecks.enabled`:
 ```yaml
@@ -134,7 +134,7 @@ DD_EXTRA_LISTENERS="kube_endpoints kube_services"
 
 ### Configuración del Agent
 
-Habilita los proveedores de configuración `endpointschecks` en el Agent basado en nodos. Esto puede hacerse de dos formas:
+Habilita los proveedores de configuración de `endpointschecks` en el Agent de nodo. Esto puede hacerse de dos maneras:
 
 - Estableciendo la variable de entorno `DD_EXTRA_CONFIG_PROVIDERS`. Si tienes varios valores, se necesita una cadena en la que los valores estén separados entre sí por espacios:
 
@@ -175,8 +175,32 @@ En la versión 1.18.0 (y posteriores) del Cluster Agent, puedes utilizar `advanc
 Para realizar un [check HTTP][9] en los endpoints de un servicio de Kubernetes:
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Utiliza la sección `spec.override.clusterAgent.extraConfd.configDataMap` para definir la configuración de tu check:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            advanced_ad_identifiers:
+              - kube_endpoints:
+                  name: "<ENDPOINTS_NAME>"
+                  namespace: "<ENDPOINTS_NAMESPACE>"
+            cluster_check: true
+            init_config:
+            instances:
+              - url: "http://%%host%%"
+                name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
 {{% tab "Helm" %}}
-Utiliza el campo `clusterAgent.confd` para definir la configuración del check:
+Utiliza el campo `clusterAgent.confd` para definir la configuración de tu check:
 
 ```yaml
 #(...)
@@ -367,7 +391,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 

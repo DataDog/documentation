@@ -21,12 +21,6 @@ further_reading:
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 Cloud Security Vulnerabilities helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
@@ -122,7 +116,7 @@ The [Infrastructure Packages Catalog][19] provides a real-time inventory of all 
 
 Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
 
-{{< img src="security/vulnerabilities/csm_package_explorer_2.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
+{{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images

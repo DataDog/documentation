@@ -53,7 +53,7 @@ Google Cloud Function のログは Google Cloud Logging で収集され、Cloud 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_functions" >}}
+{{< get-metrics-from-git "google-cloud-functions" >}}
 
 
 ### イベント

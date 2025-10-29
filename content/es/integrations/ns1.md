@@ -24,7 +24,7 @@ author:
   sales_email: zjohnson@ns1.com
   support_email: zjohnson@ns1.com
 categories:
-- la red
+- network
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md
@@ -64,7 +64,7 @@ tile:
   title: ns1
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -109,7 +109,7 @@ Ejecuta el [subcomando de estado del Agent][5] y busca `ns1` en la sección **Ch
 
 La integración NS1 no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "ns1" >}}
 
 
@@ -119,7 +119,7 @@ La integración NS1 no incluye eventos.
 
 ## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
 - [Guía de inicio rápido Integración NS1 + Datadog (Saliente)][11]
 - [Monitorización de NS1 con Datadog][12]

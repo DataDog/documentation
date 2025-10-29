@@ -68,19 +68,17 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 
 ## Datadog APM 설정
 
-애플리케이션 코드나 배포 프로세스를 수정하지 않고 Datadog APM을 설정하려면 단일 단계 APM 계측을 사용하세요.
+애플리케이션 코드나 배포 프로세스를 수정하지 않고도 Datadog APM을 설정하려면 Single Step APM Instrumentation을 사용하거나 [Datadog 추적][8] 라이브러리를 사용하여 APM을 설정할 수 있습니다.
 
-<div class="alert alert-info"><strong>참고</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">단일 단계 APM 계측</a>은 베타 서비스 중입니다. 대신 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Datadog 추적 라이브러리</a>를 사용해 APM을 설정할 수도 있습니다.</div>
 
 1. 설치 명령을 실행하세요
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
 
     `<YOUR_DD_API_KEY>`를 [Datadog API 키][2]로 변경하고, `<YOUR_DD_SITE>`를 [Datadog 사이트][7]로 변경하며, `<AGENT_ENV>`를 에이전트가 설치된 환경으로 변경하세요(예: `development`).
 
-1. 셸 세션을 시작하세요.
 1. 내 호스트나 VM에 있는 서비스를 재시작하세요
 1. 에이전트가 실행 중인지 확인하세요
 
@@ -142,7 +140,7 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 
 1. Datadog에서 [**APM** > **Services**][3]로 이동하세요. 이름이 `hello`인 Python 서비스가 있습니다.
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service" style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="새로운 Python 서비스를 보여주는 Software Catalog." style="width:100%;" >}}
 
 1. 대기 시간, 처리량, 오류율과 같은 성능 메트릭을 볼 서비스를 선택하세요.
 1. [**APM** > **Traces**][4]로 이동하세요. `hello` 서비스 트레이스가 있습니다.
@@ -221,3 +219,4 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 [5]: /ko/tracing/glossary/#instrumentation
 [6]: /ko/tracing/trace_collection/custom_instrumentation/
 [7]: /ko/getting_started/site/
+[8]: /ko/tracing/trace_collection/automatic_instrumentation/dd_libraries/

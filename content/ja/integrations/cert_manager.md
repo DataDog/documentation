@@ -94,7 +94,7 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "cert_manager" >}}
+{{< get-metrics-from-git "cert-manager" >}}
 
 
 ### イベント
@@ -102,7 +102,7 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 cert_manager インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cert_manager" >}}
+{{< get-service-checks-from-git "cert-manager" >}}
 
 
 ## トラブルシューティング

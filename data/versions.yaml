@@ -1,7 +1,7 @@
 # Core versions
-agent_version: "7.65.0"
-agent_branch: "7.65.x"
-collector_version: "0.121.0"
+agent_version: "7.71.2"
+agent_branch: "7.71.x"
+collector_version: "0.133.0"
 
 # Tags
-agent_tag: "7.65.0-full"
+agent_tag: "7.71.2-full"

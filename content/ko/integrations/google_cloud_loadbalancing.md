@@ -51,7 +51,7 @@ Google Cloud HTTP Loadbalancer 로그는 Google Cloud Logging으로 수집하여
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_loadbalancing" >}}
+{{< get-metrics-from-git "google-cloud-loadbalancing" >}}
 
 
 ### 이벤트

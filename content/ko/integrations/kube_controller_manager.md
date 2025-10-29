@@ -98,7 +98,7 @@ Kubernetes Controller Manager 점검은 [Datadog Agent][3] 패키지에 포함�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 
 ### 이벤트
@@ -106,7 +106,7 @@ Kubernetes Controller Manager 점검은 [Datadog Agent][3] 패키지에 포함�
 Kubernetes Controller Manager 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 
 ## 트러블슈팅

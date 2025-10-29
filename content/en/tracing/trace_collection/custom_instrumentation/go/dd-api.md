@@ -10,7 +10,7 @@ aliases:
 description: 'Instrument your code with the Datadog Go APM tracer.'
 code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 1
+code_lang_weight: 2
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
@@ -24,11 +24,9 @@ further_reading:
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
 </div>
 
-<div class="alert alert-info">
-The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
-</div>
-
 This page details common use cases for adding and customizing observability with Datadog APM.
+
+{{% tracing-go-v2 %}}
 
 ## Adding tags
 
@@ -45,8 +43,7 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" 
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -76,8 +73,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -97,8 +93,7 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTa
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -127,17 +122,22 @@ If you aren't using supported library instrumentation (see [Library compatibilit
 Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the <a href="https://pkg.go.dev/context">Go context library documentation</a> or documentation for any third-party libraries integrated with your application.
 </div>
 
-### Manually creating a new span
+### Manually creating a span
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4] (or [the v2 godoc page][12]):
+To manually create spans, use the `tracer` package (see the [v2 API on Datadog’s godoc][12]; for v1, see the [v1 godoc][4]).
 
-There are two functions available to create spans. API details are available for `StartSpan` [here][5] (or [here for v2][13]) and for `StartSpanFromContext` [here][6] (or [here for v2][14]).
+You can create spans in two ways:
+- Start a child from an existing span with [`StartChild` for v2][13] or [`StartSpan` for v1][5]. 
+- Start a span from a context with `StartSpanFromContext` (see API details for [v2][14] or [v1][6]).
 
 ```go
-//Create a span with a resource name, which is the child of parentSpan.
+//v2: Create a span with a resource name, which is the child of parentSpan.
+span := parentSpan.StartChild("mainOp", tracer.ResourceName("/user"))
+
+//v1: Create a span with a resource name, which is the child of parentSpan.
 span := tracer.StartSpan("mainOp", tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
 
-// Create a span which will be the child of the span in the Context ctx, if there is a span in the context.
+// v1 and v2: Create a span which will be the child of the span in the Context ctx, if there is a span in the context.
 // Returns the new span, and a new context containing the new span.
 span, ctx := tracer.StartSpanFromContext(ctx, "mainOp", tracer.ResourceName("/user"))
 ```
@@ -167,8 +167,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -194,8 +193,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

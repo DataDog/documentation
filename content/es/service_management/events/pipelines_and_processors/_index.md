@@ -1,8 +1,11 @@
 ---
 further_reading:
-- link: logs/processing/pipelines
+- link: /service_management/events/
   tag: Documentación
-  text: Pipelines de procesamiento de logs
+  text: Gestión de eventos
+- link: /service_management/events/correlation/
+  tag: Documentación
+  text: Correlación de eventos
 title: Pipelines y procesadores
 ---
 
@@ -37,15 +40,16 @@ Crea un pipeline para filtrar los eventos que te interesen, por ejemplo, un orig
 
 Puedes añadir procesadores después de crear un pipeline. Los procesadores disponibles son:
 
-- [Procesador aritmético][3]
-- [Reasignador de fechas][4]
-- [Procesador de categorías][5]
-- [Analizador de Grok][6]
-- [Procesador de búsqueda][7]
-- [Reasignador][8]
-- [Reasignador de servicios][9]
-- [Reasignador de estados][10]
-- [Procesador de generación de cadenas][11]
+- [Aggregation Key Processor][3]
+- [Procesador aritmético][4]
+- [Reasignador de fechas][5]
+- [Procesador de categorías][6]
+- [Grok Parser][7]
+- [Procesador de búsqueda][8]
+- [Reasignador][9]
+- [Reasignador de servicios][10]
+- [Reasignador de estados][11]
+- [Procesador de generación de cadenas][12]
 
 
 ## Referencias adicionales
@@ -54,12 +58,13 @@ Puedes añadir procesadores después de crear un pipeline. Los procesadores disp
 
 [1]: https://app.datadoghq.com/event/pipelines
 [2]: https://app.datadoghq.com/event/explorer
-[3]: /es/service_management/events/pipelines_and_processors/arithmetic_processor
-[4]: /es/service_management/events/pipelines_and_processors/date_remapper
-[5]: /es/service_management/events/pipelines_and_processors/category_processor
-[6]: /es/service_management/events/pipelines_and_processors/grok_parser
-[7]: /es/service_management/events/pipelines_and_processors/lookup_processor
-[8]: /es/service_management/events/pipelines_and_processors/remapper
-[9]: /es/service_management/events/pipelines_and_processors/service_remapper
-[10]: /es/service_management/events/pipelines_and_processors/status_remapper
-[11]: /es/service_management/events/pipelines_and_processors/string_builder_processor
+[3]: /es/service_management/events/pipelines_and_processors/aggregation_key
+[4]: /es/service_management/events/pipelines_and_processors/arithmetic_processor
+[5]: /es/service_management/events/pipelines_and_processors/date_remapper
+[6]: /es/service_management/events/pipelines_and_processors/category_processor
+[7]: /es/service_management/events/pipelines_and_processors/grok_parser
+[8]: /es/service_management/events/pipelines_and_processors/lookup_processor
+[9]: /es/service_management/events/pipelines_and_processors/remapper
+[10]: /es/service_management/events/pipelines_and_processors/service_remapper
+[11]: /es/service_management/events/pipelines_and_processors/status_remapper
+[12]: /es/service_management/events/pipelines_and_processors/string_builder_processor

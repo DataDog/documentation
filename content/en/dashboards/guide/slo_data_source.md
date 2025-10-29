@@ -1,5 +1,6 @@
 ---
 title: Graph historical SLO data on Dashboards
+description: Display historical SLO data on dashboards using SLO widgets and timeseries visualizations for performance tracking.
 further_reading:
 - link: "/service_management/service_level_objectives/"
   tag: "Documentation"
@@ -11,10 +12,6 @@ further_reading:
   tag: "Documentation"
   text: "SLO List Widget"
 ---
-
-{{< callout url="#" btn_hidden="true" header="false">}}
-  The SLO data source is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
-{{< /callout >}}
 
 ## Overview
 
@@ -36,12 +33,12 @@ For the *Measure* parameter, see the table below for more information on what ea
 | -----  | ----- | ----- | ----- |
 | Good events | Metric-based | The count of good events. | The sum of good events across all groups. |
 | Bad events | Metric-based | The count of bad events. | The sum of bad events across all groups. |
-| Good minutes | Time Slice | The count of good minutes. | The sum of good minutes across all groups. |
-| Bad minutes | Time Slice | The count of bad minutes. | The sum of bad minutes across all groups. |
-| SLO status | Metric-based or Time Slice | For each time bucket, the SLO status is calculated as the ratio of the number of good events/minutes to total events/minutes. | The ratio of the number of good events/minutes to total events/minutes. |
-| Error budget remaining | Metric-based or Time Slice | For each time bucket, the percentage of error budget remaining. The target for the [primary time window][3] is used in the error budget calculation. | The percentage of error budget remaining at the end of the widget's time frame. |
-| Burn rate | Metric-based or Time Slice | For each time bucket, the burn rate shows the observed error rate divided by the ideal error rate. | The burn rate over the widget's time frame. |
-| Error budget burndown | Metric-based or Time Slice | The error budget burned over time. It starts at 100% (unless there were bad events/minutes within the first time bucket) and decreases with bad events/minutes. | Error budget burndown is not available in scalar widgets. |
+| Good minutes | Monitor-based or Time Slice | The count of good minutes. | The sum of good minutes across all groups. |
+| Bad minutes | Monitor-based or Time Slice | The count of bad minutes. | The sum of bad minutes across all groups. |
+| SLO status | All types | For each time bucket, the SLO status is calculated as the ratio of the number of good events/minutes to total events/minutes. | The ratio of the number of good events/minutes to total events/minutes. |
+| Error budget remaining | All types | For each time bucket, the percentage of error budget remaining. The target for the [primary time window][3] is used in the error budget calculation. | The percentage of error budget remaining at the end of the widget's time frame. |
+| Burn rate | All types | For each time bucket, the burn rate shows the observed error rate divided by the ideal error rate. | The burn rate over the widget's time frame. |
+| Error budget burndown | All types | The error budget burned over time. It starts at 100% (unless there were bad events/minutes within the first time bucket) and decreases with bad events/minutes. | Error budget burndown is not available in scalar widgets. |
 
 #### SLO status corrections
 

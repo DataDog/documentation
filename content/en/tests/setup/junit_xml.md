@@ -16,13 +16,7 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files,
   as the native instrumentation provides more accurate time results, supports distributed traces on integration tests
   and other features that are not available with JUnit XML uploads.
@@ -113,7 +107,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-<div class="alert alert-warning">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
+<div class="alert alert-danger">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
 
 {{< tabs >}}
 
@@ -500,7 +494,7 @@ datadog-ci junit upload --service service_name \
 
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   When using bash from Git for Windows, define the <strong>MSYS_NO_PATHCONV=1</strong> environment variable.
   Otherwise, any argument starting with <strong>/</strong> will be expanded to a Windows path.
 </div>
@@ -546,6 +540,11 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 
 
 ## Reporting code coverage
+
+{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
+This section covers the code coverage feature of the Test Optimization product.
+This feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
+{{< /callout >}}
 
 It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 

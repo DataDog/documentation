@@ -1,5 +1,6 @@
 ---
 title: Visualize
+description: "Create visualizations from RUM data including lists, timeseries, tables, and graphs to analyze performance and user behavior trends."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -101,9 +102,9 @@ To build a funnel, choose your starting view or action and click on the plus ico
 
 ### Suggested next steps
 
-When you have a starting point in mind, but aren't sure what your users did next, expand the **Quickly add a step** panel (available in a drawer on the right) to view suggested next steps. After inputting steps, this panel automatically loads the top five most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
+When you have a starting point in mind, but aren't sure what your users did next, click the search input box where it says "Search for View or Action Name" to view suggested next steps. This input box automatically loads the top most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Build a funnel" style="width:90%;" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps-1.png" alt="Build a funnel" style="width:90%;" >}}
 
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 

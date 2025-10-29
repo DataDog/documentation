@@ -110,7 +110,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-필터링에 사용할 레이블 키를 지정하려면 프로파일러를 시작할 때 [WithCustomProfilerLabelKeys][2]를 추가하세요.
+필터링에 사용할 레이블 키를 지정하려면 프로파일러를 시작할 때 [WithCustomProfilerLabelKeys][3] (또는[WithCustomProfilerLabelKeys v1][2]) 옵션을 추가하세요.
 
 ```go
 profiler.Start(
@@ -123,6 +123,7 @@ profiler.Start(
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithCustomProfilerLabelKeys
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

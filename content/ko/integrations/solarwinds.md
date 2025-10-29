@@ -2,7 +2,7 @@
 categories:
 - 이벤트 관리
 - 알림
-custom_kind: integration
+custom_kind: 통합
 dependencies: []
 description: SolarWinds Orion의 경고를 Datadog 이벤트 스트림에 주입하세요.
 doc_link: https://docs.datadoghq.com/integrations/solarwinds/
@@ -16,7 +16,7 @@ is_public: true
 manifest_version: '1.0'
 name: solarwinds
 public_title: "Datadog-SolarWinds\b 통합"
-short_description: SolarWinds Orion의 경고를 Datadog 이벤트 스트림으로 주입하세요.
+short_description: SolarWinds Orion의 경고를 Datadog 이벤트 스트림에 주입하세요.
 version: '1.0'
 ---
 
@@ -105,7 +105,7 @@ SolarWinds에서 새 트리거 액션을 생성하려면:
 }
 ``` 
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 

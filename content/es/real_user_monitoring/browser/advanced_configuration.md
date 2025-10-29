@@ -2,6 +2,9 @@
 aliases:
 - /es/real_user_monitoring/installation/advanced_configuration/
 - /es/real_user_monitoring/browser/modifying_data_and_context/
+description: Configura el kit de desarrollo de software (SDK) del navegador de RUM
+  para modificar la recopilación de datos, sustituir los nombres de las vistas, gestionar
+  las sesiones de usuario y controlar el muestreo según las necesidades de tu aplicación.
 further_reading:
 - link: /real_user_monitoring/browser/tracking_user_actions
   tag: Documentación
@@ -35,7 +38,7 @@ Existen varias formas de modificar los [datos y el contexto recopilados][1] por 
 
 ## Sustituir los nombres de las vistas de RUM por defecto
 
-El SDK del RUM Browser genera automáticamente un [evento de vista][2] para cada nueva página visitada por tus usuarios o cuando se cambia la URL de la página (para aplicaciones de página única). El nombre de la vista se calcula a partir de la URL de la página actual, donde los ID alfanuméricos variables se eliminan automáticamente. Por ejemplo, `/dashboard/1234` se convierte en `/dashboard/?`.
+El SDK del RUM Browser genera automáticamente un [evento de vista][2] para cada nueva página visitada por tus usuarios o cuando se cambia la URL de la página (para aplicaciones de página única). El nombre de la vista se calcula a partir de la URL de la página actual, donde los ID alfanuméricos variables se eliminan automáticamente. Un segmento de ruta que contenga al menos un número se considera un ID de variable. Por ejemplo, `/dashboard/1234` y `/dashboard/9a` se convierten en `/dashboard/?`.
 
 A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarlos a un servicio dedicado propiedad de un equipo mediante el rastreo manual de eventos de vistas con la opción `trackViewsManually`:
 
@@ -43,6 +46,7 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
    import { datadogRum } from '@datadog/browser-rum';
 
@@ -52,8 +56,10 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
        ...
    });
    ```
+
    {{% /tab %}}
    {{% tab "CDN asíncrono" %}}
+
    ```javascript
    window.DD_RUM.onReady(function() {
        window.DD_RUM.init({
@@ -63,8 +69,10 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
        })
    })
    ```
+
    {{% /tab %}}
    {{% tab "CDN síncrono" %}}
+
    ```javascript
    window.DD_RUM &&
        window.DD_RUM.init({
@@ -73,15 +81,16 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
            ...
        });
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
-2. Debes iniciar vistas para cada nueva página o cambio de ruta (para aplicaciones de página única). Los datos de RUM se recopilan cuando se inicia la vista. A partir de la [versión 4.13.0][17], también puedes definir opcionalmente el nombre y la versión de servicios asociados.
+2. Debes iniciar las vistas para cada nueva page (página) o cambio de ruta (para aplicaciones de una sola page (página) ). Los datos de RUM se recopilan cuando se inicia la vista. A partir de la [versión 4.13.0][16], también puedes definir opcionalmente el nombre y la versión del servicio asociado.
 
    - Nombre de la vista: por defecto es la ruta URL de la página.
    - Servicio: por defecto es el servicio especificado al crear tu aplicación RUM.
    - Versión: por defecto es la versión especificada al crear tu aplicación RUM.
-   - Contexto: A partir de la [versión 5.28.0][20], puedes añadir contexto a las vistas y a los eventos secundarios de las vistas.
+   - Contexto: A partir de la [versión 5.28.0][19], puedes añadir contexto a las vistas y a los eventos secundarios de las vistas.
 
    Para más información, consulta [Configuración de la monitorización del navegador][4].
 
@@ -91,6 +100,7 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
    datadogRum.startView({
         name: 'checkout',
@@ -104,6 +114,7 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
 
    {{% /tab %}}
    {{% tab "CDN asíncrono" %}}
+
    ```javascript
    window.DD_RUM.onReady(function() {
       window.DD_RUM.startView({
@@ -116,8 +127,10 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
       })
    })
    ```
+
    {{% /tab %}}
    {{% tab "CDN síncrono" %}}
+
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
         name: 'checkout',
@@ -128,16 +141,18 @@ A partir de la [versión 2.17.0][3], puedes añadir nombres de vistas y asignarl
         },
    })
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
 </details>
 <details>
 <summary>antes de <code>v5.28.0</code></summary>
-El siguiente ejemplo rastrea manualmente las vistas a la página <code>checkout</code> en una aplicación de RUM. Utiliza <code>checkout</code> como nombre de la vista y asocia el servicio <code>purchase</code> con la versión <code>1.2.3</code>.
+El siguiente ejemplo rastrea en forma manual las pages (páginas) vistas en la page (página) de <code>pago</code> en una aplicación de RUM. Utiliza el <code>pago</code> para el nombre de la vista y asocia el servicio de <code>compra</code> con la versión <code>1.2.3</code>.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.startView({
   name: 'checkout',
@@ -147,7 +162,8 @@ datadogRum.startView({
 ```
 
 {{% /tab %}}
-{{% tab "CDN asíncrono" %}}
+{{% tab "CDN asincrónico" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
   window.DD_RUM.startView({
@@ -157,8 +173,10 @@ window.DD_RUM.onReady(function() {
   })
 })
 ```
+
 {{% /tab %}}
-{{% tab "CDN síncrono" %}}
+{{% tab "CDN sincrónico" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.startView({
   name: 'checkout',
@@ -166,32 +184,38 @@ window.DD_RUM && window.DD_RUM.startView({
   version: '1.2.3'
 })
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 </details>
 
    <details>
      <summary>antes de <code>v4.13.0</code></summary>
-   El siguiente ejemplo rastrea manualmente las vistas a la página <code>checkout</code> en una aplicación de RUM. No se puede especificar el servicio ni la versión.
+   El siguiente ejemplo rastrea en forma manual las pages (páginas) vistas en la page (página) de <code>pago</code> en una aplicación de RUM. No se puede especificar ningún servicio ni versión.
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
    datadogRum.startView('checkout')
    ```
 
    {{% /tab %}}
-   {{% tab "CDN asíncrono" %}}
+   {{% tab "CDN asincrónico" %}}
+
    ```javascript
    window.DD_RUM.onReady(function() {
        window.DD_RUM.startView('checkout')
    })
    ```
+
    {{% /tab %}}
-   {{% tab "CDN síncrono" %}}
+   {{% tab "CDN sincrónico" %}}
+
    ```javascript
    window.DD_RUM && window.DD_RUM.startView('checkout')
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -211,6 +235,7 @@ Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajus
 
    {{< tabs >}}
    {{% tab "NPM" %}}
+
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
       import { routes } from 'path/to/routes';
@@ -257,6 +282,7 @@ Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajus
 
    {{% /tab %}}
    {{% tab "CDN asíncrono" %}}
+
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
       import { routes } from 'path/to/routes';
@@ -301,8 +327,10 @@ Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajus
        return viewName || '/';
       }
    ```
+
    {{% /tab %}}
    {{% tab "CDN síncrono" %}}
+
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
       import { routes } from 'path/to/routes';
@@ -346,6 +374,7 @@ Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajus
        return viewName || '/';
       }
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -355,36 +384,42 @@ Utiliza `setViewName(name: string)` para actualizar el nombre de la vista actual
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setViewName('<VIEW_NAME>');
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewName('Checkout');
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewName('<VIEW_NAME>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewName('Checkout');
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setViewName('Checkout');
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Nota**: Cambiar el nombre de la vista afecta a la vista y a sus eventos secundarios desde el momento en que se llama al método.
 
@@ -396,7 +431,7 @@ Interceptar los eventos del RUM te permite:
 
 - Enriquecer los eventos del RUM con atributos de contexto adicionales
 - Modificar tus eventos del RUM para alterar su contenido o eliminar secuencias sensibles (consulta la [lista de propiedades editables](#modify-the-content-of-a-rum-event))
-- Descartar eventos seleccionados del RUM
+- Descartar eventos RUM seleccionados
 
 A partir de la [versión 2.13.0][5], `beforeSend` toma dos argumentos: el `event` generado por el SDK del RUM Browser y el `context` que desencadenó la creación del evento del RUM.
 
@@ -420,17 +455,18 @@ Para más información, consulta la [Guía de enriquecimiento y control de datos
 
 ### Enriquecer eventos de RUM
 
-Junto con los atributos añadidos con la [API de Global Context](#global-context) o la [recopilación de datos de marcas de funciones](#enrich-rum-events-with-feature-flags), puedes añadir atributos de contexto adicionales al evento. Por ejemplo, etiquetar tus eventos de recursos del RUM con datos extraídos de un objeto de respuesta de acceso:
+Junto con los atributos añadidos con la [API de Global Context](#global-context) o la [recopilación de datos de indicadores de funciones](#enrich-rum-events-with-feature-flags), puedes añadir atributos de contexto adicionales al evento. Por ejemplo, etiquetar tus eventos de recursos del RUM con datos extraídos de un objeto de respuesta de acceso:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
-        // recopila encabezados de respuesta de un recurso de RUM
+        // collect a RUM resource's response headers
         if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
@@ -439,14 +475,16 @@ datadogRum.init({
     ...
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
-            // recopila encabezados de respuesta de un recurso de RUM
+            // collect a RUM resource's response headers
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
@@ -456,14 +494,16 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
-            // recopila encabezados de respuesta de un recurso de RUM
+            // collect a RUM resource's response headers
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
@@ -472,19 +512,17 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Si un usuario pertenece a varios equipos, añade pares clave-valor adicionales en tus llamadas a la API de Global Context.
 
-El SDK del RUM Browser ignora:
-
-- Atributos añadidos fuera de `event.context`
-- Modificaciones realizadas en un contexto de evento de vista de RUM
+El SDK del RUM Browser ignora los atributos añadidos fuera de `eventos.context`.
 
 ### Enriquecer eventos de RUM con indicadores de funciones
 
-Puedes [enriquecer tus datos de eventos de RUM con indicadores de características][14] para obtener mejor contexto y visibilidad de la monitorización del rendimiento. Esto te permite determinar a qué usuarios se les muestra una experiencia de usuario específica y si está afectando negativamente al rendimiento del usuario.
+Puedes [enriquecer tus datos de eventos de RUM con indicadores de funciones][14] para obtener mejor contexto y visibilidad de la monitorización del rendimiento. Esto te permite determinar a qué usuarios se les muestra una experiencia de usuario específica y si está afectando negativamente al rendimiento del usuario.
 
 ### Modificar el contenido de un evento de RUM
 
@@ -492,65 +530,86 @@ Por ejemplo, para eliminar las direcciones de correo electrónico de las URL de 
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     ...,
     beforeSend: (event) => {
-        // eliminar dirección de correo electrónico de la URL de la vista
+        // remove email from view url
         event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
     },
     ...
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            // eliminar dirección de correo electrónico de la URL de la vista
+            // remove email from view url
             event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            // eliminar dirección de correo electrónico de la URL de la vista
+            // remove email from view url
             event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
     });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Puedes actualizar las siguientes propiedades de eventos:
 
-|   Atributo           |   Tipo    |   Descripción                                                                                       |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
-|   `view.url`            |   Cadena  |   La URL de la página web activa.                            |
-|   `view.referrer`       |   Cadena  |   La URL de la página web anterior desde la que se siguió un vínculo a la página solicitada actualmente.  |
-|   `view.name`           |   Cadena  |   El nombre de la vista actual.                            |
-|   `service`             |   Cadena  |   El nombre de servicio para tu aplicación.                                                            |
-|   `version`             |   Cadena  |   La versión de la aplicación, por ejemplo: 1.2.3, 6c44da20 y 2020.02.13.                          |
-|   `action.target.name`  |   Cadena  |   El elemento con el que ha interactuado el usuario. Solo para acciones recopiladas automáticamente.              |
-|   `error.message`       |   Cadena  |   Un mensaje conciso, legible, de una línea, en el cual se explica el error.                                 |
-|   `error.stack `        |   Cadena  |   La traza (trace) de stack tecnológico o la información adicional sobre el error.                                     |
-|   `error.resource.url`  |   Cadena  |   La URL del recurso que provocó el error.                                                        |
-|   `resource.url`        |   Cadena  |   La URL del recurso.                                                                                 |
-|   `context`        |   Objeto  |   Atributos añadidos con la [Global Context API](#global-context), la [View Context API](#view-context) o al generar eventos manualmente (por ejemplo, `addError` y **`addAction`**).                                                                                 |
+| Atributo                      | Tipo   | Descripción                                                                                                                                                                               |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view.url`                     | Cadena | La URL de la página web activa.                                                                                                                                                           |
+| `view.referrer`                | Cadena | La URL de la página web anterior desde la que se siguió un vínculo a la página solicitada actualmente.                                                                                          |
+| `view.name`                    | Cadena | El nombre de la vista actual.                                                                                                                                                             |
+| `view.performance.lcp.resource_url` | Cadena |   La URL de recursos para Largest Contentful Paint.                                                                                                                                 |
+| `service`                      | Cadena | El nombre de servicio para tu aplicación.                                                                                                                                                    |
+| `version`                      | Cadena | La versión de la aplicación. Por ejemplo: 1.2.3, 6c44da20 o 2020.02.13.                                                                                                                  |
+| `action.target.name`           | Cadena | El elemento con el que ha interactuado el usuario. Solo para acciones recopiladas automáticamente.                                                                                                      |
+| `error.message`                | Cadena | Un mensaje conciso, legible, de una línea, en el cual se explica el error.                                                                                                                         |
+| `error.stack`                 | Cadena | La traza de stack tecnológico o la información adicional sobre el error.                                                                                                                             |
+| `error.resource.url`           | Cadena | La URL del recurso que provocó el error.                                                                                                                                                |
+| `resource.url`                 | Cadena | La URL del recurso.                                                                                                                                                                         |
+| `long_task.scripts.source_url` | Cadena | La url del recurso de script                                                                                                                                                                   |
+| `long_task.scripts.invoker`    | Cadena | Un nombre significativo que indique cómo se ha llamado al script                                                                                                                                    |
+| `context`                      | Objeto | Atributos añadidos con la [Global Context API](#global-context), la [View Context API](#view-context) o al generar eventos manualmente (por ejemplo, `addError` y **`addAction`**). |
 
 El SDK del RUM Browser ignora las modificaciones realizadas en las propiedades de eventos no enumeradas anteriormente. Para obtener más información sobre las propiedades de eventos, consulta el [repositorio GitHub del SDK del RUM Browser][15].
+
+**Nota**: A diferencia de otros eventos, los eventos de vista se envían varias veces a Datadog para reflejar las actualizaciones que se producen durante su ciclo de vida. Una actualización de un evento de vista anterior puede seguir enviándose mientras una nueva vista está activa. Datadog recomienda tener en cuenta este comportamiento al modificar el contenido de un evento de vista.
+
+```javascript
+beforeSend: (event) => {
+    // discouraged, as the current view name could be applied to both the active view and the previous views
+    event.view.name = getCurrentViewName()
+
+    // recommended
+    event.view.name = getViewNameForUrl(event.view.url)
+}
+```
 
 ### Descartar un evento de RUM
 
@@ -573,8 +632,10 @@ datadogRum.init({
     ...
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -589,8 +650,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -604,27 +667,46 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Nota**: Los eventos de vistas no se pueden descartar.
 
 ## Sesión del usuario
 
-Añadir información del usuario a tus sesiones de RUM puede ayudar a:
-* Seguir el recorrido de un usuario concreto
-* Conocer qué usuarios se han visto más afectados por los errores
-* Monitorizar el rendimiento de tus usuarios más importantes
+Añadir información del usuario a tus sesiones de RUM te ayuda a:
+
+- Seguir el recorrido de un usuario concreto
+- Conocer qué usuarios se han visto más afectados por los errores
+- Monitorizar el rendimiento de tus usuarios más importantes
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" >}}
 
-Los siguientes atributos son opcionales, pero Datadog recomienda proporcionar al menos uno de ellos:
+{{< tabs >}}
+{{% tab "v6.4.0 y posterior" %}}
+
+Están disponibles los siguientes atributos:
+
+| Atributo  | Tipo | Obligatorio |  Descripción                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | Cadena | Sí | Identificador único de usuario.                                                                                  |
+| `usr.name`  | Cadena | No | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
+| `usr.email` | Cadena | No | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+
+{{% /tab %}}
+{{% tab "Anterior a v6.4.0" %}}
+
+Los siguientes atributos son opcionales, pero Datadog recomienda encarecidamente proporcionar al menos uno de ellos. Por ejemplo, debes establecer el ID de usuario en tus sesiones para ver los datos relevantes en algunos dashboards predeterminados de RUM, que dependen de `usr.id` como parte de la consulta.
 
 | Atributo  | Tipo | Descripción                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
-| `usr.id`    | Cadena | Identificador de usuario único.                                                                                  |
+| `usr.id`    | Cadena | Identificador único de usuario.                                                                                  |
 | `usr.name`  | Cadena | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
 | `usr.email` | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Aumentar tus posibilidades de filtrado añadiendo atributos adicionales a los recomendados. Por ejemplo, añade información sobre el plan del usuario o a qué grupo de usuarios pertenece.
 
@@ -638,6 +720,7 @@ Cuando se realizan cambios en el objeto de la sesión del usuario, todos los eve
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.setUser({
     id: '1234',
@@ -647,8 +730,10 @@ datadogRum.setUser({
     ...
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setUser({
@@ -660,8 +745,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
@@ -672,8 +759,8 @@ window.DD_RUM && window.DD_RUM.setUser({
 })
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Acceder a la sesión del usuario
 
@@ -681,24 +768,29 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.getUser()
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.getUser()
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.getUser()
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Añadir/sustituir la propiedad de la sesión del usuario
 
@@ -706,24 +798,29 @@ window.DD_RUM && window.DD_RUM.getUser()
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.setUserProperty('name', 'John Doe')
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setUserProperty('name', 'John Doe')
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Eliminar la propiedad de la sesión del usuario
 
@@ -731,23 +828,29 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.removeUserProperty('name')
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeUserProperty('name')
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Borrar la propiedad de la sesión del usuario
 
@@ -755,21 +858,200 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 datadogRum.clearUser()
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.clearUser()
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Cuenta
+
+Para agrupar a los usuarios en conjuntos diferentes, utiliza el concepto de cuenta.
+
+Están disponibles los siguientes atributos:
+
+| Atributo      | Tipo   | Obligatorio | Descripción                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | Cadena | Sí      | Identificador único de la cuenta.                                 |
+| `account.name` | Cadena | No       | Nombre descriptivo de la cuenta, mostrado por defecto en la interfaz de usuario RUM. |
+
+### Identificar cuenta
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Cuenta de acceso
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.getAccount()
+```
+
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Añadir/Anular propiedad de cuenta
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Eliminar propiedad de cuenta
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Borrar propiedades de cuenta
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+datadogRum.clearAccount()
+```
+
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -781,6 +1063,7 @@ El siguiente ejemplo recopila solo el 90 % de las sesiones de una aplicación d
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -791,8 +1074,10 @@ datadogRum.init({
     sessionSampleRate: 90,
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -803,8 +1088,10 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -814,24 +1101,25 @@ window.DD_RUM &&
         sessionSampleRate: 90,
     });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Para una sesión muestreada, no se recopilan todas las páginas de vistas ni la telemetría asociada a esa sesión.
 
 ## Consentimiento de rastreo del usuario
 
-Para cumplir con GDPR, CCPA y regulaciones similares, el SDK del RUM Browser te permite proporcionar el valor del consentimiento de rastreo en la inicialización. Para obtener más información sobre el consentimiento de rastreo, consulta [Seguridad de datos][18].
+Para cumplir con GDPR, CCPA y normativas similares, el  kit de desarrollo de software (SDK) del navegador de RUM te permite proporcionar el valor de consentimiento de rastreo en la inicialización. Para obtener más información sobre el consentimiento de rastreo, consulta [Seguridad de datos][17].
 
 El parámetro de inicialización `trackingConsent` puede ser uno de los siguientes valores:
 
-1. `"granted"`: el SDK del RUM Browser comienza a recopilar datos y los envía a Datadog.
+1. `"granted"` (predeterminado): El kit de desarrollo de software (SDK) del navegador de RUM comienza a recopilar datos y los envía a Datadog.
 2. `"not-granted"`: el SDK del RUM Browser no recopila ningún dato.
 
 Para cambiar el valor del consentimiento de rastreo después de que el SDK del RUM Browser se inicialice, utiliza la llamada a la API `setTrackingConsent()`. El SDK del RUM Browser cambia su comportamiento de acuerdo con el nuevo valor:
 
-* cuando se cambia de `"granted"` a `"not-granted"`, la sesión de RUM se detiene, los datos ya no se envían a Datadog.
-* cuando se cambia de `"not-granted"` a `"granted"`, se crea una nueva sesión de RUM si no hay ninguna sesión anterior activa y se reanuda la recopilación de datos.
+- cuando se cambia de `"granted"` a `"not-granted"`, la sesión de RUM se detiene, los datos ya no se envían a Datadog.
+- cuando se cambia de `"not-granted"` a `"granted"`, se crea una nueva sesión de RUM si no hay ninguna sesión anterior activa y se reanuda la recopilación de datos.
 
 Este estado no se sincroniza entre pestañas ni persiste entre navegaciones. Es tu responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK del RUM Browser o mediante el uso de `setTrackingConsent()`.
 
@@ -839,6 +1127,7 @@ Cuando se utiliza `setTrackingConsent()` antes que `init()`, el valor proporcion
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -851,8 +1140,10 @@ acceptCookieBannerButton.addEventListener('click', function() {
     datadogRum.setTrackingConsent('granted');
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -867,8 +1158,10 @@ acceptCookieBannerButton.addEventListener('click', () => {
     });
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
   ...,
@@ -879,8 +1172,9 @@ acceptCookieBannerButton.addEventListener('click', () => {
     window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
 });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Ver contexto
 
@@ -896,25 +1190,28 @@ Enriquece o modifica el contexto de los eventos de vista del RUM y los eventos s
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('activity', {
         hasPaid: true,
@@ -922,20 +1219,22 @@ window.DD_RUM.onReady(function() {
     });
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
 ```
-{{% /tab%}}
-{{< /tabs>}}
 
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Sustituir el contexto de la vista
 
@@ -948,7 +1247,7 @@ Sustituye el contexto de tus eventos de vista del RUM y de los eventos secundari
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewContext({
     originalUrl: 'shopist.io/department/chairs',
 });
@@ -956,18 +1255,20 @@ datadogRum.setViewContext({
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({
       originalUrl: 'shopist.io/department/chairs',
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
@@ -975,7 +1276,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.setViewContext({
         originalUrl: 'shopist.io/department/chairs',
@@ -984,6 +1285,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Contexto de error
+
+### Adjuntar contexto de error local con dd_context
+
+Al capturar errores, se puede proporcionar contexto adicional en el momento en que se genera un error. En lugar de pasar información adicional a través de la API `addError()`, puedes adjuntar una propiedad `dd_context` directamente a la instancia de error. El SDK del RUM Browser detecta automáticamente esta propiedad y la fusiona en el contexto final del evento de error.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## Contexto global
 
 ### Añadir la propiedad de contexto global
@@ -992,25 +1306,28 @@ Después de inicializar el RUM, añade contexto adicional a todos los eventos de
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
-// Ejemplo de código
+// Code example
 datadogRum.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
@@ -1018,19 +1335,22 @@ window.DD_RUM.onReady(function() {
     });
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
+
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Eliminar la propiedad de contexto global
 
@@ -1043,22 +1363,24 @@ Puedes eliminar una propiedad de contexto global previamente definida.
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.removeGlobalContextProperty('<CONTEXT_KEY>');
 
-// Ejemplo de código
+// Code example
 datadogRum.removeGlobalContextProperty('codeVersion');
 ```
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
@@ -1066,14 +1388,13 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
-
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Sustituir el contexto global
 
@@ -1086,7 +1407,7 @@ Sustituye el contexto por defecto de todos tus eventos de RUM con la API `setGlo
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 datadogRum.setGlobalContext({
     codeVersion: 34,
 });
@@ -1094,18 +1415,20 @@ datadogRum.setGlobalContext({
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({
         codeVersion: 34,
     })
 })
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
@@ -1113,15 +1436,15 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.setGlobalContext({
         codeVersion: 34,
     });
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Borrar un contexto global
 
@@ -1138,11 +1461,13 @@ datadogRum.clearGlobalContext();
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
   window.DD_RUM.clearGlobalContext();
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
@@ -1150,8 +1475,8 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.clearGlobalContext();
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Leer el contexto global
 
@@ -1168,11 +1493,13 @@ const context = datadogRum.getGlobalContext();
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
   const context = window.DD_RUM.getGlobalContext();
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
@@ -1180,8 +1507,8 @@ window.DD_RUM.onReady(function() {
 const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 ```
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Ciclo de vida de los contextos
 
@@ -1192,7 +1519,7 @@ Por defecto, el contexto global y el contexto de usuario se almacenan en la memo
 
 Para añadirlas a todos los eventos de la sesión, deben adjuntarse a cada página.
 
-Con la introducción de la opción de configuración de `storeContextsAcrossPages` en la v4.49.0 del SDK del navegador, esos contextos pueden almacenarse en [`localStorage`][19], lo cual permite los siguientes comportamientos:
+Con la introducción de la opción de configuración `storeContextsAcrossPages` en la v4.49.0 del kit de desarrollo de software (SDK) del navegador, esos contextos pueden  almacenarse en [`localStorage`][18], que permite los siguientes comportamientos:
 
 - Los contextos se conservan tras una recarga completa.
 - Los contextos se sincronizan entre pestañas abiertas en el mismo origen.
@@ -1202,6 +1529,71 @@ Sin embargo, esta función tiene algunas **limitaciones**:
 - No se recomienda configurar información de identificación personal (PII) en estos contextos, ya que los datos almacenados en `localStorage` perduran más allá de la sesión del usuario.
 - La función no es compatible con las opciones de `trackSessionAcrossSubdomains` porque los datos de `localStorage` solo se comparten entre el mismo origen (login.site.com ≠ app.site.com)
 - `localStorage` está limitado a 5 MiB por origen, por lo que los datos específicos de la aplicación, los contextos de Datadog y otros datos de terceros almacenados en la memoria local deben estar dentro de este límite para evitar problemas.
+
+## Contexto interno
+
+Una vez inicializado el kit de desarrollo de software (SDK) del navegador de RUM, puedes acceder al contexto interno del kit de desarrollo de software (SDK). Este proporciona identificadores y metadatos básicos que el kit de desarrollo de software (SDK) utiliza internamente, como identificadores de sesión y detalles de la aplicación.
+
+Puedes explorar los siguientes atributos:
+
+| Atributo      | Descripción                                                       |
+| -------------- | ----------------------------------------------------------------- |
+| application_id | ID de la aplicación.                                            |
+| session_id     | ID de la sesión.                                                |
+| user_action    | Objeto que contiene un ID de acción (o no definido si no se encuentra ninguna acción). |
+| view           | Objeto que contiene detalles sobre el evento de vista actual.           |
+
+Para obtener más información, consulta [Datos de RUM Browser recopilados][2].
+
+### Ejemplo
+
+```json
+{
+  application_id : "xxx",
+  session_id : "xxx",
+  user_action: { id: "xxx" },
+  view : {
+    id : "xxx",
+    referrer : "",
+    url: "http://localhost:8080/",
+    name: "homepage"
+  }
+}
+```
+
+También puedes utilizar el parámetro `startTime` para obtener el contexto de un momento específico. Si se omite el parámetro, se regresa el contexto actual.
+
+```typescript
+getInternalContext (startTime?: 'number' | undefined)
+```
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```JavaScript
+importar { datadogRum } desde '@datadog/browser-rum'
+
+datadogRum.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+```
+
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+
+```JavaScript
+window.DD_RUM.onReady(function () {
+  window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+
+```JavaScript
+window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Micro frontend
 
@@ -1213,41 +1605,44 @@ En la propiedad `beforeSend`, puede anular las propiedades servicio y version. P
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```JavaScript
-import { datadogRum } from '@Datadog/browser-rum';
 
-const SERVICE_REGEX = /some-pathname\/(?<servicio>\w+)\/(?<version>\w+)\//;
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
 datadogRum.init({
     ...,
-    beforeSend: (evento, context) => {
-        const stack = contexto?.handlingStack || evento?.error?.stack;
-        const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-        if (servicio && version) {
-         evento.servicio = servicio;
-         evento.version = versión;
+        if (service && version) {
+          event.service = service;
+          event.version = version;
         }
 
         return true;
     },
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
-```JavaScript
-const SERVICE_REGEX = /some-pathname/(?<servicio>\w+)\/(?<version>\w+)\//;
 
-window.DD_RUM.onReady(función() {
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
-        beforeSend: (evento, context) => {
-            const stack = contexto?.handlingStack || evento?.error?.stack;
-            const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-            if (servicio && version) {
-               evento.servicio = servicio;
-               evento.version = versión;
+            if (service && version) {
+                event.service = service;
+                event.version = version;
             }
 
             return true;
@@ -1255,43 +1650,46 @@ window.DD_RUM.onReady(función() {
     });
 });
 ```
+
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
-```JavaScript
-const SERVICE_REGEX = /some-pathname/(?<servicio>\w+)\/(?<version>\w+)\//;
+
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
 window.DD_RUM && window.DD_RUM.init({
     ...,
-    beforeSend: (evento, context) => {
-        const stack = contexto?.handlingStack || evento?.error?.stack;
-        const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-        if (servicio && version) {
-         evento.servicio = servicio;
-         evento.version = versión;
+        if (service && version) {
+          event.service = service;
+          event.version = version;
         }
 
         return true;
     },
 });
 ```
-{{% /tab%}}
-{{< /tabs>}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Cualquier consulta realizada en el Explorador RUM puede utilizar el atributo servicio para filtrar eventos.
 
 ### Limitaciones
 
 Algunos eventos no pueden atribuirse a un origen, por lo que no tienen una pila de manipulación asociada. Esto incluye:
+
 - Acción eventos recogida automáticamente
 - Eventos de recursos distintos de XHR y Fetch.
-- Ver eventos (pero en su lugar puedes [sobrescribir los nombres de vistas de RUM predeterminados][21])
+- Visualiza eventos (pero puedes [sustituir los nombres de vista de RUM predeterminados][20] en su lugar)
 - Violaciones de CORS y CSP
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /es/real_user_monitoring/browser/data_collected/
 [2]: /es/real_user_monitoring/browser/monitoring_page_performance/
@@ -1304,13 +1702,12 @@ Algunos eventos no pueden atribuirse a un origen, por lo que no tienen una pila 
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /es/real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[16]: /es/logs/log_configuration/attributes_naming_convention/#user-related-attributes
-[17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
-[18]: /es/data_security/real_user_monitoring/#browser-rum-use-of-cookies
-[19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-[21]: /es/real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[16]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
+[17]: /es/data_security/real_user_monitoring/#browser-rum-use-of-cookies
+[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+[20]: /es/real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names

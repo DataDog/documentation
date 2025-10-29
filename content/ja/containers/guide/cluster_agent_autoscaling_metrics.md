@@ -368,6 +368,13 @@ Datadog Cluster Agent は、自動的にそのネームスペース (`dcaautogen
 
 後で HPA を移行して `DatadogMetric` を参照するようにした場合、自動生成されたリソースは数時間後に Datadog Cluster Agent によりクリーンアップされます。
 
+オプションで、この動作を無効にするには、`DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN` を `false` に設定します。
+
+```yaml
+- name: DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN
+  value: "false"
+```
+
 ## Cluster Agent によるクエリの実行
 Cluster Agent は `DatadogMetric` オブジェクト用に 30 秒ごとにクエリを実行します。また、Cluster Agent は、実行されたメトリクスクエリを 35 件ずつグループ化します。したがって、Datadog メトリクス API に対する 1 つのリクエストには 35 件の`DatadogMetric` クエリが含まれます。
 

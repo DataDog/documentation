@@ -91,7 +91,7 @@ Datadog 클러스터 에이전트 점검은 대부분의 시나리오에서 [자
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "datadog_cluster_agent" >}}
+{{< get-metrics-from-git "datadog-cluster-agent" >}}
 
 
 ### 이벤트
@@ -99,7 +99,7 @@ Datadog 클러스터 에이전트 점검은 대부분의 시나리오에서 [자
 Datadog-Cluster-Agent 통합은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "datadog_cluster_agent" >}}
+{{< get-service-checks-from-git "datadog-cluster-agent" >}}
 
 
 ## 트러블슈팅

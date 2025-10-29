@@ -26,11 +26,11 @@ further_reading:
 
 ## Overview
 
-This document explains bootstrapping for the Observability Pipelines Worker.
+This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker and how to [enable the health check endpoint and the liveness and readiness probes](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
 
 ## Bootstrap Options
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>/DD_OP_DATA_DIR/config</code>.
+<div class="alert alert-danger">All configuration file paths specified in the pipeline need to be under <code>/DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
@@ -54,14 +54,13 @@ The following is a list of bootstrap options, their related pipeline environment
 : An example configuration:
 : &nbsp;&nbsp;&nbsp;&nbsp;`api`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`address`: `"127.0.0.1:8686" # optional`
 : Note: Setting `address` is optional. It is the network address to which the API should bind. If you're running the Worker in a Docker container, bind to `0.0.0.0`. Otherwise, the API is not exposed outside of the container.
-: **Description**: Enable the Observability Pipelines Worker API so you can see the Worker's processes with the `tap` or `top` command. See [Run, tap, or top the Worker][8] for more information. If you are using the Helm charts provided when you [set up a pipeline][7], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`, which:
-: - Sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
-: - Exposes the `/health` endpoint. Configure a load balancer's health check with the `/health` endpoint to check that the Worker is up and running.
+: **Description**: Enable the Observability Pipelines Worker API so you can see the Worker's processes with the `tap` or `top` command. See [Run, tap, or top the Worker][8] for more information. If you are using the Helm charts provided when you [set up a pipeline][7], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
+<br><br>See [Enable liveness and readiness probe](#enable-liveness-and-readiness-probe) on how to expose the `/health` endpoint.
 
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
 : **Priority**: `DD_API_KEY`
-: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key.
+: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key. See [Security considerations][11] for information on safeguards implemented for Remote Configuration.
 
 `pipeline_id`
 : **Pipeline environment variable**: `DD_OP_PIPELINE_ID`
@@ -105,6 +104,20 @@ The following is a list of bootstrap options, their related pipeline environment
 : <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
 : <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
 
+## Enable the health check endpoint and the liveness and readiness probes
+
+Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running.
+
+For Kubernetes, the liveness and readiness probes are already enabled in the [helm chart][9] and [values.yaml][10] file.
+
+For other installations such as VM-based ones, you must set `DD_OP_API_ENABLED` to `true` and set `DD_OP_API_ADDRESS` to `0.0.0.0:8686` to expose the `/health` endpoint. An example configuration:
+
+```
+api:
+  enabled: true
+  address: "0.0.0.0.1:8686"
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -114,6 +127,9 @@ The following is a list of bootstrap options, their related pipeline environment
 [3]: /getting_started/site/
 [4]: /agent/configuration/proxy/?tab=linux#environment-variables
 [5]: https://en.wikipedia.org/wiki/HTTP_tunnel
-[6]: /agent/remote_config/
+[6]: /remote_configuration
 [7]: /observability_pipelines/set_up_pipelines/
 [8]: /observability_pipelines/install_the_worker/worker_commands/#run-tap-or-top-the-worker
+[9]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L33-L40
+[10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
+[11]: /remote_configuration/#security-considerations

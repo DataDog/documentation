@@ -19,8 +19,8 @@ assets:
     source_type_id: 10275
     source_type_name: Teradata
   monitors:
-    High disk space: assets/monitors/high_disk_space.json
-    Low ready threads: assets/monitors/low_ready_threads.json
+    Database ready thread count is too low: assets/monitors/low_ready_threads.json
+    Datadase disk space usage is high: assets/monitors/high_disk_space.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,7 +29,7 @@ author:
 categories:
 - キャッシュ
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teradata/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: teradata
 integration_id: teradata
 integration_title: Teradata
-integration_version: 2.2.1
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: teradata
@@ -104,7 +104,7 @@ CREATE USER "datadog" AS PASSWORD="<PASSWORD>";
 任意ですが、強くお勧めします。読み取り専用で監視するために指定された `datadog` ユーザーに新規または既存のロールを付与します。
 
 ```shell
-GRANT "<READ_ONLY_ROLE>" TO "datadog";
+GRANT "<READ_ONLY_ROLE>" TO "datadog"; 
 ```
 
 Teradata システムは、デフォルトでほとんどの [Data Dictionary ビュー][12]で PUBLIC に `SELECT` 権限を付与しています。すべての Teradata Database ユーザーは `PUBLIC` 権限を持ちます。

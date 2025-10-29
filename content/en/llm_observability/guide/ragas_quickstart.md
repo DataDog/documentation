@@ -6,10 +6,6 @@ further_reading:
       text: 'Ragas Evaluations'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 Learn how to use Datadog's integration with the [Ragas][1] framework to evaluate your LLM application. For more information about the Ragas integration, including a detailed setup guide, see [Ragas Evaluations][2].
 
 1. Install required dependencies:

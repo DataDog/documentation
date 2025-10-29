@@ -15,7 +15,7 @@ further_reading:
 title: Test Impact Analysis
 ---
 
-<div class="alert alert-warning"> この機能は以前「Intelligent Test Runner」と呼ばれており、一部のタグには依然として「itr」が含まれています。</div>
+<div class="alert alert-danger"> この機能は以前「Intelligent Test Runner」と呼ばれており、一部のタグには依然として「itr」が含まれています。</div>
 
 ## 概要
 
@@ -62,7 +62,7 @@ Test Impact Analysis を設定する前に、特定の言語に対して [Test O
 
 ## 構成
 
-Datadog ライブラリを Test Impact Analysis 用に設定したら、[Test Service Settings][5] ページから構成します。Test Impact Analysis を有効にするには、`Test Optimization Settings Write` 権限が必要です。
+Datadog ライブラリを Test Impact Analysis 用に設定したら、[Test Service Settings][5] ページで追加設定を行います。Test Impact Analysis を有効にするには、`Test Optimization Settings Write` 権限が必要です。
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Test Optimization Settings ページでテストサービスに Test Impact Analysis を有効にする" style="width:80%" >}}
 
