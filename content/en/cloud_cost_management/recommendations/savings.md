@@ -17,7 +17,8 @@ further_reading:
 ## Overview
 
 {{< img src="cloud_cost/recommendations/savings-overview.png" alt="The Savings tab under CCM Recommendations." style="width:100%;" >}}
-The Savings tab gives you visibility into how your savings opportunities change over time. This information can be useful for tracking cost saving initiatives. The Savings tab visualizes two kinds of savings values:
+
+The Savings tab within Recommendations gives you visibility into how your savings opportunities change over time. This information can be useful for tracking cost saving initiatives. The Savings tab visualizes two kinds of savings values:
 
 
 - The **potential daily savings** is an estimate of the amount of money you would save each day moving forward if, at the time the estimate was calculated, you were to implement the top recommendation for each of your resource types.
