@@ -142,6 +142,13 @@ To set a rate limit:
 
 {{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
+### Audit Trail
+You can monitor user-initiated actions with [Audit Trail][16]. Events are sent when:
+- A user manually starts an investigation and when the investigation completes
+- A tool call is executed in a manual investigation
+- A user enables or disables automatic investigations for a monitor
+- A user modifies the monitor rate limit  
+
 ## How Bits AI SRE investigates
 
 Investigations happen in two phases:
@@ -188,13 +195,6 @@ At the end of an investigation, let Bits know if the conclusion it made was corr
 
 ### Manage memories
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to the [Monitor Management][3] page to view and delete memories in the **Memories** column.
-
-### Audit Trail
-You can monitor user-initiated actions with [Audit Trail][16]. Events are sent when:
-- A user manually starts an investigation and when the investigation completes
-- A tool call is executed in a manual investigation
-- A user enables or disables automatic investigations for a monitor
-- A user modifies the monitor rate limit
 
 [2]: https://app.datadoghq.com/bits-ai/investigations
 [3]: https://app.datadoghq.com/bits-ai/monitors/enabled
