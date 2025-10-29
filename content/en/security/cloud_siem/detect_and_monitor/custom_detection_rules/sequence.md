@@ -43,18 +43,17 @@ Each transition between steps has a configurable evaluation window that determin
 
 When you [create a sequence detection rule][1], these are the options you can configure:
 
-| Setting | Description | Default | Impact |
-|---------|-------------|---------|--------|
-| Steps | Define each detection condition, including query and threshold. | None | Determines which behaviors are monitored. |
-| Step transitions | Define the order and time relationship between steps. | None | Controls when a sequence qualifies for a signal. |
-| Evaluation window | After a step has occurred, the time (in seconds) to wait for the next step. | 900 seconds (15 minutes) | Larger windows increase detection coverage, but may result in more noise. |
-| Group by fields | Fields used to link activity across steps (for example, `@usr.email`, `@ip`). | None | Determines how entities are correlated across queries. |
-| Data type | Specifies whether each query evaluates logs or signals. | Signal | Defines data sources for detection. |
+| Setting | Description | Impact |
+|---------|-------------|--------|
+| Steps | Define each detection condition, including query and threshold. | Determines which behaviors are monitored. |
+| Step transitions | Define the order and time relationship between steps. | Controls when a sequence qualifies for a signal. |
+| Evaluation window | After a step has occurred, the time (in seconds) to wait for the next step. | Larger windows increase detection coverage, but may result in more noise. |
+| Group by fields | Fields used to link activity across steps (for example, `@usr.email`, `@ip`). | Determines how entities are correlated across queries. |
+| Data type | Specifies whether each query evaluates logs or signals. | Defines data sources for detection. |
 
 ## Limits
 
 - Sequence detection supports up to 10 steps per rule and a total evaluation window of 24 hours.
 - Steps must be in a linear sequence.
-- Intermediate results between steps are not shown to users, but are processed internally to maintain state.
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
