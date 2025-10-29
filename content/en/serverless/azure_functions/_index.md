@@ -14,7 +14,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
 ## Prerequisites
 
-1. **Install the Azure integration:** The [Datadog-Azure integration](/integrations/azure/) provides infrastructure metrics. Install it first for full observability.
+1. **Install the Azure integration:** The [Datadog-Azure integration](/integrations/azure/) provides infrastructure metrics and must be installed for full observability.
 2. **Review runtime compatibility:** See compatibility requirements for your language:
    - [.NET Core](/tracing/trace_collection/compatibility/dotnet-core) (Isolated Worker model)
    - [.NET Framework](/tracing/trace_collection/compatibility/dotnet-framework) (In-Process model)
@@ -186,9 +186,6 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    - Configuration is set via Function App Settings, not local files
    - Some configurations may not be supported in the Functions sandbox environment
    - The compatibility layer automatically handles some Agent-related settings
-
-[1]:/tracing/trace_collection/library_config/dotnet-core
-[2]:/tracing/trace_collection/library_config/dotnet-framework
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -213,7 +210,10 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 ## Custom Instrumentation
 
 To add custom spans and metrics:
-- [.NET Custom Instrumentation with Datadog API](/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/)
+- .NET: [Custom Instrumentation with Datadog API](/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/)
+- Node.js: [Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/nodejs/)
+- Python: [Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/python/)
+- Java: [Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/java/)
 - [Submitting Custom Metrics](/serverless/custom_metrics/)
 
 ## What's next?
@@ -223,9 +223,7 @@ To add custom spans and metrics:
 
 ## Troubleshooting
 
-For common issues and debugging steps, see:
-- [Troubleshoot Serverless Monitoring](/serverless/guide/troubleshoot_serverless_monitoring)
-- [.NET Diagnostic Tool](/tracing/troubleshooting/dotnet_diagnostic_tool)
+For common issues and debugging steps, see [Troubleshoot Serverless Monitoring](/serverless/guide/troubleshoot_serverless_monitoring).
 
 ### Enable debug logs
 
