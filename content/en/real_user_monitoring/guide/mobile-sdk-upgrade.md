@@ -41,7 +41,7 @@ All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular an
 {{% tab "Android" %}}
 
 <div class="alert alert-danger">
-We are following Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is `23`.
+Datadog follows Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is <code>23</code>.
 </div>
 
 **Requirements**:
@@ -153,6 +153,16 @@ API changes:
 
 We made minor improvements to the RUM modules. They don't require significant changes to your code, but it's worth checking if you can refactor some redundant parameters.
 
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(`https://example.com/rum/upload`), not just the hostname:
+```kotlin
+Rum.enable(
+  RumConfiguration.Builder(...)
+      .useCustomEndpoint("https://example.com/rum/upload")
+      .build()
+)
+```
+
 API changes:
 
 | `2.x`                                                                               | `3.0`                                                                                |
@@ -171,7 +181,27 @@ API changes:
 
 The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
 
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(`https://example.com/logs/upload`), not just the hostname:
+```kotlin
+Logs.enable(
+  LogsConfiguration.Builder()
+      .useCustomEndpoint("https://example.com/logs/upload")
+      .build()
+)
+```
+
 ### Trace
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(e.g.: `https://example.com/trace/upload`), not just the hostname, i.e:
+```kotlin
+Trace.enable(
+  TraceConfiguration.Builder()
+      .useCustomEndpoint(`https://example.com/trace/upload`)
+      .build()
+)
+```
 
 The [`Open Tracing`](https://opentracing.io/) project has been marked as archived and it is no longer supported. The `Open Tracing` dependencies on has been removed from SDK v3.
 
@@ -289,6 +319,20 @@ API changes:
 | `DatadogInterceptor(String?, Map<String, Set<TracingHeaderType>>,TracedRequestListener, RumResourceAttributesProvider, Sampler<Span>)` | Use `DatadogInterceptor.Builder()` instead. |
 | `DatadogInterceptor(String?,List<String>,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>)`                           | Use `DatadogInterceptor.Builder()` instead. |
 | `DatadogInterceptor(String?,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>) `                                       | Use `DatadogInterceptor.Builder()` instead. |
+
+
+### Session Replay
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(e.g.: `https://example.com/session_replay/upload`), not just the hostname, i.e:
+
+```kotlin
+SessionReplay.enable(
+  SessionReplayConfiguration.Builder(...)
+      .useCustomEndpoint("https://example.com/session_replay/upload")
+      .build()
+)
+```
 
 {{% /tab %}}
 {{% tab "iOS" %}}

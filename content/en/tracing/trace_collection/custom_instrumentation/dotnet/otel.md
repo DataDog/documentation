@@ -2,7 +2,7 @@
 title: .NET Custom Instrumentation using the OpenTelemetry API
 code_lang: otel
 type: multi-code-lang
-code_lang_weight: 2
+code_lang_weight: 1
 description: 'Instrument your .NET application with the OpenTelemetry API, to send traces to Datadog.'
 algolia:
     tags: ["C#","APM"]
