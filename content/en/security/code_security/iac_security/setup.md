@@ -70,7 +70,7 @@ After setting up the GitLab integration, enable IaC Security for your repositori
     - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
     - To enable it for a single repository, toggle the **IaC** switch to ON for that repository.
 
-[1]: /documentation/integrations/gitlab/?tab=host#setup
+[1]: /integrations/gitlab/?tab=host#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
