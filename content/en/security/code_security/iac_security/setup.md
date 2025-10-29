@@ -54,6 +54,8 @@ After setting up the GitHub integration, enable IaC Security for your repositori
 
 ### Install the GitLab integration
 
+Follow [the instructions][1] for installing the GitLab integration.
+
 ### Enable IaC Security for your repositories
 
 After setting up the GitLab integration, enable IaC Security for your repositories.
@@ -68,13 +70,15 @@ After setting up the GitLab integration, enable IaC Security for your repositori
     - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
     - To enable it for a single repository, toggle the **IaC** switch to ON for that repository.
 
-[1]: /integrations/github/#setup
+[1]: /documentation/integrations/gitlab/?tab=host#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
 ### Install the Azure DevOps integration
+
+Follow [the instructions][1] for installing the Azure DevOps integration.
 
 ### Enable IaC Security for your repositories
 
@@ -90,7 +94,7 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
     - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
     - To enable it for a single repository, toggle the **IaC** switch to ON for that repository.
 
-[1]: /integrations/github/#setup
+[1]: /integrations/azuredevops/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
