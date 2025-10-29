@@ -176,9 +176,15 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 <div class="alert alert-danger">These endpoints are subject to change while Agent-side filtering for DogStatsD custom metrics is in Preview.</div>
 
+These endpoints require a valid Datadog API key and application key. See [Getting started][3] in the API Reference for more information.
+
 ### Create a filtered metric policy
 
-**POST** `{{< region-param key="dd_api" code="true" >}}/api/unstable/remote_config/products/metric_control/filtered_metrics/policies`
+The base URL for your selected [Datadog site][4] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**POST** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies`
 
 #### Example body
 
@@ -199,7 +205,11 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 ### Update a filtered metric policy (partial update)
 
-**PATCH** `{{< region-param key="dd_api" code="true" >}}/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+The base URL for your selected [Datadog site][4] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
 
 #### Example body
 
@@ -224,7 +234,11 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 ### Update a filtered metric policy (full replace)
 
-**PUT** `{{< region-param key="dd_api" code="true" >}}/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+The base URL for your selected [Datadog site][4] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**PUT** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
 
 #### Example body
 
@@ -245,11 +259,19 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 ### Delete a policy
 
-**DELETE** `{{< region-param key="dd_api" code="true" >}}/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+The base URL for your selected [Datadog site][4] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**DELETE** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
 
 ### Get a filtered metric policy
 
-**GET** `{{< region-param key="dd_api" code="true" >}}/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+The base URL for your selected [Datadog site][4] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**GET** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
 
 #### Example response body
 
@@ -299,7 +321,11 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 ### List filtered metric policies
 
-**GET** `{{< region-param key="dd_api" code="true" >}}/api/unstable/remote_config/products/metric_control/filtered_metrics/policies`
+The base URL for your selected [Datadog site][4] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**GET** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies`
 
 #### Example response body
 
@@ -350,3 +376,5 @@ This initial preview release includes the following limitations:
 
 [1]: https://app.datadoghq.com/metric/settings/policies
 [2]: https://app.datadoghq.com/metric/summary
+[3]: /api/latest/#getting-started
+[4]: /getting_started/site/
