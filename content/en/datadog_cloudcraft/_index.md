@@ -142,13 +142,11 @@ Diagrams can be filtered by tags, such as team, application, or service, allowin
 
 Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS tags, custom tags, and terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
-{{< img src="datadog_cloudcraft/cloudcraft_filter.png" alt="Filter feature in Cloudcraft" >}}
-
 ### Search and highlight
 
 Use the search bar to locate resources on the diagram by name, ID, or tag. This feature is highly effective for finding specific resources within your cloud architecture. It highlights the search criteria in the diagram, without creating a new diagram, by greying out the elements that do not match the search criteria.
 
-{{< img src="datadog_cloudcraft/search_highlight_2.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/search_highlight_4.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
 
 ## Permissions
 
