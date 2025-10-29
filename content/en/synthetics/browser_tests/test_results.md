@@ -36,7 +36,7 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 
 In the **History** section, you can see three graphs:
 
-- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][20] configured for a test.
+- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval.
 - The **Time-to-interactive by location and device** graph displays the amount of time until a page can be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
 - The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
 
