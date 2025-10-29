@@ -1,11 +1,11 @@
 ---
-title: Configuring Single Sign On With SAML
+title: Configuring Single Sign-On With SAML
 description: Configure SAML authentication for Datadog with identity providers like Active Directory, Auth0, Google, Okta, and Microsoft Entra ID for secure single sign-on.
 disable_toc: false
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
-  text: "Single Sign On With SAML"
+  text: "Single Sign-On With SAML"
 algolia:
   tags: ['saml']
 ---
@@ -39,11 +39,11 @@ This page covers how to enable single sign-on (SSO) with SAML in Datadog, as wel
     * [Okta][14]
     * [SafeNet][15]
 
-2. In the Datadog app, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][16] and click on **Configure** under SAML.
+2. In Datadog, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][16] and click on **Configure** under SAML.
 
 3. Upload the IdP metadata from your SAML identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
-**Note:** The IdP metadata must contain ASCII characters only.
+**Note**: The IdP metadata must contain ASCII characters only.
 
 4. Download Datadog's [Service Provider metadata][17] to configure your IdP to recognize Datadog as a Service Provider.
 
@@ -64,7 +64,7 @@ To configure additional SAML providers:
 2. In the configuration modal, create a user-friendly name for this SAML provider. The name appears to end users when they choose a login method.
 3. Upload the IdP metadata from your SAML identity provider by clicking **browse files** or dragging and dropping the XML metadata file onto the modal.
 
-**Note:** The IdP metadata must contain ASCII characters only.
+**Note**: The IdP metadata must contain ASCII characters only.
 
 4. Click **Save**.
 
