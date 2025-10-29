@@ -18,7 +18,7 @@ further_reading:
 
 Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
-{{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
+{{< img src="network_device_monitoring/netflow/netflow_home_2.png" alt="The NetFlow Monitoring page containing a collapsible legend for traffic volume, device health, flows and more." style="width:100%;" >}}
 
 ## Installation
 
@@ -67,21 +67,19 @@ If the NetFlow exporter IP is one of the device IPs, but not the one configured 
 
 Datadog enriches IPs with public cloud provider service and region for IPv4 addresses, so you can filter for flow records from a specific service and region.
 
-{{< img src="network_device_monitoring/netflow/netflow_cloud_provider_ip_enrichment.png" alt="Netflow IPs enriched with cloud provider name, region, and service" width="80%" >}}
+{{< img src="network_device_monitoring/netflow/netflow_cloud_provider_enrichment.png" alt="Netflow Filter menu displaying cloud provider name, region, and service" width="30%" >}}
 
 ### Port enrichment
 
-Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443). This can be seen when searching for source or destination application names on NetFlow.
-
-{{< img src="network_device_monitoring/netflow/netflow_iana_port_mappings.png" alt="The NetFlow page filtered by @destination.application_name and displaying names for ports such as HTTPS" width="80%" >}}
+Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443). 
 
 #### Custom port enrichment
 
 You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
-From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload the CSV file containing your custom enrichments.
+From the **Configuration** tab in NetFlow, click **+ Add Enrichment** to upload the CSV file containing your custom enrichments.
 
-{{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
+{{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
 
 ### Reverse DNS private IP enrichment
 
@@ -89,17 +87,17 @@ Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames as
 
 By [default][7], the Reverse DNS IP enrichment in your `datadog.yaml` file is disabled. To enable, see the [Configuration](#configuration) section of this page.
 
-Search for **DNS** in the Flow grouping of the facets section to locate flows associated with Reverse DNS IP enrichment:
+Search for **DNS** in the **+ Filter** menu to locate flows associated with Reverse DNS IP enrichment:
 
-{{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
+{{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Filter menu enhanced to show the reverse DNS destination and source facets" width="100%" >}}
 
 **Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, see the [full configuration file][8].
 
-## Visualization
+## Sankey diagram
 
-You can access the data collected by NetFlow Monitoring on the [**NetFlow** page][5]. Hover over a flow from the list for additional information about hosts, pods, and containers, and access related network connections.
+You can visualize the flows in NetFlow Monitoring by clicking on the **Flows** menu and hovering over **NetFlow Volume Flows** from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
 
-{{< img src="network_device_monitoring/netflow/information.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
+{{< img src="network_device_monitoring/netflow/flows.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
 
 When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
 
