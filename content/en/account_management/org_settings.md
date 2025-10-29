@@ -151,7 +151,7 @@ The session duration can be configured within the following limits:
 
 #### Idle time session duration configuration
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
   This feature is currently available in preview.
 </div>
 
