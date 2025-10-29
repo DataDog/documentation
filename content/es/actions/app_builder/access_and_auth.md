@@ -37,7 +37,7 @@ Cuando ejecutas una aplicación, el usuario de la cuenta de servicio resuelve la
 
 1. Haz clic en el icono de engranaje (**Settings** [ajustes]).
 1. Selecciona en **Manage app identity** (Gestionar identidad de la aplicación).
-1. Haz clic en tu cuenta de servicio junto a *Run As** (Ejecutar como).
+1. Haz clic en tu cuenta de servicio junto a **Run As** (Ejecutar como).
 
 #### Eliminar una cuenta de servicio asociada a una aplicación
 

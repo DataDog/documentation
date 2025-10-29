@@ -89,7 +89,7 @@ Para entornos en contenedores, consulta la guía de [Autodiscovery con JMX](http
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `activemq_xml` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `activemq_xml` en la sección Checks.
 
 ## Datos recopilados
 
