@@ -309,11 +309,11 @@ Substitute `<BASE_URL>` in the example below with the base URL.
     // ... up to ~10,000 entries
   ],
   "links": {
-    "self": "/filtered_metrics?page[offset]=200&page[limit]=100",
-    "next": "/filtered_metrics?page[offset]=300&page[limit]=100",
-    "prev": "/filtered_metrics?page[offset]=100&page[limit]=100",
-    "first": "/filtered_metrics?page[offset]=0&page[limit]=100",
-    "last": "/filtered_metrics?page[offset]=9900&page[limit]=100"
+    "self": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=200&page[limit]=100",
+    "next": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=300&page[limit]=100",
+    "prev": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=100&page[limit]=100",
+    "first": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=0&page[limit]=100",
+    "last": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=9900&page[limit]=100"
   },
   "meta": {
     "agent_coverage_percent": 100,
