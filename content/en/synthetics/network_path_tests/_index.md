@@ -17,6 +17,8 @@ Network Path Testing in Synthetic Monitoring gives you complete visibility into 
 
 Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations.
 
+<div class="alert alert-info">Network Path Testing for Synthetic Monitoring is not yet billed. See the <a href="https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products">pricing page</a> for more information.</div>
+
 ## Test creation
 
 1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
