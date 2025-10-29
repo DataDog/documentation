@@ -199,7 +199,7 @@ Instead of setting custom vital variables individually, you can report a custom 
 window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
 ```
 
-**Note**: The `startTime` parameter expects a Unix timestamp in milliseconds (the number of milliseconds since January 1, 1970).
+**Note**: The `startTime` parameter expects a UNIX timestamp in milliseconds (the number of milliseconds since January 1, 1970).
 
 ### Track additional performance timings
 
