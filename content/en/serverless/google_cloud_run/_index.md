@@ -1,5 +1,6 @@
 ---
 title: Google Cloud Run
+description: "Monitor Google Cloud Run applications with Datadog for comprehensive serverless monitoring including metrics, traces, and logs."
 aliases:
     - /serverless/gcp
     - /serverless/google_cloud

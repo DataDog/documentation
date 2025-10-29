@@ -1,5 +1,6 @@
 ---
 title: Instrument AWS Lambda applications
+description: "Learn how to instrument AWS Lambda functions with Datadog for comprehensive monitoring across Python, Node.js, Go, Java, .NET, and Ruby."
 aliases:
     - /serverless/installation/installing_the_library/
     - /serverless/installation

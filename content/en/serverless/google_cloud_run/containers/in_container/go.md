@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Go Cloud Run Container In-Container
+description: Instrument Go applications running in Google Cloud Run containers using in-container monitoring for traces and metrics.
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30

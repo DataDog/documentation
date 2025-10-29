@@ -1,5 +1,6 @@
 ---
 title: Serverless Libraries and Integrations
+description: "Explore Datadog's serverless development tools, Lambda extensions, libraries, and AWS integrations for comprehensive serverless monitoring."
 aliases:
   - /serverless/serverless_integrations
   - /serverless/datadog_lambda_library/

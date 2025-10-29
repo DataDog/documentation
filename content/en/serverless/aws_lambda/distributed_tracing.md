@@ -1,5 +1,6 @@
 ---
 title: Distributed Tracing with AWS Lambda Serverless Applications
+description: "Set up distributed tracing for AWS Lambda functions to track requests across your serverless applications and connected services."
 aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/

@@ -1,5 +1,6 @@
 ---
 title: Serverless and OpenTelemetry
+description: "Learn how to use OpenTelemetry with serverless applications to generate Datadog-style spans and traces for observability monitoring."
 further_reading:
   - link: '/opentelemetry/'
     tag: 'Documentation'

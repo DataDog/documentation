@@ -1,6 +1,6 @@
 ---
 title: Serverless Tagging
-
+description: "Learn how to apply consistent tags to AWS Lambda functions for enhanced filtering, grouping, and organization across metrics, traces, and logs."
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/#aws-lambda-functions"
   tag: "Documentation"

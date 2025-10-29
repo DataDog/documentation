@@ -1,5 +1,6 @@
 ---
 title: Enhanced metrics for AWS Step Functions
+description: Configure and view enhanced AWS Step Functions metrics in the aws.states.enhanced.* namespace for detailed execution tracking.
 ---
 
 In addition to [ingesting integration metrics from AWS][3], Datadog generates enhanced metrics for AWS Step Functions, similar to [enhanced metrics for AWS Lambda][1]. Enhanced Step Functions metrics are distinguished by being in the `aws.states.enhanced.*` namespace. To add enhanced metrics, follow the [AWS Step Function monitoring installation instructions][3] and ensure that `DD_ENHANCED_METRICS` is set to `true`. 

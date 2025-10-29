@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Node.js Cloud Run Container with Sidecar
+description: Instrument Node.js applications in Google Cloud Run containers using the sidecar pattern with Datadog Agent for monitoring.
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20

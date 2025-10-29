@@ -1,5 +1,6 @@
 ---
 title: Instrumenting .NET Serverless Applications
+description: "Instrument .NET Lambda functions with Datadog for comprehensive serverless monitoring including metrics, traces, and logs."
 aliases:
     - /serverless/installation/dotnet
     - /serverless/aws_lambda/installation/dotnet

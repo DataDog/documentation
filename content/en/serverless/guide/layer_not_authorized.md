@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Serverless Layer not Authorized Errors
+description: "Troubleshoot and resolve 'lambda:GetLayerVersion not authorized' errors when deploying Datadog Lambda layers for serverless monitoring."
 ---
 This guide helps you troubleshoot the deployment error `not authorized to perform: lambda:GetLayerVersion on resource`. This error is commonly seen with Datadog Lambda Library layers or the Datadog Extension layer.
 

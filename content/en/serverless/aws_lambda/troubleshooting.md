@@ -1,5 +1,6 @@
 ---
 title: Troubleshoot AWS Lambda Monitoring
+description: "Troubleshoot common issues with Datadog AWS Lambda monitoring including missing metrics, traces, and logs."
 further_reading:
 - link: '/serverless/installation/'
   tag: 'Documentation'

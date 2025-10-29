@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
+description: Instrument Go Lambda functions using the legacy Datadog Forwarder for traces, metrics, and logs collection.
 
 ---
 

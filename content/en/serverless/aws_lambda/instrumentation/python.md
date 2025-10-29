@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Python Serverless Applications
+description: "Instrument Python Lambda functions with Datadog for comprehensive serverless monitoring including metrics, traces, and logs."
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'

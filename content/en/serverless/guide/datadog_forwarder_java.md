@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Java Serverless Applications Using the Datadog Forwarder
+description: Instrument Java Lambda functions using the legacy Datadog Forwarder for traces, metrics, and logs collection.
 
 ---
 ## Overview

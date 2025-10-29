@@ -1,5 +1,6 @@
 ---
 title: Enhanced Lambda Metrics
+description: "Learn about Datadog's enhanced Lambda metrics that provide visibility beyond standard AWS integration metrics."
 aliases:
     - /serverless/real-time-enhanced-metrics
     - /serverless/real_time_enhanced_metrics

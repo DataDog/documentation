@@ -1,5 +1,6 @@
 ---
 title: Azure App Service - Windows Code
+description: Instrument Windows Azure App Service applications using the Datadog extension for monitoring .NET and other Windows-based applications.
 aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/azure_app_services_windows

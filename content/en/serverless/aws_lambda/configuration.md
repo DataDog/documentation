@@ -1,5 +1,6 @@
 ---
 title: Configure Serverless Monitoring for AWS Lambda
+description: "Configure Datadog serverless monitoring settings for AWS Lambda functions including tags, environment variables, and advanced options."
 further_reading:
   - link: '/serverless/installation/'
     tag: 'Documentation'

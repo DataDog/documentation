@@ -1,5 +1,6 @@
 ---
 title: Custom Metrics from AWS Lambda Serverless Applications
+description: "Send custom metrics from AWS Lambda functions to Datadog using the Lambda Extension or Forwarder for business logic monitoring."
 ---
 
 ## Overview

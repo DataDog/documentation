@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Node.js Serverless Applications Using the Datadog Forwarder
+description: Instrument Node.js Lambda functions using the legacy Datadog Forwarder for traces, metrics, and logs collection.
 
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Serverless Monitoring for AWS Step Functions
+description: Troubleshoot common issues with AWS Step Functions monitoring including missing traces, metrics, and log forwarding problems.
 ---
 
 ## I cannot see any traces

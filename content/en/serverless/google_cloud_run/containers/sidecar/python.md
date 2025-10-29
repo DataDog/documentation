@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Python Cloud Run Container with Sidecar
+description: Instrument Python applications in Google Cloud Run containers using the sidecar pattern with Datadog Agent for monitoring.
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10

@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Python Serverless Applications Using the Datadog Forwarder
+description: Instrument Python Lambda functions using the legacy Datadog Forwarder for traces, metrics, and logs collection.
 
 ---
 ## Overview

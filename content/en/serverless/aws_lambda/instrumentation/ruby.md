@@ -1,5 +1,6 @@
 ---
 title: Instrumenting Ruby Serverless Applications
+description: "Instrument Ruby Lambda functions with Datadog for comprehensive serverless monitoring including metrics, traces, and logs."
 further_reading:
 - link: 'serverless/datadog_lambda_library/ruby'
   tag: 'Documentation'

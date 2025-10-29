@@ -1,5 +1,6 @@
 ---
 title: Redrive AWS Step Functions executions
+description: Redrive failed AWS Step Functions executions directly from Datadog to continue from the point of failure without restarting.
 further_reading:
     - link: 'https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html'
       tag: 'AWS Developer Guide'
