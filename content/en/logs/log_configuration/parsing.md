@@ -233,7 +233,7 @@ For example, consider a log containing a `command.line` attribute that should be
 
 ### Using helper rules to reuse common patterns
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
