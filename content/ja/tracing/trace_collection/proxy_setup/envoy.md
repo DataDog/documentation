@@ -246,7 +246,7 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 
 ## 環境変数
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> Datadog Agent のアドレスは <code>cluster</code> 設定を使用して構成されているため、変数 <code>DD_AGENT_HOST</code>、<code>DD_TRACE_AGENT_PORT</code>、<code>DD_TRACE_AGENT_URL</code> は Envoy に適用されません。
 </div>
 

@@ -130,7 +130,7 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 
 If you are initializing the SDK in a TypeScript project, use the code snippet below. Types are compatible with TypeScript >= 3.8.2.
 
-<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+<div class="alert alert-info">For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
@@ -215,12 +215,12 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /error_tracking/
-[2]: /real_user_monitoring/browser/data_collected/?tab=error#source-errors
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/?tab=error#source-errors
 [3]: /error_tracking/frontend/collecting_browser_errors/
 [4]: /error_tracking/frontend/collecting_browser_errors/?tab=npm#error-sources
 [5]: https://www.npmjs.com/package/@datadog/browser-rum
 [6]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[7]: /real_user_monitoring/browser/data_collected/
+[7]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [8]: /real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [10]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names

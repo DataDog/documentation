@@ -69,7 +69,7 @@ Multisource Querying uses the `all.cost` metric, which combines all individual c
 
 ### Out-of-the-box tags
 
-Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags shared across each integration.
+Cloud Cost Management collects tags for the AWS, Azure, Google Cloud, and Oracle Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags shared across each integration.
 
 | Tag Name | Tag Description |
 |---|---|
@@ -104,7 +104,7 @@ The following FOCUS tags are available in Cloud Cost Management:
 
 The `all.cost` metric has [Container costs allocated][13] for AWS, Azure, and Google Cloud costs, so you can query by the [relevant container tags][14].
 
-<div class="alert alert-warning">If your organization tags with any of these FOCUS tags, Datadog recommends updating your tag key on the underlying infrastructure so that tag values do not overlap with FOCUS tag values in Cloud Cost Management.</div>
+<div class="alert alert-danger">If your organization tags with any of these FOCUS tags, Datadog recommends updating your tag key on the underlying infrastructure so that tag values do not overlap with FOCUS tag values in Cloud Cost Management.</div>
 
 ## Currency conversion
 Cloud Cost Management retrieves the billing currency from each cloud provider's bill. When processing costs from multiple providers in different currencies, cost charges are converted to USD. This conversion is performed using the average monthly exchange rate, which is updated daily. This ensures that Cloud Cost Management can consistently and accurately represent all cost data, regardless of its original currency. To view your cost in the original billing currency, filter to a single provider.

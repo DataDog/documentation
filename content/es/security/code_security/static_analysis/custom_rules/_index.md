@@ -13,7 +13,7 @@ title: Reglas personalizadas de Static Code Analysis (SAST)
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security no está disponible en el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}
@@ -62,7 +62,7 @@ Para obtener un nodo capturado, utiliza el atributo `captures` del primer argume
  - `end`: posición final del nodo. La posición contiene los atributos `line` y `col`.
  - `text`: contenido del nodo.
 
-<div class="alert alert-warning">Los atributos<code>line</code> y <code>col</code> empiezan en 1. Cualquier resultado con <code>line</code> o <code>col</code> en 0 se ignora.</div>
+<div class="alert alert-danger">Los atributos<code>line</code> y <code>col</code> empiezan en 1. Cualquier resultado con <code>line</code> o <code>col</code> en 0 se ignora.</div>
 
 ```javascript
 function visit(node, filename, code) {

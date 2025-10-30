@@ -13,9 +13,9 @@ further_reading:
 title: Gestión de cuentas
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La plataforma Datadog for Government sólo admite la autenticación SAML o básica mediante nombre de usuario/correo electrónico y contraseña. Antes de configurar la autenticación SAML, asegúrate de definir al menos una cuenta con nombre de usuario/correo electrónico y contraseña para mantener el acceso durante el proceso de configuración. Datadog recomienda habilitar la autenticación multifactor (MFA) para las cuentas basadas en contraseña.
+<div class="alert alert-danger">La plataforma Datadog for Government solo admite SAML o la autenticación básica mediante nombre de usuario/correo electrónico y contraseña. Antes de configurar la autenticación SAML, asegúrate de que se ha establecido al menos una cuenta con nombre de usuario/email y contraseña para mantener el acceso durante el proceso de configuración. Datadog recomienda habilitar la autenticación multifactor (MFA) para las cuentas basadas en contraseña.
 
-Si necesitas habilitar SAML para una cuenta de prueba, ponte en contacto con el <a href="https://docs.datadoghq.com/getting_started/support/">servicio de asistencia de Datadog</a>.</div>
+Si necesitas habilitar SAML para una cuenta de prueba, ponte en contacto con el el <a href="https://docs.datadoghq.com/getting_started/support/">servicio de asistencia de Datadog</a>.</div>
 
 {{< /site-region >}}
 
@@ -40,7 +40,7 @@ Puedes gestionar tu zona horaria, preferencia de accesibilidad visual y suscripc
 
 En las suscripciones por correo electrónico, tienes acceso a los siguientes informes:
 {{< site-region region="us3,us5,gov,ap1,ap2" >}}
-<div class="alert alert-warning">Los resúmenes de correo electrónico no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Los resúmenes de correo electrónico no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest (Resumen diario)

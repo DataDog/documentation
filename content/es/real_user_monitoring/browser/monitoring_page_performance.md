@@ -35,7 +35,7 @@ Puedes acceder a la telemetría de rendimiento de tus vistas en:
 
 ## Tiempos de eventos y métricas de core web vitals
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   La telemetría de Core Web Vitals de Datadog está disponible en el paquete <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> v2.2.0 o posterior.
 </div>
 

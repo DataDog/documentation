@@ -113,7 +113,7 @@ exportateurs :
 **Exemple** : [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,7 +163,7 @@ Avec les services inférés, les dépendances sont automatiquement détectées �
 
 Activez la variable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` pour vous assurer qu'aucune intégration Datadog ne définisse de noms de service différents du nom global par défaut. Cela améliore également la représentation des connexions service-à-service et des services déduits dans les visualisations Datadog, pour tous les langages et intégrations de bibliothèques de traçage pris en charge.
 
-<div class="alert alert-warning">L'activation de cette option peut affecter les métriques APM existantes, les métriques personnalisées de span, l'analytique de trace, les filtres de rétention, les analyses de données sensibles, les monitors, les tableaux de bord ou les notebooks qui référencent les anciens noms de service. Mettez à jour ces éléments pour utiliser le tag global par défaut <code>service:&lt;DD_SERVICE&gt;</code>.</div>
+<div class="alert alert-danger">L'activation de cette option peut affecter les métriques APM existantes, les métriques personnalisées de span, l'analytique de trace, les filtres de rétention, les analyses de données sensibles, les monitors, les tableaux de bord ou les notebooks qui référencent les anciens noms de service. Mettez à jour ces éléments pour utiliser le tag global par défaut <code>service:&lt;DD_SERVICE&gt;</code>.</div>
 
 Pour savoir comment supprimer les remplacements de service et migrer vers les services inférés, consultez le [guide sur les remplacements de service][4].
 

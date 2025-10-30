@@ -101,7 +101,7 @@ No es necesario añadir la librería de rastreo porque se inyecta automáticamen
 1. Desde el subdirectorio `k8s`, utiliza el siguiente comando para instalar el Datadog Cluster Agent, especificando el archivo de configuración `values-with-lib-inj.yaml` y tu [clave de API de Datadog](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
-    <div class="alert alert-warning">Para obtener información más detallada, lee <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Instalación del Datadog Agent en Kubernetes con Helm</a></div>
+    <div class="alert alert-danger">Para obtener información más detallada, lee <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Instalación del Datadog Agent en Kubernetes con Helm</a></div>
 
 2. Puedes comprobar que el Datadog Cluster Agent se está ejecutando con el siguiente comando:
    {{< code-block lang="shell" >}}

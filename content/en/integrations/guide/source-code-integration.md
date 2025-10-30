@@ -69,7 +69,7 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
@@ -81,18 +81,19 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration while onboarding to [Datadog Code Security][101]. This integration's functionality is limited to Code Security.
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
 
 [101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
+[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
@@ -588,6 +589,10 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 {{< /tabs >}}
 
 ### PR comments
+
+<div class="alert alert-warning">
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
