@@ -248,6 +248,16 @@
         - action: pull-and-push-file
           branch: master
           globs:
+          - 'packages/plugin-cloud-run/README.md'
+          options:
+            dest_path: '/serverless/libraries_integrations/'
+            file_name: 'cli-cloud-run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-cloud-run/README.md"]
+              title: Datadog Serverless CLI for Cloud Run
+        - action: pull-and-push-file
+          branch: master
+          globs:
           - 'packages/plugin-synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'

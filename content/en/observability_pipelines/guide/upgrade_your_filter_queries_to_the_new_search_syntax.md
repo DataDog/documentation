@@ -48,7 +48,7 @@ The following table lists the differences between the legacy and new search synt
 
 | Legacy syntax | New syntax                        |
 | ------------- | ------------------------------- |
-| Requires the `@` symbol for attribute search, except when referencing [reserved fields](#legacy-syntax-reserved-fields). | Does not require the `@` symbol for attribute search. **Note**: The `@` symbol in queries is removed to preserve backwards compatibility. |
+| Requires the `@` symbol for attribute search, except when referencing [reserved fields](#legacy-syntax-reserved-fields). | Does not require the `@` symbol for attribute search. |
 | Since `@` indicates an attribute search, tag searches do not include an `@`, and are matched under the attributes `tags` and `ddtags`.<br><br>Attribute search queries without an `@` symbol are matched against the `tags` or `ddtags` array.<br><br>Example attribute search syntax: `env:prod` | Tags syntax must be explicitly entered.<br><br>Inspect your data with [Live capture][5] to determine which fields to match.<br><br>Example attribute search syntax: `tags:"env:prod" OR ddtags:"env:prod"`  |
 | [Reserved fields](#legacy-syntax-reserved-fields) do not require the `@` symbol. | Reserved fields do not require the `@` symbol. |
 

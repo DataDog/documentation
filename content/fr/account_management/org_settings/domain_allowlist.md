@@ -19,6 +19,7 @@ title: Liste d'autorisations pour les domaines
 Avec la [liste d'autorisation de domaines][1], vous pouvez restreindre les domaines de messagerie pouvant recevoir des notifications. Les notifications concernées incluent toutes les notifications provenant de :
 - Monitors
 - Rapports programmés
+- Événements
 
 Lorsque la liste d'autorisation de domaines est activée, seuls les domaines de messagerie figurant dans votre liste peuvent recevoir les notifications concernées. Si vous essayez d'envoyer une notification concernée à un domaine de messagerie qui ne figure pas dans votre liste, un avertissement s'affiche.
 

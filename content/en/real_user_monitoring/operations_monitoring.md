@@ -1,7 +1,6 @@
 ---
 title: Operations Monitoring
 description: Monitor critical technical operations within user-facing features to identify exactly when and why users fail to complete key workflows.
-private: true
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
