@@ -18,6 +18,8 @@ The [Action Catalog][10] within the Datadog App provides actions that can be per
 
 To add a query, click the Data (**{&nbsp;}**) icon to open the Data tab. Click the plus (**+**), select **Actions**, and search "query" for an action to add to your app. After you've added the query action, it appears in the **Actions** List. Select a query to configure it.
 
+You can also use Bits AI to add, configure, and trigger queries. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**) to get started. 
+
 Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
 
 ## Run settings
