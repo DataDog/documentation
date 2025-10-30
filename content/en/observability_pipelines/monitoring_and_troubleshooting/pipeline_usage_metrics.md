@@ -82,6 +82,31 @@ Utilization
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
+## Buffer metrics (when buffering is enabled)
+
+Track buffer behavior with these metrics:
+
+`pipelines.buffer_events`
+: **Description**: Number of events currently in the buffer.
+
+`pipelines.buffer_byte_size`
+: **Description**: Current buffer size in bytes.
+
+`pipelines.buffer_received_events_total`
+: **Description**: Total events added to the buffer.
+
+`pipelines.buffer_received_event_bytes_total`
+: **Description**: Total bytes added to the buffer.
+
+`pipelines.buffer_sent_events_total`
+: **Description**: Total events successfully flushed from the buffer.
+
+`pipelines.buffer_sent_event_bytes_total`
+: **Description**: Total bytes successfully flushed from the buffer.
+
+`pipelines.buffer_discarded_events_total`
+: **Description**: Events discarded from the buffer (for example, due to overflow).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

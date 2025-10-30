@@ -356,12 +356,12 @@ export default {
     ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics'
   },
   otlp_logs_endpoint: {
-    us: 'https://http-intake.logs.datadoghq.com/v1/logs',
-    us3: 'https://http-intake.logs.us3.datadoghq.com/v1/logs',
-    us5: 'https://http-intake.logs.us5.datadoghq.com/v1/logs',
-    eu: 'https://http-intake.logs.datadoghq.eu/v1/logs',
-    ap1: 'https://http-intake.logs.ap1.datadoghq.com/v1/logs',
-    ap2: 'https://http-intake.logs.ap2.datadoghq.com/v1/logs'
+    us: 'https://otlp.datadoghq.com/v1/logs',
+    us3: 'https://otlp.us3.datadoghq.com/v1/logs',
+    us5: 'https://otlp.us5.datadoghq.com/v1/logs',
+    eu: 'https://otlp.datadoghq.eu/v1/logs',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/logs',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/logs'
   },
   custom_costs_endpoint: {
     us: 'api.datadoghq.com/api/v2/cost/custom_costs',

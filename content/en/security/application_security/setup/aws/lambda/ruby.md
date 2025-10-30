@@ -51,7 +51,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```yaml
    custom:
      datadog:
-       enableASM: true
+       appSecMode: on
    ```
 
    Overall, your new `serverless.yml` file should contain at least:
@@ -59,8 +59,7 @@ To install and configure the Datadog Serverless Framework plugin:
    custom:
      datadog:
        apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
-       enableDDTracing: true
-       enableASM: true
+       appSecMode: on
    ```
    See also the complete list of [plugin parameters][2] to further configure your lambda settings.
 

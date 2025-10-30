@@ -21,7 +21,7 @@ further_reading:
 
 Use Incident Analytics to learn from past incidents and understand the efficiency and performance of your incident response process. Incident analytics allows you to pull aggregated statistics on your incidents over time. You can use these statistics to create reports that help you to:
 - Analyze whether your incident response process is improving over time
-- Assess your mean time to resolutions
+- Assess your mean time to resolution
 - Identify areas of improvement that you should invest in
 
 ## Data collected
@@ -35,7 +35,7 @@ Incident Management Analytics is a queryable data source for aggregated incident
 Incidents carry three timestamp attributes that influence analytics:
 
 * Declaration time (`declared`): When the incident was declared.
-* Detection time (`detected`): When the underlying resource from which the incident was declared was created. For example, if a monitor alert fires at 2 p.m. and the incident is declared at 2:30 p.m., the detected time is 2:30 p.m. If the incident wasn't declared from another Datadog resource, `detected` is the same as `declared`.
+* Detection time (`detected`): When the underlying resource from which the incident was declared was created. For example, if a monitor alert fires at 2 p.m. and the incident is declared at 2:30 p.m., the detected time is 2 p.m. If the incident wasn't declared from another Datadog resource, `detected` is the same as `declared`.
 * Resolution time (`resolved`): When the incident was most recently resolved.
 
 ### Measures
@@ -51,7 +51,21 @@ Incident Management reports the following analytic measures, which you can use t
 
 In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
 
-**Note:** If you override a timestamp, the override value will be used to calculate Time to Detect, Time to Repair, and Time to Resolve.
+### Timestamp overrides
+
+Incident responders may forget to declare a Datadog incident before starting the response process. They may also forget to resolve an incident in Datadog even after the incident response process effectively ends. These oversights may paint a misleading picture in your incident analytics, permanently inflating your mean time to resolve or other measures.
+
+To address this, organizations can enable **timestamp overrides**, which allow incident responders to manually override an incident's recorded timestamps. When present, overrides affect the following analytic measures:
+
+- `Time to Detect`
+- `Time to Repair`
+- `Time to Resolve`
+
+Overrides only influence search and analytics. They do not change the history automatically recorded to the incident timeline. They do not apply to the analytic measures `Status Active Duration` or `Status Stable Duration`, which are driven by the cumulative length of status segments on incident timelines.
+
+To enable timestamp overrides, go to [**Service Management** > **Incidents** > **Settings** > **Information**][11].
+
+To create, update, or delete timestamp overrides, users must have the **Incidents Write** permission.
 
 ## Visualize incident data in dashboards
 
@@ -104,3 +118,4 @@ Use the out-of-the-box Notebook template to create the Incident Report or build 
 [8]: /dashboards/widgets/timeseries/
 [9]: https://app.datadoghq.com/notebook/template/11/incident-report
 [10]: /notebooks/#share-notebooks
+[11]: https://app.datadoghq.com/incidents/settings#information
