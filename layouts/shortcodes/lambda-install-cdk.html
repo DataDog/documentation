@@ -18,18 +18,19 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 
 1. Install the Datadog CDK constructs library
 
+    For AWS CDK v1:
     ```sh
-    # For AWS CDK v1
     npm install datadog-cdk-constructs --save-dev
-
-    # For AWS CDK v2
+    ```
+    For AWS CDK v2:
+    ```sh
     npm install datadog-cdk-constructs-v2 --save-dev
     ```
 
 2. Instrument your Lambda functions
 
+    For AWS CDK v1:
     ```typescript
-    // For AWS CDK v1
     import { Datadog } from "datadog-cdk-constructs";
 
     const datadog = new Datadog(this, "Datadog", {
@@ -39,8 +40,9 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
         apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
-
-    // For AWS CDK v2
+    ```
+    For AWS CDK v2:
+    ```typescript
     import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
     const datadogLambda = new DatadogLambda(this, "datadogLambda", {
@@ -56,20 +58,20 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 
 1. Install the Datadog CDK constructs library
 
+    For AWS CDK v1:
     ```sh
-    # For AWS CDK v1
     pip install datadog-cdk-constructs
-
-    # For AWS CDK v2
+    ```
+    For AWS CDK v2:
+    ```sh
     pip install datadog-cdk-constructs-v2
     ```
 
 2. Instrument your Lambda functions
 
+    For AWS CDK v1:
     ```python
-    # For AWS CDK v1
     from datadog_cdk_constructs import Datadog
-
     datadog = Datadog(self, "Datadog",
         {{ if $layerParamPython }}{{ $layerParamPython }}={{ $layerVersion }},
         {{ end }}extension_layer_version={{ $layerExtensionVersion }},
@@ -77,8 +79,9 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
         api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
       )
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
-
-    # For AWS CDK v2
+    ```
+    For AWS CDK v2:
+    ```python
     from datadog_cdk_constructs_v2 import DatadogLambda
 
     datadog = DatadogLambda(self, "datadogLambda",
