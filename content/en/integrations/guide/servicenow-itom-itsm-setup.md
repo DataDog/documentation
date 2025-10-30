@@ -232,7 +232,6 @@ sys_id from the templated handle passed in for user.
 ### Configure Datadog Case Management {#case-management}
 
 {{% site-region region="gov" %}}
-
 <div class="alert alert-warning">
 Case Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
