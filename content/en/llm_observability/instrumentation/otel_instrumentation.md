@@ -87,7 +87,7 @@ agent = Agent(tools=[calculator, current_time])
 
 # Run the agent
 if __name__ == "__main__":
-    result = agent("I am born in 1993, what is my age?")
+    result = agent("I was born in 1993, what is my age?")
     print(f"Agent: {result}")
 ```
 
