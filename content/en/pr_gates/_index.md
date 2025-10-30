@@ -4,6 +4,20 @@ description: Learn how to use PR Gates to enable your team to control what code 
 is_beta: false
 aliases:
   - /quality_gates/
+  - /quality_gates/explorer/
+  - /quality_gates/explorer/search_syntax/
+  - /quality_gates/explorer/facets/
+  - /quality_gates/explorer/saved_views/
+  - /quality_gates/search/
+  - /quality_gates/guide/
+  - /quality_gates/guide/understanding_rule_scopes/
+  - /pr_gates/explorer/
+  - /pr_gates/explorer/search_syntax/
+  - /pr_gates/explorer/facets/
+  - /pr_gates/explorer/saved_views/
+  - /pr_gates/search/
+  - /pr_gates/guide/
+  - /pr_gates/guide/understanding_rule_scopes/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
@@ -14,12 +28,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
   tag: "Blog"
   text: "Use Datadog monitors as quality gates for GitHub Actions deployments"
-- link: "/pr_gates/explorer"
-  tag: "Documentation"
-  text: "Learn about the PR Gates Explorer"
-- link: "/account_management/audit_trail/"
-  tag: "Documentation"
-  text: "Learn about Audit Trail"
 - link: "https://www.datadoghq.com/blog/datadog-flaky-tests/"
   tag: "Blog"
   text: "Flaky tests: their hidden costs and how to address flaky behavior"
@@ -28,125 +36,86 @@ further_reading:
   text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-PR Gates is in Preview.
-{{< /callout >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">PR Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
-PR Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
+PR Gates allow you to control software security and quality by configuring rules to block pull requests with substandard code from being merged. Preventing pull requests with substandard code from being merged can ensure that the code that is eventually deployed to production adheres to high organizational standards, reducing incidents and minimizing unwanted behaviors.
 
-{{< img src="pr_gates/setup/sca_2.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
+{{< img src="pr_gates/setup/sca_3.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
 Use PR Gates to:
 
-* Create rules that block workflows using data in Datadog, ensuring that only code that meets your standards end up in production.
-* Give your organization the ability to decide what code makes it to production, enhancing your deployment discipline and mitigating potential issues in live environments.
-* Continually improve code quality and system performance with precise enforcement and customizable rules.
+* Create rules that block pull requests using data in Datadog, ensuring that only code that meets your standards end up being merged.
+* Give your organization the ability to prevent substandard code changes from ever reaching production.
+* Continually improve code security and quality with precise enforcement and customizable rules.
 
 You can configure PR Gates rules for the following categories: 
 
-[Test Optimization][9]
+| Source type     | Condition types |
+| --- | ----------- |
+| [**Static Code Analysis**][1] | - Code vulnerabilities<br/> - Code quality violations |
+| [**Software Composition Analysis**][2] | - Library vulnerabilities<br/> - Library license violations |
+| [**Code Coverage**][3] | - Total code coverage<br/> - Patch code coverage |
+| [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities |
 
-: <br> - New flaky tests <br> - Code coverage
+After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
-[Static Analysis][11]
+<div class="alert alert-warning">
+  PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
 
-: <br> - Code vulnerability violations <br> - Code quality violations
-
-[Software Composition Analysis][12]
-
-: <br> - Vulnerabilities <br> - Detected licenses
-
-By integrating PR Gates [into your CI/CD pipelines][7] or allowing the [Datadog GitHub integration][13] to create status checks on your Pull Requests automatically (currently available for SCA rules only), you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
-
-## Setup
+## Rule types
 
 PR Gates offers the following rule types:
 
 {{< tabs >}}
-{{% tab "Tests" %}}
+{{% tab "Static Code Analysis (SAST)" %}}
 
-You can create rules to block code from being merged that introduces new [flaky tests][101] or that decreases [code coverage][102].
+You can create rules to block code from being merged when a pull request introduces at least one code vulnerability or code quality violation of a certain severity.
 
-{{< img src="pr_gates/setup/flaky_test_2.png" alt="A PR Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
-
-[101]: /tests/flaky_test_management/
-[102]: /tests/code_coverage/
+{{< img src="pr_gates/setup/static_analysis_3.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
-{{% tab "Static Analysis" %}}
+{{% tab "Software Composition Analysis (SCA)" %}}
 
-You can create rules to block code from being merged when your repository has a certain number of code quality or code vulnerability violations.
+You can create rules to block code from being merged when a pull request introduces at least one library vulnerability of a certain severity or at least one library with a forbidden license.
 
-{{< img src="pr_gates/setup/static_analysis_2.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
-
-{{% /tab %}}
-{{% tab "Software Composition Analysis" %}}
-
-You can create rules to block code from being merged when your repository has a certain number of library vulnerabilities or forbidden licenses.
-
-{{< img src="pr_gates/setup/sca_2.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
+{{< img src="pr_gates/setup/sca_3.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "Code Coverage" %}}
+You can create rules to block code from being merged when a pull request causes the repository's overall code coverage to fall below a certain percentage or if the patch coverage is below a certain threshold.
 
-To create a PR Gate rule, see the [Setup documentation][2]. 
-
-## Search rules
-
-You can evaluate and update quality control processes by accessing PR Gates rules on the [**PR Gates Rules** page][6]. Improve your deployment practices based on your project requirements and desired performance outcomes. 
-
-{{< img src="pr_gates/rules_list_2.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
-
-To search for PR Gate rules, see the [Search and Manage documentation][5].
-
-## Analyze executions in the PR Gates Explorer
-
-You can search and filter for PR Gates or rule executions, create visualizations, and export saved views of your search query on the [**PR Gates Executions** page][14].
-
-{{< tabs >}}
-{{% tab "Gates" %}}
-
-{{< img src="pr_gates/explorer/gates_3.png" alt="PR Gate results in the PR Gates Explorer" style="width:100%" >}}
+{{< img src="pr_gates/setup/code_coverage.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
-{{% tab "Rule Executions" %}}
 
-{{< img src="pr_gates/explorer/executions_1.png" alt="PR Gate rule execution results in the PR Gates Explorer" style="width:100%" >}}
+{{% tab "Infrastructure as Code Scanning" %}}
+You can create rules to block code from being merged when a pull request introduces at least one infrastructure as code (IaC) vulnerability of a certain severity.
+
+{{< img src="pr_gates/setup/iac.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information, see the [PR Gates Explorer documentation][8].
+To create a PR Gate rule, see the [Setup documentation][7]. 
 
-## Track changes in rules
+## Manage rules
 
-You can view information about who created, modified, and deleted PR Gates rules in [Audit Trail][3].
+You can manage and update PR Gates rules on the [**PR Gates Rules**][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
 
-{{< img src="pr_gates/audit_event.png" alt="A PR Gates event in Datadog Audit Trail" style="width:100%" >}}
+You can see all of the rules defined by the organization.
 
-For more information, see the [Audit Trail documentation][4].
+{{< img src="pr_gates/rules_list_3.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/flaky_test_management/
-[2]: /pr_gates/setup/
-[3]: /account_management/audit_trail/
-[4]: /account_management/audit_trail/events/#ci-visibility-events
-[5]: /pr_gates/search/
-[6]: https://app.datadoghq.com/ci/pr-gates
-[7]: https://github.com/DataDog/datadog-ci
-[8]: /pr_gates/explorer/
-[9]: /tests/
-[10]: /continuous_integration/
-[11]: /security/code_security/static_analysis
-[12]: /security/code_security/software_composition_analysis
-[13]: /integrations/github/
-[14]: https://app.datadoghq.com/ci/pr-gates/
+[1]: /security/code_security/static_analysis
+[2]: /security/code_security/software_composition_analysis
+[3]: /code_coverage/
+[4]: /security/code_security/iac_security/
+[5]: /integrations/github/
+[6]: /integrations/azure_devops_source_code/
+[7]: /pr_gates/setup/
+[8]: https://app.datadoghq.com/ci/pr-gates

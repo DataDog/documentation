@@ -48,6 +48,7 @@
         "body": [
             "---",
             "title: Doc Title",
+            "description: One line description",
             "disable_toc: false",
             "aliases:",
             "- /path-to-old-doc/",
@@ -90,8 +91,8 @@
         "scope": "markdown",
         "prefix": ";;callout",
         "body": [
-            "{{< callout url=\"https://google.com\" d_toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\" btn_hidden=\"false\" header=\"Join the Beta!\">}}",
-            "Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
+            "{{< callout url="#" btn_hidden=\"false\" header=\"Join the Preview!\">}}",
+            "<Product name> is in Preview. Use this form to submit your request today.",
             "{{< /callout >}}"
         ],
         "description": "A callout with all parameters"

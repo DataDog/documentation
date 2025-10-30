@@ -12,10 +12,10 @@ further_reading:
     text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
-<div class="alert alert-info">To instrument your Azure Container Apps applications with <code>serverless-init</code>, see <a href="/serverless/guide/aca_serverless_init">Azure Container Apps with serverless-init</a>.</div>
+<div class="alert alert-info">To instrument your Azure Container Apps applications with an in-container Datadog Agent, see <a href="/serverless/guide/aca_serverless_init">Azure Container Apps with serverless-init</a>.</div>
 
 ## Overview
-Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides standard metrics and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 {{< img src="serverless/azure_container_apps/aca_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure Container Apps selected." style="width:100%;" >}}
 
@@ -25,7 +25,7 @@ Azure Container Apps is a fully managed serverless platform for deploying and sc
 
 Install the [Datadog-Azure integration][4] to collect metrics and logs.
 
-### Application container
+### Application
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
@@ -36,11 +36,7 @@ Instrument your main application with the `dd-trace-js` library. See [Tracing No
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. 
-
-In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
-
-{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -48,7 +44,6 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
 [3]: /logs/log_collection/nodejs/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
-[5]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 {{% /tab %}}
 {{% tab "Python" %}}
 #### Tracing
@@ -58,11 +53,7 @@ Instrument your main application with the `dd-trace-py` library. See [Tracing Py
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. 
-
-In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
-
-{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Python Log Collection][3]. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -70,7 +61,6 @@ To set up logging in your application, see [Python Log Collection][3]. To set up
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python#code-examples
 [3]: /logs/log_collection/python/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
-[5]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Tracing
@@ -80,11 +70,7 @@ Instrument your main application with the `dd-trace-java` library. See [Tracing 
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. 
-
-In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
-
-{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -92,7 +78,6 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java#code-examples
 [3]: /logs/log_collection/java/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java
-[5]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 {{% /tab %}}
 {{% tab "Go" %}}
 #### Tracing
@@ -102,11 +87,7 @@ Instrument your main application with the `dd-trace-go` library. See [Tracing Go
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. 
-
-In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
-
-{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -114,7 +95,6 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go#code-examples
 [3]: /logs/log_collection/go/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/go
-[5]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 {{% /tab %}}
 {{% tab ".NET" %}}
 #### Tracing
@@ -124,11 +104,7 @@ Instrument your main application with the `dd-trace-dotnet` library. See [Tracin
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. 
-
-In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
-
-{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+Instead of collecting logs through the Azure integration, alternatively you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [.NET Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
@@ -136,7 +112,6 @@ To set up logging in your application, see [.NET Log Collection][3]. To set up t
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=dotnet#code-examples
 [3]: /logs/log_collection/csharp/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet
-[5]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 {{% /tab %}}
 {{% tab "PHP" %}}
 #### Tracing
@@ -146,11 +121,7 @@ Instrument your main application with the `dd-trace-php` library. See [Tracing P
 Custom metrics are also collected through the tracer. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. 
-
-In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
-
-{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+As an alternative to collecting logs through the Azure integration, you can use the Datadog sidecar with file tailing to collect application logs. Ensure that the logging path used in your application matches the path set in `DD_SERVERLESS_LOG_PATH` when setting up your sidecar in the [Instrumentation](#instrumentation) section.
 
 To set up logging in your application, see [PHP Log Collection][3]. To set up trace log correlation, see [Correlating PHP Logs and Traces][4].
 
@@ -158,18 +129,94 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=php#code-examples
 [3]: /logs/log_collection/php/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/php
-[5]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Environment variables
-Because Azure Container Apps is built on Kubernetes, you cannot share environment variables between containers. You must set Datadog environment variables on both your application and sidecar containers.
+### Instrumentation
+
+{{< tabs >}}
+{{% tab "Terraform" %}}
+
+The [Datadog Terraform module for Container Apps][1] wraps the [`azurerm_container_app`][2] resource and automatically configures your Container App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+
+If you don't already have Terraform set up, [install Terraform][3], create a new directory, and make a file called `main.tf`.
+
+Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
+
+```tf
+variable "datadog_api_key" {
+  description = "Your Datadog API key"
+  type        = string
+  sensitive   = true
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = "00000000-0000-0000-0000-000000000000" // Replace with your subscription ID
+}
+
+resource "azurerm_container_app_environment" "my_env" {
+    name                = "my-container-app-env" // Replace with your container app environment name
+    resource_group_name = "my-resource-group"    // Replace with your resource group name
+    location            = "eastus"
+}
+
+module "my_container_app" {
+  source  = "DataDog/container-app-datadog/azurerm"
+  version = "~> 1.0"
+
+  name                         = "my-container-app" // Replace with your container app name
+  resource_group_name          = "my-resource-group" // Replace with your resource group name
+  container_app_environment_id = azurerm_container_app_environment.my_env.id
+
+  datadog_api_key = var.datadog_api_key
+  datadog_site    = "datadoghq.com" // Replace with your Datadog site
+  datadog_service = "my-service"    // Replace with your service name
+  datadog_env     = "dev"           // Replace with your environment (e.g. prod, staging, dev)
+  datadog_version = "0.1.0"         // Replace with your application version
+
+  revision_mode         = "Single"
+  workload_profile_name = "Consumption"
+  ingress = {
+    external_enabled = true
+    target_port      = 8080
+    traffic_weight = [{
+      percentage      = 100
+      latest_revision = true
+    }]
+  }
+  template = {
+    container = [{
+      cpu    = 0.5
+      memory = "1Gi"
+      image  = "docker.io/your-docker-image:latest" // Replace with your Docker image
+      name   = "main"
+    }]
+  }
+}
+```
+
+Finally, run `terraform apply`, and follow any prompts.
+
+The [Datadog Container App module][1] only deploys the Container App resource, so you need to build and push your container separately.
+
+[1]: https://registry.terraform.io/modules/DataDog/container-app-datadog/azurerm/latest
+[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_app
+[3]: https://developer.hashicorp.com/terraform/install
+
+
+{{% /tab %}}
+{{% tab "Manual" %}}
+
+
+### Application environment variables
+Because Azure Container Apps is built on Kubernetes, you cannot share environment variables between containers.
 
 | Name | Description |
 | ---- | ----------- |
 | `DD_SERVICE` | How you want to tag your service. For example, `sidecar-azure`. |
 | `DD_ENV` | How you want to tag your env. For example, `prod`.|
-| `DD_VERSION` | How you want to tag your version. |
+| `DD_VERSION` | How you want to tag your application version. |
 
 ### Sidecar container
 1. In the Azure Portal, navigate to **Application** > **Revisions and replicas**. Select **Create new revision**.
@@ -184,7 +231,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 4. Add a volume mount using [replica-scoped storage][2]. Use type "Ephemeral storage" when creating your volume. Ensure that the name and mount path matches the mount you configured in the application container.
 5. Set the environment variables in the following table:
 
-#### Environment variables
+#### Sidecar Environment variables
 | Name | Description |
 | ---- | ----------- |
 | `DD_AZURE_SUBSCRIPTION_ID` | **Required**. Your Azure subscription ID. |
@@ -193,8 +240,18 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 | `DD_SITE`  | Your Datadog site: `{{< region-param key="dd_site" code="true" >}}`
 | `DD_SERVICE` | How you want to tag your service. For example, `sidecar-azure`. |
 | `DD_ENV` | How you want to tag your env. For example, `prod`.|
-| `DD_VERSION` | How you want to tag your version. |
-| `DD_SERVERLESS_LOG_PATH` | Where you write your logs. For example, `/LogFiles/*.log`. |
+| `DD_VERSION` | How you want to tag your application version. |
+| `DD_SERVERLESS_LOG_PATH` | If using the agent for log collection, where you write your logs. For example, `/LogFiles/*.log`. This must match the logging path set up in [Application](#application) |
+
+### Logging
+
+If using the Datadog Agent for log collection, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][2]. Use type **Ephemeral storage** when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+
+{{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ### Example application
 

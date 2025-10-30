@@ -37,7 +37,7 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 - [Configure log forwarding][4]
 - [Forward traffic logs to a syslog server][5]
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://help.fortinet.com/fa/faz50hlp/56/5-6-1/FMG-FAZ/2400_System_Settings/1600_Log%20Forwarding/0400_Configuring.htm
 [3]: https://help.fortinet.com/fadc/4-5-1/olh/Content/FortiADC/handbook/log_remote.htm
 [4]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/configure-log-forwarding
