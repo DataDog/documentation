@@ -1,0 +1,19 @@
+---
+title: Zscaler ZIA Web Logs
+description: Learn more about the Zscaler ZIA Web Logs pack.
+---
+
+## Overview
+
+Zscaler ZIA Web Logs capture user web activity and security actions.
+
+What this pack does:
+
+- Normalizes fields, adds threat context
+- Drops routine and low-signal traffic
+- Keeps risky, blocked, unknown traffic
+
+## Example logs
+
+TKTK
+
