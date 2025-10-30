@@ -47,8 +47,7 @@ Navigate to [**Infrastructure > Hosts**][3] in the app to get started. To learn 
 
 ## Host and container maps
 
-<!-- Todo: retake screenshot -->
-{{< img src="getting_started/application/host_map_2024.png" alt="Host Map Overview" >}}
+{{< img src="getting_started/application/host_map_2025.png" alt="Host Map Overview" >}}
 
 [Host and container maps][4] give you a visual overview of all your hosts and containers, color-coding them by key metrics like CPU usage so you can spot issues.
 
@@ -112,10 +111,8 @@ Navigate to [Synthetic Monitoring & Testing][15] in the app to get started. To l
 ## Integrations
 
 Use Datadog's {{< translate key="integration_count" >}} [integrations][16] to bring together all of the metrics and logs from your infrastructure and gain insights into your entire observability system.
-<!-- improve -->
 
-{{< img src="getting_started/application/integrations-2024.png" alt="Integrations" >}}
-<!-- todo update screenshot -->
+{{< img src="getting_started/application/integrations-2025.png" alt="Integrations" >}}
 
 **Key capabilities**:
 
@@ -128,7 +125,6 @@ Navigate to [Integrations][18] in the app to get started, or browse the list of 
 ## Dashboards
 
 [Dashboards][20] contain graphs with real-time performance metrics, unifying your view of data across metrics, logs, traces, and more.
-<!-- revise -->
 
 **Key capabilities**:
 
