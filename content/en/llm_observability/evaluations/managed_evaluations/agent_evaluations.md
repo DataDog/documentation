@@ -209,7 +209,7 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 ### Evaluation summary
 | **Span kind** | **Method** | **Definition** | 
 |---|---|---|
-| Evaluated on LLLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
+| Evaluated on LLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
 ### Example
 {{< img src="llm_observability/evaluations/goal_completeness.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
