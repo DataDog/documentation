@@ -51,24 +51,6 @@ further_reading:
     tag: "Source Code"
     text: "Source code"
 ---
-
-## Before you begin
-
-Choose the setup guide for your deployment environment:
-
-| Environment | Setup Guide | .NET Framework Support |
-|------------|-------------|----------------------|
-| **AWS Lambda** | N/A | ❌ Not supported - requires .NET Core 3.1+ or .NET 5+ |
-| **Azure Functions** | [Install Serverless Monitoring for Azure Functions](/serverless/azure_functions/) | ✅ In-Process model only |
-| **Azure App Service (Windows)** | [Azure App Service - Windows Code](/serverless/azure_app_service/windows_code) | ✅ Supported |
-| **Azure App Service (Linux)** | N/A | ❌ Not supported - requires .NET Core/.NET 5+ |
-| **Google Cloud Run** | N/A | ❌ Not supported - requires .NET Core/.NET 5+ |
-| **All other environments** | Continue below | ✅ Supported |
-
-<div class="alert alert-warning">
-<strong>Important:</strong> .NET Framework is only supported on Windows-based platforms. For Linux or AWS Lambda, use <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">.NET Core or .NET 5+</a>.
-</div>
-
 ## Compatibility requirements
 
 ### Supported .NET Framework runtimes
@@ -79,15 +61,8 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 
 ## Installation and getting started
 
-<div class="alert alert-danger">
-<strong>Are you deploying to a serverless environment?</strong><br/>
-If using Azure Functions or Azure App Service, <strong>stop:</strong> use the appropriate serverless setup guide instead:
-<ul>
-  <li><a href="/serverless/azure_functions/">Azure Functions Setup</a> (In-Process model only)</li>
-  <li><a href="/serverless/azure_app_service/windows_code">Azure App Service - Windows Setup</a></li>
-</ul>
-<strong>The installation instructions below will NOT work for serverless environments.</strong><br/>
-<strong>Note:</strong> .NET Framework is NOT supported on AWS Lambda, Azure App Service Linux, or Google Cloud Run. Use <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">.NET Core or .NET 5+</a> for those platforms.
+<div class="alert alert-info">
+  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-danger">

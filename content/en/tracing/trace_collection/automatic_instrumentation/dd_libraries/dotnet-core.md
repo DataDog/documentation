@@ -47,24 +47,6 @@ further_reading:
     text: "Source code"
 ---
 
-## Before you begin
-
-Choose the setup guide for your deployment environment:
-
-| Environment | Setup Guide |
-|------------|-------------|
-| **AWS Lambda** | [Instrumenting .NET Serverless Applications on AWS Lambda](/serverless/aws_lambda/instrumentation/dotnet) |
-| **Azure Functions** | [Install Serverless Monitoring for Azure Functions](/serverless/azure_functions/) |
-| **Azure App Service (Windows)** | [Azure App Service - Windows Code](/serverless/azure_app_service/windows_code) |
-| **Azure App Service (Linux - Code)** | [Azure App Service - Linux Code](/serverless/azure_app_service/linux_code) |
-| **Azure App Service (Linux - Container)** | [Azure App Service - Linux Container](/serverless/azure_app_service/linux_container) |
-| **Google Cloud Run** | [Google Cloud Run - .NET](/serverless/google_cloud_run/containers/in_container/dotnet) |
-| **All other environments** | Continue below |
-
-<div class="alert alert-warning">
-<strong>Important:</strong> Serverless environments require different installation steps than traditional hosts. Do not install the Datadog Agent or MSI installer for serverless environments.
-</div>
-
 ## Compatibility requirements
 
 ### Supported .NET Core runtimes
@@ -75,16 +57,8 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 
 ## Installation and getting started
 
-<div class="alert alert-danger">
-<strong>Are you deploying to a serverless environment?</strong><br/>
-If using AWS Lambda, Azure Functions, Azure App Service, or Google Cloud Run, <strong>stop:</strong> use the appropriate serverless setup guide instead:
-<ul>
-  <li><a href="/serverless/aws_lambda/instrumentation/dotnet">AWS Lambda .NET Setup</a></li>
-  <li><a href="/serverless/azure_functions/">Azure Functions Setup</a></li>
-  <li><a href="/serverless/azure_app_service/">Azure App Service Setup</a></li>
-  <li><a href="/serverless/google_cloud_run/containers/in_container/dotnet">Google Cloud Run Setup</a></li>
-</ul>
-<strong>The installation instructions below will NOT work for serverless environments.</strong>
+<div class="alert alert-info">
+    To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-danger">
