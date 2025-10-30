@@ -95,7 +95,9 @@ SNMP devices are matched to a representative icon based on their device type in 
 
 ## Investigating devices
 
-In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hover over a device to view its overall status and key metrics. Click on a device to open a side panel with additional information.
+In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hover over a device to view its overall status and key metrics. Click on a device to open a side panel with additional information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
+
+From this view, you can also view the device's connected interfaces in the **Interfaces** tab.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_4.png" alt="The network device topology map with a device selected, displaying information about the device in the side panel." style="width:100%;" >}}
 
