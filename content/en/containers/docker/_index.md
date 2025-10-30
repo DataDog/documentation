@@ -124,16 +124,16 @@ Send custom metrics with [the StatsD protocol][20]:
 : The histogram percentiles to compute (separated by spaces). The default is `0.95`.
 
 `DD_HISTOGRAM_AGGREGATES`
-: The histogram aggregates to compute (separated by spaces). The default is "max median avg count".
+: The histogram aggregates to compute (separated by spaces). The default is `"max median avg count"`.
 
 `DD_DOGSTATSD_SOCKET`
 : Path to the unix socket to listen to. Must be in a `rw` mounted volume.
 
 `DD_DOGSTATSD_ORIGIN_DETECTION`
-: Enable container detection and tagging for unix socket metrics.
+: Enable container detection and tagging for UNIX socket metrics.
 
 `DD_DOGSTATSD_TAGS`
-: Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`.
+: Additional tags to append to all metrics, events, and service checks received by this DogStatsD server. For example: `"env:golden group:retrievers"`.
 
 `DD_USE_DOGSTATSD`
 : Enable or disable sending custom metrics from the DogStatsD library.
@@ -146,10 +146,10 @@ As a best practice, Datadog recommends using [unified service tagging][22] when 
 Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract even more tags, use the following options:
 
 `DD_CONTAINER_LABELS_AS_TAGS`
-: Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.
+: Extract container labels. This env is equivalent to `DD_DOCKER_LABELS_AS_TAGS`.
 
 `DD_CONTAINER_ENV_AS_TAGS`
-: Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env.
+: Extract container environment variables. This env is equivalent to `DD_DOCKER_ENV_AS_TAGS`.
 
 `DD_COLLECT_EC2_TAGS`
 : Extract custom EC2 tags without using the AWS integration.
@@ -165,10 +165,10 @@ Integration credentials can be stored in Docker or Kubernetes secrets and used i
 Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. These allowlists and blocklists apply to Autodiscovery only; traces and DogStatsD are not affected. The value for these environment variables support regular expressions.
 
 `DD_CONTAINER_INCLUDE`
-: Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  When using ImageStreams inside OpenShift environments, use the container name instead of image. For example:"name:container_name_1 name:container_name_2", name:.*
+: Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  When using ImageStreams inside OpenShift environments, use the container name instead of image. For example: `"name:container_name_1 name:container_name_2"`, `name:.*`
 
 `DD_CONTAINER_EXCLUDE`
-: Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`
+: Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"`, `image:.*` (**Note**: This variable is only honored for Autodiscovery.)
 
 `DD_CONTAINER_INCLUDE_METRICS`
 : Allowlist of containers whose metrics you wish to include.
@@ -186,7 +186,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 : **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`
 
 `DD_AC_EXCLUDE`
-: **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`
+: **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"`, `image:.*` (**Note**: This variable is only honored for Autodiscovery.)
 
 Additional examples are available on the [Container Discover Management][25] page.
 
