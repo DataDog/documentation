@@ -1,6 +1,8 @@
 ---
-title: Monitoring
+title: Monitoring Pipelines
 disable_toc: false
+aliases:
+  - /observability_pipelines/monitoring/
 further_reading:
 - link: "observability_pipelines/set_up_pipelines"
   tag: "Documentation"
@@ -8,7 +10,7 @@ further_reading:
 - link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Configure a metric monitor"
-- link: "/observability_pipelines/monitoring/metrics/"
+- link: "/observability_pipelines/monitoring_and_maintenance/metrics/"
   tag: "Documentation"
   text: "Observability Pipelines metrics"
 ---
@@ -70,4 +72,4 @@ To see available out-of-the-box monitors:
 [2]: /service_management/incident_management/
 [3]: /monitors/types/metric/
 [4]: /notebooks/
-[5]: /observability_pipelines/monitoring/metrics/
+[5]: /observability_pipelines/monitoring_and_maintenance/metrics/

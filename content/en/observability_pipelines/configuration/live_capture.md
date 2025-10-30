@@ -1,8 +1,10 @@
 ---
 title: Live Capture
 disable_toc: false
+aliases:
+  - /observability_pipelines/live_capture/
 further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 ---

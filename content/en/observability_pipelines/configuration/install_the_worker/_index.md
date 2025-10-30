@@ -1,13 +1,21 @@
 ---
 title: Install the Worker
 disable_toc: false
+aliases:
+    - /observability_pipelines/install_the_worker/
 further_reading:
-- link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
+- link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
+  tag: "Documentation"
+  text: "Advanced Worker configurations"
+- link: "/observability_pipelines/monitoring_and_maintenance/worker_cli_commands/"
+  tag: "Documentation"
+  text: "Worker CLI commands"
+- link: "/observability_pipelines/guide/environment_variables/"
+  tag: "Documentation"
+  text: "Environment variable for sources, processors, and components"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
-- link: "observability_pipelines/worker_commands/"
-  tag: "Documentation"
-  text: "Worker commands"
 ---
 
 ## Overview
@@ -225,8 +233,15 @@ Follow the steps below if you want to use the one-line installation script to in
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines
 [2]: https://app.datadoghq.com/organization-settings/remote-config/setup
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+See [Set Up the Worker in ECS Fargate][1] for instructions.
+
+[1]: /observability_pipelines/guide/set_up_the_worker_in_ecs_fargate/
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
@@ -282,7 +297,7 @@ If you prefer not to use the one-line installation script for Linux, follow thes
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
 {{% tab "RPM" %}}
@@ -327,7 +342,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -384,11 +399,11 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 [2]: /observability_pipelines/sources/
 [3]: /observability_pipelines/destinations/
 [4]: /observability_pipelines/processors/
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
-[7]: /observability_pipelines/environment_variables/
+[7]: /observability_pipelines/guide/environment_variables/
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline

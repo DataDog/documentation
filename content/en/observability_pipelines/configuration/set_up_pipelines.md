@@ -1,17 +1,19 @@
 ---
 title: Set Up Pipelines
 disable_toc: false
+aliases:
+  - /observability_pipelines/set_up_pipelines/
 further_reading:
 - link: "observability_pipelines/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update an existing pipeline"
-- link: "observability_pipelines/advanced_configurations/"
+- link: "observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
-  text: "Advanced configurations for Observability Pipelines"
-- link: "observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/"
+  text: "Advanced Worker configurations for Observability Pipelines"
+- link: "observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/"
   tag: "Documentation"
   text: "Run multiple pipelines on a host"
-- link: "observability_pipelines/troubleshooting/"
+- link: "observability_pipelines/monitoring_and_troubleshooting/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Observability Pipelines"
 ---
@@ -88,12 +90,12 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [8]: /observability_pipelines/#log-volume-control
 [9]: /observability_pipelines/#sensitive-data-redaction
 [10]: /observability_pipelines/#split-logs
-[11]: /observability_pipelines/update_existing_pipelines/
-[12]: /observability_pipelines/install_the_worker/
+[11]: /observability_pipelines/configuration/update_existing_pipelines/
+[12]: /observability_pipelines/configuration/install_the_worker/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /monitors/types/metric/
-[15]: /observability_pipelines/environment_variables/
-[16]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[15]: /observability_pipelines/guide/environment_variables/
+[16]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -107,9 +109,9 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 **Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
 
 [1]: /api/latest/observability-pipelines/#create-a-new-pipeline
-[2]: /observability_pipelines/install_the_worker/
+[2]: /observability_pipelines/configuration/install_the_worker/
 [3]: /api/latest/observability-pipelines/#update-a-pipeline
-[4]: /observability_pipelines/environment_variables/
+[4]: /observability_pipelines/guide/environment_variables/
 
 {{% /tab %}}
 {{% tab "Terraform" %}}
@@ -123,13 +125,13 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 Pipelines created using Terraform are read-only in the UI. Use the [datadog_observability_pipeline][1] module to make any changes to an existing pipeline.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[2]: /observability_pipelines/install_the_worker/
-[3]: /observability_pipelines/environment_variables/
+[2]: /observability_pipelines/configuration/install_the_worker/
+[3]: /observability_pipelines/guide/environment_variables/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Advanced Configurations][5] for bootstrapping options.
+See [Advanced Worker Configurations][5] for bootstrapping options.
 
 ### Index your Worker logs
 
@@ -157,5 +159,5 @@ Make sure your Worker logs are [indexed][6] in Log Management for optimal functi
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
 [4]: https://app.datadoghq.com/observability-pipelines
-[5]: /observability_pipelines/advanced_configurations/
+[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: /logs/log_configuration/indexes/

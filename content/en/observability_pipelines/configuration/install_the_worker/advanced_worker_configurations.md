@@ -1,8 +1,9 @@
 ---
-title: Advanced Configurations
+title: Advanced Worker Configurations
 disable_toc: false
 aliases:
   - /observability_pipelines/setup_opw/
+  - /observability_pipelines/advanced_configurations/
 further_reading:
 - link: "/observability_pipelines/log_volume_control/"
   tag: "Documentation"
@@ -19,7 +20,7 @@ further_reading:
 - link: "/observability_pipelines/sensitive_data_redaction/"
   tag: "Documentation"
   text: "Redact data redaction with Observability Pipelines"
-- link: "/observability_pipelines/update_existing_pipelines/"
+- link: "/observability_pipelines/configuration/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update existing pipelines"
 ---

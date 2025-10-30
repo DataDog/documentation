@@ -1,6 +1,8 @@
 ---
-title: Metrics
+title: Pipelines Usage Metrics
 disable_toc: false
+aliases:
+  - /observability_pipelines/monitoring/metrics/
 further_reading:
 - link: "/metrics/summary/"
   tag: "Documentation"

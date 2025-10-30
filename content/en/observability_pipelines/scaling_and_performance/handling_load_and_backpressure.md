@@ -1,6 +1,8 @@
 ---
-title: Performance
+title: Handling Load and Backpressure
 disable_toc: false
+aliases:
+  - /observability_pipelines/performance/
 further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
   tag: "Documentation"

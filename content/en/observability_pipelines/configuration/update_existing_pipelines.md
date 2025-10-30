@@ -1,6 +1,8 @@
 ---
 title: Update Existing Pipelines
 disable_toc: false
+aliases:
+  - /observability_pipelines/update_existing_pipelines/
 ---
 
 ## Overview

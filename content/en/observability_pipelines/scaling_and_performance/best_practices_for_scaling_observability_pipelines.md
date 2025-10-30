@@ -1,11 +1,8 @@
 ---
 title: Best Practices for Scaling Observability Pipelines
-
+aliases:
+    - /observability_pipelines/best_practices_for_scaling_observability_pipelines/
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 <div class="alert alert-info">
 This guide is for large-scale production-level deployments.
