@@ -198,9 +198,9 @@ If your telemetry does not provide attributes for any of these detection methods
 
 Ensure your telemetry includes the required attributes by following these steps in order:
 
-1.  **Use SDK Auto-Instrumentation (Preferred)**: Upgrade to a recent version of your language's OpenTelemetry auto-instrumentation. This is the preferred first step, as it often provides `container.id` or `process.pid` automatically. If these are not adding automatically, check your SDK's documentation. Some SDKs (such as Go) provide a specific setting (such as [resource.WithContainerID][8]) to enable this.
+1.  **Use SDK auto-instrumentation (Preferred)**: Upgrade to a recent version of your language's OpenTelemetry auto-instrumentation. This is the preferred first step, as it often provides `container.id` or `process.pid` automatically. If these attributes are not being added automatically, check your SDK's documentation. Some SDKs (such as Go) provide a specific setting (such as [resource.WithContainerID][8]) to enable this.
 
-2.  **Manually Set Resource Attributes**: If auto-instrumentation doesn't add the necessary attributes, set them manually using `OTEL_RESOURCE_ATTRIBUTES`. This allows the processor to use the `k8s.pod.uid` and `k8s.container.name` detection method. For example:
+2.  **Manually set resource attributes**: If auto-instrumentation doesn't add the necessary attributes, set them manually using `OTEL_RESOURCE_ATTRIBUTES`. This allows the processor to use the `k8s.pod.uid` and `k8s.container.name` detection method. For example:
     ```yaml
     env:
       - name: OTEL_SERVICE_NAME
@@ -238,7 +238,7 @@ Ensure your telemetry includes the required attributes by following these steps 
     ```
 3.  **Use the Collector's `resourcedetection` processor**: If you cannot set resource attributes at the SDK or application level, you can use the Collector's `resourcedetection` processor. Place it before `infraattributes`.
 
-4.  **Verify Attributes**: Use the `debug` exporter in your DDOT Collector pipeline to confirm that the required resource attributes (like `container.id`, `process.pid`, or `k8s.pod.uid`) are present on your telemetry.
+4.  **Verify attributes**: Use the `debug` exporter in your DDOT Collector pipeline to confirm that the required resource attributes (like `container.id`, `process.pid`, or `k8s.pod.uid`) are present on your telemetry.
 
 For more details on the attributes used by this processor, see the [Infrastructure Attribute Processor documentation][7].
 
