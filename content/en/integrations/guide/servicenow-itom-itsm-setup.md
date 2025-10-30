@@ -346,6 +346,58 @@ answer = (function transformEntry(source)
 -   The field mappings are at the bottom of the record. Some basic mappings are included. This is where you select the fields to include, define the format, and select the target fields in your ServiceNow instance.
     {{% /collapse-content %}}
 
+{{% collapse-content title="Transforming correlated alert data" level="h4" expanded=false id="transforming-correlated-alert-data" %}}
+To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. Modifications are required for the script to populate values in the ServiceNow Incident.
+
+Below is an sample script that can be modified for custom needs.
+
+```
+(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+    // We do not need to process non-correlated-alert events
+    if (!source.em_correlated_alert_id) {
+        return;
+    }
+
+    // Create a GlideRecord for the table
+    var gr = new GlideRecord('x_datad_datadog_case_incident_table');
+    gr.addQuery('case_id', source.case_id);
+    gr.addNotNullQuery('em_correlated_alert_id');
+    gr.orderByDesc('sys_created_on');
+    gr.query();
+
+    // Ensure we process each alert_id only once
+    var seenAlert = {};
+
+    // Add relevant correlated alert fields here
+    var alertNames = [];
+
+
+    // Loop through list of correlated_alerts associated with the same case_id
+    while (gr.next()) {
+        var emAlertId = gr.getValue('em_correlated_alert_id');
+
+        if (!seenAlert.hasOwnProperty(emAlertId)) {
+            seenAlert[emAlertId] = true;
+            var changeType = gr.getValue('em_change_type');
+            if (changeType == "added") {
+                var correlatedAlert = gr.getValue("em_correlated_alert");
+                var jsonAlert = JSON.parse(correlatedAlert);
+
+                // Get relevant fields from the JSON event
+                var alertName = jsonAlert['alert_message'];
+                alertNames.push(alertName);
+            }
+        }
+    }
+
+    // Set the corresponding value on the incident table
+    // target.impact = 1;
+
+})(source, map, log, target);
+```
+
+{{% /collapse-content %}}
+
 ## Troubleshooting
 
 {{% collapse-content title="Error message in your Datadog integration" level="h4" expanded=false id="troubleshooting-error-messages" %}}
