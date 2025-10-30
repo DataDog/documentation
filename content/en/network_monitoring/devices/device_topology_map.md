@@ -18,7 +18,7 @@ further_reading:
 
 The [Network Device Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search_3.mp4" alt="The network device topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new.mp4" alt="The network device topology map, with adding tags for team, service, and vendor, then selecting a device displaying the side panel" video="true" >}}
 
 ## Setup
 
@@ -33,38 +33,17 @@ The Datadog Agent version 7.52 and later automatically collects topology data. N
 
 In the Network Topology Map, the following navigation options are available:
 
-### View
+### Group by
 
-1. In **View By**, use tags to select how you want to visualize devices:
+1. Under Group By, use **tags** such as `team`, `service`, and `vendor` to select how you want to visualize devices:
 
-{{< img src="/network_device_monitoring/network_topology_map/device-topology-grouped.png" alt="The navigation option, with view by devices and tags selected, highlighting view by location" style="width:80%;" >}}
-
-### Color
-
-2. Under **Color By**, change how nodes on the Device Topology Map are colored based on:
-
-- **Device State**: Display nodes on the Device Topology Map by SNMP reachability.
-- **Ping State**: Display nodes on the Device Topology Map by [Ping status][6].
-
-{{< img src="/network_device_monitoring/network_topology_map/device-topology-overview-intro.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
-
-   The following are the definitions of the nodes for each color state:
-   <div style="width:80%; margin: 0 auto;">
-
-   | Color    | Description               |
-   |----------|---------------------------|
-   | Green   | Device is reachable.      |
-   | Red   | Issue with device, such as unreachable through SNMP.  |
-   | Gray    | Device is monitored by NDM; however, no data has been received. For example, if the ping wasn't configured and you opted to `color by` **Ping State** in the Device Topology Map, the devices are displayed in gray. |
-   | No color | Shadow devices that are not directly monitored by NDM, but are discoverable through LLDP/CDP from a connected device that NDM is monitoring. You can toggle on/off the [Hide _N_ unmonitored device section](#filter-devices) if you want these devices to be shown on the Device Topology Map.         |
-
-   </div>
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by.png" alt="The navigation option, with view tags for team, service, and vendor selected." style="width:80%;" >}}
 
 ### Filter devices
 
-3. Under **Filter Devices**, gain further granular control over what devices are shown on the Device Topology Map.
+3. Select the **+ Filter** drop down to gain further granular control over what devices are shown on the Device Topology Map.
 
-{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_hide.png" alt="The navigation option, with view filer option selected, toggling by hide unmonitored devices " style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_2.png" alt="The navigation option, with view filer option selected." style="width:80%;" >}}
 
 **Note:** The **Filter Devices** setting impacts what devices are shown on the Device Topology Map for _all_ queries you might make. For example, if you filter by a device facet in the search bar.
 
@@ -116,30 +95,15 @@ SNMP devices are matched to a representative icon based on their device type in 
 
 ## Investigating devices
 
-In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics. You can also click on a device to see the following options:
+In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hover over a device to view its overall status and key metrics. Click on a device to open a side panel with additional information.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_3.png" alt="The network device topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
-
-### Inspect
-
-Choose **Inspect** to see the device's interface connections. Click on any of the connected interfaces for further investigation.
-This view shows only the physical interfaces that are actually connected to another device. This means that it shows a subset of the total set of interfaces of a network device.
-
-{{< img src="/network_device_monitoring/network_topology_map/ndm_topology_interface_updated.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
-
-### View device details
-
-Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
-
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_device_details_2.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
-
-From this view, you can also view the device's connected interfaces in the **Connected Interfaces** tab.
-
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_devices_interface_2.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_4.png" alt="The network device topology map with a device selected, displaying information about the device in the side panel." style="width:100%;" >}}
 
 ### View flow details
 
-Choose **View flow details** to open the NetFlow tab filtered by the device's `@device.ip` for a detailed exploration of the device's sources, destinations, and volume. See the [NetFlow Monitoring][1] page for more information.
+Click the **Flow** tab in the side panel to explore the device's traffic sources, destinations, and volume. The data is automatically filtered by the device's `@device.ip`. For more information, see the [NetFlow Monitoring][1] page.
+
+{{< img src="/network_device_monitoring/network_topology_map/Netflow_tab.png" alt="View of the Device side panel, with the NetFlow tab highlighted." style="width:100%;" >}}
 
 ## Troubleshooting
 
