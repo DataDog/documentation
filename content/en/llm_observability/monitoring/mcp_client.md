@@ -331,3 +331,37 @@ clientSessionSpan.finish(); // finish at the end of the client session scope
 {{% /tab %}}
 
 {{< /tabs >}}
+
+7. Set the necessary environment variables to enable MCP client monitoring:
+
+{{< code-block lang="shell">}}
+export DD_LLMOBS_ENABLED=true
+export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
+export DD_LLMOBS_AGENTLESS_ENABLED=true
+export DD_API_KEY=<YOUR_API_KEY>
+export DD_SITE=<YOUR_DATADOG_SITE>
+{{< /code-block >}}
+
+8. Run your application:
+
+{{< tabs >}}
+
+{{% tab "Python" %}}
+{{< code-block lang="python">}}
+ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript">}}
+NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+{{< code-block lang="java">}}
+java -javaagent:dd-java-agent.jar -Ddd.llmobs.enabled=true -Ddd.llmobs.ml-app=<YOUR_ML_APP_NAME> -Ddd.llmobs.agentless-enabled=true -Ddd.api-key=<YOUR_API_KEY> -Ddd.site=<YOUR_DATADOG_SITE> <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+{{% /tab %}}
+
+{{< /tabs >}}
