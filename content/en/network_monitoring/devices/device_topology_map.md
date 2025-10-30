@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The [Network Device Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
+The [Network Device Topology Map][2] uses [Cloudcraft][7] diagrams to provide an interactive visual representation of your network's physical connections. The map automatically discovers and displays devices, their interfaces, and the relationships between them. This visualization helps you identify issues in your network devices, understand their upstream and downstream impacts, troubleshoot connectivity problems, and gain insights into how traffic flows through your infrastructure.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new.mp4" alt="The network device topology map, with adding tags for team, service, and vendor, then selecting a device displaying the side panel" video="true" >}}
 
@@ -35,7 +35,7 @@ In the Network Topology Map, the following navigation options are available:
 
 ### Group by
 
-1. Under Group By, use **tags** such as `team`, `service`, and `vendor` to select how you want to visualize devices:
+1. Under Group By, use **tags** such as `team`, `service`, and `vendor` to select how you want to visualize your devices:
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by.png" alt="The navigation option, with view tags for team, service, and vendor selected." style="width:80%;" >}}
 
@@ -43,15 +43,31 @@ In the Network Topology Map, the following navigation options are available:
 
 3. Select the **+ Filter** drop down to gain further granular control over what devices are shown on the Device Topology Map.
 
-{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_2.png" alt="The navigation option, with view filer option selected." style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_2.png" alt="The navigation option, with view filer option selected." style="width:90%;" >}}
 
 **Note:** The **Filter Devices** setting impacts what devices are shown on the Device Topology Map for _all_ queries you might make. For example, if you filter by a device facet in the search bar.
 
-Hide _N_ Unmonitored Devices - Turned OFF by default.
-: Toggling this on hides devices on the Device Topology Map that are not directly monitored by Network Device Monitoring, but still discovered by LLDP/CDP, and shown on the map from adjacent devices that are monitored by Network Device Monitoring.
+**Resources dropdown options:**
 
-Hide _N_ Unconnected Devices - Turned OFF by default.
-: Toggling this on hides any devices that have no link connections. Devices can be unconnected for reasons such as improper configuration, or the device does not support [LLDP/CDP](#troubleshooting).
+_NOT_ Unmonitored Device
+: Select this option from the **Resources** dropdown to hide devices on the Device Topology Map that are not directly monitored by Network Device Monitoring, but still discovered by LLDP/CDP, and shown on the map from adjacent devices that are monitored by Network Device Monitoring.
+
+Hide _N_ Unconnected Devices
+: Select this option from the **Resources** dropdown to hide any devices that have no link connections. Devices can be unconnected for reasons such as improper configuration, or the device does not support [LLDP/CDP](#troubleshooting).
+
+## Investigating devices
+
+In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hover over a device to view its overall status and key metrics. Click on a device to open a side panel with additional information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
+
+From this view, you can also view the device's connected interfaces in the **Interfaces** tab.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_5.png" alt="The network device topology map with a device selected, displaying information about the device in the side panel." style="width:100%;" >}}
+
+### View flow details
+
+Click the **Flow** tab in the side panel to explore the device's traffic sources, destinations, and volume. The data is automatically filtered by the device's `@device.ip`. For more information, see the [NetFlow Monitoring][1] page.
+
+{{< img src="/network_device_monitoring/network_topology_map/Netflow_tab.png" alt="View of the Device side panel, with the NetFlow tab highlighted." style="width:100%;" >}}
 
 ### Icon legend
 
@@ -92,21 +108,6 @@ SNMP devices are matched to a representative icon based on their device type in 
   </tr>
 </table>
 
-
-## Investigating devices
-
-In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hover over a device to view its overall status and key metrics. Click on a device to open a side panel with additional information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
-
-From this view, you can also view the device's connected interfaces in the **Interfaces** tab.
-
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_4.png" alt="The network device topology map with a device selected, displaying information about the device in the side panel." style="width:100%;" >}}
-
-### View flow details
-
-Click the **Flow** tab in the side panel to explore the device's traffic sources, destinations, and volume. The data is automatically filtered by the device's `@device.ip`. For more information, see the [NetFlow Monitoring][1] page.
-
-{{< img src="/network_device_monitoring/network_topology_map/Netflow_tab.png" alt="View of the Device side panel, with the NetFlow tab highlighted." style="width:100%;" >}}
-
 ## Troubleshooting
 
 If you experience issues using the Network Topology Map, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][5].
@@ -117,7 +118,7 @@ If you experience issues using the Network Topology Map, use the following troub
 
 This message is displayed when the rendered map has no links.
 
-**Note**: Since the "Hide _N_ Unconnected Devices" toggle is enabled by default, this message displays with an empty map.
+**Note**: Since the "Hide _N_ Unconnected Devices" selection is enabled by default, this message displays with an empty map.
 
 ### Empty map message
 
@@ -129,12 +130,12 @@ There are no devices because NDM is not configured.
 
 {{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="The no devices found message that is displayed when NDM is either not configured or because of filtering." style="width:80%;" >}}
 
-- Turn the "Hide _N_ Unconnected Devices" toggle off to show the isolated devices.
+- Turn the "Hide _N_ Unconnected Devices" selection off to show the isolated devices.
 - Use categorization tag to help understand your map view with information hierarchy.
 
 ### Empty map/ no monitored devices
 
-- Ensure the "Hide _N_ Unconnected Devices" toggle is off.
+- Ensure the "Hide _N_ Unconnected Devices" selection is off.
 
 ### Missing devices/connections
 
@@ -195,3 +196,4 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 [4]: /network_monitoring/devices/profiles/
 [5]: /help
 [6]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#ping
+[7]: /datadog_cloudcraft/
