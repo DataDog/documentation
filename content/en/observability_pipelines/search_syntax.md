@@ -128,7 +128,7 @@ The follow are example queries that use Boolean operators:
 : This query can also be written as: `Hello world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
-`hello` AND `status:info`
+`hello AND status:info`
 : Matches logs with a message field that contains `hello` and with `status:info`.
 
 `-http.status_code:200`
