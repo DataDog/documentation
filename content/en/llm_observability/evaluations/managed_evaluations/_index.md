@@ -25,18 +25,19 @@ LLM Observability managed evaluations leverage LLMs. To connect your LLM provide
 
 ## Compatibility matrix
 
-Managed evaluations are supported via the following configurations:
+Managed evaluations are supported via the following configurations.
 
-| Evaluation                      | DD-trace version  |  LLM Provider    | Span kind       |
-| --------------------------------| ----------------- | ---------------- | ----------------|
-| [Tool Selection][19]            | v3.12+            | OpenAI           | LLM             |
-| [Tool Argument Correctness][20] | v3.12+            | OpenAI           | LLM             |
-| [Goal Completeness][21]         | Fully supported   | OpenAI           | LLM             |
-| [Hallucination][22]             |                   | OpenAI           | LLM             |
-| [Sentiment][23]                 | Fully supported   | Fully supported  | Fully supported |
-| [Toxicity][24]                  | Fully supported   | Fully supported  | Fully supported |
-| [Prompt Injection][24]          | Fully supported   | Fully supported  | Fully supported |
-| [Topic Relevancy][25]           | Fully supported   | Fully supported  | Fully supported |
+| Evaluation                      | DD-trace version  |  LLM Provider                                      | Span kind       |
+| --------------------------------| ----------------- | ---------------------------------------------------| ----------------|
+| [Tool Selection][19]            | v3.12+            | OpenAI, Azure OpenAI                               | LLM             |
+| [Tool Argument Correctness][20] | v3.12+            | OpenAI, Azure OpenAI                               | LLM             |
+| [Goal Completeness][21]         | Fully supported   | OpenAI, Azure OpenAI                               | LLM             |
+| [Hallucination][22]             | v3.12+            | OpenAI                                             | LLM             |
+| [Sentiment][23]                 | Fully supported   | OpenAI, Azure OpenAI, Anthropic, Bedrock Anthropic | Fully supported |
+| [Toxicity][24]                  | Fully supported   | OpenAI, Azure OpenAI, Anthropic, Bedrock Anthropic | Fully supported |
+| [Prompt Injection][25]          | Fully supported   | OpenAI, Azure OpenAI, Anthropic, Bedrock Anthropic | Fully supported |
+| [Topic Relevancy][26]           | Fully supported   | OpenAI, Azure OpenAI, Anthropic, Bedrock Anthropic | Fully supported |
+| [Language Mismatch][27]         | Fully supported   | Self hosted                                        | Fully supported |
 
 
 ## Connect your LLM provider account
@@ -371,3 +372,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [24]: /llm_observability/evaluations/managed_evaluations#toxicity
 [25]: /llm_observability/evaluations/managed_evaluations#prompt-injection
 [26]: /llm_observability/evaluations/managed_evaluations#topic-relevancy
+[27]: /llm_observability/evaluations/managed_evaluations#language-mismatch
