@@ -9,7 +9,6 @@ further_reading:
 ServiceNow's ITOM/ITSM integration allows you to send alerts, cases, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
 
 To use the integration, follow the instructions to install it, and then configure it for each product:
-
 1. [Configure the ServiceNow tile](#tile)
 1. [Install the ITOM/ITSM integration](#install)
 1. Configure the integration
