@@ -70,16 +70,18 @@ title: Guías de logs
 
 <br>
 
-{{< whatsnext desc="Logs Workspaces Use Cases" >}}
-    {{< nextlink href="/Logs/workspaces/use_cases/analyze_login_attempts/" >}}Analizar los intentos de inicio de sesión para e-PHI{{< /nextlink >}}
+{{< whatsnext desc="Análisis de logs con Notebooks" >}}
+    {{< nextlink href="/logs/guide/analyze_ecommerce_ops" >}}Analizar operaciones de comercio electrónico utilizando datos de pago y opiniones de clientes{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/analyze_finance_operations" >}}Analizar operaciones financieras utilizando datos de pago y de transacciones{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/analyze_login_attempts" >}}Analizar la seguridad y la conformidad de los intentos de inicio de sesión{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
 
-{{< whatsnext desc="Sensitive Data Management" >}}
-    {{< nextlink href="logs/guide/logs-rbac" >}}Cómo configurar RBAC para logs{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Más información sobre los permisos RBAC para logs{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restringir el acceso a datos confidenciales con controles basados en consultas{{< /nextlink >}}
+{{< whatsnext desc="Gestión de datos confidenciales" >}}
+    {{< nextlink href="logs/guide/logs-rbac" >}}Configuración de RBAC para logs{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Más información sobre permisos RBAC para logs{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/manage-sensitive-logs-data-access" >}}Gestionar el acceso a datos confidenciales en logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}Eliminar logs con datos confidenciales{{< /nextlink >}}
 {{< /whatsnext >}}
 

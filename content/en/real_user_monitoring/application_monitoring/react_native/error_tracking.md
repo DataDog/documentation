@@ -29,6 +29,8 @@ Enable React Native Crash Reporting and Error Tracking to get comprehensive cras
 
 In order to symbolicate your stack traces, manually upload your source maps and native debug symbols into Datadog.
 
+**Note:** This page is for vanilla React Native projects. If you're using Expo, see the [Expo Crash Reporting and Error Tracking documentation][18] instead.
+
 Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
@@ -505,3 +507,4 @@ Inside the loop, add the following snippet:
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
 [17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
+[18]: /error_tracking/frontend/mobile/expo/

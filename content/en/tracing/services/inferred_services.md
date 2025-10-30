@@ -114,7 +114,7 @@ exporters:
 **Example**: [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
 {{% /tab %}}
 {{< /tabs >}}
 

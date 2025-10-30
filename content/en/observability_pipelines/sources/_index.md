@@ -2,7 +2,7 @@
 title: Sources
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 - link: "/observability_pipelines/processors/"
@@ -95,6 +95,6 @@ For the Worker host to trust the self-signed certificate:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/troubleshooting/#use-tap-to-see-your-data
+[2]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#use-tap-to-see-your-data
 [3]: https://letsencrypt.org/
 
