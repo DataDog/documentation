@@ -28,12 +28,11 @@ An Agent-based integration uses the [Datadog Agent][1] to submit data through cu
 These steps assume you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][8].
 
 1. [Install the required development tools](#preqrequisites).
-2. [Configure the Datadog Agent integration developer tool](#configure-ddev).
-3. [Create the scaffolding for your integration](#create-scaffolding-for-your-integration).
+2. [Configure the Datadog Agent integration developer tool](#configure-the-datadog-agent-integration-developer-tool).
+3. [Create the scaffolding for your integration](#create-the-scaffolding).
 4. [Write your agent check](#write-your-agent-check).
-5. Test your integration
-6. Open a GitHub pull request with the code for your Agent check.
-7. Submit
+5. [Test your agent check](#test-your-agent-check).
+7. [Submit your code for review](#submit-your-code-for-review).
 
 ### Preqrequisites
 
@@ -43,7 +42,7 @@ These steps assume you've [joined the Datadog Partner Network][7], have access t
 - [Docker][11] to run the full test suite.
 - Git ([command line][12] or [GitHub Desktop client][13]).
 
-### Configure ddev
+### Configure the Datadog Agent integration developer tool
 
 1. Create a `dd` directory. The Datadog Agent developer tool expects you to work in the `$HOME/dd/` directory.
    ```shell
@@ -324,7 +323,11 @@ To speed up development, use the `-m/--marker` option to run integration tests o
    ```
 Your integration is almost complete. Return to the Developer Platform in your sandbox to finalize your submission. 
 
-## Build the wheel
+## Test your agent check
+
+Agent-based integrations are distributed as Python wheel (.whl) files that customers install through the Datadog Agent. Before publishing your integration, you can locally test it by manually bulding and installing the wheel package.
+
+### Build the wheel
 
 The `pyproject.toml` file provides the metadata that is used to package and build the wheel. The wheel contains the files necessary for the functioning of the integration itself, which includes the Agent Check, configuration example file, and artifacts generated during the wheel build.
 
@@ -337,7 +340,7 @@ Once your `pyproject.toml` is ready, create a wheel using one of the following o
 - (Recommended) With the `ddev` tooling: `ddev release build <INTEGRATION_NAME>`.
 - Without the `ddev` tooling: `cd <INTEGRATION_DIR> && pip wheel . --no-deps --wheel-dir dist`.
 
-## Install the wheel
+### Install the wheel
 
 The wheel is installed using the Agent `integration` command, available in [Agent v6.10.0 or later][1]. Depending on your environment, you may need to execute this command as a specific user or with specific privileges:
 
