@@ -22,7 +22,7 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Natural language queries
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}}
 Natural Langugage Querying (NLQ) on Metrics is in Preview. If you're interested in this feature, complete this form. </a>.
 {{< /callout >}}
 
