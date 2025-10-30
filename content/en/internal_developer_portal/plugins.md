@@ -14,10 +14,10 @@ further_reading:
 
 ## Overview
 
-**Plugins** enable developers to build, deploy, and manage fully custom React applications natively within Datadog using the CLI and local development workflows.  
-This evolution of App Builder introduces a **local development model** optimized for **platform engineers** and **technical users** who prefer building with code instead of visual editors.
+**Plugins** enable developers to build, deploy, and manage fully custom applications natively within Datadog using the CLI and local development workflows.  
+This evolution of App Builder introduces a local development model optimized for platform engineers and technical users who prefer building with code instead of visual editors.
 
-Plugins combine a **React-based frontend**, **serverless backend functions**, and **Datadog-managed infrastructure**—including Datastore, secret management, and telemetry—all accessible through the Datadog CLI.
+Plugins combine a React-based frontend, serverless backend functions, and Datadog-managed infrastructure —including Datastore, secret management, and telemetry—all accessible through the Datadog CLI.
 
 {{< callout url="https://forms.gle/nyNVPmjQqEKdJwre9" header="Join the Plugins Beta" >}}
 Be among the first to build locally with Datadog’s plugin development experience.
@@ -84,7 +84,7 @@ Plugins are automatically instrumented with telemetry and can appear in any Data
 ## Key Features
 
 - **Plugin Development Flow:** Build multi-folder React apps locally using CLI commands, AI agents, and Datadog SDKs.
-- **Full-Stack Capabilities:** Support both **frontend** (React) and **backend** (serverless functions) logic using Datadog Actions—including private actions and Lambda-like handlers.
+- **Full-Stack Capabilities:** Support both frontend (React) and backend (serverless functions) logic using Datadog Actions—including private actions and Lambda-like handlers.
 - **Datadog Integrations:** Leverage Datastore, Connections, and RBAC for secure and seamless data and secret management.
 - **Preview and Publish:** Use `dd-app preview` for local testing, and `dd-app publish` for one-click deployment to Datadog.
 - **AI Assistance:** AI coding agents provide inline code generation, scaffolding, and refactoring guidance through `AGENT.md`.
@@ -117,7 +117,7 @@ The plugin framework provides an opinionated scaffold optimized for Datadog’s 
 
 ### Backend
 
-- Lightweight **serverless functions** triggered via Datadog Actions.
+- Lightweight serverless functions triggered via Datadog Actions.
 - Written in TypeScript using the `@Datadog/actions` SDK.
 
 ```typescript
