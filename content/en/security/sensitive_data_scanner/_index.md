@@ -66,7 +66,7 @@ The data that can be scanned and redacted are:
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
-Optionally, sampling rates can be set between 10% to 99% for each product. This helps manage costs when you first get started by reducing the amount of data that gets scanned for sensitive information.
+Optionally, sampling rates can be set between 10% and 99% for each product. This helps manage costs when you first get started by reducing the amount of data that gets scanned for sensitive information.
 
 For each [scanning rule][17], one of the following actions can be applied to matched sensitive data:
 
