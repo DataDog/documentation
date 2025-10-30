@@ -168,7 +168,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 {{% /tab %}}
 
 {{% tab "AWS CDK" %}}
-{{% lambda-install-cdk %}}
+{{< lambda-install-cdk language="java" layer="dd-trace-java" layerParamTypescript="javaLayerVersion" layerParamPython="java_layer_version">}}
 {{% /tab %}}
 
 {{% tab "Container image" %}}

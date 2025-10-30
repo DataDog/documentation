@@ -59,6 +59,11 @@ For more information and additional settings, see the [plugin documentation][1].
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="go" >}}
+{{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Extension
