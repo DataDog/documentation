@@ -130,7 +130,7 @@ Navigate to [Integrations][18] in the app to get started, or browse the list of 
 
 - Start with out-of-the-box dashboards or build your own to suit your specific questions.
 - Customize dashboards with drag-and-drop widgets, custom queries, and flexible layouts.
-- Combine multiple data types (metrics, logs, APM, RUM, etc.) in one place and view data in real time.
+- Combine multiple data types (including metrics, logs, APM, and RUM) in one place and view data in real time.
 - Annotate your graphs with comments or events for your team's context.
 
 Navigate to the [Dashboard List][21] in the app to get started. To learn more, read the [Dashboards documentation][20].
@@ -141,7 +141,7 @@ Navigate to the [Dashboard List][21] in the app to get started. To learn more, r
 
 - Create monitors using any metric reporting to Datadog.
 - Build complex alerting logic using multiple trigger conditions.
-- Send alerts to Slack, email, PagerDuty, and more, and use `@` in alert messages to direct notifications to the right people.
+- Send alerts to Slack, email, PagerDuty, and more, by adding`@` in alert messages to direct notifications to the right people.
 - Schedule downtimes to suppress notifications for system shutdowns, offline maintenance, and more.
 
 ## Further Reading
