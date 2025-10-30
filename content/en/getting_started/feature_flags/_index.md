@@ -68,7 +68,7 @@ const provider = new DatadogProvider({
 await OpenFeature.setProviderAndWait(provider);
 ```
 
-<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. This setting is not required for canary releases, so you can disable it if you don't need to track feature exposure.</div>
+<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
 
 More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
 
