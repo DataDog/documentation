@@ -9,4 +9,5 @@ cascade:
     publishResources: false
     render: never
 title: Api V1
+external_redirect: /api/latest/
 ---
