@@ -26,10 +26,6 @@ Use the following instructions to enable Infrastructure as Code (IaC) Security f
 
 To connect your GitHub repositories and enable PR comments, see the setup instructions in [Pull Request Comments][1].
 
-<div class="alert alert-info">
-  To use IaC Security, the GitHub App must have <code>Read &amp; Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. You can grant this access to all repositories or restrict it to selected ones.
-</div>
-
 ### Enable IaC Security for your repositories
 
 After setting up the GitHub integration, enable IaC Security for your repositories.
@@ -44,7 +40,7 @@ After setting up the GitHub integration, enable IaC Security for your repositori
     - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
     - To enable it for a single repository, toggle the **IaC** switch to ON for that repository.
 
-[1]: /security/code_security/dev_tool_int/pull_request_comments/?tab=github
+[1]: /security/code_security/dev_tool_int/pull_request_comments/?tab=github#set-up-pull-request-comments
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
@@ -52,7 +48,7 @@ After setting up the GitHub integration, enable IaC Security for your repositori
 
 ### Install the GitLab integration
 
-To connect your GitLab repositories and enable PR comments, see the setup instructions in [Pull Request Comments][1].
+To connect your GitLab repositories and enable PR comments, see the setup instructions in [GitLab Source Code][1].
 
 ### Enable IaC Security for your repositories
 
@@ -68,7 +64,7 @@ After setting up the GitLab integration, enable IaC Security for your repositori
     - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
     - To enable it for a single repository, toggle the **IaC** switch to ON for that repository.
 
-[1]: /security/code_security/dev_tool_int/pull_request_comments/?tab=gitlab
+[1]: /integrations/gitlab-source-code/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
@@ -76,7 +72,7 @@ After setting up the GitLab integration, enable IaC Security for your repositori
 
 ### Install the Azure DevOps integration
 
-To connect your Azure DevOps repositories and enable PR comments, see the setup instructions in [Pull Request Comments][1].
+To connect your Azure DevOps repositories and enable PR comments, see the setup instructions in [Azure DevOps Source Code][1].
 
 ### Enable IaC Security for your repositories
 
@@ -92,7 +88,7 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
     - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
     - To enable it for a single repository, toggle the **IaC** switch to ON for that repository.
 
-[1]: /security/code_security/dev_tool_int/pull_request_comments/?tab=azuredevops
+[1]: /integrations/azure-devops-source-code/#source-code-functionality
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
