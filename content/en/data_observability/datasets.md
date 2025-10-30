@@ -192,6 +192,29 @@ To monitor BigQuery data in Datadog, you must configure permissions in your Goog
 [1]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#expanded-bigquery-monitoring
 
 {{% /tab %}}
+{{% tab "Databricks" %}}
+
+To monitor Databricks data in Datadog, you must first complete the installation instructions in the [Databricks Integration documentation][1].
+
+After completing the Databricks setup, you must grant read-only access to the data you want to monitor.
+
+You can grant access to all current and future data within a catalog:
+```sql
+GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE_SCHEMA ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT SELECT ON CATALOG <catalog_name> TO `<application_id>`;
+```
+
+Or, you can grant access to specific tables:
+```sql
+GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE_SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
+GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
+```
+
+[1]: https://docs.datadoghq.com/integrations/databricks/?tab=useaserviceprincipalforoauth#setup
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading
