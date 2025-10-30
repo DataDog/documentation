@@ -50,7 +50,7 @@ Navigate to [**Infrastructure > Hosts**][3] in the app to get started. To learn 
 <!-- Todo: retake screenshot -->
 {{< img src="getting_started/application/host_map_2024.png" alt="Host Map Overview" >}}
 
-[Host and container maps][4] give you a visual overview of all your hosts and containers, color-coding them by key metrics like CPU usage so you can quickly spot issues.
+[Host and container maps][4] give you a visual overview of all your hosts and containers, color-coding them by key metrics like CPU usage so you can spot issues.
 
 **Key capabilities**:
 
