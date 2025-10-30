@@ -23,6 +23,22 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
+## Compatibility matrix
+
+Managed evaluations are supported via the following configurations:
+
+| Evaluation                      | DD-trace version  |  LLM Provider    | Span kind       |
+| --------------------------------| ----------------- | ---------------- | ----------------|
+| [Tool Selection][19]            | v3.12+            | OpenAI           | LLM             |
+| [Tool Argument Correctness][20] | v3.12+            | OpenAI           | LLM             |
+| [Goal Completeness][21]         | Fully supported   | OpenAI           | LLM             |
+| [Hallucination][22]             |                   | OpenAI           | LLM             |
+| [Sentiment][23]                 | Fully supported   | Fully supported  | Fully supported |
+| [Toxicity][24]                  | Fully supported   | Fully supported  | Fully supported |
+| [Prompt Injection][24]          | Fully supported   | Fully supported  | Fully supported |
+| [Topic Relevancy][25]           | Fully supported   | Fully supported  | Fully supported |
+
+
 ## Connect your LLM provider account
 
 Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
@@ -350,3 +366,8 @@ This check ensures that sensitive information is handled appropriately and secur
 [19]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
 [20]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
 [21]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#goal-completeness
+[22]: /llm_observability/evaluations/managed_evaluations#hallucination
+[23]: /llm_observability/evaluations/managed_evaluations#sentiment
+[24]: /llm_observability/evaluations/managed_evaluations#toxicity
+[25]: /llm_observability/evaluations/managed_evaluations#prompt-injection
+[26]: /llm_observability/evaluations/managed_evaluations#topic-relevancy
