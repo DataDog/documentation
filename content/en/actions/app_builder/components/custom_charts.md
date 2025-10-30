@@ -22,6 +22,8 @@ The basic workflow for creating a custom chart is as follows:
 1. Add the custom chart component and choose a chart style from the App Builder UI or the [Vega-Lite example gallery][1].
 1. Replace the values in the example with your query data.
 
+Alternatively, you can use Bits AI to get started with a custom chart. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**). Enter a custom prompt, or try the prompt `Can you help me create a custom chart?`.
+
 ## Example setup flow
 
 The following example shows how to create a histogram chart illustrating Datadog Logs grouped by service.
