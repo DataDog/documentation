@@ -217,8 +217,6 @@ Hallucination detection makes a distinction between two types of hallucinations,
 
 Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
 
-Hallucination detection is only available for OpenAI.
-
 #### Failure to Answer
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
