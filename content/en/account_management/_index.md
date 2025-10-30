@@ -117,7 +117,7 @@ Logging out of all active web sessions logs you out of all current sessions acro
 
 To log out of all active sessions:
 1. Go to Personal Settings.
-2. Click Log Out of All Web Sessions.
+2. Click **Log Out of All Web Sessions**.
 3. Confirm the action.
 
 After confirming, you are logged out from all devices and need to log back in.
