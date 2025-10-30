@@ -8,7 +8,7 @@ disable_toc: false
 
 The sequence method enables you to detect multi-stage attacks by identifying ordered patterns of related events, such as initial access, privilege escalation, and data exfiltration.
 
-You can define a sequence of steps that must occur within a defined time frame and across related entities (such as a user, host, or IP address). Each sequence can combine conditions from multiple logs or signals to identify coordinated activity that might be missed by individual rules.
+You can define a sequence of steps that must occur within a defined time frame and across related entities, such as a user, host, or IP address. Each sequence can combine conditions from multiple logs or signals to identify coordinated activity that might be missed by individual rules.
 
 {{< img src="security/security_monitoring/detection_rules/sequence/preview.png" alt="Sequence editor page showing a preview of the steps" style="width:100%;" >}}
 
@@ -23,7 +23,7 @@ See [Create Rule][1] for instructions on how to configure a content anomaly rule
 Sequence detection evaluates a defined series of steps that represent distinct stages of suspicious behavior. Each step corresponds to:
 
 - A condition such as a threshold on a log query or a signal match
-- Transitions that define the order and time constraints between steps.
+- Transitions that define the order and time constraints between steps
 
 When all steps occur in the specified order and within the configured time windows, a signal is generated.
 
@@ -45,11 +45,11 @@ When you [create a sequence detection rule][1], these are the options you can co
 
 | Setting | Description | Impact |
 |---------|-------------|--------|
+| Data type | Specifies whether each query evaluates logs, signals, or rules. | Defines data sources for detection. |
 | Steps | Define each detection condition, including query and threshold. | Determines which behaviors are monitored. |
 | Step transitions | Define the order and time relationship between steps. | Controls when a sequence qualifies for a signal. |
 | Evaluation window | After a step has occurred, the time (in seconds) to wait for the next step. | Larger windows increase detection coverage, but may result in more noise. |
 | Group by fields | Fields used to link activity across steps (for example, `@usr.email`, `@ip`). | Determines how entities are correlated across queries. |
-| Data type | Specifies whether each query evaluates logs or signals. | Defines data sources for detection. |
 
 ## Limits
 

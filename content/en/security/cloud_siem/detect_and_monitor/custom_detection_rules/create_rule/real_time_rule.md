@@ -132,17 +132,17 @@ Click **Add Root Query** to add additional queries.
 
 1. To search a different data type, click the down arrow next to **Logs** and select **Signals** or **Rules**.
 1. Define the condition for the step.
-    - For **Logs**: construct a search query for your using the [Log Explorer search syntax][1].
+    - For **Logs**: construct a search query using the [Log Explorer search syntax][1].
     - For **Signals**: reference an existing rule or query on signal fields.
     - For **Rules**: select a rule.
 1. Set group by fields (for example `@usr.email` or `@ip.address`) to link entities across steps.
 1. Enter a threshold condition, such as `>10`.
-1. Connect the query with the next query using `AND` or `OR` and repeat steps 1-4.
+1. If you want to use another query, connect this query with the next query using `AND` or `OR` and repeat steps 1-4.
 1. In the **roll-up over** dropdown menu, select the time frame all queries in that step must occur to transition to the next step.
 
 #### Define step transitions
 
-For the previous step and next step:
+For the current step and the next step:
 
 1. In the **within** dropdown menu, select an evaluation window for the transition.
     - **Note**: The total evaluation time across the sequence can be up to 24 hours.
