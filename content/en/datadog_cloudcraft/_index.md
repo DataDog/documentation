@@ -140,7 +140,7 @@ Toggle the projection from 3D (default) to 2D to visualize your resources from a
 
 Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
 
-Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS tags, custom tags, and terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
+Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS and Azure tags, custom tags, and terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
 ### Search and highlight
 
