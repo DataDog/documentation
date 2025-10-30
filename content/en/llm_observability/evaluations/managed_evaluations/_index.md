@@ -23,23 +23,7 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
-## Compatibility matrix
-
-Managed evaluations are supported via the following configurations.
-
-| Evaluation                      | DD-trace version  |  LLM Provider                 | Span kind       |
-| --------------------------------| ----------------- | ------------------------------| ----------------|
-| [Tool Selection][19]            | v3.12+            | OpenAI, Azure OpenAI          | LLM             |
-| [Tool Argument Correctness][20] | v3.12+            | OpenAI, Azure OpenAI          | LLM             |
-| [Goal Completeness][21]         | Fully supported   | OpenAI, Azure OpenAI          | LLM             |
-| [Hallucination][22]             | v2.18+            | OpenAI                        | LLM             |
-| [Sentiment][23]                 | Fully supported   | All third party LLM providers | Fully supported |
-| [Toxicity][24]                  | Fully supported   | All third party LLM providers | Fully supported |
-| [Prompt Injection][25]          | Fully supported   | All third party LLM providers | Fully supported |
-| [Topic Relevancy][26]           | Fully supported   | All third party LLM providers | Fully supported |
-| [Language Mismatch][27]         | Fully supported   | Self hosted                   | Fully supported |
-
-The current list of supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic and Bedrock Anthropic.
+You can learn more about the [compatibility requirements here][22].
 
 ## Connect your LLM provider account
 
@@ -368,9 +352,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [19]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
 [20]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
 [21]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#goal-completeness
-[22]: /llm_observability/evaluations/managed_evaluations#hallucination
-[23]: /llm_observability/evaluations/managed_evaluations#sentiment
-[24]: /llm_observability/evaluations/managed_evaluations#toxicity
-[25]: /llm_observability/evaluations/managed_evaluations#prompt-injection
-[26]: /llm_observability/evaluations/managed_evaluations#topic-relevancy
-[27]: /llm_observability/evaluations/managed_evaluations#language-mismatch
+[22]: /llm_observability/evaluations/evaluation_compatibility

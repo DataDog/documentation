@@ -23,7 +23,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 ## Create a custom LLM-as-a-judge evaluation
 
-You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability.
+You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability. You can learn more about the [compatibility requirements here][6].
 
 ### Configure the prompt
 
@@ -277,3 +277,4 @@ You can:
 [3]: /service_management/events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
+[6]: /llm_observability/evaluations/evaluation_compatibility
