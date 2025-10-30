@@ -32,13 +32,13 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
 
 1. To discover the exact location of containers folder, run the following command:
    ```shell
-   podman info -f json | jq '.store.graphRoot'
+   podman info -f json | jq -r '.store.graphRoot' | sed 's/\/storage$//'
    ```
    Output should be similar to the following:
    ```
-   "$HOME/.local/share/containers/storage"
+   $HOME/.local/share/containers
    ```
-   In the example above, the `<CONTAINERS_PATH>` wiil be `$HOME/.local/share/containers`.
+   In the example above, `<CONTAINERS_PATH>` resolves to `$HOME/.local/share/containers`.
 
 1. Run one of the following commands to deploy the Agent.
    1. To deploy the Agent without logging:
