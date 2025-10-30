@@ -83450,7 +83450,7 @@ tags:
     aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
     for more information
   name: RUM
-- description: Auto-generated tag Reference Tables
+- description: View and manage Reference Tables in your organization.
   name: Reference Tables
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
