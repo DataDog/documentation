@@ -32,14 +32,14 @@ Managed evaluations are supported via the following configurations.
 | [Tool Selection][19]            | v3.12+            | OpenAI, Azure OpenAI          | LLM             |
 | [Tool Argument Correctness][20] | v3.12+            | OpenAI, Azure OpenAI          | LLM             |
 | [Goal Completeness][21]         | Fully supported   | OpenAI, Azure OpenAI          | LLM             |
-| [Hallucination][22]             | v3.12+            | OpenAI                        | LLM             |
+| [Hallucination][22]             | v2.18+            | OpenAI                        | LLM             |
 | [Sentiment][23]                 | Fully supported   | All third party LLM providers | Fully supported |
 | [Toxicity][24]                  | Fully supported   | All third party LLM providers | Fully supported |
 | [Prompt Injection][25]          | Fully supported   | All third party LLM providers | Fully supported |
 | [Topic Relevancy][26]           | Fully supported   | All third party LLM providers | Fully supported |
 | [Language Mismatch][27]         | Fully supported   | Self hosted                   | Fully supported |
 
-The current list of supported third party LLM Providers are OpenAI, Azure OpenAI, Anthropic and Bedrock Anthropic.
+The current list of supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic and Bedrock Anthropic.
 
 ## Connect your LLM provider account
 
