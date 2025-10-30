@@ -3,8 +3,6 @@
 {{ $layerParamPython := .Get "layerParamPython" }}
 {{ $layerParamTypescript := .Get "layerParamTypescript" }}
 {{ $layerParamGo := title $layerParamTypescript }}
-
-{{/* Fetch layer versions and site dynamically */}}
 {{ $layerVersion := "" }}
 {{ if $layer }}
   {{ $layerVersion = trim ($.Page.RenderString (printf "{{< latest-lambda-layer-version layer=%q >}}" $layer)) "\n\r\t " }}
