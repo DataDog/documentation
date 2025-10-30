@@ -117,8 +117,8 @@ Use Datadog's {{< translate key="integration_count" >}} [integrations][16] to br
 **Key capabilities**:
 
 - Available integrations cover cloud technologies, incident response, data layers, security, AI, and more.
-- Build your own integration using the [developer documentation][17].
 - After integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a data center or in an online service.
+- Build your own integration using the [developer documentation][17].
 
 Navigate to [Integrations][18] in the app to get started, or browse the list of integrations in the [documentation][19].
 
