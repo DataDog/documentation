@@ -87,12 +87,14 @@ Navigate to [APM][10] in the app to get started. To learn more, read the [APM do
 
 ## RUM & Session Replay
 
-Datadog [Real User Monitoring][11] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][12], you can capture and view the web browsing sessions of your users to better understand their behavior.
+Datadog [Real User Monitoring][11] (RUM) allows you to visualize and analyze real-time user activities and experiences across web and mobile applications. With [Session Replay][12], you can capture and view user sessions to better understand their behavior.
 
 **Key capabilities**:
-- Visualize load times, frontend errors, and resources for every user session.
-- Filter and analyze data using custom attributes.
-- Unify frontend and backend metrics in one view for faster troubleshooting.
+- Monitor performance across web browsers and mobile platforms (iOS, Android, React Native, Flutter, and more) with Core Web Vitals and Mobile Vitals.
+- Track and troubleshoot errors with automated grouping, crash reporting, and suspect commit identification.
+- Detect user frustration signals like rage clicks and error clicks to identify UX issues.
+- Monitor feature flag performance and adoption.
+- Correlate frontend issues with backend traces, logs, and infrastructure metrics for full-stack visibility.
 
 Navigate to the [RUM explorer][13] in the app to get started. To learn more, read the [RUM documentation][11]
 
