@@ -38,9 +38,9 @@ Build and deploy pipelines to collect, transform, and route your logs using one 
 
  {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/configuration/sources/
-[2]: /observability_pipelines/configuration/processors/
-[3]: /observability_pipelines/configuration/destinations/
+[1]: /observability_pipelines/sources/
+[2]: /observability_pipelines/processors/
+[3]: /observability_pipelines/destinations/
 [4]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [6]: /observability_pipelines/configuration/set_up_pipelines/

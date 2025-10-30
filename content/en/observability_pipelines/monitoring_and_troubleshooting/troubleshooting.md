@@ -153,7 +153,7 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [3]: /logs/explorer/search_syntax/
 [4]: /observability_pipelines/configuration/set_up_pipelines/#set-up-a-pipeline
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
-[6]: /observability_pipelines/configuration/destinations/#event-batching-intro
+[6]: /observability_pipelines/destinations/#event-batching-intro
 [7]: https://app.datadoghq.com/logs/
 [8]: /containers/docker/log/?tab=containerinstallation#linux
 [9]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
@@ -163,7 +163,7 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
 [15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-liveness-and-readiness-probe
-[16]: /observability_pipelines/configuration/sources/#tls-certificates
+[16]: /observability_pipelines/sources/#tls-certificates
 [17]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [18]: /observability_pipelines/guide/environment_variables/
 [19]: /remote_configuration/#security-considerations

@@ -61,6 +61,6 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [5]: /logs/explorer/#share-views
 [6]: https://www.datadoghq.com/legal/hipaa-eligible-services/
 [7]: /security/sensitive_data_scanner/
-[8]: /observability_pipelines/configuration/processors/sensitive_data_scanner
+[8]: /observability_pipelines/processors/sensitive_data_scanner
 [9]: /observability_pipelines/
 [10]: /data_security/pci_compliance/

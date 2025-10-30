@@ -111,9 +111,9 @@ See [Explore templates][7] for more information.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/configuration/sources/
-[3]: /observability_pipelines/configuration/processors/
-[4]: /observability_pipelines/configuration/destinations/
+[2]: /observability_pipelines/sources/
+[3]: /observability_pipelines/processors/
+[4]: /observability_pipelines/destinations/
 [5]: /observability_pipelines/configuration/install_the_worker/
 [6]: /observability_pipelines/configuration/set_up_pipelines/
 [7]: /observability_pipelines/configuration/explore_templates/

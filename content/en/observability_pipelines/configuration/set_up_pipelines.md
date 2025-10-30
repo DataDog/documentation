@@ -80,9 +80,9 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
 
 After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
 
-[1]: /observability_pipelines/configuration/sources/
-[2]: /observability_pipelines/configuration/processors/
-[3]: /observability_pipelines/configuration/destinations/
+[1]: /observability_pipelines/sources/
+[2]: /observability_pipelines/processors/
+[3]: /observability_pipelines/destinations/
 [4]: /observability_pipelines/#archive-logs
 [5]: /observability_pipelines/#dual-ship-logs
 [6]: /observability_pipelines/#generate-metrics
@@ -155,9 +155,9 @@ Make sure your Worker logs are [indexed][6] in Log Management for optimal functi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/configuration/sources/
-[2]: /observability_pipelines/configuration/processors/
-[3]: /observability_pipelines/configuration/destinations/
+[1]: /observability_pipelines/sources/
+[2]: /observability_pipelines/processors/
+[3]: /observability_pipelines/destinations/
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: /logs/log_configuration/indexes/

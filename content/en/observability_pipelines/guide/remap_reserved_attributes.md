@@ -2,10 +2,10 @@
 title: Remap Reserved Attributes
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/configuration/processors/edit_fields/"
+- link: "/observability_pipelines/processors/edit_fields/"
   tag: "Documentation"
   text: "Learn more about the Edit Fields processor"
-- link: "/observability_pipelines/configuration/processors/custom_processor/"
+- link: "/observability_pipelines/processors/custom_processor/"
   tag: "Documentation"
   text: "Learn more about the Custom Processor processor"
 ---

@@ -400,9 +400,9 @@ sudo apt-get remove --purge observability-pipelines-worker
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
-[2]: /observability_pipelines/configuration/sources/
-[3]: /observability_pipelines/configuration/destinations/
-[4]: /observability_pipelines/configuration/processors/
+[2]: /observability_pipelines/sources/
+[3]: /observability_pipelines/destinations/
+[4]: /observability_pipelines/processors/
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [7]: /observability_pipelines/guide/environment_variables/

@@ -5,7 +5,7 @@ further_reading:
 - link: "/observability_pipelines/set_up_pipelines"
   tag: "documentation"
   text: "Set up a pipeline"
-- link: "/observability_pipelines/configuration/processors/"
+- link: "/observability_pipelines/processors/"
   tag: "documemtation"
   text: "Observability Pipelines processors"
 ---
@@ -87,10 +87,10 @@ Users have implemented the above strategies to reduce their overall log volumes.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/configuration/processors/sample
-[2]: /observability_pipelines/configuration/processors/filter
-[3]: /observability_pipelines/configuration/processors/edit_fields
-[4]: /observability_pipelines/configuration/processors/reduce
-[5]: /observability_pipelines/configuration/processors/dedupe
-[6]: /observability_pipelines/configuration/processors/quota
+[1]: /observability_pipelines/processors/sample
+[2]: /observability_pipelines/processors/filter
+[3]: /observability_pipelines/processors/edit_fields
+[4]: /observability_pipelines/processors/reduce
+[5]: /observability_pipelines/processors/dedupe
+[6]: /observability_pipelines/processors/quota
 [7]:  /observability_pipelines/configuration/set_up_pipelines/archive_logs
