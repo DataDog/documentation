@@ -57,8 +57,9 @@ Use the **Split Graph** button to view the data split into individual graphs by 
 
 ### Export
 
-Use the **Export** button (<i class="icon-export"></i>) to export your graph for use within Datadog:
+Use the **Export** button (<i class="icon-export"></i>) to export your graph:
 
+- Copy a link to the graph for sharing
 - Add it to an [incident][8]
 - Create a [monitor][9]
 - Save it to a [dashboard][10]
@@ -66,6 +67,7 @@ Use the **Export** button (<i class="icon-export"></i>) to export your graph for
 
 ### Quick Graphs
 
+https://app.datadoghq.com/s/ng8lpyfuhfammt12/mrw-ctz-fqs
 With Quick Graphs, you have more options to visualize your data, without needing to create a [Dashboard][4] or [Notebook][2]. These graphs are useful for understanding and troubleshooting issues without creating permanent dashboards or complex visualization setups.
 
 For more information, see the [Quick Graphs][7] documentation.
