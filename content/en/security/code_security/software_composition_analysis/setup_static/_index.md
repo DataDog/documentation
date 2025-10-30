@@ -91,56 +91,14 @@ See the [GitLab source code setup instructions][1] to connect GitLab to Datadog.
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-danger">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
-</div>
+**Note:** Your Azure DevOps integrations must be connected to a Microsoft Entra tenant. Azure DevOps Server is **not** supported.
 
-Before you can begin installation, request access to the closed Preview using the form above. After being granted access, see the following instructions to complete the setup process.
-
-**Note:** Azure DevOps Server is not supported.
-
-### Create and register a Microsoft Entra app
-If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
-
-1. Navigate to [Code Security setup][1].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
-3. Select **CI Pipelines**.
-4. Select the scan types you want to use.
-5. Select **Azure DevOps** as your source code management provider.
-6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
-   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
-   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
-8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
-9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
-10. Click **New client secret** and create a secret with your desired description and expiration values.
-11. Copy and paste the string in the **Value** column for your new secret, paste it into Datadog, and click **Create Configuration** to complete connecting your Entra tenant to Datadog.
-13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
-    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
-14. Click **Submit Organization**.
-
-### Configure project service hooks
-
-To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
-
-First, set your environment variables (note: the Datadog UI will fill these values out for you):
-```shell
-export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
-export DD_API_KEY="..."                         # Datadog API Key
-```
-
-Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
-```shell
-curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
-./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
-```
-
-Click [here][4] to see our CLI that automates this process.
+See the [Azure source code setup instructions][4] to connect Azure DevOps repositories to Datadog.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/DataDog/azdevops-sci-hooks
+[4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
 
 {{% /tab %}}

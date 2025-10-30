@@ -1343,7 +1343,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1400,6 +1400,7 @@ def similarity_search():
     return
 
 {{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1436,7 +1437,7 @@ The `annotationOptions` object can contain the following:
 
 `tags`
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][1].
+<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1492,8 +1493,6 @@ function similaritySearch () {
 similaritySearch = llmobs.wrap({ kind: 'retrieval', name: 'getRelevantDocs' }, similaritySearch)
 
 {{< /code-block >}}
-
-[1]: /getting_started/tagging/
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -2026,7 +2025,7 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][2].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 `assessment`
 : optional - _string_
@@ -2083,7 +2082,7 @@ def llm_call():
 {{< /code-block >}}
 
 [1]: https://app.datadoghq.com/llm/settings/evaluations
-[2]: /getting_started/tagging/
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -2118,7 +2117,7 @@ The `evaluationOptions` object can contain the following:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Example
@@ -2162,7 +2161,7 @@ The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 
 `tags`
 : optional - _Map<String, Object>_
-<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Example

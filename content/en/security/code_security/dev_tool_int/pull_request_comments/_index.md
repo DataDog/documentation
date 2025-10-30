@@ -26,7 +26,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 **Note**: PR comments are not PR checks. To set up checks, see [Quality Gates][10].
 
 ## Prerequisites
-- You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and Azure DevOps repositories ([in Preview][9]).  
+- You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and [Azure DevOps][9] repositories.  
 - Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** Settings page][4].  
 
 ## Set up pull request comments
@@ -77,16 +77,16 @@ If you already have a GitHub App connected to Datadog, update it. Otherwise, cre
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-See the [GitLab Source Code][8] setup instructions to connect GitLab to Datadog.
+See the [GitLab Source Code][8] setup instructions to connect GitLab repositories to Datadog.
 
 [8]: /integrations/gitlab-source-code/
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-Azure DevOps for Code Security is in Preview. [Request access to join the Preview][9].
+See the [Azure Source Code][8] setup instructions to connect Azure repositories to Datadog.
 
-[9]: https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/
+[9]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#source-code-functionality
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -135,7 +135,7 @@ When configuring PR comments, you can:
 [6]: /security/code_security/static_analysis/github_actions/
 [7]: https://app.datadoghq.com/security/configuration/code-security/settings
 [8]: /integrations/gitlab-source-code/
-[9]: https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/
+[9]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#source-code-functionality
 [10]: /quality_gates/?tab=staticanalysis#setup
 
 

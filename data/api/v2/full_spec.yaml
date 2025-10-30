@@ -924,7 +924,7 @@ components:
         `integration-service`, `integration-webhook`, `notebook`, `reference-table`,
         `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`,
         `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`,
-        `on-call-escalation-policy`, `on-call-team-routing-rules.'
+        `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -1435,7 +1435,9 @@ components:
     AWSAccountConfigID:
       description: 'Unique Datadog ID of the AWS Account Integration Config.
 
-        To get the config ID for an account, use the [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+        To get the config ID for an account, use the
+
+        [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
 
         endpoint and query by AWS Account ID.'
       example: 00000000-abcd-0001-0000-000000000000
@@ -1493,6 +1495,7 @@ components:
       description: 'AWS partition your AWS account is scoped to. Defaults to `aws`.
 
         See [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html)
+
         in the AWS documentation for more information.'
       enum:
       - aws
@@ -1737,6 +1740,269 @@ components:
       description: The definition of `AWSCredentialsUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSAssumeRoleUpdate'
+    AWSEventBridgeAccountConfiguration:
+      description: The EventBridge configuration for one AWS account.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        event_hubs:
+          description: Array of AWS event sources associated with this account.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeSource'
+          type: array
+        tags:
+          description: 'Array of tags (in the form `key:value`) which are added to
+            all hosts
+
+            and metrics reporting through the main AWS integration.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: The list of the host_tags.
+            type: string
+          type: array
+      type: object
+    AWSEventBridgeCreateRequest:
+      description: Amazon EventBridge create request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeCreateRequestData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeCreateRequestAttributes:
+      description: The EventBridge source to be created.
+      properties:
+        account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        create_event_bus:
+          description: 'Set to true if Datadog should create the event bus in addition
+            to the event
+
+            source. Requires the `events:CreateEventBus` permission.'
+          example: true
+          type: boolean
+        event_generator_name:
+          description: 'The given part of the event source name, which is then combined
+            with an
+
+            assigned suffix to form the full name.'
+          example: app-alerts
+          type: string
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+      required:
+      - account_id
+      - event_generator_name
+      - region
+      type: object
+    AWSEventBridgeCreateRequestData:
+      description: Amazon EventBridge create request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeCreateResponse:
+      description: Amazon EventBridge create response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeCreateResponseData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeCreateResponseAttributes:
+      description: A created EventBridge source.
+      properties:
+        event_source_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        has_bus:
+          description: True if the event bus was created in addition to the source.
+          example: true
+          type: boolean
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeCreateStatus'
+      type: object
+    AWSEventBridgeCreateResponseData:
+      description: Amazon EventBridge create response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeCreateResponseAttributes'
+        id:
+          default: create_event_bridge
+          description: The ID of the Amazon EventBridge create response data.
+          example: create_event_bridge
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeCreateStatus:
+      description: The event source status "created".
+      enum:
+      - created
+      example: created
+      type: string
+      x-enum-varnames:
+      - CREATED
+    AWSEventBridgeDeleteRequest:
+      description: Amazon EventBridge delete request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteRequestData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeDeleteRequestAttributes:
+      description: The EventBridge source to be deleted.
+      properties:
+        account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        event_generator_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+      required:
+      - account_id
+      - event_generator_name
+      - region
+      type: object
+    AWSEventBridgeDeleteRequestData:
+      description: Amazon EventBridge delete request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeDeleteResponse:
+      description: Amazon EventBridge delete response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteResponseData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeDeleteResponseAttributes:
+      description: The EventBridge source delete response attributes.
+      properties:
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteStatus'
+      type: object
+    AWSEventBridgeDeleteResponseData:
+      description: Amazon EventBridge delete response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteResponseAttributes'
+        id:
+          default: delete_event_bridge
+          description: The ID of the Amazon EventBridge list response data.
+          example: delete_event_bridge
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeDeleteStatus:
+      description: The event source status "empty".
+      enum:
+      - empty
+      example: empty
+      type: string
+      x-enum-varnames:
+      - EMPTY
+    AWSEventBridgeListResponse:
+      description: Amazon EventBridge list response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeListResponseData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeListResponseAttributes:
+      description: An object describing the EventBridge configuration for multiple
+        accounts.
+      properties:
+        accounts:
+          description: List of accounts with their event sources.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeAccountConfiguration'
+          type: array
+        is_installed:
+          description: True if the EventBridge integration is enabled for your organization.
+          type: boolean
+      type: object
+    AWSEventBridgeListResponseData:
+      description: Amazon EventBridge list response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeListResponseAttributes'
+        id:
+          default: get_event_bridge
+          description: The ID of the Amazon EventBridge list response data.
+          example: get_event_bridge
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    AWSEventBridgeSource:
+      description: An EventBridge source.
+      properties:
+        name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+      type: object
+    AWSEventBridgeType:
+      default: event_bridge
+      description: Amazon EventBridge resource type.
+      enum:
+      - event_bridge
+      example: event_bridge
+      type: string
+      x-enum-varnames:
+      - EVENT_BRIDGE
     AWSIntegration:
       description: The definition of `AWSIntegration` object.
       properties:
@@ -1816,10 +2082,12 @@ components:
       type: object
     AWSLambdaForwarderConfig:
       description: 'Log Autosubscription configuration for Datadog Forwarder Lambda
-        functions. Automatically set up triggers for existing
+        functions.
 
-        and new logs for some services, ensuring no logs from new resources are missed
-        and saving time spent on manual configuration.'
+        Automatically set up triggers for existing and new logs for some services,
+
+        ensuring no logs from new resources are missed and saving time spent on manual
+        configuration.'
       properties:
         lambdas:
           description: List of Datadog Lambda Log Forwarder ARNs in your AWS account.
@@ -1832,9 +2100,11 @@ components:
           $ref: '#/components/schemas/AWSLambdaForwarderConfigLogSourceConfig'
         sources:
           description: 'List of service IDs set to enable automatic log collection.
+
             Discover the list of available services with the
 
             [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
+
             endpoint.'
           items:
             example: s3
@@ -1854,14 +2124,20 @@ components:
       description: 'AWS log source tag filter list. Defaults to `[]`.
 
         Array of log source to AWS resource tag mappings. Each mapping contains a
-        log source and its associated AWS resource tags (in `key:value` format) used
-        to filter logs submitted to Datadog.
+        log source and its
+
+        associated AWS resource tags (in `key:value` format) used to filter logs submitted
+        to Datadog.
 
         Tag filters are applied for tags on the AWS resource emitting logs; tags associated
-        with the log storage entity (such as a CloudWatch Log Group or S3 Bucket)
-        are not considered.
+        with the
 
-        For more information on resource tag filter syntax, [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+        log storage entity (such as a CloudWatch Log Group or S3 Bucket) are not considered.
+
+        For more information on resource tag filter syntax,
+
+        [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+
         in the AWS integration billing page.'
       properties:
         source:
@@ -1965,17 +2241,21 @@ components:
       - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
       - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
     AWSNamespaceFiltersExcludeOnly:
-      description: 'Exclude only these namespaces from metrics collection. Defaults
-        to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
+      description: 'Exclude only these namespaces from metrics collection.
+
+        Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
 
         `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default
+
         to reduce your AWS CloudWatch costs from `GetMetricData` API calls.'
       properties:
         exclude_only:
-          description: 'Exclude only these namespaces from metrics collection. Defaults
-            to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
+          description: 'Exclude only these namespaces from metrics collection.
+
+            Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
 
             `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default
+
             to reduce your AWS CloudWatch costs from `GetMetricData` API calls.'
           example:
           - AWS/SQS
@@ -2006,15 +2286,18 @@ components:
       description: 'AWS Metrics Collection tag filters list. Defaults to `[]`.
 
         The array of custom AWS resource tags (in the form `key:value`) defines a
-        filter that Datadog uses when collecting metrics from a specified service.
+        filter that Datadog uses
+
+        when collecting metrics from a specified service.
 
         Wildcards, such as `?` (match a single character) and `*` (match multiple
-        characters), and exclusion using `!` before the tag are supported.
+        characters),
 
-        For EC2, only hosts that match one of the defined tags will be imported into
-        Datadog. The rest will be ignored.
+        and exclusion using `!` before the tag are supported.
 
-        For example, `env:production,instance-type:c?.*,!region:us-east-1`.'
+        For EC2, only hosts that match one of the defined tags are imported into Datadog.
+
+        The rest are ignored. For example, `env:production,instance-type:c?.*,!region:us-east-1`.'
       properties:
         namespace:
           description: The AWS service for which the tag filters defined in `tags`
@@ -2154,15 +2437,19 @@ components:
       description: AWS Resources Collection config.
       properties:
         cloud_security_posture_management_collection:
-          description: Enable Cloud Security Management to scan AWS resources for
-            vulnerabilities, misconfigurations, identity risks, and compliance violations.
-            Defaults to `false`. Requires `extended_collection` to be set to `true`.
+          description: 'Enable Cloud Security Management to scan AWS resources for
+            vulnerabilities, misconfigurations,
+
+            identity risks, and compliance violations. Defaults to `false`.
+
+            Requires `extended_collection` to be set to `true`.'
           example: false
           type: boolean
         extended_collection:
-          description: Whether Datadog collects additional attributes and configuration
-            information about the resources in your AWS account. Defaults to `true`.
-            Required for `cloud_security_posture_management_collection`.
+          description: 'Whether Datadog collects additional attributes and configuration
+            information about the resources
+
+            in your AWS account. Defaults to `true`. Required for `cloud_security_posture_management_collection`.'
           example: true
           type: boolean
       type: object
@@ -21625,6 +21912,207 @@ components:
       - ASSIGNEE
       - CASE
       - TEAM_OWNERS
+    GetMultipleRulesetsRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestData'
+      type: object
+    GetMultipleRulesetsRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsRequestDataAttributes:
+      properties:
+        include_testing_rules:
+          type: boolean
+        include_tests:
+          type: boolean
+        rulesets:
+          items:
+            type: string
+          type: array
+      type: object
+    GetMultipleRulesetsRequestDataType:
+      default: get_multiple_rulesets_request
+      description: Get multiple rulesets request resource type.
+      enum:
+      - get_multiple_rulesets_request
+      example: get_multiple_rulesets_request
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_REQUEST
+    GetMultipleRulesetsResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseData'
+      type: object
+    GetMultipleRulesetsResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributes:
+      properties:
+        rulesets:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItems'
+          type: array
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItems:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsData'
+        description:
+          type: string
+        name:
+          type: string
+        rules:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems'
+          type: array
+        short_description:
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsData:
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType:
+      default: rulesets
+      description: Rulesets resource type.
+      enum:
+      - rulesets
+      example: rulesets
+      type: string
+      x-enum-varnames:
+      - RULESETS
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems'
+          type: array
+        category:
+          type: string
+        checksum:
+          type: string
+        code:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        cve:
+          type: string
+        cwe:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData'
+        description:
+          type: string
+        documentation_url:
+          type: string
+        entity_checked:
+          type: string
+        is_published:
+          type: boolean
+        is_testing:
+          type: boolean
+        language:
+          type: string
+        last_updated_at:
+          format: date-time
+          type: string
+        last_updated_by:
+          type: string
+        name:
+          type: string
+        regex:
+          type: string
+        severity:
+          type: string
+        short_description:
+          type: string
+        should_use_ai_fix:
+          type: boolean
+        tests:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems'
+          type: array
+        tree_sitter_query:
+          type: string
+        type:
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData:
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType:
+      default: rules
+      description: Rules resource type.
+      enum:
+      - rules
+      example: rules
+      type: string
+      x-enum-varnames:
+      - RULES
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems:
+      properties:
+        annotation_count:
+          format: int64
+          maximum: 65535
+          minimum: 0
+          type: integer
+        code:
+          type: string
+        filename:
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataType:
+      default: get_multiple_rulesets_response
+      description: Get multiple rulesets response resource type.
+      enum:
+      - get_multiple_rulesets_response
+      example: get_multiple_rulesets_response
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_RESPONSE
     GetResourceEvaluationFiltersResponse:
       description: The definition of `GetResourceEvaluationFiltersResponse` object.
       properties:
@@ -43277,6 +43765,116 @@ components:
       - ISSUE_ASSIGNEE
       - ISSUE_CASE
       - ISSUE_TEAM_OWNERS
+    SecretRuleArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SecretRuleData'
+          type: array
+      required:
+      - data
+      type: object
+    SecretRuleData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecretRuleDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SecretRuleDataType'
+      required:
+      - type
+      type: object
+    SecretRuleDataAttributes:
+      properties:
+        default_included_keywords:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        license:
+          type: string
+        match_validation:
+          $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidation'
+        name:
+          type: string
+        pattern:
+          type: string
+        priority:
+          type: string
+        sds_id:
+          type: string
+        validators:
+          items:
+            type: string
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidation:
+      properties:
+        endpoint:
+          type: string
+        hosts:
+          items:
+            type: string
+          type: array
+        http_method:
+          type: string
+        invalid_http_status_code:
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems'
+          type: array
+        request_headers:
+          additionalProperties:
+            type: string
+          type: object
+        timeout_seconds:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        type:
+          type: string
+        valid_http_status_code:
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems'
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems:
+      properties:
+        end:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems:
+      properties:
+        end:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataType:
+      default: secret_rule
+      description: Secret rule resource type.
+      enum:
+      - secret_rule
+      example: secret_rule
+      type: string
+      x-enum-varnames:
+      - SECRET_RULE
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -44285,6 +44883,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -44292,6 +44892,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SecurityMonitoringSignalAssigneeUpdateAttributes:
       description: Attributes describing the new assignee of a security signal.
@@ -62370,8 +62972,12 @@ paths:
       description: "This endpoint allows you to publish events.\n\n**Note:** To utilize
         this endpoint with our client libraries, please ensure you are using the latest
         version released on or after July 1, 2025. Earlier versions do not support
-        this functionality.\n\n\u2705 **Only events with the `change` or `alert` category**
-        are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
+        this functionality.\n\n**Important:** Upgrade to the latest client library
+        version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`.
+        Older client library versions of the Post an event (v2) API send requests
+        to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n\u2705 **Only
+        events with the `change` or `alert` category** are in General Availability.
+        For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
         use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
         Notifications are not yet supported for events sent to this endpoint. Use
@@ -64047,8 +64653,9 @@ paths:
       description: Get a list of AWS Account Integration Configs.
       operationId: ListAWSAccounts
       parameters:
-      - description: Optional query parameter to filter accounts by AWS Account ID.
-          If not provided, all accounts are returned.
+      - description: 'Optional query parameter to filter accounts by AWS Account ID.
+
+          If not provided, all accounts are returned.'
         example: '123456789012'
         in: query
         name: aws_account_id
@@ -64219,6 +64826,99 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
+  /api/v2/integration/aws/event_bridge:
+    delete:
+      description: Delete an Amazon EventBridge source.
+      operationId: DeleteAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeDeleteRequest'
+        description: Delete the Amazon EventBridge source with the given name, region,
+          and associated AWS account.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeDeleteResponse'
+          description: Amazon EventBridge source deleted.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
+    get:
+      description: Get all Amazon EventBridge sources.
+      operationId: ListAWSEventBridgeSources
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeListResponse'
+          description: Amazon EventBridge sources list.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Amazon EventBridge sources
+      tags:
+      - AWS Integration
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
+    post:
+      description: Create an Amazon EventBridge source.
+      operationId: CreateAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeCreateRequest'
+        description: Create an Amazon EventBridge source for an AWS account with a
+          given name and region.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeCreateResponse'
+          description: Amazon EventBridge source created.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
   /api/v2/integration/aws/generate_new_external_id:
     post:
       description: Generate a new external ID for AWS role-based authentication.
@@ -72421,6 +73121,8 @@ paths:
 
         - On-Call Team Routing Rules: `on-call-team-routing-rules`
 
+        - Logs Pipelines: `logs-pipeline`
+
 
         #### Supported relations for resources
 
@@ -72470,7 +73172,9 @@ paths:
 
         On-Call Escalation Policies | `viewer`, `editor`
 
-        On-Call Team Routing Rules  | `viewer`, `editor`'
+        On-Call Team Routing Rules  | `viewer`, `editor`
+
+        Logs Pipelines              | `viewer`, `processors_editor`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -79155,6 +79859,59 @@ paths:
       tags:
       - Static Analysis
       x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/rulesets:
+    post:
+      description: Get rules for multiple rulesets in batch.
+      operationId: ListMultipleRulesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMultipleRulesetsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMultipleRulesetsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Ruleset get multiple
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/secrets/rules:
+    get:
+      description: Returns list of Secrets rules with ID, Pattern, Description, Priority,
+        and SDS ID
+      operationId: GetSecretsRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretRuleArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Returns list of Secrets rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
       x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
