@@ -44,7 +44,7 @@ To use NetFlow Monitoring with Network Device Monitoring, ensure you are using t
 
 To configure your devices to send NetFlow, jFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
 
-Edit your [`datadog.yaml`][3] Agent configuration file to enable NetFlow:
+1. Edit your [`datadog.yaml`][3] Agent configuration file to enable NetFlow:
 
 ```yaml
 network_devices:
@@ -63,9 +63,9 @@ network_devices:
     reverse_dns_enrichment_enabled: false
 ```
 
-After saving your changes, [restart the Agent][4].
+2. After saving your changes, [restart the Agent][4].
 
-**Note**: Ensure that your [firewall rules][9] allow incoming UDP traffic on the configured ports.
+   **Note**: Ensure that your [firewall rules][9] allow incoming UDP traffic on the configured ports.
 
 ## Aggregation
 
@@ -81,7 +81,7 @@ If the NetFlow exporter IP is one of the device IPs, but not the one configured 
 
 Datadog enriches IPs with public cloud provider service and region for IPv4 addresses, so you can filter for flow records from a specific service and region.
 
-{{< img src="network_device_monitoring/netflow/netflow_cloud_provider_enrichment.png" alt="Netflow Filter menu displaying cloud provider name, region, and service" width="30%" >}}
+{{< img src="network_device_monitoring/netflow/netflow_cloud_provider_enrichment_2.png" alt="Netflow Filter menu displaying cloud provider name, region, and service" width="100%" >}}
 
 ### Port enrichment
 
@@ -119,7 +119,11 @@ You can visualize the flows in NetFlow Monitoring by clicking on the **Flows** m
 
 {{< img src="network_device_monitoring/netflow/flows.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
 
-When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
+## NetFlow monitor
+
+Click on the **Create Monitor** icon from any of the views to create a [NetFlow monitor][6]. When creating the monitor, consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
+
+{{< img src="network_device_monitoring/netflow/create_monitor.png" alt="Flows view in NetFlow monitoring with the create monitor link highlighted." width="100%" >}}
 
 ### Interface information
 
