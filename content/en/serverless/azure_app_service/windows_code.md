@@ -73,7 +73,7 @@ If you haven't already, set up the [Datadog-Azure integration][3]. You can verif
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
-The [Datadog Terraform module for Windows Web Apps][3] wraps the [azurerm_windows_web_app][4] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the Windows Web App extension for your runtime.
+The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the Windows Web App extension for your runtime.
 
 If you don't already have Terraform set up, [install Terraform][1], create a new directory, and make a file called `main.tf`.
 
@@ -126,7 +126,7 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Windows Web App module][2] only deploys the Web App resource and extension, so you need to [deploy your code][2] separately.
+The [Datadog Windows Web App module][2] only deploys the Web App resource and extension, so you need to [deploy your code][3] separately.
 
 [1]: https://developer.hashicorp.com/terraform/install
 [2]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
@@ -149,11 +149,11 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 
    `DD_SITE`
    : **Value**: Your Datadog site<br>
-   Your [Datadog site][2]. Defaults to `datadoghq.com`.<br>
+   Your [Datadog site][3]. Defaults to `datadoghq.com`.<br>
 
    **Unified Service Tagging**
 
-   Datadog recommends tagging your application with the `env`, `service`, and `version` tags for [unified service tagging][3].
+   Datadog recommends tagging your application with the `env`, `service`, and `version` tags for [unified service tagging][4].
 
    `DD_SERVICE`
    : **Value**: Your application's service name.<br>
@@ -558,7 +558,7 @@ Still need help? Contact [Datadog support][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /metrics/
+[2]: /metrics/custom_metrics/
 [3]: /integrations/azure/
 [4]: /help
 [5]: https://app.datadoghq.com/integrations/azure
