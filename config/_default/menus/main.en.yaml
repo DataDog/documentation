@@ -4920,6 +4920,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 40202
+    - name: Compatibility
+      url: llm_observability/evaluations/evaluation_compatibility
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_compatibility
+      weight: 403
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs
