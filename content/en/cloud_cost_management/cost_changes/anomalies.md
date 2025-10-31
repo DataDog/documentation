@@ -1,10 +1,12 @@
 ---
 title: Anomalies Page
+aliases:
+- /cloud_cost_management/reporting/anomalies
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/monitors"
+- link: "/cloud_cost_management/cost_changes/monitors"
   tag: "Monitors"
   text: "Create Cost Monitors"
 ---
