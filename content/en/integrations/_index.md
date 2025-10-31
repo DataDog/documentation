@@ -163,6 +163,11 @@ cascade:
     lang: en
   aliases:
     - /integrations/amazon_event_bridge
+- _target:
+    path: /integrations/
+    lang: en
+  aliases:
+    - /integrations/open-policy-agent
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
