@@ -20,27 +20,33 @@ description: Learn how to develop and publish a Datadog Agent integration.
 ---
 ## Overview
 
-This page guides Technology Partners through creating an official Datadog agent integration. Agent integrations are best suited for collecting telemetry from software or systems that run on customer-managed infrastructure, where the Datadog Agent can be installed.
+This page guides Technology Partners through the process of creating an official Datadog Agent integration. 
 
-An Agent-based integration uses the [Datadog Agent][1] to submit data through custom agent checks written by approved Technolgoy Partners. These checks can emit [metrics][2], [events][3], [service checks][4], and [logs][5] into a customer's Datadog account. Agent-based integrations are published as a Python packages that easily allows customers to [install][6] via the Datadog Agent.
+Agent-based integrations are designed to collect telemetry from software or systems running on customer-managed infrastructure, where the Datadog Agent is installed or has network access. These integrations use the [Datadog Agent][1] to collect and submit data through custom agent checks developed by approved Technology Partners. 
+
+Agent checks can emit [metrics][2], [events][3], [service checks][4], and [logs][5] into a customer's Datadog account. Each agent-based integration is as a Python package, allowing customers to easily [install][6] it through the Datadog Agent.
 
 ## Building an agent-based integration
-These steps assume you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][8].
+Before you being, ensure that you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][8].
+
+Follow these steps to create your agent-based integration:
 
 1. [Install the required development tools](#preqrequisites).
 2. [Configure the Datadog Agent integration developer tool](#configure-the-datadog-agent-integration-developer-tool).
-3. [Create the scaffolding for your integration](#create-the-scaffolding).
-4. [Write your agent check](#write-your-agent-check).
-5. [Test your agent check](#test-your-agent-check).
-6. [Submit your code for review](#submit-your-code-for-review).
+3. [Generate your integration scaffolding](#generate-your-scaffolding).
+4. [Develop your agent check](#develop-your-agent-check).
+5. [Test your integration](#test-your-agent-check).
+6. [Submit your code for review](#submit-your-code).
 
 ### Preqrequisites
 
-- Python v3.12 installed.
-- [pipx][9] to install the development tooling and dependencies.
-- [Datadog Agent Integration Developer Tool][10] (`ddev`) to create the necessary scaffolding.
-- [Docker][11] to run the full test suite.
-- Git ([command line][12] or [GitHub Desktop client][13]).
+You'll need the following tools installed:
+
+- Python v3.12
+- [pipx][9] for installing development tooling and dependencies
+- [Datadog Agent Integration Developer Tool][10] (`ddev`) to generate scaffolding and manage integration development
+- [Docker][11] to run the full test suite
+- Git ([command line][12] or [GitHub Desktop client][13])
 
 ### Configure the Datadog Agent integration developer tool
 Use the Datadog Agent developer tool (ddev) to build and test your integration. The setup steps differ depending on whether you’re developing an [out-of-the-box (OOTB) integration or a Marketplace integration][23]. Select the appropriate tab below.
@@ -119,44 +125,53 @@ Use the Datadog Agent developer tool (ddev) to build and test your integration. 
 
 {{< /tabs >}}
 
-### Create the scaffolding
+### Generate your scaffolding
 
-Use the `ddev create` command to generate the basic file and directory structure for an agent-based integration.
+Use the `ddev create` command to generate the initial file and directory structure for your agent-based integration.
 
-1. Test the setup first with a dry run (`-n` or `--dry-run`), which shows the paths and structure without writing to disk. Verify the output path matches the expected repository.
+1. **Run a dry run (recommended)**
+    Use the `-n` or `--dry-run` flag to preview the files that will be created, without writing anything to disk. Confirm that the output path matches the expected repository location.
+    ```shell
+    ddev create -nt check_only <YOUR_INTEGRATION_NAME> --skip-manifest
+    ```
 
-   ```shell
-   ddev create -nt check_only <YOUR_INTEGRATION_NAME> --skip-manifest
-   ```
+2. **Generate the files** 
+    Once verified, run the same command without the `-n` to create the scaffolding. The tool will prompt you for integration details.
+    ```shell
+    ddev create -t check_only <YOUR_INTEGRATION_NAME> --skip-manifest
+    ```
 
-2. When ready, run the command without `-n` to create the files. The tool will prompt you for integration details.
+### Develop your agent check
 
-   ```shell
-   ddev create -t check_only <YOUR_INTEGRATION_NAME> --skip-manifest
-   ```
+Each agent-based integration centers around an agent check, a Python class that periodically collects telemetry and submits it to Datadog.
 
-### Write your agent check
+Agent [checks][16] inherit from the the `AgentCheck` base class and must meet the following requirements:
 
-At the core of each Agent-based integration is an *Agent Check* that periodically collects information and sends it to Datadog.
-
-[Checks][16] inherit their logic from the `AgentCheck` base class and have the following requirements:
-
-- Integrations running on the Datadog Agent v7 or later must be compatible with Python 3. Integrations running on the Datadog Agent v5 and v6 still use Python 2.7.
-- Checks must derive from `AgentCheck`.
-- Checks must provide a method with this signature: `check(self, instance)`.
-- Checks are organized in regular Python packages under the `datadog_checks` namespace. For example, the code for Awesome lives in the `awesome/datadog_checks/awesome/` directory.
-- The name of the package must be the same as the check name.
-- There are no restrictions on the name of the Python modules within that package, nor on the name of the class implementing the check.
+- **Python compatibility**:
+    - Integrations for Datadog Agent v7+ must support Python 3. 
+    - Integrations for Datadog Agent v5-v6 use Python 2.7.
+- **Class inheritance**: Each check must subclass `AgentCheck`.
+- **Entry point**: Each check must implement a `check(self, instance)` method.
+- **Package structure**: Checks are organized under the `datadog_checks` namespace. For example, an integration named <INTEGRATION_NAME> lives in: `<integration_name>/datadog_checks/<integration_name>/`.
+- **Naming**:
+    - The package name must match the check name.
+    - Python module and class names within the package can be freely chosen.
 
 #### Implement check logic
 
-The following example is for an integration named `Awesome`.
+The following example shows a simple integration named `Awesome`.
 
-The Agent Check is composed of a [service check][4] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible.
+This check defines a [service check][4] called `awesome.search`, which searches a webpage for a specific string:
+    - Returns `OK` if the string is found.
+    - Returns `WARNING` if the page loads but the string is missing.
+    - Returns `CRITICAL` if the page cannot be reached.
 
-To learn how to submit metrics with your Agent Check, see [Custom Agent Check][17]. To learn how to submit logs from your Agent Check, see [Agent Integration Log Collection][5].
+To learn how to submit additional data from your check, see:
+    - [Custom Agent Check][17] for submitting metrics.
+    - [Agent Integration Log Collection][5] for collecting logs from your AgentCheck using `send_log`. Best for simple, single-source log emission.
+    - [HTTP Crawler Tutorial][24] for collecting logs from multiple log sources, such as when pollin several endpoints or external HTTP APIs.
 
-The code contained within `awesome/datadog_checks/awesome/check.py` looks something like this:
+The file `awesome/datadog_checks/awesome/check.py` might look like this:
 
 {{< code-block lang="python" filename="check.py" collapsible="true" >}}
 
@@ -352,7 +367,6 @@ To speed up development, use the `-m/--marker` option to run integration tests o
    ```
    ddev test -m integration awesome
    ```
-Your integration is almost complete. Return to the Developer Platform in your sandbox to finalize your submission. 
 
 ## Test your agent check
 
@@ -360,9 +374,9 @@ Agent-based integrations are distributed as Python wheel (.whl) files that custo
 
 ### Build the wheel
 
-The `pyproject.toml` file provides the metadata that is used to package and build the wheel. The wheel contains the files necessary for the functioning of the integration itself, which includes the Agent Check, configuration example file, and artifacts generated during the wheel build.
+The `pyproject.toml` file provides the metadata that is used to package and build the wheel. The wheel contains the files necessary for the functioning of the integration itself, which includes the agent check, configuration example file, and artifacts generated during the wheel build.
 
-All additional elements, including the metadata files, are not meant to be contained within the wheel, and are used elsewhere by the Datadog platform and ecosystem.
+All additional elements, including the metadata files, are not meant to be contained within the wheel, and are used elsewhere by the Datadog.
 
 To learn more about Python packaging, see [Packaging Python Projects][21].
 
@@ -413,41 +427,41 @@ For customer install commands for both host and container environments, see the 
 
 ## Submit your code for review
 
-Open a pull request with your integration directory in the approriate repo, either [Datadog/integrations-extras][14] or [Datadog/marketplace][15]. The pull request will be review in parrallel with your Developer Platform submission.
+Open a pull request with your integration directory in the approriate repo, either [Datadog/integrations-extras][14] or [Datadog/marketplace][15]. The pull request will be reviewed in parrallel with your Developer Platform submission.
 
 ## Updating your integration
-* If you are editing or adding new integration code, a version bump is required.
 
-* If you are editing or adding new README content, manifest information, or assets such as dashboards and monitor templates, a version bump is not needed.
+After your integration is published, you can release updates through the Developer Platform.
 
 ### Bumping an integration version
-In addition to any code changes, the following is required when bumping an integration version:
-1. Update `__about__.py` to reflect the new version number. This file can be found in your integration's directory under `/datadog_checks/<your_check_name>/__about__.py`.
-2. Add an entry to the **Release Notes** in the Developer Platform that adheres to the following format:
-   ```
-   ## Version Number / Date in YYYY-MM-DD
+You’ll need to bump the version number whenever you add, remove, or modify functionality (for example, when introducing new metrics, updating dashboards, or changing integration code). A version bump isn’t required for non-functional updates, such as changes to written content, branding, logos, or images.
 
-   ***Added***:
+In Developer Platform, include a new entry in the **Release Notes** tab following this format:
+    ```
+    ## Version Number / Date (YYYY-MM-DD)
 
-   * New feature
-   * New feature
+    ***Added***:
 
-   ***Fixed***:
+    * Description of new feature
+    * Description of new feature
 
-   * Bug fix
-   * Bug fix
+    ***Fixed***:
 
-   ***Changed***:
+    * Description of fix
+    * Description of fix
 
-   * Feature update
-   * Feature update
+    ***Changed***:
 
-   ***Removed***:
+    * Description of update or improvement
+    * Description of update or improvement
 
-   * Feature removal
-   * Feature removal
-   ```
-3. Update all references to the version number mentioned in installation instructions and elsewhere. Installation instructions often include the version number, which needs to be updated.
+    ***Removed***:
+
+    * Description of removed feature
+    * Description of removed feature
+    ```
+
+Make sure to update all references to the version number across the integration's documentation and installation instructions.
 
 ## Further reading
 
@@ -476,3 +490,4 @@ In addition to any code changes, the following is required when bumping an integ
 [21]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [22]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
 [23]: https://docs.datadoghq.com/developers/integrations/?tab=integrations#out-of-the-box-integrations-vs-marketplace-offerings
+[24]: https://datadoghq.dev/integrations-core/tutorials/logs/http-crawler/
