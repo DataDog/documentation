@@ -14,43 +14,43 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 {{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
 
-Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically detect, diagnose, and fix high-impact issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
+Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
 ## Supported Datadog products
 
 Bits AI Dev Agent is available for the following Datadog products:
 
-| Product                   | Availability          | Issues Detected                                                    |
+| Product                   | Availability         | Capabilities                                                       |
 |---------------------------|----------------------|--------------------------------------------------------------------|
-| [Error Tracking][1]       | Preview              | Crashes, panics, exceptions, unhandled errors                      |
-| [Code Security][2]        | Preview              | Security issues in first-party code and open source dependencies   |
-| [Continuous Profiler][3]  | Preview              | Code-level performance issues                                      |
-| [Test Optimization][4]    | Preview              | Flaky tests                                                        |
-
-## Key capabilities
-
-Bits AI Dev Agent provides comprehensive code remediation across multiple areas of your development workflow:
+| [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
+| [Trace Explorer][11]      | Preview              | Analyzes traces and provides remediations for errors and latency bottlenecks |
+| [Code Security][2]        | Preview              | Single and bulk remediation of code vulnerabilities    |
+| [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests won't flake again.                                                         |
+| [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
+| [Containers][12  ]        | Preview              | Provides code changes for Container Recommendations                  |
 
 ### Error tracking
 
-Bits AI Dev Agent diagnoses and remediates code issues with automated context and unit-tested fixes:
+Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tested fixes:
 - Determines whether an error can be fixed through code and generates unit tests.
 - Provides links to relevant files and methods for streamlined navigation.
 - Analyzes errors asynchronously as they arrive.
 - Marks errors with a **Fix available** status and enables filtering to surface those issues.
 
-### Flaky test remediation
+## Test optimization: Flaky test management 
 
-Bits AI Dev Agent fixes unreliable tests in CI/CD pipelines and verifies that the tests remain stable.
+Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Management in Test Optimization and attempts to  verifies that tests remain stable.
+
+Auto-Push is available for this feature. 
 
 ### Trace investigation
 
 Bits AI Dev Agent debugs errors and latency directly from traces using natural language queries:
-- Parses and summarizes large traces.
-- Diagnoses likely root causes.
-- Generates code fixes for errors or latency issues within a trace.
+- Analyzes and summarizes large traces.
+- Determines likely root causes for errors and latency.
+- Generates code fixes when prompted.
 
-### Code fix generation 
+## Product recommendations
 
 Bits AI Dev Agent applies automated code changes based on Datadog insights such as CCM Recommendations, APM Recommendations, and Profiling Insights.
 
@@ -62,14 +62,14 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 
 ### Pull request assistance
 
-Bits AI Dev Agent works in GitHub to request changes, fix CI failures, and respond to review comments:
+Bits AI Dev Agent integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
 
 - Generates PR titles and descriptions based on your PR template.
 - Opens PRs as drafts, iterates using CI logs, and marks them ready for review when checks pass.
 - Continues iterating in response to chat messages and review feedback.
-  **Note**: Comment `@Datadog` to ask for updates to the PR. The Dev Agent never auto-merges PRs.
+  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev will never auto-merge PRs.
 
-Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search by service, source, and status.
+Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
 
 Learn more about [PR automation and CI iteration][9].
 
@@ -89,7 +89,7 @@ For full installation and configuration instructions, see [Setup][6].
 
 ## Limitations
 
-- Bits AI Dev Agent is an AI-based product, which means outputs may vary for the same input and sometimes require human review. 
+- Bits Dev is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
 - Bits AI Dev Agent does not support multi-repository investigations.
 
 ## Security considerations
@@ -111,3 +111,6 @@ Datadog applies automated security and quality checks on agent output, but safeg
 [7]: https://app.datadoghq.com/code?tab=my-sessions
 [8]: /bits_ai/bits_ai_sre/
 [9]: /bits_ai/bits_ai_dev_agent/pr_automation_and_ci_repair/
+[10]: /profiler/automated_analysis/
+[11]: /tracing/trace_explorer/
+[12]: /containers/
