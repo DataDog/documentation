@@ -149,7 +149,7 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 If your device is exposing topology data with LLDP or CDP but some of the connections are missing, ensure that the **Unmonitored Device** toggle is off.
 If you are using tags to filter nodes on the map, ensure the "Show one hop away on filter" toggle is on to see the connected nodes.
 
-### Un-monitored devices showing on map
+### Unmonitored devices showing on map
 
 The Device Topology Map shows all devices discovered with LLDP or CDP. These can be new devices that are not already monitored with SNMP or existing devices that were not [resolved](#device-resolution) to the equivalent monitored device.
 You can use the **Unmonitored Device** toggle to hide these nodes.
