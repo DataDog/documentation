@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a Python Cloud Run Container In-Container
+title: Instrumenting a Python Cloud Run Job
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/python
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/'
     tag: 'Documentation'
@@ -16,7 +14,12 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/python">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/python">available on GitHub</a>.</div>
+<div class="alert alert-info">
+For full visibility and access to all Datadog features in Cloud Run Jobs,
+ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+and are using <a href="https://hub.docker.com/r/datadog/serverless-init#180">serverless-init version 1.8.0 or later</a>.
+</div>
 
 1. **Install the Datadog Python tracer**.
 
@@ -35,7 +38,9 @@ RUN pip install ddtrace
 CMD ["ddtrace-run", "python", "app.py"]
 {{< /code-block >}}
 
-   For more information, see [Tracing Python applications][2].
+   **Note**: Cloud Run Jobs run to completion rather than serving requests, so auto instrumentation won't create a top-level "job" span. For end-to-end visibility, create your own root span. See the [Python Custom Instrumentation][2] instructions.
+
+   For more information, see [Tracing Python applications][3].
 
 2. **Install serverless-init**.
 
@@ -72,7 +77,7 @@ logger = structlog.get_logger()
 logger.info("Hello world!")
 {{< /code-block >}}
 
-   For more information, see [Correlating Python Logs and Traces][3].
+   For more information, see [Correlating Python Logs and Traces][4].
 
 4. **Configure your application**.
 
@@ -82,7 +87,7 @@ logger.info("Hello world!")
 
 6. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars-in-container language="python" %}}
 
@@ -95,7 +100,9 @@ logger.info("Hello world!")
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pypi.org/project/ddtrace/
-[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
-[3]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+[2]: /tracing/trace_collection/custom_instrumentation/python/dd-api?tab=decorator
+[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[4]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[5]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+

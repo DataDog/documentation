@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a Node.js Cloud Run Container In-Container
+title: Instrumenting a Node.js Cloud Run Job
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/nodejs
 further_reading:
 - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/'
   tag: 'Documentation'
@@ -16,7 +14,12 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/node">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/node">available on GitHub</a>.</div>
+<div class="alert alert-info">
+For full visibility and access to all Datadog features in Cloud Run Jobs,
+ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+and are using <a href="https://hub.docker.com/r/datadog/serverless-init#180">serverless-init version 1.8.0 or later</a>.
+</div>
 
 1. **Install the Datadog Node.js tracer**.
 
@@ -38,7 +41,9 @@ const tracer = require('dd-trace').init({
 ENV NODE_OPTIONS="--require dd-trace/init"
 {{< /code-block >}}
 
-   For more information, see [Tracing Node.js applications][1].
+   **Note**: Cloud Run Jobs run to completion rather than serving requests, so auto instrumentation won't create a top-level "job" span. For end-to-end visibility, create your own root span. See the [Node.js Custom Instrumentation][1] instructions.
+
+   For more information, see [Tracing Node.js applications][2].
 
 2. **Install serverless-init**.
 
@@ -69,7 +74,7 @@ const logger = createLogger({
 logger.info('Hello world!');
 {{< /code-block >}}
 
-   For more information, see [Correlating Node.js Logs and Traces][2].
+   For more information, see [Correlating Node.js Logs and Traces][3].
 
 4. **Configure your application**.
 
@@ -79,7 +84,7 @@ logger.info('Hello world!');
 
 6. **Send custom metrics**.
 
-   To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars-in-container language="nodejs" %}}
 
@@ -91,6 +96,7 @@ logger.info('Hello world!');
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
-[2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api?tab=locally#creating-spans
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5

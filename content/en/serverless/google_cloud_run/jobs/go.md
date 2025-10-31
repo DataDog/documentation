@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a Go Cloud Run Container In-Container
+title: Instrumenting a Go Cloud Run Job
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/go
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/go/'
     tag: 'Documentation'
@@ -16,7 +14,12 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/go">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/go">available on GitHub</a>.</div>
+<div class="alert alert-info">
+For full visibility and access to all Datadog features in Cloud Run Jobs,
+ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+and are using <a href="https://hub.docker.com/r/datadog/serverless-init#180">serverless-init version 1.8.0 or later</a>.
+</div>
 
 1. **Install the Datadog Go tracer**.
 
@@ -41,7 +44,9 @@ go get github.com/DataDog/dd-trace-go/v2/profiler
 go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 {{< /code-block >}}
 
-   For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
+   **Note**: Cloud Run Jobs run to completion rather than serving requests, so auto instrumentation won't create a top-level "job" span. For end-to-end visibility, create your own root span. See the [Go Custom Instrumentation][1] instructions.
+
+   For more information, see [Tracing Go Applications][2] and the [Tracer README][3].
 
 2. **Install serverless-init**.
 
@@ -61,7 +66,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
    logrus.WithContext(ctx).Info("Hello World!")
    ```
 
-   For more information, see [Correlating Go Logs and Traces][3].
+   For more information, see [Correlating Go Logs and Traces][4].
 
 4. **Configure your application**.
 
@@ -71,7 +76,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 6. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars-in-container language="go" %}}
 
@@ -83,9 +88,9 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
-[2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
-[3]: /tracing/other_telemetry/connect_logs_and_traces/go/
-[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5
-
+[1]: /tracing/trace_collection/custom_instrumentation/go/dd-api#manually-creating-a-span
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
+[3]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
+[4]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[5]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5
