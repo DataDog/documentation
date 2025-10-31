@@ -597,8 +597,8 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 PR comments are automated bot comments left by Datadog's [source code management integrations][10] to inform developers of issues Datadog has detected in their code changes and in certain cases, suggest remediation. 
 
 PR Comments will automatically limit its output to a maximum of 31 unique comments per PR at any given time to reduce noise and clutter. These comments include:
-* A single Summary comment will always be posted. This comment will be edited by Datadog as new commits pushed to the PR change the results.
-* Up to 30 inline comments will be posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the diff of the PR, the 30 highest severity violations will be posted.
+* A single Summary comment will always be posted to give a high-level view of all the issues Datadog detected in the PR in question. This comment will be edited by Datadog as new commits pushed to the PR change the results.
+* When applicable, up to 30 inline comments will be posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the diff of the PR, the 30 highest severity violations will be posted.
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
