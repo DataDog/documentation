@@ -1,5 +1,5 @@
 ---
-title: Traces
+title: Node.js OpenTelemetry Traces API Support
 code_lang: traces
 type: multi-code-lang
 code_lang_weight: 0
