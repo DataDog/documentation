@@ -47,7 +47,7 @@ Navigate to [**Infrastructure > Hosts**][3] in the app to get started. To learn 
 
 ## Host and container maps
 
-{{< img src="getting_started/application/host_map_2025.png" alt="Host Map Overview" >}}
+{{< img src="getting_started/application/host_map_2025.png" alt="Host Map Overview grouping by availability-zone." >}}
 
 [Host and container maps][4] give you a visual overview of all your hosts and containers, color-coding them by key metrics like CPU usage so you can spot issues.
 
@@ -100,7 +100,7 @@ Navigate to the [RUM explorer][13] in the app to get started. To learn more, rea
 
 ## Synthetic Monitoring
 
-Datadog [Synthetic Monitoring][14] allows you to create and run API, browser, and mobile tests that proactively simulate user transactions on your applications. These tests monitor all internal and external network endpoints across your system's layers. 
+Datadog [Synthetic Monitoring][14] allows you to create and run API, browser, mobile, and Network Path tests that proactively monitor simulated requests and actions from around the globe. These tests monitor your applications and APIs to detect performance issues and downtime before they impact users.
 
 **Key capabilities**:
 
