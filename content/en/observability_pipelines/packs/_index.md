@@ -44,27 +44,47 @@ To set up packs:
 
 These are the available packs:
 
-- Akamai CDN
-- AWS CloudFront
-- AWS CloudTrail
-- Amazon VPC Flow Logs
-- Cisco ASA
-- Cloudflare
-- F5
-- Fastly
-- Fortinet Firewall
-- HAProxy Ingress
-- Istio Proxy
-- Netskope
-- NGINX
-- Okta
-- Palo Alto Firewall
-- Windows XML
-- ZScaler ZIA DNS
-- Zscaler ZIA Firewall
-- Zscaler ZIA Tunnel
-- Zscaler ZIA Web Logs
+- [Akamai CDN][4]
+- [AWS CloudFront][5]
+- [AWS CloudTrail][6]
+- [Amazon VPC Flow Logs][7]
+- [Cisco ASA][8]
+- [Cloudflare][9]
+- [F5][10]
+- [Fastly][11]
+- [Fortinet Firewall][12]
+- [HAProxy Ingress][13]
+- [Istio Proxy][14]
+- [Netskope][15]
+- [NGINX][16]
+- [Okta][17]
+- [Palo Alto Firewall][18]
+- [Windows XML][19]
+- [ZScaler ZIA DNS][20]
+- [Zscaler ZIA Firewall][21]
+- [Zscaler ZIA Tunnel][22]
+- [Zscaler ZIA Web Logs][23]
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/set_up_pipelines/
+[4]: /observability_pipelines/packs/akamai_cdn/
+[5]: /observability_pipelines/packs/amazon_cloudfront/
+[6]: /observability_pipelines/packs/aws_cloudtrail/
+[7]: /observability_pipelines/packs/amazon_vpc_flow_logs/
+[8]: /observability_pipelines/packs/cisco_asa/
+[9]: /observability_pipelines/packs/cloudflare/
+[10]: /observability_pipelines/packs/f5/
+[11]: /observability_pipelines/packs/fastly/
+[12]: /observability_pipelines/packs/fortinet_firewall/
+[13]: /observability_pipelines/packs/haproxy_ingress/
+[14]: /observability_pipelines/packs/istio_proxy/
+[15]: /observability_pipelines/packs/netskope/
+[16]: /observability_pipelines/packs/nginx/
+[17]: /observability_pipelines/packs/okta/
+[18]: /observability_pipelines/packs/palo_alto_firewall/
+[19]: /observability_pipelines/packs/windows_xml/
+[20]: /observability_pipelines/packs/zscaler_zia_dns/
+[21]: /observability_pipelines/packs/zscaler_zia_firewall/
+[22]: /observability_pipelines/packs/zscaler_zia_tunnel/
+[23]: /observability_pipelines/packs/zscaler_zia_web_logs/
