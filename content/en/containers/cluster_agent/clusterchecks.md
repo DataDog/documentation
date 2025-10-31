@@ -304,10 +304,10 @@ After you set up an externally hosted database, such as CloudSQL or RDS, and a c
 cluster_check: true
 init_config:
 instances:
-    - server: "<PRIVATE_IP_ADDRESS>"
-      port: 3306
-      user: datadog
-      pass: "<YOUR_CHOSEN_PASSWORD>"
+  - server: "<PRIVATE_IP_ADDRESS>"
+    port: 3306
+    user: datadog
+    password: "<YOUR_CHOSEN_PASSWORD>"
 ```
 
 #### Example: HTTP_Check on an external URL
@@ -318,8 +318,8 @@ If there is a URL you would like to perform an [HTTP check][10] against once per
 cluster_check: true
 init_config:
 instances:
-    - name: "<EXAMPLE_NAME>"
-      url: "<EXAMPLE_URL>"
+  - name: "<EXAMPLE_NAME>"
+    url: "<EXAMPLE_URL>"
 ```
 
 #### Example: HTTP_Check on a Kubernetes service
@@ -409,40 +409,41 @@ ad.datadoghq.com/service.checks: |
 
 This syntax supports a `%%host%%` [template variable][11], which is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
+For v2, if your `init_config` is the empty `{}` you can omit it entirely.
+
 #### Example: HTTP check on an NGINX-backed service
 
-The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following service definition exposes the Pods from a Nginx deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-    name: my-nginx
-    labels:
-        run: my-nginx
-        tags.datadoghq.com/env: "prod"
-        tags.datadoghq.com/service: "my-nginx"
-        tags.datadoghq.com/version: "1.19.0"
-    annotations:
-      ad.datadoghq.com/service.checks: |
-        {
-          "http_check": {
-            "init_config": {},
-            "instances": [
-              {
-                "url":"http://%%host%%",
-                "name":"My Nginx",
-                "timeout":1
-              }
-            ]
-          }
+  name: my-nginx
+  labels:
+    app: nginx
+    tags.datadoghq.com/env: "prod"
+    tags.datadoghq.com/service: "my-nginx"
+    tags.datadoghq.com/version: "1.19.0"
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      {
+        "http_check": {
+          "instances": [
+            {
+              "url":"http://%%host%%",
+              "name":"My Nginx",
+              "timeout":1
+            }
+          ]
         }
+      }
 spec:
-    ports:
-        - port: 80
-          protocol: TCP
-    selector:
-        run: my-nginx
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: nginx
 ```
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
@@ -467,35 +468,35 @@ This syntax supports a `%%host%%` [template variable][11], which is replaced by 
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following service definition exposes the Pods from a Nginx deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-    name: my-nginx
-    labels:
-        run: my-nginx
-        tags.datadoghq.com/env: "prod"
-        tags.datadoghq.com/service: "my-nginx"
-        tags.datadoghq.com/version: "1.19.0"
-    annotations:
-        ad.datadoghq.com/service.check_names: '["http_check"]'
-        ad.datadoghq.com/service.init_configs: '[{}]'
-        ad.datadoghq.com/service.instances: |
-            [
-              {
-                "name": "My Nginx",
-                "url": "http://%%host%%",
-                "timeout": 1
-              }
-            ]
+  name: my-nginx
+  labels:
+    app: nginx
+    tags.datadoghq.com/env: "prod"
+    tags.datadoghq.com/service: "my-nginx"
+    tags.datadoghq.com/version: "1.19.0"
+  annotations:
+    ad.datadoghq.com/service.check_names: '["http_check"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
+      [
+        {
+          "name": "My Nginx",
+          "url": "http://%%host%%",
+          "timeout": 1
+        }
+      ]
 spec:
-    ports:
-        - port: 80
-          protocol: TCP
-    selector:
-        run: my-nginx
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: nginx
 ```
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
