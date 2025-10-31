@@ -11,29 +11,61 @@ further_reading:
 
 ## Overview
 
-Datadog's Network Device Monitoring (NDM) leverages Syslog to provide comprehensive visibility into the health and performance of your network infrastructure. By integrating your network devices with Datadog via Syslog, you can collect and analyze critical log data, gain insights into device behavior, troubleshoot issues, and ensure the overall stability of your network.
+Network Device Monitoring (NDM) uses Syslog to provide visibility into the health and performance of your network infrastructure. By integrating your network devices with Datadog through Syslog, you can collect and analyze log data, monitor device behavior, troubleshoot issues, and maintain network stability.
 
-This documentation page outlines how to configure your network devices to send Syslog data to Datadog and how to effectively utilize this data within the NDM product.
+This page outlines how to configure your network devices to send Syslog data to Datadog and how to use this data within NDM.
+
+{{< img src="network_device_monitoring/syslog/ndm_syslog.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+* Datadog Agent version 7.57 or later installed and running on a host that can receive Syslog messages from your network devices.
+* Network devices configured to send [Syslog messages][1] either directly to the Datadog Agent or through a proxy that forwards messages to the Datadog Agent.
 
-* **Datadog Agent (7.57+) installed and running** on a host that can receive Syslog messages from your network devices.  
-* **Network devices configured** to send Syslog messages either directly to the Datadog Agent or via a proxy which then forwards to the Datadog Agent.
+## Configuration
 
-## Configuration Steps
+{{< tabs >}}
+{{% tab "Linux" %}}
 
-### Configure the Datadog Agent for Syslog Collection
+1. Ensure the following settings are enabled in your `/etc/datadog-agent/datadog.yaml` file:
 
-To enable Syslog collection, you need to modify the Datadog Agent's configuration files.
+   ```yaml
+   logs_enabled: true # enable logs collection
+   logs_config:
+     use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
+   ```
 
-1. **Modify `datadog.yaml`:**  
-   * Locate your main `datadog.yaml` configuration file.  
-     * **Linux:** `/etc/datadog-agent/datadog.yaml`  
-     * **Windows:** `C:\ProgramData\Datadog\datadog.yaml`  
-     * **Docker:** In your Docker volume for `/etc/datadog-agent/datadog.yaml`  
-   * Ensure the following settings are enabled:
+2. Create a Syslog listener configuration:
+
+   - In `/etc/datadog-agent/conf.d/`, create a directory called `syslog.d/`.
+   - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
+
+   ```yaml
+   logs:
+     - type: syslog
+       port: 514
+       protocol: udp
+       source: syslog
+       service: <service> # optional tag
+   ```
+
+   * **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
+   * **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+   * **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
+   * **`service`**: Optional service name for unified service tagging.
+
+3. [Restart the Datadog Agent][101] to apply the changes.
+
+   ```
+   sudo systemctl restart datadog-agent
+   ``` 
+
+[101]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+1. Ensure the following settings are enabled in your `C:\ProgramData\Datadog\datadog.yaml` file:
 
 ```
 logs_enabled: true # enable logs collection
@@ -41,32 +73,78 @@ logs_config:
   use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
 ```
 
-2. **Create a Syslog listener configuration:**  
-   * Navigate to the Agent's configuration directory:  
-     * **Linux:** `/etc/datadog-agent/conf.d/`  
-     * **Windows:** `C:\ProgramData\Datadog\conf.d\`  
-     * **Docker:** Mount a volume to `/conf.d/`  
-   * Create a new directory `syslog.d/` inside `conf.d/`.  
-   * Inside `syslog.d/`, create a file named `conf.yaml` with the following content:
+2. Create a Syslog listener configuration:
 
-```
-logs:
-  - type: syslog
-    port: 514
-    protocol: udp
-    source: syslog
-    service: <service> # optional tag
+   - In `C:\ProgramData\Datadog\conf.d\`, create a directory called `syslog.d/`.
+   - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
+
+   ```yaml
+   logs:
+     - type: syslog
+       port: 514
+       protocol: udp
+       source: syslog
+       service: <service> # optional tag
+   ```
+
+   * **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
+   * **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+   * **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
+   * **`service`**: Optional service name for unified service tagging.
+
+3. [Restart the Datadog Agent][101] service from the Services console to apply the changes.
+
+[101]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+1. Ensure the following settings are enabled in your `/etc/datadog-agent/datadog.yaml` file in your Docker volume:
+
+```yaml
+logs_enabled: true # enable logs collection
+logs_config:
+  use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
 ```
 
-* **`port`**: The UDP or TCP port the Agent will listen on for Syslog messages. The standard Syslog port is 514\.  
-  * **`protocol`**: Specify `udp` or `tcp` depending on how your devices send Syslog.  
-  * **`source`**: A custom source name that will appear in Datadog for these logs. Use `syslog` here to correlate with NDM devices.  
-  * **`service`**: A service name to associate with these logs, which can be used for unified service tagging in Datadog.  
-3. **Restart the Datadog Agent** to apply the changes.  
-   * **Linux:** `sudo systemctl restart datadog-agent`  
-   * **Windows:** Restart the Datadog Agent service from the Services console.  
-   * **Docker:** Restart the Docker container.
+2. Create a Syslog listener configuration:
+
+   - Mount a a volume to `/etc/datadog-agent/conf.d/` and create a directory called `syslog.d/`.
+   - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
+
+   ```yaml
+   logs:
+     - type: syslog
+       port: 514
+       protocol: udp
+       source: syslog
+       service: <service> # optional tag
+   ```
+
+   * **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
+   * **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+   * **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
+   * **`service`**: Optional service name for unified service tagging.
+
+3. Restart the [Docker container][101] to apply the changes.
+
+[101]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Verify Syslog messages
+
+After your network devices are configured and the Datadog Agent is running, you can verify that Syslog data is being collected and sent to Datadog:
+
+1. **Navigate to the Log Explorer** in your Datadog account.  
+2. **Filter by `source:syslog`** (or whatever source you specified in your `conf.yaml` file).  
+3. You should see your network device Syslog messages appearing in the Log Explorer.  
+4. **Verify `syslog_ip`:** Ensure that the `syslog_ip` tag is present and correctly populated with the network device's IP address for each relevant log entry.
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/log_collection/
