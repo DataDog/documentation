@@ -2902,12 +2902,32 @@ menu:
       parent: actions_heading
       identifier: action_interface
       weight: 30000
-    - name: Datastore
-      url: actions/datastore/
+    - name: Datastores
+      url: actions/datastores/
       pre: datastores-wui
       parent: actions_heading
-      identifier: datastore
+      identifier: datastores
       weight: 40000
+    - name: Create and Manage Datastores
+      url: actions/datastores/create/
+      parent: datastores
+      identifier: create
+      weight: 1
+    - name: Use Datastores with Apps and Workflows
+      url: actions/datastores/use
+      parent: datastores
+      identifier: use
+      weight: 2
+    - name: Automation Rules
+      url: actions/datastores/trigger
+      parent: datastores
+      identifier: trigger
+      weight: 3
+    - name: Access and Authentication
+      url: actions/datastores/auth
+      parent: datastores
+      identifier: auth
+      weight: 4
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
