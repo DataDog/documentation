@@ -342,7 +342,7 @@ answer = (function transformEntry(source)
 - The field mappings are at the bottom of the record. Some basic mappings are included. This is where you select the fields to include, define the format, and select the target fields in your ServiceNow instance.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Transforming correlated alert data" level="h4" expanded=false id="transforming-correlated-alert-data" %}}
+{{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
 To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. Modifications are required for the script to populate values in the ServiceNow Incident.
 
 Below is an sample script that can be modified for custom needs.
