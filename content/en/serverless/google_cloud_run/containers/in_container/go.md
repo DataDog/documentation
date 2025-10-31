@@ -77,7 +77,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
