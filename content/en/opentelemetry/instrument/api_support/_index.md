@@ -37,8 +37,9 @@ By [instrumenting your code with OpenTelemetry APIs][2], your code:
 
 The setup for OpenTelemetry metrics and logs support depends on your language, specifically whether you need to install a separate OpenTelemetry Exporter.
 
-- Java, PHP, Node.js, and .NET: The Datadog SDKs handles OTLP export automatically. You do not need to install a separate OpenTelemetry Exporter.
-- Python, Ruby, Go, and Rust: The Datadog SDKs require you to also install and configure the standard OpenTelemetry OTLP Exporter package to send data.
+- Java, PHP, Node.js, and .NET (Direct implementation): The Datadog SDKs handles OTLP export automatically. You do not need to install a separate OpenTelemetry Exporter.
+- Python, Ruby, and Go (Exporter-based): The Datadog SDKs require you to also install and configure the standard OpenTelemetry OTLP Exporter package to send data.
+- Rust (Manual): The Datadog SDK does not handle OTLP export or configuration for metrics and logs. You must manually install and configure the standard OpenTelemetry SDK and OTLP Exporter. The `DD_METRICS_OTEL_ENABLED` and `DD_LOGS_OTEL_ENABLED` flags do not apply.
 
 To learn more, follow the link for your language:
 
