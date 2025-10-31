@@ -23,4 +23,4 @@ further_reading:
       text: Session Replay
 ---
 
-{% partial file="mdoc/en/real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md" /%}
+{% partial file="real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md" /%}
