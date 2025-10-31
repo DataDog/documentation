@@ -218,7 +218,7 @@ If the [GitLab integration][1] is not already installed, install it on the [GitH
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
-#### Handling GitLab Groups and Subgroups
+#### Handling gitLab groups and subgroups
 
 If your repositories are organized under [**GitLab groups or subgroups**][1] (for example,
 `https://gitlab.com/my-org/group(/subgroup)/repo`),
