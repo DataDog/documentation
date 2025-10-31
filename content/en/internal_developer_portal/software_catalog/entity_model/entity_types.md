@@ -44,6 +44,8 @@ In Software Catalog, you can collect non-instrumented services by declaring them
 
 In Software Catalog, a system (`kind:system`) is a group of entities that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
 
+Systems can be manually defined or added through [AI-generated Systems][].
+
 **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][1]. 
 
 To define components within a system, you can specify values for the `components` key in the `spec` field of the entity's v3 definition.
@@ -81,6 +83,7 @@ This page holds relationship data of components between the system and upstream/
 **Note**: If a single component is part of multiple systems, you must specify that component in the YAML for each system. 
 
 [1]: https://backstage.io/docs/features/software-catalog/system-model/
+[2]: /internal_developer_portal/software_catalog/entity_model/ai-generated-systems/
 
 {{% /tab %}}
 
