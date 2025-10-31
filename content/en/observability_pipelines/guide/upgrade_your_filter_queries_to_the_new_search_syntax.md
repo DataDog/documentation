@@ -3,7 +3,6 @@ title: Upgrade Your Filter Queries to the New Search Syntax
 description: Learn how to update your Observability Pipelines filter queries to use the new search syntax.
 aliases:
     - /observability_pipelines/guide/upgrade_to_the_new_search_syntax/
-private: true
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/search_syntax/"
