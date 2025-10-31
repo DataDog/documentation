@@ -45,7 +45,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="./your-binary" %}}
+   {{% serverless-init-install cmd="./your-binary" %}}
 
 3. **Set up logs**.
 

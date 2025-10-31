@@ -39,7 +39,7 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
+   {{% serverless-init-install cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
 
 3. **Set up logs**.
 
