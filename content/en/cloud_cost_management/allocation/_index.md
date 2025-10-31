@@ -1,6 +1,8 @@
 ---
 title: Cost Allocation
 description: Allocate cloud costs across your organization with Datadog Cloud Cost Management.
+aliases:
+  - /cloud_cost_management/cost_allocation/
 further_reading:
   - link: "/cloud_cost_management/"
     tag: "Documentation"
