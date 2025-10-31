@@ -5,6 +5,8 @@ description: Learn about the compatibility requirements for evaluations.
 
 ## Evaluation compatibility
 
+The current list of supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic and Bedrock Anthropic.
+
 ### Managed evaluations
 
 Managed evaluations are supported via the following configurations.
@@ -31,8 +33,6 @@ Custom llm-as-a-judge evaluations are supported via the following configurations
 | [Boolean][11]                   | Fully supported   | All third party LLM providers | All span kinds |
 | [Score][11]                     | Fully supported     | OpenAI, Azure OpenAI        | All span kinds |
 | [Categorical][11]               | Fully supported   | OpenAI, Azure OpenAI          | All span kinds |
-
-The current list of supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic and Bedrock Anthropic.
 
 [1]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
 [2]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
