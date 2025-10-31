@@ -5609,20 +5609,20 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_akamai_cdn
       weight: 401
-    - name: AWS CloudFront
-      url: observability_pipelines/packs/amazon_cloudfront/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_amazon_cloudfront
-      weight: 402
-    - name: AWS CloudTrail
-      url: observability_pipelines/packs/aws_cloudtrail/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aws_cloudtrail
-      weight: 403
     - name: Amazon VPC Flow Logs
       url: observability_pipelines/packs/amazon_vpc_flow_logs/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_amazon_vpc_flow_logs
+      weight: 402
+    - name: AWS CloudFront
+      url: observability_pipelines/packs/amazon_cloudfront/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_cloudfront
+      weight: 403
+    - name: AWS CloudTrail
+      url: observability_pipelines/packs/aws_cloudtrail/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_cloudtrail
       weight: 404
     - name: Cisco ASA
       url: observability_pipelines/packs/cisco_asa/

@@ -5,7 +5,7 @@ description: Learn more about the Fortinet Firewall pack.
 
 ## Overview
 
-Fortinet firewall logs record allowed, denied, and network traffic.
+Fortinet firewall logs record allowed, denied, and other network traffic.
 
 What this pack does:
 

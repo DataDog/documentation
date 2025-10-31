@@ -5,7 +5,7 @@ description: Learn more about the Zscaler ZIA Firewall pack.
 
 ## Overview
 
-Zscaler ZIA Firewall logs show network traffic and security events.
+Zscaler Internet Access (ZIA) Firewall logs show network traffic and security events.
 
 What this pack does:
 

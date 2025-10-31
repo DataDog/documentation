@@ -5,7 +5,7 @@ description: Learn more about the Zscaler ZIA Tunnel pack.
 
 ## Overview
 
-Zscaler ZIA Tunnel logs show tunnel health, traffic, and key events.
+Zscaler Internet Access (ZIA) Tunnel logs show tunnel health, traffic, and key events.
 
 What this pack does:
 

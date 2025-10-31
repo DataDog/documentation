@@ -5,7 +5,7 @@ description: Learn more about the Palo Alto Firewall pack.
 
 ## Overview
 
-Palo Alto Firewall logs capture traffic, threat, and system events.
+Palo Alto firewall logs capture traffic, threat, and system events.
 
 What this pack does:
 

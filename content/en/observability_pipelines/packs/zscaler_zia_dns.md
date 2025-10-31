@@ -5,7 +5,7 @@ description: Learn more about the ZScaler ZIA DNS pack.
 
 ## Overview
 
-ZScaler ZIA DNS logs capture org-wide DNS activity and policy actions.
+ZScaler Internet Access (ZIA) DNS logs capture org-wide DNS activity and policy actions.
 
 What this pack does:
 

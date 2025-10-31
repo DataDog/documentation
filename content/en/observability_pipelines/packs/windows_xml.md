@@ -5,7 +5,7 @@ description: Learn more about the Windows XML pack.
 
 ## Overview
 
-Windows XML logs capture system, application, and security activity from Windows hosts.
+Windows Event logs capture system, application, and security activity from Windows hosts.
 
 What this pack does:
 
