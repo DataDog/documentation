@@ -19,6 +19,8 @@ Template variables allow you to insert dynamic values from your test results and
 Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
 ```
 
+**Note**: For information about accessing local (config) variables, see the [Variables](#variables) section.
+
 ### Common variable shortcuts
 
 `{{synthetics.failed_step.name}}`
@@ -42,7 +44,8 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 `{{tags.env}}`
 : The environment tag value (for example, `prod`).
 
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned.
+**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration.
+
 
 ### Result attributes
 

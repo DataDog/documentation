@@ -41,7 +41,7 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{< /site-region >}}
 
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-1. Navigate to [Log Forwarding][4].
+1. Navigate to [Log Archiving & Forwarding][4].
 3. Select **Custom Destinations**.
 4. Click **New Destination**.
 5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.

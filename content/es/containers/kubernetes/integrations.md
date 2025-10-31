@@ -4,6 +4,8 @@ aliases:
 - /es/guides/servicediscovery/
 - /es/guides/autodiscovery/
 - /es/agent/kubernetes/integrations
+description: Configura la monitorización de integraciones para aplicaciones que se
+  ejecutan en Kubernetes utilizando plantillas de Autodiscovery
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación
@@ -29,7 +31,7 @@ Si utilizas Docker o Amazon ECS, consulta [Docker e integraciones][1].
 
 <div class="alert alert-info">
 Algunas integraciones de Datadog no funcionan con Autodiscovery, ya que requieren datos del árbol de procesos o un acceso a los sistemas de archivos: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">nodetools Cassandra</a> y <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
-Para monitorizar integraciones que no son compatibles con Autodiscovery, puedes utilizar un exportador Prometheus en el pod, para exponer un endpoint HTTP, y luego puedes utilizar la <a href="/integrations/openmetrics/">integración con OpenMetrics</a> (compatible con Autodiscovery) para encontrar el pod y consultar el endpoint.
+Para monitorizar integraciones que no son compatibles con Autodiscovery, puedes utilizar un exportador Prometheus en el pod, para exponer un endpoint HTTP, y luego puedes utilizar la <a href="/integrations/openmetrics/">integración con OpenMetrics</a> (compatible con Autodiscovery) para encontrar el pod y consultar el endpoint. 
 </div>
 
 ## Configurar tu integración
@@ -50,7 +52,7 @@ O:
 3. [Proporciona valores](#placeholder-values) para estos parámetros.
 
 {{< tabs >}}
-{{% tab "Anotaciones" %}}
+{{% tab "Annotations" %}}
 
 Si defines tus pods de Kubernetes directamente con `kind: Pod`, añade las anotaciones de cada pod directamente bajo su sección `metadata`, como se muestra a continuación:
 
@@ -78,7 +80,7 @@ spec:
 # (...)
 ```
 
-**Anotaciones de Autodiscovery v1**
+**Anotaciones de Autodiscovery v1** 
 
 ```yaml
 apiVersion: v1
@@ -101,7 +103,7 @@ spec:
 Si defines pods indirectamente (con despliegues, ReplicaSets o ReplicationControllers), añade anotaciones de pod en `spec.template.metadata`.
 
 {{% /tab %}}
-{{% tab "Archivo local" %}}
+{{% tab "Local file" %}}
 
 Puedes almacenar plantillas de Autodiscovery como archivos locales en el directorio montado `conf.d` (`/etc/datadog-agent/conf.d`). Debes reiniciar tus contenedores del Agent cada vez que cambias, añades o eliminas plantillas.
 
@@ -121,6 +123,29 @@ Puedes almacenar plantillas de Autodiscovery como archivos locales en el directo
    ```
 
 2. Monta tu carpeta host `conf.d/` en la carpeta `conf.d` del Agent contenedorizado.
+
+   Para Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   Para Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
 
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
@@ -236,8 +261,9 @@ spec:
             logs:
               <LOGS_CONFIG>
 ```
+<div class="alert alert-info">Cuando varios CRDs del <code>DatadogAgent</code> desplegados utilizan <code>configDataMap</code>, cada CRD escribe en un ConfigMap compartido llamado <code>nodeagent-extra-confd</code>. Esto puede provocar que las configuraciones se anulen entre sí. </div>
 
-Para monitorizar un [check de clústeres][1], añade una sobreescritura `extraConfd.configDataMap` al componente `clusterAgent`. También debes activar los checks de clústeres configurando `features.clusterChecks.enabled: true`.
+Para monitorizar un [check de clústeres][1], añade una sobreescritura `extraConfd.configDataMap` al componente `clusterAgent`. También debes activar los checks de clústeres configurando `features.clusterChecks.enabled: true`. 
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -292,7 +318,7 @@ datadog:
         <LOGS_CONFIG>
 ```
 
-Para monitorizar un [check de clústeres][3], define tu plantilla en `clusterAgent.confd`. Puedes encontrar ejemplos en línea en [values.yaml][2]. También debes habilitar el Cluster Agent, configurando `clusterAgent.enabled: true`, y habilitar los checks de clústeres, configurando `datadog.clusterChecks.enabled: true`.
+Para monitorizar un [check de clústeres][3], define tu plantilla en `clusterAgent.confd`. Puedes encontrar ejemplos en línea en [values.yaml][2]. También debes habilitar el Cluster Agent, configurando `clusterAgent.enabled: true`, y habilitar los checks de clústeres, configurando `datadog.clusterChecks.enabled: true`. 
 
 ```yaml
 datadog:
@@ -379,7 +405,7 @@ Aquí, `<PASSWORD>` corresponde a la contraseña del usuario `datadog` que has c
 Para aplicar esta configuración a tus contenedores de Postgres:
 
 {{< tabs >}}
-{{% tab "Anotaciones" %}}
+{{% tab "Annotations" %}}
 
 En el manifiesto de tu pod:
 
@@ -393,7 +419,7 @@ metadata:
   annotations:
     ad.datadoghq.com/postgres.checks: |
       {
-        "postgresql": {
+        "postgres": {
           "instances": [
             {
               "host": "%%host%%",
@@ -418,7 +444,7 @@ spec:
     - name: postgres
 ```
 
-**Anotaciones de Autodiscovery v1**
+**Anotaciones de Autodiscovery v1** 
 
 ```yaml
 apiVersion: v1
@@ -426,7 +452,7 @@ kind: Pod
 metadata:
   name: postgres
   annotations:
-    ad.datadoghq.com/postgres.check_names: '["postgresql"]'
+    ad.datadoghq.com/postgres.check_names: '["postgres"]'
     ad.datadoghq.com/postgres.init_configs: '[{}]'
     ad.datadoghq.com/postgres.instances: |
       [
@@ -452,7 +478,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Archivo local" %}}
+{{% tab "Local file" %}}
 1. Crea un archivo `conf.d/postgresql.d/conf.yaml` en tu host:
 
    ```yaml
@@ -472,6 +498,30 @@ spec:
    ```
 
 2. Monta tu carpeta host `conf.d/` en la carpeta `conf.d` del Agent contenedorizado.
+
+   Para Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   Para Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -527,7 +577,7 @@ Los siguientes comandos etcd crean una plantilla de integración con Postgres co
 
 ```conf
 etcdctl mkdir /datadog/check_configs/postgres
-etcdctl set /datadog/check_configs/postgres/check_names '["postgresql"]'
+etcdctl set /datadog/check_configs/postgres/check_names '["postgres"]'
 etcdctl set /datadog/check_configs/postgres/init_configs '[{}]'
 etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","port":"5432","username":"datadog","password":"%%env_PG_PASSWORD%%"}]'
 ```

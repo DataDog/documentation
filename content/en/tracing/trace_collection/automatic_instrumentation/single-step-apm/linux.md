@@ -31,7 +31,7 @@ To enable APM on a Linux host:
 
 By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
 
-You may want to choose specific SDK versions for compatability with your application's language version or specific environment requirements.
+You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
 
 To customize SDK versions:
 
