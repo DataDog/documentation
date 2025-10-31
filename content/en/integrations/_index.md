@@ -13,6 +13,7 @@ aliases:
     - /integrations/shoreline_software_license/
     - /integrations/pingdom_v3/
     - /integrations/perimeterx/
+    - /integrations/open-policy-agent/
 description: Gather data from all of your systems, apps, & services
 algolia:
     tags: ['integration', 'integration setup']
@@ -163,11 +164,6 @@ cascade:
     lang: en
   aliases:
     - /integrations/amazon_event_bridge
-- _target:
-    path: /integrations/
-    lang: en
-  aliases:
-    - /integrations/open-policy-agent
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
