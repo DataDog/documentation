@@ -24,10 +24,14 @@ Bits AI Dev Agent is available for the following Datadog products:
 |---------------------------|----------------------|--------------------------------------------------------------------|
 | [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
 | [Trace Explorer][11]      | Preview              | Analyzes traces and provides remediations for errors and latency bottlenecks |
-| [Code Security][2]        | Preview              | Single and bulk remediation of code vulnerabilities    |
+| [Code Security][2]        | Preview              | Remediates code vulnerabilities individually or in bulk    |
 | [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests won't flake again.                                                         |
 | [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
 | [Containers][12  ]        | Preview              | Provides code changes for Container Recommendations                  |
+
+## Key capabilities 
+
+The following details how Bits AI Dev Agent integrates with Datadog products to generate contextual code fixes.
 
 ### Error tracking
 
@@ -37,7 +41,7 @@ Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tes
 - Analyzes errors asynchronously as they arrive.
 - Marks errors with a **Fix available** status and enables filtering to surface those issues.
 
-## Test optimization: Flaky test management 
+### Test optimization: Flaky test management 
 
 Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Management in Test Optimization and attempts to  verifies that tests remain stable.
 
@@ -50,7 +54,7 @@ Bits AI Dev Agent debugs errors and latency directly from traces using natural l
 - Determines likely root causes for errors and latency.
 - Generates code fixes when prompted.
 
-## Product recommendations
+### Product recommendations
 
 Bits AI Dev Agent applies automated code changes based on Datadog insights such as CCM Recommendations, APM Recommendations, and Profiling Insights.
 

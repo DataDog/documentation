@@ -48,7 +48,9 @@ These optional configurations help you get the most out of Bits AI Dev Agent.
 
 Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
 
-To configure telemetry tagging, see [Tag your telemetry with Git information][7]. You can also configure service-to-repository mapping manually in **Settings**.
+To configure telemetry tagging, see [Tag your telemetry with Git information][7]. 
+
+You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
 
 ### Enable Auto-push
 
@@ -70,7 +72,7 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `agents.md`  
 - `agent.md`  
 
-You can also define global custom instructions in **Settings**, which apply to all Dev Agent sessions.  
+You can also define global custom instructions in **Bits AI** > **Dev Agent** > [**Settings**][12], which apply to all Dev Agent sessions.  
 
 ### Configure repository environment
 
@@ -78,16 +80,16 @@ Configure a custom environment for the Dev Agent to install dependencies, format
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11].
-1. Click **New Config** to create a repository configuration.
+1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11], and find the **Environments** Section.
+1. Click **Add Environment** to create a repository configuration.
    1. Define any required environment variables or secrets.
    1. Add setup commands to the shell script (for example: `pip install -r requirements.txt`).
-1. Test the setup command to ensure it runs successfully.
+1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
 When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. 
 
-**Note**: For best results, add a `CLAUDE.md` file to your repository with instructions on how to build and test your code.
+**Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `CLAUDE.md`) to your repository with instructions on how to build and test your code.
 
 ## Further reading
 
@@ -104,3 +106,4 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 [9]: /integrations/github/#troubleshooting
 [10]: /help/
 [11]: https://app.datadoghq.com/code/settings?tab=repositories
+[12]: https://app.datadoghq.com/code/settings
