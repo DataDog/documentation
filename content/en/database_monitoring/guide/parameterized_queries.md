@@ -36,6 +36,10 @@ Supported databases
 Supported deployments
 : All deployment types.
 
+## Permissions
+
+To view query parameter values in the Database Monitoring UI, users need the **Database Monitoring Parameterized Queries Read** permission. This permission is located under the **Database Monitoring** section in the [Roles page][2]. This permission is enabled by default in the Datadog Admin Role, Datadog Standard Role, and Datadog Read Only Role. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
+
 ## Setup
 To capture SQL query text and execution plans with parameter values, update the appropriate integration `conf.yaml` file based on your database type:
 - For PostgreSQL: edit `postgres.d/conf.yaml`
@@ -88,3 +92,5 @@ To capture prepared statements with parameter values in SQL Server, you must [co
 Support for PostgreSQL prepared statement parameter value capture is not available at this time.
 
 [1]: /database_monitoring/guide/sql_extended_events/
+[2]: /account_management/rbac/permissions/
+[3]: /account_management/rbac/
