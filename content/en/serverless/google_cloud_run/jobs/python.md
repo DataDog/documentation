@@ -89,7 +89,7 @@ logger.info("Hello world!")
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="python" %}}
+{{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 

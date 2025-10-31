@@ -78,7 +78,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="go" %}}
+{{% serverless-init-env-vars-in-container language="go" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
