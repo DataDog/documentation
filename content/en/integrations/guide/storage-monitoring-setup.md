@@ -55,6 +55,8 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
       - `s3:GetObject` (scoped to the destination bucket(s))
       - `s3:ListBucket` (scoped to the destination bucket(s))
 
+      Storage Management relies on AWS Integration and Resource Collection to bring together bucket details. Add all S3 permissions from the [Integration IAM policy and Resource Collection IAM policy][502].
+
       Example IAM policy:
         ```json
               {
@@ -126,6 +128,7 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
 4. Return to **Infrastructure > Storage Management** to see any new buckets. The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
 
 [501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
+[502]: https://docs.datadoghq.com/integrations/amazon-web-services/#aws-iam-permissions
 [503]: https://docs.datadoghq.com/logs/guide/forwarder/?tab=cloudformation
 [504]: https://app.datadoghq.com/integrations/amazon-web-services
 [505]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
@@ -274,6 +277,8 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
   - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
 
+   **Note**: If you don't see a list of your existing destination buckets under _I enabled it myself_, it means you haven't provided required S3 permissions as part of [AWS Resource Collection][604]
+
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 ### Use modules for complex setups
@@ -316,7 +321,10 @@ For each bucket you want to monitor:
 4. Configure the following settings:
   - Set a configuration name
   - (Optional) Specify a source bucket prefix
-  - **Object versions**: Datadog recommends selecting **Current Versions Only**
+  - **Object versions**: Datadog recommends selecting **Include all versions** (required to see non-current version metrics)
+
+  {{< img src="integrations/guide/storage_monitoring/all-versions.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+
   - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
   **Note**: If you want to use a prefix on the destination bucket, add this as well
   - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
@@ -324,6 +332,8 @@ For each bucket you want to monitor:
   - **Status**: Enabled
   - **Server-side encryption**: Don't specify an encryption key
   - Select all the available **Additional metadata fields**
+
+  {{< img src="integrations/guide/storage_monitoring/metadata.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 **Note**: Review [Amazon S3 pricing][204] for costs related to inventory generation.
 
@@ -333,6 +343,8 @@ For each bucket you want to monitor:
   - Navigate to **Storage Management** → [Enable Buckets][205]
   - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
+
+   **Note**: If you don't see a list of your existing destination buckets under _I enabled it myself_, it means you haven't provided required S3 permissions as part of [AWS Resource Collection][604]
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -351,11 +363,14 @@ For each bucket you want to monitor:
   - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
 
+ **Note**: If you don't see a list of your existing destination buckets under _I enabled it myself_, it means you haven't provided required S3 permissions as part of [AWS Resource Collection][604]
+
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
 [601]: https://forms.gle/dhDbSxTvCUDXg1QR7
 [602]: mailto:storage-monitoring@datadoghq.com
 [603]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
+[604]: https://docs.datadoghq.com/integrations/amazon-web-services/#resource-collection
 {{% /tab %}}
 
 {{< /tabs >}}
