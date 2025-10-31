@@ -24,9 +24,9 @@ Managed evaluations are supported via the following configurations.
 | [Topic Relevancy][9]            | Fully supported   | All third party LLM providers | All span kinds  |
 | [Language Mismatch][10]         | Fully supported   | Self hosted                   | All span kinds  |
 
-### Custom llm-as-a-judge evaluations
+### Custom LLM-as-a-judge evaluations
 
-Custom llm-as-a-judge evaluations are supported via the following configurations.
+Custom LLM-as-a-judge evaluations are supported for the following configurations.
 
 | Evaluation                      | DD-trace version  |  LLM Provider                 | Applicable span |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
