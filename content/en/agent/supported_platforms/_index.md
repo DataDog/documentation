@@ -223,7 +223,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <th>Notes</th>
   </thead>
   <tr>
-    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
