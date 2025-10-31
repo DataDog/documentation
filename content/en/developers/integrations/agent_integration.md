@@ -182,7 +182,7 @@ Agent [checks][16] inherit from the the `AgentCheck` base class and must meet th
     - Integrations for Datadog Agent v5-v6 use Python 2.7.
 - **Class inheritance**: Each check must subclass `AgentCheck`.
 - **Entry point**: Each check must implement a `check(self, instance)` method.
-- **Package structure**: Checks are organized under the `datadog_checks` namespace. For example, an integration named <INTEGRATION_NAME> lives in: `<integration_name>/datadog_checks/<integration_name>/`.
+- **Package structure**: Checks are organized under the `datadog_checks` namespace. For example, an integration named `<INTEGRATION_NAME>` lives in: `<integration_name>/datadog_checks/<integration_name>/`.
 - **Naming**:
     - The package name must match the check name.
     - Python module and class names within the package can be freely chosen.
@@ -467,29 +467,30 @@ After your integration is published, you can release updates through the Develop
 You’ll need to bump the version number whenever you add, remove, or modify functionality (for example, when introducing new metrics, updating dashboards, or changing integration code). A version bump isn’t required for non-functional updates, such as changes to written content, branding, logos, or images.
 
 In Developer Platform, include a new entry in the **Release Notes** tab following this format:
-    ```
-    ## Version Number / Date (YYYY-MM-DD)
+    
+```
+## Version Number / Date (YYYY-MM-DD)
 
-    ***Added***:
+***Added***:
 
-    * Description of new feature
-    * Description of new feature
+* Description of new feature
+* Description of new feature
 
-    ***Fixed***:
+***Fixed***:
 
-    * Description of fix
-    * Description of fix
+* Description of fix
+* Description of fix
 
-    ***Changed***:
+***Changed***:
 
-    * Description of update or improvement
-    * Description of update or improvement
+* Description of update or improvement
+* Description of update or improvement
 
-    ***Removed***:
+***Removed***:
 
-    * Description of removed feature
-    * Description of removed feature
-    ```
+* Description of removed feature
+* Description of removed feature
+```
 
 Make sure to update all references to the version number across the integration's documentation and installation instructions.
 
