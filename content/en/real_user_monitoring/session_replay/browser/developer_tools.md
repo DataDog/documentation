@@ -56,6 +56,6 @@ The **Attributes** tab displays all attributes related to the session. For more 
 [1]: /real_user_monitoring/explorer/
 [2]: /logs/log_collection/javascript/
 [3]: /logs/explorer/
-[4]: /real_user_monitoring/browser/collecting_browser_errors/
+[4]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
 [5]: /real_user_monitoring/error_tracking/
-[6]: /real_user_monitoring/browser/data_collected/#default-attributes
+[6]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes

@@ -620,6 +620,8 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 - Cloud provider accounts (for all desired Cloud Cost recommendations)
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
+- [GCP integration and resource collection][10] (for GCP recommendations)
+- [Datadog Agent integration][5] (for Downsize recommendations)
 
 ## Setup
 
@@ -641,6 +643,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 - **Jira**: Jira issue creation is available in both the recommendation side panel and the "Active Recommendations" list. You can create a Jira issue by clicking "Create Jira issue" in the side panel or by selecting multiple recommendations in the "Active Recommendations" list. Created Jira issues are automatically tagged to indicate their connection to a cost recommendation and include a link back to the referenced recommendation.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
+- **Dismiss**: Use "Dismiss" in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the "Dismissed" tab.
 
 ## Recommendation and resource descriptions
 
