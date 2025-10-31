@@ -9,7 +9,7 @@ The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, and
 
 ### Managed evaluations
 
-Managed evaluations are supported via the following configurations.
+Managed evaluations are supported for the following configurations.
 
 | Evaluation                      | DD-trace version  |  LLM Provider                 | Applicable span |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
