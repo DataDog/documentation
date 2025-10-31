@@ -3592,6 +3592,11 @@ menu:
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
       weight: 30005
+    - name: Syslog
+      url: network_monitoring/devices/syslog
+      parent: ndm_setup
+      identifier: ndm_syslog
+      weight: 30006
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm

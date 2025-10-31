@@ -66,7 +66,7 @@ To begin monitoring your network devices, enable SNMP monitoring using one of th
 : Configure SNMP monitoring using Autodiscovery.
 
 [Ping][5]
-: Additionally, SNMP supports enabling ping on your devices.
+: Configure the SNMP check to send ICMP pings to your devices.
 
 [VPN Monitoring][21]
 : Configure VPN monitoring to start monitoring your devices' VPN tunnels.
