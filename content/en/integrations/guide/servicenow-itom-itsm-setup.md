@@ -345,7 +345,7 @@ answer = (function transformEntry(source)
 {{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
 To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. 
 
-You must modify your script with the desired fields from data in the correlated alert column so it can populate values in the ServiceNow Incident. Below is a sample script that you customize for your needs:
+To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
 
 ```
 (function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
