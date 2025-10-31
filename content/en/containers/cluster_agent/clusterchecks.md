@@ -521,7 +521,7 @@ Name                              Running checks
 example-node-1-my-cluster-name    0
 example-node-2-my-cluster-name    1
 
-===== Checks on example-node-2 =====
+===== Checks on example-node-2-my-cluster-name =====
 
 === http_check check ===
 Configuration provider: kubernetes-services
