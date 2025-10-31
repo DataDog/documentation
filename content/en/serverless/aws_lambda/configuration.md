@@ -801,9 +801,9 @@ To enable this feature, set these environment variables:
 
 ## Reload API key secret periodically
 
-If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also set `DD_API_KEY_SECRET_RELOAD_INTERVAL` so the secret will be reloaded periodically. For example, if you set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, then the secret will be reloaded when API key is needed to send data and it has been more than 43200 seconds since the last load.
+If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to periodically reload the secret. For example, if you set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, then the secret is reloaded when the API key is needed to send data, and it has been more than 43200 seconds since the last load.
 
-Example use case: For security, every day (86400 seconds), the API key is rotated and the secret is updated to the new key, and the old API key is kept valid for another day as a grace period. In this case, you can set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200` so the API key will be reloaded during the grace period of the old key.
+Example use case: For security, every day (86400 seconds), the API key is rotate,d and the secret is updated to the new key, and the old API key is kept valid for another day as a grace period. In this case, you can set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, so the API key is reloaded during the grace period of the old key.
 
 This is available for version 88+ of the Datadog Lambda Extension.
 
