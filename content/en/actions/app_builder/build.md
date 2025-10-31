@@ -17,8 +17,8 @@ further_reading:
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
 - Tags
-- Date that the app was last modified
-- Whether the app is published
+- Date that each app was last modified
+- Whether each app is published
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the **My apps** toggle to see only apps that you created:
 
