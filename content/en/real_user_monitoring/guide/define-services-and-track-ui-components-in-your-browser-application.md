@@ -3,7 +3,7 @@ title: Define Services And Track UI Components In Your Browser Application
 description: "Organize large browser applications by defining services and tracking UI components for better team ownership and troubleshooting."
 disable_toc: false
 further_reading:
-- link: "/real_user_monitoring/browser/"
+- link: "/real_user_monitoring/application_monitoring/browser/"
   tag: "Documentation"
   text: "RUM Browser Monitoring"
 ---
@@ -118,12 +118,12 @@ Components are tracked using custom actions [mentioned above][10]:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/browser/setup/
-[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#overview
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
+[3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[5]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
+[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#overview
 [7]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages

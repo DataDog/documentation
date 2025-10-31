@@ -35,7 +35,7 @@ With Reports, you can:
    - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
    - **Azure Spend by Service Name**: Break down costs by Azure services like Virtual Machines and Azure Monitor.
    - **GCP Spend by Service Name**: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
-   - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, and more.
+   - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, Oracle Cloud, and more.
 
 ## Customizing your report
 

@@ -32,12 +32,13 @@ Después de establecer la [recopilación de logs][1], puedes personalizar la con
 - [Filtrar logs](#filter-logs)
   - [Excluir en la coincidencia](#exclude-at-match)
   - [Incluir en la coincidencia](#include-at-match)
+  - [Excluir truncado](#excluir-truncado)
 - [Limpia los datos confidenciales de tus logs](#scrub-sensitive-data-from-your-logs)
 - [Agregación multilínea](#manually-aggregate-multi-line-logs)
 - [Agregar automáticamente logs multilínea](#automatically-aggregate-multi-line-logs)
 - [Reglas de procesamiento de logs de uso común](#commonly-used-log-processing-rules)
 - [Rastrear directorios utilizando comodines](#tail-directories-using-wildcards)
-  - [Rastrear los archivos modificados más recientemente primero](#tail-most-recently-modified-files-first)
+  - [Priorizar los archivos supervisados por tiempo de modificación](#prioritize-tailed-files-by-modification-time)
 - [Cifrado de archivos de log](#log-file-encodings)
 - [Reglas de procesamiento global](#global-processing-rules)
 - [Referencias adicionales](#further-reading)
@@ -62,7 +63,7 @@ Para enviar solo un subconjunto específico de logs a Datadog, utiliza el parám
 Por ejemplo, para **excluir** los logs que contienen una dirección de correo electrónico de Datadog, utiliza `log_processing_rules` de la siguiente manera:
 
 {{< tabs >}}
-{{% tab "Configuration file" %}}
+{{% tab "Archivo de configuración" %}}
 
 ```yaml
 logs:
@@ -81,7 +82,7 @@ logs:
 {{% tab "Docker" %}}
 
 <div class="alert alert-info">
-Para obtener más información sobre la configuración del Agent, consulta <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
+Para obtener más información sobre la configuración del Agent, consulta <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Gestión de la detección de contenedores</a>.
 </div>
 
 En un entorno de Docker, utiliza la etiqueta (label) `com.datadoghq.ad.logs` en el **contenedor que envíe los logs que quieres filtrar** para especificar el parámetro `log_processing_rules`. Por ejemplo:
@@ -100,9 +101,9 @@ En un entorno de Docker, utiliza la etiqueta (label) `com.datadoghq.ad.logs` en 
       }]
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando uses etiquetas. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
-
-**Nota**: El valor de la etiqueta debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+**Nota**:
+- Escapa los caracteres de expresión regular en tus patrones cuando utilices etiquetas. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la etiqueta debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -143,9 +144,9 @@ spec:
           image: cardpayment:latest
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando uses anotaciones de pod. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
-
-**Nota**: El valor de la anotación debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+**Nota**:
+- Escapa los caracteres de expresión regular de tus patrones cuando utilices anotaciones de pod. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la anotación debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -160,7 +161,7 @@ spec:
 Por ejemplo, utiliza la siguiente configuración del parámetro `log_processing_rules` para **incluir** los logs que contienen una dirección de correo electrónico de Datadog:
 
 {{< tabs >}}
-{{% tab "Configuration file" %}}
+{{% tab "Archivo de configuración" %}}
 
 ```yaml
 logs:
@@ -224,9 +225,9 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en el conte
       }]
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando uses etiquetas. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
-
-**Nota**: El valor de la etiqueta debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+**Nota**:
+- Escapa los caracteres de expresión regular en tus patrones cuando utilices etiquetas. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la etiqueta debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -263,7 +264,85 @@ spec:
           image: cardpayment:latest
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando uses anotaciones de pod. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
+**Nota**:
+- Escapa los caracteres de expresión regular de tus patrones cuando utilices anotaciones de pod. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la anotación debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Excluir truncado
+
+| Parámetro           | Descripción                                                        |
+|---------------------|--------------------------------------------------------------------|
+| `exclude_truncated` | Cuando está presente, excluye los logs truncados y no los envía a Datadog. La regla `exclude_truncated` está disponible a partir del Agent v7.69. |
+
+Por ejemplo, para **filtrar** logs truncados:
+
+{{< tabs >}}
+{{% tab "Archivo de configuración" %}}
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: exclude_truncated
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en el contenedor que envía los logs que quieres filtrar, para especificar el parámetro`log_processing_rules`. Por ejemplo:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "exclude_truncated"
+        }]
+      }]
+```
+
+**Nota**: El valor de la etiqueta debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en tu pod para definir el parámetro `log_processing_rules`. Por ejemplo:
+
+```yaml
+apiVersion: apps/v1
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "exclude_truncated"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: '<CONTAINER_NAME>'
+          image: cardpayment:latest
+```
 
 **Nota**: El valor de la anotación debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
@@ -279,7 +358,7 @@ Esto reemplazará todos los grupos coincidentes con el valor del parámetro `rep
 Por ejemplo, para ocultar los números de tarjetas de crédito:
 
 {{< tabs >}}
-{{% tab "Configuration file" %}}
+{{% tab "Archivo de configuración" %}}
 
 ```yaml
 logs:
@@ -315,9 +394,9 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en tu conte
       }]
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando uses etiquetas. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
-
-**Nota**: El valor de la etiqueta debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+**Nota**:
+- Escapa los caracteres de expresión regular en tus patrones cuando utilices etiquetas. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la etiqueta debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -355,14 +434,14 @@ spec:
           image: cardpayment:latest
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando uses anotaciones de pod. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
-
-**Nota**: El valor de la anotación debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+**Nota**:
+- Escapa los caracteres de expresión regular de tus patrones cuando utilices anotaciones de pod. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la anotación debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-A partir de la versión 7.17 del Agent, la cadena `replace_placeholder` puede ampliar las referencias para capturar grupos como `$1`, `$2`, etc. Si quieres que una cadena vaya después del grupo de captura sin espacio de separación, utiliza el formato `${<GROUP_NUMBER>}`.
+A partir de la versión 7.17 o posterior del Agent, la cadena `replace_placeholder` puede ampliar las referencias para capturar grupos como `$1`, `$2`, etc. Si quieres que una cadena vaya después del grupo de captura sin espacio de separación, utiliza el formato `${<GROUP_NUMBER>}`.
 
 Por ejemplo, para limpiar información de usuario del log`User email: foo.bar@example.com`, utiliza:
 
@@ -396,7 +475,7 @@ Por ejemplo, cada línea de log de Java empieza con una marca de tiempo en forma
 ```
 
 {{< tabs >}}
-{{% tab "Configuration file" %}}
+{{% tab "Archivo de configuración" %}}
 
 Para enviar los logs del ejemplo anterior con un archivo de configuración, utiliza `log_processing_rules` de la siguiente manera:
 
@@ -466,14 +545,14 @@ spec:
           image: postgres:latest
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando realices una agregación multilínea con anotaciones de pod. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
-
-**Nota**: El valor de la anotación debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
+**Nota**:
+- Escapa los caracteres de expresión regular de tus patrones cuando realices agregaciones multilínea con anotaciones de pod. Por ejemplo, `\d` se convierte en `\\d`, `\w` se convierte en `\\w`.
+- El valor de la anotación debe seguir la sintaxis de JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger"><strong>Importante</strong> Los patrones de expresiones regulares para logs multilínea deben comenzar al <em>principio</em> de un log. Los patrones no pueden coincidir a mitad de una línea. <em>Un patrón que no coincida nunca puede provocar pérdidas de líneas de logs</em>. <br><br>La recopilación de logs funciona con una precisión de hasta milisegundos. Los logs con mayor precisión no se envían aunque coincidan con el patrón.</div>
+<div class="alert alert-danger"><strong>¡Importante!</strong> Los patrones de expresión regular para logs multilíneas deben comenzar al <em>principio</em> de un log. Los patrones no pueden coincidir a mitad de línea. <em>Un patrón que nunca coincida puede causar pérdidas de líneas de logs </em>. <br><br> La recopilación de logs funciona con una precisión de hasta milisegundos. Los logs con mayor precisión no se envían aunque coincidan con el patrón.</div>
 
 Más ejemplos:
 
@@ -533,20 +612,40 @@ logs:
 
 En el ejemplo anterior, hay coincidencia con `C:\\MyApp\\MyLog.log` y se excluyen `C:\\MyApp\\MyLog.20230101.log` y `C:\\MyApp\\MyLog.20230102.log`.
 
-**Nota**: El Agent requiere permisos de lectura y ejecución en un directorio para mostrar la lista de todos los archivos disponibles que contiene.
+**Nota**:
+- El Agent requiere permisos de lectura y ejecución en un directorio para enumerar todos los archivos disponibles en él.
+- Los valores de trayectoria y excluir_trayectorias son sensibles al case (incidencia).
 
-**Nota**: Los valores path y exclude_paths distinguen entre mayúsculas y minúsculas.
-
-### Rastrear los archivos modificados más recientemente primero
-
-El Agent limita el número de archivos que puedes rastrear simultáneamente, definido por el parámetro `logs_config.open_files_limit`.
-Por defecto, cuando coinciden más archivos con el patrón comodín que este límite, el Agent les da prioridad ordenando los nombres de archivo en orden lexicográfico inverso. Esto funciona bien para archivos de logs nombrados con marcas de tiempo o numeración secuencial, lo que asegura que los logs más recientes se rastrearán primero.
-
-Sin embargo, si los nombres de archivo de los logs no siguen estos patrones, puede que el comportamiento predeterminado no sea el ideal. Para dar prioridad a los archivos por hora de modificación, configura logs_config.file_wildcard_selection_mode como by_modification_time. Con esta configuración, el Agent ordena continuamente los archivos por su hora de modificación. Siempre rastrea primero los archivos modificados más recientemente y deja de rastrear aquellos modificados menos recientemente.
-
-Para definir el comportamiento predeterminado, elimina la entrada `logs_config.file_wildcard_selection_mode` o defínela explícitamente como `by_name`.
+### Priorizar los archivos supervisados por tiempo de modificación
 
 Para usar esta función, se necesita la versión 7.40.0 o posterior del Agent.
+
+El Agent limita el número de archivos que puede supervisar simultáneamente con el parámetro `logs_config.open_files_limit`. Si el número de archivos que coinciden con las sources (fuentes) de logs configuradas (como comodines) está dentro del límite, el Agent los supervisa a todos. Si coinciden más archivos de los que permite el límite, el Agent prioriza ordenando los nombres de archivo en orden lexicográfico inverso, de modo que los archivos con marcas de tiempo más recientes o números más altos se supervisen primero.
+
+Si los nombres de los archivos no siguen patrones secuenciales o de marca de tiempo, el orden predeterminado puede no ser el ideal. Para priorizar por tiempo de modificación, configura `logs_config.file_wildcard_selection_mode` en `by_modification_time`. Con esta configuración, el Agent ordena primero los archivos modificados más recientemente.
+
+**Ejemplo**:
+- `open_files_limit` = 500
+- Tu patrón de comodín coincide con 700 archivos.
+- Con `by_name`: el Agent supervisa los 500 archivos con los nombres más altos en orden lexicográfico inverso (por ejemplo, app.log.700 hasta app.log.201).
+- Con `by_modification_time`: el Agent supervisa los 500 archivos en los que se ha escrito más recientemente, independientemente de sus nombres.
+
+```yaml
+logs_enabled: true
+logs_config:
+ [...]
+  open_files_limit: 500
+
+  ## @param file_wildcard_selection_mode - string - optional - default: by_name
+  ## The strategy used to prioritize wildcard matches if they exceed open_files_limit.
+  ## Choices:
+  ##   - by_name: files are sorted in reverse lexicographic order (default).
+  ##   - by_modification_time: files are sorted by modification time, with the most recent first.
+  ## WARNING: by_modification_time is less performant and increases disk I/O.
+  file_wildcard_selection_mode: by_modification_time
+```
+
+Para definir el comportamiento predeterminado, elimina la entrada `logs_config.file_wildcard_selection_mode` o defínela explícitamente como `by_name`.
 
 ## Codificaciones del archivo de logs
 
@@ -573,7 +672,7 @@ logs:
 
 ## Reglas generales de procesamiento
 
-A partir de la versión 6.10 o superior del Datadog Agent, es posible definir las reglas de procesamiento `exclude_at_match`, `include_at_match` y `mask_sequences` de manera general en el [archivo de configuración principal][5] del Agent o mediante una variable de entorno:
+A partir de la versión 6.10 o posterior del Datadog Agent, es posible definir las reglas de procesamiento `exclude_at_match`, `include_at_match` y `mask_sequences` de manera general en el [archivo de configuración principal][5] del Agent o mediante una variable de entorno. La regla `exclude_truncated` está disponible a partir de la versión 7.69 del Agent.
 
 {{< tabs >}}
 {{% tab "Archivos de configuración" %}}
@@ -641,13 +740,13 @@ Todos los logs recopilados por el Datadog Agent se ven afectados por las reglas 
 
 **1. ¿Cuándo debo utilizar reglas multilínea manuales en lugar de la detección multilínea automática?**
 
-Si conoces el formato de tus logs, deberías utilizar reglas multilínea manuales para un control preciso. 
-Si envías muchos logs multilínea y no sabes bien cuál es su formato o no puedes configurar todas las fuentes individualmente, debes utilizar la detección multilínea automática.
+Si conoces el formato de tus logs, deberías utilizar reglas multilínea manuales para un control preciso.
+Si envías muchos logs multilínea y no estás seguro de su formato o no tienes medios para configurar todas las sources (fuentes) individualmente, debes utilizar la detección multilínea automática.
 
 **2. ¿Qué ocurre cuando un patrón multilínea no coincide con ningún log?**
 
 Todas las líneas de logs que no son JSON se procesan individualmente como entradas de logs separadas.
-Todas las líneas de logs con formato JSON se tratan como una única línea de logs. Sólo se admite el primer formato JSON válido y el resto se descartan.
+Todas las líneas de logs con formato JSON se tratan como una única línea de logs. Solo se admite el primer formato JSON válido y el resto se descartan.
 
 **3. ¿Qué ocurre cuando hay reglas globales y reglas específicas de una integración?
 Las reglas específicas de la integración anulan por completo las reglas globales de la integración en cuestión.
