@@ -51,7 +51,7 @@ To capture SQL query text and execution plans with parameter values, update the 
 ```
 
 <div class="alert alert-info">
-For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture via Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up. </div>
+For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture through Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up. </div>
 
 ```yaml
   xe_collection:
