@@ -84,7 +84,7 @@ logInfo('Hello World!');
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="php" %}}
+{{% serverless-init-env-vars-sidecar language="php" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 

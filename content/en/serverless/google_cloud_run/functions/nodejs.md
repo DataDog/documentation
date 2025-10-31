@@ -87,7 +87,7 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][3]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="nodejs" function="true" %}}
+{{% serverless-init-env-vars-sidecar language="nodejs" function="true" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 

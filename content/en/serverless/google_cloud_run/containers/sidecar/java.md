@@ -105,7 +105,7 @@ logger.info("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="java" %}}
+{{% serverless-init-env-vars-sidecar language="java" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
