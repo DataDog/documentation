@@ -81,6 +81,10 @@ To view details for a specific test run, click on a test run in the table at the
 
   {{< img src="synthetics/network_tests/test_run_side_panel.png" alt="A single test run from a network test, displaying the side panel" style="width:100%;">}}
 
+## Retention
+
+<div class="alert alert-info">Network Path Testing data is retained for 30 days.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
