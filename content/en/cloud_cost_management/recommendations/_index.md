@@ -640,7 +640,7 @@ For each cloud account that you would like to receive recommendations for:
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
 
-- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are automatically tagged and include a link back to the recommendation in Datadog.
+- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are tagged and link back to the recommendation in Datadog.
 
   To filter recommendations by Jira status, use the following query options:
   - `@jira_issues.issue_key:*` - Show only recommendations with a Jira issue
