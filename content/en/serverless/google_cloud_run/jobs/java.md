@@ -85,7 +85,7 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% gcr-configure%}}
+{{% serverless-init-configure %}}
 
 5. {{% gcr-service-label %}}
 
