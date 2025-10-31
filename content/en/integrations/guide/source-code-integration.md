@@ -594,11 +594,11 @@ For more information, see the [Dynamic Instrumentation documentation][102].
   PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
 </div>
 
-PR comments are automated bot comments left by Datadog's [source code management integrations][10] to inform developers of issues Datadog has detected in their code changes and in certain cases, suggest remediation. 
+PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation. 
 
-PR Comments will automatically limit its output to a maximum of 31 unique comments per PR at any given time to reduce noise and clutter. These comments include:
-* A single Summary comment will always be posted to give a high-level view of all the issues Datadog detected in the PR in question. This comment will be edited by Datadog as new commits pushed to the PR change the results.
-* When applicable, up to 30 inline comments will be posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the diff of the PR, the 30 highest severity violations will be posted.
+There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
+* One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
+* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
