@@ -3,6 +3,12 @@ title: Engineering Reports
 aliases:
 - /software_catalog/eng_reports
 further_reading:
+- link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
+  tag: "Blog"
+  text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
+- link: "dashboards/"
+  tag: "Documentation"
+  text: "Datadog Dashboards"
 - link: "/service_management/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
@@ -15,9 +21,6 @@ further_reading:
 - link: "/dora_metrics"
   tag: "Documentation"
   text: "DORA Metrics"
-- link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
-  tag: "Blog"
-  text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
 ---
 
 ## Overview
