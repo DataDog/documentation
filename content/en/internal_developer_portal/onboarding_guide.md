@@ -3,7 +3,7 @@ title: Onboard with Internal Developer Portal
 further_reading:
   - link: 'https://app.datadoghq.com/idp/get-started'
     tag: 'App'
-    text: 'Explore your IDP in Datadog'
+    text: 'Exploring IDP in Datadog'
   - link: '/getting_started/internal_developer_portal/'
     tag: 'Documentation'
     text: 'Getting started with Internal Developer Portal'

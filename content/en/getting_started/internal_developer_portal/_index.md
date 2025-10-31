@@ -7,10 +7,10 @@ aliases:
 further_reading:
     - link: 'https://app.datadoghq.com/idp/get-started'
       tag: 'App'
-      text: 'Explore your IDP in Datadog'
+      text: 'Exploring IDP in Datadog'
     - link: '/internal_developer_portal'
       tag: 'Documentation'
-      text: 'Read the Internal Developer Portal Documentation'
+      text: 'IDP Documentation'
     - link: 'https://learn.datadoghq.com/courses/managing-software-catalog'
       tag: 'Learning Center'
       text: 'Managing Services with the Software Catalog'
