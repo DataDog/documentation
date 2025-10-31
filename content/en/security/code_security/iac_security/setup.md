@@ -57,7 +57,7 @@ After setting up the GitLab integration, enable IaC Security for your repositori
 1. On the [Code Security Setup page][2], expand the **Activate scanning for your repositories** section.
 1. Under **Select your source code management provider**, select **GitLab**.
 1. Under **Select where your scans should run**, select **Datadog**.
-1. Under **Connect your GitHub repositories**, do one of the following:
+1. Under **Connect your GitLab repositories**, do one of the following:
     - To connect a new GitLab instance, click **Connect GitLab Instance**.
     - To enable IaC Security for an existing account, click **Select repositories**, or **Edit** if Code Security is already enabled.
 1. To enable IaC Security, do one of the following:
@@ -81,7 +81,7 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
 1. On the [Code Security Setup page][2], expand the **Activate scanning for your repositories** section.
 1. Under **Select your source code management provider**, select **Azure DevOps**.
 1. Under **Select where your scans should run**, select **Datadog**.
-1. Under **Connect your GitHub repositories**, do one of the following:
+1. Under **Connect your Azure DevOps repositories**, do one of the following:
     - To connect a new Azure DevOps organization, click **Connect Microsoft Entra App**.
     - To enable IaC Security for an existing account, click **Select repositories**, or **Edit** if Code Security is already enabled.
 1. To enable IaC Security, do one of the following:
