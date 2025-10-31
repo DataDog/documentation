@@ -32,7 +32,7 @@ These steps assume you've [joined the Datadog Partner Network][7], have access t
 3. [Create the scaffolding for your integration](#create-the-scaffolding).
 4. [Write your agent check](#write-your-agent-check).
 5. [Test your agent check](#test-your-agent-check).
-7. [Submit your code for review](#submit-your-code-for-review).
+6. [Submit your code for review](#submit-your-code-for-review).
 
 ### Preqrequisites
 
@@ -43,50 +43,81 @@ These steps assume you've [joined the Datadog Partner Network][7], have access t
 - Git ([command line][12] or [GitHub Desktop client][13]).
 
 ### Configure the Datadog Agent integration developer tool
+Use the Datadog Agent developer tool (ddev) to build and test your integration. The setup steps differ depending on whether you’re developing an [out-of-the-box (OOTB) integration or a Marketplace integration][23]. Select the appropriate tab below.
 
-1. Create a `dd` directory. The Datadog Agent developer tool expects you to work in the `$HOME/dd/` directory.
+{{< tabs >}}
+
+{{% tab "OOTB integration" %}}
+
+1. **Create a working directory**
+   The developer tool expects your work to be located in `$HOME/dd/`:
    ```shell
    mkdir $HOME/dd && cd $HOME/dd
    ```
 
-2. Clone or fork the appropriate repo based on your integration
+2. **Fork the repository**
+   Fork the [Datadog/integrations-extras][14] repository to your GitHub account.
 
-   - **If building an out-of-the-box integration**
-      1. Fork the [Datadog/integrations-extras][14] repository. 
-      2. Then clone your fork into the `dd` directory:
-         ```shell
-         git clone git@github.com:<YOUR_USERNAME>/integrations-extras.git
-         ```
-   
-   - **If building a Marketplace integration** 
-      1. Request access to the [Datadog/marketplace][15] repository from your Datadog contact if you don't already have write access.
-      2. Clone the `marketplace` repository:
-         ```shell
-         git clone git@github.com:DataDog/marketplace.git
-         ```
-3. Create a feature branch to work in:
+3. **Clone your fork** 
+   Clone your fork into the `dd` directory:
    ```shell
-   cd <integrations-extras|marketplace>
+   git clone git@github.com:<YOUR_USERNAME>/integrations-extras.git
+   ```
+
+4. **Create a feature branch**
+   Create and switch to a new branch for your integration:
+   ```shell
+   cd integrations-extras
    git switch -c <YOUR_INTEGRATION_NAME> origin/master
    ```
 
-4. Set the appropriate default working respository:
-   
-   - **If building an out-of-the-box integration**
-      ```shell
-      ddev config set repo extras
-      ```
+5. **Configure the default respository**
+   Set `extras` as the default working repository: 
+   ```shell
+   ddev config set repo extras
+   ```
+   If your repository is stored outside `$HOME/dd/`, specify the path before setting it as the default:
+   ```shell
+   ddev config set repos.extras "/path/to/integrations-extras"
+   ddev config set repo extras 
+   ```
 
-   - **If building a Marketplace integration**
-      ```shell
-      ddev config set repo marketplace
-      ```
+{{% /tab %}}
 
-   - **If you set a custom location for your repo outside `$HOME/dd/`**
-      ```shell
-      ddev config set repos.<extras|marketplace> "/path/to/<integrations-extras|marketplace>"
-      ddev config set repo <extras|marketplace> 
-       ```
+{{% tab "Marketplace integration" %}}
+
+1. **Create a working directory**
+   The developer tool expects your work to be located in `$HOME/dd/`:
+   ```shell
+   mkdir $HOME/dd && cd $HOME/dd
+   ```
+
+2. **Clone the repository**
+   Clone the [Datadog/marketplace][15] repository. If you don’t have access, request it from your Datadog contact.
+   ```shell
+   git clone git@github.com:DataDog/marketplace.git
+   ```
+
+3. **Create a feature branch** 
+   Create and switch to a new branch for your integration:
+   ```shell
+   cd marketplace
+   git switch -c <YOUR_INTEGRATION_NAME> origin/master
+   ```
+
+4. **Configure the default repository**
+   Set `marketplace` as the default working repository:
+   ```shell
+   ddev config set repo marketplace
+   ```
+   If your repository is stored outside `$HOME/dd/`, specify the path before setting it as the default:
+   ```shell
+   ddev config set repos.marketplace "/path/to/marketplace"
+   ddev config set repo marketplace
+   ```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Create the scaffolding
 
@@ -119,7 +150,7 @@ At the core of each Agent-based integration is an *Agent Check* that periodicall
 
 #### Implement check logic
 
-The following example is for an integration name `Awesome`.
+The following example is for an integration named `Awesome`.
 
 The Agent Check is composed of a [service check][4] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible.
 
@@ -444,3 +475,4 @@ In addition to any code changes, the following is required when bumping an integ
 [20]: https://github.com/pypa/hatch
 [21]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [22]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[23]: https://docs.datadoghq.com/developers/integrations/?tab=integrations#out-of-the-box-integrations-vs-marketplace-offerings
