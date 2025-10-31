@@ -49,40 +49,51 @@ You'll need the following tools installed:
 - Git ([command line][12] or [GitHub Desktop client][13])
 
 ### Configure the Datadog Agent integration developer tool
-Use the Datadog Agent developer tool (ddev) to build and test your integration. The setup steps differ depending on whether you’re developing an [out-of-the-box (OOTB) integration or a Marketplace integration][23]. Select the appropriate tab below.
+Use the Datadog Agent developer tool to build and test your integration. The setup steps differ depending on whether you’re developing an [out-of-the-box (OOTB) integration or a Marketplace integration][23]. Select the appropriate tab below.
 
 {{< tabs >}}
 
 {{% tab "OOTB integration" %}}
 
 1. **Create a working directory**
+   
    The developer tool expects your work to be located in `$HOME/dd/`:
+
    ```shell
    mkdir $HOME/dd && cd $HOME/dd
    ```
 
 2. **Fork the repository**
+
    Fork the [Datadog/integrations-extras][14] repository to your GitHub account.
 
 3. **Clone your fork** 
+
    Clone your fork into the `dd` directory:
+
    ```shell
    git clone git@github.com:<YOUR_USERNAME>/integrations-extras.git
    ```
 
 4. **Create a feature branch**
+
    Create and switch to a new branch for your integration:
+
    ```shell
    cd integrations-extras
    git switch -c <YOUR_INTEGRATION_NAME> origin/master
    ```
 
 5. **Configure the default respository**
+
    Set `extras` as the default working repository: 
+
    ```shell
    ddev config set repo extras
    ```
+
    If your repository is stored outside `$HOME/dd/`, specify the path before setting it as the default:
+
    ```shell
    ddev config set repos.extras "/path/to/integrations-extras"
    ddev config set repo extras 
@@ -93,34 +104,45 @@ Use the Datadog Agent developer tool (ddev) to build and test your integration. 
 {{% tab "Marketplace integration" %}}
 
 1. **Create a working directory**
+
    The developer tool expects your work to be located in `$HOME/dd/`:
+
    ```shell
    mkdir $HOME/dd && cd $HOME/dd
    ```
 
 2. **Clone the repository**
+
    Clone the [Datadog/marketplace][15] repository. If you don’t have access, request it from your Datadog contact.
+
    ```shell
    git clone git@github.com:DataDog/marketplace.git
    ```
 
-3. **Create a feature branch** 
+3. **Create a feature branch**
+
    Create and switch to a new branch for your integration:
+
    ```shell
    cd marketplace
    git switch -c <YOUR_INTEGRATION_NAME> origin/master
    ```
 
 4. **Configure the default repository**
+
    Set `marketplace` as the default working repository:
+
    ```shell
    ddev config set repo marketplace
    ```
+
    If your repository is stored outside `$HOME/dd/`, specify the path before setting it as the default:
+
    ```shell
    ddev config set repos.marketplace "/path/to/marketplace"
    ddev config set repo marketplace
    ```
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -130,13 +152,17 @@ Use the Datadog Agent developer tool (ddev) to build and test your integration. 
 Use the `ddev create` command to generate the initial file and directory structure for your agent-based integration.
 
 1. **Run a dry run (recommended)**
+
     Use the `-n` or `--dry-run` flag to preview the files that will be created, without writing anything to disk. Confirm that the output path matches the expected repository location.
+
     ```shell
     ddev create -nt check_only <YOUR_INTEGRATION_NAME> --skip-manifest
     ```
 
 2. **Generate the files** 
+
     Once verified, run the same command without the `-n` to create the scaffolding. The tool will prompt you for integration details.
+    
     ```shell
     ddev create -t check_only <YOUR_INTEGRATION_NAME> --skip-manifest
     ```
