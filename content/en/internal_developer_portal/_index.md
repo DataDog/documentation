@@ -85,4 +85,4 @@ If your organization manages team structure in GitHub, join the preview for GitH
 [5]: /getting_started/internal_developer_portal/
 [6]: /account_management/teams/
 [7]: https://www.datadoghq.com/knowledge-center/platform-engineering/
-[8]: /account_management/teams/manage/#subteams-hierarchical-teams/
+[8]: /account_management/teams/manage/#subteams-hierarchical-teams

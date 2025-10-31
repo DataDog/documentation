@@ -60,4 +60,4 @@ If you manage entities as code (for example, through repository-backed service d
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/organization-settings/teams
 [4]: /account_management/teams/#team-filter
-[5]: /account_management/teams/manage/#subteams-hierarchical-teams/
+[5]: /account_management/teams/manage/#subteams-hierarchical-teams
