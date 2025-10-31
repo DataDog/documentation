@@ -237,7 +237,7 @@
   },
   "reference-tables": {
     "name": "Reference Tables",
-    "description": "Auto-generated tag Reference Tables"
+    "description": "View and manage Reference Tables in your organization."
   },
   "restriction-policies": {
     "name": "Restriction Policies",

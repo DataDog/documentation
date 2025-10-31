@@ -35,18 +35,6 @@
     - org_name: DataDog
 
       repos:
-      - repo_name: dd-go
-
-        contents:
-
-        - action: npm-integrations
-          branch: prod
-          globs:
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
-          - networks/model/domain/gcp_services.go
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
-          - networks/model/domain/azure_services.go
-
       - repo_name: ansible-datadog
         contents:
 

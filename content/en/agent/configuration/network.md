@@ -39,6 +39,7 @@ Add the following domains to your inclusion list to allow for Agent installation
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 - `apt.datadoghq.com`
+- `windows-agent.datadoghq.com`
 
 ## Destinations
 <div class="alert alert-warning">
