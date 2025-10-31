@@ -130,7 +130,7 @@ Le partitionnement vous permet de diviser une règle d'allocation unique en plus
 
 {{< tabs >}}
 
-{{% onglet "Allocation égale" %}}
+{{% tab "Allocation égale" %}}
 
 Avec cette partition, la même règle d'allocation égale est appliquée à chaque environnement.
 
@@ -138,7 +138,7 @@ Avec cette partition, la même règle d'allocation égale est appliquée à chaq
 
 {{% /tab %}}
 
-{{% onglet "Allocation proportionnelle" %}}
+{{% tab "Allocation proportionnelle" %}}
 
 Avec cette partition, la même règle d'allocation proportionnelle est appliquée à chaque environnement.
 
@@ -146,7 +146,7 @@ Avec cette partition, la même règle d'allocation proportionnelle est appliqué
 
 {{% /tab %}}
 
-{{% onglet "Allocation dynamique par métrique" %}}
+{{% tab "Allocation dynamique par métrique" %}}
 
 Avec cette partition, la même règle d'allocation dynamique par métrique est appliquée à chaque environnement.
 

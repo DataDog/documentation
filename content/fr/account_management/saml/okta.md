@@ -89,7 +89,7 @@ Pour activer la connexion initiée par l'IdP, effectuez les étapes suivantes :
 1. Le contenu de l'Assertion Consumer Service URL après `/saml/assertion` correspond à l'identifiant de votre entreprise. Saisissez cette valeur avec le préfixe `/id/` dans Okta pour finaliser votre configuration.
 1. Cliquez sur **Save Changes**.
 
-{{< img src="account_management/saml/okta/company_id.png" alt='Configuration SAML dans Datadog, mettant en évidence l'identifiant de l'entreprise dans l'URL du service consommateur d'assertion' style="width:100%;" >}}
+{{< img src="account_management/saml/okta/company_id.png" alt="Configuration SAML dans Datadog, mettant en évidence l'identifiant de l'entreprise dans l'URL du service consommateur d'assertion" style="width:100%;" >}}
 
 Revenez dans Okta pour effectuer l'étape suivante de la configuration.
 
