@@ -87,7 +87,7 @@ API ユーザーの場合、エンドポイントを使用して ["All"][2] (す
 
 ## Billable on-demand pills and committed lines
 
-<div class="alert alert-warning">この機能はベータ版です。アクセスをリクエストし、お客様の組織がこの機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
+<div class="alert alert-danger">この機能はベータ版です。アクセスをリクエストし、お客様の組織がこの機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
 
 Billable on-demand pills highlight the portion of billable usage that is on-demand usage. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
 
@@ -133,7 +133,7 @@ Log Management タブにあるこの表には、インデックス名および�
 
 ## First-time usage notifications
 
-<div class="alert alert-warning">この機能はベータ版です。アクセスをリクエストし、お客様の組織がこの機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
+<div class="alert alert-danger">この機能はベータ版です。アクセスをリクエストし、お客様の組織がこの機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
 
 The first-time usage notifications feature sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent approximately 48 hours after the usage first occurs during a given month.
 

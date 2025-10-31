@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
@@ -39,8 +39,14 @@ Add the following domains to your inclusion list to allow for Agent installation
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 - `apt.datadoghq.com`
+- `windows-agent.datadoghq.com`
 
 ## Destinations
+<div class="alert alert-warning">
+Starting with version 7.67.0, the Agent converts Datadog sites to fully qualified domain names (by adding a dot at the end of the domain) to reduce the number of DNS queries.
+For example, it sends APM payloads to <code>trace.agent.datadoghq.com.</code>.<br>
+This behavior can be disabled in version 7.72.0 and later by setting <code>convert_dd_site_fqdn.enabled</code> to <code>false</code> in the configuration, or with the environment variable <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
+</div>
 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -248,7 +254,7 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 ## Open ports
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 All outbound traffic is sent over SSL through TCP or UDP.
 <br><br>
 Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
@@ -367,7 +373,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 

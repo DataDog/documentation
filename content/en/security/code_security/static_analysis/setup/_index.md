@@ -11,7 +11,7 @@ algolia:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -20,10 +20,14 @@ algolia:
 To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
-
 ### Scan with Datadog-hosted scanning
 
-For GitHub repositories, you can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub][18] (excluding repositories that use [Git Large File Storage][17])
+- [GitLab.com and GitLab Self-Managed][20]
+- [Azure DevOps][19]
+
+To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
 Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
@@ -43,7 +47,7 @@ Datadog Static Code Analysis supports all source code management providers, with
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
+Configure a GitHub App with the [GitHub integration tile][1] and set up the [source code integration][2] to enable inline code snippets and [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
@@ -59,68 +63,21 @@ When installing a GitHub App, the following permissions are required to enable c
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
+See the [GitLab source code setup instructions][1] to connect GitLab repositories to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
-
-[1]: https://github.com/DataDog/gitlab-integration-setup
+[1]: /integrations/gitlab-source-code/#setup 
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
-</div>
+**Note:** Your Azure DevOps integrations must be connected to a Microsoft Entra tenant. Azure DevOps Server is **not** supported.
 
-If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
-
-**Note:** Azure DevOps Server is not supported.
-
-### Create and register a Microsoft Entra app
-If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
-
-1. Go to [Code Security setup][1].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
-3. Select **CI Pipelines**.
-4. Select the scan types you want to use.
-5. Select **Azure DevOps** as your source code management provider.
-6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
-   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
-   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
-8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
-9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
-10. Click **New client secret** and create a secret with the description and expiration values you want to use.
-11. Copy and paste the string in the **Value** column for your new secret.
-12. Paste the secret into Datadog and click **Create Configuration** to complete the connection between your Entra tenant and Datadog.
-13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
-    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
-14. Click **Submit Organization**.
-
-### Configure project service hooks
-
-To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
-
-First, set your environment variables (note: the Datadog UI will fill these values out for you):
-```shell
-export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
-export DD_API_KEY="..."                         # Datadog API Key
-```
-
-Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
-```shell
-curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
-./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
-```
-
-Click [here][4] to see our CLI that automates this process.
+See the [Azure source code setup instructions][4] to connect Azure DevOps repositories to Datadog.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/DataDog/azdevops-sci-hooks
+[4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
 
 {{% /tab %}}
@@ -146,7 +103,7 @@ There are three levels of configuration:
 * Repo Level Configuration (Datadog)
 * Repo Level Configuration (Repo File)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
 </div>
 
@@ -704,3 +661,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
 [16]: https://www.first.org/cvss/
+[17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
+[19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
+[20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider

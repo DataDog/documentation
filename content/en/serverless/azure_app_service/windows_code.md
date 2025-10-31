@@ -4,9 +4,9 @@ aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/azure_app_services_windows
 further_reading:
-- link: "/integrations/guide/azure-portal/"
+- link: "/integrations/guide/azure-native-integration/"
   tag: "Documentation"
-  text: "Azure Portal Integration Guide"
+  text: "Azure Native Integration Guide"
 - link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
   tag: "Blog"
   text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
@@ -50,10 +50,10 @@ The Datadog .NET, Java, and Node.js APM extensions support the following runtime
 {{% tab ".NET" %}}
 Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution within your application environment.
 
-Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Portal guide][2].
+Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Native integration guide][2].
 
-[1]: /integrations/guide/azure-portal/?tab=vmextension#app-service-extension
-[2]: /integrations/guide/azure-portal/
+[1]: /integrations/guide/azure-native-integration/#app-service-extension
+[2]: /integrations/guide/azure-native-integration/
 {{% /tab %}}
 {{% tab "Java" %}}
 Support for Java Web Apps is in Preview for extension v2.4+.
@@ -73,7 +73,7 @@ If you haven't already, set up the [Datadog-Azure integration][5]. You can verif
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
-The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the Windows Web App extension for your runtime.
 
 If you don't already have Terraform set up, [install Terraform][1], create a new directory, and make a file called `main.tf`.
 
@@ -101,7 +101,7 @@ resource "azurerm_service_plan" "my_asp" {
 
 module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/windows"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   name                = "my-web-app"        // Replace with your web app name
   resource_group_name = "my-resource-group" // Replace with your resource group
@@ -176,14 +176,14 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 3. Click **Save**. This restarts your application.
 
 4. Stop your application by clicking **Stop**.
-   <div class="alert alert-warning">You <u>must</u> stop your application to successfully install Datadog.</div>
+   <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
 5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
 6. Accept the legal terms, click **OK**, and wait for the installation to complete. 
-   <div class="alert alert-warning">This step requires that your application be in a stopped state.</div>
+   <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
 7.  Start the main application, click **Start**:
 
@@ -519,7 +519,7 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
+<div class="alert alert-danger">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
     Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 {{% /tab %}}

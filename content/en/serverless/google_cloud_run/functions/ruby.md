@@ -34,6 +34,10 @@ gem 'datadog'
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform function="true" %}}
+   {{% /tab %}}
+
    {{% tab "Other" %}}
    {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
@@ -80,4 +84,4 @@ logger.info "Hello World!"
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#instrument-your-application
 [2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
 [3]: /developers/dogstatsd/?tab=ruby#install-the-dogstatsd-client
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples-5

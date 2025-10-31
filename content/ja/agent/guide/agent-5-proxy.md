@@ -26,7 +26,7 @@ Squid に関する具体的な情報は、本ページの [Squid](#squid) のセ
 
 Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent コンフィギュレーションファイルを編集します。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
 </div>
 

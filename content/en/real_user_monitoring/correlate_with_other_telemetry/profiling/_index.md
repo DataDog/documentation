@@ -118,5 +118,5 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API

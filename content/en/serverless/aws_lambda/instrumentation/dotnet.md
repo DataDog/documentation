@@ -159,6 +159,11 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="dotnet" layer="dd-trace-dotnet" layerParamTypescript="dotnetLayerVersion" layerParamPython="dotnet_layer_version">}}
+{{% /tab %}}
+
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension
@@ -201,7 +206,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "3.2.1"
+  version = "4.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"

@@ -18,7 +18,7 @@ further_reading:
   tag: Documentación
   text: Límites de frecuencias
 title: Referencia de API
-type: documentación
+type: api
 ---
 
 {{< h2 >}}Referencia de API{{< /h2 >}}
@@ -35,7 +35,7 @@ Para probar la API [![Ejecuta en Postman][3]](https://god.gw.postman.com/run-col
 
 El [uso de la API][4] es una guía de los endpoints.
 
-**Notas**: 
+**Notas**:
    - Añade tus valores de API y de clave de aplicación a la pestaña **Variables** de la recopilación de la API Datadog.
    - Los ejemplos de código cURL suponen el uso de coreutils BASH y GNU. En macOS, puedes instalar coreutils con el [Gestor de paquetes Homebrew][5]: `brew install coreutils`
 
@@ -62,7 +62,7 @@ Gradle - Añade esta dependencia al archivo de compilación de tu proyecto:
 compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
-#### Uso
+#### Utilización
 
 ```java
 import com.datadog.api.client.ApiClient;
@@ -126,7 +126,7 @@ Ejemplo de ejecución con el comando `gradle run`.
 ```sh
 pip install datadog
 ```
-#### Uso
+#### Utilización
 ```python
 import datadog
 ```
@@ -137,7 +137,7 @@ import datadog
 ```console
 pip3 install datadog-api-client
 ```
-#### Uso
+#### Utilización
 ```python
 import datadog_api_client
 ```
@@ -148,7 +148,7 @@ import datadog_api_client
 ```sh
 gem install dogapi
 ```
-#### Uso
+#### Utilización
 ```ruby
 require 'dogapi'
 ```
@@ -159,7 +159,7 @@ require 'dogapi'
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
-#### Uso
+#### Utilización
 ```ruby
 require 'datadog_api_client'
 ```
@@ -170,7 +170,7 @@ require 'datadog_api_client'
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
-#### Uso
+#### Utilización
 ```go
 import (
         "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
@@ -192,7 +192,7 @@ npm install @datadog/datadog-api-client
 yarn add @datadog/datadog-api-client
 ```
 
-#### Uso
+#### Utilización
 ```js
 import { <VERSION> } from 'datadog-api-client';
 ```
@@ -209,7 +209,7 @@ Ejecuta `cargo add datadog-api-client` o añade lo siguiente a `Cargo.toml` en `
 datadog-api-client = "0"
 ```
 
-#### Uso
+#### Utilización
 Prueba el siguiente fragmento para validar la clave de tu API Datadog:
 ```rust
 use datadog_api_client::datadog::Configuration;

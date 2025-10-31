@@ -24,7 +24,7 @@ Synthetic browser tests embed the Real User Monitoring SDK, allowing you to expl
 
 ## Allow Synthetic data on RUM applications
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If the target application is already instrumented with RUM, you should not enable RUM data collection within the synthetic test configuration as this can result in unexpected behavior.</div>
 
 In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 

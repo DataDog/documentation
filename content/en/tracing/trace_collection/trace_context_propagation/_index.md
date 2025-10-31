@@ -100,6 +100,7 @@ The Datadog Java SDK supports the following trace context formats, including dep
 |                        | `b3single`          |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
+| [Baggage][7]          | `baggage`           |
 | [AWS X-Ray][5]         | `xray`              |
 | [None][6]              | `none`              |
 
@@ -117,6 +118,7 @@ In addition to the environment variable configuration, you can also update the p
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
 [6]: #none-format
+[7]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -130,9 +132,9 @@ The Datadog Python SDK supports the following trace context formats, including d
 |------------------------|---------------------------------|
 | [Datadog][1]           | `datadog`                       |
 | [W3C Trace Context][2] | `tracecontext`                  |
-| [Baggage][6]          | `baggage`                       |
+| [Baggage][6]           | `baggage`                       |
 | [B3 Single][3]         | `b3`                            |
-|                        | `b3 single header` (deprecated) |
+|                        | `b3 single header` (removed in v3.0) |
 | [B3 Multi][4]          | `b3multi`                       |
 | [None][5]              | `none`                          |
 

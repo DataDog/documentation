@@ -12,6 +12,8 @@ aliases:
     - /integrations/shoreline_license/
     - /integrations/shoreline_software_license/
     - /integrations/pingdom_v3/
+    - /integrations/perimeterx/
+    - /integrations/open-policy-agent/
 description: Gather data from all of your systems, apps, & services
 algolia:
     tags: ['integration', 'integration setup']

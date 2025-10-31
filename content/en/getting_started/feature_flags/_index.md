@@ -5,6 +5,12 @@ further_reading:
 - link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
   tag: 'External Site'
   text: 'OpenFeature Web SDK documentation'
+- link: 'https://www.datadoghq.com/blog/feature-flags/'
+  tag: 'Blog'
+  text: 'Ship features faster and safer with Datadog Feature Flags'
+- link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
+  tag: 'Blog'
+  text: 'How to bridge speed and quality in experiments through unified data'
 site_support_id: getting_started_feature_flags
 ---
 
