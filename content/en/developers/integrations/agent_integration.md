@@ -65,7 +65,7 @@ Use the Datadog Agent developer tool to build and test your integration. The set
 
 2. **Fork the repository**
 
-   Fork the [Datadog/integrations-extras][14] repository to your GitHub account.
+   Fork the [Datadog/integrations-extras][101] repository to your GitHub account.
 
 3. **Clone your fork** 
 
@@ -99,6 +99,8 @@ Use the Datadog Agent developer tool to build and test your integration. The set
    ddev config set repo extras 
    ```
 
+[101]: https://github.com/Datadog/integrations-extras
+
 {{% /tab %}}
 
 {{% tab "Marketplace integration" %}}
@@ -113,7 +115,7 @@ Use the Datadog Agent developer tool to build and test your integration. The set
 
 2. **Clone the repository**
 
-   Clone the [Datadog/marketplace][15] repository. If you don’t have access, request it from your Datadog contact.
+   Clone the [Datadog/marketplace][101] repository. If you don’t have access, request it from your Datadog contact.
 
    ```shell
    git clone git@github.com:DataDog/marketplace.git
@@ -143,6 +145,8 @@ Use the Datadog Agent developer tool to build and test your integration. The set
    ddev config set repo marketplace
    ```
 
+[101]: https://github.com/DataDog/marketplace
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -162,7 +166,7 @@ Use the `ddev create` command to generate the initial file and directory structu
 2. **Generate the files** 
 
     Once verified, run the same command without the `-n` to create the scaffolding. The tool will prompt you for integration details.
-    
+
     ```shell
     ddev create -t check_only <YOUR_INTEGRATION_NAME> --skip-manifest
     ```
@@ -496,13 +500,13 @@ Make sure to update all references to the version number across the integration'
 [1]: https://docs.datadoghq.com/agent/
 [2]: https://docs.datadoghq.com/metrics/
 [3]: https://docs.datadoghq.com/service_management/events/
-[4]: https://docs.datadoghq.com/developers/service_checks/
+[4]: /developers/service_checks/
 [5]: https://docs.datadoghq.com/logs/log_collection/agent_checks/
 [6]: https://docs.datadoghq.com/agent/guide/integration-management/?tab=linux#install
 [7]: /developers/integrations/?tab=integrations#join-the-datadog-partner-network
 [8]: /developers/integrations/build_integration/#create-a-listing
 [9]: https://github.com/pypa/pipx
-[10]: https://docs.datadoghq.com/developers/integrations/python/
+[10]: /developers/integrations/python/
 [11]: https://docs.docker.com/get-docker/
 [12]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [13]: https://desktop.github.com/
@@ -515,5 +519,5 @@ Make sure to update all references to the version number across the integration'
 [20]: https://github.com/pypa/hatch
 [21]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [22]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[23]: https://docs.datadoghq.com/developers/integrations/?tab=integrations#out-of-the-box-integrations-vs-marketplace-offerings
+[23]: /developers/integrations/?tab=integrations#out-of-the-box-integrations-vs-marketplace-offerings
 [24]: https://datadoghq.dev/integrations-core/tutorials/logs/http-crawler/
