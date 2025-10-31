@@ -87,8 +87,3 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/app-builder/apps/list
-[10]: /actions/app_builder/build/?site=us#create-a-custom-app
-[11]: /actions/app_builder/build/#build-an-app-with-ai
-[12]: /actions/app_builder/build/#build-an-app-from-a-layout
-[13]: /actions/app_builder/build/#build-an-app-from-data
-[14]: /actions/app_builder/build/#build-with-app-playground
