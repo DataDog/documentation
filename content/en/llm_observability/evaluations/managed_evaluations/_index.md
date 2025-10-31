@@ -23,7 +23,7 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
-You can learn more about the [compatibility requirements here][22].
+Learn more about the [compatibility requirements][22].
 
 ## Connect your LLM provider account
 
