@@ -51,7 +51,7 @@ Sensitive data, such as credit card numbers, API keys, IP addresses, and persona
 
 ## Scan telemetry data
 
-{{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="Five different sensitive issues detected where two have critical priority, one has medium priority, and two are info." style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="Five different sensitive findings detected where two have critical priority, one has medium priority, and two are info." style="width:100%;" >}}
 
 Sensitive Data Scanner can scan your data [in the cloud](#in-the-cloud) or [within your environment](#in-your-environment).
 
@@ -91,7 +91,7 @@ See [Set Up Pipelines][7] for more information.
   Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Summary page's datastore section with three Amazon S3 issues" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Findings page's datastore section with three Amazon S3 findings" style="width:100%;" >}}
 
 If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
 
@@ -103,25 +103,25 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 
-## Investigate sensitive data issues
+## Investigate sensitive data findings
 
-{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/findings_20251014.png" alt="The Findings page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 
-Use the [Summary page][13] to see details of sensitive data issues identified by your scanning rules. These details include:
+Use the [Findings page][13] to see details of sensitive data findings identified by your scanning rules. These details include:
 
 - The specific scanning rule that detected the matches, so that you can determine which rules to modify as needed.
-- The scanning group in which the issue has occurred, so that you can determine the blast radius of any leaks.
-- The number of events associated with the issue to help you gauge its scope and severity.
-- A graph of the events associated with the issue to help you pinpoint when an issue started and see how it has progressed.
-- Related cases created for the issue.
+- The scanning group in which the finding has occurred, so that you can determine the blast radius of any leaks.
+- The number of events associated with the finding to help you gauge its scope and severity.
+- A graph of the events associated with the finding to help you pinpoint when a finding started and see how it has progressed.
+- Related cases created for the finding.
 
-See [Investigate Sensitive Data Issues][14] for more information on how to use the Summary page to triage your sensitive data issues.
+See [Investigate Sensitive Data Findings][14] for more information on triaging sensitive data using the Findings page.
 
 ## Review sensitive data trends
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data issues is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
 
 ## Further reading
 
@@ -133,14 +133,14 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [4]: /security/sensitive_data_scanner/setup/telemetry_data/
 [5]: /observability_pipelines/
 [6]: /observability_pipelines/processors/sensitive_data_scanner
-[7]: /observability_pipelines/set_up_pipelines/
+[7]: /observability_pipelines/configuration/set_up_pipelines/
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /remote_configuration
 [10]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [11]: /security/cloud_security_management
 [12]: /security/sensitive_data_scanner/setup/cloud_storage/
 [13]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
-[14]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
+[14]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
 [15]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
 [16]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
 [17]: /security/sensitive_data_scanner/scanning_rules/

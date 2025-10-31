@@ -56,6 +56,8 @@ sources:
   dst: "i18n/{lang}.json"
 - src: "layouts/shortcodes/**/*.en.md"
   dst: "layouts/shortcodes/**/*.{lang}.md"
+- src: "layouts/shortcodes/mdoc/en/**/*.ast.json"
+  dst: "layouts/shortcodes/mdoc/{lang}/**/*.ast.json"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
 - src: "config/_default/menus/main.en.yaml"

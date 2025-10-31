@@ -138,6 +138,8 @@ code_language_ids:
     traces: "Traces"
     metrics: "Metrics"
     logs: "Logs"
+    kubernetes_daemonset: "Kubernetes (DaemonSet)"
+    kubernetes_gateway: "Kubernetes (Gateway)"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -263,6 +265,7 @@ unsupported_sites:
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
+  apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
@@ -277,6 +280,7 @@ unsupported_sites:
   correlation: [gov] #Event management correlation
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
+  ddot_collector: [gov]
   dora_metrics: [gov]
   dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
@@ -290,13 +294,15 @@ unsupported_sites:
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
+  internal_developer_portal: [gov]
+  live_debugger: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
   otlp_agentless: [gov]
   overview_pages: [gov]
-  quality_gates: [gov]
+  pr_gates: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
   resource_catalog: [gov]
