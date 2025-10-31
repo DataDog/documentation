@@ -38,19 +38,19 @@ Below are a few examples of what App Builder apps can do:
 - Use a PagerDuty integration to see who is on-call for each team in an organization.
 - Summarize the progress of each PR in a given repo.
 
-{{< img src="/service_management/app_builder/app-builder-app.png" alt="A screenshot of an app in App Builder" caption="An app in App Builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" caption="An app in App Builder" style="width:100%;" >}}
 
 ## Configure App Builder actions
 
 Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.
 
-{{< img src="/service_management/app_builder/app-builder-action-catalog-2.png" alt="A screenshot of App Builder after clicking Add Action" caption="The Action Catalog modal inside App Builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-action-catalog-2.png" alt="The Action Catalog modal inside App Builder" caption="The Action Catalog modal inside App Builder" style="width:100%;" >}}
 
 ## Take action directly from dashboards
 
 You can use your apps from the Apps page or [access them directly from within your dashboards][6]. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-2.png" alt="A screenshot of an app embedded in a dashboard" caption="An ECS Task Balancer app embedded in a dashboard" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-2.png" alt="An ECS Task Balancer app embedded in a dashboard" caption="An ECS Task Balancer app embedded in a dashboard" style="width:100%;" >}}
 
 ### Apps created by Datadog
 
@@ -58,7 +58,7 @@ Apps created by Datadog are apps that are embedded in Integration dashboards. Th
 
 For example, the [EC2 integration dashboard][7] offers an EC2 instance management app. When you load the dashboard, the app is populated with demo data:
 
-{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="A screenshot of an EC2 app created by Datadog; the app is populated with demo data." caption="An EC2 app created by Datadog" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="An EC2 app created by Datadog" caption="An EC2 app created by Datadog" style="width:100%;" >}}
 
 To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
 
@@ -68,7 +68,7 @@ You can change the selected connection by clicking **Change Connection** in the 
 
 The App Builder Overview dashboard provides a high-level overview of your Datadog apps. To find the dashboard, go to your [Dashboard list][8] and search for `App Builder Overview`.
 
-{{< img src="service_management/app_builder/app-builder-overview-dashboard-2.png" alt="A screenshot of the App Builder Overview dashboard" caption="The App Builder Overview dashboard"style="width:100%;" >}}
+{{< img src="service_management/app_builder/app-builder-overview-dashboard-2.png" alt="The App Builder Overview dashboard" caption="The App Builder Overview dashboard"style="width:100%;" >}}
 
 ## Further reading
 
