@@ -27,7 +27,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
 
 Proxies, load balancers, and connection poolers
-: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as Supabase’s 'Dedicated Pooler' (pgbouncer) or 'Session Pooler' (Supavisor). If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as Supabase’s Dedicated Pooler (pgbouncer) or Session Pooler (Supavisor). If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -66,7 +66,7 @@ GRANT USAGE ON SCHEMA extensions TO datadog;
 GRANT pg_monitor TO datadog;
 ```
 
-You will also need to navigate to the extensions tab under the Database Management section and make sure pg_stat_statements setting is enabled.
+In addition, ensure that the `pg_stat_statements` extension is enabled for your project in Supabase.```
 
 {{% /tab %}}
 
@@ -82,14 +82,14 @@ GRANT USAGE ON SCHEMA extensions TO datadog;
 GRANT pg_monitor TO datadog;
 ```
 
-You will also need to navigate to the extensions tab under the Database Management section and make sure pg_stat_statements setting is enabled.
+In addition, ensure that the `pg_stat_statements` extension is enabled for your project in Supabase.```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
-Create the function **in every database** to enable the Agent to collect explain plans.
+Create the following function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -120,7 +120,7 @@ SECURITY DEFINER;
 
 ### Verify
 
-To verify the permissions are correct, connect to the chosen database as the datadog user you just created and run the following commands to confirm the Agent user is able to connect to the database and read core tables. For example, if your chosen database is `postgres`, connect as the `datadog` user using [psql][7] and run:
+To verify that the permissions are correct, connect to the database as the `datadog` user and run the following commands. For example, if your database is `postgres`, connect as the `datadog` user using [psql][7] and run:
 
 ```shell
 psql -h {SUPABASE_HOST} -U datadog postgres -A \
@@ -137,7 +137,7 @@ psql -h {SUPABASE_HOST} -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-When it prompts for a password, use the password you entered when you created the `datadog` user.
+When prompted for a password, use the password you created for the `datadog` user.
 
 ## Install the Agent
 
@@ -145,7 +145,7 @@ Installing the Datadog Agent also installs the Postgres check, which is required
 If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
 <div class="alert alert-info">Supabase’s default direct connection string is only valid on IPv6 networks.
-To connect the Agent to a Supabase instance with this method you need to ensure your machine running the Agent is IPv6 enabled. You should reference your cloud provider’s documentation to achieve this.
+To connect the Agent to a Supabase instance using this method, ensure that the machine running the Agent is IPv6 enabled. Reference your cloud provider’s documentation for more information.
 Supabase instances on the Pro plan or above support IPv4 addresses as an add-on.</div>
 
 Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Supabase instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
@@ -177,7 +177,7 @@ instances:
 
 Although we recommend having a direct connection to the database instead of connecting via proxy, you can still connect the Agent to your Supabase instance if the above options are not available to you. This will work best when you only have one instance in your Supabase project.
 
-Go to your Supabase account, click the Connect button on the top bar of the page and select Session pooler as the connection method. Click view parameters and copy them into your Agent configuration file:
+Get the session pooler connection string for your project via the Connect dialog, and copy it into your Agent configuration file:
 
 ```yaml
 init_config:
