@@ -224,7 +224,7 @@ If your repositories are organized under [**GitLab groups or subgroups**][1] (fo
 `https://gitlab.com/my-org/group(/subgroup)/repo`),
 the automatically detected path for your service may not resolve correctly because of the nested group structure.
 
-To ensure that DORA metrics correctly account for the relative paths of your service’s source code,
+To ensure that DORA metrics correctly account for the relative paths of your service\'s source code,
 you can use the following configuration in your service definition:
 
 ```yaml
