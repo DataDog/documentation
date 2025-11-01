@@ -411,7 +411,7 @@ Solutions to this issue are:
 
 ##### Paketo buildpack for Datadog versions older than 4.6.0
 
-Paketo buildpack for Datadog had a bug in older versions that materialized with the following error message:
+Paketo buildpack for Datadog have a [bug](https://github.com/paketo-buildpacks/datadog/issues/378) in version 6.0.0 that materializes with the following error message:
 
 ```text
 disabling Datadog at launch time is unsupported for Node
@@ -419,7 +419,30 @@ ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
 paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 ```
 
-The solution to this issue is to upgrade to version 4.6.0 or later.
+The solution to this issue is to define the `BP_NATIVE_IMAGE` environment variable to `true` in the `spring-boot-maven-plugin` configuration:
+
+```yaml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+        <image>
+          ...
+          <env>
+            ...
+            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+            ...
+          </env>
+        </image>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+You could also had the same error if you used version prior to 4.6.0. The solution is to update to a more recent version.
 
 ##### Problem activating Datadog tracer
 
