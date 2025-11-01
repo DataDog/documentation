@@ -1,108 +1,132 @@
 {
   "$$mdtype": "Node",
-  "errors": [],
-  "lines": [],
   "inline": false,
   "attributes": {
     "frontmatter": {
       "title": {
-        "string": "모바일 세션 리플레이 설치 및 설정"
+        "ast-str-485e15cc-0738-4baa-98b9-db3f8d752021": {
+          "string": "모바일 세션 리플레이 설치 및 설정"
+        }
       },
       "description": {
-        "string": "모바일 세션 리플레이을 설치하고 설정합니다."
-      },
-      "further_reading": [
-        {
-          "link": "/real_user_monitoring/session_replay/mobile",
-          "text": {
-            "string": "Mobile Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/real_user_monitoring/session_replay/mobile/app_performance",
-          "text": {
-            "string": "How Mobile Session Replay Impacts App Performance"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/real_user_monitoring/session_replay/mobile/privacy_options",
-          "text": {
-            "string": "Mobile Session Replay Privacy Options"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
-          "text": {
-            "string": "Troubleshoot Mobile Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/real_user_monitoring/session_replay",
-          "text": {
-            "string": "Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking",
-          "text": {
-            "string": "Web View Tracking"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
+        "ast-str-2b6994a7-5d24-4d85-8aca-c842cf4ee2ee": {
+          "string": "모바일 세션 리플레이을 설치하고 설정합니다."
         }
-      ]
-    }
-  },
-  "children": [
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        28,
-        29
-      ],
-      "inline": false,
-      "attributes": {
-        "file": "rum/session_replay/setup_and_configuration.mdoc.md"
       },
-      "children": [],
-      "type": "tag",
-      "tag": "partial",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "file",
-          "value": "rum/session_replay/setup_and_configuration.mdoc.md"
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 28
-        },
-        "end": {
-          "line": 29
+      "further_reading": {
+        "translationListData": {
+          "0": {
+            "link": "/real_user_monitoring/session_replay/mobile",
+            "text": {
+              "ast-str-9213fa71-a375-4bf7-9b6a-8015d1282f36": {
+                "string": "Mobile Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-fa56b914-44fe-4871-940d-7603600b6274": {
+                "string": "설명서"
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/session_replay/mobile/app_performance",
+            "text": {
+              "ast-str-379f506e-3d7a-4fea-b58f-490fec1cc61a": {
+                "string": "모바일 세션 리플레이이 앱 성능에 미치는 영향"
+              }
+            },
+            "tag": {
+              "ast-str-7a8e5a41-0f5a-45ec-a218-471f1f769312": {
+                "string": "설명서"
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring/session_replay/mobile/privacy_options",
+            "text": {
+              "ast-str-a35c2181-a87a-4f27-a952-7e4a2196c747": {
+                "string": "모바일 세션 리플레이 개인정보 보호 옵션"
+              }
+            },
+            "tag": {
+              "ast-str-166d237b-a671-42e7-b59d-8653457db279": {
+                "string": "설명서"
+              }
+            }
+          },
+          "3": {
+            "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
+            "text": {
+              "ast-str-7202702e-8627-46a1-b4c1-9d7d0ce8f95a": {
+                "string": "모바일 세션 리플레이 문제 해결"
+              }
+            },
+            "tag": {
+              "ast-str-fd107bd1-b4a4-4fdd-89e5-1240a31a9f04": {
+                "string": "설명서"
+              }
+            }
+          },
+          "4": {
+            "link": "/real_user_monitoring/session_replay",
+            "text": {
+              "ast-str-58e8f44c-bfb9-4d8b-b918-3b9216e1e522": {
+                "string": "Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-45071591-2694-4e30-8e47-902cdeb8a28b": {
+                "string": "설명서"
+              }
+            }
+          },
+          "5": {
+            "link": "/real_user_monitoring/application_monitoring/android/web_view_tracking",
+            "text": {
+              "ast-str-22e2b6a5-6d8d-4a2a-a861-8142fdd70d05": {
+                "string": "웹 보기 추적"
+              }
+            },
+            "tag": {
+              "ast-str-0cd14bce-40c2-46b6-93f1-d5a05bd92239": {
+                "string": "설명서"
+              }
+            }
+          }
         }
       }
     }
-  ],
+  },
+  "children": {
+    "translationListData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+        },
+        "children": {
+          "translationListData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "translationListData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 28-29"
+      }
+    }
+  },
   "type": "document",
-  "annotations": [],
+  "annotations": {
+    "translationListData": {}
+  },
   "slots": {}
 }
