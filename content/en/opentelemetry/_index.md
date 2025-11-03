@@ -101,7 +101,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 {{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
-**Best for**: Customers looking to gain both OTel vendor neutrality and Datadog ecosystem innovations, such as:
+**Best for**: Users looking to gain both OTel vendor neutrality and Datadog ecosystem innovations, such as:
 
 - Fleet Automation
 - Live Container Monitoring
