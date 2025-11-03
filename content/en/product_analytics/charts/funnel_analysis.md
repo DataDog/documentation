@@ -40,7 +40,24 @@ If you have a starting point in mind, but aren't sure what your users did next, 
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_dropoffs.png" alt="The funnel step editor automatically loads the top most common views and actions that users typically see and take next." style="width:50%;" >}}
 
+
+### `*** START HERE ***` 
+Click on the funnel chart to open a side panel with additional context about user dropoffs. Then, navigate between steps to see:
+
+- **Step performance**: See metrics related to conversion (for example `conversion rate`, `dropped off sessions` and `average conversion time`).
+- **Branching paths from previous steps**: Discover the other paths that users take instead of the ones you anticipate. This section is only available when looking at a step between two views in a funnel.
+- **Issues that might affect conversion**: See the top issues that might be affecting conversions and investigate them further with the links to RUM, Error Tracking, and Session Replay.
+
+
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_metrics.png" alt="Click on the funnel view to see additional context about user dropoffs." style="width:90%;" >}}
+
+# `IS THIS STILL TRUE?`
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
+
+### `*** END HERE ***`
+
+<br>
+<br>
 
 ### Filtering
 
