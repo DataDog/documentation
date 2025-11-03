@@ -222,7 +222,7 @@ If the [GitLab integration][1] is not already installed, install it on the [GitH
 
 If your repositories are organized under [**GitLab groups or subgroups**][1] (for example,
 `https://gitlab.com/my-org/group(/subgroup)/repo`),
-the automatically detected path for your service may not resolve correctly because of the nested group structure.
+the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
 
 To ensure that DORA metrics handle your service's source code paths correctly,
 you can use the following configuration in your service definition:
