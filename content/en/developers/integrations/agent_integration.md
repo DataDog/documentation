@@ -40,7 +40,7 @@ Follow these steps to create your agent-based integration:
 
 ### Preqrequisites
 
-You'll need the following tools installed:
+Ensure following tools are installed:
 
 - Python v3.12
 - [pipx][9] for installing development tooling and dependencies
@@ -49,7 +49,7 @@ You'll need the following tools installed:
 - Git ([command line][12] or [GitHub Desktop client][13])
 
 ### Configure the Datadog Agent integration developer tool
-Use the Datadog Agent developer tool to build and test your integration. The setup steps differ depending on whether you’re developing an [out-of-the-box (OOTB) integration or a Marketplace integration][23]. Select the appropriate tab below.
+Use the Datadog Agent developer tool to build and test your integration. The setup steps differ depending on whether you're developing an [out-of-the-box (OOTB) integration or a Marketplace integration][23]. Select the appropriate tab below.
 
 {{< tabs >}}
 
@@ -115,7 +115,7 @@ Use the Datadog Agent developer tool to build and test your integration. The set
 
 2. **Clone the repository**
 
-   Clone the [Datadog/marketplace][101] repository. If you don’t have access, request it from your Datadog contact.
+   Clone the [Datadog/marketplace][101] repository. If you don't have access, request it from your Datadog contact.
 
    ```shell
    git clone git@github.com:DataDog/marketplace.git
@@ -157,7 +157,7 @@ Use the `ddev create` command to generate the initial file and directory structu
 
 1. **Run a dry run (recommended)**
 
-    Use the `-n` or `--dry-run` flag to preview the files that will be created, without writing anything to disk. Confirm that the output path matches the expected repository location.
+    Use the `-n` or `--dry-run` flag to preview the files that are generated, without writing anything to disk. Confirm that the output path matches the expected repository location.
 
     ```shell
     ddev create -nt check_only <YOUR_INTEGRATION_NAME> --skip-manifest
@@ -165,7 +165,7 @@ Use the `ddev create` command to generate the initial file and directory structu
 
 2. **Generate the files** 
 
-    Once verified, run the same command without the `-n` to create the scaffolding. The tool will prompt you for integration details.
+    After verifying, run the same command without the `-n` to create the scaffolding. Follow the prompts to provide integration details.
 
     ```shell
     ddev create -t check_only <YOUR_INTEGRATION_NAME> --skip-manifest
@@ -175,7 +175,7 @@ Use the `ddev create` command to generate the initial file and directory structu
 
 Each agent-based integration centers around an agent check, a Python class that periodically collects telemetry and submits it to Datadog.
 
-Agent [checks][16] inherit from the the `AgentCheck` base class and must meet the following requirements:
+Agent [checks][16] inherit from the `AgentCheck` base class and must meet the following requirements:
 
 - **Python compatibility**:
     - Integrations for Datadog Agent v7+ must support Python 3. 
@@ -189,7 +189,7 @@ Agent [checks][16] inherit from the the `AgentCheck` base class and must meet th
 
 #### Implement check logic
 
-The following example shows a simple integration named `Awesome`.
+The following example shows logic for an integration named `Awesome`.
 
 This check defines a [service check][4] called `awesome.search`, which searches a webpage for a specific string:
     - Returns `OK` if the string is found.
@@ -198,7 +198,7 @@ This check defines a [service check][4] called `awesome.search`, which searches 
 
 To learn how to submit additional data from your check, see:
     - [Custom Agent Check][17] for submitting metrics.
-    - [Agent Integration Log Collection][5] for collecting logs from your AgentCheck using `send_log`. Best for simple, single-source log emission.
+    - [Agent Integration Log Collection][5] for collecting logs from your AgentCheck using `send_log`. Best for single-source log emission.
     - [HTTP Crawler Tutorial][24] for collecting logs from multiple log sources, such as when pollin several endpoints or external HTTP APIs.
 
 The file `awesome/datadog_checks/awesome/check.py` might look like this:
@@ -275,7 +275,7 @@ There are two types of tests:
 - [Unit tests for specific functionality](#write-a-unit-test)
 - [Integration tests that execute the `check` method and verify proper metrics collection](#write-an-integration-test)
 
-[pytest][19] and [hatch][20] are used to run the tests. Tests are required in order to publish your integration.
+[pytest][19] and [hatch][20] are used to run the tests. Tests are required to publish your integration.
 
 #### Write a unit test
 
@@ -410,7 +410,7 @@ All additional elements, including the metadata files, are not meant to be conta
 
 To learn more about Python packaging, see [Packaging Python Projects][21].
 
-Once your `pyproject.toml` is ready, create a wheel using one of the following options:
+After your `pyproject.toml` is ready, create a wheel using one of the following options:
 
 - (Recommended) With the `ddev` tooling: `ddev release build <INTEGRATION_NAME>`.
 - Without the `ddev` tooling: `cd <INTEGRATION_DIR> && pip wheel . --no-deps --wheel-dir dist`.
@@ -464,7 +464,7 @@ Open a pull request with your integration directory in the approriate repo, eith
 After your integration is published, you can release updates through the Developer Platform.
 
 ### Bumping an integration version
-You’ll need to bump the version number whenever you add, remove, or modify functionality (for example, when introducing new metrics, updating dashboards, or changing integration code). A version bump isn’t required for non-functional updates, such as changes to written content, branding, logos, or images.
+A version bump is needed whenever you add, remove, or modify functionality (for example, when introducing new metrics, updating dashboards, or changing integration code). It's not required for non-functional updates, such as changes to written content, branding, logos, or images.
 
 In Developer Platform, include a new entry in the **Release Notes** tab following this format:
     
