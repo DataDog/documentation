@@ -91,9 +91,14 @@ datadog-ci deployment mark --env prod --tags team:backend --tags reason:schedule
 
 ## Mark GitHub Actions jobs as deployments
 
-To mark GitHub jobs as deployments, `datadog-ci CLI` version `2.29.0` or higher is required.
-If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][12]),
-the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
+Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+
+<details>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+
+If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][12]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
 1. If the job name is changed using the [name property][13]:
     ```yaml
     jobs:
@@ -118,6 +123,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci deployment mark ...
     ```
+</details>
 
 ## Further reading
 
