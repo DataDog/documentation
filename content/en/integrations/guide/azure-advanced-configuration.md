@@ -305,15 +305,15 @@ Datadog's Azure integration is built to collect all metrics from [Azure Monitor]
 
 The sections below describe two important distinctions to be aware of, as well as steps to [reconcile the discrepancy](#reconcile-the-discrepancy).
 
-#### 1. Time aggregation
+### 1. Time aggregation
 
 Datadog displays raw data from Azure in per-second values, regardless of the time frame selected in Azure. This is why Datadog's value could appear lower. See [Time aggregation][15] in the metric documentation for more information.
 
-#### 2. Space aggregation
+### 2. Space aggregation
 
 [Space aggregation][20] in Datadog corresponds to the [primary aggregation type][17] of the metric in Azure Monitor. You can find the primary aggregation type from Azure's [Metric Definitions - List][16] API, in the field `primaryAggregationType`.
 
-#### Reconcile the discrepancy
+### Reconcile the discrepancy
 
 1. Graph the metric in [Azure Monitor Metrics Explorer][18], or by going to the resource in Azure and clicking **Monitoring** and then **Metrics** in the left panel.
 2. Graph the metric in the [Datadog Metrics Explorer][19].
