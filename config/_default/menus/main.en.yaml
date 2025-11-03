@@ -7109,41 +7109,46 @@ menu:
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
       weight: 304
+    - name: Network Path Testing
+      url: synthetics/network_path_tests/
+      parent: synthetics
+      identifier: synthetics_network_path_tests
+      weight: 4
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
       identifier: synthetics_mobile_app_testing
-      weight: 4
+      weight: 5
     - name: Testing Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/steps
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
-      weight: 401
+      weight: 501
     - name: Testing Results
       url: synthetics/mobile_app_testing/mobile_app_tests/results
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
-      weight: 402
+      weight: 502
     - name: Advanced Options for Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 403
+      weight: 503
     - name: Supported Devices
       url: synthetics/mobile_app_testing/devices/
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_devices
-      weight: 404
+      weight: 504
     - name: Restricted Networks
       url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_restricted_networks
-      weight: 405
+      weight: 505
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 406
+      weight: 506
     - name: Test Suites
       url: synthetics/test_suites/
       parent: synthetics
@@ -7258,42 +7263,42 @@ menu:
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 8
+      weight: 9
     - name: Notifications
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 9
+      weight: 10  
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
-      weight: 901
+      weight: 1001
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
       identifier: synthetics_notifications_conditional_alerting
-      weight: 902
+      weight: 1002
     - name: Advanced Notifications
       url: synthetics/notifications/advanced_notifications
       parent: synthetics_notifications
       identifier: synthetics_notifications_advanced_notifications
-      weight: 903
+      weight: 1003
     - name: Integrate with Statuspage
       url: synthetics/notifications/statuspage
       parent: synthetics_notifications
       identifier: synthetics_notifications_statuspage
-      weight: 904
+      weight: 1004
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 10
+      weight: 11
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 11
+      weight: 12
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
