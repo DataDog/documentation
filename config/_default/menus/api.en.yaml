@@ -10569,6 +10569,18 @@ menu:
           - DeleteCatalogEntity
         unstable: []
         order: 3
+    - name: Preview catalog entities
+      url: '#preview-catalog-entities'
+      identifier: software-catalog-preview-catalog-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewCatalogEntities
+        unstable: []
+        order: 3
     - name: Create or update entities
       url: '#create-or-update-entities'
       identifier: software-catalog-create-or-update-entities
