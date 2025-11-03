@@ -208,9 +208,9 @@ Click **Billing dataset** to access the Account Filtering UI.
 
 ### Getting historical data
 
-Datadog automatically ingests up to 15 months of available historical cost data.
+If you configure a Cost and Usage Report that already has historical data available in S3, Datadog automatically ingests up to 15 months of historical cost data.
 
-If you configure a Cost and Usage Report that already has historical data available in S3, Datadog automatically ingests it. If your newly configured report does not have historical data, you can request a backfill from AWS.
+If your newly configured report does not have historical data, you can request a backfill from AWS:
 
 To request a backfill of historical AWS cost data:
 
@@ -218,13 +218,11 @@ To request a backfill of historical AWS cost data:
 2. Include the **report name** and the **desired billing period** in your request.
 3. Wait for AWS to process the backfill request.
 
-Once the data is backfilled by AWS, Datadog automatically ingests the data within 24 hours.
+When the data is backfilled by AWS, Datadog automatically ingests the data within 24 hours.
 
-AWS cannot backfill cost data from before your AWS account was created, or data that reflects previous AWS Organizations structures if your organization's structure has changed.
+AWS cannot backfill cost data that predates your AWS account or reflects a previous AWS Organizations structure.
 
 For more information, see the [AWS Cost and Usage Reports troubleshooting guide][20].
-
-[20]: https://docs.aws.amazon.com/cur/latest/userguide/troubleshooting.html#backfill-data
 
 ## Cost types
 
@@ -468,3 +466,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [17]: https://app.datadoghq.com/cost/settings/accounts
 [18]: /help/
 [19]: /cloud_cost_management/tags
+[20]: https://docs.aws.amazon.com/cur/latest/userguide/troubleshooting.html#backfill-data
