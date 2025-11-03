@@ -67,7 +67,6 @@ Use the **Export** button (<i class="icon-export"></i>) to export your graph:
 
 ### Quick Graphs
 
-https://app.datadoghq.com/s/ng8lpyfuhfammt12/mrw-ctz-fqs
 With Quick Graphs, you have more options to visualize your data, without needing to create a [Dashboard][4] or [Notebook][2]. These graphs are useful for understanding and troubleshooting issues without creating permanent dashboards or complex visualization setups.
 
 For more information, see the [Quick Graphs][7] documentation.
