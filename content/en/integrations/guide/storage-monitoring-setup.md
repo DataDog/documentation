@@ -55,8 +55,6 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
       - `s3:GetObject` (scoped to the destination bucket(s))
       - `s3:ListBucket` (scoped to the destination bucket(s))
 
-      Storage Management relies on AWS Integration and Resource Collection to bring together bucket details. Add all S3 permissions from the [Integration IAM policy and Resource Collection IAM policy][502].
-
       Example IAM policy:
         ```json
               {
@@ -86,6 +84,9 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
                 ]
               }
         ```
+
+        **Storage Management relies on AWS Integration and Resource Collection** to bring together bucket details. Add all S3 permissions from the [Integration IAM policy and Resource Collection IAM policy][502] in addition to the permissions above.
+
 
     2. On the **Enable it for me** tab, select the regions or accounts you want to enable and assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one in AWS.
 
