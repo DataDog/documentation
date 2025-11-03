@@ -39,7 +39,20 @@ A template variable is defined by:
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
 * **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-**Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. For more information, see [Historical Data][4].
+### Template variable values
+Template variable values (values available using the template variable dropdown menus) are populated based on the sources that widgets in the dashboard are using. For example, if your dashboard has widgets querying logs, only values from logs are shown. If your dashboard has widgets querying logs, metrics, and RUM, values from logs, metrics, and RUM are shown.
+
+For most sources, template variable values are relevant to your dashboard's global time frame. For example:
+- If your dashboard's time frame is set to the last 15 minutes, only template variable values from the last 15 minutes are shown. 
+- If your dashboard time frame is set to last August 15th from 12:00 a.m. to 11:59 p.m., only values from that timeframe are shown.
+
+| Data Source                                     | Data query period   |
+|--------------------------------------           |---------------------|
+| Metrics                                         | Now - 48 hours      |
+| Cloud cost                                      | Now - 48 hours      |
+| All other sources                               | Dashboard time frame |
+
+**Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. In addition, all data queried for template variables are subject to the data retention policy. For more information, see [Historical Data][4].
 
 ## Add a template variable
 If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, you can click the question mark icon to open a help modal on how to use Dashboard Variables.

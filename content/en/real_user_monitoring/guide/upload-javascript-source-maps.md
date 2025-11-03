@@ -67,6 +67,27 @@ module.exports = {
 Parcel generates source maps by default when you run the build command: `parcel build <entry file>`.
 
 {{% /tab %}}
+{{% tab "Vite" %}}
+
+You can generate source maps by configuring the `build.sourcemap` option in your `vite.config.js` file.
+
+See the example configuration:
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    sourcemap: true, // generates .js.map files
+    minify: 'terser', // or 'esbuild'
+  }
+})
+```
+
+**Note**: If you are using TypeScript, ensure `compilerOptions.sourceMap` is set to `true` in your `tsconfig.json` file.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 After building your application, bundlers generate a directory (typically named `dist`) with minified JavaScript files co-located with their corresponding source maps.
@@ -159,6 +180,6 @@ On the other hand, an unminified stack trace provides you with all the context y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
+[2]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

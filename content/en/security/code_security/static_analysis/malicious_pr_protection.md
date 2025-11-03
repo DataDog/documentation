@@ -13,7 +13,7 @@ algolia:
 {{% /site-region %}}
 
 
-Datadog Static Code Analysis (SAST) Malicious PR protection uses LLMs to detect and prevent malicious code changes at scale. This functionality scans code for known vulnerabilities and detects potentially malicious intent in the pull requests (PRs) submitted to your repositories. Malicious PR protection helps you to:
+Datadog Static Code Analysis (SAST) Malicious PR protection uses LLMs to detect and prevent malicious code changes at scale. By scanning code for known vulnerabilities and detecting potentially malicious intent in the pull requests (PRs) submitted to your repositories, this functionality helps you to:
 
 - Scale your code reviews as the volume of AI-assisted code changes increases
 - Secure code changes from both internal and external contributors
@@ -34,16 +34,15 @@ Malicious code changes come in many different forms. Datadog SAST covers attack 
 - Pushing of malicious packages
 - CI workflow compromise  
 
-Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3].  
-
-<!-- Read more in the blog post [here][1].   -->
-<!-- ^^ This line above should be added back in once the eng blog is published -->
+Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3]. Read more in the blog post [here][1].
 
 ## Search and filter results
 
-Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] by filtering for `malicious_PR`.  
+Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] from the rule ID `def-000-wnp`.  
 
-There are two potential verdicts: `malicious` and `benign`. 
+There are two potential verdicts: `malicious` and `benign`. They can be filtered for using:
+- `@malicious_pr_protection.scan.verdict:malicious`
+- `@malicious_pr_protection.scan.verdict:benign`. 
 
 Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally via [Datadog Workflow Automation][5].
 
