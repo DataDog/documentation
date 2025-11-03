@@ -413,7 +413,7 @@ For v2, if your `init_config` is the empty `{}` you can omit it entirely.
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following service definition exposes the Pods from a Nginx deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following service definition exposes the Pods from an NGINX deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -468,7 +468,7 @@ This syntax supports a `%%host%%` [template variable][11], which is replaced by 
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following service definition exposes the Pods from a Nginx deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following service definition exposes the Pods from an NGINX deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -511,7 +511,7 @@ In addition, each Pod should be monitored with the [NGINX check][12], as it enab
 
 ## Validation
 
-The Datadog Cluster Agent dispatches each cluster check to a node Agent to run. Run the [Datadog Cluster Agent's `clusterchecks` subcommand][13] to show the check dispatching. This shows you the node of which Agent is running the check, the resolved check configuration, and all tags associated with the check.
+The Datadog Cluster Agent dispatches each cluster check to a Node Agent to run. Run the [Datadog Cluster Agent's `clusterchecks` subcommand][13] to show the check dispatching. This shows the node running the cluster check, the resolved check configuration, and all associated tags.
 
 ```
 # kubectl exec <CLUSTER_AGENT_POD_NAME> -- agent clusterchecks
