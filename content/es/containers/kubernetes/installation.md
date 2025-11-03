@@ -3,8 +3,6 @@ aliases:
 - /es/agent/kubernetes/daemonset_setup
 - /es/agent/kubernetes/helm
 - /es/agent/kubernetes/installation
-description: Instala y configura el Datadog Agent en Kubernetes utilizando el Datadog
-  OperatorHelm o kubectl
 further_reading:
 - link: /agent/kubernetes/configuration
   tag: Documentación
@@ -30,7 +28,7 @@ Para obtener documentación específica y ejemplos de monitorización del plano 
 
 Algunas funciones relacionadas con versiones posteriores de Kubernetes requieren una versión mínima de Datadog Agent.
 
-| Versión de Kubernetes | Agent version | Motivo                                |
+| Versión de Kubernetes | Versión del Agent | Motivo                                |
 | ------------------ | ------------- | ------------------------------------- |
 | 1.16.0+            | 7.19.0+       | Obsolescencia de las métricas de Kubelet           |
 | 1.21.0+            | 7.36.0+       | Eliminación de recursos de Kubernetes       |
@@ -86,7 +84,7 @@ Utiliza la página [Instalación en Kubernetes][16] de Datadog como guía para e
 
 4. **Despliega el Agent con el archivo de configuración anterior**
 
-   Ejecuta:
+   Ejecuta lo siguiente:
    ```shell
    kubectl apply -f datadog-agent.yaml
    ```
@@ -114,11 +112,9 @@ Utiliza la página [Instalación en Kubernetes][16] de Datadog como guía para e
    ```yaml
    datadog:
     apiKeyExistingSecret: datadog-secret
-    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
    ```
 
-   - Replace `<CLUSTER_NAME>` with a name for your cluster.
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**
@@ -156,18 +152,11 @@ Utiliza la página [Instalación en Kubernetes][16] de Datadog como guía para e
 
 ### Unprivileged installation
 
-To run an unprivileged installation, add the following `securityContext` to your configuration relative to your desired `<USER_ID>` and `<GROUP ID>`:
-
-- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends setting this value to `100` for the preexisting `dd-agent` user [for Datadog Agent v7.48+][26].
-- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
-
-This sets the `securityContext` at the pod level for the Agent.
-
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 To run an unprivileged installation, add the following to `datadog-agent.yaml`:
 
-{{< highlight yaml "hl_lines=14-19" >}}
+{{< highlight yaml "hl_lines=13-18" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -180,14 +169,18 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-
-  override:
-    nodeAgent:
-      securityContext:
-        runAsUser:  <USER_ID>
-        supplementalGroups:
-          - <GROUP_ID>
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <GROUP_ID>
 {{< /highlight >}}
+
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
+- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+[1]: /es/data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 
@@ -199,16 +192,18 @@ kubectl apply -f datadog-agent.yaml
 {{% tab "Helm" %}}
 To run an unprivileged installation, add the following to your `datadog-values.yaml` file:
 
-{{< highlight yaml "hl_lines=5-8" >}}
+{{< highlight yaml "hl_lines=4-7" >}}
 datadog:
   apiKeyExistingSecret: datadog-secret
-  clusterName: <CLUSTER_NAME>
   site: <DATADOG_SITE>
   securityContext:
-    runAsUser: <USER_ID>
-    supplementalGroups:
-      - <GROUP_ID>
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <GROUP_ID>
 {{< /highlight >}}
+
+- Replace `<USER_ID>` with the UID to run the Datadog Agent.
+- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
 
 Then, deploy the Agent:
 
@@ -312,7 +307,7 @@ La sección [Kubernetes][21] ofrece una visión general de todos tus recursos de
   {{< nextlink href="/agent/kubernetes/configuration">}}<u>Configuración adicional</u>: Recopila eventos, sobrescribe parámetros de proxy, envía métricas personalizadas con DogStatsD, configura listas de autorizaciones y exclusiones de contenedores, y haz referencia a la lista completa de variables de entorno disponibles.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Referencias adicionales
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -341,4 +336,3 @@ La sección [Kubernetes][21] ofrece una visión general de todos tus recursos de
 [23]: https://app.datadoghq.com/orchestration/resource/pod
 [24]: /es/infrastructure/containers/orchestrator_explorer
 [25]: /es/infrastructure/containers/kubernetes_resource_utilization
-[26]: /es/data_security/kubernetes/#running-container-as-root-user

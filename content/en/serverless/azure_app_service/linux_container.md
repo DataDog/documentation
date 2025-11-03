@@ -202,36 +202,33 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-#### Locally
+#### Using the Datadog CLI
 
-Install the [Datadog CLI][601] and [Azure CLI][602], and login to your Azure account using the Azure CLI by running `az login`.
+First, install the [Datadog CLI][601] and [Azure CLI][602].
+
+Login to your Azure account using the Azure CLI:
+
+{{< code-block lang="shell" >}}
+az login
+{{< /code-block >}}
 
 Then, run the following command to set up the sidecar container:
 
-```shell
+{{< code-block lang="shell" >}}
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
-```
+datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
+{{< /code-block >}}
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
-**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer, and additionally the `--musl` flag if your container is using dotnet on a musl libc image (such as Alpine Linux).
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
-#### Azure Cloud Shell
-
-To use the Datadog CLI in [Azure Cloud Shell][603], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
-```shell
-export DD_API_KEY=<DATADOG_API_KEY>
-export DD_SITE=<DATADOG_SITE>
-npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
-```
 
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
-[603]: https://portal.azure.com/#cloudshell/
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
@@ -291,11 +288,13 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][1] only deploys the Web App resource, so you need to build and push your container separately.
+The [Datadog Linux Web App module][4] only deploys the Web App resource, so you need to [deploy your code][5] separately.
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
 [3]: https://developer.hashicorp.com/terraform/install
+[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[5]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 {{% /tab %}}
 {{% tab "Manual" %}}

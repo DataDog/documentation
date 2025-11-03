@@ -23,8 +23,7 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
-Custom rules allow you to codify your organizations' expectations about your software components, teams, and more. You decide the evaluation criteria, freqeuency, and data input. You can create custom rules through the [Scorecards API][2] or through [Datadog Workflow Automation][9]. If you are not familiar with the Workflow Automation product, you can start [building your first custom Scorecards rule with AI][10].
-
+Datadog provides [default rules][1] so you can get started quickly with Scorecards, but you can also create custom rules.
 
 ## Create custom rules
 
@@ -131,5 +130,3 @@ You can also link an existing workflow to any custom rule that already generates
 [6]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.dd.softwarecatalog.listCatalogEntity
 [7]: https://app.datadoghq.com/workflow/action-catalog#//com.datadoghq.core.forLoop
 [8]: /api/latest/service-scorecards/
-[9]: /actions/workflows/
-[10]: /actions/workflows/build/#create-a-workflow-with-ai

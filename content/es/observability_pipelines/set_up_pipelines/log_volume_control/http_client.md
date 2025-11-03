@@ -39,25 +39,9 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-##### Requisitos previos
-
-{{% observability_pipelines/prerequisites/amazon_security_lake %}}
-
-##### Configurar el destino
-
-{{% observability_pipelines/destination_settings/amazon_security_lake %}}
-
-{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
-
-{{% /tab %}}
-{{% tab "CrowdStrike NG-SIEM" %}}
-
-{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -65,13 +49,13 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 {{% observability_pipelines/destination_settings/datadog %}}
 
 {{% /tab %}}
-{{% tab "Datadog Archives" %}}
+{{% tab "Datadog Archivos" %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
 
-Para configurar el destino, sigue las instrucciones del proveedor de nube que utilizas para archivar tus logs.
+Para configurar el destino, siga las instrucciones del proveedor de la nube que utilice para archivar su Logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -115,11 +99,6 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 {{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
-{{% tab "Socket" %}}
-
-{{% observability_pipelines/destination_settings/socket %}}
-
-{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
@@ -150,7 +129,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "Añadir variables de entorno" %}}
+{{% tab "Add env vars" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
@@ -158,11 +137,6 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 {{% tab "Add hostname" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
-
-{{% /tab %}}
-{{% tab "Procesador personalizado" %}}
-
-{{% observability_pipelines/processors/custom_processor %}}
 
 {{% /tab %}}
 {{% tab "Dedupe" %}}
@@ -200,11 +174,6 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
-{{% tab "Analizar XML" %}}
-
-{{% observability_pipelines/processors/parse_xml %}}
-
-{{% /tab %}}
 {{% tab "Cuota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -219,20 +188,6 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
-{{% collapse-content title="Asignación de bibliotecas" level="h5" expanded=false id="library_mapping" %}}
-
-{{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Asignación personalizada" level="h5" expanded=false id="custom_mapping" %}}
-
-{{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
-
-{{% /collapse-content %}}
-
-{{% observability_pipelines/processors/filter_syntax %}}
-
 {{% /tab %}}
 {{% tab "Muestra" %}}
 
@@ -243,31 +198,16 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="Añadir reglas de la biblioteca" level="h5" %}}
+<!-- {{% collapse-content title="Add rules from the biblioteca" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Añadir una regla personalizada" level="h5" %}}
+{{% collapse-content title="Add a custom rule" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
-{{% /collapse-content %}}
-
-{{% /tab %}}
-{{% tab "Dividir matriz" %}}
-
-{{% observability_pipelines/processors/split_array %}}
-
-{{% /tab %}}
-{{% tab "Procesador de etiquetas" %}}
-
-{{% observability_pipelines/processors/tags_processor %}}
-
-{{% /tab %}}
-{{% tab "Limitar" %}}
-
-{{% observability_pipelines/processors/throttle %}}
+{{% /collapse-content %}} -->
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -277,19 +217,14 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 {{% observability_pipelines/multiple_processors %}}
 
 ### Instalar el worker de Observability Pipelines
-1. Selecciona tu plataforma en el menú desplegable **Elige tu plataforma de instalación**.
+1. Selecciona tu plataforma en el menú desplegable **Choose your installation platform** (Elige tu plataforma de instalación).
 1. Ingresa la ruta completa de la URL del endpoint HTTP/S, como `https://127.0.0.8/logs`. El worker de Observability Pipelines recopila eventos de logs de este endpoint.
 
-1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta [Requisitos previos](#prerequisites).
+1. Proporcione las variables entorno para cada uno de los destinos seleccionados. Consulte [Prerrequisitos](#prerrequisitos) para obtener más información.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
@@ -297,17 +232,12 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 {{% observability_pipelines/destination_env_vars/chronicle %}}
 
 {{% /tab %}}
-{{% tab "CrowdStrike NG-SIEM" %}}
-
-{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
-
-{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog %}}
 
 {{% /tab %}}
-{{% tab "Datadog Archives" %}}
+{{% tab "Datadog Archivos" %}}
 
 Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de la nube que utilices para archivar tus logs.
 
@@ -351,11 +281,6 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/destination_env_vars/sentinelone %}}
-
-{{% /tab %}}
-{{% tab "Socket" %}}
-
-{{% observability_pipelines/destination_env_vars/socket %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}

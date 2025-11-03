@@ -1,6 +1,4 @@
 ---
-description: Configura el Datadog Agent para enviar logs a través de proxies TCP y
-  SOCKS5, con ejemplos detallados de configuración de HAProxy y NGINX.
 further_reading:
 - link: /logs/
   tag: Documentación
@@ -16,7 +14,7 @@ title: Proxy TCP del Agent para el envío de logs
 
 {{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
 <div class="alert alert-danger">
-    TCP no está disponible para el sitio {{< region-param key="dd_site_name" >}}. Ponte en contacto con el <a href="/help/">servicio de asistencia</a> para obtener más información.
+    TCP no está disponible para el sitio {{< region-param key="dd_site_name" >}} site. Para obtener más información, ponte en contacto con el <a href="/help/">servicio de asistencia</a>.
 </div>
 {{% /site-region %}}
 
@@ -300,6 +298,7 @@ stream {
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/agent/logs/log_transport?tab=https
 [2]: /es/agent/configuration/proxy/

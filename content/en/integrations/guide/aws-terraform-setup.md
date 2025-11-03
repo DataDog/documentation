@@ -17,6 +17,7 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
 
 {{< site-region region="us,us3,us5,eu" >}}
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
+   * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
 See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
@@ -39,50 +40,16 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
   }
 }
 
-data "datadog_integration_aws_iam_permissions" "datadog_permissions" {}
-
-locals {
-  all_permissions = data.datadog_integration_aws_iam_permissions.datadog_permissions.iam_permissions
-
-  max_policy_size = 6144
-  target_chunk_size = 5900
-
-  permission_sizes = [
-    for perm in local.all_permissions :
-    length(perm) + 3
-  ]
-  cumulative_sizes = [
-    for i in range(length(local.permission_sizes)) :
-    sum(slice(local.permission_sizes, 0, i + 1))
-  ]
-
-  chunk_assignments = [
-    for cumulative_size in local.cumulative_sizes :
-    floor(cumulative_size / local.target_chunk_size)
-  ]
-  chunk_numbers = distinct(local.chunk_assignments)
-  permission_chunks = [
-    for chunk_num in local.chunk_numbers : [
-      for i, perm in local.all_permissions :
-      perm if local.chunk_assignments[i] == chunk_num
-    ]
-  ]
-}
-
 data "aws_iam_policy_document" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   statement {
-    actions   = local.permission_chunks[count.index]
+    actions = [<AWS_PERMISSIONS_LIST>]
     resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
-  name   = "DatadogAWSIntegrationPolicy-${count.index + 1}"
-  policy = data.aws_iam_policy_document.datadog_aws_integration[count.index].json
+  name   = "DatadogAWSIntegrationPolicy"
+  policy = data.aws_iam_policy_document.datadog_aws_integration.json
 }
 resource "aws_iam_role" "datadog_aws_integration" {
   name               = "DatadogIntegrationRole"
@@ -90,10 +57,8 @@ resource "aws_iam_role" "datadog_aws_integration" {
   assume_role_policy = data.aws_iam_policy_document.datadog_aws_integration_assume_role.json
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = aws_iam_policy.datadog_aws_integration[count.index].arn
+  policy_arn = aws_iam_policy.datadog_aws_integration.arn
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
@@ -112,7 +77,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
       role_name = "DatadogIntegrationRole"
     }
   }
-  resources_config {
+    resources_config {
     cloud_security_posture_management_collection = false
     extended_collection                          = true
   }
@@ -120,7 +85,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
     xray_services {
     }
   }
-  logs_config {
+    logs_config {
     lambda_forwarder {
     }
   }
@@ -139,6 +104,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 
 {{< site-region region="ap1" >}}
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
+   * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
 See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
@@ -161,50 +127,16 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
   }
 }
 
-data "datadog_integration_aws_iam_permissions" "datadog_permissions" {}
-
-locals {
-  all_permissions = data.datadog_integration_aws_iam_permissions.datadog_permissions.iam_permissions
-
-  max_policy_size = 6144
-  target_chunk_size = 5900
-
-  permission_sizes = [
-    for perm in local.all_permissions :
-    length(perm) + 3
-  ]
-  cumulative_sizes = [
-    for i in range(length(local.permission_sizes)) :
-    sum(slice(local.permission_sizes, 0, i + 1))
-  ]
-
-  chunk_assignments = [
-    for cumulative_size in local.cumulative_sizes :
-    floor(cumulative_size / local.target_chunk_size)
-  ]
-  chunk_numbers = distinct(local.chunk_assignments)
-  permission_chunks = [
-    for chunk_num in local.chunk_numbers : [
-      for i, perm in local.all_permissions :
-      perm if local.chunk_assignments[i] == chunk_num
-    ]
-  ]
-}
-
 data "aws_iam_policy_document" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   statement {
-    actions   = local.permission_chunks[count.index]
+    actions = [<AWS_PERMISSIONS_LIST>]
     resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
-  name   = "DatadogAWSIntegrationPolicy-${count.index + 1}"
-  policy = data.aws_iam_policy_document.datadog_aws_integration[count.index].json
+  name   = "DatadogAWSIntegrationPolicy"
+  policy = data.aws_iam_policy_document.datadog_aws_integration.json
 }
 resource "aws_iam_role" "datadog_aws_integration" {
   name               = "DatadogIntegrationRole"
@@ -212,10 +144,8 @@ resource "aws_iam_role" "datadog_aws_integration" {
   assume_role_policy = data.aws_iam_policy_document.datadog_aws_integration_assume_role.json
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = aws_iam_policy.datadog_aws_integration[count.index].arn
+  policy_arn = aws_iam_policy.datadog_aws_integration.arn
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
@@ -234,7 +164,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
       role_name = "DatadogIntegrationRole"
     }
   }
-  resources_config {
+    resources_config {
     cloud_security_posture_management_collection = false
     extended_collection                          = true
   }
@@ -267,6 +197,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 
 {{< site-region region="ap2" >}}
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
+   * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
 See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
@@ -289,50 +220,16 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
   }
 }
 
-data "datadog_integration_aws_iam_permissions" "datadog_permissions" {}
-
-locals {
-  all_permissions = data.datadog_integration_aws_iam_permissions.datadog_permissions.iam_permissions
-
-  max_policy_size = 6144
-  target_chunk_size = 5900
-
-  permission_sizes = [
-    for perm in local.all_permissions :
-    length(perm) + 3
-  ]
-  cumulative_sizes = [
-    for i in range(length(local.permission_sizes)) :
-    sum(slice(local.permission_sizes, 0, i + 1))
-  ]
-
-  chunk_assignments = [
-    for cumulative_size in local.cumulative_sizes :
-    floor(cumulative_size / local.target_chunk_size)
-  ]
-  chunk_numbers = distinct(local.chunk_assignments)
-  permission_chunks = [
-    for chunk_num in local.chunk_numbers : [
-      for i, perm in local.all_permissions :
-      perm if local.chunk_assignments[i] == chunk_num
-    ]
-  ]
-}
-
 data "aws_iam_policy_document" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   statement {
-    actions   = local.permission_chunks[count.index]
+    actions = [<AWS_PERMISSIONS_LIST>]
     resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
-  name   = "DatadogAWSIntegrationPolicy-${count.index + 1}"
-  policy = data.aws_iam_policy_document.datadog_aws_integration[count.index].json
+  name   = "DatadogAWSIntegrationPolicy"
+  policy = data.aws_iam_policy_document.datadog_aws_integration.json
 }
 resource "aws_iam_role" "datadog_aws_integration" {
   name               = "DatadogIntegrationRole"
@@ -340,10 +237,8 @@ resource "aws_iam_role" "datadog_aws_integration" {
   assume_role_policy = data.aws_iam_policy_document.datadog_aws_integration_assume_role.json
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = aws_iam_policy.datadog_aws_integration[count.index].arn
+  policy_arn = aws_iam_policy.datadog_aws_integration.arn
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
@@ -362,7 +257,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
       role_name = "DatadogIntegrationRole"
     }
   }
-  resources_config {
+    resources_config {
     cloud_security_posture_management_collection = false
     extended_collection                          = true
   }
@@ -370,7 +265,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
     xray_services {
     }
   }
-  logs_config {
+    logs_config {
     lambda_forwarder {
     }
   }
@@ -389,6 +284,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 
 {{< site-region region="gov" >}}
 2. Select the tab for your AWS account type, and then use the example below as a base template to set up your Terraform configuration file. Ensure to update the following parameters before you apply the changes:
+   * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
 {{< tabs >}}
@@ -413,50 +309,16 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
   }
 }
 
-data "datadog_integration_aws_iam_permissions" "datadog_permissions" {}
-
-locals {
-  all_permissions = data.datadog_integration_aws_iam_permissions.datadog_permissions.iam_permissions
-
-  max_policy_size = 6144
-  target_chunk_size = 5900
-
-  permission_sizes = [
-    for perm in local.all_permissions :
-    length(perm) + 3
-  ]
-  cumulative_sizes = [
-    for i in range(length(local.permission_sizes)) :
-    sum(slice(local.permission_sizes, 0, i + 1))
-  ]
-
-  chunk_assignments = [
-    for cumulative_size in local.cumulative_sizes :
-    floor(cumulative_size / local.target_chunk_size)
-  ]
-  chunk_numbers = distinct(local.chunk_assignments)
-  permission_chunks = [
-    for chunk_num in local.chunk_numbers : [
-      for i, perm in local.all_permissions :
-      perm if local.chunk_assignments[i] == chunk_num
-    ]
-  ]
-}
-
 data "aws_iam_policy_document" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   statement {
-    actions   = local.permission_chunks[count.index]
+    actions = [<AWS_PERMISSIONS_LIST>]
     resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
-  name   = "DatadogAWSIntegrationPolicy-${count.index + 1}"
-  policy = data.aws_iam_policy_document.datadog_aws_integration[count.index].json
+  name   = "DatadogAWSIntegrationPolicy"
+  policy = data.aws_iam_policy_document.datadog_aws_integration.json
 }
 resource "aws_iam_role" "datadog_aws_integration" {
   name               = "DatadogIntegrationRole"
@@ -464,10 +326,8 @@ resource "aws_iam_role" "datadog_aws_integration" {
   assume_role_policy = data.aws_iam_policy_document.datadog_aws_integration_assume_role.json
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = aws_iam_policy.datadog_aws_integration[count.index].arn
+  policy_arn = aws_iam_policy.datadog_aws_integration.arn
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
@@ -486,7 +346,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
       role_name = "DatadogIntegrationRole"
     }
   }
-  resources_config {
+    resources_config {
     cloud_security_posture_management_collection = false
     extended_collection                          = true
   }
@@ -494,7 +354,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
     xray_services {
     }
   }
-  logs_config {
+    logs_config {
     lambda_forwarder {
     }
   }
@@ -515,7 +375,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws-us-gov:iam::065115117704:root"]
+      identifiers = ["arn:aws:iam::065115117704:root"]
     }
     condition {
       test     = "StringEquals"
@@ -527,50 +387,16 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
   }
 }
 
-data "datadog_integration_aws_iam_permissions" "datadog_permissions" {}
-
-locals {
-  all_permissions = data.datadog_integration_aws_iam_permissions.datadog_permissions.iam_permissions
-
-  max_policy_size = 6144
-  target_chunk_size = 5900
-
-  permission_sizes = [
-    for perm in local.all_permissions :
-    length(perm) + 3
-  ]
-  cumulative_sizes = [
-    for i in range(length(local.permission_sizes)) :
-    sum(slice(local.permission_sizes, 0, i + 1))
-  ]
-
-  chunk_assignments = [
-    for cumulative_size in local.cumulative_sizes :
-    floor(cumulative_size / local.target_chunk_size)
-  ]
-  chunk_numbers = distinct(local.chunk_assignments)
-  permission_chunks = [
-    for chunk_num in local.chunk_numbers : [
-      for i, perm in local.all_permissions :
-      perm if local.chunk_assignments[i] == chunk_num
-    ]
-  ]
-}
-
 data "aws_iam_policy_document" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   statement {
-    actions   = local.permission_chunks[count.index]
+    actions = [<AWS_PERMISSIONS_LIST>]
     resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
-  name   = "DatadogAWSIntegrationPolicy-${count.index + 1}"
-  policy = data.aws_iam_policy_document.datadog_aws_integration[count.index].json
+  name   = "DatadogAWSIntegrationPolicy"
+  policy = data.aws_iam_policy_document.datadog_aws_integration.json
 }
 resource "aws_iam_role" "datadog_aws_integration" {
   name               = "DatadogIntegrationRole"
@@ -578,10 +404,8 @@ resource "aws_iam_role" "datadog_aws_integration" {
   assume_role_policy = data.aws_iam_policy_document.datadog_aws_integration_assume_role.json
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
-  count = length(local.permission_chunks)
-
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = aws_iam_policy.datadog_aws_integration[count.index].arn
+  policy_arn = aws_iam_policy.datadog_aws_integration.arn
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
@@ -600,7 +424,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
       role_name = "DatadogIntegrationRole"
     }
   }
-  resources_config {
+    resources_config {
     cloud_security_posture_management_collection = false
     extended_collection                          = true
   }
@@ -608,7 +432,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
     xray_services {
     }
   }
-  logs_config {
+    logs_config {
     lambda_forwarder {
     }
   }

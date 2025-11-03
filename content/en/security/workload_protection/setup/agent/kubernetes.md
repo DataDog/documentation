@@ -17,6 +17,12 @@ Use the following instructions to enable Workload Protection.
 
 ## Installation
 
+{{< beta-callout url="" header="Enrich events with Kubernetes user identities." btn_hidden="true">}}
+Enrich your events with Kubernetes user identities to help you investigate signals.
+
+Join the preview by enabling the admission controller and cws instrumentation variables (see instructions below)
+{{< /beta-callout >}}
+
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
@@ -31,12 +37,12 @@ Use the following instructions to enable Workload Protection.
       name: datadog
     spec:
       features:
-        # (Optional) Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
+        # PREVIEW Configuration - Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
         admissionController:
           enabled: true
           cwsInstrumentation:
             enabled: true
-
+        # END OF PREVIEW Configuration
         remoteConfiguration:
           enabled: true
         # Enables Threat Detection
@@ -76,13 +82,13 @@ Use the following instructions to enable Workload Protection.
     ```yaml
     # datadog-values.yaml file
 
-    # (Optional) Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
+    # PREVIEW Configuration - Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
     clusterAgent:
       admissionController:
         enabled: true
         cwsInstrumentation:
           enabled: true
-
+    # END OF PREVIEW Configuration
     datadog:
       remoteConfiguration:
         enabled: true
@@ -124,7 +130,7 @@ helm install datadog-operator datadog/datadog-operator --set clusterRole.allowCr
 
 {{% tab "DaemonSet" %}}
 
-1. Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file. Note that the `DD_ADMISSION_CONTROLLER_ENABLED` and `DD_RUNTIME_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_ENABLED` variables in the `cluster-agent-deployment.yaml` enable event enrichment with Kubernetes user identities (optional).
+1. Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file. Note that `DD_ADMISSION_CONTROLLER_ENABLED` and `DD_RUNTIME_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_ENABLED` variables in the `cluster-agent-deployment.yaml` enables event enrichment with Kubernetes user identities (in preview).
 
     ```bash
       # Source: datadog/templates/daemonset.yaml

@@ -1,6 +1,4 @@
 ---
-description: Monitorizar dispositivos IoT y aplicaciones integradas con el Datadog
-  IoT Agent optimizado para entornos con recursos limitados.
 further_reading:
 - link: /getting_started/agent/
   tag: Documentación
@@ -48,7 +46,7 @@ Los requisitos exactos de un recurso varían en función del uso que hace de ell
 
 ### Instalación
 
-#### Automático
+#### Automática
 
 Para descargar e instalar automáticamente el IoT Agent correcto para tu sistema operativo y la arquitectura de tu conjunto de chips, usa el siguiente comando:
 

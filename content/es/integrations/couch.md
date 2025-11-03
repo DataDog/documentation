@@ -34,7 +34,7 @@ categories:
 - caching
 - data stores
 - log collection
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 8.3.0
+integration_version: 8.0.0
 is_public: true
 manifest_version: 2.0.0
 name: couch
@@ -186,7 +186,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "couch" >}}
+{{< get-metrics-from-git "couchdb" >}}
 
 
 ### Eventos
@@ -194,7 +194,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 El check de Couch no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "couch" >}}
+{{< get-service-checks-from-git "couchdb" >}}
 
 
 ## Solucionar problemas

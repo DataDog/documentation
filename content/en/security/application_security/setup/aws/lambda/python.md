@@ -48,11 +48,11 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable App and API protection by updating your `serverless.yml` with the `appSecMode` configuration parameter:
+2. Enable App and API protection by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
-       appSecMode: "on"
+       enableASM: true
    ```
 
    Overall, your new `serverless.yml` file should contain at least:
@@ -60,7 +60,8 @@ To install and configure the Datadog Serverless Framework plugin:
    custom:
      datadog:
        apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
-       appSecMode: "on"
+       enableDDTracing: true
+       enableASM: true
    ```
    See also the complete list of [plugin parameters][2] to further configure your lambda settings.
 

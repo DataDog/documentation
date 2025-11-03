@@ -141,8 +141,9 @@
         }
     }
 
-    .set {
-        .set-header {
+    // static-analysis
+    .ruleset {
+        .ruleset-header {
             transition: box-shadow 0.125s;
             box-shadow: 0 1px 3px rgba(0,0,0,0.25);
             border-radius: 4px;
@@ -156,14 +157,14 @@
                 top: 4px;
                 margin-left: 4px;
             }
-            .set-header__plus {
+            .ruleset-header__plus {
                 margin-left: 4px;
                 color: $gray-900;
             }
-            .set-header__text {
+            .ruleset-header__text {
                 margin: 0 8px
             }
-            .set-header__arrow {
+            .ruleset-header__arrow {
                 font-size: 18px;
                 transform: rotate(-90deg) !important;
             }
@@ -171,7 +172,7 @@
             box-shadow: 0 2px 3px rgba(0,0,0,0.3);
             }
             &.active {
-            .set-header__arrow {
+            .ruleset-header__arrow {
                 position: relative;
                 top: 2px;
                 transform: rotate(-180deg) !important;
@@ -183,7 +184,7 @@
                 padding: 5px 10px
             }
         }
-        .set-description {
+        .ruleset-description {
             // rendered if a paragraph description
             p {
                 font-size: 16px;
@@ -194,14 +195,14 @@
                 -webkit-padding-start: 36px;
             }
         }
-        .item {
-            .item-name-container {
+        .rule {
+            .rule-name-container {
                 a {
                     margin-left: 8px ;
                 }
             }
         }
-        .item:hover {
+        .rule:hover {
             color: $brand-primary;
             a {
                 color: $brand-primary;

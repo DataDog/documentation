@@ -14,9 +14,9 @@ further_reading:
 - link: "tests/flaky_test_management/early_flake_detection"
   tag: "Documentation"
   text: "Learn about Early Flake Detection"
-- link: "pr_gates"
+- link: "quality_gates"
   tag: "Documentation"
-  text: "Learn about PR Gates"
+  text: "Learn about Quality Gates"
 ---
 
 ## Overview
@@ -126,7 +126,7 @@ The dashboard only recommends features that are available in a given repository,
 
 [1]: /tests/flaky_test_management/auto_test_retries/
 [2]: /tests/flaky_test_management/early_flake_detection/
-[3]: /pr_gates/
+[3]: /quality_gates/
 [4]: /tests/test_impact_analysis/
 [5]: https://app.datadoghq.com/ci/test/health
 [6]: /tests/#supported-features

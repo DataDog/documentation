@@ -14,33 +14,29 @@ All Session Replay SDK versions can be found in the [Maven Central Repository][4
 
 To set up Mobile Session Replay for Android:
 
-### Step 1 - Set up the Android RUM SDK
+1. Make sure you've [set up and initialized the Datadog Android RUM SDK][5] with views instrumentation enabled.
 
-Make sure you've [set up and initialized the Datadog Android RUM SDK][5] with views instrumentation enabled.
+2. Declare the Datadog Session Replay as a dependency:
+    ```kotlin {% filename="build.gradle.kts" %}
+    implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
+    implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
+    // in case you need Material support
+    implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+    // in case you need Jetpack Compose support
+    implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
+    ```
 
-### Step 2 - Declare the Datadog Session Replay as a dependency
+3. Enable Session Replay in your app:
+    ```kotlin {% filename="Application.kt" %}
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+      // in case you need Material extension support
+      .addExtensionSupport(MaterialExtensionSupport())
+      // in case you need Jetpack Compose support
+      .addExtensionSupport(ComposeExtensionSupport())
+      .build()
 
-```kotlin {% filename="build.gradle.kts" %}
-implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
-implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
-// in case you need Material support
-implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
-// in case you need Jetpack Compose support
-implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
-```
-
-### Step 3 - Enable Session Replay {% #enable-android %}
-
-```kotlin {% filename="Application.kt" %}
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-  // in case you need Material extension support
-  .addExtensionSupport(MaterialExtensionSupport())
-  // in case you need Jetpack Compose support
-  .addExtensionSupport(ComposeExtensionSupport())
-  .build()
-
-SessionReplay.enable(sessionReplayConfig)
-```
+    SessionReplay.enable(sessionReplayConfig)
+    ```
 {% /if %}
 <!-- end Android -->
 
@@ -48,38 +44,29 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 To set up Mobile Session Replay for iOS:
 
-### Step 1 - Set up the iOS RUM SDK
+1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][6] with views instrumentation enabled.
 
-Make sure you've [set up and initialized the Datadog iOS RUM SDK][6] with views instrumentation enabled.
+2. Link the Datadog Session Replay library to your project based on your package manager:
 
-### Step 2 - Declare the Datadog Session Replay as a dependency
+   | Package manager            | Installation step                                                                           |
+   |----------------------------|---------------------------------------------------------------------------------------------|
+   | [CocoaPods][7]             | Add `pod 'DatadogSessionReplay'` to your `Podfile`.                                         |
+   | [Swift Package Manager][8] | Add `DatadogSessionReplay` library as a dependency to your app target.                      |
+   | [Carthage][9]              | Add `DatadogSessionReplay.xcframework` as a dependency to your app target.                  |
 
-{% tabs %}
-{% tab label="Swift Package Manager" %}
-Add `DatadogSessionReplay` library as a dependency to your app target.  
-{% /tab %}
-{% tab label="CocoaPods" %}
-Add `pod 'DatadogSessionReplay` to your `Podfile`.
-{% /tab %}
-{% tab label="Carthage" %}
-Add `DatadogSessionReplay.xcframework` as a dependency to your app target.
-{% /tab %}
-{% /tabs %}
+3. Enable Session Replay in your app:
 
-### Step 3 - Enable Session Replay {% #enable-ios %}
+    ```swift {% filename="AppDelegate.swift" %}
+    import DatadogSessionReplay
 
-```swift {% filename="AppDelegate.swift" %}
-import DatadogSessionReplay
-
-SessionReplay.enable(
-  with: SessionReplay.Configuration(
-    replaySampleRate: sampleRate,
-    // Enable the experimental SwiftUI recording
-    featureFlags: [.swiftui: true]
-  )
-)
-```
-
+    SessionReplay.enable(
+      with: SessionReplay.Configuration(
+        replaySampleRate: sampleRate,
+        // Enable the experimental SwiftUI recording
+        featureFlags: [.swiftui: true]
+      )
+    )
+    ```
 {% /if %}
 <!-- end iOS -->
 
@@ -89,48 +76,37 @@ All Session Replay SDK versions can be found in the [Maven Central Repository][1
 
 To set up Mobile Session Replay for Kotlin Multiplatform:
 
-### Step 1 - Set up the Kotlin Multiplatform RUM SDK
+1. Make sure you've [setup and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
 
-Make sure you've [set up and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
+2. Add the `DatadogSessionReplay` iOS library as a link-only dependency. For instructions, see the [guide][12].
 
-### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency 
+2. Declare Datadog Session Replay as a dependency:
+    ```kotlin {% filename="build.gradle.kts" %}
+    kotlin {
+      sourceSets {
+        commonMain.dependencies {
+          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]")
+          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]")
+        }
 
-For instructions, see the [guide][12].
-
-### Step 3 - Declare Datadog Session Replay as a dependency
-
-```kotlin {% filename="build.gradle.kts" %}
-kotlin {
-  sourceSets {
-    commonMain.dependencies {
-      implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]")
-      implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]")
+        // in case you need Material support on Android
+        androidMain.dependencies {
+          implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+        }
+      }
     }
+    ```
 
-    // in case you need Material support on Android
-    androidMain.dependencies {
-      implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
-    }
-  }
-}
-```
+3. Enable Session Replay in your app:
 
-### Step 4 - Enable Session Replay
+    ```kotlin {% filename="Application.kt" %}
+    // in common source set
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+      .build()
+    SessionReplay.enable(sessionReplayConfig)
+    ```
 
-```kotlin {% filename="Application.kt" %}
-// in common source set
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-  .build()
-SessionReplay.enable(sessionReplayConfig)
-```
-
-### Step 5 - Set up Material support on Android (Optional) 
-
-If your app uses Material on Android, add:
-
-```kotlin
-SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
-```
+4. In case you need Material support on Android, call the `SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())` method, available in the Android source set.
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -145,115 +121,113 @@ All Session Replay SDK versions can be found in the [npmjs repository][13].
 
 To set up Mobile Session Replay for React Native:
 
-### Step 1 - Set up the React Native SDK
+1. Make sure you've [set up and initialized the Datadog React Native SDK][14] with views instrumentation enabled.
 
-Make sure you've [set up and initialized the Datadog React Native SDK][14] with views instrumentation enabled.
+2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [npm][16] or [yarn][15].
 
-### Step 2 - Declare the React Native Session Replay as a dependency
+    {% tabs %}
 
-Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [npm][16] or [yarn][15].
+    {% tab label="npm" %}
+    ```shell
+    npm install @datadog/mobile-react-native-session-replay
+    ```
+    {% /tab %}
 
-{% tabs %}
+    {% tab label="yarn" %}
+    ```shell
+    yarn add @datadog/mobile-react-native-session-replay
+    ```
+    {% /tab %}
 
-{% tab label="npm" %}
-```shell
-npm install @datadog/mobile-react-native-session-replay
-```
-{% /tab %}
+    {% /tabs %}
 
-{% tab label="yarn" %}
-```shell
-yarn add @datadog/mobile-react-native-session-replay
-```
-{% /tab %}
+2. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK.
 
-{% /tabs %}
+    {% tabs %}
 
-### Step 3 - Enable Session Replay {% #enable-react-native %}
+    {% tab label="DatadogProvider" %}
+    If you use the `DatadogProvider` component:
 
-After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK.
+    ```typescript {% filename="App.tsx" %}
+    import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
+    import {
+      ImagePrivacyLevel,
+      SessionReplay,
+      TextAndInputPrivacyLevel,
+      TouchPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
 
-{% tabs %}
+    const configuration = new DatadogProviderConfiguration(/* ... */)
 
-{% tab label="DatadogProvider" %}
-If you use the `DatadogProvider` component:
+    // Add this function as onInitialization prop to DatadogProvider
+    const onSDKInitialized = async () => {
+      await SessionReplay.enable({
+        replaySampleRate: 100,
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
+        imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
+        touchPrivacyLevel: TouchPrivacyLevel.SHOW,
+      });
+    };
 
-```typescript {% filename="App.tsx" %}
-import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
-import {
-  ImagePrivacyLevel,
-  SessionReplay,
-  TextAndInputPrivacyLevel,
-  TouchPrivacyLevel,
-} from "@datadog/mobile-react-native-session-replay";
+    const App = () => {
+      const navigationRef = React.useRef(null);
+      return (
+        <DatadogProvider configuration={configuration} onInitialization={onSDKInitialized}>
+          {/* App */}
+        </DatadogProvider>
+      );
+    };
 
-const configuration = new DatadogProviderConfiguration(/* ... */)
+    export default App;
+    ```
+    {% /tab %}
 
-// Add this function as onInitialization prop to DatadogProvider
-const onSDKInitialized = async () => {
-  await SessionReplay.enable({
-    replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
-    textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
-    imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
-    touchPrivacyLevel: TouchPrivacyLevel.SHOW,
-  });
-};
+    {% tab label="DdSdkReactNative.initialize" %}
+    If you use the `DdSdkReactNative.initialize` method:
 
-const App = () => {
-  const navigationRef = React.useRef(null);
-  return (
-    <DatadogProvider configuration={configuration} onInitialization={onSDKInitialized}>
-      {/* App */}
-    </DatadogProvider>
-  );
-};
+    ```typescript {% filename="App.tsx" %}
+    import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
+    import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
-export default App;
-```
-{% /tab %}
+    const configuration = new DdSdkReactNativeConfiguration(/* ... */)
 
-{% tab label="DdSdkReactNative.initialize" %}
-If you use the `DdSdkReactNative.initialize` method:
+    DdSdkReactNative.initialize(configuration)
+      .then(() => SessionReplay.enable())
+      .catch((error) => { /* handle error */ });
+    ```
+    {% /tab %}
 
-```typescript {% filename="App.tsx" %}
-import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
-import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+    {% /tabs %}
 
-const configuration = new DdSdkReactNativeConfiguration(/* ... */)
+3. Enable Session Replay in your app, after initializing the Datadog SDK:
+    ```typescript {% filename="App.tsx" %}
+    import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
-DdSdkReactNative.initialize(configuration)
-  .then(() => SessionReplay.enable({
-    replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
-    textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
-    imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
-    touchPrivacyLevel: TouchPrivacyLevel.SHOW,
-  }))
-  .catch((error) => { /* handle error */ });
-```
-{% /tab %}
+    SessionReplay.enable();
+    ```
 
-{% /tabs %}
+4. Define the configuration for Session Replay:
 
-During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
+    ```typescript {% filename="App.tsx" %}
+    SessionReplay.enable({
+      replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
+    });
+    ```
 
-### Step 4 - (iOS only) Update your iOS pods.
+   During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
 
-```shell
-cd ios && pod install
-```
-
-### Step 5 - Rebuild your app 
-
-Rebuild your iOS and Android apps
-
+5. (iOS only) Update your iOS pods.
+    ```shell
+    cd ios && pod install
+    ```
+6. Rebuild your iOS and Android apps.
 {% /if %}
-
 <!-- end React Native -->
 
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 
-{% alert level="info" %}
+{% alert level="warning" %}
 Datadog Session Replay for Flutter is currently in Preview.
 {% /alert %}
 
@@ -261,11 +235,9 @@ All Session Replay SDK versions can be found in [Pub][29].
 
 To set up Datadog Session Replay for Flutter:
 
-### Step 1 - Set up the Flutter plugin
+1. Make sure you have [set up and initialized the Datadog Flutter Plugin][28].
 
-Make sure you have [set up and initialized the Datadog Flutter Plugin][28].
-
-### Step 2 - Add the package to your `pubspec.yaml`
+2. Add the package to your `pubspec.yaml`:
 
 ```yaml {% filename="pubspec.yaml" %}
 packages:
@@ -273,7 +245,7 @@ packages:
   datadog_session_replay: ^x.x.x
 ```
 
-### Step 3 - Enable Session Replay in your `DatadogConfiguration`
+3. Enable Session Replay in your `DatadogConfiguration`:
 
 ```dart
 import 'package:datadog_session_replay/datadog_session_replay.dart';
@@ -297,9 +269,7 @@ final configuration = DatadogConfiguration(
 );
 ```
 
-### Step 4 - Add a SessionReplayCapture to the root of your Widget tree
-
-Add a SessionReplayCapture widget to the root of your Widget tree, above your MaterialApp or similar application widget.
+4. Add a SessionReplayCapture widget to the root of your Widget tree, above your MaterialApp or similar application widget:
 
 ```dart
 class MyApp extends StatefulWidget {
@@ -391,7 +361,7 @@ Datadog Session Replay for Flutter does not currently support Web view capture.
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied.
+The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied.
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 

@@ -10,9 +10,6 @@ further_reading:
 - link: /database_monitoring/guide/sql_deadlock/
   tag: Documentación
   text: Configurar Deadlock Monitoring
-- link: /database_monitoring/guide/sql_extended_events/
-  tag: Documentación
-  text: Configurar la finalización de consultas y la recopilación de errores de consulta
 title: Configuración de Database Monitoring para Azure SQL Server
 ---
 
@@ -99,7 +96,7 @@ Para obtener instrucciones más detalladas sobre cómo instalar y configurar el 
 
 {{% tab "Instancia gestionada por Azure SQL" %}}
 
-Crea un inicio de sesión de solo lectura para conectarte a tu servidor y conceder los permisos necesarios:
+Crea un inicio de sesión de solo lectura para conectarte a tu servidor y concede los permisos necesarios:
 
 #### Para las versiones 2014 o posteriores de SQL Server
 
@@ -134,7 +131,7 @@ Para [SQL Server en máquinas virtuales Windows Azure][1], sigue la documentaci�
 ### Guarda tu contraseña de forma segura
 {{% dbm-secret %}}
 
-## Instala y configura el Agent
+## Instalación y configuración del Agent
 
 Dado que AWS no permite el acceso directo al host, el Datadog Agent debe instalarse en un host distinto donde pueda comunicarse con el host de SQL Server. Existen varias opciones para instalar y ejecutar el Agent.
 
@@ -167,7 +164,7 @@ Para obtener información adicional sobre la configuración de los campos `deplo
 
 Para utilizar la [autenticación de Windows][4], configura `connection_string: "Trusted_Connection=yes"` y omite los campos `username` y `password`.
 
-Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema común de etiquetado. Consulta [Etiquetado de servicio unificado][5] sobre cómo se utilizan estas etiquetas (tags) a lo largo de Datadog.
+Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][5].
 
 ### Controladores compatibles
 
@@ -176,10 +173,10 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 El proveedor [ADO][6] recomendado es el [controlador de Microsoft OLE DB][7]. Asegúrate de que el controlador está instalado en el host donde se ejecuta el Agent.
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
+adoprovider: MSOLEDBSQL19  # Sustituye por MSOLEDBSQL para las versiones 18 y anteriores
 ```
 
-Los otros dos proveedores, `SQLOLEDB` y `SQLNCLI`, están considerados obsoletos por Microsoft y ya no deben utilizarse.
+Los otros dos proveedores, `SQLOLEDB` y `SQLNCLI`, se consideran obsoletos por Microsoft y ya no deben ser utilizados.
 
 #### ODBC
 
@@ -192,7 +189,7 @@ driver: 'ODBC Driver 18 for SQL Server'
 
 Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][9].
 
-### Validación
+### Validar
 
 [Ejecuta el subcomando de estado del Agent][10] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][11] de Datadog para empezar.
 
@@ -238,13 +235,13 @@ instances:
 
 Para obtener información adicional sobre la configuración de los campos `deployment_type` y `name`, consulta las [especificaciones para la integración SQL Server][4].
 
-Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema común de etiquetado. Consulta [Etiquetado de servicio unificado][5] sobre cómo se utilizan estas etiquetas (tags) a lo largo de Datadog.
+Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][5].
 
-Una vez completada la configuración del Agent, [reinicia el Datadog Agent][6].
+Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][6].
 
-### Validación
+### Validar
 
-[Ejecuta el subcomando de estado del Agent][7] y busca `sqlserver` en la sección **Checks**. Ve a la página [Bases de datos][8] en Datadog para empezar.
+[Ejecuta el subcomando de estado del Agent][7] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][8] de Datadog para empezar.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
@@ -259,7 +256,7 @@ Una vez completada la configuración del Agent, [reinicia el Datadog Agent][6].
 {{% tab "Docker" %}}
 Para configurar el Database Monitoring Agent que se ejecuta en un contenedor Docker, configura las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en el contenedor de tu Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas (labels) de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
 
 Sustituye los valores para que coincidan con tu cuenta y tu entorno. Para ver todas las opciones de configuración disponibles, consulta el [archivo de configuración de ejemplo][2].
 
@@ -294,7 +291,7 @@ Para obtener información adicional sobre la configuración de los campos `deplo
 
 Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][4].
 
-### Validación
+### Validar
 
 [Ejecuta el subcomando de estado del Agent][5] y busca `sqlserver` en la sección **Checks** o visita la página [Bases de datos][6] de Datadog para empezar.
 
@@ -309,9 +306,9 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 {{% tab "Kubernetes" %}}
 Si estás ejecutando un clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para habilitar Database Monitoring. Si los checks de clúster aún no están habilitados, [sigue estas instrucciones][2] para habilitarlos antes de continuar.
 
-### Operador
+### Operación
 
-Sigue los pasos que se indican a continuación para configurar la integración SQL Server, utilizando como referencia las [instrucciones del Operator en Kubernetes e integraciones][6].
+Sigue los pasos que se indican a continuación para configurar la integración de SQL Server, utilizando como referencia las [Instrucciones del Operator en Kubernetes e integraciones][6].
 
 1. Crea o actualiza el archivo `Datadog-Agent.yaml` con la siguiente configuración:
 
@@ -353,7 +350,7 @@ Sigue los pasos que se indican a continuación para configurar la integración S
                   driver: 'ODBC Driver 18 for SQL Server'
                   dbm: true
                   # Optional: For additional tags
-                  tags:
+                  tags:  
                     - 'service:<CUSTOM_SERVICE>'
                     - 'env:<CUSTOM_ENV>'
                   # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
@@ -362,7 +359,7 @@ Sigue los pasos que se indican a continuación para configurar la integración S
                     fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
     ```
 
-2. Aplica los cambios al Datadog Operator con el siguiente comando:
+2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
@@ -388,7 +385,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             # Optional: For additional tags
-            tags:
+            tags: 
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
             # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
@@ -406,7 +403,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```
 
 <div class="alert alert-info">
-Para Windows, adjunta <code>--set targetSystem=windows</code> al comando de <code>instalación de Helm</code>.
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
 ### Configuración con archivos integrados
@@ -423,8 +420,8 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
     driver: 'ODBC Driver 18 for SQL Server'
-    # Optional: For additional tags
-    tags:
+    # Optional: For additional tags  
+    tags: 
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
@@ -435,7 +432,7 @@ instances:
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
 ```yaml
 apiVersion: v1

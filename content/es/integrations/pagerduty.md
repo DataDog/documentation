@@ -1,44 +1,55 @@
 ---
-app_id: pagerduty
 categories:
 - collaboration
 - incidents
 - notifications
-custom_kind: integración
-description: PagerDuty añade alertas por teléfono y SMS a tus herramientas de monitorización
-  existentes.
+custom_kind: integration
+dependencies: []
+description: Generar alertas PagerDuty a partir de métricas y eventos de Datadog
+doc_link: https://docs.datadoghq.com/integrations/pagerduty/
+draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/mobile-incident-management-datadog/
-  tag: blog
-  text: Gestionar incidentes sobre la marcha con la aplicación móvil Datadog
+  tag: Blog
+  text: Gestionar los incidentes sobre la marcha con la aplicación móvil de Datadog
 - link: https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/
-  tag: blog
-  text: Cómo se despliega PagerDuty de forma segura con Datadog
+  tag: Blog
+  text: Para desplegar PagerDuty de forma segura con Datadog
 - link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration
-  tag: blog
-  text: Blog de PagerDuty
+  tag: Blog
+  text: Uso de integraciones con el catálogo de servicios
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty
-  tag: otros
-  text: PagerDuty
-media: []
-title: PagerDuty
+  tag: Terraform
+  text: Crear y gestionar la integración Pagerduty en Datadog con Terraform
+git_integration_title: pagerduty
+has_logo: true
+integration_id: ''
+integration_title: PagerDuty
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: pagerduty
+public_title: Integración de PagerDuty en Datadog
+short_description: Generar alertas PagerDuty a partir de métricas y eventos de Datadog
+version: '1.0'
 ---
-{{< site-region region="gov" >}}
 
-<div class="alert alert-warning">La integración de PagerDuty en Datadog tiene soporte limitado en el sitio de Datadog para el gobierno. La integración del catálogo de servicios y la resolución automática de la Gestión de Incidentes y la Automatización de flujos de trabajo no son compatibles.</div>
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">La integración de PagerDuty en Datadog tiene soporte limitado en el sitio de Datadog para el gobierno. La integración del catálogo de servicios y la resolución automática de la Gestión de Incidentes y la Automatización de flujos (flows) de trabajo no son compatibles.</div>
 {{< /site-region >}}
 
 ## Información general
 
 Conecta PagerDuty a Datadog para:
 
-- Activar y resolver incidentes de tu flujo (stream) mencionando `@pagerduty` en tu mensaje
+- Activar y resolver incidentes de tu flujo mencionando `@pagerduty` en tu mensaje
 - Visualizar los incidentes y las escaladas en tu flujo a medida que se producen
 - Recibir un recordatorio diario de quién está de guardia
 
 ## Configuración
 
-Consulta la [guía de integración de Datadog](http://www.pagerduty.com/docs/guides/datadog-integration-guide) de PagerDuty.
+Consulta la [guía de la integración en Datadog][1] de Pagerduty.
 
 {{< site-region region="us" >}}
 Una vez que tengas Pagerduty integrado, puedes verificar tendencias personalizadas de incidentes de PagerDuty.
@@ -52,13 +63,13 @@ La integración de PagerDuty no incluye métricas.
 
 ### Eventos
 
-Tus eventos de PagerDuty activados/resueltos aparecen en el [Explorador de eventos](https://docs.datadoghq.com/events/explorer/).
+Tus eventos PagerDuty activados/resueltos aparecen en el [Explorador de eventos][2].
 
 ### Checks de servicio
 
 La integración de PagerDuty no incluye checks de servicio.
 
-## Solucionar problemas
+## Resolución de problemas
 
 ### Enviar una notificación a un servicio de PagerDuty específico
 
@@ -87,6 +98,9 @@ Por ejemplo, si el monitor pasa de `OK` a `WARNING` y notifica un `@pagerduty-[s
 
 Datadog tiene un límite superior para la longitud de los notificaciones del monitor enviadas a PagerDuty. El límite es de **1024 caracteres**.
 
-## Referencias adicionales
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
+[2]: https://docs.datadoghq.com/es/events/explorer/

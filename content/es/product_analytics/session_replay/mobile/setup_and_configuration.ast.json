@@ -1,5 +1,7 @@
 {
   "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
   "inline": false,
   "attributes": {
     "frontmatter": {
@@ -58,36 +60,40 @@
       ]
     }
   },
-  "children": {
-    "translationListData": {
-      "0": {
-        "$$mdtype": "Node",
-        "inline": false,
-        "attributes": {
-          "file": "mdoc/en/real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        25,
+        26
+      ],
+      "inline": false,
+      "attributes": {
+        "file": "rum/session_replay/setup_and_configuration.mdoc.md"
+      },
+      "children": [],
+      "type": "tag",
+      "tag": "partial",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "file",
+          "value": "rum/session_replay/setup_and_configuration.mdoc.md"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 25
         },
-        "children": {
-          "translationListData": {}
-        },
-        "type": "tag",
-        "tag": "partial",
-        "annotations": {
-          "translationListData": {
-            "0": {
-              "type": "attribute",
-              "name": "file",
-              "value": "mdoc/en/real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
-            }
-          }
-        },
-        "slots": {},
-        "location": "line 25-26"
+        "end": {
+          "line": 26
+        }
       }
     }
-  },
+  ],
   "type": "document",
-  "annotations": {
-    "translationListData": {}
-  },
+  "annotations": [],
   "slots": {}
 }

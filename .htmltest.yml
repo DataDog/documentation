@@ -29,9 +29,6 @@ IgnoreDirs:
   - ko
   - es
   - security/default_rules
-  - resources # files for download
-  - img # some images
-  - images # most images
 IgnoreURLs:
   - "/favicon.ico"
   - "/resources/*"

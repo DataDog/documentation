@@ -1,8 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/exclusion/
-description: Excluye los valores nulos y aplica un filtrado basado en umbrales utilizando
-  funciones de sujeción y corte en las métricas.
 title: Exclusión
 ---
 

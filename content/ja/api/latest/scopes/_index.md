@@ -1,7 +1,7 @@
 ---
 disable_sidebar: true
 title: 認可スコープ
-type: api
+type: documentation
 ---
 ## 認可スコープ
 

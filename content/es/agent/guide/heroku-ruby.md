@@ -1,7 +1,4 @@
 ---
-description: Guía paso a paso para desplegar e instrumentar una aplicación Ruby on
-  Rails en Heroku con Datadog para recopilar métricas, logs, trazas (traces) y datos
-  de integración.
 further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: Documentación
@@ -12,7 +9,7 @@ further_reading:
 title: Instrumentar una aplicación de Ruby on Rails en Heroku con Datadog
 ---
 
-Heroku es una plataforma popular entre los desarrolladores de Ruby y, más específicamente, los de Ruby on Rails. Datadog es compatible con Heroku y Ruby, por lo que puedes enviar las métricas, logs y trazas de tu aplicación de Ruby en Heroku a Datadog.
+Heroku es una plataforma popular entre los desarrolladores de Ruby y, más específicamente, los de Ruby on Rails. Datadog es compatible con Heroku y Ruby, por lo que puedes enviar las métricas, logs y trazas (traces) de tu aplicación de Ruby en Heroku a Datadog.
 
 En esta guía, te explicaremos los pasos necesarios para utilizar una aplicación de Rails desplegada en Heroku y hacer que las métricas, datos de integración, logs y trazas se envíen a Datadog.
 
@@ -524,7 +521,7 @@ Collector
 [...]
 
 ```
-## Trazas
+## Trazas (traces)
 
 Habilita la instrumentación para obtener un rastreo distribuido de tu aplicación de Ruby en Heroku.
 
@@ -775,7 +772,7 @@ Para obtener más información sobre el significado de cada uno de estos valores
 
 Sigue los mismos pasos de la sección anterior para generar métricas con una retención de 15 meses para cada una de esas medidas.
 
-#### Correlacionar logs y trazas
+#### Correlaciona logs y trazas
 
 Si sigues las instrucciones de configuración anteriores, los logs enviados desde la purga de logs de Heroku se correlacionan con las trazas.
 

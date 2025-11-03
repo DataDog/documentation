@@ -15,8 +15,4 @@ Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguie
 
 {{% observability_pipelines/source_settings/http_client %}}
 
-## Configurar las variables de entorno
-
-{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
-
-[1]: /es/observability_pipelines/configuration/set_up_pipelines/
+[1]: /es/observability_pipelines/set_up_pipelines/

@@ -2,8 +2,6 @@
 aliases:
 - /es/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
 - /es/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
-description: Utiliza el atributo restricted_roles en Terraform para controlar los
-  permisos de edición de dashboards para roles de usuario específicos.
 title: Cómo utilizar Terraform para restringir la edición de un dashboard
 ---
 
@@ -25,7 +23,7 @@ recurso "datadog_dashboard" "ejemplo" {
 
 ## Restringir un dashboard utilizando una política de restricción
 
-<div class="alert alert-danger">Las políticas de restricción están en vista previa. Ponte en contacto con el <a href="/help/">servicio de asistencia de Datadog</a> o con tu asesor de clientes para obtener acceso.</div>
+<div class="alert alert-danger">Las políticas de restricción están en Vista previa. Para obtener acceso, ponte en contacto con el <a href="/help/">servicio de asistencia de Datadog</a> o con tu asesor de clientes.</div>
 
 Las [políticas de restricción][1] te permiten restringir la edición de dashboards y otros recursos a responsables específicos, incluyendo roles, equipos, usuarios y cuentas de servicio.
 

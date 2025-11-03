@@ -1,7 +1,4 @@
 ---
-description: Aprende a crear alertas de clúster que avisen cuando un porcentaje de
-  grupos cumple ciertas condiciones, como por ejemplo cuando el 40% de los hosts tienen
-  un uso elevado de CPU.
 further_reading:
 - link: /monitors/
   tag: Documentación

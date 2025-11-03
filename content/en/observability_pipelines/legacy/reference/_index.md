@@ -3,7 +3,7 @@ title: Reference
 disable_toc: true
 disable_sidebar: true
 type: reference
-build:
+_build:
   render: false
 cascade:
   disable_toc: false

@@ -2,9 +2,6 @@
 title: Advanced Filtering
 description: Filter your data to narrow the scope of metrics returned.
 further_reading:
-  - link: "/getting_started/search/"
-    tag: "Documentation"
-    text: "Getting Started with Search in Datadog"
   - link: "/metrics/explorer/"
     tag: "Documentation"
     text: "Metrics Explorer"

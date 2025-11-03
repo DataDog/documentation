@@ -63,7 +63,27 @@ You can optionally add extensions, such as new attributes, objects, categories, 
 
 The following Log Management integrations support out-of-the-box OCSF pipelines:
 
-{{% cloud-siem-supported-ocsf %}}
+- 1Password
+- Auth0
+- AWS CloudTrail
+- Cisco Duo
+- Cisco Meraki
+- Cloudflare
+- CrowdStrike
+- GitHub Telemetry
+- Google BigQuery
+- Google Cloud
+- Google GKE cluster audit logs
+- Google Pub Sub
+- Google GSuite
+- JumpCloud
+- Kubernetes audit logs
+- LastPass
+- Microsoft 365
+- Okta
+- Salesforce
+- Slack
+- Snowflake Web Logs
 
 ## View Security Pipelines \- OCSF
 

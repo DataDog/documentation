@@ -1,8 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/rate/
-description: Calcula tasas, derivadas y diferencias de tiempo para analizar cambios
-  en métricas por segundo, minuto u hora.
 further_reading:
 - link: /monitors/guide/alert-on-no-change-in-value/
   tag: Documentación
@@ -77,6 +75,6 @@ Calcula la diferencia entre cada intervalo por intervalo. Por ejemplo, una métr
     {{< nextlink href="/dashboards/functions/timeshift" >}}Cambio temporal: cambia el punto de datos de tu métrica dentro de la línea de tiempo. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Referencias adicionales
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}

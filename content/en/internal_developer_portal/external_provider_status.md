@@ -46,44 +46,41 @@ To receive notifications for external provider degradations:
 External Provider Status monitors the following third-party providers:
 
 
-| External Provider | API monitored |  
-|----------|--------------------| 
-| Adyen | `*.adyenpayments.com` |
+| External provider | API monitored |  
+|----------|--------------------|
 | Amplitude | `api.amplitude.com` |
-| Anthropic | `api.anthropic.com` |
-| Atlassian | `*.atlassian.net`, `*.atlassian.com` |
+| Atlassian | `*.atlassian.net` |
 | Auth0 | `*.auth0.com` |
-| Azure DevOps | `dev.azure.com` |
 | Binance | `api.binance.com` |
 | Braintree | `api.braintreegateway.com` |
+| Coreweave | `*.coreweave.com` |
 | Cloudflare | `api.cloudflare.com` |
+| Confluent | `api.confluent.cloud`, `api.telemetry.confluent.cloud` |
 | Databricks | `*.cloud.databricks.com` |
+| Envoy | `api.envoy.com` |
 | Facebook | `graph.facebook.com` |
 | GitHub | `api.github.com` |
-| GitLab | `*.gitlab.com` |
-| HubSpot | `api.hubspot.com`, `api.hubapi.com` |
+| Hubspot | `api.hubspot.com` |
 | Intercom | `api.intercom.io` |
-| LaunchDarkly | `app.launchdarkly.com` |
 | Mapbox | `api.mapbox.com` |
 | Mixpanel | `api.mixpanel.com` |
-| Okta | `*.okta.com` |
 | OpenAI | `*.openai.com` |
 | PagerDuty | `api.pagerduty.com` |
 | Palo Alto Networks | `api.urlcloud.paloaltonetworks.com` |
-| PayPal | `*.paypal.com` |
-| Salesforce | `*.salesforce.com` |
+| Render | `api.render.com` |
 | SendGrid | `*.sendgrid.com` |
 | ServiceNow | `*.service-now.com` |
 | Slack | `*.slack.com` |
 | Snowflake | `*.snowflakecomputing.com` |
+| SoundCloud | `api.soundcloud.com` |
 | Splunk | `*.splunkcloud.com` |
 | Square | `connect.squareup.com` |
 | Stripe | `api.stripe.com` |
+| Towerdata | `api.towerdata.com` |
 | Twilio | `api.twilio.com` |
-| X | `api.twitter.com` |
+| Twitter | `api.twitter.com` |
 | Zendesk | `*.zendesk.com` |
 | Zoom | `api.zoom.us` |
-
 ### AWS services
 
 External Provider Status monitors the following AWS services through endpoints matching `*.amazonaws.com`:
@@ -95,6 +92,7 @@ External Provider Status monitors the following AWS services through endpoints m
 - Kinesis
 - KMS
 - Lambda
+- RDS
 - S3
 - SNS
 - SQS

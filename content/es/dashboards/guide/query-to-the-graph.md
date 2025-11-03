@@ -1,8 +1,6 @@
 ---
 aliases:
 - /es/dashboards/faq/query-to-the-graph
-description: Comprende cómo el sistema de gráficos de Datadog procesa las consultas
-  y las representa mediante líneas de gráficos con pasos de ejecución de backend.
 title: Consulta al gráfico
 ---
 
@@ -105,7 +103,7 @@ Datadog ofrece 4 agregadores espaciales:
 * `máx.`
 * `mín.`
 * `prom.`
-* `sum`
+* `suma`
 
 ## Aplica funciones (opcional)
 

@@ -1,7 +1,4 @@
 ---
-description: Configura un dashboard personalizado como página de inicio de tu organización
-  para definir la primera impresión y controlar la información que ven los usuarios
-  al iniciar sesión en Datadog.
 title: Página de destino personalizada de una organización
 ---
 
@@ -15,7 +12,7 @@ Puedes personalizar un dashboard con la información que quieres que vean tus us
 
 ## Establecer una página de destino personalizada
 
-Solo los usuarios con el rol de administrador de Datadog o el permiso de gestión de la organización (`org_management`) pueden configurar la página de inicio personalizada de una organización. Las páginas de inicio personalizadas no están disponibles durante los periodos de pruebas gratuitos.
+Sólo los usuarios con un rol de administrador de Datadog o un permiso de gestión de la organización (`org_management`) pueden establecer la página de destino personalizada de una organización.
 
 Para configurar una página de destino personalizada, sigue los pasos que se indican a continuación:
 

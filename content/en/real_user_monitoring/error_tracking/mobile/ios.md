@@ -37,7 +37,7 @@ If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2
 
 ### Add crash reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][3]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}

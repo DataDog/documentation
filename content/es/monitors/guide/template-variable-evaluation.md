@@ -1,7 +1,4 @@
 ---
-description: Modifica la salida de variables de plantilla en las notificaciones de
-  monitor utilizando operaciones matemáticas, funciones y manipulación de cadenas
-  con la sintaxis eval.
 title: Evaluación de variables de plantilla
 ---
 

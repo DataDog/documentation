@@ -10,9 +10,6 @@ further_reading:
 - link: /database_monitoring/guide/sql_deadlock/
   tag: Documentación
   text: Configurar la Monitorización Deadlock
-- link: /database_monitoring/guide/sql_extended_events/
-  tag: Documentación
-  text: Configurar la finalización de consultas y la recopilación de errores de consulta
 - link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
   tag: Blog
   text: Establecer estrategias de migración Azure para cargas de trabajo SQL con Datadog
@@ -41,7 +38,7 @@ Versiones de SQL Server compatibles
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
-Crea un inicio de sesión de solo lectura para conectarte a tu servidor y conceder los permisos necesarios:
+Crea un inicio de sesión de solo lectura para conectarte a tu servidor y concede los permisos necesarios:
 
 {{< tabs >}}
 {{% tab "SQL Server 2014 o posterior" %}}
@@ -78,8 +75,8 @@ Crea el usuario `datadog` en cada base de datos de aplicaciones adicional:
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Guarda tu contraseña de forma segura
 {{% dbm-secret %}}
@@ -89,13 +86,21 @@ CREATE USER datadog FOR LOGIN datadog;
 Se recomienda instalar el Agent directamente en el host de SQL Server, ya que esto permite al Agent recopilar una variedad de telemetrías del sistema (CPU, memoria, disco, red), además de la telemetría específica del SQL Server.
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
+{{% tab "Host de Windows" %}}
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
-{{% tab "Linux Host" %}}
+{{% tab "Host de Linux" %}}
 {{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
+{{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-alwayson %}}
+{{% dbm-sqlserver-agent-setup-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-alwayson %}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 

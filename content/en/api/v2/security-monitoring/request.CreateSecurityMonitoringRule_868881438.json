@@ -6,9 +6,7 @@
       "aggregation": "count",
       "groupByFields": [],
       "distinctFields": [],
-      "indexes": [
-        "main"
-      ]
+      "index": "main"
     }
   ],
   "filters": [],

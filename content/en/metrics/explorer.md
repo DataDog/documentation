@@ -20,6 +20,28 @@ further_reading:
 
 The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2] or dashboard ([screenboard][3], or [timeboard][4]).
 
+## Natural language queries
+
+{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}}
+Natural Langugage Querying (NLQ) on Metrics Explorer is in Preview. If you're interested in this feature, complete this form. </a>.
+{{< /callout >}}
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+Natural Language Queries is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
+<div class="alert alert-info">Natural Language Queries (NLQ) for Metrics is <strong>built with Llama</strong>.</div>
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, making it easier to explore metrics without needing to write complex syntax. To access this feature, click **Ask** in the search field.
+
+{{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
+
+The system translates natural language input into Datadog queries and understands context such as services, attributes, and tags. 
+
+To disable NLQ, you must have [`org_management` permissions][8]. Navigate to [Organization Settings > Preferences][7] and toggle off the Natural Language Queries feature.
+
 ## Graphing
 
 Use the query editor to customize the graph displayed on the Metrics Explorer page.

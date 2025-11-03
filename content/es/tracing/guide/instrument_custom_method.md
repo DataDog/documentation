@@ -1,7 +1,4 @@
 ---
-description: Aprende a añadir la instrumentación personalizada a métodos y funciones
-  para obtener una visibilidad detallada de tu lógica empresarial y del rendimiento
-  de tu aplicación.
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
   tag: 3 minutos
@@ -24,7 +21,7 @@ _8 minutos para completarlo_
 
 {{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="Vista de análisis" style="width:90%;">}}
 
-<div class="alert alert-danger">En esta página se describe el uso de OpenTracing para la instrumentación personalizada de aplicaciones. OpenTracing está obsoleto. Los conceptos presentados aquí todavía se aplican, pero te recomendamos seguir las instrucciones y ejemplos de <a href="/tracing/trace_collection/otel_instrumentation/">Instrumentación personalizada con OpenTelemetry</a> para tu lenguaje. </div>
+<div class="alert alert-danger"><strong>Nota</strong>: En esta página se describe el uso de OpenTracing para la instrumentación personalizada de aplicaciones. OpenTracing está obsoleto. Los conceptos presentados aquí todavía se aplican, pero, en su lugar, sigue las instrucciones y ejemplos de <a href="/tracing/trace_collection/otel_instrumentation/">Instrumentación personalizada con OpenTelemetry</a> para tu idioma. </div>
 
 Para proporcionarte una visibilidad profunda de tu lógica de negocio, la APM de Datadog te permite personalizar los tramos (spans) que componen tus trazas en función de tus necesidades e implementación. Esto te permite rastrear cualquier método de tu código base e incluso componentes específicos dentro de los métodos. Puedes utilizar esto para optimizar y monitorizar áreas críticas de tu aplicación en la granularidad que funcione para ti.
 
@@ -44,7 +41,7 @@ El tramo `http.request POST /charge/` está tardando mucho sin tener ningún tra
 
 En Java, la APM Datadog te permite instrumentar tu código para generar tramos personalizados, ya sea utilizando decoradores de métodos o instrumentando bloques de código específicos.
 
-**Instrumentar un método con un decorador**:
+**Instument a method with a decorator** (Instrumentar un método con un decorador):
 
 Este ejemplo añade un tramo al método `BackupLedger.write`, que añade nuevas filas a un libro de contabilidad de transacciones. Se añade un tramo para rastrear todas las transacciones contabilizadas como una sola unidad.
 
@@ -67,7 +64,7 @@ public class BackupLedger {
 
 **Instrument a specific code block** (Instrumentar un bloque de código específico):
 
-Este ejemplo añade tramos secundarios al tramo `BackupLedger.write` creado anteriormente. Este método añade un tramo secundario para cada transacción en el libro de contabilidad y una [etiqueta personalizada][1] con el ID de transacción específico.
+Este ejemplo añade tramos secundarios al tramo `BackupLedger.write` creado anteriormente. Este método añade un tramo secundario para cada transacción en el libro de contabilidad y una [etiqueta (tag) personalizada][1] con el ID de transacción específico.
 
 ```java
 import datadog.trace.api.Trace;
@@ -105,7 +102,7 @@ public class BackupLedger {
 
 En Python, la APM Datadog te permite instrumentar tu código para generar tramos personalizados, ya sea utilizando decoradores de métodos o instrumentando bloques de código específicos.
 
-**Instrumentar un método con un decorador**:
+**Instument a method with a decorator** (Instrumentar un método con un decorador):
 
 Este ejemplo añade un tramo al método `BackupLedger.write`, que añade nuevas filas a un libro de contabilidad de transacciones. Se añade un tramo para rastrear todas las transacciones contabilizadas como una sola unidad.
 
@@ -125,7 +122,7 @@ class BackupLedger:
 
 **Instrument a specific code block** (Instrumentar un bloque de código específico):
 
-Este ejemplo añade tramos secundarios al tramo `BackupLedger.write` creado anteriormente. Este método añade un tramo secundario para cada transacción en el libro de contabilidad y una [etiqueta personalizada][1] con el ID de transacción específico.
+Este ejemplo añade tramos secundarios al tramo `BackupLedger.write` creado anteriormente. Este método añade un tramo secundario para cada transacción en el libro de contabilidad y una [etiqueta (tag) personalizada][1] con el ID de transacción específico.
 
 ```python
 from ddtrace import tracer

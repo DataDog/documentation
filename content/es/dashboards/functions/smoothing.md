@@ -1,8 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/smoothing/
-description: Reduce el ruido en los datos métricos utilizando autosmooth, medias móviles
-  ponderadas exponencialmente, filtros de mediana y funciones ponderadas.
 title: Suavizado
 ---
 

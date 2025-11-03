@@ -1,11 +1,8 @@
 ---
-description: Crea tests de navegador en Datadog para monitorizar las experiencias
-  de los usuarios con los dispositivos y los navegadores. Graba escenarios de test,
-  configura alertas y confirma transacciones empresariales.
 further_reading:
-- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Centro de aprendizaje
-  text: Empezando con los tests de monitorización Synthetic
+  text: Introducción a los tests Synthetic
 - link: /synthetics/browser_tests
   tag: Documentación
   text: Más información sobre los tests de navegador

@@ -109,6 +109,7 @@ The [`datadog-ci`][22] CLI tool provides a shortcut to send deployment events wi
 
 For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][27]:
 ```shell
+export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="<DD_SITE>"
 export DD_API_KEY="<DD_API_KEY>"
 
@@ -116,8 +117,6 @@ export deploy_start=`date +%s`
 ./your-deploy-script.sh
 datadog-ci dora deployment --service shopist --env prod \
     --started-at $deploy_start --finished-at `date +%s` \
-    --version v1.12.07 --custom-tags department:engineering \
-    --custom-tags app_type:backend \
     --git-repository-url "https://github.com/organization/example-repository" \
     --git-commit-sha 66adc9350f2cc9b250b69abddab733dd55e1a588
 ```
