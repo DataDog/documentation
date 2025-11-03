@@ -30,4 +30,4 @@ Example date remapper processor
 
 {{< img src="logs/log_configuration/processor/date_remapper.png" alt="Define a date attribute" style="width:80%;" >}}
 
-[1]: /service_management/events/pipelines_and_processors/date_remapper/
+[1]: logs/log_configuration/parsing/?tab=matchers#parsing-dates
