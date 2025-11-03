@@ -424,6 +424,6 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 [14]: https://learn.microsoft.com/azure/azure-monitor/reference/metrics-index
 [15]: /metrics/#time-aggregation
 [16]: https://learn.microsoft.com/rest/api/monitor/metric-definitions/list?view=rest-monitor-2023-10-01
-[17]: https://learn.microsoft.com/azure/azure-monitor/metrics/metrics-aggregation-explained
+[17]: https://learn.microsoft.com/azure/azure-monitor/metrics/metrics-aggregation-explained#aggregation-types
 [18]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/metrics
 [19]: https://app.datadoghq.com/metric/explorer
