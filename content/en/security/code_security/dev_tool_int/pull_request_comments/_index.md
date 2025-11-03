@@ -86,7 +86,7 @@ See the [GitLab Source Code][8] setup instructions to connect GitLab repositorie
 
 See the [Azure source code setup instructions][9] to connect Azure DevOps repositories to Datadog.
 
-[9]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#source-code-functionality
+[8]: /integrations/azure-devops-source-code/#source-code-functionality
 
 {{% /tab %}}
 {{< /tabs >}}
