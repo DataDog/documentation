@@ -4,12 +4,12 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-7c124611-ecb3-4fa6-abe2-4a8158daaf75": {
+        "ast-str-e6058273-913f-46bb-9080-40f7dc9b34ae": {
           "string": "Instalación y configuración de Session Replay para móviles"
         }
       },
       "description": {
-        "ast-str-6e790010-0410-4bc8-8272-4a12fbf32d04": {
+        "ast-str-e1880e45-f1ca-40b8-b80d-7e13841e67dc": {
           "string": "Instala y configura Session Replay para móviles."
         }
       },
@@ -18,12 +18,12 @@
           "0": {
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
-              "ast-str-d16ef26e-381b-4eb8-b1de-70f969cd4eec": {
+              "ast-str-aeea9316-7851-464f-a0e5-908b6f1b7dd8": {
                 "string": "Session Replay para móviles"
               }
             },
             "tag": {
-              "ast-str-e12e54d4-5679-464d-8395-97238d1ae11b": {
+              "ast-str-3c9ae4ac-2195-4740-bcd3-a52fbb4cf619": {
                 "string": "Documentación"
               }
             }
@@ -31,12 +31,12 @@
           "1": {
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-59880ecd-7a93-4b65-be2c-3e312586a956": {
+              "ast-str-ac54f8ca-37b7-413f-b3d0-0a918b37b1b5": {
                 "string": "Cómo afecta Mobile Session Replay al rendimiento de las aplicaciones"
               }
             },
             "tag": {
-              "ast-str-f5de440d-94a8-4c72-b204-4ebad6ab4d53": {
+              "ast-str-3eecfad5-5996-44a4-85ed-994091673150": {
                 "string": "Documentación"
               }
             }
@@ -44,12 +44,12 @@
           "2": {
             "link": "/real_user_monitoring/session_replay/mobile/privacy_options",
             "text": {
-              "ast-str-22570d2d-e2c7-495b-894c-d503eaa47a6c": {
+              "ast-str-9476d72e-e89e-457c-832b-d1876d8154c2": {
                 "string": "Opciones de privacidad de Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-71164fa2-9910-4173-8da0-c119c38df091": {
+              "ast-str-3023c936-fb3f-41c2-9765-9041533094fb": {
                 "string": "Documentación"
               }
             }
@@ -57,12 +57,12 @@
           "3": {
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-a966523b-1775-4b19-ab4c-5b1b1eb779bb": {
+              "ast-str-ca2c7ee9-4fe3-4bcd-9897-43ab42c7434b": {
                 "string": "Solución de problemas de Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-2a4d546c-ef45-420a-bda3-eddb6f8b9e30": {
+              "ast-str-3977546e-a1bb-4526-bf38-ca1c391da8e6": {
                 "string": "Documentación"
               }
             }
@@ -70,12 +70,12 @@
           "4": {
             "link": "/real_user_monitoring/session_replay",
             "text": {
-              "ast-str-aaea3198-36d2-441f-92f5-bb4c0f304fe2": {
+              "ast-str-13fc98fe-a961-4b16-a2f9-fbf4c3670cc0": {
                 "string": "Session Replay"
               }
             },
             "tag": {
-              "ast-str-ab6c252b-84b1-4b1e-aa85-73679522086b": {
+              "ast-str-856f47a5-5069-429c-a560-8082fbf32ae4": {
                 "string": "Documentación"
               }
             }
@@ -83,12 +83,12 @@
           "5": {
             "link": "/real_user_monitoring/application_monitoring/android/web_view_tracking",
             "text": {
-              "ast-str-e7e182ec-27f5-4009-b3c2-4042ac233d91": {
+              "ast-str-c42c9b1d-9d9a-4622-89a1-e2f7dee5712e": {
                 "string": "Web View Tracking"
               }
             },
             "tag": {
-              "ast-str-d968d7e5-2c3c-426d-8969-9ffa2437cf80": {
+              "ast-str-130ec363-d662-4b11-b461-4d66edcce43d": {
                 "string": "Documentación"
               }
             }

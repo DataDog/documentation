@@ -4,12 +4,12 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-1d6765ec-05f2-4061-b6eb-3491b6f860a1": {
+        "ast-str-53263dcc-c7ec-4d64-a139-4f00386ed868": {
           "string": "모바일 세션 리플레이 개인정보 보호 옵션"
         }
       },
       "description": {
-        "ast-str-dca2dfce-1c6c-482e-bb94-2965f89d14fd": {
+        "ast-str-1cda96eb-ecc3-4897-a958-37bfd13a254e": {
           "string": "모바일 세션 재생을 위한 개인정보 보호 옵션을 설정합니다."
         }
       },
@@ -18,12 +18,12 @@
           "0": {
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
-              "ast-str-8475c94d-f84d-4674-82fc-decb65d009e7": {
+              "ast-str-9153c32c-9f3b-4297-83b0-1d8e5e790aa9": {
                 "string": "Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-c5645fe4-d05f-444f-a89d-adc8e96cb73b": {
+              "ast-str-f6f9bf61-8e2b-4e08-8258-4a4f9fda0063": {
                 "string": "설명서"
               }
             }
@@ -31,12 +31,12 @@
           "1": {
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-2362c5d7-1131-40ad-a000-fc28bb1491c8": {
+              "ast-str-265efd53-4f2a-45b4-95c8-613cf4db534a": {
                 "string": "모바일 세션 리플레이이 앱 성능에 미치는 영향"
               }
             },
             "tag": {
-              "ast-str-bd194498-7095-4067-baee-d72654e0a6db": {
+              "ast-str-69973a7e-d10f-4fdf-998e-ea79bff3f2a9": {
                 "string": "설명서"
               }
             }
@@ -44,12 +44,12 @@
           "2": {
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
-              "ast-str-c951c01a-4c8a-4288-ad38-6807d8898605": {
+              "ast-str-40554c8e-ece6-416f-8da6-a827f00068b7": {
                 "string": "모바일 세션 리플레이 설정 및 구성"
               }
             },
             "tag": {
-              "ast-str-96c999f2-7bb9-4295-a6cd-066ab4e9530b": {
+              "ast-str-603bebb3-4f48-4845-ba62-f2ab83d78653": {
                 "string": "설명서"
               }
             }
@@ -57,12 +57,12 @@
           "3": {
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-d44ba4c0-7fd6-40eb-bd41-46219b2a7e4c": {
+              "ast-str-f450e1cc-9426-4b69-8253-3b46d4ff2361": {
                 "string": "모바일 세션 리플레이 문제 해결"
               }
             },
             "tag": {
-              "ast-str-9fe48841-97e2-4863-be00-00e71cbcc11b": {
+              "ast-str-f4b8f251-cae7-461d-becb-4ecc3874d1c6": {
                 "string": "설명서"
               }
             }
@@ -70,12 +70,12 @@
           "4": {
             "link": "/real_user_monitoring/session_replay",
             "text": {
-              "ast-str-a5a66c70-f3e2-48a4-bcdd-aab5a769c6b1": {
+              "ast-str-15faaca3-c0f0-4f24-a51f-9a888f62f8d3": {
                 "string": "Session Replay"
               }
             },
             "tag": {
-              "ast-str-064c6aa0-3fef-4cfd-a91d-54bad56aab0e": {
+              "ast-str-4760f4f1-077d-46ab-af8d-ebced0cced6c": {
                 "string": "설명서"
               }
             }
