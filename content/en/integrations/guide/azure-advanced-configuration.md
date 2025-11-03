@@ -311,7 +311,7 @@ Datadog displays raw data from Azure in per-second values, regardless of the tim
 
 #### 2. Space aggregation
 
-[Space aggregation][22] in Datadog corresponds to the [primary aggregation type][17] of the metric in Azure Monitor. You can find the primary aggregation type from Azure's [Metric Definitions - List][16] API, in the field `primaryAggregationType`.
+[Space aggregation][20] in Datadog corresponds to the [primary aggregation type][17] of the metric in Azure Monitor. You can find the primary aggregation type from Azure's [Metric Definitions - List][16] API, in the field `primaryAggregationType`.
 
 #### Reconcile the discrepancy
 
@@ -427,3 +427,4 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 [17]: https://learn.microsoft.com/azure/azure-monitor/metrics/metrics-aggregation-explained#aggregation-types
 [18]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/metrics
 [19]: https://app.datadoghq.com/metric/explorer
+[20]: /metrics/#space-aggregation
