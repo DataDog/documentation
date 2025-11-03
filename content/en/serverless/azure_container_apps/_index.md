@@ -54,4 +54,3 @@ To instrument your Azure Container App with Datadog, choose one of two options:
 [1]: /integrations/azure/#log-collection
 [2]: /serverless/azure_container_apps/in_container
 [3]: /serverless/azure_container_apps/sidecar
-G
