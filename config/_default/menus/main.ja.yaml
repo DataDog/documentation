@@ -4682,16 +4682,11 @@ menu:
       identifier: data_streams_dead_letter_queues
       parent: data_streams
       weight: 4
-    - name: Data Pipeline Lineage
-      url: data_streams/data_pipeline_lineage
-      identifier: data_streams_pipeline_lineage
-      parent: data_streams
-      weight: 5
     - name: Metrics and Tags
       url: data_streams/metrics_and_tags
       identifier: data_streams_metrics_and_tags
       parent: data_streams
-      weight: 6
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
