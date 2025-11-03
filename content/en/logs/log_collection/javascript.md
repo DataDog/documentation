@@ -226,7 +226,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{% /tab %}}
 {{< /tabs >}}
 
-### Step 3 - Initialize the Browser SDK
+### Step 3 - Initialize the Logs Browser SDK
 
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all logs are captured correctly.
 
@@ -254,8 +254,8 @@ datadogLogs.init({
 
 ```javascript
 <script>
-  window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
+  window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
       clientToken: '<CLIENT_TOKEN>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
@@ -272,7 +272,7 @@ datadogLogs.init({
 
 ```javascript
 <script>
-    window.DD_RUM && window.DD_RUM.init({
+    window.DD_LOGS && window.DD_LOGS.init({
       clientToken: '<CLIENT_TOKEN>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
