@@ -12,7 +12,7 @@ You can define a sequence of steps that must occur within a defined time frame a
 
 {{< img src="security/security_monitoring/detection_rules/sequence/preview.png" alt="Sequence editor page showing a preview of the steps" style="width:100%;" >}}
 
-See [Create Rule][1] for instructions on how to configure a content anomaly rule.
+See [Create Rule][1] for instructions on how to configure a sequence rule.
 
 ## How the sequence method works
 
@@ -25,13 +25,13 @@ Sequence detection evaluates a defined series of steps that represent distinct s
 - A condition such as a threshold on a log query or a signal match
 - Transitions that define the order and time constraints between steps
 
-When all steps occur in the specified order and within the configured time windows, a signal is generated.
+The rule is triggered when all steps occur in the specified order and within the configured time windows.
 
 ### Linking entities
 
 {{< img src="security/security_monitoring/detection_rules/sequence/linked_entities.png" alt="Sequence editor page showing a step with the group by field highlighted" style="width:100%;" >}}
 
-The sequence of steps can be correlated across users, accounts, IP addresses, and other fields to automatically track linked entities through group by fields. This allows you to follow an attacker's path across different identities and systems.
+The sequence of steps can be correlated across users, accounts, IP addresses, and other fields to automatically track linked entities through `group by` fields. This allows you to follow an attacker's path across different identities and systems.
 
 ### Evaluation window
 
@@ -41,11 +41,11 @@ Each transition between steps has a configurable evaluation window that determin
 
 ## Configuration options
 
-When you [create a sequence detection rule][1], these are the options you can configure:
+When you [create a sequence detection rule][1], you can configure these options:
 
 | Setting | Description | Impact |
 |---------|-------------|--------|
-| Data type | Specifies whether each query evaluates logs, signals, or rules. | Defines data sources for detection. |
+| Data type | Specify whether each query evaluates logs, signals, or rules. | Defines data sources for detection. |
 | Steps | Define each detection condition, including query and threshold. | Determines which behaviors are monitored. |
 | Step transitions | Define the order and time relationship between steps. | Controls when a sequence qualifies for a signal. |
 | Evaluation window | After a step has occurred, the time (in seconds) to wait for the next step. | Larger windows increase detection coverage, but may result in more noise. |
