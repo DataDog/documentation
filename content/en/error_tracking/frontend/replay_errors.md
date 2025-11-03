@@ -70,7 +70,7 @@ Error Tracking Replay Snippets allows you to view a pixel-perfect recreation of 
    {{</tabs>}}
 
 ## Replay errors
-After reviewing key information about the error, such as the error message and stack trace, you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error. Scroll down below the stack trace and click on the preview of the replay to see a users actions before the error occured. 
+After reviewing key information about the error, such as the error message and stack trace, you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error. Scroll down below the stack trace and click on the preview of the replay to see a users actions before the error occurred. 
 
 {{< img src="error_tracking/error-replay.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
 

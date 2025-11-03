@@ -36,10 +36,6 @@ further_reading:
   text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-PR Gates are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 PR Gates allow you to control software security and quality by configuring rules to block pull requests with substandard code from being merged. Preventing pull requests with substandard code from being merged can ensure that the code that is eventually deployed to production adheres to high organizational standards, reducing incidents and minimizing unwanted behaviors.

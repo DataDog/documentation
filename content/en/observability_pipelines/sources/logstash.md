@@ -25,5 +25,5 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/log_source_configuration/logstash %}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/sources/filebeat/

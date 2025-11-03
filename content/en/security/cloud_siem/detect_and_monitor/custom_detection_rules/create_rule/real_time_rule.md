@@ -1,5 +1,7 @@
 ---
 title: Create a Real-Time Rule
+aliases:
+    - /security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules/
 code_lang: real_time_rule
 type: multi-code-lang
 weight: 1

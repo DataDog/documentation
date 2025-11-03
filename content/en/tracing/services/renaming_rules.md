@@ -23,7 +23,7 @@ Renaming is useful when:
 
 ## Prerequisites
 
-You must have the `apm_service_catalog_write` permission to create renaming rules. See [Permissions][2] for details on Datadog role-based access control.  
+You must have the `apm_service_renaming_write` permission to create renaming rules. See [Permissions][2] for details on Datadog role-based access control.  
 
 ## Create a renaming rule 
 

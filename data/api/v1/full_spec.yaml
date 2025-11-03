@@ -2991,6 +2991,7 @@ components:
       - ci_pipelines
       - incident_analytics
       - product_analytics
+      - on_call_events
       example: logs
       type: string
       x-enum-varnames:
@@ -3006,6 +3007,7 @@ components:
       - CI_PIPELINES
       - INCIDENT_ANALYTICS
       - PRODUCT_ANALYTICS
+      - ON_CALL_EVENTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -28656,7 +28658,7 @@ paths:
         - aws_configuration_read
     post:
       deprecated: true
-      description: '"**This endpoint is deprecated - use the V2 endpoints instead.**
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
         Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
@@ -28818,7 +28820,8 @@ paths:
   /api/v1/integration/aws/event_bridge:
     delete:
       deprecated: true
-      description: Delete an Amazon EventBridge source.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete an Amazon EventBridge source.'
       operationId: DeleteAWSEventBridgeSource
       requestBody:
         content:
@@ -28860,7 +28863,8 @@ paths:
         - manage_integrations
     get:
       deprecated: true
-      description: Get all Amazon EventBridge sources.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Get all Amazon EventBridge sources.'
       operationId: ListAWSEventBridgeSources
       parameters: []
       responses:
@@ -28893,7 +28897,8 @@ paths:
         permissions: []
     post:
       deprecated: true
-      description: Create an Amazon EventBridge source.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create an Amazon EventBridge source.'
       operationId: CreateAWSEventBridgeSource
       requestBody:
         content:
