@@ -16,14 +16,9 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-Set up Datadog Feature Flags for your applications. Follow the platform-specific guides below to integrate Feature Flags into your application.
+Set up Datadog Feature Flags for your applications. Follow the platform-specific guides below to integrate feature flags into your application and start collecting feature flag data:
 
-## Platform-specific setup
-
-{{< whatsnext desc="Choose your platform:" >}}
-    {{< nextlink href="/feature_flags/setup/ios" >}}iOS{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/android" >}}Android{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="feature_flags/feature_flags_setup.html" >}}
 
 ## Further reading
 
