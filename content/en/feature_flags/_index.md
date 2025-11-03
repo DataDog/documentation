@@ -2,6 +2,12 @@
 title: Feature Flags
 description: Learn about feature flags in Datadog.
 further_reading:
+- link: "/getting_started/feature_flags/"
+  tag: "Documentation"
+  text: "Getting started with Feature Flags"
+- link: "/feature_flags/setup/"
+  tag: "Documentation"
+  text: "Set up Feature Flags for your applications"
 - link: "/feature_flags/guide/migrate_from_statsig"
   tag: "Guide"
   text: "Migrate Your Feature Flags from Statsig"

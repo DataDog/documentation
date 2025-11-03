@@ -5413,11 +5413,26 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: Setup
+      url: feature_flags/setup
+      parent: feature_flags
+      identifier: feature_flags_setup
+      weight: 1
+    - name: Android and Android TV
+      url: feature_flags/setup/android
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_android
+      weight: 101
+    - name: iOS and tvOS
+      url: feature_flags/setup/ios
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_ios
+      weight: 102
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 1
+      weight: 9
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
