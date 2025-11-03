@@ -2,6 +2,7 @@
 title: Data Streams Monitoring
 aliases:
 - /data_streams/troubleshooting
+- /data_streams/data_pipeline_lineage
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

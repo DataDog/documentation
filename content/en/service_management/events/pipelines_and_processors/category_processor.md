@@ -1,6 +1,6 @@
 ---
 title: Category Processor
-
+description: Add a new attribute to events matching a search query to create groups for analytical views
 ---
 
 Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to an event matching a provided search query. Then, use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
