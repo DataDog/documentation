@@ -12,8 +12,3 @@ What this pack does:
 - Deduplicates repeated request logs
 - Samples high-volume cache hits
 - Drops health checks, static, and bot logs
-
-## Example logs
-
-TKTK
-

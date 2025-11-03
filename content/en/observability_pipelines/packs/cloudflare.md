@@ -12,8 +12,3 @@ What this pack does:
 - Deduplicates traffic, samples low-risk logs
 - Keeps key requests and security events
 - Filters secrets and removes sensitive fields
-
-## Example logs
-
-TKTK
-

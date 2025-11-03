@@ -12,8 +12,3 @@ What this pack does:
 - Removes unused log metadata
 - Drops idle and internal `ACCEPT OK` flows
 - Keeps denied and rejected connections
-
-## Example logs
-
-TKTK
-

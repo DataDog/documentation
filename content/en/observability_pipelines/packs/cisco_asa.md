@@ -12,8 +12,3 @@ What this pack does:
 - Drops redundant and low-value logs
 - Normalizes ASA codes
 - Keeps denied, VPN, and high alerts
-
-## Example logs
-
-TKTK
-

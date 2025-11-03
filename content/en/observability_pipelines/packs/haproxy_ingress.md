@@ -12,8 +12,3 @@ What this pack does:
 - Extracts key fields for analysis
 - Drops routine health check and metrics endpoints
 - Generates metrics to support cluster monitoring
-
-## Example logs
-
-TKTK
-

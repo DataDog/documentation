@@ -12,8 +12,3 @@ What this pack does:
 - Drops DNS, health, and internal flows
 - Normalizes fields, adds protocol context
 - Keeps threats, denied, and anomalous logs
-
-## Example logs
-
-TKTK
-

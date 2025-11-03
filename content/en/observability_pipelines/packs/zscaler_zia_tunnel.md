@@ -12,8 +12,3 @@ What this pack does:
 - Reduces log volume of routine heartbeat logs
 - Consolidates repeated failure alerts
 - Standardizes fields for metrics and alerts
-
-## Example logs
-
-TKTK
-

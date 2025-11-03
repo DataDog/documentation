@@ -12,8 +12,3 @@ What this pack does:
 - Samples routine allowed and internal traffic
 - Keeps blocked, threat, and unusual events
 - Generates traffic and firewall metrics
-
-## Example logs
-
-TKTK
-

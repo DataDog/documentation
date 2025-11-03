@@ -12,8 +12,3 @@ What this pack does:
 - Converts verbose XML into JSON
 - Drops empty and redundant fields
 - Keeps only security-relevant events
-
-## Example logs
-
-TKTK
-

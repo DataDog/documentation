@@ -12,8 +12,3 @@ What this pack does:
 - Generates key HTTP metrics for latency, errors, and traffic
 - Samples routine successful requests
 - Drops low-value noise (health checks, static assets, empty `200` logs)
-
-## Example logs
-
-TKTK
-

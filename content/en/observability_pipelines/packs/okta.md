@@ -12,8 +12,3 @@ What this pack does:
 - Samples routine logins and profile updates
 - Keeps high-value security events
 - Drops low-value or routine system events
-
-## Example logs
-
-TKTK
-

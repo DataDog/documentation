@@ -12,8 +12,3 @@ What this pack does:
 - Keeps detections and enforcement logs
 - Drops redundant and benign events
 - Normalizes traffic, threat, and system fields
-
-## Example logs
-
-TKTK
-

@@ -12,8 +12,3 @@ What this pack does:
 - Retains denied and unusual DNS lookups
 - Samples high-volume allowed requests
 - Filters out predictable internal traffic
-
-## Example logs
-
-TKTK
-

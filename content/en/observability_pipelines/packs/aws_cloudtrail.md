@@ -12,8 +12,3 @@ What this pack does:
 - Samples high-frequency, read-only API calls
 - Splits multi-record events into clean entries
 - Scans for keys, credentials, and role IDs
-
-## Example logs
-
-TKTK
-

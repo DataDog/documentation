@@ -12,7 +12,3 @@ What this pack does:
 - Drops static files, health checks, and bot noise
 - Keeps failed, risky, and unusual requests
 - Normalizes key values for analysis
-
-## Example logs
-
-TKTK
