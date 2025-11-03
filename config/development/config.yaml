@@ -6,5 +6,5 @@ enableGitInfo: true
 disableLanguages:
   - fr
   - ja
-  - ko
   - es
+  - ko
