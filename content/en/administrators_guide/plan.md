@@ -189,7 +189,7 @@ There are different types of integrations in Datadog, and the order in which the
 | Infrastructure ([orchestration][58], [operating system][59], [network][60]) | These integrations serve as the foundational components for monitoring your infrastructure, gathering both metrics and logs.                                                                                                               |
 | Data Layers ([data stores][61], [message queues][62])      | These integrations usually query internal DB metrics tables, so this usually requires a database administrator to provide access for the Agent.                                                                                              |
 | Development ([automation][63], [languages][64], [source control][65]) | These integrations push metrics to Datadog and require configuration on their end. Some may require DogStatsD to ship metrics.                                                                                                               |
-| Security and Compliance ([Okta][66], [Open Policy Agent][67])   | These integrations enable you to verify compliance with your standards.                                                                                                     |
+| Security and Compliance ([Okta][66])   | These integrations enable you to verify compliance with your standards.                                                                                                     |
 
 **Recommendations**:
 
@@ -380,7 +380,6 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [64]: /integrations/#cat-languages
 [65]: /integrations/#cat-source-control
 [66]: /integrations/okta/
-[67]: /integrations/open_policy_agent/
 [68]: /universal_service_monitoring/
 [69]: /integrations/process/
 [70]: /developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
