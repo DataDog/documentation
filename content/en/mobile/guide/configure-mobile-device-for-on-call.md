@@ -146,6 +146,66 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 <a href="https://datadog-on-call.s3.amazonaws.com/datadog-on-call.vcf">Download the current version of the Datadog On-Call contact card</a>. <strong>Note</strong>: The contact card is subject to change at any time.
 </div>
 
+## On-Call mobile widgets
+Add On-Call home screen and lock screen widgets to access your pages and shifts.
+
+### On-Call home screen widget
+
+View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
+
+You can customize your On-Call shift widgets by filtering on:
+
+- Organization
+- Period of time
+
+You can customize your On-Call page widgets by filtering on:
+
+- Organization
+- Team
+- Order
+
+**Note**: You can add additional filters for the On-Call pages widget.
+
+#### Edit an On-Call shift widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_shifts_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+1. Long press on the widget to configure.
+2. Tap **Edit Widget** to bring up the configuration screen.
+3. Select the **Organization** and **Period** you would like to see your On-Call shifts for.
+4. Tap out of the widget to validate your selection and exit the configuration screen.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_shifts_widget_may_2025.png" alt="Configured home screen On-Call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+1. Tap on the widget to configure.
+2. Select the **Organization** and **Time Period** you would like to see your On-Call shifts for.
+3. Tap **✓** to save the configuration.
+4. Long press and resize the widget to fit your preference.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### On-Call lock screen widget
+
+The On-Call lock screen widget displays your On-Call status. Lock screen widgets are only available on iOS.
+
+1. Long press on your lock screen.
+2. Tap **Customize**, then **Lock Screen**.
+3. Tap on the lock screen widget space to pull up the **Add Widgets** card.
+4. Scroll to and tap on the **Datadog** app.
+4. Tap the On-Call lock screen widget.
+5. Tap the widget on the lock screen to pull up the configuration panel.
+6. Select the organization you would like to display your On-Call status for.
+
+**Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widgets by tapping the **-** button on the top left of the widget you would like to delete.
+
 ## Troubleshooting
 For help with troubleshooting, [contact Datadog support][2]. You can also send a message in the [Datadog public Slack][3] [#mobile-app][4] channel.
 

@@ -23,7 +23,7 @@ Datadog SCA uses a curated proprietary database. The database is sourced from Op
 {{% security-products/sca-supported-lang %}}  
 
 SCA supports both static and runtime dependency detection:
-- For **static detection**, you can scan from your CI/CD pipelines or from Datadog's infrastructure. See [static setup][1] to get started.
+- For **static detection**, you can scan your repositories from your CI/CD pipelines or directly from Datadog's infrastructure. See [static setup][1] to get started.
 - For **runtime detection**, you can enable SCA on services instrumented with Datadog APM. See [runtime setup][2] to get started.
 
 ## Search and filter results

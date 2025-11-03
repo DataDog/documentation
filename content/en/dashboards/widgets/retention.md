@@ -52,5 +52,4 @@ On screenboards and notebooks, choose whether your widget has a custom timeframe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /real_user_monitoring/browser/advanced_configuration#user-session
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session
