@@ -356,9 +356,145 @@ Summary Evaluators are optionally defined functions that measure how well the mo
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
 ### GitHub Actions
-Use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
+This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following Python Script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
 
 **Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
+
+```python
+from ddtrace.llmobs import LLMObs
+from typing import Dict, Any, Optional, List
+
+LLMObs.enable(
+    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
+    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
+    site="datadoghq.com",      # defaults to DD_SITE environment variable
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+)
+
+
+dataset = LLMObs.create_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project",  # optional, defaults to project_name used in LLMObs.enable
+    description="Questions about world capitals",
+    records=[
+        {
+            "input_data": {
+                "question": "What is the capital of China?"
+            },  # required, JSON or string
+            "expected_output": "Beijing",  # optional, JSON or string
+            "metadata": {"difficulty": "easy"},  # optional, JSON
+        },
+        {
+            "input_data": {
+                "question": "Which city serves as the capital of South Africa?"
+            },
+            "expected_output": "Pretoria",
+            "metadata": {"difficulty": "medium"},
+        },
+    ],
+)
+
+# View dataset in Datadog UI
+print(f"View dataset: {dataset.url}")
+
+# Add a new record
+dataset.append(
+    {
+        "input_data": {"question": "What is the capital of Switzerland?"},
+        "expected_output": "Bern",
+        "metadata": {"difficulty": "easy"},
+    }
+)
+
+# Update an existing record
+dataset.update(
+    0,
+    {
+        "input_data": {"question": "What is the capital of China?"},
+        "expected_output": "Beijing",
+        "metadata": {"difficulty": "medium"},
+    },
+)
+
+# Delete a record
+dataset.delete(1)  # Deletes the second record
+
+# Save changes to Datadog
+dataset.push()
+
+# Get a single record
+record = dataset[0]
+
+# Get multiple records
+records = dataset[1:3]
+
+# Iterate through records
+for record in dataset:
+    print(record["input_data"])
+
+
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+    question = input_data["question"]
+    # Your LLM or processing logic here
+    return "Beijing" if "China" in question else "Unknown"
+
+
+def exact_match(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> bool:
+    return output_data == expected_output
+
+
+def overlap(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> float:
+    expected_output_set = set(expected_output)
+    output_set = set(output_data)
+
+    intersection = len(output_set.intersection(expected_output_set))
+    union = len(output_set.union(expected_output_set))
+
+    return intersection / union
+
+
+def fake_llm_as_a_judge(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> str:
+    fake_llm_call = "excellent"
+    return fake_llm_call
+
+
+def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
+    return evaluators_results["exact_match"].count(True)
+
+
+experiment = LLMObs.experiment(
+    name="capital-cities-test",
+    task=task,
+    dataset=dataset,
+    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+    summary_evaluators=[num_exact_matches],  # optional
+    description="Testing capital cities knowledge",
+    config={"model_name": "gpt-4", "version": "1.0"},
+)
+
+# Run the experiment
+results = experiment.run()  # Run on all dataset records
+
+# Process results
+for result in results.get("rows", []):
+    print(result)
+    print(f"Record {result['idx']}")
+    print(f"Input: {result['input']}")
+    print(f"Output: {result['output']}")
+    # print(f"Score: {result['evaluations']['evaluator_name']['value']}")
+    if result["error"]["message"]:
+        print(f"Error: {result['error']['message']}")
+
+results = experiment.run(jobs=4, raise_errors=True)
+
+print(f"View experiment: {experiment.url}")
+```
 
 ```yaml
 name: Experiment SDK Test
@@ -366,7 +502,7 @@ name: Experiment SDK Test
 on:
   push:
     branches:
-      - main # Or your desired branch
+      - main
 
 jobs:
   test:
@@ -378,12 +514,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13.0' # Or your desired Python version
-      - name: Install Poetry
-        run: pip install poetry
-      - name: Install dependencies
-        run: poetry install
-      - name: Run tests
-        run: poetry run pytest -vv -s
+      - name: Install Dependencies
+        run: pip install ddtrace>=3.15.0 dotenv
+      - name: Run Script
+        run: python ./experiment_sdk_demo/main.py
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
@@ -951,3 +1085,7 @@ Empty body on success.
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[14]: /llm_observability/experiments/?tab=manual#setup
+[15]: /llm_observability/experiments/?tab=manual#projects
+[16]: /llm_observability/experiments/?tab=manual#datasets
+[17]: /llm_observability/experiments/?tab=manual#experiments

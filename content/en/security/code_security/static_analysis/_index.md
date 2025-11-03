@@ -6,6 +6,10 @@ aliases:
 is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
+further_reading:
+- link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
+  tag: "Blog"
+  text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
 {{% site-region region="gov" %}}
