@@ -101,13 +101,13 @@ RUM without Limits provides retention filters that define the sessions you **wan
 
 To ensure sessions from a particular environment, application version, device type, or other criteria are not retained, explicitly add exclusions **inside the query of ALL OF YOUR FILTERS**. For example:
 
-- Adding `-version:(1* OR 2*)` to all filters ensures you never keep events from older versions 1 and 2 of your application
-- Adding `-@device.type:Bot` filters out search engine crawlers and other self-declared bots
-- Adding `-@geo.country:"South Korea"` excludes all sessions from South Korea
+- Adding `-version:(1* OR 2*)` to all retention filters ensures you never keep events from older versions 1 and 2 of your application
+- Adding `-@device.type:Bot` to all retention filters out search engine crawlers and other self-declared bots
+- Adding `-@geo.country:"South Korea"` to all retention filters excludes all sessions from South Korea
 
 For example, to exclude sessions from South Korea while retaining all other sessions, create a filter with the query `-@geo.country:"South Korea"` and set the retention rate to 100%.
 
-**Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other filters may still make a positive retention decision about a session that contains the event you tried to filter out.
+**Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
 
 ## Best practices
 
