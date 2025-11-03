@@ -6,9 +6,30 @@
   {{ $specPath := printf "api/%s/full_spec.yaml" $version }}
   {{ $specResource := resources.Get $specPath }}
   {{ if $specResource }}
-    {{/* $spec := $specResource | openapi3.Unmarshal */}}
-    {{ $spec := $specResource | transform.Unmarshal }}
-    {{ hugo.Store.Set $specKey $spec }}
+    <!-- normal version -->
+    {{/* $spec := $specResource | transform.Unmarshal */}}
+
+    <!-- openapi -->
+    {{ $spec := $specResource | openapi3.Unmarshal }}
+    {{/* if we use openapi lets normalize for easier switching */}}
+    {{ $normalizedSpec := dict }}
+
+    {{/* Copy all existing fields */}}
+    {{ range $key, $value := $spec }}
+      {{ $normalizedSpec = $normalizedSpec | merge (dict $key $value) }}
+    {{ end }}
+
+    {{/* Add lowercase aliases for common fields */}}
+    {{ $fieldsToNormalize := slice "Tags" "Info" "Paths" "Components" "Servers" }}
+    {{ range $fieldsToNormalize }}
+      {{ $capitalizedField := . }}
+      {{ $lowercaseField := lower . }}
+      {{ if index $spec $capitalizedField }}
+        {{ $normalizedSpec = $normalizedSpec | merge (dict $lowercaseField (index $spec $capitalizedField)) }}
+      {{ end }}
+    {{ end }}
+
+    {{ hugo.Store.Set $specKey $normalizedSpec }}
   {{ end }}
 {{ end }}
 
