@@ -53,7 +53,7 @@ You can optionally add functions to your query using the function button. Not al
 
 ### Split graph
 
-Use the **Split Graph** button to view the data split into individual graphs by tag values for tags such as region, service, or environment.
+Use the **Split Graph** button to view the data split into individual graphs by values for tags such as region, service, or environment.
 
 ### Export
 
