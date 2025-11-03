@@ -1,6 +1,5 @@
 ---
 title: Date Remapper
-
 ---
 
 As Datadog receives dates, it timestamps them using the value(s) from any of these default attributes:
@@ -20,7 +19,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 If your events don't have a timestamp that conforms to the formats listed above, use the grok processor to extract the epoch time from the timestamp to a new attribute. The date remapper uses the newly defined attribute.
 
-To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][3].
+To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][1].
 
 **Notes**:
 
@@ -30,3 +29,5 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 Example date remapper processor  
 
 {{< img src="logs/log_configuration/processor/date_remapper.png" alt="Define a date attribute" style="width:80%;" >}}
+
+[1]: /service_management/events/pipelines_and_processors/date_remapper/
