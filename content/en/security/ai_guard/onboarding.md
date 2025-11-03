@@ -1,5 +1,6 @@
 ---
 title: Get Started with AI Guard
+private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
   tag: "Blog"
