@@ -6,41 +6,50 @@ aliases:
 - /guides/new_integration/
 - /developers/integrations/new_check_howto/
 further_reading:
-- link: /developers/integrations/create_a_tile/
+- link: /developers/integrations/
   tag: Documentation
-  text: Create a tile
+  text: Create an integration
 - link: /developers/integrations/python/
   tag: Documentation
   text: Python for Agent-based Integration Development
 - link: /developers/
   tag: Documentation
   text: Learn how to develop on the Datadog platform
-title: Create an Agent Integration
+title: Create an Agent-based Integration
 description: Learn how to develop and publish a Datadog Agent integration.
 ---
 ## Overview
 
 This page walks Technology Partners through how to create a Datadog Agent integration, which you can list as out-of-the-box on the [Integrations page][23], or for a price on the [Marketplace page][24].
 
-## Agent-based integrations
+An Agent-based integration uses the [Datadog Agent][17] to submit data through custom checks written by developers. These checks can emit [metrics][34], [events][18], [service checks][25], and [logs][36] into a customer's Datadog account.
 
-Agent-based integrations use the [Datadog Agent][17] to submit data through checks written by the developer. Checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. The Agent itself can submit [logs][26] as well, but that is configured outside of the check.
+## When to use Agent-based integrations
 
-The implementation code for these integrations is hosted by Datadog. Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). Creating an Agent integration requires you to publish and deploy your solution as a Python wheel (`.whl`).
+Agent integrations are best suited for collecting data from systems or applications running with a:
+- Local Area Network (LAN)
+- Virtual Private Cloud (VPC)
+Agent-based integrations require publishing and deploying as a Python wheel (.whl).
 
-You can include out-of-the-box assets such as [monitors][27], [dashboards][28], and [log pipelines][29] with your Agent-based integration. When a user clicks **Install** on your integration tile, they are prompted to follow the setup instructions, and all out-of-the-box dashboards will appear in their account. Other assets, such as log pipelines, will appear for users after proper installation and configuration of the integration.
 
 ## Development process
 
 The process to build an Agent-based integration looks like this:
 
-1. Once you've been accepted to the [Datadog Partner Network][32], you will meet with the Datadog Technology Partner team to discuss your offering and use cases.
-2. Request a Datadog sandbox account for development through the Datadog Partner Network portal.
-3. Begin development of your integration, which includes writing the integration code on your end as well as building and installing a Python wheel (`.whl`).
-4. Test your integration in your Datadog sandbox account.
-5. Once your development work is tested and complete, populate your tile assets by providing information like setup instructions, images, support information, and more that will make up your integration tile that's displayed on the **Integrations** or **Marketplace** page.
-6. Once your pull request is submitted and approved, the Datadog Technology Partner team will schedule a demo for a final review of your integration.
-7. You will have the option of testing the tile and integration in your Datadog sandbox account before publishing, or immediately publishing the integration for all customers.
+1. Join the Datadog Partner Network
+   - Apply to the [Datadog Partner Network][32]. Once accepted, an introductory call will be scheduled with the Datadog Technology Partner team. 
+2. Set up your development environment
+   - Request a Datadog sandbox account through the Datadog Partner Network portal.
+   - Install the necessary development tools.
+3. Create your integration
+   - Within your Datadog sandbox, navigate to **Developer Platform** > **add a new listing**.
+   - Fill in the details describing your integration.
+4. Build your agent check and test your integration
+   - Create your Agent Check following [these steps](#write-an-agent-check). 
+4. Submit for review
+   - Submit your integration content through the Developer Platform.
+   - Open a GitHub pull request with the code for your Agent check.
+   - The Datadog team will schedule a final demo to review your integration.
 
 ## Prerequisites
 
@@ -192,13 +201,14 @@ At the core of each Agent-based integration is an *Agent Check* that periodicall
 
 For Awesome, the Agent Check is composed of a [service check][25] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible.
 
-To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7].
+To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7]. To learn how to submit logs from your Agent Check, see [Agent Integration Log Collection][36].
 
 The code contained within `awesome/datadog_checks/awesome/check.py` looks something like this:
 
 {{< code-block lang="python" filename="check.py" collapsible="true" >}}
 
 import requests
+import time
 
 from datadog_checks.base import AgentCheck, ConfigurationError
 
@@ -222,14 +232,40 @@ class AwesomeCheck(AgentCheck):
         except Exception as e:
             # Ideally we'd use a more specific message...
             self.service_check('awesome.search', self.CRITICAL, message=str(e))
+            # Submit an error log
+            self.send_log({
+                'message': f'Failed to access {url}: {str(e)}',
+                'timestamp': time.time(),
+                'status': 'error',
+                'service': 'awesome',
+                'url': url
+            })
         # Page is accessible
         else:
             # search_string is present
             if search_string in response.text:
                 self.service_check('awesome.search', self.OK)
+                # Submit an info log
+                self.send_log({
+                    'message': f'Successfully found "{search_string}" at {url}',
+                    'timestamp': time.time(),
+                    'status': 'info',
+                    'service': 'awesome',
+                    'url': url,
+                    'search_string': search_string
+                })
             # search_string was not found
             else:
                 self.service_check('awesome.search', self.WARNING)
+                # Submit a warning log
+                self.send_log({
+                    'message': f'String "{search_string}" not found at {url}',
+                    'timestamp': time.time(),
+                    'status': 'warning',
+                    'service': 'awesome',
+                    'url': url,
+                    'search_string': search_string
+                })
 {{< /code-block >}}
 
 To learn more about the base Python class, see [Anatomy of a Python Check][8].
@@ -363,31 +399,7 @@ To speed up development, use the `-m/--marker` option to run integration tests o
    ```
    ddev test -m integration awesome
    ```
-Your integration is almost complete. Next, add the necessary check assets.
-
-## Populate integration assets
-
-The following set of assets created by the `ddev` scaffolding **must** be populated with relevant information to your integration:
-
-`README.md`
-: This contains the documentation for your Agent Check, how to set it up, which data it collects, and support information.
-
-`spec.yaml`
-: This is used to generate the `conf.yaml.example` using the `ddev` tooling. For more information, see [Configuration Specification][11].
-
-`conf.yaml.example`
-: This contains default (or example) configuration options for your Agent Check. **Do not edit this file by hand**. It is generated from the contents of `spec.yaml`. For more information, see the [Configuration file reference documentation][12].
-
-`manifest.json`
-: This contains the metadata for your Agent Check such as the title and categories. For more information, see the [Manifest file reference documentation][13].
-
-`metadata.csv`
-: This contains the list of all metrics collected by your Agent Check. For more information, see the [Metrics metadata file reference documentation][14].
-
-`service_check.json`
-: This contains the list of all Service Checks collected by your Agent Check. For more information, see the [Service check file reference documentation][15].
-
-For more information about the `README.md` and `manifest.json` files, see [Create a Tile][20] and [Integrations Asset Reference][33].
+Your integration is almost complete. Return to the Developer Platform in your sandbox to finalize your submission. 
 
 ## Build the wheel
 
@@ -441,25 +453,22 @@ For installing your wheel to test in Kubernetes environments:
 3. Mount the initContainer in the Agent container while it's running.
 
 For customer install commands for both host and container environments, see the [Community and Marketplace Integrations documentation][35].
-## Populate your tile and publish your integration
 
-Once you have created your Agent-based integration, see the [Create a tile][20] documentation for information on populating the remaining [required assets][31] that appear on your integration tile, and opening a pull request.
+## Submit your code for review
+
+Follow the steps outlined within the Developer Platform to submit your Agent check code for review in GitHub. The pull request will be released with your integration upon approval.
 
 ## Update your integration
-To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository.
-
 * If you are editing or adding new integration code, a version bump is required.
 
 * If you are editing or adding new README content, manifest information, or assets such as dashboards and monitor templates, a version bump is not needed.
 
-After making updates to assets such as dashboards and monitor templates, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end.
-
 ### Bumping an integration version
 In addition to any code changes, the following is required when bumping an integration version:
 1. Update `__about__.py` to reflect the new version number. This file can be found in your integration's directory under `/datadog_checks/<your_check_name>/__about__.py`.
-2. Add an entry to the CHANGELOG.md file that adheres to the following format:
+2. Add an entry to the **Release Notes** in the Developer Platform that adheres to the following format:
    ```
-   ## Version Number / Date
+   ## Version Number / Date in YYYY-MM-DD
 
    ***Added***:
 
@@ -470,8 +479,18 @@ In addition to any code changes, the following is required when bumping an integ
 
    * Bug fix
    * Bug fix
+
+   ***Changed***:
+
+   * Feature update
+   * Feature update
+
+   ***Removed***:
+
+   * Feature removal
+   * Feature removal
    ```
-3. Update all references to the version number mentioned in `README.md` and elsewhere. Installation instructions in `README.md` often include the version number, which needs to be updated.
+3. Update all references to the version number mentioned in installation instructions and elsewhere. Installation instructions often include the version number, which needs to be updated.
 
 ## Further reading
 
@@ -496,7 +515,7 @@ In addition to any code changes, the following is required when bumping an integ
 [17]: https://docs.datadoghq.com/agent/
 [18]: https://docs.datadoghq.com/service_management/events/
 [19]: https://desktop.github.com/
-[20]: https://docs.datadoghq.com/developers/integrations/create_a_tile
+[20]: https://docs.datadoghq.com/developers/integrations/
 [21]: https://github.com/Datadog/integrations-extras
 [22]: https://github.com/Datadog/marketplace
 [23]: https://app.datadoghq.com/integrations
@@ -507,8 +526,9 @@ In addition to any code changes, the following is required when bumping an integ
 [28]: https://docs.datadoghq.com/dashboards/
 [29]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
 [30]: https://docs.datadoghq.com/glossary/#check
-[31]: https://docs.datadoghq.com/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
+[31]: https://docs.datadoghq.com/developers/integrations/
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/developers/integrations/check_references/
 [34]: https://docs.datadoghq.com/metrics/
 [35]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[36]: https://docs.datadoghq.com/logs/log_collection/agent_checks/

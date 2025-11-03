@@ -51,6 +51,14 @@ Use the following environment variables to configure formats for reading and wri
 : Specifies trace context propagation formats for both extraction and injection (comma-separated list). Lowest precedence; ignored if any other Datadog trace context propagation environment variable is set.<br>
 **Note**: Only use this configuration when migrating an application from the OpenTelemetry SDK to the Datadog SDK. For more information on this configuration and other OpenTelemetry environment variables, see [Using OpenTelemetry Environment Variables with Datadog SDKs][9].
 
+`DD_TRACE_PROPAGATION_BEHAVIOR_EXTRACT`
+: Specifies how incoming distributed tracing headers should be handled at a service level. Accepted values are:<br>
+`continue`: The SDK will continue the distributed trace if the incoming distributed tracing headers represent a valid trace context.<br>
+`restart`: The SDK will always start a new trace. If the incoming distributed tracing headers represent a valid trace context, that trace context will be represented as a span link on service entry spans (as opposed to the parent span in the `continue` configuration).<br>
+`ignore`: The SDK will always start a new trace and all incoming distributed tracing headers are ignored.<br>
+**Default**: `continue` <br>
+**Note**: This is only implemented in the .NET, Node.js, Python, and Java libraries.
+
 ### Advanced configuration
 
 Most services send and receive trace context headers using the same format. However, if your service needs to accept trace context headers in one format and send them in another, use these configurations:
@@ -92,6 +100,7 @@ The Datadog Java SDK supports the following trace context formats, including dep
 |                        | `b3single`          |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
+| [Baggage][7]          | `baggage`           |
 | [AWS X-Ray][5]         | `xray`              |
 | [None][6]              | `none`              |
 
@@ -109,6 +118,7 @@ In addition to the environment variable configuration, you can also update the p
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
 [6]: #none-format
+[7]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -122,9 +132,9 @@ The Datadog Python SDK supports the following trace context formats, including d
 |------------------------|---------------------------------|
 | [Datadog][1]           | `datadog`                       |
 | [W3C Trace Context][2] | `tracecontext`                  |
-| [Baggage][6]          | `baggage`                       |
+| [Baggage][6]           | `baggage`                       |
 | [B3 Single][3]         | `b3`                            |
-|                        | `b3 single header` (deprecated) |
+|                        | `b3 single header` (removed in v3.0) |
 | [B3 Multi][4]          | `b3multi`                       |
 | [None][5]              | `none`                          |
 
@@ -644,9 +654,21 @@ When the Datadog SDK is configured with the None format for extraction or inject
 By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
 
 #### Adding baggage as span tags
-_Available in Python, PHP, and Node.js. For other languages, reach out to [Support][11]_ 
 
 By default, `user.id,session.id,account.id` baggage keys are added as span tags. To customize this configuration, see [Context Propagation Configuration][13]. Specified baggage keys are automatically added as span tags `baggage.<key>` (for example, `baggage.user.id`).
+
+Support for baggage as span tags was introduced in the following releases:
+
+| Language  | Minimum SDK version             |
+|-----------|---------------------------------|
+| Java      | 1.52.0                          |
+| Python    | 3.7.0                           |
+| Ruby      | 2.20.0                          |
+| Go        | 2.2.2                           |
+| .NET      | 3.23.0                          |
+| Node      | 5.54.0                          |
+| PHP       | 1.10.0                          |
+| C++/Proxy | Not yet supported               |
 
 ## Further reading
 

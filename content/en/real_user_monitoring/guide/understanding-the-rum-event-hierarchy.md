@@ -1,6 +1,6 @@
 ---
 title: Understanding the RUM Event Hierarchy
-
+description: "Learn about RUM event types and their hierarchical relationships including sessions, views, actions, resources, and errors."
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -114,11 +114,11 @@ This example searches within the actions event type for all view names using the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected
 [2]: /account_management/billing/rum/#when-does-a-session-expire
-[3]: /real_user_monitoring/browser/data_collected/#event-specific-metrics-and-attributes
-[4]: /real_user_monitoring/browser/data_collected/#user-attributes
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#event-specific-metrics-and-attributes
+[4]: /real_user_monitoring/application_monitoring/browser/data_collected/#user-attributes
 [5]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm
-[7]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#custom-errors
+[6]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/?tab=npm
+[7]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[8]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#custom-errors

@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.aoss.active_collection
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.aoss.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -80,7 +80,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-opensearch-serverless" >}}
+{{< get-metrics-from-git "amazon_opensearch_serverless" >}}
 
 
 ### Checks de servicio
@@ -98,5 +98,5 @@ Amazon OpenSearch Serverless no incluye ningún evento.
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-opensearch-serverless
-[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_opensearch_serverless/metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_opensearch_serverless/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/es/help/

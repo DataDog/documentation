@@ -24,10 +24,7 @@ multifiltersearch:
     - name: Type
       id: type
   data:
-    - opentelemetry_convention: '`deployment.environment` <sup>1</sup>'
-      datadog_convention: '`env`'
-      type: Unified service tagging
-    - opentelemetry_convention: '`deployment.environment.name` <sup>2</sup>'
+    - opentelemetry_convention: '`deployment.environment.name` <sup>*</sup>'
       datadog_convention: '`env`'
       type: Unified service tagging
     - opentelemetry_convention: '`service.name`'
@@ -163,9 +160,11 @@ multifiltersearch:
 
 ---
 
-OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
+OpenTelemetry makes use of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
 
 {{< multifilter-search >}}
+
+<sup>*</sup>Replaces the deprecated `deployment.environment` convention. Requires Datadog Agent 7.58.0+ and Datadog Exporter v0.110.0+.
 
 ## Span type mapping
 

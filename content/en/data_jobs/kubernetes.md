@@ -1,5 +1,6 @@
 ---
 title: Data Jobs Monitoring for Spark on Kubernetes
+description: "Set up Data Jobs Monitoring for Apache Spark applications on Kubernetes clusters using the Datadog Agent and admission controller."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -25,12 +26,12 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-#### Prerequisites
+### Prerequisites
 - Kubernetes cluster version v1.20.X+
 - [`Helm`][1]
 - The [`kubectl` CLI][2]
 
-#### Installation
+### Installation
 1. Install the Datadog Operator by running the following commands:
    ```shell
    helm repo add datadog https://helm.datadoghq.com

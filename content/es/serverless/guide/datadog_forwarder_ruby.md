@@ -4,7 +4,7 @@ title: Instrumentación de aplicaciones serverless de Ruby mediante el Datadog F
 
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/ruby">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes que la funcionalidad de Lambda lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 
@@ -44,7 +44,7 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 Para rellenar los parámetros, haz lo siguiente:
 - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tu función de Lambda.
 - Reemplaza `<aws_region>` por el nombre de la región de AWS.
-- Reemplaza `<layer_version>` por la versión de la biblioteca Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="ruby" >}}`.
+- Reemplaza `<layer_version>` por la versión de la librería Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="ruby" >}}`.
 - Reemplaza `<forwarder_arn>` por el nombre de recurso de Amazon (ARN) del Forwarder (consulta la [documentación del Forwarder][2]).
 
 Por ejemplo:
@@ -64,7 +64,7 @@ Obtén más información y parámetros adicionales en la [documentación de la C
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-El complemento [Datadog Serverless Plugin][1] añade la biblioteca Lambda de Datadog automáticamente a tus funciones mediante capas y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+El complemento [Datadog Serverless Plugin][1] añade la librería Lambda de Datadog automáticamente a tus funciones mediante capas y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de la firma de código][4] de tu función antes de poder instalar el Datadog Serverless Plugin.
 
@@ -96,7 +96,7 @@ Para instalar y configurar el Datadog Serverless Plugin, sigue estos pasos:
 
 ### Instalar
 
-La biblioteca Lambda de Datadog puede instalarse como una capa o como un gem. Para la mayoría de las funciones, Datadog recomienda instalar la biblioteca como capa. Si despliegas tu función de Lambda como una imagen de contenedor, debes instalar la biblioteca como gem.
+La librería Lambda de Datadog puede instalarse como una capa o como un gem. Para la mayoría de las funciones, Datadog recomienda instalar la librería como capa. Si despliegas tu función de Lambda como una imagen de contenedor, debes instalar la librería como gem.
 
 La versión secundaria del gem `datadog-lambda` siempre coincide con la versión de la capa. Por ejemplo, la versión 0.5.0 de datadog-lambda coincide con el contenido de la versión 5 de la capa.
 
@@ -118,7 +118,7 @@ Las opciones disponibles de `RUNTIME` son `Ruby2-7` y `Ruby3-2`. La última `VER
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby3-2:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de la firma de código][4] de tu función antes de poder añadir la biblioteca Lambda de Datadog como una capa.
+Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de la firma de código][4] de tu función antes de poder añadir la librería Lambda de Datadog como una capa.
 
 #### Como un gem
 
@@ -129,7 +129,7 @@ gem 'datadog-lambda'
 gem 'ddtrace'
 ```
 
-`ddtrace` contiene extensiones nativas que deben compilarse para que Amazon Linux funcione con AWS Lambda. Por lo tanto, Datadog recomienda compilar y desplegar la función de Lambda como una imagen de contenedor. Si tu función no puede desplegarse como una imagen de contenedor y quieres utilizar Datadog APM, Datadog recomienda instalar la biblioteca Lambda como una capa en lugar de como un gem.
+`ddtrace` contiene extensiones nativas que deben compilarse para que Amazon Linux funcione con AWS Lambda. Por lo tanto, Datadog recomienda compilar y desplegar la función de Lambda como una imagen de contenedor. Si tu función no puede desplegarse como una imagen de contenedor y quieres utilizar Datadog APM, Datadog recomienda instalar la librería Lambda como una capa en lugar de como un gem.
 
 Instala `gcc`, `gmp-devel` y `make` antes de ejecutar `bundle install` en el Dockerfile de tu función para asegurarte de que las extensiones nativas se compilen correctamente.
 
@@ -145,7 +145,7 @@ RUN bundle install
 
 ### Configurar
 
-Habilita Datadog APM y envuelve la función de controlador de Lambda con la envoltura que se encuentra disponible en la biblioteca Lambda de Datadog.
+Habilita Datadog APM y envuelve la función de controlador de Lambda con la envoltura que se encuentra disponible en la librería Lambda de Datadog.
 
 ```ruby
 require 'datadog/lambda'

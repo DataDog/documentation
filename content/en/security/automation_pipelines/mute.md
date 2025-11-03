@@ -6,6 +6,9 @@ further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
     text: "Automation Pipelines"
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
 ---
 
 Configure mute rules to streamline security alerts by automatically filtering out non-urgent findings. This approach helps reduce noise from known false positives and accepted risks, allowing you to focus on addressing the most critical threats.

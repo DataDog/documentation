@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスの参照
 - link: /monitors/types/change-alert
@@ -24,7 +24,7 @@ title: メトリクスモニター
 
 メトリクスモニターは連続的なデータのストリームに役立ちます。Datadog に送信されるメトリクスのいずれかが、一定の期間にしきい値から外れると、アラートを送信します。
 
-To create a metric monitor in Datadog, navigate to [**Monitors > New Monitor**][1] and select the **Metric** monitor type.
+Datadog でメトリクスモニターを作成するには、[**Monitors > New Monitor**][1] に移動し、**Metric** モニタータイプを選択します。
 
 ## 検出方法を選択します。
 
@@ -33,9 +33,9 @@ To create a metric monitor in Datadog, navigate to [**Monitors > New Monitor**][
 
 しきい値アラートは、メトリクス値を静的なしきい値と比較します。
 
-On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above, below, equal to, or not equal to the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
+各アラートの評価時に、Datadog は選択した期間の平均値、最小値、最大値、または合計値を算出し、それがしきい値を上回っているか、下回っているか、等しいか、等しくないかをチェックします。これは予想される値が明確な標準的なアラートケース向けです。[distribution メトリクス型][1] では、選択した期間のパーセンタイルを計算する追加のしきい値オプションが利用できます。
 
-For more information, see the [Set alert conditions](#set-alert-conditions) section.
+詳細は[アラートの条件を設定する](#set-alert-conditions)セクションを参照してください。
 
 [1]: /ja/metrics/distributions/
 {{% /tab %}}
@@ -47,7 +47,7 @@ For more information, see the [Set alert conditions](#set-alert-conditions) sect
 
 このタイプのアラートは、しきい値を常に予測できる場合に、メトリクスのスパイク、ドロップ、あるいは緩やかな変化を追跡するのに役立ちます。
 
-For more information, see the [Change alert monitors][1] guide.
+詳細は[変化アラートモニター][1]ガイドを参照してください。
 
 [1]: /ja/monitors/types/change-alert/
 {{% /tab %}}
@@ -59,7 +59,7 @@ For more information, see the [Change alert monitors][1] guide.
 
 アラートの評価には、予期される範囲の内、外、上、下にある系列の割合を計算します。この割合がしきい値から外れる場合にアラートがトリガーされます。
 
-For more information, see the [Anomaly Monitor][1] page.
+詳細は[異常検知モニター][1]ページを参照してください。
 
 [1]: /ja/monitors/types/anomaly/
 {{% /tab %}}
@@ -69,7 +69,7 @@ For more information, see the [Anomaly Monitor][1] page.
 
 アラートの評価では、すべてのグループが一緒にクラスター化され、同じ動作を示しているかをチェックします。1 つ以上のグループの動作が他のグループと異なる場合にアラートがトリガーされます。
 
-For more information, see the [Outlier Monitor][1] page.
+詳細は[外れ値モニター][1]ページを参照してください。
 
 [1]: /ja/monitors/types/outlier/
 {{% /tab %}}
@@ -79,7 +79,7 @@ For more information, see the [Outlier Monitor][1] page.
 
 アラートの評価では、偏差の範囲を考慮してメトリクスの今後の値を予測します。この範囲のいずれかの部分がしきい値から外れる場合にアラートがトリガーされます。
 
-For more information, see the [Forecast Monitor][1] page.
+詳細は[予測値モニター][1]ページを参照してください。
 
 [1]: /ja/monitors/types/forecasts/
 {{% /tab %}}
@@ -92,7 +92,7 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 {{< tabs >}}
 {{% tab "しきい値" %}}
 
-{{< img src="monitors/monitor_types/metric/metric_threshold_config.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
+{{< img src="monitors/monitor_types/metric/metric_threshold_config.png" alt="しきい値検知用メトリクスモニターのメトリクスを定義する" style="width:100%;">}}
 
 | 手順                              | 必須 | デフォルト        | 例           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -117,7 +117,7 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 {{% /tab %}}
 {{% tab "変化" %}}
 
-{{< img src="monitors/monitor_types/metric/metric_change_alert_config.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
+{{< img src="monitors/monitor_types/metric/metric_change_alert_config.png" alt="変化検知用メトリクスモニターのメトリクスを定義する" style="width:100%;">}}
 
 | 手順                              | 必須 | デフォルト        | 例           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -147,14 +147,15 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 {{< /tabs >}}
 
 **注:**
-  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified. Metrics with percentile aggregators do not generate a snapshot graph in the notifications message.
+  - パーセンタイルアグリゲータを使用する distribution メトリクスの場合、対応するパーセンタイルしきい値が自動的に指定されます。パーセンタイルアグリゲータを使用しているメトリクスは、通知メッセージ内にスナップショットグラフを生成しません。
   - **max/min**: これらの max と min の説明は、メトリクスがしきい値を上回ったときにモニターがアラートすることを想定しています。しきい値を下回ったときにアラートするモニターでは、max と min の動作は逆になります。
   - モニターを作成するメトリクスの定義は、グラフを作成するメトリクスの定義と似ています。`Advanced...` オプションの使用について詳しくは、[高度なグラフの作成][2]を参照してください。
   - `as_count()` を使用する場合は動作が異なります。詳しくは、[モニター評価での as_count()][3] を参照してください。
+  - `N/A` グループはモニターに含まれないため、タグキーには値が必要です。
 
 ## アラートの条件を設定する
 
-Trigger when the metric is one of the following:
+メトリクスが以下のいずれかの場合にトリガーします:
 - `above`
 - `above or equal to`
 - `below`
@@ -162,7 +163,7 @@ Trigger when the metric is one of the following:
 - `equal to`
 - `not equal to`
 
-If the value is between zero and one, a leading zero is required. For example, `0.3`.
+値が 0 と 1 の間にある場合、先頭に 0 が必要です (例: `0.3`)。
 
 ### 高度なアラート条件
 
@@ -188,7 +189,7 @@ If the value is between zero and one, a leading zero is required. For example, `
 「フルウィンドウ」と見なされるには、モニターに次のものが必要です。
 
 1. 最初のバケットに少なくとも 1 つのデータポイント。最初のバケットは、ウィンドウで時系列的に一番早いバケットです。
-2. データポイントのない合計で最大 3 つのバケット (最初のバケットを含む)。
+2. 合計で 3 つを超えるバケットにデータポイントが存在しない場合は認められません。
 
 条件が満たされると、モニターが評価されます。それ以外の場合、評価はキャンセルされ、モニターの状態は変更されません。
 
@@ -205,11 +206,11 @@ If the value is between zero and one, a leading zero is required. For example, `
 
 #### その他のオプション
 
-For instructions on the advanced alert options (no data, auto resolve), see the [Monitor configuration][6] page.
+高度なアラートオプション（no data、auto resolve）の手順については、[モニターの構成][6]ページを参照してください。
 
 ## 通知
 
-For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
+**Configure notifications and automations** セクションの手順については、[通知][7]と[モニターの構成][8]ページを参照してください。
 
 ## その他の参考資料
 

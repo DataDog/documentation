@@ -87,7 +87,7 @@ To integrate your PagerDuty account with DORA Metrics:
         </tr>
         <tr>
           <td>Scope Type</td>
-          <td>Select <strong>Account</strong> to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type.</td>
+          <td>Select the scope of which incidents you want to send. You can send incidents for a specific <strong>Service</strong> or <strong>Team</strong>, or all PagerDuty services in your <strong>Account</strong>. Depending on your environment and access level, some scope types may not be available.</td>
         </tr>
         <tr>
           <td>Description</td>
@@ -134,6 +134,10 @@ The matching algorithm works in the following steps:
 5. If the PagerDuty service name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
+<div class="alert alert-danger">
+If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event does not contain monitor information and the first step of the matching algorithm is skipped.
+</div>
+
 [101]: https://support.pagerduty.com/docs/services-and-integrations
 [102]: /software_catalog/
 [103]: /software_catalog/integrations/#pagerduty-integration
@@ -178,7 +182,7 @@ See the [DORA Metrics API reference documentation][13] for the full spec and add
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
 ```shell
-curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
+curl -X POST "https://api.<DD_SITE>/api/v2/dora/failure" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -205,7 +209,7 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
 EOF
 ```
 
-[13]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[13]: /api/latest/dora-metrics/#send-a-failure-event-for-dora-metrics
 [14]: https://app.datadoghq.com/ci/dora
 [15]: https://app.datadoghq.com/ci/settings/dora
 

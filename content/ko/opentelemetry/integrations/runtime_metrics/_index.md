@@ -43,11 +43,11 @@ Datadog는 다음 언어에 OpenTelemetry 런타임 메트릭을 지원합니다
 
 #### 자동 계측
 
-If you use [OpenTelemetry automatic instrumentation][3] for Java applications, runtime metrics are enabled by default.
+Java 애플리케이션에 [OpenTelemetry 자동 계측][3]을 사용하면 런타임 메트릭이 기본적으로 활성화됩니다.
 
 #### 수동 계측
 
-If you use [OpenTelemetry manual instrumentation][4], follow the guides for your Java version:
+[OpenTelemetry 수동 계측][4]을 사용하는 경우 Java 버전 가이드를 참고하세요.
 - [Java 8][5]
 - [Java 17][6]
 
@@ -60,7 +60,7 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 {{% tab "Go" %}}
 
-OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
+OpenTelemetry Go 애플리케이션은 [수동으로 계측됩니다][3]. 런타임 메트릭을 사용하려면 [런타임 패키지][4] 문서를 참고하세요.
 
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
@@ -69,7 +69,7 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
+<div class="alert alert-danger">.NET OpenTelemetry SDK의 최소 지원 버전은 <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a>입니다.</div>
 
 #### 자동 계측
 
@@ -120,7 +120,7 @@ OpenTelemetry 런타임 메트릭에는 소스에 따라 다음과 같은 접두
 
 다음은 OpenTelemetry 매핑을 통해 지원되는 Datadog 런타임 메트릭 목록입니다. "N/A"는 메트릭에 해당하는 OpenTelemetry가 없음을 나타냅니다.
 
-<div class="alert alert-warning"> OpenTelemetry 런타임 메트릭은 메트릭 이름별로 Datadog에 매핑됩니다. 매핑이 깨지므로 OpenTelemetry 런타임 메트릭의 호스트 메트릭 이름을 바꾸지 마세요.</div>
+<div class="alert alert-danger"> OpenTelemetry 런타임 메트릭은 메트릭 이름별로 Datadog에 매핑됩니다. 매핑이 깨지므로 OpenTelemetry 런타임 메트릭의 호스트 메트릭 이름을 바꾸지 마세요.</div>
 
 [100]: /ko/opentelemetry/setup/collector_exporter/
 [101]: /ko/opentelemetry/setup/otlp_ingest_in_the_agent

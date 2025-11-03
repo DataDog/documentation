@@ -1,5 +1,6 @@
 ---
 title: Build diagrams with Mermaid JS
+description: "Create flowcharts, sequence diagrams, and other visual diagrams in Notebooks using Mermaid JS syntax in Markdown cells."
 disable_toc: false
 ---
 

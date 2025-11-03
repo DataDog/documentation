@@ -52,7 +52,7 @@ Para eliminar un índice de tu organización, utiliza el "Delete icon" (icono El
 
 {{< img src="logs/indexes/delete-index.png" alt="Eliminar índices" style="width:70%;">}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 No puedes volver a crear un índice con el mismo nombre del índice eliminado. 
 </div>
 

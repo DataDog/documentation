@@ -24,7 +24,7 @@ categories:
 - kubernetes
 - log collection
 - orchestration
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks/README.md
 display_on_public_website: true
@@ -98,7 +98,7 @@ La monitorización de EKS requiere que configures una de las siguientes integrac
 
 - [Kubernetes][6]
 - [AWS][7]
-- [AWS EC2][8]
+- [Amazon EC2][8]
 
 ### Recopilación de logs
 

@@ -12,6 +12,9 @@ further_reading:
 - link: '/synthetics/guide/popup/#moving-popups'
   tag: 'Documentation'
   text: 'Learn how to handle pop-ups triggered at unknown times'
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 ---
 
 ## Overview

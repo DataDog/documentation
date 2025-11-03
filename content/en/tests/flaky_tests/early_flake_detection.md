@@ -11,9 +11,9 @@ further_reading:
   - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
-  - link: "/quality_gates"
+  - link: "/pr_gates"
     tag: "Documentation"
-    text: "Learn about Quality Gates"
+    text: "Learn about PR Gates"
 ---
 
 ## Overview
@@ -35,7 +35,7 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 {{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
 
-You can choose to block the merge of the feature branch with a [Quality Gate][4]. For more information, see the [Quality Gates documentation][5].
+You can choose to block the merge of the feature branch with a [PR Gate][4]. For more information, see the [PR Gates documentation][5].
 
 ## Setup
 
@@ -49,9 +49,7 @@ After you have set up your Datadog library for Test Optimization, you can config
 
 1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][7].
 1. Click **Configure** on the Early Flake Detection column for a test service.
-1. Click the toggle to enable Early Flake Detection and add or modify the list of [**Excluded Branches from Early Flake Detection**](#manage-excluded-branches).
-
-{{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Enabling Early Flake Detection and defining excluded branches in the test service configuration" style="width:60%">}}
+1. Click the toggle to enable Early Flake Detection.
 
 ## Compatibility
 {{< tabs >}}
@@ -110,10 +108,6 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 {{< /tabs >}}
 
 
-## Manage Excluded Branches
-
-Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Optimization Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
-
 ## Explore results in the Test Optimization Explorer
 
 You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Optimization Explorer][8].
@@ -143,8 +137,8 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [1]: /glossary/#flaky-test
 [2]: /tests/flaky_test_management
 [3]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
-[4]: /quality_gates/
-[5]: /quality_gates/setup
+[4]: /pr_gates/
+[5]: /pr_gates/setup
 [6]: /tests
 [7]: https://app.datadoghq.com/ci/settings/test-optimization
 [8]: /tests/explorer/

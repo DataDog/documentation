@@ -1,5 +1,6 @@
 ---
 title: Trace Metrics
+description: Comprehensive guide to APM trace metrics including namespace, types (hits, errors, latency, Apdex), and how they're calculated from application traffic.
 further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
@@ -48,7 +49,7 @@ With the following definitions:
 : The name of the metric (examples: `hits`, `errors`, `apdex`, `duration`). See the section below.
 
 `<TAGS>`
-: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and [additional primary tags][4]). 
+: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, `rpc.grpc.status_code`(requires Datadog Agent v7.65.0+) , and Datadog Agent tags (including the host and [additional primary tags][4]). 
 : **Note:** Other tags set on spans are not available as tags on traces metrics.
 
 ## Metric suffix
@@ -59,7 +60,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the count of spans created with a specific name (for example, `redis.command`, `pylons.request`, `rails.request`, or `mysql.query`).<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `rpc.grpc.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 `trace.<SPAN_NAME>.hits.by_http_status`
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
@@ -73,7 +74,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the latency distribution for all services, resources, and versions across different environments and additional primary tags. **Recommended for all latency measurement use cases.**<br>
 **Metric type:** [DISTRIBUTION][6].<br>
-**Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [additional primary tags][4].
+**Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `rpc.grpc.status_code`, `synthetics`, and [additional primary tags][4].
 
 ### Errors
 
@@ -81,7 +82,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the count of errors for a given span.<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `rpc.grpc.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 `trace.<SPAN_NAME>.errors.by_http_status`
 : **Prerequisite:** This metric exists for any APM service.<br>
@@ -103,7 +104,7 @@ The following metrics are maintained for backward compatibility. For all latency
 
 ### Duration (Legacy)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Important:</strong> Duration metrics are maintained for backward compatibility only. For all latency measurement use cases, Datadog strongly recommends using <a href="#latency-distribution">Latency Distribution metrics</a> instead, as they provide better accuracy for percentile calculations and overall performance analysis.
 </div>
 
@@ -117,7 +118,7 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 
 ### Duration by (Legacy)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Important:</strong> Duration metrics are maintained for backward compatibility only. For all latency measurement use cases, Datadog strongly recommends using <a href="#latency-distribution">Latency Distribution metrics</a> instead, as they provide better accuracy for percentile calculations and overall performance analysis.
 </div>
 

@@ -1,5 +1,6 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
+description: Configure AWS PrivateLink endpoints to send telemetry data to Datadog securely through internal VPC connections, including cross-region setups.
 further_reading:
     - link: 'https://www.datadoghq.com/architecture/using-cross-region-aws-privatelink-to-send-telemetry-to-datadog/'
       tag: "Architecture Center"
@@ -25,7 +26,7 @@ further_reading:
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
+<div class="alert alert-danger">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1,ap2" %}}
@@ -144,7 +145,10 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 
+**Note**: Cross-region PrivateLink doesn't emit CloudWatch metrics. See [CloudWatch metrics for AWS PrivateLink][2] for more information.
+
 [1]: /help/
+[2]: https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-cloudwatch-metrics.html
 {{% /tab %}}
 
 {{% tab "VPC Peering" %}}
@@ -278,7 +282,6 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 3. [Restart the Agent][7].
 
-
 [1]: /help/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html
 [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html
@@ -302,6 +305,37 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 {{% /site-region %}}
 
+## Verify that data is being sent using PrivateLink
+
+After setting up PrivateLink, to verify that data is getting sent using PrivateLink, run the `dig` command on a machine that is on that VPC. For example, run this command if you had set up a PrivateLink for the endpoint `http-intake.logs.datadoghq.com`:
+
+```
+dig http-intake.logs.datadoghq.com
+```
+
+If logs are being sent over PrivateLink, the `ANSWER Section` section of the output shows `http-intake.logs.datadoghq.com` like in the following example. **Note**: The IP addresses you get back should be in [private IP space][1].
+
+```
+;; ANSWER SECTION:
+http-intake.logs.datadoghq.com.	60 IN	A	172.31.57.3
+http-intake.logs.datadoghq.com.	60 IN	A	172.31.3.10
+http-intake.logs.datadoghq.com.	60 IN	A	172.31.20.174
+http-intake.logs.datadoghq.com.	60 IN	A	172.31.34.135
+```
+
+If logs are not being sent over PrivateLink, the `ANSWER SECTION` of the output shows the load balancer (`4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com`) to which the logs are getting sent.
+
+```
+;; ANSWER SECTION:
+http-intake.logs.datadoghq.com.	177 IN	CNAME	http-intake-l4.logs.datadoghq.com.
+http-intake-l4.logs.datadoghq.com. 173 IN CNAME	l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com.
+l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.48
+l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.49
+l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.50
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_addresses

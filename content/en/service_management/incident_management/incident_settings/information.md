@@ -4,7 +4,7 @@ title: Information
 
 ## Overview
 
-From the [Incident Settings Information][1] page, define your organization’s severity levels and status levels, and declare incident helper text to reflect the specific needs of your organization. For example, you can customize severity settings differently for security and non-security incidents, creating a more nuanced response strategy. You can also create custom helper text so that when an incident is declared, all the key pieces of information are added.
+From the [Incident Settings Information][1] page, you can customize the statuses and severities of your incidents and enable core incident capabilities, such as private incidents, test incidents, and timestamp overrides.
 
 ## Severity levels
 
@@ -12,10 +12,11 @@ From the [Incident Settings Information][1] page, define your organization’s s
 
 Use severity level settings to:
 
-1. Define your most critical severity as `SEV-0` or `SEV-1` (defaults to `SEV-1`).
+1. Define your most critical severity as `SEV-0` or `SEV-1` (defaults to `SEV-1`)
 2. Customize the sub-labels of your severities (**Defaults:** Critical, High, Moderate, Low, Minor)
-3. Customize the descriptions of your severities.
-4. Add or delete severities from the bottom of your list, with a minimum of three and a maximum of ten. 
+3. Customize the descriptions of your severities
+4. Add or delete severities from the bottom of your list, with a minimum of one and a maximum of ten
+5. Enable the "Unknown" severity
 
 **Note**: If you attempt to delete a severity that is referenced in a [notification rule][2], you are prompted to confirm your decision. Choosing to proceed disables the impacted notification rules as they are no longer valid. Deleting a severity or changing the starting severity does not automatically update any [Incident Management Analytics][3] queries.
 
@@ -25,28 +26,61 @@ Use severity level settings to:
 
 Use status level settings to:
 
-1. Customize the descriptions of the statuses.
-2. Choose whether to enable the optional `Completed` status.
+1. Customize the descriptions of the statuses
+2. Enable the optional `Completed` status
 
-**Note**: Deleting the `Completed` status does not automatically update any incidents that are already in the `Completed` status, nor does it automatically update any [Incident Management Analytics][3] queries that explicitly reference it. Any notification rule that references the `Completed` status is disabled, as that rule is no longer valid.
+**Note**: Deleting the `Completed` status does not automatically update incidents in the `Completed` status and does not automatically update any [Incident Management Analytics][3] query that explicitly references it. Any notification rule that references the `Completed` status becomes disabled.
 
 ## Helper text
 
 {{< img src="/service_management/incidents/incident_settings/settings_info_helper_text.png" alt="Declare Incident Helper Text Settings" style="width:100%;">}}
 
-For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the severity and status level descriptions in the [Incident Creation Modal][4]. The helper text has Markdown support, which allows indented lists, text formatting, and hyperlinks to other instruction resources for incident responders.
+Helper text appears alongside the [Incident Creation Modal][4] and helps your responders understand how they should define the incident.
 
-## Additional information settings
+You can use markdown in helper text to add indented lists, formatted text, and hyperlinks to other resources.
 
-| Setting     | Description    |
-| ---  | ----------- |
-| Private&nbsp;Incidents | Enable users in your organization to make incidents private. Private Incidents gives users the ability to limit access to incidents with sensitive information so that only responders of the incident can see its details.|
-| Incident&nbsp;Deletion | Incident Deletion gives users the ability to remove the incidents from the UI, including the analytics. By default, incident deletion is disabled. |
-| Portmortem&nbsp;Generation Anytime| Enable users to to generate a postmortem regardless of the incident status. When this setting is disabled, users can only generate postmortems after an incident has been resolved. |
-| Override Status Timestamps | Enable users to override the detection, declaration, and resolution timestamps of an incident. If an override is set, the new timestamp applies in incident search and analytics. |
+## Private incidents (incident visibility)
 
+_Default: disabled_
+
+An incident's **visibility** determines what users in your Datadog organization can see it. If an incident's visibility is **organization**, any user with the **Incidents Read** permission can see it. If the incident's visibility is **private**, only the incident's responders or users with the **Private Incidents Global Access** permission can see it.
+
+On the [Datadog Incidents page][5], you can search for private incidents using the **Visibility** facet on the left. You can also add conditions around incident visibility when defining incident [notification rules][2].
+
+### Private incidents in Slack
+
+When you declare private incidents, Datadog creates private Slack channels instead of public channels.
+
+If you convert an incident to private, Datadog archives the existing incident channel, creates a new private channel, and adds all existing responders to it.
+
+To convert an incident to private in Slack, use `/datadog incident private`.
+
+## Incident deletion
+
+_Default: disabled_
+
+When incident deletion is enabled for an incident type, any user with the **Incidents Write** permission can delete any incident of the incident type.
+
+After you delete an incident, it no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
+
+## Override status timestamps
+
+_Default: disabled_
+
+When timestamp overrides are enabled in an incident type, any user with the **Incidents Write** permission can define timestamp overrides in any incident of that incident type.
+
+When enabled, you can define overrides for the `declared`, `detected`, and `resolved` timestamps on an incident. To learn more, see [Incident Analytics][3].
+
+## Test incidents
+
+_Default: disabled_
+
+When test incidents are enabled in an incident type, any user with the **Incidents Write** permission can declare test incidents of the incident type.
+
+Test incidents are visually distinguished by a purple banner. By default, test incidents do not by appear in incident search, execute automations, execute notification rules, or affect analytics. The declarer can opt into these functions during declaration.
 
 [1]: https://app.datadoghq.com/incidents/settings#Information
 [2]: /service_management/incident_management/incident_settings/notification_rules
 [3]: /service_management/incident_management/analytics
 [4]: /service_management/incident_management/#from-the-incidents-page
+[5]: https://app.datadoghq.com/incidents

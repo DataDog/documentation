@@ -10,6 +10,7 @@ aliases:
 - /es/security/application_security/enabling
 - /es/security/application_security/getting_started
 - /es/security/application_security/threats
+- /es/security/application_security/setup/standalone
 description: Monitoriza amenazas dirigidas al sistema de producción basándote en el
   contexto de ejecución proporcionado por las trazas (traces) distribuidas.
 further_reading:
@@ -39,17 +40,13 @@ further_reading:
 title: App and API Protection
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="Panel de señales de seguridad en Datadog, que muestra flujos de ataque y gráficas de llamas" width="75%">}}
 
-{{< img src="/security/application_security/app-sec-landing-page.png" alt="Un panel de señales de seguridad en Datadog, que muestra flujos de ataque y gráficas de llamas" width="75%">}}
+**App & API Protection (AAP)** proporciona visibilidad y seguridad unificadas para tus aplicaciones y APIs, ayudándote a detectar, investigar y prevenir amenazas en las cargas de trabajo modernas.
 
-**App & API Protection (AAP)** ofrece visibilidad unificada y seguridad para tus aplicaciones y APIs, lo que ayuda a detectar, investigar y prevenir amenazas en cargas de trabajo modernas.
+Tanto si defiendes APIs públicas como servicios internos o aplicaciones orientadas al usuario, AAP equipa tus Teams con detección de amenazas predeterminada en tiempo real, evaluación de la postura y protecciones dentro de la aplicación.
 
-Si estás defendiendo APIs dirigidas al público, servicios internos o aplicaciones dirigidas al usuario, AAP brinda a tus equipos detección predefinida de amenazas en tiempo real, evaluación de postura y protecciones dentro de la aplicación.
-
-<div class="alert alert-info">Antes conocida como Application Security Monitoring (ASM), AAP ahora supera la detección de amenazas en tiempo real para incluir la detección de APIs, gestión de la postura y capacidades de protección.</div>
+<div class="alert alert-info">Anteriormente conocida como Application Security Monitoring (ASM), AAP ahora va más allá de la detección de amenazas en tiempo de ejecución para incluir funciones de detección de API, gestión de la postura y protección.</div>
 
 
 ## Capacidades clave
@@ -88,6 +85,25 @@ Para empezar a configurar tu entorno para detectar y proteger amenazas con AAP, 
 
 En el [Security Signals Explorer][6], haz clic en cualquier señal de seguridad para ver qué ha sucedido y qué pasos se sugieren para mitigar el ataque. En el mismo panel, consulta trazas con sus flujos de ataque correlacionados y solicita información para disponer de un mayor contexto.
 
+## Exploit Prevention frente a WAF en la aplicación
+
+En esta sección, se ofrece un resumen de Exploit Prevention y en qué se diferencia de las reglas de Web Application Firewall (WAF) en la aplicación.
+
+Datadog AAP incluye las funciones [Exploit Prevention][14] y [WAF en la aplicación][15] para proteger tus aplicaciones contra vulnerabilidades. Exploit Prevention es una extensión de WAF en la aplicación. Exploit Prevention aprovecha WAF en la aplicación como primera línea de defensa y bloquea los ataques que el WAF no detecta.
+
+Exploit Prevention aprovecha la tecnología de Runtime Application Self-Protection (RASP) para determinar si una solicitud de aplicación interactúa con una ruta de código vulnerable y, a continuación, la protege de tipos de vulnerabilidad específicos:
+
+- Inyección SQL (SQLi)
+- Falsificación de solicitudes del lado del servidor (SSRF)
+- Inclusión de archivos locales (LFI)
+- Inserción de comandos
+
+Para conocer la compatibilidad de las bibliotecas, consulta [Exploit Prevention][13].
+
+Además de detectar patrones maliciosos en la solicitud, Exploit Prevention se diferencia de WAF en la aplicación por el seguimiento de las acciones realizadas por la aplicación (consulta SQL ejecutada, archivos a los que se accede, etc.). Exploit Prevention es capaz de determinar si la entrada del usuario modificó la consulta SQL o restringió un archivo de forma perjudicial y bloquearlo. 
+
+Por ejemplo, en un ataque de inyección SQL, el objetivo del atacante es tomar el control de la consulta SQL y cambiar su significado. Exploit Prevention analiza la consulta SQL antes de su ejecución y comprueba si hay algún parámetro de usuario en la consulta. Si hay alguno presente, Exploit Prevention comprueba si el analizador SQL interpretó el parámetro como múltiples tokens SQL (cambiando el significado de la consulta SQL). En ese caso, Exploit Prevention marca la consulta como inyectada.
+
 ## Desactivar AAP
 
 Para obtener información sobre cómo desactivar AAP o sus funciones, consulta lo siguiente:
@@ -109,3 +125,6 @@ Para obtener información sobre cómo desactivar AAP o sus funciones, consulta l
 [10]: /es/security/application_security/troubleshooting/#disabling-aap
 [11]: /es/security/application_security/troubleshooting/#disabling-software-composition-analysis
 [12]: /es/security/application_security/troubleshooting/#disabling-code-security
+[13]: /es/security/application_security/exploit-prevention/#library-compatibility
+[14]: /es/security/application_security/exploit-prevention/
+[15]: /es/security/application_security/waf-integration/

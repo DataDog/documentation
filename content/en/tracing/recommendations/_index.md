@@ -11,6 +11,7 @@ algolia:
     - performance recommendations
     - reliability recommendations
     - tracing
+site_support_id: apm_recommendations
 further_reading:
   - link: "/tracing/"
     tag: "Documentation"
@@ -89,9 +90,9 @@ multifiltersearch:
 
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-APM Recommendations are in Preview. Features and recommendations may change before general availability.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/apm-proactive-recommendations/" >}}
+APM Recommendations are in Preview. Features and recommendations may change before general availability. To request access, fill out this form.
+{{< /callout >}}
 
 APM Recommendations help you optimize your applications' performance, reliability, and error rates by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to:
 

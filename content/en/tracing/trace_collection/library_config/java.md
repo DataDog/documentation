@@ -247,6 +247,11 @@ Request path | Resource path
 `/admin/user/12345/delete` | `/admin/user`
 `/user/12345` | `/user/?`
 
+`dd.trace.status404rule.enabled`
+: **Environment Variable**: `DD_TRACE_STATUS404RULE_ENABLED`<br>
+**Default**: `true`<br>
+By default, HTTP 404 responses use "404" as the span resource name. When `false`, HTTP 404 responses keep the original URL path as the resource name.
+
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
@@ -330,20 +335,22 @@ For more information, see [Enabling AAP for Java][19].
 
 ### Errors
 
-`dd.http.client.tag.query-string`
-: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
-When set to `true` query string parameters and fragment get added to web client spans
+`dd.trace.http.client.tag.query-string`
+: **System Property (Deprecated)**: `dd.http.client.tag.query-string`<br>
+**Environment Variable**: `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Environment Variable (Deprecated)**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Default**: `true`<br>
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
 
-`dd.http.client.error.statuses`
-: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+`dd.trace.http.client.error.statuses`
+: **Environment Variable**: `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`<br>
 **Default**: `400-499`<br>
-A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.trace.http.client.error.statuses=400-403,405,410-499`
 
-`dd.http.server.error.statuses`
-: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+`dd.trace.http.server.error.statuses`
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_ERROR_STATUSES`<br>
 **Default**: `500-599`<br>
-A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.trace.http.server.error.statuses=500,502-599`
 
 `dd.grpc.client.error.statuses`
 : **Environment Variable**: `DD_GRPC_CLIENT_ERROR_STATUSES`<br>
@@ -641,7 +648,7 @@ Deprecated since version 1.9.0
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
-[3]: /agent/remote_config/
+[3]: /tracing/guide/remote_config
 [4]: https://app.datadoghq.com/services
 [5]: /tracing/setup/docker/
 [6]: /agent/configuration/network/#configure-ports

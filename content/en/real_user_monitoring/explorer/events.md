@@ -1,5 +1,6 @@
 ---
 title: Events Side Panel
+description: "View detailed information about individual RUM events including context, waterfalls, and performance data in the side panel."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -37,4 +38,4 @@ RUM collects contextual information by default. You can also add additional cont
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context

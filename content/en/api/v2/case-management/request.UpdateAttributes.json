@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "attributes": {
+        "env": [
+          "test"
+        ],
+        "service": [
+          "web-store",
+          "web-api"
+        ],
+        "team": [
+          "engineer"
+        ]
+      }
+    },
+    "type": "case"
+  }
+}

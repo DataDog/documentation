@@ -2,6 +2,8 @@
 app_id: docker
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
+  dashboards:
+    docker: assets/dashboards/docker_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -82,7 +84,7 @@ tile:
 
 **注**: Docker Daemon チェックのメンテナンスは継続されていますが、**Agent v5** でのみ動作します。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>Agent v6 で Docker インテグレーションを使用するには、下の <a href="#agent-v6">Agent v6 セクション</a>を参照してください。</b>
 </div>
 
@@ -207,7 +209,7 @@ Datadog Agent を使用したカスタム Docker コンテナの構築、Alpine 
 
 ## 収集データ
 ### メトリクス
-{{< get-metrics-from-git "docker" >}}
+{{< get-metrics-from-git "docker_daemon" >}}
 
 
 ### イベント
@@ -225,7 +227,7 @@ Docker インテグレーションは以下のイベントを生成します。
 * Update
 
 ### サービスチェック
-{{< get-service-checks-from-git "docker" >}}
+{{< get-service-checks-from-git "docker_daemon" >}}
 
 
 **注**: `docker.exit` を使用するには、[Docker YAML ファイル][21]に `collect_exit_codes: true` を追加し、Agent を再起動します。
@@ -242,7 +244,7 @@ Docker インテグレーションは以下のイベントを生成します。
 * [Docker リソースメトリクスの監視方法][26]
 * [Docker メトリクスの収集方法][27]
 * [実際に Docker を採用してわかった驚きの 8 つの事実][28]
-* [AWS ECS での Docker の監視][29]
+* [Amazon ECS での Docker の監視][29]
 * [Datadog の Docker 化][30]
 * [Datadog を使用した Docker の監視][31]
 

@@ -1,9 +1,13 @@
 ---
 title: Overlays
+description: "Use Cloudcraft overlays to view AWS infrastructure from different perspectives including observability, security, cost management, and infrastructure."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
   text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
+- link: "https://www.datadoghq.com/blog/cloudcraft-observability-overlay/"
+  tag: "Blog"
+  text: "Visually identify observability gaps with Cloudcraft in Datadog"
 ---
 
 ## Overview
@@ -88,13 +92,19 @@ By default, the security overlay shows Critical, High, and Medium severity misco
 
 You can click on any resource that has findings to open a side panel with more details, allowing deeper investigation without leaving the diagram. Click **Investigate** to get more context about the finding and learn how to remediate it.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_with_ccm_3.png" alt="Security overlay in Cloudcraft with the misconfigurations filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_misconfigurations.png" alt="Security overlay in Cloudcraft with the misconfigurations filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
 #### Investigate sensitive data
 
 You can view sensitive data matches for your S3 buckets. Click a resource with matches to learn more about the bucket's sensitive data matches. Then, hover over a filename and click its **Inspect in AWS** button.
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_sensitive_data.png" alt="Security overlay in Cloudcraft with the sensitive data filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Inspect in AWS button on the side panel." style="width:100%;" >}}
+
+#### Investigate vulnerabilities
+
+View security vulnerability matches associated with your EC2 instances. Click a resource that has a matching vulnerability. This opens a side panel which provides detailed vulnerability data for a selected EC2 instance, including severity, affected packages, and exploit status. For deeper analysis, click **Investigate** to get more context about the vulnerability and learn how to remediate it.
+
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_vuln.png" alt="Security overlay in Cloudcraft with the vulnerabilities filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
 ### Cloud Cost Management 
 

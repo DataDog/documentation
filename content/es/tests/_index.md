@@ -90,7 +90,7 @@ Por ejemplo, supongamos que estás probando una única confirmación y tienes un
 
 ### Probar los atributos de configuración
 
-Cuando ejecutas tus tests con la optimización de tests, la biblioteca detecta e informa sobre el entorno en el que se ejecutan los tests como etiquetas (tags) de test. Por ejemplo, el nombre del sistema operativo, como `Windows` o `Linux`, y la arquitectura de la plataforma, como `arm64` o `x86_64`, se agregan como etiquetas en cada test. Estos valores se muestran en las páginas de confirmación y de información general de la rama cuando un test falla o es defectuoso para una configuración específica, pero no para otras.
+Cuando ejecutas tus tests con la optimización de tests, la librería detecta e informa sobre el entorno en el que se ejecutan los tests como etiquetas (tags) de test. Por ejemplo, el nombre del sistema operativo, como `Windows` o `Linux`, y la arquitectura de la plataforma, como `arm64` o `x86_64`, se agregan como etiquetas en cada test. Estos valores se muestran en las páginas de confirmación y de información general de la rama cuando un test falla o es defectuoso para una configuración específica, pero no para otras.
 
 Las siguientes etiquetas se recopilan automáticamente para identificar configuraciones de test y algunas pueden aplicarse solo a plataformas específicas:
 
@@ -112,7 +112,7 @@ Las siguientes etiquetas se recopilan automáticamente para identificar configur
 
 ### Configuraciones de tests parametrizados
 
-Cuando se ejecutan tests parametrizados, la biblioteca detecta y genera información sobre los parámetros utilizados. Los parámetros son parte de la configuración del test, por lo que el mismo caso de test ejecutado con diferentes parámetros se considera como dos pruebas diferentes en la optimización de tests.
+Cuando se ejecutan tests parametrizados, la librería detecta y genera información sobre los parámetros utilizados. Los parámetros son parte de la configuración del test, por lo que el mismo caso de test ejecutado con diferentes parámetros se considera como dos pruebas diferentes en la optimización de tests.
 
 Si un parámetro de test no es determinista y tiene un valor diferente cada vez que se ejecuta un test, cada ejecución de test se considera un nuevo test en la optimización de tests. Como consecuencia, es posible que algunas funciones del producto no funcionen correctamente para dichos tests: historial de ejecuciones, detección de defectos, análisis del impacto de los tests y otras.
 
@@ -127,7 +127,7 @@ Evita utilizar parámetros de test no deterministas. En caso de que esto no sea 
 
 ## Configuraciones personalizadas
 
-Hay algunas configuraciones que no se pueden identificar directamente ni informar de forma automática porque pueden depender de variables de entorno, argumentos de ejecución de tests u otros enfoques que utilizan los desarrolladores. En esos casos, debes proporcionar los detalles de configuración a la biblioteca para que la optimización de tests pueda identificarlos correctamente.
+Hay algunas configuraciones que no se pueden identificar directamente ni informar de forma automática porque pueden depender de variables de entorno, argumentos de ejecución de tests u otros enfoques que utilizan los desarrolladores. En esos casos, debes proporcionar los detalles de configuración a la librería para que la optimización de tests pueda identificarlos correctamente.
 
 Define estas etiquetas como parte de la variable de entorno `DD_TAGS` con el prefijo `test.configuration`.
 

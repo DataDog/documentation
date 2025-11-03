@@ -91,7 +91,7 @@ Les logs qui ont déjà été indexés demeurent interrogeables jusqu'à la fin 
 
 Les vues historiques continuent à être stockées dans Datadog jusqu'à ce que la période de rétention sélectionnée expire, mais vous pouvez aussi choisir de les supprimer plus tôt si vous n'avez plus besoin de la vue. Vous pouvez indiquer qu'une vue historique doit être supprimée en sélectionnant l'icône de suppression à droite de la vue, puis en confirmant votre choix.
 
-Après 1 heure, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 1 heure pour annuler la suppression.
+Après 1 jour, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 1 jour pour annuler la suppression.
 
 {{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Suppression de vues historiques" video="true" width="75%" >}}
 
@@ -114,7 +114,7 @@ Datadog doit avoir un accès en lecture à vos archives afin de réintégrer leu
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
+<div class="alert alert-danger">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
 {{< /site-region >}}
 
 Afin de réintégrer des événements de log depuis vos archives, Datadog utilise le rôle IAM du compte AWS que vous avez configuré pour [votre intégration AWS][1]. Si vous n'avez pas encore créé ce rôle, [suivez ces étapes pour y remédier][2]. Pour autoriser ce rôle à réintégrer des événements de log depuis vos archives, ajoutez la déclaration d'autorisation suivante à ses stratégies IAM. Veillez à modifier les noms de compartiment et, si nécessaire, spécifiez les chemins contenant vos archives de log.

@@ -45,7 +45,7 @@ Para instrumentar manualmente un método:
 
 ## Añadir etiquetas (tags)
 
-Añade [etiquetas de tramos][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel de comercio, el importe del pago o el ID de usuario.
+Añade [span tagss][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación en Datadog. Las span tagss se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel de comercio, el importe del pago o el ID de usuario.
 
 Nota que algunas etiquetas de Datadog son necesarias para el [etiquetado de servicio unificado][3].
 
@@ -102,7 +102,7 @@ auto span = tracer.create_span();
 
 ### Configurar errores en un tramo
 
-Para asociar un tramo a un error, define una o varias etiquetas relacionadas con el error en el 
+Para asociar un tramo a un error, define una o varias etiquetas relacionadas con el error en el
 tramo. Por ejemplo:
 
 ```cpp

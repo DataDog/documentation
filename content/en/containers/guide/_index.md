@@ -1,5 +1,6 @@
 ---
 title: Containers Guides
+description: List of guides for container monitoring setup and configuration
 private: true
 disable_toc: true
 ---
@@ -16,6 +17,7 @@ disable_toc: true
     {{< nextlink href="/containers/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
     {{< nextlink href="/containers/guide/sync_container_images" >}}Synchronize Datadog's images with a private registry{{< /nextlink >}}
     {{< nextlink href="/containers/guide/how-to-import-datadog-resources-into-terraform/" >}}How to Import Datadog Resources into Terraform{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/manage-datadogpodautoscaler-with-terraform/" >}}Manage DatadogPodAutoscaler with Terraform{{< /nextlink >}}
     {{< nextlink href="/containers/guide/kubernetes-cluster-name-detection/" >}}Kubernetes Cluster Name Detection{{< /nextlink >}}
     {{< nextlink href="/containers/guide/kubernetes-legacy/" >}}Kubernetes Legacy{{< /nextlink >}}
 {{< /whatsnext >}}

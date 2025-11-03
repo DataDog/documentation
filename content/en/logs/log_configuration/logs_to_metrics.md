@@ -17,7 +17,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/generate_metrics/">Observability Pipelines</a> documentation.</div>
+<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="https://docs.datadoghq.com/observability_pipelines/configuration/explore_templates#generate-metrics">Observability Pipelines</a> documentation.</div>
 
 Datadog's [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
 
@@ -43,7 +43,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
+1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation. The index must be excluded from the query.
 2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
 3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
 4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
@@ -53,7 +53,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
-<div class="alert alert-warning">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
+<div class="alert alert-danger">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 ### Update a log-based metric
 
@@ -83,6 +83,8 @@ Log Management usage metrics come with three tags that can be used for more gran
 |  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  |
 |  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
 |  `service`              | The service attribute of the log event.                               |
+
+**Note**: The `datadog_is_excluded` and `datadog_index` fields can have a value of `N/A`. This indicates that the log(s) was ingested, but didn't match any inclusion or exclusion criteria to be explicitly routed to an index.
 
 An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested_events` metric to reflect the log status (`info`, `warning`, etc.).
 

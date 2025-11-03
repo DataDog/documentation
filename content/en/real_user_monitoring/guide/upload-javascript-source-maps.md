@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-
+description: "Upload JavaScript source maps to enhance error tracking with readable stack traces and better debugging for minified code."
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'
@@ -8,7 +8,7 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
-- link: 'https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps'
+- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command'
   tag: 'Source Code'
   text: 'Sourcemaps command reference'
 ---
@@ -21,9 +21,9 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 ## Instrument your code
 
-Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
+Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **500 MB**.
 </div>
 
@@ -67,6 +67,27 @@ module.exports = {
 Parcel generates source maps by default when you run the build command: `parcel build <entry file>`.
 
 {{% /tab %}}
+{{% tab "Vite" %}}
+
+You can generate source maps by configuring the `build.sourcemap` option in your `vite.config.js` file.
+
+See the example configuration:
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    sourcemap: true, // generates .js.map files
+    minify: 'terser', // or 'esbuild'
+  }
+})
+```
+
+**Note**: If you are using TypeScript, ensure `compilerOptions.sourceMap` is set to `true` in your `tsconfig.json` file.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 After building your application, bundlers generate a directory (typically named `dist`) with minified JavaScript files co-located with their corresponding source maps.
@@ -82,7 +103,7 @@ See the following example:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 500 MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 
@@ -158,7 +179,7 @@ On the other hand, an unminified stack trace provides you with all the context y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
+[2]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

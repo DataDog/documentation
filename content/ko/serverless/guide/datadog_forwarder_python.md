@@ -3,7 +3,7 @@ title: Datadog 포워더(Forwarder)를 사용해 파이썬(Python) 서버리스 
 ---
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스 신규 사용자인 경우 대신 <a href="/serverless/installation/python">Datadog 람다 확장을 사용해 람다 함수를 계측하기 위한 지침을 따르세요.</a> 람다에서 즉시 사용할 수 있는 기능을 제공하기 전 Datadog 포워더를 사용해 Datadog 서버리스를 설정한 경우 이 가이드를 따라 인스턴스를 유지관리하세요.
 </div>
 

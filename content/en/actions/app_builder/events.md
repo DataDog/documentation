@@ -1,5 +1,6 @@
 ---
 title: Events
+description: Configure UI component event triggers and reactions, including state functions for dynamic app interactions and behaviors.
 aliases:
 - /app_builder/events
 - /service_management/app_builder/events
@@ -11,6 +12,9 @@ further_reading:
 - link: "/service_management/app_builder/components/"
   tag: "Documentation"
   text: "Components"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 ---
 
 UI components can trigger reactions on an **Event**. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component event can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].

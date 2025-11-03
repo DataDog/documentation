@@ -340,28 +340,28 @@ export default {
     gov: 'https://ip-ranges.ddog-gov.com'
   },
   otlp_trace_endpoint: {
-    us: 'https://trace.agent.datadoghq.com/api/v0.2/traces',
-    us3: 'https://trace.agent.us3.datadoghq.com/api/v0.2/traces',
-    us5: 'https://trace.agent.us5.datadoghq.com/api/v0.2/traces',
-    eu: 'https://trace.agent.datadoghq.eu/api/v0.2/traces',
-    ap1: 'Datadog OTLP traces intake endpoint is not supported for AP1',
-    ap2: 'Datadog OTLP traces intake endpoint is not supported for AP2'
+    us: 'https://trace.agent.datadoghq.com/v1/traces',
+    us3: 'https://trace.agent.us3.datadoghq.com/v1/traces',
+    us5: 'https://trace.agent.us5.datadoghq.com/v1/traces',
+    eu: 'https://trace.agent.datadoghq.eu/v1/traces',
+    ap1: 'https://trace.agent.ap1.datadoghq.com/v1/traces',
+    ap2: 'https://trace.agent.ap2.datadoghq.com/v1/traces'
   },
   otlp_metrics_endpoint: {
-    us: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
-    us3: 'https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics',
-    us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
-    eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics',
-    ap1: 'Datadog OTLP metrics intake endpoint is not supported for AP1',
-    ap2: 'Datadog OTLP metrics intake endpoint is not supported for AP2'
+    us: 'https://otlp.datadoghq.com/v1/metrics',
+    us3: 'https://otlp.us3.datadoghq.com/v1/metrics',
+    us5: 'https://otlp.us5.datadoghq.com/v1/metrics',
+    eu: 'https://otlp.datadoghq.eu/v1/metrics',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/metrics',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics'
   },
   otlp_logs_endpoint: {
-    us: 'https://http-intake.logs.datadoghq.com/api/v2/logs',
-    us3: 'https://http-intake.logs.us3.datadoghq.com/api/v2/logs',
-    us5: 'https://http-intake.logs.us5.datadoghq.com/api/v2/logs',
-    eu: 'https://http-intake.logs.datadoghq.eu/api/v2/logs',
-    ap1: 'Datadog OTLP logs intake endpoint is not supported for AP1',
-    ap2: 'Datadog OTLP logs intake endpoint is not supported for AP2'
+    us: 'https://otlp.datadoghq.com/v1/logs',
+    us3: 'https://otlp.us3.datadoghq.com/v1/logs',
+    us5: 'https://otlp.us5.datadoghq.com/v1/logs',
+    eu: 'https://otlp.datadoghq.eu/v1/logs',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/logs',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/logs'
   },
   custom_costs_endpoint: {
     us: 'api.datadoghq.com/api/v2/cost/custom_costs',

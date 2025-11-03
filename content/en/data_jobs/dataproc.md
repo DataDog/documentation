@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Google Cloud Dataproc
+description: "Set up Data Jobs Monitoring for Apache Spark applications on Google Cloud Dataproc clusters with API key configuration and service tagging."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'

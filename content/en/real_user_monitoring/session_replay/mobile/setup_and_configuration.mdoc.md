@@ -21,9 +21,9 @@ further_reading:
   - link: '/real_user_monitoring/session_replay'
     tag: Documentation
     text: Session Replay
-  - link: '/real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking'
+  - link: '/real_user_monitoring/application_monitoring/android/web_view_tracking'
     tag: Documentation
     text: Web View Tracking
 ---
 
-{% partial file="rum/session_replay/setup_and_configuration.mdoc.md" /%}
+{% partial file="real_user_monitoring/session_replay/setup_and_configuration.mdoc.md" /%}

@@ -1,5 +1,6 @@
 ---
 title: DORA Metrics Data Collected
+description: "Learn about DORA Metrics events, fields, tags, and change lead time stages for deployment frequency, change lead time, and failure analysis."
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
@@ -75,7 +76,7 @@ Datadog breaks down change lead time into the following fields, which represent 
 | `Time to Deploy` | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
 | `Deploy Time`          | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
 
-These stages are only computed when the source of the repository metadata is GitHub, and for most stages there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
+These stages are only computed when the source of the repository metadata is GitHub or GitLab, and for most stages, there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
 
 ### Recommendations
 

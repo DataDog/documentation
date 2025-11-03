@@ -1,5 +1,6 @@
 ---
 title: Build workflows
+description: Create workflows from blueprints or build custom workflows using AI assistance, manual configuration, and drag-and-drop actions.
 disable_toc: false
 aliases:
 - /workflows/build
@@ -12,7 +13,7 @@ further_reading:
   text: "Getting Started with Workflow Automation"
 - link: "/actions/actions_catalog"
   tag: "Documentation"
-  text: "Browse the available actions in the Actions Catalog"
+  text: "Browse the available actions in the Action Catalog"
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
@@ -103,6 +104,20 @@ See the test and debug page for information on [how to test a step][11].
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+### Updating a published workflow
+
+You can update published workflows without affecting the live version until you are ready.
+
+Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
+
+Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor. 
+
+To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
+
+**Notes**:
+- Running a draft for published workflows do not accrue costs.
+- Any update to the workflow properties (name, tags, or notifications) bypass the drafting flow and are applied immediately to the published version.
 
 ## Variables and parameters
 

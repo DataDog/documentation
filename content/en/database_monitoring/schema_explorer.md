@@ -21,7 +21,8 @@ instances:
     port: 5432
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    collect_schemas: true
+    collect_schemas:
+      enabled: true
     ## Optional: Connect to a different database if needed for `custom_queries`
     # dbname: '<DB_NAME>'
 ```

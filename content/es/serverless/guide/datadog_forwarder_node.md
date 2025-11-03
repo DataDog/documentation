@@ -4,7 +4,7 @@ title: Instrumentación de aplicaciones serverless de Node.js mediante el Datado
 
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 
@@ -44,7 +44,7 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 Para rellenar los parámetros, haz lo siguiente:
 - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tu función de Lambda.
 - Reemplaza `<aws_region>` por el nombre de la región de AWS.
-- Reemplaza `<layer_version>` por la versión de la biblioteca Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="node" >}}`.
+- Reemplaza `<layer_version>` por la versión de la librería Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="node" >}}`.
 - Reemplaza `<forwarder_arn>` por el nombre de recurso de Amazon (ARN) del Forwarder (consulta la [documentación del Forwarder][2]).
 
 Por ejemplo:
@@ -65,7 +65,7 @@ Obtén más información y parámetros adicionales en la [documentación de la C
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-El complemento [Datadog Serverless Plugin][1] añade la biblioteca Lambda de Datadog automáticamente a tus funciones mediante capas y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+El complemento [Datadog Serverless Plugin][1] añade la librería Lambda de Datadog automáticamente a tus funciones mediante capas y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][6] de tu función antes de poder instalar el Datadog Serverless Plugin.
 
@@ -98,7 +98,7 @@ Para instalar y configurar el Datadog Serverless Plugin, sigue estos pasos:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la biblioteca Lambda de Datadog a tus funciones mediante capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la librería Lambda de Datadog a tus funciones mediante capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 ### Instalar
 
@@ -146,13 +146,13 @@ Obtén más información y parámetros adicionales en la [documentación de la m
 
 Las [Construcciones del Datadog CDK][1] configuran automáticamente la ingesta de métricas, trazas y logs de tus aplicaciones serverless mediante las siguientes acciones:
 
-- La instalación y configuración de la biblioteca Lambda de Datadog para tus funciones de Lambda de Python y Node.js.
+- La instalación y configuración de la librería Lambda de Datadog para tus funciones de Lambda de Python y Node.js.
 - La habilitación de la recopilación de trazas y métricas personalizadas de tus funciones de Lambda.
 - La gestión de las suscripciones del Datadog Forwarder a los grupos de logs de tus funciones de Lambda.
 
 ### Instalar
 
-Ejecuta el siguiente comando de Yarn o NPM en tu proyecto del CDK para instalar la biblioteca de Construcciones del Datadog CDK:
+Ejecuta el siguiente comando de Yarn o NPM en tu proyecto del CDK para instalar la librería de Construcciones del Datadog CDK:
 
 ```sh
 #Yarn
@@ -202,7 +202,7 @@ Obtén más información y parámetros adicionales en la [página de NPM del Dat
 
 ### Instalar
 
-Si vas a desplegar tu función de Lambda como una imagen de contenedor, no puedes utilizar la biblioteca Lambda de Datadog como una capa. En su lugar, debes instalar la biblioteca Lambda de Datadog como una dependencia de tu función dentro de la imagen. Si quieres utilizar el rastreo de Datadog, también debes instalar `dd-trace`.
+Si vas a desplegar tu función de Lambda como una imagen de contenedor, no puedes utilizar la librería Lambda de Datadog como una capa. En su lugar, debes instalar la librería Lambda de Datadog como una dependencia de tu función dentro de la imagen. Si quieres utilizar el rastreo de Datadog, también debes instalar `dd-trace`.
 
 **NPM**:
 
@@ -244,7 +244,7 @@ Suscribe la función de Lambda del Datadog Forwarder a cada uno de los grupos de
 
 ### Instalar
 
-La biblioteca Lambda de Datadog puede importarse como una capa o como un paquete de JavaScript.
+La librería Lambda de Datadog puede importarse como una capa o como un paquete de JavaScript.
 
 La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la versión de la capa. Por ejemplo, la versión 0.5.0 de datadog-lambda-js coincide con el contenido de la versión 5 de la capa.
 
@@ -253,7 +253,7 @@ La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la v
 [Configura las capas][8] de tu función de Lambda con el ARN en el siguiente formato.
 
 ```
-# For us,us3,us5,eu, and ap1 regions
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions
@@ -267,7 +267,7 @@ Las opciones disponibles en `RUNTIME` son {{< latest-lambda-layer-version layer=
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][2] de tu función antes de poder añadir la biblioteca Lambda de Datadog como una capa.
+Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][2] de tu función antes de poder añadir la librería Lambda de Datadog como una capa.
 
 #### Como un paquete
 

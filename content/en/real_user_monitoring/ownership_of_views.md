@@ -1,7 +1,6 @@
 ---
 title: Ownership of Views
 description: A guide on how to use view-based ownership in Real User Monitoring to filter event data for views your team owns.
-private: true
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
@@ -28,7 +27,7 @@ To configure team ownership for your application's views:
 
 After you associate a view with a team, Datadog automatically attributes new event data to that team.
 
-<div class="alert alert-warning">If you change a team and view mapping, any past metrics or events are not retroactively tagged with the new team.</div>
+<div class="alert alert-danger">If you change a team and view mapping, any past metrics or events are not retroactively tagged with the new team.</div>
 
 {{< img src="/real_user_monitoring/ownership_of_views/ownership-application-management-2.png" alt="View of the Team Ownership page, where you can assign different pages of your application to specific teams." >}}
 

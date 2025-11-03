@@ -13,7 +13,7 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
 ### Onboard a new or existing Team
 
 1. Go to [**On-Call** > **Teams**][4] and select **Set Up Team**.
-1. Create a new Team, select an existing Datadog Team, or import team configurations from PagerDuty or Opsgenie.
+1. Create a new Team, select an existing Datadog Team, or import team configurations from PagerDuty.
   {{< tabs >}}
   {{% tab "New Team" %}}
   - **Team Name**: Enter a name for your Team. Datadog recommends that you do not use acronyms here, unless the acronym is already widely used in your organization.
