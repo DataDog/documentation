@@ -107,13 +107,13 @@ Search for **DNS** in the **+ Filter** menu to locate flows associated with Reve
 
 **Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, see the [full configuration file][8].
 
-## IP Pill
+## IP details
 
-In the **Conversations** view, you can view the Public IP address of the Destination IP. Hover over the IP to display an IP pill that provides rich metadata about the IP and a link to **View Related Network Connections** where you can inspect the connectivity in more detail.
+In the **Conversations** view, you can view the Public IP address of the Destination IP. Hover over the IP to display rich metadata about the IP and a link to **View Related Network Connections** where you can inspect the connectivity in more detail.
 
-{{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="Hover over an IP address to display the IP Pill and View Related Network Connections" width="100%" >}}
+{{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="Hover over an IP address to display the IP details and View Related Network Connections" width="100%" >}}
 
-## Sankey diagram
+## Flow diagram
 
 You can visualize the flows in NetFlow Monitoring by clicking on the **Flows** menu and hovering over a flow from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
 
