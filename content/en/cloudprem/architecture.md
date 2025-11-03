@@ -35,6 +35,17 @@ The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of sever
 **Janitor**
 : Performs maintenance tasks, applying retention policies, garbage collecting expired splits, and running delete query jobs.
 
+
+## Connection to Datadog UI
+
+There are two ways to connect the Datadog UI to CloudPrem:
+- [**Reverse connection**][1]: Let CloudPrem initiate bi-directional gRPC requests to Datadog.
+- [**Accept external requests from Datadog**][2]: Provide Datadog with a DNS endpoint for gRPC requests and configure a public Ingress to accept those requests.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /cloudprem/configure/reverse_connection/
+[2]: /cloudprem/configure/ingress/

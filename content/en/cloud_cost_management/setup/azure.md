@@ -30,7 +30,8 @@ To determine your account type, see the [Azure documentation][10]. **Note:** If 
 
 
 {{% site-region region="us3" %}}
-**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an app registration][2].
+
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -140,9 +141,8 @@ To resolve this, add Datadog's webhook IPs to your network allowlist by visiting
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Getting historical data
-Datadog automatically ingests up to 15 months of available historical cost data.
 
-Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.

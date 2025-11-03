@@ -23,6 +23,8 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
+Learn more about the [compatibility requirements][22].
+
 ## Connect your LLM provider account
 
 Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
@@ -46,7 +48,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
-<div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
 
@@ -63,7 +65,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
-<div class="alert alert-info">Anthropic is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -78,7 +80,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-info">Bedrock is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -162,7 +164,7 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 This check identifies instances where the LLM makes a claim that disagrees with the provided input context.
 
-{{< img src="llm_observability/evaluations/hallucination_1.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/hallucination_2.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -217,13 +219,11 @@ Hallucination detection makes a distinction between two types of hallucinations,
 
 Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
 
-Hallucination detection is only available for OpenAI.
-
 #### Failure to Answer
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_2.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -261,7 +261,7 @@ Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegi
 
 This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-{{< img src="llm_observability/evaluations/sentiment_1.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_2.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -273,7 +273,7 @@ This check helps understand the overall mood of the conversation, gauge user sat
 
 This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
-{{< img src="llm_observability/evaluations/toxicity_1.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_2.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -302,7 +302,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][14]
 
 This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_2.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -323,7 +323,7 @@ You can configure the prompt injection evaluation to use specific categories of 
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_2.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -352,3 +352,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [19]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
 [20]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
 [21]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#goal-completeness
+[22]: /llm_observability/evaluations/evaluation_compatibility
