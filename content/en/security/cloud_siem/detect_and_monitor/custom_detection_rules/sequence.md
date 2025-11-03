@@ -56,4 +56,4 @@ When you [create a sequence detection rule][1], you can configure these options:
 - Sequence detection supports up to 10 steps per rule and a total evaluation window of 24 hours.
 - Steps must be in a linear sequence.
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=sequence
