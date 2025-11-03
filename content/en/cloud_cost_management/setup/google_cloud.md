@@ -137,9 +137,7 @@ Continue to follow the steps indicated in [Setup & Configuration][3].
 
 ### Getting historical data
 
-Datadog automatically ingests up to 15 months of available historical cost data.
-
-Newly created BigQuery billing export datasets only contain the most recent 2 months of data. It can take a day or two for this data to backfill in BigQuery. Datadog automatically ingests this available data once it appears in the BigQuery table.
+Newly created BigQuery billing export datasets only contain the most recent 2 months of data. It can take a day or two for this data to backfill in BigQuery. Datadog automatically ingests up to 15 months of available historical cost data once it appears in the BigQuery table.
 
 Google Cloud does not provide a process for backfilling additional historical data beyond the 2 months automatically included when the BigQuery export is first created.
 

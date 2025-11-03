@@ -38,9 +38,7 @@ Once the integration is created, enable the toggle for Cloud Cost Management.
 
 ### Getting historical data
 
-Datadog automatically ingests up to 15 months of available historical cost data.
-
-Oracle Cloud Infrastructure retains cost reports for 1 year. When you enable Cloud Cost Management, Datadog automatically ingests the available cost reports that Oracle has retained (up to 1 year of historical data).
+Oracle Cloud Infrastructure retains cost reports for 1 year. When you enable Cloud Cost Management, Datadog automatically ingests up to 15 months of available historical cost data from these retained reports (up to 1 year based on Oracle's retention).
 
 Oracle does not provide a process for backfilling additional historical data beyond what is already retained in the cost reports.
 
