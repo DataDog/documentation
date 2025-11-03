@@ -62,7 +62,7 @@ Considerations for using multiple SAML providers:
 - You can configure up to three (3) IdPs at the same time. If you no longer need a configuration, you should delete it, as there is no way to pause a configuration.
 - All configured IdPs are treated equally; there is no way to set a default or prioritized configuration.
 - All users can see and access all configured IdPs; there is no way to assign specific user groups to specific configurations. Setting clear and descriptive names for each provider helps users select the appropriate IdP during login.
-- Role mapping works with multiple SAML providers as long as the attributes in your IdPs match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing iDp, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
+- If you use SAML role mapping and want to use the same role mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
 
 To configure additional SAML providers:
 
