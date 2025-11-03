@@ -5,6 +5,9 @@ aliases:
 - /integrations/guide/azure-programmatic-management/
 description: Connect Microsoft Azure with Datadog using Azure app registration integration options. Configure metric collection, log forwarding, and Agent installation.
 further_reading:
+    - link: 'https://www.datadoghq.com/blog/azure-integration-onboarding/'
+      tag: 'Blog'
+      text: 'Accelerate your Azure integration setup with guided onboarding'
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'
       text: 'Microsoft Azure integration'
