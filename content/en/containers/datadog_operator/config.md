@@ -573,7 +573,7 @@ For a complete list of parameters, see the [Operator configuration spec][8].
 
 ## Override options
 
-The following table lists parameters that can be used to override default or global settings. Maps and arrays have a type annotation in the table; properties that are configured as map values contain a `[key]` element, to be replaced with an actual map key. `override` itself is a map with the following possible keys: `nodeAgent`, `clusterAgent`, or `clusterChecksRunner`. 
+The following table lists parameters that can be used to override default or global settings for individual components. `override` is a map with the following possible keys: `nodeAgent`, `clusterAgent`, or `clusterChecksRunner`. Maps and arrays have a type annotation in the table. In the parameter names, `component` refers to one of these component keys, and `container` refers to a specific container name within that component (such as `agent`, `cluster-agent`, `process-agent`, `trace-agent`, or `system-probe`).
 
 For example: the following manifest overrides the Node Agent's image and tag, in addition to the resource limits of the system probe container:
 
