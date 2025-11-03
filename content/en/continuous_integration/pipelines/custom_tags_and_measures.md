@@ -123,7 +123,7 @@ To create a measure, click the gear icon next to a measures name on the [Pipelin
 Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
 
 <details>
-<summary><strong>For datadog-ci versions prior to 4.1.0</strong></summary>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
 
 If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][7]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
 
