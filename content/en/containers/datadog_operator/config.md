@@ -595,7 +595,7 @@ spec:
               cpu: "2"
               memory: 1Gi
 {{< /highlight >}}
-In the table, `spec.override.nodeAgent.image.name` and `spec.override.nodeAgent.containers.system-probe.resources.limits` appear as `[key].image.name` and `[key].containers.[key].resources.limits`, respectively.
+In the table, `spec.override.nodeAgent.image.name` and `spec.override.nodeAgent.containers.system-probe.resources.limits` appear as `[component].image.name` and `[component].containers.[container].resources.limits`, respectively.
 
 {{% collapse-content title="Parameters" level="h4" expanded=true id="override-options-list" %}}
 `[component].affinity`
