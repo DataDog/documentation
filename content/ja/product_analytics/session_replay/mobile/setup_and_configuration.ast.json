@@ -1,99 +1,119 @@
 {
   "$$mdtype": "Node",
-  "errors": [],
-  "lines": [],
   "inline": false,
   "attributes": {
     "frontmatter": {
       "title": {
-        "string": "モバイルセッションリプレイの設定と構成"
+        "ast-str-8bc75e14-52d8-47b9-8b37-7a1bd7f97881": {
+          "string": "モバイルセッションリプレイの設定と構成"
+        }
       },
       "description": {
-        "string": "モバイルセッションリプレイの設定と構成"
-      },
-      "further_reading": [
-        {
-          "link": "/product_analytics/session_replay/mobile",
-          "text": {
-            "string": "Mobile Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay/mobile/app_performance",
-          "text": {
-            "string": "How Mobile Session Replay Impacts App Performance"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay/mobile/privacy_options",
-          "text": {
-            "string": "Mobile Session Replay Privacy Options"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay/mobile/troubleshooting",
-          "text": {
-            "string": "Troubleshoot Mobile Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay",
-          "text": {
-            "string": "Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
+        "ast-str-c80d6782-5698-497d-b45e-0051e109783e": {
+          "string": "モバイルセッションリプレイの設定と構成"
         }
-      ]
-    }
-  },
-  "children": [
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        25,
-        26
-      ],
-      "inline": false,
-      "attributes": {
-        "file": "rum/session_replay/setup_and_configuration.mdoc.md"
       },
-      "children": [],
-      "type": "tag",
-      "tag": "partial",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "file",
-          "value": "rum/session_replay/setup_and_configuration.mdoc.md"
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 25
-        },
-        "end": {
-          "line": 26
+      "further_reading": {
+        "translationListData": {
+          "0": {
+            "link": "/product_analytics/session_replay/mobile",
+            "text": {
+              "ast-str-e7d7a9db-512d-40eb-872f-1f1263d7e130": {
+                "string": "Mobile Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-482967ed-742a-4cc5-bf08-a90707e49069": {
+                "string": "ドキュメント"
+              }
+            }
+          },
+          "1": {
+            "link": "/product_analytics/session_replay/mobile/app_performance",
+            "text": {
+              "ast-str-d01e28f2-29f5-49e3-8163-621edb676c8a": {
+                "string": "モバイルセッションリプレイがアプリのパフォーマンスに与える影響"
+              }
+            },
+            "tag": {
+              "ast-str-a671d16d-fcc1-4d02-8c77-fcee81e7b188": {
+                "string": "ドキュメント"
+              }
+            }
+          },
+          "2": {
+            "link": "/product_analytics/session_replay/mobile/privacy_options",
+            "text": {
+              "ast-str-2c7c52b1-10f5-4302-a472-80f0d709b31e": {
+                "string": "モバイルセッションリプレイのプライバシーオプション"
+              }
+            },
+            "tag": {
+              "ast-str-404bcf03-12a3-4f75-9b2b-b99828680e18": {
+                "string": "ドキュメント"
+              }
+            }
+          },
+          "3": {
+            "link": "/product_analytics/session_replay/mobile/troubleshooting",
+            "text": {
+              "ast-str-4a42c626-16ea-4ea3-9e74-246746eb5068": {
+                "string": "モバイルセッションリプレイのトラブルシューティング"
+              }
+            },
+            "tag": {
+              "ast-str-5caa4848-2d0a-4973-a3be-f36a6d1ebad5": {
+                "string": "ドキュメント"
+              }
+            }
+          },
+          "4": {
+            "link": "/product_analytics/session_replay",
+            "text": {
+              "ast-str-606f1237-9b7f-453c-8ae7-49bbc3d2b75f": {
+                "string": "Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-b4299a90-07c0-4070-bf12-df4a07c7de82": {
+                "string": "ドキュメント"
+              }
+            }
+          }
         }
       }
     }
-  ],
+  },
+  "children": {
+    "translationListData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+        },
+        "children": {
+          "translationListData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "translationListData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
+      }
+    }
+  },
   "type": "document",
-  "annotations": [],
+  "annotations": {
+    "translationListData": {}
+  },
   "slots": {}
 }

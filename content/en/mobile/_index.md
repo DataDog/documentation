@@ -157,9 +157,10 @@ The Notification Center lists all push notifications received so that notificati
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
-**Notes**: 
+**Note**: 
 - To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
 - Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
+- Not all widget types are available, which means they do not display data on the mobile app. This includes Topology Map, List Widget (all data sources), Legacy treemap widget, and SLO Summary widget.
 
 ## Monitors
 
