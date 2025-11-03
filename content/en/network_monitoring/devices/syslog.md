@@ -13,8 +13,6 @@ further_reading:
 
 Network Device Monitoring (NDM) uses Syslog to provide visibility into the health and performance of your network infrastructure. By integrating your network devices with Datadog through Syslog, you can collect and analyze log data, monitor device behavior, troubleshoot issues, and maintain network stability.
 
-This page outlines how to configure your network devices to send Syslog data to Datadog and how to use this data within NDM.
-
 {{< img src="network_device_monitoring/syslog/ndm_syslog.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
 
 ## Prerequisites
@@ -67,11 +65,11 @@ This page outlines how to configure your network devices to send Syslog data to 
 
 1. Ensure the following settings are enabled in your `C:\ProgramData\Datadog\datadog.yaml` file:
 
-```
-logs_enabled: true # enable logs collection
-logs_config:
-  use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
-```
+   ```
+   logs_enabled: true # enable logs collection
+   logs_config:
+   use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
+   ```
 
 2. Create a Syslog listener configuration:
 
@@ -101,15 +99,15 @@ logs_config:
 
 1. Ensure the following settings are enabled in your `/etc/datadog-agent/datadog.yaml` file in your Docker volume:
 
-```yaml
-logs_enabled: true # enable logs collection
-logs_config:
-  use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
-```
+   ```yaml
+   logs_enabled: true # enable logs collection
+   logs_config:
+   use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
+   ```
 
 2. Create a Syslog listener configuration:
 
-   - Mount a a volume to `/etc/datadog-agent/conf.d/` and create a directory called `syslog.d/`.
+   - Mount a volume to `/etc/datadog-agent/conf.d/` and create a directory called `syslog.d/`.
    - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
 
    ```yaml
@@ -133,18 +131,68 @@ logs_config:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Log parsing
+
+The above steps send your Syslog data to Datadog. To ensure NDM correctly associates these logs with your monitored network devices, set up a custom log parsing pipeline that populates the `syslog_ip` tag with each device's source IP address.
+
+**Note**: NDM queries for logs where `source:syslog` **AND** the `syslog_ip` tag matches one of the IPs of the device.
+
+Choose the appropriate scenario based on your network configuration:
+
+#### Scenario A: Direct connection (no proxy)
+
+When network devices send Syslog messages directly to the Datadog Agent, the Agent's `use_sourcehost_tag: true` setting automatically adds a `source_host` tag containing the sender's IP address.
+
+To create the `syslog_ip` tag, remap the `source_host` tag using a Log Processing Pipeline:
+
+1. In Datadog, navigate to **[Logs > Log Configuration > Pipelines][3]**.
+2. Create a pipeline or select an existing one.
+3. Add a **Log Remapper** processor with the following configuration:
+   * **Source of the tag:** `source_host`
+   * **Target tag:** `syslog_ip`
+
+#### Scenario B: Using a Syslog proxy
+
+When network devices send Syslog through a proxy (such as rsyslog or syslog-ng), the `source_host` tag reflects the proxy's IP address instead of the original device's IP.
+
+To create the `syslog_ip` tag:
+
+1. **Configure the proxy** to include the original source IP in the Syslog message payload.
+   * **rsyslog example:** Use a template like `$template CustomFormat,"%fromhost-ip% %msg%\n"` to prepend the source IP to each message.
+2. **Create a Log Processing Pipeline** to extract and map the IP address:
+   1. In Datadog, navigate to [**Logs > Log Configuration > Pipelines**][3].
+   2. Create a pipeline or select an existing one.
+   3. Add a **Grok Parser** processor to extract the IP address from the message into a temporary attribute (for example, `@temp_ip`).
+   4. Add a **Log Remapper** processor with the following configuration:
+      * **Source of the attribute:** `@temp_ip` (or your chosen attribute name)
+      * **Target tag:** `syslog_ip`
+      * **Preserve source attribute:** Uncheck this option to remove the temporary attribute
+
+For detailed instructions, see the [Datadog Log Pipelines documentation][2].
+
 ## Verify Syslog messages
 
 After your network devices are configured and the Datadog Agent is running, you can verify that Syslog data is being collected and sent to Datadog:
 
-1. **Navigate to the Log Explorer** in your Datadog account.  
-2. **Filter by `source:syslog`** (or whatever source you specified in your `conf.yaml` file).  
-3. You should see your network device Syslog messages appearing in the Log Explorer.  
+1. Navigate to the **[Log Explorer][4]** in your Datadog account.
+2. **Filter by `source:syslog`** (or whatever source you specified in your `conf.yaml` file).
+3. You should see your network device Syslog messages appearing in the Log Explorer.
 4. **Verify `syslog_ip`:** Ensure that the `syslog_ip` tag is present and correctly populated with the network device's IP address for each relevant log entry.
 
+   {{< img src="network_device_monitoring/syslog/log_syslog_ip.png" alt="Log explorer, filtering by `source:syslog`, highlighting the `syslog_ip` tag on the side panel." style="width:100%;" >}}
+
+5. Optionally, navigate to [**Infrastructure > Network Devices**][5]. </br>
+    a. Select a device that is configured to send Syslog messages. </br>
+    b. In the device side panel, click the **Syslog** tab to view your Syslog messages:
+
+    {{< img src="network_device_monitoring/syslog/syslog_tab.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/
+[2]: /logs/log_configuration/pipelines/
+[3]: https://app.datadoghq.com/logs/pipelines
+[4]: https://app.datadoghq.com/logs
+[5]: https://app.datadoghq.com/devices
