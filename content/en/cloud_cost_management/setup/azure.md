@@ -141,9 +141,8 @@ To resolve this, add Datadog's webhook IPs to your network allowlist by visiting
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Getting historical data
-Datadog automatically ingests up to 15 months of available historical cost data.
 
-Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
