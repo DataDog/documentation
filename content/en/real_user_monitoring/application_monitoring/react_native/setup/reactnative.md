@@ -423,7 +423,7 @@ const config = new DatadogProviderConfiguration(
 
 ## New architecture support
 
-The [React Native new architecture][11] is supported by the React Native SDK in version `>=1.8.0`.
+The [React Native new architecture][14] is supported by the React Native SDK in version `>=1.8.0`.
 
 The minimum supported React Native version for the new architecture is `0.71`.
 
@@ -476,3 +476,4 @@ end
 [11]: https://source.android.com/security/app-sandbox
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
+[14]: https://reactnative.dev/architecture/landing-page

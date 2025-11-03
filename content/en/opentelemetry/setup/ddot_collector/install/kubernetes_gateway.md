@@ -252,6 +252,8 @@ otelAgentGateway:
           exporters: [datadog]
 ```
 
+{{% otel-infraattributes-prereq %}}
+
 <div class="alert alert-info">
 If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name becomes <code><fullnameOverride>-otel-agent-gateway</code>. The ports defined in <code>otelAgentGateway.ports</code> are exposed on this service. Ensure these ports match the OTLP receiver configuration in the gateway and the OTLP exporter configuration in the DaemonSet.
 </div>

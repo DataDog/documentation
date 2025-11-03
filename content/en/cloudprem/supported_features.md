@@ -24,6 +24,6 @@ The following log features are already supported:
 
 ## Unsupported features
 
-Features like Bits AI, LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery, and search on multiple indexes are not supported.
+Features like LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery, and search on multiple indexes are not supported.
 
 [1]: /api/latest/logs-restriction-queries/

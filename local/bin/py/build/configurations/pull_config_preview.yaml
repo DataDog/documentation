@@ -35,18 +35,6 @@
     - org_name: DataDog
 
       repos:
-      - repo_name: dd-go
-
-        contents:
-
-        - action: npm-integrations
-          branch: prod
-          globs:
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
-          - networks/model/domain/gcp_services.go
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
-          - networks/model/domain/azure_services.go
-
       - repo_name: ansible-datadog
         contents:
 
@@ -245,6 +233,16 @@
               aliases:
                 - /serverless/datadog_lambda_library/
                 - /serverless/serverless_integrations/cli/
+        - action: pull-and-push-file
+          branch: master
+          globs:
+          - 'packages/plugin-cloud-run/README.md'
+          options:
+            dest_path: '/serverless/libraries_integrations/'
+            file_name: 'cli-cloud-run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-cloud-run/README.md"]
+              title: Datadog Serverless CLI for Cloud Run
         - action: pull-and-push-file
           branch: master
           globs:
