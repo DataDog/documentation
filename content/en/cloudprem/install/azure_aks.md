@@ -51,7 +51,7 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
    kubectl create namespace cloudprem
    ```
 
-   **Note**: You can set a default namespace for your current context to avoid typing `-n <NAMESPACE_NAME>` with every command:
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
    kubectl config set-context --current --namespace=cloudprem
    ```

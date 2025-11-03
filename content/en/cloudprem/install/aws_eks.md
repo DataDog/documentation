@@ -80,16 +80,24 @@ echo ""
 ## Install the CloudPrem Helm chart
 
 1. Add and update the Datadog Helm repository:
-
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    ```
 
 1. Create a Kubernetes namespace for the chart:
-
    ```shell
    kubectl create namespace <NAMESPACE_NAME>
+   ```
+
+   For example, to create a `cloudprem` namespace:
+   ```shell
+   kubectl create namespace cloudprem
+   ```
+
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
+   ```shell
+   kubectl config set-context --current --namespace=cloudprem
    ```
 
 1. Store your Datadog API key as a Kubernetes secret:
@@ -101,7 +109,6 @@ echo ""
    ```
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
-
    ```shell
    kubectl create secret generic cloudprem-metastore-uri \
    -n <NAMESPACE_NAME> \
