@@ -1,5 +1,6 @@
 ---
 title: Search RUM Events
+description: "Search and filter RUM events by type, attributes, and full-text queries to analyze user sessions, performance, and errors."
 further_reading:
 - link: "/real_user_monitoring/explorer/group/"
   tag: "Documentation"
@@ -92,7 +93,7 @@ For example, if your facet name is **url** and you want to filter on the **url**
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/android/data_collected/
 [3]: /real_user_monitoring/ios/data_collected/
 [4]: /real_user_monitoring/reactnative/

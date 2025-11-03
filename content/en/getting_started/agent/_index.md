@@ -1,9 +1,10 @@
 ---
 title: Getting Started with the Agent
+description: Guide to installing and configuring the Datadog Agent to collect system-level metrics, events, and logs from hosts.
 further_reading:
-    - link: '/agent/basic_agent_usage/'
-      tag: 'Documentation'
-      text: 'Basic Agent Usage'
+    - link: "agent/"
+      tag: "Documentation"
+      text: "The Datadog Agent"
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to power up your Infrastructure monitoring'
@@ -12,7 +13,7 @@ further_reading:
       text: 'Why should I install the Datadog Agent on my cloud instances?'
 ---
 
-This guide provides an introduction to the Agent and how you can use it to send system level metrics to the Datadog platform. It walks through an example Agent installation on Ubuntu. It covers:
+This guide provides an introduction to the Agent and how you can use it to send system-level metrics to the Datadog platform. It walks through an example Agent installation on Ubuntu. It covers:
 
   - Agent installation
   - Verifying that the Agent is running
@@ -25,7 +26,7 @@ This guide provides an introduction to the Agent and how you can use it to send 
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. It can run on your local hosts (Windows, MacOS), containerized environments (Docker, Kubernetes), and in on-premises data centers. You can install and configure it using configuration management tools (Chef, Puppet, Ansible).
 
-The Agent is able to collect 75 to 100 system level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
+The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
 ### Agent overhead
 
@@ -83,7 +84,7 @@ See the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the 
 
 The Agent needs to be installed to send data from any one of the many Agent based Integrations. The Agent is not necessarily required to forward data to the Datadog Platform, for example, you can send Logs and Metrics through the Datadog API. However, the Agent is the recommended method to forward your data to the Datadog Platform.
 
-The Agent collects host data every 15 seconds to provide an accurate understanding of what is happening across your environments. As previously mentioned in the [Checks][14] section, the Agent has several checks enabled which collect over 50 default metrics to provide greater insight on system level data.
+The Agent collects host data every 15 seconds to provide an accurate understanding of what is happening across your environments. As previously mentioned in the [Checks][14] section, the Agent has several checks enabled which collect over 50 default metrics to provide greater insight on system-level data.
 
 ## Setup
 
@@ -95,7 +96,7 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 3. Have the Datadog UI open.
 
-**Note**: This walkthrough uses the Ubuntu operating system. See the [Basic Agent Usage][17] page for a full list of supported platforms.
+**Note**: This walkthrough uses the Ubuntu operating system. See the [Supported Platforms][17] page for a full list of supported platforms.
 
 ### Installation
 
@@ -149,7 +150,7 @@ Datadog agent (v. 7.XX.X) started on <Hostname>
 The Agent is set up to provide the following service checks:
 
   - `datadog.agent.up`: Returns `OK` if the Agent connects to Datadog.
-    <div class="alert alert-warning">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
+    <div class="alert alert-danger">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
   - `datadog.agent.check_status`: Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 
@@ -179,9 +180,9 @@ Tags add an additional layer of metadata to your metrics and events. They allow 
 
 For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `team:alpha`. See [Getting Started with Tags][24] to learn more about tagging your data.
 
-1. Locate your Agent's [main configuration file][25]. For Ubuntu, the file locations is `/etc/datadog-agent/datadog.yaml`.
+1. Locate your Agent's [main configuration file][25]. For Ubuntu, the file location is `/etc/datadog-agent/datadog.yaml`.
 
-2. In the `datadog.yaml` file, locate the `tags` parameter. Host level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
+2. In the `datadog.yaml` file, locate the `tags` parameter. Host-level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
 
    ```yaml
    ## @param tags  - list of key:value elements - optional
@@ -292,7 +293,7 @@ For help troubleshooting the Agent:
 [14]: /getting_started/agent/#checks
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
-[17]: /agent/basic_agent_usage/?tab=agentv6v7
+[17]: /agent/supported_platforms
 [18]: https://app.datadoghq.com/account/settings/agent/latest
 [19]: /agent/configuration/agent-commands/#agent-status-and-information
 [20]: https://app.datadoghq.com/event/explorer

@@ -14,10 +14,6 @@ further_reading:
 title: GitLab パイプラインでトレースを設定する
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitLab][19] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling you to deploy applications quickly and securely.
@@ -95,7 +91,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-warning"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
+<div class="alert alert-danger"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
@@ -289,7 +285,7 @@ For more information about processing job logs collected from the GitLab integra
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-warning">Datadog は、事前に署名された期間限定の URL を使って、GitLab ログの<a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">オブジェクトストレージ</a>からログファイルを直接ダウンロードします。
+<div class="alert alert-danger">Datadog は、事前に署名された期間限定の URL を使って、GitLab ログの<a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">オブジェクトストレージ</a>からログファイルを直接ダウンロードします。
 これは、Datadog サーバーがストレージにアクセスするためには、ストレージにネットワークの制限がかかっていてはいけないことを意味します。
 <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">エンドポイント</a>が設定されている場合は、一般にアクセス可能な URL に解決される必要があります。</div>
 
@@ -299,7 +295,7 @@ For more information about processing job logs collected from the GitLab integra
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-<div class="alert alert-warning">Datadog は、事前に署名された期間限定の URL を使って、GitLab ログの<a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">オブジェクトストレージ</a>からログファイルを直接ダウンロードします。
+<div class="alert alert-danger">Datadog は、事前に署名された期間限定の URL を使って、GitLab ログの<a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">オブジェクトストレージ</a>からログファイルを直接ダウンロードします。
 これは、Datadog サーバーがストレージにアクセスするためには、ストレージにネットワークの制限がかかっていてはいけないことを意味します。
 <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">エンドポイント</a>が設定されている場合は、一般にアクセス可能な URL に解決される必要があります。</div>
 

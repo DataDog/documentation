@@ -80,7 +80,7 @@ tile:
 
 ## Información general
 
-[OceanBase Database][1] es una base de datos relacional distribuida. OceanBase Database adopta una arquitectura integrada desarrollada de forma independiente, que engloba tanto la escalabilidad de una arquitectura distribuida como la ventaja de rendimiento de una arquitectura centralizada. 
+[OceanBase Database][1] es una base de datos relacional distribuida. OceanBase Database adopta una arquitectura integrada desarrollada de forma independiente, que engloba tanto la escalabilidad de una arquitectura distribuida como la ventaja de rendimiento de una arquitectura centralizada.
 
 [OceanBase Cloud][2] ofrece servicios de base de datos totalmente gestionados con escalabilidad elástica, rendimiento ultrarrápido y alta compatibilidad en la infraestructura global en la nube.
 
@@ -89,11 +89,11 @@ Con la integración de Oceanbase Cloud, los usuarios pueden recopilar diversos d
 ## Configuración
 
 Para configurar la integración de OceanBase Cloud Datadog para tu clúster, consulta los siguientes pasos
-1. Inicia sesión en la consola de Datadog.    
-    a. Elige el sitio adecuado en los [sitios de Datadog][3].    
+1. Inicia sesión en la consola de Datadog.
+    a. Elige el sitio adecuado en los [sitios de Datadog][3].
     b. Inicia sesión con tus credenciales de Dotadog.
 2. Accede a la consola de OceanBase Cloud utilizando tus credenciales de OceanBase Cloud, navega hasta la página [integraciones][4] y busca la integración de Datadog.
-3. Haz clic en Connect (Conectar). Se te redirigirá a la página de autorización de Datadog. Si no has iniciado sesión en Datadog antes de este paso, deberás seleccionar el sitio apropiado e iniciar sesión en la página de autorización abierta. 
+3. Haz clic en Connect (Conectar). Se te redirigirá a la página de autorización de Datadog. Si no has iniciado sesión en Datadog antes de este paso, deberás seleccionar el sitio apropiado e iniciar sesión en la página de autorización abierta.
 4. Haz clic en Authorize (Autorizar). Se te redirigirá de nuevo a la consola de OceanBase Cloud. Si la autorización se ha realizado correctamente, aparecerá un mensaje de notificación. Ponte en contacto con el soporte técnico de OceanBase Cloud si se produce un error.
 5. Busca OceanBase en la consola de Datadog y haz clic en Install (Instalar). Los datos de monitorización para tu instancia de OceanBase Cloud aparecerán en unos minutos en la página de dashboards de Datadog.
 
@@ -108,7 +108,7 @@ Además, asegúrate de que todas las claves de API asociadas a esta integración
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oceanbasecloud" >}}
+{{< get-metrics-from-git "oceanbase-cloud" >}}
 
 
 ### Checks de servicio

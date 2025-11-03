@@ -34,18 +34,99 @@ further_reading:
 
 ## Overview
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by accessing the relevant lines of your source code.
+Datadog's Source Code Integration allows you to connect your Git repositories to Datadog to enable various source code-related features across the Datadog platform. It allows debugging stack traces, slow profiles, and other issues by accessing the relevant lines of your source code.
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
+## Connect your Git repositories to Datadog
 
-## Setup
+To use most source code-related features, you must connect your Git repositories to Datadog. By default, when synchronizing your repositories, Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
+
+### Source code management providers
+
+Datadog supports the following features for the following source code management (SCM) providers. See [Usage](#usage) for more details about each feature:
+
+| Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
+|---|---|---|---|---|
+| **Connect SaaS Instance** | Yes <br />(GitHub.com and GitHub Enterprise Cloud) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
+| **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed or Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center or Server)|
+| **Context Links** | Yes | Yes | Yes | Yes |
+| **Code Snippets** | Yes | Yes | Yes | No |
+| **PR Comments** | Yes | Yes | Yes | No |
+
+{{< tabs >}}
+{{% tab "GitHub (SaaS & On-Prem)" %}}
+
+<div class="alert alert-info">
+Repositories from GitHub instances are supported for GitHub.com, GitHub Enterprise Cloud (SaaS), and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
+</div>
+
+Install Datadog's [GitHub integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitHub repositories.
+
+[101]: https://docs.datadoghq.com/integrations/github/
+[102]: https://app.datadoghq.com/integrations/github/
+
+{{% /tab %}}
+{{% tab "GitLab (SaaS & On-Prem)" %}}
+
+<div class="alert alert-danger">
+Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+</div>
+
+Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
+
+[101]: https://www.datadoghq.com/product-preview/gitlab-source-code-integration/
+[102]: https://app.datadoghq.com/integrations/gitlab-source-code/
+
+{{% /tab %}}
+{{% tab "Azure DevOps (SaaS Only)" %}}
+
+<div class="alert alert-danger">
+Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
+</div>
+
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
+
+[101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
+[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+
+{{% /tab %}}
+{{% tab "Other SCM Providers" %}}
+
+<div class="alert alert-danger">
+Repositories on self-hosted instances or private URLs are not supported out-of-the-box. To enable this feature, <a href="/help">contact Support</a>.
+</div>
+
+If you are using any other SCM provider, you can still manually link telemetry with your source code. To do so, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command. `datadog-ci v2.10.0` or later is required.
+
+When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+
+Run this command for every commit that you need to be synchronized with Datadog.
+
+### Validation
+
+To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+
+You can expect to see the following output:
+
+```
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
+180 tracked file paths will be reported.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
+```
+
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
+{{% /tab %}}
+{{< /tabs >}}
+
+## Tag your APM Telemetry with Git information
 
 Datadog Agent v7.35.0 or later is required.
 
 If you have [APM][6] set up already, navigate to [**Integrations** > **Link Source Code**][7] and configure the source code integration for your backend services.
-
-## Tag your telemetry with Git information
 
 Your telemetry must be tagged with Git information that ties the running application version with a particular repository and commit.
 
@@ -230,31 +311,45 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 #### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have several options: using a plugin if your application is bundled, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-##### Option 1: Docker
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Docker
 
 {{% sci-docker %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have several options depending on your serverless application's setup.
 
-##### Option 1: Datadog Tooling
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Datadog Tooling
 
 {{% sci-dd-serverless %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+For host-based environments, you have two options based on your build and deploy configuration.
+
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -376,112 +471,9 @@ If your build process is executed in CI within a Docker container, perform the f
 
 For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
 
-## Synchronize your repository metadata
-
-To link your telemetry with source code, your repository metadata must be synchronized to Datadog. Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
-
-### Git providers
-
-The source code integration supports the following Git providers:
-
-| Provider | Context Links Support | Code Snippets Support |
-|---|---|---|
-| GitHub SaaS (github.com) | Yes | Yes |
-| GitHub Enterprise Server | Yes | Yes |
-| GitLab SaaS (gitlab.com) | Yes | Yes |
-| GitLab self-managed | Yes | Yes (closed Preview) |
-| Bitbucket | Yes | No |
-| Azure DevOps Services | Yes | No |
-| Azure DevOps Server | Yes | No |
-
-{{< tabs >}}
-{{% tab "GitHub" %}}
-
-Install Datadog's [GitHub integration][101] on the [GitHub integration tile][102] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
-
-Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**App and API Protection Monitoring**][107].
-
-[101]: https://docs.datadoghq.com/integrations/github/
-[102]: https://app.datadoghq.com/integrations/github/
-[103]: /logs/error_tracking/backend/?tab=serilog#setup
-[104]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
-[105]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[106]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
-[107]: /security/application_security/
-
-{{% /tab %}}
-{{% tab "GitLab" %}}
-
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
-
-To link telemetry with your source code, either install the GitLab integration (which requires joining the closed Preview above) or upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. `datadog-ci v2.10.0` or later is required.
-
-When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
-
-Run this command for every commit that you need to be synchronized with Datadog.
-
-If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**App and API Protection Monitoring**][7].
-
-### Validation
-
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
-
-You can expect to see the following output:
-
-```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
-180 tracked file paths will be reported.
-Successfully uploaded tracked files in 1.358 seconds.
-Syncing GitDB...
-Successfully synced git DB in 3.579 seconds.
-✅ Uploaded in 5.207 seconds.
-```
-
-[1]: https://gitlab.com
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[3]: /logs/error_tracking/backend/?tab=serilog#setup
-[4]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
-[5]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[6]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
-[7]: /security/application_security/
-
-{{% /tab %}}
-{{% tab "Other Git Providers" %}}
-
-<div class="alert alert-warning">
-Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
-</div>
-
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command. `datadog-ci v2.10.0` or later is required.
-
-When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
-
-Run this command for every commit that you need to be synchronized with Datadog.
-
-### Validation
-
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
-
-You can expect to see the following output:
-
-```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
-180 tracked file paths will be reported.
-Successfully uploaded tracked files in 1.358 seconds.
-Syncing GitDB...
-Successfully synced git DB in 3.579 seconds.
-✅ Uploaded in 5.207 seconds.
-```
-
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Usage
 
-### Links to Git providers
+### Links to Git providers & code snippets
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
@@ -489,11 +481,9 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 1. Navigate to [**APM** > **Error Tracking**][2].
 2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Under **Latest Event**, click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+3. Under **Latest Event**, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
-
-If you're using the GitHub integration, or if you're hosting your repositories on the GitLab SaaS instance (gitlab.com), click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace.
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
@@ -501,24 +491,20 @@ If you're using the GitHub integration, or if you're hosting your repositories o
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see a source code preview for profile frames in the [Continuous Profiler][1].
+You can see source code previews directly in [Continuous Profiler][1] flame graphs.
 
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph.
-3. If needed, press `Opt` or `Alt` to enable the preview.
+1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
+2. Select the service you want to investigate.
+3. Hover your cursor over a method in the flame graph.
+4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
+5. If prompted, click **Connect to preview**. The first time you do this for a repository, you will be redirected to GitHub to **Authorize** the Datadog application.
+6. After authorizing, the source code preview appears in the tooltip.
+7. Click the file link in the tooltip to open the full source code file in your repository.
 
-{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
-
-You can also see links from profile frames to their source repository. This is supported for profiles broken down by line, method, or file.
-
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
-
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
@@ -526,9 +512,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 
 1. Navigate to [**Infrastructure** > **Serverless**][101] and click on the **AWS** tab.
 2. Click on a Lambda function and click the **Open Trace** button for an invocation with an associated stack trace.
-3. Click **View Code** to open the error in its source code repository.
-
-If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the Lambda function's stack trace.
+3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
 
@@ -540,7 +524,7 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 You can see links from failed test runs to their source repository in **Test Optimization**.
 
 1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
-2. Click the **View on GitHub** button to open the test in its source code repository.
+2. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
 
@@ -555,7 +539,7 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
 1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
-2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, click the **View Code** button to open the flagged code in its source code repository.
+2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click **Connect to preview**. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
@@ -571,9 +555,7 @@ You can see links from errors in your security signals' associated stack traces 
 
 1. Navigate to [**Security** > **App and API Protection**][101] and select a security signal.
 2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
-3. Click **View Code** to open the error in its source code repository.
-
-If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the security signal's stack trace.
+3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
@@ -606,6 +588,59 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 {{% /tab %}}
 {{< /tabs >}}
 
+### PR comments
+
+<div class="alert alert-warning">
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
+
+PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation. 
+
+There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
+* One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
+* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
+
+{{< tabs >}}
+{{% tab "CI Visibility" %}}
+PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
+
+{{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
+
+To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][101].
+
+[101]: https://app.datadoghq.com/ci/settings/ci-visibility
+
+{{% /tab %}}
+{{% tab "Code Security" %}}
+
+PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
+
+1. A single comment summarizing the new violations detected in your pull request.
+
+{{< img src="integrations/guide/source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
+
+2. Inline comments for each violation detected in your pull request placed directly on the lines of code that triggered the violation in the diff of the pull request.
+
+{{< img src="integrations/guide/source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
+
+To disable PR comments for Code Security, go to the [Code Security Repository Settings][101].
+
+[101]: https://app.datadoghq.com/security/configuration/code-security/settings
+
+{{% /tab %}}
+{{% tab "Test Optimization" %}}
+
+PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
+
+{{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
+
+To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][101].
+
+[101]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -618,3 +653,4 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
 [9]: /tracing/trace_collection/dd_libraries/
+[10]: #source-code-management-providers

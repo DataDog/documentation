@@ -44,7 +44,7 @@ For example, to verify an .msi file named `ddagent-cli-7.49.1.msi`:
 Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
 {{< /code-block >}}
 
-If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update. 
+If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update.
 
 ## Information security
 
@@ -92,7 +92,9 @@ For more information, see the [Secrets Management][14] documentation.
 
 {{< site-region region="gov" >}}
 
-Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake.
+
+To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
@@ -111,7 +113,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 [1]: https://docs.datadoghq.com/agent/configuration/fips-compliance?tab=hostorvm&site=gov
 {{< /site-region >}}
-{{< site-region region="us,us3,us5,eu,ap1" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
 
 You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
@@ -161,6 +163,7 @@ agent diagnose show-metadata agent-telemetry
 | logs.dropped                                | Total number of logs dropped                                                                                           |
 | logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
+| logs.truncated                              | Total number of logs truncated by the Agent                                                                            |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
@@ -185,9 +188,11 @@ agent diagnose show-metadata agent-telemetry
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
 | **Events**                                  |                                                                                                                        |
-| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled)       |
+| agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
+| **GPU Monitoring**                          |                                                                                                                        |
+| gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

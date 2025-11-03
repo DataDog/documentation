@@ -72,6 +72,7 @@ To send the demo's telemetry data to Datadog you need to add three components to
 - `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
 - `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
 - `Datadog Exporter` is responsible for exporting Traces, Metrics and Logs to Datadog.
+- `Datadog Extension` is an `optional` component which allows you to view OpenTelemetry Collector configuration within infrastructure monitoring. (Read more at [Datadog Extension][13]).
 
 Complete the following steps to configure these three components.
 
@@ -84,23 +85,32 @@ Complete the following steps to configure these three components.
 
     ```yaml
     services:
-      otelcol:
+      otel-collector:
         command:
           - "--config=/etc/otelcol-config.yml"
           - "--config=/etc/otelcol-config-extras.yml"
-          - "--feature-gates=exporter.datadogexporter.UseLogsAgentExporter"
+          - "--feature-gates=datadog.EnableOperationAndResourceNameV2"
         environment:
           - DD_SITE_PARAMETER=<Your API Site>
           - DD_API_KEY=<Your API Key>
     ```
 
-3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` and add the following to the file:
+3. To configure the OpenTelemetry Collector, open `src/otel-collector/otelcol-config-extras.yml` and add the following to the file:
 
     ```yaml
+    extensions:
+      datadog/extension:
+        api:
+          site: ${env:DD_SITE_PARAMETER}
+          key: ${env:DD_API_KEY}
+        http:
+          endpoint: "localhost:9875"
+          path: "/metadata"
+
     exporters:
       datadog:
         traces:
-          span_name_as_resource_name: true
+          compute_stats_by_span_kind: true
           trace_buffer: 500
         hostname: "otel-collector-docker"
         api:
@@ -117,26 +127,27 @@ Complete the following steps to configure these three components.
     connectors:
       datadog/connector:
         traces:
-          span_name_as_resource_name: true
+          compute_stats_by_span_kind: true
 
     service:
+      extensions: [datadog/extension]
       pipelines:
         traces:
-          processors: [resource, batch]
+          processors: [resource, resourcedetection, memory_limiter, transform, batch]
           exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
         metrics:
-          receivers: [docker_stats, httpcheck/frontendproxy, otlp, prometheus, redis, spanmetrics, datadog/connector]
-          processors: [resource, batch]
+          receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
+          processors: [resource, resourcedetection, memory_limiter, transform, batch]
           exporters: [otlphttp/prometheus, debug, datadog]
         logs:
-          processors: [resource, batch]
+          processors: [resource, resourcedetection, memory_limiter, transform, batch]
           exporters: [opensearch, debug, datadog]
     ```
 
     By default, the collector in the demo application merges the configuration from two files:
 
-    - `src/otelcollector/otelcol-config.yml`: contains the default configuration for the collector.
-    - `src/otelcollector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
+    - `src/otel-collector/otelcol-config.yml`: contains the default configuration for the collector.
+    - `src/otel-collector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
 
     <div class="alert alert-info">
     When merging YAML values, objects are merged and arrays are replaced.
@@ -171,15 +182,23 @@ Complete the following steps to configure these three components.
         - secretRef:
             name: dd-secrets
       config:
+        extensions:
+          datadog/extension:
+            api:
+              site: ${env:DD_SITE_PARAMETER}
+              key: ${env:DD_API_KEY}
+            http:
+              endpoint: "localhost:9875"
+              path: "/metadata"
         exporters:
           datadog:
             traces:
-              span_name_as_resource_name: true
+              compute_stats_by_span_kind: true
               trace_buffer: 500
             hostname: "otelcol-helm"
             api:
-              site: ${DD_SITE_PARAMETER}
-              key: ${DD_API_KEY}
+              site: ${env:DD_SITE_PARAMETER}
+              key: ${env:DD_API_KEY}
 
         processors:
           resource:
@@ -191,19 +210,20 @@ Complete the following steps to configure these three components.
         connectors:
           datadog/connector:
             traces:
-              span_name_as_resource_name: true
+              compute_stats_by_span_kind: true
 
         service:
+          extensions: [datadog/extension]
           pipelines:
             traces:
-              processors: [resource, batch]
+              processors: [resource, resourcedetection, memory_limiter, transform, batch]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
-              receivers: [httpcheck/frontend-proxy, otlp, redis, spanmetrics, datadog/connector]
-              processors: [resource, batch]
+              receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
+              processors: [resource, resourcedetection, memory_limiter, transform, batch]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
-              processors: [resource, batch]
+              processors: [resource, resourcedetection, memory_limiter, transform, batch]
               exporters: [opensearch, debug, datadog]
     ```
 
@@ -297,7 +317,7 @@ View all services that are part of the OTel Demo:
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
 
-3. Select the **List** view, then select a service to view a performance summary in the side panel.
+3. Select the **Catalog** view, then select a service to view a performance summary in the side panel.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
 
@@ -311,7 +331,7 @@ Explore traces received from the OTel Demo:
 
 2. Select an indexed span to view the full trace details for this transaction.
 
-{{< img src="/getting_started/opentelemetry/otel_demo/trace_flamegraph.png" alt="Trace view with all spans belonging to that specific transaction" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/trace_waterfall.png" alt="Trace view with all spans belonging to that specific transaction" style="width:90%;" >}}
 
 3. Navigate through the tabs to view additional details:
    - Infrastructure metrics for the services reporting Host Metrics.
@@ -340,6 +360,17 @@ The OpenTelemetry Demo includes a feature flag engine for simulating error scena
 
 {{< img src="/getting_started/opentelemetry/otel_demo/error_tracking.png" alt="Error tracking view showing error PaymentService Fail Feature Flag Enabled" style="width:90%;" >}}
 
+### OpenTelemetry Collector Configuration
+
+The Datadog Extension allows you to view OpenTelemetry Collector configuration within Datadog on either one of the following pages:
+
+- [Infrastructure List][14].
+- [Resource Catalog][15].
+
+When selecting the hostname where the Collector is running, you can visualize its full configuration:
+
+{{< img src="/getting_started/opentelemetry/otel_demo/collector_full_config.png" alt="OpenTelemetry Collector configuration rendered within Datadog" style="width:90%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -351,3 +382,6 @@ The OpenTelemetry Demo includes a feature flag engine for simulating error scena
 [10]: https://opentelemetry.io/docs/demo/#language-feature-reference
 [11]: https://app.datadoghq.com/services
 [12]: http://localhost:8080/feature
+[13]: /opentelemetry/integrations/datadog_extension/
+[14]: https://app.datadoghq.com/infrastructure
+[15]: https://app.datadoghq.com/infrastructure/catalog

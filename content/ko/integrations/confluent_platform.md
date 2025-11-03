@@ -167,7 +167,7 @@ _에이전트 버전 > 6.0에서 사용 가능_
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "confluent_platform" >}}
+{{< get-metrics-from-git "confluent-platform" >}}
 
 
 ### 이벤트
@@ -175,7 +175,7 @@ _에이전트 버전 > 6.0에서 사용 가능_
 Confluent Platform 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "confluent_platform" >}}
+{{< get-service-checks-from-git "confluent-platform" >}}
 
 
 ## 트러블슈팅

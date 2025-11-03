@@ -22,7 +22,7 @@ title: Extensión de Datadog para Visual Studio Code
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     La extensión de Datadog para Visual Studio Code no es compatible con el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}
@@ -41,19 +41,19 @@ Contiene varias características, incluidas:
   - Informes de [Application Vulnerability Management][11]
   - [Flaky Tests][12] detectadas por CI Visibility
 
-- **View in VS Code**](#view-in-vs-code) para ir directamente de tus referencias de archivo en la plataforma de Datadog a tus archivos fuente.
+- [**View in VS Code**](#view-in-vs-code) para ir directamente de tus referencias de archivo en la plataforma de Datadog a tus archivos fuente.
 
 - [**Navegación de logs**](#logs-navigation) te permite buscar logs desde tu código.
 
 - [**Code Delta**](#code-delta) para asignar con mayor precisión los datos de observabilidad a tus archivos en VS Code.
 
-- [Análisis estático**](#static-analysis) para detectar y corregir problemas incluso antes de confirmar los cambios.
+- [**Análisis estático**](#static-analysis) para detectar y corregir problemas incluso antes de confirmar los cambios.
 
-- [Exception Replay**](#exception-replay) para ayudar a depurar tu código de producción.
+- [**Exception Replay**](#exception-replay) para ayudar a depurar tu código de producción.
 
 ## Requisitos
 
-- **Una cuenta de Datadog **: la extensión requiere una cuenta de Datadog (excepto cuando se utilizan las características de [Análisis estático][14]). Si es la primera vez que visitas Datadog, visita el [sitio web de Datadog][1] para obtener más información sobre las herramientas de observabilidad de Datadog y suscribirte a una versión de prueba gratuita.
+- **Una cuenta de Datadog**: la extensión requiere una cuenta de Datadog (excepto cuando se utilizan las características de [Análisis estático][14]). Si es la primera vez que visitas Datadog, visita el [sitio web de Datadog][1] para obtener más información sobre las herramientas de observabilidad de Datadog y suscribirte a una versión de prueba gratuita.
 
 - **VS Code Git**: la extensión funciona mejor cuando la integración de VS Code Git está activada. Asegúrate de que la integración está habilitada comprobando la configuración de `git.enabled`.
 

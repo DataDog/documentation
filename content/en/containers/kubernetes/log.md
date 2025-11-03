@@ -1,8 +1,12 @@
 ---
 title: Kubernetes log collection
+description: Configure log collection from containerized applications running on Kubernetes using the Datadog Agent
 aliases:
   - /agent/kubernetes/log
 further_reading:
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitor logs from Amazon EKS on Fargate with Datadog
 - link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
@@ -136,7 +140,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Warning for unprivileged installations</strong>
 <br/><br/>
 When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.
@@ -156,9 +160,11 @@ The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datad
 
 When "Container Collect All" is enabled you can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
 
-When "Container Collect All" is disabled (default) this is not necessary as you enable log configurations by Autodiscovery annotations or config files.
+When filtering out logs through methods like `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude`, the Agent ignores log collection regardless of explicitly defined log collection configurations in [Autodiscovery annotations][19] or [Autodiscovery configuration files][20].
 
-See [Container Discovery Management][8] to learn more.
+When "Container Collect All" is disabled (default) you don't need to add any filtering because everything is excluded by default. To include collection for only selected pods, you can enable the log configuration by [Autodiscovery annotations][19] or [Autodiscovery configuration files][20] for the desired pods.
+
+See [Container Discovery Management][8] to learn more about filtering.
 
 ### Tagging
 
@@ -390,7 +396,7 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IMAGE>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
+However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_NAME>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
@@ -541,3 +547,5 @@ datadog:
 [16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [17]: /containers/guide/template_variables/
 [18]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+[19]: /containers/kubernetes/log/?tab=helm#autodiscovery-annotations
+[20]: /containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files

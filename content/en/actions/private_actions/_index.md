@@ -1,5 +1,6 @@
 ---
 title: Private Actions Overview
+description: Allow workflows and apps to interact with private network services using Docker-based private action runners with secure authentication.
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/
@@ -14,21 +15,23 @@ further_reading:
 - link: "actions/private_actions/use_private_actions"
   tag: "Documentation"
   text: "Use Private Actions"
+- link: "actions/private_actions/run_script"
+  tag: "Documentation"
+  text: "Run a Script with the Private Action Runner"
 - link: "actions/private_actions/private_action_credentials"
   tag: "Documentation"
   text: "Handling Private Action Credentials"
 - link: "https://www.datadoghq.com/blog/private-actions/"
   tag: "Blog"
   text: "Remediate Kubernetes incidents faster using private actions in your apps and workflows"
+- link: "https://www.datadoghq.com/blog/pm-app-automation/"
+  tag: "Blog"
+  text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Private actions are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network using Docker or [Kubernetes][1] and pair the runner with a [connection][2].
 
-<div class="alert alert-warning">To install a private action runner, your organization must have <a href="/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration">Remote Configuration</a> enabled.</div>
+<div class="alert alert-danger">To install a private action runner, your organization must have <a href="/remote_configuration">Remote Configuration</a> enabled.</div>
 
 When you first start the runner, it generates a private key for authentication with Datadog's servers. This private key is never accessible by Datadog and ensures you exclusive access. Datadog uses a public key derived from the private key as the means to authenticate specific runners.
 

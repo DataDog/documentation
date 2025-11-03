@@ -161,7 +161,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `nginx_ingress_controller
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "nginx_ingress_controller" >}}
+{{< get-metrics-from-git "nginx-ingress-controller" >}}
 
 
 ### Eventos

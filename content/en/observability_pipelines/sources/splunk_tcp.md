@@ -15,6 +15,10 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/splunk_tcp %}}
 
+## Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_tcp %}}
+
 {{% observability_pipelines/log_source_configuration/splunk_tcp %}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/

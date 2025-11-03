@@ -9,35 +9,9 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed logs to different destinations.
+Use the Observability Pipelines Worker to send your processed logs to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific log fields. See [Template syntax](#template-syntax) for more information.
 
-Select and set up your destinations when you [set up a pipeline][1]. This is step 4 in the pipeline setup process:
-
-1. Navigate to [Observability Pipelines][2].
-1. Select a template.
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up your processors.
-1. Install the Observability Pipelines Worker.
-
-{{< whatsnext desc="Select a destination for more information:" >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
-    <!-- {{< nextlink href="observability_pipelines/destinations/amazon_security_lake" >}}Amazon Security Lake{{< /nextlink >}} -->
-    {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/crowdstrike_ng_siem" >}}CrowdStrike Next-Gen SIEM{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Logs{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/microsoft_sentinel" >}}Microsoft Sentinel{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog or syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/splunk_hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sumo_logic_hosted_collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
-{{< /whatsnext >}}
+Select a destination in the left navigation menu to see more information about it.
 
 ## Template syntax
 
@@ -62,7 +36,7 @@ The following table lists the destinations and fields that support template synt
 
 If you want to route logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
 
-{{< img src="observability_pipelines/amazon_s3_prefix.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
+{{< img src="observability_pipelines/amazon_s3_prefix_20250709.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
 
 ### Syntax
 
@@ -116,6 +90,6 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 
 {{% observability_pipelines/destination_batching %}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers

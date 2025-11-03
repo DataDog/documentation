@@ -1,10 +1,10 @@
 ---
 categories:
-- collaboration
+- コラボレーション
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
+description: Datadog のアラートとグラフをチームの Hipchat ルームに送信
 doc_link: https://docs.datadoghq.com/integrations/hipchat/
 draft: false
 git_integration_title: hipchat
@@ -16,7 +16,7 @@ is_public: true
 manifest_version: '1.0'
 name: hipchat
 public_title: Datadog-HipChat インテグレーション
-short_description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
+short_description: Datadog のアラートとグラフをチームの Hipchat ルームに送信
 version: '1.0'
 ---
 
@@ -32,7 +32,7 @@ Hipchat インテグレーションを使用して、Datadog は、HipChat ル�
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. Datadog 用に[新しいアクセストークンを作成します][1]。通知レベルのアクセスだけが必要です。
 2. キーをコピーして、[HipChat インテグレーションタイル][2]に入力します。
@@ -43,7 +43,7 @@ Hipchat インテグレーションを使用して、Datadog は、HipChat ル�
 
 `@hipchat-<CHAT_NAME>` を使用して、HipChat ルームとグラフを共有したり、Monitor アラートを送信することもできます。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HipChat API V1 トークンを使用している場合、チャットハンドルにカンマや角括弧などの特殊文字が含まれていても、ハンドルの入力時に特殊文字をエスケープする必要はありません。オートコンプリートボックスが自動的にこれを行います。
 </div>
 
@@ -65,7 +65,7 @@ Hipchat インテグレーションには、メトリクスは含まれません
 
 Hipchat インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Hipchat インテグレーションには、サービスのチェック機能は含まれません。
 

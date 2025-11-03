@@ -7,7 +7,7 @@ algolia:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -34,7 +34,7 @@ A custom rule is composed of three main components:
 
 ### Tree-sitter query
 
-Custom rules use [tree-sitter queries][2] to query the code abstract syntax tree (AST) and retrieve elements to analyze. Elements of the AST are captured by the query using the `@` operator.
+Custom rules use [tree-sitter queries][3] to query the code abstract syntax tree (AST) and retrieve elements to analyze. Elements of the AST are captured by the query using the `@` operator.
 
 All captured nodes from the tree-sitter query are injected in the JavaScript code and further processed to
 produce violations.
@@ -51,28 +51,30 @@ The `visit` function has the signature `visit(node, path, code)`:
 
 To get a captured node, use the `captures` attribute of the first argument of the `visit` function. For example, the code below retrieves the `functionName` from a tree-sitter query. Each element contains the following attributes:
 
- - `astType`: the tree-sitter type of the node.
+ - `cstType`: the tree-sitter type of the node.
  - `start`: start position of the node. The position contains `line` and `col` attributes.
  - `end`: end position of the node. The position contains `line` and `col` attributes.
+ - `text`: the content of the node.
 
-<div class="alert alert-warning"><code>line</code> and <code>col</code> attributes start at 1. Any result with <code>line</code> or <code>col</code> set to 0 is ignored.</div>
+<div class="alert alert-danger"><code>line</code> and <code>col</code> attributes start at 1. Any result with <code>line</code> or <code>col</code> set to 0 is ignored.</div>
 
 ```javascript
 function visit(node, filename, code) {
   const functionNameNode = node.captures["functionName"];
-  console.log("ast type");
-  console.log(functionNameNode.astType);
+  console.log("cst type");
+  console.log(functionNameNode.cstType);
   console.log("start line");
   console.log(functionNameNode.start.line);
 }
 ```
 
 The analyzer includes a few helper functions to help you write rules:
- - `getCodeForNode(node, code)` captures the code for a specific node.
  - `buildError(startLine, startCol, endLine, endCol, message, severity, category)` builds an error.
    - `severity` is one of the following: `ERROR`, `WARNING`, `NOTICE` and `INFO`.
    - `category` is one of the following: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE` and `SECURITY`.
  - `addError(error)` reports an error.
+ - `ddsa.getParent(node)` returns the given node's parent, or `undefined` if the node is the root node.
+ - `ddsa.getChildren(node)` returns an array of the given node's children, or an empty array if the node is a leaf node.
 
 ### Rule examples
 

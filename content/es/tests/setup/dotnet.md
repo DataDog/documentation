@@ -22,10 +22,6 @@ title: Tests de .NET
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) por el momento.</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Marcos compatibles:
@@ -51,7 +47,7 @@ Marcos de test compatibles:
 
 ## Configuración del método de informe
 
-Para informar resultados de test a Datadog, debes configurar la biblioteca de Datadog .NET:
+Para informar resultados de test a Datadog, debes configurar la librería de Datadog .NET:
 
 {{< tabs >}}
 {{% tab "Github Actions" %}}
@@ -69,7 +65,7 @@ Si lo haces, el resto de los pasos de configuración a continuación pueden omit
 {{% /tab %}}
 
 {{% tab "Other cloud CI provider" %}}
-<div class="alert alert-info">El modo sin Agent está disponible en las versiones de biblioteca de Datadog .NET >= 2.5.1</div>
+<div class="alert alert-info">El modo sin Agent está disponible en las versiones de librería de Datadog .NET >= 2.5.1</div>
 {{% ci-agentless %}}
 
 {{% /tab %}}
@@ -95,7 +91,7 @@ Instala o actualiza el comando `dd-trace` de una de las siguientes maneras:
 
 ## Instrumentación de tests
 
-<div class="alert alert-warning"><strong>Nota</strong>: Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
 
 Para instrumentar tu conjunto de tests, antepone a tu comando de test `dd-trace ci run`, proporcionando el nombre de servicio o biblioteca en proceso de test como el parámetro `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env`. Por ejemplo:
 
@@ -282,7 +278,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 ## Instrumentación personalizada
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Tu configuración de instrumentación personalizada depende de la versión <code>dd-trace</code>. Para utilizar la instrumentación personalizada, debes mantener sincronizadas las versiones del paquete para <code>dd-trace</code> y <code>Datadog.Trace</code> de NuGet.
 </div>
 
@@ -296,7 +292,7 @@ Para más información sobre cómo añadir tramos y etiquetas para la instrument
 
 ## API para tests manuales
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Para utilizar la API de tests manuales, debes añadir el paquete de NuGet <code>Datadog.Trace</code> en el proyecto .NET de destino.
 </div>
 
@@ -310,7 +306,7 @@ Un módulo de test representa el ensamblado de .NET que incluye los tests.
 
 Para iniciar un módulo de test, llama a `TestModule.Create()` y pasa el nombre del módulo o el nombre del ensamblado de .NET donde se encuentran los tests.
 
-Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la biblioteca a enviar todos los resultados de los tests restantes al backend.
+Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la librería a enviar todos los resultados de los tests restantes al backend.
 
 ### Conjuntos de tests
 

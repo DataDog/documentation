@@ -75,7 +75,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_network_manager" >}}
+{{< get-metrics-from-git "amazon-network-manager" >}}
 
 
 ### Checks de servicio

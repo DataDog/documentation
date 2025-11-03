@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+description: Conoce las métricas basadas en DDSketch en APM para calcular percentiles
+  precisos y distribuciones de latencia con mayor exactitud.
 further_reading:
 - link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
   tag: Blog
@@ -14,13 +16,13 @@ further_reading:
 title: Métricas basadas en DDSketch en APM
 ---
 
-Las métricas de trazas se recopilan automáticamente para tus servicios y recursos, y se conservan durante 15 meses. Los percentiles de latencia existen como series temporales individuales. Estos percentiles también están disponibles como una [métrica de distribución de Datadog][1]. En lugar de tener una métrica diferente para cada percentil y métricas separadas para los servicios, recursos o segundas etiquetas primarias, Datadog ofrece una métrica simple:
+Las métricas de trazas se recopilan automáticamente para tus servicios y recursos, y se conservan durante 15 meses. Los percentiles de latencia existen como series temporales individuales. Estos percentiles también están disponibles como una [métrica de distribución de Datadog][1]. En lugar de tener una métrica diferente para cada percentil y métricas separadas para los servicios, recursos o etiquetas (tags) primarias adicionales, Datadog ofrece una métrica simple:
 
 - `trace.<SPAN_NAME>`:
   - *Requisito previo:* esta métrica existe para cualquier servicio de APM.
-  - *Descripción:* representa las distribuciones de latencia para todos los servicios, recursos y versiones a través de diferentes entornos y segundas etiquetas primarias.
+  - *Descripción:* Representa las distribuciones de latencia de todos los servicios, recursos y versiones a través de diferentes entornos y etiquetas primarias adicionales.
   - *Tipo de métrica:* [DISTRIBUTION][2]
-  - *Etiquetas (tags):* `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `synthetics` y [la segunda etiqueta primaria][3].
+  - *Etiquetas (tags):* `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, y [etiquetas primarias adicionales][3].
 
 Las páginas Servicio de APM y Recursos utilizan este tipo de métricas automáticamente. Puedes usar las métricas para alimentar tus dashboards y monitores.
 
@@ -63,5 +65,5 @@ max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
 
 [1]: /es/metrics/distributions/
 [2]: /es/metrics/types/?tab=distribution#metric-types
-[3]: /es/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[3]: /es/tracing/guide/setting_primary_tags_to_scope/#add-additional-primary-tags-in-datadog
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

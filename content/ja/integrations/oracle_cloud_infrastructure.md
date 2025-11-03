@@ -244,7 +244,7 @@ ORM スタックは、テナンシー内のリージョンに関数コンテナ�
 
 Datadog の [OCI インテグレーション概要ダッシュボード][13]または [Metrics Explorer ページ][14]で `oci.*` メトリクスを表示します。
 
-<div class="alert alert-warning">OCI 関数メトリクス (<code>oci.faas</code> ネームスペース) とコンテナインスタンスメトリクス (<code>oci_computecontainerinstance</code> ネームスペース) はプレビュー版です。</div>
+<div class="alert alert-danger">OCI 関数メトリクス (<code>oci.faas</code> ネームスペース) とコンテナインスタンスメトリクス (<code>oci_computecontainerinstance</code> ネームスペース) はプレビュー版です。</div>
 
 ### メトリクスネームスペース
 
@@ -400,7 +400,7 @@ OCI オブジェクトストレージの詳細については、[イベント入
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "oracle_cloud_infrastructure" >}}
+{{< get-metrics-from-git "oracle-cloud-infrastructure" >}}
 
 
 ### サービスチェック

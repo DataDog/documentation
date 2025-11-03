@@ -225,7 +225,7 @@ Docker 컨테이너를 사용하는 경우 세 가지 옵션이 있습니다. Do
   Node.js 클라이언트 라이브러리 버전 3.21.0 이상이 필요합니다.
  </br>
   </br>
-  TypeScript 애플리케이션에 대한 코드 링크 및 스니펫을 표시하려면 Node 애플리케이션을 실행해야 합니다: 
+  TypeScript 애플리케이션에 대한 코드 링크 및 스니펫을 표시하려면 Node 애플리케이션을 실행해야 합니다:
  </br>
   <a href="https://NodeJS.org/dist/v12.22.12/docs/API/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
 </div>
@@ -414,7 +414,7 @@ GitHub 통합을 설정하면 [**오류 추적**][103], [**연속 프로파일�
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 GitLab 인스턴스의 리포지토리는 제한된 평가판 상태로 제공됩니다. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">평가판을 신청하세요</a>.
 </div>
 
@@ -452,7 +452,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 자체 호스팅 인스턴스 또는 비공개 URL의 리포지토리는 소스 코드 통합에서 기본적으로 지원되지 않습니다. 이 기능을 사용 설정하려면 <a href="/도움/도움말">지원팀에 문의하세요</a>.
 </div>
 
@@ -520,7 +520,7 @@ GitHub(통합)를 사용 중이거나 GitLab SaaS 인스턴스(gitlab.com)에서
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="연속 프로파일러에서 GitHub 연결" style="width:100%;">}}
 
 [1]: /ko/profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 

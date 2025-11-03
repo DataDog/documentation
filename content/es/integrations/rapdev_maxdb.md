@@ -1,6 +1,6 @@
 ---
 algolia:
-  subcategory: Integraciones de Marketplace
+  subcategory: Integraciones del Marketplace
 app_id: rapdev-maxdb
 app_uuid: f30ae17c-d58a-43f4-a8a6-693279394101
 assets:
@@ -37,7 +37,7 @@ categories:
 - almacenes de datos
 - marketplace
 - sap
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -63,22 +63,22 @@ public_title: MaxDB
 short_description: Monitoriza el volumen, la caché, el esquema, la tabla y más desde
   las bases de datos de MaxDB
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Stores
+  - Category::Databases
   - Category::Marketplace
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  configuration: README.md#Setup
+  - Data Type::Metrics
+  configuration: README.md#Configuración
   description: Monitoriza el volumen, la caché, el esquema, la tabla y más desde las
     bases de datos de MaxDB
   media:
@@ -91,13 +91,13 @@ tile:
   - caption: Métricas de esquema, sesión y OMS
     image_url: images/3.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: MaxDB
-  uninstallation: README.md#Uninstallation
+  uninstallation: README.md#Desinstalación
 ---
 
-<!--  FUENTE https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 ## Información general
 
 La integración de MaxDB monitoriza áreas y volúmenes de datos y logs, cachés, sesiones, bloqueos y otras métricas de las instancias de MaxDB para garantizar que las bases de datos se ejecuten como deberían. La integración incluye un dashboard que se puede filtrar por base de datos y por host de base de datos. La integración de MaxDB también incluye monitores para algunas métricas comunes relacionadas con el estado general de la base de datos.
@@ -109,7 +109,7 @@ La integración de MaxDB monitoriza áreas y volúmenes de datos y logs, cachés
 4. Utilización de bloqueos de MaxDB
 5. Uso del área de log de MaxDB
 
-## Agent
+## Ayuda
 
 Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales: 
 
@@ -123,4 +123,4 @@ Hecho con ❤️ en Boston
 *¿Esta no es la integración que estás buscando? ¿Falta una función esencial para tu organización? Envíanos una [nota](mailto:support@rapdev.io) y la crearemos.*
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-maxdb" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-maxdb" target="_blank">adquiere esta aplicación en el Marketplace</a>.

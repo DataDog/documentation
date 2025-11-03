@@ -1,4 +1,6 @@
 ---
+aliases:
+- /es/network_monitoring/devices/netflow/
 further_reading:
 - link: /network_monitoring/devices/profiles
   tag: Documentación
@@ -9,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: Blog
   text: Monitorizar y diagnosticar problemas de rendimiento de red con SNMP Traps
-is_beta: true
 title: Monitorización de NetFlow
 ---
 
@@ -36,17 +37,21 @@ network_devices:
   netflow:
     enabled: true
     listeners:
-      - flow_type: netflow9   # opciones: netflow5, netflow9, ipfix, sflow5
-        port: 2055            # los dispositivos se deben configurar con el mismo número de puerto
+      - flow_type: netflow9   # choices: netflow5, netflow9, ipfix, sflow5
+        port: 2055            # devices need to be configured to the same port number
       - flow_type: netflow5
         port: 2056
       - flow_type: ipfix
         port: 4739
       - flow_type: sflow5
         port: 6343
+    ## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records
+    reverse_dns_enrichment_enabled: false
 ```
 
 Luego de guardar los cambios, [reinicia el Agent][4].
+
+**Nota**: Asegúrate de que tus [reglas de firewall][9] permiten el tráfico UDP entrante en los puertos configurados.
 
 ## Agregación
 
@@ -77,6 +82,18 @@ También puedes añadir tus propios enriquecimientos personalizados para asignar
 En la pestaña **Configuración** en NetFlow, haz clic en **Add Enrichment** (Añadir enriquecimiento) para cargar el archivo CSV que contiene tus enriquecimientos personalizados.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="Modal de Asignación de nuevo enriquecimiento en la pestaña de configuración de NetFlow" width="80%" >}}
+
+### Enriquecimiento de IP privada con DNS inverso
+
+Activa el enriquecimiento de IP privada con DNS inverso para realizar búsquedas de DNS de nombres de host asociados a direcciones IP de origen o destino. Cuando se activa, el Agent realiza búsquedas con DNS inverso en IP de origen y destino dentro de rangos de direcciones privadas, enriqueciendo los registros NetFlow con los nombres de host correspondientes.
+
+Por [defecto][7], el enriquecimiento de IP con DNS inverso en tu archivo `datadog.yaml` está deshabilitado. Para habilitarlo, consulta la sección [Configuración](#configuration) de esta página.
+
+Busca **DNS** en la agrupación de Flujo de la sección de facetas para encontrar los flujos asociados con el enriquecimiento de IP con DNS inverso:
+
+{{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Captura de pantalla del destino DNS inverso y de las facetas de origen" width="100%" >}}
+
+**Nota**: Las entradas de DNS inverso se almacenan en caché y están sujetas a limitaciones de frecuencia para minimizar las consultas DNS y reducir la carga de los servidores DNS. Para obtener más información sobre las opciones de configuración, incluyendo la modificación del almacenamiento en caché predeterminado y la limitación de frecuencia, consulta el [archivo de configuración completo][8].
 
 ## Visualización
 
@@ -155,6 +172,7 @@ Además de los campos, también puedes utilizar facetas predefinidas para empeza
 | MAC de destino | La dirección MAC (Media Access Control) asociada a la IP de destino. |
 | Máscara de destino | La máscara de subred asociada a la IP de destino. |
 | Puerto de destino | El número del puerto de destino. |
+| Nombre de host DNS inverso de destino | El nombre de host DNS asociado a la IP de destino. |
 | Código ISO de subdivisión del destino | El código ISO que representa la subdivisión (como estado o provincia) asociada a la IP de destino. |
 | Nombre de la subdivisión de destino | El nombre de la subdivisión (como estado o provincia) asociada a la IP de destino. |
 | Zona horaria de destino | La zona horaria asociada a la IP de destino. |
@@ -183,6 +201,7 @@ Además de los campos, también puedes utilizar facetas predefinidas para empeza
 | MAC de origen | La dirección de MAC (Media Access Control) asociada a la IP de origen. |
 | Máscara de origen | La máscara de subred asociada a la IP de origen. |
 | Puerto de origen | El número del puerto de origen. |
+| Nombre de host DNS inverso de origen | El nombre de host DNS asociado a la IP de origen. |
 | Código ISO de la subdivisión de origen | El código ISO que representa la subdivisión (como estado o provincia) asociada a la IP de origen. |
 | Nombre de la subdivisión de origen | El nombre de la subdivisión (como estado o provincia) asociada a la IP de origen. |
 | Zona horaria de origen | La zona horaria asociada a la IP de origen. |
@@ -202,11 +221,11 @@ Además, puedes consultar y visualizar **Bytes (ajustados) (@adjusted_bytes)** y
 
 Para visualizar los bytes/paquetes sin procesar (muestreados) enviados por tus dispositivos, puedes consultar **Bytes (muestreados) (@bytes)** y **Paquetes (muestreados) (@packets)** en dashboards y notebooks.
 
-## Retención
+## Conservación
 
 Los datos de NetFlow se conservan durante 30 días por defecto, con opciones de conservación de 15, 30, 60 y 90 días.
 
-<div class="alert alert-danger">Para conservar los datos de NetFlow durante más tiempo, ponte en contacto con tu representante de cuenta.</div>
+<div class="alert alert-warning">Para conservar los datos de NetFlow durante más tiempo, ponte en contacto con el representante de tu cuenta.</div>
 
 ## Solucionar problemas
 
@@ -264,3 +283,6 @@ Utiliza el comando `netstat -s` para ver si hay algún paquete UDP perdido:
 [4]: /es/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/devices/netflow
 [6]: /es/monitors/types/netflow/
+[7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
+[8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
+[9]: /es/network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all

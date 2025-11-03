@@ -58,20 +58,14 @@ tile:
   - 카테고리::메트릭
   - Category::Mobile
   - Category::Network
-  - 제공::UI 확장
+  - Offering::Integration
+  - Submitted Data Type::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
   description: iOS, Android, React Native 및 Unity의 모바일 옵저버빌리티
   media:
-  - caption: 위젯을 추가하여 Datadog에서 직접 Embrace 충돌 및 네트워킹 데이터를 모니터링하세요.
-    image_url: images/datadog_dashboard.jpg
-    media_type: image
-  - caption: 앱 및 세션 세부정보와 함께 영향을 받은 모든 사용자 세션의 모든 스택 트레이스에 액세스하여 충돌을 조사합니다. 자세한 내용을
-      보려면 Embrace의 전체 사용자 세션 재생으로 직접 이동하세요.
-    image_url: images/datadog_side_panel.jpg
-    media_type: image
   - caption: Embrace의 사용자 세션 재생은 시간 기반 시각화로 모든 사용자 세션의 전체 기술 및 동작 세부 정보를 제공합니다. 문제를
       수동으로 재현할 필요 없이 근본 원인을 즉시 식별합니다.
     image_url: images/embrace_session.jpg
@@ -104,8 +98,6 @@ Embrace의 핵심은 복잡한 모바일 데이터를 실행 가능한 데이터
 1. 무료 평가판을 시작하고 [Embrace 문서][2]를 참고하세요. **Datadog에서 메트릭을 확인하기 전 먼저 이 문서의 지침을 따라야 합니다.**
 1. Embrace 통합 설정을 완료한 후 Datadog으로 다시 이동하여 두 플랫폼을 모두 연결하세요.
 1. 크리덴셜로 로그인하여 Embrace 계정을 인증하고 Datadog에 연결하세요.
-1. Datadog에서 New Dashboard를 만듭니다. Embrace 위젯을 선택하여 충돌 또는 네트워킹 메트릭이 포함된 Embrace 데이터를 표시합니다.
-1. Datadog의 Embrace에 대해 더 자세히 알아보려면 "Details"를 클릭하세요.
 
 ## 지원
 

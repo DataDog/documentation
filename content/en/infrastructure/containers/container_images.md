@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security][2] to help you streamline your security efforts.
+The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities from [Cloud Security][2] found in your container images, and trace those vulnerabilities to specific layers, so you can pinpoint and remediate your security risks faster.
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
@@ -225,6 +225,15 @@ Use the container image trends configuration modal and toggle **Enable Container
 Image metrics are collected from the [Live Containers](#live-containers) and [Image Check](#image-collection) sources. Follow the same instructions as above to ensure that these collections are enabled across your entire infrastructure and take full advantage of the trends view.
 
 {{< img src="infrastructure/containerimages/container_image_trends_configuration_modal.png" alt="The container images trends configuration modal" width="100%">}}
+
+### Data collected
+
+| Metric Name | Description |
+|-------------|-------------|
+| **contimage.max_image_size** <br>(gauge) | The maximum size of the container image |
+| **contimage.max_image_age** <br> (gauge) | The age of the container image |
+| **contimage.running_containers** <br> (gauge) | The number of containers in which the container image is running |
+| **contimage.vuln_count** <br> (gauge) | The total number of vulnerabilities found in the container image (for Datadog Cloud Security customers who have enabled Container Vulnerabilities) |
 
 ## Container image tagging
 

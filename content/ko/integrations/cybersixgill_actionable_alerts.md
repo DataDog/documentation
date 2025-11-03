@@ -107,7 +107,7 @@ datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0
 ## 수집한 데이터
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cybersixgill_actionable_alerts" >}}
+{{< get-service-checks-from-git "cybersixgill-actionable-alerts" >}}
 
 
 ### 이벤트

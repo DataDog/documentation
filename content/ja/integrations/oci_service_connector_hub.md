@@ -88,7 +88,7 @@ Connector Hub はクラウドエンジニアが Oracle Cloud Infrastructure (OCI
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "oci_service_connector_hub" >}}
+{{< get-metrics-from-git "oci-service-connector-hub" >}}
 
 
 ### サービスチェック

@@ -1,12 +1,9 @@
 ---
 description: Utiliza tests de monitorización Synthetic en tu navegador Safari.
 private: true
+site_support_id: synthetics_safari
 title: Tests del navegador Safari
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Los tests del navegador Safari no son compatibles con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
-{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/safari-browser-testing/" >}}
 Los tests del navegador Safari están actualmente en Vista previa, ¡pero puedes solicitar acceso fácilmente! Utiliza este formulario para enviar tu solicitud hoy mismo. 

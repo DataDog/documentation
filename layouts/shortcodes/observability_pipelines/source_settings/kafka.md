@@ -5,11 +5,11 @@
     - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. Optionally, click **Advanced** and click **Add Option** to add additional librdkafka options.
+1. Optionally, click **Advanced** and click **Add Option** to add additional [librdkafka options](#librdkafka-options).
     1. Select an option in the dropdown menu.
     1. Enter a value for that option.
     1. Check your values against the [librdkafka documentation][10131] to make sure they have the correct type and are within the set range.
     1. Click **Add Option** to add another librdkafka option.
 
-[10131]: https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md
+[10131]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [10132]: /observability_pipelines/advanced_configurations/

@@ -31,6 +31,12 @@ Use the following instructions to enable Workload Protection.
       name: datadog
     spec:
       features:
+        # (Optional) Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
+        admissionController:
+          enabled: true
+          cwsInstrumentation:
+            enabled: true
+
         remoteConfiguration:
           enabled: true
         # Enables Threat Detection
@@ -48,10 +54,10 @@ Use the following instructions to enable Workload Protection.
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
-    
+
             # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
             # uncompressedLayersSupport: true
-    
+
           # Enables Host Vulnerability Management
           host:
             enabled: true
@@ -69,6 +75,14 @@ Use the following instructions to enable Workload Protection.
 
     ```yaml
     # datadog-values.yaml file
+
+    # (Optional) Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
+    clusterAgent:
+      admissionController:
+        enabled: true
+        cwsInstrumentation:
+          enabled: true
+
     datadog:
       remoteConfiguration:
         enabled: true
@@ -100,43 +114,69 @@ Use the following instructions to enable Workload Protection.
 
 2. Restart the Agent.
 
+If you experience RBAC issues, you can run the chart with the `clusterRole.allowCreatePodsExec` option enabled for the `clusterRole`: 
+
+```sh
+helm install datadog-operator datadog/datadog-operator --set clusterRole.allowCreatePodsExec=true
+```
+
 {{% /tab %}}
 
 {{% tab "DaemonSet" %}}
 
-Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
+1. Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file. Note that the `DD_ADMISSION_CONTROLLER_ENABLED` and `DD_RUNTIME_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_ENABLED` variables in the `cluster-agent-deployment.yaml` enable event enrichment with Kubernetes user identities (optional).
 
-```bash
-  # Source: datadog/templates/daemonset.yaml
-  apiVersion:app/1
-  kind: DaemonSet
-  [...]
-  spec:
-  [...]
-  spec:
+    ```bash
+      # Source: datadog/templates/daemonset.yaml
+      apiVersion:app/1
+      kind: DaemonSet
       [...]
-        containers:
-        [...]
-          - name: agent
-            [...]
-            env:
-              - name: DD_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
-          - name: system-probe
-            [...]
-            env:
-              - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-                value: "true"
-              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
-                value: "true"
+      spec:
+      [...]
+      spec:
           [...]
-```
+            containers:
+            [...]
+              - name: agent
+                [...]
+                env:
+                  - name: DD_REMOTE_CONFIGURATION_ENABLED
+                    value: "true"
+              - name: system-probe
+                [...]
+                env:
+                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
+                    value: "true"
+                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                    value: "true"
+                  - name: DD_COMPLIANCE_CONFIG_ENABLED
+                    value: "true"
+                  - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+                    value: "true"
+                  - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
+                    value: "true"
+              [...]
+
+      # Source: datadog/templates/cluster-agent-deployment.yaml
+      apiVersion:app/1
+      kind: Deployment
+      [...]
+      spec:
+        [...]
+        template:
+          [...]
+          spec:
+            [...]
+            containers:
+            [...]
+              - name: cluster-agent
+                [...]
+                env:
+                  - name: DD_ADMISSION_CONTROLLER_ENABLED
+                    value: "true"
+                  - name: DD_RUNTIME_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_ENABLED
+                    value: "true"
+    ```
 
 {{% /tab %}}
 {{< /tabs >}}

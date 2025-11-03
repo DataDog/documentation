@@ -15,8 +15,8 @@
             <div id="async-searchbar-mount"></div>
             {{ end}}
 
-            <div class="sidenav-nav sidenav-nav-main">
-                {{ partialCached "nav/left-nav.html" . .Section }}
+            <div class="sidenav-nav sidenav-nav-js-load">
+                {{ partialCached "nav/left-nav.html" . .Section .Site.Language.Lang }}
             </div>
         </div>
     </div>

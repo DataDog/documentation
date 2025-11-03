@@ -51,7 +51,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Datastore
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_datastore" >}}
+{{< get-metrics-from-git "google-cloud-datastore" >}}
 
 
 ### Événements

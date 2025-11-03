@@ -37,7 +37,7 @@ Datadog Azure インテグレーションを使用して、Azure Relay からメ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_relay" >}}
+{{< get-metrics-from-git "azure-relay" >}}
 
 
 ### イベント

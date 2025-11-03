@@ -12,6 +12,8 @@ aliases:
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
+algolia:
+    tags: ["C#","APM"]
 further_reading:
   - link: "/tracing/other_telemetry/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
@@ -56,10 +58,10 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 ## Installation and getting started
 
 <div class="alert alert-info">
-    To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+    To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
 </div>
 
@@ -135,7 +137,7 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
 </div>
 
@@ -162,7 +164,7 @@ For information about the different methods for setting environment variables, s
 
 1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
    </div>
 
@@ -174,7 +176,7 @@ For information about the different methods for setting environment variables, s
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
@@ -238,7 +240,7 @@ Custom instrumentation depends on your automatic instrumentation and includes ad
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
@@ -253,7 +255,7 @@ To use custom instrumentation in your .NET application:
 
 {{% tab "Linux" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
@@ -283,7 +285,7 @@ To attach automatic instrumentation to your service, you must set the required e
 
 ### Windows
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 
@@ -416,7 +418,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 
 #### `systemctl` (all services)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 

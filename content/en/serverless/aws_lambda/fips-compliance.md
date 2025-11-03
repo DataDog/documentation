@@ -12,8 +12,8 @@ algolia:
   tags: ["fips", "compliance", "fedramp", "govcloud", "aws lambda"]
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The FIPS-compliant Datadog Lambda extension is available in all AWS regions. While you can use these FIPS-compliant Lambda components with any Datadog site, end-to-end FIPS compliance requires sending data to the US1-FED site (ddog-gov.com).</div>
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<div class="alert alert-danger">The FIPS-compliant Datadog Lambda extension is available in all AWS regions. While you can use these FIPS-compliant Lambda components with any Datadog site, end-to-end FIPS compliance requires sending data to the US1-FED site (ddog-gov.com).</div>
 {{< /site-region >}}
 
 Datadog provides FIPS-compliant monitoring for AWS Lambda functions through the use of FIPS-certified cryptographic modules and specially designed Lambda extension layers.

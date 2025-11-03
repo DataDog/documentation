@@ -14,12 +14,6 @@ title: Référence sur le schéma des ressources cloud
 type: schema
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations n'est pas encore disponible pour le site que vous avez sélectionné.
-</div>
-{{< /site-region >}}
-
 Les types de ressources suivants sont disponibles dans le [catalogue des ressources][2] à des fins de filtrage. Consultez la documentation relative aux [règles personnalisées dans CSM Misconfigurations][1] pour en savoir plus.
 
 [1]: /fr/security/misconfigurations/custom_rules/

@@ -15,8 +15,12 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/fluent %}}
 
+## Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/fluent %}}
+
 ## Send logs to the Observability Pipelines Worker over Fluent
 
 {{% observability_pipelines/log_source_configuration/fluent %}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/

@@ -63,10 +63,6 @@ window.DD_RUM &&
 この機能を使用するには、RUM iOS SDK バージョン >= 1.18.0 が必要です。インストール手順は[こちら][1]をご覧ください。
 
 ```swift
-// SDK v1
-Global.rum.stopSession()
-
-// SDK v2
 RUMMonitor.shared().stopSession()
 ```
 
@@ -78,7 +74,7 @@ RUMMonitor.shared().stopSession()
 この機能を使用するには、RUM Android SDK バージョン >= 1.19.0 が必要です。インストール手順は[こちら][1]をご覧ください。
 
 ```kotlin
-GlobalRum.get().stopSession()
+GlobalRumMonitor.get().stopSession()
 ```
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/
@@ -92,7 +88,7 @@ GlobalRum.get().stopSession()
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -114,7 +110,7 @@ DdRum.stopSession()
 
 [1]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
 [2]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-user-sessions
-[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#track-user-sessions
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#track-user-sessions
 [5]: /ja/real_user_monitoring/reactnative/#user-information
 [6]: /ja/real_user_monitoring/browser/

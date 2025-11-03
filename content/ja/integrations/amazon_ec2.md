@@ -220,7 +220,7 @@ Datadog は、AWS Marketplace を通して EC2 Image Builder 用の Datadog Agen
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_ec2" >}}
+{{< get-metrics-from-git "amazon-ec2" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
@@ -230,7 +230,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
    - Amazon EC2 インテグレーションでメトリクスの収集を無効にしても、`aws.ec2.host_ok` はデフォルトで収集されるため、インフラストラクチャーリストに意図しないホストが表示される可能性があります。監視対象を希望するホストのみに制限するには、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。その後、[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスにそのタグを指定します。
 
 ### サービスチェック
-{{< get-service-checks-from-git "amazon_ec2" >}}
+{{< get-service-checks-from-git "amazon-ec2" >}}
 
 
 ## すぐに使える監視

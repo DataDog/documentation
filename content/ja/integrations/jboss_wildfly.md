@@ -156,7 +156,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "jboss_wildfly" >}}
+{{< get-metrics-from-git "jboss-wildfly" >}}
 
 
 ### イベント
@@ -164,7 +164,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 JBoss/WildFly インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "jboss_wildfly" >}}
+{{< get-service-checks-from-git "jboss-wildfly" >}}
 
 
 ### JMXFetch によるメトリクス収集

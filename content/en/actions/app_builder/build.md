@@ -1,5 +1,6 @@
 ---
 title: Build Apps
+description: Create custom apps from blueprints or scratch using drag-and-drop UI components, queries, and JavaScript expressions.
 aliases:
   - /app_builder/build
   - /service_management/app_builder/build
@@ -7,12 +8,11 @@ disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
-  text: "Actions Catalog"
+  text: "Action Catalog"
+- link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
+  tag: "Learning Center"
+  text: "Getting Started with App Builder"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
@@ -45,7 +45,7 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. From [App Builder][1], click **New App**.
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab, then click the component or drag it onto the canvas.
-1. Use [queries](#queries) to populate or interact with your canvas.
+1. Use [queries][12] to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, Click **Run** to test it.
@@ -103,7 +103,7 @@ When you refresh the page, the starred app appears in a section at the top of yo
 
 App Builder keeps a record of every saved version of your app.
 
-To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
+To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="icons/version-history.png" inline="true" style="width:14px;">}} icon.
 
 The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
@@ -120,19 +120,30 @@ You can perform the following operations:
 
 ### Edit an app
 
-To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 ### Export an app
 
-To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back up the app, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
-1. Click the cog (**Settings**) icon and select **Switch to JSON**. 
+1. Click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. 
 1. Replace the existing JSON with the JSON that you previously copied. 
 
 The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
+## Debug an app
+
+The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
+
+To access the Debug Console, go to [your apps list][14] and click **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} for one of your apps. Click **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} to see the entire Debug Console. Information inside the console includes:
+- **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs.
+- **Errors:** View logs for errors, warnings, and info messages.
+- **Logs:** View configuration errors for your actions, transformers, variables, and components.
+- **App State:** Access real-time application state changes.
+
+{{< img src="service_management/app_builder/app-builder-debug-console.png" alt="The expanded panel of the Debug Console inside an app's editor view" style="width:100%;" >}}
 
 ## Further reading
 

@@ -3,10 +3,6 @@ disable_toc: false
 title: (レガシー) モニタリング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は US1-FED Datadog サイトでは利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [Observability Pipelines][1] では、パイプラインは可観測性データを収集、処理、ルーティングするコンポーネントで構成されています。パイプラインとコンポーネントの健全性は、健全性ステータスとグラフ、およびリソース使用状況とデータ配信グラフによって示されます。

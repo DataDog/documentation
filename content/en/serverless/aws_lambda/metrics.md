@@ -80,6 +80,7 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 
 `aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
+: Because there are many variations of out-of-memory errors, some cases may not be handled well despite best efforts. If you encounter such a case, create an issue in the [Datadog Lambda Extension GitHub repo][18].
 
 `aws.lambda.enhanced.cpu_total_utilization`
 : Measures the total CPU utilization of the function as a number of cores.
@@ -135,6 +136,7 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 [6]: /integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
 [8]: /metrics/distributions/
+[18]: https://github.com/DataDog/datadog-lambda-extension
 
 ## Submit custom metrics
 
@@ -307,13 +309,11 @@ namespace Example
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Submit historical metrics with the Datadog Forwarder
+### Submit historical metrics
 
-In most cases, Datadog recommends that you use the Datadog Lambda extension to submit custom metrics. However, the Lambda extension can only submit metrics with a current timestamp.
+Use the Datadog Lambda Extension to submit historical metrics. These metrics can have timestamps up to one hour in the past.
 
-To submit historical metrics, use the Datadog Forwarder. These metrics can have timestamps within the last one hour.
-
-Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the Datadog Lambda Forwarder.
+Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the latest Datadog Lambda Extension.
 
 Then, choose your runtime:
 
@@ -467,28 +467,6 @@ For example:
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
-
-#### Submitting many data points
-
-Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost.
-
-You can aggregate the data points in your application to avoid the overhead.
-
-For example, in Python:
-
-```python
-def lambda_handler(event, context):
-
-    # Inefficient when event['Records'] contains many records
-    for record in event['Records']:
-      lambda_metric("record_count", 1)
-
-    # Improved implementation
-    record_count = 0
-    for record in event['Records']:
-      record_count += 1
-    lambda_metric("record_count", record_count)
-```
 
 ### Understanding distribution metrics
 

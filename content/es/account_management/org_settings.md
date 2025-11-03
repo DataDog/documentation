@@ -1,4 +1,6 @@
 ---
+description: Gestiona usuarios, equipos, autenticaciones, claves de API, roles y parámetros
+  de seguridad de tu organización Datadog desde la sección Parámetros de organización.
 further_reading:
 - link: /account_management/api-app-keys/
   tag: Documentación
@@ -9,9 +11,11 @@ further_reading:
 title: Parámetros de organización
 ---
 ## Información general
-Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings**, en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
+Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings** (Parámetros de organización), en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
 
-Desde Organization Settings, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Organization Settings** en la documentación.
+{{< img src="account_management/org_settings/nav.png" alt="Ir a los parámetros de tu organización en Datadog" style="width:80%;" >}}
+
+Desde Parámetros de organización, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Parámetros de organización** en la documentación.
 
 ## Identidad y cuentas
 
@@ -26,7 +30,7 @@ Lee la documentación sobre los [equipos][3] para gestionar equipos y organizar 
 ### Cuentas de servicio
 
 
-Las [cuentas de servicio][3] son cuentas no interactivas que puedes usar para tener claves de aplicación y otros recursos compartidos en tus equipos. Las claves de aplicación de cuentas de servicio solo las puede ver una vez la persona que las creó. Puedes utilizar cuentas de servicio para acceder a las API de Datadog sin asociar tu aplicación ni tu script a una persona concreta.
+Las [cuentas de servicio][4] son cuentas no interactivas que puedes usar para tener claves de aplicación y otros recursos compartidos en tus equipos. Las claves de aplicación de cuentas de servicio solo las puede ver una vez la persona que las creó. Puedes utilizar cuentas de servicio para acceder a las API de Datadog sin asociar tu aplicación ni tu script a una persona concreta.
 
 ## Autenticación
 
@@ -74,32 +78,6 @@ Los tokens de cliente pertenecen de forma exclusiva a tu organización y se usan
 
 Si tu aplicación no cuenta con una integración de Datadog, y no quieres crear un check del Agent personalizado, puedes enviar eventos con el correo electrónico. Para obtener información sobre cómo configurar correos electrónicos de la API de eventos, consulta la [guía de eventos con correo electrónico][12].
 
-## Productos
-
-### Logs
-
-
-##### Períodos de retención fuera de contrato en los índices de logs
-
-Los usuarios con el permiso `Org Management` pueden activar la función de los períodos de retención fuera de contrato en los índices de logs. Esta función se activa por organización; por tanto, aunque un usuario la active en una organización principal, no se habilitará automáticamente en las organizaciones secundarias.
-
-{{< img src="account_management/out-of-contract-retention.png" alt="Función de los períodos de retención fuera de contrato en los índices de logs activada." style="width:70%;" >}}
-
-Cuando se activa esta función, los usuarios con el permiso `Modify Index` pueden elegir entre períodos de retención de 3, 7, 15, 30, 45 y 60 días, incluso si no es lo que corresponde por contrato. Esto puede resultar útil cuando hay que solucionar un problema que viene de atrás o cuando un cliente deba cumplir determinados requisitos para los que necesite un período de retención superior al estipulado por contrato.
-
-**Nota**: Los períodos de retención fuera de contrato implican cargos específicos. Si se usan de forma regular, Datadog recomienda que el cliente se ponga en contacto con el gestor de su cuenta para que los añada al contrato.
-
-### Monitores
-
-#### Preferencia de zona horaria del monitor
-
-
-Los usuarios con el permiso `Org Management` pueden personalizar la zona horaria en las snapshots del gráfico de alertas, en las notificaciones de alertas del monitor.
-
-{{< img src="account_management/monitors-time-zone-preference.png" alt="Preferencia de zona horaria del monitor" style="width:70%;" >}}
-
-Este parámetro se aplica a **todas** las notificaciones de alertas del monitor y afecta a toda la organización.
-
 ### Tests Synthetic
 
 Obtén información acerca de cómo acceder y controlar los [parámetros de la monitorización Synthetic][13].
@@ -108,19 +86,23 @@ Obtén información acerca de cómo acceder y controlar los [parámetros de la m
 
 ### Centro de seguridad
 
-La página **Safety Center** (Centro de seguridad) contiene alertas de seguridad, advertencias y recomendaciones para revisar en tu organización. También puedes configurar **Security Contacts** (Contactos de seguridad) a fin de recibir notificaciones de seguridad para tu organización. Para ello, haz clic en **Configuration* (Configuración), introduce hasta dos direcciones de correo electrónico y haz clic en el botón **Save** (Guardar).
+La página [**Safety Center**][14] contiene alertas de seguridad, advertencias y recomendaciones para revisar en tu organización.
 
-### Uso compartido público
+### Compartir públicamente
 
-La pestaña **Public Sharing** (Uso compartido público) incluye una lista de dashboards y gráficas compartidas. Recuerda que puedes editar los parámetros para compartir haciendo clic en los conmutadores de activación **Enabled**.
+La pestaña **Compartir públicamente** incluye parámetros para compartir en toda la organización, junto con listas de dashboards y gráficos compartidos. Puedes activar la opción de compartir funciones de forma granular y configurar opciones de seguridad adicionales, como definir una duración máxima para las invitaciones.
 
-### Python
+Para aplicar parámetros para compartir funciones en todas tus organizaciones, ponte en contacto con el [servicio de asistencia de Datadog][16].
 
-La página [**OAuth Apps**][14] te permite ver o gestionar aplicaciones de OAuth de tu organización.
+**Nota**: El permiso OrgAdmin es necesario para ver y gestionar la opción para compartir parámetros y recursos.
+
+### Aplicaciones de OAuth
+
+La página [**Aplicaciones OAuth**][15] te permite ver o gestionar aplicaciones OAuth en tu organización.
 
 ## Cumplimiento
 
-### Traza de auditoría
+### Audit Trail
 
 La pestaña **Audit Trail** (Traza de auditoría) de la página Organization Settings (Parámetros de organización) abre una nueva pestaña que te dirige al navegador de eventos de auditoría.
 
@@ -142,7 +124,33 @@ Para cambiar el nombre de tu organización, haz clic en el botón **Edit** (Edit
 
 Puedes elegir si quieres que la página de inicio de tu organización sea una lista de dashboards o un único dashboard.
 
-## Leer más
+#### Períodos de retención fuera de contrato en los índices de logs
+
+Los usuarios con el permiso `Org Management` pueden activar la función de los períodos de retención fuera de contrato en los índices de logs. Esta función se activa por organización; por tanto, aunque un usuario la active en una organización principal, no se habilitará automáticamente en las organizaciones secundarias.
+
+{{< img src="account_management/out-of-contract-retention.png" alt="Función de los períodos de retención fuera de contrato en los índices de logs activada." style="width:70%;" >}}
+
+Cuando se activa esta función, los usuarios con el permiso `Modify Index` pueden elegir entre períodos de retención de 3, 7, 15, 30, 45 y 60 días, incluso si no es lo que corresponde por contrato. Esto puede resultar útil cuando hay que solucionar un problema que viene de atrás o cuando un cliente deba cumplir determinados requisitos para los que necesite un período de retención superior al estipulado por contrato.
+
+**Nota**: Los períodos de retención fuera de contrato implican cargos específicos. Si se usan de forma regular, Datadog recomienda que el cliente se ponga en contacto con el gestor de su cuenta para que los añada al contrato.
+
+#### Configuración de una duración máxima de sesión
+
+Los usuarios con el permiso `Org Management` pueden configurar una duración máxima de sesión para tu organización. La duración se aplica a todas las nuevas sesiones web creadas después de cambiarla, para todos los usuarios, independientemente de su rol en la organización. No se aplica a sesiones de aplicaciones móviles de Datadog.
+
+La duración de la sesión puede configurarse dentro de los siguientes límites:
+{{% site-region region="gov" %}}
+- **Duración mínima:** 1 hora
+- **Duración máxima:** 12 horas
+{{% /site-region %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
+- **Duración mínima:** 1 hora
+- **Duración máxima:** 720 horas (30 días)
+{{% /site-region %}}
+
+{{< img src="account_management/org_settings/max_session_duration.png" alt="Configuración de una duración máxima de sesión" style="width:70%;" >}}
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -155,8 +163,10 @@ Puedes elegir si quieres que la página de inicio de tu organización sea una li
 [7]: /es/account_management/saml/mapping
 [8]: /es/account_management/api-app-keys/
 [9]: /es/account_management/rbac/
-[10]: /es/agent/remote_config/?tab=configurationyamlfile#how-it-works
+[10]: /es/remote_configuration#how-it-works
 [11]: /es/account_management/api-app-keys/#client-tokens
 [12]: /es/service_management/events/guides/email/
 [13]: /es/synthetics/settings/?tab=specifyvalue#overview
-[14]: /es/account_management/org_settings/oauth_apps
+[14]: /es/account_management/safety_center
+[15]: /es/account_management/org_settings/oauth_apps
+[16]: /es/help/

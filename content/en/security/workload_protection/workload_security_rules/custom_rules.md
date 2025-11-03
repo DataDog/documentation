@@ -24,39 +24,39 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 Rules are managed and applied using [policies][3].
 
-You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
-
-For example, you can do the following with policies:
-
-- [Assign priorities][17] to your policies. Priorities can account for policies with partially overlapping tags.
-- Deploy multiple rules to a specific subset of an infrastructure using [tags][18].
-
-### Default policy
-
-The default policy and its rules cannot be modified. You can use the policy priority setting to override the default policy with custom policies.
+You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure using [tags][18].
 
 ### Create a policy
 
-1. Go to [Agent Configuration][3].
+1. Go to [Policies][3].
 2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
 3. Enter a name for the policy and click **Create**.
-   The new policy is created and placed as the top priority, but it is not enabled or deployed.
+   The new policy is created, but it is not enabled or deployed.
 4. Click the policy to open it.
-5. In **Actions**, add custom Agent rules to the policy. For details, see [Create the custom Agent and detection rules together][14].
-6. Click **Apply Tags & Deploy**. 
+5. In **New Rule**, add custom Agent rules to the policy. For details, see [Create the custom Agent and detection rules together][14].
+6. Click **Edit** next to **Deployed on 0 agents**. 
 7. Add tags to the policy to target specific infrastructure.
-8. To deploy the policy, select **Enable** and click **Apply**.
+8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm.
 
-### Prioritize policies
+### Pin a Datadog-managed policy to its current version
 
-1. Go to [Agent Configuration][3].
-2. Click **Determine Priority**.
-3. Drag the policies to set their priority.
-4. Click **Confirm Reordering**.
+<div class="alert alert-info">Policy pinning is supported in Agent version 7.71.0 and later. Previous Agents will continue to receive the latest policy updates automatically.</div>
 
-Agents that are in the scope of multiple policies apply configurations based on the priority order. In cases where a higher priority policy contains the same rules as a lower priority, the higher priority policy's rules override the lower priority policy.
+When Datadog-managed policies are updated by Datadog, they are automatically deployed to your infrastructure.
 
-When a policy is overridden, the **Overridden** status is displayed. Hover over the status to see the overriding policy name.
+To control when a new policy version is deployed to your infrastructure, you can pin the policy to its current version. Pinning a policy version prevents policy updates from being automatically rolled out when Datadog releases a new policy version. 
+
+To pin a policy, do the following:
+
+1. Go to [Policies][3].
+2. Click a Datadog-managed policy.
+3. In **Version**, click the pin option.
+   If your infrastructure is running Agents below version 7.71.0, an outdated agents warning appears. View and upgrade your Agent version in [Fleet Automation][19].
+4. Click **Pin**. To unpin the policy version, click the pin option again.
+
+### Conflicting rules
+
+When two policies deployed to the same host contain the same rule with a different status, the most severe aciton will be taken (Blocking > Monitoring > Disabled).
 
 ### Apply tags
 
@@ -65,12 +65,10 @@ When a policy is overridden, the **Overridden** status is displayed. Hover over 
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
 1. Go to [Agent Configuration][3].
-2. Hover over a policy, or open a policy, and click **Apply Tags & Deploy Policy**.
+2. Open a policy and click **Edit**.
 3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
-When you add tags, Datadog displays how many hosts the tags target. For example, `Tags match 144 hosts`. 
-
-In the policy, click **Tags With This Policy**. The number of hosts targeted by each tag are displayed in **Hosts matching this tag**.
+When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agents. For example, `Tags match 144 agents`. 
 
 ## Custom detection rules summary
 
@@ -92,11 +90,6 @@ You can create custom rules using these methods:
 
 ## Create the custom Agent and detection rules together
 
-Workload Protection custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
-
-
-## Create the custom Agent and detection rules together
-
 When you create an Agent configuration policy it contains the default Agent rules only. You can add custom Agent rules to the policy to apply specific rules to specific Agents.
 
 When you add an Agent configuration policy you can use the **Assisted rule creator** option to create the Agent and dependent detection rules together. This method ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than creating the Agent and detection rules separately and then referencing the Agent rules in the detection rules.
@@ -107,7 +100,7 @@ To use the Assisted rule creator:
 
 1. Go to [Agent Configuration][3].
 2. Create or open a policy.
-3. In **Actions**, select **Assisted rule creator**.
+3. In **Add Agent Rule**, select **Assisted rule creator**.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
    - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
@@ -207,7 +200,7 @@ To enable a policy using Remote Configuration in the Datadog UI, do the followin
 
 If you disable a policy, its rules are no longer applied to the infrastructure identified by its tags.
 
-Custom Agent rules are deployed to the Agent in a custom policy separate from the default policy. The custom policy contains custom Agent rules as well as [default rules that have been disabled][13].
+Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
 
 ## Create a custom detection rule
 
@@ -245,13 +238,13 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 
 [1]:#create-the-custom-agent-and-detection-rules-together
 [2]:#create-a-custom-agent-rule
-[3]: https://app.datadoghq.com/security/configuration/workload/agent-rules
+[3]: https://app.datadoghq.com/security/workload-protection/policies
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/workload_protection/workload_security_rules
 [8]: /security/workload_protection/
-[9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
+[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
 [12]: /security/workload_protection/guide/active-protection
@@ -261,3 +254,4 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [16]: /security/workload_protection/agent_expressions/
 [17]: #prioritize-policies
 [18]: #apply-tags
+[19]: https://app.datadoghq.com/fleet

@@ -23,21 +23,19 @@ Configura el destino Amazon Security Lake y sus variables de entorno cuando [con
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
-## Autenticación AWS
+## Cómo funciona el destino
 
-{{% observability_pipelines/aws_authentication/amazon_security_lake/intro %}}
+### Autenticación de AWS
 
 {{% observability_pipelines/aws_authentication/instructions %}}
 
-### Permisos
+#### Permisos
 
 {{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
 
-## Cómo funciona el destino
+### Procesamiento de eventos por lotes
 
-### Colocación de eventos en lotes
-
-Un lote de eventos se descarga cuando se cumple uno de estos parámetros. para obtener más información, consulta [lotes de eventos][2].
+Un lote de eventos se descarga cuando se cumple uno de estos parámetros. Consulta [procesamiento de eventos por lotes][2] para obtener más información.
 
 | Eventos máximos     | Bytes máximos       | Tiempo de espera (segundos)   |
 |----------------|-----------------|---------------------|

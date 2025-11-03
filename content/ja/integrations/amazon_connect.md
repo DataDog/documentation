@@ -58,7 +58,7 @@ Amazon Connect から S3 バケットまたは CloudWatch のいずれかにロ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_connect" >}}
+{{< get-metrics-from-git "amazon-connect" >}}
 
 
 ### イベント

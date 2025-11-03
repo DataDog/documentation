@@ -8,10 +8,6 @@ further_reading:
 title: Test Impact Analysis トラブルシューティング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Impact Analysis は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 このページでは、Test Impact Analysis に関する問題のトラブルシューティングに役立つ情報を提供します。さらにヘルプが必要な場合は、[Datadog サポート][1]にお問い合わせください。

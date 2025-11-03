@@ -96,7 +96,7 @@ Avi Vantage 검사는 [Datadog Agent][3] 패키지에 포함되어 있습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "avi_vantage" >}}
+{{< get-metrics-from-git "avi-vantage" >}}
 
 
 ### 이벤트

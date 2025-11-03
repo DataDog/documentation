@@ -19,7 +19,7 @@ View a high-level overview of your security posture on the [Overview page][1]. E
 
 Cloud Security Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
 
-{{< img src="security/cspm/misconfigurations_explorer_2.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
+{{< img src="security/cspm/misconfigurations_explorer_4.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -27,7 +27,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed misconfigurations, a comprehensive breakdown of the number of resources with pass/fail misconfigurations, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_4.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 

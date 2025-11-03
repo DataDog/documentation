@@ -1,5 +1,6 @@
 ---
 title: Compose and the Datadog Agent
+description: Configure and deploy the Datadog Agent alongside multi-container applications using Docker Compose
 further_reading:
     - link: 'https://github.com/DataDog/docker-compose-example'
       tag: "Source Code"

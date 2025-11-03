@@ -23,13 +23,13 @@ type: lenguaje de código múltiple
 
 La última versión del rastreador Java es compatible con todas las máquinas virtuales Java a partir de la versión 8. Para obtener más información sobre las versiones anteriores a la v8, consulta [Tiempos de ejecución de máquinas virtuales Java compatibles][10].
 
-Para ver la lista completa de versiones y marcos de trabajo Java compatibles con Datadog (incluidas las versiones heredadas y de mantenimiento) consulta los [requisitos de compatibilidad][1].
+Para ver la lista completa de versiones y marcos Java compatibles con Datadog (incluidas las versiones heredadas y de mantenimiento) consulta los [requisitos de compatibilidad][1].
 
 ## Para empezar
 
 Antes de empezar, asegúrate de haber [instalado y configurado el Agent][18].
 
-### Instrumentación de tu aplicación
+### Instrumentar tu solicitud
 
 Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
@@ -48,7 +48,7 @@ Para empezar a rastrear tus aplicaciones:
    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 {{% /tab %}}
-{{% tab "Archivo Docker" %}}
+{{% tab "Dockerfile" %}}
    ```dockerfile
    ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
    ```
@@ -63,19 +63,21 @@ Para empezar a rastrear tus aplicaciones:
 2. Para ejecutar tu aplicación desde un script de aplicación IDE, Maven o Gradle, o desde un comando `java -jar`, con el Continuous Profiler, el rastreo de despliegues y la inyección de logs (si envías logs a Datadog), añade el argumento de máquina virtual Java `-javaagent` y las siguientes opciones de configuración, según corresponda:
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
-   Si tienes mucha necesidad de reducir el tamaño de tu imagen y omitir módulos, puedes utilizar el comando [jdeps][19] para identificar dependencias. Sin embargo, los módulos necesarios pueden cambiar con el tiempo, así que hazlo bajo tu propia responsabilidad.
+    **Nota**: Si tienes una gran necesidad de reducir el tamaño de tu imagen y omitir módulos, puedes utilizar el comando [`jdeps`][19] para identificar dependencias. Sin embargo, los módulos necesarios pueden cambiar con el tiempo, así que hazlo bajo tu propia responsabilidad.
 
-    <div class="alert alert-danger">Habilitar la creación de perfiles puede afectar a tu factura en función de tu paquete APM. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de tarifas</a>.</div>
+    **Nota**: Al activar el rastreador para Java 24+, es posible que aparezcan advertencias relacionadas con el acceso nativo JNI o el acceso a memoria `sun.misc.Unsafe`. Suprime estas advertencias añadiendo las variables de entorno `--illegal-native-access=allow` y `--sun-misc-unsafe-memory-access=allow` justo antes del argumento `-javaagent:/path/to/dd-java-agent.jar`. Consulta [JEP 472][23] y [JEP 498][24] para más información.
+
+    <div class="alert alert-warning">La activación de la creación de perfiles puede afectar tu factura según tu paquete de APM. Consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de precios</a> para obtener más información.</div>
 
 | Variable de entorno      | Propiedad del sistema                     | Descripción|
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | Tu entorno de aplicación (`production`, `staging`, etc.) |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Habilita la inyección automática de claves MDC para los ID de rastreo y de tramos (spans) de Datadog. Para ver más detalles, consulta [Uso avanzado][6]. <br><br>**Beta**: A partir de la versión 1.18.3, si la [configuración remota del Agent][16] está habilitada donde se ejecuta este servicio, puedes configurar `DD_LOGS_INJECTION` en la interfaz de usuario [Catálogo de servicios][17]. |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Habilita la inyección automática de claves MDC para los ID de trazas (traces) y de tramos (spans) de Datadog. Para ver más detalles, consulta [Uso avanzado][6]. <br><br>A partir de la versión 1.18.3, si la [configuración remota del Agent][16] está habilitada donde se ejecuta este servicio, puedes configurar `DD_LOGS_INJECTION` en la interfaz de usuario del [Catálogo de servicios][17]. |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Activar el [Continuous Profiler][5] |
 | `DD_SERVICE`   | `dd.service`     | Nombre de un conjunto de procesos que llevan a cabo la misma tarea. Se utiliza para agrupar estadísticas de tu aplicación. |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Configura una frecuencia de muestreo en la raíz de la traza para todos los servicios. <br><br>**Beta**: A partir de la versión 1.18.3, si la [configuración remota del Agent][16] está habilitada donde se ejecuta este servicio, puedes configurar `DD_TRACE_SAMPLE_RATE` en la interfaz de usuario [Catálogo de servicios][17].     |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Configura una frecuencia de muestreo en la raíz de la traza para todos los servicios. <br><br>A partir de la versión 1.18.3, si la [configuración remota del Agent][16] está habilitada donde se ejecuta este servicio, puedes configurar `DD_TRACE_SAMPLE_RATE` en la interfaz de usuario del [Catálogo de servicios][17].     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Configura una frecuencia de muestreo en la raíz de la traza para los servicios que coinciden con la regla especificada.    |
 | `DD_VERSION` | `dd.version` |  La versión de tu aplicación (por ejemplo, `2.5`, `202003181415` o `1.3-alpha`) |
 
@@ -84,7 +86,7 @@ Las [opciones de configuración](#configuration) adicionales se describen a cont
 
 ### Añadir la versión del rastreador Java a la máquina virtual Java
 
-Consulta la documentación de tu servidor de aplicaciones para saber cómo pasar `-javaagent` y otros argumentos de máquinas virtuales Java. Aquí encontrarás las instrucciones para algunos de los marcos de trabajo más frecuentes:
+Consulta la documentación de tu servidor de aplicaciones para saber cómo pasar `-javaagent` y otros argumentos de máquinas virtuales Java. Aquí encontrarás las instrucciones para algunos de los marcos más frecuentes:
 
 {{< tabs >}}
 {{% tab "Spring Boot" %}}
@@ -116,27 +118,12 @@ Para habilitar el rastreo cuando se ejecuta Tomcat en Linux:
 
 Para habilitar el rastreo cuando se ejecuta Tomcat como servicio de Windows:
 
-1. Abre un Command Prompt.
-1. Ejecuta el siguiente comando para actualizar la configuración de tu servicio Tomcat:
-    ```shell
-    tomcat8 //US//<SERVICE_NAME> --Environment="CATALINA_OPTS=%CATALINA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar\""
-    ```
-   Sustituye `<SERVICE_NAME>` por el nombre de tu servicio Tomcat y sustituye la ruta por `dd-java-agent.jar`.
-1. Reinicia tu servicio Tomcat para que los cambios se apliquen.
-
-#### Windows (Tomcat con script de configuración de entorno)
-
-Para habilitar el rastreo cuando se ejecuta Tomcat con un script de configuración de entorno:
-
-1. Crea `setenv.bat` en el directorio `./bin` de la carpeta del proyecto Tomcat, si no existe.
-1. Añade lo siguiente a `setenv.bat`:
-   ```text
-   set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
-   ```
-Si el paso anterior no funciona, intenta añadir lo siguiente:
+1. Abre la utilidad de mantenimiento "tomcat@VERSION_MAJOR@w.exe" situada en el directorio `./bin` de la carpeta del proyecto Tomcat.
+2. Ve a la pestaña **Java** y añade lo siguiente a `Java Options`:
 ```text
-set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+-javaagent:C:\path\to\dd-java-agent.jar
 ```
+3. Reinicia tus servicios Tomcat para que los cambios surtan efecto.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
@@ -231,10 +218,23 @@ La instrumentación puede venir de la instrumentación automática, de la API Op
 
 Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][9].
 
-## Leer más
+### Configuración remota
+
+La configuración remota permite a Datadog Agent configurar dinámicamente los ajustes de rastreo sin necesidad de reiniciar la aplicación. Por defecto, la configuración remota está activada. Para desactivarla, establece la variable de entorno:
+
+```
+DD_REMOTE_CONFIG_ENABLED=false
+```
+
+O añade la propiedad del sistema de JVM:
+
+```
+-Ddd.remote_config.enabled=false
+```
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 
 [1]: /es/tracing/compatibility_requirements/java
@@ -248,10 +248,12 @@ Si es necesario, configura la biblioteca de rastreo para que envíe datos de tel
 [9]: /es/tracing/trace_collection/library_config/java/
 [10]: /es/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
 [11]: /es/tracing/trace_collection/library_injection_local/
-[16]: /es/agent/remote_config/
+[16]: /es/tracing/guide/remote_config
 [17]: https://app.datadoghq.com/services
 [18]: /es/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
 [20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
 [21]: https://github.com/DataDog/dd-trace-java/releases
 [22]: https://docs.datadoghq.com/es/getting_started/support/
+[23]: https://openjdk.org/jeps/472
+[24]: https://openjdk.org/jeps/498

@@ -31,9 +31,9 @@ cascade:
     {{< nextlink href="/logs/guide/aws-account-level-logs/" >}}Set up AWS account-level log subscriptions{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Azure Automated Log Forwarding{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-manual-log-forwarding" >}}Azure Manual Log Forwarding{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Send Azure Logs to Datadog{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Send Azure Logs with the Datadog Resource{{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Send Fluent Bit Logs{{< /nextlink >}}
     {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Collect Google Cloud logs with the Datadog Dataflow template{{< /nextlink >}}
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Collect Google Cloud logs with a Pub/Sub Push subscription{{< /nextlink >}}
@@ -69,8 +69,10 @@ cascade:
 
 <br>
 
-{{< whatsnext desc="Logs Workspaces Use Cases" >}}
-    {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts/" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
+{{< whatsnext desc="Log Analysis with Notebooks" >}}
+    {{< nextlink href="/logs/guide/analyze_ecommerce_ops" >}}Analyze E-Commerce Operations Using Payment and Customer Feedback Data{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/analyze_finance_operations" >}}Analyze Finance Operations Using Payment and Transaction Data{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/analyze_login_attempts" >}}Analyze Login Attempts for Security and Compliance{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -78,7 +80,7 @@ cascade:
 {{< whatsnext desc="Sensitive Data Management" >}}
     {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/manage-sensitive-logs-data-access" >}}Manage sensitive logs data access{{< /nextlink >}}
     {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}Delete Logs with Sensitive Data{{< /nextlink >}}
 {{< /whatsnext >}}
 

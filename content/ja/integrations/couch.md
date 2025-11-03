@@ -184,7 +184,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "couch" >}}
+{{< get-metrics-from-git "couchdb" >}}
 
 
 ### イベント
@@ -192,7 +192,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Couch チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "couch" >}}
+{{< get-service-checks-from-git "couchdb" >}}
 
 
 ## トラブルシューティング

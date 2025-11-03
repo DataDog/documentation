@@ -8,10 +8,6 @@ further_reading:
 title: Configuration de Database Monitoring pour MySQL avec une gestion sur Amazon RDS
 ---
 
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
 La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données MySQL, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des données sur les connexions, des métriques système et des données de télémétrie à propos du moteur de stockage InnoDB.
 
 L'Agent recueille la télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Suivez les étapes ci-dessous pour activer la solution Database Monitoring avec votre base de données MySQL :

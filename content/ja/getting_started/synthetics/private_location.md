@@ -29,6 +29,8 @@ title: プライベートロケーションの概要
 
 プライベートロケーションとは、プライベートネットワーク内のどこにでもインストールできる Docker コンテナや Windows サービスのことです。[Google Container Registry][2] から Docker イメージを取得するか、[Windows インストーラー][13]をダウンロードしてください。**\***
 
+**注**: Docker コンテナでの Private Location は amd64 アーキテクチャのみに対応しています。arm64 のサポートについて質問がある場合は、[Datadog サポート][15] にお問い合わせください。
+
 **\*** **このソフトウェアの使用および操作には、[こちら][14]から入手可能なエンドユーザーライセンス契約が適用されます。**
 
 プライベートロケーションを作成してインストールしたら、通常のロケーションと同じように、[Synthetic テスト][3]をプライベートロケーションに割り当てることができます。
@@ -39,7 +41,7 @@ title: プライベートロケーションの概要
 
 ## プライベートロケーションを作成する
 
-1. Datadog サイトで **Digital Experience** にカーソルを合わせ、**Settings** > [**Private Locations][5]** の順に選択します。
+1. Datadog サイトで **Digital Experience** にカーソルを合わせ、**Settings** > [**Private Locations**][5] の順に選択します。
 2. **Add Private Location** をクリックします。
 3. プライベートロケーションの詳細を入力します。`Name` と `API key` フィールドのみが必須です。
 4. **Save Location and Generate Configuration File** をクリックして、ワーカーのプライベートロケーションと関連付けられたコンフィギュレーションファイルを生成します。
@@ -114,3 +116,4 @@ title: プライベートロケーションの概要
 [12]: /ja/synthetics/private_locations?tab=windows#install-your-private-location
 [13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/
+[15]: https://www.datadoghq.com/support/

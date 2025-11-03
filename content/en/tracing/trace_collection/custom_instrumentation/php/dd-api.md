@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/php
 description: 'Manually instrument your PHP application to send custom traces to Datadog.'
 code_lang: dd-api
-code_lang_weight: 1
+code_lang_weight: 2
 type: multi-code-lang
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
@@ -54,7 +54,7 @@ You can provide the following arguments:
 - `$recurse`: Whether recursive calls shall be traced.
 - `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If a namespace is present, you <strong>must</strong> use the fully qualified name of the attribute <code>#[\DDTrace\Trace]</code>. Alternatively, you can import the namespace with <code>use DDTrace\Trace;</code> and use <code>#[Trace]</code>.
 </div>
 
@@ -195,7 +195,7 @@ if (!extension_loaded('ddtrace')) {
 );
    {{< /code-block >}}
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
    When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
    </div>
 
@@ -344,7 +344,7 @@ if ($span) {
 
 ## Adding tags
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
 </div>
 

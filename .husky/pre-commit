@@ -1,0 +1,15 @@
+branch=$(git branch --show-current)
+
+YELLOW="\033[1;33m"
+ENDCOLOR="\033[0m"
+WHITE="\033[1m"
+
+# If the current branch is master, abort the commit
+if [ "$branch" = "master" ]; then
+  echo "${YELLOW}You're trying to commit to master. Use a feature branch instead.${ENDCOLOR}"
+  exit 1
+fi
+
+# Check for circular aliases in markdown files
+echo "Checking for circular aliases..."
+python3 .husky/check-circular-aliases.py

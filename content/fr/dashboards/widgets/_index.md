@@ -140,7 +140,7 @@ Ces options ne vous dispensent pas d'attribuer des unités à vos données.
 
 ## Copier et coller des widgets
 
-<div class="alert alert-warning">Vous devez posséder les <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards">autorisations <code>dashboard_public_share</code></a> et activer le <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Partage des données publiques statiques</strong></a> dans vos Paramètres d'organisation pour utiliser cette fonctionnalité.</div>
+<div class="alert alert-danger">Vous devez posséder les <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards">autorisations <code>dashboard_public_share</code></a> et activer le <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Partage des données publiques statiques</strong></a> dans vos Paramètres d'organisation pour utiliser cette fonctionnalité.</div>
 
 Les widgets peuvent être copiés sur les pages des [dashboards][4], [notebooks][5], [services APM][6] et [ressources APM][7] à l'aide du raccourci `Ctrl + C` (`Cmd + C` pour Mac). Vous pouvez également sélectionner l'icône de partage et choisir l'option Copy.
 

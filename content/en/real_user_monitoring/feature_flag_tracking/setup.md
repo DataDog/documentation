@@ -79,7 +79,7 @@ To enable feature flag data collection for the Browser SDK:
    </details>
    <br/>
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /real_user_monitoring/application_monitoring/browser#setup
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -103,7 +103,7 @@ To enable feature flag data collection for your Flutter application:
 
 1. Set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -119,12 +119,12 @@ To enable feature flag data collection for your React Native application:
 
 You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners listed below.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 
 **Note**: The following special characters are not supported for Feature Flag Tracking: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
 
   ```javascript
-  datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+  datadogRum.addFeatureFlagEvaluation(key.replaceAll(':', '_'), value);
   ```
 
 </div>

@@ -1,10 +1,12 @@
 ---
+description: Ve e interpreta las alertas de Watchdog que detectan de forma proactiva
+  anomalías en tus sistemas y aplicaciones mediante una monitorización basada en IA.
 title: Alertas de Watchdog
 ---
 
 ## Información general
 
-Watchdog busca proactivamente anomalías en tus sistemas y aplicaciones. Cada anomalía se muestra en el [Watchdog Alert Explorer][1] con más información sobre lo ocurrido, el posible impacto en otros sistemas y la causa raíz.
+Watchdog busca proactivamente anomalías en tus sistemas y aplicaciones. Cada anomalía se muestra en el [Explorador de alertas de Watchdog[1] con más información sobre lo ocurrido, el posible impacto en otros sistemas y la causa raíz.
 
 {{< img src="watchdog/watchdog.png" alt="Página de alertas de Watchdog con una alerta pendiente sobre anomalías en logs por logs con errores, una alerta resuelta sobre anomalías en logs por logs con errores y una alerta resuelta sobre tasas de error a través del análisis de la causa raíz" >}}
 
@@ -18,12 +20,12 @@ Una tarjeta de descripción general de alertas contiene las siguientes secciones
 3. **Timeline** (Línea temporal): describe el periodo en el que se produce la anomalía.
 4. **Message** (Mensaje): describe la anomalía.
 5. **Graph** (Gráfico): representa visualmente la anomalía.
-6. **Tags* (Etiquetas): muestra el alcance de la anomalía.
+6. **Tags** (Etiquetas): muestra el alcance de la anomalía.
 7. [**Impact** (Impacto)][4] (si está disponible): describe a qué usuarios, vistas o servicios afecta la anomalía.
 
 Al hacer clic en cualquier parte de la tarjeta de información general de las alertas, se abre el panel de detalles de las alertas.
 
-Además de repetir la información de la tarjeta de información general de las alertas, la pestaña **Overview** (Información general) puede contener uno o varios de los siguientes campos:
+Además de repetir la información de la tarjeta de información general de las alertas, la pestaña **Información general** puede contener uno o varios de los siguientes campos:
 
 * **Expected Bounds** (Límites esperados): haz clic en la casilla de verificación **Show expected bounds** (Mostrar límites esperados). El gráfico cambia de color para diferenciar entre un comportamiento esperado y uno anómalo.
 * **Suggested Next Steps** (Siguientes pasos sugeridos): describe los pasos para la investigación y la clasificación del comportamiento anómalo.
@@ -31,7 +33,7 @@ Además de repetir la información de la tarjeta de información general de las 
 
 Además, Watchdog te sugiere uno o más monitores que puedes crear para recibir notificaciones si la anomalía vuelve a ocurrir. Estos monitores aún no existen, por lo que la tabla muestra su estado como `suggested`. Haz clic en **Enable Monitor** (Habilitar monitor) para habilitar el monitor sugerido para tu organización. Aparecerán una serie de iconos que te permitirán abrir, editar, clonar, silenciar o eliminar el nuevo monitor.
 
-## Watchdog Alert Explorer
+## Explorador de alertas de Watchdog
 
 Puedes utilizar el intervalo de tiempo, la barra de búsqueda o las facetas para filtrar tu fuente de alertas de Watchdog.
 
@@ -69,8 +71,8 @@ Estos logs agregados se analizan en busca de comportamientos anómalos, como los
 * Una aparición de logs con un estado de advertencia o error.
 * Un aumento repentino de logs con un estado de advertencia o error.
 
-Todas las anomalías en logs se muestran como [informaciones][3] en el Log Explorer, y coinciden con el contexto de búsqueda y con cualquier restricción aplicada a tu rol.
-Las anomalías en logs que Watchdog considera particularmente `severe` se muestran en el [Watchdog Alert Explorer][1] y pueden ser alertadas configurando un [monitor de logs de Watchdog][2].
+Todas las anomalías en logs se muestran como [informaciones][3] en el Explorador de logs y coinciden con el contexto de búsqueda y con cualquier restricción aplicada a tu rol.
+Las anomalías en logs que Watchdog considera particularmente `severe` se muestran en el [Explorador de alertas de Watchdog][1] y pueden ser alertadas configurando un [monitor de logs de Watchdog][2].
 Una anomalía `severe` se define de la siguiente forma:
 
 * Contiene logs con errores.
@@ -102,7 +104,7 @@ Watchdog escanea todos los servicios y recursos para buscar anomalías en las si
   * Latencia
   * Aciertos (índice de solicitudes)
 
-Watchdog filtra los endpoints o los servicios poco utilizados para reducir el ruido y evitar anomalías en pequeñas cantidades de tráfico. Además, si se detecta una anomalía en la tasa de aciertos, que no tiene impacto en la latencia o en la tasa de errores, se ignora la anomalía. 
+Watchdog filtra endpoints o servicios poco utilizados para reducir el ruido y evitar anomalías en pequeñas cantidades de tráfico. Watchdog requiere al menos 0,5 solicitudes por segundo para que un endpoint sea monitorizado. Además, si se detecta una anomalía en la tasa de aciertos, pero no tiene impacto en la latencia o en la tasa de errores, la anomalía se ignora.
 
 #### Historial de datos requerido
 
@@ -116,7 +118,7 @@ Watchdog escanea todos los servicios y recursos para buscar anomalías en las si
 
   * Tasa de error
   * Latencia
-  * Aciertos (tasa de solicitudes)
+  * Aciertos (índice de solicitudes)
 
 Watchdog filtra los endpoints y servicios poco utilizados para reducir el ruido y evitar anomalías en pequeñas cantidades de tráfico. Además, si se detecta una anomalía en la tasa de aciertos pero no tiene impacto en la latencia o la tasa de errores, se ignora la anomalía. 
 
@@ -169,7 +171,7 @@ Watchdog empieza a encontrar anomalías una vez que dispone del historial mínim
 [13]: /es/containers/docker/?tab=standard
 [14]: /es/containers/kubernetes/installation/?tab=operator
 [15]: /es/integrations/mysql/
-[16]: /es/integrations/mysql/
+[16]: /es/integrations/sqlserver/
 [17]: /es/integrations/cassandra/
 [18]: /es/integrations/oracle/
 {{% /tab %}}
@@ -187,7 +189,7 @@ Watchdog utiliza los mismos algoritmos estacionales que los monitores de energí
 
 Las alertas de Watchdog aparecen en las siguientes ubicaciones de Datadog:
 
-* El [Watchdog Alert Explorer][1]
+* El [Explorador de alertas de Watchdog][1]
 * En cualquier [página de servicios de APM][3] individual
 * En el [catálogo de software][7]
 * En el [panel de Watchdog Insights][8], disponible en todos los exploradores
@@ -210,7 +212,7 @@ Haz clic en el icono de los prismáticos para ver una tarjeta de alerta de Watch
 
 Para archivar una alerta de Watchdog, abre el panel lateral y haz clic en el icono de la carpeta en la esquina superior derecha. Al archivarla, la alerta se oculta del explorador, así como de otras ubicaciones de Datadog, como por ejemplo la página de inicio. Si se archiva una alerta, el icono rosa de los prismáticos de Watchdog no aparece junto al servicio o al recurso correspondiente.
 
-Para ver las alertas archivadas, selecciona la opción **Show _N_ archived alerts** (Mostrar _N_ alertas archivadas) de la casilla de verificación, en la parte superior izquierda del [Watchdog Alert Explorer][1]. Esta opción sólo está disponible si hay al menos una alerta archivada. Puedes ver quién ha archivado cada alerta y cuándo lo ha hecho, y también puedes restaurar las alertas archivadas en tu fuente.
+Para ver las alertas archivadas, selecciona la opción **Show _N_ archived alerts** (Mostrar _N_ alertas archivadas) de la casilla de verificación, en la parte superior izquierda del [Explorador de alertas de Watchdog][1]. Esta opción solo está disponible si hay al menos una alerta archivada. Puedes ver quién ha archivado cada alerta y cuándo lo ha hecho, y también puedes restaurar las alertas archivadas en tu fuente.
 
 **Nota**: El archivado no impide que Watchdog etiquete futuros problemas relacionados con el servicio o el recurso.
 

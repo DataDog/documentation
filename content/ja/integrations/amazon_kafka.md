@@ -110,7 +110,7 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_kafka" >}}
+{{< get-metrics-from-git "amazon-kafka" >}}
 
 
 ### イベント

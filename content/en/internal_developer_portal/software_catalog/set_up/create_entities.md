@@ -24,7 +24,7 @@ further_reading:
   - link: "/api/latest/service-definition/"
     tag: "API"
     text: "Learn about the Service Definition API"
-  - link: "/api/latest/software_catalog/"
+  - link: "/api/latest/software-catalog/"
     tag: "API"
     text: "Learn about the Software Catalog API"
 ---
@@ -101,7 +101,6 @@ Import the definition in one of the following ways:
 1. **Datadog APIs**: Import your definition using the [Service Definition API][7] (for schema v2.x) or the [Software Catalog API][8] (for schema v3+), which are both open-sourced GitHub Action solutions.
 1. **GitHub**: Configure the [Datadog GitHub integration](#github-integration) to manage and import your definitions.
 
-
 #### GitHub integration
 
 Configure the [GitHub integration][9] to directly link from where you view the service's definition in the Software Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
@@ -136,6 +135,6 @@ To validate your service definitions ingested by Datadog's GitHub integration, y
 [8]: /api/latest/software-catalog/
 [9]: /integrations/github/
 [10]: https://app.datadoghq.com/integrations/github
-[11]: /software_catalog/entity_model
+[11]: /api/latest/software-catalog/#create-or-update-entities
 [12]: https://app.datadoghq.com/event/explorer
-[13]: internal_developer_portal/software_catalog/entity_model
+[13]: /internal_developer_portal/software_catalog/entity_model

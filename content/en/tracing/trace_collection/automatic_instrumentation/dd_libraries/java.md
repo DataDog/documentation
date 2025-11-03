@@ -65,9 +65,11 @@ To begin tracing your applications:
     ```text
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
-    If you have a strong need to reduce the size of your image and omit modules, you can use the [jdeps][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
+    **Note**: If you have a strong need to reduce the size of your image and omit modules, you can use the [`jdeps`][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
 
-    <div class="alert alert-danger">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
+    **Note**: When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][23] and [JEP 498][24] for more information.
+
+    <div class="alert alert-warning">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
 
 | Environment Variable      | System Property                     | Description|
 | --------- | --------------------------------- | ------------ |
@@ -216,6 +218,20 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
+### Remote configuration
+
+Remote Configuration allows the Datadog Agent to dynamically configure tracing settings without requiring application restarts. By default, Remote Configuration is enabled. To disable it, set the environment variable:
+
+```
+DD_REMOTE_CONFIG_ENABLED=false
+```
+
+Or add the JVM system property:
+
+```
+-Ddd.remote_config.enabled=false
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -232,10 +248,12 @@ If needed, configure the tracing library to send application performance telemet
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
 [11]: /tracing/trace_collection/library_injection_local/
-[16]: /agent/remote_config/
+[16]: /tracing/guide/remote_config
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
 [20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
 [21]: https://github.com/DataDog/dd-trace-java/releases
 [22]: https://docs.datadoghq.com/getting_started/support/
+[23]: https://openjdk.org/jeps/472
+[24]: https://openjdk.org/jeps/498

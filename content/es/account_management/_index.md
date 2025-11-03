@@ -6,10 +6,17 @@ cascade:
   algolia:
     rank: 70
 description: Gestiona tu cuenta de Datadog y tu organización
+further_reading:
+- link: https://www.datadoghq.com/blog/volkswagen-organizations/
+  tag: Blog
+  text: Prácticas recomendadas para gestionar organizaciones de Datadog a escala
 title: Gestión de cuentas
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El sitio Datadog for Government solo admite el inicio de sesión con SAML.</div>
+<div class="alert alert-danger">La plataforma Datadog for Government solo admite SAML o la autenticación básica mediante nombre de usuario/correo electrónico y contraseña. Antes de configurar la autenticación SAML, asegúrate de que se ha establecido al menos una cuenta con nombre de usuario/email y contraseña para mantener el acceso durante el proceso de configuración. Datadog recomienda habilitar la autenticación multifactor (MFA) para las cuentas basadas en contraseña.
+
+Si necesitas habilitar SAML para una cuenta de prueba, ponte en contacto con el el <a href="https://docs.datadoghq.com/getting_started/support/">servicio de asistencia de Datadog</a>.</div>
+
 {{< /site-region >}}
 
 ## Parámetros personales
@@ -26,14 +33,14 @@ Si inicias sesión en Datadog mediante la autenticación de Google, tu cuenta de
 
 ### Preferencias
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-Puedes gestionar tu zona horaria, preferencia de accesibilidad visual y suscripciones de correo electrónico desde la pestaña [Preferences][3] (Preferencias) en la página **Personal Settings** (Configuración personal).
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+Puedes gestionar tu zona horaria, preferencia de accesibilidad visual y suscripciones de correo electrónico desde la [pestaña Preferencias][3] en la página **Configuración personal**.
 
 #### Suscripciones por correo electrónico
 
 En las suscripciones por correo electrónico, tienes acceso a los siguientes informes:
-{{< site-region region="us3,us5,gov,ap1" >}}
-<div class="alert alert-warning">Los resúmenes de correo electrónico no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="us3,us5,gov,ap1,ap2" >}}
+<div class="alert alert-danger">Los resúmenes de correo electrónico no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest (Resumen diario)
@@ -59,7 +66,7 @@ En la pestaña [Organizations][12] (Organizaciones) de **Personal Settings** (Co
 
 **Nota**: Si abandonas una organización, no podrás volver a unirte, a no ser que te invite un administrador de esa organización.
 
-Para unirte a una organización existente, es necesario que un administrador te invite. Tras recibir la invitación, se te enviará un correo electrónico con el asunto "You've been invited to join <Organization Name>". Haz clic en el botón **Join Account** (Unirse a la cuenta) en el mensaje.
+Para unirte a una organización existente, debes recibir la invitación de un administrador. Después de recibirla, se te enviará un correo electrónico con el asunto "Recibiste una invitación para unirte \<Organization Name>". Haz clic en el botón **Unirse a la cuenta** del correo electrónico.
 
 Si eres administrador de una organización, consulta la documentación de referencia adicional para:
 

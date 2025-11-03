@@ -13,6 +13,10 @@ Use Observability Pipelines' Datadog Agent source to receive logs from the Datad
 
 {{% observability_pipelines/source_settings/datadog_agent %}}
 
+## Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
+
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
@@ -32,6 +36,6 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /containers/docker/log/?tab=containerinstallation#linux
 [3]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables

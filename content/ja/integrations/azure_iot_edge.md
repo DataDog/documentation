@@ -177,7 +177,7 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### イベント
@@ -185,7 +185,7 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 Azure IoT Edge には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "azure_iot_edge" >}}
+{{< get-service-checks-from-git "azure-iot-edge" >}}
 
 
 ## トラブルシューティング

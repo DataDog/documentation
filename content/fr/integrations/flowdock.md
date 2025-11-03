@@ -1,28 +1,15 @@
 ---
+app_id: flowdock
 categories:
-  - collaboration
-  - notification
-ddtype: crawler
-dependencies: []
-description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.
-doc_link: https://docs.datadoghq.com/integrations/flowdock/
-draft: false
-git_integration_title: flowdock
-has_logo: true
-integration_id: ''
-integration_title: Flowdock
-integration_version: ''
-is_public: true
+- collaboration
+- notifications
 custom_kind: integration
-manifest_version: '1.0'
-name: flowdock
-public_title: Intégration Datadog/Flowdock
-short_description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.
-version: '1.0'
+description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.
+title: Flowdock
 ---
 {{< img src="integrations/flowdock/flowdock_overview.png" alt="Présentation Flowdock" popup="true">}}
 
-## Présentation
+## Section Overview
 
 Intégrez FlowDock pour :
 
@@ -55,6 +42,4 @@ L'intégration Flowdock n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][1].
-
-[1]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).

@@ -2,16 +2,16 @@
 further_reading:
 - link: /tests/explorer/search_syntax/
   tag: Documentación
-  text: Aprende a crear una consulta de búsqueda
+  text: Aprende a crear una consulta de búsqueda.
 - link: /tests/explorer
   tag: Documentación
-  text: Más información sobre el Explorador de visibilidad de tests
+  text: Más información sobre el explorador de Test Optimization
 title: Vistas guardadas
 ---
 
 ## Información general
 
-Las vistas guardadas permiten guardar el estado del [Explorador de visibilidad de tests][2] en la [**página Ejecuciones de tests**][1] y posibilitan la solución eficaz de problemas al proporcionar un acceso rápido a las consultas con contexto, las facetas relevantes, las opciones de visualización y el intervalo de tiempo. 
+Las vistas guardadas permiten guardar el estado del [explorador de Test Optimization][2] en la [página **Ejecuciones de tests**][1] y posibilitan la resolución eficaz de problemas al proporcionar un acceso rápido a consultas con contexto, facetas relevantes, opciones de visualización e intervalo de tiempo.
 
 Las vistas guardadas permiten rastrear lo siguiente:
 
@@ -28,13 +28,13 @@ También puedes utilizar las vistas guardadas para compartir consultas y configu
 
 <div class="alert alert-info">Los usuarios con permisos de solo lectura no podrán actualizar, eliminar ni cambiar los nombres de las vistas guardadas.</div>
 
-Para acceder a las vistas guardadas, expande **> Views** (Vistas) a la izquierda en el [Explorador de visibilidad de tests][1].
+Para acceder a las vistas guardadas, expande **> Views** (Vistas) a la izquierda en el [explorador de Test Optimization][1].
 
-{{< img src="continuous_integration/saved-view-test-runs.png" alt="Acceder a las vistas guardadas mediante un clic en la pestaña a la izquierda de Visibilidad de tests" width="50%" >}}
+{{< img src="/tests/explorer/saved_view.png" alt="Acceder a las vistas guardadas haciendo clic en la pestaña a la izquierda de Test Optimization" width="50%" >}}
 
 Todas las vistas guardadas, excepto la [vista predeterminada](#default-views), se comparten en toda la organización, incluidas las vistas guardadas personalizadas que crean los usuarios. Cualquier persona de la organización puede editarlas y muestran el avatar del usuario que creó la vista. 
 
-Haz clic en **Save** (Guardar) para crear una vista guardada personalizada a partir del contenido actual en el Explorador de visibilidad de tests.
+Haz clic en **Save** (Guardar) para crear una vista guardada personalizada a partir del contenido actual en el explorador de Test Optimization.
 
 Puedes hacer lo siguiente:
 
@@ -46,9 +46,9 @@ Puedes hacer lo siguiente:
 
 ## Vistas predeterminadas
 
-Puedes configurar una vista guardada como página de inicio predeterminada en el [Explorador de visibilidad de tests][2]. Las vistas predeterminadas se establecen por usuario y no afectan a la organización. 
+Puedes configurar una vista guardada como página de inicio predeterminada en el [explorador de Test Optimization][2]. Las vistas predeterminadas se definen por cada usuario y no afectan a la organización.
 
-Puedes anular temporalmente la vista guardada predeterminada si realizas una acción en la interfaz de usuario o si abres enlaces en el Explorador de visibilidad de tests con una configuración diferente.
+Sobrescribe temporalmente la vista guardada por defecto realizando una acción en la interfaz de usuario o abriendo enlaces en el explorador de Test Optimization que incorpora una configuración diferente.
 
 En la entrada de la vista predeterminada del panel **Views** (Vistas), puedes hacer lo siguiente:
 
@@ -56,7 +56,7 @@ En la entrada de la vista predeterminada del panel **Views** (Vistas), puedes ha
 - Actualizar la vista predeterminada con los parámetros actuales.
 - Restablecer la vista predeterminada a los parámetros por defecto para ejecutar un reinicio.
 
-## Referencias adicionales
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,5 +1,6 @@
 ---
 title: DORA Metrics Data Collected
+description: "Learn about DORA Metrics events, fields, tags, and change lead time stages for deployment frequency, change lead time, and failure analysis."
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
@@ -14,11 +15,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Getting started with Tags'
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 
 ## Overview
 
@@ -45,6 +41,16 @@ All events contain the following tags if any are available:
 
 For more information about using tags, see [Getting Started with Tags][6].
 
+#### Custom tags
+
+In addition to the tags above, deployment and failure events can be enriched with custom tags to filter DORA Metrics. There are three potential sources for these tags:
+
+- Software Catalog: If a deployment or failure event is associated with services in Software Catalog, it is automatically enriched with the `language` tag and the [custom tags defined in the Service Definitions][13].
+- Incident Management: Failure events created from [Datadog Incident Management][14] are enriched with custom tags for any user-defined [Single Select or Multi Select property fields][15].
+- DORA Metrics API: Up to 100 user-provided custom tags can be added to both deployment and failure events in the [API][7].
+
+For more information about using custom tags in DORA Metrics, see [DORA Metrics Overview][16].
+
 ## DORA metrics
 
 DORA Metrics provide the following fields:
@@ -70,7 +76,7 @@ Datadog breaks down change lead time into the following fields, which represent 
 | `Time to Deploy` | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
 | `Deploy Time`          | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
 
-These stages are only computed when the source of the repository metadata is GitHub, and for most stages there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
+These stages are only computed when the source of the repository metadata is GitHub or GitLab, and for most stages, there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
 
 ### Recommendations
 
@@ -132,4 +138,7 @@ Using commit-level granularity provides a more accurate view of engineering perf
 [10]: /dora_metrics/setup/deployments/
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
 [12]: /dora_metrics/deployments/#limitations
-
+[13]: https://www.datadoghq.com/blog/service-catalog-setup/
+[14]: https://app.datadoghq.com/incidents
+[15]: /service_management/incident_management/describe#attributes
+[16]: /dora_metrics/

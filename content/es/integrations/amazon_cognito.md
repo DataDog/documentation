@@ -63,7 +63,7 @@ Configura Amazon Cognito para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_cognito" >}}
+{{< get-metrics-from-git "amazon-cognito" >}}
 
 
 ### Eventos

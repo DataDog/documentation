@@ -1,5 +1,6 @@
 ---
 title: Understanding Injector Behavior with Single Step Instrumentation
+description: Learn how the injector works with Single Step Instrumentation to automatically instrument applications at runtime without manual configuration.
 further_reading:
 - link: tracing/trace_collection/automatic_instrumentation/single-step-apm
   tag: Documentation

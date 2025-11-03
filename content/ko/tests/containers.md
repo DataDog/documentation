@@ -9,10 +9,6 @@ further_reading:
 title: 컨테이너에서 테스트
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트에서는 테스트 가시화를 사용할 수 없습니다.({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## 개요
 
 예를 들어 [`docker run`][1] 또는 [`docker-compose`][2]를 사용해 빌드 내부에서 시작한 컨테이너에서 테스트를 실행하는 경우, CI 제공업체에 따라 컨테이너에 다음 환경 변수를 전달합니다. 이를 통해 Datadog 트레이서가 빌드 정보를 자동으로 탐지할 수 있습니다.

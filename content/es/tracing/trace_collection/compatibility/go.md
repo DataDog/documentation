@@ -15,9 +15,9 @@ type: multi-code-lang
 
 ## Compatibilidad
 
-La biblioteca de rastreo de Go Datadog es de código abierto; consulta el [repositorio GitHub][1] para más información.
+La librería de rastreo de Go Datadog es de código abierto; consulta el [repositorio GitHub][1] para más información.
 
-La biblioteca de rastreo de Go Datadog tiene una [política de compatibilidad de versiones][2] definida para las versiones de Go. Las dos últimas versiones de Go son totalmente compatibles, mientras que la tercera versión más reciente se considera en [mantenimiento][3]. Las versiones anteriores pueden funcionar, pero no se proporciona soporte por defecto. Para solicitudes especiales, [contacta con soporte][4]. 
+La librería de rastreo de Go Datadog tiene una [política de compatibilidad de versiones][2] definida para las versiones de Go. Las dos últimas versiones de Go son totalmente compatibles, mientras que la tercera versión más reciente se considera en [mantenimiento][3]. Las versiones anteriores pueden funcionar, pero no se proporciona soporte por defecto. Para solicitudes especiales, [contacta con soporte][4].
 
 ### Requisitos
 
@@ -28,7 +28,7 @@ La biblioteca de rastreo de Go Datadog tiene una [política de compatibilidad de
 
 #### Compatibilidad del marco
 
-Integra el rastreador Go con la siguiente lista de marcos web utilizando uno de los siguientes paquetes auxiliares.
+Integra el rastreador Go con la siguiente lista de web frameworks utilizando uno de los siguientes paquetes auxiliares.
 
 **Nota**: La [documentación de integraciones][5] proporciona información detallada de los paquetes compatibles y sus APIs, con ejemplos de uso.
 
@@ -43,7 +43,7 @@ Integra el rastreador Go con la siguiente lista de marcos web utilizando uno de 
 | [echo v3][15]     | Totalmente compatible | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][17]              |
 | [Fiber][18]     | Totalmente compatible | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2][19]              |
 
-#### Compatibilidad de biblioteca
+#### Compatibilidad de librería
 
 El rastreador Go incluye compatibilidad con los siguientes almacenes de datos y bibliotecas.
 

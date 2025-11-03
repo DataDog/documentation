@@ -17,10 +17,6 @@ further_reading:
 title: (LEGACY) Configurar Observability Pipelines en Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## Overview
@@ -113,8 +109,8 @@ In order to run the Worker in your AWS account, you need administrative access t
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-warning">CloudFormation installs only support Remote Configuration.</div>
-<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+<div class="alert alert-danger">CloudFormation installs only support Remote Configuration.</div>
+<div class="alert alert-warning">Only use CloudFormation installs for non-production-level workloads.</div>
 
 Para ejecutar el worker en tu cuenta AWS, necesitas acceso administrativo a esa cuenta. Recopila la siguiente información para ejecutar las instancias del worker:
 * El ID de VPC en el que se ejecutarán tus instancias.
@@ -306,7 +302,7 @@ La imagen Docker del worker de Observability Pipelines está publicada en Docker
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
+<div class="alert alert-warning">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
 
 Para instalar el worker en tu cuenta AWS, utiliza la plantilla de CloudFormation para crear un stack tecnológico:
 
@@ -410,7 +406,7 @@ Un NLB es suministrado por el módulo Terraform y está configurado para apuntar
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
+<div class="alert alert-warning">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
 
 Un NLB es suministrado por la plantilla de CloudFormation y está configurado para apuntar al grupo de escalado automático. Su dirección DNS se devuelve en el resultado `LoadBalancerDNS` en CloudFormation.
 {{% /tab %}}
@@ -447,7 +443,7 @@ De forma predeterminada, se asigna una unidad EBS de 288 GB a cada instancia y e
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Las unidades EBS creadas por esta plantilla de CloudFormation tienen su ciclo de vida ligado a la instancia con la que se crean. <strong>Esto conduce a la pérdida de datos si una instancia se cierra, por ejemplo por el grupo de escalado automático.</strong> Por este motivo, utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
+<div class="alert alert-warning">Las unidades EBS creadas por esta plantilla de CloudFormation tienen su ciclo de vida ligado a la instancia con la que se crean. <strong>Esto conduce a la pérdida de datos si una instancia se cierra, por ejemplo por el grupo de escalado automático.</strong> Por este motivo, utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
 
 Por defecto, se asigna una unidad EBS de 288 GB a cada instancia, que se monta y formatea automáticamente al arrancar la instancia.
 {{% /tab %}}

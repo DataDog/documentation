@@ -9,14 +9,10 @@ further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"
-- link: "/real_user_monitoring/browser"
+- link: "/real_user_monitoring/application_monitoring/browser"
   tag: "Documentation"
   text: "Learn about RUM Browser Monitoring"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -69,5 +65,5 @@ The RUM session has all the data that [RUM normally collects][3] so you can debu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/setup/
-[2]: /real_user_monitoring/browser/
-[3]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/browser/
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/

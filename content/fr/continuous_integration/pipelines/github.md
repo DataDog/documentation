@@ -18,10 +18,6 @@ further_reading:
 title: Configurer le tracing sur les workflows GitHub Actions
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Le site Datadog sélectionné ({{< region-param key="dd_site_name" >}}) n'est pas pris en charge.</div>
-{{< /site-region >}}
-
 ## Compatibilité
 - **Versions de GitHub prises en charge** :
   - GitHub.com (SaaS)

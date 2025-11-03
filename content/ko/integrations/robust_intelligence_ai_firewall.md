@@ -140,7 +140,7 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 Robust Inte
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "robust_intelligence_ai_firewall" >}}
+{{< get-metrics-from-git "robust-intelligence-ai-firewall" >}}
 
 
 ### 서비스 점검

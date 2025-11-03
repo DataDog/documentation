@@ -1,6 +1,6 @@
 ---
 algolia:
-  subcategory: Integraciones de Marketplace
+  subcategory: Integraciones del Marketplace
 app_id: rapdev-hpux-agent
 app_uuid: 5e611b0d-a099-4823-a4ba-e42b1012b3b5
 assets:
@@ -25,7 +25,7 @@ author:
   vendor_id: rapdev
 categories:
 - marketplace
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,14 +39,14 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_hpux_agent
 pricing:
-- billing_type: tag_count
+- billing_type: recuento_etiquetas
   includes_assets: true
   metric: datadog.marketplace.rapdev.hpux_agent
   product_id: hpux-agent
   short_description: Precio unitario por host
   tag: host
   unit_label: HP-UX Agent
-  unit_price: 40
+  unit_price: 100.0
 public_title: HP-UX Agent
 short_description: Agent del sistema que proporciona métricas para HP-UX 11.31 para
   hppa e itanium
@@ -54,10 +54,10 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Marketplace
-  - Offering::Integration
-  - Submitted Data Type::Metrics
-  configuration: README.md#Setup
+  - Categoría::Marketplace
+  - Oferta::Integración
+  - Tipo de datos enviados::Métricas
+  configuration: README.md#Configuración
   description: Agent del sistema que proporciona métricas para HP-UX 11.31 para hppa
     e itanium
   media:
@@ -70,29 +70,29 @@ tile:
   - caption: Logs
     image_url: images/3.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: HP-UX Agent
-  uninstallation: README.md#Uninstallation
+  uninstallation: README.md#Desinstalación
 ---
 
-<!--  FUENTE https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 ## Información general
 
-El HP-UX Agent te permite recopilar y generar informes sobre métricas del sistema dentro de Datadog. La integración es compatible con HP-UX 11.31 en las arquitecturas PA-RISC e Itanium. El HP-UX Agent usa la distribución del sistema Perl de HP-UX predeterminada y no requiere dependencias de bibliotecas adicionales, lo que simplifica la instalación y la compatibilidad.
+El HP-UX Agent te permite recopilar y generar informes sobre métricas del sistema dentro de Datadog. La integración es compatible con HP-UX 11.31 en las arquitecturas PA-RISC e Itanium. El HP-UX Agent usa la distribución del sistema Perl de HP-UX predeterminada y no requiere dependencias de librerías adicionales, lo que simplifica la instalación y la compatibilidad.
 
 El HP-UX Agent proporciona los metadatos de host necesarios para admitir la lista de infraestructuras de Datadog, lo que permite que tu organización trabaje con sistemas host de HP-UX similares a otros sistemas operativos host de Datadog compatibles.
 
 El HP-UX Agent usa las mismas URLs y puertos que los Agents nativos. Actualmente, el HP-UX Agent admite métricas de infraestructura central, checks de procesos y colas de log. No admite checks del Agente personalizados, integraciones ni checks de servicio.
 
-## Agent
+## Ayuda
 
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales: 
+Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
- - Correo electrónico: support@rapdev.io 
+ - Correo electrónico: support@rapdev.io
  - Chat: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - Teléfono: 855-857-0222 
+ - Teléfono: 855-857-0222
 
 ---
 Hecho con ❤️ en Boston
@@ -100,4 +100,4 @@ Hecho con ❤️ en Boston
 *¿Esta no es la integración que estás buscando? ¿Falta una función esencial para tu organización? Envíanos una [nota](mailto:support@rapdev.io) y la crearemos.*
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">adquiere esta aplicación en el Marketplace</a>.
