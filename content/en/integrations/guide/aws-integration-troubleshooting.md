@@ -62,7 +62,7 @@ See [Space aggregation][22] in the metric documentation for more information.
 {{< img src="integrations/guide/aws_integration_troubleshooting/cloudwatch-metric-explorer.png" alt="The all metrics page in CloudWatch displaying a metric query under the source tab, with the cursor hovering over a point on the graph to display a metric value and timestamp" responsive="true" style="width:90%;" >}}
 
 4. Confirm that the query in CloudWatch is scoped identically to the query in Datadog:
-   - Any [Dimensions][17] used in the query should match Datadog tags
+   - Any [Dimensions][17] used in the CloudWatch metric query should match tags used in the Datadog metric query
    - The [Statistic][18] used in the query should match the Datadog [space aggregator][19]
    - Region
    - Metric Namespace and Metric name
