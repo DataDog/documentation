@@ -16,13 +16,13 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-This page describes how to instrument your Android or Android TV application with the the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
+This page describes how to instrument your Android or Android TV application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
 This guide explains how to install and enable the SDK, create and use a `FlagsClient`, and configure advanced options.
 
 ## Installation
 
-Declare `dd-sdk-android-flags` as a dependency in your project. Add the library as a Gradle dependency in your application module’s `build.gradle` file:
+Declare `dd-sdk-android-flags` as a dependency in your project. Add the library as a Gradle dependency in your application module's `build.gradle` file:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
