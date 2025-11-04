@@ -25,7 +25,7 @@ Before you set up AI Guard, ensure you have everything you need:
 ### Usage limits {#usage-limits}
 
 The AI Guard evaluator API has the following usage limits:
-- 1 billion (1,000,000,000) tokens evaluated per day.
+- 1 billion tokens evaluated per day.
 - 12,000 requests per minute, per IP.
 
 If you exceed these limits, or expect to exceed them soon, contact [Datadog support][1] to discuss possible solutions.
@@ -52,7 +52,7 @@ To ensure no AI Guard evaluations are dropped, create a custom [retention filter
 ### Limit access to AI Guard spans {#limit-access}
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-Data Access Controls is in Limited Availability. To enroll, contact Datadog support.
+Data Access Controls is in Limited Availability. To enroll, [contact Datadog support][1].
 {{< /callout >}}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
@@ -173,7 +173,7 @@ In the initial example, AI Guard evaluated a tool call in the context of its sys
 ```
 {{% /collapse-content %}}
 {{% collapse-content title="Evaluate tool call output" level="h4" expanded=false id="example-evaluate-tool-call-output" %}}
-It's generally a good idea to evaluate a tool call before running the tool. However, it's also possible to include the message with the tool output to evaluate the result of the tool call.
+As a best practice, evaluate a tool call before running the tool. However, you can include the message with the tool output to evaluate the result of the tool call.
 
 ##### Request example {#api-example-evaluate-tool-call-request}
 
@@ -217,7 +217,7 @@ It's generally a good idea to evaluate a tool call before running the tool. Howe
 
 ### Request message format {#request-message-format}
 
-The messages you pass to AI Guard must follow this format, which is a subset of the OpenAI Chat Completion API format.
+The messages you pass to AI Guard must follow this format, which is a subset of the [OpenAI chat completion][12] API format.
 
 #### System prompt format {#system-prompt-format}
 
@@ -322,9 +322,9 @@ prompt_evaluation = client.evaluate_prompt(
 ```
 
 The `evaluate_prompt` method accepts the following parameters:
-- `history` *(optional)*: A list of `Prompt` or `ToolCall` objects representing previous prompts or tool evaluations.
-- `role` *(required)*: A string specifying the role associated with the prompt.
-- `content` *(required)*: The content of the prompt.
+- `history` (optional): A list of `Prompt` or `ToolCall` objects representing previous prompts or tool evaluations.
+- `role` (required): A string specifying the role associated with the prompt.
+- `content` (required): The content of the prompt.
 
 The method returns a Boolean value: `True` if the prompt is considered safe to execute, or `False` otherwise. If the REST API detects potentially dangerous content, it raises an `AIGuardAbortError`.
 
@@ -340,9 +340,9 @@ tool_evaluation = client.evaluate_tool(
 
 In this case, the `evaluate_tool` method accepts the following parameters:
 
-- `history` *(optional)*: A list of `Prompt` or `ToolCall` objects representing previous prompts or tool evaluations.
-- `tool_name` *(required)*: A string specifying the name of the tool to invoke.
-- `tool_args` *(required)*: A dictionary containing the required tool arguments.
+- `history` (optional): A list of `Prompt` or `ToolCall` objects representing previous prompts or tool evaluations.
+- `tool_name` (required): A string specifying the name of the tool to invoke.
+- `tool_args` (required): A dictionary containing the required tool arguments.
 
 The method returns a Boolean value: `True` if the tool invocation is considered safe, or `False` otherwise. If the REST API identifies potentially dangerous content, it raises an `AIGuardAbortError`.
 
@@ -377,8 +377,8 @@ const result = await tracer.aiguard.evaluate([
 ```
 
 The evaluate method returns a promise and receives the following parameters:
-- `messages` *(required)*: list of messages (prompts or tool calls) for AI Guard to evaluate.
-- `opts` *(optional)*: dictionary with a block flag; if set to `true`, the SDK rejects the promise with `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
+- `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
+- `opts` (optional): dictionary with a block flag; if set to `true`, the SDK rejects the promise with `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
 
 The method returns a promise that resolves to an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
@@ -441,8 +441,8 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 ```
 
 The evaluate method receives the following parameters:
-- `messages` *(required)*: list of messages (prompts or tool calls) that will be evaluated by AI Guard.
-- `options` *(optional)*: object with a block flag; if set to `true`, the SDK throws an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
+- `messages` (required): list of messages (prompts or tool calls) that will be evaluated by AI Guard.
+- `options` (optional): object with a block flag; if set to `true`, the SDK throws an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
 
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
@@ -480,7 +480,7 @@ After AI Guard is enabled in your Datadog org and you've instrumented your code 
 
 ## Monitoring {#monitoring}
 
-AI Guard includes a built-in dashboard designed to monitor tool evaluations. Datadog can share a dashboard JSON file that you can [import][8] as required.
+AI Guard includes a built-in dashboard designed to monitor tool evaluations. Datadog can share a dashboard JSON file that you can [import][8] into your dashboards as required.
 
 To ensure that evaluations triggered using the API are displayed on the dashboard, you must manually instrument custom spans using the `ddtrace` library. This setup allows for detailed evaluation tracking and analysis, helping you better understand tool behavior and performance through the AI Guard dashboard. Here's an example implementation:
 
@@ -506,18 +506,18 @@ You can use the `datadog.ai_guard.evaluations` metric to count the evaluations A
 
 ### Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
 
-To create monitors for alerting at certain thresholds, you can use Datadog Monitors, which is included at no additional charge in the Datadog platform. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
+To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][9]. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
 
 #### APM monitor
 
-Follow the instructions to create a new [APM monitor][9], with its scope set to **Trace Analytics**.
+Follow the instructions to create a new [APM monitor][10], with its scope set to **Trace Analytics**.
 
 - To monitor evaluation traffic, use the query `@ai_guard.action: (DENY OR ABORT)`.
 - To monitor blocked traffic, use the query `@ai_guard.blocked:true`.
 
 #### Metric monitor
 
-Follow the instructions to create a new [metric monitor][10].
+Follow the instructions to create a new [metric monitor][11].
 
 - To monitor evaluation traffic, use the metric `datadog.ai_guard.evaluations` with the tags `action:deny OR action:abort`.
 - To monitor blocked traffic, use the metric `datadog.ai_guard.evaluations` with the tag `blocking_enabled:true`.
@@ -534,5 +534,7 @@ Follow the instructions to create a new [metric monitor][10].
 [6]: https://app.datadoghq.com/security/ai-guard/
 [7]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [8]: /dashboards/configure/#copy-import-or-export-dashboard-json
-[9]: /monitors/types/apm/?tab=traceanalytics
-[10]: /monitors/types/metric/
+[9]: /monitors/
+[10]: /monitors/types/apm/?tab=traceanalytics
+[11]: /monitors/types/metric/
+[12]: https://platform.openai.com/docs/api-reference/chat/object
