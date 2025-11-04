@@ -1,5 +1,6 @@
 ---
 title: Pipelines and Processors
+description: Learn how to use Event Management Pipelines to process and enrich events from various sources with processors
 further_reading:
 - link: "/service_management/events/"
   tag: "Documentation"
@@ -9,9 +10,9 @@ further_reading:
   text: "Event Correlation"
 ---
 
-## Overview 
+## Overview
 
-Datadog Event Management Pipelines allow you to process and manage events from various sources efficiently. With pipelines, you can apply various processing rules and filters to customize how events are handled. Pipelines make it easier to manage large volumes of incoming events in a structured way. 
+Datadog Event Management Pipelines allow you to process and manage events from various sources efficiently. With pipelines, you can apply various processing rules and filters to customize how events are handled. Pipelines make it easier to manage large volumes of incoming events in a structured way.
 
 Use pipelines to:
 - **Enrich events**: Pipelines can add additional context or information to events, such as tagging, adding custom attributes, or correlating events with relevant metadata to make them more informative and actionable.
@@ -28,7 +29,7 @@ Pipelines and processors can be applied to all events and can be configured in t
 
 ## Create a pipeline
 
-Create an Pipeline to filter to the events that you are interested in, for example, a source or a tag. 
+Create an Pipeline to filter to the events that you are interested in, for example, a source or a tag.
 
 1. Navigate to [Event Management Pipelines][1] in Datadog.
 1. Click **Add a Pipeline**.

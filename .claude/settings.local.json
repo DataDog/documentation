@@ -1,3 +1,9 @@
 {
-  "permissions": {}
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:support.google.com)",
+      "Bash(git commit:*)"
+    ]
+  }
 }

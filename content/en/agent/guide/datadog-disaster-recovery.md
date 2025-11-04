@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" header="Join the Preview!">}}
-Datadog Disaster Recovery is in Preview, but you can request access! Use this form to submit your request.
+Datadog Disaster Recovery is in Limited Availability. Use this form to request access!
 {{< /callout >}}
 
 ## Overview 

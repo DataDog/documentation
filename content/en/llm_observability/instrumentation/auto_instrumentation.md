@@ -35,6 +35,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
 | [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
+| [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -103,6 +104,16 @@ The LangChain integration instruments the following methods:
 - [Retrieval][25]
   - `langchain_community.<vectorstore>.similarity_search()`
   - `langchain_pinecone.similarity_search()`
+- [Prompt Templating][64]
+  - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
+
+  **Note**: For best results, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
+
+  ```python
+  # "translation_template" will be used to identify the template in Datadog
+  translation_template = PromptTemplate.from_template("Translate {text} to {language}")
+  chain = translation_template | llm
+  ```
 
 ## Amazon Bedrock
 
@@ -297,6 +308,20 @@ The MCP integration instruments the following methods:
   - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
 
 
+## Google ADK
+
+The Google ADK integration provides automatic tracing for agent runs, tool calls, and code executions made through [Google's ADK Python SDK][60].
+
+### Traced methods
+
+The Google ADK integration instruments the following methods:
+
+- [Agent Runs][61]
+- [Tool Calls][62]
+- [Code Executions][63]
+
+Both the `run_live` and `run_async` methods are supported.
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -356,6 +381,11 @@ The MCP integration instruments the following methods:
 [57]: https://modelcontextprotocol.io/docs/getting-started/intro
 [58]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
 [59]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
+[60]: https://google.github.io/adk-docs/#python
+[61]: https://google.github.io/adk-docs/agents/
+[62]: https://google.github.io/adk-docs/tools
+[63]: https://google.github.io/adk-docs/agents/llm-agents/#code-execution
+[64]: https://docs.langchain.com/langsmith/manage-prompts-programmatically#pull-a-prompt
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -429,6 +459,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][5]:
   - `openai.embeddings.create()` and `azureopenai.embeddings.create()`
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][21] (as of `dd-trace@5.42.0`)
+- [Responses][32] (as of `dd-trace@5.76.0`)
 
 ## LangChain
 
@@ -646,6 +677,7 @@ module.exports = {
 [29]: https://docs.claude.com/en/api/client-sdks#typescript
 [30]: https://docs.anthropic.com/en/api/messages
 [31]: https://docs.anthropic.com/en/api/messages-streaming
+[32]: https://platform.openai.com/docs/api-reference/responses/create
 {{% /tab %}}
 {{< /tabs >}}
 

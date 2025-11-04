@@ -18,4 +18,6 @@ further_reading:
 
 [Infrastructure as Code (IaC) Security][1] identifies misconfigurations and security risks in infrastructure-as-code files before deployment, helping ensure that cloud environments remain secure and compliant.
 
+<div class="alert alert-info">For Helm resolution to work correctly, each chart directory must include the charts it depends on. For details, see <a href="https://helm.sh/docs/topics/charts/#the-chart-file-structure">Chart File Structure</a> in the Helm documentation.</div>
+
 [1]: /security/code_security/iac_security/

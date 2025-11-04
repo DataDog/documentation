@@ -24,12 +24,16 @@ Sensitive Data Scanner in the Cloud scans telemetry data, such as your applicati
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
+Optionally, sampling rates can be set between 10% and 99% for each product. This helps manage costs when you first get started by reducing the amount of data that gets scanned for sensitive information.
+
 For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
 - **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 - **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
+
+**Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -148,7 +152,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
 - When you add rules to a scanning group with sampling enabled, you will not be able to select the **redact**, **partially redact**, or **hash** actions. For complete obfuscation, disable sampling in your scanning group settings.
 
-See [Investigate Sensitive Data Issues][7] for details on how to use the [Summary][8] page to triage your sensitive data issues.
+See [Investigate Sensitive Data Findings][7] for details on triaging sensitive data using the [Findings][8] page.
 
 #### Excluded namespaces
 
@@ -311,12 +315,12 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
-[8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
+[7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
+[8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /logs/guide/logs-rbac/
 [10]: /logs/log_configuration/processors/?tab=ui#remapper
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
-[14]: /observability_pipelines/set_up_pipelines/
+[14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/

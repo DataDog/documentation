@@ -66,7 +66,7 @@ const logger = createLogger({
   ],
 });
 
-logger.info(`Hello world!`);
+logger.info('Hello world!');
 {{< /code-block >}}
 
    For more information, see [Correlating Node.js Logs and Traces][2].
@@ -93,4 +93,4 @@ logger.info(`Hello world!`);
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
