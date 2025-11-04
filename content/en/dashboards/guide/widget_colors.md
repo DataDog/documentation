@@ -1,5 +1,6 @@
 ---
 title: Selecting the right colors for your graphs
+description: Choose appropriate colors for graph series to ensure clear data distinction and effective troubleshooting for teams.
 further_reading:
 - link: "/dashboards/guide/consistent_color_palette"
   tag: Documentation

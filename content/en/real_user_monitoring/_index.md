@@ -42,7 +42,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
-- link: "/real_user_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
 - link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
@@ -93,21 +93,21 @@ Select an application type to start collecting RUM data:
 
 The following table shows which RUM capabilities are supported on each platform:
 
-| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | Notes |
-| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
-| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
-| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** supports only manual action tracking. |
-| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for **React Native** |
-| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
-| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
-| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
+| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | KMP | Unity |  Notes |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-----|-------|--------|
+| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** is only able to track some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
+| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom`. <br> - **Roku** and **Unity** support only manual action tracking. |
+| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
+| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for **React Native**. |
+| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |  |
+| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}}  |  |
+| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
+| Global context/attribute tracking in Logs  | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
+| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |  |  |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | **Flutter** Session Replay is in Preview. |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | Only partially supported for all **mobile** and **Roku** devices. |
 
 ## Supported endpoints for SDK domains
 
@@ -227,7 +227,7 @@ You must have edit access to restore general access to a restricted application.
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
 [9]: /real_user_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/ios/web_view_tracking/
@@ -235,7 +235,7 @@ You must have edit access to restore general access to a restricted application.
 [12]: /real_user_monitoring/session_replay/browser/
 [13]: /real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /real_user_monitoring/session_replay/browser/developer_tools/
-[15]: /real_user_monitoring/browser/setup/
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /real_user_monitoring/application_monitoring/browser/setup/
+[16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/

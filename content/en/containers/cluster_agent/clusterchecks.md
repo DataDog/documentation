@@ -1,5 +1,6 @@
 ---
 title: Cluster Checks
+description: Configure and manage cluster checks for monitoring noncontainerized workloads and cluster services
 aliases:
     - /agent/autodiscovery/clusterchecks
     - /agent/faq/kubernetes-state-cluster-check
@@ -27,7 +28,7 @@ _Cluster checks_ extend this mechanism to monitor noncontainerized workloads, in
 
 This ensures that only **one** instance of each check runs as opposed to **each** node-based Agent Pod running this corresponding check. The [Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every ten seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures that one (and only one) instance always runs, even as nodes are added and removed from the cluster.
 
-Metrics, events, and service checks collected by cluster checks are submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and filter your data.
+Metrics, events, and service checks collected by cluster checks are submitted without a hostname, as it is not relevant. A `kube_cluster_name` tag is added, to allow you to scope and filter your data.
 
 Using cluster checks is recommended if your infrastructure is configured for high availability (HA).
 
@@ -98,8 +99,59 @@ Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent.
 {{% /tab %}}
 {{< /tabs >}}
 
+### Cluster check tagging
 
-**Note**: With cluster checks, the metrics reported by the Agent are not linked to a given hostname because they are meant to be cluster-centric metrics and not necessarily host-based metrics. As a result, these metrics do not inherit any host-level tags associated with that host, such as those inherited from a cloud provider or added by the Agent's `DD_TAGS` environment variable. To add tags to cluster check metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
+With cluster checks, the metrics reported by the Agent are **not** linked to a given `host` because they are meant to be cluster-centric metrics and not necessarily host-based metrics. As a result, these metrics do **not** [inherit any host-level tags][16] associated with that host, such as those set from a cloud provider or set directly by the Node Agent.
+
+To add global tags to the cluster check integrations and their metrics you can set the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable with the desired tags. In Cluster Agent `7.60.0` and above any tags set in the environment variable `DD_TAGS` for the Cluster Agent are included in the dispatched cluster checks.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Provide your Operator the configuration to set the global tags:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    #(...)
+    tags:
+      - "tag1:value1"
+      - "tag2:value2"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Provide your Helm Chart the configuration to set the global tags:
+
+```yaml
+datadog:
+  #(...)
+  tags:
+    - "tag1:value1"
+    - "tag2:value2"
+```
+
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+### Cluster Agent
+
+Provide your Cluster Agent the `DD_TAGS` environment variable with your desired tags:
+
+```yaml
+- name: DD_TAGS
+  value: "tag1:value1 tag2:value2"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Additionally any [Unified Service Tagging labels][17] added to your Kubernetes service are added to the dispatched check.
+
+See the [`agent clusterchecks` validation commands](#validation) below to see how to validate what tags are associated with your checks.
 
 ### Cluster check runners
 
@@ -252,10 +304,10 @@ After you set up an externally hosted database, such as CloudSQL or RDS, and a c
 cluster_check: true
 init_config:
 instances:
-    - server: "<PRIVATE_IP_ADDRESS>"
-      port: 3306
-      user: datadog
-      pass: "<YOUR_CHOSEN_PASSWORD>"
+  - server: "<PRIVATE_IP_ADDRESS>"
+    port: 3306
+    user: datadog
+    password: "<YOUR_CHOSEN_PASSWORD>"
 ```
 
 #### Example: HTTP_Check on an external URL
@@ -266,8 +318,8 @@ If there is a URL you would like to perform an [HTTP check][10] against once per
 cluster_check: true
 init_config:
 instances:
-    - name: "<EXAMPLE_NAME>"
-      url: "<EXAMPLE_URL>"
+  - name: "<EXAMPLE_NAME>"
+    url: "<EXAMPLE_URL>"
 ```
 
 #### Example: HTTP_Check on a Kubernetes service
@@ -357,40 +409,41 @@ ad.datadoghq.com/service.checks: |
 
 This syntax supports a `%%host%%` [template variable][11], which is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
+For v2, if your `init_config` is the empty `{}` you can omit it entirely.
+
 #### Example: HTTP check on an NGINX-backed service
 
-The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following service definition exposes the Pods from an NGINX deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-    name: my-nginx
-    labels:
-        run: my-nginx
-        tags.datadoghq.com/env: "prod"
-        tags.datadoghq.com/service: "my-nginx"
-        tags.datadoghq.com/version: "1.19.0"
-    annotations:
-      ad.datadoghq.com/service.checks: |
-        {
-          "http_check": {
-            "init_config": {},
-            "instances": [
-              {
-                "url":"http://%%host%%",
-                "name":"My Nginx",
-                "timeout":1
-              }
-            ]
-          }
+  name: my-nginx
+  labels:
+    app: nginx
+    tags.datadoghq.com/env: "prod"
+    tags.datadoghq.com/service: "my-nginx"
+    tags.datadoghq.com/version: "1.19.0"
+  annotations:
+    ad.datadoghq.com/service.checks: |
+      {
+        "http_check": {
+          "instances": [
+            {
+              "url":"http://%%host%%",
+              "name":"My Nginx",
+              "timeout":1
+            }
+          ]
         }
+      }
 spec:
-    ports:
-        - port: 80
-          protocol: TCP
-    selector:
-        run: my-nginx
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: nginx
 ```
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
@@ -415,35 +468,35 @@ This syntax supports a `%%host%%` [template variable][11], which is replaced by 
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following service definition exposes the Pods from an NGINX deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-    name: my-nginx
-    labels:
-        run: my-nginx
-        tags.datadoghq.com/env: "prod"
-        tags.datadoghq.com/service: "my-nginx"
-        tags.datadoghq.com/version: "1.19.0"
-    annotations:
-        ad.datadoghq.com/service.check_names: '["http_check"]'
-        ad.datadoghq.com/service.init_configs: '[{}]'
-        ad.datadoghq.com/service.instances: |
-            [
-              {
-                "name": "My Nginx",
-                "url": "http://%%host%%",
-                "timeout": 1
-              }
-            ]
+  name: my-nginx
+  labels:
+    app: nginx
+    tags.datadoghq.com/env: "prod"
+    tags.datadoghq.com/service: "my-nginx"
+    tags.datadoghq.com/version: "1.19.0"
+  annotations:
+    ad.datadoghq.com/service.check_names: '["http_check"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
+      [
+        {
+          "name": "My Nginx",
+          "url": "http://%%host%%",
+          "timeout": 1
+        }
+      ]
 spec:
-    ports:
-        - port: 80
-          protocol: TCP
-    selector:
-        run: my-nginx
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: nginx
 ```
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
@@ -458,43 +511,58 @@ In addition, each Pod should be monitored with the [NGINX check][12], as it enab
 
 ## Validation
 
-The Datadog Cluster Agent dispatches each cluster check to a node Agent to run. Run the [Datadog Cluster Agent's `clusterchecks` subcommand][13] and look for the check name under the node Agent's hostname:
+The Datadog Cluster Agent dispatches each cluster check to a Node Agent to run. Run the [Datadog Cluster Agent's `clusterchecks` subcommand][13] to show the check dispatching. This shows the node running the cluster check, the resolved check configuration, and all associated tags.
 
 ```
-# kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
-(...)
-===== Checks on default-pool-bce5cd34-ttw6.c.sandbox.internal =====
+# kubectl exec <CLUSTER_AGENT_POD_NAME> -- agent clusterchecks
+=== 2 agents reporting ===
+
+Name                              Running checks
+example-node-1-my-cluster-name    0
+example-node-2-my-cluster-name    1
+
+===== Checks on example-node-2-my-cluster-name =====
 
 === http_check check ===
-Source: kubernetes-services
-Instance ID: http_check:My service:5b948dee172af830
+Configuration provider: kubernetes-services
+Configuration source: kube_services:kube_service://default/nginx
+Config for instance ID: http_check:My Nginx Service:be58da251c066dba
 empty_default_hostname: true
-name: My service
+name: My Nginx
 tags:
+- cluster_name:my-cluster-name
+- kube_cluster_name:my-cluster-name
 - kube_namespace:default
-- kube_service:my-nginx
-- cluster_name:example
+- kube_service:nginx
+- env:prod
+- service:my-nginx
+- version:1.19.0
 timeout: 1
-url: http://10.15.246.109
+url: http://10.0.104.181
 ~
 Init Config:
 {}
 ===
 ```
 
-Now, run the [node Agent's `status` subcommand][14] and look for the check name under the Checks section.
+Next, identify the Agent pod on that node and run the [node Agent's `status` subcommand][14]. You can identify the check name under the "Running Checks" section.
 
 ```
-# kubectl exec <NODE_AGENT_POD_NAME> agent status
+# kubectl exec <NODE_AGENT_POD_NAME> -- agent status
 ...
-    http_check (3.1.1)
-    ------------------
-      Instance ID: http_check:My service:5b948dee172af830 [OK]
-      Total Runs: 234
-      Metric Samples: Last Run: 3, Total: 702
+    http_check (12.0.1)
+    -------------------
+      Instance ID: http_check:My Nginx:b2d70acb4a61b169 [OK]
+      Configuration Source: kube_services:kube_service://default/nginx
+      Total Runs: 22
+      Metric Samples: Last Run: 2, Total: 44
       Events: Last Run: 0, Total: 0
-      Service Checks: Last Run: 1, Total: 234
-      Average Execution Time : 90ms
+      Service Checks: Last Run: 1, Total: 22
+      Average Execution Time : 1.011s
+      Last Execution Date : 2025-10-31 19:46:46 UTC (1761940006000)
+      Last Successful Execution Date : 2025-10-31 19:46:46 UTC (1761940006000)
+      metadata:
+        config.source: kube_service://default/nginx
 ```
 
 ## Further Reading
@@ -516,3 +584,5 @@ Now, run the [node Agent's `status` subcommand][14] and look for the check name 
 [13]: /containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
 [14]: /containers/cluster_agent/commands/#cluster-agent-commands
 [15]: /containers/cluster_agent/commands/?tab=datadogoperator#cluster-agent-environment-variables
+[16]: /getting_started/tagging/#tag-inheritance
+[17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes

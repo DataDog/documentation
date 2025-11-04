@@ -2,7 +2,7 @@
 title: Sources
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 - link: "/observability_pipelines/processors/"
@@ -81,7 +81,7 @@ Instead of using a self-signed certificate, Datadog recommends the following:
 
 If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host.
 
-<div class="alert alert-danger">Datadog does not recommend self-signed certificates. They are less secure and are not appropriate for production or internet-facing use. If you must use self-signed certificates, limit usage to internal testing only.</a></div>
+<div class="alert alert-warning">Datadog does not recommend self-signed certificates. They are less secure and are not appropriate for production or internet-facing use. If you must use self-signed certificates, limit usage to internal testing only.</a></div>
 
 For the Worker host to trust the self-signed certificate:
 
@@ -95,6 +95,6 @@ For the Worker host to trust the self-signed certificate:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/troubleshooting/#use-tap-to-see-your-data
+[2]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#use-tap-to-see-your-data
 [3]: https://letsencrypt.org/
 

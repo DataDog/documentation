@@ -255,7 +255,7 @@ L'aperçu de Code Analysis est disponible.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Analysis n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}

@@ -1,5 +1,6 @@
 ---
 title: Cloudcraft in Datadog
+description: "Visualize and analyze AWS cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
@@ -41,7 +42,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
-<div class="alert alert-warning"><strong>Note</strong>: Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
@@ -141,4 +142,4 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
-[14]: /account_management/rbac/
+[14]: /account_management/rbac/permissions/#infrastructure

@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Admission Controller
+description: Troubleshoot common issues with the Datadog Cluster Agent Admission Controller and library injection
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"

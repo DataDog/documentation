@@ -41,7 +41,6 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< whatsnext desc="Software Delivery:">}}
 {{< nextlink href="/continuous_integration/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CI Visibility{{< /nextlink >}}
 {{< nextlink href="/tests/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Test Optimization{{< /nextlink >}}
-{{< nextlink href="/quality_gates/guide/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Quality Gates{{< /nextlink >}}
 {{< nextlink href="/feature_flags/guide" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Feature Flags{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -23,12 +23,8 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
-pip install ddtrace>=3.14.0
+pip install ddtrace>=3.15.0
 ```
-
-### Cookbooks
-
-To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
 
 ### Setup
 
@@ -47,12 +43,22 @@ LLMObs.enable(
 
 **Notes**:
 - You need *both* an API key and an application key
-- All datasets and experiments live in a project
+
+## Projects
+_Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
+You can create a project manually in the Datadog console, API, and SDK by specifying a project name that does not already exist in `LLMObs.enable`.
+
+```python
+LLMObs.enable(
+    ...
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+)
+```
 
 ## Datasets
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
 
 ### Creating a dataset
 
@@ -146,6 +152,33 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
+### Dataset versioning
+
+Datasets are automatically versioned to track changes over time. Versioning information enables reproducibility and allows experiments to reference specific dataset versions. 
+
+The `Dataset` object has a field, `current_version`, which corresponds to the latest version; previous versions are subject to a 90-day retention window. 
+
+Dataset versions start at `0`, and each new version increments the version by 1.
+
+#### When new dataset versions are created
+
+A new dataset version is created when:
+- Adding records
+- Updating records (changes to `input` or `expected_output` fields)
+- Deleting records
+
+Dataset versions are **NOT** created for changes to `metadata` fields, or when updating the dataset name or description.
+
+#### Version retention
+
+- Previous versions (**NOT** the content of `current_version`) are retained for 90 days. 
+- The 90-day retention period resets when a previous version is used — for example, when an experiment reads a version.
+- After 90 consecutive days without use, a previous version is eligible for permanent deletion and may no longer be accessible.
+
+**Example of version retention behavior**
+
+After you publish `12`, `11` becomes a previous version with a 90-day window. After 25 days, you run an experiment with version `11`, which causes the 90-day window to **restart**. After another 90 days, during which you have not used version `11`, version `11` may be deleted.
+
 ### Accessing dataset records
 
 You can access dataset records using standard Python indexing:
@@ -211,9 +244,10 @@ Evaluators are functions that measure how well the model or agent performs by co
 - score: returns a numeric value (float)
 - categorical: returns a labeled category (string)
 
-### Creating an experiment
+### Summary Evaluators
+Summary Evaluators are optionally defined functions that measure how well the model or agent performs, by providing an aggregated score against the entire dataset, outputs, and evaluation results. The supported evaluator types are the same as above.
 
-Create an experiment using `LLMObs.experiment()`:
+### Creating an experiment
 
 1. Load a dataset
    ```python
@@ -223,20 +257,23 @@ Create an experiment using `LLMObs.experiment()`:
    dataset = LLMObs.pull_dataset("capitals-of-the-world")
    ```
 
-2. Define a task function that processes a single dataset record.
+2. Define a task function that processes a single dataset record
+
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
        question = input_data["question"]
        # Your LLM or processing logic here
        return "Beijing" if "China" in question else "Unknown"
    ```
+   A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.
+   This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
 
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.
-
    If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-3. Define evaluator functions.
+4. Define evaluator functions.
+
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
        return output_data == expected_output
@@ -254,14 +291,27 @@ Create an experiment using `LLMObs.experiment()`:
        fake_llm_call = "excellent"
        return fake_llm_call
    ```
+   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
+   Evaluators can only return a string, a number, or a Boolean.
 
-4. Create and run the experiment.
+5. (Optional) Define summary evaluator function(s).
+
+   ```python
+    def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
+        return evaluators_results["exact_match"].count(True)
+
+   ```
+   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
+   Summary evaluators can only return a string, a number, or a Boolean.
+
+6. Create and run the experiment.
    ```python
    experiment = LLMObs.experiment(
        name="capital-cities-test",
        task=task,
        dataset=dataset,
        evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+       summary_evaluators=[num_exact_matches], # optional
        description="Testing capital cities knowledge",
        config={
            "model_name": "gpt-4",
@@ -273,7 +323,7 @@ Create an experiment using `LLMObs.experiment()`:
    results = experiment.run()  # Run on all dataset records
 
    # Process results
-   for result in results:
+   for result in results.get("rows", []):
        print(f"Record {result['idx']}")
        print(f"Input: {result['input']}")
        print(f"Output: {result['output']}")
@@ -297,10 +347,185 @@ Create an experiment using `LLMObs.experiment()`:
    results = experiment.run(raise_errors=True)
    ```
 
-5. View your experiment results in Datadog:
+7. View your experiment results in Datadog.
    ```
    print(f"View experiment: {experiment.url}")
    ```
+
+## Setting up an automated experiment in CI/CD
+You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
+
+### GitHub Actions
+This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following Python Script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
+
+**Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
+
+```python
+from ddtrace.llmobs import LLMObs
+from typing import Dict, Any, Optional, List
+
+LLMObs.enable(
+    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
+    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
+    site="datadoghq.com",      # defaults to DD_SITE environment variable
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+)
+
+
+dataset = LLMObs.create_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project",  # optional, defaults to project_name used in LLMObs.enable
+    description="Questions about world capitals",
+    records=[
+        {
+            "input_data": {
+                "question": "What is the capital of China?"
+            },  # required, JSON or string
+            "expected_output": "Beijing",  # optional, JSON or string
+            "metadata": {"difficulty": "easy"},  # optional, JSON
+        },
+        {
+            "input_data": {
+                "question": "Which city serves as the capital of South Africa?"
+            },
+            "expected_output": "Pretoria",
+            "metadata": {"difficulty": "medium"},
+        },
+    ],
+)
+
+# View dataset in Datadog UI
+print(f"View dataset: {dataset.url}")
+
+# Add a new record
+dataset.append(
+    {
+        "input_data": {"question": "What is the capital of Switzerland?"},
+        "expected_output": "Bern",
+        "metadata": {"difficulty": "easy"},
+    }
+)
+
+# Update an existing record
+dataset.update(
+    0,
+    {
+        "input_data": {"question": "What is the capital of China?"},
+        "expected_output": "Beijing",
+        "metadata": {"difficulty": "medium"},
+    },
+)
+
+# Delete a record
+dataset.delete(1)  # Deletes the second record
+
+# Save changes to Datadog
+dataset.push()
+
+# Get a single record
+record = dataset[0]
+
+# Get multiple records
+records = dataset[1:3]
+
+# Iterate through records
+for record in dataset:
+    print(record["input_data"])
+
+
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+    question = input_data["question"]
+    # Your LLM or processing logic here
+    return "Beijing" if "China" in question else "Unknown"
+
+
+def exact_match(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> bool:
+    return output_data == expected_output
+
+
+def overlap(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> float:
+    expected_output_set = set(expected_output)
+    output_set = set(output_data)
+
+    intersection = len(output_set.intersection(expected_output_set))
+    union = len(output_set.union(expected_output_set))
+
+    return intersection / union
+
+
+def fake_llm_as_a_judge(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> str:
+    fake_llm_call = "excellent"
+    return fake_llm_call
+
+
+def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
+    return evaluators_results["exact_match"].count(True)
+
+
+experiment = LLMObs.experiment(
+    name="capital-cities-test",
+    task=task,
+    dataset=dataset,
+    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+    summary_evaluators=[num_exact_matches],  # optional
+    description="Testing capital cities knowledge",
+    config={"model_name": "gpt-4", "version": "1.0"},
+)
+
+# Run the experiment
+results = experiment.run()  # Run on all dataset records
+
+# Process results
+for result in results.get("rows", []):
+    print(result)
+    print(f"Record {result['idx']}")
+    print(f"Input: {result['input']}")
+    print(f"Output: {result['output']}")
+    # print(f"Score: {result['evaluations']['evaluator_name']['value']}")
+    if result["error"]["message"]:
+        print(f"Error: {result['error']['message']}")
+
+results = experiment.run(jobs=4, raise_errors=True)
+
+print(f"View experiment: {experiment.url}")
+```
+
+```yaml
+name: Experiment SDK Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: protected-main-env # The job uses secrets defined in this environment
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.0' # Or your desired Python version
+      - name: Install Dependencies
+        run: pip install ddtrace>=3.15.0 dotenv
+      - name: Run Script
+        run: python ./experiment_sdk_demo/main.py
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+```
+
+## Cookbooks
+
+To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
 
 ## HTTP API
 
@@ -500,6 +725,7 @@ List all datasets, sorted by creation date. The most recently-created datasets a
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `current_version` | int | The current version number of the dataset. Versions start at 0 and increment when records are added or modified. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -525,6 +751,7 @@ Create a dataset. If there is an existing dataset with the same name, the API re
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `current_version` | int | The current version number of the dataset. Starts at 0 for new datasets. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -538,9 +765,14 @@ List all dataset records, sorted by creation date. The most recently-created rec
 
 | Parameter | Type | Description |
 | ---- | ---- | --- |
-| `filter[version]` | string | List results for a given dataset version. |
+| `filter[version]` | int | List results for a given dataset version. If not specified, defaults to the dataset's current version. Version numbers start at 0. |
 | `page[cursor]` | string | List results with a cursor provided in the previous query. |
 | `page[limit]` | int | Limits the number of results. |
+
+**Notes**:
+- Without `filter[version]`, you get records from the **current version only**, not all versions.
+- To retrieve records from a specific historical version, use `filter[version]=N` where N is the version number.
+- Version numbers start at 0 when a dataset is created.
 
 **Response**
 
@@ -570,7 +802,7 @@ Appends records for a given dataset.
 
 | Field | Type | Description |
 | ---- | ---- | --- |
-| `deduplicate` | bool | If `true`, deduplicates appended records. |
+| `deduplicate` | bool | If `true`, deduplicates appended records. Defaults to `true`. |
 | `records` (_required_) | [][RecordReq](#object-recordreq) | List of records to create. |
 
 #### Object: RecordReq
@@ -609,6 +841,7 @@ Partially update a dataset object. Specify the fields to update in the payload.
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `current_version` | int | The current version number of the dataset. Metadata-only updates do not increment the version. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -841,14 +1074,18 @@ Empty body on success.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[1]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
-[10]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
+[10]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[14]: /llm_observability/experiments/?tab=manual#setup
+[15]: /llm_observability/experiments/?tab=manual#projects
+[16]: /llm_observability/experiments/?tab=manual#datasets
+[17]: /llm_observability/experiments/?tab=manual#experiments

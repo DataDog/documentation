@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Datadog Support
+description: Learn best practices for contacting Datadog support through chat or tickets for technical questions and urgent issues.
 further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: "Documentation"
@@ -46,7 +47,7 @@ If you're not sure which option is best, feel free to use either channel to conn
 
 ## Reaching out on chat
 
-<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
+<div class="alert alert-danger">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
 To get started, click **Support** on the bottom-left corner of the navigation menu.
 

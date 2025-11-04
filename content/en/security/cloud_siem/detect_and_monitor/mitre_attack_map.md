@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">The MITRE ATT&CK Map only covers <a href="https://attack.mitre.org/matrices/enterprise/">MITRE ATT&CK Enterprise.</a></div>
+<div class="alert alert-danger">The MITRE ATT&CK Map only covers <a href="https://attack.mitre.org/matrices/enterprise/">MITRE ATT&CK Enterprise.</a></div>
 
 The MITRE ATT&CK Framework is a knowledge base used to develop specific threat models and methodologies. Use the Cloud SIEM MITRE ATT&CK Map to explore and visualize the MITRE ATT&CK Framework against Datadog's out-of-the-box rules and your custom detection rules. The MITRE ATT&CK Map displays detection rule density as a heat map to provide visibility into attacker techniques. Your security teams can use the heat map to assess gaps in coverage that is relevant to their organization or team and prioritize improvements to their detection rule defenses.
 
@@ -39,7 +39,7 @@ Click the rule density buttons to visualize the map for a specific number of rul
 To view more information about a technique and the rules monitoring the technique:
 
 1. On the [MITRE ATT&CK Map][3] page, click on a technique tile.
-1. Click **Create Custom Rule** if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules.
+1. Click **Create Custom Rule** if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules. **Note**: For the custom rule to show within active sources, the appropriate source tag must be defined in the detection rule.
 1. In the **Rules monitoring this Technique** section, you can:
 	1. Enter a search query to filter to specific rules.
   1. Sort by the creation date, rule type, rule name, source, or highest severity.

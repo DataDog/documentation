@@ -1,5 +1,6 @@
 ---
 title: Log Monitor
+description: "Monitor indexed logs to detect security threats, troubleshoot issues, and alert when log patterns exceed defined thresholds."
 aliases:
 - /monitors/monitor_types/log
 - /monitors/create/types/log/
@@ -33,13 +34,13 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 To create a log monitor in Datadog, use the main navigation: [**Monitors > New Monitor > Logs**][3].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
 As you define the search query, the graph above the search fields updates.
 
-1. Construct a search query using the same logic as a [Log Explorer search][4].
+1. Construct a search query using the same logic as a [Log Explorer search][4]. Note that [Flex Tier logs][10], which can be shown in Log Explorer, are not supported for monitors. Only Standard Tier logs are supported.
 2. Choose to monitor over a log count, [facet][5], an attribute, or [measure][6]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select an attribute or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet or an attribute**: If a an attribute is selected, the monitor alerts over the `Unique value count` of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
@@ -126,3 +127,4 @@ Include a sample of 10 logs in the alert notification:
 [7]: /monitors/configuration/#advanced-alert-conditions
 [8]: /monitors/notify/
 [9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables
+[10]: /logs/log_configuration/flex_logs/

@@ -33,6 +33,10 @@ ddtrace==<VERSION>
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform function="true" %}}
+   {{% /tab %}}
+
    {{% tab "Other" %}}
    {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
@@ -93,4 +97,4 @@ logger.info('Hello world!')
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5

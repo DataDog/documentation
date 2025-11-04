@@ -2,7 +2,7 @@
 title: .NET Custom Instrumentation using the Datadog API
 code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 1
+code_lang_weight: 2
 aliases:
     - /tracing/opentracing/dotnet
     - /tracing/manual_instrumentation/dotnet
@@ -79,11 +79,11 @@ namespace Store.Managers
 ## Custom instrumentation with code
 
 <div class="alert alert-info">
-  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
+  This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
 </div>
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
+<div class="alert alert-danger">
+  Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 ### Configuring Datadog in code
@@ -108,7 +108,7 @@ Tracer.Configure(settings);
 
 Calling `Tracer.Configure()` replaces the settings for all subsequent traces, both for custom instrumentation and for automatic instrumentation.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Replacing the configuration should be done <strong>once, as early as possible</strong> in your application.
 </div>
 
@@ -118,7 +118,7 @@ In addition to automatic instrumentation, the `[Trace]` attribute, and `DD_TRACE
 
 To create and activate a custom span, use `Tracer.Instance.StartActive()`. If a trace is already active (when created by automatic instrumentation, for example), the span is part of the current trace. If there is no current trace, a new one is started.
 
-<div class="alert alert-warning"><strong>Warning</strong>: Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
+<div class="alert alert-danger">Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
 </div>
 
 ```csharp

@@ -1,5 +1,6 @@
 ---
 title: Synthetic Monitors
+description: "Create and manage monitors for Synthetic tests to receive notifications when web and API tests fail or perform poorly."
 aliases:
   - /synthetics/guide/synthetic-test-monitors/
 further_reading:

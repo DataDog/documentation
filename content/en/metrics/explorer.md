@@ -51,9 +51,19 @@ The possible options are:
 
 You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
+### Split graph
+
+Use the **Split Graph** button to view the data split into individual graphs by values for tags such as region, service, or environment.
+
 ### Export
 
-Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
+Use the **Export** button (<i class="icon-export"></i>) to export your graph:
+
+- Copy a link to the graph for sharing
+- Add it to an [incident][8]
+- Create a [monitor][9]
+- Save it to a [dashboard][10]
+- Save it to a [notebook][2] 
 
 ### Quick Graphs
 
@@ -72,3 +82,6 @@ For more information, see the [Quick Graphs][7] documentation.
 [5]: /metrics/introduction/#space-aggregation
 [6]: /dashboards/querying/#advanced-graphing
 [7]: /dashboards/guide/quick-graphs/
+[8]: /service_management/incident_management/
+[9]: /monitors/
+[10]: /dashboards/

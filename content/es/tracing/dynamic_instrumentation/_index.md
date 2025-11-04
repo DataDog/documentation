@@ -31,7 +31,7 @@ title: Instrumentación dinámica
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  Dynamic Instrumentation no es compatible con el <a href="/getting_started/site">sitioDatadog </a> seleccionado ({{< region-param key="dd_site_name" >}}), ya que requiere que <a href="/agent/remote_config/">la configuración remota</a> esté activada.
 </div>
 {{% /site-region %}}
@@ -48,7 +48,7 @@ Si estás interesado en probar las últimas mejoras de la experiencia de usuario
 
 Dynamic Instrumentation requiere lo siguiente:
 
-- [Datadog Agent][1] 7.45.0 o superior esté instalado junto a su servicio.
+- [Datadog Agent][1] 7.49.0 o superior esté instalado junto a su servicio.
 - [Configuración remota][2] esté habilitada en ese Agent.
 - Para aplicaciones Java, la librería de seguimiento [`dd-trace (traza)-java`][3] 1.34.0 o superior.
 - Para aplicaciones Python, la librería de seguimiento [`dd-trace (traza)-py`][4] 2.2.0 o superior.

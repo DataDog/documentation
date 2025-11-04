@@ -1,6 +1,6 @@
 ---
 title: Enrich And Control Browser RUM Data With beforeSend
-
+description: "Use the beforeSend callback to enrich, modify, or filter RUM events before they're sent to Datadog for enhanced data control."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -272,8 +272,8 @@ The following tabs show the information contained in the `beforeSend` event and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
-[2]: /real_user_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

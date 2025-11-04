@@ -27,7 +27,7 @@ Envía datos a través de una red privada para evitar la Internet pública y red
 
 ## Proveedores de nube compatibles
 
-<div class="alert alert-warning">Asegúrate de que el sitio Datadog seleccionado {{< region-param key="dd_site_name" code="true" >}} es correcto. Los enlaces privados específicos de la nube no están disponibles para todos los sitios Datadog.</div>
+<div class="alert alert-danger">Asegúrate de que el sitio Datadog seleccionado {{< region-param key="dd_site_name" code="true" >}} es correcto. Los enlaces privados específicos de la nube no están disponibles para todos los sitios Datadog.</div>
 
 {{< whatsnext desc="Conéctate a Datadog mediante:" >}}
     {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=us" >}}US1 - AWS PrivateLink{{< /nextlink >}}

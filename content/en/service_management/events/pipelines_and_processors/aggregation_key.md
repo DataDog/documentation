@@ -1,5 +1,6 @@
 ---
 title: Aggregation Key Processor
+description: Generate custom aggregation keys based on event attributes or tags to enable effective deduplication and improve event correlations
 ---
 
 Use the aggregation key processor to generate a custom aggregation key (`@aggregation_key`) based on event attributes or tags. For example, you can use the aggregation key processor to create a custom aggregation key based on an event's title and source tag. Events with matching values share the same key, enabling more effective deduplication and improving the quality of [Event Correlations][1].
@@ -12,7 +13,7 @@ Use the aggregation key processor to generate a custom aggregation key (`@aggreg
 - Events originating from different sources or integrations receive distinct aggregation keys.
 - By default, existing aggregation keys are overwritten by this processor. Adjust the toggle to configure this behavior.
 
-<div class="alert alert-warning">Aggregation keys are included by default in Datadog Monitor alerts and are not modified by the aggregation key processor. This ensures that monitor alert events retain their original keys and are not overwritten.</div>
+<div class="alert alert-danger">Aggregation keys are included by default in Datadog Monitor alerts and are not modified by the aggregation key processor. This ensures that monitor alert events retain their original keys and are not overwritten.</div>
 
 The aggregation key processor performs the following actions:
 

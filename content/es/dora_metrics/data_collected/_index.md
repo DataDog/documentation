@@ -15,7 +15,7 @@ further_reading:
 title: Datos recopilados de DORA Metrics
 ---
 
-<div class="alert alert-warning">DORA Metrics están en fase de Vista previa.</div>
+<div class="alert alert-danger">DORA Metrics están en fase de Vista previa.</div>
 
 ## Información general
 

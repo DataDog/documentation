@@ -1,5 +1,6 @@
 ---
 title: "Data Observability: Datasets"
+description: "Set up Data Observability for datasets to detect freshness delays, unusual data patterns, and column-level metric changes in Snowflake and BigQuery."
 further_reading:
   - link: '/data_observability'
     tag: 'Documentation'
@@ -189,6 +190,31 @@ After completing the Snowflake setup, configure the Snowflake integration in Dat
 To monitor BigQuery data in Datadog, you must configure permissions in your Google Cloud project and enable the relevant features in the Datadog integration. For detailed instructions, see the [Expanded BigQuery monitoring][1] section of the Datadog Google Cloud Platform documentation.
 
 [1]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#expanded-bigquery-monitoring
+
+{{% /tab %}}
+{{% tab "Databricks" %}}
+
+To monitor Databricks data in Datadog, you must complete the following steps:
+
+1. Complete the installation instructions in the [Databricks Integration documentation][1].
+1. Grant read-only access to the data you want to monitor.
+
+    You can grant access to all current and future data within a catalog:
+    ```sql
+    GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+    GRANT USE_SCHEMA ON CATALOG <catalog_name> TO `<application_id>`;
+    GRANT SELECT ON CATALOG <catalog_name> TO `<application_id>`;
+    ```
+    
+    Or, you can grant access to specific tables:
+    ```sql
+    GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+    GRANT USE_SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
+    GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
+    ```
+1. Enable the **Data Observability** toggle in the Configuration pane of the Databricks account you connected in Step 1.
+
+[1]: https://docs.datadoghq.com/integrations/databricks/?tab=useaserviceprincipalforoauth#setup
 
 {{% /tab %}}
 {{< /tabs >}}
