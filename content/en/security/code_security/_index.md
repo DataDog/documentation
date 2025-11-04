@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
+- link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
+  tag: "Blog"
+  text: "Using LLMs to filter out false positives from static code analysis"
 aliases:
 - /code_analysis/
 ---

@@ -15,6 +15,10 @@ Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguie
 
 {{% observability_pipelines/source_settings/sumo_logic %}}
 
+## Configurar las variables de entorno
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
+
 {{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
-[1]: /es/observability_pipelines/set_up_pipelines/
+[1]: /es/observability_pipelines/configuration/set_up_pipelines/

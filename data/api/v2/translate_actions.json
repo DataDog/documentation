@@ -531,6 +531,9 @@
     "request_description": "Entity YAML or JSON.",
     "request_schema_description": "Create or update entity request."
   },
+  "PreviewCatalogEntities": {
+    "summary": "Preview catalog entities"
+  },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
@@ -976,7 +979,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -1988,6 +1991,60 @@
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
+  },
+  "GetAccountFacetInfo": {
+    "description": "Get facet information for account attributes including possible values and counts",
+    "summary": "Get account facet info",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryAccounts": {
+    "description": "Query accounts with flexible filtering by account properties",
+    "summary": "Query accounts",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryEventFilteredUsers": {
+    "description": "Query users filtered by both user properties and event platform data",
+    "summary": "Query event filtered users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetUserFacetInfo": {
+    "description": "Get facet information for user attributes including possible values and counts",
+    "summary": "Get user facet info",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryUsers": {
+    "description": "Query users with flexible filtering by user properties, with optional wildcard search",
+    "summary": "Query users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMapping": {
+    "description": "Get entity mapping configuration including all available attributes and their properties",
+    "summary": "Get mapping"
+  },
+  "CreateConnection": {
+    "description": "Create a new data connection and its fields for an entity",
+    "summary": "Create connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateConnection": {
+    "description": "Update an existing data connection by adding, updating, or deleting fields",
+    "summary": "Update connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteConnection": {
+    "description": "Delete an existing data connection for an entity",
+    "summary": "Delete connection"
+  },
+  "ListConnections": {
+    "description": "List all data connections for an entity",
+    "summary": "List connections"
   },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",

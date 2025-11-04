@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="cloud_cost/recommendations/savings-overview.png" alt="The Savings tab under CCM Recommendations." style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/savings-overview-1.png" alt="The Savings tab under CCM Recommendations." style="width:100%;" >}}
 
 The Savings tab within Recommendations gives you visibility into how your savings opportunities change over time. This information can be useful for tracking cost saving initiatives. The Savings tab visualizes two kinds of savings values:
 
@@ -35,7 +35,7 @@ The Savings tab represents **potential daily savings** and **net daily savings**
 - The **Potential Daily Savings Over Time** widget graphs the potential daily savings calculated each day during the time frame. The difference between the first and last bars has the same absolute value as the net daily savings in the previous widget.
 - The **Net Daily Savings by Group** widget provides more granular visibility into net daily savings, allowing you to group savings by tags of your choice.
 
-{{< img src="cloud_cost/recommendations/savings-widgets.png" alt="The Savings tab includes the Net Daily Savings, Potential Daily Savings Over Time, and Net Daily Savings by Group widgets." style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/savings-widgets-1.png" alt="The Savings tab includes the Net Daily Savings, Potential Daily Savings Over Time, and Net Daily Savings by Group widgets." style="width:100%;" >}}
 
 ## Filtering and grouping
 
