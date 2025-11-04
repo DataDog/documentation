@@ -27,7 +27,7 @@ further_reading:
 
 Generate custom metrics from ingested spans to track trends, power dashboards, and trigger monitors—even for spans and traces that are not retained for full trace analysis.
 
-Span-based metrics are created from spans that have been ingested by Datadog APM, regardless of whether those spans are indexed by a [retention filter][1]. These metrics allow you to extract numeric values (such as counts, durations, or custom tags) from spans or traces and store them as long-lived [custom metrics][3] with a 15-month retention period.
+Span-based metrics are created from spans that have been ingested by Datadog APM, regardless of whether those spans are indexed by a [retention filter][1]. These metrics allow you to extract numeric values from spans (such as counts, durations, or custom tags) or traces (end-to-end trace duration) and store them as long-lived [custom metrics][3] with a 15-month retention period.
 
 **Notes:**
 - Datadog automatically generates an out-of-the-box set of [Trace Metrics][13] capturing request, error rates and latency distributions based on 100% of your application traffic.
