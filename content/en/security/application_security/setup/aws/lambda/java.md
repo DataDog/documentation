@@ -154,14 +154,14 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     // NOT SUPPORTED IN V1
 
     // For AWS CDK v2
-    import { Datadog } from "datadog-cdk-constructs-v2";
+    import { Datadog, DatadogAppSecMode } from "datadog-cdk-constructs-v2";
 
     const datadog = new Datadog(this, "Datadog", {
         java_layer_version: {{< latest-lambda-layer-version layer="dd-trace-java" >}},
         extension_layer_version: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         api_key_secret_arn: "<DATADOG_API_KEY_SECRET_ARN>", // or api_key
-        enable_asm: true,
+        datadog_app_sec_mode: DatadogAppSecMode.ON,
       });
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>]);
     ```
@@ -171,6 +171,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
