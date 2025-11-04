@@ -230,7 +230,7 @@ let config = flagsClient.getObjectValue(
 
 ### Flag evaluation details
 
-When you need more than just the flag value, use the `get<Type>Details` APIs. These methods return both the evaluated value and metadata explaining the evaluation:
+When you need more than only the flag value, use the `get<Type>Details` APIs. These methods return both the evaluated value and metadata explaining the evaluation:
 
 * `getBooleanDetails(key:defaultValue:) -> FlagDetails<Bool>`  
 * `getStringDetails(key:defaultValue:) -> FlagDetails<String>`  
