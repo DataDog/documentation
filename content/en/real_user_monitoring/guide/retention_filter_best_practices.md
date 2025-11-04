@@ -117,4 +117,4 @@ Below we describe the set of default filters, suggested filters, and their typic
 
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
 [2]: /real_user_monitoring/rum_without_limits/retention_filters/#logic
-[3]: /real_user_monitoring/guide/retention_filter_best_practices/#excluding-sessions-using-retention-filters
+[3]: /real_user_monitoring/rum_without_limits/retention_filters#excluding-sessions-using-retention-filters
