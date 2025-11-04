@@ -144,7 +144,9 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 #### Topic relevancy
 
 This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
-  
+
+{{< img src="llm_observability/evaluations/topic_relevancy_2.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
 | Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
