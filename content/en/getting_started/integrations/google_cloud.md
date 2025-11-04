@@ -49,22 +49,22 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 
 <div class="alert alert-danger">Ensure that any projects being monitored are not configured as <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">scoping projects</a> that pull in metrics from multiple other projects.</div>
 
-[Cloud Monitoring API][3] 
+[Cloud Monitoring API][3]
 : Allows Datadog to query your Google Cloud metric data.
 
-[Compute Engine API][4] 
+[Compute Engine API][4]
 : Allows Datadog to discover compute instance data.
 
 [Cloud Asset API][5]
 : Allows Datadog to request Google Cloud resources and link relevant labels to metrics as tags.
 
-[Cloud Resource Manager API][6] 
+[Cloud Resource Manager API][6]
 : Allows Datadog to append metrics with the correct resources and tags.
 
 [IAM API][7]
 : Allows Datadog to authenticate with Google Cloud.
 
-[Cloud Billing API][8] 
+[Cloud Billing API][8]
 : Allows developers to manage billing for their Google Cloud Platform projects programmatically. See the [Cloud Cost Management (CCM)](#cloud-cost-management-ccm) section for more information.
 
 <div class="alert alert-info">You can confirm if these APIs are enabled by going to <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
@@ -169,7 +169,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 1. In the [Google Cloud integration page][200], select **+ Add GCP Account**.
 2. Click **Quick Start**.
 3. Click **Copy** in the setup script section.<br>
-   **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.  
+   **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.
 4. Click **Open Google Cloud Shell**, or go to [Google Cloud Shell][204].
 5. Paste the script into the shell prompt and run it.
 6. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.
@@ -181,6 +181,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
+   **Note**: `VM Instance` filtering does not impact related `gcp.logging.*` metrics and does not cause any billing impact for those metrics.
 9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. A summary of the changes to be made is displayed. If confirmed, the script:
     - Enables the required APIs
@@ -192,7 +193,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 [202]: /account_management/rbac/permissions/#managed-roles
 [203]: /account_management/rbac/permissions/#custom-roles
 [204]: https://ssh.cloud.google.com/cloudshell
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
 
@@ -224,7 +225,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    - Completes the integration setup in Datadog
 
 [500]: https://app.datadoghq.com/integrations/google-cloud-platform
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Manual" level="h4" expanded=false id="manual-setup" %}}
 
@@ -254,7 +255,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 10. Click **Verify and Save Account**.
 
 [600]: https://app.datadoghq.com/integrations/google-cloud-platform
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% /tab %}}
 
@@ -272,7 +273,7 @@ The Google Cloud integration collects all available [Google Cloud metrics][12] f
 
 {{% collapse-content title="See the Google Cloud integrations Datadog collects metrics from" level="h5" %}}
 {{% google-cloud-integrations %}}
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 For deep dives into monitoring many of the more popular services, check out the blogs linked below.
 
@@ -319,7 +320,7 @@ You can choose which services and resources to collect metrics from. This can he
 Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect the metric namespaces to exclude.
 
 {{< img src="integrations/google_cloud_platform/limit_metric_namespaces.png" alt="The metric collection tab in the Datadog Google Cloud integration page" style="width:80%;">}}
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
 1. Assign a tag (such as `datadog:true`) to the hosts or Cloud Run instances you want to monitor with Datadog.
@@ -330,9 +331,9 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 See Google's documentation on [Creating and managing labels][44] for more details.
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
-In the below example, only Google Cloud hosts with the label `datadog:true` are monitored by Datadog: 
+In the below example, only Google Cloud hosts with the label `datadog:true` are monitored by Datadog:
 
 {{< img src="integrations/google_cloud_platform/limit_metric_collection.png" alt="The fields to limit metric collection in the Google Cloud integration tile" style="width:100%;" >}}
 
@@ -363,10 +364,10 @@ You can use the [terraform-gcp-datadog-integration][64] module to manage this in
 
 After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
 
-The [Datadog Agent][31] provides the [most granular, low-latency metrics][32] from your infrastructure, delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts. 
+The [Datadog Agent][31] provides the [most granular, low-latency metrics][32] from your infrastructure, delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts.
 The Agent can be installed on any host, including [GKE][33].
 
-The Agent also supports a wide range of [integrations][34], enabling you to extend visibility into specific services and databases running on your hosts. 
+The Agent also supports a wide range of [integrations][34], enabling you to extend visibility into specific services and databases running on your hosts.
 
 [Traces][35] collected through the Agent enable comprehensive Application Performance Monitoring (APM), helping you understand end-to-end service performance.
 
@@ -376,13 +377,13 @@ For the full list of benefits of installing the Agent on your cloud instances, s
 
 ## Resource changes collection
 
-Resource changes collection allows you to monitor infrastructure changes in your Google Cloud environment. When Google's Cloud Asset Inventory detects changes in your cloud resources, an event is forwarded to Datadog's [Event Management][62] through a Cloud Pub/Sub topic and subscription. Use these events to be proactively notified of risky changes in your infrastructure, and to assist with troubleshooting. 
+Resource changes collection allows you to monitor infrastructure changes in your Google Cloud environment. When Google's Cloud Asset Inventory detects changes in your cloud resources, an event is forwarded to Datadog's [Event Management][62] through a Cloud Pub/Sub topic and subscription. Use these events to be proactively notified of risky changes in your infrastructure, and to assist with troubleshooting.
 
 For detailed setup instructions, see the [resource changes collection section][18] of the Google Cloud integration documentation.
 
 ## Explore related services
 
-### Private Service Connect 
+### Private Service Connect
 
 <div class="alert alert-info">Private Service Connect is only available for the US5 and EU Datadog sites.</div>
 
@@ -482,7 +483,7 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [55]: https://cloud.google.com/resource-manager/docs/access-control-proj#browser
 [56]: https://cloud.google.com/logging/docs/view/logging-query-language
 [57]: /logs/
-[58]: /integrations/google_cloud_private_service_connect/ 
+[58]: /integrations/google_cloud_private_service_connect/
 [59]: https://cloud.google.com/vpc/docs/private-service-connect
 [60]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-services
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
