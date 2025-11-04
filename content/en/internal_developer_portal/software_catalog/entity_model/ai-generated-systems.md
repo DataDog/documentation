@@ -28,7 +28,7 @@ Recommendations include service, datastore, and queue entity types and automatic
 
 ## Enable AI-generated Systems
 
-AI-generated Systems must be enabled once per organization by a user with `org_management` permissions (included in the default Datadog Admin role).
+AI-generated Systems must be enabled once per organization by a user with `org_management` permissions (included in the default [Datadog Admin role][1]).
 
 To enable:
 
@@ -65,4 +65,6 @@ After accepting a System, you can update additional metadata on the entity page 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/rbac/permissions/#access-management
 
