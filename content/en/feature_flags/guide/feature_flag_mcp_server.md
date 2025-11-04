@@ -20,7 +20,7 @@ curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
 ### Claude
 
 ```
-claude mcp add datadog-ff -- ~/.local/bin/datadog_mcp_cli --custom-domain dd.datad0g.com --endpoint-path /api/unstable/ffe-mcp/mcp
+claude mcp add datadog -- ~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags
 ```
 
 ### Cursor
@@ -29,7 +29,7 @@ In `~/.cursor/mcp.json`, add this to the ` "mcpServers"` dict (and save)
 ```javascript
     "datadog-ff": {
       "type": "stdio",
-      "command": " ~/.local/bin/datadog_mcp_cli --custom-domain mcp.datadoghq.com --endpoint-path /api/unstable/ffe-mcp/mcp",
+      "command": "~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags",
       "args": [],
       "env": {}
     },
