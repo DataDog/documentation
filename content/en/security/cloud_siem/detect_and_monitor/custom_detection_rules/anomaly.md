@@ -32,10 +32,6 @@ A short learning period is applied for new rules or newly observed values for a 
 ## Best practices
 
 - Scope the query narrowly. Filter by service, environment, team, or endpoint to reduce noise.
-- Pair anomaly rules with threshold rules for critical drops or for cases where you need deterministic conditions.
--In the [rule multi-triggering option][2]:
-    - Use the `keep alive` window to merge bursts from the same incident into one signal.
-    - Use `maximum signal duration` to prevent stale signals from lingering.
 - Start with managed default rules for broad coverage, then add custom anomaly rules for high-volume log sources.
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=anomaly
