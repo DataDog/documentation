@@ -14,7 +14,6 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}Understanding the RUM event hierarchy{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
